@@ -1,0 +1,2 @@
+projects/site/public/static/**/*.png !text !filter !merge !diff
+projects/site/public/static/**/*.png filter=lfs diff=lfs merge=lfs -text

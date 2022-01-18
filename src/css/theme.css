@@ -1,0 +1,12 @@
+body {
+  font-family: var(--nve-font-sans);
+  --background-color: var(--nve-color-neutral-50);
+  --text-color: var(--nve-color-neutral-900);
+  --shadow: var(--nve-shadow-md);
+}
+
+body.dark {
+  --background-color: var(--nve-color-neutral-900);
+  --text-color: var(--nve-color-neutral-50);
+  --shadow: none;
+}
