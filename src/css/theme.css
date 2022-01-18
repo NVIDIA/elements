@@ -1,0 +1,12 @@
+body {
+  font-family: var(--mlv-font-sans);
+  --background-color: var(--mlv-color-neutral-50);
+  --text-color: var(--mlv-color-neutral-900);
+  --shadow: var(--mlv-shadow-md);
+}
+
+body.dark {
+  --background-color: var(--mlv-color-neutral-900);
+  --text-color: var(--mlv-color-neutral-50);
+  --shadow: none;
+}

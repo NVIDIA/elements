@@ -1,0 +1,69 @@
+:root {
+  --mlv-shadow-sm: 0.25px 1.5px 6px rgba(0, 0, 0, 0.1),
+    0px 16px 16px -6px rgba(15, 15, 15, 0.11);
+  --mlv-shadow-md: 0.5px 3px 12px rgba(0, 0, 0, 0.1),
+    0px 32px 32px -12px rgba(15, 15, 15, 0.12);
+  --mlv-shadow-lg: 0.75px 4.5px 18px rgba(0, 0, 0, 0.1),
+    0px 48px 48px -18px rgba(15, 15, 15, 0.13);
+  --mlv-shadow-xl: 1px 6px 24px rgba(0, 0, 0, 0.1),
+    0px 64px 64px -24px rgba(15, 15, 15, 0.14);
+
+  --mlv-color-neutral-50: #f6f6fc;
+  --mlv-color-neutral-100: #f2f3f7;
+  --mlv-color-neutral-200: #e6e8ec;
+  --mlv-color-neutral-250: #d6d9e0;
+  --mlv-color-neutral-300: #b1b5c4;
+  --mlv-color-neutral-500: #777e91;
+  --mlv-color-neutral-600: #353945;
+  --mlv-color-neutral-700: #23262f;
+  --mlv-color-neutral-900: #17181b;
+  --mlv-color-neutral-950: #0f0f11;
+  --mlv-color-neutral-1000: #000000;
+
+  --mlv-color-brand-500: #68b026;
+
+  --mlv-color-positive-500: #58bd7d;
+  --mlv-color-negative-500: #fe5252;
+  --mlv-color-warning-500: #ffc700;
+
+  --mlv-font-sans: 'Inter var', 'Open Sans', Roboto, 'Helvetica Neue',
+    sans-serif;
+  --mlv-font-mono: 'Lucida Console', Monaco, monospace, sans-serif;
+
+  --mlv-font-size-50: 11px;
+  --mlv-font-size-75: 12px;
+  --mlv-font-size-100: 14px;
+  --mlv-font-size-200: 16px;
+  --mlv-font-size-300: 18px;
+  --mlv-font-size-400: 20px;
+  --mlv-font-size-500: 22px;
+  --mlv-font-size-600: 25px;
+  --mlv-font-size-700: 28px;
+  --mlv-font-size-800: 32px;
+  --mlv-font-size-900: 36px;
+  --mlv-font-size-1000: 40px;
+  --mlv-font-size-1100: 45px;
+  --mlv-font-size-1200: 50px;
+  --mlv-font-size-1300: 60px;
+
+  --mlv-radius-sm: 4px;
+  --mlv-radius-md: 8px;
+  --mlv-radius-lg: 16px;
+  --mlv-radius-xl: 24px;
+  --mlv-radius-full: 1e5px;
+
+  --mlv-spacing-1: 2px;
+  --mlv-spacing-2: 4px;
+  --mlv-spacing-3: 8px;
+  --mlv-spacing-4: 12px;
+  --mlv-spacing-5: 16px;
+  --mlv-spacing-6: 20px;
+  --mlv-spacing-7: 24px;
+  --mlv-spacing-8: 32px;
+  --mlv-spacing-9: 40px;
+
+  --mlv-stroke-size-sm: 1px;
+  --mlv-stroke-size-md: 2px;
+  --mlv-stroke-size-lg: 4px;
+  --mlv-stroke-size-xl: 8px;
+}

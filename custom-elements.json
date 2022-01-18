@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Button",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'button'",
+              "attribute": "label",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "IconNames"
+              },
+              "attribute": "icon",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "prefixIcon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "prefixIcon",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'button'",
+              "fieldName": "label"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "IconNames"
+              },
+              "fieldName": "icon"
+            },
+            {
+              "name": "prefixIcon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "prefixIcon"
+            }
+          ],
+          "superclass": {
+            "name": "MlvBaseElement",
+            "module": "/src/base-element"
+          },
+          "tagName": "mlv-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Button",
+          "declaration": {
+            "name": "Button",
+            "module": "src/components/button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "mlv-button",
+          "declaration": {
+            "name": "Button",
+            "module": "src/components/button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Card",
+          "members": [],
+          "superclass": {
+            "name": "MlvBaseElement",
+            "module": "/src/base-element"
+          },
+          "tagName": "mlv-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Card",
+          "declaration": {
+            "name": "Card",
+            "module": "src/components/card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "mlv-card",
+          "declaration": {
+            "name": "Card",
+            "module": "src/components/card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/svg-icon.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "ICON_VARIANTS",
+          "type": {
+            "text": "array"
+          },
+          "default": "['current', 'default', 'lighter']"
+        },
+        {
+          "kind": "variable",
+          "name": "ICON_NAMES",
+          "type": {
+            "text": "array"
+          },
+          "default": "['arrow', 'calendar', 'copy', 'pin']"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SvgIcon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "IconVariants"
+              },
+              "default": "'default'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "IconNames"
+              },
+              "attribute": "name",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "IconVariants"
+              },
+              "default": "'default'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "IconNames"
+              },
+              "fieldName": "name"
+            }
+          ],
+          "superclass": {
+            "name": "MlvBaseElement",
+            "module": "/src/base-element"
+          },
+          "tagName": "mlv-svg-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ICON_VARIANTS",
+          "declaration": {
+            "name": "ICON_VARIANTS",
+            "module": "src/components/svg-icon.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ICON_NAMES",
+          "declaration": {
+            "name": "ICON_NAMES",
+            "module": "src/components/svg-icon.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SvgIcon",
+          "declaration": {
+            "name": "SvgIcon",
+            "module": "src/components/svg-icon.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "mlv-svg-icon",
+          "declaration": {
+            "name": "SvgIcon",
+            "module": "src/components/svg-icon.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
