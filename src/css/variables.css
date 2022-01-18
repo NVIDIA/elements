@@ -1,0 +1,69 @@
+:root {
+  --nve-shadow-sm: 0.25px 1.5px 6px rgba(0, 0, 0, 0.1),
+    0px 16px 16px -6px rgba(15, 15, 15, 0.11);
+  --nve-shadow-md: 0.5px 3px 12px rgba(0, 0, 0, 0.1),
+    0px 32px 32px -12px rgba(15, 15, 15, 0.12);
+  --nve-shadow-lg: 0.75px 4.5px 18px rgba(0, 0, 0, 0.1),
+    0px 48px 48px -18px rgba(15, 15, 15, 0.13);
+  --nve-shadow-xl: 1px 6px 24px rgba(0, 0, 0, 0.1),
+    0px 64px 64px -24px rgba(15, 15, 15, 0.14);
+
+  --nve-color-neutral-50: #f6f6fc;
+  --nve-color-neutral-100: #f2f3f7;
+  --nve-color-neutral-200: #e6e8ec;
+  --nve-color-neutral-250: #d6d9e0;
+  --nve-color-neutral-300: #b1b5c4;
+  --nve-color-neutral-500: #777e91;
+  --nve-color-neutral-600: #353945;
+  --nve-color-neutral-700: #23262f;
+  --nve-color-neutral-900: #17181b;
+  --nve-color-neutral-950: #0f0f11;
+  --nve-color-neutral-1000: #000000;
+
+  --nve-color-brand-500: #68b026;
+
+  --nve-color-positive-500: #58bd7d;
+  --nve-color-negative-500: #fe5252;
+  --nve-color-warning-500: #ffc700;
+
+  --nve-font-sans: 'Inter var', 'Open Sans', Roboto, 'Helvetica Neue',
+    sans-serif;
+  --nve-font-mono: 'Lucida Console', Monaco, monospace, sans-serif;
+
+  --nve-font-size-50: 11px;
+  --nve-font-size-75: 12px;
+  --nve-font-size-100: 14px;
+  --nve-font-size-200: 16px;
+  --nve-font-size-300: 18px;
+  --nve-font-size-400: 20px;
+  --nve-font-size-500: 22px;
+  --nve-font-size-600: 25px;
+  --nve-font-size-700: 28px;
+  --nve-font-size-800: 32px;
+  --nve-font-size-900: 36px;
+  --nve-font-size-1000: 40px;
+  --nve-font-size-1100: 45px;
+  --nve-font-size-1200: 50px;
+  --nve-font-size-1300: 60px;
+
+  --nve-radius-sm: 4px;
+  --nve-radius-md: 8px;
+  --nve-radius-lg: 16px;
+  --nve-radius-xl: 24px;
+  --nve-radius-full: 1e5px;
+
+  --nve-spacing-1: 2px;
+  --nve-spacing-2: 4px;
+  --nve-spacing-3: 8px;
+  --nve-spacing-4: 12px;
+  --nve-spacing-5: 16px;
+  --nve-spacing-6: 20px;
+  --nve-spacing-7: 24px;
+  --nve-spacing-8: 32px;
+  --nve-spacing-9: 40px;
+
+  --nve-stroke-size-sm: 1px;
+  --nve-stroke-size-md: 2px;
+  --nve-stroke-size-lg: 4px;
+  --nve-stroke-size-xl: 8px;
+}

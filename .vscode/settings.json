@@ -1,0 +1,4 @@
+{
+    "cssvar.files": ["**/variables.css"],
+    "cssvar.extensions": ["css", "typescript"]
+}
