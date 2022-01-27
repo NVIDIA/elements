@@ -1,19 +1,27 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { withDesign } from 'storybook-addon-designs'
+import { generateFigmaEmbed } from '../util/storybook-utils';
 
 import { Card }  from './card';
 const _components = { Card };
 
-const figmaEmbed = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/u92dX33lnPVzC9o4SfgK3R/MagLev-Product-System-2.0?node-id=509%3A2935',
-  }
-};
+const figmaEmbedNodeId = '505%3A2280';
+const description =  `
+  ## The MagLev Card Component
+`;
 
 export default {
   title: 'MagLev Elements/Atoms/Card',
+  component: 'nve-card',
+  decorators: [withDesign],
+  parameters: {
+    docs: {
+      description: {
+        component: description
+      }
+    }
+  },
   argTypes: {
     width: {
       control: { type: 'range', min: 200, max: 500}
@@ -68,7 +76,7 @@ export const Default = {
       `)}
     </nve-card>
   `,
-  parameters: figmaEmbed,
+  parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { content: 'Slotted Card Content', width: 200, height: 50 }
 };
 
