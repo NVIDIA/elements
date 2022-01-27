@@ -18,6 +18,7 @@
                 "text": "string"
               },
               "default": "'button'",
+              "description": "Label txt for the button",
               "attribute": "label",
               "reflects": true
             },
@@ -28,6 +29,7 @@
                 "text": "boolean"
               },
               "default": "false",
+              "description": "If 'disabled' attribute present on element, set disabled state on button",
               "attribute": "disabled",
               "reflects": true
             },
@@ -37,6 +39,7 @@
               "type": {
                 "text": "IconNames"
               },
+              "description": "If present use icon for name of icon to show",
               "attribute": "icon",
               "reflects": true
             },
@@ -47,6 +50,7 @@
                 "text": "boolean"
               },
               "default": "false",
+              "description": "If 'prefixicon' attribute present on element, show icon on left",
               "attribute": "prefixIcon",
               "reflects": true
             }
@@ -58,6 +62,7 @@
                 "text": "string"
               },
               "default": "'button'",
+              "description": "Label txt for the button",
               "fieldName": "label"
             },
             {
@@ -66,6 +71,7 @@
                 "text": "boolean"
               },
               "default": "false",
+              "description": "If 'disabled' attribute present on element, set disabled state on button",
               "fieldName": "disabled"
             },
             {
@@ -73,6 +79,7 @@
               "type": {
                 "text": "IconNames"
               },
+              "description": "If present use icon for name of icon to show",
               "fieldName": "icon"
             },
             {
@@ -81,12 +88,13 @@
                 "text": "boolean"
               },
               "default": "false",
+              "description": "If 'prefixicon' attribute present on element, show icon on left",
               "fieldName": "prefixIcon"
             }
           ],
           "superclass": {
-            "name": "MlvBaseElement",
-            "module": "/src/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
           "tagName": "mlv-button",
           "customElement": true
@@ -119,10 +127,24 @@
           "kind": "class",
           "description": "",
           "name": "Card",
+          "slots": [
+            {
+              "description": "This is a default/unnamed slot for card content",
+              "name": "default/unnamed"
+            },
+            {
+              "description": "HTML elements slotted here for image header",
+              "name": "image"
+            },
+            {
+              "description": "HTML elements slotted here for card footer",
+              "name": "footer"
+            }
+          ],
           "members": [],
           "superclass": {
-            "name": "MlvBaseElement",
-            "module": "/src/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
           "tagName": "mlv-card",
           "customElement": true
@@ -179,6 +201,7 @@
                 "text": "IconVariants"
               },
               "default": "'default'",
+              "description": "The color variant of the icon",
               "attribute": "variant",
               "reflects": true
             },
@@ -188,6 +211,7 @@
               "type": {
                 "text": "IconNames"
               },
+              "description": "The name of the icon SVG sprite",
               "attribute": "name",
               "reflects": true
             }
@@ -199,6 +223,7 @@
                 "text": "IconVariants"
               },
               "default": "'default'",
+              "description": "The color variant of the icon",
               "fieldName": "variant"
             },
             {
@@ -206,12 +231,13 @@
               "type": {
                 "text": "IconNames"
               },
+              "description": "The name of the icon SVG sprite",
               "fieldName": "name"
             }
           ],
           "superclass": {
-            "name": "MlvBaseElement",
-            "module": "/src/base-element"
+            "name": "LitElement",
+            "package": "lit"
           },
           "tagName": "mlv-svg-icon",
           "customElement": true

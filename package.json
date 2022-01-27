@@ -16,6 +16,7 @@
     "prepublishonly": "npm run build",
     "storybook": "start-storybook -p 7777",
     "build-storybook": "build-storybook",
+    "watch-manifest": "npm run analyze -- --watch",
     "analyze": "cem analyze --litelement --globs src/components/**.ts --exclude **.stories.ts"
   },
   "dependencies": {

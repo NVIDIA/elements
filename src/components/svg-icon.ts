@@ -6,9 +6,14 @@ export const ICON_NAMES = ['arrow', 'calendar', 'copy', 'pin'];
 export type IconVariants = typeof ICON_VARIANTS[number];
 export type IconNames = typeof ICON_NAMES[number];
 
-
 @customElement('mlv-svg-icon')
 export class SvgIcon extends LitElement {
+  /** The color variant of the icon */
+  @property({ attribute: 'variant', reflect: true }) variant: IconVariants = 'default';
+  /** The name of the icon SVG sprite */
+  @property({ attribute: 'name', reflect: true }) name: IconNames;
+
+
   static styles = [
     css`
       :host {
@@ -30,13 +35,6 @@ export class SvgIcon extends LitElement {
       }
     `
   ];
-
-
-  @property({ attribute: 'variant', reflect: true })
-  variant: IconVariants = 'default';
-
-  @property({ attribute: 'name', reflect: true })
-  name: IconNames;
 
   render() {
     return html`

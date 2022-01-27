@@ -5,10 +5,15 @@ import { IconNames } from './svg-icon';
 
 @customElement('mlv-button')
 export class Button extends LitElement {
+  /**  Label txt for the button */
   @property({ type: String, reflect: true }) label = 'button';
+  /** If 'disabled' attribute present on element, set disabled state on button */
   @property({ type: Boolean, reflect: true }) disabled = false;
+  /** If present use icon for name of icon to show */
   @property({ reflect: true}) icon: IconNames;
+  /** If 'prefixicon' attribute present on element, show icon on left */
   @property({ type: Boolean, reflect: true }) prefixIcon = false;
+
 
   static styles = [
     css`
