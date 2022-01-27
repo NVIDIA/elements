@@ -1,6 +1,12 @@
 import { html, css, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
+/**
+ * @slot default/unnamed - This is a default/unnamed slot for card content
+ * @slot image - HTML elements slotted here for image header
+ * @slot footer - HTML elements slotted here for card footer
+*/
+
 @customElement('nve-card')
 export class Card extends LitElement {
   static styles = [

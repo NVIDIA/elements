@@ -1,20 +1,33 @@
 import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs'
+import { generateFigmaEmbed } from '../util/storybook-utils';
 
 import { Button }  from './button';
-import { IconNames } from './svg-icon';
+import { IconNames, ICON_NAMES } from './svg-icon';
 const _components = { Button };
 
-const figmaEmbed = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/u92dX33lnPVzC9o4SfgK3R/MagLev-Product-System-2.0?node-id=171%3A3792',
-  }
-};
+const figmaEmbedNodeId = '163%3A25';
+const description =  `
+  ## The MagLev Button Component
+`;
 
 export default {
   title: 'MagLev Elements/Atoms/Button',
-  decorators: [withDesign]
+  component: 'nve-button',
+  decorators: [withDesign],
+  parameters: {
+    docs: {
+      description: {
+        component: description
+      }
+    }
+  },
+  argTypes: {
+    icon: {
+      control: 'inline-radio',
+      options: ICON_NAMES
+    },
+  },
 };
 
 interface ArgTypes {
@@ -27,7 +40,7 @@ interface ArgTypes {
 
 export const Default = {
   render: (args: ArgTypes) => html`<nve-button .label=${args.label} .disabled=${args.disabled} .icon=${args.icon} ?prefixIcon=${args.prefixIcon}>${args.content}</nve-button>`,
-  parameters: figmaEmbed,
+  parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { label: 'My Story', disabled: false, content: '' }
 };
 
@@ -41,6 +54,6 @@ export const ButtonWithIconSlotted = {
   <nve-button .label=${args.label} .disabled=${args.disabled}>
     <nve-svg-icon variant="current" name="arrow"></nve-svg-icon>
   </nve-button>`,
-  parameters: figmaEmbed,
+  parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { label: 'Slotted Icon', disabled: false, content: '' }
 };
