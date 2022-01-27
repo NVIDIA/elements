@@ -1,18 +1,26 @@
 import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs'
+import { generateFigmaEmbed } from '../util/storybook-utils';
 
 import { IconNames, IconVariants, ICON_NAMES, ICON_VARIANTS, SvgIcon } from './svg-icon';
 const _components = { SvgIcon };
 
-const figmaEmbed = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/u92dX33lnPVzC9o4SfgK3R/MagLev-Product-System-2.0'
-  }
-};
+const figmaEmbedNodeId = '164%3A61';
+const description =  `
+  ## The MagLev Icon Component
+`;
 
 export default {
   title: 'MagLev Elements/Atoms/Icon',
+  component: 'nve-svg-icon',
+  decorators: [withDesign],
+  parameters: {
+    docs: {
+      description: {
+        component: description
+      }
+    }
+  },
   argTypes: {
     variant: {
       control: 'inline-radio',
@@ -32,7 +40,7 @@ interface ArgTypes {
 
 export const Default = {
   render: (args: ArgTypes) => html`<nve-svg-icon .name="${args.name}" .variant="${args.variant}" style="font-size: 4em"></nve-svg-icon>`,
-  parameters: figmaEmbed,
+  parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'arrow', variant: 'default' }
 };
 
