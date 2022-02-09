@@ -17,22 +17,27 @@
     "storybook": "start-storybook -p 7777",
     "build-storybook": "build-storybook",
     "watch-manifest": "npm run analyze -- --watch",
-    "analyze": "cem analyze --litelement --globs src/components/**.ts --exclude **.stories.ts"
+    "analyze": "cem analyze --litelement --globs src/components/**.ts --exclude **.stories.ts",
+    "create-icon-spritesheet": "node scripts/create-icon-spritesheet.js"
   },
   "dependencies": {
     "lit": "^2.1"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.4.17",
-    "api-viewer-element": "^1.0.0-pre.3",
-    "@storybook/web-components": "6.4.13",
+    "@prettier/plugin-xml": "^1.2.0",
     "@storybook/addon-essentials": "6.4.13",
     "@storybook/addon-interactions": "6.4.18",
     "@storybook/jest": "0.0.5",
     "@storybook/testing-library": "0.0.7",
+    "@storybook/web-components": "6.4.13",
+    "@xmldom/xmldom": "^0.8.0",
+    "api-viewer-element": "^1.0.0-pre.3",
+    "prettier": "^2.5.1",
     "storybook-addon-designs": "^6.2.1",
-    "storybook-dark-mode": "^1.0.8",
     "storybook-builder-vite": "^0.1.13",
+    "storybook-dark-mode": "^1.0.8",
+    "svgo": "^2.8.0",
     "typescript": "^4.4.4",
     "vite": "^2.6.0"
   },
