@@ -2,7 +2,7 @@ import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 export const ICON_VARIANTS = ['current', 'default', 'lighter'];
-export const ICON_NAMES = ['arrow', 'calendar', 'copy', 'pin'];
+export const ICON_NAMES = ['arrow', 'back', 'calendar', 'copy', 'pin'];
 export type IconVariants = typeof ICON_VARIANTS[number];
 export type IconNames = typeof ICON_NAMES[number];
 

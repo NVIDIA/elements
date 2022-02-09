@@ -8,3 +8,5 @@ export const generateFigmaEmbed = (figmaNodeId: string) => {
     }
   };
 };
+
+export const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
