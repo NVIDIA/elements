@@ -1,6 +1,7 @@
 import { html, css, LitElement } from 'lit';
+import { property, state, customElement } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
-import { property, customElement } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { IconNames } from './svg-icon';
 
 @customElement('nve-button')
@@ -14,6 +15,7 @@ export class Button extends LitElement {
   /** If 'prefixicon' attribute present on element, show icon on left */
   @property({ type: Boolean, reflect: true }) prefixIcon = false;
 
+  @state() private _hover = false;
 
   static styles = [
     css`
@@ -37,6 +39,10 @@ export class Button extends LitElement {
         cursor: auto;
       }
 
+      button.hover:not(:disabled) {
+        background-color: var(--nve-color-negative-500);
+      }
+
       :host([prefixIcon]) button {
         flex-direction: row-reverse;
       }
@@ -44,9 +50,10 @@ export class Button extends LitElement {
   ];
 
   render() {
-    console.log(this.icon);
+    const classes = { hover: this._hover };
+
     return html`
-      <button part="base" ?disabled=${this.disabled}>
+      <button class=${classMap(classes)} @mouseover="${() => this._hover = true}" @mouseout="${() => this._hover = false}" ?disabled=${this.disabled}>
         ${this.label}
         <slot></slot>
         ${when(this.icon, () => html`<nve-svg-icon variant="current" .name="${this.icon}"></nve-svg-icon>`)}

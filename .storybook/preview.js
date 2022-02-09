@@ -1,7 +1,11 @@
 import { setCustomElementsManifest } from '@storybook/web-components';
 import customElements from '../custom-elements.json';
+import * as jest from '@storybook/jest';
 
 setCustomElementsManifest(customElements);
+
+// Fix: fn() is not defined, see: https://github.com/storybookjs/storybook/issues/15391
+window.jest = jest;
 
 export const parameters = {
   darkMode: {
@@ -11,7 +15,7 @@ export const parameters = {
   controls: {
     matchers: {
       color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
+      date: /Date$/
+    }
+  }
 };
