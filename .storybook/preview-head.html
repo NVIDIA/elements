@@ -1,3 +1,8 @@
 <link href="/src/css/fonts.css" rel="stylesheet"/>
 <link href="/src/css/variables.css" rel="stylesheet"/>
 <link href="/src/css/theme.css" rel="stylesheet"/>
+
+<script>
+    // Fix: fn() is not defined, see: https://github.com/storybookjs/storybook/issues/15391
+    window.global = window;
+</script>
