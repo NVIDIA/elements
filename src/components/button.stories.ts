@@ -1,6 +1,9 @@
 import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs'
-import { generateFigmaEmbed } from '../util/storybook-utils';
+import { expect } from '@storybook/jest';
+import { userEvent, within } from '@storybook/testing-library';
+
+import { awaitTimeout, generateFigmaEmbed } from '../util/storybook-utils';
 
 import { Button }  from './button';
 import { IconNames, ICON_NAMES } from './svg-icon';
@@ -20,14 +23,17 @@ export default {
       description: {
         component: description
       }
-    }
+    },
+    actions: {
+      handles: ['mouseover nve-button', 'mouseout nve-button', 'click nve-button'],
+    },
   },
   argTypes: {
     icon: {
       control: 'inline-radio',
       options: ICON_NAMES
-    },
-  },
+    }
+  }
 };
 
 interface ArgTypes {
@@ -39,9 +45,31 @@ interface ArgTypes {
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<nve-button .label=${args.label} .disabled=${args.disabled} .icon=${args.icon} ?prefixIcon=${args.prefixIcon}>${args.content}</nve-button>`,
+  render: (args: ArgTypes) => html`<nve-button data-testid="button" .label=${args.label} .disabled=${args.disabled} .icon=${args.icon} ?prefixIcon=${args.prefixIcon}>${args.content}</nve-button>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { label: 'My Story', disabled: false, content: '' }
+  args: { label: 'My Story ', disabled: false, content: '' },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByTestId('button').shadowRoot.querySelector('button');
+    const isEnabled = !args.disabled;
+
+    await awaitTimeout(1500);
+
+    await userEvent.hover(button);
+    await expect(button.classList.contains('hover')).toBe(isEnabled)
+    await awaitTimeout(500);
+    await userEvent.unhover(button);
+
+    await expect(button.classList.contains('hover')).toBe(false)
+
+    await userEvent.hover(button);
+    await expect(button.classList.contains('hover')).toBe(isEnabled)
+    await awaitTimeout(500);
+    await userEvent.unhover(button);
+
+    await userEvent.click(button);
+    await userEvent.unhover(button);
+  }
 };
 
 export const Disabled = { ...Default, args: { label: 'Disabled Button', disabled: true } };
