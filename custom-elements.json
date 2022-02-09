@@ -53,6 +53,15 @@
               "description": "If 'prefixicon' attribute present on element, show icon on left",
               "attribute": "prefixIcon",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "_hover",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
             }
           ],
           "attributes": [
@@ -187,7 +196,7 @@
           "type": {
             "text": "array"
           },
-          "default": "['arrow', 'calendar', 'copy', 'pin']"
+          "default": "['arrow', 'back', 'calendar', 'copy', 'pin']"
         },
         {
           "kind": "class",
