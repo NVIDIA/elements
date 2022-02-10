@@ -1,12 +1,33 @@
 :root {
-  --mlv-shadow-sm: 0.25px 1.5px 6px rgba(0, 0, 0, 0.1),
-    0px 16px 16px -6px rgba(15, 15, 15, 0.11);
-  --mlv-shadow-md: 0.5px 3px 12px rgba(0, 0, 0, 0.1),
-    0px 32px 32px -12px rgba(15, 15, 15, 0.12);
-  --mlv-shadow-lg: 0.75px 4.5px 18px rgba(0, 0, 0, 0.1),
-    0px 48px 48px -18px rgba(15, 15, 15, 0.13);
-  --mlv-shadow-xl: 1px 6px 24px rgba(0, 0, 0, 0.1),
-    0px 64px 64px -24px rgba(15, 15, 15, 0.14);
+  --mlv-system-color-interactive-primary: #68B026;
+  --mlv-system-color-interactive-primary-hover: #4E851D;
+  --mlv-system-color-interactive-destructive: #FE5252;
+  --mlv-system-color-interactive-destructive-hover: #d93535;
+  --mlv-system-color-interactive-secondary: #0971F1;
+  --mlv-system-color-interactive-on-dark: #FFFFFF;
+  --mlv-system-color-interactive-on-light: #17181B;
+  --mlv-system-color-interactive-selected: #0971F166;
+  --mlv-system-color-interactive-focused: #E6E6E6;
+  --mlv-system-color-interactive-disabled: var(--mlv-color-neutral-500);
+  --mlv-system-color-interactive-on-disabled: var(--mlv-color-neutral-250);
+
+  --mlv-system-color-hover-on-dark-0: #16161A;
+  --mlv-system-color-hover-on-dark-1: #1E2024;
+  --mlv-system-color-hover-on-dark-2: #282B36;
+  --mlv-system-color-hover-on-dark-3: #3B3F4D;
+  --mlv-system-color-hover-on-light-1: #F0F3F5;
+
+  --mlv-system-color-link-on-dark-hover: #0971F1;
+  --mlv-system-color-link-on-light-hover: #0971F1;
+
+  --mlv-system-status-dark-positive: #58BD7D;
+  --mlv-system-status-dark-warning: #FFC700;
+  --mlv-system-status-dark-negative: #FE5252;
+  --mlv-system-status-dark-info: #FFFFFF;
+  --mlv-system-status-light-positive: #10983D;
+  --mlv-system-status-light-warning: #FFC700;
+  --mlv-system-status-light-negative: #E94A3F;
+  --mlv-system-status-light-info: #17181B;
 
   --mlv-color-neutral-50: #f6f6fc;
   --mlv-color-neutral-100: #f2f3f7;
@@ -20,31 +41,31 @@
   --mlv-color-neutral-950: #0f0f11;
   --mlv-color-neutral-1000: #000000;
 
-  --mlv-color-brand-500: #68b026;
-
-  --mlv-color-positive-500: #58bd7d;
-  --mlv-color-negative-500: #fe5252;
-  --mlv-color-warning-500: #ffc700;
-
-  --mlv-font-sans: 'Inter var', 'Open Sans', Roboto, 'Helvetica Neue',
-    sans-serif;
+  --mlv-font-sans: 'Inter var', 'Open Sans', Roboto, 'Helvetica Neue', sans-serif;
   --mlv-font-mono: 'Lucida Console', Monaco, monospace, sans-serif;
 
-  --mlv-font-size-50: 11px;
-  --mlv-font-size-75: 12px;
+  --mlv-font-size-25: 11px;
+  --mlv-font-size-50: 12px;
+  --mlv-font-size-75: 13px;
   --mlv-font-size-100: 14px;
   --mlv-font-size-200: 16px;
-  --mlv-font-size-300: 18px;
-  --mlv-font-size-400: 20px;
-  --mlv-font-size-500: 22px;
-  --mlv-font-size-600: 25px;
-  --mlv-font-size-700: 28px;
-  --mlv-font-size-800: 32px;
-  --mlv-font-size-900: 36px;
-  --mlv-font-size-1000: 40px;
-  --mlv-font-size-1100: 45px;
-  --mlv-font-size-1200: 50px;
-  --mlv-font-size-1300: 60px;
+  --mlv-font-size-275: 19px;
+  --mlv-font-size-300: 20px;
+  --mlv-font-size-400: 24px;
+  --mlv-font-size-600: 28px;
+  --mlv-font-size-700: 32px;
+  --mlv-font-size-800: 36px;
+  --mlv-font-size-900: 40px;
+
+  --mlv-font-weight-thin: 100;
+  --mlv-font-weight-extra-light: 200;
+  --mlv-font-weight-light: 300;
+  --mlv-font-weight-normal: 400;
+  --mlv-font-weight-medium: 500;
+  --mlv-font-weight-semi-bold: 600;
+  --mlv-font-weight-bold: 700;
+  --mlv-font-weight-extra-bold: 800;
+  --mlv-font-weight-black: 900;
 
   --mlv-radius-sm: 4px;
   --mlv-radius-md: 8px;
@@ -66,4 +87,13 @@
   --mlv-stroke-size-md: 2px;
   --mlv-stroke-size-lg: 4px;
   --mlv-stroke-size-xl: 8px;
+
+  --mlv-shadow-sm: 0.25px 1.5px 6px rgba(0, 0, 0, 0.1),
+    0px 16px 16px -6px rgba(15, 15, 15, 0.11);
+  --mlv-shadow-md: 0.5px 3px 12px rgba(0, 0, 0, 0.1),
+    0px 32px 32px -12px rgba(15, 15, 15, 0.12);
+  --mlv-shadow-lg: 0.75px 4.5px 18px rgba(0, 0, 0, 0.1),
+    0px 48px 48px -18px rgba(15, 15, 15, 0.13);
+  --mlv-shadow-xl: 1px 6px 24px rgba(0, 0, 0, 0.1),
+    0px 64px 64px -24px rgba(15, 15, 15, 0.14);
 }

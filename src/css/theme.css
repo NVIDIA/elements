@@ -1,8 +1,13 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: var(--mlv-font-sans);
   --background-color: var(--mlv-color-neutral-50);
   --text-color: var(--mlv-color-neutral-900);
   --shadow: var(--mlv-shadow-md);
+  -webkit-font-smoothing: antialiased;
 }
 
 body.dark {

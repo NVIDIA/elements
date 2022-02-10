@@ -7,6 +7,14 @@
       "path": "src/components/button.ts",
       "declarations": [
         {
+          "kind": "variable",
+          "name": "BUTTON_VARIANTS",
+          "type": {
+            "text": "array"
+          },
+          "default": "['primary', 'secondary', 'destructive']"
+        },
+        {
           "kind": "class",
           "description": "",
           "name": "Button",
@@ -31,6 +39,17 @@
               "default": "false",
               "description": "If 'disabled' attribute present on element, set disabled state on button",
               "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariants"
+              },
+              "default": "'primary'",
+              "description": "Color Variant of the Button",
+              "attribute": "variant",
               "reflects": true
             },
             {
@@ -84,6 +103,15 @@
               "fieldName": "disabled"
             },
             {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariants"
+              },
+              "default": "'primary'",
+              "description": "Color Variant of the Button",
+              "fieldName": "variant"
+            },
+            {
               "name": "icon",
               "type": {
                 "text": "IconNames"
@@ -110,6 +138,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "BUTTON_VARIANTS",
+          "declaration": {
+            "name": "BUTTON_VARIANTS",
+            "module": "src/components/button.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "Button",
