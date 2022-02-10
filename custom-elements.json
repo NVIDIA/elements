@@ -191,14 +191,6 @@
           "default": "['current', 'default', 'lighter']"
         },
         {
-          "kind": "variable",
-          "name": "ICON_NAMES",
-          "type": {
-            "text": "array"
-          },
-          "default": "['arrow', 'back', 'calendar', 'copy', 'pin']"
-        },
-        {
           "kind": "class",
           "description": "",
           "name": "SvgIcon",
@@ -211,8 +203,7 @@
               },
               "default": "'default'",
               "description": "The color variant of the icon",
-              "attribute": "variant",
-              "reflects": true
+              "attribute": "variant"
             },
             {
               "kind": "field",
@@ -221,8 +212,7 @@
                 "text": "IconNames"
               },
               "description": "The name of the icon SVG sprite",
-              "attribute": "name",
-              "reflects": true
+              "attribute": "name"
             }
           ],
           "attributes": [
@@ -258,14 +248,6 @@
           "name": "ICON_VARIANTS",
           "declaration": {
             "name": "ICON_VARIANTS",
-            "module": "src/components/svg-icon.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ICON_NAMES",
-          "declaration": {
-            "name": "ICON_NAMES",
             "module": "src/components/svg-icon.ts"
           }
         },

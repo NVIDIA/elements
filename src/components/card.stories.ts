@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { withDesign } from 'storybook-addon-designs'
-import { generateFigmaEmbed } from '../util/storybook-utils';
 
+import { generateFigmaEmbed } from '../util/storybook-utils';
 import { Card }  from './card';
 const _components = { Card };
 
@@ -70,7 +70,7 @@ export const Default = {
 
 
           ${when(args.showButton, () => html`
-            <mlv-button label="Proceed" icon="arrow"></mlv-button>
+            <mlv-button label="Proceed" icon="navigate-to"></mlv-button>
           `)}
         </footer>
       `)}

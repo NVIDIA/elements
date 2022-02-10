@@ -56,7 +56,7 @@ export class Button extends LitElement {
       <button class=${classMap(classes)} @mouseover="${() => this._hover = true}" @mouseout="${() => this._hover = false}" ?disabled=${this.disabled}>
         ${this.label}
         <slot></slot>
-        ${when(this.icon, () => html`<mlv-svg-icon variant="current" .name="${this.icon}"></mlv-svg-icon>`)}
+        ${when(this.icon, () => html`<mlv-svg-icon variant="current" name="${this.icon}"></mlv-svg-icon>`)}
       </button>
     `;
   }

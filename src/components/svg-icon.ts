@@ -1,17 +1,17 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ICON_NAMES } from '../generated/icon-names';
 
 export const ICON_VARIANTS = ['current', 'default', 'lighter'];
-export const ICON_NAMES = ['arrow', 'back', 'calendar', 'copy', 'pin'];
 export type IconVariants = typeof ICON_VARIANTS[number];
 export type IconNames = typeof ICON_NAMES[number];
 
 @customElement('mlv-svg-icon')
 export class SvgIcon extends LitElement {
   /** The color variant of the icon */
-  @property({ attribute: 'variant', reflect: true }) variant: IconVariants = 'default';
+  @property({ attribute: 'variant' }) variant: IconVariants = 'default';
   /** The name of the icon SVG sprite */
-  @property({ attribute: 'name', reflect: true }) name: IconNames;
+  @property({ attribute: 'name' }) name: IconNames;
 
 
   static styles = [
@@ -38,8 +38,8 @@ export class SvgIcon extends LitElement {
 
   render() {
     return html`
-      <svg width="1em" height="1em" fill="currentColor">
-        <use href="./src/assets/icons.svg#${this.name}"></use>
+      <svg width="1em" height="1em">
+        <use href="./src/generated/icons.svg#${this.name}"></use>
       </svg>
     `;
   }

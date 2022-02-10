@@ -4,9 +4,9 @@ import { expect } from '@storybook/jest';
 import { userEvent, within } from '@storybook/testing-library';
 
 import { awaitTimeout, generateFigmaEmbed } from '../util/storybook-utils';
-
+import { ICON_NAMES } from '../generated/icon-names';
+import { IconNames } from './svg-icon';
 import { Button }  from './button';
-import { IconNames, ICON_NAMES } from './svg-icon';
 const _components = { Button };
 
 const figmaEmbedNodeId = '163%3A25';
@@ -45,7 +45,7 @@ interface ArgTypes {
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<mlv-button data-testid="button" .label=${args.label} .disabled=${args.disabled} .icon=${args.icon} ?prefixIcon=${args.prefixIcon}>${args.content}</mlv-button>`,
+  render: (args: ArgTypes) => html`<mlv-button data-testid="button" label=${args.label} ?disabled=${args.disabled} icon=${args.icon} ?prefixIcon=${args.prefixIcon}>${args.content}</mlv-button>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { label: 'My Story ', disabled: false, content: '' },
   play: async ({ args, canvasElement }) => {
@@ -79,7 +79,7 @@ export const ButtonWithIcon = { ...Default, args: { label: 'Copy', icon: 'copy',
 
 export const ButtonWithIconSlotted = {
   render: (args: ArgTypes) => html`
-  <mlv-button .label=${args.label} .disabled=${args.disabled}>
+  <mlv-button label=${args.label} ?disabled=${args.disabled}>
     <mlv-svg-icon variant="current" name="arrow"></mlv-svg-icon>
   </mlv-button>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),

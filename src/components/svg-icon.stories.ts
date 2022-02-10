@@ -1,11 +1,12 @@
 /* eslint-disable guard-for-in */
 import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs'
-import { awaitTimeout, generateFigmaEmbed } from '../util/storybook-utils';
 import { expect } from '@storybook/jest';
-import { userEvent, within } from '@storybook/testing-library';
+import { within } from '@storybook/testing-library';
 
-import { IconNames, IconVariants, ICON_NAMES, ICON_VARIANTS, SvgIcon } from './svg-icon';
+import { awaitTimeout, generateFigmaEmbed } from '../util/storybook-utils';
+import { IconNames, IconVariants, ICON_VARIANTS, SvgIcon } from './svg-icon';
+import { ICON_NAMES } from '../generated/icon-names';
 const _components = { SvgIcon };
 
 const figmaEmbedNodeId = '164%3A61';
@@ -29,6 +30,7 @@ export default {
       options: ICON_VARIANTS
     },
     name: {
+      control: 'inline-radio',
       options: ICON_NAMES
     },
   },
@@ -40,16 +42,37 @@ interface ArgTypes {
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<mlv-svg-icon data-testid="icon" .name="${args.name}" .variant="${args.variant}" style="font-size: 4em"></mlv-svg-icon>`,
+  render: (args: ArgTypes) => html`<mlv-svg-icon data-testid="icon" name="${args.name}" variant="${args.variant}" style="font-size: 4em"></mlv-svg-icon>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { name: 'arrow', variant: 'default' },
+  args: { name: 'analytics', variant: 'default' }
+};
+
+export const LightIcon = { ...Default, args: { name: 'analytics', variant: 'lighter' } };
+
+export const PreviewAllIcons = {
+  render: (args: ArgTypes) => html`
+
+    ${ICON_NAMES.map(iconName => html`
+      <span title="${iconName}">
+        <mlv-svg-icon data-testid="icon" name="${iconName}" variant="${args.variant}" style="font-size: 4em"></mlv-svg-icon>
+        <!-- ${iconName} -->
+      </span>
+    `)}
+  `,
+  parameters: generateFigmaEmbed(figmaEmbedNodeId),
+  args: { name: 'analytics', variant: 'default' }
+};
+
+export const CycleIcons = {
+  ...Default,
+  args: { name: 'analytics', variant: 'lighter' },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
     const icon = canvas.getByTestId('icon');
 
     await icon.setAttribute('variant', args.variant);
 
-    await awaitTimeout(2000);
+    await awaitTimeout(1000);
 
     await expect(icon.hasAttribute('name')).toBe(true)
 
@@ -60,5 +83,3 @@ export const Default = {
     }
   }
 };
-
-export const LightIcon = { ...Default, args: { name: 'arrow', variant: 'lighter' } };
