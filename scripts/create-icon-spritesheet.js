@@ -36,9 +36,12 @@ function getChildElements(node) {
   return node.nodeType === 1 ? Array.from(node.childNodes).filter((childNode) => childNode.nodeType === 1) : [];
 }
 
-function cleanSvgEl(svgEl) {
+function cleanSvgEl(svgEl, id) {
   if (svgEl.hasAttribute('fill')) {
     svgEl.setAttribute('fill', 'currentColor');
+  }
+  if (id.includes('outline')) {
+    svgEl.setAttribute('fill', 'none');
   }
   if (svgEl.hasAttribute('stroke')) {
     svgEl.setAttribute('stroke', 'currentColor');
@@ -68,7 +71,7 @@ for (const file of files) {
     resultSymbolEl.setAttribute('viewBox', viewBox);
     for (const childNode of getChildElements(svgEl)) {
       const resultChildEl = childNode.cloneNode(true);
-      cleanSvgEl(resultChildEl);
+      cleanSvgEl(resultChildEl, id);
       resultSymbolEl.appendChild(resultChildEl);
     }
     resultSvgEl.appendChild(resultSymbolEl);
