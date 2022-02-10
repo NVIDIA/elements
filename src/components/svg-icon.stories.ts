@@ -25,7 +25,7 @@ export default {
       }
     }
   },
-  argTypes: {
+  argTypes: { // ******* TODO: Track this github issue https://github.com/storybookjs/storybook/issues/17063 (bug in 6.4 that resets radio/select args to !undefined)
     variant: {
       options: ICON_VARIANTS
     },
