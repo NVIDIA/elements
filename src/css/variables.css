@@ -1,12 +1,33 @@
 :root {
-  --nve-shadow-sm: 0.25px 1.5px 6px rgba(0, 0, 0, 0.1),
-    0px 16px 16px -6px rgba(15, 15, 15, 0.11);
-  --nve-shadow-md: 0.5px 3px 12px rgba(0, 0, 0, 0.1),
-    0px 32px 32px -12px rgba(15, 15, 15, 0.12);
-  --nve-shadow-lg: 0.75px 4.5px 18px rgba(0, 0, 0, 0.1),
-    0px 48px 48px -18px rgba(15, 15, 15, 0.13);
-  --nve-shadow-xl: 1px 6px 24px rgba(0, 0, 0, 0.1),
-    0px 64px 64px -24px rgba(15, 15, 15, 0.14);
+  --nve-system-color-interactive-primary: #68B026;
+  --nve-system-color-interactive-primary-hover: #4E851D;
+  --nve-system-color-interactive-destructive: #FE5252;
+  --nve-system-color-interactive-destructive-hover: #d93535;
+  --nve-system-color-interactive-secondary: #0971F1;
+  --nve-system-color-interactive-on-dark: #FFFFFF;
+  --nve-system-color-interactive-on-light: #17181B;
+  --nve-system-color-interactive-selected: #0971F166;
+  --nve-system-color-interactive-focused: #E6E6E6;
+  --nve-system-color-interactive-disabled: var(--nve-color-neutral-500);
+  --nve-system-color-interactive-on-disabled: var(--nve-color-neutral-250);
+
+  --nve-system-color-hover-on-dark-0: #16161A;
+  --nve-system-color-hover-on-dark-1: #1E2024;
+  --nve-system-color-hover-on-dark-2: #282B36;
+  --nve-system-color-hover-on-dark-3: #3B3F4D;
+  --nve-system-color-hover-on-light-1: #F0F3F5;
+
+  --nve-system-color-link-on-dark-hover: #0971F1;
+  --nve-system-color-link-on-light-hover: #0971F1;
+
+  --nve-system-status-dark-positive: #58BD7D;
+  --nve-system-status-dark-warning: #FFC700;
+  --nve-system-status-dark-negative: #FE5252;
+  --nve-system-status-dark-info: #FFFFFF;
+  --nve-system-status-light-positive: #10983D;
+  --nve-system-status-light-warning: #FFC700;
+  --nve-system-status-light-negative: #E94A3F;
+  --nve-system-status-light-info: #17181B;
 
   --nve-color-neutral-50: #f6f6fc;
   --nve-color-neutral-100: #f2f3f7;
@@ -20,31 +41,31 @@
   --nve-color-neutral-950: #0f0f11;
   --nve-color-neutral-1000: #000000;
 
-  --nve-color-brand-500: #68b026;
-
-  --nve-color-positive-500: #58bd7d;
-  --nve-color-negative-500: #fe5252;
-  --nve-color-warning-500: #ffc700;
-
-  --nve-font-sans: 'Inter var', 'Open Sans', Roboto, 'Helvetica Neue',
-    sans-serif;
+  --nve-font-sans: 'Inter var', 'Open Sans', Roboto, 'Helvetica Neue', sans-serif;
   --nve-font-mono: 'Lucida Console', Monaco, monospace, sans-serif;
 
-  --nve-font-size-50: 11px;
-  --nve-font-size-75: 12px;
+  --nve-font-size-25: 11px;
+  --nve-font-size-50: 12px;
+  --nve-font-size-75: 13px;
   --nve-font-size-100: 14px;
   --nve-font-size-200: 16px;
-  --nve-font-size-300: 18px;
-  --nve-font-size-400: 20px;
-  --nve-font-size-500: 22px;
-  --nve-font-size-600: 25px;
-  --nve-font-size-700: 28px;
-  --nve-font-size-800: 32px;
-  --nve-font-size-900: 36px;
-  --nve-font-size-1000: 40px;
-  --nve-font-size-1100: 45px;
-  --nve-font-size-1200: 50px;
-  --nve-font-size-1300: 60px;
+  --nve-font-size-275: 19px;
+  --nve-font-size-300: 20px;
+  --nve-font-size-400: 24px;
+  --nve-font-size-600: 28px;
+  --nve-font-size-700: 32px;
+  --nve-font-size-800: 36px;
+  --nve-font-size-900: 40px;
+
+  --nve-font-weight-thin: 100;
+  --nve-font-weight-extra-light: 200;
+  --nve-font-weight-light: 300;
+  --nve-font-weight-normal: 400;
+  --nve-font-weight-medium: 500;
+  --nve-font-weight-semi-bold: 600;
+  --nve-font-weight-bold: 700;
+  --nve-font-weight-extra-bold: 800;
+  --nve-font-weight-black: 900;
 
   --nve-radius-sm: 4px;
   --nve-radius-md: 8px;
@@ -66,4 +87,13 @@
   --nve-stroke-size-md: 2px;
   --nve-stroke-size-lg: 4px;
   --nve-stroke-size-xl: 8px;
+
+  --nve-shadow-sm: 0.25px 1.5px 6px rgba(0, 0, 0, 0.1),
+    0px 16px 16px -6px rgba(15, 15, 15, 0.11);
+  --nve-shadow-md: 0.5px 3px 12px rgba(0, 0, 0, 0.1),
+    0px 32px 32px -12px rgba(15, 15, 15, 0.12);
+  --nve-shadow-lg: 0.75px 4.5px 18px rgba(0, 0, 0, 0.1),
+    0px 48px 48px -18px rgba(15, 15, 15, 0.13);
+  --nve-shadow-xl: 1px 6px 24px rgba(0, 0, 0, 0.1),
+    0px 64px 64px -24px rgba(15, 15, 15, 0.14);
 }
