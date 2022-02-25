@@ -9,4 +9,23 @@ export const generateFigmaEmbed = (figmaNodeId: string) => {
   };
 };
 
-export const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
+export const excludePrivateFields = (manifest: any) => {
+  return {
+    ...manifest,
+    ...(manifest.modules && {
+      modules: manifest.modules?.map((module) => ({
+        ...module,
+        ...(module.declarations && {
+          declarations: module.declarations?.map((declaration) => ({
+            ...declaration,
+            ...(declaration.members && {
+              members: declaration.members?.filter((members) => members.privacy !== 'private')
+            })
+          }))
+        })
+      }))
+    })
+  };
+};
+
+export const awaitTimeout = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
