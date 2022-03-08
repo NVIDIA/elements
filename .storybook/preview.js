@@ -1,12 +1,13 @@
 import { setCustomElementsManifest } from '@storybook/web-components';
 import { excludePrivateFields } from '../src/util/storybook-utils';
 import customElements from '../custom-elements.json';
-import * as jest from '@storybook/jest';
 
 setCustomElementsManifest(excludePrivateFields(customElements));
 
-// Fix: fn() is not defined, see: https://github.com/storybookjs/storybook/issues/15391
+import * as jest from "jest-mock";
 window.jest = jest;
+// Fix: `@storybook/addon-interactions` exports is not defined or `jest-mock` does not provide an export named 'fn'
+// https://github.com/storybookjs/storybook/issues/15391#issuecomment-873472669
 
 export const parameters = {
   darkMode: {

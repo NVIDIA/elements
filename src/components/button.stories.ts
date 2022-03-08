@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs'
-import { expect } from '@storybook/jest';
 import { userEvent, within } from '@storybook/testing-library';
 
 import { awaitTimeout, generateFigmaEmbed } from '../util/storybook-utils';
@@ -61,30 +60,30 @@ export const Disabled = { ...Default, args: { label: 'Disabled Button', disabled
 export const SlottedText = { ...Default, args: { content: 'Slotted Text' } };
 export const ButtonWithIcon = { ...Default, args: { label: 'Copy', icon: 'copy', prefixIcon: false } };
 
-export const simulateHoverStates = { ...Default,
-  play: async ({ args, canvasElement }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByTestId('button').shadowRoot.querySelector('button');
-    const isEnabled = !args.disabled;
+// export const simulateHoverStates = { ...Default,
+//   play: async ({ args, canvasElement }) => {
+//     const canvas = within(canvasElement);
+//     const button = canvas.getByTestId('button').shadowRoot.querySelector('button');
+//     const isEnabled = !args.disabled;
 
-    await awaitTimeout(1500);
+//     await awaitTimeout(1500);
 
-    await userEvent.hover(button);
-    await expect(button.classList.contains('hover')).toBe(isEnabled)
-    await awaitTimeout(500);
-    await userEvent.unhover(button);
+//     await userEvent.hover(button);
+//     await expect(button.classList.contains('hover')).toBe(isEnabled)
+//     await awaitTimeout(500);
+//     await userEvent.unhover(button);
 
-    await expect(button.classList.contains('hover')).toBe(false)
+//     await expect(button.classList.contains('hover')).toBe(false)
 
-    await userEvent.hover(button);
-    await expect(button.classList.contains('hover')).toBe(isEnabled)
-    await awaitTimeout(500);
-    await userEvent.unhover(button);
+//     await userEvent.hover(button);
+//     await expect(button.classList.contains('hover')).toBe(isEnabled)
+//     await awaitTimeout(500);
+//     await userEvent.unhover(button);
 
-    await userEvent.click(button);
-    await userEvent.unhover(button);
-  }
-};
+//     await userEvent.click(button);
+//     await userEvent.unhover(button);
+//   }
+// };   /*** No longer works with CSS hover psuedo class rather than explicit event listeners and CSS .hover class -- Left for play method reference ***/
 
 
 export const ButtonWithIconSlotted = {
