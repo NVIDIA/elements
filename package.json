@@ -32,7 +32,6 @@
     "@storybook/addon-interactions": "6.4.19",
     "@storybook/addons": "6.4.19",
     "@storybook/client-api": "6.4.19",
-    "@storybook/jest": "0.0.5",
     "@storybook/testing-library": "0.0.7",
     "@storybook/web-components": "6.4.19",
     "@xmldom/xmldom": "^0.8.0",

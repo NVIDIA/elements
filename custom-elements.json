@@ -27,8 +27,7 @@
               },
               "default": "'button'",
               "description": "Label txt for the button",
-              "attribute": "label",
-              "reflects": true
+              "attribute": "label"
             },
             {
               "kind": "field",
@@ -38,8 +37,7 @@
               },
               "default": "false",
               "description": "If 'disabled' attribute present on element, set disabled state on button",
-              "attribute": "disabled",
-              "reflects": true
+              "attribute": "disabled"
             },
             {
               "kind": "field",
@@ -59,8 +57,7 @@
                 "text": "IconNames"
               },
               "description": "If present use icon for name of icon to show",
-              "attribute": "icon",
-              "reflects": true
+              "attribute": "icon"
             },
             {
               "kind": "field",
@@ -70,8 +67,7 @@
               },
               "default": "false",
               "description": "If 'prefixicon' attribute present on element, show icon on left",
-              "attribute": "prefixIcon",
-              "reflects": true
+              "attribute": "prefixIcon"
             },
             {
               "kind": "field",
