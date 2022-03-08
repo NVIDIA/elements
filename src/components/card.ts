@@ -20,7 +20,7 @@ export class Card extends LitElement {
 
         background-color: var(--background-color);
         color: var(--text-color);
-        border-radius: var(--mlv-radius-md);
+        border-radius: var(--mlv-radius-lg);
         box-shadow: var(--shadow);
       }
 
@@ -36,6 +36,7 @@ export class Card extends LitElement {
         padding: var(--mlv-spacing-5);
         display: flex;
         justify-content: space-between;
+        align-items: center;
       }
     `,
   ];
