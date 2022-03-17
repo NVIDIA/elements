@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { withDesign } from 'storybook-addon-designs'
 
-import { generateFigmaEmbed } from '../util/storybook-utils';
+import { generateFigmaEmbed } from '../../util/storybook-utils';
 import { Card }  from './card';
 const _components = { Card };
 
@@ -39,6 +39,8 @@ interface ArgTypes {
   footerTxt?: string;
   imageSrc?: string;
   showButton?: boolean;
+  title?: string;
+  subTitle?: string;
 }
 
 export const Default = {
@@ -57,7 +59,8 @@ export const Default = {
         text-align: center;
       }
     </style>
-    <nve-card>
+
+    <nve-card title=${args.title} subTitle=${args.subTitle}>
       ${when(args.imageSrc, () => html`
         <img slot="image" src="${args.imageSrc}">
       `)}
@@ -78,6 +81,17 @@ export const Default = {
   `,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { content: 'Slotted Card Content', width: 200, height: 50 }
+};
+
+
+export const CardWithTitle = {
+  ...Default,
+  args: {title: 'Card Title', width: 400, height: 200 }
+};
+
+export const CardWithTitleAndSubTitle = {
+  ...Default,
+  args: {title: 'Card Title', subTitle: 'Supporting Text', width: 400, height: 200 }
 };
 
 export const CardWithImage = {

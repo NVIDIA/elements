@@ -29,3 +29,5 @@ export const excludePrivateFields = (manifest: any) => {
 };
 
 export const awaitTimeout = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
+export const getValuesFromEnum = (enumToTransform) => Object.values(enumToTransform).filter((key: string) => !isNaN(Number(enumToTransform[key])));
