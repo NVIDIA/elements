@@ -73,15 +73,18 @@
   --nve-radius-xl: 24px;
   --nve-radius-full: 1e5px;
 
-  --nve-spacing-1: 2px;
-  --nve-spacing-2: 4px;
-  --nve-spacing-3: 8px;
-  --nve-spacing-4: 12px;
-  --nve-spacing-5: 16px;
-  --nve-spacing-6: 20px;
-  --nve-spacing-7: 24px;
+  --nve-spacing-half: 2px;
+  --nve-spacing-1: 4px;
+  --nve-spacing-1-half: 6px;
+  --nve-spacing-2: 8px;
+  --nve-spacing-3: 12px;
+  --nve-spacing-4: 16px;
+  --nve-spacing-5: 20px;
+  --nve-spacing-6: 24px;
+  --nve-spacing-7: 28px;
   --nve-spacing-8: 32px;
-  --nve-spacing-9: 40px;
+  --nve-spacing-9: 36px;
+  --nve-spacing-10: 40px;
 
   --nve-stroke-size-sm: 1px;
   --nve-stroke-size-md: 2px;

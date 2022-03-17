@@ -1,0 +1,20 @@
+:host {
+  /* Base CSS */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+
+  /* Variants */
+  &([variant="current"]) {
+    color: currentColor;
+  }
+
+  &([variant="default"]) {
+    color: var(--nve-color-neutral-500);
+  }
+
+  &([variant="lighter"]) {
+    color: var(--nve-color-neutral-300);
+  }
+}

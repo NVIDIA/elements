@@ -1,4 +1,5 @@
 const path = require('path');
+const CssHmr = require('../rollup-plugin-css-hmr.cjs');
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -19,6 +20,8 @@ module.exports = {
     interactionsDebugger: true
   },
   async viteFinal(config) {
+    config.plugins = [...config.plugins, CssHmr('.ts')]; // triggers hot reload when modifying .css files
+
     // Workaround: https://github.com/storybookjs/storybook/issues/10887#issuecomment-901109891
     config.resolve.dedupe = ['@storybook/client-api'];
 
