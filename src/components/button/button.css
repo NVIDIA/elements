@@ -1,0 +1,66 @@
+button {
+  /* Base CSS */
+  display: inline-flex;
+  align-items: center;
+  appearance: none;
+  border: 4px solid transparent;
+  cursor: pointer;
+  background-color: var(--mlv-system-color-interactive-primary);
+  border-radius: var(--mlv-radius-full);
+  color: var(--mlv-color-neutral-50);
+  font-size: var(--mlv-font-size-75);
+  font-weight: var(--mlv-font-weight-semi-bold);
+  gap: var(--mlv-spacing-1);
+  padding: var(--mlv-spacing-1) var(--mlv-spacing-3);
+  line-height: var(--mlv-font-size-200);
+
+
+  /* Variants */
+  @define-mixin buttonBackground $variant {
+    :host([variant="$(variant)"]) & {
+      background-color: var(--mlv-system-color-interactive-$(variant));
+
+      &:hover {
+        background-color: var(--mlv-system-color-interactive-$(variant)-hover);
+      }
+    }
+  }
+
+  @mixin buttonBackground primary {}
+  @mixin buttonBackground destructive {}
+
+  /* TODO can we use @mixin-content to support this variant? */
+
+  :host([variant="secondary"]) & {
+    color: var(--mlv-system-color-interactive-neutral-hover);
+    background-color: var(--mlv-system-color-interactive-neutral);
+
+    &:hover {
+      color: var(--mlv-system-color-interactive-neutral);
+      background-color: var(--mlv-system-color-interactive-neutral-hover);
+    }
+  }
+
+
+  /* States */
+  &:focus-visible {
+    border-color: var(--mlv-system-color-interactive-secondary);
+  }
+
+  &:active {
+    filter: contrast(1.25) brightness(1.1);
+  }
+
+  &:disabled {
+    background-color: var(--mlv-system-color-interactive-disabled);
+    color: var(--mlv-system-color-interactive-on-disabled);
+    opacity: 40%;
+    cursor: not-allowed;
+  }
+
+
+  /* Modes */
+  :host([iconplacement="leading"]) & {
+    flex-direction: row-reverse;
+  }
+}

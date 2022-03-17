@@ -73,15 +73,18 @@
   --mlv-radius-xl: 24px;
   --mlv-radius-full: 1e5px;
 
-  --mlv-spacing-1: 2px;
-  --mlv-spacing-2: 4px;
-  --mlv-spacing-3: 8px;
-  --mlv-spacing-4: 12px;
-  --mlv-spacing-5: 16px;
-  --mlv-spacing-6: 20px;
-  --mlv-spacing-7: 24px;
+  --mlv-spacing-half: 2px;
+  --mlv-spacing-1: 4px;
+  --mlv-spacing-1-half: 6px;
+  --mlv-spacing-2: 8px;
+  --mlv-spacing-3: 12px;
+  --mlv-spacing-4: 16px;
+  --mlv-spacing-5: 20px;
+  --mlv-spacing-6: 24px;
+  --mlv-spacing-7: 28px;
   --mlv-spacing-8: 32px;
-  --mlv-spacing-9: 40px;
+  --mlv-spacing-9: 36px;
+  --mlv-spacing-10: 40px;
 
   --mlv-stroke-size-sm: 1px;
   --mlv-stroke-size-md: 2px;

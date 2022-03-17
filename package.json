@@ -17,7 +17,7 @@
     "storybook": "start-storybook -p 7777",
     "build-storybook": "build-storybook",
     "watch-manifest": "npm run analyze -- --watch",
-    "analyze": "cem analyze --litelement --globs src/components/**.ts --exclude **.stories.ts",
+    "analyze": "cem analyze --litelement --globs src/components/**/*.ts --exclude **.stories.ts",
     "create-icon-spritesheet": "node scripts/create-icon-spritesheet.js"
   },
   "dependencies": {
@@ -36,6 +36,9 @@
     "@storybook/web-components": "6.4.19",
     "@xmldom/xmldom": "^0.8.0",
     "api-viewer-element": "^1.0.0-pre.3",
+    "postcss": "^8.3.11",
+    "postcss-nested": "^5.0.6",
+    "postcss-mixins": "^9.0.1",
     "prettier": "^2.5.1",
     "storybook-addon-designs": "^6.2.1",
     "storybook-builder-vite": "^0.1.17",

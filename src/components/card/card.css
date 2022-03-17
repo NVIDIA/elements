@@ -1,0 +1,54 @@
+:host {
+  /* Base CSS */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: start;
+  overflow: hidden;
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: var(--mlv-radius-lg);
+  box-shadow: var(--shadow);
+
+
+  /* Slots */
+  #header {
+    display: flex;
+    flex-direction: column;
+    padding: var(--mlv-spacing-7) var(--mlv-spacing-7) var(--mlv-spacing-4);
+    border-bottom: 2px solid var(--mlv-color-neutral-700);
+
+    h1#title {
+      margin: 0;
+      font-size: var(--mlv-font-size-275);
+      line-height: var(--mlv-font-size-400);
+      font-weight: var(--mlv-font-weight-bold);
+    }
+
+    h2#subTitle {
+      margin: 0;
+      color: var(--mlv-color-neutral-500);
+      font-size: var(--mlv-font-size-100);
+      line-height: var(--mlv-font-size-400);
+      font-weight: var(--mlv-font-weight-normal);
+    }
+  }
+
+  ::slotted(img) {
+    width: 100%;
+  }
+
+  #content {
+    padding: var(--mlv-spacing-4) var(--mlv-spacing-7) var(--mlv-spacing-7);
+  }
+
+  #footer {
+    ::slotted(*) {
+      padding: var(--mlv-spacing-7);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
