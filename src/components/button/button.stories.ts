@@ -2,10 +2,10 @@ import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs'
 import { userEvent, within } from '@storybook/testing-library';
 
-import { awaitTimeout, generateFigmaEmbed } from '../util/storybook-utils';
-import { ICON_NAMES } from '../generated/icon-names';
-import { IconNames } from './svg-icon';
-import { Button, ButtonVariants, BUTTON_VARIANTS }  from './button';
+import { awaitTimeout, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
+import { ICON_NAMES } from '../../generated/icon-names';
+import { IconNames } from '../svg-icon/svg-icon';
+import { Button, ButtonVariants, IconPlacements }  from './button';
 const _components = { Button };
 
 const figmaEmbedNodeId = '163%3A25';
@@ -29,12 +29,16 @@ export default {
   },
   argTypes: { // ******* TODO: Track this github issue https://github.com/storybookjs/storybook/issues/17063 (bug in 6.4 that resets radio/select args to !undefined)
     icon: {
-      control: 'inline-radio',
+      control: 'select',
       options: ICON_NAMES
     },
     variant: {
       control: 'inline-radio',
-      options: BUTTON_VARIANTS
+      options: getValuesFromEnum(ButtonVariants)
+    },
+    iconPlacement: {
+      control: 'inline-radio',
+      options: getValuesFromEnum(IconPlacements)
     }
   }
 };
@@ -45,11 +49,11 @@ interface ArgTypes {
   content?: string;
   disabled?: boolean;
   icon?: IconNames;
-  prefixIcon?: boolean;
+  iconPlacement?: IconPlacements;
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<nve-button data-testid="button" label=${args.label} variant=${args.variant} ?disabled=${args.disabled} icon=${args.icon} ?prefixIcon=${args.prefixIcon}>${args.content}</nve-button>`,
+  render: (args: ArgTypes) => html`<nve-button data-testid="button" label=${args.label} variant=${args.variant} ?disabled=${args.disabled} icon=${args.icon} iconPlacement=${args.iconPlacement}>${args.content}</nve-button>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { label: 'Primary', disabled: false, content: '', variant: 'primary' }
 };
@@ -58,7 +62,7 @@ export const Secondary = { ...Default, args: { label: 'Secondary', variant: 'sec
 export const Destructive = { ...Default, args: { label: 'Destructive', variant: 'destructive' } };
 export const Disabled = { ...Default, args: { label: 'Disabled Button', disabled: true } };
 export const SlottedText = { ...Default, args: { content: 'Slotted Text' } };
-export const ButtonWithIcon = { ...Default, args: { label: 'Copy', icon: 'copy', prefixIcon: false } };
+export const ButtonWithIcon = { ...Default, args: { label: 'Copy', icon: 'copy', iconPlacement: 'trailing' } };
 
 // export const simulateHoverStates = { ...Default,
 //   play: async ({ args, canvasElement }) => {
@@ -89,7 +93,7 @@ export const ButtonWithIcon = { ...Default, args: { label: 'Copy', icon: 'copy',
 export const ButtonWithIconSlotted = {
   render: (args: ArgTypes) => html`
   <nve-button label=${args.label} ?disabled=${args.disabled}>
-    <nve-svg-icon variant="current" name="arrow"></nve-svg-icon>
+    <nve-svg-icon variant="current" name="copy"></nve-svg-icon>
   </nve-button>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { label: 'Slotted Icon', disabled: false, content: '' }

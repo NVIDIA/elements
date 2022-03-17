@@ -4,16 +4,8 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "src/components/button.ts",
+      "path": "src/components/button/button.ts",
       "declarations": [
-        {
-          "kind": "variable",
-          "name": "BUTTON_VARIANTS",
-          "type": {
-            "text": "array"
-          },
-          "default": "['primary', 'secondary', 'destructive']"
-        },
         {
           "kind": "class",
           "description": "",
@@ -45,7 +37,6 @@
               "type": {
                 "text": "ButtonVariants"
               },
-              "default": "'primary'",
               "description": "Color Variant of the Button",
               "attribute": "variant",
               "reflects": true
@@ -61,13 +52,12 @@
             },
             {
               "kind": "field",
-              "name": "prefixIcon",
+              "name": "iconPlacement",
               "type": {
-                "text": "boolean"
+                "text": "IconPlacements"
               },
-              "default": "false",
-              "description": "If 'prefixicon' attribute present on element, show icon on left",
-              "attribute": "prefixIcon"
+              "description": "Left or right placement of the icon, defaults to 'trailing'",
+              "attribute": "iconPlacement"
             },
             {
               "kind": "field",
@@ -103,7 +93,6 @@
               "type": {
                 "text": "ButtonVariants"
               },
-              "default": "'primary'",
               "description": "Color Variant of the Button",
               "fieldName": "variant"
             },
@@ -116,13 +105,12 @@
               "fieldName": "icon"
             },
             {
-              "name": "prefixIcon",
+              "name": "iconPlacement",
               "type": {
-                "text": "boolean"
+                "text": "IconPlacements"
               },
-              "default": "false",
-              "description": "If 'prefixicon' attribute present on element, show icon on left",
-              "fieldName": "prefixIcon"
+              "description": "Left or right placement of the icon, defaults to 'trailing'",
+              "fieldName": "iconPlacement"
             }
           ],
           "superclass": {
@@ -136,18 +124,10 @@
       "exports": [
         {
           "kind": "js",
-          "name": "BUTTON_VARIANTS",
-          "declaration": {
-            "name": "BUTTON_VARIANTS",
-            "module": "src/components/button.ts"
-          }
-        },
-        {
-          "kind": "js",
           "name": "Button",
           "declaration": {
             "name": "Button",
-            "module": "src/components/button.ts"
+            "module": "src/components/button/button.ts"
           }
         },
         {
@@ -155,14 +135,14 @@
           "name": "nve-button",
           "declaration": {
             "name": "Button",
-            "module": "src/components/button.ts"
+            "module": "src/components/button/button.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/card.ts",
+      "path": "src/components/card/card.ts",
       "declarations": [
         {
           "kind": "class",
@@ -182,7 +162,44 @@
               "name": "footer"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "description": "If present render a title in the header",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "subTitle",
+              "type": {
+                "text": "string"
+              },
+              "description": "If present render a subTitle in the header",
+              "attribute": "subTitle"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "description": "If present render a title in the header",
+              "fieldName": "title"
+            },
+            {
+              "name": "subTitle",
+              "type": {
+                "text": "string"
+              },
+              "description": "If present render a subTitle in the header",
+              "fieldName": "subTitle"
+            }
+          ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
@@ -197,7 +214,7 @@
           "name": "Card",
           "declaration": {
             "name": "Card",
-            "module": "src/components/card.ts"
+            "module": "src/components/card/card.ts"
           }
         },
         {
@@ -205,23 +222,15 @@
           "name": "nve-card",
           "declaration": {
             "name": "Card",
-            "module": "src/components/card.ts"
+            "module": "src/components/card/card.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/svg-icon.ts",
+      "path": "src/components/svg-icon/svg-icon.ts",
       "declarations": [
-        {
-          "kind": "variable",
-          "name": "ICON_VARIANTS",
-          "type": {
-            "text": "array"
-          },
-          "default": "['current', 'default', 'lighter']"
-        },
         {
           "kind": "class",
           "description": "",
@@ -233,7 +242,6 @@
               "type": {
                 "text": "IconVariants"
               },
-              "default": "'default'",
               "description": "The color variant of the icon",
               "attribute": "variant"
             },
@@ -253,7 +261,6 @@
               "type": {
                 "text": "IconVariants"
               },
-              "default": "'default'",
               "description": "The color variant of the icon",
               "fieldName": "variant"
             },
@@ -277,18 +284,10 @@
       "exports": [
         {
           "kind": "js",
-          "name": "ICON_VARIANTS",
-          "declaration": {
-            "name": "ICON_VARIANTS",
-            "module": "src/components/svg-icon.ts"
-          }
-        },
-        {
-          "kind": "js",
           "name": "SvgIcon",
           "declaration": {
             "name": "SvgIcon",
-            "module": "src/components/svg-icon.ts"
+            "module": "src/components/svg-icon/svg-icon.ts"
           }
         },
         {
@@ -296,7 +295,7 @@
           "name": "nve-svg-icon",
           "declaration": {
             "name": "SvgIcon",
-            "module": "src/components/svg-icon.ts"
+            "module": "src/components/svg-icon/svg-icon.ts"
           }
         }
       ]

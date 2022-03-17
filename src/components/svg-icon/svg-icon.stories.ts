@@ -3,9 +3,9 @@ import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs'
 import { within } from '@storybook/testing-library';
 
-import { awaitTimeout, generateFigmaEmbed } from '../util/storybook-utils';
-import { IconNames, IconVariants, ICON_VARIANTS, SvgIcon } from './svg-icon';
-import { ICON_NAMES } from '../generated/icon-names';
+import { awaitTimeout, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
+import { IconNames, IconVariants, SvgIcon } from './svg-icon';
+import { ICON_NAMES } from '../../generated/icon-names';
 const _components = { SvgIcon };
 
 const figmaEmbedNodeId = '164%3A61';
@@ -26,7 +26,8 @@ export default {
   },
   argTypes: { // ******* TODO: Track this github issue https://github.com/storybookjs/storybook/issues/17063 (bug in 6.4 that resets radio/select args to !undefined)
     variant: {
-      options: ICON_VARIANTS
+      control: 'inline-radio',
+      options: getValuesFromEnum(IconVariants)
     },
     name: {
       control: 'inline-radio',
