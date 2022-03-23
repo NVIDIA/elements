@@ -10,7 +10,8 @@ module.exports = {
     'storybook-dark-mode',
     'storybook-addon-designs',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions'
+    '@storybook/addon-interactions',
+    '@etchteam/storybook-addon-status'
   ],
   framework: '@storybook/web-components',
   core: {
