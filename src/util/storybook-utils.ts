@@ -9,6 +9,25 @@ export const generateFigmaEmbed = (figmaNodeId: string) => {
   };
 };
 
+export type ComponentStatuses = 'beta' | 'stable' | 'deprecated' | 'releaseCandidate';
+
+export const generateDefaultStoryParameters = (status: ComponentStatuses, reviewDocBookmark: string, description: string, actions?: string[]) => {
+  return {
+    status: {
+      type: status,
+      url: `https://docs.google.com/document/d/1Q99AFsqDdQwtCTCxoCPOfdXS46KFWBBGVAzOruG28A4/edit#bookmark=${reviewDocBookmark}`
+    },
+    docs: {
+      description: {
+        component: description
+      }
+    },
+    actions: {
+      handles: actions
+    },
+  }
+};
+
 export const excludePrivateFields = (manifest: any) => {
   return {
     ...manifest,
@@ -30,4 +49,4 @@ export const excludePrivateFields = (manifest: any) => {
 
 export const awaitTimeout = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-export const getValuesFromEnum = (enumToTransform) => Object.values(enumToTransform).filter((key: string) => !isNaN(Number(enumToTransform[key])));
+export const getValuesFromEnum = (enumToTransform): string[] => Object.values(enumToTransform);
