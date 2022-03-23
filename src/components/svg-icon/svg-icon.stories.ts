@@ -3,12 +3,14 @@ import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs'
 import { within } from '@storybook/testing-library';
 
-import { awaitTimeout, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
+import { awaitTimeout, ComponentStatuses, generateDefaultStoryParameters, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
 import { IconNames, IconVariants, SvgIcon } from './svg-icon';
 import { ICON_NAMES } from '../../generated/icon-names';
 const _components = { SvgIcon };
 
 const figmaEmbedNodeId = '164%3A61';
+const reviewDocBookmark = 'id.zckm5su0hyrd';
+const status: ComponentStatuses = 'stable';
 const description =  `
   ## The MagLev Icon Component
 `;
@@ -17,13 +19,7 @@ export default {
   title: 'MagLev Elements/Atoms/Icon',
   component: 'mlv-svg-icon',
   decorators: [withDesign],
-  parameters: {
-    docs: {
-      description: {
-        component: description
-      }
-    }
-  },
+  parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: { // ******* TODO: Track this github issue https://github.com/storybookjs/storybook/issues/17063 (bug in 6.4 that resets radio/select args to !undefined)
     variant: {
       control: 'inline-radio',

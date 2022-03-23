@@ -10,6 +10,15 @@ window.jest = jest;
 // https://github.com/storybookjs/storybook/issues/15391#issuecomment-873472669
 
 export const parameters = {
+  status: {
+    statuses: {
+      released: {
+        background: '#0000ff',
+        color: '#ffffff',
+        description: 'This component is stable and released',
+      },
+    },
+  },
   darkMode: {
     stylePreview: true
   },

@@ -2,13 +2,15 @@ import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs'
 import { userEvent, within } from '@storybook/testing-library';
 
-import { awaitTimeout, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
+import { awaitTimeout, ComponentStatuses, generateDefaultStoryParameters, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
 import { ICON_NAMES } from '../../generated/icon-names';
 import { IconNames } from '../svg-icon/svg-icon';
 import { Button, ButtonVariants, IconPlacements }  from './button';
 const _components = { Button };
 
 const figmaEmbedNodeId = '163%3A25';
+const reviewDocBookmark = 'id.l12irnk25slx';
+const status: ComponentStatuses = 'stable';
 const description =  `
   ## The MagLev Button Component
 `;
@@ -17,16 +19,7 @@ export default {
   title: 'MagLev Elements/Atoms/Button',
   component: 'mlv-button',
   decorators: [withDesign],
-  parameters: {
-    docs: {
-      description: {
-        component: description
-      }
-    },
-    actions: {
-      handles: ['mouseover mlv-button', 'mouseout mlv-button', 'mousedown mlv-button', 'click mlv-button'],
-    },
-  },
+  parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description, ['mouseover mlv-button', 'mouseout mlv-button', 'mousedown mlv-button', 'click mlv-button']),
   argTypes: { // ******* TODO: Track this github issue https://github.com/storybookjs/storybook/issues/17063 (bug in 6.4 that resets radio/select args to !undefined)
     icon: {
       control: 'select',
