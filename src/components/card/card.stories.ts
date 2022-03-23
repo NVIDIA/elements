@@ -2,11 +2,13 @@ import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { withDesign } from 'storybook-addon-designs'
 
-import { generateFigmaEmbed } from '../../util/storybook-utils';
+import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '../../util/storybook-utils';
 import { Card }  from './card';
 const _components = { Card };
 
 const figmaEmbedNodeId = '505%3A2280';
+const reviewDocBookmark = 'id.s62qmiib7wfu';
+const status: ComponentStatuses = 'beta';
 const description =  `
   ## The MagLev Card Component
 `;
@@ -15,13 +17,7 @@ export default {
   title: 'MagLev Elements/Atoms/Card',
   component: 'nve-card',
   decorators: [withDesign],
-  parameters: {
-    docs: {
-      description: {
-        component: description
-      }
-    }
-  },
+  parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: {
     width: {
       control: { type: 'range', min: 200, max: 500}
