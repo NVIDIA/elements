@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { when } from 'lit/directives/when.js';
 import styleSheet from './card.css';
 
 
@@ -25,11 +26,12 @@ export class Card extends LitElement {
 
   render() {
     return html`
-      <slot name="header" id="header">
+      ${when(this.title, () => html`
+      <div id="header">
        <h1 id="title">${this.title}</h1>
 
        <h2 id="subTitle">${this.subTitle}</h2>
-      </slot>
+      </div>`)}
 
       <slot name="image"></slot>
 

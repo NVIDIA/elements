@@ -9,7 +9,7 @@ export const generateFigmaEmbed = (figmaNodeId: string) => {
   };
 };
 
-export type ComponentStatuses = 'beta' | 'stable' | 'deprecated' | 'releaseCandidate';
+export type ComponentStatuses = 'dev' | 'beta' | 'released' | 'deprecated';
 
 export const generateDefaultStoryParameters = (status: ComponentStatuses, reviewDocBookmark: string, description: string, actions?: string[]) => {
   return {
