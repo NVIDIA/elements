@@ -41,6 +41,7 @@
     "postcss-mixins": "^9.0.1",
     "postcss-nested": "^5.0.6",
     "prettier": "^2.5.1",
+    "rollup-plugin-css-hmr": "^0.2.1",
     "storybook-addon-designs": "^6.2.1",
     "storybook-builder-vite": "^0.1.17",
     "storybook-dark-mode": "^1.0.8",
