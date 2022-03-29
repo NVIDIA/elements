@@ -10,7 +10,7 @@ const _components = { Button };
 
 const figmaEmbedNodeId = '163%3A25';
 const reviewDocBookmark = 'id.l12irnk25slx';
-const status: ComponentStatuses = 'stable';
+const status: ComponentStatuses = 'beta';
 const description =  `
   ## The MagLev Button Component
 `;

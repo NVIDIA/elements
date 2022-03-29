@@ -40,7 +40,9 @@
   }
 
   #content {
-    padding: var(--nve-spacing-4) var(--nve-spacing-7) var(--nve-spacing-7);
+    ::slotted(*) {
+      padding: var(--nve-spacing-4) var(--nve-spacing-7) var(--nve-spacing-7);
+    }
   }
 
   #footer {

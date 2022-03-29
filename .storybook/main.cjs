@@ -1,5 +1,5 @@
 const path = require('path');
-const CssHmr = require('../rollup-plugin-css-hmr.cjs');
+const CssHmr = require('rollup-plugin-css-hmr');
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
