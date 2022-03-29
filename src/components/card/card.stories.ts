@@ -8,7 +8,7 @@ const _components = { Card };
 
 const figmaEmbedNodeId = '505%3A2280';
 const reviewDocBookmark = 'id.s62qmiib7wfu';
-const status: ComponentStatuses = 'beta';
+const status: ComponentStatuses = 'dev';
 const description =  `
   ## The MagLev Card Component
 `;
@@ -23,7 +23,7 @@ export default {
       control: { type: 'range', min: 200, max: 500}
     },
     height: {
-      control: { type: 'range', min: 50, max: 400}
+      control: { type: 'range', min: 50, max: 500}
     }
   }
 };
@@ -32,9 +32,8 @@ interface ArgTypes {
   width?: number;
   height?: number;
   content?: string;
-  footerTxt?: string;
   imageSrc?: string;
-  showButton?: boolean;
+  showFooter?: boolean;
   title?: string;
   subTitle?: string;
 }
@@ -63,42 +62,41 @@ export const Default = {
 
       ${args.content}
 
-      ${when(args.footerTxt, () => html`
+      ${when(args.showFooter, () => html`
         <footer slot="footer">
-          ${args.footerTxt}
+          Proceed with Action
 
-
-          ${when(args.showButton, () => html`
-            <nve-button label="Proceed" icon="navigate-to"></nve-button>
-          `)}
+          <nve-button label="Proceed" icon="navigate-to"></nve-button>
         </footer>
       `)}
     </nve-card>
   `,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { content: 'Slotted Card Content', width: 200, height: 50 }
+  args: { width: 300, height: 150 }
 };
 
 
 export const CardWithTitle = {
   ...Default,
-  args: {title: 'Card Title', width: 400, height: 200 }
+  args: { title: 'Card Title', width: 400, height: 200 }
 };
 
 export const CardWithTitleAndSubTitle = {
   ...Default,
-  args: {title: 'Card Title', subTitle: 'Supporting Text', width: 400, height: 200 }
+  args: { title: 'Card Title', subTitle: 'Supporting Text', width: 400, height: 200 }
 };
 
 export const CardWithImage = {
   ...Default,
-  args: {imageSrc: './src/assets/card-hero-image.jpg', width: 400, height: 200 }
+  args: { imageSrc: './src/assets/card-hero-image.jpg', width: 400, height: 200 }
 };
+
 export const CardWithImageAndFooter = {
   ...Default,
-  args: { footerTxt: 'Slotted Image Above', imageSrc: './src/assets/card-hero-image.jpg', width: 400, height: 325 }
+  args: { showFooter: true, imageSrc: './src/assets/card-hero-image.jpg', width: 400 }
 };
-export const CardWithImageAndAction = {
+
+export const CardWithHeaderImageAndFooter = {
   ...Default,
-  args: { footerTxt: 'Proceed with Action', imageSrc: './src/assets/card-hero-image.jpg', width: 400, height: 325, showButton: true }
+  args: { title: 'Card Title', subTitle: 'Supporting Text',  showFooter: true, imageSrc: './src/assets/card-hero-image.jpg', width: 400 }
 };
