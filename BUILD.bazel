@@ -1,0 +1,42 @@
+load("//src/ui/platform/build/vite:index.bzl", "vite_library", "vite_default_srcs", "vite_default_data")
+load("//src/ui/platform/build/storybook:index.bzl", "storybook")
+
+vite_library(
+    name = "elements",
+    package_name = "@elements/elements",
+    srcs = vite_default_srcs(),
+    deps = [
+        "@npm_platform_libs_elements//lit",
+        "@npm_platform_libs_elements//postcss-mixins",
+        "@npm_platform_libs_elements//postcss-nested",
+    ],
+    data = vite_default_data() + [
+        "postcss.config.cjs",
+    ],
+    npm_repository = "@npm_platform_libs_elements",
+)
+
+storybook(
+    name = "storybook",
+    srcs = glob([".storybook/**/*"]) + glob(["src/**/*"]),
+    deps = [
+        "@npm_platform_libs_elements//@emotion/react",
+        "@npm_platform_libs_elements//@etchteam/storybook-addon-status",
+        "@npm_platform_libs_elements//@storybook/addon-essentials",
+        "@npm_platform_libs_elements//@storybook/addon-interactions",
+        "@npm_platform_libs_elements//@storybook/addons",
+        "@npm_platform_libs_elements//@storybook/client-api",
+        "@npm_platform_libs_elements//@storybook/testing-library",
+        "@npm_platform_libs_elements//postcss-mixins",
+        "@npm_platform_libs_elements//postcss-nested",
+        "@npm_platform_libs_elements//rollup-plugin-css-hmr",
+        "@npm_platform_libs_elements//storybook-addon-designs",
+        "@npm_platform_libs_elements//storybook-builder-vite",
+        "@npm_platform_libs_elements//storybook-dark-mode",
+    ],
+    data = vite_default_data() + [
+        "custom-elements.json",
+        "postcss.config.cjs",
+    ],
+    npm_repository = "@npm_platform_libs_elements",
+)
