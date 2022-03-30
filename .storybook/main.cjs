@@ -20,16 +20,22 @@ module.exports = {
   features: {
     interactionsDebugger: true
   },
+  staticDirs: [
+    { from: '../src/assets', to: 'src/assets' },
+    { from: '../src/css', to: 'src/css' }
+  ],
   async viteFinal(config) {
     config.plugins = [...config.plugins, CssHmr('.ts')]; // triggers hot reload when modifying .css files
 
     // Workaround: https://github.com/storybookjs/storybook/issues/10887#issuecomment-901109891
     config.resolve.dedupe = ['@storybook/client-api'];
 
-    config.server.port = 7777;
-    config.server.hmr = {
-      protocol: 'ws'
-    };
+    if (config.server) {
+      config.server.port = 7777;
+      config.server.hmr = {
+        protocol: 'ws'
+      };
+    }
 
     config.optimizeDeps = {
       ...(config.optimizeDeps || {}),
