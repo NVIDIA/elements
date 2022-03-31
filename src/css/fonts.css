@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Inter var';
-  src: url('/src/assets/fonts/Inter-roman.var.woff2') format('woff2');
+  src: url('../assets/fonts/Inter-roman.var.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
