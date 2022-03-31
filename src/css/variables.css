@@ -67,7 +67,8 @@
   --nve-font-weight-extra-bold: 800;
   --nve-font-weight-black: 900;
 
-  --nve-radius-sm: 4px;
+  --nve-radius-xs: 4px;
+  --nve-radius-sm: 6px;
   --nve-radius-md: 8px;
   --nve-radius-lg: 16px;
   --nve-radius-xl: 24px;
