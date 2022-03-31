@@ -35,6 +35,8 @@ module.exports = {
       config.server.hmr = {
         protocol: 'ws'
       };
+    } else {
+      config.base = '/ui/storybook/elements/'
     }
 
     config.optimizeDeps = {
