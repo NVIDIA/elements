@@ -10,7 +10,7 @@ const _components = { SvgIcon };
 
 const figmaEmbedNodeId = '164%3A61';
 const reviewDocBookmark = 'id.zckm5su0hyrd';
-const status: ComponentStatuses = 'beta';
+const status: ComponentStatuses = 'dev';
 const description =  `
   ## The MagLev Icon Component
 `;
