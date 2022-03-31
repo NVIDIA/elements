@@ -41,6 +41,18 @@ button {
     }
   }
 
+  :host([variant="tertiary"]) & {
+    color: var(--nve-system-color-interactive-neutral-hover);
+    background-color: transparent;
+    border-radius: var(--nve-radius-sm);
+
+    &:hover {
+      color: var(--nve-system-color-interactive-neutral);
+      background-color: var(--nve-system-color-interactive-neutral-hover);
+      opacity: 0.5;
+    }
+  }
+
 
   /* States */
   &:focus-visible {
@@ -59,8 +71,14 @@ button {
   }
 
 
-  /* Modes */
+  /* Options */
   :host([iconplacement="leading"]) & {
     flex-direction: row-reverse;
+  }
+
+  &[icon-only] {
+    border-radius: var(--nve-radius-full);
+    font-size: var(--nve-font-size-300);
+    padding: var(--nve-spacing-half);
   }
 }
