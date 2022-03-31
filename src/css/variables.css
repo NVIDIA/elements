@@ -67,7 +67,8 @@
   --mlv-font-weight-extra-bold: 800;
   --mlv-font-weight-black: 900;
 
-  --mlv-radius-sm: 4px;
+  --mlv-radius-xs: 4px;
+  --mlv-radius-sm: 6px;
   --mlv-radius-md: 8px;
   --mlv-radius-lg: 16px;
   --mlv-radius-xl: 24px;

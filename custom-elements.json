@@ -18,7 +18,7 @@
                 "text": "string"
               },
               "default": "'button'",
-              "description": "Label txt for the button",
+              "description": "Label text for the button",
               "attribute": "label"
             },
             {
@@ -47,8 +47,17 @@
               "type": {
                 "text": "IconNames"
               },
-              "description": "If present use icon for name of icon to show",
+              "description": "If present use icon for name of icon to show. For Icon Button leave off label",
               "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "iconButtonTooltip",
+              "type": {
+                "text": "string"
+              },
+              "description": "Tooltip text for the Icon Button, strongly recommended for icon only buttons",
+              "attribute": "iconButtonTooltip"
             },
             {
               "kind": "field",
@@ -76,7 +85,7 @@
                 "text": "string"
               },
               "default": "'button'",
-              "description": "Label txt for the button",
+              "description": "Label text for the button",
               "fieldName": "label"
             },
             {
@@ -101,8 +110,16 @@
               "type": {
                 "text": "IconNames"
               },
-              "description": "If present use icon for name of icon to show",
+              "description": "If present use icon for name of icon to show. For Icon Button leave off label",
               "fieldName": "icon"
+            },
+            {
+              "name": "iconButtonTooltip",
+              "type": {
+                "text": "string"
+              },
+              "description": "Tooltip text for the Icon Button, strongly recommended for icon only buttons",
+              "fieldName": "iconButtonTooltip"
             },
             {
               "name": "iconPlacement",

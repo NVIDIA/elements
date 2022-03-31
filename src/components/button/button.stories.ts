@@ -10,7 +10,7 @@ const _components = { Button };
 
 const figmaEmbedNodeId = '163%3A25';
 const reviewDocBookmark = 'id.l12irnk25slx';
-const status: ComponentStatuses = 'beta';
+const status: ComponentStatuses = 'dev';
 const description =  `
   ## The MagLev Button Component
 `;
@@ -38,6 +38,7 @@ export default {
 
 interface ArgTypes {
   label?: string;
+  iconButtonTooltip?: string;
   variant?: ButtonVariants;
   content?: string;
   disabled?: boolean;
@@ -46,16 +47,19 @@ interface ArgTypes {
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<mlv-button data-testid="button" label=${args.label} variant=${args.variant} ?disabled=${args.disabled} icon=${args.icon} iconPlacement=${args.iconPlacement}>${args.content}</mlv-button>`,
+  render: (args: ArgTypes) => html`<mlv-button data-testid="button" label=${args.label} iconButtonTooltip=${args.iconButtonTooltip} variant=${args.variant} ?disabled=${args.disabled} icon=${args.icon} iconplacement=${args.iconPlacement}>${args.content}</mlv-button>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { label: 'Primary', disabled: false, content: '', variant: 'primary' }
 };
 
 export const Secondary = { ...Default, args: { label: 'Secondary', variant: 'secondary' } };
+export const Tertiary = { ...Default, args: { label: 'Tertiary Button', variant: 'tertiary' } };
 export const Destructive = { ...Default, args: { label: 'Destructive', variant: 'destructive' } };
 export const Disabled = { ...Default, args: { label: 'Disabled Button', disabled: true } };
 export const SlottedText = { ...Default, args: { content: 'Slotted Text' } };
 export const ButtonWithIcon = { ...Default, args: { label: 'Copy', icon: 'copy', iconPlacement: 'trailing' } };
+
+export const IconButton = { ...Default, args: {icon: 'copy', iconTooltip: 'Icon Button Tooltip' } };
 
 // export const simulateHoverStates = { ...Default,
 //   play: async ({ args, canvasElement }) => {
