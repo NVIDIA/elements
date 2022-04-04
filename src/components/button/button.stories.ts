@@ -3,7 +3,7 @@ import { withDesign } from 'storybook-addon-designs'
 import { userEvent, within } from '@storybook/testing-library';
 
 import { awaitTimeout, ComponentStatuses, generateDefaultStoryParameters, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
-import { ICON_NAMES } from '../../generated/icon-names';
+import { ICON_NAMES } from '../../generated-icons/icon-names';
 import { IconNames } from '../svg-icon/svg-icon';
 import { Button, ButtonVariants, IconPlacements }  from './button';
 const _components = { Button };

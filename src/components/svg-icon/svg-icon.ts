@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ICON_NAMES } from '../../generated/icon-names';
+import { ICON_NAMES } from '../../generated-icons/icon-names';
 import styleSheet from './svg-icon.css';
 
 const componentStyling = new CSSStyleSheet();
@@ -22,7 +22,7 @@ export class SvgIcon extends LitElement {
   render() {
     return html`
       <svg width="1em" height="1em">
-        <use href="./src/generated/icons.svg#${this.name}"></use>
+        <use href="./src/generated-icons/icons.svg#${this.name}"></use>
       </svg>
     `;
   }

@@ -9,8 +9,8 @@ import plugin from '@prettier/plugin-xml';
 
 const scriptPath = path.dirname(fileURLToPath(import.meta.url));
 const iconsPath = path.join(scriptPath, '../icons');
-const resultSvgPath = path.join(scriptPath, '../src/generated/icons.svg');
-const resultTypesPath = path.join(scriptPath, '../src/generated/icon-names.ts');
+const resultSvgPath = path.join(scriptPath, '../src/generated-icons/icons.svg');
+const resultTypesPath = path.join(scriptPath, '../src/generated-icons/icon-names.ts');
 
 const svgoOptions = {
   multipass: true,

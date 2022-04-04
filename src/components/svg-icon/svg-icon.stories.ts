@@ -5,7 +5,7 @@ import { within } from '@storybook/testing-library';
 
 import { awaitTimeout, ComponentStatuses, generateDefaultStoryParameters, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
 import { IconNames, IconVariants, SvgIcon } from './svg-icon';
-import { ICON_NAMES } from '../../generated/icon-names';
+import { ICON_NAMES } from '../../generated-icons/icon-names';
 const _components = { SvgIcon };
 
 const figmaEmbedNodeId = '164%3A61';
