@@ -22,26 +22,28 @@ export class Card extends LitElement {
   /**  If present render a title in the header */
   @property({ type: String}) title: string;
   /**  If present render a subTitle in the header */
-  @property({ type: String}) subTitle: string;
+  @property({ type: String}) subtitle: string;
 
   render() {
     return html`
       ${when(this.title, () => html`
-      <div id="header">
-       <h1 id="title">${this.title}</h1>
+        <header>
+          <div id="header-titles">
+            <h1>${this.title}</h1>
+            <h2>${this.subtitle}</h2>
+          </div>
 
-       <h2 id="subTitle">${this.subTitle}</h2>
-      </div>`)}
+          <slot name="header-actions"></slot>
+        </header>
+      `)}
 
-      <slot name="image"></slot>
-
-      <div id="content">
+      <main>
         <slot></slot>
-      </div>
+      </main>
 
-      <div id="footer">
+      <footer>
         <slot name="footer"></slot>
-      </div>
+      </footer>
     `;
   }
 }
