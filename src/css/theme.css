@@ -5,6 +5,7 @@
 body {
   font-family: var(--mlv-font-sans);
   --background-color: var(--mlv-color-neutral-50);
+  --divider-color: var(--mlv-color-neutral-200);
   --text-color: var(--mlv-color-neutral-900);
   --shadow: var(--mlv-shadow-md);
   -webkit-font-smoothing: antialiased;
@@ -14,6 +15,7 @@ body {
 
 body.dark {
   --background-color: var(--mlv-color-neutral-900);
+  --divider-color: var(--mlv-color-neutral-700);
   --text-color: var(--mlv-color-neutral-50);
   --shadow: none;
   --mlv-system-color-interactive-neutral: var(--mlv-color-neutral-700);

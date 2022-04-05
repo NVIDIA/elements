@@ -13,16 +13,6 @@
           "members": [
             {
               "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'button'",
-              "description": "Label text for the button",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
               "name": "disabled",
               "type": {
                 "text": "boolean"
@@ -52,21 +42,12 @@
             },
             {
               "kind": "field",
-              "name": "iconButtonTooltip",
-              "type": {
-                "text": "string"
-              },
-              "description": "Tooltip text for the Icon Button, strongly recommended for icon only buttons",
-              "attribute": "iconButtonTooltip"
-            },
-            {
-              "kind": "field",
-              "name": "iconPlacement",
+              "name": "iconplacement",
               "type": {
                 "text": "IconPlacements"
               },
               "description": "Left or right placement of the icon, defaults to 'trailing'",
-              "attribute": "iconPlacement"
+              "attribute": "iconplacement"
             },
             {
               "kind": "field",
@@ -79,15 +60,6 @@
             }
           ],
           "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'button'",
-              "description": "Label text for the button",
-              "fieldName": "label"
-            },
             {
               "name": "disabled",
               "type": {
@@ -114,20 +86,12 @@
               "fieldName": "icon"
             },
             {
-              "name": "iconButtonTooltip",
-              "type": {
-                "text": "string"
-              },
-              "description": "Tooltip text for the Icon Button, strongly recommended for icon only buttons",
-              "fieldName": "iconButtonTooltip"
-            },
-            {
-              "name": "iconPlacement",
+              "name": "iconplacement",
               "type": {
                 "text": "IconPlacements"
               },
               "description": "Left or right placement of the icon, defaults to 'trailing'",
-              "fieldName": "iconPlacement"
+              "fieldName": "iconplacement"
             }
           ],
           "superclass": {
@@ -191,12 +155,12 @@
             },
             {
               "kind": "field",
-              "name": "subTitle",
+              "name": "subtitle",
               "type": {
                 "text": "string"
               },
               "description": "If present render a subTitle in the header",
-              "attribute": "subTitle"
+              "attribute": "subtitle"
             }
           ],
           "attributes": [
@@ -209,12 +173,12 @@
               "fieldName": "title"
             },
             {
-              "name": "subTitle",
+              "name": "subtitle",
               "type": {
                 "text": "string"
               },
               "description": "If present render a subTitle in the header",
-              "fieldName": "subTitle"
+              "fieldName": "subtitle"
             }
           ],
           "superclass": {
@@ -246,12 +210,12 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/svg-icon/svg-icon.ts",
+      "path": "src/components/icon/icon.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SvgIcon",
+          "name": "Icon",
           "members": [
             {
               "kind": "field",
@@ -270,6 +234,15 @@
               },
               "description": "The name of the icon SVG sprite",
               "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "description": "Manually specify the color of the icon",
+              "attribute": "color"
             }
           ],
           "attributes": [
@@ -288,31 +261,39 @@
               },
               "description": "The name of the icon SVG sprite",
               "fieldName": "name"
+            },
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "description": "Manually specify the color of the icon",
+              "fieldName": "color"
             }
           ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
           },
-          "tagName": "mlv-svg-icon",
+          "tagName": "mlv-icon",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SvgIcon",
+          "name": "Icon",
           "declaration": {
-            "name": "SvgIcon",
-            "module": "src/components/svg-icon/svg-icon.ts"
+            "name": "Icon",
+            "module": "src/components/icon/icon.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "mlv-svg-icon",
+          "name": "mlv-icon",
           "declaration": {
-            "name": "SvgIcon",
-            "module": "src/components/svg-icon/svg-icon.ts"
+            "name": "Icon",
+            "module": "src/components/icon/icon.ts"
           }
         }
       ]

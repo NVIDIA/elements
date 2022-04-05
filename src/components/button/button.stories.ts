@@ -4,7 +4,7 @@ import { userEvent, within } from '@storybook/testing-library';
 
 import { awaitTimeout, ComponentStatuses, generateDefaultStoryParameters, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
 import { ICON_NAMES } from '../../generated-icons/icon-names';
-import { IconNames } from '../svg-icon/svg-icon';
+import { IconNames } from '../icon/icon';
 import { Button, ButtonVariants, IconPlacements }  from './button';
 const _components = { Button };
 
@@ -26,10 +26,10 @@ export default {
       options: ICON_NAMES
     },
     variant: {
-      control: 'inline-radio',
+      control: 'text',
       options: getValuesFromEnum(ButtonVariants)
     },
-    iconPlacement: {
+    iconplacement: {
       control: 'inline-radio',
       options: getValuesFromEnum(IconPlacements)
     }
@@ -37,29 +37,30 @@ export default {
 };
 
 interface ArgTypes {
-  label?: string;
-  iconButtonTooltip?: string;
+  label?: string
   variant?: ButtonVariants;
   content?: string;
   disabled?: boolean;
   icon?: IconNames;
-  iconPlacement?: IconPlacements;
+  iconplacement?: IconPlacements;
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<mlv-button data-testid="button" label=${args.label} iconButtonTooltip=${args.iconButtonTooltip} variant=${args.variant} ?disabled=${args.disabled} icon=${args.icon} iconplacement=${args.iconPlacement}>${args.content}</mlv-button>`,
+  render: (args: ArgTypes) => html`
+  <mlv-button data-testid="button" variant=${args.variant} ?disabled=${args.disabled} icon=${args.icon} iconplacement=${args.iconplacement}>
+    ${args.content}
+  </mlv-button>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { label: 'Primary', disabled: false, content: '', variant: 'primary' }
+  args: { content: 'Primary', disabled: false,  variant: 'primary' }
 };
 
-export const Secondary = { ...Default, args: { label: 'Secondary', variant: 'secondary' } };
-export const Tertiary = { ...Default, args: { label: 'Tertiary Button', variant: 'tertiary' } };
-export const Destructive = { ...Default, args: { label: 'Destructive', variant: 'destructive' } };
-export const Disabled = { ...Default, args: { label: 'Disabled Button', disabled: true } };
-export const SlottedText = { ...Default, args: { content: 'Slotted Text' } };
-export const ButtonWithIcon = { ...Default, args: { label: 'Copy', icon: 'copy', iconPlacement: 'trailing' } };
+export const Secondary = { ...Default, args: { content: 'Secondary', variant: 'secondary' } };
+export const Tertiary = { ...Default, args: { content: 'Tertiary Button', variant: 'tertiary' } };
+export const Destructive = { ...Default, args: { content: 'Destructive', variant: 'destructive' } };
+export const Disabled = { ...Default, args: { content: 'Disabled Button', disabled: true } };
+export const ButtonWithIcon = { ...Default, args: { content: 'Copy', icon: 'copy', iconplacement: 'trailing' } };
 
-export const IconButton = { ...Default, args: {icon: 'copy', iconTooltip: 'Icon Button Tooltip' } };
+export const IconButton = { ...Default, args: {icon: 'copy', iconplacement: IconPlacements.IconOnly } };
 
 // export const simulateHoverStates = { ...Default,
 //   play: async ({ args, canvasElement }) => {
@@ -85,13 +86,3 @@ export const IconButton = { ...Default, args: {icon: 'copy', iconTooltip: 'Icon 
 //     await userEvent.unhover(button);
 //   }
 // };   /*** No longer works with CSS hover psuedo class rather than explicit event listeners and CSS .hover class -- Left for play method reference ***/
-
-
-export const ButtonWithIconSlotted = {
-  render: (args: ArgTypes) => html`
-  <mlv-button label=${args.label} ?disabled=${args.disabled}>
-    <mlv-svg-icon variant="current" name="copy"></mlv-svg-icon>
-  </mlv-button>`,
-  parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { label: 'Slotted Icon', disabled: false, content: '' }
-};

@@ -3,6 +3,7 @@ import { when } from 'lit/directives/when.js';
 import { withDesign } from 'storybook-addon-designs'
 
 import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '../../util/storybook-utils';
+import { IconPlacements } from '../button/button';
 import { Card }  from './card';
 const _components = { Card };
 
@@ -32,10 +33,10 @@ interface ArgTypes {
   width?: number;
   height?: number;
   content?: string;
-  imageSrc?: string;
   showFooter?: boolean;
+  showHeaderActions?: boolean;
   title?: string;
-  subTitle?: string;
+  subtitle?: string;
 }
 
 export const Default = {
@@ -55,9 +56,11 @@ export const Default = {
       }
     </style>
 
-    <mlv-card title=${args.title} subTitle=${args.subTitle}>
-      ${when(args.imageSrc, () => html`
-        <img slot="image" src="${args.imageSrc}">
+    <mlv-card title=${args.title} subtitle=${args.subtitle}>
+      ${when(args.showHeaderActions, () => html`
+        <div slot="header-actions">
+          <mlv-button variant="tertiary" icon="additional-actions" iconplacement=${IconPlacements.IconOnly}></mlv-button>
+        </div>
       `)}
 
       ${args.content}
@@ -66,37 +69,32 @@ export const Default = {
         <footer slot="footer">
           Proceed with Action
 
-          <mlv-button label="Proceed" icon="navigate-to"></mlv-button>
+          <mlv-button icon="navigate-to">Proceed</mlv-button>
         </footer>
       `)}
     </mlv-card>
   `,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { width: 300, height: 150 }
+  args: { width: 300, height: 150, content: 'Card Content' }
 };
 
 
 export const CardWithTitle = {
   ...Default,
-  args: { title: 'Card Title', width: 400, height: 200 }
+  args: { title: 'Card Title', content: 'Card Content', width: 400, height: 200 }
 };
 
 export const CardWithTitleAndSubTitle = {
   ...Default,
-  args: { title: 'Card Title', subTitle: 'Supporting Text', width: 400, height: 200 }
+  args: { title: 'Card Title', content: 'Card Content', subtitle: 'Supporting Text', width: 400, height: 300 }
 };
 
-export const CardWithImage = {
+export const CardWithSlottedHeaderActions = {
   ...Default,
-  args: { imageSrc: './src/assets/card-hero-image.jpg', width: 400, height: 200 }
+  args: { showHeaderActions: true, content: 'Card Content', title: 'Card Title', subtitle: 'Supporting Text', width: 400, height: 300 }
 };
 
-export const CardWithImageAndFooter = {
+export const CardWithHeaderAndFooter = {
   ...Default,
-  args: { showFooter: true, imageSrc: './src/assets/card-hero-image.jpg', width: 400 }
-};
-
-export const CardWithHeaderImageAndFooter = {
-  ...Default,
-  args: { title: 'Card Title', subTitle: 'Supporting Text',  showFooter: true, imageSrc: './src/assets/card-hero-image.jpg', width: 400 }
+  args: { content: 'Card Content', title: 'Card Title', subtitle: 'Supporting Text', showFooter: true, width: 400, height: 300 }
 };

@@ -4,9 +4,9 @@ import { withDesign } from 'storybook-addon-designs'
 import { within } from '@storybook/testing-library';
 
 import { awaitTimeout, ComponentStatuses, generateDefaultStoryParameters, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
-import { IconNames, IconVariants, SvgIcon } from './svg-icon';
+import { IconNames, IconVariants, Icon } from './icon';
 import { ICON_NAMES } from '../../generated-icons/icon-names';
-const _components = { SvgIcon };
+const _components = { Icon };
 
 const figmaEmbedNodeId = '164%3A61';
 const reviewDocBookmark = 'id.zckm5su0hyrd';
@@ -17,13 +17,14 @@ const description =  `
 
 export default {
   title: 'MagLev Elements/Atoms/Icon',
-  component: 'mlv-svg-icon',
+  component: 'mlv-icon',
   decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: { // ******* TODO: Track this github issue https://github.com/storybookjs/storybook/issues/17063 (bug in 6.4 that resets radio/select args to !undefined)
     variant: {
       control: 'inline-radio',
-      options: getValuesFromEnum(IconVariants)
+      options: getValuesFromEnum(IconVariants),
+      default: IconVariants.Default
     },
     name: {
       control: 'inline-radio',
@@ -35,33 +36,33 @@ export default {
 interface ArgTypes {
   variant?: IconVariants;
   name?: IconNames;
+  color?: string;
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<mlv-svg-icon data-testid="icon" name="${args.name}" variant="${args.variant}" style="font-size: 4em"></mlv-svg-icon>`,
+  render: (args: ArgTypes) => html`<mlv-icon data-testid="icon" name="${args.name}" variant="${args.variant}" color="${args.color}" style="font-size: 4em"></mlv-icon>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { name: 'analytics', variant: 'default' }
+  args: { name: 'analytics', variant: IconVariants.Default }
 };
 
-export const LightIcon = { ...Default, args: { name: 'analytics', variant: 'lighter' } };
+export const LightIcon = { ...Default, args: { name: 'analytics', variant: IconVariants.Lighter } };
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
 
     ${ICON_NAMES.map(iconName => html`
       <span title="${iconName}">
-        <mlv-svg-icon data-testid="icon" name="${iconName}" variant="${args.variant}" style="font-size: 4em"></mlv-svg-icon>
-        <!-- ${iconName} -->
+        <mlv-icon data-testid="icon" name="${iconName}" variant="${args.variant}" style="font-size: 4em"></mlv-icon>
       </span>
     `)}
   `,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { name: 'analytics', variant: 'default' }
+  args: { name: 'analytics', variant: IconVariants.Default }
 };
 
 export const CycleIcons = {
   ...Default,
-  args: { name: 'analytics', variant: 'lighter' },
+  args: { name: 'analytics', variant: IconVariants.Lighter },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
     const icon = canvas.getByTestId('icon');

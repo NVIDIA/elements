@@ -6,7 +6,7 @@
 
 
   /* Variants */
-  &([variant="current"]) {
+  &([variant="inherit"]) {
     color: currentColor;
   }
 
