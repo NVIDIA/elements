@@ -5,6 +5,7 @@
 body {
   font-family: var(--nve-font-sans);
   --background-color: var(--nve-color-neutral-50);
+  --divider-color: var(--nve-color-neutral-200);
   --text-color: var(--nve-color-neutral-900);
   --shadow: var(--nve-shadow-md);
   -webkit-font-smoothing: antialiased;
@@ -14,6 +15,7 @@ body {
 
 body.dark {
   --background-color: var(--nve-color-neutral-900);
+  --divider-color: var(--nve-color-neutral-700);
   --text-color: var(--nve-color-neutral-50);
   --shadow: none;
   --nve-system-color-interactive-neutral: var(--nve-color-neutral-700);
