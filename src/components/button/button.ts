@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { property, state, customElement } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 import { IconNames, IconVariants } from '../icon/icon';
-import styleSheet from './button.css';
+import styleSheet from './button.css?inline';
 
 export enum ButtonVariants { Primary = 'primary', Secondary = 'secondary', Destructive = 'destructive', Tertiary = 'tertiary' }
 export enum IconPlacements { Trailing = 'trailing', Leading = 'leading', IconOnly = 'icononly' }
@@ -18,11 +18,11 @@ export class Button extends LitElement {
   /** If 'disabled' attribute present on element, set disabled state on button */
   @property({ type: Boolean }) disabled = false;
   /** Color Variant of the Button */
-  @property({ type: String, reflect: true }) variant: ButtonVariants = ButtonVariants.Primary;
+  @property({ type: String, reflect: true }) variant: ButtonVariants | string = 'primary';
   /** If present use icon for name of icon to show. For Icon Button leave off label */
   @property({ type: String }) icon: IconNames;
   /** Left or right placement of the icon, defaults to 'trailing' */
-  @property({ type: String }) iconplacement: IconPlacements = IconPlacements.Trailing;
+  @property({ type: String }) iconplacement: IconPlacements | string = 'trailing';
 
   @state() private _hover = false; // No longer used but left for testing/demoing private field exclusion from Storybook API Docs
 
