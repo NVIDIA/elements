@@ -25,8 +25,9 @@
               "kind": "field",
               "name": "variant",
               "type": {
-                "text": "ButtonVariants"
+                "text": "ButtonVariants | string"
               },
+              "default": "'primary'",
               "description": "Color Variant of the Button",
               "attribute": "variant",
               "reflects": true
@@ -44,8 +45,9 @@
               "kind": "field",
               "name": "iconplacement",
               "type": {
-                "text": "IconPlacements"
+                "text": "IconPlacements | string"
               },
+              "default": "'trailing'",
               "description": "Left or right placement of the icon, defaults to 'trailing'",
               "attribute": "iconplacement"
             },
@@ -72,8 +74,9 @@
             {
               "name": "variant",
               "type": {
-                "text": "ButtonVariants"
+                "text": "ButtonVariants | string"
               },
+              "default": "'primary'",
               "description": "Color Variant of the Button",
               "fieldName": "variant"
             },
@@ -88,8 +91,9 @@
             {
               "name": "iconplacement",
               "type": {
-                "text": "IconPlacements"
+                "text": "IconPlacements | string"
               },
+              "default": "'trailing'",
               "description": "Left or right placement of the icon, defaults to 'trailing'",
               "fieldName": "iconplacement"
             }
@@ -221,8 +225,9 @@
               "kind": "field",
               "name": "variant",
               "type": {
-                "text": "IconVariants"
+                "text": "IconVariants | string"
               },
+              "default": "'default'",
               "description": "The color variant of the icon",
               "attribute": "variant"
             },
@@ -249,8 +254,9 @@
             {
               "name": "variant",
               "type": {
-                "text": "IconVariants"
+                "text": "IconVariants | string"
               },
+              "default": "'default'",
               "description": "The color variant of the icon",
               "fieldName": "variant"
             },
