@@ -2,9 +2,9 @@
   "name": "@elements/elements",
   "version": "0.1.0",
   "type": "module",
-  "main": "dist/mlv-elements.es.js",
+  "main": "dist/elements.es.js",
   "exports": {
-    ".": "./dist/mlv-elements.es.js"
+    ".": "./dist/elements.es.js"
   },
   "types": "./dist/types/src/index.d.ts",
   "files": [
@@ -14,45 +14,52 @@
     "dev": "vite -- --port 7778",
     "build": "tsc && vite build",
     "prepublishonly": "npm run build",
-    "storybook": "start-storybook -p 7777",
+    "storybook": "start-storybook -p 7789",
     "build-storybook": "build-storybook",
     "watch-manifest": "npm run analyze -- --watch",
     "analyze": "cem analyze --litelement --globs src/components/**/*.ts --exclude **.stories.ts",
-    "create-icon-spritesheet": "node scripts/create-icon-spritesheet.js"
+    "create-icon-spritesheet": "node create-icon-spritesheet.js",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "lit": "^2.1"
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "^0.4.17",
-    "@emotion/react": "^11.8.1",
-    "@emotion/styled": "^10.3.0",
-    "@etchteam/storybook-addon-status": "^4.2.0",
-    "@prettier/plugin-xml": "^1.2.0",
+    "@custom-elements-manifest/analyzer": "0.4.17",
+    "@emotion/react": "11.8.1",
+    "@emotion/styled": "10.3.0",
+    "@etchteam/storybook-addon-status": "4.2.0",
+    "@prettier/plugin-xml": "1.2.0",
     "@storybook/addon-essentials": "6.4.20",
     "@storybook/addon-interactions": "6.4.20",
     "@storybook/addons": "6.4.20",
     "@storybook/client-api": "6.4.20",
     "@storybook/testing-library": "0.0.7",
     "@storybook/web-components": "6.4.20",
-    "@xmldom/xmldom": "^0.8.0",
-    "api-viewer-element": "^1.0.0-pre.3",
-    "bindings": "^1.5.0",
-    "postcss": "^8.3.11",
-    "nan": "^2.12.1",
-    "postcss-mixins": "^9.0.1",
-    "postcss-nested": "^5.0.6",
-    "prettier": "^2.5.1",
-    "rollup-plugin-css-hmr": "^0.2.1",
-    "storybook-addon-designs": "^6.2.1",
-    "storybook-builder-vite": "^0.1.17",
-    "storybook-dark-mode": "^1.0.8",
-    "svgo": "^2.8.0",
-    "typescript": "^4.4.4",
-    "vite": "^2.6.0"
+    "@xmldom/xmldom": "0.8.0",
+    "api-viewer-element": "1.0.0-pre.3",
+    "bindings": "1.5.0",
+    "postcss": "8.3.11",
+    "nan": "2.12.1",
+    "postcss-mixins": "9.0.1",
+    "postcss-nested": "5.0.6",
+    "prettier": "2.5.1",
+    "rollup-plugin-css-hmr": "0.2.1",
+    "storybook-addon-designs": "6.2.1",
+    "storybook-builder-vite": "0.1.17",
+    "storybook-dark-mode": "1.0.8",
+    "svgo": "2.8.0",
+    "typescript": "4.4.4",
+    "vite": "2.6.0",
+    "@milahu/patch-package-with-pnpm-support": "6.4.8"
   },
   "publishConfig": {
     "registry": "https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/"
   },
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  }
 }

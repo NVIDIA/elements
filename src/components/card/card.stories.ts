@@ -9,7 +9,7 @@ const _components = { Card };
 
 const figmaEmbedNodeId = '505%3A2280';
 const reviewDocBookmark = 'id.s62qmiib7wfu';
-const status: ComponentStatuses = 'dev';
+const status: ComponentStatuses = 'alpha';
 const description =  `
   ## The MagLev Card Component
 `;

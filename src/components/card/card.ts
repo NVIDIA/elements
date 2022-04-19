@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
-import styleSheet from './card.css';
+import styleSheet from './card.css?inline';
 
 
 const componentStyling = new CSSStyleSheet();
