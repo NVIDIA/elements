@@ -1,4 +1,4 @@
-:root {
+:host, :root {
   --nve-system-color-interactive-primary: #68B026;
   --nve-system-color-interactive-primary-hover: #549C12;
   --nve-system-color-interactive-destructive: #FE5252;

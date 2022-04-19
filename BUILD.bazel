@@ -4,12 +4,13 @@ load("//src/ui/platform/build/storybook:index.bzl", "storybook")
 vite_library(
     name = "elements",
     package_name = "@elements/elements",
-    srcs = vite_default_srcs(),
+    srcs = vite_default_srcs() + glob(["css/**/*"]),
     deps = [
         "@npm_platform_libs_elements//lit",
         "@npm_platform_libs_elements//postcss-mixins",
         "@npm_platform_libs_elements//postcss-nested",
     ],
+    allow_js = True,
     data = vite_default_data() + [
         "postcss.config.cjs",
     ],
