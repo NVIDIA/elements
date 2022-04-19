@@ -13,13 +13,18 @@ window.jest = jest;
 export const parameters = {
   status: {
     statuses: {
-      dev: {
+      alpha: {
         background: 'yellow',
         color: '#000000',
         description: 'This component is undergoing active development',
       },
-      released: {
-        background: 'pink',
+      beta: {
+        background: 'blue',
+        color: '#000000',
+        description: 'This component is undergoing active development',
+      },
+      stable: {
+        background: 'green',
         color: '#000000',
         description: 'This component is stable and released',
       },

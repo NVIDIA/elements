@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ICON_NAMES } from '../../generated-icons/icon-names';
-import styleSheet from './icon.css';
+import { ICON_NAMES } from './icon-names';
+import styleSheet from './icon.css?inline';
 
 const componentStyling = new CSSStyleSheet();
 componentStyling.replace(styleSheet);
@@ -15,7 +15,7 @@ export class Icon extends LitElement {
   static styles = componentStyling;
 
   /** The color variant of the icon */
-  @property({ type: String }) variant: IconVariants = IconVariants.Default
+  @property({ type: String }) variant: IconVariants | string = 'default';
   /** The name of the icon SVG sprite */
   @property({ type: String }) name: IconNames;
   /**  Manually specify the color of the icon */
@@ -24,7 +24,7 @@ export class Icon extends LitElement {
   render() {
     return html`
       <svg width="1em" height="1em" color="${this.color}">
-        <use href="./src/generated-icons/icons.svg#${this.name}"></use>
+        <use href="/assets/icons.svg#${this.name}"></use>
       </svg>
     `;
   }
