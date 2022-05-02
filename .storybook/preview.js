@@ -15,17 +15,17 @@ export const parameters = {
     statuses: {
       alpha: {
         background: 'yellow',
-        color: '#000000',
+        color: 'black',
         description: 'This component is undergoing active development',
       },
       beta: {
         background: 'blue',
-        color: '#000000',
+        color: 'white',
         description: 'This component is undergoing active development',
       },
       stable: {
         background: 'green',
-        color: '#000000',
+        color: 'white',
         description: 'This component is stable and released',
       },
     },
