@@ -10,9 +10,11 @@ button {
   color: var(--nve-color-neutral-50);
   font-size: var(--nve-font-size-75);
   font-weight: var(--nve-font-weight-semi-bold);
+  font-family: var(--nve-font-sans);
   gap: var(--nve-spacing-1);
   padding: var(--nve-spacing-1) var(--nve-spacing-3);
   line-height: var(--nve-font-size-200);
+  -webkit-font-smoothing: antialiased;
 
   &:hover {
     background-color: var(--nve-system-color-interactive-primary-hover);

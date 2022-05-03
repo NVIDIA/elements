@@ -41,7 +41,7 @@
   --nve-color-neutral-950: #0f0f11;
   --nve-color-neutral-1000: #000000;
 
-  --nve-font-sans: 'Inter var', 'Open Sans', Roboto, 'Helvetica Neue', sans-serif;
+  --nve-font-sans: 'Inter var', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
   --nve-font-mono: 'Lucida Console', Monaco, monospace, sans-serif;
 
   --nve-font-size-25: 11px;
