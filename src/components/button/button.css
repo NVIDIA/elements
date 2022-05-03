@@ -10,9 +10,11 @@ button {
   color: var(--mlv-color-neutral-50);
   font-size: var(--mlv-font-size-75);
   font-weight: var(--mlv-font-weight-semi-bold);
+  font-family: var(--mlv-font-sans);
   gap: var(--mlv-spacing-1);
   padding: var(--mlv-spacing-1) var(--mlv-spacing-3);
   line-height: var(--mlv-font-size-200);
+  -webkit-font-smoothing: antialiased;
 
   &:hover {
     background-color: var(--mlv-system-color-interactive-primary-hover);

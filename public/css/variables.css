@@ -41,7 +41,7 @@
   --mlv-color-neutral-950: #0f0f11;
   --mlv-color-neutral-1000: #000000;
 
-  --mlv-font-sans: 'Inter var', 'Open Sans', Roboto, 'Helvetica Neue', sans-serif;
+  --mlv-font-sans: 'Inter var', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
   --mlv-font-mono: 'Lucida Console', Monaco, monospace, sans-serif;
 
   --mlv-font-size-25: 11px;
