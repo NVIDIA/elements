@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 import styleSheet from './card.css?inline';
 
@@ -14,7 +14,8 @@ componentStyling.replace(styleSheet);
  * @slot footer - HTML elements slotted here for card footer
 */
 
-@customElement('mlv-card')
+
+const ELEMENT = 'mlv-card';
 export class Card extends LitElement {
   static styles = componentStyling;
 
@@ -47,6 +48,9 @@ export class Card extends LitElement {
     `;
   }
 }
+
+
+customElements.get(ELEMENT) || customElements.define(ELEMENT, Card);
 
 declare global {
   interface HTMLElementTagNameMap {
