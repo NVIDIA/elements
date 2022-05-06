@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { ICON_NAMES } from './icon-names';
 import styleSheet from './icon.css?inline';
 
@@ -10,7 +10,7 @@ export enum IconVariants { Inherit = 'inherit', Default = 'default', Lighter = '
 export type IconNames = typeof ICON_NAMES[number];
 
 
-@customElement('nve-icon')
+const ELEMENT = 'nve-icon';
 export class Icon extends LitElement {
   static styles = componentStyling;
 
@@ -30,8 +30,11 @@ export class Icon extends LitElement {
   }
 }
 
+
+customElements.get(ELEMENT) || customElements.define(ELEMENT, Icon);
+
 declare global {
   interface HTMLElementTagNameMap {
-    'nve-icon': Icon,
+    'nve-icon': Icon
   }
 }

@@ -4,7 +4,10 @@
   "type": "module",
   "main": "dist/elements.es.js",
   "exports": {
-    ".": "./dist/elements.es.js"
+    ".": "./dist/elements.es.js",
+    "./theme.css": "./dist/css/theme.css",
+    "./variables.css": "./dist/css/variables.css",
+    "./fonts.css": "./dist/css/fonts.css"
   },
   "types": "./dist/types/src/index.d.ts",
   "files": [

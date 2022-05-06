@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { property, state, customElement } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 import { IconNames, IconVariants } from '../icon/icon';
 import styleSheet from './button.css?inline';
@@ -11,7 +11,7 @@ const componentStyling = new CSSStyleSheet();
 componentStyling.replace(styleSheet);
 
 
-@customElement('nve-button')
+const ELEMENT = 'nve-button';
 export class Button extends LitElement {
   static styles = componentStyling;
 
@@ -35,6 +35,8 @@ export class Button extends LitElement {
     `;
   }
 }
+
+customElements.get(ELEMENT) || customElements.define(ELEMENT, Button);
 
 declare global {
   interface HTMLElementTagNameMap {
