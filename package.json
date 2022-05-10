@@ -64,5 +64,8 @@
     "parserOptions": {
       "sourceType": "module"
     }
+  },
+  "bzlgen": {
+    "md5": "c5b9aef292471f9923b3c50203257a2f"
   }
 }
