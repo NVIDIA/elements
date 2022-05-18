@@ -21,9 +21,8 @@ module.exports = {
     interactionsDebugger: true
   },
   staticDirs: [
-    { from: '../src/assets', to: 'src/assets' },
-    { from: '../src/css', to: 'src/css' },
-    { from: '../src/generated-icons', to: 'src/generated-icons' }
+    { from: '../public/assets', to: 'public/assets' },
+    { from: '../public/css', to: 'public/css' }
   ],
   async viteFinal(config) {
     config.plugins = [...config.plugins, CssHmr('.ts')]; // triggers hot reload when modifying .css files
