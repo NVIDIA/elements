@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
+    "@babel/runtime": "^7.18.0",
     "@custom-elements-manifest/analyzer": "0.4.17",
     "@emotion/core": "10.3.0",
     "@emotion/react": "11.8.1",
@@ -79,6 +80,6 @@
     }
   },
   "bzlgen": {
-    "md5": "d2156c45e696d26c9c29ff5e3c3eca5b"
+    "md5": "d35551ba313b7072d8bce15ce1c1b5b4"
   }
 }
