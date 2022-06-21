@@ -1,10 +1,9 @@
-import { html, LitElement } from 'lit';
+import { html, unsafeCSS, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ICON_NAMES } from './icon-names';
 import styleSheet from './icon.css?inline';
 
-const componentStyling = new CSSStyleSheet();
-componentStyling.replace(styleSheet);
+const componentStyling = unsafeCSS(styleSheet);
 
 export enum IconVariants { Inherit = 'inherit', Default = 'default', Lighter = 'lighter' }
 export type IconNames = typeof ICON_NAMES[number];

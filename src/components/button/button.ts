@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, unsafeCSS, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 import { IconNames, IconVariants } from '../icon/icon';
@@ -7,9 +7,7 @@ import styleSheet from './button.css?inline';
 export enum ButtonVariants { Primary = 'primary', Secondary = 'secondary', Destructive = 'destructive', Tertiary = 'tertiary' }
 export enum IconPlacements { Trailing = 'trailing', Leading = 'leading', IconOnly = 'icononly' }
 
-const componentStyling = new CSSStyleSheet();
-componentStyling.replace(styleSheet);
-
+const componentStyling = unsafeCSS(styleSheet);
 
 const ELEMENT = 'nve-button';
 export class Button extends LitElement {
