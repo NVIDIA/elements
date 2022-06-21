@@ -1,12 +1,9 @@
-import { html, LitElement } from 'lit';
+import { html, unsafeCSS, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 import styleSheet from './card.css?inline';
 
-
-const componentStyling = new CSSStyleSheet();
-componentStyling.replace(styleSheet);
-
+const componentStyling = unsafeCSS(styleSheet);
 
 /**
  * @slot default/unnamed - This is a default/unnamed slot for card content
