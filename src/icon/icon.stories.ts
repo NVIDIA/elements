@@ -1,17 +1,22 @@
 /* eslint-disable guard-for-in */
 import { html } from 'lit';
-import { withDesign } from 'storybook-addon-designs'
+import { withDesign } from 'storybook-addon-designs';
 import { within } from '@storybook/testing-library';
 
-import { awaitTimeout, ComponentStatuses, generateDefaultStoryParameters, generateFigmaEmbed, getValuesFromEnum } from '../../util/storybook-utils';
-import { IconNames, IconVariants, Icon } from './icon';
-import { ICON_NAMES } from './icon-names';
-const _components = { Icon };
+import {
+  awaitTimeout,
+  ComponentStatuses,
+  generateDefaultStoryParameters,
+  generateFigmaEmbed,
+  getValuesFromEnum
+} from '@elements/elements/internal';
+import { IconNames, IconVariants, ICON_NAMES } from '@elements/elements/icon';
+import '@elements/elements/icon/define.js';
 
 const figmaEmbedNodeId = '164%3A61';
 const reviewDocBookmark = 'id.zckm5su0hyrd';
 const status: ComponentStatuses = 'beta';
-const description =  `
+const description = `
   ## The MagLev Icon Component
 `;
 
@@ -29,8 +34,8 @@ export default {
     name: {
       control: 'inline-radio',
       options: ICON_NAMES
-    },
-  },
+    }
+  }
 };
 
 interface ArgTypes {
@@ -40,7 +45,14 @@ interface ArgTypes {
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<mlv-icon data-testid="icon" name="${args.name}" variant="${args.variant}" color="${args.color}" style="font-size: 4em"></mlv-icon>`,
+  render: (args: ArgTypes) =>
+    html`<mlv-icon
+      data-testid="icon"
+      name="${args.name}"
+      variant="${args.variant}"
+      color="${args.color}"
+      style="font-size: 4em"
+    ></mlv-icon>`,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'analytics', variant: IconVariants.Default }
 };
@@ -49,12 +61,13 @@ export const LightIcon = { ...Default, args: { name: 'analytics', variant: IconV
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-
-    ${ICON_NAMES.map(iconName => html`
-      <span title="${iconName}">
-        <mlv-icon data-testid="icon" name="${iconName}" variant="${args.variant}" style="font-size: 4em"></mlv-icon>
-      </span>
-    `)}
+    ${ICON_NAMES.map(
+      (iconName) => html`
+        <span title="${iconName}">
+          <mlv-icon data-testid="icon" name="${iconName}" variant="${args.variant}" style="font-size: 4em"></mlv-icon>
+        </span>
+      `
+    )}
   `,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'analytics', variant: IconVariants.Default }

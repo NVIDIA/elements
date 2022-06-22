@@ -1,39 +1,39 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property } from 'lit/decorators/property.js';
 import { when } from 'lit/directives/when.js';
 import styleSheet from './card.css?inline';
 
 const componentStyling = unsafeCSS(styleSheet);
 
 /**
- * @slot default/unnamed - This is a default/unnamed slot for card content
+ * @element mlv-card
+ * @slot - This is a default/unnamed slot for card content
  * @slot image - HTML elements slotted here for image header
  * @slot footer - HTML elements slotted here for card footer
-*/
-
-
-const ELEMENT = 'mlv-card';
+ */
 export class Card extends LitElement {
   static styles = componentStyling;
 
-
   /**  If present render a title in the header */
-  @property({ type: String}) title: string;
+  @property({ type: String }) title: string;
   /**  If present render a subTitle in the header */
-  @property({ type: String}) subtitle: string;
+  @property({ type: String }) subtitle: string;
 
   render() {
     return html`
-      ${when(this.title, () => html`
-        <header>
-          <div id="header-titles">
-            <h1>${this.title}</h1>
-            <h2>${this.subtitle}</h2>
-          </div>
+      ${when(
+        this.title,
+        () => html`
+          <header>
+            <div id="header-titles">
+              <h1>${this.title}</h1>
+              <h2>${this.subtitle}</h2>
+            </div>
 
-          <slot name="header-actions"></slot>
-        </header>
-      `)}
+            <slot name="header-actions"></slot>
+          </header>
+        `
+      )}
 
       <main>
         <slot></slot>
@@ -43,14 +43,5 @@ export class Card extends LitElement {
         <slot name="footer"></slot>
       </footer>
     `;
-  }
-}
-
-
-customElements.get(ELEMENT) || customElements.define(ELEMENT, Card);
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'mlv-card': Card;
   }
 }

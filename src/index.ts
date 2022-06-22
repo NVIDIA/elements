@@ -1,3 +1,4 @@
-export * from './components/icon/icon';
-export * from './components/button/button';
-export * from './components/card/card';
+import '@elements/elements/button/define.js';
+import '@elements/elements/card/define.js';
+import '@elements/elements/icon/define.js';
+import '@elements/elements/internal';

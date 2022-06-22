@@ -5,11 +5,16 @@ import styleSheet from './icon.css?inline';
 
 const componentStyling = unsafeCSS(styleSheet);
 
-export enum IconVariants { Inherit = 'inherit', Default = 'default', Lighter = 'lighter' }
+export enum IconVariants {
+  Inherit = 'inherit',
+  Default = 'default',
+  Lighter = 'lighter'
+}
 export type IconNames = typeof ICON_NAMES[number];
 
-
-const ELEMENT = 'mlv-icon';
+/**
+ * @element mlv-icon
+ */
 export class Icon extends LitElement {
   static styles = componentStyling;
 
@@ -26,14 +31,5 @@ export class Icon extends LitElement {
         <use href="/assets/icons.svg#${this.name}"></use>
       </svg>
     `;
-  }
-}
-
-
-customElements.get(ELEMENT) || customElements.define(ELEMENT, Icon);
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'mlv-icon': Icon
   }
 }

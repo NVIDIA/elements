@@ -10,6 +10,12 @@
           "kind": "class",
           "description": "",
           "name": "Button",
+          "slots": [
+            {
+              "description": "default slot",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -114,13 +120,20 @@
             "name": "Button",
             "module": "src/components/button/button.ts"
           }
-        },
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/button/index.ts",
+      "declarations": [],
+      "exports": [
         {
-          "kind": "custom-element-definition",
-          "name": "mlv-button",
+          "kind": "js",
+          "name": "*",
           "declaration": {
-            "name": "Button",
-            "module": "src/components/button/button.ts"
+            "name": "*",
+            "package": "./button.js"
           }
         }
       ]
@@ -136,7 +149,7 @@
           "slots": [
             {
               "description": "This is a default/unnamed slot for card content",
-              "name": "default/unnamed"
+              "name": ""
             },
             {
               "description": "HTML elements slotted here for image header",
@@ -201,13 +214,20 @@
             "name": "Card",
             "module": "src/components/card/card.ts"
           }
-        },
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card/index.ts",
+      "declarations": [],
+      "exports": [
         {
-          "kind": "custom-element-definition",
-          "name": "mlv-card",
+          "kind": "js",
+          "name": "*",
           "declaration": {
-            "name": "Card",
-            "module": "src/components/card/card.ts"
+            "name": "*",
+            "package": "./card.js"
           }
         }
       ]
@@ -293,13 +313,28 @@
             "name": "Icon",
             "module": "src/components/icon/icon.ts"
           }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/icon/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./icon.js"
+          }
         },
         {
-          "kind": "custom-element-definition",
-          "name": "mlv-icon",
+          "kind": "js",
+          "name": "*",
           "declaration": {
-            "name": "Icon",
-            "module": "src/components/icon/icon.ts"
+            "name": "*",
+            "package": "./icon-names.js"
           }
         }
       ]

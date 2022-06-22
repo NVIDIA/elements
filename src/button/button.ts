@@ -1,15 +1,28 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property } from 'lit/decorators/property.js';
+import { state } from 'lit/decorators/state.js';
 import { when } from 'lit/directives/when.js';
-import { IconNames, IconVariants } from '../icon/icon';
+import { IconNames, IconVariants } from '@elements/elements/icon';
 import styleSheet from './button.css?inline';
 
-export enum ButtonVariants { Primary = 'primary', Secondary = 'secondary', Destructive = 'destructive', Tertiary = 'tertiary' }
-export enum IconPlacements { Trailing = 'trailing', Leading = 'leading', IconOnly = 'icononly' }
+export enum ButtonVariants {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Destructive = 'destructive',
+  Tertiary = 'tertiary'
+}
+export enum IconPlacements {
+  Trailing = 'trailing',
+  Leading = 'leading',
+  IconOnly = 'icononly'
+}
 
 const componentStyling = unsafeCSS(styleSheet);
 
-const ELEMENT = 'mlv-button';
+/**
+ * @element mlv-button
+ * @slot - default slot
+ */
 export class Button extends LitElement {
   static styles = componentStyling;
 
@@ -31,13 +44,5 @@ export class Button extends LitElement {
         ${when(this.icon, () => html`<mlv-icon variant=${IconVariants.Inherit} name="${this.icon}"></mlv-icon>`)}
       </button>
     `;
-  }
-}
-
-customElements.get(ELEMENT) || customElements.define(ELEMENT, Button);
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'mlv-button': Button,
   }
 }

@@ -1,16 +1,15 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
-import { withDesign } from 'storybook-addon-designs'
+import { withDesign } from 'storybook-addon-designs';
 
-import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '../../util/storybook-utils';
-import { IconPlacements } from '../button/button';
-import { Card }  from './card';
-const _components = { Card };
+import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '@elements/elements/internal';
+import { IconPlacements } from '@elements/elements/button';
+import '@elements/elements/card/define.js';
 
 const figmaEmbedNodeId = '505%3A2280';
 const reviewDocBookmark = 'id.s62qmiib7wfu';
 const status: ComponentStatuses = 'alpha';
-const description =  `
+const description = `
   ## The MagLev Card Component
 `;
 
@@ -21,10 +20,10 @@ export default {
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: {
     width: {
-      control: { type: 'range', min: 200, max: 500}
+      control: { type: 'range', min: 200, max: 500 }
     },
     height: {
-      control: { type: 'range', min: 50, max: 500}
+      control: { type: 'range', min: 50, max: 500 }
     }
   }
 };
@@ -57,27 +56,34 @@ export const Default = {
     </style>
 
     <mlv-card title=${args.title} subtitle=${args.subtitle}>
-      ${when(args.showHeaderActions, () => html`
-        <div slot="header-actions">
-          <mlv-button variant="tertiary" icon="additional-actions" iconplacement=${IconPlacements.IconOnly}></mlv-button>
-        </div>
-      `)}
-
+      ${when(
+        args.showHeaderActions,
+        () => html`
+          <div slot="header-actions">
+            <mlv-button
+              variant="tertiary"
+              icon="additional-actions"
+              iconplacement=${IconPlacements.IconOnly}
+            ></mlv-button>
+          </div>
+        `
+      )}
       ${args.content}
+      ${when(
+        args.showFooter,
+        () => html`
+          <footer slot="footer">
+            Proceed with Action
 
-      ${when(args.showFooter, () => html`
-        <footer slot="footer">
-          Proceed with Action
-
-          <mlv-button icon="navigate-to">Proceed</mlv-button>
-        </footer>
-      `)}
+            <mlv-button icon="navigate-to">Proceed</mlv-button>
+          </footer>
+        `
+      )}
     </mlv-card>
   `,
   parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { width: 300, height: 150, content: 'Card Content' }
 };
-
 
 export const CardWithTitle = {
   ...Default,
@@ -91,10 +97,24 @@ export const CardWithTitleAndSubTitle = {
 
 export const CardWithSlottedHeaderActions = {
   ...Default,
-  args: { showHeaderActions: true, content: 'Card Content', title: 'Card Title', subtitle: 'Supporting Text', width: 400, height: 300 }
+  args: {
+    showHeaderActions: true,
+    content: 'Card Content',
+    title: 'Card Title',
+    subtitle: 'Supporting Text',
+    width: 400,
+    height: 300
+  }
 };
 
 export const CardWithHeaderAndFooter = {
   ...Default,
-  args: { content: 'Card Content', title: 'Card Title', subtitle: 'Supporting Text', showFooter: true, width: 400, height: 300 }
+  args: {
+    content: 'Card Content',
+    title: 'Card Title',
+    subtitle: 'Supporting Text',
+    showFooter: true,
+    width: 400,
+    height: 300
+  }
 };
