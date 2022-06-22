@@ -1,63 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="Description" content="Put your description here." />
+    <base href="/" />
+    <style>
+      @import '@elements/elements/css/fonts.css';
+      @import '@elements/elements/css/variables.css';
+      @import '@elements/elements/css/theme.css';
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="Description" content="Put your description here.">
-  <base href="/">
+      html,
+      body {
+        margin: 40px;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        font-family: sans-serif;
+        background-color: #ededed;
+      }
 
-  <link href="/css/fonts.css" rel="stylesheet"/>
-  <link href="/css/variables.css" rel="stylesheet"/>
-  <link href="/css/theme.css" rel="stylesheet"/>
+      api-viewer {
+        width: 800px;
+      }
 
-  <style>
-    html,
-    body {
-      margin: 40px;
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      font-family: sans-serif;
-      background-color: #ededed;
-    }
+      ::part(demo-output) {
+        max-height: 600px;
+        overflow: auto;
+      }
+    </style>
+    <title>MagLev Elements</title>
+    <script type="module">
+      import 'api-viewer-element';
+      import '@elements/elements';
+      import manifest from '@elements/elements/custom-elements.json';
 
-    api-viewer {
-      width: 800px;
-    }
+      function switchDarkMode(darkMode) {
+        darkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark');
+      }
 
-    ::part(demo-output) {
-      max-height: 600px;
-      overflow: auto;
-    }
-  </style>
-  <title>MagLev Elements</title>
+      window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => switchDarkMode(e.matches));
+      switchDarkMode(window.matchMedia('(prefers-color-scheme: dark)'));
 
-  <script type="module">
-    import 'api-viewer-element';
-  </script>
-  <script type="module" src="/src/index.ts"></script>
+      // workaround for https://github.com/open-wc/api-viewer-element/issues/122
+      manifest.modules.forEach((module) =>
+        module.declarations
+          .filter((d) => d.tagName)
+          .forEach((declaration) =>
+            module.exports.push({ kind: 'custom-element-definition', name: declaration.tagName, declaration })
+          )
+      );
+      document.querySelector('api-viewer').manifest = manifest;
+    </script>
+  </head>
 
-  <script>
-    function switchDarkMode(darkMode) {
-      console.log(darkMode);
-      darkMode && document.body.classList.add('dark');
-      !darkMode && document.body.classList.remove('dark');
-    }
+  <body>
+    <h1>Maglev UI Components</h1>
 
-    window.matchMedia('(prefers-color-scheme: dark)').addListener(
-      e => switchDarkMode(e.matches)
-    );
-  </script>
-</head>
+    <api-viewer section="demo"></api-viewer>
 
-<body>
-  <h1>Maglev UI Components</h1>
-
-  <api-viewer src="./custom-elements.json" section="demo"></api-viewer>
-
-  <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2Fu92dX33lnPVzC9o4SfgK3R%2FMagLev-Product-System-2.0%3Fnode-id%3D35%253A733" allowfullscreen></iframe>
-
-</body>
-
+    <iframe
+      style="border: 1px solid rgba(0, 0, 0, 0.1)"
+      width="800"
+      height="450"
+      src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2Fu92dX33lnPVzC9o4SfgK3R%2FMagLev-Product-System-2.0%3Fnode-id%3D35%253A733"
+      allowfullscreen
+    ></iframe>
+  </body>
 </html>
