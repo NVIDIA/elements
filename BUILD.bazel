@@ -4,11 +4,15 @@ load("//src/ui/platform/build/storybook:index.bzl", "storybook")
 vite_library(
     name = "elements",
     package_name = "@elements/elements",
+    tsconfig = None,
     srcs = vite_default_srcs() + glob(["css/**/*"]),
     deps = [
         "@npm_platform_libs_elements//lit",
         "@npm_platform_libs_elements//postcss-mixins",
         "@npm_platform_libs_elements//postcss-nested",
+        "@npm_platform_libs_elements//rollup-plugin-minify-html-literals",
+        "@npm_platform_libs_elements//rollup-plugin-shell",
+        "@npm_platform_libs_elements//rollup-plugin-terser",
     ],
     allow_js = True,
     data = vite_default_data() + [
@@ -37,6 +41,9 @@ storybook(
         "@npm_platform_libs_elements//postcss-mixins",
         "@npm_platform_libs_elements//postcss-nested",
         "@npm_platform_libs_elements//rollup-plugin-css-hmr",
+        "@npm_platform_libs_elements//rollup-plugin-minify-html-literals",
+        "@npm_platform_libs_elements//rollup-plugin-shell",
+        "@npm_platform_libs_elements//rollup-plugin-terser",
         "@npm_platform_libs_elements//storybook-addon-designs",
         "@npm_platform_libs_elements//storybook-builder-vite",
         "@npm_platform_libs_elements//storybook-dark-mode",

@@ -1,6 +1,8 @@
 const path = require('path');
 const CssHmr = require('rollup-plugin-css-hmr');
 
+const isBazel = !!process.env['BAZEL_WORKSPACE'];
+
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   // stories: [
@@ -20,11 +22,17 @@ module.exports = {
   features: {
     interactionsDebugger: true
   },
-  staticDirs: [
-    { from: '../public/assets', to: 'public/assets' },
-    { from: '../public/css', to: 'public/css' }
-  ],
   async viteFinal(config) {
+    config.resolve.alias = { '@elements/elements': path.resolve(__dirname, '../dist') };
+
+    if (isBazel) {
+      config.resolve.alias = {
+        '@elements/elements/css': path.resolve(__dirname, '../public/css'),
+        '@elements/elements/custom-elements.json': path.resolve(__dirname, '../custom-elements.json'),
+        '@elements/elements': path.resolve(__dirname, '../src'),
+      };
+    }
+
     config.plugins = [...config.plugins, CssHmr('.ts')]; // triggers hot reload when modifying .css files
 
     // Workaround: https://github.com/storybookjs/storybook/issues/10887#issuecomment-901109891
@@ -36,7 +44,7 @@ module.exports = {
         protocol: 'ws'
       };
     } else {
-      config.base = '/ui/storybook/elements/'
+      config.base = '/ui/storybook/elements/';
     }
 
     config.optimizeDeps = {

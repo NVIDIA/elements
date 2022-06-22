@@ -7,12 +7,17 @@
     "typeRoots": ["node_modules/@types"],
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "dist/types",
-    "rootDir": ".",
+    "outDir": "dist/",
+    "baseUrl": "./",
+    "rootDir": "./src",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "isolatedModules": true,
+    "paths": {
+      "@elements/elements/*": ["./src/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/icon-names.js"]
 }
