@@ -11,7 +11,12 @@ export const generateFigmaEmbed = (figmaNodeId: string) => {
 
 export type ComponentStatuses = 'alpha' | 'beta' | 'stable' | 'deprecated';
 
-export const generateDefaultStoryParameters = (status: ComponentStatuses, reviewDocBookmark: string, description: string, actions?: string[]) => {
+export const generateDefaultStoryParameters = (
+  status: ComponentStatuses,
+  reviewDocBookmark: string,
+  description: string,
+  actions?: string[]
+) => {
   return {
     status: {
       type: status,
@@ -24,8 +29,8 @@ export const generateDefaultStoryParameters = (status: ComponentStatuses, review
     },
     actions: {
       handles: actions
-    },
-  }
+    }
+  };
 };
 
 export const excludePrivateFields = (manifest: any) => {
