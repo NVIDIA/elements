@@ -32,10 +32,18 @@
   },
   "typesVersions": {
     "*": {
-      "*/define": ["dist/*/define.d.ts"],
-      "*/define.js": ["dist/*/define.d.ts"],
-      "*/index.js": ["dist/*/index.d.ts"],
-      "*": ["dist/*/index.d.ts"]
+      "*/define": [
+        "dist/*/define.d.ts"
+      ],
+      "*/define.js": [
+        "dist/*/define.d.ts"
+      ],
+      "*/index.js": [
+        "dist/*/index.d.ts"
+      ],
+      "*": [
+        "dist/*/index.d.ts"
+      ]
     }
   },
   "scripts": {
@@ -65,16 +73,20 @@
     "@emotion/react": "11.8.1",
     "@emotion/styled": "10.3.0",
     "@etchteam/storybook-addon-status": "4.2.0",
-    "@milahu/patch-package-with-pnpm-support": "6.4.8",
+    "@milahu/patch-package": "6.4.14",
     "@prettier/plugin-xml": "1.2.0",
+    "@storybook/addon-backgrounds": "6.4.20",
+    "@storybook/addon-docs": "6.4.20",
     "@storybook/addon-essentials": "6.4.20",
     "@storybook/addon-interactions": "6.4.20",
     "@storybook/addons": "6.4.20",
     "@storybook/api": "6.4.20",
+    "@storybook/builder-vite": "0.1.37",
     "@storybook/client-api": "6.4.20",
     "@storybook/components": "6.4.20",
     "@storybook/core-common": "6.4.20",
     "@storybook/core-events": "6.4.20",
+    "@storybook/node-logger": "6.4.20",
     "@storybook/store": "6.4.20",
     "@storybook/testing-library": "0.0.7",
     "@storybook/theming": "6.4.20",
@@ -97,7 +109,6 @@
     "rollup-plugin-shell": "^1.0.3",
     "rollup-plugin-terser": "7.0.2",
     "storybook-addon-designs": "6.2.1",
-    "storybook-builder-vite": "0.1.17",
     "storybook-dark-mode": "1.0.8",
     "svgo": "2.8.0",
     "typescript": "4.4.4",
@@ -114,6 +125,6 @@
     }
   },
   "bzlgen": {
-    "md5": "ed865814b5b7795c7a1d964e1864661c"
+    "md5": "90f086fa5e1408ea4ffe6833a1a9f1fc"
   }
 }

@@ -17,7 +17,7 @@ module.exports = {
   ],
   framework: '@storybook/web-components',
   core: {
-    builder: 'storybook-builder-vite'
+    builder: '@storybook/builder-vite'
   },
   features: {
     interactionsDebugger: true
