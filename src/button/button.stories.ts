@@ -34,7 +34,7 @@ export default {
       options: ICON_NAMES
     },
     variant: {
-      control: 'text',
+      control: 'inline-radio',
       options: getValuesFromEnum(ButtonVariants)
     },
     iconplacement: {
@@ -63,7 +63,7 @@ export const Default = {
   >
     ${args.content}
   </nve-button>`,
-  parameters: generateFigmaEmbed(figmaEmbedNodeId),
+  // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { content: 'Primary', disabled: false, variant: 'primary' }
 };
 
