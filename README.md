@@ -15,14 +15,19 @@ pnpm i --save @elements/elements
 ## Usage
 
 ```ts
-// import and use individual element
-import '@elements/elements/button/use.js';
+// import and use individual elements (recommended)
+import '@elements/elements/button/define.js';
+import '@elements/elements/card/define.js';
+import '@elements/elements/icon/define.js';
 
-// import specific element references
+// import specific element type references
 import { Button } from '@elements/elements';
 
-// import and use all elements
+// import all elements (not recommended)
 import '@elements/elements';
+
+// optional (polyfills for non-chromium browsers)
+import '@elements/elements/polyfills';
 ```
 
 ```html
