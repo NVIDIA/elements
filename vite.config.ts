@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import execute from 'rollup-plugin-shell';
 import { terser } from 'rollup-plugin-terser';
-import { dependencies } from './package.json';
+import { dependencies, optionalDependencies } from './package.json';
 import process from 'process';
 import path from 'path';
 
@@ -35,7 +35,7 @@ export default defineConfig((env) => {
       rollupOptions: {
         treeshake: false,
         preserveEntrySignatures: 'strict',
-        external: [...Object.keys(dependencies || {})].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
+        external: [...Object.keys(dependencies || {}), ...Object.keys(optionalDependencies || {})].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
         output: [
           {
             format: 'es',
