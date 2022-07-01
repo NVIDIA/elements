@@ -50,7 +50,8 @@
     }
   },
   "scripts": {
-    "dev": "pnpm run build && pnpm run build:watch & vite --port 7778",
+    "dev": "pnpm run build && pnpm run build:watch & start-storybook -p 7789",
+    "storybook": "start-storybook -p 7789",
     "ci": "pnpm run build && pnpm run test",
     "clean": "cd dist && git clean -dfX",
     "build": "vite build",
@@ -58,11 +59,10 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
-    "storybook": "start-storybook -p 7789",
     "build-storybook": "build-storybook",
     "create-icon-spritesheet": "node create-icon-spritesheet.js",
     "prepublishonly": "pnpm run build",
-    "postinstall": "patch-package"
+    "generate-manifest": "cem analyze --litelement --globs src/**/*.ts --exclude **.stories.ts src/internal/**/*.ts"
   },
   "dependencies": {
     "lit": "^2.1",
@@ -81,22 +81,24 @@
     "@etchteam/storybook-addon-status": "4.2.0",
     "@milahu/patch-package": "6.4.14",
     "@prettier/plugin-xml": "1.2.0",
-    "@storybook/addon-backgrounds": "6.4.20",
-    "@storybook/addon-docs": "6.4.20",
-    "@storybook/addon-essentials": "6.4.20",
-    "@storybook/addon-interactions": "6.4.20",
-    "@storybook/addons": "6.4.20",
-    "@storybook/api": "6.4.20",
+    "@storybook/addon-backgrounds": "6.5.9",
+    "@storybook/addon-docs": "6.5.9",
+    "@storybook/addon-essentials": "6.5.9",
+    "@storybook/addon-interactions": "6.5.9",
+    "@storybook/addon-measure": "6.5.9",
+    "@storybook/addon-outline": "6.5.9",
+    "@storybook/addons": "6.5.9",
+    "@storybook/api": "6.5.9",
     "@storybook/builder-vite": "0.1.37",
-    "@storybook/client-api": "6.4.20",
-    "@storybook/components": "6.4.20",
-    "@storybook/core-common": "6.4.20",
-    "@storybook/core-events": "6.4.20",
-    "@storybook/node-logger": "6.4.20",
-    "@storybook/store": "6.4.20",
+    "@storybook/client-api": "6.5.9",
+    "@storybook/components": "6.5.9",
+    "@storybook/core-common": "6.5.9",
+    "@storybook/core-events": "6.5.9",
+    "@storybook/node-logger": "6.5.9",
+    "@storybook/store": "6.5.9",
     "@storybook/testing-library": "0.0.7",
-    "@storybook/theming": "6.4.20",
-    "@storybook/web-components": "6.4.20",
+    "@storybook/theming": "6.5.9",
+    "@storybook/web-components": "6.5.9",
     "@xmldom/xmldom": "0.8.0",
     "api-viewer-element": "1.0.0-pre.3",
     "babel-loader": "^8.0.0",
@@ -131,6 +133,6 @@
     }
   },
   "bzlgen": {
-    "md5": "74af1fbe1a99fce4c8bc5da89b694ce7"
+    "md5": "7ec4f7dd610ee3009b767b9d950fd86b"
   }
 }

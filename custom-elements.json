@@ -4,7 +4,7 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "src/components/button/button.ts",
+      "path": "src/button/button.ts",
       "declarations": [
         {
           "kind": "class",
@@ -118,14 +118,29 @@
           "name": "Button",
           "declaration": {
             "name": "Button",
-            "module": "src/components/button/button.ts"
+            "module": "src/button/button.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/button/index.ts",
+      "path": "src/button/define.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "mlv-button",
+          "declaration": {
+            "name": "Button",
+            "package": "@elements/elements/button"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/button/index.ts",
       "declarations": [],
       "exports": [
         {
@@ -140,7 +155,7 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/card/card.ts",
+      "path": "src/card/card.ts",
       "declarations": [
         {
           "kind": "class",
@@ -212,14 +227,29 @@
           "name": "Card",
           "declaration": {
             "name": "Card",
-            "module": "src/components/card/card.ts"
+            "module": "src/card/card.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/card/index.ts",
+      "path": "src/card/define.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "mlv-card",
+          "declaration": {
+            "name": "Card",
+            "package": "@elements/elements/card"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/card/index.ts",
       "declarations": [],
       "exports": [
         {
@@ -234,7 +264,22 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/icon/icon.ts",
+      "path": "src/icon/define.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "mlv-icon",
+          "declaration": {
+            "name": "Icon",
+            "package": "@elements/elements/icon"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/icon/icon.ts",
       "declarations": [
         {
           "kind": "class",
@@ -311,14 +356,14 @@
           "name": "Icon",
           "declaration": {
             "name": "Icon",
-            "module": "src/components/icon/icon.ts"
+            "module": "src/icon/icon.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/icon/index.ts",
+      "path": "src/icon/index.ts",
       "declarations": [],
       "exports": [
         {
@@ -338,6 +383,12 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/internal/index.ts",
+      "declarations": [],
+      "exports": []
     }
   ]
 }

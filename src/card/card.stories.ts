@@ -81,7 +81,7 @@ export const Default = {
       )}
     </mlv-card>
   `,
-  parameters: generateFigmaEmbed(figmaEmbedNodeId),
+  // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { width: 300, height: 150, content: 'Card Content' }
 };
 
