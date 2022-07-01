@@ -23,7 +23,7 @@ const description = `
 export default {
   title: 'MagLev Elements/Atoms/Icon',
   component: 'nve-icon',
-  decorators: [withDesign],
+  // decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: {
     variant: {
@@ -53,7 +53,7 @@ export const Default = {
       color="${args.color}"
       style="font-size: 4em"
     ></nve-icon>`,
-  parameters: generateFigmaEmbed(figmaEmbedNodeId),
+  // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'analytics', variant: IconVariants.Default }
 };
 
@@ -69,7 +69,7 @@ export const PreviewAllIcons = {
       `
     )}
   `,
-  parameters: generateFigmaEmbed(figmaEmbedNodeId),
+  // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'analytics', variant: IconVariants.Default }
 };
 
