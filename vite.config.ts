@@ -45,7 +45,7 @@ export default defineConfig((env) => {
           }
         ],
         plugins: [
-          mode === 'production' ? execute({ commands: [`./node_modules/@custom-elements-manifest/analyzer/index.js analyze --litelement --globs src/components/**/*.ts --exclude **.stories.ts --outdir ${outDir}`], hook: 'generateBundle', sync: true }) : false,
+          execute({ commands: [`./node_modules/@custom-elements-manifest/analyzer/index.js analyze --litelement ${mode === 'watch' ? '--watch' : ''} --globs src/**/*.ts --exclude **.stories.ts --outdir ${outDir}`], hook: 'generateBundle', sync: true }),
           mode === 'production' ? execute({ commands: [`./node_modules/typescript/bin/tsc --project tsconfig.lib.json --outdir ${outDir}`], hook: 'generateBundle', sync: true }) : false,
           mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
           mode === 'production' ? terser({ ecma: 2020, module: true }) : false

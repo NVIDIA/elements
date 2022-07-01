@@ -15,9 +15,12 @@ vite_library(
         "@npm_platform_libs_elements//rollup-plugin-terser",
     ],
     allow_js = True,
-    data = vite_default_data() + [
+    data = [
+        "package.json",
+        "package-lock.json",
+        "vite.config.ts",
         "postcss.config.cjs",
-    ],
+    ] + glob(["public/**/*"]),
     npm_repository = "@npm_platform_libs_elements",
 )
 
@@ -50,9 +53,12 @@ storybook(
         "@npm_platform_libs_elements//storybook-dark-mode",
         "@npm_platform_libs_elements//webpack",
     ],
-    data = vite_default_data() + [
-        "custom-elements.json",
+    data = [
+        "package.json",
+        "package-lock.json",
+        "vite.config.ts",
         "postcss.config.cjs",
-    ],
+        "custom-elements.json"
+    ] + glob(["public/**/*"]),
     npm_repository = "@npm_platform_libs_elements",
 )
