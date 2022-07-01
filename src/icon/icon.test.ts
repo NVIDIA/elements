@@ -1,13 +1,21 @@
-import { describe, expect, it, beforeEach } from 'vitest';
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, elementIsStable } from '@elements/elements/test';
 import { Icon } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 
 describe('mlv-icon', () => {
+  let fixture: HTMLElement;
   let element: Icon;
+
   beforeEach(async () => {
-    element = document.createElement('mlv-icon');
-    document.body.appendChild(element);
-    await element.updateComplete;
+    fixture = await createFixture(html`<mlv-icon></mlv-icon>`);
+    element = fixture.querySelector('mlv-icon');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    fixture.remove();
   });
 
   it('should create element', () => {
@@ -21,14 +29,14 @@ describe('mlv-icon', () => {
   it('should update svg reference when "name" is updated', async () => {
     expect(element.name).eq(undefined);
     element.name = 'test';
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.shadowRoot.innerHTML).includes('/assets/icons.svg#test');
   });
 
   it('should update svg color when "color" is updated', async () => {
     expect(element.color).eq(undefined);
     element.color = 'red';
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.shadowRoot.querySelector('svg').getAttribute('color')).eq('red');
   });
 });
