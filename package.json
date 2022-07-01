@@ -10,6 +10,7 @@
   ],
   "sideEffects": [
     "./dist/index.js",
+    "./dist/polyfills/index.js",
     "./**/define.js"
   ],
   "exports": {
@@ -20,6 +21,8 @@
     ".": "./dist/index.js",
     "./internal": "./dist/internal/index.js",
     "./internal/index.js": "./dist/internal/index.js",
+    "./polyfills": "./dist/polyfills/index.js",
+    "./polyfills/index.js": "./dist/polyfills/index.js",
     "./button": "./dist/button/index.js",
     "./button/index.js": "./dist/button/index.js",
     "./button/define.js": "./dist/button/define.js",
@@ -64,6 +67,9 @@
   "dependencies": {
     "lit": "^2.1",
     "lit-html": "^2.1"
+  },
+  "optionalDependencies": {
+    "element-internals-polyfill": "^1.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -125,6 +131,6 @@
     }
   },
   "bzlgen": {
-    "md5": "90f086fa5e1408ea4ffe6833a1a9f1fc"
+    "md5": "74af1fbe1a99fce4c8bc5da89b694ce7"
   }
 }
