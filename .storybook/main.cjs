@@ -23,6 +23,7 @@ module.exports = {
     interactionsDebugger: true
   },
   async viteFinal(config) {
+    config.logLevel = 'error';
     config.resolve.alias = { '@elements/elements': path.resolve(__dirname, '../dist') };
 
     if (isBazel) {
