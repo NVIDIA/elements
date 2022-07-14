@@ -28,10 +28,10 @@ export default defineConfig((env) => {
     build: {
       watch: mode === 'watch' ? {} : undefined,
       outDir,
-      emptyOutDir: false,
+      emptyOutDir: mode === 'production',
       target: 'esnext',
       sourcemap: true,
-      lib: { entry: resolve('./src/index.ts'), formats: ['es'] },
+      lib: { entry: resolve('./src/entrypoints.ts'), formats: ['es'] },
       rollupOptions: {
         treeshake: false,
         preserveEntrySignatures: 'strict',
@@ -45,8 +45,8 @@ export default defineConfig((env) => {
           }
         ],
         plugins: [
-          execute({ commands: [`./node_modules/@custom-elements-manifest/analyzer/index.js analyze --litelement ${mode === 'watch' ? '--watch' : ''} --globs src/**/*.ts --exclude **.stories.ts --outdir ${outDir}`], hook: 'generateBundle', sync: true }),
-          mode === 'production' ? execute({ commands: [`./node_modules/typescript/bin/tsc --project tsconfig.lib.json --outdir ${outDir}`], hook: 'generateBundle', sync: true }) : false,
+          execute({ commands: [`./node_modules/typescript/bin/tsc --project tsconfig.lib.json --outdir ${outDir}`], hook: 'generateBundle', }),
+          execute({ commands: [`./node_modules/@custom-elements-manifest/analyzer/index.js analyze ${mode === 'watch' ? '--quiet' : ''} --litelement --globs src/**/*.ts --exclude **.stories.ts --outdir ${outDir}`], hook: 'generateBundle' }),
           mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
           mode === 'production' ? terser({ ecma: 2020, module: true }) : false
         ]
@@ -55,7 +55,10 @@ export default defineConfig((env) => {
     test: {
       globals: true,
       environment: 'happy-dom',
-      watchExclude: ['**/node_modules/**']
+      watchExclude: ['**/node_modules/**'],
+      coverage: {
+        exclude: ['**/storybook/**', '**/test/**', '**/*.test.ts', '**/*.css.js', '**/index.js']
+      }
     }
   };
 });
