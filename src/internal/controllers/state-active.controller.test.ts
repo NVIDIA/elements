@@ -1,0 +1,49 @@
+import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators/custom-element.js';
+import { property } from 'lit/decorators/property.js';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { stateActive } from '@elements/elements/internal';
+import { createFixture } from '@elements/elements/test';
+
+@stateActive<StateActiveControllerTestElement>()
+@customElement('state-active-controller-test-element')
+class StateActiveControllerTestElement extends LitElement {
+  @property({ type: Boolean }) disabled = false;
+}
+
+/**
+ * In real browsers the State CSS selector is `:--active` rather than the polyfilled `[state--active]` selector for vitest/js-dom env
+ * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
+ * https://github.com/calebdwilliams/element-internals-polyfill#state-api
+ */
+describe('state-active.controller', () => {
+  let element: StateActiveControllerTestElement;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`<state-active-controller-test-element></state-active-controller-test-element>`);
+    element = fixture.querySelector<StateActiveControllerTestElement>('state-active-controller-test-element');
+  });
+
+  afterEach(() => {
+    fixture.remove();
+  });
+
+  it('should add active state on mousedown', async () => {
+    expect(element.matches('[state--active]')).toBe(false);
+
+    element.dispatchEvent(new MouseEvent('mousedown'));
+    expect(element.matches('[state--active]')).toBe(true);
+
+    element.dispatchEvent(new MouseEvent('mouseup'));
+    expect(element.matches('[state--active]')).toBe(false);
+  });
+
+  it('should not add active state if element is disabled', async () => {
+    element.disabled = true;
+    expect(element.matches('[state--active]')).toBe(false);
+
+    element.dispatchEvent(new MouseEvent('mousedown'));
+    expect(element.matches('[state--active]')).toBe(false);
+  });
+});

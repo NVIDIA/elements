@@ -1,6 +1,7 @@
-import { html, unsafeCSS, LitElement } from 'lit';
+import { html, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
+import { MlvBaseButton } from '@elements/elements/internal';
 import styleSheet from './button.css?inline';
 
 export enum ButtonVariants {
@@ -20,11 +21,9 @@ const componentStyling = unsafeCSS(styleSheet);
  * @element mlv-button
  * @slot Default - Default slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.
  */
-export class Button extends LitElement {
+export class Button extends MlvBaseButton {
   static styles = componentStyling;
 
-  /** If 'disabled' attribute present on element, set disabled state on button */
-  @property({ type: Boolean }) disabled = false;
   /** Color Variant of the Button */
   @property({ type: String, reflect: true }) variant: ButtonVariants | string = 'primary';
 
@@ -32,9 +31,9 @@ export class Button extends LitElement {
 
   render() {
     return html`
-      <button ?disabled=${this.disabled} >
+      <div internal-host>
         <slot></slot>
-      </button>
+      </div>
     `;
   }
 }

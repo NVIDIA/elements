@@ -1,12 +1,14 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
+import { Button } from '@elements/elements/button';
 // import { withDesign } from 'storybook-addon-designs';
 
 import {
   ComponentStatuses,
   generateDefaultStoryParameters,
   generateFigmaEmbed,
-  getValuesFromEnum
+  getValuesFromEnum,
+  spread
 } from '@elements/elements/internal';
 import { IconNames, ICON_NAMES } from '@elements/elements/icon';
 import { ButtonVariants, IconSlotPlacements } from '@elements/elements/button';
@@ -37,24 +39,13 @@ export default {
   }
 };
 
-interface ArgTypes {
-  label?: string;
-  variant?: ButtonVariants;
-  textContent?: string;
-  disabled?: boolean;
+type ArgTypes = Button & {
   iconName?: IconNames;
   iconSlotPlacement: IconSlotPlacements;
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html` <mlv-button
-    data-testid="button"
-    variant=${args.variant}
-    ?disabled=${args.disabled}
-  >
-    ${args.textContent}
-  </mlv-button>`,
-  // parameters: generateFigmaEmbed(figmaEmbedNodeId),
+  render: (args: ArgTypes) => html`<mlv-button data-testid="button" ${spread(args)}>${args.textContent}</mlv-button>`,
   args: { textContent: 'Primary', disabled: false, variant: 'primary' }
 };
 
@@ -65,11 +56,7 @@ export const Disabled = { ...Default, args: { textContent: 'Disabled Button', di
 
 export const ButtonWithIcon = {
   render: (args: ArgTypes) => html`
-  <mlv-button
-    data-testid="button"
-    variant=${args.variant}
-    ?disabled=${args.disabled}
-  >
+  <mlv-button data-testid="button" ${spread(args)}>
     ${when(args.iconSlotPlacement === IconSlotPlacements.Leading,() => html`<mlv-icon name="${args.iconName}"></mlv-icon>`)}
 
       ${args.textContent}
