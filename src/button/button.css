@@ -1,4 +1,4 @@
-button {
+[internal-host] {
   /* Base CSS */
   display: inline-flex;
   align-items: center;
@@ -64,11 +64,11 @@ button {
     border-color: var(--nve-system-color-interactive-secondary);
   }
 
-  &:active {
+  :host(:--active) & {
     filter: contrast(1.25) brightness(1.1);
   }
 
-  &:disabled {
+  :host(:--disabled) & {
     background-color: var(--nve-system-color-interactive-disabled);
     color: var(--nve-system-color-interactive-on-disabled);
     opacity: 40%;
