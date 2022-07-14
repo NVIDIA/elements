@@ -38,3 +38,16 @@ function waitForAllElementsToBeDefined() {
 function retry(fn: () => Promise<any>, maxTries = 10) {
   return fn().catch(() => maxTries > 0 ? retry(fn, maxTries--) : Promise.reject('Max attempts reached'));
 }
+
+export function emulateClick(component: HTMLElement | Element) {
+  const event1 = new MouseEvent('mousedown');
+  const event2 = new MouseEvent('mouseup');
+  const event3 = new MouseEvent('click');
+  component.dispatchEvent(event1);
+  component.dispatchEvent(event2);
+  component.dispatchEvent(event3);
+}
+
+export function untilEvent(element: HTMLElement | Document, event: string) {
+  return new Promise<any>(resolve => element.addEventListener(event, e => resolve(e)));
+}

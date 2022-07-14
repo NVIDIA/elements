@@ -1,0 +1,59 @@
+import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators/custom-element.js';
+import { property } from 'lit/decorators/property.js';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { createFixture, elementIsStable } from '@elements/elements/test';
+import { stateDisabled } from '@elements/elements/internal';
+
+@stateDisabled<StateDisabledControllerTestElement>()
+@customElement('state-disabled-controller-test-element')
+class StateDisabledControllerTestElement extends LitElement {
+  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean }) readonly = false;
+  declare _internals: ElementInternals;
+}
+
+/**
+ * In real browsers the State CSS selector is `:--disabled` rather than the polyfilled `[state--disabled]` selector for vitest/js-dom env
+ * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
+ * https://github.com/calebdwilliams/element-internals-polyfill#state-api
+ */
+describe('state-disabled.controller', () => {
+  let element: StateDisabledControllerTestElement;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`<state-disabled-controller-test-element></state-disabled-controller-test-element>`);
+    element = fixture.querySelector<StateDisabledControllerTestElement>('state-disabled-controller-test-element');
+  });
+
+  afterEach(() => {
+    fixture.remove();
+  });
+
+  it('should initialize aria-disabled', async () => {
+    element.disabled = true;
+    await elementIsStable(element);
+    expect(element._internals.ariaDisabled).toBe('true');
+    expect(element.matches('[state--disabled]')).toBe(true);
+  });
+
+  it('should update aria-disabled when disabled API is updated', async () => {
+    element.disabled = true;
+    await elementIsStable(element);
+    expect(element._internals.ariaDisabled).toBe('true');
+    expect(element.matches('[state--disabled]')).toBe(true);
+
+    element.disabled = false;
+    await elementIsStable(element);
+    expect(element._internals.ariaDisabled).toBe('false');
+    expect(element.matches('[state--disabled]')).toBe(false);
+  });
+
+  it('should remove aria-disabled if readonly', async () => {
+    element.readonly = true;
+    await elementIsStable(element);
+    expect(element._internals.ariaDisabled).toBe(null);
+    expect(element.matches('[state--disabled]')).toBe(false);
+  });
+});
