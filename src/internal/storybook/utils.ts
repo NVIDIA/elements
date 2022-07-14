@@ -1,3 +1,5 @@
+import { ElementPart, Directive, directive, DirectiveParameters } from 'lit/directive.js';
+
 const FIGMA_FILE = 'https://www.figma.com/file/u92dX33lnPVzC9o4SfgK3R/MagLev-Product-System-2.0';
 
 export const generateFigmaEmbed = (figmaNodeId: string) => {
@@ -55,3 +57,22 @@ export const excludePrivateFields = (manifest: any) => {
 export const awaitTimeout = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 export const getValuesFromEnum = (enumToTransform): string[] => Object.values(enumToTransform);
+
+/**
+ * @experimental
+ * Only use for storybook demos. Not for production components.
+ * Waiting for stable release of https://github.com/lit/lit/pull/1960
+ */
+ export class Spread extends Directive {
+  render() {
+    return '';
+  }
+
+  update(part: ElementPart, params: DirectiveParameters<this>) {
+    Object.entries((params as any)[0])
+      .filter(([k, v]: [string, any]) => v !== part.element[k] && k !== 'textContent' && k !== 'innerHTML')
+      .forEach(([k, v]) => part.element[k] = v);
+  }
+}
+
+export const spread: any = directive(Spread);
