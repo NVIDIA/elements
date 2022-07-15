@@ -12,8 +12,8 @@
           "name": "Button",
           "slots": [
             {
-              "description": "default slot",
-              "name": ""
+              "description": "Default slot for button text content or icon, icon placement determined by whether <nve-icon> is inserted before or after text content.",
+              "name": "Default"
             }
           ],
           "members": [
@@ -40,26 +40,7 @@
             },
             {
               "kind": "field",
-              "name": "icon",
-              "type": {
-                "text": "IconNames"
-              },
-              "description": "If present use icon for name of icon to show. For Icon Button leave off label",
-              "attribute": "icon"
-            },
-            {
-              "kind": "field",
-              "name": "iconplacement",
-              "type": {
-                "text": "IconPlacements | string"
-              },
-              "default": "'trailing'",
-              "description": "Left or right placement of the icon, defaults to 'trailing'",
-              "attribute": "iconplacement"
-            },
-            {
-              "kind": "field",
-              "name": "_hover",
+              "name": "_hiddenProp",
               "type": {
                 "text": "boolean"
               },
@@ -85,23 +66,6 @@
               "default": "'primary'",
               "description": "Color Variant of the Button",
               "fieldName": "variant"
-            },
-            {
-              "name": "icon",
-              "type": {
-                "text": "IconNames"
-              },
-              "description": "If present use icon for name of icon to show. For Icon Button leave off label",
-              "fieldName": "icon"
-            },
-            {
-              "name": "iconplacement",
-              "type": {
-                "text": "IconPlacements | string"
-              },
-              "default": "'trailing'",
-              "description": "Left or right placement of the icon, defaults to 'trailing'",
-              "fieldName": "iconplacement"
             }
           ],
           "superclass": {
@@ -304,15 +268,6 @@
               },
               "description": "The name of the icon SVG sprite",
               "attribute": "name"
-            },
-            {
-              "kind": "field",
-              "name": "color",
-              "type": {
-                "text": "string"
-              },
-              "description": "Manually specify the color of the icon",
-              "attribute": "color"
             }
           ],
           "attributes": [
@@ -332,14 +287,6 @@
               },
               "description": "The name of the icon SVG sprite",
               "fieldName": "name"
-            },
-            {
-              "name": "color",
-              "type": {
-                "text": "string"
-              },
-              "description": "Manually specify the color of the icon",
-              "fieldName": "color"
             }
           ],
           "superclass": {
@@ -387,6 +334,18 @@
     {
       "kind": "javascript-module",
       "path": "src/internal/index.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/polyfills/index.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/test/index.ts",
       "declarations": [],
       "exports": []
     }

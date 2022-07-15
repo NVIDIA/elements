@@ -32,11 +32,4 @@ describe('nve-icon', () => {
     await elementIsStable(element);
     expect(element.shadowRoot.innerHTML).includes('/assets/icons.svg#test');
   });
-
-  it('should update svg color when "color" is updated', async () => {
-    expect(element.color).eq(undefined);
-    element.color = 'red';
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('svg').getAttribute('color')).eq('red');
-  });
 });
