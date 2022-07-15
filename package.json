@@ -79,7 +79,6 @@
     "@emotion/react": "11.8.1",
     "@emotion/styled": "10.3.0",
     "@etchteam/storybook-addon-status": "4.2.0",
-    "@milahu/patch-package": "6.4.14",
     "@prettier/plugin-xml": "1.2.0",
     "@storybook/addon-backgrounds": "6.5.9",
     "@storybook/addon-docs": "6.5.9",
@@ -99,8 +98,9 @@
     "@storybook/testing-library": "0.0.7",
     "@storybook/theming": "6.5.9",
     "@storybook/web-components": "6.5.9",
+    "@types/react": "16.9.52",
+    "@types/react-dom": "16.9.8",
     "@xmldom/xmldom": "0.8.0",
-    "api-viewer-element": "1.0.0-pre.3",
     "babel-loader": "^8.0.0",
     "bindings": "1.5.0",
     "happy-dom": "^5.2.0",
@@ -133,6 +133,6 @@
     }
   },
   "bzlgen": {
-    "md5": "7ec4f7dd610ee3009b767b9d950fd86b"
+    "md5": "dac77aee391b0535c457764640872215"
   }
 }
