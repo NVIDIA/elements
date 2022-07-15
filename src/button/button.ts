@@ -1,8 +1,6 @@
 import { html, unsafeCSS, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { when } from 'lit/directives/when.js';
-import { IconNames, IconVariants } from '@elements/elements/icon';
 import styleSheet from './button.css?inline';
 
 export enum ButtonVariants {
@@ -11,17 +9,16 @@ export enum ButtonVariants {
   Destructive = 'destructive',
   Tertiary = 'tertiary'
 }
-export enum IconPlacements {
+export enum IconSlotPlacements {
   Trailing = 'trailing',
-  Leading = 'leading',
-  IconOnly = 'icononly'
+  Leading = 'leading'
 }
 
 const componentStyling = unsafeCSS(styleSheet);
 
 /**
  * @element mlv-button
- * @slot - default slot
+ * @slot Default - Default slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.
  */
 export class Button extends LitElement {
   static styles = componentStyling;
@@ -30,18 +27,13 @@ export class Button extends LitElement {
   @property({ type: Boolean }) disabled = false;
   /** Color Variant of the Button */
   @property({ type: String, reflect: true }) variant: ButtonVariants | string = 'primary';
-  /** If present use icon for name of icon to show. For Icon Button leave off label */
-  @property({ type: String }) icon: IconNames;
-  /** Left or right placement of the icon, defaults to 'trailing' */
-  @property({ type: String }) iconplacement: IconPlacements | string = 'trailing';
 
-  @state() private _hover = false; // No longer used but left for testing/demoing private field exclusion from Storybook API Docs
+  @state() private _hiddenProp = false; // No longer used but left for testing private field exclusion from Storybook Docs
 
   render() {
     return html`
-      <button ?disabled=${this.disabled} ?icon-only=${this.iconplacement === IconPlacements.IconOnly && this.icon}>
-        ${when(this.iconplacement !== IconPlacements.IconOnly, () => html`<slot></slot>`)}
-        ${when(this.icon, () => html`<mlv-icon variant=${IconVariants.Inherit} name="${this.icon}"></mlv-icon>`)}
+      <button ?disabled=${this.disabled} >
+        <slot></slot>
       </button>
     `;
   }

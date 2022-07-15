@@ -1,5 +1,6 @@
 import { html } from 'lit';
-import { withDesign } from 'storybook-addon-designs';
+import { when } from 'lit/directives/when.js';
+// import { withDesign } from 'storybook-addon-designs';
 
 import {
   ComponentStatuses,
@@ -8,7 +9,7 @@ import {
   getValuesFromEnum
 } from '@elements/elements/internal';
 import { IconNames, ICON_NAMES } from '@elements/elements/icon';
-import { ButtonVariants, IconPlacements } from '@elements/elements/button';
+import { ButtonVariants, IconSlotPlacements } from '@elements/elements/button';
 import '@elements/elements/button/define.js';
 
 const figmaEmbedNodeId = '163%3A25';
@@ -21,7 +22,7 @@ const description = `
 export default {
   title: 'MagLev Elements/Atoms/Button',
   component: 'mlv-button',
-  decorators: [withDesign],
+  // decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description, [
     'mouseover mlv-button',
     'mouseout mlv-button',
@@ -29,17 +30,9 @@ export default {
     'click mlv-button'
   ]),
   argTypes: {
-    icon: {
-      control: 'select',
-      options: ICON_NAMES
-    },
     variant: {
       control: 'inline-radio',
       options: getValuesFromEnum(ButtonVariants)
-    },
-    iconplacement: {
-      control: 'inline-radio',
-      options: getValuesFromEnum(IconPlacements)
     }
   }
 };
@@ -47,10 +40,10 @@ export default {
 interface ArgTypes {
   label?: string;
   variant?: ButtonVariants;
-  content?: string;
+  textContent?: string;
   disabled?: boolean;
-  icon?: IconNames;
-  iconplacement?: IconPlacements;
+  iconName?: IconNames;
+  iconSlotPlacement: IconSlotPlacements;
 }
 
 export const Default = {
@@ -58,19 +51,40 @@ export const Default = {
     data-testid="button"
     variant=${args.variant}
     ?disabled=${args.disabled}
-    icon=${args.icon}
-    iconplacement=${args.iconplacement}
   >
-    ${args.content}
+    ${args.textContent}
   </mlv-button>`,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { content: 'Primary', disabled: false, variant: 'primary' }
+  args: { textContent: 'Primary', disabled: false, variant: 'primary' }
 };
 
-export const Secondary = { ...Default, args: { content: 'Secondary', variant: 'secondary' } };
-export const Tertiary = { ...Default, args: { content: 'Tertiary Button', variant: 'tertiary' } };
-export const Destructive = { ...Default, args: { content: 'Destructive', variant: 'destructive' } };
-export const Disabled = { ...Default, args: { content: 'Disabled Button', disabled: true } };
-export const ButtonWithIcon = { ...Default, args: { content: 'Copy', icon: 'copy', iconplacement: 'trailing' } };
+export const Secondary = { ...Default, args: { textContent: 'Secondary', variant: 'secondary' } };
+export const Tertiary = { ...Default, args: { textContent: 'Tertiary Button', variant: 'tertiary' } };
+export const Destructive = { ...Default, args: { textContent: 'Destructive', variant: 'destructive' } };
+export const Disabled = { ...Default, args: { textContent: 'Disabled Button', disabled: true } };
 
-export const IconButton = { ...Default, args: { icon: 'copy', iconplacement: IconPlacements.IconOnly } };
+export const ButtonWithIcon = {
+  render: (args: ArgTypes) => html`
+  <mlv-button
+    data-testid="button"
+    variant=${args.variant}
+    ?disabled=${args.disabled}
+  >
+    ${when(args.iconSlotPlacement === IconSlotPlacements.Leading,() => html`<mlv-icon name="${args.iconName}"></mlv-icon>`)}
+
+      ${args.textContent}
+
+    ${when(args.iconSlotPlacement === IconSlotPlacements.Trailing,() => html`<mlv-icon name="${args.iconName}"></mlv-icon>`)}
+  </mlv-button>`,
+  args: { textContent: 'Button Icon', disabled: false, variant: 'primary', iconName: 'navigate-to', iconSlotPlacement: 'trailing' },
+  argTypes: {
+    iconName: {
+      control: 'select',
+      options: ICON_NAMES
+    },
+    iconSlotPlacement: {
+      control: 'inline-radio',
+      options: getValuesFromEnum(IconSlotPlacements)
+    },
+  }
+};

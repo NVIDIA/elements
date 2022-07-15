@@ -22,12 +22,10 @@ export class Icon extends LitElement {
   @property({ type: String }) variant: IconVariants | string = 'default';
   /** The name of the icon SVG sprite */
   @property({ type: String }) name: IconNames;
-  /**  Manually specify the color of the icon */
-  @property({ type: String }) color: string;
 
   render() {
     return html`
-      <svg width="1em" height="1em" color="${this.color}">
+      <svg width="1em" height="1em">
         <use href="/assets/icons.svg#${this.name}"></use>
       </svg>
     `;

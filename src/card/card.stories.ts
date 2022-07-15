@@ -3,7 +3,7 @@ import { when } from 'lit/directives/when.js';
 import { withDesign } from 'storybook-addon-designs';
 
 import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '@elements/elements/internal';
-import { IconPlacements } from '@elements/elements/button';
+import { IconSlotPlacements } from '@elements/elements/button';
 import '@elements/elements/card/define.js';
 
 const figmaEmbedNodeId = '505%3A2280';
@@ -62,8 +62,6 @@ export const Default = {
           <div slot="header-actions">
             <mlv-button
               variant="tertiary"
-              icon="additional-actions"
-              iconplacement=${IconPlacements.IconOnly}
             ></mlv-button>
           </div>
         `

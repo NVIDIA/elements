@@ -76,11 +76,7 @@ button {
   }
 
 
-  /* Options */
-  :host([iconplacement="leading"]) & {
-    flex-direction: row-reverse;
-  }
-
+  /* Options TODO not used now -> move to new icon action button element */
   &[icon-only] {
     border-radius: var(--mlv-radius-full);
     font-size: var(--mlv-font-size-300);
