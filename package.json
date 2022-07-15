@@ -1,6 +1,6 @@
 {
   "name": "@elements/elements",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "type": "module",
   "customElements": "custom-elements.json",
   "files": [
