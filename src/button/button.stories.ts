@@ -45,7 +45,7 @@ type ArgTypes = Button & {
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<mlv-button data-testid="button" ${spread(args)}>${args.textContent}</mlv-button>`,
+  render: (args: ArgTypes) => html`<mlv-button ${spread(args)}>${args.textContent}</mlv-button>`,
   args: { textContent: 'Primary', disabled: false, variant: 'primary' }
 };
 
