@@ -1,6 +1,6 @@
 import { html, unsafeCSS, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
-import { ICON_NAMES } from './icon-names';
+import { ICON_NAMES } from './icon-names.js';
 import styleSheet from './icon.css?inline';
 
 const componentStyling = unsafeCSS(styleSheet);
