@@ -31,7 +31,10 @@
     "./card/define.js": "./dist/card/define.js",
     "./icon": "./dist/icon/index.js",
     "./icon/index.js": "./dist/icon/index.js",
-    "./icon/define.js": "./dist/icon/define.js"
+    "./icon/define.js": "./dist/icon/define.js",
+    "./icon-button": "./dist/icon-button/index.js",
+    "./icon-button/index.js": "./dist/icon-button/index.js",
+    "./icon-button/define.js": "./dist/icon-button/define.js"
   },
   "typesVersions": {
     "*": {
