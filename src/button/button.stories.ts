@@ -45,7 +45,7 @@ type ArgTypes = Button & {
 }
 
 export const Default = {
-  render: (args: ArgTypes) => html`<nve-button data-testid="button" ${spread(args)}>${args.textContent}</nve-button>`,
+  render: (args: ArgTypes) => html`<nve-button ${spread(args)}>${args.textContent}</nve-button>`,
   args: { textContent: 'Primary', disabled: false, variant: 'primary' }
 };
 

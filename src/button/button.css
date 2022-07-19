@@ -74,12 +74,4 @@
     opacity: 40%;
     cursor: not-allowed;
   }
-
-
-  /* Options TODO not used now -> move to new icon action button element */
-  &[icon-only] {
-    border-radius: var(--nve-radius-full);
-    font-size: var(--nve-font-size-300);
-    padding: var(--nve-spacing-half);
-  }
 }
