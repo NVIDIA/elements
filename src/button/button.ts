@@ -22,7 +22,7 @@ const componentStyling = unsafeCSS(styleSheet);
  * @slot Default - Default slot for button text content or icon, icon placement determined by whether <nve-icon> is inserted before or after text content.
  */
 export class Button extends MlvBaseButton {
-  static styles = componentStyling;
+  static styles = [componentStyling];
 
   /** Color Variant of the Button */
   @property({ type: String, reflect: true }) variant: ButtonVariants | string = 'primary';
