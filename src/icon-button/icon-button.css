@@ -1,0 +1,5 @@
+[internal-host] {
+  border-radius: var(--nve-radius-full);
+  font-size: var(--nve-font-size-300);
+  padding: var(--nve-spacing-half);
+}
