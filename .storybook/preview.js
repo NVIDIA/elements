@@ -1,4 +1,4 @@
-import { setCustomElementsManifest } from '@storybook/web-components';
+import { setCustomElementsManifest } from '@elements/custom-elements-storybook/preview';
 import { themes } from '@storybook/theming';
 import { excludePrivateFields } from '@elements/elements/internal';
 import customElements from '@elements/elements/custom-elements.json';
