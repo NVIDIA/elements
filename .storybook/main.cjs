@@ -1,5 +1,7 @@
 const path = require('path');
 
+const { addons } = require('@elements/custom-elements-storybook');
+
 module.exports = {
   stories: [
     '../src/**/*.stories.mdx',
@@ -7,11 +9,7 @@ module.exports = {
     '../tokens/**/*.stories.mdx',
     '../tokens/**/*.stories.ts'
   ],
-  addons: [
-    'storybook-addon-designs',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions'
-  ],
+  addons,
   framework: '@storybook/web-components',
   core: {
     builder: '@storybook/builder-vite'
@@ -25,9 +23,6 @@ module.exports = {
     if (!process.env['BAZEL_WORKSPACE']) {
       config.resolve.alias = { '@elements/elements': path.resolve(__dirname, '../dist') };
     }
-
-    // Workaround: https://github.com/storybookjs/storybook/issues/10887#issuecomment-901109891
-    config.resolve.dedupe = ['@storybook/client-api'];
 
     if (config.server) {
       config.server.port = 7777;
@@ -46,17 +41,6 @@ module.exports = {
         // Fix: fn() is not defined, see: https://github.com/storybookjs/storybook/issues/15391
         'jest-mock'
       ]
-    };
-
-    // TODO: Revisit when Storybook 6.5 ships with a fix for impacts from Emotion 11 release on docs addon
-    // Workaround: https://github.com/eirslett/storybook-builder-vite/issues/219#issuecomment-1023666193
-    // Related: https://github.com/storybookjs/storybook/issues/16716
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@emotion/react': path.resolve(path.join(__dirname, '../node_modules/@emotion/react')),
-      '@emotion/styled': path.resolve(path.join(__dirname, '../node_modules/@emotion/styled')),
-      '@emotion/core': path.resolve(path.join(__dirname, '../node_modules/@emotion/react')),
-      'emotion-theming': path.resolve(path.join(__dirname, '../node_modules/@emotion/react'))
     };
 
     return config;
