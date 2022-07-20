@@ -37,7 +37,7 @@ vite_library(
 # This will remove the need for the file group here and allow builds to depend on the package artifacts from other rules.
 filegroup(
     name = "@elements/elements",
-    srcs = [":elements"]
+    srcs = [":elements"],
 )
 
 storybook(
@@ -45,21 +45,8 @@ storybook(
     srcs = glob([".storybook/**/*"]) + glob(["src/**/*"]),
     deps = [
         ":@elements/elements",
-        "@npm_platform_libs_elements//@storybook/addon-essentials",
-        "@npm_platform_libs_elements//@storybook/addon-interactions",
-        "@npm_platform_libs_elements//@storybook/addons",
-        "@npm_platform_libs_elements//@storybook/api",
-        "@npm_platform_libs_elements//@storybook/builder-vite",
-        "@npm_platform_libs_elements//@storybook/client-api",
-        "@npm_platform_libs_elements//@storybook/components",
-        "@npm_platform_libs_elements//@storybook/core-common",
-        "@npm_platform_libs_elements//@storybook/core-events",
-        "@npm_platform_libs_elements//@storybook/node-logger",
-        "@npm_platform_libs_elements//@storybook/store",
-        "@npm_platform_libs_elements//@storybook/testing-library",
-        "@npm_platform_libs_elements//@storybook/theming",
-        "@npm_platform_libs_elements//storybook-addon-designs",
-        "@npm_platform_libs_elements//webpack",
+        "@npm_platform_libs_elements//@elements/custom-elements-storybook",
+        "@npm_platform_libs_elements//lit",
     ],
     data = [
         "package.json"
