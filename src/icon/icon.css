@@ -3,18 +3,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
+  color: var(--nve-color-neutral-500);
 
   /* Variants */
-  &([variant="inherit"]) {
+  &([variant='inherit']) {
     color: currentColor;
   }
 
-  &([variant="default"]) {
-    color: var(--nve-color-neutral-500);
-  }
-
-  &([variant="lighter"]) {
+  &([variant='lighter']) {
     color: var(--nve-color-neutral-300);
   }
 }

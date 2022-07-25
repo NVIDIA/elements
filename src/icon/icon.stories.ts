@@ -21,15 +21,14 @@ const description = `
 `;
 
 export default {
-  title: 'MagLev Elements/Atoms/Icon',
+  title: 'Elements/Icon/Examples',
   component: 'nve-icon',
   // decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: {
     variant: {
       control: 'inline-radio',
-      options: getValuesFromEnum(IconVariants),
-      default: IconVariants.Default
+      options: getValuesFromEnum(IconVariants)
     },
     name: {
       control: 'inline-radio',
@@ -47,30 +46,24 @@ interface ArgTypes {
 export const Default = {
   render: (args: ArgTypes) =>
     html`<nve-icon
-      data-testid="icon"
       name="${args.name}"
       variant="${args.variant}"
       color="${args.color}"
       style="font-size: 4em"
     ></nve-icon>`,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { name: 'analytics', variant: IconVariants.Default }
+  args: { name: 'analytics' }
 };
 
 export const LightIcon = { ...Default, args: { name: 'analytics', variant: IconVariants.Lighter } };
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map(
-      (iconName) => html`
-        <span title="${iconName}">
-          <nve-icon data-testid="icon" name="${iconName}" variant="${args.variant}" style="font-size: 4em"></nve-icon>
-        </span>
-      `
+    ${ICON_NAMES.map((iconName) => html`<nve-icon title="${iconName}" .name="${iconName}" .variant="${args.variant}" style="font-size: 4em"></nve-icon>\n`
     )}
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { name: 'analytics', variant: IconVariants.Default }
+  args: { name: 'analytics' }
 };
 
 export const CycleIcons = {
@@ -93,3 +86,11 @@ export const CycleIcons = {
     }
   }
 };
+
+export const variants = {
+  render: () => html`
+    <nve-icon name="analytics"></nve-icon>
+    <nve-icon name="analytics" variant="inherit"></nve-icon>
+    <nve-icon name="analytics" variant="lighter"></nve-icon>
+  `
+}
