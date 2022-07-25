@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+header[internal-host] {
+  padding: var(--mlv-spacing-7) var(--mlv-spacing-7) var(--mlv-spacing-4);
+  border-bottom: 2px solid var(--divider-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  ::slotted([slot="title"]) {
+    margin: 0;
+    font-size: var(--mlv-font-size-275);
+    line-height: var(--mlv-font-size-400);
+    font-weight: var(--mlv-font-weight-bold);
+  }
+
+  ::slotted([slot="subtitle"]) {
+    margin: 0;
+    color: var(--mlv-color-neutral-500);
+    font-size: var(--mlv-font-size-100);
+    line-height: var(--mlv-font-size-400);
+    font-weight: var(--mlv-font-weight-normal);
+  }
+}

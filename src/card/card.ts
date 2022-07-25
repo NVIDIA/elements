@@ -1,47 +1,84 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { property } from 'lit/decorators/property.js';
-import { when } from 'lit/directives/when.js';
-import styleSheet from './card.css?inline';
+import cardStyleSheet from './card.css?inline';
+import cardHeaderStyleSheet from './card-header.css?inline';
+import cardFooterStyleSheet from './card-footer.css?inline';
 
-const componentStyling = unsafeCSS(styleSheet);
+const cardComponentStyling = unsafeCSS(cardStyleSheet);
+const cardHeaderComponentStyling = unsafeCSS(cardHeaderStyleSheet);
+const cardFooterComponentStyling = unsafeCSS(cardFooterStyleSheet);
 
 /**
  * @element mlv-card
  * @slot - This is a default/unnamed slot for card content
- * @slot image - HTML elements slotted here for image header
- * @slot footer - HTML elements slotted here for card footer
+ * @slot header - header element
  */
 export class Card extends LitElement {
-  static styles = componentStyling;
-
-  /**  If present render a title in the header */
-  @property({ type: String }) title: string;
-  /**  If present render a subTitle in the header */
-  @property({ type: String }) subtitle: string;
+  static styles = cardComponentStyling;
 
   render() {
     return html`
-      ${when(
-        this.title,
-        () => html`
-          <header>
-            <div id="header-titles">
-              <h1>${this.title}</h1>
-              <h2>${this.subtitle}</h2>
-            </div>
+      <div internal-host>
+        <slot name="header"></slot>
 
-            <slot name="header-actions"></slot>
-          </header>
-        `
-      )}
+        <main>
+          <slot></slot>
+        </main>
 
-      <main>
-        <slot></slot>
-      </main>
-
-      <footer>
         <slot name="footer"></slot>
+      </div>
+    `;
+  }
+}
+
+
+/**
+ * @element mlv-card-header
+ * @slot - This is a default/unnamed slot for card content
+ * @slot title - Title Text
+ * @slot subtitle - Subtitle Text
+ * @slot header-action - Subtitle Text
+ */
+ export class CardHeader extends LitElement {
+  static styles = cardHeaderComponentStyling;
+
+  render() {
+    return html`
+      <header internal-host>
+        <div>
+          <slot name="title"></slot>
+          <slot name="subtitle"></slot>
+        </div>
+
+        <slot name="header-action"></slot>
+      </header>
+    `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback(); // Do not override connectedCallback w/out supering
+    this.slot = 'header';
+  }
+}
+
+
+
+/**
+ * @element mlv-card-footer
+ * @slot - This is a default/unnamed slot for card content
+ */
+ export class CardFooter extends LitElement {
+  static styles = cardFooterComponentStyling;
+
+  render() {
+    return html`
+      <footer internal-host>
+        <slot></slot>
       </footer>
     `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback(); // Do not override connectedCallback w/out supering
+    this.slot = 'footer';
   }
 }
