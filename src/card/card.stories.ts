@@ -33,9 +33,8 @@ interface ArgTypes {
   height?: number;
   content?: string;
   showFooter?: boolean;
-  showHeaderActions?: boolean;
-  title?: string;
-  subtitle?: string;
+  showHeader?: boolean;
+  showAction?: boolean;
 }
 
 export const Default = {
@@ -46,35 +45,38 @@ export const Default = {
         height: ${args.height}px;
       }
 
-      nve-card img {
-        height: 250px;
-      }
-
       nve-card footer {
         text-align: center;
       }
     </style>
 
-    <nve-card title=${args.title} subtitle=${args.subtitle}>
+    <nve-card>
       ${when(
-        args.showHeaderActions,
+        args.showHeader,
         () => html`
-          <div slot="header-actions">
-            <nve-button
-              variant="tertiary"
-            ></nve-button>
-          </div>
+        <nve-card-header>
+          <div slot="title">Title</div>
+          <div slot="subtitle">Sub Title</div>
+
+
+          ${when(
+            args.showAction,
+            () => html`
+              <nve-icon-button slot="header-action" name="additional-actions" variant="tertiary"></nve-icon-button>
+            `)}
+        </nve-card-header>
         `
       )}
+
       ${args.content}
+
       ${when(
         args.showFooter,
         () => html`
-          <footer slot="footer">
-            Proceed with Action
-
-            <nve-button icon="navigate-to">Proceed</nve-button>
-          </footer>
+        <nve-card-footer>
+          Proceed with Action
+          <nve-button icon="navigate-to">Proceed</nve-button>
+        </nve-card-footer>
         `
       )}
     </nve-card>
@@ -83,26 +85,14 @@ export const Default = {
   args: { width: 300, height: 150, content: 'Card Content' }
 };
 
-export const CardWithTitle = {
+export const CardWithHeader = {
   ...Default,
-  args: { title: 'Card Title', content: 'Card Content', width: 400, height: 200 }
+  args: { content: 'Card Content', showHeader: true, width: 400, height: 200 }
 };
 
-export const CardWithTitleAndSubTitle = {
+export const CardWithHeaderAndAction = {
   ...Default,
-  args: { title: 'Card Title', content: 'Card Content', subtitle: 'Supporting Text', width: 400, height: 300 }
-};
-
-export const CardWithSlottedHeaderActions = {
-  ...Default,
-  args: {
-    showHeaderActions: true,
-    content: 'Card Content',
-    title: 'Card Title',
-    subtitle: 'Supporting Text',
-    width: 400,
-    height: 300
-  }
+  args: { content: 'Card Content', showHeader: true, showAction: true, width: 400, height: 200 }
 };
 
 export const CardWithHeaderAndFooter = {
@@ -111,6 +101,7 @@ export const CardWithHeaderAndFooter = {
     content: 'Card Content',
     title: 'Card Title',
     subtitle: 'Supporting Text',
+    showHeader: true,
     showFooter: true,
     width: 400,
     height: 300
