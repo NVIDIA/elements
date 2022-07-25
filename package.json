@@ -54,13 +54,13 @@
   },
   "scripts": {
     "dev": "pnpm run build && pnpm run build:watch & start-storybook -p 7789",
+    "ci": "pnpm run build && pnpm run test && pnpm run build-storybook",
     "storybook": "start-storybook -p 7789",
-    "ci": "pnpm run build && pnpm run test",
     "build": "vite build",
     "build:watch": "vite build --mode watch",
     "test": "vitest run --coverage",
     "test:watch": "vitest watch",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook --output-dir ./storybook-static",
     "create-icon-spritesheet": "node create-icon-spritesheet.js",
     "prepublishonly": "pnpm run build",
     "generate-manifest": "cem analyze --litelement --globs src/**/*.ts --exclude **.stories.ts src/internal/**/*.ts"
