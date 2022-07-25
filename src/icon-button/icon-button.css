@@ -3,3 +3,7 @@
   font-size: var(--nve-font-size-300);
   padding: var(--nve-spacing-half);
 }
+
+nve-icon {
+  color: inherit;
+}

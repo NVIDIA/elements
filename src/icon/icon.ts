@@ -6,8 +6,8 @@ import styleSheet from './icon.css?inline';
 const componentStyling = unsafeCSS(styleSheet);
 
 export enum IconVariants {
-  Inherit = 'inherit',
   Default = 'default',
+  Inherit = 'inherit',
   Lighter = 'lighter'
 }
 export type IconNames = typeof ICON_NAMES[number];
@@ -19,7 +19,8 @@ export class Icon extends LitElement {
   static styles = componentStyling;
 
   /** The color variant of the icon */
-  @property({ type: String }) variant: IconVariants | string = 'default';
+  @property({ type: String, reflect: true }) variant: 'lighter' | 'inherit';
+
   /** The name of the icon SVG sprite */
   @property({ type: String }) name: IconNames;
 

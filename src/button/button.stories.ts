@@ -22,7 +22,7 @@ const description = `
 `;
 
 export default {
-  title: 'MagLev Elements/Atoms/Button',
+  title: 'Elements/Button/Examples',
   component: 'nve-button',
   // decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description, [
@@ -75,3 +75,13 @@ export const ButtonWithIcon = {
     },
   }
 };
+
+export const Interactions = {
+  render: () => html`
+    <nve-button variant="primary">primary</nve-button>
+    <nve-button variant="secondary">secondary</nve-button>
+    <nve-button variant="destructive">destructive</nve-button>
+    <nve-button variant="tertiary">tertiary</nve-button>
+    <nve-button disabled>disabled</nve-button>
+  `
+}
