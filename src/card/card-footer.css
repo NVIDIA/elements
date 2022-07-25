@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+footer[internal-host] {
+  padding: var(--nve-spacing-7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
