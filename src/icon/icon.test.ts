@@ -22,8 +22,11 @@ describe('mlv-icon', () => {
     expect(element.tagName).eq('MLV-ICON');
   });
 
-  it('should have a default variant of "default"', () => {
-    expect(element.variant).eq('default');
+  it('should reflect variant atrribute for style hook', async () => {
+    expect(element.variant).eq(undefined);
+    element.variant = 'lighter';
+    await elementIsStable(element);
+    expect(element.getAttribute('variant')).eq('lighter');
   });
 
   it('should update svg reference when "name" is updated', async () => {

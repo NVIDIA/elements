@@ -14,7 +14,7 @@ const description = `
 `;
 
 export default {
-  title: 'MagLev Elements/Atoms/Card',
+  title: 'Elements/Card/Examples',
   component: 'mlv-card',
   decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),

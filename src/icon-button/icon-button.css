@@ -3,3 +3,7 @@
   font-size: var(--mlv-font-size-300);
   padding: var(--mlv-spacing-half);
 }
+
+mlv-icon {
+  color: inherit;
+}

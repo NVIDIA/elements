@@ -22,7 +22,7 @@ const description = `
 `;
 
 export default {
-  title: 'MagLev Elements/Atoms/Button',
+  title: 'Elements/Button/Examples',
   component: 'mlv-button',
   // decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description, [
@@ -75,3 +75,13 @@ export const ButtonWithIcon = {
     },
   }
 };
+
+export const Interactions = {
+  render: () => html`
+    <mlv-button variant="primary">primary</mlv-button>
+    <mlv-button variant="secondary">secondary</mlv-button>
+    <mlv-button variant="destructive">destructive</mlv-button>
+    <mlv-button variant="tertiary">tertiary</mlv-button>
+    <mlv-button disabled>disabled</mlv-button>
+  `
+}

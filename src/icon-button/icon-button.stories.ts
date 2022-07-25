@@ -21,7 +21,7 @@ const description = `
 `;
 
 export default {
-  title: 'MagLev Elements/Atoms/IconButton',
+  title: 'Elements/Icon Button/Examples',
   component: 'mlv-icon-button',
   // decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description, [
@@ -54,3 +54,13 @@ export const Secondary = { ...Default, args: { name: 'analytics', variant: 'seco
 export const Tertiary = { ...Default, args: {  name: 'analytics', variant: 'tertiary' } };
 export const Destructive = { ...Default, args: {  name: 'analytics', variant: 'destructive' } };
 export const Disabled = { ...Default, args: {  name: 'analytics', disabled: true } };
+
+export const Interactions = {
+  render: () => html`
+    <mlv-icon-button variant="primary" name="analytics">primary</mlv-icon-button>
+    <mlv-icon-button variant="secondary" name="analytics">secondary</mlv-icon-button>
+    <mlv-icon-button variant="destructive" name="analytics">destructive</mlv-icon-button>
+    <mlv-icon-button variant="tertiary" name="analytics">tertiary</mlv-icon-button>
+    <mlv-icon-button disabled name="analytics"></mlv-icon-button>
+  `
+}
