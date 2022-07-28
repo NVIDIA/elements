@@ -1,9 +1,8 @@
-import { html, unsafeCSS, LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
+import { useStyles } from '@elements/elements/internal';
 import { ICON_NAMES } from './icon-names.js';
-import styleSheet from './icon.css?inline';
-
-const componentStyling = unsafeCSS(styleSheet);
+import styles from './icon.css?inline';
 
 export enum IconVariants {
   Inherit = 'inherit',
@@ -15,7 +14,7 @@ export type IconNames = typeof ICON_NAMES[number];
  * @element nve-icon
  */
 export class Icon extends LitElement {
-  static styles = componentStyling;
+  static styles = useStyles([styles]);
 
   /** The color variant of the icon */
   @property({ type: String, reflect: true }) variant: IconVariants;
