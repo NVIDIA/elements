@@ -1,16 +1,15 @@
-import { html, unsafeCSS } from 'lit';
+import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { useStyles } from '@elements/elements/internal';
 import { Button } from '@elements/elements/button';
-import styleSheet from './icon-button.css?inline';
 import { IconNames } from '@elements/elements/icon';
-
-const componentStyling = unsafeCSS(styleSheet);
+import styles from './icon-button.css?inline';
 
 /**
  * @element mlv-icon-button
  */
 export class IconButton extends Button {
-static styles = [...Button.styles, componentStyling];
+  static styles = useStyles([...Button.styles, styles]);
 
   @property({ type: String }) name: IconNames;
 

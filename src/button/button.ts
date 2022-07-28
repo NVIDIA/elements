@@ -1,8 +1,8 @@
-import { html, unsafeCSS } from 'lit';
+import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { MlvBaseButton } from '@elements/elements/internal';
-import styleSheet from './button.css?inline';
+import { MlvBaseButton, useStyles } from '@elements/elements/internal';
+import styles from './button.css?inline';
 
 export enum ButtonVariants {
   Primary = 'primary',
@@ -15,14 +15,12 @@ export enum IconSlotPlacements {
   Leading = 'leading'
 }
 
-const componentStyling = unsafeCSS(styleSheet);
-
 /**
  * @element mlv-button
  * @slot Default - Default slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.
  */
 export class Button extends MlvBaseButton {
-  static styles = [componentStyling];
+  static styles = useStyles([styles]);
 
   /** Color Variant of the Button */
   @property({ type: String, reflect: true }) variant: ButtonVariants | string = 'primary';
