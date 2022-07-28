@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { stateActive } from '@elements/elements/internal';
-import { createFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable } from '@elements/elements/test';
 
 @stateActive<StateActiveControllerTestElement>()
 @customElement('state-active-controller-test-element')
@@ -45,5 +45,14 @@ describe('state-active.controller', () => {
 
     element.dispatchEvent(new MouseEvent('mousedown'));
     expect(element.matches('[state--active]')).toBe(false);
+  });
+
+  it('should not trigger scroll behavior when Space is pressed', async () => {
+    expect(document.body.getBoundingClientRect().top).toBe(0);
+
+    element.dispatchEvent(new KeyboardEvent('keypress', { code: 'Space' }));
+    await elementIsStable(element);
+
+    expect(document.body.getBoundingClientRect().top).toBe(0);
   });
 });
