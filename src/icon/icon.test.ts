@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable } from '@elements/elements/test';
-import { Icon } from '@elements/elements/icon';
+import { Icon, IconVariants } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 
 describe('nve-icon', () => {
@@ -24,7 +24,7 @@ describe('nve-icon', () => {
 
   it('should reflect variant atrribute for style hook', async () => {
     expect(element.variant).eq(undefined);
-    element.variant = 'lighter';
+    element.variant = IconVariants.Lighter;
     await elementIsStable(element);
     expect(element.getAttribute('variant')).eq('lighter');
   });
