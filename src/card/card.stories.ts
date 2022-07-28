@@ -44,10 +44,6 @@ export const Default = {
         width: ${args.width}px;
         height: ${args.height}px;
       }
-
-      nve-card footer {
-        text-align: center;
-      }
     </style>
 
     <nve-card>
