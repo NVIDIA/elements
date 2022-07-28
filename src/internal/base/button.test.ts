@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MlvBaseButton } from '@elements/elements/internal';
-import { createFixture, elementIsStable, emulateClick, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, emulateClick, untilEvent, removeFixture } from '@elements/elements/test';
 
 @customElement('base-button-test-element')
 class BaseButtonTestElement extends MlvBaseButton { }
@@ -31,7 +31,7 @@ describe('base button', () => {
   });
 
   afterEach(() => {
-    fixture.remove();
+    removeFixture(fixture);
   });
 
   it('should add active state on mousedown', async () => {

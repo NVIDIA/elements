@@ -12,5 +12,6 @@ export * from './controllers/type-submit.controller.js';
 export * from './styles/index.js';
 export * from './storybook/utils.js';
 export * from './utils/a11y.js';
+export * from './utils/dom.js';
 export * from './utils/events.js';
 export * from './utils/keynav.js';

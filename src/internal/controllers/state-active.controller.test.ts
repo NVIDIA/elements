@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { stateActive } from '@elements/elements/internal';
-import { createFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
 
 @stateActive<StateActiveControllerTestElement>()
 @customElement('state-active-controller-test-element')
@@ -26,7 +26,7 @@ describe('state-active.controller', () => {
   });
 
   afterEach(() => {
-    fixture.remove();
+    removeFixture(fixture);
   });
 
   it('should add active state on mousedown', async () => {

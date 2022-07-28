@@ -2,7 +2,6 @@ import { TemplateResult, render } from 'lit';
 import '@elements/elements/polyfills'; // polyfills for required for vitest
 
 /**
- * @internal
  * Creates a test fixture DOM element for testing.
  * Fixture is ready when all custom elements have been defined.
  */
@@ -19,6 +18,13 @@ export async function createFixture(template?: TemplateResult): Promise<HTMLElem
 }
 
 /**
+ * Removes test fixture DOM element.
+ */
+export function removeFixture(fixture: HTMLElement) {
+  document.body.removeChild(fixture);
+}
+
+/**
  * Find all elements not defined in the custom elmenets registry and wait until
  * all elements have been added to registry https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined
  */
@@ -31,7 +37,7 @@ function waitForAllElementsToBeDefined() {
  * @internal
  * Awaits until Lit element has rendered and has no pending updates
  */
- export function elementIsStable(element: any) {
+export function elementIsStable(element: any) {
   return retry(async () => await element.updateComplete ? Promise.resolve() : Promise.reject());
 }
 
