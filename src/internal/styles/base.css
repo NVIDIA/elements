@@ -1,0 +1,29 @@
+/**
+ * https://web.dev/custom-elements-best-practices/
+ * Base CSS for all custom elements.
+ */
+
+:host {
+  all: initial;
+  display: block;
+  visibility: inherit;
+  box-sizing: border-box;
+  font-family: inherit;
+  contain: layout; /* https://developer.mozilla.org/en-US/docs/Web/CSS/contain */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* https://developers.google.com/web/fundamentals/web-components/best-practices#add-a-:host-display-style-that-respects-the-hidden-attribute */
+[hidden],
+:host([hidden]) {
+  display: none !important;
+}
+
+slot {
+  display: content;
+}
