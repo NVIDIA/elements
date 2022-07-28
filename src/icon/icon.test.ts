@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
 import { Icon, IconVariants } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 
@@ -15,11 +15,11 @@ describe('mlv-icon', () => {
   });
 
   afterEach(() => {
-    fixture.remove();
+    removeFixture(fixture);
   });
 
-  it('should create element', () => {
-    expect(element.tagName).eq('MLV-ICON');
+  it('should define element', () => {
+    expect(customElements.get('mlv-icon')).toBeDefined();
   });
 
   it('should reflect variant atrribute for style hook', async () => {

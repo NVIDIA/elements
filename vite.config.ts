@@ -57,6 +57,10 @@ export default defineConfig((env) => {
       environment: 'happy-dom',
       watchExclude: ['**/node_modules/**'],
       coverage: {
+        lines: 90,
+        branches: 90,
+        functions: 90,
+        statements: 90,
         exclude: ['**/storybook/**', '**/test/**', '**/*.test.ts', '**/*.css.js', '**/index.js']
       }
     }

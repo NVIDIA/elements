@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
 import { IconButton } from '@elements/elements/icon-button';
 import '@elements/elements/icon-button/define.js';
 
@@ -14,11 +14,11 @@ describe('mlv-icon-button', () => {
   });
 
   afterEach(() => {
-    fixture.remove();
+    removeFixture(fixture);
   });
 
-  it('should create element', () => {
-    expect(element.tagName).eq('MLV-ICON-BUTTON');
+  it('should define element', () => {
+    expect(customElements.get('mlv-icon-button')).toBeDefined();
   });
 
   it('should have a default variant of "primary"', () => {

@@ -3,7 +3,7 @@ import { property } from 'lit/decorators/property.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { typeButton } from '@elements/elements/internal';
-import { createFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
 
 @typeButton<TypeButtonControllerTestElement>()
 @customElement('type-button-controller-test-element')
@@ -24,7 +24,7 @@ describe('TypeButtonController', () => {
   });
 
   afterEach(() => {
-    fixture.remove();
+    removeFixture(fixture);
   });
 
   it('should initialize tabindex 0 for focus behavior', async () => {
