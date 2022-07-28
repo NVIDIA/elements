@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
 import { statePressed } from '@elements/elements/internal';
 
 @statePressed<StatePressedControllerTestElement>()
@@ -28,7 +28,7 @@ describe('state-pressed.controller', () => {
   });
 
   afterEach(() => {
-    fixture.remove();
+    removeFixture(fixture);
   });
 
   it('should initialize aria-pressed as null', async () => {

@@ -21,6 +21,8 @@
     ".": "./dist/index.js",
     "./internal": "./dist/internal/index.js",
     "./internal/index.js": "./dist/internal/index.js",
+    "./test": "./dist/test/index.js",
+    "./test/index.js": "./dist/test/index.js",
     "./polyfills": "./dist/polyfills/index.js",
     "./polyfills/index.js": "./dist/polyfills/index.js",
     "./button": "./dist/button/index.js",
@@ -54,7 +56,7 @@
   },
   "scripts": {
     "dev": "pnpm run build && pnpm run build:watch & start-storybook -p 7789",
-    "ci": "pnpm run build && pnpm run test && pnpm run build-storybook",
+    "ci": "pnpm run build && pnpm run build-storybook && pnpm run test",
     "storybook": "start-storybook -p 7789",
     "build": "vite build",
     "build:watch": "vite build --mode watch",

@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
 import { stateDisabled } from '@elements/elements/internal';
 
 @stateDisabled<StateDisabledControllerTestElement>()
@@ -28,7 +28,7 @@ describe('state-disabled.controller', () => {
   });
 
   afterEach(() => {
-    fixture.remove();
+    removeFixture(fixture);
   });
 
   it('should initialize aria-disabled', async () => {
