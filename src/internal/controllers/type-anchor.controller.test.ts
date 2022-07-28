@@ -3,7 +3,7 @@ import { customElement  } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { typeAnchor } from '@elements/elements/internal';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { elementIsStable, createFixture, emulateClick } from '@elements/elements/test';
+import { createFixture, removeFixture, emulateClick } from '@elements/elements/test';
 
 @typeAnchor<TypeAnchorTestElement>()
 @customElement('type-anchor-test-element')
@@ -28,7 +28,7 @@ describe('type-anchor.controller', () => {
   });
 
   afterEach(() => {
-    fixture.remove();
+    removeFixture(fixture);
   });
 
   it('should prevent click event if host disabled', () => {
