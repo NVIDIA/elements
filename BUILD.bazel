@@ -16,6 +16,8 @@ vite_library(
     ],
     allow_js = True,
     data = [
+        "tsconfig.json",
+        "tsconfig.lib.json",
         "package.json",
         "package-lock.json",
         "vite.config.ts",

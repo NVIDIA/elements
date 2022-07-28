@@ -1,11 +1,8 @@
-import { html, unsafeCSS, LitElement } from 'lit';
+import { html, LitElement } from 'lit';
+import { useStyles } from '@elements/elements/internal';
 import cardStyleSheet from './card.css?inline';
 import cardHeaderStyleSheet from './card-header.css?inline';
 import cardFooterStyleSheet from './card-footer.css?inline';
-
-const cardComponentStyling = unsafeCSS(cardStyleSheet);
-const cardHeaderComponentStyling = unsafeCSS(cardHeaderStyleSheet);
-const cardFooterComponentStyling = unsafeCSS(cardFooterStyleSheet);
 
 /**
  * @element nve-card
@@ -14,7 +11,7 @@ const cardFooterComponentStyling = unsafeCSS(cardFooterStyleSheet);
  * @slot footer - footer element (Use <nve-card-footer> or custom content)
  */
 export class Card extends LitElement {
-  static styles = cardComponentStyling;
+  static styles = useStyles([cardStyleSheet]);
 
   render() {
     return html`
@@ -39,7 +36,7 @@ export class Card extends LitElement {
  * @slot header-action - Header Action Button
  */
  export class CardHeader extends LitElement {
-  static styles = cardHeaderComponentStyling;
+  static styles = useStyles([cardHeaderStyleSheet]);
 
   render() {
     return html`
@@ -67,7 +64,7 @@ export class Card extends LitElement {
  * @slot default - This is a default/unnamed slot for card footer content
  */
  export class CardFooter extends LitElement {
-  static styles = cardFooterComponentStyling;
+  static styles = useStyles([cardFooterStyleSheet]);
 
   render() {
     return html`
