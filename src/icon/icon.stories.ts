@@ -1,16 +1,14 @@
 /* eslint-disable guard-for-in */
 import { html } from 'lit';
 import { withDesign } from 'storybook-addon-designs';
-import { within } from '@storybook/testing-library';
 
 import {
-  awaitTimeout,
   ComponentStatuses,
   generateDefaultStoryParameters,
   generateFigmaEmbed,
   getValuesFromEnum
 } from '@elements/elements/internal';
-import { IconNames, IconVariants, ICON_NAMES } from '@elements/elements/icon';
+import {  IconNames, IconVariants, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 
 const figmaEmbedNodeId = '164%3A61';
@@ -66,31 +64,10 @@ export const PreviewAllIcons = {
   args: { name: 'analytics' }
 };
 
-export const CycleIcons = {
-  ...Default,
-  args: { name: 'analytics', variant: IconVariants.Lighter },
-  play: async ({ args, canvasElement }) => {
-    const canvas = within(canvasElement);
-    const icon = canvas.getByTestId('icon');
-
-    await icon.setAttribute('variant', args.variant);
-
-    await awaitTimeout(1000);
-
-    // await expect(icon.hasAttribute('name')).toBe(true)
-
-    for (const iconName in ICON_NAMES) {
-      await icon.setAttribute('name', ICON_NAMES[iconName]);
-      await awaitTimeout(1000);
-      // await expect(icon.getAttribute('name')).toBe(ICON_NAMES[iconName])
-    }
-  }
-};
-
 export const variants = {
   render: () => html`
-    <nve-icon name="analytics"></nve-icon>
-    <nve-icon name="analytics" variant="inherit"></nve-icon>
-    <nve-icon name="analytics" variant="lighter"></nve-icon>
+    <nve-icon name="analytics" style="font-size: 2em"></nve-icon>
+    <nve-icon name="analytics" variant="inherit" style="font-size: 2em"></nve-icon>
+    <nve-icon name="analytics" variant="lighter" style="font-size: 2em"></nve-icon>
   `
 }
