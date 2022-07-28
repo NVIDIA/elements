@@ -109,11 +109,15 @@
           "slots": [
             {
               "description": "This is a default/unnamed slot for card content",
-              "name": ""
+              "name": "default"
             },
             {
-              "description": "header element",
+              "description": "header element (Use <mlv-card-header> or custom content)",
               "name": "header"
+            },
+            {
+              "description": "footer element (Use <mlv-card-footer> or custom content)",
+              "name": "footer"
             }
           ],
           "members": [],
@@ -130,10 +134,6 @@
           "name": "CardHeader",
           "slots": [
             {
-              "description": "This is a default/unnamed slot for card content",
-              "name": ""
-            },
-            {
               "description": "Title Text",
               "name": "title"
             },
@@ -142,7 +142,7 @@
               "name": "subtitle"
             },
             {
-              "description": "Subtitle Text",
+              "description": "Header Action Button",
               "name": "header-action"
             }
           ],
@@ -160,8 +160,8 @@
           "name": "CardFooter",
           "slots": [
             {
-              "description": "This is a default/unnamed slot for card content",
-              "name": ""
+              "description": "This is a default/unnamed slot for card footer content",
+              "name": "default"
             }
           ],
           "members": [],
@@ -391,11 +391,11 @@
               "kind": "field",
               "name": "variant",
               "type": {
-                "text": "IconVariants | string"
+                "text": "IconVariants"
               },
-              "default": "'default'",
               "description": "The color variant of the icon",
-              "attribute": "variant"
+              "attribute": "variant",
+              "reflects": true
             },
             {
               "kind": "field",
@@ -411,9 +411,8 @@
             {
               "name": "variant",
               "type": {
-                "text": "IconVariants | string"
+                "text": "IconVariants"
               },
-              "default": "'default'",
               "description": "The color variant of the icon",
               "fieldName": "variant"
             },

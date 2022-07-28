@@ -9,8 +9,9 @@ const cardFooterComponentStyling = unsafeCSS(cardFooterStyleSheet);
 
 /**
  * @element mlv-card
- * @slot - This is a default/unnamed slot for card content
- * @slot header - header element
+ * @slot default - This is a default/unnamed slot for card content
+ * @slot header - header element (Use <mlv-card-header> or custom content)
+ * @slot footer - footer element (Use <mlv-card-footer> or custom content)
  */
 export class Card extends LitElement {
   static styles = cardComponentStyling;
@@ -33,10 +34,9 @@ export class Card extends LitElement {
 
 /**
  * @element mlv-card-header
- * @slot - This is a default/unnamed slot for card content
  * @slot title - Title Text
  * @slot subtitle - Subtitle Text
- * @slot header-action - Subtitle Text
+ * @slot header-action - Header Action Button
  */
  export class CardHeader extends LitElement {
   static styles = cardHeaderComponentStyling;
@@ -64,7 +64,7 @@ export class Card extends LitElement {
 
 /**
  * @element mlv-card-footer
- * @slot - This is a default/unnamed slot for card content
+ * @slot default - This is a default/unnamed slot for card footer content
  */
  export class CardFooter extends LitElement {
   static styles = cardFooterComponentStyling;

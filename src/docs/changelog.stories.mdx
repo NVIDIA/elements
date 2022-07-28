@@ -1,0 +1,22 @@
+<Meta title="About/Changelog" />
+
+# Changelog
+
+## v0.2.0
+- Removed "icon" property on &lt;MLV-ICON&gt;
+- Added &lt;MLV-BUTTON-ICON&gt; element
+- Refactored &lt;MLV-CARD&gt; to a composition / slot based API
+    - Adds &lt;MLV-CARD-HEADER&gt;
+    - Adds &lt;MLV-CARD-FOOTER&gt;
+- &lt;MLV-BUTTON-ICON&gt; now based on base button class w/ submit and aria support
+    - Refactored with button behavior Lit controllers
+- Build artifact redesigned to reduce side effects in build
+- Now supports individual element imports
+    - ("import '@elements/elements/button/define.js';")
+- Added Lit testing utils for element unit testing
+- Updated Storybook to version 6.5
+- Added MDX docs to Storybook
+
+## v0.1.3
+- Initial release of alpha version to artifactory
+- POC version of Button/Icon/Card elements based in Lit/Vite/Storybook build tooling
