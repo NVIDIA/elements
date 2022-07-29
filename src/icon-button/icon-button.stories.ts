@@ -1,19 +1,9 @@
 import { html } from 'lit';
 import { IconButton } from '@elements/elements/icon-button';
-// import { withDesign } from 'storybook-addon-designs';
-
-import {
-  ComponentStatuses,
-  generateDefaultStoryParameters,
-  generateFigmaEmbed,
-  getValuesFromEnum,
-  spread
-} from '@elements/elements/internal';
+import { ComponentStatuses, generateDefaultStoryParameters, spread } from '@elements/elements/internal';
 import { ICON_NAMES } from '@elements/elements/icon';
-import { ButtonVariants } from '@elements/elements/button';
 import '@elements/elements/icon-button/define.js';
 
-const figmaEmbedNodeId = '163%3A25';
 const reviewDocBookmark = 'id.l12irnk25slx';
 const status: ComponentStatuses = 'beta';
 const description = `
@@ -23,7 +13,6 @@ const description = `
 export default {
   title: 'Elements/Icon Button/Examples',
   component: 'nve-icon-button',
-  // decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description, [
     'mouseover nve-button',
     'mouseout nve-button',
@@ -31,9 +20,9 @@ export default {
     'click nve-button'
   ]),
   argTypes: {
-   variant: {
+    interaction: {
       control: 'inline-radio',
-      options: getValuesFromEnum(ButtonVariants)
+      options: ['emphasize', 'destructive', 'ghost']
     },
     name: {
       control: 'inline-radio',
@@ -42,25 +31,43 @@ export default {
   }
 };
 
-type ArgTypes = IconButton & {
-}
+type ArgTypes = IconButton;
 
 export const Default = {
   render: (args: ArgTypes) => html`<nve-icon-button ${spread(args)}></nve-icon-button>`,
-  args: { disabled: false, name: 'analytics', variant: 'primary' }
+  args: { disabled: false, name: 'analytics', interaction: '' }
 };
 
-export const Secondary = { ...Default, args: { name: 'analytics', variant: 'secondary' } };
-export const Tertiary = { ...Default, args: {  name: 'analytics', variant: 'tertiary' } };
-export const Destructive = { ...Default, args: {  name: 'analytics', variant: 'destructive' } };
+export const Emphasize = { ...Default, args: { name: 'analytics', interaction: 'emphasize' } };
+export const Destructive = { ...Default, args: {  name: 'analytics', interaction: 'destructive' } };
+export const Ghost = { ...Default, args: {  name: 'analytics', interaction: 'ghost' } };
 export const Disabled = { ...Default, args: {  name: 'analytics', disabled: true } };
 
 export const Interactions = {
   render: () => html`
-    <nve-icon-button variant="primary" name="analytics">primary</nve-icon-button>
-    <nve-icon-button variant="secondary" name="analytics">secondary</nve-icon-button>
-    <nve-icon-button variant="destructive" name="analytics">destructive</nve-icon-button>
-    <nve-icon-button variant="tertiary" name="analytics">tertiary</nve-icon-button>
+    <nve-icon-button name="analytics"></nve-icon-button>
+    <nve-icon-button interaction="emphasize" name="analytics"></nve-icon-button>
+    <nve-icon-button interaction="destructive" name="analytics"></nve-icon-button>
+    <nve-icon-button interaction="ghost" name="analytics"></nve-icon-button>
     <nve-icon-button disabled name="analytics"></nve-icon-button>
+  `
+}
+
+export const Themes = {
+  render: () => html`
+    <div nve-theme="light">
+      <nve-icon-button name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="emphasize" name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="destructive" name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="ghost" name="analytics"></nve-icon-button>
+      <nve-icon-button disabled name="analytics"></nve-icon-button>
+    </div>
+    <div nve-theme="dark">
+      <nve-icon-button name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="emphasize" name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="destructive" name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="ghost" name="analytics"></nve-icon-button>
+      <nve-icon-button disabled name="analytics"></nve-icon-button>
+    </div>
   `
 }

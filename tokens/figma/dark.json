@@ -1,0 +1,510 @@
+{
+  "mle-dark-theme": {
+    "sys": {
+      "background-color": {
+        "layer": {
+          "canvas-00": {
+            "value": "#0b0c0f",
+            "type": "color",
+            "description": "(Canvas) Default page background, old #f4f5f6"
+          },
+          "container-01": {
+            "value": "#16181d",
+            "type": "color",
+            "description": "(Card) \t      Container color on background;"
+          },
+          "dropdown-02": {
+            "value": "#23262f",
+            "type": "color",
+            "description": "\t      Container color on layer-01"
+          },
+          "popup-03": {
+            "value": "#343847",
+            "type": "color",
+            "description": "Container color on/over layer-02 with even higher elevation"
+          }
+        },
+        "shell": {
+          "value": "#000000",
+          "type": "color",
+          "description": "(IDE)"
+        },
+        "inverse": {
+          "value": "#ffffff",
+          "type": "color",
+          "description": "    High contrast backgrounds;     High contrast elements"
+        },
+        "track": {
+          "type": "color",
+          "value": "#818996"
+        },
+        "scrollbar": {
+          "value": "#818996bf",
+          "type": "color"
+        },
+        "brand": {
+          "value": "#69b027",
+          "type": "color",
+          "description": "Feature background color"
+        }
+      },
+      "border-color": {
+        "focused": {
+          "value": "#0971f1",
+          "type": "color"
+        },
+        "emphasis": {
+          "value": "#e5e6e9",
+          "type": "color"
+        },
+        "default": {
+          "value": "#818996",
+          "type": "color"
+        },
+        "weak": {
+          "value": "#49515d",
+          "type": "color"
+        },
+        "inverse": {
+          "value": "#ffffff",
+          "type": "color",
+          "description": "#141416"
+        }
+      },
+      "accent-color": {
+        "primary": {
+          "type": "color",
+          "value": "#69b027"
+        },
+        "secondary": {
+          "value": "#0971f1",
+          "type": "color",
+          "description": "old - #205FDC"
+        },
+        "tertiary": {
+          "value": "#ffffff",
+          "type": "color"
+        }
+      },
+      "support-color": {
+        "info": {
+          "value": "#ffffff",
+          "type": "color"
+        },
+        "positive": {
+          "value": "#10983d",
+          "type": "color"
+        },
+        "negative": {
+          "value": "#e94a3f",
+          "type": "color"
+        },
+        "warning": {
+          "value": "#ffc700",
+          "type": "color"
+        },
+        "neutral": {
+          "value": "#818996",
+          "type": "color"
+        }
+      },
+      "text-color": {
+        "emphasis": {
+          "value": "#f6f7f9",
+          "type": "color",
+          "description": "Headers;hover text color for default. old - {ref.color.neutral.700}"
+        },
+        "default": {
+          "value": "#cbced4",
+          "type": "color",
+          "description": "Body copy; {ref.color.neutral.600} "
+        },
+        "weak": {
+          "value": "#818996",
+          "type": "color",
+          "description": "old - {ref.color.neutral.400}"
+        },
+        "on-color": {
+          "value": "#ffffff",
+          "type": "color",
+          "description": "Text on interactive colors;"
+        },
+        "static-black": {
+          "value": "#000000",
+          "type": "color"
+        },
+        "placeholder": {
+          "value": "#cbced499",
+          "type": "color",
+          "description": "color for placeholder text before input"
+        }
+      },
+      "interaction": {
+        "icon": {
+          "hover": {
+            "value": "#f6f7f9",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#81899680",
+            "type": "color"
+          },
+          "on-color-disabled": {
+            "value": "#ffffff80",
+            "type": "color"
+          }
+        },
+        "layer": {
+          "canvas-01": {
+            "hover": {
+              "value": "#1c1f26",
+              "type": "color"
+            },
+            "selected": {
+              "value": "#21242c",
+              "type": "color"
+            },
+            "selected-hover": {
+              "value": "#21242c",
+              "type": "color"
+            }
+          },
+          "container-02": {
+            "hover": {
+              "value": "#272b35",
+              "type": "color",
+              "description": "sys.interaction-color.layer.layer-01-hover"
+            },
+            "selected": {
+              "value": "#2f3541",
+              "type": "color",
+              "description": "sys.interaction-color.layer.layer-01-hover"
+            },
+            "selected-hover": {
+              "value": "#2b303b",
+              "type": "color",
+              "description": "sys.interaction-color.layer.layer-01-hover"
+            }
+          },
+          "popup-03": {
+            "hover": {
+              "value": " hsla(225, 15%, 11%, 1)",
+              "type": "color"
+            },
+            "selected": {
+              "value": " hsla(225, 15%, 6%, 1)",
+              "type": "color"
+            },
+            "selected-hover": {
+              "value": " hsla(225, 15%, 4%, 1)",
+              "type": "color"
+            }
+          }
+        },
+        "border": {
+          "hover": {
+            "value": "#ffffff",
+            "type": "color"
+          },
+          "disabled": {
+            "value": "#e5e6e940",
+            "type": "color"
+          },
+          "active": {
+            "value": "#ffffff",
+            "type": "color"
+          }
+        },
+        "button": {
+          "destructive": {
+            "hover": {
+              "value": "{ref.color.red-carmine.600}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{ref.color.red-carmine.500}",
+              "type": "color"
+            }
+          },
+          "emphasized": {
+            "hover": {
+              "value": "{ref.color.brand-green.600}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{ref.color.brand-green.500}",
+              "type": "color"
+            }
+          },
+          "default-00": {
+            "hover": {
+              "value": "{ref.color.gray-zinc.650}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{ref.color.gray-zinc.750}",
+              "type": "color"
+            }
+          },
+          "default-01": {
+            "hover": {
+              "value": "{ref.color.gray-zinc.600}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{ref.color.gray-zinc.750}",
+              "type": "color"
+            }
+          },
+          "default-02": {
+            "hover": {
+              "value": "{ref.color.gray-zinc.600}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{ref.color.gray-zinc.750}",
+              "type": "color"
+            }
+          },
+          "default-03": {
+            "hover": {
+              "value": "{ref.color.gray-zinc.500}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{ref.color.gray-zinc.750}",
+              "type": "color"
+            }
+          },
+          "disabled": {
+            "onbase-00": {
+              "value": "{ref.color.gray-zinc.800}",
+              "type": "color"
+            },
+            "onbase-01": {
+              "value": "{ref.color.gray-zinc.800}",
+              "type": "color"
+            },
+            "onbase-02": {
+              "value": "{ref.color.gray-zinc.800}",
+              "type": "color"
+            },
+            "onbase-03": {
+              "value": "{ref.color.gray-zinc.700}",
+              "type": "color"
+            }
+          }
+        },
+        "highlight": {
+          "selected": {
+            "emphasis": {
+              "value": "#0971f1",
+              "type": "color"
+            },
+            "weak": {
+              "value": "#ffffff",
+              "type": "color"
+            }
+          }
+        },
+        "field": {
+          "disabled": {
+            "value": "#23262f80",
+            "type": "color"
+          },
+          "hover": {
+            "value": " hsla(222, 14%, 81%, 1)",
+            "type": "color"
+          }
+        },
+        "text": {
+          "disabled": {
+            "value": "#cbced440",
+            "type": "color"
+          },
+          "hover": {
+            "value": "#f6f7f9",
+            "type": "color"
+          },
+          "disabled-inverse": {
+            "value": "#2e364140",
+            "type": "color"
+          }
+        },
+        "link": {
+          "hover": {
+            "value": "#0865d8",
+            "type": "color"
+          },
+          "visited": {
+            "value": "#9757d7",
+            "type": "color"
+          },
+          "inverse": {
+            "value": "#CBCED4",
+            "type": "color",
+            "description": "links on background-inverse backgrounds"
+          },
+          "disabled": {
+            "value": "CBCED425",
+            "type": "color"
+          }
+        }
+      },
+      "icon-color": {
+        "default": {
+          "value": "#818996",
+          "type": "color"
+        },
+        "on-color": {
+          "value": "#ffffff",
+          "type": "color",
+          "description": "    Icons on interactive or colored bgs; "
+        }
+      },
+      "button-background-color": {
+        "emphasized": {
+          "default": {
+            "value": "{ref.color.brand-green.500}",
+            "type": "color"
+          }
+        },
+        "default-00": {
+          "default": {
+            "value": "{ref.color.gray-zinc.750}",
+            "type": "color"
+          }
+        },
+        "default-01": {
+          "default": {
+            "value": "{ref.color.gray-zinc.750}",
+            "type": "color"
+          }
+        },
+        "default-02": {
+          "default": {
+            "value": "{ref.color.gray-zinc.650}",
+            "type": "color"
+          }
+        },
+        "default-03": {
+          "default": {
+            "value": "{ref.color.gray-zinc.600}",
+            "type": "color",
+            "description": "change to ref value"
+          }
+        },
+        "toggle": {
+          "off": {
+            "value": "#818996",
+            "type": "color"
+          }
+        },
+        "destructive": {
+          "default": {
+            "value": "{ref.color.red-carmine.500}",
+            "type": "color"
+          }
+        }
+      },
+      "misc-color": {
+        "coachmark": {
+          "background-color": {
+            "1": {
+              "value": "#69b027",
+              "type": "color"
+            },
+            "2": {
+              "value": "#69b02740",
+              "type": "color"
+            },
+            "3": {
+              "value": "#69b02726",
+              "type": "color"
+            }
+          }
+        },
+        "text-badge": {
+          "background-color": {
+            "2": {
+              "value": "#9757d7",
+              "type": "color"
+            }
+          }
+        },
+        "tag": {
+          "background-color": {
+            "1": {
+              "value": "#58a6ff",
+              "type": "color"
+            }
+          }
+        }
+      },
+      "field-color": {
+        "00": {
+          "value": "#16181d",
+          "type": "color",
+          "description": "A field is considered a layer on top of the background it is placed on, for example a field placed on a $layer-00 aka base background will use $field-00"
+        },
+        "01": {
+          "value": "#23262f",
+          "type": "color",
+          "description": "A field is considered a layer on top of the background it is placed on, for example a field placed on a $layer-01 aka a card background will use $field-01"
+        },
+        "02": {
+          "value": "#343847",
+          "type": "color",
+          "description": "A field is considered a layer on top of the background it is placed on, for example a field placed on a $layer-02 aka an elevated card background will use $field-02"
+        },
+        "03": {
+          "value": "#414858",
+          "type": "color",
+          "description": "A field is considered a layer on top of the background it is placed on, for example a field placed on a $layer-03 aka an elevated card background will use $field-03"
+        },
+        "inverse": {
+          "value": "#ffffff",
+          "type": "color"
+        }
+      },
+      "status-color": {
+        "finished": {
+          "text": {
+            "value": "#10983d",
+            "type": "color"
+          },
+          "background": {
+            "value": "#10983d33",
+            "type": "color"
+          }
+        },
+        "failed": {
+          "text": {
+            "value": "#e94a3f",
+            "type": "color"
+          },
+          "": {
+            "value": "#e94a3f40",
+            "type": "color"
+          }
+        }
+      },
+      "utilities-color": {
+        "horizontal-overflow": {
+          "right": {
+            "value": "linear-gradient(90deg, #000000a6 0%, #00000000 100%)",
+            "type": "color"
+          },
+          "left": {
+            "value": "linear-gradient(-90deg, #000000a6 0%, #00000000 100%)",
+            "type": "color"
+          }
+        },
+        "overlay": {
+          "value": "#00000080",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

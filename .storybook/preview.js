@@ -2,9 +2,7 @@ import { setCustomElementsManifest } from '@storybook/web-components';
 import { themes } from '@storybook/theming';
 import { excludePrivateFields } from '@elements/elements/internal';
 import customElements from '@elements/elements/custom-elements.json';
-import '@elements/elements/css/fonts.css';
-import '@elements/elements/css/variables.css';
-import '@elements/elements/css/theme.css';
+import styles from '@elements/elements/index.css';
 
 setCustomElementsManifest(excludePrivateFields(customElements));
 
@@ -52,10 +50,55 @@ export const parameters = {
         'About',
         [
           'Getting Started',
-          'Changelog',
+          'Changelog'
+        ],
+        'Foundation',
+        [
+          'Tokens',
+          'Themes',
+          'Typography',
+          'Layout',
+          'Objects',
+          'Interactions',
+          'Status',
+          'Examples'
         ],
         'Elements'
       ]
     }
   }
 };
+
+export const globalTypes = {
+  theme: {
+    name: 'Themes',
+    description: 'Themes',
+    defaultValue: 'dark',
+    toolbar: {
+      icon: 'paintbrush',
+      showName: true,
+      items: [
+        { value: '', title: 'Light' },
+        { value: 'dark', title: 'Dark' },
+        { value: 'high-contrast', title: 'High Contrast' },
+      ],
+    },
+  },
+}
+
+const styleSheet = document.createElement('style')
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
+window.parent.document.head.appendChild(styleSheet);
+updateTheme('dark');
+
+function updateTheme(themes) {
+  document.querySelector('html').setAttribute('nve-theme', themes);
+  window.parent.document.querySelector('html').setAttribute('nve-theme', themes);
+  window.localStorage.setItem('nve-theme', themes);
+}
+
+export const decorators = [(story, { globals }) => {
+  updateTheme(globals.theme ? globals.theme : '');
+  return story();
+}];

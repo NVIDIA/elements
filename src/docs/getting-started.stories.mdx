@@ -6,9 +6,19 @@
 
 ## Installation
 
+To install the Maglev UI Elements, run the following command:
+
 ```bash
 pnpm install @elements/elements
 ```
+
+Once installed import the global CSS into your project.
+
+```css
+@import '@elements/elements/index.css';
+```
+
+Elements can be imported/loaded via JavaScript imports and made available to use in your HTML templates.
 
 ```javascript
 import '@elements/elements/button/define.js';
@@ -17,3 +27,5 @@ import '@elements/elements/button/define.js';
 ```html
 <nve-button>hello there</nve-button>
 ```
+
+<nve-button interaction="emphasize">hello there</nve-button>
