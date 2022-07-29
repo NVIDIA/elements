@@ -1,16 +1,43 @@
 :host {
-  /* Base CSS */
+  --color: var(--nve-sys-text-default-color);
+  --width: var(--nve-ref-size-600);
+  --height: var(--nve-ref-size-600);
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--nve-color-neutral-500);
+}
 
-  /* Variants */
-  &([variant='inherit']) {
-    color: currentColor;
-  }
+[internal-host] {
+  color: var(--color);
+  width: var(--width);
+  height: var(--height);
+  place-self: center;
+}
 
-  &([variant='lighter']) {
-    color: var(--nve-color-neutral-300);
-  }
+svg {
+  width: var(--width);
+  height: var(--height);
+}
+
+:host([variant='inherit']) {
+  --color: currentColor;
+}
+
+:host([status='neutral']),
+:host([variant='lighter']) {
+  --color: var(--nve-sys-status-neutral-background);
+}
+
+:host([status='success']) {
+  --color: var(--nve-sys-status-success-background);
+}
+
+:host([status='warning']) {
+  --color: var(--nve-sys-status-warning-background);
+}
+
+:host([status='danger']) {
+  --color: var(--nve-sys-status-danger-background);
+}
+
+:host([status='info']) {
+  --color: var(--nve-sys-status-info-background);
 }

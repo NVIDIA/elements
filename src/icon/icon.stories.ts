@@ -47,7 +47,6 @@ export const Default = {
       name="${args.name}"
       variant="${args.variant}"
       color="${args.color}"
-      style="font-size: 4em"
     ></nve-icon>`,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'analytics' }
@@ -57,7 +56,7 @@ export const LightIcon = { ...Default, args: { name: 'analytics', variant: IconV
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map((iconName) => html`<nve-icon title="${iconName}" .name="${iconName}" .variant="${args.variant}" style="font-size: 4em"></nve-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<nve-icon title="${iconName}" .name="${iconName}" .variant="${args.variant}"></nve-icon>\n`
     )}
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
@@ -69,5 +68,34 @@ export const variants = {
     <nve-icon name="analytics" style="font-size: 2em"></nve-icon>
     <nve-icon name="analytics" variant="inherit" style="font-size: 2em"></nve-icon>
     <nve-icon name="analytics" variant="lighter" style="font-size: 2em"></nve-icon>
+  `
+}
+
+export const statuses = {
+  render: () => html`
+    <nve-icon name="analytics"></nve-icon>
+    <nve-icon name="analytics" status="info"></nve-icon>
+    <nve-icon name="analytics" status="success"></nve-icon>
+    <nve-icon name="analytics" status="warning"></nve-icon>
+    <nve-icon name="analytics" status="danger"></nve-icon>
+  `
+}
+
+export const Themes = {
+  render: () => html`
+    <div nve-theme="light">
+      <nve-icon name="analytics"></nve-icon>
+      <nve-icon name="analytics" status="info"></nve-icon>
+      <nve-icon name="analytics" status="success"></nve-icon>
+      <nve-icon name="analytics" status="warning"></nve-icon>
+      <nve-icon name="analytics" status="danger"></nve-icon>
+    </div>
+    <div nve-theme="dark">
+      <nve-icon name="analytics"></nve-icon>
+      <nve-icon name="analytics" status="info"></nve-icon>
+      <nve-icon name="analytics" status="success"></nve-icon>
+      <nve-icon name="analytics" status="warning"></nve-icon>
+      <nve-icon name="analytics" status="danger"></nve-icon>
+    </div>
   `
 }

@@ -1,20 +1,11 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { Button } from '@elements/elements/button';
-// import { withDesign } from 'storybook-addon-designs';
 
-import {
-  ComponentStatuses,
-  generateDefaultStoryParameters,
-  generateFigmaEmbed,
-  getValuesFromEnum,
-  spread
-} from '@elements/elements/internal';
+import { ComponentStatuses, generateDefaultStoryParameters, InlinePosition, spread } from '@elements/elements/internal';
 import { IconNames, ICON_NAMES } from '@elements/elements/icon';
-import { ButtonVariants, IconSlotPlacements } from '@elements/elements/button';
 import '@elements/elements/button/define.js';
 
-const figmaEmbedNodeId = '163%3A25';
 const reviewDocBookmark = 'id.l12irnk25slx';
 const status: ComponentStatuses = 'beta';
 const description = `
@@ -24,7 +15,6 @@ const description = `
 export default {
   title: 'Elements/Button/Examples',
   component: 'nve-button',
-  // decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description, [
     'mouseover nve-button',
     'mouseout nve-button',
@@ -32,38 +22,36 @@ export default {
     'click nve-button'
   ]),
   argTypes: {
-    variant: {
+    interaction: {
       control: 'inline-radio',
-      options: getValuesFromEnum(ButtonVariants)
+      options: ['emphasize', 'destructive', 'ghost']
     }
   }
 };
 
 type ArgTypes = Button & {
   iconName?: IconNames;
-  iconSlotPlacement: IconSlotPlacements;
+  iconSlotPlacement: InlinePosition;
 }
 
 export const Default = {
   render: (args: ArgTypes) => html`<nve-button ${spread(args)}>${args.textContent}</nve-button>`,
-  args: { textContent: 'Primary', disabled: false, variant: 'primary' }
+  args: { textContent: 'Default', disabled: false }
 };
 
-export const Secondary = { ...Default, args: { textContent: 'Secondary', variant: 'secondary' } };
-export const Tertiary = { ...Default, args: { textContent: 'Tertiary Button', variant: 'tertiary' } };
-export const Destructive = { ...Default, args: { textContent: 'Destructive', variant: 'destructive' } };
-export const Disabled = { ...Default, args: { textContent: 'Disabled Button', disabled: true } };
+export const Emphasize = { ...Default, args: { textContent: 'Emphasize', interaction: 'emphasize' } };
+export const Ghost = { ...Default, args: { textContent: 'Ghost', interaction: 'ghost' } };
+export const Destructive = { ...Default, args: { textContent: 'Destructive', interaction: 'destructive' } };
+export const Disabled = { ...Default, args: { textContent: 'Disabled', disabled: true } };
 
 export const ButtonWithIcon = {
   render: (args: ArgTypes) => html`
-  <nve-button data-testid="button" ${spread(args)}>
-    ${when(args.iconSlotPlacement === IconSlotPlacements.Leading,() => html`<nve-icon name="${args.iconName}"></nve-icon>`)}
-
+  <nve-button ${spread(args)}>
+    ${when(args.iconSlotPlacement === 'start',() => html`<nve-icon name="${args.iconName}"></nve-icon>`)}
       ${args.textContent}
-
-    ${when(args.iconSlotPlacement === IconSlotPlacements.Trailing,() => html`<nve-icon name="${args.iconName}"></nve-icon>`)}
+    ${when(args.iconSlotPlacement === 'end',() => html`<nve-icon name="${args.iconName}"></nve-icon>`)}
   </nve-button>`,
-  args: { textContent: 'Button Icon', disabled: false, variant: 'primary', iconName: 'navigate-to', iconSlotPlacement: 'trailing' },
+  args: { textContent: 'Button Icon', disabled: false, interaction: 'emphasize', iconName: 'navigate-to', iconSlotPlacement: 'end' },
   argTypes: {
     iconName: {
       control: 'select',
@@ -71,17 +59,46 @@ export const ButtonWithIcon = {
     },
     iconSlotPlacement: {
       control: 'inline-radio',
-      options: getValuesFromEnum(IconSlotPlacements)
+      options: ['start', 'end']
     },
   }
 };
 
 export const Interactions = {
   render: () => html`
-    <nve-button variant="primary">primary</nve-button>
-    <nve-button variant="secondary">secondary</nve-button>
-    <nve-button variant="destructive">destructive</nve-button>
-    <nve-button variant="tertiary">tertiary</nve-button>
+    <nve-button>default</nve-button>
+    <nve-button interaction="emphasize">emphasize</nve-button>
+    <nve-button interaction="destructive">destructive</nve-button>
+    <nve-button interaction="ghost">ghost</nve-button>
     <nve-button disabled>disabled</nve-button>
+  `
+}
+
+export const Link = {
+  render: () => html`
+    <nve-button><a href="#">default</a></nve-button>
+    <nve-button interaction="emphasize"><a href="#">emphasize</a></nve-button>
+    <nve-button interaction="destructive"><a href="#">destructive</a></nve-button>
+    <nve-button interaction="ghost"><a href="#">ghost</a></nve-button>
+    <nve-button disabled><a href="#">disabled</a></nve-button>
+  `
+}
+
+export const Themes = {
+  render: () => html`
+    <div nve-theme="light">
+      <nve-button>default</nve-button>
+      <nve-button interaction="emphasize">emphasize</nve-button>
+      <nve-button interaction="destructive">destructive</nve-button>
+      <nve-button interaction="ghost">ghost</nve-button>
+      <nve-button disabled>disabled</nve-button>
+    </div>
+    <div nve-theme="dark">
+      <nve-button>default</nve-button>
+      <nve-button interaction="emphasize">emphasize</nve-button>
+      <nve-button interaction="destructive">destructive</nve-button>
+      <nve-button interaction="ghost">ghost</nve-button>
+      <nve-button disabled>disabled</nve-button>
+    </div>
   `
 }

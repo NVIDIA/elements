@@ -1,28 +1,29 @@
 :host {
-  display: block;
+  --background: var(--nve-sys-layer-container-background);
+  --color: var(--nve-sys-layer-canvas-color);
+  --border-radius: var(--nve-ref-border-radius-lg);
+  --box-shadow: var(--nve-ref-shadow-100);
+  --padding: var(--nve-ref-size-400) var(--nve-ref-size-700) var(--nve-ref-size-700);
 }
 
 [internal-host] {
-  /* Base CSS */
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  background: var(--background);
+  color: var(--color);
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: start;
   overflow: hidden;
+}
 
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border-radius: var(--nve-radius-lg);
-  box-shadow: var(--shadow);
-
-
-  /* Slots */
-  main {
-    padding: var(--nve-spacing-4) var(--nve-spacing-7) var(--nve-spacing-7);
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-  }
+main {
+  padding: var(--padding);
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
 }
