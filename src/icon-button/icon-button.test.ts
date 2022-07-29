@@ -21,11 +21,11 @@ describe('mlv-icon-button', () => {
     expect(customElements.get('mlv-icon-button')).toBeDefined();
   });
 
-  it('should have a default variant of "primary"', () => {
-    expect(element.variant).eq('primary');
+  it('should have a default interaction unset', () => {
+    expect(element.interaction).eq(undefined);
   });
 
-  it('should update "name" on chile mlv-icon when "name" is updated on parent', async () => {
+  it('should update "name" on child mlv-icon when "name" is updated on parent', async () => {
     expect(element.name).eq(undefined);
     element.name = 'test';
     await elementIsStable(element);

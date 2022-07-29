@@ -1,16 +1,43 @@
 :host {
-  /* Base CSS */
+  --color: var(--mlv-sys-text-default-color);
+  --width: var(--mlv-ref-size-600);
+  --height: var(--mlv-ref-size-600);
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--mlv-color-neutral-500);
+}
 
-  /* Variants */
-  &([variant='inherit']) {
-    color: currentColor;
-  }
+[internal-host] {
+  color: var(--color);
+  width: var(--width);
+  height: var(--height);
+  place-self: center;
+}
 
-  &([variant='lighter']) {
-    color: var(--mlv-color-neutral-300);
-  }
+svg {
+  width: var(--width);
+  height: var(--height);
+}
+
+:host([variant='inherit']) {
+  --color: currentColor;
+}
+
+:host([status='neutral']),
+:host([variant='lighter']) {
+  --color: var(--mlv-sys-status-neutral-background);
+}
+
+:host([status='success']) {
+  --color: var(--mlv-sys-status-success-background);
+}
+
+:host([status='warning']) {
+  --color: var(--mlv-sys-status-warning-background);
+}
+
+:host([status='danger']) {
+  --color: var(--mlv-sys-status-danger-background);
+}
+
+:host([status='info']) {
+  --color: var(--mlv-sys-status-info-background);
 }

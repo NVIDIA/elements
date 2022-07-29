@@ -2,3 +2,75 @@
   // Fix: fn() is not defined, see: https://github.com/storybookjs/storybook/issues/15391
   window.global = window;
 </script>
+<style>
+  .sbdocs.sbdocs-preview,
+  .sbdocs.sbdocs-wrapper,
+  body {
+    background: var(--mlv-sys-layer-canvas-background) !important;
+    color: var(--mlv-sys-layer-canvas-color) !important;
+    font-family: var(--mlv-ref-font-family-inter) !important;
+    font-weight: var(--mlv-ref-font-weight-regular) !important;
+    box-shadow: none;
+    border: 0;
+  }
+
+  .sbdocs.sbdocs-preview {
+    background: var(--mlv-sys-layer-container-background) !important;
+    padding: var(--mlv-ref-size-400) !important;
+  }
+
+  .os-host + .docs-story {
+    padding: 48px 0;
+  }
+
+  .docs-story > div:first-child {
+    padding: 12px !important;
+  }
+
+  .docs-story [mlv-theme] {
+    padding: 12px;
+  }
+
+  .sbdocs-preview {
+    margin-bottom: 64px !important;
+  }
+
+  .sbdocs-title, .sbdocs-h1, .sbdocs-h2, .sbdocs-h3, .sbdocs-h4, .sbdocs-h5, .sbdocs-h6, .sbdocs-p, .sbdocs-li {
+    font-family: var(--mlv-ref-font-family-inter) !important;
+    font-weight: var(--mlv-ref-font-weight-regular) !important;
+    color: var(--mlv-sys-layer-canvas-color) !important;
+  }
+
+  .sbdocs-h1 {
+    margin-bottom: 24px !important;
+  }
+
+  .sbdocs-h2 {
+    border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-default) !important;
+  }
+
+  .sbdocs .sbdocs-pre {
+    margin-top: 4px !important;
+  }
+
+  .sbdocs code {
+    color: var(--mlv-sys-layer-canvas-color) !important;
+    background: var(--mlv-sys-layer-container-background) !important;
+    border: 0 !important;
+  }
+
+  .docblock-code-toggle {
+    background: var(--mlv-sys-interaction-default-background) !important;
+    color: var(--mlv-sys-interaction-default-color) !important;
+    border-radius: var(--mlv-ref-border-radius-lg) !important;
+    outline-offset: -4px !important;
+  }
+
+  .css-11xgcgt {
+    background: transparent !important;
+  }
+
+  .docs-story .innerZoomElementWrapper > div {
+    border: 0 !important;
+  }
+</style>

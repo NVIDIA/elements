@@ -1,9 +1,10 @@
-[internal-host] {
-  border-radius: var(--mlv-radius-full);
-  font-size: var(--mlv-font-size-300);
-  padding: var(--mlv-spacing-half);
+:host {
+  --border-radius: var(--mlv-ref-border-radius-full);
+  --padding: var(--mlv-ref-space-xxs);
+  --line-height: 0;
 }
 
 mlv-icon {
-  color: inherit;
+  --color: var(--_icon-color);
+  pointer-events: none;
 }

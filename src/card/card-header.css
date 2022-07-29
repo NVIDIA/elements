@@ -1,10 +1,13 @@
 :host {
-  display: block;
+  --padding: var(--mlv-ref-size-700) var(--mlv-ref-size-700) var(--mlv-ref-size-400);
+  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
+  --line-height: 1em;
 }
 
 header[internal-host] {
-  padding: var(--mlv-spacing-7) var(--mlv-spacing-7) var(--mlv-spacing-4);
-  border-bottom: 2px solid var(--divider-color);
+  padding: var(--padding);
+  border-bottom: var(--border-bottom);
+  color: var(--color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,16 +15,13 @@ header[internal-host] {
 
   ::slotted([slot="title"]) {
     margin: 0;
-    font-size: var(--mlv-font-size-275);
-    line-height: var(--mlv-font-size-400);
-    font-weight: var(--mlv-font-weight-bold);
+    font-size: var(--mlv-ref-font-size-400);
+    font-weight: var(--mlv-ref-font-weight-bold);
   }
 
   ::slotted([slot="subtitle"]) {
     margin: 0;
-    color: var(--mlv-color-neutral-500);
-    font-size: var(--mlv-font-size-100);
-    line-height: var(--mlv-font-size-400);
-    font-weight: var(--mlv-font-weight-normal);
+    font-size: var(--mlv-ref-font-size-200);
+    font-weight: var(--mlv-ref-font-weight-normal);
   }
 }

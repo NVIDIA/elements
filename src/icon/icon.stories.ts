@@ -47,7 +47,6 @@ export const Default = {
       name="${args.name}"
       variant="${args.variant}"
       color="${args.color}"
-      style="font-size: 4em"
     ></mlv-icon>`,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'analytics' }
@@ -57,7 +56,7 @@ export const LightIcon = { ...Default, args: { name: 'analytics', variant: IconV
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map((iconName) => html`<mlv-icon title="${iconName}" .name="${iconName}" .variant="${args.variant}" style="font-size: 4em"></mlv-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<mlv-icon title="${iconName}" .name="${iconName}" .variant="${args.variant}"></mlv-icon>\n`
     )}
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
@@ -69,5 +68,34 @@ export const variants = {
     <mlv-icon name="analytics" style="font-size: 2em"></mlv-icon>
     <mlv-icon name="analytics" variant="inherit" style="font-size: 2em"></mlv-icon>
     <mlv-icon name="analytics" variant="lighter" style="font-size: 2em"></mlv-icon>
+  `
+}
+
+export const statuses = {
+  render: () => html`
+    <mlv-icon name="analytics"></mlv-icon>
+    <mlv-icon name="analytics" status="info"></mlv-icon>
+    <mlv-icon name="analytics" status="success"></mlv-icon>
+    <mlv-icon name="analytics" status="warning"></mlv-icon>
+    <mlv-icon name="analytics" status="danger"></mlv-icon>
+  `
+}
+
+export const Themes = {
+  render: () => html`
+    <div mlv-theme="light">
+      <mlv-icon name="analytics"></mlv-icon>
+      <mlv-icon name="analytics" status="info"></mlv-icon>
+      <mlv-icon name="analytics" status="success"></mlv-icon>
+      <mlv-icon name="analytics" status="warning"></mlv-icon>
+      <mlv-icon name="analytics" status="danger"></mlv-icon>
+    </div>
+    <div mlv-theme="dark">
+      <mlv-icon name="analytics"></mlv-icon>
+      <mlv-icon name="analytics" status="info"></mlv-icon>
+      <mlv-icon name="analytics" status="success"></mlv-icon>
+      <mlv-icon name="analytics" status="warning"></mlv-icon>
+      <mlv-icon name="analytics" status="danger"></mlv-icon>
+    </div>
   `
 }

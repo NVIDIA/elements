@@ -1,13 +1,12 @@
 const path = require('path');
-const CssHmr = require('rollup-plugin-css-hmr');
-
-const isBazel = !!process.env['BAZEL_WORKSPACE'];
 
 module.exports = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  // stories: [
-  //   { directory: '../src', files: '*.stories.ts', titlePrefix: 'foo' }
-  // ], // this feature will auto generate titles enabled by CSF3.0 but latest storybook-builder-vite 0.1.13 doesn't support waiting for 2.x
+  stories: [
+    '../src/**/*.stories.mdx',
+    '../src/**/*.stories.ts',
+    '../tokens/**/*.stories.mdx',
+    '../tokens/**/*.stories.ts'
+  ],
   addons: [
     'storybook-addon-designs',
     '@storybook/addon-essentials',
@@ -22,17 +21,10 @@ module.exports = {
   },
   async viteFinal(config) {
     config.logLevel = 'error';
-    config.resolve.alias = { '@elements/elements': path.resolve(__dirname, '../dist') };
 
-    if (isBazel) {
-      config.resolve.alias = {
-        '@elements/elements/css': path.resolve(__dirname, '../public/css'),
-        '@elements/elements/custom-elements.json': path.resolve(__dirname, '../custom-elements.json'),
-        '@elements/elements': path.resolve(__dirname, '../src'),
-      };
+    if (!process.env['BAZEL_WORKSPACE']) {
+      config.resolve.alias = { '@elements/elements': path.resolve(__dirname, '../dist') };
     }
-
-    config.plugins = [...config.plugins, CssHmr('.ts')]; // triggers hot reload when modifying .css files
 
     // Workaround: https://github.com/storybookjs/storybook/issues/10887#issuecomment-901109891
     config.resolve.dedupe = ['@storybook/client-api'];

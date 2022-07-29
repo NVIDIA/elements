@@ -1,0 +1,308 @@
+{
+  "ref": {
+    "border": {
+      "color": {
+        "default": {
+          "value": "CanvasText",
+          "type": "color"
+        },
+        "emphasis": {
+          "value": "CanvasText",
+          "type": "color"
+        },
+        "muted": {
+          "value": "CanvasText",
+          "type": "color"
+        }
+      }
+    },
+    "shadow": {
+      "100": {
+        "value": "0 0 0 2px CanvasText",
+        "type": "boxShadow"
+      },
+      "200": {
+        "value": "0 0 0 2px CanvasText",
+        "type": "boxShadow"
+      },
+      "300": {
+        "value": "0 0 0 2px CanvasText",
+        "type": "boxShadow"
+      }
+    }
+  },
+  "sys": {
+    "text": {
+      "default": {
+        "color": {
+          "value": "CanvasText",
+          "type": "color"
+        }
+      },
+      "muted": {
+        "color": {
+          "value": "GrayText",
+          "type": "color"
+        }
+      },
+      "emphasis": {
+        "color": {
+          "value": "CanvasText",
+          "type": "color"
+        }
+      },
+      "placeholder": {
+        "color": {
+          "value": "GrayText",
+          "type": "color"
+        }
+      },
+      "link": {
+        "color": {
+          "value": "LinkText",
+          "type": "color"
+        },
+        "hover": {
+          "color": {
+            "value": "ActiveText",
+            "type": "color"
+          }
+        },
+        "visited": {
+          "color": {
+            "value": "VisitedText",
+            "type": "color"
+          }
+        },
+        "disabled": {
+          "color": {
+            "value": "GrayText",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "status": {
+      "info": {
+        "background": {
+          "value": "ButtonText",
+          "type": "color"
+        },
+        "color": {
+          "value": "ButtonFace",
+          "type": "color"
+        }
+      },
+      "success": {
+        "background": {
+          "value": "ButtonText",
+          "type": "color"
+        },
+        "color": {
+          "value": "ButtonFace",
+          "type": "color"
+        }
+      },
+      "danger": {
+        "background": {
+          "value": "ButtonText",
+          "type": "color"
+        },
+        "color": {
+          "value": "ButtonFace",
+          "type": "color"
+        }
+      },
+      "warning": {
+        "background": {
+          "value": "ButtonText",
+          "type": "color"
+        },
+        "color": {
+          "value": "ButtonFace",
+          "type": "color"
+        }
+      },
+      "neutral": {
+        "background": {
+          "value": "ButtonText",
+          "type": "color"
+        },
+        "color": {
+          "value": "ButtonFace",
+          "type": "color"
+        }
+      }
+    },
+    "interaction": {
+      "default": {
+        "background": {
+          "value": "ButtonFace",
+          "type": "color"
+        },
+        "color": {
+          "value": "ButtonText",
+          "type": "color"
+        },
+        "hover": {
+          "background": {
+            "value": "Highlight",
+            "type": "color"
+          },
+          "color": {
+            "value": "HighlightText",
+            "type": "color"
+          }
+        },
+        "active": {
+          "background": {
+            "value": "Highlight",
+            "type": "color"
+          },
+          "color": {
+            "value": "ActiveText",
+            "type": "color"
+          }
+        },
+        "disabled": {
+          "background": {
+            "value": "Canvas",
+            "type": "color"
+          },
+          "color": {
+            "value": "GrayText",
+            "type": "color"
+          }
+        }
+      },
+      "emphasize": {
+        "background": {
+          "value": "ButtonFace",
+          "type": "color"
+        },
+        "color": {
+          "value": "ButtonText",
+          "type": "color"
+        },
+        "hover": {
+          "background": {
+            "value": "Highlight",
+            "type": "color"
+          },
+          "color": {
+            "value": "HighlightText",
+            "type": "color"
+          }
+        },
+        "active": {
+          "background": {
+            "value": "Highlight",
+            "type": "color"
+          },
+          "color": {
+            "value": "ActiveText",
+            "type": "color"
+          }
+        },
+        "disabled": {
+          "background": {
+            "value": "Canvas",
+            "type": "color"
+          },
+          "color": {
+            "value": "GrayText",
+            "type": "color"
+          }
+        }
+      },
+      "destructive": {
+        "background": {
+          "value": "ButtonFace",
+          "type": "color"
+        },
+        "color": {
+          "value": "ButtonText",
+          "type": "color"
+        },
+        "hover": {
+          "background": {
+            "value": "Highlight",
+            "type": "color"
+          },
+          "color": {
+            "value": "HighlightText",
+            "type": "color"
+          }
+        },
+        "active": {
+          "background": {
+            "value": "Highlight",
+            "type": "color"
+          },
+          "color": {
+            "value": "ActiveText",
+            "type": "color"
+          }
+        },
+        "disabled": {
+          "background": {
+            "value": "Canvas",
+            "type": "color"
+          },
+          "color": {
+            "value": "GrayText",
+            "type": "color"
+          }
+        }
+      },
+      "highlight": {
+        "background": {
+          "value": "Highlight",
+          "type": "color"
+        }
+      }
+    },
+    "layer": {
+      "canvas": {
+        "background": {
+          "value": "Canvas",
+          "type": "color"
+        },
+        "color": {
+          "value": "CanvasText",
+          "type": "color"
+        }
+      },
+      "container": {
+        "background": {
+          "value": "Canvas",
+          "type": "color"
+        },
+        "color": {
+          "value": "CanvasText",
+          "type": "color"
+        }
+      },
+      "overlay": {
+        "background": {
+          "value": "Canvas",
+          "type": "color"
+        },
+        "color": {
+          "value": "Canvas",
+          "type": "color"
+        }
+      },
+      "popup": {
+        "background": {
+          "value": "Canvas",
+          "type": "color"
+        },
+        "color": {
+          "value": "CanvasText",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

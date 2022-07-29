@@ -46,36 +46,38 @@ export const Default = {
       }
     </style>
 
-    <mlv-card>
-      ${when(
-        args.showHeader,
-        () => html`
-        <mlv-card-header>
-          <div slot="title">Title</div>
-          <div slot="subtitle">Sub Title</div>
+    <div mlv-theme>
+      <mlv-card>
+        ${when(
+          args.showHeader,
+          () => html`
+          <mlv-card-header>
+            <div slot="title">Title</div>
+            <div slot="subtitle">Sub Title</div>
 
 
-          ${when(
-            args.showAction,
-            () => html`
-              <mlv-icon-button slot="header-action" name="additional-actions" variant="tertiary"></mlv-icon-button>
-            `)}
-        </mlv-card-header>
-        `
-      )}
+            ${when(
+              args.showAction,
+              () => html`
+                <mlv-icon-button slot="header-action" name="additional-actions" interaction="ghost"></mlv-icon-button>
+              `)}
+          </mlv-card-header>
+          `
+        )}
 
-      ${args.content}
+        ${args.content}
 
-      ${when(
-        args.showFooter,
-        () => html`
-        <mlv-card-footer>
-          Proceed with Action
-          <mlv-button icon="navigate-to">Proceed</mlv-button>
-        </mlv-card-footer>
-        `
-      )}
-    </mlv-card>
+        ${when(
+          args.showFooter,
+          () => html`
+          <mlv-card-footer>
+            Proceed with Action
+            <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
+          </mlv-card-footer>
+          `
+        )}
+      </mlv-card>
+    </div>
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { width: 300, height: 150, content: 'Card Content' }
@@ -103,3 +105,35 @@ export const CardWithHeaderAndFooter = {
     height: 300
   }
 };
+
+
+export const Themes = {
+  render: () => html`
+    <div mlv-theme="light">
+      <mlv-card style="width: 400px; height: 300px;">
+        <mlv-card-header>
+          <div slot="title">Title</div>
+          <div slot="subtitle">Sub Title</div>
+        </mlv-card-header>
+        <p>Card Content</p>
+        <mlv-card-footer>
+          Proceed with Action
+          <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
+        </mlv-card-footer>
+      </mlv-card>
+    </div>
+    <div mlv-theme="dark">
+      <mlv-card style="width: 400px; height: 300px;">
+        <mlv-card-header>
+          <div slot="title">Title</div>
+          <div slot="subtitle">Sub Title</div>
+        </mlv-card-header>
+        <p>Card Content</p>
+        <mlv-card-footer>
+          Proceed with Action
+          <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
+        </mlv-card-footer>
+      </mlv-card>
+    </div>
+  `
+}

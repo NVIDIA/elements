@@ -1,0 +1,5 @@
+[mlv-theme] {
+  background: var(--mlv-sys-layer-canvas-background) !important;
+  color: var(--mlv-sys-layer-canvas-color) !important;
+  font-family: var(--mlv-ref-font-family-inter) !important;
+}

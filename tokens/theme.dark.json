@@ -1,0 +1,202 @@
+{
+  "ref": {
+    "border": {
+      "color": {
+        "default": {
+          "value": "{ref.color.gray-stone.500}",
+          "type": "color"
+        },
+        "emphasis": {
+          "value": "{ref.color.gray-stone.200}",
+          "type": "color"
+        },
+        "muted": {
+          "value": "{ref.color.gray-stone.800}",
+          "type": "color"
+        },
+        "inverse": {
+          "value": "{ref.color.white}",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "sys": {
+    "text": {
+      "default": {
+        "color": {
+          "value": "{ref.color.gray-stone.200}",
+          "type": "color"
+        }
+      },
+      "muted": {
+        "color": {
+          "value": "{ref.color.gray-stone.500}",
+          "type": "color"
+        }
+      },
+      "emphasis": {
+        "color": {
+          "value": "{ref.color.gray-stone.100}",
+          "type": "color"
+        }
+      },
+      "placeholder": {
+        "color": {
+          "value": "{ref.color.gray-zinc.500}",
+          "type": "color"
+        }
+      },
+      "link": {
+        "color": {
+          "value": "{ref.color.gray-stone.300}",
+          "type": "color"
+        }
+      }
+    },
+    "status": {
+      "info": {
+        "background": {
+          "value": "{ref.color.white}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.black.color}",
+          "type": "color"
+        }
+      }
+    },
+    "accent": {
+      "tertiary": {
+        "background": {
+          "value": "{ref.color.white}",
+          "type": "color"
+        }
+      }
+    },
+    "interaction": {
+      "default": {
+        "background": {
+          "value": "{ref.color.gray-zinc.650}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{ref.color.white}",
+          "type": "color"
+        },
+        "hover": {
+          "background": {
+            "value": "{ref.color.gray-zinc.600}",
+            "type": "color"
+          },
+          "color": {
+            "value": "{ref.color.white}",
+            "type": "color"
+          }
+        },
+        "selected": {
+          "background": {
+            "value": "{ref.color.gray-zinc.600}",
+            "type": "color"
+          },
+          "color": {
+            "value": "{ref.color.white}",
+            "type": "color"
+          }
+        },
+        "active": {
+          "background": {
+            "value": "{ref.color.gray-zinc.500}",
+            "type": "color"
+          },
+          "color": {
+            "value": "{ref.color.white}",
+            "type": "color"
+          }
+        },
+        "disabled": {
+          "background": {
+            "value": "{ref.color.gray-zinc.800}",
+            "type": "color"
+          },
+          "color": {
+            "value": "{ref.color.gray-zinc.600}",
+            "type": "color"
+          }
+        }
+      },
+      "emphasize": {
+        "disabled": {
+          "background": {
+            "value": "{ref.color.gray-zinc.400}",
+            "type": "color"
+          },
+          "color": {
+            "value": "{ref.color.gray-zinc.500}",
+            "type": "color"
+          }
+        }
+      },
+      "destructive": {
+        "disabled": {
+          "background": {
+            "value": "{ref.color.gray-zinc.400}",
+            "type": "color"
+          },
+          "color": {
+            "value": "{ref.color.gray-zinc.500}",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "layer": {
+      "canvas": {
+        "background": {
+          "value": "{ref.color.gray-zinc.900}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.default.color}",
+          "type": "color"
+        }
+      },
+      "container": {
+        "background": {
+          "value": "{ref.color.gray-zinc.800}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.default.color}",
+          "type": "color"
+        }
+      },
+      "overlay": {
+        "background": {
+          "value": "{ref.color.gray-zinc.700}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.default.color}",
+          "type": "color"
+        }
+      },
+      "backdrop": {
+        "background": {
+          "value": "{ref.color.alpha.black.200}",
+          "type": "color"
+        }
+      },
+      "popover": {
+        "background": {
+          "value": "{ref.color.gray-zinc.650}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.white.color}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

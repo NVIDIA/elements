@@ -1,81 +1,133 @@
 :host {
+  --color: var(--mlv-sys-interaction-default-color);
+  --background: var(--mlv-sys-interaction-default-background);
+  --padding: 0 var(--mlv-ref-size-300);
+  --border-radius: var(--mlv-ref-border-radius-lg);
+  --font-weight: var(--mlv-ref-font-weight-semibold);
+  --font-size: var(--mlv-ref-font-size-200);
+  --text-decoration: none;
+  --cursor: pointer;
+  --gap: var(--mlv-ref-space-xxs);
+  --height: var(--mlv-ref-size-800);
+  --_icon-color: var(--color);
+  --width: fit-content;
   display: inline-flex;
+  position: relative;
+  outline: 0;
 }
 
 [internal-host] {
-  /* Base CSS */
+  color: var(--color);
+  background: var(--background);
+  padding: var(--padding);
+  height: var(--height);
+  width: var(--width);
+  border-radius: var(--border-radius);
+  text-decoration: var(--text-decoration);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  cursor: var(--cursor);
+  gap: var(--gap);
   display: inline-flex;
-  align-items: center;
+  place-items: center;
   appearance: none;
-  border: 4px solid transparent;
-  cursor: pointer;
-  background-color: var(--mlv-system-color-interactive-primary);
-  border-radius: var(--mlv-radius-full);
-  color: var(--mlv-color-neutral-50);
-  font-size: var(--mlv-font-size-75);
-  font-weight: var(--mlv-font-weight-semi-bold);
-  font-family: var(--mlv-font-sans);
-  gap: var(--mlv-spacing-1);
-  padding: var(--mlv-spacing-1) var(--mlv-spacing-3);
-  line-height: var(--mlv-font-size-200);
-  -webkit-font-smoothing: antialiased;
+  line-height: 1.2em;
+}
 
-  &:hover {
-    background-color: var(--mlv-system-color-interactive-primary-hover);
+::slotted(mlv-icon) {
+  --color: var(--_icon-color);
+  pointer-events: none;
+}
+
+::slotted(a) {
+  text-decoration: none !important;
+  color: var(--color) !important;
+  outline: 0;
+}
+
+::slotted(a)::after {
+  display: block;
+  content: ' ';
+  inset: 0;
+  position: absolute;
+}
+
+:host(:focus-within) [internal-host] {
+  outline: var(--mlv-ref-outline-webkit);
+  outline: var(--mlv-ref-outline-default);
+}
+
+:host(:hover) {
+  --color: var(--mlv-sys-interaction-default-hover-color);
+  --background: var(--mlv-sys-interaction-default-hover-background);
+}
+
+:host(:--active) {
+  --color: var(--mlv-sys-interaction-default-active-color);
+  --background: var(--mlv-sys-interaction-default-active-background);
+}
+
+:host(:--disabled) {
+  --color: var(--mlv-sys-interaction-default-disabled-color);
+  --background: var(--mlv-sys-interaction-default-disabled-background);
+  --cursor: not-allowed;
+}
+
+:host([interaction='emphasize']) {
+  --color: var(--mlv-sys-interaction-emphasize-color);
+  --background: var(--mlv-sys-interaction-emphasize-background);
+
+  &:host(:hover) {
+    --color: var(--mlv-sys-interaction-emphasize-hover-color);
+    --background: var(--mlv-sys-interaction-emphasize-hover-background);
   }
 
-
-  /* Variants */
-  @define-mixin buttonBackground $variant {
-    :host([variant="$(variant)"]) & {
-      background-color: var(--mlv-system-color-interactive-$(variant));
-
-      &:hover {
-        background-color: var(--mlv-system-color-interactive-$(variant)-hover);
-      }
-    }
+  &:host(:--active) {
+    --color: var(--mlv-sys-interaction-emphasize-active-color);
+    --background: var(--mlv-sys-interaction-emphasize-active-background);
   }
 
-  @mixin buttonBackground primary {}
-  @mixin buttonBackground destructive {}
+  &:host(:--disabled) {
+    --color: var(--mlv-sys-interaction-default-disabled-color);
+    --background: var(--mlv-sys-interaction-default-disabled-background);
+  }
+}
 
-  /* TODO can we use @mixin-content to support this variant? */
+:host([interaction='destructive']) {
+  --color: var(--mlv-sys-interaction-destructive-color);
+  --background: var(--mlv-sys-interaction-destructive-background);
 
-  :host([variant="secondary"]) & {
-    color: var(--mlv-system-color-interactive-neutral-hover);
-    background-color: var(--mlv-system-color-interactive-neutral);
-
-    &:hover {
-      color: var(--mlv-system-color-interactive-neutral);
-      background-color: var(--mlv-system-color-interactive-neutral-hover);
-    }
+  &:host(:hover) {
+    --color: var(--mlv-sys-interaction-destructive-hover-color);
+    --background: var(--mlv-sys-interaction-destructive-hover-background);
   }
 
-  :host([variant="tertiary"]) & {
-    color: var(--mlv-system-color-interactive-neutral-hover);
-    background-color: transparent;
-
-    &:hover {
-      color: var(--mlv-system-color-interactive-neutral);
-      background-color: var(--mlv-system-color-interactive-neutral-hover);
-      opacity: 0.5;
-    }
+  &:host(:--active) {
+    --color: var(--mlv-sys-interaction-destructive-active-color);
+    --background: var(--mlv-sys-interaction-destructive-active-background);
   }
 
+  &:host(:--disabled) {
+    --color: var(--mlv-sys-interaction-default-disabled-color);
+    --background: var(--mlv-sys-interaction-default-disabled-background);
+  }
+}
 
-  /* States */
-  &:focus-visible {
-    border-color: var(--mlv-system-color-interactive-secondary);
+:host([interaction='ghost']) {
+  --background: transparent;
+
+  &:host(:hover) {
+    --background: transparent;
+    --text-decoration: underline;
   }
 
-  :host(:--active) & {
-    filter: contrast(1.25) brightness(1.1);
+  &:host(:--active) {
+    --background: transparent;
+    --text-decoration: underline;
   }
 
-  :host(:--disabled) & {
-    background-color: var(--mlv-system-color-interactive-disabled);
-    color: var(--mlv-system-color-interactive-on-disabled);
-    opacity: 40%;
-    cursor: not-allowed;
+  &:host(:--disabled) {
+    --color: var(--mlv-sys-interaction-default-disabled-color);
+    --background: transparent;
   }
 }
