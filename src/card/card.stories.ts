@@ -46,36 +46,38 @@ export const Default = {
       }
     </style>
 
-    <nve-card>
-      ${when(
-        args.showHeader,
-        () => html`
-        <nve-card-header>
-          <div slot="title">Title</div>
-          <div slot="subtitle">Sub Title</div>
+    <div nve-theme>
+      <nve-card>
+        ${when(
+          args.showHeader,
+          () => html`
+          <nve-card-header>
+            <div slot="title">Title</div>
+            <div slot="subtitle">Sub Title</div>
 
 
-          ${when(
-            args.showAction,
-            () => html`
-              <nve-icon-button slot="header-action" name="additional-actions" variant="tertiary"></nve-icon-button>
-            `)}
-        </nve-card-header>
-        `
-      )}
+            ${when(
+              args.showAction,
+              () => html`
+                <nve-icon-button slot="header-action" name="additional-actions" interaction="ghost"></nve-icon-button>
+              `)}
+          </nve-card-header>
+          `
+        )}
 
-      ${args.content}
+        ${args.content}
 
-      ${when(
-        args.showFooter,
-        () => html`
-        <nve-card-footer>
-          Proceed with Action
-          <nve-button icon="navigate-to">Proceed</nve-button>
-        </nve-card-footer>
-        `
-      )}
-    </nve-card>
+        ${when(
+          args.showFooter,
+          () => html`
+          <nve-card-footer>
+            Proceed with Action
+            <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
+          </nve-card-footer>
+          `
+        )}
+      </nve-card>
+    </div>
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { width: 300, height: 150, content: 'Card Content' }
@@ -103,3 +105,35 @@ export const CardWithHeaderAndFooter = {
     height: 300
   }
 };
+
+
+export const Themes = {
+  render: () => html`
+    <div nve-theme="light">
+      <nve-card style="width: 400px; height: 300px;">
+        <nve-card-header>
+          <div slot="title">Title</div>
+          <div slot="subtitle">Sub Title</div>
+        </nve-card-header>
+        <p>Card Content</p>
+        <nve-card-footer>
+          Proceed with Action
+          <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
+        </nve-card-footer>
+      </nve-card>
+    </div>
+    <div nve-theme="dark">
+      <nve-card style="width: 400px; height: 300px;">
+        <nve-card-header>
+          <div slot="title">Title</div>
+          <div slot="subtitle">Sub Title</div>
+        </nve-card-header>
+        <p>Card Content</p>
+        <nve-card-footer>
+          Proceed with Action
+          <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
+        </nve-card-footer>
+      </nve-card>
+    </div>
+  `
+}

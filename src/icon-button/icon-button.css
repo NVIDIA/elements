@@ -1,9 +1,10 @@
-[internal-host] {
-  border-radius: var(--nve-radius-full);
-  font-size: var(--nve-font-size-300);
-  padding: var(--nve-spacing-half);
+:host {
+  --border-radius: var(--nve-ref-border-radius-full);
+  --padding: var(--nve-ref-space-xxs);
+  --line-height: 0;
 }
 
 nve-icon {
-  color: inherit;
+  --color: var(--_icon-color);
+  pointer-events: none;
 }

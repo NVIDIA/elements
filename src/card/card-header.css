@@ -1,10 +1,13 @@
 :host {
-  display: block;
+  --padding: var(--nve-ref-size-700) var(--nve-ref-size-700) var(--nve-ref-size-400);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
+  --line-height: 1em;
 }
 
 header[internal-host] {
-  padding: var(--nve-spacing-7) var(--nve-spacing-7) var(--nve-spacing-4);
-  border-bottom: 2px solid var(--divider-color);
+  padding: var(--padding);
+  border-bottom: var(--border-bottom);
+  color: var(--color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,16 +15,13 @@ header[internal-host] {
 
   ::slotted([slot="title"]) {
     margin: 0;
-    font-size: var(--nve-font-size-275);
-    line-height: var(--nve-font-size-400);
-    font-weight: var(--nve-font-weight-bold);
+    font-size: var(--nve-ref-font-size-400);
+    font-weight: var(--nve-ref-font-weight-bold);
   }
 
   ::slotted([slot="subtitle"]) {
     margin: 0;
-    color: var(--nve-color-neutral-500);
-    font-size: var(--nve-font-size-100);
-    line-height: var(--nve-font-size-400);
-    font-weight: var(--nve-font-weight-normal);
+    font-size: var(--nve-ref-font-size-200);
+    font-weight: var(--nve-ref-font-weight-normal);
   }
 }

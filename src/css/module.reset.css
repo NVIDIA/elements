@@ -1,0 +1,5 @@
+[nve-theme] {
+  background: var(--nve-sys-layer-canvas-background) !important;
+  color: var(--nve-sys-layer-canvas-color) !important;
+  font-family: var(--nve-ref-font-family-inter) !important;
+}
