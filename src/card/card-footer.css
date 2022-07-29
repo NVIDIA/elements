@@ -1,9 +1,10 @@
 :host {
-  display: block;
+  --padding: var(--nve-ref-size-700);
 }
 
 footer[internal-host] {
-  padding: var(--nve-spacing-7);
+  padding: var(--padding);
+  color: var(--color);
   display: flex;
   justify-content: space-between;
   align-items: center;

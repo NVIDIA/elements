@@ -1,0 +1,53 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Foundation/Objects" />
+
+# Objects (beta)
+
+Object style tokens are design tokens that describe the shape of an element and its position as a layer within the UI.
+
+## Layers
+
+Layers define the position of an element on the z-axis in the UI. Layer types are
+categories of elements that build up to higher layers as they are stacked or nested.
+Read more about the [popup explainer](https://open-ui.org/components/popup.research.explainer).
+
+The layers in order of stacking are the following:
+
+- `canvas` - body, document
+- `container` - cards, steppers, tabs
+- `overlay` - modals, drawers, dropdowns (menus, filters, combobox)
+- `popup` - tooltips, toasts
+
+<Canvas>
+  <Story id="foundation-examples-objects--layers" />
+</Canvas>
+
+<Canvas>
+  <Story id="foundation-examples-tokens--layer" />
+</Canvas>
+
+## Shadow
+
+<Canvas>
+  <Story id="foundation-examples-tokens--shadow" />
+</Canvas>
+
+## Border Color
+
+<Canvas>
+  <Story id="foundation-examples-tokens--border-color" />
+</Canvas>
+
+## Border Width
+
+<Canvas>
+  <Story id="foundation-examples-tokens--border-width" />
+</Canvas>
+
+
+## Border Radius
+
+<Canvas>
+  <Story id="foundation-examples-tokens--border-radius" />
+</Canvas>

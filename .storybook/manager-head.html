@@ -1,0 +1,39 @@
+<style>
+  body {
+    background: var(--nve-sys-layer-container-background) !important;
+    color: var(--nve-sys-layer-canvas-color) !important;
+    font-family: var(--nve-ref-font-family-inter) !important;
+    font-weight: var(--nve-ref-font-weight-regular) !important;
+  }
+
+  [title='Storybook'] svg {
+    display: none !important;
+  }
+
+  [title='Storybook']::after {
+    color: var(--nve-sys-layer-container-color);
+    font-family: var(--nve-ref-font-family-inter);
+    font-weight: var(--nve-ref-font-weight-regular);
+    font-size: var(--nve-ref-font-size-400);
+    content: 'Maglev Elements';
+    display: block;
+    width: 170px;
+  }
+
+  svg[color='primary'] {
+    color: var(--nve-sys-accent-primary-background) !important;
+  }
+
+  .os-content {
+    background: var(--nve-sys-layer-container-background) !important;
+  }
+
+  .sidebar-item  {
+    color: var(--nve-sys-layer-canvas-color) !important;
+  }
+
+  .sidebar-item[data-selected='true'] {
+    background: var(--nve-sys-accent-secondary-background) !important;
+    color: var(--nve-sys-text-white-color) !important;
+  }
+</style>

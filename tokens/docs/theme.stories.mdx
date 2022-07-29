@@ -1,0 +1,52 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Foundation/Themes" />
+
+# Themes (beta)
+
+Themes are built leveraging CSS Custom Properties.
+
+```css
+@import '@elements/elements/index.css';
+```
+
+Themes are applied by setting the `nve-theme` attribute on the host `html` element.
+
+```html
+<html lang="en" nve-theme="dark">
+```
+
+Currently there are the following themes:
+- Light (default)
+- Dark
+- High Contrast
+
+Themes can be applied dynamically based on user preferences.
+
+```javascript
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  body.setAttribute('nve-theme', 'dark');
+}
+
+if (window.matchMedia('(-ms-high-contrast: active)')).matches || window.matchMedia('(forced-colors: active)')).matches) {
+  document.body.setAttribute('nve-theme', 'high-contrast');
+}
+```
+
+# Light (Default)
+
+<Canvas>
+  <Story id="foundation-examples-themes--default" />
+</Canvas>
+
+# Dark
+
+<Canvas>
+  <Story id="foundation-examples-themes--dark" />
+</Canvas>
+
+# High Contrast
+
+<Canvas>
+  <Story id="foundation-examples-themes--high-contrast" />
+</Canvas>

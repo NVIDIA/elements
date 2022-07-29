@@ -7,6 +7,9 @@ import styles from './icon-button.css?inline';
 
 /**
  * @element nve-icon-button
+ * @cssprop --border-radius
+ * @cssprop --padding
+ * @cssprop --line-height
  */
 export class IconButton extends Button {
   static styles = useStyles([...Button.styles, styles]);

@@ -13,6 +13,8 @@ vite_library(
         "@npm_platform_libs_elements//rollup-plugin-minify-html-literals",
         "@npm_platform_libs_elements//rollup-plugin-shell",
         "@npm_platform_libs_elements//rollup-plugin-terser",
+        "@npm_platform_libs_elements//@custom-elements-manifest/analyzer",
+        "@npm_platform_libs_elements//style-dictionary",
     ],
     allow_js = True,
     data = [
@@ -22,15 +24,27 @@ vite_library(
         "package-lock.json",
         "vite.config.ts",
         "postcss.config.cjs",
+        "tokens/style-dictionary.config.js",
+        "tokens/theme.compact.json",
+        "tokens/theme.dark.json",
+        "tokens/theme.high-contrast.json",
+        "tokens/tokens.json",
     ] + glob(["public/**/*"]),
     npm_repository = "@npm_platform_libs_elements",
+)
+
+# js_library rule likely needs to be updated from "name = name" to "name = package_name"
+# This will remove the need for the file group here and allow builds to depend on the package artifacts from other rules.
+filegroup(
+    name = "@elements/elements",
+    srcs = [":elements"]
 )
 
 storybook(
     name = "storybook",
     srcs = glob([".storybook/**/*"]) + glob(["src/**/*"]),
     deps = [
-        "@npm_platform_libs_elements//@emotion/react",
+        ":@elements/elements",
         "@npm_platform_libs_elements//@storybook/addon-essentials",
         "@npm_platform_libs_elements//@storybook/addon-interactions",
         "@npm_platform_libs_elements//@storybook/addons",
@@ -44,21 +58,11 @@ storybook(
         "@npm_platform_libs_elements//@storybook/store",
         "@npm_platform_libs_elements//@storybook/testing-library",
         "@npm_platform_libs_elements//@storybook/theming",
-        "@npm_platform_libs_elements//postcss-mixins",
-        "@npm_platform_libs_elements//postcss-nested",
-        "@npm_platform_libs_elements//rollup-plugin-css-hmr",
-        "@npm_platform_libs_elements//rollup-plugin-minify-html-literals",
-        "@npm_platform_libs_elements//rollup-plugin-shell",
-        "@npm_platform_libs_elements//rollup-plugin-terser",
         "@npm_platform_libs_elements//storybook-addon-designs",
         "@npm_platform_libs_elements//webpack",
     ],
     data = [
-        "package.json",
-        "package-lock.json",
-        "vite.config.ts",
-        "postcss.config.cjs",
-        "custom-elements.json"
-    ] + glob(["public/**/*"]),
+        "package.json"
+    ],
     npm_repository = "@npm_platform_libs_elements",
 )
