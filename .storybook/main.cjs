@@ -9,11 +9,9 @@ module.exports = {
   //   { directory: '../src', files: '*.stories.ts', titlePrefix: 'foo' }
   // ], // this feature will auto generate titles enabled by CSF3.0 but latest storybook-builder-vite 0.1.13 doesn't support waiting for 2.x
   addons: [
-    'storybook-dark-mode',
     'storybook-addon-designs',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@etchteam/storybook-addon-status'
+    '@storybook/addon-interactions'
   ],
   framework: '@storybook/web-components',
   core: {
