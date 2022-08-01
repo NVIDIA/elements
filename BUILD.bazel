@@ -31,7 +31,6 @@ storybook(
     srcs = glob([".storybook/**/*"]) + glob(["src/**/*"]),
     deps = [
         "@npm_platform_libs_elements//@emotion/react",
-        "@npm_platform_libs_elements//@etchteam/storybook-addon-status",
         "@npm_platform_libs_elements//@storybook/addon-essentials",
         "@npm_platform_libs_elements//@storybook/addon-interactions",
         "@npm_platform_libs_elements//@storybook/addons",
@@ -52,7 +51,6 @@ storybook(
         "@npm_platform_libs_elements//rollup-plugin-shell",
         "@npm_platform_libs_elements//rollup-plugin-terser",
         "@npm_platform_libs_elements//storybook-addon-designs",
-        "@npm_platform_libs_elements//storybook-dark-mode",
         "@npm_platform_libs_elements//webpack",
     ],
     data = [
