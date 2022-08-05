@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,
     "module": "es2020",
     "allowJs": true,
     "target": "es2020",
@@ -10,7 +11,7 @@
     "outDir": "dist/",
     "baseUrl": "./",
     "rootDir": "./src",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
