@@ -5,6 +5,7 @@ vite_library(
     name = "elements",
     package_name = "@elements/elements",
     tsconfig = None,
+    emptyOutDir = False,
     srcs = vite_default_srcs() + glob(["css/**/*"]),
     deps = [
         "@npm_platform_libs_elements//lit",
@@ -15,6 +16,7 @@ vite_library(
         "@npm_platform_libs_elements//rollup-plugin-terser",
         "@npm_platform_libs_elements//@custom-elements-manifest/analyzer",
         "@npm_platform_libs_elements//style-dictionary",
+        "@npm_platform_libs_elements//vite-plugin-dts"
     ],
     allow_js = True,
     data = [

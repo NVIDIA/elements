@@ -8,3 +8,11 @@ interface ElementInternals {
     delete: (state: string) => void;
   }
 }
+
+interface HTMLElementTagNameMap {
+  'mlv-button': Button;
+  'mlv-card': Card;
+  'mlv-card-header': CardHeader;
+  'mlv-card-footer': CardFooter;
+  'mlv-icon': Icon;
+}

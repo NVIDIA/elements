@@ -20,38 +20,36 @@ StyleDictionary.registerFormat({
   }
 });
 
-export function buildTokens(dist) {
-  const buildPath = `${dist}/`;
+export function buildTokens(buildPath) {
   StyleDictionary.extend({
     source: ['./tokens/tokens.json'],
-    platforms: { css: cssOutput('css/module.tokens.css', buildPath), json: jsonOutput('tokens/tokens.json', buildPath) }
+    platforms: { css: cssOutput(`${buildPath}css/module.tokens.css`), json: jsonOutput(`${buildPath}tokens/tokens.json`) }
   }).buildAllPlatforms();
 
   StyleDictionary.extend({
     include: ['./tokens/tokens.json'],
     source: ['./tokens/theme.dark.json'],
-    platforms: { css: cssOutput('css/theme.dark.css', buildPath) }
+    platforms: { css: cssOutput(`${buildPath}css/theme.dark.css`) }
   }).buildAllPlatforms();
 
   StyleDictionary.extend({
     include: ['./tokens/tokens.json'],
     source: ['./tokens/theme.compact.json'],
-    platforms: { css: cssOutput('css/theme.compact.css', buildPath) }
+    platforms: { css: cssOutput(`${buildPath}css/theme.compact.css`) }
   }).buildAllPlatforms();
 
   StyleDictionary.extend({
     include: ['./tokens/tokens.json'],
     source: ['./tokens/theme.high-contrast.json'],
-    platforms: { css: cssOutput('css/theme.high-contrast.css', buildPath) }
+    platforms: { css: cssOutput(`${buildPath}css/theme.high-contrast.css`) }
   }).buildAllPlatforms();
 }
 
-function cssOutput(destination, buildPath) {
+function cssOutput(destination) {
   const theme = getTheme(destination);
   return {
     prefix: 'mlv',
     transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css',  'custom/css-calc'],
-    buildPath,
     files: [{
       format: 'custom/css',
       destination,
@@ -64,12 +62,11 @@ function cssOutput(destination, buildPath) {
   }
 }
 
-function jsonOutput(destination, buildPath) {
+function jsonOutput(destination) {
   const theme = getTheme(destination);
   return {
     prefix: 'mlv',
     transformGroup: 'web',
-    buildPath,
     files: [{
       format: 'json/flat',
       destination,
