@@ -10,6 +10,7 @@
   ],
   "sideEffects": [
     "./dist/index.js",
+    "./dist/entrypoints.js",
     "./dist/polyfills/index.js",
     "./**/define.js"
   ],
@@ -99,6 +100,7 @@
     "style-dictionary": "3.7.1",
     "svgo": "2.8.0",
     "typescript": "4.7.4",
+    "vite-plugin-dts": "1.4.1",
     "vite": "^2.6.0",
     "vitest": "^0.15.2"
   },
@@ -111,6 +113,6 @@
     }
   },
   "bzlgen": {
-    "md5": "cb80de642c0af3b9ebe89adee79a455b"
+    "md5": "063bcb5f612ea765a9575509daf51201"
   }
 }
