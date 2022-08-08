@@ -24,7 +24,7 @@ export default {
       control: 'inline-radio',
       options: ['emphasize', 'destructive', 'ghost']
     },
-    name: {
+    iconName: {
       control: 'inline-radio',
       options: ICON_NAMES
     }
@@ -35,39 +35,39 @@ type ArgTypes = IconButton;
 
 export const Default = {
   render: (args: ArgTypes) => html`<nve-icon-button ${spread(args)}></nve-icon-button>`,
-  args: { disabled: false, name: 'analytics', interaction: '' }
+  args: { disabled: false, iconName: 'analytics', interaction: '' }
 };
 
-export const Emphasize = { ...Default, args: { name: 'analytics', interaction: 'emphasize' } };
-export const Destructive = { ...Default, args: {  name: 'analytics', interaction: 'destructive' } };
-export const Ghost = { ...Default, args: {  name: 'analytics', interaction: 'ghost' } };
-export const Disabled = { ...Default, args: {  name: 'analytics', disabled: true } };
+export const Emphasize = { ...Default, args: { iconName: 'analytics', interaction: 'emphasize' } };
+export const Destructive = { ...Default, args: {  iconName: 'analytics', interaction: 'destructive' } };
+export const Ghost = { ...Default, args: {  iconName: 'analytics', interaction: 'ghost' } };
+export const Disabled = { ...Default, args: {  iconName: 'analytics', disabled: true } };
 
 export const Interactions = {
   render: () => html`
-    <nve-icon-button name="analytics"></nve-icon-button>
-    <nve-icon-button interaction="emphasize" name="analytics"></nve-icon-button>
-    <nve-icon-button interaction="destructive" name="analytics"></nve-icon-button>
-    <nve-icon-button interaction="ghost" name="analytics"></nve-icon-button>
-    <nve-icon-button disabled name="analytics"></nve-icon-button>
+    <nve-icon-button icon-name="analytics"></nve-icon-button>
+    <nve-icon-button interaction="emphasize" icon-name="analytics"></nve-icon-button>
+    <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>
+    <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
+    <nve-icon-button disabled icon-name="analytics"></nve-icon-button>
   `
 }
 
 export const Themes = {
   render: () => html`
     <div nve-theme="light">
-      <nve-icon-button name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="emphasize" name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="destructive" name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="ghost" name="analytics"></nve-icon-button>
-      <nve-icon-button disabled name="analytics"></nve-icon-button>
+      <nve-icon-button icon-name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="emphasize" icon-name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
+      <nve-icon-button disabled icon-name="analytics"></nve-icon-button>
     </div>
     <div nve-theme="dark">
-      <nve-icon-button name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="emphasize" name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="destructive" name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="ghost" name="analytics"></nve-icon-button>
-      <nve-icon-button disabled name="analytics"></nve-icon-button>
+      <nve-icon-button icon-name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="emphasize" icon-name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
+      <nve-icon-button disabled icon-name="analytics"></nve-icon-button>
     </div>
   `
 }
