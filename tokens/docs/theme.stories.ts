@@ -31,11 +31,11 @@ function getThemeDemo(theme) {
         </nve-card-footer>
       </nve-card>
       <div>
-        <nve-icon-button name="analytics"></nve-icon-button>
-        <nve-icon-button name="analytics" interaction="emphasize"></nve-icon-button>
-        <nve-icon-button name="analytics" interaction="destructive"></nve-icon-button>
-        <nve-icon-button name="analytics" interaction="ghost"></nve-icon-button>
-        <nve-icon-button name="analytics" disabled></nve-icon-button>
+        <nve-icon-button icon-name="analytics"></nve-icon-button>
+        <nve-icon-button icon-name="analytics" interaction="emphasize"></nve-icon-button>
+        <nve-icon-button icon-name="analytics" interaction="destructive"></nve-icon-button>
+        <nve-icon-button icon-name="analytics" interaction="ghost"></nve-icon-button>
+        <nve-icon-button icon-name="analytics" disabled></nve-icon-button>
       </div>
       <div>
         <nve-icon name="analytics"></nve-icon>
