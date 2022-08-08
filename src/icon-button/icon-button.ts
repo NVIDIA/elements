@@ -14,12 +14,12 @@ import styles from './icon-button.css?inline';
 export class IconButton extends Button {
   static styles = useStyles([...Button.styles, styles]);
 
-  @property({ type: String }) name: IconNames;
+  @property({ type: String, attribute: 'icon-name' }) iconName: IconNames;
 
   render() {
     return html`
       <div internal-host>
-        <mlv-icon .name="${this.name}"></mlv-icon>
+        <mlv-icon .name=${this.iconName}></mlv-icon>
       </div>
     `;
   }

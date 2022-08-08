@@ -10,6 +10,38 @@
           "kind": "class",
           "description": "",
           "name": "Button",
+          "cssProperties": [
+            {
+              "name": "--color"
+            },
+            {
+              "name": "--background"
+            },
+            {
+              "name": "--padding"
+            },
+            {
+              "name": "--border-radius"
+            },
+            {
+              "name": "--font-weight"
+            },
+            {
+              "name": "--font-size"
+            },
+            {
+              "name": "--text-decoration"
+            },
+            {
+              "name": "--cursor"
+            },
+            {
+              "name": "--gap"
+            },
+            {
+              "name": "--height"
+            }
+          ],
           "slots": [
             {
               "description": "Default slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.",
@@ -19,34 +51,21 @@
           "members": [
             {
               "kind": "field",
-              "name": "variant",
+              "name": "interaction",
               "type": {
-                "text": "ButtonVariants | string"
+                "text": "Interaction"
               },
-              "default": "'primary'",
-              "description": "Color Variant of the Button",
-              "attribute": "variant",
+              "attribute": "interaction",
               "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "_hiddenProp",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
             }
           ],
           "attributes": [
             {
-              "name": "variant",
+              "name": "interaction",
               "type": {
-                "text": "ButtonVariants | string"
+                "text": "Interaction"
               },
-              "default": "'primary'",
-              "description": "Color Variant of the Button",
-              "fieldName": "variant"
+              "fieldName": "interaction"
             }
           ],
           "superclass": {
@@ -106,6 +125,23 @@
           "kind": "class",
           "description": "",
           "name": "Card",
+          "cssProperties": [
+            {
+              "name": "--background"
+            },
+            {
+              "name": "--color"
+            },
+            {
+              "name": "--border-radius"
+            },
+            {
+              "name": "--box-shadow"
+            },
+            {
+              "name": "--padding"
+            }
+          ],
           "slots": [
             {
               "description": "This is a default/unnamed slot for card content",
@@ -132,6 +168,17 @@
           "kind": "class",
           "description": "",
           "name": "CardHeader",
+          "cssProperties": [
+            {
+              "name": "--padding"
+            },
+            {
+              "name": "--border-bottom"
+            },
+            {
+              "name": "--line-height"
+            }
+          ],
           "slots": [
             {
               "description": "Title Text",
@@ -158,6 +205,11 @@
           "kind": "class",
           "description": "",
           "name": "CardFooter",
+          "cssProperties": [
+            {
+              "name": "--padding"
+            }
+          ],
           "slots": [
             {
               "description": "This is a default/unnamed slot for card footer content",
@@ -269,38 +321,34 @@
           "kind": "class",
           "description": "",
           "name": "IconButton",
+          "cssProperties": [
+            {
+              "name": "--border-radius"
+            },
+            {
+              "name": "--padding"
+            },
+            {
+              "name": "--line-height"
+            }
+          ],
           "members": [
             {
               "kind": "field",
-              "name": "name",
+              "name": "iconName",
               "type": {
                 "text": "IconNames"
               },
-              "attribute": "name"
+              "attribute": "icon-name"
             },
             {
               "kind": "field",
-              "name": "variant",
+              "name": "interaction",
               "type": {
-                "text": "ButtonVariants | string"
+                "text": "Interaction"
               },
-              "default": "'primary'",
-              "description": "Color Variant of the Button",
-              "attribute": "variant",
+              "attribute": "interaction",
               "reflects": true,
-              "inheritedFrom": {
-                "name": "Button",
-                "module": "src/button/button.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "_hiddenProp",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false",
               "inheritedFrom": {
                 "name": "Button",
                 "module": "src/button/button.ts"
@@ -309,20 +357,18 @@
           ],
           "attributes": [
             {
-              "name": "name",
+              "name": "icon-name",
               "type": {
                 "text": "IconNames"
               },
-              "fieldName": "name"
+              "fieldName": "iconName"
             },
             {
-              "name": "variant",
+              "name": "interaction",
               "type": {
-                "text": "ButtonVariants | string"
+                "text": "Interaction"
               },
-              "default": "'primary'",
-              "description": "Color Variant of the Button",
-              "fieldName": "variant",
+              "fieldName": "interaction",
               "inheritedFrom": {
                 "name": "Button",
                 "module": "src/button/button.ts"
@@ -386,6 +432,17 @@
           "kind": "class",
           "description": "",
           "name": "Icon",
+          "cssProperties": [
+            {
+              "name": "--color"
+            },
+            {
+              "name": "--width"
+            },
+            {
+              "name": "--height"
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -395,6 +452,15 @@
               },
               "description": "The color variant of the icon",
               "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "'warning' | 'danger' | 'success' | 'info'"
+              },
+              "attribute": "status",
               "reflects": true
             },
             {
@@ -415,6 +481,13 @@
               },
               "description": "The color variant of the icon",
               "fieldName": "variant"
+            },
+            {
+              "name": "status",
+              "type": {
+                "text": "'warning' | 'danger' | 'success' | 'info'"
+              },
+              "fieldName": "status"
             },
             {
               "name": "name",
@@ -533,6 +606,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "package": "./styles/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "package": "./storybook/utils.js"
           }
         },
@@ -541,7 +622,23 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "package": "./types/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "package": "./utils/a11y.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./utils/dom.js"
           }
         },
         {
@@ -574,6 +671,38 @@
       "declarations": [
         {
           "kind": "function",
+          "name": "createFixture",
+          "return": {
+            "type": {
+              "text": "Promise<HTMLElement>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "template",
+              "optional": true,
+              "type": {
+                "text": "TemplateResult"
+              }
+            }
+          ],
+          "description": "Creates a test fixture DOM element for testing.\nFixture is ready when all custom elements have been defined."
+        },
+        {
+          "kind": "function",
+          "name": "removeFixture",
+          "parameters": [
+            {
+              "name": "fixture",
+              "type": {
+                "text": "HTMLElement"
+              }
+            }
+          ],
+          "description": "Removes test fixture DOM element."
+        },
+        {
+          "kind": "function",
           "name": "emulateClick",
           "parameters": [
             {
@@ -604,6 +733,22 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "createFixture",
+          "declaration": {
+            "name": "createFixture",
+            "module": "src/test/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "removeFixture",
+          "declaration": {
+            "name": "removeFixture",
+            "module": "src/test/index.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "emulateClick",

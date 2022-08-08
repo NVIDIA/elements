@@ -31,11 +31,11 @@ function getThemeDemo(theme) {
         </mlv-card-footer>
       </mlv-card>
       <div>
-        <mlv-icon-button name="analytics"></mlv-icon-button>
-        <mlv-icon-button name="analytics" interaction="emphasize"></mlv-icon-button>
-        <mlv-icon-button name="analytics" interaction="destructive"></mlv-icon-button>
-        <mlv-icon-button name="analytics" interaction="ghost"></mlv-icon-button>
-        <mlv-icon-button name="analytics" disabled></mlv-icon-button>
+        <mlv-icon-button icon-name="analytics"></mlv-icon-button>
+        <mlv-icon-button icon-name="analytics" interaction="emphasize"></mlv-icon-button>
+        <mlv-icon-button icon-name="analytics" interaction="destructive"></mlv-icon-button>
+        <mlv-icon-button icon-name="analytics" interaction="ghost"></mlv-icon-button>
+        <mlv-icon-button icon-name="analytics" disabled></mlv-icon-button>
       </div>
       <div>
         <mlv-icon name="analytics"></mlv-icon>

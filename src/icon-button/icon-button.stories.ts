@@ -24,7 +24,7 @@ export default {
       control: 'inline-radio',
       options: ['emphasize', 'destructive', 'ghost']
     },
-    name: {
+    iconName: {
       control: 'inline-radio',
       options: ICON_NAMES
     }
@@ -35,39 +35,39 @@ type ArgTypes = IconButton;
 
 export const Default = {
   render: (args: ArgTypes) => html`<mlv-icon-button ${spread(args)}></mlv-icon-button>`,
-  args: { disabled: false, name: 'analytics', interaction: '' }
+  args: { disabled: false, iconName: 'analytics', interaction: '' }
 };
 
-export const Emphasize = { ...Default, args: { name: 'analytics', interaction: 'emphasize' } };
-export const Destructive = { ...Default, args: {  name: 'analytics', interaction: 'destructive' } };
-export const Ghost = { ...Default, args: {  name: 'analytics', interaction: 'ghost' } };
-export const Disabled = { ...Default, args: {  name: 'analytics', disabled: true } };
+export const Emphasize = { ...Default, args: { iconName: 'analytics', interaction: 'emphasize' } };
+export const Destructive = { ...Default, args: {  iconName: 'analytics', interaction: 'destructive' } };
+export const Ghost = { ...Default, args: {  iconName: 'analytics', interaction: 'ghost' } };
+export const Disabled = { ...Default, args: {  iconName: 'analytics', disabled: true } };
 
 export const Interactions = {
   render: () => html`
-    <mlv-icon-button name="analytics"></mlv-icon-button>
-    <mlv-icon-button interaction="emphasize" name="analytics"></mlv-icon-button>
-    <mlv-icon-button interaction="destructive" name="analytics"></mlv-icon-button>
-    <mlv-icon-button interaction="ghost" name="analytics"></mlv-icon-button>
-    <mlv-icon-button disabled name="analytics"></mlv-icon-button>
+    <mlv-icon-button icon-name="analytics"></mlv-icon-button>
+    <mlv-icon-button interaction="emphasize" icon-name="analytics"></mlv-icon-button>
+    <mlv-icon-button interaction="destructive" icon-name="analytics"></mlv-icon-button>
+    <mlv-icon-button interaction="ghost" icon-name="analytics"></mlv-icon-button>
+    <mlv-icon-button disabled icon-name="analytics"></mlv-icon-button>
   `
 }
 
 export const Themes = {
   render: () => html`
     <div mlv-theme="light">
-      <mlv-icon-button name="analytics"></mlv-icon-button>
-      <mlv-icon-button interaction="emphasize" name="analytics"></mlv-icon-button>
-      <mlv-icon-button interaction="destructive" name="analytics"></mlv-icon-button>
-      <mlv-icon-button interaction="ghost" name="analytics"></mlv-icon-button>
-      <mlv-icon-button disabled name="analytics"></mlv-icon-button>
+      <mlv-icon-button icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button interaction="emphasize" icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button interaction="destructive" icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button interaction="ghost" icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button disabled icon-name="analytics"></mlv-icon-button>
     </div>
     <div mlv-theme="dark">
-      <mlv-icon-button name="analytics"></mlv-icon-button>
-      <mlv-icon-button interaction="emphasize" name="analytics"></mlv-icon-button>
-      <mlv-icon-button interaction="destructive" name="analytics"></mlv-icon-button>
-      <mlv-icon-button interaction="ghost" name="analytics"></mlv-icon-button>
-      <mlv-icon-button disabled name="analytics"></mlv-icon-button>
+      <mlv-icon-button icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button interaction="emphasize" icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button interaction="destructive" icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button interaction="ghost" icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button disabled icon-name="analytics"></mlv-icon-button>
     </div>
   `
 }
