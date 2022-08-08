@@ -25,13 +25,13 @@ describe('nve-icon-button', () => {
     expect(element.interaction).eq(undefined);
   });
 
-  it('should update "name" on child nve-icon when "name" is updated on parent', async () => {
-    expect(element.name).eq(undefined);
-    element.name = 'test';
+  it('should update "name" on child nve-icon when "icon" is updated on parent', async () => {
+    expect(element.iconName).eq(undefined);
+    element.iconName = 'test';
     await elementIsStable(element);
 
-    expect(element.name).toBe('test');
-    element.name = 'test';
+    expect(element.iconName).toBe('test');
+    element.iconName = 'test';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('nve-icon').name).toBe('test');
   });
