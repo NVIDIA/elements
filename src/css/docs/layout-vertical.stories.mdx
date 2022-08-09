@@ -1,0 +1,38 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Layout/Vertical Layout" />
+
+# Vertical Layout
+
+Vertical _Flexbox_ based layouts can be achieved with _little to no CSS_ using the `nve-layout` attribute.
+
+Set `nve-layout="column"` on a container element and add additional alignment values.
+
+- `nve-layout="column ..."`
+
+
+- `align:left`
+- `align:right`
+- `align:top`
+- `align:bottom`
+- `align:center`
+- `align:horizontal-center`
+- `align:vertical-center`
+- `align:space-around`
+- `align:space-between`
+- `align:space-evenly`
+
+Combine `nve-layout` attribute values to create your desired layout. For example:
+```html
+<section nve-layout="column align:vertical-center align:right">
+```
+
+## Vertical Layout Examples
+
+```html
+<section nve-layout="column align:...">
+```
+
+<Canvas>
+  <Story id="layout-examples--vertical" />
+</Canvas>
