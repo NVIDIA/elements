@@ -57,12 +57,18 @@ export const parameters = {
           'Tokens',
           'Themes',
           'Typography',
-          'Layout',
           'Objects',
           'Interactions',
           'Status',
           'Testing',
           'Examples'
+        ],
+        'Layout',
+        [
+          'Getting Started',
+          'Horizontal Layout',
+          'Vertical Layout',
+          'Examples',
         ],
         'Elements'
       ]
