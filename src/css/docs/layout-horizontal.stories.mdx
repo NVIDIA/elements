@@ -1,0 +1,39 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Layout/Horizontal Layout" />
+
+# Horizontal Layout
+
+Horizontal _Flexbox_ based layouts can be achieved with _little to no CSS_ using the `mlv-layout` attribute.
+
+Set `mlv-layout="row"` on a container element and add additional alignment values.
+
+- `mlv-layout="row ..."`
+
+
+- `align:left`
+- `align:right`
+- `align:top`
+- `align:bottom`
+- `align:center`
+- `align:horizontal-center`
+- `align:vertical-center`
+- `align:space-around`
+- `align:space-between`
+- `align:space-evenly`
+- `align:wrap`
+
+Combine `mlv-layout` attribute values to create your desired layout. For example:
+```html
+<section mlv-layout="row align:vertical-center align:right">
+```
+
+## Horizontal Layout Examples
+
+```html
+<section mlv-layout="row align:...">
+```
+
+<Canvas>
+  <Story id="layout-examples--horizontal" />
+</Canvas>
