@@ -1,6 +1,6 @@
 {
   "name": "@elements/elements",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "customElements": "custom-elements.json",
   "files": [
@@ -63,7 +63,7 @@
     "ci": "pnpm run clean && pnpm run build && pnpm run build-storybook && pnpm run test",
     "clean": "git clean dist -fX",
     "storybook": "start-storybook -p 7789",
-    "build": "vite build",
+    "build": "pnpm run clean && vite build",
     "build:watch": "vite build --mode watch",
     "test": "vitest run --coverage",
     "test:watch": "vitest watch",
