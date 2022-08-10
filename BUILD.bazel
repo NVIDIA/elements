@@ -44,7 +44,7 @@ filegroup(
 
 storybook(
     name = "storybook",
-    srcs = glob([".storybook/**/*"]) + glob(["src/**/*"]),
+    srcs = glob([".storybook/**/*"]) + glob(["src/**/*"]) + glob(["tokens/**/*"]) + glob(["public/**/*"]),
     deps = [
         ":@elements/elements",
         "@npm_platform_libs_elements//@elements/custom-elements-storybook",
