@@ -17,6 +17,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./custom-elements.json": "./dist/custom-elements.json",
+    "./tokens/tokens.json": "./dist/tokens/tokens.json",
     "./assets/*": "./dist/assets/*",
     "./css/*": "./dist/css/*",
     ".": "./dist/index.js",
