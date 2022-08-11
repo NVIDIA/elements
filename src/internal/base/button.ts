@@ -20,6 +20,8 @@ import { typeSubmit } from '../controllers/type-submit.controller.js';
 @stateDisabled<MlvBaseButton>()
 @stateExpanded<MlvBaseButton>()
 export class MlvBaseButton extends LitElement {
+  static formAssociated = true;
+
   /**
    * Use for buttons that are toggle button types.
    * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed

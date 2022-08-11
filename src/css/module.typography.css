@@ -1,8 +1,183 @@
 @font-face {
   font-family: 'Inter var';
-  src: url('./assets/Inter-roman.var.woff2') format('woff2');
+  src: url('./assets/inter-roman.var.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
   font-named-instance: 'Regular';
+}
+
+/* https://seek-oss.github.io/capsize/ */
+:is([nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'], [nve-text~='eyebrow'], [nve-text~='eyebrow'])::before {
+  content: '';
+  margin-bottom: -0.1818em;
+  display: table;
+}
+
+:is([nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'], [nve-text~='eyebrow'])[nve-text]::after {
+  content: '';
+  margin-top: -0.1818em;
+  display: table;
+}
+
+[nve-text] {
+  font-family: var(--nve-ref-font-family-inter);
+  font-weight: var(--nve-ref-font-weight-regular);
+  color: var(--nve-sys-text-default-color);
+  margin: 0;
+}
+
+[nve-text~='display'] {
+  font-size: var(--nve-ref-font-size-1000);
+
+  &[nve-text~='xl'] {
+    font-size: var(--nve-ref-font-size-1200);
+  }
+
+  &[nve-text~='lg'] {
+    font-size: var(--nve-ref-font-size-1100);
+  }
+
+  &[nve-text~='sm'] {
+    font-size: var(--nve-ref-font-size-900);
+  }
+}
+
+[nve-text~='heading'] {
+  font-size: var(--nve-ref-font-size-500);
+
+  &[nve-text~='xl'] {
+    font-size: var(--nve-ref-font-size-700);
+  }
+
+  &[nve-text~='lg'] {
+    font-size: var(--nve-ref-font-size-600);
+  }
+
+  &[nve-text~='sm'] {
+    font-size: var(--nve-ref-font-size-400);
+  }
+}
+
+[nve-text~='body'] {
+  font-size: var(--nve-ref-font-size-200);
+  font-weight: var(--nve-ref-font-weight-regular);
+
+  &[nve-text~='xl'] {
+    font-size: var(--nve-ref-font-size-400);
+  }
+
+  &[nve-text~='lg'] {
+    font-size: var(--nve-ref-font-size-300);
+  }
+
+  &[nve-text~='sm'] {
+    font-size: var(--nve-ref-font-size-100);
+  }
+}
+
+[nve-text~='label'] {
+  font-size: var(--nve-ref-font-size-200);
+  font-weight: var(--nve-ref-font-weight-semibold);
+
+  &[nve-text~='xl'] {
+    font-size: var(--nve-ref-font-size-400);
+  }
+
+  &[nve-text~='lg'] {
+    font-size: var(--nve-ref-font-size-300);
+  }
+
+  &[nve-text~='sm'] {
+    font-size: var(--nve-ref-font-size-100);
+  }
+}
+
+[nve-text~='eyebrow'] {
+  font-size: var(--nve-ref-font-size-100);
+  font-weight: var(--nve-ref-font-weight-semibold);
+
+  &[nve-text~='xl'] {
+    font-size: var(--nve-ref-font-size-300);
+  }
+
+  &[nve-text~='lg'] {
+    font-size: var(--nve-ref-font-size-200);
+  }
+}
+
+/* color */
+[nve-text~='emphasis'] {
+  color: var(--nve-sys-text-emphasis-color);
+}
+
+[nve-text~='muted'] {
+  color: var(--nve-sys-text-muted-color);
+}
+
+/* weights */
+[nve-text~='bold'] {
+  font-weight: var(--nve-ref-font-weight-bold);
+}
+
+[nve-text~='semibold'] {
+  font-weight: var(--nve-ref-font-weight-semibold);
+}
+
+[nve-text~='regular'] {
+  font-weight: var(--nve-ref-font-weight-regular);
+}
+
+[nve-text~='light'] {
+  font-weight: var(--nve-ref-font-weight-light);
+}
+
+[nve-text~='list'] {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+
+  &li {
+    margin: 0;
+  }
+
+  &[nve-text~='unstyled'] {
+    list-style: none;
+  }
+}
+
+[nve-text~='link'] {
+  color: var(--nve-sys-text-link-color);
+
+  &:hover,
+  &[nve-text~='hover'] {
+    color: var(--nve-sys-text-link-hover-color);
+  }
+
+  &[nve-text~='disabled'] {
+    color: var(--nve-sys-text-link-disabled-color);
+  }
+
+  &:visited,
+  &[nve-text~='visited'] {
+    color: var(--nve-sys-text-link-visited-color);
+  }
+}
+
+[nve-text~='uppercase'] {
+  text-transform: uppercase;
+}
+
+[nve-text~='lowercase'] {
+  text-transform: lowercase;
+}
+
+[nve-text~='capitalize'] {
+  text-transform: capitalize;
+}
+
+[nve-text~='truncate'] {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
 }
