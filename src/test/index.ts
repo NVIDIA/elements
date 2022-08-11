@@ -34,7 +34,6 @@ function waitForAllElementsToBeDefined() {
 }
 
 /**
- * @internal
  * Awaits until Lit element has rendered and has no pending updates
  */
 export function elementIsStable(element: any) {
