@@ -57,6 +57,7 @@ export const parameters = {
           'Tokens',
           'Themes',
           'Typography',
+          'Size & Space',
           'Objects',
           'Interactions',
           'Status',

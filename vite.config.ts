@@ -49,6 +49,7 @@ export default defineConfig((env) => {
     ],
     build: {
       cssCodeSplit: true,
+      minify: false, // https://github.com/vitejs/vite/issues/8848
       watch: mode === 'watch' ? {} : undefined,
       outDir: dist(),
       emptyOutDir: false,
@@ -62,9 +63,10 @@ export default defineConfig((env) => {
         output: [
           {
             format: 'esm',
+            sourcemap: true,
             preserveModules: true,
-            entryFileNames: (module) =>
-              module.facadeModuleId?.includes('.css?') ? '[name].css.js' : '[name].js'
+            assetFileNames: '[name].[ext]',
+            entryFileNames: (module) => module.facadeModuleId?.includes('.css?') ? '[name].css.js' : '[name].js'
           }
         ],
         plugins: [
@@ -79,7 +81,7 @@ export default defineConfig((env) => {
           },
           execute({ commands: [`./node_modules/@custom-elements-manifest/analyzer/index.js analyze ${mode === 'watch' ? '--quiet' : ''} --litelement --globs ./src --exclude **.stories.ts --outdir ${dist()}`], hook: 'generateBundle' }),
           mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
-          mode === 'production' ? terser({ ecma: 2020, module: true }) : false
+          mode === 'production' ? terser({ ecma: 2020, module: true }) : false // https://github.com/vitejs/vite/issues/8848
         ]
       }
     },
