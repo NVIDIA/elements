@@ -1,0 +1,55 @@
+<Meta title="About/Angular" />
+
+# Angular Setup
+
+
+## Installation
+
+To install the Maglev UI Elements, run the following command:
+
+```bash
+pnpm install @elements/elements
+```
+
+Once installed import the global CSS into your angular application's global `styles.scss`
+
+```css
+/* ./src/styles.scss */
+
+@import '@elements/elements/dist/index.css';
+```
+
+Next import either the full `@elements/elements` package or individual element imports into a root Angular module.
+
+```javascript
+/* ./src/shared.module.ts */
+
+// Full package
+import '@elements/elements';
+
+// Individual import
+import '@elements/elements/button/define.js';
+```
+
+Make sure `CUSTOM_ELEMENTS_SCHEMA` is set on the Angular module to allow web components to be used within your templates.
+
+```javascript
+/* ./src/shared.module.ts */
+
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+
+@NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  ...
+})
+```
+
+Lastly, if you are not on typescript >= version `4.5.x` you will need to add this type declaration to use isolated element imports:
+
+```javascript
+/* ./src/declarations.d.ts */
+
+interface ElementInternals {
+  any: any;
+}
+```
