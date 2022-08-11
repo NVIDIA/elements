@@ -61,6 +61,7 @@ export const parameters = {
           'Objects',
           'Interactions',
           'Status',
+          'Testing',
           'Examples'
         ],
         'Elements'
