@@ -59,9 +59,9 @@
     }
   },
   "scripts": {
-    "dev": "pnpm run build && pnpm run build:watch & start-storybook -p 7789",
+    "dev": "pnpm run build && pnpm run build:watch & pnpm run storybook",
     "ci": "pnpm run clean && pnpm run build && pnpm run build-storybook && pnpm run test",
-    "clean": "git clean dist -fX",
+    "clean": "git clean dist coverage storybook-static -fX",
     "storybook": "start-storybook -p 7789",
     "build": "pnpm run clean && vite build",
     "build:watch": "vite build --mode watch",
@@ -73,8 +73,8 @@
     "generate-manifest": "cem analyze --litelement --globs src/**/*.ts --exclude **.stories.ts src/internal/**/*.ts"
   },
   "dependencies": {
-    "lit": "^2.1",
-    "lit-html": "^2.1"
+    "lit": "^2.3.1",
+    "lit-html": "^2.3.1"
   },
   "optionalDependencies": {
     "element-internals-polyfill": "^1.1.4"
@@ -101,8 +101,8 @@
     "style-dictionary": "3.7.1",
     "svgo": "2.8.0",
     "typescript": "4.7.4",
-    "vite-plugin-dts": "1.4.1",
     "vite": "^2.6.0",
+    "vite-plugin-dts": "1.4.1",
     "vitest": "^0.15.2"
   },
   "publishConfig": {
@@ -114,6 +114,6 @@
     }
   },
   "bzlgen": {
-    "md5": "063bcb5f612ea765a9575509daf51201"
+    "md5": "0848cf1d6a004b001da2a8a8a329504b"
   }
 }
