@@ -40,6 +40,7 @@ vite_library(
 filegroup(
     name = "@elements/elements",
     srcs = [":elements"],
+    tags = ["ui"],
 )
 
 storybook(
