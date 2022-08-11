@@ -1,0 +1,67 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="About/Lit" />
+
+# Lit Setup
+
+## Installation
+
+To install the MagLev UI Elements, run the following command:
+
+```bash
+pnpm install @elements/elements
+```
+
+Once installed, import the global CSS into your project.
+
+```css
+@import '@elements/elements/dist/index.css';
+```
+
+Elements can be imported/loaded via JavaScript imports and made available to use in your Lit templates.
+
+```javascript
+import '@elements/elements/button/define.js';
+```
+
+```html
+<mlv-button>hello there</mlv-button>
+```
+
+<mlv-button interaction="emphasize">hello there</mlv-button>
+
+## CSS Utilities
+
+Elements provide layout and typography utilities to make it easy to style your UI.
+These utilities are global CSS attributes that can be applied to any element. To
+use these utilities within a Lit element, you need to import the styles, so they
+are available in your elements Shadow DOM.
+
+<Canvas>
+  <Story id="foundation-examples-integration--lit" />
+</Canvas>
+
+```typescript
+import { html, unsafeCSS, LitElement } from 'lit';
+import { customElement } from 'lit/decorators/custom-element.js';
+import typography from '@elements/elements/css/module.typography.css';
+import layout from '@elements/elements/css/module.layout.css';
+
+@customElement('my-element')
+class MyElement extends LitElement {
+
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
+  render() {
+    return html`
+      <div mlv-layout="column gap:lg">
+        <p mlv-text="display">display</p>
+        <p mlv-text="heading">heading</p>
+        <p mlv-text="body">body</p>
+        <p mlv-text="label">label</p>
+        <p mlv-text="eyebrow">eyebrow</p>
+      </div>
+    `;
+  }
+}
+```
