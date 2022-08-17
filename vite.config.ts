@@ -3,12 +3,12 @@ import path from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
 import { terser } from 'rollup-plugin-terser';
-import execute from 'rollup-plugin-shell';
+import { readFile } from 'fs/promises';
+import { execSync } from 'child_process';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import dts from 'vite-plugin-dts';
-import { dependencies, optionalDependencies } from './package.json';
-import { buildTokens } from './tokens/style-dictionary.config.js';
 
+const packageFile = JSON.parse(await readFile(new URL('./package.json', import.meta.url)) as any);
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 const index = process.argv.findIndex((i) => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
@@ -17,9 +17,12 @@ const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
 // https://lit.dev/docs/tools/production/
 export default defineConfig((env) => {
   const mode = env.mode as 'production' | 'watch' | 'test' | 'development';
+  const testProdBuild = mode === 'test' && !(process.argv.findIndex((i) => i === '--coverage') !== -1);
+
+  execSync(`./node_modules/@custom-elements-manifest/analyzer/index.js analyze ${mode === 'watch' ? '--quiet' : ''} --litelement --globs ./src --exclude **.stories.ts --outdir ${dist()}`);
 
   if (mode !== 'test') {
-    buildTokens(dist());
+    execSync(`node ${resolve('./tokens/style-dictionary.config.cjs')} --outDir ${dist()}`);
   }
 
   return {
@@ -29,7 +32,7 @@ export default defineConfig((env) => {
         '../dist/css/theme.dark.css': dist(`css/theme.dark.css`),
         '../dist/css/theme.compact.css': dist(`css/theme.compact.css`),
         '../dist/css/theme.high-contrast.css': dist(`css/theme.high-contrast.css`),
-        '@elements/elements': resolve(mode !== 'test' ? './src' : dist()) // tests should run against final build artifacts not source
+        '@elements/elements': resolve(testProdBuild ? dist() : './src') // tests should run against final build artifacts not source
       }
     },
     plugins: [
@@ -54,12 +57,11 @@ export default defineConfig((env) => {
       outDir: dist(),
       emptyOutDir: false,
       target: 'esnext',
-      sourcemap: true,
       lib: { entry: resolve('./src/entrypoints.ts'), formats: ['es'] },
       rollupOptions: {
         treeshake: false,
         preserveEntrySignatures: 'strict',
-        external: [...Object.keys(dependencies || {}), ...Object.keys(optionalDependencies || {})].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
+        external: [...Object.keys(packageFile.dependencies || {}), ...Object.keys(packageFile.optionalDependencies || {})].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
         output: [
           {
             format: 'esm',
@@ -79,7 +81,6 @@ export default defineConfig((env) => {
                 .forEach(file => fs.rename(dist(file), dist(`css/${file}`), (e) => e ? console.log(e) : null));
             }
           },
-          execute({ commands: [`./node_modules/@custom-elements-manifest/analyzer/index.js analyze ${mode === 'watch' ? '--quiet' : ''} --litelement --globs ./src --exclude **.stories.ts --outdir ${dist()}`], hook: 'generateBundle' }),
           mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
           mode === 'production' ? terser({ ecma: 2020, module: true }) : false // https://github.com/vitejs/vite/issues/8848
         ]
@@ -89,6 +90,8 @@ export default defineConfig((env) => {
       globals: true,
       environment: 'happy-dom',
       watchExclude: ['**/node_modules/**'],
+      deps: { inline: true }, // https://github.com/lit/lit/issues/3216
+      setupFiles: [`${dist()}/test/setup.js`], // https://github.com/vitest-dev/vitest/issues/1700
       coverage: {
         lines: 90,
         branches: 90,
