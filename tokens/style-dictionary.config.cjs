@@ -1,7 +1,6 @@
-import { default as StyleDictionary } from 'style-dictionary';
-
-const index = process.argv.findIndex((i) => i === '--outDir') + 1;
+const StyleDictionary = require('style-dictionary');
 const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
+const buildPath = process.argv[process.argv.findIndex((i) => i === '--outDir') + 1];
 
 StyleDictionary.registerTransform({
   name: 'custom/css-calc',
@@ -20,7 +19,7 @@ StyleDictionary.registerFormat({
   }
 });
 
-export function buildTokens(buildPath) {
+function buildTokens() {
   StyleDictionary.extend({
     source: ['./tokens/tokens.json'],
     platforms: { css: cssOutput(`${buildPath}css/module.tokens.css`), json: jsonOutput(`${buildPath}tokens/tokens.json`) }
@@ -79,3 +78,5 @@ function getTheme(path) {
   const m = /.*?theme.(.*?)\..*?/g.exec(path);
   return m ? m[1] : false;
 };
+
+buildTokens();
