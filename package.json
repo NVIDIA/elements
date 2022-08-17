@@ -12,6 +12,7 @@
     "./dist/index.js",
     "./dist/entrypoints.js",
     "./dist/polyfills/index.js",
+    "./dist/test/index.js",
     "./**/define.js"
   ],
   "exports": {
@@ -60,12 +61,13 @@
   },
   "scripts": {
     "dev": "pnpm run build && pnpm run build:watch & pnpm run storybook",
-    "ci": "pnpm run clean && pnpm run build && pnpm run build-storybook && pnpm run test",
+    "ci": "pnpm run clean && pnpm run build && pnpm run build-storybook && pnpm run test && pnpm run test:coverage",
     "clean": "git clean dist coverage storybook-static -fX",
     "storybook": "start-storybook -p 7789",
     "build": "pnpm run clean && vite build",
     "build:watch": "vite build --mode watch",
-    "test": "vitest run --coverage",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch",
     "build-storybook": "build-storybook --output-dir ./storybook-static",
     "create-icon-spritesheet": "node create-icon-spritesheet.js",
@@ -77,33 +79,26 @@
     "lit-html": "^2.3.1"
   },
   "optionalDependencies": {
-    "element-internals-polyfill": "^1.1.4"
+    "element-internals-polyfill": "^1.1.11"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "0.6.3",
     "@elements/custom-elements-storybook": "0.1.4",
-    "@prettier/plugin-xml": "1.2.0",
-    "@storybook/theming": "6.5.9",
-    "@types/react": "16.9.52",
-    "@types/react-dom": "16.9.8",
-    "@xmldom/xmldom": "0.8.0",
-    "bindings": "1.5.0",
-    "happy-dom": "^5.2.0",
-    "postcss": "8.3.11",
-    "postcss-mixins": "9.0.1",
+    "@vitest/coverage-c8": "0.22.1",
+    "happy-dom": "6.0.4",
+    "postcss": "8.4.16",
+    "postcss-mixins": "9.0.3",
     "postcss-nested": "5.0.6",
     "prettier": "2.5.1",
-    "rollup": "^2.70.2",
-    "rollup-plugin-css-hmr": "0.2.1",
+    "rollup": "2.78.1",
     "rollup-plugin-minify-html-literals": "1.2.6",
-    "rollup-plugin-shell": "^1.0.3",
     "rollup-plugin-terser": "7.0.2",
     "style-dictionary": "3.7.1",
     "svgo": "2.8.0",
     "typescript": "4.7.4",
-    "vite": "^2.6.0",
+    "vite": "3.0.9",
     "vite-plugin-dts": "1.4.1",
-    "vitest": "^0.15.2"
+    "vitest": "0.22.1"
   },
   "publishConfig": {
     "registry": "https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/"
@@ -114,6 +109,6 @@
     }
   },
   "bzlgen": {
-    "md5": "0848cf1d6a004b001da2a8a8a329504b"
+    "md5": "9001b26a8b14a9b181439e9a62d62734"
   }
 }

@@ -1,5 +1,6 @@
 import { TemplateResult, render } from 'lit';
 import '@elements/elements/polyfills'; // polyfills for required for vitest
+import './setup.js';
 
 /**
  * Creates a test fixture DOM element for testing.
