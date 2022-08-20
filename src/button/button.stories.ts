@@ -102,3 +102,21 @@ export const Themes = {
     </div>
   `
 }
+
+export const FormSubmit = {
+  render: () => html`
+<form id="test-form">
+  <mlv-button id="test-button">submit</mlv-button>
+</form>
+<script>
+  const form = document.querySelector('#test-form');
+  const button = document.querySelector('#test-button');
+
+  button.addEventListener('click', e => console.log(e));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    console.log(e);
+  });
+</script>  
+`
+}
