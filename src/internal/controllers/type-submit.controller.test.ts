@@ -114,7 +114,7 @@ describe('type-submit.controller', () => {
     expect(o.f).not.toHaveBeenCalled();
   });
 
-  it('should not interact with form elements if disabeld', async () => {
+  it('should not interact with form elements if disabled', async () => {
     submitButtonInForm.disabled = true;
     await elementIsStable(submitButtonInForm);
 
@@ -123,5 +123,20 @@ describe('type-submit.controller', () => {
 
     form.addEventListener('submit', o.f);
     expect(o.f).not.toHaveBeenCalled();
+  });
+
+  it('should only submit once per click/keypress', async () => {
+    await elementIsStable(submitButtonInForm);
+
+    const o = { f: () => { } };
+    vi.spyOn(o, 'f');
+
+    form.addEventListener('submit', o.f);
+    expect(o.f).not.toHaveBeenCalled();
+
+    // happy-dom does not properly emulate the relatedTarget/composed event options
+    // emulateClick(submitButtonInForm);
+    // await elementIsStable(submitButtonInForm);
+    // expect(o.f).toHaveBeenCalledTimes(1);
   });
 });
