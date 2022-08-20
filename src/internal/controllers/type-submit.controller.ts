@@ -50,31 +50,25 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
   }
 
   #setupNativeButtonBehavior() {
-    if (this.host.readonly|| this.host.disabled) {
-      this.host.removeEventListener('click', this.#triggerNativeButtonBehavior.bind(this));
-      this.host.removeEventListener('keyup', this.#emulateKeyBoardEventBehavior.bind(this));
-    } else {
+    this.host.removeEventListener('click', this.#triggerNativeButtonBehavior.bind(this));
+    this.host.removeEventListener('keyup', this.#emulateKeyBoardEventBehavior.bind(this));
+
+    if (!this.host.readonly && !this.host.disabled) {
       this.host.addEventListener('click', this.#triggerNativeButtonBehavior.bind(this));
       this.host.addEventListener('keyup', this.#emulateKeyBoardEventBehavior.bind(this));
     }
   }
 
+  // when submitting forms with Enter key, default submit button receives click event from the form
   #emulateKeyBoardEventBehavior(event: KeyboardEvent) {
-    onKeys(['Enter', 'Space'], event, () => {
-      // when submitting forms with Enter key, default submit button receives click event from the form
-      if (this.host.type === 'button') {
-        this.#triggerNativeButtonBehavior(event);
-      } else {
-        this.host.click();
-      }
-      stopEvent(event);
-    });
+    onKeys(['Enter', 'Space'], event, () => this.#triggerNativeButtonBehavior(event));
   }
 
   #triggerNativeButtonBehavior(event: Event) {
     if (this.host.disabled) {
       stopEvent(event);
     } else if (!event.defaultPrevented) {
+      stopEvent(event);
       this.host.appendChild(this.#button);
       this.#button.dispatchEvent(new MouseEvent('click', { relatedTarget: this.host, composed: true }));
       this.#button.remove();
