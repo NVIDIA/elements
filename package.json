@@ -3,6 +3,22 @@
   "version": "0.2.1",
   "type": "module",
   "customElements": "custom-elements.json",
+  "scripts": {
+    "dev": "pnpm run build && pnpm run build:watch & pnpm run storybook",
+    "ci": "pnpm run clean && pnpm run build && pnpm run build-storybook && pnpm run lint && pnpm run test && pnpm run test:coverage",
+    "clean": "git clean dist coverage storybook-static -fX",
+    "storybook": "start-storybook -p 7789",
+    "build": "pnpm run clean && vite build",
+    "build:watch": "vite build --mode watch",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "lint": "node ../../../tools/lint-changes/lint.changes.js",
+    "build-storybook": "build-storybook --output-dir ./storybook-static",
+    "create-icon-spritesheet": "node create-icon-spritesheet.js",
+    "prepublishonly": "pnpm run build",
+    "generate-manifest": "cem analyze --litelement --globs src/**/*.ts --exclude **.stories.ts src/internal/**/*.ts"
+  },
   "files": [
     "README.md",
     "package.json",
@@ -51,6 +67,9 @@
     "./datetime": "./dist/datetime/index.js",
     "./datetime/index.js": "./dist/datetime/index.js",
     "./datetime/define.js": "./dist/datetime/define.js",
+    "./file": "./dist/file/index.js",
+    "./file/index.js": "./dist/file/index.js",
+    "./file/define.js": "./dist/file/define.js",
     "./forms": "./dist/forms/index.js",
     "./forms/index.js": "./dist/forms/index.js",
     "./forms/define.js": "./dist/forms/define.js",
@@ -109,22 +128,6 @@
         "dist/*/index.d.ts"
       ]
     }
-  },
-  "scripts": {
-    "dev": "pnpm run build && pnpm run build:watch & pnpm run storybook",
-    "ci": "pnpm run clean && pnpm run build && pnpm run build-storybook && pnpm run lint && pnpm run test && pnpm run test:coverage",
-    "clean": "git clean dist coverage storybook-static -fX",
-    "storybook": "start-storybook -p 7789",
-    "build": "pnpm run clean && vite build",
-    "build:watch": "vite build --mode watch",
-    "test": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest watch",
-    "lint": "node ../../../tools/lint-changes/lint.changes.js",
-    "build-storybook": "build-storybook --output-dir ./storybook-static",
-    "create-icon-spritesheet": "node create-icon-spritesheet.js",
-    "prepublishonly": "pnpm run build",
-    "generate-manifest": "cem analyze --litelement --globs src/**/*.ts --exclude **.stories.ts src/internal/**/*.ts"
   },
   "dependencies": {
     "lit": "^2.3.1",

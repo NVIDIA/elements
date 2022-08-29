@@ -5,10 +5,11 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 
 export default {
-  title: 'Forms/Control/Examples'
+  title: 'Forms/Control/Examples',
+  parameters: { badges: ['beta'] }
 }
 
-export const control = () => {
+export const Control = () => {
   return html`
 <mlv-control>
   <label>label</label>
@@ -17,7 +18,7 @@ export const control = () => {
 </mlv-control>`;
 };
 
-export const responsive = () => {
+export const Responsive = () => {
   return html`
   <div style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal;">
     <mlv-control-group layout="horizontal-inline">
@@ -40,7 +41,7 @@ export const responsive = () => {
   `;
 };
 
-export const controlLayout = () => {
+export const ControlLayout = () => {
   return html`
 <style>
   div {
@@ -222,7 +223,7 @@ export const controlLayout = () => {
 </div>`;
 };
 
-export const controlValidation = () => {
+export const ControlValidation = () => {
   return html`
 <mlv-control>
   <label>validation</label>
@@ -232,7 +233,7 @@ export const controlValidation = () => {
 </mlv-control>`;
 }
 
-export const noLabelControl = () => {
+export const NoLabelControl = () => {
   return html`
 <mlv-control>
   <input type="search" aria-label="search" placeholder="search" />
@@ -287,7 +288,7 @@ export const controlGroup = () => {
 `;
 }
 
-export const dateControl = () => {
+export const DateControl = () => {
   return html`
 <mlv-control>
   <label>date</label>
@@ -296,7 +297,7 @@ export const dateControl = () => {
 </mlv-control>`;
 };
 
-export const textareaControl = () => {
+export const TextareaControl = () => {
   return html`
 <mlv-control>
   <label>about</label>
@@ -305,7 +306,7 @@ export const textareaControl = () => {
 </mlv-control>`;
 }
 
-export const datalist = () => {
+export const Datalist = () => {
   return html`
 <mlv-control>
   <label>search</label>
@@ -318,7 +319,7 @@ export const datalist = () => {
 </mlv-control>`;
 };
 
-export const status = () => {
+export const Status = () => {
   return html`
 <mlv-control>
   <label>label</label>
@@ -351,7 +352,7 @@ export const status = () => {
 </mlv-control>`;
 };
 
-export const selectmenuExperimental = () => {
+export const SelectmenuExperimental = () => {
   return html`
 <mlv-control layout="vertical">
   <label>selectmenu</label>
@@ -470,7 +471,7 @@ class Emoji extends LitElement {
   }
 }
 
-export const custom = () => {
+export const Custom = () => {
   return html`
 <mlv-control layout="horizontal">
   <label>custom emoji</label>

@@ -1,0 +1,47 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Forms/Time/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Time
+
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time/)
+
+## Installation
+
+```typescript
+import '@elements/elements/time/define.js';
+```
+
+```html
+<mlv-time>
+  <label>label</label>
+  <input type="time" min="09:00" max="18:00" value="12:00" />
+  <mlv-control-message>message</mlv-control-message>
+</mlv-time>
+```
+
+<Canvas>
+  <Story id="forms-time-examples--time" />
+</Canvas>
+
+## Datalist
+
+<Canvas>
+  <Story id="forms-time-examples--datalist" />
+</Canvas>
+
+## Vertical
+
+<Canvas>
+  <Story id="forms-time-examples--vertical" />
+</Canvas>
+
+## Horizontal
+
+<Canvas>
+  <Story id="forms-time-examples--horizontal" />
+</Canvas>
+
+## <mlv-time\>
+
+<Props of="mlv-time" />

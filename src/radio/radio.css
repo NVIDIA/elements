@@ -1,0 +1,18 @@
+:host {
+  --width: var(--mlv-ref-size-400);
+  --height: var(--mlv-ref-size-400);
+  --cursor: pointer;
+}
+
+::slotted(input) {
+  /* https://web.dev/accent-color/#guaranteeing-contrast */
+  accent-color: var(--accent-color) !important;
+  width: var(--width) !important;
+  height: var(--height) !important;
+  margin: 0 !important;
+  cursor: var(--cursor) !important;
+}
+
+slot {
+  line-height: 0 !important;
+}

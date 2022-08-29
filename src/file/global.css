@@ -1,0 +1,38 @@
+mlv-file > input {
+  color: var(--color);
+}
+
+mlv-file > input::file-selector-button {
+  background: var(--background);
+  padding: var(--padding);
+  height: var(--height);
+  width: var(--width);
+  border-radius: var(--border-radius);
+  border: var(--border);
+  text-decoration: var(--text-decoration);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  cursor: var(--cursor);
+  gap: var(--gap);
+  margin-right: var(--mlv-ref-space-sm);
+  display: inline-flex;
+  place-items: center;
+  appearance: none;
+  line-height: 1.2em;
+}
+
+mlv-file > input::file-selector-button:hover {
+  --color: var(--mlv-sys-interaction-default-hover-color);
+  --background: var(--mlv-sys-interaction-default-hover-background);
+}
+
+mlv-file > input::file-selector-button:active {
+  --color: var(--mlv-sys-interaction-default-active-color);
+  --background: var(--mlv-sys-interaction-default-active-background);
+}
+
+mlv-file > input::file-selector-button:disabled {
+  --color: var(--mlv-sys-interaction-default-disabled-color);
+  --background: var(--mlv-sys-interaction-default-disabled-background);
+  --cursor: not-allowed;
+}

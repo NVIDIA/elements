@@ -7,7 +7,7 @@ export default {
 
 export const KitchenSink = {
   render: () => html`
-<div style="display: grid; gap: 24px 48px; grid-template-columns: 1fr 1fr; max-width: 1600px;">
+<div style="display: grid; gap: 36px 48px; grid-template-columns: 1fr 1fr; max-width: 1400px;">
     <mlv-input layout="vertical-inline">
       <label>text label</label>
       <input />
@@ -190,6 +190,21 @@ export const KitchenSink = {
       <textarea></textarea>
       <mlv-control-message>message</mlv-control-message>
     </mlv-textarea>
+
+    <mlv-file>
+      <label>file label</label>
+      <input type="file" />
+      <mlv-control-message>message</mlv-control-message>
+    </mlv-file>
+
+    <mlv-search rounded>
+      <input type="search" aria-label="search" placeholder="search" />
+      <datalist>
+        <option value="search result 1"></option>
+        <option value="search result 2"></option>
+        <option value="search result 3"></option>
+      </datalist>
+    </mlv-search>
 
     <mlv-input layout="vertical-inline">
       <label>disabled</label>

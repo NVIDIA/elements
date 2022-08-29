@@ -1,0 +1,18 @@
+import { useStyles } from '@elements/elements/internal';
+import { Control } from '@elements/elements/forms';
+import styles from './input.css?inline';
+
+/**
+ * @alpha
+ * @element mlv-input
+ * @cssprop --padding
+ * @cssprop --font-size
+ * @cssprop --height
+ * @cssprop --background
+ * @cssprop --border-radius
+ * @cssprop --border
+ * @cssprop --cursor
+ */
+export class Input extends Control {
+  static styles = useStyles([...Control.styles, styles]);
+}

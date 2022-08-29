@@ -2,7 +2,8 @@ import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { attachInternals, useStyles, associateAriaLabel, assoicateAriaDescribedBy, associateControlGroup } from '@elements/elements/internal';
 import { ControlMessage } from '../control-message/control-message.js';
-import { setupControlStatusStates, setupControlGroupStates, inputQuery, setupControlLayoutStates } from '../utils/index.js';
+import { setupControlStatusStates, setupControlGroupStates, inputQuery } from '../utils/states.js';
+import { setupControlLayoutStates } from '../utils/layout.js';
 import styles from './control-group.css?inline';
 
 /**

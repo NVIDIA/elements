@@ -1,5 +1,6 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { state } from 'lit/decorators/state.js';
 import { useStyles } from '@elements/elements/internal';
 import styles from './control-message.css?inline';
 
@@ -23,12 +24,14 @@ export class ControlMessage extends LitElement {
    */
   @property({ type: String }) error: keyof ValidityState = null;
 
+  @state() private alertStatus: string;
+
   static styles = useStyles([styles]);
 
   render() {
     return html`
       <div internal-host>
-        <mlv-alert .status=${alertStatus[this.status]}>
+        <mlv-alert .status=${this.alertStatus}>
           <slot></slot>
         </mlv-alert>
       </div>
@@ -38,5 +41,16 @@ export class ControlMessage extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.slot = 'messages';
+  }
+
+  protected update(props: PropertyValues<this>) {
+    super.update(props);
+    if (props.has('status')) {
+      this.alertStatus = alertStatus[this.status];
+    }
+
+    if (props.has('error') && this.error) {
+      this.alertStatus = alertStatus.error;
+    }
   }
 }

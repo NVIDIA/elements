@@ -1,0 +1,47 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { BADGE } from '@geometricpanda/storybook-addon-badges';
+
+<Meta title="Forms/Date/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Date
+
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
+
+## Installation
+
+```typescript
+import '@elements/elements/date/define.js';
+```
+
+```html
+<mlv-date>
+  <label>label</label>
+  <input type="date" />
+</mlv-date>
+```
+
+<Canvas>
+  <Story id="forms-date-examples--date" />
+</Canvas>
+
+## Datalist
+
+<Canvas>
+  <Story id="forms-date-examples--datalist" />
+</Canvas>
+
+## Vertical
+
+<Canvas>
+  <Story id="forms-date-examples--vertical" />
+</Canvas>
+
+## Horizontal
+
+<Canvas>
+  <Story id="forms-date-examples--horizontal" />
+</Canvas>
+
+## <mlv-date\>
+
+<Props of="mlv-date" />

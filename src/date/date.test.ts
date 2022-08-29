@@ -1,0 +1,34 @@
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { Date } from '@elements/elements/date';
+import '@elements/elements/date/define.js';
+
+describe('mlv-date', () => {
+  let fixture: HTMLElement;
+  let element: Date;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-date>
+        <label>label</label>
+        <input type="date" />
+      </mlv-date>
+    `);
+    element = fixture.querySelector('mlv-date');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get('mlv-date')).toBeDefined();
+  });
+
+
+  it('should render calendar suffix icon', () => {
+    expect(element.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('date');
+  });
+});

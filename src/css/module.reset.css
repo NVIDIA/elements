@@ -6,8 +6,13 @@
   text-rendering: optimizeSpeed;
 }
 
-input::placeholder {
+/* some CSS selectors are unavailable to ::slotted() */
+[mlv-control] input::placeholder {
   color: var(--mlv-sys-text-placeholder-color) !important;
+}
+
+[mlv-control] input::-webkit-calendar-picker-indicator {
+  opacity: 0 !important;
 }
 
 mlv-select option {
@@ -17,6 +22,6 @@ mlv-select option {
   align-items: center !important;
 }
 
-[mlv-control] input::-webkit-calendar-picker-indicator {
-  opacity: 0 !important;
+mlv-color input::-webkit-color-swatch {
+  border: none !important;
 }

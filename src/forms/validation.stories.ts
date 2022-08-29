@@ -1,14 +1,15 @@
 import { html } from 'lit';
-// import '@elements/elements/input/define.js';
-// import '@elements/elements/password/define.js';
+import '@elements/elements/input/define.js';
+import '@elements/elements/password/define.js';
 
 export default {
-  title: 'Forms/Validation/Examples'
+  title: 'Forms/Validation/Examples',
+  parameters: { badges: ['alpha'] }
 };
 
 export const Validation = () => {
   return html`
-<form style="display: flex; flex-direction: column; gap: 24px; max-width: 350px;">
+<form mlv-layout="column gap:md" style="max-width: 350px;">
   <mlv-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
@@ -41,5 +42,53 @@ export const Validation = () => {
     alertGroup.hidden = false;
   });
 </script>
+`;
+}
+
+export const ValidationErrorGroup = () => {
+  return html`
+<form mlv-layout="column gap:md" style="max-width: 350px;" novalidate>
+  <mlv-input status="error">
+    <label>email</label>
+    <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
+    <mlv-control-message status="error">invalid email</mlv-control-message>
+  </mlv-input>
+
+  <mlv-password status="error">
+    <label>password</label>
+    <input type="password" name="password" required minlength="6" autocomplete="off" />
+    <mlv-control-message status="error">minimum length is 6 characters</mlv-control-message>
+  </mlv-password>
+
+  <mlv-button>login to account</mlv-button>
+
+  <mlv-alert-group status="danger">
+    <mlv-alert>invalid email</mlv-alert>
+    <mlv-alert>password required</mlv-alert>
+  </mlv-alert-group>
+</form>
+`;
+}
+
+export const ValidationSuccessGroup = () => {
+  return html`
+<form mlv-layout="column gap:md" style="max-width: 350px;" novalidate>
+  <mlv-input>
+    <label>username</label>
+    <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
+    <mlv-control-message status="success">username available</mlv-control-message>
+  </mlv-input>
+
+  <mlv-password status="error">
+    <label>password</label>
+    <input type="password" name="password" required minlength="6" autocomplete="off" />
+  </mlv-password>
+
+  <mlv-button>login to account</mlv-button>
+
+  <mlv-alert-group status="success">
+    <mlv-alert closable>account created</mlv-alert>
+  </mlv-alert-group>
+</form>
 `;
 }

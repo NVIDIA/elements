@@ -1,0 +1,41 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { BADGE } from '@geometricpanda/storybook-addon-badges';
+
+<Meta title="Forms/File/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# File
+
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file)
+
+## Installation
+
+```typescript
+import '@elements/elements/file/define.js';
+```
+
+```html
+<mlv-file>
+  <label>label</label>
+  <input type="file" />
+</mlv-file>
+```
+
+<Canvas>
+  <Story id="forms-file-examples--file" />
+</Canvas>
+
+## Vertical
+
+<Canvas>
+  <Story id="forms-file-examples--vertical" />
+</Canvas>
+
+## Horizontal
+
+<Canvas>
+  <Story id="forms-file-examples--horizontal" />
+</Canvas>
+
+## <mlv-file\>
+
+<Props of="mlv-file" />
