@@ -1,0 +1,51 @@
+:host {
+  --padding: 0 var(--nve-ref-size-200);
+  --font-size: var(--nve-ref-font-size-300);
+  --height: var(--nve-ref-font-size-700);
+  --background: var(--nve-sys-interaction-default-background);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --border: 0;
+  width: 100%;
+}
+
+[input] {
+  min-height: var(--height);
+  background: var(--background);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  color: var(--color);
+  cursor: var(--cursor);
+  display: flex;
+  align-content: stretch;
+  width: 100%;
+}
+
+::slotted(select) {
+  appearance: none !important;
+  color: var(--color) !important;
+  padding: var(--padding) !important;
+  font-size: var(--font-size) !important;
+  color: var(--color) !important;
+  width: 100% !important;
+  border: 0 !important;
+  background: none !important;
+  display: block !important;
+}
+
+::slotted(select[multiple]) {
+  padding: 0 !important;
+  min-height: 100px !important;
+}
+
+:host(:--invalid),
+:host(:--error) {
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-status-danger-background);
+}
+
+:host(:--success) {
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-status-success-background);
+}
+
+:host(:--disabled) {
+  --border: var(--nve-ref-border-width-md) solid transparent;
+}

@@ -1,0 +1,85 @@
+import { html } from 'lit';
+import '@elements/elements/textarea/define.js';
+
+export default {
+  title: 'Forms/Textarea/Examples',
+  component: 'nve-textarea',
+  parameters: { badges: ['beta'] }
+};
+
+export const Textarea = {
+  render: () => html`
+<nve-textarea>
+  <label>label</label>
+  <textarea></textarea>
+  <nve-control-message>message</nve-control-message>
+</nve-textarea>`
+};
+
+export const Vertical = {
+  render: () => html`
+<div nve-layout="column gap:lg align:stretch">
+  <nve-textarea>
+    <label>label</label>
+    <textarea></textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
+
+  <nve-textarea>
+    <label>disabled</label>
+    <textarea disabled></textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
+
+  <nve-textarea>
+    <label>success</label>
+    <textarea></textarea>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-textarea>
+
+  <nve-textarea>
+    <label>error</label>
+    <textarea></textarea>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-textarea>
+</div>`
+};
+
+export const Horizontal = {
+  render: () => html`
+<div nve-layout="column gap:lg align:stretch">
+  <nve-textarea layout="horizontal">
+    <label>label</label>
+    <textarea></textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
+
+  <nve-textarea layout="horizontal">
+    <label>disabled</label>
+    <textarea disabled></textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
+
+  <nve-textarea layout="horizontal">
+    <label>success</label>
+    <textarea></textarea>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-textarea>
+
+  <nve-textarea layout="horizontal">
+    <label>error</label>
+    <textarea></textarea>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-textarea>
+</div>`
+};
+
+export const controlValidation = () => {
+  return html`
+<nve-textarea>
+  <label>validation</label>
+  <textarea required></textarea>
+  <nve-control-message>message</nve-control-message>
+  <nve-control-message error="valueMissing">required</nve-control-message>
+</nve-textarea>`;
+}

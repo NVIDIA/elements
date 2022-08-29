@@ -1,0 +1,70 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Forms/Radio/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Radio
+
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio)
+
+## Installation
+
+```typescript
+import '@elements/elements/radio/define.js';
+```
+
+```html
+<nve-radio-group>
+  <label>label</label>
+  <nve-radio>
+    <label>radio 1</label>
+    <input type="radio" checked />
+  </nve-radio>
+
+  <nve-radio>
+    <label>radio 2</label>
+    <input type="radio" />
+  </nve-radio>
+
+  <nve-radio>
+    <label>radio 3</label>
+    <input type="radio" />
+  </nve-radio>
+  <nve-control-message>message</nve-control-message>
+</nve-radio-group>
+```
+
+<Canvas>
+  <Story id="forms-radio-examples--radio" />
+</Canvas>
+
+## Vertical Group
+
+<Canvas>
+  <Story id="forms-radio-examples--vertical-group" />
+</Canvas>
+
+## Vertical Inline Group
+
+<Canvas>
+  <Story id="forms-radio-examples--vertical-inline-group" />
+</Canvas>
+
+## Horizontal Group
+
+<Canvas>
+  <Story id="forms-radio-examples--horizontal-group" />
+</Canvas>
+
+## Horizontal Inline Group
+
+<Canvas>
+  <Story id="forms-radio-examples--horizontal-inline-group" />
+</Canvas>
+
+## <nve-radio\>
+
+<Props of="nve-radio" />
+
+## <nve-radio-group\>
+
+<Props of="nve-radio-group" />

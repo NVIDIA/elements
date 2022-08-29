@@ -1,0 +1,38 @@
+nve-file > input {
+  color: var(--color);
+}
+
+nve-file > input::file-selector-button {
+  background: var(--background);
+  padding: var(--padding);
+  height: var(--height);
+  width: var(--width);
+  border-radius: var(--border-radius);
+  border: var(--border);
+  text-decoration: var(--text-decoration);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  cursor: var(--cursor);
+  gap: var(--gap);
+  margin-right: var(--nve-ref-space-sm);
+  display: inline-flex;
+  place-items: center;
+  appearance: none;
+  line-height: 1.2em;
+}
+
+nve-file > input::file-selector-button:hover {
+  --color: var(--nve-sys-interaction-default-hover-color);
+  --background: var(--nve-sys-interaction-default-hover-background);
+}
+
+nve-file > input::file-selector-button:active {
+  --color: var(--nve-sys-interaction-default-active-color);
+  --background: var(--nve-sys-interaction-default-active-background);
+}
+
+nve-file > input::file-selector-button:disabled {
+  --color: var(--nve-sys-interaction-default-disabled-color);
+  --background: var(--nve-sys-interaction-default-disabled-background);
+  --cursor: not-allowed;
+}
