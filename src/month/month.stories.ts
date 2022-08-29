@@ -1,0 +1,91 @@
+import { html } from 'lit';
+import '@elements/elements/month/define.js';
+
+export default {
+  title: 'Forms/Month/Examples',
+  component: 'nve-month',
+  parameters: { badges: ['alpha'] }
+};
+
+export const Month = {
+  render: () => html`
+<nve-month>
+  <label>label</label>
+  <input type="month" />
+  <nve-control-message>message</nve-control-message>
+</nve-month>
+`
+};
+
+export const Datalist = {
+  render: () => html`
+<nve-month>
+  <label>label</label>
+  <input type="month" />
+  <nve-control-message>message</nve-control-message>
+  <datalist>
+    <option value="2018-04"></option>
+    <option value="2018-05"></option>
+    <option value="2018-06"></option>
+  </datalist>
+</nve-month>
+  `
+}
+
+export const Vertical = {
+  render: () => html`
+<div nve-layout="column gap:lg">
+  <nve-month>
+    <label>label</label>
+    <input type="month" />
+    <nve-control-message>message</nve-control-message>
+  </nve-month>
+
+  <nve-month>
+    <label>disabled</label>
+    <input type="month" disabled />
+    <nve-control-message>message</nve-control-message>
+  </nve-month>
+
+  <nve-month>
+    <label>success</label>
+    <input type="month" />
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-month>
+
+  <nve-month>
+    <label>error</label>
+    <input type="month" />
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-month>
+</div>`
+};
+
+export const Horizontal = {
+  render: () => html`
+<div nve-layout="column gap:lg">
+  <nve-month layout="horizontal">
+    <label>label</label>
+    <input type="month" />
+    <nve-control-message>message</nve-control-message>
+  </nve-month>
+
+  <nve-month layout="horizontal">
+    <label>disabled</label>
+    <input type="month" disabled />
+    <nve-control-message>message</nve-control-message>
+  </nve-month>
+
+  <nve-month layout="horizontal">
+    <label>success</label>
+    <input type="month" />
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-month>
+
+  <nve-month layout="horizontal">
+    <label>error</label>
+    <input type="month" />
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-month>
+</div>`
+};

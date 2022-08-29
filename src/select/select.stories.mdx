@@ -1,0 +1,57 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Forms/Select/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Select
+
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/select)
+
+## Installation
+
+```typescript
+import '@elements/elements/select/define.js';
+```
+
+```html
+<nve-select>
+  <label>label</label>
+  <select>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </select>
+  <nve-control-message>message</nve-control-message>
+</nve-select>
+```
+
+<Canvas>
+  <Story id="forms-select-examples--select" />
+</Canvas>
+
+## Vertical
+
+<Canvas>
+  <Story id="forms-select-examples--vertical" />
+</Canvas>
+
+## Horizontal
+
+<Canvas>
+  <Story id="forms-select-examples--horizontal" />
+</Canvas>
+
+## Multiple
+
+<Canvas>
+  <Story id="forms-select-examples--multiple" />
+</Canvas>
+
+## Size
+
+<Canvas>
+  <Story id="forms-select-examples--size" />
+</Canvas>
+
+## <nve-select\>
+
+<Props of="nve-select" />

@@ -1,0 +1,50 @@
+:host {
+  --cursor: pointer;
+  --border-radius: var(--nve-ref-border-radius-full);
+  --background: var(--nve-sys-interaction-default-background);
+  --width: var(--nve-ref-size-1000);
+  --height: var(--nve-ref-size-500);
+  --anchor-width: var(--nve-ref-font-size-200);
+  --anchor-height: var(--nve-ref-font-size-200);
+  --anchor-border-radius: var(--nve-ref-border-radius-full);
+  --anchor-background: var(--nve-sys-interaction-default-active-background);
+}
+
+::slotted(input) {
+  display: none !important;
+}
+
+[input] {
+  cursor: var(--cursor);
+  border-radius: var(--border-radius);
+  background: var(--background);
+  height: var(--height);
+  width: var(--width);
+  display: flex !important;
+  padding: 0 3px;
+  align-items: center;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in;
+  transition-property: background-color;
+}
+
+[input]:after {
+  border-radius: var(--anchor-border-radius);
+  background: var(--anchor-background);
+  height: var(--anchor-height);
+  width: var(--anchor-width);
+  display: inline-block;
+  content: '';
+  transition-duration: 200ms;
+  transition-timing-function: ease-in;
+  transition-property: transform;
+}
+
+:host(:--checked) {
+  --background: var(--nve-sys-accent-secondary-background);
+  --anchor-background: var(--nve-sys-interaction-default-active-color);
+
+  [input]:after {
+    transform: translate(calc(var(--width) / 2), 0);
+  }
+}
