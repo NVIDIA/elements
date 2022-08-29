@@ -9,6 +9,10 @@ interface ElementInternals {
   }
 }
 
+interface HTMLInputElement {
+  showPicker: () => void;
+}
+
 interface HTMLElementTagNameMap {
   'nve-button': Button;
   'nve-card': Card;

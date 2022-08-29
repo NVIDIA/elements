@@ -5,10 +5,11 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 
 export default {
-  title: 'Forms/Control/Examples'
+  title: 'Forms/Control/Examples',
+  parameters: { badges: ['beta'] }
 }
 
-export const control = () => {
+export const Control = () => {
   return html`
 <nve-control>
   <label>label</label>
@@ -17,7 +18,7 @@ export const control = () => {
 </nve-control>`;
 };
 
-export const responsive = () => {
+export const Responsive = () => {
   return html`
   <div style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal;">
     <nve-control-group layout="horizontal-inline">
@@ -40,7 +41,7 @@ export const responsive = () => {
   `;
 };
 
-export const controlLayout = () => {
+export const ControlLayout = () => {
   return html`
 <style>
   div {
@@ -222,7 +223,7 @@ export const controlLayout = () => {
 </div>`;
 };
 
-export const controlValidation = () => {
+export const ControlValidation = () => {
   return html`
 <nve-control>
   <label>validation</label>
@@ -232,7 +233,7 @@ export const controlValidation = () => {
 </nve-control>`;
 }
 
-export const noLabelControl = () => {
+export const NoLabelControl = () => {
   return html`
 <nve-control>
   <input type="search" aria-label="search" placeholder="search" />
@@ -287,7 +288,7 @@ export const controlGroup = () => {
 `;
 }
 
-export const dateControl = () => {
+export const DateControl = () => {
   return html`
 <nve-control>
   <label>date</label>
@@ -296,7 +297,7 @@ export const dateControl = () => {
 </nve-control>`;
 };
 
-export const textareaControl = () => {
+export const TextareaControl = () => {
   return html`
 <nve-control>
   <label>about</label>
@@ -305,7 +306,7 @@ export const textareaControl = () => {
 </nve-control>`;
 }
 
-export const datalist = () => {
+export const Datalist = () => {
   return html`
 <nve-control>
   <label>search</label>
@@ -318,7 +319,7 @@ export const datalist = () => {
 </nve-control>`;
 };
 
-export const status = () => {
+export const Status = () => {
   return html`
 <nve-control>
   <label>label</label>
@@ -351,7 +352,7 @@ export const status = () => {
 </nve-control>`;
 };
 
-export const selectmenuExperimental = () => {
+export const SelectmenuExperimental = () => {
   return html`
 <nve-control layout="vertical">
   <label>selectmenu</label>
@@ -470,7 +471,7 @@ class Emoji extends LitElement {
   }
 }
 
-export const custom = () => {
+export const Custom = () => {
   return html`
 <nve-control layout="horizontal">
   <label>custom emoji</label>

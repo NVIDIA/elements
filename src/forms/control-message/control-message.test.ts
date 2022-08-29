@@ -48,4 +48,10 @@ describe('nve-control-message', () => {
     await elementIsStable(element);
     expect(alert.status).toBe('warning');
   });
+
+  it('should set the alert status to danger if message has a validation error applied', async () => {
+    element.error = 'valueMissing';
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('nve-alert').status).toBe('danger');
+  });
 });

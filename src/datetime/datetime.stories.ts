@@ -1,0 +1,91 @@
+import { html } from 'lit';
+import '@elements/elements/datetime/define.js';
+
+export default {
+  title: 'Forms/Datetime/Examples',
+  component: 'nve-datetime',
+  parameters: { badges: ['alpha'] }
+};
+
+export const Datetime = {
+  render: () => html`
+<nve-datetime>
+  <label>date</label>
+  <input type="datetime-local" />
+  <nve-control-message>message</nve-control-message>
+</nve-datetime>
+`
+};
+
+export const Datalist = {
+  render: () => html`
+<nve-month>
+  <label>label</label>
+  <input type="datetime-local" />
+  <nve-control-message>message</nve-control-message>
+  <datalist>
+    <option value="2018-06-07T00:00"></option>
+    <option value="2018-06-12T19:30"></option>
+    <option value="2018-06-14T00:00"></option>
+  </datalist>
+</nve-month>
+  `
+}
+
+export const Vertical = {
+  render: () => html`
+<div nve-layout="column gap:lg align:stretch">
+  <nve-datetime>
+    <label>label</label>
+    <input type="datetime-local" />
+    <nve-control-message>message</nve-control-message>
+  </nve-datetime>
+
+  <nve-datetime>
+    <label>disabled</label>
+    <input type="datetime-local" disabled />
+    <nve-control-message>message</nve-control-message>
+  </nve-datetime>
+
+  <nve-datetime>
+    <label>success</label>
+    <input type="datetime-local" />
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-datetime>
+
+  <nve-datetime>
+    <label>error</label>
+    <input type="datetime-local" />
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-datetime>
+</div>`
+};
+
+export const Horizontal = {
+  render: () => html`
+<div nve-layout="column gap:lg align:stretch">
+  <nve-datetime layout="horizontal">
+    <label>label</label>
+    <input type="datetime-local" />
+    <nve-control-message>message</nve-control-message>
+  </nve-datetime>
+
+  <nve-datetime layout="horizontal">
+    <label>disabled</label>
+    <input type="datetime-local" disabled />
+    <nve-control-message>message</nve-control-message>
+  </nve-datetime>
+
+  <nve-datetime layout="horizontal">
+    <label>success</label>
+    <input type="datetime-local" />
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-datetime>
+
+  <nve-datetime layout="horizontal">
+    <label>error</label>
+    <input type="datetime-local" />
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-datetime>
+</div>`
+};
