@@ -1,0 +1,47 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Forms/Time/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Time
+
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time/)
+
+## Installation
+
+```typescript
+import '@elements/elements/time/define.js';
+```
+
+```html
+<nve-time>
+  <label>label</label>
+  <input type="time" min="09:00" max="18:00" value="12:00" />
+  <nve-control-message>message</nve-control-message>
+</nve-time>
+```
+
+<Canvas>
+  <Story id="forms-time-examples--time" />
+</Canvas>
+
+## Datalist
+
+<Canvas>
+  <Story id="forms-time-examples--datalist" />
+</Canvas>
+
+## Vertical
+
+<Canvas>
+  <Story id="forms-time-examples--vertical" />
+</Canvas>
+
+## Horizontal
+
+<Canvas>
+  <Story id="forms-time-examples--horizontal" />
+</Canvas>
+
+## <nve-time\>
+
+<Props of="nve-time" />

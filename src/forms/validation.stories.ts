@@ -1,14 +1,15 @@
 import { html } from 'lit';
-// import '@elements/elements/input/define.js';
-// import '@elements/elements/password/define.js';
+import '@elements/elements/input/define.js';
+import '@elements/elements/password/define.js';
 
 export default {
-  title: 'Forms/Validation/Examples'
+  title: 'Forms/Validation/Examples',
+  parameters: { badges: ['alpha'] }
 };
 
 export const Validation = () => {
   return html`
-<form style="display: flex; flex-direction: column; gap: 24px; max-width: 350px;">
+<form nve-layout="column gap:md" style="max-width: 350px;">
   <nve-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
@@ -41,5 +42,53 @@ export const Validation = () => {
     alertGroup.hidden = false;
   });
 </script>
+`;
+}
+
+export const ValidationErrorGroup = () => {
+  return html`
+<form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
+  <nve-input status="error">
+    <label>email</label>
+    <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
+    <nve-control-message status="error">invalid email</nve-control-message>
+  </nve-input>
+
+  <nve-password status="error">
+    <label>password</label>
+    <input type="password" name="password" required minlength="6" autocomplete="off" />
+    <nve-control-message status="error">minimum length is 6 characters</nve-control-message>
+  </nve-password>
+
+  <nve-button>login to account</nve-button>
+
+  <nve-alert-group status="danger">
+    <nve-alert>invalid email</nve-alert>
+    <nve-alert>password required</nve-alert>
+  </nve-alert-group>
+</form>
+`;
+}
+
+export const ValidationSuccessGroup = () => {
+  return html`
+<form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
+  <nve-input>
+    <label>username</label>
+    <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
+    <nve-control-message status="success">username available</nve-control-message>
+  </nve-input>
+
+  <nve-password status="error">
+    <label>password</label>
+    <input type="password" name="password" required minlength="6" autocomplete="off" />
+  </nve-password>
+
+  <nve-button>login to account</nve-button>
+
+  <nve-alert-group status="success">
+    <nve-alert closable>account created</nve-alert>
+  </nve-alert-group>
+</form>
 `;
 }

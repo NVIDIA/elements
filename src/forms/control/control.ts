@@ -3,7 +3,8 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList } from '@elements/elements/internal';
 import { ControlMessage } from '../control-message/control-message.js';
-import { setupControlValidationStates, setupControlStates, setupControlStatusStates, inputQuery, isInlineInputType, setupControlLayoutStates } from '../utils/index.js';
+import { setupControlValidationStates, setupControlStates, setupControlStatusStates, inputQuery } from '../utils/states.js';
+import { setupControlLayoutStates, isInlineInputType } from '../utils/layout.js';
 import styles from './control.css?inline';
 
 /**

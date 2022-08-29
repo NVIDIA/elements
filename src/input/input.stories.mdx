@@ -1,0 +1,46 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Forms/Input/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Input
+
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text)
+
+## Installation
+
+```typescript
+import '@elements/elements/input/define.js';
+```
+
+```html
+<nve-input>
+  <label>label</label>
+  <input type="text" />
+</nve-input>
+```
+
+<Canvas>
+  <Story id="forms-input-examples--input" />
+</Canvas>
+
+## Vertical
+
+<Canvas>
+  <Story id="forms-input-examples--vertical" />
+</Canvas>
+
+## Horizontal
+
+<Canvas>
+  <Story id="forms-input-examples--horizontal" />
+</Canvas>
+
+## Rounded
+
+<Canvas>
+  <Story id="forms-input-examples--rounded" />
+</Canvas>
+
+## <nve-input\>
+
+<Props of="nve-input" />
