@@ -1,5 +1,22 @@
 [nve-theme] {
+  color-scheme: var(--nve-sys-color-scheme) !important;
   background: var(--nve-sys-layer-canvas-background) !important;
   color: var(--nve-sys-layer-canvas-color) !important;
   font-family: var(--nve-ref-font-family-inter) !important;
+  text-rendering: optimizeSpeed;
+}
+
+input::placeholder {
+  color: var(--nve-sys-text-placeholder-color) !important;
+}
+
+nve-select option {
+  padding: var(--padding) !important;
+  height: var(--height) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+[nve-control] input::-webkit-calendar-picker-indicator {
+  opacity: 0 !important;
 }

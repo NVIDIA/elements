@@ -12,24 +12,46 @@ window.jest = jest;
 // https://github.com/storybookjs/storybook/issues/15391#issuecomment-873472669
 
 export const parameters = {
-  status: {
-    statuses: {
-      alpha: {
-        background: 'yellow',
-        color: 'black',
-        description: 'This component is undergoing active development'
+  docs: {
+    theme: themes.dark,
+  },
+  badgesConfig: {
+    alpha: {
+      styles: {
+        backgroundColor: 'var(--nve-sys-status-warning-background)',
+        borderColor: 'var(--nve-sys-status-warning-background)',
+        color: 'var(--nve-sys-status-warning-color)',
       },
-      beta: {
-        background: 'blue',
-        color: 'white',
-        description: 'This component is undergoing active development'
-      },
-      stable: {
-        background: 'green',
-        color: 'white',
-        description: 'This component is stable and released'
+      title: 'Alpha',
+      tooltip: {
+        title: 'Alpha 🚧',
+        desc: 'This element or utility is in under alpha preview as a work in progress. Breaking API and visual changes may occur during the engineering and UI design review process.',
       }
-    }
+    },
+    beta: {
+      styles: {
+        backgroundColor: 'var(--nve-sys-status-info-background)',
+        borderColor: 'var(--nve-sys-status-info-background)',
+        color: 'var(--nve-sys-status-info-color)',
+      },
+      title: 'Beta',
+      tooltip: {
+        title: 'Beta 🛠️',
+        desc: 'This element or utility is in beta and available for use. The APIs and visual design are stable but in may change as we seek additional feedback.',
+      }
+    },
+    stable: {
+      styles: {
+        backgroundColor: 'var(--nve-sys-status-success-background)',
+        borderColor: 'var(--nve-sys-status-success-background)',
+        color: 'var(--nve-sys-status-success-color)',
+      },
+      title: 'Stable',
+      tooltip: {
+        title: 'Stable ✅',
+        desc: 'This element or utility is Stable and ready for use.',
+      }
+    },
   },
   darkMode: {
     stylePreview: true,
@@ -71,7 +93,39 @@ export const parameters = {
           'Vertical Layout',
           'Examples',
         ],
-        'Elements'
+        'Elements',
+        [
+          'Alert',
+          'Alert Group',
+          'Button',
+          'Card',
+          'Icon',
+          'Icon Button',
+          'Internal'
+        ],
+        'Forms',
+        [
+          'Forms',
+          'Control',
+          'Actions',
+          'Validation',
+          'Checkbox',
+          'Input',
+          'Input Groups',
+          'Password',
+          'Radio',
+          'Range',
+          'Search',
+          'Select',
+          'Switch',
+          'Textarea',
+          'Color',
+          'Date',
+          'Datetime',
+          'Month',
+          'Time',
+          'Week'
+        ]
       ]
     }
   }

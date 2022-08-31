@@ -542,6 +542,64 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/input/define.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "nve-input",
+          "declaration": {
+            "name": "MlvInput",
+            "package": "@elements/elements/input"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/input/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./input.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/input/input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "MlvInput",
+          "members": [],
+          "superclass": {
+            "name": "Control",
+            "package": "@elements/elements/forms"
+          },
+          "tagName": "nve-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "MlvInput",
+          "declaration": {
+            "name": "MlvInput",
+            "module": "src/input/input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/internal/index.ts",
       "declarations": [],
       "exports": [

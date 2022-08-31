@@ -1,0 +1,102 @@
+:host {
+  --color: var(--nve-sys-text-default-color);
+}
+
+[internal-host] {
+  color: var(--color);
+}
+
+::slotted(label) {
+  color: var(--color) !important;
+}
+
+:host(:--disabled) {
+  --color: var(--nve-sys-text-muted-color);
+}
+
+slot[name='label'] {
+  grid-area: label;
+  display: block;
+  align-self: start;
+}
+
+slot[name='messages'] {
+  grid-area: messages;
+  display: block;
+}
+
+.input-slot {
+  grid-area: input;
+  display: flex;
+  flex-direction: column;
+  gap: 4px 16px;
+  width: fit-content;
+  flex-wrap: wrap;
+}
+
+:host([layout*='-inline']) {
+  & .input-slot {
+    flex-direction: row;
+  }
+}
+
+.no-messages {
+  & slot[name='messages'] {
+    display: none !important;
+  }
+}
+
+[internal-host] {
+  display: grid;
+  gap: 8px;
+  align-items: start;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    'label label label'
+    'input input input'
+    'messages messages messages';
+
+  &.no-messages {
+    grid-template-areas: 
+      'label label label'
+      'input input input';
+  }
+}
+
+:host([layout='vertical-inline']) [internal-host] {
+  grid-template-areas:
+    'label label label'
+    'input input input'
+    'messages messages messages';;
+
+  &.no-messages {
+    grid-template-areas: 
+      'label label label'
+      'input input input';
+  }
+}
+
+:host([layout='horizontal']) [internal-host] {
+  grid-template-columns: 180px minmax(auto, max-content) auto;
+  grid-template-areas:
+    'label input input'
+    '. messages messages';
+
+  &.no-messages {
+    grid-template-areas: 
+      'label input input';
+  }
+}
+
+:host([layout='horizontal-inline']) [internal-host] {
+  grid-template-columns: 180px minmax(auto, max-content) auto;
+  grid-template-areas:
+    'label input input'
+    '. messages messages';
+  
+  &.no-messages {
+    grid-template-areas: 
+      'label input input';
+  }
+}

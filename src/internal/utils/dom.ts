@@ -24,3 +24,32 @@ export function getChildren(node: any) {
     return node.children; // light DOM direct children
   }
 }
+
+export function generateId() {
+  return `_${Math.random().toString(36).substring(2, 9)}`;
+}
+
+export function getAttributeChanges(element: HTMLElement, attr: string, fn: (attrValue: string) => void) {
+  fn(element.getAttribute(attr));
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      if (mutation.attributeName === attr) {
+        fn((mutation.target as HTMLElement).getAttribute(attr));
+      }
+    });
+  });
+  observer.observe(element, { attributes: true, subtree: true });
+  return observer;
+}
+
+export function getAttributeListChanges(element: HTMLElement, attrs: string[], fn: (mutation: MutationRecord) => void) {
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      if (attrs.includes(mutation.attributeName)) {
+        fn(mutation);
+      }
+    });
+  });
+  observer.observe(element, { attributes: true, subtree: true });
+  return observer;
+}

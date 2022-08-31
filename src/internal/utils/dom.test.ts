@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges } from '@elements/elements/internal';
 
 @customElement('test-element')
 class TestComponent extends LitElement {
@@ -77,5 +77,34 @@ describe('getFlatDOMTree', () => {
     expect(children[4].textContent).toBe('three');
     expect(children[5].textContent).toBe('four');
     expect(children[6].textContent).toBe('four');
+  });
+});
+
+describe('getAttributeChanges', () => {
+  it('should get attribute changes', async () => {
+    const element = document.createElement('div');
+    let foo = null;
+
+    expect(foo).toBe(null);
+
+    getAttributeChanges(element, 'foo', value => foo = value);
+    element.setAttribute('foo', 'bar');
+
+    expect(foo).toBe('bar');
+  });
+});
+
+describe('getAttributeListChanges', () => {
+  it('should get attribute changes from a list of chosen attributes', async () => {
+    const element = document.createElement('div');
+    const values = [];
+
+    expect(values).toEqual([]);
+
+    getAttributeListChanges(element, ['foo', 'bar'], value => values.push(value.attributeName));
+    element.setAttribute('foo', '');
+    element.setAttribute('bar', '');
+
+    expect(values).toEqual(['foo', 'bar']);
   });
 });
