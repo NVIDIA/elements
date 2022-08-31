@@ -10,7 +10,7 @@ import plugin from '@prettier/plugin-xml';
 const scriptPath = path.dirname(fileURLToPath(import.meta.url));
 const iconsPath = path.join(scriptPath, '/icons');
 const resultSvgPath = path.join(scriptPath, '/public/assets/icons.svg');
-const resultTypesPath = path.join(scriptPath, '/src/components/icon/icon-names.js');
+const resultTypesPath = path.join(scriptPath, '/src/icon/icon-names.js');
 
 const svgoOptions = {
   multipass: true,
@@ -81,7 +81,7 @@ for (const file of files) {
 const resultSvgText = new XMLSerializer().serializeToString(resultDocument);
 const resultPrettierSvgText = prettier.format(resultSvgText, {
   parser: 'xml',
-  plugins: plugin,
+  plugins: [plugin],
   xmlWhitespaceSensitivity: 'ignore'
 });
 fs.writeFileSync(resultSvgPath, resultPrettierSvgText);

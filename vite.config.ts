@@ -32,6 +32,7 @@ export default defineConfig((env) => {
         '../dist/css/theme.dark.css': dist(`css/theme.dark.css`),
         '../dist/css/theme.compact.css': dist(`css/theme.compact.css`),
         '../dist/css/theme.high-contrast.css': dist(`css/theme.high-contrast.css`),
+        '../dist/assets/inter-roman.var.woff2': dist(`assets/inter-roman.var.woff2`),
         '@elements/elements': resolve(testProdBuild ? dist() : './src') // tests should run against final build artifacts not source
       }
     },
@@ -97,7 +98,7 @@ export default defineConfig((env) => {
         branches: 90,
         functions: 90,
         statements: 90,
-        exclude: ['**/storybook/**', '**/test/**', '**/*.test.ts', '**/*.css.js', '**/index.js']
+        exclude: ['**/storybook/**', '**/test/**', '**/*.test.ts', '**/*.css.js', '**/*.css', '**/index.js']
       }
     }
   };

@@ -47,7 +47,9 @@ storybook(
     srcs = glob([".storybook/**/*"]) + glob(["src/**/*"]) + glob(["tokens/**/*"]) + glob(["public/**/*"]),
     deps = [
         ":@elements/elements",
+        "@npm_platform_libs_elements//@geometricpanda/storybook-addon-badges",
         "@npm_platform_libs_elements//@elements/custom-elements-storybook",
+        "@npm_platform_libs_elements//emoji-picker-element",
         "@npm_platform_libs_elements//lit",
     ],
     data = [

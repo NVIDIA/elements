@@ -1,0 +1,48 @@
+:host {
+  --gap: var(--mlv-ref-space-xs);
+  --font-size: var(--mlv-ref-font-size-200);
+  --background: var(--mlv-sys-status-neutral-background);
+  --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
+  --border-radius: var(--mlv-ref-border-radius-md);
+  --color: var(--mlv-sys-text-white-color);
+  width: 100%;
+}
+
+[internal-host] {
+  background: var(--background);
+  font-size: var(--font-size);
+  gap: var(--gap);
+  color: var(--color);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  --_alert-color: var(--color);
+}
+
+::slotted(mlv-alert) {
+  --color: var(--_alert-color);
+  --icon-color: var(--_alert-color);
+  --icon-size: var(--mlv-ref-size-600);
+  height: var(--mlv-ref-size-800);
+}
+
+:host([status='info']) {
+  --background: var(--mlv-sys-status-info-background);
+  --color: var(--mlv-sys-status-info-color);
+}
+
+:host([status='success']) {
+  --background: var(--mlv-sys-status-success-background);
+  --color: var(--mlv-sys-status-success-color);
+}
+
+:host([status='warning']) {
+  --background: var(--mlv-sys-status-warning-background);
+  --color: var(--mlv-sys-status-warning-color);
+}
+
+:host([status='danger']) {
+  --background: var(--mlv-sys-status-danger-background);
+  --color: var(--mlv-sys-status-danger-color);
+}

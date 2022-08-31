@@ -1,0 +1,100 @@
+:host {
+  --cursor: pointer;
+  --accent-color: var(--mlv-sys-accent-secondary-background);
+  --color: var(--mlv-sys-text-default-color);
+  --control-width: 200px;
+}
+
+::slotted(*) {
+  color-scheme: var(--mlv-sys-color-scheme);
+}
+
+::slotted(label) {
+  color: var(--color) !important;
+  cursor: var(--cursor) !important;
+  display: inline-block !important;
+  line-height: 1em !important;
+  align-self: center !important;
+}
+
+:host(:--disabled),
+:host(:--disabled) ::slotted(mlv-control-message:not([status])) {
+  --cursor: not-allowed;
+  --color: var(--mlv-sys-text-muted-color);
+}
+
+[input] {
+  cursor: var(--cursor);
+  grid-area: input;
+  display: block;
+  line-height: 1;
+}
+
+slot {
+  display: flex;
+  line-height: 1;
+  width: 100%;
+}
+
+slot[name='label'] {
+  grid-area: label;
+}
+
+slot[name='messages'] {
+  grid-area: messages;
+}
+
+.no-messages {
+  & slot[name='messages'] {
+    display: none !important;
+  }
+}
+
+[internal-host] {
+  display: grid;
+  width: 100%;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    'label label label'
+    'input input input'
+    'messages messages messages';
+  
+    &.no-messages {
+      grid-template-areas: 
+        'label label label'
+        'input input input';
+    }
+}
+
+[internal-host].inline-control {
+  align-items: center;
+  grid-template-columns: auto 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'input label label'
+    '. messages messages';
+
+  & slot {
+    display: inline;
+  }
+
+  &.no-messages {
+    grid-template-areas: 
+      'input label label';
+  }
+}
+
+:host([layout='horizontal']) [internal-host],
+:host([layout='horizontal-inline']) [internal-host] {
+  grid-template-columns: 180px 1fr minmax(0, 180px);
+  grid-template-areas:
+    'label input input'
+    '. messages messages';
+
+  &.no-messages {
+    grid-template-areas: 
+      'label input input';
+  }
+}

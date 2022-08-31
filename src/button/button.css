@@ -1,5 +1,5 @@
 :host {
-  --color: var(--mlv-sys-interaction-default-color);
+  --color: var(--mlv-sys-text-muted-color);
   --background: var(--mlv-sys-interaction-default-background);
   --padding: 0 var(--mlv-ref-size-300);
   --border-radius: var(--mlv-ref-border-radius-lg);
@@ -14,6 +14,7 @@
   display: inline-flex;
   position: relative;
   outline: 0;
+  width: fit-content;
 }
 
 [internal-host] {
@@ -73,6 +74,11 @@
   --cursor: not-allowed;
 }
 
+:host([readonly]) {
+  --cursor: cursor !important;
+  --text-decoration: none !important;
+}
+
 :host([interaction='emphasize']) {
   --color: var(--mlv-sys-interaction-emphasize-color);
   --background: var(--mlv-sys-interaction-emphasize-background);
@@ -130,4 +136,8 @@
     --color: var(--mlv-sys-interaction-default-disabled-color);
     --background: transparent;
   }
+}
+
+:host([readonly][interaction='ghost']) {
+  --color: var(--mlv-sys-text-muted-color);
 }

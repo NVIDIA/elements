@@ -22,6 +22,9 @@
     }
   },
   "sys": {
+    "color-scheme": {
+      "value": "dark"
+    },
     "text": {
       "default": {
         "color": {

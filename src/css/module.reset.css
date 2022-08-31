@@ -1,5 +1,22 @@
 [mlv-theme] {
+  color-scheme: var(--mlv-sys-color-scheme) !important;
   background: var(--mlv-sys-layer-canvas-background) !important;
   color: var(--mlv-sys-layer-canvas-color) !important;
   font-family: var(--mlv-ref-font-family-inter) !important;
+  text-rendering: optimizeSpeed;
+}
+
+input::placeholder {
+  color: var(--mlv-sys-text-placeholder-color) !important;
+}
+
+mlv-select option {
+  padding: var(--padding) !important;
+  height: var(--height) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+[mlv-control] input::-webkit-calendar-picker-indicator {
+  opacity: 0 !important;
 }

@@ -28,7 +28,7 @@
   }
 
   .docs-story > div:first-child {
-    padding: 12px !important;
+    padding: 12px 12px 36px 12px !important;
   }
 
   .docs-story [mlv-theme] {
@@ -63,6 +63,30 @@
     border: 0 !important;
   }
 
+  .docblock-argstable td,
+  .docblock-argstable td[colspan] {
+    background: var(--mlv-sys-layer-container-background) !important;
+    color: var(--mlv-sys-layer-container-color) !important;
+  }
+
+  /* docs table badges */
+  .docblock-argstable td span.css-10iuupx {
+    background: var(--mlv-sys-status-info-background) !important;
+    color: var(--mlv-sys-status-info-color) !important;
+  }
+
+  .docblock-argstable tr {
+    border-top-color: var(--mlv-ref-border-color-muted) !important;
+  }
+
+  .docblock-argstable tbody {
+    box-shadow: none !important;
+  }
+
+  .docblock-argstable-head th {
+    color: var(--mlv-sys-layer-canvas-color) !important;
+  }
+
   .docblock-code-toggle {
     background: var(--mlv-sys-interaction-default-background) !important;
     color: var(--mlv-sys-interaction-default-color) !important;
@@ -70,11 +94,31 @@
     outline-offset: -4px !important;
   }
 
-  .css-11xgcgt {
+  .docblock-source {
+    border: 0 !important;
+    background: var(--mlv-ref-color-gray-zinc-800) !important;
+  }
+
+  .docblock-source button {
+    background: var(--mlv-ref-color-gray-zinc-700) !important;
+  }
+
+  .sbdocs-preview .prismjs {
+    background: var(--mlv-ref-color-gray-zinc-900) !important;
+  }
+
+  /* code button backgrounds */
+  .css-11xgcgt,
+  .css-1az4em2 {
     background: transparent !important;
   }
 
   .docs-story .innerZoomElementWrapper > div {
     border: 0 !important;
+  }
+
+  #story--forms-validation-examples--validation,
+  #iframe--forms-validation-examples--validation {
+    min-height: 400px;
   }
 </style>
