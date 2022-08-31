@@ -1,0 +1,52 @@
+
+:host {
+  --gap: var(--nve-ref-space-xs);
+  --font-size: var(--nve-ref-font-size-200);
+  --color: var(--nve-sys-interaction-default-color);
+  --icon-color: var(--nve-sys-status-neutral-background);
+  --icon-size: var(--nve-ref-size-500);
+  width: auto;
+}
+
+[internal-host] {
+  font-size: var(--font-size);
+  gap: var(--gap);
+  color: var(--color);
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+nve-icon {
+  --color: var(--icon-color);
+  --width: var(--icon-size);
+  --height: var(--icon-size);
+  margin: calc(var(--nve-ref-space-xxxs) * -1);
+}
+
+nve-icon-button {
+  --color: var(--icon-color);
+  margin-left: auto;
+}
+
+:host([status='muted']) {
+  --color: var(--nve-sys-text-muted-color);
+}
+
+:host([status='info']) {
+  --icon-color: var(--nve-sys-status-info-background);
+}
+
+:host([status='success']) {
+  --icon-color: var(--nve-sys-status-success-background);
+  --color: var(--nve-sys-status-success-background);
+}
+
+:host([status='warning']) {
+  --icon-color: var(--nve-sys-status-warning-background);
+}
+
+:host([status='danger']) {
+  --icon-color: var(--nve-sys-status-danger-background);
+  --color: var(--nve-sys-status-danger-background);
+}

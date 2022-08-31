@@ -1,0 +1,59 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Forms/Control/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Control
+
+## Installation
+
+```typescript
+import '@elements/elements/forms/define.js';
+```
+
+The `nve-control` element is the base control that all built in `nve-*` form controls extend.
+The `nve-control` can be used for generic imput type as well as custom or third party form controls.
+
+## Responsive
+
+<Canvas>
+  <Story id="forms-control-examples--responsive" />
+</Canvas>
+
+## Control Validation
+
+<Canvas>
+  <Story id="forms-control-examples--control-validation" />
+</Canvas> 
+
+## No Label Control
+
+<Canvas>
+  <Story id="forms-control-examples--no-label-control" />
+</Canvas>
+
+## Status
+
+<Canvas>
+  <Story id="forms-control-examples--status" />
+</Canvas>
+
+## Custom
+
+Custom inputs can be used and leverage the same form layouts and validation statuses as the built in controls.
+Place the `nve-control` attribute on the element that is the custom input. [emoji picker source](https://github.com/nolanlawson/emoji-picker-element).
+
+<Canvas>
+  <Story id="forms-control-examples--custom" />
+</Canvas>
+
+## <nve-control\>
+
+<Props of="nve-control" />
+
+## <nve-control-message\>
+
+<Props of="nve-control-message" />
+
+## <nve-control-group\>
+
+<Props of="nve-control-group" />
