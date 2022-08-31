@@ -7,6 +7,7 @@ export * from './controllers/state-disabled.controller.js';
 export * from './controllers/state-expanded.controller.js';
 export * from './controllers/state-pressed.controller.js';
 export * from './controllers/type-anchor.controller.js';
+export * from './controllers/type-closable.controller.js';
 export * from './controllers/type-button.controller.js';
 export * from './controllers/type-submit.controller.js';
 export * from './styles/index.js';
