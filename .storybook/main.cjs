@@ -10,7 +10,7 @@ module.exports = {
     '../tokens/**/*.stories.mdx',
     '../tokens/**/*.stories.ts'
   ],
-  addons,
+  addons: [...addons, '@geometricpanda/storybook-addon-badges'],
   framework: '@storybook/web-components',
   core: {
     builder: '@storybook/builder-vite'

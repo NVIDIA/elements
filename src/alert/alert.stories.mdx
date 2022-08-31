@@ -1,0 +1,38 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Elements/Alert/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Alert
+
+[W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)
+
+## Installation
+
+```typescript
+import '@elements/elements/alert/define.js';
+```
+
+```html
+<nve-alert status="success">success message</nve-alert>
+```
+
+<Canvas>
+  <Story id="elements-alert-examples--default" />
+</Canvas>
+
+## Status
+
+<Canvas>
+  <Story id="elements-alert-examples--status" />
+</Canvas>
+
+## Themes
+
+<Canvas>
+  <Story id="elements-alert-examples--themes" />
+</Canvas>
+
+# Element API
+
+## <nve-alert\>
+<Props of="nve-alert" />

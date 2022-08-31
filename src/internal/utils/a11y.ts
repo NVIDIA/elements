@@ -1,8 +1,47 @@
+import { generateId } from './dom.js';
 
 export function attachInternals(element: HTMLElement & { _internals?: ElementInternals }) {
   try {
     element._internals = element.attachInternals();
-  } catch {
-    return ;
+  } catch (e: any) {
+    if (!e.message.includes('ElementInternals for the specified element was already attached')) {
+      console.error(e);
+    }
+    return;
+  }
+}
+
+export function associateLabel(label: HTMLLabelElement, input: HTMLInputElement) {
+  if (label && input) {
+    input.id = input.id ? input.id : generateId();
+    label.setAttribute('for', input.id);
+  }
+}
+
+export function associateAriaLabel(label: HTMLElement, element: HTMLElement) {
+  if (label && element) {
+    label.id = label.id ? label.id : generateId();
+    element.setAttribute('aria-labelledby', label.id);
+  }
+}
+
+export function assoicateAriaDescribedBy(messages: HTMLElement[], element: HTMLElement) {
+  if (messages.length && element) {
+    const ids = messages.map(m => m.id = generateId()).join(' ');
+    element.setAttribute('aria-describedby', ids);
+  }
+}
+
+export function associateDataList(datalist: HTMLDataListElement, element: HTMLInputElement) {
+  if (datalist) {
+    datalist.id = datalist.id?.length ? datalist.id : generateId();
+    element.setAttribute('list', datalist.id);
+  }
+}
+
+export function associateControlGroup(elements: HTMLInputElement[]) {
+  if (!elements.find(e => e?.name?.length)) {
+    const name = generateId();
+    elements.forEach(e => e.name = name);
   }
 }

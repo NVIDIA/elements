@@ -1,0 +1,7 @@
+[internal-host] {
+  --_alert-color: var(--color);
+}
+
+nve-alert {
+  --color: var(--_alert-color);
+}

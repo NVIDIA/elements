@@ -1,0 +1,50 @@
+import { html } from 'lit';
+import { Alert } from '@elements/elements/alert';
+import '@elements/elements/alert/define.js';
+
+export default {
+  title: 'Elements/Alert/Examples',
+  component: 'nve-alert',
+  argTypes: {
+    status: {
+      control: 'inline-radio',
+      options: ['warning', 'danger', 'success', 'info']
+    }
+  }
+};
+
+type ArgTypes = Alert & { };
+
+export const Default = {
+  render: (args: ArgTypes) =>
+    html`<nve-alert .status=${args.status}>alert message</nve-alert>`,
+    args: { status: 'info' }
+};
+
+export const Status = {
+  render: () => html`
+    <div nve-layout="column gap:md">
+      <nve-alert status="info">info</nve-alert>
+      <nve-alert status="warning">warning</nve-alert>
+      <nve-alert status="success">success</nve-alert>
+      <nve-alert status="danger">danger</nve-alert>
+    </div>
+  `
+}
+
+export const Themes = {
+  render: () => html`
+    <div nve-theme="light" nve-layout="column gap:md">
+      <nve-alert status="info">info</nve-alert>
+      <nve-alert status="warning">warning</nve-alert>
+      <nve-alert status="success">success</nve-alert>
+      <nve-alert status="danger">danger</nve-alert>
+    </div>
+    <div nve-theme="dark" nve-layout="column gap:md">
+      <nve-alert status="info">info</nve-alert>
+      <nve-alert status="warning">warning</nve-alert>
+      <nve-alert status="success">success</nve-alert>
+      <nve-alert status="danger">danger</nve-alert>
+    </div>
+  `
+}

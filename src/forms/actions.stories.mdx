@@ -1,0 +1,35 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Forms/Actions/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Control Actions
+
+## Installation
+
+```typescript
+import '@elements/elements/input/define.js';
+```
+
+```html
+<nve-input>
+  <label>label</label>
+  <input type="text" />
+  <nve-icon-button icon-name="cancel" interaction="ghost" onClick="alert('click')" aria-label="clear"></nve-icon-button>
+</nve-input>
+```
+
+## Actions
+
+<Canvas>
+  <Story id="forms-actions-examples--actions" />
+</Canvas>
+
+## Prefix/Suffix
+
+<Canvas>
+  <Story id="forms-actions-examples--prefix-suffix" />
+</Canvas>
+
+## <nve-input\>
+
+<Props of="nve-input" />

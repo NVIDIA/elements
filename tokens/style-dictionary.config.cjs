@@ -14,8 +14,7 @@ StyleDictionary.registerFormat({
   name: 'custom/css',
   formatter: ({ dictionary, file, options }) => {
     const selector = options.theme ? `[nve-theme~='${options.theme}']` : `:root, [nve-theme~='light']`;
-    const colorScheme = options.theme === 'dark' ? '\n  color-scheme: dark;' : '';
-    return `${fileHeader({ file })}\n${selector} {${colorScheme}\n${formattedVariables({ format: 'css', dictionary, outputReferences: options.outputReferences })}\n}`;
+    return `${fileHeader({ file })}\n${selector} {\n${formattedVariables({ format: 'css', dictionary, outputReferences: options.outputReferences })}\n}`;
   }
 });
 
