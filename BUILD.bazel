@@ -11,6 +11,7 @@ vite_library(
         "@npm_platform_libs_elements//lit",
         "@npm_platform_libs_elements//postcss-mixins",
         "@npm_platform_libs_elements//postcss-nested",
+        "@npm_platform_libs_elements//postcss-each",
         "@npm_platform_libs_elements//rollup-plugin-minify-html-literals",
         "@npm_platform_libs_elements//rollup-plugin-terser",
         "@npm_platform_libs_elements//@custom-elements-manifest/analyzer",
