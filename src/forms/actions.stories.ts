@@ -18,6 +18,16 @@ export const Actions = () => {
 </mlv-input>`
 };
 
+export const LabelAction = () => {
+  return html`
+<mlv-input>
+  <label>label</label>
+  <mlv-icon-button icon-name="information" interaction="ghost" aria-label="more details" slot="label" onClick="alert('more info')"></mlv-icon-button>
+  <input type="text" />
+  <mlv-control-message>message</mlv-control-message>
+</mlv-input>`
+};
+
 export const PrefixSuffix = () => {
   return html`
 <mlv-input>

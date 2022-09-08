@@ -4,11 +4,31 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 # Forms
 
+The form control elements leverage the native browser inputs as its public API.
+This approach allows any framework or library to use the form elements and keeps
+the API simple without obfuscating the native browser APIs.
+
 ## Installation
+
+The form elements are split into individual sub imports/entrypoints. To use
+forms, import the `@elements/elements/forms/define.js` entrypoint. Import any additional
+form elements as needed.
 
 ```typescript
 import '@elements/elements/forms/define.js';
+import '@elements/elements/input/define.js';
 ```
+
+```html
+<mlv-input>
+  <label>label</label>
+  <input type="text" />
+  <mlv-control-message>message</mlv-control-message>
+</mlv-input>
+```
+
+All form elements support the following layouts for label placement, `horizontal`, `horizontal-inline`, `vertical` and `vertical-inline`.
+Vertical is the default label layout for all elements.
 
 ## Horizontal Inline
 

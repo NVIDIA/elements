@@ -20,23 +20,50 @@ export const Control = () => {
 
 export const Responsive = () => {
   return html`
-  <div style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal;">
-    <mlv-control-group layout="horizontal-inline">
-      <label>label</label>
-      <mlv-control>
+  <div mlv-layout="column gap:lg" style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal; max-width: 600px;">
+    <mlv-input layout="horizontal">
+      <label>text label</label>
+      <input />
+      <mlv-control-message>message</mlv-control-message>
+    </mlv-input>
+    <mlv-select layout="horizontal">
+      <label>select label</label>
+      <select>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+      </select>
+      <mlv-control-message>message</mlv-control-message>
+    </mlv-select>
+    <mlv-search layout="horizontal-inline">
+      <label>search label</label>
+      <input type="search" placeholder="search" />
+    </mlv-search>
+    <mlv-checkbox-group layout="horizontal-inline">
+      <label>checkbox label</label>
+      <mlv-checkbox>
         <label>local</label>
         <input type="checkbox" name="checkbox-group" value="1" checked />
-      </mlv-control>
-      <mlv-control>
+      </mlv-checkbox>
+      <mlv-checkbox>
         <label>staging</label>
         <input type="checkbox" name="checkbox-group" value="2" />
-      </mlv-control>
-      <mlv-control>
+      </mlv-checkbox>
+      <mlv-checkbox>
         <label>production</label>
         <input type="checkbox" name="checkbox-group" value="3" />
-      </mlv-control>
+      </mlv-checkbox>
       <mlv-control-message>message</mlv-control-message>
-    </mlv-control-group>
+    </mlv-checkbox-group>
+    <mlv-range layout="horizontal-inline">
+      <label>label</label>
+      <input type="range" />
+      <mlv-control-message>message</mlv-control-message>
+    </mlv-range>
+    <mlv-textarea layout="horizontal-inline">
+      <label>label</label>
+      <textarea></textarea>
+    </mlv-textarea>
   </div>
   `;
 };
@@ -473,14 +500,11 @@ class Emoji extends LitElement {
 
 export const Custom = () => {
   return html`
-<mlv-control layout="horizontal">
-  <label>custom emoji</label>
+<mlv-control>
+  <label>custom emoji label</label>
   <my-emoji mlv-control></my-emoji>
-  <mlv-control-message status="error">message</mlv-control-message>
+  <mlv-control-message>message <span id="emoji"></span></mlv-control-message>
 </mlv-control>
-
-<p id="emoji"></p>
-
 <script>
   document.querySelector('my-emoji').addEventListener('change', e => {
     document.querySelector('#emoji').textContent = e.target.value;
