@@ -14,10 +14,15 @@ const layoutDemoStyles = html`
       gap: var(--mlv-ref-space-sm);
     }
 
-
     section[mlv-layout~='column'] {
       height: 250px;
       width: 250px;
+    }
+
+    section[mlv-layout~='grid'] {
+      height: auto;
+      min-height: 250px;
+      max-width: 1200px;
     }
 
     mlv-card {
@@ -27,149 +32,103 @@ const layoutDemoStyles = html`
   </style>
 `;
 
+const generateCards = (numCards: number) => {
+  const cards = [];
+
+  for (let i = 0; i < numCards; i++) {
+    cards.push(html`<mlv-card></mlv-card>`);
+  }
+
+  return html`${cards}`;
+};
+
 export const Horizontal = {
   render: () => html`
     ${layoutDemoStyles}
 
     <h3>Align Left</h3>
     <section mlv-layout="row align:left">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Horizontal Center</h3>
     <section mlv-layout="row align:horizontal-center">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Right</h3>
     <section mlv-layout="row align:right">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Vertical Center</h3>
     <section mlv-layout="row align:vertical-center">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Center</h3>
     <section mlv-layout="row align:center">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Vertical Center & Right</h3>
     <section mlv-layout="row align:vertical-center align:right">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Left & Bottom</h3>
     <section mlv-layout="row align:left align:bottom">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Horizontal Center & Bottom</h3>
     <section mlv-layout="row align:horizontal-center align:bottom">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Right & Bottom</h3>
     <section mlv-layout="row align:right align:bottom">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Space Around</h3>
     <section mlv-layout="row align:space-around">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Space Between</h3>
     <section mlv-layout="row align:space-between">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Space Evenly</h3>
     <section mlv-layout="row align:space-evenly">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Stretch Horizontal</h3>
     <section mlv-layout="row align:horizontal-stretch">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Stretch Vertical</h3>
     <section mlv-layout="row align:vertical-stretch">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Full Stretch</h3>
     <section mlv-layout="row align:stretch">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Wrap</h3>
     <section mlv-layout="row align:left align:top align:wrap">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(10)}
     </section>
 
     <h3>Overflow Hidden By Default</h3>
     <section mlv-layout="row align:left align:top">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(10)}
     </section>
   `
 }
@@ -181,111 +140,196 @@ export const Vertical = {
 
     <h3>Align Top</h3>
     <section mlv-layout="column align:top">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Vertical Center</h3>
     <section mlv-layout="column align:vertical-center">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Bottom</h3>
     <section mlv-layout="column align:bottom">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Horizontal Center</h3>
     <section mlv-layout="column align:horizontal-center">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Center</h3>
     <section mlv-layout="column align:center">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Horizontal Center & Bottom</h3>
     <section mlv-layout="column align:horizontal-center align:bottom">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Top & Right</h3>
     <section mlv-layout="column align:top align:right">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Vertical Center & Right</h3>
     <section mlv-layout="column align:vertical-center align:right">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Bottom & Right</h3>
     <section mlv-layout="column align:bottom align:right">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Space Around</h3>
     <section mlv-layout="column align:space-around">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Space Between</h3>
     <section mlv-layout="column align:space-between">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Space Evenly</h3>
     <section mlv-layout="column align:space-evenly">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Stretch Horizontal</h3>
     <section mlv-layout="column align:horizontal-stretch">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Stretch Vertical</h3>
     <section mlv-layout="column align:vertical-stretch">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
 
     <h3>Align Full Stretch</h3>
     <section mlv-layout="column align:stretch">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(3)}
     </section>
   `
 }
 
+
+export const Grid = {
+  render: () => html`
+    ${layoutDemoStyles}
+
+    <h3>Grid with (<code>span-items:2</code>) specified on parent</h3>
+    <section mlv-layout="grid gap:md span-items:2">
+      ${generateCards(6)}
+    </section>
+
+    <h3>Grid with (<code>span-items:6</code>) specified on parent</h3>
+    <section mlv-layout="grid gap:md span-items:6">
+      ${generateCards(2)}
+    </section>
+
+    <h3>Grid with individual spans (<code>span:...</code>) on the children</h3>
+    <section mlv-layout="grid gap:md">
+      ${generateCards(12)}
+
+      <mlv-card mlv-layout="span:2"></mlv-card>
+      <mlv-card mlv-layout="span:2"></mlv-card>
+      <mlv-card mlv-layout="span:2"></mlv-card>
+      <mlv-card mlv-layout="span:2"></mlv-card>
+      <mlv-card mlv-layout="span:2"></mlv-card>
+      <mlv-card mlv-layout="span:2"></mlv-card>
+
+      <mlv-card mlv-layout="span:3"></mlv-card>
+      <mlv-card mlv-layout="span:3"></mlv-card>
+      <mlv-card mlv-layout="span:3"></mlv-card>
+      <mlv-card mlv-layout="span:3"></mlv-card>
+
+      <mlv-card mlv-layout="span:4"></mlv-card>
+      <mlv-card mlv-layout="span:4"></mlv-card>
+      <mlv-card mlv-layout="span:4"></mlv-card>
+
+      <mlv-card mlv-layout="span:5"></mlv-card>
+      <mlv-card mlv-layout="span:5"></mlv-card>
+      <mlv-card mlv-layout="span:2"></mlv-card>
+
+      <mlv-card mlv-layout="span:6"></mlv-card>
+      <mlv-card mlv-layout="span:6"></mlv-card>
+
+      <mlv-card mlv-layout="span:7"></mlv-card>
+      <mlv-card mlv-layout="span:3"></mlv-card>
+      <mlv-card mlv-layout="span:2"></mlv-card>
+
+      <mlv-card mlv-layout="span:8"></mlv-card>
+      <mlv-card mlv-layout="span:4"></mlv-card>
+
+      <mlv-card mlv-layout="span:9"></mlv-card>
+      <mlv-card mlv-layout="span:3"></mlv-card>
+    </section>
+
+
+    <h3>Grid Align Top</h3>
+    <section mlv-layout="grid gap:md align:top">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Vertical Center</h3>
+    <section mlv-layout="grid gap:md align:vertical-center">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Bottom</h3>
+    <section mlv-layout="grid gap:md align:bottom">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Horizontal Center</h3>
+    <section mlv-layout="grid gap:md align:horizontal-center">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Center</h3>
+    <section mlv-layout="grid gap:md align:center">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Horizontal Center & Bottom</h3>
+    <section mlv-layout="grid gap:md align:horizontal-center align:bottom">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Top & Right</h3>
+    <section mlv-layout="grid gap:md align:top align:right">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Vertical Center & Right</h3>
+    <section mlv-layout="grid gap:md align:vertical-center align:right">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Bottom & Right</h3>
+    <section mlv-layout="grid gap:md align:bottom align:right">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Stretch Horizontal</h3>
+    <section mlv-layout="grid gap:md align:horizontal-stretch">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Stretch Vertical</h3>
+    <section mlv-layout="grid gap:md align:vertical-stretch">
+      ${generateCards(9)}
+    </section>
+
+    <h3>Grid Align Full Stretch</h3>
+    <section mlv-layout="grid gap:md align:stretch">
+      ${generateCards(9)}
+    </section>
+  `
+}
 
 export const Gaps = {
   render: () => html`
@@ -293,65 +337,47 @@ export const Gaps = {
 
     <h3>Gap xxxs</h3>
     <section mlv-layout="row gap:xxxs">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(5)}
     </section>
 
     <h3>Gap xxs</h3>
     <section mlv-layout="row gap:xxs">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(5)}
     </section>
 
     <h3>Gap Extra Small</h3>
     <section mlv-layout="row gap:xs">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(5)}
     </section>
 
     <h3>Gap Small</h3>
     <section mlv-layout="row gap:sm">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(5)}
     </section>
 
     <h3>Gap Medium</h3>
     <section mlv-layout="row gap:md">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(5)}
     </section>
 
     <h3>Gap Large</h3>
     <section mlv-layout="row gap:lg">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(5)}
     </section>
 
     <h3>Gap Extra Large</h3>
     <section mlv-layout="row gap:xl">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(5)}
     </section>
 
     <h3>Gap xxl</h3>
     <section mlv-layout="row gap:xxl">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(5)}
     </section>
 
     <h3>Gap xxxl</h3>
     <section mlv-layout="row gap:xxxl">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      ${generateCards(5)}
     </section>
   `
 }

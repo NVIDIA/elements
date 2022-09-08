@@ -4,12 +4,13 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs';
 
 # Layout System
 
-Horizontal and vertical _Flexbox_ based layouts can be achieved with _little to no CSS_ using the `mlv-layout` attribute.
+Grid, horizontal and vertical based layouts can be achieved with _little to no CSS_ using the `mlv-layout` attribute.
 
-Set `mlv-layout="row"` or `mlv-layout="column"` on a container element and add additional alignment values.
+Set `mlv-layout="row"` `mlv-layout="column"` or `mlv-layout="grid"` on a container element and add additional alignment values.
 
 - `mlv-layout="row ..."`
 - `mlv-layout="column ..."`
+- `mlv-layout="grid ..."`
 
 
 - `align:left`
@@ -19,7 +20,7 @@ Set `mlv-layout="row"` or `mlv-layout="column"` on a container element and add a
 
 Combine `mlv-layout` attribute values to create your desired layout. For example:
 ```html
-<section mlv-layout="column align:vertical-center align:right">
+<section mlv-layout="row align:vertical-center align:right">
 ```
 
 ## Layout Gap Spacing
@@ -28,6 +29,9 @@ Combine `mlv-layout` attribute values to create your desired layout. For example
 Add the `gap` value to `mlv-layout` to set spacing between elements. For example:
 ```html
 <section mlv-layout="row gap:md">
+```
+```html
+<section mlv-layout="grid gap:md">
 ```
 
 The following "t-shirt" spacing values are available:
