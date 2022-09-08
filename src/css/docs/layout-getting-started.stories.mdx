@@ -4,12 +4,13 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs';
 
 # Layout System
 
-Horizontal and vertical _Flexbox_ based layouts can be achieved with _little to no CSS_ using the `nve-layout` attribute.
+Grid, horizontal and vertical based layouts can be achieved with _little to no CSS_ using the `nve-layout` attribute.
 
-Set `nve-layout="row"` or `nve-layout="column"` on a container element and add additional alignment values.
+Set `nve-layout="row"` `nve-layout="column"` or `nve-layout="grid"` on a container element and add additional alignment values.
 
 - `nve-layout="row ..."`
 - `nve-layout="column ..."`
+- `nve-layout="grid ..."`
 
 
 - `align:left`
@@ -19,7 +20,7 @@ Set `nve-layout="row"` or `nve-layout="column"` on a container element and add a
 
 Combine `nve-layout` attribute values to create your desired layout. For example:
 ```html
-<section nve-layout="column align:vertical-center align:right">
+<section nve-layout="row align:vertical-center align:right">
 ```
 
 ## Layout Gap Spacing
@@ -28,6 +29,9 @@ Combine `nve-layout` attribute values to create your desired layout. For example
 Add the `gap` value to `nve-layout` to set spacing between elements. For example:
 ```html
 <section nve-layout="row gap:md">
+```
+```html
+<section nve-layout="grid gap:md">
 ```
 
 The following "t-shirt" spacing values are available:
