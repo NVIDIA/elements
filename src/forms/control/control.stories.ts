@@ -20,23 +20,50 @@ export const Control = () => {
 
 export const Responsive = () => {
   return html`
-  <div style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal;">
-    <nve-control-group layout="horizontal-inline">
-      <label>label</label>
-      <nve-control>
+  <div nve-layout="column gap:lg" style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal; max-width: 600px;">
+    <nve-input layout="horizontal">
+      <label>text label</label>
+      <input />
+      <nve-control-message>message</nve-control-message>
+    </nve-input>
+    <nve-select layout="horizontal">
+      <label>select label</label>
+      <select>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+      </select>
+      <nve-control-message>message</nve-control-message>
+    </nve-select>
+    <nve-search layout="horizontal-inline">
+      <label>search label</label>
+      <input type="search" placeholder="search" />
+    </nve-search>
+    <nve-checkbox-group layout="horizontal-inline">
+      <label>checkbox label</label>
+      <nve-checkbox>
         <label>local</label>
         <input type="checkbox" name="checkbox-group" value="1" checked />
-      </nve-control>
-      <nve-control>
+      </nve-checkbox>
+      <nve-checkbox>
         <label>staging</label>
         <input type="checkbox" name="checkbox-group" value="2" />
-      </nve-control>
-      <nve-control>
+      </nve-checkbox>
+      <nve-checkbox>
         <label>production</label>
         <input type="checkbox" name="checkbox-group" value="3" />
-      </nve-control>
+      </nve-checkbox>
       <nve-control-message>message</nve-control-message>
-    </nve-control-group>
+    </nve-checkbox-group>
+    <nve-range layout="horizontal-inline">
+      <label>label</label>
+      <input type="range" />
+      <nve-control-message>message</nve-control-message>
+    </nve-range>
+    <nve-textarea layout="horizontal-inline">
+      <label>label</label>
+      <textarea></textarea>
+    </nve-textarea>
   </div>
   `;
 };
@@ -473,14 +500,11 @@ class Emoji extends LitElement {
 
 export const Custom = () => {
   return html`
-<nve-control layout="horizontal">
-  <label>custom emoji</label>
+<nve-control>
+  <label>custom emoji label</label>
   <my-emoji nve-control></my-emoji>
-  <nve-control-message status="error">message</nve-control-message>
+  <nve-control-message>message <span id="emoji"></span></nve-control-message>
 </nve-control>
-
-<p id="emoji"></p>
-
 <script>
   document.querySelector('my-emoji').addEventListener('change', e => {
     document.querySelector('#emoji').textContent = e.target.value;
