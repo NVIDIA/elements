@@ -1,6 +1,6 @@
 {
   "name": "@elements/elements",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "type": "module",
   "customElements": "custom-elements.json",
   "scripts": {
@@ -146,6 +146,7 @@
     "postcss": "8.4.16",
     "postcss-mixins": "9.0.3",
     "postcss-nested": "5.0.6",
+    "postcss-each": "1.1.0",
     "prettier": "2.5.1",
     "rollup": "2.78.1",
     "rollup-plugin-minify-html-literals": "1.2.6",
@@ -166,6 +167,6 @@
     }
   },
   "bzlgen": {
-    "md5": "f49e385ce62770e6879d5d0c0007b2ba"
+    "md5": "4bf2304fd823dce8276c351895b80472"
   }
 }

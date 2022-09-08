@@ -91,6 +91,7 @@ export const parameters = {
           'Getting Started',
           'Horizontal Layout',
           'Vertical Layout',
+          'Grid Layout',
           'Examples',
         ],
         'Elements',
