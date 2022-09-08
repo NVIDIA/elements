@@ -4,6 +4,8 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 # Control Actions
 
+Text type controls support prefix and suffix labeling as well as action buttons.
+
 ## Installation
 
 ```typescript
@@ -14,7 +16,7 @@ import '@elements/elements/input/define.js';
 <nve-input>
   <label>label</label>
   <input type="text" />
-  <nve-icon-button icon-name="cancel" interaction="ghost" onClick="alert('click')" aria-label="clear"></nve-icon-button>
+  <nve-icon-button icon-name="cancel" interaction="ghost" aria-label="clear"></nve-icon-button>
 </nve-input>
 ```
 
@@ -22,6 +24,12 @@ import '@elements/elements/input/define.js';
 
 <Canvas>
   <Story id="forms-actions-examples--actions" />
+</Canvas>
+
+## Label Action
+
+<Canvas>
+  <Story id="forms-actions-examples--label-action" />
 </Canvas>
 
 ## Prefix/Suffix
