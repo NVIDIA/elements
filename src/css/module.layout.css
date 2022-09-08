@@ -174,5 +174,78 @@
   /* Grid Layouts */
   &[nve-layout~='grid'] {
     display: grid;
+    align-items: start;
+    align-content: start;
+    grid-template-columns: repeat(12, 1fr); /* TODO make 12 columns a design token? */
+    width: 100%;
+
+    @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
+      [nve-layout~='span:$(num)'],
+      &[nve-layout~='span-items:$(num)'] > * {
+        grid-column: span $(num)/span $(num);
+      }
+    }
+
+    @define-mixin auto-columns {
+      grid-auto-flow: column;
+      grid-template-columns: initial;
+    }
+
+    /* Grid Alignments */
+    &[nve-layout~='align:left'] {
+      justify-content: start;
+      @mixin auto-columns;
+    }
+
+    &[nve-layout~='align:right'] {
+      justify-content: end;
+      @mixin auto-columns;
+    }
+
+    &[nve-layout~='align:top'] {
+      align-content: start;
+    }
+
+    &[nve-layout~='align:bottom'] {
+      align-content: end;
+    }
+
+    &[nve-layout~='align:horizontal-center'] {
+      justify-items: center;
+      justify-content: center;
+      @mixin auto-columns;
+    }
+
+    &[nve-layout~='align:vertical-center'] {
+      align-items: center;
+      align-content: center;
+    }
+
+    &[nve-layout*='align:horizontal-stretch'] {
+      justify-items: stretch;
+      justify-content: stretch;
+      @mixin auto-columns;
+    }
+
+    &[nve-layout*='align:vertical-stretch'] {
+      align-items: stretch;
+      align-content: stretch;
+    }
+
+    &[nve-layout*='align:stretch'] {
+      align-items: stretch;
+      align-content: stretch;
+      justify-items: stretch;
+      justify-content: stretch;
+      @mixin auto-columns;
+    }
+
+    &[nve-layout*='align:center'] {
+      align-items: center;
+      align-content: center;
+      justify-items: center;
+      justify-content: center;
+      @mixin auto-columns;
+    }
   }
 }
