@@ -11,12 +11,37 @@ To install the MagLev UI Elements, run the following command:
 pnpm install @elements/elements
 ```
 
-Once installed import the global CSS into your angular application's global `styles.scss`
+Once installed import the global CSS into your angular application's global `styles.scss` file
 
 ```css
 /* ./src/styles.scss */
 
 @import '@elements/elements/dist/index.css';
+```
+
+If you don't have a global `styles.scss` add one to your app's `angular.json` config
+
+```json
+  /* ./angular.json */
+  // projects.appName.architect.build.options.styles:
+  "styles": [
+    "./src/styles.scss"
+  ],
+```
+
+Next add the following to your app's `angular.json` config, which will copy the `@elements/elements` icon asset file into your local angular build
+
+```json
+  /* ./angular.json */
+  // projects.appName.architect.build.options.assets:
+  "assets": [
+    ...
+    {
+      "glob": "**/*",
+      "input": "./node_modules/@elements/elements/dist/assets",
+      "output": "/assets/"
+    }
+  ]
 ```
 
 Next import either the full `@elements/elements` package or individual element imports into a root Angular module.
