@@ -11,7 +11,15 @@
 }
 
 ::slotted(input) {
-  display: none !important;
+  cursor: var(--cursor) !important;
+  appearance: none !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: var(--width) !important;
+  height: var(--height) !important;
+  border-radius: var(--border-radius) !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 [input] {
@@ -26,6 +34,7 @@
   transition-duration: 200ms;
   transition-timing-function: ease-in;
   transition-property: background-color;
+  position: relative;
 }
 
 [input]:after {

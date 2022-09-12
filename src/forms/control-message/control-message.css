@@ -1,7 +1,15 @@
-[internal-host] {
-  --_alert-color: var(--color);
+:host {
+  --_alert-color: var(--color, initial);
 }
 
 mlv-alert {
   --color: var(--_alert-color);
+}
+
+:host([status='success']) {
+  --_alert-color: var(--mlv-sys-status-success-background);
+}
+
+:host([status='error']) {
+  --_alert-color: var(--mlv-sys-status-danger-background);
 }
