@@ -5,14 +5,46 @@ import '@elements/elements/icon-button/define.js';
 export default {
   title: 'Forms/Input/Examples',
   component: 'nve-input',
-  parameters: { badges: ['beta'] }
+  parameters: { badges: ['beta'] },
+  argTypes: {
+    disabled: {
+      control: 'boolean',
+      defaultValue: false
+    },
+    status: {
+      control: 'inline-radio',
+      options: ['success', 'error', 'default'],
+      defaultValue: 'default'
+    },
+    layout: {
+      control: 'inline-radio',
+      options: ['vertical', 'horizontal'],
+      defaultValue: 'vertical'
+    }
+  }
+};
+
+interface ArgTypes {
+  status: 'success' | 'error',
+  disabled: boolean;
+  layout: 'vertical' | 'horizontal'
+}
+
+export const Default = {
+  render: (args: ArgTypes) =>
+    html`
+<nve-input .layout=${args.layout}>
+  <label>label</label>
+  <input type="text" ?disabled=${args.disabled} />
+  <nve-control-message .status=${args.status}>message</nve-control-message>
+</nve-input>`,
 };
 
 export const Input = () => {
   return html`
 <nve-input>
   <label>label</label>
-  <input type="text" required />
+  <input type="text" />
   <nve-control-message>message</nve-control-message>
 </nve-input>`
 };
