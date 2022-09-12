@@ -31,8 +31,9 @@ slot {
 /* https://coryrylan.com/blog/dont-override-css-outline-focus-styles */
 :host(:focus) [focusable],
 :host(:--focus) [focusable],
+:host([nve-control]) ::slotted(input:focus),
 :host([tabindex='0']:--focus),
 :host([tabindex='0']:focus) [focusable] {
-  outline: Highlight solid 2px;
-  outline: 5px auto -webkit-focus-ring-color;
+  outline: Highlight solid 2px !important;
+  outline: 5px auto -webkit-focus-ring-color !important;
 }
