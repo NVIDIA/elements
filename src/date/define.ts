@@ -1,4 +1,5 @@
 import { Date } from '@elements/elements/date';
+import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 
 customElements.get('mlv-date') || customElements.define('mlv-date', Date);

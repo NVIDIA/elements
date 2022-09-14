@@ -1,4 +1,5 @@
 import { Color } from '@elements/elements/color';
+import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 
 customElements.get('mlv-color') || customElements.define('mlv-color', Color);

@@ -1,5 +1,6 @@
 import { Alert } from './alert.js';
 import { AlertGroup } from './alert-group.js';
+import '@elements/elements/icon-button/define.js';
 import '@elements/elements/icon/define.js';
 
 customElements.get('mlv-alert') || customElements.define('mlv-alert', Alert);
