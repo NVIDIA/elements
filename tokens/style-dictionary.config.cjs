@@ -7,7 +7,14 @@ StyleDictionary.registerTransform({
   type: 'value',
   transitive: true,
   matcher: ({ value }) => typeof value === 'string' && value?.includes('*'),
-  transformer: ({ value }) => `calc(${value})`,
+  transformer: ({ value, attributes }) => {
+    if (attributes.type === 'font') {
+      const [scale, base] = value.split('*').map(i => i.trim().replace('px', ''));
+      return `calc(${scale} * ${parseInt(base, 10) / 16}rem)`;
+    } else {
+      return `calc(${value})`;
+    }
+  },
 });
 
 StyleDictionary.registerFormat({
