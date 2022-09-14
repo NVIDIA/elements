@@ -1,4 +1,5 @@
 import { Password } from '@elements/elements/password';
+import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 
 customElements.get('nve-password') || customElements.define('nve-password', Password);
