@@ -1,6 +1,7 @@
-import { html, PropertyValues } from 'lit';
-import { useStyles } from '@elements/elements/internal';
+import { html } from 'lit';
+import { appendRootNodeStyle, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
+import globalStyles from './select.global.css?inline';
 import styles from './select.css?inline';
 
 /**
@@ -18,5 +19,10 @@ export class Select extends Control {
 
   protected get suffixContent() {
     return this.input?.multiple ? html`` : html`<nve-icon-button icon-name="chevron-down" interaction="ghost" readonly></nve-icon-button>`;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    appendRootNodeStyle(this, globalStyles);
   }
 }
