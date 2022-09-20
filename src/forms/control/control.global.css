@@ -1,0 +1,8 @@
+[mlv-control] input::placeholder {
+  color: var(--mlv-sys-text-placeholder-color) !important;
+}
+
+[mlv-control] input::-webkit-search-cancel-button,
+[mlv-control] input::-webkit-calendar-picker-indicator {
+  opacity: 0 !important;
+}

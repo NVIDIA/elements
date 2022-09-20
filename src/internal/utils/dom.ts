@@ -53,3 +53,15 @@ export function getAttributeListChanges(element: HTMLElement, attrs: string[], f
   observer.observe(element, { attributes: true, subtree: true });
   return observer;
 }
+
+/**
+ * Appends styles to the render root of a given element. This is useful for
+ * styles that need to be applied outside the scope of the element's shadow
+ * root such as UA styles --webkit-* that won't work in a ::slotted selector
+ */
+export function appendRootNodeStyle(host: HTMLElement, styles: string) {
+  const stylesheet = new CSSStyleSheet();
+  (stylesheet as any).replaceSync(styles);
+  const root = host.parentNode.toString() === '[object ShadowRoot]' ? host.parentNode : document as any;
+  root.adoptedStyleSheets = [...root.adoptedStyleSheets, stylesheet];
+}

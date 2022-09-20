@@ -5,23 +5,3 @@
   font-family: var(--mlv-ref-font-family-inter) !important;
   text-rendering: optimizeSpeed;
 }
-
-/* some CSS selectors are unavailable to ::slotted() */
-[mlv-control] input::placeholder {
-  color: var(--mlv-sys-text-placeholder-color) !important;
-}
-
-[mlv-control] input::-webkit-calendar-picker-indicator {
-  opacity: 0 !important;
-}
-
-mlv-select option {
-  padding: var(--padding) !important;
-  height: var(--height) !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-mlv-color input::-webkit-color-swatch {
-  border: none !important;
-}

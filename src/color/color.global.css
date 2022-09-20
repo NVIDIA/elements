@@ -1,0 +1,3 @@
+mlv-color input::-webkit-color-swatch {
+  border: none !important;
+}

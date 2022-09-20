@@ -1,10 +1,11 @@
 import { LitElement, html, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList } from '@elements/elements/internal';
+import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList, appendRootNodeStyle } from '@elements/elements/internal';
 import { ControlMessage } from '../control-message/control-message.js';
 import { setupControlValidationStates, setupControlStates, setupControlStatusStates, inputQuery } from '../utils/states.js';
 import { setupControlLayoutStates, isInlineInputType } from '../utils/layout.js';
+import globalStyles from './control.global.css?inline';
 import styles from './control.css?inline';
 
 /**
@@ -71,8 +72,9 @@ export class Control extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
+    appendRootNodeStyle(this, globalStyles);
   }
-
+  
   firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
     this.setAttribute('mlv-control', '');
