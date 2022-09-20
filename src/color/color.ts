@@ -1,7 +1,8 @@
 import { html } from 'lit';
-import { useStyles } from '@elements/elements/internal';
+import { appendRootNodeStyle, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
+import globalStyles from './color.global.css?inline';
 import styles from './color.css?inline';
 
 declare const EyeDropper: any;
@@ -19,6 +20,7 @@ export class Color extends Control {
 
   connectedCallback() {
     super.connectedCallback();
+    appendRootNodeStyle(this, globalStyles);
 
     if (this.input.value === '#000000' || this.input.value === '') {
       this.input.value = getComputedStyle(this).getPropertyValue('--background').trim();

@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges } from '@elements/elements/internal';
+import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle } from '@elements/elements/internal';
 
 @customElement('test-element')
 class TestComponent extends LitElement {
@@ -107,4 +107,71 @@ describe('getAttributeListChanges', () => {
 
     expect(values).toEqual(['foo', 'bar']);
   });
+});
+
+describe('appendRootNodeStyle', () => {
+  @customElement('test-one')
+  class TestOne extends LitElement {
+    render() {
+      return html`
+        <span>one</span>
+        <test-two></test-two>
+      `;
+    }
+
+    connectedCallback(): void {
+      super.connectedCallback();
+      appendRootNodeStyle(this, 'test-one { color: blue }')
+    }
+  }
+
+  @customElement('test-two')
+  class TestTwo extends LitElement {
+    render() {
+      return html`
+        <span>two</span>
+      `;
+    }
+
+    connectedCallback(): void {
+      super.connectedCallback();
+      appendRootNodeStyle(this, 'test-two { color: red }')
+    }
+  }
+
+  let fixture: HTMLElement;
+  let testOne: HTMLElement;
+  let testTwo: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <test-one></test-one>
+    `);
+
+    testOne = fixture.querySelector('test-one');
+    testTwo = testOne.shadowRoot.querySelector('test-two');
+    await elementIsStable(testTwo);
+    await elementIsStable(testOne);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get('test-one')).toBeDefined();
+    expect(customElements.get('test-two')).toBeDefined();
+  });
+
+  it('should append stylesheet to document if element is in root light dom', async () => {
+    const cssRules = Array.from((document as any).adoptedStyleSheets[0].cssRules) as any;
+    expect(cssRules[0].selectorText).toBe('test-one');
+  });
+
+  // should be 1, the inner element should append tot he adoptedStyleSheets of the outer element but happy-dom does not emulate this correctly
+  // it('should append stylesheet to shadow root if element is rendered in a shadow root', async () => {
+  //   await elementIsStable(testTwo);
+  //   await elementIsStable(testOne);
+  //   expect((testOne as any).shadowRoot.adoptedStyleSheets.length).toBe(1);
+  // });
 });

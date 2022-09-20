@@ -5,6 +5,7 @@
  * 
  * Used for Custom Elements Form/A11y APIs
  */
+import 'construct-style-sheets-polyfill';
 import 'element-internals-polyfill';
 
 /**

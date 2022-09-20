@@ -1,0 +1,8 @@
+[nve-control] input::placeholder {
+  color: var(--nve-sys-text-placeholder-color) !important;
+}
+
+[nve-control] input::-webkit-search-cancel-button,
+[nve-control] input::-webkit-calendar-picker-indicator {
+  opacity: 0 !important;
+}

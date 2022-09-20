@@ -1,5 +1,7 @@
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators/custom-element.js';
 import '@elements/elements/date/define.js';
+import '@elements/elements/datetime/define.js';
 
 export default {
   title: 'Forms/Date/Examples',

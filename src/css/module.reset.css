@@ -5,23 +5,3 @@
   font-family: var(--nve-ref-font-family-inter) !important;
   text-rendering: optimizeSpeed;
 }
-
-/* some CSS selectors are unavailable to ::slotted() */
-[nve-control] input::placeholder {
-  color: var(--nve-sys-text-placeholder-color) !important;
-}
-
-[nve-control] input::-webkit-calendar-picker-indicator {
-  opacity: 0 !important;
-}
-
-nve-select option {
-  padding: var(--padding) !important;
-  height: var(--height) !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-nve-color input::-webkit-color-swatch {
-  border: none !important;
-}
