@@ -1,6 +1,6 @@
 {
   "name": "@elements/elements",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "type": "module",
   "customElements": "custom-elements.json",
   "scripts": {
@@ -134,11 +134,12 @@
     "lit-html": "^2.3.1"
   },
   "optionalDependencies": {
+    "construct-style-sheets-polyfill": "3.1.0",
     "element-internals-polyfill": "^1.1.11"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "0.6.3",
-    "@geometricpanda/storybook-addon-badges": "^0.2.2",
+    "@geometricpanda/storybook-addon-badges": "0.2.2",
     "@elements/custom-elements-storybook": "0.1.4",
     "@vitest/coverage-c8": "0.22.1",
     "emoji-picker-element": "1.12.1",
@@ -167,6 +168,6 @@
     }
   },
   "bzlgen": {
-    "md5": "4bf2304fd823dce8276c351895b80472"
+    "md5": "246cd918c8726079d810c2e22e85328e"
   }
 }
