@@ -3,7 +3,6 @@
   --color: var(--nve-sys-layer-canvas-color);
   --border-radius: var(--nve-ref-border-radius-lg);
   --box-shadow: var(--nve-ref-shadow-100);
-  --padding: var(--nve-ref-size-400) var(--nve-ref-size-700) var(--nve-ref-size-700);
 }
 
 [internal-host] {
@@ -18,12 +17,4 @@
   align-items: stretch;
   justify-content: start;
   overflow: hidden;
-}
-
-main {
-  padding: var(--padding);
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: center;
 }
