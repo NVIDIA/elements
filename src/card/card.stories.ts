@@ -65,7 +65,9 @@ export const Default = {
           `
         )}
 
-        ${args.content}
+        <nve-card-content>
+          ${args.content}
+        </nve-card-content>
 
         ${when(
           args.showFooter,
@@ -82,6 +84,38 @@ export const Default = {
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { width: 300, height: 150, content: 'Card Content' }
 };
+
+export const CardWithContentLayout = {
+  render: () => html`
+    <nve-card style="width: 400px; height: 300px;">
+      <nve-card-content nve-layout="row align:space-around">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </nve-card-content>
+    </nve-card>
+  `
+}
+
+export const CardWithMultipleContentsAndDivider = {
+  render: () => html`
+    <nve-card style="width: 400px; height: 300px;">
+      <nve-card-content nve-layout="row align:space-around">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </nve-card-content>
+
+      <hr style="width: 100%">
+
+      <nve-card-content nve-layout="row align:center gap:md">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </nve-card-content>
+    </nve-card>
+  `
+}
 
 export const CardWithHeader = {
   ...Default,
@@ -115,20 +149,29 @@ export const Themes = {
           <div slot="title">Title</div>
           <div slot="subtitle">Sub Title</div>
         </nve-card-header>
-        <p>Card Content</p>
+
+        <nve-card-content>
+          Card Content
+        </nve-card-content>
+
         <nve-card-footer>
           Proceed with Action
           <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
         </nve-card-footer>
       </nve-card>
     </div>
+
     <div nve-theme="dark">
       <nve-card style="width: 400px; height: 300px;">
         <nve-card-header>
           <div slot="title">Title</div>
           <div slot="subtitle">Sub Title</div>
         </nve-card-header>
-        <p>Card Content</p>
+
+        <nve-card-content>
+          Card Content
+        </nve-card-content>
+
         <nve-card-footer>
           Proceed with Action
           <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
