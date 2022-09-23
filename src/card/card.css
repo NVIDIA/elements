@@ -3,7 +3,6 @@
   --color: var(--mlv-sys-layer-canvas-color);
   --border-radius: var(--mlv-ref-border-radius-lg);
   --box-shadow: var(--mlv-ref-shadow-100);
-  --padding: var(--mlv-ref-size-400) var(--mlv-ref-size-700) var(--mlv-ref-size-700);
 }
 
 [internal-host] {
@@ -18,12 +17,4 @@
   align-items: stretch;
   justify-content: start;
   overflow: hidden;
-}
-
-main {
-  padding: var(--padding);
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: center;
 }

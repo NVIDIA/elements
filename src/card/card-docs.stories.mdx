@@ -4,29 +4,51 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 # Card
 
+Card is composed of a `mlv-card` container element and several sub-components with default styling.
+The following sub-components can be used within `mlv-card` to achieve standard card layouts:
+
+- `mlv-card-header`
+- `mlv-card-content`
+- `mlv-card-footer`
+
+Content slotted directly under `mlv-card` is supported for full flexibility of content.
+
 ## Installation
 
 ```typescript
 import '@elements/elements/card/define.js';
 ```
 
-```html
-<mlv-card>
-  card
-</mlv-card>
-```
-
 <Canvas>
   <Story id="elements-card-examples--default" />
 </Canvas>
 
-## Card With Header
+## Card with Content Layout
+
+Layout system is supported when <a href="./?path=/story/layout-getting-started--page">mlv-layout</a> attribute
+is used on the `mlv-card-content` element:
+
+```html
+<mlv-card>
+  <mlv-card-content mlv-layout="row align:space-around">
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
+  </mlv-card-content>
+</mlv-card>
+```
+
+<Canvas>
+  <Story id="elements-card-examples--card-with-content-layout" />
+</Canvas>
+
+## Card with Header
 
 <Canvas>
   <Story id="elements-card-examples--card-with-header" />
 </Canvas>
 
-## Card With Header and Action
+## Card with Header and Action
 
 <Canvas>
   <Story id="elements-card-examples--card-with-header-and-action" />
@@ -34,8 +56,18 @@ import '@elements/elements/card/define.js';
 
 ## Card with Header and Footer
 
+Combining `mlv-card-header`, `mlv-card-content` & `mlv-card-footer` will yield a fully styled card.
+Note how `mlv-card-content` will vertically stretch to fill the card size and the footer will align
+to the bottom of the card.
+
 <Canvas>
   <Story id="elements-card-examples--card-with-header-and-footer" />
+</Canvas>
+
+## Card With Multiple Content Containers and Full-bleed Divider
+
+<Canvas>
+  <Story id="elements-card-examples--card-with-multiple-contents-and-divider" />
 </Canvas>
 
 ## Themes
@@ -52,6 +84,9 @@ import '@elements/elements/card/define.js';
 
 ## <mlv-card-header\>
 <Props of="mlv-card-header" />
+
+## <mlv-card-content\>
+<Props of="mlv-card-content" />
 
 ## <mlv-card-footer\>
 <Props of="mlv-card-footer" />

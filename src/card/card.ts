@@ -2,18 +2,19 @@ import { html, LitElement } from 'lit';
 import { useStyles } from '@elements/elements/internal';
 import cardStyleSheet from './card.css?inline';
 import cardHeaderStyleSheet from './card-header.css?inline';
+import cardContentStyleSheet from './card-content.css?inline';
 import cardFooterStyleSheet from './card-footer.css?inline';
 
 /**
  * @element mlv-card
  * @slot default - This is a default/unnamed slot for card content
  * @slot header - header element (Use <mlv-card-header> or custom content)
+ * @slot content - content element (Use <mlv-card-content> or custom content)
  * @slot footer - footer element (Use <mlv-card-footer> or custom content)
  * @cssprop --background
  * @cssprop --color
  * @cssprop --border-radius
  * @cssprop --box-shadow
- * @cssprop --padding
  */
 export class Card extends LitElement {
   static styles = useStyles([cardStyleSheet]);
@@ -23,9 +24,7 @@ export class Card extends LitElement {
       <div internal-host>
         <slot name="header"></slot>
 
-        <main>
-          <slot></slot>
-        </main>
+        <slot></slot>
 
         <slot name="footer"></slot>
       </div>
@@ -66,6 +65,20 @@ export class Card extends LitElement {
 }
 
 
+/**
+ * @element mlv-card-content
+ * @slot default - This is a default/unnamed slot for card content content
+ * @cssprop --padding
+ */
+ export class CardContent extends LitElement {
+  static styles = useStyles([cardContentStyleSheet]);
+
+  render() {
+    return html`
+      <slot></slot>
+    `;
+  }
+}
 
 /**
  * @element mlv-card-footer

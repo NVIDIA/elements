@@ -65,7 +65,9 @@ export const Default = {
           `
         )}
 
-        ${args.content}
+        <mlv-card-content>
+          ${args.content}
+        </mlv-card-content>
 
         ${when(
           args.showFooter,
@@ -82,6 +84,38 @@ export const Default = {
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { width: 300, height: 150, content: 'Card Content' }
 };
+
+export const CardWithContentLayout = {
+  render: () => html`
+    <mlv-card style="width: 400px; height: 300px;">
+      <mlv-card-content mlv-layout="row align:space-around">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </mlv-card-content>
+    </mlv-card>
+  `
+}
+
+export const CardWithMultipleContentsAndDivider = {
+  render: () => html`
+    <mlv-card style="width: 400px; height: 300px;">
+      <mlv-card-content mlv-layout="row align:space-around">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </mlv-card-content>
+
+      <hr style="width: 100%">
+
+      <mlv-card-content mlv-layout="row align:center gap:md">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </mlv-card-content>
+    </mlv-card>
+  `
+}
 
 export const CardWithHeader = {
   ...Default,
@@ -115,20 +149,29 @@ export const Themes = {
           <div slot="title">Title</div>
           <div slot="subtitle">Sub Title</div>
         </mlv-card-header>
-        <p>Card Content</p>
+
+        <mlv-card-content>
+          Card Content
+        </mlv-card-content>
+
         <mlv-card-footer>
           Proceed with Action
           <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
         </mlv-card-footer>
       </mlv-card>
     </div>
+
     <div mlv-theme="dark">
       <mlv-card style="width: 400px; height: 300px;">
         <mlv-card-header>
           <div slot="title">Title</div>
           <div slot="subtitle">Sub Title</div>
         </mlv-card-header>
-        <p>Card Content</p>
+
+        <mlv-card-content>
+          Card Content
+        </mlv-card-content>
+
         <mlv-card-footer>
           Proceed with Action
           <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
