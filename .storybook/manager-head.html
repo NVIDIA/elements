@@ -9,10 +9,59 @@
   }
 
   body {
-    background: var(--mlv-sys-layer-container-background) !important;
+    background: var(--mlv-sys-layer-shell-background) !important;
     color: var(--mlv-sys-layer-canvas-color) !important;
     font-family: var(--mlv-ref-font-family-inter) !important;
     font-weight: var(--mlv-ref-font-weight-regular) !important;
+  }
+
+  /* main shell */
+  #root > div > [role='main'] {
+    height: 100vh !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: auto !important;
+  }
+
+  .sto-1va4tas {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  
+  /* main viewport */
+  #panel-tab-content,
+  .sto-10ro1m {
+    top: 52px !important;
+    height: calc(100% - 52px) !important;
+    background: var(--mlv-sys-layer-shell-background) !important;
+  }
+
+  /* top bar nav */
+  .os-viewport-native-scrollbars-invisible .os-content {
+    background: var(--mlv-sys-layer-shell-background) !important;
+  }
+
+  .sto-1mi4vlx,
+  .sto-p1dfi6,
+  .sto-17imonf,
+  .sto-rfiy1p,
+  .sto-1ic2gvo {
+    height: 52px !important;
+  }
+
+  /* top bar nav buttons */
+  .os-viewport-native-scrollbars-invisible .os-content button,
+  .os-viewport-native-scrollbars-invisible .os-content a,
+  .os-viewport-native-scrollbars-invisible .os-content .sto-p1dfi6 div {
+    align-self: center !important;
+    margin: 0 !important;
+    display: flex !important;
+  }
+
+  /* API Argstable */
+  .docblock-argstable tr > th,
+  .docblock-argstable tr > td {
+    background: var(--mlv-sys-layer-container-background) !important;
   }
 
   [title='Storybook'] {
@@ -42,13 +91,23 @@
     background: var(--mlv-sys-layer-container-background) !important;
   }
 
+  .os-content button.sto-17imonf,
+  .os-content button.sto-1l38861 { /* selected/active toolbar buttons */
+    color: var(--mlv-sys-interaction-default-selected-color) !important;
+    border-bottom-color: var(--mlv-sys-interaction-default-selected-background) !important;
+  }
+  
+  .sidebar-container .os-content {
+    background: var(--mlv-sys-layer-shell-background) !important;
+  }
+
   .sidebar-item  {
     color: var(--mlv-sys-layer-canvas-color) !important;
   }
 
   .sidebar-item[data-selected='true'] {
-    background: var(--mlv-sys-accent-secondary-background) !important;
-    color: var(--mlv-sys-text-white-color) !important;
+    background: var(--mlv-sys-interaction-default-selected-background) !important;
+    color: var(--mlv-sys-interaction-default-selected-color) !important;
   }
 
   /* popovers */

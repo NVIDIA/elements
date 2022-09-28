@@ -3,18 +3,21 @@
   --color: var(--mlv-sys-layer-canvas-color);
   --border-radius: var(--mlv-ref-border-radius-lg);
   --box-shadow: var(--mlv-ref-shadow-100);
-}
-
-[internal-host] {
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   background: var(--background);
   color: var(--color);
-  height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: start;
   overflow: hidden;
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: start;
+  height: 100%;
 }

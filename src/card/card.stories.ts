@@ -3,7 +3,6 @@ import { when } from 'lit/directives/when.js';
 import { withDesign } from 'storybook-addon-designs';
 
 import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '@elements/elements/internal';
-import { IconSlotPlacements } from '@elements/elements/button';
 import '@elements/elements/card/define.js';
 
 const figmaEmbedNodeId = '505%3A2280';
@@ -46,7 +45,7 @@ export const Default = {
       }
     </style>
 
-    <div mlv-theme>
+    <div mlv-theme="">
       <mlv-card>
         ${when(
           args.showHeader,
@@ -87,33 +86,37 @@ export const Default = {
 
 export const CardWithContentLayout = {
   render: () => html`
-    <mlv-card style="width: 400px; height: 300px;">
-      <mlv-card-content mlv-layout="row align:space-around">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </mlv-card-content>
-    </mlv-card>
+    <div mlv-theme>
+      <mlv-card style="width: 400px; height: 300px;">
+        <mlv-card-content mlv-layout="row align:space-around">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </mlv-card-content>
+      </mlv-card>
+    </div>
   `
 }
 
 export const CardWithMultipleContentsAndDivider = {
   render: () => html`
-    <mlv-card style="width: 400px; height: 300px;">
-      <mlv-card-content mlv-layout="row align:space-around">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </mlv-card-content>
+    <div mlv-theme>
+      <mlv-card style="width: 400px; height: 300px;">
+        <mlv-card-content mlv-layout="row align:space-around">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </mlv-card-content>
 
-      <hr style="width: 100%">
+        <hr style="width: 100%">
 
-      <mlv-card-content mlv-layout="row align:center gap:md">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </mlv-card-content>
-    </mlv-card>
+        <mlv-card-content mlv-layout="row align:center gap:md">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </mlv-card-content>
+      </mlv-card>
+    </div>
   `
 }
 
