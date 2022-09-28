@@ -80,7 +80,7 @@
     "interaction": {
       "default": {
         "background": {
-          "value": "{ref.color.gray-zinc.650}",
+          "value": "{ref.color.gray-zinc.750}",
           "type": "color"
         },
         "color": {
@@ -89,7 +89,7 @@
         },
         "hover": {
           "background": {
-            "value": "{ref.color.gray-zinc.600}",
+            "value": "{ref.color.gray-zinc.700}",
             "type": "color"
           },
           "color": {
@@ -99,7 +99,7 @@
         },
         "selected": {
           "background": {
-            "value": "{ref.color.gray-zinc.600}",
+            "value": "{ref.color.gray-zinc.700}",
             "type": "color"
           },
           "color": {
@@ -109,7 +109,7 @@
         },
         "active": {
           "background": {
-            "value": "{ref.color.gray-zinc.500}",
+            "value": "{ref.color.gray-zinc.650}",
             "type": "color"
           },
           "color": {
@@ -156,7 +156,17 @@
     "layer": {
       "canvas": {
         "background": {
-          "value": "{ref.color.gray-zinc.900}",
+          "value": "{ref.color.gray-zinc.1000}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.default.color}",
+          "type": "color"
+        }
+      },
+      "shell": {
+        "background": {
+          "value": "{ref.color.black}",
           "type": "color"
         },
         "color": {
@@ -166,7 +176,7 @@
       },
       "container": {
         "background": {
-          "value": "{ref.color.gray-zinc.800}",
+          "value": "{ref.color.gray-zinc.900}",
           "type": "color"
         },
         "color": {
@@ -176,7 +186,7 @@
       },
       "overlay": {
         "background": {
-          "value": "{ref.color.gray-zinc.700}",
+          "value": "{ref.color.gray-zinc.650}",
           "type": "color"
         },
         "color": {
