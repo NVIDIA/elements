@@ -3,7 +3,6 @@ import { when } from 'lit/directives/when.js';
 import { withDesign } from 'storybook-addon-designs';
 
 import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '@elements/elements/internal';
-import { IconSlotPlacements } from '@elements/elements/button';
 import '@elements/elements/card/define.js';
 
 const figmaEmbedNodeId = '505%3A2280';
@@ -46,7 +45,7 @@ export const Default = {
       }
     </style>
 
-    <div nve-theme>
+    <div nve-theme="">
       <nve-card>
         ${when(
           args.showHeader,
@@ -87,33 +86,37 @@ export const Default = {
 
 export const CardWithContentLayout = {
   render: () => html`
-    <nve-card style="width: 400px; height: 300px;">
-      <nve-card-content nve-layout="row align:space-around">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </nve-card-content>
-    </nve-card>
+    <div nve-theme>
+      <nve-card style="width: 400px; height: 300px;">
+        <nve-card-content nve-layout="row align:space-around">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </nve-card-content>
+      </nve-card>
+    </div>
   `
 }
 
 export const CardWithMultipleContentsAndDivider = {
   render: () => html`
-    <nve-card style="width: 400px; height: 300px;">
-      <nve-card-content nve-layout="row align:space-around">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </nve-card-content>
+    <div nve-theme>
+      <nve-card style="width: 400px; height: 300px;">
+        <nve-card-content nve-layout="row align:space-around">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </nve-card-content>
 
-      <hr style="width: 100%">
+        <hr style="width: 100%">
 
-      <nve-card-content nve-layout="row align:center gap:md">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </nve-card-content>
-    </nve-card>
+        <nve-card-content nve-layout="row align:center gap:md">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </nve-card-content>
+      </nve-card>
+    </div>
   `
 }
 
