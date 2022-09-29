@@ -10,7 +10,6 @@ export function hideAllValidationMessages(messages: ControlMessage[]) {
 }
 
 export function showActiveValidationMessages(control: Control, messages: ControlMessage[]) {
-  console.log(control.input.validity)
   messages.find(m => control.input.validity[m.error])?.removeAttribute('hidden');
 }
 

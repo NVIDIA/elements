@@ -91,7 +91,6 @@ export default defineConfig((env) => {
       globals: true,
       environment: 'happy-dom',
       watchExclude: ['**/node_modules/**'],
-      deps: { inline: true }, // https://github.com/lit/lit/issues/3216
       setupFiles: [`${dist()}/test/setup.js`], // https://github.com/vitest-dev/vitest/issues/1700
       coverage: {
         lines: 90,
