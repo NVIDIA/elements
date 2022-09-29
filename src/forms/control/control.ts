@@ -1,4 +1,5 @@
 import { LitElement, html, PropertyValues } from 'lit';
+import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList, appendRootNodeStyle } from '@elements/elements/internal';
@@ -49,9 +50,13 @@ export class Control extends LitElement {
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
+  get #internalStyleStates() {
+    return { 'no-messages': !this.#messages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
+  }
+
   render() {
     return !this.inlineControl ? html`
-      <div internal-host class="${this.#messages.length ? '' : 'no-messages'}">
+      <div internal-host class=${classMap(this.#internalStyleStates)}>
         ${this.#label ? html`<slot name="label"></slot>` : ''}
         <div input>
           ${this.prefixContent}
@@ -61,7 +66,7 @@ export class Control extends LitElement {
         <slot name="messages"></slot>
       </div>
     ` : html`
-      <div internal-host class="inline-control ${this.#messages.length ? '' : 'no-messages'}">
+      <div internal-host class=${classMap(this.#internalStyleStates)}>
         <slot input></slot>
         <slot name="label"></slot>
         <slot name="messages"></slot>

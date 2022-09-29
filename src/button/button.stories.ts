@@ -71,6 +71,10 @@ export const Interactions = {
     <nve-button interaction="destructive">destructive</nve-button>
     <nve-button interaction="ghost">ghost</nve-button>
     <nve-button disabled>disabled</nve-button>
+    <script>
+      const btns = document.querySelectorAll('nve-button');
+      btns[0].addEventListener('click', () => console.log('CLICK'));
+    </script>
   `
 }
 
