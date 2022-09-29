@@ -40,7 +40,7 @@ export class ControlGroup extends LitElement {
     `;
   }
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'group';
