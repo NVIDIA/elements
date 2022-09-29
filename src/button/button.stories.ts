@@ -71,6 +71,10 @@ export const Interactions = {
     <mlv-button interaction="destructive">destructive</mlv-button>
     <mlv-button interaction="ghost">ghost</mlv-button>
     <mlv-button disabled>disabled</mlv-button>
+    <script>
+      const btns = document.querySelectorAll('mlv-button');
+      btns[0].addEventListener('click', () => console.log('CLICK'));
+    </script>
   `
 }
 

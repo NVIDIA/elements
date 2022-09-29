@@ -60,12 +60,23 @@ slot[name='messages'] {
     'label label label'
     'input input input'
     'messages messages messages';
-  
-    &.no-messages {
-      grid-template-areas: 
-        'label label label'
-        'input input input';
-    }
+
+  &.no-messages {
+    grid-template-areas: 
+      'label label label'
+      'input input input';
+  }
+
+  &.no-label {
+    grid-template-areas: 
+      'input input input'
+      'messages messages messages';
+  }
+
+  &.no-label.no-messages {
+    grid-template-areas: 
+      'input input input';
+  }
 }
 
 [internal-host].inline-control {

@@ -50,6 +50,14 @@ describe('type-submit.controller', () => {
     expect(submitButtonInForm.type).toBe('submit');
   });
 
+  it('should trigger click event when using space key', async () => {
+    await elementIsStable(button);
+    expect(button.type).toBe(undefined);
+    const event = untilEvent(button, 'click');
+    button.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
+    expect((await event).target).toBe(button);
+  });
+
   it('should add or remove button event listeners when readonly updates', async () => {
     await elementIsStable(submitButtonInForm);
     expect(submitButtonInForm.readonly).toBe(undefined);
