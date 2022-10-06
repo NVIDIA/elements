@@ -81,6 +81,14 @@ export const statuses = {
   `
 }
 
+export const size = {
+  render: () => html`
+    <nve-icon style="--width: 20px; --height: 20px;" name="analytics"></nve-icon>
+    <nve-icon name="analytics"></nve-icon>
+    <nve-icon style="--width: 30px; --height: 30px;" name="analytics"></nve-icon>
+  `
+}
+
 export const Themes = {
   render: () => html`
     <div nve-theme="light">

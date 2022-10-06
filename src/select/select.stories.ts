@@ -112,31 +112,60 @@ export const Horizontal = {
 
 export const Multiple = {
   render: () => html`
-<nve-select>
-  <label>label</label>
-  <select multiple>
-    <option value="1">Option 1</option>
-    <option value="2">Option 2</option>
-    <option value="3">Option 3</option>
-    <option value="3">Option 3</option>
-    <option value="4">Option 4</option>
-    <option value="5">Option 5</option>
-  </select>
-  <nve-control-message>message</nve-control-message>
-</nve-select>`
+<div nve-layout="column gap:xl">
+  <nve-select>
+    <label>label</label>
+    <select multiple>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+  <hr />
+  <nve-select layout="horizontal">
+    <label>label</label>
+    <select multiple>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+</div>`
 };
 
 export const Size = {
   render: () => html`
-<nve-select>
-  <label>label</label>
-  <select size="3">
-    <option value="1">Option 1</option>
-    <option value="2">Option 2</option>
-    <option value="3">Option 3</option>
-    <option value="4">Option 4</option>
-    <option value="5">Option 5</option>
-  </select>
-  <nve-control-message>message</nve-control-message>
-</nve-select>`
+<div nve-layout="column gap:xl">
+  <nve-select>
+    <label>label</label>
+    <select size="3">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+  <hr />
+  <nve-select layout="horizontal">
+    <label>label</label>
+    <select size="3">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+</div>`
 };
