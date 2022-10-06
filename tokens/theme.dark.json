@@ -3,15 +3,15 @@
     "border": {
       "color": {
         "default": {
-          "value": "{ref.color.gray-stone.500}",
+          "value": "{ref.color.gray-zinc.700}",
           "type": "color"
         },
         "emphasis": {
-          "value": "{ref.color.gray-stone.200}",
+          "value": "{ref.color.gray-zinc.400}",
           "type": "color"
         },
         "muted": {
-          "value": "{ref.color.gray-stone.800}",
+          "value": "{ref.color.gray-zinc.800}",
           "type": "color"
         },
         "inverse": {
