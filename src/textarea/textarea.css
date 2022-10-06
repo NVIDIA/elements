@@ -23,6 +23,11 @@
   min-height: 100px;
 }
 
+:host([layout='horizontal']) ::slotted(label) {
+  padding-top: var(--nve-ref-size-100) !important;
+  align-self: start !important;
+}
+
 :host(:--invalid),
 :host(:--error) {
   --border: var(--nve-ref-border-width-md) solid var(--nve-sys-status-danger-background);
