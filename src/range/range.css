@@ -1,4 +1,5 @@
 :host {
+  --control-height: var(--mlv-ref-size-800);
   --cursor: pointer;
   width: 100%;
 }

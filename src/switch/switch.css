@@ -22,12 +22,17 @@
   padding: 0 !important;
 }
 
+[internal-host] {
+  min-height: var(--control-height);
+}
+
 [input] {
   cursor: var(--cursor);
   border-radius: var(--border-radius);
   background: var(--background);
   height: var(--height);
   width: var(--width);
+  min-height: auto;
   display: flex !important;
   padding: 0 3px;
   align-items: center;

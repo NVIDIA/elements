@@ -112,31 +112,60 @@ export const Horizontal = {
 
 export const Multiple = {
   render: () => html`
-<mlv-select>
-  <label>label</label>
-  <select multiple>
-    <option value="1">Option 1</option>
-    <option value="2">Option 2</option>
-    <option value="3">Option 3</option>
-    <option value="3">Option 3</option>
-    <option value="4">Option 4</option>
-    <option value="5">Option 5</option>
-  </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+<div mlv-layout="column gap:xl">
+  <mlv-select>
+    <label>label</label>
+    <select multiple>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-select>
+  <hr />
+  <mlv-select layout="horizontal">
+    <label>label</label>
+    <select multiple>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-select>
+</div>`
 };
 
 export const Size = {
   render: () => html`
-<mlv-select>
-  <label>label</label>
-  <select size="3">
-    <option value="1">Option 1</option>
-    <option value="2">Option 2</option>
-    <option value="3">Option 3</option>
-    <option value="4">Option 4</option>
-    <option value="5">Option 5</option>
-  </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+<div mlv-layout="column gap:xl">
+  <mlv-select>
+    <label>label</label>
+    <select size="3">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-select>
+  <hr />
+  <mlv-select layout="horizontal">
+    <label>label</label>
+    <select size="3">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-select>
+</div>`
 };

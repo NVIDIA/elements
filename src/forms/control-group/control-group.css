@@ -14,6 +14,11 @@
   --color: var(--mlv-sys-text-muted-color);
 }
 
+:host([layout*='horizontal-inline']) ::slotted([mlv-control]),
+:host([layout*='vertical-inline']) ::slotted([mlv-control]) {
+  --control-height: var(--mlv-ref-size-800);
+}
+
 slot[name='label'] {
   grid-area: label;
   display: block;
@@ -29,7 +34,7 @@ slot[name='messages'] {
   grid-area: input;
   display: flex;
   flex-direction: column;
-  gap: 4px 16px;
+  gap: var(--mlv-ref-size-300) var(--mlv-ref-size-400);
   width: fit-content;
   flex-wrap: wrap;
 }

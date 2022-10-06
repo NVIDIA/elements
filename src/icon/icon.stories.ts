@@ -81,6 +81,14 @@ export const statuses = {
   `
 }
 
+export const size = {
+  render: () => html`
+    <mlv-icon style="--width: 20px; --height: 20px;" name="analytics"></mlv-icon>
+    <mlv-icon name="analytics"></mlv-icon>
+    <mlv-icon style="--width: 30px; --height: 30px;" name="analytics"></mlv-icon>
+  `
+}
+
 export const Themes = {
   render: () => html`
     <div mlv-theme="light">
