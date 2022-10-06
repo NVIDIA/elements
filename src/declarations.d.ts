@@ -13,10 +13,7 @@ interface HTMLInputElement {
   showPicker: () => void;
 }
 
-interface HTMLElementTagNameMap {
-  'mlv-button': Button;
-  'mlv-card': Card;
-  'mlv-card-header': CardHeader;
-  'mlv-card-footer': CardFooter;
-  'mlv-icon': Icon;
+interface HTMLElement {
+  'mlv-text': string;
+  'mlv-layout': string;
 }
