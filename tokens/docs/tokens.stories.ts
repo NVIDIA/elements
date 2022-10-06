@@ -76,6 +76,8 @@ function renderTokenTable(tokens) {
       width: 100%;
       max-width: 1024px;
       text-align: left;
+      padding: 12px;
+      background: var(--nve-sys-layer-canvas-background);
     }
 
     .tokens-table td {
@@ -112,7 +114,7 @@ function renderTokenTable(tokens) {
           ${name.includes('ref-border-color') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
           ${name.includes('ref-border-width') ? html`<div style="${styleMap({ border: '1px solid var(--nve-ref-border-color-default)', background: 'transparent', 'border-width': value })}"></div>` : ''}
           ${name.includes('ref-opacity') ? html`<div style="${styleMap({ opacity: `var(${name})`, background: '#000' })}"></div>` : ''}
-          ${name.includes('ref-shadow') ? html`<div style="${styleMap({ 'box-shadow': `var(${name})`, background: '#fff', width: '200px', height: '200px' })}"></div>` : ''}
+          ${name.includes('ref-shadow') ? html`<div style="${styleMap({ 'box-shadow': `var(${name})`, background: 'var(--nve-sys-layer-container-background)', width: '200px', height: '200px' })}"></div>` : ''}
           ${name.includes('sys-status') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
           ${name.includes('sys-text') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
           ${name.includes('sys-accent') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
