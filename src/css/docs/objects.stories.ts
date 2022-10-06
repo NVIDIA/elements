@@ -11,6 +11,8 @@ export const layers = {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 48px;
+        padding: 24px;
+        background: var(--nve-sys-layer-canvas-background);
       }
 
       .layer-demo h2,
@@ -29,9 +31,8 @@ export const layers = {
         background: var(--nve-sys-layer-container-background);
         color: var(--nve-sys-layer-container-color);
         padding: var(--nve-ref-size-500);
-        box-shadow: var(--nve-ref-shadow-200);
+        box-shadow: var(--nve-ref-shadow-100);
         border-radius: var(--nve-ref-border-radius-lg);
-        border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
         width: 400px;
         height: 300px;
       }
@@ -39,7 +40,7 @@ export const layers = {
       .overlay {
         background: var(--nve-sys-layer-overlay-background);
         color: var(--nve-sys-layer-overlay-color);
-        padding: var(--nve-ref-size-500);
+        padding: var(--nve-ref-size-600);
         box-shadow: var(--nve-ref-shadow-200);
         border-radius: var(--nve-ref-border-radius-lg);
         width: 400px;
