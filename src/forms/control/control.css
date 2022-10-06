@@ -3,6 +3,7 @@
   --accent-color: var(--nve-sys-accent-secondary-background);
   --color: var(--nve-sys-text-default-color);
   --control-width: 200px;
+  --control-height: auto;
 }
 
 ::slotted(*) {
@@ -26,8 +27,9 @@
 [input] {
   cursor: var(--cursor);
   grid-area: input;
-  display: block;
+  display: flex;
   line-height: 1;
+  min-height: var(--control-height);
 }
 
 slot {
@@ -88,7 +90,8 @@ slot[name='messages'] {
     '. messages messages';
 
   & slot {
-    display: inline;
+    display: inline-flex;
+    align-items: center;
   }
 
   &.no-messages {
