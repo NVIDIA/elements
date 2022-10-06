@@ -13,10 +13,7 @@ interface HTMLInputElement {
   showPicker: () => void;
 }
 
-interface HTMLElementTagNameMap {
-  'nve-button': Button;
-  'nve-card': Card;
-  'nve-card-header': CardHeader;
-  'nve-card-footer': CardFooter;
-  'nve-icon': Icon;
+interface HTMLElement {
+  'nve-text': string;
+  'nve-layout': string;
 }
