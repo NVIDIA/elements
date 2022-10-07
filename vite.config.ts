@@ -3,12 +3,11 @@ import path from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
 import { terser } from 'rollup-plugin-terser';
-import { readFile } from 'fs/promises';
 import { execSync } from 'child_process';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import dts from 'vite-plugin-dts';
 
-const packageFile = JSON.parse(await readFile(new URL('./package.json', import.meta.url)) as any);
+const packageFile = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)) as any);
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 const index = process.argv.findIndex((i) => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
@@ -28,11 +27,7 @@ export default defineConfig((env) => {
   return {
     resolve: {
       alias: {
-        '../dist/css/module.tokens.css': dist(`css/module.tokens.css`),
-        '../dist/css/theme.dark.css': dist(`css/theme.dark.css`),
-        '../dist/css/theme.compact.css': dist(`css/theme.compact.css`),
-        '../dist/css/theme.high-contrast.css': dist(`css/theme.high-contrast.css`),
-        '../dist/assets/inter-roman.var.woff2': dist(`assets/inter-roman.var.woff2`),
+        '../dist': dist(),
         '@elements/elements': resolve(testProdBuild ? dist() : './src') // tests should run against final build artifacts not source
       }
     },
@@ -76,28 +71,14 @@ export default defineConfig((env) => {
           {
             name: 'https://github.com/vitejs/vite/issues/8057',
             closeBundle() {
-              fs.mkdirSync(dist('css'), { recursive: true });
               fs.readdirSync(dist())
                 .filter(f => f !== 'index.css' && f.endsWith('.css'))
-                .forEach(file => fs.rename(dist(file), dist(`css/${file}`), (e) => e ? console.log(e) : null));
+                .forEach(file => fs.renameSync(dist(file), dist(`css/${file}`)));
             }
           },
           mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
           mode === 'production' ? terser({ ecma: 2020, module: true }) : false // https://github.com/vitejs/vite/issues/8848
         ]
-      }
-    },
-    test: {
-      globals: true,
-      environment: 'happy-dom',
-      watchExclude: ['**/node_modules/**'],
-      setupFiles: [`${dist()}/test/setup.js`], // https://github.com/vitest-dev/vitest/issues/1700
-      coverage: {
-        lines: 90,
-        branches: 90,
-        functions: 90,
-        statements: 90,
-        exclude: ['**/storybook/**', '**/test/**', '**/*.test.ts', '**/*.css.js', '**/*.css', '**/index.js']
       }
     }
   };
