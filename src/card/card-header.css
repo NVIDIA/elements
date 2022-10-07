@@ -1,5 +1,5 @@
 :host {
-  --padding: var(--nve-ref-size-700) var(--nve-ref-size-700) var(--nve-ref-size-400);
+  --padding: var(--nve-ref-size-500) var(--nve-ref-size-500) var(--nve-ref-size-400);
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
   --line-height: 1em;
 }

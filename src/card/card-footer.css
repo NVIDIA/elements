@@ -1,9 +1,11 @@
 :host {
-  --padding: var(--nve-ref-size-700);
+  --padding: var(--nve-ref-size-500);
+  --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
 }
 
 footer[internal-host] {
   padding: var(--padding);
+  border-top: var(--border-top);
   color: var(--color);
   display: flex;
   justify-content: space-between;

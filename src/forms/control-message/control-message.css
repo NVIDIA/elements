@@ -1,4 +1,5 @@
 :host {
+  --color: var(--nve-sys-text-muted-color);
   --_alert-color: var(--color, initial);
 }
 
