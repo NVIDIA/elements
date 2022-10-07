@@ -1,5 +1,6 @@
 :host {
   --color: var(--nve-sys-text-default-color);
+  --label-color: var(--nve-sys-text-muted-color);
 }
 
 [internal-host] {
@@ -7,7 +8,9 @@
 }
 
 ::slotted(label) {
-  color: var(--color) !important;
+  font-weight: var(--nve-ref-font-weight-semibold) !important;
+  color: var(--label-color) !important;
+  cursor: var(--cursor) !important;
 }
 
 :host(:--disabled) {
@@ -22,7 +25,7 @@
 slot[name='label'] {
   grid-area: label;
   display: block;
-  align-self: start;
+  align-self: center;
 }
 
 slot[name='messages'] {
@@ -103,5 +106,16 @@ slot[name='messages'] {
   &.no-messages {
     grid-template-areas: 
       'label input input';
+  }
+}
+
+:host([layout='horizontal']) {
+  & ::slotted(label) {
+    padding-top: var(--nve-ref-size-100) !important;
+    align-self: start !important;
+  }
+
+  slot[name='label'] {
+    align-self: start;
   }
 }
