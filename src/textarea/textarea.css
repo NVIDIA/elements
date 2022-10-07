@@ -23,9 +23,15 @@
   min-height: 100px;
 }
 
-:host([layout='horizontal']) ::slotted(label) {
-  padding-top: var(--mlv-ref-size-100) !important;
-  align-self: start !important;
+:host([layout*='horizontal']) {
+  & ::slotted(label) {
+    padding-top: var(--mlv-ref-size-100) !important;
+    align-self: start !important;
+  }
+
+  slot[name='label'] {
+    align-self: start;
+  }
 }
 
 :host(:--invalid),

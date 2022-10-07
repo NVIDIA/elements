@@ -2,6 +2,7 @@
   --cursor: pointer;
   --accent-color: var(--mlv-sys-accent-secondary-background);
   --color: var(--mlv-sys-text-default-color);
+  --label-color: var(--mlv-sys-text-muted-color);
   --control-width: 200px;
   --control-height: auto;
 }
@@ -11,7 +12,8 @@
 }
 
 ::slotted(label) {
-  color: var(--color) !important;
+  font-weight: var(--mlv-ref-font-weight-semibold) !important;
+  color: var(--label-color) !important;
   cursor: var(--cursor) !important;
   display: inline-block !important;
   line-height: 1em !important;
@@ -40,6 +42,7 @@ slot {
 
 slot[name='label'] {
   grid-area: label;
+  align-self: center;
 }
 
 slot[name='messages'] {
@@ -97,6 +100,11 @@ slot[name='messages'] {
   &.no-messages {
     grid-template-areas: 
       'input label label';
+  }
+
+  & ::slotted(label) {
+    font-weight: var(--mlv-ref-font-weight-regular) !important;
+    color: var(--color) !important;
   }
 }
 
