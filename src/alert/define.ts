@@ -1,5 +1,4 @@
-import { Alert } from './alert.js';
-import { AlertGroup } from './alert-group.js';
+import { Alert, AlertGroup } from '@elements/elements/alert';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/icon/define.js';
 

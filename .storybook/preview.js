@@ -6,11 +6,6 @@ import styles from '@elements/elements/index.css';
 
 setCustomElementsManifest(excludePrivateFields(customElements));
 
-import * as jest from 'jest-mock';
-window.jest = jest;
-// Fix: `@storybook/addon-interactions` exports is not defined or `jest-mock` does not provide an export named 'fn'
-// https://github.com/storybookjs/storybook/issues/15391#issuecomment-873472669
-
 export const parameters = {
   docs: {
     theme: themes.dark,
