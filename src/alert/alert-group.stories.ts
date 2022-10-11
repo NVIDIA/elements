@@ -8,7 +8,7 @@ export default {
   argTypes: {
     status: {
       control: 'inline-radio',
-      options: ['warning', 'danger', 'success', 'info', 'muted']
+      options: ['', 'info', 'warning', 'danger', 'success']
     }
   }
 };
@@ -28,9 +28,9 @@ export const Default = {
 export const Status = {
   render: () => html`
     <div nve-layout="column gap:md">
-      <nve-alert-group status="info">
-        <nve-alert>info</nve-alert>
-        <nve-alert>info</nve-alert>
+      <nve-alert-group>
+        <nve-alert>default</nve-alert>
+        <nve-alert>default</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="warning">
@@ -54,9 +54,9 @@ export const Status = {
 export const Closable = {
   render: () => html`
     <div nve-layout="column gap:md">
-      <nve-alert-group status="info">
-        <nve-alert closable>info</nve-alert>
-        <nve-alert closable>info</nve-alert>
+      <nve-alert-group>
+        <nve-alert closable>default</nve-alert>
+        <nve-alert closable>default</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="warning">
@@ -80,9 +80,9 @@ export const Closable = {
 export const Themes = {
   render: () => html`
     <div nve-theme="light" nve-layout="column gap:md">
-      <nve-alert-group status="info">
-        <nve-alert>info</nve-alert>
-        <nve-alert>info</nve-alert>
+      <nve-alert-group>
+        <nve-alert>default</nve-alert>
+        <nve-alert>default</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="warning">
@@ -101,9 +101,9 @@ export const Themes = {
       </nve-alert-group>
     </div>
     <div nve-theme="dark" nve-layout="column gap:md">
-      <nve-alert-group status="info">
-        <nve-alert>info</nve-alert>
-        <nve-alert>info</nve-alert>
+      <nve-alert-group>
+        <nve-alert>default</nve-alert>
+        <nve-alert>default</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="warning">

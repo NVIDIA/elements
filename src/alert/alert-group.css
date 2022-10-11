@@ -27,9 +27,9 @@
   height: var(--nve-ref-size-800);
 }
 
-:host([status='info']) {
-  --background: var(--nve-sys-status-info-background);
-  --color: var(--nve-sys-status-info-color);
+:host([status='accent']) {
+  --background: var(--nve-sys-status-accent-background);
+  --color: var(--nve-sys-status-accent-color);
 }
 
 :host([status='success']) {
