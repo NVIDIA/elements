@@ -8,7 +8,7 @@ export default {
   argTypes: {
     status: {
       control: 'inline-radio',
-      options: ['warning', 'danger', 'success', 'info']
+      options: ['undefined', 'accent', 'warning', 'danger', 'success']
     }
   }
 };
@@ -18,13 +18,13 @@ type ArgTypes = Alert & { };
 export const Default = {
   render: (args: ArgTypes) =>
     html`<nve-alert .status=${args.status}>alert message</nve-alert>`,
-    args: { status: 'info' }
+    args: { status: '' }
 };
 
 export const Status = {
   render: () => html`
     <div nve-layout="column gap:md">
-      <nve-alert status="info">info</nve-alert>
+      <nve-alert>default</nve-alert>
       <nve-alert status="warning">warning</nve-alert>
       <nve-alert status="success">success</nve-alert>
       <nve-alert status="danger">danger</nve-alert>
@@ -35,13 +35,13 @@ export const Status = {
 export const Themes = {
   render: () => html`
     <div nve-theme="light" nve-layout="column gap:md">
-      <nve-alert status="info">info</nve-alert>
+      <nve-alert>default</nve-alert>
       <nve-alert status="warning">warning</nve-alert>
       <nve-alert status="success">success</nve-alert>
       <nve-alert status="danger">danger</nve-alert>
     </div>
     <div nve-theme="dark" nve-layout="column gap:md">
-      <nve-alert status="info">info</nve-alert>
+      <nve-alert>default</nve-alert>
       <nve-alert status="warning">warning</nve-alert>
       <nve-alert status="success">success</nve-alert>
       <nve-alert status="danger">danger</nve-alert>

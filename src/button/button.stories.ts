@@ -85,6 +85,8 @@ export const Link = {
     <nve-button interaction="destructive"><a href="#">destructive</a></nve-button>
     <nve-button interaction="ghost"><a href="#">ghost</a></nve-button>
     <nve-button disabled><a href="#">disabled</a></nve-button>
+    <!-- anchors can wrap button instances, however its recommended to slot the anchor into the button -->
+    <a href="https://google.com"><nve-button>default</nve-button></a>
   `
 }
 

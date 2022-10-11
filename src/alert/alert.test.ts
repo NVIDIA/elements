@@ -41,7 +41,7 @@ describe('nve-alert', () => {
   });
 
   it('should show status icon if status is proivided', async () => {
-    expect(alert.shadowRoot.querySelector('nve-icon')).toBe(null);
+    expect(alert.shadowRoot.querySelector('nve-icon').name).toBe('information');
     alert.status = 'success';
     await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector('nve-icon')).toBeDefined();

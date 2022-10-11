@@ -25,9 +25,9 @@ export const parameters = {
     },
     beta: {
       styles: {
-        backgroundColor: 'var(--nve-sys-status-info-background)',
-        borderColor: 'var(--nve-sys-status-info-background)',
-        color: 'var(--nve-sys-status-info-color)',
+        backgroundColor: 'var(--nve-sys-status-default-background)',
+        borderColor: 'var(--nve-sys-status-default-background)',
+        color: 'var(--nve-sys-status-default-color)',
       },
       title: 'Beta',
       tooltip: {
