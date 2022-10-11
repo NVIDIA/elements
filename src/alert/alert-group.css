@@ -27,9 +27,9 @@
   height: var(--mlv-ref-size-800);
 }
 
-:host([status='info']) {
-  --background: var(--mlv-sys-status-info-background);
-  --color: var(--mlv-sys-status-info-color);
+:host([status='accent']) {
+  --background: var(--mlv-sys-status-accent-background);
+  --color: var(--mlv-sys-status-accent-color);
 }
 
 :host([status='success']) {

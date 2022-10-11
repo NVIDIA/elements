@@ -3,7 +3,7 @@
   --gap: var(--mlv-ref-space-xs);
   --font-size: var(--mlv-ref-font-size-200);
   --color: var(--mlv-sys-interaction-default-color);
-  --icon-color: var(--mlv-sys-status-neutral-background);
+  --icon-color: var(--mlv-sys-interaction-default-color);
   --icon-size: var(--mlv-ref-size-500);
   width: auto;
 }
@@ -34,8 +34,8 @@ mlv-icon-button {
   --color: var(--mlv-sys-text-muted-color);
 }
 
-:host([status='info']) {
-  --icon-color: var(--mlv-sys-status-info-background);
+:host([status='accent']) {
+  --icon-color: var(--mlv-sys-status-accent-background);
 }
 
 :host([status='success']) {

@@ -41,7 +41,7 @@ describe('mlv-alert', () => {
   });
 
   it('should show status icon if status is proivided', async () => {
-    expect(alert.shadowRoot.querySelector('mlv-icon')).toBe(null);
+    expect(alert.shadowRoot.querySelector('mlv-icon').name).toBe('information');
     alert.status = 'success';
     await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector('mlv-icon')).toBeDefined();

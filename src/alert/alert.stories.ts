@@ -8,7 +8,7 @@ export default {
   argTypes: {
     status: {
       control: 'inline-radio',
-      options: ['warning', 'danger', 'success', 'info']
+      options: ['undefined', 'accent', 'warning', 'danger', 'success']
     }
   }
 };
@@ -18,13 +18,13 @@ type ArgTypes = Alert & { };
 export const Default = {
   render: (args: ArgTypes) =>
     html`<mlv-alert .status=${args.status}>alert message</mlv-alert>`,
-    args: { status: 'info' }
+    args: { status: '' }
 };
 
 export const Status = {
   render: () => html`
     <div mlv-layout="column gap:md">
-      <mlv-alert status="info">info</mlv-alert>
+      <mlv-alert>default</mlv-alert>
       <mlv-alert status="warning">warning</mlv-alert>
       <mlv-alert status="success">success</mlv-alert>
       <mlv-alert status="danger">danger</mlv-alert>
@@ -35,13 +35,13 @@ export const Status = {
 export const Themes = {
   render: () => html`
     <div mlv-theme="light" mlv-layout="column gap:md">
-      <mlv-alert status="info">info</mlv-alert>
+      <mlv-alert>default</mlv-alert>
       <mlv-alert status="warning">warning</mlv-alert>
       <mlv-alert status="success">success</mlv-alert>
       <mlv-alert status="danger">danger</mlv-alert>
     </div>
     <div mlv-theme="dark" mlv-layout="column gap:md">
-      <mlv-alert status="info">info</mlv-alert>
+      <mlv-alert>default</mlv-alert>
       <mlv-alert status="warning">warning</mlv-alert>
       <mlv-alert status="success">success</mlv-alert>
       <mlv-alert status="danger">danger</mlv-alert>

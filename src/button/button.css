@@ -1,5 +1,5 @@
 :host {
-  --color: var(--mlv-sys-text-muted-color);
+  --color: var(--mlv-sys-interaction-default-color);
   --background: var(--mlv-sys-interaction-default-background);
   --padding: 0 var(--mlv-ref-size-300);
   --border-radius: var(--mlv-ref-border-radius-lg);

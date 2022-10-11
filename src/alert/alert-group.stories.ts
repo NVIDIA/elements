@@ -8,7 +8,7 @@ export default {
   argTypes: {
     status: {
       control: 'inline-radio',
-      options: ['warning', 'danger', 'success', 'info', 'muted']
+      options: ['', 'info', 'warning', 'danger', 'success']
     }
   }
 };
@@ -28,9 +28,9 @@ export const Default = {
 export const Status = {
   render: () => html`
     <div mlv-layout="column gap:md">
-      <mlv-alert-group status="info">
-        <mlv-alert>info</mlv-alert>
-        <mlv-alert>info</mlv-alert>
+      <mlv-alert-group>
+        <mlv-alert>default</mlv-alert>
+        <mlv-alert>default</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">
@@ -54,9 +54,9 @@ export const Status = {
 export const Closable = {
   render: () => html`
     <div mlv-layout="column gap:md">
-      <mlv-alert-group status="info">
-        <mlv-alert closable>info</mlv-alert>
-        <mlv-alert closable>info</mlv-alert>
+      <mlv-alert-group>
+        <mlv-alert closable>default</mlv-alert>
+        <mlv-alert closable>default</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">
@@ -80,9 +80,9 @@ export const Closable = {
 export const Themes = {
   render: () => html`
     <div mlv-theme="light" mlv-layout="column gap:md">
-      <mlv-alert-group status="info">
-        <mlv-alert>info</mlv-alert>
-        <mlv-alert>info</mlv-alert>
+      <mlv-alert-group>
+        <mlv-alert>default</mlv-alert>
+        <mlv-alert>default</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">
@@ -101,9 +101,9 @@ export const Themes = {
       </mlv-alert-group>
     </div>
     <div mlv-theme="dark" mlv-layout="column gap:md">
-      <mlv-alert-group status="info">
-        <mlv-alert>info</mlv-alert>
-        <mlv-alert>info</mlv-alert>
+      <mlv-alert-group>
+        <mlv-alert>default</mlv-alert>
+        <mlv-alert>default</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">

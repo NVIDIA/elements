@@ -1,6 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
-import { attachInternals, useStyles } from '@elements/elements/internal';
+import { attachInternals, Status, useStyles } from '@elements/elements/internal';
 import styles from './alert-group.css?inline';
 
 /**
@@ -16,7 +16,7 @@ import styles from './alert-group.css?inline';
 export class AlertGroup extends LitElement {
   static styles = useStyles([styles]);
 
-  @property({ type: String, reflect: true }) status: 'warning' | 'danger' | 'success' | 'info' | 'muted';
+  @property({ type: String, reflect: true }) status: Status;
 
   /** @private */
   declare _internals: ElementInternals;

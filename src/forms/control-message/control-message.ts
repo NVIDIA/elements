@@ -31,14 +31,14 @@ export class ControlMessage extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <mlv-alert .status=${this.alertStatus}>
+        <mlv-alert .status=${this.status || this.error ? this.alertStatus : 'muted'}>
           <slot></slot>
         </mlv-alert>
       </div>
     `;
   }
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
     this.slot = 'messages';
   }

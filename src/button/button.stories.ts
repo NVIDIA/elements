@@ -85,6 +85,8 @@ export const Link = {
     <mlv-button interaction="destructive"><a href="#">destructive</a></mlv-button>
     <mlv-button interaction="ghost"><a href="#">ghost</a></mlv-button>
     <mlv-button disabled><a href="#">disabled</a></mlv-button>
+    <!-- anchors can wrap button instances, however its recommended to slot the anchor into the button -->
+    <a href="https://google.com"><mlv-button>default</mlv-button></a>
   `
 }
 

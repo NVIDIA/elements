@@ -25,9 +25,9 @@ export const parameters = {
     },
     beta: {
       styles: {
-        backgroundColor: 'var(--mlv-sys-status-info-background)',
-        borderColor: 'var(--mlv-sys-status-info-background)',
-        color: 'var(--mlv-sys-status-info-color)',
+        backgroundColor: 'var(--mlv-sys-status-default-background)',
+        borderColor: 'var(--mlv-sys-status-default-background)',
+        color: 'var(--mlv-sys-status-default-color)',
       },
       title: 'Beta',
       tooltip: {
