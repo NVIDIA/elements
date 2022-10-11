@@ -11,6 +11,7 @@ nve-alert {
   --_alert-color: var(--nve-sys-status-success-background);
 }
 
-:host([status='error']) {
+:host([status='error']),
+:host([error]) {
   --_alert-color: var(--nve-sys-status-danger-background);
 }

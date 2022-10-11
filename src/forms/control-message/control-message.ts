@@ -31,14 +31,14 @@ export class ControlMessage extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <nve-alert .status=${this.alertStatus}>
+        <nve-alert .status=${this.status || this.error ? this.alertStatus : 'muted'}>
           <slot></slot>
         </nve-alert>
       </div>
     `;
   }
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
     this.slot = 'messages';
   }
