@@ -1,14 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
-import { attachInternals, TypeClosableController, useStyles } from '@elements/elements/internal';
+import { attachInternals, Status, statusIcons, TypeClosableController, useStyles } from '@elements/elements/internal';
 import styles from './alert.css?inline';
-
-const icons = {
-  info: 'information',
-  warning: 'warning',
-  success: 'passed-or-success',
-  danger: 'warning'
-}
 
 /**
  * @alpha
@@ -23,7 +16,7 @@ const icons = {
 export class Alert extends LitElement {
   static styles = useStyles([styles]);
 
-  @property({ type: String, reflect: true }) status: 'warning' | 'danger' | 'success' | 'info' | 'muted';
+  @property({ type: String, reflect: true }) status: Status | 'muted';
 
   @property({ type: Boolean }) closable = false;
 
@@ -35,7 +28,7 @@ export class Alert extends LitElement {
   render() {
     return html`
       <div internal-host>
-        ${icons[this.status] ? html`<nve-icon .name=${icons[this.status]} part="status-icon"></nve-icon>` : ''}
+        ${this.status !== 'muted' ? html`<nve-icon name=${statusIcons[this.status] ?? 'information'}></nve-icon>` : ''}
         <slot></slot>
         ${this.closable ? html`<nve-icon-button @click=${() => this.#typeClosableController.close()} interaction="ghost" icon-name="cancel" aria-label="close"></nve-icon-button>` : ''}
       </div>

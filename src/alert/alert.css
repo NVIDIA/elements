@@ -3,7 +3,7 @@
   --gap: var(--nve-ref-space-xs);
   --font-size: var(--nve-ref-font-size-200);
   --color: var(--nve-sys-interaction-default-color);
-  --icon-color: var(--nve-sys-status-neutral-background);
+  --icon-color: var(--nve-sys-interaction-default-color);
   --icon-size: var(--nve-ref-size-500);
   width: auto;
 }
@@ -34,8 +34,8 @@ nve-icon-button {
   --color: var(--nve-sys-text-muted-color);
 }
 
-:host([status='info']) {
-  --icon-color: var(--nve-sys-status-info-background);
+:host([status='accent']) {
+  --icon-color: var(--nve-sys-status-accent-background);
 }
 
 :host([status='success']) {

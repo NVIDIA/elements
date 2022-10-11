@@ -19,12 +19,18 @@ class TypeAnchorTestElement extends LitElement {
 describe('type-anchor.controller', () => {
   let fixture: HTMLElement;
   let element: TypeAnchorTestElement;
+  let elementTwo: TypeAnchorTestElement;
   let anchor: HTMLAnchorElement;
+  let anchorTwo: HTMLAnchorElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<type-anchor-test-element><a href="#">anchor</a></type-anchor-test-element>`);
-    element = fixture.querySelector<TypeAnchorTestElement>('type-anchor-test-element');
-    anchor = element.querySelector<HTMLAnchorElement>('a');
+    fixture = await createFixture(html`
+    <type-anchor-test-element><a href="#">anchor</a></type-anchor-test-element>
+    <a href="#"><type-anchor-test-element>anchor</type-anchor-test-element></a>`);
+    element = fixture.querySelectorAll<TypeAnchorTestElement>('type-anchor-test-element')[0];
+    elementTwo = fixture.querySelectorAll<TypeAnchorTestElement>('type-anchor-test-element')[1];
+    anchor = fixture.querySelectorAll<HTMLAnchorElement>('a')[0];
+    anchorTwo = fixture.querySelectorAll<HTMLAnchorElement>('a')[1];
   });
 
   afterEach(() => {
@@ -47,5 +53,29 @@ describe('type-anchor.controller', () => {
     element.disabled = false;
     emulateClick(anchor);
     expect(clicks).toBe(2);
+  });
+
+  it('should allow element to slot anchor', () => {
+    let clicks = 0;
+    anchor.addEventListener('click', () => clicks++);
+
+    emulateClick(anchor);
+    expect(clicks).toBe(1);
+
+    expect(element.readonly).toBe(true);
+    expect(anchor.style.textDecoration).toBe('');
+    expect(element.style.cursor).toBe('');
+  });
+
+  it('should allow element to be wrapped in anchor', () => {
+    let clicks = 0;
+    anchorTwo.addEventListener('click', () => clicks++);
+
+    emulateClick(anchorTwo);
+    expect(clicks).toBe(1);
+
+    expect(elementTwo.readonly).toBe(true);
+    expect(anchorTwo.style.textDecoration).toBe('none');
+    expect(elementTwo.style.cursor).toBe('pointer');
   });
 });
