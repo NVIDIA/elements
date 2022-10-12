@@ -93,6 +93,10 @@ export const parameters = {
             'Documentation',
             'Examples'
           ],
+          'Iconography',
+          [
+            'Documentation'
+          ],
           'Layout',
           [
             'Documentation',
@@ -102,7 +106,7 @@ export const parameters = {
             'Examples',
           ],
         ],
-        
+
         'Elements',
         [
           'Alert',

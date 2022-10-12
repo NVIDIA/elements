@@ -7,6 +7,12 @@
   margin: 0;
   min-height: 0;
 
+  /* Grow */
+  &[mlv-layout~='grow'] {
+    height: 100%;
+    width: 100%;
+  }
+
   /* Horizontal Layout */
   &[mlv-layout~='row'] {
     flex-direction: row;
@@ -140,8 +146,8 @@
     gap: var(--mlv-ref-space-xxs);
   }
 
-  &[mlv-layout~='gap:sx'] {
-    gap: var(--mlv-ref-space-sx);
+  &[mlv-layout~='gap:xs'] {
+    gap: var(--mlv-ref-space-xs);
   }
 
   &[mlv-layout~='gap:sm'] {
@@ -167,6 +173,21 @@
   &[mlv-layout~='gap:xxxl'] {
     gap: var(--mlv-ref-space-xxxl);
   }
+
+
+  /* Container Padding Spacing */
+  @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+    &[mlv-layout~='pad:$(size)'] {
+      padding: var(--mlv-ref-space-$(size));
+    }
+
+    @each $side in top, left, right, bottom {
+      &[mlv-layout~='pad-$(side):$(size)'] {
+        padding-$(side): var(--mlv-ref-space-$(size));
+      }
+    }
+  }
+
 
 
   /* Grid Layouts */

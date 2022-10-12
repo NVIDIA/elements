@@ -7,10 +7,9 @@ export default {
 const layoutDemoStyles = html`
   <style>
     section {
-      background-color: var(--mlv-sys-layer-canvas-background);
+      background-color: var(--mlv-sys-interaction-default-background);
       border: var(--mlv-ref-border-width-lg) solid var(--mlv-ref-border-color-emphasis);
       gap: var(--mlv-ref-space-sm);
-      padding: var(--mlv-ref-size-600);
       margin-block: var(--mlv-ref-space-sm) var(--mlv-ref-space-xl) !important;
       min-height: 200px !important;
     }
@@ -22,6 +21,7 @@ const layoutDemoStyles = html`
     mlv-card {
       min-width: 60px !important;
       min-height: 60px !important;
+      --background: var(--mlv-sys-layer-overlay-color);
     }
   </style>
 `;
@@ -379,5 +379,33 @@ export const Gaps = {
     <section mlv-layout="row gap:xxxl">
       ${generateCards(5)}
     </section>
+  `
+}
+
+export const Padding = {
+  render: () => html`
+    ${layoutDemoStyles}
+
+    ${['xxxs', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'].map(size =>  html`
+      <h3 mlv-text="section">Padding ${size}</h3>
+      <section mlv-layout="row align:stretch pad:${size}">
+        <mlv-card></mlv-card>
+      </section>
+    `)}
+
+    ${['top', 'right', 'bottom', 'left'].map(side =>  html`
+      <h3 mlv-text="section">Padding ${side}</h3>
+      <section mlv-layout="row align:stretch pad-${side}:xxl">
+        <mlv-card></mlv-card>
+      </section>
+    `)}
+  `
+}
+export const Grow = {
+  render: () => html`
+    ${layoutDemoStyles}
+
+      <h3 mlv-text="section">Grow Container</h3>
+      <section mlv-layout="row grow"></section>
   `
 }
