@@ -20,6 +20,7 @@ export class IconButton extends Button {
     return html`
       <div internal-host>
         <nve-icon .name=${this.iconName}></nve-icon>
+        <slot></slot>
       </div>
     `;
   }
