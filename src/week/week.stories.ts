@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/week/define.js';
 
 export default {
-  title: 'Forms/Week/Examples',
+  title: 'Elements/Week/Examples',
   component: 'nve-week',
   parameters: { badges: ['alpha'] }
 };

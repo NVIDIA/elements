@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/search/define.js';
 
 export default {
-  title: 'Forms/Search/Examples',
+  title: 'Elements/Search/Examples',
   component: 'nve-search',
   parameters: { badges: ['alpha'] }
 };

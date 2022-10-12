@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/select/define.js';
 
 export default {
-  title: 'Forms/Select/Examples',
+  title: 'Elements/Select/Examples',
   component: 'nve-select',
   parameters: { badges: ['beta'] }
 };

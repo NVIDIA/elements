@@ -1,6 +1,6 @@
 :host {
-  --color: var(--nve-sys-interaction-default-color);
-  --background: var(--nve-sys-interaction-default-background);
+  --color: var(--nve-sys-interaction-neutral-color);
+  --background: var(--nve-sys-interaction-neutral-background);
   --padding: 0 var(--nve-ref-size-300);
   --border-radius: var(--nve-ref-border-radius-lg);
   --font-weight: var(--nve-ref-font-weight-semibold);
@@ -59,18 +59,18 @@
 }
 
 :host(:hover) {
-  --color: var(--nve-sys-interaction-default-hover-color);
-  --background: var(--nve-sys-interaction-default-hover-background);
+  --color: var(--nve-sys-interaction-neutral-hover-color);
+  --background: var(--nve-sys-interaction-neutral-hover-background);
 }
 
 :host(:--active) {
-  --color: var(--nve-sys-interaction-default-active-color);
-  --background: var(--nve-sys-interaction-default-active-background);
+  --color: var(--nve-sys-interaction-neutral-active-color);
+  --background: var(--nve-sys-interaction-neutral-active-background);
 }
 
 :host(:--disabled) {
-  --color: var(--nve-sys-interaction-default-disabled-color);
-  --background: var(--nve-sys-interaction-default-disabled-background);
+  --color: var(--nve-sys-interaction-neutral-disabled-color);
+  --background: var(--nve-sys-interaction-neutral-disabled-background);
   --cursor: not-allowed;
 }
 
@@ -94,8 +94,8 @@
   }
 
   &:host(:--disabled) {
-    --color: var(--nve-sys-interaction-default-disabled-color);
-    --background: var(--nve-sys-interaction-default-disabled-background);
+    --color: var(--nve-sys-interaction-neutral-disabled-color);
+    --background: var(--nve-sys-interaction-neutral-disabled-background);
   }
 }
 
@@ -114,8 +114,8 @@
   }
 
   &:host(:--disabled) {
-    --color: var(--nve-sys-interaction-default-disabled-color);
-    --background: var(--nve-sys-interaction-default-disabled-background);
+    --color: var(--nve-sys-interaction-neutral-disabled-color);
+    --background: var(--nve-sys-interaction-neutral-disabled-background);
   }
 }
 
@@ -133,7 +133,7 @@
   }
 
   &:host(:--disabled) {
-    --color: var(--nve-sys-interaction-default-disabled-color);
+    --color: var(--nve-sys-interaction-neutral-disabled-color);
     --background: transparent;
   }
 }
