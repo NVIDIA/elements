@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/time/define.js';
 
 export default {
-  title: 'Forms/Time/Examples',
+  title: 'Elements/Time/Examples',
   component: 'mlv-time',
   parameters: { badges: ['alpha'] }
 };

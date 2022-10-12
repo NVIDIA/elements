@@ -1,6 +1,6 @@
 :host {
-  --color: var(--mlv-sys-interaction-default-color);
-  --background: var(--mlv-sys-interaction-default-background);
+  --color: var(--mlv-sys-interaction-neutral-color);
+  --background: var(--mlv-sys-interaction-neutral-background);
   --padding: 0 var(--mlv-ref-size-300);
   --border-radius: var(--mlv-ref-border-radius-lg);
   --font-weight: var(--mlv-ref-font-weight-semibold);
@@ -59,18 +59,18 @@
 }
 
 :host(:hover) {
-  --color: var(--mlv-sys-interaction-default-hover-color);
-  --background: var(--mlv-sys-interaction-default-hover-background);
+  --color: var(--mlv-sys-interaction-neutral-hover-color);
+  --background: var(--mlv-sys-interaction-neutral-hover-background);
 }
 
 :host(:--active) {
-  --color: var(--mlv-sys-interaction-default-active-color);
-  --background: var(--mlv-sys-interaction-default-active-background);
+  --color: var(--mlv-sys-interaction-neutral-active-color);
+  --background: var(--mlv-sys-interaction-neutral-active-background);
 }
 
 :host(:--disabled) {
-  --color: var(--mlv-sys-interaction-default-disabled-color);
-  --background: var(--mlv-sys-interaction-default-disabled-background);
+  --color: var(--mlv-sys-interaction-neutral-disabled-color);
+  --background: var(--mlv-sys-interaction-neutral-disabled-background);
   --cursor: not-allowed;
 }
 
@@ -94,8 +94,8 @@
   }
 
   &:host(:--disabled) {
-    --color: var(--mlv-sys-interaction-default-disabled-color);
-    --background: var(--mlv-sys-interaction-default-disabled-background);
+    --color: var(--mlv-sys-interaction-neutral-disabled-color);
+    --background: var(--mlv-sys-interaction-neutral-disabled-background);
   }
 }
 
@@ -114,8 +114,8 @@
   }
 
   &:host(:--disabled) {
-    --color: var(--mlv-sys-interaction-default-disabled-color);
-    --background: var(--mlv-sys-interaction-default-disabled-background);
+    --color: var(--mlv-sys-interaction-neutral-disabled-color);
+    --background: var(--mlv-sys-interaction-neutral-disabled-background);
   }
 }
 
@@ -133,7 +133,7 @@
   }
 
   &:host(:--disabled) {
-    --color: var(--mlv-sys-interaction-default-disabled-color);
+    --color: var(--mlv-sys-interaction-neutral-disabled-color);
     --background: transparent;
   }
 }

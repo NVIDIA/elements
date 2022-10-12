@@ -27,7 +27,7 @@
     box-shadow: none !important;
     border-radius: 0 !important;
   }
-  
+
   /* main viewport */
   #panel-tab-content,
   .sto-10ro1m {
@@ -101,13 +101,25 @@
     background: var(--mlv-sys-layer-shell-background) !important;
   }
 
-  .sidebar-item  {
+  .sidebar-item {
     color: var(--mlv-sys-layer-canvas-color) !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    font-size: 14px !important;
+  }
+
+  .sidebar-item:hover {
+    background: var(--mlv-sys-interaction-default-hover-background) !important;
+    color: var(--mlv-sys-interaction-default-hover-color) !important;
   }
 
   .sidebar-item[data-selected='true'] {
     background: var(--mlv-sys-interaction-default-selected-background) !important;
     color: var(--mlv-sys-interaction-default-selected-color) !important;
+  }
+
+  .sidebar-subheading {
+    padding: 0 !important;
   }
 
   /* popovers */

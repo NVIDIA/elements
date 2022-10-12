@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundation/Examples/Typography'
+  title: 'Foundations/Typography/Examples'
 };
 
 export const Type = {

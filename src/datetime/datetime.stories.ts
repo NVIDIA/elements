@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/datetime/define.js';
 
 export default {
-  title: 'Forms/Datetime/Examples',
+  title: 'Elements/Datetime/Examples',
   component: 'mlv-datetime',
   parameters: { badges: ['alpha'] }
 };

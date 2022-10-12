@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundation/Examples/Themes'
+  title: 'Foundations/Themes/Examples'
 };
 
 export const Default = {
@@ -24,7 +24,9 @@ function getThemeDemo(theme) {
           <h2 slot="title">Title</h2>
           <h3 slot="subtitle">Sub Title</h3>
         </mlv-card-header>
-        <p>Card Content</p>
+        <mlv-card-content>
+          <p mlv-text="content">Card Content</p>
+        </mlv-card-content>
         <mlv-card-footer>
           Proceed with Action
           <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>

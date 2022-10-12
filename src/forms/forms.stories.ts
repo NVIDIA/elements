@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/forms/define.js';
 
 export default {
-  title: 'Forms/Forms/Examples'
+  title: 'Elements/Forms/Examples'
 }
 
 export const KitchenSink = {

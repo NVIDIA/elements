@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/radio/define.js';
 
 export default {
-  title: 'Forms/Radio/Examples',
+  title: 'Elements/Radio/Examples',
   component: 'mlv-input',
   parameters: { badges: ['beta'] }
 };

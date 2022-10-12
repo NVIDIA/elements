@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundation/Examples/Objects'
+  title: 'Foundations/Tokens/Examples'
 };
 
 export const layers = {
@@ -100,7 +100,7 @@ export const layers = {
         </div>
       </div>
       <div class="popover">
-        <h2>popover</h2>
+        <h2>popup</h2>
         <ul>
           <li>tooltips</li>
           <li>toasts</li>

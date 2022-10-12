@@ -3,7 +3,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import tokenJSON from '@elements/elements/tokens/tokens.json';
 
 export default {
-  title: 'Foundation/Examples/Tokens'
+  title: 'Foundations/Tokens/Examples'
 };
 
 export const Default = {

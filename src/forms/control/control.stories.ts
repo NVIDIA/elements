@@ -5,7 +5,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 
 export default {
-  title: 'Forms/Control/Examples',
+  title: 'Elements/Form Control/Examples',
   parameters: { badges: ['beta'] }
 }
 

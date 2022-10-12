@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundation/Examples/Interactions'
+  title: 'Foundations/Tokens/Examples'
 };
 
 const menuDemoStyles = html`
@@ -27,7 +27,7 @@ const menuDemoStyles = html`
     display: block;
     overflow: hidden;
     min-height: 320px;
-    background: var(--mlv-sys-layer-overlay-background);
+    background: var(--mlv-sys-layer-container-background);
     box-shadow: var(--mlv-ref-shadow-200);
     border-radius: var(--mlv-ref-border-radius-md);
     width: 200px;
@@ -71,7 +71,7 @@ const menuDemoStyles = html`
   }
 
   .mlv-menu-item[disabled] {
-    background: var(--mlv-sys-interaction-default-disabled-background);
+    background: none;
     color: var(--mlv-sys-interaction-default-disabled-color);
     cursor: not-allowed;
   }
@@ -155,7 +155,46 @@ export const Menu = {
   `
 };
 
-export const DropdownMenu = {
+export const ContainerMenu = {
+  render: () => html`
+    <div mlv-layout="grid span-items:6 gap:md">
+      <div mlv-theme="light">
+        <mlv-card>
+          <mlv-card-content mlv-layout="grid gap:md">
+            <div mlv-layout="span:4 column">
+              <div class="mlv-menu-item">item</div>
+              <div class="mlv-menu-item">default</div>
+              <div class="mlv-menu-item" hover>hover</div>
+              <div class="mlv-menu-item" active>active</div>
+              <div class="mlv-menu-item" selected>selected</div>
+              <div class="mlv-menu-item" disabled>disabled</div>
+              <div class="mlv-menu-item" focused>focused</div>
+            </div>
+            <div mlv-layout="span:8">container</div>
+          </mlv-card-content>
+        </mlv-card>
+      </div>
+      <div mlv-theme="dark">
+        <mlv-card>
+          <mlv-card-content mlv-layout="grid gap:md">
+            <div mlv-layout="span:4 column">
+              <div class="mlv-menu-item">item</div>
+              <div class="mlv-menu-item">default</div>
+              <div class="mlv-menu-item" hover>hover</div>
+              <div class="mlv-menu-item" active>active</div>
+              <div class="mlv-menu-item" selected>selected</div>
+              <div class="mlv-menu-item" disabled>disabled</div>
+              <div class="mlv-menu-item" focused>focused</div>
+            </div>
+            <div mlv-layout="span:8">container</div>
+          </mlv-card-content>
+        </mlv-card>
+      </div>
+    </div>
+  `
+}
+
+export const PopupMenu = {
   render: () => html`
     ${menuDemoStyles}
     <section mlv-theme="light" class="interaction-demo">

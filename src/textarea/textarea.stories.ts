@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/textarea/define.js';
 
 export default {
-  title: 'Forms/Textarea/Examples',
+  title: 'Elements/Textarea/Examples',
   component: 'mlv-textarea',
   parameters: { badges: ['beta'] }
 };

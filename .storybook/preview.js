@@ -67,47 +67,58 @@ export const parameters = {
         'About',
         [
           'Getting Started',
-          'Changelog'
+          'Changelog',
+          'Angular',
+          'Lit',
+          'Testing',
         ],
-        'Foundation',
+        'Foundations',
         [
           'Tokens',
+          [
+            'Documentation',
+            'Size & Space',
+            'Objects',
+            'Interactions',
+            'Status',
+            'Examples'
+          ],
           'Themes',
+          [
+            'Documentation',
+            'Examples'
+          ],
           'Typography',
-          'Size & Space',
-          'Objects',
-          'Interactions',
-          'Status',
-          'Testing',
-          'Examples'
+          [
+            'Documentation',
+            'Examples'
+          ],
+          'Layout',
+          [
+            'Documentation',
+            'Horizontal Layout',
+            'Vertical Layout',
+            'Grid Layout',
+            'Examples',
+          ],
         ],
-        'Layout',
-        [
-          'Getting Started',
-          'Horizontal Layout',
-          'Vertical Layout',
-          'Grid Layout',
-          'Examples',
-        ],
+        
         'Elements',
         [
           'Alert',
           'Alert Group',
           'Button',
           'Card',
+          'Datalist',
           'Icon',
           'Icon Button',
-          'Internal'
-        ],
-        'Forms',
-        [
           'Forms',
-          'Control',
-          'Actions',
+          'Form Validation',
+          'Form Actions',
+          'Form Control',
           'Validation',
           'Input',
           'Input Group',
-          'Datalist',
           'Checkbox',
           'Password',
           'Radio',
@@ -122,7 +133,8 @@ export const parameters = {
           'File',
           'Month',
           'Time',
-          'Week'
+          'Week',
+          'Internal',
         ]
       ]
     }
