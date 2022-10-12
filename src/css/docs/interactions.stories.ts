@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundation/Examples/Interactions'
+  title: 'Foundations/Tokens/Examples'
 };
 
 const menuDemoStyles = html`
@@ -27,7 +27,7 @@ const menuDemoStyles = html`
     display: block;
     overflow: hidden;
     min-height: 320px;
-    background: var(--nve-sys-layer-overlay-background);
+    background: var(--nve-sys-layer-container-background);
     box-shadow: var(--nve-ref-shadow-200);
     border-radius: var(--nve-ref-border-radius-md);
     width: 200px;
@@ -71,7 +71,7 @@ const menuDemoStyles = html`
   }
 
   .nve-menu-item[disabled] {
-    background: var(--nve-sys-interaction-default-disabled-background);
+    background: none;
     color: var(--nve-sys-interaction-default-disabled-color);
     cursor: not-allowed;
   }
@@ -155,7 +155,46 @@ export const Menu = {
   `
 };
 
-export const DropdownMenu = {
+export const ContainerMenu = {
+  render: () => html`
+    <div nve-layout="grid span-items:6 gap:md">
+      <div nve-theme="light">
+        <nve-card>
+          <nve-card-content nve-layout="grid gap:md">
+            <div nve-layout="span:4 column">
+              <div class="nve-menu-item">item</div>
+              <div class="nve-menu-item">default</div>
+              <div class="nve-menu-item" hover>hover</div>
+              <div class="nve-menu-item" active>active</div>
+              <div class="nve-menu-item" selected>selected</div>
+              <div class="nve-menu-item" disabled>disabled</div>
+              <div class="nve-menu-item" focused>focused</div>
+            </div>
+            <div nve-layout="span:8">container</div>
+          </nve-card-content>
+        </nve-card>
+      </div>
+      <div nve-theme="dark">
+        <nve-card>
+          <nve-card-content nve-layout="grid gap:md">
+            <div nve-layout="span:4 column">
+              <div class="nve-menu-item">item</div>
+              <div class="nve-menu-item">default</div>
+              <div class="nve-menu-item" hover>hover</div>
+              <div class="nve-menu-item" active>active</div>
+              <div class="nve-menu-item" selected>selected</div>
+              <div class="nve-menu-item" disabled>disabled</div>
+              <div class="nve-menu-item" focused>focused</div>
+            </div>
+            <div nve-layout="span:8">container</div>
+          </nve-card-content>
+        </nve-card>
+      </div>
+    </div>
+  `
+}
+
+export const PopupMenu = {
   render: () => html`
     ${menuDemoStyles}
     <section nve-theme="light" class="interaction-demo">

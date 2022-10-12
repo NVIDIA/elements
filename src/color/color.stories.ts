@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/color/define.js';
 
 export default {
-  title: 'Forms/Color/Examples',
+  title: 'Elements/Color/Examples',
   component: 'nve-color',
   parameters: { badges: ['alpha'] }
 };

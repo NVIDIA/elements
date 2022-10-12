@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/checkbox/define.js';
 
 export default {
-  title: 'Forms/Checkbox/Examples',
+  title: 'Elements/Checkbox/Examples',
   component: 'nve-checkbox',
   parameters: { badges: ['beta'] }
 };

@@ -3,7 +3,7 @@ import '@elements/elements/input/define.js';
 import '@elements/elements/icon-button/define.js';
 
 export default {
-  title: 'Forms/Input/Examples',
+  title: 'Elements/Input/Examples',
   component: 'nve-input',
   parameters: { badges: ['beta'] },
   argTypes: {

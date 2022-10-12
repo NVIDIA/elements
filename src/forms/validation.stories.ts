@@ -3,7 +3,7 @@ import '@elements/elements/input/define.js';
 import '@elements/elements/password/define.js';
 
 export default {
-  title: 'Forms/Validation/Examples',
+  title: 'Elements/Form Validation/Examples',
   parameters: { badges: ['alpha'] }
 };
 
