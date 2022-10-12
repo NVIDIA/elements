@@ -7,10 +7,19 @@ import '@elements/elements/icon-button/define.js';
 describe('nve-icon-button', () => {
   let fixture: HTMLElement;
   let element: IconButton;
+  let elementWithAnchor: IconButton;
+  let anchor: HTMLAnchorElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<nve-icon-button></nve-icon-button>`);
-    element = fixture.querySelector('nve-icon-button');
+    fixture = await createFixture(html`
+      <nve-icon-button></nve-icon-button>
+      <nve-icon-button>
+        <a href="#" aria-label="link to page"></a>
+      </nve-icon-button>
+    `);
+    element = fixture.querySelectorAll('nve-icon-button')[0];
+    elementWithAnchor = fixture.querySelectorAll('nve-icon-button')[1];
+    anchor = fixture.querySelector('a');
   });
 
   afterEach(() => {
@@ -34,5 +43,10 @@ describe('nve-icon-button', () => {
     element.iconName = 'test';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('nve-icon').name).toBe('test');
+  });
+
+  it('should allow anchor to be slotted', async () => {
+    await elementIsStable(elementWithAnchor);
+    expect(elementWithAnchor.shadowRoot.querySelector('slot').assignedElements()[0]).toBe(anchor);
   });
 });
