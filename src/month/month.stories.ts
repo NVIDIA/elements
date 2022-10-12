@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/month/define.js';
 
 export default {
-  title: 'Forms/Month/Examples',
+  title: 'Elements/Month/Examples',
   component: 'nve-month',
   parameters: { badges: ['alpha'] }
 };

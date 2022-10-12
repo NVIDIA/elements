@@ -4,7 +4,7 @@ import '@elements/elements/date/define.js';
 import '@elements/elements/datetime/define.js';
 
 export default {
-  title: 'Forms/Date/Examples',
+  title: 'Elements/Date/Examples',
   component: 'nve-date',
   parameters: { badges: ['alpha'] }
 };

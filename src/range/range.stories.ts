@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/range/define.js';
 
 export default {
-  title: 'Forms/Range/Examples',
+  title: 'Elements/Range/Examples',
   component: 'nve-range',
   parameters: { badges: ['beta'] }
 };

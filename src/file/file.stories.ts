@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/file/define.js';
 
 export default {
-  title: 'Forms/File/Examples',
+  title: 'Elements/File/Examples',
   component: 'nve-file',
   parameters: { badges: ['alpha'] }
 };

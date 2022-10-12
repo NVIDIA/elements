@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@elements/elements/password/define.js';
 
 export default {
-  title: 'Forms/Password/Examples',
+  title: 'Elements/Password/Examples',
   component: 'nve-password',
   parameters: { badges: ['beta'] }
 };

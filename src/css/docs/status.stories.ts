@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundation/Examples/Status'
+  title: 'Foundations/Tokens/Examples'
 };
 
 export const Status = {
