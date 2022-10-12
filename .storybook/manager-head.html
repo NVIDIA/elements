@@ -70,6 +70,15 @@
     padding: 0 !important;
   }
 
+  [title='Storybook']::before {
+    content: '';
+    background-image: url('/assets/elements-icon-128.png');
+    background-size: 23px 23px;
+    width: 23px;
+    height: 23px;
+  }
+
+
   [title='Storybook'] svg {
     display: none !important;
   }
@@ -77,10 +86,11 @@
   [title='Storybook']::after {
     color: var(--nve-sys-layer-container-color);
     font-family: var(--nve-ref-font-family-inter);
-    font-weight: var(--nve-ref-font-weight-regular);
-    font-size: var(--nve-ref-font-size-300);
+    font-weight: var(--nve-ref-font-weight-semibold);
+    font-size: var(--nve-ref-font-size-400);
     content: 'MagLev Elements';
-    width: 136px;
+    padding: 10px;
+    width: 175px !important;
   }
 
   svg[color='primary'] {
@@ -96,7 +106,7 @@
     color: var(--nve-sys-interaction-default-selected-color) !important;
     border-bottom-color: var(--nve-sys-interaction-default-selected-background) !important;
   }
-  
+
   .sidebar-container .os-content {
     background: var(--nve-sys-layer-shell-background) !important;
   }
