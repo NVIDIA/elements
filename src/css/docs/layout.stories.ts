@@ -7,10 +7,9 @@ export default {
 const layoutDemoStyles = html`
   <style>
     section {
-      background-color: var(--nve-sys-layer-canvas-background);
+      background-color: var(--nve-sys-interaction-default-background);
       border: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-emphasis);
       gap: var(--nve-ref-space-sm);
-      padding: var(--nve-ref-size-600);
       margin-block: var(--nve-ref-space-sm) var(--nve-ref-space-xl) !important;
       min-height: 200px !important;
     }
@@ -22,6 +21,7 @@ const layoutDemoStyles = html`
     nve-card {
       min-width: 60px !important;
       min-height: 60px !important;
+      --background: var(--nve-sys-layer-overlay-color);
     }
   </style>
 `;
@@ -379,5 +379,33 @@ export const Gaps = {
     <section nve-layout="row gap:xxxl">
       ${generateCards(5)}
     </section>
+  `
+}
+
+export const Padding = {
+  render: () => html`
+    ${layoutDemoStyles}
+
+    ${['xxxs', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'].map(size =>  html`
+      <h3 nve-text="section">Padding ${size}</h3>
+      <section nve-layout="row align:stretch pad:${size}">
+        <nve-card></nve-card>
+      </section>
+    `)}
+
+    ${['top', 'right', 'bottom', 'left'].map(side =>  html`
+      <h3 nve-text="section">Padding ${side}</h3>
+      <section nve-layout="row align:stretch pad-${side}:xxl">
+        <nve-card></nve-card>
+      </section>
+    `)}
+  `
+}
+export const Grow = {
+  render: () => html`
+    ${layoutDemoStyles}
+
+      <h3 nve-text="section">Grow Container</h3>
+      <section nve-layout="row grow"></section>
   `
 }
