@@ -53,6 +53,17 @@ export const Interactions = {
   `
 }
 
+export const Link = {
+  render: () => html`
+    <mlv-icon-button icon-name="analytics">
+      <a href="#" aria-label="link to page"></a>
+    </mlv-icon-button>
+    <mlv-icon-button interaction="ghost" icon-name="analytics">
+      <a href="#" aria-label="link to page"></a>
+    </mlv-icon-button>
+  `
+}
+
 export const Themes = {
   render: () => html`
     <div mlv-theme="light">

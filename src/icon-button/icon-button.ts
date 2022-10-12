@@ -20,6 +20,7 @@ export class IconButton extends Button {
     return html`
       <div internal-host>
         <mlv-icon .name=${this.iconName}></mlv-icon>
+        <slot></slot>
       </div>
     `;
   }

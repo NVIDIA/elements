@@ -2,9 +2,23 @@
   --border-radius: var(--mlv-ref-border-radius-full);
   --padding: var(--mlv-ref-space-xxs);
   --line-height: 0;
+  --gap: 0;
 }
 
 mlv-icon {
   --color: var(--_icon-color);
   pointer-events: none;
+}
+
+::slotted(a) {
+  text-decoration: none !important;
+  color: var(--color) !important;
+  outline: 0;
+}
+
+::slotted(a)::after {
+  display: block;
+  content: ' ';
+  inset: 0;
+  position: absolute;
 }
