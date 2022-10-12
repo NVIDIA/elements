@@ -53,6 +53,17 @@ export const Interactions = {
   `
 }
 
+export const Link = {
+  render: () => html`
+    <nve-icon-button icon-name="analytics">
+      <a href="#" aria-label="link to page"></a>
+    </nve-icon-button>
+    <nve-icon-button interaction="ghost" icon-name="analytics">
+      <a href="#" aria-label="link to page"></a>
+    </nve-icon-button>
+  `
+}
+
 export const Themes = {
   render: () => html`
     <div nve-theme="light">
