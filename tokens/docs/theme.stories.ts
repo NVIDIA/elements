@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundation/Examples/Themes'
+  title: 'Foundations/Themes/Examples'
 };
 
 export const Default = {
@@ -24,7 +24,9 @@ function getThemeDemo(theme) {
           <h2 slot="title">Title</h2>
           <h3 slot="subtitle">Sub Title</h3>
         </nve-card-header>
-        <p>Card Content</p>
+        <nve-card-content>
+          <p nve-text="content">Card Content</p>
+        </nve-card-content>
         <nve-card-footer>
           Proceed with Action
           <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
