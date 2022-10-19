@@ -1,7 +1,7 @@
 :host {
   --color: var(--mlv-sys-text-default-color);
-  --width: var(--mlv-ref-size-600);
-  --height: var(--mlv-ref-size-600);
+  --width: var(--mlv-ref-size-500);
+  --height: var(--mlv-ref-size-500);
   display: inline-flex;
 }
 
