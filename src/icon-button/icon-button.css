@@ -3,6 +3,7 @@
   --padding: var(--nve-ref-space-xxs);
   --line-height: 0;
   --gap: 0;
+  --height: auto;
 }
 
 nve-icon {

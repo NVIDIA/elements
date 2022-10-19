@@ -1,7 +1,7 @@
 :host {
   --color: var(--nve-sys-text-default-color);
-  --width: var(--nve-ref-size-600);
-  --height: var(--nve-ref-size-600);
+  --width: var(--nve-ref-size-500);
+  --height: var(--nve-ref-size-500);
   display: inline-flex;
 }
 
