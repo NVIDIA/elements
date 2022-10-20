@@ -74,7 +74,7 @@ export const variants = {
 export const statuses = {
   render: () => html`
     <mlv-icon name="analytics"></mlv-icon>
-    <mlv-icon name="analytics" status="info"></mlv-icon>
+    <mlv-icon name="analytics" status="accent"></mlv-icon>
     <mlv-icon name="analytics" status="success"></mlv-icon>
     <mlv-icon name="analytics" status="warning"></mlv-icon>
     <mlv-icon name="analytics" status="danger"></mlv-icon>
@@ -93,14 +93,14 @@ export const Themes = {
   render: () => html`
     <div mlv-theme="light">
       <mlv-icon name="analytics"></mlv-icon>
-      <mlv-icon name="analytics" status="info"></mlv-icon>
+      <mlv-icon name="analytics" status="accent"></mlv-icon>
       <mlv-icon name="analytics" status="success"></mlv-icon>
       <mlv-icon name="analytics" status="warning"></mlv-icon>
       <mlv-icon name="analytics" status="danger"></mlv-icon>
     </div>
     <div mlv-theme="dark">
       <mlv-icon name="analytics"></mlv-icon>
-      <mlv-icon name="analytics" status="info"></mlv-icon>
+      <mlv-icon name="analytics" status="accent"></mlv-icon>
       <mlv-icon name="analytics" status="success"></mlv-icon>
       <mlv-icon name="analytics" status="warning"></mlv-icon>
       <mlv-icon name="analytics" status="danger"></mlv-icon>

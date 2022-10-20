@@ -44,6 +44,8 @@ storybook(
         "@npm_platform_libs_elements//@geometricpanda/storybook-addon-badges",
         "@npm_platform_libs_elements//@elements/custom-elements-storybook",
         "@npm_platform_libs_elements//emoji-picker-element",
+        "@npm_platform_libs_elements//construct-style-sheets-polyfill",
+        "@npm_platform_libs_elements//element-internals-polyfill",
         "@npm_platform_libs_elements//lit",
     ],
     data = [

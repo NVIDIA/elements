@@ -1,10 +1,11 @@
 :host {
   --gap: var(--mlv-ref-space-xs);
   --font-size: var(--mlv-ref-font-size-200);
-  --background: var(--mlv-sys-status-neutral-background);
+  --background: var(--mlv-sys-status-default-background);
   --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
   --border-radius: var(--mlv-ref-border-radius-md);
-  --color: var(--mlv-sys-text-white-color);
+  --color: var(--mlv-sys-status-default-color);
+  --icon-size: var(--mlv-ref-size-600);
   width: 100%;
 }
 

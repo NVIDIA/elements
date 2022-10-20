@@ -2,8 +2,8 @@
 :host {
   --gap: var(--mlv-ref-space-xs);
   --font-size: var(--mlv-ref-font-size-200);
-  --color: var(--mlv-sys-interaction-default-color);
-  --icon-color: var(--mlv-sys-interaction-default-color);
+  --color: var(--mlv-sys-text-default-color);
+  --icon-color: var(--mlv-sys-text-default-color);
   --icon-size: var(--mlv-ref-size-500);
   width: auto;
 }

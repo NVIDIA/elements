@@ -38,6 +38,6 @@ svg {
   --color: var(--mlv-sys-status-danger-background);
 }
 
-:host([status='info']) {
-  --color: var(--mlv-sys-status-info-background);
+:host([status='accent']) {
+  --color: var(--mlv-sys-status-accent-background);
 }
