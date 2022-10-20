@@ -72,7 +72,7 @@ export default defineConfig((env) => {
             name: 'https://github.com/vitejs/vite/issues/8057',
             closeBundle() {
               fs.readdirSync(dist())
-                .filter(f => f !== 'index.css' && f.endsWith('.css'))
+                .filter(f => f.endsWith('.css') && (f.includes('module.') || f.includes('theme.')))
                 .forEach(file => fs.renameSync(dist(file), dist(`css/${file}`)));
             }
           },

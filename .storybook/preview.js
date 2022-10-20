@@ -3,6 +3,7 @@ import { themes } from '@storybook/theming';
 import { excludePrivateFields } from '@elements/elements/internal';
 import customElements from '@elements/elements/custom-elements.json';
 import styles from '@elements/elements/index.css';
+import font from '@elements/elements/inter.css';
 
 setCustomElementsManifest(excludePrivateFields(customElements));
 
@@ -162,10 +163,14 @@ export const globalTypes = {
   },
 }
 
-const styleSheet = document.createElement('style')
-styleSheet.innerText = styles;
-document.head.appendChild(styleSheet);
-window.parent.document.head.appendChild(styleSheet);
+const styleSheet = new CSSStyleSheet();
+styleSheet.replaceSync(styles + font);
+document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
+
+const parentStyle = document.createElement('style');
+parentStyle.innerText = styles + font;
+window.parent.document.head.appendChild(parentStyle);
+
 updateTheme('dark');
 
 function updateTheme(themes) {
