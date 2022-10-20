@@ -38,6 +38,6 @@ svg {
   --color: var(--nve-sys-status-danger-background);
 }
 
-:host([status='info']) {
-  --color: var(--nve-sys-status-info-background);
+:host([status='accent']) {
+  --color: var(--nve-sys-status-accent-background);
 }

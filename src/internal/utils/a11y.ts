@@ -1,13 +1,8 @@
 import { generateId } from './dom.js';
 
 export function attachInternals(element: HTMLElement & { _internals?: ElementInternals }) {
-  try {
+  if (element._internals === undefined) {
     element._internals = element.attachInternals();
-  } catch (e: any) {
-    if (!e.message.includes('ElementInternals for the specified element was already attached')) {
-      console.error(e);
-    }
-    return;
   }
 }
 

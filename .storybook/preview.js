@@ -4,6 +4,7 @@ import { excludePrivateFields } from '@elements/elements/internal';
 import customElements from '@elements/elements/custom-elements.json';
 import styles from '@elements/elements/index.css';
 import font from '@elements/elements/inter.css';
+import '@elements/elements/polyfills/index.js';
 
 setCustomElementsManifest(excludePrivateFields(customElements));
 
