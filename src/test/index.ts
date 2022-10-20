@@ -29,16 +29,26 @@ export function removeFixture(fixture: HTMLElement) {
  * Find all elements not defined in the custom elmenets registry and wait until
  * all elements have been added to registry https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined
  */
-function waitForAllElementsToBeDefined() {
-  const pendingElements = Array.from(document.querySelectorAll(':not(:defined)'));
-  return Promise.all(pendingElements.map(e => customElements.whenDefined(e.tagName)));
+async function waitForAllElementsToBeDefined() {
+  const pendingElements = [...new Set(Array.from(document.querySelectorAll('*:not(:defined)')).filter(e => e.tagName.includes('-')).map(e => e.tagName.toLocaleLowerCase()))];
+  return new Promise((resolve, reject) => {
+    Promise.all(pendingElements.map(e => customElements.whenDefined(e))).then(() => resolve(''));
+    setTimeout(() => {
+      reject('');
+      console.log(`\x1b[91m Elements not defined: ${pendingElements}\x1b[0m`);
+    }, 5000);
+  });
 }
 
 /**
  * Awaits until Lit element has rendered and has no pending updates
  */
-export function elementIsStable(element: any) {
-  return retry(async () => await element.updateComplete ? Promise.resolve() : Promise.reject());
+export async function elementIsStable(element: any) {
+  if (element.updateComplete) {
+    return retry(async () => await element.updateComplete ? Promise.resolve() : Promise.reject('Element did not stablize'));
+  } else {
+    return Promise.reject(`${element.tagName.toLocaleLowerCase()} is not a defined lit element`);
+  }
 }
 
 function retry(fn: () => Promise<any>, maxTries = 10) {
