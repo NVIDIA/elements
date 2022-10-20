@@ -40,6 +40,7 @@
     ".": "./dist/index.js",
     "./index.js": "./dist/index.js",
     "./index.css": "./dist/index.css",
+    "./inter.css": "./dist/inter.css",
     "./internal": "./dist/internal/index.js",
     "./internal/index.js": "./dist/internal/index.js",
     "./test": "./dist/test/index.js",
