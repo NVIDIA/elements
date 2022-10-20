@@ -1,12 +1,3 @@
-/* @font-face {
-  font-family: 'Inter var';
-  src: url('./assets/inter-roman.var.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-  font-named-instance: 'Regular';
-} */
-
 /* https://seek-oss.github.io/capsize/ */
 :is([nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'], [nve-text~='eyebrow'], [nve-text~='eyebrow'])::before {
   content: '';
