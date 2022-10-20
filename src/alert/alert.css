@@ -2,8 +2,8 @@
 :host {
   --gap: var(--nve-ref-space-xs);
   --font-size: var(--nve-ref-font-size-200);
-  --color: var(--nve-sys-interaction-default-color);
-  --icon-color: var(--nve-sys-interaction-default-color);
+  --color: var(--nve-sys-text-default-color);
+  --icon-color: var(--nve-sys-text-default-color);
   --icon-size: var(--nve-ref-size-500);
   width: auto;
 }

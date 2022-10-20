@@ -74,7 +74,7 @@ export const variants = {
 export const statuses = {
   render: () => html`
     <nve-icon name="analytics"></nve-icon>
-    <nve-icon name="analytics" status="info"></nve-icon>
+    <nve-icon name="analytics" status="accent"></nve-icon>
     <nve-icon name="analytics" status="success"></nve-icon>
     <nve-icon name="analytics" status="warning"></nve-icon>
     <nve-icon name="analytics" status="danger"></nve-icon>
@@ -93,14 +93,14 @@ export const Themes = {
   render: () => html`
     <div nve-theme="light">
       <nve-icon name="analytics"></nve-icon>
-      <nve-icon name="analytics" status="info"></nve-icon>
+      <nve-icon name="analytics" status="accent"></nve-icon>
       <nve-icon name="analytics" status="success"></nve-icon>
       <nve-icon name="analytics" status="warning"></nve-icon>
       <nve-icon name="analytics" status="danger"></nve-icon>
     </div>
     <div nve-theme="dark">
       <nve-icon name="analytics"></nve-icon>
-      <nve-icon name="analytics" status="info"></nve-icon>
+      <nve-icon name="analytics" status="accent"></nve-icon>
       <nve-icon name="analytics" status="success"></nve-icon>
       <nve-icon name="analytics" status="warning"></nve-icon>
       <nve-icon name="analytics" status="danger"></nve-icon>
