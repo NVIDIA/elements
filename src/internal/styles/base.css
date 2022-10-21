@@ -10,6 +10,7 @@
   box-sizing: border-box;
   font-family: inherit;
   contain: layout; /* https://developer.mozilla.org/en-US/docs/Web/CSS/contain */
+  pointer-events: inherit;
 }
 
 *,
