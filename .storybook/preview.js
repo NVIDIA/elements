@@ -72,6 +72,7 @@ export const parameters = {
           'Changelog',
           'Angular',
           'Lit',
+          'React',
           'Testing',
         ],
         'Foundations',

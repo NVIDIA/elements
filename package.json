@@ -141,6 +141,7 @@
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "0.6.3",
     "@geometricpanda/storybook-addon-badges": "0.2.2",
+    "@lit-labs/react": "1.0.9",
     "@elements/custom-elements-storybook": "0.1.4",
     "@vitest/coverage-c8": "0.24.0",
     "emoji-picker-element": "1.12.1",
@@ -170,6 +171,6 @@
     }
   },
   "bzlgen": {
-    "md5": "963f4176351824daf6dae9e85aae5eef"
+    "md5": "b25563ff35d09c7285d9c0eea46183a2"
   }
 }
