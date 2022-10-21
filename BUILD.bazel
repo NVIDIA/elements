@@ -9,6 +9,8 @@ vite_library(
     srcs = vite_default_srcs() + glob(["css/**/*"]),
     deps = [
         "@npm_platform_libs_elements//lit",
+        "@npm_platform_libs_elements//@floating-ui/dom",
+        "@npm_platform_libs_elements//@lit-labs/motion",
         "@npm_platform_libs_elements//postcss-mixins",
         "@npm_platform_libs_elements//postcss-nested",
         "@npm_platform_libs_elements//postcss-each",
@@ -46,6 +48,7 @@ storybook(
         "@npm_platform_libs_elements//emoji-picker-element",
         "@npm_platform_libs_elements//construct-style-sheets-polyfill",
         "@npm_platform_libs_elements//element-internals-polyfill",
+        "@npm_platform_libs_elements//@lit-labs/motion",
         "@npm_platform_libs_elements//lit",
     ],
     data = [
