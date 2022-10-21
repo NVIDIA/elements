@@ -131,6 +131,8 @@
     }
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.0.3",
+    "@lit-labs/motion": "^1.0.3",
     "lit": "^2.4.0",
     "lit-html": "^2.4.0"
   },
@@ -145,7 +147,7 @@
     "@elements/custom-elements-storybook": "0.1.4",
     "@vitest/coverage-c8": "0.24.0",
     "emoji-picker-element": "1.12.1",
-    "happy-dom": "6.0.4",
+    "happy-dom": "7.6.0",
     "postcss": "8.4.16",
     "postcss-csso": "6.0.1",
     "postcss-each": "1.1.0",
@@ -171,6 +173,6 @@
     }
   },
   "bzlgen": {
-    "md5": "b25563ff35d09c7285d9c0eea46183a2"
+    "md5": "06a302b4e0648e72116277d75451f94e"
   }
 }
