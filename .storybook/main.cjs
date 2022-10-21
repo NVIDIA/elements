@@ -6,6 +6,7 @@ module.exports = {
   stories: [
     '../src/**/*.stories.mdx',
     '../src/**/*.stories.ts',
+    '../src/**/*.stories.tsx',
     '../tokens/**/*.stories.mdx',
     '../tokens/**/*.stories.ts'
   ],
