@@ -15,7 +15,7 @@ class TypeClosableControllerTestElement extends LitElement {
   }
 }
 
-describe('state-pressed.controller', () => {
+describe('type-closable.controller', () => {
   let element: TypeClosableControllerTestElement;
   let fixture: HTMLElement;
 

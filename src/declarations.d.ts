@@ -17,3 +17,10 @@ interface HTMLElement {
   'mlv-text': string;
   'mlv-layout': string;
 }
+
+interface HTMLDialogElement extends HTMLElement {
+  show?: () => void;
+  showModal?: () => void;
+  close?: (returnValue?: string) => void;
+  returnValue?: string;
+}
