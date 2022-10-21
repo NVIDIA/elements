@@ -1,0 +1,40 @@
+<Meta title="About/React" />
+
+# React Setup
+
+## Installation
+
+To install the MagLev UI Elements, run the following command:
+
+```bash
+pnpm install @elements/elements
+```
+
+Once installed, import the global CSS into your project.
+
+```css
+@import '@elements/elements/dist/index.css';
+@import '@elements/elements/dist/inter.css';
+```
+
+Due to [React not being compatible](https://custom-elements-everywhere.com/) with
+standard DOM APIs the `@lit-labs/react` package must be used to render Custom Elements.
+This package will wrap elements into a React component mapping the events and
+properties in a way that React can support.
+
+```tsx
+import * as React from 'react';
+import { createComponent } from '@lit-labs/react';
+import { Alert } from '@elements/elements/alert';
+
+export const MlvAlert = createComponent(React, 'nve-alert', Alert, { onclose: 'close' });
+```
+
+The `MlvAlert` React component can now be used within a React application.
+
+```tsx
+<MlvAlert closable={isClosable} onclose={(e) => closeAlert()} />
+```
+
+To learn more about the `@lit-labs/react` package, please visit the [documentation](https://github.com/lit/lit/tree/main/packages/labs/react).
+View a working [demo here](/story/internal-examples-integration-react--demo).
