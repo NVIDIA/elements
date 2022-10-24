@@ -1,5 +1,5 @@
 :host {
-  --color: var(--mlv-sys-text-default-color);
+  --color: var(--mlv-sys-status-neutral-background);
   --width: var(--mlv-ref-size-500);
   --height: var(--mlv-ref-size-500);
   display: inline-flex;
@@ -19,11 +19,6 @@ svg {
 
 :host([variant='inherit']) {
   --color: currentColor;
-}
-
-:host([status='neutral']),
-:host([variant='lighter']) {
-  --color: var(--mlv-sys-status-neutral-background);
 }
 
 :host([status='success']) {

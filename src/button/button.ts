@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { MlvBaseButton, useStyles, Interaction } from '@elements/elements/internal';
+import { MlvBaseButton, useStyles, Interaction, GhostInteraction } from '@elements/elements/internal';
 import styles from './button.css?inline';
 
 /**
@@ -20,7 +20,7 @@ import styles from './button.css?inline';
 export class Button extends MlvBaseButton {
   static styles = useStyles([styles]);
 
-  @property({ type: String, reflect: true }) interaction: Interaction;
+  @property({ type: String, reflect: true }) interaction: Interaction | GhostInteraction;
 
   render() {
     return html`

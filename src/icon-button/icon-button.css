@@ -4,6 +4,7 @@
   --line-height: 0;
   --gap: 0;
   --height: auto;
+  --color: var(--mlv-sys-status-neutral-background);
 }
 
 mlv-icon {

@@ -48,8 +48,16 @@ export const Interactions = {
     <mlv-icon-button icon-name="analytics"></mlv-icon-button>
     <mlv-icon-button interaction="emphasize" icon-name="analytics"></mlv-icon-button>
     <mlv-icon-button interaction="destructive" icon-name="analytics"></mlv-icon-button>
-    <mlv-icon-button interaction="ghost" icon-name="analytics"></mlv-icon-button>
     <mlv-icon-button disabled icon-name="analytics"></mlv-icon-button>
+  `
+}
+
+export const GhostInteractions = {
+  render: () => html`
+    <mlv-icon-button interaction="ghost" icon-name="analytics"></mlv-icon-button>
+    <mlv-icon-button interaction="ghost-emphasize" icon-name="analytics"></mlv-icon-button>
+    <mlv-icon-button interaction="ghost-destructive" icon-name="analytics"></mlv-icon-button>
+    <mlv-icon-button interaction="ghost" icon-name="analytics" disabled></mlv-icon-button>
   `
 }
 

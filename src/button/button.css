@@ -41,7 +41,7 @@
 }
 
 ::slotted(a) {
-  text-decoration: none !important;
+  text-decoration: var(--text-decoration) !important;
   color: var(--color) !important;
   outline: 0;
 }
@@ -76,7 +76,6 @@
 
 :host([readonly]) {
   --cursor: cursor !important;
-  --text-decoration: none !important;
 }
 
 :host([interaction='emphasize']) {
@@ -119,8 +118,9 @@
   }
 }
 
-:host([interaction='ghost']) {
+:host([interaction*='ghost']) {
   --background: transparent;
+  --_icon-color: var(--color);
 
   &:host(:hover) {
     --background: transparent;
@@ -135,6 +135,30 @@
   &:host(:--disabled) {
     --color: var(--mlv-sys-interaction-neutral-disabled-color);
     --background: transparent;
+  }
+
+  &:host([interaction*='destructive']) {
+    --color: var(--mlv-sys-interaction-destructive-background);
+
+    &:host(:hover) {
+      --color: var(--mlv-sys-interaction-destructive-hover-background);
+    }
+  
+    &:host(:--active) {
+      --color: var(--mlv-sys-interaction-destructive-active-background);
+    }
+  }
+
+  &:host([interaction*='emphasize']) {
+    --color: var(--mlv-sys-interaction-emphasize-background);
+
+    &:host(:hover) {
+      --color: var(--mlv-sys-interaction-emphasize-hover-background);
+    }
+  
+    &:host(:--active) {
+      --color: var(--mlv-sys-interaction-emphasize-active-background);
+    }
   }
 }
 

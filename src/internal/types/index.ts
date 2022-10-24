@@ -1,5 +1,7 @@
 
-export type Interaction = 'emphasize' | 'destructive' | 'ghost';
+export type Interaction = 'emphasize' | 'destructive';
+
+export type GhostInteraction = 'ghost' | `${'ghost'}-${Interaction}`;
 
 export type InlinePosition = 'start' | 'center' | 'end';
 

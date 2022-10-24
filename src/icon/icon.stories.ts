@@ -1,14 +1,11 @@
 /* eslint-disable guard-for-in */
 import { html } from 'lit';
-import { withDesign } from 'storybook-addon-designs';
-
 import {
   ComponentStatuses,
   generateDefaultStoryParameters,
-  generateFigmaEmbed,
   getValuesFromEnum
 } from '@elements/elements/internal';
-import {  IconNames, IconVariants, ICON_NAMES } from '@elements/elements/icon';
+import {  Icon, IconNames, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 
 const figmaEmbedNodeId = '164%3A61';
@@ -26,19 +23,23 @@ export default {
   argTypes: {
     variant: {
       control: 'inline-radio',
-      options: getValuesFromEnum(IconVariants)
+      options: ['inherit', 'default']
     },
     name: {
       control: 'inline-radio',
       options: ICON_NAMES
-    }
+    },
+    status: {
+      control: 'inline-radio',
+      options: ['default', 'success', 'warning', 'danger', 'accent']
+    },
   }
 };
 
 interface ArgTypes {
-  variant?: IconVariants;
+  variant?: Icon['variant'];
+  status?: Icon['status'];
   name?: IconNames;
-  color?: string;
 }
 
 export const Default = {
@@ -46,13 +47,11 @@ export const Default = {
     html`<mlv-icon
       name="${args.name}"
       variant="${args.variant}"
-      color="${args.color}"
+      status="${args.status}"
     ></mlv-icon>`,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'analytics' }
 };
-
-export const LightIcon = { ...Default, args: { name: 'analytics', variant: IconVariants.Lighter } };
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
@@ -65,9 +64,8 @@ export const PreviewAllIcons = {
 
 export const variants = {
   render: () => html`
-    <mlv-icon name="analytics" style="font-size: 2em"></mlv-icon>
-    <mlv-icon name="analytics" variant="inherit" style="font-size: 2em"></mlv-icon>
-    <mlv-icon name="analytics" variant="lighter" style="font-size: 2em"></mlv-icon>
+    <mlv-icon name="analytics"></mlv-icon>
+    <mlv-icon name="analytics" variant="inherit"></mlv-icon>
   `
 }
 

@@ -69,12 +69,15 @@ export const Interactions = {
     <mlv-button>default</mlv-button>
     <mlv-button interaction="emphasize">emphasize</mlv-button>
     <mlv-button interaction="destructive">destructive</mlv-button>
-    <mlv-button interaction="ghost">ghost</mlv-button>
     <mlv-button disabled>disabled</mlv-button>
-    <script>
-      const btns = document.querySelectorAll('mlv-button');
-      btns[0].addEventListener('click', () => console.log('CLICK'));
-    </script>
+  `
+}
+
+export const GhostInteractions = {
+  render: () => html`
+    <mlv-button interaction="ghost">ghost</mlv-button>
+    <mlv-button interaction="ghost-emphasize">ghost-emphasize</mlv-button>
+    <mlv-button interaction="ghost-destructive">ghost-destructive</mlv-button>
   `
 }
 
@@ -83,10 +86,13 @@ export const Link = {
     <mlv-button><a href="#">default</a></mlv-button>
     <mlv-button interaction="emphasize"><a href="#">emphasize</a></mlv-button>
     <mlv-button interaction="destructive"><a href="#">destructive</a></mlv-button>
-    <mlv-button interaction="ghost"><a href="#">ghost</a></mlv-button>
     <mlv-button disabled><a href="#">disabled</a></mlv-button>
     <!-- anchors can wrap button instances, however its recommended to slot the anchor into the button -->
     <a href="https://google.com"><mlv-button>default</mlv-button></a>
+
+    <mlv-button interaction="ghost"><a href="#">ghost</a></mlv-button>
+    <mlv-button interaction="ghost-emphasize"><a href="#">ghost-emphasize</a></mlv-button>
+    <mlv-button interaction="ghost-destructive"><a href="#">ghost-destructive</a></mlv-button>
   `
 }
 
@@ -96,14 +102,12 @@ export const Themes = {
       <mlv-button>default</mlv-button>
       <mlv-button interaction="emphasize">emphasize</mlv-button>
       <mlv-button interaction="destructive">destructive</mlv-button>
-      <mlv-button interaction="ghost">ghost</mlv-button>
       <mlv-button disabled>disabled</mlv-button>
     </div>
     <div mlv-theme="dark">
       <mlv-button>default</mlv-button>
       <mlv-button interaction="emphasize">emphasize</mlv-button>
       <mlv-button interaction="destructive">destructive</mlv-button>
-      <mlv-button interaction="ghost">ghost</mlv-button>
       <mlv-button disabled>disabled</mlv-button>
     </div>
   `
