@@ -4,6 +4,7 @@
   --line-height: 0;
   --gap: 0;
   --height: auto;
+  --color: var(--nve-sys-status-neutral-background);
 }
 
 nve-icon {
