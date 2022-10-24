@@ -1,5 +1,5 @@
 :host {
-  --color: var(--nve-sys-text-default-color);
+  --color: var(--nve-sys-status-neutral-background);
   --width: var(--nve-ref-size-500);
   --height: var(--nve-ref-size-500);
   display: inline-flex;
@@ -19,11 +19,6 @@ svg {
 
 :host([variant='inherit']) {
   --color: currentColor;
-}
-
-:host([status='neutral']),
-:host([variant='lighter']) {
-  --color: var(--nve-sys-status-neutral-background);
 }
 
 :host([status='success']) {

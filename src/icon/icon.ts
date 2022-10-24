@@ -4,10 +4,6 @@ import { useStyles } from '@elements/elements/internal';
 import { ICON_NAMES } from './icon-names.js';
 import styles from './icon.css?inline';
 
-export enum IconVariants {
-  Inherit = 'inherit',
-  Lighter = 'lighter'
-}
 export type IconNames = typeof ICON_NAMES[number];
 
 /**
@@ -20,7 +16,7 @@ export class Icon extends LitElement {
   static styles = useStyles([styles]);
 
   /** The color variant of the icon */
-  @property({ type: String, reflect: true }) variant: IconVariants;
+  @property({ type: String, reflect: true }) variant?: 'inherit';
 
   @property({ type: String, reflect: true }) status: 'warning' | 'danger' | 'success' | 'info';
 
