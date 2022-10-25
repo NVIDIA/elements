@@ -53,11 +53,6 @@
   position: absolute;
 }
 
-:host(:focus-within) [internal-host] {
-  outline: var(--nve-ref-outline-webkit);
-  outline: var(--nve-ref-outline-default);
-}
-
 :host(:hover) {
   --color: var(--nve-sys-interaction-neutral-hover-color);
   --background: var(--nve-sys-interaction-neutral-hover-background);

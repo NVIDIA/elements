@@ -70,6 +70,7 @@ export const Weights = {
 <div nve-layout="column gap:lg">
   <p nve-text="body bold">bold</p>
   <p nve-text="body semibold">semibold</p>
+  <p nve-text="body medium">medium</p>
   <p nve-text="body">default</p>
   <p nve-text="body light">light</p>
 </div>

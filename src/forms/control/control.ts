@@ -12,6 +12,13 @@ import styles from './control.css?inline';
 /**
  * @alpha
  * @element nve-control
+ * @cssprop --cursor
+ * @cssprop --accent-color
+ * @cssprop --color
+ * @cssprop --label-color
+ * @cssprop --label-width
+ * @cssprop --control-width
+ * @cssprop --control-height
  */
 export class Control extends LitElement {
   @property({ type: String }) status: 'warning' | 'error' | 'success' | 'disabled';
@@ -79,7 +86,7 @@ export class Control extends LitElement {
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
   }
-  
+
   firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
     this.setAttribute('nve-control', '');

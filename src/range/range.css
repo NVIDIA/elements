@@ -1,13 +1,48 @@
 :host {
+  --background: var(--accent-color);
   --control-height: var(--nve-ref-size-800);
   --cursor: pointer;
+  --track-width: 50%;
+  --track-height: 6px;
+  --track-border-radius: var(--nve-ref-border-radius-md);
   width: 100%;
 }
 
 ::slotted(input) {
   /* https://web.dev/accent-color/#guaranteeing-contrast */
   accent-color: var(--accent-color) !important;
+  height: var(--track-height) !important;
   cursor: var(--cursor) !important;
   margin: 0 !important;
   width: 100% !important;
+  background: transparent;
+  align-self: center;
+  appearance: var(--_appearance);
+}
+
+[input] {
+  position: relative;
+}
+
+[input]::after {
+  content: '';
+  display: block;
+  width: var(--track-width);
+  height: var(--track-height);
+  background: var(--background);
+  border-top-left-radius: var(--track-border-radius);
+  border-bottom-left-radius: var(--track-border-radius);
+  position: absolute;
+  pointer-events: none;
+  align-self: center;
+  z-index: 999;
+  left: 0;
+}
+
+:host(:--disabled) {
+  --background: var(--nve-sys-interaction-default-disabled-background);
+}
+
+:host(:not(:--disabled):hover) [input] {
+  filter: brightness(0.9);
 }

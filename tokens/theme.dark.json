@@ -125,11 +125,11 @@
     "interaction": {
       "default": {
         "background": {
-          "value": "{ref.color.gray-zinc.750}",
+          "value": "{ref.color.gray-zinc.700}",
           "type": "color"
         },
         "color": {
-          "value": "{ref.color.white}",
+          "value": "{sys.text.default.color}",
           "type": "color"
         },
         "hover": {
@@ -154,7 +154,7 @@
         },
         "active": {
           "background": {
-            "value": "{ref.color.gray-zinc.700}",
+            "value": "{ref.color.gray-zinc.750}",
             "type": "color"
           },
           "color": {
@@ -179,7 +179,7 @@
           "type": "color"
         },
         "color": {
-          "value": "{ref.color.white}",
+          "value": "{sys.text.default.color}",
           "type": "color"
         },
         "hover": {

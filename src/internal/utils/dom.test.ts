@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate } from '@elements/elements/internal';
 
 @customElement('test-element')
 class TestComponent extends LitElement {
@@ -174,4 +174,36 @@ describe('appendRootNodeStyle', () => {
   //   await elementIsStable(testOne);
   //   expect((testOne as any).shadowRoot.adoptedStyleSheets.length).toBe(1);
   // });
+});
+
+describe('getElementUpdate', () => {
+  it('should trigger updates for attribute changes', async () => {
+    const element = document.createElement('div') as unknown as HTMLElement & { foo: string };
+
+    const update = new Promise(r => {
+      getElementUpdate(element, 'foo', value => {
+        if (value) {
+          r(value);
+        }
+      });
+    });
+
+    element.setAttribute('foo', 'bar');
+    expect(await update).toBe('bar');
+  });
+
+  it('should trigger updates for property changes', async () => {
+    const element = document.createElement('div') as unknown as HTMLElement & { foo: string };
+
+    const update = new Promise(r => {
+      getElementUpdate(element, 'id', value => {
+        if (value) {
+          r(value);
+        }
+      });
+    });
+
+    element.id = 'foo';
+    expect(await update).toBe('foo');
+  });
 });

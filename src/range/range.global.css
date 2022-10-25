@@ -1,0 +1,19 @@
+nve-range input[type='range']::-webkit-slider-thumb {
+  width: var(--nve-ref-size-500);
+  height: var(--nve-ref-size-500);
+  background: var(--background);
+  border-radius: 50%;
+  margin-top: -6px;
+  appearance: var(--_appearance);
+}
+
+nve-range input[type=range]::-webkit-slider-runnable-track {
+  background: var(--nve-sys-interaction-default-background);
+  height: var(--track-height);
+  border-radius: var(--nve-ref-border-radius-lg);
+  align-self: center;
+}
+
+nve-range:has(datalist) {
+  --_appearance: auto !important;
+}
