@@ -119,6 +119,10 @@
   font-weight: var(--nve-ref-font-weight-regular);
 }
 
+[nve-text~='medium'] {
+  font-weight: var(--nve-ref-font-weight-medium);
+}
+
 [nve-text~='light'] {
   font-weight: var(--nve-ref-font-weight-light);
 }

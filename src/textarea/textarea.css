@@ -4,6 +4,7 @@
   --height: var(--nve-ref-font-size-700);
   --background: var(--nve-sys-interaction-default-background);
   --border-radius: var(--nve-ref-border-radius-sm);
+  --cursor: text;
   --border: 0;
   width: 100%;
 }

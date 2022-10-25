@@ -3,4 +3,21 @@ nve-select option {
   height: var(--height) !important;
   display: flex !important;
   align-items: center !important;
+  background: var(--background) !important;
+  color: var(--color) !important;
+}
+
+nve-select option:checked {
+  background: var(--nve-sys-interaction-default-selected-background) !important;
+  color: var(--nve-sys-interaction-default-selected-color) !important;
+}
+
+nve-select option:hover {
+  background: var(--nve-sys-interaction-default-hover-background) !important;
+  color: var(--nve-sys-interaction-default-hover-color) !important;
+}
+
+nve-select option:active {
+  background: var(--nve-sys-interaction-default-active-background) !important;
+  color: var(--nve-sys-interaction-default-active-color) !important;
 }
