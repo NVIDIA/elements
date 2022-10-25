@@ -4,6 +4,10 @@
   --cursor: pointer;
 }
 
+:host([mlv-control]:focus-within) [input] {
+  outline: 0 !important;
+}
+
 ::slotted(input) {
   /* https://web.dev/accent-color/#guaranteeing-contrast */
   accent-color: var(--accent-color) !important;

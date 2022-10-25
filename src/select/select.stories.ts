@@ -20,6 +20,25 @@ export const Select = {
 </mlv-select>`
 };
 
+export const Prefix = {
+  render: () => html`
+<div mlv-layout="grid span-items:6 gap:md">
+  <mlv-select>
+    <mlv-button interaction="ghost" readonly="">location</mlv-button>
+    <select>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+  </mlv-select>
+  <mlv-input>
+    <label>label</label>
+    <input />
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-input>
+</div>`
+};
+
 export const Vertical = {
   render: () => html`
 <div mlv-layout="column gap:lg align:stretch">

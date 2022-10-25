@@ -53,11 +53,6 @@
   position: absolute;
 }
 
-:host(:focus-within) [internal-host] {
-  outline: var(--mlv-ref-outline-webkit);
-  outline: var(--mlv-ref-outline-default);
-}
-
 :host(:hover) {
   --color: var(--mlv-sys-interaction-neutral-hover-color);
   --background: var(--mlv-sys-interaction-neutral-hover-background);

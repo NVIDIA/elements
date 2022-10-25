@@ -154,12 +154,23 @@ export const globalTypes = {
     description: 'Themes',
     defaultValue: 'dark',
     toolbar: {
-      icon: 'paintbrush',
       showName: true,
       items: [
         { value: '', title: 'Light' },
         { value: 'dark', title: 'Dark' },
         { value: 'high-contrast', title: 'High Contrast' },
+      ],
+    },
+  },
+  scale: {
+    name: 'Scale',
+    description: 'Themes',
+    defaultValue: '',
+    toolbar: {
+      showName: true,
+      items: [
+        { value: '', title: 'Default' },
+        { value: 'compact', title: 'Compact' }
       ],
     },
   },
@@ -182,6 +193,6 @@ function updateTheme(themes) {
 }
 
 export const decorators = [(story, { globals }) => {
-  updateTheme(globals.theme ? globals.theme : '');
+  updateTheme(`${globals.theme ? globals.theme : ''} ${globals.scale ? globals.scale : ''}`);
   return story();
 }];

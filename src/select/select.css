@@ -3,6 +3,7 @@
   --font-size: var(--mlv-ref-font-size-300);
   --height: var(--mlv-ref-font-size-700);
   --background: var(--mlv-sys-interaction-default-background);
+  --color: var(--mlv-sys-interaction-default-color);
   --border-radius: var(--mlv-ref-border-radius-sm);
   --border: 0;
   width: 100%;
@@ -17,7 +18,15 @@
   cursor: var(--cursor);
   display: flex;
   align-content: stretch;
+  position: relative;
   width: 100%;
+}
+
+[icon-name='chevron-down'] {
+  top: var(--mlv-ref-size-100);
+  pointer-events: none;
+  position: absolute;
+  right: 0;
 }
 
 ::slotted(select) {

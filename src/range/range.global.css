@@ -1,0 +1,19 @@
+mlv-range input[type='range']::-webkit-slider-thumb {
+  width: var(--mlv-ref-size-500);
+  height: var(--mlv-ref-size-500);
+  background: var(--background);
+  border-radius: 50%;
+  margin-top: -6px;
+  appearance: var(--_appearance);
+}
+
+mlv-range input[type=range]::-webkit-slider-runnable-track {
+  background: var(--mlv-sys-interaction-default-background);
+  height: var(--track-height);
+  border-radius: var(--mlv-ref-border-radius-lg);
+  align-self: center;
+}
+
+mlv-range:has(datalist) {
+  --_appearance: auto !important;
+}

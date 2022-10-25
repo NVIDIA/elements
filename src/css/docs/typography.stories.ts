@@ -70,6 +70,7 @@ export const Weights = {
 <div mlv-layout="column gap:lg">
   <p mlv-text="body bold">bold</p>
   <p mlv-text="body semibold">semibold</p>
+  <p mlv-text="body medium">medium</p>
   <p mlv-text="body">default</p>
   <p mlv-text="body light">light</p>
 </div>

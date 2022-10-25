@@ -3,4 +3,21 @@ mlv-select option {
   height: var(--height) !important;
   display: flex !important;
   align-items: center !important;
+  background: var(--background) !important;
+  color: var(--color) !important;
+}
+
+mlv-select option:checked {
+  background: var(--mlv-sys-interaction-default-selected-background) !important;
+  color: var(--mlv-sys-interaction-default-selected-color) !important;
+}
+
+mlv-select option:hover {
+  background: var(--mlv-sys-interaction-default-hover-background) !important;
+  color: var(--mlv-sys-interaction-default-hover-color) !important;
+}
+
+mlv-select option:active {
+  background: var(--mlv-sys-interaction-default-active-background) !important;
+  color: var(--mlv-sys-interaction-default-active-color) !important;
 }

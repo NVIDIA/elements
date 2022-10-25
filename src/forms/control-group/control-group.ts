@@ -9,6 +9,9 @@ import styles from './control-group.css?inline';
 /**
  * @alpha
  * @element mlv-control-group
+ * @cssprop --color
+ * @cssprop --label-color 
+ * @cssprop --label-width
  */
 export class ControlGroup extends LitElement {
   @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';;

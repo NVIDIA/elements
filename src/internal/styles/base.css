@@ -29,9 +29,9 @@ slot {
 }
 
 /* https://coryrylan.com/blog/dont-override-css-outline-focus-styles */
+:host(:focus-within) [focus-within],
 :host(:focus) [focusable],
 :host(:--focus) [focusable],
-:host([mlv-control]) ::slotted(input:focus),
 :host([tabindex='0']:--focus),
 :host([tabindex='0']:focus) [focusable] {
   outline: Highlight solid 2px !important;

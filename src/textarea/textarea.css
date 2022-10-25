@@ -4,6 +4,7 @@
   --height: var(--mlv-ref-font-size-700);
   --background: var(--mlv-sys-interaction-default-background);
   --border-radius: var(--mlv-ref-border-radius-sm);
+  --cursor: text;
   --border: 0;
   width: 100%;
 }

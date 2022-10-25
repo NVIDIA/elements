@@ -18,7 +18,7 @@ export class IconButton extends Button {
 
   render() {
     return html`
-      <div internal-host>
+      <div internal-host focus-within>
         <mlv-icon .name=${this.iconName}></mlv-icon>
         <slot></slot>
       </div>

@@ -1,6 +1,7 @@
 :host {
   --color: var(--mlv-sys-text-default-color);
   --label-color: var(--mlv-sys-text-muted-color);
+  --_label-width: var(--label-width, 180px);
 }
 
 [internal-host] {
@@ -86,7 +87,7 @@ slot[name='messages'] {
 }
 
 :host([layout='horizontal']) [internal-host] {
-  grid-template-columns: 180px minmax(auto, max-content) auto;
+  grid-template-columns: var(--_label-width) minmax(auto, max-content) auto;
   grid-template-areas:
     'label input input'
     '. messages messages';
@@ -98,7 +99,7 @@ slot[name='messages'] {
 }
 
 :host([layout='horizontal-inline']) [internal-host] {
-  grid-template-columns: 180px minmax(auto, max-content) auto;
+  grid-template-columns: var(--_label-width) minmax(auto, max-content) auto;
   grid-template-areas:
     'label input input'
     '. messages messages';

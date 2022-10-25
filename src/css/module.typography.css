@@ -119,6 +119,10 @@
   font-weight: var(--mlv-ref-font-weight-regular);
 }
 
+[mlv-text~='medium'] {
+  font-weight: var(--mlv-ref-font-weight-medium);
+}
+
 [mlv-text~='light'] {
   font-weight: var(--mlv-ref-font-weight-light);
 }
