@@ -1,3 +1,17 @@
 :host {
   width: 100%;
 }
+
+[input] {
+  position: relative;
+}
+
+[icon-name='search'] {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+}
+
+::slotted(input) {
+  padding-inline-start: var(--nve-ref-size-700) !important;
+}

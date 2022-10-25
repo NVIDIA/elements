@@ -5,6 +5,7 @@
   --label-color: var(--nve-sys-text-muted-color);
   --control-width: 200px;
   --control-height: auto;
+  --_label-width: var(--label-width, 180px);
 }
 
 ::slotted(*) {
@@ -24,6 +25,24 @@
 :host(:--disabled) ::slotted(nve-control-message:not([status])) {
   --cursor: not-allowed;
   --color: var(--nve-sys-text-muted-color);
+}
+
+:host([nve-control]) ::slotted(input:focus),
+:host([nve-control]) ::slotted(select:focus),
+:host([nve-control]) ::slotted(textarea:focus) {
+  outline: 0 !important;
+}
+
+:host([nve-control]:focus-within) [input],
+:host([nve-control]:focus-within) ::slotted(input[type='radio']),
+:host([nve-control]:focus-within) ::slotted(input[type='checkbox']) {
+  outline: Highlight solid 2px !important;
+  outline: 5px auto -webkit-focus-ring-color !important;
+}
+
+:host([nve-control]:focus-within) [internal-host]:has(nve-icon-button:focus) [input],
+[internal-host]:has(nve-icon-button) {
+  outline: 0 !important;
 }
 
 [input] {
@@ -110,7 +129,7 @@ slot[name='messages'] {
 
 :host([layout='horizontal']) [internal-host],
 :host([layout='horizontal-inline']) [internal-host] {
-  grid-template-columns: 180px 1fr minmax(0, 180px);
+  grid-template-columns: var(--_label-width) 1fr minmax(0, var(--_label-width));
   grid-template-areas:
     'label input input'
     '. messages messages';

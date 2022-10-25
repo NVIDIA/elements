@@ -18,7 +18,7 @@ export class IconButton extends Button {
 
   render() {
     return html`
-      <div internal-host>
+      <div internal-host focus-within>
         <nve-icon .name=${this.iconName}></nve-icon>
         <slot></slot>
       </div>

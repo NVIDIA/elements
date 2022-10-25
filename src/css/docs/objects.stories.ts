@@ -62,9 +62,9 @@ export const layers = {
         height: 200px;
       }
 
-      .popover {
-        background: var(--nve-sys-layer-popover-background);
-        color: var(--nve-sys-layer-popover-color);
+      .popup {
+        background: var(--nve-sys-layer-popup-background);
+        color: var(--nve-sys-layer-popup-color);
         padding: var(--nve-ref-size-400);
         box-shadow: var(--nve-ref-shadow-300);
         border-radius: var(--nve-ref-border-radius-md);
@@ -99,7 +99,7 @@ export const layers = {
           </ul>
         </div>
       </div>
-      <div class="popover">
+      <div class="popup">
         <h2>popup</h2>
         <ul>
           <li>tooltips</li>
