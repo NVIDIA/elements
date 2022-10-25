@@ -65,3 +65,25 @@ export function appendRootNodeStyle(host: HTMLElement, styles: string) {
   const root = host.parentNode.toString() === '[object ShadowRoot]' ? host.parentNode : document as any;
   root.adoptedStyleSheets = [...root.adoptedStyleSheets, stylesheet];
 }
+
+/* used for cases of needing to know a property update outside of lit, example a native input value prop change */
+export function getElementUpdate(element: HTMLElement, key: string, callback: (value: any) => void) {
+  if (element.hasAttribute(key)) {
+    callback(element.getAttribute(key));
+  } else if ((element as any)[key] !== undefined) {
+    callback((element as any)[key]);
+  }
+
+  const updatedProp = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), key) as any;
+  if (updatedProp) {
+    Object.defineProperty(element, key, {
+      get: updatedProp.get,
+      set: val => {
+        callback(val);
+        updatedProp.set.call(element, val);
+      },
+    });
+  }
+
+  return getAttributeChanges(element, key, val => callback(val));
+}
