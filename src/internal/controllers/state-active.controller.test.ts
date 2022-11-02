@@ -55,4 +55,34 @@ describe('state-active.controller', () => {
 
     expect(document.body.getBoundingClientRect().top).toBe(0);
   });
+
+  it('should add active state on space keypress', async () => {
+    expect(element.matches('[state--active]')).toBe(false);
+
+    element.dispatchEvent(new KeyboardEvent('keypress', { code: 'Space' }));
+    expect(element.matches('[state--active]')).toBe(true);
+
+    element.dispatchEvent(new KeyboardEvent('keyup'));
+    expect(element.matches('[state--active]')).toBe(false);
+  });
+
+  it('should add active state on enter keypress', async () => {
+    expect(element.matches('[state--active]')).toBe(false);
+
+    element.dispatchEvent(new KeyboardEvent('keypress', { code: 'Enter' }));
+    expect(element.matches('[state--active]')).toBe(true);
+
+    element.dispatchEvent(new KeyboardEvent('keyup'));
+    expect(element.matches('[state--active]')).toBe(false);
+  });
+
+  it('should not add active state on any invalid keypress', async () => {
+    expect(element.matches('[state--active]')).toBe(false);
+
+    element.dispatchEvent(new KeyboardEvent('keypress', { code: 'KeyK' }));
+    expect(element.matches('[state--active]')).toBe(false);
+
+    element.dispatchEvent(new KeyboardEvent('keyup'));
+    expect(element.matches('[state--active]')).toBe(false);
+  });
 });
