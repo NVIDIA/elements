@@ -12,7 +12,7 @@ export const inputQuery = 'input, select, selectmenu, textarea, [nve-control]';
  * :--invalid form control is in a invalid state
  */
 export function setupControlValidationStates(control: Control, messages: ControlMessage[]) {
-  if (!control.input.form?.noValidate) {
+  if (!control.input.form?.noValidate && !control.input.formNoValidate && !control.input.hasAttribute('formnovalidate')) {
     hideAllValidationMessages(messages);
 
     control.input.addEventListener('blur', () => control.input.checkValidity());
@@ -37,6 +37,17 @@ export function setupControlValidationStates(control: Control, messages: Control
       }
 
       hideInactiveValidationMessages(control,  messages);
+    });
+  } else {
+    control.shadowRoot.addEventListener('slotchange', () => {
+      const messages = Array.from(control.querySelectorAll<ControlMessage>('nve-control-message'));
+      if (messages.find(m => m.status === 'error')) {
+        control._internals.states.delete('--valid');
+        control._internals.states.add('--invalid');
+      } else {
+        control._internals.states.delete('--invalid');
+        control._internals.states.add('--valid');
+      }
     });
   }
 }
