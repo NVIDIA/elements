@@ -27,7 +27,7 @@ export class StateActiveController<T extends Active> implements ReactiveControll
   }
 
   #emulateActive(e: any) {
-    if (!this.host.disabled) {
+    if (!this.host.disabled && this.#isValidKeyEvent(e)) {
       this.host._internals.states.add('--active');
     }
 
@@ -38,5 +38,9 @@ export class StateActiveController<T extends Active> implements ReactiveControll
 
   #emulateInactive() {
     this.host._internals.states.delete('--active');
+  }
+
+  #isValidKeyEvent(e: KeyboardEvent) {
+    return e.code ? e.code === 'Space' || e.code === 'Enter' : true;
   }
 }
