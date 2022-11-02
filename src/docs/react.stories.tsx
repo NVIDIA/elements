@@ -4,12 +4,12 @@ import { createComponent } from '@lit-labs/react';
 import { Button } from '@elements/elements/button';
 
 export default {
-  title: 'Internal/Examples/Integration/React'
+  title: 'Internal/Integration'
 };
 
 const MlvButton = createComponent(React, 'mlv-button', Button);
 
-export const Demo = () =>{
+export const ReactExample = () =>{
   setTimeout(() => render(<MlvButton>react button</MlvButton>, document.getElementById('react-root')));
   return `<div id="react-root"></div>`;
 };

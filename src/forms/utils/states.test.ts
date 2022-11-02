@@ -58,3 +58,49 @@ describe('updateControlStatusState', () => {
     });
   });
 });
+
+describe('setupControlValidationStates', () => {
+  let fixture: HTMLElement;
+  let control: Control;
+  let message: ControlMessage;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-control>
+        <label>label</label>
+        <input type="text" formnovalidate required />
+        <mlv-control-message>message</mlv-control-message>
+      </mlv-control>
+    `);
+    control = fixture.querySelector('mlv-control');
+    message = fixture.querySelector('mlv-control-message');
+    await elementIsStable(control);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should update validation state if HTML5 validation is disabled and manually controlled', async () => {
+    await elementIsStable(control);
+    expect((control._internals.states as any).has('--valid')).toBe(false);
+    expect((control._internals.states as any).has('--invalid')).toBe(false);
+
+    const message = document.createElement('mlv-control-message');
+    message.status = 'error';
+
+    control.appendChild(message);
+    control.shadowRoot.dispatchEvent(new Event('slotchange'));
+    await elementIsStable(control);
+
+    expect(message.hidden).toBe(false);
+    expect((control._internals.states as any).has('--valid')).toBe(false);
+    expect((control._internals.states as any).has('--invalid')).toBe(true);
+
+    message.remove();
+    control.shadowRoot.dispatchEvent(new Event('slotchange'));
+    await elementIsStable(control);await elementIsStable(control);await elementIsStable(control);await elementIsStable(control);
+    expect((control._internals.states as any).has('--invalid')).toBe(false);
+    expect((control._internals.states as any).has('--valid')).toBe(true);
+  });
+});

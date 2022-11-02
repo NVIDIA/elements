@@ -65,14 +65,14 @@ describe('mlv-control', () => {
 
   it('should assign no-label style hook if no label element was provided', async() => {
     label.remove();
-    element.requestUpdate();
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('.no-label')).toBeTruthy();
   });
 
   it('should assign no-message style hook if no control message was provided', async() => {
     message.remove();
-    element.requestUpdate();
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('.no-messages')).toBeTruthy();
   });

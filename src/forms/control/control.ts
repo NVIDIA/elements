@@ -50,6 +50,8 @@ export class Control extends LitElement {
 
   @state() private inlineControl = false;
 
+  @state() private styleStates = { 'no-messages': !this.#messages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
+
   static styles = useStyles([styles]);
 
   /** @private */
@@ -57,13 +59,9 @@ export class Control extends LitElement {
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
-  get #internalStyleStates() {
-    return { 'no-messages': !this.#messages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
-  }
-
   render() {
     return !this.inlineControl ? html`
-      <div internal-host class=${classMap(this.#internalStyleStates)}>
+      <div internal-host class=${classMap(this.styleStates)}>
         ${this.#label ? html`<slot name="label"></slot>` : ''}
         <div input>
           ${this.prefixContent}
@@ -73,7 +71,7 @@ export class Control extends LitElement {
         <slot name="messages"></slot>
       </div>
     ` : html`
-      <div internal-host class=${classMap(this.#internalStyleStates)}>
+      <div internal-host class=${classMap(this.styleStates)}>
         <slot input></slot>
         <slot name="label"></slot>
         <slot name="messages"></slot>
@@ -99,8 +97,17 @@ export class Control extends LitElement {
       ...setupControlStatusStates(this, this.#messages),
       setupControlLayoutStates(this),
     );
+
     this.#updateAssociations();
-    this.shadowRoot.addEventListener('slotchange', () => this.#updateAssociations());
+    this.#updateStyleStates();
+    this.shadowRoot.addEventListener('slotchange', () => {
+      this.#updateAssociations();
+      this.#updateStyleStates();
+    });
+  }
+
+  #updateStyleStates() {
+    this.styleStates = { 'no-messages': !this.#messages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
   }
 
   disconnectedCallback() {
