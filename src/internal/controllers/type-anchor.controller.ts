@@ -19,7 +19,7 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
   }
 
   get #parentAnchor() {
-    return this.host.parentElement.tagName === 'A' ? this.host.parentElement as HTMLAnchorElement : null;
+    return this.host.parentElement?.tagName === 'A' ? this.host.parentElement as HTMLAnchorElement : null;
   }
 
   constructor(private host: T) {
