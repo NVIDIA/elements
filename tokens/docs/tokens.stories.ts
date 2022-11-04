@@ -99,8 +99,20 @@ function renderTokenTable(tokens) {
       </tr>
     </thead>
     <tbody>
-      ${Object.entries(tokens).map(([name, value]: any) => html`<tr>
-        <td>${name}</td>
+      ${Object.entries(tokens).map(([name, value]: any) => {
+        function _toggleCopyIcon(e: any, show: boolean) {
+          e.target.querySelector('nve-icon-button').style.opacity = show ? 100 : 0;
+        }
+
+        function copyTokenName(name: string) {
+          navigator.clipboard.writeText(name);
+        }
+
+        return html`<tr @mouseenter="${(e) => _toggleCopyIcon(e, true)}" @mouseleave="${(e) => _toggleCopyIcon(e, false)}">
+        <td>
+          ${name}
+          <nve-icon-button style="opacity: 0" title="Copy '${name}' to clipboard" icon-name="copy" interaction="ghost" @click="${() => copyTokenName(name)}"></nve-icon-button>
+        </td>
         <td>
           <code>${value}</code>
         </td>
@@ -121,7 +133,7 @@ function renderTokenTable(tokens) {
           ${name.includes('sys-interaction') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
           ${name.includes('sys-layer') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
         </td>
-      </tr>`)}
+      </tr>`})}
     </tbody>
   </table>`;
 }
