@@ -1,28 +1,47 @@
 :host {
   --padding: var(--mlv-ref-size-200);
   --font-size: var(--mlv-ref-font-size-300);
-  --height: var(--mlv-ref-font-size-700);
+  --height: 100px;
+  --width: 100%;
+  --min-height: 100px;
   --background: var(--mlv-sys-interaction-default-background);
   --border-radius: var(--mlv-ref-border-radius-sm);
   --cursor: text;
   --border: 0;
+  display: block;
   width: 100%;
 }
 
 ::slotted(textarea) {
   padding: var(--padding) !important;
-  height: var(--height) !important;
   font-size: var(--font-size) !important;
   margin: 0 !important;
   align-content: stretch !important;
-  width: 100% !important;
   background: var(--background) !important;
   border: var(--border) !important;
   color: var(--color) !important;
   border-radius: var(--border-radius) !important;
   cursor: var(--cursor) !important;
-  min-height: 100px;
+  min-height: var(--min-height) !important;
 }
+
+::slotted(textarea:not([rows])) {
+  min-height: var(--min-height) !important;
+  height: var(--min-height) !important;
+}
+
+::slotted(textarea:not([cols])) {
+  width: var(--width) !important;
+}
+
+:host([mlv-control]:focus-within) [input] {
+  outline: 0 !important;
+}
+
+/* slot:has(textarea) {
+  display: none !important;
+  width: fit-content !important;
+} */
 
 :host([layout*='horizontal']) {
   & ::slotted(label) {

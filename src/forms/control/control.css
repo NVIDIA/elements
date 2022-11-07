@@ -10,6 +10,7 @@
 
 ::slotted(*) {
   color-scheme: var(--mlv-sys-color-scheme);
+  font-family: inherit;
 }
 
 ::slotted(label) {
@@ -28,8 +29,7 @@
 }
 
 :host([mlv-control]) ::slotted(input:focus),
-:host([mlv-control]) ::slotted(select:focus),
-:host([mlv-control]) ::slotted(textarea:focus) {
+:host([mlv-control]) ::slotted(select:focus) {
   outline: 0 !important;
 }
 

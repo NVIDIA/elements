@@ -41,6 +41,7 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
   #setupSubmitButton() {  
     if (!this.#button) {
       this.#button = document.createElement('button') as HTMLButtonElement & { inert: boolean };
+      this.#button.hidden = true;
       this.#button.inert = true;
     }
 
@@ -71,9 +72,8 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
     if (this.host.disabled) {
       stopEvent(event);
     } else if (!event.defaultPrevented) {
-      stopEvent(event);
       this.host.appendChild(this.#button);
-      this.#button.dispatchEvent(new MouseEvent('click', { relatedTarget: this.host, composed: true }));
+      this.#button.dispatchEvent(new PointerEvent('click', { relatedTarget: this.host, composed: true }));
       this.#button.remove();
     }
   }

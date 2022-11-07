@@ -83,3 +83,12 @@ export const controlValidation = () => {
   <mlv-control-message error="valueMissing">required</mlv-control-message>
 </mlv-textarea>`;
 }
+
+export const columnsAndRows = () => {
+  return html`
+<mlv-textarea>
+  <label>label</label>
+  <textarea rows="15" cols="40"></textarea>
+  <mlv-control-message>message</mlv-control-message>
+</mlv-textarea>`;
+}
