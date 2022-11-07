@@ -281,7 +281,7 @@
       },
       "overlay": {
         "background": {
-          "value": "{ref.color.gray-zinc.700}",
+          "value": "{ref.color.gray-zinc.750}",
           "type": "color"
         },
         "color": {
