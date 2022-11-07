@@ -83,3 +83,12 @@ export const controlValidation = () => {
   <nve-control-message error="valueMissing">required</nve-control-message>
 </nve-textarea>`;
 }
+
+export const columnsAndRows = () => {
+  return html`
+<nve-textarea>
+  <label>label</label>
+  <textarea rows="15" cols="40"></textarea>
+  <nve-control-message>message</nve-control-message>
+</nve-textarea>`;
+}

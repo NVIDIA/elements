@@ -5,10 +5,12 @@
   --color: var(--nve-sys-text-default-color);
   --icon-color: var(--nve-sys-text-default-color);
   --icon-size: var(--nve-ref-size-500);
+  --font-weight: var(--nve-ref-font-weight-regular);
   width: auto;
 }
 
 [internal-host] {
+  font-weight: var(--font-weight);
   font-size: var(--font-size);
   gap: var(--gap);
   color: var(--color);

@@ -50,6 +50,15 @@ describe('type-submit.controller', () => {
     expect(submitButtonInForm.type).toBe('submit');
   });
 
+  // https://github.com/capricorn86/happy-dom/issues/527
+  // it('should allow click event to bubble', async () => {
+  //   await elementIsStable(button);
+  //   expect(button.type).toBe(undefined);
+  //   const event = untilEvent(form, 'click');
+  //   emulateClick(button);
+  //   expect((await event).target).toBe(button);
+  // });
+
   it('should trigger click event when using space key', async () => {
     await elementIsStable(button);
     expect(button.type).toBe(undefined);
