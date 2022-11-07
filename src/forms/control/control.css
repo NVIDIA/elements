@@ -10,6 +10,7 @@
 
 ::slotted(*) {
   color-scheme: var(--nve-sys-color-scheme);
+  font-family: inherit;
 }
 
 ::slotted(label) {
@@ -28,8 +29,7 @@
 }
 
 :host([nve-control]) ::slotted(input:focus),
-:host([nve-control]) ::slotted(select:focus),
-:host([nve-control]) ::slotted(textarea:focus) {
+:host([nve-control]) ::slotted(select:focus) {
   outline: 0 !important;
 }
 
