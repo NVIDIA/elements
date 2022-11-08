@@ -20,11 +20,8 @@ module.exports = {
   },
   async viteFinal(config) {
     config.logLevel = 'error';
-
-    if (!process.env['BAZEL_WORKSPACE']) {
-      config.resolve.alias = { '@elements/elements': path.resolve(__dirname, '../dist') };
-    }
-
+    config.resolve.alias = { '@elements/elements': path.resolve(__dirname, '../dist') };
+    
     if (config.server) {
       config.server.port = 7777;
       config.server.hmr = {
