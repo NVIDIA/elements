@@ -141,6 +141,12 @@ export const parameters = {
           'Month',
           'Time',
           'Week',
+          'Dropdown',
+          'Dialog',
+          'Notification',
+          'Panel',
+          'Toast',
+          'Tooltip',
           'Internal',
         ]
       ]
@@ -174,6 +180,18 @@ export const globalTypes = {
       ],
     },
   },
+  animation: {
+    name: 'Animation',
+    description: 'Animation',
+    defaultValue: '',
+    toolbar: {
+      showName: true,
+      items: [
+        { value: '', title: 'Default' },
+        { value: 'reduced-motion', title: 'Reduced Motion' },
+      ],
+    },
+  },
 }
 
 const styleSheet = new CSSStyleSheet();
@@ -186,13 +204,22 @@ window.parent.document.head.appendChild(parentStyle);
 
 updateTheme('dark');
 
-function updateTheme(themes) {
-  document.querySelector('html').setAttribute('nve-theme', themes);
-  window.parent.document.querySelector('html').setAttribute('nve-theme', themes);
-  window.localStorage.setItem('nve-theme', themes);
+function updateTheme(themes) {  
+  const preview = window.parent.document.querySelector('#storybook-preview-wrapper');
+  const manager = window.parent.document.querySelector('html');
+  const story = document.querySelector('html');
+
+  if (preview) {
+    manager.setAttribute('nve-theme', themes);
+    story.setAttribute('nve-theme', themes);
+    Array.from(document.querySelectorAll('iframe')).forEach(i => i.contentWindow.document.querySelector('html').setAttribute('nve-theme', themes));
+  } else {
+    const nestedStories = Array.from(window.parent.document.querySelectorAll('iframe')).map(i => i.contentWindow.document.querySelector('html'));
+    nestedStories.forEach(i => i.setAttribute('nve-theme', manager.getAttribute('nve-theme')));
+  }
 }
 
 export const decorators = [(story, { globals }) => {
-  updateTheme(`${globals.theme ? globals.theme : ''} ${globals.scale ? globals.scale : ''}`);
+  updateTheme(`${globals.theme ? globals.theme : ''} ${globals.scale ? globals.scale : ''} ${globals.animation ? globals.animation : ''}`);
   return story();
 }];

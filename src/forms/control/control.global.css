@@ -1,4 +1,5 @@
-[nve-control] input::placeholder {
+[nve-control] input::placeholder,
+[nve-control] textarea::placeholder {
   color: var(--nve-sys-text-placeholder-color) !important;
 }
 
