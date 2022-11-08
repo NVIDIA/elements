@@ -1,5 +1,6 @@
 @import '../dist/css/module.tokens.css';
 @import '../dist/css/theme.high-contrast.css';
+@import '../dist/css/theme.reduced-motion.css';
 @import '../dist/css/theme.compact.css';
 @import '../dist/css/theme.dark.css';
 @import './css/module.reset.css';

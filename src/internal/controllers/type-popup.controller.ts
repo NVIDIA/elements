@@ -121,7 +121,6 @@ export class TypePopupController<T extends Popup> implements ReactiveController 
       await new Promise(r => requestAnimationFrame(r));
 
       if (config.popup && config.position) {
-        console.log(config)
         const position = await computePopupPosition(config);
         setPopupStyles(config, position);
         setArrowStyles(config, position);
