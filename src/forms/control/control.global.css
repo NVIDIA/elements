@@ -1,4 +1,5 @@
-[mlv-control] input::placeholder {
+[mlv-control] input::placeholder,
+[mlv-control] textarea::placeholder {
   color: var(--mlv-sys-text-placeholder-color) !important;
 }
 

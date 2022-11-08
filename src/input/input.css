@@ -41,6 +41,7 @@ mlv-icon-button,
 
 ::slotted(mlv-button) {
   --padding: 0 var(--mlv-ref-size-200);
+  --color: var(--label-color);
   --height: 100%;
 }
 

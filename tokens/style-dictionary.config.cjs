@@ -48,6 +48,12 @@ function buildTokens() {
     source: ['./tokens/theme.high-contrast.json'],
     platforms: { css: cssOutput(`${buildPath}css/theme.high-contrast.css`) }
   }).buildAllPlatforms();
+
+  StyleDictionary.extend({
+    include: ['./tokens/tokens.json'],
+    source: ['./tokens/theme.reduced-motion.json'],
+    platforms: { css: cssOutput(`${buildPath}css/theme.reduced-motion.css`) }
+  }).buildAllPlatforms();
 }
 
 function cssOutput(destination) {

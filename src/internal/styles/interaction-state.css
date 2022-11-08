@@ -1,0 +1,23 @@
+[interaction-state] {
+  background-image: linear-gradient(hsla(0, 0%, var(--mlv-sys-interaction-state-lightness), var(--mlv-sys-interaction-state-alpha)) 0 0) !important;
+}
+
+:host(:hover) [interaction-state],
+:host(:--hover) [interaction-state] {
+  --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-hover-alpha);
+}
+
+:host(:active) [interaction-state],
+:host(:--active) [interaction-state] {
+  --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-active-alpha);
+}
+
+:host([selected]) [interaction-state],
+:host(:--selected) [interaction-state] {
+  --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-selected-alpha);
+}
+
+:host([disabled]) [interaction-state],
+:host(:--disabled) [interaction-state] {
+  --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-disabled-alpha) !important;
+}

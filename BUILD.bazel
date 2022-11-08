@@ -41,6 +41,7 @@ vite_rules_js_library(
         "tokens/theme.compact.json",
         "tokens/theme.dark.json",
         "tokens/theme.high-contrast.json",
+        "tokens/theme.reduced-motion.json",
         "tokens/tokens.json",
     ] + glob(["public/**/*"]),
     vite_bin = vite_bin,

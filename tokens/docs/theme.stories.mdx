@@ -31,6 +31,10 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 if (window.matchMedia('(-ms-high-contrast: active)')).matches || window.matchMedia('(forced-colors: active)')).matches) {
   document.body.setAttribute('mlv-theme', 'high-contrast');
 }
+
+if (window.matchMedia('(prefers-reduced-motion: reduce)')).matches) {
+  document.body.setAttribute('mlv-theme', 'reduced-motion');
+}
 ```
 
 # Light (Default)
@@ -49,4 +53,10 @@ if (window.matchMedia('(-ms-high-contrast: active)')).matches || window.matchMed
 
 <Canvas>
   <Story id="foundations-themes-examples--high-contrast" />
+</Canvas>
+
+# Reduced Motion
+
+<Canvas>
+  <Story id="foundations-themes-examples--reduced-motion" />
 </Canvas>

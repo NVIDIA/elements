@@ -1,0 +1,16 @@
+:host {
+  --border-top: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-default);
+  --padding: var(--mlv-ref-size-500);
+  --gap: var(--mlv-ref-space-sm);
+  display: block;
+  width: calc(100% + calc(var(--padding) * 2));
+  margin: auto calc(var(--padding) * -1) 0 calc(var(--padding) * -1);
+}
+
+[internal-host] {
+  border-top: var(--border-top);
+  padding: var(--padding) var(--padding) 0 var(--padding);
+  display: flex;
+  justify-content: end;
+  gap: var(--gap);
+}

@@ -7,7 +7,7 @@
   --anchor-width: var(--mlv-ref-font-size-200);
   --anchor-height: var(--mlv-ref-font-size-200);
   --anchor-border-radius: var(--mlv-ref-border-radius-full);
-  --anchor-background: var(--mlv-sys-interaction-default-disabled-color);
+  --anchor-background: var(--mlv-sys-interaction-default-color);
 }
 
 ::slotted(input) {
@@ -42,13 +42,9 @@
   position: relative;
 }
 
-:host(:not(:--disabled):not(:--checked)) [input]:hover {
-  --background: var(--mlv-sys-interaction-default-hover-background);
-}
-
 :host(:--disabled:--checked) [input] {
-  --anchor-background: var(--mlv-sys-interaction-default-background);
-  --background: var(--mlv-sys-interaction-default-disabled-color);
+  --anchor-background: var(--mlv-sys-interaction-disabled-background);
+  --background: var(--mlv-sys-interaction-disabled-color);
 }
 
 [input]:after {
@@ -65,7 +61,7 @@
 
 :host(:--checked) {
   --background: var(--mlv-sys-accent-secondary-background);
-  --anchor-background: var(--mlv-sys-interaction-default-active-color);
+  --anchor-background: var(--mlv-sys-interaction-default-color);
 
   [input]:after {
     transform: translate(calc(var(--width) / 2), 0);
