@@ -1,0 +1,12 @@
+:host {
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-default);
+  --padding: var(--nve-ref-size-500);
+  display: block;
+  width: calc(100% + calc(var(--padding) * 2));
+  margin: 0 calc(var(--padding) * -1) var(--padding) calc(var(--padding) * -1);
+}
+
+[internal-host] {
+  border-bottom: var(--border-bottom);
+  padding: 0 var(--padding) var(--padding) var(--padding);
+}

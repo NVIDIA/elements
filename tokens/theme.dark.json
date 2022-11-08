@@ -125,128 +125,39 @@
     "interaction": {
       "default": {
         "background": {
+          "value": "{ref.color.gray-zinc.800}",
+          "type": "color"
+        },
+        "background-100": {
+          "value": "{ref.color.gray-zinc.800}",
+          "type": "color"
+        },
+        "background-200": {
+          "value": "{ref.color.gray-zinc.700}",
+          "type": "color"
+        },
+        "background-300": {
+          "value": "{ref.color.gray-zinc.600}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.default.color}",
+          "type": "color"
+        }
+      },
+      "disabled": {
+        "background": {
           "value": "{ref.color.gray-zinc.700}",
           "type": "color"
         },
         "color": {
-          "value": "{sys.text.default.color}",
+          "value": "{ref.color.gray-zinc.500}",
           "type": "color"
-        },
-        "hover": {
-          "background": {
-            "value": "{ref.color.gray-zinc.800}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.white}",
-            "type": "color"
-          }
-        },
-        "selected": {
-          "background": {
-            "value": "{ref.color.gray-zinc.800}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.white}",
-            "type": "color"
-          }
-        },
-        "active": {
-          "background": {
-            "value": "{ref.color.gray-zinc.750}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.white}",
-            "type": "color"
-          }
-        },
-        "disabled": {
-          "background": {
-            "value": "{ref.color.gray-zinc.750}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.gray-zinc.500}",
-            "type": "color"
-          }
-        }
-      },
-      "neutral": {
-        "background": {
-          "value": "{ref.color.gray-zinc.750}",
-          "type": "color"
-        },
-        "color": {
-          "value": "{sys.text.default.color}",
-          "type": "color"
-        },
-        "hover": {
-          "background": {
-            "value": "{ref.color.gray-zinc.800}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.white}",
-            "type": "color"
-          }
-        },
-        "selected": {
-          "background": {
-            "value": "{ref.color.gray-zinc.800}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.white}",
-            "type": "color"
-          }
-        },
-        "active": {
-          "background": {
-            "value": "{ref.color.gray-zinc.650}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.white}",
-            "type": "color"
-          }
-        },
-        "disabled": {
-          "background": {
-            "value": "{ref.color.gray-zinc.800}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.gray-zinc.600}",
-            "type": "color"
-          }
-        }
-      },
-      "emphasize": {
-        "disabled": {
-          "background": {
-            "value": "{ref.color.gray-zinc.400}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.gray-zinc.500}",
-            "type": "color"
-          }
-        }
-      },
-      "destructive": {
-        "disabled": {
-          "background": {
-            "value": "{ref.color.gray-zinc.400}",
-            "type": "color"
-          },
-          "color": {
-            "value": "{ref.color.gray-zinc.500}",
-            "type": "color"
-          }
         }
       }
+    },
+    "interaction-state": {
+      "lightness": { "value": "50%" }
     },
     "layer": {
       "canvas": {
@@ -281,7 +192,7 @@
       },
       "overlay": {
         "background": {
-          "value": "{ref.color.gray-zinc.750}",
+          "value": "{ref.color.gray-zinc.800}",
           "type": "color"
         },
         "color": {
@@ -297,11 +208,11 @@
       },
       "popup": {
         "background": {
-          "value": "{ref.color.gray-zinc.800}",
+          "value": "{ref.color.gray-zinc.100}",
           "type": "color"
         },
         "color": {
-          "value": "{sys.text.white.color}",
+          "value": "{sys.text.black.color}",
           "type": "color"
         }
       }

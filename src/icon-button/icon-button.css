@@ -4,6 +4,9 @@
   --line-height: 0;
   --gap: 0;
   --height: auto;
+}
+
+:host([interaction*='ghost']) {
   --color: var(--nve-sys-status-neutral-background);
 }
 

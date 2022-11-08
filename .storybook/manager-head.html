@@ -69,6 +69,9 @@
     height: 23px;
   }
 
+  .os-content .sto-1rzw0xq {
+    opacity: 0 !important;
+  }
 
   [title='Storybook'] svg {
     display: none !important;
@@ -103,20 +106,24 @@
   }
 
   .sidebar-item {
-    color: var(--nve-sys-layer-canvas-color) !important;
+    background: var(--nve-sys-layer-shell-background) !important;
+    background-image: linear-gradient(hsla(0, 0%, var(--nve-sys-interaction-state-lightness), var(--nve-sys-interaction-state-alpha)) 0 0) !important;
+    color: var(--nve-sys-layer-shell-color) !important;
     padding-top: 6px !important;
     padding-bottom: 6px !important;
     font-size: 14px !important;
   }
 
   .sidebar-item:hover {
-    background: var(--nve-sys-interaction-default-hover-background) !important;
-    color: var(--nve-sys-interaction-default-hover-color) !important;
+    --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-hover-alpha);
   }
 
   .sidebar-item[data-selected='true'] {
-    background: var(--nve-sys-interaction-default-selected-background) !important;
-    color: var(--nve-sys-interaction-default-selected-color) !important;
+    --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-selected-alpha);
+  }
+
+  .sidebar-item[data-selected='true'] svg {
+    color: var(--nve-sys-layer-shell-color) !important;
   }
 
   .sidebar-subheading {

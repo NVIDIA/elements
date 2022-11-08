@@ -1,6 +1,6 @@
 :host {
-  --color: var(--nve-sys-interaction-neutral-color);
-  --background: var(--nve-sys-interaction-neutral-background);
+  --color: var(--nve-sys-interaction-default-color);
+  --background: var(--nve-sys-interaction-default-background);
   --padding: 0 var(--nve-ref-size-300);
   --border-radius: var(--nve-ref-border-radius-lg);
   --font-weight: var(--nve-ref-font-weight-semibold);
@@ -14,7 +14,7 @@
   display: inline-flex;
   position: relative;
   outline: 0;
-  width: fit-content;
+  width: var(--width);
 }
 
 [internal-host] {
@@ -31,6 +31,7 @@
   gap: var(--gap);
   display: inline-flex;
   place-items: center;
+  justify-content: center;
   appearance: none;
   line-height: 1.2em;
 }
@@ -53,64 +54,27 @@
   position: absolute;
 }
 
-:host(:hover) {
-  --color: var(--nve-sys-interaction-neutral-hover-color);
-  --background: var(--nve-sys-interaction-neutral-hover-background);
-}
-
-:host(:--active) {
-  --color: var(--nve-sys-interaction-neutral-active-color);
-  --background: var(--nve-sys-interaction-neutral-active-background);
-}
-
 :host(:--disabled) {
-  --color: var(--nve-sys-interaction-neutral-disabled-color);
-  --background: var(--nve-sys-interaction-neutral-disabled-background);
+  --color: var(--nve-sys-interaction-disabled-color);
+  --background: var(--nve-sys-interaction-disabled-background);
   --cursor: not-allowed;
 }
 
 :host([readonly]) {
+  --text-decoration: none !important;
   --cursor: cursor !important;
 }
 
 :host([interaction='emphasize']) {
   --color: var(--nve-sys-interaction-emphasize-color);
   --background: var(--nve-sys-interaction-emphasize-background);
-
-  &:host(:hover) {
-    --color: var(--nve-sys-interaction-emphasize-hover-color);
-    --background: var(--nve-sys-interaction-emphasize-hover-background);
-  }
-
-  &:host(:--active) {
-    --color: var(--nve-sys-interaction-emphasize-active-color);
-    --background: var(--nve-sys-interaction-emphasize-active-background);
-  }
-
-  &:host(:--disabled) {
-    --color: var(--nve-sys-interaction-neutral-disabled-color);
-    --background: var(--nve-sys-interaction-neutral-disabled-background);
-  }
+  --nve-sys-interaction-state-lightness: 0%;
 }
 
 :host([interaction='destructive']) {
   --color: var(--nve-sys-interaction-destructive-color);
   --background: var(--nve-sys-interaction-destructive-background);
-
-  &:host(:hover) {
-    --color: var(--nve-sys-interaction-destructive-hover-color);
-    --background: var(--nve-sys-interaction-destructive-hover-background);
-  }
-
-  &:host(:--active) {
-    --color: var(--nve-sys-interaction-destructive-active-color);
-    --background: var(--nve-sys-interaction-destructive-active-background);
-  }
-
-  &:host(:--disabled) {
-    --color: var(--nve-sys-interaction-neutral-disabled-color);
-    --background: var(--nve-sys-interaction-neutral-disabled-background);
-  }
+  --nve-sys-interaction-state-lightness: 0%;
 }
 
 :host([interaction*='ghost']) {
@@ -120,6 +84,10 @@
   &:host(:hover) {
     --background: transparent;
     --text-decoration: underline;
+
+    [interaction-state] {
+      --nve-sys-interaction-state-alpha: 0;
+    }
   }
 
   &:host(:--active) {
@@ -128,35 +96,16 @@
   }
 
   &:host(:--disabled) {
-    --color: var(--nve-sys-interaction-neutral-disabled-color);
+    --color: var(--nve-sys-interaction-disabled-color);
     --background: transparent;
+    --text-decoration: none;
   }
 
   &:host([interaction*='destructive']) {
     --color: var(--nve-sys-interaction-destructive-background);
-
-    &:host(:hover) {
-      --color: var(--nve-sys-interaction-destructive-hover-background);
-    }
-  
-    &:host(:--active) {
-      --color: var(--nve-sys-interaction-destructive-active-background);
-    }
   }
 
   &:host([interaction*='emphasize']) {
     --color: var(--nve-sys-interaction-emphasize-background);
-
-    &:host(:hover) {
-      --color: var(--nve-sys-interaction-emphasize-hover-background);
-    }
-  
-    &:host(:--active) {
-      --color: var(--nve-sys-interaction-emphasize-active-background);
-    }
   }
-}
-
-:host([readonly][interaction='ghost']) {
-  --color: var(--nve-sys-text-muted-color);
 }
