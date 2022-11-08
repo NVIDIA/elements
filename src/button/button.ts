@@ -24,7 +24,7 @@ export class Button extends MlvBaseButton {
 
   render() {
     return html`
-      <div internal-host focus-within>
+      <div internal-host interaction-state focus-within>
         <slot></slot>
       </div>
     `;

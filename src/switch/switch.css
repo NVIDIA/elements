@@ -7,7 +7,7 @@
   --anchor-width: var(--nve-ref-font-size-200);
   --anchor-height: var(--nve-ref-font-size-200);
   --anchor-border-radius: var(--nve-ref-border-radius-full);
-  --anchor-background: var(--nve-sys-interaction-default-disabled-color);
+  --anchor-background: var(--nve-sys-interaction-default-color);
 }
 
 ::slotted(input) {
@@ -42,13 +42,9 @@
   position: relative;
 }
 
-:host(:not(:--disabled):not(:--checked)) [input]:hover {
-  --background: var(--nve-sys-interaction-default-hover-background);
-}
-
 :host(:--disabled:--checked) [input] {
-  --anchor-background: var(--nve-sys-interaction-default-background);
-  --background: var(--nve-sys-interaction-default-disabled-color);
+  --anchor-background: var(--nve-sys-interaction-disabled-background);
+  --background: var(--nve-sys-interaction-disabled-color);
 }
 
 [input]:after {
@@ -65,7 +61,7 @@
 
 :host(:--checked) {
   --background: var(--nve-sys-accent-secondary-background);
-  --anchor-background: var(--nve-sys-interaction-default-active-color);
+  --anchor-background: var(--nve-sys-interaction-default-color);
 
   [input]:after {
     transform: translate(calc(var(--width) / 2), 0);

@@ -28,3 +28,8 @@ class MyElement extends LitElement {
 export const Lit = {
   render: () => html`<my-element></my-element>`
 }
+
+// used to trigger global option updates (theming) when all stories are isolated in iframes
+export const Empty = {
+  render: () => html``
+}

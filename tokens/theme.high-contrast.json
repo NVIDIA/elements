@@ -32,6 +32,9 @@
     }
   },
   "sys": {
+    "color-scheme": {
+      "value": "light"
+    },
     "text": {
       "default": {
         "color": {
@@ -85,51 +88,51 @@
     "status": {
       "info": {
         "background": {
-          "value": "ButtonText",
+          "value": "CanvasText",
           "type": "color"
         },
         "color": {
-          "value": "ButtonFace",
+          "value": "Canvas",
           "type": "color"
         }
       },
       "success": {
         "background": {
-          "value": "ButtonText",
+          "value": "CanvasText",
           "type": "color"
         },
         "color": {
-          "value": "ButtonFace",
+          "value": "Canvas",
           "type": "color"
         }
       },
       "danger": {
         "background": {
-          "value": "ButtonText",
+          "value": "CanvasText",
           "type": "color"
         },
         "color": {
-          "value": "ButtonFace",
+          "value": "Canvas",
           "type": "color"
         }
       },
       "warning": {
         "background": {
-          "value": "ButtonText",
+          "value": "CanvasText",
           "type": "color"
         },
         "color": {
-          "value": "ButtonFace",
+          "value": "Canvas",
           "type": "color"
         }
       },
       "neutral": {
         "background": {
-          "value": "ButtonText",
+          "value": "CanvasText",
           "type": "color"
         },
         "color": {
-          "value": "ButtonFace",
+          "value": "Canvas",
           "type": "color"
         }
       }
@@ -143,36 +146,6 @@
         "color": {
           "value": "ButtonText",
           "type": "color"
-        },
-        "hover": {
-          "background": {
-            "value": "Highlight",
-            "type": "color"
-          },
-          "color": {
-            "value": "HighlightText",
-            "type": "color"
-          }
-        },
-        "active": {
-          "background": {
-            "value": "Highlight",
-            "type": "color"
-          },
-          "color": {
-            "value": "ActiveText",
-            "type": "color"
-          }
-        },
-        "disabled": {
-          "background": {
-            "value": "Canvas",
-            "type": "color"
-          },
-          "color": {
-            "value": "GrayText",
-            "type": "color"
-          }
         }
       },
       "emphasize": {
@@ -183,36 +156,6 @@
         "color": {
           "value": "ButtonText",
           "type": "color"
-        },
-        "hover": {
-          "background": {
-            "value": "Highlight",
-            "type": "color"
-          },
-          "color": {
-            "value": "HighlightText",
-            "type": "color"
-          }
-        },
-        "active": {
-          "background": {
-            "value": "Highlight",
-            "type": "color"
-          },
-          "color": {
-            "value": "ActiveText",
-            "type": "color"
-          }
-        },
-        "disabled": {
-          "background": {
-            "value": "Canvas",
-            "type": "color"
-          },
-          "color": {
-            "value": "GrayText",
-            "type": "color"
-          }
         }
       },
       "destructive": {
@@ -223,41 +166,15 @@
         "color": {
           "value": "ButtonText",
           "type": "color"
-        },
-        "hover": {
-          "background": {
-            "value": "Highlight",
-            "type": "color"
-          },
-          "color": {
-            "value": "HighlightText",
-            "type": "color"
-          }
-        },
-        "active": {
-          "background": {
-            "value": "Highlight",
-            "type": "color"
-          },
-          "color": {
-            "value": "ActiveText",
-            "type": "color"
-          }
-        },
-        "disabled": {
-          "background": {
-            "value": "Canvas",
-            "type": "color"
-          },
-          "color": {
-            "value": "GrayText",
-            "type": "color"
-          }
         }
       },
-      "highlight": {
+      "disabled": {
         "background": {
-          "value": "Highlight",
+          "value": "ButtonFace",
+          "type": "color"
+        },
+        "color": {
+          "value": "GrayText",
           "type": "color"
         }
       }
