@@ -72,7 +72,7 @@ export class Control extends LitElement {
       </div>
     ` : html`
       <div internal-host class=${classMap(this.styleStates)}>
-        <slot input></slot>
+        <div input><slot interaction-state></slot></div>
         <slot name="label"></slot>
         <slot name="messages"></slot>
       </div>
