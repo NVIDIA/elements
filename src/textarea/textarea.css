@@ -34,15 +34,6 @@
   width: var(--width) !important;
 }
 
-:host([mlv-control]:focus-within) [input] {
-  outline: 0 !important;
-}
-
-/* slot:has(textarea) {
-  display: none !important;
-  width: fit-content !important;
-} */
-
 :host([layout*='horizontal']) {
   & ::slotted(label) {
     padding-top: var(--mlv-ref-size-100) !important;

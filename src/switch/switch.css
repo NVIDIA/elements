@@ -7,7 +7,7 @@
   --anchor-width: var(--mlv-ref-font-size-200);
   --anchor-height: var(--mlv-ref-font-size-200);
   --anchor-border-radius: var(--mlv-ref-border-radius-full);
-  --anchor-background: var(--mlv-sys-interaction-default-color);
+  --anchor-background: var(--mlv-sys-interaction-disabled-color);
 }
 
 ::slotted(input) {
@@ -27,6 +27,10 @@
 }
 
 [input] {
+  align-items: center;
+}
+
+[input] slot {
   cursor: var(--cursor);
   border-radius: var(--border-radius);
   background: var(--background);
@@ -42,12 +46,12 @@
   position: relative;
 }
 
-:host(:--disabled:--checked) [input] {
+:host(:--disabled:--checked) [input] slot {
   --anchor-background: var(--mlv-sys-interaction-disabled-background);
   --background: var(--mlv-sys-interaction-disabled-color);
 }
 
-[input]:after {
+[input] slot:after {
   border-radius: var(--anchor-border-radius);
   background: var(--anchor-background);
   height: var(--anchor-height);
@@ -61,9 +65,18 @@
 
 :host(:--checked) {
   --background: var(--mlv-sys-accent-secondary-background);
-  --anchor-background: var(--mlv-sys-interaction-default-color);
+  --anchor-background: var(--mlv-sys-text-white-color);
 
-  [input]:after {
+  [input] slot:after {
     transform: translate(calc(var(--width) / 2), 0);
   }
+}
+
+:host([mlv-control]:focus-within) [input] {
+  outline: 0 !important;
+}
+
+:host([mlv-control]:focus-within) [input] slot {
+  outline: Highlight solid 2px !important;
+  outline: 5px auto -webkit-focus-ring-color !important;
 }

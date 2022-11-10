@@ -29,13 +29,12 @@
 }
 
 :host([mlv-control]) ::slotted(input:focus),
-:host([mlv-control]) ::slotted(select:focus) {
+:host([mlv-control]) ::slotted(select:focus),
+:host([mlv-control]) ::slotted(textarea:focus) {
   outline: 0 !important;
 }
 
-:host([mlv-control]:focus-within) [input],
-:host([mlv-control]:focus-within) ::slotted(input[type='radio']),
-:host([mlv-control]:focus-within) ::slotted(input[type='checkbox']) {
+:host([mlv-control]:focus-within) [input] {
   outline: Highlight solid 2px !important;
   outline: 5px auto -webkit-focus-ring-color !important;
 }
