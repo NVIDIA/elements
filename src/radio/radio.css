@@ -1,22 +1,64 @@
 :host {
+  --cursor: pointer;
   --width: var(--nve-ref-size-400);
   --height: var(--nve-ref-size-400);
-  --cursor: pointer;
+  --border-width: var(--nve-ref-border-width-md);
+  --border-radius: var(--nve-ref-border-radius-full);
+  --border-color: hsla(227, 10%, 50%, 0.4);
+  --background: transparent;
+}
+
+::slotted(input) {
+  width: var(--width) !important;
+  height: var(--height) !important;
+  cursor: var(--cursor) !important;
+  margin: 0 !important;
+  position: absolute !important;
+  border-radius: var(--border-radius) !important;
+  opacity: 0 !important;
+  inset: 0 !important;
+}
+
+[input] {
+  align-items: center;
+  position: relative;
+}
+
+[input] slot {
+  width: var(--width);
+  height: var(--height);
+  border: var(--border-width) solid var(--border-color);
+  background: var(--background);
+  border-radius: var(--border-radius);
+  display: block;
+}
+
+[input] slot::before {
+  content: '';
+  width: calc(var(--width) / 2);
+  height: calc(var(--height) / 2);
+  margin-left: var(--nve-ref-space-xxxs);
+  border-radius: var(--border-radius);
+}
+
+:host(:--checked) {
+  --nve-sys-interaction-state-lightness: 0%;
+  --border-color: var(--accent-color);
+
+  & [input] slot::before {
+    background: var(--border-color);
+  }
+}
+
+:host(:--disabled) {
+  --border-color: var(--nve-sys-interaction-disabled-background);
 }
 
 :host([nve-control]:focus-within) [input] {
   outline: 0 !important;
 }
 
-::slotted(input) {
-  /* https://web.dev/accent-color/#guaranteeing-contrast */
-  accent-color: var(--accent-color) !important;
-  width: var(--width) !important;
-  height: var(--height) !important;
-  margin: 0 !important;
-  cursor: var(--cursor) !important;
-}
-
-slot {
-  line-height: 0 !important;
+:host([nve-control]:focus-within) [input] slot {
+  outline: Highlight solid 2px !important;
+  outline: 5px auto -webkit-focus-ring-color !important;
 }
