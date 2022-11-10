@@ -71,7 +71,7 @@ storybook_rules_js(
 # TODO: Remove when the Home app does not consume the fonts directly anymore.
 filegroup(
     name = "files",
-    srcs = vite_default_srcs(),
+    srcs = vite_default_srcs() + glob(["public/**/*"]),
     tags = ["ui"],
     visibility = ["//visibility:public"],
 )
