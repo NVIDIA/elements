@@ -2,6 +2,7 @@ import { getAttributeChanges, getAttributeListChanges } from '@elements/elements
 import { ControlGroup } from '../control-group/control-group.js';
 import { ControlMessage } from '../control-message/control-message.js';
 import { Control } from '../control/control.js';
+import { isInlineInputType } from './layout.js';
 import { hideAllControlMessages, hideAllValidationMessages, hideInactiveValidationMessages, showActiveValidationMessages, showNonValidationMessages } from './messages.js';
 
 export const inputQuery = 'input, select, selectmenu, textarea, [nve-control]';
@@ -63,8 +64,9 @@ export function setupControlValidationStates(control: Control, messages: Control
 export function setupControlStates(control: Control) {
   const observers: MutationObserver[] = [];
   const states = control._internals.states;
+  const host = isInlineInputType(control.input) ? (control.parentElement as ControlGroup) : control.input;
   control.input.checked ? states.add('--checked') : states.delete('--checked');
-  control.input.addEventListener('change', () => control.input.checked ? states.add('--checked') : states.delete('--checked'));
+  host.addEventListener('change', () => control.input.checked ? states.add('--checked') : states.delete('--checked'));
   control.input.addEventListener('focus', () => control._internals.states.add('--focus'));
   control.input.addEventListener('input', () => control._internals.states.add('--dirty'));
   control.input.addEventListener('blur', () => {

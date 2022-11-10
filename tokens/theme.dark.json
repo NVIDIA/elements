@@ -3,7 +3,7 @@
     "border": {
       "color": {
         "default": {
-          "value": "{ref.color.gray-zinc.700}",
+          "value": "{ref.color.gray-zinc.600}",
           "type": "color"
         },
         "emphasis": {
