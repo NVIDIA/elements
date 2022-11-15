@@ -10,6 +10,7 @@
 
 ::slotted(label) {
   font-weight: var(--nve-ref-font-weight-semibold) !important;
+  font-size: var(--nve-ref-font-size-200) !important;
   color: var(--label-color) !important;
   cursor: var(--cursor) !important;
 }

@@ -1,8 +1,8 @@
 :host {
   --nve-sys-interaction-default-background: var(--nve-sys-interaction-default-background-300);
-  --nve-sys-layer-popup-arrow-padding: 6px;
-  --nve-sys-layer-popup-arrow-offset: 4px;
-  --nve-sys-layer-popup-offset: var(--nve-ref-space-xxl);
+  --nve-sys-layer-popover-arrow-padding: 6px;
+  --nve-sys-layer-popover-arrow-offset: 4px;
+  --nve-sys-layer-popover-offset: var(--nve-ref-space-xxl);
   --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --border-radius: var(--nve-ref-border-radius-lg);
   --background: var(--nve-sys-layer-overlay-background);
@@ -54,4 +54,5 @@ nve-icon-button {
   position: absolute;
   top: 18px;
   right: 18px;
+  z-index: 99;
 }

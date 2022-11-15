@@ -3,25 +3,25 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
-import { PopupAlign, PopupPosition, TypePopupController } from '@elements/elements/internal';
+import { PopoverAlign, PopoverPosition, TypePopoverController } from '@elements/elements/internal';
 
-@customElement('type-popup-controller-test-element')
-class TypePopupControllerTestElement extends LitElement {
+@customElement('type-popover-controller-test-element')
+class TypePopoverControllerTestElement extends LitElement {
   @property({ type: String, reflect: true }) anchor: string | HTMLElement;
 
-  @property({ type: String, reflect: true }) position: PopupPosition;
+  @property({ type: String, reflect: true }) position: PopoverPosition;
 
-  @property({ type: String, reflect: true }) alignment: PopupAlign;
+  @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
-  @property({ type: String, reflect: true }) popupType: 'auto' | 'manual' | 'hint' = 'hint';
+  @property({ type: String, reflect: true }) popoverType: 'auto' | 'manual' | 'hint' = 'hint';
 
   @property({ type: Boolean, reflect: true }) arrow = true;
 
-  get popupArrow() {
+  get popoverArrow() {
     return this.shadowRoot.querySelector<HTMLElement>('.arrow');
   }
 
-  typePopupController = new TypePopupController<TypePopupControllerTestElement>(this);
+  typePopoverController = new TypePopoverController<TypePopoverControllerTestElement>(this);
 
   static styles = [css`
     :host {
@@ -64,7 +64,7 @@ class TypePopupControllerTestElement extends LitElement {
   render() {
     return html`
       <dialog hidden>
-        <button @click=${() => this.typePopupController.close()}>Close</button>
+        <button @click=${() => this.typePopoverController.close()}>Close</button>
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
       </dialog>
@@ -72,17 +72,17 @@ class TypePopupControllerTestElement extends LitElement {
   }
 }
 
-describe('type-popup.controller', () => {
-  let element: TypePopupControllerTestElement;
+describe('type-popover.controller', () => {
+  let element: TypePopoverControllerTestElement;
   let dialog: HTMLDialogElement;
   let fixture: HTMLElement;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
     <button id="btn-anchor">anchor</button>
-    <type-popup-controller-test-element id="btn-anchor" hidden></type-popup-controller-test-element>
+    <type-popover-controller-test-element id="btn-anchor" hidden></type-popover-controller-test-element>
     `);
-    element = fixture.querySelector<TypePopupControllerTestElement>('type-popup-controller-test-element');
+    element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
     dialog = element.shadowRoot.querySelector('dialog');
     await element.updateComplete;
   });
@@ -92,7 +92,7 @@ describe('type-popup.controller', () => {
   });
 
   it('should define test element', () => {
-    expect(customElements.get('type-popup-controller-test-element')).toBeDefined();
+    expect(customElements.get('type-popover-controller-test-element')).toBeDefined();
   });
 
   it('should position element to top of anchor', async () => {
