@@ -74,14 +74,14 @@ export const Link = {
 
 export const Themes = {
   render: () => html`
-    <div mlv-theme="light">
+    <div mlv-theme="root light">
       <mlv-icon-button icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button interaction="emphasize" icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button interaction="destructive" icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button interaction="ghost" icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button disabled icon-name="analytics"></mlv-icon-button>
     </div>
-    <div mlv-theme="dark">
+    <div mlv-theme="root dark">
       <mlv-icon-button icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button interaction="emphasize" icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button interaction="destructive" icon-name="analytics"></mlv-icon-button>

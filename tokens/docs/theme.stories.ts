@@ -74,7 +74,7 @@ export const ReducedMotion = {
 
 function getThemeDemo(theme) {
   return html`
-    <div mlv-theme="${theme}" mlv-layout="grid span-items:6 gap:md pad:md">
+    <div mlv-theme="root ${theme}" mlv-layout="grid span-items:6 gap:md pad:md">
       <mlv-card>${getThemeContent()}</mlv-card>
       ${getThemeContent()}
     </div>

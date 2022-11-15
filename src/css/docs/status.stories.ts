@@ -42,7 +42,7 @@ export const Status = {
         color: var(--mlv-sys-status-danger-color);
       }
     </style>
-    <section mlv-theme="light" class="status-demo">
+    <section mlv-theme="root light" class="status-demo">
       <div class="neutral">
         neutral
       </div>
@@ -59,7 +59,7 @@ export const Status = {
         danger
       </div>
     </section>
-    <section mlv-theme="dark" class="status-demo">
+    <section mlv-theme="root dark" class="status-demo">
       <div class="neutral">
         neutral
       </div>

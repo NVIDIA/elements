@@ -92,7 +92,7 @@ const menuDemoStyles = html`
 export const Menu = {
   render: () => html`
     ${menuDemoStyles}
-    <section mlv-theme="light" class="interaction-demo">
+    <section mlv-theme="root light" class="interaction-demo">
       <div class="mlv-menu">
         <div class="mlv-menu-item">item</div>
         <div class="mlv-menu-item">default</div>
@@ -124,7 +124,7 @@ export const Menu = {
         <div class="mlv-menu-item">item</div>
       </div>
     </section>
-    <section mlv-theme="dark" class="interaction-demo">
+    <section mlv-theme="root dark" class="interaction-demo">
       <div class="mlv-menu">
         <div class="mlv-menu-item">item</div>
         <div class="mlv-menu-item">default</div>
@@ -162,7 +162,7 @@ export const Menu = {
 export const ContainerMenu = {
   render: () => html`
     <div mlv-layout="grid span-items:6 gap:md">
-      <div mlv-theme="light">
+      <div mlv-theme="root light">
         <mlv-card>
           <mlv-card-content mlv-layout="grid gap:md">
             <div mlv-layout="span:4 column">
@@ -178,7 +178,7 @@ export const ContainerMenu = {
           </mlv-card-content>
         </mlv-card>
       </div>
-      <div mlv-theme="dark">
+      <div mlv-theme="root dark">
         <mlv-card>
           <mlv-card-content mlv-layout="grid gap:md">
             <div mlv-layout="span:4 column">
@@ -201,7 +201,7 @@ export const ContainerMenu = {
 export const PopupMenu = {
   render: () => html`
     ${menuDemoStyles}
-    <section mlv-theme="light" class="interaction-demo">
+    <section mlv-theme="root light" class="interaction-demo">
       <div class="mlv-dropdown">
         <div class="mlv-menu">
           <div class="mlv-menu-item">item</div>
@@ -245,7 +245,7 @@ export const PopupMenu = {
         </div>
       </div>
     </section>
-    <section mlv-theme="dark" class="interaction-demo">
+    <section mlv-theme="root dark" class="interaction-demo">
       <div class="mlv-dropdown">
         <div class="mlv-menu">
           <div class="mlv-menu-item">item</div>
@@ -295,7 +295,7 @@ export const PopupMenu = {
 export const NavigationDrawer = {
   render: () => html`
   ${menuDemoStyles}
-  <section mlv-theme="light" class="interaction-demo">
+  <section mlv-theme="root light" class="interaction-demo">
     <div class="mlv-drawer">
       <div class="mlv-menu">
         <div class="mlv-menu-item">item</div>
@@ -339,7 +339,7 @@ export const NavigationDrawer = {
       </div>
     </div>
   </section>
-  <section mlv-theme="dark" class="interaction-demo">
+  <section mlv-theme="root dark" class="interaction-demo">
     <div class="mlv-drawer">
       <div class="mlv-menu">
         <div class="mlv-menu-item">item</div>
@@ -447,7 +447,7 @@ export const Tabs = {
         outline: Highlight solid 2px; /* --mlv-ref-outline */
       }
     </style>
-    <section mlv-theme="light" class="interaction-demo-tabs">
+    <section mlv-theme="root light" class="interaction-demo-tabs">
       <div class="mlv-tabs">
         <div class="mlv-tab">item</div>
         <div class="mlv-tab">item</div>
@@ -485,7 +485,7 @@ export const Tabs = {
         <p>focused</p>
       </div>
     </section>
-    <section mlv-theme="dark" class="interaction-demo-tabs">
+    <section mlv-theme="root dark" class="interaction-demo-tabs">
       <div class="mlv-tabs">
         <div class="mlv-tab">item</div>
         <div class="mlv-tab">item</div>

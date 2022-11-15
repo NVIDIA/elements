@@ -34,13 +34,13 @@ export const Status = {
 
 export const Themes = {
   render: () => html`
-    <div mlv-theme="light" mlv-layout="column gap:md">
+    <div mlv-theme="root light" mlv-layout="column gap:md">
       <mlv-alert>default</mlv-alert>
       <mlv-alert status="warning">warning</mlv-alert>
       <mlv-alert status="success">success</mlv-alert>
       <mlv-alert status="danger">danger</mlv-alert>
     </div>
-    <div mlv-theme="dark" mlv-layout="column gap:md">
+    <div mlv-theme="root dark" mlv-layout="column gap:md">
       <mlv-alert>default</mlv-alert>
       <mlv-alert status="warning">warning</mlv-alert>
       <mlv-alert status="success">success</mlv-alert>

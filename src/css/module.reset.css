@@ -1,4 +1,6 @@
-[mlv-theme] {
+html[mlv-theme],
+body[mlv-theme],
+[mlv-theme~='root'] {
   color-scheme: var(--mlv-sys-color-scheme) !important;
   background: var(--mlv-sys-layer-canvas-background) !important;
   color: var(--mlv-sys-layer-canvas-color) !important;

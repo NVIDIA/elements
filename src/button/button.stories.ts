@@ -98,13 +98,13 @@ export const Link = {
 
 export const Themes = {
   render: () => html`
-    <div mlv-theme="light">
+    <div mlv-theme="root light">
       <mlv-button>default</mlv-button>
       <mlv-button interaction="emphasize">emphasize</mlv-button>
       <mlv-button interaction="destructive">destructive</mlv-button>
       <mlv-button disabled>disabled</mlv-button>
     </div>
-    <div mlv-theme="dark">
+    <div mlv-theme="root dark">
       <mlv-button>default</mlv-button>
       <mlv-button interaction="emphasize">emphasize</mlv-button>
       <mlv-button interaction="destructive">destructive</mlv-button>

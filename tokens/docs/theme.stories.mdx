@@ -4,22 +4,30 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs';
 
 # Themes (beta)
 
-Themes are built leveraging CSS Custom Properties.
+Themes are built leveraging CSS Custom Properties. Themes are applied by setting the `mlv-theme` attribute on the host `html` element.
 
 ```css
 @import '@elements/elements/dist/index.css';
 ```
 
-Themes are applied by setting the `mlv-theme` attribute on the host `html` element.
-
 ```html
 <html lang="en" mlv-theme="dark">
 ```
+
+<mlv-alert status="warning">
+  If your application cannot access root nodes like html or body then apply mlv-theme="root" to set the root background colors and fonts.
+</mlv-alert>
+
+<br /><br />
+
+## Theme Options
 
 Currently there are the following themes:
 - Light (default)
 - Dark
 - High Contrast
+- Reduced Motion (alpha)
+- Compact (alpha)
 
 Themes can be applied dynamically based on user preferences.
 
@@ -37,25 +45,25 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)')).matches) {
 }
 ```
 
-# Light (Default)
+## Light (Default)
 
 <Canvas>
   <Story id="foundations-themes-examples--default" />
 </Canvas>
 
-# Dark
+## Dark
 
 <Canvas>
   <Story id="foundations-themes-examples--dark" />
 </Canvas>
 
-# High Contrast
+## High Contrast
 
 <Canvas>
   <Story id="foundations-themes-examples--high-contrast" />
 </Canvas>
 
-# Reduced Motion
+## Reduced Motion
 
 <Canvas>
   <Story id="foundations-themes-examples--reduced-motion" />

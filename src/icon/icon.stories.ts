@@ -89,14 +89,14 @@ export const size = {
 
 export const Themes = {
   render: () => html`
-    <div mlv-theme="light">
+    <div mlv-theme="root light">
       <mlv-icon name="analytics"></mlv-icon>
       <mlv-icon name="analytics" status="accent"></mlv-icon>
       <mlv-icon name="analytics" status="success"></mlv-icon>
       <mlv-icon name="analytics" status="warning"></mlv-icon>
       <mlv-icon name="analytics" status="danger"></mlv-icon>
     </div>
-    <div mlv-theme="dark">
+    <div mlv-theme="root dark">
       <mlv-icon name="analytics"></mlv-icon>
       <mlv-icon name="analytics" status="accent"></mlv-icon>
       <mlv-icon name="analytics" status="success"></mlv-icon>

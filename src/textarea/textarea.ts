@@ -8,8 +8,11 @@ import styles from './textarea.css?inline';
  * @cssprop --padding
  * @cssprop --font-size
  * @cssprop --height
+ * @cssprop --width
+ * @cssprop --min-height
  * @cssprop --background
  * @cssprop --border-radius
+ * @cssprop --cursor
  * @cssprop --border
  */
 export class Textarea extends Control {

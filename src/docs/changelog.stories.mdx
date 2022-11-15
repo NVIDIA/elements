@@ -8,10 +8,13 @@
 - Added alpha stage layer/interaction tokens
 
 ### Fixes
-- Fix placeholder color for textarea
 - Fix/Breaking: removal of interaction state tokens
   Interaction background and color tokens remain however the alternate states (hover, active) are removed.
   Background contrast is now used to determine the interaction state. See [Interaction states](./?path=/story/foundations-tokens-interactions--page) for more information.
+- Fix/Breaking: Theme base styles such as font and background colors are only applied when `mlv-theme` attr is placed on the `html`, `body` element or with `mlv-theme="root"`.
+  This allows for more flexibility when using testing themes without overiding the nested element style properties.
+- Fix placeholder color for textarea
+- Textarea correctly overrides initial min-height when using the `row` attr.
 
 ## v0.4.2
 - Fix button types not bubbling to parent elements

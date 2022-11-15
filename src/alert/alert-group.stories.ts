@@ -79,7 +79,7 @@ export const Closable = {
 
 export const Themes = {
   render: () => html`
-    <div mlv-theme="light" mlv-layout="column gap:md">
+    <div mlv-theme="root light" mlv-layout="column gap:md">
       <mlv-alert-group>
         <mlv-alert>default</mlv-alert>
         <mlv-alert>default</mlv-alert>
@@ -100,7 +100,7 @@ export const Themes = {
         <mlv-alert>danger</mlv-alert>
       </mlv-alert-group>
     </div>
-    <div mlv-theme="dark" mlv-layout="column gap:md">
+    <div mlv-theme="root dark" mlv-layout="column gap:md">
       <mlv-alert-group>
         <mlv-alert>default</mlv-alert>
         <mlv-alert>default</mlv-alert>

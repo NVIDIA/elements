@@ -86,37 +86,33 @@ export const Default = {
 
 export const CardWithContentLayout = {
   render: () => html`
-    <div mlv-theme>
-      <mlv-card style="width: 400px; height: 300px;">
-        <mlv-card-content mlv-layout="row align:space-around">
-          <div>Item 1</div>
-          <div>Item 2</div>
-          <div>Item 3</div>
-        </mlv-card-content>
-      </mlv-card>
-    </div>
+    <mlv-card style="width: 400px; height: 300px;">
+      <mlv-card-content mlv-layout="row align:space-around">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </mlv-card-content>
+    </mlv-card>
   `
 }
 
 export const CardWithMultipleContentsAndDivider = {
   render: () => html`
-    <div mlv-theme>
-      <mlv-card style="width: 400px; height: 300px;">
-        <mlv-card-content mlv-layout="row align:space-around">
-          <div>Item 1</div>
-          <div>Item 2</div>
-          <div>Item 3</div>
-        </mlv-card-content>
+    <mlv-card style="width: 400px; height: 300px;">
+      <mlv-card-content mlv-layout="row align:space-around">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </mlv-card-content>
 
-        <hr style="width: 100%">
+      <hr style="width: 100%">
 
-        <mlv-card-content mlv-layout="row align:center gap:md">
-          <div>Item 1</div>
-          <div>Item 2</div>
-          <div>Item 3</div>
-        </mlv-card-content>
-      </mlv-card>
-    </div>
+      <mlv-card-content mlv-layout="row align:center gap:md">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </mlv-card-content>
+    </mlv-card>
   `
 }
 
@@ -146,7 +142,7 @@ export const CardWithHeaderAndFooter = {
 
 export const Themes = {
   render: () => html`
-    <div mlv-theme="light">
+    <div mlv-theme="root light">
       <mlv-card style="width: 400px; height: 300px;">
         <mlv-card-header>
           <div slot="title">Title</div>
@@ -164,7 +160,7 @@ export const Themes = {
       </mlv-card>
     </div>
 
-    <div mlv-theme="dark">
+    <div mlv-theme="root dark">
       <mlv-card style="width: 400px; height: 300px;">
         <mlv-card-header>
           <div slot="title">Title</div>
