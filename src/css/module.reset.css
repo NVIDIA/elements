@@ -1,4 +1,6 @@
-[nve-theme] {
+html[nve-theme],
+body[nve-theme],
+[nve-theme~='root'] {
   color-scheme: var(--nve-sys-color-scheme) !important;
   background: var(--nve-sys-layer-canvas-background) !important;
   color: var(--nve-sys-layer-canvas-color) !important;

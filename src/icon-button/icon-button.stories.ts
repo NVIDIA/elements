@@ -74,14 +74,14 @@ export const Link = {
 
 export const Themes = {
   render: () => html`
-    <div nve-theme="light">
+    <div nve-theme="root light">
       <nve-icon-button icon-name="analytics"></nve-icon-button>
       <nve-icon-button interaction="emphasize" icon-name="analytics"></nve-icon-button>
       <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>
       <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
       <nve-icon-button disabled icon-name="analytics"></nve-icon-button>
     </div>
-    <div nve-theme="dark">
+    <div nve-theme="root dark">
       <nve-icon-button icon-name="analytics"></nve-icon-button>
       <nve-icon-button interaction="emphasize" icon-name="analytics"></nve-icon-button>
       <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>

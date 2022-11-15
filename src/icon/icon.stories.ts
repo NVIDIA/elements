@@ -89,14 +89,14 @@ export const size = {
 
 export const Themes = {
   render: () => html`
-    <div nve-theme="light">
+    <div nve-theme="root light">
       <nve-icon name="analytics"></nve-icon>
       <nve-icon name="analytics" status="accent"></nve-icon>
       <nve-icon name="analytics" status="success"></nve-icon>
       <nve-icon name="analytics" status="warning"></nve-icon>
       <nve-icon name="analytics" status="danger"></nve-icon>
     </div>
-    <div nve-theme="dark">
+    <div nve-theme="root dark">
       <nve-icon name="analytics"></nve-icon>
       <nve-icon name="analytics" status="accent"></nve-icon>
       <nve-icon name="analytics" status="success"></nve-icon>

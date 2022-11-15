@@ -86,37 +86,33 @@ export const Default = {
 
 export const CardWithContentLayout = {
   render: () => html`
-    <div nve-theme>
-      <nve-card style="width: 400px; height: 300px;">
-        <nve-card-content nve-layout="row align:space-around">
-          <div>Item 1</div>
-          <div>Item 2</div>
-          <div>Item 3</div>
-        </nve-card-content>
-      </nve-card>
-    </div>
+    <nve-card style="width: 400px; height: 300px;">
+      <nve-card-content nve-layout="row align:space-around">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </nve-card-content>
+    </nve-card>
   `
 }
 
 export const CardWithMultipleContentsAndDivider = {
   render: () => html`
-    <div nve-theme>
-      <nve-card style="width: 400px; height: 300px;">
-        <nve-card-content nve-layout="row align:space-around">
-          <div>Item 1</div>
-          <div>Item 2</div>
-          <div>Item 3</div>
-        </nve-card-content>
+    <nve-card style="width: 400px; height: 300px;">
+      <nve-card-content nve-layout="row align:space-around">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </nve-card-content>
 
-        <hr style="width: 100%">
+      <hr style="width: 100%">
 
-        <nve-card-content nve-layout="row align:center gap:md">
-          <div>Item 1</div>
-          <div>Item 2</div>
-          <div>Item 3</div>
-        </nve-card-content>
-      </nve-card>
-    </div>
+      <nve-card-content nve-layout="row align:center gap:md">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </nve-card-content>
+    </nve-card>
   `
 }
 
@@ -146,7 +142,7 @@ export const CardWithHeaderAndFooter = {
 
 export const Themes = {
   render: () => html`
-    <div nve-theme="light">
+    <div nve-theme="root light">
       <nve-card style="width: 400px; height: 300px;">
         <nve-card-header>
           <div slot="title">Title</div>
@@ -164,7 +160,7 @@ export const Themes = {
       </nve-card>
     </div>
 
-    <div nve-theme="dark">
+    <div nve-theme="root dark">
       <nve-card style="width: 400px; height: 300px;">
         <nve-card-header>
           <div slot="title">Title</div>
