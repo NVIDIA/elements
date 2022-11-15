@@ -1,23 +1,23 @@
 import { ReactiveController, ReactiveElement } from 'lit';
 import { clickOutsideElementBounds, getAttributeChanges, getFlatDOMTree } from '../utils/dom.js';
-import { computePopupPosition, getPopupCustomCSSProperites, PopupAlign, PopupConfig, PopupPosition, popupRenderUpdate, PopupType, setArrowStyles, setPopupStyles } from './type-popup.utils.js';
+import { computePopoverPosition, getPopoverCustomCSSProperites, PopoverAlign, PopoverConfig, PopoverPosition, popoverRenderUpdate, PopoverType, setArrowStyles, setPopoverStyles } from './type-popover.utils.js';
 
-export type { Placement, PopupAlign, PopupPosition, PopupType } from './type-popup.utils.js';
+export type { Placement, PopoverAlign as PopoverAlign, PopoverPosition as PopoverPosition, PopoverType as PopoverType } from './type-popover.utils.js';
 
-export interface Popup extends ReactiveElement {
+export interface Popover extends ReactiveElement {
   anchor?: HTMLElement | string;
-  position?: PopupPosition;
-  alignment?: PopupAlign;
-  popupArrow?: HTMLElement;
-  popupType?: PopupType;
+  position?: PopoverPosition;
+  alignment?: PopoverAlign;
+  popoverArrow?: HTMLElement;
+  popoverType?: PopoverType;
   autoClose?: number;
 }
 
 /**
  * https://open-ui.org/components/popup.research.explainer
  */
-export class TypePopupController<T extends Popup> implements ReactiveController {
-  get #popup() {
+export class TypePopoverController<T extends Popover> implements ReactiveController {
+  get #popover() {
     return this.#dialog ? this.#dialog : this.host;
   }
 
@@ -27,21 +27,22 @@ export class TypePopupController<T extends Popup> implements ReactiveController 
 
   get #anchor() {
     const id = typeof this.host.anchor === 'string' ? this.host.anchor : this.host.anchor?.id;
-    const anchor = getFlatDOMTree(this.host.parentElement).filter(el => el?.id !== '').find(el => el.id === id) as HTMLElement;
+    const anchor = getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === id) as HTMLElement;
     return anchor ? anchor : document.body;
   }
 
-  get #config(): PopupConfig {
+  get #config(): PopoverConfig {
     return {
       position: this.host.position,
       alignment: this.host.alignment,
-      popup: this.#popup,
+      popover: this.#popover,
       anchor: this.#anchor,
-      arrow: this.host.popupArrow,
+      arrow: this.host.popoverArrow,
     }
   }
 
-  #popupType: PopupType;
+  #popoverType: PopoverType;
+  #cleanup: ({ disconnect: () => void })[];
 
   constructor(private host: T) {
     this.host.addController(this);
@@ -50,42 +51,52 @@ export class TypePopupController<T extends Popup> implements ReactiveController 
   async hostConnected() {
     await this.host.updateComplete;
     this.#dialog?.addEventListener('close', () => this.close());
-    popupRenderUpdate(this.#config, () => this.#calculatePosition());
-    getAttributeChanges(this.host, 'hidden', () => this.#update());
+    this.#cleanup = [
+      { disconnect: popoverRenderUpdate(this.#config, () => this.#calculatePosition()) },
+      getAttributeChanges(this.host, 'hidden', () => this.#update())
+    ];
   }
 
   async hostUpdated() {
     await this.host.updateComplete;
-    this.#updatePopupType();
+    this.#updatePopoverType();
     this.#calculatePosition();
+
+    if ((this.#dialog as any)?.open && this.host.hidden) {
+      this.#dialog.close();
+    }
+  }
+
+  hostDisconnected() {
+    this.#cleanup.forEach(i => i.disconnect());
   }
 
   #update() {
     this.host.requestUpdate();
-    this.#updateModal();
+    this.#updateVisibility();
     this.#toggleLightDismiss();
     this.#calculatePosition();
     this.#autoClose();
   }
 
   #lightDismiss = ((e: PointerEvent) => {
-    if (clickOutsideElementBounds(e, this.#popup)) {
+    if (clickOutsideElementBounds(e, this.#popover)) {
       this.close();
     }
   }).bind(this);
 
   async #toggleLightDismiss() {
     document.removeEventListener('click', this.#lightDismiss);
-    if (!this.host.hasAttribute('hidden') && this.host.popupType !== 'manual' && !this.host.autoClose) {
+    if (!this.host.hasAttribute('hidden') && this.host.popoverType !== 'manual' && !this.host.autoClose) {
       await new Promise(r => requestAnimationFrame(r));
       document.addEventListener('click', this.#lightDismiss);
     }
   }
 
-  #updatePopupType() {
-    if (this.#popupType !== this.host.popupType) {
-      this.#popupType = this.host.popupType;
-      this.#updateModal();
+  #updatePopoverType() {
+    if (this.#popoverType !== this.host.popoverType) {
+      this.#popoverType = this.host.popoverType;
+      this.#updateVisibility();
     }
   }
 
@@ -95,12 +106,12 @@ export class TypePopupController<T extends Popup> implements ReactiveController 
     }
   }
 
-  #updateModal() {
+  #updateVisibility() {
     if (this.#dialog) {
       this.#dialog.removeAttribute('open');
       this.#dialog.hidden = this.host.hidden;
-      if (!this.host.hidden && this.host.popupType !== 'manual') {
-        this.host.popupType === 'auto' ? this.#dialog.showModal() : this.#dialog.show();
+      if (!this.host.hidden && this.host.popoverType !== 'manual') {
+        this.host.popoverType === 'auto' ? this.#dialog.showModal() : this.#dialog.show();
       }
     }
   }
@@ -115,14 +126,14 @@ export class TypePopupController<T extends Popup> implements ReactiveController 
   async #calculatePosition() {
     await this.host.updateComplete;
     if (!this.host.hidden) {
-      const config = { ...this.#config, ...getPopupCustomCSSProperites(this.host) };
+      const config = { ...this.#config, ...getPopoverCustomCSSProperites(this.host) };
       config.arrow?.removeAttribute('style');
       await this.host.updateComplete;
       await new Promise(r => requestAnimationFrame(r));
 
-      if (config.popup && config.position) {
-        const position = await computePopupPosition(config);
-        setPopupStyles(config, position);
+      if (config.popover && config.position) {
+        const position = await computePopoverPosition(config);
+        setPopoverStyles(config, position);
         setArrowStyles(config, position);
       }
     }

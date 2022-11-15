@@ -23,4 +23,5 @@ interface HTMLDialogElement extends HTMLElement {
   showModal?: () => void;
   close?: (returnValue?: string) => void;
   returnValue?: string;
+  open?: boolean;
 }

@@ -22,7 +22,9 @@ export async function createFixture(template?: TemplateResult): Promise<HTMLElem
  * Removes test fixture DOM element.
  */
 export function removeFixture(fixture: HTMLElement) {
-  document.body.removeChild(fixture);
+  if (fixture) {
+    document.body.removeChild(fixture);
+  }
 }
 
 /**

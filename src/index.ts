@@ -6,6 +6,7 @@ import '@elements/elements/color/define.js';
 import '@elements/elements/date/define.js';
 import '@elements/elements/datetime/define.js';
 import '@elements/elements/dialog/define.js';
+import '@elements/elements/dropdown/define.js';
 import '@elements/elements/file/define.js';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/icon/define.js';
