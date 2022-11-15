@@ -74,7 +74,7 @@ export const ReducedMotion = {
 
 function getThemeDemo(theme) {
   return html`
-    <div nve-theme="${theme}" nve-layout="grid span-items:6 gap:md pad:md">
+    <div nve-theme="root ${theme}" nve-layout="grid span-items:6 gap:md pad:md">
       <nve-card>${getThemeContent()}</nve-card>
       ${getThemeContent()}
     </div>

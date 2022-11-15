@@ -34,13 +34,13 @@ export const Status = {
 
 export const Themes = {
   render: () => html`
-    <div nve-theme="light" nve-layout="column gap:md">
+    <div nve-theme="root light" nve-layout="column gap:md">
       <nve-alert>default</nve-alert>
       <nve-alert status="warning">warning</nve-alert>
       <nve-alert status="success">success</nve-alert>
       <nve-alert status="danger">danger</nve-alert>
     </div>
-    <div nve-theme="dark" nve-layout="column gap:md">
+    <div nve-theme="root dark" nve-layout="column gap:md">
       <nve-alert>default</nve-alert>
       <nve-alert status="warning">warning</nve-alert>
       <nve-alert status="success">success</nve-alert>

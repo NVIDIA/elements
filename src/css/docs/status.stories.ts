@@ -42,7 +42,7 @@ export const Status = {
         color: var(--nve-sys-status-danger-color);
       }
     </style>
-    <section nve-theme="light" class="status-demo">
+    <section nve-theme="root light" class="status-demo">
       <div class="neutral">
         neutral
       </div>
@@ -59,7 +59,7 @@ export const Status = {
         danger
       </div>
     </section>
-    <section nve-theme="dark" class="status-demo">
+    <section nve-theme="root dark" class="status-demo">
       <div class="neutral">
         neutral
       </div>

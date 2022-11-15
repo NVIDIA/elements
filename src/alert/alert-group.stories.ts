@@ -79,7 +79,7 @@ export const Closable = {
 
 export const Themes = {
   render: () => html`
-    <div nve-theme="light" nve-layout="column gap:md">
+    <div nve-theme="root light" nve-layout="column gap:md">
       <nve-alert-group>
         <nve-alert>default</nve-alert>
         <nve-alert>default</nve-alert>
@@ -100,7 +100,7 @@ export const Themes = {
         <nve-alert>danger</nve-alert>
       </nve-alert-group>
     </div>
-    <div nve-theme="dark" nve-layout="column gap:md">
+    <div nve-theme="root dark" nve-layout="column gap:md">
       <nve-alert-group>
         <nve-alert>default</nve-alert>
         <nve-alert>default</nve-alert>
