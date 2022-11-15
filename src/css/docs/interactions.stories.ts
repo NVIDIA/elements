@@ -92,7 +92,7 @@ const menuDemoStyles = html`
 export const Menu = {
   render: () => html`
     ${menuDemoStyles}
-    <section nve-theme="light" class="interaction-demo">
+    <section nve-theme="root light" class="interaction-demo">
       <div class="nve-menu">
         <div class="nve-menu-item">item</div>
         <div class="nve-menu-item">default</div>
@@ -124,7 +124,7 @@ export const Menu = {
         <div class="nve-menu-item">item</div>
       </div>
     </section>
-    <section nve-theme="dark" class="interaction-demo">
+    <section nve-theme="root dark" class="interaction-demo">
       <div class="nve-menu">
         <div class="nve-menu-item">item</div>
         <div class="nve-menu-item">default</div>
@@ -162,7 +162,7 @@ export const Menu = {
 export const ContainerMenu = {
   render: () => html`
     <div nve-layout="grid span-items:6 gap:md">
-      <div nve-theme="light">
+      <div nve-theme="root light">
         <nve-card>
           <nve-card-content nve-layout="grid gap:md">
             <div nve-layout="span:4 column">
@@ -178,7 +178,7 @@ export const ContainerMenu = {
           </nve-card-content>
         </nve-card>
       </div>
-      <div nve-theme="dark">
+      <div nve-theme="root dark">
         <nve-card>
           <nve-card-content nve-layout="grid gap:md">
             <div nve-layout="span:4 column">
@@ -201,7 +201,7 @@ export const ContainerMenu = {
 export const PopupMenu = {
   render: () => html`
     ${menuDemoStyles}
-    <section nve-theme="light" class="interaction-demo">
+    <section nve-theme="root light" class="interaction-demo">
       <div class="nve-dropdown">
         <div class="nve-menu">
           <div class="nve-menu-item">item</div>
@@ -245,7 +245,7 @@ export const PopupMenu = {
         </div>
       </div>
     </section>
-    <section nve-theme="dark" class="interaction-demo">
+    <section nve-theme="root dark" class="interaction-demo">
       <div class="nve-dropdown">
         <div class="nve-menu">
           <div class="nve-menu-item">item</div>
@@ -295,7 +295,7 @@ export const PopupMenu = {
 export const NavigationDrawer = {
   render: () => html`
   ${menuDemoStyles}
-  <section nve-theme="light" class="interaction-demo">
+  <section nve-theme="root light" class="interaction-demo">
     <div class="nve-drawer">
       <div class="nve-menu">
         <div class="nve-menu-item">item</div>
@@ -339,7 +339,7 @@ export const NavigationDrawer = {
       </div>
     </div>
   </section>
-  <section nve-theme="dark" class="interaction-demo">
+  <section nve-theme="root dark" class="interaction-demo">
     <div class="nve-drawer">
       <div class="nve-menu">
         <div class="nve-menu-item">item</div>
@@ -447,7 +447,7 @@ export const Tabs = {
         outline: Highlight solid 2px; /* --nve-ref-outline */
       }
     </style>
-    <section nve-theme="light" class="interaction-demo-tabs">
+    <section nve-theme="root light" class="interaction-demo-tabs">
       <div class="nve-tabs">
         <div class="nve-tab">item</div>
         <div class="nve-tab">item</div>
@@ -485,7 +485,7 @@ export const Tabs = {
         <p>focused</p>
       </div>
     </section>
-    <section nve-theme="dark" class="interaction-demo-tabs">
+    <section nve-theme="root dark" class="interaction-demo-tabs">
       <div class="nve-tabs">
         <div class="nve-tab">item</div>
         <div class="nve-tab">item</div>
