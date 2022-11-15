@@ -22,7 +22,6 @@
   color: var(--color) !important;
   border-radius: var(--border-radius) !important;
   cursor: var(--cursor) !important;
-  min-height: var(--min-height) !important;
 }
 
 ::slotted(textarea:not([rows])) {

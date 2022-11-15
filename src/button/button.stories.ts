@@ -98,13 +98,13 @@ export const Link = {
 
 export const Themes = {
   render: () => html`
-    <div nve-theme="light">
+    <div nve-theme="root light">
       <nve-button>default</nve-button>
       <nve-button interaction="emphasize">emphasize</nve-button>
       <nve-button interaction="destructive">destructive</nve-button>
       <nve-button disabled>disabled</nve-button>
     </div>
-    <div nve-theme="dark">
+    <div nve-theme="root dark">
       <nve-button>default</nve-button>
       <nve-button interaction="emphasize">emphasize</nve-button>
       <nve-button interaction="destructive">destructive</nve-button>
