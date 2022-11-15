@@ -6,16 +6,16 @@ if (!(window as any).process) {
   (window as any).process = { env: { NODE_ENV: 'production' } }; // floating-ui
 }
 
-export type PopupType = 'auto' | 'manual' | 'hint'; // https://open-ui.org/components/popup.research.explainer#api-shape
-export type PopupAlign = 'start' | 'end';
-export type PopupSides = 'top' | 'bottom' | 'left' | 'right';
-export type PopupPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
-export type Placement = PopupPosition | `${PopupSides}-${PopupAlign}`;
+export type PopoverType = 'auto' | 'manual' | 'hint'; // https://open-ui.org/components/popup.research.explainer#api-shape
+export type PopoverAlign = 'start' | 'end';
+export type PopoverSides = 'top' | 'bottom' | 'left' | 'right';
+export type PopoverPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
+export type Placement = PopoverPosition | `${PopoverSides}-${PopoverAlign}`;
 
-export interface PopupConfig {
-  position: PopupPosition,
-  alignment?: PopupAlign,
-  popup: HTMLElement,
+export interface PopoverConfig {
+  position: PopoverPosition,
+  alignment?: PopoverAlign,
+  popover: HTMLElement,
   anchor: HTMLElement,
   arrow?: HTMLElement,
   offset?: number,
@@ -24,7 +24,7 @@ export interface PopupConfig {
   strategy?: 'fixed' | 'absolute'
 }
 
-export const popupBaseStyles = css`
+export const popoverBaseStyles = css`
 :host {
   contain: initial;
   position: fixed;
@@ -38,7 +38,7 @@ export const popupBaseStyles = css`
   pointer-events: none !important;
 }
 
-.popup,
+.popover,
 dialog {
   background: none;
   font-family: inherit;
@@ -56,33 +56,33 @@ dialog {
   user-select: text;
 }
 
-.popup[hidden],
+.popover[hidden],
 dialog[hidden] {
   display: flex !important;
   pointer-events: none !important;
 }
 
-.popup:not([hidden]),
+.popover:not([hidden]),
 dialog:not([hidden]) {
   opacity: 1;
 }
 `;
 
-export function getPopupCustomCSSProperites(element: HTMLElement) {
+export function getPopoverCustomCSSProperites(element: HTMLElement) {
   const styles = getComputedStyle(element);
   return {
-    offset: parseTokenNumber(styles.getPropertyValue('--mlv-sys-layer-popup-offset')),
-    arrowOffset: parseTokenNumber(styles.getPropertyValue('--mlv-sys-layer-popup-arrow-offset')),
-    arrowPadding: parseTokenNumber(styles.getPropertyValue('--mlv-sys-layer-popup-arrow-padding'))
+    offset: parseTokenNumber(styles.getPropertyValue('--mlv-sys-layer-popover-offset')),
+    arrowOffset: parseTokenNumber(styles.getPropertyValue('--mlv-sys-layer-popover-arrow-offset')),
+    arrowPadding: parseTokenNumber(styles.getPropertyValue('--mlv-sys-layer-popover-arrow-padding'))
   };
 }
 
-export function setPopupStyles(config: PopupConfig, position: { x: number, y: number }) {
+export function setPopoverStyles(config: PopoverConfig, position: { x: number, y: number }) {
   const positionStyle = config.anchor === document.body ? 'fixed' : 'absolute';
-  Object.assign(config.popup.style, { position: positionStyle, left: `${position.x}px`, top: `${position.y}px` });
+  Object.assign(config.popover.style, { position: positionStyle, left: `${position.x}px`, top: `${position.y}px` });
 }
 
-export function setArrowStyles(config: PopupConfig, position: ComputePositionReturn) {
+export function setArrowStyles(config: PopoverConfig, position: ComputePositionReturn) {
   if (config.arrow && config.position !== 'center') {
     const side = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[position.placement.split('-')[0]];
     Object.assign(config.arrow.style, {
@@ -93,21 +93,21 @@ export function setArrowStyles(config: PopupConfig, position: ComputePositionRet
   }
 }
 
-export function popupRenderUpdate(config: PopupConfig, fn: () => void) {
-  autoUpdate(config.anchor, config.popup, () => fn());
+export function popoverRenderUpdate(config: PopoverConfig, fn: () => void) {
+  return autoUpdate(config.anchor, config.popover, () => fn());
 }
 
-export function computePopupPosition(config: PopupConfig) {
+export function computePopoverPosition(config: PopoverConfig) {
   const middleware = [
     getOffsetMiddleware(config),
     config.arrow ? arrow({ element: config.arrow, padding: config.arrowPadding }) : null,
     flip()
   ].filter(i => !!i);
-  const placement = `${config.position}${config.alignment === 'start' || config.alignment === 'end' ? `-${config.alignment}` : ''}` as `${PopupSides}-${PopupAlign}`;
-  return computePosition(config.anchor, config.popup, { placement: config.position !== 'center' ? placement : undefined, middleware, strategy: config.strategy });
+  const placement = `${config.position}${config.alignment === 'start' || config.alignment === 'end' ? `-${config.alignment}` : ''}` as `${PopoverSides}-${PopoverAlign}`;
+  return computePosition(config.anchor, config.popover, { placement: config.position !== 'center' ? placement : undefined, middleware, strategy: config.strategy });
 }
 
-function getOffsetMiddleware(config: PopupConfig): Middleware {
+function getOffsetMiddleware(config: PopoverConfig): Middleware {
   return offset(({ rects }) => {
     if (config.position === 'center') {
       return -rects.reference.height / 2 - rects.floating.height / 2;

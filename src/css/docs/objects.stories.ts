@@ -62,9 +62,9 @@ export const layers = {
         height: 200px;
       }
 
-      .popup {
-        background: var(--mlv-sys-layer-popup-background);
-        color: var(--mlv-sys-layer-popup-color);
+      .popover {
+        background: var(--mlv-sys-layer-popover-background);
+        color: var(--mlv-sys-layer-popover-color);
         padding: var(--mlv-ref-size-400);
         box-shadow: var(--mlv-ref-shadow-300);
         border-radius: var(--mlv-ref-border-radius-md);
@@ -99,8 +99,8 @@ export const layers = {
           </ul>
         </div>
       </div>
-      <div class="popup">
-        <h2>popup</h2>
+      <div class="popover">
+        <h2>popover</h2>
         <ul>
           <li>tooltips</li>
           <li>toasts</li>

@@ -129,7 +129,7 @@ export const Position = {
 
   #feedback-dialog {
     --max-width: 400px;
-    --mlv-sys-layer-popup-offset: 8px;
+    --mlv-sys-layer-popover-offset: 8px;
   }
 </style>
 <mlv-icon-button id="feedback-btn" icon-name="cancel" interaction="emphasize"></mlv-icon-button>

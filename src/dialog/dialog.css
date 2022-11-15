@@ -1,8 +1,8 @@
 :host {
   --mlv-sys-interaction-default-background: var(--mlv-sys-interaction-default-background-300);
-  --mlv-sys-layer-popup-arrow-padding: 6px;
-  --mlv-sys-layer-popup-arrow-offset: 4px;
-  --mlv-sys-layer-popup-offset: var(--mlv-ref-space-xxl);
+  --mlv-sys-layer-popover-arrow-padding: 6px;
+  --mlv-sys-layer-popover-arrow-offset: 4px;
+  --mlv-sys-layer-popover-offset: var(--mlv-ref-space-xxl);
   --border: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
   --border-radius: var(--mlv-ref-border-radius-lg);
   --background: var(--mlv-sys-layer-overlay-background);
@@ -54,4 +54,5 @@ mlv-icon-button {
   position: absolute;
   top: 18px;
   right: 18px;
+  z-index: 99;
 }

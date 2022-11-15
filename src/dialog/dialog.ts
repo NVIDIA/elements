@@ -1,16 +1,30 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { animationFade, PopupAlign, popupBaseStyles, PopupPosition, PopupType, TypePopupController, useStyles } from '@elements/elements/internal';
+import { animationFade, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './dialog.css?inline';
 
 /**
  * @alpha
+ * @event close
  * @element mlv-dialog
+ * @cssprop --border
+ * @cssprop --border-radius
+ * @cssprop --background
+ * @cssprop --color
+ * @cssprop --padding
+ * @cssprop --box-shadow
+ * @cssprop --gap
+ * @cssprop --max-width
+ * @cssprop --min-height
+ * @cssprop --mlv-sys-interaction-default-background
+ * @cssprop --mlv-sys-layer-popover-arrow-padding
+ * @cssprop --mlv-sys-layer-popover-arrow-offset
+ * @cssprop --mlv-sys-layer-popover-offset
  */
 export class Dialog extends LitElement {
-  @property({ type: String, reflect: true }) position: PopupPosition = 'center';
+  @property({ type: String, reflect: true }) position: PopoverPosition = 'center';
 
-  @property({ type: String, reflect: true }) alignment: PopupAlign;
+  @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
   @property({ type: String, reflect: true }) size: 'sm' | 'md' | 'lg' = 'md';
 
@@ -22,19 +36,19 @@ export class Dialog extends LitElement {
 
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
-  static styles = useStyles([popupBaseStyles, styles]);
+  static styles = useStyles([popoverBaseStyles, styles]);
 
-  get popupType(): PopupType {
+  get popoverType(): PopoverType {
     return this.modal ? 'auto' : 'manual';
   }
 
-  #typePopupController = new TypePopupController<Dialog>(this);
+  #typePopoverController = new TypePopoverController<Dialog>(this);
 
   render() {
     return html`
     <dialog ${animationFade(this)}>
       <div class="header">
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopupController.close()} icon-name="cancel" aria-label="close"></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" aria-label="close"></mlv-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
       <div class="content">

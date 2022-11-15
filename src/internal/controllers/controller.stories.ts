@@ -1,7 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { animate } from '@lit-labs/motion';
-import { MlvBaseButton, TypePopupController, PopupPosition, spread, PopupAlign, popupBaseStyles } from '@elements/elements/internal';
+import { MlvBaseButton, TypePopoverController, popoverPosition, spread, popoverAlign, popoverBaseStyles, animationFade } from '@elements/elements/internal';
 
 export default {
   title: 'Internal/Controllers'
@@ -95,14 +94,14 @@ export const baseButton = () => {
 </form>`;
 };
 
-class PopupDemo extends LitElement {
+class PopoverDemo extends LitElement {
   @property({ type: String, reflect: true }) anchor: string | HTMLElement;
 
-  @property({ type: String, reflect: true }) position: PopupPosition;
+  @property({ type: String, reflect: true }) position: popoverPosition;
 
-  @property({ type: String, reflect: true }) alignment: PopupAlign;;
+  @property({ type: String, reflect: true }) alignment: popoverAlign;;
 
-  @property({ type: String, reflect: true, attribute: 'popup-type' }) popupType: 'auto' | 'manual' | 'hint' = 'hint';
+  @property({ type: String, reflect: true, attribute: 'popover-type' }) popoverType: 'auto' | 'manual' | 'hint' = 'hint';
 
   @property({ type: Boolean, reflect: true }) arrow = true;
 
@@ -110,21 +109,21 @@ class PopupDemo extends LitElement {
 
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
-  get popupArrow() {
+  get popoverArrow() {
     return this.shadowRoot.querySelector<HTMLElement>('.arrow');
   }
 
-  get popupElement() {
+  get popoverElement() {
     return this.shadowRoot.querySelector<HTMLElement>('dialog');
   }
 
-  protected typePopupController = new TypePopupController<PopupDemo>(this);
+  protected typePopoverController = new TypePopoverController<PopoverDemo>(this);
 
-  static styles = [popupBaseStyles, css`
+  static styles = [popoverBaseStyles, css`
     :host {
-      --mlv-sys-layer-popup-arrow-padding: 6px;
-      --mlv-sys-layer-popup-arrow-offset: 2px;
-      --mlv-sys-layer-popup-offset: 2px;
+      --mlv-sys-layer-popover-arrow-padding: 6px;
+      --mlv-sys-layer-popover-arrow-offset: 2px;
+      --mlv-sys-layer-popover-offset: 2px;
     }
 
     dialog {
@@ -163,17 +162,17 @@ class PopupDemo extends LitElement {
 
   render() {
     return html`
-      <dialog ${animate({ keyframeOptions: { duration: 200, easing: 'ease-in-out' } })}>
+      <dialog ${animationFade(this)}>
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopupController.close()} icon-name="cancel" interaction="ghost" aria-label="close"></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.typepopoverController.close()} icon-name="cancel" interaction="ghost" aria-label="close"></mlv-icon-button>` : ''}
       </dialog>
     `;
   }
 }
-customElements.get('ui-popup') || customElements.define('ui-popup', PopupDemo);
+customElements.get('ui-popover') || customElements.define('ui-popover', PopoverDemo);
 
-export const PopupController = {
+export const PopoverController = {
   render: (args) => html`
     <style>
       #root-inner {
@@ -186,7 +185,7 @@ export const PopupController = {
       }
     </style>
 
-    <ui-popup ${spread(args)} style="--mlv-sys-layer-popup-offset: ${args.offset}px">popup</ui-popup>
+    <ui-popover ${spread(args)} style="--mlv-sys-layer-popover-offset: ${args.offset}px">popover</ui-popover>
     <mlv-card id="card">
       <mlv-card-content mlv-layout="align:center" style="width: 450px; height: 300px;">
         <mlv-button id="button">toggle</mlv-button>
@@ -194,9 +193,9 @@ export const PopupController = {
     </mlv-card>
     <script type="module">
       const button = document.querySelector('#button');
-      const popup = document.querySelector('ui-popup');
-      button.addEventListener('click', () => popup.hidden = false);
-      popup.addEventListener('close', () => popup.hidden = true);
+      const popover = document.querySelector('ui-popover');
+      button.addEventListener('click', () => popover.hidden = false);
+      popover.addEventListener('close', () => popover.hidden = true);
     </script>
   `,
   argTypes: {
@@ -214,7 +213,7 @@ export const PopupController = {
       options: ['button', 'card', 'body'],
       defaultValue: 'button'
     },
-    popupType: {
+    popoverType: {
       control: 'inline-radio',
       options: ['auto', 'manual', 'hint'],
       defaultValue: 'hint'
@@ -236,7 +235,7 @@ export const PopupController = {
   }
 };
 
-export const PopupControllerAlignment = {
+export const PopoverControllerAlignment = {
   render: () => html`
     <style>
     #root-inner {
@@ -250,31 +249,31 @@ export const PopupControllerAlignment = {
   </style>
 
   <mlv-card id="card" style="width: 450px; height: 300px;"></mlv-card>
-  <ui-popup anchor="card" popup-type="manual" position="top" alignment="start">top start</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="top">top center</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="top" alignment="end">top end</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="right" alignment="start">right start</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="right">right center</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="right" alignment="end">right end</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="bottom" alignment="start">bottom start</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="bottom">bottom center</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="bottom" alignment="end">bottom end</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="left" alignment="start">left start</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="left">left center</ui-popup>
-  <ui-popup anchor="card" popup-type="manual" position="left" alignment="end">left end</ui-popup>
+  <ui-popover anchor="card" popover-type="manual" position="top" alignment="start">top start</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="top">top center</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="top" alignment="end">top end</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="right" alignment="start">right start</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="right">right center</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="right" alignment="end">right end</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="bottom" alignment="start">bottom start</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="bottom">bottom center</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="bottom" alignment="end">bottom end</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="left" alignment="start">left start</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="left">left center</ui-popover>
+  <ui-popover anchor="card" popover-type="manual" position="left" alignment="end">left end</ui-popover>
 
-  <ui-popup popup-type="manual" position="center">center</ui-popup>
-  <ui-popup popup-type="manual" position="top" alignment="start">top start</ui-popup>
-  <ui-popup popup-type="manual" position="top">top center</ui-popup>
-  <ui-popup popup-type="manual" position="top" alignment="end">top end</ui-popup>
-  <ui-popup popup-type="manual" position="right" alignment="start">right start</ui-popup>
-  <ui-popup popup-type="manual" position="right">right center</ui-popup>
-  <ui-popup popup-type="manual" position="right" alignment="end">right end</ui-popup>
-  <ui-popup popup-type="manual" position="bottom" alignment="start">bottom start</ui-popup>
-  <ui-popup popup-type="manual" position="bottom">bottom center</ui-popup>
-  <ui-popup popup-type="manual" position="bottom" alignment="end">bottom end</ui-popup>
-  <ui-popup popup-type="manual" position="left" alignment="start">left start</ui-popup>
-  <ui-popup popup-type="manual" position="left">left center</ui-popup>
-  <ui-popup popup-type="manual" position="left" alignment="end">left end</ui-popup>
+  <ui-popover popover-type="manual" position="center">center</ui-popover>
+  <ui-popover popover-type="manual" position="top" alignment="start">top start</ui-popover>
+  <ui-popover popover-type="manual" position="top">top center</ui-popover>
+  <ui-popover popover-type="manual" position="top" alignment="end">top end</ui-popover>
+  <ui-popover popover-type="manual" position="right" alignment="start">right start</ui-popover>
+  <ui-popover popover-type="manual" position="right">right center</ui-popover>
+  <ui-popover popover-type="manual" position="right" alignment="end">right end</ui-popover>
+  <ui-popover popover-type="manual" position="bottom" alignment="start">bottom start</ui-popover>
+  <ui-popover popover-type="manual" position="bottom">bottom center</ui-popover>
+  <ui-popover popover-type="manual" position="bottom" alignment="end">bottom end</ui-popover>
+  <ui-popover popover-type="manual" position="left" alignment="start">left start</ui-popover>
+  <ui-popover popover-type="manual" position="left">left center</ui-popover>
+  <ui-popover popover-type="manual" position="left" alignment="end">left end</ui-popover>
   `
 }

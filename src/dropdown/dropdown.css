@@ -1,0 +1,62 @@
+:host {
+  --mlv-sys-interaction-default-background: var(--mlv-sys-interaction-default-background-300);
+  --mlv-sys-layer-popover-arrow-padding: 6px;
+  --mlv-sys-layer-popover-arrow-offset: 4px;
+  --mlv-sys-layer-popover-offset: 2px;
+  --arrow-transform: translate(0, -2px) rotate(-45deg);
+  --border: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  --border-radius: var(--mlv-ref-border-radius-md);
+  --background: var(--mlv-sys-layer-overlay-background);
+  --color: var(--mlv-sys-layer-overlay-color);
+  --padding: var(--mlv-ref-size-400);
+  --box-shadow: var(--mlv-ref-shadow-700);
+}
+
+dialog {
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  border: var(--border);
+  background: var(--background);
+  color: var(--color);
+  box-shadow: var(--box-shadow);
+  gap: var(--mlv-ref-space-sm);
+}
+
+dialog::backdrop {
+  background: transparent;
+}
+
+dialog:has(mlv-icon-button) {
+  padding-right: var(--mlv-ref-size-800);
+}
+
+mlv-icon-button {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.arrow {
+  width: var(--mlv-ref-size-400);
+  height: var(--mlv-ref-size-400);
+  background: var(--background);
+  transform: var(--arrow-transform);
+  border-radius: var(--mlv-ref-border-radius-xs);
+  position: absolute;
+}
+
+:host([position*='top']) {
+  --arrow-transform: translate(0, -2px) rotate(-45deg);
+}
+
+:host([position*='right']) {
+  --arrow-transform: translate(2px, 0) rotate(45deg);
+}
+
+:host([position*='bottom']) {
+  --arrow-transform: translate(0, 2px) rotate(45deg);
+}
+
+:host([position*='left']) {
+  --arrow-transform: translate(-2px, 0) rotate(45deg);
+}

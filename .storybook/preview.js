@@ -82,6 +82,7 @@ export const parameters = {
             'Documentation',
             'Size & Space',
             'Objects',
+            'Layers',
             'Interactions',
             'Status',
             'Examples'
