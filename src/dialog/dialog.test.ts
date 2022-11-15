@@ -34,18 +34,18 @@ describe('nve-dialog', () => {
 
   it('should use manual behavior when non-modal', async () => {
     expect(element.modal).toBe(undefined);
-    expect(element.popupType).toBe('manual');
+    expect(element.popoverType).toBe('manual');
     await elementIsStable(element);
 
     element.modal = true;
     await elementIsStable(element);
-    expect(element.popupType).toBe('auto');
+    expect(element.popoverType).toBe('auto');
   });
 
   it('should use auto behavior when modal', async () => {
     element.modal = true;
     await elementIsStable(element);
-    expect(element.popupType).toBe('auto');
+    expect(element.popoverType).toBe('auto');
   });
 
   it('should use default to center position', async () => {

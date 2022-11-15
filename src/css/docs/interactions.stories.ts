@@ -198,7 +198,7 @@ export const ContainerMenu = {
   `
 }
 
-export const PopupMenu = {
+export const PopoverMenu = {
   render: () => html`
     ${menuDemoStyles}
     <section nve-theme="root light" class="interaction-demo">
