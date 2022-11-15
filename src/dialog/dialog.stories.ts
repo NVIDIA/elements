@@ -129,7 +129,7 @@ export const Position = {
 
   #feedback-dialog {
     --max-width: 400px;
-    --nve-sys-layer-popup-offset: 8px;
+    --nve-sys-layer-popover-offset: 8px;
   }
 </style>
 <nve-icon-button id="feedback-btn" icon-name="cancel" interaction="emphasize"></nve-icon-button>

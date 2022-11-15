@@ -210,7 +210,7 @@
           "type": "color"
         }
       },
-      "popup": {
+      "popover": {
         "background": {
           "value": "Canvas",
           "type": "color"
