@@ -142,8 +142,9 @@ export const parameters = {
           'Month',
           'Time',
           'Week',
-          'Dropdown',
+          'Popovers',
           'Dialog',
+          'Dropdown',
           'Notification',
           'Panel',
           'Toast',
@@ -165,7 +166,7 @@ export const globalTypes = {
       items: [
         { value: '', title: 'Light' },
         { value: 'dark', title: 'Dark' },
-        { value: 'high-contrast', title: 'High Contrast' },
+        { value: 'high-contrast', title: 'High Contrast' }
       ],
     },
   },

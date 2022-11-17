@@ -1,13 +1,29 @@
 :host {
   --border-radius: var(--nve-ref-border-radius-full);
-  --padding: var(--nve-ref-space-xxs);
+  --padding: var(--nve-ref-size-100);
   --line-height: 0;
   --gap: 0;
   --height: auto;
 }
 
+:host([size='sm']) {
+  --padding: var(--nve-ref-size-100);
+  --height: auto;
+
+  & nve-icon {
+    --width: var(--nve-ref-size-400);
+    --height: var(--nve-ref-size-400);
+  }
+}
+
+:host([size='lg']) {
+  --padding: var(--nve-ref-size-300);
+  --height: auto;
+}
+
 :host([interaction*='ghost']) {
   --color: var(--nve-sys-status-neutral-background);
+  --padding: var(--nve-ref-size-100);
 }
 
 nve-icon {

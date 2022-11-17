@@ -2,18 +2,20 @@ import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@elements/elements/test';
 import { PopoverAlign, PopoverPosition, TypePopoverController } from '@elements/elements/internal';
 
 @customElement('type-popover-controller-test-element')
 class TypePopoverControllerTestElement extends LitElement {
   @property({ type: String, reflect: true }) anchor: string | HTMLElement;
 
+  @property({ type: String, reflect: true }) trigger: string | HTMLElement;
+
   @property({ type: String, reflect: true }) position: PopoverPosition;
 
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
-  @property({ type: String, reflect: true }) popoverType: 'auto' | 'manual' | 'hint' = 'hint';
+  @property({ type: String, reflect: true }) popoverType: 'auto' | 'manual' | 'hint' = 'auto';
 
   @property({ type: Boolean, reflect: true }) arrow = true;
 
@@ -75,14 +77,16 @@ class TypePopoverControllerTestElement extends LitElement {
 describe('type-popover.controller', () => {
   let element: TypePopoverControllerTestElement;
   let dialog: HTMLDialogElement;
+  let button: HTMLButtonElement;
   let fixture: HTMLElement;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <button id="btn-anchor">anchor</button>
-    <type-popover-controller-test-element id="btn-anchor" hidden></type-popover-controller-test-element>
+    <button id="btn">anchor</button>
+    <type-popover-controller-test-element .anchor=${'btn'} .trigger=${'btn'} hidden></type-popover-controller-test-element>
     `);
     element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
+    button = fixture.querySelector('button');
     dialog = element.shadowRoot.querySelector('dialog');
     await element.updateComplete;
   });
@@ -108,10 +112,30 @@ describe('type-popover.controller', () => {
 
   it('should sync hidden attribute of host element to the inner dialog element', async () => {
     await elementIsStable(element);
-    expect(dialog.hidden).toBe(true);
+    expect(element.inert).toBe(true);
 
     element.hidden = false;
     await elementIsStable(element);
-    expect(dialog.hidden).toBe(false);
+    expect(element.inert).toBe(false);
+  });
+
+  it('should trigger close event when associated trigger is activated', async () => {
+    await elementIsStable(element);
+    const event = untilEvent(element, 'close');
+    const closeBtn = dialog.querySelector('button');
+    emulateClick(closeBtn);
+    expect((await event).target).toBe(element);
+  });
+
+  it('should trigger open event when associated trigger is activated', async () => {
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    expect(element.trigger).toBe('btn');
+    expect(element.anchor).toBe('btn');
+
+    const event = untilEvent(element, 'open');
+    emulateClick(button);
+    expect((await event).target).toBe(element);
   });
 });
