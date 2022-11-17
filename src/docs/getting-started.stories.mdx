@@ -1,10 +1,20 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
 <Meta title="About/Getting Started" />
+
+<Story id="internal-integration--empty" />
 
 # MagLev Elements
 
-## Foundational building blocks for MagLev UI Patterns.
+## Foundational building blocks for MagLev UI.
 
 ### Installation
+
+Configure npm to use the internal package registry.
+
+```bash
+npm --global config set @elements/elements:registry https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
+```
 
 To install the MagLev UI Elements, run the following command:
 
@@ -31,16 +41,16 @@ import '@elements/elements/button/define.js';
 
 <mlv-button interaction="emphasize">hello there</mlv-button>
 
-Alternatively, you can import the entire @elements/elements library, but will incur a larger bundle size.
-```javascript
-import '@elements/elements';
-```
+<hr /><br />
 
 <section mlv-layout="row gap:sm align:center">
   <mlv-button>
-    <a href="./?path=/story/about-angular--page">Angular Installation</a>
+    <a href="./?path=/story/about-angular--page">Angular Integration</a>
   </mlv-button>
   <mlv-button>
-    <a href="./?path=/story/about-lit--page">Lit Installation</a>
+    <a href="./?path=/story/about-lit--page">Lit Integration</a>
+  </mlv-button>
+  <mlv-button>
+    <a href="./?path=/story/about-react--page">React Integration</a>
   </mlv-button>
 </section>

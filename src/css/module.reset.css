@@ -7,3 +7,7 @@ body[mlv-theme],
   font-family: var(--mlv-ref-font-family-inter) !important;
   text-rendering: optimizeSpeed;
 }
+
+*:has([mlv-popover]) {
+  contain: initial;
+}

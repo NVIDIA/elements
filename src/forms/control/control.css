@@ -35,6 +35,10 @@
   outline: 0 !important;
 }
 
+::slotted(mlv-button[mlv-control]) {
+  width: 100%;
+}
+
 :host([mlv-control]:focus-within) [input] {
   outline: Highlight solid 2px !important;
   outline: 5px auto -webkit-focus-ring-color !important;

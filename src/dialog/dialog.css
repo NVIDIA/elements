@@ -12,6 +12,7 @@
   --gap: var(--mlv-ref-space-sm);
   --max-width: 600px;
   --min-height: 250px;
+  --width: 100%;
   display: contents;
 }
 
@@ -32,7 +33,7 @@ dialog {
   box-shadow: var(--box-shadow);
   max-width: var(--max-width);
   min-height: var(--min-height);
-  width: 100%;
+  width: var(--width);
 }
 
 dialog::backdrop {
@@ -44,9 +45,14 @@ dialog::backdrop {
   gap: var(--gap);
 }
 
+.header:has(mlv-icon-button) {
+  min-height: var(--mlv-ref-size-300);
+}
+
 .content {
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: var(--gap);
 }
 

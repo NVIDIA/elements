@@ -42,6 +42,7 @@ describe('mlv-dialog', () => {
     expect(element.popoverType).toBe('auto');
   });
 
+  // https://open-ui.org/components/popup.research.explainer#api-shape
   it('should use auto behavior when modal', async () => {
     element.modal = true;
     await elementIsStable(element);

@@ -11,6 +11,5 @@ export function animationFade(host: HTMLElement, keyframeOptions = defaults) {
     duration: parseFloat(styles.getPropertyValue(keyframeOptions.duration)),
     easing: styles.getPropertyValue(keyframeOptions.easing)
   };
-  
-  return animate({ properties: ['opacity'], keyframeOptions: options });
+  return animate({ skipInitial: true, properties: ['opacity'], keyframeOptions: options });
 }

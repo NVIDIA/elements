@@ -81,6 +81,14 @@ export const GhostInteractions = {
   `
 }
 
+export const Size = {
+  render: () => html`
+    <mlv-button size="sm">small</mlv-button>
+    <mlv-button>default</mlv-button>
+    <mlv-button size="lg">large</mlv-button>
+  `
+}
+
 export const Link = {
   render: () => html`
     <mlv-button><a href="#">default</a></mlv-button>
@@ -129,4 +137,15 @@ export const FormSubmit = {
   });
 </script>  
 `
+}
+
+export const FormControl = {
+  render: () => html`
+<div mlv-layout="row gap:xs" style="max-width: 400px">
+  <mlv-search>
+    <input type="search" placeholder="search" aria-label="search" />
+  </mlv-search>
+  <mlv-button mlv-control>filter option <mlv-icon name="chevron-down"></mlv-icon></mlv-button>
+</div>
+  `
 }

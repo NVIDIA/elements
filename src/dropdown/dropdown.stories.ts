@@ -90,7 +90,32 @@ export const RadioGroup = {
       </mlv-radio>
     </mlv-radio-group>
   </mlv-dropdown>
-  <mlv-button id="btn">button</mlv-button>
+  <mlv-button id="btn" mlv-control>test sort <mlv-icon name="chevron-down"></mlv-icon></mlv-button>
+</div>
+  `
+};
+
+export const CheckboxGroup = {
+  render: () => html`
+<div mlv-layout="row align:center" style="height: 250px">
+  <mlv-dropdown anchor="btn">
+    <mlv-checkbox-group style="width: 250px">
+      <label>Test Suites</label>
+      <mlv-checkbox>
+        <label>Local</label>
+        <input type="checkbox" />
+      </mlv-checkbox>
+      <mlv-checkbox>
+        <label>Nightly</label>
+        <input type="checkbox" checked />
+      </mlv-checkbox>
+      <mlv-checkbox>
+        <label>Remote</label>
+        <input type="checkbox" />
+      </mlv-checkbox>
+    </mlv-checkbox-group>
+  </mlv-dropdown>
+  <mlv-button id="btn" mlv-control>test suites <mlv-icon name="chevron-down"></mlv-icon></mlv-button>
 </div>
   `
 };

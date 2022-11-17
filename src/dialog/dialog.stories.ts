@@ -120,47 +120,9 @@ export const Alignment = {
 
 export const Position = {
   render: () => html`
-<style>
-  #feedback-btn {
-    --padding: 12px;
-    position: absolute;
-    inset: auto 36px 36px auto;
-  }
-
-  #feedback-dialog {
-    --max-width: 400px;
-    --mlv-sys-layer-popover-offset: 8px;
-  }
-</style>
-<mlv-icon-button id="feedback-btn" icon-name="cancel" interaction="emphasize"></mlv-icon-button>
-<mlv-dialog id="feedback-dialog" position="top" alignment="start" anchor="feedback-btn">
-  <div mlv-layout="column gap:lg">
-    <mlv-select>
-      <label>Feedback type</label>
-      <select>
-        <option value="1">Feature Request</option>
-        <option value="2">Bug/Issue</option>
-        <option value="3">Other</option>
-      </select>
-    </mlv-select>
-    <mlv-select>
-      <label>Product</label>
-      <select>
-        <option value="1">Dashboard</option>
-        <option value="2">Analytics</option>
-        <option value="3">Tasks</option>
-      </select>
-    </mlv-select>
-    <mlv-input>
-      <label>Location</label>
-      <input type="url" placeholder="https://example.com" />
-    </mlv-input>
-    <mlv-textarea>
-      <label>Feedback</label>
-      <textarea placeholder="description..." rows="8"></textarea>
-    </mlv-textarea>
-    <mlv-button style="--width: 100%">Submit Feedback</mlv-button>
-  </div>
+<mlv-dialog size="sm" position="bottom" alignment="end" closable>
+  <h3 mlv-text="heading">Position</h3>
+  <p mlv-text="body">some text content in a small dialog</p>
 </mlv-dialog>
   `
 };

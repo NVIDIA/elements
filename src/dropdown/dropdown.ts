@@ -7,6 +7,7 @@ import styles from './dropdown.css?inline';
 /**
  * @alpha
  * @element mlv-dropdown
+ * @event open
  * @event close
  * @slot - default slot for dropdown content
  * @cssprop --border
@@ -23,22 +24,50 @@ import styles from './dropdown.css?inline';
  * @cssprop --mlv-sys-layer-popover-offset
  */
 export class Dropdown extends LitElement {
+  /**
+   * The anchor provides the element that the popover should position relative to.
+   * Anchor can accept a idref string within the same render root or a HTMLElement DOM reference.
+   */
   @property({ type: String }) anchor: string | HTMLElement;
 
+  /**
+   * The trigger defines what element triggers an `open` interaction event.
+   * A trigger can accept a idref string within the same render root or a HTMLElement DOM reference.
+   */
+  @property({ type: String }) trigger: string | HTMLElement;
+
+  /**
+   * Sets the side position of the popover relative to the provided anchor element.
+   */
   @property({ type: String, reflect: true }) position: PopoverPosition = 'bottom';
 
+  /**
+   * Sets the alignment of the popover relative to the provided anchor element.
+   * If an arrow exists the alginment will be relative to the arrow against the anchor.
+   */
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
+  /**
+   * Determines if a close button should render within dropdown. Non-closable
+   * dropdowns can be used for menu or selection patterns.
+   */
   @property({ type: Boolean }) closable = false;
 
+  /**
+   * Determines if an arrow should be rendered.
+   */
   @property({ type: Boolean }) arrow = false;
 
+  /**
+   * Determines if popover should be rendered and positioned.
+   */
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
   @query('.arrow') popoverArrow: HTMLElement;
 
   static styles = useStyles([popoverBaseStyles, styles]);
 
+  /** @private */
   readonly popoverType: PopoverType = 'auto';
 
   #typePopoverController = new TypePopoverController<Dropdown>(this);

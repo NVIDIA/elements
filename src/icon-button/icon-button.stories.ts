@@ -52,6 +52,14 @@ export const Interactions = {
   `
 }
 
+export const Size = {
+  render: () => html`
+    <mlv-icon-button size="sm" icon-name="analytics"></mlv-icon-button>
+    <mlv-icon-button icon-name="analytics"></mlv-icon-button>
+    <mlv-icon-button size="lg" icon-name="analytics"></mlv-icon-button>
+  `
+}
+
 export const GhostInteractions = {
   render: () => html`
     <mlv-icon-button interaction="ghost" icon-name="analytics"></mlv-icon-button>
@@ -80,6 +88,7 @@ export const Themes = {
       <mlv-icon-button interaction="destructive" icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button interaction="ghost" icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button disabled icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button interaction="inverse" icon-name="analytics"></mlv-icon-button>
     </div>
     <div mlv-theme="root dark">
       <mlv-icon-button icon-name="analytics"></mlv-icon-button>
@@ -87,6 +96,7 @@ export const Themes = {
       <mlv-icon-button interaction="destructive" icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button interaction="ghost" icon-name="analytics"></mlv-icon-button>
       <mlv-icon-button disabled icon-name="analytics"></mlv-icon-button>
+      <mlv-icon-button interaction="inverse" icon-name="analytics"></mlv-icon-button>
     </div>
   `
 }

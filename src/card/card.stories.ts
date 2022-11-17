@@ -45,7 +45,7 @@ export const Default = {
       }
     </style>
 
-    <div mlv-theme="">
+    <div mlv-theme="root">
       <mlv-card>
         ${when(
           args.showHeader,

@@ -430,7 +430,7 @@ export const Tabs = {
       }
 
       .mlv-tab[selected] {
-        background: var(--mlv-sys-interaction-default-selected-background);
+        background: var(--mlv-sys-interaction-selected-background);
       }
 
       .mlv-tab[disabled] {

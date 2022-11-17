@@ -6,11 +6,12 @@ export type { Placement, PopoverAlign as PopoverAlign, PopoverPosition as Popove
 
 export interface Popover extends ReactiveElement {
   anchor?: HTMLElement | string;
+  trigger?: HTMLElement | string;
   position?: PopoverPosition;
   alignment?: PopoverAlign;
   popoverArrow?: HTMLElement;
   popoverType?: PopoverType;
-  autoClose?: number;
+  closeTimeout?: number;
 }
 
 /**
@@ -31,6 +32,11 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     return anchor ? anchor : document.body;
   }
 
+  get #trigger() {
+    const id = typeof this.host.trigger === 'string' ? this.host.trigger : this.host.trigger?.id;
+    return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === id) as HTMLElement;
+  }
+
   get #config(): PopoverConfig {
     return {
       position: this.host.position,
@@ -41,7 +47,6 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     }
   }
 
-  #popoverType: PopoverType;
   #cleanup: ({ disconnect: () => void })[];
 
   constructor(private host: T) {
@@ -55,16 +60,15 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
       { disconnect: popoverRenderUpdate(this.#config, () => this.#calculatePosition()) },
       getAttributeChanges(this.host, 'hidden', () => this.#update())
     ];
+
+    this.#addTriggerInteractions();
+    this.host.setAttribute('mlv-popover', '');
   }
 
   async hostUpdated() {
     await this.host.updateComplete;
-    this.#updatePopoverType();
     this.#calculatePosition();
-
-    if ((this.#dialog as any)?.open && this.host.hidden) {
-      this.#dialog.close();
-    }
+    this.#updateVisibility();
   }
 
   hostDisconnected() {
@@ -76,7 +80,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     this.#updateVisibility();
     this.#toggleLightDismiss();
     this.#calculatePosition();
-    this.#autoClose();
+    this.#closeTimeout();
   }
 
   #lightDismiss = ((e: PointerEvent) => {
@@ -87,39 +91,50 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   async #toggleLightDismiss() {
     document.removeEventListener('click', this.#lightDismiss);
-    if (!this.host.hasAttribute('hidden') && this.host.popoverType !== 'manual' && !this.host.autoClose) {
+    if (!this.host.hasAttribute('hidden') && this.host.popoverType !== 'manual' && !this.host.closeTimeout) {
       await new Promise(r => requestAnimationFrame(r));
       document.addEventListener('click', this.#lightDismiss);
     }
   }
 
-  #updatePopoverType() {
-    if (this.#popoverType !== this.host.popoverType) {
-      this.#popoverType = this.host.popoverType;
-      this.#updateVisibility();
+  #addTriggerInteractions() {
+    if (this.#trigger && this.host.popoverType === 'hint') {
+      this.#trigger.addEventListener('mousemove', () => this.open());
+      this.#trigger.addEventListener('mouseleave', () => this.close());
+      this.#trigger.addEventListener('focus', () => this.open());
+      this.#trigger.addEventListener('focusout', () => this.close());
+    } else if (this.#trigger) {
+      this.#trigger.addEventListener('click', () => this.open());
     }
   }
 
-  #autoClose() {
-    if (!this.host.hidden && this.host.autoClose) {
-      setTimeout(() => this.close(), this.host.autoClose);
+  #closeTimeout() {
+    if (!this.host.hidden && this.host.closeTimeout) {
+      setTimeout(() => this.close(), this.host.closeTimeout);
     }
   }
 
   #updateVisibility() {
     if (this.#dialog) {
-      this.#dialog.removeAttribute('open');
-      this.#dialog.hidden = this.host.hidden;
-      if (!this.host.hidden && this.host.popoverType !== 'manual') {
-        this.host.popoverType === 'auto' ? this.#dialog.showModal() : this.#dialog.show();
+      (this.host as any).inert = this.host.hidden;
+      if (!this.host.hidden && !this.#dialog.open && this.host.popoverType === 'auto') {
+        this.#dialog.showModal();
+      } else if (this.host.hidden) {
+        this.#dialog.close();
       }
     }
   }
 
   close() {
     this.host.dispatchEvent(new CustomEvent('close'));
-    if (this.#dialog && this.host.hidden) {
+    if (this.#dialog.open && this.host.hidden) {
       this.#dialog.close();
+    }
+  }
+
+  open() {
+    if (this.host.hidden) {
+      this.host.dispatchEvent(new CustomEvent('open'));
     }
   }
 
