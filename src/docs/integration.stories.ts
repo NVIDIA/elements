@@ -4,7 +4,7 @@ import typography from '@elements/elements/css/module.typography.css';
 import layout from '@elements/elements/css/module.layout.css';
 
 export default {
-  title: 'Internal/Examples/Integration'
+  title: 'Internal/Integration'
 };
 
 @customElement('my-element')

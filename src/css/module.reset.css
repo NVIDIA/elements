@@ -7,3 +7,7 @@ body[nve-theme],
   font-family: var(--nve-ref-font-family-inter) !important;
   text-rendering: optimizeSpeed;
 }
+
+*:has([nve-popover]) {
+  contain: initial;
+}

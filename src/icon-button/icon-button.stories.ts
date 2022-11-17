@@ -52,6 +52,14 @@ export const Interactions = {
   `
 }
 
+export const Size = {
+  render: () => html`
+    <nve-icon-button size="sm" icon-name="analytics"></nve-icon-button>
+    <nve-icon-button icon-name="analytics"></nve-icon-button>
+    <nve-icon-button size="lg" icon-name="analytics"></nve-icon-button>
+  `
+}
+
 export const GhostInteractions = {
   render: () => html`
     <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
@@ -80,6 +88,7 @@ export const Themes = {
       <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>
       <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
       <nve-icon-button disabled icon-name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="inverse" icon-name="analytics"></nve-icon-button>
     </div>
     <div nve-theme="root dark">
       <nve-icon-button icon-name="analytics"></nve-icon-button>
@@ -87,6 +96,7 @@ export const Themes = {
       <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>
       <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
       <nve-icon-button disabled icon-name="analytics"></nve-icon-button>
+      <nve-icon-button interaction="inverse" icon-name="analytics"></nve-icon-button>
     </div>
   `
 }

@@ -81,6 +81,14 @@ export const GhostInteractions = {
   `
 }
 
+export const Size = {
+  render: () => html`
+    <nve-button size="sm">small</nve-button>
+    <nve-button>default</nve-button>
+    <nve-button size="lg">large</nve-button>
+  `
+}
+
 export const Link = {
   render: () => html`
     <nve-button><a href="#">default</a></nve-button>
@@ -129,4 +137,15 @@ export const FormSubmit = {
   });
 </script>  
 `
+}
+
+export const FormControl = {
+  render: () => html`
+<div nve-layout="row gap:xs" style="max-width: 400px">
+  <nve-search>
+    <input type="search" placeholder="search" aria-label="search" />
+  </nve-search>
+  <nve-button nve-control>filter option <nve-icon name="chevron-down"></nve-icon></nve-button>
+</div>
+  `
 }

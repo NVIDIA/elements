@@ -1,0 +1,14 @@
+:host {
+  --nve-sys-layer-popover-offset: var(--nve-ref-space-xxl);
+  --box-shadow: var(--nve-ref-shadow-200);
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 200px;
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--nve-ref-space-sm);
+}

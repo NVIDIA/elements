@@ -6,11 +6,12 @@
   --font-weight: var(--nve-ref-font-weight-semibold);
   --font-size: var(--nve-ref-font-size-200);
   --text-decoration: none;
+  --text-align: center;
   --cursor: pointer;
   --gap: var(--nve-ref-space-xxs);
   --height: var(--nve-ref-size-800);
   --_icon-color: var(--color);
-  --width: fit-content;
+  --width: initial;
   display: inline-flex;
   position: relative;
   outline: 0;
@@ -22,9 +23,10 @@
   background: var(--background);
   padding: var(--padding);
   height: var(--height);
-  width: var(--width);
+  width: 100%;
   border-radius: var(--border-radius);
   text-decoration: var(--text-decoration);
+  text-align: var(--text-align);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   cursor: var(--cursor);
@@ -33,6 +35,8 @@
   place-items: center;
   justify-content: center;
   appearance: none;
+  user-select: none;
+  white-space: nowrap;
   line-height: 1.2em;
 }
 
@@ -60,6 +64,37 @@
   --cursor: not-allowed;
 }
 
+:host([nve-control]) {
+  --text-align: start;
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --font-weight: var(--nve-ref-font-weight-regular);
+  --font-size: var(--nve-ref-font-size-300);
+  --padding: var(--nve-ref-size-300);
+
+  & [internal-host] {
+    justify-content: start;
+  }
+
+  & ::slotted(nve-icon[name='chevron-down']) {
+    --color: var(--nve-sys-status-neutral-background);
+    margin-inline-start: auto;
+  }
+
+  &:host(:hover) [interaction-state] {
+    --nve-sys-interaction-state-alpha: 0;
+  }
+}
+
+:host([size='sm']) {
+  --height: var(--nve-ref-size-700);
+  --padding: 0 var(--nve-ref-size-200);
+}
+
+:host([size='lg']) {
+  --height: var(--nve-ref-size-900);
+  --padding: 0 var(--nve-ref-size-600);
+}
+
 :host([readonly]) {
   --text-decoration: none !important;
   --cursor: cursor !important;
@@ -77,8 +112,14 @@
   --nve-sys-interaction-state-lightness: 0%;
 }
 
+:host([interaction='inverse']) {
+  --color: var(--nve-sys-interaction-default-background);
+  --background: var(--nve-sys-interaction-default-color);
+}
+
 :host([interaction*='ghost']) {
   --background: transparent;
+  --padding: 0 var(--nve-ref-size-200);
   --_icon-color: var(--color);
 
   &:host(:hover) {
