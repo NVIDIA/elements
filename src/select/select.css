@@ -6,6 +6,7 @@
   --color: var(--nve-sys-interaction-default-color);
   --border-radius: var(--nve-ref-border-radius-sm);
   --border: 0;
+  --cursor: pointer;
   width: 100%;
 }
 
@@ -15,7 +16,6 @@
   border: var(--border);
   border-radius: var(--border-radius);
   color: var(--color);
-  cursor: var(--cursor);
   display: flex;
   align-content: stretch;
   position: relative;
@@ -39,6 +39,7 @@
   border: 0 !important;
   background: none !important;
   display: block !important;
+  cursor: var(--cursor) !important;
 }
 
 ::slotted(select[multiple]) {

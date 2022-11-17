@@ -45,7 +45,7 @@ export const Default = {
       }
     </style>
 
-    <div nve-theme="">
+    <div nve-theme="root">
       <nve-card>
         ${when(
           args.showHeader,

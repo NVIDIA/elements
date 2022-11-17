@@ -90,7 +90,32 @@ export const RadioGroup = {
       </nve-radio>
     </nve-radio-group>
   </nve-dropdown>
-  <nve-button id="btn">button</nve-button>
+  <nve-button id="btn" nve-control>test sort <nve-icon name="chevron-down"></nve-icon></nve-button>
+</div>
+  `
+};
+
+export const CheckboxGroup = {
+  render: () => html`
+<div nve-layout="row align:center" style="height: 250px">
+  <nve-dropdown anchor="btn">
+    <nve-checkbox-group style="width: 250px">
+      <label>Test Suites</label>
+      <nve-checkbox>
+        <label>Local</label>
+        <input type="checkbox" />
+      </nve-checkbox>
+      <nve-checkbox>
+        <label>Nightly</label>
+        <input type="checkbox" checked />
+      </nve-checkbox>
+      <nve-checkbox>
+        <label>Remote</label>
+        <input type="checkbox" />
+      </nve-checkbox>
+    </nve-checkbox-group>
+  </nve-dropdown>
+  <nve-button id="btn" nve-control>test suites <nve-icon name="chevron-down"></nve-icon></nve-button>
 </div>
   `
 };

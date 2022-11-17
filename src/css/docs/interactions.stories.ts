@@ -430,7 +430,7 @@ export const Tabs = {
       }
 
       .nve-tab[selected] {
-        background: var(--nve-sys-interaction-default-selected-background);
+        background: var(--nve-sys-interaction-selected-background);
       }
 
       .nve-tab[disabled] {

@@ -1,0 +1,76 @@
+:host {
+  --nve-sys-layer-popover-arrow-offset: var(--nve-ref-size-100);
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+  --nve-sys-layer-popover-offset: var(--nve-ref-space-md);
+  --background: var(--nve-sys-layer-popover-background);
+  --border-radius: var(--nve-ref-border-radius-md);
+  --color: var(--nve-sys-layer-popover-color);
+  --font-size: var(--nve-ref-font-size-200);
+  --box-shadow: var(--nve-ref-shadow-100);
+  --gap: var(--nve-ref-size-200);
+  --_gap: var(--gap);
+}
+
+dialog {
+  background: var(--background);
+  font-size: var(--font-size);
+  gap: var(--gap);
+  color: var(--color);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+dialog:has(nve-icon-button) {
+  padding-right: var(--nve-ref-size-800);
+}
+
+:host([status='accent']) {
+  --background: var(--nve-sys-status-accent-background);
+  --color: var(--nve-sys-status-accent-color);
+}
+
+:host([status='success']) {
+  --background: var(--nve-sys-status-success-background);
+  --color: var(--nve-sys-status-success-color);
+}
+
+:host([status='warning']) {
+  --background: var(--nve-sys-status-warning-background);
+  --color: var(--nve-sys-status-warning-color);
+}
+
+:host([status='danger']) {
+  --background: var(--nve-sys-status-danger-background);
+  --color: var(--nve-sys-status-danger-color);
+}
+
+nve-alert-group:not([status]),
+nve-alert-group[status='info'] {
+  --background: var(--nve-sys-layer-popover-background);
+  --color: var(--nve-sys-layer-popover-color);
+}
+
+nve-icon {
+  --color: inherit;
+}
+
+nve-icon-button {
+  --color: inherit;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+::slotted(nve-button[interaction='ghost']) {
+  --color: inherit;
+  margin-inline-end: calc(var(--_gap) / -2);
+  margin-inline-start: calc(var(--_gap) * 2);
+}
+
+::slotted([nve-text]) {
+  color: inherit !important;
+}

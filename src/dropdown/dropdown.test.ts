@@ -38,6 +38,7 @@ describe('nve-dropdown', () => {
     expect(element.shadowRoot.querySelector('.arrow').tagName).toBe('DIV');
   });
 
+  // https://open-ui.org/components/popup.research.explainer#api-shape
   it('should default to auto behavior', async () => {
     await elementIsStable(element);
     expect(element.popoverType).toBe('auto');
