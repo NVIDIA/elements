@@ -6,7 +6,13 @@ if (!(window as any).process) {
   (window as any).process = { env: { NODE_ENV: 'production' } }; // floating-ui
 }
 
-export type PopoverType = 'auto' | 'manual' | 'hint'; // https://open-ui.org/components/popup.research.explainer#api-shape
+/**
+ * https://open-ui.org/components/popup.research.explainer#api-shape
+ * auto - light dismiss, focus on open, return to trigger
+ * manual - no light dismiss, no auto focus
+ * hint - no light dismiss, no auto focus, open/close on hover/focus
+ */
+export type PopoverType = 'auto' | 'manual' | 'hint';
 export type PopoverAlign = 'start' | 'end';
 export type PopoverSides = 'top' | 'bottom' | 'left' | 'right';
 export type PopoverPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
@@ -26,6 +32,7 @@ export interface PopoverConfig {
 
 export const popoverBaseStyles = css`
 :host {
+  --width: max-content;
   contain: initial;
   position: fixed;
   top: 0;
@@ -40,13 +47,13 @@ export const popoverBaseStyles = css`
 
 .popover,
 dialog {
+  width: var(--width);
   background: none;
   font-family: inherit;
   display: flex;
   flex-direction: column;
   overflow: visible;
   position: fixed;
-  width: fit-content;
   white-space: nowrap;
   z-index: 9999;
   border: 0;
@@ -56,14 +63,8 @@ dialog {
   user-select: text;
 }
 
-.popover[hidden],
-dialog[hidden] {
-  display: flex !important;
-  pointer-events: none !important;
-}
-
-.popover:not([hidden]),
-dialog:not([hidden]) {
+:host(:not([hidden])) .popover,
+:host(:not([hidden])) dialog {
   opacity: 1;
 }
 `;
@@ -101,7 +102,7 @@ export function computePopoverPosition(config: PopoverConfig) {
   const middleware = [
     getOffsetMiddleware(config),
     config.arrow ? arrow({ element: config.arrow, padding: config.arrowPadding }) : null,
-    flip()
+    config.anchor !== document.body ? flip() : null
   ].filter(i => !!i);
   const placement = `${config.position}${config.alignment === 'start' || config.alignment === 'end' ? `-${config.alignment}` : ''}` as `${PopoverSides}-${PopoverAlign}`;
   return computePosition(config.anchor, config.popover, { placement: config.position !== 'center' ? placement : undefined, middleware, strategy: config.strategy });

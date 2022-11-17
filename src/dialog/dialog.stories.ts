@@ -120,47 +120,9 @@ export const Alignment = {
 
 export const Position = {
   render: () => html`
-<style>
-  #feedback-btn {
-    --padding: 12px;
-    position: absolute;
-    inset: auto 36px 36px auto;
-  }
-
-  #feedback-dialog {
-    --max-width: 400px;
-    --nve-sys-layer-popover-offset: 8px;
-  }
-</style>
-<nve-icon-button id="feedback-btn" icon-name="cancel" interaction="emphasize"></nve-icon-button>
-<nve-dialog id="feedback-dialog" position="top" alignment="start" anchor="feedback-btn">
-  <div nve-layout="column gap:lg">
-    <nve-select>
-      <label>Feedback type</label>
-      <select>
-        <option value="1">Feature Request</option>
-        <option value="2">Bug/Issue</option>
-        <option value="3">Other</option>
-      </select>
-    </nve-select>
-    <nve-select>
-      <label>Product</label>
-      <select>
-        <option value="1">Dashboard</option>
-        <option value="2">Analytics</option>
-        <option value="3">Tasks</option>
-      </select>
-    </nve-select>
-    <nve-input>
-      <label>Location</label>
-      <input type="url" placeholder="https://example.com" />
-    </nve-input>
-    <nve-textarea>
-      <label>Feedback</label>
-      <textarea placeholder="description..." rows="8"></textarea>
-    </nve-textarea>
-    <nve-button style="--width: 100%">Submit Feedback</nve-button>
-  </div>
+<nve-dialog size="sm" position="bottom" alignment="end" closable>
+  <h3 nve-text="heading">Position</h3>
+  <p nve-text="body">some text content in a small dialog</p>
 </nve-dialog>
   `
 };

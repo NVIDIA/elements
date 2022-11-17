@@ -3,6 +3,8 @@ export type Interaction = 'emphasize' | 'destructive';
 
 export type GhostInteraction = 'ghost' | `${'ghost'}-${Interaction}`;
 
+export type Inverse = 'inverse';
+
 export type InlinePosition = 'start' | 'center' | 'end';
 
 export type BlockPosition = 'start' | 'center' | 'end';

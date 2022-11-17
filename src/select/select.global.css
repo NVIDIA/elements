@@ -8,16 +8,6 @@ nve-select option {
 }
 
 nve-select option:checked {
-  background: var(--nve-sys-interaction-default-selected-background) !important;
-  color: var(--nve-sys-interaction-default-selected-color) !important;
-}
-
-nve-select option:hover {
-  background: var(--nve-sys-interaction-default-hover-background) !important;
-  color: var(--nve-sys-interaction-default-hover-color) !important;
-}
-
-nve-select option:active {
-  background: var(--nve-sys-interaction-default-active-background) !important;
-  color: var(--nve-sys-interaction-default-active-color) !important;
+  background: var(--nve-sys-interaction-selected-background) !important;
+  color: var(--nve-sys-interaction-selected-color) !important;
 }

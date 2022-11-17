@@ -143,6 +143,18 @@
           "value": "ButtonFace",
           "type": "color"
         },
+        "background-100": {
+          "value": "ButtonFace",
+          "type": "color"
+        },
+        "background-200": {
+          "value": "ButtonFace",
+          "type": "color"
+        },
+        "background-300": {
+          "value": "ButtonFace",
+          "type": "color"
+        },
         "color": {
           "value": "ButtonText",
           "type": "color"

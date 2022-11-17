@@ -1,0 +1,62 @@
+:host {
+  --nve-sys-layer-popover-arrow-padding: 6px;
+  --nve-sys-layer-popover-arrow-offset: 4px;
+  --nve-sys-layer-popover-offset: 2px;
+  --border-radius: var(--nve-ref-border-radius-md);
+  --background: var(--nve-sys-layer-popover-background);
+  --color: var(--nve-sys-layer-popover-color);
+  --padding: var(--nve-ref-size-300);
+  --box-shadow: var(--nve-ref-shadow-100);
+  --font-size: var(--nve-ref-font-size-200);
+  --arrow-transform: translate(0, -2px) rotate(-45deg);
+}
+
+dialog {
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background: var(--background);
+  color: var(--color);
+  box-shadow: var(--box-shadow);
+  gap: var(--nve-ref-space-sm);
+  font-size: var(--font-size);
+}
+
+dialog:has(nve-icon-button) {
+  padding-right: var(--nve-ref-size-800);
+}
+
+.arrow {
+  width: var(--nve-ref-size-400);
+  height: var(--nve-ref-size-400);
+  background: var(--background);
+  transform: var(--arrow-transform);
+  border-radius: var(--nve-ref-border-radius-xs);
+  position: absolute;
+}
+
+nve-icon-button {
+  --color: inherit;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+::slotted([nve-text]) {
+  color: inherit !important;
+}
+
+:host([position*='top']) {
+  --arrow-transform: translate(0, -2px) rotate(-45deg);
+}
+
+:host([position*='right']) {
+  --arrow-transform: translate(2px, 0) rotate(45deg);
+}
+
+:host([position*='bottom']) {
+  --arrow-transform: translate(0, 2px) rotate(45deg);
+}
+
+:host([position*='left']) {
+  --arrow-transform: translate(-2px, 0) rotate(45deg);
+}

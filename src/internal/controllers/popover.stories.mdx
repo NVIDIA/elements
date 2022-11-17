@@ -1,0 +1,88 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Elements/Popovers/Documentation" parameters={{ badges: ['alpha'] }} />
+
+<Story id="internal-integration--empty" />
+
+# Popovers
+
+Elements provides a set of popover type components based on the popover spec and aria guidelines.
+
+- [popover spec](https://open-ui.org/components/popup.research.explainer)
+- [w3c aria patterns](https://www.w3.org/WAI/ARIA/apg/patterns/)
+
+## Available Elements
+
+<nve-alert status="warning">Popover elements currently in alpha</nve-alert>
+
+- [dialog](?path=/story/elements-dialog-documentation--page)
+- [dropdown](?path=/story/elements-dropdown-documentation--page)
+- [tooltip](?path=/story/elements-tooltip-documentation--page)
+- [toast](?path=/story/elements-toast-documentation--page)
+- [notification](?path=/story/elements-notification-documentation--page)
+
+## Installation
+
+```typescript
+import '@elements/elements/dialog/define.js';
+import '@elements/elements/dropdown/define.js';
+import '@elements/elements/tooltip/define.js';
+import '@elements/elements/toast/define.js';
+import '@elements/elements/notification/define.js';
+```
+
+## Usage
+
+Popover types are visible by default and can be controlled via the `hidden` attribute.
+
+```html
+<nve-tooltip anchor="action-btn">hello there</nve-tooltip>
+<nve-button id="action-btn">button</nve-button>
+```
+
+<Story id="elements-tooltip-examples--default" inline={false} height={280} />
+
+
+## Events
+
+Some popover types such as tooltip have complex interactions such as showing when hovered or focused.
+To simplify these interactions all popover type elements provide a `open` and `close` event to notify
+when the popover is attempting to close or open based ona user interaction.
+
+<Story id="elements-tooltip-examples--interactive" inline={false} height={280} />
+
+```html
+<nve-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</nve-tooltip>
+<nve-button id="action-btn">button</nve-button>
+<script type="module">
+  const tooltip = document.querySelector('nve-tooltip[anchor="action-btn"]');
+  tooltip.addEventListener('close', () => tooltip.hidden = true);
+  tooltip.addEventListener('open', () => tooltip.hidden = false);
+</script>
+```
+
+The `anchor` property defines what element the popover should position itself relative to. For popovers
+like modals this defaults to the document body. The `trigger` property is an optional property that defines
+what element triggers the `open` event.
+
+<Canvas>
+  <Story id="elements-popovers-examples--trigger" inline={false} height={270} />
+</Canvas>
+
+For elements like tooltips this is often the same as anchor however the anchor and trigger are not always
+the same as UX patterns such as guided tours may have trigger elements that are not the anchored position.
+Both `anchor` and `trigger` can take a string idref or a DOM Element reference.
+
+<br /><br />
+
+## Interactive
+
+<Canvas>
+  <Story id="elements-popovers-examples--interactive" inline={false} height={400} />
+</Canvas>
+
+## Nested
+
+<Canvas>
+  <Story id="elements-popovers-examples--nested" inline={false} height={700} />
+</Canvas>
