@@ -55,7 +55,7 @@ export const Default = {
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map((iconName) => html`<mlv-icon title="${iconName}" .name="${iconName}" .variant="${args.variant}"></mlv-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<mlv-icon name="${iconName}" .variant="${args.variant}"></mlv-icon>\n`
     )}
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
