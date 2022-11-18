@@ -55,7 +55,7 @@ export const Default = {
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map((iconName) => html`<nve-icon title="${iconName}" .name="${iconName}" .variant="${args.variant}"></nve-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<nve-icon name="${iconName}" .variant="${args.variant}"></nve-icon>\n`
     )}
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),

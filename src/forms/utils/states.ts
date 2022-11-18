@@ -16,7 +16,28 @@ export function setupControlValidationStates(control: Control, messages: Control
   if (!control.input.form?.noValidate && !control.input.formNoValidate && !control.input.hasAttribute('formnovalidate')) {
     hideAllValidationMessages(messages);
 
-    control.input.addEventListener('blur', () => control.input.checkValidity());
+    /**
+     * resetValidState() logic triggered by input blur() or input() change events
+     */
+    const resetValidState = () => {
+      if (control.input.validity.valid) {
+        control._internals.states.delete('--invalid');
+        control._internals.states.add('--valid');
+        control.status = null;
+        showNonValidationMessages(messages);
+      }
+
+      hideInactiveValidationMessages(control,  messages);
+    };
+
+    control.input.addEventListener('blur', () => {
+      control.input.checkValidity();
+      resetValidState();
+    });
+
+    control.input.addEventListener('input', () => {
+      resetValidState();
+    });
 
     control.input.addEventListener('invalid', () => {
       if (messages.find(m => m.error)) {
@@ -27,17 +48,6 @@ export function setupControlValidationStates(control: Control, messages: Control
       control.status = 'error';
       control._internals.states.delete('--valid');
       control._internals.states.add('--invalid');
-    });
-
-    control.input.addEventListener('input', () => {
-      if (control.input.validity.valid) {
-        control._internals.states.delete('--invalid');
-        control._internals.states.add('--valid');
-        control.status = null;
-        showNonValidationMessages(messages);
-      }
-
-      hideInactiveValidationMessages(control,  messages);
     });
   } else {
     control.shadowRoot.addEventListener('slotchange', () => {
