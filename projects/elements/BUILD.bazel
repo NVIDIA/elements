@@ -1,34 +1,21 @@
+load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm//src/ui/platform/design-system/elements:vite/package_json.bzl", vite_bin = "bin")
 load("@npm//src/ui/platform/design-system/elements:typescript/package_json.bzl", typescript_bin = "bin")
 load("@npm//src/ui/platform/design-system/elements:@elements/custom-elements-storybook/package_json.bzl", storybook_bin = "bin")
-load("//src/ui/platform/build/vite:index.bzl", "vite_rules_js_library", "vite_default_srcs", "vite_default_data")
-load("//src/ui/platform/build/storybook:index.bzl", "storybook_rules_js")
-load("//src/ui/platform/tools/custom-elements-storybook:index.bzl", "custom_elements_storybook_deps")
+load("//src/ui/platform/build/vite:index.bzl", "vite_library", "vite_default_srcs", "vite_default_data")
+load("//src/ui/platform/build/storybook:index.bzl", "storybook")
 
 npm_link_all_packages()
 
-vite_rules_js_library(
+vite_library(
     name = "elements",
     package_name = "@elements/elements",
     tsconfig = None,
     emptyOutDir = False,
     srcs = vite_default_srcs(),
     deps = [
-        ":node_modules/lit",
-        ":node_modules/@floating-ui/dom",
-        ":node_modules/@lit-labs/motion",
-        ":node_modules/postcss-mixins",
-        ":node_modules/postcss-nested",
-        ":node_modules/postcss-each",
-        ":node_modules/postcss-csso",
-        ":node_modules/rollup-plugin-minify-html-literals",
-        ":node_modules/rollup-plugin-terser",
-        ":node_modules/@custom-elements-manifest/analyzer",
-        ":node_modules/style-dictionary",
-        ":node_modules/typescript",
-        ":node_modules/vite",
-        ":node_modules/vite-plugin-dts",
+        ":node_modules",
     ],
     allow_js = True,
     data = [
@@ -48,22 +35,13 @@ vite_rules_js_library(
     typescript_bin = typescript_bin,
 )
 
-storybook_rules_js(
+storybook(
     name = "storybook",
     srcs = glob([".storybook/**/*"]) + glob(["src/**/*"]) + glob(["tokens/**/*"]) + glob(["public/**/*"]),
     deps = [
         ":elements",
-        ":node_modules/@geometricpanda/storybook-addon-badges",
-        ":node_modules/@elements/custom-elements-storybook",
-        ":node_modules/emoji-picker-element",
-        ":node_modules/construct-style-sheets-polyfill",
-        ":node_modules/element-internals-polyfill",
-        ":node_modules/@lit-labs/motion",
-        ":node_modules/@lit-labs/react",
-        ":node_modules/lit",
-        ":node_modules/typescript",
-        ":node_modules/prettier",
-    ] + custom_elements_storybook_deps(),
+        ":node_modules",
+    ],
     data = [
         "package.json"
     ],
@@ -71,7 +49,7 @@ storybook_rules_js(
 )
 
 # TODO: Remove when the Home app does not consume the fonts directly anymore.
-filegroup(
+copy_to_bin(
     name = "files",
     srcs = vite_default_srcs() + glob(["public/**/*"]),
     tags = ["ui"],
