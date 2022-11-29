@@ -29,24 +29,22 @@
   --color: var(--nve-sys-text-muted-color);
 }
 
+[internal-host]:focus-within [input] {
+  outline: Highlight solid 2px !important;
+  outline: 5px auto -webkit-focus-ring-color !important;
+}
+
 :host([nve-control]) ::slotted(input:focus),
 :host([nve-control]) ::slotted(select:focus),
-:host([nve-control]) ::slotted(textarea:focus) {
+:host([nve-control]) ::slotted(textarea:focus),
+:host([nve-control='custom']) [input],
+:host([nve-control]:focus-within) [internal-host]:has(nve-icon-button:focus) [input],
+[internal-host]:has(nve-icon-button) {
   outline: 0 !important;
 }
 
 ::slotted(nve-button[nve-control]) {
   width: 100%;
-}
-
-:host([nve-control]:focus-within) [input] {
-  outline: Highlight solid 2px !important;
-  outline: 5px auto -webkit-focus-ring-color !important;
-}
-
-:host([nve-control]:focus-within) [internal-host]:has(nve-icon-button:focus) [input],
-[internal-host]:has(nve-icon-button) {
-  outline: 0 !important;
 }
 
 [input] {
