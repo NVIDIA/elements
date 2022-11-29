@@ -29,24 +29,22 @@
   --color: var(--mlv-sys-text-muted-color);
 }
 
+[internal-host]:focus-within [input] {
+  outline: Highlight solid 2px !important;
+  outline: 5px auto -webkit-focus-ring-color !important;
+}
+
 :host([mlv-control]) ::slotted(input:focus),
 :host([mlv-control]) ::slotted(select:focus),
-:host([mlv-control]) ::slotted(textarea:focus) {
+:host([mlv-control]) ::slotted(textarea:focus),
+:host([mlv-control='custom']) [input],
+:host([mlv-control]:focus-within) [internal-host]:has(mlv-icon-button:focus) [input],
+[internal-host]:has(mlv-icon-button) {
   outline: 0 !important;
 }
 
 ::slotted(mlv-button[mlv-control]) {
   width: 100%;
-}
-
-:host([mlv-control]:focus-within) [input] {
-  outline: Highlight solid 2px !important;
-  outline: 5px auto -webkit-focus-ring-color !important;
-}
-
-:host([mlv-control]:focus-within) [internal-host]:has(mlv-icon-button:focus) [input],
-[internal-host]:has(mlv-icon-button) {
-  outline: 0 !important;
 }
 
 [input] {

@@ -88,6 +88,7 @@ export class Control extends LitElement {
   firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
     this.setAttribute('mlv-control', '');
+    this.setAttribute('mlv-control', this.querySelector('[mlv-control]') ? 'custom' : '');
     this.input?.multiple ? this.setAttribute('multiple', '') : this.removeAttribute('multiple');
     this.input?.size ? this.setAttribute('size', '') : this.removeAttribute('size');
     this.inlineControl = isInlineInputType(this.input);

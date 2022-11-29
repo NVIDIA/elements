@@ -113,11 +113,11 @@ export const FeedbackPattern = {
   <h3 mlv-text="label">Submitted</h3>
   <p mlv-text="body">Feedback will be sent to the team.</p>
 </mlv-notification>
-<mlv-dropdown id="feedback-dropdown" position="top" alignment="start" size="sm" anchor="feedback-btn" trigger="feedback-btn" hidden style="--width: 368px">
-  <div mlv-layout="column gap:lg align:horizontal-stretch">
+<mlv-dropdown hidden id="feedback-dropdown" position="top" alignment="start" size="sm" anchor="feedback-btn" trigger="feedback-btn" style="--width: 368px">
+  <form id="feedback-form" mlv-layout="column gap:lg align:horizontal-stretch">
     <mlv-select>
       <label>Feedback type</label>
-      <select autofocus>
+      <select autofocus name="type">
         <option value="1">Feature Request</option>
         <option value="2">Bug/Issue</option>
         <option value="3">Other</option>
@@ -125,7 +125,7 @@ export const FeedbackPattern = {
     </mlv-select>
     <mlv-select>
       <label>Product</label>
-      <select>
+      <select name="product">
         <option value="1">Dashboard</option>
         <option value="2">Analytics</option>
         <option value="3">Tasks</option>
@@ -133,26 +133,87 @@ export const FeedbackPattern = {
     </mlv-select>
     <mlv-input>
       <label>Location</label>
-      <input type="url" placeholder="https://example.com" />
+      <input type="url" placeholder="https://example.com" name="url" />
     </mlv-input>
     <mlv-textarea>
       <label>Feedback</label>
-      <textarea placeholder="description..." rows="8"></textarea>
+      <textarea placeholder="description..." rows="8" required name="description"></textarea>
+      <mlv-control-message error="valueMissing">required</mlv-control-message>
     </mlv-textarea>
+    <mlv-control style="">
+      <label>How satisfied are you with this product?</label>
+      <section mlv-control class="rating-radio">
+        <input type="radio" aria-label="1" value="1" name="radio-rating" />
+        <input type="radio" aria-label="2" value="2" name="radio-rating" />
+        <input type="radio" aria-label="3" value="3" name="radio-rating" />
+        <input type="radio" aria-label="4" value="4" name="radio-rating" />
+        <input type="radio" aria-label="5" value="5" name="radio-rating" />
+      </section>
+      <mlv-control-message style="width: 100%;">
+        <div style="display: flex; width: 100%;">
+          <span>Not satisfied</span>
+          <span style="margin-inline-start: auto">Very satisfied</span>
+        </div>
+      </mlv-control-message>
+    </mlv-control>
     <mlv-button id="submit-btn">Submit Feedback</mlv-button>
-  </div>
+  </form>
 </mlv-dropdown>
 <style>
+  .rating-radio {
+    display: grid;
+    grid-template-columns: repeat(5, 18.4%);
+    width: 102%;
+    gap: 2%;
+    outline: 0;
+  }
+
+  .rating-radio input {
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    outline-offset: 4px;
+    cursor: pointer;
+    outline: 0;
+  }
+
+  .rating-radio input::after {
+    background: var(--mlv-sys-interaction-default-background);
+    background-image: linear-gradient(hsla(0, 0%, var(--mlv-sys-interaction-state-lightness), var(--mlv-sys-interaction-state-alpha)) 0 0);
+    color: var(--mlv-sys-interaction-default-color);
+    border-radius: var(--mlv-ref-border-radius-md);
+    height: var(--mlv-ref-size-1000);
+    content: attr(value) ' ';
+    justify-content: center;
+    place-items: center;
+    display: flex;
+    width: 100%;
+  }
+
+  .rating-radio input:checked::after {
+    background: var(--mlv-sys-accent-secondary-background);
+    color: var(--mlv-sys-text-white-color);
+  }
+
+  .rating-radio input:focus::after {
+    outline: Highlight solid 2px;
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+
+  .rating-radio input:hover {
+    --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-hover-alpha);
+  }
+
   #feedback-section {
-    position: absolute;
-    inset: auto 36px 36px auto;
-    width: 44px;
-    height: 44px;
+    inset: auto var(--mlv-ref-size-900) var(--mlv-ref-size-900) auto;
+    height: var(--mlv-ref-size-1000);
+    width: var(--mlv-ref-size-1000);
+    position: fixed;
   }
 
   #dismiss-btn {
     position: absolute;
-    inset: auto -12px 28px auto;
+    inset: auto calc(-1 * var(--mlv-ref-size-400)) var(--mlv-ref-size-600) auto;
     z-index: 99;
   }
 </style>
@@ -164,12 +225,19 @@ export const FeedbackPattern = {
   const button = document.querySelector('#feedback-btn');
   const dismissButton = document.querySelector('#dismiss-btn');
   const submitButton = document.querySelector('#submit-btn');
+  const feedbackForm = document.querySelector('#feedback-form');
 
   notification.addEventListener('close', () => notification.hidden = true);
   dropdown.addEventListener('close', () => toggleFeedback(true));
   dropdown.addEventListener('open', () => toggleFeedback(false));
-  submitButton.addEventListener('click', () => submitFeedback());
   dismissButton.addEventListener('click', () => dismissFeedback());
+
+  feedbackForm.addEventListener('submit', e => {
+    e.preventDefault();
+    toggleFeedback(true);
+    notification.hidden = false;
+    console.log(Object.fromEntries(new FormData(e.target)));
+  });
 
   ['mousemove', 'focusin'].forEach(e => section.addEventListener(e, () => {
     if (dropdown.hidden) {
@@ -184,11 +252,6 @@ export const FeedbackPattern = {
       dismissButton.hidden = true;
     }
   }));
-
-  function submitFeedback() {
-    toggleFeedback(true);
-    notification.hidden = false;
-  }
 
   function dismissFeedback() {
     toggleFeedback(true);
