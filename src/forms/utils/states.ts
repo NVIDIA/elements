@@ -20,7 +20,7 @@ export function setupControlValidationStates(control: Control, messages: Control
      * resetValidState() logic triggered by input blur() or input() change events
      */
     const resetValidState = () => {
-      if (control.input.validity.valid) {
+      if (control.input.validity?.valid) {
         control._internals.states.delete('--invalid');
         control._internals.states.add('--valid');
         control.status = null;
