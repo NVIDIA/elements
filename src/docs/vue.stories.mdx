@@ -1,0 +1,24 @@
+<Meta title="About/Vue" />
+
+# Vue Integration
+
+To use Maglev Elements in Vue follow the [instalation getting started](?path=/story/about-getting-started--page) steps. Once complete
+elements can be imported and used within Vue SFC files.
+
+```javascript
+import '@elements/elements/alert-group/define.js';
+```
+
+Once added, properties and events can be used via the standard Vue template syntax.
+
+```html
+<!--
+- status - HTML attribute
+- :closable - can update via attributes or JavaScript property binding
+- @close - event listener binding for 'close' custom event
+-->
+
+<nve-alert-group status="success">
+  <nve-alert :closable="true" @close="closeAlert">hello there!</nve-alert>
+</nve-alert-group>
+```
