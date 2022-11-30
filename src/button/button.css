@@ -8,7 +8,7 @@
   --text-decoration: none;
   --text-align: center;
   --cursor: pointer;
-  --gap: var(--nve-ref-space-xxs);
+  --gap: var(--nve-ref-space-xs);
   --height: var(--nve-ref-size-800);
   --_icon-color: var(--color);
   --width: initial;
@@ -48,6 +48,9 @@
 ::slotted(a) {
   text-decoration: var(--text-decoration) !important;
   color: var(--color) !important;
+  gap: var(--gap) !important;
+  display: flex !important;
+  align-items: center !important;
   outline: 0;
 }
 
