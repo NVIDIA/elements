@@ -1,40 +1,36 @@
 <Meta title="About/React" />
 
-# React Setup
+# React Integration
 
-## Installation
-
-To install the MagLev UI Elements, run the following command:
-
-```bash
-pnpm install @elements/elements
-```
-
-Once installed, import the global CSS into your project.
-
-```css
-@import '@elements/elements/dist/index.css';
-@import '@elements/elements/dist/inter.css';
-```
+To use Maglev Elements in Vue follow the [instalation getting started](?path=/story/about-getting-started--page) steps. Once complete
+elements can be imported and used within React jsx and tsx files.
 
 Due to [React not being compatible](https://custom-elements-everywhere.com/) with
 standard DOM APIs the `@lit-labs/react` package must be used to render Custom Elements.
-This package will wrap elements into a React component mapping the events and
+This package will wrap elements into a React component mapping the standard events and
 properties in a way that React can support.
 
 ```tsx
 import * as React from 'react';
 import { createComponent } from '@lit-labs/react';
 import { Alert } from '@elements/elements/alert';
+import { AlertGroup } from '@elements/elements/alert-group';
 
 export const MlvAlert = createComponent(React, 'mlv-alert', Alert, { onclose: 'close' });
+export const MlvAlertGroup = createComponent(React, 'mlv-alert-group', AlertGroup);
 ```
 
 The `MlvAlert` React component can now be used within a React application.
 
 ```tsx
-<MlvAlert closable={isClosable} onclose={(e) => closeAlert()} />
+// - status - HTML attribute
+// - closable - can update via attributes or JavaScript property binding
+// - onclose - event listener binding for 'close' custom event
+
+<MlvAlertGroup status="success">
+  <MlvAlert closable={isClosable} onclose={(e) => closeAlert()}>hello there!</MlvAlert>
+</MlvAlertGroup>
 ```
 
 To learn more about the `@lit-labs/react` package, please visit the [documentation](https://github.com/lit/lit/tree/main/packages/labs/react).
-View a working [demo here](/story/internal-integration-react--demo).
+View a working [demo here](?path=/story/internal-integration--react-example).

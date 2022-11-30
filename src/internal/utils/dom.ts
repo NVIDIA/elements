@@ -61,8 +61,8 @@ export function getAttributeListChanges(element: HTMLElement, attrs: string[], f
  */
 export function appendRootNodeStyle(host: HTMLElement, styles: string) {
   const stylesheet = new CSSStyleSheet();
-  (stylesheet as any).replaceSync(styles ?? ''); /// vitest in coverage mode ignores inlined assets like css and returns undefined
-  const root = host.parentNode.toString() === '[object ShadowRoot]' ? host.parentNode : document as any;
+  (stylesheet as any).replaceSync(styles ?? ''); // vitest in coverage mode ignores inlined assets like css and returns undefined
+  const root = host.getRootNode() as any;
   root.adoptedStyleSheets = [...root.adoptedStyleSheets, stylesheet];
 }
 

@@ -1,67 +1,33 @@
 <Meta title="About/Angular" />
 
-# Angular Setup
+# Angular Integration
 
+To use Maglev Elements in Angular follow the [instalation getting started](?path=/story/about-getting-started--page) steps.
 
-## Installation
-
-To install the MagLev UI Elements, run the following command:
-
-```bash
-pnpm install @elements/elements
-```
-
-Once installed import the global CSS into your angular application's global `styles.scss` file
-
-```css
-/* ./src/styles.scss */
-
-@import '@elements/elements/dist/index.css';
-```
-
-If you don't have a global `styles.scss` add one to your app's `angular.json` config
+Add the following to your app's `angular.json` config, which will copy the `@elements/elements` icon asset file into your local angular build.
 
 ```json
-  /* ./angular.json */
-  // projects.appName.architect.build.options.styles:
-  "styles": [
-    "./src/styles.scss"
-  ],
+/*
+ * ./angular.json
+ * projects.appName.architect.build.options.assets:
+ */
+"assets": [
+  ...
+  {
+    "glob": "**/*",
+    "input": "./node_modules/@elements/elements/dist/assets",
+    "output": "/assets/"
+  }
+]
 ```
 
-Next add the following to your app's `angular.json` config, which will copy the `@elements/elements` icon asset file into your local angular build
-
-```json
-  /* ./angular.json */
-  // projects.appName.architect.build.options.assets:
-  "assets": [
-    ...
-    {
-      "glob": "**/*",
-      "input": "./node_modules/@elements/elements/dist/assets",
-      "output": "/assets/"
-    }
-  ]
-```
-
-Next import either the full `@elements/elements` package or individual element imports into a root Angular module.
-
-```javascript
-/* ./src/shared.module.ts */
-
-// Full package
-import '@elements/elements';
-
-// Individual import
-import '@elements/elements/button/define.js';
-```
-
-Make sure `CUSTOM_ELEMENTS_SCHEMA` is set on the Angular module to allow web components to be used within your templates.
+Next import the element into a root Angular module and add `CUSTOM_ELEMENTS_SCHEMA` to the Angular module to allow web components to be used within your templates.
 
 ```javascript
 /* ./src/shared.module.ts */
 
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import '@elements/elements/alert-group/define.js';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -69,7 +35,47 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 })
 ```
 
-Lastly, if you are not on typescript >= version `4.5.x` you will need to add this type declaration to use isolated element imports:
+Once added, properties and events can be used via the standard Angular template syntax.
+
+```html
+<!--
+  - [attr.hidden] - HTML Boolean attribute
+  - status - HTML attribute
+  - [closable] - can update via attributes or JavaScript property binding
+  - (close) - event listener binding for 'close' custom event
+-->
+
+<mlv-alert-group status="success" [attr.hidden]="!showAlert">
+  <mlv-alert [closable]="true" (close)="showAlert = false">hello there!</mlv-alert>
+</mlv-alert-group>
+```
+
+## Optional
+
+### Styles
+
+If you don't have a global `styles.scss` add one to your app's `angular.json` config.
+
+```json
+/* 
+ * ./angular.json
+ * projects.appName.architect.build.options.styles:
+ */
+"styles": [
+  "./src/styles.scss"
+],
+```
+
+```css
+/* ./styles.css */
+@import '@elements/elements/dist/index.css';
+@import '@elements/elements/dist/inter.css';
+```
+
+
+### TypeScript
+
+If you are not on typescript >= version `4.5.x` you will need to add this type declaration to use isolated element imports:
 
 ```javascript
 /* ./src/declarations.d.ts */

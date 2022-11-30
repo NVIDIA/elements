@@ -2,33 +2,30 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs';
 
 <Meta title="About/Lit" />
 
-# Lit Setup
+# Lit Integration
 
-## Installation
-
-To install the MagLev UI Elements, run the following command:
-
-```bash
-pnpm install @elements/elements
-```
-
-Once installed, import the global CSS into your project.
-
-```css
-@import '@elements/elements/dist/index.css';
-```
-
-Elements can be imported/loaded via JavaScript imports and made available to use in your Lit templates.
+To use Maglev Elements in Lit follow the [instalation getting started](?path=/story/about-getting-started--page) steps. Once complete
+elements can be imported and used within Lit components.
 
 ```javascript
-import '@elements/elements/button/define.js';
+import '@elements/elements/alert-group/define.js';
 ```
 
-```html
-<mlv-button>hello there</mlv-button>
+Once added, properties and events can be used via the standard lit template syntax.
+
+```javascript
+// - ?hidden - HTML Boolean attribute
+// - status - HTML attribute
+// - .closable - can update via attributes or JavaScript property binding
+// - @close - event listener binding for 'close' custom event
+
+html`
+  <mlv-alert-group status="success" ?hidden=${!showAlert}>
+    <mlv-alert .closable=${true} @close=${() => showAlert = false}">hello there!</mlv-alert>
+  </mlv-alert-group>
+`;
 ```
 
-<mlv-button interaction="emphasize">hello there</mlv-button>
 
 ## CSS Utilities
 
