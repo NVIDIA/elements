@@ -6,32 +6,26 @@ import { Meta, Story } from '@storybook/addon-docs';
 
 # MagLev Elements
 
-## Foundational building blocks for MagLev UI.
+## Foundational building blocks for MagLev UI
 
 ### Installation
 
-Configure npm to use the internal package registry.
-
 ```bash
+# add internal registry to local package manager (optional)
 npm --global config set @elements/elements:registry https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
-```
 
-To install the MagLev UI Elements, run the following command:
-
-```bash
+# install from registry
 pnpm install @elements/elements
 ```
 
-Once installed import the global CSS into your project.
-
 ```css
+/* import the global CSS into your project */
 @import '@elements/elements/dist/index.css';
 @import '@elements/elements/dist/inter.css';
 ```
 
-Elements can be imported/loaded via JavaScript imports and made available to use in your HTML templates.
-
 ```javascript
+// Load via JavaScript imports to make available in HTML templates
 import '@elements/elements/button/define.js';
 ```
 
@@ -39,18 +33,31 @@ import '@elements/elements/button/define.js';
 <nve-button>hello there</nve-button>
 ```
 
-<nve-button interaction="emphasize">hello there</nve-button>
-
 <hr /><br />
 
 <section nve-layout="row gap:sm align:center">
   <nve-button>
-    <a href="./?path=/story/about-angular--page">Angular Integration</a>
+    <a href="./?path=/story/about-lit--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit Integration</a>
   </nve-button>
   <nve-button>
-    <a href="./?path=/story/about-lit--page">Lit Integration</a>
+    <a href="./?path=/story/about-angular--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#angular-svg"></use></svg> Angular Integration</a>
   </nve-button>
   <nve-button>
-    <a href="./?path=/story/about-react--page">React Integration</a>
+    <a href="./?path=/story/about-vue--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#vue-svg"></use></svg> Vue Integration</a>
+  </nve-button>
+  <nve-button>
+    <a href="./?path=/story/about-react--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#react-svg"></use></svg> React Integration</a>
+  </nve-button>
+</section>
+<br />
+<section nve-layout="row gap:sm align:center">
+  <nve-button>
+    <a href="http://nv/elements-slack" target="_blank"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#slack-icon-svg"></use></svg> Slack Support</a>
+  </nve-button>
+  <nve-button>
+    <a href="http://nv/elements-figma" target="_blank"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#figma-svg"></use></svg> Figma Library</a>
+  </nve-button>
+    <nve-button>
+    <a href="ui/packages/npm:%2F%2F@elements%2Felements" target="_blank"><nve-icon name="archive" style={{ '--color': 'var(--nve-sys-accent-primary-background)' }}></nve-icon> NPM Package</a>
   </nve-button>
 </section>

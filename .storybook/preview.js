@@ -12,6 +12,9 @@ export const parameters = {
   docs: {
     theme: themes.dark,
   },
+  controls: {
+    expanded: false
+  },
   badgesConfig: {
     alpha: {
       styles: {
@@ -70,10 +73,12 @@ export const parameters = {
         [
           'Getting Started',
           'Changelog',
+          'Support',
+          'Testing',
           'Angular',
           'Lit',
           'React',
-          'Testing',
+          'Vue'
         ],
         'Foundations',
         [
