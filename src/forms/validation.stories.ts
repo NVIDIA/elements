@@ -24,7 +24,7 @@ export const Validation = () => {
     <nve-control-message error="tooShort">minimum length is 6 characters</nve-control-message>
   </nve-password>
 
-  <nve-button>login to account</nve-button>
+  <nve-button disabled>login to account</nve-button>
 
   <nve-alert-group hidden status="success">
     <nve-alert></nve-alert>
@@ -40,6 +40,10 @@ export const Validation = () => {
     const values = Object.fromEntries(new FormData(form));
     alert.innerText = values.email + ' / ' + values.password;
     alertGroup.hidden = false;
+  });
+
+  form.addEventListener('input', e => {
+    form.querySelector('nve-button').disabled = form.matches(':invalid');
   });
 </script>
 `;

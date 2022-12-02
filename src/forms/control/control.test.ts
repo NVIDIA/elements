@@ -76,4 +76,11 @@ describe('nve-control', () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('.no-messages')).toBeTruthy();
   });
+
+  it('should assign no-message style hook if no visble control message was provided', async() => {
+    message.hidden = true;
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.no-messages')).toBeTruthy();
+  });
 });

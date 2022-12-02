@@ -6,10 +6,22 @@ const defaults = {
 };
 
 export function animationFade(host: HTMLElement, keyframeOptions = defaults) {
-  const styles = getComputedStyle(host);
-  const options = {
-    duration: parseFloat(styles.getPropertyValue(keyframeOptions.duration)),
-    easing: styles.getPropertyValue(keyframeOptions.easing)
-  };
-  return animate({ skipInitial: true, properties: ['opacity'], keyframeOptions: options });
+  const value = parseFloat(getComputedStyleWithFallback(host, keyframeOptions.duration));
+  const duration = value < 1 ? value * 1000 : value;
+  const easing = getComputedStyleWithFallback(host, keyframeOptions.easing);
+
+  return animate({
+    skipInitial: true,
+    properties: ['opacity'],
+    keyframeOptions: {
+      duration,
+      easing
+    }
+  });
+}
+
+export function getComputedStyleWithFallback(element: HTMLElement, property: string) {
+  const styles = getComputedStyle(element);
+  const computedValue = styles.getPropertyValue(property);
+  return computedValue?.length ? computedValue : element.style.getPropertyValue(property);
 }

@@ -61,12 +61,6 @@
   position: absolute;
 }
 
-:host(:--disabled) {
-  --color: var(--nve-sys-interaction-disabled-color);
-  --background: var(--nve-sys-interaction-disabled-background);
-  --cursor: not-allowed;
-}
-
 :host([nve-control]) {
   --text-align: start;
   --border-radius: var(--nve-ref-border-radius-sm);
@@ -118,6 +112,12 @@
 :host([interaction='inverse']) {
   --color: var(--nve-sys-interaction-default-background);
   --background: var(--nve-sys-interaction-default-color);
+}
+
+:host(:--disabled) {
+  --color: var(--nve-sys-interaction-disabled-color);
+  --background: var(--nve-sys-interaction-disabled-background);
+  --cursor: not-allowed;
 }
 
 :host([interaction*='ghost']) {

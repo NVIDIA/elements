@@ -1,9 +1,9 @@
 :host {
   --nve-sys-layer-popover-offset: var(--nve-ref-space-xl);
   --border-radius: var(--nve-ref-border-radius-md);
-  --status-color: var(--nve-sys-status-info-background);
-  --background: var(--nve-sys-layer-overlay-background);
-  --color: var(--nve-sys-layer-overlay-color);
+  --status-color: var(--nve-sys-status-neutral-background);
+  --background: var(--nve-sys-layer-popover-background);
+  --color: var(--nve-sys-layer-popover-color);
   --padding: var(--nve-ref-size-500) var(--nve-ref-size-900);
   --box-shadow: var(--nve-ref-shadow-400);
   --min-width: 320px;
