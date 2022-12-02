@@ -2,7 +2,7 @@ import { LitElement, html, PropertyValues } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList, appendRootNodeStyle } from '@elements/elements/internal';
+import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList, appendRootNodeStyle, getAttributeListChanges } from '@elements/elements/internal';
 import { ControlMessage } from '../control-message/control-message.js';
 import { setupControlValidationStates, setupControlStates, setupControlStatusStates, inputQuery } from '../utils/states.js';
 import { setupControlLayoutStates, isInlineInputType } from '../utils/layout.js';
@@ -33,6 +33,10 @@ export class Control extends LitElement {
     return Array.from(this.querySelectorAll<ControlMessage>('nve-control-message'));
   }
 
+  get #visibleMessages() {
+    return this.#messages.filter(i => !i.hasAttribute('hidden'));
+  }
+
   /** @private */
   get input() {
     return this.querySelector<HTMLInputElement>(inputQuery);
@@ -50,7 +54,7 @@ export class Control extends LitElement {
 
   @state() private inlineControl = false;
 
-  @state() private styleStates = { 'no-messages': !this.#messages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
+  @state() private styleStates = { 'no-messages': !this.#visibleMessages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
 
   static styles = useStyles([styles]);
 
@@ -83,32 +87,30 @@ export class Control extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
+    this.shadowRoot.addEventListener('slotchange', () => this.#updateStyleStates());
   }
 
   firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
     this.setAttribute('nve-control', '');
     this.setAttribute('nve-control', this.querySelector('[nve-control]') ? 'custom' : '');
-    this.input?.multiple ? this.setAttribute('multiple', '') : this.removeAttribute('multiple');
-    this.input?.size ? this.setAttribute('size', '') : this.removeAttribute('size');
-    this.inlineControl = isInlineInputType(this.input);
     setupControlValidationStates(this, this.#messages);
     this.#observers.push(
       ...setupControlStates(this),
       ...setupControlStatusStates(this, this.#messages),
       setupControlLayoutStates(this),
+      getAttributeListChanges(this, ['hidden', 'status'], () => this.#updateStyleStates())
     );
 
     this.#updateAssociations();
-    this.#updateStyleStates();
-    this.shadowRoot.addEventListener('slotchange', () => {
-      this.#updateAssociations();
-      this.#updateStyleStates();
-    });
+    this.shadowRoot.addEventListener('slotchange', () => this.#updateAssociations());
   }
 
   #updateStyleStates() {
-    this.styleStates = { 'no-messages': !this.#messages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
+    this.inlineControl = isInlineInputType(this.input);
+    this.input?.multiple ? this.setAttribute('multiple', '') : this.removeAttribute('multiple');
+    this.input?.size ? this.setAttribute('size', '') : this.removeAttribute('size');
+    this.styleStates = { 'no-messages': !this.#visibleMessages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
   }
 
   disconnectedCallback() {

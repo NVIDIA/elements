@@ -127,3 +127,27 @@ export const Transforms = {
 </div>
   `
 }
+
+export const LeadingTrim = {
+  render: () => html`
+<div nve-layout="row gap:md" nve-theme="root">
+  <nve-card>
+    <nve-card-content nve-layout="column gap:lg">
+      <h2 nve-text="heading">leading-trim enabled</h2>
+      <h3 nve-text="body">leading-trim enabled</h3>
+      <h4 nve-text="label">leading-trim enabled</h4>
+      <h5 nve-text="eyebrow">leading-trim enabled</h5>
+    </nve-card-content>
+  </nve-card>
+
+  <nve-card>
+    <nve-card-content nve-layout="column gap:lg">
+      <h2 nve-text="heading trim:none">leading-trim disabled</h2>
+      <h3 nve-text="body trim:none">leading-trim disabled</h3>
+      <h4 nve-text="label trim:none">leading-trim disabled</h4>
+      <h5 nve-text="eyebrow trim:none">leading-trim disabled</h5>
+    </nve-card-content>
+  </nve-card>
+</div>
+  `
+}
