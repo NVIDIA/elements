@@ -72,7 +72,7 @@ export const Interactive = {
       </nve-dialog>
 
       <nve-button id="notification-btn">notification snackbar</nve-button>
-      <nve-notification hidden closable position="bottom" alignment="end" trigger="notification-btn" close-timeout="2000" status="accent">
+      <nve-notification hidden closable position="bottom" alignment="end" trigger="notification-btn" close-timeout="2000">
         <h3 nve-text="label">notification</h3>
         <p nve-text="body">some text content in a notification</p>  
       </nve-notification>
