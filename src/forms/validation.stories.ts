@@ -24,7 +24,7 @@ export const Validation = () => {
     <mlv-control-message error="tooShort">minimum length is 6 characters</mlv-control-message>
   </mlv-password>
 
-  <mlv-button>login to account</mlv-button>
+  <mlv-button disabled>login to account</mlv-button>
 
   <mlv-alert-group hidden status="success">
     <mlv-alert></mlv-alert>
@@ -40,6 +40,10 @@ export const Validation = () => {
     const values = Object.fromEntries(new FormData(form));
     alert.innerText = values.email + ' / ' + values.password;
     alertGroup.hidden = false;
+  });
+
+  form.addEventListener('input', e => {
+    form.querySelector('mlv-button').disabled = form.matches(':invalid');
   });
 </script>
 `;

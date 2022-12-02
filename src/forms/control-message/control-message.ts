@@ -24,14 +24,22 @@ export class ControlMessage extends LitElement {
    */
   @property({ type: String }) error: keyof ValidityState = null;
 
-  @state() private alertStatus: string;
-
   static styles = useStyles([styles]);
+
+  get alertStatus() {
+    if (this.status) {
+      return alertStatus[this.status];
+    } else if (this.error) {
+      return alertStatus.error;
+    } else {
+      return 'muted';
+    }
+  }
 
   render() {
     return html`
       <div internal-host>
-        <mlv-alert .status=${this.status || this.error ? this.alertStatus : 'muted'}>
+        <mlv-alert .status=${this.alertStatus}>
           <slot></slot>
         </mlv-alert>
       </div>
@@ -41,16 +49,5 @@ export class ControlMessage extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.slot = 'messages';
-  }
-
-  protected update(props: PropertyValues<this>) {
-    super.update(props);
-    if (props.has('status')) {
-      this.alertStatus = alertStatus[this.status];
-    }
-
-    if (props.has('error') && this.error) {
-      this.alertStatus = alertStatus.error;
-    }
   }
 }

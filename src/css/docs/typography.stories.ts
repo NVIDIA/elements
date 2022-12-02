@@ -127,3 +127,27 @@ export const Transforms = {
 </div>
   `
 }
+
+export const LeadingTrim = {
+  render: () => html`
+<div mlv-layout="row gap:md" mlv-theme="root">
+  <mlv-card>
+    <mlv-card-content mlv-layout="column gap:lg">
+      <h2 mlv-text="heading">leading-trim enabled</h2>
+      <h3 mlv-text="body">leading-trim enabled</h3>
+      <h4 mlv-text="label">leading-trim enabled</h4>
+      <h5 mlv-text="eyebrow">leading-trim enabled</h5>
+    </mlv-card-content>
+  </mlv-card>
+
+  <mlv-card>
+    <mlv-card-content mlv-layout="column gap:lg">
+      <h2 mlv-text="heading trim:none">leading-trim disabled</h2>
+      <h3 mlv-text="body trim:none">leading-trim disabled</h3>
+      <h4 mlv-text="label trim:none">leading-trim disabled</h4>
+      <h5 mlv-text="eyebrow trim:none">leading-trim disabled</h5>
+    </mlv-card-content>
+  </mlv-card>
+</div>
+  `
+}

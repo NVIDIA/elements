@@ -104,6 +104,7 @@ export const layers = {
         <ul>
           <li>tooltips</li>
           <li>toasts</li>
+          <li>notifications</li>
         </ul>
       </div>
     </section>

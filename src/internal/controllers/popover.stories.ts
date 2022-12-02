@@ -72,7 +72,7 @@ export const Interactive = {
       </mlv-dialog>
 
       <mlv-button id="notification-btn">notification snackbar</mlv-button>
-      <mlv-notification hidden closable position="bottom" alignment="end" trigger="notification-btn" close-timeout="2000" status="accent">
+      <mlv-notification hidden closable position="bottom" alignment="end" trigger="notification-btn" close-timeout="2000">
         <h3 mlv-text="label">notification</h3>
         <p mlv-text="body">some text content in a notification</p>  
       </mlv-notification>

@@ -90,10 +90,10 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   }).bind(this);
 
   async #toggleLightDismiss() {
-    document.removeEventListener('pointerup', this.#lightDismiss);
+    document.removeEventListener('pointerdown', this.#lightDismiss);
     if (!this.host.hasAttribute('hidden') && this.host.popoverType !== 'manual' && !this.host.closeTimeout) {
       await new Promise(r => requestAnimationFrame(r));
-      document.addEventListener('pointerup', this.#lightDismiss);
+      document.addEventListener('pointerdown', this.#lightDismiss);
     }
   }
 

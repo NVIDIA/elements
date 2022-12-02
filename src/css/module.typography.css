@@ -11,6 +11,11 @@
   display: table;
 }
 
+[mlv-text~='trim:none']::before,
+[mlv-text~='trim:none']::after {
+  content: none !important;
+}
+
 [mlv-text] {
   font-family: var(--mlv-ref-font-family-inter);
   font-weight: var(--mlv-ref-font-weight-regular);

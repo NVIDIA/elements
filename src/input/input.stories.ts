@@ -13,8 +13,8 @@ export default {
     },
     status: {
       control: 'inline-radio',
-      options: ['success', 'error', 'default'],
-      defaultValue: 'default'
+      options: ['success', 'error', ''],
+      defaultValue: ''
     },
     layout: {
       control: 'inline-radio',

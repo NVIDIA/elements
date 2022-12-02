@@ -61,12 +61,6 @@
   position: absolute;
 }
 
-:host(:--disabled) {
-  --color: var(--mlv-sys-interaction-disabled-color);
-  --background: var(--mlv-sys-interaction-disabled-background);
-  --cursor: not-allowed;
-}
-
 :host([mlv-control]) {
   --text-align: start;
   --border-radius: var(--mlv-ref-border-radius-sm);
@@ -118,6 +112,12 @@
 :host([interaction='inverse']) {
   --color: var(--mlv-sys-interaction-default-background);
   --background: var(--mlv-sys-interaction-default-color);
+}
+
+:host(:--disabled) {
+  --color: var(--mlv-sys-interaction-disabled-color);
+  --background: var(--mlv-sys-interaction-disabled-background);
+  --cursor: not-allowed;
 }
 
 :host([interaction*='ghost']) {

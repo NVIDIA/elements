@@ -52,7 +52,7 @@ export function setupControlValidationStates(control: Control, messages: Control
   } else {
     control.shadowRoot.addEventListener('slotchange', () => {
       const messages = Array.from(control.querySelectorAll<ControlMessage>('mlv-control-message'));
-      if (messages.find(m => m.status === 'error')) {
+      if (messages.find(m => m.status === 'error' && !m.hidden)) {
         control._internals.states.delete('--valid');
         control._internals.states.add('--invalid');
       } else {

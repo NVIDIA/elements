@@ -75,6 +75,15 @@ This enables full control of the visual styling of an element separate from the 
   <Story id="foundations-typography-examples--size" />
 </Canvas>
 
+## Leading Trim
+
+By default all `mlv-text` attributes use [leading-trim](https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202) to remove excesss whitespace between lines. This provides a more precise layout.
+Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavior it may be necessary to disable this behavior. This can be done by applying `mlv-text="trim:none"`.
+
+<Canvas>
+  <Story id="foundations-typography-examples--leading-trim" />
+</Canvas>
+
 ## Tokens
 
 <Canvas>

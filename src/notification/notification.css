@@ -1,9 +1,9 @@
 :host {
   --mlv-sys-layer-popover-offset: var(--mlv-ref-space-xl);
   --border-radius: var(--mlv-ref-border-radius-md);
-  --status-color: var(--mlv-sys-status-info-background);
-  --background: var(--mlv-sys-layer-overlay-background);
-  --color: var(--mlv-sys-layer-overlay-color);
+  --status-color: var(--mlv-sys-status-neutral-background);
+  --background: var(--mlv-sys-layer-popover-background);
+  --color: var(--mlv-sys-layer-popover-color);
   --padding: var(--mlv-ref-size-500) var(--mlv-ref-size-900);
   --box-shadow: var(--mlv-ref-shadow-400);
   --min-width: 320px;
