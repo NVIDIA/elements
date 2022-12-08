@@ -9,6 +9,7 @@
   width: auto;
 }
 
+slot,
 [internal-host] {
   font-weight: var(--font-weight);
   font-size: var(--font-size);
@@ -18,6 +19,11 @@
   align-items: center;
   line-height: 1em;
   height: 100%;
+}
+
+slot {
+  flex-wrap: wrap;
+  line-height: 1em;
 }
 
 mlv-icon {

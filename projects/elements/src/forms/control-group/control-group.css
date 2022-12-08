@@ -72,6 +72,19 @@ slot[name='messages'] {
       'label label label'
       'input input input';
   }
+
+  &.no-label {
+    & slot[name='messages'] {
+      grid-template-areas: 
+        'input input input'
+        'messages messages messages';
+    }
+  }
+
+  &.no-label.no-messages {
+    grid-template-areas: 
+      'input input input';
+  }
 }
 
 :host([layout='vertical-inline']) [internal-host] {

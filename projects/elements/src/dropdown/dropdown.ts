@@ -45,7 +45,7 @@ export class Dropdown extends LitElement {
    * Sets the alignment of the popover relative to the provided anchor element.
    * If an arrow exists the alginment will be relative to the arrow against the anchor.
    */
-  @property({ type: String, reflect: true }) alignment: PopoverAlign;
+  @property({ type: String, reflect: true }) alignment: PopoverAlign = 'start';
 
   /**
    * Determines if a close button should render within dropdown. Non-closable

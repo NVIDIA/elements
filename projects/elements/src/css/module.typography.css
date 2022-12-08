@@ -148,6 +148,7 @@
 
 [mlv-text~='link'] {
   color: var(--mlv-sys-text-link-color);
+  line-height: inherit;
 
   &:hover,
   &[mlv-text~='hover'] {

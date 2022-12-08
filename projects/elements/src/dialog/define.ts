@@ -1,4 +1,5 @@
 import { Dialog, DialogHeader, DialogFooter } from '@elements/elements/dialog';
+import '@elements/elements/icon-button/define.js';
 
 customElements.get('mlv-dialog') || customElements.define('mlv-dialog', Dialog);
 customElements.get('mlv-dialog-header') || customElements.define('mlv-dialog-header', DialogHeader);

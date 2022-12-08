@@ -35,10 +35,10 @@ export class ControlGroup extends LitElement {
 
   render() {
     return html`
-      <div internal-host class="${this.#messages.length ? '' : 'no-messages'}">
-        <slot name="label"></slot>
+      <div internal-host class="${this.#messages.length ? '' : 'no-messages'} ${this.label ? '' : 'no-label'}">
+        ${this.label ? html`<slot name="label"></slot>` : ''}
         <slot class="input-slot"></slot>
-        <slot name="messages"></slot>
+        ${this.#messages.length ? html`<slot name="messages"></slot>` : ''}
       </div>
     `;
   }

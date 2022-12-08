@@ -2,7 +2,7 @@
   --mlv-sys-interaction-default-background: var(--mlv-sys-interaction-default-background-300);
   --mlv-sys-layer-popover-arrow-padding: 6px;
   --mlv-sys-layer-popover-arrow-offset: 4px;
-  --mlv-sys-layer-popover-offset: 2px;
+  --mlv-sys-layer-popover-offset: 4px;
   --arrow-transform: translate(0, -2px) rotate(-45deg);
   --border: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
   --border-radius: var(--mlv-ref-border-radius-md);

@@ -1,6 +1,6 @@
 :host {
   --padding: var(--mlv-ref-size-200);
-  --font-size: var(--mlv-ref-font-size-300);
+  --font-size: var(--mlv-ref-font-size-200);
   --height: 100px;
   --width: 100%;
   --min-height: 100px;
