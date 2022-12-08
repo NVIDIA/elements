@@ -70,7 +70,7 @@ export const Content = {
 export const RadioGroup = {
   render: () => html`
 <div mlv-layout="row align:center" style="height: 250px">
-  <mlv-dropdown anchor="btn">
+  <mlv-dropdown anchor="btn" hidden>
     <mlv-radio-group style="width: 250px">
       <label>Sort By</label>
       <mlv-radio>
@@ -92,6 +92,12 @@ export const RadioGroup = {
   </mlv-dropdown>
   <mlv-button id="btn" mlv-control>test sort <mlv-icon name="chevron-down"></mlv-icon></mlv-button>
 </div>
+<script>
+  const dropdown = document.querySelector('mlv-dropdown');
+  const btn = document.querySelector('#btn');
+  btn.addEventListener('click', () => dropdown.hidden = false);
+  dropdown.addEventListener('close', () => dropdown.hidden = true);
+</script>
   `
 };
 
