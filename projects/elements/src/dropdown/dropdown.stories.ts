@@ -70,7 +70,7 @@ export const Content = {
 export const RadioGroup = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 250px">
-  <nve-dropdown anchor="btn">
+  <nve-dropdown anchor="btn" hidden>
     <nve-radio-group style="width: 250px">
       <label>Sort By</label>
       <nve-radio>
@@ -92,6 +92,12 @@ export const RadioGroup = {
   </nve-dropdown>
   <nve-button id="btn" nve-control>test sort <nve-icon name="chevron-down"></nve-icon></nve-button>
 </div>
+<script>
+  const dropdown = document.querySelector('nve-dropdown');
+  const btn = document.querySelector('#btn');
+  btn.addEventListener('click', () => dropdown.hidden = false);
+  dropdown.addEventListener('close', () => dropdown.hidden = true);
+</script>
   `
 };
 
