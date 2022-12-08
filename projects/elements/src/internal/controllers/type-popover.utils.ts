@@ -111,7 +111,8 @@ export function computePopoverPosition(config: PopoverConfig) {
 function getOffsetMiddleware(config: PopoverConfig): Middleware {
   return offset(({ rects }) => {
     if (config.position === 'center') {
-      return -rects.reference.height / 2 - rects.floating.height / 2;
+      const height = config.anchor === document.body ? document.documentElement.clientHeight : rects.reference.height;
+      return -rects.reference.height + ((height / 2) - (rects.floating.height / 2));
     } else if (config.anchor === document.body) {
       const crossAxis = { start: config.offset, end: -config.offset, undefined: 0, center: 0 };
       return { mainAxis: config.position === 'top' || config.position === 'bottom' ? -rects.floating.height - config.offset : -rects.floating.width - config.offset, crossAxis: crossAxis[config.alignment] };

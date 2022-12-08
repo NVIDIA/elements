@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, Status, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { animationFade, attachInternals, getComputedStyleWithFallback, PopoverAlign, popoverBaseStyles, PopoverType, Status, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './notification.css?inline';
 
 /**
@@ -81,8 +81,8 @@ export class Notification extends LitElement {
   render() {
     return html`
     ${this.position
-    ? html`<dialog class="popover" ${animationFade(this)}>${this.#popoverContent}</dialog>`
-    : html`<div class="popover" ${animationFade(this)}>${this.#popoverContent}</div>`}
+    ? html`<dialog class="popover" ${animationFade(this, { onComplete: () => this.#complete()})}>${this.#popoverContent}</dialog>`
+    : html`<div class="popover" ${animationFade(this, { onComplete: () => this.#complete()})}>${this.#popoverContent}</div>`}
     `;
   }
 
@@ -90,5 +90,16 @@ export class Notification extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'alert';
+  }
+
+  async remove() {
+    this.shadowRoot.addEventListener('nve-animation-complete', () => {
+      super.remove();
+    }, { once: true });
+    this.hidden = true;
+  }
+
+  #complete() {
+    this.shadowRoot.dispatchEvent(new CustomEvent('nve-animation-complete'))
   }
 }

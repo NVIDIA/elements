@@ -2,7 +2,7 @@
   --nve-sys-interaction-default-background: var(--nve-sys-interaction-default-background-300);
   --nve-sys-layer-popover-arrow-padding: 6px;
   --nve-sys-layer-popover-arrow-offset: 4px;
-  --nve-sys-layer-popover-offset: 2px;
+  --nve-sys-layer-popover-offset: 4px;
   --arrow-transform: translate(0, -2px) rotate(-45deg);
   --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --border-radius: var(--nve-ref-border-radius-md);
