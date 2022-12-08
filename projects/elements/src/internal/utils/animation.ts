@@ -1,19 +1,24 @@
-import { animate } from '@lit-labs/motion';
+import { animate, Options } from '@lit-labs/motion';
 
-const defaults = {
-  duration: '--nve-ref-animation-duration-200',
-  easing: '--nve-ref-animation-easing-100'
-};
-
-export function animationFade(host: HTMLElement, keyframeOptions = defaults) {
-  const value = parseFloat(getComputedStyleWithFallback(host, keyframeOptions.duration));
-  const duration = value < 1 ? value * 1000 : value;
-  const easing = getComputedStyleWithFallback(host, keyframeOptions.easing);
-
-  return animate({
+export function animationFade(host: HTMLElement, options?: Options) {
+  const defaultOptions = {
     skipInitial: true,
     properties: ['opacity'],
     keyframeOptions: {
+      duration: '--nve-ref-animation-duration-200',
+      easing: '--nve-ref-animation-easing-100'
+    },
+    ...options
+  };
+
+  const value = parseFloat(getComputedStyleWithFallback(host, defaultOptions.keyframeOptions.duration as string));
+  const duration = value < 1 ? value * 1000 : value;
+  const easing = getComputedStyleWithFallback(host, defaultOptions.keyframeOptions.easing);
+
+  return animate({
+    ...defaultOptions,
+    keyframeOptions: {
+      ...defaultOptions.keyframeOptions,
       duration,
       easing
     }
