@@ -1,4 +1,5 @@
 import { Dialog, DialogHeader, DialogFooter } from '@elements/elements/dialog';
+import '@elements/elements/icon-button/define.js';
 
 customElements.get('nve-dialog') || customElements.define('nve-dialog', Dialog);
 customElements.get('nve-dialog-header') || customElements.define('nve-dialog-header', DialogHeader);
