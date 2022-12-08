@@ -148,6 +148,7 @@
 
 [nve-text~='link'] {
   color: var(--nve-sys-text-link-color);
+  line-height: inherit;
 
   &:hover,
   &[nve-text~='hover'] {
