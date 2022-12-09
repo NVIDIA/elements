@@ -24,6 +24,7 @@ slot,
 slot {
   flex-wrap: wrap;
   line-height: 1em;
+  width: 100%;
 }
 
 mlv-icon {
