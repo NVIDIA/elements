@@ -3,6 +3,7 @@ const path = require('path');
 const { addons } = require('@elements/custom-elements-storybook');
 
 module.exports = {
+  staticDirs: ['../.storybook/assets'],
   stories: [
     '../src/**/*.stories.mdx',
     '../src/**/*.stories.ts',

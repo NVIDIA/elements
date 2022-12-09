@@ -29,7 +29,7 @@ export const Default = {
   <p nve-text="body">some text content in a notification</p>
 </nve-notification>
 `,
-  args: { position: 'bottom', closable: true }
+  args: { position: 'bottom', alignment: 'center', closable: true }
 };
 
 export const Content = {
@@ -43,7 +43,7 @@ export const Content = {
 
 export const Interactive = {
   render: () => html`
-<nve-notification hidden closable position="bottom" alignment="end" close-timeout="2000">
+<nve-notification hidden closable position="bottom" close-timeout="2000">
   <h3 nve-text="label">notification</h3>
   <p nve-text="body">some text content in a notification</p>  
 </nve-notification>

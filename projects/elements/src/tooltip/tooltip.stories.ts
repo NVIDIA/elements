@@ -26,32 +26,32 @@ type ArgTypes = Tooltip;
 
 export const Default = {
   render: (args: ArgTypes) => html`
-    <div style="height: 150px; width: 100%; display: flex; align-items:center; justify-content: center;">
-      <nve-tooltip anchor="btn" ${spread(args)}>${args.textContent}</nve-tooltip>
-      <nve-button id="btn">button</nve-button>
-    </div>
+<div nve-layout="row align:center" style="height: 250px">
+  <nve-tooltip anchor="btn" ${spread(args)}>${args.textContent}</nve-tooltip>
+  <nve-button id="btn">button</nve-button>
+</div>
   `,
-  args: { textContent: 'hello there', position: 'bottom' }
+  args: { textContent: 'hello there', position: 'top' }
 };
 
 export const Interactive = {
   render: () => html`
-    <div nve-layout="row align:center" style="height: 250px">
-      <nve-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</nve-tooltip>
-      <nve-button id="action-btn">button</nve-button>
-      <script type="module">
-        const tooltip = document.querySelector('nve-tooltip[anchor="action-btn"]');
-        tooltip.addEventListener('close', () => tooltip.hidden = true);
-        tooltip.addEventListener('open', () => tooltip.hidden = false);
-      </script>
-    </div>
+<div nve-layout="row align:center" style="height: 250px">
+  <nve-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</nve-tooltip>
+  <nve-button id="action-btn">button</nve-button>
+  <script type="module">
+    const tooltip = document.querySelector('nve-tooltip[anchor="action-btn"]');
+    tooltip.addEventListener('close', () => tooltip.hidden = true);
+    tooltip.addEventListener('open', () => tooltip.hidden = false);
+  </script>
+</div>
   `
 };
 
 export const Content = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 150px">
-  <nve-tooltip anchor="btn" position="right">
+  <nve-tooltip anchor="btn" position="bottom">
     <h3 nve-text="label">Title</h3>
     <p nve-text="body">some text content</p>
   </nve-tooltip>

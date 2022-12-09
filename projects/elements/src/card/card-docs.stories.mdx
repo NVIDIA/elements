@@ -19,8 +19,22 @@ Content slotted directly under `nve-card` is supported for full flexibility of c
 import '@elements/elements/card/define.js';
 ```
 
+```html
+<nve-card>
+  <nve-card-content>
+    Card Content
+  </nve-card-content>
+</nve-card>
+```
+
 <Canvas>
   <Story id="elements-card-examples--default" />
+</Canvas>
+
+## Media Card
+
+<Canvas>
+  <Story id="elements-card-examples--media-card" />
 </Canvas>
 
 ## Card with Content Layout
@@ -72,10 +86,10 @@ to the bottom of the card.
 
 ## Themes
 
-<Canvas>
-  <Story id="elements-card-examples--themes" />
+<Canvas columns={2}>
+  <Story id="elements-card-examples--light-theme" />
+  <Story id="elements-card-examples--dark-theme" />
 </Canvas>
-
 
 # Element API
 

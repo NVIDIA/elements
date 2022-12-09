@@ -5,12 +5,21 @@ import customElements from '@elements/elements/custom-elements.json';
 import styles from '@elements/elements/index.css';
 import font from '@elements/elements/inter.css';
 import '@elements/elements/polyfills/index.js';
+import prettier from 'prettier/esm/standalone.mjs';
+import parserHTML from 'prettier/esm/parser-html.mjs';
 
 setCustomElementsManifest(excludePrivateFields(customElements));
 
 export const parameters = {
   docs: {
     theme: themes.dark,
+    transformSource: (src) => {
+      // remove nve-theme="root" from demo source snippets when not used for theming
+      const hasRoot = i => i.includes('nve-theme="root"');
+      const lines = src.trim().split('\n').filter(i => !hasRoot(i));
+      const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('nve-theme="root ', 'nve-theme="');
+      return prettier.format(source, { parser: 'html', plugins: [parserHTML], singleAttributePerLine: false });
+    }
   },
   controls: {
     expanded: false
@@ -74,12 +83,9 @@ export const parameters = {
           'Getting Started',
           'Changelog',
           'Support',
-          'Testing',
-          'Angular',
-          'Lit',
-          'React',
-          'Vue'
+          'Testing'
         ],
+        'Integrations',
         'Foundations',
         [
           'Tokens',
@@ -90,6 +96,8 @@ export const parameters = {
             'Layers',
             'Interactions',
             'Status',
+            'Forms',
+            'Popovers',
             'Examples'
           ],
           'Themes',
@@ -115,47 +123,7 @@ export const parameters = {
             'Examples',
           ],
         ],
-
-        'Elements',
-        [
-          'Alert',
-          'Alert Group',
-          'Button',
-          'Card',
-          'Datalist',
-          'Icon',
-          'Icon Button',
-          'Forms',
-          'Form Validation',
-          'Form Actions',
-          'Form Control',
-          'Validation',
-          'Input',
-          'Input Group',
-          'Checkbox',
-          'Password',
-          'Radio',
-          'Range',
-          'Search',
-          'Select',
-          'Switch',
-          'Textarea',
-          'Color',
-          'Date',
-          'Datetime',
-          'File',
-          'Month',
-          'Time',
-          'Week',
-          'Popovers',
-          'Dialog',
-          'Dropdown',
-          'Notification',
-          'Panel',
-          'Toast',
-          'Tooltip',
-          'Internal',
-        ]
+        'Elements'
       ]
     }
   }

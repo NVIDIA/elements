@@ -91,33 +91,40 @@ export const Size = {
 
 export const Link = {
   render: () => html`
-    <nve-button><a href="#">default</a></nve-button>
-    <nve-button interaction="emphasize"><a href="#">emphasize</a></nve-button>
-    <nve-button interaction="destructive"><a href="#">destructive</a></nve-button>
-    <nve-button disabled><a href="#">disabled</a></nve-button>
-    <!-- anchors can wrap button instances, however its recommended to slot the anchor into the button -->
-    <a href="https://google.com"><nve-button>default</nve-button></a>
-
-    <nve-button interaction="ghost"><a href="#">ghost</a></nve-button>
-    <nve-button interaction="ghost-emphasize"><a href="#">ghost-emphasize</a></nve-button>
-    <nve-button interaction="ghost-destructive"><a href="#">ghost-destructive</a></nve-button>
+<nve-button><a href="#">default</a></nve-button>
+<nve-button interaction="emphasize"><a href="#">emphasize</a></nve-button>
+<nve-button interaction="destructive"><a href="#">destructive</a></nve-button>
+<nve-button disabled><a href="#">disabled</a></nve-button>
   `
 }
 
-export const Themes = {
+export const LinkGhost = {
   render: () => html`
-    <div nve-theme="root light">
-      <nve-button>default</nve-button>
-      <nve-button interaction="emphasize">emphasize</nve-button>
-      <nve-button interaction="destructive">destructive</nve-button>
-      <nve-button disabled>disabled</nve-button>
-    </div>
-    <div nve-theme="root dark">
-      <nve-button>default</nve-button>
-      <nve-button interaction="emphasize">emphasize</nve-button>
-      <nve-button interaction="destructive">destructive</nve-button>
-      <nve-button disabled>disabled</nve-button>
-    </div>
+<nve-button interaction="ghost"><a href="#">ghost</a></nve-button>
+<nve-button interaction="ghost-emphasize"><a href="#">ghost-emphasize</a></nve-button>
+<nve-button interaction="ghost-destructive"><a href="#">ghost-destructive</a></nve-button>
+  `
+}
+
+export const LightTheme = {
+  render: () => html`
+<div nve-theme="root light" nve-layout="row gap:sm pad:md">
+  <nve-button>default</nve-button>
+  <nve-button interaction="emphasize">emphasize</nve-button>
+  <nve-button interaction="destructive">destructive</nve-button>
+  <nve-button disabled>disabled</nve-button>
+</div>
+  `
+}
+
+export const DarkTheme = {
+  render: () => html`
+<div nve-theme="root dark" nve-layout="row gap:sm pad:md">
+  <nve-button>default</nve-button>
+  <nve-button interaction="emphasize">emphasize</nve-button>
+  <nve-button interaction="destructive">destructive</nve-button>
+  <nve-button disabled>disabled</nve-button>
+</div>
   `
 }
 
