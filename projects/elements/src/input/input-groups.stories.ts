@@ -26,3 +26,55 @@ export const InputGroup = () => {
 </nve-input-group>
 `
 };
+
+export const FilterGroup = {
+  render: () => html`
+  <div nve-layout="row align:vertical-center">
+    <nve-input-group>
+      <nve-select style="width: 100px">
+        <select>
+          <option value="1">workload</option>
+          <option value="1">instance</option>
+        </select>
+      </nve-select>
+      <nve-select style="width: 100px">
+        <select>
+          <option value="2">sort by</option>
+          <option value="1">filter by</option>
+        </select>
+      </nve-select>
+      <nve-select style="width: 100px">
+        <select>
+          <option value="1">status</option>
+          <option value="1">utilization</option>
+        </select>
+      </nve-select>
+    </nve-input-group>
+    <nve-icon-button aria-label="remove filter" interaction="ghost" icon-name="cancel"></nve-icon-button>
+  </div>
+  `
+};
+
+export const FilterGroupRange = {
+  render: () => html`
+<div nve-layout="row align:vertical-center">
+  <nve-input-group>
+    <nve-select style="width:150px">
+      <select aria-label="date type">
+        <option value="1">recording date</option>
+        <option value="2">process date</option>
+      </select>
+    </nve-select>
+    <nve-date style="width:225px">
+      <nve-button interaction="ghost" readonly="">start</nve-button>
+      <input type="date" value="2022-05-11" aria-label="start date" />
+    </nve-date>
+    <nve-date style="width:225px">
+      <nve-button interaction="ghost" readonly="">end</nve-button>
+      <input type="date" value="2022-12-07" aria-label="end date" />
+    </nve-date>
+  </nve-input-group>
+  <nve-icon-button aria-label="remove filter" interaction="ghost" icon-name="cancel"></nve-icon-button>
+</div>
+    `
+}

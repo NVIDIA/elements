@@ -1,6 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
-<Meta title="Elements/Popovers/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Foundations/Popovers/Documentation" parameters={{ badges: ['alpha'] }} />
 
 <Story id="internal-integration--empty" />
 
@@ -30,6 +30,10 @@ import '@elements/elements/tooltip/define.js';
 import '@elements/elements/toast/define.js';
 import '@elements/elements/notification/define.js';
 ```
+
+<Canvas>
+  <Story id="foundations-popovers-examples--interactive" inline={false} height={400} />
+</Canvas>
 
 ## Usage
 
@@ -66,23 +70,15 @@ like modals this defaults to the document body. The `trigger` property is an opt
 what element triggers the `open` event.
 
 <Canvas>
-  <Story id="elements-popovers-examples--trigger" inline={false} height={270} />
+  <Story id="foundations-popovers-examples--trigger" inline={false} height={270} />
 </Canvas>
 
 For elements like tooltips this is often the same as anchor however the anchor and trigger are not always
 the same as UX patterns such as guided tours may have trigger elements that are not the anchored position.
 Both `anchor` and `trigger` can take a string idref or a DOM Element reference.
 
-<br /><br />
-
-## Interactive
-
-<Canvas>
-  <Story id="elements-popovers-examples--interactive" inline={false} height={400} />
-</Canvas>
-
 ## Nested
 
 <Canvas>
-  <Story id="elements-popovers-examples--nested" inline={false} height={700} />
+  <Story id="foundations-popovers-examples--nested" inline={false} height={700} />
 </Canvas>

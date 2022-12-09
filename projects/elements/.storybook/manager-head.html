@@ -108,6 +108,7 @@
   .sidebar-item {
     background: var(--nve-sys-layer-shell-background) !important;
     background-image: linear-gradient(hsla(0, 0%, var(--nve-sys-interaction-state-lightness), var(--nve-sys-interaction-state-alpha)) 0 0) !important;
+    border-left: var(--nve-ref-size-100) solid transparent !important;
     color: var(--nve-sys-layer-shell-color) !important;
     padding-top: 6px !important;
     padding-bottom: 6px !important;
@@ -120,6 +121,7 @@
 
   .sidebar-item[data-selected='true'] {
     --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-selected-alpha);
+    border-left: var(--nve-ref-size-100) solid var(--nve-sys-accent-primary-background) !important;
   }
 
   .sidebar-item[data-selected='true'] svg {

@@ -1,14 +1,14 @@
-<Meta title="About/React" />
+<Meta title="Integrations/React" />
 
 # React Integration
 
-To use Maglev Elements in Vue follow the [instalation getting started](?path=/story/about-getting-started--page) steps. Once complete
-elements can be imported and used within React jsx and tsx files.
+<nve-alert status="warning">
+  While Elements can be used in React we recommend alternatives such as <a nve-text="link" href="https://preactjs.com">Preact</a> due to <a nve-text="link" href="https://custom-elements-everywhere.com/">React incompatibilities</a> with standard Web APIs.
+</nve-alert>
 
-Due to [React not being compatible](https://custom-elements-everywhere.com/) with
-standard DOM APIs the `@lit-labs/react` package must be used to render Custom Elements.
-This package will wrap elements into a React component mapping the standard events and
-properties in a way that React can support.
+To use Maglev Elements in [React](https://reactjs.org/) follow the [instalation getting started](?path=/story/about-getting-started--page) steps. Once complete
+elements can be imported and used within React jsx and tsx files. The `@lit-labs/react` package must be used to enable React compatibility with Custom Elements.
+This package will wrap elements into a React component mapping the standard events and properties in a way that React can understand.
 
 ```tsx
 import * as React from 'react';
