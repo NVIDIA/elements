@@ -4,6 +4,8 @@ import { Meta, Story } from '@storybook/addon-docs';
 
 <Story id="internal-integration--empty" />
 
+<span id="getting-started-img"></span>
+
 # MagLev Elements
 
 ## Foundational building blocks for MagLev UI
@@ -11,8 +13,8 @@ import { Meta, Story } from '@storybook/addon-docs';
 ### Installation
 
 ```bash
-# add internal registry to local package manager (optional)
-npm --global config set @elements/elements:registry https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
+# add internal registry to local .npmrc file (optional)
+@elements/elements:registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
 
 # install from registry
 pnpm install @elements/elements
@@ -37,16 +39,25 @@ import '@elements/elements/button/define.js';
 
 <section mlv-layout="row gap:sm align:center">
   <mlv-button>
-    <a href="./?path=/story/about-lit--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit Integration</a>
+    <a href="./?path=/story/integrations-typescript--page"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#typescript-svg"></use></svg> TypeScript</a>
   </mlv-button>
   <mlv-button>
-    <a href="./?path=/story/about-angular--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#angular-svg"></use></svg> Angular Integration</a>
+    <a href="./?path=/story/integrations-lit--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit</a>
   </mlv-button>
   <mlv-button>
-    <a href="./?path=/story/about-vue--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#vue-svg"></use></svg> Vue Integration</a>
+    <a href="./?path=/story/integrations-angular--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#angular-svg"></use></svg> Angular</a>
   </mlv-button>
   <mlv-button>
-    <a href="./?path=/story/about-react--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#react-svg"></use></svg> React Integration</a>
+    <a href="./?path=/story/integrations-vue--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#vue-svg"></use></svg> Vue</a>
+  </mlv-button>
+  <mlv-button>
+    <a href="./?path=/story/integrations-preact--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#preact-svg"></use></svg> Preact</a>
+  </mlv-button>
+  <mlv-button>
+    <a href="./?path=/story/integrations-react--page"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#react-svg"></use></svg> React</a>
+  </mlv-button>
+  <mlv-button>
+    <a href="./?path=/story/about-getting-started--page"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#javascript-svg"></use></svg> JavaScript</a>
   </mlv-button>
 </section>
 <br />

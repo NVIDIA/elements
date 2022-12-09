@@ -4,6 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 
 import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '@elements/elements/internal';
 import '@elements/elements/card/define.js';
+import '@elements/elements/icon-button/define.js';
 
 const figmaEmbedNodeId = '505%3A2280';
 const reviewDocBookmark = 'id.s62qmiib7wfu';
@@ -38,15 +39,8 @@ interface ArgTypes {
 
 export const Default = {
   render: (args: ArgTypes) => html`
-    <style>
-      mlv-card {
-        width: ${args.width}px;
-        height: ${args.height}px;
-      }
-    </style>
-
     <div mlv-theme="root">
-      <mlv-card>
+      <mlv-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
           args.showHeader,
           () => html`
@@ -58,7 +52,7 @@ export const Default = {
             ${when(
               args.showAction,
               () => html`
-                <mlv-icon-button slot="header-action" name="additional-actions" interaction="ghost"></mlv-icon-button>
+                <mlv-icon-button slot="header-action" icon-name="additional-actions" interaction="ghost"></mlv-icon-button>
               `)}
           </mlv-card-header>
           `
@@ -86,6 +80,7 @@ export const Default = {
 
 export const CardWithContentLayout = {
   render: () => html`
+  <div mlv-theme="root">
     <mlv-card style="width: 400px; height: 300px;">
       <mlv-card-content mlv-layout="row align:space-around">
         <div>Item 1</div>
@@ -93,26 +88,56 @@ export const CardWithContentLayout = {
         <div>Item 3</div>
       </mlv-card-content>
     </mlv-card>
+  </div>
+  `
+}
+
+export const MediaCard = {
+  render: () => html`
+  <div mlv-theme="root" mlv-layout="grid gap:md span-items:6 align:stretch" style="height: 480px">
+    <mlv-card style="height: 100%; width: 100%;">
+      <img src="images/test-image-3.webp" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+      <mlv-card-content>
+        <p>card content</p>
+      </mlv-card-content>
+      <mlv-card-footer>
+        Proceed with Action
+        <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
+      </mlv-card-footer>
+    </mlv-card>
+    <mlv-card style="height: 100%; width: 100%;">
+      <img src="images/test-image-2.webp" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+      <mlv-card-content>
+        <p>card content</p>
+      </mlv-card-content>
+      <mlv-card-footer>
+        Proceed with Action
+        <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
+      </mlv-card-footer>
+    </mlv-card>
+  </div>
   `
 }
 
 export const CardWithMultipleContentsAndDivider = {
   render: () => html`
-    <mlv-card style="width: 400px; height: 300px;">
-      <mlv-card-content mlv-layout="row align:space-around">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </mlv-card-content>
+    <div mlv-theme="root">
+      <mlv-card style="width: 400px; height: 300px;">
+        <mlv-card-content mlv-layout="row align:space-around">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </mlv-card-content>
 
-      <hr style="width: 100%">
+        <hr style="width: 100%">
 
-      <mlv-card-content mlv-layout="row align:center gap:md">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </mlv-card-content>
-    </mlv-card>
+        <mlv-card-content mlv-layout="row align:center gap:md">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </mlv-card-content>
+      </mlv-card>
+    </div>
   `
 }
 
@@ -140,42 +165,46 @@ export const CardWithHeaderAndFooter = {
 };
 
 
-export const Themes = {
+export const LightTheme = {
   render: () => html`
-    <div mlv-theme="root light">
-      <mlv-card style="width: 400px; height: 300px;">
-        <mlv-card-header>
-          <div slot="title">Title</div>
-          <div slot="subtitle">Sub Title</div>
-        </mlv-card-header>
+<div mlv-theme="root light" mlv-layout="pad:md align:center">
+  <mlv-card style="width: 400px; height: 300px;">
+    <mlv-card-header>
+      <div slot="title">Title</div>
+      <div slot="subtitle">Sub Title</div>
+    </mlv-card-header>
 
-        <mlv-card-content>
-          Card Content
-        </mlv-card-content>
+    <mlv-card-content>
+      Card Content
+    </mlv-card-content>
 
-        <mlv-card-footer>
-          Proceed with Action
-          <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
-        </mlv-card-footer>
-      </mlv-card>
-    </div>
+    <mlv-card-footer>
+      Proceed with Action
+      <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
+    </mlv-card-footer>
+  </mlv-card>
+</div>
+  `
+}
 
-    <div mlv-theme="root dark">
-      <mlv-card style="width: 400px; height: 300px;">
-        <mlv-card-header>
-          <div slot="title">Title</div>
-          <div slot="subtitle">Sub Title</div>
-        </mlv-card-header>
+export const DarkTheme = {
+  render: () => html`
+<div mlv-theme="root dark" mlv-layout="pad:md align:center">
+  <mlv-card style="width: 400px; height: 300px;">
+    <mlv-card-header>
+      <div slot="title">Title</div>
+      <div slot="subtitle">Sub Title</div>
+    </mlv-card-header>
 
-        <mlv-card-content>
-          Card Content
-        </mlv-card-content>
+    <mlv-card-content>
+      Card Content
+    </mlv-card-content>
 
-        <mlv-card-footer>
-          Proceed with Action
-          <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
-        </mlv-card-footer>
-      </mlv-card>
-    </div>
+    <mlv-card-footer>
+      Proceed with Action
+      <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
+    </mlv-card-footer>
+  </mlv-card>
+</div>
   `
 }

@@ -26,32 +26,32 @@ type ArgTypes = Tooltip;
 
 export const Default = {
   render: (args: ArgTypes) => html`
-    <div style="height: 150px; width: 100%; display: flex; align-items:center; justify-content: center;">
-      <mlv-tooltip anchor="btn" ${spread(args)}>${args.textContent}</mlv-tooltip>
-      <mlv-button id="btn">button</mlv-button>
-    </div>
+<div mlv-layout="row align:center" style="height: 250px">
+  <mlv-tooltip anchor="btn" ${spread(args)}>${args.textContent}</mlv-tooltip>
+  <mlv-button id="btn">button</mlv-button>
+</div>
   `,
-  args: { textContent: 'hello there', position: 'bottom' }
+  args: { textContent: 'hello there', position: 'top' }
 };
 
 export const Interactive = {
   render: () => html`
-    <div mlv-layout="row align:center" style="height: 250px">
-      <mlv-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</mlv-tooltip>
-      <mlv-button id="action-btn">button</mlv-button>
-      <script type="module">
-        const tooltip = document.querySelector('mlv-tooltip[anchor="action-btn"]');
-        tooltip.addEventListener('close', () => tooltip.hidden = true);
-        tooltip.addEventListener('open', () => tooltip.hidden = false);
-      </script>
-    </div>
+<div mlv-layout="row align:center" style="height: 250px">
+  <mlv-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</mlv-tooltip>
+  <mlv-button id="action-btn">button</mlv-button>
+  <script type="module">
+    const tooltip = document.querySelector('mlv-tooltip[anchor="action-btn"]');
+    tooltip.addEventListener('close', () => tooltip.hidden = true);
+    tooltip.addEventListener('open', () => tooltip.hidden = false);
+  </script>
+</div>
   `
 };
 
 export const Content = {
   render: () => html`
 <div mlv-layout="row align:center" style="height: 150px">
-  <mlv-tooltip anchor="btn" position="right">
+  <mlv-tooltip anchor="btn" position="bottom">
     <h3 mlv-text="label">Title</h3>
     <p mlv-text="body">some text content</p>
   </mlv-tooltip>

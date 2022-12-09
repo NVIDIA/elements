@@ -29,7 +29,7 @@ export const Default = {
   <p mlv-text="body">some text content in a notification</p>
 </mlv-notification>
 `,
-  args: { position: 'bottom', closable: true }
+  args: { position: 'bottom', alignment: 'center', closable: true }
 };
 
 export const Content = {
@@ -43,7 +43,7 @@ export const Content = {
 
 export const Interactive = {
   render: () => html`
-<mlv-notification hidden closable position="bottom" alignment="end" close-timeout="2000">
+<mlv-notification hidden closable position="bottom" close-timeout="2000">
   <h3 mlv-text="label">notification</h3>
   <p mlv-text="body">some text content in a notification</p>  
 </mlv-notification>

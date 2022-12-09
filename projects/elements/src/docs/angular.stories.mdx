@@ -1,10 +1,10 @@
-<Meta title="About/Angular" />
+<Meta title="Integrations/Angular" />
 
 # Angular Integration
 
-To use Maglev Elements in Angular follow the [instalation getting started](?path=/story/about-getting-started--page) steps.
+To use Maglev Elements in [Angular](https://angular.io/) follow the [instalation getting started](?path=/story/about-getting-started--page) steps.
 
-Add the following to your app's `angular.json` config, which will copy the `@elements/elements` icon asset file into your local angular build.
+Add the following to your app's `angular.json` config, which will copy the `@elements/elements` icon asset file into your local Angular build.
 
 ```json
 /*
@@ -50,7 +50,52 @@ Once added, properties and events can be used via the standard Angular template 
 </mlv-alert-group>
 ```
 
-## Optional
+## Forms
+
+Maglev Elements provides a suite of form components that leverage standard HTML input types. This enables frameworks
+to take advantage of built in framework features like [Angular Reactive Forms](https://angular.io/guide/reactive-forms) for managing form validation and state.
+
+<mlv-alert>To integrate custom form control types into Elements checkout our [custom control](./?path=/story/elements-form-control-documentation--page) documentation.</mlv-alert>
+
+```html
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mlv-input>
+    <label>first name</label>
+    <input type="text" formControlName="firstName" />
+    <mlv-control-message *ngIf="form.controls.firstName.invalid && (form.controls.firstName.dirty || form.controls.firstName.touched)">required</mlv-control-message>
+  </mlv-input>
+  <button>submit</button>
+</form>
+```
+
+```typescript
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
+})
+export class AppComponent  {
+  form: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      firstName: ['', Validators.required]
+    });
+  }
+
+  submit() {
+    this.form.controls.custom.markAsTouched();
+    console.log(this.form.value);
+  }
+}
+```
+
+## Advanced Installation
+
+If your app was created with an older version of the Angualr CLI you may to need add or adjust the following to your application.
 
 ### Styles
 

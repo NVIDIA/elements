@@ -108,6 +108,7 @@
   .sidebar-item {
     background: var(--mlv-sys-layer-shell-background) !important;
     background-image: linear-gradient(hsla(0, 0%, var(--mlv-sys-interaction-state-lightness), var(--mlv-sys-interaction-state-alpha)) 0 0) !important;
+    border-left: var(--mlv-ref-size-100) solid transparent !important;
     color: var(--mlv-sys-layer-shell-color) !important;
     padding-top: 6px !important;
     padding-bottom: 6px !important;
@@ -120,6 +121,7 @@
 
   .sidebar-item[data-selected='true'] {
     --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-selected-alpha);
+    border-left: var(--mlv-ref-size-100) solid var(--mlv-sys-accent-primary-background) !important;
   }
 
   .sidebar-item[data-selected='true'] svg {

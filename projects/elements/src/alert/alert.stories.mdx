@@ -1,6 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
-<Meta title="Elements/Alert/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Alert/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Alert
 
@@ -28,8 +28,9 @@ import '@elements/elements/alert/define.js';
 
 ## Themes
 
-<Canvas>
-  <Story id="elements-alert-examples--themes" />
+<Canvas columns={2}>
+  <Story id="elements-alert-examples--light-theme" />
+  <Story id="elements-alert-examples--dark-theme" />
 </Canvas>
 
 # Element API

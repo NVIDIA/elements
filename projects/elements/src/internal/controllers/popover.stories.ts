@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Elements/Popovers/Examples'
+  title: 'Foundations/Popovers/Examples'
 }
 
 export const Trigger = {

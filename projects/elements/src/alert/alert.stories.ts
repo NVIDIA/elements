@@ -32,19 +32,24 @@ export const Status = {
   `
 }
 
-export const Themes = {
+export const LightTheme = {
   render: () => html`
-    <div mlv-theme="root light" mlv-layout="column gap:md">
-      <mlv-alert>default</mlv-alert>
-      <mlv-alert status="warning">warning</mlv-alert>
-      <mlv-alert status="success">success</mlv-alert>
-      <mlv-alert status="danger">danger</mlv-alert>
-    </div>
-    <div mlv-theme="root dark" mlv-layout="column gap:md">
-      <mlv-alert>default</mlv-alert>
-      <mlv-alert status="warning">warning</mlv-alert>
-      <mlv-alert status="success">success</mlv-alert>
-      <mlv-alert status="danger">danger</mlv-alert>
-    </div>
+<div mlv-theme="root light" mlv-layout="column gap:md pad:md">
+  <mlv-alert>default</mlv-alert>
+  <mlv-alert status="warning">warning</mlv-alert>
+  <mlv-alert status="success">success</mlv-alert>
+  <mlv-alert status="danger">danger</mlv-alert>
+</div>
+  `
+}
+
+export const DarkTheme = {
+  render: () => html`
+<div mlv-theme="root dark" mlv-layout="column gap:md pad:md">
+  <mlv-alert>default</mlv-alert>
+  <mlv-alert status="warning">warning</mlv-alert>
+  <mlv-alert status="success">success</mlv-alert>
+  <mlv-alert status="danger">danger</mlv-alert>
+</div>
   `
 }
