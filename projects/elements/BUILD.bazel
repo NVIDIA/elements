@@ -62,6 +62,7 @@ storybook_rules_js(
         ":node_modules/@lit-labs/react",
         ":node_modules/lit",
         ":node_modules/typescript",
+        ":node_modules/prettier",
     ] + custom_elements_storybook_deps(),
     data = [
         "package.json"

@@ -38,14 +38,23 @@ import '@elements/elements/button/define.js';
 
 ## Link
 
-<Canvas>
+Anchors can wrap button instances, however its recommended to slot the anchor into the button.
+
+```html
+<nve-button><a href="#">default</a></nve-button> <!-- do -->
+<a href="#"><nve-button>default</nve-button></a> <!-- don't -->
+```
+
+<Canvas columns={2}>
   <Story id="elements-button-examples--link" />
+  <Story id="elements-button-examples--link-ghost" />
 </Canvas>
 
 ## Themes
 
-<Canvas>
-  <Story id="elements-button-examples--themes" />
+<Canvas columns={2}>
+  <Story id="elements-button-examples--light-theme" />
+  <Story id="elements-button-examples--dark-theme" />
 </Canvas>
 
 ## Size

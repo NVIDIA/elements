@@ -4,6 +4,7 @@ import { withDesign } from 'storybook-addon-designs';
 
 import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '@elements/elements/internal';
 import '@elements/elements/card/define.js';
+import '@elements/elements/icon-button/define.js';
 
 const figmaEmbedNodeId = '505%3A2280';
 const reviewDocBookmark = 'id.s62qmiib7wfu';
@@ -38,15 +39,8 @@ interface ArgTypes {
 
 export const Default = {
   render: (args: ArgTypes) => html`
-    <style>
-      nve-card {
-        width: ${args.width}px;
-        height: ${args.height}px;
-      }
-    </style>
-
     <div nve-theme="root">
-      <nve-card>
+      <nve-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
           args.showHeader,
           () => html`
@@ -58,7 +52,7 @@ export const Default = {
             ${when(
               args.showAction,
               () => html`
-                <nve-icon-button slot="header-action" name="additional-actions" interaction="ghost"></nve-icon-button>
+                <nve-icon-button slot="header-action" icon-name="additional-actions" interaction="ghost"></nve-icon-button>
               `)}
           </nve-card-header>
           `
@@ -86,6 +80,7 @@ export const Default = {
 
 export const CardWithContentLayout = {
   render: () => html`
+  <div nve-theme="root">
     <nve-card style="width: 400px; height: 300px;">
       <nve-card-content nve-layout="row align:space-around">
         <div>Item 1</div>
@@ -93,26 +88,56 @@ export const CardWithContentLayout = {
         <div>Item 3</div>
       </nve-card-content>
     </nve-card>
+  </div>
+  `
+}
+
+export const MediaCard = {
+  render: () => html`
+  <div nve-theme="root" nve-layout="grid gap:md span-items:6 align:stretch" style="height: 480px">
+    <nve-card style="height: 100%; width: 100%;">
+      <img src="images/test-image-3.webp" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+      <nve-card-content>
+        <p>card content</p>
+      </nve-card-content>
+      <nve-card-footer>
+        Proceed with Action
+        <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
+      </nve-card-footer>
+    </nve-card>
+    <nve-card style="height: 100%; width: 100%;">
+      <img src="images/test-image-2.webp" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+      <nve-card-content>
+        <p>card content</p>
+      </nve-card-content>
+      <nve-card-footer>
+        Proceed with Action
+        <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
+      </nve-card-footer>
+    </nve-card>
+  </div>
   `
 }
 
 export const CardWithMultipleContentsAndDivider = {
   render: () => html`
-    <nve-card style="width: 400px; height: 300px;">
-      <nve-card-content nve-layout="row align:space-around">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </nve-card-content>
+    <div nve-theme="root">
+      <nve-card style="width: 400px; height: 300px;">
+        <nve-card-content nve-layout="row align:space-around">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </nve-card-content>
 
-      <hr style="width: 100%">
+        <hr style="width: 100%">
 
-      <nve-card-content nve-layout="row align:center gap:md">
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-      </nve-card-content>
-    </nve-card>
+        <nve-card-content nve-layout="row align:center gap:md">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </nve-card-content>
+      </nve-card>
+    </div>
   `
 }
 
@@ -140,42 +165,46 @@ export const CardWithHeaderAndFooter = {
 };
 
 
-export const Themes = {
+export const LightTheme = {
   render: () => html`
-    <div nve-theme="root light">
-      <nve-card style="width: 400px; height: 300px;">
-        <nve-card-header>
-          <div slot="title">Title</div>
-          <div slot="subtitle">Sub Title</div>
-        </nve-card-header>
+<div nve-theme="root light" nve-layout="pad:md align:center">
+  <nve-card style="width: 400px; height: 300px;">
+    <nve-card-header>
+      <div slot="title">Title</div>
+      <div slot="subtitle">Sub Title</div>
+    </nve-card-header>
 
-        <nve-card-content>
-          Card Content
-        </nve-card-content>
+    <nve-card-content>
+      Card Content
+    </nve-card-content>
 
-        <nve-card-footer>
-          Proceed with Action
-          <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
-        </nve-card-footer>
-      </nve-card>
-    </div>
+    <nve-card-footer>
+      Proceed with Action
+      <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
+    </nve-card-footer>
+  </nve-card>
+</div>
+  `
+}
 
-    <div nve-theme="root dark">
-      <nve-card style="width: 400px; height: 300px;">
-        <nve-card-header>
-          <div slot="title">Title</div>
-          <div slot="subtitle">Sub Title</div>
-        </nve-card-header>
+export const DarkTheme = {
+  render: () => html`
+<div nve-theme="root dark" nve-layout="pad:md align:center">
+  <nve-card style="width: 400px; height: 300px;">
+    <nve-card-header>
+      <div slot="title">Title</div>
+      <div slot="subtitle">Sub Title</div>
+    </nve-card-header>
 
-        <nve-card-content>
-          Card Content
-        </nve-card-content>
+    <nve-card-content>
+      Card Content
+    </nve-card-content>
 
-        <nve-card-footer>
-          Proceed with Action
-          <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
-        </nve-card-footer>
-      </nve-card>
-    </div>
+    <nve-card-footer>
+      Proceed with Action
+      <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
+    </nve-card-footer>
+  </nve-card>
+</div>
   `
 }
