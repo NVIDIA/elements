@@ -1,5 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
+import { Icon } from '@elements/elements/icon';
+import { IconButton } from '@elements/elements/icon-button';
 import { attachInternals, Status, statusIcons, TypeClosableController, useStyles } from '@elements/elements/internal';
 import styles from './alert.css?inline';
 
@@ -24,6 +26,11 @@ export class Alert extends LitElement {
 
   /** @private */
   declare _internals: ElementInternals;
+
+  static elementDefinitions = {
+    'nve-icon': Icon,
+    'nve-icon-button': IconButton
+  }
 
   render() {
     return html`

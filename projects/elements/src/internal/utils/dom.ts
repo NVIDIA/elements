@@ -97,3 +97,12 @@ export function clickOutsideElementBounds(event: PointerEvent, element: HTMLElem
 export function parseTokenNumber(value: string) {
   return parseInt(value.includes('calc') ? value.split(' * ')[1].replace('px)', '') : value, 10) || 0;
 }
+
+/**
+ * Utility for applying mixin recursively to all custom elements, used for scoped element registry polyfills and shims
+ */
+export function scope(element: any, Mixin: any) {
+  return class extends Mixin(element as any) {
+    static elementDefinitions = Object.entries({ ...element.elementDefinitions }).reduce((p, [tag, el]) => ({ ...p, [tag]: scope(el, Mixin) }), { })
+  };
+}

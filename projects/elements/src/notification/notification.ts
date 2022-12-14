@@ -1,6 +1,8 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { animationFade, attachInternals, getComputedStyleWithFallback, PopoverAlign, popoverBaseStyles, PopoverType, Status, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { Icon } from '@elements/elements/icon';
+import { IconButton } from '@elements/elements/icon-button';
+import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, Status, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './notification.css?inline';
 
 /**
@@ -76,6 +78,11 @@ export class Notification extends LitElement {
     <nve-icon .name=${statusIcons[this.status] ?? 'information'} part="status-icon"></nve-icon>
     ${this.closable ? html`<nve-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" interaction="ghost" aria-label="close"></nve-icon-button>` : ''}
     <slot></slot>`;
+  }
+
+  static elementDefinitions = {
+    'nve-icon': Icon,
+    'nve-icon-button': IconButton
   }
 
   render() {
