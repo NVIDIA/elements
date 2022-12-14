@@ -1,0 +1,20 @@
+{
+  "name": "extensions-elements-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@elements/elements": "workspace:*",
+    "@webcomponents/scoped-custom-element-registry": "0.0.6"
+  },
+  "devDependencies": {
+    "typescript": "4.9.3",
+    "vite": "3.1.8",
+    "vite-plugin-static-copy": "0.11.1"
+  }
+}

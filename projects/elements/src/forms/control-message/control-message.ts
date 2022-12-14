@@ -1,7 +1,7 @@
-import { LitElement, html, PropertyValues } from 'lit';
+import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { state } from 'lit/decorators/state.js';
 import { useStyles } from '@elements/elements/internal';
+import { Alert } from '@elements/elements/alert';
 import styles from './control-message.css?inline';
 
 const alertStatus = {
@@ -34,6 +34,10 @@ export class ControlMessage extends LitElement {
     } else {
       return 'muted';
     }
+  }
+
+  static elementDefinitions = {
+    'nve-alert': Alert
   }
 
   render() {

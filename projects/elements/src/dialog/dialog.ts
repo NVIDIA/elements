@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { animationFade, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './dialog.css?inline';
+import { IconButton } from '../icon-button';
 
 /**
  * @alpha
@@ -77,6 +78,10 @@ export class Dialog extends LitElement {
   }
 
   #typePopoverController = new TypePopoverController<Dialog>(this);
+
+  static elementDefinitions = {
+    'nve-icon-button': IconButton
+  }
 
   render() {
     return html`
