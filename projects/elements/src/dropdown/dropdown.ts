@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
+import { IconButton } from '@elements/elements/icon-button';
 import { animationFade, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './dropdown.css?inline';
 
@@ -71,6 +72,10 @@ export class Dropdown extends LitElement {
   readonly popoverType: PopoverType = 'auto';
 
   #typePopoverController = new TypePopoverController<Dropdown>(this);
+
+  static elementDefinitions = {
+    'mlv-icon-button': IconButton
+  }
 
   render() {
     return html`

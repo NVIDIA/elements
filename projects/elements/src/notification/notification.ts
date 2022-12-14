@@ -1,6 +1,8 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { animationFade, attachInternals, getComputedStyleWithFallback, PopoverAlign, popoverBaseStyles, PopoverType, Status, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { Icon } from '@elements/elements/icon';
+import { IconButton } from '@elements/elements/icon-button';
+import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, Status, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './notification.css?inline';
 
 /**
@@ -76,6 +78,11 @@ export class Notification extends LitElement {
     <mlv-icon .name=${statusIcons[this.status] ?? 'information'} part="status-icon"></mlv-icon>
     ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" interaction="ghost" aria-label="close"></mlv-icon-button>` : ''}
     <slot></slot>`;
+  }
+
+  static elementDefinitions = {
+    'mlv-icon': Icon,
+    'mlv-icon-button': IconButton
   }
 
   render() {

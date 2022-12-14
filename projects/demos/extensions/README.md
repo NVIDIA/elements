@@ -1,0 +1,69 @@
+# Extensions + @elements/elements
+
+[Built with Vite](https://vitejs.dev/)
+
+To create reusable UI components that build on top of MagLev Elements we recommend using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components).
+This path enables your extensions to work in a large variety of frameworks and environments. We recommend
+reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team.
+The rest of this guide will focus on how to integrate specifically for Element integration and best practices for MagLev.
+
+## Getting Started
+
+```shell
+pnpm i
+```
+
+```shell
+pnpm run dev
+```
+
+## Scoped Registry
+
+By default Web Components, specifcally the custom elements spec, defines elements on a global registry.
+This can introduce tag name collisions if multiple versions of the same library are loaded. To avoid this
+we recommend using a scoped registry. This allows you to define your own registry and ensure the Elements you
+depend on are only registered to the scope of your component and not the global registry.
+
+The lit team provides the `@lit-labs/scoped-registry-mixin` package which provides a mixin that can be used to
+create a scoped registry based on the in progress [Scoped Custom Element Registries](https://github.com/webcomponents/polyfills/tree/master/packages/scoped-custom-element-registry) spec.
+
+```typescript
+import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators/custom-element.js';
+import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
+import { scope } from '@elements/elements/internal';
+import { Input } from '@elements/elements/input';
+import { Password } from '@elements/elements/password';
+import { Button } from '@elements/elements/button';
+import '@webcomponents/scoped-custom-element-registry';
+
+@customElement('domain-login')
+export class DomainLogin extends ScopedRegistryHost(LitElement) {
+  static elementDefinitions = {
+    'mlv-input': scope(Input, ScopedRegistryHost),
+    'mlv-password': scope(Password, ScopedRegistryHost),
+    'mlv-button': scope(Button, ScopedRegistryHost)
+  }
+
+  render() {
+    return html`
+      <mlv-input>
+        <label>Email</label>
+        <input type="email" />
+      </mlv-input>
+
+      <mlv-password>
+        <label>Password</label>
+        <input type="password" />
+      </mlv-password>
+
+      <mlv-button interaction="emphasize">Login</mlv-button>
+    `;
+  }
+}
+```
+
+The static `elementDefinitions` property is used to define the elements that will be registered to the scoped registry.
+The `scope` function is used to wrap the element definition with the `ScopedRegistryHost` mixin. This is required to ensure
+all Elements in the entire DOM tree are registered to the scoped registry. Once completed the `domain-login` component
+can be used in any framework that supports Web Components.
