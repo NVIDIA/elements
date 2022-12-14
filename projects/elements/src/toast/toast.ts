@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { IconButton } from '@elements/elements/icon-button';
 import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './toast.css?inline';
 
@@ -68,6 +69,10 @@ export class Toast extends LitElement {
 
   /** @private */
   declare _internals: ElementInternals;
+
+  static elementDefinitions = {
+    'nve-icon-button': IconButton
+  }
 
   render() {
     return html`

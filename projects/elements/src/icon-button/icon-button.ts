@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@elements/elements/internal';
 import { Button } from '@elements/elements/button';
-import { IconNames } from '@elements/elements/icon';
+import { Icon, IconNames } from '@elements/elements/icon';
 import styles from './icon-button.css?inline';
 
 /**
@@ -15,6 +15,10 @@ export class IconButton extends Button {
   static styles = useStyles([...Button.styles, styles]);
 
   @property({ type: String, attribute: 'icon-name' }) iconName: IconNames;
+
+  static elementDefinitions = {
+    'nve-icon': Icon
+  }
 
   render() {
     return html`

@@ -2,6 +2,8 @@ import { LitElement, html, PropertyValues } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
+import { Icon } from '@elements/elements/icon';
+import { IconButton } from '@elements/elements/icon-button/icon-button';
 import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList, appendRootNodeStyle, getAttributeListChanges } from '@elements/elements/internal';
 import { ControlMessage } from '../control-message/control-message.js';
 import { setupControlValidationStates, setupControlStates, setupControlStatusStates, inputQuery } from '../utils/states.js';
@@ -62,6 +64,11 @@ export class Control extends LitElement {
   declare _internals: ElementInternals;
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
+
+  static elementDefinitions = {
+    'nve-icon': Icon,
+    'nve-icon-button': IconButton
+  }
 
   render() {
     return !this.inlineControl ? html`
