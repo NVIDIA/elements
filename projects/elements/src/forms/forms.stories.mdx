@@ -1,4 +1,5 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
 
 <Meta title="Foundations/Forms/Documentation" />
 
@@ -8,7 +9,7 @@ The form control elements leverage the native browser inputs as its public API.
 This approach allows any framework or library to use the form elements and keeps
 the API simple without obfuscating the native browser APIs.
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 The form elements are split into individual sub imports/entrypoints.
 
@@ -24,34 +25,61 @@ import '@elements/elements/input/define.js';
 </nve-input>
 ```
 
+<LinkedHeader>Framework Integrations</LinkedHeader>
+
+Each frontend framework typically provides it's own guidance and best practices for creating forms.
+See the links below for specific integration patterns for the following frameworks:
+
+<section nve-layout="row gap:sm align:center">
+  <nve-button>
+    <a href="./?path=/story/integrations-angular--page#forms" onClick="location.reload()">
+      <svg width="20" height="20">
+        <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#angular-svg"></use>
+      </svg>{' '}
+      Angular Integration
+    </a>
+  </nve-button>
+
+  <nve-button>
+    <a href="./?path=/story/integrations-lit--page#forms" onClick="location.reload()">
+      <svg width="20" height="20">
+        <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use>
+      </svg>{' '}
+      Lit Integration
+    </a>
+  </nve-button>
+</section>
+
+# Form layouts
+
 All form elements support the following layouts for label placement, `horizontal`, `horizontal-inline`, `vertical` and `vertical-inline`.
 Vertical is the default label layout for all elements.
 
-## Horizontal Inline
+<LinkedHeader>Horizontal Inline</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-forms-examples--horizontal-inline" />
 </Canvas>
 
-## Horizontal
+<LinkedHeader>Horizontal</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-forms-examples--horizontal" />
 </Canvas>
 
-## Vertical
+<LinkedHeader>Vertical</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-forms-examples--vertical" />
 </Canvas>
 
-## Vertical Inline
+<LinkedHeader>Vertical Inline</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-forms-examples--vertical-inline" />
 </Canvas>
 
-## Kitchen Sink
+<LinkedHeader>Kitchen Sink</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-forms-examples--kitchen-sink" />

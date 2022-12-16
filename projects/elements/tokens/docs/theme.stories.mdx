@@ -1,4 +1,5 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../src/docs/utils.mdx';
 
 <Meta title="Foundations/Themes/Documentation" />
 
@@ -20,7 +21,7 @@ Themes are built leveraging CSS Custom Properties. Themes are applied by setting
 
 <br /><br />
 
-## Theme Options
+<LinkedHeader>Theme Options</LinkedHeader>
 
 Currently there are the following themes:
 - Light (default)
@@ -45,25 +46,25 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)')).matches) {
 }
 ```
 
-## Light (Default)
+<LinkedHeader>Light (Default)</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-themes-examples--default" />
 </Canvas>
 
-## Dark
+<LinkedHeader>Dark</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-themes-examples--dark" />
 </Canvas>
 
-## High Contrast
+<LinkedHeader>High Contrast</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-themes-examples--high-contrast" />
 </Canvas>
 
-## Reduced Motion
+<LinkedHeader>Reduced Motion</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-themes-examples--reduced-motion" />

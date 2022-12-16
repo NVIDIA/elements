@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Card/Documentation" parameters={{ badges: ['stable'] }} />
 
@@ -13,7 +15,7 @@ The following sub-components can be used within `nve-card` to achieve standard c
 
 Content slotted directly under `nve-card` is supported for full flexibility of content.
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/card/define.js';
@@ -31,13 +33,13 @@ import '@elements/elements/card/define.js';
   <Story id="elements-card-examples--default" />
 </Canvas>
 
-## Media Card
+<LinkedHeader>Media Card</LinkedHeader>
 
 <Canvas>
   <Story id="elements-card-examples--media-card" />
 </Canvas>
 
-## Card with Content Layout
+<LinkedHeader>Card with Content Layout</LinkedHeader>
 
 Layout system is supported when <a href="./?path=/story/layout-getting-started--page">nve-layout</a> attribute
 is used on the `nve-card-content` element:
@@ -56,19 +58,19 @@ is used on the `nve-card-content` element:
   <Story id="elements-card-examples--card-with-content-layout" />
 </Canvas>
 
-## Card with Header
+<LinkedHeader>Card with Header</LinkedHeader>
 
 <Canvas>
   <Story id="elements-card-examples--card-with-header" />
 </Canvas>
 
-## Card with Header and Action
+<LinkedHeader>Card with Header and Action</LinkedHeader>
 
 <Canvas>
   <Story id="elements-card-examples--card-with-header-and-action" />
 </Canvas>
 
-## Card with Header and Footer
+<LinkedHeader>Card with Header and Footer</LinkedHeader>
 
 Combining `nve-card-header`, `nve-card-content` & `nve-card-footer` will yield a fully styled card.
 Note how `nve-card-content` will vertically stretch to fill the card size and the footer will align
@@ -78,13 +80,13 @@ to the bottom of the card.
   <Story id="elements-card-examples--card-with-header-and-footer" />
 </Canvas>
 
-## Card With Multiple Content Containers and Full-bleed Divider
+<LinkedHeader>Card With Multiple Content Containers and Full-bleed Divider</LinkedHeader>
 
 <Canvas>
   <Story id="elements-card-examples--card-with-multiple-contents-and-divider" />
 </Canvas>
 
-## Themes
+<LinkedHeader>Themes</LinkedHeader>
 
 <Canvas columns={2}>
   <Story id="elements-card-examples--light-theme" />
@@ -93,14 +95,14 @@ to the bottom of the card.
 
 # Element API
 
-## <nve-card\>
+<LinkedHeader>nve-card</LinkedHeader>
 <Props of="nve-card" />
 
-## <nve-card-header\>
+<LinkedHeader>nve-card-header</LinkedHeader>
 <Props of="nve-card-header" />
 
-## <nve-card-content\>
+<LinkedHeader>nve-card-content</LinkedHeader>
 <Props of="nve-card-content" />
 
-## <nve-card-footer\>
+<LinkedHeader>nve-card-footer</LinkedHeader>
 <Props of="nve-card-footer" />

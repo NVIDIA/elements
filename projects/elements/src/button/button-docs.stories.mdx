@@ -1,10 +1,12 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Button/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Button
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/button/define.js';
@@ -18,25 +20,25 @@ import '@elements/elements/button/define.js';
   <Story id="elements-button-examples--default" />
 </Canvas>
 
-## With Icon
+<LinkedHeader>With Icon</LinkedHeader>
 
 <Canvas>
   <Story id="elements-button-examples--button-with-icon" />
 </Canvas>
 
-## Interactions
+<LinkedHeader>Interactions</LinkedHeader>
 
 <Canvas>
   <Story id="elements-button-examples--interactions" />
 </Canvas>
 
-## Ghost Interactions
+<LinkedHeader>Ghost Interactions</LinkedHeader>
 
 <Canvas>
   <Story id="elements-button-examples--ghost-interactions" />
 </Canvas>
 
-## Link
+<LinkedHeader>Link</LinkedHeader>
 
 Anchors can wrap button instances, however its recommended to slot the anchor into the button.
 
@@ -50,20 +52,20 @@ Anchors can wrap button instances, however its recommended to slot the anchor in
   <Story id="elements-button-examples--link-ghost" />
 </Canvas>
 
-## Themes
+<LinkedHeader>Themes</LinkedHeader>
 
 <Canvas columns={2}>
   <Story id="elements-button-examples--light-theme" />
   <Story id="elements-button-examples--dark-theme" />
 </Canvas>
 
-## Size
+<LinkedHeader>Size</LinkedHeader>
 
 <Canvas>
   <Story id="elements-button-examples--size" />
 </Canvas>
 
-## Form Control
+<LinkedHeader>Form Control</LinkedHeader>
 
 Form control option allows a button to be styled like a control field. This is helpful for using button to trigger custom form control components or dropdowns.
 
@@ -73,5 +75,5 @@ Form control option allows a button to be styled like a control field. This is h
 
 # Element API
 
-## <nve-button\>
+<LinkedHeader>nve-button</LinkedHeader>
 <Props of="nve-button" />
