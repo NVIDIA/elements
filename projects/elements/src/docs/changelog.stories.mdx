@@ -1,11 +1,15 @@
+import { LinkedHeader } from './utils.mdx';
+
 <Meta title="About/Changelog" />
 
 # Changelog
 
-## 0.6.2 (pending)
+<LinkedHeader>0.6.2 (pending)</LinkedHeader>
+
 - Fix add internal support for scoped registries and documentation
 
-## v0.6.1
+<LinkedHeader>v0.6.1</LinkedHeader>
+
 ### Fixes
 - Fix animation computation from design tokens
 - Fix optional disabling of leading trim for nve-text utils
@@ -23,7 +27,8 @@
 - Fix wait until animation complete to remove notification snackbar element
 - Fix popover alignments with center content and scrollable body content
 
-## v0.6.0
+<LinkedHeader>v0.6.0</LinkedHeader>
+
 ### Features
 - Added alpha stage tooltip element
 - Added alpha stage toast element
@@ -36,7 +41,8 @@
 - Fix root global style attachment used in forms
 - Fix interaction token references
 
-## v0.5.0
+<LinkedHeader>v0.5.0</LinkedHeader>
+
 ### Features
 - Added alpha stage dialog element
 - Added alpha stage dropdown element
@@ -54,18 +60,21 @@
   This allows for more flexibility when using testing themes without overiding the nested element style properties.
 - Rename internals and `--nve-sys-layer-popup-*` to `--nve-sys-layer-popover-*` to align with [popover spec](https://github.com/openui/open-ui/issues/627#issuecomment-1293918937)
 
-## v0.4.2
+<LinkedHeader>v0.4.2</LinkedHeader>
+
 - Fix button types not bubbling to parent elements
 - Fix enable textarea cols and rows support
 - Fix overlay token contrast
 - Fix form controls inherit font family
 
-## v0.4.1
+<LinkedHeader>v0.4.1</LinkedHeader>
+
 ### Fixes
 - Fix keypress active state on buttons to only trigger with spacebar and enter keys
 - Fix DOM based non-HTML5 validation for better framework support (Angular, Vue, React, etc)
 
-## v0.4.0
+<LinkedHeader>v0.4.0</LinkedHeader>
+
 ### Features
 - Added T-Shirt size padding to layout system
 - Allow anchors to alternatively wrap nve-button/nve-icon-button instances as a fallback
@@ -91,7 +100,7 @@
 - Cleanup/align statuses in preparation for additional status components like toasts/snackbars
 
 
-## v0.3.2
+<LinkedHeader>v0.3.2</LinkedHeader>
 
 ### Features
 - Added Grid Support to Layout System
@@ -100,13 +109,13 @@
 - Fixed issue when element placed in shadow root would incorrectly render native chromium icons for form controls
 - Fixed issue around layout of the default `nve-card` content. A `nve-card-content` sub-component was added.
 
-## v0.3.1
+<LinkedHeader>v0.3.1</LinkedHeader>
 
 ### Fixes
 - `nve-icon-button` co-dependency will automatically register when using isolated imports of form elements
 - Update typography system to support `rem` font size properties
 
-## v0.3.0
+<LinkedHeader>v0.3.0</LinkedHeader>
 
 ### Features
 - Added Horizontal and Vertical Layout System
@@ -118,7 +127,7 @@
 ### Fixes
 - `nve-button` correctly triggers one event per submit
 
-## v0.2.1
+<LinkedHeader>v0.2.1</LinkedHeader>
 
 ### Features
 - Now supports individual element imports for better performance
@@ -150,6 +159,7 @@
     - Adds `nve-card-header`
     - Adds `nve-card-footer`
 
-## v0.1.3
+<LinkedHeader>v0.1.3</LinkedHeader>
+
 - Initial release of alpha version to artifactory
 - POC version of Button/Icon/Card elements based in Lit/Vite/Storybook build tooling

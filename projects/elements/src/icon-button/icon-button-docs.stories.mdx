@@ -1,10 +1,12 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Icon Button/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Icon Button
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/icon-button/define.js';
@@ -18,31 +20,31 @@ import '@elements/elements/icon-button/define.js';
   <Story id="elements-icon-button-examples--default" />
 </Canvas>
 
-## Interactions
+<LinkedHeader>Interactions</LinkedHeader>
 
 <Canvas>
   <Story id="elements-icon-button-examples--interactions" />
 </Canvas>
 
-## Ghost Interactions
+<LinkedHeader>Ghost Interactions</LinkedHeader>
 
 <Canvas>
   <Story id="elements-icon-button-examples--ghost-interactions" />
 </Canvas>
 
-## Link
+<LinkedHeader>Link</LinkedHeader>
 
 <Canvas>
   <Story id="elements-icon-button-examples--link" />
 </Canvas>
 
-## Themes
+<LinkedHeader>Themes</LinkedHeader>
 
 <Canvas>
   <Story id="elements-icon-button-examples--themes" />
 </Canvas>
 
-## Size
+<LinkedHeader>Size</LinkedHeader>
 
 <Canvas>
   <Story id="elements-icon-button-examples--size" />
@@ -50,5 +52,5 @@ import '@elements/elements/icon-button/define.js';
 
 # Element API
 
-## <nve-icon-button\>
+<LinkedHeader>nve-icon-button</LinkedHeader>
 <Props of="nve-icon-button" />

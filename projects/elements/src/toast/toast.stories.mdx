@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Toast/Documentation" parameters={{ badges: ['alpha'] }} />
 
@@ -6,7 +8,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 [W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/)
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/toast/define.js';
@@ -22,13 +24,13 @@ import '@elements/elements/toast/define.js';
   <Story id="elements-toast-examples--default" inline={false} height={200} />
 </Canvas>
 
-## Status/Actions
+<LinkedHeader>Status/Actions</LinkedHeader>
 
 <Canvas columns={2}>
   <Story id="elements-toast-examples--status" inline={false} height={300} />
   <Story id="elements-toast-examples--actions" inline={false} height={300} />
 </Canvas>
 
-## <nve-toast\>
+<LinkedHeader>nve-toast</LinkedHeader>
 
 <Props of="nve-toast" />

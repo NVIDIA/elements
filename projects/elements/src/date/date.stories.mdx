@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 import { BADGE } from '@geometricpanda/storybook-addon-badges';
 
 <Meta title="Elements/Date/Documentation" parameters={{ badges: ['alpha'] }} />
@@ -7,7 +9,7 @@ import { BADGE } from '@geometricpanda/storybook-addon-badges';
 
 [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/date/define.js';
@@ -24,24 +26,24 @@ import '@elements/elements/date/define.js';
   <Story id="elements-date-examples--date" />
 </Canvas>
 
-## Datalist
+<LinkedHeader>Datalist</LinkedHeader>
 
 <Canvas>
   <Story id="elements-date-examples--datalist" />
 </Canvas>
 
-## Vertical
+<LinkedHeader>Vertical</LinkedHeader>
 
 <Canvas>
   <Story id="elements-date-examples--vertical" />
 </Canvas>
 
-## Horizontal
+<LinkedHeader>Horizontal</LinkedHeader>
 
 <Canvas>
   <Story id="elements-date-examples--horizontal" />
 </Canvas>
 
-## <nve-date\>
+<LinkedHeader>nve-date</LinkedHeader>
 
 <Props of="nve-date" />

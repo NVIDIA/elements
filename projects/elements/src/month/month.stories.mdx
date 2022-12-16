@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Month/Documentation" parameters={{ badges: ['alpha'] }} />
 
@@ -6,7 +8,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month)
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/month/define.js';
@@ -23,24 +25,24 @@ import '@elements/elements/month/define.js';
   <Story id="elements-month-examples--month" />
 </Canvas>
 
-## Datalist
+<LinkedHeader>Datalist</LinkedHeader>
 
 <Canvas>
   <Story id="elements-month-examples--datalist" />
 </Canvas>
 
-## Vertical
+<LinkedHeader>Vertical</LinkedHeader>
 
 <Canvas>
   <Story id="elements-month-examples--vertical" />
 </Canvas>
 
-## Horizontal
+<LinkedHeader>Horizontal</LinkedHeader>
 
 <Canvas>
   <Story id="elements-month-examples--horizontal" />
 </Canvas>
 
-## <nve-month\>
+<LinkedHeader>nve-month</LinkedHeader>
 
 <Props of="nve-month" />
