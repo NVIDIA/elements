@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Form Validation/Documentation" parameters={{ badges: ['alpha'] }} />
 
@@ -19,13 +21,13 @@ If you are using a framework that manages valdiation like Angular, then `novalid
   <Story id="elements-form-validation-examples--validation" inline={false} height={400} />
 </Canvas>
 
-## Error Groups
+<LinkedHeader>Error Groups</LinkedHeader>
 
 <Canvas>
   <Story id="elements-form-validation-examples--validation-error-group" />
 </Canvas>
 
-## Success Groups
+<LinkedHeader>Success Groups</LinkedHeader>
 
 <Canvas>
   <Story id="elements-form-validation-examples--validation-success-group" />

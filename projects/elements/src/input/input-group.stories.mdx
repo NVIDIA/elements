@@ -1,10 +1,12 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Input Group/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Input Group
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/input/define.js';
@@ -27,30 +29,30 @@ import '@elements/elements/input/define.js';
 </mlv-input-group>
 ```
 
-## Input Group
+<LinkedHeader>Input Group</LinkedHeader>
 
 <Canvas>
   <Story id="elements-input-group-examples--input-group" />
 </Canvas>
 
-## Range Group
+<LinkedHeader>Range Group</LinkedHeader>
 
 <Canvas>
   <Story id="elements-date-examples--range" />
 </Canvas>
 
-## Filter Group
+<LinkedHeader>Filter Group</LinkedHeader>
 
 <Canvas>
   <Story id="elements-input-group-examples--filter-group" />
 </Canvas>
 
-## Filter Group Range
+<LinkedHeader>Filter Group Range</LinkedHeader>
 
 <Canvas>
   <Story id="elements-input-group-examples--filter-group-range" />
 </Canvas>
 
-## <mlv-input-group\>
+<LinkedHeader>mlv-input-group</LinkedHeader>
 
 <Props of="mlv-input-group" />

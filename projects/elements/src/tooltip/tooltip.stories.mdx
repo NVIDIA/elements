@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Tooltip/Documentation" parameters={{ badges: ['alpha'] }} />
 
@@ -8,7 +10,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 [W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/)
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/tooltip/define.js';
@@ -24,19 +26,19 @@ import '@elements/elements/tooltip/define.js';
   <Story id="elements-tooltip-examples--default" inline={false} height={280} />
 </Canvas>
 
-## Content/Position
+<LinkedHeader>Content/Position</LinkedHeader>
 
 <Canvas columns={2}>
   <Story id="elements-tooltip-examples--content" inline={false} height={280} />
   <Story id="elements-tooltip-examples--position" inline={false} height={280} />
 </Canvas>
 
-## Alignment
+<LinkedHeader>Alignment</LinkedHeader>
 
 <Canvas>
   <Story id="elements-tooltip-examples--alignment" inline={false} height={800} />
 </Canvas>
 
-## <mlv-tooltip\>
+<LinkedHeader>mlv-tooltip</LinkedHeader>
 
 <Props of="mlv-tooltip" />

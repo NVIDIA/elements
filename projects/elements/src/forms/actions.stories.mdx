@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Form Actions/Documentation" parameters={{ badges: ['beta'] }} />
 
@@ -6,7 +8,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 Text type controls support prefix and suffix labeling as well as action buttons.
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/input/define.js';
@@ -20,24 +22,24 @@ import '@elements/elements/input/define.js';
 </mlv-input>
 ```
 
-## Actions
+<LinkedHeader>Actions</LinkedHeader>
 
 <Canvas>
   <Story id="elements-form-actions-examples--actions" />
 </Canvas>
 
-## Label Action
+<LinkedHeader>Label Action</LinkedHeader>
 
 <Canvas>
   <Story id="elements-form-actions-examples--label-action" />
 </Canvas>
 
-## Prefix/Suffix
+<LinkedHeader>Prefix/Suffix</LinkedHeader>
 
 <Canvas>
   <Story id="elements-form-actions-examples--prefix-suffix" />
 </Canvas>
 
-## <mlv-input\>
+<LinkedHeader>mlv-input</LinkedHeader>
 
 <Props of="mlv-input" />

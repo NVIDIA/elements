@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Dropdown/Documentation" parameters={{ badges: ['alpha'] }} />
 
@@ -8,7 +10,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 Generic dropdown element for rendering a variety of different content within a dropdown container.
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/dropdown/define.js';
@@ -24,39 +26,39 @@ import '@elements/elements/dropdown/define.js';
   <Story id="elements-dropdown-examples--default" inline={false} height={300} />
 </Canvas>
 
-## Content/Closable
+<LinkedHeader>Content/Closable</LinkedHeader>
 
 <Canvas columns={2}>
   <Story id="elements-dropdown-examples--content" inline={false} height={300} />
   <Story id="elements-dropdown-examples--closable" inline={false} height={300} />
 </Canvas>
 
-## Radio Group Pattern
+<LinkedHeader>Radio Group Pattern</LinkedHeader>
 
 <Canvas columns={2}>
   <Story id="elements-dropdown-examples--radio-group-interactive" inline={false} height={300} />
   <Story id="elements-dropdown-examples--radio-group" inline={false} height={300} />
 </Canvas>
 
-## Checkbox Group Pattern
+<LinkedHeader>Checkbox Group Pattern</LinkedHeader>
 
 <Canvas columns={2}>
   <Story id="elements-dropdown-examples--checkbox-group-interactive" inline={false} height={300} />
   <Story id="elements-dropdown-examples--checkbox-group" inline={false} height={300} />
 </Canvas>
 
-## Arrow
+<LinkedHeader>Arrow</LinkedHeader>
 
 <Canvas>
   <Story id="elements-dropdown-examples--arrow" inline={false} height={300} />
 </Canvas>
 
-## Position
+<LinkedHeader>Position</LinkedHeader>
 
 <Canvas>
   <Story id="elements-dropdown-examples--position" inline={false} height={600} />
 </Canvas>
 
-## <mlv-dropdown\>
+<LinkedHeader>mlv-dropdown</LinkedHeader>
 
 <Props of="mlv-dropdown" />

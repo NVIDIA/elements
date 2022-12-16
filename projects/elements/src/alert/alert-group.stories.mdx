@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Alert Group/Documentation" parameters={{ badges: ['alpha'] }} />
 
@@ -6,7 +8,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 [W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/alert/define.js';
@@ -23,19 +25,19 @@ import '@elements/elements/alert/define.js';
   <Story id="elements-alert-group-examples--default" />
 </Canvas>
 
-## Status
+<LinkedHeader>Status</LinkedHeader>
 
 <Canvas>
   <Story id="elements-alert-group-examples--status" />
 </Canvas>
 
-## Closable
+<LinkedHeader>Closable</LinkedHeader>
 
 <Canvas>
   <Story id="elements-alert-group-examples--closable" />
 </Canvas>
 
-## Themes
+<LinkedHeader>Themes</LinkedHeader>
 
 <Canvas>
   <Story id="elements-alert-group-examples--themes" />
@@ -43,8 +45,8 @@ import '@elements/elements/alert/define.js';
 
 # Element API
 
-## <mlv-alert\>
+<LinkedHeader>mlv-alert</LinkedHeader>
 <Props of="mlv-alert" />
 
-## <mlv-alert-group\>
+<LinkedHeader>mlv-alert-group</LinkedHeader>
 <Props of="mlv-alert-group" />

@@ -1,4 +1,5 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Foundations/Layout/Documentation" />
 
@@ -23,7 +24,7 @@ Combine `mlv-layout` attribute values to create your desired layout. For example
 <section mlv-layout="row align:vertical-center align:right">
 ```
 
-## Layout Gap Spacing
+<LinkedHeader>Layout Gap Spacing</LinkedHeader>
 
 
 Add the `gap` value to `mlv-layout` to set spacing between elements. For example:
@@ -51,7 +52,7 @@ The following "t-shirt" spacing values are available:
 </Canvas>
 
 
-## Layout Padding
+<LinkedHeader>Layout Padding</LinkedHeader>
 
 
 Add the `pad` value to `mlv-layout` to set spacing between elements. For example:
@@ -90,7 +91,7 @@ By default padding will apply to all 4 sides of container, to specify padding on
 </Canvas>
 
 
-## Full width/height on container
+<LinkedHeader>Full width/height on container</LinkedHeader>
 
 For convenience a `mlv-layout="grow"` option can be set to give the container `100% width & height`.
 This is often useful for giving the root element of a page full height.

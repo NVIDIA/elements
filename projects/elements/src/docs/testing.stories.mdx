@@ -1,3 +1,5 @@
+import { LinkedHeader } from './utils.mdx';
+
 <Meta title="About/Testing" />
 
 # Testing
@@ -55,7 +57,7 @@ it('should update svg reference when "name" is updated', async () => {
 });
 ```
 
-## Testing Environment
+<LinkedHeader>Testing Environment</LinkedHeader>
 
 If you use a testing Environment that uses a DOM mocking such as [happy-dom](https://github.com/capricorn86/happy-dom) or [js-dom](https://github.com/jsdom/jsdom)
 then you will likely need to import the bundled polyfills to enable the elements

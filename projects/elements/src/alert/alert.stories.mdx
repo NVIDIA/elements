@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Alert/Documentation" parameters={{ badges: ['beta'] }} />
 
@@ -6,7 +8,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 [W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/alert/define.js';
@@ -20,13 +22,13 @@ import '@elements/elements/alert/define.js';
   <Story id="elements-alert-examples--default" />
 </Canvas>
 
-## Status
+<LinkedHeader>Status</LinkedHeader>
 
 <Canvas>
   <Story id="elements-alert-examples--status" />
 </Canvas>
 
-## Themes
+<LinkedHeader>Themes</LinkedHeader>
 
 <Canvas columns={2}>
   <Story id="elements-alert-examples--light-theme" />
@@ -35,5 +37,5 @@ import '@elements/elements/alert/define.js';
 
 # Element API
 
-## <mlv-alert\>
+<LinkedHeader>mlv-alert</LinkedHeader>
 <Props of="mlv-alert" />

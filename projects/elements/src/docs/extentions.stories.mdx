@@ -1,4 +1,5 @@
 import { Meta, Story } from '@storybook/addon-docs';
+import { LinkedHeader } from './utils.mdx';
 
 <Meta title="About/Extensions" parameters={{ badges: ['alpha'] }} />
 
@@ -11,7 +12,7 @@ This path enables your extensions to work in a large variety of frameworks and e
 reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team.
 The rest of this guide will focus on how to integrate specifically for Element integration and best practices for MagLev.
 
-## Scoped Registry
+<LinkedHeader>Scoped Registry</LinkedHeader>
 
 By default Web Components, specifcally the custom elements spec, defines elements on a global registry.
 This can introduce tag name collisions if multiple versions of the same library are loaded. To avoid this

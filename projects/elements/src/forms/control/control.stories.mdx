@@ -1,10 +1,12 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
+
 
 <Meta title="Elements/Form Control/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Control
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/forms/define.js';
@@ -13,7 +15,7 @@ import '@elements/elements/forms/define.js';
 The `mlv-control` element is the base control that all built in `mlv-*` form controls extend.
 The `mlv-control` can be used for generic imput type as well as custom or third party form controls.
 
-## Responsive
+<LinkedHeader>Responsive</LinkedHeader>
 
 All control elements are responsive and will adjust to one of the set layouts based on the available space.
 The element breakpoints are based on the available space to the element rather than the viewport.
@@ -22,7 +24,7 @@ The element breakpoints are based on the available space to the element rather t
   <Story id="elements-form-control-examples--responsive" />
 </Canvas>
 
-## Custom Controls
+<LinkedHeader>Custom Controls</LinkedHeader>
 
 Custom inputs can be used and leverage the same form layouts and validation statuses as the built in controls.
 Place the `mlv-control` attribute on the element that is the custom input. [emoji picker source](https://github.com/nolanlawson/emoji-picker-element).
@@ -31,14 +33,14 @@ Place the `mlv-control` attribute on the element that is the custom input. [emoj
   <Story id="elements-form-control-examples--custom" inline={false} height="400px" />
 </Canvas>
 
-## <mlv-control\>
+<LinkedHeader>mlv-control</LinkedHeader>
 
 <Props of="mlv-control" />
 
-## <mlv-control-message\>
+<LinkedHeader>mlv-control-message</LinkedHeader>
 
 <Props of="mlv-control-message" />
 
-## <mlv-control-group\>
+<LinkedHeader>mlv-control-group</LinkedHeader>
 
 <Props of="mlv-control-group" />

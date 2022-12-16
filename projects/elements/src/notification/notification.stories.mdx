@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Notification/Documentation" parameters={{ badges: ['alpha'] }} />
 
@@ -8,7 +10,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 [W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/)
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/notification/define.js';
@@ -23,28 +25,28 @@ import '@elements/elements/notification/define.js';
   <Story id="elements-notification-examples--default" inline={false} height="300px" />
 </Canvas>
 
-## Status
+<LinkedHeader>Status</LinkedHeader>
 
 <Canvas>
   <Story id="elements-notification-examples--status" inline={false} height="600px" />
 </Canvas>
 
-## Interactive Stack
+<LinkedHeader>Interactive Stack</LinkedHeader>
 
 <Canvas>
   <Story id="elements-notification-examples--interactive-stack" inline={false} height="600px" />
 </Canvas>
 
-## Position
+<LinkedHeader>Position</LinkedHeader>
 
 <Canvas>
   <Story id="elements-notification-examples--position" inline={false} height="700px" />
 </Canvas>
 
-## <mlv-notification\>
+<LinkedHeader>mlv-notification</LinkedHeader>
 
 <Props of="mlv-notification" />
 
-## <mlv-notification-group\>
+<LinkedHeader>mlv-notification-group</LinkedHeader>
 
 <Props of="mlv-notification-group" />

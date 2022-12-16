@@ -1,4 +1,6 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../docs/utils.mdx';
+
 
 <Meta title="Elements/Datetime/Documentation" parameters={{ badges: ['alpha'] }} />
 
@@ -6,7 +8,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 
 [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local)
 
-## Installation
+<LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
 import '@elements/elements/datetime/define.js';
@@ -23,24 +25,24 @@ import '@elements/elements/datetime/define.js';
   <Story id="elements-datetime-examples--datetime" />
 </Canvas>
 
-## Datalist
+<LinkedHeader>Datalist</LinkedHeader>
 
 <Canvas>
   <Story id="elements-datetime-examples--datalist" />
 </Canvas>
 
-## Vertical
+<LinkedHeader>Vertical</LinkedHeader>
 
 <Canvas>
   <Story id="elements-datetime-examples--vertical" />
 </Canvas>
 
-## Horizontal
+<LinkedHeader>Horizontal</LinkedHeader>
 
 <Canvas>
   <Story id="elements-datetime-examples--horizontal" />
 </Canvas>
 
-## <mlv-datetime\>
+<LinkedHeader>mlv-datetime</LinkedHeader>
 
 <Props of="mlv-datetime" />

@@ -1,3 +1,5 @@
+import { LinkedHeader } from './utils.mdx';
+
 <Meta title="Integrations/Angular" />
 
 # Angular Integration
@@ -50,12 +52,12 @@ Once added, properties and events can be used via the standard Angular template 
 </mlv-alert-group>
 ```
 
-## Forms
+<LinkedHeader>Forms</LinkedHeader>
 
 Maglev Elements provides a suite of form components that leverage standard HTML input types. This enables frameworks
 to take advantage of built in framework features like [Angular Reactive Forms](https://angular.io/guide/reactive-forms) for managing form validation and state.
 
-<mlv-alert>To integrate custom form control types into Elements checkout our [custom control](./?path=/story/elements-form-control-documentation--page) documentation.</mlv-alert>
+<mlv-alert>To integrate custom form control types into Elements checkout our <a href="./?path=/story/elements-form-control-documentation--page#custom-controls" onClick="location.reload()">custom control</a> documentation.</mlv-alert>
 
 ```html
 <form [formGroup]="form" (ngSubmit)="submit()">
@@ -93,7 +95,7 @@ export class AppComponent  {
 }
 ```
 
-## Advanced Installation
+<LinkedHeader>Advanced Installation</LinkedHeader>
 
 If your app was created with an older version of the Angualr CLI you may to need add or adjust the following to your application.
 
@@ -102,7 +104,7 @@ If your app was created with an older version of the Angualr CLI you may to need
 If you don't have a global `styles.scss` add one to your app's `angular.json` config.
 
 ```json
-/* 
+/*
  * ./angular.json
  * projects.appName.architect.build.options.styles:
  */

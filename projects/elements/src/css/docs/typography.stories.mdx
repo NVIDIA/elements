@@ -1,4 +1,5 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Foundations/Typography/Documentation" />
 
@@ -15,67 +16,67 @@ This enables full control of the visual styling of an element separate from the 
 <p mlv-text="eyebrow">eyebrow</p>
 ```
 
-## Types
+<LinkedHeader>Types</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--type" />
 </Canvas>
 
-## Colors
+<LinkedHeader>Colors</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--color" />
 </Canvas>
 
-## Weights
+<LinkedHeader>Weights</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--weights" />
 </Canvas>
 
-## Transforms
+<LinkedHeader>Transforms</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--transforms" />
 </Canvas>
 
-## Link
+<LinkedHeader>Link</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--link" />
 </Canvas>
 
-## List
+<LinkedHeader>List</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--list" />
 </Canvas>
 
-## Ordered List
+<LinkedHeader>Ordered List</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--ordered-list" />
 </Canvas>
 
-## Unstyled List
+<LinkedHeader>Unstyled List</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--unstyled-list" />
 </Canvas>
 
-## Headings
+<LinkedHeader>Headings</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--headings" />
 </Canvas>
 
-## Size
+<LinkedHeader>Size</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-typography-examples--size" />
 </Canvas>
 
-## Leading Trim
+<LinkedHeader>Leading Trim</LinkedHeader>
 
 By default all `mlv-text` attributes use [leading-trim](https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202) to remove excesss whitespace between lines. This provides a more precise layout.
 Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavior it may be necessary to disable this behavior. This can be done by applying `mlv-text="trim:none"`.
@@ -84,7 +85,7 @@ Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavi
   <Story id="foundations-typography-examples--leading-trim" />
 </Canvas>
 
-## Tokens
+<LinkedHeader>Tokens</LinkedHeader>
 
 <Canvas>
   <Story id="foundations-tokens-examples--text" />
