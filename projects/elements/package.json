@@ -8,7 +8,7 @@
     "ci": "pnpm run clean && pnpm run build && pnpm run build-storybook && pnpm run lint && pnpm run test && pnpm run test:coverage",
     "clean": "git clean dist coverage storybook-static -fX",
     "storybook": "start-storybook -p 7789",
-    "build": "pnpm run clean && vite build",
+    "build": "wireit",
     "build:watch": "vite build --mode watch",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -185,6 +185,22 @@
   "eslintConfig": {
     "parserOptions": {
       "sourceType": "module"
+    }
+  },
+  "wireit": {
+    "build": {
+      "command": "pnpm run clean && vite build",
+      "files": [
+        "icons/**",
+        "public/**",
+        "src/**",
+        "tokens/**",
+        "tsconfig.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ]
     }
   }
 }
