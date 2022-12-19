@@ -9,6 +9,7 @@ if (!storybookLayout) {
 }
 
 addons.setConfig({
+  enableShortcuts: false, // prevents shortcuts from interfering with stories
   theme: themes.dark,
   sidebar: {
     renderLabel: ({ id, name }) => {
@@ -16,5 +17,10 @@ addons.setConfig({
       const alphaBadge = React.createElement('span', {  }, name, React.createElement('span', { style: { color: 'var(--mlv-sys-text-muted-color)'}}, ' (alpha)'));
       return alpha.includes(id) ? alphaBadge : name;
     }
+  },
+  toolbar: {
+    eject: { hidden: true },
+    copy: { hidden: true },
+    grid: { hidden: true }
   }
 });

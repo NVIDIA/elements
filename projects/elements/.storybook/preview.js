@@ -11,6 +11,13 @@ import parserHTML from 'prettier/esm/parser-html.mjs';
 setCustomElementsManifest(excludePrivateFields(customElements));
 
 export const parameters = {
+  backgrounds: {
+    disable: true,
+    grid: {
+      disable: true,
+    }
+  },
+  viewMode: 'story',
   docs: {
     theme: themes.dark,
     transformSource: (src) => {
@@ -122,6 +129,14 @@ export const parameters = {
             'Grid Layout',
             'Examples',
           ],
+          'Forms',
+          [
+            'Documentation',
+            'Validation',
+            'Controls',
+            'Actions',
+            'Examples'
+          ]
         ],
         'Elements'
       ]
@@ -145,7 +160,7 @@ export const globalTypes = {
   },
   scale: {
     name: 'Scale',
-    description: 'Themes',
+    description: 'Scale',
     defaultValue: '',
     toolbar: {
       showName: true,

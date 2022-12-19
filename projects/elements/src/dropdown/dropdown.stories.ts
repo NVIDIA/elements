@@ -1,4 +1,6 @@
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators/custom-element.js';
+import { state } from 'lit/decorators/state.js';
 import { spread } from '@elements/elements/internal';
 import { Dropdown } from '@elements/elements/dropdown';
 import '@elements/elements/card/define.js';
@@ -7,7 +9,13 @@ import '@elements/elements/dropdown/define.js';
 export default {
   title: 'Elements/Dropdown/Examples',
   component: 'mlv-dropdown',
-  parameters: { badges: ['alpha'] },
+  parameters: {
+    badges: ['alpha'],
+    docs: {
+      inlineStories: false,
+      iframeHeight: 500
+    },
+  },
   argTypes: {
     position: {
       control: 'inline-radio',
@@ -87,37 +95,38 @@ export const RadioGroup = {
   `
 };
 
-export const RadioGroupInteractive = {
-  render: () => html`
-<mlv-dropdown anchor="btn" hidden>
+const options = [
+  { id: '1', label: 'completed', message: 'latest completed tasts' },
+  { id: '2', label: 'failing', message: 'latest failing tasks' },
+  { id: '3', label: 'status', message: 'task status priority' }
+];
+
+@customElement('radio-group-interactive-demo')
+class RadioGroupInteractiveDemo extends LitElement {  
+  @state() show = false;
+  @state() selected = options[0];
+
+  render() {
+    return html`
+<mlv-button id="btn" style="width: 130px" mlv-control>${this.selected.label} <mlv-icon name="chevron-down"></mlv-icon></mlv-button>
+<mlv-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
   <mlv-radio-group style="width: 250px">
     <label>Sort By</label>
-    <mlv-radio>
-      <label>Completed</label>
-      <input type="radio" checked />
-      <mlv-control-message>latest completed tasts</mlv-control-message>
-    </mlv-radio>
-    <mlv-radio>
-      <label>Failing</label>
-      <input type="radio" />
-      <mlv-control-message>latest failing tasks</mlv-control-message>
-    </mlv-radio>
-    <mlv-radio>
-      <label>Status</label>
-      <input type="radio" />
-      <mlv-control-message>task status priority</mlv-control-message>
-    </mlv-radio>
+    ${options.map(option => html`
+    <mlv-radio @pointerup=${() => this.show = false}>
+      <label>${option.label}</label>
+      <input type="radio" value=${option.id} ?checked=${option.id === this.selected.id} @input=${() => this.selected = option} />
+      <mlv-control-message>${option.message}</mlv-control-message>
+    </mlv-radio>`)}
   </mlv-radio-group>
 </mlv-dropdown>
-<mlv-button id="btn" mlv-control>completed <mlv-icon name="chevron-down"></mlv-icon></mlv-button>
-<script>
-  const dropdown = document.querySelector('mlv-dropdown');
-  const btn = document.querySelector('#btn');
-  btn.addEventListener('click', () => dropdown.hidden = false);
-  dropdown.addEventListener('close', () => dropdown.hidden = true);
-</script>
-  `
-};
+    `
+  }
+}
+
+export function RadioGroupInteractive() {
+  return html`<radio-group-interactive-demo></radio-group-interactive-demo>`
+}
 
 export const CheckboxGroup = {
   render: () => html`
@@ -142,33 +151,38 @@ export const CheckboxGroup = {
   `
 };
 
-export const CheckboxGroupInteractive = {
-  render: () => html`
-<mlv-dropdown hidden anchor="btn">
+const checkboxes = [
+  { id: '1', label: 'local', message: 'latest local' },
+  { id: '2', label: 'nightly', message: 'latest nightly builds' },
+  { id: '3', label: 'remote', message: 'pending remote builds' }
+];
+
+@customElement('checkbox-group-interactive-demo')
+class CheckboxGroupInteractiveDemo extends LitElement {  
+  @state() show = false;
+  @state() suites = { '1': true, '2': false, '3': false };
+
+  render() {
+    return html`
+<mlv-button id="btn" style="width: 130px" mlv-control>test suites <mlv-icon name="chevron-down"></mlv-icon></mlv-button>
+<mlv-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
   <mlv-checkbox-group style="width: 250px">
-    <label>Test Suites</label>
+    <label>Sort By</label>
+    ${checkboxes.map(checkbox => html`
     <mlv-checkbox>
-      <label>Local</label>
-      <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-checkbox>
-      <label>Nightly</label>
-      <input type="checkbox" checked />
-    </mlv-checkbox>
-    <mlv-checkbox>
-      <label>Remote</label>
-      <input type="checkbox" />
-    </mlv-checkbox>
+      <label>${checkbox.label}</label>
+      <input type="checkbox" value=${checkbox.id} ?checked=${this.suites[checkbox.id]} @input=${e => this.suites = { ...this.suites, [checkbox.id]: e.target.checked }} />
+      <mlv-control-message>${checkbox.message}</mlv-control-message>
+    </mlv-checkbox>`)}
   </mlv-checkbox-group>
 </mlv-dropdown>
-<mlv-button id="btn" mlv-control>test suites <mlv-icon name="chevron-down"></mlv-icon></mlv-button>
-<script>
-  const dropdown = document.querySelector('mlv-dropdown');
-  const btn = document.querySelector('#btn');
-  btn.addEventListener('click', () => dropdown.hidden = false);
-  dropdown.addEventListener('close', () => dropdown.hidden = true);
-</script>
-  `
+<pre>${checkboxes.map(c => html`${c.label}: ${this.suites[c.id]}\n`)}</pre>
+    `
+  }
+}
+
+export const CheckboxGroupInteractive = {
+  render: () => html`<checkbox-group-interactive-demo></checkbox-group-interactive-demo>`
 };
 
 export const Closable = {
