@@ -63,3 +63,60 @@ class MyElement extends LitElement {
   }
 }
 ```
+
+<h2 id="forms">Forms</h2>
+
+When using Elements in forms with Lit components you can leverage the [HTML FormData API](https://developer.mozilla.org/en-US/docs/Web/API/FormData) to
+manage form state and validation.
+
+<Story id="internal-integration--lit-forms" />
+
+Events can be attached to the form element to capture `submit` and `input` events.
+Using `FormData` the `name` of the input is referenced as the key for our form values.
+
+```typescript
+@customElement('app-login')
+export class AppLogin extends LitElement {
+  @query('form') form: HTMLFormElement;
+
+  @state() formValues = { email: '', password: '', remember: false };
+
+  render() {
+    return html`
+    <form @submit=${e => this.#submit(e)} @input=${this.#input}>
+      <nve-input>
+        <label>Email</label>
+        <input .value=${this.formValues.email} type="email" name="email" autocomplete="off" pattern=".+@nvidia.com" required autocomplete="off" />
+        <nve-control-message error="valueMissing">required</nve-control-message>
+        <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
+      </nve-input>
+
+      <nve-password>
+        <label>Password</label>
+        <input .value=${this.formValues.password} type="password" name="password" minlength="6" required />
+        <nve-control-message error="valueMissing">required</nve-control-message>
+        <nve-control-message error="tooShort">minimum length is 6 characters</nve-control-message>
+      </nve-password>
+
+      <nve-checkbox>
+        <label>Remember me</label>
+        <input ?checked=${this.formValues.remember} type="checkbox" name="remember" />
+      </nve-checkbox>
+
+      <nve-button interaction="emphasize">Login</nve-button>
+    </form>
+    `;
+  }
+
+  #input() {
+    this.formValues = Object.fromEntries(new FormData(this.form)) as any;
+  }
+
+  #submit(e) {
+    e.preventDefault();
+    if (this.form.reportValidity()) {
+      console.log(this.formValues)
+    }
+  }
+}
+```
