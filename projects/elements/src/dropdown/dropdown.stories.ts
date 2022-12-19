@@ -1,4 +1,6 @@
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators/custom-element.js';
+import { state } from 'lit/decorators/state.js';
 import { spread } from '@elements/elements/internal';
 import { Dropdown } from '@elements/elements/dropdown';
 import '@elements/elements/card/define.js';
@@ -7,7 +9,13 @@ import '@elements/elements/dropdown/define.js';
 export default {
   title: 'Elements/Dropdown/Examples',
   component: 'nve-dropdown',
-  parameters: { badges: ['alpha'] },
+  parameters: {
+    badges: ['alpha'],
+    docs: {
+      inlineStories: false,
+      iframeHeight: 500
+    },
+  },
   argTypes: {
     position: {
       control: 'inline-radio',
@@ -87,37 +95,38 @@ export const RadioGroup = {
   `
 };
 
-export const RadioGroupInteractive = {
-  render: () => html`
-<nve-dropdown anchor="btn" hidden>
+const options = [
+  { id: '1', label: 'completed', message: 'latest completed tasts' },
+  { id: '2', label: 'failing', message: 'latest failing tasks' },
+  { id: '3', label: 'status', message: 'task status priority' }
+];
+
+@customElement('radio-group-interactive-demo')
+class RadioGroupInteractiveDemo extends LitElement {  
+  @state() show = false;
+  @state() selected = options[0];
+
+  render() {
+    return html`
+<nve-button id="btn" style="width: 130px" nve-control>${this.selected.label} <nve-icon name="chevron-down"></nve-icon></nve-button>
+<nve-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
   <nve-radio-group style="width: 250px">
     <label>Sort By</label>
-    <nve-radio>
-      <label>Completed</label>
-      <input type="radio" checked />
-      <nve-control-message>latest completed tasts</nve-control-message>
-    </nve-radio>
-    <nve-radio>
-      <label>Failing</label>
-      <input type="radio" />
-      <nve-control-message>latest failing tasks</nve-control-message>
-    </nve-radio>
-    <nve-radio>
-      <label>Status</label>
-      <input type="radio" />
-      <nve-control-message>task status priority</nve-control-message>
-    </nve-radio>
+    ${options.map(option => html`
+    <nve-radio @pointerup=${() => this.show = false}>
+      <label>${option.label}</label>
+      <input type="radio" value=${option.id} ?checked=${option.id === this.selected.id} @input=${() => this.selected = option} />
+      <nve-control-message>${option.message}</nve-control-message>
+    </nve-radio>`)}
   </nve-radio-group>
 </nve-dropdown>
-<nve-button id="btn" nve-control>completed <nve-icon name="chevron-down"></nve-icon></nve-button>
-<script>
-  const dropdown = document.querySelector('nve-dropdown');
-  const btn = document.querySelector('#btn');
-  btn.addEventListener('click', () => dropdown.hidden = false);
-  dropdown.addEventListener('close', () => dropdown.hidden = true);
-</script>
-  `
-};
+    `
+  }
+}
+
+export function RadioGroupInteractive() {
+  return html`<radio-group-interactive-demo></radio-group-interactive-demo>`
+}
 
 export const CheckboxGroup = {
   render: () => html`
@@ -142,33 +151,38 @@ export const CheckboxGroup = {
   `
 };
 
-export const CheckboxGroupInteractive = {
-  render: () => html`
-<nve-dropdown hidden anchor="btn">
+const checkboxes = [
+  { id: '1', label: 'local', message: 'latest local' },
+  { id: '2', label: 'nightly', message: 'latest nightly builds' },
+  { id: '3', label: 'remote', message: 'pending remote builds' }
+];
+
+@customElement('checkbox-group-interactive-demo')
+class CheckboxGroupInteractiveDemo extends LitElement {  
+  @state() show = false;
+  @state() suites = { '1': true, '2': false, '3': false };
+
+  render() {
+    return html`
+<nve-button id="btn" style="width: 130px" nve-control>test suites <nve-icon name="chevron-down"></nve-icon></nve-button>
+<nve-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
   <nve-checkbox-group style="width: 250px">
-    <label>Test Suites</label>
+    <label>Sort By</label>
+    ${checkboxes.map(checkbox => html`
     <nve-checkbox>
-      <label>Local</label>
-      <input type="checkbox" />
-    </nve-checkbox>
-    <nve-checkbox>
-      <label>Nightly</label>
-      <input type="checkbox" checked />
-    </nve-checkbox>
-    <nve-checkbox>
-      <label>Remote</label>
-      <input type="checkbox" />
-    </nve-checkbox>
+      <label>${checkbox.label}</label>
+      <input type="checkbox" value=${checkbox.id} ?checked=${this.suites[checkbox.id]} @input=${e => this.suites = { ...this.suites, [checkbox.id]: e.target.checked }} />
+      <nve-control-message>${checkbox.message}</nve-control-message>
+    </nve-checkbox>`)}
   </nve-checkbox-group>
 </nve-dropdown>
-<nve-button id="btn" nve-control>test suites <nve-icon name="chevron-down"></nve-icon></nve-button>
-<script>
-  const dropdown = document.querySelector('nve-dropdown');
-  const btn = document.querySelector('#btn');
-  btn.addEventListener('click', () => dropdown.hidden = false);
-  dropdown.addEventListener('close', () => dropdown.hidden = true);
-</script>
-  `
+<pre>${checkboxes.map(c => html`${c.label}: ${this.suites[c.id]}\n`)}</pre>
+    `
+  }
+}
+
+export const CheckboxGroupInteractive = {
+  render: () => html`<checkbox-group-interactive-demo></checkbox-group-interactive-demo>`
 };
 
 export const Closable = {
