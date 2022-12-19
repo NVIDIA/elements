@@ -2,7 +2,7 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 import { LinkedHeader } from '../docs/utils.mdx';
 
 
-<Meta title="Elements/Form Validation/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Foundations/Forms/Validation" parameters={{ badges: ['alpha'] }} />
 
 # Validation
 
@@ -17,18 +17,37 @@ shown conditionally based on the current input validity state.
 To manage validation manually use the `novalidate` attribute to disable HTML5 validation.
 If you are using a framework that manages valdiation like Angular, then `novalidate` is automatically applied.
 
-<Canvas>
-  <Story id="elements-form-validation-examples--validation" inline={false} height={400} />
-</Canvas>
+<br />
+<Story id="internal-integration--lit-forms" />
+<br />
+
+```html
+<form>
+  <nve-input>
+    <label>email</label>
+    <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
+    <nve-control-message error="valueMissing">required</nve-control-message>
+    <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
+  </nve-input>
+<script>
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const values = Object.fromEntries(new FormData(form));
+    console.log(values); // { email: '...' }
+  });
+</script>
+```
 
 <LinkedHeader>Error Groups</LinkedHeader>
 
 <Canvas>
-  <Story id="elements-form-validation-examples--validation-error-group" />
+  <Story id="foundations-forms-examples--validation-error-group" />
 </Canvas>
 
 <LinkedHeader>Success Groups</LinkedHeader>
 
 <Canvas>
-  <Story id="elements-form-validation-examples--validation-success-group" />
+  <Story id="foundations-forms-examples--validation-success-group" />
 </Canvas>
