@@ -18,8 +18,19 @@
     "useDefineForClassFields": false,
     "isolatedModules": true,
     "paths": {
-      "@elements/elements/*": ["./src/*"]
-    }
+      "@elements/elements/*": ["./src/*"],
+      "@elements/elements/*.js": ["./src/*.js"]
+    },
+    "plugins": [
+      {
+        "name": "ts-lit-plugin",
+        "strict": true,
+        "globalAttributes": ["mlv-text", "mlv-layout"],
+        "rules": {
+          "no-unknown-attribute": "off"
+        }
+      }
+    ]
   },
   "include": ["src/**/*.ts", "src/**/icon-names.js"]
 }

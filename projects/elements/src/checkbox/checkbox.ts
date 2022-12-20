@@ -1,3 +1,4 @@
+import type { CSSResult } from 'lit';
 import { useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import styles from './checkbox.css?inline';
@@ -10,5 +11,5 @@ import styles from './checkbox.css?inline';
  * @cssprop --cursor
  */
 export class Checkbox extends Control {
-  static styles = useStyles([...Control.styles, styles]);
+  static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 }

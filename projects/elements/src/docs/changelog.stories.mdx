@@ -4,9 +4,16 @@ import { LinkedHeader } from './utils.mdx';
 
 # Changelog
 
-<LinkedHeader>0.6.2 (pending)</LinkedHeader>
+<LinkedHeader>v0.7.0 (pending)</LinkedHeader>
 
+### Fixes
 - Fix add internal support for scoped registries and documentation
+
+### Breaking
+- Global registration from `import '@elements/elements'` is no longer supported. Use individual element imports instead.
+  ```javascript
+  import '@elements/elements/button/define.js';
+  ```
 
 <LinkedHeader>v0.6.1</LinkedHeader>
 

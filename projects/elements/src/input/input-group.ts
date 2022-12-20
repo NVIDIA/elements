@@ -1,3 +1,4 @@
+import type { CSSResult } from 'lit';
 import { useStyles } from '@elements/elements/internal';
 import { ControlGroup } from '@elements/elements/forms';
 import styles from './input-group.css?inline';
@@ -7,7 +8,7 @@ import styles from './input-group.css?inline';
  * @element mlv-input-group
  */
 export class InputGroup extends ControlGroup {
-  static styles = useStyles([...ControlGroup.styles, styles]);
+  static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
   
   async connectedCallback() {
     super.connectedCallback();

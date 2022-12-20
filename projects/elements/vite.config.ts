@@ -2,10 +2,11 @@ import fs from 'fs';
 import path from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import { execSync } from 'child_process';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import dts from 'vite-plugin-dts';
+import glob from 'glob';
 
 const packageFile = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)) as any);
 const resolve = (rel) => path.resolve(process.cwd(), rel);
@@ -16,19 +17,13 @@ const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
 // https://lit.dev/docs/tools/production/
 export default defineConfig((env) => {
   const mode = env.mode as 'production' | 'watch' | 'test' | 'development';
-  const testProdBuild = mode === 'test' && !(process.argv.findIndex((i) => i === '--coverage') !== -1);
-
-  execSync(`./node_modules/@custom-elements-manifest/analyzer/index.js analyze ${mode === 'watch' ? '--quiet' : ''} --litelement --globs ./src --exclude **.stories.ts --outdir ${dist()}`);
-
-  if (mode !== 'test') {
-    execSync(`node ${resolve('./tokens/style-dictionary.config.cjs')} --outDir ${dist()}`);
-  }
+  execSync(`./node_modules/@custom-elements-manifest/analyzer/index.js analyze ${mode === 'watch' ? '--quiet' : ''} --litelement --globs ./src/**/*.ts --exclude src/internal/**/*.ts src/**/*.stories.ts --outdir ${dist()}`);
+  execSync(`node ${resolve('./tokens/style-dictionary.config.cjs')} --outDir ${dist()}`);
 
   return {
     resolve: {
       alias: {
-        '../dist': dist(),
-        '@elements/elements': resolve(testProdBuild ? dist() : './src') // tests should run against final build artifacts not source
+        '@elements/elements': resolve('./src') // tests should run against final build artifacts not source
       }
     },
     plugins: [
@@ -40,8 +35,7 @@ export default defineConfig((env) => {
           outputDir: dist(),
           staticImport: true,
           noEmitOnError: true,
-          skipDiagnostics: false,
-          logDiagnostics: true
+          skipDiagnostics: false
         }),
         enforce: 'pre'
       }
@@ -53,7 +47,21 @@ export default defineConfig((env) => {
       outDir: dist(),
       emptyOutDir: false,
       target: 'esnext',
-      lib: { entry: resolve('./src/entrypoints.ts'), formats: ['es'] },
+      lib: {
+        entry: {
+          index: resolve('./src/index.ts'),                                    // imports all independent component entrypoints
+          'internal/index': resolve('./src/internal/index.ts'),                // internal utilities for @elements/elements
+          'polyfills/index': resolve('./src/polyfills/index.ts'),                // optional polyfills for non-chromium envs
+          'test/index': resolve('./src/test/index.ts'),                        // internal testing utilities for @elements/elements
+          'css/module.typography': resolve('./src/css/module.typography.css'), // base typography styles
+          'css/module.layout': resolve('./src/css/module.layout.css'),         // layout utilities
+          'css/module.reset': resolve('./src/css/module.reset.css'),           // common reset/base styles
+          'index.css': resolve('./src/index.css'),                             // global styles including all above style modules
+          ...glob.sync('./src/**/define.ts').reduce((p, i) => {                 // all component entrypoints
+            return { ...p, [i.replace('./src/', '').replace('.ts', '')]: resolve(i) };
+          }, { })
+        }
+      },
       rollupOptions: {
         treeshake: false,
         preserveEntrySignatures: 'strict',
@@ -64,7 +72,7 @@ export default defineConfig((env) => {
             sourcemap: true,
             preserveModules: true,
             assetFileNames: '[name].[ext]',
-            entryFileNames: (module) => module.facadeModuleId?.includes('.css?') ? '[name].css.js' : '[name].js'
+            entryFileNames: '[name].js'
           }
         ],
         plugins: [
