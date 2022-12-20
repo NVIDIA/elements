@@ -1,3 +1,4 @@
+import type { CSSResult } from 'lit';
 import { useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import styles from './switch.css?inline';
@@ -16,5 +17,5 @@ import styles from './switch.css?inline';
  * @cssprop --anchor-background
  */
 export class Switch extends Control {
-  static styles = useStyles([...Control.styles, styles]);
+  static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 }

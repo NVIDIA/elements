@@ -2,21 +2,26 @@
 
 ### Web Components for MagLev UI Apps and framework agnostic UI Development
 
-## View the docs on the deployed <a href="https://elements.nvidia.com/ui/storybook/elements">Storybook</a> page.
-
-<br /><br />
-
+- [Documentation](https://elements-stage.nvidia.com/ui/storybook/elements)
+- [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
+- [Changelog](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/about-changelog--page)
+- [Package](ui/packages/npm:%2F%2F@elements%2Felements)
 
 ## Getting Started
 
 ```bash
-pnpm i --save @elements/elements
+# add internal registry to local .npmrc file (optional)
+@elements/elements:registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
+
+# install from registry
+pnpm install @elements/elements
 ```
 
-<br />
-
-
-## Usage
+```css
+/* import the global CSS into your project */
+@import '@elements/elements/dist/index.css';
+@import '@elements/elements/dist/inter.css';
+```
 
 ```ts
 // import and use individual elements (recommended)
@@ -27,9 +32,6 @@ import '@elements/elements/icon/define.js';
 // import specific element type references
 import { Button } from '@elements/elements';
 
-// import all elements (not recommended)
-import '@elements/elements';
-
 // optional (polyfills for non-chromium browsers)
 import '@elements/elements/polyfills';
 ```
@@ -38,22 +40,22 @@ import '@elements/elements/polyfills';
 <nve-button>button</nve-button>
 ```
 
-<br />
-
-## Angular
-
-```ts
-@NgModule({
-  // ...
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
-})
-class AppModule {}
-```
-
-<br />
+## Framework Integrations
+- [Angular](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-angular--page)
+- [Lit](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-lit--page)
+- [Preact](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-preact--page)
+- [React](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-react--page)
+- [TypeScript](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-typescript--page)
+- [Vue](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-vue--page)
 
 
 ## Development
+
+- `ci`: run full build/lint/test as well as demo/storybook apps against final output
+- `build`: run library build
+- `dev`: run storybook and build in watch mode
+- `test`: run unit tests
+- `test:watch`: run unit tets in watch mode
 
 All component development is currently done within a Storybook build:
 
@@ -101,7 +103,7 @@ pnpm dev
 Test storybook make sure everything looks good, then run a local build:
 
 ```bash
-pnpm build
+pnpm ci
 ```
 
 Validate expected artifacts in `/dist` folder, then run a dry publish and validate contents and package size that will be uploaded to artifactory:

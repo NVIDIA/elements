@@ -5,15 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "wireit",
     "preview": "vite preview"
   },
+  "wireit": {
+    "build": {
+      "command": "vite build",
+      "files": ["index.html", "vite.config.ts", "package.json"],
+      "output": ["dist"],
+      "dependencies": ["../../elements:build"]
+    }
+  },
   "dependencies": {
-    "@elements/elements": "0.6.1"
+    "@elements/elements": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "4.9.3",
-    "vite": "3.1.8",
-    "vite-plugin-static-copy": "0.11.1"
+    "typescript": "4.9.4",
+    "vite": "4.0.2",
+    "vite-plugin-static-copy": "0.13.0"
   }
 }
