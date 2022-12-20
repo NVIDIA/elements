@@ -1,6 +1,7 @@
-import { animate, Options } from '@lit-labs/motion';
+import type { DirectiveResult } from 'lit/directive';
+import { Animate, animate, Options } from '@lit-labs/motion';
 
-export function animationFade(host: HTMLElement, options?: Options) {
+export function animationFade(host: HTMLElement, options?: Options): DirectiveResult<typeof Animate> {
   const defaultOptions = {
     skipInitial: true,
     properties: ['opacity'],
