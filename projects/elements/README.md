@@ -117,10 +117,4 @@ Finally, run that actual deploy of the new version and verify contents on <a hre
 
 ```bash
 pnpm publish
-```
-
-#### Duplicate the CSS assets
-Note! It is also required that we manually clone `dist/index.css` and duplicate this over to the IDE as a `apps/home/src/elements.css` file. This deploy step should not be needed in the future when a `package.json` is added to the `home` app (it will then be automatically be pulled from the node_modules of specified install version in the IDE home app).
-
-_Copy build artifact:_ `src/ui/platform/design-system/elements/dist/index.css`
-_Paste and rename as:_ `src/ui/platform/apps/home/src/elements.css`
+``
