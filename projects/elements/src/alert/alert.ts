@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button';
 import { attachInternals, Status, statusIcons, TypeClosableController, useStyles } from '@elements/elements/internal';

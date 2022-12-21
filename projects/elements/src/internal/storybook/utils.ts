@@ -1,7 +1,5 @@
 import { ElementPart, Directive, directive, DirectiveParameters } from 'lit/directive.js';
 
-const FIGMA_FILE = 'https://www.figma.com/file/u92dX33lnPVzC9o4SfgK3R/MagLev-Product-System-2.0';
-
 export const generateFigmaEmbed = (figmaNodeId: string) => {
   return {
     design: {

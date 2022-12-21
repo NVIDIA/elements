@@ -13,7 +13,7 @@ if (!(window as any).process) {
  * hint - no light dismiss, no auto focus, open/close on hover/focus
  */
 export type PopoverType = 'auto' | 'manual' | 'hint';
-export type PopoverAlign = 'start' | 'end';
+export type PopoverAlign = 'start' | 'end' | 'center';
 export type PopoverSides = 'top' | 'bottom' | 'left' | 'right';
 export type PopoverPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
 export type Placement = PopoverPosition | `${PopoverSides}-${PopoverAlign}`;
@@ -104,7 +104,7 @@ export function computePopoverPosition(config: PopoverConfig) {
     config.arrow ? arrow({ element: config.arrow, padding: config.arrowPadding }) : null,
     config.anchor !== document.body ? flip() : null
   ].filter(i => !!i);
-  const placement = `${config.position}${config.alignment === 'start' || config.alignment === 'end' ? `-${config.alignment}` : ''}` as `${PopoverSides}-${PopoverAlign}`;
+  const placement = `${config.position}${config.alignment === 'start' || config.alignment === 'end' ? `-${config.alignment}` : ''}` as `${PopoverSides}-${Exclude<PopoverAlign, 'center'>}`;
   return computePosition(config.anchor, config.popover, { placement: config.position !== 'center' ? placement : undefined, middleware, strategy: config.strategy });
 }
 

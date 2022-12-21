@@ -3,7 +3,7 @@ import { spread } from '@elements/elements/internal';
 import { Tooltip } from '@elements/elements/tooltip';
 import '@elements/elements/card/define.js';
 import '@elements/elements/tooltip/define.js';
-
+import '@elements/elements/button/define.js';
 
 export default {
   title: 'Elements/Tooltip/Examples',

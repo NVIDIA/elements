@@ -94,7 +94,7 @@ describe('type-submit.controller', () => {
   it('should not ineract with form elements if type button', async () => {
     submitButtonInForm.type = 'button';
     await elementIsStable(submitButtonInForm);
-    const o = { f: () => { } };
+    const o = { f: () => null };
     vi.spyOn(o, 'f');
 
     form.addEventListener('submit', o.f);
@@ -107,7 +107,7 @@ describe('type-submit.controller', () => {
   });
 
   it('should handle dynamic changes for type', async () => {
-    const o = { f: () => { } };
+    const o = { f: () => null };
     vi.spyOn(o, 'f');
 
     // change default (implicit "submit") to type="button"
@@ -135,7 +135,7 @@ describe('type-submit.controller', () => {
     submitButtonInForm.disabled = true;
     await elementIsStable(submitButtonInForm);
 
-    const o = { f: () => { } };
+    const o = { f: () => null };
     vi.spyOn(o, 'f');
 
     form.addEventListener('submit', o.f);
@@ -145,7 +145,7 @@ describe('type-submit.controller', () => {
   it('should only submit once per click/keypress', async () => {
     await elementIsStable(submitButtonInForm);
 
-    const o = { f: () => { } };
+    const o = { f: () => null };
     vi.spyOn(o, 'f');
 
     form.addEventListener('submit', o.f);
