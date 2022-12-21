@@ -62,7 +62,6 @@ describe('updateControlStatusState', () => {
 describe('setupControlValidationStates', () => {
   let fixture: HTMLElement;
   let control: Control;
-  let message: ControlMessage;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -73,7 +72,6 @@ describe('setupControlValidationStates', () => {
       </nve-control>
     `);
     control = fixture.querySelector('nve-control');
-    message = fixture.querySelector('nve-control-message');
     await elementIsStable(control);
   });
 

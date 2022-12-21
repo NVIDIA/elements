@@ -7,7 +7,7 @@ import cardFooterStyleSheet from './card-footer.css?inline';
 
 /**
  * @element nve-card
- * @slot default - This is a default/unnamed slot for card content
+ * @slot - This is a default/unnamed slot for card content
  * @slot header - header element (Use <nve-card-header> or custom content)
  * @slot content - content element (Use <nve-card-content> or custom content)
  * @slot footer - footer element (Use <nve-card-footer> or custom content)
@@ -67,7 +67,7 @@ export class Card extends LitElement {
 
 /**
  * @element nve-card-content
- * @slot default - This is a default/unnamed slot for card content content
+ * @slot - This is a default/unnamed slot for card content content
  * @cssprop --padding
  */
  export class CardContent extends LitElement {
@@ -82,7 +82,7 @@ export class Card extends LitElement {
 
 /**
  * @element nve-card-footer
- * @slot default - This is a default/unnamed slot for card footer content
+ * @slot - This is a default/unnamed slot for card footer content
  * @cssprop --padding
  */
  export class CardFooter extends LitElement {

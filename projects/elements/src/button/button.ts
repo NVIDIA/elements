@@ -5,7 +5,7 @@ import styles from './button.css?inline';
 
 /**
  * @element nve-button
- * @slot Default - Default slot for button text content or icon, icon placement determined by whether <nve-icon> is inserted before or after text content.
+ * @slot - slot for button text content or icon, icon placement determined by whether <nve-icon> is inserted before or after text content.
  * @cssprop --color
  * @cssprop --background
  * @cssprop --padding
