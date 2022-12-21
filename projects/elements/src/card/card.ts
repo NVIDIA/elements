@@ -7,7 +7,7 @@ import cardFooterStyleSheet from './card-footer.css?inline';
 
 /**
  * @element mlv-card
- * @slot default - This is a default/unnamed slot for card content
+ * @slot - This is a default/unnamed slot for card content
  * @slot header - header element (Use <mlv-card-header> or custom content)
  * @slot content - content element (Use <mlv-card-content> or custom content)
  * @slot footer - footer element (Use <mlv-card-footer> or custom content)
@@ -67,7 +67,7 @@ export class Card extends LitElement {
 
 /**
  * @element mlv-card-content
- * @slot default - This is a default/unnamed slot for card content content
+ * @slot - This is a default/unnamed slot for card content content
  * @cssprop --padding
  */
  export class CardContent extends LitElement {
@@ -82,7 +82,7 @@ export class Card extends LitElement {
 
 /**
  * @element mlv-card-footer
- * @slot default - This is a default/unnamed slot for card footer content
+ * @slot - This is a default/unnamed slot for card footer content
  * @cssprop --padding
  */
  export class CardFooter extends LitElement {

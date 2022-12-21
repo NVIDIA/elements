@@ -62,7 +62,6 @@ describe('updateControlStatusState', () => {
 describe('setupControlValidationStates', () => {
   let fixture: HTMLElement;
   let control: Control;
-  let message: ControlMessage;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -73,7 +72,6 @@ describe('setupControlValidationStates', () => {
       </mlv-control>
     `);
     control = fixture.querySelector('mlv-control');
-    message = fixture.querySelector('mlv-control-message');
     await elementIsStable(control);
   });
 

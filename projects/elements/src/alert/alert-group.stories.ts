@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { Alert } from '@elements/elements/alert';
+import { AlertGroup } from '@elements/elements/alert';
 import '@elements/elements/alert/define.js';
 
 export default {
@@ -8,12 +8,12 @@ export default {
   argTypes: {
     status: {
       control: 'inline-radio',
-      options: ['', 'info', 'warning', 'danger', 'success']
+      options: ['', 'accent', 'warning', 'danger', 'success']
     }
   }
 };
 
-type ArgTypes = Alert & { };
+type ArgTypes = AlertGroup;
 
 export const Default = {
   render: (args: ArgTypes) =>

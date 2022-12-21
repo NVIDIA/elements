@@ -5,8 +5,6 @@ import { inputStyles } from '@elements/elements/input';
 import globalStyles from './color.global.css?inline';
 import styles from './color.css?inline';
 
-declare const EyeDropper: any;
-
 /**
  * @alpha
  * @element mlv-color
@@ -28,6 +26,6 @@ export class Color extends Control {
   }
 
   #select() {
-    new (window as any).EyeDropper().open().then(color => this.input.value = color.sRGBHex).catch(() => {});
+    new (window as any).EyeDropper().open().then(color => this.input.value = color.sRGBHex).catch(() => null);
   }
 }

@@ -1,14 +1,9 @@
 /* eslint-disable guard-for-in */
 import { html } from 'lit';
-import {
-  ComponentStatuses,
-  generateDefaultStoryParameters,
-  getValuesFromEnum
-} from '@elements/elements/internal';
-import {  Icon, IconNames, ICON_NAMES } from '@elements/elements/icon';
+import { ComponentStatuses, generateDefaultStoryParameters } from '@elements/elements/internal';
+import { Icon, IconNames, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 
-const figmaEmbedNodeId = '164%3A61';
 const reviewDocBookmark = 'id.zckm5su0hyrd';
 const status: ComponentStatuses = 'beta';
 const description = `
@@ -37,17 +32,17 @@ export default {
 };
 
 interface ArgTypes {
-  variant?: Icon['variant'];
-  status?: Icon['status'];
-  name?: IconNames;
+  variant: Icon['variant'];
+  status: Icon['status'];
+  name: IconNames;
 }
 
 export const Default = {
   render: (args: ArgTypes) =>
     html`<mlv-icon
-      name="${args.name}"
-      variant="${args.variant}"
-      status="${args.status}"
+      .name=${args.name}
+      .variant=${args.variant}
+      .status=${args.status}
     ></mlv-icon>`,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'analytics' }
@@ -55,7 +50,7 @@ export const Default = {
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map((iconName) => html`<mlv-icon name="${iconName}" .variant="${args.variant}"></mlv-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<mlv-icon .name=${iconName} .variant=${args.variant}></mlv-icon>\n`
     )}
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),

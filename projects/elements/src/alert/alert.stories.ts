@@ -13,7 +13,7 @@ export default {
   }
 };
 
-type ArgTypes = Alert & { };
+type ArgTypes = Alert;
 
 export const Default = {
   render: (args: ArgTypes) =>

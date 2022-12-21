@@ -1,8 +1,14 @@
 import { html, LitElement } from 'lit';
-import '@elements/elements/forms/define.js';
-import 'emoji-picker-element';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
+import 'emoji-picker-element';
+import '@elements/elements/forms/define.js';
+import '@elements/elements/input/define.js';
+import '@elements/elements/select/define.js';
+import '@elements/elements/search/define.js';
+import '@elements/elements/range/define.js';
+import '@elements/elements/textarea/define.js';
+import '@elements/elements/checkbox/define.js';
 
 export default {
   title: 'Foundations/Forms/Examples',
@@ -379,6 +385,12 @@ export const Status = () => {
 </mlv-control>`;
 };
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "selectmenu": HTMLInputElement;
+  }
+}
+
 export const SelectmenuExperimental = () => {
   return html`
 <mlv-control layout="vertical">
@@ -457,7 +469,7 @@ export const SelectmenuExperimental = () => {
 }
 
 @customElement('my-emoji')
-class Emoji extends LitElement {
+class EmojiDemo extends LitElement {
   @property({ type: String }) value = '';
 
   static formAssociated = true;

@@ -1,5 +1,5 @@
 import { html, LitElement, PropertyValues } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property } from 'lit/decorators/property.js';
 import { attachInternals, Status, useStyles } from '@elements/elements/internal';
 import styles from './alert-group.css?inline';
 

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
 import { Alert, AlertGroup } from '@elements/elements/alert';
 import '@elements/elements/alert/define.js';
 

@@ -266,8 +266,8 @@
           ],
           "slots": [
             {
-              "description": "Default slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.",
-              "name": "Default"
+              "description": "slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.",
+              "name": ""
             }
           ],
           "members": [
@@ -371,7 +371,7 @@
           "slots": [
             {
               "description": "This is a default/unnamed slot for card content",
-              "name": "default"
+              "name": ""
             },
             {
               "description": "header element (Use <mlv-card-header> or custom content)",
@@ -443,7 +443,7 @@
           "slots": [
             {
               "description": "This is a default/unnamed slot for card content content",
-              "name": "default"
+              "name": ""
             }
           ],
           "members": [],
@@ -466,7 +466,7 @@
           "slots": [
             {
               "description": "This is a default/unnamed slot for card footer content",
-              "name": "default"
+              "name": ""
             }
           ],
           "members": [],
@@ -1687,7 +1687,7 @@
               "kind": "field",
               "name": "status",
               "type": {
-                "text": "'warning' | 'danger' | 'success' | 'info'"
+                "text": "'warning' | 'danger' | 'success' | 'accent'"
               },
               "attribute": "status",
               "reflects": true
@@ -1714,7 +1714,7 @@
             {
               "name": "status",
               "type": {
-                "text": "'warning' | 'danger' | 'success' | 'info'"
+                "text": "'warning' | 'danger' | 'success' | 'accent'"
               },
               "fieldName": "status"
             },

@@ -1,6 +1,9 @@
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { MlvBaseButton, TypePopoverController, popoverPosition, spread, popoverAlign, popoverBaseStyles, animationFade } from '@elements/elements/internal';
+import { MlvBaseButton, TypePopoverController, PopoverPosition, spread, PopoverAlign, popoverBaseStyles, animationFade } from '@elements/elements/internal';
+import '@elements/elements/card/define.js';
+import '@elements/elements/button/define.js';
+import '@elements/elements/icon-button/define.js';
 
 export default {
   title: 'Internal/Controllers'
@@ -97,9 +100,9 @@ export const baseButton = () => {
 class PopoverDemo extends LitElement {
   @property({ type: String, reflect: true }) anchor: string | HTMLElement;
 
-  @property({ type: String, reflect: true }) position: popoverPosition;
+  @property({ type: String, reflect: true }) position: PopoverPosition;
 
-  @property({ type: String, reflect: true }) alignment: popoverAlign;;
+  @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
   @property({ type: String, reflect: true, attribute: 'popover-type' }) popoverType: 'auto' | 'manual' | 'hint' = 'hint';
 
@@ -165,7 +168,7 @@ class PopoverDemo extends LitElement {
       <dialog ${animationFade(this)}>
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.typepopoverController.close()} icon-name="cancel" interaction="ghost" aria-label="close"></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" interaction="ghost" aria-label="close"></mlv-icon-button>` : ''}
       </dialog>
     `;
   }

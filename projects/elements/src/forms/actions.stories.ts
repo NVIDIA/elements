@@ -1,5 +1,7 @@
 import { html } from 'lit';
+import '@elements/elements/forms/define.js';
 import '@elements/elements/input/define.js';
+import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
 
 export default {

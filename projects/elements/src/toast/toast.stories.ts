@@ -2,6 +2,7 @@ import { html } from 'lit';
 import { spread } from '@elements/elements/internal';
 import { Toast } from '@elements/elements/toast';
 import '@elements/elements/card/define.js';
+import '@elements/elements/button/define.js';
 import '@elements/elements/toast/define.js';
 
 

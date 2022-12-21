@@ -2,6 +2,7 @@ import { html } from 'lit';
 import { spread } from '@elements/elements/internal';
 import { Notification } from '@elements/elements/notification';
 import '@elements/elements/notification/define.js';
+import '@elements/elements/button/define.js';
 
 
 export default {

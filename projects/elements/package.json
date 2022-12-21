@@ -16,8 +16,9 @@
     "storybook": "wireit",
     "storybook:watch": "wireit",
     "lint": "wireit",
-    "lint:project": "wireit",
+    "lint:eslint": "wireit",
     "lint:repo": "wireit",
+    "lint:analyzer": "wireit",
     "demos": "wireit",
     "create-icon-spritesheet": "wireit",
     "prepublishonly": "wireit",
@@ -218,6 +219,9 @@
       "files": [
         "public/**",
         "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.stories.mdx",
+        "!src/**/*.test.ts",
         "tokens/**",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -258,16 +262,17 @@
     "test:unit": {
       "command": "vitest run",
       "files": [
-        "dist/**"
+        "dist/**",
+        "src/**/*.test.ts"
       ],
       "output": []
     },
     "test:coverage": {
       "command": "vitest run --coverage",
       "files": [
-        "public/**",
-        "src/**",
+        "src/**/*.test.ts",
         "tsconfig.json",
+        "tsconfig.lib.json",
         "vite.config.ts",
         "vitest.config.ts"
       ],
@@ -286,14 +291,23 @@
       ]
     },
     "lint": {
-      "dependencies": ["lint:repo"]
+      "dependencies": ["lint:eslint", "lint:repo"]
     },
-    "lint:project": {
-      "command": "lit-analyzer src --rules.no-unknown-slot off --rules.no-missing-import off && eslint -c eslintrc.cjs --ext .ts,.js src",
+    "lint:eslint": {
+      "command": "eslint -c ./eslint.config.js ./src",
       "files": [
         "src/**/*.ts",
         "src/**/*.js",
-        ".eslintrc.cjs"
+        "eslint.config.js"
+      ],
+      "output": []
+    },
+    "lint:analyzer": {
+      "command": "lit-analyzer src",
+      "files": [
+        "src/**/*.ts",
+        "src/**/*.js",
+        "eslint.config.js"
       ],
       "output": [],
       "dependencies": [
@@ -341,7 +355,7 @@
     },
     "generate-manifest": {
       "command": "cem analyze --litelement --globs ./src/**/*.ts --exclude src/internal/**/*.ts src/**/*.stories.ts",
-      "input": ["src/**/*"],
+      "files": ["src/**/*"],
       "output": ["custom-elements.json"]
     },
     "prepublishonly": {

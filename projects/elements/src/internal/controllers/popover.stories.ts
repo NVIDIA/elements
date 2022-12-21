@@ -1,4 +1,16 @@
 import { html } from 'lit';
+import '@elements/elements/forms/define.js';
+import '@elements/elements/button/define.js';
+import '@elements/elements/icon-button/define.js';
+import '@elements/elements/search/define.js';
+import '@elements/elements/textarea/define.js';
+import '@elements/elements/select/define.js';
+import '@elements/elements/dialog/define.js';
+import '@elements/elements/tooltip/define.js';
+import '@elements/elements/toast/define.js';
+import '@elements/elements/dropdown/define.js';
+import '@elements/elements/notification/define.js';
+import '@elements/elements/input/define.js';
 
 export default {
   title: 'Foundations/Popovers/Examples'
@@ -117,7 +129,7 @@ export const FeedbackPattern = {
   <form id="feedback-form" mlv-layout="column gap:lg align:horizontal-stretch">
     <mlv-select>
       <label>Feedback type</label>
-      <select autofocus name="type">
+      <select name="type">
         <option value="1">Feature Request</option>
         <option value="2">Bug/Issue</option>
         <option value="3">Other</option>
