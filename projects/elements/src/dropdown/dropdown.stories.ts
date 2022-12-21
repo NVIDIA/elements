@@ -4,7 +4,14 @@ import { state } from 'lit/decorators/state.js';
 import { spread } from '@elements/elements/internal';
 import { Dropdown } from '@elements/elements/dropdown';
 import '@elements/elements/card/define.js';
+import '@elements/elements/button/define.js';
+import '@elements/elements/forms/define.js';
+import '@elements/elements/search/define.js';
+import '@elements/elements/alert/define.js';
 import '@elements/elements/dropdown/define.js';
+import '@elements/elements/radio/define.js';
+import '@elements/elements/checkbox/define.js';
+import '@elements/elements/icon/define.js';
 
 export default {
   title: 'Elements/Dropdown/Examples',
@@ -63,7 +70,7 @@ export const Content = {
   <nve-search rounded>
     <input type="search" placeholder="Search" />
   </nve-search>
-  <nve-alert status="info">some text content in a dropdown</nve-alert>
+  <nve-alert>some text content in a dropdown</nve-alert>
 </nve-dropdown>
 <nve-button id="btn">button</nve-button>
   `

@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import '@elements/elements/forms/define.js';
 import '@elements/elements/color/define.js';
 
 export default {

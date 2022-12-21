@@ -1,12 +1,12 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { withDesign } from 'storybook-addon-designs';
-
-import { ComponentStatuses, generateFigmaEmbed, generateDefaultStoryParameters } from '@elements/elements/internal';
+import { ComponentStatuses, generateDefaultStoryParameters } from '@elements/elements/internal';
 import '@elements/elements/card/define.js';
+import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
+import '@elements/elements/icon/define.js';
 
-const figmaEmbedNodeId = '505%3A2280';
 const reviewDocBookmark = 'id.s62qmiib7wfu';
 const status: ComponentStatuses = 'alpha';
 const description = `
@@ -74,7 +74,6 @@ export const Default = {
       </nve-card>
     </div>
   `,
-  // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { width: 300, height: 150, content: 'Card Content' }
 };
 
@@ -96,7 +95,7 @@ export const MediaCard = {
   render: () => html`
   <div nve-theme="root" nve-layout="grid gap:md span-items:6 align:stretch" style="height: 480px">
     <nve-card style="height: 100%; width: 100%;">
-      <img src="images/test-image-3.webp" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+      <img src="images/test-image-3.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
       <nve-card-content>
         <p>card content</p>
       </nve-card-content>
@@ -106,7 +105,7 @@ export const MediaCard = {
       </nve-card-footer>
     </nve-card>
     <nve-card style="height: 100%; width: 100%;">
-      <img src="images/test-image-2.webp" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+      <img src="images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
       <nve-card-content>
         <p>card content</p>
       </nve-card-content>

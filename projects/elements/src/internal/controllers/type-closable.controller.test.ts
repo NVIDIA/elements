@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
 import { TypeClosableController } from '@elements/elements/internal';
 
 @customElement('type-closable-controller-test-element')

@@ -5,6 +5,7 @@ import { Button } from '@elements/elements/button';
 import { ComponentStatuses, generateDefaultStoryParameters, InlinePosition, spread } from '@elements/elements/internal';
 import { IconNames, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/button/define.js';
+import '@elements/elements/search/define.js';
 
 const reviewDocBookmark = 'id.l12irnk25slx';
 const status: ComponentStatuses = 'beta';
@@ -30,7 +31,7 @@ export default {
 };
 
 type ArgTypes = Button & {
-  iconName?: IconNames;
+  iconName: IconNames;
   iconSlotPlacement: InlinePosition;
 }
 
@@ -47,9 +48,9 @@ export const Disabled = { ...Default, args: { textContent: 'Disabled', disabled:
 export const ButtonWithIcon = {
   render: (args: ArgTypes) => html`
   <nve-button ${spread(args)}>
-    ${when(args.iconSlotPlacement === 'start',() => html`<nve-icon name="${args.iconName}"></nve-icon>`)}
+    ${when(args.iconSlotPlacement === 'start',() => html`<nve-icon .name=${args.iconName}></nve-icon>`)}
       ${args.textContent}
-    ${when(args.iconSlotPlacement === 'end',() => html`<nve-icon name="${args.iconName}"></nve-icon>`)}
+    ${when(args.iconSlotPlacement === 'end',() => html`<nve-icon .name=${args.iconName}></nve-icon>`)}
   </nve-button>`,
   args: { textContent: 'Button Icon', disabled: false, interaction: 'emphasize', iconName: 'navigate-to', iconSlotPlacement: 'end' },
   argTypes: {

@@ -206,7 +206,7 @@ describe('base button', () => {
   it('should not ineract with form elements if type button', async () => {
     submitButtonInForm.type = 'button';
     await elementIsStable(submitButtonInForm);
-    const o = { f: () => { } };
+    const o = { f: () => null };
     vi.spyOn(o, 'f');
 
     form.addEventListener('submit', o.f);
@@ -219,7 +219,7 @@ describe('base button', () => {
   });
 
   it('should handle dynamic changes for type', async () => {
-    const o = { f: () => { } };
+    const o = { f: () => null };
     vi.spyOn(o, 'f');
 
     // change default (implicit "submit") to type="button"
@@ -247,7 +247,7 @@ describe('base button', () => {
     submitButtonInForm.disabled = true;
     await elementIsStable(submitButtonInForm);
 
-    const o = { f: () => { } };
+    const o = { f: () => null };
     vi.spyOn(o, 'f');
 
     form.addEventListener('submit', o.f);

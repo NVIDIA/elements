@@ -14,7 +14,7 @@ import styles from './control-group.css?inline';
  * @cssprop --label-width
  */
 export class ControlGroup extends LitElement {
-  @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';;
+  @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
   
   get label() {
     return this.querySelector<HTMLLabelElement>('label');

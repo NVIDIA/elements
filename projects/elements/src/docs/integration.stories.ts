@@ -4,13 +4,19 @@ import { state } from 'lit/decorators/state.js';
 import { query } from 'lit/decorators/query.js';
 import typography from '@elements/elements/css/module.typography.css';
 import layout from '@elements/elements/css/module.layout.css';
+import '@elements/elements/notification/define.js';
+import '@elements/elements/password/define.js';
+import '@elements/elements/forms/define.js';
+import '@elements/elements/input/define.js';
+import '@elements/elements/checkbox/define.js';
+import '@elements/elements/button/define.js';
 
 export default {
   title: 'Internal/Integration'
 };
 
 @customElement('my-element')
-class MyElement extends LitElement {
+class MyElementDemo extends LitElement {
   static styles = [unsafeCSS(`${typography}${layout}`)];
 
   render() {
@@ -45,7 +51,7 @@ export class AppLogin extends LitElement {
       <form @submit=${e => this.#submit(e)} @input=${this.#input} nve-layout="column gap:lg align:stretch" style="max-width: 400px">
         <nve-input>
           <label>Email</label>
-          <input .value=${this.formValues.email} type="email" name="email" autocomplete="off" pattern=".+@nvidia.com" required autocomplete="off" />
+          <input .value=${this.formValues.email} type="email" name="email" autocomplete="off" pattern=".+@nvidia.com" required />
           <nve-control-message error="valueMissing">required</nve-control-message>
           <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
         </nve-input>
@@ -65,7 +71,7 @@ export class AppLogin extends LitElement {
         <nve-button interaction="emphasize">Login</nve-button>
       </form>
       <pre>${JSON.stringify(this.formValues, null, 2)}</pre>
-      <nve-notification ?hidden=${!this.showNotification} @close=${() => this.showNotification = false} close-timeout="2000" status="success" position="top" alignment="center">Submited: ${JSON.stringify(this.formValues)}</nve-notification>
+      <nve-notification ?hidden=${!this.showNotification} @close=${() => this.showNotification = false} close-timeout="2000" status="success" position="top">Submited: ${JSON.stringify(this.formValues)}</nve-notification>
     `;
   }
 

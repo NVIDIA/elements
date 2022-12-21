@@ -245,7 +245,6 @@ describe('parseTokenNumber', () => {
 
 describe('defineElement', () => {
   let fixture: HTMLElement;
-  let test: HTMLElement;
 
   defineElement('test-element', class TestElement extends LitElement { });
 
@@ -253,8 +252,6 @@ describe('defineElement', () => {
     fixture = await createFixture(html`
       <test-element></test-element>
     `);
-
-    test = fixture.querySelector('test-element');
   });
 
   afterEach(() => {

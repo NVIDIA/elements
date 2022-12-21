@@ -1,4 +1,6 @@
 import { html } from 'lit';
+import '@elements/elements/forms/define.js';
+import '@elements/elements/month/define.js';
 import '@elements/elements/datetime/define.js';
 
 export default {
