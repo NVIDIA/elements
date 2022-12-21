@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@elements/elements/internal';
 import { ICON_NAMES } from './icon-names.js';
 import styles from './icon.css?inline';
@@ -18,7 +18,7 @@ export class Icon extends LitElement {
   /** The color variant of the icon */
   @property({ type: String, reflect: true }) variant?: 'inherit';
 
-  @property({ type: String, reflect: true }) status: 'warning' | 'danger' | 'success' | 'info';
+  @property({ type: String, reflect: true }) status: 'warning' | 'danger' | 'success' | 'accent';
 
   /** The name of the icon SVG sprite */
   @property({ type: String }) name: IconNames;

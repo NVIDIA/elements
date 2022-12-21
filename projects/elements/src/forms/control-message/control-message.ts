@@ -4,12 +4,19 @@ import { useStyles } from '@elements/elements/internal';
 import { Alert } from '@elements/elements/alert';
 import styles from './control-message.css?inline';
 
-const alertStatus = {
+const alertStatus: AlertStatus = {
   error: 'danger',
   warning: 'warning',
   success: 'success',
   disabled: 'muted'
 };
+
+interface AlertStatus {
+  error: 'danger',
+  warning: 'warning',
+  success: 'success',
+  disabled: 'muted'
+}
 
 /**
  * @alpha
@@ -26,7 +33,7 @@ export class ControlMessage extends LitElement {
 
   static styles = useStyles([styles]);
 
-  get alertStatus() {
+  get alertStatus(){
     if (this.status) {
       return alertStatus[this.status];
     } else if (this.error) {

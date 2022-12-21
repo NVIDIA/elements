@@ -1,4 +1,14 @@
 import { html } from 'lit';
+import '@elements/elements/card/define.js';
+import '@elements/elements/forms/define.js';
+import '@elements/elements/input/define.js';
+import '@elements/elements/button/define.js';
+import '@elements/elements/icon/define.js';
+import '@elements/elements/dropdown/define.js';
+import '@elements/elements/dialog/define.js';
+import '@elements/elements/tooltip/define.js';
+import '@elements/elements/search/define.js';
+import '@elements/elements/icon-button/define.js';
 
 export default {
   title: 'Foundations/Tokens/Examples'

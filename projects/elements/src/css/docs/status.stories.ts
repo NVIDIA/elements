@@ -1,4 +1,6 @@
 import { html } from 'lit';
+import '@elements/elements/alert/define.js';
+import '@elements/elements/notification/define.js';
 
 export default {
   title: 'Foundations/Tokens/Examples'
