@@ -1,9 +1,10 @@
 import { Alert, AlertGroup } from '@elements/elements/alert';
+import { defineElement } from '@elements/elements/internal';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/icon/define.js';
 
-customElements.get('mlv-alert') || customElements.define('mlv-alert', Alert);
-customElements.get('mlv-alert-group') || customElements.define('mlv-alert-group', AlertGroup);
+defineElement('mlv-alert', Alert);
+defineElement('mlv-alert-group', AlertGroup);
 
 declare global {
   interface HTMLElementTagNameMap {

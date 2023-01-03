@@ -1,8 +1,9 @@
+import { defineElement } from '@elements/elements/internal';
 import { Password } from '@elements/elements/password';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 
-customElements.get('mlv-password') || customElements.define('mlv-password', Password);
+defineElement('mlv-password', Password);
 
 declare global {
   interface HTMLElementTagNameMap {

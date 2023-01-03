@@ -1,7 +1,8 @@
+import { defineElement } from '@elements/elements/internal';
 import { File } from '@elements/elements/file';
 import '@elements/elements/forms/define.js';
 
-customElements.get('mlv-file') || customElements.define('mlv-file', File);
+defineElement('mlv-file', File);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,8 +1,9 @@
+import { defineElement } from '@elements/elements/internal';
 import { Time } from '@elements/elements/time';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 
-customElements.get('mlv-time') || customElements.define('mlv-time', Time);
+defineElement('mlv-time', Time);
 
 declare global {
   interface HTMLElementTagNameMap {

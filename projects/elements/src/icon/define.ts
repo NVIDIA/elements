@@ -1,6 +1,7 @@
+import { defineElement } from '@elements/elements/internal';
 import { Icon } from '@elements/elements/icon';
 
-customElements.get('mlv-icon') || customElements.define('mlv-icon', Icon);
+defineElement('mlv-icon', Icon);
 
 declare global {
   interface HTMLElementTagNameMap {

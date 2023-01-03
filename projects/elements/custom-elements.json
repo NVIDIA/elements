@@ -199,24 +199,7 @@
       "kind": "javascript-module",
       "path": "src/alert/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-alert",
-          "declaration": {
-            "name": "Alert",
-            "package": "@elements/elements/alert"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-alert-group",
-          "declaration": {
-            "name": "AlertGroup",
-            "package": "@elements/elements/alert"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -283,8 +266,8 @@
           ],
           "slots": [
             {
-              "description": "slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.",
-              "name": ""
+              "description": "Default slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.",
+              "name": "Default"
             }
           ],
           "members": [
@@ -346,16 +329,7 @@
       "kind": "javascript-module",
       "path": "src/button/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-button",
-          "declaration": {
-            "name": "Button",
-            "package": "@elements/elements/button"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -397,7 +371,19 @@
           "slots": [
             {
               "description": "This is a default/unnamed slot for card content",
-              "name": ""
+              "name": "default"
+            },
+            {
+              "description": "header element (Use <mlv-card-header> or custom content)",
+              "name": "header"
+            },
+            {
+              "description": "content element (Use <mlv-card-content> or custom content)",
+              "name": "content"
+            },
+            {
+              "description": "footer element (Use <mlv-card-footer> or custom content)",
+              "name": "footer"
             }
           ],
           "members": [],
@@ -424,10 +410,6 @@
             }
           ],
           "slots": [
-            {
-              "description": "This is a default/unnamed slot for card content",
-              "name": ""
-            },
             {
               "description": "Title Text",
               "name": "title"
@@ -461,7 +443,7 @@
           "slots": [
             {
               "description": "This is a default/unnamed slot for card content content",
-              "name": ""
+              "name": "default"
             }
           ],
           "members": [],
@@ -484,7 +466,7 @@
           "slots": [
             {
               "description": "This is a default/unnamed slot for card footer content",
-              "name": ""
+              "name": "default"
             }
           ],
           "members": [],
@@ -535,40 +517,7 @@
       "kind": "javascript-module",
       "path": "src/card/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-card",
-          "declaration": {
-            "name": "Card",
-            "package": "@elements/elements/card"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-card-header",
-          "declaration": {
-            "name": "CardHeader",
-            "package": "@elements/elements/card"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-card-content",
-          "declaration": {
-            "name": "CardContent",
-            "package": "@elements/elements/card"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-card-footer",
-          "declaration": {
-            "name": "CardFooter",
-            "package": "@elements/elements/card"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -656,24 +605,7 @@
       "kind": "javascript-module",
       "path": "src/checkbox/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-checkbox",
-          "declaration": {
-            "name": "Checkbox",
-            "package": "@elements/elements/checkbox"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-checkbox-group",
-          "declaration": {
-            "name": "CheckboxGroup",
-            "package": "@elements/elements/checkbox"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -740,16 +672,7 @@
       "kind": "javascript-module",
       "path": "src/color/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-color",
-          "declaration": {
-            "name": "Color",
-            "package": "@elements/elements/color"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -804,16 +727,7 @@
       "kind": "javascript-module",
       "path": "src/date/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-date",
-          "declaration": {
-            "name": "Date",
-            "package": "@elements/elements/date"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -868,16 +782,7 @@
       "kind": "javascript-module",
       "path": "src/datetime/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-datetime",
-          "declaration": {
-            "name": "Datetime",
-            "package": "@elements/elements/datetime"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -898,32 +803,7 @@
       "kind": "javascript-module",
       "path": "src/dialog/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-dialog",
-          "declaration": {
-            "name": "Dialog",
-            "package": "@elements/elements/dialog"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-dialog-header",
-          "declaration": {
-            "name": "DialogHeader",
-            "package": "@elements/elements/dialog"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-dialog-footer",
-          "declaration": {
-            "name": "DialogFooter",
-            "package": "@elements/elements/dialog"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -1283,16 +1163,7 @@
       "kind": "javascript-module",
       "path": "src/dropdown/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-dropdown",
-          "declaration": {
-            "name": "Dropdown",
-            "package": "@elements/elements/dropdown"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -1559,16 +1430,7 @@
       "kind": "javascript-module",
       "path": "src/file/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-file",
-          "declaration": {
-            "name": "File",
-            "package": "@elements/elements/file"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -1617,32 +1479,7 @@
       "kind": "javascript-module",
       "path": "src/forms/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-control",
-          "declaration": {
-            "name": "Control",
-            "package": "@elements/elements/forms"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-control-group",
-          "declaration": {
-            "name": "ControlGroup",
-            "package": "@elements/elements/forms"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-control-message",
-          "declaration": {
-            "name": "ControlMessage",
-            "package": "@elements/elements/forms"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -1679,16 +1516,7 @@
       "kind": "javascript-module",
       "path": "src/icon-button/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-icon-button",
-          "declaration": {
-            "name": "IconButton",
-            "package": "@elements/elements/icon-button"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -1823,16 +1651,7 @@
       "kind": "javascript-module",
       "path": "src/icon/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-icon",
-          "declaration": {
-            "name": "Icon",
-            "package": "@elements/elements/icon"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -1868,7 +1687,7 @@
               "kind": "field",
               "name": "status",
               "type": {
-                "text": "'warning' | 'danger' | 'success' | 'accent'"
+                "text": "'warning' | 'danger' | 'success' | 'info'"
               },
               "attribute": "status",
               "reflects": true
@@ -1895,7 +1714,7 @@
             {
               "name": "status",
               "type": {
-                "text": "'warning' | 'danger' | 'success' | 'accent'"
+                "text": "'warning' | 'danger' | 'success' | 'info'"
               },
               "fieldName": "status"
             },
@@ -1954,24 +1773,7 @@
       "kind": "javascript-module",
       "path": "src/input/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-input",
-          "declaration": {
-            "name": "Input",
-            "package": "@elements/elements/input"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-input-group",
-          "declaration": {
-            "name": "InputGroup",
-            "package": "@elements/elements/input"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -2238,16 +2040,7 @@
       "kind": "javascript-module",
       "path": "src/month/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-month",
-          "declaration": {
-            "name": "Month",
-            "package": "@elements/elements/month"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -2302,24 +2095,7 @@
       "kind": "javascript-module",
       "path": "src/notification/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-notification",
-          "declaration": {
-            "name": "Notification",
-            "package": "@elements/elements/notification"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-notification-group",
-          "declaration": {
-            "name": "NotificationGroup",
-            "package": "@elements/elements/notification"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -2695,16 +2471,7 @@
       "kind": "javascript-module",
       "path": "src/password/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-password",
-          "declaration": {
-            "name": "Password",
-            "package": "@elements/elements/password"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -2778,24 +2545,7 @@
       "kind": "javascript-module",
       "path": "src/radio/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-radio",
-          "declaration": {
-            "name": "Radio",
-            "package": "@elements/elements/radio"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-radio-group",
-          "declaration": {
-            "name": "RadioGroup",
-            "package": "@elements/elements/radio"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -2891,16 +2641,7 @@
       "kind": "javascript-module",
       "path": "src/range/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-range",
-          "declaration": {
-            "name": "Range",
-            "package": "@elements/elements/range"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -2963,16 +2704,7 @@
       "kind": "javascript-module",
       "path": "src/search/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-search",
-          "declaration": {
-            "name": "Search",
-            "package": "@elements/elements/search"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -3027,16 +2759,7 @@
       "kind": "javascript-module",
       "path": "src/select/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-select",
-          "declaration": {
-            "name": "Select",
-            "package": "@elements/elements/select"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -3111,24 +2834,7 @@
       "kind": "javascript-module",
       "path": "src/switch/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-switch",
-          "declaration": {
-            "name": "Switch",
-            "package": "@elements/elements/switch"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-switch-group",
-          "declaration": {
-            "name": "SwitchGroup",
-            "package": "@elements/elements/switch"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -3165,9 +2871,7 @@
           "superclass": {
             "name": "ControlGroup",
             "package": "@elements/elements/forms"
-          },
-          "tagName": "mlv-switch-group",
-          "customElement": true
+          }
         }
       ],
       "exports": [
@@ -3371,16 +3075,7 @@
       "kind": "javascript-module",
       "path": "src/textarea/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-textarea",
-          "declaration": {
-            "name": "Textarea",
-            "package": "@elements/elements/textarea"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -3458,16 +3153,7 @@
       "kind": "javascript-module",
       "path": "src/time/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-time",
-          "declaration": {
-            "name": "Time",
-            "package": "@elements/elements/time"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -3522,16 +3208,7 @@
       "kind": "javascript-module",
       "path": "src/toast/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-toast",
-          "declaration": {
-            "name": "Toast",
-            "package": "@elements/elements/toast"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -3804,16 +3481,7 @@
       "kind": "javascript-module",
       "path": "src/tooltip/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-tooltip",
-          "declaration": {
-            "name": "Tooltip",
-            "package": "@elements/elements/tooltip"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -4033,16 +3701,7 @@
       "kind": "javascript-module",
       "path": "src/week/define.ts",
       "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "mlv-week",
-          "declaration": {
-            "name": "Week",
-            "package": "@elements/elements/week"
-          }
-        }
-      ]
+      "exports": []
     },
     {
       "kind": "javascript-module",

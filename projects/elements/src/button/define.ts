@@ -1,6 +1,7 @@
+import { defineElement } from '@elements/elements/internal';
 import { Button } from '@elements/elements/button';
 
-customElements.get('mlv-button') || customElements.define('mlv-button', Button);
+defineElement('mlv-button', Button);
 
 declare global {
   interface HTMLElementTagNameMap {

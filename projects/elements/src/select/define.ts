@@ -1,8 +1,9 @@
+import { defineElement } from '@elements/elements/internal';
 import { Select } from '@elements/elements/select';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 
-customElements.get('mlv-select') || customElements.define('mlv-select', Select);
+defineElement('mlv-select', Select);
 
 declare global {
   interface HTMLElementTagNameMap {
