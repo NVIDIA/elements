@@ -106,3 +106,9 @@ export function scope(element: any, Mixin: any) {
     static elementDefinitions = Object.entries({ ...element.elementDefinitions }).reduce((p, [tag, el]) => ({ ...p, [tag]: scope(el, Mixin) }), { })
   };
 }
+
+export function defineElement(tag: string, element: CustomElementConstructor) {
+  if (!customElements.get(tag)) {
+    customElements.define(tag, element);
+  }
+}
