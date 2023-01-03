@@ -1,7 +1,8 @@
+import { defineElement } from '@elements/elements/internal';
 import { Dropdown } from '@elements/elements/dropdown';
 import '@elements/elements/icon-button/define.js';
 
-customElements.get('nve-dropdown') || customElements.define('nve-dropdown', Dropdown);
+defineElement('nve-dropdown', Dropdown);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,7 +1,8 @@
+import { defineElement } from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button';
 import '@elements/elements/icon/define.js';
 
-customElements.get('nve-icon-button') || customElements.define('nve-icon-button', IconButton);
+defineElement('nve-icon-button', IconButton);
 
 declare global {
   interface HTMLElementTagNameMap {
