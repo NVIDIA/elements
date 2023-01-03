@@ -1,7 +1,8 @@
+import { defineElement } from '@elements/elements/internal';
 import { Textarea } from '@elements/elements/textarea';
 import '@elements/elements/forms/define.js';
 
-customElements.get('nve-textarea') || customElements.define('nve-textarea', Textarea);
+defineElement('nve-textarea', Textarea);
 
 declare global {
   interface HTMLElementTagNameMap {

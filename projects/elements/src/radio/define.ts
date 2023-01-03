@@ -1,8 +1,9 @@
+import { defineElement } from '@elements/elements/internal';
 import { Radio, RadioGroup } from '@elements/elements/radio';
 import '@elements/elements/forms/define.js';
 
-customElements.get('nve-radio') || customElements.define('nve-radio', Radio);
-customElements.get('nve-radio-group') || customElements.define('nve-radio-group', RadioGroup);
+defineElement('nve-radio', Radio);
+defineElement('nve-radio-group', RadioGroup);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,8 +1,9 @@
+import { defineElement } from '@elements/elements/internal';
 import { Input, InputGroup } from '@elements/elements/input';
 import '@elements/elements/forms/define.js';
 
-customElements.get('nve-input') || customElements.define('nve-input', Input);
-customElements.get('nve-input-group') || customElements.define('nve-input-group', InputGroup);
+defineElement('nve-input', Input);
+defineElement('nve-input-group', InputGroup);
 
 declare global {
   interface HTMLElementTagNameMap {
