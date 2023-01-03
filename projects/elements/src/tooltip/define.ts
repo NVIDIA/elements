@@ -1,6 +1,7 @@
+import { defineElement } from '@elements/elements/internal';
 import { Tooltip } from '@elements/elements/tooltip';
 
-customElements.get('nve-tooltip') || customElements.define('nve-tooltip', Tooltip);
+defineElement('nve-tooltip', Tooltip);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, defineElement } from '@elements/elements/internal';
 
 @customElement('test-element')
 class TestComponent extends LitElement {
@@ -240,5 +240,28 @@ describe('parseTokenNumber', () => {
     expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 1px)')).toBe(1);
     expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 0px)')).toBe(0);
     expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 0)')).toBe(0);
+  });
+});
+
+describe('defineElement', () => {
+  let fixture: HTMLElement;
+  let test: HTMLElement;
+
+  defineElement('test-element', class TestElement extends LitElement { });
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <test-element></test-element>
+    `);
+
+    test = fixture.querySelector('test-element');
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get('test-element')).toBeDefined();
   });
 });
