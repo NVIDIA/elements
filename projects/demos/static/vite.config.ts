@@ -15,7 +15,8 @@ export default defineConfig(() => {
     plugins: [
       viteStaticCopy({
         targets: [
-          { src: './node_modules/@elements/elements/dist/assets/icons.svg', dest: './assets' }
+          { src: './node_modules/@elements/elements/dist/assets/icons.svg', dest: './assets' },
+          { src: './node_modules/@elements/elements/dist/custom-elements.json', dest: './assets' }
         ]
       })
     ]
