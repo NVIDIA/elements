@@ -43,13 +43,14 @@ pnpm run build
 Once build you will have the following in the `dist/assets`.
 
 ```
+custom-elements.json
 icons.svg
 index.css
 index.js
 inter.woff2
 ```
 
-These files can now be copied into your environment for use.
+These files can now be manually copied into your environment for use.
 
 ```html
 <!DOCTYPE html>
