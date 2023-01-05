@@ -48,4 +48,10 @@ describe('nve-dropdown', () => {
     await elementIsStable(element);
     expect(element.position).toBe('bottom');
   });
+
+  it('should apply an aria-label to the close button', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
+  });
 });

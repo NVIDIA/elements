@@ -165,6 +165,7 @@
     "@lit-labs/react": "1.0.9",
     "@elements/custom-elements-storybook": "0.1.7",
     "@prettier/plugin-xml": "2.2.0",
+    "@rollup/plugin-replace": "5.0.2",
     "@rollup/plugin-terser": "0.1.0",
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
