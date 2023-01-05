@@ -246,11 +246,10 @@ describe('parseTokenNumber', () => {
 describe('defineElement', () => {
   let fixture: HTMLElement;
 
-  defineElement('test-element', class TestElement extends LitElement { });
-
   beforeEach(async () => {
+    defineElement('define-test-element', class TestElement extends LitElement { });
     fixture = await createFixture(html`
-      <test-element></test-element>
+      <define-test-element></define-test-element>
     `);
   });
 
@@ -259,6 +258,10 @@ describe('defineElement', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('test-element')).toBeDefined();
+    expect(customElements.get('define-test-element')).toBeDefined();
+  });
+
+  it('should add element to global service registry', () => {
+    expect(window.MLV_ELEMENTS.state.elementRegistry['define-test-element'].length > 0).toBe(true);
   });
 });

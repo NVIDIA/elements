@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import { IconButton } from '@elements/elements/icon-button';
-import { animationFade, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { animationFade, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './dropdown.css?inline';
 
 /**
@@ -73,6 +73,10 @@ export class Dropdown extends LitElement {
 
   #typePopoverController = new TypePopoverController<Dropdown>(this);
 
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+
   static elementDefinitions = {
     'nve-icon-button': IconButton
   }
@@ -80,7 +84,7 @@ export class Dropdown extends LitElement {
   render() {
     return html`
       <dialog ${animationFade(this)}>
-        ${this.closable ? html`<nve-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="ghost" aria-label="close"></nve-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="ghost" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
       </dialog>
