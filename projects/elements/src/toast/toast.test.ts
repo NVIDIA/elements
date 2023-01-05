@@ -46,4 +46,10 @@ describe('nve-toast', () => {
     await elementIsStable(element);
     expect(element._internals.role).toBe('alert');
   });
+
+  it('should apply an aria-label to the close button', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
+  });
 });

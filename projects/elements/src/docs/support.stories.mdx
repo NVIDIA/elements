@@ -66,3 +66,33 @@ If a browser API is reasonably supported via a polyfill then it may be added to 
 ```javascript
 import '@elements/elements/polyfills';
 ```
+
+<LinkedHeader>Versioning</LinkedHeader>
+
+The `@elements/elements` pacakge follows [semver](https://semver.org/) and is currently pre 1.0. Changes can be found in the [Changelog](./?path=/story/about-changelog--page). A debug utility is available
+on the global window object to help identify the active versions being used at runtime. This log will list out all the registered elements and active versions.
+```typescript
+window.MAGLEV_ELEMENTS.debug();
+```
+
+```json
+{
+  "versions": ["0.0.0"],
+  "elementRegistry": {
+    "nve-icon": "0.0.0",
+    "nve-alert": "0.0.0",
+    "nve-button": "0.0.0",
+    "nve-input": "0.0.0",
+    "nve-dropdown": "0.0.0",
+    "nve-dialog": "0.0.0",
+  },
+  "i18nRegistry": {
+    "close": "close",
+    "expand": "expand",
+    "sort": "sort",
+    "show": "show",
+    "hide": "hide",
+    "loading": "loading"
+  }
+}
+```
