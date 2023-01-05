@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 import terser from '@rollup/plugin-terser';
 import { execSync } from 'child_process';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
+import replace from '@rollup/plugin-replace';
 import dts from 'vite-plugin-dts';
 import glob from 'glob';
 
@@ -84,6 +85,7 @@ export default defineConfig((env) => {
                 .forEach(file => fs.renameSync(dist(file), dist(`css/${file}`)));
             }
           },
+          mode === 'production' ? replace({ preventAssignment: false, values: { PACKAGE_VERSION: packageFile.version }}) : false,
           mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
           mode === 'production' ? terser({ ecma: 2020, module: true }) : false // https://github.com/vitejs/vite/issues/8848
         ]

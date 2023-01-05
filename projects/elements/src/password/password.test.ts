@@ -37,4 +37,16 @@ describe('mlv-password', () => {
     expect(fixture.querySelector('input').type).toBe('text');
     expect(element.shadowRoot.querySelector('mlv-icon-button').iconName).toBe('eye-hidden');
   });
+
+  it('should apply an aria-label to the password visibility button', async () => {
+    await elementIsStable(element);
+    const button = element.shadowRoot.querySelector('mlv-icon-button');
+    expect(button.ariaLabel).toBe('show');
+    button.click();
+    await elementIsStable(element);
+    expect(button.ariaLabel).toBe('hide');
+    button.click();
+    await elementIsStable(element);
+    expect(button.ariaLabel).toBe('show');
+  });
 });

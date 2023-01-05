@@ -52,4 +52,10 @@ describe('mlv-alert', () => {
     await elementIsStable(alert);
     expect(alert._internals.role).toBe('alert');
   });
+
+  it('should apply an aria-label to the close button', async () => {
+    alert.closable = true;
+    await elementIsStable(alert);
+    expect(alert.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+  });
 });

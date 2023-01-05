@@ -1,3 +1,5 @@
+import { GlobalStateService } from '../services/global.service.js';
+
 /**
  * Preserves visual DOM ordering when using slots within Shadow DOM
  * See additional information/resources on Shadow DOM linear traversal
@@ -108,7 +110,11 @@ export function scope(element: any, Mixin: any) {
 }
 
 export function defineElement(tag: string, element: CustomElementConstructor) {
+  const version = 'PACKAGE_VERSION';
   if (!customElements.get(tag)) {
     customElements.define(tag, element);
+    GlobalStateService.dispatch('MLV_ELEMENT_DEFINE', { elementRegistry: { [tag]: version } });
+  } else if (GlobalStateService.state.elementRegistry[tag] !== version && location.hostname === 'localhost') {
+    console.warn(`Element ${tag} version ${version} already defined, please check for duplicate package versions.`);
   }
 }

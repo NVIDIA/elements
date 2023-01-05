@@ -6,8 +6,13 @@ import { LinkedHeader } from './utils.mdx';
 
 <LinkedHeader>v0.7.0 (pending)</LinkedHeader>
 
-### Fixes
-- Fix add internal support for scoped registries and documentation
+### Features
+- Add internal [support for scoped registries](./?path=/story/about-extensions--page).
+- Add [i18n support](./?path=/story/foundations-i18n-documentation--page) for accessibility and internal aria strings
+- Add version [debugger](http://localhost:7789/?path=/story/about-support--page)
+  ```javascript
+  window.MAGLEV_ELEMENTS.debug()
+  ```
 
 ### Breaking
 - Global registration from `import '@elements/elements'` is no longer supported. Use individual element imports instead.

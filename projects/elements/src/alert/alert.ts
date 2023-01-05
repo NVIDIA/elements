@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button';
-import { attachInternals, Status, statusIcons, TypeClosableController, useStyles } from '@elements/elements/internal';
+import { attachInternals, I18nController, Status, statusIcons, TypeClosableController, useStyles } from '@elements/elements/internal';
 import styles from './alert.css?inline';
 
 /**
@@ -24,6 +24,10 @@ export class Alert extends LitElement {
 
   #typeClosableController = new TypeClosableController(this);
 
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+
   /** @private */
   declare _internals: ElementInternals;
 
@@ -37,7 +41,7 @@ export class Alert extends LitElement {
       <div internal-host>
         ${this.status !== 'muted' ? html`<mlv-icon name=${statusIcons[this.status] ?? 'information'}></mlv-icon>` : ''}
         <slot></slot>
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typeClosableController.close()} interaction="ghost" icon-name="cancel" aria-label="close"></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typeClosableController.close()} interaction="ghost" icon-name="cancel" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
       </div>
     `;
   }

@@ -136,7 +136,9 @@ export const parameters = {
             'Controls',
             'Actions',
             'Examples'
-          ]
+          ],
+          'Popovers',
+          'I18n'
         ],
         'Elements'
       ]

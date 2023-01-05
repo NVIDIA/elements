@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { IconButton } from '@elements/elements/icon-button';
-import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { animationFade, attachInternals, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './toast.css?inline';
 
 /**
@@ -67,6 +67,10 @@ export class Toast extends LitElement {
 
   #typePopoverController = new TypePopoverController<Toast>(this);
 
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+
   /** @private */
   declare _internals: ElementInternals;
 
@@ -78,7 +82,7 @@ export class Toast extends LitElement {
     return html`
       <dialog ${animationFade(this)}>
         <slot name="prefix">${this.status !== 'muted' ? html`<mlv-icon name=${statusIcons[this.status] ?? 'information'}></mlv-icon>` : ''}</slot>
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="ghost" aria-label="close"></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="ghost" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
         <slot></slot>
       </dialog>
     `;

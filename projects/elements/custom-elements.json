@@ -138,6 +138,20 @@
             },
             {
               "kind": "field",
+              "name": "#i18nController",
+              "privacy": "private",
+              "type": {
+                "text": "I18nController<this>"
+              },
+              "default": "new I18nController<this>(this)"
+            },
+            {
+              "kind": "field",
+              "name": "i18n",
+              "attribute": "mlv-i18n"
+            },
+            {
+              "kind": "field",
               "name": "_internals",
               "type": {
                 "text": "ElementInternals"
@@ -174,6 +188,10 @@
               },
               "default": "false",
               "fieldName": "closable"
+            },
+            {
+              "name": "mlv-i18n",
+              "fieldName": "i18n"
             }
           ],
           "superclass": {
@@ -1010,6 +1028,20 @@
             },
             {
               "kind": "field",
+              "name": "#i18nController",
+              "privacy": "private",
+              "type": {
+                "text": "I18nController<this>"
+              },
+              "default": "new I18nController<this>(this)"
+            },
+            {
+              "kind": "field",
+              "name": "i18n",
+              "attribute": "mlv-i18n"
+            },
+            {
+              "kind": "field",
               "name": "popoverType",
               "type": {
                 "text": "PopoverType"
@@ -1107,6 +1139,10 @@
               "default": "false",
               "description": "Determines if popover should be rendered and positioned.",
               "fieldName": "hidden"
+            },
+            {
+              "name": "mlv-i18n",
+              "fieldName": "i18n"
             }
           ],
           "superclass": {
@@ -1313,6 +1349,20 @@
             },
             {
               "kind": "field",
+              "name": "#i18nController",
+              "privacy": "private",
+              "type": {
+                "text": "I18nController<this>"
+              },
+              "default": "new I18nController<this>(this)"
+            },
+            {
+              "kind": "field",
+              "name": "i18n",
+              "attribute": "mlv-i18n"
+            },
+            {
+              "kind": "field",
               "name": "elementDefinitions",
               "type": {
                 "text": "object"
@@ -1390,6 +1440,10 @@
               "default": "false",
               "description": "Determines if popover should be rendered and positioned.",
               "fieldName": "hidden"
+            },
+            {
+              "name": "mlv-i18n",
+              "fieldName": "i18n"
             }
           ],
           "superclass": {
@@ -1895,6 +1949,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "package": "./controllers/i18n.controller.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "package": "./controllers/state-active.controller.js"
           }
         },
@@ -1983,6 +2045,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "package": "./services/i18n.service.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "package": "./storybook/utils.js"
           }
         },
@@ -2032,6 +2102,14 @@
           "declaration": {
             "name": "*",
             "package": "./utils/keynav.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./utils/objects.js"
           }
         }
       ]
@@ -2508,12 +2586,32 @@
             },
             {
               "kind": "field",
+              "name": "#i18nController",
+              "privacy": "private",
+              "type": {
+                "text": "I18nController<this>"
+              },
+              "default": "new I18nController<this>(this)"
+            },
+            {
+              "kind": "field",
+              "name": "i18n",
+              "attribute": "mlv-i18n"
+            },
+            {
+              "kind": "field",
               "name": "suffixContent",
               "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "#toggleVisibility"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mlv-i18n",
+              "fieldName": "i18n"
             }
           ],
           "superclass": {
@@ -3365,6 +3463,20 @@
             },
             {
               "kind": "field",
+              "name": "#i18nController",
+              "privacy": "private",
+              "type": {
+                "text": "I18nController<this>"
+              },
+              "default": "new I18nController<this>(this)"
+            },
+            {
+              "kind": "field",
+              "name": "i18n",
+              "attribute": "mlv-i18n"
+            },
+            {
+              "kind": "field",
               "name": "_internals",
               "type": {
                 "text": "ElementInternals"
@@ -3456,6 +3568,10 @@
                 "text": "'accent' | 'warning' | 'danger' | 'success' | 'muted'"
               },
               "fieldName": "status"
+            },
+            {
+              "name": "mlv-i18n",
+              "fieldName": "i18n"
             }
           ],
           "superclass": {

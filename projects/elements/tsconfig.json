@@ -18,6 +18,7 @@
     "useDefineForClassFields": false,
     "isolatedModules": true,
     "paths": {
+      "@elements/elements": ["./src/index.js"],
       "@elements/elements/*": ["./src/*"],
       "@elements/elements/*.js": ["./src/*.js"]
     },

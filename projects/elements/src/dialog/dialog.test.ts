@@ -63,4 +63,10 @@ describe('mlv-dialog', () => {
     await elementIsStable(element);
     expect(element.anchor).toBe(document.body);
   });
+
+  it('should apply an aria-label to the close button', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+  });
 });

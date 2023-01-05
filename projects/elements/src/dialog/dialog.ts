@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { animationFade, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { animationFade, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './dialog.css?inline';
 import { IconButton } from '../icon-button';
 
@@ -70,6 +70,10 @@ export class Dialog extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+
   static styles = useStyles([popoverBaseStyles, styles]);
 
   /** @private */
@@ -87,7 +91,7 @@ export class Dialog extends LitElement {
     return html`
     <dialog ${animationFade(this)}>
       <div class="header">
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" aria-label="close"></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
       <div class="content">
