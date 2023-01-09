@@ -1,4 +1,4 @@
-import { getAttributeChanges, getAttributeListChanges } from '@elements/elements/internal';
+import { getAttributeChanges, getAttributeListChanges, getElementUpdates } from '@elements/elements/internal';
 import { ControlGroup } from '../control-group/control-group.js';
 import { ControlMessage } from '../control-message/control-message.js';
 import { Control } from '../control/control.js';
@@ -85,9 +85,9 @@ export function setupControlStates(control: Control) {
   });
 
   observers.push(
-    getAttributeChanges(control.input, 'readonly', value => (value === '' ? true : value) ? states.add('--readonly') : states.delete('--readonly')),
-    getAttributeChanges(control.input, 'checked', value => (value === '' ? true : value) ? states.add('--checked') : states.delete('--checked')),
-    getAttributeChanges(control.input, 'disabled', value => (value === '' ? true : value) ? states.add('--disabled') : states.delete('--disabled')),
+    getElementUpdates(control.input, 'readonly', value => (value === '' ? true : value) ? states.add('--readonly') : states.delete('--readonly')),
+    getElementUpdates(control.input, 'checked', value => (value === '' ? true : value) ? states.add('--checked') : states.delete('--checked')),
+    getElementUpdates(control.input, 'disabled', value => (value === '' ? true : value) ? states.add('--disabled') : states.delete('--disabled')),
   );
   return observers;
 }
