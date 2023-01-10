@@ -4,7 +4,7 @@ import { LinkedHeader } from './utils.mdx';
 
 # Changelog
 
-<LinkedHeader>v0.7.0 (pending)</LinkedHeader>
+<LinkedHeader>v0.7.0</LinkedHeader>
 
 ### Features
 - Add internal [support for scoped registries](./?path=/story/about-extensions--page).
@@ -13,6 +13,10 @@ import { LinkedHeader } from './utils.mdx';
   ```javascript
   window.MAGLEV_ELEMENTS.debug()
   ```
+
+### Fixes
+- Fix issue with nve-checkbox and nve-radio not reflecting initial property values for checked state
+- Fix issue with custom-elements.json not generating inherited property metadata
 
 ### Breaking
 - Global registration from `import '@elements/elements'` is no longer supported. Use individual element imports instead.
