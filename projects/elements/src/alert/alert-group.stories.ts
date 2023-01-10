@@ -33,6 +33,11 @@ export const Status = {
         <nve-alert>default</nve-alert>
       </nve-alert-group>
 
+      <nve-alert-group status="accent">
+        <nve-alert>default</nve-alert>
+        <nve-alert>default</nve-alert>
+      </nve-alert-group>
+
       <nve-alert-group status="warning">
         <nve-alert>warning</nve-alert>
         <nve-alert>warning</nve-alert>
@@ -59,6 +64,11 @@ export const Closable = {
         <nve-alert closable>default</nve-alert>
       </nve-alert-group>
 
+      <nve-alert-group status="accent">
+        <nve-alert closable>default</nve-alert>
+        <nve-alert closable>default</nve-alert>
+      </nve-alert-group>
+
       <nve-alert-group status="warning">
         <nve-alert closable>warning</nve-alert>
         <nve-alert closable>warning</nve-alert>
@@ -79,10 +89,15 @@ export const Closable = {
 
 export const Themes = {
   render: () => html`
-    <div nve-theme="root light" nve-layout="column gap:md">
+    <div nve-theme="root light" nve-layout="column gap:md pad:md">
       <nve-alert-group>
         <nve-alert>default</nve-alert>
         <nve-alert>default</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="accent">
+        <nve-alert>warning</nve-alert>
+        <nve-alert>warning</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="warning">
@@ -100,10 +115,15 @@ export const Themes = {
         <nve-alert>danger</nve-alert>
       </nve-alert-group>
     </div>
-    <div nve-theme="root dark" nve-layout="column gap:md">
+    <div nve-theme="root dark" nve-layout="column gap:md pad:md">
       <nve-alert-group>
         <nve-alert>default</nve-alert>
         <nve-alert>default</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="accent">
+        <nve-alert>warning</nve-alert>
+        <nve-alert>warning</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="warning">
@@ -121,5 +141,13 @@ export const Themes = {
         <nve-alert>danger</nve-alert>
       </nve-alert-group>
     </div>
+  `
+}
+
+export const Banner = {
+  render: () => html`
+    <nve-alert-group status="warning" style="--border-radius: 0">
+      <nve-alert closable>warning banner</nve-alert>
+    </nve-alert-group>
   `
 }
