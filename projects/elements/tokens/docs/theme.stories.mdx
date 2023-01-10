@@ -33,17 +33,17 @@ Currently there are the following themes:
 Themes can be applied dynamically based on user preferences.
 
 ```javascript
-if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  body.setAttribute('nve-theme', 'dark');
-}
+ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+   document.body.setAttribute('nve-theme', 'dark');
+ }
 
-if (window.matchMedia('(-ms-high-contrast: active)')).matches || window.matchMedia('(forced-colors: active)')).matches) {
-  document.body.setAttribute('nve-theme', 'high-contrast');
-}
+ if (window.matchMedia('(-ms-high-contrast: active)').matches || window.matchMedia('(forced-colors: active)').matches) {
+   document.body.setAttribute('nve-theme', 'high-contrast');
+ }
 
-if (window.matchMedia('(prefers-reduced-motion: reduce)')).matches) {
-  document.body.setAttribute('nve-theme', 'reduced-motion');
-}
+ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+   document.body.setAttribute('nve-theme', 'reduced-motion');
+ }
 ```
 
 <LinkedHeader>Light (Default)</LinkedHeader>
