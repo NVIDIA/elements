@@ -25,6 +25,7 @@ export const Status = {
   render: () => html`
     <div nve-layout="column gap:md">
       <nve-alert>default</nve-alert>
+      <nve-alert status="accent">accent</nve-alert>
       <nve-alert status="warning">warning</nve-alert>
       <nve-alert status="success">success</nve-alert>
       <nve-alert status="danger">danger</nve-alert>
@@ -36,6 +37,7 @@ export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="column gap:md pad:md">
   <nve-alert>default</nve-alert>
+  <nve-alert status="accent">accent</nve-alert>
   <nve-alert status="warning">warning</nve-alert>
   <nve-alert status="success">success</nve-alert>
   <nve-alert status="danger">danger</nve-alert>
@@ -47,6 +49,7 @@ export const DarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="column gap:md pad:md">
   <nve-alert>default</nve-alert>
+  <nve-alert status="accent">accent</nve-alert>
   <nve-alert status="warning">warning</nve-alert>
   <nve-alert status="success">success</nve-alert>
   <nve-alert status="danger">danger</nve-alert>
