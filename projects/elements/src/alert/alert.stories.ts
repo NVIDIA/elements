@@ -25,6 +25,7 @@ export const Status = {
   render: () => html`
     <div mlv-layout="column gap:md">
       <mlv-alert>default</mlv-alert>
+      <mlv-alert status="accent">accent</mlv-alert>
       <mlv-alert status="warning">warning</mlv-alert>
       <mlv-alert status="success">success</mlv-alert>
       <mlv-alert status="danger">danger</mlv-alert>
@@ -36,6 +37,7 @@ export const LightTheme = {
   render: () => html`
 <div mlv-theme="root light" mlv-layout="column gap:md pad:md">
   <mlv-alert>default</mlv-alert>
+  <mlv-alert status="accent">accent</mlv-alert>
   <mlv-alert status="warning">warning</mlv-alert>
   <mlv-alert status="success">success</mlv-alert>
   <mlv-alert status="danger">danger</mlv-alert>
@@ -47,6 +49,7 @@ export const DarkTheme = {
   render: () => html`
 <div mlv-theme="root dark" mlv-layout="column gap:md pad:md">
   <mlv-alert>default</mlv-alert>
+  <mlv-alert status="accent">accent</mlv-alert>
   <mlv-alert status="warning">warning</mlv-alert>
   <mlv-alert status="success">success</mlv-alert>
   <mlv-alert status="danger">danger</mlv-alert>

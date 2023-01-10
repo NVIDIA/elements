@@ -33,6 +33,11 @@ export const Status = {
         <mlv-alert>default</mlv-alert>
       </mlv-alert-group>
 
+      <mlv-alert-group status="accent">
+        <mlv-alert>default</mlv-alert>
+        <mlv-alert>default</mlv-alert>
+      </mlv-alert-group>
+
       <mlv-alert-group status="warning">
         <mlv-alert>warning</mlv-alert>
         <mlv-alert>warning</mlv-alert>
@@ -59,6 +64,11 @@ export const Closable = {
         <mlv-alert closable>default</mlv-alert>
       </mlv-alert-group>
 
+      <mlv-alert-group status="accent">
+        <mlv-alert closable>default</mlv-alert>
+        <mlv-alert closable>default</mlv-alert>
+      </mlv-alert-group>
+
       <mlv-alert-group status="warning">
         <mlv-alert closable>warning</mlv-alert>
         <mlv-alert closable>warning</mlv-alert>
@@ -79,10 +89,15 @@ export const Closable = {
 
 export const Themes = {
   render: () => html`
-    <div mlv-theme="root light" mlv-layout="column gap:md">
+    <div mlv-theme="root light" mlv-layout="column gap:md pad:md">
       <mlv-alert-group>
         <mlv-alert>default</mlv-alert>
         <mlv-alert>default</mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="accent">
+        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>warning</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">
@@ -100,10 +115,15 @@ export const Themes = {
         <mlv-alert>danger</mlv-alert>
       </mlv-alert-group>
     </div>
-    <div mlv-theme="root dark" mlv-layout="column gap:md">
+    <div mlv-theme="root dark" mlv-layout="column gap:md pad:md">
       <mlv-alert-group>
         <mlv-alert>default</mlv-alert>
         <mlv-alert>default</mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="accent">
+        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>warning</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">
@@ -121,5 +141,13 @@ export const Themes = {
         <mlv-alert>danger</mlv-alert>
       </mlv-alert-group>
     </div>
+  `
+}
+
+export const Banner = {
+  render: () => html`
+    <mlv-alert-group status="warning" style="--border-radius: 0">
+      <mlv-alert closable>warning banner</mlv-alert>
+    </mlv-alert-group>
   `
 }
