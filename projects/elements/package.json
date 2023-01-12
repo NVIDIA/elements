@@ -5,6 +5,7 @@
   "customElements": "custom-elements.json",
   "scripts": {
     "ci": "wireit",
+    "ci:nocache": "wireit",
     "dev": "wireit",
     "clean": "wireit",
     "build": "wireit",
@@ -149,6 +150,9 @@
       ]
     }
   },
+  "overrides": {
+    "rollup@^0.65.2 || ^1.0.0 || ^2.0.0": "3.7.5"
+  },
   "dependencies": {
     "@floating-ui/dom": "^1.0.3",
     "@lit-labs/motion": "^1.0.3",
@@ -157,7 +161,7 @@
   },
   "optionalDependencies": {
     "construct-style-sheets-polyfill": "^3.1.0",
-    "element-internals-polyfill": "^1.1.14"
+    "element-internals-polyfill": "^1.1.18"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "0.6.3",
@@ -169,11 +173,12 @@
     "@rollup/plugin-terser": "0.1.0",
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
+    "@typescript/lib-dom": "npm:@types/web@0.0.87",
     "@vitest/coverage-c8": "0.26.0",
     "emoji-picker-element": "1.12.1",
     "eslint": "8.30.0",
-    "eslint-plugin-lit-a11y": "2.3.0",
     "eslint-plugin-lit": "1.7.2",
+    "eslint-plugin-lit-a11y": "2.3.0",
     "eslint-plugin-wc": "1.4.0",
     "glob": "8.0.3",
     "happy-dom": "8.1.0",
@@ -188,8 +193,8 @@
     "rollup-plugin-minify-html-literals": "1.2.6",
     "style-dictionary": "3.7.1",
     "svgo": "2.8.0",
-    "typescript": "4.8.4",
     "ts-lit-plugin": "1.2.1",
+    "typescript": "4.8.4",
     "vite": "4.0.2",
     "vite-plugin-dts": "1.7.1",
     "vitest": "0.25.8"
@@ -213,6 +218,12 @@
         "storybook",
         "demos",
         "generate-manifest"
+      ]
+    },
+    "ci:nocache": {
+      "command": "pnpm i && pnpm run ci",
+      "dependencies": [
+        "clean"
       ]
     },
     "build": {
@@ -240,7 +251,7 @@
       "service": true
     },
     "clean": {
-      "command": "git clean dist coverage storybook-static .wireit -fX"
+      "command": "cd ../../../../ && git clean -dfX"
     },
     "test": {
       "command": "vitest run",
@@ -292,7 +303,10 @@
       ]
     },
     "lint": {
-      "dependencies": ["lint:eslint", "lint:repo"]
+      "dependencies": [
+        "lint:eslint",
+        "lint:repo"
+      ]
     },
     "lint:eslint": {
       "command": "eslint -c ./eslint.config.js ./src",
@@ -356,8 +370,12 @@
     },
     "generate-manifest": {
       "command": "cem analyze --litelement --globs ./src/**/*.ts --exclude src/internal/**/*.ts src/**/*.stories.ts",
-      "files": ["src/**/*"],
-      "output": ["custom-elements.json"]
+      "files": [
+        "src/**/*"
+      ],
+      "output": [
+        "custom-elements.json"
+      ]
     },
     "prepublishonly": {
       "dependencies": [
