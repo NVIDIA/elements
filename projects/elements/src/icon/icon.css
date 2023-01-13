@@ -10,6 +10,8 @@
   width: var(--width);
   height: var(--height);
   place-self: center;
+  display: flex;
+  place-items: center;
 }
 
 svg {
