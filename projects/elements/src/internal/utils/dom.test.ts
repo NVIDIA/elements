@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, defineElement } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, defineElement, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode } from '@elements/elements/internal';
 
 @customElement('test-element')
 class TestComponent extends LitElement {
@@ -263,5 +263,102 @@ describe('defineElement', () => {
 
   it('should add element to global service registry', () => {
     expect(window.MLV_ELEMENTS.state.elementRegistry['define-test-element'].length > 0).toBe(true);
+  });
+});
+
+describe('isContextMenuClick', () => {
+  it('should determine if click was a context menu', async () => {
+    expect(isContextMenuClick(new MouseEvent('mouseup'))).toBe(false);
+    expect(isContextMenuClick(new MouseEvent('mouseup', { buttons: 2, ctrlKey: false }))).toBe(true);
+    expect(isContextMenuClick(new MouseEvent('mouseup', { buttons: 1, ctrlKey: true }))).toBe(true);
+  });
+});
+
+@customElement('traversal-test-element')
+class TraversalTest extends LitElement {
+  buttonId = 'shady-btn';
+
+  render() {
+    return html`
+      <slot name="slot-two">slot 2</slot>
+      <button>shadow dom 1</button>
+      <p>shadow dom</p>
+      <slot>slot</slot>
+      <button>shadow dom 2</button>
+    `;
+  }
+}
+
+
+describe('getFlattenedFocusableItems', () => {
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <traversal-test-element>
+        <button>light dom 2</button>
+        <p>light dom</p>
+        <button slot="slot-two">light dom 1</button>
+      </traversal-test-element>
+    `);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should find all focusable DOM elements in light and shadow DOM from flattened DOM tree', () => {
+    const children = getFlattenedFocusableItems(fixture);
+    expect(children.length).toBe(5);
+    expect(children[0].textContent).toBe('light dom 1');
+    expect(children[1].textContent).toBe('shadow dom 1');
+    expect(children[2].textContent).toBe('light dom 2');
+    expect(children[3].textContent).toBe('light dom 1'); // this item is incorrect and should not exist in this list due to happy-dom/vitest incorrectly shiming the shadow DOM APIs
+    expect(children[4].textContent).toBe('shadow dom 2');
+  });
+});
+
+describe('getFlattenedDOMTree', () => {
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <traversal-test-element>
+        <button>light dom 2</button>
+        <button slot="slot-two">light dom 1</button>
+      </traversal-test-element>
+    `);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should find all DOM elements in light and shadow DOM from flattened DOM tree preserving slotted element order', () => {
+    const children = getFlattenedDOMTree(fixture);
+    expect(children.length).toBe(9);
+    expect(children[0].tagName.toLowerCase()).toBe('traversal-test-element');
+    expect(children[1].textContent).toBe('slot 2');
+    expect(children[2].textContent).toBe('light dom 1');
+    expect(children[3].textContent).toBe('shadow dom 1');
+    expect(children[4].textContent).toBe('shadow dom');
+    expect(children[5].textContent).toBe('slot');
+    expect(children[6].textContent).toBe('light dom 2');
+    expect(children[7].textContent).toBe('light dom 1'); // this item is incorrect and should not exist in this list due to happy-dom/vitest incorrectly shiming the shadow DOM APIs
+    expect(children[8].textContent).toBe('shadow dom 2');
+  });
+});
+
+describe('validKeyNavigationCode(): ', () => {
+  it('should determine if keycode is a valid code for key navigation', () => {
+    expect(validKeyNavigationCode({ code: 'nope' } as KeyboardEvent)).toBe(false);
+    expect(validKeyNavigationCode({ code: KeynavCode.End } as KeyboardEvent)).toBe(true);
+    expect(validKeyNavigationCode({ code: KeynavCode.Home } as KeyboardEvent)).toBe(true);
+    expect(validKeyNavigationCode({ code: KeynavCode.PageUp } as KeyboardEvent)).toBe(true);
+    expect(validKeyNavigationCode({ code: KeynavCode.PageDown } as KeyboardEvent)).toBe(true);
+    expect(validKeyNavigationCode({ code: KeynavCode.ArrowUp } as KeyboardEvent)).toBe(true);
+    expect(validKeyNavigationCode({ code: KeynavCode.ArrowDown } as KeyboardEvent)).toBe(true);
+    expect(validKeyNavigationCode({ code: KeynavCode.ArrowLeft } as KeyboardEvent)).toBe(true);
+    expect(validKeyNavigationCode({ code: KeynavCode.ArrowRight } as KeyboardEvent)).toBe(true);
   });
 });
