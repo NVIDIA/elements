@@ -5,6 +5,8 @@ import '../declarations.d.ts';
  */
 export * from './base/button.js';
 export * from './controllers/i18n.controller.js';
+export * from './controllers/keynav-grid.controller.js';
+export * from './controllers/keynav-list.controller.js';
 export * from './controllers/state-active.controller.js';
 export * from './controllers/state-disabled.controller.js';
 export * from './controllers/state-expanded.controller.js';
@@ -23,5 +25,6 @@ export * from './utils/a11y.js';
 export * from './utils/animation.js';
 export * from './utils/dom.js';
 export * from './utils/events.js';
-export * from './utils/keynav.js';
 export * from './utils/objects.js';
+export * from './utils/focus.js';
+export * from './utils/keynav.js';
