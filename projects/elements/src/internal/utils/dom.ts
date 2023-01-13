@@ -1,4 +1,5 @@
 import { GlobalStateService } from '../services/global.service.js';
+import { isFocusable } from './focus.js';
 
 /**
  * Preserves visual DOM ordering when using slots within Shadow DOM
@@ -14,7 +15,7 @@ import { GlobalStateService } from '../services/global.service.js';
     .flat(depth);
 }
 
-export function getChildren(node: any) {
+export function getChildren(node: any): NodeList {
   if (node.documentElement) {
     return node.documentElement.children; // root document children
   } else if (node.shadowRoot) {
@@ -117,4 +118,42 @@ export function defineElement(tag: string, element: CustomElementConstructor) {
   } else if (GlobalStateService.state.elementRegistry[tag] !== version && location.hostname === 'localhost') {
     console.warn(`Element ${tag} version ${version} already defined, please check for duplicate package versions.`);
   }
+}
+
+export function isContextMenuClick(event: MouseEvent) {
+  return (event.buttons === 2 && !event.ctrlKey) || (event.buttons === 1 && event.ctrlKey);
+}
+
+export function getFlattenedFocusableItems(element: Node, depth = 10) {
+  return getFlattenedDOMTree(element, depth).filter((e: HTMLElement) => isFocusable(e)) as HTMLElement[];
+}
+
+export function getFlattenedDOMTree(node: Node, depth = 10): HTMLElement[] {
+  return (Array.from(getChildren(node)).reduce((p: Node[], n: Node) => (
+    [...p, [n, [...Array.from(getChildren(n)).map(i => [i, getFlattenedDOMTree(i, depth)])]]]
+  ), []) as HTMLElement[]).flat(depth);
+}
+
+export function validKeyNavigationCode(e: KeyboardEvent) {
+  return (
+    e.code === KeynavCode.End ||
+    e.code === KeynavCode.Home ||
+    e.code === KeynavCode.PageUp ||
+    e.code === KeynavCode.PageDown ||
+    e.code === KeynavCode.ArrowUp ||
+    e.code === KeynavCode.ArrowDown ||
+    e.code === KeynavCode.ArrowLeft ||
+    e.code === KeynavCode.ArrowRight
+  );
+}
+
+export enum KeynavCode {
+  End = 'End',
+  Home = 'Home',
+  PageUp = 'PageUp',
+  PageDown = 'PageDown',
+  ArrowUp = 'ArrowUp',
+  ArrowDown = 'ArrowDown',
+  ArrowLeft = 'ArrowLeft',
+  ArrowRight = 'ArrowRight'
 }

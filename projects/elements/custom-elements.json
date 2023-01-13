@@ -1957,6 +1957,22 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "package": "./controllers/keynav-grid.controller.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./controllers/keynav-list.controller.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "package": "./controllers/state-active.controller.js"
           }
         },
@@ -2101,7 +2117,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "./utils/keynav.js"
+            "package": "./utils/objects.js"
           }
         },
         {
@@ -2109,7 +2125,15 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "./utils/objects.js"
+            "package": "./utils/focus.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./utils/keynav.js"
           }
         }
       ]
