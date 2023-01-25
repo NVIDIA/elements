@@ -21,7 +21,7 @@ export const layersDemo = {
         padding: 0 !important;
       }
     </style>
-    <div mlv-theme="light" mlv-layout="column gap:lg pad:lg" style="height: 50vh;">
+    <div mlv-theme="light root" mlv-layout="column gap:lg pad:lg" style="height: 50vh;">
       <mlv-card style="width: 500px; height: 300px;">
         <mlv-card-header>
           <div slot="title">Card</div>
@@ -61,7 +61,7 @@ export const layersDemo = {
       </mlv-dialog>
     </div>
 
-    <div mlv-theme="dark" mlv-layout="column gap:lg pad:lg" style="height: 50vh; position: relative;">
+    <div mlv-theme="dark root" mlv-layout="column gap:lg pad:lg" style="height: 50vh; position: relative;">
       <mlv-card style="width: 500px; height: 300px;">
         <mlv-card-header>
           <div slot="title">Card</div>

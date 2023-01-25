@@ -42,6 +42,15 @@ export const Content = {
   `
 };
 
+export const ContentWrap = {
+  render: () => html`
+<mlv-notification closable>
+  <h3 mlv-text="label">Title</h3>
+  <p mlv-text="body" style="width: 230px">some text content in a notification with some really long text in it that just keeps going...</p>
+</mlv-notification>
+  `
+};
+
 export const Interactive = {
   render: () => html`
 <mlv-notification hidden closable position="bottom" close-timeout="2000">
