@@ -3,6 +3,8 @@ import { useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import styles from './input.css?inline';
 
+export const inputStyles = styles;
+
 /**
  * @alpha
  * @element nve-input
