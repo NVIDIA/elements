@@ -3,7 +3,9 @@ import { spread } from '@elements/elements/internal';
 import { Tooltip } from '@elements/elements/tooltip';
 import '@elements/elements/card/define.js';
 import '@elements/elements/tooltip/define.js';
+import '@elements/elements/toast/define.js';
 import '@elements/elements/button/define.js';
+import '@elements/elements/icon-button/define.js';
 
 export default {
   title: 'Elements/Tooltip/Examples',
@@ -46,6 +48,47 @@ export const Interactive = {
   </script>
 </div>
   `
+};
+
+export const Hint = {
+  render: () => html`
+<div nve-layout="block align:vertical-center" style="height: 90vh">
+  <nve-tooltip anchor="action-btn" position="right" trigger="action-btn" hidden>Preview in progress CI tasks for the active host</nve-tooltip>
+  <div nve-layout="row gap:xs align:vertical-center">
+    <h2 nve-text="section">Preview</h2>
+    <nve-icon-button interaction="ghost" icon-name="information" id="action-btn"></nve-icon-button>
+  </div>
+  <script type="module">
+    const tooltip = document.querySelector('nve-tooltip[anchor="action-btn"]');
+    tooltip.addEventListener('close', () => tooltip.hidden = true);
+    tooltip.addEventListener('open', () => tooltip.hidden = false);
+  </script>
+</div>
+  `
+};
+
+export const HintCopy = {
+  render: () => html`
+<div nve-layout="row align:center" style="height: 90vh">
+  <nve-tooltip trigger="btn" anchor="btn" hidden>2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</nve-tooltip>
+  <nve-toast trigger="btn" anchor="btn" close-timeout="1500" hidden>copied!</nve-toast>
+  <nve-button interaction="ghost" id="btn" aria-label="copy to clipboard">
+    <p nve-text="truncate" style="width: 120px">2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</p><nve-icon name="copy"></nve-icon>
+  </nve-button>
+</div>
+
+<script type="module">
+  const toast = document.querySelector('nve-toast');
+  const tooltip = document.querySelector('nve-tooltip');
+  tooltip.addEventListener('close', () => tooltip.hidden = true);
+  tooltip.addEventListener('open', (e) => tooltip.hidden = !toast.hidden);
+  toast.addEventListener('close', () => toast.hidden = true);
+  toast.addEventListener('open', () => {
+    toast.hidden = false;
+    tooltip.hidden = true;
+  });
+</script>
+`
 };
 
 export const Content = {
