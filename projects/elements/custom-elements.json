@@ -1849,14 +1849,6 @@
             "name": "*",
             "package": "./input-group.js"
           }
-        },
-        {
-          "kind": "js",
-          "name": "inputStyles",
-          "declaration": {
-            "name": "styles",
-            "module": "src/input/index.ts"
-          }
         }
       ]
     },
@@ -1892,6 +1884,11 @@
       "kind": "javascript-module",
       "path": "src/input/input.ts",
       "declarations": [
+        {
+          "kind": "variable",
+          "name": "inputStyles",
+          "default": "styles"
+        },
         {
           "kind": "class",
           "description": "",
@@ -1929,6 +1926,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "inputStyles",
+          "declaration": {
+            "name": "inputStyles",
+            "module": "src/input/input.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "Input",

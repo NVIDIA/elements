@@ -1,5 +1,3 @@
-import '../declarations.d.ts';
-
 /**
  * @internal private common utilities for elements elements
  */

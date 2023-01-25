@@ -97,7 +97,7 @@ export class AppComponent  {
 
 <LinkedHeader>Advanced Installation</LinkedHeader>
 
-If your app was created with an older version of the Angualr CLI you may to need add or adjust the following to your application.
+If your app was created with an older version of the Angular CLI you may to need add or adjust the following to your application.
 
 ### Styles
 
@@ -124,10 +124,20 @@ If you don't have a global `styles.scss` add one to your app's `angular.json` co
 
 If you are not on typescript >= version `4.5.x` you will need to add this type declaration to use isolated element imports:
 
-```javascript
+```typescript
 /* ./src/declarations.d.ts */
 
 interface ElementInternals {
   any: any;
+}
+```
+
+If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig#paths) likely you will need to enable the [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck) to avoid type definition collisions within the monorepo. Alternatively, to avoid `skipLibCheck` use `pnpm` workspaces instead of tsconfig path mapping.
+
+```json
+{
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
 }
 ```

@@ -26,3 +26,25 @@ alert.setAttribute('status', 'success');
 // create event listeners
 alert!.addEventListener('close', e => console.log(e.target));
 ```
+
+<LinkedHeader>Advanced Installation</LinkedHeader>
+
+If you are not on typescript >= version `4.5.x` you will need to add this type declaration to use isolated element imports:
+
+```typescript
+/* ./src/declarations.d.ts */
+
+interface ElementInternals {
+  any: any;
+}
+```
+
+If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig#paths) likely you will need to enable the [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck) to avoid type definition collisions within the monorepo. Alternatively, to avoid `skipLibCheck` use `pnpm` workspaces instead of tsconfig path mapping.
+
+```json
+{
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}
+```
