@@ -235,6 +235,7 @@
         "!src/**/*.stories.mdx",
         "!src/**/*.test.ts",
         "tokens/**",
+        "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts"
