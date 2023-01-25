@@ -42,6 +42,15 @@ export const Content = {
   `
 };
 
+export const ContentWrap = {
+  render: () => html`
+<nve-notification closable>
+  <h3 nve-text="label">Title</h3>
+  <p nve-text="body" style="width: 230px">some text content in a notification with some really long text in it that just keeps going...</p>
+</nve-notification>
+  `
+};
+
 export const Interactive = {
   render: () => html`
 <nve-notification hidden closable position="bottom" close-timeout="2000">
