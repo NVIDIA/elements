@@ -21,7 +21,7 @@ export const layersDemo = {
         padding: 0 !important;
       }
     </style>
-    <div nve-theme="light" nve-layout="column gap:lg pad:lg" style="height: 50vh;">
+    <div nve-theme="light root" nve-layout="column gap:lg pad:lg" style="height: 50vh;">
       <nve-card style="width: 500px; height: 300px;">
         <nve-card-header>
           <div slot="title">Card</div>
@@ -61,7 +61,7 @@ export const layersDemo = {
       </nve-dialog>
     </div>
 
-    <div nve-theme="dark" nve-layout="column gap:lg pad:lg" style="height: 50vh; position: relative;">
+    <div nve-theme="dark root" nve-layout="column gap:lg pad:lg" style="height: 50vh; position: relative;">
       <nve-card style="width: 500px; height: 300px;">
         <nve-card-header>
           <div slot="title">Card</div>
