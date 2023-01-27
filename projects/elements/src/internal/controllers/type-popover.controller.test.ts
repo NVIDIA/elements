@@ -120,11 +120,26 @@ describe('type-popover.controller', () => {
   });
 
   it('should trigger close event when associated trigger is activated', async () => {
+    element.hidden = false;
     await elementIsStable(element);
     const event = untilEvent(element, 'close');
     const closeBtn = dialog.querySelector('button');
     emulateClick(closeBtn);
     expect((await event).target).toBe(element);
+  });
+
+  it('should not trigger a close event when popover is closed via "hidden" attribute or property', async () => {
+    element.hidden = false;
+    await elementIsStable(element);
+
+    let events = 0;
+    untilEvent(element, 'close').then(() => events++);
+
+    element.hidden = true;
+    await elementIsStable(element);
+    
+    await new Promise(r => setTimeout(() => r(null), 0));
+    expect(events).toBe(0);
   });
 
   it('should trigger open event when associated trigger is activated', async () => {
