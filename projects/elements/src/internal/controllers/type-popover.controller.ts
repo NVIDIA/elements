@@ -126,7 +126,10 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   }
 
   close() {
-    this.host.dispatchEvent(new CustomEvent('close'));
+    if (!this.host.hidden) {
+      this.host.dispatchEvent(new CustomEvent('close'));
+    }
+
     if (this.#dialog?.open && this.host.hidden) {
       this.#dialog.close();
     }
