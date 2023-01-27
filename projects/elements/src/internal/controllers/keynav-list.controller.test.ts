@@ -56,7 +56,6 @@ describe('keynav-list.controller', () => {
 
   it('should set activate a item on click', async () => {
     await elementIsStable(element);
-    console.log(element.keynavListConfig.items[2].tagName)
     element.keynavListConfig.items[2].dispatchEvent(new MouseEvent('mouseup', { bubbles: true, buttons: 1 }));
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
