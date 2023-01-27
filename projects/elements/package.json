@@ -150,8 +150,10 @@
       ]
     }
   },
-  "overrides": {
-    "rollup@^0.65.2 || ^1.0.0 || ^2.0.0": "3.7.5"
+  "pnpm": {
+    "overrides": {
+      "rollup@^0.65.2 || ^1.0.0 || ^2.0.0": "$rollup"
+    }
   },
   "dependencies": {
     "@floating-ui/dom": "^1.0.3",
@@ -175,6 +177,7 @@
     "@typescript-eslint/parser": "5.47.0",
     "@typescript/lib-dom": "npm:@types/web@0.0.87",
     "@vitest/coverage-c8": "0.26.0",
+    "@xmldom/xmldom": "0.8.6",
     "emoji-picker-element": "1.12.1",
     "eslint": "8.30.0",
     "eslint-plugin-lit": "1.7.2",
