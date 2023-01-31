@@ -1,16 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
-import prettier from 'prettier';
 import { optimize } from 'svgo';
-import plugin from '@prettier/plugin-xml';
 
 const scriptPath = path.dirname(fileURLToPath(import.meta.url));
 const iconsPath = path.join(scriptPath, '/icons');
 const resultSvgPath = path.join(scriptPath, '/public/assets/icons.svg');
-const resultTypesPath = path.join(scriptPath, '/src/icon/icon-names.js');
+const resultTypesPath = path.join(scriptPath, '/src/icon/icon-names.ts');
 
 const svgoOptions = {
   multipass: true,
@@ -36,12 +33,9 @@ function getChildElements(node) {
   return node.nodeType === 1 ? Array.from(node.childNodes).filter((childNode) => childNode.nodeType === 1) : [];
 }
 
-function cleanSvgEl(svgEl, removeOutline) {
+function cleanSvgEl(svgEl) {
   if (svgEl.hasAttribute('fill')) {
     svgEl.setAttribute('fill', 'currentColor');
-  }
-  if (removeOutline) {
-    svgEl.setAttribute('fill', 'none'); // Outline type icons require additional cleaning
   }
   if (svgEl.hasAttribute('stroke')) {
     svgEl.setAttribute('stroke', 'currentColor');
@@ -71,23 +65,17 @@ for (const file of files) {
     resultSymbolEl.setAttribute('viewBox', viewBox);
     for (const childNode of getChildElements(svgEl)) {
       const resultChildEl = childNode.cloneNode(true);
-      cleanSvgEl(resultChildEl, id.includes('outline'));
+      cleanSvgEl(resultChildEl);
       resultSymbolEl.appendChild(resultChildEl);
     }
     resultSvgEl.appendChild(resultSymbolEl);
   }
 }
 
-const resultSvgText = new XMLSerializer().serializeToString(resultDocument);
-const resultPrettierSvgText = prettier.format(resultSvgText, {
-  parser: 'xml',
-  plugins: [plugin],
-  xmlWhitespaceSensitivity: 'ignore'
-});
-fs.writeFileSync(resultSvgPath, resultPrettierSvgText);
+fs.writeFileSync(resultSvgPath, new XMLSerializer().serializeToString(resultDocument));
 
 const resultTypes = `
 // This is an auto-generated file. DO NOT EDIT
-export const ICON_NAMES = ${JSON.stringify(resultIds, null, 2)};
+export const ICON_NAMES = [\n${resultIds.map(i => `  '${i}'`).join(',\n')}\n];
 `;
 fs.writeFileSync(resultTypesPath, resultTypes);

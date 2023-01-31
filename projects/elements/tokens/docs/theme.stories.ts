@@ -85,18 +85,18 @@ function getThemeContent() {
   return html`
     <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px">
     <div nve-layout="row gap:sm">
-        <nve-icon-button icon-name="analytics"></nve-icon-button>
-        <nve-icon-button icon-name="analytics" interaction="emphasize"></nve-icon-button>
-        <nve-icon-button icon-name="analytics" interaction="destructive"></nve-icon-button>
-        <nve-icon-button icon-name="analytics" interaction="ghost"></nve-icon-button>
-        <nve-icon-button icon-name="analytics" disabled></nve-icon-button>
+        <nve-icon-button icon-name="user"></nve-icon-button>
+        <nve-icon-button icon-name="user" interaction="emphasize"></nve-icon-button>
+        <nve-icon-button icon-name="user" interaction="destructive"></nve-icon-button>
+        <nve-icon-button icon-name="user" interaction="ghost"></nve-icon-button>
+        <nve-icon-button icon-name="user" disabled></nve-icon-button>
       </div>
       <div nve-layout="row gap:sm">
-        <nve-icon name="analytics"></nve-icon>
-        <nve-icon name="analytics" status="info"></nve-icon>
-        <nve-icon name="analytics" status="success"></nve-icon>
-        <nve-icon name="analytics" status="warning"></nve-icon>
-        <nve-icon name="analytics" status="danger"></nve-icon>
+        <nve-icon name="user"></nve-icon>
+        <nve-icon name="user" status="info"></nve-icon>
+        <nve-icon name="user" status="success"></nve-icon>
+        <nve-icon name="user" status="warning"></nve-icon>
+        <nve-icon name="user" status="danger"></nve-icon>
       </div>
       <div nve-layout="row gap:sm">
         <nve-button>default</nve-button>

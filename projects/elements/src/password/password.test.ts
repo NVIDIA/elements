@@ -29,13 +29,13 @@ describe('nve-password', () => {
 
   it('should toggle the input type when the visibility icon is pressed', async () => {
     expect(fixture.querySelector('input').type).toBe('password');
-    expect(element.shadowRoot.querySelector('nve-icon-button').iconName).toBe('eye');
+    expect(element.shadowRoot.querySelector('nve-icon-button').iconName).toBe('visible');
 
     element.shadowRoot.querySelector('nve-icon-button').click();
     await elementIsStable(element);
 
     expect(fixture.querySelector('input').type).toBe('text');
-    expect(element.shadowRoot.querySelector('nve-icon-button').iconName).toBe('eye-hidden');
+    expect(element.shadowRoot.querySelector('nve-icon-button').iconName).toBe('hidden');
   });
 
   it('should apply an aria-label to the password visibility button', async () => {

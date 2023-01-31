@@ -41,7 +41,7 @@ export class Alert extends LitElement {
       <div internal-host>
         ${this.status !== 'muted' ? html`<nve-icon name=${statusIcons[this.status] ?? 'information'}></nve-icon>` : ''}
         <slot></slot>
-        ${this.closable ? html`<nve-icon-button @click=${() => this.#typeClosableController.close()} interaction="ghost" icon-name="cancel" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button @click=${() => this.#typeClosableController.close()} interaction="ghost" icon-name="cancel" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
       </div>
     `;
   }

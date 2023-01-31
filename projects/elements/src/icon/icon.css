@@ -1,7 +1,7 @@
 :host {
   --color: var(--nve-sys-status-neutral-background);
-  --width: var(--nve-ref-size-500);
-  --height: var(--nve-ref-size-500);
+  --width: var(--nve-ref-size-400);
+  --height: var(--nve-ref-size-400);
   display: inline-flex;
 }
 
@@ -17,6 +17,42 @@
 svg {
   width: var(--width);
   height: var(--height);
+}
+
+:host([size='sm']) {
+  --width: var(--nve-ref-size-300);
+  --height: var(--nve-ref-size-300);
+}
+
+:host([size='lg']) {
+  --width: var(--nve-ref-size-500);
+  --height: var(--nve-ref-size-500);
+}
+
+:host([direction='up'][name='arrow']),
+:host([direction='up'][name='caret']),
+:host([direction='up'][name='chevron']) {
+  transform: rotate(0deg);
+}
+
+:host([direction='down'][name='arrow']),
+:host([direction='down'][name='caret']),
+:host([direction='down'][name='chevron']) {
+  transform: rotate(180deg);
+}
+
+:host([direction='left'][name='arrow']),
+:host([direction='left'][name='caret']),
+:host([direction='left'][name='chevron']),
+:host([direction='left'][name='expand-panel']) {
+  transform: rotate(270deg);
+}
+
+:host([direction='right'][name='arrow']),
+:host([direction='right'][name='caret']),
+:host([direction='right'][name='chevron']),
+:host([direction='right'][name='expand-panel']) {
+  transform: rotate(90deg);
 }
 
 :host([variant='inherit']) {
