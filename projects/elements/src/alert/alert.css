@@ -4,7 +4,7 @@
   --font-size: var(--nve-ref-font-size-200);
   --color: var(--nve-sys-text-default-color);
   --icon-color: var(--nve-sys-text-default-color);
-  --icon-size: var(--nve-ref-size-500);
+  --icon-size: var(--nve-ref-size-400);
   --font-weight: var(--nve-ref-font-weight-regular);
   width: auto;
 }
@@ -31,7 +31,6 @@ nve-icon {
   --color: var(--icon-color);
   --width: var(--icon-size);
   --height: var(--icon-size);
-  margin: calc(var(--nve-ref-space-xxxs) * -1);
 }
 
 nve-icon-button {

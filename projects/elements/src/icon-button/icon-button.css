@@ -1,29 +1,32 @@
 :host {
   --border-radius: var(--nve-ref-border-radius-full);
-  --padding: var(--nve-ref-size-100);
+  --padding: 0;
   --line-height: 0;
   --gap: 0;
-  --height: auto;
+  --height: var(--nve-ref-size-800);
+  --width: var(--nve-ref-size-800);
 }
 
 :host([size='sm']) {
-  --padding: var(--nve-ref-size-100);
-  --height: auto;
+  --padding: 0;
+  --height: var(--nve-ref-size-700);
+  --width: var(--nve-ref-size-700);
 
   & nve-icon {
-    --width: var(--nve-ref-size-400);
-    --height: var(--nve-ref-size-400);
+    --width: var(--nve-ref-size-300);
+    --height: var(--nve-ref-size-300);
   }
 }
 
 :host([size='lg']) {
-  --padding: var(--nve-ref-size-300);
-  --height: auto;
+  --width: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-100));
+  --height: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-100));
+  --padding: 0;
 }
 
 :host([interaction*='ghost']) {
   --color: var(--nve-sys-status-neutral-background);
-  --padding: var(--nve-ref-size-100);
+  --padding: 0;
 }
 
 nve-icon {

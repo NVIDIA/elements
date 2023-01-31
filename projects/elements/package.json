@@ -346,7 +346,8 @@
     "create-icon-spritesheet": {
       "command": "node create-icon-spritesheet.js",
       "files": [
-        "icons/**"
+        "icons/**",
+        "create-icon-spritesheet.js"
       ],
       "output": [
         "public/assets/icons.svg",
