@@ -35,46 +35,46 @@ type ArgTypes = IconButton;
 
 export const Default = {
   render: (args: ArgTypes) => html`<nve-icon-button ${spread(args)}></nve-icon-button>`,
-  args: { disabled: false, iconName: 'analytics', interaction: '' }
+  args: { disabled: false, iconName: 'menu', interaction: '' }
 };
 
-export const Emphasize = { ...Default, args: { iconName: 'analytics', interaction: 'emphasize' } };
-export const Destructive = { ...Default, args: {  iconName: 'analytics', interaction: 'destructive' } };
-export const Ghost = { ...Default, args: {  iconName: 'analytics', interaction: 'ghost' } };
-export const Disabled = { ...Default, args: {  iconName: 'analytics', disabled: true } };
+export const Emphasize = { ...Default, args: { iconName: 'menu', interaction: 'emphasize' } };
+export const Destructive = { ...Default, args: {  iconName: 'menu', interaction: 'destructive' } };
+export const Ghost = { ...Default, args: {  iconName: 'menu', interaction: 'ghost' } };
+export const Disabled = { ...Default, args: {  iconName: 'menu', disabled: true } };
 
 export const Interactions = {
   render: () => html`
-    <nve-icon-button icon-name="analytics"></nve-icon-button>
-    <nve-icon-button interaction="emphasize" icon-name="analytics"></nve-icon-button>
-    <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>
-    <nve-icon-button disabled icon-name="analytics"></nve-icon-button>
+    <nve-icon-button icon-name="menu"></nve-icon-button>
+    <nve-icon-button interaction="emphasize" icon-name="menu"></nve-icon-button>
+    <nve-icon-button interaction="destructive" icon-name="menu"></nve-icon-button>
+    <nve-icon-button disabled icon-name="menu"></nve-icon-button>
   `
 }
 
 export const Size = {
   render: () => html`
-    <nve-icon-button size="sm" icon-name="analytics"></nve-icon-button>
-    <nve-icon-button icon-name="analytics"></nve-icon-button>
-    <nve-icon-button size="lg" icon-name="analytics"></nve-icon-button>
+    <nve-icon-button size="sm" icon-name="menu"></nve-icon-button>
+    <nve-icon-button icon-name="menu"></nve-icon-button>
+    <nve-icon-button size="lg" icon-name="menu"></nve-icon-button>
   `
 }
 
 export const GhostInteractions = {
   render: () => html`
-    <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
-    <nve-icon-button interaction="ghost-emphasize" icon-name="analytics"></nve-icon-button>
-    <nve-icon-button interaction="ghost-destructive" icon-name="analytics"></nve-icon-button>
-    <nve-icon-button interaction="ghost" icon-name="analytics" disabled></nve-icon-button>
+    <nve-icon-button interaction="ghost" icon-name="menu"></nve-icon-button>
+    <nve-icon-button interaction="ghost-emphasize" icon-name="menu"></nve-icon-button>
+    <nve-icon-button interaction="ghost-destructive" icon-name="menu"></nve-icon-button>
+    <nve-icon-button interaction="ghost" icon-name="menu" disabled></nve-icon-button>
   `
 }
 
 export const Link = {
   render: () => html`
-    <nve-icon-button icon-name="analytics">
+    <nve-icon-button icon-name="menu">
       <a href="#" aria-label="link to page"></a>
     </nve-icon-button>
-    <nve-icon-button interaction="ghost" icon-name="analytics">
+    <nve-icon-button interaction="ghost" icon-name="menu">
       <a href="#" aria-label="link to page"></a>
     </nve-icon-button>
   `
@@ -83,20 +83,20 @@ export const Link = {
 export const Themes = {
   render: () => html`
     <div nve-theme="root light">
-      <nve-icon-button icon-name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="emphasize" icon-name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
-      <nve-icon-button disabled icon-name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="inverse" icon-name="analytics"></nve-icon-button>
+      <nve-icon-button icon-name="menu"></nve-icon-button>
+      <nve-icon-button interaction="emphasize" icon-name="menu"></nve-icon-button>
+      <nve-icon-button interaction="destructive" icon-name="menu"></nve-icon-button>
+      <nve-icon-button interaction="ghost" icon-name="menu"></nve-icon-button>
+      <nve-icon-button disabled icon-name="menu"></nve-icon-button>
+      <nve-icon-button interaction="inverse" icon-name="menu"></nve-icon-button>
     </div>
     <div nve-theme="root dark">
-      <nve-icon-button icon-name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="emphasize" icon-name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="destructive" icon-name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="ghost" icon-name="analytics"></nve-icon-button>
-      <nve-icon-button disabled icon-name="analytics"></nve-icon-button>
-      <nve-icon-button interaction="inverse" icon-name="analytics"></nve-icon-button>
+      <nve-icon-button icon-name="menu"></nve-icon-button>
+      <nve-icon-button interaction="emphasize" icon-name="menu"></nve-icon-button>
+      <nve-icon-button interaction="destructive" icon-name="menu"></nve-icon-button>
+      <nve-icon-button interaction="ghost" icon-name="menu"></nve-icon-button>
+      <nve-icon-button disabled icon-name="menu"></nve-icon-button>
+      <nve-icon-button interaction="inverse" icon-name="menu"></nve-icon-button>
     </div>
   `
 }

@@ -74,7 +74,9 @@
 
   & ::slotted(nve-icon[name='chevron-down']) {
     --color: var(--nve-sys-status-neutral-background);
-    margin-inline: auto calc(var(--nve-ref-size-100) * -1);
+    --width: var(--nve-ref-size-300);
+    --height: var(--nve-ref-size-300);
+    margin-inline: auto 0;
   }
 
   &:host(:hover) [interaction-state] {

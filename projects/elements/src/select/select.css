@@ -22,11 +22,13 @@
   width: 100%;
 }
 
-[icon-name='chevron-down'] {
-  top: var(--nve-ref-size-100);
+[name='chevron-down'] {
+  --width: var(--nve-ref-size-300);
+  --height: var(--nve-ref-size-300);
+  right: var(--nve-ref-size-200);
+  align-self: center;
   pointer-events: none;
   position: absolute;
-  right: 0;
 }
 
 ::slotted(select) {

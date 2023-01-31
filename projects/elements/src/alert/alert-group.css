@@ -24,7 +24,7 @@
 ::slotted(nve-alert) {
   --color: var(--_alert-color);
   --icon-color: var(--_alert-color);
-  --icon-size: var(--nve-ref-size-600);
+  --icon-size: var(--nve-ref-size-500);
   height: var(--nve-ref-size-800);
 }
 
