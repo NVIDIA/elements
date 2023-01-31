@@ -24,7 +24,7 @@
 ::slotted(mlv-alert) {
   --color: var(--_alert-color);
   --icon-color: var(--_alert-color);
-  --icon-size: var(--mlv-ref-size-600);
+  --icon-size: var(--mlv-ref-size-500);
   height: var(--mlv-ref-size-800);
 }
 

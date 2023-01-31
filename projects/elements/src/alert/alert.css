@@ -4,7 +4,7 @@
   --font-size: var(--mlv-ref-font-size-200);
   --color: var(--mlv-sys-text-default-color);
   --icon-color: var(--mlv-sys-text-default-color);
-  --icon-size: var(--mlv-ref-size-500);
+  --icon-size: var(--mlv-ref-size-400);
   --font-weight: var(--mlv-ref-font-weight-regular);
   width: auto;
 }
@@ -31,7 +31,6 @@ mlv-icon {
   --color: var(--icon-color);
   --width: var(--icon-size);
   --height: var(--icon-size);
-  margin: calc(var(--mlv-ref-space-xxxs) * -1);
 }
 
 mlv-icon-button {

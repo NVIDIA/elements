@@ -85,18 +85,18 @@ function getThemeContent() {
   return html`
     <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px">
     <div mlv-layout="row gap:sm">
-        <mlv-icon-button icon-name="analytics"></mlv-icon-button>
-        <mlv-icon-button icon-name="analytics" interaction="emphasize"></mlv-icon-button>
-        <mlv-icon-button icon-name="analytics" interaction="destructive"></mlv-icon-button>
-        <mlv-icon-button icon-name="analytics" interaction="ghost"></mlv-icon-button>
-        <mlv-icon-button icon-name="analytics" disabled></mlv-icon-button>
+        <mlv-icon-button icon-name="user"></mlv-icon-button>
+        <mlv-icon-button icon-name="user" interaction="emphasize"></mlv-icon-button>
+        <mlv-icon-button icon-name="user" interaction="destructive"></mlv-icon-button>
+        <mlv-icon-button icon-name="user" interaction="ghost"></mlv-icon-button>
+        <mlv-icon-button icon-name="user" disabled></mlv-icon-button>
       </div>
       <div mlv-layout="row gap:sm">
-        <mlv-icon name="analytics"></mlv-icon>
-        <mlv-icon name="analytics" status="info"></mlv-icon>
-        <mlv-icon name="analytics" status="success"></mlv-icon>
-        <mlv-icon name="analytics" status="warning"></mlv-icon>
-        <mlv-icon name="analytics" status="danger"></mlv-icon>
+        <mlv-icon name="user"></mlv-icon>
+        <mlv-icon name="user" status="info"></mlv-icon>
+        <mlv-icon name="user" status="success"></mlv-icon>
+        <mlv-icon name="user" status="warning"></mlv-icon>
+        <mlv-icon name="user" status="danger"></mlv-icon>
       </div>
       <div mlv-layout="row gap:sm">
         <mlv-button>default</mlv-button>

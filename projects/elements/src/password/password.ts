@@ -20,7 +20,7 @@ export class Password extends Control {
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   protected get suffixContent() {
-    return html`<mlv-icon-button @click=${() => this.#toggleVisibility()} .pressed=${this.pressed} .iconName=${this.pressed ? 'eye-hidden' : 'eye'} interaction="ghost" .ariaLabel=${this.pressed ? this.i18n.hide : this.i18n.show}></mlv-icon-button>`;
+    return html`<mlv-icon-button @click=${() => this.#toggleVisibility()} .pressed=${this.pressed} .iconName=${this.pressed ? 'hidden' : 'visible'} interaction="ghost" .ariaLabel=${this.pressed ? this.i18n.hide : this.i18n.show}></mlv-icon-button>`;
   }
 
   #toggleVisibility() {

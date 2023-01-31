@@ -45,58 +45,77 @@ export const Default = {
       .status=${args.status}
     ></mlv-icon>`,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { name: 'analytics' }
+  args: { name: 'user' }
 };
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map((iconName) => html`<mlv-icon .name=${iconName} .variant=${args.variant}></mlv-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<mlv-icon name=${iconName} .variant=${args.variant}></mlv-icon>\n`
     )}
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { name: 'analytics' }
+  args: { name: 'user' }
 };
 
 export const variants = {
   render: () => html`
-    <mlv-icon name="analytics"></mlv-icon>
-    <mlv-icon name="analytics" variant="inherit"></mlv-icon>
+    <mlv-icon name="user"></mlv-icon>
+    <mlv-icon name="user" variant="inherit"></mlv-icon>
   `
 }
 
 export const statuses = {
   render: () => html`
-    <mlv-icon name="analytics"></mlv-icon>
-    <mlv-icon name="analytics" status="accent"></mlv-icon>
-    <mlv-icon name="analytics" status="success"></mlv-icon>
-    <mlv-icon name="analytics" status="warning"></mlv-icon>
-    <mlv-icon name="analytics" status="danger"></mlv-icon>
+    <mlv-icon name="user"></mlv-icon>
+    <mlv-icon name="user" status="accent"></mlv-icon>
+    <mlv-icon name="user" status="success"></mlv-icon>
+    <mlv-icon name="user" status="warning"></mlv-icon>
+    <mlv-icon name="user" status="danger"></mlv-icon>
   `
 }
 
 export const size = {
   render: () => html`
-    <mlv-icon style="--width: 20px; --height: 20px;" name="analytics"></mlv-icon>
-    <mlv-icon name="analytics"></mlv-icon>
-    <mlv-icon style="--width: 30px; --height: 30px;" name="analytics"></mlv-icon>
+    <mlv-icon name="user" size="sm"></mlv-icon>
+    <mlv-icon name="user"></mlv-icon>
+    <mlv-icon name="user" size="lg"></mlv-icon>
   `
 }
 
-export const Themes = {
+export const direction = {
+  render: () => html`
+    <mlv-icon name="expand-panel"></mlv-icon>
+    <mlv-icon name="collapse-panel"></mlv-icon>
+    <mlv-icon name="arrow" direction="up"></mlv-icon>
+    <mlv-icon name="arrow" direction="down"></mlv-icon>
+    <mlv-icon name="arrow" direction="left"></mlv-icon>
+    <mlv-icon name="arrow" direction="right"></mlv-icon>
+    <mlv-icon name="caret" direction="up"></mlv-icon>
+    <mlv-icon name="caret" direction="down"></mlv-icon>
+    <mlv-icon name="caret" direction="left"></mlv-icon>
+    <mlv-icon name="caret" direction="right"></mlv-icon>
+    <mlv-icon name="chevron" direction="up"></mlv-icon>
+    <mlv-icon name="chevron" direction="down"></mlv-icon>
+    <mlv-icon name="chevron" direction="left"></mlv-icon>
+    <mlv-icon name="chevron" direction="right"></mlv-icon>
+  `
+}
+
+export const themes = {
   render: () => html`
     <div mlv-theme="root light">
-      <mlv-icon name="analytics"></mlv-icon>
-      <mlv-icon name="analytics" status="accent"></mlv-icon>
-      <mlv-icon name="analytics" status="success"></mlv-icon>
-      <mlv-icon name="analytics" status="warning"></mlv-icon>
-      <mlv-icon name="analytics" status="danger"></mlv-icon>
+      <mlv-icon name="user"></mlv-icon>
+      <mlv-icon name="user" status="accent"></mlv-icon>
+      <mlv-icon name="user" status="success"></mlv-icon>
+      <mlv-icon name="user" status="warning"></mlv-icon>
+      <mlv-icon name="user" status="danger"></mlv-icon>
     </div>
     <div mlv-theme="root dark">
-      <mlv-icon name="analytics"></mlv-icon>
-      <mlv-icon name="analytics" status="accent"></mlv-icon>
-      <mlv-icon name="analytics" status="success"></mlv-icon>
-      <mlv-icon name="analytics" status="warning"></mlv-icon>
-      <mlv-icon name="analytics" status="danger"></mlv-icon>
+      <mlv-icon name="user"></mlv-icon>
+      <mlv-icon name="user" status="accent"></mlv-icon>
+      <mlv-icon name="user" status="success"></mlv-icon>
+      <mlv-icon name="user" status="warning"></mlv-icon>
+      <mlv-icon name="user" status="danger"></mlv-icon>
     </div>
   `
 }

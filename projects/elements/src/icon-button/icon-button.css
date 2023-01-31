@@ -1,29 +1,32 @@
 :host {
   --border-radius: var(--mlv-ref-border-radius-full);
-  --padding: var(--mlv-ref-size-100);
+  --padding: 0;
   --line-height: 0;
   --gap: 0;
-  --height: auto;
+  --height: var(--mlv-ref-size-800);
+  --width: var(--mlv-ref-size-800);
 }
 
 :host([size='sm']) {
-  --padding: var(--mlv-ref-size-100);
-  --height: auto;
+  --padding: 0;
+  --height: var(--mlv-ref-size-700);
+  --width: var(--mlv-ref-size-700);
 
   & mlv-icon {
-    --width: var(--mlv-ref-size-400);
-    --height: var(--mlv-ref-size-400);
+    --width: var(--mlv-ref-size-300);
+    --height: var(--mlv-ref-size-300);
   }
 }
 
 :host([size='lg']) {
-  --padding: var(--mlv-ref-size-300);
-  --height: auto;
+  --width: calc(var(--mlv-ref-size-1000) + var(--mlv-ref-size-100));
+  --height: calc(var(--mlv-ref-size-1000) + var(--mlv-ref-size-100));
+  --padding: 0;
 }
 
 :host([interaction*='ghost']) {
   --color: var(--mlv-sys-status-neutral-background);
-  --padding: var(--mlv-ref-size-100);
+  --padding: 0;
 }
 
 mlv-icon {
