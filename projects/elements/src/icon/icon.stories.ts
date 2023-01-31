@@ -45,58 +45,77 @@ export const Default = {
       .status=${args.status}
     ></nve-icon>`,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { name: 'analytics' }
+  args: { name: 'user' }
 };
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map((iconName) => html`<nve-icon .name=${iconName} .variant=${args.variant}></nve-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<nve-icon name=${iconName} .variant=${args.variant}></nve-icon>\n`
     )}
   `,
   // parameters: generateFigmaEmbed(figmaEmbedNodeId),
-  args: { name: 'analytics' }
+  args: { name: 'user' }
 };
 
 export const variants = {
   render: () => html`
-    <nve-icon name="analytics"></nve-icon>
-    <nve-icon name="analytics" variant="inherit"></nve-icon>
+    <nve-icon name="user"></nve-icon>
+    <nve-icon name="user" variant="inherit"></nve-icon>
   `
 }
 
 export const statuses = {
   render: () => html`
-    <nve-icon name="analytics"></nve-icon>
-    <nve-icon name="analytics" status="accent"></nve-icon>
-    <nve-icon name="analytics" status="success"></nve-icon>
-    <nve-icon name="analytics" status="warning"></nve-icon>
-    <nve-icon name="analytics" status="danger"></nve-icon>
+    <nve-icon name="user"></nve-icon>
+    <nve-icon name="user" status="accent"></nve-icon>
+    <nve-icon name="user" status="success"></nve-icon>
+    <nve-icon name="user" status="warning"></nve-icon>
+    <nve-icon name="user" status="danger"></nve-icon>
   `
 }
 
 export const size = {
   render: () => html`
-    <nve-icon style="--width: 20px; --height: 20px;" name="analytics"></nve-icon>
-    <nve-icon name="analytics"></nve-icon>
-    <nve-icon style="--width: 30px; --height: 30px;" name="analytics"></nve-icon>
+    <nve-icon name="user" size="sm"></nve-icon>
+    <nve-icon name="user"></nve-icon>
+    <nve-icon name="user" size="lg"></nve-icon>
   `
 }
 
-export const Themes = {
+export const direction = {
+  render: () => html`
+    <nve-icon name="expand-panel"></nve-icon>
+    <nve-icon name="collapse-panel"></nve-icon>
+    <nve-icon name="arrow" direction="up"></nve-icon>
+    <nve-icon name="arrow" direction="down"></nve-icon>
+    <nve-icon name="arrow" direction="left"></nve-icon>
+    <nve-icon name="arrow" direction="right"></nve-icon>
+    <nve-icon name="caret" direction="up"></nve-icon>
+    <nve-icon name="caret" direction="down"></nve-icon>
+    <nve-icon name="caret" direction="left"></nve-icon>
+    <nve-icon name="caret" direction="right"></nve-icon>
+    <nve-icon name="chevron" direction="up"></nve-icon>
+    <nve-icon name="chevron" direction="down"></nve-icon>
+    <nve-icon name="chevron" direction="left"></nve-icon>
+    <nve-icon name="chevron" direction="right"></nve-icon>
+  `
+}
+
+export const themes = {
   render: () => html`
     <div nve-theme="root light">
-      <nve-icon name="analytics"></nve-icon>
-      <nve-icon name="analytics" status="accent"></nve-icon>
-      <nve-icon name="analytics" status="success"></nve-icon>
-      <nve-icon name="analytics" status="warning"></nve-icon>
-      <nve-icon name="analytics" status="danger"></nve-icon>
+      <nve-icon name="user"></nve-icon>
+      <nve-icon name="user" status="accent"></nve-icon>
+      <nve-icon name="user" status="success"></nve-icon>
+      <nve-icon name="user" status="warning"></nve-icon>
+      <nve-icon name="user" status="danger"></nve-icon>
     </div>
     <div nve-theme="root dark">
-      <nve-icon name="analytics"></nve-icon>
-      <nve-icon name="analytics" status="accent"></nve-icon>
-      <nve-icon name="analytics" status="success"></nve-icon>
-      <nve-icon name="analytics" status="warning"></nve-icon>
-      <nve-icon name="analytics" status="danger"></nve-icon>
+      <nve-icon name="user"></nve-icon>
+      <nve-icon name="user" status="accent"></nve-icon>
+      <nve-icon name="user" status="success"></nve-icon>
+      <nve-icon name="user" status="warning"></nve-icon>
+      <nve-icon name="user" status="danger"></nve-icon>
     </div>
   `
 }

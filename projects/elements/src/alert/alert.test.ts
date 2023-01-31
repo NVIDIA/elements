@@ -45,7 +45,7 @@ describe('nve-alert', () => {
     alert.status = 'success';
     await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector('nve-icon')).toBeDefined();
-    expect(alert.shadowRoot.querySelector('nve-icon').name).toBe('passed-or-success');
+    expect(alert.shadowRoot.querySelector('nve-icon').name).toBe('success-badge');
   });
 
   it('should provide a aria role of alert to describe content', async () => {

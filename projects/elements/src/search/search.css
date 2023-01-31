@@ -13,5 +13,5 @@
 }
 
 ::slotted(input) {
-  padding-inline-start: var(--nve-ref-size-700) !important;
+  padding-inline-start: var(--nve-ref-size-800) !important;
 }

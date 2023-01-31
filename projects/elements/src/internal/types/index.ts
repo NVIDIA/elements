@@ -17,8 +17,8 @@ export const statusIcons = {
   default: 'information',
   accent: 'information',
   warning: 'warning',
-  success: 'passed-or-success',
-  danger: 'warning'
+  success: 'success-badge',
+  danger: 'important-badge'
 };
 
 declare global {
