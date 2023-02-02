@@ -46,10 +46,8 @@ nve-icon-button {
 [part='status-icon'] {
   position: absolute;
   top: 16px;
-  left: 8px;
+  left: 12px;
   --color: var(--status-color);
-  --width: 20px;
-  --height: 20px;
 }
 
 ::slotted([nve-text]) {
