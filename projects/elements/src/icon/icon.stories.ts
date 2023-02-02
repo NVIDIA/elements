@@ -1,8 +1,15 @@
 /* eslint-disable guard-for-in */
-import { html } from 'lit';
+import { html, LitElement, unsafeCSS } from 'lit';
+import { state } from 'lit/decorators/state.js';
+import { customElement } from 'lit/decorators/custom-element.js';
 import { ComponentStatuses, generateDefaultStoryParameters } from '@elements/elements/internal';
+import layout from '@elements/elements/css/module.layout.css';
+import typography from '@elements/elements/css/module.typography.css';
 import { Icon, IconNames, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
+import '@elements/elements/card/define.js';
+import '@elements/elements/search/define.js';
+import '@elements/elements/notification/define.js';
 
 const reviewDocBookmark = 'id.zckm5su0hyrd';
 const status: ComponentStatuses = 'beta';
@@ -13,7 +20,6 @@ const description = `
 export default {
   title: 'Elements/Icon/Examples',
   component: 'nve-icon',
-  // decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: {
     variant: {
@@ -44,7 +50,6 @@ export const Default = {
       .variant=${args.variant}
       .status=${args.status}
     ></nve-icon>`,
-  // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'user' }
 };
 
@@ -53,9 +58,68 @@ export const PreviewAllIcons = {
     ${ICON_NAMES.map((iconName) => html`<nve-icon name=${iconName} .variant=${args.variant}></nve-icon>\n`
     )}
   `,
-  // parameters: generateFigmaEmbed(figmaEmbedNodeId),
   args: { name: 'user' }
 };
+
+export const IconCatalog = {
+  render: (args: ArgTypes) => html`
+    <icon-demo></icon-demo>
+
+    <nve-notification-group position="bottom" alignment="end"></nve-notification-group>
+  `
+};
+
+@customElement('icon-demo')
+export class IconDemo extends LitElement {
+  static styles = [unsafeCSS(layout), unsafeCSS(typography)];
+
+  @state() iconSearchKey = '';
+
+  render() {
+    return html`
+    <style>
+      nve-button {
+        --border-radius: var(--nve-ref-border-radius-sm);
+        --height: 100px;
+      }
+    </style>
+
+    <div nve-layout="column gap:lg">
+      <nve-search>
+        <input type="search" @input=${e => this.iconSearchKey = e.target.value} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
+      </nve-search>
+
+      <div nve-layout="grid gap:md span-items:2">
+        ${ICON_NAMES.filter((iconName) => iconName.includes(this.iconSearchKey)).map((iconName) => html`
+          <nve-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard.">
+            <div nve-layout="column align:center gap:md">
+              <nve-icon size="lg" name=${iconName}></nve-icon>
+              <h3 nve-text="label sm">${iconName}</h3>
+            </div>
+          </nve-button>`
+        )}
+      </div>
+    </div>
+  `;
+  }
+
+  #copyIcon(iconName: string) {
+    const iconCode = `<nve-icon name="${iconName}"></nve-icon>`;
+    navigator.clipboard.writeText(iconCode);
+
+    const notification = document.createElement('nve-notification');
+    notification.closable = true;
+    // notification.status = 'success';
+    notification.innerHTML = `<h3 nve-text="label">Copied!</h3><p nve-text="body">${iconCode} icon code copied to clipboard.</p>`;
+    notification.addEventListener('close', () => notification.remove(), { once: true });
+
+    console.log(notification, document);
+    console.log(`${iconCode} Copied!`);
+
+    document.querySelector('nve-notification-group').prepend(notification);
+    setTimeout(() => notification.remove(), 2000 * (document.querySelectorAll('nve-notification').length));
+  }
+}
 
 export const variants = {
   render: () => html`
