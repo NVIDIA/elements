@@ -62,7 +62,7 @@ export const PreviewAllIcons = {
 };
 
 export const IconCatalog = {
-  render: (args: ArgTypes) => html`
+  render: () => html`
     <icon-demo></icon-demo>
 
     <nve-notification-group position="bottom" alignment="end"></nve-notification-group>
