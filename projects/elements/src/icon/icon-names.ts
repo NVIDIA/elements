@@ -173,6 +173,7 @@ export const ICON_NAMES = [
   'video-camera',
   'video-pause',
   'video-play',
+  'video-stop',
   'view-as-grid',
   'view-as-list',
   'view-as-table-outline',
