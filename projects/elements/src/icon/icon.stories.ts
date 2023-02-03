@@ -62,7 +62,7 @@ export const PreviewAllIcons = {
 };
 
 export const IconCatalog = {
-  render: (args: ArgTypes) => html`
+  render: () => html`
     <icon-demo></icon-demo>
 
     <mlv-notification-group position="bottom" alignment="end"></mlv-notification-group>
