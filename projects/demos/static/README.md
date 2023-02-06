@@ -44,7 +44,6 @@ Once build you will have the following in the `dist/assets`.
 
 ```
 custom-elements.json
-icons.svg
 index.css
 index.js
 inter.woff2

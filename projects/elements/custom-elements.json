@@ -1709,30 +1709,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/icon/icon-names.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "ICON_NAMES",
-          "type": {
-            "text": "array"
-          },
-          "default": "[\n  'add-asset',\n  'add-user',\n  'additional-actions',\n  'analytics',\n  'annotation',\n  'app-switcher',\n  'archive',\n  'arrow',\n  'assist',\n  'attached',\n  'beaker',\n  'beginning',\n  'book',\n  'bookmark',\n  'bounding-box',\n  'breadcrumb',\n  'camera',\n  'cancel',\n  'caret',\n  'carousel-horizontal',\n  'carousel-vertical',\n  'category-list',\n  'checklist-complete',\n  'checklist',\n  'checkmark',\n  'chevron-down',\n  'chevron-left',\n  'chevron-right',\n  'chevron-up',\n  'chevron',\n  'chop',\n  'cloud-download',\n  'cloud-upload',\n  'cloud',\n  'code',\n  'collapse-all',\n  'collapse-panel',\n  'collection',\n  'columns',\n  'computer',\n  'copy',\n  'cross-hairs',\n  'dark-mode',\n  'dashboard',\n  'data-generation',\n  'data-management',\n  'dataset-slice',\n  'date',\n  'debugging',\n  'delete',\n  'docs',\n  'domains',\n  'double-chevron',\n  'download',\n  'drag',\n  'edit',\n  'end',\n  'expand-all',\n  'expand-full-screen',\n  'expand-panel',\n  'expand',\n  'expression',\n  'eye-hidden',\n  'eye',\n  'failed-badge',\n  'failed',\n  'fast-foward',\n  'favorite-filled',\n  'favorite-outline',\n  'feedback',\n  'filter-outline',\n  'filter',\n  'flagged',\n  'free-text',\n  'globe',\n  'group-boxes',\n  'help',\n  'hidden',\n  'home',\n  'important-badge',\n  'inbox-1',\n  'inbox',\n  'information',\n  'insights',\n  'interaction',\n  'key',\n  'layers',\n  'light-mode',\n  'lightbulb',\n  'link',\n  'location',\n  'lock',\n  'logout',\n  'looping-off',\n  'looping',\n  'mail',\n  'maintenance',\n  'map-drives',\n  'menu',\n  'minimize',\n  'minus-badge',\n  'minus',\n  'navigate-back',\n  'navigate-to',\n  'not-allowed',\n  'notification',\n  'notifications',\n  'obstacle',\n  'open-external-link',\n  'organization',\n  'pan',\n  'passed-or-success',\n  'picture-in-picture',\n  'pie-chart',\n  'pinned-1',\n  'pinned',\n  'placeholder',\n  'plugin-store',\n  'plugins',\n  'plus-badge',\n  'plus',\n  'priority-high',\n  'priority-low',\n  'priority-medium',\n  'project',\n  'refresh-1',\n  'refresh',\n  'remove-asset',\n  'reply',\n  'reset',\n  'retry',\n  'rewind',\n  'schedule',\n  'search',\n  'sensor',\n  'server',\n  'set-prioritiy',\n  'settings',\n  'shapes',\n  'share',\n  'shortcut',\n  'sort-ascending',\n  'sort-decending',\n  'soundwave',\n  'status-offline',\n  'status-online',\n  'success-badge',\n  'success',\n  'support',\n  'swatch-1',\n  'swatch',\n  'switch-horizontal',\n  'switch-vertical',\n  'system-status',\n  'tag',\n  'team',\n  'template',\n  'terminal',\n  'thumbs-down',\n  'thumbs-up',\n  'transparency',\n  'trend-down',\n  'trend-up',\n  'truck',\n  'tutorial',\n  'unlock',\n  'upload',\n  'user',\n  'users',\n  'video-camera',\n  'video-pause',\n  'video-play',\n  'video-stop',\n  'view-as-grid',\n  'view-as-list',\n  'view-as-table-outline',\n  'visible',\n  'volume-muted',\n  'volume',\n  'warning',\n  'wifi',\n  'zoom-in',\n  'zoom-out'\n]"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "ICON_NAMES",
-          "declaration": {
-            "name": "ICON_NAMES",
-            "module": "src/icon/icon-names.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/icon/icon.ts",
       "declarations": [
         {
@@ -1799,6 +1775,13 @@
               },
               "description": "The name of the icon SVG sprite",
               "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "svg",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
@@ -1854,10 +1837,54 @@
       "exports": [
         {
           "kind": "js",
+          "name": "IconNames",
+          "declaration": {
+            "name": "IconNames",
+            "module": "./icons.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "Icon",
           "declaration": {
             "name": "Icon",
             "module": "src/icon/icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/icon/icons.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "ICON_IMPORTS",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n  'add-asset': () => import('./icons/add-asset.svg?raw'),\n  'add-user': () => import('./icons/add-user.svg?raw'),\n  'additional-actions': () => import('./icons/additional-actions.svg?raw'),\n  'analytics': () => import('./icons/analytics.svg?raw'),\n  'annotation': () => import('./icons/annotation.svg?raw'),\n  'app-switcher': () => import('./icons/app-switcher.svg?raw'),\n  'archive': () => import('./icons/archive.svg?raw'),\n  'arrow': () => import('./icons/arrow.svg?raw'),\n  'assist': () => import('./icons/assist.svg?raw'),\n  'attached': () => import('./icons/attached.svg?raw'),\n  'beaker': () => import('./icons/beaker.svg?raw'),\n  'beginning': () => import('./icons/beginning.svg?raw'),\n  'book': () => import('./icons/book.svg?raw'),\n  'bookmark': () => import('./icons/bookmark.svg?raw'),\n  'bounding-box': () => import('./icons/bounding-box.svg?raw'),\n  'breadcrumb': () => import('./icons/breadcrumb.svg?raw'),\n  'camera': () => import('./icons/camera.svg?raw'),\n  'cancel': () => import('./icons/cancel.svg?raw'),\n  'caret': () => import('./icons/caret.svg?raw'),\n  'carousel-horizontal': () => import('./icons/carousel-horizontal.svg?raw'),\n  'carousel-vertical': () => import('./icons/carousel-vertical.svg?raw'),\n  'category-list': () => import('./icons/category-list.svg?raw'),\n  'checklist-complete': () => import('./icons/checklist-complete.svg?raw'),\n  'checklist': () => import('./icons/checklist.svg?raw'),\n  'checkmark': () => import('./icons/checkmark.svg?raw'),\n  'chevron-down': () => import('./icons/chevron-down.svg?raw'),\n  'chevron-left': () => import('./icons/chevron-left.svg?raw'),\n  'chevron-right': () => import('./icons/chevron-right.svg?raw'),\n  'chevron-up': () => import('./icons/chevron-up.svg?raw'),\n  'chevron': () => import('./icons/chevron.svg?raw'),\n  'chop': () => import('./icons/chop.svg?raw'),\n  'cloud-download': () => import('./icons/cloud-download.svg?raw'),\n  'cloud-upload': () => import('./icons/cloud-upload.svg?raw'),\n  'cloud': () => import('./icons/cloud.svg?raw'),\n  'code': () => import('./icons/code.svg?raw'),\n  'collapse-all': () => import('./icons/collapse-all.svg?raw'),\n  'collapse-panel': () => import('./icons/collapse-panel.svg?raw'),\n  'collection': () => import('./icons/collection.svg?raw'),\n  'columns': () => import('./icons/columns.svg?raw'),\n  'computer': () => import('./icons/computer.svg?raw'),\n  'copy': () => import('./icons/copy.svg?raw'),\n  'cross-hairs': () => import('./icons/cross-hairs.svg?raw'),\n  'dark-mode': () => import('./icons/dark-mode.svg?raw'),\n  'dashboard': () => import('./icons/dashboard.svg?raw'),\n  'data-generation': () => import('./icons/data-generation.svg?raw'),\n  'data-management': () => import('./icons/data-management.svg?raw'),\n  'dataset-slice': () => import('./icons/dataset-slice.svg?raw'),\n  'date': () => import('./icons/date.svg?raw'),\n  'debugging': () => import('./icons/debugging.svg?raw'),\n  'delete': () => import('./icons/delete.svg?raw'),\n  'docs': () => import('./icons/docs.svg?raw'),\n  'domains': () => import('./icons/domains.svg?raw'),\n  'double-chevron': () => import('./icons/double-chevron.svg?raw'),\n  'download': () => import('./icons/download.svg?raw'),\n  'drag': () => import('./icons/drag.svg?raw'),\n  'dropper': () => import('./icons/dropper.svg?raw'),\n  'edit': () => import('./icons/edit.svg?raw'),\n  'end': () => import('./icons/end.svg?raw'),\n  'expand-all': () => import('./icons/expand-all.svg?raw'),\n  'expand-full-screen': () => import('./icons/expand-full-screen.svg?raw'),\n  'expand-panel': () => import('./icons/expand-panel.svg?raw'),\n  'expand': () => import('./icons/expand.svg?raw'),\n  'expression': () => import('./icons/expression.svg?raw'),\n  'eye-hidden': () => import('./icons/eye-hidden.svg?raw'),\n  'eye': () => import('./icons/eye.svg?raw'),\n  'failed-badge': () => import('./icons/failed-badge.svg?raw'),\n  'failed': () => import('./icons/failed.svg?raw'),\n  'fast-foward': () => import('./icons/fast-foward.svg?raw'),\n  'favorite-filled': () => import('./icons/favorite-filled.svg?raw'),\n  'favorite-outline': () => import('./icons/favorite-outline.svg?raw'),\n  'feedback': () => import('./icons/feedback.svg?raw'),\n  'filter-outline': () => import('./icons/filter-outline.svg?raw'),\n  'filter': () => import('./icons/filter.svg?raw'),\n  'flagged': () => import('./icons/flagged.svg?raw'),\n  'free-text': () => import('./icons/free-text.svg?raw'),\n  'globe': () => import('./icons/globe.svg?raw'),\n  'group-boxes': () => import('./icons/group-boxes.svg?raw'),\n  'help': () => import('./icons/help.svg?raw'),\n  'hidden': () => import('./icons/hidden.svg?raw'),\n  'home': () => import('./icons/home.svg?raw'),\n  'important-badge': () => import('./icons/important-badge.svg?raw'),\n  'inbox-1': () => import('./icons/inbox-1.svg?raw'),\n  'inbox': () => import('./icons/inbox.svg?raw'),\n  'information': () => import('./icons/information.svg?raw'),\n  'insights': () => import('./icons/insights.svg?raw'),\n  'interaction': () => import('./icons/interaction.svg?raw'),\n  'key': () => import('./icons/key.svg?raw'),\n  'layers': () => import('./icons/layers.svg?raw'),\n  'light-mode': () => import('./icons/light-mode.svg?raw'),\n  'lightbulb': () => import('./icons/lightbulb.svg?raw'),\n  'link': () => import('./icons/link.svg?raw'),\n  'location': () => import('./icons/location.svg?raw'),\n  'lock': () => import('./icons/lock.svg?raw'),\n  'logout': () => import('./icons/logout.svg?raw'),\n  'looping-off': () => import('./icons/looping-off.svg?raw'),\n  'looping': () => import('./icons/looping.svg?raw'),\n  'mail': () => import('./icons/mail.svg?raw'),\n  'maintenance': () => import('./icons/maintenance.svg?raw'),\n  'map-drives': () => import('./icons/map-drives.svg?raw'),\n  'menu': () => import('./icons/menu.svg?raw'),\n  'minimize': () => import('./icons/minimize.svg?raw'),\n  'minus-badge': () => import('./icons/minus-badge.svg?raw'),\n  'minus': () => import('./icons/minus.svg?raw'),\n  'navigate-back': () => import('./icons/navigate-back.svg?raw'),\n  'navigate-to': () => import('./icons/navigate-to.svg?raw'),\n  'not-allowed': () => import('./icons/not-allowed.svg?raw'),\n  'notification': () => import('./icons/notification.svg?raw'),\n  'notifications': () => import('./icons/notifications.svg?raw'),\n  'obstacle': () => import('./icons/obstacle.svg?raw'),\n  'open-external-link': () => import('./icons/open-external-link.svg?raw'),\n  'organization': () => import('./icons/organization.svg?raw'),\n  'pan': () => import('./icons/pan.svg?raw'),\n  'passed-or-success': () => import('./icons/passed-or-success.svg?raw'),\n  'picture-in-picture': () => import('./icons/picture-in-picture.svg?raw'),\n  'pie-chart': () => import('./icons/pie-chart.svg?raw'),\n  'pinned-1': () => import('./icons/pinned-1.svg?raw'),\n  'pinned': () => import('./icons/pinned.svg?raw'),\n  'placeholder': () => import('./icons/placeholder.svg?raw'),\n  'plugin-store': () => import('./icons/plugin-store.svg?raw'),\n  'plugins': () => import('./icons/plugins.svg?raw'),\n  'plus-badge': () => import('./icons/plus-badge.svg?raw'),\n  'plus': () => import('./icons/plus.svg?raw'),\n  'priority-high': () => import('./icons/priority-high.svg?raw'),\n  'priority-low': () => import('./icons/priority-low.svg?raw'),\n  'priority-medium': () => import('./icons/priority-medium.svg?raw'),\n  'project': () => import('./icons/project.svg?raw'),\n  'refresh-1': () => import('./icons/refresh-1.svg?raw'),\n  'refresh': () => import('./icons/refresh.svg?raw'),\n  'remove-asset': () => import('./icons/remove-asset.svg?raw'),\n  'reply': () => import('./icons/reply.svg?raw'),\n  'reset': () => import('./icons/reset.svg?raw'),\n  'retry': () => import('./icons/retry.svg?raw'),\n  'rewind': () => import('./icons/rewind.svg?raw'),\n  'schedule': () => import('./icons/schedule.svg?raw'),\n  'search': () => import('./icons/search.svg?raw'),\n  'sensor': () => import('./icons/sensor.svg?raw'),\n  'server': () => import('./icons/server.svg?raw'),\n  'set-prioritiy': () => import('./icons/set-prioritiy.svg?raw'),\n  'settings': () => import('./icons/settings.svg?raw'),\n  'shapes': () => import('./icons/shapes.svg?raw'),\n  'share': () => import('./icons/share.svg?raw'),\n  'shortcut': () => import('./icons/shortcut.svg?raw'),\n  'sort-ascending': () => import('./icons/sort-ascending.svg?raw'),\n  'sort-decending': () => import('./icons/sort-decending.svg?raw'),\n  'soundwave': () => import('./icons/soundwave.svg?raw'),\n  'status-offline': () => import('./icons/status-offline.svg?raw'),\n  'status-online': () => import('./icons/status-online.svg?raw'),\n  'success-badge': () => import('./icons/success-badge.svg?raw'),\n  'success': () => import('./icons/success.svg?raw'),\n  'support': () => import('./icons/support.svg?raw'),\n  'swatch': () => import('./icons/swatch.svg?raw'),\n  'switch-horizontal': () => import('./icons/switch-horizontal.svg?raw'),\n  'switch-vertical': () => import('./icons/switch-vertical.svg?raw'),\n  'system-status': () => import('./icons/system-status.svg?raw'),\n  'tag': () => import('./icons/tag.svg?raw'),\n  'team': () => import('./icons/team.svg?raw'),\n  'template': () => import('./icons/template.svg?raw'),\n  'terminal': () => import('./icons/terminal.svg?raw'),\n  'thumbs-down': () => import('./icons/thumbs-down.svg?raw'),\n  'thumbs-up': () => import('./icons/thumbs-up.svg?raw'),\n  'transparency': () => import('./icons/transparency.svg?raw'),\n  'trend-down': () => import('./icons/trend-down.svg?raw'),\n  'trend-up': () => import('./icons/trend-up.svg?raw'),\n  'truck': () => import('./icons/truck.svg?raw'),\n  'tutorial': () => import('./icons/tutorial.svg?raw'),\n  'unlock': () => import('./icons/unlock.svg?raw'),\n  'upload': () => import('./icons/upload.svg?raw'),\n  'user': () => import('./icons/user.svg?raw'),\n  'users': () => import('./icons/users.svg?raw'),\n  'video-camera': () => import('./icons/video-camera.svg?raw'),\n  'video-pause': () => import('./icons/video-pause.svg?raw'),\n  'video-play': () => import('./icons/video-play.svg?raw'),\n  'video-stop': () => import('./icons/video-stop.svg?raw'),\n  'view-as-grid': () => import('./icons/view-as-grid.svg?raw'),\n  'view-as-list': () => import('./icons/view-as-list.svg?raw'),\n  'view-as-table-outline': () => import('./icons/view-as-table-outline.svg?raw'),\n  'visible': () => import('./icons/visible.svg?raw'),\n  'volume-muted': () => import('./icons/volume-muted.svg?raw'),\n  'volume': () => import('./icons/volume.svg?raw'),\n  'warning': () => import('./icons/warning.svg?raw'),\n  'wifi': () => import('./icons/wifi.svg?raw'),\n  'zoom-in': () => import('./icons/zoom-in.svg?raw'),\n  'zoom-out': () => import('./icons/zoom-out.svg?raw'),\n}"
+        },
+        {
+          "kind": "variable",
+          "name": "ICON_NAMES"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ICON_IMPORTS",
+          "declaration": {
+            "name": "ICON_IMPORTS",
+            "module": "src/icon/icons.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ICON_NAMES",
+          "declaration": {
+            "name": "ICON_NAMES",
+            "module": "src/icon/icons.ts"
           }
         }
       ]
@@ -1880,7 +1907,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "./icon-names.js"
+            "package": "./icons.js"
           }
         }
       ]
