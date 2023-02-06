@@ -27,7 +27,7 @@ export default defineConfig({
       branches: 90,
       functions: 90,
       statements: 90,
-      exclude: ['**/storybook/**', '**/test/**', '**/*.test.ts', '**/*.css.js', '**/*.css', '**/index.js']
+      exclude: ['**/storybook/**', '**/test/**', '**/*.test.ts', '**/*.css.js', '**/*.css', '**/index.js', '**/src/icon/icons/**', '**/src/icon/icons.ts']
     }
   }
 });

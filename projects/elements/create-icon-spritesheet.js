@@ -1,14 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import { optimize } from 'svgo';
 
 const scriptPath = path.dirname(fileURLToPath(import.meta.url));
-const iconsPath = path.join(scriptPath, '/icons');
-const resultSvgPath = path.join(scriptPath, '/public/assets/icons.svg');
-const resultTypesPath = path.join(scriptPath, '/src/icon/icon-names.ts');
-
+const inputPath = path.join(scriptPath, '/src/icon/icons/');
+const outputPath = path.join(scriptPath, '/src/icon/');
 const svgoOptions = {
   multipass: true,
   plugins: [
@@ -23,59 +20,18 @@ const svgoOptions = {
   ]
 };
 
-const resultIds = [];
-const resultDocument = new DOMParser().parseFromString(
-  `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>`
-);
-const resultSvgEl = resultDocument.firstChild;
+const icons = { };
+fs.readdirSync(inputPath).filter(file => file.endsWith('.svg')).sort().forEach(file => {
+  const svgText = fs.readFileSync(path.join(inputPath, file), { encoding: 'utf-8' });
+  const id = file.substring(0, file.length - 4);
+  icons[id] = optimize(svgText, svgoOptions).data;
+});
 
-function getChildElements(node) {
-  return node.nodeType === 1 ? Array.from(node.childNodes).filter((childNode) => childNode.nodeType === 1) : [];
-}
-
-function cleanSvgEl(svgEl) {
-  if (svgEl.hasAttribute('fill')) {
-    svgEl.setAttribute('fill', 'currentColor');
-  }
-  if (svgEl.hasAttribute('stroke')) {
-    svgEl.setAttribute('stroke', 'currentColor');
-  }
-  for (const childNode of getChildElements(svgEl.childNodes)) {
-    cleanSvgEl(childNode);
-  }
-}
-
-const files = fs.readdirSync(iconsPath);
-files.sort();
-for (const file of files) {
-  if (file.endsWith('.svg')) {
-    const svgPath = path.join(iconsPath, file);
-    const svgText = fs.readFileSync(svgPath, { encoding: 'utf-8' });
-    const optimizedSvgText = optimize(svgText, svgoOptions).data;
-    const svgDocument = new DOMParser().parseFromString(optimizedSvgText);
-
-    const id = file.substring(0, file.length - 4);
-    const svgEl = svgDocument.firstChild;
-    const viewBox = svgEl.getAttribute('viewBox');
-
-    resultIds.push(id);
-
-    const resultSymbolEl = resultDocument.createElement('symbol');
-    resultSymbolEl.setAttribute('id', id);
-    resultSymbolEl.setAttribute('viewBox', viewBox);
-    for (const childNode of getChildElements(svgEl)) {
-      const resultChildEl = childNode.cloneNode(true);
-      cleanSvgEl(resultChildEl);
-      resultSymbolEl.appendChild(resultChildEl);
-    }
-    resultSvgEl.appendChild(resultSymbolEl);
-  }
-}
-
-fs.writeFileSync(resultSvgPath, new XMLSerializer().serializeToString(resultDocument));
-
-const resultTypes = `
+fs.writeFileSync(`${outputPath}/icons.ts`, `
 // This is an auto-generated file. DO NOT EDIT
-export const ICON_NAMES = [\n${resultIds.map(i => `  '${i}'`).join(',\n')}\n];
-`;
-fs.writeFileSync(resultTypesPath, resultTypes);
+export const ICON_IMPORTS = {\n${Object.keys(icons).map(i => `  '${i}': () => import('./icons/${i}.svg?raw'),`).join('\n')}\n};
+
+export const ICON_NAMES = Object.keys(ICON_IMPORTS);
+
+export type IconNames = ${Object.keys(icons).map(i => `'${i}'`).join(' | ')};
+`);
