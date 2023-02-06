@@ -252,7 +252,10 @@
     },
     "build:watch": {
       "command": "vite build --mode watch",
-      "service": true
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
     },
     "clean": {
       "command": "cd ../../../../ && git clean -dfX"
@@ -350,7 +353,7 @@
         "create-icon-spritesheet.js"
       ],
       "output": [
-        "public/assets/icons.svg",
+        "src/icon/svg/**",
         "src/icon/icon-names.js"
       ]
     },

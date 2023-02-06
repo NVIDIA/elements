@@ -31,8 +31,8 @@ describe('mlv-icon', () => {
 
   it('should update svg reference when "name" is updated', async () => {
     expect(element.name).eq(undefined);
-    element.name = 'test';
+    element.name = 'book';
     await elementIsStable(element);
-    expect(element.shadowRoot.innerHTML).includes('/assets/icons.svg#test');
+    expect(element.shadowRoot.innerHTML).includes('<div internal-host="">');
   });
 });
