@@ -1,10 +1,11 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { state } from 'lit/decorators/state.js';
 import { useStyles } from '@elements/elements/internal';
-import { ICON_NAMES } from './icon-names.js';
+import { ICON_IMPORTS, IconNames } from './icons.js';
 import styles from './icon.css?inline';
 
-export type IconNames = typeof ICON_NAMES[number];
+export type { IconNames } from './icons.js';
 
 /**
  * @element nve-icon
@@ -30,13 +31,18 @@ export class Icon extends LitElement {
   /** The name of the icon SVG sprite */
   @property({ type: String }) name: IconNames;
 
+  @state() svg: string;
+
   render() {
     return html`
-      <div internal-host>
-        <svg fill="none">
-          <use href="/assets/icons.svg#${this.name}"></use>
-        </svg>
-      </div>
+      <div internal-host .innerHTML=${this.svg ?? ''}></div>
     `;
+  }
+
+  async updated(props: PropertyValues<this>) {
+    super.updated(props);
+    if (ICON_IMPORTS[this.name]) {
+      this.svg = (await ICON_IMPORTS[this.name]()).default;
+    }
   }
 }
