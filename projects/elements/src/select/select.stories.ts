@@ -25,21 +25,15 @@ export const Select = {
 
 export const Prefix = {
   render: () => html`
-<div nve-layout="grid span-items:6 gap:md">
   <nve-select>
-    <nve-button interaction="ghost" readonly="">location</nve-button>
+    <nve-button interaction="ghost" readonly>location</nve-button>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
   </nve-select>
-  <nve-input>
-    <label>label</label>
-    <input />
-    <nve-control-message>message</nve-control-message>
-  </nve-input>
-</div>`
+  `
 };
 
 export const Vertical = {
