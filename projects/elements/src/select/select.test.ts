@@ -38,4 +38,12 @@ describe('mlv-select', () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('mlv-icon-button')).toBe(null);
   });
+
+  it('should show icon if not a size select type', async () => {
+    expect(element.shadowRoot.querySelector('mlv-icon-button')).toBeDefined();
+    fixture.querySelector('select').size = 3;
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('mlv-icon-button')).toBe(null);
+  });
 });

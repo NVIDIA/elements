@@ -14,7 +14,8 @@
   --width: initial;
   display: inline-flex;
   position: relative;
-  outline: 0;
+  user-select: none;
+  white-space: nowrap;
   width: var(--width);
 }
 
@@ -34,10 +35,9 @@
   display: inline-flex;
   place-items: center;
   justify-content: center;
-  appearance: none;
-  user-select: none;
   white-space: nowrap;
   line-height: 1.2em;
+  overflow: hidden;
 }
 
 ::slotted(mlv-icon) {

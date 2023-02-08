@@ -129,6 +129,15 @@ export const DarkTheme = {
   `
 }
 
+export const NoWrap = {
+  render: () => html`
+    <mlv-button style="--width: 100px">item item item</mlv-button>
+    <mlv-button style="--width: 100px">
+      <span>item</span><span>item</span><span>item</span>
+    </mlv-button>
+  `
+}
+
 export const FormSubmit = {
   render: () => html`
 <form id="test-form">
