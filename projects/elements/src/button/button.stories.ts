@@ -129,6 +129,15 @@ export const DarkTheme = {
   `
 }
 
+export const NoWrap = {
+  render: () => html`
+    <nve-button style="--width: 100px">item item item</nve-button>
+    <nve-button style="--width: 100px">
+      <span>item</span><span>item</span><span>item</span>
+    </nve-button>
+  `
+}
+
 export const FormSubmit = {
   render: () => html`
 <form id="test-form">
