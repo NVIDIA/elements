@@ -1,9 +1,10 @@
 load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm//src/ui/platform/design-system/elements:vite/package_json.bzl", vite_bin = "bin")
+load("@npm//src/ui/platform/design-system/elements:vitest/package_json.bzl", vitest_bin = "bin")
 load("@npm//src/ui/platform/design-system/elements:typescript/package_json.bzl", typescript_bin = "bin")
 load("@npm//src/ui/platform/design-system/elements:@elements/custom-elements-storybook/package_json.bzl", storybook_bin = "bin")
-load("//src/ui/platform/build/vite:index.bzl", "vite_library", "vite_default_srcs", "vite_default_data")
+load("//src/ui/platform/build/vite:index.bzl", "vite_library", "vite_default_srcs", "vite_default_data", "vite_default_test_srcs")
 load("//src/ui/platform/build/storybook:index.bzl", "storybook")
 
 npm_link_all_packages()
@@ -14,6 +15,9 @@ vite_library(
     tsconfig = None,
     emptyOutDir = False,
     srcs = vite_default_srcs(),
+    test_srcs = vite_default_test_srcs() + [
+        ":dist",
+    ],
     deps = [
         ":node_modules",
     ],
@@ -31,7 +35,9 @@ vite_library(
         "tokens/theme.reduced-motion.json",
         "tokens/tokens.json",
     ] + glob(["public/**/*"]),
+    node_options = ["--max-old-space-size=8192"],
     vite_bin = vite_bin,
+    vitest_bin = vitest_bin,
     typescript_bin = typescript_bin,
 )
 
