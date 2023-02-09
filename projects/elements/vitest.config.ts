@@ -18,7 +18,11 @@ export default defineConfig({
     include: ['./src/**/*.test.ts'],
     forceRerunTriggers: ['**/dist/**'],
     watchExclude: ['**/node_modules/**'],
+    // Default includes '.cache' which fails under Bazel as its sandbox lives in such a folder.
     exclude: ['**/node_modules/**'],
+    // CPU detection on CI fails due to K8s/Docker.
+    maxThreads: 8,
+    minThreads: 8,
     environment: 'happy-dom',
     deps: { external: ['**/node_modules/**'] },
     setupFiles: [path.resolve(__dirname, './src/test/setup.ts')], // https://github.com/vitest-dev/vitest/issues/1700
