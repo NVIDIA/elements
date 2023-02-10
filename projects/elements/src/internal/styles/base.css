@@ -37,6 +37,13 @@ slot {
   outline: 5px auto -webkit-focus-ring-color !important;
 }
 
+:host(:focus-within:not(:focus-visible):not([readonly])) [focus-within],
+:host(:focus:not(:focus-visible)) [focusable],
+:host([tabindex='0']:focus:not(:focus-visible)) [focusable] {
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+
 @supports selector(:--focus) {
   :host(:--focus) [focusable],
   :host([tabindex='0']:--focus) {
