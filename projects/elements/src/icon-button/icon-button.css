@@ -34,6 +34,11 @@ nve-icon {
   pointer-events: none;
 }
 
+:host([icon-name='cancel']) nve-icon {
+  --height: var(--nve-ref-size-300);
+  --width: var(--nve-ref-size-300);
+}
+
 ::slotted(a) {
   text-decoration: none !important;
   color: var(--color) !important;

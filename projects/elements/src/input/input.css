@@ -7,6 +7,7 @@
   --border-radius: var(--nve-ref-border-radius-sm);
   --border: var(--nve-ref-border-width-md) solid transparent;
   --cursor: text;
+  --_icon-height: var(--height);
   width: 100%;
 }
 
@@ -37,6 +38,7 @@
 
 nve-icon-button,
 ::slotted(nve-icon-button) {
+  --height: var(--_icon-height);
   align-self: center;
 }
 
