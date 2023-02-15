@@ -18,7 +18,7 @@ export class Select extends Control {
   static styles = useStyles([...Control.styles, styles]);
 
   protected get suffixContent() {
-    return (this.input?.multiple || this.input?.size) ? html`` : html`<nve-icon name="chevron-down"></nve-icon>`;
+    return (this.input?.multiple || this.input?.size) ? html`` : html`<nve-icon name="caret" direction="down"></nve-icon>`;
   }
 
   connectedCallback() {
