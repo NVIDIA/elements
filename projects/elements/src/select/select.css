@@ -22,10 +22,10 @@
   width: 100%;
 }
 
-[name='chevron-down'] {
-  --width: var(--mlv-ref-size-300);
-  --height: var(--mlv-ref-size-300);
-  right: var(--mlv-ref-size-200);
+[name='caret'] {
+  --width: var(--mlv-ref-size-200);
+  --height: var(--mlv-ref-size-200);
+  right: var(--mlv-ref-size-300);
   align-self: center;
   pointer-events: none;
   position: absolute;

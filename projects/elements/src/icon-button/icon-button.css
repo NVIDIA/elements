@@ -34,6 +34,11 @@ mlv-icon {
   pointer-events: none;
 }
 
+:host([icon-name='cancel']) mlv-icon {
+  --height: var(--mlv-ref-size-300);
+  --width: var(--mlv-ref-size-300);
+}
+
 ::slotted(a) {
   text-decoration: none !important;
   color: var(--color) !important;

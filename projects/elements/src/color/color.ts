@@ -13,7 +13,7 @@ export class Color extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
   protected get suffixContent() {
-    return html`<mlv-icon-button icon-name="free-text" interaction="ghost" @click=${() =>  this.#select()}></mlv-icon-button>`;
+    return html`<mlv-icon-button icon-name="dropper" interaction="ghost" @click=${() =>  this.#select()}></mlv-icon-button>`;
   }
 
   connectedCallback() {

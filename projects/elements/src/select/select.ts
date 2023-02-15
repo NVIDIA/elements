@@ -18,7 +18,7 @@ export class Select extends Control {
   static styles = useStyles([...Control.styles, styles]);
 
   protected get suffixContent() {
-    return (this.input?.multiple || this.input?.size) ? html`` : html`<mlv-icon name="chevron-down"></mlv-icon>`;
+    return (this.input?.multiple || this.input?.size) ? html`` : html`<mlv-icon name="caret" direction="down"></mlv-icon>`;
   }
 
   connectedCallback() {
