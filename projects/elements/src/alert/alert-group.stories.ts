@@ -38,14 +38,14 @@ export const Status = {
         <nve-alert>default</nve-alert>
       </nve-alert-group>
 
-      <nve-alert-group status="warning">
-        <nve-alert>warning</nve-alert>
-        <nve-alert>warning</nve-alert>
-      </nve-alert-group>
-
       <nve-alert-group status="success">
         <nve-alert>success</nve-alert>
         <nve-alert>success</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="warning">
+        <nve-alert>warning</nve-alert>
+        <nve-alert>warning</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="danger">
@@ -65,13 +65,8 @@ export const Closable = {
       </nve-alert-group>
 
       <nve-alert-group status="accent">
-        <nve-alert closable>default</nve-alert>
-        <nve-alert closable>default</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="warning">
-        <nve-alert closable>warning</nve-alert>
-        <nve-alert closable>warning</nve-alert>
+        <nve-alert closable>accent</nve-alert>
+        <nve-alert closable>accent</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="success">
@@ -79,11 +74,48 @@ export const Closable = {
         <nve-alert closable>success</nve-alert>
       </nve-alert-group>
 
+      <nve-alert-group status="warning">
+        <nve-alert closable>warning</nve-alert>
+        <nve-alert closable>warning</nve-alert>
+      </nve-alert-group>
+
       <nve-alert-group status="danger">
         <nve-alert closable>danger</nve-alert>
         <nve-alert closable>danger</nve-alert>
       </nve-alert-group>
     </div>
+  `
+}
+
+export const Actions = {
+  render: () => html`
+  <div nve-layout="column gap:md">
+    <nve-alert-group>
+      <nve-alert>
+        default <nve-button slot="actions" interaction="ghost">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+    <nve-alert-group status="accent">
+      <nve-alert>
+        accent <nve-button slot="actions" interaction="ghost">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+    <nve-alert-group status="success">
+      <nve-alert>
+        success <nve-button slot="actions" interaction="ghost">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+    <nve-alert-group status="warning">
+      <nve-alert>
+        warning <nve-button slot="actions" interaction="ghost">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+    <nve-alert-group status="danger">
+      <nve-alert>
+        danger <nve-button slot="actions" interaction="ghost">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+  </div>
   `
 }
 
@@ -96,18 +128,18 @@ export const Themes = {
       </nve-alert-group>
 
       <nve-alert-group status="accent">
-        <nve-alert>warning</nve-alert>
-        <nve-alert>warning</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="warning">
-        <nve-alert>warning</nve-alert>
-        <nve-alert>warning</nve-alert>
+        <nve-alert>accent</nve-alert>
+        <nve-alert>accent</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="success">
         <nve-alert>success</nve-alert>
         <nve-alert>success</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="warning">
+        <nve-alert>warning</nve-alert>
+        <nve-alert>warning</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="danger">
@@ -122,18 +154,18 @@ export const Themes = {
       </nve-alert-group>
 
       <nve-alert-group status="accent">
-        <nve-alert>warning</nve-alert>
-        <nve-alert>warning</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="warning">
-        <nve-alert>warning</nve-alert>
-        <nve-alert>warning</nve-alert>
+        <nve-alert>accent</nve-alert>
+        <nve-alert>accent</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="success">
         <nve-alert>success</nve-alert>
         <nve-alert>success</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="warning">
+        <nve-alert>warning</nve-alert>
+        <nve-alert>warning</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="danger">
