@@ -9,4 +9,5 @@
 [internal-host] {
   border-bottom: var(--border-bottom);
   padding: 0 var(--padding) var(--padding) var(--padding);
+  color: var(--color);
 }
