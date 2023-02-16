@@ -58,4 +58,9 @@ describe('mlv-alert', () => {
     await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
   });
+
+  it('should provide a actions slot for action buttons', async () => {
+    await elementIsStable(alert);
+    expect(alert.shadowRoot.querySelector('slot[name=actions]')).toBeTruthy();
+  });
 });

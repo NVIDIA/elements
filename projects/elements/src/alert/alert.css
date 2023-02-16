@@ -21,10 +21,12 @@ slot,
   height: 100%;
 }
 
-slot {
-  flex-wrap: wrap;
-  line-height: 1em;
-  width: 100%;
+::slotted(mlv-button[interaction='ghost']) {
+  --color: inherit;
+}
+
+slot[name='actions'] {
+  margin-left: auto;
 }
 
 mlv-icon {

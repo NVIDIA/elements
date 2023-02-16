@@ -1,5 +1,5 @@
 /* https://seek-oss.github.io/capsize/ */
-:is([mlv-text~='display'], [mlv-text~='heading'], [mlv-text~='body'], [mlv-text~='label'], [mlv-text~='eyebrow'], [mlv-text~='eyebrow'])::before {
+:is([mlv-text~='display'], [mlv-text~='heading'], [mlv-text~='body'], [mlv-text~='label'], [mlv-text~='eyebrow'])::before {
   content: '';
   margin-bottom: -0.1818em;
   display: table;
@@ -11,17 +11,17 @@
   display: table;
 }
 
+[mlv-text~='display'], [mlv-text~='heading'], [mlv-text~='body'], [mlv-text~='label'], [mlv-text~='eyebrow'] {
+  font-family: var(--mlv-ref-font-family-inter) !important;
+  font-weight: var(--mlv-ref-font-weight-regular) !important;
+  color: var(--mlv-sys-text-default-color) !important;
+  white-space: initial;
+  margin: 0;
+}
+
 [mlv-text~='trim:none']::before,
 [mlv-text~='trim:none']::after {
   content: none !important;
-}
-
-[mlv-text] {
-  font-family: var(--mlv-ref-font-family-inter) !important;
-  font-weight: var(--mlv-ref-font-weight-regular) !important;
-  color: var(--mlv-sys-text-default-color)!important;
-  white-space: initial;
-  margin: 0;
 }
 
 [mlv-text~='display'] {

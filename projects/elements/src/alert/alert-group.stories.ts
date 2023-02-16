@@ -38,14 +38,14 @@ export const Status = {
         <mlv-alert>default</mlv-alert>
       </mlv-alert-group>
 
-      <mlv-alert-group status="warning">
-        <mlv-alert>warning</mlv-alert>
-        <mlv-alert>warning</mlv-alert>
-      </mlv-alert-group>
-
       <mlv-alert-group status="success">
         <mlv-alert>success</mlv-alert>
         <mlv-alert>success</mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="warning">
+        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>warning</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
@@ -65,13 +65,8 @@ export const Closable = {
       </mlv-alert-group>
 
       <mlv-alert-group status="accent">
-        <mlv-alert closable>default</mlv-alert>
-        <mlv-alert closable>default</mlv-alert>
-      </mlv-alert-group>
-
-      <mlv-alert-group status="warning">
-        <mlv-alert closable>warning</mlv-alert>
-        <mlv-alert closable>warning</mlv-alert>
+        <mlv-alert closable>accent</mlv-alert>
+        <mlv-alert closable>accent</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="success">
@@ -79,11 +74,48 @@ export const Closable = {
         <mlv-alert closable>success</mlv-alert>
       </mlv-alert-group>
 
+      <mlv-alert-group status="warning">
+        <mlv-alert closable>warning</mlv-alert>
+        <mlv-alert closable>warning</mlv-alert>
+      </mlv-alert-group>
+
       <mlv-alert-group status="danger">
         <mlv-alert closable>danger</mlv-alert>
         <mlv-alert closable>danger</mlv-alert>
       </mlv-alert-group>
     </div>
+  `
+}
+
+export const Actions = {
+  render: () => html`
+  <div mlv-layout="column gap:md">
+    <mlv-alert-group>
+      <mlv-alert>
+        default <mlv-button slot="actions" interaction="ghost">action</mlv-button>
+      </mlv-alert>
+    </mlv-alert-group>
+    <mlv-alert-group status="accent">
+      <mlv-alert>
+        accent <mlv-button slot="actions" interaction="ghost">action</mlv-button>
+      </mlv-alert>
+    </mlv-alert-group>
+    <mlv-alert-group status="success">
+      <mlv-alert>
+        success <mlv-button slot="actions" interaction="ghost">action</mlv-button>
+      </mlv-alert>
+    </mlv-alert-group>
+    <mlv-alert-group status="warning">
+      <mlv-alert>
+        warning <mlv-button slot="actions" interaction="ghost">action</mlv-button>
+      </mlv-alert>
+    </mlv-alert-group>
+    <mlv-alert-group status="danger">
+      <mlv-alert>
+        danger <mlv-button slot="actions" interaction="ghost">action</mlv-button>
+      </mlv-alert>
+    </mlv-alert-group>
+  </div>
   `
 }
 
@@ -96,18 +128,18 @@ export const Themes = {
       </mlv-alert-group>
 
       <mlv-alert-group status="accent">
-        <mlv-alert>warning</mlv-alert>
-        <mlv-alert>warning</mlv-alert>
-      </mlv-alert-group>
-
-      <mlv-alert-group status="warning">
-        <mlv-alert>warning</mlv-alert>
-        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>accent</mlv-alert>
+        <mlv-alert>accent</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="success">
         <mlv-alert>success</mlv-alert>
         <mlv-alert>success</mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="warning">
+        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>warning</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
@@ -122,18 +154,18 @@ export const Themes = {
       </mlv-alert-group>
 
       <mlv-alert-group status="accent">
-        <mlv-alert>warning</mlv-alert>
-        <mlv-alert>warning</mlv-alert>
-      </mlv-alert-group>
-
-      <mlv-alert-group status="warning">
-        <mlv-alert>warning</mlv-alert>
-        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>accent</mlv-alert>
+        <mlv-alert>accent</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="success">
         <mlv-alert>success</mlv-alert>
         <mlv-alert>success</mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="warning">
+        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>warning</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
