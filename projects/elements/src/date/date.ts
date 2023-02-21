@@ -11,6 +11,11 @@ import styles from './date.css?inline';
 export class Date extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
+  static readonly metadata = {
+    tag: 'nve-date',
+    version: 'PACKAGE_VERSION'
+  };
+
   protected get suffixContent() {
     return html`<nve-icon-button icon-name="date" interaction="ghost" @click=${() => this.input.showPicker()}></nve-icon-button>`;
   }

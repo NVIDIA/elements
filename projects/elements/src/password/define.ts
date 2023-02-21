@@ -1,9 +1,9 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Password } from '@elements/elements/password';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 
-defineElement('nve-password', Password);
+define(Password);
 
 declare global {
   interface HTMLElementTagNameMap {

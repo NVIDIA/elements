@@ -33,6 +33,15 @@
           "members": [
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-alert-group',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
               "name": "status",
               "type": {
                 "text": "Status"
@@ -114,6 +123,24 @@
           "members": [
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-alert',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
+              "name": "elementDefinitions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    'nve-icon': Icon,\n    'nve-icon-button': IconButton\n  }"
+            },
+            {
+              "kind": "field",
               "name": "status",
               "type": {
                 "text": "Status | 'muted'"
@@ -157,15 +184,6 @@
                 "text": "ElementInternals"
               },
               "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "elementDefinitions",
-              "type": {
-                "text": "object"
-              },
-              "static": true,
-              "default": "{\n    'nve-icon': Icon,\n    'nve-icon-button': IconButton\n  }"
             }
           ],
           "events": [
@@ -291,6 +309,15 @@
           "members": [
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-button',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
               "name": "interaction",
               "type": {
                 "text": "Interaction | GhostInteraction | Inverse"
@@ -404,7 +431,17 @@
               "name": "footer"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-card',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
@@ -441,7 +478,17 @@
               "name": "header-action"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-card-header',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
@@ -464,7 +511,17 @@
               "name": ""
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-card-content',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
@@ -487,7 +544,17 @@
               "name": ""
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-card-footer',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
@@ -560,7 +627,17 @@
           "kind": "class",
           "description": "",
           "name": "CheckboxGroup",
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-checkbox-group',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "ControlGroup",
             "package": "@elements/elements/forms"
@@ -599,7 +676,17 @@
               "name": "--cursor"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-checkbox',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "Control",
             "package": "@elements/elements/forms"
@@ -657,6 +744,15 @@
           "description": "",
           "name": "Color",
           "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-color',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
             {
               "kind": "field",
               "name": "suffixContent",
@@ -718,6 +814,15 @@
           "members": [
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-date',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
               "name": "suffixContent",
               "privacy": "protected"
             }
@@ -771,6 +876,15 @@
           "description": "",
           "name": "Datetime",
           "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-datetime',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
             {
               "kind": "field",
               "name": "suffixContent",
@@ -837,7 +951,17 @@
               "name": ""
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-dialog-footer',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
@@ -871,7 +995,17 @@
               "name": ""
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-dialog-header',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
@@ -1053,6 +1187,15 @@
               "name": "#typePopoverController",
               "privacy": "private",
               "default": "new TypePopoverController<Dialog>(this)"
+            },
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-dialog',\n    version: 'PACKAGE_VERSION'\n  }"
             },
             {
               "kind": "field",
@@ -1363,6 +1506,15 @@
             },
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-dropdown',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
               "name": "elementDefinitions",
               "type": {
                 "text": "object"
@@ -1494,7 +1646,17 @@
           "kind": "class",
           "description": "",
           "name": "File",
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-file',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "Control",
             "package": "@elements/elements/forms"
@@ -1599,6 +1761,19 @@
                 "text": "IconNames"
               },
               "attribute": "icon-name"
+            },
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-icon-button',\n    version: 'PACKAGE_VERSION'\n  }",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/button/button.ts"
+              }
             },
             {
               "kind": "field",
@@ -1782,6 +1957,15 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-icon',\n    version: 'PACKAGE_VERSION'\n  }"
             }
           ],
           "attributes": [
@@ -1949,7 +2133,17 @@
           "kind": "class",
           "description": "",
           "name": "InputGroup",
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-input-group',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "ControlGroup",
             "package": "@elements/elements/forms"
@@ -2005,7 +2199,17 @@
               "name": "--cursor"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-input',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "Control",
             "package": "@elements/elements/forms"
@@ -2264,6 +2468,15 @@
           "members": [
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-month',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
               "name": "suffixContent",
               "privacy": "protected"
             }
@@ -2362,6 +2575,15 @@
               "name": "typePopoverController",
               "privacy": "protected",
               "default": "new TypePopoverController<NotificationGroup>(this)"
+            },
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-notification-group',\n    version: 'PACKAGE_VERSION'\n  }"
             },
             {
               "kind": "method",
@@ -2555,6 +2777,15 @@
             },
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-notification',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
               "name": "elementDefinitions",
               "type": {
                 "text": "object"
@@ -2704,6 +2935,15 @@
             },
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-password',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
               "name": "#i18nController",
               "privacy": "private",
               "type": {
@@ -2794,7 +3034,17 @@
           "kind": "class",
           "description": "",
           "name": "RadioGroup",
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-radio-group',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "ControlGroup",
             "package": "@elements/elements/forms"
@@ -2833,7 +3083,17 @@
               "name": "--cursor"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-radio',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "Control",
             "package": "@elements/elements/forms"
@@ -2884,6 +3144,15 @@
           "name": "Range",
           "members": [
             {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-range',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
               "kind": "method",
               "name": "#setTrackWidth",
               "parameters": [
@@ -2918,6 +3187,83 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/scoped/index.ts",
+      "declarations": [
+        {
+          "kind": "mixin",
+          "description": "Utility for applying mixin recursively to all custom elements, used for scoped element registry polyfills and shims",
+          "name": "scope",
+          "members": [
+            {
+              "kind": "field",
+              "name": "elementDefinitions",
+              "static": true
+            }
+          ],
+          "mixins": [
+            {
+              "name": "Mixin",
+              "module": "src/scoped/index.ts"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "element",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "name": "Mixin",
+              "default": "ScopedRegistryHost"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "defineScopedElement",
+          "parameters": [
+            {
+              "name": "prefix",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "Element",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "name": "Mixin",
+              "default": "ScopedRegistryHost"
+            }
+          ],
+          "description": "Utility for registering elements with a scope prefix for global scope when Custom Element Scoped Registries are not available"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "scope",
+          "declaration": {
+            "name": "scope",
+            "module": "src/scoped/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "defineScopedElement",
+          "declaration": {
+            "name": "defineScopedElement",
+            "module": "src/scoped/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/search/define.ts",
       "declarations": [],
       "exports": []
@@ -2946,6 +3292,15 @@
           "description": "",
           "name": "Search",
           "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-search',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
             {
               "kind": "field",
               "name": "prefixContent",
@@ -3023,6 +3378,15 @@
           "members": [
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-select',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
               "name": "suffixContent",
               "privacy": "protected"
             }
@@ -3083,7 +3447,17 @@
           "kind": "class",
           "description": "",
           "name": "SwitchGroup",
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-switch-group',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "ControlGroup",
             "package": "@elements/elements/forms"
@@ -3138,7 +3512,17 @@
               "name": "--anchor-background"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-switch',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "Control",
             "package": "@elements/elements/forms"
@@ -3345,7 +3729,17 @@
               "name": "--border"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-textarea',\n    version: 'PACKAGE_VERSION'\n  }"
+            }
+          ],
           "superclass": {
             "name": "Control",
             "package": "@elements/elements/forms"
@@ -3395,6 +3789,15 @@
           "description": "",
           "name": "Time",
           "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-time',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
             {
               "kind": "field",
               "name": "suffixContent",
@@ -3600,6 +4003,15 @@
                 "text": "ElementInternals"
               },
               "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-toast',\n    version: 'PACKAGE_VERSION'\n  }"
             },
             {
               "kind": "field",
@@ -3838,6 +4250,15 @@
             },
             {
               "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-tooltip',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
+            {
+              "kind": "field",
               "name": "popoverType",
               "type": {
                 "text": "PopoverType"
@@ -3961,6 +4382,15 @@
           "description": "",
           "name": "Week",
           "members": [
+            {
+              "kind": "field",
+              "name": "metadata",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{\n    tag: 'nve-week',\n    version: 'PACKAGE_VERSION'\n  }"
+            },
             {
               "kind": "field",
               "name": "suffixContent",

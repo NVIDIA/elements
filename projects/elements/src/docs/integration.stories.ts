@@ -4,12 +4,16 @@ import { state } from 'lit/decorators/state.js';
 import { query } from 'lit/decorators/query.js';
 import typography from '@elements/elements/css/module.typography.css';
 import layout from '@elements/elements/css/module.layout.css';
+import { defineScopedElement } from '@elements/elements/scoped';
+import { IconButton } from '@elements/elements/icon-button';
 import '@elements/elements/notification/define.js';
 import '@elements/elements/password/define.js';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/input/define.js';
 import '@elements/elements/checkbox/define.js';
 import '@elements/elements/button/define.js';
+
+defineScopedElement('myplugin', IconButton);
 
 export default {
   title: 'Internal/Integration'
@@ -89,6 +93,10 @@ export class AppLogin extends LitElement {
 
 export const LitForms = {
   render: () => html`<app-login></app-login>`
+}
+
+export const ScopedElement = {
+  render: () => html`<myplugin-nve-icon-button icon-name="cancel"></myplugin-nve-icon-button>`
 }
 
 // used to trigger global option updates (theming) when all stories are isolated in iframes

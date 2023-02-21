@@ -1,10 +1,10 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Card, CardHeader, CardContent, CardFooter } from '@elements/elements/card';
 
-defineElement('nve-card', Card);
-defineElement('nve-card-header', CardHeader);
-defineElement('nve-card-content', CardContent);
-defineElement('nve-card-footer', CardFooter);
+define(Card);
+define(CardHeader);
+define(CardContent);
+define(CardFooter);
 
 declare global {
   interface HTMLElementTagNameMap {

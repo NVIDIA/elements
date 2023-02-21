@@ -16,6 +16,11 @@ import styles from './alert-group.css?inline';
 export class AlertGroup extends LitElement {
   static styles = useStyles([styles]);
 
+  static readonly metadata = {
+    tag: 'nve-alert-group',
+    version: 'PACKAGE_VERSION'
+  };
+
   @property({ type: String, reflect: true }) status: Status;
 
   /** @private */

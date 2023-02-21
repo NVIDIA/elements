@@ -18,4 +18,9 @@ import styles from './switch.css?inline';
  */
 export class Switch extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
+
+  static readonly metadata = {
+    tag: 'nve-switch',
+    version: 'PACKAGE_VERSION'
+  };
 }

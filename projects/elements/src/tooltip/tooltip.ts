@@ -53,6 +53,11 @@ export class Tooltip extends LitElement {
 
   static styles = useStyles([popoverBaseStyles, styles]);
 
+  static readonly metadata = {
+    tag: 'nve-tooltip',
+    version: 'PACKAGE_VERSION'
+  };
+
   /** @private */
   readonly popoverType: PopoverType = 'hint';
 

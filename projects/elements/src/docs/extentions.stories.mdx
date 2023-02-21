@@ -62,3 +62,26 @@ The static `elementDefinitions` property is used to define the elements that wil
 The `scope` function is used to wrap the element definition with the `ScopedRegistryHost` mixin. This is required to ensure
 all Elements in the entire DOM tree are registered to the scoped registry. Once completed the `domain-login` component
 can be used in any framework that supports Web Components.
+
+<LinkedHeader>Element Scoping without Shadow DOM</LinkedHeader>
+
+If you are building an extention that cannot leverage Shadow DOM then you can use a prefixing strategy to minimize global tag collisions.
+
+```typescript
+import { IconButton } from '@elements/elements/icon-button';
+import { defineScopedElement } from '@elements/elements/scoped';
+import '@webcomponents/scoped-custom-element-registry';
+
+defineScopedElement('myplugin', IconButton);
+```
+
+The `defineScopedElement` utility function will ensure that the `IconButton` uses a scoped registry, encapsulating its internal dependency on `nve-icon`.
+It will also register `IconButton` with a new global prefix of `myplugin` rather than the default global `nve-icon-button`.
+
+```html
+<myplugin-nve-icon-button icon-name="cancel"></myplugin-nve-icon-button>
+```
+
+<Story id="internal-integration--scoped-element" />
+
+While this still creates a global registration for `myplugin-nve-icon-button` its name can be specific to the app, plugin or integration and reduce the chance of a global name collision.

@@ -1,9 +1,9 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Month } from '@elements/elements/month';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 
-defineElement('nve-month', Month);
+define(Month);
 
 declare global {
   interface HTMLElementTagNameMap {

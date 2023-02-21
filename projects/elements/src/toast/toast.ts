@@ -60,8 +60,6 @@ export class Toast extends LitElement {
 
   @property({ type: String, reflect: true }) status: 'accent' | 'warning' | 'danger' | 'success' | 'muted';
 
-  static styles = useStyles([popoverBaseStyles, styles]);
-
   /** @private */
   readonly popoverType: PopoverType = 'manual';
 
@@ -73,6 +71,13 @@ export class Toast extends LitElement {
 
   /** @private */
   declare _internals: ElementInternals;
+
+  static styles = useStyles([popoverBaseStyles, styles]);
+
+  static readonly metadata = {
+    tag: 'nve-toast',
+    version: 'PACKAGE_VERSION'
+  };
 
   static elementDefinitions = {
     'nve-icon-button': IconButton
