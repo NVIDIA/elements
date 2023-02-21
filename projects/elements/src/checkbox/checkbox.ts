@@ -12,4 +12,9 @@ import styles from './checkbox.css?inline';
  */
 export class Checkbox extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
+
+  static readonly metadata = {
+    tag: 'nve-checkbox',
+    version: 'PACKAGE_VERSION'
+  };
 }

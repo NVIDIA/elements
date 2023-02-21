@@ -52,6 +52,7 @@ export default defineConfig((env) => {
         entry: {
           index: resolve('./src/index.ts'),                                    // imports all independent component entrypoints
           'internal/index': resolve('./src/internal/index.ts'),                // internal utilities for @elements/elements
+          'scoped/index': resolve('./src/scoped/index.ts'),                    // utilities for scoping elements
           'polyfills/index': resolve('./src/polyfills/index.ts'),                // optional polyfills for non-chromium envs
           'test/index': resolve('./src/test/index.ts'),                        // internal testing utilities for @elements/elements
           'css/module.typography': resolve('./src/css/module.typography.css'), // base typography styles

@@ -1,10 +1,10 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Dialog, DialogHeader, DialogFooter } from '@elements/elements/dialog';
 import '@elements/elements/icon-button/define.js';
 
-defineElement('nve-dialog', Dialog);
-defineElement('nve-dialog-header', DialogHeader);
-defineElement('nve-dialog-footer', DialogFooter);
+define(Dialog);
+define(DialogHeader);
+define(DialogFooter);
 
 declare global {
   interface HTMLElementTagNameMap {

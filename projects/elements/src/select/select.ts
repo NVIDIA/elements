@@ -17,6 +17,11 @@ import styles from './select.css?inline';
 export class Select extends Control {
   static styles = useStyles([...Control.styles, styles]);
 
+  static readonly metadata = {
+    tag: 'nve-select',
+    version: 'PACKAGE_VERSION'
+  };
+
   protected get suffixContent() {
     return (this.input?.multiple || this.input?.size) ? html`` : html`<nve-icon name="caret" direction="down"></nve-icon>`;
   }

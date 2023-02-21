@@ -10,8 +10,6 @@ import styles from './notification-group.css?inline';
  * @element nve-notification-group
  */
 export class NotificationGroup extends LitElement {
-  static styles = useStyles([styles]);
-
   @property({ type: String }) anchor: string | HTMLElement;
 
   @property({ type: String, reflect: true }) position;
@@ -21,6 +19,13 @@ export class NotificationGroup extends LitElement {
   @state() private minHeight = 0;
 
   protected typePopoverController = new TypePopoverController<NotificationGroup>(this);
+
+  static styles = useStyles([styles]);
+
+  static readonly metadata = {
+    tag: 'nve-notification-group',
+    version: 'PACKAGE_VERSION'
+  };
 
   render() {
     return html`
