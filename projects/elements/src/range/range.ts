@@ -11,6 +11,11 @@ import { PropertyValues } from 'lit';
 export class Range extends Control {
   static styles = useStyles([...Control.styles, styles]);
 
+  static readonly metadata = {
+    tag: 'mlv-range',
+    version: 'PACKAGE_VERSION'
+  };
+
   connectedCallback() {
     super.connectedCallback();
     appendRootNodeStyle(this, globalStyles);

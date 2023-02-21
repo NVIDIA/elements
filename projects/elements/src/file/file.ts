@@ -16,6 +16,11 @@ globalStyle.className = 'mlv-file';
 export class File extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
+  static readonly metadata = {
+    tag: 'mlv-file',
+    version: 'PACKAGE_VERSION'
+  };
+
   connectedCallback() {
     super.connectedCallback();
     this.appendChild(globalStyle);

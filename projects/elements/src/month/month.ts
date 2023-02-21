@@ -11,6 +11,11 @@ import styles from './month.css?inline';
 export class Month extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
+  static readonly metadata = {
+    tag: 'mlv-month',
+    version: 'PACKAGE_VERSION'
+  };
+
   protected get suffixContent() {
     return html`<mlv-icon-button icon-name="date" interaction="ghost" @click=${() => this.input.showPicker()}></mlv-icon-button>`;
   }

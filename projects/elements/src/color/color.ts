@@ -12,6 +12,11 @@ import styles from './color.css?inline';
 export class Color extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
+  static readonly metadata = {
+    tag: 'mlv-color',
+    version: 'PACKAGE_VERSION'
+  };
+
   protected get suffixContent() {
     return html`<mlv-icon-button icon-name="dropper" interaction="ghost" @click=${() =>  this.#select()}></mlv-icon-button>`;
   }

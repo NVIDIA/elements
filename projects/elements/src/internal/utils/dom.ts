@@ -110,13 +110,15 @@ export function scope(element: any, Mixin: any) {
   };
 }
 
-export function defineElement(tag: string, element: CustomElementConstructor) {
-  const version = 'PACKAGE_VERSION';
-  if (!customElements.get(tag)) {
-    customElements.define(tag, element);
-    GlobalStateService.dispatch('MLV_ELEMENT_DEFINE', { elementRegistry: { [tag]: version } });
-  } else if (GlobalStateService.state.elementRegistry[tag] !== version && location.hostname === 'localhost') {
-    console.warn(`Element ${tag} version ${version} already defined, please check for duplicate package versions.`);
+export function define(element: CustomElementConstructor & { metadata: { version: string; tag: string } }, config = { prefix: '' }) {
+  const { tag, version } = element.metadata;
+  const prefix = config.prefix ? `${config.prefix}-` : '';
+  const tagName = `${prefix}${tag}`;
+  if (!customElements.get(tagName)) {
+    customElements.define(tagName, element);
+    GlobalStateService.dispatch('MLV_ELEMENT_DEFINE', { elementRegistry: { [tagName]: version } });
+  } else if (GlobalStateService.state.elementRegistry[tagName] !== version && location.hostname === 'localhost') {
+    console.warn(`Element ${tagName} version ${version} already defined, please check for duplicate package versions.`);
   }
 }
 

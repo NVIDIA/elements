@@ -33,6 +33,11 @@ export class ControlMessage extends LitElement {
 
   static styles = useStyles([styles]);
 
+  static readonly metadata = {
+    tag: 'mlv-control-message',
+    version: 'PACKAGE_VERSION'
+  };
+
   get alertStatus(){
     if (this.status) {
       return alertStatus[this.status];

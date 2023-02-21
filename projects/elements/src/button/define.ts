@@ -1,7 +1,7 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Button } from '@elements/elements/button';
 
-defineElement('mlv-button', Button);
+define(Button);
 
 declare global {
   interface HTMLElementTagNameMap {

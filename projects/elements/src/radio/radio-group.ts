@@ -9,4 +9,9 @@ import styles from './radio-group.css?inline';
  */
 export class RadioGroup extends ControlGroup {
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-radio-group',
+    version: 'PACKAGE_VERSION'
+  };
 }

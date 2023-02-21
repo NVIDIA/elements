@@ -18,4 +18,9 @@ import styles from './textarea.css?inline';
  */
 export class Textarea extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-textarea',
+    version: 'PACKAGE_VERSION'
+  };
 }

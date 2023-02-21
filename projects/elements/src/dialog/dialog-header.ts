@@ -10,6 +10,11 @@ import styles from './dialog-header.css?inline';
 export class DialogHeader extends LitElement {
   static styles = useStyles([styles]);
 
+  static readonly metadata = {
+    tag: 'mlv-dialog-header',
+    version: 'PACKAGE_VERSION'
+  };
+
   render() {
     return html`
       <div internal-host>

@@ -1,9 +1,9 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Time } from '@elements/elements/time';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 
-defineElement('mlv-time', Time);
+define(Time);
 
 declare global {
   interface HTMLElementTagNameMap {

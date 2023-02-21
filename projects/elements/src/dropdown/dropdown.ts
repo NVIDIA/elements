@@ -66,8 +66,6 @@ export class Dropdown extends LitElement {
 
   @query('.arrow') popoverArrow: HTMLElement;
 
-  static styles = useStyles([popoverBaseStyles, styles]);
-
   /** @private */
   readonly popoverType: PopoverType = 'auto';
 
@@ -76,6 +74,13 @@ export class Dropdown extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+
+  static styles = useStyles([popoverBaseStyles, styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-dropdown',
+    version: 'PACKAGE_VERSION'
+  };
 
   static elementDefinitions = {
     'mlv-icon-button': IconButton

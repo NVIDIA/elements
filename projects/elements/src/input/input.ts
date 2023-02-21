@@ -18,4 +18,9 @@ export const inputStyles = styles;
  */
 export class Input extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-input',
+    version: 'PACKAGE_VERSION'
+  };
 }

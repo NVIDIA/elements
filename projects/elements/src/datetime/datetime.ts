@@ -11,6 +11,11 @@ import styles from './datetime.css?inline';
 export class Datetime extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
+  static readonly metadata = {
+    tag: 'mlv-datetime',
+    version: 'PACKAGE_VERSION'
+  };
+
   protected get suffixContent() {
     return html`<mlv-icon-button icon-name="date" interaction="ghost" @click=${() => this.input.showPicker()}></mlv-icon-button>`;
   }

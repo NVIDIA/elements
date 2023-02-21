@@ -1,8 +1,8 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Toast } from '@elements/elements/toast';
 import '@elements/elements/icon-button/define.js';
 
-defineElement('mlv-toast', Toast);
+define(Toast);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -74,14 +74,19 @@ export class Dialog extends LitElement {
 
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
-  static styles = useStyles([popoverBaseStyles, styles]);
-
   /** @private */
   get popoverType(): PopoverType {
     return this.modal ? 'auto' : 'manual';
   }
 
   #typePopoverController = new TypePopoverController<Dialog>(this);
+
+  static styles = useStyles([popoverBaseStyles, styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-dialog',
+    version: 'PACKAGE_VERSION'
+  };
 
   static elementDefinitions = {
     'mlv-icon-button': IconButton

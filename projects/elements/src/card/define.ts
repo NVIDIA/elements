@@ -1,10 +1,10 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Card, CardHeader, CardContent, CardFooter } from '@elements/elements/card';
 
-defineElement('mlv-card', Card);
-defineElement('mlv-card-header', CardHeader);
-defineElement('mlv-card-content', CardContent);
-defineElement('mlv-card-footer', CardFooter);
+define(Card);
+define(CardHeader);
+define(CardContent);
+define(CardFooter);
 
 declare global {
   interface HTMLElementTagNameMap {

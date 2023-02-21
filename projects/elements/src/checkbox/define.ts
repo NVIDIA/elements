@@ -1,9 +1,9 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Checkbox, CheckboxGroup } from '@elements/elements/checkbox';
 import '@elements/elements/forms/define.js';
 
-defineElement('mlv-checkbox', Checkbox);
-defineElement('mlv-checkbox-group', CheckboxGroup);
+define(Checkbox);
+define(CheckboxGroup);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,8 +1,8 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Textarea } from '@elements/elements/textarea';
 import '@elements/elements/forms/define.js';
 
-defineElement('mlv-textarea', Textarea);
+define(Textarea);
 
 declare global {
   interface HTMLElementTagNameMap {

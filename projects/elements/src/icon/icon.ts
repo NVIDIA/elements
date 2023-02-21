@@ -14,8 +14,6 @@ export type { IconNames } from './icons.js';
  * @cssprop --height
  */
 export class Icon extends LitElement {
-  static styles = useStyles([styles]);
-
   /** The color variant of the icon */
   @property({ type: String, reflect: true }) variant?: 'inherit';
 
@@ -32,6 +30,13 @@ export class Icon extends LitElement {
   @property({ type: String }) name: IconNames;
 
   @state() svg: string;
+
+  static styles = useStyles([styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-icon',
+    version: 'PACKAGE_VERSION'
+  };
 
   render() {
     return html`

@@ -58,12 +58,17 @@ export class Control extends LitElement {
 
   @state() private styleStates = { 'no-messages': !this.#visibleMessages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
 
-  static styles = useStyles([styles]);
-
   /** @private */
   declare _internals: ElementInternals;
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
+
+  static styles = useStyles([styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-control',
+    version: 'PACKAGE_VERSION'
+  };
 
   static elementDefinitions = {
     'mlv-icon': Icon,

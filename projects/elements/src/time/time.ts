@@ -11,6 +11,11 @@ import styles from './time.css?inline';
 export class Time extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
+  static readonly metadata = {
+    tag: 'mlv-time',
+    version: 'PACKAGE_VERSION'
+  };
+
   protected get suffixContent() {
     return html`<mlv-icon-button icon-name="schedule" interaction="ghost" @click=${() => this.input.showPicker()}></mlv-icon-button>`;
   }
