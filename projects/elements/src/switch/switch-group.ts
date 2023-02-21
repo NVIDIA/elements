@@ -5,4 +5,9 @@ import styles from './switch-group.css?inline';
 
 export class SwitchGroup extends ControlGroup {
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
+
+  static readonly metadata = {
+    tag: 'nve-switch-group',
+    version: 'PACKAGE_VERSION'
+  };
 }

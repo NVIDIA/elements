@@ -30,6 +30,11 @@ export class ControlGroup extends LitElement {
 
   static styles = useStyles([styles]);
 
+  static readonly metadata = {
+    tag: 'nve-control-group',
+    version: 'PACKAGE_VERSION'
+  };
+
   /** @private */
   declare _internals: ElementInternals;
 

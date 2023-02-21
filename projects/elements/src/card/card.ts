@@ -19,6 +19,11 @@ import cardFooterStyleSheet from './card-footer.css?inline';
 export class Card extends LitElement {
   static styles = useStyles([cardStyleSheet]);
 
+  static readonly metadata = {
+    tag: 'nve-card',
+    version: 'PACKAGE_VERSION'
+  };
+
   render() {
     return html`
       <div internal-host>
@@ -44,6 +49,11 @@ export class Card extends LitElement {
  */
  export class CardHeader extends LitElement {
   static styles = useStyles([cardHeaderStyleSheet]);
+
+  static readonly metadata = {
+    tag: 'nve-card-header',
+    version: 'PACKAGE_VERSION'
+  };
 
   render() {
     return html`
@@ -73,6 +83,11 @@ export class Card extends LitElement {
  export class CardContent extends LitElement {
   static styles = useStyles([cardContentStyleSheet]);
 
+  static readonly metadata = {
+    tag: 'nve-card-content',
+    version: 'PACKAGE_VERSION'
+  };
+
   render() {
     return html`
       <slot></slot>
@@ -87,6 +102,11 @@ export class Card extends LitElement {
  */
  export class CardFooter extends LitElement {
   static styles = useStyles([cardFooterStyleSheet]);
+
+  static readonly metadata = {
+    tag: 'nve-card-footer',
+    version: 'PACKAGE_VERSION'
+  };
 
   render() {
     return html`

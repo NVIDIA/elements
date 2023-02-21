@@ -1,9 +1,9 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Notification, NotificationGroup } from '@elements/elements/notification';
 import '@elements/elements/icon-button/define.js';
 
-defineElement('nve-notification', Notification);
-defineElement('nve-notification-group', NotificationGroup);
+define(Notification);
+define(NotificationGroup);
 
 declare global {
   interface HTMLElementTagNameMap {

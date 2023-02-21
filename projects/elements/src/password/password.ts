@@ -15,6 +15,11 @@ export class Password extends Control {
 
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
+  static readonly metadata = {
+    tag: 'nve-password',
+    version: 'PACKAGE_VERSION'
+  };
+
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;

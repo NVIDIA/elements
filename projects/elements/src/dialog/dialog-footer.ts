@@ -10,6 +10,11 @@ import styles from './dialog-footer.css?inline';
 export class DialogFooter extends LitElement {
   static styles = useStyles([styles]);
 
+  static readonly metadata = {
+    tag: 'nve-dialog-footer',
+    version: 'PACKAGE_VERSION'
+  };
+
   render() {
     return html`
       <div internal-host>

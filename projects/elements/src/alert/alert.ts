@@ -18,6 +18,16 @@ import styles from './alert.css?inline';
 export class Alert extends LitElement {
   static styles = useStyles([styles]);
 
+  static readonly metadata = {
+    tag: 'nve-alert',
+    version: 'PACKAGE_VERSION'
+  };
+
+  static elementDefinitions = {
+    'nve-icon': Icon,
+    'nve-icon-button': IconButton
+  };
+
   @property({ type: String, reflect: true }) status: Status | 'muted';
 
   @property({ type: Boolean }) closable = false;
@@ -30,11 +40,6 @@ export class Alert extends LitElement {
 
   /** @private */
   declare _internals: ElementInternals;
-
-  static elementDefinitions = {
-    'nve-icon': Icon,
-    'nve-icon-button': IconButton
-  }
 
   render() {
     return html`

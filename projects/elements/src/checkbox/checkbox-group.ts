@@ -9,4 +9,9 @@ import styles from './checkbox-group.css?inline';
  */
 export class CheckboxGroup extends ControlGroup {
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
+
+  static readonly metadata = {
+    tag: 'nve-checkbox-group',
+    version: 'PACKAGE_VERSION'
+  };
 }

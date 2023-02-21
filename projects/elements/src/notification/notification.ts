@@ -63,8 +63,6 @@ export class Notification extends LitElement {
 
   protected typePopoverController = new TypePopoverController<Notification>(this);
 
-  static styles = useStyles([popoverBaseStyles, styles]);
-
   /** @private */
   get popoverType(): PopoverType {
     return 'manual';
@@ -79,6 +77,13 @@ export class Notification extends LitElement {
     ${this.closable ? html`<nve-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" interaction="ghost" aria-label="close"></nve-icon-button>` : ''}
     <slot></slot>`;
   }
+
+  static styles = useStyles([popoverBaseStyles, styles]);
+
+  static readonly metadata = {
+    tag: 'nve-notification',
+    version: 'PACKAGE_VERSION'
+  };
 
   static elementDefinitions = {
     'nve-icon': Icon,
