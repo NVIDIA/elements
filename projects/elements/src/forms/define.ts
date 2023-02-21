@@ -1,11 +1,11 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Control, ControlGroup, ControlMessage } from '@elements/elements/forms';
 import '@elements/elements/alert/define.js';
 import '@elements/elements/icon/define.js';
 
-defineElement('nve-control', Control);
-defineElement('nve-control-group', ControlGroup);
-defineElement('nve-control-message', ControlMessage);
+define(Control);
+define(ControlGroup);
+define(ControlMessage);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,7 +1,7 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Tooltip } from '@elements/elements/tooltip';
 
-defineElement('nve-tooltip', Tooltip);
+define(Tooltip);
 
 declare global {
   interface HTMLElementTagNameMap {

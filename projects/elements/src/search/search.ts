@@ -11,6 +11,11 @@ import styles from './search.css?inline';
 export class Search extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
+  static readonly metadata = {
+    tag: 'nve-search',
+    version: 'PACKAGE_VERSION'
+  };
+
   protected get prefixContent() {
     return html`<nve-icon-button icon-name="search" interaction="ghost" readonly></nve-icon-button>`;
   }

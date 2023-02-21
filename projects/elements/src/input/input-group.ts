@@ -9,7 +9,12 @@ import styles from './input-group.css?inline';
  */
 export class InputGroup extends ControlGroup {
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
-  
+
+  static readonly metadata = {
+    tag: 'nve-input-group',
+    version: 'PACKAGE_VERSION'
+  };
+
   async connectedCallback() {
     super.connectedCallback();
     await this.updateComplete;

@@ -12,9 +12,14 @@ import styles from './icon-button.css?inline';
  * @cssprop --line-height
  */
 export class IconButton extends Button {
+  @property({ type: String, attribute: 'icon-name' }) iconName: IconNames;
+
   static styles = useStyles([...Button.styles, styles]);
 
-  @property({ type: String, attribute: 'icon-name' }) iconName: IconNames;
+  static readonly metadata = {
+    tag: 'nve-icon-button',
+    version: 'PACKAGE_VERSION'
+  };
 
   static elementDefinitions = {
     'nve-icon': Icon

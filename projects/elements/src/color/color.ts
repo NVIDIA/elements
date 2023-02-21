@@ -12,6 +12,11 @@ import styles from './color.css?inline';
 export class Color extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
+  static readonly metadata = {
+    tag: 'nve-color',
+    version: 'PACKAGE_VERSION'
+  };
+
   protected get suffixContent() {
     return html`<nve-icon-button icon-name="dropper" interaction="ghost" @click=${() =>  this.#select()}></nve-icon-button>`;
   }

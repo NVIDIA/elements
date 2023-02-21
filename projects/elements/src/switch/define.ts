@@ -1,9 +1,9 @@
-import { defineElement } from '@elements/elements/internal';
+import { define } from '@elements/elements/internal';
 import { Switch, SwitchGroup } from '@elements/elements/switch';
 import '@elements/elements/forms/define.js';
 
-defineElement('nve-switch', Switch);
-defineElement('nve-switch-group', SwitchGroup);
+define(Switch);
+define(SwitchGroup);
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -20,6 +20,11 @@ import styles from './button.css?inline';
 export class Button extends MlvBaseButton {
   static styles = useStyles([styles]);
 
+  static readonly metadata = {
+    tag: 'nve-button',
+    version: 'PACKAGE_VERSION'
+  };
+
   @property({ type: String, reflect: true }) interaction: Interaction | GhostInteraction | Inverse;
 
   @property({ type: String, reflect: true }) size: 'sm' | 'lg' | '';

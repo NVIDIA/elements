@@ -12,4 +12,9 @@ import styles from './radio.css?inline';
  */
 export class Radio extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
+
+  static readonly metadata = {
+    tag: 'nve-radio',
+    version: 'PACKAGE_VERSION'
+  };
 }
