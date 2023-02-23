@@ -40,13 +40,13 @@ To build the global bundles, import the components desired for your bundle in th
 pnpm run build
 ```
 
-Once build you will have the following in the `dist/assets`.
+Once build you will have the following in the `dist`.
 
 ```
-custom-elements.json
-index.css
-index.js
-inter.woff2
+elements-elements.[version].bundle.js
+elements-elements.[version].bundle.css
+elements-elements.[version].bundle.woff2
+elements-elements.[version].bundle.json
 ```
 
 These files can now be manually copied into your environment for use.
@@ -55,12 +55,12 @@ These files can now be manually copied into your environment for use.
 <!DOCTYPE html>
 <html lang="en" nve-theme="dark">
   <head>
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./elements-elements.0.0.0.bundle.css">
   </head>
   <body nve-text="body">
     <nve-alert>hello there</nve-alert>
 
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./elements-elements.0.0.0.bundle.js"></script>
   </body>
 </html>
 ```
