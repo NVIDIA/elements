@@ -22,8 +22,7 @@
     "lint:analyzer": "wireit",
     "demos": "wireit",
     "create-icon-spritesheet": "wireit",
-    "prepublishonly": "wireit",
-    "generate-manifest": "wireit"
+    "prepublishonly": "wireit"
   },
   "files": [
     "README.md",
@@ -224,8 +223,7 @@
         "test",
         "test:coverage",
         "storybook",
-        "demos",
-        "generate-manifest"
+        "demos"
       ]
     },
     "ci:nocache": {
@@ -380,15 +378,6 @@
     "storybook:watch": {
       "command": "start-storybook -p 7789",
       "service": true
-    },
-    "generate-manifest": {
-      "command": "cem analyze --litelement --globs ./src/**/*.ts --exclude src/internal/**/*.ts src/**/*.stories.ts",
-      "files": [
-        "src/**/*"
-      ],
-      "output": [
-        "custom-elements.json"
-      ]
     },
     "prepublishonly": {
       "dependencies": [
