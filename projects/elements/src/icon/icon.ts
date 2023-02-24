@@ -23,7 +23,10 @@ export class Icon extends LitElement {
   /** SVG size */
   @property({ type: String, reflect: true }) size: 'sm' | 'lg';
 
-  /** SVG rotation direction */
+  /**
+   * Sets the direction of the icon.
+   * Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)
+   */
   @property({ type: String, reflect: true }) direction: 'up' | 'down' | 'left' | 'right';
 
   /** The name of the icon SVG sprite */

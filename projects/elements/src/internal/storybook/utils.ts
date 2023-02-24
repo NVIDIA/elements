@@ -43,7 +43,7 @@ export const excludePrivateFields = (manifest: any) => {
           declarations: module.declarations?.map((declaration) => ({
             ...declaration,
             ...(declaration.members && {
-              members: declaration.members?.filter((members) => members.privacy !== 'private')
+              members: declaration.members?.filter((members) => members.privacy !== 'private' && !members.static && members.name !== 'i18n' && members.name !== '_internals')
             })
           }))
         })
