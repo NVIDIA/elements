@@ -37,21 +37,21 @@ svg {
 
 :host([direction='down'][name='arrow']),
 :host([direction='down'][name='caret']),
-:host([direction='down'][name='chevron']) {
+:host([direction='down'][name='chevron']),
+:host([direction='right'][name='expand-panel']),
+:host([direction='right'][name='collapse-panel']) {
   transform: rotate(180deg);
 }
 
 :host([direction='left'][name='arrow']),
 :host([direction='left'][name='caret']),
-:host([direction='left'][name='chevron']),
-:host([direction='left'][name='expand-panel']) {
+:host([direction='left'][name='chevron']) {
   transform: rotate(270deg);
 }
 
 :host([direction='right'][name='arrow']),
 :host([direction='right'][name='caret']),
-:host([direction='right'][name='chevron']),
-:host([direction='right'][name='expand-panel']) {
+:host([direction='right'][name='chevron']) {
   transform: rotate(90deg);
 }
 

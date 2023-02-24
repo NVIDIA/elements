@@ -14,6 +14,12 @@ import styles from './icon-button.css?inline';
 export class IconButton extends Button {
   @property({ type: String, attribute: 'icon-name' }) iconName: IconNames;
 
+  /**
+   * Sets the direction of the icon.
+   * Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)
+   */
+  @property({ type: String, reflect: true }) direction: 'up' | 'down' | 'left' | 'right';
+
   static styles = useStyles([...Button.styles, styles]);
 
   static readonly metadata = {
@@ -28,7 +34,7 @@ export class IconButton extends Button {
   render() {
     return html`
       <div internal-host interaction-state focus-within>
-        <mlv-icon .name=${this.iconName}></mlv-icon>
+        <mlv-icon name=${this.iconName} direction=${this.direction}></mlv-icon>
         <slot></slot>
       </div>
     `;

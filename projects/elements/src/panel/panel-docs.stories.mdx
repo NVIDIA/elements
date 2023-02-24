@@ -1,0 +1,97 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
+
+
+<Meta title="Elements/Panel/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Panels
+
+Panels provide a way to make detail content available alongside the primary page layout,
+in a way that is accessible and minimizable.
+
+Side panel is composed of a `<mlv-panel>` container element and several sub-components with default styling.
+The following sub-components can be used within `mlv-panel` to achieve standard panel layouts:
+
+- `<mlv-panel-content>`
+- `<mlv-panel-footer>`
+
+Panels will always be minimizable, either by closing or collapsing. The proper close/collapse icon button will display depending on the
+whether or not `closable` is set. By default `closable` is off and the panel's minimizing function is to collapse to just an icon button.
+
+Additionally, `<mlv-panel>` can be have it's `side` property set to `left` or `right` to get the proper collapse/expand icon and animation
+depending on which side of the page you are using the panel.
+
+An slot for `action-icon` is exposed allowing you to render an additional button in the header.
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/panel/define.js';
+```
+
+```html
+<mlv-panel collapsable>
+  <mlv-panel-content>
+    Panel Content
+  </mlv-panel-content>
+</mlv-panel>
+```
+
+<Canvas>
+  <Story id="elements-panel-examples--default" />
+</Canvas>
+
+<LinkedHeader>Left / Right Side Panels</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-panel-examples--left-side-panel" />
+  <Story id="elements-panel-examples--right-side-panel" />
+</Canvas>
+
+<LinkedHeader>Closable Panel with External Trigger</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-panel-examples--closable-panel" />
+</Canvas>
+
+<LinkedHeader>Collapsable Panel with External Trigger</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-panel-examples--panel-with-trigger" />
+</Canvas>
+
+<LinkedHeader>Panel with Subtitle and Action Icon</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-panel-examples--panel-with-subtitle-and-action-icon" />
+</Canvas>
+
+<LinkedHeader>Panel with Footer</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-panel-examples--panel-with-footer" />
+</Canvas>
+
+<LinkedHeader>Themes</LinkedHeader>
+
+<Canvas columns={3}>
+  <Story id="elements-panel-examples--light-theme" />
+  <Story id="elements-panel-examples--dark-theme" />
+  <Story id="elements-panel-examples--high-contrast-theme" />
+</Canvas>
+
+<Status status={{ apiDoc: true, unitTests: false, themeSupport: true, apiReview: false, vqaReview: false, a11y: false, performance: false, stable: false, pkg: false, figma: true, vetted: false, responsive: false }}></Status>
+
+# Element API
+
+<LinkedHeader>mlv-panel</LinkedHeader>
+<Props of="mlv-panel" />
+
+<LinkedHeader>mlv-panel-header</LinkedHeader>
+<Props of="mlv-panel-header" />
+
+<LinkedHeader>mlv-panel-content</LinkedHeader>
+<Props of="mlv-panel-content" />
+
+<LinkedHeader>mlv-panel-footer</LinkedHeader>
+<Props of="mlv-panel-footer" />
