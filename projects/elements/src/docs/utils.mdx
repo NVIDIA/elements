@@ -4,31 +4,35 @@ export const LinkedHeader = ({children: txt} ) => {
   );
 }
 
-export const Status = ({children: txt, status: { demo, apiDoc, unitTests, themeSupport, apiReview, vqaReview, a11y, performance, stable, pkg, figma }} ) => {
+export const Status = ({children: txt, status: { demo, apiDoc, robustDocs, unitTests, themeSupport, responsive, apiReview, vqaReview, a11y, performance, stable, pkg, figma, vetted }} ) => {
   const alpha = apiReview && vqaReview && a11y && performance && stable && pkg && figma;
-  const beta = apiReview && vqaReview && a11y && performance;
-  const stbl = stable && pkg && figma;
+  const beta = apiReview && vqaReview && robustDocs && unitTests && pkg && figma;
+  const stbl = stable && responsive && a11y && performance && vetted;
   return (
     <div class="status-summary" style={{ margin: '0 0 80px 0' }}>
-      <h2>Stability</h2>
+      <h2 id="stability">Stability</h2>
       <p>All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
       <h3><nve-badge status={(!beta && !stbl) || demo ? 'warning' : 'pending'}>pre-release <nve-icon name="warning"></nve-icon></nve-badge></h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <nve-alert status={unitTests ? 'finished' : 'pending'}>Robust unit test coverage</nve-alert>
+        <nve-alert status={'finished'}>Preview viewable in Storybook</nve-alert>
+        <nve-alert status={apiDoc ? 'finished' : 'pending'}>Basic API documentation and demos</nve-alert>
         <nve-alert status={themeSupport ? 'finished' : 'pending'}>Theme support</nve-alert>
-        <nve-alert status={themeSupport ? 'finished' : 'pending'}>Adapt to different screen/container sizes</nve-alert>
       </div>
       <h3><nve-badge status={(beta && !stbl) || demo ? 'running' : 'pending'}>beta <nve-icon name="schedule"></nve-icon></nve-badge></h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <nve-alert status={a11y ? 'finished' : 'pending'}>No outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></nve-alert>
-        <nve-alert status={performance ? 'finished' : 'pending'}>No outstanding performance issues</nve-alert>
-        <nve-alert status={apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/story/about-api-design-getting-started--page">Public API Review</a></nve-alert>
-        <nve-alert status={vqaReview ? 'finished' : 'pending'}>Passed VQA Review</nve-alert>
+        <nve-alert status={robustDocs ? 'finished' : 'pending'}>Robust written docs and interactive demos</nve-alert>
+        <nve-alert status={unitTests ? 'finished' : 'pending'}>Robust unit test coverage</nve-alert>
+        <nve-alert status={apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/story/about-api-design-getting-started--page">Internal API Review</a></nve-alert>
+        <nve-alert status={vqaReview ? 'finished' : 'pending'}>Passed Designer VQA Review</nve-alert>
+        <nve-alert status={pkg ? 'finished' : 'pending'}>Published in <a href="http://nv/elements">library package</a></nve-alert>
+        <nve-alert status={figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
       </div>
       <h3><nve-badge status={stbl || demo ? 'finished' : 'pending'}>stable <nve-icon name="success-badge"></nve-icon></nve-badge></h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <nve-alert status={pkg ? 'finished' : 'pending'}>Published in <a href="http://nv/elements">library package</a></nve-alert>
-        <nve-alert status={figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
+        <nve-alert status={responsive ? 'finished' : 'pending'}>Adapts to different screen/container sizes</nve-alert>
+        <nve-alert status={a11y ? 'finished' : 'pending'}>No outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></nve-alert>
+        <nve-alert status={performance ? 'finished' : 'pending'}>No outstanding performance issues</nve-alert>
+        <nve-alert status={vetted ? 'finished' : 'pending'}>Incorporates dev feedback from initial usage</nve-alert>
         <nve-alert status={stable ? 'finished' : 'pending'}>No breaking API changes for at least 90 days</nve-alert>
       </div>
     </div>
