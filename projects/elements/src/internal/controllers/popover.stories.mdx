@@ -39,7 +39,7 @@ import '@elements/elements/notification/define.js';
 
 <LinkedHeader>Usage</LinkedHeader>
 
-Popover types are visible by default and can be controlled via the `hidden` attribute.
+Popover types are visible by default and can be controlled via the `hidden` attribute or by appending and removing from the DOM.
 
 ```html
 <nve-tooltip anchor="action-btn">hello there</nve-tooltip>
@@ -50,6 +50,11 @@ Popover types are visible by default and can be controlled via the `hidden` attr
 
 
 <LinkedHeader>Events</LinkedHeader>
+
+All popovers are stateless and do not auto close. Popovers provide a `close` event to notify when
+a user has interacted with the popover in a way that should dismiss the popover. Events do not mutate or alter
+the visiblity of the element. This ensures maximum flexiblity, allowing events to be used for running
+application specific logic before showing or hidding the element.
 
 Some popover types such as tooltip have complex interactions such as showing when hovered or focused.
 To simplify these interactions all popover type elements provide a `open` and `close` event to notify
