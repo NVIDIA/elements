@@ -65,23 +65,23 @@ can be used in any framework that supports Web Components.
 
 <LinkedHeader>Element Scoping without Shadow DOM</LinkedHeader>
 
-If you are building an extention that cannot leverage Shadow DOM then you can use a prefixing strategy to minimize global tag collisions.
+<mlv-alert status="warning">The tag alias strategy is experimental and only for rare use-cases when Shadow DOM cannot be used and the UI is likely global impacting other applications.</mlv-alert>
 
 ```typescript
 import { IconButton } from '@elements/elements/icon-button';
 import { defineScopedElement } from '@elements/elements/scoped';
 import '@webcomponents/scoped-custom-element-registry';
 
-defineScopedElement('myplugin', IconButton);
+defineScopedElement('plugin', IconButton);
 ```
 
 The `defineScopedElement` utility function will ensure that the `IconButton` uses a scoped registry, encapsulating its internal dependency on `mlv-icon`.
-It will also register `IconButton` with a new global prefix of `myplugin` rather than the default global `mlv-icon-button`.
+It will also register `IconButton` with a new global suffix of `plugin` rather than the default global `mlv-icon-button`.
 
 ```html
-<myplugin-mlv-icon-button icon-name="cancel"></myplugin-mlv-icon-button>
+<mlv-icon-button-plugin icon-name="cancel"></mlv-icon-button-plugin>
 ```
 
 <Story id="internal-integration--scoped-element" />
 
-While this still creates a global registration for `myplugin-mlv-icon-button` its name can be specific to the app, plugin or integration and reduce the chance of a global name collision.
+While this still creates a global registration for `mlv-icon-button-plugin` its name can be specific to the app, plugin or integration and reduce the chance of a global name collision.

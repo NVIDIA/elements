@@ -13,7 +13,7 @@ import '@elements/elements/input/define.js';
 import '@elements/elements/checkbox/define.js';
 import '@elements/elements/button/define.js';
 
-defineScopedElement('myplugin', IconButton);
+defineScopedElement('plugin', IconButton);
 
 export default {
   title: 'Internal/Integration'
@@ -96,7 +96,7 @@ export const LitForms = {
 }
 
 export const ScopedElement = {
-  render: () => html`<myplugin-mlv-icon-button icon-name="cancel"></myplugin-mlv-icon-button>`
+  render: () => html`<mlv-icon-button-plugin icon-name="cancel"></mlv-icon-button-plugin>`
 }
 
 // used to trigger global option updates (theming) when all stories are isolated in iframes
