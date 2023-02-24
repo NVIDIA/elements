@@ -1,6 +1,6 @@
 {
   "name": "@elements/elements",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "type": "module",
   "customElements": "custom-elements.json",
   "scripts": {
@@ -334,10 +334,7 @@
         "src/**/*.js",
         "eslint.config.js"
       ],
-      "output": [],
-      "dependencies": [
-        "generate-manifest"
-      ]
+      "output": []
     },
     "lint:repo": {
       "command": "node ../../../tools/lint-changes/lint.changes.js",
