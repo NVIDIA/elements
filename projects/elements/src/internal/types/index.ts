@@ -13,13 +13,13 @@ export type Position = 'center' | `block-${BlockPosition}` | `inline-${InlinePos
 
 export type Status = 'accent' | 'warning' | 'success' | 'danger';
 
-export const statusIcons = {
-  default: 'information',
-  accent: 'information',
-  warning: 'warning',
-  success: 'success-badge',
-  danger: 'important-badge'
-};
+export enum statusIcons {
+  undefined = 'information',
+  accent = 'information',
+  warning = 'warning',
+  success = 'success-badge',
+  danger = 'important-badge'
+}
 
 declare global {
   interface Window {

@@ -79,9 +79,9 @@ export const InteractiveStack = {
     notification.closable = true;
     notification.status = ['warning', 'danger', 'success', 'accent', undefined][Math.floor(Math.random() * 5)];
     notification.innerHTML = '<h3 nve-text="label">' + (notification.status ?? 'default') + '</h3><p nve-text="body">some text content in a notification</p>';
+    notification.closeTimeout = 2000 * (document.querySelectorAll('nve-notification').length + 1);
     notification.addEventListener('close', () => notification.remove(), { once: true });
     document.querySelector('nve-notification-group').prepend(notification);
-    setTimeout(() => notification.remove(), 2000 * (document.querySelectorAll('nve-notification').length));
   });
 </script>
 `
