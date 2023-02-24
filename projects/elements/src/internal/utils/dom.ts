@@ -110,10 +110,10 @@ export function scope(element: any, Mixin: any) {
   };
 }
 
-export function define(element: CustomElementConstructor & { metadata: { version: string; tag: string } }, config = { prefix: '' }) {
+export function define(element: CustomElementConstructor & { metadata: { version: string; tag: string } }, config = { suffix: '' }) {
   const { tag, version } = element.metadata;
-  const prefix = config.prefix ? `${config.prefix}-` : '';
-  const tagName = `${prefix}${tag}`;
+  const suffix = config.suffix ? `-${config.suffix}` : '';
+  const tagName = `${tag}${suffix}`;
   if (!customElements.get(tagName)) {
     customElements.define(tagName, element);
     GlobalStateService.dispatch('MLV_ELEMENT_DEFINE', { elementRegistry: { [tagName]: version } });
