@@ -17,7 +17,7 @@
     }
   },
   "dependencies": {
-    "@elements/elements": "0.8.0"
+    "@elements/elements": "workspace:*"
   },
   "devDependencies": {
     "typescript": "4.9.4",
