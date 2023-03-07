@@ -9,9 +9,10 @@ export interface Popover extends ReactiveElement {
   trigger?: HTMLElement | string;
   position?: PopoverPosition;
   alignment?: PopoverAlign;
+  closeTimeout?: number;
   popoverArrow?: HTMLElement;
   popoverType?: PopoverType;
-  closeTimeout?: number;
+  popoverDismissible?: boolean;
 }
 
 /**
@@ -47,6 +48,11 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     }
   }
 
+  get #dismissible() {
+    // by default all popover types are dismissible unless explicitly overridden such as non-closable dialogs
+    return this.host.popoverDismissible !== false;
+  }
+
   #cleanup: ({ disconnect: () => void })[];
 
   constructor(private host: T) {
@@ -56,6 +62,11 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   async hostConnected() {
     await this.host.updateComplete;
     this.#dialog?.addEventListener('close', () => this.close());
+    this.#dialog?.addEventListener('cancel', async (event) => {
+      event.preventDefault();
+      this.close();
+    });
+
     this.#cleanup = [
       { disconnect: popoverRenderUpdate(this.#config, () => this.#calculatePosition()) },
       getAttributeChanges(this.host, 'hidden', () => this.#update())
@@ -126,7 +137,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   }
 
   close() {
-    if (!this.host.hidden) {
+    if (!this.host.hidden && this.#dismissible) {
       this.host.dispatchEvent(new CustomEvent('close'));
     }
 

@@ -97,6 +97,26 @@ export const Large = {
   `
 };
 
+export const NonClosable = {
+  render: () => html`
+<mlv-button id="open-btn">open</mlv-button>
+<mlv-dialog hidden modal>
+  <h3 mlv-text="heading">Non-Closable Dialog</h3>
+  <p mlv-text="body">escape key and light dismiss will not work here</p>
+  <mlv-dialog-footer>
+    <mlv-button id="cancel-btn">cancel</mlv-button>
+  </mlv-dialog-footer>
+</mlv-dialog>
+<script>
+  const dialog = document.querySelector('mlv-dialog');
+  const open = document.querySelector('#open-btn');
+  const cancel = document.querySelector('#cancel-btn');
+  open.addEventListener('click', () => dialog.hidden = false);
+  cancel.addEventListener('click', () => dialog.hidden = true);
+</script>
+  `
+};
+
 export const Alignment = {
   inline: false,
   render: () => html`

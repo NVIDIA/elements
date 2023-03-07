@@ -79,6 +79,11 @@ export class Dialog extends LitElement {
     return this.modal ? 'auto' : 'manual';
   }
 
+  /** @private */
+  get popoverDismissible() {
+    return !!this.closable;
+  }
+
   #typePopoverController = new TypePopoverController<Dialog>(this);
 
   static styles = useStyles([popoverBaseStyles, styles]);
