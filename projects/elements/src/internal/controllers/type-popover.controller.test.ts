@@ -23,6 +23,8 @@ class TypePopoverControllerTestElement extends LitElement {
     return this.shadowRoot.querySelector<HTMLElement>('.arrow');
   }
 
+  popoverDismissible = true;
+
   typePopoverController = new TypePopoverController<TypePopoverControllerTestElement>(this);
 
   static styles = [css`
@@ -152,5 +154,18 @@ describe('type-popover.controller', () => {
     const event = untilEvent(element, 'open');
     emulateClick(button);
     expect((await event).target).toBe(element);
+  });
+
+  it('should not trigger a close event when element is not dismissable', async () => {
+    element.hidden = false;
+    element.popoverDismissible = false;
+    await elementIsStable(element);
+
+    let events = 0;
+    untilEvent(element, 'close').then(() => events++);
+
+    emulateClick(document.body);
+    await new Promise(r => setTimeout(() => r(null), 0));
+    expect(events).toBe(0);
   });
 });
