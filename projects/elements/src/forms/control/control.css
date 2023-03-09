@@ -1,11 +1,12 @@
 :host {
   --cursor: pointer;
   --accent-color: var(--nve-sys-accent-secondary-background);
-  --color: var(--nve-sys-text-default-color);
+  --color: var(--nve-sys-text-color);
   --label-color: var(--nve-sys-text-muted-color);
   --control-width: 200px;
   --control-height: auto;
   --_label-width: var(--label-width, 180px);
+  --nve-sys-interaction-state-base: var(--background);
 }
 
 ::slotted(*) {

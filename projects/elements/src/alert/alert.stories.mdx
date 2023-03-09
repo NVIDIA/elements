@@ -1,5 +1,5 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../docs/utils.mdx';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 
 <Meta title="Elements/Alert/Documentation" parameters={{ badges: ['beta'] }} />
@@ -22,20 +22,33 @@ import '@elements/elements/alert/define.js';
   <Story id="elements-alert-examples--default" />
 </Canvas>
 
+<LinkedHeader>Support</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-alert-examples--support-status" />
+</Canvas>
+
 <LinkedHeader>Status</LinkedHeader>
 
 <Canvas>
   <Story id="elements-alert-examples--status" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+<LinkedHeader>Support Themes</LinkedHeader>
 
 <Canvas columns={2}>
-  <Story id="elements-alert-examples--light-theme" />
-  <Story id="elements-alert-examples--dark-theme" />
+  <Story id="elements-alert-examples--support-status-light-theme" />
+  <Story id="elements-alert-examples--support-status-dark-theme" />
 </Canvas>
 
-# Element API
+<LinkedHeader>Status Themes</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-alert-examples--status-light-theme" />
+  <Story id="elements-alert-examples--status-dark-theme" />
+</Canvas>
+
+<Status status={{ apiDoc: true, unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, a11y: true, performance: true, stable: false, pkg: true, figma: true }}></Status>
 
 <LinkedHeader>nve-alert</LinkedHeader>
 <Props of="nve-alert" />

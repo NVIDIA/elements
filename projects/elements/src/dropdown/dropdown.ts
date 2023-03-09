@@ -19,7 +19,6 @@ import styles from './dropdown.css?inline';
  * @cssprop --color
  * @cssprop --padding
  * @cssprop --box-shadow
- * @cssprop --nve-sys-interaction-default-background
  * @cssprop --nve-sys-layer-popover-arrow-padding
  * @cssprop --nve-sys-layer-popover-arrow-offset
  * @cssprop --nve-sys-layer-popover-offset

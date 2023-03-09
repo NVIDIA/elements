@@ -40,7 +40,7 @@
 }
 
 :host(:--disabled) {
-  --background: var(--nve-sys-interaction-default-disabled-background);
+  --background: var(--nve-sys-interaction-disabled-background);
 }
 
 :host(:not(:--disabled):hover) [input] {

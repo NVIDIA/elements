@@ -1,23 +1,28 @@
 [interaction-state] {
-  background-image: linear-gradient(hsla(0, 0%, var(--nve-sys-interaction-state-lightness), var(--nve-sys-interaction-state-alpha)) 0 0) !important;
+  background-image: linear-gradient(color-mix(in oklab, var(--nve-sys-interaction-state-base) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)) 0 0) !important;
 }
 
 :host(:hover) [interaction-state],
 :host(:--hover) [interaction-state] {
-  --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-hover-alpha);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
 :host(:active) [interaction-state],
 :host(:--active) [interaction-state] {
-  --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-active-alpha);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-active);
 }
 
 :host([selected]) [interaction-state],
 :host(:--selected) [interaction-state] {
-  --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-selected-alpha);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
 }
 
 :host([disabled]) [interaction-state],
 :host(:--disabled) [interaction-state] {
-  --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-disabled-alpha) !important;
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-disabled);
+}
+
+:host([readonly]) [interaction-state],
+:host(:--readonly) [interaction-state] {
+  --nve-sys-interaction-state-ratio: 0;
 }

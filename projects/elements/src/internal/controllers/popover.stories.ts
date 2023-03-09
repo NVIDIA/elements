@@ -190,9 +190,10 @@ export const FeedbackPattern = {
   }
 
   .rating-radio input::after {
-    background: var(--nve-sys-interaction-default-background);
-    background-image: linear-gradient(hsla(0, 0%, var(--nve-sys-interaction-state-lightness), var(--nve-sys-interaction-state-alpha)) 0 0);
-    color: var(--nve-sys-interaction-default-color);
+    --background: var(--nve-sys-interaction-background);
+    background-image: linear-gradient(color-mix(in oklab, var(--background) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)) 0 0) !important;
+    background: var(--background);
+    color: var(--nve-sys-interaction-color);
     border-radius: var(--nve-ref-border-radius-md);
     height: var(--nve-ref-size-1000);
     content: attr(value) ' ';
@@ -203,7 +204,7 @@ export const FeedbackPattern = {
   }
 
   .rating-radio input:checked::after {
-    background: var(--nve-sys-accent-secondary-background);
+    --background: var(--nve-sys-accent-secondary-background);
     color: var(--nve-sys-text-white-color);
   }
 
@@ -213,7 +214,7 @@ export const FeedbackPattern = {
   }
 
   .rating-radio input:hover {
-    --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-hover-alpha);
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
   }
 
   #feedback-section {

@@ -8,7 +8,7 @@ export default {
 const layoutDemoStyles = html`
   <style>
     section {
-      background-color: var(--nve-sys-interaction-default-background);
+      background-color: var(--nve-sys-interaction-background);
       border: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-emphasis);
       gap: var(--nve-ref-space-sm);
       margin-block: var(--nve-ref-space-sm) var(--nve-ref-space-xl) !important;

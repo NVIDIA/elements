@@ -8,7 +8,7 @@ nve-range input[type='range']::-webkit-slider-thumb {
 }
 
 nve-range input[type=range]::-webkit-slider-runnable-track {
-  background: var(--nve-sys-interaction-default-background);
+  background: var(--nve-sys-interaction-background);
   height: var(--track-height);
   border-radius: var(--nve-ref-border-radius-lg);
   align-self: center;

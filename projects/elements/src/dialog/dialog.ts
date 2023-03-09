@@ -19,7 +19,6 @@ import { IconButton } from '../icon-button';
  * @cssprop --gap
  * @cssprop --max-width
  * @cssprop --min-height
- * @cssprop --nve-sys-interaction-default-background
  * @cssprop --nve-sys-layer-popover-arrow-padding
  * @cssprop --nve-sys-layer-popover-arrow-offset
  * @cssprop --nve-sys-layer-popover-offset

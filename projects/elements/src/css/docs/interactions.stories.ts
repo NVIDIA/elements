@@ -12,25 +12,34 @@ const menuDemoStyles = html`
     display: flex;
     gap: 12px;
     margin: 24px 0;
-    padding: 12px;
+  }
+  
+  [nve-theme*=root].interaction-demo {
+    padding: 6px !important;
   }
 
   .nve-dropdown {
-    display: block;
-    overflow: hidden;
-    background: var(--nve-sys-layer-overlay-background);
+    --background: var(--nve-sys-layer-overlay-background);
+    --nve-sys-interaction-background: var(--nve-sys-layer-overlay-background);
+    background: var(--background);
     box-shadow: var(--nve-ref-shadow-200);
     border-radius: var(--nve-ref-border-radius-md);
+    padding: var(--nve-ref-size-200);
+    gap: var(--nve-ref-size-200);
     width: 200px;
+    display: flex;
+    flex-direction: column;
   }
   
   .nve-drawer {
-    display: block;
-    overflow: hidden;
-    min-height: 320px;
     background: var(--nve-sys-layer-container-background);
     box-shadow: var(--nve-ref-shadow-200);
     border-radius: var(--nve-ref-border-radius-md);
+    padding: var(--nve-ref-size-200);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 320px;
     width: 200px;
   }
 
@@ -48,15 +57,35 @@ const menuDemoStyles = html`
     display: block;
     border: 0;
     cursor: pointer;
-    background: transparent;
     text-align: left;
-    padding: var(--nve-ref-size-400) var(--nve-ref-size-600);
-    color: var(--nve-sys-interaction-default-color);
+    padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+    color: var(--nve-sys-interaction-color);
     font-size: var(--nve-ref-font-size-300);
+    border-radius: var(--nve-ref-border-radius-xs);
+    background-image: linear-gradient(color-mix(in oklab, var(--nve-sys-interaction-state-base) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)) 0 0) !important;
+  }
+
+  .nve-menu-item:hover,
+  .nve-menu-item[hover] {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+  }
+
+  .nve-menu-item:active,
+  .nve-menu-item[active] {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-active);
+  }
+
+  .nve-menu-item[selected] {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
   }
 
   .nve-menu-item[disabled] {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-disabled);
     cursor: not-allowed;
+  }
+
+  .nve-menu-item[readonly] {
+    --nve-sys-interaction-state-ratio: 0;
   }
 
   .nve-menu-item:focus,
@@ -64,28 +93,6 @@ const menuDemoStyles = html`
     outline-offset: -3px;
     outline: 5px auto -webkit-focus-ring-color;
     outline: Highlight solid 2px;
-  }
-
-  .nve-menu-item {
-    background-image: linear-gradient(hsla(0, 0%, var(--nve-sys-interaction-state-lightness), var(--nve-sys-interaction-state-alpha)) 0 0) !important;
-  }
-
-  .nve-menu-item:hover,
-  .nve-menu-item[hover] {
-    --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-hover-alpha);
-  }
-
-  .nve-menu-item[disabled] {
-    --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-disabled-alpha);
-  }
-
-  .nve-menu-item:active,
-  .nve-menu-item[active] {
-    --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-active-alpha);
-  }
-
-  .nve-menu-item[selected] {
-    --nve-sys-interaction-state-alpha: var(--nve-sys-interaction-state-selected-alpha);
   }
 </style>
 `;
@@ -163,11 +170,10 @@ export const Menu = {
 export const ContainerMenu = {
   render: () => html`
     <div nve-layout="grid span-items:6 gap:md">
-      <div nve-theme="root light">
+      <div nve-theme="root light" nve-layout="pad:md align:stretch">
         <nve-card>
           <nve-card-content nve-layout="grid gap:md">
-            <div nve-layout="span:4 column">
-              <div class="nve-menu-item">item</div>
+            <div nve-layout="span:5 column gap:xs">
               <div class="nve-menu-item">default</div>
               <div class="nve-menu-item" hover>hover</div>
               <div class="nve-menu-item" active>active</div>
@@ -175,15 +181,14 @@ export const ContainerMenu = {
               <div class="nve-menu-item" disabled>disabled</div>
               <div class="nve-menu-item" focused>focused</div>
             </div>
-            <div nve-layout="span:8">container</div>
+            <div nve-layout="span:7">container</div>
           </nve-card-content>
         </nve-card>
       </div>
-      <div nve-theme="root dark">
+      <div nve-theme="root dark" nve-layout="pad:md align:stretch">
         <nve-card>
           <nve-card-content nve-layout="grid gap:md">
-            <div nve-layout="span:4 column">
-              <div class="nve-menu-item">item</div>
+            <div nve-layout="span:5 column gap:xs">
               <div class="nve-menu-item">default</div>
               <div class="nve-menu-item" hover>hover</div>
               <div class="nve-menu-item" active>active</div>
@@ -191,7 +196,7 @@ export const ContainerMenu = {
               <div class="nve-menu-item" disabled>disabled</div>
               <div class="nve-menu-item" focused>focused</div>
             </div>
-            <div nve-layout="span:8">container</div>
+            <div nve-layout="span:7">container</div>
           </nve-card-content>
         </nve-card>
       </div>
@@ -407,9 +412,9 @@ export const Tabs = {
         background: transparent;
         padding: 0 var(--nve-ref-size-300);
         height: var(--nve-ref-size-800);
-        color: var(--nve-sys-interaction-default-color);
+        color: var(--nve-sys-interaction-color);
         font-size: var(--nve-ref-font-size-300);
-        border-radius: var(--nve-ref-border-radius-lg);
+        border-bottom: var(--nve-ref-border-width-lg) solid transparent;
       }
 
       .nve-tabs > p {
@@ -417,28 +422,13 @@ export const Tabs = {
         margin: 0;
       }
 
-      .nve-tab:hover,
-      .nve-tab[hover] {
-        background: var(--nve-sys-interaction-ghost-hover-background);
-        color: var(--nve-sys-interaction-ghost-hover-color);
-        text-decoration: underline;
-      }
-
-      .nve-tab:active,
-      .nve-tab[active] {
-        background: var(--nve-sys-interaction-ghost-active-background);
-        color: var(--nve-sys-interaction-ghost-active-color);
-      }
-
-      .nve-tab[selected] {
-        background: var(--nve-sys-interaction-selected-background);
+      .nve-tab:is([selected], [hover], :hover) {
+        border-bottom: var(--nve-ref-border-width-lg) solid var(--nve-sys-accent-secondary-background);
       }
 
       .nve-tab[disabled] {
-        background: var(--nve-sys-interaction-ghost-disabled-background);
-        color: var(--nve-sys-interaction-ghost-disabled-color);
         cursor: not-allowed;
-        text-decoration: none;
+        border-bottom: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-muted);
       }
 
       .nve-tab:focus,
