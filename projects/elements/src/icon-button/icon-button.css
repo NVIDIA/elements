@@ -25,7 +25,7 @@
 }
 
 :host([interaction*='ghost']) {
-  --color: var(--nve-sys-status-neutral-background);
+  --color: var(--nve-sys-support-emphasis-color);
   --padding: 0;
 }
 

@@ -8,10 +8,10 @@ nve-alert {
 }
 
 :host([status='success']) {
-  --_alert-color: var(--nve-sys-status-success-background);
+  --_alert-color: var(--nve-sys-support-success-emphasis-color);
 }
 
 :host([status='error']),
 :host([error]) {
-  --_alert-color: var(--nve-sys-status-danger-background);
+  --_alert-color: var(--nve-sys-support-danger-emphasis-color);
 }

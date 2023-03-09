@@ -163,6 +163,29 @@ export const CardWithHeaderAndFooter = {
   }
 };
 
+export const DescriptionList = {
+  render: () => html`
+<div nve-theme="root">
+  <nve-card style="width: 650px">
+    <nve-card-header>
+      <h2 slot="title">Nautical Terms</h2>
+    </nve-card-header>
+    <nve-card-content>
+      <dl nve-layout="grid gap:lg">
+        <dt nve-layout="span:4" nve-text="muted">Knot</dt>
+        <dd nve-layout="span:8">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
+
+        <dt nve-layout="span:4" nve-text="muted">Port</dt>
+        <dd nve-layout="span:8">Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+
+        <dt nve-layout="span:4" nve-text="muted">Starboard</dt>
+        <dd nve-layout="span:8">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+      </dl>
+    </nve-card-content>
+  </nve-card>
+</div>
+  `
+}
 
 export const LightTheme = {
   render: () => html`
