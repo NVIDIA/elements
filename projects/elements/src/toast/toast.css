@@ -29,29 +29,22 @@ dialog:has(mlv-icon-button) {
 }
 
 :host([status='accent']) {
-  --background: var(--mlv-sys-status-accent-background);
-  --color: var(--mlv-sys-status-accent-color);
+  --background: var(--mlv-sys-support-accent-color);
 }
 
 :host([status='success']) {
-  --background: var(--mlv-sys-status-success-background);
-  --color: var(--mlv-sys-status-success-color);
+  --background: var(--mlv-sys-support-success-color);
+  --color: var(--mlv-sys-text-white-color);
 }
 
 :host([status='warning']) {
-  --background: var(--mlv-sys-status-warning-background);
-  --color: var(--mlv-sys-status-warning-color);
+  --background: var(--mlv-sys-support-warning-color);
+  --color: var(--mlv-sys-text-black-color);
 }
 
 :host([status='danger']) {
-  --background: var(--mlv-sys-status-danger-background);
-  --color: var(--mlv-sys-status-danger-color);
-}
-
-mlv-alert-group:not([status]),
-mlv-alert-group[status='info'] {
-  --background: var(--mlv-sys-layer-popover-background);
-  --color: var(--mlv-sys-layer-popover-color);
+  --background: var(--mlv-sys-support-danger-color);
+  --color: var(--mlv-sys-text-white-color);
 }
 
 mlv-icon {

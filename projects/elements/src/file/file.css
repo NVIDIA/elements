@@ -1,5 +1,5 @@
 :host {
-  --background: var(--mlv-sys-interaction-default-background);
+  --background: var(--mlv-sys-interaction-background);
   --padding: 0 var(--mlv-ref-size-300);
   --border-radius: var(--mlv-ref-border-radius-lg);
   --border: 0;

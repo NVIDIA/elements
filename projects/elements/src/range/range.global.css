@@ -8,7 +8,7 @@ mlv-range input[type='range']::-webkit-slider-thumb {
 }
 
 mlv-range input[type=range]::-webkit-slider-runnable-track {
-  background: var(--mlv-sys-interaction-default-background);
+  background: var(--mlv-sys-interaction-background);
   height: var(--track-height);
   border-radius: var(--mlv-ref-border-radius-lg);
   align-self: center;

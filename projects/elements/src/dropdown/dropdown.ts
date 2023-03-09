@@ -19,7 +19,6 @@ import styles from './dropdown.css?inline';
  * @cssprop --color
  * @cssprop --padding
  * @cssprop --box-shadow
- * @cssprop --mlv-sys-interaction-default-background
  * @cssprop --mlv-sys-layer-popover-arrow-padding
  * @cssprop --mlv-sys-layer-popover-arrow-offset
  * @cssprop --mlv-sys-layer-popover-offset

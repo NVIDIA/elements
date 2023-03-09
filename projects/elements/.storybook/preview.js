@@ -4,6 +4,7 @@ import { excludePrivateFields } from '@elements/elements/internal';
 import customElements from '@elements/elements/custom-elements.json';
 import styles from '@elements/elements/index.css';
 import font from '@elements/elements/inter.css';
+import { MLV_VERSION } from '@elements/elements';
 import '@elements/elements/polyfills';
 import '@webcomponents/scoped-custom-element-registry';
 import prettier from 'prettier/esm/standalone.mjs';
@@ -12,6 +13,7 @@ import parserHTML from 'prettier/esm/parser-html.mjs';
 setCustomElementsManifest(excludePrivateFields(customElements));
 
 export const parameters = {
+  badges: ['stable'],
   backgrounds: {
     disable: true,
     grid: {
@@ -21,12 +23,13 @@ export const parameters = {
   viewMode: 'story',
   docs: {
     theme: themes.dark,
-    transformSource: (src) => {
+    transformSource: (src, context) => {
+      const isTokenTable = context.id.includes('foundations-tokens-examples--');
       // remove mlv-theme="root" from demo source snippets when not used for theming
       const hasRoot = i => i.includes('mlv-theme="root"');
       const lines = src.trim().split('\n').filter(i => !hasRoot(i));
       const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('mlv-theme="root ', 'mlv-theme="');
-      return prettier.format(source, { parser: 'html', plugins: [parserHTML], singleAttributePerLine: false });
+      return isTokenTable ? source : prettier.format(source, { parser: 'html', plugins: [parserHTML], singleAttributePerLine: false });
     }
   },
   controls: {
@@ -35,23 +38,23 @@ export const parameters = {
   badgesConfig: {
     alpha: {
       styles: {
-        backgroundColor: 'var(--mlv-sys-status-warning-background)',
-        borderColor: 'var(--mlv-sys-status-warning-background)',
-        color: 'var(--mlv-sys-status-warning-color)',
+        backgroundColor: 'var(--mlv-sys-support-warning-muted-color)',
+        borderColor: 'var(--mlv-sys-support-warning-muted-color)',
+        color: 'var(--mlv-sys-support-warning-emphasis-color)',
       },
-      title: 'Alpha',
+      title: `Pre-Release ${MLV_VERSION}`,
       tooltip: {
-        title: 'Alpha 🚧',
-        desc: 'This element or utility is in under alpha preview as a work in progress. Breaking API and visual changes may occur during the engineering and UI design review process.',
+        title: 'Pre-Release 🚧',
+        desc: 'This element or utility is in under pre-release as a work in progress. Breaking API and visual changes may occur during the engineering and UI design review process.',
       }
     },
     beta: {
       styles: {
-        backgroundColor: 'var(--mlv-sys-status-default-background)',
-        borderColor: 'var(--mlv-sys-status-default-background)',
-        color: 'var(--mlv-sys-status-default-color)',
+        backgroundColor: 'var(--mlv-sys-support-accent-muted-color)',
+        borderColor: 'var(--mlv-sys-support-accent-muted-color)',
+        color: 'var(--mlv-sys-support-accent-emphasis-color)',
       },
-      title: 'Beta',
+      title: `Beta ${MLV_VERSION}`,
       tooltip: {
         title: 'Beta 🛠️',
         desc: 'This element or utility is in beta and available for use. The APIs and visual design are stable but in may change as we seek additional feedback.',
@@ -59,11 +62,11 @@ export const parameters = {
     },
     stable: {
       styles: {
-        backgroundColor: 'var(--mlv-sys-status-success-background)',
-        borderColor: 'var(--mlv-sys-status-success-background)',
-        color: 'var(--mlv-sys-status-success-color)',
+        backgroundColor: 'var(--mlv-sys-support-success-muted-color)',
+        borderColor: 'var(--mlv-sys-support-success-muted-color)',
+        color: 'var(--mlv-sys-support-success-emphasis-color)',
       },
-      title: 'Stable',
+      title: `Stable ${MLV_VERSION}`,
       tooltip: {
         title: 'Stable ✅',
         desc: 'This element or utility is Stable and ready for use.',
@@ -91,6 +94,7 @@ export const parameters = {
           'Getting Started',
           'Changelog',
           'Support',
+          'Versioning',
           'Testing',
           'Extensions',
           'API Design',
@@ -116,9 +120,10 @@ export const parameters = {
             'Objects',
             'Layers',
             'Interactions',
+            'Support',
             'Status',
-            'Forms',
-            'Popovers',
+            'Color',
+            'Animation',
             'Examples'
           ],
           'Themes',
@@ -152,6 +157,7 @@ export const parameters = {
             'Examples'
           ],
           'Popovers',
+          'Visualization',
           'I18n'
         ],
         'Elements'

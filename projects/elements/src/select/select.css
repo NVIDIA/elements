@@ -2,8 +2,8 @@
   --padding: 0 var(--mlv-ref-size-200);
   --font-size: var(--mlv-ref-font-size-200);
   --height: var(--mlv-ref-font-size-700);
-  --background: var(--mlv-sys-interaction-default-background);
-  --color: var(--mlv-sys-interaction-default-color);
+  --background: var(--mlv-sys-interaction-field-background);
+  --color: var(--mlv-sys-interaction-field-color);
   --border-radius: var(--mlv-ref-border-radius-sm);
   --border: 0;
   --cursor: pointer;
@@ -63,11 +63,11 @@
 
 :host(:--invalid),
 :host(:--error) {
-  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-status-danger-background);
+  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-danger-emphasis-color);
 }
 
 :host(:--success) {
-  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-status-success-background);
+  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-success-emphasis-color);
 }
 
 :host(:--disabled) {

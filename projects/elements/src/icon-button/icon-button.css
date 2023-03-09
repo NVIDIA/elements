@@ -25,7 +25,7 @@
 }
 
 :host([interaction*='ghost']) {
-  --color: var(--mlv-sys-status-neutral-background);
+  --color: var(--mlv-sys-support-emphasis-color);
   --padding: 0;
 }
 

@@ -1,5 +1,6 @@
 :host {
-  --mlv-sys-interaction-default-background: var(--mlv-sys-interaction-default-background-300);
+  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-300);
+  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-300);
   --mlv-sys-layer-popover-arrow-padding: 6px;
   --mlv-sys-layer-popover-arrow-offset: 4px;
   --mlv-sys-layer-popover-offset: var(--mlv-ref-space-xxl);

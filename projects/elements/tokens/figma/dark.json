@@ -1,507 +1,2119 @@
 {
-  "mle-dark-theme": {
-    "sys": {
-      "background-color": {
-        "layer": {
-          "canvas-00": {
-            "value": "#0b0c0f",
-            "type": "color",
-            "description": "(Canvas) Default page background, old #f4f5f6"
+  "mlv-dark-theme": {
+    "ref": {
+      "color": {
+        "white": {
+          "value": "#ffffff",
+          "type": "color"
+        },
+        "black": {
+          "value": "#000000",
+          "type": "color"
+        },
+        "white-alpha": {
+          "100": {
+            "value": "#ffffff00",
+            "type": "color"
           },
-          "container-01": {
-            "value": "#16181d",
-            "type": "color",
-            "description": "(Card) \t      Container color on background;"
+          "200": {
+            "value": "#ffffff03",
+            "type": "color"
           },
-          "dropdown-02": {
-            "value": "#23262f",
-            "type": "color",
-            "description": "\t      Container color on layer-01"
+          "300": {
+            "value": "#ffffff08",
+            "type": "color"
           },
-          "popup-03": {
-            "value": "#343847",
-            "type": "color",
-            "description": "Container color on/over layer-02 with even higher elevation"
+          "400": {
+            "value": "#ffffff0f",
+            "type": "color"
+          },
+          "500": {
+            "value": "#ffffff17",
+            "type": "color"
+          },
+          "600": {
+            "value": "#ffffff1f",
+            "type": "color"
+          },
+          "700": {
+            "value": "#ffffff2e",
+            "type": "color"
+          },
+          "800": {
+            "value": "#ffffff40",
+            "type": "color"
+          },
+          "900": {
+            "value": "#ffffff63",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#ffffff73",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#ffffff96",
+            "type": "color"
+          },
+          "1200": {
+            "value": "#ffffffeb",
+            "type": "color"
           }
         },
-        "shell": {
-          "value": "#000000",
-          "type": "color",
-          "description": "(IDE)"
+        "black-alpha": {
+          "100": {
+            "value": "#00000003",
+            "type": "color"
+          },
+          "200": {
+            "value": "#00000008",
+            "type": "color"
+          },
+          "300": {
+            "value": "#0000000d",
+            "type": "color"
+          },
+          "400": {
+            "value": "#00000012",
+            "type": "color"
+          },
+          "500": {
+            "value": "#00000017",
+            "type": "color"
+          },
+          "600": {
+            "value": "#0000001c",
+            "type": "color"
+          },
+          "700": {
+            "value": "#00000024",
+            "type": "color"
+          },
+          "800": {
+            "value": "#00000038",
+            "type": "color"
+          },
+          "900": {
+            "value": "#00000070",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#0000007a",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#0000008f",
+            "type": "color"
+          },
+          "1200": {
+            "value": "#000000e8",
+            "type": "color"
+          }
         },
-        "inverse": {
-          "value": "#ffffff",
-          "type": "color",
-          "description": "    High contrast backgrounds;     High contrast elements"
+        "purple-violet": {
+          "100": {
+            "value": "#17151f",
+            "type": "color"
+          },
+          "200": {
+            "value": "#1c172b",
+            "type": "color"
+          },
+          "300": {
+            "value": "#251e40",
+            "type": "color"
+          },
+          "400": {
+            "value": "#2c2250",
+            "type": "color"
+          },
+          "500": {
+            "value": "#32275f",
+            "type": "color"
+          },
+          "600": {
+            "value": "#392c72",
+            "type": "color"
+          },
+          "700": {
+            "value": "#443592",
+            "type": "color"
+          },
+          "800": {
+            "value": "#4b32bf",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#5b43cc",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#8066fa",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#9e8cfc",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#f1eefe",
+            "type": "color",
+            "description": "High-contrast text"
+          }
         },
-        "track": {
-          "type": "color",
-          "value": "#818996"
+        "purple-lavender": {
+          "100": {
+            "value": "#1b141d",
+            "type": "color"
+          },
+          "200": {
+            "value": "#221527",
+            "type": "color"
+          },
+          "300": {
+            "value": "#301a3a",
+            "type": "color"
+          },
+          "400": {
+            "value": "#3a1e48",
+            "type": "color"
+          },
+          "500": {
+            "value": "#432155",
+            "type": "color"
+          },
+          "600": {
+            "value": "#4e2667",
+            "type": "color"
+          },
+          "700": {
+            "value": "#5f2d84",
+            "type": "color"
+          },
+          "800": {
+            "value": "#8831c4",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#934ec9",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#c066ff",
+            "type": "color",
+            "description": "category viz"
+          },
+          "1100": {
+            "value": "#bf7af0",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#f7ecfc",
+            "type": "color",
+            "description": "High-contrast text"
+          }
         },
-        "scrollbar": {
-          "value": "#818996bf",
-          "type": "color"
+        "purple-plum": {
+          "100": {
+            "value": "#1d131d",
+            "type": "color"
+          },
+          "200": {
+            "value": "#251425",
+            "type": "color"
+          },
+          "300": {
+            "value": "#341a34",
+            "type": "color"
+          },
+          "400": {
+            "value": "#3e1d40",
+            "type": "color"
+          },
+          "500": {
+            "value": "#48214b",
+            "type": "color"
+          },
+          "600": {
+            "value": "#542658",
+            "type": "color"
+          },
+          "700": {
+            "value": "#692d6f",
+            "type": "color"
+          },
+          "800": {
+            "value": "#a62ab8",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#c842db",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#df5cf2",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#d864d8",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#fbecfc",
+            "type": "color",
+            "description": "High-contrast text"
+          }
         },
-        "brand": {
-          "value": "#69b027",
-          "type": "color",
-          "description": "Feature background color"
+        "pink-magenta": {
+          "100": {
+            "value": "#1d1418",
+            "type": "color"
+          },
+          "200": {
+            "value": "#27141c",
+            "type": "color"
+          },
+          "300": {
+            "value": "#3c1827",
+            "type": "color"
+          },
+          "400": {
+            "value": "#481a2d",
+            "type": "color"
+          },
+          "500": {
+            "value": "#541b33",
+            "type": "color"
+          },
+          "600": {
+            "value": "#641d3b",
+            "type": "color"
+          },
+          "700": {
+            "value": "#801d45",
+            "type": "color"
+          },
+          "800": {
+            "value": "#c4185d",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#e82c77",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#ff4590",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#f76190",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#feecf4",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "red-tomato": {
+          "100": {
+            "value": "#1d1412",
+            "type": "color"
+          },
+          "200": {
+            "value": "#2a1410",
+            "type": "color"
+          },
+          "300": {
+            "value": "#3b1813",
+            "type": "color"
+          },
+          "400": {
+            "value": "#481a14",
+            "type": "color"
+          },
+          "500": {
+            "value": "#541c15",
+            "type": "color"
+          },
+          "600": {
+            "value": "#652016",
+            "type": "color"
+          },
+          "700": {
+            "value": "#7f2315",
+            "type": "color"
+          },
+          "800": {
+            "value": "#bf1f00",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#e33210",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#fa4623",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#f16a50",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#feefec",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "orange-pumpkin": {
+          "100": {
+            "value": "#1f1206",
+            "type": "color"
+          },
+          "200": {
+            "value": "#2b1400",
+            "type": "color"
+          },
+          "300": {
+            "value": "#391a03",
+            "type": "color"
+          },
+          "400": {
+            "value": "#441f04",
+            "type": "color"
+          },
+          "500": {
+            "value": "#4f2305",
+            "type": "color"
+          },
+          "600": {
+            "value": "#5f2a06",
+            "type": "color"
+          },
+          "700": {
+            "value": "#763205",
+            "type": "color"
+          },
+          "800": {
+            "value": "#c45104",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#ff6600",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#ff802b",
+            "type": "color",
+            "description": "categorical viz"
+          },
+          "1100": {
+            "value": "#ff8b3e",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#feeadd",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "yellow-amber": {
+          "100": {
+            "value": "#1f1300",
+            "type": "color"
+          },
+          "200": {
+            "value": "#271700",
+            "type": "color"
+          },
+          "300": {
+            "value": "#341c00",
+            "type": "color"
+          },
+          "400": {
+            "value": "#3f2200",
+            "type": "color"
+          },
+          "500": {
+            "value": "#4a2900",
+            "type": "color"
+          },
+          "600": {
+            "value": "#573300",
+            "type": "color"
+          },
+          "700": {
+            "value": "#693f05",
+            "type": "color"
+          },
+          "800": {
+            "value": "#ffb224",
+            "type": "color",
+            "description": "system warning, Solid backgrounds"
+          },
+          "900": {
+            "value": "#ffc700",
+            "type": "color",
+            "description": "category viz"
+          },
+          "1000": {
+            "value": "#ffcb47",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#f1a10d",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#fef3dd",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "green-grass": {
+          "100": {
+            "value": "#0d1912",
+            "type": "color"
+          },
+          "200": {
+            "value": "#0f1e13",
+            "type": "color"
+          },
+          "300": {
+            "value": "#132819",
+            "type": "color"
+          },
+          "400": {
+            "value": "#16301d",
+            "type": "color"
+          },
+          "500": {
+            "value": "#193921",
+            "type": "color"
+          },
+          "600": {
+            "value": "#1d4427",
+            "type": "color"
+          },
+          "700": {
+            "value": "#245530",
+            "type": "color"
+          },
+          "800": {
+            "value": "#0e8434",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#12AB43",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#41CC4F",
+            "type": "color",
+            "description": "category viz, "
+          },
+          "1100": {
+            "value": "#63c174",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#e5fbeb",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "teal-seafoam": {
+          "100": {
+            "value": "#091915",
+            "type": "color"
+          },
+          "200": {
+            "value": "#04201b",
+            "type": "color"
+          },
+          "300": {
+            "value": "#062923",
+            "type": "color"
+          },
+          "400": {
+            "value": "#07312b",
+            "type": "color"
+          },
+          "500": {
+            "value": "#083932",
+            "type": "color"
+          },
+          "600": {
+            "value": "#09443c",
+            "type": "color"
+          },
+          "700": {
+            "value": "#0b544a",
+            "type": "color"
+          },
+          "800": {
+            "value": "#008679",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#1db4a4",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#00dbc2",
+            "type": "color",
+            "description": "category viz"
+          },
+          "1100": {
+            "value": "#0ac5b3",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#e1faf4",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "green-mint": {
+          "100": {
+            "value": "#081917",
+            "type": "color"
+          },
+          "200": {
+            "value": "#05201e",
+            "type": "color"
+          },
+          "300": {
+            "value": "#052926",
+            "type": "color"
+          },
+          "400": {
+            "value": "#04312c",
+            "type": "color"
+          },
+          "500": {
+            "value": "#033a34",
+            "type": "color"
+          },
+          "600": {
+            "value": "#01453d",
+            "type": "color"
+          },
+          "700": {
+            "value": "#00564a",
+            "type": "color"
+          },
+          "800": {
+            "value": "#2f8471",
+            "type": "color"
+          },
+          "900": {
+            "value": "#00ccaa",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#70E1C8",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#70e1c8",
+            "type": "color"
+          },
+          "1200": {
+            "value": "#e7fcf7",
+            "type": "color"
+          }
+        },
+        "teal-cyan": {
+          "100": {
+            "value": "#07191d",
+            "type": "color"
+          },
+          "200": {
+            "value": "#061e24",
+            "type": "color"
+          },
+          "300": {
+            "value": "#072830",
+            "type": "color"
+          },
+          "400": {
+            "value": "#07303b",
+            "type": "color"
+          },
+          "500": {
+            "value": "#073844",
+            "type": "color"
+          },
+          "600": {
+            "value": "#064150",
+            "type": "color"
+          },
+          "700": {
+            "value": "#045063",
+            "type": "color"
+          },
+          "800": {
+            "value": "#0081a1",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#0ea0c4",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#00c4f5",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#00c2d7",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#e1f8fa",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "blue-sky": {
+          "100": {
+            "value": "#0c1820",
+            "type": "color"
+          },
+          "200": {
+            "value": "#071d2a",
+            "type": "color"
+          },
+          "300": {
+            "value": "#082636",
+            "type": "color"
+          },
+          "400": {
+            "value": "#082d41",
+            "type": "color"
+          },
+          "500": {
+            "value": "#08354c",
+            "type": "color"
+          },
+          "600": {
+            "value": "#083e59",
+            "type": "color"
+          },
+          "700": {
+            "value": "#064b6b",
+            "type": "color"
+          },
+          "800": {
+            "value": "#288199",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#3ea2bd",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#67dafa",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#2ec8ee",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#eaf8ff",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "blue-cobalt": {
+          "100": {
+            "value": "#0f1720",
+            "type": "color"
+          },
+          "200": {
+            "value": "#0f1b2d",
+            "type": "color"
+          },
+          "300": {
+            "value": "#10243e",
+            "type": "color"
+          },
+          "400": {
+            "value": "#102a4c",
+            "type": "color"
+          },
+          "500": {
+            "value": "#0f3058",
+            "type": "color"
+          },
+          "600": {
+            "value": "#0D3868",
+            "type": "color"
+          },
+          "700": {
+            "value": "#0a4481",
+            "type": "color"
+          },
+          "800": {
+            "value": "#0971f1",
+            "type": "color",
+            "description": "interactive, selected, emphasis, accent,Solid backgrounds"
+          },
+          "900": {
+            "value": "#0091ff",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#3498F5",
+            "type": "color",
+            "description": "emphasized text in dark mode\n"
+          },
+          "1100": {
+            "value": "#52A9FF",
+            "type": "color"
+          },
+          "1200": {
+            "value": "#eaf6ff",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "blue-indigo": {
+          "100": {
+            "value": "#131620",
+            "type": "color"
+          },
+          "200": {
+            "value": "#15192d",
+            "type": "color"
+          },
+          "300": {
+            "value": "#192140",
+            "type": "color"
+          },
+          "400": {
+            "value": "#1c274f",
+            "type": "color"
+          },
+          "500": {
+            "value": "#1f2c5c",
+            "type": "color"
+          },
+          "600": {
+            "value": "#22346e",
+            "type": "color"
+          },
+          "700": {
+            "value": "#273e89",
+            "type": "color"
+          },
+          "800": {
+            "value": "#3253bf",
+            "type": "color"
+          },
+          "900": {
+            "value": "#4b6ee3",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#6587f7",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#849dff",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#eef1fd",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "gray-denim": {
+          "100": {
+            "value": "#0b0c0f",
+            "type": "color",
+            "description": "dark mode: canvas"
+          },
+          "200": {
+            "value": "#181a20",
+            "type": "color",
+            "description": "dark mode: container"
+          },
+          "300": {
+            "value": "#1e2129",
+            "type": "color"
+          },
+          "400": {
+            "value": "#23262f",
+            "type": "color",
+            "description": "dark mode: overlay"
+          },
+          "500": {
+            "value": "#272b35",
+            "type": "color"
+          },
+          "600": {
+            "value": "#2d323e",
+            "type": "color"
+          },
+          "700": {
+            "value": "#343847",
+            "type": "color",
+            "description": "dark mode: subdued popover\n"
+          },
+          "800": {
+            "value": "#454a5e",
+            "type": "color"
+          },
+          "900": {
+            "value": "#606880",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#6d7692",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#9298af",
+            "type": "color"
+          },
+          "1200": {
+            "value": "#EAECF0",
+            "type": "color"
+          }
+        },
+        "gray-slate": {
+          "100": {
+            "value": "#151718",
+            "type": "color"
+          },
+          "200": {
+            "value": "#1a1d1e",
+            "type": "color"
+          },
+          "300": {
+            "value": "#202425",
+            "type": "color"
+          },
+          "400": {
+            "value": "#26292b",
+            "type": "color"
+          },
+          "500": {
+            "value": "#2b2e31",
+            "type": "color"
+          },
+          "600": {
+            "value": "#313438",
+            "type": "color"
+          },
+          "700": {
+            "value": "#3a3e42",
+            "type": "color"
+          },
+          "800": {
+            "value": "#4c5055",
+            "type": "color"
+          },
+          "900": {
+            "value": "#697077",
+            "type": "color",
+            "description": "dark mode: high emphasis divider\n"
+          },
+          "1000": {
+            "value": "#939ca5",
+            "type": "color",
+            "description": "dark mode: weak text\n"
+          },
+          "1100": {
+            "value": "#c9d0d9",
+            "type": "color",
+            "description": "dark mode: default text"
+          },
+          "1200": {
+            "value": "#ecedee",
+            "type": "color",
+            "description": "dark mode: high emphasis text"
+          }
+        },
+        "red-cardinal": {
+          "100": {
+            "value": "#1f1315",
+            "type": "color"
+          },
+          "200": {
+            "value": "#291415",
+            "type": "color"
+          },
+          "300": {
+            "value": "#3c181a",
+            "type": "color"
+          },
+          "400": {
+            "value": "#481a1d",
+            "type": "color"
+          },
+          "500": {
+            "value": "#541b1f",
+            "type": "color"
+          },
+          "600": {
+            "value": "#671e22",
+            "type": "color"
+          },
+          "700": {
+            "value": "#822025",
+            "type": "color"
+          },
+          "800": {
+            "value": "#c42128",
+            "type": "color",
+            "description": "system failed, Solid backgrounds"
+          },
+          "900": {
+            "value": "#e8383f",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#FF4A4A",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#ff6369",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#feecee",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "pink-rose": {
+          "100": {
+            "value": "#1f121b",
+            "type": "color"
+          },
+          "200": {
+            "value": "#271421",
+            "type": "color"
+          },
+          "300": {
+            "value": "#3a182f",
+            "type": "color"
+          },
+          "400": {
+            "value": "#451a37",
+            "type": "color"
+          },
+          "500": {
+            "value": "#501b3f",
+            "type": "color"
+          },
+          "600": {
+            "value": "#601d48",
+            "type": "color"
+          },
+          "700": {
+            "value": "#7a1d5a",
+            "type": "color"
+          },
+          "800": {
+            "value": "#bf2185",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#e336a4",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#fa50bc",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#f65cb6",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#feebf7",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "yellow-nova": {
+          "100": {
+            "value": "#1c1500",
+            "type": "color"
+          },
+          "200": {
+            "value": "#221a00",
+            "type": "color"
+          },
+          "300": {
+            "value": "#2c2100",
+            "type": "color"
+          },
+          "400": {
+            "value": "#352800",
+            "type": "color"
+          },
+          "500": {
+            "value": "#3e3000",
+            "type": "color"
+          },
+          "600": {
+            "value": "#493c00",
+            "type": "color"
+          },
+          "700": {
+            "value": "#594a05",
+            "type": "color"
+          },
+          "800": {
+            "value": "#ffd500",
+            "type": "color"
+          },
+          "900": {
+            "value": "#f5d90a",
+            "type": "color",
+            "description": "category viz, Solid backgrounds"
+          },
+          "1000": {
+            "value": "#ffef5c",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#f0c000",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#fffad1",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "lime-pear": {
+          "100": {
+            "value": "#141807",
+            "type": "color"
+          },
+          "200": {
+            "value": "#181d08",
+            "type": "color"
+          },
+          "300": {
+            "value": "#1e260d",
+            "type": "color"
+          },
+          "400": {
+            "value": "#252e0f",
+            "type": "color"
+          },
+          "500": {
+            "value": "#2b3711",
+            "type": "color"
+          },
+          "600": {
+            "value": "#344213",
+            "type": "color"
+          },
+          "700": {
+            "value": "#415215",
+            "type": "color"
+          },
+          "800": {
+            "value": "#69b027",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#bee840",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#99d52a",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#87be22",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#effbdd",
+            "type": "color",
+            "description": "High-contrast text"
+          }
+        },
+        "green-jade": {
+          "100": {
+            "value": "#0d1912",
+            "type": "color"
+          },
+          "200": {
+            "value": "#0c1f17",
+            "type": "color"
+          },
+          "300": {
+            "value": "#0f291e",
+            "type": "color"
+          },
+          "400": {
+            "value": "#113123",
+            "type": "color"
+          },
+          "500": {
+            "value": "#133929",
+            "type": "color"
+          },
+          "600": {
+            "value": "#164430",
+            "type": "color"
+          },
+          "700": {
+            "value": "#1b543a",
+            "type": "color"
+          },
+          "800": {
+            "value": "#148851",
+            "type": "color",
+            "description": "Solid backgrounds"
+          },
+          "900": {
+            "value": "#26ab6c",
+            "type": "color"
+          },
+          "1000": {
+            "value": "#3CB179",
+            "type": "color"
+          },
+          "1100": {
+            "value": "#4cc38a",
+            "type": "color",
+            "description": "Step 1100  is designed for 400 weight text in any size, and guaranteed to work well on a step 3 background. Each test should pass 4.5:1 contrast ratio."
+          },
+          "1200": {
+            "value": "#e5fbeb",
+            "type": "color",
+            "description": "High-contrast text"
+          }
         }
-      },
-      "border-color": {
-        "focused": {
-          "value": "#0971f1",
-          "type": "color"
-        },
-        "emphasis": {
-          "value": "#e5e6e9",
-          "type": "color"
-        },
-        "default": {
-          "value": "#818996",
-          "type": "color"
-        },
-        "weak": {
-          "value": "#49515d",
-          "type": "color"
-        },
-        "inverse": {
-          "value": "#ffffff",
-          "type": "color",
-          "description": "#141416"
-        }
-      },
-      "accent-color": {
+      }
+    },
+    "sys": {
+      "accent": {
         "primary": {
+          "value": "{ref.color.lime-pear.800}",
           "type": "color",
-          "value": "#69b027"
+          "description": "brand, limited usage, for extra emphasis"
         },
         "secondary": {
-          "value": "#0971f1",
+          "value": "{ref.color.blue-cobalt.800}",
           "type": "color",
-          "description": "old - #205FDC"
+          "description": "becomes info high emphasis, high emphasis selected state, loud"
         },
         "tertiary": {
-          "value": "#ffffff",
-          "type": "color"
-        }
-      },
-      "support-color": {
-        "info": {
-          "value": "#ffffff",
-          "type": "color"
-        },
-        "positive": {
-          "value": "#10983d",
-          "type": "color"
-        },
-        "negative": {
-          "value": "#e94a3f",
-          "type": "color"
-        },
-        "warning": {
-          "value": "#ffc700",
-          "type": "color"
-        },
-        "neutral": {
-          "value": "#818996",
-          "type": "color"
-        }
-      },
-      "text-color": {
-        "emphasis": {
-          "value": "#f6f7f9",
+          "value": "{ref.color.white}",
           "type": "color",
-          "description": "Headers;hover text color for default. old - {ref.color.neutral.700}"
+          "description": "becomes popup color, info-low emphasis,  low emphasis selected state, quiet"
+        }
+      },
+      "layer": {
+        "shell": {
+          "value": "{ref.color.black}",
+          "type": "color",
+          "description": "shell, ide, wrapper, chrome, main navigation"
+        },
+        "canvas-00": {
+          "value": "{ref.color.gray-denim.100}",
+          "type": "color",
+          "description": "(Canvas) Default page background"
+        },
+        "container-01": {
+          "value": "{ref.color.gray-denim.200}",
+          "type": "color",
+          "description": "Container color on background; ex. card"
+        },
+        "overlay-02": {
+          "value": "{ref.color.gray-denim.400}",
+          "type": "color",
+          "description": " Container color overtop / on layer-01"
+        },
+        "popover-03": {
+          "value": "{ref.color.gray-denim.700}",
+          "type": "color",
+          "description": "Container color on/over layer-02 with even higher elevation"
+        },
+        "inverse": {
+          "value": "{ref.color.white}",
+          "type": "color",
+          "description": "    High contrast backgrounds;     High contrast elements, typically for popovers , popups, toasts, notifications"
+        },
+        "interaction": {
+          "popover-03": {
+            "hover": {
+              "value": "linear-gradient(0deg, #343847, #343847), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color",
+              "description": "meta: popup hover, layer 3 hover"
+            },
+            "selected": {
+              "value": "linear-gradient(0deg, #474E61, #474E61), linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #474E61, #474E61), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            }
+          },
+          "canvas-00": {
+            "hover": {
+              "value": "linear-gradient(0deg, #0B0C0F, #0B0C0F), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color"
+            },
+            "selected": {
+              "value": "linear-gradient(0deg, #0B0C0F, #0B0C0F), linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #0B0C0F, #0B0C0F), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            }
+          },
+          "container-01": {
+            "hover": {
+              "value": "linear-gradient(0deg, #181A20, #181A20), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color"
+            },
+            "selected": {
+              "value": "linear-gradient(0deg, #181A20, #181A20), linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #181A20, #181A20), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            }
+          },
+          "overlay-02": {
+            "hover": {
+              "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color"
+            },
+            "selected": {
+              "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            }
+          }
+        },
+        "alt-accent": {
+          "canvas": {
+            "value": "linear-gradient(0deg, #0B0C0F, #0B0C0F), linear-gradient(0deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12));",
+            "type": "color",
+            "description": "Tertiary background paired with layer-00 (canvas)"
+          },
+          "container": {
+            "value": "linear-gradient(0deg, #181A20, #181A20), linear-gradient(0deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12));",
+            "type": "color",
+            "description": "Tertiary background paired with layer-01 (container)"
+          },
+          "overlay": {
+            "value": "linear-gradient(0deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)), linear-gradient(0deg, #23262F, #23262F);",
+            "type": "color",
+            "description": "Tertiary background paired with layer-02 (overlay)\n"
+          },
+          "popover": {
+            "value": "linear-gradient(0deg, #343847, #343847), linear-gradient(0deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12));",
+            "type": "color",
+            "description": "Tertiary background paired with layer-03 (popover)\n"
+          }
+        }
+      },
+      "text": {
+        "emphasis": {
+          "value": "{ref.color.gray-slate.1200}",
+          "type": "color",
+          "description": "Headers;hover text color for default. "
         },
         "default": {
-          "value": "#cbced4",
+          "value": "{ref.color.gray-slate.1100}",
           "type": "color",
-          "description": "Body copy; {ref.color.neutral.600} "
+          "description": "Body copy; "
         },
         "weak": {
-          "value": "#818996",
+          "value": "{ref.color.gray-slate.1000}",
           "type": "color",
-          "description": "old - {ref.color.neutral.400}"
+          "description": "low emphasis text"
         },
-        "on-color": {
-          "value": "#ffffff",
+        "white": {
+          "value": "{ref.color.white}",
           "type": "color",
           "description": "Text on interactive colors;"
         },
-        "static-black": {
-          "value": "#000000",
+        "black": {
+          "value": "{ref.color.black}",
           "type": "color"
         },
         "placeholder": {
-          "value": "#cbced499",
+          "value": "#c9d0d999",
           "type": "color",
           "description": "color for placeholder text before input"
-        }
-      },
-      "interaction": {
-        "icon": {
+        },
+        "interaction": {
           "hover": {
             "value": "#f6f7f9",
-            "type": "color"
+            "type": "color",
+            "description": "text hover"
           },
           "disabled": {
-            "value": "#81899680",
-            "type": "color"
+            "value": "hsla(214, 17%, 82%, 0.25);",
+            "type": "color",
+            "description": "text disabled"
           },
-          "on-color-disabled": {
-            "value": "#ffffff80",
+          "disabled-white": {
+            "value": "hsla(0, 0%, 100%, 0.25);",
+            "type": "color",
+            "description": "text disabled white"
+          },
+          "disabled-black": {
+            "value": "hsla(0, 0%, 0%, 0.25);",
             "type": "color"
           }
+        }
+      },
+      "border": {
+        "emphasis": {
+          "value": "{ref.color.gray-slate.900}",
+          "type": "color",
+          "description": "divider line to emphasize seperate sections of content"
         },
-        "layer": {
-          "canvas-01": {
-            "hover": {
-              "value": "#1c1f26",
-              "type": "color"
-            },
-            "selected": {
-              "value": "#21242c",
-              "type": "color"
-            },
-            "selected-hover": {
-              "value": "#21242c",
-              "type": "color"
-            }
-          },
-          "container-02": {
-            "hover": {
-              "value": "#272b35",
-              "type": "color",
-              "description": "sys.interaction-color.layer.layer-01-hover"
-            },
-            "selected": {
-              "value": "#2f3541",
-              "type": "color",
-              "description": "sys.interaction-color.layer.layer-01-hover"
-            },
-            "selected-hover": {
-              "value": "#2b303b",
-              "type": "color",
-              "description": "sys.interaction-color.layer.layer-01-hover"
-            }
-          },
-          "popup-03": {
-            "hover": {
-              "value": " hsla(225, 15%, 11%, 1)",
-              "type": "color"
-            },
-            "selected": {
-              "value": " hsla(225, 15%, 6%, 1)",
-              "type": "color"
-            },
-            "selected-hover": {
-              "value": " hsla(225, 15%, 4%, 1)",
-              "type": "color"
-            }
-          }
+        "default": {
+          "value": "hsla(210, 6%, 44%, 0.4);",
+          "type": "color",
+          "description": "default divider line to seperate sections of content"
         },
-        "border": {
+        "weak": {
+          "value": "hsla(210, 6%, 44%, 0.18);",
+          "type": "color",
+          "description": "lower emphasis divider line to suggest seperate sections of content"
+        },
+        "inverse": {
+          "value": "{ref.color.white}",
+          "type": "color"
+        },
+        "interaction": {
+          "focused": {
+            "value": "{sys.accent.secondary}",
+            "type": "color",
+            "description": "focus border;\nFocus underline"
+          },
           "hover": {
             "value": "#ffffff",
-            "type": "color"
+            "type": "color",
+            "description": "meta: border hover"
           },
           "disabled": {
             "value": "#e5e6e940",
-            "type": "color"
-          },
-          "active": {
-            "value": "#ffffff",
-            "type": "color"
-          }
-        },
-        "button": {
-          "destructive": {
-            "hover": {
-              "value": "{ref.color.red-carmine.600}",
-              "type": "color"
-            },
-            "active": {
-              "value": "{ref.color.red-carmine.500}",
-              "type": "color"
-            }
-          },
-          "emphasized": {
-            "hover": {
-              "value": "{ref.color.brand-green.600}",
-              "type": "color"
-            },
-            "active": {
-              "value": "{ref.color.brand-green.500}",
-              "type": "color"
-            }
-          },
-          "default-00": {
-            "hover": {
-              "value": "{ref.color.gray-zinc.650}",
-              "type": "color"
-            },
-            "active": {
-              "value": "{ref.color.gray-zinc.750}",
-              "type": "color"
-            }
-          },
-          "default-01": {
-            "hover": {
-              "value": "{ref.color.gray-zinc.600}",
-              "type": "color"
-            },
-            "active": {
-              "value": "{ref.color.gray-zinc.750}",
-              "type": "color"
-            }
-          },
-          "default-02": {
-            "hover": {
-              "value": "{ref.color.gray-zinc.600}",
-              "type": "color"
-            },
-            "active": {
-              "value": "{ref.color.gray-zinc.750}",
-              "type": "color"
-            }
-          },
-          "default-03": {
-            "hover": {
-              "value": "{ref.color.gray-zinc.500}",
-              "type": "color"
-            },
-            "active": {
-              "value": "{ref.color.gray-zinc.750}",
-              "type": "color"
-            }
-          },
-          "disabled": {
-            "onbase-00": {
-              "value": "{ref.color.gray-zinc.800}",
-              "type": "color"
-            },
-            "onbase-01": {
-              "value": "{ref.color.gray-zinc.800}",
-              "type": "color"
-            },
-            "onbase-02": {
-              "value": "{ref.color.gray-zinc.800}",
-              "type": "color"
-            },
-            "onbase-03": {
-              "value": "{ref.color.gray-zinc.700}",
-              "type": "color"
-            }
-          }
-        },
-        "highlight": {
-          "selected": {
-            "emphasis": {
-              "value": "#0971f1",
-              "type": "color"
-            },
-            "weak": {
-              "value": "#ffffff",
-              "type": "color"
-            }
-          }
-        },
-        "field": {
-          "disabled": {
-            "value": "#23262f80",
-            "type": "color"
-          },
-          "hover": {
-            "value": " hsla(222, 14%, 81%, 1)",
-            "type": "color"
-          }
-        },
-        "text": {
-          "disabled": {
-            "value": "#cbced440",
-            "type": "color"
-          },
-          "hover": {
-            "value": "#f6f7f9",
-            "type": "color"
-          },
-          "disabled-inverse": {
-            "value": "#2e364140",
-            "type": "color"
-          }
-        },
-        "link": {
-          "hover": {
-            "value": "#0865d8",
-            "type": "color"
-          },
-          "visited": {
-            "value": "#9757d7",
-            "type": "color"
-          },
-          "inverse": {
-            "value": "#CBCED4",
             "type": "color",
-            "description": "links on background-inverse backgrounds"
-          },
-          "disabled": {
-            "value": "CBCED425",
-            "type": "color"
+            "description": "meta: border disabled"
           }
         }
       },
-      "icon-color": {
+      "icon": {
         "default": {
-          "value": "#818996",
-          "type": "color"
+          "value": "{sys.text.weak}",
+          "type": "color",
+          "description": "icon default"
         },
-        "on-color": {
-          "value": "#ffffff",
+        "white": {
+          "value": "{ref.color.white}",
           "type": "color",
           "description": "    Icons on interactive or colored bgs; "
-        }
-      },
-      "button-background-color": {
-        "emphasized": {
-          "default": {
-            "value": "{ref.color.brand-green.500}",
-            "type": "color"
-          }
         },
-        "default-00": {
-          "default": {
-            "value": "{ref.color.gray-zinc.750}",
-            "type": "color"
-          }
+        "black": {
+          "value": "{ref.color.black}",
+          "type": "color",
+          "description": "    Icons on interactive or colored bgs; "
         },
-        "default-01": {
-          "default": {
-            "value": "{ref.color.gray-zinc.750}",
-            "type": "color"
-          }
-        },
-        "default-02": {
-          "default": {
-            "value": "{ref.color.gray-zinc.650}",
-            "type": "color"
-          }
-        },
-        "default-03": {
-          "default": {
-            "value": "{ref.color.gray-zinc.600}",
+        "interaction": {
+          "hover": {
+            "value": "{sys.text.default}",
             "type": "color",
-            "description": "change to ref value"
-          }
-        },
-        "toggle": {
-          "off": {
-            "value": "#818996",
-            "type": "color"
-          }
-        },
-        "destructive": {
-          "default": {
-            "value": "{ref.color.red-carmine.500}",
+            "description": "meta: icon hover"
+          },
+          "selected": {
+            "value": "{sys.accent.tertiary}",
+            "type": "color",
+            "description": "meta: icon selected"
+          },
+          "disabled": {
+            "value": "#939ca573",
+            "type": "color",
+            "description": "meta: icon disabled"
+          },
+          "disabled-white": {
+            "value": "hsla(0, 0%, 100%, 0.25);",
+            "type": "color",
+            "description": "meta: icon disabled"
+          },
+          "disabled-black": {
+            "value": "hsla(0, 0%, 0%, 0.25);",
             "type": "color"
           }
         }
       },
-      "misc-color": {
-        "coachmark": {
-          "background-color": {
-            "1": {
-              "value": "#69b027",
-              "type": "color"
-            },
-            "2": {
-              "value": "#69b02740",
-              "type": "color"
-            },
-            "3": {
-              "value": "#69b02726",
-              "type": "color"
-            }
-          }
-        },
-        "text-badge": {
-          "background-color": {
-            "2": {
-              "value": "#9757d7",
-              "type": "color"
-            }
-          }
-        },
-        "tag": {
-          "background-color": {
-            "1": {
-              "value": "#58a6ff",
-              "type": "color"
-            }
-          }
-        }
-      },
-      "field-color": {
-        "00": {
-          "value": "#16181d",
+      "field": {
+        "on-00": {
+          "value": "{ref.color.gray-denim.400}",
           "type": "color",
           "description": "A field is considered a layer on top of the background it is placed on, for example a field placed on a $layer-00 aka base background will use $field-00"
         },
-        "01": {
-          "value": "#23262f",
+        "on-01": {
+          "value": "{ref.color.gray-denim.400}",
           "type": "color",
           "description": "A field is considered a layer on top of the background it is placed on, for example a field placed on a $layer-01 aka a card background will use $field-01"
         },
-        "02": {
-          "value": "#343847",
+        "on-02": {
+          "value": "{ref.color.gray-denim.700}",
           "type": "color",
           "description": "A field is considered a layer on top of the background it is placed on, for example a field placed on a $layer-02 aka an elevated card background will use $field-02"
         },
-        "03": {
-          "value": "#414858",
+        "on-03": {
+          "value": "{ref.color.gray-denim.800}",
           "type": "color",
           "description": "A field is considered a layer on top of the background it is placed on, for example a field placed on a $layer-03 aka an elevated card background will use $field-03"
         },
-        "inverse": {
-          "value": "#ffffff",
-          "type": "color"
+        "interaction": {
+          "hover-00": {
+            "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+            "type": "color",
+            "description": "field hover"
+          },
+          "hover-01": {
+            "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+            "type": "color",
+            "description": "field hover"
+          },
+          "hover-02": {
+            "value": "linear-gradient(0deg, #343847, #343847), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+            "type": "color",
+            "description": "field hover"
+          },
+          "hover-03": {
+            "value": "linear-gradient(0deg, #454A5E, #454A5E), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+            "type": "color",
+            "description": "field hover"
+          },
+          "disabled": {
+            "value": "hsla(225, 15%, 16%, 0.45)",
+            "type": "color"
+          }
         }
       },
-      "status-color": {
-        "finished": {
+      "link": {
+        "text-emphasis": {
+          "value": "{ref.color.blue-cobalt.1000}",
+          "type": "color",
+          "description": "Use when needing to emphasis a link like in docs"
+        },
+        "text-weak": {
+          "value": "{sys.text.default}",
+          "type": "color",
+          "description": "use when there are many links and an emphasized treatment would cause too much focus"
+        },
+        "interaction": {
+          "hover-quiet": {
+            "value": "{sys.link.text-emphasis}",
+            "type": "color",
+            "description": "link, link hover"
+          },
+          "visited": {
+            "value": "{ref.color.purple-lavender.1000}",
+            "type": "color",
+            "description": "Color for visited links"
+          },
+          "disabled": {
+            "value": "hsla(214, 17%, 82%, 0.45);",
+            "type": "color",
+            "description": "disabled link"
+          }
+        }
+      },
+      "support": {
+        "success": {
           "text": {
-            "value": "#10983d",
+            "value": "{ref.color.green-grass.900}",
+            "type": "color",
+            "description": "support, success"
+          },
+          "background": {
+            "value": "{ref.color.green-grass.800}",
+            "type": "color",
+            "description": "support , success"
+          }
+        },
+        "danger": {
+          "text": {
+            "value": "{ref.color.red-cardinal.1000}",
             "type": "color"
           },
           "background": {
-            "value": "#10983d33",
+            "value": "{ref.color.red-cardinal.800}",
+            "type": "color",
+            "description": "support positive, trending"
+          }
+        },
+        "warning": {
+          "text": {
+            "value": "{ref.color.yellow-nova.800}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{ref.color.yellow-nova.800}",
+            "type": "color",
+            "description": "support warning"
+          }
+        },
+        "neutral": {
+          "text": {
+            "value": "{ref.color.gray-slate.1000}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{ref.color.gray-denim.300}",
+            "type": "color",
+            "description": "support neutral"
+          }
+        },
+        "info-weak": {
+          "text": {
+            "value": "{sys.accent.tertiary}",
+            "type": "color",
+            "description": "support info"
+          },
+          "background": {
+            "value": "{ref.color.gray-denim.300}",
+            "type": "color"
+          }
+        },
+        "info-emphasis": {
+          "text": {
+            "value": "{sys.link.text-emphasis}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{sys.accent.secondary}",
+            "type": "color"
+          }
+        }
+      },
+      "status": {
+        "scheduled": {
+          "text": {
+            "value": "{ref.color.purple-violet.1100}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{ref.color.purple-violet.300}",
+            "type": "color"
+          }
+        },
+        "queued": {
+          "text": {
+            "value": "{ref.color.blue-indigo.1100}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{ref.color.blue-indigo.300}",
+            "type": "color"
+          }
+        },
+        "pending": {
+          "text": {
+            "value": "{ref.color.gray-slate.1100}",
+            "type": "color"
+          },
+          "background": {
+            "value": "#{ref.color.gray-slate.300}",
+            "type": "color"
+          }
+        },
+        "starting": {
+          "text": {
+            "value": "{ref.color.green-mint.1100}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{ref.color.green-mint.300}",
+            "type": "color"
+          }
+        },
+        "running": {
+          "text": {
+            "value": "{ref.color.blue-cobalt.1100}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{ref.color.blue-cobalt.300}",
+            "type": "color"
+          }
+        },
+        "restarting": {
+          "text": {
+            "value": "{ref.color.yellow-amber.1100}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{ref.color.yellow-amber.300}",
+            "type": "color"
+          }
+        },
+        "stopping": {
+          "text": {
+            "value": "{ref.color.pink-rose.1100}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{ref.color.pink-rose.300}",
+            "type": "color"
+          }
+        },
+        "finished": {
+          "text": {
+            "value": "{ref.color.green-grass.1100}",
+            "type": "color",
+            "description": "status finished"
+          },
+          "background": {
+            "value": "{ref.color.green-grass.300}",
             "type": "color"
           }
         },
         "failed": {
           "text": {
-            "value": "#e94a3f",
+            "value": "{ref.color.red-cardinal.1100}",
+            "type": "color",
+            "description": "status failed"
+          },
+          "background": {
+            "value": "{ref.color.red-cardinal.300}",
+            "type": "color",
+            "description": "status failed"
+          }
+        },
+        "unknown": {
+          "text": {
+            "value": "#ffffffcc",
             "type": "color"
           },
-          "": {
-            "value": "#e94a3f40",
+          "background": {
+            "value": "#ffffff14",
             "type": "color"
           }
         }
       },
-      "utilities-color": {
-        "horizontal-overflow": {
-          "right": {
+      "button": {
+        "toggle": {
+          "off": {
+            "value": "{ref.color.gray-slate.1000}",
+            "type": "color",
+            "description": "toggle"
+          }
+        },
+        "default-on-00": {
+          "default": {
+            "value": "{ref.color.gray-denim.400}",
+            "type": "color",
+            "description": "button default"
+          },
+          "interaction": {
+            "hover": {
+              "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "hsla(225, 15%, 16%, 0.45);",
+              "type": "color"
+            }
+          }
+        },
+        "default-on-01": {
+          "default": {
+            "value": "{ref.color.gray-denim.400}",
+            "type": "color",
+            "description": "button default"
+          },
+          "interaction": {
+            "disabled": {
+              "value": "hsla(225, 15%, 16%, 0.45);",
+              "type": "color"
+            },
+            "hover": {
+              "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            }
+          }
+        },
+        "default-on-02": {
+          "default": {
+            "value": "{ref.color.gray-denim.700}",
+            "type": "color",
+            "description": "button default"
+          },
+          "interaction": {
+            "disabled": {
+              "value": "hsla(225, 15%, 16%, 0.45);",
+              "type": "color"
+            },
+            "hover": {
+              "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #23262F, #23262F), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            }
+          }
+        },
+        "default-on-03": {
+          "default": {
+            "value": "{ref.color.gray-denim.800}",
+            "type": "color",
+            "description": "button default"
+          },
+          "interaction": {
+            "disabled": {
+              "value": "hsla(225, 15%, 16%, 0.45);",
+              "type": "color"
+            },
+            "hover": {
+              "value": "linear-gradient(0deg, #454A5E, #454A5E), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #454A5E, #454A5E), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            }
+          }
+        },
+        "emphasized": {
+          "default": {
+            "value": "{sys.accent.primary}",
+            "type": "color",
+            "description": "button emphasis"
+          },
+          "interaction": {
+            "hover": {
+              "value": "linear-gradient(0deg, #69B027, #69B027), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #69B027, #69B027), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "hsla(225, 15%, 16%, 0.45);",
+              "type": "color"
+            }
+          }
+        },
+        "destructive": {
+          "default": {
+            "value": "{sys.support.danger.background}",
+            "type": "color",
+            "description": "button destructive"
+          },
+          "interaction": {
+            "hover": {
+              "value": "linear-gradient(0deg, #C42128, #C42128), linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));",
+              "type": "color"
+            },
+            "active": {
+              "value": "linear-gradient(0deg, #C42128, #C42128), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));",
+              "type": "color"
+            },
+            "disabled": {
+              "value": "hsla(225, 15%, 16%, 0.45);",
+              "type": "color"
+            }
+          }
+        }
+      },
+      "visualization": {
+        "categorical": {
+          "violet": {
+            "value": "{ref.color.purple-violet.1000}",
+            "type": "color"
+          },
+          "lavender": {
+            "value": "{ref.color.purple-plum.1000}",
+            "type": "color"
+          },
+          "rose": {
+            "value": "{ref.color.pink-rose.1000}",
+            "type": "color"
+          },
+          "red": {
+            "value": "{ref.color.red-cardinal.1000}",
+            "type": "color"
+          },
+          "pumpkin": {
+            "value": "{ref.color.orange-pumpkin.1000}",
+            "type": "color"
+          },
+          "amber": {
+            "value": "{ref.color.yellow-amber.800}",
+            "type": "color"
+          },
+          "nova": {
+            "value": "{ref.color.yellow-nova.900}",
+            "type": "color"
+          },
+          "pear": {
+            "value": "{ref.color.lime-pear.1000}",
+            "type": "color"
+          },
+          "grass": {
+            "value": "{ref.color.green-grass.1000}",
+            "type": "color"
+          },
+          "seafoam": {
+            "value": "{ref.color.teal-seafoam.1000}",
+            "type": "color"
+          },
+          "cyan": {
+            "value": "{ref.color.teal-cyan.1000}",
+            "type": "color"
+          },
+          "slate": {
+            "value": "{ref.color.gray-slate.1000}",
+            "type": "color"
+          }
+        },
+        "sequential": {
+          "diverging": {
+            "virdis": {
+              "100": {
+                "value": "#fde725",
+                "type": "color"
+              },
+              "200": {
+                "value": "#d2e21b",
+                "type": "color"
+              },
+              "300": {
+                "value": "#a5db36",
+                "type": "color"
+              },
+              "400": {
+                "value": "#7ad151",
+                "type": "color"
+              },
+              "500": {
+                "value": "#54c568",
+                "type": "color"
+              },
+              "600": {
+                "value": "#35b779",
+                "type": "color"
+              },
+              "700": {
+                "value": "#22a884",
+                "type": "color"
+              },
+              "800": {
+                "value": "#1f988b",
+                "type": "color"
+              },
+              "900": {
+                "value": "#23888e",
+                "type": "color"
+              },
+              "1000": {
+                "value": "#31688e",
+                "type": "color"
+              },
+              "1100": {
+                "value": "#39568c",
+                "type": "color"
+              },
+              "1200": {
+                "value": "#414487",
+                "type": "color"
+              },
+              "1300": {
+                "value": "#472f7d",
+                "type": "color"
+              },
+              "1400": {
+                "value": "#481a6c",
+                "type": "color"
+              },
+              "1500": {
+                "value": "#440154",
+                "type": "color"
+              }
+            },
+            "red-green": {
+              "100": {
+                "value": "#FF4747",
+                "type": "color"
+              },
+              "200": {
+                "value": "#C43D3D",
+                "type": "color"
+              },
+              "300": {
+                "value": "#782525",
+                "type": "color"
+              },
+              "400": {
+                "value": "#471616",
+                "type": "color"
+              },
+              "500": {
+                "value": "{ref.color.gray-denim.300}",
+                "type": "color"
+              },
+              "600": {
+                "value": "#003820",
+                "type": "color"
+              },
+              "700": {
+                "value": "#00602D",
+                "type": "color"
+              },
+              "800": {
+                "value": "#10983D",
+                "type": "color"
+              },
+              "900": {
+                "value": "#27D545",
+                "type": "color"
+              }
+            }
+          }
+        },
+        "trend": {
+          "negative": {
+            "@": {
+              "value": "{ref.color.red-cardinal.1000}",
+              "type": "color"
+            },
+            "emphasis": {
+              "value": "{ref.color.red-cardinal.1100}",
+              "type": "color"
+            }
+          },
+          "positive": {
+            "@": {
+              "value": "{ref.color.green-grass.1000}",
+              "type": "color"
+            },
+            "emphasis": {
+              "value": "{ref.color.green-grass.1100}",
+              "type": "color"
+            }
+          }
+        }
+      },
+      "utilities": {
+        "interaction": {
+          "hover": {
+            "alpha": {
+              "value": "#ffffff0d",
+              "type": "color",
+              "description": "overlaid on  select backgrounds fill simulates hover"
+            }
+          },
+          "selected": {
+            "alpha": {
+              "value": "#ffffff14",
+              "type": "color",
+              "description": "overlaid on  select backgrounds fill simulates  selected state"
+            },
+            "emphasis-alpha": {
+              "value": "#016df1f7",
+              "type": "color"
+            }
+          },
+          "active": {
+            "alpha": {
+              "value": "#ffffff1a",
+              "type": "color",
+              "description": "overlaid on  select backgrounds fill simulates  active state"
+            }
+          }
+        },
+        "scrollbar-thumb": {
+          "value": "rgba($ref.color.gray-slate.1000, 75%)",
+          "type": "color",
+          "description": " #818996bf"
+        },
+        "overlays": {
+          "overlay": {
+            "value": "#00000066",
+            "type": "color"
+          },
+          "horizontal-right": {
             "value": "linear-gradient(90deg, #000000a6 0%, #00000000 100%)",
             "type": "color"
           },
-          "left": {
+          "horizontal-left": {
             "value": "linear-gradient(-90deg, #000000a6 0%, #00000000 100%)",
             "type": "color"
           }
         },
-        "overlay": {
-          "value": "#00000080",
+        "gradient": {
+          "green-to-red": {
+            "value": "linear-gradient(90deg, #00cc33 0%, #1558b7 48.35%, #fd4b4b 100%)",
+            "type": "color"
+          },
+          "blue-purple": {
+            "value": "linear-gradient(-30deg, #8e4ec6 0%, #3e63dd 100%)",
+            "type": "color"
+          }
+        },
+        "alt-accent": {
+          "value": "hsla(0, 0%, 0%, 0.12);",
           "type": "color"
         }
       }

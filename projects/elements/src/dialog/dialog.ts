@@ -19,7 +19,6 @@ import { IconButton } from '../icon-button';
  * @cssprop --gap
  * @cssprop --max-width
  * @cssprop --min-height
- * @cssprop --mlv-sys-interaction-default-background
  * @cssprop --mlv-sys-layer-popover-arrow-padding
  * @cssprop --mlv-sys-layer-popover-arrow-offset
  * @cssprop --mlv-sys-layer-popover-offset

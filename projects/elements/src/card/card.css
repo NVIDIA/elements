@@ -1,5 +1,6 @@
 :host {
-  --mlv-sys-interaction-default-background: var(--mlv-sys-interaction-default-background-200);
+  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-200);
+  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-200);
   --background: var(--mlv-sys-layer-container-background);
   --color: var(--mlv-sys-layer-canvas-color);
   --border-radius: var(--mlv-ref-border-radius-lg);

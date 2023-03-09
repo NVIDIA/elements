@@ -1,50 +1,30 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import { LinkedHeader } from '../../docs/utils.mdx';
 
-<Meta title="Foundations/Tokens/Status" />
+<Meta title="Foundations/Tokens/Status" parameters={{ badges: ['beta'] }} />
 
-# Status (beta)
+# Status
 
-Status colors are used in combination of text or ionography to convey status of
-an element or interation. Status type components inlcude `alerts`, `badges`, `tags` and `form control` messages.
+Status colors are used in combination of text or iconography to convey status of a task.
 
-- `default`
-- `accent`
-- `success`
-- `warning`
-- `danger`
+<LinkedHeader>Dot Status</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-dot-examples--status" />
+</Canvas>
+
+<LinkedHeader>Badge Status</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-badge-examples--status" />
+</Canvas>
+
+<LinkedHeader>Alert Status</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-alert-examples--status" />
+</Canvas>
 
 <LinkedHeader>Status Tokens</LinkedHeader>
 
 <Story id="foundations-tokens-examples--status" />
-
-<LinkedHeader>Accent Tokens</LinkedHeader>
-
-Accent tokens are used as system wide color accents. Components using accent colors
-inlcude checkboxes, radios, range inputs and form controls.
-
-<Story id="foundations-tokens-examples--accent" />
-
-<LinkedHeader>Icon</LinkedHeader>
-
-<Canvas>
-  <Story id="elements-icon-examples--themes" inline={false} height="100px" />
-</Canvas>
-
-<LinkedHeader>Notification Snackbar</LinkedHeader>
-
-<Canvas>
-  <Story id="elements-notification-examples--status" inline={false} height="500px" />
-</Canvas>
-
-<LinkedHeader>Alert</LinkedHeader>
-
-<Canvas>
-  <Story id="elements-alert-examples--status" inline={false} height="500px" />
-</Canvas>
-
-<LinkedHeader>Alert Group</LinkedHeader>
-
-<Canvas>
-  <Story id="elements-alert-group-examples--status" inline={false} height="600px" />
-</Canvas>

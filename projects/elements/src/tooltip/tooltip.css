@@ -6,7 +6,7 @@
   --background: var(--mlv-sys-layer-popover-background);
   --color: var(--mlv-sys-layer-popover-color);
   --padding: var(--mlv-ref-size-300);
-  --box-shadow: var(--mlv-ref-shadow-100);
+  --box-shadow: var(--mlv-ref-shadow-500);
   --font-size: var(--mlv-ref-font-size-200);
   --arrow-transform: translate(0, -2px) rotate(-45deg);
 }

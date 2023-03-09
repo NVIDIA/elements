@@ -1,6 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, Status, useStyles } from '@elements/elements/internal';
+import { attachInternals, SupportStatus, useStyles } from '@elements/elements/internal';
 import styles from './alert-group.css?inline';
 
 /**
@@ -21,7 +21,7 @@ export class AlertGroup extends LitElement {
     version: 'PACKAGE_VERSION'
   };
 
-  @property({ type: String, reflect: true }) status: Status;
+  @property({ type: String, reflect: true }) status: SupportStatus;
 
   /** @private */
   declare _internals: ElementInternals;

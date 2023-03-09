@@ -1,7 +1,7 @@
 :host {
   --mlv-sys-layer-popover-offset: var(--mlv-ref-space-xl);
   --border-radius: var(--mlv-ref-border-radius-md);
-  --status-color: var(--mlv-sys-status-neutral-background);
+  --status-color: var(--mlv-sys-support-color);
   --background: var(--mlv-sys-layer-popover-background);
   --color: var(--mlv-sys-layer-popover-color);
   --padding: var(--mlv-ref-size-500) var(--mlv-ref-size-900);
@@ -55,17 +55,18 @@ mlv-icon-button {
 }
 
 :host([status='accent']) {
-  --status-color: var(--mlv-sys-accent-secondary-background);
+  --status-color: var(--mlv-sys-support-accent-color);
 }
 
 :host([status='success']) {
-  --status-color: var(--mlv-sys-status-success-background);
+  --status-color: var(--mlv-sys-support-success-color);
 }
 
 :host([status='warning']) {
-  --status-color: var(--mlv-sys-status-warning-background);
+  --status-color: var(--mlv-sys-support-warning-color);
+  --status-color: color-mix(in oklab, var(--mlv-sys-support-warning-color) 90%, var(--mlv-sys-contrast-mute-color));
 }
 
 :host([status='danger']) {
-  --status-color: var(--mlv-sys-status-danger-background);
+  --status-color: var(--mlv-sys-support-danger-color);
 }

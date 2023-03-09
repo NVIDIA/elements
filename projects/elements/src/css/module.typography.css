@@ -12,9 +12,9 @@
 }
 
 [mlv-text~='display'], [mlv-text~='heading'], [mlv-text~='body'], [mlv-text~='label'], [mlv-text~='eyebrow'] {
-  font-family: var(--mlv-ref-font-family-inter) !important;
+  font-family: var(--mlv-ref-font-family) !important;
   font-weight: var(--mlv-ref-font-weight-regular) !important;
-  color: var(--mlv-sys-text-default-color) !important;
+  color: var(--mlv-sys-text-color) !important;
   white-space: initial;
   margin: 0;
 }
@@ -151,6 +151,7 @@
   color: var(--mlv-sys-text-link-color) !important;
   text-decoration: underline !important;
   line-height: inherit !important;
+  width: initial !important;
 
   &:hover,
   &[mlv-text~='hover'] {
@@ -169,7 +170,7 @@
 
 [mlv-text~='code'] {
   font-weight: var(--mlv-ref-font-weight-regular) !important;
-  color: var(--mlv-sys-text-default-color) !important;
+  color: var(--mlv-sys-text-color) !important;
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -184,6 +185,18 @@
 
 [mlv-text~='capitalize'] {
   text-transform: capitalize !important;
+}
+
+[mlv-text~='inherit'] {
+  color: inherit !important;
+}
+
+[mlv-text~='center'] {
+  text-align: center !important;
+}
+
+[mlv-text~='end'] {
+  text-align: end !important;
 }
 
 [mlv-text~='truncate'] {

@@ -1,8 +1,8 @@
 {
   "ref": {
     "scale": {
-      "size": { "value": "0.9" },
-      "space": { "value": "0.9" }
+      "size": { "value": "0.95" },
+      "space": { "value": "0.8" }
     }
   }
 }

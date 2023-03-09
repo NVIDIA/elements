@@ -1,23 +1,28 @@
 [interaction-state] {
-  background-image: linear-gradient(hsla(0, 0%, var(--mlv-sys-interaction-state-lightness), var(--mlv-sys-interaction-state-alpha)) 0 0) !important;
+  background-image: linear-gradient(color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio)) 0 0) !important;
 }
 
 :host(:hover) [interaction-state],
 :host(:--hover) [interaction-state] {
-  --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-hover-alpha);
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
 }
 
 :host(:active) [interaction-state],
 :host(:--active) [interaction-state] {
-  --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-active-alpha);
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-active);
 }
 
 :host([selected]) [interaction-state],
 :host(:--selected) [interaction-state] {
-  --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-selected-alpha);
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
 }
 
 :host([disabled]) [interaction-state],
 :host(:--disabled) [interaction-state] {
-  --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-disabled-alpha) !important;
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-disabled);
+}
+
+:host([readonly]) [interaction-state],
+:host(:--readonly) [interaction-state] {
+  --mlv-sys-interaction-state-ratio: 0;
 }

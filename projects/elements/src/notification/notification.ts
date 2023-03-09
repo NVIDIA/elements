@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button';
-import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, Status, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, SupportStatus, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './notification.css?inline';
 
 /**
@@ -59,7 +59,7 @@ export class Notification extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
-  @property({ type: String, reflect: true }) status: Status;
+  @property({ type: String, reflect: true }) status: SupportStatus;
 
   protected typePopoverController = new TypePopoverController<Notification>(this);
 

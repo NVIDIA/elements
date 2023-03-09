@@ -1,7 +1,7 @@
 :host {
   --cursor: pointer;
   --border-radius: var(--mlv-ref-border-radius-full);
-  --background: var(--mlv-sys-interaction-default-background);
+  --background: var(--mlv-sys-interaction-field-background);
   --width: var(--mlv-ref-size-1000);
   --height: var(--mlv-ref-size-500);
   --anchor-width: var(--mlv-ref-font-size-200);

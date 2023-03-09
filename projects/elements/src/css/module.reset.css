@@ -4,7 +4,7 @@ body[mlv-theme],
   color-scheme: var(--mlv-sys-color-scheme) !important;
   background: var(--mlv-sys-layer-canvas-background) !important;
   color: var(--mlv-sys-layer-canvas-color) !important;
-  font-family: var(--mlv-ref-font-family-inter) !important;
+  font-family: var(--mlv-ref-font-family) !important;
   text-rendering: optimizeSpeed;
 }
 

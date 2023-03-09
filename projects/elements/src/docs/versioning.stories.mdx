@@ -1,0 +1,39 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { LinkedHeader, Status } from './utils.mdx';
+
+<Meta title="About/Versioning" />
+
+<Story id="internal-integration--empty" />
+
+# Versioning
+
+The `@elements/elements` pacakge follows [semver](https://semver.org/) and is currently pre 1.0. Changes can be found in the [Changelog](./?path=/story/about-changelog--page). A debug utility is available
+on the global window object to help identify the active versions being used at runtime. This log will list out all the registered elements and active versions.
+
+```typescript
+window.MLV_ELEMENTS.debug()
+```
+
+```json
+{
+  "versions": ["0.0.0"],
+  "elementRegistry": {
+    "mlv-icon": "0.0.0",
+    "mlv-alert": "0.0.0",
+    "mlv-button": "0.0.0",
+    "mlv-input": "0.0.0",
+    "mlv-dropdown": "0.0.0",
+    "mlv-dialog": "0.0.0",
+  },
+  "i18nRegistry": {
+    "close": "close",
+    "expand": "expand",
+    "sort": "sort",
+    "show": "show",
+    "hide": "hide",
+    "loading": "loading"
+  }
+}
+```
+
+<Status status={{ demo: true, apiDoc: false, unitTests: false, themeSupport: false, apiReview: false, vqaReview: false, a11y: false, performance: false, stable: false, pkg: false, figma: false }}></Status>

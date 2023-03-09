@@ -86,7 +86,7 @@ export default defineConfig((env) => {
                 .forEach(file => fs.renameSync(dist(file), dist(`css/${file}`)));
             }
           },
-          mode === 'production' ? replace({ preventAssignment: false, values: { PACKAGE_VERSION: packageFile.version }}) : false,
+          replace({ preventAssignment: false, values: { PACKAGE_VERSION: packageFile.version }}),
           mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
           mode === 'production' ? terser({ ecma: 2020, module: true }) : false // https://github.com/vitejs/vite/issues/8848
         ]

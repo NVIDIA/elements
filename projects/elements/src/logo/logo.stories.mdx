@@ -1,0 +1,44 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
+
+<Meta title="Elements/Logo/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Logo
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/logo/define.js';
+```
+
+```html
+<mlv-logo></mlv-logo>
+```
+
+<Canvas>
+  <Story id="elements-logo-examples--default" />
+</Canvas>
+
+<LinkedHeader>Size</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-logo-examples--size" />
+</Canvas>
+
+<LinkedHeader>Color</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-logo-examples--color" />
+</Canvas>
+
+<LinkedHeader>Themes</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-logo-examples--light-theme" />
+  <Story id="elements-logo-examples--dark-theme" />
+</Canvas>
+
+<Status status={{ apiDoc: true, unitTests: true, themeSupport: true, apiReview: false, vqaReview: false, a11y: true, performance: true, stable: false, pkg: true, figma: false }}></Status>
+
+<LinkedHeader>mlv-logo</LinkedHeader>
+<Props of="mlv-logo" />

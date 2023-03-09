@@ -1,11 +1,12 @@
 :host {
   --gap: var(--mlv-ref-space-xs);
   --font-size: var(--mlv-ref-font-size-200);
-  --background: var(--mlv-sys-status-default-background);
   --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
   --border-radius: var(--mlv-ref-border-radius-md);
-  --color: var(--mlv-sys-status-default-color);
   --icon-size: var(--mlv-ref-size-600);
+  --color: var(--mlv-sys-text-color);
+  --icon-color: var(--mlv-sys-support-emphasis-color);
+  --background: var(--mlv-sys-support-muted-color);
   width: 100%;
 }
 
@@ -19,31 +20,33 @@
   display: flex;
   flex-direction: column;
   --_alert-color: var(--color);
+  --_icon-color: var(--icon-color);
 }
 
 ::slotted(mlv-alert) {
   --color: var(--_alert-color);
-  --icon-color: var(--_alert-color);
-  --icon-size: var(--mlv-ref-size-500);
+  --icon-color: var(--_icon-color);
+  --icon-size: var(--mlv-ref-size-400);
   height: var(--mlv-ref-size-800);
+  width: 100%;
 }
 
 :host([status='accent']) {
-  --background: var(--mlv-sys-status-accent-background);
-  --color: var(--mlv-sys-status-accent-color);
+  --background: var(--mlv-sys-support-accent-muted-color);
+  --icon-color: var(--mlv-sys-support-accent-emphasis-color);
 }
 
 :host([status='success']) {
-  --background: var(--mlv-sys-status-success-background);
-  --color: var(--mlv-sys-status-success-color);
+  --background: var(--mlv-sys-support-success-muted-color);
+  --icon-color: var(--mlv-sys-support-success-emphasis-color);
 }
 
 :host([status='warning']) {
-  --background: var(--mlv-sys-status-warning-background);
-  --color: var(--mlv-sys-status-warning-color);
+  --background: var(--mlv-sys-support-warning-muted-color);
+  --icon-color: var(--mlv-sys-support-warning-emphasis-color);
 }
 
 :host([status='danger']) {
-  --background: var(--mlv-sys-status-danger-background);
-  --color: var(--mlv-sys-status-danger-color);
+  --background: var(--mlv-sys-support-danger-muted-color);
+  --icon-color: var(--mlv-sys-support-danger-emphasis-color);
 }

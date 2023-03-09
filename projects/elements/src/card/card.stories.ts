@@ -163,6 +163,29 @@ export const CardWithHeaderAndFooter = {
   }
 };
 
+export const DescriptionList = {
+  render: () => html`
+<div mlv-theme="root">
+  <mlv-card style="width: 650px">
+    <mlv-card-header>
+      <h2 slot="title">Nautical Terms</h2>
+    </mlv-card-header>
+    <mlv-card-content>
+      <dl mlv-layout="grid gap:lg">
+        <dt mlv-layout="span:4" mlv-text="muted">Knot</dt>
+        <dd mlv-layout="span:8">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
+
+        <dt mlv-layout="span:4" mlv-text="muted">Port</dt>
+        <dd mlv-layout="span:8">Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+
+        <dt mlv-layout="span:4" mlv-text="muted">Starboard</dt>
+        <dd mlv-layout="span:8">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+      </dl>
+    </mlv-card-content>
+  </mlv-card>
+</div>
+  `
+}
 
 export const LightTheme = {
   render: () => html`

@@ -1,0 +1,27 @@
+:host {
+  --border-radius: 0;
+  --background: var(--mlv-sys-support-color);
+  --color: var(--mlv-sys-text-white-color);
+  --icon-color: var(--color);
+}
+
+:host([status='accent']) {
+  --background: var(--mlv-sys-support-accent-color);
+  --icon-color: var(--color);
+}
+
+:host([status='success']) {
+  --background: var(--mlv-sys-support-success-color);
+  --icon-color: var(--color);
+}
+
+:host([status='warning']) {
+  --background: var(--mlv-sys-support-warning-color);
+  --icon-color: var(--color);
+  --color: var(--mlv-sys-text-black-color);
+}
+
+:host([status='danger']) {
+  --background: var(--mlv-sys-support-danger-color);
+  --icon-color: var(--color);
+}

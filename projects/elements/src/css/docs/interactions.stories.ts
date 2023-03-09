@@ -12,25 +12,34 @@ const menuDemoStyles = html`
     display: flex;
     gap: 12px;
     margin: 24px 0;
-    padding: 12px;
+  }
+  
+  [mlv-theme*=root].interaction-demo {
+    padding: 6px !important;
   }
 
   .mlv-dropdown {
-    display: block;
-    overflow: hidden;
-    background: var(--mlv-sys-layer-overlay-background);
+    --background: var(--mlv-sys-layer-overlay-background);
+    --mlv-sys-interaction-background: var(--mlv-sys-layer-overlay-background);
+    background: var(--background);
     box-shadow: var(--mlv-ref-shadow-200);
     border-radius: var(--mlv-ref-border-radius-md);
+    padding: var(--mlv-ref-size-200);
+    gap: var(--mlv-ref-size-200);
     width: 200px;
+    display: flex;
+    flex-direction: column;
   }
   
   .mlv-drawer {
-    display: block;
-    overflow: hidden;
-    min-height: 320px;
     background: var(--mlv-sys-layer-container-background);
     box-shadow: var(--mlv-ref-shadow-200);
     border-radius: var(--mlv-ref-border-radius-md);
+    padding: var(--mlv-ref-size-200);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 320px;
     width: 200px;
   }
 
@@ -48,15 +57,35 @@ const menuDemoStyles = html`
     display: block;
     border: 0;
     cursor: pointer;
-    background: transparent;
     text-align: left;
-    padding: var(--mlv-ref-size-400) var(--mlv-ref-size-600);
-    color: var(--mlv-sys-interaction-default-color);
+    padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
+    color: var(--mlv-sys-interaction-color);
     font-size: var(--mlv-ref-font-size-300);
+    border-radius: var(--mlv-ref-border-radius-xs);
+    background-image: linear-gradient(color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio)) 0 0) !important;
+  }
+
+  .mlv-menu-item:hover,
+  .mlv-menu-item[hover] {
+    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
+  }
+
+  .mlv-menu-item:active,
+  .mlv-menu-item[active] {
+    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-active);
+  }
+
+  .mlv-menu-item[selected] {
+    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
   }
 
   .mlv-menu-item[disabled] {
+    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-disabled);
     cursor: not-allowed;
+  }
+
+  .mlv-menu-item[readonly] {
+    --mlv-sys-interaction-state-ratio: 0;
   }
 
   .mlv-menu-item:focus,
@@ -64,28 +93,6 @@ const menuDemoStyles = html`
     outline-offset: -3px;
     outline: 5px auto -webkit-focus-ring-color;
     outline: Highlight solid 2px;
-  }
-
-  .mlv-menu-item {
-    background-image: linear-gradient(hsla(0, 0%, var(--mlv-sys-interaction-state-lightness), var(--mlv-sys-interaction-state-alpha)) 0 0) !important;
-  }
-
-  .mlv-menu-item:hover,
-  .mlv-menu-item[hover] {
-    --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-hover-alpha);
-  }
-
-  .mlv-menu-item[disabled] {
-    --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-disabled-alpha);
-  }
-
-  .mlv-menu-item:active,
-  .mlv-menu-item[active] {
-    --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-active-alpha);
-  }
-
-  .mlv-menu-item[selected] {
-    --mlv-sys-interaction-state-alpha: var(--mlv-sys-interaction-state-selected-alpha);
   }
 </style>
 `;
@@ -163,11 +170,10 @@ export const Menu = {
 export const ContainerMenu = {
   render: () => html`
     <div mlv-layout="grid span-items:6 gap:md">
-      <div mlv-theme="root light">
+      <div mlv-theme="root light" mlv-layout="pad:md align:stretch">
         <mlv-card>
           <mlv-card-content mlv-layout="grid gap:md">
-            <div mlv-layout="span:4 column">
-              <div class="mlv-menu-item">item</div>
+            <div mlv-layout="span:5 column gap:xs">
               <div class="mlv-menu-item">default</div>
               <div class="mlv-menu-item" hover>hover</div>
               <div class="mlv-menu-item" active>active</div>
@@ -175,15 +181,14 @@ export const ContainerMenu = {
               <div class="mlv-menu-item" disabled>disabled</div>
               <div class="mlv-menu-item" focused>focused</div>
             </div>
-            <div mlv-layout="span:8">container</div>
+            <div mlv-layout="span:7">container</div>
           </mlv-card-content>
         </mlv-card>
       </div>
-      <div mlv-theme="root dark">
+      <div mlv-theme="root dark" mlv-layout="pad:md align:stretch">
         <mlv-card>
           <mlv-card-content mlv-layout="grid gap:md">
-            <div mlv-layout="span:4 column">
-              <div class="mlv-menu-item">item</div>
+            <div mlv-layout="span:5 column gap:xs">
               <div class="mlv-menu-item">default</div>
               <div class="mlv-menu-item" hover>hover</div>
               <div class="mlv-menu-item" active>active</div>
@@ -191,7 +196,7 @@ export const ContainerMenu = {
               <div class="mlv-menu-item" disabled>disabled</div>
               <div class="mlv-menu-item" focused>focused</div>
             </div>
-            <div mlv-layout="span:8">container</div>
+            <div mlv-layout="span:7">container</div>
           </mlv-card-content>
         </mlv-card>
       </div>
@@ -407,9 +412,9 @@ export const Tabs = {
         background: transparent;
         padding: 0 var(--mlv-ref-size-300);
         height: var(--mlv-ref-size-800);
-        color: var(--mlv-sys-interaction-default-color);
+        color: var(--mlv-sys-interaction-color);
         font-size: var(--mlv-ref-font-size-300);
-        border-radius: var(--mlv-ref-border-radius-lg);
+        border-bottom: var(--mlv-ref-border-width-lg) solid transparent;
       }
 
       .mlv-tabs > p {
@@ -417,28 +422,13 @@ export const Tabs = {
         margin: 0;
       }
 
-      .mlv-tab:hover,
-      .mlv-tab[hover] {
-        background: var(--mlv-sys-interaction-ghost-hover-background);
-        color: var(--mlv-sys-interaction-ghost-hover-color);
-        text-decoration: underline;
-      }
-
-      .mlv-tab:active,
-      .mlv-tab[active] {
-        background: var(--mlv-sys-interaction-ghost-active-background);
-        color: var(--mlv-sys-interaction-ghost-active-color);
-      }
-
-      .mlv-tab[selected] {
-        background: var(--mlv-sys-interaction-selected-background);
+      .mlv-tab:is([selected], [hover], :hover) {
+        border-bottom: var(--mlv-ref-border-width-lg) solid var(--mlv-sys-accent-secondary-background);
       }
 
       .mlv-tab[disabled] {
-        background: var(--mlv-sys-interaction-ghost-disabled-background);
-        color: var(--mlv-sys-interaction-ghost-disabled-color);
         cursor: not-allowed;
-        text-decoration: none;
+        border-bottom: var(--mlv-ref-border-width-lg) solid var(--mlv-ref-border-color-muted);
       }
 
       .mlv-tab:focus,

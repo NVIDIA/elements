@@ -1,5 +1,5 @@
 :host {
-  --color: var(--mlv-sys-status-neutral-background);
+  --color: var(--mlv-sys-support-color);
   --width: var(--mlv-ref-size-400);
   --height: var(--mlv-ref-size-400);
   display: inline-flex;
@@ -60,17 +60,17 @@ svg {
 }
 
 :host([status='success']) {
-  --color: var(--mlv-sys-status-success-background);
+  --color: var(--mlv-sys-support-success-color);
 }
 
 :host([status='warning']) {
-  --color: var(--mlv-sys-status-warning-background);
+  --color: var(--mlv-sys-support-warning-color);
 }
 
 :host([status='danger']) {
-  --color: var(--mlv-sys-status-danger-background);
+  --color: var(--mlv-sys-support-danger-color);
 }
 
 :host([status='accent']) {
-  --color: var(--mlv-sys-status-accent-background);
+  --color: var(--mlv-sys-support-accent-color);
 }

@@ -1,74 +1,70 @@
 {
-  "mle-ref-tokens": {
+  "mlv-ref-tokens": {
     "ref": {
-      "space": {
+      "size": {
         "50": {
-          "value": "2px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 2",
+          "type": "sizing",
+          "description": "Size tokens provide a scale of values used for element sizing. This includes padding and margins retained within the bounds of the element."
         },
         "100": {
-          "value": "4px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 4",
+          "type": "sizing",
+          "description": "Size tokens provide a scale of values used for element sizing. This includes padding and margins retained within the bounds of the element."
         },
         "150": {
-          "value": "6px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 6",
+          "type": "sizing",
+          "description": "(used for spacin between an element + text or closely related elements) Size tokens provide a scale of values used for element sizing. This includes padding and margins retained within the bounds of the element."
         },
         "200": {
-          "value": "8px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 8",
+          "type": "sizing",
+          "description": "Size tokens provide a scale of values used for element sizing. This includes padding and margins retained within the bounds of the element."
+        },
+        "250": {
+          "value": "{ref.scale.size} * 10",
+          "type": "sizing",
+          "description": "Size tokens provide a scale of values used for element sizing. This includes padding and margins retained within the bounds of the element."
         },
         "300": {
-          "value": "12px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 12",
+          "type": "sizing",
+          "description": "Size tokens provide a scale of values used for element sizing. This includes padding and margins retained within the bounds of the element."
         },
         "400": {
-          "value": "16px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 16",
+          "type": "sizing",
+          "description": "Size tokens provide a scale of values used for element sizing. This includes padding and margins retained within the bounds of the element."
         },
         "500": {
-          "value": "20px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 20",
+          "type": "sizing",
+          "description": "Size tokens provide a scale of values used for element sizing. This includes padding and margins retained within the bounds of the element."
         },
         "600": {
-          "value": "24px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 24",
+          "type": "sizing",
+          "description": "Size tokens provide a scale of values used for element sizing. This includes padding and margins retained within the bounds of the element."
         },
         "700": {
-          "value": "28px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 28",
+          "type": "sizing",
+          "description": "compact theme default size for elements / buttons, small buttons"
         },
         "800": {
-          "value": "32px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 32",
+          "type": "sizing",
+          "description": "default / comfortable theme - default size for elements/buttons"
         },
         "900": {
-          "value": "36px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 36",
+          "type": "sizing"
         },
         "1000": {
-          "value": "40px",
-          "type": "spacing"
-        },
-        "1100": {
-          "value": "44px",
-          "type": "spacing"
-        },
-        "1200": {
-          "value": "48px",
-          "type": "spacing"
-        },
-        "1300": {
-          "value": "52px",
-          "type": "spacing"
-        },
-        "1400": {
-          "value": "56px",
-          "type": "spacing"
-        },
-        "1600": {
-          "value": "64px",
-          "type": "spacing"
+          "value": "{ref.scale.size} * 40",
+          "type": "sizing",
+          "description": "large theme default size for elements / buttons"
         }
       },
       "border-radius": {
@@ -105,14 +101,14 @@
         }
       },
       "border-width": {
+        "sm": {
+          "value": "1px",
+          "type": "borderWidth"
+        },
         "md": {
           "value": "2px",
           "type": "borderWidth",
           "description": "default. inputs, assist chips, fpcus states, selected"
-        },
-        "sm": {
-          "value": "1px",
-          "type": "borderWidth"
         },
         "lg": {
           "value": "3px",
@@ -121,792 +117,6 @@
         "xl": {
           "value": "4px",
           "type": "borderWidth"
-        }
-      },
-      "color": {
-        "white": {
-          "value": "#ffffff",
-          "type": "color"
-        },
-        "black": {
-          "value": "#000000",
-          "type": "color"
-        },
-        "neutral": {
-          "50": {
-            "value": "#fafafa",
-            "type": "color",
-            "description": "DM - High Contrast Text; LM - BG 0 (Canvas); Light Border"
-          },
-          "100": {
-            "value": "#e6e8ec",
-            "type": "color",
-            "description": "DM - Default Text,focus ring; LM -seperator, border"
-          },
-          "150": {
-            "value": "#d6d9e0",
-            "type": "color",
-            "description": "LM - Button (on 0/Canvas)"
-          },
-          "200": {
-            "value": "#afb4be",
-            "type": "color",
-            "description": "DM - Muted Contrast Text"
-          },
-          "300": {
-            "value": "#8c92a1",
-            "type": "color",
-            "description": " "
-          },
-          "400": {
-            "value": "#777e90",
-            "type": "color",
-            "description": "DM/LM - Icons, Subtle Contrast Text"
-          },
-          "500": {
-            "value": "#353945",
-            "type": "color",
-            "description": "DM-  Highest/modal/palette; LM - muted text"
-          },
-          "600": {
-            "value": "#23262f",
-            "type": "color",
-            "description": "DM-  elevated cards tooltips; LM - default text"
-          },
-          "700": {
-            "value": "#17191f",
-            "type": "color",
-            "description": "DM-  bg 1 (cards on canvas) LM - High Contrast Text"
-          },
-          "750": {
-            "value": "#14151a",
-            "type": "color",
-            "description": "DM-  contrast on 0"
-          },
-          "800": {
-            "value": "#0d0e11",
-            "type": "color",
-            "description": "DM- Canvas"
-          },
-          "900": {
-            "value": "#000000",
-            "type": "color",
-            "description": "DM - IDE; LM - emphasized text"
-          },
-          "00": {
-            "value": "#ffffff",
-            "type": "color"
-          }
-        },
-        "gray-zinc": {
-          "100": {
-            "value": "#f9fafb",
-            "type": "color"
-          },
-          "300": {
-            "value": "#edeff2",
-            "type": "color"
-          },
-          "400": {
-            "value": "#E2E4E9  ",
-            "type": "color",
-            "description": "hsl(222, 15%, 90%)"
-          },
-          "500": {
-            "value": "#626c84",
-            "type": "color"
-          },
-          "600": {
-            "value": "#414858",
-            "type": "color"
-          },
-          "650": {
-            "value": "#343847",
-            "type": "color"
-          },
-          "700": {
-            "value": "#2b303b",
-            "type": "color"
-          },
-          "750": {
-            "value": "#23262F",
-            "type": "color"
-          },
-          "800": {
-            "value": "#21242c",
-            "type": "color"
-          },
-          "900": {
-            "value": "#16181d",
-            "type": "color",
-            "description": "17191F"
-          },
-          "1000": {
-            "value": "#0b0c0f",
-            "type": "color"
-          }
-        },
-        "alpha-white": {
-          "50": {
-            "value": "#ffffff0a",
-            "type": "color"
-          },
-          "100": {
-            "value": "#ffffff0f",
-            "type": "color"
-          },
-          "200": {
-            "value": "#ffffff14",
-            "type": "color"
-          },
-          "300": {
-            "value": "#ffffff29",
-            "type": "color"
-          },
-          "400": {
-            "value": "#ffffff3d",
-            "type": "color"
-          },
-          "500": {
-            "value": "#ffffff5c",
-            "type": "color"
-          },
-          "600": {
-            "value": "#ffffff7a",
-            "type": "color"
-          },
-          "700": {
-            "value": "#ffffffa3",
-            "type": "color"
-          },
-          "800": {
-            "value": "#ffffffcc",
-            "type": "color"
-          },
-          "900": {
-            "value": "#ffffffeb",
-            "type": "color"
-          }
-        },
-        "alpha-black": {
-          "50": {
-            "value": "#0000000a",
-            "type": "color"
-          },
-          "100": {
-            "value": "#0000000f",
-            "type": "color"
-          },
-          "200": {
-            "value": "#00000014",
-            "type": "color"
-          },
-          "300": {
-            "value": "#00000029",
-            "type": "color"
-          },
-          "400": {
-            "value": "#0000003d",
-            "type": "color"
-          },
-          "500": {
-            "value": "#0000005c",
-            "type": "color"
-          },
-          "600": {
-            "value": "#0000007a",
-            "type": "color"
-          },
-          "700": {
-            "value": "#000000a3",
-            "type": "color"
-          },
-          "800": {
-            "value": "#000000cc",
-            "type": "color"
-          },
-          "900": {
-            "value": "#000000eb",
-            "type": "color"
-          }
-        },
-        "yellow-nova": {
-          "100": {
-            "value": "#fff5e4",
-            "type": "color"
-          },
-          "200": {
-            "value": "#ffeac6",
-            "type": "color"
-          },
-          "300": {
-            "value": "#ffdfa1",
-            "type": "color"
-          },
-          "400": {
-            "value": "#ffd372",
-            "type": "color"
-          },
-          "500": {
-            "value": "#ffc700",
-            "type": "color"
-          },
-          "600": {
-            "value": "#e4b200",
-            "type": "color"
-          },
-          "700": {
-            "value": "#c69a00",
-            "type": "color"
-          },
-          "800": {
-            "value": "#a17e00",
-            "type": "color"
-          },
-          "900": {
-            "value": "#725900",
-            "type": "color"
-          }
-        },
-        "teal-river": {
-          "100": {
-            "value": "#e5eced",
-            "type": "color"
-          },
-          "200": {
-            "value": "#c7d7d9",
-            "type": "color"
-          },
-          "300": {
-            "value": "#a4c1c3",
-            "type": "color"
-          },
-          "400": {
-            "value": "#76a7ab",
-            "type": "color"
-          },
-          "500": {
-            "value": "#23888e",
-            "type": "color"
-          },
-          "600": {
-            "value": "#1f7a7f",
-            "type": "color"
-          },
-          "700": {
-            "value": "#1b696e",
-            "type": "color"
-          },
-          "800": {
-            "value": "#16565a",
-            "type": "color"
-          },
-          "900": {
-            "value": "#103d40",
-            "type": "color"
-          }
-        },
-        "red-carmine": {
-          "100": {
-            "value": "#fbe6e6",
-            "type": "color"
-          },
-          "200": {
-            "value": "#f6cbca",
-            "type": "color"
-          },
-          "300": {
-            "value": "#f2aba8",
-            "type": "color"
-          },
-          "400": {
-            "value": "#ee847f",
-            "type": "color"
-          },
-          "500": {
-            "value": "#e94a3f",
-            "type": "color"
-          },
-          "600": {
-            "value": "#d04238",
-            "type": "color"
-          },
-          "700": {
-            "value": "#b43931",
-            "type": "color"
-          },
-          "800": {
-            "value": "#932f28",
-            "type": "color"
-          },
-          "900": {
-            "value": "#68211c",
-            "type": "color"
-          }
-        },
-        "green-blast": {
-          "100": {
-            "value": "#e4eee6",
-            "type": "color"
-          },
-          "200": {
-            "value": "#c6dcc9",
-            "type": "color"
-          },
-          "300": {
-            "value": "#a2c8a8",
-            "type": "color"
-          },
-          "400": {
-            "value": "#73B17E",
-            "type": "color"
-          },
-          "500": {
-            "value": "#10983d",
-            "type": "color"
-          },
-          "600": {
-            "value": "#0E8837",
-            "type": "color"
-          },
-          "700": {
-            "value": "#0C762F",
-            "type": "color"
-          },
-          "800": {
-            "value": "#0A6027",
-            "type": "color"
-          },
-          "900": {
-            "value": "#07441B",
-            "type": "color"
-          }
-        },
-        "brand-green": {
-          "100": {
-            "value": "#e3efd4",
-            "type": "color"
-          },
-          "200": {
-            "value": "#c6e0aa",
-            "type": "color"
-          },
-          "300": {
-            "value": "#a9d081",
-            "type": "color"
-          },
-          "400": {
-            "value": "#8ac057",
-            "type": "color",
-            "description": "#74b800"
-          },
-          "500": {
-            "value": "#69b027",
-            "type": "color",
-            "description": "hover -  hsla(91, 64%, 37%, 1)"
-          },
-          "600": {
-            "value": "#448d00",
-            "type": "color"
-          },
-          "700": {
-            "value": "#1a6b00",
-            "type": "color"
-          },
-          "800": {
-            "value": "#004b00",
-            "type": "color"
-          },
-          "900": {
-            "value": "#002c00",
-            "type": "color"
-          }
-        },
-        "blue-denim": {
-          "100": {
-            "value": "#e4eafc",
-            "type": "color"
-          },
-          "200": {
-            "value": "#c6d2f9",
-            "type": "color"
-          },
-          "300": {
-            "value": "#a1b7f7",
-            "type": "color"
-          },
-          "400": {
-            "value": "#7298f4",
-            "type": "color"
-          },
-          "500": {
-            "value": "#0971f1",
-            "type": "color"
-          },
-          "600": {
-            "value": "#0865d8",
-            "type": "color"
-          },
-          "700": {
-            "value": "#0758bb",
-            "type": "color"
-          },
-          "800": {
-            "value": "#064798",
-            "type": "color"
-          },
-          "900": {
-            "value": "#04336c",
-            "type": "color"
-          }
-        },
-        "orange-burst": {
-          "100": {
-            "value": "#fff0d9",
-            "type": "color"
-          },
-          "200": {
-            "value": "#ffe1b3",
-            "type": "color"
-          },
-          "300": {
-            "value": "#ffd38e",
-            "type": "color"
-          },
-          "400": {
-            "value": "#ffc468",
-            "type": "color"
-          },
-          "500": {
-            "value": "#ffb63e",
-            "type": "color"
-          },
-          "600": {
-            "value": "#ce8c04",
-            "type": "color"
-          },
-          "700": {
-            "value": "#9e6400",
-            "type": "color"
-          },
-          "800": {
-            "value": "#713f00",
-            "type": "color"
-          },
-          "900": {
-            "value": "#4c1b00",
-            "type": "color"
-          }
-        },
-        "gray-stone": {
-          "100": {
-            "value": "#F6F7F9",
-            "type": "color",
-            "description": "canvas  F9FAFB/#f8f9fa "
-          },
-          "150": {
-            "value": "#f2f3f4",
-            "type": "color"
-          },
-          "200": {
-            "value": "#e5e6e9",
-            "type": "color",
-            "description": "E6E7EA"
-          },
-          "300": {
-            "value": "#cbced4",
-            "type": "color",
-            "description": "DM - default text"
-          },
-          "400": {
-            "value": "#999faa",
-            "type": "color"
-          },
-          "500": {
-            "value": "#818996",
-            "type": "color",
-            "description": "weak text"
-          },
-          "600": {
-            "value": "#646c79",
-            "type": "color"
-          },
-          "700": {
-            "value": "#49515d",
-            "type": "color"
-          },
-          "800": {
-            "value": "#2e3641",
-            "type": "color",
-            "description": "LM - default text"
-          },
-          "900": {
-            "value": "#0e161f",
-            "type": "color",
-            "description": "LM - emphasis text/icon , old 101923"
-          }
-        },
-        "blue-sea": {
-          "100": {
-            "value": "#e5f6ff",
-            "type": "color"
-          },
-          "200": {
-            "value": "#cbedff",
-            "type": "color"
-          },
-          "300": {
-            "value": "#aee4ff",
-            "type": "color"
-          },
-          "400": {
-            "value": "#8edbff",
-            "type": "color"
-          },
-          "500": {
-            "value": "#66d2ff",
-            "type": "color"
-          },
-          "600": {
-            "value": "#2aa6d1",
-            "type": "color"
-          },
-          "700": {
-            "value": "#007da6",
-            "type": "color"
-          },
-          "800": {
-            "value": "#00557c",
-            "type": "color"
-          },
-          "900": {
-            "value": "#003154",
-            "type": "color"
-          }
-        },
-        "green-symphony": {
-          "100": {
-            "value": "#dcf8de",
-            "type": "color"
-          },
-          "200": {
-            "value": "#b8f0bc",
-            "type": "color"
-          },
-          "300": {
-            "value": "#92e79c",
-            "type": "color"
-          },
-          "400": {
-            "value": "#64de7b",
-            "type": "color"
-          },
-          "500": {
-            "value": "#11d459",
-            "type": "color"
-          },
-          "600": {
-            "value": "#00aa32",
-            "type": "color"
-          },
-          "700": {
-            "value": "#008100",
-            "type": "color"
-          },
-          "800": {
-            "value": "#005900",
-            "type": "color"
-          },
-          "900": {
-            "value": "#003500",
-            "type": "color"
-          }
-        },
-        "lime-pear": {
-          "100": {
-            "value": "#f2f5d4",
-            "type": "color"
-          },
-          "200": {
-            "value": "#e4eaa9",
-            "type": "color"
-          },
-          "300": {
-            "value": "#d4e07e",
-            "type": "color"
-          },
-          "400": {
-            "value": "#c2d650",
-            "type": "color"
-          },
-          "500": {
-            "value": "#aecc00",
-            "type": "color"
-          },
-          "600": {
-            "value": "#81a200",
-            "type": "color"
-          },
-          "700": {
-            "value": "#567900",
-            "type": "color"
-          },
-          "800": {
-            "value": "#315300",
-            "type": "color"
-          },
-          "900": {
-            "value": "#212e00",
-            "type": "color"
-          }
-        },
-        "green-jade": {
-          "100": {
-            "value": "#e4eee6",
-            "type": "color"
-          },
-          "200": {
-            "value": "#c6dcc9",
-            "type": "color"
-          },
-          "300": {
-            "value": "#a2c8a8",
-            "type": "color"
-          },
-          "400": {
-            "value": "#73b17e",
-            "type": "color"
-          },
-          "600": {
-            "value": "#0e8837",
-            "type": "color"
-          },
-          "700": {
-            "value": "#0c762f",
-            "type": "color"
-          },
-          "800": {
-            "value": "#0a6027",
-            "type": "color"
-          },
-          "900": {
-            "value": "#07441b",
-            "type": "color"
-          }
-        },
-        "purple-lilac": {
-          "100": {
-            "value": "#f2e9ff",
-            "type": "color"
-          },
-          "200": {
-            "value": "#e3d2ff",
-            "type": "color"
-          },
-          "300": {
-            "value": "#d5bcff",
-            "type": "color"
-          },
-          "400": {
-            "value": "#c5a7ff",
-            "type": "color"
-          },
-          "500": {
-            "value": "#b491ff",
-            "type": "color"
-          },
-          "600": {
-            "value": "#8e6ed8",
-            "type": "color"
-          },
-          "700": {
-            "value": "#694db2",
-            "type": "color"
-          },
-          "800": {
-            "value": "#442d8e",
-            "type": "color"
-          },
-          "900": {
-            "value": "#1c0f6b",
-            "type": "color"
-          }
-        },
-        "pink-rose": {
-          "100": {
-            "value": "#ffe4ed",
-            "type": "color"
-          },
-          "200": {
-            "value": "#ffcadb",
-            "type": "color"
-          },
-          "300": {
-            "value": "#ffaeca",
-            "type": "color"
-          },
-          "400": {
-            "value": "#ff92b9",
-            "type": "color"
-          },
-          "500": {
-            "value": "#ff73a8",
-            "type": "color"
-          },
-          "600": {
-            "value": "#d64e85",
-            "type": "color"
-          },
-          "700": {
-            "value": "#af2564",
-            "type": "color"
-          },
-          "800": {
-            "value": "#880044",
-            "type": "color"
-          },
-          "900": {
-            "value": "#620027",
-            "type": "color"
-          }
-        },
-        "purple-lavendar": {
-          "100": {
-            "value": "#f9e7ff",
-            "type": "color"
-          },
-          "200": {
-            "value": "#f3ceff",
-            "type": "color"
-          },
-          "300": {
-            "value": "#ecb6ff",
-            "type": "color"
-          },
-          "400": {
-            "value": "#e39dff",
-            "type": "color"
-          },
-          "500": {
-            "value": "#da83ff",
-            "type": "color"
-          },
-          "600": {
-            "value": "#b35fd8",
-            "type": "color"
-          },
-          "700": {
-            "value": "#8c3ab1",
-            "type": "color"
-          },
-          "800": {
-            "value": "#67128c",
-            "type": "color"
-          },
-          "900": {
-            "value": "#420069",
-            "type": "color"
-          }
         }
       },
       "font-family": {
@@ -960,12 +170,24 @@
           "value": "26",
           "type": "lineHeights"
         },
+        "700": {
+          "value": "28",
+          "type": "lineHeights"
+        },
         "800": {
           "value": "32",
           "type": "lineHeights"
         },
-        "1150": {
-          "value": "46",
+        "900": {
+          "value": "36",
+          "type": "lineHeights"
+        },
+        "1000": {
+          "value": "40",
+          "type": "lineHeights"
+        },
+        "1200": {
+          "value": "48",
           "type": "lineHeights"
         },
         "1400": {
@@ -978,6 +200,10 @@
         },
         "1700": {
           "value": "68",
+          "type": "lineHeights"
+        },
+        "1800": {
+          "value": "72",
           "type": "lineHeights"
         },
         "2000": {
@@ -1021,6 +247,18 @@
         "bold": {
           "value": "Bold",
           "type": "fontWeights"
+        },
+        "medium": {
+          "value": "Medium",
+          "type": "fontWeights"
+        },
+        "extra-bold": {
+          "value": "Extra Bold",
+          "type": "fontWeights"
+        },
+        "light": {
+          "value": "light",
+          "type": "fontWeights"
         }
       },
       "font-size": {
@@ -1048,8 +286,8 @@
           "value": "{ref.scale.text} *18",
           "type": "fontSizes"
         },
-        "475": {
-          "value": "{ref.scale.text} *19",
+        "500": {
+          "value": "{ref.scale.text} *20",
           "type": "fontSizes"
         },
         "600": {
@@ -1087,19 +325,19 @@
       },
       "letter-spacing": {
         "relaxed": {
-          "value": "1",
+          "value": "1px",
           "type": "letterSpacing"
         },
         "snug": {
-          "value": "-1%",
+          "value": "-.15%",
           "type": "letterSpacing"
         },
         "none": {
           "value": "0%",
           "type": "letterSpacing"
         },
-        "tight": {
-          "value": "-2%",
+        "comfortable": {
+          "value": ".3px",
           "type": "letterSpacing"
         }
       },
@@ -1166,9 +404,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.semibold}",
-            "lineHeight": "{ref.line-height.400}",
-            "fontSize": "{ref.font-size.400}",
-            "letterSpacing": "{ref.letter-spacing.relaxed}",
+            "lineHeight": "{ref.line-height.600}",
+            "fontSize": "{ref.font-size.450}",
+            "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.uppercase}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1181,9 +419,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.semibold}",
-            "lineHeight": "{ref.line-height.450}",
+            "lineHeight": "{ref.line-height.300}",
             "fontSize": "{ref.font-size.250}",
-            "letterSpacing": "{ref.letter-spacing.snug}",
+            "letterSpacing": "{ref.letter-spacing.none}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1194,7 +432,7 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.semibold}",
-            "lineHeight": "{ref.line-height.500}",
+            "lineHeight": "{ref.line-height.400}",
             "fontSize": "{ref.font-size.300}",
             "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
@@ -1207,7 +445,7 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.semibold}",
-            "lineHeight": "{ref.line-height.550}",
+            "lineHeight": "{ref.line-height.500}",
             "fontSize": "{ref.font-size.350}",
             "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
@@ -1220,7 +458,7 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.semibold}",
-            "lineHeight": "{ref.line-height.600}",
+            "lineHeight": "{ref.line-height.550}",
             "fontSize": "{ref.font-size.400}",
             "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
@@ -1233,7 +471,7 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.semibold}",
-            "lineHeight": "{ref.line-height.650}",
+            "lineHeight": "{ref.line-height.600}",
             "fontSize": "{ref.font-size.450}",
             "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
@@ -1248,9 +486,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.regular}",
-            "lineHeight": "{ref.line-height.450}",
+            "lineHeight": "{ref.line-height.300}",
             "fontSize": "{ref.font-size.250}",
-            "letterSpacing": "{ref.letter-spacing.none}",
+            "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1261,9 +499,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.regular}",
-            "lineHeight": "{ref.line-height.500}",
+            "lineHeight": "{ref.line-height.400}",
             "fontSize": "{ref.font-size.300}",
-            "letterSpacing": "{ref.letter-spacing.none}",
+            "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1274,9 +512,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.regular}",
-            "lineHeight": "{ref.line-height.550}",
+            "lineHeight": "{ref.line-height.500}",
             "fontSize": "{ref.font-size.350}",
-            "letterSpacing": "{ref.letter-spacing.none}",
+            "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1287,9 +525,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.regular}",
-            "lineHeight": "{ref.line-height.600}",
+            "lineHeight": "{ref.line-height.550}",
             "fontSize": "{ref.font-size.400}",
-            "letterSpacing": "{ref.letter-spacing.none}",
+            "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1300,9 +538,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.regular}",
-            "lineHeight": "{ref.line-height.650}",
+            "lineHeight": "{ref.line-height.600}",
             "fontSize": "{ref.font-size.450}",
-            "letterSpacing": "{ref.letter-spacing.none}",
+            "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1315,7 +553,7 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.bold}",
-            "lineHeight": "{ref.line-height.600}",
+            "lineHeight": "{ref.line-height.550}",
             "fontSize": "{ref.font-size.400}",
             "letterSpacing": "{ref.letter-spacing.none}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
@@ -1329,7 +567,7 @@
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.bold}",
             "lineHeight": "{ref.line-height.600}",
-            "fontSize": "{ref.font-size.475}",
+            "fontSize": "{ref.font-size.450}",
             "letterSpacing": "{ref.letter-spacing.none}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
@@ -1341,9 +579,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.bold}",
-            "lineHeight": "{ref.line-height.800}",
-            "fontSize": "{ref.font-size.600}",
-            "letterSpacing": "{ref.letter-spacing.none}",
+            "lineHeight": "{ref.line-height.700}",
+            "fontSize": "{ref.font-size.500}",
+            "letterSpacing": "{ref.letter-spacing.comfortable}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1355,8 +593,8 @@
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.bold}",
             "lineHeight": "{ref.line-height.800}",
-            "fontSize": "{ref.font-size.700}",
-            "letterSpacing": "{ref.letter-spacing.snug}",
+            "fontSize": "{ref.font-size.600}",
+            "letterSpacing": "{ref.letter-spacing.comfortable}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1367,9 +605,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.bold}",
-            "lineHeight": "{ref.line-height.1400}",
-            "fontSize": "{ref.font-size.800}",
-            "letterSpacing": "{ref.letter-spacing.tight}",
+            "lineHeight": "{ref.line-height.900}",
+            "fontSize": "{ref.font-size.700}",
+            "letterSpacing": "{ref.letter-spacing.comfortable}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1381,10 +619,10 @@
         "xs": {
           "value": {
             "fontFamily": "{ref.font-family.inter}",
-            "fontWeight": "{ref.font-weight.bold}",
-            "lineHeight": "{ref.line-height.1150}",
-            "fontSize": "{ref.font-size.900}",
-            "letterSpacing": "{ref.letter-spacing.snug}",
+            "fontWeight": "{ref.font-weight.medium}",
+            "lineHeight": "{ref.line-height.1200}",
+            "fontSize": "{ref.font-size.800}",
+            "letterSpacing": "{ref.letter-spacing.none}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1395,7 +633,7 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.bold}",
-            "lineHeight": "{ref.line-height.1500}",
+            "lineHeight": "{ref.line-height.1200}",
             "fontSize": "{ref.font-size.1000}",
             "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
@@ -1434,9 +672,9 @@
           "value": {
             "fontFamily": "{ref.font-family.inter}",
             "fontWeight": "{ref.font-weight.bold}",
-            "lineHeight": "{ref.line-height.2450}",
+            "lineHeight": "{ref.line-height.1800}",
             "fontSize": "{ref.font-size.1700}",
-            "letterSpacing": "{ref.letter-spacing.tight}",
+            "letterSpacing": "{ref.letter-spacing.snug}",
             "paragraphSpacing": "{ref.paragraph-spacing.none}",
             "textCase": "{ref.text-case.none}",
             "textDecoration": "{ref.text-decoration.none}"
@@ -1464,52 +702,6 @@
           "type": "textDecoration"
         }
       },
-      "size": {
-        "100": {
-          "value": "{ref.scale.size} * 4",
-          "type": "sizing"
-        },
-        "200": {
-          "value": "{ref.scale.size} * 8",
-          "type": "sizing"
-        },
-        "300": {
-          "value": "{ref.scale.size} * 12",
-          "type": "sizing"
-        },
-        "400": {
-          "value": "{ref.scale.size} * 16",
-          "type": "sizing"
-        },
-        "500": {
-          "value": "{ref.scale.size} * 20",
-          "type": "sizing"
-        },
-        "600": {
-          "value": "{ref.scale.size} * 24",
-          "type": "sizing",
-          "description": "tags"
-        },
-        "700": {
-          "value": "{ref.scale.size} * 28",
-          "type": "sizing",
-          "description": "compact theme default size for elements / buttons, small buttons"
-        },
-        "800": {
-          "value": "{ref.scale.size} * 32",
-          "type": "sizing",
-          "description": "default / comfortable theme - default size for elements/buttons"
-        },
-        "900": {
-          "value": "{ref.scale.size} * 36",
-          "type": "sizing"
-        },
-        "1000": {
-          "value": "{ref.scale.size} * 40",
-          "type": "sizing",
-          "description": "large theme default size for elements / buttons"
-        }
-      },
       "scale": {
         "text": {
           "value": "1",
@@ -1532,7 +724,7 @@
           "type": "other"
         }
       },
-      "layout-space": {
+      "space": {
         "xxxs": {
           "value": "{ref.scale.space} * 2",
           "type": "spacing"
@@ -1558,15 +750,15 @@
           "type": "spacing"
         },
         "xl": {
-          "value": "{ref.scale.space} * 32",
+          "value": "{ref.scale.space} * 28",
           "type": "spacing"
         },
         "xxl": {
-          "value": "{ref.scale.space} * 48",
+          "value": "{ref.scale.space} * 32",
           "type": "spacing"
         },
         "xxxl": {
-          "value": "{ref.scale.space} * 64",
+          "value": "{ref.scale.space} * 48",
           "type": "spacing"
         }
       },
@@ -1610,6 +802,28 @@
         "900": {
           "value": "90%",
           "type": "opacity"
+        }
+      },
+      "shadow": {
+        "100": {
+          "value": "0px 16px 32px 0px hsla(234, 50%, 4%, 0.02);",
+          "type": "boxShadow"
+        },
+        "200": {
+          "value": "0px 16px 32px 0px hsla(234, 50%, 4%, 0.05);",
+          "type": "boxShadow"
+        },
+        "300": {
+          "value": "0px 16px 32px 0px hsla(234, 50%, 4%, 0.08);",
+          "type": "boxShadow"
+        },
+        "400": {
+          "value": "0px 16px 32px 0px hsla(234, 50%, 4%, 0.12);",
+          "type": "boxShadow"
+        },
+        "500": {
+          "value": "0px 16px 32px 0px hsla(234, 50%, 4%, 0.17);",
+          "type": "boxShadow"
         }
       }
     }

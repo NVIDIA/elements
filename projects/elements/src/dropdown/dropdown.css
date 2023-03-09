@@ -1,5 +1,6 @@
 :host {
-  --mlv-sys-interaction-default-background: var(--mlv-sys-interaction-default-background-300);
+  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-300);
+  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-300);
   --mlv-sys-layer-popover-arrow-padding: 6px;
   --mlv-sys-layer-popover-arrow-offset: 4px;
   --mlv-sys-layer-popover-offset: 4px;
@@ -9,7 +10,7 @@
   --background: var(--mlv-sys-layer-overlay-background);
   --color: var(--mlv-sys-layer-overlay-color);
   --padding: var(--mlv-ref-size-400);
-  --box-shadow: var(--mlv-ref-shadow-700);
+  --box-shadow: var(--mlv-ref-shadow-400);
 }
 
 dialog {

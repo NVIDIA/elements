@@ -2,11 +2,15 @@
 :host {
   --gap: var(--mlv-ref-space-xs);
   --font-size: var(--mlv-ref-font-size-200);
-  --color: var(--mlv-sys-text-default-color);
-  --icon-color: var(--mlv-sys-text-default-color);
+  --color: var(--mlv-sys-text-color);
+  --icon-color: var(--status-color);
   --icon-size: var(--mlv-ref-size-400);
-  --font-weight: var(--mlv-ref-font-weight-regular);
+  --font-weight: var(--mlv-ref-font-weight-semibold);
   width: auto;
+}
+
+[internal-host] {
+  --_icon-cancel-color: var(--color);
 }
 
 slot,
@@ -35,33 +39,31 @@ slot[name='actions'] {
 
 mlv-icon {
   --color: var(--icon-color);
+}
+
+mlv-icon:not([size='sm']) {
   --width: var(--icon-size);
   --height: var(--icon-size);
 }
 
-mlv-icon-button {
+mlv-icon[size='sm'] {
+  padding: 2px;
+}
+
+mlv-icon-button:not([icon-name='cancel']) {
   --color: var(--icon-color);
   margin-left: auto;
 }
 
-:host([status='muted']) {
-  --color: var(--mlv-sys-text-muted-color);
+mlv-icon-button[interaction='ghost'] {
+  --color: var(--_icon-cancel-color);
 }
 
-:host([status='accent']) {
-  --icon-color: var(--mlv-sys-status-accent-background);
+::slotted([mlv-text]) {
+  color: inherit !important;
 }
 
-:host([status='success']) {
-  --icon-color: var(--mlv-sys-status-success-background);
-  --color: var(--mlv-sys-status-success-background);
-}
-
-:host([status='warning']) {
-  --icon-color: var(--mlv-sys-status-warning-background);
-}
-
+:host([status='success']),
 :host([status='danger']) {
-  --icon-color: var(--mlv-sys-status-danger-background);
-  --color: var(--mlv-sys-status-danger-background);
+  --color: var(--status-color);
 }

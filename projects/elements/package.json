@@ -54,6 +54,9 @@
     "./alert": "./dist/alert/index.js",
     "./alert/index.js": "./dist/alert/index.js",
     "./alert/define.js": "./dist/alert/define.js",
+    "./badge": "./dist/badge/index.js",
+    "./badge/index.js": "./dist/badge/index.js",
+    "./badge/define.js": "./dist/badge/define.js",
     "./button": "./dist/button/index.js",
     "./button/index.js": "./dist/button/index.js",
     "./button/define.js": "./dist/button/define.js",
@@ -75,6 +78,9 @@
     "./dialog": "./dist/dialog/index.js",
     "./dialog/index.js": "./dist/dialog/index.js",
     "./dialog/define.js": "./dist/dialog/define.js",
+    "./dot": "./dist/dot/index.js",
+    "./dot/index.js": "./dist/dot/index.js",
+    "./dot/define.js": "./dist/dot/define.js",
     "./dropdown": "./dist/dropdown/index.js",
     "./dropdown/index.js": "./dist/dropdown/index.js",
     "./dropdown/define.js": "./dist/dropdown/define.js",
@@ -120,6 +126,9 @@
     "./switch": "./dist/switch/index.js",
     "./switch/index.js": "./dist/switch/index.js",
     "./switch/define.js": "./dist/switch/define.js",
+    "./tag": "./dist/tag/index.js",
+    "./tag/index.js": "./dist/tag/index.js",
+    "./tag/define.js": "./dist/tag/define.js",
     "./toast": "./dist/toast/index.js",
     "./toast/index.js": "./dist/toast/index.js",
     "./toast/define.js": "./dist/toast/define.js",
@@ -353,8 +362,7 @@
         "create-icon-spritesheet.js"
       ],
       "output": [
-        "src/icon/svg/**",
-        "src/icon/icon-names.js"
+        "src/icon/icons.ts"
       ]
     },
     "storybook": {

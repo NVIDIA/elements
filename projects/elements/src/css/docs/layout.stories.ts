@@ -8,7 +8,7 @@ export default {
 const layoutDemoStyles = html`
   <style>
     section {
-      background-color: var(--mlv-sys-interaction-default-background);
+      background-color: var(--mlv-sys-interaction-background);
       border: var(--mlv-ref-border-width-lg) solid var(--mlv-ref-border-color-emphasis);
       gap: var(--mlv-ref-space-sm);
       margin-block: var(--mlv-ref-space-sm) var(--mlv-ref-space-xl) !important;

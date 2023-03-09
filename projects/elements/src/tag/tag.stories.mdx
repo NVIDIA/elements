@@ -1,0 +1,50 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
+
+<Meta title="Elements/Tag/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Tag
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/tag/define.js';
+```
+
+```html
+<mlv-tag></mlv-tag>
+```
+
+<Canvas>
+  <Story id="elements-tag-examples--default" />
+</Canvas>
+
+## Closable
+
+<Canvas>
+  <Story id="elements-tag-examples--closable" />
+</Canvas>
+
+## Color
+
+<Canvas>
+  <Story id="elements-tag-examples--color" />
+</Canvas>
+
+## Readonly
+
+<Canvas>
+  <Story id="elements-tag-examples--readonly" />
+</Canvas>
+
+<LinkedHeader>Themes</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-tag-examples--light-theme" />
+  <Story id="elements-tag-examples--dark-theme" />
+</Canvas>
+
+<Status status={{ apiDoc: true, unitTests: true, themeSupport: true, apiReview: false, vqaReview: false, a11y: false, performance: false, stable: false, pkg: true, figma: false }}></Status>
+
+<LinkedHeader>mlv-tag</LinkedHeader>
+<Props of="mlv-tag" />

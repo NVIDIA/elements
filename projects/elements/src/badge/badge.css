@@ -1,0 +1,62 @@
+
+:host {
+  --background: color-mix(in oklab, var(--status-color) var(--mlv-sys-contrast-mute-ratio), var(--mlv-sys-contrast-mute-color));
+  --gap: var(--mlv-ref-space-xs);
+  --font-size: var(--mlv-ref-font-size-100);
+  --status-color: var(--mlv-sys-status-color);
+  --padding: var(--mlv-ref-size-150) var(--mlv-ref-size-200);
+  --border-radius: var(--mlv-ref-border-radius-sm);
+  --font-weight: var(--mlv-ref-font-weight-semibold);
+}
+
+@supports not (background: color-mix(in oklab, #000 0%, #fff)) {
+  [internal-host] {
+    --background: var(--status-color);
+    border: 1px solid transparent;
+    background-image: linear-gradient(hsla(0, 0%, 0%, 0.8) 0 0) !important;
+  }
+}
+
+[internal-host] {
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  gap: var(--gap);
+  background: var(--background);
+  color: var(--status-color);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1em;
+  place-items: center;
+  place-content: center;
+}
+
+:host(:--has-text) [internal-host] {
+  height: 18px;
+  width: 18px;
+}
+
+::slotted([mlv-text]) {
+  color: inherit !important;
+}
+
+mlv-icon,
+::slotted(mlv-icon) {
+  --color: var(--status-color);
+  --width: var(--mlv-ref-size-300);
+  --height: var(--mlv-ref-size-300);
+}
+
+/* trend status */
+:host([status='trend-down']) {
+  --status-color: var(--mlv-sys-visualization-trend-negative-emphasis-color);
+}
+
+:host([status='trend-up']) {
+  --status-color: var(--mlv-sys-visualization-trend-positive-emphasis-color);
+}
+
+:host([status='trend-neutral']) {
+  --status-color: var(--mlv-sys-status-pending-color);
+}

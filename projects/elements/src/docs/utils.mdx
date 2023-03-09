@@ -3,3 +3,34 @@ export const LinkedHeader = ({children: txt} ) => {
     <h2 id={txt.replace(/\s+/g, '-').toLowerCase()} >{txt}</h2>
   );
 }
+
+export const Status = ({children: txt, status: { demo, apiDoc, unitTests, themeSupport, apiReview, vqaReview, a11y, performance, stable, pkg, figma }} ) => {
+  const alpha = apiReview && vqaReview && a11y && performance && stable && pkg && figma;
+  const beta = apiReview && vqaReview && a11y && performance;
+  const stbl = stable && pkg && figma;
+  return (
+    <div class="status-summary" style={{ margin: '0 0 80px 0' }}>
+      <h2>Stability</h2>
+      <p>All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
+      <h3><mlv-badge status={(!beta && !stbl) || demo ? 'warning' : 'pending'}>pre-release <mlv-icon name="warning"></mlv-icon></mlv-badge></h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <mlv-alert status={unitTests ? 'finished' : 'pending'}>Robust unit test coverage</mlv-alert>
+        <mlv-alert status={themeSupport ? 'finished' : 'pending'}>Theme support</mlv-alert>
+        <mlv-alert status={themeSupport ? 'finished' : 'pending'}>Adapt to different screen/container sizes</mlv-alert>
+      </div>
+      <h3><mlv-badge status={(beta && !stbl) || demo ? 'running' : 'pending'}>beta <mlv-icon name="schedule"></mlv-icon></mlv-badge></h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <mlv-alert status={a11y ? 'finished' : 'pending'}>No outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></mlv-alert>
+        <mlv-alert status={performance ? 'finished' : 'pending'}>No outstanding performance issues</mlv-alert>
+        <mlv-alert status={apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/story/about-api-design-getting-started--page">Public API Review</a></mlv-alert>
+        <mlv-alert status={vqaReview ? 'finished' : 'pending'}>Passed VQA Review</mlv-alert>
+      </div>
+      <h3><mlv-badge status={stbl || demo ? 'finished' : 'pending'}>stable <mlv-icon name="success-badge"></mlv-icon></mlv-badge></h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <mlv-alert status={pkg ? 'finished' : 'pending'}>Published in <a href="http://nv/elements">library package</a></mlv-alert>
+        <mlv-alert status={figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></mlv-alert>
+        <mlv-alert status={stable ? 'finished' : 'pending'}>No breaking API changes for at least 90 days</mlv-alert>
+      </div>
+    </div>
+  );
+}

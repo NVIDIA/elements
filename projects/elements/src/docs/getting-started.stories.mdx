@@ -1,17 +1,16 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { LinkedHeader } from './utils.mdx';
 
-<Meta title="About/Getting Started" />
+<Meta title="About/Getting Started" parameters={{ options: { showPanel: false }}} />
 
 <Story id="internal-integration--empty" />
 
 <span id="getting-started-img"></span>
 
-# MagLev Elements
-
-<LinkedHeader>Foundational building blocks for MagLev UI</LinkedHeader>
-
-### Installation
+<div class="getting-started-logo">
+  <h1><mlv-logo></mlv-logo> Elements</h1>
+  <h3>Foundational building blocks for Web UI</h3>
+</div>
 
 ```bash
 # add internal registry to local .npmrc file (optional)

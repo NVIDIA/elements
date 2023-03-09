@@ -22,7 +22,7 @@ export const Default = {
       <mlv-alert>alert message</mlv-alert>
     </mlv-alert-group>
     `,
-    args: { status: 'info' }
+    args: { status: undefined }
 };
 
 export const Status = {
@@ -38,14 +38,14 @@ export const Status = {
         <mlv-alert>default</mlv-alert>
       </mlv-alert-group>
 
-      <mlv-alert-group status="success">
-        <mlv-alert>success</mlv-alert>
-        <mlv-alert>success</mlv-alert>
-      </mlv-alert-group>
-
       <mlv-alert-group status="warning">
         <mlv-alert>warning</mlv-alert>
         <mlv-alert>warning</mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="success">
+        <mlv-alert>success</mlv-alert>
+        <mlv-alert>success</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
@@ -69,14 +69,14 @@ export const Closable = {
         <mlv-alert closable>accent</mlv-alert>
       </mlv-alert-group>
 
-      <mlv-alert-group status="success">
-        <mlv-alert closable>success</mlv-alert>
-        <mlv-alert closable>success</mlv-alert>
-      </mlv-alert-group>
-
       <mlv-alert-group status="warning">
         <mlv-alert closable>warning</mlv-alert>
         <mlv-alert closable>warning</mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="success">
+        <mlv-alert closable>success</mlv-alert>
+        <mlv-alert closable>success</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
@@ -100,14 +100,14 @@ export const Actions = {
         accent <mlv-button slot="actions" interaction="ghost">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
-    <mlv-alert-group status="success">
-      <mlv-alert>
-        success <mlv-button slot="actions" interaction="ghost">action</mlv-button>
-      </mlv-alert>
-    </mlv-alert-group>
     <mlv-alert-group status="warning">
       <mlv-alert>
         warning <mlv-button slot="actions" interaction="ghost">action</mlv-button>
+      </mlv-alert>
+    </mlv-alert-group>
+    <mlv-alert-group status="success">
+      <mlv-alert>
+        success <mlv-button slot="actions" interaction="ghost">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
     <mlv-alert-group status="danger">
@@ -132,14 +132,14 @@ export const Themes = {
         <mlv-alert>accent</mlv-alert>
       </mlv-alert-group>
 
-      <mlv-alert-group status="success">
-        <mlv-alert>success</mlv-alert>
-        <mlv-alert>success</mlv-alert>
-      </mlv-alert-group>
-
       <mlv-alert-group status="warning">
         <mlv-alert>warning</mlv-alert>
         <mlv-alert>warning</mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="success">
+        <mlv-alert>success</mlv-alert>
+        <mlv-alert>success</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
@@ -158,14 +158,14 @@ export const Themes = {
         <mlv-alert>accent</mlv-alert>
       </mlv-alert-group>
 
-      <mlv-alert-group status="success">
-        <mlv-alert>success</mlv-alert>
-        <mlv-alert>success</mlv-alert>
-      </mlv-alert-group>
-
       <mlv-alert-group status="warning">
         <mlv-alert>warning</mlv-alert>
         <mlv-alert>warning</mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="success">
+        <mlv-alert>success</mlv-alert>
+        <mlv-alert>success</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
@@ -173,13 +173,5 @@ export const Themes = {
         <mlv-alert>danger</mlv-alert>
       </mlv-alert-group>
     </div>
-  `
-}
-
-export const Banner = {
-  render: () => html`
-    <mlv-alert-group status="warning" style="--border-radius: 0">
-      <mlv-alert closable>warning banner</mlv-alert>
-    </mlv-alert-group>
   `
 }

@@ -25,10 +25,39 @@ StyleDictionary.registerFormat({
   }
 });
 
+StyleDictionary.registerFormat({
+  name: 'custom/json',
+  transformGroup: 'web',
+  formatter: ({ dictionary }) => {
+    const content = formattedVariables({ format: 'json', dictionary, outputReferences: true })
+      .replaceAll(';', '')
+      .split('\n')
+      .map(i => {
+        const [key, value] = i.split(' = ');
+        const formattedValue = value.includes('calc') ? value.replace('calc(', '').replace(')', '') : value;
+        return `  "${key}": "${formattedValue}"`;
+      })
+      .join(',\n');
+    return `{\n${content}\n}`;
+  }
+});
+
 function buildTokens() {
   StyleDictionary.extend({
     source: ['./tokens/tokens.json'],
     platforms: { css: cssOutput(`${buildPath}css/module.tokens.css`), json: jsonOutput(`${buildPath}tokens/tokens.json`) }
+  }).buildAllPlatforms();
+
+  StyleDictionary.extend({
+    include: ['./tokens/tokens.json'],
+    source: ['./tokens/theme.dark.json'],
+    platforms: { json: jsonOutput(`${buildPath}tokens/tokens.dark.json`) }
+  }).buildAllPlatforms();
+
+  StyleDictionary.extend({
+    include: ['./tokens/tokens.json'],
+    source: ['./tokens/theme.high-contrast.json'],
+    platforms: { json: jsonOutput(`${buildPath}tokens/tokens.high-contrast.json`) }
   }).buildAllPlatforms();
 
   StyleDictionary.extend({
@@ -78,11 +107,16 @@ function jsonOutput(destination) {
   return {
     prefix: 'mlv',
     transformGroup: 'web',
+    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc'],
     files: [{
-      format: 'json/flat',
+      format: 'custom/json',
       destination,
       filter: theme ? (token) => getTheme(token.filePath) : null
-    }]
+    }],
+    options: {
+      outputReferences: true,
+      theme
+    }
   };
 }
 

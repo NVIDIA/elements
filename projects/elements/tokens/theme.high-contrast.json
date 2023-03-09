@@ -2,7 +2,7 @@
   "ref": {
     "border": {
       "color": {
-        "default": {
+        "@": {
           "value": "CanvasText",
           "type": "color"
         },
@@ -28,6 +28,14 @@
       "300": {
         "value": "0 0 0 2px CanvasText",
         "type": "boxShadow"
+      },
+      "400": {
+        "value": "0 0 0 2px CanvasText",
+        "type": "boxShadow"
+      },
+      "500": {
+        "value": "0 0 0 2px CanvasText",
+        "type": "boxShadow"
       }
     }
   },
@@ -36,11 +44,9 @@
       "value": "light"
     },
     "text": {
-      "default": {
-        "color": {
-          "value": "CanvasText",
-          "type": "color"
-        }
+      "color": {
+        "value": "CanvasText",
+        "type": "color"
       },
       "muted": {
         "color": {
@@ -85,60 +91,142 @@
         }
       }
     },
-    "status": {
-      "info": {
+    "accent": {
+      "primary": {
         "background": {
-          "value": "CanvasText",
-          "type": "color"
-        },
-        "color": {
-          "value": "Canvas",
+          "value": "{ref.color.brand-green.900}",
           "type": "color"
         }
       },
-      "success": {
+      "secondary": {
         "background": {
-          "value": "CanvasText",
-          "type": "color"
-        },
-        "color": {
-          "value": "Canvas",
+          "value": "{ref.color.blue-cobalt.1000}",
           "type": "color"
         }
       },
-      "danger": {
+      "tertiary": {
         "background": {
-          "value": "CanvasText",
-          "type": "color"
-        },
-        "color": {
-          "value": "Canvas",
-          "type": "color"
-        }
-      },
-      "warning": {
-        "background": {
-          "value": "CanvasText",
-          "type": "color"
-        },
-        "color": {
-          "value": "Canvas",
-          "type": "color"
-        }
-      },
-      "neutral": {
-        "background": {
-          "value": "CanvasText",
-          "type": "color"
-        },
-        "color": {
-          "value": "Canvas",
+          "value": "{ref.color.black}",
           "type": "color"
         }
       }
     },
+    "support": {
+      "color": {
+        "value": "{ref.color.gray-slate.1000}",
+        "type": "color"
+      },
+      "muted": {
+        "color": {
+          "value": "{ref.color.gray-slate.600}",
+          "type": "color"
+        }
+      },
+      "emphasis": {
+        "color": {
+          "value": "{ref.color.gray-slate.1100}",
+          "type": "color"
+        }
+      },
+      "accent": {
+        "color": {
+          "value": "{ref.color.blue-cobalt.1100}",
+          "type": "color"
+        },
+        "muted": {
+          "color": {
+            "value": "{ref.color.blue-cobalt.400}",
+            "type": "color"
+          }
+        },
+        "emphasis": {
+          "color": {
+            "value": "{ref.color.blue-cobalt.1100}",
+            "type": "color"
+          }
+        }
+      },
+      "success": {
+        "color": {
+          "value": "{ref.color.green-grass.1100}",
+          "type": "color"
+        },
+        "muted": {
+          "color": {
+            "value": "{ref.color.green-grass.400}",
+            "type": "color"
+          }
+        },
+        "emphasis": {
+          "color": {
+            "value": "{ref.color.green-grass.1100}",
+            "type": "color"
+          }
+        }
+      },
+      "danger": {
+        "color": {
+          "value": "{ref.color.red-cardinal.1100}",
+          "type": "color"
+        },
+        "muted": {
+          "color": {
+            "value": "{ref.color.red-cardinal.400}",
+            "type": "color"
+          }
+        },
+        "emphasis": {
+          "color": {
+            "value": "{ref.color.red-cardinal.1100}",
+            "type": "color"
+          }
+        }
+      },
+      "warning": {
+        "color": {
+          "value": "{ref.color.yellow-nova.800}",
+          "type": "color"
+        },
+        "muted": {
+          "color": {
+            "value": "{ref.color.yellow-nova.300}",
+            "type": "color"
+          }
+        },
+        "emphasis": {
+          "color": {
+            "value": "{ref.color.yellow-nova.1000}",
+            "type": "color"
+          }
+        }
+      }
+    },
     "interaction": {
-      "default": {
+      "color": {
+        "value": "ButtonText",
+        "type": "color"
+      },
+      "background": {
+        "value": "ButtonFace",
+        "type": "color"
+      },
+      "background-100": {
+        "value": "ButtonFace",
+        "type": "color"
+      },
+      "background-200": {
+        "value": "ButtonFace",
+        "type": "color"
+      },
+      "background-300": {
+        "value": "ButtonFace",
+        "type": "color"
+      },
+      "field": {
+        "color": {
+          "value": "FieldText",
+          "type": "color"
+        },
         "background": {
           "value": "ButtonFace",
           "type": "color"
@@ -154,39 +242,45 @@
         "background-300": {
           "value": "ButtonFace",
           "type": "color"
-        },
-        "color": {
-          "value": "ButtonText",
-          "type": "color"
         }
       },
       "emphasize": {
-        "background": {
-          "value": "ButtonFace",
-          "type": "color"
-        },
         "color": {
           "value": "ButtonText",
+          "type": "color"
+        },
+        "background": {
+          "value": "ButtonFace",
           "type": "color"
         }
       },
       "destructive": {
-        "background": {
-          "value": "ButtonFace",
-          "type": "color"
-        },
         "color": {
           "value": "ButtonText",
+          "type": "color"
+        },
+        "background": {
+          "value": "ButtonFace",
           "type": "color"
         }
       },
       "disabled": {
-        "background": {
-          "value": "ButtonFace",
+        "color": {
+          "value": "{ref.color.gray-slate.800}",
           "type": "color"
         },
+        "background": {
+          "value": "{ref.color.gray-slate.600}",
+          "type": "color"
+        }
+      },
+      "selected": {
         "color": {
-          "value": "GrayText",
+          "value": "{sys.text.color}",
+          "type": "color"
+        },
+        "background": {
+          "value": "{sys.interaction.background}",
           "type": "color"
         }
       }
@@ -218,7 +312,7 @@
           "type": "color"
         },
         "color": {
-          "value": "Canvas",
+          "value": "CanvasText",
           "type": "color"
         }
       },

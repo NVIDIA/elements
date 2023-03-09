@@ -1,11 +1,12 @@
 :host {
   --cursor: pointer;
   --accent-color: var(--mlv-sys-accent-secondary-background);
-  --color: var(--mlv-sys-text-default-color);
+  --color: var(--mlv-sys-text-color);
   --label-color: var(--mlv-sys-text-muted-color);
   --control-width: 200px;
   --control-height: auto;
   --_label-width: var(--label-width, 180px);
+  --mlv-sys-interaction-state-base: var(--background);
 }
 
 ::slotted(*) {

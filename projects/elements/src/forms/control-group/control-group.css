@@ -1,5 +1,5 @@
 :host {
-  --color: var(--mlv-sys-text-default-color);
+  --color: var(--mlv-sys-text-color);
   --label-color: var(--mlv-sys-text-muted-color);
   --_label-width: var(--label-width, 180px);
 }

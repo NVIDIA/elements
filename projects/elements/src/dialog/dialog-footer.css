@@ -1,5 +1,5 @@
 :host {
-  --border-top: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-default);
+  --border-top: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color);
   --padding: var(--mlv-ref-size-500);
   --gap: var(--mlv-ref-space-sm);
   display: block;

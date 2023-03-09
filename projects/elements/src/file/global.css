@@ -22,13 +22,13 @@ mlv-file > input::file-selector-button {
 }
 
 mlv-file > input::file-selector-button:hover {
-  --color: var(--mlv-sys-interaction-default-hover-color);
-  --background: var(--mlv-sys-interaction-default-background);
+  --color: var(--mlv-sys-interaction-hover-color);
+  --background: var(--mlv-sys-interaction-background);
 }
 
 mlv-file > input::file-selector-button:active {
-  --color: var(--mlv-sys-interaction-default-active-color);
-  --background: var(--mlv-sys-interaction-default-background);
+  --color: var(--mlv-sys-interaction-active-color);
+  --background: var(--mlv-sys-interaction-background);
 }
 
 mlv-file > input::file-selector-button:disabled {
