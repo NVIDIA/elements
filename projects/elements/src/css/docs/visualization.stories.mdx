@@ -1,0 +1,29 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
+
+<Meta title="Foundations/Visualization/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Visualization
+
+The visualization design tokens provide a consistent color palette for theming various data visualization UI tools and libraries.
+
+<LinkedHeader>Categorical</LinkedHeader>
+
+The categorical tokens are used for visualizations that represent various categories or groups.
+These values are useful when the data has distinct groups but no natural numerical order.
+
+<Story id="foundations-tokens-examples--visualization-categorical" />
+
+<LinkedHeader>Sequential Diverging Virdis</LinkedHeader>
+
+The diverging tokens are used for visualizations that represent two opposing values or groups of data. This can be useful for data with a natural center and the goal is to highlight the differences or deviations from the center.
+
+<Story id="foundations-tokens-examples--visualization-sequential-diverging-virdis" />
+
+<LinkedHeader>Sequential Diverging Red Green</LinkedHeader>
+
+<Story id="foundations-tokens-examples--visualization-sequential-diverging-red-green" />
+
+<LinkedHeader>Trend</LinkedHeader>
+
+<Story id="foundations-tokens-examples--visualization-trend" />

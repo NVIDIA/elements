@@ -1,9 +1,9 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import { LinkedHeader } from '../../docs/utils.mdx';
 
-<Meta title="Foundations/Tokens/Layers" />
+<Meta title="Foundations/Tokens/Layers" parameters={{ badges: ['beta'] }} />
 
-# Layers (beta)
+# Layers
 
 Layers define the position of an element on the z-axis in the UI. Layer types are
 categories of elements that build up to higher layers as they are stacked or nested.
@@ -26,12 +26,4 @@ The layers in order of stacking are the following:
 
 <LinkedHeader>Layer Tokens</LinkedHeader>
 
-<Canvas>
-  <Story id="foundations-tokens-examples--layer" />
-</Canvas>
-
-<LinkedHeader>Interaction Tokens</LinkedHeader>
-
-<Canvas>
-  <Story id="foundations-tokens-examples--interaction" />
-</Canvas>
+<Story id="foundations-tokens-examples--layer" />

@@ -22,13 +22,13 @@ nve-file > input::file-selector-button {
 }
 
 nve-file > input::file-selector-button:hover {
-  --color: var(--nve-sys-interaction-default-hover-color);
-  --background: var(--nve-sys-interaction-default-background);
+  --color: var(--nve-sys-interaction-hover-color);
+  --background: var(--nve-sys-interaction-background);
 }
 
 nve-file > input::file-selector-button:active {
-  --color: var(--nve-sys-interaction-default-active-color);
-  --background: var(--nve-sys-interaction-default-background);
+  --color: var(--nve-sys-interaction-active-color);
+  --background: var(--nve-sys-interaction-background);
 }
 
 nve-file > input::file-selector-button:disabled {

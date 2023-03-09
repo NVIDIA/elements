@@ -1,0 +1,53 @@
+
+:host {
+  --background: color-mix(in oklab, var(--color) var(--nve-sys-contrast-mute-ratio), var(--nve-sys-contrast-mute-color));
+  --nve-sys-interaction-state-base: var(--background);
+  --color: var(--nve-ref-color-blue-cobalt-1100);
+  --gap: var(--nve-ref-space-xs);
+  --font-size: var(--nve-ref-font-size-100);
+  --padding: var(--nve-ref-size-150) var(--nve-ref-size-200);
+  --border-radius: var(--nve-ref-border-radius-lg);
+  --font-weight: var(--nve-ref-font-weight-semibold);
+  --cursor: pointer;
+  display: inline-flex;
+  user-select: none;
+}
+
+@supports not (background: color-mix(in oklab, #000 0%, #fff)) {
+  :host([color]) [internal-host] {
+    --background: var(--color);
+    border: 1px solid transparent;
+    background-image: linear-gradient(hsla(0, 0%, 0%, 0.8) 0 0) !important;
+  }
+}
+
+[internal-host] {
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  gap: var(--gap);
+  background: var(--background);
+  color: var(--color);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  cursor: var(--cursor);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1em;
+  place-items: center;
+  place-content: center;
+}
+
+::slotted([nve-text]) {
+  color: inherit !important;
+}
+
+nve-icon {
+  --color: inherit;
+  --width: var(--nve-ref-size-200);
+  --height: var(--nve-ref-size-200);
+}
+
+:host([readonly]) {
+  --text-decoration: none !important;
+  --cursor: cursor !important;
+}

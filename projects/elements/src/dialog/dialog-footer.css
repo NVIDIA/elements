@@ -1,5 +1,5 @@
 :host {
-  --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-default);
+  --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
   --padding: var(--nve-ref-size-500);
   --gap: var(--nve-ref-space-sm);
   display: block;

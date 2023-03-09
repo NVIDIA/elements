@@ -1,0 +1,57 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
+
+<Meta title="Elements/Dot/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Dot Notification
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/dot/define.js';
+```
+
+```html
+<nve-dot status="starting"></nve-dot>
+```
+
+<Canvas>
+  <Story id="elements-dot-examples--default" />
+</Canvas>
+
+<LinkedHeader>Status</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-dot-examples--status" />
+</Canvas>
+
+<LinkedHeader>Support</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-dot-examples--support-status" />
+</Canvas>
+
+<LinkedHeader>Number</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-dot-examples--number" />
+</Canvas>
+
+<LinkedHeader>Status Themes</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-dot-examples--status-light-theme" />
+  <Story id="elements-dot-examples--status-dark-theme" />
+</Canvas>
+
+<LinkedHeader>Support Themes</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-dot-examples--support-light-theme" />
+  <Story id="elements-dot-examples--support-dark-theme" />
+</Canvas>
+
+<Status status={{ apiDoc: true, unitTests: true, themeSupport: true, apiReview: false, vqaReview: false, a11y: true, performance: true, stable: false, pkg: true, figma: false }}></Status>
+
+<LinkedHeader>nve-dot</LinkedHeader>
+<Props of="nve-dot" />

@@ -1,0 +1,40 @@
+
+:host {
+  --gap: var(--nve-ref-space-xs);
+  --font-size: var(--nve-ref-font-size-100);
+  --background: var(--status-color);
+  --color: var(--nve-sys-text-white-color);
+  --border-radius: var(--nve-ref-border-radius-full);
+  --height: var(--nve-ref-size-300);
+  --width: var(--nve-ref-size-300);
+  width: auto;
+}
+
+[internal-host] {
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  gap: var(--gap);
+  background: var(--background);
+  color: var(--color);
+  border-radius: var(--border-radius);
+  height: var(--height);
+  width: var(--width);
+  display: flex;
+  align-items: center;
+  line-height: 1em;
+  place-items: center;
+  place-content: center;
+}
+
+:host(:--has-text) [internal-host] {
+  height: var(--nve-ref-size-400);
+  width: var(--nve-ref-size-400);
+}
+
+::slotted([nve-text]) {
+  color: inherit !important;
+}
+
+:host([status='warning']) {
+  --color: var(--nve-sys-text-black-color);
+}

@@ -4,7 +4,8 @@
   --height: 100px;
   --width: 100%;
   --min-height: 100px;
-  --background: var(--nve-sys-interaction-default-background);
+  --background: var(--nve-sys-interaction-field-background);
+  --color: var(--nve-sys-interaction-field-color);
   --border-radius: var(--nve-ref-border-radius-sm);
   --cursor: text;
   --border: 0;
@@ -46,11 +47,11 @@
 
 :host(:--invalid),
 :host(:--error) {
-  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-status-danger-background);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
 }
 
 :host(:--success) {
-  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-status-success-background);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-success-emphasis-color);
 }
 
 :host(:--disabled) {
