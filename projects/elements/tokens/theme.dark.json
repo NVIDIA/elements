@@ -145,6 +145,26 @@
           "type": "color"
         }
       },
+      "emphasize": {
+        "background": {
+          "value": "{sys.accent.primary.background}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.white.color}",
+          "type": "color"
+        }
+      },
+      "destructive": {
+        "background": {
+          "value": "{sys.status.danger.background}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.white.color}",
+          "type": "color"
+        }
+      },
       "disabled": {
         "background": {
           "value": "{ref.color.gray-zinc.700}",
@@ -152,6 +172,16 @@
         },
         "color": {
           "value": "{ref.color.gray-zinc.500}",
+          "type": "color"
+        }
+      },
+      "selected": {
+        "background": {
+          "value": "{sys.interaction.default.background}",
+          "type": "color"
+        },
+        "color": {
+          "value": "{sys.text.default.color}",
           "type": "color"
         }
       }
