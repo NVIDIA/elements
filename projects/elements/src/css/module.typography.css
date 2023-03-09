@@ -12,9 +12,9 @@
 }
 
 [nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'], [nve-text~='eyebrow'] {
-  font-family: var(--nve-ref-font-family-inter) !important;
+  font-family: var(--nve-ref-font-family) !important;
   font-weight: var(--nve-ref-font-weight-regular) !important;
-  color: var(--nve-sys-text-default-color) !important;
+  color: var(--nve-sys-text-color) !important;
   white-space: initial;
   margin: 0;
 }
@@ -151,6 +151,7 @@
   color: var(--nve-sys-text-link-color) !important;
   text-decoration: underline !important;
   line-height: inherit !important;
+  width: initial !important;
 
   &:hover,
   &[nve-text~='hover'] {
@@ -169,7 +170,7 @@
 
 [nve-text~='code'] {
   font-weight: var(--nve-ref-font-weight-regular) !important;
-  color: var(--nve-sys-text-default-color) !important;
+  color: var(--nve-sys-text-color) !important;
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -184,6 +185,18 @@
 
 [nve-text~='capitalize'] {
   text-transform: capitalize !important;
+}
+
+[nve-text~='inherit'] {
+  color: inherit !important;
+}
+
+[nve-text~='center'] {
+  text-align: center !important;
+}
+
+[nve-text~='end'] {
+  text-align: end !important;
 }
 
 [nve-text~='truncate'] {

@@ -29,29 +29,22 @@ dialog:has(nve-icon-button) {
 }
 
 :host([status='accent']) {
-  --background: var(--nve-sys-status-accent-background);
-  --color: var(--nve-sys-status-accent-color);
+  --background: var(--nve-sys-support-accent-color);
 }
 
 :host([status='success']) {
-  --background: var(--nve-sys-status-success-background);
-  --color: var(--nve-sys-status-success-color);
+  --background: var(--nve-sys-support-success-color);
+  --color: var(--nve-sys-text-white-color);
 }
 
 :host([status='warning']) {
-  --background: var(--nve-sys-status-warning-background);
-  --color: var(--nve-sys-status-warning-color);
+  --background: var(--nve-sys-support-warning-color);
+  --color: var(--nve-sys-text-black-color);
 }
 
 :host([status='danger']) {
-  --background: var(--nve-sys-status-danger-background);
-  --color: var(--nve-sys-status-danger-color);
-}
-
-nve-alert-group:not([status]),
-nve-alert-group[status='info'] {
-  --background: var(--nve-sys-layer-popover-background);
-  --color: var(--nve-sys-layer-popover-color);
+  --background: var(--nve-sys-support-danger-color);
+  --color: var(--nve-sys-text-white-color);
 }
 
 nve-icon {

@@ -1,5 +1,6 @@
 :host {
-  --nve-sys-interaction-default-background: var(--nve-sys-interaction-default-background-300);
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-300);
   --nve-sys-layer-popover-arrow-padding: 6px;
   --nve-sys-layer-popover-arrow-offset: 4px;
   --nve-sys-layer-popover-offset: var(--nve-ref-space-xxl);

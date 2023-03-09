@@ -2,8 +2,8 @@
   --padding: 0 var(--nve-ref-size-200);
   --font-size: var(--nve-ref-font-size-200);
   --height: var(--nve-ref-font-size-700);
-  --background: var(--nve-sys-interaction-default-background);
-  --color: var(--nve-sys-interaction-default-color);
+  --background: var(--nve-sys-interaction-field-background);
+  --color: var(--nve-sys-interaction-field-color);
   --border-radius: var(--nve-ref-border-radius-sm);
   --border: var(--nve-ref-border-width-md) solid transparent;
   --cursor: text;
@@ -30,6 +30,7 @@
   padding: var(--padding) !important;
   font-size: var(--font-size) !important;
   color: var(--color) !important;
+  line-height: var(--height) !important;
   width: 100% !important;
   border: 0 !important;
   background: none !important;
@@ -54,11 +55,11 @@ nve-icon-button,
 
 :host(:--invalid),
 :host(:--error) {
-  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-status-danger-background);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
 }
 
 :host(:--success) {
-  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-status-success-background);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-success-emphasis-color);
 }
 
 :host(:--disabled) {

@@ -1,5 +1,5 @@
 :host {
-  --color: var(--nve-sys-status-neutral-background);
+  --color: var(--nve-sys-support-color);
   --width: var(--nve-ref-size-400);
   --height: var(--nve-ref-size-400);
   display: inline-flex;
@@ -60,17 +60,17 @@ svg {
 }
 
 :host([status='success']) {
-  --color: var(--nve-sys-status-success-background);
+  --color: var(--nve-sys-support-success-color);
 }
 
 :host([status='warning']) {
-  --color: var(--nve-sys-status-warning-background);
+  --color: var(--nve-sys-support-warning-color);
 }
 
 :host([status='danger']) {
-  --color: var(--nve-sys-status-danger-background);
+  --color: var(--nve-sys-support-danger-color);
 }
 
 :host([status='accent']) {
-  --color: var(--nve-sys-status-accent-background);
+  --color: var(--nve-sys-support-accent-color);
 }

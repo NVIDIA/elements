@@ -1,5 +1,6 @@
 :host {
-  --nve-sys-interaction-default-background: var(--nve-sys-interaction-default-background-300);
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-300);
   --nve-sys-layer-popover-arrow-padding: 6px;
   --nve-sys-layer-popover-arrow-offset: 4px;
   --nve-sys-layer-popover-offset: 4px;
@@ -9,7 +10,7 @@
   --background: var(--nve-sys-layer-overlay-background);
   --color: var(--nve-sys-layer-overlay-color);
   --padding: var(--nve-ref-size-400);
-  --box-shadow: var(--nve-ref-shadow-700);
+  --box-shadow: var(--nve-ref-shadow-400);
 }
 
 dialog {

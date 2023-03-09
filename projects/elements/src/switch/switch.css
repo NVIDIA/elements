@@ -1,7 +1,7 @@
 :host {
   --cursor: pointer;
   --border-radius: var(--nve-ref-border-radius-full);
-  --background: var(--nve-sys-interaction-default-background);
+  --background: var(--nve-sys-interaction-field-background);
   --width: var(--nve-ref-size-1000);
   --height: var(--nve-ref-size-500);
   --anchor-width: var(--nve-ref-font-size-200);

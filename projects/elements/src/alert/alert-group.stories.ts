@@ -22,7 +22,7 @@ export const Default = {
       <nve-alert>alert message</nve-alert>
     </nve-alert-group>
     `,
-    args: { status: 'info' }
+    args: { status: undefined }
 };
 
 export const Status = {
@@ -38,14 +38,14 @@ export const Status = {
         <nve-alert>default</nve-alert>
       </nve-alert-group>
 
-      <nve-alert-group status="success">
-        <nve-alert>success</nve-alert>
-        <nve-alert>success</nve-alert>
-      </nve-alert-group>
-
       <nve-alert-group status="warning">
         <nve-alert>warning</nve-alert>
         <nve-alert>warning</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="success">
+        <nve-alert>success</nve-alert>
+        <nve-alert>success</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="danger">
@@ -69,14 +69,14 @@ export const Closable = {
         <nve-alert closable>accent</nve-alert>
       </nve-alert-group>
 
-      <nve-alert-group status="success">
-        <nve-alert closable>success</nve-alert>
-        <nve-alert closable>success</nve-alert>
-      </nve-alert-group>
-
       <nve-alert-group status="warning">
         <nve-alert closable>warning</nve-alert>
         <nve-alert closable>warning</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="success">
+        <nve-alert closable>success</nve-alert>
+        <nve-alert closable>success</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="danger">
@@ -100,14 +100,14 @@ export const Actions = {
         accent <nve-button slot="actions" interaction="ghost">action</nve-button>
       </nve-alert>
     </nve-alert-group>
-    <nve-alert-group status="success">
-      <nve-alert>
-        success <nve-button slot="actions" interaction="ghost">action</nve-button>
-      </nve-alert>
-    </nve-alert-group>
     <nve-alert-group status="warning">
       <nve-alert>
         warning <nve-button slot="actions" interaction="ghost">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+    <nve-alert-group status="success">
+      <nve-alert>
+        success <nve-button slot="actions" interaction="ghost">action</nve-button>
       </nve-alert>
     </nve-alert-group>
     <nve-alert-group status="danger">
@@ -132,14 +132,14 @@ export const Themes = {
         <nve-alert>accent</nve-alert>
       </nve-alert-group>
 
-      <nve-alert-group status="success">
-        <nve-alert>success</nve-alert>
-        <nve-alert>success</nve-alert>
-      </nve-alert-group>
-
       <nve-alert-group status="warning">
         <nve-alert>warning</nve-alert>
         <nve-alert>warning</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="success">
+        <nve-alert>success</nve-alert>
+        <nve-alert>success</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="danger">
@@ -158,14 +158,14 @@ export const Themes = {
         <nve-alert>accent</nve-alert>
       </nve-alert-group>
 
-      <nve-alert-group status="success">
-        <nve-alert>success</nve-alert>
-        <nve-alert>success</nve-alert>
-      </nve-alert-group>
-
       <nve-alert-group status="warning">
         <nve-alert>warning</nve-alert>
         <nve-alert>warning</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="success">
+        <nve-alert>success</nve-alert>
+        <nve-alert>success</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group status="danger">
@@ -173,13 +173,5 @@ export const Themes = {
         <nve-alert>danger</nve-alert>
       </nve-alert-group>
     </div>
-  `
-}
-
-export const Banner = {
-  render: () => html`
-    <nve-alert-group status="warning" style="--border-radius: 0">
-      <nve-alert closable>warning banner</nve-alert>
-    </nve-alert-group>
   `
 }

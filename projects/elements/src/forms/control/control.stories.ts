@@ -412,8 +412,8 @@ export const SelectmenuExperimental = () => {
   }
 
   selectmenu button {
-    background: var(--nve-sys-interaction-default-background);
-    color: var(--nve-sys-interaction-default-color);
+    background: var(--nve-sys-interaction-background);
+    color: var(--nve-sys-interaction-color);
     border-radius: var(--nve-ref-border-radius-sm);
     width: 100%;
     border: 0;
@@ -422,17 +422,15 @@ export const SelectmenuExperimental = () => {
   }
 
   selectmenu option {
+    --background: var(--nve-sys-interaction-background);
+    --nve-sys-interaction-state-base: var(--nve-sys-interaction-background);
     cursor: pointer;
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    color: var(--nve-sys-interaction-default-color);
+    color: var(--nve-sys-interaction-color);
     border: 0;
     padding: 12px;
-  }
-
-  selectmenu option:hover {
-    background: var(--nve-sys-interaction-default-hover-background);
   }
 
   selectmenu option::before {
@@ -443,8 +441,20 @@ export const SelectmenuExperimental = () => {
     background-size: contain;
   }
 
+  selectmenu option {
+    background-image: linear-gradient(color-mix(in oklab, var(--nve-sys-interaction-state-base) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)) 0 0) !important;
+  }
+
+  selectmenu option:hover{
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+  }
+
+  selectmenu option:active {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-active);
+  }
+
   selectmenu::part(listbox) {
-    background: var(--nve-sys-interaction-default-background);
+    background: var(--nve-sys-interaction-background);
     padding: 0;
     border: 0;
   }

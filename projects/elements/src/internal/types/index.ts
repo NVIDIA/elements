@@ -11,15 +11,36 @@ export type BlockPosition = 'start' | 'center' | 'end';
 
 export type Position = 'center' | `block-${BlockPosition}` | `inline-${InlinePosition}`;
 
-export type Status = 'accent' | 'warning' | 'success' | 'danger';
+export type SupportStatus = 'accent' | 'warning' | 'success' | 'danger';
 
-export enum statusIcons {
-  undefined = 'information',
-  accent = 'information',
-  warning = 'warning',
-  success = 'success-badge',
-  danger = 'important-badge'
-}
+export type TaskStatus = 'scheduled' | 'queued' | 'pending' | 'starting' | 'running' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown';
+
+export type TrendStatus = 'trend-down' | 'trend-up' | 'trend-neutral';
+
+export type ColorPalette = 'red-cardinal' | 'gray-slate' | 'gray-denim' | 'blue-indigo' | 'blue-cobalt' | 'blue-sky' | 'teal-cyan' | 'green-mint' | 'teal-seafoam' | 'green-grass' | 'yellow-amber' | 'orange-pumpkin' | 'red-tomato' | 'pink-magenta' | 'purple-plum' | 'purple-violet' | 'purple-lavender' | 'pink-rose' | 'green-jade' | 'lime-pear' | 'yellow-nova' | 'brand-green';
+
+export const statusIcons = {
+  '': 'information',
+  undefined: 'information',
+  default: 'information',
+  accent: 'information',
+  warning: 'warning',
+  success: 'success-badge',
+  danger: 'important-badge',
+  scheduled: 'schedule',
+  failed: 'failed-badge',
+  finished: 'success-badge',
+  unknown: 'help',
+  queued: 'checklist',
+  running: 'dot',
+  restarting: 'dot',
+  stopping: 'dot',
+  pending: 'dot',
+  starting: 'dot',
+  'trend-up': 'trend-up',
+  'trend-down': 'trend-down',
+  'trend-neutral': 'minus'
+};
 
 declare global {
   interface Window {
