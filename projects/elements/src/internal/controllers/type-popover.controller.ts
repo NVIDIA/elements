@@ -53,7 +53,8 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     return this.host.popoverDismissible !== false;
   }
 
-  #cleanup: ({ disconnect: () => void })[];
+  #popoverUpdateDisconnect: () => void;
+  #hiddenUpdateObserver: MutationObserver;
 
   constructor(private host: T) {
     this.host.addController(this);
@@ -67,11 +68,8 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
       this.close();
     });
 
-    this.#cleanup = [
-      { disconnect: popoverRenderUpdate(this.#config, () => this.#calculatePosition()) },
-      getAttributeChanges(this.host, 'hidden', () => this.#update())
-    ];
-
+    this.#popoverUpdateDisconnect = popoverRenderUpdate(this.#config, () => this.#calculatePosition());
+    this.#hiddenUpdateObserver = getAttributeChanges(this.host, 'hidden', () => this.#update());
     this.#addTriggerInteractions();
     this.host.setAttribute('nve-popover', '');
   }
@@ -83,7 +81,8 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   }
 
   hostDisconnected() {
-    this.#cleanup.forEach(i => i.disconnect());
+    this.#popoverUpdateDisconnect();
+    this.#hiddenUpdateObserver.disconnect();
   }
 
   #update() {
