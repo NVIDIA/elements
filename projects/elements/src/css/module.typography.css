@@ -167,6 +167,13 @@
   }
 }
 
+[nve-text~='code'] {
+  font-weight: var(--nve-ref-font-weight-regular) !important;
+  color: var(--nve-sys-text-default-color) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 [nve-text~='uppercase'] {
   text-transform: uppercase !important;
 }

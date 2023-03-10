@@ -21,6 +21,10 @@ slot,
   height: 100%;
 }
 
+slot {
+  flex-wrap: wrap;
+}
+
 ::slotted(nve-button[interaction='ghost']) {
   --color: inherit;
 }

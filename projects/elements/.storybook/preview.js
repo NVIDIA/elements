@@ -91,7 +91,20 @@ export const parameters = {
           'Getting Started',
           'Changelog',
           'Support',
-          'Testing'
+          'Testing',
+          'Extensions',
+          'API Design',
+          [
+            'Getting Started',
+            'Properties & Attributes',
+            'Slots',
+            'Registration',
+            'Custom Events',
+            'Stateless',
+            'Composition',
+            'Styles',
+            'Packaging'
+          ]
         ],
         'Integrations',
         'Foundations',
