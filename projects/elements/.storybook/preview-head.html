@@ -22,6 +22,10 @@
     border: 0;
   }
 
+  .sbdocs nve-alert p {
+    margin: 0 !important;
+  }
+
   .sbdocs.sbdocs-wrapper {
     padding: 36px !important;
   }
@@ -80,7 +84,13 @@
   }
 
   .sbdocs-h2 {
+    margin-top: 48px !important;
     border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-default) !important;
+  }
+
+  .sbdocs-p:has(nve-alert) {
+    margin: 0 0 var(--nve-ref-size-300) 0 !important;
+    line-height: 0 !important;
   }
 
   .sbdocs code {
