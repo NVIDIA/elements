@@ -167,6 +167,13 @@
   }
 }
 
+[mlv-text~='code'] {
+  font-weight: var(--mlv-ref-font-weight-regular) !important;
+  color: var(--mlv-sys-text-default-color) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 [mlv-text~='uppercase'] {
   text-transform: uppercase !important;
 }

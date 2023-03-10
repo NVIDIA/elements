@@ -22,6 +22,10 @@
     border: 0;
   }
 
+  .sbdocs mlv-alert p {
+    margin: 0 !important;
+  }
+
   .sbdocs.sbdocs-wrapper {
     padding: 36px !important;
   }
@@ -80,7 +84,13 @@
   }
 
   .sbdocs-h2 {
+    margin-top: 48px !important;
     border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-default) !important;
+  }
+
+  .sbdocs-p:has(mlv-alert) {
+    margin: 0 0 var(--mlv-ref-size-300) 0 !important;
+    line-height: 0 !important;
   }
 
   .sbdocs code {
