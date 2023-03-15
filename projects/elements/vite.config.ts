@@ -19,12 +19,17 @@ const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
 export default defineConfig((env) => {
   const mode = env.mode as 'production' | 'watch' | 'test' | 'development';
   execSync(`./node_modules/@custom-elements-manifest/analyzer/index.js analyze ${mode === 'watch' ? '--quiet' : ''} --litelement --globs ./src --exclude src/**/*.css src/**/*.stories.mdx src/**/*.stories.ts --outdir ${dist()}`);
-  execSync(`node ${resolve('./tokens/style-dictionary.config.cjs')} --outDir ${dist()}`);
+  execSync(`node ${resolve('./tokens/style-dictionary.config.cjs')} --outDir ${resolve('./')}/dist/`);
 
   return {
     resolve: {
       alias: {
-        '@elements/elements': resolve('./src') // tests should run against final build artifacts not source
+        '@elements/elements': resolve('./src'), // tests should run against final build artifacts not source
+        '../dist/css/module.tokens.css': resolve('./dist/css/module.tokens.css'),
+        '../dist/css/theme.high-contrast.css': resolve('./dist/css/theme.high-contrast.css'),
+        '../dist/css/theme.reduced-motion.css': resolve('./dist/css/theme.reduced-motion.css'),
+        '../dist/css/theme.compact.css': resolve('./dist/css/theme.compact.css'),
+        '../dist/css/theme.dark.css': resolve('./dist/css/theme.dark.css')
       }
     },
     plugins: [
@@ -67,7 +72,7 @@ export default defineConfig((env) => {
       rollupOptions: {
         treeshake: false,
         preserveEntrySignatures: 'strict',
-        external: [...Object.keys(packageFile.dependencies || {}), ...Object.keys(packageFile.optionalDependencies || {})].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
+        external: ['@happy-dom/global-registrator', ...Object.keys(packageFile.dependencies || {}), ...Object.keys(packageFile.optionalDependencies || {})].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
         output: [
           {
             format: 'esm',

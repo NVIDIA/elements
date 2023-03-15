@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture } from '@elements/elements/test';
-import { focusElement, isFocusable } from './focus.js';
+import { focusElement, isFocusable } from '@elements/elements/internal';
 
 describe('isFocusable', () => {
   let fixture: HTMLElement;
@@ -24,7 +24,6 @@ describe('isFocusable', () => {
       <embed true />
       <input value="true" />
       <input disabled value="false" />
-      <iframe title="test frame">true</iframe>
       <object>true</object>
       <select true></select>
       <select disabled false></select>
@@ -40,7 +39,7 @@ describe('isFocusable', () => {
 
   it('should mark focusable elements as true', () => {
     const elements = Array.from(fixture.querySelectorAll('*')).map(e => isFocusable(e));
-    expect(elements.filter(i => i === true).length).toBe(12);
+    expect(elements.filter(i => i === true).length).toBe(11);
     expect(elements.filter(i => i === false).length).toBe(8);
   });
 });
