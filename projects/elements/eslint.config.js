@@ -4,7 +4,7 @@ import typescriptParser from '@typescript-eslint/parser';
 import lit from 'eslint-plugin-lit';
 import litA11y from 'eslint-plugin-lit-a11y';
 
-const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/storybook-static/**'];
+const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/storybook-build/**'];
 
 export default [
   'eslint:recommended',
