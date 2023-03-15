@@ -1,63 +1,57 @@
-load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 load("@npm//:defs.bzl", "npm_link_all_packages")
-load("@npm//src/ui/platform/design-system/elements:vite/package_json.bzl", vite_bin = "bin")
-load("@npm//src/ui/platform/design-system/elements:vitest/package_json.bzl", vitest_bin = "bin")
-load("@npm//src/ui/platform/design-system/elements:typescript/package_json.bzl", typescript_bin = "bin")
-load("@npm//src/ui/platform/design-system/elements:@elements/custom-elements-storybook/package_json.bzl", storybook_bin = "bin")
-load("//src/ui/platform/build/vite:index.bzl", "vite_library", "vite_default_srcs", "vite_default_data", "vite_default_test_srcs")
-load("//src/ui/platform/build/storybook:index.bzl", "storybook")
+load("@npm//src/ui/platform/design-system/elements:wireit/package_json.bzl", wireit_bin = "bin")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary")
 
 npm_link_all_packages()
 
-vite_library(
-    name = "elements",
-    package_name = "@elements/elements",
-    tsconfig = None,
-    emptyOutDir = False,
-    srcs = vite_default_srcs(),
-    test_srcs = vite_default_test_srcs() + [
-        ":dist",
-    ],
-    deps = [
+wireit_bin.wireit_binary(
+    name = "wireit_bin",
+    chdir = package_name(),
+    patch_node_fs = False,
+    include_npm = True,
+    data = glob([".storybook/**"]) + glob(["src/**"]) + glob(["public/**"])  + glob(["tokens/**"]) + [
         ":node_modules",
-    ],
-    allow_js = True,
-    data = [
+        "eslint.config.js",
         "tsconfig.json",
         "tsconfig.lib.json",
         "package.json",
         "vite.config.ts",
+        "vitest.config.ts",
         "postcss.config.cjs",
-        "tokens/style-dictionary.config.cjs",
-        "tokens/theme.compact.json",
-        "tokens/theme.dark.json",
-        "tokens/theme.high-contrast.json",
-        "tokens/theme.reduced-motion.json",
-        "tokens/tokens.json",
-    ] + glob(["public/**/*"]),
-    node_options = ["--max-old-space-size=8192"],
-    vite_bin = vite_bin,
-    vitest_bin = vitest_bin,
-    typescript_bin = typescript_bin,
+        "create-icon-spritesheet.js"
+    ],
+    env = { "CI": "true", "WIREIT_CACHE": "none", "npm_lifecycle_event": "ci" },
 )
 
-storybook(
-    name = "storybook",
-    srcs = glob([".storybook/**/*"]) + glob(["src/**/*"]) + glob(["tokens/**/*"]) + glob(["public/**/*"]),
-    deps = [
-        ":elements",
-        ":node_modules",
-    ],
-    data = [
-        "package.json"
-    ],
-    storybook_bin = storybook_bin,
+js_run_binary(
+    name = "build",
+    patch_node_fs = False,
+    tool = ":wireit_bin",
+    out_dirs = [
+        "dist",
+        "coverage"
+    ]
 )
 
-# TODO: Remove when the Home app does not consume the fonts directly anymore.
-copy_to_bin(
-    name = "files",
-    srcs = vite_default_srcs() + glob(["public/**/*"]),
+js_run_binary(
+    name = "storybook-build",
+    patch_node_fs = False,
+    tool = ":wireit_bin",
+    out_dirs = [
+        "storybook-build"
+    ]
+)
+
+js_library(
+    name = "lib",
+    srcs = ["package.json", ":build"],
     tags = ["ui"],
+)
+
+npm_package(
+    name = "elements",
+    srcs = [":lib"],
     visibility = ["//visibility:public"],
+    tags = ["ui"],
 )

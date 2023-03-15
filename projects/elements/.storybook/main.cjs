@@ -1,6 +1,7 @@
 const path = require('path');
 
 const { addons } = require('@elements/custom-elements-storybook');
+const resolve = (rel) => path.resolve(process.cwd(), rel);
 
 module.exports = {
   staticDirs: ['../.storybook/assets'],
@@ -21,8 +22,8 @@ module.exports = {
   },
   async viteFinal(config) {
     config.logLevel = 'error';
-    config.resolve.alias = { '@elements/elements': path.resolve(__dirname, '../dist') };
-    
+    config.resolve.alias = { '@elements/elements': resolve('./dist') };
+
     if (config.server) {
       config.server.port = 7777;
       config.server.hmr = {
