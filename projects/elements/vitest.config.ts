@@ -9,13 +9,18 @@ const entries = glob.sync('./src/**/define.ts')
   .map(path => path.replace('./src', 'src').replace('.ts', '.js'))
   .reduce((p, i) => ({ ...p, [i]: path.resolve(__dirname, i.replace('src', base).replace('.js', coverage ? '.ts' : '.js')) }), { });
 
+const resolve = (rel) => path.resolve(process.cwd(), rel);
+
 export default defineConfig({
   test: {
+    root: resolve('.'),
     alias: {
-      '@elements/elements': `./${base}`,
+      '@elements/elements': resolve(`./${base}`),
+      '@elements/elements/test': resolve(`./${base}/test`),
+      '@elements/elements/internal': resolve(`./${base}/internal`),
       ...entries
     },
-    include: ['./src/**/*.test.ts'],
+    include: [resolve('./src/**/*.test.ts')],
     forceRerunTriggers: ['**/dist/**'],
     watchExclude: ['**/node_modules/**'],
     // Default includes '.cache' which fails under Bazel as its sandbox lives in such a folder.
@@ -23,10 +28,11 @@ export default defineConfig({
     // CPU detection on CI fails due to K8s/Docker.
     maxThreads: 8,
     minThreads: 8,
-    environment: 'happy-dom',
     deps: { external: ['**/node_modules/**'] },
-    setupFiles: [path.resolve(__dirname, './src/test/setup.ts')], // https://github.com/vitest-dev/vitest/issues/1700
+    setupFiles: [resolve('./src/test/setup.ts')], // https://github.com/vitest-dev/vitest/issues/1700
     coverage: {
+      reportsDirectory: resolve('./coverage'),
+      reporter: ['lcov', 'html'],
       lines: 90,
       branches: 90,
       functions: 90,
