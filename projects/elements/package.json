@@ -186,6 +186,7 @@
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "0.6.3",
     "@geometricpanda/storybook-addon-badges": "0.2.2",
+    "@happy-dom/global-registrator": "8.9.0",
     "@lit-labs/react": "1.0.9",
     "@elements/custom-elements-storybook": "0.1.7",
     "@rollup/plugin-replace": "5.0.2",
@@ -193,14 +194,15 @@
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
     "@typescript/lib-dom": "npm:@types/web@0.0.87",
-    "@vitest/coverage-c8": "0.26.0",
+    "@vitest/coverage-c8": "0.29.3",
     "emoji-picker-element": "1.12.1",
     "eslint": "8.30.0",
     "eslint-plugin-lit": "1.7.2",
     "eslint-plugin-lit-a11y": "2.3.0",
     "eslint-plugin-wc": "1.4.0",
     "glob": "8.0.3",
-    "happy-dom": "8.1.0",
+    "globals": "13.20.0",
+    "happy-dom": "8.9.0",
     "lit-analyzer": "1.2.1",
     "postcss": "8.4.16",
     "postcss-csso": "6.0.1",
@@ -216,7 +218,8 @@
     "typescript": "4.8.4",
     "vite": "4.0.2",
     "vite-plugin-dts": "1.7.1",
-    "vitest": "0.25.8"
+    "vitest": "0.27.3",
+    "wireit": "0.9.5"
   },
   "publishConfig": {
     "registry": "https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/"
@@ -245,7 +248,7 @@
       ]
     },
     "build": {
-      "command": "vite build",
+      "command": "node_modules/vite/bin/vite.js build",
       "files": [
         "public/**",
         "src/**",
@@ -276,7 +279,7 @@
       "command": "git clean -dfX"
     },
     "test": {
-      "command": "vitest run",
+      "command": "node_modules/vitest/vitest.mjs run",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -302,7 +305,7 @@
       "output": []
     },
     "test:coverage": {
-      "command": "vitest run --coverage",
+      "command": "node -e \"if (process.env.NODE_ENV === 'CI'){process.exit(1)}\" || node_modules/vitest/vitest.mjs run --coverage",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -318,6 +321,13 @@
       ]
     },
     "demos": {
+      "command": "node -e \"if (process.env.NODE_ENV === 'CI'){process.exit(1)}\" || npm run _demos",
+      "files": [
+      ],
+      "output": [
+      ]
+    },
+    "_demos": {
       "dependencies": [
         "../demos/static:build",
         "../demos/typescript:build",
@@ -331,7 +341,7 @@
       ]
     },
     "lint:eslint": {
-      "command": "eslint -c ./eslint.config.js ./src",
+      "command": "node_modules/eslint/bin/eslint.js -c ./eslint.config.js ./src",
       "files": [
         "src/**/*.ts",
         "src/**/*.js",
@@ -349,17 +359,18 @@
       "output": []
     },
     "lint:repo": {
-      "command": "node ../../../tools/lint-changes/lint.changes.js",
+      "command": "node -e \"if (process.env.NODE_ENV === 'CI'){process.exit(1)}\" || node ../../../tools/lint-changes/lint.changes.js",
       "files": [
         "**",
         "!dist/**",
         "!coverage/**",
-        "!storybook-static/**"
+        "!storybook-build/**"
       ],
       "output": []
     },
     "create-icon-spritesheet": {
-      "command": "node create-icon-spritesheet.js",
+      "command": "node -e \"if (process.env.NODE_ENV === 'CI'){process.exit(1)}\" || node create-icon-spritesheet.js",
+      "clean": false,
       "files": [
         "icons/**",
         "create-icon-spritesheet.js"
@@ -369,7 +380,7 @@
       ]
     },
     "storybook": {
-      "command": "build-storybook --output-dir ./storybook-static",
+      "command": "node_modules/@elements/custom-elements-storybook/bin/build.js --output-dir ./storybook-build",
       "files": [
         ".storybook/**",
         "src/**/*.stories.ts",
@@ -377,7 +388,7 @@
         "vite.config.ts"
       ],
       "output": [
-        "storybook-static/**"
+        "storybook-build/**"
       ],
       "dependencies": [
         "build"
