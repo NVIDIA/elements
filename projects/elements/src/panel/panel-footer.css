@@ -1,6 +1,7 @@
 :host {
   --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-500);
   --border-top: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
+  --gap: var(--mlv-ref-space-sm);
 }
 
 footer[internal-host] {
@@ -8,6 +9,10 @@ footer[internal-host] {
   border-top: var(--border-top);
   color: var(--color);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  place-items: flex-start;
+  gap: var(--gap);
+
+  ::slotted(mlv-button) {
+    flex-grow: 1;
+  }
 }

@@ -2,7 +2,6 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
 import { Panel, PanelHeader, PanelFooter } from '@elements/elements/panel';
-import { getFlatDOMTree } from '@elements/elements/internal';
 import '@elements/elements/panel/define.js';
 
 describe('mlv-panel', () => {

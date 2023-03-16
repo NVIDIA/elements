@@ -1,10 +1,9 @@
 :host {
-  --padding: var(--mlv-ref-size-500) var(--mlv-ref-size-500) var(--mlv-ref-size-400);
+  --padding: var(--mlv-ref-size-500) 0 var(--mlv-ref-size-400) var(--mlv-ref-size-500);
   --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
-  --line-height: 1em;
 }
 
-header[internal-host] {
+[internal-host] {
   padding: var(--padding);
   border-bottom: var(--border-bottom);
   color: var(--color);
@@ -12,10 +11,6 @@ header[internal-host] {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  #icon-buttons {
-    display: flex;
-  }
 
   ::slotted([slot="title"]) {
     margin: 0;
@@ -27,5 +22,12 @@ header[internal-host] {
     margin: 0;
     font-size: var(--mlv-ref-font-size-200);
     font-weight: var(--mlv-ref-font-weight-normal);
+  }
+
+  ::slotted([slot="action-icon"]) {
+    position: absolute;
+    top: 14px;
+    right: 48px;
+    z-index: 99;
   }
 }
