@@ -1,6 +1,7 @@
 :host {
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-500);
   --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
+  --gap: var(--nve-ref-space-sm);
 }
 
 footer[internal-host] {
@@ -8,6 +9,10 @@ footer[internal-host] {
   border-top: var(--border-top);
   color: var(--color);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  place-items: flex-start;
+  gap: var(--gap);
+
+  ::slotted(nve-button) {
+    flex-grow: 1;
+  }
 }

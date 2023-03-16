@@ -12,6 +12,7 @@ in a way that is accessible and minimizable.
 Side panel is composed of a `<nve-panel>` container element and several sub-components with default styling.
 The following sub-components can be used within `nve-panel` to achieve standard panel layouts:
 
+- `<nve-panel-header>`
 - `<nve-panel-content>`
 - `<nve-panel-footer>`
 
@@ -60,10 +61,16 @@ import '@elements/elements/panel/define.js';
   <Story id="elements-panel-examples--panel-with-trigger" />
 </Canvas>
 
-<LinkedHeader>Panel with Subtitle and Action Icon</LinkedHeader>
+<LinkedHeader>Panel with Header</LinkedHeader>
 
 <Canvas>
-  <Story id="elements-panel-examples--panel-with-subtitle-and-action-icon" />
+  <Story id="elements-panel-examples--panel-with-header" />
+</Canvas>
+
+<LinkedHeader>Panel with Full Header</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-panel-examples--panel-with-full-header" />
 </Canvas>
 
 <LinkedHeader>Panel with Footer</LinkedHeader>
@@ -74,13 +81,16 @@ import '@elements/elements/panel/define.js';
 
 <LinkedHeader>Themes</LinkedHeader>
 
-<Canvas columns={3}>
+<Canvas columns={2}>
   <Story id="elements-panel-examples--light-theme" />
   <Story id="elements-panel-examples--dark-theme" />
+</Canvas>
+
+<Canvas>
   <Story id="elements-panel-examples--high-contrast-theme" />
 </Canvas>
 
-<Status status={{ apiDoc: true, unitTests: false, themeSupport: true, apiReview: false, vqaReview: false, a11y: false, performance: false, stable: false, pkg: false, figma: true, vetted: false, responsive: false }}></Status>
+<Status status={{ apiDoc: true, unitTests: false, themeSupport: true, apiReview: true, vqaReview: true, a11y: false, performance: false, stable: false, pkg: false, figma: true, vetted: false, responsive: false }}></Status>
 
 # Element API
 

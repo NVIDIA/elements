@@ -1,32 +1,36 @@
 :host {
-  --nve-sys-interaction-default-background: var(--nve-sys-interaction-default-background-200);
   --background: var(--nve-sys-layer-container-background);
   --color: var(--nve-sys-layer-canvas-color);
   --box-shadow: var(--nve-ref-shadow-300);
-  box-shadow: var(--box-shadow);
-  background: var(--background);
-  color: var(--color);
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: start;
   overflow: hidden;
   -webkit-transition: width 240ms ease;
   -webkit-transition: height 240ms ease;
 }
 
-:host(:not([closable]):not(:--expanded)) {
-  width: 32px !important;
-  height: 32px !important;
-  background: none;
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: start;
+  height: 100%;
+  color: var(--color);
+  box-shadow: var(--box-shadow);
+  background: var(--background);
+}
 
-  nve-panel-header {
-    --padding: none;
-    --border-bottom: none;
+:host(:not([closable]):not(:--expanded)) {
+  [internal-host] {
+    width: 32px !important;
+    height: 32px !important;
+    background: none;
   }
 
-  slot, [slot="title"], [slot="subtitle"], [slot="action-icon"] {
+  slot {
     display: none;
+  }
+
+  nve-icon-button {
+    position: initial;
   }
 }
 
@@ -38,10 +42,20 @@
   float: right;
 }
 
-[internal-host] {
+.header {
+  min-height: var(--nve-ref-size-900);
+}
+
+.content {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: start;
-  height: 100%;
+  align-items: start;
+  flex-grow: 1;
+}
+
+nve-icon-button {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  z-index: 99;
 }
