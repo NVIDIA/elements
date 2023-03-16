@@ -17,7 +17,6 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
  * @slot action-icon - Extra Action Button
  * @cssprop --padding
  * @cssprop --border-bottom
- * @cssprop --line-height
  */
 export class PanelHeader extends LitElement {
   static styles = useStyles([panelHeaderStyleSheet]);
@@ -29,17 +28,14 @@ export class PanelHeader extends LitElement {
 
   render() {
     return html`
-      <header internal-host>
+      <div internal-host>
         <div id="titles">
           <slot name="title"></slot>
           <slot name="subtitle"></slot>
         </div>
 
-        <div id="icon-buttons">
-          <slot name="action-icon"></slot>
-          <slot name="close-button"></slot>
-        </div>
-      </header>
+        <slot name="action-icon"></slot>
+      </div>
     `;
   }
 
@@ -75,6 +71,8 @@ export class PanelHeader extends LitElement {
  * @element nve-panel-footer
  * @slot - This is a default/unnamed slot for panel footer content
  * @cssprop --padding
+ * @cssprop --border-top
+ * @cssprop --gap
  */
  export class PanelFooter extends LitElement {
   static styles = useStyles([panelFooterStyleSheet]);
@@ -133,44 +131,38 @@ export class Panel extends LitElement {
   #typeClosableController = new TypeClosableController(this);
 
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
-  @property({ type: Boolean, reflect: true }) expanded: boolean = true;
-  @property({ type: Boolean }) closable: boolean = false;
+  @property({ type: Boolean, reflect: true }) expanded = true;
+  @property({ type: Boolean }) closable = false;
   @property({ type: String }) side: 'left' | 'right' = 'left';
-  @property({ type: String }) title: string;
-  @property({ type: String }) subtitle: string;
 
   render() {
     return html`
       <div internal-host>
-          <nve-panel-header>
-            ${when(this.title, () => html`<div slot="title">${this.title}</div>`)}
+        <div class="header">
+          <slot name="header"></slot>
 
-            ${when(this.subtitle, () => html`<div slot="subtitle">${this.subtitle}</div>`)}
+          ${when(
+            !this.closable,
+            () => html`
+              <nve-icon-button interaction=${this.expanded ? 'ghost' : ''} icon-name=${this.expanded ? 'collapse-panel' : 'expand-panel'}
+                @click=${() => this.expanded = !this.expanded}
+                direction=${this.side}
+                .expanded=${this.expanded}
+                .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
+              ></nve-icon-button>
+            `,
+            () => html`
+              <nve-icon-button interaction="ghost" icon-name="cancel"
+                @click=${() => this.#typeClosableController.close()}
+                .expanded=${this.expanded}
+                .ariaLabel=${this.expanded ? this.i18n.hide : this.i18n.show}
+              ></nve-icon-button>
+            `)}
+        </div>
 
-            <div slot="action-icon">
-              <slot name="action-icon"></slot>
-            </div>
-
-            ${when(
-              !this.closable,
-              () => html`
-                <nve-icon-button slot="close-button" interaction=${this.expanded ? 'ghost' : ''} icon-name=${this.expanded ? 'collapse-panel' : 'expand-panel'}
-                  @click=${() => this.expanded = !this.expanded}
-                  direction=${this.side}
-                  .expanded=${this.expanded}
-                  .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
-                ></nve-icon-button>
-              `,
-              () => html`
-                <nve-icon-button slot="close-button" interaction="ghost" icon-name="cancel"
-                  @click=${() => this.#typeClosableController.close()}
-                  .expanded=${this.expanded}
-                  .ariaLabel=${this.expanded ? this.i18n.hide : this.i18n.show}
-                ></nve-icon-button>
-              `)}
-          </nve-panel-header>
-
-        <slot></slot>
+        <div class="content">
+          <slot></slot>
+        </div>
 
         <slot name="footer"></slot>
       </div>
