@@ -1,10 +1,9 @@
 :host {
-  --padding: var(--nve-ref-size-500) var(--nve-ref-size-500) var(--nve-ref-size-400);
+  --padding: var(--nve-ref-size-500) 0 var(--nve-ref-size-400) var(--nve-ref-size-500);
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
-  --line-height: 1em;
 }
 
-header[internal-host] {
+[internal-host] {
   padding: var(--padding);
   border-bottom: var(--border-bottom);
   color: var(--color);
@@ -12,10 +11,6 @@ header[internal-host] {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  #icon-buttons {
-    display: flex;
-  }
 
   ::slotted([slot="title"]) {
     margin: 0;
@@ -27,5 +22,12 @@ header[internal-host] {
     margin: 0;
     font-size: var(--nve-ref-font-size-200);
     font-weight: var(--nve-ref-font-weight-normal);
+  }
+
+  ::slotted([slot="action-icon"]) {
+    position: absolute;
+    top: 14px;
+    right: 48px;
+    z-index: 99;
   }
 }
