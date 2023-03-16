@@ -32,6 +32,7 @@ interface ArgTypes {
   showActionIcon?: boolean;
   showTrigger?: boolean;
   showFooter?: boolean;
+  showHeader?: boolean;
   title?: string;
   subtitle?: string;
   side?: string;
@@ -57,60 +58,72 @@ const togglePanel = (isClosable: boolean) => {
 
 export const Default = {
   render: (args: ArgTypes) => html`
-    <div nve-theme="root ${args.theme}" nve-layout="row align:space-between pad:sm">
-      <nve-panel id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} title=${args.title} subtitle=${args.subtitle} side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
+    <section nve-layout="row align:space-between pad:sm">
+      <div nve-theme="root ${args.theme}">
+        <nve-panel id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
-          args.showActionIcon,
-          () => html`<nve-icon-button interaction="ghost" slot="action-icon" icon-name="additional-actions" @click=${() => customActionHandler()}></nve-icon-button>`
-        )}
+            args.showHeader,
+            () => html`
+            <nve-panel-header>
+              <div slot="title">${args.title}</div>
+              <div slot="subtitle">${args.subtitle}</div>
 
-        <nve-panel-content nve-layout="column gap:xl">
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm default muted">Release</label>
-            <p nve-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
-          </div>
+              ${when(
+                args.showActionIcon,
+                () => html`<nve-icon-button interaction="ghost" slot="action-icon" icon-name="additional-actions" @click=${() => customActionHandler()}></nve-icon-button>`
+              )}
+            </nve-panel-header>
+            `
+          )}
 
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm default muted">Date</label>
-            <p nve-text="eyebrow sm">2021-08-18</p>
-          </div>
+          <nve-panel-content nve-layout="column gap:xl">
+            <div nve-layout="column gap:xs">
+              <label nve-text="body sm default muted">Release</label>
+              <p nve-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
+            </div>
 
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm default muted">State</label>
-            <nve-button nve-control>Indexed</nve-button>
-          </div>
+            <div nve-layout="column gap:xs">
+              <label nve-text="body sm default muted">Date</label>
+              <p nve-text="eyebrow sm">2021-08-18</p>
+            </div>
 
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm default muted">Driver</label>
-            <p nve-text="eyebrow sm">Kenjiro Ono</p>
-          </div>
+            <div nve-layout="column gap:xs">
+              <label nve-text="body sm default muted">State</label>
+              <nve-button nve-control>Indexed</nve-button>
+            </div>
 
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm default muted">Copilot</label>
-            <p nve-text="eyebrow sm">Kenichi Yoshii</p>
-          </div>
+            <div nve-layout="column gap:xs">
+              <label nve-text="body sm default muted">Driver</label>
+              <p nve-text="eyebrow sm">Kenjiro Ono</p>
+            </div>
 
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm default muted">GVS</label>
-            <a href="#" nve-text="link body sm">http://testbot/testbot/view/content...</a>
-          </div>
+            <div nve-layout="column gap:xs">
+              <label nve-text="body sm default muted">Copilot</label>
+              <p nve-text="eyebrow sm">Kenichi Yoshii</p>
+            </div>
 
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm default muted">Session ID</label>
-            <a href="#" nve-text="link body sm">Experiment 12345</a>
-          </div>
-        </nve-panel-content>
+            <div nve-layout="column gap:xs">
+              <label nve-text="body sm default muted">GVS</label>
+              <a href="#" nve-text="link body sm">http://testbot/testbot/view/content...</a>
+            </div>
 
-        ${when(
-          args.showFooter,
-          () => html`
-          <nve-panel-footer>
-            <nve-button interaction="ghost-destructive">Destructive</nve-button>
-            <nve-button interaction="default">Default</nve-button>
-          </nve-panel-footer>
-          `
-        )}
-      </nve-panel>
+            <div nve-layout="column gap:xs">
+              <label nve-text="body sm default muted">Session ID</label>
+              <a href="#" nve-text="link body sm">Experiment 12345</a>
+            </div>
+          </nve-panel-content>
+
+          ${when(
+            args.showFooter,
+            () => html`
+            <nve-panel-footer>
+              <nve-button interaction="ghost-destructive">Destructive</nve-button>
+              <nve-button interaction="default">Default</nve-button>
+            </nve-panel-footer>
+            `
+          )}
+        </nve-panel>
+      </div>
 
       ${when(
           args.showTrigger,
@@ -118,11 +131,14 @@ export const Default = {
             <nve-button interaction="emphasize" @click=${() => togglePanel(args.closable)}>Toggle Panel</nve-button>
           `
         )}
-    </div>
+    </section>
 
-    <nve-notification-group position="bottom" alignment="end"></nve-notification-group>
+    ${when(
+      args.showActionIcon,
+      () => html`<nve-notification-group position="bottom" alignment="end"></nve-notification-group>`
+    )}
   `,
-  args: { title: 'Details', side: 'left', expanded: true, closable: false, width: 280, height: 550 }
+  args: { title: 'Title', side: 'left', expanded: true, closable: false, showHeader: true, width: 280, height: 550 }
 };
 
 export const LeftSidePanel = {
@@ -145,9 +161,14 @@ export const PanelWithTrigger = {
   args: { title: 'Panel with Trigger', side: 'left', expanded: true, closable: false, showTrigger: true, width: 280, height: 550 }
 };
 
-export const PanelWithSubtitleAndActionIcon = {
+export const PanelWithHeader = {
   ...Default,
-  args: { title: 'Title', subtitle: 'Subtitle', side: 'left', expanded: true, closable: false, showActionIcon: true, width: 280, height: 550 }
+  args: { title: 'Title', side: 'left', expanded: true, closable: false, showHeader: true, width: 280, height: 550 }
+};
+
+export const PanelWithFullHeader = {
+  ...Default,
+  args: { title: 'Title', subtitle: 'Subtitle', side: 'left', expanded: true, closable: false, showHeader: true, showActionIcon: true, width: 280, height: 550 }
 };
 
 export const PanelWithFooter = {
@@ -158,15 +179,15 @@ export const PanelWithFooter = {
 
 export const LightTheme = {
   ...Default,
-  args: { title: 'Light Theme', side: 'left', expanded: true, closable: false, theme: 'light', width: 280, height: 600 }
+  args: { title: 'Light Theme', side: 'left', expanded: true, showHeader: true, theme: 'light', width: 280, height: 600 }
 };
 
 export const DarkTheme = {
   ...Default,
-  args: { title: 'Dark Theme', side: 'left', expanded: true, closable: false, theme: 'dark', width: 280, height: 600 }
+  args: { title: 'Dark Theme', side: 'left', expanded: true, showHeader: true, theme: 'dark', width: 280, height: 600 }
 };
 
 export const HighContrastTheme = {
   ...Default,
-  args: { title: 'High Contrast Theme', side: 'left', expanded: true, closable: false, theme: 'high-contrast', width: 280, height: 600 }
+  args: { title: 'High Contrast Theme', side: 'left', expanded: true, showHeader: true, theme: 'high-contrast', width: 280, height: 600 }
 };
