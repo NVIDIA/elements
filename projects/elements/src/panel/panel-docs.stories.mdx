@@ -2,27 +2,24 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 
-<Meta title="Elements/Panel/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Panel/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Panels
 
-Panels provide a way to make detail content available alongside the primary page layout,
+Panels provide a way to make additional content available alongside the primary page layout,
 in a way that is accessible and minimizable.
 
-Side panel is composed of a `<nve-panel>` container element and several sub-components with default styling.
-The following sub-components can be used within `nve-panel` to achieve standard panel layouts:
+The Panel element is composed of a `<nve-panel>` container element and several sub-components with default styling applied.
+The following sub-components can be used within `<nve-panel>` to achieve standard layouts:
 
 - `<nve-panel-header>`
 - `<nve-panel-content>`
 - `<nve-panel-footer>`
 
 Panels will always be minimizable, either by closing or collapsing. The proper close/collapse icon button will display depending on the
-whether or not `closable` is set. By default `closable` is off and the panel's minimizing function is to collapse to just an icon button.
+whether or not the `closable` attribute is set. By default `closable` is false and the panel will collapse down to just an expand icon.
 
-Additionally, `<nve-panel>` can be have it's `side` property set to `left` or `right` to get the proper collapse/expand icon and animation
-depending on which side of the page you are using the panel.
-
-An slot for `action-icon` is exposed allowing you to render an additional button in the header.
+Additionally, `<nve-panel>` can be have it's `side` property set to `left` or `right` to get the proper collapse/expand icon and animation.
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -49,25 +46,36 @@ import '@elements/elements/panel/define.js';
   <Story id="elements-panel-examples--right-side-panel" />
 </Canvas>
 
-<LinkedHeader>Closable Panel with External Trigger</LinkedHeader>
-
-<Canvas>
-  <Story id="elements-panel-examples--closable-panel" />
-</Canvas>
 
 <LinkedHeader>Collapsable Panel with External Trigger</LinkedHeader>
+
+An external trigger can be used to expand/collapse or hide/show a panel.
+In this example clicking the button toggles the `expanded` attribute on the `<nve-panel>` between `true` and `false`
 
 <Canvas>
   <Story id="elements-panel-examples--panel-with-trigger" />
 </Canvas>
 
+<LinkedHeader>Closable Panel with External Trigger</LinkedHeader>
+
+This is the same example as above only with the `closable` attribute on the `<nve-panel>`
+set to `true`
+
+<Canvas>
+  <Story id="elements-panel-examples--closable-panel" />
+</Canvas>
+
 <LinkedHeader>Panel with Header</LinkedHeader>
+
+The `<nve-panel-header>` sub-component can be slotted into `<nve-panel>` to get default border styling, and additional sub slots within the header.
 
 <Canvas>
   <Story id="elements-panel-examples--panel-with-header" />
 </Canvas>
 
 <LinkedHeader>Panel with Full Header</LinkedHeader>
+
+In this example `<nve-panel-header>` is further slotted with elements for `slot="title"`, `slot="subtitle"`, `<nve-icon-button>` with `slot="action-icon"`
 
 <Canvas>
   <Story id="elements-panel-examples--panel-with-full-header" />
@@ -90,7 +98,7 @@ import '@elements/elements/panel/define.js';
   <Story id="elements-panel-examples--high-contrast-theme" />
 </Canvas>
 
-<Status status={{ apiDoc: true, unitTests: false, themeSupport: true, apiReview: true, vqaReview: true, a11y: false, performance: false, stable: false, pkg: false, figma: true, vetted: false, responsive: false }}></Status>
+<Status status={{ apiDoc: true, robustDocs: true,  unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stable: false, vetted: false, responsive: false }}></Status>
 
 # Element API
 
