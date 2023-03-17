@@ -10,7 +10,7 @@ import '@elements/elements/notification/define.js';
 export default {
   title: 'Elements/Panel/Examples',
   component: 'mlv-panel',
-  parameters: { badges: ['alpha'] },
+  parameters: { badges: ['beta'] },
   argTypes: {
     width: {
       control: { type: 'range', min: 280, max: 500 }

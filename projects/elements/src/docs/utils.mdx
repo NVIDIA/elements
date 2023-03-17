@@ -10,7 +10,7 @@ export const Status = ({children: txt, status: { demo, apiDoc, robustDocs, unitT
   const stbl = stable && responsive && a11y && performance && vetted;
   return (
     <div class="status-summary" style={{ margin: '0 0 80px 0' }}>
-      <h2 id="stability">Stability</h2>
+      <h2 id="stability" style={{ gap: '0' }}>Release Status</h2>
       <p>All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
       <h3><mlv-badge status={(!beta && !stbl) || demo ? 'warning' : 'pending'}>pre-release <mlv-icon name="warning"></mlv-icon></mlv-badge></h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -24,14 +24,14 @@ export const Status = ({children: txt, status: { demo, apiDoc, robustDocs, unitT
         <mlv-alert status={unitTests ? 'finished' : 'pending'}>Robust unit test coverage</mlv-alert>
         <mlv-alert status={apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/story/about-api-design-getting-started--page">Internal API Review</a></mlv-alert>
         <mlv-alert status={vqaReview ? 'finished' : 'pending'}>Passed Designer VQA Review</mlv-alert>
-        <mlv-alert status={pkg ? 'finished' : 'pending'}>Published in <a href="http://nv/elements">library package</a></mlv-alert>
+        <mlv-alert status={pkg ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></mlv-alert>
         <mlv-alert status={figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></mlv-alert>
       </div>
       <h3><mlv-badge status={stbl || demo ? 'finished' : 'pending'}>stable <mlv-icon name="success-badge"></mlv-icon></mlv-badge></h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <mlv-alert status={responsive ? 'finished' : 'pending'}>Adapts to different screen/container sizes</mlv-alert>
         <mlv-alert status={a11y ? 'finished' : 'pending'}>No outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></mlv-alert>
         <mlv-alert status={performance ? 'finished' : 'pending'}>No outstanding performance issues</mlv-alert>
+        <mlv-alert status={responsive ? 'finished' : 'pending'}>Adapts to different screen/container sizes</mlv-alert>
         <mlv-alert status={vetted ? 'finished' : 'pending'}>Incorporates dev feedback from initial usage</mlv-alert>
         <mlv-alert status={stable ? 'finished' : 'pending'}>No breaking API changes for at least 90 days</mlv-alert>
       </div>

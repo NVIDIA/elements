@@ -3,6 +3,8 @@ import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
 import { Panel, PanelHeader, PanelFooter } from '@elements/elements/panel';
 import '@elements/elements/panel/define.js';
+import '@elements/elements/icon-button/define.js';
+import { getFlatDOMTree } from '@elements/elements/internal';
 
 describe('mlv-panel', () => {
   let fixture: HTMLElement;
@@ -16,6 +18,7 @@ describe('mlv-panel', () => {
         <mlv-panel-footer></mlv-panel-footer>
         <p>content</p>
         <mlv-panel-header>
+          <mlv-icon-button interaction="ghost" slot="action-icon" icon-name="additional-actions"></mlv-icon-button>
           <h3 slot="subtitle">subtitle</h3>
           <h2 slot="title">title</h2>
         </mlv-panel-header>
@@ -37,15 +40,83 @@ describe('mlv-panel', () => {
     expect(customElements.get('mlv-panel')).toBeDefined();
     expect(customElements.get('mlv-panel-header')).toBeDefined();
     expect(customElements.get('mlv-panel-footer')).toBeDefined();
+    expect(customElements.get('mlv-icon-button')).toBeDefined();
   });
 
-  it('should have the mlv-panel-header self define the header slot', async () => {
+  it('should have card preserve the heading/content/footer DOM order via slots', async () => {
+    await elementIsStable(panel);
     await elementIsStable(panelHeader);
-    expect(panelHeader.slot).toBe('header');
+    await elementIsStable(panelFooter);
+
+    const [header, footer] = getFlatDOMTree(panel).filter(e => e.tagName.includes('MLV-PANEL'));
+    expect(header).toBe(panelHeader);
+    expect(footer).toBe(panelFooter);
   });
 
-  it('should have the mlv-panel-footer self define the footer slot', async () => {
-    await elementIsStable(panelFooter);
-    expect(panelFooter.slot).toBe('footer');
+  it('should have panel header preserve the title/subtitle/action DOM order via slots', async () => {
+    await elementIsStable(panelHeader);
+
+    const [titleElement, subtitleElement, actionElement] = getFlatDOMTree(panelHeader).filter(e => e.hasAttribute('slot'));
+    expect(titleElement).toBe(panelHeader.querySelector('[slot="title"]'));
+    expect(subtitleElement).toBe(panelHeader.querySelector('[slot="subtitle"]'));
+    expect(actionElement).toBe(panelHeader.querySelector('[slot="action-icon"]'));
+  });
+
+  it('should replace collapse icon with cancel icon when closable', async () => {
+    await elementIsStable(panel);
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+
+    panel.closable = true;
+    await elementIsStable(panel);
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('cancel');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('hide');
+  });
+
+  it('should replace collapse icon with expand icon when collapsed, and update aria attributes', async () => {
+    await elementIsStable(panel);
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+    expect(panel._internals.ariaExpanded).toBe('true');
+    expect(panel.matches('[state--expanded]')).toBe(true);
+
+    panel.expanded = false;
+
+    await elementIsStable(panel);
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('expand-panel');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('expand');
+    expect(panel._internals.ariaExpanded).toBe('false');
+    expect(panel.matches('[state--expanded]')).toBe(false);
+  });
+
+  it('should flip collapse icon direction when panel side set to "right" mode', async () => {
+    await elementIsStable(panel);
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('left');
+
+    panel.setAttribute('side', 'right');
+    await elementIsStable(panel);
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('right');
+  });
+
+  it('should collapse panel when icon button clicked', async () => {
+    await elementIsStable(panel);
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+    expect(panel._internals.ariaExpanded).toBe('true');
+    expect(panel.matches('[state--expanded]')).toBe(true);
+
+    panel.shadowRoot.querySelector('mlv-icon-button').click();
+
+    await elementIsStable(panel);
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('expand-panel');
+    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('expand');
+    expect(panel._internals.ariaExpanded).toBe('false');
+    expect(panel.matches('[state--expanded]')).toBe(false);
   });
 });

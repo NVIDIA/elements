@@ -9,12 +9,11 @@ import panelContentStyleSheet from './panel-content.css?inline';
 import panelFooterStyleSheet from './panel-footer.css?inline';
 
 
-
 /**
  * @element mlv-panel-header
  * @slot title - Title Text
  * @slot subtitle - Subtitle Text
- * @slot action-icon - Extra Action Button
+ * @slot action-icon - Extra Action Button (use `mlv-icon-button`)
  * @cssprop --padding
  * @cssprop --border-bottom
  */
@@ -99,12 +98,12 @@ export class PanelHeader extends LitElement {
 
 
 /**
- * @alpha
+ * @beta
  * @element mlv-panel
  * @slot - This is a default/unnamed slot for panel content
- * @slot action-icon - Extra Action Button
- * @slot content - content element (Use <mlv-panel-content> or custom content)
- * @slot footer - footer element (Use <mlv-panel-footer> or custom content)
+ * @slot header - header element (Use `<mlv-panel-header>` or custom content)
+ * @slot content - content element (Use `<mlv-panel-content>` or custom content)
+ * @slot footer - footer element (Use `<mlv-panel-footer>` or custom content)
  * @cssprop --background
  * @cssprop --color
  * @cssprop --box-shadow
@@ -131,8 +130,17 @@ export class Panel extends LitElement {
   #typeClosableController = new TypeClosableController(this);
 
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+  /**
+   * Determines whether or not the panel is fully expanded, displaying its contents, or not.
+   */
   @property({ type: Boolean, reflect: true }) expanded = true;
+  /**
+   * Determines whether or not the panel will collapse down to an expand icon, or fully hide.
+  */
   @property({ type: Boolean }) closable = false;
+  /**
+   * Sets the proper collapse icon and collapse animation, based on what side of the page the panel will be used.
+  */
   @property({ type: String }) side: 'left' | 'right' = 'left';
 
   render() {
