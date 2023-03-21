@@ -1,6 +1,6 @@
 {
   "name": "@elements/elements",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "type": "module",
   "customElements": "custom-elements.json",
   "scripts": {
@@ -99,6 +99,9 @@
     "./input": "./dist/input/index.js",
     "./input/index.js": "./dist/input/index.js",
     "./input/define.js": "./dist/input/define.js",
+    "./logo": "./dist/logo/index.js",
+    "./logo/index.js": "./dist/logo/index.js",
+    "./logo/define.js": "./dist/logo/define.js",
     "./month": "./dist/month/index.js",
     "./month/index.js": "./dist/month/index.js",
     "./month/define.js": "./dist/month/define.js",
