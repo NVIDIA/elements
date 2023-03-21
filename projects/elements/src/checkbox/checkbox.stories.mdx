@@ -1,8 +1,7 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../docs/utils.mdx';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
 
-
-<Meta title="Elements/Checkbox/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Checkbox/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Checkbox
 
@@ -48,6 +47,8 @@ import '@elements/elements/checkbox/define.js';
 <Canvas>
   <Story id="elements-checkbox-examples--horizontal-inline-group" />
 </Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: true, unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stable: true, vetted: true, responsive: true }}></Status>
 
 <LinkedHeader>nve-checkbox</LinkedHeader>
 

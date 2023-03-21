@@ -95,8 +95,8 @@
   .getting-started-logo {
     margin: 7vh 0 0 0 !important;
     display: flex;
+    flex-direction: column;
     gap: 12px;
-    align-items: end;
   }
 
   .getting-started-logo h1 {
@@ -162,6 +162,13 @@
     border: 0 !important;
     background: var(--nve-sys-layer-container-background) !important;
     box-shadow: none !important;
+  }
+
+  /* heading anchor */
+  .css-cflg6q {
+    margin-left: 0;
+    position: absolute;
+    left: 0;
   }
 
   .prismjs {
@@ -256,11 +263,11 @@
     }
   }
 
-  .status-summary a {
+  .status-summary nve-alert a {
     color: var(--nve-sys-text-color) !important;
     text-decoration: underline !important;
     font-weight: 800;
-    margin-left: -4px;
+    margin-left: -0.5ch;
   }
 </style>
 <div hidden style="display: none !important">

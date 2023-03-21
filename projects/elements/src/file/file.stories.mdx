@@ -1,9 +1,7 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../docs/utils.mdx';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
 
-import { BADGE } from '@geometricpanda/storybook-addon-badges';
-
-<Meta title="Elements/File/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/File/Documentation" parameters={{ badges: ['beta'] }} />
 
 # File
 
@@ -37,6 +35,8 @@ import '@elements/elements/file/define.js';
 <Canvas>
   <Story id="elements-file-examples--horizontal" />
 </Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: true, unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stable: false, vetted: false, responsive: true }}></Status>
 
 <LinkedHeader>nve-file</LinkedHeader>
 
