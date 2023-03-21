@@ -1,8 +1,8 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../docs/utils.mdx';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 
-<Meta title="Elements/Notification/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Notification/Documentation" parameters={{ badges: ['beta'] }} />
 
 <Story id="internal-integration--empty" />
 
@@ -48,6 +48,8 @@ import '@elements/elements/notification/define.js';
 <Canvas>
   <Story id="elements-notification-examples--content-wrap" inline={false} height="700px" />
 </Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: true, unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stable: false, vetted: false, responsive: true }}></Status>
 
 <LinkedHeader>nve-notification</LinkedHeader>
 

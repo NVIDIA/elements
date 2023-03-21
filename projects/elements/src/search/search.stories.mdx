@@ -1,8 +1,8 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../docs/utils.mdx';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 
-<Meta title="Elements/Search/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Search/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Search
 
@@ -48,6 +48,8 @@ import '@elements/elements/search/define.js';
 <Canvas>
   <Story id="elements-search-examples--horizontal" />
 </Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: true, unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stable: true, vetted: true, responsive: true }}></Status>
 
 <LinkedHeader>nve-search</LinkedHeader>
 
