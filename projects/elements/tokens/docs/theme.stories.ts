@@ -93,7 +93,7 @@ function getThemeContent() {
       </div>
       <div nve-layout="row gap:sm">
         <nve-icon name="user"></nve-icon>
-        <nve-icon name="user" status="info"></nve-icon>
+        <nve-icon name="user" status="accent"></nve-icon>
         <nve-icon name="user" status="success"></nve-icon>
         <nve-icon name="user" status="warning"></nve-icon>
         <nve-icon name="user" status="danger"></nve-icon>
@@ -122,6 +122,7 @@ function getThemeContent() {
       </div>
       <div nve-layout="column gap:md">
         <nve-alert>default</nve-alert>
+        <nve-alert status="accent">accent</nve-alert>
         <nve-alert status="warning">warning</nve-alert>
         <nve-alert status="success">success</nve-alert>
         <nve-alert status="danger">danger</nve-alert>
@@ -130,6 +131,11 @@ function getThemeContent() {
         <nve-alert-group>
           <nve-alert>default</nve-alert>
           <nve-alert>default</nve-alert>
+        </nve-alert-group>
+
+        <nve-alert-group status="accent">
+          <nve-alert>accent</nve-alert>
+          <nve-alert>accent</nve-alert>
         </nve-alert-group>
 
         <nve-alert-group status="warning">

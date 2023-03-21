@@ -1,9 +1,8 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../docs/utils.mdx';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
 
-import { BADGE } from '@geometricpanda/storybook-addon-badges';
 
-<Meta title="Elements/Date/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Date/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Date
 
@@ -43,6 +42,8 @@ import '@elements/elements/date/define.js';
 <Canvas>
   <Story id="elements-date-examples--horizontal" />
 </Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: true, unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stable: true, vetted: true, responsive: true }}></Status>
 
 <LinkedHeader>nve-date</LinkedHeader>
 
