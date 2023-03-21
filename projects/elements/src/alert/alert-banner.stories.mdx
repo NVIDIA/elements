@@ -1,7 +1,7 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../docs/utils.mdx';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
 
-<Meta title="Elements/Alert Banner/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Alert Banner/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Alert Banner
 
@@ -36,6 +36,8 @@ import '@elements/elements/alert/define.js';
   <Story id="elements-alert-banner-examples--light-theme" />
   <Story id="elements-alert-banner-examples--dark-theme" />
 </Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: true, unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stable: false, vetted: false, responsive: true }}></Status>
 
 <LinkedHeader>mlv-alert</LinkedHeader>
 <Props of="mlv-alert" />

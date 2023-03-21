@@ -1,6 +1,5 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../docs/utils.mdx';
-
+import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 <Meta title="Elements/Color/Documentation" parameters={{ badges: ['alpha'] }} />
 
@@ -42,6 +41,8 @@ import '@elements/elements/color/define.js';
 <Canvas>
   <Story id="elements-color-examples--horizontal" />
 </Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: true, unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stable: true, vetted: false, responsive: true }}></Status>
 
 <LinkedHeader>mlv-color</LinkedHeader>
 

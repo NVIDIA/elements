@@ -1,8 +1,8 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../docs/utils.mdx';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 
-<Meta title="Elements/Toast/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Toast/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Toast
 
@@ -30,6 +30,8 @@ import '@elements/elements/toast/define.js';
   <Story id="elements-toast-examples--status" inline={false} height={300} />
   <Story id="elements-toast-examples--actions" inline={false} height={300} />
 </Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: true, unitTests: true, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stable: false, vetted: true, responsive: true }}></Status>
 
 <LinkedHeader>mlv-toast</LinkedHeader>
 

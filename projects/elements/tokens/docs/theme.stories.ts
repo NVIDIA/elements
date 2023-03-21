@@ -93,7 +93,7 @@ function getThemeContent() {
       </div>
       <div mlv-layout="row gap:sm">
         <mlv-icon name="user"></mlv-icon>
-        <mlv-icon name="user" status="info"></mlv-icon>
+        <mlv-icon name="user" status="accent"></mlv-icon>
         <mlv-icon name="user" status="success"></mlv-icon>
         <mlv-icon name="user" status="warning"></mlv-icon>
         <mlv-icon name="user" status="danger"></mlv-icon>
@@ -122,6 +122,7 @@ function getThemeContent() {
       </div>
       <div mlv-layout="column gap:md">
         <mlv-alert>default</mlv-alert>
+        <mlv-alert status="accent">accent</mlv-alert>
         <mlv-alert status="warning">warning</mlv-alert>
         <mlv-alert status="success">success</mlv-alert>
         <mlv-alert status="danger">danger</mlv-alert>
@@ -130,6 +131,11 @@ function getThemeContent() {
         <mlv-alert-group>
           <mlv-alert>default</mlv-alert>
           <mlv-alert>default</mlv-alert>
+        </mlv-alert-group>
+
+        <mlv-alert-group status="accent">
+          <mlv-alert>accent</mlv-alert>
+          <mlv-alert>accent</mlv-alert>
         </mlv-alert-group>
 
         <mlv-alert-group status="warning">
