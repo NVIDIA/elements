@@ -3,22 +3,22 @@ import path from 'path';
 import process from 'process';
 import glob from 'glob';
 
+const resolve = (rel) => path.resolve(process.cwd(), rel);
 const coverage = (process.argv.findIndex((i) => i === '--coverage') !== -1);
 const base = coverage ? 'src' : 'dist';
 const entries = glob.sync('./src/**/define.ts')
-  .map(path => path.replace('./src', 'src').replace('.ts', '.js'))
-  .reduce((p, i) => ({ ...p, [i]: path.resolve(__dirname, i.replace('src', base).replace('.js', coverage ? '.ts' : '.js')) }), { });
-
-const resolve = (rel) => path.resolve(process.cwd(), rel);
+  .map(path => path.replace('.ts', '.js'))
+  .reduce((p, i) => ({ ...p, [i.replace('./src', '@elements/elements').replace('/index.js', '')]: resolve(i.replace('src', base)).replace('.js', coverage ? '.ts' : '.js') }), { });
 
 export default defineConfig({
   test: {
     root: resolve('.'),
     alias: {
-      '@elements/elements': resolve(`./${base}`),
+      ...entries,
       '@elements/elements/test': resolve(`./${base}/test`),
       '@elements/elements/internal': resolve(`./${base}/internal`),
-      ...entries
+      '@elements/elements/scoped': resolve(`./${base}/scoped`),
+      '@elements/elements': resolve(`./${base}`),
     },
     include: [resolve('./src/**/*.test.ts')],
     forceRerunTriggers: ['**/dist/**'],
