@@ -12,7 +12,6 @@
     "build:watch": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
-    "test:unit": "wireit",
     "test:coverage": "wireit",
     "storybook": "wireit",
     "storybook:watch": "wireit",
@@ -21,6 +20,7 @@
     "lint:repo": "wireit",
     "lint:analyzer": "wireit",
     "demos": "wireit",
+    "_demos": "wireit",
     "create-icon-spritesheet": "wireit",
     "prepublishonly": "wireit"
   },
@@ -299,16 +299,8 @@
       "command": "pnpm run test:unit --watch",
       "output": []
     },
-    "test:unit": {
-      "command": "vitest run",
-      "files": [
-        "dist/**",
-        "src/**/*.test.ts"
-      ],
-      "output": []
-    },
     "test:coverage": {
-      "command": "node -e \"if (process.env.NODE_ENV === 'CI'){process.exit(1)}\" || node_modules/vitest/vitest.mjs run --coverage",
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node_modules/vitest/vitest.mjs run --coverage",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -324,7 +316,7 @@
       ]
     },
     "demos": {
-      "command": "node -e \"if (process.env.NODE_ENV === 'CI'){process.exit(1)}\" || npm run _demos",
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || npm run _demos",
       "files": [
       ],
       "output": [
@@ -362,7 +354,7 @@
       "output": []
     },
     "lint:repo": {
-      "command": "node -e \"if (process.env.NODE_ENV === 'CI'){process.exit(1)}\" || node ../../../tools/lint-changes/lint.changes.js",
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node ../../../tools/lint-changes/lint.changes.js",
       "files": [
         "**",
         "!dist/**",
@@ -372,7 +364,7 @@
       "output": []
     },
     "create-icon-spritesheet": {
-      "command": "node -e \"if (process.env.NODE_ENV === 'CI'){process.exit(1)}\" || node create-icon-spritesheet.js",
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node create-icon-spritesheet.js",
       "clean": false,
       "files": [
         "icons/**",
