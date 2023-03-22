@@ -82,6 +82,8 @@ pnpm test:watch
 
 ## Deploying
 
+### Version
+
 Bump the `version` field in `package.json` following semantic versioning conventions and ideally adhering to our release cadence.
 We currently aim for one minor version release at the end of each month and additional patch versions for bug fixes.
 
@@ -93,7 +95,11 @@ We currently aim for one minor version release at the end of each month and addi
 }
 ```
 
-First validate a proper build and verify expected component APIs and demos by running local Storybook:
+Update the changelog in storybook to reflect the latest version and release notes. `src/docs/changelog.stories.mdx`
+
+### Build
+
+Validate a proper build and verify expected component APIs and demos by running local Storybook:
 
 ```bash
 pnpm i
@@ -103,8 +109,10 @@ pnpm dev
 Test storybook make sure everything looks good, then run a local build:
 
 ```bash
-pnpm ci
+pnpm ci:nocache
 ```
+
+### Publish
 
 Validate expected artifacts in `/dist` folder, then run a dry publish and validate contents and package size that will be uploaded to artifactory:
 
@@ -117,4 +125,18 @@ Finally, run that actual deploy of the new version and verify contents on <a hre
 
 ```bash
 pnpm publish
-``
+```
+
+### UI Platform Dependencies
+
+After publishing the UI platform (IDE) dependencies can be updated.
+
+```
+src/ui/platform/apps/home/package.json 
+src/ui/platform/libs/feedback-elements/package.json 
+src/ui/platform/libs/ide/package.json 
+src/ui/platform/plugins/apps-and-services/package.json 
+src/ui/platform/shared/elements/package.json
+```
+
+Example Release Commit: https://git-av.nvidia.com/r/c/elements/+/120980
