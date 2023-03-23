@@ -160,7 +160,9 @@ export const parameters = {
           'Visualization',
           'I18n'
         ],
-        'Elements'
+        'Elements',
+        'Patterns',
+        'Internals'
       ]
     }
   }
