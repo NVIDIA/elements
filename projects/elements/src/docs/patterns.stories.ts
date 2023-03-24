@@ -18,7 +18,7 @@ export const Header = {
             <div mlv-layout="row gap:sm" style="margin-left: auto">
               <mlv-icon-button icon-name="information" aria-label="information"></mlv-icon-button>
               <mlv-icon-button icon-name="edit" aria-label="edit"></mlv-icon-button>
-              <mlv-icon-button icon-name="menu" aria-label="additional actions"></mlv-icon-button>
+              <mlv-icon-button icon-name="additional-actions" aria-label="additional actions"></mlv-icon-button>
             </div>
           </div>
           <div mlv-layout="row gap:xl align:vertical-center">
