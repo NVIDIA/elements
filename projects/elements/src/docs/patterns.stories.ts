@@ -18,7 +18,7 @@ export const Header = {
             <div nve-layout="row gap:sm" style="margin-left: auto">
               <nve-icon-button icon-name="information" aria-label="information"></nve-icon-button>
               <nve-icon-button icon-name="edit" aria-label="edit"></nve-icon-button>
-              <nve-icon-button icon-name="menu" aria-label="additional actions"></nve-icon-button>
+              <nve-icon-button icon-name="additional-actions" aria-label="additional actions"></nve-icon-button>
             </div>
           </div>
           <div nve-layout="row gap:xl align:vertical-center">
