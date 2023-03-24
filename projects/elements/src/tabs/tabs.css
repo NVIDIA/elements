@@ -1,0 +1,31 @@
+
+:host {
+  --gap: var(--mlv-ref-space-xs);
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+}
+
+:host([vertical]) [internal-host] {
+  flex-direction: column;
+  --gap: var(--mlv-ref-space-xxxs);
+
+  ::slotted(mlv-tabs-item) {
+    --border-bottom-width: 0;
+    --border-left-width: var(--mlv-ref-border-width-lg);
+  }
+
+  ::slotted(mlv-tabs-item:--selected) {
+    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
+  }
+}
+
+:host([borderless]) [internal-host] {
+  ::slotted(mlv-tabs-item) {
+    --border-bottom-width: 0;
+    --border-left-width: 0;
+  }
+}

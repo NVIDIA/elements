@@ -1,0 +1,59 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
+
+<Meta title="Elements/Tabs/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Tabs
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/tabs/define.js';
+```
+
+```html
+<mlv-tabs>
+  <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
+  <mlv-tabs-item>Tab 2</mlv-tabs-item>
+  <mlv-tabs-item>Tab 3</mlv-tabs-item>
+  <mlv-tabs-item>Tab 3</mlv-tabs-item>
+  <mlv-tabs-item disabled>disabled</mlv-tabs-item>
+</mlv-tabs>
+```
+
+<Canvas>
+  <Story id="elements-tabs-examples--default" />
+</Canvas>
+
+<LinkedHeader>Themes</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-tabs-examples--light-theme" />
+  <Story id="elements-tabs-examples--dark-theme" />
+</Canvas>
+
+<LinkedHeader>Borderless Tabs</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-tabs-examples--borderless-tabs" />
+</Canvas>
+
+<LinkedHeader>Vertical Tabs</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-tabs-examples--vertical-tabs" />
+</Canvas>
+
+<LinkedHeader>Borderless Vertical Tabs with Icons</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-tabs-examples--borderless-vertical-tabs" />
+</Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: false, unitTests: false, themeSupport: true, apiReview: true, vqaReview: false, figma: true, pkg: false, a11y: true, performance: false, stabsle: false, vetted: false, responsive: false }}></Status>
+
+<LinkedHeader>mlv-tabs</LinkedHeader>
+<Props of="mlv-tabs" />
+
+<LinkedHeader>mlv-tabs-item</LinkedHeader>
+<Props of="mlv-tabs-item" />
