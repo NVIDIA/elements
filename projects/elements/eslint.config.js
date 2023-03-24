@@ -34,6 +34,7 @@ export default [
       '@typescript-eslint/no-explicit-any': 'off', // TODO: would like to enable
       '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test' }], // ignore demo/test components that do not need to be exported
       'lit-a11y/anchor-has-content': 'off', // rule does not check for aria-label
+      'lit-a11y/click-events-have-key-events': 'off', // a11y may be handled by @keyNavigationList controller
       'no-restricted-imports': [
         'error',
         {

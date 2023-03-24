@@ -14,10 +14,10 @@ export const Status = ({children: txt, status: { demo, apiDoc, robustDocs, unitT
       <p>All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
       <h3><nve-badge status={(!beta && !stbl) || demo ? 'warning' : 'pending'}>pre-release <nve-icon name="warning"></nve-icon></nve-badge></h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <nve-alert status={figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
         <nve-alert status={'finished'}>Preview viewable in Storybook</nve-alert>
         <nve-alert status={apiDoc ? 'finished' : 'pending'}>Basic API documentation and demos</nve-alert>
-        <nve-alert status={themeSupport ? 'finished' : 'pending'}>Theme support</nve-alert>
-      </div>
+        <nve-alert status={themeSupport ? 'finished' : 'pending'}>Theme support</nve-alert></div>
       <h3><nve-badge status={(beta && !stbl) || demo ? 'running' : 'pending'}>beta <nve-icon name="schedule"></nve-icon></nve-badge></h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <nve-alert status={robustDocs ? 'finished' : 'pending'}>Robust written docs and interactive demos</nve-alert>
@@ -25,7 +25,6 @@ export const Status = ({children: txt, status: { demo, apiDoc, robustDocs, unitT
         <nve-alert status={apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/story/about-api-design-getting-started--page">Internal API Review</a></nve-alert>
         <nve-alert status={vqaReview ? 'finished' : 'pending'}>Passed Designer VQA Review</nve-alert>
         <nve-alert status={pkg ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></nve-alert>
-        <nve-alert status={figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
       </div>
       <h3><nve-badge status={stbl || demo ? 'finished' : 'pending'}>stable <nve-icon name="success-badge"></nve-icon></nve-badge></h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
