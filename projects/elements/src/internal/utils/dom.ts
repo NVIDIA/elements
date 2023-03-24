@@ -15,7 +15,7 @@ import { isFocusable } from './focus.js';
     .flat(depth);
 }
 
-export function getChildren(node: any): NodeList {
+export function getChildren(node: any): NodeListOf<HTMLElement> {
   if (node.documentElement) {
     return node.documentElement.children; // root document children
   } else if (node.shadowRoot) {

@@ -1,0 +1,31 @@
+
+:host {
+  --gap: var(--nve-ref-space-xs);
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+}
+
+:host([vertical]) [internal-host] {
+  flex-direction: column;
+  --gap: var(--nve-ref-space-xxxs);
+
+  ::slotted(nve-tabs-item) {
+    --border-bottom-width: 0;
+    --border-left-width: var(--nve-ref-border-width-lg);
+  }
+
+  ::slotted(nve-tabs-item:--selected) {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+  }
+}
+
+:host([borderless]) [internal-host] {
+  ::slotted(nve-tabs-item) {
+    --border-bottom-width: 0;
+    --border-left-width: 0;
+  }
+}
