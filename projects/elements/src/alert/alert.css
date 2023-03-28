@@ -6,6 +6,7 @@
   --icon-color: var(--status-color);
   --icon-size: var(--nve-ref-size-400);
   --font-weight: var(--nve-ref-font-weight-semibold);
+  --justify-content: start;
   width: auto;
 }
 
@@ -21,6 +22,7 @@ slot,
   color: var(--color);
   display: flex;
   align-items: center;
+  justify-content: var(--justify-content);
   line-height: 1em;
   height: 100%;
 }
@@ -29,12 +31,24 @@ slot {
   flex-wrap: wrap;
 }
 
+slot:not([name='actions']):not([name='prefix']) {
+  flex-grow: 1;
+}
+
+slot[name] {
+  font-weight: var(--nve-ref-font-weight-semibold);
+}
+
 ::slotted(nve-button[interaction='ghost']) {
   --color: inherit;
 }
 
 slot[name='actions'] {
   margin-left: auto;
+}
+
+slot[name='prefix'] {
+  margin-right: var(--nve-ref-space-md);
 }
 
 nve-icon {
