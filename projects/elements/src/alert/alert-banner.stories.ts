@@ -20,7 +20,9 @@ export const Default = {
   render: (args: ArgTypes) =>
     html`
 <mlv-alert-banner .status=${args.status}>
-  <mlv-alert>alert message</mlv-alert>
+  <mlv-alert closable>
+    <span slot="prefix">default</span> banner message
+  </mlv-alert>
 </mlv-alert-banner>
     `,
     args: { status: undefined }
@@ -31,31 +33,31 @@ export const Status = {
 <div mlv-layout="column gap:md">
   <mlv-alert-banner>
     <mlv-alert closable>
-      default banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">default</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="accent">
     <mlv-alert closable>
-      accent banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">accent</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="warning">
     <mlv-alert closable>
-      warning banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">warning</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="success">
     <mlv-alert closable>
-      success banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">success</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="danger">
     <mlv-alert closable>
-      danger banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">danger</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 </div>
@@ -67,31 +69,31 @@ export const LightTheme = {
 <div mlv-theme="root light" mlv-layout="column gap:md pad:md">
   <mlv-alert-banner>
     <mlv-alert closable>
-      default banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">default</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="accent">
     <mlv-alert closable>
-      accent banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">accent</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="warning">
     <mlv-alert closable>
-      warning banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">warning</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="success">
     <mlv-alert closable>
-      success banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">success</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="danger">
     <mlv-alert closable>
-      danger banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">danger</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 </div>
@@ -101,33 +103,33 @@ export const LightTheme = {
 export const DarkTheme = {
   render: () => html`
 <div mlv-theme="root dark" mlv-layout="column gap:md pad:md">
-  <mlv-alert-banner>
+<mlv-alert-banner>
     <mlv-alert closable>
-      default banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">default</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="accent">
     <mlv-alert closable>
-      accent banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">accent</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="warning">
     <mlv-alert closable>
-      warning banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">warning</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="success">
     <mlv-alert closable>
-      success banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">success</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 
   <mlv-alert-banner status="danger">
     <mlv-alert closable>
-      danger banner message <a href="#" mlv-text="link">action</a>
+      <span slot="prefix">danger</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
     </mlv-alert>
   </mlv-alert-banner>
 </div>

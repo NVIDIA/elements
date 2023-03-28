@@ -296,8 +296,8 @@
       ]
     },
     "test:watch": {
-      "command": "pnpm run test:unit --watch",
-      "output": []
+      "command": "vitest --watch",
+      "service": true
     },
     "test:coverage": {
       "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node_modules/vitest/vitest.mjs run --coverage",

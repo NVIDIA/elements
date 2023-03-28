@@ -61,6 +61,27 @@ describe('mlv-alert', () => {
 
   it('should provide a actions slot for action buttons', async () => {
     await elementIsStable(alert);
+    expect(alert.shadowRoot.querySelector('slot[name=actions]')).toBeFalsy();
+
+    const button = document.createElement('button');
+    button.slot = 'actions';
+    alert.appendChild(button);
+    alert.requestUpdate();
+
+    await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector('slot[name=actions]')).toBeTruthy();
+  });
+
+  it('should provide a prefix slot for banner api', async () => {
+    await elementIsStable(alert);
+    expect(alert.shadowRoot.querySelector('slot[name=prefix]')).toBeFalsy();
+
+    const span = document.createElement('span');
+    span.slot = 'prefix';
+    alert.appendChild(span);
+    alert.requestUpdate();
+
+    await elementIsStable(alert);
+    expect(alert.shadowRoot.querySelector('slot[name=prefix]')).toBeTruthy();
   });
 });

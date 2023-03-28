@@ -40,6 +40,14 @@ export class Alert extends LitElement {
 
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
+  get #prefix() {
+    return this.querySelectorAll('[slot="prefix"]');
+  }
+
+  get #actions() {
+    return this.querySelectorAll('[slot="actions"]');
+  }
+
   /** @private */
   declare _internals: ElementInternals;
 
@@ -47,8 +55,9 @@ export class Alert extends LitElement {
     return html`
       <div internal-host>
         ${this.status !== 'muted' ? html`<mlv-icon name=${statusIcons[this.status] ?? 'dot'} .size=${statusIcons[this.status] === 'dot' ? 'sm' : null}></mlv-icon>` : ''}
+        ${this.#prefix.length ? html`<slot name="prefix"></slot>` : ''}
         <slot></slot>
-        <slot name="actions"></slot>
+        ${this.#actions.length ? html`<slot name="actions"></slot>` : ''}
         ${this.closable ? html`<mlv-icon-button @click=${() => this.#typeClosableController.close()} interaction="ghost" icon-name="cancel" size="sm" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
       </div>
     `;

@@ -25,3 +25,7 @@
   --background: var(--mlv-sys-support-danger-color);
   --icon-color: var(--color);
 }
+
+::slotted(mlv-alert) {
+  --font-weight: var(--mlv-ref-font-weight-regular);
+}
