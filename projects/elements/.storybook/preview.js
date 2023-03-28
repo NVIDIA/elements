@@ -29,7 +29,7 @@ export const parameters = {
       const hasRoot = i => i.includes('nve-theme="root"');
       const lines = src.trim().split('\n').filter(i => !hasRoot(i));
       const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('nve-theme="root ', 'nve-theme="');
-      return isTokenTable ? source : prettier.format(source, { parser: 'html', plugins: [parserHTML], singleAttributePerLine: false });
+      return isTokenTable ? source : prettier.format(source, { parser: 'html', plugins: [parserHTML], singleAttributePerLine: false }).replaceAll('=""', '');
     }
   },
   controls: {

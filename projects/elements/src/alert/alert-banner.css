@@ -25,3 +25,7 @@
   --background: var(--nve-sys-support-danger-color);
   --icon-color: var(--color);
 }
+
+::slotted(nve-alert) {
+  --font-weight: var(--nve-ref-font-weight-regular);
+}
