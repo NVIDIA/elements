@@ -53,7 +53,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     return this.host.popoverDismissible !== false;
   }
 
-  #popoverUpdateDisconnect: () => void;
+  #popoverUpdateDisconnect = () => null;
   #hiddenUpdateObserver: MutationObserver;
 
   constructor(private host: T) {
@@ -82,7 +82,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   hostDisconnected() {
     this.#popoverUpdateDisconnect();
-    this.#hiddenUpdateObserver.disconnect();
+    this.#hiddenUpdateObserver?.disconnect();
   }
 
   #update() {
