@@ -168,4 +168,11 @@ describe('type-popover.controller', () => {
     await new Promise(r => setTimeout(() => r(null), 0));
     expect(events).toBe(0);
   });
+
+  it('should not throw if disconnected before setup', async () => {
+    const el = document.createElement('type-popover-controller-test-element') as any;
+    el.parentNode = fixture;
+    fixture.appendChild(el);
+    element.remove();
+  });
 });
