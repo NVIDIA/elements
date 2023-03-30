@@ -332,6 +332,7 @@
     "lint": {
       "dependencies": [
         "lint:eslint",
+        "lint:analyzer",
         "lint:repo"
       ]
     },
@@ -345,11 +346,10 @@
       "output": []
     },
     "lint:analyzer": {
-      "command": "lit-analyzer src",
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node_modules/lit-analyzer/cli.js src",
       "files": [
         "src/**/*.ts",
-        "src/**/*.js",
-        "eslint.config.js"
+        "tsconfig.json"
       ],
       "output": []
     },
