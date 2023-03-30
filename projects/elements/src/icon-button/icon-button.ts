@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@elements/elements/internal';
 import { Button } from '@elements/elements/button';
-import { Icon, IconNames } from '@elements/elements/icon';
+import { Icon, IconName } from '@elements/elements/icon';
 import styles from './icon-button.css?inline';
 
 /**
@@ -12,7 +12,7 @@ import styles from './icon-button.css?inline';
  * @cssprop --line-height
  */
 export class IconButton extends Button {
-  @property({ type: String, attribute: 'icon-name' }) iconName: IconNames;
+  @property({ type: String, attribute: 'icon-name' }) iconName: IconName;
 
   /**
    * Sets the direction of the icon.

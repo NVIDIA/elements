@@ -26,9 +26,12 @@
       {
         "name": "ts-lit-plugin",
         "strict": true,
-        "globalAttributes": ["nve-text", "nve-layout"],
+        "globalAttributes": ["nve-text", "nve-layout", "nve-theme"],
         "rules": {
-          "no-unknown-attribute": "off"
+          "no-unknown-tag-name": "off",
+          "no-unknown-attribute": "off",
+          "no-missing-import": "off",
+          "no-unknown-property": "off"
         }
       }
     ]

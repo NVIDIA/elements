@@ -67,7 +67,7 @@
   --border-radius: var(--nve-ref-border-radius-sm);
   --font-weight: var(--nve-ref-font-weight-regular);
   --padding: 0 var(--nve-ref-size-200);
-  --height: var(--nve-ref-font-size-700);
+  --height: var(--nve-ref-size-700);
 
   & [internal-host] {
     justify-content: start;

@@ -54,7 +54,7 @@ export class Alert extends LitElement {
   render() {
     return html`
       <div internal-host>
-        ${this.status !== 'muted' ? html`<nve-icon name=${statusIcons[this.status] ?? 'dot'} .size=${statusIcons[this.status] === 'dot' ? 'sm' : null}></nve-icon>` : ''}
+        ${this.status !== 'muted' ? html`<nve-icon name=${statusIcons[this.status] ?? 'dot'} .size=${statusIcons[this.status] === 'dot' ? 'sm' : undefined}></nve-icon>` : ''}
         ${this.#prefix.length ? html`<slot name="prefix"></slot>` : ''}
         <slot></slot>
         ${this.#actions.length ? html`<slot name="actions"></slot>` : ''}
