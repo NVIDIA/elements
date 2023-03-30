@@ -303,7 +303,7 @@ class I18nDemo extends LitElement {
       </div>
       
       <div nve-layout="grid span-items:6 gap:sm">
-        <i18n-item nve-i18n='{ "close": "dismiss task failure warning" }'></i18n-item>
+        <i18n-item .i18n=${{ "close": "dismiss task failure warning" }}></i18n-item>
         <i18n-item></i18n-item>
       </div>
     </div>
