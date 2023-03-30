@@ -15,13 +15,13 @@ header[internal-host] {
 
   ::slotted([slot="title"]) {
     margin: 0;
-    font-size: var(--mlv-ref-font-size-400);
+    font-size: var(--mlv-ref-font-size-300);
     font-weight: var(--mlv-ref-font-weight-bold);
   }
 
   ::slotted([slot="subtitle"]) {
     margin: 0;
-    font-size: var(--mlv-ref-font-size-200);
+    font-size: var(--mlv-ref-font-size-100);
     font-weight: var(--mlv-ref-font-weight-normal);
   }
 }

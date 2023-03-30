@@ -26,9 +26,12 @@
       {
         "name": "ts-lit-plugin",
         "strict": true,
-        "globalAttributes": ["mlv-text", "mlv-layout"],
+        "globalAttributes": ["mlv-text", "mlv-layout", "mlv-theme"],
         "rules": {
-          "no-unknown-attribute": "off"
+          "no-unknown-tag-name": "off",
+          "no-unknown-attribute": "off",
+          "no-missing-import": "off",
+          "no-unknown-property": "off"
         }
       }
     ]

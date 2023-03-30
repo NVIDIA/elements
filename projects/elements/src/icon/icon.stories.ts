@@ -5,7 +5,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { ComponentStatuses, generateDefaultStoryParameters } from '@elements/elements/internal';
 import layout from '@elements/elements/css/module.layout.css';
 import typography from '@elements/elements/css/module.typography.css';
-import { Icon, IconNames, ICON_NAMES } from '@elements/elements/icon';
+import { Icon, IconName, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/card/define.js';
 import '@elements/elements/search/define.js';
@@ -40,7 +40,7 @@ export default {
 interface ArgTypes {
   variant: Icon['variant'];
   status: Icon['status'];
-  name: IconNames;
+  name: IconName;
 }
 
 export const Default = {
@@ -55,7 +55,7 @@ export const Default = {
 
 export const PreviewAllIcons = {
   render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map((iconName) => html`<mlv-icon name=${iconName} .variant=${args.variant}></mlv-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<mlv-icon .name=${iconName as IconName} .variant=${args.variant}></mlv-icon>\n`
     )}
   `,
   args: { name: 'user' }
@@ -93,7 +93,7 @@ export class IconDemo extends LitElement {
         ${ICON_NAMES.filter((iconName) => iconName.includes(this.iconSearchKey)).map((iconName) => html`
           <mlv-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard.">
             <div mlv-layout="column align:center gap:md">
-              <mlv-icon size="lg" name=${iconName}></mlv-icon>
+              <mlv-icon size="lg" name=${iconName as IconName}></mlv-icon>
               <h3 mlv-text="label sm">${iconName}</h3>
             </div>
           </mlv-button>`

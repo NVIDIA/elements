@@ -33,28 +33,28 @@ export const Header = {
           </div>
           <div mlv-layout="row gap:xl align:vertical-center">
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body muted">Session ID</span>
-              <a mlv-text="body bold link" href="#">13245768</a>
+              <span mlv-text="body sm muted">Session ID</span>
+              <a mlv-text="body sm bold link" href="#">13245768</a>
             </section>
 
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body muted">Driver</span>
-              <span mlv-text="body bold">Jane Doe</span>
+              <span mlv-text="body sm muted">Driver</span>
+              <span mlv-text="body sm bold">Jane Doe</span>
             </section>
 
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body muted">Co-Pilot</span>
-              <span mlv-text="body bold">John Doe</span>
+              <span mlv-text="body sm muted">Co-Pilot</span>
+              <span mlv-text="body sm bold">John Doe</span>
             </section>
 
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body muted">Route</span>
-              <span mlv-text="body bold">Santa Clara</span>
+              <span mlv-text="body sm muted">Route</span>
+              <span mlv-text="body sm bold">Santa Clara</span>
             </section>
 
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body muted">Status</span>
-              <span mlv-text="body bold"><mlv-badge status="success">complete</mlv-badge></span>
+              <span mlv-text="body sm muted">Status</span>
+              <span mlv-text="body sm bold"><mlv-badge status="success">complete</mlv-badge></span>
             </section>
           </div>
         </section>

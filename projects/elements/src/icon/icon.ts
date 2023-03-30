@@ -2,10 +2,10 @@ import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { useStyles } from '@elements/elements/internal';
-import { ICON_IMPORTS, IconNames } from './icons.js';
+import { ICON_IMPORTS, IconName } from './icons.js';
 import styles from './icon.css?inline';
 
-export type { IconNames } from './icons.js';
+export type { IconName, IconNames } from './icons.js';
 
 /**
  * @element mlv-icon
@@ -18,19 +18,19 @@ export class Icon extends LitElement {
   @property({ type: String, reflect: true }) variant?: 'inherit';
 
   /** SVG status color */
-  @property({ type: String, reflect: true }) status: 'warning' | 'danger' | 'success' | 'accent';
+  @property({ type: String, reflect: true }) status?: 'warning' | 'danger' | 'success' | 'accent';
 
   /** SVG size */
-  @property({ type: String, reflect: true }) size: 'sm' | 'lg';
+  @property({ type: String, reflect: true }) size?: 'sm' | 'lg';
 
   /**
    * Sets the direction of the icon.
    * Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)
    */
-  @property({ type: String, reflect: true }) direction: 'up' | 'down' | 'left' | 'right';
+  @property({ type: String, reflect: true }) direction?: 'up' | 'down' | 'left' | 'right';
 
   /** The name of the icon SVG sprite */
-  @property({ type: String }) name: IconNames;
+  @property({ type: String }) name: IconName;
 
   @state() svg: string;
 

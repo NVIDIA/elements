@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { IconButton } from '@elements/elements/icon-button';
 import { animationFade, attachInternals, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
+import type { IconName } from '@elements/elements/icon';
 import styles from './toast.css?inline';
 
 /**
@@ -86,7 +87,7 @@ export class Toast extends LitElement {
   render() {
     return html`
       <dialog ${animationFade(this)}>
-        <slot name="prefix">${this.status !== 'muted' ? html`<mlv-icon name=${statusIcons[this.status] ?? 'information'}></mlv-icon>` : ''}</slot>
+        <slot name="prefix">${this.status !== 'muted' ? html`<mlv-icon .name=${(statusIcons[this.status] ?? 'information') as IconName}></mlv-icon>` : ''}</slot>
         ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="ghost" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
         <slot></slot>
       </dialog>

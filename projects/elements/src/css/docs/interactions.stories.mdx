@@ -25,6 +25,37 @@ All UI interactions contain a default set of six interactive states.
 Below are HTML & CSS demonstrating how to consume the interaction design tokens.
 Demos will be replaced with custom elements over time.
 
+<LinkedHeader>Interactions</LinkedHeader>
+
+The `--mlv-sys-interaction-state-ratio-*` provides a step ratio value for each interaction state. This combined with
+the CSS [color-mix](https://developer.chrome.com/blog/css-color-mix/) property allows colors to be dynamically computed from the base color.
+
+<Canvas>
+  <Story id="foundations-tokens-examples--interactions" />
+</Canvas>
+
+```css
+button {
+  background: color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio, 0%));
+}
+
+button:hover {
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
+}
+
+button:active {
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-active);
+}
+
+button:disabled {
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-disabled);
+}
+
+button[selected] {
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
+}
+```
+
 <LinkedHeader>Menu</LinkedHeader>
 
 <Canvas>
@@ -48,13 +79,6 @@ Demos will be replaced with custom elements over time.
 <Canvas>
   <Story id="foundations-tokens-examples--navigation-drawer" />
 </Canvas>
-
-<LinkedHeader>Tabs</LinkedHeader>
-
-<Canvas>
-  <Story id="foundations-tokens-examples--tabs" />
-</Canvas>
-
 
 <LinkedHeader>Interaction Tokens</LinkedHeader>
 

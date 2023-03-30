@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { AlertGroup } from '@elements/elements/alert';
 import '@elements/elements/alert/define.js';
+import '@elements/elements/button/define.js';
 
 export default {
   title: 'Elements/Alert Group/Examples',

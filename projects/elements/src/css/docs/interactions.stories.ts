@@ -5,6 +5,57 @@ export default {
   title: 'Foundations/Tokens/Examples'
 };
 
+export const Interactions = {
+  render() {
+    return html`
+<style>
+  button {
+    background: color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio, 0%));
+    border: 0;
+    padding: 12px;
+    cursor: pointer;
+    margin-bottom: 6px;
+    width: 100px;
+  }
+
+  button:hover,
+  button[hover] {
+    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
+  }
+
+  button:active,
+  button[active] {
+    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-active);
+  }
+
+  button:disabled,
+  button[disabled] {
+    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-disabled);
+  }
+
+  button[selected] {
+    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
+  }
+</style>
+
+<section>
+  <button>button</button>
+  <button hover>hover</button>
+  <button active>active</button>
+  <button selected>selected</button>
+  <button disabled>disabled</button>
+</section>
+<section style="--mlv-sys-interaction-state-base: var(--mlv-ref-color-brand-green-900)">
+  <button>button</button>
+  <button hover>hover</button>
+  <button active>active</button>
+  <button selected>selected</button>
+  <button disabled>disabled</button>
+</section>
+    `;
+  }
+}
+
 const menuDemoStyles = html`
 <!-- demo html/css -->
 <style>
@@ -391,128 +442,3 @@ export const NavigationDrawer = {
   </section>
 `
 }
-
-export const Tabs = {
-  render: () => html`
-    <style>
-      .interaction-demo-tabs {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 48px 12px;
-        margin: 24px 0;
-        padding: 6px;
-      }
-
-      .mlv-tab {
-        width: fit-content;
-        display: inline-flex;
-        align-items: center;
-        border: 0;
-        cursor: pointer;
-        background: transparent;
-        padding: 0 var(--mlv-ref-size-300);
-        height: var(--mlv-ref-size-800);
-        color: var(--mlv-sys-interaction-color);
-        font-size: var(--mlv-ref-font-size-300);
-        border-bottom: var(--mlv-ref-border-width-lg) solid transparent;
-      }
-
-      .mlv-tabs > p {
-        padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
-        margin: 0;
-      }
-
-      .mlv-tab:is([selected], [hover], :hover) {
-        border-bottom: var(--mlv-ref-border-width-lg) solid var(--mlv-sys-accent-secondary-background);
-      }
-
-      .mlv-tab[disabled] {
-        cursor: not-allowed;
-        border-bottom: var(--mlv-ref-border-width-lg) solid var(--mlv-ref-border-color-muted);
-      }
-
-      .mlv-tab:focus,
-      .mlv-tab[focused] {
-        outline-offset: -3px;
-        outline: 5px auto -webkit-focus-ring-color; /* var(--mlv-ref-outline-webkit) */
-        outline: Highlight solid 2px; /* --mlv-ref-outline */
-      }
-    </style>
-    <section mlv-theme="root light" class="interaction-demo-tabs">
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab">item</div>
-        <p>default</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" hover>item</div>
-        <div class="mlv-tab">item</div>
-        <p>hover</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" active>item</div>
-        <div class="mlv-tab">item</div>
-        <p>active</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" selected>item</div>
-        <div class="mlv-tab">item</div>
-        <p>selected</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" disabled>item</div>
-        <div class="mlv-tab">item</div>
-        <p>disabled</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" focused>item</div>
-        <div class="mlv-tab">item</div>
-        <p>focused</p>
-      </div>
-    </section>
-    <section mlv-theme="root dark" class="interaction-demo-tabs">
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab">item</div>
-        <p>default</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" hover>item</div>
-        <div class="mlv-tab">item</div>
-        <p>hover</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" active>item</div>
-        <div class="mlv-tab">item</div>
-        <p>active</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" selected>item</div>
-        <div class="mlv-tab">item</div>
-        <p>selected</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" disabled>item</div>
-        <div class="mlv-tab">item</div>
-        <p>disabled</p>
-      </div>
-      <div class="mlv-tabs">
-        <div class="mlv-tab">item</div>
-        <div class="mlv-tab" focused>item</div>
-        <div class="mlv-tab">item</div>
-        <p>focused</p>
-      </div>
-    </section>
-  `
-};

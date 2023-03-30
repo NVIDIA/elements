@@ -35,7 +35,7 @@ interface ArgTypes {
   showHeader?: boolean;
   title?: string;
   subtitle?: string;
-  side?: string;
+  side: 'left' | 'right';
   theme?: string;
 }
 
@@ -60,7 +60,7 @@ export const Default = {
   render: (args: ArgTypes) => html`
     <section mlv-layout="row align:space-between pad:sm">
       <div mlv-theme="root ${args.theme}">
-        <mlv-panel id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
+        <mlv-panel id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
             args.showHeader,
             () => html`
@@ -118,7 +118,7 @@ export const Default = {
             () => html`
             <mlv-panel-footer>
               <mlv-button interaction="ghost-destructive">Destructive</mlv-button>
-              <mlv-button interaction="default">Default</mlv-button>
+              <mlv-button>Default</mlv-button>
             </mlv-panel-footer>
             `
           )}

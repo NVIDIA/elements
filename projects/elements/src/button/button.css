@@ -67,7 +67,7 @@
   --border-radius: var(--mlv-ref-border-radius-sm);
   --font-weight: var(--mlv-ref-font-weight-regular);
   --padding: 0 var(--mlv-ref-size-200);
-  --height: var(--mlv-ref-font-size-700);
+  --height: var(--mlv-ref-size-700);
 
   & [internal-host] {
     justify-content: start;
