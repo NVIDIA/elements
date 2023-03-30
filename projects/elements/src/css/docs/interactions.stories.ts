@@ -5,6 +5,57 @@ export default {
   title: 'Foundations/Tokens/Examples'
 };
 
+export const Interactions = {
+  render() {
+    return html`
+<style>
+  button {
+    background: color-mix(in oklab, var(--nve-sys-interaction-state-base) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio, 0%));
+    border: 0;
+    padding: 12px;
+    cursor: pointer;
+    margin-bottom: 6px;
+    width: 100px;
+  }
+
+  button:hover,
+  button[hover] {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+  }
+
+  button:active,
+  button[active] {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-active);
+  }
+
+  button:disabled,
+  button[disabled] {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-disabled);
+  }
+
+  button[selected] {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+  }
+</style>
+
+<section>
+  <button>button</button>
+  <button hover>hover</button>
+  <button active>active</button>
+  <button selected>selected</button>
+  <button disabled>disabled</button>
+</section>
+<section style="--nve-sys-interaction-state-base: var(--nve-ref-color-brand-green-900)">
+  <button>button</button>
+  <button hover>hover</button>
+  <button active>active</button>
+  <button selected>selected</button>
+  <button disabled>disabled</button>
+</section>
+    `;
+  }
+}
+
 const menuDemoStyles = html`
 <!-- demo html/css -->
 <style>
@@ -391,128 +442,3 @@ export const NavigationDrawer = {
   </section>
 `
 }
-
-export const Tabs = {
-  render: () => html`
-    <style>
-      .interaction-demo-tabs {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 48px 12px;
-        margin: 24px 0;
-        padding: 6px;
-      }
-
-      .nve-tab {
-        width: fit-content;
-        display: inline-flex;
-        align-items: center;
-        border: 0;
-        cursor: pointer;
-        background: transparent;
-        padding: 0 var(--nve-ref-size-300);
-        height: var(--nve-ref-size-800);
-        color: var(--nve-sys-interaction-color);
-        font-size: var(--nve-ref-font-size-300);
-        border-bottom: var(--nve-ref-border-width-lg) solid transparent;
-      }
-
-      .nve-tabs > p {
-        padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
-        margin: 0;
-      }
-
-      .nve-tab:is([selected], [hover], :hover) {
-        border-bottom: var(--nve-ref-border-width-lg) solid var(--nve-sys-accent-secondary-background);
-      }
-
-      .nve-tab[disabled] {
-        cursor: not-allowed;
-        border-bottom: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-muted);
-      }
-
-      .nve-tab:focus,
-      .nve-tab[focused] {
-        outline-offset: -3px;
-        outline: 5px auto -webkit-focus-ring-color; /* var(--nve-ref-outline-webkit) */
-        outline: Highlight solid 2px; /* --nve-ref-outline */
-      }
-    </style>
-    <section nve-theme="root light" class="interaction-demo-tabs">
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab">item</div>
-        <div class="nve-tab">item</div>
-        <p>default</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" hover>item</div>
-        <div class="nve-tab">item</div>
-        <p>hover</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" active>item</div>
-        <div class="nve-tab">item</div>
-        <p>active</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" selected>item</div>
-        <div class="nve-tab">item</div>
-        <p>selected</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" disabled>item</div>
-        <div class="nve-tab">item</div>
-        <p>disabled</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" focused>item</div>
-        <div class="nve-tab">item</div>
-        <p>focused</p>
-      </div>
-    </section>
-    <section nve-theme="root dark" class="interaction-demo-tabs">
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab">item</div>
-        <div class="nve-tab">item</div>
-        <p>default</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" hover>item</div>
-        <div class="nve-tab">item</div>
-        <p>hover</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" active>item</div>
-        <div class="nve-tab">item</div>
-        <p>active</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" selected>item</div>
-        <div class="nve-tab">item</div>
-        <p>selected</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" disabled>item</div>
-        <div class="nve-tab">item</div>
-        <p>disabled</p>
-      </div>
-      <div class="nve-tabs">
-        <div class="nve-tab">item</div>
-        <div class="nve-tab" focused>item</div>
-        <div class="nve-tab">item</div>
-        <p>focused</p>
-      </div>
-    </section>
-  `
-};

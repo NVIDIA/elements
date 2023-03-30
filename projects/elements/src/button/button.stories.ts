@@ -3,7 +3,7 @@ import { when } from 'lit/directives/when.js';
 import { Button } from '@elements/elements/button';
 
 import { ComponentStatuses, generateDefaultStoryParameters, InlinePosition, spread } from '@elements/elements/internal';
-import { IconNames, ICON_NAMES } from '@elements/elements/icon';
+import { IconName, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/button/define.js';
 import '@elements/elements/search/define.js';
 
@@ -31,7 +31,7 @@ export default {
 };
 
 type ArgTypes = Button & {
-  iconName: IconNames;
+  iconName: IconName;
   iconSlotPlacement: InlinePosition;
 }
 

@@ -45,7 +45,7 @@ export class TabsItem extends MlvBaseButton {
 /**
  * @alpha
  * @element nve-tabs
- * @slot tabs - default slot for nve-tab-item
+ * @slot - default slot for nve-tab-item
  * @cssprop --gap
  */
 @keyNavigationList<Tabs>()

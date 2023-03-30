@@ -33,28 +33,28 @@ export const Header = {
           </div>
           <div nve-layout="row gap:xl align:vertical-center">
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body muted">Session ID</span>
-              <a nve-text="body bold link" href="#">13245768</a>
+              <span nve-text="body sm muted">Session ID</span>
+              <a nve-text="body sm bold link" href="#">13245768</a>
             </section>
 
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body muted">Driver</span>
-              <span nve-text="body bold">Jane Doe</span>
+              <span nve-text="body sm muted">Driver</span>
+              <span nve-text="body sm bold">Jane Doe</span>
             </section>
 
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body muted">Co-Pilot</span>
-              <span nve-text="body bold">John Doe</span>
+              <span nve-text="body sm muted">Co-Pilot</span>
+              <span nve-text="body sm bold">John Doe</span>
             </section>
 
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body muted">Route</span>
-              <span nve-text="body bold">Santa Clara</span>
+              <span nve-text="body sm muted">Route</span>
+              <span nve-text="body sm bold">Santa Clara</span>
             </section>
 
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body muted">Status</span>
-              <span nve-text="body bold"><nve-badge status="success">complete</nve-badge></span>
+              <span nve-text="body sm muted">Status</span>
+              <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
             </section>
           </div>
         </section>

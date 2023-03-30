@@ -31,7 +31,10 @@ fs.writeFileSync(`${outputPath}/icons.ts`, `
 // This is an auto-generated file. DO NOT EDIT
 export const ICON_IMPORTS = {\n${Object.keys(icons).map(i => `  '${i}': () => import('./icons/${i}.svg?raw'),`).join('\n')}\n};
 
-export const ICON_NAMES = Object.keys(ICON_IMPORTS);
+export type IconName = ${Object.keys(icons).map(i => `'${i}'`).join(' | ')};
 
-export type IconNames = ${Object.keys(icons).map(i => `'${i}'`).join(' | ')};
+/** @deprecated */
+export type IconNames = IconName;
+
+export const ICON_NAMES = Object.keys(ICON_IMPORTS) as IconName[];
 `);
