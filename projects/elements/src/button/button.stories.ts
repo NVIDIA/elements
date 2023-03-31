@@ -94,7 +94,7 @@ export const Link = {
   render: () => html`
 <mlv-button><a href="#">default</a></mlv-button>
 <mlv-button interaction="emphasize"><a href="#">emphasize</a></mlv-button>
-<mlv-button interaction="destructive"><a href="#">destructive</a></mlv-button>
+<mlv-button interaction="destructive"><a href="#">destructive</a> <mlv-icon name="delete"></mlv-icon></mlv-button>
 <mlv-button disabled><a href="#">disabled</a></mlv-button>
   `
 }
