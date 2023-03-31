@@ -1,0 +1,43 @@
+import { LinkedHeader } from './utils.mdx';
+
+<Meta title="Integrations/Buildless" />
+
+# Buildless Integration
+
+Using [Import Maps](https://web.dev/import-maps-in-all-modern-browsers/) it is possible to
+use elements without build tooling such as Vite or Rollup for easy in browser **prototyping**.
+
+[Demo Project](https://git-av.nvidia.com/r/plugins/gitiles/elements/+/refs/heads/main/src/ui/platform/design-system/demos/buildless/)
+
+```html
+<!DOCTYPE html>
+<html lang="en" mlv-theme="dark">
+  <head>
+    <title>Import Map Starter + @elements/elements</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./node_modules/@elements/elements/dist/index.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "lit": "https://unpkg.com/lit@2.7.0/index.js?module",
+          "lit/": "https://unpkg.com/lit@2.7.0/",
+          "lit/directive.js": "https://unpkg.com/lit@2.7.0/directive.js?module",
+          "lit-html/directive.js": "https://unpkg.com/lit-html@2.7.0/directive.js?module",
+          "lit/decorators/property.js": "https://unpkg.com/lit@2.7.0/decorators/property.js?module",
+          "lit/decorators/state.js": "https://unpkg.com/lit@2.7.0/decorators/state.js?module",
+          "@lit-labs/motion": "https://unpkg.com/@lit-labs/motion@1.0.3/index.js?module",
+          "@floating-ui/dom": "https://unpkg.com/@floating-ui/dom@1.2.5/dist/floating-ui.dom.esm.js?module",
+          "@elements/elements/": "./node_modules/@elements/elements/dist/"
+        }
+      }
+    </script>
+  </head>
+  <body mlv-text="body" mlv-layout="column gap:md pad:lg">
+    <mlv-alert status="success">hello world</mlv-alert>
+
+    <script type="module">
+      import '@elements/elements/alert/define.js';
+    </script>
+  </body>
+</html>
+```
