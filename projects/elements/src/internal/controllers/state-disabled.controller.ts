@@ -34,7 +34,6 @@ export class StateDisabledController<T extends Disabled> implements ReactiveCont
 
     if (this.host.readonly) {
       this.host._internals.ariaDisabled = null;
-      this.host._internals.states.delete('--disabled');
     }
   }
 }

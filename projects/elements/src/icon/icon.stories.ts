@@ -22,10 +22,6 @@ export default {
   component: 'nve-icon',
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: {
-    variant: {
-      control: 'inline-radio',
-      options: ['inherit', 'default']
-    },
     name: {
       control: 'inline-radio',
       options: ICON_NAMES
@@ -38,7 +34,6 @@ export default {
 };
 
 interface ArgTypes {
-  variant: Icon['variant'];
   status: Icon['status'];
   name: IconName;
 }
@@ -47,17 +42,8 @@ export const Default = {
   render: (args: ArgTypes) =>
     html`<nve-icon
       .name=${args.name}
-      .variant=${args.variant}
       .status=${args.status}
     ></nve-icon>`,
-  args: { name: 'user' }
-};
-
-export const PreviewAllIcons = {
-  render: (args: ArgTypes) => html`
-    ${ICON_NAMES.map((iconName) => html`<nve-icon .name=${iconName as IconName} .variant=${args.variant}></nve-icon>\n`
-    )}
-  `,
   args: { name: 'user' }
 };
 
@@ -70,7 +56,7 @@ export const IconCatalog = {
 };
 
 @customElement('icon-demo')
-export class IconDemo extends LitElement {
+class IconDemo extends LitElement {
   static styles = [unsafeCSS(layout), unsafeCSS(typography)];
 
   @state() iconSearchKey = '';
@@ -121,12 +107,13 @@ export class IconDemo extends LitElement {
   }
 }
 
-export const variants = {
+export const PreviewAllIcons = {
   render: () => html`
-    <nve-icon name="user"></nve-icon>
-    <nve-icon name="user" variant="inherit"></nve-icon>
-  `
-}
+    ${ICON_NAMES.map((iconName) => html`<nve-icon .name=${iconName as IconName}></nve-icon>\n`
+    )}
+  `,
+  args: { name: 'user' }
+};
 
 export const statuses = {
   render: () => html`

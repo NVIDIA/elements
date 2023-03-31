@@ -121,6 +121,10 @@
   --color: var(--nve-sys-interaction-disabled-color);
   --background: var(--nve-sys-interaction-disabled-background);
   --cursor: not-allowed;
+
+  ::slotted(a) {
+    cursor: not-allowed;
+  }
 }
 
 :host([interaction*='ghost']) {
