@@ -14,9 +14,6 @@ export type { IconName, IconNames } from './icons.js';
  * @cssprop --height
  */
 export class Icon extends LitElement {
-  /** The color variant of the icon */
-  @property({ type: String, reflect: true }) variant?: 'inherit';
-
   /** SVG status color */
   @property({ type: String, reflect: true }) status?: 'warning' | 'danger' | 'success' | 'accent';
 

@@ -94,7 +94,7 @@ export const Link = {
   render: () => html`
 <nve-button><a href="#">default</a></nve-button>
 <nve-button interaction="emphasize"><a href="#">emphasize</a></nve-button>
-<nve-button interaction="destructive"><a href="#">destructive</a></nve-button>
+<nve-button interaction="destructive"><a href="#">destructive</a> <nve-icon name="delete"></nve-icon></nve-button>
 <nve-button disabled><a href="#">disabled</a></nve-button>
   `
 }

@@ -55,10 +55,6 @@ svg {
   transform: rotate(90deg);
 }
 
-:host([variant='inherit']) {
-  --color: currentColor;
-}
-
 :host([status='success']) {
   --color: var(--nve-sys-support-success-color);
 }
