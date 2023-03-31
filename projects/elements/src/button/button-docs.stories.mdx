@@ -38,7 +38,7 @@ import '@elements/elements/button/define.js';
   <Story id="elements-button-examples--ghost-interactions" />
 </Canvas>
 
-<LinkedHeader>Link</LinkedHeader>
+<LinkedHeader>Linked Buttons</LinkedHeader>
 
 Anchors can wrap button instances, however its recommended to slot the anchor into the button.
 
@@ -47,6 +47,11 @@ Anchors can wrap button instances, however its recommended to slot the anchor in
 <a href="#"><nve-button>default</nve-button></a> <!-- don't -->
 ```
 
+If you need to slot an icon in a linked button, put `<nve-icon>` adjacent to the anchor tag.
+
+```html
+<nve-button><a href="#">default</a> <nve-icon name="reset"></nve-icon></nve-button> <!-- do -->
+```
 <Canvas columns={2}>
   <Story id="elements-button-examples--link" />
   <Story id="elements-button-examples--link-ghost" />

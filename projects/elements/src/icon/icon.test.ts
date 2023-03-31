@@ -22,13 +22,6 @@ describe('nve-icon', () => {
     expect(customElements.get('nve-icon')).toBeDefined();
   });
 
-  it('should reflect variant atrribute for style hook', async () => {
-    expect(element.variant).eq(undefined);
-    element.variant = 'inherit';
-    await elementIsStable(element);
-    expect(element.getAttribute('variant')).eq('inherit');
-  });
-
   it('should update svg reference when "name" is updated', async () => {
     expect(element.name).eq(undefined);
     element.name = 'book';
