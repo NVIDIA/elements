@@ -1,0 +1,23 @@
+{
+  "name": "buildless-elements-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wireit"
+  },
+  "wireit": {
+    "dev": {
+      "command": "http-server",
+      "service": true,
+      "files": ["index.html", "package.json"],
+      "dependencies": ["../../elements:build"]
+    }
+  },
+  "dependencies": {
+    "@elements/elements": "workspace:*"
+  },
+  "devDependencies": {
+    "http-server": "14.1.1"
+  }
+}
