@@ -172,17 +172,22 @@
     left: 0;
   }
 
+
+
   .prismjs {
     color: var(--nve-ref-color-white) !important;
     background: var(--nve-ref-color-gray-denim-1200) !important;
+    background: color-mix(in oklab, var(--nve-ref-color-gray-denim-1200), white 2%) !important;
+  }
+
+  [nve-theme*='branding'] .prismjs {
+    background: var(--nve-ref-color-gray-slate-1200) !important;
+    background: color-mix(in oklab, var(--nve-ref-color-gray-slate-1200), white 2%) !important;
   }
 
   [nve-theme*='dark'] .prismjs {
-    background: var(--nve-ref-color-gray-denim-200) !important;
-  }
-
-  [nve-theme*='dark'] .sbdocs-preview .prismjs {
-    background: var(--nve-ref-color-gray-denim-300) !important;
+    background: var(--nve-sys-layer-container-background) !important;
+    background: color-mix(in oklab, var(--nve-sys-layer-container-background), white 2%) !important;
   }
 
   .docblock-source button,
