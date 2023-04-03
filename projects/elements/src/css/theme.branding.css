@@ -1,0 +1,92 @@
+/* @experimental do not use in production */
+[nve-theme*='branding'],
+[nve-theme*='branding'] [nve-theme*='light'] {
+  --nve-ref-color-gray-slate-1200: hsl(0, 0%, 9%);
+  --nve-ref-color-gray-slate-1100: hsl(0, 0%, 44%);
+  --nve-ref-color-gray-slate-1000: hsl(0, 0%, 52%);
+  --nve-ref-color-gray-slate-900: hsl(0, 0%, 56%);
+  --nve-ref-color-gray-slate-800: hsl(0, 0%, 78%);
+  --nve-ref-color-gray-slate-700: hsl(0, 0%, 86%);
+  --nve-ref-color-gray-slate-600: hsl(0, 0%, 89%);
+  --nve-ref-color-gray-slate-500: hsl(0, 0%, 91%);
+  --nve-ref-color-gray-slate-400: hsl(0, 0%, 93%);
+  --nve-ref-color-gray-slate-300: hsl(0, 0%, 95%);
+  --nve-ref-color-gray-slate-200: hsl(0, 0%, 98%);
+  --nve-ref-color-gray-slate-100: hsl(0, 0%, 99%);
+  --nve-sys-accent-secondary-background: var(--nve-ref-color-brand-green-1000);
+  --nve-sys-support-accent-emphasis-color: var(--nve-ref-color-blue-sky-1100);
+  --nve-sys-support-accent-muted-color: var(--nve-ref-color-blue-sky-400);
+  --nve-sys-support-accent-color: var(--nve-ref-color-blue-sky-1100);
+  --nve-sys-support-success-emphasis-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-support-success-muted-color: var(--nve-ref-color-brand-green-400);
+  --nve-sys-support-success-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-text-link-emphasis-color: var(--nve-ref-color-brand-green-1000);
+  --nve-sys-support-emphasis-color: var(--nve-ref-color-gray-slate-1100);
+  --nve-sys-support-muted-color: var(--nve-ref-color-gray-slate-600);
+  --nve-sys-support-color: var(--nve-ref-color-gray-slate-1000);
+  --nve-sys-accent-tertiary-background: var(--nve-ref-color-black);
+  --nve-sys-accent-primary-background: var(--nve-ref-color-brand-green-900);
+  --nve-sys-text-link-hover-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-status-finished-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-status-starting-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-status-color: var(--nve-ref-color-gray-slate-1000);
+  --nve-ref-border-radius-xl: 8px;
+  --nve-ref-border-radius-lg: 4px;
+  --nve-ref-border-radius-md: 2px;
+  --nve-ref-border-radius-sm: 2px;
+  --nve-ref-border-radius-xs: 0px;
+  --nve-ref-scale-size: 1.1;
+}
+
+[nve-theme~='branding-dark'],
+[nve-theme~='branding-dark'] [nve-theme~='dark'],
+[nve-theme~='branding'][nve-theme~='dark'] [nve-theme~='dark'] {
+  --nve-sys-color-scheme: dark;
+  --nve-ref-color-gray-slate-1200: hsl(0, 0%, 93%);
+  --nve-ref-color-gray-slate-1100: hsl(0, 0%, 82%);
+  --nve-ref-color-gray-slate-1000: hsl(0, 0%, 61%);
+  --nve-ref-color-gray-slate-900: hsl(0, 0%, 44%);
+  --nve-ref-color-gray-slate-800: hsl(0, 0%, 32%);
+  --nve-ref-color-gray-slate-700: hsl(0, 0%, 24%);
+  --nve-ref-color-gray-slate-600: hsl(0, 0%, 21%);
+  --nve-ref-color-gray-slate-500: hsl(0, 0%, 18%);
+  --nve-ref-color-gray-slate-400: hsl(0, 0%, 16%);
+  --nve-ref-color-gray-slate-300: hsl(0, 0%, 14%);
+  --nve-ref-color-gray-slate-200: hsl(0, 0%, 11%);
+  --nve-ref-color-gray-slate-100: hsl(0, 0%, 9%);
+  --nve-sys-layer-popover-accent-background: var(--nve-ref-color-gray-slate-400);
+  --nve-sys-layer-popover-background: var(--nve-ref-color-gray-slate-400);
+  --nve-sys-layer-popover-color: var(--nve-sys-text-default-color);
+  --nve-sys-layer-overlay-accent-background: var(--nve-ref-color-gray-slate-300);
+  --nve-sys-layer-overlay-background: var(--nve-ref-color-gray-slate-400);
+  --nve-sys-layer-container-accent-background: var(--nve-ref-color-gray-slate-300);
+  --nve-sys-layer-container-background: var(--nve-ref-color-gray-slate-300);
+  --nve-sys-layer-shell-accent-background: var(--nve-ref-color-gray-slate-100);
+  --nve-sys-layer-shell-background: var(--nve-ref-color-gray-slate-200);
+  --nve-sys-layer-canvas-accent-background: var(--nve-ref-color-gray-slate-200);
+  --nve-sys-layer-canvas-background: var(--nve-ref-color-gray-slate-100);
+  --nve-sys-text-placeholder-color: var(--nve-ref-color-gray-slate-900);
+  --nve-sys-interaction-background-300: var(--nve-ref-color-gray-slate-200);
+  --nve-sys-interaction-background-200: var(--nve-ref-color-gray-slate-200);
+  --nve-sys-interaction-background-100: var(--nve-ref-color-gray-slate-300);
+  --nve-sys-interaction-background: var(--nve-ref-color-gray-slate-300);
+  --nve-sys-interaction-disabled-background: var(--nve-ref-color-gray-slate-700);
+  --nve-sys-interaction-disabled-color: var(--nve-ref-color-gray-slate-900);
+  --nve-sys-accent-secondary-background: var(--nve-ref-color-brand-green-1000);
+  --nve-sys-support-accent-color: var(--nve-ref-color-blue-sky-700);
+  --nve-sys-support-accent-emphasis-color: var(--nve-ref-color-blue-sky-900);
+  --nve-sys-support-accent-muted-color: var(--nve-ref-color-blue-sky-500);
+  --nve-sys-support-success-emphasis-color: var(--nve-ref-color-brand-green-900);
+  --nve-sys-support-success-muted-color: var(--nve-ref-color-brand-green-400);
+  --nve-sys-support-success-color: var(--nve-ref-color-brand-green-800);
+  --nve-sys-text-link-emphasis-color: var(--nve-ref-color-brand-green-1000);
+  --nve-sys-support-emphasis-color: var(--nve-ref-color-gray-slate-900);
+  --nve-sys-support-muted-color: var(--nve-ref-color-gray-slate-600);
+  --nve-sys-support-color: var(--nve-ref-color-gray-slate-1000);
+  --nve-sys-accent-tertiary-background: var(--nve-ref-color-black);
+  --nve-sys-accent-primary-background: var(--nve-ref-color-brand-green-900);
+  --nve-sys-text-link-hover-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-status-finished-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-status-starting-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-status-color: var(--nve-ref-color-gray-slate-1000);
+}
