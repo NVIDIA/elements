@@ -4,6 +4,7 @@ import { excludePrivateFields } from '@elements/elements/internal';
 import customElements from '@elements/elements/custom-elements.json';
 import styles from '@elements/elements/index.css';
 import font from '@elements/elements/inter.css';
+import branding from '../src/css/theme.branding.css';
 import { MLV_VERSION } from '@elements/elements';
 import '@elements/elements/polyfills';
 import '@webcomponents/scoped-custom-element-registry';
@@ -11,6 +12,9 @@ import prettier from 'prettier/esm/standalone.mjs';
 import parserHTML from 'prettier/esm/parser-html.mjs';
 
 setCustomElementsManifest(excludePrivateFields(customElements));
+
+const params = new URLSearchParams(window.location.search);
+const experimental = params.get('experimental') === 'true';
 
 export const parameters = {
   badges: ['stable'],
@@ -168,6 +172,17 @@ export const parameters = {
   }
 };
 
+const stableThemes = [
+  { value: '', title: 'Light' },
+  { value: 'dark', title: 'Dark' },
+  { value: 'high-contrast', title: 'High Contrast' }
+];
+
+const experimentalThemes = [
+  { value: 'branding', title: 'Branding' },
+  { value: 'branding-dark', title: 'Branding Dark' }
+];
+
 export const globalTypes = {
   theme: {
     name: 'Themes',
@@ -175,11 +190,7 @@ export const globalTypes = {
     defaultValue: 'dark',
     toolbar: {
       showName: true,
-      items: [
-        { value: '', title: 'Light' },
-        { value: 'dark', title: 'Dark' },
-        { value: 'high-contrast', title: 'High Contrast' }
-      ],
+      items: experimental ? [...stableThemes, ...experimentalThemes] : stableThemes
     },
   },
   scale: {
@@ -209,11 +220,11 @@ export const globalTypes = {
 }
 
 const styleSheet = new CSSStyleSheet();
-styleSheet.replaceSync(styles + font);
+styleSheet.replaceSync(styles + font + branding);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
 
 const parentStyle = document.createElement('style');
-parentStyle.innerText = styles + font;
+parentStyle.innerText = styles + font + branding;
 window.parent.document.head.appendChild(parentStyle);
 
 updateTheme('dark');
