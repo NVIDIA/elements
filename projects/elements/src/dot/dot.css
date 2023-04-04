@@ -1,7 +1,7 @@
 
 :host {
   --gap: var(--nve-ref-space-xs);
-  --font-size: var(--nve-ref-font-size-100);
+  --font-size: var(--nve-ref-font-size-50);
   --background: var(--status-color);
   --color: var(--nve-sys-text-white-color);
   --border-radius: var(--nve-ref-border-radius-full);
