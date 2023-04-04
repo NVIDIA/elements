@@ -5,6 +5,20 @@ import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 # Tabs
 
+Tabs provide a selection UX, typically used for swapping content shown on a page,
+or within a navigation context.
+
+The Tabs component is composed of a `<nve-tabs>` parent element and multiple `<nve-tabs-item>` elements slotted as children. <br />
+The `selected` attribute when applied to an item by the host application will give the selected tab the proper selected styles.
+
+The `disabled` attribute can be applied to an item to get the proper visual cues and prevent interaction. <br />
+All default interaction, hover and active states are handled by the elements.
+
+Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
+concerns are handled out of the box. <br />
+Try using left/right arrow keys on horizontal tabs or up/down on vertical tabs.
+
+
 <LinkedHeader>Installation</LinkedHeader>
 
 ```typescript
@@ -27,6 +41,8 @@ import '@elements/elements/tabs/define.js';
 
 <LinkedHeader>Themes</LinkedHeader>
 
+Dark, and light themes are handled out of the box.
+
 <Canvas columns={2}>
   <Story id="elements-tabs-examples--light-theme" />
   <Story id="elements-tabs-examples--dark-theme" />
@@ -34,11 +50,23 @@ import '@elements/elements/tabs/define.js';
 
 <LinkedHeader>Borderless Tabs</LinkedHeader>
 
+By default Tabs will show a blue border on the selected item. You can disable the border by setting `borderless` on the parent `<nve-tabs>`
+
 <Canvas>
   <Story id="elements-tabs-examples--borderless-tabs" />
 </Canvas>
 
+<LinkedHeader>Tabs with Dot Indicators</LinkedHeader>
+
+Dots and icons can be added by simplply slotting in `<nve-icon>` or `<nve-dot>` into your `<nve-tabs-item>`
+
+<Canvas>
+  <Story id="elements-tabs-examples--tabs-with-dots" />
+</Canvas>
+
 <LinkedHeader>Vertical Tabs</LinkedHeader>
+
+Tabs can be used as the foundation for a side menu by enabling vertical mode. Simply set `vertical` on `<nve-tabs>`
 
 <Canvas>
   <Story id="elements-tabs-examples--vertical-tabs" />
@@ -46,11 +74,26 @@ import '@elements/elements/tabs/define.js';
 
 <LinkedHeader>Borderless Vertical Tabs with Icons</LinkedHeader>
 
+This example shows the combination of vertical tabs, set to borderless, with icons slotted. <br />
+An Icon only collapsed version of vertical tabs could be built off this system.
+
 <Canvas>
   <Story id="elements-tabs-examples--borderless-vertical-tabs" />
 </Canvas>
 
-<Status status={{ apiDoc: true, robustDocs: false, unitTests: false, themeSupport: true, apiReview: true, vqaReview: false, figma: true, pkg: false, a11y: true, performance: false, stabsle: false, vetted: false, responsive: false }}></Status>
+<LinkedHeader>Stateless Tabs</LinkedHeader>
+
+By default Tabs will be stateless. This means selection behavior will have to be handled by the host application. <br />
+We have provided a way to opt in to stateful selection behavior where click events and keyboard enter will trigger the selection state.
+
+In all other examples on this page `behavior-select` is set on the parent `<nve-tabs>` to opt into stateful behavior. The following example
+shows the default stateless behavior, where the host app will have to set/remove the `selected` attribute on child `<nve-tabs-item>`.
+
+<Canvas>
+  <Story id="elements-tabs-examples--stateless-tabs" />
+</Canvas>
+
+<Status status={{ apiDoc: true, robustDocs: true, unitTests: false, themeSupport: true, apiReview: true, vqaReview: true, figma: true, pkg: true, a11y: true, performance: true, stabsle: false, vetted: false, responsive: false }}></Status>
 
 <LinkedHeader>nve-tabs</LinkedHeader>
 <Props of="nve-tabs" />
