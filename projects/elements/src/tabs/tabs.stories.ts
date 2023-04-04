@@ -26,10 +26,7 @@ export const LightTheme = {
   render: () => html`
   <mlv-card mlv-theme="light" style="--border-radius: none">
     <mlv-tabs behavior-select>
-      <mlv-tabs-item selected>
-        Tab 1
-        <mlv-dot status="scheduled"></mlv-dot>
-      </mlv-tabs-item>
+      <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
       <mlv-tabs-item>Tab 2</mlv-tabs-item>
       <mlv-tabs-item>Tab 3</mlv-tabs-item>
       <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
@@ -43,24 +40,7 @@ export const DarkTheme = {
   render: () => html`
   <mlv-card mlv-theme="dark" style="--border-radius: none">
     <mlv-tabs behavior-select>
-      <mlv-tabs-item selected>
-        Tab 1
-        <mlv-dot status="starting"></mlv-dot>
-      </mlv-tabs-item>
-      <mlv-tabs-item>Tab 2</mlv-tabs-item>
-      <mlv-tabs-item>Tab 3</mlv-tabs-item>
-      <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
-      <mlv-tabs-item>Tab 5</mlv-tabs-item>
-    </mlv-tabs>
-  </mlv-card>
-  `
-};
-
-export const VerticalTabs = {
-  render: () => html`
-  <mlv-card style="--border-radius: none; width: 250px;">
-    <mlv-tabs vertical behavior-select>
-      <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
+      <mlv-tabs-item selected> Tab 1</mlv-tabs-item>
       <mlv-tabs-item>Tab 2</mlv-tabs-item>
       <mlv-tabs-item>Tab 3</mlv-tabs-item>
       <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
@@ -82,25 +62,64 @@ export const BorderlessTabs = {
   `
 };
 
+export const TabsWithDots = {
+  render: () => html`
+  <mlv-tabs behavior-select>
+    <mlv-tabs-item>Tab 1</mlv-tabs-item>
+    <mlv-tabs-item>Tab 2</mlv-tabs-item>
+    <mlv-tabs-item>Tab 3 </mlv-tabs-item>
+    <mlv-tabs-item selected>
+      Tab 4
+      <mlv-dot status="warning" aria-label="10 notifications">10</mlv-dot>
+    </mlv-tabs-item>
+    <mlv-tabs-item>Tab 5</mlv-tabs-item>
+  </mlv-tabs>
+  `
+};
 
+export const VerticalTabs = {
+  render: () => html`
+  <mlv-card style="--border-radius: none; width: 250px;">
+    <mlv-tabs vertical behavior-select>
+      <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
+      <mlv-tabs-item>Tab 2</mlv-tabs-item>
+      <mlv-tabs-item>Tab 3</mlv-tabs-item>
+      <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
+      <mlv-tabs-item>Tab 5</mlv-tabs-item>
+    </mlv-tabs>
+  </mlv-card>
+  `
+};
 
 export const BorderlessVerticalTabs = {
   render: () => html`
   <mlv-card style="--border-radius: none; width: 250px;">
     <mlv-tabs vertical borderless behavior-select>
       <mlv-tabs-item>
-        <mlv-icon status="accent" name="settings"></mlv-icon> Tab 1
+        <mlv-icon name="settings"></mlv-icon> Tab 1
       </mlv-tabs-item>
       <mlv-tabs-item>
-        <mlv-icon status="success" name="user"></mlv-icon> Tab 2
+        <mlv-icon name="user"></mlv-icon> Tab 2
       </mlv-tabs-item>
       <mlv-tabs-item selected>
-        <mlv-icon status="warning" name="beaker"></mlv-icon> Tab 3
+        <mlv-icon name="beaker"></mlv-icon> Tab 3
       </mlv-tabs-item>
       <mlv-tabs-item>
-        <mlv-icon status="danger" name="dashboard"></mlv-icon> Tab 4
+        <mlv-icon name="dashboard"></mlv-icon> Tab 4
       </mlv-tabs-item>
     </mlv-tabs>
   </mlv-card>
+  `
+};
+
+export const StatelessTabs = {
+  render: () => html`
+  <mlv-tabs>
+    <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
+    <mlv-tabs-item>Tab 2</mlv-tabs-item>
+    <mlv-tabs-item>Tab 3</mlv-tabs-item>
+    <mlv-tabs-item>Tab 4</mlv-tabs-item>
+    <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
+  </mlv-tabs>
   `
 };

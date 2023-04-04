@@ -32,7 +32,10 @@
     border-left: var(--border-left-width) solid var(--mlv-sys-accent-secondary-background);
     color: var(--mlv-sys-text-emphasis-color);
     border-radius: 0 !important;
-    /* --mlv-sys-interaction-state-ratio: 0 !important; */
+
+    ::slotted(mlv-icon) {
+      --color: var(--mlv-sys-interaction-color);
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 
 :host {
   --gap: var(--mlv-ref-space-xs);
-  --font-size: var(--mlv-ref-font-size-100);
+  --font-size: var(--mlv-ref-font-size-50);
   --background: var(--status-color);
   --color: var(--mlv-sys-text-white-color);
   --border-radius: var(--mlv-ref-border-radius-full);
