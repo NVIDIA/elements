@@ -69,6 +69,18 @@ export const GhostInteractions = {
   `
 }
 
+export const CustomIcon = {
+  render: () => html`
+    <mlv-icon-button>
+      <span slot="icon">🎉</span>
+    </mlv-icon-button>
+    <mlv-icon-button>
+      <span slot="icon">🔗</span>
+      <a href="#" aria-label="custom icon button"></a>
+    </mlv-icon-button>
+  `
+}
+
 export const Link = {
   render: () => html`
     <mlv-icon-button icon-name="menu">

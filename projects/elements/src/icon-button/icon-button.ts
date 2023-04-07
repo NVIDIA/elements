@@ -7,6 +7,8 @@ import styles from './icon-button.css?inline';
 
 /**
  * @element mlv-icon-button
+ * @slot - default for links
+ * @slot icon - icon customization
  * @cssprop --border-radius
  * @cssprop --padding
  * @cssprop --line-height
@@ -34,8 +36,10 @@ export class IconButton extends Button {
   render() {
     return html`
       <div internal-host interaction-state focus-within>
-        <mlv-icon name=${this.iconName} direction=${this.direction}></mlv-icon>
         <slot></slot>
+        <slot name="icon">
+          <mlv-icon .name=${this.iconName} .direction=${this.direction}></mlv-icon>
+        </slot>
       </div>
     `;
   }
