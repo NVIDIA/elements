@@ -7,6 +7,8 @@ import styles from './icon-button.css?inline';
 
 /**
  * @element nve-icon-button
+ * @slot - default for links
+ * @slot icon - icon customization
  * @cssprop --border-radius
  * @cssprop --padding
  * @cssprop --line-height
@@ -34,8 +36,10 @@ export class IconButton extends Button {
   render() {
     return html`
       <div internal-host interaction-state focus-within>
-        <nve-icon name=${this.iconName} direction=${this.direction}></nve-icon>
         <slot></slot>
+        <slot name="icon">
+          <nve-icon .name=${this.iconName} .direction=${this.direction}></nve-icon>
+        </slot>
       </div>
     `;
   }
