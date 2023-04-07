@@ -69,6 +69,18 @@ export const GhostInteractions = {
   `
 }
 
+export const CustomIcon = {
+  render: () => html`
+    <nve-icon-button>
+      <span slot="icon">🎉</span>
+    </nve-icon-button>
+    <nve-icon-button>
+      <span slot="icon">🔗</span>
+      <a href="#" aria-label="custom icon button"></a>
+    </nve-icon-button>
+  `
+}
+
 export const Link = {
   render: () => html`
     <nve-icon-button icon-name="menu">
