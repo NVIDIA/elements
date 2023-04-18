@@ -15,7 +15,7 @@ import '@elements/elements/notification/define.js';
 import '@elements/elements/input/define.js';
 
 export default {
-  title: 'Patterns/Stories'
+  title: 'Patterns/Section Patterns/Examples'
 };
 
 export const Header = {
@@ -25,12 +25,14 @@ export const Header = {
         <section nve-layout="column gap:lg align:stretch pad-top:md pad-right:xl pad-bottom:md pad-left:xl">
           <div nve-layout="row gap:md align:center">
             <h1 nve-text="heading lg semibold">Page Title</h1>
+
             <div nve-layout="row gap:sm" style="margin-left: auto">
               <nve-icon-button icon-name="information" aria-label="information"></nve-icon-button>
               <nve-icon-button icon-name="edit" aria-label="edit"></nve-icon-button>
               <nve-icon-button icon-name="additional-actions" aria-label="additional actions"></nve-icon-button>
             </div>
           </div>
+
           <div nve-layout="row gap:xl align:vertical-center">
             <section nve-layout="row gap:xs align:center">
               <span nve-text="body sm muted">Session ID</span>

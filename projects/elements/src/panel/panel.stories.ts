@@ -47,11 +47,11 @@ const customActionHandler = () => {
   notification.addEventListener('close', () => notification.remove(), { once: true });
 
 
-  document.querySelector('nve-notification-group').prepend(notification);
+  document.querySelector('nve-notification-group')?.prepend(notification);
   setTimeout(() => notification.remove(), 2000 * (document.querySelectorAll('nve-notification').length));
 }
 
-const togglePanel = (isClosable: boolean) => {
+const togglePanel = (isClosable?: boolean) => {
   const panel = document.querySelector(`nve-panel#trigger-closable-${isClosable}`) as Panel;
   panel.expanded = !panel.expanded;
 }
