@@ -47,11 +47,11 @@ const customActionHandler = () => {
   notification.addEventListener('close', () => notification.remove(), { once: true });
 
 
-  document.querySelector('mlv-notification-group').prepend(notification);
+  document.querySelector('mlv-notification-group')?.prepend(notification);
   setTimeout(() => notification.remove(), 2000 * (document.querySelectorAll('mlv-notification').length));
 }
 
-const togglePanel = (isClosable: boolean) => {
+const togglePanel = (isClosable?: boolean) => {
   const panel = document.querySelector(`mlv-panel#trigger-closable-${isClosable}`) as Panel;
   panel.expanded = !panel.expanded;
 }

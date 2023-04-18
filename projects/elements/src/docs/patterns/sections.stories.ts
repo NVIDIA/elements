@@ -15,7 +15,7 @@ import '@elements/elements/notification/define.js';
 import '@elements/elements/input/define.js';
 
 export default {
-  title: 'Patterns/Stories'
+  title: 'Patterns/Section Patterns/Examples'
 };
 
 export const Header = {
@@ -25,12 +25,14 @@ export const Header = {
         <section mlv-layout="column gap:lg align:stretch pad-top:md pad-right:xl pad-bottom:md pad-left:xl">
           <div mlv-layout="row gap:md align:center">
             <h1 mlv-text="heading lg semibold">Page Title</h1>
+
             <div mlv-layout="row gap:sm" style="margin-left: auto">
               <mlv-icon-button icon-name="information" aria-label="information"></mlv-icon-button>
               <mlv-icon-button icon-name="edit" aria-label="edit"></mlv-icon-button>
               <mlv-icon-button icon-name="additional-actions" aria-label="additional actions"></mlv-icon-button>
             </div>
           </div>
+
           <div mlv-layout="row gap:xl align:vertical-center">
             <section mlv-layout="row gap:xs align:center">
               <span mlv-text="body sm muted">Session ID</span>
