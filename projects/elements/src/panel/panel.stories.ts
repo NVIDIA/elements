@@ -60,7 +60,7 @@ export const Default = {
   render: (args: ArgTypes) => html`
     <section nve-layout="row align:space-between pad:sm">
       <div nve-theme="root ${args.theme}">
-        <nve-panel id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
+        <nve-panel behavior-expand id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
             args.showHeader,
             () => html`
