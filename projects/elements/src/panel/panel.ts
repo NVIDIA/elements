@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { when } from 'lit/directives/when.js';
-import { stateExpanded, I18nController, TypeClosableController, useStyles } from '@elements/elements/internal';
+import { stateExpanded, I18nController, TypeExpandableController, useStyles } from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import panelStyleSheet from './panel.css?inline';
 import panelHeaderStyleSheet from './panel-header.css?inline';
@@ -127,17 +127,21 @@ export class Panel extends LitElement {
 
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
-  #typeClosableController = new TypeClosableController(this);
+  #typeExpandableController = new TypeExpandableController(this);
 
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
   /**
    * Determines whether or not the panel is fully expanded, displaying its contents, or not.
    */
-  @property({ type: Boolean, reflect: true }) expanded = true;
+  @property({ type: Boolean, reflect: true }) expanded = false;
   /**
    * Determines whether or not the panel will collapse down to an expand icon, or fully hide.
   */
   @property({ type: Boolean }) closable = false;
+  /**
+   * Determines whether or not the panel should handle auto-closing behavior vs. defaults to off.
+   */
+  @property({ type: Boolean, attribute: 'behavior-expand'}) behaviorExpand = false;
   /**
    * Sets the proper collapse icon and collapse animation, based on what side of the page the panel will be used.
   */
@@ -153,7 +157,7 @@ export class Panel extends LitElement {
             !this.closable,
             () => html`
               <nve-icon-button interaction=${this.expanded ? 'ghost' : ''} icon-name=${this.expanded ? 'collapse-panel' : 'expand-panel'}
-                @click=${() => this.expanded = !this.expanded}
+                @click=${() => this.#typeExpandableController.toggle()}
                 direction=${this.side}
                 .expanded=${this.expanded}
                 .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
@@ -161,7 +165,7 @@ export class Panel extends LitElement {
             `,
             () => html`
               <nve-icon-button interaction="ghost" icon-name="cancel"
-                @click=${() => this.#typeClosableController.close()}
+                @click=${() => this.#typeExpandableController.close()}
                 .expanded=${this.expanded}
                 .ariaLabel=${this.expanded ? this.i18n.hide : this.i18n.show}
               ></nve-icon-button>

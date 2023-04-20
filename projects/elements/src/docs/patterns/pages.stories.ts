@@ -6,6 +6,7 @@ import '@elements/elements/card/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/tabs/define.js';
+import { Panel } from '../../panel/panel';
 
 export default {
   title: 'Patterns/Page Patterns/Examples'
@@ -15,80 +16,102 @@ interface ArgTypes {
   grid?: boolean;
 }
 
+const togglePanel = (isClosable?: boolean) => {
+  const panel = document.querySelector(`nve-panel#closable-${isClosable}`) as Panel;
+  panel.expanded = !panel.expanded;
+}
+
 const renderPanel = (isClosable?: boolean) => html`
-  <nve-panel expanded ?closable=${isClosable}>
+  <nve-panel expanded ?closable=${isClosable} behavior-expand id="closable-${isClosable}">
     <nve-panel-header>
-      <div slot="title">Panel Title</div>
+      <div slot="title">${isClosable ? 'Details Panel' : 'Navigation Panel'}</div>
     </nve-panel-header>
 
     <nve-panel-content nve-layout="column gap:xl">
-      <nve-tabs behavior-select>
-        <nve-tabs-item selected>Tab A</nve-tabs-item>
-        <nve-tabs-item>Tab B</nve-tabs-item>
-        <nve-tabs-item>Tab C</nve-tabs-item>
-      </nve-tabs>
+      ${ when(isClosable, () => html`
+        <nve-tabs behavior-select>
+          <nve-tabs-item selected>Tab A</nve-tabs-item>
+          <nve-tabs-item>Tab B</nve-tabs-item>
+          <nve-tabs-item>Tab C</nve-tabs-item>
+        </nve-tabs>
 
-      <div nve-layout="column gap:xs">
-        <label nve-text="body sm default muted">Release</label>
-        <p nve-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
-      </div>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm default muted">Release</label>
+          <p nve-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
+        </div>
 
-      <div nve-layout="column gap:xs">
-        <label nve-text="body sm default muted">Date</label>
-        <p nve-text="eyebrow sm">2021-08-18</p>
-      </div>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm default muted">Date</label>
+          <p nve-text="eyebrow sm">2021-08-18</p>
+        </div>
 
-      <div nve-layout="column gap:xs">
-        <label nve-text="body sm default muted">State</label>
-        <nve-button nve-control>Indexed</nve-button>
-      </div>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm default muted">State</label>
+          <nve-button nve-control>Indexed</nve-button>
+        </div>
 
-      <div nve-layout="column gap:xs">
-        <label nve-text="body sm default muted">Driver</label>
-        <p nve-text="eyebrow sm">Kenjiro Ono</p>
-      </div>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm default muted">Driver</label>
+          <p nve-text="eyebrow sm">Kenjiro Ono</p>
+        </div>
 
-      <div nve-layout="column gap:xs">
-        <label nve-text="body sm default muted">Copilot</label>
-        <p nve-text="eyebrow sm">Kenichi Yoshii</p>
-      </div>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm default muted">Copilot</label>
+          <p nve-text="eyebrow sm">Kenichi Yoshii</p>
+        </div>
 
-      <div nve-layout="column gap:xs">
-        <label nve-text="body sm default muted">GVS</label>
-        <a href="#" nve-text="link body sm"
-          >http://testbot/testbot/view/content...</a
-        >
-      </div>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm default muted">GVS</label>
+          <a href="#" nve-text="link body sm"
+            >http://testbot/testbot/view/content...</a
+          >
+        </div>
 
-      <div nve-layout="column gap:xs">
-        <label nve-text="body sm default muted">Session ID</label>
-        <a href="#" nve-text="link body sm">Experiment 12345</a>
-      </div>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm default muted">Session ID</label>
+          <a href="#" nve-text="link body sm">Experiment 12345</a>
+        </div>
+      `, () => html``)}
     </nve-panel-content>
   </nve-panel>
 `;
 
-const renderCard = (height?: number, span?: number) => html`
-  <nve-card style="height: ${height}px;" nve-layout="span:${ifDefined(span)}">
+const renderCard = (height?: number, cardSpan?: number, cardBorderRadius?: string) => html`
+  <nve-card style="--border-radius: ${ifDefined(cardBorderRadius)}" nve-layout="span:${ifDefined(cardSpan)}">
     <nve-card-header>
       <div slot="title">Card Title</div>
       <nve-icon-button slot="header-action" icon-name="additional-actions" interaction="ghost"></nve-icon-button>
     </nve-card-header>
-    <nve-card-content> Card Content </nve-card-content>
+    <nve-card-content style="height: ${height}px"> Card Content </nve-card-content>
   </nve-card>
 `;
 
+
 const StackedCardsWithPanel = {
   render: (args: ArgTypes) => html`
+    <style>
+      header {
+        background-color: var(--nve-sys-layer-container-background);
+      }
+
+      nve-panel-content {
+        width: 328px;
+      }
+
+      #header-buttons {
+        border-left: 1px solid var(--nve-ref-border-color-muted);
+      }
+    </style>
+
     <main nve-theme="root" nve-layout="column gap:lg align:stretch">
-        <header nve-layout="column gap:md pad:md align:stretch">
+        <header nve-layout="column gap:md pad-top:md pad-right:md pad-left:md align:stretch">
           <section nve-layout="row align:space-between align:vertical-center">
             <div nve-layout="row gap:sm align:vertical-center">
               <nve-icon-button icon-name="navigate-back" aria-label="navigate-back"></nve-icon-button>
               <h1 nve-text="heading lg bold">Page Heading</h1>
             </div>
 
-            <aside nve-layout="row gap:sm align:vertical-center">
+            <div nve-layout="row gap:sm align:vertical-center">
               <section nve-layout="column gap:md">
                 <span nve-text="body sm muted">Created by</span>
                 <span nve-text="body sm semibold">First Last</span>
@@ -115,12 +138,12 @@ const StackedCardsWithPanel = {
 
               </section>
 
-              <div nve-layout="row gap:sm pad:sm" style="border-left: 1px solid gray">
+              <div nve-layout="row gap:sm pad:sm" id="header-buttons">
                 <nve-button>Default</nve-button>
-                <nve-icon-button icon-name="information" interaction="emphasize" aria-label="information"></nve-icon-button>
-                <nve-icon-button icon-name="additional-actions" aria-label="additional actions"></nve-icon-button>
+                <nve-icon-button icon-name="information" aria-label="information"></nve-icon-button>
+                <nve-icon-button icon-name="additional-actions" aria-label="additional actions" @click=${() => togglePanel(args.panelSide === 'right')}></nve-icon-button>
               </div>
-            </aside>
+            </div>
           </section>
 
           <nve-tabs behavior-select>
@@ -132,34 +155,34 @@ const StackedCardsWithPanel = {
           </nve-tabs>
         </header>
 
-        <div nve-layout="row gap:md align:stretch">
+        <div nve-layout="row gap:lg align:stretch">
           ${ when(args.panelSide === 'left', () => html`
-            <aside style="max-width: 300px;" nve-layout="align:vertical-stretch">
-              ${renderPanel()}
+            <aside nve-layout="align:vertical-stretch">
+              ${renderPanel(false)}
             </aside>
           `)}
 
           ${ when(!args.grid, () => html`
-            <section nve-layout="column gap:md align:stretch grow">
-              ${renderCard(220)}
+            <section nve-layout="column gap:lg align:stretch grow">
+              ${renderCard(200, undefined, !args.panelSide ? 'none' : undefined)}
 
-              ${renderCard(220)}
+              ${renderCard(200, undefined, !args.panelSide ? 'none' : undefined)}
 
-              ${renderCard(220)}
+              ${renderCard(200, undefined, !args.panelSide ? 'none' : undefined)}
             </section>
           `)}
 
           ${ when(args.grid, () => html`
-            <section nve-layout="grid gap:md span-items:6">
-              ${renderCard(300, 12)}
+            <section nve-layout="grid gap:lg span-items:6">
+              ${renderCard(250, 12)}
 
-              ${renderCard(220)}
+              ${renderCard(200, 6)}
 
-              ${renderCard(220)}
+              ${renderCard(200, 6)}
 
-              ${renderCard(220)}
+              ${renderCard(200, 6)}
 
-              ${renderCard(220)}
+              ${renderCard(200, 6)}
             </section>
           `)}
 

@@ -27,6 +27,10 @@ describe('nve-panel', () => {
     panel = fixture.querySelector('nve-panel');
     panelHeader = fixture.querySelector('nve-panel-header');
     panelFooter = fixture.querySelector('nve-panel-footer');
+
+    panel.expanded = true;
+    panel.behaviorExpand = true;
+
     await elementIsStable(panel);
     await elementIsStable(panelHeader);
     await elementIsStable(panelFooter);
