@@ -6,6 +6,7 @@ import '@elements/elements/card/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/tabs/define.js';
+import { Panel } from '../../panel/panel';
 
 export default {
   title: 'Patterns/Page Patterns/Examples'
@@ -15,80 +16,102 @@ interface ArgTypes {
   grid?: boolean;
 }
 
+const togglePanel = (isClosable?: boolean) => {
+  const panel = document.querySelector(`mlv-panel#closable-${isClosable}`) as Panel;
+  panel.expanded = !panel.expanded;
+}
+
 const renderPanel = (isClosable?: boolean) => html`
-  <mlv-panel expanded ?closable=${isClosable}>
+  <mlv-panel expanded ?closable=${isClosable} behavior-expand id="closable-${isClosable}">
     <mlv-panel-header>
-      <div slot="title">Panel Title</div>
+      <div slot="title">${isClosable ? 'Details Panel' : 'Navigation Panel'}</div>
     </mlv-panel-header>
 
     <mlv-panel-content mlv-layout="column gap:xl">
-      <mlv-tabs behavior-select>
-        <mlv-tabs-item selected>Tab A</mlv-tabs-item>
-        <mlv-tabs-item>Tab B</mlv-tabs-item>
-        <mlv-tabs-item>Tab C</mlv-tabs-item>
-      </mlv-tabs>
+      ${ when(isClosable, () => html`
+        <mlv-tabs behavior-select>
+          <mlv-tabs-item selected>Tab A</mlv-tabs-item>
+          <mlv-tabs-item>Tab B</mlv-tabs-item>
+          <mlv-tabs-item>Tab C</mlv-tabs-item>
+        </mlv-tabs>
 
-      <div mlv-layout="column gap:xs">
-        <label mlv-text="body sm default muted">Release</label>
-        <p mlv-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
-      </div>
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm default muted">Release</label>
+          <p mlv-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
+        </div>
 
-      <div mlv-layout="column gap:xs">
-        <label mlv-text="body sm default muted">Date</label>
-        <p mlv-text="eyebrow sm">2021-08-18</p>
-      </div>
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm default muted">Date</label>
+          <p mlv-text="eyebrow sm">2021-08-18</p>
+        </div>
 
-      <div mlv-layout="column gap:xs">
-        <label mlv-text="body sm default muted">State</label>
-        <mlv-button mlv-control>Indexed</mlv-button>
-      </div>
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm default muted">State</label>
+          <mlv-button mlv-control>Indexed</mlv-button>
+        </div>
 
-      <div mlv-layout="column gap:xs">
-        <label mlv-text="body sm default muted">Driver</label>
-        <p mlv-text="eyebrow sm">Kenjiro Ono</p>
-      </div>
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm default muted">Driver</label>
+          <p mlv-text="eyebrow sm">Kenjiro Ono</p>
+        </div>
 
-      <div mlv-layout="column gap:xs">
-        <label mlv-text="body sm default muted">Copilot</label>
-        <p mlv-text="eyebrow sm">Kenichi Yoshii</p>
-      </div>
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm default muted">Copilot</label>
+          <p mlv-text="eyebrow sm">Kenichi Yoshii</p>
+        </div>
 
-      <div mlv-layout="column gap:xs">
-        <label mlv-text="body sm default muted">GVS</label>
-        <a href="#" mlv-text="link body sm"
-          >http://testbot/testbot/view/content...</a
-        >
-      </div>
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm default muted">GVS</label>
+          <a href="#" mlv-text="link body sm"
+            >http://testbot/testbot/view/content...</a
+          >
+        </div>
 
-      <div mlv-layout="column gap:xs">
-        <label mlv-text="body sm default muted">Session ID</label>
-        <a href="#" mlv-text="link body sm">Experiment 12345</a>
-      </div>
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm default muted">Session ID</label>
+          <a href="#" mlv-text="link body sm">Experiment 12345</a>
+        </div>
+      `, () => html``)}
     </mlv-panel-content>
   </mlv-panel>
 `;
 
-const renderCard = (height?: number, span?: number) => html`
-  <mlv-card style="height: ${height}px;" mlv-layout="span:${ifDefined(span)}">
+const renderCard = (height?: number, cardSpan?: number, cardBorderRadius?: string) => html`
+  <mlv-card style="--border-radius: ${ifDefined(cardBorderRadius)}" mlv-layout="span:${ifDefined(cardSpan)}">
     <mlv-card-header>
       <div slot="title">Card Title</div>
       <mlv-icon-button slot="header-action" icon-name="additional-actions" interaction="ghost"></mlv-icon-button>
     </mlv-card-header>
-    <mlv-card-content> Card Content </mlv-card-content>
+    <mlv-card-content style="height: ${height}px"> Card Content </mlv-card-content>
   </mlv-card>
 `;
 
+
 const StackedCardsWithPanel = {
   render: (args: ArgTypes) => html`
+    <style>
+      header {
+        background-color: var(--mlv-sys-layer-container-background);
+      }
+
+      mlv-panel-content {
+        width: 328px;
+      }
+
+      #header-buttons {
+        border-left: 1px solid var(--mlv-ref-border-color-muted);
+      }
+    </style>
+
     <main mlv-theme="root" mlv-layout="column gap:lg align:stretch">
-        <header mlv-layout="column gap:md pad:md align:stretch">
+        <header mlv-layout="column gap:md pad-top:md pad-right:md pad-left:md align:stretch">
           <section mlv-layout="row align:space-between align:vertical-center">
             <div mlv-layout="row gap:sm align:vertical-center">
               <mlv-icon-button icon-name="navigate-back" aria-label="navigate-back"></mlv-icon-button>
               <h1 mlv-text="heading lg bold">Page Heading</h1>
             </div>
 
-            <aside mlv-layout="row gap:sm align:vertical-center">
+            <div mlv-layout="row gap:sm align:vertical-center">
               <section mlv-layout="column gap:md">
                 <span mlv-text="body sm muted">Created by</span>
                 <span mlv-text="body sm semibold">First Last</span>
@@ -115,12 +138,12 @@ const StackedCardsWithPanel = {
 
               </section>
 
-              <div mlv-layout="row gap:sm pad:sm" style="border-left: 1px solid gray">
+              <div mlv-layout="row gap:sm pad:sm" id="header-buttons">
                 <mlv-button>Default</mlv-button>
-                <mlv-icon-button icon-name="information" interaction="emphasize" aria-label="information"></mlv-icon-button>
-                <mlv-icon-button icon-name="additional-actions" aria-label="additional actions"></mlv-icon-button>
+                <mlv-icon-button icon-name="information" aria-label="information"></mlv-icon-button>
+                <mlv-icon-button icon-name="additional-actions" aria-label="additional actions" @click=${() => togglePanel(args.panelSide === 'right')}></mlv-icon-button>
               </div>
-            </aside>
+            </div>
           </section>
 
           <mlv-tabs behavior-select>
@@ -132,34 +155,34 @@ const StackedCardsWithPanel = {
           </mlv-tabs>
         </header>
 
-        <div mlv-layout="row gap:md align:stretch">
+        <div mlv-layout="row gap:lg align:stretch">
           ${ when(args.panelSide === 'left', () => html`
-            <aside style="max-width: 300px;" mlv-layout="align:vertical-stretch">
-              ${renderPanel()}
+            <aside mlv-layout="align:vertical-stretch">
+              ${renderPanel(false)}
             </aside>
           `)}
 
           ${ when(!args.grid, () => html`
-            <section mlv-layout="column gap:md align:stretch grow">
-              ${renderCard(220)}
+            <section mlv-layout="column gap:lg align:stretch grow">
+              ${renderCard(200, undefined, !args.panelSide ? 'none' : undefined)}
 
-              ${renderCard(220)}
+              ${renderCard(200, undefined, !args.panelSide ? 'none' : undefined)}
 
-              ${renderCard(220)}
+              ${renderCard(200, undefined, !args.panelSide ? 'none' : undefined)}
             </section>
           `)}
 
           ${ when(args.grid, () => html`
-            <section mlv-layout="grid gap:md span-items:6">
-              ${renderCard(300, 12)}
+            <section mlv-layout="grid gap:lg span-items:6">
+              ${renderCard(250, 12)}
 
-              ${renderCard(220)}
+              ${renderCard(200, 6)}
 
-              ${renderCard(220)}
+              ${renderCard(200, 6)}
 
-              ${renderCard(220)}
+              ${renderCard(200, 6)}
 
-              ${renderCard(220)}
+              ${renderCard(200, 6)}
             </section>
           `)}
 

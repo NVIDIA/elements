@@ -60,7 +60,7 @@ export const Default = {
   render: (args: ArgTypes) => html`
     <section mlv-layout="row align:space-between pad:sm">
       <div mlv-theme="root ${args.theme}">
-        <mlv-panel id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
+        <mlv-panel behavior-expand id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
             args.showHeader,
             () => html`

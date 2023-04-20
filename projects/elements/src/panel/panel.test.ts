@@ -27,6 +27,10 @@ describe('mlv-panel', () => {
     panel = fixture.querySelector('mlv-panel');
     panelHeader = fixture.querySelector('mlv-panel-header');
     panelFooter = fixture.querySelector('mlv-panel-footer');
+
+    panel.expanded = true;
+    panel.behaviorExpand = true;
+
     await elementIsStable(panel);
     await elementIsStable(panelHeader);
     await elementIsStable(panelFooter);
