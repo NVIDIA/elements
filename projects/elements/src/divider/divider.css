@@ -1,0 +1,27 @@
+/* TODO: LEFTOFF! */
+:host {
+  --color: var(--mlv-ref-border-color);
+  --emphasis-color: var(--mlv-ref-border-color-emphasis);
+  --internal-color: var(--color);
+  width: 100%;
+}
+
+:host([emphasis]) {
+  --internal-color: var(--emphasis-color);
+}
+
+[internal-host] {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  line-height: 1em;
+  place-items: center;
+  place-content: center;
+}
+
+[divider-line] {
+  background-color: var(--internal-color);
+  display: block;
+  flex: 1 1 auto;
+  height: 1px;
+}
