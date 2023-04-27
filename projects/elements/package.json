@@ -395,7 +395,10 @@
       ],
       "dependencies": [
         "build"
-      ]
+      ],
+      "env": {
+        "NODE_OPTIONS": "--openssl-legacy-provider"
+      }
     },
     "storybook:watch": {
       "command": "start-storybook -p 7789",
