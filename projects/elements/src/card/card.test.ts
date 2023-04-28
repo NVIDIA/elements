@@ -62,12 +62,13 @@ describe('mlv-card', () => {
     expect(footer).toBe(cardFooter);
   });
 
-  it('should have card header preserve the title/subtitle/action DOM order via slots', async () => {
+  it('should have card header preserve the title/subtitle/default/action DOM order via slots', async () => {
     await elementIsStable(cardHeader);
 
-    const [titleElement, subtitleElement, actionElement] = getFlatDOMTree(cardHeader).filter(e => e.hasAttribute('slot'));
+    const [titleElement, subtitleElement, defaultSlot, actionElement] = getFlatDOMTree(cardHeader).filter(e => e.hasAttribute('slot'));
     expect(titleElement).toBe(cardHeader.querySelector('[slot="title"]'));
     expect(subtitleElement).toBe(cardHeader.querySelector('[slot="subtitle"]'));
+    expect(defaultSlot).toBeTruthy();
     expect(actionElement).toBe(cardHeader.querySelector('[slot="header-action"]'));
   });
 });

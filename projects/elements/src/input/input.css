@@ -1,14 +1,15 @@
 :host {
   --padding: 0 var(--mlv-ref-size-200);
   --font-size: var(--mlv-ref-font-size-200);
-  --height: var(--mlv-ref-size-700);
+  --height: var(--mlv-ref-size-800);
   --background: var(--mlv-sys-interaction-field-background);
   --color: var(--mlv-sys-interaction-field-color);
   --border-radius: var(--mlv-ref-border-radius-sm);
   --border: var(--mlv-ref-border-width-md) solid transparent;
   --cursor: text;
   --_icon-height: var(--height);
-  width: 100%;
+  --width: 100%;
+  width: var(--width);
 }
 
 [input] {
@@ -18,9 +19,9 @@
   border-radius: var(--border-radius);
   color: var(--color);
   cursor: var(--cursor);
+  width: var(--width);
   display: flex;
   align-content: stretch;
-  width: 100%;
 }
 
 ::slotted(input) {
@@ -31,10 +32,10 @@
   font-size: var(--font-size) !important;
   color: var(--color) !important;
   line-height: var(--height) !important;
-  width: 100% !important;
   border: 0 !important;
   background: none !important;
   display: block !important;
+  width: 100% !important;
 }
 
 mlv-icon-button,

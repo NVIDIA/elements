@@ -2,9 +2,10 @@
   --padding: var(--mlv-ref-size-500) var(--mlv-ref-size-500) var(--mlv-ref-size-400);
   --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
   --line-height: 1em;
+  --gap: var(--mlv-ref-space-xs);
 }
 
-header[internal-host] {
+[internal-host] {
   padding: var(--padding);
   border-bottom: var(--border-bottom);
   color: var(--color);
@@ -12,16 +13,22 @@ header[internal-host] {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
 
-  ::slotted([slot="title"]) {
-    margin: 0;
-    font-size: var(--mlv-ref-font-size-300);
-    font-weight: var(--mlv-ref-font-weight-bold);
-  }
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
 
-  ::slotted([slot="subtitle"]) {
-    margin: 0;
-    font-size: var(--mlv-ref-font-size-100);
-    font-weight: var(--mlv-ref-font-weight-normal);
-  }
+::slotted([slot='title']) {
+  margin: 0;
+  font-size: var(--mlv-ref-font-size-300);
+  font-weight: var(--mlv-ref-font-weight-bold);
+}
+
+::slotted([slot='subtitle']) {
+  margin: 0;
+  font-size: var(--mlv-ref-font-size-100);
+  font-weight: var(--mlv-ref-font-weight-normal);
 }

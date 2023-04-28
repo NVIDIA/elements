@@ -9,6 +9,8 @@
   --box-shadow: var(--mlv-ref-shadow-500);
   --font-size: var(--mlv-ref-font-size-200);
   --arrow-transform: translate(0, -2px) rotate(-45deg);
+  --width: max-content;
+  --height: initial;
 }
 
 dialog {
@@ -19,6 +21,9 @@ dialog {
   box-shadow: var(--box-shadow);
   gap: var(--mlv-ref-space-sm);
   font-size: var(--font-size);
+  width: var(--width);
+  height: var(--height);
+  white-space: initial;
 }
 
 dialog:has(mlv-icon-button) {

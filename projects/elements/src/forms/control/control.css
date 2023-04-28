@@ -124,6 +124,16 @@ slot[name='messages'] {
       'input label label';
   }
 
+  &.no-label.no-messages {
+    grid-template-areas: 
+      'input input input';
+  }
+
+  &.no-label.no-messages slot[name='label'],
+  &.no-label.no-messages slot[name='messages'] {
+    display: contents !important;
+  }
+
   & ::slotted(label) {
     font-weight: var(--mlv-ref-font-weight-regular) !important;
     color: var(--color) !important;

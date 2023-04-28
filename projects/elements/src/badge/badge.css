@@ -36,9 +36,9 @@
   place-content: center;
 }
 
-:host(:--has-text) [internal-host] {
-  height: 18px;
-  width: 18px;
+:host(:--has-text) {
+  --height: 18px;
+  --width: 18px;
 }
 
 ::slotted([mlv-text]) {

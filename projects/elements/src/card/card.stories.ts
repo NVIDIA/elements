@@ -187,6 +187,25 @@ export const DescriptionList = {
   `
 }
 
+export const Tabs = {
+  render: () => html`
+<div mlv-theme="root">
+  <mlv-card style="width:400px; height:200px">
+    <mlv-card-header>
+      <div slot="title">Title</div>
+      <mlv-tabs>
+        <mlv-tabs-item selected>tab 1</mlv-tabs-item>
+        <mlv-tabs-item>tab 2</mlv-tabs-item>
+        <mlv-tabs-item>tab 3</mlv-tabs-item>
+      </mlv-tabs>
+    </mlv-card-header>
+
+    <mlv-card-content> Card Content </mlv-card-content>
+  </mlv-card>
+</div>
+  `
+}
+
 export const LightTheme = {
   render: () => html`
 <div mlv-theme="root light" mlv-layout="pad:md align:center">

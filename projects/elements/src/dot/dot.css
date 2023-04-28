@@ -26,9 +26,9 @@
   place-content: center;
 }
 
-:host(:--has-text) [internal-host] {
-  height: var(--mlv-ref-size-400);
-  width: var(--mlv-ref-size-400);
+:host(:--has-text) {
+  --height: var(--mlv-ref-size-400);
+  --width: var(--mlv-ref-size-400);
 }
 
 ::slotted([mlv-text]) {

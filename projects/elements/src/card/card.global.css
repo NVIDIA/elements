@@ -1,0 +1,4 @@
+
+mlv-card-header:has(mlv-tabs) {
+  --padding: var(--mlv-ref-size-500) var(--mlv-ref-size-500) var(--mlv-ref-size-200);
+}
