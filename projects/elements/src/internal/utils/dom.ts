@@ -66,7 +66,9 @@ export function appendRootNodeStyle(host: HTMLElement, styles: string) {
   const stylesheet = new CSSStyleSheet();
   (stylesheet as any).replaceSync(styles ?? ''); // vitest in coverage mode ignores inlined assets like css and returns undefined
   const root = host.getRootNode() as any;
-  root.adoptedStyleSheets = [...root.adoptedStyleSheets, stylesheet];
+  if (root.adoptedStyleSheets) {
+    root.adoptedStyleSheets = [...Array.from(root.adoptedStyleSheets), stylesheet];
+  }
 }
 
 /* used for cases of needing to know a property update outside of lit, example a native input value prop change */

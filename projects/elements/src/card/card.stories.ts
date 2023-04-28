@@ -187,6 +187,25 @@ export const DescriptionList = {
   `
 }
 
+export const Tabs = {
+  render: () => html`
+<div nve-theme="root">
+  <nve-card style="width:400px; height:200px">
+    <nve-card-header>
+      <div slot="title">Title</div>
+      <nve-tabs>
+        <nve-tabs-item selected>tab 1</nve-tabs-item>
+        <nve-tabs-item>tab 2</nve-tabs-item>
+        <nve-tabs-item>tab 3</nve-tabs-item>
+      </nve-tabs>
+    </nve-card-header>
+
+    <nve-card-content> Card Content </nve-card-content>
+  </nve-card>
+</div>
+  `
+}
+
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="pad:md align:center">
