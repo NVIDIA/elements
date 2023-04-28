@@ -1,31 +1,11 @@
+/* eslint-disable guard-for-in */
 import { html } from 'lit';
 import '@elements/elements/card/define.js';
 
 export default {
-  title: 'Foundations/Layout/Examples'
+  title: 'Internal/Layout/Examples'
 };
 
-const layoutDemoStyles = html`
-  <style>
-    section {
-      background-color: var(--nve-sys-interaction-background);
-      border: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-emphasis);
-      gap: var(--nve-ref-space-sm);
-      margin-block: var(--nve-ref-space-sm) var(--nve-ref-space-xl) !important;
-      min-height: 200px !important;
-    }
-
-    section[nve-layout~='column'] {
-      height: 400px;
-    }
-
-    nve-card {
-      min-width: 60px !important;
-      min-height: 60px !important;
-      --background: var(--nve-sys-layer-overlay-color);
-    }
-  </style>
-`;
 
 const generateCards = (numCards: number) => {
   const cards = [];
@@ -37,201 +17,101 @@ const generateCards = (numCards: number) => {
   return html`${cards}`;
 };
 
-export const Horizontal = {
-  render: () => html`
-    ${layoutDemoStyles}
 
-    <h3 nve-text="section">Align Left</h3>
-    <section nve-layout="row align:left">
-      ${generateCards(3)}
+const generateLayoutStory = (name, layoutValue, numCards) => {
+  return {
+    render: () => html`
+    <h3 nve-text="section">${name}</h3>
+    <section class="layout-example" nve-layout=${layoutValue}>
+      ${generateCards(numCards)}
     </section>
-
-    <h3 nve-text="section">Align Horizontal Center</h3>
-    <section nve-layout="row align:horizontal-center">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Right</h3>
-    <section nve-layout="row align:right">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Vertical Center</h3>
-    <section nve-layout="row align:vertical-center">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Center</h3>
-    <section nve-layout="row align:center">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Vertical Center & Right</h3>
-    <section nve-layout="row align:vertical-center align:right">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Left & Bottom</h3>
-    <section nve-layout="row align:left align:bottom">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Horizontal Center & Bottom</h3>
-    <section nve-layout="row align:horizontal-center align:bottom">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Right & Bottom</h3>
-    <section nve-layout="row align:right align:bottom">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Space Around</h3>
-    <section nve-layout="row align:space-around">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Space Between</h3>
-    <section nve-layout="row align:space-between">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Space Evenly</h3>
-    <section nve-layout="row align:space-evenly">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Stretch Horizontal</h3>
-    <section nve-layout="row align:horizontal-stretch">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Stretch Vertical</h3>
-    <section nve-layout="row align:vertical-stretch">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Full Stretch</h3>
-    <section nve-layout="row align:stretch">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Wrap</h3>
-    <section nve-layout="row align:left align:top align:wrap">
-      ${generateCards(10)}
-    </section>
-
-    <h3 nve-text="section">Overflow Hidden By Default</h3>
-    <section nve-layout="row align:left align:top">
-      ${generateCards(10)}
-    </section>
-  `
+    `
+  }
 }
 
 
-export const Vertical = {
+export const HorizontalAlignLeft = generateLayoutStory('Align Left', 'row gap:sm align:left', 3);
+export const HorizontalAlignHorizontalCenter = generateLayoutStory('Align Horizontal Center', 'row gap:sm align:horizontal-center', 3);
+export const HorizontalAlignRight = generateLayoutStory('Align Right', 'row gap:sm align:right', 3);
+export const HorizontalAlignVerticalCenter = generateLayoutStory('Align Vertical Center', 'row gap:sm align:vertical-center', 3)
+export const HorizontalAlignCenter = generateLayoutStory('Align Center', 'row gap:sm align:center', 3);
+export const HorizontalAlignVerticalCenterAndRight = generateLayoutStory('Align Vertical Center & Right', 'row gap:sm align:vertical-center align:right', 3);
+export const HorizontalAlignLeftAndBottom = generateLayoutStory('Align Left & Bottom', 'row gap:sm align:left align:bottom', 3);
+export const HorizontalAlignHorizontalCenterAndBottom = generateLayoutStory('Align Horizontal Center & Bottom', 'row gap:sm align:horizontal-center align:bottom', 3);
+export const HorizontalAlignRightAndBottom = generateLayoutStory('Align Right & Bottom', 'row gap:sm align:right align:bottom', 3);
+export const HorizontalAlignSpaceAround = generateLayoutStory('Align Space Around', 'row align:space-around', 3);
+export const HorizontalAlignSpaceBetween = generateLayoutStory('Align Space Between', 'row align:space-between', 3);
+export const HorizontalAlignSpaceEvenly = generateLayoutStory('Align Space Evenly', 'row align:space-evenly', 3);
+export const HorizontalAlignStretchHorizontal = generateLayoutStory('Align Stretch Horizontal', 'row gap:sm align:horizontal-stretch', 3);
+export const HorizontalAlignStretchVertical = generateLayoutStory('Align Stretch Vertical', 'row gap:sm align:vertical-stretch', 3);
+export const HorizontalAlignFullStretch = generateLayoutStory('Align Full Stretch', 'row gap:sm align:stretch', 3);
+export const HorizontalAlignWrap = generateLayoutStory('Align Wrap', 'row gap:sm align:left align:top align:wrap', 20);
+
+
+export const VerticalAlignTop = generateLayoutStory('Align Top', 'column gap:sm align:top', 3);
+export const VerticalAlignVerticalCenter = generateLayoutStory('Align Vertical Center', 'column gap:sm align:vertical-center', 3);
+export const VerticalAlignBottom = generateLayoutStory('Align Bottom', 'column gap:sm align:bottom', 3);
+export const VerticalAlignHorizontalCenter = generateLayoutStory('Align Horizontal Center', 'column gap:sm align:horizontal-center', 3);
+export const VerticalAlignCenter = generateLayoutStory('Align Center', 'column gap:sm align:center', 3);
+export const VerticalAlignCenterAndBottom = generateLayoutStory('Align Center & Bottom', 'column gap:sm align:horizontal-center align:bottom', 3);
+export const VerticalAlignTopAndRight = generateLayoutStory('Align Top & Right', 'column gap:sm align:top align:right', 3);
+export const VerticalAlignCenterAndRight = generateLayoutStory('Align Center & Right', 'column gap:sm align:vertical-center align:right', 3);
+export const VerticalAlignBottomAndRight = generateLayoutStory('Align Bottom & Right', 'column gap:sm align:bottom align:right', 3);
+export const VerticalAlignSpaceAround = generateLayoutStory('Align Space Around', 'column align:space-around', 3);
+export const VerticalAlignSpaceBetween = generateLayoutStory('Align Space Between', 'column align:space-between', 3);
+export const VerticalAlignSpaceEvenly = generateLayoutStory('Align Space Evenly', 'column align:space-evenly', 3);
+export const VerticalAlignStretchHorizontal = generateLayoutStory('Align Stretch Horizontal', 'column gap:sm align:horizontal-stretch', 3);
+export const VerticalAlignStretchVertical = generateLayoutStory('Align Stretch Vertical', 'column gap:sm align:vertical-stretch', 3);
+export const VerticalAlignFullStretch = generateLayoutStory('Align Full Stretch', 'column gap:sm align:stretch', 3);
+
+
+export const GapXxxs = generateLayoutStory('Gap Xxxs', 'row gap:xxxs', 5);
+export const GapXxs = generateLayoutStory('Gap Xxs', 'row gap:xxs', 5);
+export const GapXs = generateLayoutStory('Gap Xs', 'row gap:xs', 5);
+export const GapSm = generateLayoutStory('Gap Sm', 'row gap:sm', 5);
+export const GapMd = generateLayoutStory('Gap Md', 'row gap:md', 5);
+export const GapLg = generateLayoutStory('Gap Lg', 'row gap:lg', 5);
+export const GapXl = generateLayoutStory('Gap Xl', 'row gap:xl', 5);
+export const GapXxl = generateLayoutStory('Gap Xxl', 'row gap:xxl', 5);
+export const GapXxxl = generateLayoutStory('Gap Xxxl', 'row gap:xxxl', 5);
+
+
+export const PadXxxs = generateLayoutStory('Padding Xxxs', 'row gap:sm align:stretch pad:xxxs', 3);
+export const PadXxs = generateLayoutStory('Padding Xxs', 'row gap:sm align:stretch pad:xxs', 3);
+export const PadXs = generateLayoutStory('Padding Xs', 'row gap:sm align:stretch pad:xs', 3);
+export const PadSm = generateLayoutStory('Padding Sm', 'row gap:sm align:stretch pad:sm', 3);
+export const PadMd = generateLayoutStory('Padding Md', 'row gap:sm align:stretch pad:md', 3);
+export const PadLg = generateLayoutStory('Padding Lg', 'row gap:sm align:stretch pad:lg', 3);
+export const PadXl = generateLayoutStory('Padding Xl', 'row gap:sm align:stretch pad:xl', 3);
+export const PadXxl = generateLayoutStory('Padding Xxl', 'row gap:sm align:stretch pad:xxl', 3);
+export const PadXxxl = generateLayoutStory('Padding Xxxl', 'row gap:sm align:stretch pad:xxxl', 3);
+
+
+export const PadTop = generateLayoutStory('Padding Top', 'row gap:sm align:stretch pad-top:xxl', 3);
+export const PadRight = generateLayoutStory('Padding Right', 'row gap:sm align:stretch pad-right:xxl', 3);
+export const PadBottom = generateLayoutStory('Padding Bottom', 'row gap:sm align:stretch pad-bottom:xxl', 3);
+export const PadLeft = generateLayoutStory('Padding Left', 'row gap:sm align:stretch pad-left:xxl', 3);
+
+
+export const GridSpan2 = generateLayoutStory(html`Grid with (<code>span-items:2</code>) specified on parent`, 'grid gap:md span-items:2', 6);
+export const GridSpan6 = generateLayoutStory(html`Grid with (<code>span-items:6</code>) specified on parent`, 'grid gap:md span-items:6', 2);
+export const GridAlignTop = generateLayoutStory('Grid Align Top', 'grid gap:md align:top align:left', 9);
+export const GridAlignVerticalCenter = generateLayoutStory('Grid Align Vertical Center', 'grid gap:md align:vertical-center align:left', 9);
+export const GridAlignBottom = generateLayoutStory('Grid Align Bottom', 'grid gap:md align:bottom align:left', 9);
+export const GridAlignHorizontalCenter = generateLayoutStory('Grid Align Horizontal Center', 'grid gap:md align:horizontal-center', 9);
+export const GridAlignCenter = generateLayoutStory('Grid Align Center', 'grid gap:md align:center', 9);
+export const GridAlignCenterAndBottom = generateLayoutStory('Grid Align Center & Bottom', 'grid gap:md align:horizontal-center align:bottom', 9);
+export const GridAlignTopAndRight = generateLayoutStory('Grid Align Top & Right', 'grid gap:md align:top align:right', 9);
+export const GridAlignCenterAndRight = generateLayoutStory('Grid Align Center & Right', 'grid gap:md align:vertical-center align:right', 9);
+export const GridAlignBottomAndRight = generateLayoutStory('Grid Align Bottom & Right', 'grid gap:md align:bottom align:right', 9);
+export const GridAlignHorizontalStretch = generateLayoutStory('Grid Align Horizontal Stretch', 'grid gap:md align:horizontal-stretch', 9);
+export const GridAlignVerticalStretch = generateLayoutStory('Grid Align Vertical Stretch', 'grid gap:md align:vertical-stretch', 9);
+export const GridAlignFullStretch = generateLayoutStory('Grid Align Full Stretch', 'grid gap:md align:stretch', 9);
+
+
+export const GridVariableSpans = {
   render: () => html`
-    ${layoutDemoStyles}
-
-    <h3 nve-text="section">Align Top</h3>
-    <section nve-layout="column align:top">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Vertical Center</h3>
-    <section nve-layout="column align:vertical-center">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Bottom</h3>
-    <section nve-layout="column align:bottom">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Horizontal Center</h3>
-    <section nve-layout="column align:horizontal-center">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Center</h3>
-    <section nve-layout="column align:center">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Horizontal Center & Bottom</h3>
-    <section nve-layout="column align:horizontal-center align:bottom">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Top & Right</h3>
-    <section nve-layout="column align:top align:right">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Vertical Center & Right</h3>
-    <section nve-layout="column align:vertical-center align:right">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Bottom & Right</h3>
-    <section nve-layout="column align:bottom align:right">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Space Around</h3>
-    <section nve-layout="column align:space-around">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Space Between</h3>
-    <section nve-layout="column align:space-between">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Space Evenly</h3>
-    <section nve-layout="column align:space-evenly">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Stretch Horizontal</h3>
-    <section nve-layout="column align:horizontal-stretch">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Stretch Vertical</h3>
-    <section nve-layout="column align:vertical-stretch">
-      ${generateCards(3)}
-    </section>
-
-    <h3 nve-text="section">Align Full Stretch</h3>
-    <section nve-layout="column align:stretch">
-      ${generateCards(3)}
-    </section>
-  `
-}
-
-
-export const Grid = {
-  render: () => html`
-    ${layoutDemoStyles}
-
-    <h3 nve-text="section">Grid with (<code>span-items:2</code>) specified on parent</h3>
-    <section nve-layout="grid gap:md span-items:2">
-      ${generateCards(6)}
-    </section>
-
-    <h3 nve-text="section">Grid with (<code>span-items:6</code>) specified on parent</h3>
-    <section nve-layout="grid gap:md span-items:6">
-      ${generateCards(2)}
-    </section>
-
-    <h3 nve-text="section">Grid with variable size spans</h3>
-    <section nve-layout="grid gap:md">
-      <nve-card nve-layout="span:4"></nve-card>
-      <nve-card nve-layout="span:8"></nve-card>
-    </section>
-
-    <h3 nve-text="section">Grid with individual spans (<code>span:...</code>) on the children</h3>
+    <h3 nve-text="section">Grid with variable spans (<code>span:...</code>) on the children</h3>
     <section nve-layout="grid gap:md">
       ${generateCards(12)}
 
@@ -268,144 +148,12 @@ export const Grid = {
       <nve-card nve-layout="span:9"></nve-card>
       <nve-card nve-layout="span:3"></nve-card>
     </section>
-
-
-    <h3 nve-text="section">Grid Align Top</h3>
-    <section nve-layout="grid gap:md align:top">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Vertical Center</h3>
-    <section nve-layout="grid gap:md align:vertical-center">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Bottom</h3>
-    <section nve-layout="grid gap:md align:bottom">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Horizontal Center</h3>
-    <section nve-layout="grid gap:md align:horizontal-center">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Center</h3>
-    <section nve-layout="grid gap:md align:center">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Horizontal Center & Bottom</h3>
-    <section nve-layout="grid gap:md align:horizontal-center align:bottom">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Top & Right</h3>
-    <section nve-layout="grid gap:md align:top align:right">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Vertical Center & Right</h3>
-    <section nve-layout="grid gap:md align:vertical-center align:right">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Bottom & Right</h3>
-    <section nve-layout="grid gap:md align:bottom align:right">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Stretch Horizontal</h3>
-    <section nve-layout="grid gap:md align:horizontal-stretch">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Stretch Vertical</h3>
-    <section nve-layout="grid gap:md align:vertical-stretch">
-      ${generateCards(9)}
-    </section>
-
-    <h3 nve-text="section">Grid Align Full Stretch</h3>
-    <section nve-layout="grid gap:md align:stretch">
-      ${generateCards(9)}
-    </section>
   `
 }
 
-export const Gaps = {
-  render: () => html`
-    ${layoutDemoStyles}
 
-    <h3 nve-text="section">Gap xxxs</h3>
-    <section nve-layout="row gap:xxxs">
-      ${generateCards(5)}
-    </section>
-
-    <h3 nve-text="section">Gap xxs</h3>
-    <section nve-layout="row gap:xxs">
-      ${generateCards(5)}
-    </section>
-
-    <h3 nve-text="section">Gap Extra Small</h3>
-    <section nve-layout="row gap:xs">
-      ${generateCards(5)}
-    </section>
-
-    <h3 nve-text="section">Gap Small</h3>
-    <section nve-layout="row gap:sm">
-      ${generateCards(5)}
-    </section>
-
-    <h3 nve-text="section">Gap Medium</h3>
-    <section nve-layout="row gap:md">
-      ${generateCards(5)}
-    </section>
-
-    <h3 nve-text="section">Gap Large</h3>
-    <section nve-layout="row gap:lg">
-      ${generateCards(5)}
-    </section>
-
-    <h3 nve-text="section">Gap Extra Large</h3>
-    <section nve-layout="row gap:xl">
-      ${generateCards(5)}
-    </section>
-
-    <h3 nve-text="section">Gap xxl</h3>
-    <section nve-layout="row gap:xxl">
-      ${generateCards(5)}
-    </section>
-
-    <h3 nve-text="section">Gap xxxl</h3>
-    <section nve-layout="row gap:xxxl">
-      ${generateCards(5)}
-    </section>
-  `
-}
-
-export const Padding = {
-  render: () => html`
-    ${layoutDemoStyles}
-
-    ${['xxxs', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'].map(size =>  html`
-      <h3 nve-text="section">Padding ${size}</h3>
-      <section nve-layout="row align:stretch pad:${size}">
-        <nve-card></nve-card>
-      </section>
-    `)}
-
-    ${['top', 'right', 'bottom', 'left'].map(side =>  html`
-      <h3 nve-text="section">Padding ${side}</h3>
-      <section nve-layout="row align:stretch pad-${side}:xxl">
-        <nve-card></nve-card>
-      </section>
-    `)}
-  `
-}
 export const Grow = {
   render: () => html`
-    ${layoutDemoStyles}
-
       <h3 nve-text="section">Grow Container</h3>
       <section nve-layout="row grow"></section>
   `

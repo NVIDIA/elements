@@ -74,6 +74,23 @@
     padding: 12px;
   }
 
+  .docs-story section.layout-example {
+    background-color: var(--nve-sys-interaction-background);
+    border: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-emphasis);
+    margin-block: var(--nve-ref-space-sm) var(--nve-ref-space-xl) !important;
+    min-height: 200px !important;
+  }
+
+  .docs-story section.layout-example[nve-layout~='column'] {
+    height: 400px;
+  }
+
+  .docs-story section.layout-example > nve-card {
+    min-width: 60px !important;
+    min-height: 60px !important;
+    --background: var(--nve-sys-layer-overlay-color);
+  }
+
   .sbdocs-preview {
     margin-bottom: 64px !important;
   }
