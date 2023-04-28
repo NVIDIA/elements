@@ -140,8 +140,8 @@ const StackedCardsWithPanel = {
 
               <div mlv-layout="row gap:sm pad:sm" id="header-buttons">
                 <mlv-button>Default</mlv-button>
-                <mlv-icon-button icon-name="information" aria-label="information"></mlv-icon-button>
-                <mlv-icon-button icon-name="additional-actions" aria-label="additional actions" @click=${() => togglePanel(args.panelSide === 'right')}></mlv-icon-button>
+                <mlv-icon-button icon-name="information" aria-label="information" @click=${() => togglePanel(args.panelSide === 'right')}></mlv-icon-button>
+                <mlv-icon-button icon-name="additional-actions" aria-label="additional actions"></mlv-icon-button>
               </div>
             </div>
           </section>

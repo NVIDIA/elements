@@ -147,10 +147,9 @@ export const parameters = {
           'Layout',
           [
             'Documentation',
-            'Horizontal Layout',
-            'Vertical Layout',
-            'Grid Layout',
-            'Examples',
+            'Horizontal Flex',
+            'Vertical Flex',
+            'Grid',
           ],
           'Forms',
           [
@@ -166,7 +165,7 @@ export const parameters = {
         ],
         'Elements',
         'Patterns',
-        'Internals'
+        'Internal'
       ]
     }
   }
@@ -229,7 +228,7 @@ window.parent.document.head.appendChild(parentStyle);
 
 updateTheme('dark');
 
-function updateTheme(themes) {  
+function updateTheme(themes) {
   const preview = window.parent.document.querySelector('#storybook-preview-wrapper');
   const manager = window.parent.document.querySelector('html');
   const story = document.querySelector('html');
