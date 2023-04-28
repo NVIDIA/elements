@@ -6,8 +6,11 @@ import styles from './notification-group.css?inline';
 
 
 /**
- * @alpha
  * @element nve-notification-group
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-notification-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
+ * @responsive false
  */
 export class NotificationGroup extends LitElement {
   @property({ type: String }) anchor: string | HTMLElement;

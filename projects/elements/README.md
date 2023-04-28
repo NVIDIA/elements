@@ -132,10 +132,13 @@ pnpm publish
 After publishing the UI platform (IDE) dependencies can be updated.
 
 ```
-src/ui/platform/apps/home/package.json 
-src/ui/platform/libs/feedback-elements/package.json 
-src/ui/platform/libs/ide/package.json 
-src/ui/platform/plugins/apps-and-services/package.json 
+src/ui/platform/apps/home/package.json
+src/ui/platform/libs/feedback-elements/package.json
+src/ui/platform/libs/components/package.json
+src/ui/platform/libs/components/app-frame/package.json
+src/ui/platform/libs/ide/package.json
+src/ui/platform/libs/ide-shell/package.json
+src/ui/platform/plugins/apps-and-services/package.json
 src/ui/platform/shared/elements/package.json
 ```
 

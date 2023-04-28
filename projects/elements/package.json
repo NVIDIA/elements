@@ -22,6 +22,7 @@
     "demos": "wireit",
     "_demos": "wireit",
     "create-icon-spritesheet": "wireit",
+    "metrics": "wireit",
     "prepublishonly": "wireit"
   },
   "files": [
@@ -190,7 +191,7 @@
     "element-internals-polyfill": "^1.1.18"
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "0.6.3",
+    "@custom-elements-manifest/analyzer": "0.8.0",
     "@geometricpanda/storybook-addon-badges": "0.2.2",
     "@happy-dom/global-registrator": "8.9.0",
     "@lit-labs/react": "1.0.9",
@@ -200,7 +201,7 @@
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
     "@typescript/lib-dom": "npm:@types/web@0.0.87",
-    "@vitest/coverage-c8": "0.29.3",
+    "@vitest/coverage-c8": "0.30.1",
     "emoji-picker-element": "1.12.1",
     "eslint": "8.30.0",
     "eslint-plugin-lit": "1.7.2",
@@ -224,7 +225,7 @@
     "typescript": "4.8.4",
     "vite": "4.0.2",
     "vite-plugin-dts": "1.7.1",
-    "vitest": "0.29.8",
+    "vitest": "0.30.1",
     "wireit": "0.9.5"
   },
   "publishConfig": {
@@ -265,7 +266,8 @@
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
-        "vite.config.ts"
+        "vite.config.ts",
+        "custom-elements-manifest.config.mjs"
       ],
       "output": [
         "dist/**"
@@ -303,7 +305,7 @@
       "service": true
     },
     "test:coverage": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node_modules/vitest/vitest.mjs run --coverage",
+      "command": "node_modules/vitest/vitest.mjs run --coverage",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -395,6 +397,18 @@
     "storybook:watch": {
       "command": "start-storybook -p 7789",
       "service": true
+    },
+    "metrics": {
+      "command": "node ./metrics/index.mjs",
+      "files": [
+        "metrics/index.mjs"
+      ],
+      "output": [
+        "metrics/data.json"
+      ],
+      "dependencies": [
+        "test:coverage"
+      ]
     },
     "prepublishonly": {
       "dependencies": [
