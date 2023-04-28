@@ -1419,7 +1419,7 @@
       },
       "selected": {
         "color": {
-          "value": "{sys.text.color}",
+          "value": "{sys.text.emphasis.color}",
           "type": "color"
         },
         "background": {
@@ -1493,7 +1493,7 @@
         },
         "accent": {
           "background": {
-            "value": "{ref.color.gray-denim.100}",
+            "value": "{ref.color.gray-denim.300}",
             "type": "color"
           }
         }

@@ -21,6 +21,7 @@ dialog {
   color: var(--color);
   box-shadow: var(--box-shadow);
   gap: var(--nve-ref-space-sm);
+  outline: 0;
 }
 
 dialog::backdrop {
@@ -42,8 +43,10 @@ nve-icon-button {
   height: var(--nve-ref-size-400);
   background: var(--background);
   transform: var(--arrow-transform);
-  border-radius: var(--nve-ref-border-radius-xs);
+  border-top-left-radius: var(--nve-ref-border-radius-xs);
   position: absolute;
+  border-left: var(--border);
+  border-top:  var(--border);
 }
 
 :host([position*='top']) {
@@ -55,7 +58,7 @@ nve-icon-button {
 }
 
 :host([position*='bottom']) {
-  --arrow-transform: translate(0, 2px) rotate(45deg);
+  --arrow-transform: translate(0, -1px) rotate(45deg);
 }
 
 :host([position*='left']) {

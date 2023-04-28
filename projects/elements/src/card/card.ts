@@ -1,9 +1,10 @@
 import { html, LitElement } from 'lit';
-import { useStyles } from '@elements/elements/internal';
+import { appendRootNodeStyle, useStyles } from '@elements/elements/internal';
 import cardStyleSheet from './card.css?inline';
 import cardHeaderStyleSheet from './card-header.css?inline';
 import cardContentStyleSheet from './card-content.css?inline';
 import cardFooterStyleSheet from './card-footer.css?inline';
+import globalStyles from './card.global.css?inline';
 
 /**
  * @element nve-card
@@ -38,11 +39,17 @@ export class Card extends LitElement {
       </div>
     `;
   }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    appendRootNodeStyle(this, globalStyles);
+  }
 }
 
 
 /**
  * @element nve-card-header
+ * @slot - default slot
  * @slot title - Title Text
  * @slot subtitle - Subtitle Text
  * @slot header-action - Header Action Button
@@ -64,9 +71,10 @@ export class Card extends LitElement {
   render() {
     return html`
       <header internal-host>
-        <div>
+        <div class="content">
           <slot name="title"></slot>
           <slot name="subtitle"></slot>
+          <slot></slot>
         </div>
 
         <slot name="header-action"></slot>
