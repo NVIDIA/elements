@@ -5,8 +5,9 @@ import { inputStyles } from '@elements/elements/input';
 import styles from './datetime.css?inline';
 
 /**
- * @alpha
  * @element mlv-datetime
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-datetime-documentation--page
+ * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
  */
 export class Datetime extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);

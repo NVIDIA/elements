@@ -7,8 +7,9 @@ import { inputStyles } from '@elements/elements/input';
 import styles from './password.css?inline';
 
 /**
- * @alpha
  * @element mlv-password
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-password-documentation--page
+ * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password
  */
 export class Password extends Control {
   @state() private pressed = false;

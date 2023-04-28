@@ -4,11 +4,13 @@ import { Control } from '@elements/elements/forms';
 import styles from './checkbox.css?inline';
 
 /**
- * @alpha
  * @element mlv-checkbox
  * @cssprop --width
  * @cssprop --height
  * @cssprop --cursor
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-checkbox-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/
  */
 export class Checkbox extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);

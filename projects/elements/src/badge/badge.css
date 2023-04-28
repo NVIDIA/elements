@@ -7,6 +7,8 @@
   --padding: var(--mlv-ref-size-150) var(--mlv-ref-size-200);
   --border-radius: var(--mlv-ref-border-radius-sm);
   --font-weight: var(--mlv-ref-font-weight-semibold);
+  --width: initial;
+  --height: initial;
 }
 
 @supports not (background: color-mix(in oklab, #000 0%, #fff)) {
@@ -25,6 +27,8 @@
   color: var(--status-color);
   padding: var(--padding);
   border-radius: var(--border-radius);
+  width: var(--width);
+  height: var(--height);
   display: inline-flex;
   align-items: center;
   line-height: 1em;

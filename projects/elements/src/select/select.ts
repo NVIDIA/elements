@@ -5,7 +5,6 @@ import globalStyles from './select.global.css?inline';
 import styles from './select.css?inline';
 
 /**
- * @alpha
  * @element mlv-select
  * @cssprop --padding
  * @cssprop --font-size
@@ -13,6 +12,9 @@ import styles from './select.css?inline';
  * @cssprop --background
  * @cssprop --border-radius
  * @cssprop --border
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-select-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-24&t=clRGqnKDRGNhR0Yu-0
+ * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
  */
 export class Select extends Control {
   static styles = useStyles([...Control.styles, styles]);

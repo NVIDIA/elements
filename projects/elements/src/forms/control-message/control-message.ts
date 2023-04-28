@@ -19,8 +19,11 @@ interface AlertStatus {
 }
 
 /**
- * @alpha
  * @element mlv-control-message
+ * @package true
+ * @storybook http://localhost:7789/?path=/story/foundations-forms-validation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0
+ * @aria https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
  */
 export class ControlMessage extends LitElement {
   @property({ type: String, reflect: true }) status: 'warning' | 'error' | 'success' | 'disabled';

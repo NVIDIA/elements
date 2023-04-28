@@ -1,16 +1,20 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { MlvBaseButton, stateSelected, useStyles, keyNavigationList, KeynavListConfig } from '@elements/elements/internal';
+import { MlvBaseButton, stateSelected, useStyles, keyNavigationList, KeynavListConfig, attachInternals } from '@elements/elements/internal';
 import tabsItemStyleSheet from './tabs-item.css?inline';
 import tabsStyleSheet from './tabs.css?inline';
 
 /**
- * @alpha
  * @element mlv-tabs-item
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --font-size
  * @cssprop --font-weight
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-tabs-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
+ * @stable false
+ * @responsive false
  */
 
 @stateSelected<TabsItem>()
@@ -43,10 +47,14 @@ export class TabsItem extends MlvBaseButton {
 
 
 /**
- * @alpha
  * @element mlv-tabs
  * @slot - default slot for mlv-tab-item
  * @cssprop --gap
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-tabs-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
+ * @responsive false
+ * @stable false
  */
 @keyNavigationList<Tabs>()
 export class Tabs extends LitElement {
@@ -98,6 +106,7 @@ export class Tabs extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    attachInternals(this);
     this._internals.role = 'tablist';
     this._internals.ariaOrientation = this.vertical ? 'vertical' : 'horizontal';
   }

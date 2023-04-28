@@ -5,7 +5,6 @@ import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, Popove
 import styles from './tooltip.css?inline';
 
 /**
- * @alpha
  * @element mlv-tooltip
  * @event open
  * @event close
@@ -20,6 +19,9 @@ import styles from './tooltip.css?inline';
  * @cssprop --mlv-sys-layer-popover-arrow-padding
  * @cssprop --mlv-sys-layer-popover-arrow-offset
  * @cssprop --mlv-sys-layer-popover-offset
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-tooltip-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-29&t=clRGqnKDRGNhR0Yu-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */
 export class Tooltip extends LitElement {
   /**

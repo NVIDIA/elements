@@ -18,7 +18,7 @@ const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
 // https://lit.dev/docs/tools/production/
 export default defineConfig((env) => {
   const mode = env.mode as 'production' | 'watch' | 'test' | 'development';
-  execSync(`./node_modules/@custom-elements-manifest/analyzer/index.js analyze ${mode === 'watch' ? '--quiet' : ''} --litelement --globs ./src --exclude src/**/*.css src/**/*.stories.mdx src/**/*.stories.ts --outdir ${dist()}`);
+  execSync(`node ./node_modules/@custom-elements-manifest/analyzer/cem.js analyze ${mode === 'watch' ? '--quiet' : ''} --config ./custom-elements-manifest.config.mjs --litelement --globs ./src --exclude src/**/*.css src/**/*.stories.mdx src/**/*.stories.ts --outdir ${dist()}`);
   execSync(`node ${resolve('./tokens/style-dictionary.config.cjs')} --outDir ${resolve('./')}/dist/`);
 
   return {

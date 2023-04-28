@@ -15,6 +15,9 @@ import cardFooterStyleSheet from './card-footer.css?inline';
  * @cssprop --color
  * @cssprop --border-radius
  * @cssprop --box-shadow
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
+ * @aria https://github.com/w3c/aria-practices/issues
  */
 export class Card extends LitElement {
   static styles = useStyles([cardStyleSheet]);
@@ -46,6 +49,9 @@ export class Card extends LitElement {
  * @cssprop --padding
  * @cssprop --border-bottom
  * @cssprop --line-height
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
+ * @aria https://github.com/w3c/aria-practices/issues
  */
  export class CardHeader extends LitElement {
   static styles = useStyles([cardHeaderStyleSheet]);
@@ -79,6 +85,9 @@ export class Card extends LitElement {
  * @element mlv-card-content
  * @slot - This is a default/unnamed slot for card content content
  * @cssprop --padding
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
+ * @aria https://github.com/w3c/aria-practices/issues
  */
  export class CardContent extends LitElement {
   static styles = useStyles([cardContentStyleSheet]);
@@ -99,6 +108,9 @@ export class Card extends LitElement {
  * @element mlv-card-footer
  * @slot - This is a default/unnamed slot for card footer content
  * @cssprop --padding
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
+ * @aria https://github.com/w3c/aria-practices/issues
  */
  export class CardFooter extends LitElement {
   static styles = useStyles([cardFooterStyleSheet]);

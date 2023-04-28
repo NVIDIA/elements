@@ -16,6 +16,10 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
  * @slot action-icon - Extra Action Button (use `mlv-icon-button`)
  * @cssprop --padding
  * @cssprop --border-bottom
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-panel-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+ * @stable false
  */
 export class PanelHeader extends LitElement {
   static styles = useStyles([panelHeaderStyleSheet]);
@@ -49,6 +53,10 @@ export class PanelHeader extends LitElement {
  * @element mlv-panel-content
  * @slot - This is a default/unnamed slot for panel content content
  * @cssprop --padding
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-panel-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+ * @stable false
  */
  export class PanelContent extends LitElement {
   static styles = useStyles([panelContentStyleSheet]);
@@ -72,6 +80,10 @@ export class PanelHeader extends LitElement {
  * @cssprop --padding
  * @cssprop --border-top
  * @cssprop --gap
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-panel-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+ * @stable false
  */
  export class PanelFooter extends LitElement {
   static styles = useStyles([panelFooterStyleSheet]);
@@ -98,7 +110,6 @@ export class PanelHeader extends LitElement {
 
 
 /**
- * @beta
  * @element mlv-panel
  * @slot - This is a default/unnamed slot for panel content
  * @slot header - header element (Use `<mlv-panel-header>` or custom content)
@@ -107,6 +118,10 @@ export class PanelHeader extends LitElement {
  * @cssprop --background
  * @cssprop --color
  * @cssprop --box-shadow
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-panel-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+ * @stable false
  */
 
 @stateExpanded<Panel>()

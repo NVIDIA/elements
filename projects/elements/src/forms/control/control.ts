@@ -12,7 +12,6 @@ import globalStyles from './control.global.css?inline';
 import styles from './control.css?inline';
 
 /**
- * @alpha
  * @element mlv-control
  * @cssprop --cursor
  * @cssprop --accent-color
@@ -21,6 +20,10 @@ import styles from './control.css?inline';
  * @cssprop --label-width
  * @cssprop --control-width
  * @cssprop --control-height
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/foundations-forms-controls--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0
+ * @aria https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
+ * @package true
  */
 export class Control extends LitElement {
   @property({ type: String }) status: 'warning' | 'error' | 'success' | 'disabled';
