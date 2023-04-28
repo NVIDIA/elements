@@ -5,17 +5,16 @@
   --gap: 0;
   --height: var(--nve-ref-size-800);
   --width: var(--nve-ref-size-800);
+  --icon-width: var(--nve-ref-size-400);
+  --icon-height: var(--nve-ref-size-400);
 }
 
 :host([size='sm']) {
   --padding: 0;
   --height: var(--nve-ref-size-700);
   --width: var(--nve-ref-size-700);
-
-  & nve-icon {
-    --width: var(--nve-ref-size-300);
-    --height: var(--nve-ref-size-300);
-  }
+  --icon-width: var(--nve-ref-size-300);
+  --icon-height: var(--nve-ref-size-300);
 }
 
 :host([size='lg']) {
@@ -31,12 +30,14 @@
 
 nve-icon {
   --color: var(--_icon-color);
+  --width: var(--icon-width);
+  --height: var(--icon-height);
   pointer-events: none;
 }
 
-:host([icon-name='cancel']) nve-icon {
-  --height: var(--nve-ref-size-300);
-  --width: var(--nve-ref-size-300);
+:host([icon-name='cancel']) {
+  --icon-height: var(--nve-ref-size-300);
+  --icon-width: var(--nve-ref-size-300);
 }
 
 ::slotted(a) {
