@@ -140,8 +140,8 @@ const StackedCardsWithPanel = {
 
               <div nve-layout="row gap:sm pad:sm" id="header-buttons">
                 <nve-button>Default</nve-button>
-                <nve-icon-button icon-name="information" aria-label="information"></nve-icon-button>
-                <nve-icon-button icon-name="additional-actions" aria-label="additional actions" @click=${() => togglePanel(args.panelSide === 'right')}></nve-icon-button>
+                <nve-icon-button icon-name="information" aria-label="information" @click=${() => togglePanel(args.panelSide === 'right')}></nve-icon-button>
+                <nve-icon-button icon-name="additional-actions" aria-label="additional actions"></nve-icon-button>
               </div>
             </div>
           </section>
