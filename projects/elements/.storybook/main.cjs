@@ -22,7 +22,10 @@ module.exports = {
   },
   async viteFinal(config) {
     config.logLevel = 'error';
-    config.resolve.alias = { '@elements/elements': resolve('./dist') };
+    config.resolve.alias = {
+      '@elements/elements': resolve('./dist'),
+      'metrics': resolve('./metrics')
+    };
 
     if (config.server) {
       config.server.port = 7777;
