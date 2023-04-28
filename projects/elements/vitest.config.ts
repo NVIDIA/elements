@@ -32,7 +32,7 @@ export default defineConfig({
     setupFiles: [resolve('./src/test/setup.ts')], // https://github.com/vitest-dev/vitest/issues/1700
     coverage: {
       reportsDirectory: resolve('./coverage'),
-      reporter: ['lcov', 'html'],
+      reporter: ['lcov', 'html', 'json-summary'],
       lines: 90,
       branches: 90,
       functions: 90,

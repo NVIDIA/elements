@@ -7,6 +7,8 @@ import styles from './time.css?inline';
 /**
  * @alpha
  * @element nve-time
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-time-documentation--page
+ * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
  */
 export class Time extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);

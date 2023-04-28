@@ -6,7 +6,6 @@ import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, Popove
 import styles from './notification.css?inline';
 
 /**
- * @alpha
  * @element nve-notification
  * @event open
  * @event close
@@ -20,6 +19,10 @@ import styles from './notification.css?inline';
  * @cssprop --min-width
  * @cssprop --width
  * @cssprop --nve-sys-layer-popover-offset
+ * @responsive false
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-notification-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
  */
 export class Notification extends LitElement {
   /**

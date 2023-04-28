@@ -11,6 +11,7 @@ import { typeSubmit } from '../controllers/type-submit.controller.js';
 /**
  * Standard button behaviors for custom elements.
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
 @typeButton<MlvBaseButton>()
 @typeAnchor<MlvBaseButton>()
