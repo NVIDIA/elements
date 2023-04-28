@@ -10,8 +10,9 @@ globalStyle.textContent = global;
 globalStyle.className = 'nve-file';
 
 /**
- * @alpha
  * @element nve-file
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-file-documentation--page
+ * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  */
 export class File extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);

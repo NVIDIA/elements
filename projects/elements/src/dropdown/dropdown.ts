@@ -6,7 +6,6 @@ import { animationFade, I18nController, PopoverAlign, popoverBaseStyles, Popover
 import styles from './dropdown.css?inline';
 
 /**
- * @alpha
  * @element nve-dropdown
  * @event open
  * @event close
@@ -22,6 +21,9 @@ import styles from './dropdown.css?inline';
  * @cssprop --nve-sys-layer-popover-arrow-padding
  * @cssprop --nve-sys-layer-popover-arrow-offset
  * @cssprop --nve-sys-layer-popover-offset
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-dropdown-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
 export class Dropdown extends LitElement {
   /**

@@ -6,7 +6,6 @@ import { attachInternals, I18nController, SupportStatus, TaskStatus, statusIcons
 import styles from './alert.css?inline';
 
 /**
- * @beta
  * @element nve-alert
  * @event close
  * @cssprop --gap
@@ -14,6 +13,9 @@ import styles from './alert.css?inline';
  * @cssprop --color
  * @cssprop --icon-color
  * @cssprop --icon-size
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-alert-documentation--page
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=76-5326&t=CAAM7yEBvG18tRRa-0
  */
 export class Alert extends LitElement {
   static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
@@ -54,7 +56,7 @@ export class Alert extends LitElement {
   render() {
     return html`
       <div internal-host>
-        ${this.status !== 'muted' ? html`<nve-icon name=${statusIcons[this.status] ?? 'dot'} .size=${statusIcons[this.status] === 'dot' ? 'sm' : undefined}></nve-icon>` : ''}
+        ${this.status !== 'muted' ? html`<nve-icon name=${statusIcons[this.status] ?? 'dot'} .size=${statusIcons[this.status] === 'dot' ? 'sm' : undefined as any}></nve-icon>` : ''}
         ${this.#prefix.length ? html`<slot name="prefix"></slot>` : ''}
         <slot></slot>
         ${this.#actions.length ? html`<slot name="actions"></slot>` : ''}
