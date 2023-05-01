@@ -23,7 +23,7 @@ export class Logo extends LitElement {
   /** visual treatment to represent a ongoing task status */
   @property({ type: String, reflect: true }) color: ColorPalette;
 
-  @property({ type: String, reflect: true }) size: 'sm' | 'lg';
+  @property({ type: String, reflect: true }) size: 'sm' | 'md' | 'lg';
 
   static styles = useStyles([styles, colorStateStyles]);
 

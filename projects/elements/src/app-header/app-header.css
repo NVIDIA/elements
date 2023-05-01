@@ -1,0 +1,78 @@
+:host {
+  width: 100%;
+}
+
+[internal-host] {
+  background: var(--nve-sys-layer-shell-background);
+  padding: 0;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
+  align-items: center;
+  padding: var(--nve-ref-space-xs) var(--nve-ref-space-sm);
+  justify-content: space-between;
+  gap: none;
+}
+
+[app-branding] {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  gap: var(--nve-ref-space-sm);
+  margin: 0;
+  min-height: 0;
+}
+
+::slotted([slot='title']),
+slot[name='title'] h2 {
+  font-family: var(--nve-ref-font-family);
+  font-size: var(--nve-ref-font-size-200);
+  font-weight: var(--nve-ref-font-weight-semibold);
+  color: var(--nve-sys-text-color);
+  white-space: initial;
+  margin: 0;
+}
+
+nav > div,
+slot {
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
+  align-items: flex-start;
+  gap: var(--nve-ref-space-xs);
+  margin: 0;
+  min-height: 0;
+}
+
+slot[name="nav-items"] {
+  margin: 0 auto 0 var(--nve-ref-space-xxl);
+}
+
+slot[name="nav-actions"] {
+  align-items: center;
+}
+
+::slotted(nve-button[slot="nav-items"]) {
+  --color: var(--nve-sys-text-muted-color);
+  --border-radius: 2px;
+}
+
+::slotted(nve-button[slot="nav-items"][selected]) {
+  --color: var(--nve-sys-text-emphasis-color);
+  --text-decoration: none;
+  --nve-sys-interaction-state-ratio-active: 0;
+}
+
+::slotted(nve-icon-button[slot="nav-items"][selected]) {
+  --color: var(--nve-sys-text-emphasis-color);
+}
+
+::slotted(nve-button[slot="nav-items"]:hover),
+::slotted(nve-button[slot="nav-items"]:focus) {
+  --text-decoration: underline;
+}

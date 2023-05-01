@@ -1,0 +1,71 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
+
+<Meta title="Elements/App Header/Documentation" parameters={{ badges: ['beta'] }} />
+
+# App Header
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/app-header/define.js';
+```
+
+```html
+<nve-app-header>
+  <nve-logo></nve-logo>
+  <span>Your App Title</span>
+  <nve-button slot="nav-items" active>Link 1</nve-button>
+  <nve-button slot="nav-items">Link 2</nve-button>
+  <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
+  <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
+  <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+</nve-app-header>
+```
+
+<Canvas>
+  <Story id="elements-app-header-examples--default" inline={false} height={400} />
+</Canvas>
+
+<LinkedHeader>App Branding</LinkedHeader>
+
+Use the default slot in `nve-logo` to create an app logo badge within the app header. Include a `<span>`
+element inside `nve-app-header` to change the default application title.
+
+<Canvas>
+  <Story id="elements-app-header-examples--app-badge" />
+</Canvas>
+
+<LinkedHeader>Nav Items</LinkedHeader>
+
+`nve-button` and `nve-icon-button` elements can be assigned to the "nav-items" slot. This will place them
+in the section of the app header where the nav items are located. It will also handle the styling for
+the nav items.
+
+The currently active nav item can be specified by adding the `active` attribute to it. In the below
+example, we have specified the second nav item to be the active one.
+
+<Canvas>
+  <Story id="elements-app-header-examples--nav-items" />
+</Canvas>
+
+<LinkedHeader>Nav Actions</LinkedHeader>
+
+`nve-icon-button` elements can be assigned to the "nav-actions" slot. This will place them
+in the section of the app header where supplemental actions are located.
+
+<Canvas>
+  <Story id="elements-app-header-examples--nav-actions" />
+</Canvas>
+
+<LinkedHeader>Themes</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-app-header-examples--light-theme" />
+  <Story id="elements-app-header-examples--dark-theme" />
+</Canvas>
+
+<Status tag={'nve-app-header'}></Status>
+
+<LinkedHeader>nve-app-header</LinkedHeader>
+<Props of="nve-app-header" />
