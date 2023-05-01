@@ -58,5 +58,5 @@ export function setActiveKeyListItem(items: NodeListOf<HTMLElement> | HTMLElemen
 
 export function initializeKeyListItems(items: NodeListOf<HTMLElement> | HTMLElement[]) {
   items.forEach(i => (i.tabIndex = -1));
-  items[0].tabIndex = 0;
+  items[0] && (items[0].tabIndex = 0);
 }

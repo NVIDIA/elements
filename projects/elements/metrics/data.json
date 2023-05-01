@@ -68,6 +68,25 @@
       "status": "stable"
     },
     {
+      "name": "mlv-app-header",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": false,
+      "vqa": false,
+      "responsive": false,
+      "themes": true,
+      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/menubar/",
+      "package": true,
+      "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-app-header-documentation--page",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30%3A35&t=DvnVUAk9yttg7lfF-1",
+      "instanceTotal": 0,
+      "projectTotal": 0,
+      "coverageTotal": 97.36,
+      "behavior": "navigation",
+      "status": "beta"
+    },
+    {
       "name": "mlv-badge",
       "unitTests": true,
       "apiReview": true,

@@ -67,7 +67,7 @@ export class MlvBaseButton extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-    /**
+  /**
    * This Boolean attribute prevents the selected state if button is part of a multi choice selection group
    * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected
    */

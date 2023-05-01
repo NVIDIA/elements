@@ -1,0 +1,78 @@
+:host {
+  width: 100%;
+}
+
+[internal-host] {
+  background: var(--mlv-sys-layer-shell-background);
+  padding: 0;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
+  align-items: center;
+  padding: var(--mlv-ref-space-xs) var(--mlv-ref-space-sm);
+  justify-content: space-between;
+  gap: none;
+}
+
+[app-branding] {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  gap: var(--mlv-ref-space-sm);
+  margin: 0;
+  min-height: 0;
+}
+
+::slotted([slot='title']),
+slot[name='title'] h2 {
+  font-family: var(--mlv-ref-font-family);
+  font-size: var(--mlv-ref-font-size-200);
+  font-weight: var(--mlv-ref-font-weight-semibold);
+  color: var(--mlv-sys-text-color);
+  white-space: initial;
+  margin: 0;
+}
+
+nav > div,
+slot {
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
+  align-items: flex-start;
+  gap: var(--mlv-ref-space-xs);
+  margin: 0;
+  min-height: 0;
+}
+
+slot[name="nav-items"] {
+  margin: 0 auto 0 var(--mlv-ref-space-xxl);
+}
+
+slot[name="nav-actions"] {
+  align-items: center;
+}
+
+::slotted(mlv-button[slot="nav-items"]) {
+  --color: var(--mlv-sys-text-muted-color);
+  --border-radius: 2px;
+}
+
+::slotted(mlv-button[slot="nav-items"][selected]) {
+  --color: var(--mlv-sys-text-emphasis-color);
+  --text-decoration: none;
+  --mlv-sys-interaction-state-ratio-active: 0;
+}
+
+::slotted(mlv-icon-button[slot="nav-items"][selected]) {
+  --color: var(--mlv-sys-text-emphasis-color);
+}
+
+::slotted(mlv-button[slot="nav-items"]:hover),
+::slotted(mlv-button[slot="nav-items"]:focus) {
+  --text-decoration: underline;
+}

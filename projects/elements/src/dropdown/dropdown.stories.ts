@@ -84,7 +84,7 @@ export const RadioGroup = {
     <mlv-radio>
       <label>Completed</label>
       <input type="radio" checked />
-      <mlv-control-message>latest completed tasts</mlv-control-message>
+      <mlv-control-message>latest completed tasks</mlv-control-message>
     </mlv-radio>
     <mlv-radio>
       <label>Failing</label>
@@ -109,7 +109,7 @@ const options = [
 ];
 
 @customElement('radio-group-interactive-demo')
-class RadioGroupInteractiveDemo extends LitElement {  
+class RadioGroupInteractiveDemo extends LitElement {
   @state() show = false;
   @state() selected = options[0];
 

@@ -90,6 +90,7 @@ export const baseButton = () => {
 <ui-button>button</ui-button>
 <ui-button pressed>pressed</ui-button>
 <ui-button expanded>expanded</ui-button>
+<ui-button selected>selected</ui-button>
 <ui-button disabled>disabled</ui-button>
 <ui-button><a href="#">link</a></ui-button>
 
