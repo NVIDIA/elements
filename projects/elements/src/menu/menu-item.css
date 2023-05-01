@@ -40,10 +40,6 @@
   --color: var(--nve-sys-interaction-selected-color);
 }
 
-:host(:--selected) {
-  --color: var(--nve-sys-interaction-selected-color);
-}
-
 :host(:--hover) {
   --color: var(--nve-sys-interaction-hover-color);
 }
@@ -66,4 +62,8 @@
 
 ::slotted(*:not(a)) {
   pointer-events: none;
+}
+
+::slotted(nve-divider) {
+  margin: 0 calc(-1 * var(--padding));
 }
