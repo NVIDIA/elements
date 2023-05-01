@@ -84,7 +84,7 @@ export const RadioGroup = {
     <nve-radio>
       <label>Completed</label>
       <input type="radio" checked />
-      <nve-control-message>latest completed tasts</nve-control-message>
+      <nve-control-message>latest completed tasks</nve-control-message>
     </nve-radio>
     <nve-radio>
       <label>Failing</label>
@@ -109,7 +109,7 @@ const options = [
 ];
 
 @customElement('radio-group-interactive-demo')
-class RadioGroupInteractiveDemo extends LitElement {  
+class RadioGroupInteractiveDemo extends LitElement {
   @state() show = false;
   @state() selected = options[0];
 
