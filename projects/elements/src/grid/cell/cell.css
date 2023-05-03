@@ -1,0 +1,29 @@
+:host {
+  --color: var(--nve-sys-layer-canvas-color);
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-500);
+  --height: var(--row-height);
+  --min-width: var(--nve-ref-size-1000);
+  --border-left: 0;
+  --border-right: 0;
+  --justify-content: start;
+  transition: box-shadow 300ms ease-in-out;
+}
+
+[internal-host] {
+  background: color-mix(in oklab, var(--background, var(--nve-sys-layer-canvas-background)) 100%, var(--nve-sys-interaction-state-mix) var(--interaction-state-ratio, 0%));
+  color: var(--color);
+  padding: var(--padding);
+  height: var(--height);
+  font-size: var(--font-size);
+  min-width: var(--min-width);
+  border-left: var(--border-left);
+  border-right: var(--border-right);
+  justify-content: var(--justify-content);
+  display: flex;
+  align-items: center;
+  outline-offset: -2px;
+}
+
+::slotted(nve-icon-button) {
+  --border-radius: 0;
+}

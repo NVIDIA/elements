@@ -153,7 +153,11 @@
   &:host(:--disabled) {
     --color: var(--nve-sys-interaction-disabled-color);
     --background: transparent;
-    --text-decoration: none;
+    --text-decoration: none !important;
+
+    [interaction-state] {
+      --nve-sys-interaction-state-ratio: 0;
+    }
   }
 
   &:host(:--selected) {

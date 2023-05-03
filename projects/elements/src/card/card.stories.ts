@@ -206,6 +206,18 @@ export const Tabs = {
   `
 }
 
+export const ContainerFill = {
+  render: () => html`
+    <div nve-theme="root">
+      <nve-card container="fill">
+        <nve-card-content>
+          Container Fill
+        </nve-card-content>
+      </nve-card>
+    </div>
+  `
+}
+
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="pad:md align:center">

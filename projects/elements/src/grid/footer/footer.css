@@ -1,0 +1,21 @@
+:host {
+  --background: var(--nve-sys-layer-container-background);
+  --color: var(--nve-sys-layer-canvas-color);
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-500);
+  --height: var(--nve-ref-size-1000);
+  contain: initial;
+}
+
+[internal-host] {
+  border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  background: var(--background);
+  color: var(--color);
+  padding: var(--padding);
+  height: var(--height);
+  display: flex;
+  align-items: center;
+}
+
+::slotted(nve-pagination) {
+  margin-inline: auto calc(-1 * var(--nve-ref-size-300));
+}

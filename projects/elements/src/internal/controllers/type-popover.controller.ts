@@ -95,6 +95,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     this.#toggleLightDismiss();
     this.#calculatePosition();
     this.#closeTimeout();
+    this.#updateAnchorState();
   }
 
   #lightDismiss = ((e: PointerEvent) => {
@@ -136,6 +137,14 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
       } else if (this.host.hidden) {
         this.#dialog.close();
       }
+    }
+  }
+
+  #updateAnchorState() {
+    if (this.host.hidden) {
+      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.delete('--anchor-active');
+    } else {
+      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.add('--anchor-active');
     }
   }
 

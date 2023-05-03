@@ -1,0 +1,48 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Column Action" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Column Action
+
+<Metrics tag="nve-grid-column"></Metrics>
+
+Column actions can be created by using the `nve-icon-button` to trigger dropdowns or panels to reveal additional actions to the user.
+
+```html
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column>
+      Column 1 <nve-icon-button slot="actions"></nve-icon-button>
+    </nve-grid-column>
+    <nve-grid-column>Column 2</nve-grid-column>
+    <nve-grid-column>Column 3</nve-grid-column>
+    <nve-grid-column>Column 4</nve-grid-column>
+  </nve-grid-header>
+    <nve-grid-row>
+      ...
+    </nve-grid-row>
+  ...
+</nve-grid>
+```
+
+## Column Action
+
+<Canvas>
+  <Story id="elements-data-grid-examples--column-action" inline={false} height={460} />
+</Canvas>
+
+<LinkedHeader>nve-grid-column</LinkedHeader>
+<Props of="nve-grid-column" />
+
+<LinkedHeader>nve-grid</LinkedHeader>
+<Props of="nve-grid" />
+
+<LinkedHeader>nve-grid-header</LinkedHeader>
+<Props of="nve-grid-header" />
+
+<LinkedHeader>nve-grid-row</LinkedHeader>
+<Props of="nve-grid-row" />
+
+<LinkedHeader>nve-grid-cell</LinkedHeader>
+<Props of="nve-grid-cell" />

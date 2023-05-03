@@ -1,0 +1,43 @@
+
+:host {
+  width: fit-content;
+  display: inline-flex;
+  contain: initial;
+}
+
+[internal-host] {
+  display: flex;
+  align-items: center;
+}
+
+label {
+  color: var(--nve-sys-text-muted-color);
+  font-size: var(--nve-ref-font-size-200);
+  margin-inline: var(--nve-ref-size-100);
+  white-space: nowrap;
+}
+
+.select-label {
+  background: var(--nve-sys-interaction-field-background);
+  color: var(--nve-sys-interaction-field-color);
+  padding: 0 var(--nve-ref-size-200);
+  position: absolute;
+  inset: 2px;
+  display: flex;
+  place-items: center;
+  pointer-events: none;
+}
+
+nve-input {
+  margin-inline-end: var(--nve-ref-size-200);
+  --width: 6ch;
+}
+
+nve-select {
+  margin-inline-end: var(--nve-ref-size-200);
+  --width: 10ch;
+}
+
+nve-icon-button:--disabled {
+  --nve-sys-interaction-state-ratio-disabled: 0 !important;
+}

@@ -1,0 +1,63 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Column Alignment" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Column Alignment
+
+<Metrics tag="nve-grid-column"></Metrics>
+
+Column alignments can be controlled using the `column-align` attribute or `columnAlign` property. Column alignment can be individually controlled.
+
+```html
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column column-align="left">Column 1</nve-grid-column>
+    <nve-grid-column column-align="right">Column 2</nve-grid-column>
+    <nve-grid-column column-align="center">Column 3</nve-grid-column>
+    <nve-grid-column>Column 4</nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>cell 1-1</nve-grid-cell>
+    <nve-grid-cell>cell 1-2</nve-grid-cell>
+    <nve-grid-cell>cell 1-3</nve-grid-cell>
+    <nve-grid-cell>cell 1-4</nve-grid-cell>
+  </nve-grid-row>
+  ...
+</nve-grid>
+```
+
+## Column Align Center
+
+<Canvas>
+  <Story id="elements-data-grid-examples--column-align-center" />
+</Canvas>
+
+
+## Column Align End
+
+<Canvas>
+  <Story id="elements-data-grid-examples--column-align-end" />
+</Canvas>
+
+
+## Column Align Start (default)
+
+<Canvas>
+  <Story id="elements-data-grid-examples--column-align-start" />
+</Canvas>
+
+<LinkedHeader>nve-grid-column</LinkedHeader>
+<Props of="nve-grid-column" />
+
+<LinkedHeader>nve-grid</LinkedHeader>
+<Props of="nve-grid" />
+
+<LinkedHeader>nve-grid-header</LinkedHeader>
+<Props of="nve-grid-header" />
+
+<LinkedHeader>nve-grid-row</LinkedHeader>
+<Props of="nve-grid-row" />
+
+<LinkedHeader>nve-grid-cell</LinkedHeader>
+<Props of="nve-grid-cell" />

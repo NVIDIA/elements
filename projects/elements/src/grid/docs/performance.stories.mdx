@@ -1,0 +1,66 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Performance" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Performance
+
+<Metrics tag="nve-grid"></Metrics>
+
+The grid leverages several approaches to maximize render performance including [CSS Contain](https://developer.mozilla.org/en-US/docs/Web/CSS/contain) and [Element Internal States](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states)
+Performance is tied to the type of elements rendered within the grid iteself.
+Average performance of 1000 rows and 4000 cells is around 250-300ms in a typical
+application. Additional elements within cells will add the the overall render time.
+Use pagination or batch rendering to improve overal initial render performance.
+
+<Story id="elements-data-grid-examples--performance" />
+
+
+## Batch Rendering
+
+Batch rendering allows rows to dynamically be added for improved performance. The grid will dispatch a `scrollend` event
+when the user has scrolled to the end of the current scroll box. When the even occurs addtional rows can be appended.
+
+<Story id="elements-data-grid-examples--batch-render" />
+
+## Lit <svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg>
+
+```typescript
+@customElement('batch-render-demo')
+class BatchRenderDemo extends LitElement {
+  @state() rows = [];
+
+  render() {
+    return html`
+      <nve-grid style="--scroll-height: 400px" @scrollend=${() => this.#loadNextGroup()}>
+        ...
+        ${this.rows.map(row => html`<nve-grid-row>...</nve-grid-row>`)}
+      </nve-grid>
+    `
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.#loadNextGroup();
+  }
+
+  #loadNextGroup() {
+    this.rows = [...this.rows, ...getNextBatch()];
+  }
+}
+```
+
+<LinkedHeader>nve-grid</LinkedHeader>
+<Props of="nve-grid" />
+
+<LinkedHeader>nve-grid-header</LinkedHeader>
+<Props of="nve-grid-header" />
+
+<LinkedHeader>nve-grid-column</LinkedHeader>
+<Props of="nve-grid-column" />
+
+<LinkedHeader>nve-grid-row</LinkedHeader>
+<Props of="nve-grid-row" />
+
+<LinkedHeader>nve-grid-cell</LinkedHeader>
+<Props of="nve-grid-cell" />

@@ -4,6 +4,8 @@ import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@elements/elements/test';
 import { PopoverAlign, PopoverPosition, TypePopoverController } from '@elements/elements/internal';
+import type { Button } from '@elements/elements/button';
+import '@elements/elements/button/define.js';
 
 @customElement('type-popover-controller-test-element')
 class TypePopoverControllerTestElement extends LitElement {
@@ -68,7 +70,7 @@ class TypePopoverControllerTestElement extends LitElement {
   render() {
     return html`
       <dialog hidden>
-        <button @click=${() => this.typePopoverController.close()}>Close</button>
+        <nve-button @click=${() => this.typePopoverController.close()}>Close</nve-button>
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
       </dialog>
@@ -79,18 +81,19 @@ class TypePopoverControllerTestElement extends LitElement {
 describe('type-popover.controller', () => {
   let element: TypePopoverControllerTestElement;
   let dialog: HTMLDialogElement;
-  let button: HTMLButtonElement;
+  let button: Button;
   let fixture: HTMLElement;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <button id="btn">anchor</button>
+    <nve-button id="btn">anchor</nve-button>
     <type-popover-controller-test-element .anchor=${'btn'} .trigger=${'btn'} hidden></type-popover-controller-test-element>
     `);
     element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
-    button = fixture.querySelector('button');
+    button = fixture.querySelector('nve-button');
     dialog = element.shadowRoot.querySelector('dialog');
     await element.updateComplete;
+    await button.updateComplete;
   });
 
   afterEach(() => {
@@ -121,11 +124,24 @@ describe('type-popover.controller', () => {
     expect(element.inert).toBe(false);
   });
 
+  it('should update :--anchor-active state on anchor', async () => {
+    await elementIsStable(element);
+    expect(button.matches('[state--anchor-active]')).toBe(false);
+
+    // happy-dom not trigger attribute observer
+    // element.setAttribute('hidden', '');
+    // element.hidden = true;
+    // element.requestUpdate();
+    // await elementIsStable(element);
+    // await elementIsStable(button);
+    // expect(button.matches('[state--anchor-active]')).toBe(true);
+  });
+
   it('should trigger close event when associated trigger is activated', async () => {
     element.hidden = false;
     await elementIsStable(element);
     const event = untilEvent(element, 'close');
-    const closeBtn = dialog.querySelector('button');
+    const closeBtn = dialog.querySelector('nve-button');
     emulateClick(closeBtn);
     expect((await event).target).toBe(element);
   });
