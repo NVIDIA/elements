@@ -66,3 +66,21 @@ nve-icon-button,
 :host(:--disabled) {
   --border: var(--nve-ref-border-width-md) solid transparent;
 }
+
+:host([container="flat"]) {
+  --border-radius: 0;
+  --box-shadow: none;
+  --background: inherit;
+}
+
+:host([container="flat"][nve-control]:focus-within) [input] {
+  outline: 0 !important;
+}
+
+:host([container="flat"]) [input] {
+  border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
+}
+
+:host([container="flat"][nve-control]:focus-within) [input] {
+  border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
+}

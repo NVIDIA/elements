@@ -210,3 +210,7 @@ export function waitForScrollEnd(element: HTMLElement) {
     tick(0);
   });
 }
+
+export function endOfScrollBox(element: HTMLElement, offset = 0) {
+  return element.scrollTop + element.offsetHeight + offset >= element.scrollHeight;
+}

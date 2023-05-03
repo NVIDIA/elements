@@ -1,0 +1,108 @@
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@elements/elements/test';
+import type { IconButton } from '@elements/elements/icon-button';
+import { Pagination } from '@elements/elements/pagination';
+import '@elements/elements/pagination/define.js';
+
+describe('nve-pagination', () => {
+  let fixture: HTMLElement;
+  let element: Pagination;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-pagination name="page" .value=${1} .step=${10} .items=${100}></nve-pagination>
+    `);
+    element = fixture.querySelector('nve-pagination');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get('nve-pagination')).toBeDefined();
+  });
+
+  it('should have a role of toolbar', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('toolbar');
+  });
+
+  it('should set the select label', async () => {
+    expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('1-10');
+
+    element.value = 5;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('40-50');
+  });
+
+  it('should apply aria labels to buttons and select', async () => {
+    element.skippable = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector<HTMLSelectElement>('select').ariaLabel).toBe('current page');
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-left"]').ariaLabel).toBe('previous');
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-right"]').ariaLabel).toBe('next');
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="start"]').ariaLabel).toBe('start');
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="end"]').ariaLabel).toBe('end');
+  });
+
+  it('should disable previous and start buttons if at start of pages', async () => {
+    element.skippable = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-left"]').disabled).toBe(true);
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="start"]').disabled).toBe(true);
+  });
+
+  it('should disable next and end buttons if at end of pages', async () => {
+    element.skippable = true;
+    element.value = 10;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('90-100');
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-right"]').disabled).toBe(true);
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="end"]').disabled).toBe(true);
+  });
+
+  it('should emit the next page when clicking the next and previous button', async () => {
+    await elementIsStable(element);
+    const nextEvent = untilEvent(element, 'change');
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-right"]'));
+    await nextEvent;
+    expect(element.value).toBe(2);
+
+    const previousEvent = untilEvent(element, 'change');
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-left"]'));
+    await previousEvent;
+    expect(element.value).toBe(1);
+  });
+
+  it('should emit the next page when clicking the start and end button', async () => {
+    element.skippable = true;
+    await elementIsStable(element);
+    const startEvent = untilEvent(element, 'change');
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="end"]'));
+    await startEvent;
+    expect(element.step).toBe(10);
+    expect(element.value).toBe(10);
+    expect(element.items).toBe(100);
+
+    const previousEvent = untilEvent(element, 'change');
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="start"]'));
+    await previousEvent;
+    expect(element.value).toBe(1);
+  });
+
+  it('should set a form value when value changes', async () => {
+    await elementIsStable(element);
+    // const form = fixture.querySelector('form');
+    expect(element.value).toBe(1);
+    // expect(Object.fromEntries(new FormData(form)).page).toBe('1'); // happy-dom polyfill issue
+
+    const nextEvent = untilEvent(element, 'change');
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-right"]'));
+    await nextEvent;
+    expect(element.value).toBe(2);
+    // expect(Object.fromEntries(new FormData(form)).page).toBe('2'); // happy-dom polyfill issue
+  });
+});
