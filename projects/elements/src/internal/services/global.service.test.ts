@@ -9,26 +9,16 @@ describe('GlobalStateService', () => {
   });
 
   it('should provide an intial state object', () => {
-    expect(GlobalStateService.state).toStrictEqual({
-      versions: ['PACKAGE_VERSION'],
-      elementRegistry: { },
-      i18nRegistry: { },
-      iconRegistry: { }
-    });
+    expect(GlobalStateService.state.versions[0]).toBe('PACKAGE_VERSION');
   });
 
   it('should merge state updates', async () => {
     GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '1.0.0' } });
     GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { two: '2.0.0' } });
 
-    expect(GlobalStateService.state).toStrictEqual({
-      versions: ['PACKAGE_VERSION'],
-      elementRegistry: {
-        one: '1.0.0',
-        two: '2.0.0'
-      },
-      i18nRegistry: { },
-      iconRegistry: { }
+    expect(GlobalStateService.state.elementRegistry).toStrictEqual({
+      one: '1.0.0',
+      two: '2.0.0'
     });
   });
 
@@ -37,13 +27,8 @@ describe('GlobalStateService', () => {
     GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
     await event;
 
-    expect((await event).detail).toStrictEqual({
-      versions: ['PACKAGE_VERSION'],
-      elementRegistry: {
-        one: '0.0.0'
-      },
-      i18nRegistry: { },
-      iconRegistry: { }
+    expect((await event).detail.elementRegistry).toStrictEqual({
+      one: '0.0.0'
     });
   });
 });

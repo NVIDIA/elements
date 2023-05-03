@@ -1,0 +1,45 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Placeholder" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Placeholder
+
+<Metrics tag="nve-grid-placeholder"></Metrics>
+
+Placeholder can be used to display a message when data is being loaded for the grid.
+
+```html
+<nve-grid style="--scroll-height: 333px">
+  <nve-grid-header>
+    <nve-grid-column></nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-placeholder>
+    Loading...
+  </nve-grid-placeholder>
+</nve-grid>
+```
+
+## Placeholder
+
+<Canvas>
+  <Story id="elements-data-grid-examples--placeholder" />
+</Canvas>
+
+<LinkedHeader>nve-grid-placeholder</LinkedHeader>
+<Props of="nve-grid-placeholder" />
+
+<LinkedHeader>nve-grid</LinkedHeader>
+<Props of="nve-grid" />
+
+<LinkedHeader>nve-grid-header</LinkedHeader>
+<Props of="nve-grid-header" />
+
+<LinkedHeader>nve-grid-column</LinkedHeader>
+<Props of="nve-grid-column" />
+
+<LinkedHeader>nve-grid-row</LinkedHeader>
+<Props of="nve-grid-row" />
+
+<LinkedHeader>nve-grid-cell</LinkedHeader>
+<Props of="nve-grid-cell" />

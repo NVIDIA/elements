@@ -1,0 +1,53 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Row Action" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Row Action
+
+<Metrics tag="nve-grid-row"></Metrics>
+
+Row actions enable addtional user actions specific to a given row. Place a `nve-icon-button` at the end
+of the grid row for actions.
+
+```html
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column>Column 1</nve-grid-column>
+    <nve-grid-column>Column 2</nve-grid-column>
+    <nve-grid-column>Column 3</nve-grid-column>
+    <nve-grid-column width="max-content" position="fixed" aria-label="additonal actions"></nve-grid-column>
+  </nve-grid-header>
+  ...
+  <nve-grid-row>
+    <nve-grid-cell>Cell 1-1</nve-grid-cell>
+    <nve-grid-cell>Cell 1-2</nve-grid-cell>
+    <nve-grid-cell>Cell 1-3</nve-grid-cell>
+    <nve-grid-cell>
+      <nve-icon-button interaction="ghost" icon-name="additional-actions" aria-label="row 1 actions"></nve-icon-button>
+    </nve-grid-cell>
+  </nve-grid-row>
+  ...
+</nve-grid>
+```
+
+## Action
+
+<Canvas>
+  <Story id="elements-data-grid-examples--row-action" />
+</Canvas>
+
+<LinkedHeader>nve-grid</LinkedHeader>
+<Props of="nve-grid" />
+
+<LinkedHeader>nve-grid-header</LinkedHeader>
+<Props of="nve-grid-header" />
+
+<LinkedHeader>nve-grid-column</LinkedHeader>
+<Props of="nve-grid-column" />
+
+<LinkedHeader>nve-grid-row</LinkedHeader>
+<Props of="nve-grid-row" />
+
+<LinkedHeader>nve-grid-cell</LinkedHeader>
+<Props of="nve-grid-cell" />

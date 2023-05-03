@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, scrollBarWidth, hasScrollBar } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, scrollBarWidth, hasScrollBar, endOfScrollBox } from '@elements/elements/internal';
 
 @customElement('test-element')
 class TestComponent extends LitElement {
@@ -393,5 +393,21 @@ describe('hasScrollBar(): ', () => {
     innerDiv.style.width = '1000px';
 
     expect(hasScrollBar(div)).toBe(true);
+  });
+});
+
+describe('endOfScrollBox(): ', () => {
+  it('should determine if the scroll position is at the end of the scroll box', () => {
+    const div = document.createElement('div');
+    const innerDiv = document.createElement('div');
+    div.style.width = '500px';
+    div.style.width = '500px';
+    div.style.overflow = 'auto';
+    innerDiv.style.width = '1000px';
+    innerDiv.style.width = '1000px';
+
+    div.scrollTop = 1;
+    (div.scrollHeight as any) = 0; // read only in browser but hack for happy-dom
+    expect(endOfScrollBox(div)).toBe(true);
   });
 });

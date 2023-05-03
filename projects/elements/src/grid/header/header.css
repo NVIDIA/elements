@@ -1,0 +1,18 @@
+:host {
+  --background: var(--nve-sys-layer-container-accent-background);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  position: sticky;
+  z-index: 100;
+  top: 0;
+}
+
+[internal-host] {
+  grid-auto-columns: var(--grid-auto-columns);
+  grid-auto-flow: var(--grid-auto-flow);
+  grid-template-columns: var(--grid-template-column);
+  border-bottom: var(--border-bottom);
+  background: var(--background);
+  display: grid;
+  min-width: fit-content;
+  padding-right: 1px;
+}

@@ -1,0 +1,62 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid
+
+<Metrics tag="nve-grid"></Metrics>
+
+<figure>
+  <blockquote cite="https://www.w3.org/WAI/ARIA/apg/patterns/grid/">
+    A grid widget is a container that enables users to navigate the information or
+    interactive elements it contains using directional navigation keys, such as arrow keys,
+    Home, and End. As a generic container widget that offers flexible keyboard navigation,
+    it can serve a wide variety of needs. It can be used for purposes as simple as grouping
+    a collection of checkboxes or navigation links or as complex as creating a
+    full-featured spreadsheet application.
+  </blockquote>
+  <figcaption>- ARIA Authoring Practices Guide</figcaption>
+</figure>
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/grid/define.js';
+```
+
+```html
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column>column 1</nve-grid-column>
+    <nve-grid-column>column 2</nve-grid-column>
+    <nve-grid-column>column 3</nve-grid-column>
+    <nve-grid-column>column 4</nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>cell 1-1</nve-grid-cell>
+    <nve-grid-cell>cell 1-2</nve-grid-cell>
+    <nve-grid-cell>cell 1-3</nve-grid-cell>
+    <nve-grid-cell>cell 1-4</nve-grid-cell>
+  </nve-grid-row>
+  ...
+</nve-grid>
+```
+
+<Canvas>
+  <Story id="elements-data-grid-examples--default" />
+</Canvas>
+
+<Status tag={'nve-grid'}></Status>
+
+<LinkedHeader>nve-grid</LinkedHeader>
+<Props of="nve-grid" />
+
+<LinkedHeader>nve-grid-header</LinkedHeader>
+<Props of="nve-grid-header" />
+
+<LinkedHeader>nve-grid-row</LinkedHeader>
+<Props of="nve-grid-row" />
+
+<LinkedHeader>nve-grid-cell</LinkedHeader>
+<Props of="nve-grid-cell" />

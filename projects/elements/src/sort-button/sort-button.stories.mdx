@@ -1,0 +1,36 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../docs/utils.mdx';
+
+<Meta title="Elements/Sort Button/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Sort Button
+
+<Metrics tag="nve-sort-button"></Metrics>
+
+The sort button emits a `sort` event when clicked that provides the current and next sort values.
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/sort-button/define.js';
+```
+
+```html
+<nve-sort-button></nve-sort-button>
+```
+
+<Canvas>
+  <Story id="elements-sort-button-examples--default" />
+</Canvas>
+
+<LinkedHeader>Themes</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-sort-button-examples--light-theme" />
+  <Story id="elements-sort-button-examples--dark-theme" />
+</Canvas>
+
+<Status tag="nve-sort-button"></Status>
+
+<LinkedHeader>nve-sort-button</LinkedHeader>
+<Props of="nve-sort-button" />
