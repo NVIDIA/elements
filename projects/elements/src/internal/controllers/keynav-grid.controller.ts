@@ -1,5 +1,5 @@
 import { ReactiveController, ReactiveElement } from 'lit';
-import { onChildListMutation } from '../utils/events.js';
+import { onChildListMutation, throttle } from '../utils/events.js';
 import { validKeyNavigationCode, isContextMenuClick, getFlattenedDOMTree, getFlattenedFocusableItems, KeynavCode } from '../utils/dom.js';
 import { focusElement, getActiveElement, initializeKeyListItems, setActiveKeyListItem, isSimpleFocusable } from '../utils/focus.js';
 
@@ -56,7 +56,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     this.#config.grid.addEventListener('keyup', (e: KeyboardEvent) => this.#updateCellActivation(e));
     this.#config.grid.addEventListener('keydown', (e: KeyboardEvent) => this.#keynavCell(e));
     this.#config.grid.addEventListener('mouseup', (e: MouseEvent) => this.#clickCell(e));
-    this.#observers.push(onChildListMutation(this.host, () => initializeKeyListItems(this.#hostCells)));
+    this.#observers.push(onChildListMutation(this.host, throttle(() => initializeKeyListItems(this.#hostCells), 500)));
   }
 
   hostDisconnected() {

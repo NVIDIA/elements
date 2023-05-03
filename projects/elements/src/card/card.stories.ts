@@ -206,6 +206,18 @@ export const Tabs = {
   `
 }
 
+export const ContainerFill = {
+  render: () => html`
+    <div mlv-theme="root">
+      <mlv-card container="fill">
+        <mlv-card-content>
+          Container Fill
+        </mlv-card-content>
+      </mlv-card>
+    </div>
+  `
+}
+
 export const LightTheme = {
   render: () => html`
 <div mlv-theme="root light" mlv-layout="pad:md align:center">

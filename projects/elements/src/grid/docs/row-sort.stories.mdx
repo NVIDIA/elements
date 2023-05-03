@@ -1,0 +1,78 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Row Sort" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Row Sort
+
+<Metrics tag="mlv-grid-row"></Metrics>
+
+Sort can be set via the `sort` property and `sort` event on the `mlv-sort-button`.
+The grid sort API follows the [ARIA sort spec](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)
+and automatically will set the appropriate accessibility related attributes to convey the current sorting state.
+
+```html
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column>
+      Column 1 <mlv-sort-button sort="none"></mlv-sort-button>
+    </mlv-grid-column>
+    <mlv-grid-column>Column 2</mlv-grid-column>
+    <mlv-grid-column>Column 3</mlv-grid-column>
+    <mlv-grid-column>Column 4</mlv-grid-column>
+  </mlv-grid-header>
+  <mlv-grid-row>
+    <mlv-grid-cell>cell 1-1</mlv-grid-cell>
+    <mlv-grid-cell>cell 1-2</mlv-grid-cell>
+    <mlv-grid-cell>cell 1-3</mlv-grid-cell>
+    <mlv-grid-cell>cell 1-4</mlv-grid-cell>
+  </mlv-grid-row>
+  ...
+</mlv-grid>
+```
+
+<Story id="elements-data-grid-examples--row-sort-interactive" />
+
+## Lit <svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg>
+
+```typescript
+class RowSortDemo extends LitElement {
+  @state() sort: 'none' | 'ascending' | 'descending' = 'none';
+
+  get items() {
+    // application sort logic
+  }
+
+  render() {
+    return html`
+      <mlv-grid>
+        <mlv-grid-header>
+        ${Object.entries(this.items[0]).map(([, column], i) => html`
+          <mlv-grid-column>
+            ${column.label} ${i === 0 ? html`<mlv-sort-button .sort=${this.sort} @sort=${e => this.sort = e.detail.next}></mlv-sort-button>` : html``}
+          </mlv-grid-column>`)}
+        </mlv-grid-header>
+        ${this.items.map(row => html`
+        <mlv-grid-row>
+          ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+        </mlv-grid-row>`)}
+      </mlv-grid>
+    `
+  }
+}
+```
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<Props of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<Props of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<Props of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<Props of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<Props of="mlv-grid-cell" />

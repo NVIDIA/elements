@@ -1,0 +1,48 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Column Action" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Column Action
+
+<Metrics tag="mlv-grid-column"></Metrics>
+
+Column actions can be created by using the `mlv-icon-button` to trigger dropdowns or panels to reveal additional actions to the user.
+
+```html
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column>
+      Column 1 <mlv-icon-button slot="actions"></mlv-icon-button>
+    </mlv-grid-column>
+    <mlv-grid-column>Column 2</mlv-grid-column>
+    <mlv-grid-column>Column 3</mlv-grid-column>
+    <mlv-grid-column>Column 4</mlv-grid-column>
+  </mlv-grid-header>
+    <mlv-grid-row>
+      ...
+    </mlv-grid-row>
+  ...
+</mlv-grid>
+```
+
+## Column Action
+
+<Canvas>
+  <Story id="elements-data-grid-examples--column-action" inline={false} height={460} />
+</Canvas>
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<Props of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<Props of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<Props of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<Props of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<Props of="mlv-grid-cell" />

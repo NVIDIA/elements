@@ -1,0 +1,64 @@
+import { html, LitElement, PropertyValues } from 'lit';
+import { useStyles, attachInternals } from '@elements/elements/internal';
+import type { GridColumn } from '@elements/elements/grid';
+import styles from './header.css?inline';
+
+/**
+ * @element mlv-grid-header
+ * @slot - default slot for content
+ * @cssprop --background
+ * @cssprop --border-bottom
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-grid-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
+ * @stable false
+ * @responsive false
+ */
+export class GridHeader extends LitElement {
+  static styles = useStyles([styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-grid-header',
+    version: 'PACKAGE_VERSION'
+  };
+
+  static elementDefinitions = {
+
+  };
+
+  /** @private */
+  declare _internals: ElementInternals;
+
+  get #columns() {
+    return Array.from(this.querySelectorAll<GridColumn>('mlv-grid-column'))
+  }
+
+  render() {
+    return html`
+      <div internal-host>
+        <slot @slotchange=${() => this.#computeColumnWidths()}></slot>
+      </div>
+    `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    attachInternals(this);
+    this._internals.role = 'row';
+    this.#columns.forEach((c, i) => c.ariaColIndex = `${i + 1}`);
+    this.addEventListener('mlv-grid-column-resize', () => this.#computeColumnWidths());
+  }
+
+  async firstUpdated(props: PropertyValues<this>) {
+    super.firstUpdated(props);
+    await this.updateComplete;
+    this.#computeColumnWidths();
+  }
+
+  async #computeColumnWidths() {
+    await this.updateComplete;
+    this.parentElement.style.setProperty('--grid-auto-flow', 'initial');
+    this.parentElement.style.setProperty('--grid-template-column', this.#columns.map((_, i) => `var(--c${i})`).join(' '));
+    this.#columns.map((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width: '1fr'));
+  }
+}

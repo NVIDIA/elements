@@ -49,6 +49,7 @@ export class MenuItem extends MlvBaseButton {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'menuitem';
+    this.type = 'button';
     appendRootNodeStyle(this, globalStyles);
   }
 }

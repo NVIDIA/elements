@@ -66,3 +66,21 @@ mlv-icon-button,
 :host(:--disabled) {
   --border: var(--mlv-ref-border-width-md) solid transparent;
 }
+
+:host([container="flat"]) {
+  --border-radius: 0;
+  --box-shadow: none;
+  --background: inherit;
+}
+
+:host([container="flat"][mlv-control]:focus-within) [input] {
+  outline: 0 !important;
+}
+
+:host([container="flat"]) [input] {
+  border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
+}
+
+:host([container="flat"][mlv-control]:focus-within) [input] {
+  border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-emphasis);
+}

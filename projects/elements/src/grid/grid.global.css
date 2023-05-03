@@ -1,0 +1,37 @@
+
+mlv-grid-row:has(mlv-grid-cell:first-child mlv-radio > input:checked) mlv-grid-row,
+mlv-grid-row:has(mlv-grid-cell:first-child mlv-checkbox > input:checked) mlv-grid-row,
+mlv-grid-row:has(mlv-grid-cell:first-child mlv-radio > input:checked) mlv-grid-cell,
+mlv-grid-row:has(mlv-grid-cell:first-child mlv-checkbox > input:checked) mlv-grid-cell {
+  --interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
+}
+
+mlv-grid:has(mlv-grid-cell:first-child mlv-radio),
+mlv-grid:has(mlv-grid-cell:first-child mlv-checkbox) {
+  --grid-auto-columns: 36px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+
+mlv-grid-column[width='max-content'] {
+  --padding: var(--mlv-ref-size-300);
+}
+
+mlv-grid-cell:has(> mlv-icon-button) {
+  --padding: var(--mlv-ref-size-100);
+}
+
+mlv-grid-cell:has(> mlv-checkbox),
+mlv-grid-cell:has(> mlv-radio) {
+  --padding: var(--mlv-ref-size-300);
+}
+
+mlv-grid:has(mlv-bulk-actions:not([hidden]))::part(scrollbox) {
+  padding-bottom: var(--mlv-ref-size-1000);
+}
+
+mlv-grid-column > mlv-sort-button + mlv-icon-button {
+  margin-inline-start: initial;
+}
+
+mlv-grid-cell:focus-within > a {
+  box-shadow: 0 0 0 2px Highlight; /* programatic focus does not trigger standard outline style */
+}

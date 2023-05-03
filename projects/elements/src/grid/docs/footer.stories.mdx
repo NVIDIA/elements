@@ -1,0 +1,59 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Footer" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Footer
+
+<Metrics tag="mlv-grid-footer"></Metrics>
+
+Grid footer can be used to display contextual information or additonal user actions such as pagination.
+
+```html
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column>Column 1</mlv-grid-column>
+    <mlv-grid-column>Column 2</mlv-grid-column>
+    <mlv-grid-column>Column 3</mlv-grid-column>
+    <mlv-grid-column>Column 4</mlv-grid-column>
+  </mlv-grid-header>
+  <mlv-grid-row>
+    <mlv-grid-cell>Cell 1-1</mlv-grid-cell>
+    <mlv-grid-cell>Cell 1-2</mlv-grid-cell>
+    <mlv-grid-cell>Cell 1-3</mlv-grid-cell>
+    <mlv-grid-cell>Cell 1-4</mlv-grid-cell>
+  </mlv-grid-row>
+  ...
+  <mlv-grid-footer>footer content</mlv-grid-footer>
+</mlv-grid>
+```
+
+## Footer
+
+<Canvas>
+  <Story id="elements-data-grid-examples--footer" />
+</Canvas>
+
+## Scrollbar
+
+<Canvas>
+  <Story id="elements-data-grid-examples--footer-scrollbar" />
+</Canvas>
+
+<LinkedHeader>mlv-grid-footer</LinkedHeader>
+<Props of="mlv-grid-footer" />
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<Props of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<Props of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<Props of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<Props of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<Props of="mlv-grid-cell" />

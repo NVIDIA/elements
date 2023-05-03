@@ -1,0 +1,51 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Card" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Card
+
+<Metrics tag="mlv-grid"></Metrics>
+
+Grid can be nested in Cards for various UI patterns such as card tab groups. Use the `container="flat"` attribute to
+enable proper styling of the grid when nested within a card.
+
+```html
+<mlv-card>
+  <mlv-card-header>
+    <div slot="title">Data Grid</div>
+    <div slot="subtitle">Card Example</div>
+    <mlv-icon-button slot="header-action" icon-name="filter-outline"></mlv-icon-button>
+  </mlv-card-header>
+  <mlv-grid container="flat">
+    ...
+  </mlv-grid>
+</mlv-card>
+```
+
+## Card
+
+<Canvas>
+  <Story id="elements-data-grid-examples--card" />
+</Canvas>
+
+## Card Tabs
+
+<Canvas>
+  <Story id="elements-data-grid-examples--card-tabs" />
+</Canvas>
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<Props of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<Props of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<Props of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<Props of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<Props of="mlv-grid-cell" />

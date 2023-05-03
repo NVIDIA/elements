@@ -1,0 +1,36 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../docs/utils.mdx';
+
+<Meta title="Elements/Bulk Actions/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Bulk Actions
+
+<Metrics tag="mlv-bulk-actions"></Metrics>
+
+Bulk Actions are used for selecting and running an action on one to many selections by the user.
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/bulk-actions/define.js';
+```
+
+```html
+<mlv-bulk-actions></mlv-bulk-actions>
+```
+
+<Canvas>
+  <Story id="elements-bulk-actions-examples--default" />
+</Canvas>
+
+<LinkedHeader>Themes</LinkedHeader>
+
+<Canvas columns={2}>
+  <Story id="elements-bulk-actions-examples--light-theme" />
+  <Story id="elements-bulk-actions-examples--dark-theme" />
+</Canvas>
+
+<Status tag="mlv-bulk-actions"></Status>
+
+<LinkedHeader>mlv-badge</LinkedHeader>
+<Props of="mlv-bulk-actions" />

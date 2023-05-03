@@ -1,0 +1,46 @@
+:host {
+  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-200);
+  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-200);
+  --background: var(--mlv-sys-layer-overlay-background);
+  --padding: var(--mlv-ref-size-200);
+  --gap: var(--mlv-ref-size-200);
+  --color: var(--mlv-sys-layer-canvas-color);
+  --border-radius: var(--mlv-ref-border-radius-md);
+  --box-shadow: var(--mlv-ref-shadow-300);
+  --border-bottom: none;
+  --height: var(--mlv-ref-size-1000);
+  --font-size: var(--mlv-ref-font-size-200);
+  display: block;
+  width: 100%;
+}
+
+[internal-host] {
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border-bottom: var(--border-bottom);
+  background: var(--background);
+  color: var(--color);
+  height: var(--height);
+  font-size: var(--font-size);
+  gap: var(--gap);
+  line-height: 0;
+  display: flex;
+  place-items: center;
+}
+
+::slotted(mlv-button:first-child),
+::slotted(mlv-icon-button:first-child) {
+  margin-inline-start: auto;
+}
+
+:host([status='accent']) ::slotted(mlv-button),
+:host([status='accent']) ::slotted(mlv-icon-button),
+:host([status='accent']) mlv-icon-button {
+  --color: var(--mlv-sys-text-white-color);
+}
+
+:host([status='accent']) {
+  --background: var(--mlv-sys-support-accent-color);
+  --color: var(--mlv-sys-text-white-color);
+}

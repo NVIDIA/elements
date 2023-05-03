@@ -1,0 +1,24 @@
+:host {
+  --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  contain: layout;
+  display: block;
+  min-width: max-content;
+  content-visibility: auto;
+  contain-intrinsic-size: auto var(--row-height, var(--mlv-ref-size-900));
+}
+
+[internal-host] {
+  grid-auto-columns: var(--grid-auto-columns);
+  border-bottom: var(--border-bottom);
+  display: grid;
+  grid-auto-flow: var(--grid-auto-flow);
+  grid-template-columns: var(--grid-template-column);
+}
+
+:host(:hover) ::slotted(mlv-grid-cell) {
+  --interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
+}
+
+:host(:--selected) ::slotted(mlv-grid-cell) {
+  --interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
+}

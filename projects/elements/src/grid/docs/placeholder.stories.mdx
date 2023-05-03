@@ -1,0 +1,45 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Placeholder" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Placeholder
+
+<Metrics tag="mlv-grid-placeholder"></Metrics>
+
+Placeholder can be used to display a message when data is being loaded for the grid.
+
+```html
+<mlv-grid style="--scroll-height: 333px">
+  <mlv-grid-header>
+    <mlv-grid-column></mlv-grid-column>
+  </mlv-grid-header>
+  <mlv-grid-placeholder>
+    Loading...
+  </mlv-grid-placeholder>
+</mlv-grid>
+```
+
+## Placeholder
+
+<Canvas>
+  <Story id="elements-data-grid-examples--placeholder" />
+</Canvas>
+
+<LinkedHeader>mlv-grid-placeholder</LinkedHeader>
+<Props of="mlv-grid-placeholder" />
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<Props of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<Props of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<Props of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<Props of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<Props of="mlv-grid-cell" />

@@ -1,0 +1,46 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Display Settings" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Display Settings
+
+<Metrics tag="mlv-grid-column"></Metrics>
+
+Display settings are placed above the data grid leveraging dropdowns to provide various configuration options.
+Columns can be hidden via the `hidden` attribute or conditionaly rendered in DOM. Display settings can include
+column visibility or advanced filtering options.
+
+```html
+<section mlv-layout="row gap:md align:stretch">
+  <mlv-panel expanded closable>
+    ...
+  </mlv-panel>
+
+  <div mlv-layout="column gap:md">
+    <mlv-button>display settings</mlv-button>
+    <mlv-grid>
+      ...
+    </mlv-grid>
+  </div>
+</section>
+```
+
+<Canvas>
+  <Story id="elements-data-grid-examples--display-settings" inline={false} height="450px" />
+</Canvas>
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<Props of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<Props of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<Props of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<Props of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<Props of="mlv-grid-cell" />

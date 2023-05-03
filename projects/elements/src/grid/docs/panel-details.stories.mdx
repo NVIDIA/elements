@@ -1,0 +1,58 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Panel Detail" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Panel Details
+
+<Metrics tag="mlv-grid"></Metrics>
+
+Use a right aligned [panel](./?path=/story/elements-panel-documentation--page) when displaying advanced filtering or display settings for the grid.
+Item detail panels should be open using a action button placed at the end of the grid row.
+
+```html
+<section mlv-layout="row gap:md align:stretch">
+  <mlv-grid>
+    <mlv-grid-header>
+      <mlv-grid-column>Column 1</mlv-grid-column>
+      <mlv-grid-column>Column 2</mlv-grid-column>
+      <mlv-grid-column>Column 3</mlv-grid-column>
+      <mlv-grid-column width="max-content" aria-label="details"></mlv-grid-column>
+    </mlv-grid-header>
+
+    <mlv-grid-row>
+      <mlv-grid-cell>Cell 1-1</mlv-grid-cell>
+      <mlv-grid-cell>Cell 1-2</mlv-grid-cell>
+      <mlv-grid-cell>Cell 1-3</mlv-grid-cell>
+      <mlv-grid-cell>
+        <mlv-icon-button interaction="ghost" icon-name="additional-actions" aria-label="view item 1"></mlv-icon-button>
+      </mlv-grid-cell>
+    </mlv-grid-row>
+  </mlv-grid>
+
+  <mlv-panel expanded closable></mlv-panel>
+</section>
+```
+
+<Canvas>
+  <Story id="elements-data-grid-examples--panel-detail" />
+</Canvas>
+
+## Interactive
+
+<Story id="elements-data-grid-examples--panel-detail-interactive" />
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<Props of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<Props of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<Props of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<Props of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<Props of="mlv-grid-cell" />

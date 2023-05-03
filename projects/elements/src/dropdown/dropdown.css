@@ -11,6 +11,7 @@
   --color: var(--mlv-sys-layer-overlay-color);
   --padding: var(--mlv-ref-size-400);
   --box-shadow: var(--mlv-ref-shadow-400);
+  --_divider-padding: var(--padding);
 }
 
 dialog {
@@ -68,4 +69,8 @@ mlv-icon-button {
 
 ::slotted(mlv-menu) {
   --width: 100%;
+}
+
+::slotted(mlv-divider) {
+  margin: 0 calc(-1 * var(--_divider-padding));
 }

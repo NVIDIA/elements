@@ -87,7 +87,7 @@ async function getProjects() {
           return tags;
         }, {})).map(([name, instanceTotal]) => ({ name, instanceTotal })).filter(e => e.name !== 'undefined');
   
-        return { name: project.package, path: `src/ui/${project.path.split('/src/ui/')[1]}`, elementsVersion: project.elements, elements };
+        return { name: project.package, path: `src/ui/${project.path.split('/src/ui/')[1]}`, elementsVersion: project.elements, elements, instanceTotal: elements.reduce((p, e) => e.instanceTotal + p, 0) };
       })
   );
 }
@@ -206,22 +206,6 @@ async function getMetrics() {
   };
 
   return metrics;
-}
-
-function getLastTwelveMonths() {
-  const dates = [];
-  const date = new Date();
-  const currentYear = date.getFullYear();
-  const currentMonth = date.getMonth();
-
-  for (let i = 0; i < 4; i++) {
-    let month = currentMonth - 1;
-    let year = currentYear;
-
-    const lastDate = new Date(year, month - i, 0);
-    dates.push(lastDate);
-  }
-  return dates;
 }
 
 const metrics = await getMetrics();

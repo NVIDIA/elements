@@ -14,3 +14,14 @@ export function onChildListMutation(element: HTMLElement, fn: (mutation?: Mutati
   observer.observe(element, { childList: true });
   return observer;
 }
+
+export function throttle(func, limit, ...args) {
+  let wait = true;
+  return () => {
+    if (wait) {
+      func.apply(this, ...args);
+      wait = false;
+      setTimeout(() => wait = true, limit);
+    }
+  }
+}

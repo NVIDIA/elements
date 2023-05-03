@@ -171,23 +171,29 @@ export const parameters = {
           'Alert Group',
           'App Header',
           'Badge',
+          'Breadcrumb',
           'Button',
+          'Bulk Actions',
           'Card',
           'Checkbox',
           'Color',
           'Data Grid',
           [
             'Documentation',
+            'Integrations',
             'Action',
-            'Card',
             'Column Action',
             'Column Alignment',
             'Column Fixed',
             'Column Width',
-            'Detail Panel',
+            'Container',
+            'Card',
+            'Display Settings',
             'Footer',
             'Multi Select',
             'Pagination',
+            'Panel Detail',
+            'Performance',
             'Placeholder',
             'Row Action',
             'Row Sort',
@@ -219,6 +225,7 @@ export const parameters = {
           'Range',
           'Search',
           'Select',
+          'Sort Button',
           'Switch',
           'Tabs',
           'Tag',
@@ -280,6 +287,19 @@ export const globalTypes = {
       ],
     },
   },
+  dataTheme: {
+    name: 'Data',
+    description: 'Data',
+    defaultValue: 'infra',
+    toolbar: {
+      showName: true,
+      items: [
+        { value: 'infra', title: 'Infra' },
+        { value: 'models', title: 'AI/ML' },
+        { value: 'hardware', title: 'Hardware' }
+      ],
+    },
+  }
 }
 
 const styleSheet = new CSSStyleSheet();
@@ -307,7 +327,13 @@ function updateTheme(themes) {
   }
 }
 
+const dataTheme = (story, { globals }) => {
+  localStorage.setItem('mlv-data-theme', globals.dataTheme);
+  const fn = (...args) => story(args);
+  return fn();
+};
+
 export const decorators = [(story, { globals }) => {
   updateTheme(`${globals.theme ? globals.theme : ''} ${globals.scale ? globals.scale : ''} ${globals.animation ? globals.animation : ''}`);
   return story();
-}];
+}, dataTheme];

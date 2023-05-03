@@ -1,4 +1,5 @@
 import { html, LitElement } from 'lit';
+import { property } from 'lit/decorators/property.js';
 import { appendRootNodeStyle, useStyles } from '@elements/elements/internal';
 import cardStyleSheet from './card.css?inline';
 import cardHeaderStyleSheet from './card-header.css?inline';
@@ -21,6 +22,9 @@ import globalStyles from './card.global.css?inline';
  * @aria https://github.com/w3c/aria-practices/issues
  */
 export class Card extends LitElement {
+  /** flat (embed into parent container) or fill (fill parent container width) */
+  @property({ type: String, reflect: true }) container?: 'flat' | 'fill';
+
   static styles = useStyles([cardStyleSheet]);
 
   static readonly metadata = {

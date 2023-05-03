@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@elements/elements/test';
-import { onChildListMutation, stopEvent } from './events.js';
+import { onChildListMutation, stopEvent, throttle } from './events.js';
 
 describe('stopEvent', () => {
   it('should cause event to prevent default behavior (preventDefault)', async () => {
@@ -51,5 +51,18 @@ describe('onChildListMutation', () => {
     list.querySelector('li').remove();
     expect(list.querySelectorAll('li').length).toBe(0);
     expect(((await mutation) as any).type).toBe('childList');
+  });
+});
+
+describe('throttle', () => {
+  it('should throttle functions calls within given time', async () => {
+    let count = 0;
+    const fn = throttle(() => count++, 0);
+    fn();
+    fn();
+    fn();
+    expect(count).toBe(1);
+    await new Promise(r => setTimeout(() => r(''), 20));
+    expect(count).toBe(1);
   });
 });

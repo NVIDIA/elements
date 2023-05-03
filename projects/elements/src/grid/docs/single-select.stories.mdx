@@ -1,0 +1,53 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Single Select" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Single Select
+
+<Metrics tag="mlv-grid-row"></Metrics>
+
+Single selection enables users to use a radio list association to select one item at a time.
+To enable single select, place a `mlv-radio` input as the first grid cell of each row. Set the `name`
+attribute on each radio to ensure they associate to the same radio group.
+
+```html
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column width="max-content" aria-label="single selection"></mlv-grid-column>
+    <mlv-grid-column>Column</mlv-grid-column>
+    ...
+  </mlv-grid-header>
+  <mlv-grid-row selected>
+    <mlv-grid-cell>
+      <mlv-radio>
+        <input type="radio" name="single-select" checked aria-label="select row 1">
+      </mlv-radio>
+    </mlv-grid-cell>
+    <mlv-grid-cell>Cell</mlv-grid-cell>
+    ...
+  </mlv-grid-row>
+  ...
+</mlv-grid>
+```
+
+## Single Select
+
+<Canvas>
+  <Story id="elements-data-grid-examples--single-select" />
+</Canvas>
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<Props of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<Props of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<Props of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<Props of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<Props of="mlv-grid-cell" />

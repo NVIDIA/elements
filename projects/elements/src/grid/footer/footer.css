@@ -1,0 +1,21 @@
+:host {
+  --background: var(--mlv-sys-layer-container-background);
+  --color: var(--mlv-sys-layer-canvas-color);
+  --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-500);
+  --height: var(--mlv-ref-size-1000);
+  contain: initial;
+}
+
+[internal-host] {
+  border-top: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  background: var(--background);
+  color: var(--color);
+  padding: var(--padding);
+  height: var(--height);
+  display: flex;
+  align-items: center;
+}
+
+::slotted(mlv-pagination) {
+  margin-inline: auto calc(-1 * var(--mlv-ref-size-300));
+}

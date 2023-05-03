@@ -1,0 +1,106 @@
+:host {
+  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-200);
+  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-200);
+  --background: var(--mlv-sys-layer-container-background);
+  --color: var(--mlv-sys-layer-canvas-color);
+  --border-radius: var(--mlv-ref-border-radius-lg);
+  --box-shadow: var(--mlv-ref-shadow-100);
+  --font-size: var(--mlv-ref-font-size-200);
+  --row-height: var(--mlv-ref-size-900);
+  --scroll-height: initial;
+  --grid-auto-columns: minmax(0, 1fr);
+  --scroll-width: 0;
+  --grid-template-column: initial;
+  --grid-auto-flow: column;
+  width: 100%;
+  display: grid;
+}
+
+[internal-host] {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  background: var(--background);
+  color: var(--color);
+  font-size: var(--font-size);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: start;
+  overflow: hidden;
+  color-scheme: inherit;
+  contain: initial;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+:host(:--scrolling) {
+  --scroll-shadow: 0 0 4px hsla(0, 0%, 0%, 0.4);
+}
+
+[name='columns'] {
+  min-width: fit-content;
+  display: grid;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+[part='scrollbox'] {
+  max-height: var(--scroll-height);
+  min-height: var(--scroll-height);
+  /* padding-bottom: var(--mlv-ref-size-200); */
+  overflow: auto;
+  position: relative;
+}
+
+:host([container*='fill']) {
+  --border-radius: 0;
+  --box-shadow: none;
+}
+
+:host([container*='flat']) {
+  --border-radius: 0;
+  --box-shadow: none;
+  --background: inherit;
+}
+
+:host([container*='flat']) ::slotted(mlv-grid-header) {
+  --background: inherit;
+}
+
+:host([stripe]) ::slotted(mlv-grid-row:nth-child(odd)) {
+  --background: var(--mlv-sys-layer-container-accent-background);
+}
+
+::slotted(mlv-grid-row:last-child) {
+  --border-bottom: 0;
+}
+
+::slotted(mlv-bulk-actions) {
+  position: fixed;
+  z-index: 99;
+  left: 12px;
+  bottom: 12px;
+  width: calc(100% - 24px);
+}
+
+::-webkit-scrollbar {
+  background: var(--background);
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  height: 100vh;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mlv-ref-border-color-muted);
+  border: 2px solid var(--background);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(0,0,0,0);
+}

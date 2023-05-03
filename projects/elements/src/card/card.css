@@ -5,8 +5,10 @@
   --color: var(--mlv-sys-layer-canvas-color);
   --border-radius: var(--mlv-ref-border-radius-lg);
   --box-shadow: var(--mlv-ref-shadow-100);
+  --border-bottom: none;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+  border-bottom: var(--border-bottom);
   background: var(--background);
   color: var(--color);
   display: flex;
@@ -22,4 +24,9 @@
   align-items: stretch;
   justify-content: start;
   height: 100%;
+}
+
+:host([container='fill']) {
+  --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  --border-radius: 0;
 }

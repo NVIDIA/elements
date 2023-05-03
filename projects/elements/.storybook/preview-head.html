@@ -106,8 +106,9 @@
   }
 
   .sbdocs-blockquote {
-    border-left: var(--mlv-ref-border-width-xl) solid var(--mlv-ref-border-color-muted) !important;
-    font-size: var(--mlv-ref-font-size-300) !important;
+    padding-left: var(--mlv-ref-font-size-200) !important;
+    border-left: var(--mlv-ref-border-width-lg) solid var(--mlv-ref-border-color-muted) !important;
+    font-size: var(--mlv-ref-font-size-200) !important;
   }
 
   figure {
@@ -116,6 +117,7 @@
 
   figcaption {
     font-size: var(--mlv-ref-font-size-200) !important;
+    font-weight: var(--mlv-ref-font-weight-regular) !important;
   }
 
   .sbdocs-h1,
@@ -124,6 +126,11 @@
     gap: 12px;
     color: var(--mlv-sys-text-emphasis-color) !important;
     margin-bottom: 24px !important;
+    align-items: center;
+  }
+
+  .sbdocs-h1 {
+    margin-bottom: 16px !important;
   }
 
   .getting-started-logo {
@@ -150,6 +157,10 @@
   .sbdocs-p:has(mlv-alert) {
     margin: 0 0 var(--mlv-ref-size-300) 0 !important;
     line-height: 0 !important;
+  }
+
+  .sbdocs-h1 + .sbdocs-div + .sbdocs-p:first-of-type {
+    margin: 24px 0 36px 0 !important;
   }
 
   .sbdocs code {

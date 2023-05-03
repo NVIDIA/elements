@@ -1,0 +1,67 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Multi Select" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Multi Select
+
+<Metrics tag="mlv-grid-row"></Metrics>
+
+Multi Select rows use a checkbox as the first focusable item within the row. When selected
+set the `selected` attribute/property on the row. This will ensure selected styles as well
+as the proper `ariaSelected` state for accessibility.
+
+```html
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column width="max-content">
+      <mlv-checkbox>
+        <input type="checkbox" aria-label="select all rows">
+      </mlv-checkbox>
+    </mlv-grid-column>
+    <mlv-grid-column>Column</mlv-grid-column>
+  </mlv-grid-header>
+  ...
+  <mlv-grid-row selected>
+    <mlv-grid-cell>
+      <mlv-checkbox>
+        <input type="checkbox" checked aria-label="select row 1">
+      </mlv-checkbox>
+    </mlv-grid-cell>
+    <mlv-grid-cell>Cell</mlv-grid-cell>
+    ...
+  </mlv-grid-row>
+  ...
+</mlv-grid>
+```
+
+## Multi Select
+
+<Canvas>
+  <Story id="elements-data-grid-examples--multi-select" />
+</Canvas>
+
+## Multi Select Bulk Actions
+
+When a user has actions that can be applied to multiple items, use the bulk actions component.
+The bulk actions should only be visible when at least one or more rows are selected.
+If the bulk actions are closed then all selected rows should be deselected.
+
+<Canvas>
+  <Story id="elements-data-grid-examples--multi-select-bulk-actions" />
+</Canvas>
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<Props of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<Props of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<Props of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<Props of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<Props of="mlv-grid-cell" />
