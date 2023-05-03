@@ -1,0 +1,51 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Card" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Card
+
+<Metrics tag="nve-grid"></Metrics>
+
+Grid can be nested in Cards for various UI patterns such as card tab groups. Use the `container="flat"` attribute to
+enable proper styling of the grid when nested within a card.
+
+```html
+<nve-card>
+  <nve-card-header>
+    <div slot="title">Data Grid</div>
+    <div slot="subtitle">Card Example</div>
+    <nve-icon-button slot="header-action" icon-name="filter-outline"></nve-icon-button>
+  </nve-card-header>
+  <nve-grid container="flat">
+    ...
+  </nve-grid>
+</nve-card>
+```
+
+## Card
+
+<Canvas>
+  <Story id="elements-data-grid-examples--card" />
+</Canvas>
+
+## Card Tabs
+
+<Canvas>
+  <Story id="elements-data-grid-examples--card-tabs" />
+</Canvas>
+
+<LinkedHeader>nve-grid</LinkedHeader>
+<Props of="nve-grid" />
+
+<LinkedHeader>nve-grid-header</LinkedHeader>
+<Props of="nve-grid-header" />
+
+<LinkedHeader>nve-grid-column</LinkedHeader>
+<Props of="nve-grid-column" />
+
+<LinkedHeader>nve-grid-row</LinkedHeader>
+<Props of="nve-grid-row" />
+
+<LinkedHeader>nve-grid-cell</LinkedHeader>
+<Props of="nve-grid-cell" />

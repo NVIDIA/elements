@@ -1,0 +1,42 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Pagination" parameters={{ badges: ['alpha'] }} />
+
+# Data Grid Pagination
+
+<Metrics tag="nve-grid"></Metrics>
+
+The pagination pattern should be used when working with large data sets that need to be
+incrementally loaded or filtered for performance or usablity.
+
+```html
+<nve-grid>
+  ...
+
+  <nve-grid-footer>
+    <nve-pagination value="1" items="100" step="10"></nve-pagination>
+  </nve-grid-footer>
+</nve-grid>
+```
+
+## Pagination
+
+<Canvas>
+  <Story id="elements-data-grid-examples--pagination" />
+</Canvas>
+
+<LinkedHeader>nve-grid</LinkedHeader>
+<Props of="nve-grid" />
+
+<LinkedHeader>nve-grid-header</LinkedHeader>
+<Props of="nve-grid-header" />
+
+<LinkedHeader>nve-grid-column</LinkedHeader>
+<Props of="nve-grid-column" />
+
+<LinkedHeader>nve-grid-row</LinkedHeader>
+<Props of="nve-grid-row" />
+
+<LinkedHeader>nve-grid-cell</LinkedHeader>
+<Props of="nve-grid-cell" />

@@ -1,0 +1,32 @@
+:host {
+  --width: var(--nve-ref-size-800);
+  --height: var(--nve-ref-size-800);
+  --border-radius: var(--nve-ref-border-radius-full);
+}
+
+[internal-host] {
+  width: var(--width);
+  height: var(--height);
+  border-radius: var(--border-radius);
+  background: transparent;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  place-items: center;
+  place-content: center;
+  padding: 0;
+  position: relative;
+  outline: 0;
+  overflow: hidden;
+}
+
+nve-icon {
+  --color: var(--nve-sys-text-placeholder-color);
+  cursor: pointer;
+}
+
+:host([sort='ascending']) nve-icon,
+:host([sort='descending']) nve-icon {
+  --color: var(--nve-sys-text-emphasis-color);
+}
