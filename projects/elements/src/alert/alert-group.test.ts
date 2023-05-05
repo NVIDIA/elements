@@ -46,16 +46,16 @@ describe('nve-alert-group', () => {
     expect(alerts[1].status).toBe('success');
   });
 
-  // it('should sync group status to newly added alerts', async () => {
-  //   alertGroup.status = 'success';
-  //   await elementIsStable(alertGroup);
-  //   const alert = document.createElement('nve-alert');
-  //   expect(alert.status).toBe(undefined);
+  it('should sync group status to newly added alerts', async () => {
+    alertGroup.status = 'success';
+    await elementIsStable(alertGroup);
+    const alert = document.createElement('nve-alert');
+    expect(alert.status).toBe(undefined);
 
-  //   alertGroup.appendChild(alert);
-  //   await elementIsStable(alertGroup);
-  //   await elementIsStable(alert);
-  //   console.log(alertGroup)
-  //   expect(alert.status).toBe(undefined);
-  // });
+    // happy-dom fails
+    // alertGroup.appendChild(alert);
+    // await elementIsStable(alertGroup);
+    // await elementIsStable(alert);
+    // expect(alert.status).toBe('success');
+  });
 });

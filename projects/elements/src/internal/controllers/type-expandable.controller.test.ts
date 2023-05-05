@@ -8,6 +8,9 @@ import { TypeExpandableController } from '@elements/elements/internal';
 @customElement('type-expandable-controller-test-element')
 class TypeExpandableControllerTestElement extends LitElement {
   @property({ type: Boolean }) expanded: boolean;
+
+  @property({ type: Boolean }) behaviorExpand: boolean;
+
   #typeExpandableController = new TypeExpandableController(this);
 
   close() {
@@ -16,6 +19,10 @@ class TypeExpandableControllerTestElement extends LitElement {
 
   open() {
     this.#typeExpandableController.open();
+  }
+
+  toggle() {
+    this.#typeExpandableController.toggle();
   }
 }
 
@@ -39,6 +46,7 @@ describe('type-expandable.controller', () => {
     const event = untilEvent(element, 'close');
     element.close();
     expect((await event)).toBeDefined();
+    expect(element.expanded).toBe(true); // default to stateless
   });
 
   it('should emit open event when open button clicked', async () => {
@@ -48,5 +56,18 @@ describe('type-expandable.controller', () => {
     const event = untilEvent(element, 'open');
     element.open();
     expect((await event)).toBeDefined();
+    expect(element.expanded).toBe(false); // default to stateless
+  });
+
+  it('should enable auto stateful expanding if behavior-expand is set', async () => {
+    element.expanded = false;
+    element.behaviorExpand = true;
+    await elementIsStable(element);
+
+    element.toggle();
+    expect(element.expanded).toBe(true);
+
+    element.toggle();
+    expect(element.expanded).toBe(false);
   });
 });

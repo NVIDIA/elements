@@ -33,10 +33,13 @@ export function removeFixture(fixture: HTMLElement) {
 async function waitForAllElementsToBeDefined() {
   const pendingElements = [...new Set(Array.from(document.querySelectorAll('*:not(:defined)')).filter(e => e.tagName.includes('-')).map(e => e.tagName.toLocaleLowerCase()))];
   return new Promise((resolve, reject) => {
+    const undefinedElements = [];
     Promise.all(pendingElements.map(e => customElements.whenDefined(e))).then(() => resolve(''));
     setTimeout(() => {
-      reject('');
-      console.log(`\x1b[91m Elements not defined: ${pendingElements}\x1b[0m`);
+      if (undefinedElements.length) {
+        reject('');
+        console.log(`\x1b[91m Elements not defined: ${undefinedElements}\x1b[0m`);
+      }
     }, 5000);
   });
 }
@@ -58,11 +61,15 @@ function retry(fn: () => Promise<any>, maxTries = 10) {
 
 export function emulateClick(component: HTMLElement | Element) {
   const event1 = new MouseEvent('mousedown');
-  const event2 = new MouseEvent('mouseup');
-  const event3 = new MouseEvent('click');
+  const event2 = new MouseEvent('pointerdown');
+  const event3 = new MouseEvent('mouseup');
+  const event4 = new MouseEvent('pointerup');
+  const event5 = new MouseEvent('click');
   component.dispatchEvent(event1);
   component.dispatchEvent(event2);
   component.dispatchEvent(event3);
+  component.dispatchEvent(event4);
+  component.dispatchEvent(event5);
 }
 
 export function untilEvent(element: HTMLElement | Document, event: string) {

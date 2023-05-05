@@ -30,4 +30,10 @@ describe('nve-time', () => {
   it('should render clock suffix icon', () => {
     expect(element.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('schedule');
   });
+
+  it('should trigger native UI', async () => {
+    element.shadowRoot.querySelector('nve-icon-button').click();
+    await elementIsStable(element);
+    expect(element.input.matches(':focus')).toBe(false);
+  });
 });
