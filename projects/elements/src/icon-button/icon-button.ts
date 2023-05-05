@@ -39,11 +39,11 @@ export class IconButton extends Button {
   render() {
     return html`
       <div internal-host interaction-state focus-within>
-        <slot></slot>
-        <slot name="icon">
+        <slot>
           <nve-icon .name=${this.iconName} .direction=${this.direction}></nve-icon>
         </slot>
       </div>
+      <slot name="anchor"></slot>
     `;
   }
 }

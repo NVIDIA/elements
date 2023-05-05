@@ -1,17 +1,30 @@
 import { html, LitElement } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
-import { defineScopedElement } from '@elements/elements/scoped';
+import { defineScopedElement, scope } from '@elements/elements/scoped';
 import { define } from '@elements/elements/internal';
 
-export class TestElement extends LitElement {
+
+export class TestTwoElement extends LitElement {
   static metadata = {
     tag: 'test-element',
     version: ''
   }
 }
 
-define(TestElement);
+export class TestElement extends LitElement {
+  static metadata = {
+    tag: 'test-element',
+    version: ''
+  }
+
+  static elementDefinitions = {
+    'nve-test-two': TestTwoElement
+  };
+}
+
+scope(TestTwoElement);
+define(TestTwoElement);
 defineScopedElement('scoped', TestElement);
 
 describe('scoped element', () => {
@@ -34,5 +47,9 @@ describe('scoped element', () => {
 
   it('should define scoped alias element', () => {
     expect(customElements.get('test-element-scoped')).toBeDefined();
+  });
+
+  it('should have static defined dependencies', () => {
+    expect(TestElement.elementDefinitions['nve-test-two']).toBe(TestTwoElement);
   });
 });

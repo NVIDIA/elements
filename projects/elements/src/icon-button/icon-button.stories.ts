@@ -69,14 +69,34 @@ export const GhostInteractions = {
   `
 }
 
+export const PressedToggle = {
+  render: () => html`
+  <div nve-layout="row gap:sm pad-bottom:md">
+    <nve-icon-button icon-name="filter-outline"></nve-icon-button>
+    <nve-icon-button pressed icon-name="filter"></nve-icon-button>
+  </div>
+
+  <div nve-layout="row gap:sm">
+    <nve-icon-button icon-name="hidden" interaction="ghost" aria-label="show"></nve-icon-button>
+    <nve-icon-button pressed icon-name="visible" interaction="ghost" aria-label="hide"></nve-icon-button>
+  </div>
+  `
+}
+
+export const SelectedGhost = {
+  render: () => html`
+    <nve-icon-button selected icon-name="split-vertical" aria-label="split vertical" interaction="ghost"></nve-icon-button>
+    <nve-icon-button icon-name="split-horizontal" aria-label="split horizontal" interaction="ghost"></nve-icon-button>
+    <nve-icon-button icon-name="split-none" aria-label="preview" interaction="ghost"></nve-icon-button>
+  `
+}
+
 export const CustomIcon = {
   render: () => html`
+    <nve-icon-button interaction="emphasize">ML</nve-icon-button>
+    <nve-icon-button>🎉</nve-icon-button>
     <nve-icon-button>
-      <span slot="icon">🎉</span>
-    </nve-icon-button>
-    <nve-icon-button>
-      <span slot="icon">🔗</span>
-      <a href="#" aria-label="custom icon button"></a>
+      🔗 <a href="#" aria-label="custom icon button"></a>
     </nve-icon-button>
   `
 }

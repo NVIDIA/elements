@@ -37,11 +37,10 @@ describe('nve-color', () => {
   });
 
   it('should update the color value if EyeDropper is used', async () => {
-    if (!(window as any).EyeDropper) { // mock for happy-dom/non chromium env
-      (window as any).EyeDropper = class {
-        open() {
-          return Promise.resolve({ sRGBHex: '#2d2d2d' });
-        }
+    const original = (window as any).EyeDropper;
+    (window as any).EyeDropper = class {
+      open() {
+        return Promise.resolve({ sRGBHex: '#2d2d2d' });
       }
     }
   
@@ -51,5 +50,31 @@ describe('nve-color', () => {
     element.shadowRoot.querySelector('nve-icon-button').click();
     await elementIsStable(element);
     expect(fixture.querySelector('input').value).toBe('#2d2d2d');
+
+    (window as any).EyeDropper = original;
+  });
+});
+
+describe('nve-color default', () => {
+  let fixture: HTMLElement;
+  let element: Color;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-color style="--background: #0F0">
+        <label>label</label>
+        <input type="text" value="" />
+      </nve-color>
+    `);
+    element = fixture.querySelector('nve-color');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should provide value if default of empty string set by some browsers', () => {
+    expect(fixture.querySelector('input').value).toBe('#0F0');
   });
 });

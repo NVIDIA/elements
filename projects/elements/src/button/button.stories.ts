@@ -99,6 +99,21 @@ export const Link = {
   `
 }
 
+export const PressedToggle = {
+  render: () => html`
+    <nve-button pressed>pressed</nve-button>
+    <nve-button>unpressed</nve-button>
+  `
+}
+
+export const SelectedGhost = {
+  render: () => html`
+    <nve-button selected interaction="ghost">selected</nve-button>
+    <nve-button interaction="ghost">unselected</nve-button>
+    <nve-button interaction="ghost">unselected</nve-button>
+  `
+}
+
 export const LinkGhost = {
   render: () => html`
 <nve-button interaction="ghost"><a href="#">ghost</a></nve-button>

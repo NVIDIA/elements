@@ -81,13 +81,17 @@ export function getElementUpdate(element: HTMLElement, key: string, callback: (v
 
   const updatedProp = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), key) as any;
   if (updatedProp) {
-    Object.defineProperty(element, key, {
-      get: updatedProp.get,
-      set: val => {
-        callback(val);
-        updatedProp.set.call(element, val);
-      },
-    });
+    try {
+      Object.defineProperty(element, key, {
+        get: updatedProp.get,
+        set: val => {
+          callback(val);
+          updatedProp.set.call(element, val);
+        },
+      });
+    } catch {
+      // try/catch for cases where prop may have already been defined
+    }
   }
 
   return getAttributeChanges(element, key, val => callback(val));
@@ -160,4 +164,10 @@ export enum KeynavCode {
   ArrowDown = 'ArrowDown',
   ArrowLeft = 'ArrowLeft',
   ArrowRight = 'ArrowRight'
+}
+
+export function removeEmptyTextNode(node: Node) {
+  if ((node as Text)?.wholeText?.trim() === '') {
+    (node as Text).remove();
+  }
 }

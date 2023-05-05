@@ -30,6 +30,18 @@ import '@elements/elements/select/define.js';
   <Story id="elements-select-examples--select" />
 </Canvas>
 
+## Custom Option Render
+
+Select can render custom templates for option menus with the following limitations:
+- The select is for use of form control values only. For navigation use `nve-menu`.
+- Content must be static within `<template>` tag.
+- The select value when not active is not customizable.
+- Cannot be used with `multiple` or `size` options.
+
+<Canvas>
+  <Story id="elements-select-examples--custom-option-render" />
+</Canvas>
+
 <LinkedHeader>Vertical</LinkedHeader>
 
 <Canvas>
