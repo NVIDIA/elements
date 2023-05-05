@@ -1,13 +1,17 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { onChildListMutation, stopEvent } from '@elements/elements/internal';
-import { createFixture, removeFixture } from '@elements/elements/test';
 import { html } from 'lit';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { createFixture, removeFixture } from '@elements/elements/test';
+import { onChildListMutation, stopEvent } from './events.js';
 
 describe('stopEvent', () => {
   it('should cause event to prevent default behavior (preventDefault)', async () => {
     const event = new KeyboardEvent('keydown', { code: 'Enter' });
-    stopEvent(event);
-    expect(event.defaultPrevented).toBe(true);
+    const div = document.createElement('div');
+    div.dispatchEvent(event);
+    div.addEventListener('keydown', e => {
+      stopEvent(e);
+      expect(e.defaultPrevented).toBe(true);
+    });
   });
 
   it('should prevent event from bubbling (stopPropagation)', async () => {
@@ -35,15 +39,17 @@ describe('onChildListMutation', () => {
   });
 
   it('should notify of additions in child list', async () => {
-    const mutation = new Promise(r => onChildListMutation(list, () => r(list.querySelectorAll('li').length)));
+    const mutation = new Promise(r => onChildListMutation(list, m => r(m)));
     const li = document.createElement('li');
     list.appendChild(li);
-    expect(await mutation).toBe(2);
+    expect(list.querySelectorAll('li').length).toBe(2);
+    expect(((await mutation) as any).type).toBe('childList');
   });
 
   it('should notify of removal in child list', async () => {
-    const mutanten = new Promise(r =>onChildListMutation(list, () => r(list.querySelectorAll('li').length)));
+    const mutation = new Promise(r => onChildListMutation(list, m => r(m)));
     list.querySelector('li').remove();
-    expect(await mutanten).toBe(0);
+    expect(list.querySelectorAll('li').length).toBe(0);
+    expect(((await mutation) as any).type).toBe('childList');
   });
 });

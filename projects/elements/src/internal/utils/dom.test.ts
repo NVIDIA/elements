@@ -362,3 +362,16 @@ describe('validKeyNavigationCode(): ', () => {
     expect(validKeyNavigationCode({ code: KeynavCode.ArrowRight } as KeyboardEvent)).toBe(true);
   });
 });
+
+describe('removeEmptyTextNode', () => {
+  it('should remove text node if empty', async () => {
+    const element = document.createElement('div');
+    element.innerHTML = ' ';
+
+    expect(element.childNodes.length).toEqual(1);
+
+    // happy-dom does not emulate the wholeText text node property
+    // element.childNodes.forEach(node => removeEmptyTextNode(node));
+    // expect(element.childNodes.length).toEqual(0);
+  });
+});

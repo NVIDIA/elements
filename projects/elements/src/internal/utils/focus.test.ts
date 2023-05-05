@@ -68,16 +68,20 @@ describe('focusElement', () => {
 
   it('should focus non-interactive elements', () => {
     const [one, two, three] = Array.from(fixture.querySelectorAll<HTMLElement>('*'));
+    focusElement(two);
+    expect(document.activeElement === one).toBe(false);
+    expect(document.activeElement === two).toBe(true);
+    expect(document.activeElement === three).toBe(false);
+    expect(three.getAttribute('tabindex')).toBe(null);
+
     focusElement(three);
     expect(document.activeElement === one).toBe(false);
     expect(document.activeElement === two).toBe(false);
     expect(document.activeElement === three).toBe(true);
     expect(three.getAttribute('tabindex')).toBe('-1');
 
-    focusElement(two);
-    expect(document.activeElement === one).toBe(false);
-    expect(document.activeElement === two).toBe(true);
-    expect(document.activeElement === three).toBe(false);
+    three.dispatchEvent(new Event('blur'));
     expect(three.getAttribute('tabindex')).toBe(null);
+    expect(three && !isFocusable(three)).toBe(true);
   });
 });

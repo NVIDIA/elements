@@ -35,5 +35,11 @@ describe('type-closable.controller', () => {
     const event = untilEvent(element, 'close');
     element.close();
     expect((await event)).toBeDefined();
+
+    let call = false;
+    element.addEventListener('close', () => call = true);
+    element.closable = false;
+    element.close();
+    expect(call).toBe(false);
   });
 });

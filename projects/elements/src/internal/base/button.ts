@@ -4,6 +4,7 @@ import { stateActive } from '../controllers/state-active.controller.js';
 import { stateDisabled } from '../controllers/state-disabled.controller.js';
 import { stateExpanded } from '../controllers/state-expanded.controller.js';
 import { statePressed } from '../controllers/state-pressed.controller.js';
+import { stateSelected } from '../controllers/state-selected.controller.js';
 import { typeButton } from '../controllers/type-button.controller.js';
 import { typeAnchor } from '../controllers/type-anchor.controller.js';
 import { typeSubmit } from '../controllers/type-submit.controller.js';
@@ -18,6 +19,7 @@ import { typeSubmit } from '../controllers/type-submit.controller.js';
 @typeSubmit<MlvBaseButton>()
 @stateActive<MlvBaseButton>()
 @statePressed<MlvBaseButton>()
+@stateSelected<MlvBaseButton>()
 @stateDisabled<MlvBaseButton>()
 @stateExpanded<MlvBaseButton>()
 export class MlvBaseButton extends LitElement {
@@ -64,6 +66,12 @@ export class MlvBaseButton extends LitElement {
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled
    */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+    /**
+   * This Boolean attribute prevents the selected state if button is part of a multi choice selection group
+   * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected
+   */
+  @property({ type: Boolean, reflect: true }) selected: boolean;
 
   /**
    * @private

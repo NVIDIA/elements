@@ -37,4 +37,19 @@ describe('nve-range', () => {
     await elementIsStable(element);
     expect(element.style.getPropertyValue('--track-width')).toBe('99%');
   });
+
+  it('should update the custom track width with custom min/max', async () => {
+    element.input.min = '20';
+    element.input.max = '80';
+    element.querySelector('input').value = '66';
+    await elementIsStable(element);
+    expect(element.style.getPropertyValue('--track-width')).toBe('76%');
+  });
+
+  it('should update the custom track width when input changes', async () => {
+    element.querySelector('input').value = '50';
+    await elementIsStable(element);
+    element.querySelector('input').dispatchEvent(new Event('input'));
+    expect(element.style.getPropertyValue('--track-width')).toBe('50%');
+  });
 });
