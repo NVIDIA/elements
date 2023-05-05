@@ -33,6 +33,8 @@ describe('hideAllValidationMessages', () => {
 
     expect(messages[0].hidden).toBe(true);
     expect(messages[1].hidden).toBe(false);
+    expect(messages[0].hasAttribute('hidden')).toBe(true);
+    expect(messages[1].hasAttribute('hidden')).toBe(false);
   });
 });
 
@@ -52,6 +54,8 @@ describe('showActiveValidationMessages', () => {
 
     expect(messages[0].hidden).toBe(false);
     expect(messages[1].hidden).toBe(true);
+    expect(messages[0].hasAttribute('hidden')).toBe(false);
+    expect(messages[1].hasAttribute('hidden')).toBe(true);
   });
 });
 
@@ -66,6 +70,8 @@ describe('hideAllControlMessages', () => {
 
     expect(messages[0].hidden).toBe(true);
     expect(messages[1].hidden).toBe(true);
+    expect(messages[0].hasAttribute('hidden')).toBe(true);
+    expect(messages[1].hasAttribute('hidden')).toBe(true);
   });
 });
 
@@ -83,5 +89,7 @@ describe('hideInactiveValidationMessages', () => {
 
     expect(messages[0].hidden).toBe(true);
     expect(messages[1].hidden).toBe(false);
+    expect(messages[0].hasAttribute('hidden')).toBe(true);
+    expect(messages[1].hasAttribute('hidden')).toBe(false);
   });
 });

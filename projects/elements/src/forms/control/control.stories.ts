@@ -385,12 +385,6 @@ export const Status = () => {
 </nve-control>`;
 };
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "selectmenu": HTMLInputElement;
-  }
-}
-
 export const SelectmenuExperimental = () => {
   return html`
 <nve-control layout="vertical">

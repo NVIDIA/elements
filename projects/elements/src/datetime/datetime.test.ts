@@ -31,4 +31,10 @@ describe('nve-datetime', () => {
   it('should render calendar suffix icon', () => {
     expect(element.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('date');
   });
+
+  it('should trigger native UI', async () => {
+    element.shadowRoot.querySelector('nve-icon-button').click();
+    await elementIsStable(element);
+    expect(element.input.matches(':focus')).toBe(false);
+  });
 });

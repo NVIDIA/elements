@@ -43,6 +43,13 @@ describe('setArrowStyles', () => {
   it('should assign coorditates for arrow position relative to the popover element', () => {
     const popover = document.createElement('div');
     const arrow = document.createElement('div');
+    popover.style.width = '100px';
+    popover.style.height = '100px';
+    arrow.style.width = '4px';
+    arrow.style.height = '4px';
+    document.body.appendChild(popover);
+    document.body.appendChild(arrow);
+
     const config: PopoverConfig = { position: 'top', alignment: 'start', popover: popover, arrow, anchor: document.body, arrowPadding: 6, arrowOffset: 4, offset: 12 };
     const position: ComputePositionReturn = {
       x: 0,
@@ -59,10 +66,13 @@ describe('setArrowStyles', () => {
     };
 
     setArrowStyles(config, position);
-    const style = (window.getComputedStyle(config.arrow) as any)._ownerElement._attributes.style.value; // happy-dom does not support getComputedStyle()
-    expect(style.includes('left: 10px')).toBe(true);
-    expect(style.includes('top: 10px')).toBe(true);
-    expect(style.includes('bottom: 4px')).toBe(true);
+    const style = window.getComputedStyle(config.arrow);
+    expect(style.left).toBe('10px');
+    expect(style.top).toBe('10px');
+    expect(style.bottom).toBe('4px');
+
+    popover.remove();
+    arrow.remove();
   });
 });
 

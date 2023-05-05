@@ -7,7 +7,10 @@ import styles from './divider.css?inline';
  * @alpha
  * @element nve-divider
  * @cssprop --color
- * @cssprop --emphasis-color
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-divider-documentation--page
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0
+ * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr
+ * @stable false
  */
 export class Divider extends LitElement {
   // TODO: Implement vertical divider; only horizontal now

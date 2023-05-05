@@ -76,7 +76,7 @@ export class Notification extends LitElement {
 
   get #popoverContent() {
     return html`
-    <nve-icon .name=${statusIcons[this.status] ?? 'information'} part="status-icon"></nve-icon>
+    <nve-icon .name=${statusIcons[this.status]} part="status-icon"></nve-icon>
     ${this.closable ? html`<nve-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" interaction="ghost" aria-label="close"></nve-icon-button>` : ''}
     <slot></slot>`;
   }

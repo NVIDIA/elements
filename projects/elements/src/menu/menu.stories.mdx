@@ -1,0 +1,80 @@
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, Status } from '../docs/utils.mdx';
+
+<Meta title="Elements/Menu/Documentation" parameters={{ badges: ['alpha'] }} />
+
+# Menu
+
+<figure>
+  <blockquote cite="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/">
+    A menu is a widget that offers a list of choices to the user, such as a set of actions or functions.
+    Menu widgets behave like native operating system menus, such as the menus that pull down from the
+    menubars commonly found at the top of many desktop application windows. A menu is usually opened,
+    or made visible, by activating a menu button, choosing an item in a menu that opens a sub menu,
+    or by invoking a command, such as Shift + F10 in Windows, that opens a context specific menu.
+  </blockquote>
+  <figcaption>- ARIA Authoring Practices Guide</figcaption>
+</figure>
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/menu/define.js';
+```
+
+```html
+<nve-menu>
+  <nve-menu-item>item 1</nve-menu-item>
+  <nve-menu-item selected>item 2</nve-menu-item>
+  <nve-menu-item>item 3</nve-menu-item>
+  <nve-menu-item>item 4</nve-menu-item>
+</nve-menu>
+```
+
+<Canvas>
+  <Story id="elements-menu-examples--default" />
+</Canvas>
+
+## Icons
+
+<Canvas>
+  <Story id="elements-menu-examples--icons" />
+</Canvas>
+
+## Dropdown
+
+[ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
+
+<Canvas>
+  <Story id="elements-menu-examples--dropdown" inline={false} height={300} />
+</Canvas>
+
+## Complex
+
+<Canvas>
+  <Story id="elements-menu-examples--complex" inline={false} height={340} />
+</Canvas>
+
+## Links
+
+<Canvas>
+  <Story id="elements-menu-examples--links" />
+</Canvas>
+
+## Selected
+
+<Canvas>
+  <Story id="elements-menu-examples--selected" />
+</Canvas>
+
+## Disabled
+
+<Canvas>
+  <Story id="elements-menu-examples--disabled" />
+</Canvas>
+
+<Status tag="nve-menu"></Status>
+
+<LinkedHeader>nve-menu</LinkedHeader>
+
+<Props of="nve-menu" />

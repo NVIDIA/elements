@@ -64,3 +64,8 @@ nve-icon-button {
 :host([position*='left']) {
   --arrow-transform: translate(-2px, 0) rotate(45deg);
 }
+
+::slotted(nve-menu) {
+  margin: calc(var(--nve-ref-size-400) * -1);
+  --width: 100%;
+}
