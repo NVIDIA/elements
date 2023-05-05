@@ -64,3 +64,8 @@ mlv-icon-button {
 :host([position*='left']) {
   --arrow-transform: translate(-2px, 0) rotate(45deg);
 }
+
+::slotted(mlv-menu) {
+  margin: calc(var(--mlv-ref-size-400) * -1);
+  --width: 100%;
+}

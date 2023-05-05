@@ -3,9 +3,12 @@
 }
 
 [mlv-layout] {
-  display: flex;
-  margin: 0;
-  min-height: 0;
+  &[mlv-layout~='row'],
+  &[mlv-layout~='column'] {
+    display: flex;
+    margin: 0;
+    min-height: 0;
+  }
 
   /* Grow */
   &[mlv-layout~='grow'] {

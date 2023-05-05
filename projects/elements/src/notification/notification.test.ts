@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
 import { Notification } from '@elements/elements/notification';
 import '@elements/elements/notification/define.js';
 
@@ -62,5 +62,20 @@ describe('mlv-notification', () => {
     element.position = 'bottom';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('dialog').tagName).toBe('DIALOG');
+  });
+
+  it('should override remove to set hidden', async () => {
+    expect(element.hidden).toBe(false);
+    element.remove();
+    expect(element.hidden).toBe(true);
+  });
+
+  it('should emit close event when close button clicked', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'close');
+    element.shadowRoot.querySelector('mlv-icon-button').click();
+    expect((await event)).toBeDefined();
   });
 });

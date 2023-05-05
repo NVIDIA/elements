@@ -1,0 +1,69 @@
+:host {
+  --border-radius: var(--mlv-ref-border-radius-xs);
+  --font-size: var(--mlv-ref-font-size-200);
+  --color: var(--mlv-sys-interaction-color);
+  --padding: var(--mlv-ref-size-200);
+  --gap: var(--mlv-ref-space-sm);
+  --width: 100%;
+  --min-height: var(--mlv-ref-size-800);
+  --line-height: 0;
+  --cursor: pointer;
+}
+
+[internal-host] {
+  padding: var(--padding);
+  color: var(--color);
+  font-size: var(--font-size);
+  border-radius: var(--border-radius);
+  gap: var(--gap);
+  width: var(--width);
+  min-width: var(--min-width);
+  min-height: var(--min-height);
+  cursor: var(--cursor);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  border: 0;
+  text-align: left;
+}
+
+:host(:--disabled) [interaction-state] {
+  --mlv-sys-interaction-state-ratio: 0;
+}
+
+:host(:--disabled) {
+  --cursor: not-allowed;
+  --color: var(--mlv-sys-interaction-disabled-color);
+}
+
+:host(:--selected) {
+  --color: var(--mlv-sys-interaction-selected-color);
+}
+
+:host(:--selected) {
+  --color: var(--mlv-sys-interaction-selected-color);
+}
+
+:host(:--hover) {
+  --color: var(--mlv-sys-interaction-hover-color);
+}
+
+::slotted(a) {
+  text-decoration: var(--text-decoration) !important;
+  color: var(--color) !important;
+  gap: var(--gap) !important;
+  display: flex !important;
+  align-items: center !important;
+  outline: 0;
+}
+
+::slotted(a)::after {
+  display: block;
+  content: ' ';
+  inset: 0;
+  position: absolute;
+}
+
+::slotted(*:not(a)) {
+  pointer-events: none;
+}

@@ -69,14 +69,34 @@ export const GhostInteractions = {
   `
 }
 
+export const PressedToggle = {
+  render: () => html`
+  <div mlv-layout="row gap:sm pad-bottom:md">
+    <mlv-icon-button icon-name="filter-outline"></mlv-icon-button>
+    <mlv-icon-button pressed icon-name="filter"></mlv-icon-button>
+  </div>
+
+  <div mlv-layout="row gap:sm">
+    <mlv-icon-button icon-name="hidden" interaction="ghost" aria-label="show"></mlv-icon-button>
+    <mlv-icon-button pressed icon-name="visible" interaction="ghost" aria-label="hide"></mlv-icon-button>
+  </div>
+  `
+}
+
+export const SelectedGhost = {
+  render: () => html`
+    <mlv-icon-button selected icon-name="split-vertical" aria-label="split vertical" interaction="ghost"></mlv-icon-button>
+    <mlv-icon-button icon-name="split-horizontal" aria-label="split horizontal" interaction="ghost"></mlv-icon-button>
+    <mlv-icon-button icon-name="split-none" aria-label="preview" interaction="ghost"></mlv-icon-button>
+  `
+}
+
 export const CustomIcon = {
   render: () => html`
+    <mlv-icon-button interaction="emphasize">ML</mlv-icon-button>
+    <mlv-icon-button>🎉</mlv-icon-button>
     <mlv-icon-button>
-      <span slot="icon">🎉</span>
-    </mlv-icon-button>
-    <mlv-icon-button>
-      <span slot="icon">🔗</span>
-      <a href="#" aria-label="custom icon button"></a>
+      🔗 <a href="#" aria-label="custom icon button"></a>
     </mlv-icon-button>
   `
 }

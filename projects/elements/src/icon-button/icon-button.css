@@ -28,6 +28,10 @@
   --padding: 0;
 }
 
+:host([interaction*='ghost']:--pressed) {
+  --color: var(--mlv-sys-text-emphasis-color);
+}
+
 mlv-icon {
   --color: var(--_icon-color);
   --width: var(--icon-width);

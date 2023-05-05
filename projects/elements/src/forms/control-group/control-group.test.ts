@@ -51,4 +51,11 @@ describe('mlv-control-group', () => {
     await elementIsStable(element);
     expect(element.getAttribute('aria-describedby')).toBe(message.id);
   });
+
+  it('should assign no-label style hook if no visble control label was provided', async() => {
+    label.remove();
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.no-label')).toBeTruthy();
+  });
 });

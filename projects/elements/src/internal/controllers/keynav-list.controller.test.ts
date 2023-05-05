@@ -10,9 +10,12 @@ import { keyNavigationList } from '@elements/elements/internal';
 class KeynavListControllerTestElement extends LitElement {
   @property({ type: String }) layout: 'horizontal' | 'vertical' = 'horizontal';
 
+  @property({ type: Boolean }) loop = false;
+
   get keynavListConfig() {
     return {
       layout: this.layout,
+      loop: this.loop,
       items: this.shadowRoot.querySelectorAll<HTMLElement>('button')
     }
   }
@@ -100,5 +103,68 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
+  });
+
+  it('should support vertical End shortcut', async () => {
+    element.layout = 'vertical';
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'End', bubbles: true }));
+
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[5].tabIndex).toBe(0);
+  });
+
+  it('should support vertical Home shortcut', async () => {
+    element.layout = 'vertical';
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'Home', bubbles: true }));
+
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[5].tabIndex).toBe(-1);
+  });
+
+  it('should support PageDown shortcut', async () => {
+    element.layout = 'vertical';
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'PageDown', bubbles: true }));
+
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[4].tabIndex).toBe(0);
+  });
+
+  it('should support PageUp shortcut', async () => {
+    element.layout = 'vertical';
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'PageDown', bubbles: true }));
+
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[4].tabIndex).toBe(0);
+
+    element.keynavListConfig.items[4].dispatchEvent(new KeyboardEvent('keydown', { code: 'PageUp', bubbles: true }));
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[4].tabIndex).toBe(-1);
+  });
+
+  it('should support vertical loops', async () => {
+    element.layout = 'vertical';
+    element.loop = true;
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowUp', bubbles: true }));
+
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[5].tabIndex).toBe(0);
+
+    element.keynavListConfig.items[5].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true }));
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[5].tabIndex).toBe(-1);
   });
 });

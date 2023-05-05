@@ -385,12 +385,6 @@ export const Status = () => {
 </mlv-control>`;
 };
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "selectmenu": HTMLInputElement;
-  }
-}
-
 export const SelectmenuExperimental = () => {
   return html`
 <mlv-control layout="vertical">

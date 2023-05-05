@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@elements/elements/test';
 import { Tag } from '@elements/elements/tag';
 import '@elements/elements/tag/define.js';
 
@@ -45,5 +45,14 @@ describe('mlv-tag', () => {
   it('should be an interctive button type', async () => {
     await elementIsStable(element);
     expect(element._internals.role).toBe('button');
+  });
+
+  it('should emit close event when close button clicked', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'close');
+    element.shadowRoot.querySelector('mlv-icon').click();
+    expect((await event)).toBeDefined();
   });
 });

@@ -103,6 +103,10 @@ export class Control extends LitElement {
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
     this.shadowRoot.addEventListener('slotchange', () => this.#updateStyleStates());
+
+    if (!this.input.showPicker) {
+      this.input.showPicker = () => this.input.focus();
+    }
   }
 
   firstUpdated(props: PropertyValues<this>) {

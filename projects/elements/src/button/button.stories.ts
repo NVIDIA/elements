@@ -99,6 +99,21 @@ export const Link = {
   `
 }
 
+export const PressedToggle = {
+  render: () => html`
+    <mlv-button pressed>pressed</mlv-button>
+    <mlv-button>unpressed</mlv-button>
+  `
+}
+
+export const SelectedGhost = {
+  render: () => html`
+    <mlv-button selected interaction="ghost">selected</mlv-button>
+    <mlv-button interaction="ghost">unselected</mlv-button>
+    <mlv-button interaction="ghost">unselected</mlv-button>
+  `
+}
+
 export const LinkGhost = {
   render: () => html`
 <mlv-button interaction="ghost"><a href="#">ghost</a></mlv-button>

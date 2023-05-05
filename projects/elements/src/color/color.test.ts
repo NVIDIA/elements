@@ -37,11 +37,10 @@ describe('mlv-color', () => {
   });
 
   it('should update the color value if EyeDropper is used', async () => {
-    if (!(window as any).EyeDropper) { // mock for happy-dom/non chromium env
-      (window as any).EyeDropper = class {
-        open() {
-          return Promise.resolve({ sRGBHex: '#2d2d2d' });
-        }
+    const original = (window as any).EyeDropper;
+    (window as any).EyeDropper = class {
+      open() {
+        return Promise.resolve({ sRGBHex: '#2d2d2d' });
       }
     }
   
@@ -51,5 +50,31 @@ describe('mlv-color', () => {
     element.shadowRoot.querySelector('mlv-icon-button').click();
     await elementIsStable(element);
     expect(fixture.querySelector('input').value).toBe('#2d2d2d');
+
+    (window as any).EyeDropper = original;
+  });
+});
+
+describe('mlv-color default', () => {
+  let fixture: HTMLElement;
+  let element: Color;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-color style="--background: #0F0">
+        <label>label</label>
+        <input type="text" value="" />
+      </mlv-color>
+    `);
+    element = fixture.querySelector('mlv-color');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should provide value if default of empty string set by some browsers', () => {
+    expect(fixture.querySelector('input').value).toBe('#0F0');
   });
 });

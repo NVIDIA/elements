@@ -36,7 +36,6 @@ export class Dot extends LitElement {
   }
 
   #updateSlot() {
-    console.log(this.#internals)
     this.textContent.length ? this.#internals.states.add('--has-text') : this.#internals.states.delete('--has-text');
   }
 }

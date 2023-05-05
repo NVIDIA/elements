@@ -1,4 +1,5 @@
 import { ReactiveController, ReactiveElement  } from 'lit';
+import { removeEmptyTextNode } from '../utils/dom.js';
 
 /**
  * Adds anchor/link support for interactive custom elements.
@@ -22,12 +23,22 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
     return this.host.parentElement?.tagName === 'A' ? this.host.parentElement as HTMLAnchorElement : null;
   }
 
+  get #defaultSlot() {
+    return this.host.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
+  }
+
+  get #anchorSlot() {
+    return this.host.shadowRoot.querySelector<HTMLSlotElement>('slot[name=anchor]');
+  }
+
   constructor(private host: T) {
     this.host.addController(this);
   }
 
   async hostConnected() {
     await this.host.updateComplete;
+
+    this.#updateAnchorSlotAssignment();
 
     if (this.#anchor) {
       this.host.readonly = true;
@@ -44,5 +55,12 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
         e.stopImmediatePropagation();
       }
     });
+  }
+
+  #updateAnchorSlotAssignment() {
+    if (this.#anchor && this.#anchorSlot) {
+      this.#anchor.slot = 'anchor';
+      this.#defaultSlot?.assignedNodes().forEach(node => removeEmptyTextNode(node));
+    }
   }
 }

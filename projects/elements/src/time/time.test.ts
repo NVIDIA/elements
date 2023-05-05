@@ -30,4 +30,10 @@ describe('mlv-time', () => {
   it('should render clock suffix icon', () => {
     expect(element.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('schedule');
   });
+
+  it('should trigger native UI', async () => {
+    element.shadowRoot.querySelector('mlv-icon-button').click();
+    await elementIsStable(element);
+    expect(element.input.matches(':focus')).toBe(false);
+  });
 });
