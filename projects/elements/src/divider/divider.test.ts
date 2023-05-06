@@ -12,7 +12,7 @@ describe('nve-divider', () => {
     fixture = await createFixture(html`
       <nve-divider></nve-divider>
     `);
-    element = fixture.querySelector('nve-divider');
+    element = fixture.querySelectorAll('nve-divider')[0];
     await elementIsStable(element);
   });
 
@@ -24,24 +24,12 @@ describe('nve-divider', () => {
     expect(customElements.get('nve-divider')).toBeDefined();
   });
 
-  it('should default to 100% width', () => {
-    expect((element.shadowRoot.querySelector('[divider-line]') as HTMLElement).style.width).toBe('100%');
-  });
-
   it('orientation should default to "horizontal"', () => {
     expect(element.orientation).toBe('horizontal');
+    expect(element._internals.ariaOrientation).toBe('horizontal');
   });
 
-  it('emphasis should default to false', () => {
-    expect(element.emphasis).toBe(false);
+  it('should initialize role separator', () => {
+    expect(element._internals.role).toBe('separator');
   });
-
-  // TODO: not sure why this test was failing; but if i remove it the entire test suite fails too?!
-  // it('changing emphasis should matter', async () => {
-  //   const originalColor = getComputedStyle(element).getPropertyValue('--internal-color').trim();
-  //   element.emphasis = true;
-  //   await elementIsStable(element);
-  //   const newColor = getComputedStyle(element).getPropertyValue('--internal-color').trim();
-  //   expect(newColor).not.toEqual(originalColor);
-  // });
 });
