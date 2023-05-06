@@ -97,10 +97,6 @@ const StackedCardsWithPanel = {
       nve-panel-content {
         width: 328px;
       }
-
-      #header-buttons {
-        border-left: 1px solid var(--nve-ref-border-color-muted);
-      }
     </style>
 
     <main nve-theme="root" nve-layout="column gap:lg align:stretch">
@@ -138,7 +134,8 @@ const StackedCardsWithPanel = {
 
               </section>
 
-              <div nve-layout="row gap:sm pad:sm" id="header-buttons">
+              <div nve-layout="row gap:sm pad:sm">
+                <nve-divider orientation="vertical"></nve-divider>
                 <nve-button>Default</nve-button>
                 <nve-icon-button icon-name="information" aria-label="information" @click=${() => togglePanel(args.panelSide === 'right')}></nve-icon-button>
                 <nve-icon-button icon-name="additional-actions" aria-label="additional actions"></nve-icon-button>
