@@ -97,10 +97,6 @@ const StackedCardsWithPanel = {
       mlv-panel-content {
         width: 328px;
       }
-
-      #header-buttons {
-        border-left: 1px solid var(--mlv-ref-border-color-muted);
-      }
     </style>
 
     <main mlv-theme="root" mlv-layout="column gap:lg align:stretch">
@@ -138,7 +134,8 @@ const StackedCardsWithPanel = {
 
               </section>
 
-              <div mlv-layout="row gap:sm pad:sm" id="header-buttons">
+              <div mlv-layout="row gap:sm pad:sm">
+                <mlv-divider orientation="vertical"></mlv-divider>
                 <mlv-button>Default</mlv-button>
                 <mlv-icon-button icon-name="information" aria-label="information" @click=${() => togglePanel(args.panelSide === 'right')}></mlv-icon-button>
                 <mlv-icon-button icon-name="additional-actions" aria-label="additional actions"></mlv-icon-button>

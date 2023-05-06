@@ -1,27 +1,26 @@
-/* TODO: LEFTOFF! */
 :host {
   --color: var(--mlv-ref-border-color);
-  --emphasis-color: var(--mlv-ref-border-color-emphasis);
-  --internal-color: var(--color);
-  width: 100%;
-}
-
-:host([emphasis]) {
-  --internal-color: var(--emphasis-color);
+  --border-radius: 0;
+  --padding: 0;
+  --size: var(--mlv-ref-border-width-md);
 }
 
 [internal-host] {
+  display: block;
   width: 100%;
-  display: flex;
-  align-items: center;
-  line-height: 1em;
-  place-items: center;
-  place-content: center;
+  height: var(--size);
+  background-color: var(--color);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
 }
 
-[divider-line] {
-  background-color: var(--internal-color);
-  display: block;
-  flex: 1 1 auto;
-  height: 1px;
+:host([orientation='vertical']) {
+  align-self: stretch;
+  height: inherit;
+  width: var(--size);
+}
+
+:host([orientation="vertical"]) [internal-host] {
+  height: 100%;
+  width: var(--size);
 }

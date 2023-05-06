@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { when } from 'lit/directives/when.js';
-import { stateExpanded, I18nController, TypeExpandableController, useStyles } from '@elements/elements/internal';
+import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals } from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import panelStyleSheet from './panel.css?inline';
 import panelHeaderStyleSheet from './panel-header.css?inline';
@@ -198,6 +198,7 @@ export class Panel extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    attachInternals(this);
     this._internals.role = 'region';
   }
 }

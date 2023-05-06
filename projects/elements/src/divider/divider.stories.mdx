@@ -1,9 +1,12 @@
 import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 import { LinkedHeader, Status } from '../docs/utils.mdx';
 
-<Meta title="Elements/Divider/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Divider/Documentation" parameters={{ badges: ['alpha'] }} />
 
-# Divider Notification
+# Divider
+[W3 ARIA Role Documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/separator_role)
+
+Divider is a component that separates and distinguishes sections of content or groups of menuitems.
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -25,6 +28,24 @@ import '@elements/elements/divider/define.js';
   <Story id="elements-divider-examples--emphasis" />
 </Canvas>
 
+<LinkedHeader>Muted</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-divider-examples--muted" />
+</Canvas>
+
+<LinkedHeader>Vertical</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-divider-examples--vertical" />
+</Canvas>
+
+<LinkedHeader>Rounded</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-divider-examples--rounded" />
+</Canvas>
+
 <LinkedHeader>Themes</LinkedHeader>
 
 <Canvas columns={2}>
@@ -35,4 +56,5 @@ import '@elements/elements/divider/define.js';
 <Status tag={'mlv-divider'}></Status>
 
 <LinkedHeader>mlv-divider</LinkedHeader>
+
 <Props of="mlv-divider" />
