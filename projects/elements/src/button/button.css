@@ -157,7 +157,7 @@
   }
 
   &:host(:--selected) {
-    --color: var(--mlv-sys-text-link-color);
+    --color: var(--mlv-sys-interaction-selected-color);
     --background: transparent;
 
     [interaction-state] {
