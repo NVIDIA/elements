@@ -32,4 +32,13 @@ describe('nve-logo', () => {
     await elementIsStable(element);
     expect(element.getAttribute('color')).toBe('green-grass');
   });
+
+  it('should reflect a size value', async () => {
+    expect(element.color).toBe(undefined);
+    expect(element.hasAttribute('size')).toBe(false);
+
+    element.size = 'sm';
+    await elementIsStable(element);
+    expect(element.getAttribute('size')).toBe('sm');
+  });
 });
