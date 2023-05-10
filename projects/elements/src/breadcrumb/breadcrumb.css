@@ -1,0 +1,66 @@
+[internal-host] {
+  --breadcrumb-height: var(--nve-ref-size-500);
+  --item-text-size: var(--nve-ref-font-size-50);
+  --item-color: var(--nve-sys-text-muted-color);
+  --item-active-color: var(--nve-sys-text-emphasis-color);
+  --item-active-font-weight: var(--nve-ref-font-weight-semibold);
+}
+
+ol, li {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin: 0;
+  min-height: 0;
+  align-items: flex-start;
+  justify-content: stretch;
+  gap: var(--nve-ref-size-100);
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--breadcrumb-height);
+}
+
+::slotted(nve-button) {
+  --border-radius: 2px;
+  --font-size: var(--item-text-size);
+  --color: var(--item-color);
+  --padding: 0 var(--nve-ref-size-100);
+  --height: var(--breadcrumb-height);
+}
+
+::slotted(nve-button:hover) {
+  --text-decoration: underline;
+}
+
+::slotted(nve-icon-button) {
+  --border-radius: 2px;
+  --icon-width: var(--nve-ref-size-300);
+  --icon-height: var(--nve-ref-size-300);
+  --height: var(--breadcrumb-height);
+  --width: var(--breadcrumb-height);
+  --font-size: var(--item-text-size);
+  --color: var(--item-color);
+}
+
+nve-icon[separator] {
+  --height: var(--nve-ref-size-200);
+  --width: var(--nve-ref-size-200);
+  --color: var(--item-color);
+}
+
+::slotted(span) {
+  font-size: var(--item-text-size);
+  color: var(--item-color);
+  display: block;
+}
+
+::slotted(*[last-item]) {
+  color: var(--item-active-color);
+  font-weight: var(--item-active-font-weight);
+  --font-weight: var(--item-active-font-weight);
+  --color: var(--item-active-color);
+}

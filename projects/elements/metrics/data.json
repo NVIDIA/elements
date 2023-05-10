@@ -106,6 +106,25 @@
       "status": "beta"
     },
     {
+      "name": "nve-breadcrumb",
+      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": false,
+      "vqa": false,
+      "responsive": false,
+      "themes": true,
+      "package": true,
+      "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-breadcrumb-documentation--page",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1",
+      "instanceTotal": 0,
+      "projectTotal": 0,
+      "coverageTotal": 93.75,
+      "behavior": "navigation",
+      "status": "alpha"
+    },
+    {
       "name": "nve-button",
       "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/button/",
       "unitTests": true,
