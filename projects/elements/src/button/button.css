@@ -138,7 +138,7 @@
 
   &:host(:hover) {
     --background: transparent;
-    --text-decoration: underline;
+    --text-decoration: underline !important;
 
     [interaction-state] {
       --mlv-sys-interaction-state-ratio: 0;
@@ -147,7 +147,7 @@
 
   &:host(:--active) {
     --background: transparent;
-    --text-decoration: underline;
+    --text-decoration: underline !important;
   }
 
   &:host(:--disabled) {
