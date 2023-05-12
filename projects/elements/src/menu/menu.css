@@ -1,6 +1,6 @@
 
 :host {
-  --padding: var(--mlv-ref-size-200);
+  --padding:0;
   --gap: var(--mlv-ref-size-100);
   --width: min-content;
   --min-width: 170px;
@@ -16,11 +16,4 @@
   width: var(--width);
   min-width: var(--min-width);
   margin: 0;
-}
-
-::slotted(hr) {
-  width: calc(100% + calc(var(--padding) * 2));
-  border: 1px solid var(--mlv-ref-border-color-muted);
-  margin: 0;
-  margin-left: calc(var(--padding) * -1);
 }

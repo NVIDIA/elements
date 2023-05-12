@@ -11,3 +11,7 @@ mlv-select option:checked {
   background: var(--mlv-sys-interaction-selected-background) !important;
   color: var(--mlv-sys-interaction-selected-color) !important;
 }
+
+mlv-select mlv-dropdown {
+  --padding: var(--mlv-ref-size-200);
+}

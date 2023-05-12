@@ -28,7 +28,7 @@ export const Dropdown = {
       <mlv-menu-item><mlv-icon name="user"></mlv-icon> profile</mlv-menu-item>
       <mlv-menu-item><mlv-icon name="settings"></mlv-icon> settings</mlv-menu-item>
       <mlv-menu-item><mlv-icon name="favorite-filled"></mlv-icon> favorites</mlv-menu-item>
-      <hr />
+      <mlv-divider></mlv-divider>
       <mlv-menu-item><mlv-icon name="logout"></mlv-icon> logout</mlv-menu-item>
     </mlv-menu>
   </mlv-dropdown>
@@ -86,7 +86,7 @@ export const Complex = {
     <mlv-search rounded>
       <input type="search" placeholder="search tools" aria-label="search apps" />
     </mlv-search>
-    <mlv-menu style="--min-width: 200px">
+    <mlv-menu>
       <mlv-menu-item>
         <mlv-logo color="pink-rose" size="sm">Db</mlv-logo> Debugger
       </mlv-menu-item>
@@ -96,7 +96,7 @@ export const Complex = {
       <mlv-menu-item>
         <mlv-logo color="yellow-nova" size="sm">CI</mlv-logo> CI Services
       </mlv-menu-item>
-      <hr />
+      <mlv-divider></mlv-divider>
       <mlv-menu-item>
         <mlv-logo size="sm"></mlv-logo> All Apps
       </mlv-menu-item>

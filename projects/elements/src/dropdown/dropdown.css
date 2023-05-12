@@ -67,6 +67,5 @@ mlv-icon-button {
 }
 
 ::slotted(mlv-menu) {
-  margin: calc(var(--mlv-ref-size-400) * -1);
   --width: 100%;
 }
