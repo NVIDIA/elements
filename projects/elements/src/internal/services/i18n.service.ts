@@ -7,6 +7,11 @@ export interface I18nStrings {
   show: string;
   hide: string;
   loading: string;
+  previous: string;
+  next: string;
+  start: string;
+  end: string;
+  currentPage: string;
 }
 
 const i18nRegistry = {
@@ -15,7 +20,12 @@ const i18nRegistry = {
   sort: 'sort',
   show: 'show',
   hide: 'hide',
-  loading: 'loading'
+  loading: 'loading',
+  previous: 'previous',
+  next: 'next',
+  start: 'start',
+  end: 'end',
+  currentPage: 'current page'
 };
 
 class I18n {

@@ -10,10 +10,11 @@ const ariaSpecs = {
     'https://www.w3.org/WAI/ARIA/apg/patterns/tabs/',
     'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
     'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/',
-    'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/examples/menubar-navigation/'
+    'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/examples/menubar-navigation/',
+    'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav'
   ],
   list: [
-    'https://www.w3.org/WAI/ARIA/apg/patterns/grid/examples/data-grids/',
+    'https://www.w3.org/WAI/ARIA/apg/patterns/grid/',
     'https://www.w3.org/WAI/ARIA/apg/patterns/treeview/'
   ],
   feedback: [

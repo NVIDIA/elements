@@ -23,38 +23,36 @@ class AppHeaderDefaultDemo extends LitElement {
     const ddownTwoId = "default-dropdown-2";
 
     return html`
-<div style="height: 360px">
 <nve-app-header>
   <nve-logo></nve-logo>
   <nve-button slot="nav-items" selected>Link 1</nve-button>
   <nve-button slot="nav-items">Link 2</nve-button>
   <nve-icon-button icon-name="assist" slot="nav-actions" @click=${() => alert('Thanks for clicking the feedback icon button!')}></nve-icon-button>
   <nve-icon-button icon-name="app-switcher" id=${ddownOneId + '-btn'} slot="nav-actions" @click=${() => this.activeId = ddownOneId}></nve-icon-button>
-  <nve-dropdown id=${ddownOneId}
-    anchor=${ddownOneId + '-btn'}
-    .hidden=${this.activeId !== ddownOneId}
-    @close=${() => this.activeId === ddownOneId ? this.activeId = '' : ''}>
-    <nve-menu>
-      <nve-menu-item><nve-icon name="user"></nve-icon> Menu Item</nve-menu-item>
-      <nve-menu-item><nve-icon name="settings"></nve-icon> Menu Item</nve-menu-item>
-      <nve-menu-item><nve-icon name="favorite-filled"></nve-icon> Menu Item</nve-menu-item>
-      <nve-divider></nve-divider>
-      <nve-menu-item><nve-icon name="logout"></nve-icon> Menu Item</nve-menu-item>
-    </nve-menu>
-  </nve-dropdown>
   <nve-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
-  <nve-dropdown id=${ddownTwoId}
-    anchor=${ddownTwoId + '-btn'}
-    .hidden=${this.activeId !== ddownTwoId}
-    @close=${() => this.activeId === ddownTwoId ? this.activeId = '' : ''}>
-    <nve-menu>
-      <nve-menu-item><nve-icon name="user"></nve-icon> Menu Item</nve-menu-item>
-      <nve-menu-item><nve-icon name="settings"></nve-icon> Menu Item</nve-menu-item>
-      <nve-menu-item><nve-icon name="assist"></nve-icon> Menu Item</nve-menu-item>
-    </nve-menu>
-  </nve-dropdown>
 </nve-app-header>
-</div>
+<nve-dropdown id=${ddownOneId}
+  anchor=${ddownOneId + '-btn'}
+  .hidden=${this.activeId !== ddownOneId}
+  @close=${() => this.activeId === ddownOneId ? this.activeId = '' : ''}>
+  <nve-menu>
+    <nve-menu-item><nve-icon name="user"></nve-icon> Menu Item</nve-menu-item>
+    <nve-menu-item><nve-icon name="settings"></nve-icon> Menu Item</nve-menu-item>
+    <nve-menu-item><nve-icon name="favorite-filled"></nve-icon> Menu Item</nve-menu-item>
+    <nve-divider></nve-divider>
+    <nve-menu-item><nve-icon name="logout"></nve-icon> Menu Item</nve-menu-item>
+  </nve-menu>
+</nve-dropdown>
+<nve-dropdown id=${ddownTwoId}
+  anchor=${ddownTwoId + '-btn'}
+  .hidden=${this.activeId !== ddownTwoId}
+  @close=${() => this.activeId === ddownTwoId ? this.activeId = '' : ''} arrow>
+  <nve-menu>
+    <nve-menu-item><nve-icon name="user"></nve-icon> Menu Item</nve-menu-item>
+    <nve-menu-item><nve-icon name="settings"></nve-icon> Menu Item</nve-menu-item>
+    <nve-menu-item><nve-icon name="assist"></nve-icon> Menu Item</nve-menu-item>
+  </nve-menu>
+</nve-dropdown>
   `
   }
 }
@@ -69,39 +67,45 @@ export const Default = {
 
 export const AppBadge = {
   render: () => html`
-<nve-app-header>
-  <nve-logo color="yellow-nova">Ab</nve-logo>
-  <h2 slot="title">My App Title</h2>
-  <nve-button slot="nav-items" selected>Link 1</nve-button>
-  <nve-button slot="nav-items">Link 2</nve-button>
-  <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
-  <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
-  <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
-</nve-app-header>
+<div nve-theme="root">
+  <nve-app-header>
+    <nve-logo color="yellow-nova">Ab</nve-logo>
+    <h2 slot="title">My App Title</h2>
+    <nve-button slot="nav-items" selected>Link 1</nve-button>
+    <nve-button slot="nav-items">Link 2</nve-button>
+    <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+  </nve-app-header>
+</div>
   `
 };
 
 export const NavItems = {
   render: () => html`
-<nve-app-header>
-  <nve-logo></nve-logo>
-  <h2 slot="title">Nav Items</h2>
-  <nve-button slot="nav-items">Link 1</nve-button>
-  <nve-button slot="nav-items" selected>Link 2</nve-button>
-  <nve-icon-button icon-name="additional-actions" slot="nav-items"></nve-icon-button>
-</nve-app-header>
+<div nve-theme="root">
+  <nve-app-header>
+    <nve-logo></nve-logo>
+    <h2 slot="title">Nav Items</h2>
+    <nve-button slot="nav-items">Link 1</nve-button>
+    <nve-button slot="nav-items" selected>Link 2</nve-button>
+    <nve-icon-button icon-name="additional-actions" slot="nav-items"></nve-icon-button>
+  </nve-app-header>
+</div>
   `
 };
 
 export const NavActions = {
   render: () => html`
-<nve-app-header>
-  <nve-logo></nve-logo>
-  <h2 slot="title">Nav Actions</h2>
-  <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
-  <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
-  <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
-</nve-app-header>
+<div nve-theme="root">
+  <nve-app-header>
+    <nve-logo></nve-logo>
+    <h2 slot="title">Nav Actions</h2>
+    <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+  </nve-app-header>
+</div>
   `
 };
 

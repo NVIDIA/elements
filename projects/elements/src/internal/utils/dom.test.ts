@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, scrollBarWidth, hasScrollBar } from '@elements/elements/internal';
 
 @customElement('test-element')
 class TestComponent extends LitElement {
@@ -373,5 +373,25 @@ describe('removeEmptyTextNode', () => {
     // happy-dom does not emulate the wholeText text node property
     // element.childNodes.forEach(node => removeEmptyTextNode(node));
     // expect(element.childNodes.length).toEqual(0);
+  });
+});
+
+describe('scrollBarWidth(): ', () => {
+  it('should compute the current scroll bar width', () => {
+    expect(scrollBarWidth()).toBe(0); // in real browsers this typically is 10
+  });
+});
+
+describe('hasScrollBar(): ', () => {
+  it('should compute the current scroll bar width', () => {
+    const div = document.createElement('div');
+    const innerDiv = document.createElement('div');
+    div.style.width = '500px';
+    div.style.width = '500px';
+    div.style.overflow = 'auto';
+    innerDiv.style.width = '1000px';
+    innerDiv.style.width = '1000px';
+
+    expect(hasScrollBar(div)).toBe(true);
   });
 });
