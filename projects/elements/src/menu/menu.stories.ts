@@ -28,7 +28,7 @@ export const Dropdown = {
       <nve-menu-item><nve-icon name="user"></nve-icon> profile</nve-menu-item>
       <nve-menu-item><nve-icon name="settings"></nve-icon> settings</nve-menu-item>
       <nve-menu-item><nve-icon name="favorite-filled"></nve-icon> favorites</nve-menu-item>
-      <hr />
+      <nve-divider></nve-divider>
       <nve-menu-item><nve-icon name="logout"></nve-icon> logout</nve-menu-item>
     </nve-menu>
   </nve-dropdown>
@@ -86,7 +86,7 @@ export const Complex = {
     <nve-search rounded>
       <input type="search" placeholder="search tools" aria-label="search apps" />
     </nve-search>
-    <nve-menu style="--min-width: 200px">
+    <nve-menu>
       <nve-menu-item>
         <nve-logo color="pink-rose" size="sm">Db</nve-logo> Debugger
       </nve-menu-item>
@@ -96,7 +96,7 @@ export const Complex = {
       <nve-menu-item>
         <nve-logo color="yellow-nova" size="sm">CI</nve-logo> CI Services
       </nve-menu-item>
-      <hr />
+      <nve-divider></nve-divider>
       <nve-menu-item>
         <nve-logo size="sm"></nve-logo> All Apps
       </nve-menu-item>
