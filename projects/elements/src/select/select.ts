@@ -50,13 +50,17 @@ export class Select extends Control {
     return this.querySelector('nve-dropdown');
   }
 
+  get #menu() {
+    return this.querySelector('nve-menu');
+  }
+
   get #menuItems() {
     return this.querySelectorAll('nve-menu-item');
   }
 
   protected get dropdown() {
     return html`
-    <nve-dropdown hidden .anchor=${this.#select as HTMLElement}>
+    <nve-dropdown hidden .anchor=${this.#select as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
       <nve-menu role="listbox">
         ${this.#options.map(o => html`<nve-menu-item role="option" aria-selected=${o.value === this.#select.value} ?selected=${o.value === this.#select.value} .value=${o.value}>${this.#getOptionLabel(o)}</nve-menu-item>`)}
       </nve-menu>
@@ -77,18 +81,23 @@ export class Select extends Control {
       if (!this.#select.disabled && !this.#select.size && !this.#select.multiple) {
         e.preventDefault();
         this.#updateOptions();
-        this.#dropdown.style.setProperty('--width', `${this.#select.getBoundingClientRect().width}px`);
+        const width = this.#select.getBoundingClientRect().width;
+        this.#menu.style.setProperty('--width', `${width}px`);
+        this.#menu.style.setProperty('--min-width', `fit-content`);
+        this.#dropdown.style.setProperty('--width', `${width}px`);
         this.#dropdown.hidden = false;
       }
     });
   }
 
   #selectValue(value) {
-    this.#select.value = value;
-    this.#updateOptions();
-    this.#select.dispatchEvent(new Event('input'));
-    this.#select.dispatchEvent(new Event('change'));
-    this.#dropdown.toggleAttribute('hidden');
+    if (value) {
+      this.#select.value = value;
+      this.#updateOptions();
+      this.#select.dispatchEvent(new Event('input'));
+      this.#select.dispatchEvent(new Event('change'));
+      this.#dropdown.toggleAttribute('hidden');
+    }
   }
 
   #updateOptions() {

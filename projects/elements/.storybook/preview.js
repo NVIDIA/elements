@@ -28,12 +28,12 @@ export const parameters = {
   docs: {
     theme: themes.dark,
     transformSource: (src, context) => {
-      const isTokenTable = context.id.includes('foundations-tokens-examples--');
+      const excludes = context.id.includes('foundations-tokens-examples--');
       // remove nve-theme="root" from demo source snippets when not used for theming
-      const hasRoot = i => i.includes('nve-theme="root"');
+      const hasRoot = i => i.match(/nve-theme="root"/g)?.length > 1;
       const lines = src.trim().split('\n').filter(i => !hasRoot(i));
       const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('nve-theme="root ', 'nve-theme="');
-      return isTokenTable ? source : prettier.format(source, { parser: 'html', plugins: [parserHTML], singleAttributePerLine: false }).replaceAll('=""', '');
+      return excludes ? source : prettier.format(source, { parser: 'html', plugins: [parserHTML], singleAttributePerLine: false, printWidth: 120 }).replaceAll('=""', '');
     }
   },
   controls: {
@@ -101,6 +101,7 @@ export const parameters = {
           'Versioning',
           'Testing',
           'Extensions',
+          'Metrics',
           'API Design',
           [
             'Getting Started',
@@ -164,6 +165,69 @@ export const parameters = {
           'I18n'
         ],
         'Elements',
+        [
+          'Alert',
+          'Alert Banner',
+          'Alert Group',
+          'App Header',
+          'Badge',
+          'Button',
+          'Card',
+          'Checkbox',
+          'Color',
+          'Data Grid',
+          [
+            'Documentation',
+            'Action',
+            'Card',
+            'Column Action',
+            'Column Alignment',
+            'Column Fixed',
+            'Column Width',
+            'Detail Panel',
+            'Footer',
+            'Multi Select',
+            'Pagination',
+            'Placeholder',
+            'Row Action',
+            'Row Sort',
+            'Scroll Height',
+            'Single Select',
+            'Stripe',
+            'Kitchen Sink',
+            'Examples'
+          ],
+          'Date',
+          'Datetime',
+          'Dialog',
+          'Divider',
+          'Dot',
+          'Dropdown',
+          'File',
+          'Icon',
+          'Icon Button',
+          'Input',
+          'Input Group',
+          'Logo',
+          'Menu',
+          'Month',
+          'Notification',
+          'Pagination',
+          'Panel',
+          'Password',
+          'Radio',
+          'Range',
+          'Search',
+          'Select',
+          'Switch',
+          'Tabs',
+          'Tag',
+          'Textarea',
+          'Time',
+          'Toast',
+          'Tootltip',
+          'Week',
+        ],
         'Patterns',
         'Internal'
       ]
