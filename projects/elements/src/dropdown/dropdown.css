@@ -67,6 +67,5 @@ nve-icon-button {
 }
 
 ::slotted(nve-menu) {
-  margin: calc(var(--nve-ref-size-400) * -1);
   --width: 100%;
 }
