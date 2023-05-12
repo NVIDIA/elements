@@ -10,6 +10,7 @@
   --width: fit-content;
   width: var(--width);
   position: inherit;
+  display: block;
 }
 
 :host([position]) {

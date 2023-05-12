@@ -1,18 +1,19 @@
 :host {
+  --background: var(--mlv-sys-layer-shell-background);
+  --padding: var(--mlv-ref-space-xs) var(--mlv-ref-space-sm);
+  --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  contain: initial;
   width: 100%;
 }
 
 [internal-host] {
-  background: var(--mlv-sys-layer-shell-background);
-  padding: 0;
-}
-
-nav {
+  background: var(--background);
+  padding: var(--padding);
+  border-bottom: var(--border-bottom);
   display: flex;
   flex-direction: row;
   justify-items: flex-start;
   align-items: center;
-  padding: var(--mlv-ref-space-xs) var(--mlv-ref-space-sm);
   justify-content: space-between;
   gap: none;
 }
@@ -38,7 +39,6 @@ slot[name='title'] h2 {
   margin: 0;
 }
 
-nav > div,
 slot {
   display: flex;
   flex-direction: row;

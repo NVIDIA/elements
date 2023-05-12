@@ -166,6 +166,19 @@
   &[mlv-text~='visited'] {
     color: var(--mlv-sys-text-link-visited-color) !important;
   }
+
+  &:focus-visible {
+    outline: Highlight solid 2px !important;
+    outline: 5px auto -webkit-focus-ring-color !important;
+  }
+
+  &[mlv-text~='no-visit'] {
+    color: var(--mlv-sys-text-link-color) !important;
+  }
+
+  &[mlv-text~='no-underline'] {
+    color: var(--mlv-sys-text-link-color) !important;
+  }
 }
 
 [mlv-text~='code'] {

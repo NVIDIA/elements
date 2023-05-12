@@ -61,7 +61,7 @@ describe('mlv-select', () => {
   });
 
   it('should set the value state for menu items', async () => {
-    const item = fixture.querySelectorAll<MenuItem>('mlv-menu-item')[0];
+    const item = element.querySelectorAll<MenuItem>('mlv-menu-item')[0];
     expect(item.value).toBe('1');
   });
 

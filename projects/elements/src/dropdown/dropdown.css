@@ -21,6 +21,7 @@ dialog {
   color: var(--color);
   box-shadow: var(--box-shadow);
   gap: var(--mlv-ref-space-sm);
+  width: fit-content;
   outline: 0;
 }
 

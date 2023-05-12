@@ -7,7 +7,8 @@ describe('setPopoverStyles', () => {
     const config: PopoverConfig = {
       position: 'center',
       popover: document.createElement('div'),
-      anchor: document.body
+      anchor: document.body,
+      strategy: 'fixed'
     };
 
     setPopoverStyles(config, { x: 0, y: 0 });
@@ -18,7 +19,8 @@ describe('setPopoverStyles', () => {
     const config: PopoverConfig = {
       position: 'top',
       popover: document.createElement('div'),
-      anchor: document.createElement('div')
+      anchor: document.createElement('div'),
+      strategy: 'absolute'
     };
 
     setPopoverStyles(config, { x: 0, y: 0 });
@@ -29,7 +31,8 @@ describe('setPopoverStyles', () => {
     const config: PopoverConfig = {
       position: 'top',
       popover: document.createElement('div'),
-      anchor: document.createElement('div')
+      anchor: document.createElement('div'),
+      strategy: 'absolute'
     };
 
     setPopoverStyles(config, { x: 10, y: 20 });
