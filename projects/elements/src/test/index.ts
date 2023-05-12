@@ -60,11 +60,11 @@ function retry(fn: () => Promise<any>, maxTries = 10) {
 }
 
 export function emulateClick(component: HTMLElement | Element) {
-  const event1 = new MouseEvent('mousedown');
-  const event2 = new MouseEvent('pointerdown');
-  const event3 = new MouseEvent('mouseup');
-  const event4 = new MouseEvent('pointerup');
-  const event5 = new MouseEvent('click');
+  const event1 = new MouseEvent('mousedown', { bubbles: true });
+  const event2 = new MouseEvent('pointerdown', { bubbles: true });
+  const event3 = new MouseEvent('mouseup', { bubbles: true });
+  const event4 = new MouseEvent('pointerup', { bubbles: true });
+  const event5 = new MouseEvent('click', { bubbles: true });
   component.dispatchEvent(event1);
   component.dispatchEvent(event2);
   component.dispatchEvent(event3);

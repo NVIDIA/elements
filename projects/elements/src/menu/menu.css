@@ -4,6 +4,8 @@
   --gap: var(--nve-ref-size-100);
   --width: min-content;
   --min-width: 170px;
+  width: var(--width);
+  min-width: var(--min-width);
 }
 
 [internal-host] {

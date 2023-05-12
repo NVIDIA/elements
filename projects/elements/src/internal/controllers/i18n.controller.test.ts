@@ -37,11 +37,16 @@ describe('i18n.controller', () => {
     expect(element.i18n).toStrictEqual({
       __set: true,
       close: 'close',
+      currentPage: 'current page',
       expand: 'expand',
       sort: 'sort',
       show: 'show',
       hide: 'hide',
-      loading: 'loading'
+      loading: 'loading',
+      previous: 'previous',
+      next: 'next',
+      start: 'start',
+      end: 'end'
     });
   });
 
@@ -52,11 +57,16 @@ describe('i18n.controller', () => {
     expect(element.i18n).toStrictEqual({
       __set: true,
       close: 'close override',
+      currentPage: 'current page',
       expand: 'expand',
       sort: 'sort',
       show: 'show',
       hide: 'hide',
-      loading: 'loading'
+      loading: 'loading',
+      previous: 'previous',
+      next: 'next',
+      start: 'start',
+      end: 'end'
     });
   });
 })
