@@ -171,3 +171,42 @@ export function removeEmptyTextNode(node: Node) {
     (node as Text).remove();
   }
 }
+
+export function scrollBarWidth() {
+  const div = document.createElement('div');
+  div.style.setProperty('width', '100px');
+  div.style.setProperty('height', '100px');
+  div.style.setProperty('overflow', 'scroll');
+  div.style.setProperty('position', 'absolute');
+  div.style.setProperty('top', '-9999px');
+  document.body.appendChild(div);
+  const width = div.offsetWidth - div.clientWidth;
+  document.body.removeChild(div);
+  return width;
+}
+
+export function hasScrollBar(el: HTMLElement) {
+  return !!(el.scrollTop || (++el.scrollTop && el.scrollTop--));
+}
+
+export function waitForScrollEnd(element: HTMLElement) {
+  let prevFrame = 0;
+  let prevX = element.scrollLeft;
+  let prevY = element.scrollTop;
+
+  return new Promise(resolve => {
+    function tick(frames) {
+      if (frames >= 500 || frames - prevFrame > 20) {
+        resolve(null);
+      } else {
+        if (element.scrollTop !== prevX || element.scrollLeft !== prevY) {
+          prevFrame = frames;
+          prevX = element.scrollTop;
+          prevY = element.scrollLeft;
+        }
+        requestAnimationFrame(tick.bind(null, frames + 1))
+      }
+    }
+    tick(0);
+  });
+}

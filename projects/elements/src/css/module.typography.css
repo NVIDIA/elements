@@ -166,6 +166,19 @@
   &[nve-text~='visited'] {
     color: var(--nve-sys-text-link-visited-color) !important;
   }
+
+  &:focus-visible {
+    outline: Highlight solid 2px !important;
+    outline: 5px auto -webkit-focus-ring-color !important;
+  }
+
+  &[nve-text~='no-visit'] {
+    color: var(--nve-sys-text-link-color) !important;
+  }
+
+  &[nve-text~='no-underline'] {
+    color: var(--nve-sys-text-link-color) !important;
+  }
 }
 
 [nve-text~='code'] {

@@ -7,7 +7,9 @@
   --border-radius: var(--nve-ref-border-radius-sm);
   --border: 0;
   --cursor: pointer;
-  width: 100%;
+  --width: 100%;
+  width: var(--width);
+  contain: initial;
 }
 
 [input] {
@@ -15,11 +17,11 @@
   background: var(--background);
   border: var(--border);
   border-radius: var(--border-radius);
+  width: var(--width);
   color: var(--color);
   display: flex;
   align-content: stretch;
   position: relative;
-  width: 100%;
 }
 
 [name='caret'] {

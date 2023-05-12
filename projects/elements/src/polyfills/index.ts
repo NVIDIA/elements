@@ -7,6 +7,7 @@
  */
 import 'construct-style-sheets-polyfill';
 import 'element-internals-polyfill';
+import 'formdata-polyfill';
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute

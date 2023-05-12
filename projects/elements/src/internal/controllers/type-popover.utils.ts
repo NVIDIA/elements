@@ -1,5 +1,6 @@
 import { css } from 'lit';
-import { arrow, autoUpdate, computePosition, ComputePositionReturn, flip, Middleware, offset } from '@floating-ui/dom';
+import { arrow, autoUpdate, computePosition, ComputePositionReturn, flip, Middleware, offset, platform } from '@floating-ui/dom';
+import { offsetParent } from 'composed-offset-position';
 import { parseTokenNumber } from '../utils/dom.js';
 
 if (!(window as any).process) {
@@ -34,14 +35,10 @@ export const popoverBaseStyles = css`
 :host {
   --width: max-content;
   contain: initial;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
+  display: contents;
 }
 
 :host([hidden]) {
-  display: block !important;
   pointer-events: none !important;
 }
 
@@ -78,9 +75,8 @@ export function getPopoverCustomCSSProperites(element: HTMLElement) {
   };
 }
 
-export function setPopoverStyles(config: PopoverConfig, position: { x: number, y: number }) {
-  const positionStyle = config.anchor === document.body ? 'fixed' : 'absolute';
-  Object.assign(config.popover.style, { position: positionStyle, left: `${position.x}px`, top: `${position.y}px` });
+export function setPopoverStyles(config: PopoverConfig, position: Partial<ComputePositionReturn>) {
+  Object.assign(config.popover.style, { position: config.strategy, left: `${position.x}px`, top: `${position.y}px` });
 }
 
 export function setArrowStyles(config: PopoverConfig, position: ComputePositionReturn) {
@@ -105,7 +101,20 @@ export function computePopoverPosition(config: PopoverConfig) {
     config.anchor !== document.body ? flip() : null
   ].filter(i => !!i);
   const placement = `${config.position}${config.alignment === 'start' || config.alignment === 'end' ? `-${config.alignment}` : ''}` as `${PopoverSides}-${Exclude<PopoverAlign, 'center'>}`;
-  return computePosition(config.anchor, config.popover, { placement: config.position !== 'center' ? placement : undefined, middleware, strategy: config.strategy });
+  return computePosition(
+    config.anchor,
+    config.popover,
+    {
+      placement: config.position !== 'center' ? placement : undefined,
+      middleware,
+      strategy: 'fixed',
+      platform: {
+        ...platform,
+        // https://floating-ui.com/docs/platform#shadow-dom-fix
+        getOffsetParent: (element: HTMLElement) => platform.getOffsetParent(element, offsetParent),
+      }
+    }
+  );
 }
 
 function getOffsetMiddleware(config: PopoverConfig): Middleware {

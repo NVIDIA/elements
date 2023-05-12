@@ -14,7 +14,12 @@ describe('GlobalStateService', () => {
       sort: 'sort',
       show: 'show',
       hide: 'hide',
-      loading: 'loading'
+      loading: 'loading',
+      previous: 'previous',
+      next: 'next',
+      start: 'start',
+      end: 'end',
+      currentPage: 'current page'
     });
   });
 
@@ -25,7 +30,12 @@ describe('GlobalStateService', () => {
       sort: 'classer',
       show: 'montrer',
       hide: 'cacher',
-      loading: 'bourrage'
+      loading: 'bourrage',
+      previous: 'précédente',
+      next: 'suivante',
+      start: 'page de démarrage',
+      end: 'page de fin',
+      currentPage: 'page actuelle'
     });
 
     expect(I18nService.i18n).toStrictEqual({
@@ -34,7 +44,12 @@ describe('GlobalStateService', () => {
       sort: 'classer',
       show: 'montrer',
       hide: 'cacher',
-      loading: 'bourrage'
+      loading: 'bourrage',
+      previous: 'précédente',
+      next: 'suivante',
+      start: 'page de démarrage',
+      end: 'page de fin',
+      currentPage: 'page actuelle'
     });
   });
 });
