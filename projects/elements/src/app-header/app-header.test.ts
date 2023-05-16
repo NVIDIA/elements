@@ -108,4 +108,9 @@ describe('mlv-app-header: nav items and actions', () => {
     expect(navActionOverride.getAttribute('interaction')).toBe('emphasize');
     expect(navActionOverride.textContent).toBe(innerIconBtnText);
   });
+
+  it('should set emphasized buttons to size sm if not set', () => {
+    expect(element.querySelector<IconButton>('mlv-icon-button:not([interaction="emphasize"])').size).toBe(undefined);
+    expect(element.querySelector<IconButton>('mlv-icon-button[interaction="emphasize"]').size).toBe('sm');
+  });
 });

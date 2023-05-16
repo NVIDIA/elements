@@ -1,10 +1,9 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { useStyles, keyNavigationList, KeynavListConfig, attachInternals } from '@elements/elements/internal';
+import { Logo } from '@elements/elements/logo';
 import type { IconButton } from '@elements/elements/icon-button';
 import type { Button } from '@elements/elements/button';
 import styles from './app-header.css?inline';
-
-type AppHeaderFocusable = Button | IconButton;
 
 /**
  * @element mlv-app-header
@@ -14,14 +13,14 @@ type AppHeaderFocusable = Button | IconButton;
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-app-header-documentation--page
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-35&t=c9DaB6YRpkhGAp49-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav
- * @vqa false
+ * @vqa true
  * @stable false
  */
- @keyNavigationList<AppHeader>()
- export class AppHeader extends LitElement {
+@keyNavigationList<AppHeader>()
+export class AppHeader extends LitElement {
   get keynavListConfig(): KeynavListConfig {
     return {
-      items: Array.from(this.querySelectorAll<AppHeaderFocusable>('mlv-button, mlv-icon-button'))
+      items: [...this.#navItems, ...this.#navActions]
     }
   }
 
@@ -32,16 +31,20 @@ type AppHeaderFocusable = Button | IconButton;
     version: 'PACKAGE_VERSION'
   };
 
+  static elementDefinitions = {
+    'mlv-logo': Logo
+  }
+
   get #navItems() {
-    return this.querySelectorAll('[slot="nav-items"]');
+    return Array.from(this.querySelectorAll<Button>('[slot="nav-items"]'));
   }
 
   get #navActions() {
-    return this.querySelectorAll('[slot="nav-actions"]');
+    return Array.from(this.querySelectorAll<IconButton>('[slot="nav-actions"]'));
   }
 
   get #slottedLogo() {
-    return this.querySelector('mlv-logo');
+    return this.querySelector<Logo>('mlv-logo');
   }
 
   render() {
@@ -82,8 +85,12 @@ type AppHeaderFocusable = Button | IconButton;
   }
 
   #updateItems() {
-    const allNavItems = [].concat(Array.from(this.#navItems), Array.from(this.#navActions));
-    allNavItems.filter(item => item !== null && !item.hasAttribute('interaction'))
-      .forEach(item => (item as AppHeaderFocusable).interaction = 'ghost');
+    this.#navActions
+      .filter(i => i.getAttribute('interaction') === 'emphasize')
+      .forEach(item => item.size = 'sm');
+
+    [...this.#navItems, ...this.#navActions]
+      .filter(i => !i.hasAttribute('interaction'))
+      .forEach(item => item.interaction = 'ghost');
   }
 }

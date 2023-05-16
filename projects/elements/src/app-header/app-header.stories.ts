@@ -28,8 +28,9 @@ class AppHeaderDefaultDemo extends LitElement {
   <mlv-button slot="nav-items" selected>Link 1</mlv-button>
   <mlv-button slot="nav-items">Link 2</mlv-button>
   <mlv-icon-button icon-name="assist" slot="nav-actions" @click=${() => alert('Thanks for clicking the feedback icon button!')}></mlv-icon-button>
+  <mlv-icon-button icon-name="search" slot="nav-actions" @click=${() => alert('Thanks for clicking the search icon button!')}></mlv-icon-button>
   <mlv-icon-button icon-name="app-switcher" id=${ddownOneId + '-btn'} slot="nav-actions" @click=${() => this.activeId = ddownOneId}></mlv-icon-button>
-  <mlv-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
+  <mlv-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasize" slot="nav-actions">EL</mlv-icon-button>
 </mlv-app-header>
 <mlv-dropdown id=${ddownOneId}
   anchor=${ddownOneId + '-btn'}
@@ -74,6 +75,7 @@ export const AppBadge = {
     <mlv-button slot="nav-items" selected>Link 1</mlv-button>
     <mlv-button slot="nav-items">Link 2</mlv-button>
     <mlv-icon-button icon-name="assist" slot="nav-actions"></mlv-icon-button>
+    <mlv-icon-button icon-name="search" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button icon-name="app-switcher" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>
@@ -102,6 +104,7 @@ export const NavActions = {
     <mlv-logo></mlv-logo>
     <h2 slot="title">Nav Actions</h2>
     <mlv-icon-button icon-name="assist" slot="nav-actions"></mlv-icon-button>
+    <mlv-icon-button icon-name="search" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button icon-name="app-switcher" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>

@@ -5,7 +5,7 @@
   --color: var(--mlv-sys-status-color);
   --height: var(--mlv-ref-size-1000);
   --width: var(--mlv-ref-size-1000);
-  --font-size: calc(var(--width) / 2.5);
+  --font-size: calc(var(--width) / 2);
   --border-radius: var(--mlv-ref-border-radius-sm);
   --font-weight: var(--mlv-ref-font-weight-bold);
   display: inline-block;
