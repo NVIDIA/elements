@@ -7,7 +7,6 @@ import tabsStyleSheet from './tabs.css?inline';
 /**
  * @element mlv-tabs-item
  * @slot - default slot for content
- * @cssprop --background
  * @cssprop --font-size
  * @cssprop --font-weight
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-tabs-documentation--page

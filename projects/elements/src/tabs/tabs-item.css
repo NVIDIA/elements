@@ -1,19 +1,20 @@
 
 :host {
-  --border-bottom-width: var(--mlv-ref-border-width-lg) ;
-  --border-left-width: 0;
+  --border-width: 100%;
+  --border-height: var(--mlv-ref-border-width-lg);
+  --border-top: auto;
+  --width: 100%;
   --font-size: var(--mlv-ref-font-size-200);
   --font-weight: var(--mlv-ref-font-weight-semibold);
   --mlv-sys-interaction-state-ratio: 0;
 }
 
 [internal-host] {
-  width: fit-content;
   display: inline-flex;
   align-items: center;
   border: 0;
   cursor: pointer;
-  width: 100%;
+  width: var(--width);
   gap: var(--mlv-ref-space-xs);
   padding: 0 var(--mlv-ref-size-200);
   height: var(--mlv-ref-size-800);
@@ -21,17 +22,28 @@
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   line-height: var(--mlv-ref-font-size-500);
-  border-bottom: var(--border-bottom-width) solid transparent;
-  border-left: var(--border-left-width) solid transparent;
+  position: relative;
   background-image: linear-gradient(color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio)) 0 0) !important;
+  inset: var(--border-inset);
 }
 
 :host(:is(:--selected)) {
+  &:after {
+    content: '';
+    display: block;
+    width: var(--border-width);
+    height: var(--border-height);
+    border-radius: var(--mlv-ref-border-radius-xs);
+    background: var(--mlv-sys-accent-secondary-background);
+    position: absolute;
+    bottom: 0;
+    top: var(--border-top);
+    left: 0;
+  }
+
   [internal-host] {
-    border-bottom: var(--border-bottom-width) solid var(--mlv-sys-accent-secondary-background);
-    border-left: var(--border-left-width) solid var(--mlv-sys-accent-secondary-background);
     color: var(--mlv-sys-text-emphasis-color);
-    border-radius: 0 !important;
+    border-radius: var(--mlv-ref-border-radius-sm);
 
     ::slotted(mlv-icon) {
       --color: var(--mlv-sys-interaction-color);

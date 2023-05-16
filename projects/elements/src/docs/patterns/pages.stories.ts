@@ -27,52 +27,63 @@ const renderPanel = (isClosable?: boolean) => html`
       <div slot="title">${isClosable ? 'Details Panel' : 'Navigation Panel'}</div>
     </mlv-panel-header>
 
-    <mlv-panel-content mlv-layout="column gap:xl">
+
       ${ when(isClosable, () => html`
-        <mlv-tabs behavior-select>
-          <mlv-tabs-item selected>Tab A</mlv-tabs-item>
-          <mlv-tabs-item>Tab B</mlv-tabs-item>
-          <mlv-tabs-item>Tab C</mlv-tabs-item>
-        </mlv-tabs>
+        <mlv-panel-content mlv-layout="column gap:xl">
+          <mlv-tabs behavior-select>
+            <mlv-tabs-item selected>Tab A</mlv-tabs-item>
+            <mlv-tabs-item>Tab B</mlv-tabs-item>
+            <mlv-tabs-item>Tab C</mlv-tabs-item>
+          </mlv-tabs>
 
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm default muted">Release</label>
-          <p mlv-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
-        </div>
+          <div mlv-layout="column gap:xs">
+            <label mlv-text="body sm default muted">Release</label>
+            <p mlv-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
+          </div>
 
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm default muted">Date</label>
-          <p mlv-text="eyebrow sm">2021-08-18</p>
-        </div>
+          <div mlv-layout="column gap:xs">
+            <label mlv-text="body sm default muted">Date</label>
+            <p mlv-text="eyebrow sm">2021-08-18</p>
+          </div>
 
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm default muted">State</label>
-          <mlv-button mlv-control>Indexed</mlv-button>
-        </div>
+          <div mlv-layout="column gap:xs">
+            <label mlv-text="body sm default muted">State</label>
+            <mlv-button mlv-control>Indexed</mlv-button>
+          </div>
 
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm default muted">Driver</label>
-          <p mlv-text="eyebrow sm">Kenjiro Ono</p>
-        </div>
+          <div mlv-layout="column gap:xs">
+            <label mlv-text="body sm default muted">Driver</label>
+            <p mlv-text="eyebrow sm">Kenjiro Ono</p>
+          </div>
 
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm default muted">Copilot</label>
-          <p mlv-text="eyebrow sm">Kenichi Yoshii</p>
-        </div>
+          <div mlv-layout="column gap:xs">
+            <label mlv-text="body sm default muted">Copilot</label>
+            <p mlv-text="eyebrow sm">Kenichi Yoshii</p>
+          </div>
 
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm default muted">GVS</label>
-          <a href="#" mlv-text="link body sm"
-            >http://testbot/testbot/view/content...</a
-          >
-        </div>
+          <div mlv-layout="column gap:xs">
+            <label mlv-text="body sm default muted">GVS</label>
+            <a href="#" mlv-text="link body sm"
+              >http://testbot/testbot/view/content...</a
+            >
+          </div>
 
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm default muted">Session ID</label>
-          <a href="#" mlv-text="link body sm">Experiment 12345</a>
-        </div>
-      `, () => html``)}
-    </mlv-panel-content>
+          <div mlv-layout="column gap:xs">
+            <label mlv-text="body sm default muted">Session ID</label>
+            <a href="#" mlv-text="link body sm">Experiment 12345</a>
+          </div>
+        </mlv-panel-content>
+      `, () => html`
+        <mlv-panel-content mlv-layout="column align:stretch">
+          <mlv-tabs vertical behavior-select>
+            <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
+            <mlv-tabs-item>Tab 2</mlv-tabs-item>
+            <mlv-tabs-item>Tab 3</mlv-tabs-item>
+            <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
+            <mlv-tabs-item>Tab 5</mlv-tabs-item>
+          </mlv-tabs>
+        </mlv-panel-content>
+      `)}
   </mlv-panel>
 `;
 
