@@ -1,19 +1,20 @@
 
 :host {
-  --border-bottom-width: var(--nve-ref-border-width-lg) ;
-  --border-left-width: 0;
+  --border-width: 100%;
+  --border-height: var(--nve-ref-border-width-lg);
+  --border-top: auto;
+  --width: 100%;
   --font-size: var(--nve-ref-font-size-200);
   --font-weight: var(--nve-ref-font-weight-semibold);
   --nve-sys-interaction-state-ratio: 0;
 }
 
 [internal-host] {
-  width: fit-content;
   display: inline-flex;
   align-items: center;
   border: 0;
   cursor: pointer;
-  width: 100%;
+  width: var(--width);
   gap: var(--nve-ref-space-xs);
   padding: 0 var(--nve-ref-size-200);
   height: var(--nve-ref-size-800);
@@ -21,17 +22,28 @@
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   line-height: var(--nve-ref-font-size-500);
-  border-bottom: var(--border-bottom-width) solid transparent;
-  border-left: var(--border-left-width) solid transparent;
+  position: relative;
   background-image: linear-gradient(color-mix(in oklab, var(--nve-sys-interaction-state-base) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)) 0 0) !important;
+  inset: var(--border-inset);
 }
 
 :host(:is(:--selected)) {
+  &:after {
+    content: '';
+    display: block;
+    width: var(--border-width);
+    height: var(--border-height);
+    border-radius: var(--nve-ref-border-radius-xs);
+    background: var(--nve-sys-accent-secondary-background);
+    position: absolute;
+    bottom: 0;
+    top: var(--border-top);
+    left: 0;
+  }
+
   [internal-host] {
-    border-bottom: var(--border-bottom-width) solid var(--nve-sys-accent-secondary-background);
-    border-left: var(--border-left-width) solid var(--nve-sys-accent-secondary-background);
     color: var(--nve-sys-text-emphasis-color);
-    border-radius: 0 !important;
+    border-radius: var(--nve-ref-border-radius-sm);
 
     ::slotted(nve-icon) {
       --color: var(--nve-sys-interaction-color);
