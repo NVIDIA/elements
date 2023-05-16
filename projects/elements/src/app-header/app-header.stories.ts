@@ -28,8 +28,9 @@ class AppHeaderDefaultDemo extends LitElement {
   <nve-button slot="nav-items" selected>Link 1</nve-button>
   <nve-button slot="nav-items">Link 2</nve-button>
   <nve-icon-button icon-name="assist" slot="nav-actions" @click=${() => alert('Thanks for clicking the feedback icon button!')}></nve-icon-button>
+  <nve-icon-button icon-name="search" slot="nav-actions" @click=${() => alert('Thanks for clicking the search icon button!')}></nve-icon-button>
   <nve-icon-button icon-name="app-switcher" id=${ddownOneId + '-btn'} slot="nav-actions" @click=${() => this.activeId = ddownOneId}></nve-icon-button>
-  <nve-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+  <nve-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasize" slot="nav-actions">EL</nve-icon-button>
 </nve-app-header>
 <nve-dropdown id=${ddownOneId}
   anchor=${ddownOneId + '-btn'}
@@ -74,6 +75,7 @@ export const AppBadge = {
     <nve-button slot="nav-items" selected>Link 1</nve-button>
     <nve-button slot="nav-items">Link 2</nve-button>
     <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button icon-name="search" slot="nav-actions"></nve-icon-button>
     <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
     <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
   </nve-app-header>
@@ -102,6 +104,7 @@ export const NavActions = {
     <nve-logo></nve-logo>
     <h2 slot="title">Nav Actions</h2>
     <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button icon-name="search" slot="nav-actions"></nve-icon-button>
     <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
     <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
   </nve-app-header>
