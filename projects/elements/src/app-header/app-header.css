@@ -15,7 +15,6 @@
   justify-items: flex-start;
   align-items: center;
   justify-content: space-between;
-  gap: none;
 }
 
 [app-branding] {
@@ -44,7 +43,6 @@ slot {
   flex-direction: row;
   justify-items: flex-start;
   align-items: flex-start;
-  gap: var(--nve-ref-space-xs);
   margin: 0;
   min-height: 0;
 }
@@ -75,4 +73,8 @@ slot[name="nav-actions"] {
 ::slotted(nve-button[slot="nav-items"]:hover),
 ::slotted(nve-button[slot="nav-items"]:focus) {
   --text-decoration: underline;
+}
+
+::slotted(nve-icon-button[interaction='emphasize']) {
+  margin-inline-start: var(--nve-ref-space-lg);
 }
