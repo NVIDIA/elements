@@ -5,7 +5,7 @@
   --color: var(--nve-sys-status-color);
   --height: var(--nve-ref-size-1000);
   --width: var(--nve-ref-size-1000);
-  --font-size: calc(var(--width) / 2.5);
+  --font-size: calc(var(--width) / 2);
   --border-radius: var(--nve-ref-border-radius-sm);
   --font-weight: var(--nve-ref-font-weight-bold);
   display: inline-block;
