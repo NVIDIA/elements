@@ -27,52 +27,63 @@ const renderPanel = (isClosable?: boolean) => html`
       <div slot="title">${isClosable ? 'Details Panel' : 'Navigation Panel'}</div>
     </nve-panel-header>
 
-    <nve-panel-content nve-layout="column gap:xl">
+
       ${ when(isClosable, () => html`
-        <nve-tabs behavior-select>
-          <nve-tabs-item selected>Tab A</nve-tabs-item>
-          <nve-tabs-item>Tab B</nve-tabs-item>
-          <nve-tabs-item>Tab C</nve-tabs-item>
-        </nve-tabs>
+        <nve-panel-content nve-layout="column gap:xl">
+          <nve-tabs behavior-select>
+            <nve-tabs-item selected>Tab A</nve-tabs-item>
+            <nve-tabs-item>Tab B</nve-tabs-item>
+            <nve-tabs-item>Tab C</nve-tabs-item>
+          </nve-tabs>
 
-        <div nve-layout="column gap:xs">
-          <label nve-text="body sm default muted">Release</label>
-          <p nve-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
-        </div>
+          <div nve-layout="column gap:xs">
+            <label nve-text="body sm default muted">Release</label>
+            <p nve-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
+          </div>
 
-        <div nve-layout="column gap:xs">
-          <label nve-text="body sm default muted">Date</label>
-          <p nve-text="eyebrow sm">2021-08-18</p>
-        </div>
+          <div nve-layout="column gap:xs">
+            <label nve-text="body sm default muted">Date</label>
+            <p nve-text="eyebrow sm">2021-08-18</p>
+          </div>
 
-        <div nve-layout="column gap:xs">
-          <label nve-text="body sm default muted">State</label>
-          <nve-button nve-control>Indexed</nve-button>
-        </div>
+          <div nve-layout="column gap:xs">
+            <label nve-text="body sm default muted">State</label>
+            <nve-button nve-control>Indexed</nve-button>
+          </div>
 
-        <div nve-layout="column gap:xs">
-          <label nve-text="body sm default muted">Driver</label>
-          <p nve-text="eyebrow sm">Kenjiro Ono</p>
-        </div>
+          <div nve-layout="column gap:xs">
+            <label nve-text="body sm default muted">Driver</label>
+            <p nve-text="eyebrow sm">Kenjiro Ono</p>
+          </div>
 
-        <div nve-layout="column gap:xs">
-          <label nve-text="body sm default muted">Copilot</label>
-          <p nve-text="eyebrow sm">Kenichi Yoshii</p>
-        </div>
+          <div nve-layout="column gap:xs">
+            <label nve-text="body sm default muted">Copilot</label>
+            <p nve-text="eyebrow sm">Kenichi Yoshii</p>
+          </div>
 
-        <div nve-layout="column gap:xs">
-          <label nve-text="body sm default muted">GVS</label>
-          <a href="#" nve-text="link body sm"
-            >http://testbot/testbot/view/content...</a
-          >
-        </div>
+          <div nve-layout="column gap:xs">
+            <label nve-text="body sm default muted">GVS</label>
+            <a href="#" nve-text="link body sm"
+              >http://testbot/testbot/view/content...</a
+            >
+          </div>
 
-        <div nve-layout="column gap:xs">
-          <label nve-text="body sm default muted">Session ID</label>
-          <a href="#" nve-text="link body sm">Experiment 12345</a>
-        </div>
-      `, () => html``)}
-    </nve-panel-content>
+          <div nve-layout="column gap:xs">
+            <label nve-text="body sm default muted">Session ID</label>
+            <a href="#" nve-text="link body sm">Experiment 12345</a>
+          </div>
+        </nve-panel-content>
+      `, () => html`
+        <nve-panel-content nve-layout="column align:stretch">
+          <nve-tabs vertical behavior-select>
+            <nve-tabs-item selected>Tab 1</nve-tabs-item>
+            <nve-tabs-item>Tab 2</nve-tabs-item>
+            <nve-tabs-item>Tab 3</nve-tabs-item>
+            <nve-tabs-item disabled>Disabled</nve-tabs-item>
+            <nve-tabs-item>Tab 5</nve-tabs-item>
+          </nve-tabs>
+        </nve-panel-content>
+      `)}
   </nve-panel>
 `;
 
