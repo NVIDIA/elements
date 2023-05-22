@@ -24,6 +24,7 @@ wireit_bin.wireit_binary(
         "metrics/data.json"
     ],
     env = { "CI": "true", "WIREIT_CACHE": "none", "npm_lifecycle_event": "ci" },
+    tags = ["ui"],
 )
 
 js_run_binary(
@@ -33,7 +34,8 @@ js_run_binary(
     out_dirs = [
         "dist",
         "coverage"
-    ]
+    ],
+    tags = ["ui"],
 )
 
 js_run_binary(
@@ -42,7 +44,8 @@ js_run_binary(
     tool = ":wireit_bin",
     out_dirs = [
         "storybook-build"
-    ]
+    ],
+    tags = ["ui"],
 )
 
 js_library(
