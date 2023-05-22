@@ -200,7 +200,7 @@
     "@geometricpanda/storybook-addon-badges": "0.2.2",
     "@happy-dom/global-registrator": "8.9.0",
     "@lit-labs/react": "1.1.1",
-    "@elements/custom-elements-storybook": "0.1.7",
+    "@elements/custom-elements-storybook": "0.3.0",
     "@rollup/plugin-replace": "5.0.2",
     "@rollup/plugin-terser": "0.1.0",
     "@typescript-eslint/eslint-plugin": "5.47.0",
@@ -388,6 +388,9 @@
         ".storybook/**",
         "src/**/*.stories.ts",
         "src/**/*.stories.mdx",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
         "vite.config.ts"
       ],
       "output": [
@@ -395,10 +398,7 @@
       ],
       "dependencies": [
         "build"
-      ],
-      "env": {
-        "NODE_OPTIONS": "--openssl-legacy-provider"
-      }
+      ]
     },
     "storybook:watch": {
       "command": "start-storybook -p 7789",
