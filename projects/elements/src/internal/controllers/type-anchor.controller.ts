@@ -17,7 +17,8 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
   }
 
   get #slottedAnchor() {
-    return this.host.querySelector<HTMLAnchorElement>('a');
+    // return elements that have been nested in a slot
+    return this.host.querySelector<HTMLSlotElement>('slot, slot[name=anchor]')?.assignedElements()?.find((e: any) => e?.tagName === 'A') || this.host.querySelector<HTMLAnchorElement>('a');
   }
 
   get #parentAnchor() {
