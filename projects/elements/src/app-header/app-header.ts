@@ -1,5 +1,5 @@
 import { html, LitElement, PropertyValues } from 'lit';
-import { useStyles, keyNavigationList, KeynavListConfig, attachInternals } from '@elements/elements/internal';
+import { useStyles, attachInternals } from '@elements/elements/internal';
 import { Logo } from '@elements/elements/logo';
 import type { IconButton } from '@elements/elements/icon-button';
 import type { Button } from '@elements/elements/button';
@@ -16,14 +16,7 @@ import styles from './app-header.css?inline';
  * @responsive false
  * @stable false
  */
-@keyNavigationList<AppHeader>()
 export class AppHeader extends LitElement {
-  get keynavListConfig(): KeynavListConfig {
-    return {
-      items: [...this.#navItems, ...this.#navActions]
-    }
-  }
-
   static styles = useStyles([styles]);
 
   static readonly metadata = {
