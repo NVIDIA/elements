@@ -1,31 +1,68 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { TabsItem } from '@elements/elements/tabs';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@elements/elements/test';
+import { TabsItem, Tabs } from '@elements/elements/tabs';
 import '@elements/elements/tabs/define.js';
 
 describe('mlv-tab', () => {
   let fixture: HTMLElement;
-  let element: TabsItem;
+  let parentElement: Tabs;
+  let childElement: TabsItem;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
+    <mlv-tabs>
       <mlv-tabs-item></mlv-tabs-item>
+    </mlv-tabs>
     `);
-    element = fixture.querySelector('mlv-tabs-item');
-    await elementIsStable(element);
+    parentElement = fixture.querySelector('mlv-tabs');
+    childElement = fixture.querySelector('mlv-tabs-item');
+
+    await elementIsStable(parentElement);
+    await elementIsStable(childElement);
   });
 
   afterEach(() => {
     removeFixture(fixture);
   });
 
-  it('should define element', () => {
+  it('should define parentElement', () => {
+    expect(customElements.get('mlv-tabs')).toBeDefined();
+  });
+
+  it('should define childElement', () => {
     expect(customElements.get('mlv-tabs-item')).toBeDefined();
   });
 
-  it('should be an interactive button type', async () => {
-    await elementIsStable(element);
-    expect(element._internals.role).toBe('tab');
+  it('should have correct a18y roles', async () => {
+    expect(parentElement._internals.role).toBe('tablist');
+    expect(childElement._internals.role).toBe('tab');
+  });
+
+  it('should have proper defaults on parent', () => {
+    expect(parentElement.vertical).toBe(false);
+    expect(parentElement.borderless).toBe(false);
+    expect(parentElement.behaviorSelect).toBe(false);
+  });
+
+  it('should handle behaviorSelect via clicking', async () => {
+    expect(childElement.selected).toBe(false);
+    parentElement.behaviorSelect = true;
+
+    const event = untilEvent(childElement, 'click');
+    emulateClick(childElement);
+    expect((await event)).toBeDefined();
+
+    expect(childElement.selected).toBe(true);
+  });
+
+  it('should NOT handle behaviorSelect via clicking by default', async () => {
+    expect(childElement.selected).toBe(false);
+
+    const event = untilEvent(childElement, 'click');
+    emulateClick(childElement);
+    expect((await event)).toBeDefined();
+
+    expect(childElement.selected).toBe(false);
   });
 });

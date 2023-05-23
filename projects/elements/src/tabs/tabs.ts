@@ -97,7 +97,7 @@ export class Tabs extends LitElement {
 
   render() {
     return html`
-      <div internal-host @click=${(e: CustomEvent) => (this.#selectTab(e.target))}>
+      <div internal-host>
         <slot></slot>
       </div>
     `;
@@ -108,5 +108,7 @@ export class Tabs extends LitElement {
     attachInternals(this);
     this._internals.role = 'tablist';
     this._internals.ariaOrientation = this.vertical ? 'vertical' : 'horizontal';
+
+    this.addEventListener('click', (e: CustomEvent) => (this.#selectTab(e.target)))
   }
 }
