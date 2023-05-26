@@ -8,6 +8,7 @@ import styles from './week.css?inline';
  * @element nve-week
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-week-documentation--page
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
+ * @vqa false
  */
 export class Week extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);

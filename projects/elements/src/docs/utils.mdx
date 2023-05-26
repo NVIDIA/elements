@@ -7,15 +7,14 @@ export const LinkedHeader = ({children: txt} ) => {
   );
 }
 
-export const Metrics = ({ demo, tag }) => {
+export const Metrics = ({ tag }) => {
   return (
 <div>
   <metrics-demo tag={tag}></metrics-demo>
 </div>
   );
 }
-
-export const Status = ({ demo, tag }) => {
+export const Status = ({ tag }) => {
   const metadata = metrics.elements.find(d => d.name === tag);
   return (
     <div class="status-summary" style={{ margin: '0 0 80px 0' }}>
@@ -33,7 +32,6 @@ export const Status = ({ demo, tag }) => {
         <nve-alert status={metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</nve-alert>
         <nve-alert status={metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/story/about-api-design-getting-started--page">API Review</a></nve-alert>
         <nve-alert status={metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</nve-alert>
-        <nve-alert status={metadata.aria ? 'finished' : 'pending'}>Implements ARIA Spec</nve-alert>
         <nve-alert status={metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></nve-alert>
       </div>
       <h3><nve-badge status={metadata.status === 'stable' ? 'finished' : 'pending'}>stable <nve-icon name="success-badge"></nve-icon></nve-badge></h3>
@@ -45,4 +43,9 @@ export const Status = ({ demo, tag }) => {
       </div>
     </div>
   );
+}
+
+export const statusBadges = (tag) => {
+  const status = metrics.elements.find(d => d.name === tag).status;
+  return status === 'pre-release' ? ['alpha'] : [status];
 }
