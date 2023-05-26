@@ -1,6 +1,6 @@
 :host {
-  --color: var(--nve-sys-text-color);
-  --label-color: var(--nve-sys-text-muted-color);
+  --color: var(--nve-sys-interaction-field-color);
+  --label-color: var(--nve-sys-interaction-field-color);
   --_label-width: var(--label-width, 180px);
 }
 
