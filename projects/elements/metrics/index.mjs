@@ -86,7 +86,7 @@ async function getProjects() {
           });
           return tags;
         }, {})).map(([name, instanceTotal]) => ({ name, instanceTotal })).filter(e => e.name !== 'undefined');
-  
+
         return { name: project.package, path: `src/ui/${project.path.split('/src/ui/')[1]}`, elementsVersion: project.elements, elements, instanceTotal: elements.reduce((p, e) => e.instanceTotal + p, 0) };
       })
   );
@@ -144,8 +144,8 @@ function getBehaviorCategory(classDeclaration) {
 function getElementStability(metadata) {
   let status = 'unknown';
   const preRelease = metadata.apiReview && metadata.storybook?.length;
-  const beta = metadata.unitTests && metadata.package;
-  const stable = metadata.stable && metadata.responsive && metadata.performance && metadata.vqa && metadata.aria?.length;
+  const beta = metadata.unitTests && metadata.apiReview && metadata.vqa && metadata.package;
+  const stable = metadata.stable && metadata.responsive && metadata.performance && metadata.aria?.length;
 
   if (preRelease) {
     status = 'pre-release';
