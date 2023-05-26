@@ -1,7 +1,7 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { Meta, Props, Story, Source, Canvas } from '@storybook/addon-docs';
 import { LinkedHeader, Status } from '../docs/utils.mdx';
 
-<Meta title="Elements/Tabs/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Tabs/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Tabs
 
@@ -37,6 +37,7 @@ import '@elements/elements/tabs/define.js';
 
 <Canvas>
   <Story id="elements-tabs-examples--default" />
+  <Source id="elements-tabs-examples--default" transform={(data => console.log(data))}/>
 </Canvas>
 
 <LinkedHeader>Themes</LinkedHeader>

@@ -10,7 +10,7 @@ import '@elements/elements/icon-button/define.js';
 export default {
   title: 'Elements/Tooltip/Examples',
   component: 'mlv-tooltip',
-  parameters: { badges: ['alpha'] },
+  parameters: { badges: ['beta'] },
   argTypes: {
     position: {
       control: 'inline-radio',
