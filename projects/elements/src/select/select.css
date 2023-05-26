@@ -8,6 +8,8 @@
   --border: 0;
   --cursor: pointer;
   --width: 100%;
+  --font-weight: normal;
+  --text-align: start;
   width: var(--width);
   contain: initial;
 }
@@ -43,6 +45,8 @@
   background: none !important;
   display: block !important;
   cursor: var(--cursor) !important;
+  font-weight: var(--font-weight) !important;
+  text-align: var(--text-align) !important;
 }
 
 ::slotted(select[multiple]) {

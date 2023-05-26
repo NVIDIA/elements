@@ -35,7 +35,7 @@ export class Select extends Control {
   }
 
   protected get suffixContent() {
-    return (this.input?.multiple || this.input?.size) ? html`` : html`<mlv-icon name="caret" direction="down"></mlv-icon>`;
+    return (this.input?.multiple || this.input?.size) ? html`` : html`<mlv-icon part="caret" name="caret" direction="down"></mlv-icon>`;
   }
 
   get #select() {

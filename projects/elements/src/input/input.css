@@ -7,6 +7,7 @@
   --border-radius: var(--mlv-ref-border-radius-sm);
   --border: var(--mlv-ref-border-width-md) solid transparent;
   --cursor: text;
+  --font-weight: normal;
   --_icon-height: var(--height);
   --width: 100%;
   width: var(--width);
@@ -36,6 +37,7 @@
   background: none !important;
   display: block !important;
   width: 100% !important;
+  font-weight: var(--font-weight) !important;
 }
 
 mlv-icon-button,

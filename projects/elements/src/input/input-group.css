@@ -1,16 +1,30 @@
+:host {
+  --background: var(--mlv-sys-support-color);
+  --color: var(--mlv-sys-interaction-field-color);
+  --border-radius: var(--mlv-ref-border-radius-sm);
+}
+
+[internal-host] {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
 
 .input-slot {
+  background: var(--background);
+  border-radius: var(--border-radius);
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 2px;
+  gap: 1px;
 }
 
 slot[name='label'] {
   align-self: center;
 }
 
-:host {
-  border-radius: var(--mlv-ref-border-radius-sm);
+::slotted(mlv-icon-button) {
+  --background: var(--mlv-sys-interaction-field-background);
+  --color: var(--mlv-sys-support-emphasis-color);
+  --border-radius: 0;
 }
 
 ::slotted([mlv-control]) {

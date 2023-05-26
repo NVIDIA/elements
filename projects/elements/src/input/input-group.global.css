@@ -1,0 +1,14 @@
+mlv-input-group[type='filter'] > mlv-select::part(caret) {
+  display: none !important;
+}
+
+mlv-input-group > [mlv-control],
+mlv-input-group > mlv-button {
+  --border-radius: 0;
+}
+
+mlv-input-group[type='filter'] [mlv-control]:nth-child(odd),
+mlv-input-group[type='filter'] mlv-button:nth-child(odd) {
+  --font-weight: var(--mlv-ref-font-weight-medium);
+  --text-align: center;
+}

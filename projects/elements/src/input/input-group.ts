@@ -1,6 +1,8 @@
 import type { CSSResult } from 'lit';
-import { useStyles } from '@elements/elements/internal';
+import { property } from 'lit/decorators/property.js';
+import { useStyles, appendRootNodeStyle } from '@elements/elements/internal';
 import { ControlGroup } from '@elements/elements/forms';
+import globalStyles from './input-group.global.css?inline';
 import styles from './input-group.css?inline';
 
 /**
@@ -10,6 +12,8 @@ import styles from './input-group.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
  */
 export class InputGroup extends ControlGroup {
+  @property({ type: String, reflect: true }) type?: 'filter';
+
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
 
   static readonly metadata = {
@@ -19,8 +23,9 @@ export class InputGroup extends ControlGroup {
 
   async connectedCallback() {
     super.connectedCallback();
+    appendRootNodeStyle(this, globalStyles);
     await this.updateComplete;
-    const controls = Array.from(this.querySelectorAll('[mlv-control]'));
+    const controls = Array.from(this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements());
     controls[0].setAttribute('first-control', '');
     controls[controls.length - 1].setAttribute('last-control', '');
   }

@@ -1,6 +1,6 @@
 :host {
-  --color: var(--mlv-sys-text-color);
-  --label-color: var(--mlv-sys-text-muted-color);
+  --color: var(--mlv-sys-interaction-field-color);
+  --label-color: var(--mlv-sys-interaction-field-color);
   --_label-width: var(--label-width, 180px);
 }
 

@@ -38,4 +38,10 @@ describe('mlv-input', () => {
     expect(controls[0].hasAttribute('first-control')).toBe(true);
     expect(controls[1].hasAttribute('last-control')).toBe(true);
   });
+
+  it('should reflect the type style attribute', async () => {
+    element.type = 'filter';
+    await elementIsStable(element);
+    expect(element.getAttribute('type')).toBe('filter');
+  });
 });
