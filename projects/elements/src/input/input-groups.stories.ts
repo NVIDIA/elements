@@ -34,28 +34,53 @@ export const InputGroup = () => {
 export const FilterGroup = {
   render: () => html`
   <div nve-layout="row align:vertical-center">
-    <nve-input-group>
-      <nve-select style="width: 100px">
+    <nve-input-group type="filter">
+      <nve-select style="width: 85px">
         <select>
           <option value="1">workload</option>
-          <option value="1">instance</option>
+          <option value="2">instance</option>
         </select>
       </nve-select>
-      <nve-select style="width: 100px">
+      <nve-select style="width: 70px">
         <select>
-          <option value="2">sort by</option>
-          <option value="1">filter by</option>
+          <option value="1">sort by</option>
+          <option value="2">filter by</option>
         </select>
       </nve-select>
-      <nve-select style="width: 100px">
+      <nve-select style="width: 85px">
         <select>
-          <option value="1">status</option>
           <option value="1">utilization</option>
+          <option value="2">status</option>
         </select>
       </nve-select>
+      <nve-icon-button aria-label="remove filter" icon-name="cancel"></nve-icon-button>
     </nve-input-group>
-    <nve-icon-button aria-label="remove filter" interaction="ghost" icon-name="cancel"></nve-icon-button>
   </div>
+  `
+};
+
+export const FilterGroupButtons = {
+  render: () => html`
+  <div nve-layout="row align:vertical-center">
+    <nve-input-group type="filter">
+      <nve-button style="width: 65px">GPS</nve-button>
+      <nve-select style="width: 75px">
+        <select>
+          <option value="1">contains</option>
+          <option value="2">excludes</option>
+        </select>
+      </nve-select>
+      <nve-button style="width: 190px" id="map-btn">37.3706254,-121.9671894</nve-button>
+      <nve-icon-button aria-label="remove filter" icon-name="cancel"></nve-icon-button>
+    </nve-input-group>
+    <nve-dropdown anchor="map-btn" trigger="map-btn">
+      <nve-input>
+        <nve-icon-button icon-name="location" readonly></nve-icon-button>
+        <input value="37.3706254,-121.9671894" disabled />
+      </nve-input>
+      <img src="images/test-map-2.webp" width="300px" alt="non-interactive demo map" />  
+    </nve-dropdown>
+    </div>
   `
 };
 
@@ -69,16 +94,16 @@ export const FilterGroupRange = {
         <option value="2">process date</option>
       </select>
     </nve-select>
-    <nve-date style="width:225px">
+    <nve-date style="width:220px">
       <nve-button interaction="ghost" readonly="">start</nve-button>
       <input type="date" value="2022-05-11" aria-label="start date" />
     </nve-date>
-    <nve-date style="width:225px">
+    <nve-date style="width:220px">
       <nve-button interaction="ghost" readonly="">end</nve-button>
       <input type="date" value="2022-12-07" aria-label="end date" />
     </nve-date>
+    <nve-icon-button aria-label="remove filter" icon-name="cancel"></nve-icon-button>
   </nve-input-group>
-  <nve-icon-button aria-label="remove filter" interaction="ghost" icon-name="cancel"></nve-icon-button>
 </div>
     `
 }
