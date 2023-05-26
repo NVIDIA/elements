@@ -1,5 +1,6 @@
 import { ReactiveController, ReactiveElement  } from 'lit';
 import { removeEmptyTextNode } from '../utils/dom.js';
+import { attachInternals } from '../utils/a11y.js';
 
 /**
  * Adds anchor/link support for interactive custom elements.
@@ -8,7 +9,7 @@ export function typeAnchor<T extends Anchor>(): ClassDecorator {
   return (target: any) => target.addInitializer((instance: T) => new TypeAnchorController(instance));
 }
 
-export interface Anchor extends ReactiveElement { disabled: boolean; readonly: boolean; }
+export interface Anchor extends ReactiveElement { disabled: boolean; readonly: boolean; _internals: ElementInternals }
 
 export class TypeAnchorController<T extends Anchor> implements ReactiveController {
   get #anchor() {
@@ -36,12 +37,16 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
   }
 
   async hostConnected() {
+    attachInternals(this.host);
     await this.host.updateComplete;
 
     this.#updateAnchorSlotAssignment();
 
     if (this.#anchor) {
       this.host.readonly = true;
+      this.host._internals?.states.add('--anchor');
+    } else {
+      this.host._internals?.states.delete('--anchor');
     }
 
     if (this.#parentAnchor) {

@@ -3,13 +3,15 @@ import { customElement  } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { typeAnchor } from '@elements/elements/internal';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, emulateClick } from '@elements/elements/test';
+import { createFixture, removeFixture, emulateClick, elementIsStable } from '@elements/elements/test';
 
 @typeAnchor<TypeAnchorTestElement>()
 @customElement('type-anchor-test-element')
 class TypeAnchorTestElement extends LitElement {
   @property({ type: Boolean }) disabled = false;
   @property({ type: Boolean }) readonly = false;
+
+  declare _internals: ElementInternals;
 
   render() {
     return html`<slot></slot>`;
@@ -31,6 +33,8 @@ describe('type-anchor.controller', () => {
     elementTwo = fixture.querySelectorAll<TypeAnchorTestElement>('type-anchor-test-element')[1];
     anchor = fixture.querySelectorAll<HTMLAnchorElement>('a')[0];
     anchorTwo = fixture.querySelectorAll<HTMLAnchorElement>('a')[1];
+    await elementIsStable(element);
+    await elementIsStable(elementTwo);
   });
 
   afterEach(() => {
@@ -65,6 +69,7 @@ describe('type-anchor.controller', () => {
     expect(element.readonly).toBe(true);
     expect(anchor.style.textDecoration).toBe('');
     expect(element.style.cursor).toBe('');
+    expect((element.matches('[state--anchor]'))).toBe(true);
   });
 
   it('should allow element to be wrapped in anchor', () => {
@@ -77,5 +82,6 @@ describe('type-anchor.controller', () => {
     expect(elementTwo.readonly).toBe(true);
     expect(anchorTwo.style.textDecoration).toBe('none');
     expect(elementTwo.style.cursor).toBe('pointer');
+    expect((element.matches('[state--anchor]'))).toBe(true);
   });
 });

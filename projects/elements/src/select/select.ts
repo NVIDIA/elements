@@ -35,7 +35,7 @@ export class Select extends Control {
   }
 
   protected get suffixContent() {
-    return (this.input?.multiple || this.input?.size) ? html`` : html`<nve-icon name="caret" direction="down"></nve-icon>`;
+    return (this.input?.multiple || this.input?.size) ? html`` : html`<nve-icon part="caret" name="caret" direction="down"></nve-icon>`;
   }
 
   get #select() {
