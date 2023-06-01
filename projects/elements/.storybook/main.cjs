@@ -1,6 +1,5 @@
 const path = require('path');
 
-const { addons } = require('@elements/custom-elements-storybook');
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 
 module.exports = {
@@ -12,7 +11,12 @@ module.exports = {
     '../tokens/**/*.stories.mdx',
     '../tokens/**/*.stories.ts'
   ],
-  addons: [...addons, '@geometricpanda/storybook-addon-badges'],
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    'storybook-addon-designs',
+    '@geometricpanda/storybook-addon-badges'
+  ],
   framework: '@storybook/web-components',
   core: {
     builder: '@storybook/builder-vite'
