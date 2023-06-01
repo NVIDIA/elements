@@ -15,7 +15,5 @@ const log = (...msg) => {
 }
 
 console.warn = log;
-console.error = log;
-console.log = log;
 
 export { };

@@ -4,8 +4,8 @@ import { fileURLToPath } from 'url';
 import { optimize } from 'svgo';
 
 const scriptPath = path.dirname(fileURLToPath(import.meta.url));
-const inputPath = path.join(scriptPath, '/src/icon/icons/');
-const outputPath = path.join(scriptPath, '/src/icon/');
+const inputPath = path.join(scriptPath, '../src/icon/icons/');
+const outputPath = path.join(scriptPath, '../src/icon/');
 const svgoOptions = {
   multipass: true,
   plugins: [

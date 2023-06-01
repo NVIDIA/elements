@@ -122,7 +122,7 @@ class RadioGroupInteractiveDemo extends LitElement {
     ${options.map(option => html`
     <nve-radio @pointerup=${() => this.show = false}>
       <label>${option.label}</label>
-      <input type="radio" value=${option.id} ?checked=${option.id === this.selected.id} @input=${() => this.selected = option} />
+      <input type="radio" .value=${option.id} ?checked=${option.id === this.selected.id} @input=${() => this.selected = option} />
       <nve-control-message>${option.message}</nve-control-message>
     </nve-radio>`)}
   </nve-radio-group>
@@ -178,7 +178,7 @@ class CheckboxGroupInteractiveDemo extends LitElement {
     ${checkboxes.map(checkbox => html`
     <nve-checkbox>
       <label>${checkbox.label}</label>
-      <input type="checkbox" value=${checkbox.id} ?checked=${this.suites[checkbox.id]} @input=${e => this.suites = { ...this.suites, [checkbox.id]: e.target.checked }} />
+      <input type="checkbox" .value=${checkbox.id} ?checked=${this.suites[checkbox.id]} @input=${e => this.suites = { ...this.suites, [checkbox.id]: e.target.checked }} />
       <nve-control-message>${checkbox.message}</nve-control-message>
     </nve-checkbox>`)}
   </nve-checkbox-group>
