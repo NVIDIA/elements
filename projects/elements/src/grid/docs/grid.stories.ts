@@ -1,4 +1,4 @@
-import { LitElement, unsafeCSS, html, css } from 'lit';
+import { LitElement, unsafeCSS, html, css, nothing } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import layout from '@elements/elements/css/module.layout.css';
@@ -100,7 +100,7 @@ export const SingleSelect = {
       <nve-grid-row .selected=${i === 1}>
         <nve-grid-cell>
           <nve-radio>
-            <input type="radio" ?checked=${i === 1} name="single-select" value=${i} aria-label="select row ${i}" />
+            <input type="radio" ?checked=${i === 1} name="single-select" .value=${i} aria-label="select row ${i}" />
           </nve-radio>
         </nve-grid-cell>
         ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
@@ -243,7 +243,7 @@ export const ColumnWidth = {
 <div nve-theme="root">
   <nve-grid style="--scroll-height: 410px">
     <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</nve-grid-column> `)}
+      ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column width=${i !== 4 ? '300px' : ''}>${column.label}</nve-grid-column> `)}
     </nve-grid-header>
     ${getItems().map(row => html`
       <nve-grid-row>
@@ -261,7 +261,7 @@ export const ColumnFixed = {
 <div nve-theme="root">
   <nve-grid style="--scroll-height: 410px; max-width: 800px">
     <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position="${i === 0 ? 'fixed' : ''}" width="200px">${column.label}</nve-grid-column> `)}
+      ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column> `)}
     </nve-grid-header>
     ${getItems().map(row => html`
       <nve-grid-row>
@@ -278,7 +278,7 @@ export const ColumnMultiFixed = {
 <div nve-theme="root">
   <nve-grid style="--scroll-height: 410px; max-width: 800px">
     <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position="${(i === 0) || (i === 4) ? 'fixed' : ''}" width="200px">${column.label}</nve-grid-column>`)}
+      ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column>`)}
     </nve-grid-header>
     ${getItems().map(row => html`
       <nve-grid-row>
@@ -472,7 +472,7 @@ class RowSortDemo extends LitElement {
         <nve-grid-header>
         ${Object.entries(this.items[0]).map(([, column], i) => html`
           <nve-grid-column>
-            ${column.label} ${i === 0 ? html`<nve-sort-button .sort=${this.sort} @sort=${e => this.sort = e.detail.next}></nve-sort-button>` : html``}
+            ${column.label} ${i === 0 ? html`<nve-sort-button .sort=${this.sort} @sort=${e => this.sort = e.detail.next}></nve-sort-button>` : nothing}
           </nve-grid-column>`)}
         </nve-grid-header>
         ${this.items.map(row => html`
@@ -569,7 +569,7 @@ class GridPerformanceDemo extends LitElement {
           ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
         </nve-grid-row>`)}
       </nve-grid>
-      ` : html``}
+      ` : nothing}
     `
   }
 }
@@ -711,7 +711,7 @@ export const PanelDetail = {
         <nve-grid-row ?selected=${i === 1}>
           ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
           <nve-grid-cell>
-            <nve-icon-button interaction="ghost" icon-name="additional-actions" value="${row.id}" aria-label="view ${row.id}"></nve-icon-button>
+            <nve-icon-button interaction="ghost" icon-name="additional-actions" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
           </nve-grid-cell>
         </nve-grid-row>
       `)}

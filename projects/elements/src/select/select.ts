@@ -1,4 +1,4 @@
-import { PropertyValues, html, render } from 'lit';
+import { PropertyValues, html, nothing, render } from 'lit';
 import { appendRootNodeStyle, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { Icon } from '@elements/elements/icon';
@@ -35,7 +35,7 @@ export class Select extends Control {
   }
 
   protected get suffixContent() {
-    return (this.input?.multiple || this.input?.size) ? html`` : html`<nve-icon part="caret" name="caret" direction="down"></nve-icon>`;
+    return (this.input?.multiple || this.input?.size) ? nothing : html`<nve-icon part="caret" name="caret" direction="down"></nve-icon>`;
   }
 
   get #select() {
