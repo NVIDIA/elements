@@ -1,4 +1,4 @@
-import { LitElement, html, PropertyValues } from 'lit';
+import { LitElement, html, PropertyValues, nothing, TemplateResult } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
@@ -48,13 +48,13 @@ export class Control extends LitElement {
   }
 
   /** @private */
-  protected get prefixContent() {
-    return html``;
+  protected get prefixContent(): typeof nothing | TemplateResult {
+    return nothing;
   }
 
   /** @private */
-  protected get suffixContent() {
-    return html``;
+  protected get suffixContent(): typeof nothing | TemplateResult {
+    return nothing;
   }
 
   @state() private inlineControl = false;
