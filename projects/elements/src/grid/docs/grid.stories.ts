@@ -1,4 +1,4 @@
-import { LitElement, unsafeCSS, html, css } from 'lit';
+import { LitElement, unsafeCSS, html, css, nothing } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import layout from '@elements/elements/css/module.layout.css';
@@ -100,7 +100,7 @@ export const SingleSelect = {
       <mlv-grid-row .selected=${i === 1}>
         <mlv-grid-cell>
           <mlv-radio>
-            <input type="radio" ?checked=${i === 1} name="single-select" value=${i} aria-label="select row ${i}" />
+            <input type="radio" ?checked=${i === 1} name="single-select" .value=${i} aria-label="select row ${i}" />
           </mlv-radio>
         </mlv-grid-cell>
         ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
@@ -243,7 +243,7 @@ export const ColumnWidth = {
 <div mlv-theme="root">
   <mlv-grid style="--scroll-height: 410px">
     <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</mlv-grid-column> `)}
+      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column width=${i !== 4 ? '300px' : ''}>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
     ${getItems().map(row => html`
       <mlv-grid-row>
@@ -261,7 +261,7 @@ export const ColumnFixed = {
 <div mlv-theme="root">
   <mlv-grid style="--scroll-height: 410px; max-width: 800px">
     <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position="${i === 0 ? 'fixed' : ''}" width="200px">${column.label}</mlv-grid-column> `)}
+      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
     ${getItems().map(row => html`
       <mlv-grid-row>
@@ -278,7 +278,7 @@ export const ColumnMultiFixed = {
 <div mlv-theme="root">
   <mlv-grid style="--scroll-height: 410px; max-width: 800px">
     <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position="${(i === 0) || (i === 4) ? 'fixed' : ''}" width="200px">${column.label}</mlv-grid-column>`)}
+      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column>`)}
     </mlv-grid-header>
     ${getItems().map(row => html`
       <mlv-grid-row>
@@ -472,7 +472,7 @@ class RowSortDemo extends LitElement {
         <mlv-grid-header>
         ${Object.entries(this.items[0]).map(([, column], i) => html`
           <mlv-grid-column>
-            ${column.label} ${i === 0 ? html`<mlv-sort-button .sort=${this.sort} @sort=${e => this.sort = e.detail.next}></mlv-sort-button>` : html``}
+            ${column.label} ${i === 0 ? html`<mlv-sort-button .sort=${this.sort} @sort=${e => this.sort = e.detail.next}></mlv-sort-button>` : nothing}
           </mlv-grid-column>`)}
         </mlv-grid-header>
         ${this.items.map(row => html`
@@ -569,7 +569,7 @@ class GridPerformanceDemo extends LitElement {
           ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
         </mlv-grid-row>`)}
       </mlv-grid>
-      ` : html``}
+      ` : nothing}
     `
   }
 }
@@ -711,7 +711,7 @@ export const PanelDetail = {
         <mlv-grid-row ?selected=${i === 1}>
           ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
           <mlv-grid-cell>
-            <mlv-icon-button interaction="ghost" icon-name="additional-actions" value="${row.id}" aria-label="view ${row.id}"></mlv-icon-button>
+            <mlv-icon-button interaction="ghost" icon-name="additional-actions" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
           </mlv-grid-cell>
         </mlv-grid-row>
       `)}

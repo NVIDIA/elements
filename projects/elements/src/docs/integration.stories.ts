@@ -1,4 +1,4 @@
-import { html, unsafeCSS, LitElement } from 'lit';
+import { html, unsafeCSS, LitElement, nothing } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import { query } from 'lit/decorators/query.js';
@@ -101,5 +101,5 @@ export const ScopedElement = {
 
 // used to trigger global option updates (theming) when all stories are isolated in iframes
 export const Empty = {
-  render: () => html``
+  render: () => nothing
 }

@@ -102,6 +102,7 @@ export const parameters = {
           'Testing',
           'Extensions',
           'Metrics',
+          'Contributions',
           'API Design',
           [
             'Getting Started',
