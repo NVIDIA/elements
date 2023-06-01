@@ -74,7 +74,7 @@ export class Breadcrumb extends LitElement {
       ${slotNames.map(
         (slotName, idx) => html`
           <li>
-            <slot name="${slotName}"></slot>
+            <slot name=${slotName}></slot>
             ${(idx < penultimateSlotLength) ? this.separator : ''}
           </li>
         `)}</ol></div><slot hidden-slot @slotchange=${this.#slotUpdate}></slot>`;
