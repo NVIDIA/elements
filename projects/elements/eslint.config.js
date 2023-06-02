@@ -76,7 +76,9 @@ export default [
         },
       ],
       'rulesdir/reserved-property-names': ['error'],
-      'rulesdir/reserved-event-names': ['error']
+      'rulesdir/reserved-event-names': ['error'],
+      'rulesdir/stateless-property': ['error'],
+      'rulesdir/primitive-property': ['error']
     }
   }
 ];
