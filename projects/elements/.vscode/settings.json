@@ -1,4 +1,18 @@
 {
-    "cssvar.files": ["**/variables.css"],
-    "cssvar.extensions": ["css", "typescript"]
+  "cssvar.files": ["elements/dist/**/*.css"],
+  "cssvar.extensions": ["css", "ts", "js"],
+  "cssvar.ignore": ["**/node_modules/**", "**/storybook-build/**", "**/demos/**/dist/**"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }
