@@ -125,7 +125,8 @@ export class Pagination extends LitElement {
 
   #setStep(value: number) {
     this.#setValue(1);
-    this.step = value;
+    /* eslint-disable-next-line */
+    this.step = value; // stateful due to internalized select element
   }
 
   #setValue(value: number) {
