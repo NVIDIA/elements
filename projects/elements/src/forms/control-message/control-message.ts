@@ -29,7 +29,7 @@ export class ControlMessage extends LitElement {
   @property({ type: String, reflect: true }) status: 'warning' | 'error' | 'success' | 'disabled';
 
   /**
-   * @type badInput | customError | patternMismatch | rangeOverflow | rangeUnderflow | stepMismatch | tooLong | tooShort | typeMismatch | valid | valueMissing
+   * @type 'badInput' | 'customError' | 'patternMismatch' | 'rangeOverflow' | 'rangeUnderflow' | 'stepMismatch' | 'tooLong' | 'tooShort' | 'typeMismatch' | 'valid' | 'valueMissing'
    * https://developer.mozilla.org/en-US/docs/Web/API/ValidityState
    */
   @property({ type: String }) error: keyof ValidityState = null;
