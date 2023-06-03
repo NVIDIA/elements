@@ -1,50 +1,170 @@
 import pkg from './package.json' assert { type: 'json' };
 
-export default {
-  plugins: [
-    {
-      // https://github.com/webcomponents/custom-elements-manifest/issues/42
-      name: 'metadata',
-      analyzePhase({ ts, node, moduleDoc }) {
-        const metadata = ['figma', 'storybook', 'responsive', 'themes', 'zeroheight', 'vqa', 'aria', 'stable', 'performance', 'package'];
+function metadataPlugin() {
+  return {
+    // https://github.com/webcomponents/custom-elements-manifest/issues/42
+    name: 'metadata',
+    analyzePhase({ ts, node, moduleDoc }) {
+      const metadata = [
+        'figma',
+        'storybook',
+        'responsive',
+        'themes',
+        'zeroheight',
+        'vqa',
+        'aria',
+        'stable',
+        'performance',
+        'package'
+      ];
 
-        switch (node.kind) {
-          case ts.SyntaxKind.ClassDeclaration:
-            node.jsDoc?.forEach(jsDoc => {
-              const classDeclaration = moduleDoc.declarations.find(declaration => declaration.name === node.name?.getText());
-              jsDoc.tags?.forEach(tag => {
-                if (metadata.find(m => m === tag.tagName?.getText())) {
-                  let value = tag.comment;
-                  if (value === 'true') {
-                    value = true;
-                  }
-
-                  if (value === 'false') {
-                    value = false;
-                  }
-
-                  classDeclaration.metadata = { ...classDeclaration.metadata, [tag.tagName?.getText()]: value };
+      switch (node.kind) {
+        case ts.SyntaxKind.ClassDeclaration:
+          node.jsDoc?.forEach((jsDoc) => {
+            const classDeclaration = moduleDoc.declarations.find(
+              (declaration) => declaration.name === node.name?.getText()
+            );
+            jsDoc.tags?.forEach((tag) => {
+              if (metadata.find((m) => m === tag.tagName?.getText())) {
+                let value = tag.comment;
+                if (value === 'true') {
+                  value = true;
                 }
-              });
 
-              if (classDeclaration.metadata && classDeclaration.tagName) {
-                classDeclaration.metadata = {
-                  unitTests: true,
-                  apiReview: true,
-                  performance: true,
-                  stable: true,
-                  vqa: true,
-                  responsive: true,
-                  themes: true,
-                  aria: false,
-                  package: JSON.stringify(pkg.exports).includes(classDeclaration.tagName.split('-')[1]),
-                  ...classDeclaration.metadata,
-                };
+                if (value === 'false') {
+                  value = false;
+                }
+
+                classDeclaration.metadata = { ...classDeclaration.metadata, [tag.tagName?.getText()]: value };
               }
             });
-            break;
+
+            if (classDeclaration.metadata && classDeclaration.tagName) {
+              classDeclaration.metadata = {
+                unitTests: true,
+                apiReview: true,
+                performance: true,
+                stable: true,
+                vqa: true,
+                responsive: true,
+                themes: true,
+                aria: false,
+                package: JSON.stringify(pkg.exports).includes(classDeclaration.tagName.split('-')[1]),
+                ...classDeclaration.metadata
+              };
+            }
+          });
+          break;
+      }
+    }
+  };
+}
+
+// Leverage the TypeScript compiler to evaluate exported string literal (union) types to their compiled type values.
+// Note: https://ts-ast-viewer.com/ is helpful for understanding the TypeScript AST and type checker return values.
+function rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment) {
+  function quoteWrap(string) {
+    return `'${string}'`;
+  }
+
+  const stringLiteralsByTypeAlias = new Map();
+
+  function rewriteTypesText(entry) {
+    const text = entry.type?.text;
+    if (!text) {
+      return;
+    }
+    const types = text.split('|').map((value) => value.trim());
+    const rewrittenTypes = new Set();
+    let performRewrite = false;
+    for (const type of types) {
+      const stringLiterals = stringLiteralsByTypeAlias.get(type);
+      if (stringLiterals !== undefined) {
+        performRewrite = true;
+        for (const stringLiteral of stringLiterals) {
+          // NOTE: This has() check is necessary to retain TypeScript's first-declaration-wins ordering.
+          if (!rewrittenTypes.has(stringLiteral)) {
+            rewrittenTypes.add(stringLiteral);
+          }
+        }
+      } else {
+        rewrittenTypes.add(type);
+      }
+    }
+    if (performRewrite) {
+      entry.type.text = Array.from(rewrittenTypes).join(' | ');
+    }
+  }
+
+  return {
+    name: 'rewrite-exported-string-literal-type-aliases',
+    analyzePhase({ ts, node }) {
+      switch (node.kind) {
+        case ts.SyntaxKind.TypeAliasDeclaration:
+          if (node.modifiers?.[0]?.kind === ts.SyntaxKind.ExportKeyword) {
+            // Evaluate types that look like this:
+            //   export type Inverse = 'inverse';
+            if (
+              node.type.kind === ts.SyntaxKind.LiteralType &&
+              node.type.literal.kind === ts.SyntaxKind.StringLiteral
+            ) {
+              const typeAlias = node.name.escapedText;
+              const { value } = runtimeEnvironment.typeChecker.getTypeAtLocation(node);
+              const stringLiterals = [quoteWrap(value)];
+              stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
+            }
+            // Evaluate types that look like this:
+            //   export type Interaction = 'emphasize' | 'destructive';
+            //   export type GhostInteraction = 'ghost' | `${'ghost'}-${Interaction}`;
+            if (node.type.kind === ts.SyntaxKind.UnionType) {
+              const typeAlias = node.name.escapedText;
+              const { types } = runtimeEnvironment.typeChecker.getTypeAtLocation(node);
+              if (types.every((type) => type.value !== undefined)) {
+                const stringLiterals = types.map((type) => quoteWrap(type.value));
+                stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
+              }
+            }
+          }
+          break;
+      }
+    },
+    packageLinkPhase({ customElementsManifest }) {
+      for (const module of customElementsManifest.modules) {
+        for (const declaration of module.declarations) {
+          switch (declaration.kind) {
+            case 'class':
+              for (const member of declaration.members ?? []) {
+                rewriteTypesText(member);
+              }
+              for (const attribute of declaration.attributes ?? []) {
+                rewriteTypesText(attribute);
+              }
+              break;
+            case 'function':
+              for (const parameter of declaration.parameters ?? []) {
+                rewriteTypesText(parameter);
+              }
+              break;
+          }
         }
       }
     }
-  ]
+  };
 }
+
+const runtimeEnvironment = {};
+
+export default {
+  overrideModuleCreation: ({ ts, globs }) => {
+    const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.json');
+    if (!configFile) {
+      throw Error('tsconfig.json not found');
+    }
+    const { config } = ts.readConfigFile(configFile, ts.sys.readFile);
+    const { options } = ts.parseJsonConfigFileContent(config, ts.sys, process.cwd());
+    const program = ts.createProgram(globs, options);
+    runtimeEnvironment.typeChecker = program.getTypeChecker();
+    return program.getSourceFiles().filter((sf) => globs.find((glob) => sf.fileName.includes(glob)));
+  },
+  plugins: [metadataPlugin(), rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment)]
+};
