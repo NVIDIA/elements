@@ -249,9 +249,10 @@
     "globals": "13.20.0",
     "happy-dom": "8.9.0",
     "lit-analyzer": "1.2.1",
-    "postcss": "8.4.16",
+    "postcss": "8.4.23",
     "postcss-csso": "6.0.1",
     "postcss-each": "1.1.0",
+    "postcss-load-config": "^4.0.1",
     "postcss-mixins": "9.0.4",
     "postcss-nested": "5.0.6",
     "prettier": "2.5.1",
@@ -299,6 +300,7 @@
     "build": {
       "command": "node_modules/vite/bin/vite.js build",
       "files": [
+        "build/vscode-custom-data.js",
         "public/**",
         "src/**",
         "!src/**/*.stories.ts",

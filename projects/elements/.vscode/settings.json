@@ -4,6 +4,7 @@
   "cssvar.ignore": ["**/node_modules/**", "**/storybook-build/**", "**/demos/**/dist/**"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[html]": {
+    "customData": ["./dist/elements.html-data.json"],
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[css]": {
