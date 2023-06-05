@@ -3,6 +3,8 @@ import { styleMap } from 'lit/directives/style-map.js';
 import tokenJSON from '@elements/elements/tokens/tokens.json';
 import tokenJSONDark from '@elements/elements/tokens/tokens.dark.json';
 import tokenJSONHighContrast from '@elements/elements/tokens/tokens.high-contrast.json';
+import '@elements/elements/icon-button/define.js';
+import '@elements/elements/toast/define.js';
 
 export default {
   title: 'Foundations/Tokens/Examples'
@@ -67,16 +69,20 @@ export const Animation = {
 export const Interaction = {
   render: () => html`
   ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.endsWith('sys-interaction-background') || value.endsWith('sys-interaction-color')))}
-  <h3 class="sbdocs-h2">Emphasize</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-emphasize')))}
+  <h3 class="sbdocs-h2">Emphasis</h3>
+  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-emphasis')))}
   <h3 class="sbdocs-h2">Destructive</h3>
   ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-destructive')))}
-  <h3 class="sbdocs-h2">Field</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-field')))}
-  <h3 class="sbdocs-h2">Disabled</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-disabled')))}
+  <h3 class="sbdocs-h2">Secondary</h3>
+  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-secondary')))}
+  <h3 class="sbdocs-h2">Highlighted</h3>
+  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-highlighted')))}
   <h3 class="sbdocs-h2">Selected</h3>
   ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-selected')))}
+  <h3 class="sbdocs-h2">Disabled</h3>
+  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-disabled')))}
+  <h3 class="sbdocs-h2">Field</h3>
+  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-field')))}
   `
 };
 

@@ -4,9 +4,11 @@ import { state } from 'lit/decorators/state.js';
 import '@elements/elements/app-header/define.js';
 import '@elements/elements/logo/define.js';
 import '@elements/elements/button/define.js';
+import '@elements/elements/icon/define.js';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/menu/define.js';
 import '@elements/elements/divider/define.js';
+import '@elements/elements/dropdown/define.js';
 
 export default {
   title: 'Elements/App Header/Examples',

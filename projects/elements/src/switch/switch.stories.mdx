@@ -1,12 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Switch/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Switch
 
-[W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/switch/)
+<element-metrics tag="nve-switch"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -49,8 +48,8 @@ import '@elements/elements/switch/define.js';
   <Story id="elements-switch-examples--horizontal-inline-group" />
 </Canvas>
 
-<Status tag={'nve-switch'}></Status>
+<element-status tag={'nve-switch'}></element-status>
 
 <LinkedHeader>nve-switch</LinkedHeader>
 
-<Props of="nve-switch" />
+<ArgsTable of="nve-switch" />

@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { appendRootNodeStyle, useStyles } from '@elements/elements/internal';
+import { appendRootNodeStyle, useStyles, Container } from '@elements/elements/internal';
 import cardStyleSheet from './card.css?inline';
 import cardHeaderStyleSheet from './card-header.css?inline';
 import cardContentStyleSheet from './card-content.css?inline';
@@ -21,7 +21,7 @@ import globalStyles from './card.global.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
-export class Card extends LitElement {
+export class Card extends LitElement implements Container {
   /** flat (embed into parent container) or fill (fill parent container width) */
   @property({ type: String, reflect: true }) container?: 'flat' | 'fill';
 

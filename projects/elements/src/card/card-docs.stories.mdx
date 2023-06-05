@@ -1,10 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Card/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Card
+
+<element-metrics tag="nve-card"></element-metrics>
 
 Card is composed of a `nve-card` container element and several sub-components with default styling.
 The following sub-components can be used within `nve-card` to achieve standard card layouts:
@@ -111,16 +112,16 @@ to the bottom of the card.
   <Story id="elements-card-examples--dark-theme" />
 </Canvas>
 
-<Status tag={'nve-card'}></Status>
+<element-status tag={'nve-card'}></element-status>
 
 <LinkedHeader>nve-card</LinkedHeader>
-<Props of="nve-card" />
+<ArgsTable of="nve-card" />
 
 <LinkedHeader>nve-card-header</LinkedHeader>
-<Props of="nve-card-header" />
+<ArgsTable of="nve-card-header" />
 
 <LinkedHeader>nve-card-content</LinkedHeader>
-<Props of="nve-card-content" />
+<ArgsTable of="nve-card-content" />
 
 <LinkedHeader>nve-card-footer</LinkedHeader>
-<Props of="nve-card-footer" />
+<ArgsTable of="nve-card-footer" />

@@ -1,11 +1,11 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
-import { withDesign } from 'storybook-addon-designs';
 import { ComponentStatuses, generateDefaultStoryParameters } from '@elements/elements/internal';
 import '@elements/elements/card/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/icon/define.js';
+import '@elements/elements/tabs/define.js';
 
 const reviewDocBookmark = 'id.s62qmiib7wfu';
 const status: ComponentStatuses = 'alpha';
@@ -16,7 +16,6 @@ const description = `
 export default {
   title: 'Elements/Card/Examples',
   component: 'nve-card',
-  decorators: [withDesign],
   parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: {
     width: {

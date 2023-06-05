@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../../docs/utils.mdx';
 
 <Meta title="Elements/Data Grid/Column Width" parameters={{ badges: ['alpha'] }} />
 
 # Data Grid Column Width
 
-<Metrics tag="nve-grid-column"></Metrics>
+<element-metrics tag="nve-grid-column"></element-metrics>
 
 Columns can individually have set widths using the `width` property or attribute. If the total width of all columns
 is less than the grid width then the last column will fill the remaining space.
@@ -35,16 +35,16 @@ is less than the grid width then the last column will fill the remaining space.
 </Canvas>
 
 <LinkedHeader>nve-grid</LinkedHeader>
-<Props of="nve-grid" />
+<ArgsTable of="nve-grid" />
 
 <LinkedHeader>nve-grid-header</LinkedHeader>
-<Props of="nve-grid-header" />
+<ArgsTable of="nve-grid-header" />
 
 <LinkedHeader>nve-grid-column</LinkedHeader>
-<Props of="nve-grid-column" />
+<ArgsTable of="nve-grid-column" />
 
 <LinkedHeader>nve-grid-row</LinkedHeader>
-<Props of="nve-grid-row" />
+<ArgsTable of="nve-grid-row" />
 
 <LinkedHeader>nve-grid-cell</LinkedHeader>
-<Props of="nve-grid-cell" />
+<ArgsTable of="nve-grid-cell" />

@@ -1,10 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Panel/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Panels
+
+<element-metrics tag="nve-panel"></element-metrics>
 
 Panels provide a way to make additional content available alongside the primary page layout,
 in a way that is accessible and minimizable.
@@ -98,18 +99,18 @@ In this example `<nve-panel-header>` is further slotted with elements for `slot=
   <Story id="elements-panel-examples--high-contrast-theme" />
 </Canvas>
 
-<Status tag={'nve-panel'}></Status>
+<element-status tag={'nve-panel'}></element-status>
 
 # Element API
 
 <LinkedHeader>nve-panel</LinkedHeader>
-<Props of="nve-panel" />
+<ArgsTable of="nve-panel" />
 
 <LinkedHeader>nve-panel-header</LinkedHeader>
-<Props of="nve-panel-header" />
+<ArgsTable of="nve-panel-header" />
 
 <LinkedHeader>nve-panel-content</LinkedHeader>
-<Props of="nve-panel-content" />
+<ArgsTable of="nve-panel-content" />
 
 <LinkedHeader>nve-panel-footer</LinkedHeader>
-<Props of="nve-panel-footer" />
+<ArgsTable of="nve-panel-footer" />
