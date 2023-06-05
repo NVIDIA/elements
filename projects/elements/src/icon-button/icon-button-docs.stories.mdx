@@ -1,10 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Icon Button/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Icon Button
+
+<element-metrics tag="nve-icon-button"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -74,7 +75,7 @@ import '@elements/elements/icon-button/define.js';
 
 # Element API
 
-<Status tag={'nve-icon-button'}></Status>
+<element-status tag={'nve-icon-button'}></element-status>
 
 <LinkedHeader>nve-icon-button</LinkedHeader>
-<Props of="nve-icon-button" />
+<ArgsTable of="nve-icon-button" />

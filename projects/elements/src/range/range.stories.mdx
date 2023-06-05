@@ -1,12 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Range/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Range
 
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range)
+<element-metrics tag="nve-range"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -49,8 +48,8 @@ import '@elements/elements/range/define.js';
   <Story id="elements-range-examples--horizontal" />
 </Canvas>
 
-<Status tag={'nve-range'}></Status>
+<element-status tag={'nve-range'}></element-status>
 
 <LinkedHeader>nve-range</LinkedHeader>
 
-<Props of="nve-range" />
+<ArgsTable of="nve-range" />

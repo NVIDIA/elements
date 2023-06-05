@@ -1,45 +1,39 @@
 const path = require('path');
+const { mergeConfig } = require('vite');
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 
 module.exports = {
   staticDirs: ['../.storybook/assets'],
   stories: [
+    '../docs/**/*.stories.mdx',
+    '../docs/**/*.stories.ts',
     '../src/**/*.stories.mdx',
     '../src/**/*.stories.ts',
     '../src/**/*.stories.tsx',
     '../tokens/**/*.stories.mdx',
     '../tokens/**/*.stories.ts'
   ],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    'storybook-addon-designs',
-    '@geometricpanda/storybook-addon-badges'
-  ],
-  framework: '@storybook/web-components',
-  core: {
-    builder: '@storybook/builder-vite'
-  },
-  features: {
-    interactionsDebugger: true
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  framework: {
+    name: '@storybook/web-components-vite'
   },
   async viteFinal(config) {
-    config.logLevel = 'error';
-    config.resolve.alias = {
-      '@elements/elements': resolve('./dist'),
-      'metrics': resolve('./metrics')
-    };
-
-    if (config.server) {
-      config.server.port = 7777;
-      config.server.hmr = {
-        protocol: 'ws'
-      };
-    } else {
-      config.base = '/ui/storybook/elements/';
-    }
-
-    return config;
+    return mergeConfig(config, {
+      // base: config.server ? undefined : '/ui/storybook/elements/',
+      build: {
+        target: 'esnext',
+        minify: 'esnext'
+      },
+      resolve: {
+        alias: {
+          '@elements/elements': resolve('./dist'),
+          'metrics': resolve('./metrics')
+        }
+      },
+      server: {
+        port: 7777
+      }
+    });
   }
 };

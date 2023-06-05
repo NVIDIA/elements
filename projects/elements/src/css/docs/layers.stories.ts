@@ -9,6 +9,7 @@ import '@elements/elements/dialog/define.js';
 import '@elements/elements/tooltip/define.js';
 import '@elements/elements/search/define.js';
 import '@elements/elements/icon-button/define.js';
+import '@elements/elements/tooltip/define.js';
 
 export default {
   title: 'Foundations/Tokens/Examples'

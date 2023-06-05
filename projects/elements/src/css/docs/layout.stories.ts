@@ -3,7 +3,7 @@ import { html } from 'lit';
 import '@elements/elements/card/define.js';
 
 export default {
-  title: 'Internal/Layout/Examples'
+  title: 'Foundations/Layout/Examples'
 };
 
 

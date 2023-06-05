@@ -1,6 +1,5 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Notification/Documentation" parameters={{ badges: ['beta'] }} />
 
@@ -8,7 +7,7 @@ import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 # Notification Snackbar
 
-[W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/)
+<element-metrics tag="nve-notification"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -49,12 +48,12 @@ import '@elements/elements/notification/define.js';
   <Story id="elements-notification-examples--content-wrap" inline={false} height="700px" />
 </Canvas>
 
-<Status tag={'nve-notification'}></Status>
+<element-status tag={'nve-notification'}></element-status>
 
 <LinkedHeader>nve-notification</LinkedHeader>
 
-<Props of="nve-notification" />
+<ArgsTable of="nve-notification" />
 
 <LinkedHeader>nve-notification-group</LinkedHeader>
 
-<Props of="nve-notification-group" />
+<ArgsTable of="nve-notification-group" />

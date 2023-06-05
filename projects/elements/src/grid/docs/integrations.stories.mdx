@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../../docs/utils.mdx';
 
 <Meta title="Elements/Data Grid/Integrations" parameters={{ badges: ['alpha'] }} />
 
 # Data Grid Integrations
 
-<Metrics tag="nve-grid"></Metrics>
+<element-metrics tag="nve-grid"></element-metrics>
 
 The Data Grid is designed to be declarative to enable apps to choose the best rendering techniques that fit their use cases.
 When using a framework or library such as Angular, leverage the frameworks default syntax and conventions for rendering
@@ -67,16 +67,16 @@ export class App {
 }
 ```
 
-<Status tag={'nve-grid'}></Status>
+<element-status tag={'nve-grid'}></element-status>
 
 <LinkedHeader>nve-grid</LinkedHeader>
-<Props of="nve-grid" />
+<ArgsTable of="nve-grid" />
 
 <LinkedHeader>nve-grid-header</LinkedHeader>
-<Props of="nve-grid-header" />
+<ArgsTable of="nve-grid-header" />
 
 <LinkedHeader>nve-grid-row</LinkedHeader>
-<Props of="nve-grid-row" />
+<ArgsTable of="nve-grid-row" />
 
 <LinkedHeader>nve-grid-cell</LinkedHeader>
-<Props of="nve-grid-cell" />
+<ArgsTable of="nve-grid-cell" />
