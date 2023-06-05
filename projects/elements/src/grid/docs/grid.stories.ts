@@ -1,8 +1,22 @@
 import { LitElement, unsafeCSS, html, css, nothing } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
-import layout from '@elements/elements/css/module.layout.css';
+import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/grid/define.js';
+import '@elements/elements/badge/define.js';
+import '@elements/elements/button/define.js';
+import '@elements/elements/card/define.js';
+import '@elements/elements/checkbox/define.js';
+import '@elements/elements/dropdown/define.js';
+import '@elements/elements/icon/define.js';
+import '@elements/elements/icon-button/define.js';
+import '@elements/elements/tabs/define.js';
+import '@elements/elements/menu/define.js';
+import '@elements/elements/pagination/define.js';
+import '@elements/elements/panel/define.js';
+import '@elements/elements/radio/define.js';
+import '@elements/elements/search/define.js';
+import '@elements/elements/sort-button/define.js';
 import '@elements/elements/tabs/define.js';
 import { getItems, grid } from '@elements/elements/test';
 
@@ -42,7 +56,7 @@ export const MultiSelect = {
       ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
     ${getItems().map((row, i) => html`
-      <mlv-grid-row .selected=${i === 1}>
+      <mlv-grid-row>
         <mlv-grid-cell>
           <mlv-checkbox>
             <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
@@ -97,7 +111,7 @@ export const SingleSelect = {
       ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
     ${getItems().map((row, i) => html`
-      <mlv-grid-row .selected=${i === 1}>
+      <mlv-grid-row>
         <mlv-grid-cell>
           <mlv-radio>
             <input type="radio" ?checked=${i === 1} name="single-select" .value=${i} aria-label="select row ${i}" />

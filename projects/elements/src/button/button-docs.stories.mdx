@@ -1,10 +1,12 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 
 <Meta title="Elements/Button/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Button
+
+<element-metrics tag="mlv-button"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -94,7 +96,7 @@ Form control option allows a button to be styled like a control field. This is h
   <Story id="elements-button-examples--form-control" />
 </Canvas>
 
-<Status tag={'mlv-button'}></Status>
+<element-status tag={'mlv-button'}></element-status>
 
 <LinkedHeader>mlv-button</LinkedHeader>
-<Props of="mlv-button" />
+<ArgsTable of="mlv-button" />

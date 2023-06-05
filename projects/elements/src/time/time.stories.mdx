@@ -1,12 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics, statusBadges  } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, statusBadges  } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Time/Documentation" parameters={{ badges: statusBadges('mlv-time') }} />
 
 # Time
 
-<Metrics tag="mlv-time"></Metrics>
+<element-metrics tag="mlv-time"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -44,8 +43,8 @@ import '@elements/elements/time/define.js';
   <Story id="elements-time-examples--horizontal" />
 </Canvas>
 
-<Status tag={'mlv-time'}></Status>
+<element-status tag={'mlv-time'}></element-status>
 
 <LinkedHeader>mlv-time</LinkedHeader>
 
-<Props of="mlv-time" />
+<ArgsTable of="mlv-time" />

@@ -3,9 +3,10 @@ import { html, LitElement, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { ComponentStatuses, generateDefaultStoryParameters } from '@elements/elements/internal';
-import layout from '@elements/elements/css/module.layout.css';
-import typography from '@elements/elements/css/module.typography.css';
+import layout from '@elements/elements/css/module.layout.css?inline';
+import typography from '@elements/elements/css/module.typography.css?inline';
 import { Icon, IconName, ICON_NAMES } from '@elements/elements/icon';
+import '@elements/elements/button/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/card/define.js';
 import '@elements/elements/search/define.js';
@@ -115,7 +116,7 @@ export const PreviewAllIcons = {
   args: { name: 'user' }
 };
 
-export const statuses = {
+export const Statuses = {
   render: () => html`
     <mlv-icon name="user"></mlv-icon>
     <mlv-icon name="user" status="accent"></mlv-icon>
@@ -125,7 +126,7 @@ export const statuses = {
   `
 }
 
-export const size = {
+export const Size = {
   render: () => html`
     <mlv-icon name="user" size="sm"></mlv-icon>
     <mlv-icon name="user"></mlv-icon>
@@ -133,7 +134,7 @@ export const size = {
   `
 }
 
-export const direction = {
+export const Direction = {
   render: () => html`
     <mlv-icon name="expand-panel"></mlv-icon>
     <mlv-icon name="collapse-panel"></mlv-icon>
@@ -152,7 +153,7 @@ export const direction = {
   `
 }
 
-export const themes = {
+export const Themes = {
   render: () => html`
     <div mlv-theme="root light">
       <mlv-icon name="user"></mlv-icon>

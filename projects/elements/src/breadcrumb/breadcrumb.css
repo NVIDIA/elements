@@ -1,4 +1,4 @@
-[internal-host] {
+:host {
   --breadcrumb-height: var(--mlv-ref-size-500);
   --item-text-size: var(--mlv-ref-font-size-50);
   --item-color: var(--mlv-sys-text-muted-color);
@@ -58,7 +58,7 @@ mlv-icon[separator] {
   display: block;
 }
 
-::slotted(*[last-item]) {
+::slotted(*:last-child) {
   color: var(--item-active-color);
   font-weight: var(--item-active-font-weight);
   --font-weight: var(--item-active-font-weight);

@@ -1,12 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Textarea/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Textarea
 
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea/)
+<element-metrics tag="mlv-textarea"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -43,8 +42,8 @@ import '@elements/elements/textarea/define.js';
   <Story id="elements-textarea-examples--columns-and-rows" />
 </Canvas>
 
-<Status tag={'mlv-textarea'}></Status>
+<element-status tag={'mlv-textarea'}></element-status>
 
 <LinkedHeader>mlv-textarea</LinkedHeader>
 
-<Props of="mlv-textarea" />
+<ArgsTable of="mlv-textarea" />

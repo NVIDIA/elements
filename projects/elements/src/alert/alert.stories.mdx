@@ -1,12 +1,12 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 
 <Meta title="Elements/Alert/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Alert
 
-[W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)
+<element-metrics tag="mlv-alert"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -48,7 +48,7 @@ import '@elements/elements/alert/define.js';
   <Story id="elements-alert-examples--status-dark-theme" />
 </Canvas>
 
-<Status tag={'mlv-alert'}></Status>
+<element-status tag={'mlv-alert'}></element-status>
 
 <LinkedHeader>mlv-alert</LinkedHeader>
-<Props of="mlv-alert" />
+<ArgsTable of="mlv-alert" />

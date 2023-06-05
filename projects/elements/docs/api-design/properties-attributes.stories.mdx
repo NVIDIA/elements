@@ -1,0 +1,95 @@
+import { Meta } from '@storybook/addon-docs';
+import '@elements/elements/alert/define.js';
+
+<Meta title="About/API Design/Properties & Attributes" />
+
+# Properties & Attributes
+
+Properties/attributes represent an element's visual state. Examples:
+
+- *types* `status: error | success | warning`
+- *states* `expanded | selected | disabled`
+- *behaviors* `closable | draggable`
+
+```html
+<mlv-alert status="success"></mlv-alert>
+```
+
+Properties (`@property`) in lit enables the property to be set on the element via JavaScript or HTML Attributes.
+
+```html
+<mlv-alert status="success"></mlv-alert>
+
+<script type="module">
+  const alert = document.querySelector('mlv-alert');
+  alert.status = 'warning';
+</script>
+```
+
+<mlv-alert status="muted">
+  <p mlv-text="body">🎓 Learn: By default when a property is set Lit will not update the corresponding attribute in the DOM for performance. If the attribute is used as a style hook example, <code mlv-text="code">:host([disabled])</code> then the <code mlv-text="code">reflect</code> option can be set on the property decorator.</p>
+</mlv-alert>
+
+## Impossible states
+
+Properties/Attributes should avoid enabling “impossible states”. Impossible states are caused by conflicting APIs on a single element.
+
+  <mlv-alert status="success"><p>Do:</p></mlv-alert>
+```html
+<mlv-alert status="success">hello there</mlv-alert>
+```
+
+  <mlv-alert status="danger"><p>Don't:</p></mlv-alert>
+```html
+<mlv-alert info>hello there</mlv-alert>
+<mlv-alert success>hello there</mlv-alert>
+<mlv-alert warning>hello there</mlv-alert>
+<mlv-alert danger>hello there</mlv-alert>
+
+<!-- alert cannot be in a success and error state -->
+<mlv-alert success danger>hello there</mlv-alert>
+```
+
+<mlv-alert status="muted">
+  <p>🎓 Learn: <a href="https://kentcdodds.com/blog/make-impossible-states-impossible" mlv-text="link">Make impossible states impossible</a></p>
+</mlv-alert>
+
+## Boolean Types
+
+Boolean property/attribute type behave the same as native HTML element boolean types. The presence of the attribute is truthy and absence of the attribute is falsy. ([MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden))
+
+```html
+<mlv-alert closable>hello there</mlv-alert>
+```
+
+<mlv-alert status="warning">
+  <p>Warning: avoid double negations on attributes as this breaks the default expectations of native HTML elements, examples (<code mlv-text="code">disable-closable</code>, <code mlv-text="code">not-closable</code>, <code mlv-text="code">closable=”false”</code>)</p>
+</mlv-alert>
+&nbsp;
+<mlv-alert status="warning">
+  <p>Warning: a custom coercion function is needed for react support which will set boolean attributes to a value of “false” <a href="https://github.com/vmware-clarity/core/blob/main/projects/core/src/internal/utils/dom.ts#L268" mlv-text="link">example</a> <a href="https://github.com/facebook/react/issues/9230" mlv-text="link">react issue</a>.</p>
+</mlv-alert>
+
+## Primitive Types
+
+<mlv-alert status="accent">Note: Primitive type guidance is for atomic and highly reusable element libraries</mlv-alert>
+
+While Lit keeps both properties and attributes in sync, do not use complex types like `object` and `array` on the API. Since HTML cannot represent JavaScript objects, Lit must JSON parse attributes and reflect them anytime there is a change to ensure the JavaScript property and HTML attribute are in sync. This can be expensive to parse when using an object or array and cause unexpected behaviors such as lost object references for the user.
+
+<mlv-alert status="success">
+  <p>Use <code>string | number | boolean</code></p>
+</mlv-alert>
+&nbsp;
+<mlv-alert status="danger">
+  <p>Avoid <code>object | array</code></p>
+</mlv-alert>
+
+Complex types cause compatibility and usability issues as it can require the developer to use JavaScript to render content. This can make it difficult for user-generated content like CMS systems or SSR (Server Side Rendering) to easily render static HTML.
+
+<mlv-alert status="warning">
+  <p>Warning: avoid using <code>@property</code> on built in properties/attributes on the <code>HTMLElement</code> as the decorator overrides the getter/setter and can cause unexpected behavior. <a href="https://github.com/vmware-clarity/core/blob/main/projects/core/build/eslint-rules/reserved-property-names.js" mlv-text="link">read more</a></p>
+</mlv-alert>
+&nbsp;
+<mlv-alert status="muted">
+  <p>🎓 Learn: <a href="https://developers.google.com/web/fundamentals/web-components/best-practices#attributes-properties" mlv-text="link">Web Fundamentals Attributes vs Properties</a></p>
+</mlv-alert>

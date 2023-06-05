@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Breadcrumb/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Breadcrumb
 
-<Metrics tag="mlv-breadcrumb"></Metrics>
+<element-metrics tag="mlv-breadcrumb"></element-metrics>
 
 Breadcrumb is a component that can help users establish their location while navigating a website with complex URLs and navigation paths.
 
@@ -42,8 +42,8 @@ import '@elements/elements/breadcrumb/define.js';
   <Story id="elements-breadcrumb-examples--dark-theme" />
 </Canvas>
 
-<Status tag={'mlv-breadcrumb'}></Status>
+<element-status tag={'mlv-breadcrumb'}></element-status>
 
 <LinkedHeader>mlv-breadcrumb</LinkedHeader>
 
-<Props of="mlv-breadcrumb" />
+<ArgsTable of="mlv-breadcrumb" />

@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../../docs/utils.mdx';
 
 <Meta title="Elements/Data Grid/Container" parameters={{ badges: ['alpha'] }} />
 
 # Data Grid Container
 
-<Metrics tag="mlv-grid"></Metrics>
+<element-metrics tag="mlv-grid"></element-metrics>
 
 The `container` property/attribute enables the grid container to be altered for use cases such as nesting within another component like cards or full screen widths.
 
@@ -28,16 +28,16 @@ The `container` property/attribute enables the grid container to be altered for 
 </Canvas>
 
 <LinkedHeader>mlv-grid</LinkedHeader>
-<Props of="mlv-grid" />
+<ArgsTable of="mlv-grid" />
 
 <LinkedHeader>mlv-grid-header</LinkedHeader>
-<Props of="mlv-grid-header" />
+<ArgsTable of="mlv-grid-header" />
 
 <LinkedHeader>mlv-grid-column</LinkedHeader>
-<Props of="mlv-grid-column" />
+<ArgsTable of="mlv-grid-column" />
 
 <LinkedHeader>mlv-grid-row</LinkedHeader>
-<Props of="mlv-grid-row" />
+<ArgsTable of="mlv-grid-row" />
 
 <LinkedHeader>mlv-grid-cell</LinkedHeader>
-<Props of="mlv-grid-cell" />
+<ArgsTable of="mlv-grid-cell" />

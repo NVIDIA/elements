@@ -1,0 +1,48 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../utils.mdx';
+
+<Meta title="Page Patterns/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Page Patterns
+
+Page patterns demonstrate the composition of `MagLev Elements` with proper utilization of the attribute based
+[Layout System](./?path=/story/foundations-layout-documentation--page).
+
+<p mlv-text="body" class="full-width">
+  Additionally best practices in semantic and minmial HTML structuring of a pages design is shown. <br />
+  All of the example are built with around **~100 lines of HTML and nearly zero CSS**.
+</p>
+
+<LinkedHeader>Stacked Cards with Collapsable Panel</LinkedHeader>
+
+A page pattern with header, stacked cards, and left side panel.
+
+<Canvas>
+  <Story id="page-patterns-examples--stacked-cards-with-collapsable-panel" />
+</Canvas>
+
+
+<LinkedHeader>Stacked Cards with Closable Panel</LinkedHeader>
+
+A page pattern with header, stacked cards, and closable right side panel.
+
+<Canvas>
+  <Story id="page-patterns-examples--stacked-cards-with-closable-panel" />
+</Canvas>
+
+
+<LinkedHeader>Stacked Full-Width Cards</LinkedHeader>
+
+A page pattern with header, and full-width stacked cards.
+
+<Canvas>
+  <Story id="page-patterns-examples--stacked-cards-full-width" />
+</Canvas>
+
+<LinkedHeader>Stacked Cards Grid</LinkedHeader>
+
+A page pattern with header, and a mosaic grid of cards.
+
+<Canvas>
+  <Story id="page-patterns-examples--stacked-card-grid" />
+</Canvas>

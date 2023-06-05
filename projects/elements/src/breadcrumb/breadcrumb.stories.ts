@@ -2,6 +2,8 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import '@elements/elements/breadcrumb/define.js';
+import '@elements/elements/card/define.js';
+import '@elements/elements/dropdown/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
@@ -49,21 +51,21 @@ class BreadcrumbMenuDemo extends LitElement {
     return html`
 <mlv-breadcrumb>
   <mlv-icon-button id=${ddownId + '-btn'} @click=${() => this.menuHidden = false} icon-name="additional-actions"></mlv-icon-button>
-  <mlv-dropdown id=${ddownId}
-    anchor=${ddownId + '-btn'}
-    .hidden=${this.menuHidden}
-    @close=${() => this.menuHidden = true}
-    arrow>
-    <mlv-menu>
-      <mlv-menu-item>Item 1</mlv-menu-item>
-      <mlv-menu-item>Item 2</mlv-menu-item>
-      <mlv-menu-item>Item 3</mlv-menu-item>
-    </mlv-menu>
-  </mlv-dropdown>
   <mlv-button><a href="javascript: void(0)">Item 4</a></mlv-button>
   <mlv-button><a href="javascript: void(0)">Item 5</a></mlv-button>
   <span>You Are Here</span>
 </mlv-breadcrumb>
+<mlv-dropdown id=${ddownId}
+  anchor=${ddownId + '-btn'}
+  .hidden=${this.menuHidden}
+  @close=${() => this.menuHidden = true}
+  arrow>
+  <mlv-menu>
+    <mlv-menu-item>Item 1</mlv-menu-item>
+    <mlv-menu-item>Item 2</mlv-menu-item>
+    <mlv-menu-item>Item 3</mlv-menu-item>
+  </mlv-menu>
+</mlv-dropdown>
 `
   }
 }

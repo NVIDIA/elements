@@ -1,6 +1,5 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics, statusBadges } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, statusBadges } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Tooltip/Documentation" parameters={{ badges: statusBadges('mlv-tooltip') }} />
 
@@ -8,7 +7,7 @@ import { LinkedHeader, Status, Metrics, statusBadges } from '../docs/utils.mdx';
 
 # Tooltip
 
-<Metrics tag="mlv-tooltip"></Metrics>
+<element-metrics tag="mlv-tooltip"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -51,8 +50,8 @@ import '@elements/elements/tooltip/define.js';
   <Story id="elements-tooltip-examples--alignment" inline={false} height={800} />
 </Canvas>
 
-<Status tag={'mlv-tooltip'}></Status>
+<element-status tag={'mlv-tooltip'}></element-status>
 
 <LinkedHeader>mlv-tooltip</LinkedHeader>
 
-<Props of="mlv-tooltip" />
+<ArgsTable of="mlv-tooltip" />

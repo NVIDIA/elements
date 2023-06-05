@@ -1,6 +1,5 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Dialog/Documentation" parameters={{ badges: ['beta'] }} />
 
@@ -8,7 +7,7 @@ import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 # Dialog
 
-[W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/)
+<element-metrics tag="mlv-dialog"></element-metrics>
 
 Dialog is a component that appears above main content. A modal dialog is used to
 display critical information that requires users attention. Use `hidden` to show or hide the dialog.
@@ -71,16 +70,16 @@ import '@elements/elements/dialog/define.js';
   <Story id="elements-dialog-examples--position" inline={false} height="800px" />
 </Canvas>
 
-<Status tag={'mlv-dialog'}></Status>
+<element-status tag={'mlv-dialog'}></element-status>
 
 <LinkedHeader>mlv-dialog</LinkedHeader>
 
-<Props of="mlv-dialog" />
+<ArgsTable of="mlv-dialog" />
 
 <LinkedHeader>mlv-dialog-header</LinkedHeader>
 
-<Props of="mlv-dialog-header" />
+<ArgsTable of="mlv-dialog-header" />
 
 <LinkedHeader>mlv-dialog-footer</LinkedHeader>
 
-<Props of="mlv-dialog-footer" />
+<ArgsTable of="mlv-dialog-footer" />

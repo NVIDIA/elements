@@ -5,6 +5,7 @@ import '@elements/elements/card/define.js';
 import '@elements/elements/tooltip/define.js';
 import '@elements/elements/toast/define.js';
 import '@elements/elements/button/define.js';
+import '@elements/elements/icon/define.js';
 import '@elements/elements/icon-button/define.js';
 
 export default {

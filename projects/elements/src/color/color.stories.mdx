@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Color/Documentation" parameters={{ badges: ['alpha'] }} />
 
 # Color
 
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color)
+<element-metrics tag="mlv-color"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -42,8 +42,8 @@ import '@elements/elements/color/define.js';
   <Story id="elements-color-examples--horizontal" />
 </Canvas>
 
-<Status tag={'mlv-color'}></Status>
+<element-status tag={'mlv-color'}></element-status>
 
 <LinkedHeader>mlv-color</LinkedHeader>
 
-<Props of="mlv-color" />
+<ArgsTable of="mlv-color" />

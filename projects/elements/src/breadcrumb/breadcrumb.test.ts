@@ -1,8 +1,7 @@
-import { html, LitElement } from 'lit';
-import { customElement } from 'lit/decorators/custom-element.js';
+import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { Breadcrumb, getBreadcrumbItemId, addSlotsAndAttributesToItems } from '@elements/elements/breadcrumb';
+import { Breadcrumb } from '@elements/elements/breadcrumb';
 import '@elements/elements/breadcrumb/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
@@ -17,6 +16,7 @@ describe('mlv-breadcrumb', () => {
         <mlv-icon-button icon-name="home"><a href="#" aria-label="link to first page"></a></mlv-icon-button>
         <mlv-button><a href="#">Item</a></mlv-button>
         <span>Static item</span>
+        <h4>noop</h4>
       </mlv-breadcrumb>
     `);
     element = fixture.querySelector('mlv-breadcrumb');
@@ -30,82 +30,20 @@ describe('mlv-breadcrumb', () => {
   it('should define element', () => {
     expect(customElements.get('mlv-breadcrumb')).toBeDefined();
   });
-});
 
-describe('mlv-breadcrumb helpers: getBreadcrumbItemId', () => {
-  it('generates an id', () => {
-    const testme = getBreadcrumbItemId();
-    expect(testme).toBeDefined();
-    expect(typeof testme === 'string').toBe(true);
-  });
-
-  it('ids should be unique', () => {
-    const testme = [getBreadcrumbItemId(), getBreadcrumbItemId(), getBreadcrumbItemId(), getBreadcrumbItemId()];
-    expect(testme[0]).not.toEqual(testme[testme.length - 1]);
-  });
-});
-
-@customElement('breadcrumb-helper-test-element')
-class BreadcrumbHelperTestComponent extends LitElement {
-  render() {
-    return html`
-      <slot></slot>
-    `;
-  }
-}
-
-describe('mlv-breadcrumb helpers: addSlotsAndAttributesToItems', () => {
-  let fixture: HTMLElement;
-  let element: BreadcrumbHelperTestComponent;
-
-  beforeEach(async () => {
-    fixture = await createFixture(html`
-      <breadcrumb-helper-test-element>
-        <h4>noop</h4>
-        <mlv-icon-button icon-name="home"><a href="#" aria-label="link to first page"></a></mlv-icon-button>
-        <div>noop</div>
-        <mlv-button><a href="#">Item</a></mlv-button>
-        <span>Static item</span>
-      </breadcrumb-helper-test-element>
-    `);
-    element = fixture.querySelector('breadcrumb-helper-test-element');
+  it('should assign elements to defined slot', async () => {
+    element.shadowRoot.querySelector('slot').dispatchEvent(new Event('slotchange'));
     await elementIsStable(element);
+    await new Promise(r => setTimeout(r, 0));
+    const items: any[] = Array.from(element.querySelectorAll('*'));
+    expect(items[0].getAttribute('slot').includes('_')).toBe(true);
   });
 
-  afterEach(() => {
-    removeFixture(fixture);
-  });
-
-  it('should decorate clickable and span elements with slot names', () => {
-    const testItems = addSlotsAndAttributesToItems(Array.from(element.children));
-    testItems.forEach((item, idx) => {
-      const tagName = item.tagName;
-
-      expect(item.hasAttribute('slot')).toBe(true);
-
-      if (tagName === 'SPAN') {
-        expect(item.hasAttribute('interaction')).toBe(false);
-      } else {
-        expect(item.getAttribute('interaction')).toBe('ghost');
-      }
-
-      if (idx === (testItems.length - 1)) {
-        expect(item.hasAttribute('last-item')).toBe(true);
-      }
-    });
-  });
-
-  it('should ignore non-clickable and non-span elements', () => {
-    const testTags = addSlotsAndAttributesToItems(Array.from(element.children)).map(el => el.tagName);
-    expect(testTags.indexOf('DIV')).toEqual(-1);
-    expect(testTags.indexOf('H4')).toEqual(-1);
-  });
-
-  it('should decorate last item with last-item attribute', () => {
-    expect(element).toBeDefined();
-  });
-
-  it('should decorate clickable elements with ghost interaction', () => {
-    expect(element).toBeDefined();
+  it('should decorate clickable elements with ghost interaction', async () => {
+    element.shadowRoot.querySelector('slot').dispatchEvent(new Event('slotchange'));
+    const items: any[] = Array.from(element.querySelectorAll('*'));
+    await elementIsStable(element);
+    expect(items[0].getAttribute('interaction')).toBe('ghost');
+    expect(items[3].getAttribute('interaction')).toBe(null);
   });
 });

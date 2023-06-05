@@ -1,12 +1,12 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 
 <Meta title="Elements/Datetime/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Datetime
 
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local)
+<element-metrics tag="mlv-datetime"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -43,8 +43,8 @@ import '@elements/elements/datetime/define.js';
   <Story id="elements-datetime-examples--horizontal" />
 </Canvas>
 
-<Status tag={'mlv-datetime'}></Status>
+<element-status tag={'mlv-datetime'}></element-status>
 
 <LinkedHeader>mlv-datetime</LinkedHeader>
 
-<Props of="mlv-datetime" />
+<ArgsTable of="mlv-datetime" />

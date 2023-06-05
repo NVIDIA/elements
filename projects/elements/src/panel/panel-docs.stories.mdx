@@ -1,10 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Panel/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Panels
+
+<element-metrics tag="mlv-panel"></element-metrics>
 
 Panels provide a way to make additional content available alongside the primary page layout,
 in a way that is accessible and minimizable.
@@ -98,18 +99,18 @@ In this example `<mlv-panel-header>` is further slotted with elements for `slot=
   <Story id="elements-panel-examples--high-contrast-theme" />
 </Canvas>
 
-<Status tag={'mlv-panel'}></Status>
+<element-status tag={'mlv-panel'}></element-status>
 
 # Element API
 
 <LinkedHeader>mlv-panel</LinkedHeader>
-<Props of="mlv-panel" />
+<ArgsTable of="mlv-panel" />
 
 <LinkedHeader>mlv-panel-header</LinkedHeader>
-<Props of="mlv-panel-header" />
+<ArgsTable of="mlv-panel-header" />
 
 <LinkedHeader>mlv-panel-content</LinkedHeader>
-<Props of="mlv-panel-content" />
+<ArgsTable of="mlv-panel-content" />
 
 <LinkedHeader>mlv-panel-footer</LinkedHeader>
-<Props of="mlv-panel-footer" />
+<ArgsTable of="mlv-panel-footer" />

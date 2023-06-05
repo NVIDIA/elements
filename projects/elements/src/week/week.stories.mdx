@@ -1,12 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics, statusBadges } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, statusBadges } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Week/Documentation" parameters={{ badges: statusBadges('mlv-week') }} />
 
 # Week
 
-<Metrics tag="mlv-week"></Metrics>
+<element-metrics tag="mlv-week"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -43,8 +42,8 @@ import '@elements/elements/week/define.js';
   <Story id="elements-week-examples--horizontal" />
 </Canvas>
 
-<Status tag={'mlv-week'}></Status>
+<element-status tag={'mlv-week'}></element-status>
 
 <LinkedHeader>mlv-week</LinkedHeader>
 
-<Props of="mlv-week" />
+<ArgsTable of="mlv-week" />

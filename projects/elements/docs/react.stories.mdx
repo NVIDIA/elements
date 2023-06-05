@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs';
+import { LinkedHeader } from './utils.mdx';
+import '@elements/elements/alert/define.js';
+
+<Meta title="Integrations/React" />
+
+# React Integration
+
+<mlv-alert status="warning">
+  While Elements can be used in React we recommend alternatives such as <a mlv-text="link" href="https://preactjs.com">Preact</a> due to <a mlv-text="link" href="https://custom-elements-everywhere.com/">React incompatibilities</a> with standard Web APIs.
+</mlv-alert>
+
+To use Maglev Elements in [React](https://reactjs.org/) follow the [instalation getting started](?path=/story/about-getting-started--page) steps. Once complete
+elements can be imported and used within React jsx and tsx files. The `@lit-labs/react` package must be used to enable React compatibility with Custom Elements.
+This package will wrap elements into a React component mapping the standard events and properties in a way that React can understand.
+
+```tsx
+import * as React from 'react';
+import { createComponent } from '@lit-labs/react';
+import { Alert } from '@elements/elements/alert';
+import { AlertGroup } from '@elements/elements/alert-group';
+
+export const MlvAlert = createComponent(React, 'mlv-alert', Alert, { onclose: 'close' });
+export const MlvAlertGroup = createComponent(React, 'mlv-alert-group', AlertGroup);
+```
+
+The `MlvAlert` React component can now be used within a React application.
+
+```tsx
+// - status - HTML attribute
+// - closable - can update via attributes or JavaScript property binding
+// - onclose - event listener binding for 'close' custom event
+
+<MlvAlertGroup status="success">
+  <MlvAlert closable={isClosable} onclose={(e) => closeAlert()}>hello there!</MlvAlert>
+</MlvAlertGroup>
+```
+
+To learn more about the `@lit-labs/react` package, please visit the [documentation](https://github.com/lit/lit/tree/main/packages/labs/react).
+View a working [demo here](?path=/story/internal-integration--react-example).

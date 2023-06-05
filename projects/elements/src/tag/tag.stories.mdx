@@ -1,9 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Tag/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Tag
+
+<element-metrics tag="mlv-tag"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -44,7 +46,7 @@ import '@elements/elements/tag/define.js';
   <Story id="elements-tag-examples--dark-theme" />
 </Canvas>
 
-<Status tag={'mlv-tag'}></Status>
+<element-status tag={'mlv-tag'}></element-status>
 
 <LinkedHeader>mlv-tag</LinkedHeader>
-<Props of="mlv-tag" />
+<ArgsTable of="mlv-tag" />

@@ -1,10 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Icon Button/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Icon Button
+
+<element-metrics tag="mlv-icon-button"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -74,7 +75,7 @@ import '@elements/elements/icon-button/define.js';
 
 # Element API
 
-<Status tag={'mlv-icon-button'}></Status>
+<element-status tag={'mlv-icon-button'}></element-status>
 
 <LinkedHeader>mlv-icon-button</LinkedHeader>
-<Props of="mlv-icon-button" />
+<ArgsTable of="mlv-icon-button" />

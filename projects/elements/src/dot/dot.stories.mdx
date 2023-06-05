@@ -1,9 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Dot/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Dot Notification
+
+<element-metrics tag="mlv-dot"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -51,7 +53,7 @@ import '@elements/elements/dot/define.js';
   <Story id="elements-dot-examples--support-dark-theme" />
 </Canvas>
 
-<Status tag={'mlv-dot'}></Status>
+<element-status tag={'mlv-dot'}></element-status>
 
 <LinkedHeader>mlv-dot</LinkedHeader>
-<Props of="mlv-dot" />
+<ArgsTable of="mlv-dot" />

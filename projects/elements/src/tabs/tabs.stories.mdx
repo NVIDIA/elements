@@ -1,9 +1,11 @@
-import { Meta, Props, Story, Source, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Source, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Tabs/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Tabs
+
+<element-metrics tag="mlv-tabs"></element-metrics>
 
 Tabs provide a selection UX, typically used for swapping content shown on a page,
 or within a navigation context.
@@ -37,7 +39,6 @@ import '@elements/elements/tabs/define.js';
 
 <Canvas>
   <Story id="elements-tabs-examples--default" />
-  <Source id="elements-tabs-examples--default" transform={(data => console.log(data))}/>
 </Canvas>
 
 <LinkedHeader>Themes</LinkedHeader>
@@ -94,10 +95,10 @@ shows the default stateless behavior, where the host app will have to set/remove
   <Story id="elements-tabs-examples--stateless-tabs" />
 </Canvas>
 
-<Status tag={'mlv-tabs'}></Status>
+<element-status tag={'mlv-tabs'}></element-status>
 
 <LinkedHeader>mlv-tabs</LinkedHeader>
-<Props of="mlv-tabs" />
+<ArgsTable of="mlv-tabs" />
 
 <LinkedHeader>mlv-tabs-item</LinkedHeader>
-<Props of="mlv-tabs-item" />
+<ArgsTable of="mlv-tabs-item" />

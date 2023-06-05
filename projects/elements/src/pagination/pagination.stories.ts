@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import '@elements/elements/pagination/define.js';
+import '@elements/elements/button/define.js';
 
 export default {
   title: 'Elements/Pagination/Examples',

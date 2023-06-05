@@ -5,6 +5,7 @@ import { Button } from '@elements/elements/button';
 import { ComponentStatuses, generateDefaultStoryParameters, InlinePosition, spread } from '@elements/elements/internal';
 import { IconName, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/button/define.js';
+import '@elements/elements/icon/define.js';
 import '@elements/elements/search/define.js';
 
 const reviewDocBookmark = 'id.l12irnk25slx';

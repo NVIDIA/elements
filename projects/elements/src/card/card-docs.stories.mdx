@@ -1,10 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Card/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Card
+
+<element-metrics tag="mlv-card"></element-metrics>
 
 Card is composed of a `mlv-card` container element and several sub-components with default styling.
 The following sub-components can be used within `mlv-card` to achieve standard card layouts:
@@ -111,16 +112,16 @@ to the bottom of the card.
   <Story id="elements-card-examples--dark-theme" />
 </Canvas>
 
-<Status tag={'mlv-card'}></Status>
+<element-status tag={'mlv-card'}></element-status>
 
 <LinkedHeader>mlv-card</LinkedHeader>
-<Props of="mlv-card" />
+<ArgsTable of="mlv-card" />
 
 <LinkedHeader>mlv-card-header</LinkedHeader>
-<Props of="mlv-card-header" />
+<ArgsTable of="mlv-card-header" />
 
 <LinkedHeader>mlv-card-content</LinkedHeader>
-<Props of="mlv-card-content" />
+<ArgsTable of="mlv-card-content" />
 
 <LinkedHeader>mlv-card-footer</LinkedHeader>
-<Props of="mlv-card-footer" />
+<ArgsTable of="mlv-card-footer" />

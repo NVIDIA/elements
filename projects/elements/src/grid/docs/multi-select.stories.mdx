@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../../docs/utils.mdx';
 
 <Meta title="Elements/Data Grid/Multi Select" parameters={{ badges: ['alpha'] }} />
 
 # Data Grid Multi Select
 
-<Metrics tag="mlv-grid-row"></Metrics>
+<element-metrics tag="mlv-grid-row"></element-metrics>
 
 Multi Select rows use a checkbox as the first focusable item within the row. When selected
 set the `selected` attribute/property on the row. This will ensure selected styles as well
@@ -52,16 +52,16 @@ If the bulk actions are closed then all selected rows should be deselected.
 </Canvas>
 
 <LinkedHeader>mlv-grid</LinkedHeader>
-<Props of="mlv-grid" />
+<ArgsTable of="mlv-grid" />
 
 <LinkedHeader>mlv-grid-header</LinkedHeader>
-<Props of="mlv-grid-header" />
+<ArgsTable of="mlv-grid-header" />
 
 <LinkedHeader>mlv-grid-column</LinkedHeader>
-<Props of="mlv-grid-column" />
+<ArgsTable of="mlv-grid-column" />
 
 <LinkedHeader>mlv-grid-row</LinkedHeader>
-<Props of="mlv-grid-row" />
+<ArgsTable of="mlv-grid-row" />
 
 <LinkedHeader>mlv-grid-cell</LinkedHeader>
-<Props of="mlv-grid-cell" />
+<ArgsTable of="mlv-grid-cell" />

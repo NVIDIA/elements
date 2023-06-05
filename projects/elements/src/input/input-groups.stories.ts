@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/date/define.js';
+import '@elements/elements/dropdown/define.js';
 import '@elements/elements/select/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/input/define.js';

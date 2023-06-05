@@ -1,12 +1,12 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 
 <Meta title="Elements/Date/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Date
 
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
+<element-metrics tag="mlv-date"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -43,8 +43,8 @@ import '@elements/elements/date/define.js';
   <Story id="elements-date-examples--horizontal" />
 </Canvas>
 
-<Status tag={'mlv-date'}></Status>
+<element-status tag={'mlv-date'}></element-status>
 
 <LinkedHeader>mlv-date</LinkedHeader>
 
-<Props of="mlv-date" />
+<ArgsTable of="mlv-date" />

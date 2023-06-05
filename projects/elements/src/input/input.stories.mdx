@@ -1,12 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Input/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Input
 
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text)
+<element-metrics tag="mlv-input"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -43,8 +42,8 @@ import '@elements/elements/input/define.js';
   <Story id="elements-input-examples--rounded" />
 </Canvas>
 
-<Status tag={'mlv-input'}></Status>
+<element-status tag={'mlv-input'}></element-status>
 
 <LinkedHeader>mlv-input</LinkedHeader>
 
-<Props of="mlv-input" />
+<ArgsTable of="mlv-input" />
