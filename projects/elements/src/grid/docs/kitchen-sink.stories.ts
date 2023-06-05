@@ -1,14 +1,25 @@
 import { LitElement, unsafeCSS, html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
-import layout from '@elements/elements/css/module.layout.css';
-import typography from '@elements/elements/css/module.typography.css';
+import layout from '@elements/elements/css/module.layout.css?inline';
+import typography from '@elements/elements/css/module.typography.css?inline';
 import '@elements/elements/grid/define.js';
-import '@elements/elements/panel/define.js';
+import '@elements/elements/alert/define.js';
+import '@elements/elements/app-header/define.js';
+import '@elements/elements/badge/define.js';
+import '@elements/elements/bulk-actions/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/checkbox/define.js';
 import '@elements/elements/card/define.js';
-import '@elements/elements/app-header/define.js';
+import '@elements/elements/dialog/define.js';
+import '@elements/elements/dropdown/define.js';
+import '@elements/elements/icon/define.js';
+import '@elements/elements/icon-button/define.js';
+import '@elements/elements/logo/define.js';
+import '@elements/elements/notification/define.js';
+import '@elements/elements/panel/define.js'
+import '@elements/elements/search/define.js';
+import '@elements/elements/select/define.js';
 import { generateId } from '@elements/elements/internal';
 
 export default {

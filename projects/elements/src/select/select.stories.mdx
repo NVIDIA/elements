@@ -1,12 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Select/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Select
 
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/select)
+<element-metrics tag="nve-select"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -72,8 +71,8 @@ Select can render custom templates for option menus with the following limitatio
   <Story id="elements-select-examples--prefix" />
 </Canvas>
 
-<Status tag={'nve-select'}></Status>
+<element-status tag={'nve-select'}></element-status>
 
 <LinkedHeader>nve-select</LinkedHeader>
 
-<Props of="nve-select" />
+<ArgsTable of="nve-select" />

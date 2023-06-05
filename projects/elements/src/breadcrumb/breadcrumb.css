@@ -1,4 +1,4 @@
-[internal-host] {
+:host {
   --breadcrumb-height: var(--nve-ref-size-500);
   --item-text-size: var(--nve-ref-font-size-50);
   --item-color: var(--nve-sys-text-muted-color);
@@ -58,7 +58,7 @@ nve-icon[separator] {
   display: block;
 }
 
-::slotted(*[last-item]) {
+::slotted(*:last-child) {
   color: var(--item-active-color);
   font-weight: var(--item-active-font-weight);
   --font-weight: var(--item-active-font-weight);

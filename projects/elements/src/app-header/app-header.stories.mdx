@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/App Header/Documentation" parameters={{ badges: ['beta'] }} />
 
 # App Header
 
-<Metrics tag="nve-app-header"></Metrics>
+<element-metrics tag="nve-app-header"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -67,7 +67,7 @@ in the section of the app header where supplemental actions are located.
   <Story id="elements-app-header-examples--dark-theme" />
 </Canvas>
 
-<Status tag={'nve-app-header'}></Status>
+<element-status tag={'nve-app-header'}></element-status>
 
 <LinkedHeader>nve-app-header</LinkedHeader>
-<Props of="nve-app-header" />
+<ArgsTable of="nve-app-header" />

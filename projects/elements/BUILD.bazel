@@ -10,10 +10,11 @@ wireit_bin.wireit_binary(
     chdir = package_name(),
     patch_node_fs = False,
     include_npm = True,
-    data = glob([".storybook/**"]) + glob(["src/**"]) + glob(["public/**"])  + glob(["tokens/**"]) + glob(["build/**"]) + [
+    data = glob([".storybook/**"]) + glob(["docs/**"]) + glob(["src/**"]) + glob(["public/**"])  + glob(["tokens/**"]) + glob(["build/**"]) + [
         ":node_modules",
         "eslint.config.js",
         "tsconfig.json",
+        "tsconfig.eslint.json",
         "tsconfig.lib.json",
         "package.json",
         "vite.config.ts",

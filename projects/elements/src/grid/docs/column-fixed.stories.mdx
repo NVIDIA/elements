@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics } from '../../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../../docs/utils.mdx';
 
 <Meta title="Elements/Data Grid/Column Fixed" parameters={{ badges: ['alpha'] }} />
 
 # Data Grid Column Fixed
 
-<Metrics tag="nve-grid-column"></Metrics>
+<element-metrics tag="nve-grid-column"></element-metrics>
 
 Columns positioned to a fixed location within the grid preventing the column from scrolling when the grid has horizontal scroll. Use the `position="fixed"` attribute to position the column.
 
@@ -48,16 +48,16 @@ Multiple Columns can fixed to any given side, however fixed columns should not s
 </Canvas>
 
 <LinkedHeader>nve-grid</LinkedHeader>
-<Props of="nve-grid" />
+<ArgsTable of="nve-grid" />
 
 <LinkedHeader>nve-grid-header</LinkedHeader>
-<Props of="nve-grid-header" />
+<ArgsTable of="nve-grid-header" />
 
 <LinkedHeader>nve-grid-column</LinkedHeader>
-<Props of="nve-grid-column" />
+<ArgsTable of="nve-grid-column" />
 
 <LinkedHeader>nve-grid-row</LinkedHeader>
-<Props of="nve-grid-row" />
+<ArgsTable of="nve-grid-row" />
 
 <LinkedHeader>nve-grid-cell</LinkedHeader>
-<Props of="nve-grid-cell" />
+<ArgsTable of="nve-grid-cell" />

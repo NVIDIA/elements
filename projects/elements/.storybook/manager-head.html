@@ -21,7 +21,7 @@
 
   /* main viewport */
   #panel-tab-content,
-  .sto-10ro1m {
+  .css-10ro1m {
     top: 48px !important;
     height: calc(100% - 48px) !important;
     background: var(--nve-sys-layer-shell-background) !important;
@@ -33,16 +33,29 @@
   }
 
   /* top bar nav */
-  .sto-sqdry3 .os-viewport-native-scrollbars-invisible .os-content {
+  .css-p1dfi6,
+  .css-j2chfn {
     background: var(--nve-sys-layer-shell-background) !important;
   }
 
-  .sto-1mi4vlx,
-  .sto-p1dfi6,
-  .sto-17imonf,
-  .sto-rfiy1p,
-  .sto-1ic2gvo {
+  /* top bar nav button */
+  .css-c3junj,
+  .css-4ii5m {
+    margin: 0 !important;
     height: 48px !important;
+    align-items: center !important;
+    display: flex !important;
+    gap: 4px !important;
+
+    & .css-888fv8,
+    & .css-17dxjer {
+      margin: 0 !important;
+      padding-left: 4px !important;
+    }
+  }
+
+  [title="Apply outlines to the preview"] {
+    display: none !important;
   }
 
   /* top bar nav buttons */
@@ -117,19 +130,32 @@
     background: var(--nve-sys-layer-container-background) !important;
   }
 
-  .os-content button.sto-17imonf,
-  .os-content button.sto-1l38861 { /* selected/active toolbar buttons */
+  button.css-17dxjer,
+  button.css-888fv8 { /* selected/active toolbar buttons */
     color: var(--nve-sys-interaction-selected-color) !important;
     border-bottom-color: var(--nve-sys-interaction-selected-background) !important;
   }
 
+  button.css-e3cb6b {
+    margin: 0 !important;
+  }
+
+  [title='Apply a grid to the preview'],
   .sidebar-header button.sto-19hajsw {
     display: none !important;
+  }
+
+  .os-viewport.os-viewport-native-scrollbars-invisible {
+    background: var(--nve-sys-layer-shell-background) !important;
   }
 
   .sidebar-container .os-content {
     background: var(--nve-sys-layer-shell-background) !important;
     padding: 12px 16px !important;
+  }
+
+  .sidebar-container .css-lnkd2p {
+    overflow: hidden;
   }
 
   .sidebar-container .sto-80pces {
@@ -148,6 +174,10 @@
 
   .sidebar-container .search-field {
     margin-top: 0 !important;
+  }
+
+  [data-action='collapse-root'] {
+    font-weight: 900 !important;
   }
 
   #storybook-explorer-searchfield {
@@ -184,13 +214,17 @@
   .sidebar-container .sidebar-item,
   .sto-1k5e3f,
   .sto-pbjbky,
-  .sto-1l38861 {
+  .css-888fv8 {
     background: transparent !important;
-    padding-block: 6px !important;
     background-image: linear-gradient(color-mix(in oklab, var(--nve-sys-interaction-state-base) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)) 0 0) !important;
     color: var(--nve-sys-interaction-color) !important;
-    font-size: var(--nve-ref-font-size-200) !important;
     border-radius: var(--nve-ref-border-radius-xs) !important;
+    padding-block: 6px !important;
+    font-size: var(--nve-ref-font-size-200) !important
+  }
+
+  .css-1qwztpk {
+    margin: 0 !important;
   }
 
   .sidebar-item:hover,
@@ -208,10 +242,14 @@
     --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-active);
   }
 
-  .sidebar-item[data-selected='true']:not(#about-getting-started--page),
+  .sidebar-item[data-selected='true']:not(#about-getting-started--docs),
   .sto-pbjbky:has(.sto-1aork4c),
-  .sto-1l38861 {
+  .css-888fv8 {
     --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+  }
+
+  #about-getting-started--docs.sidebar-item {
+    --nve-sys-interaction-state-ratio: 0 !important;
   }
 
   .sidebar-item[data-selected='true'] svg {
@@ -226,17 +264,17 @@
     padding: 0 !important;
   }
 
-  .sidebar-item svg:is(.sto-jx5zn8, .sto-1o4fzuk, .sto-oj9fag, .sto-1utb4xs, .sto-ha8kg) {
+  .sidebar-item svg {
     display: none !important;
   }
 
   /* popovers */
-  #docs-root ~ [style*='position: absolute'] {
+  [data-popper-placement] {
     background: var(--nve-sys-layer-container-background) !important;
     color: var(--nve-sys-layer-container-color) !important;
   }
 
-  #docs-root ~ [style*='position: absolute'] * {
+  [data-popper-placement] * {
     color: var(--nve-sys-layer-container-color) !important;
     border-bottom-color: var(--nve-sys-layer-container-background) !important;
   }

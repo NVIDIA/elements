@@ -1,6 +1,5 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics, statusBadges } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader, statusBadges } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Tooltip/Documentation" parameters={{ badges: statusBadges('nve-tooltip') }} />
 
@@ -8,7 +7,7 @@ import { LinkedHeader, Status, Metrics, statusBadges } from '../docs/utils.mdx';
 
 # Tooltip
 
-<Metrics tag="nve-tooltip"></Metrics>
+<element-metrics tag="nve-tooltip"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -51,8 +50,8 @@ import '@elements/elements/tooltip/define.js';
   <Story id="elements-tooltip-examples--alignment" inline={false} height={800} />
 </Canvas>
 
-<Status tag={'nve-tooltip'}></Status>
+<element-status tag={'nve-tooltip'}></element-status>
 
 <LinkedHeader>nve-tooltip</LinkedHeader>
 
-<Props of="nve-tooltip" />
+<ArgsTable of="nve-tooltip" />

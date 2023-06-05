@@ -1,12 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Alert Group/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Alert Group
 
-[W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)
+<element-metrics tag="nve-alert-group"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -49,12 +48,12 @@ import '@elements/elements/alert/define.js';
   <Story id="elements-alert-group-examples--themes" />
 </Canvas>
 
-<Status tag={'nve-alert-group'}></Status>
+<element-status tag={'nve-alert-group'}></element-status>
 
 # Element API
 
 <LinkedHeader>nve-alert</LinkedHeader>
-<Props of="nve-alert" />
+<ArgsTable of="nve-alert" />
 
 <LinkedHeader>nve-alert-group</LinkedHeader>
-<Props of="nve-alert-group" />
+<ArgsTable of="nve-alert-group" />
