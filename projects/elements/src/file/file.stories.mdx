@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/File/Documentation" parameters={{ badges: ['beta'] }} />
 
 # File
 
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file)
+<element-metrics tag="nve-file"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -36,8 +36,8 @@ import '@elements/elements/file/define.js';
   <Story id="elements-file-examples--horizontal" />
 </Canvas>
 
-<Status tag={'nve-file'}></Status>
+<element-status tag={'nve-file'}></element-status>
 
 <LinkedHeader>nve-file</LinkedHeader>
 
-<Props of="nve-file" />
+<ArgsTable of="nve-file" />

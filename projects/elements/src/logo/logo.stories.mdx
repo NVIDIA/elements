@@ -1,9 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Logo/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Logo
+
+<element-metrics tag="nve-logo"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -38,7 +40,7 @@ import '@elements/elements/logo/define.js';
   <Story id="elements-logo-examples--dark-theme" />
 </Canvas>
 
-<Status tag={'nve-logo'}></Status>
+<element-status tag={'nve-logo'}></element-status>
 
 <LinkedHeader>nve-logo</LinkedHeader>
-<Props of="nve-logo" />
+<ArgsTable of="nve-logo" />

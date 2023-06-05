@@ -2,6 +2,8 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import '@elements/elements/breadcrumb/define.js';
+import '@elements/elements/card/define.js';
+import '@elements/elements/dropdown/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
@@ -49,21 +51,21 @@ class BreadcrumbMenuDemo extends LitElement {
     return html`
 <nve-breadcrumb>
   <nve-icon-button id=${ddownId + '-btn'} @click=${() => this.menuHidden = false} icon-name="additional-actions"></nve-icon-button>
-  <nve-dropdown id=${ddownId}
-    anchor=${ddownId + '-btn'}
-    .hidden=${this.menuHidden}
-    @close=${() => this.menuHidden = true}
-    arrow>
-    <nve-menu>
-      <nve-menu-item>Item 1</nve-menu-item>
-      <nve-menu-item>Item 2</nve-menu-item>
-      <nve-menu-item>Item 3</nve-menu-item>
-    </nve-menu>
-  </nve-dropdown>
   <nve-button><a href="javascript: void(0)">Item 4</a></nve-button>
   <nve-button><a href="javascript: void(0)">Item 5</a></nve-button>
   <span>You Are Here</span>
 </nve-breadcrumb>
+<nve-dropdown id=${ddownId}
+  anchor=${ddownId + '-btn'}
+  .hidden=${this.menuHidden}
+  @close=${() => this.menuHidden = true}
+  arrow>
+  <nve-menu>
+    <nve-menu-item>Item 1</nve-menu-item>
+    <nve-menu-item>Item 2</nve-menu-item>
+    <nve-menu-item>Item 3</nve-menu-item>
+  </nve-menu>
+</nve-dropdown>
 `
   }
 }

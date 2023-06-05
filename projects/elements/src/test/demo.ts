@@ -8,7 +8,8 @@ export interface DemoItem {
   field5: { label: string, value: string | number }
 }
 
-function createItem(type: 'infra' | 'models' | 'hardware' | 'system' = 'infra'): DemoItem {
+/* default "infrastructure" */
+function createItem(type: '' | 'models' | 'hardware' | 'system' = ''): DemoItem {
   const id = generateId().replace('_', '');
   const created = new Intl.DateTimeFormat('en-US', { dateStyle: 'short' }).format(new Date(new Date(2020, 0, 1).getTime() + Math.random() * (new Date().getTime() - new Date(2012, 0, 1).getTime())));
 
@@ -32,7 +33,7 @@ function createItem(type: 'infra' | 'models' | 'hardware' | 'system' = 'infra'):
       { field1: { label: 'id', value: id }, field2: { label: 'model', value: '4060ti' }, field3: { label: 'memory', value: '16gb' }, field4: { label: 'cores', value: 4352 }, field5: { label: 'created', value: created } },
       { field1: { label: 'id', value: id }, field2: { label: 'model', value: '4060' }, field3: { label: 'memory', value: '8gb' }, field4: { label: 'cores', value: 3072 }, field5: { label: 'created', value: created } },
     ][Math.floor(Math.random() * 6)];
-  } else {
+  } else { // default "infrastructure"
     return {
       field1: { label: 'id', value: id },
       field2: { label: 'task', value: ['build', 'test', 'integration'][Math.floor(Math.random() * 3)] },
@@ -46,8 +47,8 @@ function createItem(type: 'infra' | 'models' | 'hardware' | 'system' = 'infra'):
 // cache the result to reuse, this prevents storybook from getting stuck in render loops
 // due to to trying to stablize the prior render to the current in React
 const data = {
-  'infra': {
-    '10': Array(10).fill('').map(() => createItem('infra'))
+  '': {
+    '10': Array(10).fill('').map(() => createItem('')) // infrastructure
   },
   'models': {
     '10': Array(10).fill('').map(() => createItem('models'))
@@ -61,7 +62,7 @@ const data = {
  * demo data for stories only, provides a set of demo object that sync with the storybook data option
  */
 export function getItems(rows = 10): DemoItem[] {
-  const type = localStorage.getItem('nve-data-theme') as 'infra' | 'models' | 'hardware' ?? 'infra';
+  const type = localStorage.getItem('nve-data-theme') as '' | 'models' | 'hardware' ?? '';
 
   if (data[type][rows]) {
     return [...data[type][rows]];

@@ -1,15 +1,16 @@
 import  { setCustomElementsManifest } from '@storybook/web-components';
 import { themes } from '@storybook/theming';
 import { excludePrivateFields } from '@elements/elements/internal';
-import customElements from '@elements/elements/custom-elements.json';
-import styles from '@elements/elements/index.css';
-import font from '@elements/elements/inter.css';
-import branding from '../src/css/theme.branding.css';
+import styles from '@elements/elements/index.css?inline';
+import font from '@elements/elements/inter.css?inline';
+import branding from '../src/css/theme.branding.css?inline';
 import { MLV_VERSION } from '@elements/elements';
 import '@elements/elements/polyfills';
-import '@webcomponents/scoped-custom-element-registry';
-import prettier from 'prettier/esm/standalone.mjs';
-import parserHTML from 'prettier/esm/parser-html.mjs';
+// import '@webcomponents/scoped-custom-element-registry';
+
+const prettier = await import('prettier/esm/standalone.mjs');
+const parserHTML = await import('prettier/esm/parser-html.mjs');
+const customElements = await import('@elements/elements/custom-elements.json');
 
 setCustomElementsManifest(excludePrivateFields(customElements));
 
@@ -33,7 +34,7 @@ export const parameters = {
       const hasRoot = i => i.match(/nve-theme="root"/g)?.length > 1;
       const lines = src.trim().split('\n').filter(i => !hasRoot(i));
       const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('nve-theme="root ', 'nve-theme="');
-      return excludes ? source : prettier.format(source, { parser: 'html', plugins: [parserHTML], singleAttributePerLine: false, printWidth: 120 }).replaceAll('=""', '');
+      return excludes ? source : prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 }).replaceAll('=""', '');
     }
   },
   controls: {
@@ -236,7 +237,20 @@ export const parameters = {
           'Tooltip',
           'Week',
         ],
-        'Patterns',
+        'Section Patterns',
+        [
+          'Documentation',
+          'Feedback',
+          'Header',
+          'Row',
+          'Examples'
+        ],
+        'Page Patterns',
+        [
+          'Documentation',
+          'Card',
+          'Panel'
+        ],
         'Internal'
       ]
     }
@@ -260,6 +274,7 @@ export const globalTypes = {
     description: 'Themes',
     defaultValue: 'dark',
     toolbar: {
+      title: 'Themes',
       showName: true,
       items: experimental ? [...stableThemes, ...experimentalThemes] : stableThemes
     },
@@ -269,6 +284,7 @@ export const globalTypes = {
     description: 'Scale',
     defaultValue: '',
     toolbar: {
+      title: 'Scale',
       showName: true,
       items: [
         { value: '', title: 'Default' },
@@ -281,6 +297,7 @@ export const globalTypes = {
     description: 'Animation',
     defaultValue: '',
     toolbar: {
+      title: 'Animation',
       showName: true,
       items: [
         { value: '', title: 'Default' },
@@ -291,11 +308,12 @@ export const globalTypes = {
   dataTheme: {
     name: 'Data',
     description: 'Data',
-    defaultValue: 'infra',
+    defaultValue: '',
     toolbar: {
+      title: 'Data',
       showName: true,
       items: [
-        { value: 'infra', title: 'Infra' },
+        { value: '', title: 'Infra' },
         { value: 'models', title: 'AI/ML' },
         { value: 'hardware', title: 'Hardware' }
       ],

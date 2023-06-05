@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Pagination/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Pagination
 
-<Metrics tag="nve-pagination"></Metrics>
+<element-metrics tag="nve-pagination"></element-metrics>
 
 <LinkedHeader>Installation</LinkedHeader>
 
@@ -48,8 +48,8 @@ Pagination is [form associated component](https://web.dev/more-capable-form-cont
   <Story id="elements-pagination-examples--dark-theme" />
 </Canvas>
 
-<Status tag="nve-pagination"></Status>
+<element-status tag="nve-pagination"></element-status>
 
 <LinkedHeader>nve-pagination</LinkedHeader>
 
-<Props of="nve-pagination" />
+<ArgsTable of="nve-pagination" />

@@ -1,10 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Icon/Documentation" parameters={{ badges: ['stable'] }} />
 
 # Icon
+
+<element-metrics tag="nve-icon"></element-metrics>
 
 The Iconography system is based on exposing an SVG based icon library to a the `<nve-icon>` element.
 
@@ -58,7 +59,7 @@ Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/
   <Story id="elements-icon-examples--themes" />
 </Canvas>
 
-<Status tag={'nve-icon'}></Status>
+<element-status tag={'nve-icon'}></element-status>
 
 <LinkedHeader>nve-icon</LinkedHeader>
-<Props of="nve-icon" />
+<ArgsTable of="nve-icon" />

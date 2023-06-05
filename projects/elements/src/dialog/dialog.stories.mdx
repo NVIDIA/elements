@@ -1,6 +1,5 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status } from '../docs/utils.mdx';
-
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Dialog/Documentation" parameters={{ badges: ['beta'] }} />
 
@@ -8,7 +7,7 @@ import { LinkedHeader, Status } from '../docs/utils.mdx';
 
 # Dialog
 
-[W3 ARIA Pattern Documentation](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/)
+<element-metrics tag="nve-dialog"></element-metrics>
 
 Dialog is a component that appears above main content. A modal dialog is used to
 display critical information that requires users attention. Use `hidden` to show or hide the dialog.
@@ -71,16 +70,16 @@ import '@elements/elements/dialog/define.js';
   <Story id="elements-dialog-examples--position" inline={false} height="800px" />
 </Canvas>
 
-<Status tag={'nve-dialog'}></Status>
+<element-status tag={'nve-dialog'}></element-status>
 
 <LinkedHeader>nve-dialog</LinkedHeader>
 
-<Props of="nve-dialog" />
+<ArgsTable of="nve-dialog" />
 
 <LinkedHeader>nve-dialog-header</LinkedHeader>
 
-<Props of="nve-dialog-header" />
+<ArgsTable of="nve-dialog-header" />
 
 <LinkedHeader>nve-dialog-footer</LinkedHeader>
 
-<Props of="nve-dialog-footer" />
+<ArgsTable of="nve-dialog-footer" />

@@ -1390,6 +1390,18 @@
       "emphasize": {
         "color": {
           "value": "{sys.text.white.color}",
+          "type": "color",
+          "deprecated": true
+        },
+        "background": {
+          "value": "{sys.accent.primary.background}",
+          "type": "color",
+          "deprecated": true
+        }
+      },
+      "emphasis": {
+        "color": {
+          "value": "{sys.text.white.color}",
           "type": "color"
         },
         "background": {
@@ -1404,6 +1416,26 @@
         },
         "background": {
           "value": "{ref.color.red-cardinal.1000}",
+          "type": "color"
+        }
+      },
+      "secondary": {
+        "color": {
+          "value": "{sys.text.white.color}",
+          "type": "color"
+        },
+        "background": {
+          "value": "{sys.accent.secondary.background}",
+          "type": "color"
+        }
+      },
+      "highlighted": {
+        "color": {
+          "value": "{sys.interaction.color}",
+          "type": "color"
+        },
+        "background": {
+          "value": "{ref.color.blue-cobalt.500}",
           "type": "color"
         }
       },

@@ -1,11 +1,11 @@
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, Status, Metrics } from '../docs/utils.mdx';
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Bulk Actions/Documentation" parameters={{ badges: ['beta'] }} />
 
 # Bulk Actions
 
-<Metrics tag="nve-bulk-actions"></Metrics>
+<element-metrics tag="nve-bulk-actions"></element-metrics>
 
 Bulk Actions are used for selecting and running an action on one to many selections by the user.
 
@@ -30,7 +30,7 @@ import '@elements/elements/bulk-actions/define.js';
   <Story id="elements-bulk-actions-examples--dark-theme" />
 </Canvas>
 
-<Status tag="nve-bulk-actions"></Status>
+<element-status tag="nve-bulk-actions"></element-status>
 
 <LinkedHeader>nve-badge</LinkedHeader>
-<Props of="nve-bulk-actions" />
+<ArgsTable of="nve-bulk-actions" />
