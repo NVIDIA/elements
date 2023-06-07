@@ -3,8 +3,9 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/grid/define.js';
-import '@elements/elements/badge/define.js';
+import '@elements/elements/badge/define.js'
 import '@elements/elements/button/define.js';
+import '@elements/elements/bulk-actions/define.js'
 import '@elements/elements/card/define.js';
 import '@elements/elements/checkbox/define.js';
 import '@elements/elements/dropdown/define.js';
@@ -679,10 +680,10 @@ export const Placeholder = {
   `
 };
 
-export const Fill = {
+export const Full = {
   render: () => html`
 <div nve-theme="root">
-  <nve-grid container="fill">
+  <nve-grid container="full">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
     </nve-grid-header>
@@ -881,8 +882,8 @@ export const All = {
     ${Placeholder.render()}
   </div>
   <div nve-layout="column gap:md align:stretch">
-    <h2 nve-text="heading">Fill</h2>
-    ${Fill.render()}
+    <h2 nve-text="heading">Full</h2>
+    ${Full.render()}
   </div>
   <div nve-layout="column gap:md align:stretch">
     <h2 nve-text="heading">Flat</h2>
