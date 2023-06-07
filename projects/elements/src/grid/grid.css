@@ -14,6 +14,7 @@
   --grid-auto-flow: column;
   width: 100%;
   display: grid;
+  contain: initial;
 }
 
 [internal-host] {
@@ -49,12 +50,12 @@
 [part='scrollbox'] {
   max-height: var(--scroll-height);
   min-height: var(--scroll-height);
-  /* padding-bottom: var(--nve-ref-size-200); */
+  contain: layout;
   overflow: auto;
   position: relative;
 }
 
-:host([container*='fill']) {
+:host([container*='full']) {
   --border-radius: 0;
   --box-shadow: none;
 }

@@ -22,8 +22,8 @@ import globalStyles from './grid.global.css?inline';
 @stateScroll<Grid>()
 @keyNavigationGrid<Grid>()
 export class Grid extends LitElement implements Container {
-  /** flat (embed into parent container) or fill (fill parent container width) */
-  @property({ type: String, reflect: true }) container?: 'flat' | 'fill';
+  /** flat (embed into parent container) or full (full parent container width) */
+  @property({ type: String, reflect: true }) container?: 'flat' | 'full';
 
   /** determine style variant stripe rows */
   @property({ type: Boolean, reflect: true }) stripe: boolean;

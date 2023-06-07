@@ -22,8 +22,8 @@ import globalStyles from './card.global.css?inline';
  * @aria https://github.com/w3c/aria-practices/issues
  */
 export class Card extends LitElement implements Container {
-  /** flat (embed into parent container) or fill (fill parent container width) */
-  @property({ type: String, reflect: true }) container?: 'flat' | 'fill';
+  /** flat (embed into parent container) or full (full parent container width) */
+  @property({ type: String, reflect: true }) container?: 'flat' | 'full';
 
   static styles = useStyles([cardStyleSheet]);
 

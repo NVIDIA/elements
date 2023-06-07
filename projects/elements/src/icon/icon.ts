@@ -30,7 +30,7 @@ export class Icon extends LitElement {
   @property({ type: String, reflect: true }) direction?: 'up' | 'down' | 'left' | 'right';
 
   /** The name of the icon SVG sprite */
-  @property({ type: String }) name: IconName;
+  @property({ type: String, reflect: true }) name: IconName;
 
   @state() svg: string;
 
