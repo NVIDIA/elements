@@ -127,7 +127,7 @@ class KitchenSinkDemo extends LitElement {
 
   get #header() {
     return html`
-    <mlv-card container="fill" style="max-height: 120px">
+    <mlv-card container="full" style="max-height: 120px">
       <mlv-card-content mlv-layout="column gap:md align:horizontal-stretch">
         <div mlv-layout="row gap:md align:center">
           <h1 mlv-text="heading lg semibold">Workflows</h1>

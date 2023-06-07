@@ -208,7 +208,7 @@ export const Tabs = {
 export const ContainerFill = {
   render: () => html`
     <div mlv-theme="root">
-      <mlv-card container="fill">
+      <mlv-card container="full">
         <mlv-card-content>
           Container Fill
         </mlv-card-content>

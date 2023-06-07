@@ -26,7 +26,8 @@
   height: 100%;
 }
 
-:host([container='fill']) {
+:host([container='fill']), /* @deprecated 'fill' */
+:host([container='full']) {
   --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
   --border-radius: 0;
 }

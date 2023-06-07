@@ -3,8 +3,9 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/grid/define.js';
-import '@elements/elements/badge/define.js';
+import '@elements/elements/badge/define.js'
 import '@elements/elements/button/define.js';
+import '@elements/elements/bulk-actions/define.js'
 import '@elements/elements/card/define.js';
 import '@elements/elements/checkbox/define.js';
 import '@elements/elements/dropdown/define.js';
@@ -679,10 +680,10 @@ export const Placeholder = {
   `
 };
 
-export const Fill = {
+export const Full = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid container="fill">
+  <mlv-grid container="full">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
@@ -881,8 +882,8 @@ export const All = {
     ${Placeholder.render()}
   </div>
   <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Fill</h2>
-    ${Fill.render()}
+    <h2 mlv-text="heading">Full</h2>
+    ${Full.render()}
   </div>
   <div mlv-layout="column gap:md align:stretch">
     <h2 mlv-text="heading">Flat</h2>

@@ -28,4 +28,11 @@ describe('mlv-icon', () => {
     await elementIsStable(element);
     expect(element.shadowRoot.innerHTML).includes('<div internal-host="">');
   });
+
+  it('should reflect name attribute for CSS selectors', async () => {
+    expect(element.name).eq(undefined);
+    element.name = 'book';
+    await elementIsStable(element);
+    expect(element.getAttribute('name')).toBe('book');
+  });
 });
