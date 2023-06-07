@@ -208,7 +208,7 @@ export const Tabs = {
 export const ContainerFill = {
   render: () => html`
     <div nve-theme="root">
-      <nve-card container="fill">
+      <nve-card container="full">
         <nve-card-content>
           Container Fill
         </nve-card-content>
