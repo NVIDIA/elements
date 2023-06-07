@@ -127,7 +127,7 @@ class KitchenSinkDemo extends LitElement {
 
   get #header() {
     return html`
-    <nve-card container="fill" style="max-height: 120px">
+    <nve-card container="full" style="max-height: 120px">
       <nve-card-content nve-layout="column gap:md align:horizontal-stretch">
         <div nve-layout="row gap:md align:center">
           <h1 nve-text="heading lg semibold">Workflows</h1>

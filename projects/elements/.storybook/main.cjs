@@ -20,7 +20,7 @@ module.exports = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      // base: config.server ? undefined : '/ui/storybook/elements/',
+      base: config.server ? undefined : '/ui/storybook/elements/',
       build: {
         target: 'esnext',
         minify: 'esnext'
@@ -30,9 +30,6 @@ module.exports = {
           '@elements/elements': resolve('./dist'),
           'metrics': resolve('./metrics')
         }
-      },
-      server: {
-        port: 7777
       }
     });
   }

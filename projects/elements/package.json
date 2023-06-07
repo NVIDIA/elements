@@ -442,7 +442,7 @@
       }
     },
     "storybook:watch": {
-      "command": "node_modules/storybook/index.js dev",
+      "command": "node_modules/storybook/index.js dev --port 7777",
       "service": true,
       "env": {
         "NODE_OPTIONS": "--openssl-legacy-provider"
