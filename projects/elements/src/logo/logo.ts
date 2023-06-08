@@ -15,7 +15,7 @@ import styles from './logo.css?inline';
  * @cssprop --border-radius
  * @cssprop --font-weight
  * @stable false
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-logo-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-logo-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=113-5317&t=iOYah8Uct8CFd69k-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */

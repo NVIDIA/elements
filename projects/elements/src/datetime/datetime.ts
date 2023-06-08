@@ -6,7 +6,7 @@ import styles from './datetime.css?inline';
 
 /**
  * @element nve-datetime
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-datetime-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-datetime-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
  * @vqa false
  */
