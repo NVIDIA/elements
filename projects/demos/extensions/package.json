@@ -3,25 +3,165 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "wireit",
-    "preview": "vite preview"
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/index.js",
+    "./index.js": "./dist/index.js",
+    "./login": "./dist/login/index.js",
+    "./login/index.js": "./dist/login/index.js",
+    "./login/define.js": "./dist/login/define.js"
   },
-  "wireit": {
-    "build": {
-      "command": "tsc && vite build",
-      "files": ["index.html", "vite.config.ts", "package.json"],
-      "output": ["dist"],
-      "dependencies": ["../../elements:build"]
+  "sideEffects": [
+    "./**/define.js"
+  ],
+  "typesVersions": {
+    "*": {
+      "*/define": [
+        "dist/*/define.d.ts"
+      ],
+      "*/define.js": [
+        "dist/*/define.d.ts"
+      ],
+      "*/index.js": [
+        "dist/*/index.d.ts"
+      ],
+      "*": [
+        "dist/*/index.d.ts"
+      ]
     }
   },
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "build:watch": "wireit",
+    "test": "wireit",
+    "test:watch": "wireit",
+    "storybook": "wireit",
+    "storybook:watch": "wireit"
+  },
   "dependencies": {
-    "@elements/elements": "workspace:*"
+    "@lit-labs/scoped-registry-mixin": "^1.0.1",
+    "@elements/elements": "workspace:*",
+    "@webcomponents/scoped-custom-element-registry": "^0.0.9",
+    "lit": "^2.7.3",
+    "lit-html": "^2.7.3"
   },
   "devDependencies": {
+    "@happy-dom/global-registrator": "8.9.0",
+    "@storybook/addon-docs": "7.1.0-alpha.26",
+    "@storybook/addon-essentials": "7.1.0-alpha.26",
+    "@storybook/addon-links": "7.1.0-alpha.26",
+    "@storybook/addons": "7.1.0-alpha.26",
+    "@storybook/blocks": "7.1.0-alpha.26",
+    "@storybook/builder-vite": "7.1.0-alpha.26",
+    "@storybook/channel-postmessage": "7.1.0-alpha.26",
+    "@storybook/channel-websocket": "7.1.0-alpha.26",
+    "@storybook/client-api": "7.1.0-alpha.26",
+    "@storybook/core-common": "7.1.0-alpha.26",
+    "@storybook/preview-api": "7.1.0-alpha.26",
+    "@storybook/theming": "7.1.0-alpha.26",
+    "@storybook/web-components": "7.1.0-alpha.26",
+    "@storybook/web-components-vite": "7.1.0-alpha.26",
+    "@vitest/browser": "0.32.0",
+    "glob": "8.0.3",
+    "playwright": "1.34.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "storybook": "7.1.0-alpha.26",
     "typescript": "4.9.4",
-    "vite": "4.0.2",
-    "vite-plugin-static-copy": "0.13.0"
+    "vite": "4.3.9",
+    "vite-plugin-dts": "2.3.0",
+    "vitest": "0.32.0"
+  },
+  "wireit": {
+    "dev": {
+      "dependencies": [
+        "build:watch",
+        "storybook:watch"
+      ]
+    },
+    "ci": {
+      "dependencies": [
+        "build",
+        "test"
+      ]
+    },
+    "build": {
+      "command": "tsc && vite build",
+      "dependencies": [
+        "../../elements:build"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "files": [
+        "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.stories.mdx",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --mode watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test": {
+      "command": "node_modules/vitest/vitest.mjs run",
+      "files": [
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    },
+    "storybook": {
+      "command": "node_modules/storybook/index.js build --output-dir ./storybook-build",
+      "files": [
+        ".storybook/**",
+        "src/**/*.stories.ts",
+        "src/**/*.stories.mdx",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "storybook-build/**"
+      ],
+      "dependencies": [
+        "build"
+      ],
+      "env": {
+        "NODE_OPTIONS": "--openssl-legacy-provider"
+      }
+    },
+    "storybook:watch": {
+      "command": "node_modules/storybook/index.js dev",
+      "service": true,
+      "env": {
+        "NODE_OPTIONS": "--openssl-legacy-provider"
+      }
+    }
   }
 }

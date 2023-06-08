@@ -1,11 +1,13 @@
-import  { setCustomElementsManifest } from '@storybook/web-components';
+import { setCustomElementsManifest } from '@storybook/web-components';
 import { themes } from '@storybook/theming';
 import { excludePrivateFields } from '@elements/elements/internal';
 import styles from '@elements/elements/index.css?inline';
 import font from '@elements/elements/inter.css?inline';
 import branding from '../src/css/theme.branding.css?inline';
 import { MLV_VERSION } from '@elements/elements';
+import { playground } from './playground-url.js';
 import '@elements/elements/polyfills';
+import '@elements/elements/button/define.js';
 // import '@webcomponents/scoped-custom-element-registry';
 
 const prettier = await import('prettier/esm/standalone.mjs');
@@ -33,7 +35,7 @@ export const parameters = {
       // remove nve-theme="root" from demo source snippets when not used for theming
       const hasRoot = i => i.match(/nve-theme="root"/g)?.length > 1;
       const lines = src.trim().split('\n').filter(i => !hasRoot(i));
-      const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('nve-theme="root ', 'nve-theme="');
+      const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('nve-theme="root ', 'nve-theme="').split('<nve-button class="playground-btn">')[0];
       return excludes ? source : prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 }).replaceAll('=""', '');
     }
   },
@@ -355,4 +357,4 @@ const dataTheme = (story, { globals }) => {
 export const decorators = [(story, { globals }) => {
   updateTheme(`${globals.theme ? globals.theme : ''} ${globals.scale ? globals.scale : ''} ${globals.animation ? globals.animation : ''}`);
   return story();
-}, dataTheme];
+}, dataTheme, playground];
