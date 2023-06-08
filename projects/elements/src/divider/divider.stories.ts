@@ -6,7 +6,6 @@ import '@elements/elements/icon-button/define.js';
 export default {
   title: 'Elements/Divider/Examples',
   component: 'nve-divider',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

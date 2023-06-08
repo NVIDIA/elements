@@ -1,22 +1,14 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
-import { ComponentStatuses, generateDefaultStoryParameters } from '@elements/elements/internal';
 import '@elements/elements/card/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/tabs/define.js';
 
-const reviewDocBookmark = 'id.s62qmiib7wfu';
-const status: ComponentStatuses = 'alpha';
-const description = `
-  ## The MagLev Card Component
-`;
-
 export default {
   title: 'Elements/Card/Examples',
   component: 'nve-card',
-  parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: {
     width: {
       control: { type: 'range', min: 200, max: 500 }

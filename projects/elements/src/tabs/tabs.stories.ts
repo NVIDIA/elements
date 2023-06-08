@@ -7,7 +7,6 @@ import '@elements/elements/icon/define.js';
 export default {
   title: 'Elements/Tabs/Examples',
   component: 'nve-tabs',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

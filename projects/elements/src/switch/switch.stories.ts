@@ -5,7 +5,6 @@ import '@elements/elements/switch/define.js';
 export default {
   title: 'Elements/Switch/Examples',
   component: 'nve-switch',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Switch = () => {

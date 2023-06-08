@@ -5,7 +5,6 @@ import '@elements/elements/time/define.js';
 export default {
   title: 'Elements/Time/Examples',
   component: 'nve-time',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Time = {

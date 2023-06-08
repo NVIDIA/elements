@@ -4,7 +4,6 @@ import '@elements/elements/sort-button/define.js';
 export default {
   title: 'Elements/Sort Button/Examples',
   component: 'nve-sort-button',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

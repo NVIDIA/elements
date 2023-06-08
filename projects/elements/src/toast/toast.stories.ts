@@ -9,7 +9,6 @@ import '@elements/elements/toast/define.js';
 export default {
   title: 'Elements/Toast/Examples',
   component: 'nve-toast',
-  parameters: { badges: ['alpha'] },
   argTypes: {
     position: {
       control: 'inline-radio',

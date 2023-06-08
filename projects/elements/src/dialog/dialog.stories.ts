@@ -8,7 +8,6 @@ import '@elements/elements/dialog/define.js';
 export default {
   title: 'Elements/Dialog/Examples',
   component: 'nve-dialog',
-  parameters: { badges: ['alpha'] },
   inline: false,
   argTypes: {
     position: {

@@ -25,7 +25,6 @@ import { generateId } from '@elements/elements/internal';
 export default {
   title: 'Elements/Data Grid/Examples',
   component: 'nve-grid',
-  parameters: { badges: ['alpha'] }
 };
 
 interface Workflow {
@@ -76,7 +75,7 @@ function getTrend(value: number) {
 @customElement('ksg-demo')
 class KitchenSinkDemo extends LitElement {
   @state() private search = '';
-  
+
   @state() private workflowDetail: Workflow = null;
 
   @state() private workflowGridSettings = false;
@@ -366,7 +365,7 @@ class KitchenSinkDemo extends LitElement {
     </div>
     ${this.#createWorkflowDialog}
     ${this.#aboutDialog}
-    ${this.#notification}    
+    ${this.#notification}
     `
   }
 
