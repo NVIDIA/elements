@@ -5,7 +5,6 @@ import '@elements/elements/search/define.js';
 export default {
   title: 'Elements/Search/Examples',
   component: 'nve-search',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Search = {

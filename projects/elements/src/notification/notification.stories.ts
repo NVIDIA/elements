@@ -8,7 +8,6 @@ import '@elements/elements/button/define.js';
 export default {
   title: 'Elements/Notification/Examples',
   component: 'nve-notification',
-  parameters: { badges: ['alpha'] },
   argTypes: {
     position: {
       control: 'inline-radio',
@@ -55,7 +54,7 @@ export const Interactive = {
   render: () => html`
 <nve-notification hidden closable position="bottom" close-timeout="2000">
   <h3 nve-text="label">notification</h3>
-  <p nve-text="body">some text content in a notification</p>  
+  <p nve-text="body">some text content in a notification</p>
 </nve-notification>
 <nve-button>show</nve-button>
 

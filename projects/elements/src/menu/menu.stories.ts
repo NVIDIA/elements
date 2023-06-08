@@ -9,7 +9,6 @@ import '@elements/elements/search/define.js';
 export default {
   title: 'Elements/Menu/Examples',
   component: 'nve-menu',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

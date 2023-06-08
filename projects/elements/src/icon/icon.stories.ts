@@ -2,7 +2,6 @@
 import { html, LitElement, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { ComponentStatuses, generateDefaultStoryParameters } from '@elements/elements/internal';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import typography from '@elements/elements/css/module.typography.css?inline';
 import { Icon, IconName, ICON_NAMES } from '@elements/elements/icon';
@@ -12,16 +11,9 @@ import '@elements/elements/card/define.js';
 import '@elements/elements/search/define.js';
 import '@elements/elements/notification/define.js';
 
-const reviewDocBookmark = 'id.zckm5su0hyrd';
-const status: ComponentStatuses = 'beta';
-const description = `
-  ## The MagLev Icon Component
-`;
-
 export default {
   title: 'Elements/Icon/Examples',
   component: 'nve-icon',
-  parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description),
   argTypes: {
     name: {
       control: 'inline-radio',

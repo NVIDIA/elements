@@ -4,7 +4,6 @@ import '@elements/elements/tag/define.js';
 export default {
   title: 'Elements/Tag/Examples',
   component: 'nve-tag',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

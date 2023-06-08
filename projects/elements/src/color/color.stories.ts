@@ -5,7 +5,6 @@ import '@elements/elements/color/define.js';
 export default {
   title: 'Elements/Color/Examples',
   component: 'nve-color',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Color = {
