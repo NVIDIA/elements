@@ -65,7 +65,7 @@ import  { MlvDialog } from '@elements/elements/dialog';
 ## Side Effects & Registration
 
 Elements should not automatically register themselves to the customElementsRegistry.
-Rather side effects like registration should be isolated to a single file. 
+Rather side effects like registration should be isolated to a single file.
 
 ```typescript
 // example define.js
@@ -93,7 +93,7 @@ The `package.json` should have the `sideEffects` entry set to `false` and list a
 element registrations to the explicit sideEffects entry. This enables tools like Webpack
 and Rollup to properly define dependency graphs and tree-shake.
 
-<mlv-alert status="muted"><p>🎓 Learn: <a href="./?path=/story/about-extensions--page#scoped-registry">Elements Documentation</a></p></mlv-alert>
+<mlv-alert status="muted"><p>🎓 Learn: <a href="./?path=/docs/about-extensions--docs#scoped-registry">Elements Documentation</a></p></mlv-alert>
 
 <mlv-alert status="muted"><p>🎓 Learn: <a href="https://github.com/webcomponents/polyfills/tree/master/packages/scoped-custom-element-registry">Scoped Element Registry</a></p></mlv-alert>
 

@@ -9,7 +9,7 @@ import tabsStyleSheet from './tabs.css?inline';
  * @slot - default slot for content
  * @cssprop --font-size
  * @cssprop --font-weight
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-tabs-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tabs-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  * @stable false
@@ -49,7 +49,7 @@ export class TabsItem extends MlvBaseButton {
  * @element mlv-tabs
  * @slot - default slot for mlv-tab-item
  * @cssprop --gap
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-tabs-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tabs-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  * @responsive false

@@ -19,7 +19,7 @@ import styles from './toast.css?inline';
  * @cssprop --gap
  * @cssprop --mlv-sys-layer-popover-arrow-offset
  * @cssprop --mlv-sys-layer-popover-offset
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-input-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=596-34431&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */

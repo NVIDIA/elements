@@ -6,7 +6,7 @@ import styles from './week.css?inline';
 
 /**
  * @element mlv-week
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-week-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-week-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
  * @vqa false
  */

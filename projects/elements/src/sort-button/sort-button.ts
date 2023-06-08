@@ -16,7 +16,7 @@ const nextSort = {
  * @slot - default slot for content
  * @cssprop --width
  * @cssprop --height
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-sort-button-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-sort-button-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=127-8456&t=TYtFvncSeBAKHOMe-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
  * @stable false

@@ -117,7 +117,7 @@ class ElementStatus extends LitElement {
       <h3><mlv-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <mlv-icon name="schedule"></mlv-icon></mlv-badge></h3>
       <div style="display: flex; flex-direction: column; gap: 8px;">
         <mlv-alert .status=${metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</mlv-alert>
-        <mlv-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/story/about-api-design-getting-started--page">API Review</a></mlv-alert>
+        <mlv-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/about-api-design-getting-started--docs">API Review</a></mlv-alert>
         <mlv-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</mlv-alert>
         <mlv-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></mlv-alert>
       </div>

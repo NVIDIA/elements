@@ -14,7 +14,7 @@ import styles from './badge.css?inline';
  * @cssprop --padding
  * @cssprop --border-radius
  * @cssprop --font-weight
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-badge-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-badge-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  * @stable false

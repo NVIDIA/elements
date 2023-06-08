@@ -6,7 +6,7 @@ import styles from './time.css?inline';
 
 /**
  * @element mlv-time
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-time-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-time-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
  * @vqa false
  */
