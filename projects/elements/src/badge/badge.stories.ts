@@ -4,7 +4,6 @@ import '@elements/elements/badge/define.js';
 export default {
   title: 'Elements/Badge/Examples',
   component: 'mlv-badge',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {
@@ -100,7 +99,7 @@ export const StatusDarkTheme = {
 export const Trend = {
   render: () => html`
 <div mlv-layout="row gap:md">
-  <mlv-badge status="trend-neutral">+15%</mlv-badge>  
+  <mlv-badge status="trend-neutral">+15%</mlv-badge>
   <mlv-badge status="trend-up">+15%</mlv-badge>
   <mlv-badge status="trend-down">-15%</mlv-badge>
 </div>
@@ -110,7 +109,7 @@ export const Trend = {
 export const TrendLightTheme = {
   render: () => html`
 <div mlv-theme="root light" mlv-layout="row gap:md pad:md">
-  <mlv-badge status="trend-neutral">+15%</mlv-badge>  
+  <mlv-badge status="trend-neutral">+15%</mlv-badge>
   <mlv-badge status="trend-up">+15%</mlv-badge>
   <mlv-badge status="trend-down">-15%</mlv-badge>
 </div>
@@ -120,7 +119,7 @@ export const TrendLightTheme = {
 export const TrendDarkTheme = {
   render: () => html`
 <div mlv-theme="root dark" mlv-layout="row gap:md pad:md">
-  <mlv-badge status="trend-neutral">+15%</mlv-badge>  
+  <mlv-badge status="trend-neutral">+15%</mlv-badge>
   <mlv-badge status="trend-up">+15%</mlv-badge>
   <mlv-badge status="trend-down">-15%</mlv-badge>
 </div>

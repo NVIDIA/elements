@@ -6,7 +6,6 @@ import '@elements/elements/datetime/define.js';
 export default {
   title: 'Elements/Datetime/Examples',
   component: 'mlv-datetime',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Datetime = {

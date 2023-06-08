@@ -1,24 +1,12 @@
 import { html } from 'lit';
 import { IconButton } from '@elements/elements/icon-button';
-import { ComponentStatuses, generateDefaultStoryParameters, spread } from '@elements/elements/internal';
+import { spread } from '@elements/elements/internal';
 import { ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/icon-button/define.js';
-
-const reviewDocBookmark = 'id.l12irnk25slx';
-const status: ComponentStatuses = 'beta';
-const description = `
-  ## The MagLev Icon Button Component
-`;
 
 export default {
   title: 'Elements/Icon Button/Examples',
   component: 'mlv-icon-button',
-  parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description, [
-    'mouseover mlv-button',
-    'mouseout mlv-button',
-    'mousedown mlv-button',
-    'click mlv-button'
-  ]),
   argTypes: {
     interaction: {
       control: 'inline-radio',

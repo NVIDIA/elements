@@ -18,7 +18,6 @@ const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeS
 export default {
   title: 'Elements/Data Grid/Examples',
   component: 'mlv-grid',
-  parameters: { badges: ['alpha'] }
 };
 
 function getMinorVersion(value) {

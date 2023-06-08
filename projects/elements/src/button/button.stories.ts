@@ -1,28 +1,15 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { Button } from '@elements/elements/button';
-
-import { ComponentStatuses, generateDefaultStoryParameters, InlinePosition, spread } from '@elements/elements/internal';
+import { InlinePosition, spread } from '@elements/elements/internal';
 import { IconName, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/search/define.js';
 
-const reviewDocBookmark = 'id.l12irnk25slx';
-const status: ComponentStatuses = 'beta';
-const description = `
-  ## The MagLev Button Component
-`;
-
 export default {
   title: 'Elements/Button/Examples',
   component: 'mlv-button',
-  parameters: generateDefaultStoryParameters(status, reviewDocBookmark, description, [
-    'mouseover mlv-button',
-    'mouseout mlv-button',
-    'mousedown mlv-button',
-    'click mlv-button'
-  ]),
   argTypes: {
     interaction: {
       control: 'inline-radio',
@@ -168,7 +155,7 @@ export const FormSubmit = {
     e.preventDefault();
     console.log(e);
   });
-</script>  
+</script>
 `
 }
 

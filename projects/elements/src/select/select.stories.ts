@@ -8,7 +8,6 @@ import '@elements/elements/logo/define.js';
 export default {
   title: 'Elements/Select/Examples',
   component: 'mlv-select',
-  parameters: { badges: ['beta'] }
 };
 
 export const Select = {

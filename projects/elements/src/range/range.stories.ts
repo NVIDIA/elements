@@ -5,7 +5,6 @@ import '@elements/elements/range/define.js';
 export default {
   title: 'Elements/Range/Examples',
   component: 'mlv-range',
-  parameters: { badges: ['beta'] }
 };
 
 export const Range = {

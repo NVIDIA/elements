@@ -5,7 +5,6 @@ import '@elements/elements/month/define.js';
 export default {
   title: 'Elements/Month/Examples',
   component: 'mlv-month',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Month = {

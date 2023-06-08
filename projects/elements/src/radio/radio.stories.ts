@@ -5,7 +5,6 @@ import '@elements/elements/radio/define.js';
 export default {
   title: 'Elements/Radio/Examples',
   component: 'mlv-input',
-  parameters: { badges: ['beta'] }
 };
 
 export const radio = {

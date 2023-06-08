@@ -7,7 +7,6 @@ import '@elements/elements/password/define.js';
 
 export default {
   title: 'Foundations/Forms/Examples',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Validation = () => {

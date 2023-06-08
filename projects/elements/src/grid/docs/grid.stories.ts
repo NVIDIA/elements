@@ -24,7 +24,6 @@ import { getItems, grid } from '@elements/elements/test';
 export default {
   title: 'Elements/Data Grid/Examples',
   component: 'mlv-grid',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

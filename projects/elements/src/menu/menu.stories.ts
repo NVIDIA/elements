@@ -9,7 +9,6 @@ import '@elements/elements/search/define.js';
 export default {
   title: 'Elements/Menu/Examples',
   component: 'mlv-menu',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

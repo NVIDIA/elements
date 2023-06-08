@@ -5,7 +5,6 @@ import '@elements/elements/button/define.js';
 export default {
   title: 'Elements/Pagination/Examples',
   component: 'mlv-pagination',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

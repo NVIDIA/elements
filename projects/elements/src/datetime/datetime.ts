@@ -8,6 +8,7 @@ import styles from './datetime.css?inline';
  * @element mlv-datetime
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-datetime-documentation--page
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
+ * @vqa false
  */
 export class Datetime extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);

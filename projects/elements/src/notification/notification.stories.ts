@@ -8,7 +8,6 @@ import '@elements/elements/button/define.js';
 export default {
   title: 'Elements/Notification/Examples',
   component: 'mlv-notification',
-  parameters: { badges: ['alpha'] },
   argTypes: {
     position: {
       control: 'inline-radio',
@@ -55,7 +54,7 @@ export const Interactive = {
   render: () => html`
 <mlv-notification hidden closable position="bottom" close-timeout="2000">
   <h3 mlv-text="label">notification</h3>
-  <p mlv-text="body">some text content in a notification</p>  
+  <p mlv-text="body">some text content in a notification</p>
 </mlv-notification>
 <mlv-button>show</mlv-button>
 

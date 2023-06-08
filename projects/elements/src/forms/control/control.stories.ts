@@ -12,7 +12,6 @@ import '@elements/elements/checkbox/define.js';
 
 export default {
   title: 'Foundations/Forms/Examples',
-  parameters: { badges: ['beta'] }
 }
 
 export const Control = () => {

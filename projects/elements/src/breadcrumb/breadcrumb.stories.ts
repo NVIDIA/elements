@@ -12,7 +12,6 @@ import '@elements/elements/menu/define.js';
 export default {
   title: 'Elements/Breadcrumb/Examples',
   component: 'mlv-breadcrumb',
-  parameters: { badges: ['alpha'] }
 };
 
 /* eslint-disable */

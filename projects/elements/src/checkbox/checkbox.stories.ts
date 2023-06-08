@@ -5,7 +5,6 @@ import '@elements/elements/checkbox/define.js';
 export default {
   title: 'Elements/Checkbox/Examples',
   component: 'mlv-checkbox',
-  parameters: { badges: ['beta'] }
 };
 
 export const Checkbox = () => {

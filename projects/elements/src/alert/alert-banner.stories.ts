@@ -5,7 +5,6 @@ import '@elements/elements/alert/define.js';
 export default {
   title: 'Elements/Alert Banner/Examples',
   component: 'mlv-alert-banner',
-  parameters: { badges: ['alpha'] },
   argTypes: {
     status: {
       control: 'inline-radio',

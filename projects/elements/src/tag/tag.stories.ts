@@ -4,7 +4,6 @@ import '@elements/elements/tag/define.js';
 export default {
   title: 'Elements/Tag/Examples',
   component: 'mlv-tag',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

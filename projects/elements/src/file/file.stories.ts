@@ -5,7 +5,6 @@ import '@elements/elements/file/define.js';
 export default {
   title: 'Elements/File/Examples',
   component: 'mlv-file',
-  parameters: { badges: ['alpha'] }
 };
 
 export const File = {

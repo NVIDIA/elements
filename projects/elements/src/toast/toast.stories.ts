@@ -9,7 +9,6 @@ import '@elements/elements/toast/define.js';
 export default {
   title: 'Elements/Toast/Examples',
   component: 'mlv-toast',
-  parameters: { badges: ['alpha'] },
   argTypes: {
     position: {
       control: 'inline-radio',
