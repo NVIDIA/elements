@@ -36,7 +36,7 @@ curve of the API and makes it consistent between other components within the lib
 
 The internal host element is a pattern that provides an API guard on the element. When styling
 a custom element, avoid applying styles other than basic display properties and custom properties
-to the host element. The more styles applied to the host, the easier it is for a consumer to 
+to the host element. The more styles applied to the host, the easier it is for a consumer to
 override and change the styles in unexpected ways.
 
 <nve-alert status="danger"><p>Don't:</p></nve-alert>
@@ -62,7 +62,7 @@ override and change the styles in unexpected ways.
   nve-card {
     /* bypassing custom css properties */
     background: red;
-    
+
     /* possibly breaking component styles/layout */
     display: inline;
   }
@@ -90,12 +90,12 @@ and expose only the styles as needed to the public facing API.
     --color: white;
     display: block;
   }
-  
+
   [internal-host] {
     /* customizable via the custom properties */
     background: var(--background);
     color: var(--color);
-    
+
     /* internal and protected by shadow dom */
     display: flex;
     flex-direction: column;
@@ -276,11 +276,11 @@ By using logical properties the styles will follow the reading direction of the 
 support when the reading order is reversed by the user preferences in the browser.
 
 <nve-alert status="muted"><p>🎓 Learn: <a href="https://web.dev/logical-property-shorthands/">CSS Logical Properties</a></p></nve-alert>
-<nve-alert status="muted"><p>🎓 Case Study: <a href="https://storybook.core.clarity.design/?path=/story/stories-forms--internationalization">Example of inverted form controls </a></p></nve-alert>
+<nve-alert status="muted"><p>🎓 Case Study: <a href="https://storybook.core.clarity.design/?path=/docs/stories-forms--internationalization">Example of inverted form controls </a></p></nve-alert>
 
 ## Parts
 
-CSS Parts enable elements to expose DOM elements to consumers that typically would be encapsulated in the Shadow DOM. 
+CSS Parts enable elements to expose DOM elements to consumers that typically would be encapsulated in the Shadow DOM.
 
 ```html
 <!-- nve-dialog internal template -->
@@ -316,7 +316,7 @@ its own well defined and versioned API.
 </style>
 ```
 
-This enables safely giving more control to the application developer while preventing the element API surface from growing. 
+This enables safely giving more control to the application developer while preventing the element API surface from growing.
 
 ## Responsive
 
