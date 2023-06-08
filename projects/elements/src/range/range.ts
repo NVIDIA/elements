@@ -6,7 +6,7 @@ import { PropertyValues } from 'lit';
 
 /**
  * @element nve-range
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-range-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-range-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-25&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/slider/
  */
