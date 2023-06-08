@@ -8,6 +8,7 @@ import styles from './month.css?inline';
  * @element nve-month
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-month-documentation--page
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month
+ * @vqa false
  */
 export class Month extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);

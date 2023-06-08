@@ -6,7 +6,6 @@ import '@elements/elements/datetime/define.js';
 export default {
   title: 'Elements/Datetime/Examples',
   component: 'nve-datetime',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Datetime = {

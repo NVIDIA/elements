@@ -4,7 +4,6 @@ import '@elements/elements/badge/define.js';
 export default {
   title: 'Elements/Badge/Examples',
   component: 'nve-badge',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {
@@ -100,7 +99,7 @@ export const StatusDarkTheme = {
 export const Trend = {
   render: () => html`
 <div nve-layout="row gap:md">
-  <nve-badge status="trend-neutral">+15%</nve-badge>  
+  <nve-badge status="trend-neutral">+15%</nve-badge>
   <nve-badge status="trend-up">+15%</nve-badge>
   <nve-badge status="trend-down">-15%</nve-badge>
 </div>
@@ -110,7 +109,7 @@ export const Trend = {
 export const TrendLightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="row gap:md pad:md">
-  <nve-badge status="trend-neutral">+15%</nve-badge>  
+  <nve-badge status="trend-neutral">+15%</nve-badge>
   <nve-badge status="trend-up">+15%</nve-badge>
   <nve-badge status="trend-down">-15%</nve-badge>
 </div>
@@ -120,7 +119,7 @@ export const TrendLightTheme = {
 export const TrendDarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="row gap:md pad:md">
-  <nve-badge status="trend-neutral">+15%</nve-badge>  
+  <nve-badge status="trend-neutral">+15%</nve-badge>
   <nve-badge status="trend-up">+15%</nve-badge>
   <nve-badge status="trend-down">-15%</nve-badge>
 </div>

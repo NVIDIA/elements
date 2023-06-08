@@ -5,7 +5,6 @@ import '@elements/elements/range/define.js';
 export default {
   title: 'Elements/Range/Examples',
   component: 'nve-range',
-  parameters: { badges: ['beta'] }
 };
 
 export const Range = {

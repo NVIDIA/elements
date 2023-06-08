@@ -5,7 +5,6 @@ import '@elements/elements/week/define.js';
 export default {
   title: 'Elements/Week/Examples',
   component: 'nve-week',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Week = {

@@ -11,7 +11,6 @@ import '@elements/elements/icon-button/define.js';
 export default {
   title: 'Elements/Tooltip/Examples',
   component: 'nve-tooltip',
-  parameters: { badges: ['beta'] },
   argTypes: {
     position: {
       control: 'inline-radio',

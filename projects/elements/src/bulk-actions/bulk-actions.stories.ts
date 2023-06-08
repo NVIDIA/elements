@@ -6,7 +6,6 @@ import '@elements/elements/icon-button/define.js';
 export default {
   title: 'Elements/Bulk Actions/Examples',
   component: 'nve-bulk-actions',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

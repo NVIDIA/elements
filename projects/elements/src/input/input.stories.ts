@@ -6,7 +6,6 @@ import '@elements/elements/icon-button/define.js';
 export default {
   title: 'Elements/Input/Examples',
   component: 'nve-input',
-  parameters: { badges: ['beta'] },
   argTypes: {
     disabled: {
       control: 'boolean',
