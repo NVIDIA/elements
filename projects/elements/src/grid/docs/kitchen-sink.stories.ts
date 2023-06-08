@@ -186,7 +186,7 @@ class KitchenSinkDemo extends LitElement {
 
   get #detailPanel() {
     return html`
-    <mlv-panel ?expanded=${!!this.workflowDetail} @close=${() => this.workflowDetail = null} closable style="min-width: 420px">
+    <mlv-panel ?expanded=${!!this.workflowDetail} @close=${() => this.workflowDetail = null} closable style="min-width: 400px">
       <mlv-panel-header>
         <h2 slot="title">Workflow: ${this.workflowDetail?.id}</h2>
       </mlv-panel-header>

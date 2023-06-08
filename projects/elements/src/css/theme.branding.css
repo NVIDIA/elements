@@ -42,9 +42,11 @@
 [mlv-theme~='branding-dark'] [mlv-theme~='dark'],
 [mlv-theme~='branding'][mlv-theme~='dark'] [mlv-theme~='dark'] {
   --mlv-sys-color-scheme: dark;
-  --mlv-ref-color-gray-slate-1200: hsl(0, 0%, 93%);
-  --mlv-ref-color-gray-slate-1100: hsl(0, 0%, 82%);
-  --mlv-ref-color-gray-slate-1000: hsl(0, 0%, 61%);
+  --mlv-sys-contrast-mute-ratio: 20%;
+  --mlv-sys-text-link-color: var(--mlv-ref-color-white);
+  --mlv-ref-color-gray-slate-1200: hsl(0, 0%, 75%);
+  --mlv-ref-color-gray-slate-1100: hsl(0, 0%, 65%);
+  --mlv-ref-color-gray-slate-1000: hsl(0, 0%, 60%);
   --mlv-ref-color-gray-slate-900: hsl(0, 0%, 44%);
   --mlv-ref-color-gray-slate-800: hsl(0, 0%, 32%);
   --mlv-ref-color-gray-slate-700: hsl(0, 0%, 24%);
@@ -73,20 +75,35 @@
   --mlv-sys-interaction-disabled-background: var(--mlv-ref-color-gray-slate-700);
   --mlv-sys-interaction-disabled-color: var(--mlv-ref-color-gray-slate-900);
   --mlv-sys-accent-secondary-background: var(--mlv-ref-color-brand-green-1000);
-  --mlv-sys-support-accent-color: var(--mlv-ref-color-blue-sky-700);
-  --mlv-sys-support-accent-emphasis-color: var(--mlv-ref-color-blue-sky-900);
-  --mlv-sys-support-accent-muted-color: var(--mlv-ref-color-blue-sky-500);
-  --mlv-sys-support-success-emphasis-color: var(--mlv-ref-color-brand-green-900);
-  --mlv-sys-support-success-muted-color: var(--mlv-ref-color-brand-green-400);
-  --mlv-sys-support-success-color: var(--mlv-ref-color-brand-green-800);
-  --mlv-sys-text-link-emphasis-color: var(--mlv-ref-color-brand-green-1000);
-  --mlv-sys-support-emphasis-color: var(--mlv-ref-color-gray-slate-900);
-  --mlv-sys-support-muted-color: var(--mlv-ref-color-gray-slate-600);
+  --mlv-sys-support-accent-color: var(--mlv-ref-color-blue-sky-1100);
+  --mlv-sys-support-accent-muted-color: var(--mlv-ref-color-blue-sky-600);
+  --mlv-sys-support-accent-emphasis-color: var(--mlv-ref-color-blue-sky-1100);
+  --mlv-sys-support-success-color: var(--mlv-ref-color-brand-green-1100);
+  --mlv-sys-support-success-muted-color: var(--mlv-ref-color-brand-green-600);
+  --mlv-sys-support-success-emphasis-color: var(--mlv-ref-color-brand-green-1100);
+  --mlv-sys-support-warning-color: var(--mlv-ref-color-yellow-nova-900);
+  --mlv-sys-support-warning-muted-color: var(--mlv-ref-color-yellow-nova-600);
+  --mlv-sys-support-warning-emphasis-color: var(--mlv-ref-color-yellow-nova-1000);
+  --mlv-sys-support-danger-color: var(--mlv-ref-color-red-cardinal-1000);
+  --mlv-sys-support-danger-muted-color: var(--mlv-ref-color-red-cardinal-600);
+  --mlv-sys-support-danger-emphasis-color: var(--mlv-ref-color-red-cardinal-1000);
   --mlv-sys-support-color: var(--mlv-ref-color-gray-slate-1000);
+  --mlv-sys-support-muted-color: var(--mlv-ref-color-gray-slate-1100);
+  --mlv-sys-support-emphasis-color: var(--mlv-ref-color-gray-slate-1200);
   --mlv-sys-accent-tertiary-background: var(--mlv-ref-color-black);
   --mlv-sys-accent-primary-background: var(--mlv-ref-color-brand-green-900);
+  --mlv-sys-text-link-emphasis-color: var(--mlv-ref-color-brand-green-1000);
   --mlv-sys-text-link-hover-color: var(--mlv-ref-color-brand-green-1100);
   --mlv-sys-status-finished-color: var(--mlv-ref-color-brand-green-1100);
   --mlv-sys-status-starting-color: var(--mlv-ref-color-brand-green-1100);
-  --mlv-sys-status-color: var(--mlv-ref-color-gray-slate-1000);
+  --mlv-sys-status-color: var(--mlv-ref-color-gray-slate-900);
+  --mlv-sys-status-pending-color: var(--mlv-ref-color-gray-slate-800);
+
+  & mlv-alert-group {
+    --color: var(--mlv-sys-text-black-color);
+
+    &:not([status]) {
+      --icon-color: var(--mlv-sys-text-black-color);
+    }
+  }
 }

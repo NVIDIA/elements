@@ -4,21 +4,13 @@ import '@elements/elements/alert/define.js';
 
 export default {
   title: 'Elements/Alert/Examples',
-  component: 'mlv-alert',
-  argTypes: {
-    status: {
-      control: 'inline-radio',
-      options: ['undefined', 'accent', 'warning', 'danger', 'success']
-    }
-  }
+  component: 'mlv-alert'
 };
 
 type ArgTypes = Alert;
 
 export const Default = {
-  render: (args: ArgTypes) =>
-    html`<mlv-alert .status=${args.status}>alert message</mlv-alert>`,
-    args: { status: '' }
+  render: (args: ArgTypes) => html`<mlv-alert .status=${args.status}>alert message</mlv-alert>`
 };
 
 export const SupportStatus = {
