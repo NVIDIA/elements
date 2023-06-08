@@ -9,16 +9,16 @@ import styles from './control-group.css?inline';
 /**
  * @element nve-control-group
  * @cssprop --color
- * @cssprop --label-color 
+ * @cssprop --label-color
  * @cssprop --label-width
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-input-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
  * @package true
  */
 export class ControlGroup extends LitElement {
   @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
-  
+
   get label() {
     return this.querySelector<HTMLLabelElement>('label');
   }

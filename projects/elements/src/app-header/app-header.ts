@@ -10,7 +10,7 @@ import styles from './app-header.css?inline';
  * @cssprop --background
  * @cssprop --padding
  * @cssprop --border-bottom
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-app-header-documentation--page
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-app-header-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-35&t=c9DaB6YRpkhGAp49-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav
  * @responsive false
