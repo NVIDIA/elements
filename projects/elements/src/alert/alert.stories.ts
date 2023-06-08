@@ -4,21 +4,13 @@ import '@elements/elements/alert/define.js';
 
 export default {
   title: 'Elements/Alert/Examples',
-  component: 'nve-alert',
-  argTypes: {
-    status: {
-      control: 'inline-radio',
-      options: ['undefined', 'accent', 'warning', 'danger', 'success']
-    }
-  }
+  component: 'nve-alert'
 };
 
 type ArgTypes = Alert;
 
 export const Default = {
-  render: (args: ArgTypes) =>
-    html`<nve-alert .status=${args.status}>alert message</nve-alert>`,
-    args: { status: '' }
+  render: (args: ArgTypes) => html`<nve-alert .status=${args.status}>alert message</nve-alert>`
 };
 
 export const SupportStatus = {

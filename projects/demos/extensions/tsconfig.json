@@ -15,6 +15,11 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
+    "paths": {
+      "extensions-elements-starter": ["./src/index.js"],
+      "extensions-elements-starter/*": ["./src/*"],
+      "extensions-elements-starter/*.js": ["./src/*.js"]
+    }
   },
-  "include": ["src"]
+  "include": ["src"],
 }

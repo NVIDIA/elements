@@ -186,7 +186,7 @@ class KitchenSinkDemo extends LitElement {
 
   get #detailPanel() {
     return html`
-    <nve-panel ?expanded=${!!this.workflowDetail} @close=${() => this.workflowDetail = null} closable style="min-width: 420px">
+    <nve-panel ?expanded=${!!this.workflowDetail} @close=${() => this.workflowDetail = null} closable style="min-width: 400px">
       <nve-panel-header>
         <h2 slot="title">Workflow: ${this.workflowDetail?.id}</h2>
       </nve-panel-header>
