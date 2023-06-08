@@ -5,7 +5,6 @@ import '@elements/elements/textarea/define.js';
 export default {
   title: 'Elements/Textarea/Examples',
   component: 'nve-textarea',
-  parameters: { badges: ['beta'] }
 };
 
 export const Textarea = {

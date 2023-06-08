@@ -13,7 +13,6 @@ import '@elements/elements/dropdown/define.js';
 export default {
   title: 'Elements/App Header/Examples',
   component: 'nve-app-header',
-  parameters: { badges: ['alpha'] }
 };
 
 @customElement('app-header-default-demo')

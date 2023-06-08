@@ -4,7 +4,6 @@ import '@elements/elements/dot/define.js';
 export default {
   title: 'Elements/Dot/Examples',
   component: 'nve-dot',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {

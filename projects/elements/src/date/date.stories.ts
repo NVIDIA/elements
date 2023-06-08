@@ -10,7 +10,6 @@ import '@elements/elements/time/define.js';
 export default {
   title: 'Elements/Date/Examples',
   component: 'nve-date',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Date = {

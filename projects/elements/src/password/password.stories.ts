@@ -5,7 +5,6 @@ import '@elements/elements/password/define.js';
 export default {
   title: 'Elements/Password/Examples',
   component: 'nve-password',
-  parameters: { badges: ['beta'] }
 };
 
 export const Password = {

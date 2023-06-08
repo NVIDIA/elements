@@ -4,7 +4,6 @@ import '@elements/elements/logo/define.js';
 export default {
   title: 'Elements/Logo/Examples',
   component: 'nve-logo',
-  parameters: { badges: ['alpha'] }
 };
 
 export const Default = {
