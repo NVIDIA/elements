@@ -42,9 +42,11 @@
 [nve-theme~='branding-dark'] [nve-theme~='dark'],
 [nve-theme~='branding'][nve-theme~='dark'] [nve-theme~='dark'] {
   --nve-sys-color-scheme: dark;
-  --nve-ref-color-gray-slate-1200: hsl(0, 0%, 93%);
-  --nve-ref-color-gray-slate-1100: hsl(0, 0%, 82%);
-  --nve-ref-color-gray-slate-1000: hsl(0, 0%, 61%);
+  --nve-sys-contrast-mute-ratio: 20%;
+  --nve-sys-text-link-color: var(--nve-ref-color-white);
+  --nve-ref-color-gray-slate-1200: hsl(0, 0%, 75%);
+  --nve-ref-color-gray-slate-1100: hsl(0, 0%, 65%);
+  --nve-ref-color-gray-slate-1000: hsl(0, 0%, 60%);
   --nve-ref-color-gray-slate-900: hsl(0, 0%, 44%);
   --nve-ref-color-gray-slate-800: hsl(0, 0%, 32%);
   --nve-ref-color-gray-slate-700: hsl(0, 0%, 24%);
@@ -73,20 +75,35 @@
   --nve-sys-interaction-disabled-background: var(--nve-ref-color-gray-slate-700);
   --nve-sys-interaction-disabled-color: var(--nve-ref-color-gray-slate-900);
   --nve-sys-accent-secondary-background: var(--nve-ref-color-brand-green-1000);
-  --nve-sys-support-accent-color: var(--nve-ref-color-blue-sky-700);
-  --nve-sys-support-accent-emphasis-color: var(--nve-ref-color-blue-sky-900);
-  --nve-sys-support-accent-muted-color: var(--nve-ref-color-blue-sky-500);
-  --nve-sys-support-success-emphasis-color: var(--nve-ref-color-brand-green-900);
-  --nve-sys-support-success-muted-color: var(--nve-ref-color-brand-green-400);
-  --nve-sys-support-success-color: var(--nve-ref-color-brand-green-800);
-  --nve-sys-text-link-emphasis-color: var(--nve-ref-color-brand-green-1000);
-  --nve-sys-support-emphasis-color: var(--nve-ref-color-gray-slate-900);
-  --nve-sys-support-muted-color: var(--nve-ref-color-gray-slate-600);
+  --nve-sys-support-accent-color: var(--nve-ref-color-blue-sky-1100);
+  --nve-sys-support-accent-muted-color: var(--nve-ref-color-blue-sky-600);
+  --nve-sys-support-accent-emphasis-color: var(--nve-ref-color-blue-sky-1100);
+  --nve-sys-support-success-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-support-success-muted-color: var(--nve-ref-color-brand-green-600);
+  --nve-sys-support-success-emphasis-color: var(--nve-ref-color-brand-green-1100);
+  --nve-sys-support-warning-color: var(--nve-ref-color-yellow-nova-900);
+  --nve-sys-support-warning-muted-color: var(--nve-ref-color-yellow-nova-600);
+  --nve-sys-support-warning-emphasis-color: var(--nve-ref-color-yellow-nova-1000);
+  --nve-sys-support-danger-color: var(--nve-ref-color-red-cardinal-1000);
+  --nve-sys-support-danger-muted-color: var(--nve-ref-color-red-cardinal-600);
+  --nve-sys-support-danger-emphasis-color: var(--nve-ref-color-red-cardinal-1000);
   --nve-sys-support-color: var(--nve-ref-color-gray-slate-1000);
+  --nve-sys-support-muted-color: var(--nve-ref-color-gray-slate-1100);
+  --nve-sys-support-emphasis-color: var(--nve-ref-color-gray-slate-1200);
   --nve-sys-accent-tertiary-background: var(--nve-ref-color-black);
   --nve-sys-accent-primary-background: var(--nve-ref-color-brand-green-900);
+  --nve-sys-text-link-emphasis-color: var(--nve-ref-color-brand-green-1000);
   --nve-sys-text-link-hover-color: var(--nve-ref-color-brand-green-1100);
   --nve-sys-status-finished-color: var(--nve-ref-color-brand-green-1100);
   --nve-sys-status-starting-color: var(--nve-ref-color-brand-green-1100);
-  --nve-sys-status-color: var(--nve-ref-color-gray-slate-1000);
+  --nve-sys-status-color: var(--nve-ref-color-gray-slate-900);
+  --nve-sys-status-pending-color: var(--nve-ref-color-gray-slate-800);
+
+  & nve-alert-group {
+    --color: var(--nve-sys-text-black-color);
+
+    &:not([status]) {
+      --icon-color: var(--nve-sys-text-black-color);
+    }
+  }
 }
