@@ -50,7 +50,7 @@ function serialize(data, compress = true) {
 }
 
 function createDefaultFiles(content) {
-  const ELEMENTS_VERSION = `0.10.0`;
+  const ELEMENTS_VERSION = `0.11.1`;
   const CDN_ORIGIN = `https://cdn-stage.nvidia.com`;
   const CDN_MODULES_URL = `${CDN_ORIGIN}/assets/elements-playground/modules`;
 
@@ -68,11 +68,12 @@ function createDefaultFiles(content) {
     },
     "scopes": {
       "${CDN_ORIGIN}/": {
-        "lit": "${CDN_MODULES_URL}/lit@2.7.0/index.js",
-        "lit/": "${CDN_MODULES_URL}/lit@2.7.0/",
+        "composed-offset-position": "${CDN_MODULES_URL}/composed-offset-position@0.0.4/dist/composed-offset-position.esm.js",
+        "lit": "${CDN_MODULES_URL}/lit@2.7.4/index.js",
+        "lit/": "${CDN_MODULES_URL}/lit@2.7.4/",
         "lit-element/lit-element.js": "${CDN_MODULES_URL}/lit-element@3.3.0/development/lit-element.js",
-        "lit-html": "${CDN_MODULES_URL}/lit-html@2.7.0/development/lit-html.js",
-        "lit-html/": "${CDN_MODULES_URL}/lit-html@2.7.0/development/",
+        "lit-html": "${CDN_MODULES_URL}/lit-html@2.7.4/development/lit-html.js",
+        "lit-html/": "${CDN_MODULES_URL}/lit-html@2.7.4/development/",
         "@floating-ui/core": "${CDN_MODULES_URL}/@floating-ui/core@1.2.6/dist/floating-ui.core.esm.js",
         "@floating-ui/dom": "${CDN_MODULES_URL}/@floating-ui/dom@1.2.6/dist/floating-ui.dom.esm.js",
         "@lit/reactive-element": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/reactive-element.js",
@@ -93,9 +94,11 @@ ${content}
 </html>`
     },
     'index.ts': {
-      content: `
-import '@elements/elements/alert/define.js';
+      content: `import '@elements/elements/alert/define.js';
+import '@elements/elements/app-header/define.js';
 import '@elements/elements/badge/define.js';
+import '@elements/elements/breadcrumb/define.js';
+import '@elements/elements/bulk-actions/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/card/define.js';
 import '@elements/elements/checkbox/define.js';
@@ -103,27 +106,33 @@ import '@elements/elements/color/define.js';
 import '@elements/elements/date/define.js';
 import '@elements/elements/datetime/define.js';
 import '@elements/elements/dialog/define.js';
+import '@elements/elements/divider/define.js';
 import '@elements/elements/dot/define.js';
 import '@elements/elements/dropdown/define.js';
 import '@elements/elements/file/define.js';
 import '@elements/elements/forms/define.js';
+import '@elements/elements/grid/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/input/define.js';
 import '@elements/elements/logo/define.js';
+import '@elements/elements/menu/define.js';
 import '@elements/elements/month/define.js';
 import '@elements/elements/notification/define.js';
+import '@elements/elements/pagination/define.js';
 import '@elements/elements/panel/define.js';
 import '@elements/elements/password/define.js';
 import '@elements/elements/radio/define.js';
 import '@elements/elements/range/define.js';
 import '@elements/elements/search/define.js';
 import '@elements/elements/select/define.js';
+import '@elements/elements/sort-button/define.js';
 import '@elements/elements/switch/define.js';
-import '@elements/elements/textarea/define.js';
 import '@elements/elements/tabs/define.js';
-import '@elements/elements/time/define.js';
+import '@elements/elements/tag/define.js';
 import '@elements/elements/toast/define.js';
+import '@elements/elements/time/define.js';
+import '@elements/elements/textarea/define.js';
 import '@elements/elements/tooltip/define.js';
 import '@elements/elements/week/define.js';`
     }
