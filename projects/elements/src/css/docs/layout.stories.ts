@@ -11,23 +11,27 @@ const generateCards = (numCards: number) => {
   const cards = [];
 
   for (let i = 0; i < numCards; i++) {
-    cards.push(html`<mlv-card></mlv-card>`);
+    cards.push(html`<mlv-card></mlv-card>
+    `);
   }
 
   return html`${cards}`;
 };
 
 
+/* eslint-disable */
 const generateLayoutStory = (name, layoutValue, numCards) => {
   return {
     render: () => html`
-    <h3 mlv-text="section">${name}</h3>
-    <section class="layout-example" mlv-layout=${layoutValue}>
-      ${generateCards(numCards)}
-    </section>
+<h3 mlv-text="section">${name}</h3>
+
+<section class="layout-example" mlv-layout="${layoutValue}">
+  ${generateCards(numCards)}
+</section>
     `
   }
 }
+/* eslint-enable */
 
 
 export const HorizontalAlignLeft = generateLayoutStory('Align Left', 'row gap:sm align:left', 3);

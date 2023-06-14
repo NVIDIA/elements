@@ -13,7 +13,8 @@ export function playground(Story, context) {
     const lines = src.trim().split('\n').filter(i => !hasRoot(i));
     const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('mlv-theme="root ', 'mlv-theme="');
     const formattedSource = prettier.default.format(source.replaceAll(' mlv-theme="dark"', '').replaceAll(' mlv-theme="light"', '').replaceAll(' mlv-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
-    const files = serialize(createDefaultFiles(formattedSource));
+
+    const files = serialize(addCssContent(createDefaultFiles(formattedSource), context.id));
     const url = `https://elements-stage.nvidia.com/ui/elements-playground/?files=${files}&theme=${context.globals.theme}`;
     const playgroundButton = Object.keys(context.unmappedArgs).length ? nothing : html`<mlv-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></mlv-button>`;
     return html`${Story()} ${playgroundButton}`;
@@ -86,6 +87,7 @@ function createDefaultFiles(content) {
   }
   </script>
   <script type="module" src="./index.js"></script>
+  <link rel="stylesheet" href="./index.css">
 </head>
 <body>
 
@@ -137,4 +139,32 @@ import '@elements/elements/tooltip/define.js';
 import '@elements/elements/week/define.js';`
     }
   };
+}
+
+function addCssContent(defaultFiles, storyId) {
+  if (storyId.includes('foundations-layout')) {
+    defaultFiles['index.css'] = {
+      content:
+`section.layout-example {
+  background-color: var(--mlv-sys-interaction-background);
+  border: var(--mlv-ref-border-width-lg) solid var(--mlv-ref-border-color-emphasis);
+  margin-block: var(--mlv-ref-space-sm) var(--mlv-ref-space-xl) !important;
+  min-height: 200px !important;
+}
+
+section.layout-example[mlv-layout~='column'] {
+  height: 400px;
+}
+
+section.layout-example > mlv-card {
+  min-width: 60px !important;
+  min-height: 60px !important;
+  --background: var(--mlv-sys-layer-overlay-color);
+}`
+    }
+    return defaultFiles;
+  }
+  else {
+    return defaultFiles;
+  }
 }
