@@ -5,60 +5,81 @@ import { LinkedHeader } from './utils.mdx';
 
 # Changelog
 
-<LinkedHeader>0.11.1 (pending)</LinkedHeader>
+<LinkedHeader>0.11.1 - 06-21-2023</LinkedHeader>
+
+### Docs
+- Updates Elements docs to use <a target="_blank" href="https://storybook.js.org/blog/storybook-7-0/">Storybook 7.0</a>!
+  - Vastly improved loading times, removing webpack and fully embracing Vite builds
+  - Faster local dev experience for building Elements library
+- We removed remainder of the Storybook brand UI for a fully MagLev Elements based UX
+- Audit and refactor of tooling and visualization of component release stuatus, with a new [metrics](./?path=/docs/about-metrics--docs) block on every component doc page.
+- Started draft of a [contributions](./?path=/docs/about-contributions--docs) model for the Elements library,
+
+### Elements Playground
+- Adds integration with the <a target="_blank" href="/ui/elements-playground">Elements Playground</a> via links to interactive code-sandbox for most storybook examples.
+- Adds metadata generation off all our custom elements to support IDE-light experience in the Playground.
+
+### Examples
+- Re-worked the starter library in the repo in preparation for supporting additional MagLev component libraries
 
 ### Fixes
-- Fix form control label contrast
-- Fix input group style alignment
+- Fixes form control label contrast
+- Fixes input group style alignment
+- Fixes container issue with dropdown in grid pagination
+- Fixes registration but with mlv-pagination
+- Fixes API alignment with full
+- Fixes icon name reflect issue
+- Fixes sb demo full width styles
+- Improves lint checking
 
-<LinkedHeader>0.11.0 - 05-30-11</LinkedHeader>
+<LinkedHeader>0.11.0 - 05-30-2023</LinkedHeader>
 
 ### Features
-- Add beta [app header](./?path=/docs/elements-app-header-documentation--docs) component
-- Add beta [breadcrumb](./?path=/docs/elements-breadcrumb-documentation--docs) component
-- Add beta [bulk actions](./?path=/docs/elements-bulk-actions-documentation--docs) component
-- Add beta [menu](./?path=/docs/elements-menu-documentation--docs) component
-- Add beta [pagination](./?path=/docs/elements-pagination-documentation--docs) component
-- Add beta [sort-button](./?path=/docs/elements-sort-button-documentation--docs) component
-- Add beta [divider](./?path=/docs/elements-divider-documentation--docs) component
-- Add beta [tabs](./?path=/docs/elements-tabs-documentation--docs) border visual treatment
-- Add pre-release [data-grid](./?path=/docs/elements-data-grid-documentation--docs)
-- Add improved select input customizations via menu
+- Adds beta [app header](./?path=/docs/elements-app-header-documentation--docs) component
+- Adds beta [breadcrumb](./?path=/docs/elements-breadcrumb-documentation--docs) component
+- Adds beta [bulk actions](./?path=/docs/elements-bulk-actions-documentation--docs) component
+- Adds beta [menu](./?path=/docs/elements-menu-documentation--docs) component
+- Adds beta [pagination](./?path=/docs/elements-pagination-documentation--docs) component
+- Adds beta [sort-button](./?path=/docs/elements-sort-button-documentation--docs) component
+- Adds beta [divider](./?path=/docs/elements-divider-documentation--docs) component
+- Adds beta [tabs](./?path=/docs/elements-tabs-documentation--docs) border visual treatment
+- Adds pre-release [data-grid](./?path=/docs/elements-data-grid-documentation--docs)
+- Adds improved select input customizations via menu
 
-### Fixes
-- Fix icon default slot for icon button
-- Fix badge css prop size override
-- Fix dot css prop size override
-- Fix card header generic content support
-- Fix dropdown arrow border
-- Fix radio group checked event in shadow roots
-- Fix icon void inner viewbox for start/end
-- Fix icon size override for icon button
-- Fix input control width style
-- Fix input control default height
-- Fix global style attachement in shadow roots
-- Fix tooltip text wrap with fixed widths
-- Fix interaction selected token text color
-- Fix backport base menu to select internals
-- Fix missing toggle/pressed states
-- Fix base button anchor auto assignment
-- Fix greedy selector for certain mlv-layouts
-- Fix alignment on mlv-control button option
+### Fixeses
+- Fixes icon default slot for icon button
+- Fixes badge css prop size override
+- Fixes dot css prop size override
+- Fixes card header generic content support
+- Fixes dropdown arrow border
+- Fixes radio group checked event in shadow roots
+- Fixes icon void inner viewbox for start/end
+- Fixes icon size override for icon button
+- Fixes input control width style
+- Fixes input control default height
+- Fixes global style attachement in shadow roots
+- Fixes tooltip text wrap with Fixesed widths
+- Fixes interaction selected token text color
+- Fixes backport base menu to select internals
+- Fixes missing toggle/pressed states
+- Fixes base button anchor auto assignment
+- Fixes greedy selector for certain mlv-layouts
+- Fixes alignment on mlv-control button option
 
 <LinkedHeader>0.10.0 - 04-05-2023</LinkedHeader>
 
 ### Features
-- Added [panel](./?path=/docs/elements-panel-documentation--docs) component
-- Added [tabs](./?path=/docs/elements-tabs-documentation--docs) component
-- Added a new [buildless](./?path=/docs/integrations-buildless--docs) integration template utilizing Import Maps
+- Adds [panel](./?path=/docs/elements-panel-documentation--docs) component
+- Adds [tabs](./?path=/docs/elements-tabs-documentation--docs) component
+- Adds a new [buildless](./?path=/docs/integrations-buildless--docs) integration template utilizing Import Maps
 
 ### Fixes
 - Fixes disabled button styles when used as link
 - Lint and Type Improvements
 
 ### Documentation
-- Added [patterns](./?path=/docs/page-patterns-documentation--docs) section to docs for more code examples and templates
-- Added [example](./?path=/docs/elements-button-examples--link) of icons in linked buttons
+- Adds [patterns](./?path=/docs/page-patterns-documentation--docs) section to docs for more code examples and templates
+- Adds [example](./?path=/docs/elements-button-examples--link) of icons in linked buttons
 - Revamped [interactions](./?path=/docs/foundations-tokens-interactions--docs) tokens docs
 - Detailed Tabs and Panel docs with writtern descriptions of usage
 
