@@ -95,7 +95,7 @@ We currently aim for one minor version release at the end of each month and addi
 }
 ```
 
-Update the changelog in storybook to reflect the latest version and release notes. `src/docs/changelog.stories.mdx`
+Update the changelog in storybook to reflect the latest version and release notes. `docs/changelog.stories.mdx`
 
 ### Build
 
