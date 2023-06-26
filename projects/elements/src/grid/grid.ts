@@ -17,7 +17,6 @@ import globalStyles from './grid.global.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  * @stable false
  * @responsive false
- * @package false
  */
 @stateScroll<Grid>()
 @keyNavigationGrid<Grid>()
