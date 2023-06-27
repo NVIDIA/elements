@@ -4,6 +4,7 @@ import { Control } from '@elements/elements/forms';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import { Menu, MenuItem } from '@elements/elements/menu';
+import { Dropdown } from '@elements/elements/dropdown';
 import globalStyles from './select.global.css?inline';
 import styles from './select.css?inline';
 
@@ -28,6 +29,7 @@ export class Select extends Control {
   };
 
   static elementDefinitions = {
+    'nve-dropdown': Dropdown,
     'nve-menu': Menu,
     'nve-menu-item': MenuItem,
     'nve-icon': Icon,
