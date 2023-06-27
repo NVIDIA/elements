@@ -32,18 +32,47 @@ describe('mlv-breadcrumb', () => {
   });
 
   it('should assign elements to defined slot', async () => {
-    element.shadowRoot.querySelector('slot').dispatchEvent(new Event('slotchange'));
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
-    await new Promise(r => setTimeout(r, 0));
-    const items: any[] = Array.from(element.querySelectorAll('*'));
-    expect(items[0].getAttribute('slot').includes('_')).toBe(true);
+
+    expect(element.querySelector('mlv-icon-button').slot.includes('_')).toBe(true);
+    expect(element.querySelector('mlv-button').slot.includes('_')).toBe(true);
+    expect(element.querySelector('span').slot.includes('_')).toBe(true);
+    expect(element.querySelector('h4').slot).toBe('');
   });
 
   it('should decorate clickable elements with ghost interaction', async () => {
-    element.shadowRoot.querySelector('slot').dispatchEvent(new Event('slotchange'));
-    const items: any[] = Array.from(element.querySelectorAll('*'));
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
-    expect(items[0].getAttribute('interaction')).toBe('ghost');
-    expect(items[3].getAttribute('interaction')).toBe(null);
+
+    expect(element.querySelector('mlv-icon-button').interaction.includes('ghost')).toBe(true);
+    expect(element.querySelector('mlv-button').interaction.includes('ghost')).toBe(true);
+  });
+
+  it('should remove wrapper slot if a child is removed', async () => {
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('li').length).toBe(4);
+
+    element.querySelector('mlv-icon-button').remove();
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('li').length).toBe(3);
+  });
+
+  it('should add wrapper slot if a child is added', async () => {
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('li').length).toBe(4);
+
+    const button = document.createElement('mlv-button');
+    element.append(button);
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('li').length).toBe(5);
   });
 });
