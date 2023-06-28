@@ -1,10 +1,4 @@
-import { GlobalRegistrator } from '@happy-dom/global-registrator';
-
-// directly setup happy dom so bazel can find dependencies, otherwise vite dynamically loads happy dom causing it to fail
-if (!globalThis.registerHappyDom) {
- GlobalRegistrator.register();
- globalThis.registerHappyDom = true;
-}
+import '@vitest/coverage-istanbul';
 
 // filter out logs in vitest https://github.com/vitest-dev/vitest/issues/1700
 const warn = console.warn;
