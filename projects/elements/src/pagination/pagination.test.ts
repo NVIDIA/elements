@@ -11,7 +11,9 @@ describe('nve-pagination', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-pagination name="page" .value=${1} .step=${10} .items=${100}></nve-pagination>
+      <form>
+        <nve-pagination name="page" .value=${1} .step=${10} .items=${100}></nve-pagination>
+      </form>
     `);
     element = fixture.querySelector('nve-pagination');
     await elementIsStable(element);
@@ -71,6 +73,7 @@ describe('nve-pagination', () => {
     await nextEvent;
     expect(element.value).toBe(2);
 
+    await elementIsStable(element);
     const previousEvent = untilEvent(element, 'change');
     emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-left"]'));
     await previousEvent;
@@ -87,6 +90,7 @@ describe('nve-pagination', () => {
     expect(element.value).toBe(10);
     expect(element.items).toBe(100);
 
+    await elementIsStable(element);
     const previousEvent = untilEvent(element, 'change');
     emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="start"]'));
     await previousEvent;
@@ -95,14 +99,14 @@ describe('nve-pagination', () => {
 
   it('should set a form value when value changes', async () => {
     await elementIsStable(element);
-    // const form = fixture.querySelector('form');
+    const form = fixture.querySelector('form');
     expect(element.value).toBe(1);
-    // expect(Object.fromEntries(new FormData(form)).page).toBe('1'); // happy-dom polyfill issue
+    expect(Object.fromEntries(new FormData(form)).page).toBe('1');
 
     const nextEvent = untilEvent(element, 'change');
     emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-right"]'));
     await nextEvent;
     expect(element.value).toBe(2);
-    // expect(Object.fromEntries(new FormData(form)).page).toBe('2'); // happy-dom polyfill issue
+    expect(Object.fromEntries(new FormData(form)).page).toBe('2');
   });
 });

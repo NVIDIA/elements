@@ -10,7 +10,7 @@ wireit_bin.wireit_binary(
     chdir = package_name(),
     patch_node_fs = False,
     include_npm = True,
-    data = glob([".storybook/**"]) + glob(["docs/**"]) + glob(["src/**"]) + glob(["public/**"])  + glob(["tokens/**"]) + glob(["build/**"]) + [
+    data = glob([".storybook/**"]) + glob(["docs/**"]) + glob(["src/**"]) + glob(["public/**"]) + glob(["tokens/**"]) + glob(["build/**"]) + [
         ":node_modules",
         "eslint.config.js",
         "tsconfig.json",
@@ -33,16 +33,8 @@ js_run_binary(
     tool = ":wireit_bin",
     out_dirs = [
         "dist",
-        "coverage"
-    ],
-    tags = ["ui"],
-)
-
-js_run_binary(
-    name = "storybook-build",
-    patch_node_fs = False,
-    tool = ":wireit_bin",
-    out_dirs = [
+        "coverage",
+        ".playwright",
         "storybook-build"
     ],
     tags = ["ui"],

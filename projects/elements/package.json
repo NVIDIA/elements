@@ -13,7 +13,6 @@
     "build:icons": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
-    "test:coverage": "wireit",
     "storybook": "wireit",
     "storybook:watch": "wireit",
     "lint": "wireit",
@@ -23,7 +22,8 @@
     "demos": "wireit",
     "_demos": "wireit",
     "metrics": "wireit",
-    "prepublishonly": "wireit"
+    "prepublishonly": "wireit",
+    "playwright": "wireit"
   },
   "files": [
     "README.md",
@@ -220,7 +220,6 @@
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "0.8.0",
-    "@happy-dom/global-registrator": "8.9.0",
     "@lit-labs/virtualizer": "2.0.3",
     "@rollup/plugin-replace": "5.0.2",
     "@rollup/plugin-terser": "0.1.0",
@@ -241,7 +240,9 @@
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
     "@typescript/lib-dom": "npm:@types/web@0.0.87",
-    "@vitest/coverage-c8": "0.30.1",
+    "@vitest/browser": "0.32.4",
+    "@vitest/coverage-istanbul": "0.32.4",
+    "@vitest/utils": "0.32.4",
     "emoji-picker-element": "1.12.1",
     "eslint": "8.41.0",
     "eslint-plugin-lit": "1.8.3",
@@ -251,12 +252,12 @@
     "fflate": "0.8.0",
     "glob": "8.0.3",
     "globals": "13.20.0",
-    "happy-dom": "8.9.0",
     "lit-analyzer": "1.2.1",
+    "playwright": "1.35.1",
     "postcss": "8.4.23",
     "postcss-csso": "6.0.1",
     "postcss-each": "1.1.0",
-    "postcss-load-config": "^4.0.1",
+    "postcss-load-config": "4.0.1",
     "postcss-mixins": "9.0.4",
     "postcss-nested": "5.0.6",
     "prettier": "2.5.1",
@@ -270,9 +271,9 @@
     "svgo": "2.8.0",
     "ts-lit-plugin": "1.2.1",
     "typescript": "4.8.4",
-    "vite": "4.0.2",
-    "vite-plugin-dts": "1.7.1",
-    "vitest": "0.30.1",
+    "vite": "4.3.9",
+    "vite-plugin-dts": "3.0.3",
+    "vitest": "0.32.4",
     "wireit": "0.9.5"
   },
   "publishConfig": {
@@ -290,7 +291,6 @@
         "lint",
         "build",
         "test",
-        "test:coverage",
         "storybook",
         "demos"
       ]
@@ -335,25 +335,7 @@
       "command": "git clean -dfX"
     },
     "test": {
-      "command": "node_modules/vitest/vitest.mjs run",
-      "files": [
-        "src/**/*.test.ts",
-        "tsconfig.json",
-        "tsconfig.lib.json",
-        "vite.config.ts",
-        "vitest.config.ts"
-      ],
-      "output": [],
-      "dependencies": [
-        "build"
-      ]
-    },
-    "test:watch": {
-      "command": "vitest --watch",
-      "service": true
-    },
-    "test:coverage": {
-      "command": "node_modules/vitest/vitest.mjs run --coverage",
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/vitest/vitest.mjs run --browser.headless --coverage",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -365,7 +347,24 @@
         "coverage/**"
       ],
       "dependencies": [
+        "playwright",
         "build"
+      ]
+    },
+    "test:watch": {
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.playwright vitest --watch",
+      "service": true,
+      "dependencies": [
+        "playwright"
+      ]
+    },
+    "playwright": {
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/playwright/cli.js install chromium",
+      "files": [
+        "package.json"
+      ],
+      "output": [
+        ".playwright/**"
       ]
     },
     "demos": {
@@ -463,7 +462,7 @@
         "metrics/data.json"
       ],
       "dependencies": [
-        "test:coverage"
+        "test"
       ]
     },
     "prepublishonly": {

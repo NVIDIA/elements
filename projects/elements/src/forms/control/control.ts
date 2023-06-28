@@ -149,4 +149,12 @@ export class Control extends LitElement {
       this.#label.slot = 'label';
     }
   }
+
+  protected showPicker() {
+    try {
+      this.input.showPicker();
+    } catch {
+      // 
+    }
+  }
 }

@@ -61,9 +61,9 @@ describe('nve-panel', () => {
     await elementIsStable(panelHeader);
 
     const [titleElement, subtitleElement, actionElement] = getFlatDOMTree(panelHeader).filter(e => e.hasAttribute('slot'));
-    expect(titleElement).toBe(panelHeader.querySelector('[slot="title"]'));
-    expect(subtitleElement).toBe(panelHeader.querySelector('[slot="subtitle"]'));
-    expect(actionElement).toBe(panelHeader.querySelector('[slot="action-icon"]'));
+    expect(titleElement).toBe(panelHeader.querySelector('[slot="title"'));
+    expect(subtitleElement).toBe(panelHeader.querySelector('[slot="subtitle"'));
+    expect(actionElement).toBe(panelHeader.querySelector('[slot="action-icon"'));
   });
 
   it('should replace collapse icon with cancel icon when closable', async () => {
@@ -84,7 +84,7 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
-    expect(panel.matches('[state--expanded]')).toBe(true);
+    expect(panel.matches(':--expanded')).toBe(true);
 
     panel.expanded = false;
 
@@ -92,7 +92,7 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('expand-panel');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
-    expect(panel.matches('[state--expanded]')).toBe(false);
+    expect(panel.matches(':--expanded')).toBe(false);
   });
 
   it('should flip collapse icon direction when panel side set to "right" mode', async () => {
@@ -113,7 +113,7 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
-    expect(panel.matches('[state--expanded]')).toBe(true);
+    expect(panel.matches(':--expanded')).toBe(true);
 
     panel.shadowRoot.querySelector('nve-icon-button').click();
 
@@ -121,6 +121,6 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('expand-panel');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
-    expect(panel.matches('[state--expanded]')).toBe(false);
+    expect(panel.matches(':--expanded')).toBe(false);
   });
 });
