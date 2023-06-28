@@ -71,7 +71,7 @@ describe('setupControlValidationStates HTML5 disabled', () => {
 
   it('should update validation state if HTML5 validation is disabled and manually controlled', async () => {
     await elementIsStable(control);
-    // expect((control._internals.states as any).has('--valid')).toBe(true); // incorrect in happy-dom
+    expect((control._internals.states as any).has('--valid')).toBe(true);
     expect((control._internals.states as any).has('--invalid')).toBe(false);
     expect((control._internals.states as any).has('--touched')).toBe(false);
 
@@ -119,18 +119,18 @@ describe('setupControlValidationStates', () => {
     control.input.dispatchEvent(new Event('blur'));
     await elementIsStable(control);
 
-    // expect((control._internals.states as any).has('--invalid')).toBe(true); // incorrect in happy-dom
+    expect((control._internals.states as any).has('--invalid')).toBe(true);
     expect((control._internals.states as any).has('--valid')).toBe(false);
-    // expect(control.status).toBe('error'); // incorrect in happy-dom
+    expect(control.status).toBe('error');
   });
 
   it('should reset validation state on input', async () => {
     control.input.dispatchEvent(new Event('blur'));
     await elementIsStable(control);
 
-    // expect((control._internals.states as any).has('--invalid')).toBe(true); // incorrect in happy-dom
+    expect((control._internals.states as any).has('--invalid')).toBe(true);
     expect((control._internals.states as any).has('--valid')).toBe(false);
-    // expect(control.status).toBe('error'); // incorrect in happy-dom
+    expect(control.status).toBe('error');
   });
 
   it('should reset validity when passing', async () => {
@@ -139,7 +139,7 @@ describe('setupControlValidationStates', () => {
     await elementIsStable(control);
 
     expect((control._internals.states as any).has('--invalid')).toBe(false);
-    // expect(control.status).toBe(null); // incorrect in happy-dom
+    expect(control.status).toBe(null);
   });
 });
 
@@ -168,73 +168,73 @@ describe('setupControlStates', () => {
 
   it('should update checked states', async () => {
     await elementIsStable(control);
-    expect((control.matches('[state--checked]'))).toBe(false);
+    expect((control.matches(':--checked'))).toBe(false);
     expect((control._internals.states as any).has('--checked')).toBe(false);
 
     input.checked = true;
     input.dispatchEvent(new Event('change'));
     await elementIsStable(control);
-    expect((control.matches('[state--checked]'))).toBe(true);
+    expect((control.matches(':--checked'))).toBe(true);
     expect((control._internals.states as any).has('--checked')).toBe(true);
   });
 
   it('should update readonly states', async () => {
     await elementIsStable(control);
-    expect((control.matches('[state--readonly]'))).toBe(false);
+    expect((control.matches(':--readonly'))).toBe(false);
     expect((control._internals.states as any).has('--readonly')).toBe(false);
 
     input.setAttribute('readonly', '');
     await elementIsStable(control);
-    expect((control.matches('[state--readonly]'))).toBe(true);
+    expect((control.matches(':--readonly'))).toBe(true);
     expect((control._internals.states as any).has('--readonly')).toBe(true);
   });
 
   it('should update disabled states', async () => {
     await elementIsStable(control);
-    expect((control.matches('[state--disabled]'))).toBe(false);
+    expect((control.matches(':--disabled'))).toBe(false);
     expect((control._internals.states as any).has('--disabled')).toBe(false);
 
     input.setAttribute('disabled', '');
     await elementIsStable(control);
-    expect((control.matches('[state--disabled]'))).toBe(true);
+    expect((control.matches(':--disabled'))).toBe(true);
     expect((control._internals.states as any).has('--disabled')).toBe(true);
   });
 
   it('should update focus states', async () => {
     await elementIsStable(control);
-    expect((control.matches('[state--focus]'))).toBe(false);
+    expect((control.matches(':--focus'))).toBe(false);
     expect((control._internals.states as any).has('--focus')).toBe(false);
 
     input.dispatchEvent(new Event('focus'));
     await elementIsStable(control);
-    expect((control.matches('[state--focus]'))).toBe(true);
+    expect((control.matches(':--focus'))).toBe(true);
     expect((control._internals.states as any).has('--focus')).toBe(true);
 
     input.dispatchEvent(new Event('blur'));
     await elementIsStable(control);
-    expect((control.matches('[state--focus]'))).toBe(false);
+    expect((control.matches(':--focus'))).toBe(false);
     expect((control._internals.states as any).has('--focus')).toBe(false);
   });
 
   it('should update touched state', async () => {
     await elementIsStable(control);
-    expect((control.matches('[state--touched]'))).toBe(false);
+    expect((control.matches(':--touched'))).toBe(false);
     expect((control._internals.states as any).has('--touched')).toBe(false);
 
     input.dispatchEvent(new Event('blur'));
     await elementIsStable(control);
-    expect((control.matches('[state--touched]'))).toBe(true);
+    expect((control.matches(':--touched'))).toBe(true);
     expect((control._internals.states as any).has('--touched')).toBe(true);
   });
 
   it('should update dirty state', async () => {
     await elementIsStable(control);
-    expect((control.matches('[state--dirty]'))).toBe(false);
+    expect((control.matches(':--dirty'))).toBe(false);
     expect((control._internals.states as any).has('--dirty')).toBe(false);
 
     input.dispatchEvent(new Event('input'));
     await elementIsStable(control);
-    expect((control.matches('[state--dirty]'))).toBe(true);
+    expect((control.matches(':--dirty'))).toBe(true);
     expect((control._internals.states as any).has('--dirty')).toBe(true);
   });
 });

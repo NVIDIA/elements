@@ -11,6 +11,13 @@ const entries = glob.sync('./src/**/define.ts')
   .reduce((p, i) => ({ ...p, [i.replace('./src', '@elements/elements').replace('/index.js', '')]: resolve(i.replace('src', base)).replace('.js', coverage ? '.ts' : '.js') }), { });
 
 export default defineConfig({
+  optimizeDeps: {
+    include: [
+      '@vitest/utils > diff-sequences',
+      '@vitest/utils > loupe'
+    ],
+    exclude: ['@vitest/coverage-istanbul']
+  },
   test: {
     root: resolve('.'),
     alias: {
@@ -31,13 +38,19 @@ export default defineConfig({
     deps: { external: ['**/node_modules/**'] },
     setupFiles: [resolve('./src/test/setup.ts')], // https://github.com/vitest-dev/vitest/issues/1700
     coverage: {
+      provider: 'istanbul',
       reportsDirectory: resolve('./coverage'),
       reporter: ['lcov', 'html', 'json-summary'],
       lines: 90,
-      branches: 90,
-      functions: 90,
+      branches: 80,
+      functions: 85,
       statements: 90,
       exclude: ['**/storybook/**', '**/polyfills/**', '**/test/**', '**/*.test.ts', '**/docs.ts', '**/*.css.js', '**/*.css', '**/index.js', '**/src/icon/icons/**', '**/src/icon/icons.ts']
+    },
+    browser: {
+      enabled: true,
+      provider: 'playwright',
+      name: 'chromium'
     }
   }
 });

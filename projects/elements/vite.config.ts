@@ -22,6 +22,7 @@ export default defineConfig((env) => {
   execSync(`node ${resolve('./tokens/style-dictionary.config.cjs')} --outDir ${resolve('./')}/dist/`);
   execSync(`node ${resolve('./build/css-var-completions.js')}`);
   execSync(`node ${resolve('./build/vscode-custom-data.js')}`);
+  // execSync(`node ./node_modules/playwright/cli.js install chromium --with-deps`);
 
   return {
     resolve: {
@@ -74,7 +75,7 @@ export default defineConfig((env) => {
       rollupOptions: {
         treeshake: false,
         preserveEntrySignatures: 'strict',
-        external: ['@happy-dom/global-registrator', ...Object.keys(packageFile.dependencies || {}), ...Object.keys(packageFile.optionalDependencies || {})].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
+        external: [...Object.keys(packageFile.dependencies || {}), ...Object.keys(packageFile.optionalDependencies || {})].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
         output: [
           {
             format: 'esm',

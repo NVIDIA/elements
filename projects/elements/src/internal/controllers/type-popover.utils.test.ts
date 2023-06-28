@@ -72,7 +72,7 @@ describe('setArrowStyles', () => {
     const style = window.getComputedStyle(config.arrow);
     expect(style.left).toBe('10px');
     expect(style.top).toBe('10px');
-    expect(style.bottom).toBe('4px');
+    expect(style.bottom).toBe('2px');
 
     popover.remove();
     arrow.remove();
@@ -99,9 +99,9 @@ describe('computePopoverPosition', () => {
 
     const position = await computePopoverPosition(config);
     expect(position.x).toBe(0);
-    expect(position.y).toBe(-2);
+    expect(position.y).toBe(2);
     expect(position.strategy).toBe('fixed');
-    expect(position.placement).toBe('top-start');
+    expect(position.placement).toBe('bottom-start');
     expect(position.middlewareData.arrow).toBe(undefined);
   });
 
@@ -113,9 +113,9 @@ describe('computePopoverPosition', () => {
 
     const position = await computePopoverPosition(config);
     expect(position.x).toBe(-6);
-    expect(position.y).toBe(-2);
+    expect(position.y).toBe(2);
     expect(position.strategy).toBe('fixed');
-    expect(position.placement).toBe('top-start');
+    expect(position.placement).toBe('bottom-start');
     expect(position.middlewareData.arrow).toEqual({ x: 6, centerOffset: -6 });
   });
 });
