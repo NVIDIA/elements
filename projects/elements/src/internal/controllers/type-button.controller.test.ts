@@ -48,6 +48,6 @@ describe('TypeButtonController', () => {
     await elementIsStable(element);
     expect(element.tabIndex).toBe(-1);
     expect(element._internals.role).toBe(null);
-    expect(element.getAttribute('role')).toBe('null'); // polyfill incorrectly reflects to string 'null'. In browsers this is properly set to null.
+    expect(element.getAttribute('role')).toBe(null);
   });
 });

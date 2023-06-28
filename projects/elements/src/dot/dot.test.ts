@@ -35,15 +35,14 @@ describe('nve-dot', () => {
 
   it('should apply slotted text specific styles', async () => {
     await elementIsStable(element);
-    expect(element.matches('[state--has-text]')).toBe(false);
+    expect(element.matches(':--has-text')).toBe(false);
 
-    // happy-dom fails
-    // element.innerHTML = '<span>test</span>';
-    // await elementIsStable(element);
-    // expect(element.matches('[state--has-text]')).toBe(true);
+    element.innerHTML = '<span>test</span>';
+    await elementIsStable(element);
+    expect(element.matches(':--has-text')).toBe(true);
 
     element.innerHTML = '';
     await elementIsStable(element);
-    expect(element.matches('[state--has-text]')).toBe(false);
+    expect(element.matches(':--has-text')).toBe(false);
   });
 });

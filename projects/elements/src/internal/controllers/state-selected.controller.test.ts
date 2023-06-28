@@ -14,7 +14,6 @@ class StateSelectedControllerTestElement extends LitElement {
 }
 
 /**
- * In real browsers the State CSS selector is `:--selected` rather than the polyfilled `[state--selected]` selector for vitest/js-dom env
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  * https://github.com/calebdwilliams/element-internals-polyfill#state-api
  */
@@ -34,38 +33,38 @@ describe('state-selected.controller', () => {
   it('should initialize aria-selected as null', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe(null);
-    expect(element.matches('[state--selected]')).toBe(false);
+    expect(element.matches(':--selected')).toBe(false);
   });
 
   it('should initialize aria-selected as null if selected not applied', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe(null);
-    expect(element.matches('[state--selected]')).toBe(false);
+    expect(element.matches(':--selected')).toBe(false);
   });
 
   it('should initialize aria-selected as true if selected applied', async () => {
     element.selected = true;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe('true');
-    expect(element.matches('[state--selected]')).toBe(true);
+    expect(element.matches(':--selected')).toBe(true);
   });
 
   it('should initialize aria-selected as false if selected=false is applied', async () => {
     element.selected = false;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe('false');
-    expect(element.matches('[state--selected]')).toBe(false);
+    expect(element.matches(':--selected')).toBe(false);
   });
 
   it('should remove aria-selected if readonly', async () => {
     element.selected = true;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe('true');
-    expect(element.matches('[state--selected]')).toBe(true);
+    expect(element.matches(':--selected')).toBe(true);
 
     element.readonly = true;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe(null);
-    expect(element.matches('[state--selected]')).toBe(false);
+    expect(element.matches(':--selected')).toBe(false);
   });
 });

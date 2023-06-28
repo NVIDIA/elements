@@ -80,7 +80,7 @@ describe('type-anchor.controller', () => {
     expect(element.readonly).toBe(true);
     expect(anchor.style.textDecoration).toBe('');
     expect(element.style.cursor).toBe('');
-    expect((element.matches('[state--anchor]'))).toBe(true);
+    expect((element.matches(':--anchor'))).toBe(true);
   });
 
   it('should allow element to be wrapped in anchor', () => {
@@ -93,6 +93,7 @@ describe('type-anchor.controller', () => {
     expect(elementTwo.readonly).toBe(true);
     expect(anchorTwo.style.textDecoration).toBe('none');
     expect(elementTwo.style.cursor).toBe('pointer');
+    expect((element.matches(':--anchor'))).toBe(true);
   });
 
   it('should allow for element to pick up anchors that have been slotted in the shadow DOM', () => {
