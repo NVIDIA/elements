@@ -21,7 +21,7 @@ export type TrendStatus = 'trend-down' | 'trend-up' | 'trend-neutral';
 export type ColorPalette = 'red-cardinal' | 'gray-slate' | 'gray-denim' | 'blue-indigo' | 'blue-cobalt' | 'blue-sky' | 'teal-cyan' | 'green-mint' | 'teal-seafoam' | 'green-grass' | 'yellow-amber' | 'orange-pumpkin' | 'red-tomato' | 'pink-magenta' | 'purple-plum' | 'purple-violet' | 'purple-lavender' | 'pink-rose' | 'green-jade' | 'lime-pear' | 'yellow-nova' | 'brand-green';
 
 export interface Container {
-  container?: 'flat' | 'full';
+  container?: 'flat' | 'full' | 'inset';
 }
 
 export const statusIcons: { [key: string]: IconName } = {
