@@ -136,8 +136,7 @@ export class Panel extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-icon-button': IconButton,
-    'nve-panel-header': PanelHeader
+    'nve-icon-button': IconButton
   };
 
 
