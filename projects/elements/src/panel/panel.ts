@@ -136,8 +136,7 @@ export class Panel extends LitElement {
   };
 
   static elementDefinitions = {
-    'mlv-icon-button': IconButton,
-    'mlv-panel-header': PanelHeader
+    'mlv-icon-button': IconButton
   };
 
 

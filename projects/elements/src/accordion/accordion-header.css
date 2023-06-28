@@ -1,0 +1,24 @@
+:host {
+  width: 100%;
+}
+
+[internal-host] {
+  color: var(--color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  ::slotted([slot="title"]) {
+    margin: 0;
+    font-size: var(--mlv-ref-font-size-200);
+    font-weight: var(--mlv-ref-font-weight-medium);
+  }
+
+  ::slotted([slot="subtitle"]) {
+    margin: 0;
+    font-size: var(--mlv-ref-font-size-100);
+    font-weight: var(--mlv-ref-font-weight-regular);
+    color: var(--mlv-sys-text-muted-color);
+  }
+}

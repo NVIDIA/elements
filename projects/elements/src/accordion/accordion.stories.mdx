@@ -1,0 +1,63 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Accordion/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Accordion
+
+<element-metrics tag="mlv-accordion"></element-metrics>
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/accordion/define.js';
+```
+
+```html
+
+<mlv-accordion>
+  <mlv-accordion-header>
+    <div slot="title">Heading</div>
+  </mlv-accordion-header>
+
+  <mlv-accordion-content>
+    Content
+  </mlv-accordion-content>
+</mlv-accordion>
+```
+
+<LinkedHeader>Full</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-accordion-examples--default" />
+</Canvas>
+
+<LinkedHeader>Inset</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-accordion-examples--inset" />
+</Canvas>
+
+<LinkedHeader>Flat</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-accordion-examples--flat" />
+</Canvas>
+
+<LinkedHeader>With Actions</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-accordion-examples--with-actions" />
+</Canvas>
+
+
+<element-status tag={'mlv-accordion'}></element-status>
+
+<LinkedHeader>mlv-accordion</LinkedHeader>
+<ArgsTable of="mlv-accordion" />
+
+<LinkedHeader>mlv-accordion-header</LinkedHeader>
+<ArgsTable of="mlv-accordion-header" />
+
+<LinkedHeader>mlv-accordion-content</LinkedHeader>
+<ArgsTable of="mlv-accordion-content" />

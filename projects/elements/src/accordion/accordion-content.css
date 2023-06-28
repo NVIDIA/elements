@@ -1,0 +1,8 @@
+:host {
+  --padding: var(--mlv-ref-size-400) var(--mlv-ref-size-500) var(--mlv-ref-size-500);
+  padding: var(--padding);
+  color: var(--color);
+  font-weight: var(--mlv-ref-font-weight-regular);
+  font-size: var(--mlv-ref-font-size-200);
+  flex-grow: 1;
+}

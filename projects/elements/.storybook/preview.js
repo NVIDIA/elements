@@ -170,6 +170,7 @@ export const parameters = {
         ],
         'Elements',
         [
+          'Accordion',
           'Alert',
           'Alert Banner',
           'Alert Group',
