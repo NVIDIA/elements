@@ -1,0 +1,63 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Accordion/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Accordion
+
+<element-metrics tag="nve-accordion"></element-metrics>
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/accordion/define.js';
+```
+
+```html
+
+<nve-accordion>
+  <nve-accordion-header>
+    <div slot="title">Heading</div>
+  </nve-accordion-header>
+
+  <nve-accordion-content>
+    Content
+  </nve-accordion-content>
+</nve-accordion>
+```
+
+<LinkedHeader>Full</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-accordion-examples--default" />
+</Canvas>
+
+<LinkedHeader>Inset</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-accordion-examples--inset" />
+</Canvas>
+
+<LinkedHeader>Flat</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-accordion-examples--flat" />
+</Canvas>
+
+<LinkedHeader>With Actions</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-accordion-examples--with-actions" />
+</Canvas>
+
+
+<element-status tag={'nve-accordion'}></element-status>
+
+<LinkedHeader>nve-accordion</LinkedHeader>
+<ArgsTable of="nve-accordion" />
+
+<LinkedHeader>nve-accordion-header</LinkedHeader>
+<ArgsTable of="nve-accordion-header" />
+
+<LinkedHeader>nve-accordion-content</LinkedHeader>
+<ArgsTable of="nve-accordion-content" />
