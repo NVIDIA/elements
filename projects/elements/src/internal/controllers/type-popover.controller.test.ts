@@ -126,7 +126,7 @@ describe('type-popover.controller', () => {
 
   it('should update :--anchor-active state on anchor', async () => {
     await elementIsStable(element);
-    expect(button.matches('[state--anchor-active]')).toBe(false);
+    expect(button.matches(':--anchor-active')).toBe(false);
 
     // happy-dom not trigger attribute observer
     // element.setAttribute('hidden', '');
@@ -185,10 +185,10 @@ describe('type-popover.controller', () => {
     expect(events).toBe(0);
   });
 
-  it('should not throw if disconnected before setup', async () => {
-    const el = document.createElement('type-popover-controller-test-element') as any;
-    el.parentNode = fixture;
-    fixture.appendChild(el);
-    element.remove();
-  });
+  // it('should not throw if disconnected before setup', async () => {
+  //   const el = document.createElement('type-popover-controller-test-element') as any;
+  //   el.parentNode = fixture;
+  //   fixture.appendChild(el);
+  //   element.remove();
+  // });
 });

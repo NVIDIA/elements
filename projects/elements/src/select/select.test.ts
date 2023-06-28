@@ -3,7 +3,7 @@ import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, emulateClick } from '@elements/elements/test';
 import { Select } from '@elements/elements/select';
 import type { Dropdown } from '@elements/elements/dropdown';
-import type { MenuItem } from '@elements/elements/menu';
+import type { Menu, MenuItem } from '@elements/elements/menu';
 import '@elements/elements/select/define.js';
 
 describe('mlv-select', () => {
@@ -67,22 +67,21 @@ describe('mlv-select', () => {
 
   it('should show custom dropdown menu when clicked', async () => {
     const dropdown = element.querySelector<Dropdown>('mlv-dropdown');
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.hidden).toBe(true);
     emulateClick(fixture.querySelector('select'));
     element.requestUpdate();
     expect(dropdown.hidden).toBe(false);
   });
 
-  // polyfill fails in happy dom
-  // it('should each menu with the aria role of listbox', async () => {
-  //   const menu = fixture.querySelector<Menu>('mlv-menu');
-  //   expect(menu.getAttribute('role')).toBe('listbox');
-  // });
+  it('should each menu with the aria role of listbox', async () => {
+    const menu = fixture.querySelector<Menu>('mlv-menu');
+    expect(menu.getAttribute('role')).toBe('listbox');
+  });
 
-  // it('should each menu item with the aria role of option', async () => {
-  //   const items = fixture.querySelectorAll<MenuItem>('mlv-menu-item');
-  //   expect(items[0].getAttribute('role')).toBe('option');
-  //   expect(items[1].getAttribute('role')).toBe('option');
-  //   expect(items[2].getAttribute('role')).toBe('option');
-  // });
+  it('should each menu item with the aria role of option', async () => {
+    const items = fixture.querySelectorAll<MenuItem>('mlv-menu-item');
+    expect(items[0].getAttribute('role')).toBe('option');
+    expect(items[1].getAttribute('role')).toBe('option');
+    expect(items[2].getAttribute('role')).toBe('option');
+  });
 });

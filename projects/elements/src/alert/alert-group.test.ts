@@ -52,10 +52,9 @@ describe('mlv-alert-group', () => {
     const alert = document.createElement('mlv-alert');
     expect(alert.status).toBe(undefined);
 
-    // happy-dom fails
-    // alertGroup.appendChild(alert);
-    // await elementIsStable(alertGroup);
-    // await elementIsStable(alert);
-    // expect(alert.status).toBe('success');
+    alertGroup.appendChild(alert);
+    await elementIsStable(alertGroup);
+    await elementIsStable(alert);
+    expect(alert.status).toBe('success');
   });
 });

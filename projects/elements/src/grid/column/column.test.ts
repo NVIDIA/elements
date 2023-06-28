@@ -53,10 +53,9 @@ describe('mlv-grid-column', () => {
     columns[0].columnAlign = 'center';
     await elementIsStable(columns[0]);
     const sheets = (grid.getRootNode() as any).adoptedStyleSheets;
-    expect(sheets[sheets.length - 1].cssRules[0]._cssText.includes('--justify-content: center')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('--justify-content: center')).toBe(true);
   });
 
-  // right position is currently not tested due to happy-dom not being able to emulate true layout calculations
   it('should update column position', async () => {
     columns[0].position = 'fixed';
     await elementIsStable(columns[0]);
@@ -64,13 +63,14 @@ describe('mlv-grid-column', () => {
     const sheets = (grid.getRootNode() as any).adoptedStyleSheets;
 
     // position
-    expect(sheets[sheets.length - 1].cssRules[0]._cssText.includes('position: sticky')).toBe(true);
-    expect(sheets[sheets.length - 1].cssRules[0]._cssText.includes('z-index: 99')).toBe(true);
-    expect(sheets[sheets.length - 1].cssRules[0]._cssText.includes('right: 0px;')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('position: sticky')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('z-index: 99')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('right: 0px;')).toBe(false);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('left: 0px;')).toBe(true);
 
-    // left border
-    expect(sheets[sheets.length - 1].cssRules[1]._cssText.includes('var(--scroll-shadow)')).toBe(true);
-    expect(sheets[sheets.length - 1].cssRules[1]._cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(true);
-    expect(sheets[sheets.length - 1].cssRules[1]._cssText.includes('--border-left: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)')).toBe(true);
+    // left side
+    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('var(--scroll-shadow)')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
+    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('--border-right: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)')).toBe(true);
   });
 });

@@ -19,6 +19,6 @@ export class Time extends Control {
   };
 
   protected get suffixContent() {
-    return html`<mlv-icon-button icon-name="schedule" interaction="ghost" @click=${() => this.input.showPicker()}></mlv-icon-button>`;
+    return html`<mlv-icon-button icon-name="schedule" interaction="ghost" @click=${this.showPicker}></mlv-icon-button>`;
   }
 }

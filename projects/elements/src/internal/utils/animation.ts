@@ -20,8 +20,8 @@ export function animationFade(host: HTMLElement, options?: Options): DirectiveRe
     ...defaultOptions,
     keyframeOptions: {
       ...defaultOptions.keyframeOptions,
-      duration,
-      easing
+      duration: duration ? duration : 0,
+      easing: easing ? easing : 'ease-in-out'
     }
   });
 }
