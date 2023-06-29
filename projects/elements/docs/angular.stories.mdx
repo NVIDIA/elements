@@ -99,7 +99,7 @@ export class AppComponent  {
 }
 ```
 
-<LinkedHeader>Advanced Installation</LinkedHeader>
+<LinkedHeader>Legacy Installation</LinkedHeader>
 
 If your app was created with an older version of the Angular CLI you may to need add or adjust the following to your application.
 
@@ -144,4 +144,52 @@ If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig
     "skipLibCheck": true
   }
 }
+```
+
+<LinkedHeader>Advanced - Import CSS Source</LinkedHeader>
+
+[Lit](https://lit.dev) as a standard TypeScript based library works mostly out of the box when imported and used within an Angular application source code.
+This enables Lit based Web Components to be authored directly within your Angular application but not require a standalone library/project.
+If you are authoring Lit based components and would like to import external CSS files (similar to [Vite Inlined Imports](https://vitejs.dev/guide/features.html#disabling-css-injection-into-the-page)) additonal Angular CLI configuration is needed.
+
+<nve-alert status="accent">Imports like Webpack !raw-loader and Vite ?inline are not Web standard and likely to be migrated in the future to <a href="https://web.dev/css-module-scripts/">Import Assertions</a></nve-alert>
+
+### 1. Install
+
+```shell
+pnpm install raw-loader
+```
+
+### 2. Update tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+  }
+}
+```
+
+### 3. Update Types
+
+```typescript
+// declarations.d.ts
+declare module 'raw-loader!*.css' {
+  const content: string;
+  export = content;
+}
+```
+
+### 4. Import Styles
+
+```typescript
+import { unsafeCSS } from 'lit';
+import typography from 'raw-loader!node_modules/@elements/elements/css/module.typography.css';
+import layout from 'raw-loader!node_modules/@elements/elements/css/module.layout.css';
+
+// Lit Component
+static override styles = [
+  css`${unsafeCSS(typography)}`,
+  css`${unsafeCSS(layout)}`
+];
 ```
