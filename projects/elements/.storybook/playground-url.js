@@ -66,6 +66,7 @@ function createDefaultFiles(content) {
   {
     "imports": {
       "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/"
+      "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/"
     },
     "scopes": {
       "${CDN_ORIGIN}/": {
