@@ -221,6 +221,7 @@
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "0.8.0",
     "@happy-dom/global-registrator": "8.9.0",
+    "@lit-labs/virtualizer": "2.0.3",
     "@rollup/plugin-replace": "5.0.2",
     "@rollup/plugin-terser": "0.1.0",
     "@storybook/addon-docs": "7.1.0-alpha.26",

@@ -1,6 +1,7 @@
 import { LitElement, unsafeCSS, html, css, nothing } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
+import { getItems, grid } from '@elements/elements/test';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/grid/define.js';
 import '@elements/elements/badge/define.js'
@@ -19,7 +20,7 @@ import '@elements/elements/radio/define.js';
 import '@elements/elements/search/define.js';
 import '@elements/elements/sort-button/define.js';
 import '@elements/elements/tabs/define.js';
-import { getItems, grid } from '@elements/elements/test';
+import '@lit-labs/virtualizer';
 
 export default {
   title: 'Elements/Data Grid/Examples',
@@ -506,8 +507,8 @@ export const RowSortInteractive = {
   `
 };
 
-@customElement('batch-render-demo')
-class BatchRenderDemo extends LitElement {
+@customElement('infinite-scroll-demo')
+class InfiniteScrollDemo extends LitElement {
   static styles = [unsafeCSS(layout)];
 
   @state() rows = this.#group(grid(10000).rows, 100);
@@ -548,10 +549,10 @@ class BatchRenderDemo extends LitElement {
   }
 }
 
-export const BatchRender = {
+export const PerformanceInfiniteScroll = {
   render: () => html`
 <div mlv-theme="root">
-  <batch-render-demo></batch-render-demo>
+  <infinite-scroll-demo></infinite-scroll-demo>
 </div>
   `
 };
@@ -562,6 +563,7 @@ class GridPerformanceDemo extends LitElement {
   :host {
     display: block;
     height: 500px;
+    padding: 24px 0;
   }
   `];
 
@@ -571,10 +573,10 @@ class GridPerformanceDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-button @click=${() => this.show = !this.show}>show</mlv-button>
+      <mlv-button @click=${() => this.show = !this.show}>show large grid</mlv-button>
       <p>1000 rows, 4000 cells</p>
       ${this.show ? html`
-      <mlv-grid style="--scroll-height: 400px; width: 1024px">
+      <mlv-grid style="--scroll-height: 400px; max-width: 1024px">
         <mlv-grid-header>
           ${this.grid.columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column>`)}
         </mlv-grid-header>
@@ -592,6 +594,38 @@ export const Performance = {
   render: () => html`
 <div mlv-theme="root">
   <grid-performance-demo></grid-performance-demo>
+</div>
+  `
+};
+
+@customElement('grid-virtual-scroll-demo')
+class GridVirtualScrollDemo extends LitElement {
+  items = new Array(10000).fill('').map((_i, n) => ({ column: `${n}-0`, column1: `${n}-1`, column2: `${n}-2`, column3: `${n}-3` }));
+
+  render() {
+    return html`
+      <mlv-grid>
+        <mlv-grid-header>
+          <mlv-grid-column>column</mlv-grid-column>
+          <mlv-grid-column>column</mlv-grid-column>
+          <mlv-grid-column>column</mlv-grid-column>
+          <mlv-grid-column>column</mlv-grid-column>
+        </mlv-grid-header>
+
+        <lit-virtualizer style="min-height: 350px" scroller .items=${this.items} .renderItem=${i => html`
+          <mlv-grid-row style="width: 100%">
+            ${Object.keys(i).map(key => html`<mlv-grid-cell>${i[key]}</mlv-grid-cell>`)}
+          </mlv-grid-row>`}>
+        </lit-virtualizer>
+      </mlv-grid>
+    `;
+  }
+}
+
+export const PerformanceVirtualScroll = {
+  render: () => html`
+<div mlv-theme="root">
+  <grid-virtual-scroll-demo></grid-virtual-scroll-demo>
 </div>
   `
 };

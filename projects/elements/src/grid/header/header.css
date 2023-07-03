@@ -1,6 +1,7 @@
 :host {
   --background: var(--mlv-sys-layer-container-accent-background);
   --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  --padding: 0 1px 0 0;
   position: sticky;
   z-index: 100;
   top: 0;
@@ -12,7 +13,7 @@
   grid-template-columns: var(--grid-template-column);
   border-bottom: var(--border-bottom);
   background: var(--background);
+  padding: var(--padding);
   display: grid;
   min-width: fit-content;
-  padding-right: 1px;
 }

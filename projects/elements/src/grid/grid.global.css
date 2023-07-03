@@ -35,3 +35,29 @@ mlv-grid-column > mlv-sort-button + mlv-icon-button {
 mlv-grid-cell:focus-within > a {
   box-shadow: 0 0 0 2px Highlight; /* programatic focus does not trigger standard outline style */
 }
+
+mlv-grid {
+  &:has([scroller]) mlv-grid-header {
+    --padding: 0 16px 0 0;
+  }
+
+  & [scroller]::-webkit-scrollbar {
+    background: var(--background);
+    width: 12px;
+    height: 12px;
+  }
+
+  & [scroller]::-webkit-scrollbar-track {
+    height: 100vh;
+  }
+
+  & [scroller]::-webkit-scrollbar-thumb {
+    background: var(--mlv-ref-border-color-muted);
+    border: 2px solid var(--background);
+    border-radius: 50px;
+  }
+
+  & [scroller]::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0);
+  }
+}
