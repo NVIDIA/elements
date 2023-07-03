@@ -5,7 +5,7 @@ const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
 
 export function playground(Story, context) {
-  if (Object.keys(context.unmappedArgs).length || context.id === 'internal-integration--empty' || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n')) {
+  if (Object.keys(context.unmappedArgs).length || context.id === 'internal-integration--empty' || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
     return Story();
   } else {
     const hasRoot = i => i.match(/nve-theme="root"/g)?.length > 1;
