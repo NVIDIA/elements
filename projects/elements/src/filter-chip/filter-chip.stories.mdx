@@ -1,0 +1,66 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Filter Chip/Documentation" />
+
+# Filter Chip
+
+<element-metrics tag="nve-filter-chip"></element-metrics>
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/filter-chip/define.js';
+```
+
+```html
+<nve-filter-chip closable>
+  <select aria-label="dataset">
+    <option>workload</option>
+    <option selected>instance</option>
+  </select>
+  <select aria-label="condition">
+    <option>sort by</option>
+    <option selected>filter by</option>
+  </select>
+  <select aria-label="filter">
+    <option>utilization</option>
+    <option selected>status</option>
+  </select>
+</nve-filter-chip>
+```
+
+<Canvas>
+  <Story id="elements-filter-chip-examples--default" />
+</Canvas>
+
+<LinkedHeader>Text Input</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-filter-chip-examples--text-input" />
+</Canvas>
+
+<LinkedHeader>Multiple</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-filter-chip-examples--multiple" />
+</Canvas>
+
+<LinkedHeader>Date Range</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-filter-chip-examples--date-range" />
+</Canvas>
+
+<LinkedHeader>Custom</LinkedHeader>
+
+Custom filter chips can be created by using the `slot` attribute. A `nve-button` can be used to trigger custom UI.
+
+<Canvas>
+  <Story id="elements-filter-chip-examples--custom" inline={false} height={'450px'} />
+</Canvas>
+
+<element-status tag="nve-filter-chip"></element-status>
+
+<LinkedHeader>nve-filter-chip</LinkedHeader>
+<ArgsTable of="nve-filter-chip" />

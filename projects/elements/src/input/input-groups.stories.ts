@@ -31,34 +31,6 @@ export const InputGroup = () => {
 `
 };
 
-export const FilterGroup = {
-  render: () => html`
-  <div nve-layout="row align:vertical-center">
-    <nve-input-group type="filter">
-      <nve-select style="width: 85px">
-        <select>
-          <option value="1">workload</option>
-          <option value="2">instance</option>
-        </select>
-      </nve-select>
-      <nve-select style="width: 70px">
-        <select>
-          <option value="1">sort by</option>
-          <option value="2">filter by</option>
-        </select>
-      </nve-select>
-      <nve-select style="width: 85px">
-        <select>
-          <option value="1">utilization</option>
-          <option value="2">status</option>
-        </select>
-      </nve-select>
-      <nve-icon-button aria-label="remove filter" icon-name="cancel"></nve-icon-button>
-    </nve-input-group>
-  </div>
-  `
-};
-
 export const FilterGroupButtons = {
   render: () => html`
   <div nve-layout="row align:vertical-center">

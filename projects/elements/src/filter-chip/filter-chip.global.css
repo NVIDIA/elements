@@ -1,0 +1,10 @@
+nve-filter-chip input::placeholder,
+nve-filter-chip textarea::placeholder {
+  color: var(--nve-sys-text-placeholder-color) !important;
+}
+
+nve-filter-chip input::-webkit-search-cancel-button,
+nve-filter-chip input::-webkit-calendar-picker-indicator {
+  opacity: 0 !important;
+  display: none !important;
+}
