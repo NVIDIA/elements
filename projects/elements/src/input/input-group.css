@@ -3,6 +3,7 @@
   --color: var(--nve-sys-interaction-field-color);
   --border-radius: var(--nve-ref-border-radius-sm);
   width: fit-content;
+  contain: none;
 }
 
 [internal-host] {
