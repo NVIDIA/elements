@@ -153,3 +153,24 @@ slot:not([name]),
 slot[name*='option-'] {
   display: contents;
 }
+
+:host([container="flat"]) {
+  --border-radius: 0;
+  --box-shadow: none;
+  
+  & [input] {
+    background: inherit;
+    border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
+  }
+
+  & mlv-tag {
+    --background: var(--mlv-sys-interaction-field-background);
+  }
+}
+
+:host([container="flat"][mlv-control]:focus-within) {
+  & [input] {
+    outline: 0 !important;
+    border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-emphasis);
+  }
+}

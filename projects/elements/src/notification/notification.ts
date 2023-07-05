@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button';
-import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, SupportStatus, statusIcons, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, SupportStatus, statusIcons, TypePopoverController, useStyles, I18nController } from '@elements/elements/internal';
 import styles from './notification.css?inline';
 
 /**
@@ -62,7 +62,14 @@ export class Notification extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
+  /**
+   * Determins the visual status of the notification.
+   */
   @property({ type: String, reflect: true }) status: SupportStatus;
+
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   protected typePopoverController = new TypePopoverController<Notification>(this);
 
@@ -77,7 +84,7 @@ export class Notification extends LitElement {
   get #popoverContent() {
     return html`
     <mlv-icon .name=${statusIcons[this.status]} part="status-icon"></mlv-icon>
-    ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" interaction="flat" aria-label="close"></mlv-icon-button>` : ''}
+    ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" interaction="flat" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
     <slot></slot>`;
   }
 

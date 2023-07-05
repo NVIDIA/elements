@@ -3,6 +3,7 @@
   --color: var(--mlv-sys-interaction-field-color);
   --border-radius: var(--mlv-ref-border-radius-sm);
   width: fit-content;
+  contain: none;
 }
 
 [internal-host] {
