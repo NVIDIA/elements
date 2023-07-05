@@ -77,6 +77,31 @@ export const Prefix = {
   `
 };
 
+export const Flat = {
+  render: () => html`
+<div nve-layout="column gap:xl align:stretch">
+  <nve-select container="flat">
+    <label>label</label>
+    <select>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+
+  <nve-select container="flat">
+    <label>multiple</label>
+    <select multiple>
+      <option selected value="1">Option 1</option>
+      <option selected value="2">Option 2</option>
+      <option selected value="3">Option 3</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+</div>`
+};
+
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
