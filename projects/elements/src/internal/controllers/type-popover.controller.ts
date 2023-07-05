@@ -29,7 +29,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   get #anchor() {
     if (typeof this.host.anchor === 'string' && this.host.anchor?.length) {
-      return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === this.host.anchor) as HTMLElement;
+      return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === this.host.anchor);
     } else if (this.host.anchor && this.host.anchor !== document.body) {
       return this.host.anchor as HTMLElement;
     } else {
@@ -39,7 +39,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   get #trigger() {
     const id = typeof this.host.trigger === 'string' ? this.host.trigger : this.host.trigger?.id;
-    return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === id) as HTMLElement;
+    return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === id);
   }
 
   get #config(): PopoverConfig {

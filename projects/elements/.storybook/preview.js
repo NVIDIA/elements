@@ -220,6 +220,8 @@ export const parameters = {
           'Dot',
           'Dropdown',
           'File',
+          'Filter',
+          'Filter Chip',
           'Icon',
           'Icon Button',
           'Input',
