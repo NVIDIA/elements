@@ -35,6 +35,15 @@ js_run_binary(
         "dist",
         "coverage",
         ".playwright",
+    ],
+    tags = ["ui"],
+)
+
+js_run_binary(
+    name = "storybook-build",
+    patch_node_fs = False,
+    tool = ":wireit_bin",
+    out_dirs = [
         "storybook-build"
     ],
     tags = ["ui"],
