@@ -27,8 +27,7 @@ export class Color extends Control {
   connectedCallback() {
     super.connectedCallback();
     appendRootNodeStyle(this, globalStyles);
-
-    if (this.input.value === '#000000' || this.input.value === '') {
+    if (this.input.value === '#000000') {
       this.input.value = getComputedStyle(this).getPropertyValue('--background').trim();
     }
   }
