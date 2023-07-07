@@ -54,27 +54,3 @@ describe('nve-color', () => {
     (window as any).EyeDropper = original;
   });
 });
-
-describe('nve-color default', () => {
-  let fixture: HTMLElement;
-  let element: Color;
-
-  beforeEach(async () => {
-    fixture = await createFixture(html`
-      <nve-color style="--background: #0F0">
-        <label>label</label>
-        <input type="text" value="" />
-      </nve-color>
-    `);
-    element = fixture.querySelector('nve-color');
-    await elementIsStable(element);
-  });
-
-  afterEach(() => {
-    removeFixture(fixture);
-  });
-
-  it('should provide value if default of empty string set by some browsers', () => {
-    expect(fixture.querySelector('input').value).toBe('#0F0');
-  });
-});

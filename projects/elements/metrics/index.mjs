@@ -169,7 +169,7 @@ function getElements(coverage, projects) {
   return elementTags.filter(tag => !tag.includes('demo') && !tag.includes('i18n') && !tag.includes('ui-') && !tag.includes('my-')).reduce((elements, name) => {
     const manifest = elementsManifest.find(e => e.tagName === name);
     const superclassManifest = elementsManifest.find(e => e.name === manifest.superclass?.name) ?? { };
-    const cov = coverage.find(c => c.file.replace('elements/', '') === manifest.path);
+    const cov = coverage.find(c => c.file.replace('elements/src/', '') === manifest.path.replace('/src/', '').replace('.js', '.ts'));
     const aria = manifest.metadata.aria ? manifest.metadata.aria : superclassManifest.metadata?.aria;
     const metadata = {
       name,
