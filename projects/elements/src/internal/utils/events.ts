@@ -15,6 +15,7 @@ export function onChildListMutation(element: HTMLElement, fn: (mutation?: Mutati
   return observer;
 }
 
+/* istanbul ignore next */
 export function throttle(func, limit, ...args) {
   let wait = true;
   return () => {

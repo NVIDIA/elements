@@ -70,6 +70,19 @@ describe('nve-app-header: app branding', () => {
     await elementIsStable(appLogo);
     expect(appLogo.getAttribute('size')).toBe('lg');
     expect(appLogo.textContent.includes(testShortcode)).toBe(true);
+
+    appLogo.removeAttribute('size');
+    element.shadowRoot.querySelector('slot').dispatchEvent(new Event('slotchange'));
+    await appLogo.updateComplete;
+    expect(appLogo.size).toBe('sm');
+  });
+
+  it('should set logo to sm if no customization is provided', async () => {
+    const appLogo = element.querySelector<Logo>('nve-logo');
+    appLogo.removeAttribute('size');
+    element.shadowRoot.querySelector('slot').dispatchEvent(new Event('slotchange'));
+    await appLogo.updateComplete;
+    expect(appLogo.size).toBe('sm');
   });
   
   it('should carryover custom title', () => {
@@ -101,11 +114,24 @@ describe('nve-app-header: nav items and actions', () => {
     removeFixture(fixture);
   });
 
+  it('should provide a default interaction type to actions', () => {
+    const defaultGhostItem = element.querySelector<Button>('#default-ghost-btn');
+    expect(defaultGhostItem.interaction).toBe('ghost');
+  });
+
+  it('should set emphasize buttons to size sm', async () => {
+    element.requestUpdate();
+    await element.updateComplete;
+    const navActionOverride = element.querySelector<Button>('#override-action-btn');
+    expect(navActionOverride.interaction).toBe('emphasize');
+    expect(navActionOverride.size).toBe('sm');
+  });
+
   it('should not override set interaction types', () => {
     const navItemOverride = element.querySelector<Button>('#override-ghost-btn');
     const navActionOverride = element.querySelector<IconButton>('#override-action-btn');
-    expect(navItemOverride.getAttribute('interaction')).toBe('emphasize');
-    expect(navActionOverride.getAttribute('interaction')).toBe('emphasize');
+    expect(navItemOverride.interaction).toBe('emphasize');
+    expect(navActionOverride.interaction).toBe('emphasize');
     expect(navActionOverride.textContent).toBe(innerIconBtnText);
   });
 

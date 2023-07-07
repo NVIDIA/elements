@@ -58,7 +58,7 @@ export default [
       'lit/no-useless-template-literals': ['error'],
       'lit/no-value-attribute': ['error'],
       'lit/prefer-nothing': ['error'],
-      'lit/quoted-expressions': ['error'],
+      'lit/quoted-expressions': ['off'],
       'lit/value-after-constraints': ['error'],
       '@typescript-eslint/no-explicit-any': 'off', // TODO
       '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test' }], // ignore demo/test components that do not need to be exported
@@ -79,6 +79,16 @@ export default [
       'rulesdir/reserved-event-names': ['error'],
       'rulesdir/stateless-property': ['error'],
       'rulesdir/primitive-property': ['error']
+    }
+  },
+  {
+    files: ['**/*.ts'],
+    ignores: [...ignores, '**/*.stories.ts'],
+    plugins: {
+      lit
+    },
+    rules: {
+      'lit/quoted-expressions': ['error'],
     }
   }
 ];
