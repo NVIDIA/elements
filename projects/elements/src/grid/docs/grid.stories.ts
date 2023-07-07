@@ -258,7 +258,7 @@ export const ColumnWidth = {
 <div mlv-theme="root">
   <mlv-grid style="--scroll-height: 410px">
     <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column width=${i !== 4 ? '300px' : ''}>${column.label}</mlv-grid-column> `)}
+      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
     ${getItems().map(row => html`
       <mlv-grid-row>

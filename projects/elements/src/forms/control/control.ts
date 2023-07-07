@@ -127,7 +127,7 @@ export class Control extends LitElement {
 
   #updateStyleStates() {
     this.inlineControl = isInlineInputType(this.input);
-    this.input?.multiple ? this.setAttribute('multiple', '') : this.removeAttribute('multiple');
+    this.toggleAttribute('multiple', this.input?.multiple);
     this.input?.size ? this.setAttribute('size', '') : this.removeAttribute('size');
     this.styleStates = { 'no-messages': !this.#visibleMessages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
   }

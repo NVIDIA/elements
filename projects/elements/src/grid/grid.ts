@@ -83,7 +83,7 @@ export class Grid extends LitElement implements Container {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'grid';
-    this.id = this.id ? this.id : generateId();
+    this.id ||= generateId();
     appendRootNodeStyle(this, globalStyles);
   }
 }

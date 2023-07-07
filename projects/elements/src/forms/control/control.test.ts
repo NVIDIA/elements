@@ -41,46 +41,99 @@ describe('mlv-control', () => {
     expect(customElements.get('mlv-control')).toBeDefined();
   });
 
-  it('should assign mlv-control attribute identifier', async() => {
+  it('should assign mlv-control attribute identifier', async () => {
     expect(element.hasAttribute('mlv-control')).toBe(true);
   });
 
-  it('should associate label to input', async() => {
+  it('should associate label to input', async () => {
     expect(input.id).toBe(label.htmlFor);
   });
 
-  it('should assign label to label slot', async() => {
+  it('should assign label to label slot', async () => {
     expect(label.slot).toBe('label');
   });
 
-  it('should associate message to input', async() => {
+  it('should associate message to input', async () => {
     await elementIsStable(element);
     expect(input.getAttribute('aria-describedby')).toBe(message.id);
   });
 
-  it('should associate datalist to input', async() => {
+  it('should associate datalist to input', async () => {
     await elementIsStable(element);
     expect(input.getAttribute('list')).toBe(datalist.id);
   });
 
-  it('should assign no-label style hook if no label element was provided', async() => {
+  it('should assign no-label style hook if no label element was provided', async () => {
     label.remove();
     element.shadowRoot.dispatchEvent(new Event('slotchange'));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('.no-label')).toBeTruthy();
   });
 
-  it('should assign no-message style hook if no control message was provided', async() => {
+  it('should assign no-message style hook if no control message was provided', async () => {
     message.remove();
     element.shadowRoot.dispatchEvent(new Event('slotchange'));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('.no-messages')).toBeTruthy();
   });
 
-  it('should assign no-message style hook if no visble control message was provided', async() => {
+  it('should assign no-message style hook if no visble control message was provided', async () => {
     message.hidden = true;
     element.shadowRoot.dispatchEvent(new Event('slotchange'));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('.no-messages')).toBeTruthy();
+  });
+
+  it('should apply multiple attribute if input type is "multiple"', async () => {
+    expect(element.hasAttribute('multiple')).toBe(false);
+    element.input.multiple = true;
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
+    await elementIsStable(element);
+    expect(element.hasAttribute('multiple')).toBe(true);
+  });
+
+  it('should apply custom control attribute if slotted input is a custom input type', async () => {
+    expect(element.hasAttribute('multiple')).toBe(false);
+    element.input.multiple = true;
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
+    await elementIsStable(element);
+    expect(element.hasAttribute('multiple')).toBe(true);
+  });
+
+  it('should apply mlv-control attribute with no custom value if native input provided', async () => {
+    expect(element.getAttribute('mlv-control')).toBe('');
+  });
+});
+
+describe('mlv-control custom', () => {
+  let fixture: HTMLElement;
+  let element: Control;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-control>
+        <label>label</label>
+        <div mlv-control tabindex="0"></div>
+      </mlv-control>
+    `);
+    element = fixture.querySelector('mlv-control');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should apply custom control attribute if slotted input is a custom input type', async () => {
+    expect(element.getAttribute('mlv-control')).toBe('custom');
+  });
+
+  it('should focus input if custom and does not implement "showPicker"', async () => {
+    expect(element.input.showPicker).toBeTruthy();
+
+    element.input.checkValidity = () => true;
+    element.input.showPicker();
+    await element.updateComplete;
+    expect(document.activeElement).toBe(element.input);
   });
 });

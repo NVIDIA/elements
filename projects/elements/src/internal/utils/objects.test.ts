@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deepMerge } from './objects.js';
+import { deepMerge } from '@elements/elements/internal';
 
 describe('deepMerge', () => {
   const obj1 = {

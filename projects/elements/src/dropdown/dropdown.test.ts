@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
 import { Dropdown } from '@elements/elements/dropdown';
 import '@elements/elements/dropdown/define.js';
 
@@ -53,5 +53,14 @@ describe('mlv-dropdown', () => {
     element.closable = true;
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+  });
+
+  it('should emit close event when close button clicked', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'close');
+    element.shadowRoot.querySelector('mlv-icon-button').click();
+    expect((await event)).toBeDefined();
   });
 });

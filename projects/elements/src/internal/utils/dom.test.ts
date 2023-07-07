@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth } from '@elements/elements/internal';
 
 @customElement('test-element')
 class TestComponent extends LitElement {
@@ -372,11 +372,11 @@ describe('removeEmptyTextNode', () => {
   });
 });
 
-// describe('scrollBarWidth(): ', () => {
-//   it('should compute the current scroll bar width', () => {
-//     expect(scrollBarWidth()).toBe(15);
-//   });
-// });
+describe('scrollBarWidth(): ', () => {
+  it('should compute the current scroll bar width', () => {
+    expect(typeof scrollBarWidth()).toBe('number');
+  });
+});
 
 // describe('hasScrollBar(): ', () => {
 //   it('should compute the current scroll bar width', () => {

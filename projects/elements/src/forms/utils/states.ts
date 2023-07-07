@@ -1,8 +1,7 @@
 import { getAttributeChanges, getAttributeListChanges, getElementUpdate } from '@elements/elements/internal';
-import { ControlGroup } from '../control-group/control-group.js';
-import { ControlMessage } from '../control-message/control-message.js';
-import { Control } from '../control/control.js';
-import { hideAllControlMessages, hideAllValidationMessages, hideInactiveValidationMessages, showActiveValidationMessages, showNonValidationMessages } from './messages.js';
+import type { ControlGroup } from '../control-group/control-group.js';
+import type { ControlMessage } from '../control-message/control-message.js';
+import type { Control } from '../control/control.js';
 
 export const inputQuery = 'input, select, selectmenu, textarea, [mlv-control]';
 
@@ -143,5 +142,27 @@ export function updateControlStatusState(control: Control | ControlGroup, messag
 
   if (message?.status?.length && !message?.hidden) {
     control._internals.states.add(`--${message.status}`);
+  }
+}
+
+export function showNonValidationMessages(messages: ControlMessage[]) {
+  messages.filter(m => !m.hasAttribute('error')).forEach(m => m.removeAttribute('hidden'));
+}
+
+export function hideAllValidationMessages(messages: ControlMessage[]) {
+  messages.filter(m => m.hasAttribute('error')).forEach(m => m.setAttribute('hidden', ''));
+}
+
+export function showActiveValidationMessages(control: Control, messages: ControlMessage[]) {
+  messages.find(m => control.input.validity[m.error])?.removeAttribute('hidden');
+}
+
+export function hideAllControlMessages(messages: ControlMessage[]) {
+  messages.forEach(m => m.setAttribute('hidden', ''));
+}
+
+export function hideInactiveValidationMessages(control: Control, messages: ControlMessage[]) {
+  if (messages.find(m => m.error) && control.input.validity.valid) {
+    messages.filter(m => m.error && !control.input.validity[m.error]).forEach(m => m.setAttribute('hidden', ''));
   }
 }
