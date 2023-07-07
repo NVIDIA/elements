@@ -219,7 +219,7 @@
     "formdata-polyfill": "^4.0.10"
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "0.8.0",
+    "@custom-elements-manifest/analyzer": "0.8.3",
     "@lit-labs/virtualizer": "2.0.3",
     "@rollup/plugin-replace": "5.0.2",
     "@rollup/plugin-terser": "0.1.0",

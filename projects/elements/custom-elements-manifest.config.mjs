@@ -1,4 +1,7 @@
 import pkg from './package.json' assert { type: 'json' };
+import path from 'path';
+
+const resolve = (rel) => path.resolve(process.cwd(), rel);
 
 function metadataPlugin() {
   return {
@@ -57,6 +60,38 @@ function metadataPlugin() {
           break;
       }
     }
+  };
+}
+
+function basePathPlugin() {
+  return {
+    name: 'base',
+    packageLinkPhase({ customElementsManifest }) {
+      const base = resolve(process.cwd(), 'src');
+      customElementsManifest.modules = JSON.parse(
+        JSON.stringify(customElementsManifest.modules).replaceAll(`"/${base}`, '"').replaceAll(`"${base}`, '"')
+      );
+    },
+  };
+}
+
+export function extensionPlugin() {
+  return {
+    name: 'extensions',
+    packageLinkPhase({ customElementsManifest }) {
+      customElementsManifest.modules = JSON.parse(
+        JSON.stringify(customElementsManifest.modules).replace(/\.ts"/g, '.js"')
+      );
+    },
+  };
+}
+
+export function orderPlugin() {
+  return {
+    name: 'order',
+    packageLinkPhase({ customElementsManifest }) {
+      customElementsManifest.modules.sort((a, b) => (a.path < b.path ? -1 : 1));
+    },
   };
 }
 
@@ -155,10 +190,14 @@ function rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment) {
 const runtimeEnvironment = {};
 
 export default {
+  globs: [resolve('./src')],
+  exclude: [resolve('src/**/*.css'), resolve('src/**/*.stories.mdx'), resolve('src/**/*.stories.ts')],
+  litelement: true,
+  plugins: [basePathPlugin(), extensionPlugin(), orderPlugin(), metadataPlugin(), rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment)],
   overrideModuleCreation: ({ ts, globs }) => {
-    const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.json');
+    const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.lib.json');
     if (!configFile) {
-      throw Error('tsconfig.json not found');
+      throw Error('tsconfig.lib.json not found');
     }
     const { config } = ts.readConfigFile(configFile, ts.sys.readFile);
     const { options } = ts.parseJsonConfigFileContent(config, ts.sys, process.cwd());
@@ -166,5 +205,4 @@ export default {
     runtimeEnvironment.typeChecker = program.getTypeChecker();
     return program.getSourceFiles().filter((sf) => globs.find((glob) => sf.fileName.includes(glob)));
   },
-  plugins: [metadataPlugin(), rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment)]
 };

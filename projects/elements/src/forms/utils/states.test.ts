@@ -1,9 +1,9 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
-import { ControlMessage } from '../control-message/control-message.js';
-import { Control } from '../control/control.js';
-import { updateControlStatusState, setupControlStates, setupControlValidationStates } from './states.js';
+import type { ControlMessage } from '../control-message/control-message.js';
+import type { Control } from '../control/control.js';
+import { updateControlStatusState, setupControlStates, setupControlValidationStates, showNonValidationMessages, hideAllValidationMessages, showActiveValidationMessages, hideAllControlMessages, hideInactiveValidationMessages } from './states.js';
 import '@elements/elements/forms/define.js';
 
 describe('updateControlStatusState', () => {
@@ -122,6 +122,16 @@ describe('setupControlValidationStates', () => {
     expect((control._internals.states as any).has('--invalid')).toBe(true);
     expect((control._internals.states as any).has('--valid')).toBe(false);
     expect(control.status).toBe('error');
+    expect(message.hidden).toBe(false);
+    expect(message.hasAttribute('hidden')).toBe(false);
+
+    control.input.value = 'test';
+    control.input.dispatchEvent(new Event('blur'));
+    await elementIsStable(control);
+
+    expect((control._internals.states as any).has('--invalid')).toBe(false);
+    expect((control._internals.states as any).has('--valid')).toBe(true);
+    expect(control.status).toBe(null);
   });
 
   it('should reset validation state on input', async () => {
@@ -225,6 +235,8 @@ describe('setupControlStates', () => {
     await elementIsStable(control);
     expect((control.matches(':--touched'))).toBe(true);
     expect((control._internals.states as any).has('--touched')).toBe(true);
+    expect((control.matches(':--focus'))).toBe(false);
+    expect((control._internals.states as any).has('--focus')).toBe(false);
   });
 
   it('should update dirty state', async () => {
@@ -236,5 +248,107 @@ describe('setupControlStates', () => {
     await elementIsStable(control);
     expect((control.matches(':--dirty'))).toBe(true);
     expect((control._internals.states as any).has('--dirty')).toBe(true);
+  });
+});
+
+describe('showNonValidationMessages', () => {
+  it('should show all messages that do not have a validation requirement', async () => {
+    const messages = [
+      document.createElement('nve-control-message'),
+      document.createElement('nve-control-message')
+    ];
+
+    messages[0].setAttribute('error', 'valueMissing');
+    messages[0].hidden = true;
+    messages[1].hidden = true;
+
+    showNonValidationMessages(messages);
+
+    expect(messages[0].hidden).toBe(true);
+    expect(messages[1].hidden).toBe(false);
+  });
+});
+
+describe('hideAllValidationMessages', () => {
+  it('should hide all messages with a validation requirement', async () => {
+    const messages = [
+      document.createElement('nve-control-message'),
+      document.createElement('nve-control-message')
+    ];
+
+    messages[0].setAttribute('error', 'valueMissing');
+
+    hideAllValidationMessages(messages);
+
+    expect(messages[0].hidden).toBe(true);
+    expect(messages[1].hidden).toBe(false);
+    expect(messages[0].hasAttribute('hidden')).toBe(true);
+    expect(messages[1].hasAttribute('hidden')).toBe(false);
+  });
+});
+
+describe('showActiveValidationMessages', () => {
+  it('should only messages wich have active validation rules', async () => {
+    const controlMock = { input: { validity: { valueMissing: true } } } as Control;
+    const messages = [
+      document.createElement('nve-control-message'),
+      document.createElement('nve-control-message')
+    ];
+
+    messages[0].error = 'valueMissing';
+    messages[0].hidden = true;
+    messages[1].hidden = true;
+
+    showActiveValidationMessages(controlMock, messages);
+
+    expect(messages[0].hidden).toBe(false);
+    expect(messages[1].hidden).toBe(true);
+    expect(messages[0].hasAttribute('hidden')).toBe(false);
+    expect(messages[1].hasAttribute('hidden')).toBe(true);
+  });
+});
+
+describe('hideAllControlMessages', () => {
+  it('should hide all control messages', async () => {
+    const messages = [
+      document.createElement('nve-control-message'),
+      document.createElement('nve-control-message')
+    ];
+
+    document.body.append(...messages)
+
+    expect(messages[0].hidden).toBe(false);
+    expect(messages[1].hidden).toBe(false);
+    expect(messages[0].hasAttribute('hidden')).toBe(false);
+    expect(messages[1].hasAttribute('hidden')).toBe(false);
+
+    hideAllControlMessages(messages);
+
+    expect(messages[0].hidden).toBe(true);
+    expect(messages[1].hidden).toBe(true);
+    expect(messages[0].hasAttribute('hidden')).toBe(true);
+    expect(messages[1].hasAttribute('hidden')).toBe(true);
+
+    messages[0].remove();
+    messages[1].remove();
+  });
+});
+
+describe('hideInactiveValidationMessages', () => {
+  it('should hide all validation messages if control is valid', async () => {
+    const controlMock = { input: { validity: { valid: true } } } as Control;
+    const messages = [
+      document.createElement('nve-control-message'),
+      document.createElement('nve-control-message')
+    ];
+
+    messages[0].error = 'valueMissing';
+
+    hideInactiveValidationMessages(controlMock, messages);
+
+    expect(messages[0].hidden).toBe(true);
+    expect(messages[1].hidden).toBe(false);
+    expect(messages[0].hasAttribute('hidden')).toBe(true);
+    expect(messages[1].hasAttribute('hidden')).toBe(false);
   });
 });

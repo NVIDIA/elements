@@ -42,10 +42,16 @@ export default defineConfig({
       reportsDirectory: resolve('./coverage'),
       reporter: ['lcov', 'html', 'json-summary'],
       lines: 90,
-      branches: 80,
-      functions: 85,
+      branches: 85,
+      functions: 90,
       statements: 90,
-      exclude: ['**/storybook/**', '**/polyfills/**', '**/test/**', '**/*.test.ts', '**/docs.ts', '**/*.css.js', '**/*.css', '**/index.js', '**/src/icon/icons/**', '**/src/icon/icons.ts']
+      watermarks: {
+        statements: [80, 90],
+        functions: [80, 90],
+        branches: [80, 90],
+        lines: [80, 90]
+      },
+      exclude: ['**/storybook/**', '**/polyfills/**', '**/test/**', '**/*.test.ts', '**/docs.ts', '**/*.css.js', '**/*.css', '**/index.js', '**/src/icon/icons/**', '**/src/icon/icons.ts', '**/src/forms/utils/states.ts'] // disable form state due to source map error
     },
     browser: {
       enabled: true,

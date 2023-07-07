@@ -50,7 +50,7 @@ export class GridColumn extends LitElement {
     return html`
       <div internal-host focusable="active">
         <slot></slot>
-        <slot name="actions" @slotchange=${() => this.#updateActions()}></slot>
+        <slot name="actions" @slotchange=${this.#updateActions}></slot>
       </div>
     `;
   }
