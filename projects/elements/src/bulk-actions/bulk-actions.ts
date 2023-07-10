@@ -39,7 +39,7 @@ export class BulkActions extends LitElement {
   render() {
     return html`
       <div internal-host>
-        ${this.closable ? html`<nve-icon-button @click=${() => this.#typeClosableController.close()} .ariaLabel=${this.i18n.close} icon-name="cancel" interaction="ghost"></nve-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button @click=${() => this.#typeClosableController.close()} .ariaLabel=${this.i18n.close} icon-name="cancel" interaction="flat"></nve-icon-button>` : ''}
         <slot></slot>
       </div>
     `;

@@ -18,7 +18,7 @@ describe('nve-panel', () => {
         <nve-panel-footer></nve-panel-footer>
         <p>content</p>
         <nve-panel-header>
-          <nve-icon-button interaction="ghost" slot="action-icon" icon-name="additional-actions"></nve-icon-button>
+          <nve-icon-button interaction="flat" slot="action-icon" icon-name="additional-actions"></nve-icon-button>
           <h3 slot="subtitle">subtitle</h3>
           <h2 slot="title">title</h2>
         </nve-panel-header>

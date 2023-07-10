@@ -24,12 +24,14 @@
   --padding: 0;
 }
 
-:host([interaction*='ghost']) {
+:host([interaction*='ghost']), /** @deprecated ghost */
+:host([interaction*='flat']) {
   --color: var(--nve-sys-support-emphasis-color);
   --padding: 0;
 }
 
-:host([interaction*='ghost']:--pressed) {
+:host([interaction*='ghost']:--pressed), /** @deprecated ghost */
+:host([interaction*='flat']:--pressed) {
   --color: var(--nve-sys-text-emphasis-color);
 }
 

@@ -19,6 +19,6 @@ export class Datetime extends Control {
   };
 
   protected get suffixContent() {
-    return html`<nve-icon-button icon-name="date" interaction="ghost" @click=${this.showPicker}></nve-icon-button>`;
+    return html`<nve-icon-button icon-name="date" interaction="flat" @click=${this.showPicker}></nve-icon-button>`;
   }
 }
