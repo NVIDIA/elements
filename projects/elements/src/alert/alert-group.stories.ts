@@ -93,27 +93,27 @@ export const Actions = {
   <div nve-layout="column gap:md">
     <nve-alert-group>
       <nve-alert>
-        default <nve-button slot="actions" interaction="ghost">action</nve-button>
+        default <nve-button slot="actions" interaction="flat">action</nve-button>
       </nve-alert>
     </nve-alert-group>
     <nve-alert-group status="accent">
       <nve-alert>
-        accent <nve-button slot="actions" interaction="ghost">action</nve-button>
+        accent <nve-button slot="actions" interaction="flat">action</nve-button>
       </nve-alert>
     </nve-alert-group>
     <nve-alert-group status="warning">
       <nve-alert>
-        warning <nve-button slot="actions" interaction="ghost">action</nve-button>
+        warning <nve-button slot="actions" interaction="flat">action</nve-button>
       </nve-alert>
     </nve-alert-group>
     <nve-alert-group status="success">
       <nve-alert>
-        success <nve-button slot="actions" interaction="ghost">action</nve-button>
+        success <nve-button slot="actions" interaction="flat">action</nve-button>
       </nve-alert>
     </nve-alert-group>
     <nve-alert-group status="danger">
       <nve-alert>
-        danger <nve-button slot="actions" interaction="ghost">action</nve-button>
+        danger <nve-button slot="actions" interaction="flat">action</nve-button>
       </nve-alert>
     </nve-alert-group>
   </div>

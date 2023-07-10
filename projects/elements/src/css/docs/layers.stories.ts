@@ -55,7 +55,7 @@ export const layersDemo = {
           <nve-tooltip anchor="tooltip-btn" position="top">tooltip</nve-tooltip>
           <nve-search rounded>
             <label>dropdown content</label>
-            <nve-icon-button id="tooltip-btn" icon-name="information" interaction="ghost" aria-label="more details" slot="label"></nve-icon-button>
+            <nve-icon-button id="tooltip-btn" icon-name="information" interaction="flat" aria-label="more details" slot="label"></nve-icon-button>
             <input type="search" placeholder="search" />
           </nve-search>
         </nve-dropdown>
@@ -96,7 +96,7 @@ export const layersDemo = {
           <nve-tooltip anchor="tooltip-btn" position="top">tooltip</nve-tooltip>
           <nve-search rounded>
             <label>dropdown content</label>
-            <nve-icon-button id="tooltip-btn" icon-name="information" interaction="ghost" aria-label="more details" slot="label"></nve-icon-button>
+            <nve-icon-button id="tooltip-btn" icon-name="information" interaction="flat" aria-label="more details" slot="label"></nve-icon-button>
             <input type="search" placeholder="search" />
           </nve-search>
         </nve-dropdown>
