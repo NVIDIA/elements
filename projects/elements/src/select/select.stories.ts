@@ -73,7 +73,7 @@ export const CustomOptionRender = {
 export const Prefix = {
   render: () => html`
   <nve-select>
-    <nve-button interaction="ghost" readonly>location</nve-button>
+    <nve-button interaction="flat" readonly>location</nve-button>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>

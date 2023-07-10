@@ -73,7 +73,7 @@ export class Breadcrumb extends LitElement {
       this.#resetItems();
       const items = this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements();
       items.filter(i => new Set(['MLV-BUTTON', 'MLV-ICON-BUTTON', 'SPAN', 'A']).has(i.tagName)).forEach(i => i.slot = generateId());
-      items.filter(i => new Set(['MLV-BUTTON', 'MLV-ICON-BUTTON']).has(i.tagName)).forEach((i: Button) => i.setAttribute('interaction', 'ghost'));
+      items.filter(i => new Set(['MLV-BUTTON', 'MLV-ICON-BUTTON']).has(i.tagName)).forEach((i: Button) => i.setAttribute('interaction', 'flat'));
       this.breadcrumbItems = items.length ? items : this.breadcrumbItems;
     }
   }

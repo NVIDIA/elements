@@ -150,7 +150,7 @@ describe('nve-grid-column actions', () => {
   it('should provide a default interaction and icon name to action buttons', async () => {
     columns[0].shadowRoot.querySelector('[name=actions]').dispatchEvent(new Event('slotchange'));
     await elementIsStable(actions[0]);
-    expect(actions[0].interaction).toBe('ghost');
+    expect(actions[0].interaction).toBe('flat');
     expect(actions[0].iconName).toBe('additional-actions');
   });
 });

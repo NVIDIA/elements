@@ -69,7 +69,7 @@ export const Default = {
 
               ${when(
                 args.showActionIcon,
-                () => html`<nve-icon-button interaction="ghost" slot="action-icon" icon-name="additional-actions" @click=${() => customActionHandler()}></nve-icon-button>`
+                () => html`<nve-icon-button interaction="flat" slot="action-icon" icon-name="additional-actions" @click=${() => customActionHandler()}></nve-icon-button>`
               )}
             </nve-panel-header>
             `
@@ -116,7 +116,7 @@ export const Default = {
             args.showFooter,
             () => html`
             <nve-panel-footer>
-              <nve-button interaction="ghost-destructive">Destructive</nve-button>
+              <nve-button interaction="flat-destructive">Destructive</nve-button>
               <nve-button>Default</nve-button>
             </nve-panel-footer>
             `

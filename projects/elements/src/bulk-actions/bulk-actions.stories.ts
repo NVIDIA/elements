@@ -13,13 +13,13 @@ export const Default = {
 <div nve-theme="root" nve-layout="column gap:md">
   <nve-bulk-actions closable status="accent">
     123 selected
-    <nve-button interaction="ghost-destructive">delete</nve-button>
-    <nve-icon-button interaction="ghost" icon-name="additional-actions"></nve-icon-button>
+    <nve-button interaction="flat-destructive">delete</nve-button>
+    <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
   </nve-bulk-actions>
   <nve-bulk-actions closable>
     123 selected
-    <nve-button interaction="ghost-destructive">delete</nve-button>
-    <nve-icon-button interaction="ghost" icon-name="additional-actions"></nve-icon-button>
+    <nve-button interaction="flat-destructive">delete</nve-button>
+    <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
   </nve-bulk-actions>
 </div>
   `
@@ -30,8 +30,8 @@ export const LightTheme = {
 <div nve-theme="root light" nve-layout="row gap:md pad:md">
   <nve-bulk-actions>
     123 selected
-    <nve-button interaction="ghost-destructive">delete</nve-button>
-    <nve-icon-button interaction="ghost" icon-name="additional-actions"></nve-icon-button>
+    <nve-button interaction="flat-destructive">delete</nve-button>
+    <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
   </nve-bulk-actions>
 </div>
   `
@@ -42,8 +42,8 @@ export const DarkTheme = {
 <div nve-theme="root dark" nve-layout="row gap:md pad:md">
   <nve-bulk-actions>
     123 selected
-    <nve-button interaction="ghost-destructive">delete</nve-button>
-    <nve-icon-button interaction="ghost" icon-name="additional-actions"></nve-icon-button>
+    <nve-button interaction="flat-destructive">delete</nve-button>
+    <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
   </nve-bulk-actions>
 </div>
   `

@@ -24,7 +24,7 @@ export const InputGroup = () => {
   </nve-select>
   <nve-input>
     <input placeholder="example" type="url" aria-label="host" />
-    <nve-button interaction="ghost" readonly="">.com</nve-button>
+    <nve-button interaction="flat" readonly="">.com</nve-button>
   </nve-input>
   <nve-control-message>host: 123456</nve-control-message>
 </nve-input-group>
@@ -95,11 +95,11 @@ export const FilterGroupRange = {
       </select>
     </nve-select>
     <nve-date style="width:220px">
-      <nve-button interaction="ghost" readonly="">start</nve-button>
+      <nve-button interaction="flat" readonly="">start</nve-button>
       <input type="date" value="2022-05-11" aria-label="start date" />
     </nve-date>
     <nve-date style="width:220px">
-      <nve-button interaction="ghost" readonly="">end</nve-button>
+      <nve-button interaction="flat" readonly="">end</nve-button>
       <input type="date" value="2022-12-07" aria-label="end date" />
     </nve-date>
     <nve-icon-button aria-label="remove filter" icon-name="cancel"></nve-icon-button>

@@ -57,8 +57,8 @@ export const WithActions = {
         <nve-accordion-header>
           <div slot="title">Heading</div>
 
-          <nve-icon-button interaction="ghost" icon-name="plus" size="sm" slot="actions"></nve-icon-button>
-          <nve-icon-button interaction="ghost" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
+          <nve-icon-button interaction="flat" icon-name="plus" size="sm" slot="actions"></nve-icon-button>
+          <nve-icon-button interaction="flat" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
         </nve-accordion-header>
 
         <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>

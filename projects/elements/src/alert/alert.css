@@ -39,7 +39,8 @@ slot[name] {
   font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-::slotted(nve-button[interaction='ghost']) {
+::slotted(nve-button[interaction='ghost']), /** @deprecated ghost */
+::slotted(nve-button[interaction='flat']) {
   --color: inherit;
 }
 
@@ -69,7 +70,7 @@ nve-icon-button:not([icon-name='cancel']) {
   margin-left: auto;
 }
 
-nve-icon-button[interaction='ghost'] {
+nve-icon-button[interaction='flat'] {
   --color: var(--_icon-cancel-color);
 }
 
