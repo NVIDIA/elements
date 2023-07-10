@@ -13,9 +13,9 @@ export const Actions = () => {
   return html`
 <mlv-input>
   <label>label</label>
-  <mlv-icon-button icon-name="search" interaction="ghost" readonly></mlv-icon-button>
+  <mlv-icon-button icon-name="search" interaction="flat" readonly></mlv-icon-button>
   <input type="text" />
-  <mlv-icon-button icon-name="cancel" interaction="ghost" onClick="alert('click')" aria-label="clear"></mlv-icon-button>
+  <mlv-icon-button icon-name="cancel" interaction="flat" aria-label="clear"></mlv-icon-button>
   <mlv-control-message>message</mlv-control-message>
 </mlv-input>`
 };
@@ -24,7 +24,7 @@ export const LabelAction = () => {
   return html`
 <mlv-input>
   <label>label</label>
-  <mlv-icon-button icon-name="information" interaction="ghost" aria-label="more details" slot="label" onClick="alert('more info')"></mlv-icon-button>
+  <mlv-icon-button icon-name="information" interaction="flat" aria-label="more details" slot="label"></mlv-icon-button>
   <input type="text" />
   <mlv-control-message>message</mlv-control-message>
 </mlv-input>`
@@ -34,9 +34,9 @@ export const PrefixSuffix = () => {
   return html`
 <mlv-input>
   <label>label</label>
-  <mlv-button interaction="ghost" readonly>https://</mlv-button>
+  <mlv-button interaction="flat" readonly>https://</mlv-button>
   <input type="text" />
-  <mlv-button interaction="ghost" readonly>.com</mlv-button>
+  <mlv-button interaction="flat" readonly>.com</mlv-button>
   <mlv-control-message>message</mlv-control-message>
 </mlv-input>`
 }

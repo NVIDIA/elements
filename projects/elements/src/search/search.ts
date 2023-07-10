@@ -23,6 +23,6 @@ export class Search extends Control implements Container {
   };
 
   protected get prefixContent() {
-    return html`<mlv-icon-button icon-name="search" interaction="ghost" readonly></mlv-icon-button>`;
+    return html`<mlv-icon-button icon-name="search" interaction="flat" readonly></mlv-icon-button>`;
   }
 }

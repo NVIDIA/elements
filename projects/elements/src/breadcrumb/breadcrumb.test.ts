@@ -40,13 +40,13 @@ describe('mlv-breadcrumb', () => {
     expect(element.querySelector('span').slot.includes('_')).toBe(true);
   });
 
-  it('should decorate clickable elements with ghost interaction', async () => {
+  it('should decorate clickable elements with flat interaction', async () => {
     const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
 
-    expect(element.querySelector('mlv-icon-button').interaction.includes('ghost')).toBe(true);
-    expect(element.querySelector('mlv-button').interaction.includes('ghost')).toBe(true);
+    expect(element.querySelector('mlv-icon-button').interaction.includes('flat')).toBe(true);
+    expect(element.querySelector('mlv-button').interaction.includes('flat')).toBe(true);
   });
 
   it('should remove wrapper slot if a child is removed', async () => {

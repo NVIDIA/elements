@@ -2,7 +2,10 @@ import type { IconName } from "@elements/elements/icon";
 
 export type Interaction = 'emphasize' | 'destructive';
 
+/** @deprecated */
 export type GhostInteraction = 'ghost' | `${'ghost'}-${Interaction}`;
+
+export type FlatInteraction = 'flat' | `${'flat'}-${Interaction}`;
 
 export type Inverse = 'inverse';
 

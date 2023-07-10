@@ -24,7 +24,7 @@ export const InputGroup = () => {
   </mlv-select>
   <mlv-input>
     <input placeholder="example" type="url" aria-label="host" />
-    <mlv-button interaction="ghost" readonly="">.com</mlv-button>
+    <mlv-button interaction="flat" readonly="">.com</mlv-button>
   </mlv-input>
   <mlv-control-message>host: 123456</mlv-control-message>
 </mlv-input-group>
@@ -95,11 +95,11 @@ export const FilterGroupRange = {
       </select>
     </mlv-select>
     <mlv-date style="width:220px">
-      <mlv-button interaction="ghost" readonly="">start</mlv-button>
+      <mlv-button interaction="flat" readonly="">start</mlv-button>
       <input type="date" value="2022-05-11" aria-label="start date" />
     </mlv-date>
     <mlv-date style="width:220px">
-      <mlv-button interaction="ghost" readonly="">end</mlv-button>
+      <mlv-button interaction="flat" readonly="">end</mlv-button>
       <input type="date" value="2022-12-07" aria-label="end date" />
     </mlv-date>
     <mlv-icon-button aria-label="remove filter" icon-name="cancel"></mlv-icon-button>

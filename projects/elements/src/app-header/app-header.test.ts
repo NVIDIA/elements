@@ -99,8 +99,8 @@ describe('mlv-app-header: nav items and actions', () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <mlv-app-header>
-        <mlv-button id="default-ghost-btn" slot="nav-items">A</mlv-button>
-        <mlv-button id="override-ghost-btn" interaction="emphasize" slot="nav-items">B</mlv-button>
+        <mlv-button id="default-flat-btn" slot="nav-items">A</mlv-button>
+        <mlv-button id="override-flat-btn" interaction="emphasize" slot="nav-items">B</mlv-button>
         <mlv-icon-button id="default-icon-btn" icon-name="settings" slot="nav-items"></mlv-icon-button>
         <mlv-icon-button id="default-action-btn" icon-name="user" slot="nav-actions"></mlv-icon-button>
         <mlv-icon-button id="override-action-btn" interaction="emphasize" slot="nav-actions">${innerIconBtnText}</mlv-icon-button>
@@ -115,8 +115,8 @@ describe('mlv-app-header: nav items and actions', () => {
   });
 
   it('should provide a default interaction type to actions', () => {
-    const defaultGhostItem = element.querySelector<Button>('#default-ghost-btn');
-    expect(defaultGhostItem.interaction).toBe('ghost');
+    const defaultFlatItem = element.querySelector<Button>('#default-flat-btn');
+    expect(defaultFlatItem.interaction).toBe('flat');
   });
 
   it('should set emphasize buttons to size sm', async () => {
@@ -128,7 +128,7 @@ describe('mlv-app-header: nav items and actions', () => {
   });
 
   it('should not override set interaction types', () => {
-    const navItemOverride = element.querySelector<Button>('#override-ghost-btn');
+    const navItemOverride = element.querySelector<Button>('#override-flat-btn');
     const navActionOverride = element.querySelector<IconButton>('#override-action-btn');
     expect(navItemOverride.interaction).toBe('emphasize');
     expect(navActionOverride.interaction).toBe('emphasize');

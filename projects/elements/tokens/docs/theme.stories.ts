@@ -94,7 +94,7 @@ function getThemeContent() {
         <mlv-icon-button icon-name="user"></mlv-icon-button>
         <mlv-icon-button icon-name="user" interaction="emphasize"></mlv-icon-button>
         <mlv-icon-button icon-name="user" interaction="destructive"></mlv-icon-button>
-        <mlv-icon-button icon-name="user" interaction="ghost"></mlv-icon-button>
+        <mlv-icon-button icon-name="user" interaction="flat"></mlv-icon-button>
         <mlv-icon-button icon-name="user" disabled></mlv-icon-button>
       </div>
       <div mlv-layout="row gap:sm">

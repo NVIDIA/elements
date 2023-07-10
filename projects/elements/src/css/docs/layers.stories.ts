@@ -55,7 +55,7 @@ export const layersDemo = {
           <mlv-tooltip anchor="tooltip-btn" position="top">tooltip</mlv-tooltip>
           <mlv-search rounded>
             <label>dropdown content</label>
-            <mlv-icon-button id="tooltip-btn" icon-name="information" interaction="ghost" aria-label="more details" slot="label"></mlv-icon-button>
+            <mlv-icon-button id="tooltip-btn" icon-name="information" interaction="flat" aria-label="more details" slot="label"></mlv-icon-button>
             <input type="search" placeholder="search" />
           </mlv-search>
         </mlv-dropdown>
@@ -96,7 +96,7 @@ export const layersDemo = {
           <mlv-tooltip anchor="tooltip-btn" position="top">tooltip</mlv-tooltip>
           <mlv-search rounded>
             <label>dropdown content</label>
-            <mlv-icon-button id="tooltip-btn" icon-name="information" interaction="ghost" aria-label="more details" slot="label"></mlv-icon-button>
+            <mlv-icon-button id="tooltip-btn" icon-name="information" interaction="flat" aria-label="more details" slot="label"></mlv-icon-button>
             <input type="search" placeholder="search" />
           </mlv-search>
         </mlv-dropdown>

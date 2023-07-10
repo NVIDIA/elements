@@ -73,7 +73,7 @@ export const CustomOptionRender = {
 export const Prefix = {
   render: () => html`
   <mlv-select>
-    <mlv-button interaction="ghost" readonly>location</mlv-button>
+    <mlv-button interaction="flat" readonly>location</mlv-button>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>

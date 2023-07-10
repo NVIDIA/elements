@@ -47,16 +47,16 @@ export const Actions = {
   render: () => html`
 <div mlv-layout="row align:center" style="height: 200px">
   <mlv-toast position="top">
-    default <mlv-button interaction="ghost">action</mlv-button>
+    default <mlv-button interaction="flat">action</mlv-button>
   </mlv-toast>
   <mlv-toast status="success" position="right">
-    success <mlv-button interaction="ghost">action</mlv-button>
+    success <mlv-button interaction="flat">action</mlv-button>
   </mlv-toast>
   <mlv-toast status="warning" position="bottom">
-    warning <mlv-button interaction="ghost">action</mlv-button>
+    warning <mlv-button interaction="flat">action</mlv-button>
   </mlv-toast>
   <mlv-toast status="danger" position="left">
-    danger <mlv-button interaction="ghost">action</mlv-button>
+    danger <mlv-button interaction="flat">action</mlv-button>
   </mlv-toast>
 </div>
   `

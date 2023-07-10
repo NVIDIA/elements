@@ -13,7 +13,7 @@ export default {
   argTypes: {
     interaction: {
       control: 'inline-radio',
-      options: ['emphasize', 'destructive', 'ghost']
+      options: ['emphasize', 'destructive', 'flat']
     }
   }
 };
@@ -29,7 +29,7 @@ export const Default = {
 };
 
 export const Emphasize = { ...Default, args: { textContent: 'Emphasize', interaction: 'emphasize' } };
-export const Ghost = { ...Default, args: { textContent: 'Ghost', interaction: 'ghost' } };
+export const Flat = { ...Default, args: { textContent: 'Flat', interaction: 'flat' } };
 export const Destructive = { ...Default, args: { textContent: 'Destructive', interaction: 'destructive' } };
 export const Disabled = { ...Default, args: { textContent: 'Disabled', disabled: true } };
 
@@ -62,11 +62,11 @@ export const Interactions = {
   `
 }
 
-export const GhostInteractions = {
+export const FlatInteractions = {
   render: () => html`
-    <mlv-button interaction="ghost">ghost</mlv-button>
-    <mlv-button interaction="ghost-emphasize">ghost-emphasize</mlv-button>
-    <mlv-button interaction="ghost-destructive">ghost-destructive</mlv-button>
+    <mlv-button interaction="flat">flat</mlv-button>
+    <mlv-button interaction="flat-emphasize">flat-emphasize</mlv-button>
+    <mlv-button interaction="flat-destructive">flat-destructive</mlv-button>
   `
 }
 
@@ -94,19 +94,19 @@ export const PressedToggle = {
   `
 }
 
-export const SelectedGhost = {
+export const SelectedFlat = {
   render: () => html`
-    <mlv-button selected interaction="ghost">selected</mlv-button>
-    <mlv-button interaction="ghost">unselected</mlv-button>
-    <mlv-button interaction="ghost">unselected</mlv-button>
+    <mlv-button selected interaction="flat">selected</mlv-button>
+    <mlv-button interaction="flat">unselected</mlv-button>
+    <mlv-button interaction="flat">unselected</mlv-button>
   `
 }
 
-export const LinkGhost = {
+export const LinkFlat = {
   render: () => html`
-<mlv-button interaction="ghost"><a href="#">ghost</a></mlv-button>
-<mlv-button interaction="ghost-emphasize"><a href="#">ghost-emphasize</a></mlv-button>
-<mlv-button interaction="ghost-destructive"><a href="#">ghost-destructive</a></mlv-button>
+<mlv-button interaction="flat"><a href="#">flat</a></mlv-button>
+<mlv-button interaction="flat-emphasize"><a href="#">flat-emphasize</a></mlv-button>
+<mlv-button interaction="flat-destructive"><a href="#">flat-destructive</a></mlv-button>
   `
 }
 

@@ -95,8 +95,8 @@ export const MultiSelectBulkActions = {
     `)}
     <mlv-bulk-actions closable status="accent">
       1 selected
-      <mlv-button interaction="ghost-destructive">delete</mlv-button>
-      <mlv-icon-button interaction="ghost" icon-name="additional-actions"></mlv-icon-button>
+      <mlv-button interaction="flat-destructive">delete</mlv-button>
+      <mlv-icon-button interaction="flat" icon-name="additional-actions"></mlv-icon-button>
     </mlv-bulk-actions>
   </mlv-grid>
 </div>
@@ -138,7 +138,7 @@ export const RowAction = {
       <mlv-grid-row>
         ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
         <mlv-grid-cell>
-          <mlv-icon-button interaction="ghost" icon-name="additional-actions" aria-label="row ${i} actions"></mlv-icon-button>
+          <mlv-icon-button interaction="flat" icon-name="additional-actions" aria-label="row ${i} actions"></mlv-icon-button>
         </mlv-grid-cell>
       </mlv-grid-row>
     `)}
@@ -404,7 +404,7 @@ export const DisplaySettings = {
       </mlv-checkbox>
     </mlv-checkbox-group>
     <mlv-divider></mlv-divider>
-    <mlv-button interaction="ghost-destructive" style="--height: initial">restore settings</mlv-button>
+    <mlv-button interaction="flat-destructive" style="--height: initial">restore settings</mlv-button>
   </mlv-dropdown>
   <div mlv-layout="row gap:sm align:vertical-center">
     <p mlv-text="body muted">1,145 results found</p>
@@ -759,7 +759,7 @@ export const PanelDetail = {
         <mlv-grid-row ?selected=${i === 1}>
           ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
           <mlv-grid-cell>
-            <mlv-icon-button interaction="ghost" icon-name="additional-actions" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
+            <mlv-icon-button interaction="flat" icon-name="additional-actions" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
           </mlv-grid-cell>
         </mlv-grid-row>
       `)}
@@ -810,11 +810,11 @@ class PanelDemo extends LitElement {
           <mlv-grid-row ?selected=${this.selectedId === row.id}>
             ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
             <mlv-grid-cell>
-              <mlv-icon-button @click=${() => this.selectedId = row.id} interaction="ghost" icon-name="additional-actions"></mlv-icon-button>
+              <mlv-icon-button @click=${() => this.selectedId = row.id} interaction="flat" icon-name="additional-actions"></mlv-icon-button>
             </mlv-grid-cell>
           </mlv-grid-row>`)}
           <mlv-grid-footer>
-            <mlv-icon-button aria-label="show grid options" interaction="ghost" icon-name="additional-actions"></mlv-icon-button>
+            <mlv-icon-button aria-label="show grid options" interaction="flat" icon-name="additional-actions"></mlv-icon-button>
           </mlv-grid-footer>
         </mlv-grid>
         <mlv-panel closable ?expanded=${!!this.selectedId} @close=${() => this.selectedId = null} style="min-width: 280px">

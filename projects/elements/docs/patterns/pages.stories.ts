@@ -91,7 +91,7 @@ const renderCard = (height?: number, cardSpan?: number, cardBorderRadius?: strin
   <mlv-card style="--border-radius: ${ifDefined(cardBorderRadius)}" mlv-layout="span:${ifDefined(cardSpan)}">
     <mlv-card-header>
       <div slot="title">Card Title</div>
-      <mlv-icon-button slot="header-action" icon-name="additional-actions" interaction="ghost"></mlv-icon-button>
+      <mlv-icon-button slot="header-action" icon-name="additional-actions" interaction="flat"></mlv-icon-button>
     </mlv-card-header>
     <mlv-card-content style="height: ${height}px"> Card Content </mlv-card-content>
   </mlv-card>

@@ -170,7 +170,7 @@ class PopoverDemo extends LitElement {
       <dialog ${animationFade(this)}>
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" interaction="ghost" aria-label="close"></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" interaction="flat" aria-label="close"></mlv-icon-button>` : ''}
       </dialog>
     `;
   }

@@ -69,7 +69,7 @@ export const Default = {
 
               ${when(
                 args.showActionIcon,
-                () => html`<mlv-icon-button interaction="ghost" slot="action-icon" icon-name="additional-actions" @click=${() => customActionHandler()}></mlv-icon-button>`
+                () => html`<mlv-icon-button interaction="flat" slot="action-icon" icon-name="additional-actions" @click=${() => customActionHandler()}></mlv-icon-button>`
               )}
             </mlv-panel-header>
             `
@@ -116,7 +116,7 @@ export const Default = {
             args.showFooter,
             () => html`
             <mlv-panel-footer>
-              <mlv-button interaction="ghost-destructive">Destructive</mlv-button>
+              <mlv-button interaction="flat-destructive">Destructive</mlv-button>
               <mlv-button>Default</mlv-button>
             </mlv-panel-footer>
             `

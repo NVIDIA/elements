@@ -305,8 +305,8 @@ class KitchenSinkDemo extends LitElement {
     return this.#selectedCount ? html`
     <mlv-bulk-actions slot="footer" status="accent" closable @close=${() => this.#selectAll(false)}>
       ${this.#selectedCount} selected
-      <mlv-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} interaction="ghost">edit</mlv-button>
-      <mlv-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} interaction="ghost-destructive">delete</mlv-button>
+      <mlv-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} interaction="flat">edit</mlv-button>
+      <mlv-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} interaction="flat-destructive">delete</mlv-button>
     </mlv-bulk-actions>` : ''
   }
 
@@ -349,7 +349,7 @@ class KitchenSinkDemo extends LitElement {
                 ${this.columns.region.visible ? html`<mlv-grid-cell>${workflow.region}</mlv-grid-cell>` : ''}
                 ${this.columns.created.visible ? html`<mlv-grid-cell>${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(workflow.created)}</mlv-grid-cell>` : ''}
                 <mlv-grid-cell>
-                  <mlv-icon-button interaction="ghost" icon-name="additional-actions" @click=${() => this.workflowDetail = workflow}></mlv-icon-button>
+                  <mlv-icon-button interaction="flat" icon-name="additional-actions" @click=${() => this.workflowDetail = workflow}></mlv-icon-button>
                 </mlv-grid-cell>
               </mlv-grid-row>`)}
               ${this.#placeholder}

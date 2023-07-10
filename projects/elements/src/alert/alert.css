@@ -39,7 +39,8 @@ slot[name] {
   font-weight: var(--mlv-ref-font-weight-semibold);
 }
 
-::slotted(mlv-button[interaction='ghost']) {
+::slotted(mlv-button[interaction='ghost']), /** @deprecated ghost */
+::slotted(mlv-button[interaction='flat']) {
   --color: inherit;
 }
 
@@ -69,7 +70,7 @@ mlv-icon-button:not([icon-name='cancel']) {
   margin-left: auto;
 }
 
-mlv-icon-button[interaction='ghost'] {
+mlv-icon-button[interaction='flat'] {
   --color: var(--_icon-cancel-color);
 }
 

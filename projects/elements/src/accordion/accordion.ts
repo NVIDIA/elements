@@ -135,7 +135,7 @@ export class Accordion extends LitElement implements Container {
           <slot id="heading" name="header"></slot>
 
           <mlv-icon-button
-            interaction="ghost"
+            interaction="flat"
             size="sm"
             @click=${() => this.#typeExpandableController.toggle()}
             direction=${this.expanded ? this.#hasAction ? 'down' : 'up' : this.#hasAction ? 'right' : 'down'}

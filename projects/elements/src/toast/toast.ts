@@ -90,7 +90,7 @@ export class Toast extends LitElement {
     return html`
       <dialog ${animationFade(this)}>
         <slot name="prefix">${this.status !== 'muted' ? html`<mlv-icon .name=${(statusIcons[this.status] as IconName)}></mlv-icon>` : ''}</slot>
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="ghost" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="flat" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
         <slot></slot>
       </dialog>
     `;
