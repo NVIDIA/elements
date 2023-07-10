@@ -21,7 +21,7 @@ export class Color extends Control {
   };
 
   protected get suffixContent() {
-    return html`<nve-icon-button icon-name="dropper" interaction="ghost" @click=${() =>  this.#select()}></nve-icon-button>`;
+    return html`<nve-icon-button icon-name="dropper" interaction="flat" @click=${() =>  this.#select()}></nve-icon-button>`;
   }
 
   connectedCallback() {

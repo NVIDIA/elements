@@ -19,6 +19,6 @@ export class Time extends Control {
   };
 
   protected get suffixContent() {
-    return html`<nve-icon-button icon-name="schedule" interaction="ghost" @click=${this.showPicker}></nve-icon-button>`;
+    return html`<nve-icon-button icon-name="schedule" interaction="flat" @click=${this.showPicker}></nve-icon-button>`;
   }
 }

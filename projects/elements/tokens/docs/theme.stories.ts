@@ -94,7 +94,7 @@ function getThemeContent() {
         <nve-icon-button icon-name="user"></nve-icon-button>
         <nve-icon-button icon-name="user" interaction="emphasize"></nve-icon-button>
         <nve-icon-button icon-name="user" interaction="destructive"></nve-icon-button>
-        <nve-icon-button icon-name="user" interaction="ghost"></nve-icon-button>
+        <nve-icon-button icon-name="user" interaction="flat"></nve-icon-button>
         <nve-icon-button icon-name="user" disabled></nve-icon-button>
       </div>
       <div nve-layout="row gap:sm">

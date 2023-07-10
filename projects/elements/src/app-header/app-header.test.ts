@@ -99,8 +99,8 @@ describe('nve-app-header: nav items and actions', () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-app-header>
-        <nve-button id="default-ghost-btn" slot="nav-items">A</nve-button>
-        <nve-button id="override-ghost-btn" interaction="emphasize" slot="nav-items">B</nve-button>
+        <nve-button id="default-flat-btn" slot="nav-items">A</nve-button>
+        <nve-button id="override-flat-btn" interaction="emphasize" slot="nav-items">B</nve-button>
         <nve-icon-button id="default-icon-btn" icon-name="settings" slot="nav-items"></nve-icon-button>
         <nve-icon-button id="default-action-btn" icon-name="user" slot="nav-actions"></nve-icon-button>
         <nve-icon-button id="override-action-btn" interaction="emphasize" slot="nav-actions">${innerIconBtnText}</nve-icon-button>
@@ -115,8 +115,8 @@ describe('nve-app-header: nav items and actions', () => {
   });
 
   it('should provide a default interaction type to actions', () => {
-    const defaultGhostItem = element.querySelector<Button>('#default-ghost-btn');
-    expect(defaultGhostItem.interaction).toBe('ghost');
+    const defaultFlatItem = element.querySelector<Button>('#default-flat-btn');
+    expect(defaultFlatItem.interaction).toBe('flat');
   });
 
   it('should set emphasize buttons to size sm', async () => {
@@ -128,7 +128,7 @@ describe('nve-app-header: nav items and actions', () => {
   });
 
   it('should not override set interaction types', () => {
-    const navItemOverride = element.querySelector<Button>('#override-ghost-btn');
+    const navItemOverride = element.querySelector<Button>('#override-flat-btn');
     const navActionOverride = element.querySelector<IconButton>('#override-action-btn');
     expect(navItemOverride.interaction).toBe('emphasize');
     expect(navActionOverride.interaction).toBe('emphasize');

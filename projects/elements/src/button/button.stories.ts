@@ -13,7 +13,7 @@ export default {
   argTypes: {
     interaction: {
       control: 'inline-radio',
-      options: ['emphasize', 'destructive', 'ghost']
+      options: ['emphasize', 'destructive', 'flat']
     }
   }
 };
@@ -29,7 +29,7 @@ export const Default = {
 };
 
 export const Emphasize = { ...Default, args: { textContent: 'Emphasize', interaction: 'emphasize' } };
-export const Ghost = { ...Default, args: { textContent: 'Ghost', interaction: 'ghost' } };
+export const Flat = { ...Default, args: { textContent: 'Flat', interaction: 'flat' } };
 export const Destructive = { ...Default, args: { textContent: 'Destructive', interaction: 'destructive' } };
 export const Disabled = { ...Default, args: { textContent: 'Disabled', disabled: true } };
 
@@ -62,11 +62,11 @@ export const Interactions = {
   `
 }
 
-export const GhostInteractions = {
+export const FlatInteractions = {
   render: () => html`
-    <nve-button interaction="ghost">ghost</nve-button>
-    <nve-button interaction="ghost-emphasize">ghost-emphasize</nve-button>
-    <nve-button interaction="ghost-destructive">ghost-destructive</nve-button>
+    <nve-button interaction="flat">flat</nve-button>
+    <nve-button interaction="flat-emphasize">flat-emphasize</nve-button>
+    <nve-button interaction="flat-destructive">flat-destructive</nve-button>
   `
 }
 
@@ -94,19 +94,19 @@ export const PressedToggle = {
   `
 }
 
-export const SelectedGhost = {
+export const SelectedFlat = {
   render: () => html`
-    <nve-button selected interaction="ghost">selected</nve-button>
-    <nve-button interaction="ghost">unselected</nve-button>
-    <nve-button interaction="ghost">unselected</nve-button>
+    <nve-button selected interaction="flat">selected</nve-button>
+    <nve-button interaction="flat">unselected</nve-button>
+    <nve-button interaction="flat">unselected</nve-button>
   `
 }
 
-export const LinkGhost = {
+export const LinkFlat = {
   render: () => html`
-<nve-button interaction="ghost"><a href="#">ghost</a></nve-button>
-<nve-button interaction="ghost-emphasize"><a href="#">ghost-emphasize</a></nve-button>
-<nve-button interaction="ghost-destructive"><a href="#">ghost-destructive</a></nve-button>
+<nve-button interaction="flat"><a href="#">flat</a></nve-button>
+<nve-button interaction="flat-emphasize"><a href="#">flat-emphasize</a></nve-button>
+<nve-button interaction="flat-destructive"><a href="#">flat-destructive</a></nve-button>
   `
 }
 

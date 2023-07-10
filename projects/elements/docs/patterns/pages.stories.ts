@@ -91,7 +91,7 @@ const renderCard = (height?: number, cardSpan?: number, cardBorderRadius?: strin
   <nve-card style="--border-radius: ${ifDefined(cardBorderRadius)}" nve-layout="span:${ifDefined(cardSpan)}">
     <nve-card-header>
       <div slot="title">Card Title</div>
-      <nve-icon-button slot="header-action" icon-name="additional-actions" interaction="ghost"></nve-icon-button>
+      <nve-icon-button slot="header-action" icon-name="additional-actions" interaction="flat"></nve-icon-button>
     </nve-card-header>
     <nve-card-content style="height: ${height}px"> Card Content </nve-card-content>
   </nve-card>

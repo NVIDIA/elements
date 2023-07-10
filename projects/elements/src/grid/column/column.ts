@@ -89,7 +89,7 @@ export class GridColumn extends LitElement {
 
   #updateActions() {
     this.#actions.forEach(action => {
-      action.interaction = 'ghost';
+      action.interaction = 'flat';
       action.iconName = action.iconName ? action.iconName : 'additional-actions';
     });
   }
