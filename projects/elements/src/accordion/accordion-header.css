@@ -11,6 +11,7 @@
 
   ::slotted([slot="title"]) {
     margin: 0;
+    padding-bottom: var(--nve-ref-space-xxs);
     font-size: var(--nve-ref-font-size-200);
     font-weight: var(--nve-ref-font-weight-medium);
   }

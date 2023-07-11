@@ -1,0 +1,20 @@
+:host {
+  --padding: var(--nve-ref-size-400) var(--nve-ref-size-500) var(--nve-ref-size-500);
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+}
+
+:host([container='full']) [internal-host] {
+  gap: var(--nve-ref-size-50);
+}
+
+:host([container='flat']) [internal-host] {
+  gap: var(--nve-ref-size-50);
+}
+
+:host([container='inset']) [internal-host] {
+  gap: var(--nve-ref-space-md);
+}
