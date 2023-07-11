@@ -20,6 +20,20 @@ export const Default = {
   `
 };
 
+export const Disabled = {
+  render: () => html`
+  <div mlv-theme="root">
+    <mlv-accordion behavior-expand disabled>
+      <mlv-accordion-header>
+        <div slot="title">Heading</div>
+      </mlv-accordion-header>
+
+      <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+    </mlv-accordion>
+  </div>
+  `
+};
+
 export const Inset = {
   render: () =>  html`
   <div mlv-theme="root">
@@ -63,6 +77,134 @@ export const WithActions = {
 
         <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
       </mlv-accordion>
+  </div>
+  `
+};
+
+export const AccordionGroupFull = {
+  render: () => html`
+  <div mlv-theme="root">
+    <mlv-accordion-group behavior-expand>
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 1</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 2</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 3</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+    </mlv-accordion-group>
+  </div>
+  `
+};
+
+export const AccordionGroupInset = {
+  render: () => html`
+  <div mlv-theme="root">
+    <mlv-accordion-group container="inset" behavior-expand>
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 1</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 2</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 3</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+    </mlv-accordion-group>
+  </div>
+  `
+};
+
+export const AccordionGroupFlat = {
+  render: () => html`
+  <div mlv-theme="root">
+    <mlv-accordion-group container="flat" behavior-expand>
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 1</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 2</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 3</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+    </mlv-accordion-group>
+  </div>
+  `
+};
+
+export const AccordionGroupExpandSingle = {
+  render: () => html`
+  <div mlv-theme="root">
+    <mlv-accordion-group behavior-expand-single>
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 1</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 2</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+
+      <mlv-accordion>
+        <mlv-accordion-header>
+          <div slot="title">Heading 3</div>
+        </mlv-accordion-header>
+
+        <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+      </mlv-accordion>
+    </mlv-accordion-group>
   </div>
   `
 };

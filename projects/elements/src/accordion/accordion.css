@@ -5,7 +5,7 @@
   --color: var(--mlv-sys-layer-canvas-color);
   --border-radius: 0;
   --box-shadow: var(--mlv-ref-shadow-100);
-  --header-padding: var(--mlv-ref-size-300);
+  --header-padding: var(--mlv-ref-size-300) var(--mlv-ref-size-400);
 }
 
 [internal-host] {
@@ -37,10 +37,6 @@
 
 :host(:not(:--expanded)) #content {
   display: none;
-}
-
-:host([container='full']) {
-  --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
 }
 
 :host([container='inset']) {

@@ -1,0 +1,20 @@
+:host {
+  --padding: var(--mlv-ref-size-400) var(--mlv-ref-size-500) var(--mlv-ref-size-500);
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+}
+
+:host([container='full']) [internal-host] {
+  gap: var(--mlv-ref-size-50);
+}
+
+:host([container='flat']) [internal-host] {
+  gap: var(--mlv-ref-size-50);
+}
+
+:host([container='inset']) [internal-host] {
+  gap: var(--mlv-ref-space-md);
+}

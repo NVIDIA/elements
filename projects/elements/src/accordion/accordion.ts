@@ -1,10 +1,11 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals, ContainerElement, Container } from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
 import accordionHeaderStyleSheet from './accordion-header.css?inline';
 import accordionContentStyleSheet from './accordion-content.css?inline';
+import accordionGroupStyleSheet from './accordion-group.css?inline';
 
 
 /**
@@ -119,6 +120,10 @@ export class Accordion extends LitElement implements ContainerElement {
    */
   @property({ type: Boolean, reflect: true }) expanded = false;
   /**
+   * Determines whether the accordion is expandable
+   */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+  /**
    * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
   */
   @property({ type: Boolean, attribute: 'behavior-expand'}) behaviorExpand = false;
@@ -139,6 +144,8 @@ export class Accordion extends LitElement implements ContainerElement {
             size="sm"
             @click=${() => this.#typeExpandableController.toggle()}
             direction=${this.expanded ? this.#hasAction ? 'down' : 'up' : this.#hasAction ? 'right' : 'down'}
+            ?disabled=${this.disabled}
+            ?pressed=${this.expanded}
             icon-name="caret"
             .expanded=${this.expanded}
             .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
@@ -157,5 +164,70 @@ export class Accordion extends LitElement implements ContainerElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'region';
+  }
+}
+
+
+/**
+ * @element mlv-accordion-group
+ * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs
+ * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+ * @stable false
+ */
+export class AccordionGroup extends LitElement {
+  declare _internals: ElementInternals;
+  static styles = useStyles([accordionGroupStyleSheet]);
+
+  /**
+   * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
+  */
+  @property({ type: Boolean, attribute: 'behavior-expand'}) behaviorExpand = false;
+  /**
+   * Determines whether or not the accordion should opt-in to stateful expansion of a single accordion at a time
+  */
+  @property({ type: Boolean, attribute: 'behavior-expand-single'}) behaviorExpandSingle = false;
+  /** flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion) */
+  @property({ type: String, reflect: true }) container?: 'flat' | 'full' | 'inset' = 'full';
+
+  static readonly metadata = {
+    tag: 'mlv-accordion-group',
+    version: 'PACKAGE_VERSION'
+  };
+
+  get #accordions() {
+    return this.querySelectorAll('mlv-accordion');
+  }
+
+  render() {
+    return html`
+      <div internal-host>
+        <slot @slotchange=${() => this.#updateChildAttributes()}></slot>
+      </div>
+    `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    attachInternals(this);
+    this._internals.role = 'group';
+
+    if (this.behaviorExpandSingle) {
+      this.#accordions.forEach(accordion => {
+        accordion.addEventListener('open', () => {
+          this.#accordions.forEach(accordion => accordion.expanded = false);
+        });
+      });
+    }
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    this.#updateChildAttributes();
+  }
+
+  #updateChildAttributes() {
+    this.#accordions.forEach(accordion => accordion.container = this.container);
+    this.#accordions.forEach(accordion => accordion.behaviorExpand = this.behaviorExpand || this.behaviorExpandSingle);
   }
 }
