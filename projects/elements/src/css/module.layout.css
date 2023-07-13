@@ -11,6 +11,7 @@
   }
 
   /* Grow */
+  &[nve-layout~='full'],
   &[nve-layout~='grow'] {
     height: 100%;
     width: 100%;

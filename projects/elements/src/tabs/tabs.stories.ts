@@ -23,7 +23,7 @@ export const Default = {
 
 export const LightTheme = {
   render: () => html`
-  <nve-card nve-theme="light" style="--border-radius: none">
+  <div nve-theme="root light" nve-layout="row gap:sm pad:md">
     <nve-tabs behavior-select>
       <nve-tabs-item selected>Tab 1</nve-tabs-item>
       <nve-tabs-item>Tab 2</nve-tabs-item>
@@ -31,13 +31,13 @@ export const LightTheme = {
       <nve-tabs-item disabled>Disabled</nve-tabs-item>
       <nve-tabs-item>Tab 5</nve-tabs-item>
     </nve-tabs>
-  </nve-card>
+  </div>
   `
 };
 
 export const DarkTheme = {
   render: () => html`
-  <nve-card nve-theme="dark" style="--border-radius: none">
+  <div nve-theme="root dark" nve-layout="row gap:sm pad:md">
     <nve-tabs behavior-select>
       <nve-tabs-item selected> Tab 1</nve-tabs-item>
       <nve-tabs-item>Tab 2</nve-tabs-item>
@@ -45,7 +45,7 @@ export const DarkTheme = {
       <nve-tabs-item disabled>Disabled</nve-tabs-item>
       <nve-tabs-item>Tab 5</nve-tabs-item>
     </nve-tabs>
-  </nve-card>
+  </div>
   `
 };
 
@@ -78,36 +78,32 @@ export const TabsWithDots = {
 
 export const VerticalTabs = {
   render: () => html`
-  <nve-card style="--border-radius: none; width: 250px;">
-    <nve-tabs vertical behavior-select>
-      <nve-tabs-item selected>Tab 1</nve-tabs-item>
-      <nve-tabs-item>Tab 2</nve-tabs-item>
-      <nve-tabs-item>Tab 3</nve-tabs-item>
-      <nve-tabs-item disabled>Disabled</nve-tabs-item>
-      <nve-tabs-item>Tab 5</nve-tabs-item>
-    </nve-tabs>
-  </nve-card>
+  <nve-tabs vertical behavior-select style="width: 250px">
+    <nve-tabs-item selected>Tab 1</nve-tabs-item>
+    <nve-tabs-item>Tab 2</nve-tabs-item>
+    <nve-tabs-item>Tab 3</nve-tabs-item>
+    <nve-tabs-item disabled>Disabled</nve-tabs-item>
+    <nve-tabs-item>Tab 5</nve-tabs-item>
+  </nve-tabs>
   `
 };
 
 export const BorderlessVerticalTabs = {
   render: () => html`
-  <nve-card style="--border-radius: none; width: 250px;">
-    <nve-tabs vertical borderless behavior-select>
-      <nve-tabs-item>
-        <nve-icon name="settings"></nve-icon> Tab 1
-      </nve-tabs-item>
-      <nve-tabs-item>
-        <nve-icon name="user"></nve-icon> Tab 2
-      </nve-tabs-item>
-      <nve-tabs-item selected>
-        <nve-icon name="beaker"></nve-icon> Tab 3
-      </nve-tabs-item>
-      <nve-tabs-item>
-        <nve-icon name="dashboard"></nve-icon> Tab 4
-      </nve-tabs-item>
-    </nve-tabs>
-  </nve-card>
+  <nve-tabs vertical borderless behavior-select style="width: 250px">
+    <nve-tabs-item>
+      <nve-icon name="settings"></nve-icon> Tab 1
+    </nve-tabs-item>
+    <nve-tabs-item>
+      <nve-icon name="user"></nve-icon> Tab 2
+    </nve-tabs-item>
+    <nve-tabs-item selected>
+      <nve-icon name="beaker"></nve-icon> Tab 3
+    </nve-tabs-item>
+    <nve-tabs-item>
+      <nve-icon name="dashboard"></nve-icon> Tab 4
+    </nve-tabs-item>
+  </nve-tabs>
   `
 };
 

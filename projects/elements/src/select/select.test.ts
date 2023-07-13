@@ -9,6 +9,7 @@ import '@elements/elements/select/define.js';
 describe('nve-select', () => {
   let fixture: HTMLElement;
   let element: Select;
+  let select: HTMLSelectElement;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -28,6 +29,7 @@ describe('nve-select', () => {
       </nve-select>
     `);
     element = fixture.querySelector('nve-select');
+    select = fixture.querySelector('select');
     await elementIsStable(element);
   });
 
@@ -56,32 +58,96 @@ describe('nve-select', () => {
   });
 
   it('should render a menu for each provided option', async () => {
-    const items = element.querySelectorAll<MenuItem>('nve-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>('nve-menu-item');
     expect(items.length).toBe(3);
   });
 
-  it('should set the value state for menu items', async () => {
-    const item = element.querySelectorAll<MenuItem>('nve-menu-item')[0];
-    expect(item.value).toBe('1');
+  it('should render a custom option slot for each given item', async () => {
+    const items = element.shadowRoot.querySelectorAll<HTMLSlotElement>('[name*="option-"]');
+    expect(items.length).toBe(3);
+    expect(items[0].name).toBe('option-1');
+    expect(items[1].name).toBe('option-2');
+    expect(items[2].name).toBe('option-3');
   });
 
   it('should show custom dropdown menu when clicked', async () => {
-    const dropdown = element.querySelector<Dropdown>('nve-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
     expect(dropdown.hidden).toBe(true);
-    emulateClick(fixture.querySelector('select'));
+    emulateClick(select);
     element.requestUpdate();
     expect(dropdown.hidden).toBe(false);
   });
 
+  it('should hide dropdown when closed', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
+    expect(dropdown.hidden).toBe(true);
+    emulateClick(select);
+    element.requestUpdate();
+    expect(dropdown.hidden).toBe(false);
+
+    dropdown.dispatchEvent(new CustomEvent('close'));
+    await element.updateComplete;
+    expect(dropdown.hidden).toBe(true);
+  });
+
   it('should each menu with the aria role of listbox', async () => {
-    const menu = fixture.querySelector<Menu>('nve-menu');
+    const menu = element.shadowRoot.querySelector<Menu>('nve-menu');
     expect(menu.getAttribute('role')).toBe('listbox');
   });
 
   it('should each menu item with the aria role of option', async () => {
-    const items = fixture.querySelectorAll<MenuItem>('nve-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>('nve-menu-item');
     expect(items[0].getAttribute('role')).toBe('option');
     expect(items[1].getAttribute('role')).toBe('option');
     expect(items[2].getAttribute('role')).toBe('option');
+  });
+
+  it('should close dropdown when menu item is selected', async () => {
+    const items = element.shadowRoot.querySelectorAll<MenuItem>('nve-menu-item');
+    expect(element.shadowRoot.querySelector('nve-dropdown').hidden).toBe(true);
+
+    emulateClick(select);
+    await element.updateComplete;
+    expect(element.shadowRoot.querySelector('nve-dropdown').hidden).toBe(false);
+
+    emulateClick(items[0]);
+    expect(element.shadowRoot.querySelector('nve-dropdown').hidden).toBe(true);
+  });
+
+  it('should render tags when using multiple select', async () => {
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+
+    element.requestUpdate();
+    await element.updateComplete;
+    expect(element.shadowRoot.querySelectorAll('nve-tag').length).toBe(2);
+  });
+
+  it('should deselect option when tag is clicked', async () => {
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+
+    element.requestUpdate();
+    await element.updateComplete;
+    expect(element.shadowRoot.querySelectorAll('nve-tag').length).toBe(2);
+
+    // remove tag/deselect option
+    emulateClick(element.shadowRoot.querySelectorAll('nve-tag')[0]);
+    await element.updateComplete;
+    expect(element.shadowRoot.querySelectorAll('nve-tag').length).toBe(1);
+  });
+
+  it('should set host :--multiple state when multiple is used', async () => {
+    select.multiple = true;
+    await element.requestUpdate();
+    expect(element.matches(':--multiple')).toBe(true);
+  });
+
+  it('should set host :--size state when multiple is used', async () => {
+    select.size = 2;
+    await element.requestUpdate();
+    expect(element.matches(':--size')).toBe(true);
   });
 });

@@ -11,6 +11,12 @@ class StateScrollControllerTestElement extends LitElement {
 
   static styles = [css`:host { overflow: auto; width: 50px; height: 50px; display: block; }`];
 
+  // defaults
+  stateScrollConfig = {
+    scrollOffset: 0,
+    target: this
+  }
+
   render() {
     return html`<div style="width: 100px; height: 100px;"></div>`
   }
@@ -27,10 +33,12 @@ describe('state-scroll.controller', () => {
   beforeEach(async () => {
     fixture = await createFixture(html`<state-scroll-controller-test-element></state-scroll-controller-test-element>`);
     element = fixture.querySelector<StateScrollControllerTestElement>('state-scroll-controller-test-element');
+    await elementIsStable(element);
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     removeFixture(fixture);
+    element._internals.states.delete(':--scrolling')
   });
 
   it('should initialize with no scrolling state', async () => {
@@ -39,7 +47,6 @@ describe('state-scroll.controller', () => {
   });
 
   it('should add scrolling state on scroll', async () => {
-    await elementIsStable(element);
     const event = untilEvent(element, 'scroll');
     element.scrollLeft = 10;
     element.dispatchEvent(new Event('scroll', { bubbles: true }));
@@ -47,21 +54,44 @@ describe('state-scroll.controller', () => {
     expect(element.matches(':--scrolling')).toBe(true);
   });
 
-  it('should dispatch scrollend event when scroll reaches end of scrollbox', async () => {
-    await elementIsStable(element);
+  it('should remove scrolling state on scrollend', async () => {
     const event = untilEvent(element, 'scrollend');
-    element.scrollTop = 10;
-    element.dispatchEvent(new Event('scroll'));
+    element.scrollLeft = 10;
+    element.dispatchEvent(new Event('scrollend', { bubbles: true }));
+    await event;
+    expect(element.matches(':--scrolling')).toBe(false);
+  });
+
+  it('should dispatch scrollend event when scroll reaches end of scrollbox', async () => {
+    const event = untilEvent(element, 'scrollboxend');
+    element.scrollTop = 50;
+    element.dispatchEvent(new Event('scrollend'));
     await event;
     expect(await event).toBeTruthy();
   });
 
-  it('should remove scrolling state when scroll reaches end of scrollbox', async () => {
-    await elementIsStable(element);
-    const event = untilEvent(element, 'scroll');
-    element.scrollTop = 10;
-    element.dispatchEvent(new Event('scroll'));
+  it('should account for scroll offset', async () => {
+    element.stateScrollConfig.scrollOffset = 5;
+    const event = untilEvent(element, 'scrollboxend');
+    element.scrollTop = 45;
+    element.dispatchEvent(new Event('scrollend'));
     await event;
-    expect(element.matches(':--scrolling')).toBe(false);
+    expect(await event).toBeTruthy();
+  });
+
+  it('should add scrolling state on scroll for custom target', async () => {
+    element.stateScrollConfig.target = element.shadowRoot.querySelector('div') as any;
+    const event = untilEvent(element, 'scroll');
+    element.scrollLeft = 10;
+    element.dispatchEvent(new Event('scroll', { bubbles: true }));
+    await event;
+    expect(element.matches(':--scrolling')).toBe(true);
+
+    element.stateScrollConfig.target = undefined;
+    const eventElement = untilEvent(element, 'scroll');
+    element.scrollLeft = 10;
+    element.dispatchEvent(new Event('scroll', { bubbles: true }));
+    await eventElement;
+    expect(element.matches(':--scrolling')).toBe(true);
   });
 });
