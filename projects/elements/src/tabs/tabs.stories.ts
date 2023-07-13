@@ -23,7 +23,7 @@ export const Default = {
 
 export const LightTheme = {
   render: () => html`
-  <mlv-card mlv-theme="light" style="--border-radius: none">
+  <div mlv-theme="root light" mlv-layout="row gap:sm pad:md">
     <mlv-tabs behavior-select>
       <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
       <mlv-tabs-item>Tab 2</mlv-tabs-item>
@@ -31,13 +31,13 @@ export const LightTheme = {
       <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
       <mlv-tabs-item>Tab 5</mlv-tabs-item>
     </mlv-tabs>
-  </mlv-card>
+  </div>
   `
 };
 
 export const DarkTheme = {
   render: () => html`
-  <mlv-card mlv-theme="dark" style="--border-radius: none">
+  <div mlv-theme="root dark" mlv-layout="row gap:sm pad:md">
     <mlv-tabs behavior-select>
       <mlv-tabs-item selected> Tab 1</mlv-tabs-item>
       <mlv-tabs-item>Tab 2</mlv-tabs-item>
@@ -45,7 +45,7 @@ export const DarkTheme = {
       <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
       <mlv-tabs-item>Tab 5</mlv-tabs-item>
     </mlv-tabs>
-  </mlv-card>
+  </div>
   `
 };
 
@@ -78,36 +78,32 @@ export const TabsWithDots = {
 
 export const VerticalTabs = {
   render: () => html`
-  <mlv-card style="--border-radius: none; width: 250px;">
-    <mlv-tabs vertical behavior-select>
-      <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
-      <mlv-tabs-item>Tab 2</mlv-tabs-item>
-      <mlv-tabs-item>Tab 3</mlv-tabs-item>
-      <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
-      <mlv-tabs-item>Tab 5</mlv-tabs-item>
-    </mlv-tabs>
-  </mlv-card>
+  <mlv-tabs vertical behavior-select style="width: 250px">
+    <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
+    <mlv-tabs-item>Tab 2</mlv-tabs-item>
+    <mlv-tabs-item>Tab 3</mlv-tabs-item>
+    <mlv-tabs-item disabled>Disabled</mlv-tabs-item>
+    <mlv-tabs-item>Tab 5</mlv-tabs-item>
+  </mlv-tabs>
   `
 };
 
 export const BorderlessVerticalTabs = {
   render: () => html`
-  <mlv-card style="--border-radius: none; width: 250px;">
-    <mlv-tabs vertical borderless behavior-select>
-      <mlv-tabs-item>
-        <mlv-icon name="settings"></mlv-icon> Tab 1
-      </mlv-tabs-item>
-      <mlv-tabs-item>
-        <mlv-icon name="user"></mlv-icon> Tab 2
-      </mlv-tabs-item>
-      <mlv-tabs-item selected>
-        <mlv-icon name="beaker"></mlv-icon> Tab 3
-      </mlv-tabs-item>
-      <mlv-tabs-item>
-        <mlv-icon name="dashboard"></mlv-icon> Tab 4
-      </mlv-tabs-item>
-    </mlv-tabs>
-  </mlv-card>
+  <mlv-tabs vertical borderless behavior-select style="width: 250px">
+    <mlv-tabs-item>
+      <mlv-icon name="settings"></mlv-icon> Tab 1
+    </mlv-tabs-item>
+    <mlv-tabs-item>
+      <mlv-icon name="user"></mlv-icon> Tab 2
+    </mlv-tabs-item>
+    <mlv-tabs-item selected>
+      <mlv-icon name="beaker"></mlv-icon> Tab 3
+    </mlv-tabs-item>
+    <mlv-tabs-item>
+      <mlv-icon name="dashboard"></mlv-icon> Tab 4
+    </mlv-tabs-item>
+  </mlv-tabs>
   `
 };
 

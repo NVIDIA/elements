@@ -36,6 +36,23 @@ describe('mlv-color', () => {
     expect(fixture.querySelector('input').value).toBe('#000000');
   });
 
+  it('should apply default if custom default is provided', async () => {
+    await elementIsStable(element);
+    expect(fixture.querySelector('input').value).toBe('#000000');
+  });
+
+  it('should not apply default if custom default is provided', async () => {
+    const element = document.createElement('mlv-color');
+    const input = document.createElement('input');
+    input.value = '#fff';
+
+    element.appendChild(input);
+    document.body.appendChild(element);
+    await element.updateComplete;
+    expect(input.value).toBe('#fff');
+    element.remove();
+  });
+
   it('should update the color value if EyeDropper is used', async () => {
     const original = (window as any).EyeDropper;
     (window as any).EyeDropper = class {

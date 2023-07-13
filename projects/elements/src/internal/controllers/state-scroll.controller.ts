@@ -1,6 +1,5 @@
 import { ReactiveController, ReactiveElement } from 'lit';
-import { attachInternals } from '../utils/a11y.js';
-import { endOfScrollBox, waitForScrollEnd } from '../utils/dom.js';
+import { attachInternals, endOfScrollBox } from '@elements/elements/internal';
 
 /**
  * Adds active scroll state detection
@@ -25,7 +24,9 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
     return target ? target : this.host;
   }
 
-  #offset = 0;
+  get #offset() {
+    return this.host.stateScrollConfig?.scrollOffset ? this.host.stateScrollConfig?.scrollOffset : 0;
+  }
 
   constructor(private host: T) {
     this.host.addController(this);
@@ -34,26 +35,17 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
   async hostConnected() {
     await this.host.updateComplete;
     attachInternals(this.host);
-    this.#offset = this.host.stateScrollConfig?.scrollOffset ? this.host.stateScrollConfig?.scrollOffset : 0;
 
-    let prevX = 0;
-    let prevY = 0;
     this.#target.addEventListener('scroll', async () => {
-      if (prevX !== this.#target.scrollLeft) {
-        prevX = this.#target.scrollLeft;
-        this.host._internals.states.add('--scrolling');
-      }
+      this.host._internals.states.add('--scrolling');
 
-      if ((prevY !== this.#target.scrollTop) && endOfScrollBox(this.#target, this.#offset)){
-        this.host.dispatchEvent(new CustomEvent('scrollend'));
+      if (endOfScrollBox(this.#target, this.#offset)){
+        this.host.dispatchEvent(new CustomEvent('scrollboxend'));
       }
+    });
 
-      prevY = this.#target.scrollTop;
-      await waitForScrollEnd(this.#target);
-
-      if ((this.host._internals.states as any).has('--scrolling')) {
-        this.host._internals.states.delete('--scrolling');
-      }
+    this.#target.addEventListener('scrollend', async () => {
+      this.host._internals.states.delete('--scrolling');
     });
   }
 }

@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox } from '@elements/elements/internal';
 
 @customElement('test-element')
 class TestComponent extends LitElement {
@@ -289,7 +289,6 @@ class TraversalTest extends LitElement {
   }
 }
 
-
 describe('getFlattenedFocusableItems', () => {
   let fixture: HTMLElement;
 
@@ -378,38 +377,38 @@ describe('scrollBarWidth(): ', () => {
   });
 });
 
-// describe('hasScrollBar(): ', () => {
-//   it('should compute the current scroll bar width', () => {
-//     const div = document.createElement('div');
-//     const innerDiv = document.createElement('div');
-//     div.style.width = '500px';
-//     div.style.height = '500px';
-//     div.style.overflow = 'auto';
-//     div.style.display = 'block';
-//     innerDiv.style.width = '1000px';
-//     innerDiv.style.height = '1000px';
-//     innerDiv.style.display = 'block';
-//     div.appendChild(innerDiv);
-//     document.body.appendChild(div);
+describe('hasScrollBar(): ', () => {
+  it('should compute the current scroll bar width', () => {
+    const div = document.createElement('div');
+    const innerDiv = document.createElement('div');
+    div.style.width = '500px';
+    div.style.height = '500px';
+    div.style.overflow = 'auto';
+    div.style.display = 'block';
+    innerDiv.style.width = '1000px';
+    innerDiv.style.height = '1000px';
+    innerDiv.style.display = 'block';
+    div.appendChild(innerDiv);
+    document.body.appendChild(div);
 
-//     expect(hasScrollBar(div)).toBe(true);
-//     div.remove();
-//   });
-// });
+    expect(hasScrollBar(div)).toBe(true);
+    div.remove();
+  });
+});
 
-// describe('endOfScrollBox(): ', () => {
-//   it('should determine if the scroll position is at the end of the scroll box', () => {
-//     const div = document.createElement('div');
-//     const innerDiv = document.createElement('div');
-//     div.style.width = '500px';
-//     div.style.height = '500px';
-//     div.style.overflow = 'auto';
-//     innerDiv.style.width = '1000px';
-//     innerDiv.style.height = '1000px';
-//     div.appendChild(innerDiv);
-//     document.body.appendChild(div);
-//     div.scrollTop = 1000;
-//     expect(endOfScrollBox(div)).toBe(true);
-//     div.remove();
-//   });
-// });
+describe('endOfScrollBox(): ', () => {
+  it('should determine if the scroll position is at the end of the scroll box', () => {
+    const div = document.createElement('div');
+    const innerDiv = document.createElement('div');
+    div.style.width = '500px';
+    div.style.height = '500px';
+    div.style.overflow = 'auto';
+    innerDiv.style.width = '1000px';
+    innerDiv.style.height = '1000px';
+    div.appendChild(innerDiv);
+    document.body.appendChild(div);
+    div.scrollTop = 1000;
+    expect(endOfScrollBox(div)).toBe(true);
+    div.remove();
+  });
+});

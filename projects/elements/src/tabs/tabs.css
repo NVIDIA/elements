@@ -9,9 +9,12 @@
   gap: var(--gap);
 }
 
-:host([vertical]) [internal-host] {
-  flex-direction: column;
+:host([vertical]) {
   --gap: var(--mlv-ref-space-xxxs);
+
+  [internal-host] {
+    flex-direction: column;
+  }
 
   ::slotted(mlv-tabs-item) {
     --border-width: var(--mlv-ref-border-width-lg);
@@ -19,7 +22,6 @@
     --border-top: calc(50% - 12px);
     --border-inset: 0 8px 0 8px;
     --width: calc(100% - 8px);
-
   }
 
   ::slotted(mlv-tabs-item:--selected) {
@@ -27,7 +29,7 @@
   }
 }
 
-:host([borderless]) [internal-host] {
+:host([borderless]) {
   ::slotted(mlv-tabs-item) {
     --border-width: 0;
     --border-height: 0;

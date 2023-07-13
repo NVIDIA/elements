@@ -67,3 +67,7 @@
 ::slotted(mlv-divider) {
   margin: 0 calc(-1 * var(--padding));
 }
+
+::slotted(mlv-icon) {
+  --color: inherit;
+}

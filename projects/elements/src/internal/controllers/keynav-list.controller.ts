@@ -36,6 +36,11 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     this.host.addController(this);
   }
 
+  /** @private attr mlv-keynav-disabled is an internal API for advanced use cases only */
+  get #keynavDisabled() {
+    return this.host.hasAttribute('mlv-keynav-disabled');
+  }
+
   async hostConnected() {
     await this.host.updateComplete;
     this.#initializeTabIndex();
@@ -46,7 +51,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
   }
 
   #initializeTabIndex() {
-    if (this.#config.manageFocus && this.#config.manageTabindex) {
+    if (this.#config.manageFocus && this.#config.manageTabindex && !this.#keynavDisabled) {
       initializeKeyListItems(this.#config.items);
     }
   }
@@ -59,7 +64,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
   }
 
   #focusItem(e: KeyboardEvent) {
-    if (validKeyNavigationCode(e)) {
+    if (validKeyNavigationCode(e) && !this.#keynavDisabled) {
       const activeItem = this.#getActiveItem(e);
       if (activeItem) {
         const { loop, layout, dir } = this.#config;

@@ -3,6 +3,7 @@
   --padding:0;
   --gap: var(--mlv-ref-size-100);
   --width: min-content;
+  --max-width: 100%;
   --min-width: 170px;
   width: var(--width);
   min-width: var(--min-width);
@@ -15,5 +16,6 @@
   flex-direction: column;
   width: var(--width);
   min-width: var(--min-width);
+  max-width: var(--max-width);
   margin: 0;
 }

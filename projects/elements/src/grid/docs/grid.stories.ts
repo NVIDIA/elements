@@ -74,7 +74,7 @@ export const MultiSelect = {
 export const MultiSelectBulkActions = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid style="--scroll-height: 410px">
+  <mlv-grid style="--scroll-height: 402px">
     <mlv-grid-header>
       <mlv-grid-column width="max-content" position="fixed">
         <mlv-checkbox>
@@ -170,7 +170,7 @@ export const Footer = {
 export const FooterScrollbar = {
   render: () => html`
 <div mlv-theme="root">
-<mlv-grid style="--scroll-height: 410px">
+<mlv-grid style="--scroll-height: 402px">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
@@ -210,7 +210,7 @@ export const Pagination = {
 export const Scroll = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid style="--scroll-height: 410px">
+  <mlv-grid style="--scroll-height: 402px">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
@@ -256,7 +256,7 @@ export const ColumnAction = {
 export const ColumnWidth = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid style="--scroll-height: 410px">
+  <mlv-grid style="--scroll-height: 402px">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
@@ -274,7 +274,7 @@ export const ColumnWidth = {
 export const ColumnFixed = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid style="--scroll-height: 410px; max-width: 800px">
+  <mlv-grid style="--scroll-height: 402px; max-width: 800px">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
@@ -291,7 +291,7 @@ export const ColumnFixed = {
 export const ColumnMultiFixed = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid style="--scroll-height: 410px; max-width: 800px">
+  <mlv-grid style="--scroll-height: 402px; max-width: 800px">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column>`)}
     </mlv-grid-header>
@@ -308,7 +308,7 @@ export const ColumnMultiFixed = {
 export const ColumnStackFixed = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid style="--scroll-height: 410px; max-width: 800px">
+  <mlv-grid style="--scroll-height: 402px; max-width: 800px">
     <mlv-grid-header>
       <mlv-grid-column position="fixed" width="100px">Column 1</mlv-grid-column>
       <mlv-grid-column position="fixed" width="100px">Column 2</mlv-grid-column>
@@ -517,7 +517,7 @@ class InfiniteScrollDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-grid style="--scroll-height: 400px" @scrollend=${() => this.#loadGroup()}>
+      <mlv-grid style="--scroll-height: 400px" @scrollboxend=${() => this.#loadGroup()}>
         <mlv-grid-header>
           ${this.grid.columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column>`)}
         </mlv-grid-header>
@@ -701,7 +701,7 @@ export const CardTabs = {
 export const Placeholder = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid style="--scroll-height: 410px">
+  <mlv-grid style="--scroll-height: 402px">
     <mlv-grid-header>
       <mlv-grid-column></mlv-grid-column>
     </mlv-grid-header>

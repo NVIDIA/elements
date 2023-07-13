@@ -4,6 +4,7 @@ import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/dropdown/define.js';
 import '@elements/elements/menu/define.js';
+import '@elements/elements/tag/define.js';
 
 define(Select);
 

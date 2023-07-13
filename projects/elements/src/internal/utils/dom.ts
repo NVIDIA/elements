@@ -214,3 +214,7 @@ export function waitForScrollEnd(element: HTMLElement) {
 export function endOfScrollBox(element: HTMLElement, offset = 0) {
   return element.scrollTop + element.offsetHeight + offset >= element.scrollHeight;
 }
+
+export async function openEyeDropper(): Promise<string> {
+  return await new (window as any).EyeDropper().open().then(color => color.sRGBHex);
+}

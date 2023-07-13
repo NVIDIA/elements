@@ -11,6 +11,7 @@
   }
 
   /* Grow */
+  &[mlv-layout~='full'],
   &[mlv-layout~='grow'] {
     height: 100%;
     width: 100%;

@@ -59,7 +59,7 @@ declare global {
         i18nRegistry: Readonly<{ [key: string]: string }>;
         iconRegistry: Readonly<{ [key: string]: any }>;
       },
-      debug: () => void;
+      debug: (log: (...args) => void) => void;
     }
   }
 
@@ -67,6 +67,7 @@ declare global {
     states: {
       add: (state: string) => void;
       delete: (state: string) => void;
+      has: (state: string) => boolean;
     }
   }
 

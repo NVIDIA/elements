@@ -11,6 +11,8 @@
   --color: var(--mlv-sys-layer-overlay-color);
   --padding: var(--mlv-ref-size-400);
   --box-shadow: var(--mlv-ref-shadow-400);
+  --width: fit-content;
+  --min-width: fit-content;
   --_divider-padding: var(--padding);
 }
 
@@ -22,7 +24,8 @@ dialog {
   color: var(--color);
   box-shadow: var(--box-shadow);
   gap: var(--mlv-ref-space-sm);
-  width: fit-content;
+  width: var(--width);
+  min-width: var(--min-width);
   outline: 0;
 }
 

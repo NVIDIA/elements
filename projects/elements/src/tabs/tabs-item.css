@@ -6,64 +6,61 @@
   --width: 100%;
   --font-size: var(--mlv-ref-font-size-200);
   --font-weight: var(--mlv-ref-font-weight-semibold);
+  --border-radius: var(--mlv-ref-border-radius-sm);
+  --color: var(--mlv-sys-text-muted-color);
+  --height: var(--mlv-ref-size-800);
+  --cursor: pointer;
   --mlv-sys-interaction-state-ratio: 0;
 }
 
 [internal-host] {
-  display: inline-flex;
-  align-items: center;
-  border: 0;
-  cursor: pointer;
   width: var(--width);
   gap: var(--mlv-ref-space-xs);
   padding: 0 var(--mlv-ref-size-200);
-  height: var(--mlv-ref-size-800);
-  color: var(--mlv-sys-text-muted-color);
+  height: var(--height);
+  color: var(--color);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   line-height: var(--mlv-ref-font-size-500);
-  position: relative;
   background-image: linear-gradient(color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio)) 0 0) !important;
   inset: var(--border-inset);
+  border-radius: var(--border-radius);
+  cursor: var(--cursor);
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  position: relative;
 }
 
-:host(:is(:--selected)) {
+:host(:--selected) {
+  --color: var(--mlv-sys-text-emphasis-color);
+
   &:after {
-    content: '';
-    display: block;
     width: var(--border-width);
     height: var(--border-height);
-    border-radius: var(--mlv-ref-border-radius-xs);
+    border-radius: var(--border-radius);
     background: var(--mlv-sys-accent-secondary-background);
+    top: var(--border-top);
+    content: '';
+    display: block;
     position: absolute;
     bottom: 0;
-    top: var(--border-top);
     left: 0;
   }
 
-  [internal-host] {
-    color: var(--mlv-sys-text-emphasis-color);
-    border-radius: var(--mlv-ref-border-radius-sm);
-
-    ::slotted(mlv-icon) {
-      --color: var(--mlv-sys-interaction-color);
-    }
+  ::slotted(mlv-icon) {
+    --color: var(--mlv-sys-interaction-color);
   }
 }
 
 :host(:hover:not(:--disabled, :--selected)) {
-  [internal-host] {
-    color: var(--mlv-sys-text-emphasis-color);
-    border-radius: var(--mlv-ref-border-radius-sm);
-    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
-  }
+  --color: var(--mlv-sys-text-emphasis-color);
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
 }
 
 :host(:--disabled) {
-  [internal-host] {
-    cursor: not-allowed;
-    color: var(--mlv-sys-interaction-disabled-color);
-  }
+  --color: var(--mlv-sys-interaction-disabled-color);
+  --cursor: not-allowed;
 }
 
 :host(:is(:focus, focused)) {

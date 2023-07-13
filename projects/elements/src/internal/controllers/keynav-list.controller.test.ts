@@ -167,4 +167,17 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
     expect(element.keynavListConfig.items[5].tabIndex).toBe(-1);
   });
+
+  it('should disable key nav if host has mlv-keynav-disabled attribute', async () => {
+    element.setAttribute('mlv-keynav-disabled', '');
+
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
+    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
+
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
+  });
 });

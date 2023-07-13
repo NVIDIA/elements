@@ -30,41 +30,35 @@ export const CustomOptionRender = {
   <select id="complex">
     <option value="1">
       Debugger
-      <template>
-        <div mlv-layout="row gap:xs align:vertical-center">
-          <mlv-logo color="pink-rose">Db</mlv-logo>
-          <p mlv-layout="column gap:xs">
-            <span mlv-text="label">Debugger</span>
-            <span mlv-text="body muted">some details on option 1</span>
-          </p>
-        </div>
-      </template>
     </option>
     <option value="2">
       Task Manager
-      <template>
-        <div mlv-layout="row gap:xs align:vertical-center">
-          <mlv-logo color="blue-cobalt">TM</mlv-logo>
-          <p mlv-layout="column gap:xs">
-            <span mlv-text="label">Task Manager</span>
-            <span mlv-text="body muted">some details on option 2</span>
-          </p>
-        </div>
-      </template>
     </option>
     <option value="3">
       CI Services
-      <template>
-        <div mlv-layout="row gap:xs align:vertical-center">
-          <mlv-logo color="green-mint">CI</mlv-logo>
-          <p mlv-layout="column gap:xs">
-            <span mlv-text="label">CI Services</span>
-            <span mlv-text="body muted">some details on option 3</span>
-          </p>
-        </div>
-      </template>
     </option>
   </select>
+    <div slot="option-1" mlv-layout="row gap:xs align:vertical-center">
+      <mlv-logo color="pink-rose">Db</mlv-logo>
+      <p mlv-layout="column gap:xs">
+        <span mlv-text="label">Debugger</span>
+        <span mlv-text="body muted">some details on option 1</span>
+      </p>
+    </div>
+    <div slot="option-2" mlv-layout="row gap:xs align:vertical-center">
+      <mlv-logo color="blue-cobalt">TM</mlv-logo>
+      <p mlv-layout="column gap:xs">
+        <span mlv-text="label">Task Manager</span>
+        <span mlv-text="body muted">some details on option 2</span>
+      </p>
+    </div>
+    <div slot="option-3" mlv-layout="row gap:xs align:vertical-center">
+      <mlv-logo color="green-mint">CI</mlv-logo>
+      <p mlv-layout="column gap:xs">
+        <span mlv-text="label">CI Services</span>
+        <span mlv-text="body muted">some details on option 3</span>
+      </p>
+    </div>
   <mlv-control-message>message</mlv-control-message>
 </mlv-select>
   `
@@ -175,31 +169,17 @@ export const Horizontal = {
 
 export const Multiple = {
   render: () => html`
-<div mlv-layout="column gap:xl">
-  <mlv-select>
-    <label>label</label>
-    <select multiple>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-      <option value="4">Option 4</option>
-      <option value="5">Option 5</option>
-    </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
-  <hr />
-  <mlv-select layout="horizontal">
-    <label>label</label>
-    <select multiple>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-      <option value="4">Option 4</option>
-      <option value="5">Option 5</option>
-    </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
-</div>`
+<mlv-select>
+  <label>label</label>
+  <select multiple>
+    <option value="1">Option 1</option>
+    <option value="2" selected>Option 2</option>
+    <option value="3" selected>Option 3</option>
+    <option value="4">Option 4</option>
+    <option value="5">Option 5</option>
+  </select>
+  <mlv-control-message>message</mlv-control-message>
+</mlv-select>`
 };
 
 export const Size = {

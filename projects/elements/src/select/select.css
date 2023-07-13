@@ -10,6 +10,8 @@
   --width: 100%;
   --font-weight: normal;
   --text-align: start;
+  --_input-background: var(--background);
+  --_icon-color: var(--color);
   width: var(--width);
   contain: initial;
 }
@@ -21,6 +23,7 @@
   border-radius: var(--border-radius);
   width: var(--width);
   color: var(--color);
+  align-items: center;
   display: flex;
   align-content: stretch;
   position: relative;
@@ -40,21 +43,38 @@
   color: var(--color) !important;
   padding: var(--padding) !important;
   font-size: var(--font-size) !important;
+  cursor: var(--cursor) !important;
+  font-weight: var(--font-weight) !important;
+  text-align: var(--text-align) !important;
+  height: var(--height) !important;
   width: 100% !important;
   border: 0 !important;
   background: none !important;
   display: block !important;
-  cursor: var(--cursor) !important;
-  font-weight: var(--font-weight) !important;
-  text-align: var(--text-align) !important;
 }
 
-::slotted(select[multiple]) {
+:host(:--multiple) {
+  --padding: 0 var(--mlv-ref-size-100);
+}
+
+:host(:--multiple) [input] {
+  padding: var(--padding);
+  gap: var(--mlv-ref-size-100);
+}
+
+:host(:--multiple) ::slotted(select[multiple]) {
+  opacity: 0 !important;
+}
+
+:host(:--size) ::slotted(select) {
   padding: 0 !important;
   min-height: 100px !important;
 }
 
-:host([layout*='horizontal'][multiple]),
+:host(:--size) [name='caret'] {
+  display: none;
+}
+
 :host([layout*='horizontal'][size]) {
   & ::slotted(label) {
     padding-top: var(--mlv-ref-size-100) !important;
@@ -77,4 +97,27 @@
 
 :host(:--disabled) {
   --border: var(--mlv-ref-border-width-md) solid transparent;
+}
+
+mlv-tag {
+  --background: color-mix(in oklab, var(--color) 15%, var(--_input-background));
+  --padding: var(--mlv-ref-size-100) var(--mlv-ref-size-200);
+  --cursor: pointer !important;
+}
+
+mlv-dropdown {
+  --padding: var(--mlv-ref-size-200);
+}
+
+mlv-menu-item:not(:--selected) mlv-icon[name='checkmark'] {
+  opacity: 0;
+}
+
+mlv-menu-item mlv-icon {
+  --color: inherit;
+}
+
+slot:not([name]),
+slot[name*='option-'] {
+  display: contents;
 }

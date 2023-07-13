@@ -1,10 +1,11 @@
-import { PropertyValues, html, nothing, render } from 'lit';
-import { appendRootNodeStyle, useStyles } from '@elements/elements/internal';
+import { PropertyValues, html, nothing } from 'lit';
+import { appendRootNodeStyle, focusElementTimeout, onListboxActivate, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import { Menu, MenuItem } from '@elements/elements/menu';
 import { Dropdown } from '@elements/elements/dropdown';
+import { Tag } from '@elements/elements/tag';
 import globalStyles from './select.global.css?inline';
 import styles from './select.css?inline';
 
@@ -33,40 +34,45 @@ export class Select extends Control {
     'mlv-menu': Menu,
     'mlv-menu-item': MenuItem,
     'mlv-icon': Icon,
-    'mlv-icon-button': IconButton
-  }
-
-  protected get suffixContent() {
-    return (this.input?.multiple || this.input?.size) ? nothing : html`<mlv-icon part="caret" name="caret" direction="down"></mlv-icon>`;
+    'mlv-icon-button': IconButton,
+    'mlv-tag': Tag
   }
 
   get #select() {
-    return this.querySelector('select');
-  }
-
-  get #options() {
-    return Array.from(this.querySelectorAll('option'));
+    return (this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true })?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement;
   }
 
   get #dropdown() {
-    return this.querySelector('mlv-dropdown');
-  }
-
-  get #menu() {
-    return this.querySelector('mlv-menu');
+    return this.shadowRoot.querySelector('mlv-dropdown');
   }
 
   get #menuItems() {
-    return this.querySelectorAll('mlv-menu-item');
+    return this.shadowRoot.querySelectorAll('mlv-menu-item');
   }
 
-  protected get dropdown() {
+  get #input() {
+    return this.shadowRoot.querySelector('[input]')
+  }
+
+  protected get prefixContent() {
+    return this.input?.multiple ? html`${Array.from(this.#select?.options).filter(o => o.selected).map(o => html`
+      <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o, false)}>${o.textContent}</mlv-tag>
+    `)}` : nothing;
+  }
+
+  protected get suffixContent() {
     return html`
-    <mlv-dropdown hidden .anchor=${this.#select as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
-      <mlv-menu role="listbox">
-        ${this.#options.map(o => html`<mlv-menu-item role="option" aria-selected=${o.value === this.#select.value} ?selected=${o.value === this.#select.value} .value=${o.value}>${this.#getOptionLabel(o)}</mlv-menu-item>`)}
-      </mlv-menu>
-    </mlv-dropdown>`
+      <mlv-icon name="caret" direction="down"></mlv-icon>
+      <mlv-dropdown @close=${e => e.target.hidden = true} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
+        <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content">
+          ${(Array.from(this.#select.options) as HTMLOptionElement[]).map((o, i) => html`
+          <mlv-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} aria-selected=${o.selected}>
+            <slot name="option-${i + 1}">
+              <mlv-icon name="checkmark"></mlv-icon> ${o.innerText}
+            </slot>
+          </mlv-menu-item>`)}
+        </mlv-menu>
+      </mlv-dropdown>`;
   }
 
   connectedCallback() {
@@ -74,40 +80,38 @@ export class Select extends Control {
     appendRootNodeStyle(this, globalStyles);
   }
 
-  firstUpdated(props: PropertyValues<this>): void {
+  async firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
-    render(this.dropdown, this);
-    this.#dropdown.addEventListener('close', () => this.#dropdown.toggleAttribute('hidden'));
-    this.#dropdown.addEventListener('click', (e: any) => this.#selectValue(e.target.value));
-    this.#select.addEventListener('pointerdown', (e: any) => {
-      if (!this.#select.disabled && !this.#select.size && !this.#select.multiple) {
-        e.preventDefault();
-        this.#updateOptions();
-        const width = this.#select.getBoundingClientRect().width;
-        this.#menu.style.setProperty('--width', `${width}px`);
-        this.#menu.style.setProperty('--min-width', `fit-content`);
-        this.#dropdown.style.setProperty('--width', `${width}px`);
-        this.#dropdown.hidden = false;
-      }
-    });
-  }
+    await this.updateComplete;
 
-  #selectValue(value) {
-    if (value) {
-      this.#select.value = value;
-      this.#updateOptions();
-      this.#select.dispatchEvent(new Event('input'));
-      this.#select.dispatchEvent(new Event('change'));
-      this.#dropdown.toggleAttribute('hidden');
+    if (this.#select.size === 0) {
+      onListboxActivate(this.#select, () => {
+        this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
+        this.#dropdown.hidden = false;
+        focusElementTimeout(this.#menuItems[0]);
+      });
     }
   }
 
-  #updateOptions() {
-    this.#menuItems.forEach((o: any) => o.selected = (o.value === this.#select.value))
+  async updated(props: PropertyValues<this>) {
+    super.updated(props);
+    if (this.#select.size !== 0) {
+      this._internals.states.add('--size');
+    }
+
+    if (this.#select.multiple && this.#select.size === 0) {
+      this._internals.states.add('--multiple');
+    }
   }
 
-  #getOptionLabel(option: HTMLOptionElement) {
-    const template = option.querySelector('template');
-    return template ? template.content.cloneNode(true) : option.innerText;
+  #selectValue(option: HTMLOptionElement, selected: boolean) {
+    option.selected = selected;
+    this.#select.dispatchEvent(new Event('input', { bubbles: true }));
+    this.#select.dispatchEvent(new Event('change', { bubbles: true }));
+    this.requestUpdate();
+
+    if (!this.#select.multiple) {
+      this.#dropdown.hidden = true;
+    }
   }
 }
