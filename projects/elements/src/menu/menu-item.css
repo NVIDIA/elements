@@ -67,3 +67,7 @@
 ::slotted(nve-divider) {
   margin: 0 calc(-1 * var(--padding));
 }
+
+::slotted(nve-icon) {
+  --color: inherit;
+}

@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { untilEvent } from '@elements/elements/test';
 import { GlobalStateService } from './global.service.js';
 
@@ -30,5 +30,23 @@ describe('GlobalStateService', () => {
     expect((await event).detail.elementRegistry).toStrictEqual({
       one: '0.0.0'
     });
+  });
+
+  it('should log out state when debug() is called', async () => {
+    const event = untilEvent(document, 'TEST_EVENT');
+    GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
+    await event;
+
+    expect((await event).detail.elementRegistry).toStrictEqual({
+      one: '0.0.0'
+    });
+
+    const watch = {
+      fn: () => null
+    };
+
+    vi.spyOn(watch, 'fn');
+    window.MLV_ELEMENTS.debug(watch.fn);
+    expect(watch.fn).toHaveBeenCalled();
   });
 });

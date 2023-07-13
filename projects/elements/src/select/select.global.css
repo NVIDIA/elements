@@ -11,7 +11,3 @@ nve-select option:checked {
   background: var(--nve-sys-interaction-selected-background) !important;
   color: var(--nve-sys-interaction-selected-color) !important;
 }
-
-nve-select nve-dropdown {
-  --padding: var(--nve-ref-size-200);
-}

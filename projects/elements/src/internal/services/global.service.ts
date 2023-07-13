@@ -3,7 +3,7 @@ import { deepMerge } from '../utils/objects.js';
 export class GlobalState {
   constructor() {
     window.MLV_ELEMENTS ??= {
-      debug: () => console.log(`%c@elements/elements\n%c${JSON.stringify(window.MLV_ELEMENTS.state, null, 2)}`, 'color: #69b027', 'color: inherit'),
+      debug: (log = console.log) => log(`%c@elements/elements\n%c${JSON.stringify(window.MLV_ELEMENTS.state, null, 2)}`, 'color: #69b027', 'color: inherit'),
       state: {
         versions: [],
         elementRegistry: { },
