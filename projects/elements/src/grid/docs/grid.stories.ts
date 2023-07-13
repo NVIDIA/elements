@@ -74,7 +74,7 @@ export const MultiSelect = {
 export const MultiSelectBulkActions = {
   render: () => html`
 <div nve-theme="root">
-  <nve-grid style="--scroll-height: 410px">
+  <nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       <nve-grid-column width="max-content" position="fixed">
         <nve-checkbox>
@@ -170,7 +170,7 @@ export const Footer = {
 export const FooterScrollbar = {
   render: () => html`
 <div nve-theme="root">
-<nve-grid style="--scroll-height: 410px">
+<nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
     </nve-grid-header>
@@ -210,7 +210,7 @@ export const Pagination = {
 export const Scroll = {
   render: () => html`
 <div nve-theme="root">
-  <nve-grid style="--scroll-height: 410px">
+  <nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
     </nve-grid-header>
@@ -256,7 +256,7 @@ export const ColumnAction = {
 export const ColumnWidth = {
   render: () => html`
 <div nve-theme="root">
-  <nve-grid style="--scroll-height: 410px">
+  <nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</nve-grid-column> `)}
     </nve-grid-header>
@@ -274,7 +274,7 @@ export const ColumnWidth = {
 export const ColumnFixed = {
   render: () => html`
 <div nve-theme="root">
-  <nve-grid style="--scroll-height: 410px; max-width: 800px">
+  <nve-grid style="--scroll-height: 402px; max-width: 800px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column> `)}
     </nve-grid-header>
@@ -291,7 +291,7 @@ export const ColumnFixed = {
 export const ColumnMultiFixed = {
   render: () => html`
 <div nve-theme="root">
-  <nve-grid style="--scroll-height: 410px; max-width: 800px">
+  <nve-grid style="--scroll-height: 402px; max-width: 800px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column>`)}
     </nve-grid-header>
@@ -308,7 +308,7 @@ export const ColumnMultiFixed = {
 export const ColumnStackFixed = {
   render: () => html`
 <div nve-theme="root">
-  <nve-grid style="--scroll-height: 410px; max-width: 800px">
+  <nve-grid style="--scroll-height: 402px; max-width: 800px">
     <nve-grid-header>
       <nve-grid-column position="fixed" width="100px">Column 1</nve-grid-column>
       <nve-grid-column position="fixed" width="100px">Column 2</nve-grid-column>
@@ -517,7 +517,7 @@ class InfiniteScrollDemo extends LitElement {
 
   render() {
     return html`
-      <nve-grid style="--scroll-height: 400px" @scrollend=${() => this.#loadGroup()}>
+      <nve-grid style="--scroll-height: 400px" @scrollboxend=${() => this.#loadGroup()}>
         <nve-grid-header>
           ${this.grid.columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column>`)}
         </nve-grid-header>
@@ -701,7 +701,7 @@ export const CardTabs = {
 export const Placeholder = {
   render: () => html`
 <div nve-theme="root">
-  <nve-grid style="--scroll-height: 410px">
+  <nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       <nve-grid-column></nve-grid-column>
     </nve-grid-header>

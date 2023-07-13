@@ -51,6 +51,10 @@ export function focusElement(element: HTMLElement) {
   }
 }
 
+export function focusElementTimeout(element: HTMLElement) {
+  setTimeout(() => focusElement(element));
+}
+
 export function setActiveKeyListItem(items: NodeListOf<HTMLElement> | HTMLElement[], item: HTMLElement) {
   items.forEach(i => (i.tabIndex = -1));
   item.tabIndex = 0;
@@ -59,4 +63,29 @@ export function setActiveKeyListItem(items: NodeListOf<HTMLElement> | HTMLElemen
 export function initializeKeyListItems(items: NodeListOf<HTMLElement> | HTMLElement[]) {
   items.forEach(i => (i.tabIndex = -1));
   items[0] && (items[0].tabIndex = 0);
+}
+
+/** determines if user interaction is a valid interaction for activating a listbox type */
+export function onListboxActivate(element: HTMLElement & { disabled?: boolean }, fn: (event: Event) => void) {
+  const validKey = e => e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'ArrowDown';
+
+  element.addEventListener('pointerdown', (e: any) => {
+    e.preventDefault();
+
+    if (!element.disabled) {
+      fn(e);
+    }
+  });
+
+  element.addEventListener('keyup', (e: any) => {
+    if (validKey(e) && !element.disabled) {
+      fn(e);
+    }
+  });
+
+  element.addEventListener('keydown', (e: any) => {
+    if (validKey(e) && !element.disabled) {
+      e.preventDefault();
+    }
+  });
 }
