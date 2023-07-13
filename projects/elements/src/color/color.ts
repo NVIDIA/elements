@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { appendRootNodeStyle, useStyles } from '@elements/elements/internal';
+import { appendRootNodeStyle, openEyeDropper, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
 import globalStyles from './color.global.css?inline';
@@ -32,7 +32,7 @@ export class Color extends Control {
     }
   }
 
-  #select() {
-    new (window as any).EyeDropper().open().then(color => this.input.value = color.sRGBHex).catch(() => null);
+  async #select() {
+    this.input.value = await openEyeDropper();
   }
 }

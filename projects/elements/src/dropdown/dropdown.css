@@ -11,6 +11,8 @@
   --color: var(--nve-sys-layer-overlay-color);
   --padding: var(--nve-ref-size-400);
   --box-shadow: var(--nve-ref-shadow-400);
+  --width: fit-content;
+  --min-width: fit-content;
   --_divider-padding: var(--padding);
 }
 
@@ -22,7 +24,8 @@ dialog {
   color: var(--color);
   box-shadow: var(--box-shadow);
   gap: var(--nve-ref-space-sm);
-  width: fit-content;
+  width: var(--width);
+  min-width: var(--min-width);
   outline: 0;
 }
 

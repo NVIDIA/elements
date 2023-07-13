@@ -1,14 +1,9 @@
 import { defineConfig } from 'vitest/config';
 import path from 'path';
 import process from 'process';
-import glob from 'glob';
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
-const coverage = (process.argv.findIndex((i) => i === '--coverage') !== -1);
-const base = coverage ? 'src' : 'dist';
-const entries = glob.sync('./src/**/define.ts')
-  .map(path => path.replace('.ts', '.js'))
-  .reduce((p, i) => ({ ...p, [i.replace('./src', '@elements/elements').replace('/index.js', '')]: resolve(i.replace('src', base)).replace('.js', coverage ? '.ts' : '.js') }), { });
+const base = (process.argv.findIndex((i) => i === '--coverage') !== -1) ? 'src' : 'dist';
 
 export default defineConfig({
   optimizeDeps: {
@@ -21,11 +16,8 @@ export default defineConfig({
   test: {
     root: resolve('.'),
     alias: {
-      ...entries,
-      '@elements/elements/test': resolve(`./${base}/test`),
-      '@elements/elements/internal': resolve(`./${base}/internal`),
-      '@elements/elements/scoped': resolve(`./${base}/scoped`),
       '@elements/elements': resolve(`./${base}`),
+      '@elements/elements/': resolve(`./${base}/`),
     },
     include: [resolve('./src/**/*.test.ts')],
     forceRerunTriggers: ['**/dist/**'],
@@ -42,7 +34,7 @@ export default defineConfig({
       reportsDirectory: resolve('./coverage'),
       reporter: ['lcov', 'html', 'json-summary'],
       lines: 90,
-      branches: 85,
+      branches: 90,
       functions: 90,
       statements: 90,
       watermarks: {
@@ -51,9 +43,27 @@ export default defineConfig({
         branches: [80, 90],
         lines: [80, 90]
       },
-      exclude: ['**/storybook/**', '**/polyfills/**', '**/test/**', '**/*.test.ts', '**/docs.ts', '**/*.css.js', '**/*.css', '**/index.js', '**/src/icon/icons/**', '**/src/icon/icons.ts', '**/src/forms/utils/states.ts'] // disable form state due to source map error
+      exclude: [
+        '**/storybook/**',
+        '**/polyfills/**',
+        '**/test/**',
+        '**/*.test.ts',
+        '**/docs.ts',
+        '**/*.css.js',
+        '**/*.css',
+        '**/index.js',
+        '**/src/icon/icons/**',
+        '**/src/icon/icons.ts',
+        '**/src/app-header/app-header.ts', // https://github.com/vitest-dev/vitest/issues/3514
+        '**/src/internal/controllers/type-popover.utils.ts', // https://github.com/vitest-dev/vitest/issues/3514
+        '**/src/internal/utils/events.ts', // https://github.com/vitest-dev/vitest/issues/3514
+        '**/src/internal/utils/dom.ts', // https://github.com/vitest-dev/vitest/issues/3514
+        '**/src/internal/utils/focus.ts', // https://github.com/vitest-dev/vitest/issues/3514
+        '**/src/forms/utils/states.ts' // https://github.com/vitest-dev/vitest/issues/3514
+      ]
     },
     browser: {
+      slowHijackESM: false,
       enabled: true,
       provider: 'playwright',
       name: 'chromium'
