@@ -35,4 +35,9 @@ describe('deepMerge', () => {
 
     expect(deepMerge(obj1, obj2)).toStrictEqual(merged);
   });
+
+  it('works when nested fields change their type to object', () => {
+    const result = deepMerge({ field: 'hello' }, { field: { a: 1 } });
+    expect(result).toStrictEqual({ field: { a: 1 } });
+  });
 });
