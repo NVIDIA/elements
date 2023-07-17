@@ -29,7 +29,7 @@ fs.readdirSync(inputPath).filter(file => file.endsWith('.svg')).sort().forEach(f
 
 fs.writeFileSync(`${outputPath}/icons.ts`, `
 // This is an auto-generated file. DO NOT EDIT
-export const ICON_IMPORTS = {\n${Object.keys(icons).map(i => `  '${i}': () => import('./icons/${i}.svg?raw'),`).join('\n')}\n};
+export const ICON_IMPORTS = {\n${Object.keys(icons).map(i => `  '${i}': {\n    svg: () => import('./icons/${i}.svg?raw')\n  },`).join('\n')}\n};
 
 export type IconName = ${Object.keys(icons).map(i => `'${i}'`).join(' | ')};
 
