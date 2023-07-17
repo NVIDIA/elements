@@ -102,7 +102,7 @@ class IconDemo extends LitElement {
 
 export const PreviewAllIcons = {
   render: () => html`
-    ${ICON_NAMES.map((iconName) => html`<mlv-icon .name=${iconName as IconName}></mlv-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<mlv-icon name=${iconName as IconName}></mlv-icon>\n`
     )}
   `,
   args: { name: 'user' }
@@ -161,5 +161,43 @@ export const Themes = {
       <mlv-icon name="user" status="warning"></mlv-icon>
       <mlv-icon name="user" status="danger"></mlv-icon>
     </div>
+  `
+}
+
+
+export const Registration = {
+  render: () => html`
+    <mlv-icon name="inference-ai-posters" style="--width: 75px; --height: 75px;"></mlv-icon>
+    <mlv-icon name="automotive-vehicles-autonomous-car-side" style="--width: 75px; --height: 75px;"></mlv-icon>
+
+    <script type="module">
+      customElements.get('mlv-icon').add({
+        'inference-ai-posters': {
+          svg: () => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48"><g clip-path="url(#inference-ai-posters__a)"><path fill="currentColor" d="M40.5 11.5h-33v25h33v-25Zm-1 24h-31v-23h31v23ZM5.5 9.325V38.5h37V9.325h-37Zm36 28.175h-35V10.325h35V37.5Zm-26-10.908a1.477 1.477 0 0 0-1.23.093 1.5 1.5 0 1 0 1.908 2.233L22.5 32.04a1.5 1.5 0 0 0 2.992 0l6.326-3.122a1.506 1.506 0 1 0 .679-2.326l-1.927-2.623 1.853-2.585a1.5 1.5 0 1 0-.5-2.42l-6.432-2.842c0-.041.012-.08.012-.122a1.5 1.5 0 1 0-3 0c0 .042.009.081.012.122l-6.435 2.842a1.5 1.5 0 1 0-.5 2.42l1.853 2.585-1.933 2.623Zm8-9.184a1.4 1.4 0 0 0 1 0l3.246 4.41-2.567 1.265a1.482 1.482 0 0 0-2.356 0l-2.567-1.265 3.244-4.41Zm8 10.552-5.869 2.9 3.035-4.235 2.842 1.255c.002.02-.008.052-.008.08Zm-15.016-.084 2.842-1.255 3.035 4.235L16.5 27.96c0-.028-.01-.06-.012-.084h-.004Zm7.852 2.666a1.4 1.4 0 0 0-.68 0l-3.267-4.39 2.526-1.116a1.492 1.492 0 0 0 2.162 0l2.526 1.116-3.267 4.39ZM24.5 24a.5.5 0 0 1-.038.189v.011a.5.5 0 0 1-.914 0v-.011A.5.5 0 1 1 24.5 24Zm.988.122c0-.027.007-.054.008-.081l2.852-1.4.932 1.259-1.06 1.425-2.732-1.203Zm-2.988-.081c0 .027.006.054.008.081l-2.728 1.207-1.06-1.429.932-1.267 2.848 1.408Zm-3.769 1.75-2.081.919 1.388-1.886.693.967ZM14.5 28a.5.5 0 1 1 .999.002A.5.5 0 0 1 14.5 28Zm9.5 4.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1Zm9.5-4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm-2.154-1.29-2.081-.919.693-.967 1.388 1.886Zm-2.087-4.522 2.048-1.008-1.4 1.884-.648-.876ZM33.5 20a.5.5 0 0 1-.692.461l-.172-.123-.011-.017-.1-.206A.492.492 0 0 1 32.5 20a.5.5 0 0 1 .998.007L33.5 20Zm-2-.031-2.846 1.4-3-4.081 5.858 2.588c-.002.032-.012.062-.012.093ZM24 15.5a.5.5 0 0 1 .463.685l-.009.019a.507.507 0 0 1-.1.149h-.006a.495.495 0 0 1-.7 0h-.006a.507.507 0 0 1-.1-.149l-.009-.019A.5.5 0 0 1 24 15.5Zm-1.654 1.789-3 4.081-2.846-1.4c0-.03-.007-.06-.009-.091l5.855-2.59ZM14.5 20a.5.5 0 1 1 1 0 .459.459 0 0 1-.024.117l-.1.2-.013.02-.172.123a.49.49 0 0 1-.545-.106A.5.5 0 0 1 14.5 20Zm2.193 1.18 2.048 1.008-.646.876-1.402-1.884Z"/></g><defs><clipPath id="inference-ai-posters__a"><path fill="currentColor" d="M0 0h48v48H0z"/></clipPath></defs></svg>'
+        },
+        'automotive-vehicles-autonomous-car-side': {
+          svg: () => fetch('https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg').then(r => r.text())
+        }
+      });
+    </script>
+  `
+}
+
+export const Alias = {
+  render: () => html`
+    <mlv-icon name="chevron"></mlv-icon>
+    <mlv-icon name="chevron-up"></mlv-icon>
+
+    <script type="module">
+      customElements.get('mlv-icon').alias({
+        'chevron': 'chevron-up'
+      });
+    </script>
+  `
+}
+
+export const Source = {
+  render: () => html`
+    <mlv-icon name="https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg" style="--width: 75px; --height: 75px;"></mlv-icon>
   `
 }

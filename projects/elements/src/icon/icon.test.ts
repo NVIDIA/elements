@@ -35,4 +35,24 @@ describe('mlv-icon', () => {
     await elementIsStable(element);
     expect(element.getAttribute('name')).toBe('book');
   });
+
+  it('should allow icon aliasing', () => {
+    expect((customElements.get('mlv-icon') as any)._icons['chevron-up']).toBe((customElements.get('mlv-icon') as any)._icons['chevron']);
+  });
+
+  it('should allow icons to be registered', async () => {
+    (customElements.get('mlv-icon') as any).add({
+      'test-svg': { svg: () => '<svg id="test-svg"><path d=""/></svg>' }
+    });
+
+    expect((customElements.get('mlv-icon') as any)._icons['test-svg']).toBeDefined();
+  });
+
+  it('should allow dynamic paths', async () => {
+    element.name = './assets/icons.svg' as any;
+    await elementIsStable(element);
+    await new Promise(r => setTimeout(r, 100));
+    expect((customElements.get('mlv-icon') as any)._icons['./assets/icons.svg']).toBeTruthy();
+  });
+
 });

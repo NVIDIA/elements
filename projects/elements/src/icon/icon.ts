@@ -47,10 +47,36 @@ export class Icon extends LitElement {
     `;
   }
 
+  static _icons = ICON_IMPORTS;
+
+  static add(icons: any) {
+    const IconDefinition = customElements.get('mlv-icon') as any;
+    IconDefinition._icons = { ...IconDefinition._icons, ...icons };
+    Object.keys(icons).forEach(name => document.dispatchEvent(new CustomEvent(`mlv-icon-${name}`)));
+  }
+
+  static alias(aliases: { [key: string]: IconName | string }) {
+    const IconDefinition = customElements.get('mlv-icon') as any;
+    Object.keys(aliases).forEach(alias => {
+      const name = aliases[alias];
+      IconDefinition._icons[alias] = IconDefinition._icons[name];
+      document.dispatchEvent(new CustomEvent(`mlv-icon-${alias}`));
+    });
+  }
+
   async updated(props: PropertyValues<this>) {
     super.updated(props);
-    if (ICON_IMPORTS[this.name]) {
-      this.svg = (await ICON_IMPORTS[this.name]()).default;
+    this.svg = await this.#render();
+    if (!Icon._icons[this.name] || !this.svg) {
+      document.addEventListener(`mlv-icon-${this.name}`, () => this.requestUpdate(), { once: true });
     }
+  }
+
+  async #render() {
+    const dynamic = { svg: () => fetch(this.name).then(res => res.text()) };
+    const value = await (this.name?.endsWith('.svg') ? dynamic : Icon._icons[this.name])?.svg() ?? '';
+    const svg = typeof value === 'string' ? value : value.default;
+    Icon._icons[this.name] = { svg: () => svg as any, ...Icon._icons[this.name] };
+    return svg;
   }
 }
