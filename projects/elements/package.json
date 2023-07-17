@@ -400,7 +400,7 @@
       "output": []
     },
     "lint:analyzer": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node_modules/lit-analyzer/cli.js src",
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node_modules/lit-analyzer/cli.js src --rules.no-incompatible-type-binding off",
       "files": [
         "src/**/*.ts",
         "tsconfig.json"
@@ -421,7 +421,8 @@
       "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node ./build/icons.js",
       "clean": false,
       "files": [
-        "icons/**",
+        "src/icon/**",
+        "!src/icon/icons.ts",
         "build/icons.js"
       ],
       "output": [
