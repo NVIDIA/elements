@@ -14,7 +14,7 @@ ol, li {
   min-height: 0;
   align-items: flex-start;
   justify-content: stretch;
-  gap: var(--nve-ref-size-100);
+  gap: var(--nve-ref-space-xxs);
 }
 
 li {
@@ -30,6 +30,7 @@ li {
   --color: var(--item-color);
   --padding: 0 var(--nve-ref-size-100);
   --height: var(--breadcrumb-height);
+  --font-weight: var(--nve-ref-font-weight-medium);
 }
 
 ::slotted(nve-button:hover) {
