@@ -64,7 +64,7 @@ export class Select extends Control {
     return html`
       <nve-icon name="caret" direction="down"></nve-icon>
       <nve-dropdown @close=${e => e.target.hidden = true} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
-        <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content">
+        <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label="options">
           ${(Array.from(this.#select.options) as HTMLOptionElement[]).map((o, i) => html`
           <nve-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} aria-selected=${o.selected}>
             <slot name="option-${i + 1}">
