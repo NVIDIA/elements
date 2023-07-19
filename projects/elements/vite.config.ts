@@ -22,7 +22,6 @@ export default defineConfig((env) => {
   execSync(`node ${resolve('./tokens/style-dictionary.config.cjs')} --outDir ${resolve('./')}/dist/`);
   execSync(`node ${resolve('./build/css-var-completions.js')}`);
   execSync(`node ${resolve('./build/vscode-custom-data.js')}`);
-  // execSync(`node ./node_modules/playwright/cli.js install chromium --with-deps`);
 
   return {
     resolve: {
@@ -38,13 +37,11 @@ export default defineConfig((env) => {
     plugins: [
       {
         ...dts({
-          tsConfigFilePath: './tsconfig.lib.json',
+          tsconfigPath: './tsconfig.lib.json',
           root: resolve('.'),
           entryRoot: resolve('./src'),
-          outputDir: dist(),
-          staticImport: true,
-          noEmitOnError: true,
-          skipDiagnostics: false
+          outDir: dist(),
+          staticImport: true
         }),
         enforce: 'pre'
       }

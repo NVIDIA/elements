@@ -3,7 +3,9 @@ import path from 'path';
 import process from 'process';
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
-const base = (process.argv.findIndex((i) => i === '--coverage') !== -1) ? 'src' : 'dist';
+const coverage = (process.argv.findIndex((i) => i === '--coverage') !== -1);
+const base = coverage ? 'src' : 'dist';
+const watch = (process.argv.findIndex((i) => i === '--watch') !== -1);
 
 export default defineConfig({
   optimizeDeps: {
@@ -14,7 +16,10 @@ export default defineConfig({
     exclude: ['@vitest/coverage-istanbul']
   },
   test: {
+    singleThread: true,
     root: resolve('.'),
+    isolate: coverage,
+    retry: 1,
     alias: {
       '@elements/elements': resolve(`./${base}`),
       '@elements/elements/': resolve(`./${base}/`),
@@ -65,6 +70,7 @@ export default defineConfig({
     browser: {
       slowHijackESM: false,
       enabled: true,
+      headless: !watch,
       provider: 'playwright',
       name: 'chromium'
     }

@@ -1,5 +1,4 @@
 import { TemplateResult, render } from 'lit';
-import '@elements/elements/polyfills'; // polyfills for required for vitest
 
 export * from './demo.js';
 

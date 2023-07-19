@@ -1,5 +1,3 @@
-import '@vitest/coverage-istanbul';
-
 // filter out logs in vitest https://github.com/vitest-dev/vitest/issues/1700
 const warn = console.warn;
 const log = (...msg) => {

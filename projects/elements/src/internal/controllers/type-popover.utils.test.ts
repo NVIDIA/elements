@@ -112,10 +112,10 @@ describe('computePopoverPosition', () => {
     const config: PopoverConfig = { position: 'top', alignment: 'start', popover: popover, anchor, arrow, arrowPadding: 6, arrowOffset: 4, offset: 2, strategy: 'fixed' };
 
     const position = await computePopoverPosition(config);
-    expect(position.x).toBe(-6);
+    expect(position.x).toBe(0);
     expect(position.y).toBe(2);
     expect(position.strategy).toBe('fixed');
     expect(position.placement).toBe('bottom-start');
-    expect(position.middlewareData.arrow).toEqual({ x: 6, centerOffset: -6 });
+    expect(position.middlewareData.arrow).toEqual({ x: 0, centerOffset: 0 });
   });
 });

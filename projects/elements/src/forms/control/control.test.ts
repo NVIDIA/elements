@@ -12,6 +12,7 @@ describe('nve-control', () => {
   let datalist: HTMLDataListElement;
   let message: ControlMessage;
 
+
   beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-control>
@@ -135,5 +136,14 @@ describe('nve-control custom', () => {
     element.input.showPicker();
     await element.updateComplete;
     expect(document.activeElement).toBe(element.input);
+  });
+
+  it('should create a control instance without throwing due to not yet slotted input', async () => {
+    const control = document.createElement('nve-control');
+    control.id = 'nve-control-instance';
+    document.body.appendChild(control);
+
+    expect(document.querySelector('#nve-control-instance')).toBeDefined();
+    control.remove();
   });
 });
