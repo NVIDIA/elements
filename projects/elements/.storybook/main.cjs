@@ -3,6 +3,9 @@ const { mergeConfig } = require('vite');
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 
+// https://storybook.js.org/docs/react/faq#how-do-i-fix-module-resolution-while-using-pnpm-plug-n-play
+const wrapForPnp = (packageName) => path.dirname(require.resolve(path.join(packageName, 'package.json')));
+
 module.exports = {
   staticDirs: ['../.storybook/assets'],
   stories: [
@@ -14,9 +17,9 @@ module.exports = {
     '../tokens/**/*.stories.mdx',
     '../tokens/**/*.stories.ts'
   ],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: [wrapForPnp('@storybook/addon-links'), wrapForPnp('@storybook/addon-essentials')],
   framework: {
-    name: '@storybook/web-components-vite'
+    name: wrapForPnp('@storybook/web-components-vite')
   },
   async viteFinal(config) {
     return mergeConfig(config, {

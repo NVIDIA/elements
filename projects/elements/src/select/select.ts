@@ -64,7 +64,7 @@ export class Select extends Control {
     return html`
       <mlv-icon name="caret" direction="down"></mlv-icon>
       <mlv-dropdown @close=${e => e.target.hidden = true} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
-        <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content">
+        <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label="options">
           ${(Array.from(this.#select.options) as HTMLOptionElement[]).map((o, i) => html`
           <mlv-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} aria-selected=${o.selected}>
             <slot name="option-${i + 1}">

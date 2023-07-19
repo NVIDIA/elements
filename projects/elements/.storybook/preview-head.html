@@ -63,14 +63,6 @@
     padding: 48px 0;
   }
 
-  .docs-story {
-    padding-bottom: 42px;
-  }
-
-  .docs-story > div:first-child {
-    padding: 12px 12px 36px 12px !important;
-  }
-
   .css-q22hxw:has(.full-width) {
     max-width: 100% !important;
   }
@@ -106,14 +98,14 @@
   }
 
   .sbdocs-title,
-  .sbdocs h1,
-  .sbdocs h2,
-  .sbdocs h3,
-  .sbdocs h4,
-  .sbdocs h5,
-  .sbdocs h6,
-  .sbdocs p,
-  .sbdocs li,
+  .sbdocs h1:not([mlv-text]),
+  .sbdocs h2:not([mlv-text]),
+  .sbdocs h3:not([mlv-text]),
+  .sbdocs h4:not([mlv-text]),
+  .sbdocs h5:not([mlv-text]),
+  .sbdocs h6:not([mlv-text]),
+  .sbdocs p:not([mlv-text]),
+  .sbdocs li:not([mlv-text]),
   .sbdocs-blockquote,
   h2.css-wzniqs + p {
     font-family: var(--mlv-ref-font-family) !important;
@@ -294,14 +286,27 @@
 
   .playground-btn {
     position: absolute;
-    bottom: -32px;
-    right: 99px;
+    bottom: -38px;
+    right: 90px;
     --height: 24px;
     --font-size: 12px;
   }
 
+  .css-luvzlg,
+  .css-1wjen9k {
+    padding: 12px 12px 48px 12px !important;
+  }
+
+  .css-luvzlg,
+  .css-ij01h6,
   .css-1wjen9k {
     overflow: visible !important;
+    position: static !important;
+  }
+
+  .css-16dy5eq,
+  .css-ljvrp8 {
+    width: 100%;
   }
 
   .sbdocs-preview > div:nth-child(2) {

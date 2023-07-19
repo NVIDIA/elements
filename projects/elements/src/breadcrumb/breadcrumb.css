@@ -14,7 +14,7 @@ ol, li {
   min-height: 0;
   align-items: flex-start;
   justify-content: stretch;
-  gap: var(--mlv-ref-size-100);
+  gap: var(--mlv-ref-space-xxs);
 }
 
 li {
@@ -30,6 +30,7 @@ li {
   --color: var(--item-color);
   --padding: 0 var(--mlv-ref-size-100);
   --height: var(--breadcrumb-height);
+  --font-weight: var(--mlv-ref-font-weight-medium);
 }
 
 ::slotted(mlv-button:hover) {

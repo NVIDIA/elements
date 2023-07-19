@@ -1,4 +1,4 @@
-import { LitElement, html, PropertyValues, nothing, TemplateResult } from 'lit';
+import { LitElement, html, nothing, TemplateResult } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
@@ -102,18 +102,19 @@ export class Control extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
-    this.shadowRoot.addEventListener('slotchange', () => this.#updateStyleStates());
-
-    if (!this.input.showPicker) {
-      this.input.showPicker = () => this.input.focus();
-    }
-  }
-
-  firstUpdated(props: PropertyValues<this>) {
-    super.firstUpdated(props);
     this.setAttribute('mlv-control', '');
     this.setAttribute('mlv-control', this.querySelector('[mlv-control]') ? 'custom' : '');
+
+    this.shadowRoot.addEventListener('slotchange', () => {
+      if (this.input && this.#observers.length === 0) {
+        this.#setupInput();
+      }
+    });
+  }
+
+  #setupInput() {
     setupControlValidationStates(this, this.#messages);
+
     this.#observers.push(
       ...setupControlStates(this),
       ...setupControlStatusStates(this, this.#messages),
@@ -121,8 +122,18 @@ export class Control extends LitElement {
       getAttributeListChanges(this, ['hidden', 'status'], () => this.#updateStyleStates())
     );
 
+    this.#polyfillShowPicker();
     this.#updateAssociations();
-    this.shadowRoot.addEventListener('slotchange', () => this.#updateAssociations());
+    this.shadowRoot.addEventListener('slotchange', () => {
+      this.#updateStyleStates();
+      this.#updateAssociations();
+    });
+  }
+
+  #polyfillShowPicker() {
+    if (!this.input.showPicker) {
+      this.input.showPicker = () => this.input.focus();
+    }
   }
 
   #updateStyleStates() {

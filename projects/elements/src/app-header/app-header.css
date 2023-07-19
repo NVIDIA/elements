@@ -23,17 +23,17 @@
   align-items: center;
   justify-items: center;
   justify-content: center;
-  gap: var(--mlv-ref-space-sm);
+  gap: var(--mlv-ref-space-xs);
   margin: 0;
   min-height: 0;
 }
 
 ::slotted([slot='title']),
 slot[name='title'] h2 {
-  font-family: var(--mlv-ref-font-family);
-  font-size: var(--mlv-ref-font-size-200);
-  font-weight: var(--mlv-ref-font-weight-semibold);
-  color: var(--mlv-sys-text-color);
+  font-family: var(--mlv-ref-font-family) !important;
+  font-size: var(--mlv-ref-font-size-200) !important;
+  font-weight: var(--mlv-ref-font-weight-semibold) !important;
+  color: var(--mlv-sys-text-muted-color) !important;
   white-space: initial;
   margin: 0;
 }
@@ -49,6 +49,7 @@ slot {
 
 slot[name="nav-items"] {
   margin: 0 auto 0 var(--mlv-ref-space-xxl);
+  gap: var(--mlv-ref-space-xxs);
 }
 
 slot[name="nav-actions"] {
@@ -58,12 +59,14 @@ slot[name="nav-actions"] {
 ::slotted(mlv-button[slot="nav-items"]) {
   --color: var(--mlv-sys-text-muted-color);
   --border-radius: 2px;
+  --font-weight: var(--mlv-ref-font-weight-medium);
 }
 
 ::slotted(mlv-button[slot="nav-items"][selected]) {
   --color: var(--mlv-sys-text-emphasis-color);
   --text-decoration: none;
   --mlv-sys-interaction-state-ratio-active: 0;
+  --font-weight: var(--mlv-ref-font-weight-semibold);
 }
 
 ::slotted(mlv-icon-button[slot="nav-items"][selected]) {

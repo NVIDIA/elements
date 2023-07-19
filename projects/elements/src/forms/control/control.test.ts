@@ -12,6 +12,7 @@ describe('mlv-control', () => {
   let datalist: HTMLDataListElement;
   let message: ControlMessage;
 
+
   beforeEach(async () => {
     fixture = await createFixture(html`
       <mlv-control>
@@ -135,5 +136,14 @@ describe('mlv-control custom', () => {
     element.input.showPicker();
     await element.updateComplete;
     expect(document.activeElement).toBe(element.input);
+  });
+
+  it('should create a control instance without throwing due to not yet slotted input', async () => {
+    const control = document.createElement('mlv-control');
+    control.id = 'mlv-control-instance';
+    document.body.appendChild(control);
+
+    expect(document.querySelector('#mlv-control-instance')).toBeDefined();
+    control.remove();
   });
 });
