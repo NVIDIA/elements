@@ -7,7 +7,7 @@
   --width: var(--nve-ref-size-800);
   --icon-width: var(--nve-ref-size-400);
   --icon-height: var(--nve-ref-size-400);
-  --font-size: calc(var(--width) / 2);
+  --font-size: calc(var(--width) / 2.3);
 }
 
 :host([size='sm']) {

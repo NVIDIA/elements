@@ -47,12 +47,12 @@ describe('state-active.controller', () => {
   });
 
   it('should not trigger scroll behavior when Space is pressed', async () => {
-    expect(document.body.getBoundingClientRect().top).toBe(0);
+    const original = document.body.getBoundingClientRect().top;
 
     element.dispatchEvent(new KeyboardEvent('keypress', { code: 'Space' }));
     await elementIsStable(element);
 
-    expect(document.body.getBoundingClientRect().top).toBe(0);
+    expect(document.body.getBoundingClientRect().top).toBe(original);
   });
 
   it('should add active state on space keypress', async () => {

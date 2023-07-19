@@ -24,6 +24,8 @@ describe('GlobalStateService', () => {
   });
 
   it('should update i18n state', () => {
+    const original = { ...I18nService.i18n };
+
     I18nService.update({
       close: 'fermer',
       expand: 'étendre',
@@ -51,5 +53,7 @@ describe('GlobalStateService', () => {
       end: 'page de fin',
       currentPage: 'page actuelle'
     });
+
+    I18nService.update(original);
   });
 });

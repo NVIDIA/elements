@@ -23,17 +23,17 @@
   align-items: center;
   justify-items: center;
   justify-content: center;
-  gap: var(--nve-ref-space-sm);
+  gap: var(--nve-ref-space-xs);
   margin: 0;
   min-height: 0;
 }
 
 ::slotted([slot='title']),
 slot[name='title'] h2 {
-  font-family: var(--nve-ref-font-family);
-  font-size: var(--nve-ref-font-size-200);
-  font-weight: var(--nve-ref-font-weight-semibold);
-  color: var(--nve-sys-text-color);
+  font-family: var(--nve-ref-font-family) !important;
+  font-size: var(--nve-ref-font-size-200) !important;
+  font-weight: var(--nve-ref-font-weight-semibold) !important;
+  color: var(--nve-sys-text-muted-color) !important;
   white-space: initial;
   margin: 0;
 }
@@ -49,6 +49,7 @@ slot {
 
 slot[name="nav-items"] {
   margin: 0 auto 0 var(--nve-ref-space-xxl);
+  gap: var(--nve-ref-space-xxs);
 }
 
 slot[name="nav-actions"] {
@@ -58,12 +59,14 @@ slot[name="nav-actions"] {
 ::slotted(nve-button[slot="nav-items"]) {
   --color: var(--nve-sys-text-muted-color);
   --border-radius: 2px;
+  --font-weight: var(--nve-ref-font-weight-medium);
 }
 
 ::slotted(nve-button[slot="nav-items"][selected]) {
   --color: var(--nve-sys-text-emphasis-color);
   --text-decoration: none;
   --nve-sys-interaction-state-ratio-active: 0;
+  --font-weight: var(--nve-ref-font-weight-semibold);
 }
 
 ::slotted(nve-icon-button[slot="nav-items"][selected]) {

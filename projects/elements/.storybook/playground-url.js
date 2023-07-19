@@ -5,7 +5,7 @@ const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
 
 export function playground(Story, context) {
-  if (Object.keys(context.unmappedArgs).length || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
+  if (context.viewMode === 'story' || Object.keys(context.unmappedArgs).length || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
     return Story();
   } else {
     const hasRoot = i => i.match(/nve-theme="root"/g)?.length > 1;
@@ -14,7 +14,7 @@ export function playground(Story, context) {
     const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('nve-theme="root ', 'nve-theme="');
     const formattedSource = prettier.default.format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
 
-    const files = serialize(addCssContent(createDefaultFiles(formattedSource), context.id));
+    const files = serialize(addCssContent(createDefaultFiles(formattedSource, context.id), context.id));
     const url = `https://elements-stage.nvidia.com/ui/elements-playground/?files=${files}&theme=${context.globals.theme}`;
     const playgroundButton = Object.keys(context.unmappedArgs).length ? nothing : html`<nve-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></nve-button>`;
     return html`${Story()} ${playgroundButton}`;
@@ -50,7 +50,7 @@ function serialize(data, compress = true) {
   return encodeURIComponent(base64);
 }
 
-function createDefaultFiles(content) {
+function createDefaultFiles(content, storyId) {
   const ELEMENTS_VERSION = `0.11.2`;
   const CDN_ORIGIN = `https://cdn-stage.nvidia.com`;
   const CDN_MODULES_URL = `${CDN_ORIGIN}/assets/elements-playground/modules`;
@@ -65,7 +65,7 @@ function createDefaultFiles(content) {
   <script type="importmap">
   {
     "imports": {
-      "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/"
+      "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/",
       "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/"
     },
     "scopes": {
@@ -88,7 +88,7 @@ function createDefaultFiles(content) {
   }
   </script>
   <script type="module" src="./index.js"></script>
-  <link rel="stylesheet" href="./index.css">
+  ${storyId.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
 </head>
 <body>
 
