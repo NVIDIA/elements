@@ -15,9 +15,9 @@ export function setupControlValidationStates(control: Control, messages: Control
     hideAllValidationMessages(messages);
 
     /**
-     * resetValidState() logic triggered by input blur() or input() change events
+     * updateValidityState() logic triggered by input blur() or input() change events
      */
-    const resetValidState = () => {
+    const updateValidityState = () => {
       if (control.input.validity?.valid) {
         control._internals.states.delete('--invalid');
         control._internals.states.add('--valid');
@@ -28,13 +28,21 @@ export function setupControlValidationStates(control: Control, messages: Control
       hideInactiveValidationMessages(control,  messages);
     };
 
+    const resetValidityState = () => {
+      control.status = null;
+      control._internals.states.delete('--valid');
+      control._internals.states.delete('--invalid');
+      hideAllValidationMessages(messages);
+      showNonValidationMessages(messages);
+    }
+
     control.input.addEventListener('blur', () => {
       control.input.checkValidity();
-      resetValidState();
+      updateValidityState();
     });
 
     control.input.addEventListener('input', () => {
-      resetValidState();
+      updateValidityState();
     });
 
     control.input.addEventListener('invalid', () => {
@@ -47,6 +55,9 @@ export function setupControlValidationStates(control: Control, messages: Control
       control._internals.states.delete('--valid');
       control._internals.states.add('--invalid');
     });
+
+    control.addEventListener('reset', () => resetValidityState());
+    control.input.form?.addEventListener('reset', () => resetValidityState());
   } else {
     control.shadowRoot.addEventListener('slotchange', () => {
       const messages = Array.from(control.querySelectorAll<ControlMessage>('nve-control-message'));
@@ -84,6 +95,13 @@ export function setupControlStates(control: Control) {
     if (e.target.name === control.input.name) {
       control.input.checked ? states.add('--checked') : states.delete('--checked');
     }
+  });
+
+  control.input.form?.addEventListener('reset', () => {
+    control._internals.states.delete('--touched');
+    control._internals.states.delete('--dirty');
+    control._internals.states.delete('--error');
+    control._internals.states.delete('--success');
   });
 
   observers.push(

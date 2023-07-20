@@ -93,6 +93,10 @@
     --background: var(--nve-sys-layer-overlay-color);
   }
 
+  .docs-story .css-12mi1ip {
+    transform: initial !important; /* transform breaks popover positioning */
+  }
+
   .sbdocs-preview {
     margin-bottom: 64px !important;
   }
@@ -286,10 +290,16 @@
 
   .playground-btn {
     position: absolute;
+    z-index: 99;
+    display: none;
     bottom: -38px;
     right: 90px;
     --height: 24px;
     --font-size: 12px;
+  }
+
+  .sbdocs-preview .playground-btn {
+    display: block;
   }
 
   .css-luvzlg,
