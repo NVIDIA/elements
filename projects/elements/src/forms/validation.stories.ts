@@ -11,7 +11,7 @@ export default {
 
 export const Validation = () => {
   return html`
-<form mlv-layout="column gap:md" style="max-width: 350px;">
+<form id="validation" mlv-layout="column gap:md" style="max-width: 350px;">
   <mlv-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
@@ -32,15 +32,15 @@ export const Validation = () => {
     <mlv-alert></mlv-alert>
   </mlv-alert-group>
 </form>
-<script>
-  const form = document.querySelector('form');
-  const alertGroup = document.querySelector('mlv-alert-group');
-  const alert = document.querySelector('mlv-alert');
+<script type="module">
+  const form = document.querySelector('form#validation');
+  const alertGroup = document.querySelector('#validation mlv-alert-group');
+  const alert = document.querySelector('#validation mlv-alert');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const values = Object.fromEntries(new FormData(form));
-    alert.innerText = values.email + ' / ' + values.password;
+    const { email, password } = Object.fromEntries(new FormData(form));
+    alert.innerText = email + ' / ' + password;
     alertGroup.hidden = false;
   });
 
@@ -96,5 +96,37 @@ export const ValidationSuccessGroup = () => {
     <mlv-alert closable>account created</mlv-alert>
   </mlv-alert-group>
 </form>
+`;
+}
+
+export const ValidationReset = () => {
+  return html`
+<form mlv-layout="column gap:md" style="max-width: 350px;">
+  <mlv-input>
+    <label>email</label>
+    <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" value="test@nvidia.com" />
+    <mlv-icon-button aria-label="reset" icon-name="cancel" interaction="flat" type="button"></mlv-icon-button>
+    <mlv-control-message error="valueMissing">required</mlv-control-message>
+    <mlv-control-message error="patternMismatch">invalid NVIDIA email</mlv-control-message>
+  </mlv-input>
+
+  <mlv-password status="error">
+    <label>password</label>
+    <input type="password" name="password" required minlength="6" autocomplete="off" />
+    <mlv-control-message error="valueMissing">required</mlv-control-message>
+  </mlv-password>
+
+  <mlv-button type="button">reset form</mlv-button>
+</form>
+<script type="module">
+  const form = document.querySelector('form');
+  const input = form.querySelector('mlv-input');
+  const resetInput = form.querySelector('mlv-icon-button[icon-name="cancel"]');
+  const resetForm = form.querySelector('mlv-button');
+
+  resetInput.addEventListener('click', e => input.reset());
+  resetForm.addEventListener('click', e => form.reset());
+  form.addEventListener('reset', e => console.log(e));
+</script>
 `;
 }

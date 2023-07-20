@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
 import type { ControlMessage } from '../control-message/control-message.js';
 import type { Control } from '../control/control.js';
 import { updateControlStatusState, setupControlStates, setupControlValidationStates, showNonValidationMessages, hideAllValidationMessages, showActiveValidationMessages, hideAllControlMessages, hideInactiveValidationMessages } from './states.js';
@@ -94,19 +94,23 @@ describe('setupControlValidationStates HTML5 disabled', () => {
 
 describe('setupControlValidationStates', () => {
   let fixture: HTMLElement;
+  let form: HTMLFormElement;
   let control: Control;
   let message: ControlMessage;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control>
-        <label>label</label>
-        <input type="text" required />
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-control>
+      <form>
+        <mlv-control>
+          <label>label</label>
+          <input type="text" required value="" />
+          <mlv-control-message>message</mlv-control-message>
+        </mlv-control>
+      </form>
     `);
     control = fixture.querySelector('mlv-control');
     message = fixture.querySelector('mlv-control-message');
+    form = fixture.querySelector('form');
     setupControlValidationStates(control, [message]);
     await elementIsStable(control);
   });
@@ -150,6 +154,18 @@ describe('setupControlValidationStates', () => {
 
     expect((control._internals.states as any).has('--invalid')).toBe(false);
     expect(control.status).toBe(null);
+  });
+
+  it('should reset validity when parent form reset is called', async () => {
+    control.input.value = 'test';
+    control.input.dispatchEvent(new Event('blur'));
+    await elementIsStable(control);
+
+    const event = untilEvent(form, 'reset');
+    form.reset();
+    expect((await event)).toBeDefined();
+    await elementIsStable(control);
+    expect(control.input.value).toBe('');
   });
 });
 

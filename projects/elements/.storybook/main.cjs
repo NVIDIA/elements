@@ -24,6 +24,11 @@ module.exports = {
   async viteFinal(config) {
     return mergeConfig(config, {
       base: config.server ? undefined : '/ui/storybook/elements/',
+      server: {
+        watch: {
+          ignored: [resolve('node_modules/**'), resolve('.playwright/**'), resolve('.wireit/**'), resolve('coverage/**'), resolve('storybook-build/**'), `!${resolve('dist/**')}`],
+        },
+      },
       build: {
         target: 'esnext',
         minify: 'esnext'

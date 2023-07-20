@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
 import { Control, ControlMessage } from '@elements/elements/forms';
 import '@elements/elements/forms/define.js';
 
@@ -114,7 +114,7 @@ describe('mlv-control custom', () => {
     fixture = await createFixture(html`
       <mlv-control>
         <label>label</label>
-        <div mlv-control tabindex="0"></div>
+        <div mlv-control tabindex="0" value=""></div>
       </mlv-control>
     `);
     element = fixture.querySelector('mlv-control');
@@ -145,5 +145,15 @@ describe('mlv-control custom', () => {
 
     expect(document.querySelector('#mlv-control-instance')).toBeDefined();
     control.remove();
+  });
+
+  it('should reset form control value when reset is called', async () => {
+    const event = untilEvent(element, 'reset');
+    element.input.value = 'test';
+    await element.updateComplete;
+    
+    element.reset();
+    expect((await event)).toBeDefined();
+    expect(element.input.value).toBe('');
   });
 });

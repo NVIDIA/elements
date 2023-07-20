@@ -112,6 +112,12 @@ export class Control extends LitElement {
     });
   }
 
+  /** resets control value to initial attribute value and clears any active validation rules */
+  reset() {
+    this.dispatchEvent(new CustomEvent('reset', { bubbles: true }));
+    this.input.value = this.input.getAttribute('value');
+  }
+
   #setupInput() {
     setupControlValidationStates(this, this.#messages);
 
