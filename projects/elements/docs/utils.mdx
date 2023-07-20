@@ -1,13 +1,14 @@
 import metrics from '../metrics/data.json';
-import './metrics.stories';
 
 export const LinkedHeader = ({children: txt} ) => {
+  import('./metrics.stories');
   return (
     <h2 id={txt.replace(/\s+/g, '-').toLowerCase()} >{txt}</h2>
   );
 }
 
 export const statusBadges = (tag) => {
+  import('./metrics.stories');
   const status = metrics.elements.find(d => d.name === tag).status;
   return status === 'pre-release' ? ['alpha'] : [status];
 }
