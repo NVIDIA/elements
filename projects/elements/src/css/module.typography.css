@@ -138,7 +138,7 @@
   padding: 0;
   list-style-position: inside !important;
 
-  &li {
+  li {
     margin: 0 !important;
   }
 
