@@ -51,7 +51,7 @@ function serialize(data, compress = true) {
 }
 
 function createDefaultFiles(content, storyId) {
-  const ELEMENTS_VERSION = `0.11.2`;
+  const ELEMENTS_VERSION = `0.12.0`;
   const CDN_ORIGIN = `https://cdn-stage.nvidia.com`;
   const CDN_MODULES_URL = `${CDN_ORIGIN}/assets/elements-playground/modules`;
 
