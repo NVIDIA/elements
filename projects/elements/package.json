@@ -453,6 +453,7 @@
         ".storybook/**",
         "src/**/*.stories.ts",
         "src/**/*.stories.mdx",
+        "docs/**",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
