@@ -1,10 +1,17 @@
 :host {
   --color: var(--nve-sys-text-muted-color);
+  --font-weight: var(--nve-ref-font-weight-regular);
+  --font-size: var(--nve-ref-font-size-100);
+  --_alert-font-weight: var(--font-weight);
+  --_alert-font-size: var(--font-size);
   --_alert-color: var(--color, initial);
 }
 
 nve-alert {
   --color: var(--_alert-color);
+  --font-weight:  var(--_alert-font-weight);
+  --font-size:  var(--_alert-font-size);
+  --icon-color: var(--color);
 }
 
 :host([status='success']) {

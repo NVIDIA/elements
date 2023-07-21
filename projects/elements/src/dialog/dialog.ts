@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { animationFade, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { animationFade, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, Size, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './dialog.css?inline';
 import { IconButton } from '../icon-button';
 
@@ -41,7 +41,7 @@ export class Dialog extends LitElement {
   /**
    * Sets the maximum size of the dialog.
    */
-  @property({ type: String, reflect: true }) size: 'sm' | 'md' | 'lg' = 'md';
+  @property({ type: String, reflect: true }) size?: Size;
 
   /**
    * Determines if a close button should render within dialog. Non-closable

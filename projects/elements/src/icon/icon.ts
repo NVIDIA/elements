@@ -1,7 +1,7 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { useStyles } from '@elements/elements/internal';
+import { Size, useStyles } from '@elements/elements/internal';
 import { ICON_IMPORTS, IconName } from './icons.js';
 import styles from './icon.css?inline';
 
@@ -21,7 +21,7 @@ export class Icon extends LitElement {
   @property({ type: String, reflect: true }) status?: 'warning' | 'danger' | 'success' | 'accent';
 
   /** SVG size */
-  @property({ type: String, reflect: true }) size?: 'sm' | 'lg';
+  @property({ type: String, reflect: true }) size?: Size;
 
   /**
    * Sets the direction of the icon.

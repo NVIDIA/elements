@@ -1,11 +1,11 @@
 
 :host {
   --border-width: 100%;
-  --border-height: var(--nve-ref-border-width-lg);
+  --border-height: var(--nve-ref-border-width-xl);
   --border-top: auto;
   --width: 100%;
-  --font-size: var(--nve-ref-font-size-200);
-  --font-weight: var(--nve-ref-font-weight-semibold);
+  --font-size: var(--nve-ref-font-size-100);
+  --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: var(--nve-ref-border-radius-sm);
   --color: var(--nve-sys-text-muted-color);
   --height: var(--nve-ref-size-800);
@@ -34,6 +34,8 @@
 
 :host(:--selected) {
   --color: var(--nve-sys-text-emphasis-color);
+  --font-weight: var(--nve-ref-font-weight-semibold);
+
 
   &:after {
     width: var(--border-width);

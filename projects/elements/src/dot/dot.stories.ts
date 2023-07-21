@@ -12,6 +12,22 @@ export const Default = {
   `
 };
 
+export const Size = {
+  render: () => html`
+<div nve-layout="row gap:sm">
+  <nve-dot size="sm">10</nve-dot>
+  <nve-dot>10</nve-dot>
+  <nve-dot size="lg">10</nve-dot>
+</div>
+<br>
+<div nve-layout="row gap:lg">
+  <nve-dot size="sm"></nve-dot>
+  <nve-dot></nve-dot>
+  <nve-dot size="lg"></nve-dot>
+</div>
+  `
+}
+
 export const SupportStatus = {
   render: () => html`
 <div nve-layout="row gap:md">
