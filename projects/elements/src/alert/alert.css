@@ -31,7 +31,7 @@ slot {
   flex-wrap: wrap;
 }
 
-slot:not([name='actions']):not([name='prefix']) {
+slot:not([name='actions']):not([name='prefix']):not([name='icon']) {
   flex-grow: 1;
 }
 
@@ -45,11 +45,11 @@ slot[name] {
 }
 
 slot[name='actions'] {
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 slot[name='prefix'] {
-  margin-right: var(--nve-ref-space-md);
+  margin-inline-end: var(--nve-ref-space-lg);
 }
 
 nve-icon {

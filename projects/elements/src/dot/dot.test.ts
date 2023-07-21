@@ -33,6 +33,15 @@ describe('nve-dot', () => {
     expect(element.getAttribute('status')).toBe('restarting');
   });
 
+  it('should reflect a size', async () => {
+    expect(element.size).toBe(undefined);
+    expect(element.hasAttribute('size')).toBe(false);
+
+    element.size = 'sm';
+    await elementIsStable(element);
+    expect(element.getAttribute('size')).toBe('sm');
+  });
+
   it('should apply slotted text specific styles', async () => {
     await elementIsStable(element);
     expect(element.matches(':--has-text')).toBe(false);

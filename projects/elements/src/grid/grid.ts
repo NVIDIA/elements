@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { keyNavigationGrid, useStyles, attachInternals, appendRootNodeStyle, generateId, stateScroll, Container } from '@elements/elements/internal';
+import { keyNavigationGrid, useStyles, attachInternals, appendRootNodeStyle, generateId, stateScroll, ContainerElement } from '@elements/elements/internal';
 import type { GridHeader } from './header/header.js';
 import type { GridColumn } from './column/column.js';
 import type { GridRow } from './row/row.js';
@@ -20,7 +20,7 @@ import globalStyles from './grid.global.css?inline';
  */
 @stateScroll<Grid>()
 @keyNavigationGrid<Grid>()
-export class Grid extends LitElement implements Container {
+export class Grid extends LitElement implements ContainerElement {
   /** flat (embed into parent container) or full (full parent container width) */
   @property({ type: String, reflect: true }) container?: 'flat' | 'full';
 

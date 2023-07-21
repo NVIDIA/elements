@@ -114,6 +114,35 @@ describe('nve-grid-column', () => {
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('--border-left: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)')).toBe(true);
   });
+
+  it('should update remove fixed styles when property or column has changed', async () => {
+    columns[3].position = 'fixed';
+    await elementIsStable(columns[0]);
+    await elementIsStable(grid);
+    const sheets = (grid.getRootNode() as any).adoptedStyleSheets;
+
+    
+    // position
+    expect(columns[3].hasAttribute('right')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('position: sticky')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('z-index: 99')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('right: 0px;')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('left: 0px;')).toBe(false);
+
+    // right side
+    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('var(--scroll-shadow)')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
+    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('--border-left: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)')).toBe(true);
+
+    columns[3].position = '';
+    await elementIsStable(columns[0]);
+    await elementIsStable(grid);
+
+    // stylesheets removed
+    expect(columns[3].hasAttribute('right')).toBe(false);
+    expect(sheets[sheets.length - 1].cssRules[0]).toBe(undefined);
+    expect(sheets[sheets.length - 1].cssRules[1]).toBe(undefined);
+  });
 });
 
 describe('nve-grid-column actions', () => {
