@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { ColorPalette, useStyles, colorStateStyles } from '@elements/elements/internal';
+import { ColorPalette, useStyles, colorStateStyles, Size } from '@elements/elements/internal';
 import styles from './logo.css?inline';
 
 /**
@@ -20,10 +20,15 @@ import styles from './logo.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
 export class Logo extends LitElement {
-  /** visual treatment to represent a ongoing task status */
+  /**
+   * Visual treatment to represent unique color of an application
+   */
   @property({ type: String, reflect: true }) color: ColorPalette;
 
-  @property({ type: String, reflect: true }) size: 'sm' | 'md' | 'lg';
+  /**
+   * Determines size of logo
+   */
+  @property({ type: String, reflect: true }) size?: Size;
 
   static styles = useStyles([styles, colorStateStyles]);
 

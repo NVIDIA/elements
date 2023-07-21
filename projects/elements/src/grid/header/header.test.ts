@@ -52,6 +52,23 @@ describe('nve-grid-header', () => {
     expect(columns[3].ariaColIndex).toBe('4');
   });
 
+  it('should set each column ariaColIndex when a new column is added or removed', async () => {
+    expect(columns[0].ariaColIndex).toBe('1');
+    expect(columns[1].ariaColIndex).toBe('2');
+    expect(columns[2].ariaColIndex).toBe('3');
+    expect(columns[3].ariaColIndex).toBe('4');
+
+    const newColumn = document.createElement('nve-grid-column');
+    newColumn.textContent = 'column 5';
+    element.appendChild(newColumn);
+    await elementIsStable(element);
+    expect(columns[0].ariaColIndex).toBe('1');
+    expect(columns[1].ariaColIndex).toBe('2');
+    expect(columns[2].ariaColIndex).toBe('3');
+    expect(columns[3].ariaColIndex).toBe('4');
+    expect(newColumn.ariaColIndex).toBe('5');
+  });
+
   it('should create initial CSS layout grid for columns', async () => {
     expect(grid.style.getPropertyValue('--grid-auto-flow')).toBe('initial');
     expect(grid.style.getPropertyValue('--grid-template-column')).toBe('var(--c0) var(--c1) var(--c2) var(--c3)');
