@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals, Container } from '@elements/elements/internal';
+import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals, ContainerElement, Container } from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
 import accordionHeaderStyleSheet from './accordion-header.css?inline';
@@ -93,7 +93,7 @@ export class AccordionHeader extends LitElement {
  */
 
 @stateExpanded<Accordion>()
-export class Accordion extends LitElement implements Container {
+export class Accordion extends LitElement implements ContainerElement {
   declare _internals: ElementInternals;
 
   static styles = useStyles([accordionStyleSheet]);
@@ -113,7 +113,7 @@ export class Accordion extends LitElement implements Container {
 
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
   /** flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion) */
-  @property({ type: String, reflect: true }) container?: 'flat' | 'full' | 'inset' = 'full';
+  @property({ type: String, reflect: true }) container?: Container = 'full';
   /**
    * Determines whether the accordion is expanded, displaying its contents, or not.
    */

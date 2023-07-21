@@ -1,5 +1,4 @@
 import { LitElement, unsafeCSS, html, css, nothing } from 'lit';
-import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import { getItems, grid } from '@elements/elements/test';
 import layout from '@elements/elements/css/module.layout.css?inline';
@@ -463,7 +462,6 @@ export function sortStringKeys<T>(list: T[], key: string, sortType: 'none' | 'as
   return list;
 }
 
-@customElement('row-sort-demo')
 class RowSortDemo extends LitElement {
   @state() sort: 'none' | 'ascending' | 'descending' = 'none';
 
@@ -499,6 +497,8 @@ class RowSortDemo extends LitElement {
   }
 }
 
+customElements.get('row-sort-demo') || customElements.define('row-sort-demo', RowSortDemo);
+
 export const RowSortInteractive = {
   render: () => html`
 <div mlv-theme="root">
@@ -507,7 +507,6 @@ export const RowSortInteractive = {
   `
 };
 
-@customElement('infinite-scroll-demo')
 class InfiniteScrollDemo extends LitElement {
   static styles = [unsafeCSS(layout)];
 
@@ -549,6 +548,8 @@ class InfiniteScrollDemo extends LitElement {
   }
 }
 
+customElements.get('infinite-scroll-demo') || customElements.define('infinite-scroll-demo', InfiniteScrollDemo);
+
 export const PerformanceInfiniteScroll = {
   render: () => html`
 <div mlv-theme="root">
@@ -557,7 +558,6 @@ export const PerformanceInfiniteScroll = {
   `
 };
 
-@customElement('grid-performance-demo')
 class GridPerformanceDemo extends LitElement {
   static styles = [unsafeCSS(layout), css`
   :host {
@@ -590,6 +590,8 @@ class GridPerformanceDemo extends LitElement {
   }
 }
 
+customElements.get('grid-performance-demo') || customElements.define('grid-performance-demo', GridPerformanceDemo);
+
 export const Performance = {
   render: () => html`
 <div mlv-theme="root">
@@ -598,7 +600,6 @@ export const Performance = {
   `
 };
 
-@customElement('grid-virtual-scroll-demo')
 class GridVirtualScrollDemo extends LitElement {
   items = new Array(10000).fill('').map((_i, n) => ({ column: `${n}-0`, column1: `${n}-1`, column2: `${n}-2`, column3: `${n}-3` }));
 
@@ -621,6 +622,8 @@ class GridVirtualScrollDemo extends LitElement {
     `;
   }
 }
+
+customElements.get('grid-virtual-scroll-demo') || customElements.define('grid-virtual-scroll-demo', GridVirtualScrollDemo);
 
 export const PerformanceVirtualScroll = {
   render: () => html`
@@ -790,8 +793,7 @@ export const PanelDetail = {
   `
 };
 
-@customElement('mlv-grid-panel-demo')
-class PanelDemo extends LitElement {
+class GridPanelDemo extends LitElement {
   @state() selectedId: string = null;
 
   #grid = grid(8, 3);
@@ -827,10 +829,54 @@ class PanelDemo extends LitElement {
   }
 }
 
+customElements.get('grid-panel-demo') || customElements.define('grid-panel-demo', GridPanelDemo);
+
 export const PanelDetailInteractive = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid-panel-demo></mlv-grid-panel-demo>
+  <grid-panel-demo></grid-panel-demo>
+</div>
+  `
+};
+
+class GridDynamicColumnDemo extends LitElement {
+  @state() selectedId: string = null;
+
+  @state() grid = grid(10, 6);
+
+  static styles = [unsafeCSS(layout)];
+
+  render() {
+    return html`
+      <div mlv-layout="row gap:md align:stretch" style="height: calc(100% - 28px)">
+        <mlv-grid>
+          <mlv-grid-header>
+            ${this.grid.columns.map((column, i) => html`<mlv-grid-column width="200px" position=${(i === this.grid.columns.length - 1) || (i === 0) ? 'fixed' : ''}>${column.label}</mlv-grid-column> `)}
+          </mlv-grid-header>
+          ${this.grid.rows.map(row => html`
+          <mlv-grid-row ?selected=${this.selectedId === row.id}>
+            ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
+          </mlv-grid-row>`)}
+          <mlv-grid-footer>
+            <mlv-button interaction="flat" @click=${this.#update}>add column</mlv-button>
+          </mlv-grid-footer>
+        </mlv-grid>
+      </div>
+      
+    `
+  }
+
+  #update() {
+    this.grid = grid(10, this.shadowRoot.querySelectorAll('mlv-grid-column').length + 1);
+  }
+}
+
+customElements.get('grid-dynamic-column-demo') || customElements.define('grid-dynamic-column-demo', GridDynamicColumnDemo);
+
+export const ColumnDynamicFixed = {
+  render: () => html`
+<div mlv-theme="root">
+  <grid-dynamic-column-demo></grid-dynamic-column-demo>
 </div>
   `
 };
@@ -871,8 +917,8 @@ export const All = {
     ${ColumnFixed.render()}
   </div>
   <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Column Stack Fixed</h2>
-    ${ColumnStackFixed.render()}
+    <h2 mlv-text="heading">Column Dynamic Fixed</h2>
+    ${ColumnDynamicFixed.render()}
   </div>
   <div mlv-layout="column gap:md align:stretch">
     <h2 mlv-text="heading">Footer</h2>

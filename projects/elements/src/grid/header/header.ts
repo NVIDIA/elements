@@ -45,7 +45,6 @@ export class GridHeader extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'row';
-    this.#columns.forEach((c, i) => c.ariaColIndex = `${i + 1}`);
     this.addEventListener('mlv-grid-column-resize', () => this.#computeColumnWidths());
   }
 
@@ -57,6 +56,7 @@ export class GridHeader extends LitElement {
 
   async #computeColumnWidths() {
     await this.updateComplete;
+    this.#columns.forEach((c, i) => c.ariaColIndex = `${i + 1}`);
     this.parentElement.style.setProperty('--grid-auto-flow', 'initial');
     this.parentElement.style.setProperty('--grid-template-column', this.#columns.map((_, i) => `var(--c${i})`).join(' '));
     this.#columns.map((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width: '1fr'));

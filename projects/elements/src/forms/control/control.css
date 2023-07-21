@@ -15,8 +15,8 @@
 }
 
 ::slotted(label) {
-  font-weight: var(--mlv-ref-font-weight-semibold) !important;
-  font-size: var(--mlv-ref-font-size-200) !important;
+  font-weight: var(--mlv-ref-font-weight-medium) !important;
+  font-size: var(--mlv-ref-font-size-100) !important;
   color: var(--label-color) !important;
   cursor: var(--cursor) !important;
   display: inline-block !important;

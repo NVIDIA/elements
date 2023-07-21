@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { MlvBaseButton, useStyles, Interaction, GhostInteraction, Inverse, FlatInteraction } from '@elements/elements/internal';
+import { MlvBaseButton, useStyles, Interaction, GhostInteraction, Inverse, FlatInteraction, Size } from '@elements/elements/internal';
 import styles from './button.css?inline';
 
 /**
@@ -27,9 +27,15 @@ export class Button extends MlvBaseButton {
     version: 'PACKAGE_VERSION'
   };
 
+  /**
+   * Visual treatment to represent user interaction appearance
+   */
   @property({ type: String, reflect: true }) interaction: Interaction | FlatInteraction | Inverse | GhostInteraction;
 
-  @property({ type: String, reflect: true }) size: 'sm' | 'lg' | '';
+  /**
+   * Determines size of button 
+   */
+  @property({ type: String, reflect: true }) size?: Size;
 
   render() {
     return html`

@@ -12,6 +12,22 @@ export const Default = {
   `
 };
 
+export const Size = {
+  render: () => html`
+<div mlv-layout="row gap:sm">
+  <mlv-dot size="sm">10</mlv-dot>
+  <mlv-dot>10</mlv-dot>
+  <mlv-dot size="lg">10</mlv-dot>
+</div>
+<br>
+<div mlv-layout="row gap:lg">
+  <mlv-dot size="sm"></mlv-dot>
+  <mlv-dot></mlv-dot>
+  <mlv-dot size="lg"></mlv-dot>
+</div>
+  `
+}
+
 export const SupportStatus = {
   render: () => html`
 <div mlv-layout="row gap:md">

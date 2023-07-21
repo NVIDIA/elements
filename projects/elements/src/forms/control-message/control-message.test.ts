@@ -30,7 +30,7 @@ describe('mlv-control-message', () => {
 
   it('should assign correct alert state based on control validation state', async () => {
     const alert = element.shadowRoot.querySelector('mlv-alert');
-    expect(alert.status).toBe('muted');
+    expect(alert.status).toBe(undefined);
 
     element.status = 'success';
     await elementIsStable(element);
@@ -42,7 +42,7 @@ describe('mlv-control-message', () => {
 
     element.status = 'disabled';
     await elementIsStable(element);
-    expect(alert.status).toBe('muted');
+    expect(alert.status).toBe(undefined);
 
     element.status = 'warning';
     await elementIsStable(element);

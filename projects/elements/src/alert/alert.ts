@@ -8,6 +8,9 @@ import styles from './alert.css?inline';
 /**
  * @element mlv-alert
  * @event close
+ * @slot icon
+ * @slot prefix
+ * @slot actions
  * @cssprop --gap
  * @cssprop --font-size
  * @cssprop --color
@@ -56,7 +59,7 @@ export class Alert extends LitElement {
   render() {
     return html`
       <div internal-host>
-        ${this.status !== 'muted' ? html`<mlv-icon name=${statusIcons[this.status] ?? 'dot'} .size=${statusIcons[this.status] === 'dot' ? 'sm' : undefined as any}></mlv-icon>` : ''}
+        <slot name="icon"><mlv-icon name=${statusIcons[this.status]} .size=${statusIcons[this.status] === 'dot' ? 'sm' : undefined as any}></mlv-icon></slot>
         ${this.#prefix.length ? html`<slot name="prefix"></slot>` : ''}
         <slot></slot>
         ${this.#actions.length ? html`<slot name="actions"></slot>` : ''}

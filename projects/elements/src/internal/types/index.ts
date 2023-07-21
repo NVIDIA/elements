@@ -2,9 +2,6 @@ import type { IconName } from "@elements/elements/icon";
 
 export type Interaction = 'emphasize' | 'destructive';
 
-/** @deprecated */
-export type GhostInteraction = 'ghost' | `${'ghost'}-${Interaction}`;
-
 export type FlatInteraction = 'flat' | `${'flat'}-${Interaction}`;
 
 export type Inverse = 'inverse';
@@ -23,8 +20,12 @@ export type TrendStatus = 'trend-down' | 'trend-up' | 'trend-neutral';
 
 export type ColorPalette = 'red-cardinal' | 'gray-slate' | 'gray-denim' | 'blue-indigo' | 'blue-cobalt' | 'blue-sky' | 'teal-cyan' | 'green-mint' | 'teal-seafoam' | 'green-grass' | 'yellow-amber' | 'orange-pumpkin' | 'red-tomato' | 'pink-magenta' | 'purple-plum' | 'purple-violet' | 'purple-lavender' | 'pink-rose' | 'green-jade' | 'lime-pear' | 'yellow-nova' | 'brand-green';
 
-export interface Container {
-  container?: 'flat' | 'full' | 'inset';
+export type Size = 'sm' | 'lg'; // 'md' is default
+
+export type Container = 'flat' | 'full' | 'inset';
+
+export interface ContainerElement {
+  container?: Partial<Container>;
 }
 
 export const statusIcons: { [key: string]: IconName } = {
@@ -76,3 +77,6 @@ declare global {
     'mlv-layout': string;
   }
 }
+
+/** @deprecated */
+export type GhostInteraction = 'ghost' | `${'ghost'}-${Interaction}`;
