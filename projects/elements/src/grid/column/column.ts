@@ -1,6 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, attachInternals, appendRootNodeStyle } from '@elements/elements/internal';
+import { useStyles, attachInternals, appendRootNodeStyle, getAttributeChanges } from '@elements/elements/internal';
 import type { Grid } from '@elements/elements/grid';
 import type { IconButton } from '@elements/elements/icon-button';
 import styles from './column.css?inline';
@@ -46,6 +46,8 @@ export class GridColumn extends LitElement {
     return Array.from(this.querySelectorAll<IconButton>('nve-sort-button, nve-icon-button[slot=actions]'))
   }
 
+  #observers: (MutationObserver | ResizeObserver)[] = [];
+
   render() {
     return html`
       <div internal-host focusable="active">
@@ -59,10 +61,7 @@ export class GridColumn extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'columnheader';
-    this.#setupSort();
-  }
-
-  #setupSort() {
+    this.#observers.push(getAttributeChanges(this, 'aria-colindex', () => this.#computeColumnPositions()));
     this.addEventListener('sort', (e: CustomEvent) => this.ariaSort = e.detail.next);
   }
 
@@ -94,6 +93,8 @@ export class GridColumn extends LitElement {
     });
   }
 
+  #positionStylesheet: CSSStyleSheet;
+
   #computeColumnPositions() {
     if (this.position === 'fixed') {
       const columns = Array.from(this.parentElement.querySelectorAll<GridColumn>('nve-grid-column'));
@@ -124,8 +125,17 @@ export class GridColumn extends LitElement {
         }
       ` : '';
 
-      appendRootNodeStyle(this.#grid, `${positionStyle}\n${borderStyle}`);
+      if (this.#positionStylesheet) {
+        this.#positionStylesheet.replaceSync(`${positionStyle}\n${borderStyle}`);
+      } else {
+        this.#positionStylesheet = appendRootNodeStyle(this.#grid, `${positionStyle}\n${borderStyle}`);
+      }
+
       this.setAttribute(side, '');
+    } else {
+      this.removeAttribute('left');
+      this.removeAttribute('right');
+      this.#positionStylesheet?.replaceSync('');
     }
   }
 

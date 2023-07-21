@@ -69,6 +69,7 @@ export function appendRootNodeStyle(host: HTMLElement, styles: string) {
   if (root.adoptedStyleSheets) {
     root.adoptedStyleSheets = [...Array.from(root.adoptedStyleSheets), stylesheet];
   }
+  return stylesheet;
 }
 
 /* used for cases of needing to know a property update outside of lit, example a native input value prop change */
