@@ -44,7 +44,8 @@ export class Control extends LitElement {
 
   /** @private */
   get input() {
-    return this.querySelector<HTMLInputElement>(inputQuery);
+    const slotted = Array.from(this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i => i.matches(inputQuery)) as HTMLInputElement;
+    return slotted ? slotted : this.querySelector<HTMLInputElement>(inputQuery);
   }
 
   /** @private */
@@ -106,6 +107,8 @@ export class Control extends LitElement {
     this.setAttribute('nve-control', this.querySelector('[nve-control]') ? 'custom' : '');
 
     this.shadowRoot.addEventListener('slotchange', () => {
+      this.#updateStyleStates();
+
       if (this.input && this.#observers.length === 0) {
         this.#setupInput();
       }
@@ -143,10 +146,12 @@ export class Control extends LitElement {
   }
 
   #updateStyleStates() {
-    this.inlineControl = isInlineInputType(this.input);
-    this.toggleAttribute('multiple', this.input?.multiple);
-    this.input?.size ? this.setAttribute('size', '') : this.removeAttribute('size');
-    this.styleStates = { 'no-messages': !this.#visibleMessages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
+    if (this.input) {
+      this.inlineControl = isInlineInputType(this.input);
+      this.toggleAttribute('multiple', this.input?.multiple);
+      this.input?.size ? this.setAttribute('size', '') : this.removeAttribute('size');
+      this.styleStates = { 'no-messages': !this.#visibleMessages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
+    }
   }
 
   disconnectedCallback() {

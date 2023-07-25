@@ -43,7 +43,7 @@ export const WithIconButton = {
 
 @customElement('breadcrumb-menu-demo')
 class BreadcrumbMenuDemo extends LitElement {
-  @state() menuHidden = true;
+  @state() private menuHidden = true;
 
   render() {
     const ddownId = "more-links";
