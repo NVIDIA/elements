@@ -92,7 +92,7 @@ export function setupControlStates(control: Control) {
   });
 
   control.input.getRootNode().addEventListener('change', (e: any) => {
-    if (e.target.name === control.input.name) {
+    if (e.target.name === control.input?.name) {
       control.input.checked ? states.add('--checked') : states.delete('--checked');
     }
   });

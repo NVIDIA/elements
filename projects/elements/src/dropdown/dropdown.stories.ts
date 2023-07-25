@@ -110,8 +110,8 @@ const options = [
 
 @customElement('radio-group-interactive-demo')
 class RadioGroupInteractiveDemo extends LitElement {
-  @state() show = false;
-  @state() selected = options[0];
+  @state() private show = false;
+  @state() private selected = options[0];
 
   render() {
     return html`
@@ -166,8 +166,8 @@ const checkboxes = [
 
 @customElement('checkbox-group-interactive-demo')
 class CheckboxGroupInteractiveDemo extends LitElement {  
-  @state() show = false;
-  @state() suites = { '1': true, '2': false, '3': false };
+  @state() private show = false;
+  @state() private suites = { '1': true, '2': false, '3': false };
 
   render() {
     return html`

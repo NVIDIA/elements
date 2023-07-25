@@ -75,7 +75,7 @@ function basePathPlugin() {
   };
 }
 
-export function extensionPlugin() {
+function extensionPlugin() {
   return {
     name: 'extensions',
     packageLinkPhase({ customElementsManifest }) {
@@ -86,7 +86,7 @@ export function extensionPlugin() {
   };
 }
 
-export function orderPlugin() {
+function orderPlugin() {
   return {
     name: 'order',
     packageLinkPhase({ customElementsManifest }) {

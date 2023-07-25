@@ -25,6 +25,7 @@
   white-space: nowrap;
   border: 0;
   text-align: left;
+  outline-offset: calc(-1 * var(--mlv-ref-size-50));
 }
 
 :host(:--disabled) [interaction-state] {

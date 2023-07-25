@@ -42,6 +42,10 @@ export class Select extends Control {
     return (this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true })?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement;
   }
 
+  get #options() {
+    return Array.from(this.#select?.options ? this.#select.options : []);
+  }
+
   get #dropdown() {
     return this.shadowRoot.querySelector('mlv-dropdown');
   }
@@ -55,17 +59,17 @@ export class Select extends Control {
   }
 
   protected get prefixContent() {
-    return this.input?.multiple ? html`${Array.from(this.#select?.options).filter(o => o.selected).map(o => html`
+    return this.input?.multiple ? html`${this.#options.filter(o => o.selected).map(o => html`
       <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o, false)}>${o.textContent}</mlv-tag>
     `)}` : nothing;
   }
 
   protected get suffixContent() {
     return html`
-      <mlv-icon name="caret" direction="down"></mlv-icon>
+      <mlv-icon name="caret" part="caret" direction="down"></mlv-icon>
       <mlv-dropdown @close=${e => e.target.hidden = true} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
-        <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label="options">
-          ${(Array.from(this.#select.options) as HTMLOptionElement[]).map((o, i) => html`
+        <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label="select options">
+          ${this.#options.map((o, i) => html`
           <mlv-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} aria-selected=${o.selected}>
             <slot name="option-${i + 1}">
               <mlv-icon name="checkmark"></mlv-icon> ${o.innerText}

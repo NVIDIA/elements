@@ -17,7 +17,7 @@ export default {
 
 @customElement('app-header-default-demo')
 class AppHeaderDefaultDemo extends LitElement {
-  @state() activeId = '';
+  @state() private activeId = '';
 
   render() {
     const ddownOneId = "default-dropdown-1";

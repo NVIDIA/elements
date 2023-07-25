@@ -2,11 +2,13 @@
   --background: var(--mlv-sys-support-color);
   --color: var(--mlv-sys-interaction-field-color);
   --border-radius: var(--mlv-ref-border-radius-sm);
+  width: fit-content;
 }
 
 [internal-host] {
   border-radius: var(--border-radius);
   overflow: hidden;
+  width: max-content;
 }
 
 .input-slot {
@@ -25,6 +27,10 @@ slot[name='label'] {
   --background: var(--mlv-sys-interaction-field-background);
   --color: var(--mlv-sys-support-emphasis-color);
   --border-radius: 0;
+}
+
+::slotted(mlv-select) {
+  width: fit-content;
 }
 
 ::slotted([mlv-control]) {

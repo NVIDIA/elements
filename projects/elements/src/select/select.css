@@ -10,6 +10,7 @@
   --width: 100%;
   --font-weight: normal;
   --text-align: start;
+  --scroll-height: 100vh;
   --_input-background: var(--background);
   --_icon-color: var(--color);
   width: var(--width);
@@ -107,6 +108,10 @@ mlv-tag {
 
 mlv-dropdown {
   --padding: var(--mlv-ref-size-200);
+}
+
+mlv-menu {
+  --max-height: var(--scroll-height);
 }
 
 mlv-menu-item:not(:--selected) mlv-icon[name='checkmark'] {

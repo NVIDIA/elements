@@ -30,7 +30,8 @@
   border: var(--border-width) solid var(--border-color);
   background: var(--background);
   border-radius: var(--border-radius);
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 [input] slot::before {

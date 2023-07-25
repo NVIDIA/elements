@@ -98,7 +98,7 @@ class KitchenSinkDemo extends LitElement {
 
   #workflows = workflowData();
 
-  @state() filteredWorkflows = this.#workflows;
+  @state() private filteredWorkflows = this.#workflows;
 
   static styles = [unsafeCSS(layout), unsafeCSS(typography)];
 
