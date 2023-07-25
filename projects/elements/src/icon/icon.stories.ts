@@ -52,7 +52,7 @@ export const IconCatalog = {
 class IconDemo extends LitElement {
   static styles = [unsafeCSS(layout), unsafeCSS(typography)];
 
-  @state() iconSearchKey = '';
+  @state() private iconSearchKey = '';
 
   render() {
     return html`

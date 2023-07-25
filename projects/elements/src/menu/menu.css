@@ -5,6 +5,7 @@
   --width: min-content;
   --max-width: 100%;
   --min-width: 170px;
+  --max-height: 100%;
   width: var(--width);
   min-width: var(--min-width);
 }
@@ -17,5 +18,27 @@
   width: var(--width);
   min-width: var(--min-width);
   max-width: var(--max-width);
+  max-height: var(--max-height);
   margin: 0;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  background: var(--background);
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  height: 100vh;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--nve-ref-border-color-muted);
+  border: 2px solid var(--background);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(0,0,0,0);
 }

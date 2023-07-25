@@ -2,11 +2,13 @@
   --background: var(--nve-sys-support-color);
   --color: var(--nve-sys-interaction-field-color);
   --border-radius: var(--nve-ref-border-radius-sm);
+  width: fit-content;
 }
 
 [internal-host] {
   border-radius: var(--border-radius);
   overflow: hidden;
+  width: max-content;
 }
 
 .input-slot {
@@ -25,6 +27,10 @@ slot[name='label'] {
   --background: var(--nve-sys-interaction-field-background);
   --color: var(--nve-sys-support-emphasis-color);
   --border-radius: 0;
+}
+
+::slotted(nve-select) {
+  width: fit-content;
 }
 
 ::slotted([nve-control]) {

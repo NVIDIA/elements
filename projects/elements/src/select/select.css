@@ -10,6 +10,7 @@
   --width: 100%;
   --font-weight: normal;
   --text-align: start;
+  --scroll-height: 100vh;
   --_input-background: var(--background);
   --_icon-color: var(--color);
   width: var(--width);
@@ -107,6 +108,10 @@ nve-tag {
 
 nve-dropdown {
   --padding: var(--nve-ref-size-200);
+}
+
+nve-menu {
+  --max-height: var(--scroll-height);
 }
 
 nve-menu-item:not(:--selected) nve-icon[name='checkmark'] {
