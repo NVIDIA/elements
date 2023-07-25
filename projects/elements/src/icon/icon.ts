@@ -32,7 +32,7 @@ export class Icon extends LitElement {
   /** The name of the icon SVG sprite */
   @property({ type: String, reflect: true }) name: IconName;
 
-  @state() svg: string;
+  @state() private svg: string;
 
   static styles = useStyles([styles]);
 
