@@ -463,7 +463,7 @@ export function sortStringKeys<T>(list: T[], key: string, sortType: 'none' | 'as
 }
 
 class RowSortDemo extends LitElement {
-  @state() sort: 'none' | 'ascending' | 'descending' = 'none';
+  @state() private sort: 'none' | 'ascending' | 'descending' = 'none';
 
   static styles = [unsafeCSS(layout)];
 
@@ -510,9 +510,9 @@ export const RowSortInteractive = {
 class InfiniteScrollDemo extends LitElement {
   static styles = [unsafeCSS(layout)];
 
-  @state() rows = this.#group(grid(10000).rows, 100);
+  @state() private rows = this.#group(grid(10000).rows, 100);
 
-  @state() grid = grid(0, 4)
+  @state() private grid = grid(0, 4)
 
   render() {
     return html`
@@ -567,9 +567,9 @@ class GridPerformanceDemo extends LitElement {
   }
   `];
 
-  @state() show = false;
+  @state() private show = false;
 
-  @state() grid = grid(1000);
+  @state() private grid = grid(1000);
 
   render() {
     return html`
@@ -794,7 +794,7 @@ export const PanelDetail = {
 };
 
 class GridPanelDemo extends LitElement {
-  @state() selectedId: string = null;
+  @state() private selectedId: string = null;
 
   #grid = grid(8, 3);
 
@@ -840,9 +840,9 @@ export const PanelDetailInteractive = {
 };
 
 class GridDynamicColumnDemo extends LitElement {
-  @state() selectedId: string = null;
+  @state() private selectedId: string = null;
 
-  @state() grid = grid(10, 6);
+  @state() private grid = grid(10, 6);
 
   static styles = [unsafeCSS(layout)];
 
