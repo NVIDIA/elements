@@ -40,8 +40,7 @@ export default defineConfig((env) => {
           tsconfigPath: './tsconfig.lib.json',
           root: resolve('.'),
           entryRoot: resolve('./src'),
-          outDir: dist(),
-          staticImport: true
+          outDir: dist()
         }),
         enforce: 'pre'
       }
@@ -52,7 +51,7 @@ export default defineConfig((env) => {
       watch: mode === 'watch' ? {} : undefined,
       outDir: dist(),
       emptyOutDir: false,
-      target: 'esnext',
+      target: 'es2021', // temporarily blocked on using esnext or es2022 due to Webpack in IDE plugins https://github.com/webpack/webpack/issues/16330
       lib: {
         entry: {
           index: resolve('./src/index.ts'),                                    // imports all independent component entrypoints
