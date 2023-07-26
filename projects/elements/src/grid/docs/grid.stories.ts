@@ -95,7 +95,7 @@ export const MultiSelectBulkActions = {
     <nve-bulk-actions closable status="accent" slot="footer">
       1 selected
       <nve-button interaction="flat-destructive">delete</nve-button>
-      <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
+      <nve-icon-button interaction="flat" icon-name="more-actions"></nve-icon-button>
     </nve-bulk-actions>
   </nve-grid>
 </div>
@@ -137,7 +137,7 @@ export const RowAction = {
       <nve-grid-row>
         ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
         <nve-grid-cell>
-          <nve-icon-button interaction="flat" icon-name="additional-actions" aria-label="row ${i} actions"></nve-icon-button>
+          <nve-icon-button interaction="flat" icon-name="more-actions" aria-label="row ${i} actions"></nve-icon-button>
         </nve-grid-cell>
       </nve-grid-row>
     `)}
@@ -244,8 +244,8 @@ export const ColumnAction = {
       <input type="search" placeholder="search column" aria-label="search apps" />
     </nve-search>
     <nve-menu>
-      <nve-menu-item><nve-icon name="settings"></nve-icon> settings</nve-menu-item>
-      <nve-menu-item><nve-icon name="favorite-filled"></nve-icon> favorites</nve-menu-item>
+      <nve-menu-item><nve-icon name="gear"></nve-icon> settings</nve-menu-item>
+      <nve-menu-item><nve-icon name="star"></nve-icon> favorites</nve-menu-item>
     </nve-menu>
   </nve-dropdown>
 </div>
@@ -674,7 +674,7 @@ export const Card = {
     <nve-card-header>
       <h2 nve-text="heading sm bold">Data Grid</h2>
       <h3 nve-text="body muted">Card Example</h3>
-      <nve-icon-button slot="header-action" icon-name="additional-actions"></nve-icon-button>
+      <nve-icon-button slot="header-action" icon-name="more-actions"></nve-icon-button>
     </nve-card-header>
     <nve-grid container="flat" style="--scroll-height: 325px">
       <nve-grid-header>
@@ -779,7 +779,7 @@ export const PanelDetail = {
         <nve-grid-row ?selected=${i === 1}>
           ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
           <nve-grid-cell>
-            <nve-icon-button interaction="flat" icon-name="additional-actions" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
+            <nve-icon-button interaction="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
           </nve-grid-cell>
         </nve-grid-row>
       `)}
@@ -829,11 +829,11 @@ class GridPanelDemo extends LitElement {
           <nve-grid-row ?selected=${this.selectedId === row.id}>
             ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
             <nve-grid-cell>
-              <nve-icon-button @click=${() => this.selectedId = row.id} interaction="flat" icon-name="additional-actions"></nve-icon-button>
+              <nve-icon-button @click=${() => this.selectedId = row.id} interaction="flat" icon-name="more-actions"></nve-icon-button>
             </nve-grid-cell>
           </nve-grid-row>`)}
           <nve-grid-footer>
-            <nve-icon-button aria-label="show grid options" interaction="flat" icon-name="additional-actions"></nve-icon-button>
+            <nve-icon-button aria-label="show grid options" interaction="flat" icon-name="more-actions"></nve-icon-button>
           </nve-grid-footer>
         </nve-grid>
         <nve-panel closable ?expanded=${!!this.selectedId} @close=${() => this.selectedId = null} style="min-width: 280px">

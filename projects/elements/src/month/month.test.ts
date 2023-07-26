@@ -28,7 +28,7 @@ describe('nve-month', () => {
   });
 
   it('should render calendar suffix icon', () => {
-    expect(element.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('date');
+    expect(element.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('calendar');
   });
 
   it('should trigger native UI', async () => {

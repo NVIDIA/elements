@@ -5,8 +5,6 @@
   --gap: 0;
   --height: var(--nve-ref-size-800);
   --width: var(--nve-ref-size-800);
-  --icon-width: var(--nve-ref-size-400);
-  --icon-height: var(--nve-ref-size-400);
   --font-size: calc(var(--width) / 2.3);
 }
 
@@ -14,8 +12,6 @@
   --padding: 0;
   --height: var(--nve-ref-size-600);
   --width: var(--nve-ref-size-600);
-  --icon-width: var(--nve-ref-size-300);
-  --icon-height: var(--nve-ref-size-300);
 }
 
 :host([size='lg']) {
@@ -26,12 +22,16 @@
 
 :host([interaction*='ghost']), /** @deprecated ghost */
 :host([interaction*='flat']) {
-  --color: var(--nve-sys-support-emphasis-color);
+  --color: var(--nve-sys-text-color);
   --padding: 0;
 }
 
 :host([interaction*='ghost']:--pressed), /** @deprecated ghost */
 :host([interaction*='flat']:--pressed) {
+  --color: var(--nve-sys-text-emphasis-color);
+}
+
+:host([interaction*='flat']:hover) {
   --color: var(--nve-sys-text-emphasis-color);
 }
 
@@ -41,14 +41,7 @@
 
 nve-icon {
   --color: var(--_icon-color);
-  --width: var(--icon-width);
-  --height: var(--icon-height);
   pointer-events: none;
-}
-
-:host([icon-name='cancel']) {
-  --icon-height: var(--nve-ref-size-300);
-  --icon-width: var(--nve-ref-size-300);
 }
 
 ::slotted(a) {

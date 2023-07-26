@@ -119,7 +119,7 @@ export const KitchenSink = {
 
     <nve-input-group layout="vertical-inline">
       <label>domain</label>
-      <nve-select style="width: 130px">
+      <nve-select style="width: 120px">
         <select aria-label="protocol">
           <option>https://</option>
           <option>http://</option>

@@ -1,13 +1,13 @@
 :host {
   --nve-sys-layer-popover-arrow-padding: 6px;
-  --nve-sys-layer-popover-arrow-offset: 4px;
+  --nve-sys-layer-popover-arrow-offset: 2px;
   --nve-sys-layer-popover-offset: 2px;
-  --border-radius: var(--nve-ref-border-radius-md);
+  --border-radius: var(--nve-ref-border-radius-sm);
   --background: var(--nve-sys-layer-popover-background);
   --color: var(--nve-sys-layer-popover-color);
-  --padding: var(--nve-ref-size-300);
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
   --box-shadow: var(--nve-ref-shadow-500);
-  --font-size: var(--nve-ref-font-size-200);
+  --font-size: var(--nve-ref-font-size-100);
   --arrow-transform: translate(0, -2px) rotate(-45deg);
   --width: max-content;
   --height: initial;
@@ -19,7 +19,6 @@ dialog {
   background: var(--background);
   color: var(--color);
   box-shadow: var(--box-shadow);
-  gap: var(--nve-ref-space-sm);
   font-size: var(--font-size);
   width: var(--width);
   height: var(--height);
@@ -31,11 +30,11 @@ dialog:has(nve-icon-button) {
 }
 
 .arrow {
-  width: var(--nve-ref-size-400);
-  height: var(--nve-ref-size-400);
+  width: var(--nve-ref-size-300);
+  height: var(--nve-ref-size-300);
   background: var(--background);
   transform: var(--arrow-transform);
-  border-radius: var(--nve-ref-border-radius-xs);
+  border-radius: var(--nve-ref-size-50);
   position: absolute;
 }
 

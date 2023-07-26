@@ -117,8 +117,8 @@ class KitchenSinkDemo extends LitElement {
       <h2 slot="title">Workflows</h2>
       <nve-button slot="nav-items" active>Link 1</nve-button>
       <nve-button slot="nav-items">Link 2</nve-button>
-      <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
-      <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
+      <nve-icon-button icon-name="chat-bubble" slot="nav-actions"></nve-icon-button>
+      <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
       <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
     </nve-app-header>
     `
@@ -131,8 +131,8 @@ class KitchenSinkDemo extends LitElement {
         <div nve-layout="row gap:md align:center">
           <h1 nve-text="heading lg semibold">Workflows</h1>
           <div nve-layout="row gap:sm" style="margin-left: auto">
-            <nve-icon-button @click=${() => this.showAboutDialog = true} icon-name="information" aria-label="about kitchen sink"></nve-icon-button>
-            <nve-icon-button icon-name="additional-actions" aria-label="additional actions"></nve-icon-button>
+            <nve-icon-button @click=${() => this.showAboutDialog = true} icon-name="information-circle-stroke" aria-label="about kitchen sink"></nve-icon-button>
+            <nve-icon-button icon-name="more-actions" aria-label="additional actions"></nve-icon-button>
           </div>
         </div>
         <div nve-layout="row gap:xl align:vertical-center">
@@ -349,7 +349,7 @@ class KitchenSinkDemo extends LitElement {
                 ${this.columns.region.visible ? html`<nve-grid-cell>${workflow.region}</nve-grid-cell>` : ''}
                 ${this.columns.created.visible ? html`<nve-grid-cell>${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(workflow.created)}</nve-grid-cell>` : ''}
                 <nve-grid-cell>
-                  <nve-icon-button interaction="flat" icon-name="additional-actions" @click=${() => this.workflowDetail = workflow}></nve-icon-button>
+                  <nve-icon-button interaction="flat" icon-name="more-actions" @click=${() => this.workflowDetail = workflow}></nve-icon-button>
                 </nve-grid-cell>
               </nve-grid-row>`)}
               ${this.#placeholder}

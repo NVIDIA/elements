@@ -1,6 +1,6 @@
 :host {
   --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
-  --padding: var(--nve-ref-size-500);
+  --padding: var(--nve-ref-size-400);
   --gap: var(--nve-ref-space-sm);
   display: block;
   width: calc(100% + calc(var(--padding) * 2));

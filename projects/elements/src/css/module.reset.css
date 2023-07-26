@@ -11,3 +11,14 @@ body[nve-theme],
 *:has([nve-popover]) {
   contain: initial;
 }
+
+[nve-theme~='debug'] {
+  --nve-debug-outline-width: 2px;
+  --nve-debug-layout-outline: var(--nve-debug-outline-width) solid var(--nve-ref-color-purple-plum-900);
+  --nve-debug-element-outline: var(--nve-debug-outline-width) solid var(--nve-ref-color-brand-green-900);
+  --nve-debug-typography-outline: var(--nve-debug-outline-width) solid var(--nve-ref-color-yellow-amber-900);
+}
+
+[nve-theme~='debug'][nve-theme~='dark'] {
+  --nve-debug-outline-width: 1px;
+}

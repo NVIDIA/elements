@@ -40,7 +40,7 @@ export const ButtonWithIcon = {
       ${args.textContent}
     ${when(args.iconSlotPlacement === 'end',() => html`<nve-icon .name=${args.iconName}></nve-icon>`)}
   </nve-button>`,
-  args: { textContent: 'Button Icon', disabled: false, interaction: 'emphasize', iconName: 'navigate-to', iconSlotPlacement: 'end' },
+  args: { textContent: 'Button Icon', disabled: false, interaction: 'emphasize', iconName: 'edit', iconSlotPlacement: 'end' },
   argTypes: {
     iconName: {
       control: 'select',
@@ -165,7 +165,7 @@ export const FormControl = {
   <nve-search>
     <input type="search" placeholder="search" aria-label="search" />
   </nve-search>
-  <nve-button nve-control>filter option <nve-icon name="chevron-down"></nve-icon></nve-button>
+  <nve-button nve-control>filter option <nve-icon name="chevron" direction="down" size="sm"></nve-icon></nve-button>
 </div>
   `
 }

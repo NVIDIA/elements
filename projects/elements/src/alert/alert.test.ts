@@ -41,11 +41,11 @@ describe('nve-alert', () => {
   });
 
   it('should show status icon if status is proivided', async () => {
-    expect(alert.shadowRoot.querySelector('nve-icon').name).toBe('information');
+    expect(alert.shadowRoot.querySelector('nve-icon').name).toBe('information-circle-stroke');
     alert.status = 'success';
     await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector('nve-icon')).toBeDefined();
-    expect(alert.shadowRoot.querySelector('nve-icon').name).toBe('success-badge');
+    expect(alert.shadowRoot.querySelector('nve-icon').name).toBe('checkmark-circle');
   });
 
   it('should provide a aria role of alert to describe content', async () => {

@@ -3,6 +3,7 @@
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
   --line-height: 1em;
   --gap: var(--nve-ref-space-xs);
+  contain: none;
 }
 
 [internal-host] {
