@@ -81,13 +81,13 @@ export class Select extends Control {
 
   protected get suffixContent() {
     return html`
-      <mlv-icon name="caret" part="caret" direction="down"></mlv-icon>
+      <mlv-icon name="caret" part="caret" direction="down" size="sm"></mlv-icon>
       <mlv-dropdown @close=${e => e.target.hidden = true} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
         <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label="select options">
           ${this.#options.map((o, i) => html`
           <mlv-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} aria-selected=${o.selected}>
             <slot name="option-${i + 1}">
-              <mlv-icon name="checkmark"></mlv-icon> ${o.innerText}
+              <mlv-icon name="check" size="sm"></mlv-icon> ${o.innerText}
             </slot>
           </mlv-menu-item>`)}
         </mlv-menu>

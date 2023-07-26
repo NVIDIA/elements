@@ -28,9 +28,9 @@ class AppHeaderDefaultDemo extends LitElement {
   <mlv-logo></mlv-logo>
   <mlv-button slot="nav-items" selected>Link 1</mlv-button>
   <mlv-button slot="nav-items">Link 2</mlv-button>
-  <mlv-icon-button icon-name="assist" slot="nav-actions" @click=${() => alert('Thanks for clicking the feedback icon button!')}></mlv-icon-button>
+  <mlv-icon-button icon-name="chat-bubble" slot="nav-actions" @click=${() => alert('Thanks for clicking the feedback icon button!')}></mlv-icon-button>
   <mlv-icon-button icon-name="search" slot="nav-actions" @click=${() => alert('Thanks for clicking the search icon button!')}></mlv-icon-button>
-  <mlv-icon-button icon-name="app-switcher" id=${ddownOneId + '-btn'} slot="nav-actions" @click=${() => this.activeId = ddownOneId}></mlv-icon-button>
+  <mlv-icon-button icon-name="switch-apps" id=${ddownOneId + '-btn'} slot="nav-actions" @click=${() => this.activeId = ddownOneId}></mlv-icon-button>
   <mlv-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasize" slot="nav-actions">EL</mlv-icon-button>
 </mlv-app-header>
 <mlv-dropdown id=${ddownOneId}
@@ -38,9 +38,9 @@ class AppHeaderDefaultDemo extends LitElement {
   .hidden=${this.activeId !== ddownOneId}
   @close=${() => this.activeId === ddownOneId ? this.activeId = '' : ''}>
   <mlv-menu>
-    <mlv-menu-item><mlv-icon name="user"></mlv-icon> Menu Item</mlv-menu-item>
-    <mlv-menu-item><mlv-icon name="settings"></mlv-icon> Menu Item</mlv-menu-item>
-    <mlv-menu-item><mlv-icon name="favorite-filled"></mlv-icon> Menu Item</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="person"></mlv-icon> Menu Item</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="gear"></mlv-icon> Menu Item</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="star"></mlv-icon> Menu Item</mlv-menu-item>
     <mlv-divider></mlv-divider>
     <mlv-menu-item><mlv-icon name="logout"></mlv-icon> Menu Item</mlv-menu-item>
   </mlv-menu>
@@ -50,9 +50,9 @@ class AppHeaderDefaultDemo extends LitElement {
   .hidden=${this.activeId !== ddownTwoId}
   @close=${() => this.activeId === ddownTwoId ? this.activeId = '' : ''} arrow>
   <mlv-menu>
-    <mlv-menu-item><mlv-icon name="user"></mlv-icon> Menu Item</mlv-menu-item>
-    <mlv-menu-item><mlv-icon name="settings"></mlv-icon> Menu Item</mlv-menu-item>
-    <mlv-menu-item><mlv-icon name="assist"></mlv-icon> Menu Item</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="person"></mlv-icon> Menu Item</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="gear"></mlv-icon> Menu Item</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="chat-bubble"></mlv-icon> Menu Item</mlv-menu-item>
   </mlv-menu>
 </mlv-dropdown>
   `
@@ -75,9 +75,9 @@ export const AppBadge = {
     <h2 slot="title">My App Title</h2>
     <mlv-button slot="nav-items" selected>Link 1</mlv-button>
     <mlv-button slot="nav-items">Link 2</mlv-button>
-    <mlv-icon-button icon-name="assist" slot="nav-actions"></mlv-icon-button>
+    <mlv-icon-button icon-name="chat-bubble" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button icon-name="search" slot="nav-actions"></mlv-icon-button>
-    <mlv-icon-button icon-name="app-switcher" slot="nav-actions"></mlv-icon-button>
+    <mlv-icon-button icon-name="switch-apps" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>
 </div>
@@ -92,7 +92,7 @@ export const NavItems = {
     <h2 slot="title">Nav Items</h2>
     <mlv-button slot="nav-items">Link 1</mlv-button>
     <mlv-button slot="nav-items" selected>Link 2</mlv-button>
-    <mlv-icon-button icon-name="additional-actions" slot="nav-items"></mlv-icon-button>
+    <mlv-icon-button icon-name="more-actions" slot="nav-items"></mlv-icon-button>
   </mlv-app-header>
 </div>
   `
@@ -104,9 +104,9 @@ export const NavActions = {
   <mlv-app-header>
     <mlv-logo></mlv-logo>
     <h2 slot="title">Nav Actions</h2>
-    <mlv-icon-button icon-name="assist" slot="nav-actions"></mlv-icon-button>
+    <mlv-icon-button icon-name="chat-bubble" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button icon-name="search" slot="nav-actions"></mlv-icon-button>
-    <mlv-icon-button icon-name="app-switcher" slot="nav-actions"></mlv-icon-button>
+    <mlv-icon-button icon-name="switch-apps" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>
 </div>

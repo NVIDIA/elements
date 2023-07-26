@@ -90,7 +90,7 @@ export class Dropdown extends LitElement {
   render() {
     return html`
       <dialog ${animationFade(this)}>
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="falt" size="sm" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="flat" size="sm" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
       </dialog>

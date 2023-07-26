@@ -11,3 +11,14 @@ body[mlv-theme],
 *:has([mlv-popover]) {
   contain: initial;
 }
+
+[mlv-theme~='debug'] {
+  --mlv-debug-outline-width: 2px;
+  --mlv-debug-layout-outline: var(--mlv-debug-outline-width) solid var(--mlv-ref-color-purple-plum-900);
+  --mlv-debug-element-outline: var(--mlv-debug-outline-width) solid var(--mlv-ref-color-brand-green-900);
+  --mlv-debug-typography-outline: var(--mlv-debug-outline-width) solid var(--mlv-ref-color-yellow-amber-900);
+}
+
+[mlv-theme~='debug'][mlv-theme~='dark'] {
+  --mlv-debug-outline-width: 1px;
+}

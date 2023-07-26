@@ -3,6 +3,9 @@
 }
 
 [mlv-layout] {
+  outline: var(--mlv-debug-layout-outline, initial);
+  outline-offset: 1px;
+
   &[mlv-layout~='row'],
   &[mlv-layout~='column'] {
     display: flex;

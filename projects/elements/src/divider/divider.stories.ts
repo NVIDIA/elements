@@ -30,8 +30,8 @@ export const Vertical = {
   render: () => html`
     <div mlv-layout="row gap:sm align:vertical-center" style="height: 50px">
       <mlv-divider orientation="vertical"></mlv-divider>
-      <mlv-icon-button icon-name="information"></mlv-icon-button>
-      <mlv-icon-button icon-name="additional-actions"></mlv-icon-button>
+      <mlv-icon-button icon-name="information-circle-stroke"></mlv-icon-button>
+      <mlv-icon-button icon-name="more-actions"></mlv-icon-button>
     </div>
   `
 };

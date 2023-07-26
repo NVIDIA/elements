@@ -12,6 +12,7 @@
   font-size: inherit;
   contain: layout; /* https://developer.mozilla.org/en-US/docs/Web/CSS/contain */
   pointer-events: inherit;
+  outline: var(--mlv-debug-element-outline, initial);
 }
 
 *,

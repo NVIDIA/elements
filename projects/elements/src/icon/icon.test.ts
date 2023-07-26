@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
 import { Icon } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 
@@ -37,11 +37,11 @@ describe('mlv-icon', () => {
   });
 
   it('should allow icon aliasing', () => {
-    expect((customElements.get('mlv-icon') as any)._icons['chevron-up']).toBe((customElements.get('mlv-icon') as any)._icons['chevron']);
+    expect((customElements.get('mlv-icon') as any)._icons['chevron-up']).toStrictEqual((customElements.get('mlv-icon') as any)._icons['chevron']);
   });
 
   it('should allow icons to be registered', async () => {
-    (customElements.get('mlv-icon') as any).add({
+    await (customElements.get('mlv-icon') as any).add({
       'test-svg': { svg: () => '<svg id="test-svg"><path d=""/></svg>' }
     });
 
@@ -55,4 +55,16 @@ describe('mlv-icon', () => {
     expect((customElements.get('mlv-icon') as any)._icons['./assets/icons.svg']).toBeTruthy();
   });
 
+  it('should update when new icon is registered', async () => {
+    element.name = 'test-svg' as any;
+    await elementIsStable(element);
+
+    const event = untilEvent(document, 'mlv-icon-test-svg');
+    (customElements.get('mlv-icon') as any).add({
+      'test-svg': { svg: () => '<svg id="test-svg"><path d=""/></svg>' }
+    });
+    expect((await event)).toBeDefined();
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('#test-svg')).toBeTruthy();
+  });
 });

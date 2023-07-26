@@ -66,19 +66,19 @@ export class Pagination extends LitElement {
   }
 
   get #previousButton() {
-    return html`<mlv-icon-button @click=${() => this.#setValue(this.value - 1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.previous} interaction="flat" icon-name="chevron-left"></mlv-icon-button>`;
+    return html`<mlv-icon-button @click=${() => this.#setValue(this.value - 1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.previous} interaction="flat" icon-name="chevron" direction="left"></mlv-icon-button>`;
   }
 
   get #nextButton() {
-    return html`<mlv-icon-button @click=${() => this.#setValue(this.value + 1)} .disabled=${this.disabled || this.#currentPage >= this.items} .ariaLabel=${this.i18n.next} interaction="flat" icon-name="chevron-right"></mlv-icon-button>`;
+    return html`<mlv-icon-button @click=${() => this.#setValue(this.value + 1)} .disabled=${this.disabled || this.#currentPage >= this.items} .ariaLabel=${this.i18n.next} interaction="flat" icon-name="chevron" direction="right"></mlv-icon-button>`;
   }
 
   get #startButton() {
-    return html`<mlv-icon-button @click=${() => this.#setValue(1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.start} interaction="flat" icon-name="start"></mlv-icon-button>`;
+    return html`<mlv-icon-button @click=${() => this.#setValue(1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.start} interaction="flat" icon-name="arrow-stop" direction="left"></mlv-icon-button>`;
   }
 
   get #endButton() {
-    return html`<mlv-icon-button @click=${() => this.#setValue(this.items / this.step)} .disabled=${this.disabled || (((this.value - 1) * this.step) + this.step) >= this.items} .ariaLabel=${this.i18n.end} interaction="flat" icon-name="end"></mlv-icon-button>`;
+    return html`<mlv-icon-button @click=${() => this.#setValue(this.items / this.step)} .disabled=${this.disabled || (((this.value - 1) * this.step) + this.step) >= this.items} .ariaLabel=${this.i18n.end} interaction="flat" icon-name="arrow-stop" direction="right"></mlv-icon-button>`;
   }
 
   get #select() {

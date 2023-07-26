@@ -17,6 +17,7 @@
   color: var(--mlv-sys-text-color) !important;
   white-space: initial;
   margin: 0;
+  outline: var(--mlv-debug-typography-outline, initial);
 }
 
 [mlv-text~='trim:none']::before,
@@ -41,18 +42,22 @@
 }
 
 [mlv-text~='heading'] {
-  font-size: var(--mlv-ref-font-size-500) !important;
+  font-size: var(--mlv-ref-font-size-400) !important;
 
   &[mlv-text~='xl'] {
-    font-size: var(--mlv-ref-font-size-700) !important;
-  }
-
-  &[mlv-text~='lg'] {
     font-size: var(--mlv-ref-font-size-600) !important;
   }
 
+  &[mlv-text~='lg'] {
+    font-size: var(--mlv-ref-font-size-500) !important;
+  }
+
   &[mlv-text~='sm'] {
-    font-size: var(--mlv-ref-font-size-400) !important;
+    font-size: var(--mlv-ref-font-size-300) !important;
+  }
+
+  &[mlv-text~='xs'] {
+    font-size: var(--mlv-ref-font-size-200) !important;
   }
 }
 

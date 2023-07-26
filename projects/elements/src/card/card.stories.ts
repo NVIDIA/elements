@@ -43,7 +43,7 @@ export const Default = {
             ${when(
               args.showAction,
               () => html`
-                <mlv-icon-button slot="header-action" icon-name="additional-actions" interaction="flat"></mlv-icon-button>
+                <mlv-icon-button slot="header-action" icon-name="more-actions" interaction="flat"></mlv-icon-button>
               `)}
           </mlv-card-header>
           `

@@ -3,6 +3,7 @@
   --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
   --line-height: 1em;
   --gap: var(--mlv-ref-space-xs);
+  contain: none;
 }
 
 [internal-host] {

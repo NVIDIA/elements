@@ -155,7 +155,7 @@ describe('mlv-grid-column actions', () => {
       <mlv-grid>
         <mlv-grid-header>
           <mlv-grid-column>column 1 <mlv-icon-button slot="actions"></mlv-icon-button></mlv-grid-column>
-          <mlv-grid-column>column 2 <mlv-icon-button icon-name="user" slot="actions"></mlv-icon-button></mlv-grid-column>
+          <mlv-grid-column>column 2 <mlv-icon-button icon-name="person" slot="actions"></mlv-icon-button></mlv-grid-column>
           <mlv-grid-column>column 3</mlv-grid-column>
           <mlv-grid-column>column 4</mlv-grid-column>
         </mlv-grid-header>

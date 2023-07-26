@@ -14,12 +14,12 @@ export const Default = {
   <mlv-bulk-actions closable status="accent">
     123 selected
     <mlv-button interaction="flat-destructive">delete</mlv-button>
-    <mlv-icon-button interaction="flat" icon-name="additional-actions"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" icon-name="more-actions"></mlv-icon-button>
   </mlv-bulk-actions>
   <mlv-bulk-actions closable>
     123 selected
     <mlv-button interaction="flat-destructive">delete</mlv-button>
-    <mlv-icon-button interaction="flat" icon-name="additional-actions"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" icon-name="more-actions"></mlv-icon-button>
   </mlv-bulk-actions>
 </div>
   `
@@ -31,7 +31,7 @@ export const LightTheme = {
   <mlv-bulk-actions>
     123 selected
     <mlv-button interaction="flat-destructive">delete</mlv-button>
-    <mlv-icon-button interaction="flat" icon-name="additional-actions"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" icon-name="more-actions"></mlv-icon-button>
   </mlv-bulk-actions>
 </div>
   `
@@ -43,7 +43,7 @@ export const DarkTheme = {
   <mlv-bulk-actions>
     123 selected
     <mlv-button interaction="flat-destructive">delete</mlv-button>
-    <mlv-icon-button interaction="flat" icon-name="additional-actions"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" icon-name="more-actions"></mlv-icon-button>
   </mlv-bulk-actions>
 </div>
   `

@@ -95,7 +95,7 @@ export const MultiSelectBulkActions = {
     <mlv-bulk-actions closable status="accent" slot="footer">
       1 selected
       <mlv-button interaction="flat-destructive">delete</mlv-button>
-      <mlv-icon-button interaction="flat" icon-name="additional-actions"></mlv-icon-button>
+      <mlv-icon-button interaction="flat" icon-name="more-actions"></mlv-icon-button>
     </mlv-bulk-actions>
   </mlv-grid>
 </div>
@@ -137,7 +137,7 @@ export const RowAction = {
       <mlv-grid-row>
         ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
         <mlv-grid-cell>
-          <mlv-icon-button interaction="flat" icon-name="additional-actions" aria-label="row ${i} actions"></mlv-icon-button>
+          <mlv-icon-button interaction="flat" icon-name="more-actions" aria-label="row ${i} actions"></mlv-icon-button>
         </mlv-grid-cell>
       </mlv-grid-row>
     `)}
@@ -244,8 +244,8 @@ export const ColumnAction = {
       <input type="search" placeholder="search column" aria-label="search apps" />
     </mlv-search>
     <mlv-menu>
-      <mlv-menu-item><mlv-icon name="settings"></mlv-icon> settings</mlv-menu-item>
-      <mlv-menu-item><mlv-icon name="favorite-filled"></mlv-icon> favorites</mlv-menu-item>
+      <mlv-menu-item><mlv-icon name="gear"></mlv-icon> settings</mlv-menu-item>
+      <mlv-menu-item><mlv-icon name="star"></mlv-icon> favorites</mlv-menu-item>
     </mlv-menu>
   </mlv-dropdown>
 </div>
@@ -674,7 +674,7 @@ export const Card = {
     <mlv-card-header>
       <h2 mlv-text="heading sm bold">Data Grid</h2>
       <h3 mlv-text="body muted">Card Example</h3>
-      <mlv-icon-button slot="header-action" icon-name="additional-actions"></mlv-icon-button>
+      <mlv-icon-button slot="header-action" icon-name="more-actions"></mlv-icon-button>
     </mlv-card-header>
     <mlv-grid container="flat" style="--scroll-height: 325px">
       <mlv-grid-header>
@@ -779,7 +779,7 @@ export const PanelDetail = {
         <mlv-grid-row ?selected=${i === 1}>
           ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
           <mlv-grid-cell>
-            <mlv-icon-button interaction="flat" icon-name="additional-actions" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
+            <mlv-icon-button interaction="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
           </mlv-grid-cell>
         </mlv-grid-row>
       `)}
@@ -829,11 +829,11 @@ class GridPanelDemo extends LitElement {
           <mlv-grid-row ?selected=${this.selectedId === row.id}>
             ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
             <mlv-grid-cell>
-              <mlv-icon-button @click=${() => this.selectedId = row.id} interaction="flat" icon-name="additional-actions"></mlv-icon-button>
+              <mlv-icon-button @click=${() => this.selectedId = row.id} interaction="flat" icon-name="more-actions"></mlv-icon-button>
             </mlv-grid-cell>
           </mlv-grid-row>`)}
           <mlv-grid-footer>
-            <mlv-icon-button aria-label="show grid options" interaction="flat" icon-name="additional-actions"></mlv-icon-button>
+            <mlv-icon-button aria-label="show grid options" interaction="flat" icon-name="more-actions"></mlv-icon-button>
           </mlv-grid-footer>
         </mlv-grid>
         <mlv-panel closable ?expanded=${!!this.selectedId} @close=${() => this.selectedId = null} style="min-width: 280px">

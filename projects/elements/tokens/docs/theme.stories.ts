@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import '@elements/elements/alert/define.js';
 import '@elements/elements/button/define.js';
+import '@elements/elements/select/define.js';
 import '@elements/elements/card/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/icon-button/define.js';
@@ -16,6 +17,14 @@ export const Default = {
 
 export const Dark = {
   render: () => getThemeDemo('dark')
+}
+
+export const DefaultDebug = {
+  render: () => getThemeDemo('light debug')
+}
+
+export const DarkDebug = {
+  render: () => getThemeDemo('dark debug')
 }
 
 export const HighContrast = {
@@ -91,18 +100,18 @@ function getThemeContent() {
   return html`
     <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px">
     <div mlv-layout="row gap:sm">
-        <mlv-icon-button icon-name="user"></mlv-icon-button>
-        <mlv-icon-button icon-name="user" interaction="emphasize"></mlv-icon-button>
-        <mlv-icon-button icon-name="user" interaction="destructive"></mlv-icon-button>
-        <mlv-icon-button icon-name="user" interaction="flat"></mlv-icon-button>
-        <mlv-icon-button icon-name="user" disabled></mlv-icon-button>
+        <mlv-icon-button icon-name="person"></mlv-icon-button>
+        <mlv-icon-button icon-name="person" interaction="emphasize"></mlv-icon-button>
+        <mlv-icon-button icon-name="person" interaction="destructive"></mlv-icon-button>
+        <mlv-icon-button icon-name="person" interaction="flat"></mlv-icon-button>
+        <mlv-icon-button icon-name="person" disabled></mlv-icon-button>
       </div>
       <div mlv-layout="row gap:sm">
-        <mlv-icon name="user"></mlv-icon>
-        <mlv-icon name="user" status="accent"></mlv-icon>
-        <mlv-icon name="user" status="success"></mlv-icon>
-        <mlv-icon name="user" status="warning"></mlv-icon>
-        <mlv-icon name="user" status="danger"></mlv-icon>
+        <mlv-icon name="person"></mlv-icon>
+        <mlv-icon name="person" status="accent"></mlv-icon>
+        <mlv-icon name="person" status="success"></mlv-icon>
+        <mlv-icon name="person" status="warning"></mlv-icon>
+        <mlv-icon name="person" status="danger"></mlv-icon>
       </div>
       <div mlv-layout="row gap:sm">
         <mlv-button>default</mlv-button>

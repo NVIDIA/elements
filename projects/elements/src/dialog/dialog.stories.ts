@@ -29,7 +29,7 @@ export const Default = {
   inline: false,
   render: (args: ArgTypes) => html`
     <mlv-dialog ${spread(args)} closable>
-      <h3 mlv-text="heading">Title</h3>
+      <h3 mlv-text="heading semibold sm">Title</h3>
       <p mlv-text="body">some text content in a closable dialog</p>
     </mlv-dialog>
   `,
@@ -58,7 +58,7 @@ export const Content = {
   render: () => html`
 <mlv-dialog closable>
   <mlv-dialog-header>
-    <h3 mlv-text="heading">title</h3>
+    <h3 mlv-text="heading semibold">title</h3>
   </mlv-dialog-header>
   <p mlv-text="body">some text content in a closable dialog</p>
   <mlv-dialog-footer>

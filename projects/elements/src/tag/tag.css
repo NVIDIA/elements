@@ -46,8 +46,6 @@
 
 mlv-icon {
   --color: inherit;
-  --width: var(--mlv-ref-size-200);
-  --height: var(--mlv-ref-size-200);
   cursor: var(--cursor);
 }
 

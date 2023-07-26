@@ -69,45 +69,45 @@ export const Default = {
 
               ${when(
                 args.showActionIcon,
-                () => html`<mlv-icon-button interaction="flat" slot="action-icon" icon-name="additional-actions" @click=${() => customActionHandler()}></mlv-icon-button>`
+                () => html`<mlv-icon-button interaction="flat" slot="action-icon" icon-name="more-actions" @click=${() => customActionHandler()}></mlv-icon-button>`
               )}
             </mlv-panel-header>
             `
           )}
 
-          <mlv-panel-content mlv-layout="column gap:xl">
+          <mlv-panel-content mlv-layout="column gap:md">
             <div mlv-layout="column gap:xs">
-              <label mlv-text="body sm default muted">Release</label>
-              <p mlv-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
+              <label mlv-text="body sm medium muted">Release</label>
+              <p mlv-text="label semibold sm">RainbowBridge/08-18-2021AM/A2A</p>
             </div>
 
             <div mlv-layout="column gap:xs">
-              <label mlv-text="body sm default muted">Date</label>
-              <p mlv-text="eyebrow sm">2021-08-18</p>
+              <label mlv-text="body sm medium muted">Date</label>
+              <p mlv-text="label semibold sm">2021-08-18</p>
             </div>
 
             <div mlv-layout="column gap:xs">
-              <label mlv-text="body sm default muted">State</label>
-              <mlv-button mlv-control>Indexed</mlv-button>
+              <label mlv-text="body sm medium muted">State</label>
+              <mlv-badge status="finished">Indexed</mlv-badge>
             </div>
 
             <div mlv-layout="column gap:xs">
-              <label mlv-text="body sm default muted">Driver</label>
-              <p mlv-text="eyebrow sm">Kenjiro Ono</p>
+              <label mlv-text="body sm medium muted">Driver</label>
+              <p mlv-text="label semibold sm">Kenjiro Ono</p>
             </div>
 
             <div mlv-layout="column gap:xs">
-              <label mlv-text="body sm default muted">Copilot</label>
-              <p mlv-text="eyebrow sm">Kenichi Yoshii</p>
+              <label mlv-text="body sm medium muted">Copilot</label>
+              <p mlv-text="label semibold sm">Kenichi Yoshii</p>
             </div>
 
             <div mlv-layout="column gap:xs">
-              <label mlv-text="body sm default muted">GVS</label>
+              <label mlv-text="body sm medium muted">GVS</label>
               <a href="#" mlv-text="link body sm">http://testbot/testbot/view/content...</a>
             </div>
 
             <div mlv-layout="column gap:xs">
-              <label mlv-text="body sm default muted">Session ID</label>
+              <label mlv-text="body sm medium muted">Session ID</label>
               <a href="#" mlv-text="link body sm">Experiment 12345</a>
             </div>
           </mlv-panel-content>

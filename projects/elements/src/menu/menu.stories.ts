@@ -27,9 +27,9 @@ export const Dropdown = {
   <mlv-button id="dropdown-menu-btn">dropdown</mlv-button>
   <mlv-dropdown anchor="dropdown-menu-btn">
     <mlv-menu>
-      <mlv-menu-item><mlv-icon name="user"></mlv-icon> profile</mlv-menu-item>
-      <mlv-menu-item><mlv-icon name="settings"></mlv-icon> settings</mlv-menu-item>
-      <mlv-menu-item><mlv-icon name="favorite-filled"></mlv-icon> favorites</mlv-menu-item>
+      <mlv-menu-item><mlv-icon name="person"></mlv-icon> profile</mlv-menu-item>
+      <mlv-menu-item><mlv-icon name="gear"></mlv-icon> settings</mlv-menu-item>
+      <mlv-menu-item><mlv-icon name="star"></mlv-icon> favorites</mlv-menu-item>
       <mlv-divider></mlv-divider>
       <mlv-menu-item><mlv-icon name="logout"></mlv-icon> logout</mlv-menu-item>
     </mlv-menu>
@@ -62,9 +62,9 @@ export const Disabled = {
 export const Icons = {
   render: () => html`
   <mlv-menu>
-    <mlv-menu-item><mlv-icon name="user"></mlv-icon> profile</mlv-menu-item>
-    <mlv-menu-item><mlv-icon name="settings"></mlv-icon> settings</mlv-menu-item>
-    <mlv-menu-item><mlv-icon name="favorite-filled"></mlv-icon> favorites</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="person"></mlv-icon> profile</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="gear"></mlv-icon> settings</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="star"></mlv-icon> favorites</mlv-menu-item>
     <mlv-menu-item><mlv-icon name="logout"></mlv-icon> logout</mlv-menu-item>
   </mlv-menu>
   `
@@ -73,9 +73,9 @@ export const Icons = {
 export const Links = {
   render: () => html`
   <mlv-menu>
-    <mlv-menu-item><mlv-icon name="user"></mlv-icon><a href="#">profile</a></mlv-menu-item>
-    <mlv-menu-item><mlv-icon name="settings"></mlv-icon> <a href="#">settings</a></mlv-menu-item>
-    <mlv-menu-item><mlv-icon name="favorite-filled"></mlv-icon> <a href="#">favorites</a></mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="person"></mlv-icon><a href="#">profile</a></mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="gear"></mlv-icon> <a href="#">settings</a></mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="star"></mlv-icon> <a href="#">favorites</a></mlv-menu-item>
     <mlv-menu-item><mlv-icon name="logout"></mlv-icon> <a href="#">logout</a></mlv-menu-item>
   </mlv-menu>
   `

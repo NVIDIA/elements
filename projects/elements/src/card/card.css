@@ -16,7 +16,7 @@
   align-items: stretch;
   justify-content: start;
   overflow: hidden;
-  contain: initial;
+  contain: none;
 }
 
 [internal-host] {

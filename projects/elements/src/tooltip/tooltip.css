@@ -1,13 +1,13 @@
 :host {
   --mlv-sys-layer-popover-arrow-padding: 6px;
-  --mlv-sys-layer-popover-arrow-offset: 4px;
+  --mlv-sys-layer-popover-arrow-offset: 2px;
   --mlv-sys-layer-popover-offset: 2px;
-  --border-radius: var(--mlv-ref-border-radius-md);
+  --border-radius: var(--mlv-ref-border-radius-sm);
   --background: var(--mlv-sys-layer-popover-background);
   --color: var(--mlv-sys-layer-popover-color);
-  --padding: var(--mlv-ref-size-300);
+  --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
   --box-shadow: var(--mlv-ref-shadow-500);
-  --font-size: var(--mlv-ref-font-size-200);
+  --font-size: var(--mlv-ref-font-size-100);
   --arrow-transform: translate(0, -2px) rotate(-45deg);
   --width: max-content;
   --height: initial;
@@ -19,7 +19,6 @@ dialog {
   background: var(--background);
   color: var(--color);
   box-shadow: var(--box-shadow);
-  gap: var(--mlv-ref-space-sm);
   font-size: var(--font-size);
   width: var(--width);
   height: var(--height);
@@ -31,11 +30,11 @@ dialog:has(mlv-icon-button) {
 }
 
 .arrow {
-  width: var(--mlv-ref-size-400);
-  height: var(--mlv-ref-size-400);
+  width: var(--mlv-ref-size-300);
+  height: var(--mlv-ref-size-300);
   background: var(--background);
   transform: var(--arrow-transform);
-  border-radius: var(--mlv-ref-border-radius-xs);
+  border-radius: var(--mlv-ref-size-50);
   position: absolute;
 }
 

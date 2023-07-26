@@ -1,11 +1,12 @@
 import { html, LitElement, PropertyValues } from 'lit';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { Size, useStyles } from '@elements/elements/internal';
-import { ICON_IMPORTS, IconName } from './icons.js';
+import { ICON_IMPORTS, IconName, IconSVG } from './icons.js';
 import styles from './icon.css?inline';
 
-export type { IconName, IconNames } from './icons.js';
+export type { IconName, IconNames, IconSVG } from './icons.js';
 
 /**
  * @element mlv-icon
@@ -21,7 +22,7 @@ export class Icon extends LitElement {
   @property({ type: String, reflect: true }) status?: 'warning' | 'danger' | 'success' | 'accent';
 
   /** SVG size */
-  @property({ type: String, reflect: true }) size?: Size;
+  @property({ type: String, reflect: true }) size?: Size | 'xs' | 'xl';
 
   /**
    * Sets the direction of the icon.
@@ -41,22 +42,32 @@ export class Icon extends LitElement {
     version: 'PACKAGE_VERSION'
   };
 
+  get #svg() {
+    return this.shadowRoot.querySelector('svg');
+  }
+
   render() {
     return html`
-      <div internal-host .innerHTML=${this.svg ?? ''}></div>
+      <div internal-host>${unsafeSVG(this.svg)}</div>
     `;
   }
 
   static _icons = ICON_IMPORTS;
 
-  static add(icons: any) {
+  static async add(icons: { [key: string]: IconSVG }) {
+    await customElements.whenDefined('mlv-icon');
     const IconDefinition = customElements.get('mlv-icon') as any;
+    IconDefinition._icons ??= [];
+
     IconDefinition._icons = { ...IconDefinition._icons, ...icons };
     Object.keys(icons).forEach(name => document.dispatchEvent(new CustomEvent(`mlv-icon-${name}`)));
   }
 
-  static alias(aliases: { [key: string]: IconName | string }) {
+  static async alias(aliases: { [key: string]: IconName | string }) {
+    await customElements.whenDefined('mlv-icon');
     const IconDefinition = customElements.get('mlv-icon') as any;
+    IconDefinition._icons ??= [];
+
     Object.keys(aliases).forEach(alias => {
       const name = aliases[alias];
       IconDefinition._icons[alias] = IconDefinition._icons[name];
@@ -66,17 +77,18 @@ export class Icon extends LitElement {
 
   async updated(props: PropertyValues<this>) {
     super.updated(props);
-    this.svg = await this.#render();
+    await this.#render();
+
     if (!Icon._icons[this.name] || !this.svg) {
       document.addEventListener(`mlv-icon-${this.name}`, () => this.requestUpdate(), { once: true });
     }
   }
 
   async #render() {
-    const dynamic = { svg: () => fetch(this.name).then(res => res.text()) };
-    const value = await (this.name?.endsWith('.svg') ? dynamic : Icon._icons[this.name])?.svg() ?? '';
-    const svg = typeof value === 'string' ? value : value.default;
-    Icon._icons[this.name] = { svg: () => svg as any, ...Icon._icons[this.name] };
-    return svg;
+    const svg = await (this.name?.endsWith('.svg') ? fetch(this.name).then(res => res.text()) : Icon._icons[this.name]?.svg() ?? Promise.resolve(''));
+    this.svg = svg;
+    await this.updateComplete;
+    await new Promise(r => requestAnimationFrame(r));
+    Icon._icons[this.name] = { svg: () => svg, ...Icon._icons[this.name] };
   }
 }

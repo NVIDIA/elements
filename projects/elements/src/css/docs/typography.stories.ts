@@ -12,7 +12,6 @@ export const Type = {
   <p mlv-text="heading">heading</p>
   <p mlv-text="body">body</p>
   <p mlv-text="label">label</p>
-  <p mlv-text="eyebrow">eyebrow</p>
 </div>
   `
 }
@@ -24,7 +23,6 @@ export const Headings = {
   <h2 mlv-text="heading">heading</h2>
   <h3 mlv-text="body">body</h3>
   <h4 mlv-text="label">label</h4>
-  <h5 mlv-text="eyebrow">eyebrow</h5>
 </div>
   `
 }
@@ -48,10 +46,6 @@ export const Size = {
   <p mlv-text="label lg">label</p>
   <p mlv-text="label">label</p>
   <p mlv-text="label sm">label</p>
-  <p mlv-text="eyebrow xl">eyebrow</p>
-  <p mlv-text="eyebrow lg">eyebrow</p>
-  <p mlv-text="eyebrow">eyebrow</p>
-  <p mlv-text="eyebrow sm">eyebrow</p>
 </div>
   `
 }
@@ -137,7 +131,6 @@ export const LeadingTrim = {
       <h2 mlv-text="heading">leading-trim enabled</h2>
       <h3 mlv-text="body">leading-trim enabled</h3>
       <h4 mlv-text="label">leading-trim enabled</h4>
-      <h5 mlv-text="eyebrow">leading-trim enabled</h5>
     </mlv-card-content>
   </mlv-card>
 
@@ -146,7 +139,6 @@ export const LeadingTrim = {
       <h2 mlv-text="heading trim:none">leading-trim disabled</h2>
       <h3 mlv-text="body trim:none">leading-trim disabled</h3>
       <h4 mlv-text="label trim:none">leading-trim disabled</h4>
-      <h5 mlv-text="eyebrow trim:none">leading-trim disabled</h5>
     </mlv-card-content>
   </mlv-card>
 </div>

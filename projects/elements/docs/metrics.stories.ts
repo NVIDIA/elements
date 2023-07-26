@@ -121,7 +121,7 @@ class ElementStatus extends LitElement {
         <mlv-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</mlv-alert>
         <mlv-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></mlv-alert>
       </div>
-      <h3><mlv-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <mlv-icon name="success-badge"></mlv-icon></mlv-badge></h3>
+      <h3><mlv-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <mlv-icon name="checkmark-circle"></mlv-icon></mlv-badge></h3>
       <div style="display: flex; flex-direction: column; gap: 8px">
         <mlv-alert .status=${metadata.aria ? 'finished' : 'pending'}>No known outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></mlv-alert>
         <mlv-alert .status=${metadata.performance ? 'finished' : 'pending'}>No known outstanding performance issues</mlv-alert>
@@ -220,8 +220,8 @@ class ElementsMetrics extends LitElement {
             <mlv-grid-cell>${getStatusBadge(element.status)}</mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(element.coverageTotal)}</mlv-grid-cell>
             <mlv-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} mlv-text="link no-visit">${element.behavior}</a></mlv-grid-cell>
-            <mlv-grid-cell><mlv-icon name="success-badge" status="success"></mlv-icon></mlv-grid-cell>
-            <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="success-badge" status="success"></mlv-icon>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
+            <mlv-grid-cell><mlv-icon name="checkmark-circle" status="success"></mlv-icon></mlv-grid-cell>
+            <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="checkmark-circle" status="success"></mlv-icon>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
             <mlv-grid-cell>${element.instanceTotal}</mlv-grid-cell>
             <mlv-grid-cell>${element.projectTotal}</mlv-grid-cell>
             <mlv-grid-cell>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit">Figma</a>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>

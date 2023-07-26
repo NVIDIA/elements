@@ -21,6 +21,6 @@ export class Date extends Control {
   };
 
   protected get suffixContent() {
-    return html`<mlv-icon-button icon-name="date" interaction="flat" @click=${this.showPicker}></mlv-icon-button>`;
+    return html`<mlv-icon-button icon-name="calendar" interaction="flat" @click=${this.showPicker}></mlv-icon-button>`;
   }
 }

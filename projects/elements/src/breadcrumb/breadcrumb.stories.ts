@@ -49,7 +49,7 @@ class BreadcrumbMenuDemo extends LitElement {
     const ddownId = "more-links";
     return html`
 <mlv-breadcrumb>
-  <mlv-icon-button id=${ddownId + '-btn'} @click=${() => this.menuHidden = false} icon-name="additional-actions"></mlv-icon-button>
+  <mlv-icon-button id=${ddownId + '-btn'} @click=${() => this.menuHidden = false} icon-name="more-actions"></mlv-icon-button>
   <mlv-button><a href="javascript: void(0)">Item 4</a></mlv-button>
   <mlv-button><a href="javascript: void(0)">Item 5</a></mlv-button>
   <span>You Are Here</span>

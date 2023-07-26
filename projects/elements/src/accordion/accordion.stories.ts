@@ -71,7 +71,7 @@ export const WithActions = {
         <mlv-accordion-header>
           <div slot="title">Heading</div>
 
-          <mlv-icon-button interaction="flat" icon-name="plus" size="sm" slot="actions"></mlv-icon-button>
+          <mlv-icon-button interaction="flat" icon-name="add" size="sm" slot="actions"></mlv-icon-button>
           <mlv-icon-button interaction="flat" icon-name="delete" size="sm" slot="actions"></mlv-icon-button>
         </mlv-accordion-header>
 

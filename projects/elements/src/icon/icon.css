@@ -12,11 +12,16 @@
   place-self: center;
   display: flex;
   place-items: center;
+  
 }
 
 svg {
   width: var(--width);
   height: var(--height);
+}
+
+:host([outline]) {
+  outline: 1px dashed var(--color);
 }
 
 :host([size='sm']) {
@@ -29,29 +34,54 @@ svg {
   --height: var(--mlv-ref-size-500);
 }
 
-:host([direction='up'][name='arrow']),
-:host([direction='up'][name='caret']),
-:host([direction='up'][name='chevron']) {
+:host([size='xl']) {
+  --width: var(--mlv-ref-size-600);
+  --height: var(--mlv-ref-size-600);
+}
+
+:host([name='arrow']),
+:host([name='arrow-angle']),
+:host([name='cancel']),
+:host([name='caret']),
+:host([name='chevron']),
+:host([name='double-chevron']) {
+  --width: var(--mlv-ref-size-300);
+  --height: var(--mlv-ref-size-300);
+}
+
+:host([size='sm'][name='arrow']),
+:host([size='sm'][name='arrow-angle']),
+:host([size='sm'][name='cancel']),
+:host([size='sm'][name='caret']),
+:host([size='sm'][name='chevron']),
+:host([size='sm'][name='double-chevron']) {
+  --width: var(--mlv-ref-size-200);
+  --height: var(--mlv-ref-size-200);
+}
+
+:host([size='lg'][name='arrow']),
+:host([size='lg'][name='arrow-angle']),
+:host([size='lg'][name='cancel']),
+:host([size='lg'][name='caret']),
+:host([size='lg'][name='chevron']),
+:host([size='lg'][name='double-chevron']) {
+  --width: var(--mlv-ref-size-400);
+  --height: var(--mlv-ref-size-400);
+}
+
+:host([direction='up']) {
   transform: rotate(0deg);
 }
 
-:host([direction='down'][name='arrow']),
-:host([direction='down'][name='caret']),
-:host([direction='down'][name='chevron']),
-:host([direction='right'][name='expand-panel']),
-:host([direction='right'][name='collapse-panel']) {
+:host([direction='down']) {
   transform: rotate(180deg);
 }
 
-:host([direction='left'][name='arrow']),
-:host([direction='left'][name='caret']),
-:host([direction='left'][name='chevron']) {
+:host([direction='left']) {
   transform: rotate(270deg);
 }
 
-:host([direction='right'][name='arrow']),
-:host([direction='right'][name='caret']),
-:host([direction='right'][name='chevron']) {
+:host([direction='right']) {
   transform: rotate(90deg);
 }
 
@@ -69,4 +99,27 @@ svg {
 
 :host([status='accent']) {
   --color: var(--mlv-sys-support-accent-color);
+}
+
+/** @deprecated (left) */
+:host([name='chevron-left']),
+:host([name='beginning']),
+:host([name='collapse-panel']),
+:host([name='navigate-back']) {
+  transform: rotate(270deg);
+}
+
+/** @deprecated (right) */
+:host([name='chevron-right']),
+:host([name='end']),
+:host([name='expand-panel']),
+:host([name='navigate-to']),
+:host([name='carousel-horizontal']) {
+  transform: rotate(90deg);
+}
+
+/** @deprecated (down) */
+:host([name='chevron-down']),
+:host([name*='thumbs-down']) {
+  transform: rotate(180deg);
 }

@@ -91,7 +91,7 @@ const renderCard = (height?: number, cardSpan?: number, cardBorderRadius?: strin
   <mlv-card style="--border-radius: ${ifDefined(cardBorderRadius)}" mlv-layout="span:${ifDefined(cardSpan)}">
     <mlv-card-header>
       <div slot="title">Card Title</div>
-      <mlv-icon-button slot="header-action" icon-name="additional-actions" interaction="flat"></mlv-icon-button>
+      <mlv-icon-button slot="header-action" icon-name="more-actions" interaction="flat"></mlv-icon-button>
     </mlv-card-header>
     <mlv-card-content style="height: ${height}px"> Card Content </mlv-card-content>
   </mlv-card>
@@ -114,7 +114,7 @@ const StackedCardsWithPanel = {
         <header mlv-layout="column gap:md pad-top:md pad-right:md pad-left:md align:stretch">
           <section mlv-layout="row align:space-between align:vertical-center">
             <div mlv-layout="row gap:sm align:vertical-center">
-              <mlv-icon-button icon-name="navigate-back" aria-label="navigate-back"></mlv-icon-button>
+              <mlv-icon-button icon-name="chevron" direction="left" aria-label="navigate-back"></mlv-icon-button>
               <h1 mlv-text="heading lg bold">Page Heading</h1>
             </div>
 
@@ -148,8 +148,8 @@ const StackedCardsWithPanel = {
               <div mlv-layout="row gap:sm pad:sm">
                 <mlv-divider orientation="vertical"></mlv-divider>
                 <mlv-button>Default</mlv-button>
-                <mlv-icon-button icon-name="information" aria-label="information" @click=${() => togglePanel(args.panelSide === 'right')}></mlv-icon-button>
-                <mlv-icon-button icon-name="additional-actions" aria-label="additional actions"></mlv-icon-button>
+                <mlv-icon-button icon-name="information-circle-stroke" aria-label="information" @click=${() => togglePanel(args.panelSide === 'right')}></mlv-icon-button>
+                <mlv-icon-button icon-name="more-actions" aria-label="additional actions"></mlv-icon-button>
               </div>
             </div>
           </section>

@@ -28,9 +28,9 @@ export const Header = {
             <h1 mlv-text="heading lg semibold">Page Title</h1>
 
             <div mlv-layout="row gap:sm" style="margin-left: auto">
-              <mlv-icon-button icon-name="information" aria-label="information"></mlv-icon-button>
+              <mlv-icon-button icon-name="information-circle-stroke" aria-label="information"></mlv-icon-button>
               <mlv-icon-button icon-name="edit" aria-label="edit"></mlv-icon-button>
-              <mlv-icon-button icon-name="additional-actions" aria-label="additional actions"></mlv-icon-button>
+              <mlv-icon-button icon-name="more-actions" aria-label="additional actions"></mlv-icon-button>
             </div>
           </div>
 

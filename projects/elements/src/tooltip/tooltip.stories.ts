@@ -56,7 +56,7 @@ export const Hint = {
   <mlv-tooltip anchor="action-btn" position="right" trigger="action-btn" hidden>Preview in progress CI tasks for the active host</mlv-tooltip>
   <div mlv-layout="row gap:xs align:vertical-center">
     <h2 mlv-text="section">Preview</h2>
-    <mlv-icon-button interaction="flat" icon-name="information" id="action-btn"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" icon-name="information-circle-stroke" id="action-btn"></mlv-icon-button>
   </div>
   <script type="module">
     const tooltip = document.querySelector('mlv-tooltip[anchor="action-btn"]');

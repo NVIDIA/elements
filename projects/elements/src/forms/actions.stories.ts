@@ -24,7 +24,7 @@ export const LabelAction = () => {
   return html`
 <mlv-input>
   <label>label</label>
-  <mlv-icon-button icon-name="information" interaction="flat" aria-label="more details" slot="label"></mlv-icon-button>
+  <mlv-icon-button icon-name="information-circle-stroke" interaction="flat" aria-label="more details" slot="label"></mlv-icon-button>
   <input type="text" />
   <mlv-control-message>message</mlv-control-message>
 </mlv-input>`

@@ -92,16 +92,16 @@ export const BorderlessVerticalTabs = {
   render: () => html`
   <mlv-tabs vertical borderless behavior-select style="width: 250px">
     <mlv-tabs-item>
-      <mlv-icon name="settings"></mlv-icon> Tab 1
+      <mlv-icon name="gear"></mlv-icon> Tab 1
     </mlv-tabs-item>
     <mlv-tabs-item>
-      <mlv-icon name="user"></mlv-icon> Tab 2
+      <mlv-icon name="person"></mlv-icon> Tab 2
     </mlv-tabs-item>
     <mlv-tabs-item selected>
       <mlv-icon name="beaker"></mlv-icon> Tab 3
     </mlv-tabs-item>
     <mlv-tabs-item>
-      <mlv-icon name="dashboard"></mlv-icon> Tab 4
+      <mlv-icon name="add-grid"></mlv-icon> Tab 4
     </mlv-tabs-item>
   </mlv-tabs>
   `

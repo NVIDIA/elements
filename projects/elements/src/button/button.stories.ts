@@ -40,7 +40,7 @@ export const ButtonWithIcon = {
       ${args.textContent}
     ${when(args.iconSlotPlacement === 'end',() => html`<mlv-icon .name=${args.iconName}></mlv-icon>`)}
   </mlv-button>`,
-  args: { textContent: 'Button Icon', disabled: false, interaction: 'emphasize', iconName: 'navigate-to', iconSlotPlacement: 'end' },
+  args: { textContent: 'Button Icon', disabled: false, interaction: 'emphasize', iconName: 'edit', iconSlotPlacement: 'end' },
   argTypes: {
     iconName: {
       control: 'select',
@@ -165,7 +165,7 @@ export const FormControl = {
   <mlv-search>
     <input type="search" placeholder="search" aria-label="search" />
   </mlv-search>
-  <mlv-button mlv-control>filter option <mlv-icon name="chevron-down"></mlv-icon></mlv-button>
+  <mlv-button mlv-control>filter option <mlv-icon name="chevron" direction="down" size="sm"></mlv-icon></mlv-button>
 </div>
   `
 }

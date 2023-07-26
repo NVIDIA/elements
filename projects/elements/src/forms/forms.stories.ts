@@ -119,7 +119,7 @@ export const KitchenSink = {
 
     <mlv-input-group layout="vertical-inline">
       <label>domain</label>
-      <mlv-select style="width: 130px">
+      <mlv-select style="width: 120px">
         <select aria-label="protocol">
           <option>https://</option>
           <option>http://</option>

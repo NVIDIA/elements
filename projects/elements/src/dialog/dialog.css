@@ -8,7 +8,7 @@
   --border-radius: var(--mlv-ref-border-radius-lg);
   --background: var(--mlv-sys-layer-overlay-background);
   --color: var(--mlv-sys-layer-overlay-color);
-  --padding: var(--mlv-ref-size-500);
+  --padding: var(--mlv-ref-size-400);
   --box-shadow: var(--mlv-ref-shadow-500);
   --gap: var(--mlv-ref-space-sm);
   --max-width: 600px;
@@ -59,7 +59,7 @@ dialog::backdrop {
 
 mlv-icon-button {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 8px;
+  right: 8px;
   z-index: 99;
 }
