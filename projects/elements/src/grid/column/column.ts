@@ -31,10 +31,6 @@ export class GridColumn extends LitElement {
     version: 'PACKAGE_VERSION'
   };
 
-  static elementDefinitions = {
-
-  };
-
   /** @private */
   declare _internals: ElementInternals;
 

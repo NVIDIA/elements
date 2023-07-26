@@ -19,10 +19,6 @@ export class GridPlaceholder extends LitElement {
     version: 'PACKAGE_VERSION'
   };
 
-  static elementDefinitions = {
-
-  };
-
   /** @private */
   _internals: ElementInternals;
 

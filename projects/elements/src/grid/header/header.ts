@@ -22,10 +22,6 @@ export class GridHeader extends LitElement {
     version: 'PACKAGE_VERSION'
   };
 
-  static elementDefinitions = {
-
-  };
-
   /** @private */
   declare _internals: ElementInternals;
 
