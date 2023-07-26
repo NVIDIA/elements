@@ -1,5 +1,6 @@
 import { gzipSync } from 'fflate';
 import { html, nothing } from 'lit';
+import packageFile from '../package.json';
 
 const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
@@ -51,7 +52,7 @@ function serialize(data, compress = true) {
 }
 
 function createDefaultFiles(content, storyId) {
-  const ELEMENTS_VERSION = `0.12.0`;
+  const ELEMENTS_VERSION = packageFile.version;
   const CDN_ORIGIN = `https://cdn-stage.nvidia.com`;
   const CDN_MODULES_URL = `${CDN_ORIGIN}/assets/elements-playground/modules`;
 
@@ -90,14 +91,16 @@ function createDefaultFiles(content, storyId) {
   <script type="module" src="./index.js"></script>
   ${storyId.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
 </head>
-<body>
+<body mlv-layout="column gap:lg pad:lg">
 
 ${content}
+
 </body>
 </html>`
     },
     'index.ts': {
-      content: `import '@elements/elements/alert/define.js';
+      content: `import '@elements/elements/accordion/define.js';
+import '@elements/elements/alert/define.js';
 import '@elements/elements/app-header/define.js';
 import '@elements/elements/badge/define.js';
 import '@elements/elements/breadcrumb/define.js';
@@ -133,9 +136,9 @@ import '@elements/elements/sort-button/define.js';
 import '@elements/elements/switch/define.js';
 import '@elements/elements/tabs/define.js';
 import '@elements/elements/tag/define.js';
-import '@elements/elements/toast/define.js';
-import '@elements/elements/time/define.js';
 import '@elements/elements/textarea/define.js';
+import '@elements/elements/time/define.js';
+import '@elements/elements/toast/define.js';
 import '@elements/elements/tooltip/define.js';
 import '@elements/elements/week/define.js';`
     }

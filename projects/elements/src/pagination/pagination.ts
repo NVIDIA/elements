@@ -50,6 +50,7 @@ export class Pagination extends LitElement {
     }
   }
 
+  /** @private */
   declare _internals: ElementInternals;
 
   get #currentPage() {

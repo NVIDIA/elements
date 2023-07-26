@@ -19,13 +19,15 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
  * @stable false
  */
 export class AccordionHeader extends LitElement {
-  declare _internals: ElementInternals;
   static styles = useStyles([accordionHeaderStyleSheet]);
 
   static readonly metadata = {
     tag: 'mlv-accordion-header',
     version: 'PACKAGE_VERSION'
   };
+
+  /** @private */
+  declare _internals: ElementInternals;
 
   render() {
     return html`
@@ -60,7 +62,7 @@ export class AccordionHeader extends LitElement {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
  */
- export class AccordionContent extends LitElement {
+export class AccordionContent extends LitElement {
   static styles = useStyles([accordionContentStyleSheet]);
 
   static readonly metadata = {
@@ -89,14 +91,9 @@ export class AccordionHeader extends LitElement {
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
- * @vqa false
- * @unitTests false
  */
-
 @stateExpanded<Accordion>()
 export class Accordion extends LitElement implements ContainerElement {
-  declare _internals: ElementInternals;
-
   static styles = useStyles([accordionStyleSheet]);
 
   static readonly metadata = {
@@ -108,17 +105,24 @@ export class Accordion extends LitElement implements ContainerElement {
     'mlv-icon-button': IconButton,
   };
 
+  /** @private */
+  declare _internals: ElementInternals;
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
   #typeExpandableController = new TypeExpandableController(this);
 
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
-  /** flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion) */
+
+  /**
+   * flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion)
+   */
   @property({ type: String, reflect: true }) container?: Container = 'full';
+
   /**
    * Determines whether the accordion is expanded, displaying its contents, or not.
    */
   @property({ type: Boolean, reflect: true }) expanded = false;
+
   /**
    * Determines whether the accordion is expandable
    */
@@ -126,8 +130,7 @@ export class Accordion extends LitElement implements ContainerElement {
   /**
    * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
   */
-  @property({ type: Boolean, attribute: 'behavior-expand'}) behaviorExpand = false;
-
+  @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
   get #hasAction(): boolean {
     return !!this.querySelector('[slot="actions"]')

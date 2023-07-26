@@ -14,8 +14,6 @@ import styles from './divider.css?inline';
  * @stable false
  */
 export class Divider extends LitElement {
-  declare _internals: ElementInternals;
-
   @property({ type: String }) orientation: 'vertical' | 'horizontal' = 'horizontal';
 
   static styles = useStyles([styles]);
@@ -24,6 +22,9 @@ export class Divider extends LitElement {
     tag: 'mlv-divider',
     version: 'PACKAGE_VERSION'
   };
+
+  /** @private */
+  declare _internals: ElementInternals;
 
   render() {
     return html`<div internal-host></div>`;

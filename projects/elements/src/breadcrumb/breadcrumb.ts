@@ -28,6 +28,7 @@ export class Breadcrumb extends LitElement {
     }
   }
 
+  /** @private */
   declare _internals: ElementInternals;
 
   static styles = useStyles([styles]);

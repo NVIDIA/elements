@@ -65,8 +65,6 @@ export class TabsItem extends MlvBaseButton {
  */
 @keyNavigationList<Tabs>()
 export class Tabs extends LitElement {
-  declare _internals: ElementInternals;
-
   /** @private */
   get keynavListConfig(): KeynavListConfig {
     return {
@@ -74,14 +72,17 @@ export class Tabs extends LitElement {
       layout: this.vertical ? 'vertical' : 'horizontal'
     }
   }
+
   /**
    * Determines whether or not the tabs should display in a vertical layout vs. defaulting to horizontal.
    */
   @property({ type: Boolean }) vertical = false;
+
   /**
    * Determines whether or not the tabs should display a border on selected items vs. defaults to show border.
    */
   @property({ type: Boolean}) borderless = false;
+
   /**
    * Determines whether or not the tabs should handle selection behavior vs. defaults to off.
    */
@@ -93,6 +94,9 @@ export class Tabs extends LitElement {
     tag: 'mlv-tabs',
     version: 'PACKAGE_VERSION'
   };
+
+  /** @private */
+  declare _internals: ElementInternals;
 
   #selectTab(tabItem) {
     if (!this.behaviorSelect || tabItem.tagName !== 'MLV-TABS-ITEM' || tabItem.disabled) {
