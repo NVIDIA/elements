@@ -36,16 +36,20 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
     await this.host.updateComplete;
     attachInternals(this.host);
 
-    this.#target.addEventListener('scroll', async () => {
-      this.host._internals.states.add('--scrolling');
+    this.#startScroll();
+
+    this.#target.addEventListener('scrollend', async () => {
+      this.host._internals.states.delete('--scrolling');
 
       if (endOfScrollBox(this.#target, this.#offset)){
         this.host.dispatchEvent(new CustomEvent('scrollboxend'));
       }
-    });
 
-    this.#target.addEventListener('scrollend', async () => {
-      this.host._internals.states.delete('--scrolling');
+      this.#startScroll();
     });
+  }
+
+  #startScroll() {
+    this.#target.addEventListener('scroll', async () => this.host._internals.states.add('--scrolling'), { once: true });
   }
 }
