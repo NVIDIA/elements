@@ -5,6 +5,731 @@ import { LinkedHeader } from './utils.mdx';
 
 # Changelog
 
+<LinkedHeader>0.14.0 - pending</LinkedHeader>
+
+## Fixes
+- Fix VQA panel
+- Fix VQA dialog
+- Fix VQA tooltip
+- Fix VQA typography headings
+
+### Features
+- New icons
+
+### Deprecations
+- Icon names have been revamped for more accurate and descriptive names. This API we expect to stablize in the next release. See the grid below for a mapping of old to new names.
+
+<nve-grid style={{ 'width': '700px' }}>
+  <nve-grid-header>
+    <nve-grid-column>Deprecated</nve-grid-column>
+    <nve-grid-column>New Recommended</nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>additional-actions</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>more-actions</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>analytics</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>pie-chart</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>annotation</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>transparent-box</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>app-switcher</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>switch-apps</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>assist</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>chat-bubble</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>attached</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>paper-clip</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>breadcrumb</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>chevron + direction="right"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+    <nve-grid-row>
+    <nve-grid-cell>
+      <code>chevron-up</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>chevron</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>chevron-right</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>chevron + direction="right"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>chevron-down</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>chevron + direction="down"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>chevron-left</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>chevron + direction="left"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>category-list</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>bars-3-bottom-left</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>checkmark</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>check</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>chop</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>scissors</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>collection</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>rectangle-stack-vertical</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>dark-mode</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>moon</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>dashboard</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>add-grid</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>date</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>calendar</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>docs</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>book</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>domains</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>globe-alt-stroke</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>expand-full-screen</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>maximize</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>expand</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>maximize</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>expand-panel</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>arrow-stop + direction="right"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>collapse-panel</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>arrow-stop + direction="left"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>failed-badge</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>x-circle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>failed</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>x-circle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>favorite-filled</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>star</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>favorite-outline</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>star-stroke</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>feedback</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>megaphone</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>filter-ouline</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>filter-stroke</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>flagged</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>flag</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>free-text</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>edit</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>help</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>question-mark-circle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>hidden</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>eye-hidden</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>important-badge</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>exclamation-circle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>inbox-1</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>carousel-vertical</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>information</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>information-circle-stroke</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>interaction</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>cursor-rays</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>light-mode</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>sun</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>mail</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>envelope</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>maintenance</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>wrench</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>minus-badge</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>miunus-circle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>navigate-back</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>arrow + direction="left"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>navigate-to</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>arrow + direction="right"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>notification</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>bell</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>obstacle</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>traffic-cone</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>open-external-link</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>arrow-angle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>organization</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>office-building</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>pan</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>hand</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>passed-or-success</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>checkmark-circle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>location</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>map-pin</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>pinned-1</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>pin</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>plugin-store</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>plug</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>plugins</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>plug</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>plus-badge</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>plus-circle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>plus</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>add</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>project</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>folder</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>refresh-1</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>redo</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>retry</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>redo</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>reset</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>undo</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>schedule</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>clock</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>set-priority</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>chart-bar</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>settings</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>gear</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>shortcut</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>lightning-bolt</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>success-badge</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>checkmark-circle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>support</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>chat-bubble</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>system-status</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>chip</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>transparency</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>circle-half</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>team</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>person-3</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>user</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>person</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>video-pause</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>pause</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>video-play</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>play</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>video-stop</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>stop</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>view-as-list</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>bars-4</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>view-as-table-outline</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>table</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>visible</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>eye</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>warning</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>exclamation-triangle</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>tutorial</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>academic-ca</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>debugging</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>bug</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>insights</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>projector</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>beginning</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>arrow-stop + direction="left"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>end</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>arrow-stop + direction="right"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>carousel-vertical</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>carousel</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>carousel-horizontal</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>carousel + direction="right | left"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>thumbs-down</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>thumb + direction="down"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>thumbs-up</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>thumb</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>thumbs-down-stroke</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>thumb-stroke + direction="down"</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <code>thumbs-up-stroke</code>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <code>thumb-stroke</code>
+    </nve-grid-cell>
+  </nve-grid-row>
+</nve-grid>
+
 <LinkedHeader>0.13.1 - 08-03-2023</LinkedHeader>
 
 ### Fixes
@@ -18,14 +743,17 @@ import { LinkedHeader } from './utils.mdx';
 - Fix missing panel dependency
 - Fix responsive/compact for select multiple
 
-<LinkedHeader>0.13.0- 07-26-2023</LinkedHeader>
+<LinkedHeader>0.13.0 - 07-26-2023</LinkedHeader>
 
 ### Fixes
+
 - Fix VQA form control labels
 - Fix VQA form control messages
 - Fix VQA alert
 - Fix VQA dot
 - Fix VQA tab item
+- Fix VQA card header
+- Fix VQA panel header
 - Fix Grid fixed columns when dynamically rendered
 - Fix improvements to property type consistency between elements
 - Fix menu/select bounded scroll height
@@ -35,11 +763,13 @@ import { LinkedHeader } from './utils.mdx';
 - Temporary downlevel build target for legacy webpack compatibility [github.com/webpack/webpack/issues/16330](https://github.com/webpack/webpack/issues/16330)
 
 ### Features
+
 - Beta [accordion](./?path=/docs/elements-accordion-documentation--docs) component
 
 <LinkedHeader>0.12.0 - 07-20-2023</LinkedHeader>
 
 ### Fixes
+
 - Fix adding items to breadcrumb
 - Fix missing scope dep for select
 - Fix bubbling issue for select
@@ -48,22 +778,26 @@ import { LinkedHeader } from './utils.mdx';
 - Fix ensure form controls can instantiate with dynamic input rendering
 
 ### Features
+
 - Add inline multiselect support for select element
 - Experimental custom select options migrated from `<template>` to `slot` based API. [Read More](./?path=/docs/elements-select-documentation--docs#custom-option-render)
 - Add support for icon name aliases. Allows icon fallbacks and easier migration paths
 - Add support for form control reset and form element resets
 
 ### Deprecations
+
 - `interaction="ghost"` API on button types is now deprecated in favor of `interaction="flat"`
 
 <LinkedHeader>0.11.2 - 06-26-2023</LinkedHeader>
 
 ### Fixes
+
 - enable grid metadata generation
 
 <LinkedHeader>0.11.1 - 06-21-2023</LinkedHeader>
 
 ### Docs
+
 - Updates Elements docs to use <a target="_blank" href="https://storybook.js.org/blog/storybook-7-0/">Storybook 7.0</a>!
   - Vastly improved loading times, removing webpack and fully embracing Vite builds
   - Faster local dev experience for building Elements library
@@ -72,13 +806,16 @@ import { LinkedHeader } from './utils.mdx';
 - Started draft of a [contributions](./?path=/docs/about-contributions--docs) model for the Elements library,
 
 ### Elements Playground
+
 - Adds integration with the <a target="_blank" href="/ui/elements-playground">Elements Playground</a> via links to interactive code-sandbox for most storybook examples.
 - Adds metadata generation off all our custom elements to support IDE-light experience in the Playground.
 
 ### Examples
+
 - Re-worked the starter library in the repo in preparation for supporting additional MagLev component libraries
 
 ### Fixes
+
 - Fixes form control label contrast
 - Fixes input group style alignment
 - Fixes container issue with dropdown in grid pagination
@@ -91,6 +828,7 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.11.0 - 05-30-2023</LinkedHeader>
 
 ### Features
+
 - Adds beta [app header](./?path=/docs/elements-app-header-documentation--docs) component
 - Adds beta [breadcrumb](./?path=/docs/elements-breadcrumb-documentation--docs) component
 - Adds beta [bulk actions](./?path=/docs/elements-bulk-actions-documentation--docs) component
@@ -103,6 +841,7 @@ import { LinkedHeader } from './utils.mdx';
 - Adds improved select input customizations via menu
 
 ### Fixes
+
 - Fixes icon default slot for icon button
 - Fixes badge css prop size override
 - Fixes dot css prop size override
@@ -125,15 +864,18 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.10.0 - 04-05-2023</LinkedHeader>
 
 ### Features
+
 - Adds [panel](./?path=/docs/elements-panel-documentation--docs) component
 - Adds [tabs](./?path=/docs/elements-tabs-documentation--docs) component
 - Adds a new [buildless](./?path=/docs/integrations-buildless--docs) integration template utilizing Import Maps
 
 ### Fixes
+
 - Fixes disabled button styles when used as link
 - Lint and Type Improvements
 
 ### Documentation
+
 - Adds [patterns](./?path=/docs/page-patterns-documentation--docs) section to docs for more code examples and templates
 - Adds [example](./?path=/docs/elements-button-examples--link) of icons in linked buttons
 - Revamped [interactions](./?path=/docs/foundations-tokens-interactions--docs) tokens docs
@@ -142,17 +884,20 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.9.2 - 03-29-2023</LinkedHeader>
 
 ### Fixes
+
 - fix node specific import for test entrypoint
 
 <LinkedHeader>0.9.1 - 03-29-2023</LinkedHeader>
 
 ### Fixes
+
 - Updated [--nve-ref-font-size-xxx](./?path=/docs/foundations-tokens-documentation--docs#text) tokens scale
 - Above change impacts `nve-text="heading"` and `nve-text="display"` on the [font sizing](./?path=/docs/foundations-typography-examples--size) system
 - Fix banner alert alignment
 - Fix prevent exception for early disconnect on popover controllers
 
 ### Documentation
+
 - Added a [pattern example](./?path=/docs/section-patterns-header--docs) for composing a page header
 
 <LinkedHeader>0.9.0 - 03-21-2023</LinkedHeader>
@@ -188,8 +933,8 @@ import { LinkedHeader } from './utils.mdx';
   | `--nve-ref-shadow-700`             | `--nve-ref-shadow-500`             |
   | `--nve-ref-shadow-600`             | `--nve-ref-shadow-500`             |
 
-
 ### Features
+
 - [badge component](./?path=/docs/elements-badge-documentation--docs)
 - [dot component](./?path=/docs/elements-dot-documentation--docs)
 - [logo component](./?path=/docs/elements-logo-documentation--docs)
@@ -199,11 +944,13 @@ import { LinkedHeader } from './utils.mdx';
 - new color palettes expanded to 1200 range
 - new spacing tokens `ref-size-50`, `ref-size-150`, `ref-size-250`
 - new static json format for tokens
+
   - `@elements/elements/tokens/tokens.json`
   - `@elements/elements/tokens/tokens.dark.json`
   - `@elements/elements/tokens/tokens.high-contrast.json`
 
 - [new support tokens](./?path=/docs/foundations-tokens-support--docs)
+
   - `--nve-sys-support-warning-emphasis-color`
   - `--nve-sys-support-warning-muted-color`
   - `--nve-sys-support-warning-color`
@@ -220,8 +967,8 @@ import { LinkedHeader } from './utils.mdx';
   - `--nve-sys-support-muted-color`
   - `--nve-sys-support-color`
 
-
 - [new status tokens](./?path=/docs/foundations-tokens-status--docs)
+
   - `--nve-sys-status-scheduled-background`
   - `--nve-sys-status-scheduled-color`
   - `--nve-sys-status-queued-background`
@@ -243,8 +990,8 @@ import { LinkedHeader } from './utils.mdx';
   - `--nve-sys-status-unknown-background`
   - `--nve-sys-status-unknown-color`
 
-
 - [new visualization tokens](./?path=/docs/foundations-visualization-documentation--docs)
+
   - `--nve-sys-visualization-categorical-violet`
   - `--nve-sys-visualization-categorical-lavender`
   - `--nve-sys-visualization-categorical-rose`
@@ -286,7 +1033,6 @@ import { LinkedHeader } from './utils.mdx';
   - `--nve-sys-visualization-trend-negative-color`
   - `--nve-sys-visualization-trend-negative-emphasis-color`
 
-
 - [new color tokens](./?path=/docs/foundations-tokens-color--docs)
   - `--ref-color-red-tomato-*`
   - `--ref-color-red-cardinal-*`
@@ -308,6 +1054,7 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.8.2 - 03-10-2023</LinkedHeader>
 
 ### Fixes
+
 - fix missing interaction selection token background in dark theme
 - fix prevent dialog light dismiss when not closable
 - fix add workaround for incorrect binding when downleveling from native private props in apps
@@ -315,6 +1062,7 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.8.1 - 02-24-2023</LinkedHeader>
 
 ### Fixes
+
 - fix nested overflow with text nodes in buttons
 - fix select icon when select set to size
 - fix align icon size to control size
@@ -331,6 +1079,7 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.8.0 - 02-07-2023</LinkedHeader>
 
 ### Features
+
 - Lazy load individual icons on demand without requiring assets directory
 - Improved support for static build outputs, see `/demos/static` for more details
 - New icons:
@@ -463,6 +1212,7 @@ import { LinkedHeader } from './utils.mdx';
   - `zoom-out`
 
 ### Fixes
+
 - Fix isolated global type references for better TS compatibility
 - Fix text wrap issue in typography for notifications
 - Fix specificity for nve-text utility overrides
@@ -472,24 +1222,28 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.7.1 - 01-12-2023</LinkedHeader>
 
 ### Fixes
+
 - Fix global type references for older TypeScript compatibility
 - Fix alignment issue with icon svg within its host container
 
 <LinkedHeader>0.7.0 - 01-10-2023</LinkedHeader>
 
 ### Features
+
 - Add internal [support for scoped registries](./?path=/docs/about-extensions--docs#scoped-registry).
 - Add [i18n support](./?path=/docs/foundations-i18n-documentation--docs) for accessibility and internal aria strings
 - Add version [debugger](http://localhost:7789/?path=/docs/about-changelog--docs#versioning)
   ```javascript
-  window.MLV_ELEMENTS.debug()
+  window.MLV_ELEMENTS.debug();
   ```
 
 ### Fixes
+
 - Fix issue with nve-checkbox and nve-radio not reflecting initial property values for checked state
 - Fix issue with custom-elements.json not generating inherited property metadata
 
 ### <nve-icon name="warning" status="warning"></nve-icon> Breaking
+
 - Global registration from `import '@elements/elements'` is no longer supported. Use individual element imports instead.
   ```javascript
   import '@elements/elements/button/define.js';
@@ -498,6 +1252,7 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.6.2 - 01-20-2023</LinkedHeader>
 
 ### Fixes
+
 - Fix animation computation from design tokens
 - Fix optional disabling of leading trim for nve-text utils
 - Fix missing disabled state when using interaction style on `nve-button`
@@ -517,11 +1272,13 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.6.0 - 12-01-2022</LinkedHeader>
 
 ### Features
+
 - Added alpha stage tooltip element
 - Added alpha stage toast element
 - Added alpha stage notification snackbar element
 
 ### Fixes
+
 - Fix focus outline for custom form control types
 - Fix popover light dismiss from closing on form control click events
 - Fix link button gap and alignment style
@@ -531,16 +1288,19 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.5.0 - 11-22-2022</LinkedHeader>
 
 ### Features
+
 - Added alpha stage dialog element
 - Added alpha stage dropdown element
 - Added alpha stage layer/interaction tokens
 
 ### Fixes
+
 - Fix invalid state on date input not resetting on blur
 - Fix placeholder color for textarea
 - Textarea correctly overrides initial min-height when using the `row` attr.
 
 ### <nve-icon name="warning" status="warning"></nve-icon> Breaking
+
 - Removal of interaction state tokens. Interaction background and color tokens remain however the alternate states (hover, active) are removed.
   Background contrast is now used to determine the interaction state. See [Interaction states](./?path=/docs/foundations-tokens-interactions--docs#interactions) for more information.
 - Fix: Theme base styles such as font and background colors are only applied when `nve-theme` attr is placed on the `html`, `body` element or with `nve-theme="root"`.
@@ -557,20 +1317,24 @@ import { LinkedHeader } from './utils.mdx';
 <LinkedHeader>0.4.1 - 11-03-2022</LinkedHeader>
 
 ### Fixes
+
 - Fix keypress active state on buttons to only trigger with spacebar and enter keys
 - Fix DOM based non-HTML5 validation for better framework support (Angular, Vue, React, etc)
 
 <LinkedHeader>0.4.0 - 10-24-2022</LinkedHeader>
 
 ### Features
+
 - Added T-Shirt size padding to layout system
 - Allow anchors to alternatively wrap nve-button/nve-icon-button instances as a fallback
 
 ### Documentation
+
 - Added Iconography section to Foundations and re-works Storybook navigation
 - Added Documentation on Layout System Padding
 
 ### Fixes
+
 - Fix interaction button token contrast levels for light theme
 - Fix horizontal alignments on control groups
 - Fix missing font weight on control group labels
@@ -586,37 +1350,43 @@ import { LinkedHeader } from './utils.mdx';
 - Add `csso` for css minification
 - Cleanup/align statuses in preparation for additional status components like toasts/snackbars
 
-
 <LinkedHeader>0.3.2 - 09-27-2022</LinkedHeader>
 
 ### Features
+
 - Added Grid Support to Layout System
 
 ### Fixes
+
 - Fixed issue when element placed in shadow root would incorrectly render native chromium icons for form controls
 - Fixed issue around layout of the default `nve-card` content. A `nve-card-content` sub-component was added.
 
 <LinkedHeader>0.3.1 - 09-19-2022</LinkedHeader>
 
 ### Fixes
+
 - `nve-icon-button` co-dependency will automatically register when using isolated imports of form elements
 - Update typography system to support `rem` font size properties
 
 <LinkedHeader>0.3.0 - 09-09-2022</LinkedHeader>
 
 ### Features
+
 - Added Horizontal and Vertical Layout System
 - Added initial support for native form elements (input, textarea, select, checkbox, radio, range)
 
 ### Documentation
+
 - Added `alpha`, `beta`, `stable` tags/info to stories.
 
 ### Fixes
+
 - `nve-button` correctly triggers one event per submit
 
 <LinkedHeader>0.2.1 - 08-09-2022</LinkedHeader>
 
 ### Features
+
 - Now supports individual element imports for better performance
   ```javascript
   import '@elements/elements/button/define.js';
@@ -632,19 +1402,21 @@ import { LinkedHeader } from './utils.mdx';
 - Added Lit testing utils for element unit testing
 - Updated Storybook to version 6.5
 - `nve-button` and `nve-button-icon` now based on base button class w/ submit and aria support
-    - Refactored with button behavior Lit controllers
+  - Refactored with button behavior Lit controllers
 - Added beta release of design token integration into elements
 
 ### Fixes
+
 - `nve-button` and `nve-button-icon` now support full HTML Form submit events
 - `nve-button` and `nve-button-icon` now support keyboard interactions (space/enter)
 
 ### <nve-icon name="warning" status="warning"></nve-icon> Breaking Changes
+
 - Button `variant` has been replaced with button `interaction` to align with design
 - Removed `icon` property on `nve-icon`
 - Refactored `nve-card` to a composition / slot based API for more flexibility
-    - Adds `nve-card-header`
-    - Adds `nve-card-footer`
+  - Adds `nve-card-header`
+  - Adds `nve-card-footer`
 
 <LinkedHeader>0.1.3 - 07-15-2022</LinkedHeader>
 

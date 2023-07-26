@@ -81,13 +81,13 @@ export class Select extends Control {
 
   protected get suffixContent() {
     return html`
-      <nve-icon name="caret" part="caret" direction="down"></nve-icon>
+      <nve-icon name="caret" part="caret" direction="down" size="sm"></nve-icon>
       <nve-dropdown @close=${e => e.target.hidden = true} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
         <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label="select options">
           ${this.#options.map((o, i) => html`
           <nve-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} aria-selected=${o.selected}>
             <slot name="option-${i + 1}">
-              <nve-icon name="checkmark"></nve-icon> ${o.innerText}
+              <nve-icon name="check" size="sm"></nve-icon> ${o.innerText}
             </slot>
           </nve-menu-item>`)}
         </nve-menu>

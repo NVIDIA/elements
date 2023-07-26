@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import '@elements/elements/alert/define.js';
 import '@elements/elements/button/define.js';
+import '@elements/elements/select/define.js';
 import '@elements/elements/card/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/icon-button/define.js';
@@ -16,6 +17,14 @@ export const Default = {
 
 export const Dark = {
   render: () => getThemeDemo('dark')
+}
+
+export const DefaultDebug = {
+  render: () => getThemeDemo('light debug')
+}
+
+export const DarkDebug = {
+  render: () => getThemeDemo('dark debug')
 }
 
 export const HighContrast = {
@@ -91,18 +100,18 @@ function getThemeContent() {
   return html`
     <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px">
     <div nve-layout="row gap:sm">
-        <nve-icon-button icon-name="user"></nve-icon-button>
-        <nve-icon-button icon-name="user" interaction="emphasize"></nve-icon-button>
-        <nve-icon-button icon-name="user" interaction="destructive"></nve-icon-button>
-        <nve-icon-button icon-name="user" interaction="flat"></nve-icon-button>
-        <nve-icon-button icon-name="user" disabled></nve-icon-button>
+        <nve-icon-button icon-name="person"></nve-icon-button>
+        <nve-icon-button icon-name="person" interaction="emphasize"></nve-icon-button>
+        <nve-icon-button icon-name="person" interaction="destructive"></nve-icon-button>
+        <nve-icon-button icon-name="person" interaction="flat"></nve-icon-button>
+        <nve-icon-button icon-name="person" disabled></nve-icon-button>
       </div>
       <div nve-layout="row gap:sm">
-        <nve-icon name="user"></nve-icon>
-        <nve-icon name="user" status="accent"></nve-icon>
-        <nve-icon name="user" status="success"></nve-icon>
-        <nve-icon name="user" status="warning"></nve-icon>
-        <nve-icon name="user" status="danger"></nve-icon>
+        <nve-icon name="person"></nve-icon>
+        <nve-icon name="person" status="accent"></nve-icon>
+        <nve-icon name="person" status="success"></nve-icon>
+        <nve-icon name="person" status="warning"></nve-icon>
+        <nve-icon name="person" status="danger"></nve-icon>
       </div>
       <div nve-layout="row gap:sm">
         <nve-button>default</nve-button>

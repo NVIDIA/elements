@@ -49,7 +49,7 @@ class BreadcrumbMenuDemo extends LitElement {
     const ddownId = "more-links";
     return html`
 <nve-breadcrumb>
-  <nve-icon-button id=${ddownId + '-btn'} @click=${() => this.menuHidden = false} icon-name="additional-actions"></nve-icon-button>
+  <nve-icon-button id=${ddownId + '-btn'} @click=${() => this.menuHidden = false} icon-name="more-actions"></nve-icon-button>
   <nve-button><a href="javascript: void(0)">Item 4</a></nve-button>
   <nve-button><a href="javascript: void(0)">Item 5</a></nve-button>
   <span>You Are Here</span>

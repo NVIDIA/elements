@@ -92,16 +92,16 @@ export const BorderlessVerticalTabs = {
   render: () => html`
   <nve-tabs vertical borderless behavior-select style="width: 250px">
     <nve-tabs-item>
-      <nve-icon name="settings"></nve-icon> Tab 1
+      <nve-icon name="gear"></nve-icon> Tab 1
     </nve-tabs-item>
     <nve-tabs-item>
-      <nve-icon name="user"></nve-icon> Tab 2
+      <nve-icon name="person"></nve-icon> Tab 2
     </nve-tabs-item>
     <nve-tabs-item selected>
       <nve-icon name="beaker"></nve-icon> Tab 3
     </nve-tabs-item>
     <nve-tabs-item>
-      <nve-icon name="dashboard"></nve-icon> Tab 4
+      <nve-icon name="add-grid"></nve-icon> Tab 4
     </nve-tabs-item>
   </nve-tabs>
   `

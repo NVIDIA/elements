@@ -19,6 +19,6 @@ export class Week extends Control {
   };
 
   protected get suffixContent() {
-    return html`<nve-icon-button icon-name="date" interaction="flat" @click=${this.showPicker}></nve-icon-button>`;
+    return html`<nve-icon-button icon-name="calendar" interaction="flat" @click=${this.showPicker}></nve-icon-button>`;
   }
 }

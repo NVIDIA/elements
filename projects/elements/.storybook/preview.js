@@ -300,6 +300,19 @@ export const globalTypes = {
       ],
     },
   },
+  debug: {
+    name: 'Debug',
+    description: 'Debug',
+    defaultValue: '',
+    toolbar: {
+      title: 'Debug',
+      showName: true,
+      items: [
+        { value: '', title: 'Off' },
+        { value: 'debug', title: 'On' }
+      ],
+    },
+  },
   animation: {
     name: 'Animation',
     description: 'Animation',
@@ -361,6 +374,6 @@ const dataTheme = (story, { globals }) => {
 };
 
 export const decorators = [(story, { globals }) => {
-  updateTheme(`${globals.theme ? globals.theme : ''} ${globals.scale ? globals.scale : ''} ${globals.animation ? globals.animation : ''}`);
+  updateTheme(`${globals.theme ? globals.theme : ''} ${globals.scale ? globals.scale : ''} ${globals.debug ? globals.debug : ''} ${globals.animation ? globals.animation : ''}`);
   return story();
 }, dataTheme, playground];

@@ -56,7 +56,7 @@ export const Hint = {
   <nve-tooltip anchor="action-btn" position="right" trigger="action-btn" hidden>Preview in progress CI tasks for the active host</nve-tooltip>
   <div nve-layout="row gap:xs align:vertical-center">
     <h2 nve-text="section">Preview</h2>
-    <nve-icon-button interaction="flat" icon-name="information" id="action-btn"></nve-icon-button>
+    <nve-icon-button interaction="flat" icon-name="information-circle-stroke" id="action-btn"></nve-icon-button>
   </div>
   <script type="module">
     const tooltip = document.querySelector('nve-tooltip[anchor="action-btn"]');
