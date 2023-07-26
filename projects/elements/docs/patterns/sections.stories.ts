@@ -28,9 +28,9 @@ export const Header = {
             <h1 nve-text="heading lg semibold">Page Title</h1>
 
             <div nve-layout="row gap:sm" style="margin-left: auto">
-              <nve-icon-button icon-name="information" aria-label="information"></nve-icon-button>
+              <nve-icon-button icon-name="information-circle-stroke" aria-label="information"></nve-icon-button>
               <nve-icon-button icon-name="edit" aria-label="edit"></nve-icon-button>
-              <nve-icon-button icon-name="additional-actions" aria-label="additional actions"></nve-icon-button>
+              <nve-icon-button icon-name="more-actions" aria-label="additional actions"></nve-icon-button>
             </div>
           </div>
 

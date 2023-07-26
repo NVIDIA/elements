@@ -60,13 +60,13 @@ export const FlatInteractions = {
 export const PressedToggle = {
   render: () => html`
   <div nve-layout="row gap:sm pad-bottom:md">
-    <nve-icon-button icon-name="filter-outline"></nve-icon-button>
+    <nve-icon-button icon-name="filter-stroke"></nve-icon-button>
     <nve-icon-button pressed icon-name="filter"></nve-icon-button>
   </div>
 
   <div nve-layout="row gap:sm">
-    <nve-icon-button icon-name="hidden" interaction="flat" aria-label="show"></nve-icon-button>
-    <nve-icon-button pressed icon-name="visible" interaction="flat" aria-label="hide"></nve-icon-button>
+    <nve-icon-button icon-name="eye-hidden" interaction="flat" aria-label="show"></nve-icon-button>
+    <nve-icon-button pressed icon-name="eye" interaction="flat" aria-label="hide"></nve-icon-button>
   </div>
   `
 }

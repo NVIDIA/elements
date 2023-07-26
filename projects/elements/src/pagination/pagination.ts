@@ -66,19 +66,19 @@ export class Pagination extends LitElement {
   }
 
   get #previousButton() {
-    return html`<nve-icon-button @click=${() => this.#setValue(this.value - 1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.previous} interaction="flat" icon-name="chevron-left"></nve-icon-button>`;
+    return html`<nve-icon-button @click=${() => this.#setValue(this.value - 1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.previous} interaction="flat" icon-name="chevron" direction="left"></nve-icon-button>`;
   }
 
   get #nextButton() {
-    return html`<nve-icon-button @click=${() => this.#setValue(this.value + 1)} .disabled=${this.disabled || this.#currentPage >= this.items} .ariaLabel=${this.i18n.next} interaction="flat" icon-name="chevron-right"></nve-icon-button>`;
+    return html`<nve-icon-button @click=${() => this.#setValue(this.value + 1)} .disabled=${this.disabled || this.#currentPage >= this.items} .ariaLabel=${this.i18n.next} interaction="flat" icon-name="chevron" direction="right"></nve-icon-button>`;
   }
 
   get #startButton() {
-    return html`<nve-icon-button @click=${() => this.#setValue(1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.start} interaction="flat" icon-name="start"></nve-icon-button>`;
+    return html`<nve-icon-button @click=${() => this.#setValue(1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.start} interaction="flat" icon-name="arrow-stop" direction="left"></nve-icon-button>`;
   }
 
   get #endButton() {
-    return html`<nve-icon-button @click=${() => this.#setValue(this.items / this.step)} .disabled=${this.disabled || (((this.value - 1) * this.step) + this.step) >= this.items} .ariaLabel=${this.i18n.end} interaction="flat" icon-name="end"></nve-icon-button>`;
+    return html`<nve-icon-button @click=${() => this.#setValue(this.items / this.step)} .disabled=${this.disabled || (((this.value - 1) * this.step) + this.step) >= this.items} .ariaLabel=${this.i18n.end} interaction="flat" icon-name="arrow-stop" direction="right"></nve-icon-button>`;
   }
 
   get #select() {

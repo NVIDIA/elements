@@ -14,12 +14,12 @@ export const Default = {
   <nve-bulk-actions closable status="accent">
     123 selected
     <nve-button interaction="flat-destructive">delete</nve-button>
-    <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
+    <nve-icon-button interaction="flat" icon-name="more-actions"></nve-icon-button>
   </nve-bulk-actions>
   <nve-bulk-actions closable>
     123 selected
     <nve-button interaction="flat-destructive">delete</nve-button>
-    <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
+    <nve-icon-button interaction="flat" icon-name="more-actions"></nve-icon-button>
   </nve-bulk-actions>
 </div>
   `
@@ -31,7 +31,7 @@ export const LightTheme = {
   <nve-bulk-actions>
     123 selected
     <nve-button interaction="flat-destructive">delete</nve-button>
-    <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
+    <nve-icon-button interaction="flat" icon-name="more-actions"></nve-icon-button>
   </nve-bulk-actions>
 </div>
   `
@@ -43,7 +43,7 @@ export const DarkTheme = {
   <nve-bulk-actions>
     123 selected
     <nve-button interaction="flat-destructive">delete</nve-button>
-    <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
+    <nve-icon-button interaction="flat" icon-name="more-actions"></nve-icon-button>
   </nve-bulk-actions>
 </div>
   `

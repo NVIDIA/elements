@@ -27,9 +27,9 @@ export const Dropdown = {
   <nve-button id="dropdown-menu-btn">dropdown</nve-button>
   <nve-dropdown anchor="dropdown-menu-btn">
     <nve-menu>
-      <nve-menu-item><nve-icon name="user"></nve-icon> profile</nve-menu-item>
-      <nve-menu-item><nve-icon name="settings"></nve-icon> settings</nve-menu-item>
-      <nve-menu-item><nve-icon name="favorite-filled"></nve-icon> favorites</nve-menu-item>
+      <nve-menu-item><nve-icon name="person"></nve-icon> profile</nve-menu-item>
+      <nve-menu-item><nve-icon name="gear"></nve-icon> settings</nve-menu-item>
+      <nve-menu-item><nve-icon name="star"></nve-icon> favorites</nve-menu-item>
       <nve-divider></nve-divider>
       <nve-menu-item><nve-icon name="logout"></nve-icon> logout</nve-menu-item>
     </nve-menu>
@@ -62,9 +62,9 @@ export const Disabled = {
 export const Icons = {
   render: () => html`
   <nve-menu>
-    <nve-menu-item><nve-icon name="user"></nve-icon> profile</nve-menu-item>
-    <nve-menu-item><nve-icon name="settings"></nve-icon> settings</nve-menu-item>
-    <nve-menu-item><nve-icon name="favorite-filled"></nve-icon> favorites</nve-menu-item>
+    <nve-menu-item><nve-icon name="person"></nve-icon> profile</nve-menu-item>
+    <nve-menu-item><nve-icon name="gear"></nve-icon> settings</nve-menu-item>
+    <nve-menu-item><nve-icon name="star"></nve-icon> favorites</nve-menu-item>
     <nve-menu-item><nve-icon name="logout"></nve-icon> logout</nve-menu-item>
   </nve-menu>
   `
@@ -73,9 +73,9 @@ export const Icons = {
 export const Links = {
   render: () => html`
   <nve-menu>
-    <nve-menu-item><nve-icon name="user"></nve-icon><a href="#">profile</a></nve-menu-item>
-    <nve-menu-item><nve-icon name="settings"></nve-icon> <a href="#">settings</a></nve-menu-item>
-    <nve-menu-item><nve-icon name="favorite-filled"></nve-icon> <a href="#">favorites</a></nve-menu-item>
+    <nve-menu-item><nve-icon name="person"></nve-icon><a href="#">profile</a></nve-menu-item>
+    <nve-menu-item><nve-icon name="gear"></nve-icon> <a href="#">settings</a></nve-menu-item>
+    <nve-menu-item><nve-icon name="star"></nve-icon> <a href="#">favorites</a></nve-menu-item>
     <nve-menu-item><nve-icon name="logout"></nve-icon> <a href="#">logout</a></nve-menu-item>
   </nve-menu>
   `

@@ -121,7 +121,7 @@ class ElementStatus extends LitElement {
         <nve-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</nve-alert>
         <nve-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></nve-alert>
       </div>
-      <h3><nve-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <nve-icon name="success-badge"></nve-icon></nve-badge></h3>
+      <h3><nve-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <nve-icon name="checkmark-circle"></nve-icon></nve-badge></h3>
       <div style="display: flex; flex-direction: column; gap: 8px">
         <nve-alert .status=${metadata.aria ? 'finished' : 'pending'}>No known outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></nve-alert>
         <nve-alert .status=${metadata.performance ? 'finished' : 'pending'}>No known outstanding performance issues</nve-alert>
@@ -220,8 +220,8 @@ class ElementsMetrics extends LitElement {
             <nve-grid-cell>${getStatusBadge(element.status)}</nve-grid-cell>
             <nve-grid-cell>${getCoverageStatus(element.coverageTotal)}</nve-grid-cell>
             <nve-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} nve-text="link no-visit">${element.behavior}</a></nve-grid-cell>
-            <nve-grid-cell><nve-icon name="success-badge" status="success"></nve-icon></nve-grid-cell>
-            <nve-grid-cell>${element.responsive ? html`<nve-icon name="success-badge" status="success"></nve-icon>` : html`<nve-icon name="warning" status="warning"></nve-icon>`}</nve-grid-cell>
+            <nve-grid-cell><nve-icon name="checkmark-circle" status="success"></nve-icon></nve-grid-cell>
+            <nve-grid-cell>${element.responsive ? html`<nve-icon name="checkmark-circle" status="success"></nve-icon>` : html`<nve-icon name="warning" status="warning"></nve-icon>`}</nve-grid-cell>
             <nve-grid-cell>${element.instanceTotal}</nve-grid-cell>
             <nve-grid-cell>${element.projectTotal}</nve-grid-cell>
             <nve-grid-cell>${element.figma ? html`<a href=${element.figma} nve-text="link no-visit">Figma</a>` : html`<nve-icon name="warning" status="warning"></nve-icon>`}</nve-grid-cell>

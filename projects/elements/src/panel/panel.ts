@@ -172,7 +172,7 @@ export class Panel extends LitElement {
           ${when(
             !this.closable,
             () => html`
-              <nve-icon-button interaction=${this.expanded ? 'flat' : ''} icon-name=${this.expanded ? 'collapse-panel' : 'expand-panel'}
+              <nve-icon-button interaction=${this.expanded ? 'flat' : ''} icon-name="double-chevron" .direction=${this.expanded ? 'left' : 'right'}
                 @click=${() => this.#typeExpandableController.toggle()}
                 direction=${this.side}
                 .expanded=${this.expanded}

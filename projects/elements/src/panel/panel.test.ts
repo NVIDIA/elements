@@ -18,7 +18,7 @@ describe('nve-panel', () => {
         <nve-panel-footer></nve-panel-footer>
         <p>content</p>
         <nve-panel-header>
-          <nve-icon-button interaction="flat" slot="action-icon" icon-name="additional-actions"></nve-icon-button>
+          <nve-icon-button interaction="flat" slot="action-icon" icon-name="more-actions"></nve-icon-button>
           <h3 slot="subtitle">subtitle</h3>
           <h2 slot="title">title</h2>
         </nve-panel-header>
@@ -69,7 +69,7 @@ describe('nve-panel', () => {
   it('should replace collapse icon with cancel icon when closable', async () => {
     await elementIsStable(panel);
     expect(panel.shadowRoot.querySelector('nve-icon-button').tagName).toBe('MLV-ICON-BUTTON');
-    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('left');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
 
     panel.closable = true;
@@ -81,7 +81,7 @@ describe('nve-panel', () => {
   it('should replace collapse icon with expand icon when collapsed, and update aria attributes', async () => {
     await elementIsStable(panel);
     expect(panel.shadowRoot.querySelector('nve-icon-button').tagName).toBe('MLV-ICON-BUTTON');
-    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('left');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
     expect(panel.matches(':--expanded')).toBe(true);
@@ -89,7 +89,7 @@ describe('nve-panel', () => {
     panel.expanded = false;
 
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('expand-panel');
+    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('right');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
     expect(panel.matches(':--expanded')).toBe(false);
@@ -98,19 +98,20 @@ describe('nve-panel', () => {
   it('should flip collapse icon direction when panel side set to "right" mode', async () => {
     await elementIsStable(panel);
     expect(panel.shadowRoot.querySelector('nve-icon-button').tagName).toBe('MLV-ICON-BUTTON');
-    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('double-chevron');
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('left');
 
     panel.setAttribute('side', 'right');
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('double-chevron');
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('right');
   });
 
   it('should collapse panel when icon button clicked', async () => {
     await elementIsStable(panel);
     expect(panel.shadowRoot.querySelector('nve-icon-button').tagName).toBe('MLV-ICON-BUTTON');
-    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('collapse-panel');
+    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('double-chevron');
+    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('left');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
     expect(panel.matches(':--expanded')).toBe(true);
@@ -118,7 +119,8 @@ describe('nve-panel', () => {
     panel.shadowRoot.querySelector('nve-icon-button').click();
 
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('expand-panel');
+    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('double-chevron');
+    expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('right');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
     expect(panel.matches(':--expanded')).toBe(false);

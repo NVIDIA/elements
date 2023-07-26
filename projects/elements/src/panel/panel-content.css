@@ -1,6 +1,7 @@
 :host {
-  --padding: var(--nve-ref-size-400) var(--nve-ref-size-500) var(--nve-ref-size-500);
+  --padding: var(--nve-ref-size-400);
   padding: var(--padding);
   color: var(--color);
   flex-grow: 1;
+  width: 100%;
 }

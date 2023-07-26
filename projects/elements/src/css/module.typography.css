@@ -17,6 +17,7 @@
   color: var(--nve-sys-text-color) !important;
   white-space: initial;
   margin: 0;
+  outline: var(--nve-debug-typography-outline, initial);
 }
 
 [nve-text~='trim:none']::before,
@@ -41,18 +42,22 @@
 }
 
 [nve-text~='heading'] {
-  font-size: var(--nve-ref-font-size-500) !important;
+  font-size: var(--nve-ref-font-size-400) !important;
 
   &[nve-text~='xl'] {
-    font-size: var(--nve-ref-font-size-700) !important;
-  }
-
-  &[nve-text~='lg'] {
     font-size: var(--nve-ref-font-size-600) !important;
   }
 
+  &[nve-text~='lg'] {
+    font-size: var(--nve-ref-font-size-500) !important;
+  }
+
   &[nve-text~='sm'] {
-    font-size: var(--nve-ref-font-size-400) !important;
+    font-size: var(--nve-ref-font-size-300) !important;
+  }
+
+  &[nve-text~='xs'] {
+    font-size: var(--nve-ref-font-size-200) !important;
   }
 }
 

@@ -91,7 +91,7 @@ const renderCard = (height?: number, cardSpan?: number, cardBorderRadius?: strin
   <nve-card style="--border-radius: ${ifDefined(cardBorderRadius)}" nve-layout="span:${ifDefined(cardSpan)}">
     <nve-card-header>
       <div slot="title">Card Title</div>
-      <nve-icon-button slot="header-action" icon-name="additional-actions" interaction="flat"></nve-icon-button>
+      <nve-icon-button slot="header-action" icon-name="more-actions" interaction="flat"></nve-icon-button>
     </nve-card-header>
     <nve-card-content style="height: ${height}px"> Card Content </nve-card-content>
   </nve-card>
@@ -114,7 +114,7 @@ const StackedCardsWithPanel = {
         <header nve-layout="column gap:md pad-top:md pad-right:md pad-left:md align:stretch">
           <section nve-layout="row align:space-between align:vertical-center">
             <div nve-layout="row gap:sm align:vertical-center">
-              <nve-icon-button icon-name="navigate-back" aria-label="navigate-back"></nve-icon-button>
+              <nve-icon-button icon-name="chevron" direction="left" aria-label="navigate-back"></nve-icon-button>
               <h1 nve-text="heading lg bold">Page Heading</h1>
             </div>
 
@@ -148,8 +148,8 @@ const StackedCardsWithPanel = {
               <div nve-layout="row gap:sm pad:sm">
                 <nve-divider orientation="vertical"></nve-divider>
                 <nve-button>Default</nve-button>
-                <nve-icon-button icon-name="information" aria-label="information" @click=${() => togglePanel(args.panelSide === 'right')}></nve-icon-button>
-                <nve-icon-button icon-name="additional-actions" aria-label="additional actions"></nve-icon-button>
+                <nve-icon-button icon-name="information-circle-stroke" aria-label="information" @click=${() => togglePanel(args.panelSide === 'right')}></nve-icon-button>
+                <nve-icon-button icon-name="more-actions" aria-label="additional actions"></nve-icon-button>
               </div>
             </div>
           </section>

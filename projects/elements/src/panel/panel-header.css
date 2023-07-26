@@ -1,5 +1,5 @@
 :host {
-  --padding: var(--nve-ref-size-500) 0 var(--nve-ref-size-400) var(--nve-ref-size-500);
+  --padding: var(--nve-ref-size-300) 0 var(--nve-ref-size-300) var(--nve-ref-size-400);
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
 }
 
@@ -11,23 +11,23 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
 
-  ::slotted([slot="title"]) {
-    margin: 0;
-    font-size: var(--nve-ref-font-size-300);
-    font-weight: var(--nve-ref-font-weight-semibold);
-  }
+::slotted([slot="title"]) {
+  margin: 0;
+  font-size: var(--nve-ref-font-size-200);
+  font-weight: var(--nve-ref-font-weight-semibold);
+}
 
-  ::slotted([slot="subtitle"]) {
-    margin: 0;
-    font-size: var(--nve-ref-font-size-200);
-    font-weight: var(--nve-ref-font-weight-normal);
-  }
+::slotted([slot="subtitle"]) {
+  margin: 0;
+  font-size: var(--nve-ref-font-size-100);
+  font-weight: var(--nve-ref-font-weight-normal);
+}
 
-  ::slotted([slot="action-icon"]) {
-    position: absolute;
-    top: 14px;
-    right: 48px;
-    z-index: 99;
-  }
+::slotted([slot="action-icon"]) {
+  position: absolute;
+  top: 14px;
+  right: 48px;
+  z-index: 99;
 }

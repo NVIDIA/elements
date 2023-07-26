@@ -1,570 +1,766 @@
 
 // This is an auto-generated file. DO NOT EDIT
+export interface IconSVG {
+  svg: () => Promise<string>;
+}
+
 export const ICON_IMPORTS = {
+  'academic-cap': {
+    svg: async () => (await import('./icons/academic-cap.svg?raw')).default
+  },
   'add-asset': {
-    svg: () => import('./icons/add-asset.svg?raw')
+    svg: async () => (await import('./icons/add-asset.svg?raw')).default
+  },
+  'add-comment': {
+    svg: async () => (await import('./icons/add-comment.svg?raw')).default
+  },
+  'add-grid': {
+    svg: async () => (await import('./icons/add-grid.svg?raw')).default
   },
   'add-user': {
-    svg: () => import('./icons/add-user.svg?raw')
+    svg: async () => (await import('./icons/add-user.svg?raw')).default
   },
-  'additional-actions': {
-    svg: () => import('./icons/additional-actions.svg?raw')
-  },
-  'analytics': {
-    svg: () => import('./icons/analytics.svg?raw')
-  },
-  'annotation': {
-    svg: () => import('./icons/annotation.svg?raw')
-  },
-  'app-switcher': {
-    svg: () => import('./icons/app-switcher.svg?raw')
+  'add': {
+    svg: async () => (await import('./icons/add.svg?raw')).default
   },
   'archive': {
-    svg: () => import('./icons/archive.svg?raw')
+    svg: async () => (await import('./icons/archive.svg?raw')).default
+  },
+  'arrow-angle': {
+    svg: async () => (await import('./icons/arrow-angle.svg?raw')).default
+  },
+  'arrow-both': {
+    svg: async () => (await import('./icons/arrow-both.svg?raw')).default
+  },
+  'arrow-path-rounded-square': {
+    svg: async () => (await import('./icons/arrow-path-rounded-square.svg?raw')).default
+  },
+  'arrow-stop': {
+    svg: async () => (await import('./icons/arrow-stop.svg?raw')).default
   },
   'arrow': {
-    svg: () => import('./icons/arrow.svg?raw')
+    svg: async () => (await import('./icons/arrow.svg?raw')).default
   },
-  'assist': {
-    svg: () => import('./icons/assist.svg?raw')
+  'at-symbol': {
+    svg: async () => (await import('./icons/at-symbol.svg?raw')).default
   },
-  'attached': {
-    svg: () => import('./icons/attached.svg?raw')
+  'backspace': {
+    svg: async () => (await import('./icons/backspace.svg?raw')).default
+  },
+  'bar-pill-stack': {
+    svg: async () => (await import('./icons/bar-pill-stack.svg?raw')).default
+  },
+  'bars-3-bottom-left': {
+    svg: async () => (await import('./icons/bars-3-bottom-left.svg?raw')).default
+  },
+  'bars-3-bottom-right': {
+    svg: async () => (await import('./icons/bars-3-bottom-right.svg?raw')).default
+  },
+  'bars-3-center-left': {
+    svg: async () => (await import('./icons/bars-3-center-left.svg?raw')).default
+  },
+  'bars-4': {
+    svg: async () => (await import('./icons/bars-4.svg?raw')).default
   },
   'beaker': {
-    svg: () => import('./icons/beaker.svg?raw')
+    svg: async () => (await import('./icons/beaker.svg?raw')).default
   },
-  'beginning': {
-    svg: () => import('./icons/beginning.svg?raw')
+  'bell-slash': {
+    svg: async () => (await import('./icons/bell-slash.svg?raw')).default
+  },
+  'bell-stroke': {
+    svg: async () => (await import('./icons/bell-stroke.svg?raw')).default
+  },
+  'bell': {
+    svg: async () => (await import('./icons/bell.svg?raw')).default
+  },
+  'bold': {
+    svg: async () => (await import('./icons/bold.svg?raw')).default
   },
   'book': {
-    svg: () => import('./icons/book.svg?raw')
+    svg: async () => (await import('./icons/book.svg?raw')).default
+  },
+  'bookmark-stroke': {
+    svg: async () => (await import('./icons/bookmark-stroke.svg?raw')).default
   },
   'bookmark': {
-    svg: () => import('./icons/bookmark.svg?raw')
+    svg: async () => (await import('./icons/bookmark.svg?raw')).default
   },
   'bounding-box': {
-    svg: () => import('./icons/bounding-box.svg?raw')
+    svg: async () => (await import('./icons/bounding-box.svg?raw')).default
   },
-  'breadcrumb': {
-    svg: () => import('./icons/breadcrumb.svg?raw')
+  'branch': {
+    svg: async () => (await import('./icons/branch.svg?raw')).default
+  },
+  'briefcase': {
+    svg: async () => (await import('./icons/briefcase.svg?raw')).default
+  },
+  'browser': {
+    svg: async () => (await import('./icons/browser.svg?raw')).default
+  },
+  'bug': {
+    svg: async () => (await import('./icons/bug.svg?raw')).default
+  },
+  'calendar': {
+    svg: async () => (await import('./icons/calendar.svg?raw')).default
   },
   'camera': {
-    svg: () => import('./icons/camera.svg?raw')
+    svg: async () => (await import('./icons/camera.svg?raw')).default
   },
   'cancel': {
-    svg: () => import('./icons/cancel.svg?raw')
+    svg: async () => (await import('./icons/cancel.svg?raw')).default
   },
   'caret': {
-    svg: () => import('./icons/caret.svg?raw')
+    svg: async () => (await import('./icons/caret.svg?raw')).default
   },
-  'carousel-horizontal': {
-    svg: () => import('./icons/carousel-horizontal.svg?raw')
+  'carets-closed-square': {
+    svg: async () => (await import('./icons/carets-closed-square.svg?raw')).default
   },
-  'carousel-vertical': {
-    svg: () => import('./icons/carousel-vertical.svg?raw')
+  'carousel': {
+    svg: async () => (await import('./icons/carousel.svg?raw')).default
   },
   'category-list': {
-    svg: () => import('./icons/category-list.svg?raw')
+    svg: async () => (await import('./icons/category-list.svg?raw')).default
   },
-  'checklist-complete': {
-    svg: () => import('./icons/checklist-complete.svg?raw')
+  'chart-bar': {
+    svg: async () => (await import('./icons/chart-bar.svg?raw')).default
+  },
+  'chat-bubble': {
+    svg: async () => (await import('./icons/chat-bubble.svg?raw')).default
+  },
+  'chat-bubbles': {
+    svg: async () => (await import('./icons/chat-bubbles.svg?raw')).default
+  },
+  'check-badge': {
+    svg: async () => (await import('./icons/check-badge.svg?raw')).default
+  },
+  'check': {
+    svg: async () => (await import('./icons/check.svg?raw')).default
   },
   'checklist': {
-    svg: () => import('./icons/checklist.svg?raw')
+    svg: async () => (await import('./icons/checklist.svg?raw')).default
   },
-  'checkmark': {
-    svg: () => import('./icons/checkmark.svg?raw')
+  'checkmark-circle': {
+    svg: async () => (await import('./icons/checkmark-circle.svg?raw')).default
   },
-  'chevron-down': {
-    svg: () => import('./icons/chevron-down.svg?raw')
+  'chevron': {
+    svg: async () => (await import('./icons/chevron.svg?raw')).default
   },
-  'chevron-left': {
-    svg: () => import('./icons/chevron-left.svg?raw')
+  'chip': {
+    svg: async () => (await import('./icons/chip.svg?raw')).default
   },
-  'chevron-right': {
-    svg: () => import('./icons/chevron-right.svg?raw')
+  'circle-angled-line': {
+    svg: async () => (await import('./icons/circle-angled-line.svg?raw')).default
   },
-  'chevron-up': {
-    svg: () => import('./icons/chevron-up.svg?raw')
+  'circle-dash': {
+    svg: async () => (await import('./icons/circle-dash.svg?raw')).default
   },
-  'chop': {
-    svg: () => import('./icons/chop.svg?raw')
+  'circle-dot-arrows': {
+    svg: async () => (await import('./icons/circle-dot-arrows.svg?raw')).default
+  },
+  'circle-dot': {
+    svg: async () => (await import('./icons/circle-dot.svg?raw')).default
+  },
+  'circle-half': {
+    svg: async () => (await import('./icons/circle-half.svg?raw')).default
+  },
+  'circle-rule': {
+    svg: async () => (await import('./icons/circle-rule.svg?raw')).default
+  },
+  'circle-tick': {
+    svg: async () => (await import('./icons/circle-tick.svg?raw')).default
+  },
+  'circle': {
+    svg: async () => (await import('./icons/circle.svg?raw')).default
+  },
+  'clipboard': {
+    svg: async () => (await import('./icons/clipboard.svg?raw')).default
+  },
+  'clock-circle-arrow': {
+    svg: async () => (await import('./icons/clock-circle-arrow.svg?raw')).default
+  },
+  'clock': {
+    svg: async () => (await import('./icons/clock.svg?raw')).default
   },
   'cloud-download': {
-    svg: () => import('./icons/cloud-download.svg?raw')
+    svg: async () => (await import('./icons/cloud-download.svg?raw')).default
   },
   'cloud-upload': {
-    svg: () => import('./icons/cloud-upload.svg?raw')
+    svg: async () => (await import('./icons/cloud-upload.svg?raw')).default
   },
   'cloud': {
-    svg: () => import('./icons/cloud.svg?raw')
+    svg: async () => (await import('./icons/cloud.svg?raw')).default
   },
   'code': {
-    svg: () => import('./icons/code.svg?raw')
+    svg: async () => (await import('./icons/code.svg?raw')).default
   },
   'collapse-all': {
-    svg: () => import('./icons/collapse-all.svg?raw')
+    svg: async () => (await import('./icons/collapse-all.svg?raw')).default
   },
-  'collapse-panel': {
-    svg: () => import('./icons/collapse-panel.svg?raw')
-  },
-  'collection': {
-    svg: () => import('./icons/collection.svg?raw')
+  'collapse-details': {
+    svg: async () => (await import('./icons/collapse-details.svg?raw')).default
   },
   'columns': {
-    svg: () => import('./icons/columns.svg?raw')
+    svg: async () => (await import('./icons/columns.svg?raw')).default
+  },
+  'compare': {
+    svg: async () => (await import('./icons/compare.svg?raw')).default
   },
   'computer': {
-    svg: () => import('./icons/computer.svg?raw')
+    svg: async () => (await import('./icons/computer.svg?raw')).default
+  },
+  'connect-node': {
+    svg: async () => (await import('./icons/connect-node.svg?raw')).default
+  },
+  'connected-blocks': {
+    svg: async () => (await import('./icons/connected-blocks.svg?raw')).default
   },
   'copy': {
-    svg: () => import('./icons/copy.svg?raw')
+    svg: async () => (await import('./icons/copy.svg?raw')).default
   },
   'cross-hairs': {
-    svg: () => import('./icons/cross-hairs.svg?raw')
+    svg: async () => (await import('./icons/cross-hairs.svg?raw')).default
   },
-  'dark-mode': {
-    svg: () => import('./icons/dark-mode.svg?raw')
+  'cursor-rays': {
+    svg: async () => (await import('./icons/cursor-rays.svg?raw')).default
   },
-  'dashboard': {
-    svg: () => import('./icons/dashboard.svg?raw')
-  },
-  'data-generation': {
-    svg: () => import('./icons/data-generation.svg?raw')
+  'cursor-ripples': {
+    svg: async () => (await import('./icons/cursor-ripples.svg?raw')).default
   },
   'data-management': {
-    svg: () => import('./icons/data-management.svg?raw')
+    svg: async () => (await import('./icons/data-management.svg?raw')).default
   },
-  'dataset-slice': {
-    svg: () => import('./icons/dataset-slice.svg?raw')
-  },
-  'date': {
-    svg: () => import('./icons/date.svg?raw')
-  },
-  'debugging': {
-    svg: () => import('./icons/debugging.svg?raw')
+  'delete-node': {
+    svg: async () => (await import('./icons/delete-node.svg?raw')).default
   },
   'delete': {
-    svg: () => import('./icons/delete.svg?raw')
+    svg: async () => (await import('./icons/delete.svg?raw')).default
   },
-  'docs': {
-    svg: () => import('./icons/docs.svg?raw')
+  'doc-checkmark': {
+    svg: async () => (await import('./icons/doc-checkmark.svg?raw')).default
   },
-  'domains': {
-    svg: () => import('./icons/domains.svg?raw')
+  'document-clipboard': {
+    svg: async () => (await import('./icons/document-clipboard.svg?raw')).default
+  },
+  'dot-stroke': {
+    svg: async () => (await import('./icons/dot-stroke.svg?raw')).default
   },
   'dot': {
-    svg: () => import('./icons/dot.svg?raw')
+    svg: async () => (await import('./icons/dot.svg?raw')).default
   },
   'double-chevron': {
-    svg: () => import('./icons/double-chevron.svg?raw')
+    svg: async () => (await import('./icons/double-chevron.svg?raw')).default
   },
   'download': {
-    svg: () => import('./icons/download.svg?raw')
+    svg: async () => (await import('./icons/download.svg?raw')).default
   },
   'drag': {
-    svg: () => import('./icons/drag.svg?raw')
+    svg: async () => (await import('./icons/drag.svg?raw')).default
   },
   'dropper': {
-    svg: () => import('./icons/dropper.svg?raw')
+    svg: async () => (await import('./icons/dropper.svg?raw')).default
+  },
+  'duplicate': {
+    svg: async () => (await import('./icons/duplicate.svg?raw')).default
   },
   'edit': {
-    svg: () => import('./icons/edit.svg?raw')
+    svg: async () => (await import('./icons/edit.svg?raw')).default
   },
-  'end': {
-    svg: () => import('./icons/end.svg?raw')
+  'ellipses': {
+    svg: async () => (await import('./icons/ellipses.svg?raw')).default
+  },
+  'envelope': {
+    svg: async () => (await import('./icons/envelope.svg?raw')).default
+  },
+  'exclamation-circle': {
+    svg: async () => (await import('./icons/exclamation-circle.svg?raw')).default
+  },
+  'exclamation-triangle': {
+    svg: async () => (await import('./icons/exclamation-triangle.svg?raw')).default
   },
   'expand-all': {
-    svg: () => import('./icons/expand-all.svg?raw')
+    svg: async () => (await import('./icons/expand-all.svg?raw')).default
   },
-  'expand-full-screen': {
-    svg: () => import('./icons/expand-full-screen.svg?raw')
-  },
-  'expand-panel': {
-    svg: () => import('./icons/expand-panel.svg?raw')
-  },
-  'expand': {
-    svg: () => import('./icons/expand.svg?raw')
+  'expand-details': {
+    svg: async () => (await import('./icons/expand-details.svg?raw')).default
   },
   'expression': {
-    svg: () => import('./icons/expression.svg?raw')
+    svg: async () => (await import('./icons/expression.svg?raw')).default
   },
   'eye-hidden': {
-    svg: () => import('./icons/eye-hidden.svg?raw')
+    svg: async () => (await import('./icons/eye-hidden.svg?raw')).default
   },
   'eye': {
-    svg: () => import('./icons/eye.svg?raw')
+    svg: async () => (await import('./icons/eye.svg?raw')).default
   },
-  'failed-badge': {
-    svg: () => import('./icons/failed-badge.svg?raw')
+  'face-frown': {
+    svg: async () => (await import('./icons/face-frown.svg?raw')).default
   },
-  'failed': {
-    svg: () => import('./icons/failed.svg?raw')
+  'face-smile': {
+    svg: async () => (await import('./icons/face-smile.svg?raw')).default
+  },
+  'fast-forward-10': {
+    svg: async () => (await import('./icons/fast-forward-10.svg?raw')).default
   },
   'fast-forward': {
-    svg: () => import('./icons/fast-forward.svg?raw')
+    svg: async () => (await import('./icons/fast-forward.svg?raw')).default
   },
-  'favorite-filled': {
-    svg: () => import('./icons/favorite-filled.svg?raw')
+  'film': {
+    svg: async () => (await import('./icons/film.svg?raw')).default
   },
-  'favorite-outline': {
-    svg: () => import('./icons/favorite-outline.svg?raw')
-  },
-  'feedback': {
-    svg: () => import('./icons/feedback.svg?raw')
-  },
-  'filter-outline': {
-    svg: () => import('./icons/filter-outline.svg?raw')
+  'filter-stroke': {
+    svg: async () => (await import('./icons/filter-stroke.svg?raw')).default
   },
   'filter': {
-    svg: () => import('./icons/filter.svg?raw')
+    svg: async () => (await import('./icons/filter.svg?raw')).default
   },
-  'flagged': {
-    svg: () => import('./icons/flagged.svg?raw')
+  'flag-stroke': {
+    svg: async () => (await import('./icons/flag-stroke.svg?raw')).default
   },
-  'free-text': {
-    svg: () => import('./icons/free-text.svg?raw')
+  'flag': {
+    svg: async () => (await import('./icons/flag.svg?raw')).default
+  },
+  'fold': {
+    svg: async () => (await import('./icons/fold.svg?raw')).default
+  },
+  'folder': {
+    svg: async () => (await import('./icons/folder.svg?raw')).default
+  },
+  'fork': {
+    svg: async () => (await import('./icons/fork.svg?raw')).default
+  },
+  'gear': {
+    svg: async () => (await import('./icons/gear.svg?raw')).default
+  },
+  'globe-alt-stroke': {
+    svg: async () => (await import('./icons/globe-alt-stroke.svg?raw')).default
   },
   'globe': {
-    svg: () => import('./icons/globe.svg?raw')
+    svg: async () => (await import('./icons/globe.svg?raw')).default
   },
   'group-boxes': {
-    svg: () => import('./icons/group-boxes.svg?raw')
+    svg: async () => (await import('./icons/group-boxes.svg?raw')).default
   },
-  'help': {
-    svg: () => import('./icons/help.svg?raw')
+  'group': {
+    svg: async () => (await import('./icons/group.svg?raw')).default
   },
-  'hidden': {
-    svg: () => import('./icons/hidden.svg?raw')
+  'hand': {
+    svg: async () => (await import('./icons/hand.svg?raw')).default
+  },
+  'heading': {
+    svg: async () => (await import('./icons/heading.svg?raw')).default
   },
   'home': {
-    svg: () => import('./icons/home.svg?raw')
+    svg: async () => (await import('./icons/home.svg?raw')).default
   },
-  'important-badge': {
-    svg: () => import('./icons/important-badge.svg?raw')
+  'horizontal-rule': {
+    svg: async () => (await import('./icons/horizontal-rule.svg?raw')).default
   },
-  'inbox-1': {
-    svg: () => import('./icons/inbox-1.svg?raw')
+  'hourglass-end': {
+    svg: async () => (await import('./icons/hourglass-end.svg?raw')).default
+  },
+  'hourglass-mid': {
+    svg: async () => (await import('./icons/hourglass-mid.svg?raw')).default
+  },
+  'hourglass-start': {
+    svg: async () => (await import('./icons/hourglass-start.svg?raw')).default
+  },
+  'hourglass': {
+    svg: async () => (await import('./icons/hourglass.svg?raw')).default
+  },
+  'identification': {
+    svg: async () => (await import('./icons/identification.svg?raw')).default
+  },
+  'image': {
+    svg: async () => (await import('./icons/image.svg?raw')).default
   },
   'inbox': {
-    svg: () => import('./icons/inbox.svg?raw')
+    svg: async () => (await import('./icons/inbox.svg?raw')).default
   },
-  'information': {
-    svg: () => import('./icons/information.svg?raw')
+  'infinity': {
+    svg: async () => (await import('./icons/infinity.svg?raw')).default
   },
-  'insights': {
-    svg: () => import('./icons/insights.svg?raw')
+  'information-circle-stroke': {
+    svg: async () => (await import('./icons/information-circle-stroke.svg?raw')).default
   },
-  'interaction': {
-    svg: () => import('./icons/interaction.svg?raw')
+  'italic': {
+    svg: async () => (await import('./icons/italic.svg?raw')).default
   },
   'key': {
-    svg: () => import('./icons/key.svg?raw')
+    svg: async () => (await import('./icons/key.svg?raw')).default
+  },
+  'laptop-phone': {
+    svg: async () => (await import('./icons/laptop-phone.svg?raw')).default
   },
   'layers': {
-    svg: () => import('./icons/layers.svg?raw')
+    svg: async () => (await import('./icons/layers.svg?raw')).default
   },
-  'light-mode': {
-    svg: () => import('./icons/light-mode.svg?raw')
+  'lifebuoy': {
+    svg: async () => (await import('./icons/lifebuoy.svg?raw')).default
   },
   'lightbulb': {
-    svg: () => import('./icons/lightbulb.svg?raw')
+    svg: async () => (await import('./icons/lightbulb.svg?raw')).default
+  },
+  'lightning-bolt': {
+    svg: async () => (await import('./icons/lightning-bolt.svg?raw')).default
   },
   'link': {
-    svg: () => import('./icons/link.svg?raw')
-  },
-  'location': {
-    svg: () => import('./icons/location.svg?raw')
+    svg: async () => (await import('./icons/link.svg?raw')).default
   },
   'lock': {
-    svg: () => import('./icons/lock.svg?raw')
+    svg: async () => (await import('./icons/lock.svg?raw')).default
+  },
+  'login': {
+    svg: async () => (await import('./icons/login.svg?raw')).default
   },
   'logout': {
-    svg: () => import('./icons/logout.svg?raw')
+    svg: async () => (await import('./icons/logout.svg?raw')).default
   },
   'looping-off': {
-    svg: () => import('./icons/looping-off.svg?raw')
+    svg: async () => (await import('./icons/looping-off.svg?raw')).default
   },
   'looping': {
-    svg: () => import('./icons/looping.svg?raw')
-  },
-  'mail': {
-    svg: () => import('./icons/mail.svg?raw')
-  },
-  'maintenance': {
-    svg: () => import('./icons/maintenance.svg?raw')
+    svg: async () => (await import('./icons/looping.svg?raw')).default
   },
   'map-drives': {
-    svg: () => import('./icons/map-drives.svg?raw')
+    svg: async () => (await import('./icons/map-drives.svg?raw')).default
+  },
+  'map-pin': {
+    svg: async () => (await import('./icons/map-pin.svg?raw')).default
+  },
+  'map': {
+    svg: async () => (await import('./icons/map.svg?raw')).default
+  },
+  'markdown': {
+    svg: async () => (await import('./icons/markdown.svg?raw')).default
+  },
+  'maximize': {
+    svg: async () => (await import('./icons/maximize.svg?raw')).default
+  },
+  'megaphone': {
+    svg: async () => (await import('./icons/megaphone.svg?raw')).default
   },
   'menu': {
-    svg: () => import('./icons/menu.svg?raw')
+    svg: async () => (await import('./icons/menu.svg?raw')).default
+  },
+  'merge': {
+    svg: async () => (await import('./icons/merge.svg?raw')).default
+  },
+  'meter': {
+    svg: async () => (await import('./icons/meter.svg?raw')).default
   },
   'minimize': {
-    svg: () => import('./icons/minimize.svg?raw')
+    svg: async () => (await import('./icons/minimize.svg?raw')).default
   },
-  'minus-badge': {
-    svg: () => import('./icons/minus-badge.svg?raw')
+  'minus-circle': {
+    svg: async () => (await import('./icons/minus-circle.svg?raw')).default
   },
   'minus': {
-    svg: () => import('./icons/minus.svg?raw')
+    svg: async () => (await import('./icons/minus.svg?raw')).default
   },
-  'navigate-back': {
-    svg: () => import('./icons/navigate-back.svg?raw')
+  'moon': {
+    svg: async () => (await import('./icons/moon.svg?raw')).default
   },
-  'navigate-to': {
-    svg: () => import('./icons/navigate-to.svg?raw')
+  'more-actions': {
+    svg: async () => (await import('./icons/more-actions.svg?raw')).default
+  },
+  'music-note': {
+    svg: async () => (await import('./icons/music-note.svg?raw')).default
+  },
+  'newspaper': {
+    svg: async () => (await import('./icons/newspaper.svg?raw')).default
   },
   'not-allowed': {
-    svg: () => import('./icons/not-allowed.svg?raw')
+    svg: async () => (await import('./icons/not-allowed.svg?raw')).default
   },
-  'notification': {
-    svg: () => import('./icons/notification.svg?raw')
+  'numbers': {
+    svg: async () => (await import('./icons/numbers.svg?raw')).default
   },
-  'notifications': {
-    svg: () => import('./icons/notifications.svg?raw')
+  'office-building': {
+    svg: async () => (await import('./icons/office-building.svg?raw')).default
   },
-  'obstacle': {
-    svg: () => import('./icons/obstacle.svg?raw')
+  'paper-airplane': {
+    svg: async () => (await import('./icons/paper-airplane.svg?raw')).default
   },
-  'open-external-link': {
-    svg: () => import('./icons/open-external-link.svg?raw')
+  'paper-clip': {
+    svg: async () => (await import('./icons/paper-clip.svg?raw')).default
   },
-  'organization': {
-    svg: () => import('./icons/organization.svg?raw')
+  'pause': {
+    svg: async () => (await import('./icons/pause.svg?raw')).default
   },
-  'pan': {
-    svg: () => import('./icons/pan.svg?raw')
+  'pencil-square': {
+    svg: async () => (await import('./icons/pencil-square.svg?raw')).default
   },
-  'passed-or-success': {
-    svg: () => import('./icons/passed-or-success.svg?raw')
+  'person-2': {
+    svg: async () => (await import('./icons/person-2.svg?raw')).default
+  },
+  'person-3': {
+    svg: async () => (await import('./icons/person-3.svg?raw')).default
+  },
+  'person-circle': {
+    svg: async () => (await import('./icons/person-circle.svg?raw')).default
+  },
+  'person': {
+    svg: async () => (await import('./icons/person.svg?raw')).default
+  },
+  'phone': {
+    svg: async () => (await import('./icons/phone.svg?raw')).default
   },
   'picture-in-picture': {
-    svg: () => import('./icons/picture-in-picture.svg?raw')
+    svg: async () => (await import('./icons/picture-in-picture.svg?raw')).default
   },
   'pie-chart': {
-    svg: () => import('./icons/pie-chart.svg?raw')
+    svg: async () => (await import('./icons/pie-chart.svg?raw')).default
   },
-  'pinned-1': {
-    svg: () => import('./icons/pinned-1.svg?raw')
+  'pin': {
+    svg: async () => (await import('./icons/pin.svg?raw')).default
   },
-  'pinned': {
-    svg: () => import('./icons/pinned.svg?raw')
+  'pizza-slice': {
+    svg: async () => (await import('./icons/pizza-slice.svg?raw')).default
   },
   'placeholder': {
-    svg: () => import('./icons/placeholder.svg?raw')
+    svg: async () => (await import('./icons/placeholder.svg?raw')).default
   },
-  'plugin-store': {
-    svg: () => import('./icons/plugin-store.svg?raw')
+  'play': {
+    svg: async () => (await import('./icons/play.svg?raw')).default
   },
-  'plugins': {
-    svg: () => import('./icons/plugins.svg?raw')
+  'plug': {
+    svg: async () => (await import('./icons/plug.svg?raw')).default
   },
-  'plus-badge': {
-    svg: () => import('./icons/plus-badge.svg?raw')
+  'plus-circle': {
+    svg: async () => (await import('./icons/plus-circle.svg?raw')).default
   },
-  'plus': {
-    svg: () => import('./icons/plus.svg?raw')
+  'plus-minus': {
+    svg: async () => (await import('./icons/plus-minus.svg?raw')).default
   },
   'priority-high': {
-    svg: () => import('./icons/priority-high.svg?raw')
+    svg: async () => (await import('./icons/priority-high.svg?raw')).default
   },
   'priority-low': {
-    svg: () => import('./icons/priority-low.svg?raw')
+    svg: async () => (await import('./icons/priority-low.svg?raw')).default
   },
   'priority-medium': {
-    svg: () => import('./icons/priority-medium.svg?raw')
+    svg: async () => (await import('./icons/priority-medium.svg?raw')).default
   },
-  'project': {
-    svg: () => import('./icons/project.svg?raw')
+  'projector': {
+    svg: async () => (await import('./icons/projector.svg?raw')).default
   },
-  'refresh-1': {
-    svg: () => import('./icons/refresh-1.svg?raw')
+  'pull-close': {
+    svg: async () => (await import('./icons/pull-close.svg?raw')).default
+  },
+  'pull-draft': {
+    svg: async () => (await import('./icons/pull-draft.svg?raw')).default
+  },
+  'pull-open': {
+    svg: async () => (await import('./icons/pull-open.svg?raw')).default
+  },
+  'pulse': {
+    svg: async () => (await import('./icons/pulse.svg?raw')).default
+  },
+  'puzzle-piece': {
+    svg: async () => (await import('./icons/puzzle-piece.svg?raw')).default
+  },
+  'question-mark-circle-stroke': {
+    svg: async () => (await import('./icons/question-mark-circle-stroke.svg?raw')).default
+  },
+  'question-mark-circle': {
+    svg: async () => (await import('./icons/question-mark-circle.svg?raw')).default
+  },
+  'rectangle-group': {
+    svg: async () => (await import('./icons/rectangle-group.svg?raw')).default
+  },
+  'rectangle-stack-horizontal': {
+    svg: async () => (await import('./icons/rectangle-stack-horizontal.svg?raw')).default
+  },
+  'rectangle-stack-vertical': {
+    svg: async () => (await import('./icons/rectangle-stack-vertical.svg?raw')).default
+  },
+  'redo': {
+    svg: async () => (await import('./icons/redo.svg?raw')).default
   },
   'refresh': {
-    svg: () => import('./icons/refresh.svg?raw')
-  },
-  'remove-asset': {
-    svg: () => import('./icons/remove-asset.svg?raw')
+    svg: async () => (await import('./icons/refresh.svg?raw')).default
   },
   'reply': {
-    svg: () => import('./icons/reply.svg?raw')
+    svg: async () => (await import('./icons/reply.svg?raw')).default
   },
-  'reset': {
-    svg: () => import('./icons/reset.svg?raw')
-  },
-  'retry': {
-    svg: () => import('./icons/retry.svg?raw')
+  'rewind-10': {
+    svg: async () => (await import('./icons/rewind-10.svg?raw')).default
   },
   'rewind': {
-    svg: () => import('./icons/rewind.svg?raw')
+    svg: async () => (await import('./icons/rewind.svg?raw')).default
   },
-  'schedule': {
-    svg: () => import('./icons/schedule.svg?raw')
+  'rocketship': {
+    svg: async () => (await import('./icons/rocketship.svg?raw')).default
+  },
+  'scale': {
+    svg: async () => (await import('./icons/scale.svg?raw')).default
+  },
+  'scissors': {
+    svg: async () => (await import('./icons/scissors.svg?raw')).default
   },
   'search': {
-    svg: () => import('./icons/search.svg?raw')
+    svg: async () => (await import('./icons/search.svg?raw')).default
   },
   'sensor': {
-    svg: () => import('./icons/sensor.svg?raw')
+    svg: async () => (await import('./icons/sensor.svg?raw')).default
+  },
+  'server-stack': {
+    svg: async () => (await import('./icons/server-stack.svg?raw')).default
   },
   'server': {
-    svg: () => import('./icons/server.svg?raw')
-  },
-  'set-prioritiy': {
-    svg: () => import('./icons/set-prioritiy.svg?raw')
-  },
-  'settings': {
-    svg: () => import('./icons/settings.svg?raw')
+    svg: async () => (await import('./icons/server.svg?raw')).default
   },
   'shapes': {
-    svg: () => import('./icons/shapes.svg?raw')
+    svg: async () => (await import('./icons/shapes.svg?raw')).default
   },
   'share': {
-    svg: () => import('./icons/share.svg?raw')
+    svg: async () => (await import('./icons/share.svg?raw')).default
   },
-  'shortcut': {
-    svg: () => import('./icons/shortcut.svg?raw')
+  'signal-slash': {
+    svg: async () => (await import('./icons/signal-slash.svg?raw')).default
+  },
+  'signal': {
+    svg: async () => (await import('./icons/signal.svg?raw')).default
+  },
+  'signpost': {
+    svg: async () => (await import('./icons/signpost.svg?raw')).default
   },
   'sort-ascending': {
-    svg: () => import('./icons/sort-ascending.svg?raw')
+    svg: async () => (await import('./icons/sort-ascending.svg?raw')).default
   },
   'sort-descending': {
-    svg: () => import('./icons/sort-descending.svg?raw')
+    svg: async () => (await import('./icons/sort-descending.svg?raw')).default
   },
   'soundwave': {
-    svg: () => import('./icons/soundwave.svg?raw')
+    svg: async () => (await import('./icons/soundwave.svg?raw')).default
+  },
+  'sparkles': {
+    svg: async () => (await import('./icons/sparkles.svg?raw')).default
   },
   'split-horizontal': {
-    svg: () => import('./icons/split-horizontal.svg?raw')
+    svg: async () => (await import('./icons/split-horizontal.svg?raw')).default
   },
   'split-none': {
-    svg: () => import('./icons/split-none.svg?raw')
+    svg: async () => (await import('./icons/split-none.svg?raw')).default
   },
   'split-vertical': {
-    svg: () => import('./icons/split-vertical.svg?raw')
+    svg: async () => (await import('./icons/split-vertical.svg?raw')).default
+  },
+  'star-stroke': {
+    svg: async () => (await import('./icons/star-stroke.svg?raw')).default
+  },
+  'star': {
+    svg: async () => (await import('./icons/star.svg?raw')).default
   },
   'start': {
-    svg: () => import('./icons/start.svg?raw')
+    svg: async () => (await import('./icons/start.svg?raw')).default
   },
   'status-offline': {
-    svg: () => import('./icons/status-offline.svg?raw')
+    svg: async () => (await import('./icons/status-offline.svg?raw')).default
   },
   'status-online': {
-    svg: () => import('./icons/status-online.svg?raw')
+    svg: async () => (await import('./icons/status-online.svg?raw')).default
   },
-  'success-badge': {
-    svg: () => import('./icons/success-badge.svg?raw')
+  'stop-sign': {
+    svg: async () => (await import('./icons/stop-sign.svg?raw')).default
   },
-  'success': {
-    svg: () => import('./icons/success.svg?raw')
+  'strikethrough': {
+    svg: async () => (await import('./icons/strikethrough.svg?raw')).default
   },
-  'support': {
-    svg: () => import('./icons/support.svg?raw')
+  'sun': {
+    svg: async () => (await import('./icons/sun.svg?raw')).default
   },
   'swatch': {
-    svg: () => import('./icons/swatch.svg?raw')
+    svg: async () => (await import('./icons/swatch.svg?raw')).default
   },
-  'switch-horizontal': {
-    svg: () => import('./icons/switch-horizontal.svg?raw')
+  'switch-apps': {
+    svg: async () => (await import('./icons/switch-apps.svg?raw')).default
   },
-  'switch-vertical': {
-    svg: () => import('./icons/switch-vertical.svg?raw')
+  'switch': {
+    svg: async () => (await import('./icons/switch.svg?raw')).default
   },
-  'system-status': {
-    svg: () => import('./icons/system-status.svg?raw')
+  'table': {
+    svg: async () => (await import('./icons/table.svg?raw')).default
   },
   'tag': {
-    svg: () => import('./icons/tag.svg?raw')
+    svg: async () => (await import('./icons/tag.svg?raw')).default
   },
-  'team': {
-    svg: () => import('./icons/team.svg?raw')
+  'telescope': {
+    svg: async () => (await import('./icons/telescope.svg?raw')).default
   },
   'template': {
-    svg: () => import('./icons/template.svg?raw')
+    svg: async () => (await import('./icons/template.svg?raw')).default
   },
   'terminal': {
-    svg: () => import('./icons/terminal.svg?raw')
+    svg: async () => (await import('./icons/terminal.svg?raw')).default
   },
-  'thumbs-down': {
-    svg: () => import('./icons/thumbs-down.svg?raw')
+  'thumb-stroke': {
+    svg: async () => (await import('./icons/thumb-stroke.svg?raw')).default
   },
-  'thumbs-up': {
-    svg: () => import('./icons/thumbs-up.svg?raw')
+  'thumb': {
+    svg: async () => (await import('./icons/thumb.svg?raw')).default
   },
-  'transparency': {
-    svg: () => import('./icons/transparency.svg?raw')
+  'traffic-cone': {
+    svg: async () => (await import('./icons/traffic-cone.svg?raw')).default
+  },
+  'transparent-box': {
+    svg: async () => (await import('./icons/transparent-box.svg?raw')).default
   },
   'trend-down': {
-    svg: () => import('./icons/trend-down.svg?raw')
+    svg: async () => (await import('./icons/trend-down.svg?raw')).default
   },
   'trend-up': {
-    svg: () => import('./icons/trend-up.svg?raw')
+    svg: async () => (await import('./icons/trend-up.svg?raw')).default
+  },
+  'trophy': {
+    svg: async () => (await import('./icons/trophy.svg?raw')).default
   },
   'truck': {
-    svg: () => import('./icons/truck.svg?raw')
+    svg: async () => (await import('./icons/truck.svg?raw')).default
   },
-  'tutorial': {
-    svg: () => import('./icons/tutorial.svg?raw')
+  'typography': {
+    svg: async () => (await import('./icons/typography.svg?raw')).default
+  },
+  'undo': {
+    svg: async () => (await import('./icons/undo.svg?raw')).default
   },
   'unlock': {
-    svg: () => import('./icons/unlock.svg?raw')
+    svg: async () => (await import('./icons/unlock.svg?raw')).default
   },
   'upload': {
-    svg: () => import('./icons/upload.svg?raw')
-  },
-  'user': {
-    svg: () => import('./icons/user.svg?raw')
-  },
-  'users': {
-    svg: () => import('./icons/users.svg?raw')
+    svg: async () => (await import('./icons/upload.svg?raw')).default
   },
   'video-camera': {
-    svg: () => import('./icons/video-camera.svg?raw')
-  },
-  'video-pause': {
-    svg: () => import('./icons/video-pause.svg?raw')
-  },
-  'video-play': {
-    svg: () => import('./icons/video-play.svg?raw')
-  },
-  'video-stop': {
-    svg: () => import('./icons/video-stop.svg?raw')
+    svg: async () => (await import('./icons/video-camera.svg?raw')).default
   },
   'view-as-grid': {
-    svg: () => import('./icons/view-as-grid.svg?raw')
-  },
-  'view-as-list': {
-    svg: () => import('./icons/view-as-list.svg?raw')
-  },
-  'view-as-table-outline': {
-    svg: () => import('./icons/view-as-table-outline.svg?raw')
-  },
-  'visible': {
-    svg: () => import('./icons/visible.svg?raw')
+    svg: async () => (await import('./icons/view-as-grid.svg?raw')).default
   },
   'volume-muted': {
-    svg: () => import('./icons/volume-muted.svg?raw')
+    svg: async () => (await import('./icons/volume-muted.svg?raw')).default
   },
   'volume': {
-    svg: () => import('./icons/volume.svg?raw')
-  },
-  'warning': {
-    svg: () => import('./icons/warning.svg?raw')
+    svg: async () => (await import('./icons/volume.svg?raw')).default
   },
   'wifi': {
-    svg: () => import('./icons/wifi.svg?raw')
+    svg: async () => (await import('./icons/wifi.svg?raw')).default
+  },
+  'wrench': {
+    svg: async () => (await import('./icons/wrench.svg?raw')).default
+  },
+  'x-circle': {
+    svg: async () => (await import('./icons/x-circle.svg?raw')).default
   },
   'zoom-in': {
-    svg: () => import('./icons/zoom-in.svg?raw')
+    svg: async () => (await import('./icons/zoom-in.svg?raw')).default
   },
   'zoom-out': {
-    svg: () => import('./icons/zoom-out.svg?raw')
+    svg: async () => (await import('./icons/zoom-out.svg?raw')).default
   },
 };
 
-export type IconName = 'add-asset' | 'add-user' | 'additional-actions' | 'analytics' | 'annotation' | 'app-switcher' | 'archive' | 'arrow' | 'assist' | 'attached' | 'beaker' | 'beginning' | 'book' | 'bookmark' | 'bounding-box' | 'breadcrumb' | 'camera' | 'cancel' | 'caret' | 'carousel-horizontal' | 'carousel-vertical' | 'category-list' | 'checklist-complete' | 'checklist' | 'checkmark' | 'chevron-down' | 'chevron-left' | 'chevron-right' | 'chevron-up' | 'chop' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-panel' | 'collection' | 'columns' | 'computer' | 'copy' | 'cross-hairs' | 'dark-mode' | 'dashboard' | 'data-generation' | 'data-management' | 'dataset-slice' | 'date' | 'debugging' | 'delete' | 'docs' | 'domains' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'edit' | 'end' | 'expand-all' | 'expand-full-screen' | 'expand-panel' | 'expand' | 'expression' | 'eye-hidden' | 'eye' | 'failed-badge' | 'failed' | 'fast-forward' | 'favorite-filled' | 'favorite-outline' | 'feedback' | 'filter-outline' | 'filter' | 'flagged' | 'free-text' | 'globe' | 'group-boxes' | 'help' | 'hidden' | 'home' | 'important-badge' | 'inbox-1' | 'inbox' | 'information' | 'insights' | 'interaction' | 'key' | 'layers' | 'light-mode' | 'lightbulb' | 'link' | 'location' | 'lock' | 'logout' | 'looping-off' | 'looping' | 'mail' | 'maintenance' | 'map-drives' | 'menu' | 'minimize' | 'minus-badge' | 'minus' | 'navigate-back' | 'navigate-to' | 'not-allowed' | 'notification' | 'notifications' | 'obstacle' | 'open-external-link' | 'organization' | 'pan' | 'passed-or-success' | 'picture-in-picture' | 'pie-chart' | 'pinned-1' | 'pinned' | 'placeholder' | 'plugin-store' | 'plugins' | 'plus-badge' | 'plus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'project' | 'refresh-1' | 'refresh' | 'remove-asset' | 'reply' | 'reset' | 'retry' | 'rewind' | 'schedule' | 'search' | 'sensor' | 'server' | 'set-prioritiy' | 'settings' | 'shapes' | 'share' | 'shortcut' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'start' | 'status-offline' | 'status-online' | 'success-badge' | 'success' | 'support' | 'swatch' | 'switch-horizontal' | 'switch-vertical' | 'system-status' | 'tag' | 'team' | 'template' | 'terminal' | 'thumbs-down' | 'thumbs-up' | 'transparency' | 'trend-down' | 'trend-up' | 'truck' | 'tutorial' | 'unlock' | 'upload' | 'user' | 'users' | 'video-camera' | 'video-pause' | 'video-play' | 'video-stop' | 'view-as-grid' | 'view-as-list' | 'view-as-table-outline' | 'visible' | 'volume-muted' | 'volume' | 'warning' | 'wifi' | 'zoom-in' | 'zoom-out';
+export type IconName = 'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'start' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out';
 
 /** @deprecated */
 export type IconNames = IconName;

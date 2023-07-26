@@ -48,8 +48,6 @@
     "./index.js": "./dist/index.js",
     "./index.css": "./dist/index.css",
     "./inter.css": "./dist/inter.css",
-    "./internal": "./dist/internal/index.js",
-    "./internal/index.js": "./dist/internal/index.js",
     "./test": "./dist/test/index.js",
     "./test/index.js": "./dist/test/index.js",
     "./polyfills": "./dist/polyfills/index.js",
