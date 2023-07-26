@@ -98,7 +98,7 @@ export const RadioGroup = {
     </nve-radio>
   </nve-radio-group>
 </nve-dropdown>
-<nve-button id="btn" nve-control>completed <nve-icon name="chevron-down"></nve-icon></nve-button>
+<nve-button id="btn" nve-control>completed <nve-icon name="chevron" direction="down" size="sm"></nve-icon></nve-button>
   `
 };
 
@@ -115,7 +115,7 @@ class RadioGroupInteractiveDemo extends LitElement {
 
   render() {
     return html`
-<nve-button id="btn" style="width: 130px" nve-control>${this.selected.label} <nve-icon name="chevron-down"></nve-icon></nve-button>
+<nve-button id="btn" nve-control>${this.selected.label} <nve-icon name="chevron" direction="down" size="sm"></nve-icon></nve-button>
 <nve-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
   <nve-radio-group style="width: 250px">
     <label>Sort By</label>
@@ -154,7 +154,7 @@ export const CheckboxGroup = {
     </nve-checkbox>
   </nve-checkbox-group>
 </nve-dropdown>
-<nve-button id="btn" nve-control>test suites <nve-icon name="chevron-down"></nve-icon></nve-button>
+<nve-button id="btn" nve-control>test suites <nve-icon name="chevron" direction="down" size="sm"></nve-icon></nve-button>
   `
 };
 
@@ -171,7 +171,7 @@ class CheckboxGroupInteractiveDemo extends LitElement {
 
   render() {
     return html`
-<nve-button id="btn" style="width: 130px" nve-control>test suites <nve-icon name="chevron-down"></nve-icon></nve-button>
+<nve-button id="btn" nve-control>test suites <nve-icon name="chevron" direction="down" size="sm"></nve-icon></nve-button>
 <nve-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
   <nve-checkbox-group style="width: 250px">
     <label>Sort By</label>

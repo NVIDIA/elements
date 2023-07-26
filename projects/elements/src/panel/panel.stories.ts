@@ -69,45 +69,45 @@ export const Default = {
 
               ${when(
                 args.showActionIcon,
-                () => html`<nve-icon-button interaction="flat" slot="action-icon" icon-name="additional-actions" @click=${() => customActionHandler()}></nve-icon-button>`
+                () => html`<nve-icon-button interaction="flat" slot="action-icon" icon-name="more-actions" @click=${() => customActionHandler()}></nve-icon-button>`
               )}
             </nve-panel-header>
             `
           )}
 
-          <nve-panel-content nve-layout="column gap:xl">
+          <nve-panel-content nve-layout="column gap:md">
             <div nve-layout="column gap:xs">
-              <label nve-text="body sm default muted">Release</label>
-              <p nve-text="eyebrow sm">RainbowBridge/08-18-2021AM/A2A</p>
+              <label nve-text="body sm medium muted">Release</label>
+              <p nve-text="label semibold sm">RainbowBridge/08-18-2021AM/A2A</p>
             </div>
 
             <div nve-layout="column gap:xs">
-              <label nve-text="body sm default muted">Date</label>
-              <p nve-text="eyebrow sm">2021-08-18</p>
+              <label nve-text="body sm medium muted">Date</label>
+              <p nve-text="label semibold sm">2021-08-18</p>
             </div>
 
             <div nve-layout="column gap:xs">
-              <label nve-text="body sm default muted">State</label>
-              <nve-button nve-control>Indexed</nve-button>
+              <label nve-text="body sm medium muted">State</label>
+              <nve-badge status="finished">Indexed</nve-badge>
             </div>
 
             <div nve-layout="column gap:xs">
-              <label nve-text="body sm default muted">Driver</label>
-              <p nve-text="eyebrow sm">Kenjiro Ono</p>
+              <label nve-text="body sm medium muted">Driver</label>
+              <p nve-text="label semibold sm">Kenjiro Ono</p>
             </div>
 
             <div nve-layout="column gap:xs">
-              <label nve-text="body sm default muted">Copilot</label>
-              <p nve-text="eyebrow sm">Kenichi Yoshii</p>
+              <label nve-text="body sm medium muted">Copilot</label>
+              <p nve-text="label semibold sm">Kenichi Yoshii</p>
             </div>
 
             <div nve-layout="column gap:xs">
-              <label nve-text="body sm default muted">GVS</label>
+              <label nve-text="body sm medium muted">GVS</label>
               <a href="#" nve-text="link body sm">http://testbot/testbot/view/content...</a>
             </div>
 
             <div nve-layout="column gap:xs">
-              <label nve-text="body sm default muted">Session ID</label>
+              <label nve-text="body sm medium muted">Session ID</label>
               <a href="#" nve-text="link body sm">Experiment 12345</a>
             </div>
           </nve-panel-content>

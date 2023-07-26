@@ -36,7 +36,7 @@ export const layersDemo = {
           </nve-input>
         </nve-card-content>
         <nve-card-footer>
-          <nve-button>button <nve-icon name="navigate-to"></nve-icon></nve-button>
+          <nve-button>button <nve-icon name="arrow" direction="right"></nve-icon></nve-button>
         </nve-card-footer>
       </nve-card>
       <div nve-layout="column gap:md">
@@ -45,7 +45,7 @@ export const layersDemo = {
           <input type="text" value="input" />
           <nve-control-message>message</nve-control-message>
         </nve-input>
-        <nve-button>button <nve-icon name="navigate-to"></nve-icon></nve-button>
+        <nve-button>button <nve-icon name="arrow" direction="right"></nve-icon></nve-button>
       </div>
       <nve-dialog size="sm" closable position="top" alignment="end">
         <h3 nve-text="heading">Dialog</h3>
@@ -55,7 +55,7 @@ export const layersDemo = {
           <nve-tooltip anchor="tooltip-btn" position="top">tooltip</nve-tooltip>
           <nve-search rounded>
             <label>dropdown content</label>
-            <nve-icon-button id="tooltip-btn" icon-name="information" interaction="flat" aria-label="more details" slot="label"></nve-icon-button>
+            <nve-icon-button id="tooltip-btn" icon-name="information-circle-stroke" interaction="flat" aria-label="more details" slot="label"></nve-icon-button>
             <input type="search" placeholder="search" />
           </nve-search>
         </nve-dropdown>
@@ -76,7 +76,7 @@ export const layersDemo = {
           </nve-input>
         </nve-card-content>
         <nve-card-footer>
-          <nve-button>button <nve-icon name="navigate-to"></nve-icon></nve-button>
+          <nve-button>button <nve-icon name="arrow" direction="right"></nve-icon></nve-button>
         </nve-card-footer>
       </nve-card>
       <div nve-layout="column gap:md">
@@ -85,7 +85,7 @@ export const layersDemo = {
           <input type="text" value="input" />
           <nve-control-message>message</nve-control-message>
         </nve-input>
-        <nve-button>button <nve-icon name="navigate-to"></nve-icon></nve-button>
+        <nve-button>button <nve-icon name="arrow" direction="right"></nve-icon></nve-button>
       </div>
       <div id="dark" style="position: absolute; right: 48px; top: 0;"></div>
       <nve-dialog size="sm" closable position="bottom" alignment="end" anchor="dark">
@@ -96,7 +96,7 @@ export const layersDemo = {
           <nve-tooltip anchor="tooltip-btn" position="top">tooltip</nve-tooltip>
           <nve-search rounded>
             <label>dropdown content</label>
-            <nve-icon-button id="tooltip-btn" icon-name="information" interaction="flat" aria-label="more details" slot="label"></nve-icon-button>
+            <nve-icon-button id="tooltip-btn" icon-name="information-circle-stroke" interaction="flat" aria-label="more details" slot="label"></nve-icon-button>
             <input type="search" placeholder="search" />
           </nve-search>
         </nve-dropdown>

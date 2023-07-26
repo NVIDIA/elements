@@ -46,7 +46,7 @@ export const Nested = {
     <nve-tooltip anchor="tooltip-btn" position="top">hello there</nve-tooltip>
     <nve-search rounded>
       <label>search dataset</label>
-      <nve-icon-button id="tooltip-btn" icon-name="information" interaction="flat" aria-label="more details" slot="label"></nve-icon-button>
+      <nve-icon-button id="tooltip-btn" icon-name="information-circle-stroke" interaction="flat" aria-label="more details" slot="label"></nve-icon-button>
       <input type="search" placeholder="search" />
     </nve-search>
   </nve-dropdown>

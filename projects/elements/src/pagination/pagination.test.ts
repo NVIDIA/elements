@@ -44,17 +44,17 @@ describe('nve-pagination', () => {
     element.skippable = true;
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector<HTMLSelectElement>('select').ariaLabel).toBe('current page');
-    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-left"]').ariaLabel).toBe('previous');
-    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-right"]').ariaLabel).toBe('next');
-    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="start"]').ariaLabel).toBe('start');
-    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="end"]').ariaLabel).toBe('end');
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="left"]').ariaLabel).toBe('previous');
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="right"]').ariaLabel).toBe('next');
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="left"]').ariaLabel).toBe('start');
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="right"]').ariaLabel).toBe('end');
   });
 
   it('should disable previous and start buttons if at start of pages', async () => {
     element.skippable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-left"]').disabled).toBe(true);
-    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="start"]').disabled).toBe(true);
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="left"]').disabled).toBe(true);
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="left"]').disabled).toBe(true);
   });
 
   it('should disable next and end buttons if at end of pages', async () => {
@@ -62,20 +62,20 @@ describe('nve-pagination', () => {
     element.value = 10;
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('90-100');
-    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-right"]').disabled).toBe(true);
-    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="end"]').disabled).toBe(true);
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="right"]').disabled).toBe(true);
+    expect(element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="right"]').disabled).toBe(true);
   });
 
   it('should emit the next page when clicking the next and previous button', async () => {
     await elementIsStable(element);
     const nextEvent = untilEvent(element, 'change');
-    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-right"]'));
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="right"]'));
     await nextEvent;
     expect(element.value).toBe(2);
 
     await elementIsStable(element);
     const previousEvent = untilEvent(element, 'change');
-    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-left"]'));
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="left"]'));
     await previousEvent;
     expect(element.value).toBe(1);
   });
@@ -84,7 +84,7 @@ describe('nve-pagination', () => {
     element.skippable = true;
     await elementIsStable(element);
     const startEvent = untilEvent(element, 'change');
-    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="end"]'));
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="right"]'));
     await startEvent;
     expect(element.step).toBe(10);
     expect(element.value).toBe(10);
@@ -92,7 +92,7 @@ describe('nve-pagination', () => {
 
     await elementIsStable(element);
     const previousEvent = untilEvent(element, 'change');
-    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="start"]'));
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="left"]'));
     await previousEvent;
     expect(element.value).toBe(1);
   });
@@ -104,7 +104,7 @@ describe('nve-pagination', () => {
     expect(Object.fromEntries(new FormData(form)).page).toBe('1');
 
     const nextEvent = untilEvent(element, 'change');
-    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron-right"]'));
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="right"]'));
     await nextEvent;
     expect(element.value).toBe(2);
     expect(Object.fromEntries(new FormData(form)).page).toBe('2');

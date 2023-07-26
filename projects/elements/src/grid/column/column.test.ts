@@ -155,7 +155,7 @@ describe('nve-grid-column actions', () => {
       <nve-grid>
         <nve-grid-header>
           <nve-grid-column>column 1 <nve-icon-button slot="actions"></nve-icon-button></nve-grid-column>
-          <nve-grid-column>column 2 <nve-icon-button icon-name="user" slot="actions"></nve-icon-button></nve-grid-column>
+          <nve-grid-column>column 2 <nve-icon-button icon-name="person" slot="actions"></nve-icon-button></nve-grid-column>
           <nve-grid-column>column 3</nve-grid-column>
           <nve-grid-column>column 4</nve-grid-column>
         </nve-grid-header>

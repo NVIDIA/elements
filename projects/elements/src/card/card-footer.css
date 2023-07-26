@@ -1,6 +1,7 @@
 :host {
   --padding: var(--nve-ref-size-500);
   --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
+  contain: none;
 }
 
 footer[internal-host] {

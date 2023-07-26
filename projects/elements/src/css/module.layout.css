@@ -3,6 +3,9 @@
 }
 
 [nve-layout] {
+  outline: var(--nve-debug-layout-outline, initial);
+  outline-offset: 1px;
+
   &[nve-layout~='row'],
   &[nve-layout~='column'] {
     display: flex;

@@ -46,8 +46,6 @@
 
 nve-icon {
   --color: inherit;
-  --width: var(--nve-ref-size-200);
-  --height: var(--nve-ref-size-200);
   cursor: var(--cursor);
 }
 

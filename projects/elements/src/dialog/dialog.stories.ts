@@ -29,7 +29,7 @@ export const Default = {
   inline: false,
   render: (args: ArgTypes) => html`
     <nve-dialog ${spread(args)} closable>
-      <h3 nve-text="heading">Title</h3>
+      <h3 nve-text="heading semibold sm">Title</h3>
       <p nve-text="body">some text content in a closable dialog</p>
     </nve-dialog>
   `,
@@ -58,7 +58,7 @@ export const Content = {
   render: () => html`
 <nve-dialog closable>
   <nve-dialog-header>
-    <h3 nve-text="heading">title</h3>
+    <h3 nve-text="heading semibold">title</h3>
   </nve-dialog-header>
   <p nve-text="body">some text content in a closable dialog</p>
   <nve-dialog-footer>
