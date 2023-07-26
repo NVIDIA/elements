@@ -126,8 +126,6 @@ export class PanelHeader extends LitElement {
 
 @stateExpanded<Panel>()
 export class Panel extends LitElement {
-  declare _internals: ElementInternals;
-
   static styles = useStyles([panelStyleSheet]);
 
   static readonly metadata = {
@@ -139,6 +137,8 @@ export class Panel extends LitElement {
     'nve-icon-button': IconButton
   };
 
+  /** @private */
+  declare _internals: ElementInternals;
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
   #typeExpandableController = new TypeExpandableController(this);
