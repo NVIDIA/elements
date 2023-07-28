@@ -33,9 +33,14 @@ export const parameters = {
     transformSource: (src, context) => {
       const excludes = context.id.includes('foundations-tokens-examples--');
       // remove nve-theme="root" from demo source snippets when not used for theming
-      const hasRoot = i => i.match(/nve-theme="root"/g)?.length > 1;
-      const lines = src.trim().split('\n').filter(i => !hasRoot(i));
-      const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('nve-theme="root ', 'nve-theme="').split('<nve-button class="playground-btn">')[0];
+      let source = src
+        .trim()
+        .replace(/<nve-button class="playground-btn">.*<\/nve-button>/g, '')
+        .replaceAll(' nve-theme="root ', ' nve-theme="')
+        .replaceAll(' nve-theme="root"', '');
+
+      const lines = source.split('\n').filter(i => i.length ? i.trim().length : false);
+      source = lines[0]?.trim() === '<div>' ? lines.slice(1, -1).join('\n') : source;
       return excludes ? source : prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 }).replaceAll('=""', '');
     }
   },

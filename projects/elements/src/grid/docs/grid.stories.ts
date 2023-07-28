@@ -92,7 +92,7 @@ export const MultiSelectBulkActions = {
         ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
       </nve-grid-row>
     `)}
-    <nve-bulk-actions closable status="accent">
+    <nve-bulk-actions closable status="accent" slot="footer">
       1 selected
       <nve-button interaction="flat-destructive">delete</nve-button>
       <nve-icon-button interaction="flat" icon-name="additional-actions"></nve-icon-button>
@@ -265,6 +265,23 @@ export const ColumnWidth = {
       </nve-grid-row>
     `)}
     <nve-grid-footer>footer content</nve-grid-footer>
+  </nve-grid>
+</div>
+  `
+};
+
+export const Content = {
+  render: () => html`
+<div nve-theme="root">
+  <nve-grid>
+    <nve-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    </nve-grid-header>
+    ${getItems(10).map((row, ir) => html`
+      <nve-grid-row>
+        ${Object.entries(row).map(([, cell], ic) => html`<nve-grid-cell>${ir === 3 && ic === 2 ? `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores` : cell.value}</nve-grid-cell> `)}
+      </nve-grid-row>
+    `)}
   </nve-grid>
 </div>
   `
@@ -578,7 +595,7 @@ class GridPerformanceDemo extends LitElement {
       ${this.show ? html`
       <nve-grid style="--scroll-height: 400px; max-width: 1024px">
         <nve-grid-header>
-          ${this.grid.columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column>`)}
+          ${this.grid.columns.map(column => html`<nve-grid-column width="1fr">${column.label}</nve-grid-column>`)}
         </nve-grid-header>
         ${this.grid.rows.map(row => html`
         <nve-grid-row>
@@ -921,6 +938,10 @@ export const All = {
     ${ColumnDynamicFixed.render()}
   </div>
   <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Column Width</h2>
+    ${ColumnWidth.render()}
+  </div>
+  <div nve-layout="column gap:md align:stretch">
     <h2 nve-text="heading">Footer</h2>
     ${Footer.render()}
   </div>
@@ -967,6 +988,10 @@ export const All = {
   <div nve-layout="column gap:md align:stretch">
     <h2 nve-text="heading">Flat</h2>
     ${Flat.render()}
+  </div>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Content Width</h2>
+    ${Content.render()}
   </div>
 </div>`
 }
