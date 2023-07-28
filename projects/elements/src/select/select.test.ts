@@ -70,6 +70,28 @@ describe('mlv-select', () => {
     expect(items[2].name).toBe('option-3');
   });
 
+  it('should re-render a custom options when options are dynamically added or removed', async () => {
+    const items = element.shadowRoot.querySelectorAll<HTMLSlotElement>('[name*="option-"]');
+    expect(items.length).toBe(3);
+    expect(items[0].name).toBe('option-1');
+    expect(items[1].name).toBe('option-2');
+    expect(items[2].name).toBe('option-3');
+
+    const option = document.createElement('option');
+    option.value = '4';
+    option.textContent = 'Option 4';
+    select.appendChild(option);
+
+    emulateClick(select);
+    await element.updateComplete;
+    expect(element.shadowRoot.querySelectorAll<HTMLSlotElement>('[name*="option-"]').length).toBe(4);
+
+    option.remove();
+    emulateClick(select);
+    await element.updateComplete;
+    expect(element.shadowRoot.querySelectorAll<HTMLSlotElement>('[name*="option-"]').length).toBe(3);
+  });
+
   it('should show custom dropdown menu when clicked', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
     expect(dropdown.hidden).toBe(true);

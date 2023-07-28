@@ -11,6 +11,7 @@ import globalStyles from './grid.global.css?inline';
 /**
  * @element mlv-grid
  * @slot - default slot for content
+ * @slot footer - slot for mlv-grid-footer or mlv-bulk-actions
  * @cssprop --background
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-grid-documentation--page
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0

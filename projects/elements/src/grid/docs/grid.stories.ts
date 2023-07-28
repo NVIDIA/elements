@@ -92,7 +92,7 @@ export const MultiSelectBulkActions = {
         ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
       </mlv-grid-row>
     `)}
-    <mlv-bulk-actions closable status="accent">
+    <mlv-bulk-actions closable status="accent" slot="footer">
       1 selected
       <mlv-button interaction="flat-destructive">delete</mlv-button>
       <mlv-icon-button interaction="flat" icon-name="additional-actions"></mlv-icon-button>
@@ -265,6 +265,23 @@ export const ColumnWidth = {
       </mlv-grid-row>
     `)}
     <mlv-grid-footer>footer content</mlv-grid-footer>
+  </mlv-grid>
+</div>
+  `
+};
+
+export const Content = {
+  render: () => html`
+<div mlv-theme="root">
+  <mlv-grid>
+    <mlv-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+    </mlv-grid-header>
+    ${getItems(10).map((row, ir) => html`
+      <mlv-grid-row>
+        ${Object.entries(row).map(([, cell], ic) => html`<mlv-grid-cell>${ir === 3 && ic === 2 ? `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores` : cell.value}</mlv-grid-cell> `)}
+      </mlv-grid-row>
+    `)}
   </mlv-grid>
 </div>
   `
@@ -578,7 +595,7 @@ class GridPerformanceDemo extends LitElement {
       ${this.show ? html`
       <mlv-grid style="--scroll-height: 400px; max-width: 1024px">
         <mlv-grid-header>
-          ${this.grid.columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column>`)}
+          ${this.grid.columns.map(column => html`<mlv-grid-column width="1fr">${column.label}</mlv-grid-column>`)}
         </mlv-grid-header>
         ${this.grid.rows.map(row => html`
         <mlv-grid-row>
@@ -921,6 +938,10 @@ export const All = {
     ${ColumnDynamicFixed.render()}
   </div>
   <div mlv-layout="column gap:md align:stretch">
+    <h2 mlv-text="heading">Column Width</h2>
+    ${ColumnWidth.render()}
+  </div>
+  <div mlv-layout="column gap:md align:stretch">
     <h2 mlv-text="heading">Footer</h2>
     ${Footer.render()}
   </div>
@@ -967,6 +988,10 @@ export const All = {
   <div mlv-layout="column gap:md align:stretch">
     <h2 mlv-text="heading">Flat</h2>
     ${Flat.render()}
+  </div>
+  <div mlv-layout="column gap:md align:stretch">
+    <h2 mlv-text="heading">Content Width</h2>
+    ${Content.render()}
   </div>
 </div>`
 }

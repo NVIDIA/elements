@@ -72,25 +72,25 @@ describe('mlv-grid-header', () => {
   it('should create initial CSS layout grid for columns', async () => {
     expect(grid.style.getPropertyValue('--grid-auto-flow')).toBe('initial');
     expect(grid.style.getPropertyValue('--grid-template-column')).toBe('var(--c0) var(--c1) var(--c2) var(--c3)');
-    expect(grid.style.getPropertyValue('--c0')).toBe('1fr');
-    expect(grid.style.getPropertyValue('--c1')).toBe('1fr');
-    expect(grid.style.getPropertyValue('--c2')).toBe('1fr');
-    expect(grid.style.getPropertyValue('--c3')).toBe('1fr');
+    expect(grid.style.getPropertyValue('--c0').includes('minmax(auto, ')).toBe(true);
+    expect(grid.style.getPropertyValue('--c1').includes('minmax(auto, ')).toBe(true);
+    expect(grid.style.getPropertyValue('--c2').includes('minmax(auto, ')).toBe(true);
+    expect(grid.style.getPropertyValue('--c3').includes('minmax(auto, ')).toBe(true);
   });
 
   it('should update grid if column width changes', async () => {
-    expect(grid.style.getPropertyValue('--c0')).toBe('1fr');
-    expect(grid.style.getPropertyValue('--c1')).toBe('1fr');
-    expect(grid.style.getPropertyValue('--c2')).toBe('1fr');
-    expect(grid.style.getPropertyValue('--c3')).toBe('1fr');
+    expect(grid.style.getPropertyValue('--c0').includes('minmax(auto, ')).toBe(true);
+    expect(grid.style.getPropertyValue('--c1').includes('minmax(auto, ')).toBe(true);
+    expect(grid.style.getPropertyValue('--c2').includes('minmax(auto, ')).toBe(true);
+    expect(grid.style.getPropertyValue('--c3').includes('minmax(auto, ')).toBe(true);
 
     columns[0].width = '100px';
     await elementIsStable(columns[0]);
     await elementIsStable(element);
 
     expect(grid.style.getPropertyValue('--c0')).toBe('100px');
-    expect(grid.style.getPropertyValue('--c1')).toBe('1fr');
-    expect(grid.style.getPropertyValue('--c2')).toBe('1fr');
-    expect(grid.style.getPropertyValue('--c3')).toBe('1fr');
+    expect(grid.style.getPropertyValue('--c1').includes('minmax(auto, ')).toBe(true);
+    expect(grid.style.getPropertyValue('--c2').includes('minmax(auto, ')).toBe(true);
+    expect(grid.style.getPropertyValue('--c3').includes('minmax(auto, ')).toBe(true);
   });
 });

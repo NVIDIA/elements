@@ -33,9 +33,14 @@ export const parameters = {
     transformSource: (src, context) => {
       const excludes = context.id.includes('foundations-tokens-examples--');
       // remove mlv-theme="root" from demo source snippets when not used for theming
-      const hasRoot = i => i.match(/mlv-theme="root"/g)?.length > 1;
-      const lines = src.trim().split('\n').filter(i => !hasRoot(i));
-      const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('mlv-theme="root ', 'mlv-theme="').split('<mlv-button class="playground-btn">')[0];
+      let source = src
+        .trim()
+        .replace(/<mlv-button class="playground-btn">.*<\/mlv-button>/g, '')
+        .replaceAll(' mlv-theme="root ', ' mlv-theme="')
+        .replaceAll(' mlv-theme="root"', '');
+
+      const lines = source.split('\n').filter(i => i.length ? i.trim().length : false);
+      source = lines[0]?.trim() === '<div>' ? lines.slice(1, -1).join('\n') : source;
       return excludes ? source : prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 }).replaceAll('=""', '');
     }
   },

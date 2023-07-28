@@ -16,16 +16,20 @@ mlv-grid-column[width='max-content'] {
 }
 
 mlv-grid-cell:has(> mlv-icon-button) {
-  --padding: var(--mlv-ref-size-100);
+  --padding: 0 var(--mlv-ref-size-100);
 }
 
 mlv-grid-cell:has(> mlv-checkbox),
 mlv-grid-cell:has(> mlv-radio) {
-  --padding: var(--mlv-ref-size-300);
+  --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
 }
 
 mlv-grid:has(mlv-bulk-actions:not([hidden]))::part(scrollbox) {
   padding-bottom: var(--mlv-ref-size-1000);
+}
+
+mlv-grid:has(mlv-bulk-actions:not([hidden])) {
+  contain: content;
 }
 
 mlv-grid-column > mlv-sort-button + mlv-icon-button {
