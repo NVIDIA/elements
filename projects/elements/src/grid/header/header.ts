@@ -47,7 +47,7 @@ export class GridHeader extends LitElement {
   async firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
     await this.updateComplete;
-    this.#computeColumnWidths();
+    new ResizeObserver(() => this.#computeColumnWidths()).observe(this);
   }
 
   async #computeColumnWidths() {
@@ -55,6 +55,12 @@ export class GridHeader extends LitElement {
     this.#columns.forEach((c, i) => c.ariaColIndex = `${i + 1}`);
     this.parentElement.style.setProperty('--grid-auto-flow', 'initial');
     this.parentElement.style.setProperty('--grid-template-column', this.#columns.map((_, i) => `var(--c${i})`).join(' '));
-    this.#columns.map((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width: '1fr'));
+
+    // compute initial column width
+    this.#columns.map((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width : `1fr`));
+
+    // compute column width based on content
+    await this.updateComplete;
+    this.#columns.map((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`));
   }
 }
