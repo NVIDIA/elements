@@ -90,6 +90,7 @@ export class Select extends Control {
 
     if (this.#select.size === 0) {
       onListboxActivate(this.#select, () => {
+        this.requestUpdate(); // update menu items
         this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
         this.#dropdown.hidden = false;
         focusElementTimeout(this.#menuItems[0]);
