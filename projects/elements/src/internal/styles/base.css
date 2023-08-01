@@ -9,6 +9,7 @@
   visibility: inherit;
   box-sizing: border-box;
   font-family: inherit;
+  font-size: inherit;
   contain: layout; /* https://developer.mozilla.org/en-US/docs/Web/CSS/contain */
   pointer-events: inherit;
 }
