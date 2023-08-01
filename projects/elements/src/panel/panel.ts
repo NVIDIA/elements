@@ -111,6 +111,8 @@ export class PanelHeader extends LitElement {
 
 /**
  * @element nve-panel
+ * @event open
+ * @event close
  * @slot - This is a default/unnamed slot for panel content
  * @slot header - header element (Use `<nve-panel-header>` or custom content)
  * @slot content - content element (Use `<nve-panel-content>` or custom content)

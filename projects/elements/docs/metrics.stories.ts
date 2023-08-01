@@ -352,7 +352,7 @@ export const Metrics = {
         </nve-grid-header>
         ${metrics.tests.coverage.map(cov => html`
           <nve-grid-row>
-            <nve-grid-cell><p nve-text="truncate">${cov.file}</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="body truncate">${cov.file}</p></nve-grid-cell>
             <nve-grid-cell>${getCoverageStatus(cov.statements.pct)}</nve-grid-cell>
             <nve-grid-cell>${getCoverageStatus(cov.lines.pct)}</nve-grid-cell>
             <nve-grid-cell>${getCoverageStatus(cov.functions.pct)}</nve-grid-cell>

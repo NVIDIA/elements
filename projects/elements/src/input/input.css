@@ -9,6 +9,7 @@
   --cursor: text;
   --font-weight: normal;
   --_icon-height: var(--height);
+  --_font-size: var(--font-size);
   --width: 100%;
   width: var(--width);
 }
@@ -47,6 +48,7 @@ nve-icon-button,
 }
 
 ::slotted(nve-button) {
+  --font-size: var(--_font-size);
   --padding: 0 var(--nve-ref-size-200);
   --color: var(--label-color);
   --height: 100%;
