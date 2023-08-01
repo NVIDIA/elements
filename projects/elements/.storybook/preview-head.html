@@ -22,10 +22,12 @@
   body {
     background: var(--nve-sys-layer-canvas-background, #0b0c0f) !important;
     color: var(--nve-sys-layer-canvas-color) !important;
-    font-family: var(--nve-ref-font-family) !important;
-    font-weight: var(--nve-ref-font-weight-regular) !important;
     box-shadow: none;
     border: 0;
+    /* emulates nve-text="body" */
+    font-family: var(--nve-ref-font-family) !important;
+    font-weight: var(--nve-ref-font-weight-regular) !important;
+    font-size: var(--nve-ref-font-size-200);
   }
 
   .sbdocs nve-alert p {
@@ -105,14 +107,14 @@
   }
 
   .sbdocs-title,
-  .sbdocs h1:not([nve-text]),
-  .sbdocs h2:not([nve-text]),
-  .sbdocs h3:not([nve-text]),
-  .sbdocs h4:not([nve-text]),
-  .sbdocs h5:not([nve-text]),
-  .sbdocs h6:not([nve-text]),
-  .sbdocs p:not([nve-text]),
-  .sbdocs li:not([nve-text]),
+  .sbdocs h1:not([nve-text]):not([slot]),
+  .sbdocs h2:not([nve-text]):not([slot]),
+  .sbdocs h3:not([nve-text]):not([slot]),
+  .sbdocs h4:not([nve-text]):not([slot]),
+  .sbdocs h5:not([nve-text]):not([slot]),
+  .sbdocs h6:not([nve-text]):not([slot]),
+  .sbdocs p:not([nve-text]):not([slot]),
+  .sbdocs li:not([nve-text]):not([slot]),
   .sbdocs-blockquote,
   h2.css-wzniqs + p {
     font-family: var(--nve-ref-font-family) !important;
