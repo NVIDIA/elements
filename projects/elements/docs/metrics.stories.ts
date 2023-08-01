@@ -352,7 +352,7 @@ export const Metrics = {
         </mlv-grid-header>
         ${metrics.tests.coverage.map(cov => html`
           <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="truncate">${cov.file}</p></mlv-grid-cell>
+            <mlv-grid-cell><p mlv-text="body truncate">${cov.file}</p></mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(cov.statements.pct)}</mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(cov.lines.pct)}</mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(cov.functions.pct)}</mlv-grid-cell>

@@ -167,6 +167,19 @@ describe('mlv-select', () => {
     expect(element.matches(':--multiple')).toBe(true);
   });
 
+  it('should hide tags and display label when multiple is used and tags overflow container', async () => {
+    expect(element.matches(':--multiple-overflow')).toBe(false);
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+    element.style.setProperty('--width', '50px');
+
+    element.requestUpdate();
+    await element.updateComplete;
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(element.matches(':--multiple-overflow')).toBe(true);
+  });
+
   it('should set host :--size state when multiple is used', async () => {
     select.size = 2;
     await element.requestUpdate();

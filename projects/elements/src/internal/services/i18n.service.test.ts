@@ -11,6 +11,8 @@ describe('GlobalStateService', () => {
     expect(I18nService.i18n).toStrictEqual({
       close: 'close',
       expand: 'expand',
+      select: 'select',
+      selected: 'selected',
       sort: 'sort',
       show: 'show',
       hide: 'hide',
@@ -29,6 +31,8 @@ describe('GlobalStateService', () => {
     I18nService.update({
       close: 'fermer',
       expand: 'étendre',
+      select: 'choisir',
+      selected: 'choisir',
       sort: 'classer',
       show: 'montrer',
       hide: 'cacher',
@@ -43,6 +47,8 @@ describe('GlobalStateService', () => {
     expect(I18nService.i18n).toStrictEqual({
       close: 'fermer',
       expand: 'étendre',
+      select: 'choisir',
+      selected: 'choisir',
       sort: 'classer',
       show: 'montrer',
       hide: 'cacher',

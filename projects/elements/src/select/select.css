@@ -1,6 +1,6 @@
 :host {
   --padding: 0 var(--mlv-ref-size-200);
-  --font-size: var(--mlv-ref-font-size-200);
+  --font-size: var(--mlv-ref-font-size-100);
   --height: var(--mlv-ref-size-800);
   --background: var(--mlv-sys-interaction-field-background);
   --color: var(--mlv-sys-interaction-field-color);
@@ -56,11 +56,40 @@
 
 :host(:--multiple) {
   --padding: 0 var(--mlv-ref-size-100);
+
+  & [input] {
+    padding: var(--padding);
+  }
+
+  & .tags {
+    width: fit-content;
+    display: flex;
+    gap: var(--mlv-ref-size-100);
+  }
+
+  & .tags-label {
+    padding: 0 var(--mlv-ref-size-200);
+    font-size: var(--font-size);
+    cursor: var(--cursor);
+    font-weight: var(--font-weight);
+    position: absolute;
+    left: 0;
+    display: none;
+    pointer-events: none;
+  }
 }
 
-:host(:--multiple) [input] {
-  padding: var(--padding);
-  gap: var(--mlv-ref-size-100);
+:host(:--multiple-overflow),
+:host([multiple-overflow]) {
+  & .tags {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  & .tags-label {
+    display: block;
+  }
 }
 
 :host(:--multiple) ::slotted(select[multiple]) {

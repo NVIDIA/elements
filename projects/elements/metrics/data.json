@@ -1,15 +1,16 @@
 {
-  "created": "2023-07-26T19:54:17.523Z",
+  "created": "2023-08-01T16:03:32.102Z",
   "versions": [
     "0.10.0",
     "0.11.1",
-    "0.11.2",
+    "0.13.0",
     "0.12.0",
     "0.7.1",
     "0.1.3",
     "0.4.1",
     "0.8.0",
     "0.11.0",
+    "0.11.2",
     "0.6.0"
   ],
   "elements": [
@@ -28,7 +29,7 @@
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
       "instanceTotal": 0,
       "projectTotal": 0,
-      "coverageTotal": 81.08,
+      "coverageTotal": 84.61,
       "behavior": "container",
       "status": "beta"
     },
@@ -47,7 +48,26 @@
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
       "instanceTotal": 0,
       "projectTotal": 0,
-      "coverageTotal": 81.08,
+      "coverageTotal": 84.61,
+      "behavior": "container",
+      "status": "beta"
+    },
+    {
+      "name": "mlv-accordion-group",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": false,
+      "vqa": true,
+      "responsive": true,
+      "themes": true,
+      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/",
+      "package": true,
+      "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs",
+      "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
+      "instanceTotal": 0,
+      "projectTotal": 0,
+      "coverageTotal": 84.61,
       "behavior": "container",
       "status": "beta"
     },
@@ -66,7 +86,7 @@
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
       "instanceTotal": 0,
       "projectTotal": 0,
-      "coverageTotal": 81.08,
+      "coverageTotal": 84.61,
       "behavior": "container",
       "status": "beta"
     },
@@ -158,7 +178,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-badge-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0",
-      "instanceTotal": 6,
+      "instanceTotal": 7,
       "projectTotal": 2,
       "coverageTotal": 100,
       "behavior": "content",
@@ -215,7 +235,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0",
-      "instanceTotal": 63,
+      "instanceTotal": 64,
       "projectTotal": 16,
       "coverageTotal": 100,
       "behavior": "button",
@@ -310,8 +330,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-checkbox-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0",
-      "instanceTotal": 11,
-      "projectTotal": 5,
+      "instanceTotal": 10,
+      "projectTotal": 4,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -595,7 +615,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-grid-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 2,
+      "instanceTotal": 3,
       "projectTotal": 2,
       "coverageTotal": 100,
       "behavior": "list",
@@ -614,7 +634,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 2,
+      "instanceTotal": 3,
       "projectTotal": 2,
       "coverageTotal": 100,
       "behavior": "list",
@@ -633,9 +653,9 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 2,
+      "instanceTotal": 3,
       "projectTotal": 2,
-      "coverageTotal": 90,
+      "coverageTotal": 92,
       "behavior": "list",
       "status": "beta"
     },
@@ -671,7 +691,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 2,
+      "instanceTotal": 3,
       "projectTotal": 2,
       "coverageTotal": 100,
       "behavior": "list",
@@ -690,7 +710,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 1,
+      "instanceTotal": 2,
       "projectTotal": 1,
       "coverageTotal": 100,
       "behavior": "list",
@@ -709,7 +729,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 2,
+      "instanceTotal": 3,
       "projectTotal": 2,
       "coverageTotal": 100,
       "behavior": "list",
@@ -728,7 +748,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
-      "instanceTotal": 46,
+      "instanceTotal": 44,
       "projectTotal": 15,
       "coverageTotal": 96.96,
       "behavior": "content",
@@ -747,7 +767,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
-      "instanceTotal": 26,
+      "instanceTotal": 25,
       "projectTotal": 12,
       "coverageTotal": 100,
       "behavior": "button",
@@ -1110,7 +1130,7 @@
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-24&t=clRGqnKDRGNhR0Yu-0",
       "instanceTotal": 6,
       "projectTotal": 4,
-      "coverageTotal": 100,
+      "coverageTotal": 98.76,
       "behavior": "form",
       "status": "stable"
     },
@@ -1127,8 +1147,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-sort-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=127-8456&t=TYtFvncSeBAKHOMe-0",
-      "instanceTotal": 0,
-      "projectTotal": 0,
+      "instanceTotal": 1,
+      "projectTotal": 1,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -1493,7 +1513,7 @@
     {
       "name": "drivescrubber",
       "path": "src/ui/drivescrubber",
-      "elementsVersion": "0.11.2",
+      "elementsVersion": "0.13.0",
       "elements": [
         {
           "name": "mlv-alert-banner",
@@ -1505,11 +1525,11 @@
         },
         {
           "name": "mlv-badge",
-          "instanceTotal": 5
+          "instanceTotal": 6
         },
         {
           "name": "mlv-button",
-          "instanceTotal": 11
+          "instanceTotal": 12
         },
         {
           "name": "mlv-card",
@@ -1522,14 +1542,6 @@
         {
           "name": "mlv-card-content",
           "instanceTotal": 3
-        },
-        {
-          "name": "mlv-icon-button",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-icon",
-          "instanceTotal": 5
         },
         {
           "name": "mlv-input",
@@ -1560,11 +1572,39 @@
           "instanceTotal": 2
         },
         {
-          "name": "mlv-toast",
+          "name": "mlv-grid-cell",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-placeholder",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-row",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-sort-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox",
+          "name": "mlv-toast",
           "instanceTotal": 1
         },
         {
@@ -1584,6 +1624,10 @@
           "instanceTotal": 1
         },
         {
+          "name": "mlv-icon-button",
+          "instanceTotal": 2
+        },
+        {
           "name": "mlv-tabs-item",
           "instanceTotal": 1
         },
@@ -1592,31 +1636,7 @@
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-cell",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid-column",
-          "instanceTotal": 1
-        },
-        {
           "name": "mlv-grid-footer",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid-header",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid-placeholder",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid-row",
           "instanceTotal": 1
         },
         {
@@ -1628,7 +1648,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 71
+      "instanceTotal": 76
     },
     {
       "name": "app-shell-angular-demo",
@@ -2288,20 +2308,6 @@
       "instanceTotal": 0
     },
     {
-      "name": "@elements/segments-angular",
-      "path": "src/ui/segments/segments-angular",
-      "elementsVersion": "0.10.0",
-      "elements": [],
-      "instanceTotal": 0
-    },
-    {
-      "name": "@elements/segments-lit",
-      "path": "src/ui/segments/segments-lit",
-      "elementsVersion": "0.11.1",
-      "elements": [],
-      "instanceTotal": 0
-    },
-    {
       "name": "tracking",
       "path": "src/ui/tracking/apps/tracking",
       "elementsVersion": "^0.10.0",
@@ -2333,33 +2339,6 @@
   "tests": {
     "coverage": [
       {
-        "file": "elements/src/accordion/accordion.ts",
-        "lines": {
-          "total": 24,
-          "covered": 17,
-          "skipped": 0,
-          "pct": 70.83
-        },
-        "functions": {
-          "total": 8,
-          "covered": 4,
-          "skipped": 0,
-          "pct": 50
-        },
-        "statements": {
-          "total": 37,
-          "covered": 30,
-          "skipped": 0,
-          "pct": 81.08
-        },
-        "branches": {
-          "total": 10,
-          "covered": 4,
-          "skipped": 0,
-          "pct": 40
-        }
-      },
-      {
         "file": "elements/src/internal/controllers/type-popover.controller.ts",
         "lines": {
           "total": 75,
@@ -2387,12 +2366,39 @@
         }
       },
       {
+        "file": "elements/src/accordion/accordion.ts",
+        "lines": {
+          "total": 45,
+          "covered": 36,
+          "skipped": 0,
+          "pct": 80
+        },
+        "functions": {
+          "total": 18,
+          "covered": 12,
+          "skipped": 0,
+          "pct": 66.66
+        },
+        "statements": {
+          "total": 65,
+          "covered": 55,
+          "skipped": 0,
+          "pct": 84.61
+        },
+        "branches": {
+          "total": 14,
+          "covered": 10,
+          "skipped": 0,
+          "pct": 71.42
+        }
+      },
+      {
         "file": "elements/src/grid/column/column.ts",
         "lines": {
           "total": 47,
-          "covered": 42,
+          "covered": 43,
           "skipped": 0,
-          "pct": 89.36
+          "pct": 91.48
         },
         "functions": {
           "total": 9,
@@ -2402,15 +2408,15 @@
         },
         "statements": {
           "total": 50,
-          "covered": 45,
+          "covered": 46,
           "skipped": 0,
-          "pct": 90
+          "pct": 92
         },
         "branches": {
           "total": 32,
-          "covered": 28,
+          "covered": 29,
           "skipped": 0,
-          "pct": 87.5
+          "pct": 90.62
         }
       },
       {
@@ -2681,6 +2687,33 @@
           "covered": 61,
           "skipped": 0,
           "pct": 85.91
+        }
+      },
+      {
+        "file": "elements/src/select/select.ts",
+        "lines": {
+          "total": 57,
+          "covered": 56,
+          "skipped": 0,
+          "pct": 98.24
+        },
+        "functions": {
+          "total": 26,
+          "covered": 26,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 81,
+          "covered": 80,
+          "skipped": 0,
+          "pct": 98.76
+        },
+        "branches": {
+          "total": 20,
+          "covered": 17,
+          "skipped": 0,
+          "pct": 85
         }
       },
       {
@@ -3194,33 +3227,6 @@
           "covered": 0,
           "skipped": 0,
           "pct": 100
-        }
-      },
-      {
-        "file": "elements/src/select/select.ts",
-        "lines": {
-          "total": 34,
-          "covered": 34,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 13,
-          "covered": 13,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 37,
-          "covered": 37,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 16,
-          "covered": 14,
-          "skipped": 0,
-          "pct": 87.5
         }
       },
       {
@@ -4576,26 +4582,26 @@
       {
         "file": "elements/src/grid/header/header.ts",
         "lines": {
-          "total": 17,
-          "covered": 17,
+          "total": 19,
+          "covered": 19,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 8,
-          "covered": 8,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 21,
-          "covered": 21,
+          "total": 25,
+          "covered": 25,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 2,
-          "covered": 2,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         }
@@ -5764,8 +5770,8 @@
       {
         "file": "elements/src/accordion/define.ts",
         "lines": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -5776,8 +5782,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -5792,28 +5798,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1283,
-        "covered": 1251,
+        "total": 1330,
+        "covered": 1296,
         "skipped": 0,
-        "pct": 97.5
+        "pct": 97.44
       },
       "statements": {
-        "total": 1532,
-        "covered": 1489,
+        "total": 1609,
+        "covered": 1563,
         "skipped": 0,
-        "pct": 97.19
+        "pct": 97.14
       },
       "functions": {
-        "total": 408,
-        "covered": 384,
+        "total": 433,
+        "covered": 407,
         "skipped": 0,
-        "pct": 94.11
+        "pct": 93.99
       },
       "branches": {
-        "total": 546,
-        "covered": 499,
+        "total": 556,
+        "covered": 511,
         "skipped": 0,
-        "pct": 91.39
+        "pct": 91.9
       },
       "branchesTrue": {
         "total": 0,

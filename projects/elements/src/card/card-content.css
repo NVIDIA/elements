@@ -3,4 +3,5 @@
   padding: var(--padding);
   color: var(--color);
   flex-grow: 1;
+  contain: initial;
 }

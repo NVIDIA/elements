@@ -22,10 +22,12 @@
   body {
     background: var(--mlv-sys-layer-canvas-background, #0b0c0f) !important;
     color: var(--mlv-sys-layer-canvas-color) !important;
-    font-family: var(--mlv-ref-font-family) !important;
-    font-weight: var(--mlv-ref-font-weight-regular) !important;
     box-shadow: none;
     border: 0;
+    /* emulates mlv-text="body" */
+    font-family: var(--mlv-ref-font-family) !important;
+    font-weight: var(--mlv-ref-font-weight-regular) !important;
+    font-size: var(--mlv-ref-font-size-200);
   }
 
   .sbdocs mlv-alert p {
@@ -105,14 +107,14 @@
   }
 
   .sbdocs-title,
-  .sbdocs h1:not([mlv-text]),
-  .sbdocs h2:not([mlv-text]),
-  .sbdocs h3:not([mlv-text]),
-  .sbdocs h4:not([mlv-text]),
-  .sbdocs h5:not([mlv-text]),
-  .sbdocs h6:not([mlv-text]),
-  .sbdocs p:not([mlv-text]),
-  .sbdocs li:not([mlv-text]),
+  .sbdocs h1:not([mlv-text]):not([slot]),
+  .sbdocs h2:not([mlv-text]):not([slot]),
+  .sbdocs h3:not([mlv-text]):not([slot]),
+  .sbdocs h4:not([mlv-text]):not([slot]),
+  .sbdocs h5:not([mlv-text]):not([slot]),
+  .sbdocs h6:not([mlv-text]):not([slot]),
+  .sbdocs p:not([mlv-text]):not([slot]),
+  .sbdocs li:not([mlv-text]):not([slot]),
   .sbdocs-blockquote,
   h2.css-wzniqs + p {
     font-family: var(--mlv-ref-font-family) !important;

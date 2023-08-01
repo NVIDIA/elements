@@ -3,6 +3,8 @@ import { GlobalStateService } from './global.service.js';
 export interface I18nStrings {
   close: string;
   expand: string;
+  select: string;
+  selected: string;
   sort: string;
   show: string;
   hide: string;
@@ -17,6 +19,8 @@ export interface I18nStrings {
 const i18nRegistry = {
   close: 'close',
   expand: 'expand',
+  select: 'select',
+  selected: 'selected',
   sort: 'sort',
   show: 'show',
   hide: 'hide',

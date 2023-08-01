@@ -1,5 +1,6 @@
 import { define } from '@elements/elements/internal';
 import { Panel, PanelHeader, PanelContent, PanelFooter } from '@elements/elements/panel';
+import '@elements/elements/icon-button/define.js';
 
 define(Panel);
 define(PanelHeader);

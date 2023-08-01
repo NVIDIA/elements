@@ -1,5 +1,6 @@
 
 :host {
+  --font-size: var(--mlv-ref-font-size-100);
   width: fit-content;
   display: inline-flex;
   contain: initial;
@@ -12,7 +13,7 @@
 
 label {
   color: var(--mlv-sys-text-muted-color);
-  font-size: var(--mlv-ref-font-size-200);
+  font-size: var(--mlv-ref-font-size-100);
   margin-inline: var(--mlv-ref-size-100);
   white-space: nowrap;
 }
@@ -21,6 +22,7 @@ label {
   background: var(--mlv-sys-interaction-field-background);
   color: var(--mlv-sys-interaction-field-color);
   padding: 0 var(--mlv-ref-size-200);
+  font-size: var(--font-size);
   position: absolute;
   inset: 2px;
   display: flex;
