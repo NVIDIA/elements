@@ -1,5 +1,5 @@
 {
-  "created": "2023-08-01T16:03:32.102Z",
+  "created": "2023-08-03T15:23:00.495Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -103,8 +103,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=76-5326&t=CAAM7yEBvG18tRRa-0",
-      "instanceTotal": 9,
-      "projectTotal": 5,
+      "instanceTotal": 10,
+      "projectTotal": 6,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -178,7 +178,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-badge-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0",
-      "instanceTotal": 7,
+      "instanceTotal": 9,
       "projectTotal": 2,
       "coverageTotal": 100,
       "behavior": "content",
@@ -235,7 +235,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0",
-      "instanceTotal": 64,
+      "instanceTotal": 66,
       "projectTotal": 16,
       "coverageTotal": 100,
       "behavior": "button",
@@ -254,7 +254,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0",
-      "instanceTotal": 8,
+      "instanceTotal": 9,
       "projectTotal": 5,
       "coverageTotal": 94.73,
       "behavior": "container",
@@ -273,7 +273,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0",
-      "instanceTotal": 8,
+      "instanceTotal": 9,
       "projectTotal": 5,
       "coverageTotal": 94.73,
       "behavior": "container",
@@ -615,8 +615,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-grid-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 3,
-      "projectTotal": 2,
+      "instanceTotal": 5,
+      "projectTotal": 4,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -634,8 +634,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 3,
-      "projectTotal": 2,
+      "instanceTotal": 5,
+      "projectTotal": 4,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -653,8 +653,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 3,
-      "projectTotal": 2,
+      "instanceTotal": 5,
+      "projectTotal": 4,
       "coverageTotal": 92,
       "behavior": "list",
       "status": "beta"
@@ -691,8 +691,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 3,
-      "projectTotal": 2,
+      "instanceTotal": 5,
+      "projectTotal": 4,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -729,8 +729,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "instanceTotal": 3,
-      "projectTotal": 2,
+      "instanceTotal": 5,
+      "projectTotal": 4,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -748,8 +748,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
-      "instanceTotal": 44,
-      "projectTotal": 15,
+      "instanceTotal": 49,
+      "projectTotal": 17,
       "coverageTotal": 96.96,
       "behavior": "content",
       "status": "stable"
@@ -767,8 +767,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
-      "instanceTotal": 25,
-      "projectTotal": 12,
+      "instanceTotal": 28,
+      "projectTotal": 14,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -1525,7 +1525,7 @@
         },
         {
           "name": "nve-badge",
-          "instanceTotal": 6
+          "instanceTotal": 8
         },
         {
           "name": "nve-button",
@@ -1648,7 +1648,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 76
+      "instanceTotal": 78
     },
     {
       "name": "app-shell-angular-demo",
@@ -1926,10 +1926,18 @@
       "elements": [
         {
           "name": "nve-button",
-          "instanceTotal": 1
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 2
         }
       ],
-      "instanceTotal": 1
+      "instanceTotal": 6
     },
     {
       "name": "@elements/next-common",
@@ -1937,15 +1945,47 @@
       "elementsVersion": "0.11.1",
       "elements": [
         {
-          "name": "nve-button",
+          "name": "nve-alert",
           "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 2
         },
         {
           "name": "nve-card",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-card-content",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-row",
           "instanceTotal": 1
         },
         {
@@ -1953,7 +1993,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 4
+      "instanceTotal": 17
     },
     {
       "name": "ide",
@@ -2306,6 +2346,34 @@
       "elementsVersion": "0.11.1",
       "elements": [],
       "instanceTotal": 0
+    },
+    {
+      "name": "@elements/lit-library",
+      "path": "src/ui/platform/xp/templates/lit-library",
+      "elementsVersion": "0.11.2",
+      "elements": [
+        {
+          "name": "nve-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-row",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 5
     },
     {
       "name": "tracking",
