@@ -7,14 +7,15 @@
   flex-direction: column;
 }
 
-:host([container='full']) [internal-host] {
-  gap: var(--nve-ref-size-50);
-}
-
 :host([container='flat']) [internal-host] {
   gap: var(--nve-ref-size-50);
 }
 
 :host([container='inset']) [internal-host] {
   gap: var(--nve-ref-space-md);
+}
+
+:host([container='full']) ::slotted(nve-accordion:not(:last-child)) {
+  --box-shadow: none;
+  border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
 }

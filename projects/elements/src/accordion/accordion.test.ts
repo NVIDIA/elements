@@ -50,13 +50,13 @@ describe('nve-accordion', () => {
     expect(parentElement.behaviorExpandSingle).toBe(false);
   });
 
-  it('should handle behaviorExpand, passed from parent group element, when clicking on the caret', async () => {
+  it('should handle behaviorExpand, passed from parent group element, when clicking on the header', async () => {
     expect(childElement1.expanded).toBe(false);
 
     parentElement.behaviorExpand = true;
     await elementIsStable(childElement1);
 
-    const trigger = childElement1.shadowRoot.querySelector('nve-icon-button');
+    const trigger = childElement1.shadowRoot.querySelector('#header') as HTMLElement;
 
     const event = untilEvent(trigger, 'click');
     emulateClick(trigger);
@@ -68,7 +68,7 @@ describe('nve-accordion', () => {
   it('should NOT handle expansion when behaviorExpand not set', async () => {
     expect(childElement1.expanded).toBe(false);
 
-    const trigger = childElement1.shadowRoot.querySelector('nve-icon-button');
+    const trigger = childElement1.shadowRoot.querySelector('#header') as HTMLElement;
 
     const event = untilEvent(trigger, 'click');
     emulateClick(trigger);
