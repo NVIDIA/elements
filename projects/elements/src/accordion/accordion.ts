@@ -136,23 +136,32 @@ export class Accordion extends LitElement implements ContainerElement {
     return !!this.querySelector('[slot="actions"]')
   }
 
+  #toggle(element: HTMLElement): void {
+    if (element.slot === 'actions' || this.disabled) {
+      return;
+    }
+
+    this.#typeExpandableController.toggle();
+  }
+
   render() {
     return html`
       <div internal-host class=${this.#hasAction ? 'has-action' : ''}>
-        <div id="header">
+        <div id="header"
+          @click=${(e) => this.#toggle(e.target)}
+          .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
+          .ariaControls=${'content'}
+          >
           <slot id="heading" name="header"></slot>
 
           <nve-icon-button
             interaction="flat"
             size="sm"
-            @click=${() => this.#typeExpandableController.toggle()}
+            icon-name="caret"
             direction=${this.expanded ? this.#hasAction ? 'down' : 'up' : this.#hasAction ? 'right' : 'down'}
             ?disabled=${this.disabled}
             ?pressed=${this.expanded}
-            icon-name="caret"
             .expanded=${this.expanded}
-            .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
-            .ariaControls=${'content'}
             ></nve-icon-button>
         </div>
 
