@@ -1,8 +1,10 @@
 :host {
   width: 100%;
+  --cursor: pointer;
 }
 
 [internal-host] {
+  cursor: var(--cursor);
   color: var(--color);
   display: flex;
   flex-direction: row;
@@ -11,7 +13,6 @@
 
   ::slotted([slot="title"]) {
     margin: 0;
-    padding-bottom: var(--mlv-ref-space-xxs);
     font-size: var(--mlv-ref-font-size-200);
     font-weight: var(--mlv-ref-font-weight-medium);
   }
@@ -21,5 +22,11 @@
     font-size: var(--mlv-ref-font-size-100);
     font-weight: var(--mlv-ref-font-weight-regular);
     color: var(--mlv-sys-text-muted-color);
+  }
+
+  #actions {
+    display: flex;
+    flex-direction: row;
+    gap: var(--mlv-ref-space-xs);
   }
 }

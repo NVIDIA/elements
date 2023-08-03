@@ -9,6 +9,20 @@ export default {
 export const Default = {
   render: () => html`
   <div mlv-theme="root">
+    <mlv-accordion>
+      <mlv-accordion-header>
+        <div slot="title">Heading</div>
+      </mlv-accordion-header>
+
+      <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+    </mlv-accordion>
+  </div>
+  `
+};
+
+export const Full = {
+  render: () => html`
+  <div mlv-theme="root">
     <mlv-accordion behavior-expand>
       <mlv-accordion-header>
         <div slot="title">Heading</div>

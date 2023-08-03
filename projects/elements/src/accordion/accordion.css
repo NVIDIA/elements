@@ -6,6 +6,8 @@
   --border-radius: 0;
   --box-shadow: var(--mlv-ref-shadow-100);
   --header-padding: var(--mlv-ref-size-300) var(--mlv-ref-size-400);
+  --cursor: pointer;
+  width: 100%;
 }
 
 [internal-host] {
@@ -22,6 +24,7 @@
 }
 
 #header {
+  cursor: var(--cursor);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -41,13 +44,17 @@
 
 :host([container='inset']) {
   --border-radius: var(--mlv-ref-border-radius-md);
-
-  #content {
-    border-top: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
-  }
 }
 
 :host([container='flat']) {
   --box-shadow: none;
   --background: inherit;
+}
+
+:host([disabled]) {
+  --cursor: not-allowed;
+
+  ::slotted(mlv-accordion-header) {
+    --cursor: not-allowed;
+  }
 }
