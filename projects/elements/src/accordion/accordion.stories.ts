@@ -9,6 +9,20 @@ export default {
 export const Default = {
   render: () => html`
   <div nve-theme="root">
+    <nve-accordion>
+      <nve-accordion-header>
+        <div slot="title">Heading</div>
+      </nve-accordion-header>
+
+      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+    </nve-accordion>
+  </div>
+  `
+};
+
+export const Full = {
+  render: () => html`
+  <div nve-theme="root">
     <nve-accordion behavior-expand>
       <nve-accordion-header>
         <div slot="title">Heading</div>
