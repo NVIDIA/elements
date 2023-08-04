@@ -10,7 +10,7 @@
   --width: 100%;
   --font-weight: normal;
   --text-align: start;
-  --scroll-height: 100vh;
+  --scroll-height: 50vh;
   --_input-background: var(--background);
   --_icon-color: var(--color);
   width: var(--width);
