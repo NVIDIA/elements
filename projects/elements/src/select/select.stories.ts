@@ -228,20 +228,30 @@ export const Size = {
 
 export const Height = {
   render: () => html`
-<mlv-select style="--scroll-height: 150px">
-  <label>label</label>
-  <select>
-    <option value="1">Option 1</option>
-    <option value="2">Option 2</option>
-    <option value="3">Option 3</option>
-    <option value="4">Option 4</option>
-    <option value="5">Option 5</option>
-    <option value="6">Option 6</option>
-    <option value="7">Option 7</option>
-    <option value="8">Option 8</option>
-    <option value="9">Option 9</option>
-    <option value="10">Option 10</option>
-  </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+<div mlv-layout="column gap:lg align:stretch">
+  <mlv-select style="--scroll-height: 150px">
+    <label>label</label>
+    <select>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+      <option value="6">Option 6</option>
+      <option value="7">Option 7</option>
+      <option value="8">Option 8</option>
+      <option value="9">Option 9</option>
+      <option value="10">Option 10</option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-select>
+
+  <mlv-select>
+    <label>label</label>
+    <select>
+      ${new Array(100).fill('').map((_, i) => html`<option>Option ${i + 1}</option>`)}
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-select>
+</div>`
 };
