@@ -1,17 +1,17 @@
 {
-  "created": "2023-08-04T19:07:26.162Z",
+  "created": "2023-08-07T21:03:34.718Z",
   "versions": [
     "0.10.0",
     "0.11.1",
-    "0.13.0",
+    "0.13.1",
     "0.12.0",
     "0.7.1",
     "0.1.3",
     "0.4.1",
     "0.8.0",
     "0.11.0",
-    "0.11.2",
-    "0.6.0"
+    "0.6.0",
+    "0.11.2"
   ],
   "elements": [
     {
@@ -29,7 +29,7 @@
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
       "instanceTotal": 0,
       "projectTotal": 0,
-      "coverageTotal": 84.61,
+      "coverageTotal": 84.28,
       "behavior": "container",
       "status": "beta"
     },
@@ -48,7 +48,7 @@
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
       "instanceTotal": 0,
       "projectTotal": 0,
-      "coverageTotal": 84.61,
+      "coverageTotal": 84.28,
       "behavior": "container",
       "status": "beta"
     },
@@ -67,7 +67,7 @@
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
       "instanceTotal": 0,
       "projectTotal": 0,
-      "coverageTotal": 84.61,
+      "coverageTotal": 84.28,
       "behavior": "container",
       "status": "beta"
     },
@@ -86,7 +86,7 @@
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
       "instanceTotal": 0,
       "projectTotal": 0,
-      "coverageTotal": 84.61,
+      "coverageTotal": 84.28,
       "behavior": "container",
       "status": "beta"
     },
@@ -235,7 +235,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0",
-      "instanceTotal": 112,
+      "instanceTotal": 111,
       "projectTotal": 16,
       "coverageTotal": 100,
       "behavior": "button",
@@ -805,7 +805,7 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
-      "instanceTotal": 16,
+      "instanceTotal": 15,
       "projectTotal": 9,
       "coverageTotal": 100,
       "behavior": "form",
@@ -1532,7 +1532,7 @@
     {
       "name": "drivescrubber",
       "path": "src/ui/drivescrubber",
-      "elementsVersion": "0.13.0",
+      "elementsVersion": "0.13.1",
       "elements": [
         {
           "name": "mlv-alert-banner",
@@ -1548,7 +1548,7 @@
         },
         {
           "name": "mlv-button",
-          "instanceTotal": 12
+          "instanceTotal": 11
         },
         {
           "name": "mlv-card",
@@ -1576,7 +1576,7 @@
         },
         {
           "name": "mlv-input",
-          "instanceTotal": 4
+          "instanceTotal": 3
         },
         {
           "name": "mlv-search",
@@ -1671,7 +1671,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 82
+      "instanceTotal": 80
     },
     {
       "name": "app-shell-angular-demo",
@@ -1952,16 +1952,16 @@
           "instanceTotal": 3
         },
         {
+          "name": "mlv-divider",
+          "instanceTotal": 2
+        },
+        {
           "name": "mlv-icon-button",
           "instanceTotal": 5
         },
         {
           "name": "mlv-icon",
           "instanceTotal": 7
-        },
-        {
-          "name": "mlv-divider",
-          "instanceTotal": 2
         },
         {
           "name": "mlv-panel-header",
@@ -2296,7 +2296,7 @@
     {
       "name": "@elements/xp-app-shell",
       "path": "src/ui/platform/xp/app-shell",
-      "elementsVersion": "0.11.2",
+      "elementsVersion": "0.13.1",
       "elements": [
         {
           "name": "mlv-app-header",
@@ -2491,28 +2491,28 @@
       {
         "file": "elements/src/accordion/accordion.ts",
         "lines": {
-          "total": 45,
-          "covered": 36,
+          "total": 49,
+          "covered": 39,
           "skipped": 0,
-          "pct": 80
+          "pct": 79.59
         },
         "functions": {
-          "total": 18,
-          "covered": 12,
+          "total": 19,
+          "covered": 13,
           "skipped": 0,
-          "pct": 66.66
+          "pct": 68.42
         },
         "statements": {
-          "total": 65,
-          "covered": 55,
+          "total": 70,
+          "covered": 59,
           "skipped": 0,
-          "pct": 84.61
+          "pct": 84.28
         },
         "branches": {
-          "total": 14,
-          "covered": 10,
+          "total": 18,
+          "covered": 13,
           "skipped": 0,
-          "pct": 71.42
+          "pct": 72.22
         }
       },
       {
@@ -5975,28 +5975,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1372,
-        "covered": 1337,
+        "total": 1376,
+        "covered": 1340,
         "skipped": 0,
-        "pct": 97.44
+        "pct": 97.38
       },
       "statements": {
-        "total": 1658,
-        "covered": 1611,
+        "total": 1663,
+        "covered": 1615,
         "skipped": 0,
-        "pct": 97.16
+        "pct": 97.11
       },
       "functions": {
-        "total": 442,
-        "covered": 416,
+        "total": 443,
+        "covered": 417,
         "skipped": 0,
-        "pct": 94.11
+        "pct": 94.13
       },
       "branches": {
-        "total": 570,
-        "covered": 526,
+        "total": 574,
+        "covered": 529,
         "skipped": 0,
-        "pct": 92.28
+        "pct": 92.16
       },
       "branchesTrue": {
         "total": 0,
