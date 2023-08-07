@@ -1,0 +1,34 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader  } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Progress Bar/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Progress Bar
+
+<element-metrics tag="nve-progress-bar"></element-metrics>
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/progress-bar/define.js';
+```
+
+```html
+<nve-progress-bar status="accent" value="25"></nve-progress-bar>
+
+<nve-progress-bar status="success" value="50"></nve-progress-bar>
+
+<nve-progress-bar status="warning" value="75"></nve-progress-bar>
+
+<nve-progress-bar status="danger" value="100"></nve-progress-bar>
+```
+
+<Canvas>
+  <Story id="elements-progress-bar-examples--default" />
+</Canvas>
+
+<element-status tag={'nve-progress-bar'}></element-status>
+
+<LinkedHeader>nve-progress-bar</LinkedHeader>
+
+<ArgsTable of="nve-progress-bar" />
