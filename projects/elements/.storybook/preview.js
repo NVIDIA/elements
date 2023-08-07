@@ -232,6 +232,7 @@ export const parameters = {
           'Notification',
           'Pagination',
           'Panel',
+          'Progress Bar',
           'Password',
           'Radio',
           'Range',
