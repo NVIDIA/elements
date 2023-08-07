@@ -1,0 +1,53 @@
+:host {
+  width: 100%;
+}
+
+:host([status='accent']) {
+  --accent-color: var(--nve-sys-support-accent-color);
+}
+
+:host([status='success']) {
+  --accent-color: var(--nve-sys-support-success-color);
+}
+
+:host([status='warning']) {
+  --accent-color: var(--nve-sys-support-warning-color);
+}
+
+:host([status='danger']) {
+  --accent-color: var(--nve-sys-support-danger-color);
+}
+
+progress {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance: none;
+  background-color: var(--nve-sys-interaction-field-background);
+  border-radius: var(--nve-ref-border-radius-full);
+  height: var(--nve-ref-size-200);
+  width: 100%;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: var(--nve-sys-interaction-field-background);
+  border-radius: var(--nve-ref-border-radius-full);
+}
+
+progress[value]::-webkit-progress-value {
+  border-radius: var(--nve-ref-border-radius-full);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: var(--accent-color);
+}
+
+progress[value].full::-webkit-progress-value {
+  border-top-right-radius: var(--nve-ref-border-radius-full);
+  border-bottom-right-radius: var(--nve-ref-border-radius-full);
+}
+
+progress[value]::-moz-progress-bar {
+  border-radius: 100px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: var(--accent-color);
+}
