@@ -66,7 +66,7 @@ describe('nve-notification', () => {
 
   it('should override remove to set hidden', async () => {
     expect(element.hidden).toBe(false);
-    element.remove();
+    await element.remove();
     expect(element.hidden).toBe(true);
   });
 

@@ -90,7 +90,7 @@ export function setArrowStyles(config: PopoverConfig, position: ComputePositionR
   }
 }
 
-export function popoverRenderUpdate(config: PopoverConfig, fn: () => void) {
+export function popoverRenderUpdate(config: PopoverConfig, fn: () => any) {
   return autoUpdate(config.anchor, config.popover, () => fn());
 }
 
