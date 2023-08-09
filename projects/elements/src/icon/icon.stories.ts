@@ -126,9 +126,9 @@ class IconDemo extends LitElement {
     this.values = Object.fromEntries(new FormData(this.#form)) as any;
   }
 
-  #copyIcon(iconName: string) {
+  async #copyIcon(iconName: string) {
     const iconCode = `<mlv-icon name="${iconName}"></mlv-icon>`;
-    navigator.clipboard.writeText(iconCode);
+    await navigator.clipboard.writeText(iconCode);
 
     const notification = document.createElement('mlv-notification');
     notification.closable = true;

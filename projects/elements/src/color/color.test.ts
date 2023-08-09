@@ -33,12 +33,12 @@ describe('mlv-color', () => {
 
   it('should default the color to the input background if not set', async () => {
     await elementIsStable(element);
-    expect(fixture.querySelector('input').value).toBe('#000000');
+    expect(fixture.querySelector('input').value).toBe('#dfe3e6');
   });
 
   it('should apply default if custom default is provided', async () => {
     await elementIsStable(element);
-    expect(fixture.querySelector('input').value).toBe('#000000');
+    expect(fixture.querySelector('input').value).toBe('#dfe3e6');
   });
 
   it('should not apply default if custom default is provided', async () => {
@@ -62,7 +62,7 @@ describe('mlv-color', () => {
     }
   
     await elementIsStable(element);
-    expect(fixture.querySelector('input').value).toBe('#000000');
+    expect(fixture.querySelector('input').value).toBe('#dfe3e6');
 
     element.shadowRoot.querySelector('mlv-icon-button').click();
     await elementIsStable(element);

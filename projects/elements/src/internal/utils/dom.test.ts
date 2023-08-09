@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox, getThemeTokens } from '@elements/elements/internal';
 
 @customElement('dom-test-element')
 class TestComponent extends LitElement {
@@ -410,5 +410,12 @@ describe('endOfScrollBox(): ', () => {
     div.scrollTop = 1000;
     expect(endOfScrollBox(div)).toBe(true);
     div.remove();
+  });
+});
+
+describe('getCurrentTokens', () => {
+  it('should compute and return the current design tokens', async () => {
+    const tokens = getThemeTokens();
+    expect(tokens).toBeTruthy();
   });
 });
