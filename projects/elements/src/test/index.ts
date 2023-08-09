@@ -35,7 +35,7 @@ async function waitForAllElementsToBeDefined() {
   const pendingElements = [...new Set(Array.from(document.querySelectorAll('*:not(:defined)')).filter(e => e.tagName.includes('-')).map(e => e.tagName.toLocaleLowerCase()))];
   return new Promise((resolve, reject) => {
     const undefinedElements = [];
-    Promise.all(pendingElements.map(e => customElements.whenDefined(e))).then(() => resolve(''));
+    Promise.all(pendingElements.map(e => customElements.whenDefined(e))).then(() => resolve('')).catch(e => reject(e));
     setTimeout(() => {
       if (undefinedElements.length) {
         reject('');

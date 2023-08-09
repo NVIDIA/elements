@@ -129,7 +129,7 @@ describe('nve-select', () => {
     expect(element.shadowRoot.querySelector('nve-dropdown').hidden).toBe(true);
 
     emulateClick(select);
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.shadowRoot.querySelector('nve-dropdown').hidden).toBe(false);
 
     emulateClick(items[0]);
@@ -142,7 +142,7 @@ describe('nve-select', () => {
     select.options[1].selected = true;
 
     element.requestUpdate();
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('nve-tag').length).toBe(2);
   });
 
@@ -152,7 +152,7 @@ describe('nve-select', () => {
     select.options[1].selected = true;
 
     element.requestUpdate();
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('nve-tag').length).toBe(2);
 
     // remove tag/deselect option
@@ -163,7 +163,8 @@ describe('nve-select', () => {
 
   it('should set host :--multiple state when multiple is used', async () => {
     select.multiple = true;
-    await element.requestUpdate();
+    element.requestUpdate();
+    await elementIsStable(element);
     expect(element.matches(':--multiple')).toBe(true);
   });
 
@@ -175,14 +176,16 @@ describe('nve-select', () => {
     element.style.setProperty('--width', '50px');
 
     element.requestUpdate();
-    await element.updateComplete;
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
     await new Promise(resolve => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(true);
   });
 
   it('should set host :--size state when multiple is used', async () => {
     select.size = 2;
-    await element.requestUpdate();
+    element.requestUpdate();
+    await elementIsStable(element);
     expect(element.matches(':--size')).toBe(true);
   });
 });
