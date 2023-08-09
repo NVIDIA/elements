@@ -151,7 +151,7 @@ describe('type-popover.controller', () => {
     await elementIsStable(element);
 
     let events = 0;
-    untilEvent(element, 'close').then(() => events++);
+    untilEvent(element, 'close').then(() => events++).catch(e => console.log(e));
 
     element.hidden = true;
     await elementIsStable(element);
@@ -178,7 +178,7 @@ describe('type-popover.controller', () => {
     await elementIsStable(element);
 
     let events = 0;
-    untilEvent(element, 'close').then(() => events++);
+    untilEvent(element, 'close').then(() => events++).catch(e => console.log(e));
 
     emulateClick(document.body);
     await new Promise(r => setTimeout(() => r(null), 0));

@@ -67,21 +67,21 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   async hostConnected() {
     await this.host.updateComplete;
     this.#dialog?.addEventListener('close', () => this.close());
-    this.#dialog?.addEventListener('cancel', async (event) => {
+    this.#dialog?.addEventListener('cancel', (event) => {
       event.preventDefault();
       this.close();
     });
 
-    this.#popoverUpdateDisconnect = popoverRenderUpdate(this.#config, () => this.#calculatePosition());
-    this.#hiddenUpdateObserver = getAttributeChanges(this.host, 'hidden', () => this.#update());
+    this.#popoverUpdateDisconnect = popoverRenderUpdate(this.#config, async () => await this.#calculatePosition());
+    this.#hiddenUpdateObserver = getAttributeChanges(this.host, 'hidden', async () => await this.#update());
     this.#addTriggerInteractions();
     this.host.setAttribute('nve-popover', '');
   }
 
   async hostUpdated() {
     await this.host.updateComplete;
-    this.#calculatePosition();
     this.#updateVisibility();
+    await this.#calculatePosition();
   }
 
   hostDisconnected() {
@@ -89,13 +89,13 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     this.#hiddenUpdateObserver?.disconnect();
   }
 
-  #update() {
+  async #update() {
     this.host.requestUpdate();
     this.#updateVisibility();
     this.#toggleLightDismiss();
-    this.#calculatePosition();
     this.#closeTimeout();
     this.#updateAnchorState();
+    await this.#calculatePosition();
   }
 
   #lightDismiss = ((e: PointerEvent) => {
@@ -104,11 +104,10 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     }
   }).bind(this);
 
-  async #toggleLightDismiss() {
+  #toggleLightDismiss() {
     document.removeEventListener('pointerdown', this.#lightDismiss);
     if (!this.host.hasAttribute('hidden') && this.host.popoverType !== 'manual' && !this.host.closeTimeout) {
-      await new Promise(r => requestAnimationFrame(r));
-      document.addEventListener('pointerdown', this.#lightDismiss);
+      requestAnimationFrame(() => document.addEventListener('pointerdown', this.#lightDismiss));
     }
   }
 
