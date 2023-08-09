@@ -63,16 +63,17 @@ export class Icon extends LitElement {
     Object.keys(icons).forEach(name => document.dispatchEvent(new CustomEvent(`nve-icon-${name}`)));
   }
 
-  static async alias(aliases: { [key: string]: IconName | string }) {
-    await customElements.whenDefined('nve-icon');
-    const IconDefinition = customElements.get('nve-icon') as any;
-    IconDefinition._icons ??= [];
-
-    Object.keys(aliases).forEach(alias => {
-      const name = aliases[alias];
-      IconDefinition._icons[alias] = IconDefinition._icons[name];
-      document.dispatchEvent(new CustomEvent(`nve-icon-${alias}`));
-    });
+  static alias(aliases: { [key: string]: IconName | string }) {
+    customElements.whenDefined('nve-icon').then(() => {
+      const IconDefinition = customElements.get('nve-icon') as any;
+      IconDefinition._icons ??= [];
+  
+      Object.keys(aliases).forEach(alias => {
+        const name = aliases[alias];
+        IconDefinition._icons[alias] = IconDefinition._icons[name];
+        document.dispatchEvent(new CustomEvent(`nve-icon-${alias}`));
+      });
+    }).catch(e => console.log(`nve-icon was never defined: ${e}`));
   }
 
   async updated(props: PropertyValues<this>) {

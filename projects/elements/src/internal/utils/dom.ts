@@ -7,11 +7,11 @@ import { isFocusable } from './focus.js';
  * https://nolanlawson.com/2021/02/13/managing-focus-in-the-shadow-dom/
  * https://www.abeautifulsite.net/posts/querying-through-shadow-roots/
  */
- export function getFlatDOMTree(node: Node, depth = 10): HTMLElement[] {
+export function getFlatDOMTree(node: Node, depth = 10): HTMLElement[] {
   return (Array.from(getChildren(node)).reduce((prev: any[], next: any) => {
-      const nextChild = Array.from(getChildren(next)).map((i: any) => [i, getFlatDOMTree(i, depth)]);
-      return [...prev, [next, [...nextChild]]];
-    }, []) as any[])
+    const nextChild = Array.from(getChildren(next)).map((i: any) => [i, getFlatDOMTree(i, depth)]);
+    return [...prev, [next, [...nextChild]]];
+  }, []) as any[])
     .flat(depth);
 }
 
@@ -32,7 +32,7 @@ export function generateId() {
   return `_${Math.random().toString(36).substring(2, 9)}`;
 }
 
-export function getAttributeChanges(element: HTMLElement, attr: string, fn: (attrValue: string) => void) {
+export function getAttributeChanges(element: HTMLElement, attr: string, fn: (attrValue: string) => any) {
   fn(element.getAttribute(attr));
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
@@ -113,7 +113,7 @@ export function parseTokenNumber(value: string) {
  */
 export function scope(element: any, Mixin: any) {
   return class extends Mixin(element as any) {
-    static elementDefinitions = Object.entries({ ...element.elementDefinitions }).reduce((p, [tag, el]) => ({ ...p, [tag]: scope(el, Mixin) }), { })
+    static elementDefinitions = Object.entries({ ...element.elementDefinitions }).reduce((p, [tag, el]) => ({ ...p, [tag]: scope(el, Mixin) }), {})
   };
 }
 
@@ -218,4 +218,37 @@ export function endOfScrollBox(element: HTMLElement, offset = 0) {
 
 export async function openEyeDropper(): Promise<string> {
   return await new (window as any).EyeDropper().open().then(color => color.sRGBHex);
+}
+
+/**
+ * provides a object with key/value of the currently applied design tokens
+ */
+export function getThemeTokens(element = document.querySelector(':root')) { // default root or provided element
+  const styles = getComputedStyle(element);
+  let parent = null;
+
+  // check for parent iframe, same domain iframes change how style sheets are accessed
+  try {
+    parent = Array.from(window.parent.document.styleSheets);
+  } catch {
+    parent = [];
+  }
+
+  return [...parent, ...Array.from(document.styleSheets)]
+    .reduce(
+      (finalArr, sheet) =>
+        finalArr.concat(
+          [...sheet.cssRules]
+            .filter((rule) => rule.type === 1)
+            .reduce((propValArr, rule) => {
+              const props = [...rule.style].filter(p => p.trim().includes('--mlv')).map((propName) => [
+                propName.trim(),
+                rule.style.getPropertyValue(propName).trim(),
+              ]);
+              return [...propValArr, ...props];
+            }, [])
+        ),
+      []
+    )
+    .reduce((p, token) => ({ ...p, [token[0]]: styles.getPropertyValue(token[0]) }), {});
 }

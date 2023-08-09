@@ -16,13 +16,19 @@ export default defineConfig({
     exclude: ['@vitest/coverage-istanbul']
   },
   test: {
-    singleThread: true,
-    root: resolve('.'),
+    useAtomics: true,
+    // bail: coverage ? 1 : 0,
+    // retry: coverage ? 10 : 1,
     isolate: coverage,
-    retry: 1,
+    // singleThread: true,
+    root: resolve('.'),
     alias: {
       '@elements/elements': resolve(`./${base}`),
-      '@elements/elements/': resolve(`./${base}/`),
+      '../dist/css/module.tokens.css': resolve('./dist/css/module.tokens.css'),
+      '../dist/css/theme.high-contrast.css': resolve('./dist/css/theme.high-contrast.css'),
+      '../dist/css/theme.reduced-motion.css': resolve('./dist/css/theme.reduced-motion.css'),
+      '../dist/css/theme.compact.css': resolve('./dist/css/theme.compact.css'),
+      '../dist/css/theme.dark.css': resolve('./dist/css/theme.dark.css')
     },
     include: [resolve('./src/**/*.test.ts')],
     forceRerunTriggers: ['**/dist/**'],
@@ -32,7 +38,11 @@ export default defineConfig({
     // CPU detection on CI fails due to K8s/Docker.
     maxThreads: 8,
     minThreads: 8,
-    deps: { external: ['**/node_modules/**'] },
+    server: {
+      deps: {
+        external: ['**/node_modules/**']
+      }
+    },
     setupFiles: [resolve('./src/test/setup.ts')], // https://github.com/vitest-dev/vitest/issues/1700
     coverage: {
       provider: 'istanbul',

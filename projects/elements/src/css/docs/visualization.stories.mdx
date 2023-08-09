@@ -1,11 +1,60 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import { LinkedHeader } from '../../../docs/utils.mdx';
 
-<Meta title="Foundations/Visualization/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Foundations/Visualization/Documentation" />
 
 # Visualization
 
 The visualization design tokens provide a consistent color palette for theming various data visualization UI tools and libraries.
+Elements does not support data visualizations as part of the core library, but does provide a set of tokens that can be used to
+theme various data visualization libraries.
+
+<LinkedHeader>Usage</LinkedHeader>
+
+Tokens can be consumed via CSS Custom Properties, however data visualizatiion libraries often are themed via JavaScript based
+APIs. To make it easier to theme these libraries a utility function is provided to convert the active theme tokens to a JavaScript object.
+
+```typescript
+import { getThemeTokens } from '@elements/elements';
+
+const tokens = getThemeTokens();
+
+// output
+{
+  "--nve-ref-color-brand-green-100": "#121807"
+  "--nve-ref-border-radius-lg": "16px"
+  "--nve-ref-font-size-200": "14px"
+  ...
+}
+```
+
+<LinkedHeader>Example</LinkedHeader>
+
+Below is a simple demo of a visualization library (ChartJS) consuming the tokens and rendering the visualization to a HTML canvas.
+
+<Story id="foundations-visualization-examples--utils" inline={false} height="600px" />
+
+```typescript
+import { getCurrentTokens } from '@elements/elements';
+import Chart from 'chart.js/auto';
+
+const tokens = getCurrentTokens();
+new Chart(document.querySelector('canvas'), {
+  type: 'line',
+  options: { ... },
+  data: {
+    labels: [...],
+    datasets: [
+      {
+        label: 'grass',
+        data: [...],
+        backgroundColor: tokens['--nve-sys-visualization-categorical-grass'],
+        borderColor: tokens['--nve-sys-visualization-categorical-grass'],
+      }
+    ]
+  }
+});
+```
 
 <LinkedHeader>Categorical</LinkedHeader>
 
