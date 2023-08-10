@@ -1,13 +1,12 @@
 import { PropertyValues, html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { appendRootNodeStyle, focusElementTimeout, onListboxActivate, useStyles, i18n, I18nController } from '@elements/elements/internal';
+import { focusElementTimeout, onListboxActivate, useStyles, i18n, I18nController } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import { Menu, MenuItem } from '@elements/elements/menu';
 import { Dropdown } from '@elements/elements/dropdown';
 import { Tag } from '@elements/elements/tag';
-import globalStyles from './select.global.css?inline';
 import styles from './select.css?inline';
 
 /**
@@ -92,11 +91,6 @@ export class Select extends Control {
           </nve-menu-item>`)}
         </nve-menu>
       </nve-dropdown>`;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    appendRootNodeStyle(this, globalStyles);
   }
 
   async firstUpdated(props: PropertyValues<this>) {

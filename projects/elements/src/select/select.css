@@ -52,6 +52,14 @@
   display: block !important;
 }
 
+[internal-host]:has(nve-menu:focus-within) [input] {
+  outline: 0 !important
+}
+
+:host(:--selected) {
+  --font-weight: var(--nve-ref-font-weight-semibold);
+}
+
 :host(:--multiple) {
   --padding: 0 var(--nve-ref-size-100);
 
