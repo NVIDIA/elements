@@ -52,6 +52,14 @@
   display: block !important;
 }
 
+[internal-host]:has(mlv-menu:focus-within) [input] {
+  outline: 0 !important
+}
+
+:host(:--selected) {
+  --font-weight: var(--mlv-ref-font-weight-semibold);
+}
+
 :host(:--multiple) {
   --padding: 0 var(--mlv-ref-size-100);
 

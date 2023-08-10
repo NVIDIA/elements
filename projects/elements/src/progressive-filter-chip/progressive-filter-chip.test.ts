@@ -1,26 +1,26 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@elements/elements/test';
-import { FilterChip } from '@elements/elements/filter-chip';
-import '@elements/elements/filter-chip/define.js';
+import { ProgressiveFilterChip } from '@elements/elements/progressive-filter-chip';
+import '@elements/elements/progressive-filter-chip/define.js';
 import '@elements/elements/forms/define.js';
 
-describe('mlv-filter-chip', () => {
+describe('mlv-progressive-filter-chip', () => {
   let fixture: HTMLElement;
-  let element: FilterChip;
+  let element: ProgressiveFilterChip;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-filter-chip>
+      <mlv-progressive-filter-chip>
         <select>
           <option value="1">option 1</option>
           <option value="2">option 2</option>
         </select>
         <input type="text" value="text value" />
         <input type="date" value="2021-01-01" />
-      </mlv-filter-chip>
+      </mlv-progressive-filter-chip>
     `);
-    element = fixture.querySelector('mlv-filter-chip');
+    element = fixture.querySelector('mlv-progressive-filter-chip');
     await elementIsStable(element);
   });
 
@@ -29,7 +29,7 @@ describe('mlv-filter-chip', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-filter-chip')).toBeDefined();
+    expect(customElements.get('mlv-progressive-filter-chip')).toBeDefined();
   });
 
   it('should render close button when closable', async () => {
