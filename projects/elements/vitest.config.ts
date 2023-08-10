@@ -17,10 +17,9 @@ export default defineConfig({
   },
   test: {
     useAtomics: true,
-    // bail: coverage ? 1 : 0,
-    // retry: coverage ? 10 : 1,
+    retry: 1,
     isolate: coverage,
-    // singleThread: true,
+    singleThread: true,
     root: resolve('.'),
     alias: {
       '@elements/elements': resolve(`./${base}`),
