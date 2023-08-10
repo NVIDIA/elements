@@ -1,6 +1,5 @@
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { execSync } from 'node:child_process';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
@@ -72,7 +71,7 @@ async function getProjects() {
       .filter(path => !path.includes('design-system') && !path.includes('dist') && !path.includes('deprecated'))
       .reduce((files, path) => {
         const data = require(path);
-        return data.dependencies && data.dependencies['@elements/elements'] ? [...files, { ...data, path }] : files;
+        return data.dependencies && data?.dependencies['@elements/elements'] ? [...files, { ...data, path }] : files;
       }, [])
       .map(file => {
         return { package: file.name, elements: file.dependencies['@elements/elements'], path: file.path.replace('/package.json', '') };
@@ -175,7 +174,6 @@ function getElements(coverage, projects) {
       name,
       ...superclassManifest.metadata ?? { },
       ...manifest.metadata,
-      instanceTotal: 0,
       projectTotal: getProjectTotal(name, projects),
       instanceTotal: getInstanceTotal(name, projects),
       coverageTotal: cov?.statements?.pct,

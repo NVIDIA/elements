@@ -1,26 +1,26 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@elements/elements/test';
-import { FilterChip } from '@elements/elements/filter-chip';
-import '@elements/elements/filter-chip/define.js';
+import { ProgressiveFilterChip } from '@elements/elements/progressive-filter-chip';
+import '@elements/elements/progressive-filter-chip/define.js';
 import '@elements/elements/forms/define.js';
 
-describe('nve-filter-chip', () => {
+describe('nve-progressive-filter-chip', () => {
   let fixture: HTMLElement;
-  let element: FilterChip;
+  let element: ProgressiveFilterChip;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-filter-chip>
+      <nve-progressive-filter-chip>
         <select>
           <option value="1">option 1</option>
           <option value="2">option 2</option>
         </select>
         <input type="text" value="text value" />
         <input type="date" value="2021-01-01" />
-      </nve-filter-chip>
+      </nve-progressive-filter-chip>
     `);
-    element = fixture.querySelector('nve-filter-chip');
+    element = fixture.querySelector('nve-progressive-filter-chip');
     await elementIsStable(element);
   });
 
@@ -29,7 +29,7 @@ describe('nve-filter-chip', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-filter-chip')).toBeDefined();
+    expect(customElements.get('nve-progressive-filter-chip')).toBeDefined();
   });
 
   it('should render close button when closable', async () => {

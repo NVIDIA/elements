@@ -1,0 +1,72 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Progressive Filter Chip/Documentation" />
+
+# Progressive Filter Chip
+
+<element-metrics tag="nve-progressive-filter-chip"></element-metrics>
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/progressive-filter-chip/define.js';
+```
+
+```html
+<nve-progressive-filter-chip closable>
+  <select aria-label="dataset">
+    <option>workload</option>
+    <option selected>instance</option>
+  </select>
+  <select aria-label="condition">
+    <option>sort by</option>
+    <option selected>filter by</option>
+  </select>
+  <select aria-label="filter">
+    <option>utilization</option>
+    <option selected>status</option>
+  </select>
+</nve-progressive-filter-chip>
+```
+
+<Canvas>
+  <Story id="elements-progressive-filter-chip-examples--default" />
+</Canvas>
+
+## Text Input
+
+<Canvas>
+  <Story id="elements-progressive-filter-chip-examples--text-input" />
+</Canvas>
+
+## Multiple
+
+<Canvas>
+  <Story id="elements-progressive-filter-chip-examples--multiple" />
+</Canvas>
+
+## Date Range
+
+<Canvas>
+  <Story id="elements-progressive-filter-chip-examples--date-range" />
+</Canvas>
+
+## Layer
+
+<Canvas>
+  <Story id="elements-progressive-filter-chip-examples--layer" />
+</Canvas>
+
+## Custom
+
+Custom filter chips can be created by using the `slot` attribute. A `nve-button` can be used to trigger custom UI.
+
+<Canvas>
+  <Story id="elements-progressive-filter-chip-examples--custom" inline={false} height={'450px'} />
+</Canvas>
+
+<element-status tag="nve-progressive-filter-chip"></element-status>
+
+<LinkedHeader>nve-progressive-filter-chip</LinkedHeader>
+<ArgsTable of="nve-progressive-filter-chip" />
