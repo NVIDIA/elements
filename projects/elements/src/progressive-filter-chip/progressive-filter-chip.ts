@@ -6,11 +6,11 @@ import { Input } from '@elements/elements/input';
 import { Select } from '@elements/elements/select';
 import { Date } from '@elements/elements/date';
 import { IconButton } from '@elements/elements/icon-button';
-import globalStyles from './filter-chip.global.css?inline';
-import styles from './filter-chip.css?inline';
+import globalStyles from './progressive-filter-chip.global.css?inline';
+import styles from './progressive-filter-chip.css?inline';
 
 /**
- * @element nve-filter-chip
+ * @element nve-progressive-filter-chip
  * @slot - default slot for content
  * @event close - dispatched when close button is clicked
  * @cssprop --background
@@ -20,9 +20,9 @@ import styles from './filter-chip.css?inline';
  * @stable false
  * @vqa false
  */
-export class FilterChip extends LitElement {
+export class ProgressiveFilterChip extends LitElement {
   static readonly metadata = {
-    tag: 'nve-filter-chip',
+    tag: 'nve-progressive-filter-chip',
     version: 'PACKAGE_VERSION'
   };
 

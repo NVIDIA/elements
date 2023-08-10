@@ -1,0 +1,10 @@
+nve-progressive-filter-chip input::placeholder,
+nve-progressive-filter-chip textarea::placeholder {
+  color: var(--nve-sys-text-placeholder-color) !important;
+}
+
+nve-progressive-filter-chip input::-webkit-search-cancel-button,
+nve-progressive-filter-chip input::-webkit-calendar-picker-indicator {
+  opacity: 0 !important;
+  display: none !important;
+}
