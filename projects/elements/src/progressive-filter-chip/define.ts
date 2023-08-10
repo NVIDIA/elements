@@ -1,15 +1,15 @@
 import { define } from '@elements/elements/internal';
-import { FilterChip } from '@elements/elements/filter-chip';
+import { ProgressiveFilterChip } from '@elements/elements/progressive-filter-chip';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/input/define.js';
 import '@elements/elements/select/define.js';
 import '@elements/elements/date/define.js';
 
-define(FilterChip);
+define(ProgressiveFilterChip);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'nve-filter-chip': FilterChip;
+    'nve-progressive-filter-chip': ProgressiveFilterChip;
   }
 }

@@ -44,9 +44,6 @@ export const parameters = {
       return excludes ? source : prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 }).replaceAll('=""', '');
     }
   },
-  controls: {
-    expanded: false
-  },
   badgesConfig: {
     alpha: {
       styles: {
@@ -92,6 +89,7 @@ export const parameters = {
   },
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
+    expanded: false,
     matchers: {
       color: /(background|color)$/i,
       date: /Date$/
@@ -220,8 +218,6 @@ export const parameters = {
           'Dot',
           'Dropdown',
           'File',
-          'Filter',
-          'Filter Chip',
           'Icon',
           'Icon Button',
           'Input',
@@ -232,6 +228,7 @@ export const parameters = {
           'Notification',
           'Pagination',
           'Panel',
+          'Progressive Filter Chip',
           'Progress Bar',
           'Password',
           'Radio',
