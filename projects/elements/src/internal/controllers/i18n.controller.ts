@@ -16,7 +16,7 @@ export class I18nController<T extends I18n> implements ReactiveController {
 
   constructor(private host: T) {
     this.host.addController(this);
-    document.addEventListener('MLV_ELEMENTS_I18N_UPDATE', () => this.#update());
+    globalThis.document.addEventListener('MLV_ELEMENTS_I18N_UPDATE', () => this.#update());
   }
 
   hostUpdated() {

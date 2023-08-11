@@ -33,7 +33,7 @@ export function isSimpleFocusable(element: Element) {
   );
 }
 
-export function getActiveElement(root: Document | ShadowRoot = document): Element | null {
+export function getActiveElement(root: Document | ShadowRoot = globalThis.document): Element | null {
   if (root.activeElement && root.activeElement.shadowRoot) {
     return getActiveElement(root.activeElement.shadowRoot) ?? root.activeElement;
   } else {
