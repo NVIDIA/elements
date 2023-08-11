@@ -3,8 +3,8 @@ import { arrow, autoUpdate, computePosition, ComputePositionReturn, flip, Middle
 import { offsetParent } from 'composed-offset-position';
 import { parseTokenNumber } from '../utils/dom.js';
 
-if (!(window as any).process) {
-  (window as any).process = { env: { NODE_ENV: 'production' } }; // floating-ui
+if (!globalThis.process) {
+  (globalThis.process as any) = { env: { NODE_ENV: 'production' } }; // floating-ui
 }
 
 /**
@@ -98,7 +98,7 @@ export function computePopoverPosition(config: PopoverConfig) {
   const middleware = [
     getOffsetMiddleware(config),
     config.arrow ? arrow({ element: config.arrow, padding: config.arrowPadding }) : null,
-    config.anchor !== document.body ? flip() : null
+    config.anchor !== globalThis.document.body ? flip() : null
   ].filter(i => !!i);
   const placement = `${config.position}${config.alignment === 'start' || config.alignment === 'end' ? `-${config.alignment}` : ''}` as `${PopoverSides}-${Exclude<PopoverAlign, 'center'>}`;
   return computePosition(
@@ -120,9 +120,9 @@ export function computePopoverPosition(config: PopoverConfig) {
 function getOffsetMiddleware(config: PopoverConfig): Middleware {
   return offset(({ rects }) => {
     if (config.position === 'center') {
-      const height = config.anchor === document.body ? document.documentElement.clientHeight : rects.reference.height;
+      const height = config.anchor === globalThis.document.body ? globalThis.document.documentElement.clientHeight : rects.reference.height;
       return -rects.reference.height + ((height / 2) - (rects.floating.height / 2));
-    } else if (config.anchor === document.body) {
+    } else if (config.anchor === globalThis.document.body) {
       const crossAxis = { start: config.offset, end: -config.offset, undefined: 0, center: 0 };
       return { mainAxis: config.position === 'top' || config.position === 'bottom' ? -rects.floating.height - config.offset : -rects.floating.width - config.offset, crossAxis: crossAxis[config.alignment] };
     } else {

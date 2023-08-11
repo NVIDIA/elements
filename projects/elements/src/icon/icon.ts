@@ -55,25 +55,29 @@ export class Icon extends LitElement {
   static _icons = ICON_IMPORTS;
 
   static async add(icons: { [key: string]: IconSVG }) {
-    await customElements.whenDefined('nve-icon');
-    const IconDefinition = customElements.get('nve-icon') as any;
-    IconDefinition._icons ??= [];
+    if (globalThis.customElements?.whenDefined) {
+      await globalThis.customElements.whenDefined('nve-icon');
+      const IconDefinition = customElements.get('nve-icon') as any;
+      IconDefinition._icons ??= [];
 
-    IconDefinition._icons = { ...IconDefinition._icons, ...icons };
-    Object.keys(icons).forEach(name => document.dispatchEvent(new CustomEvent(`nve-icon-${name}`)));
+      IconDefinition._icons = { ...IconDefinition._icons, ...icons };
+      Object.keys(icons).forEach(name => globalThis?.document?.dispatchEvent(new CustomEvent(`nve-icon-${name}`)));
+    }
   }
 
   static alias(aliases: { [key: string]: IconName | string }) {
-    customElements.whenDefined('nve-icon').then(() => {
-      const IconDefinition = customElements.get('nve-icon') as any;
-      IconDefinition._icons ??= [];
-  
-      Object.keys(aliases).forEach(alias => {
-        const name = aliases[alias];
-        IconDefinition._icons[alias] = IconDefinition._icons[name];
-        document.dispatchEvent(new CustomEvent(`nve-icon-${alias}`));
-      });
-    }).catch(e => console.log(`nve-icon was never defined: ${e}`));
+    if (globalThis.customElements?.whenDefined) {
+      customElements.whenDefined('nve-icon').then(() => {
+        const IconDefinition = customElements.get('nve-icon') as any;
+        IconDefinition._icons ??= [];
+    
+        Object.keys(aliases).forEach(alias => {
+          const name = aliases[alias];
+          IconDefinition._icons[alias] = IconDefinition._icons[name];
+          globalThis.document.dispatchEvent(new CustomEvent(`nve-icon-${alias}`));
+        });
+      }).catch(e => console.log(`nve-icon was never defined: ${e}`));
+    }
   }
 
   async updated(props: PropertyValues<this>) {
@@ -81,7 +85,7 @@ export class Icon extends LitElement {
     await this.#render();
 
     if (!Icon._icons[this.name] || !this.svg) {
-      document.addEventListener(`nve-icon-${this.name}`, () => this.requestUpdate(), { once: true });
+      globalThis?.document?.addEventListener(`nve-icon-${this.name}`, () => this.requestUpdate(), { once: true });
     }
   }
 

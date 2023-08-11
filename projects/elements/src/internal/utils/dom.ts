@@ -124,7 +124,7 @@ export function define(element: CustomElementConstructor & { metadata: { version
   if (!customElements.get(tagName)) {
     customElements.define(tagName, element);
     GlobalStateService.dispatch('MLV_ELEMENT_DEFINE', { elementRegistry: { [tagName]: version } });
-  } else if (GlobalStateService.state.elementRegistry[tagName] !== version && location.hostname === 'localhost') {
+  } else if (GlobalStateService.state.elementRegistry[tagName] !== version && globalThis?.location?.hostname === 'localhost') {
     console.warn(`Element ${tagName} version ${version} already defined, please check for duplicate package versions.`);
   }
 }
@@ -174,15 +174,15 @@ export function removeEmptyTextNode(node: Node) {
 }
 
 export function scrollBarWidth() {
-  const div = document.createElement('div');
+  const div = globalThis.document.createElement('div');
   div.style.setProperty('width', '100px');
   div.style.setProperty('height', '100px');
   div.style.setProperty('overflow', 'scroll');
   div.style.setProperty('position', 'absolute');
   div.style.setProperty('top', '-9999px');
-  document.body.appendChild(div);
+  globalThis.document.body.appendChild(div);
   const width = div.offsetWidth - div.clientWidth;
-  document.body.removeChild(div);
+  globalThis.document.body.removeChild(div);
   return width;
 }
 
@@ -217,24 +217,24 @@ export function endOfScrollBox(element: HTMLElement, offset = 0) {
 }
 
 export async function openEyeDropper(): Promise<string> {
-  return await new (window as any).EyeDropper().open().then(color => color.sRGBHex);
+  return await new (globalThis as any).EyeDropper().open().then(color => color.sRGBHex);
 }
 
 /**
  * provides a object with key/value of the currently applied design tokens
  */
-export function getThemeTokens(element = document.querySelector(':root')) { // default root or provided element
+export function getThemeTokens(element = globalThis.document.querySelector(':root')) { // default root or provided element
   const styles = getComputedStyle(element);
   let parent = null;
 
   // check for parent iframe, same domain iframes change how style sheets are accessed
   try {
-    parent = Array.from(window.parent.document.styleSheets);
+    parent = Array.from(globalThis.parent.document.styleSheets);
   } catch {
     parent = [];
   }
 
-  return [...parent, ...Array.from(document.styleSheets)]
+  return [...parent, ...Array.from(globalThis.document.styleSheets)]
     .reduce(
       (finalArr, sheet) =>
         finalArr.concat(
