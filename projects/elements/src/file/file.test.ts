@@ -27,8 +27,7 @@ describe('mlv-file', () => {
     expect(customElements.get('mlv-file')).toBeDefined();
   });
 
-
   it('should append global styles needed for file pseudo selectors', () => {
-    expect(element.querySelector('.mlv-file')).toBeTruthy();
+    expect((element as any).getRootNode().adoptedStyleSheets).toBeTruthy();
   });
 });

@@ -30,10 +30,10 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   get #anchor() {
     if (typeof this.host.anchor === 'string' && this.host.anchor?.length) {
       return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === this.host.anchor);
-    } else if (this.host.anchor && this.host.anchor !== document.body) {
+    } else if (this.host.anchor && this.host.anchor !== globalThis.document.body) {
       return this.host.anchor as HTMLElement;
     } else {
-      return document.body;
+      return globalThis.document.body;
     }
   }
 
@@ -105,9 +105,9 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   }).bind(this);
 
   #toggleLightDismiss() {
-    document.removeEventListener('pointerdown', this.#lightDismiss);
+    globalThis.document.removeEventListener('pointerdown', this.#lightDismiss);
     if (!this.host.hasAttribute('hidden') && this.host.popoverType !== 'manual' && !this.host.closeTimeout) {
-      requestAnimationFrame(() => document.addEventListener('pointerdown', this.#lightDismiss));
+      requestAnimationFrame(() => globalThis.document.addEventListener('pointerdown', this.#lightDismiss));
     }
   }
 
