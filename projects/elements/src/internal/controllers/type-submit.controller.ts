@@ -40,7 +40,7 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
 
   #setupSubmitButton() {  
     if (!this.#button) {
-      this.#button = document.createElement('button') as HTMLButtonElement & { inert: boolean };
+      this.#button = globalThis.document.createElement('button') as HTMLButtonElement & { inert: boolean };
       this.#button.hidden = true;
       this.#button.inert = true;
     }

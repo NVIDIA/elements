@@ -8,12 +8,15 @@ import rulesdir from 'eslint-plugin-rulesdir';
 
 rulesdir.RULES_DIR = './build/eslint';
 
+const source = ['**/src/**/*.ts', '**/src/**/*.d.ts'];
+const tests = ['**/src/test/*.ts', '**/*.test.ts'];
+const stories = ['**/*.stories.ts'];
 const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/storybook-build/**'];
 
 export default [
   'eslint:recommended',
   {
-    files: ['**/*.ts', '**/*.d.ts'],
+    files: [...source, ...tests, ...stories],
     ignores,
     plugins: {
       '@typescript-eslint': typescript,
@@ -83,13 +86,26 @@ export default [
     }
   },
   {
-    files: ['**/*.ts'],
-    ignores: [...ignores, '**/*.stories.ts'],
+    files: [...source],
+    ignores: [...ignores, ...stories],
     plugins: {
       lit
     },
     rules: {
       'lit/quoted-expressions': ['error'],
+    }
+  },
+  {
+    files: [...source],
+    ignores: [...ignores, ...tests, ...stories],
+    rules: {
+      'no-implicit-globals': ['error'],
+      'no-restricted-globals': [
+        'error',
+        { name: 'window', message: 'Use globalThis instead.' },
+        { name: 'location', message: 'Use globalThis.location instead.' },
+        { name: 'document', message: 'Use globalThis.document instead.' },
+      ],
     }
   }
 ];
