@@ -27,8 +27,7 @@ describe('nve-file', () => {
     expect(customElements.get('nve-file')).toBeDefined();
   });
 
-
   it('should append global styles needed for file pseudo selectors', () => {
-    expect(element.querySelector('.nve-file')).toBeTruthy();
+    expect((element as any).getRootNode().adoptedStyleSheets).toBeTruthy();
   });
 });

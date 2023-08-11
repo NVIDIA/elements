@@ -43,7 +43,7 @@ class I18n {
     }
   }
 
-  update(i18nRegistry: Partial<typeof window.MLV_ELEMENTS.state.i18nRegistry>) {
+  update(i18nRegistry: Partial<typeof window.MLV_ELEMENTS.state.i18nRegistry>) { // eslint-disable-line no-restricted-globals
     GlobalStateService.dispatch('MLV_ELEMENTS_I18N_UPDATE', { i18nRegistry });
   }
 }
