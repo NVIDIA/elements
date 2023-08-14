@@ -315,8 +315,10 @@ export const Metrics = {
       <div nve-layout="row gap:md align:vertical-center">
         <h3 nve-text="body bold">Summary:</h3>
         <section nve-layout="row gap:xs align:center">
-          <span nve-text="body sm muted">Total</span>
-          <span nve-text="body sm bold"><nve-badge>${metrics.elements.length}</nve-badge></span>
+          <span nve-text="body sm muted">Total Available Components</span>
+          <span nve-text="body sm bold"><nve-badge status="success">${metrics.elements.length}</nve-badge></span>
+          <span nve-text="body sm muted">Total Maglev Instances</span>
+          <span nve-text="body sm bold"><nve-badge status="success">${metrics.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge></span>
         </section>
       </div>
       <elements-metrics></elements-metrics>
