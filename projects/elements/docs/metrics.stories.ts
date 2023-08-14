@@ -315,8 +315,10 @@ export const Metrics = {
       <div mlv-layout="row gap:md align:vertical-center">
         <h3 mlv-text="body bold">Summary:</h3>
         <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Total</span>
-          <span mlv-text="body sm bold"><mlv-badge>${metrics.elements.length}</mlv-badge></span>
+          <span mlv-text="body sm muted">Total Available Components</span>
+          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.length}</mlv-badge></span>
+          <span mlv-text="body sm muted">Total Maglev Instances</span>
+          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
         </section>
       </div>
       <elements-metrics></elements-metrics>

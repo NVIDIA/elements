@@ -1,0 +1,89 @@
+:host {
+  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-300);
+  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-300);
+  --mlv-sys-layer-popover-arrow-padding: 0;
+  --mlv-sys-layer-popover-arrow-offset: 0;
+  --mlv-sys-layer-popover-offset: 0;
+  --border: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  --background: var(--mlv-sys-layer-overlay-background);
+  --color: var(--mlv-sys-layer-overlay-color);
+  --padding: var(--mlv-ref-size-400);
+  --box-shadow: var(--mlv-ref-shadow-500);
+  --gap: var(--mlv-ref-space-sm);
+  --min-height: 100%;
+  --max-width: 400px;
+  --width: 100%;
+  display: contents;
+}
+
+:host([size='sm']) {
+  --max-width: 280px;
+}
+
+:host([size='lg']) {
+  --max-width: 540px;
+}
+
+dialog {
+  padding: var(--padding);
+  border: var(--border);
+  background: var(--background);
+  color: var(--color);
+  box-shadow: var(--box-shadow);
+  max-width: var(--max-width);
+  min-height: var(--min-height);
+  width: var(--width);
+  top: 0 !important;
+  bottom: 0 !important;
+}
+
+:host([position="left"]) dialog {
+  right: initial !important;
+  left: 0 !important;
+}
+
+:host([position="left"][hidden]) dialog {
+  right: initial !important;
+  left: -400px !important;
+}
+
+:host([position="right"]) dialog {
+  left: initial !important;
+  right: 0 !important;
+}
+
+:host([position="right"][hidden]) dialog {
+  left: initial !important;
+  right: -400px !important;
+}
+
+:host([hidden]) {
+  display: block !important;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.header {
+  display: flex;
+  gap: var(--gap);
+}
+
+.header:has(mlv-icon-button) {
+  min-height: var(--mlv-ref-size-300);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--gap);
+}
+
+mlv-icon-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 99;
+}

@@ -216,6 +216,7 @@ export const parameters = {
           'Dialog',
           'Divider',
           'Dot',
+          'Drawer',
           'Dropdown',
           'File',
           'Icon',
