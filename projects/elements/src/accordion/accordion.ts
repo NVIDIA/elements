@@ -1,5 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { state } from 'lit/decorators/state.js';
 import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals, ContainerElement, Container } from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
@@ -132,6 +133,8 @@ export class Accordion extends LitElement implements ContainerElement {
   */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
+  @state() private hoverActive = false;
+
   get #hasAction(): boolean {
     return !!this.querySelector('[slot="actions"]')
   }
@@ -149,6 +152,8 @@ export class Accordion extends LitElement implements ContainerElement {
       <div internal-host class=${this.#hasAction ? 'has-action' : ''}>
         <div id="header"
           @click=${(e) => this.#toggle(e.target)}
+          @mouseenter=${() => this.hoverActive = true}
+          @mouseleave=${() => this.hoverActive = false}
           .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
           .ariaControls=${'content'}
           >
@@ -161,6 +166,7 @@ export class Accordion extends LitElement implements ContainerElement {
             direction=${this.expanded ? this.#hasAction ? 'down' : 'up' : this.#hasAction ? 'right' : 'down'}
             ?disabled=${this.disabled}
             ?pressed=${this.expanded}
+            ?selected=${!this.disabled && this.hoverActive}
             .expanded=${this.expanded}
             ></nve-icon-button>
         </div>
