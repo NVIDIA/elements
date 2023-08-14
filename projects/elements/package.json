@@ -405,7 +405,8 @@
       "dependencies": [
         "../demos/static:build",
         "../demos/typescript:build",
-        "../demos/extensions:build"
+        "../demos/extensions:build",
+        "../demos/nextjs:build"
       ]
     },
     "lint": {

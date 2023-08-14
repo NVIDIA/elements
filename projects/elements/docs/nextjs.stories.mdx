@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs';
+import { LinkedHeader } from './utils.mdx';
+import '@elements/elements/alert/define.js';
+
+<Meta title="Integrations/NextJS" />
+
+# NextJS Integration
+
+<mlv-alert status="warning">
+  While Elements can be used in React we recommend alternatives such as <a mlv-text="link" href="https://preactjs.com">Preact</a> due to <a mlv-text="link" href="https://custom-elements-everywhere.com/">React incompatibilities</a> with standard Web APIs.
+</mlv-alert>
+
+To use Maglev Elements in [NextJS](https://nextjs.org/) follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps. Once complete
+elements can be imported and used within React jsx and tsx files. The [@lit-labs/react](https://github.com/lit/lit/tree/main/packages/labs/react) package must be
+used to enable React compatibility with Custom Elements. This package will wrap elements into a React component mapping the standard events and properties in a
+way that React can understand. A experimental [@lit-labs/nextjs](https://github.com/lit/lit/tree/main/packages/labs/nextjs) package exists for rendering
+elements with NextJS SSR.
+
+```javascript
+const withLitSSR = require('@lit-labs/nextjs')(); // https://github.com/lit/lit/tree/main/packages/labs/nextjs
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Add your own config here
+  reactStrictMode: true,
+  swcMinify: true,
+};
+
+module.exports = withLitSSR(nextConfig);
+```
+
+```tsx
+import * as React from 'react';
+import { createComponent } from '@lit-labs/react';
+import { Dialog } from '@elements/elements/dialog/index.js';
+import '@elements/elements/dialog/define.js';
+
+const MlvDialog = createComponent({ react: React, tagName: 'mlv-dialog', elementClass: Dialog, events: { onclose: 'close' } });
+```
+
+The `MlvDialog` React component can now be used within a the NextJS application.
+
+```tsx
+// - closable - HTML attribute
+// - hidden - can update via attributes or JavaScript property binding
+// - onclose - event listener binding for 'close' custom event
+
+<MlvDialog closable modal hidden={!showDialog} onclose={() => setShowDialog(false)}>
+  ...
+</MlvDialog>
+```
+
+## Dynamic Components
+
+To use the components but avoid using the experimental `@lit-labs/nextjs` package, the components can be rendered client-side only using the `next/dynamic` package.
+
+```tsx
+import React from 'react';
+import { createComponent } from '@lit-labs/react';
+import dynamic from 'next/dynamic';
+
+export const MlvDialog = dynamic(async () => {
+  import('@elements/elements/dialog/define.js');
+  const { Dialog } = await import('@elements/elements/dialog');
+  return createComponent({ react: React, tagName: Dialog.metadata.tag, elementClass: Dialog, events: { onclose: 'close' } });
+}, { ssr: false });
+```
