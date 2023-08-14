@@ -63,6 +63,7 @@ describe('mlv-grid-column', () => {
     await elementIsStable(columns[0]);
     const sheets = (grid.getRootNode() as any).adoptedStyleSheets;
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('--justify-content: center')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('mlv-grid-column:nth-child(1)')).toBe(true);
   });
 
   it('should update fixed left column position', async () => {
@@ -75,9 +76,9 @@ describe('mlv-grid-column', () => {
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('left: 0px;')).toBe(false);
 
     // left side
-    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('var(--scroll-shadow)')).toBe(false);
-    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
-    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('--border-right: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)')).toBe(false);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('var(--scroll-shadow)')).toBe(false);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('--border-right: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)')).toBe(false);
 
 
     columns[0].position = 'fixed';
@@ -180,6 +181,6 @@ describe('mlv-grid-column actions', () => {
     columns[0].shadowRoot.querySelector('[name=actions]').dispatchEvent(new Event('slotchange'));
     await elementIsStable(actions[0]);
     expect(actions[0].interaction).toBe('flat');
-    expect(actions[0].iconName).toBe('additional-actions');
+    expect(actions[0].iconName).toBe('more-actions');
   });
 });

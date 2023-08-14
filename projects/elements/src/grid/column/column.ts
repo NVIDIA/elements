@@ -57,7 +57,10 @@ export class GridColumn extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'columnheader';
-    this.#observers.push(getAttributeChanges(this, 'aria-colindex', () => this.#computeColumnPositions()));
+    this.#observers.push(getAttributeChanges(this, 'aria-colindex', () => {
+      this.#computeColumnPositions();
+      this.#computeColumnAlignment();
+    }));
     this.addEventListener('sort', (e: CustomEvent) => this.ariaSort = e.detail.next);
   }
 
@@ -85,7 +88,7 @@ export class GridColumn extends LitElement {
   #updateActions() {
     this.#actions.forEach(action => {
       action.interaction = 'flat';
-      action.iconName = action.iconName ? action.iconName : 'additional-actions';
+      action.iconName = action.iconName ? action.iconName : 'more-actions';
     });
   }
 
