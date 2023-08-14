@@ -1,0 +1,33 @@
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { DrawerHeader } from '@elements/elements/drawer';
+import '@elements/elements/drawer/define.js';
+
+describe('nve-drawer-header', () => {
+  let fixture: HTMLElement;
+  let element: DrawerHeader;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-drawer>
+        <nve-drawer-header>hello</nve-drawer-header>
+      </nve-drawer>
+    `);
+    element = fixture.querySelector('nve-drawer-header');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get('nve-drawer-header')).toBeDefined();
+  });
+
+  it('should render with the header default slot', async () => {
+    await elementIsStable(element);
+    expect(element.slot).toBe('header');
+  });
+});
