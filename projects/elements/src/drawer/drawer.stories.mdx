@@ -1,0 +1,74 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Elements/Drawer/Documentation" parameters={{ badges: ['beta'] }} />
+
+<Story id="internal-integration--empty" />
+
+# Drawer
+
+<element-metrics tag="nve-drawer"></element-metrics>
+
+Drawer are to display content that is out of context of the rest of the page (notifications, navigations, settings).
+Alternatively [Panel](./?path=/docs/elements-panel-documentation--docs) is inline as its content is coupled or closely
+related to the content on the page (details, additional actions/options).
+
+## Installation
+
+```typescript
+import '@elements/elements/drawer/define.js';
+```
+
+```html
+<nve-drawer>
+  hello there
+</nve-drawer>
+```
+
+<Canvas>
+  <Story id="elements-drawer-examples--default" inline={false} height="700px" />
+</Canvas>
+
+
+## Interactive
+
+<Canvas>
+  <Story id="elements-drawer-examples--interactive" inline={false} height="700px" />
+</Canvas>
+
+## Small
+
+<Canvas>
+  <Story id="elements-drawer-examples--small" inline={false} height="700px" />
+</Canvas>
+
+## Large
+
+<Canvas>
+  <Story id="elements-drawer-examples--large" inline={false} height="700px" />
+</Canvas>
+
+## Non-Closable
+
+<Canvas>
+  <Story id="elements-drawer-examples--non-closable" inline={false} height="700px" />
+</Canvas>
+
+## Position
+
+<Canvas>
+  <Story id="elements-drawer-examples--position" inline={false} height="800px" />
+</Canvas>
+
+<element-status tag={'nve-drawer'}></element-status>
+
+## nve-drawer
+
+<ArgsTable of="nve-drawer" />
+
+## nve-drawer-header
+
+<ArgsTable of="nve-drawer-header" />
+
+## nve-drawer-footer
+
+<ArgsTable of="nve-drawer-footer" />
