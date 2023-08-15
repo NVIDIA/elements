@@ -736,11 +736,11 @@ export const Placeholder = {
 export const Full = {
   render: () => html`
 <div nve-theme="root">
-  <nve-grid container="full">
+  <nve-grid container="full" style="--scroll-height: 402px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
     </nve-grid-header>
-    ${getItems().map(row => html`
+    ${getItems(20).map(row => html`
     <nve-grid-row>
       ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
     </nve-grid-row>
@@ -753,11 +753,11 @@ export const Full = {
 export const Flat = {
   render: () => html`
     <div nve-theme="root">
-      <nve-grid container="flat">
+      <nve-grid container="flat" style="--scroll-height: 402px">
         <nve-grid-header>
           ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
         </nve-grid-header>
-        ${getItems().map(row => html`
+        ${getItems(20).map(row => html`
         <nve-grid-row>
           ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
         </nve-grid-row>
