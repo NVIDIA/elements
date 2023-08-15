@@ -1,7 +1,18 @@
 import { define } from '@elements/elements/internal';
-import { Icon } from '@elements/elements/icon';
+import { ICON_IMPORTS, Icon } from '@elements/elements/icon';
 
 define(Icon);
+
+if (globalThis.customElements?.get) {
+  const RegisteredIcon = customElements.get('nve-icon') as typeof Icon;
+  const [registeredMajor, registeredMinor] = RegisteredIcon.metadata.version.split('.').map((v) => parseInt(v, 10));
+  const [major, minor] = 'PACKAGE_VERSION'.split('.').map((v) => parseInt(v, 10));
+
+  // determine if a older icon was registered and if so, merge the icons with the latest svgs
+  if (registeredMinor <= minor && registeredMajor <= major) {
+    RegisteredIcon._icons = { ...RegisteredIcon._icons, ...ICON_IMPORTS };
+  }
+}
 
 /** @deprecated aliases */
 Icon.alias({

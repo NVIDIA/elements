@@ -1,5 +1,5 @@
 import { html, LitElement, PropertyValues } from 'lit';
-import { useStyles, attachInternals } from '@elements/elements/internal';
+import { useStyles, attachInternals, debounce } from '@elements/elements/internal';
 import type { GridColumn } from '@elements/elements/grid';
 import styles from './header.css?inline';
 
@@ -47,7 +47,8 @@ export class GridHeader extends LitElement {
   async firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
     await this.updateComplete;
-    new ResizeObserver(() => this.#computeColumnWidths()).observe(this);
+    const debounceFn = debounce(() => this.#computeColumnWidths(), 100);
+    new ResizeObserver(debounceFn).observe(this);
   }
 
   async #computeColumnWidths() {

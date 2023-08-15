@@ -366,7 +366,7 @@
       ]
     },
     "test:coverage": {
-      "command": "PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/vitest/vitest.mjs run --coverage --threads=false --bail=1 --browser.api.port=63316",
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/vitest/vitest.mjs run --coverage --threads=false --bail=1 --browser.api.port=63316",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
