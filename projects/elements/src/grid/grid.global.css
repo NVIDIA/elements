@@ -11,6 +11,18 @@ nve-grid:has(nve-grid-cell:first-child nve-checkbox) {
   --grid-auto-columns: 36px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 }
 
+nve-grid[container='flat'] nve-grid-header {
+  --background: var(--nve-sys-layer-canvas-background);
+}
+
+nve-card nve-grid[container='flat'] nve-grid-header,
+nve-panel nve-grid[container='flat'] nve-grid-header,
+nve-dialog nve-grid[container='flat'] nve-grid-header,
+nve-drawer nve-grid[container='flat'] nve-grid-header,
+nve-accordion nve-grid[container='flat'] nve-grid-header {
+  --background: var(--nve-sys-layer-container-background);
+}
+
 nve-grid-column[width='max-content'] {
   --padding: var(--nve-ref-size-300);
 }
