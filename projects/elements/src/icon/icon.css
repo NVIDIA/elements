@@ -101,7 +101,7 @@ svg {
   --color: var(--nve-sys-support-accent-color);
 }
 
-/** @deprecated (left) */
+/** @deprecated (left) 0.14.0 */
 :host([name='chevron-left']),
 :host([name='beginning']),
 :host([name='collapse-panel']),
@@ -109,7 +109,7 @@ svg {
   transform: rotate(270deg);
 }
 
-/** @deprecated (right) */
+/** @deprecated (right) 0.14.0 */
 :host([name='chevron-right']),
 :host([name='end']),
 :host([name='expand-panel']),
@@ -118,7 +118,7 @@ svg {
   transform: rotate(90deg);
 }
 
-/** @deprecated (down) */
+/** @deprecated (down) 0.14.0 */
 :host([name='chevron-down']),
 :host([name*='thumbs-down']) {
   transform: rotate(180deg);
