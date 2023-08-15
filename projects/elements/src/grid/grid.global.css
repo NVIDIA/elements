@@ -11,6 +11,18 @@ mlv-grid:has(mlv-grid-cell:first-child mlv-checkbox) {
   --grid-auto-columns: 36px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 }
 
+mlv-grid[container='flat'] mlv-grid-header {
+  --background: var(--mlv-sys-layer-canvas-background);
+}
+
+mlv-card mlv-grid[container='flat'] mlv-grid-header,
+mlv-panel mlv-grid[container='flat'] mlv-grid-header,
+mlv-dialog mlv-grid[container='flat'] mlv-grid-header,
+mlv-drawer mlv-grid[container='flat'] mlv-grid-header,
+mlv-accordion mlv-grid[container='flat'] mlv-grid-header {
+  --background: var(--mlv-sys-layer-container-background);
+}
+
 mlv-grid-column[width='max-content'] {
   --padding: var(--mlv-ref-size-300);
 }

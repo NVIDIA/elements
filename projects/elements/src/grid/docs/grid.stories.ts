@@ -736,11 +736,11 @@ export const Placeholder = {
 export const Full = {
   render: () => html`
 <div mlv-theme="root">
-  <mlv-grid container="full">
+  <mlv-grid container="full" style="--scroll-height: 402px">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
-    ${getItems().map(row => html`
+    ${getItems(20).map(row => html`
     <mlv-grid-row>
       ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
     </mlv-grid-row>
@@ -753,11 +753,11 @@ export const Full = {
 export const Flat = {
   render: () => html`
     <div mlv-theme="root">
-      <mlv-grid container="flat">
+      <mlv-grid container="flat" style="--scroll-height: 402px">
         <mlv-grid-header>
           ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
         </mlv-grid-header>
-        ${getItems().map(row => html`
+        ${getItems(20).map(row => html`
         <mlv-grid-row>
           ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
         </mlv-grid-row>
