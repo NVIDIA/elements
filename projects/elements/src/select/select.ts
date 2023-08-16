@@ -23,6 +23,8 @@ import styles from './select.css?inline';
  */
 @i18n<Select>()
 export class Select extends Control {
+  @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
+
   static styles = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {

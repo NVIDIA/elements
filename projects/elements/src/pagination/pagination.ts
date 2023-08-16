@@ -22,9 +22,13 @@ export class Pagination extends LitElement {
 
   @property({ type: Boolean }) skippable: boolean;
 
+  @property({ type: Boolean, attribute: 'disable-step' }) disableStep: boolean;
+
   @property({ type: Boolean }) disabled: boolean;
 
   @property({ type: String }) name: string;
+
+  @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
@@ -82,9 +86,9 @@ export class Pagination extends LitElement {
   }
 
   get #select() {
-    return html`
-    <nve-select>
-      <select .ariaLabel=${this.i18n.currentPage} @change=${e => this.#setStep(parseInt(e.target.value, 10))} value=${this.step} .disabled=${this.disabled}>
+    return this.disableStep ? html`<label>${this.#selectLabel}&nbsp;</label>` : html`
+    <nve-select .container=${this.container}>
+      <select .ariaLabel=${this.i18n.currentPage} @change=${e => this.#setStep(parseInt(e.target.value, 10))} value=${this.step} .disabled=${this.disabled || this.disableStep}>
         <option ?selected=${this.step === 10} value="10">10</option>
         <option ?selected=${this.step === 20} value="20">20</option>
         <option ?selected=${this.step === 50} value="50">50</option>

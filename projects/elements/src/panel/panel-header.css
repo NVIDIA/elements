@@ -23,6 +23,7 @@
   margin: 0;
   font-size: var(--nve-ref-font-size-100);
   font-weight: var(--nve-ref-font-weight-normal);
+  color: var(--nve-sys-text-muted-color);
 }
 
 ::slotted([slot="action-icon"]) {
