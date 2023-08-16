@@ -98,7 +98,7 @@ export const RadioGroup = {
     </mlv-radio>
   </mlv-radio-group>
 </mlv-dropdown>
-<mlv-button id="btn" mlv-control>completed <mlv-icon name="chevron" direction="down" size="sm"></mlv-icon></mlv-button>
+<mlv-button id="btn" mlv-control>completed <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
   `
 };
 
@@ -115,7 +115,7 @@ class RadioGroupInteractiveDemo extends LitElement {
 
   render() {
     return html`
-<mlv-button id="btn" mlv-control>${this.selected.label} <mlv-icon name="chevron" direction="down" size="sm"></mlv-icon></mlv-button>
+<mlv-button id="btn" mlv-control>${this.selected.label} <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
 <mlv-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
   <mlv-radio-group style="width: 250px">
     <label>Sort By</label>
@@ -154,7 +154,7 @@ export const CheckboxGroup = {
     </mlv-checkbox>
   </mlv-checkbox-group>
 </mlv-dropdown>
-<mlv-button id="btn" mlv-control>test suites <mlv-icon name="chevron" direction="down" size="sm"></mlv-icon></mlv-button>
+<mlv-button id="btn" mlv-control>test suites <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
   `
 };
 
@@ -171,7 +171,7 @@ class CheckboxGroupInteractiveDemo extends LitElement {
 
   render() {
     return html`
-<mlv-button id="btn" mlv-control>test suites <mlv-icon name="chevron" direction="down" size="sm"></mlv-icon></mlv-button>
+<mlv-button id="btn" mlv-control>test suites <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
 <mlv-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
   <mlv-checkbox-group style="width: 250px">
     <label>Sort By</label>

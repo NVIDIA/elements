@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deepMerge } from '@elements/elements/internal';
+import { deepMerge, parseVersion } from '@elements/elements/internal';
 
 describe('deepMerge', () => {
   const obj1 = {
@@ -39,5 +39,11 @@ describe('deepMerge', () => {
   it('works when nested fields change their type to object', () => {
     const result = deepMerge({ field: 'hello' }, { field: { a: 1 } });
     expect(result).toStrictEqual({ field: { a: 1 } });
+  });
+});
+
+describe('parseVersion', () => {
+  it('it should parse a version string', () => {
+    expect(parseVersion('1.2.3')).toStrictEqual({ major: 1, minor: 2, patch: 3 });
   });
 });

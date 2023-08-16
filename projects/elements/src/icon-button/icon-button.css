@@ -1,4 +1,5 @@
 :host {
+  --color: var(--mlv-sys-text-muted-color);
   --border-radius: var(--mlv-ref-border-radius-full);
   --padding: 0;
   --line-height: 0;
@@ -10,13 +11,13 @@
 
 :host([size='sm']) {
   --padding: 0;
-  --height: var(--mlv-ref-size-600);
-  --width: var(--mlv-ref-size-600);
+  --height: var(--mlv-ref-size-700);
+  --width: var(--mlv-ref-size-700);
 }
 
 :host([size='lg']) {
-  --width: calc(var(--mlv-ref-size-1000) + var(--mlv-ref-size-100));
-  --height: calc(var(--mlv-ref-size-1000) + var(--mlv-ref-size-100));
+  --width: var(--mlv-ref-size-1000);
+  --height: var(--mlv-ref-size-1000);
   --padding: 0;
 }
 

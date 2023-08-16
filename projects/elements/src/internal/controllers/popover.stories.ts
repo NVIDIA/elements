@@ -6,6 +6,7 @@ import '@elements/elements/search/define.js';
 import '@elements/elements/dialog/define.js';
 import '@elements/elements/tooltip/define.js';
 import '@elements/elements/toast/define.js';
+import '@elements/elements/drawer/define.js';
 import '@elements/elements/dropdown/define.js';
 import '@elements/elements/notification/define.js';
 
@@ -68,6 +69,14 @@ export const Interactive = {
       <mlv-button id="toast-btn">toast</mlv-button>
       <mlv-toast anchor="toast-btn" trigger="toast-btn" position="top" close-timeout="1500" hidden>copied!</mlv-toast>
 
+      <mlv-button id="drawer-btn" size="sm">drawer</mlv-button>
+      <mlv-drawer hidden closable modal trigger="drawer-btn">
+        <mlv-drawer-header>
+          <h3 mlv-text="heading semibold sm">Title</h3>
+        </mlv-drawer-header>
+        <p mlv-text="body">some text content in a drawer</p>
+      </mlv-drawer>
+
       <mlv-button id="dropdown-btn">dropdown</mlv-button>
       <mlv-dropdown anchor="dropdown-btn" trigger="dropdown-btn" closable hidden>
         <h3 mlv-text="heading">Title</h3>
@@ -94,6 +103,10 @@ export const Interactive = {
         const toast = document.querySelector('mlv-toast');
         toast.addEventListener('open', () => toast.hidden = false);
         toast.addEventListener('close', () => toast.hidden = true);
+
+        const drawer = document.querySelector('mlv-drawer');
+        drawer.addEventListener('open', () => drawer.hidden = false);
+        drawer.addEventListener('close', () => drawer.hidden = true);
 
         const dropdown = document.querySelector('mlv-dropdown');
         dropdown.addEventListener('open', () => dropdown.hidden = false);

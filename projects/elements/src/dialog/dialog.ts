@@ -102,7 +102,7 @@ export class Dialog extends LitElement {
     return html`
     <dialog ${animationFade(this)}>
       <div class="header">
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button size="sm" @click=${() => this.#typePopoverController.close()} icon-name="cancel" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
       <div class="content">

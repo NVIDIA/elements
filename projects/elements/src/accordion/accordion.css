@@ -4,14 +4,12 @@
   --background: var(--mlv-sys-layer-container-background);
   --color: var(--mlv-sys-layer-canvas-color);
   --border-radius: 0;
-  --box-shadow: var(--mlv-ref-shadow-100);
   --header-padding: var(--mlv-ref-size-300) var(--mlv-ref-size-400);
   --cursor: pointer;
   width: 100%;
 }
 
 [internal-host] {
-  box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
   background: var(--background);
   color: var(--color);
@@ -47,7 +45,6 @@
 }
 
 :host([container='flat']) {
-  --box-shadow: none;
   --background: inherit;
 }
 

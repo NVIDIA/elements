@@ -1,15 +1,15 @@
-import { define } from '@elements/elements/internal';
+import { define, parseVersion } from '@elements/elements/internal';
 import { ICON_IMPORTS, Icon } from '@elements/elements/icon';
 
 define(Icon);
 
 if (globalThis.customElements?.get) {
   const RegisteredIcon = customElements.get('mlv-icon') as typeof Icon;
-  const [registeredMajor, registeredMinor] = RegisteredIcon.metadata.version.split('.').map((v) => parseInt(v, 10));
-  const [major, minor] = 'PACKAGE_VERSION'.split('.').map((v) => parseInt(v, 10));
+  const registered = parseVersion(RegisteredIcon.metadata.version);
+  const current = parseVersion('PACKAGE_VERSION');
 
   // determine if a older icon was registered and if so, merge the icons with the latest svgs
-  if (registeredMinor <= minor && registeredMajor <= major) {
+  if (registered.minor <= current.minor && registered.major <= current.major) {
     RegisteredIcon._icons = { ...RegisteredIcon._icons, ...ICON_IMPORTS };
   }
 }

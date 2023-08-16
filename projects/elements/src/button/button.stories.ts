@@ -72,9 +72,9 @@ export const FlatInteractions = {
 
 export const Size = {
   render: () => html`
-    <mlv-button size="sm">small</mlv-button>
-    <mlv-button>default</mlv-button>
-    <mlv-button size="lg">large</mlv-button>
+    <mlv-button size="sm">small button</mlv-button>
+    <mlv-button>default button</mlv-button>
+    <mlv-button size="lg">large button</mlv-button>
   `
 }
 

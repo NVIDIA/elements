@@ -5,7 +5,7 @@
   --padding: 0 var(--mlv-ref-size-300);
   --border-radius: var(--mlv-ref-border-radius-lg);
   --font-weight: var(--mlv-ref-font-weight-semibold);
-  --font-size: var(--mlv-ref-font-size-200);
+  --font-size: var(--mlv-ref-font-size-100);
   --text-decoration: none;
   --text-align: center;
   --cursor: pointer;
@@ -84,12 +84,12 @@
 
 :host([size='sm']) {
   --height: var(--mlv-ref-size-700);
-  --padding: 0 var(--mlv-ref-size-200);
 }
 
 :host([size='lg']) {
   --height: var(--mlv-ref-size-900);
-  --padding: 0 var(--mlv-ref-size-600);
+  --padding: 0 var(--mlv-ref-size-400);
+  --font-size: var(--mlv-ref-font-size-200);
 }
 
 :host([readonly]) {

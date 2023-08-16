@@ -31,11 +31,11 @@ export class Control extends LitElement {
   @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
   get #label() {
-    return this.querySelector<HTMLLabelElement>('label');
+    return this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="label"]')?.assignedElements({ flatten: true })?.[0] as HTMLLabelElement;
   }
 
   get #messages() {
-    return Array.from(this.querySelectorAll<ControlMessage>('mlv-control-message'));
+    return (this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="messages"]')?.assignedElements({ flatten: true }) ?? []) as ControlMessage[];
   }
 
   get #visibleMessages() {
@@ -82,7 +82,7 @@ export class Control extends LitElement {
   render() {
     return !this.inlineControl ? html`
       <div internal-host class=${classMap(this.styleStates)}>
-        ${this.#label ? html`<slot name="label"></slot>` : ''}
+        <slot name="label" ?hidden=${!this.#label}></slot>
         <div input>
           ${this.prefixContent}
           <slot></slot>
@@ -167,8 +167,9 @@ export class Control extends LitElement {
   }
 
   #assignLabel() {
-    if (this.#label) {
-      this.#label.slot = 'label';
+    const label = this.querySelector('label') || this.shadowRoot.querySelector('slot').assignedNodes({ flatten: true }).find((i: HTMLElement) => i.tagName === 'LABEL') as HTMLLabelElement;
+    if (label) {
+      label.slot = 'label';
     }
   }
 

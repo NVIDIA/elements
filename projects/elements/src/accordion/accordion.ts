@@ -86,7 +86,6 @@ export class AccordionContent extends LitElement {
  * @slot content - content element (Use `<mlv-accordion-content>` or custom content)
  * @cssprop --background
  * @cssprop --color
- * @cssprop --box-shadow
  * @cssprop --header-padding
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630

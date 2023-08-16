@@ -13,20 +13,20 @@ Elements provides a set of popover type components based on the popover spec and
 - [popover spec](https://open-ui.org/components/popup.research.explainer)
 - [w3c aria patterns](https://www.w3.org/WAI/ARIA/apg/patterns/)
 
-<LinkedHeader>Available Elements</LinkedHeader>
-
-<mlv-alert status="warning">Popover elements currently in alpha</mlv-alert>
+## Available Elements
 
 - [dialog](?path=/docs/elements-dialog-documentation--docs)
+- [drawer](?path=/docs/elements-drawer-documentation--docs)
 - [dropdown](?path=/docs/elements-dropdown-documentation--docs)
 - [tooltip](?path=/docs/elements-tooltip-documentation--docs)
 - [toast](?path=/docs/elements-toast-documentation--docs)
 - [notification](?path=/docs/elements-notification-documentation--docs)
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/dialog/define.js';
+import '@elements/elements/drawer/define.js';
 import '@elements/elements/dropdown/define.js';
 import '@elements/elements/tooltip/define.js';
 import '@elements/elements/toast/define.js';
@@ -37,7 +37,7 @@ import '@elements/elements/notification/define.js';
   <Story id="foundations-popovers-examples--interactive" inline={false} height={400} />
 </Canvas>
 
-<LinkedHeader>Usage</LinkedHeader>
+## Usage
 
 Popover types are visible by default and can be controlled via the `hidden` attribute or by appending and removing from the DOM.
 
@@ -49,7 +49,7 @@ Popover types are visible by default and can be controlled via the `hidden` attr
 <Story id="elements-tooltip-examples--default" inline={false} height={280} />
 
 
-<LinkedHeader>Events</LinkedHeader>
+## Events
 
 All popovers are stateless and do not auto close. Popovers provide a `close` event to notify when
 a user has interacted with the popover in a way that should dismiss the popover. Events do not mutate or alter
@@ -84,7 +84,7 @@ For elements like tooltips this is often the same as anchor however the anchor a
 the same as UX patterns such as guided tours may have trigger elements that are not the anchored position.
 Both `anchor` and `trigger` can take a string idref or a DOM Element reference.
 
-<LinkedHeader>Nested</LinkedHeader>
+## Nested
 
 <Canvas>
   <Story id="foundations-popovers-examples--nested" inline={false} height={700} />

@@ -29,6 +29,24 @@ export const Disabled = {
   `
 };
 
+export const Flat = {
+  render: () => html`
+    <mlv-pagination container="flat" value="1" items="100" step="10" skippable></mlv-pagination>
+  `
+};
+
+export const Inline = {
+  render: () => html`
+    <mlv-pagination container="inline" value="1" items="100" step="10"></mlv-pagination>
+  `
+};
+
+export const DisableStep = {
+  render: () => html`
+    <mlv-pagination disable-step container="inline" value="1" items="100" step="10"></mlv-pagination>
+  `
+};
+
 export const Forms = {
   render: () => html`
     <form id="pagination-form" mlv-layout="column gap:md">

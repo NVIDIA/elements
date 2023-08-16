@@ -23,6 +23,7 @@
   margin: 0;
   font-size: var(--mlv-ref-font-size-100);
   font-weight: var(--mlv-ref-font-weight-normal);
+  color: var(--mlv-sys-text-muted-color);
 }
 
 ::slotted([slot="action-icon"]) {

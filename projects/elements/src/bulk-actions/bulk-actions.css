@@ -9,7 +9,8 @@
   --box-shadow: var(--mlv-ref-shadow-300);
   --border-bottom: none;
   --height: var(--mlv-ref-size-1000);
-  --font-size: var(--mlv-ref-font-size-200);
+  --font-size: var(--mlv-ref-font-size-100);
+  --font-weight: var(--mlv-ref-font-weight-medium);
   display: block;
   width: 100%;
 }
@@ -23,6 +24,7 @@
   color: var(--color);
   height: var(--height);
   font-size: var(--font-size);
+  font-weight: var(--font-weight);
   gap: var(--gap);
   line-height: 0;
   display: flex;
