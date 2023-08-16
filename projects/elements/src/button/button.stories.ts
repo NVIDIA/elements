@@ -72,9 +72,9 @@ export const FlatInteractions = {
 
 export const Size = {
   render: () => html`
-    <nve-button size="sm">small</nve-button>
-    <nve-button>default</nve-button>
-    <nve-button size="lg">large</nve-button>
+    <nve-button size="sm">small button</nve-button>
+    <nve-button>default button</nve-button>
+    <nve-button size="lg">large button</nve-button>
   `
 }
 

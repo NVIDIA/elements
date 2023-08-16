@@ -1,4 +1,5 @@
 :host {
+  --color: var(--nve-sys-text-muted-color);
   --border-radius: var(--nve-ref-border-radius-full);
   --padding: 0;
   --line-height: 0;
@@ -10,13 +11,13 @@
 
 :host([size='sm']) {
   --padding: 0;
-  --height: var(--nve-ref-size-600);
-  --width: var(--nve-ref-size-600);
+  --height: var(--nve-ref-size-700);
+  --width: var(--nve-ref-size-700);
 }
 
 :host([size='lg']) {
-  --width: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-100));
-  --height: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-100));
+  --width: var(--nve-ref-size-1000);
+  --height: var(--nve-ref-size-1000);
   --padding: 0;
 }
 

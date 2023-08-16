@@ -1,5 +1,5 @@
 {
-  "created": "2023-08-14T16:43:13.870Z",
+  "created": "2023-08-17T00:43:54.976Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -27,9 +27,9 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs",
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
-      "projectTotal": 0,
-      "instanceTotal": 0,
-      "coverageTotal": 85.33,
+      "projectTotal": 1,
+      "instanceTotal": 1,
+      "coverageTotal": 83.54,
       "behavior": "container",
       "status": "beta"
     },
@@ -46,9 +46,9 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs",
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
-      "projectTotal": 0,
-      "instanceTotal": 0,
-      "coverageTotal": 85.33,
+      "projectTotal": 1,
+      "instanceTotal": 1,
+      "coverageTotal": 83.54,
       "behavior": "container",
       "status": "beta"
     },
@@ -65,9 +65,9 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs",
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
-      "projectTotal": 0,
-      "instanceTotal": 0,
-      "coverageTotal": 85.33,
+      "projectTotal": 1,
+      "instanceTotal": 1,
+      "coverageTotal": 83.54,
       "behavior": "container",
       "status": "beta"
     },
@@ -84,9 +84,9 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs",
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
-      "projectTotal": 0,
-      "instanceTotal": 0,
-      "coverageTotal": 85.33,
+      "projectTotal": 1,
+      "instanceTotal": 1,
+      "coverageTotal": 83.54,
       "behavior": "container",
       "status": "beta"
     },
@@ -104,7 +104,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=76-5326&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 7,
-      "instanceTotal": 47,
+      "instanceTotal": 58,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -123,7 +123,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-banner-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-14&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 4,
-      "instanceTotal": 19,
+      "instanceTotal": 30,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -142,7 +142,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-group-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2519-54572&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 6,
-      "instanceTotal": 19,
+      "instanceTotal": 27,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -161,7 +161,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-app-header-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-35&t=c9DaB6YRpkhGAp49-0",
       "projectTotal": 2,
-      "instanceTotal": 57,
+      "instanceTotal": 65,
       "behavior": "navigation",
       "status": "beta"
     },
@@ -198,7 +198,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-breadcrumb-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1",
       "projectTotal": 4,
-      "instanceTotal": 61,
+      "instanceTotal": 69,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -236,7 +236,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 17,
-      "instanceTotal": 188,
+      "instanceTotal": 207,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -255,7 +255,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 6,
-      "instanceTotal": 37,
+      "instanceTotal": 44,
       "coverageTotal": 94.73,
       "behavior": "container",
       "status": "stable"
@@ -274,7 +274,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 6,
-      "instanceTotal": 32,
+      "instanceTotal": 36,
       "coverageTotal": 94.73,
       "behavior": "container",
       "status": "stable"
@@ -293,7 +293,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 3,
-      "instanceTotal": 13,
+      "instanceTotal": 19,
       "coverageTotal": 94.73,
       "behavior": "container",
       "status": "stable"
@@ -331,7 +331,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-checkbox-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 6,
-      "instanceTotal": 13,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -350,7 +350,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-checkbox-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 5,
-      "instanceTotal": 6,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -388,8 +388,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/foundations-forms-controls--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 8,
-      "instanceTotal": 54,
-      "coverageTotal": 100,
+      "instanceTotal": 66,
+      "coverageTotal": 98.76,
       "behavior": "form",
       "status": "stable"
     },
@@ -540,7 +540,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-divider-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
       "projectTotal": 2,
-      "instanceTotal": 117,
+      "instanceTotal": 127,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -616,7 +616,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dropdown-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 7,
-      "instanceTotal": 67,
+      "instanceTotal": 76,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -654,7 +654,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-grid-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 5,
-      "instanceTotal": 24,
+      "instanceTotal": 25,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -673,7 +673,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 5,
-      "instanceTotal": 24,
+      "instanceTotal": 25,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -692,8 +692,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 5,
-      "instanceTotal": 24,
-      "coverageTotal": 100,
+      "instanceTotal": 25,
+      "coverageTotal": 98.46,
       "behavior": "list",
       "status": "beta"
     },
@@ -730,8 +730,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 5,
-      "instanceTotal": 24,
-      "coverageTotal": 100,
+      "instanceTotal": 25,
+      "coverageTotal": 96.96,
       "behavior": "list",
       "status": "beta"
     },
@@ -768,7 +768,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 5,
-      "instanceTotal": 24,
+      "instanceTotal": 25,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -787,8 +787,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 17,
-      "instanceTotal": 215,
-      "coverageTotal": 93.61,
+      "instanceTotal": 233,
+      "coverageTotal": 95.12,
       "behavior": "content",
       "status": "stable"
     },
@@ -806,7 +806,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 14,
-      "instanceTotal": 162,
+      "instanceTotal": 180,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -825,7 +825,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 10,
-      "instanceTotal": 17,
+      "instanceTotal": 18,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -863,7 +863,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-logo-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=113-5317&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 3,
-      "instanceTotal": 63,
+      "instanceTotal": 71,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -882,7 +882,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-menu-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0",
       "projectTotal": 2,
-      "instanceTotal": 62,
+      "instanceTotal": 71,
       "coverageTotal": 100,
       "behavior": "navigation",
       "status": "beta"
@@ -901,7 +901,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-menu-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0",
       "projectTotal": 2,
-      "instanceTotal": 61,
+      "instanceTotal": 70,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -978,7 +978,7 @@
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0",
       "projectTotal": 2,
       "instanceTotal": 3,
-      "coverageTotal": 95.83,
+      "coverageTotal": 95.94,
       "behavior": "content",
       "status": "beta"
     },
@@ -1206,7 +1206,7 @@
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-24&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 5,
       "instanceTotal": 9,
-      "coverageTotal": 98.73,
+      "coverageTotal": 98.75,
       "behavior": "form",
       "status": "stable"
     },
@@ -1376,7 +1376,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tooltip-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-29&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 8,
-      "instanceTotal": 12,
+      "instanceTotal": 13,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "beta"
@@ -1601,7 +1601,11 @@
         },
         {
           "name": "nve-badge",
-          "instanceTotal": 8
+          "instanceTotal": 7
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 4
         },
         {
           "name": "nve-button",
@@ -1674,10 +1678,6 @@
         {
           "name": "nve-grid-row",
           "instanceTotal": 2
-        },
-        {
-          "name": "nve-icon",
-          "instanceTotal": 3
         },
         {
           "name": "nve-sort-button",
@@ -2058,11 +2058,11 @@
         },
         {
           "name": "nve-icon-button",
-          "instanceTotal": 72
+          "instanceTotal": 74
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 108
+          "instanceTotal": 109
         },
         {
           "name": "nve-app-header",
@@ -2070,7 +2070,7 @@
         },
         {
           "name": "nve-badge",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-breadcrumb",
@@ -2082,7 +2082,7 @@
         },
         {
           "name": "nve-card",
-          "instanceTotal": 21
+          "instanceTotal": 22
         },
         {
           "name": "nve-card-header",
@@ -2090,7 +2090,7 @@
         },
         {
           "name": "nve-card-content",
-          "instanceTotal": 20
+          "instanceTotal": 21
         },
         {
           "name": "nve-card-footer",
@@ -2098,11 +2098,11 @@
         },
         {
           "name": "nve-checkbox-group",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-checkbox",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-color",
@@ -2130,7 +2130,7 @@
         },
         {
           "name": "nve-divider",
-          "instanceTotal": 57
+          "instanceTotal": 59
         },
         {
           "name": "nve-dot",
@@ -2138,7 +2138,7 @@
         },
         {
           "name": "nve-dropdown",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-file",
@@ -2154,11 +2154,11 @@
         },
         {
           "name": "nve-grid-cell",
-          "instanceTotal": 19
+          "instanceTotal": 20
         },
         {
           "name": "nve-grid-column",
-          "instanceTotal": 19
+          "instanceTotal": 20
         },
         {
           "name": "nve-grid-footer",
@@ -2166,11 +2166,11 @@
         },
         {
           "name": "nve-grid",
-          "instanceTotal": 19
+          "instanceTotal": 20
         },
         {
           "name": "nve-grid-header",
-          "instanceTotal": 19
+          "instanceTotal": 20
         },
         {
           "name": "nve-grid-placeholder",
@@ -2178,7 +2178,7 @@
         },
         {
           "name": "nve-grid-row",
-          "instanceTotal": 19
+          "instanceTotal": 20
         },
         {
           "name": "nve-input-group",
@@ -2186,7 +2186,7 @@
         },
         {
           "name": "nve-input",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-logo",
@@ -2194,11 +2194,11 @@
         },
         {
           "name": "nve-menu-item",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-menu",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-month",
@@ -2290,14 +2290,30 @@
         },
         {
           "name": "nve-tooltip",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-week",
           "instanceTotal": 2
+        },
+        {
+          "name": "nve-accordion-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-accordion-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-accordion",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-accordion-group",
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 735
+      "instanceTotal": 759
     },
     {
       "name": "@elements/next-common",
@@ -2306,22 +2322,22 @@
       "elements": [
         {
           "name": "nve-card",
-          "instanceTotal": 9
+          "instanceTotal": 15
         },
         {
           "name": "nve-card-footer",
-          "instanceTotal": 9
+          "instanceTotal": 15
         },
         {
           "name": "nve-button",
-          "instanceTotal": 5
+          "instanceTotal": 8
         },
         {
           "name": "nve-card-content",
-          "instanceTotal": 5
+          "instanceTotal": 8
         }
       ],
-      "instanceTotal": 28
+      "instanceTotal": 46
     },
     {
       "name": "ide",
@@ -2561,34 +2577,34 @@
       "elements": [
         {
           "name": "nve-alert-banner",
-          "instanceTotal": 9
-        },
-        {
-          "name": "nve-alert",
-          "instanceTotal": 9
+          "instanceTotal": 16
         },
         {
           "name": "nve-alert-group",
-          "instanceTotal": 4
+          "instanceTotal": 8
+        },
+        {
+          "name": "nve-alert",
+          "instanceTotal": 16
         },
         {
           "name": "nve-button",
-          "instanceTotal": 4
+          "instanceTotal": 8
         },
         {
           "name": "nve-control",
-          "instanceTotal": 4
+          "instanceTotal": 8
         },
         {
           "name": "nve-icon-button",
-          "instanceTotal": 4
+          "instanceTotal": 8
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 4
+          "instanceTotal": 8
         }
       ],
-      "instanceTotal": 38
+      "instanceTotal": 72
     },
     {
       "name": "@elements/xp-app-shell",
@@ -2597,66 +2613,66 @@
       "elements": [
         {
           "name": "nve-app-header",
-          "instanceTotal": 55
+          "instanceTotal": 63
         },
         {
           "name": "nve-breadcrumb",
-          "instanceTotal": 57
+          "instanceTotal": 65
         },
         {
           "name": "nve-button",
-          "instanceTotal": 64
+          "instanceTotal": 76
         },
         {
           "name": "nve-dropdown",
-          "instanceTotal": 59
+          "instanceTotal": 67
         },
         {
           "name": "nve-icon-button",
-          "instanceTotal": 61
+          "instanceTotal": 73
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 64
+          "instanceTotal": 76
         },
         {
           "name": "nve-logo",
-          "instanceTotal": 58
+          "instanceTotal": 66
         },
         {
           "name": "nve-menu-item",
-          "instanceTotal": 59
+          "instanceTotal": 67
         },
         {
           "name": "nve-menu",
-          "instanceTotal": 60
+          "instanceTotal": 68
         },
         {
           "name": "nve-divider",
-          "instanceTotal": 60
+          "instanceTotal": 68
         },
         {
           "name": "nve-control",
-          "instanceTotal": 38
+          "instanceTotal": 46
         },
         {
           "name": "nve-alert-banner",
-          "instanceTotal": 5
+          "instanceTotal": 9
         },
         {
           "name": "nve-alert-group",
-          "instanceTotal": 5
+          "instanceTotal": 9
         },
         {
           "name": "nve-alert",
-          "instanceTotal": 5
+          "instanceTotal": 9
         },
         {
           "name": "nve-badge",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 651
+      "instanceTotal": 763
     },
     {
       "name": "@elements/xp-core-primitives",
@@ -2800,28 +2816,55 @@
       {
         "file": "elements/src/accordion/accordion.ts",
         "lines": {
-          "total": 47,
-          "covered": 37,
+          "total": 50,
+          "covered": 38,
           "skipped": 0,
-          "pct": 78.72
+          "pct": 76
         },
         "functions": {
-          "total": 21,
+          "total": 23,
           "covered": 15,
           "skipped": 0,
-          "pct": 71.42
+          "pct": 65.21
         },
         "statements": {
-          "total": 75,
-          "covered": 64,
+          "total": 79,
+          "covered": 66,
           "skipped": 0,
-          "pct": 85.33
+          "pct": 83.54
         },
         "branches": {
-          "total": 18,
-          "covered": 13,
+          "total": 20,
+          "covered": 15,
           "skipped": 0,
-          "pct": 72.22
+          "pct": 75
+        }
+      },
+      {
+        "file": "elements/src/icon/define.ts",
+        "lines": {
+          "total": 8,
+          "covered": 7,
+          "skipped": 0,
+          "pct": 87.5
+        },
+        "functions": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 8,
+          "covered": 7,
+          "skipped": 0,
+          "pct": 87.5
+        },
+        "branches": {
+          "total": 6,
+          "covered": 3,
+          "skipped": 0,
+          "pct": 50
         }
       },
       {
@@ -2879,33 +2922,6 @@
         }
       },
       {
-        "file": "elements/src/icon/icon.ts",
-        "lines": {
-          "total": 34,
-          "covered": 32,
-          "skipped": 0,
-          "pct": 94.11
-        },
-        "functions": {
-          "total": 15,
-          "covered": 12,
-          "skipped": 0,
-          "pct": 80
-        },
-        "statements": {
-          "total": 47,
-          "covered": 44,
-          "skipped": 0,
-          "pct": 93.61
-        },
-        "branches": {
-          "total": 12,
-          "covered": 10,
-          "skipped": 0,
-          "pct": 83.33
-        }
-      },
-      {
         "file": "elements/src/card/card.ts",
         "lines": {
           "total": 15,
@@ -2960,12 +2976,39 @@
         }
       },
       {
+        "file": "elements/src/icon/icon.ts",
+        "lines": {
+          "total": 30,
+          "covered": 29,
+          "skipped": 0,
+          "pct": 96.66
+        },
+        "functions": {
+          "total": 16,
+          "covered": 14,
+          "skipped": 0,
+          "pct": 87.5
+        },
+        "statements": {
+          "total": 41,
+          "covered": 39,
+          "skipped": 0,
+          "pct": 95.12
+        },
+        "branches": {
+          "total": 14,
+          "covered": 11,
+          "skipped": 0,
+          "pct": 78.57
+        }
+      },
+      {
         "file": "elements/src/pagination/pagination.ts",
         "lines": {
-          "total": 40,
-          "covered": 37,
+          "total": 42,
+          "covered": 39,
           "skipped": 0,
-          "pct": 92.5
+          "pct": 92.85
         },
         "functions": {
           "total": 19,
@@ -2974,16 +3017,16 @@
           "pct": 89.47
         },
         "statements": {
-          "total": 72,
-          "covered": 69,
+          "total": 74,
+          "covered": 71,
           "skipped": 0,
-          "pct": 95.83
+          "pct": 95.94
         },
         "branches": {
-          "total": 10,
-          "covered": 10,
+          "total": 14,
+          "covered": 13,
           "skipped": 0,
-          "pct": 100
+          "pct": 92.85
         }
       },
       {
@@ -3014,6 +3057,33 @@
         }
       },
       {
+        "file": "elements/src/grid/header/header.ts",
+        "lines": {
+          "total": 21,
+          "covered": 21,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 13,
+          "covered": 12,
+          "skipped": 0,
+          "pct": 92.3
+        },
+        "statements": {
+          "total": 33,
+          "covered": 32,
+          "skipped": 0,
+          "pct": 96.96
+        },
+        "branches": {
+          "total": 4,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
         "file": "elements/src/internal/controllers/keynav-grid.controller.ts",
         "lines": {
           "total": 69,
@@ -3038,6 +3108,33 @@
           "covered": 53,
           "skipped": 0,
           "pct": 91.37
+        }
+      },
+      {
+        "file": "elements/src/grid/column/column.ts",
+        "lines": {
+          "total": 53,
+          "covered": 52,
+          "skipped": 0,
+          "pct": 98.11
+        },
+        "functions": {
+          "total": 14,
+          "covered": 14,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 65,
+          "covered": 64,
+          "skipped": 0,
+          "pct": 98.46
+        },
+        "branches": {
+          "total": 32,
+          "covered": 30,
+          "skipped": 0,
+          "pct": 93.75
         }
       },
       {
@@ -3070,10 +3167,10 @@
       {
         "file": "elements/src/select/select.ts",
         "lines": {
-          "total": 55,
-          "covered": 54,
+          "total": 56,
+          "covered": 55,
           "skipped": 0,
-          "pct": 98.18
+          "pct": 98.21
         },
         "functions": {
           "total": 25,
@@ -3082,16 +3179,43 @@
           "pct": 100
         },
         "statements": {
-          "total": 79,
-          "covered": 78,
+          "total": 80,
+          "covered": 79,
           "skipped": 0,
-          "pct": 98.73
+          "pct": 98.75
         },
         "branches": {
           "total": 20,
-          "covered": 18,
+          "covered": 19,
           "skipped": 0,
-          "pct": 90
+          "pct": 95
+        }
+      },
+      {
+        "file": "elements/src/forms/control/control.ts",
+        "lines": {
+          "total": 59,
+          "covered": 59,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 25,
+          "covered": 24,
+          "skipped": 0,
+          "pct": 96
+        },
+        "statements": {
+          "total": 81,
+          "covered": 80,
+          "skipped": 0,
+          "pct": 98.76
+        },
+        "branches": {
+          "total": 24,
+          "covered": 24,
+          "skipped": 0,
+          "pct": 100
         }
       },
       {
@@ -4312,20 +4436,20 @@
       {
         "file": "elements/src/internal/utils/objects.ts",
         "lines": {
-          "total": 12,
-          "covered": 12,
+          "total": 14,
+          "covered": 14,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 2,
-          "covered": 2,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 12,
-          "covered": 12,
+          "total": 15,
+          "covered": 15,
           "skipped": 0,
           "pct": 100
         },
@@ -4985,33 +5109,6 @@
         }
       },
       {
-        "file": "elements/src/icon/define.ts",
-        "lines": {
-          "total": 2,
-          "covered": 2,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 0,
-          "covered": 0,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 2,
-          "covered": 2,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 0,
-          "covered": 0,
-          "skipped": 0,
-          "pct": 100
-        }
-      },
-      {
         "file": "elements/src/grid/row/row.ts",
         "lines": {
           "total": 6,
@@ -5066,33 +5163,6 @@
         }
       },
       {
-        "file": "elements/src/grid/header/header.ts",
-        "lines": {
-          "total": 20,
-          "covered": 20,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 13,
-          "covered": 13,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 32,
-          "covered": 32,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 4,
-          "covered": 4,
-          "skipped": 0,
-          "pct": 100
-        }
-      },
-      {
         "file": "elements/src/grid/footer/footer.ts",
         "lines": {
           "total": 6,
@@ -5117,33 +5187,6 @@
           "covered": 0,
           "skipped": 0,
           "pct": 100
-        }
-      },
-      {
-        "file": "elements/src/grid/column/column.ts",
-        "lines": {
-          "total": 51,
-          "covered": 51,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 14,
-          "covered": 14,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 64,
-          "covered": 64,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 32,
-          "covered": 31,
-          "skipped": 0,
-          "pct": 96.87
         }
       },
       {
@@ -5304,33 +5347,6 @@
         "branches": {
           "total": 10,
           "covered": 10,
-          "skipped": 0,
-          "pct": 100
-        }
-      },
-      {
-        "file": "elements/src/forms/control/control.ts",
-        "lines": {
-          "total": 58,
-          "covered": 58,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 24,
-          "covered": 24,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 79,
-          "covered": 79,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 22,
-          "covered": 22,
           "skipped": 0,
           "pct": 100
         }
@@ -6419,28 +6435,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1346,
-        "covered": 1312,
+        "total": 1360,
+        "covered": 1323,
         "skipped": 0,
-        "pct": 97.47
+        "pct": 97.27
       },
       "statements": {
-        "total": 1823,
-        "covered": 1778,
+        "total": 1837,
+        "covered": 1787,
         "skipped": 0,
-        "pct": 97.53
+        "pct": 97.27
       },
       "functions": {
-        "total": 497,
-        "covered": 469,
+        "total": 503,
+        "covered": 472,
         "skipped": 0,
-        "pct": 94.36
+        "pct": 93.83
       },
       "branches": {
-        "total": 590,
-        "covered": 541,
+        "total": 606,
+        "covered": 552,
         "skipped": 0,
-        "pct": 91.69
+        "pct": 91.08
       },
       "branchesTrue": {
         "total": 0,
