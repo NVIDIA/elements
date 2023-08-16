@@ -18,7 +18,8 @@ function metadataPlugin() {
         'aria',
         'stable',
         'performance',
-        'package'
+        'package',
+        'description'
       ];
 
       switch (node.kind) {

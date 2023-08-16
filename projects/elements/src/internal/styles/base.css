@@ -13,6 +13,7 @@
   contain: layout; /* https://developer.mozilla.org/en-US/docs/Web/CSS/contain */
   pointer-events: inherit;
   outline: var(--nve-debug-element-outline, initial);
+  color-scheme: var(--nve-sys-color-scheme);
 }
 
 *,
