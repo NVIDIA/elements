@@ -1,4 +1,4 @@
-import { html, LitElement, unsafeCSS } from 'lit';
+import { html, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import { define } from '@elements/elements/internal';
@@ -11,6 +11,9 @@ import '@elements/elements/icon/define.js';
 import '@elements/elements/grid/define.js';
 import '@elements/elements/sort-button/define.js';
 import '@elements/elements/tooltip/define.js';
+import '@elements/elements/drawer/define.js';
+import '@elements/elements/search/define.js';
+import '@elements/elements/json-viewer/define.js';
 import metrics from 'metrics/data.json';
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
@@ -150,11 +153,14 @@ class ElementMetrics extends LitElement {
   render() {
     const element = metrics.elements.find(d => d.name === this.tag);
     return html`
-    <section mlv-layout="row gap:sm align:vertical-center">
-      <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
-      <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
-      <div><a href=${element.aria} mlv-text="link no-visit label">API Spec</a></div>
-      <div>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit label">Figma</a>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</div>
+    <section mlv-layout="column gap:md">
+      <div mlv-layout="row gap:sm align:vertical-center">
+        <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
+        <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
+        <a href=${element.aria} mlv-text="link no-visit label">API Spec</a>
+        ${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit label">Figma</a>` : nothing}
+      </div>
+      ${element.description ? html`<p mlv-text="body">${element.description}</p>` : nothing}
     </section>`;
   }
 
@@ -227,7 +233,10 @@ class ElementsMetrics extends LitElement {
             <mlv-grid-cell>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit">Figma</a>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
           </mlv-grid-row>`
         })}
-        <mlv-grid-footer><p mlv-text="body muted sm">Report Created on ${reportDate}</p></mlv-grid-footer>
+        <mlv-grid-footer>
+          <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
+          <mlv-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'elements', bubbles: true }))} interaction="flat" style="margin-left: auto">view data</mlv-button>
+        </mlv-grid-footer>
       </mlv-grid>
       <mlv-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</mlv-tooltip>
     `;
@@ -290,7 +299,10 @@ class ProjectMetrics extends LitElement {
             <mlv-grid-cell><code mlv-text="code">${project.path}</code></mlv-grid-cell>
           </mlv-grid-row>
         `)}
-        <mlv-grid-footer><p mlv-text="body muted sm">Report Created on ${reportDate}</p></mlv-grid-footer>
+        <mlv-grid-footer>
+          <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
+          <mlv-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'projects', bubbles: true }))} interaction="flat" style="margin-left: auto">view data</mlv-button>
+        </mlv-grid-footer>
       </mlv-grid>
       <mlv-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</mlv-tooltip>
     `;
@@ -299,75 +311,126 @@ class ProjectMetrics extends LitElement {
 
 define(ProjectMetrics);
 
+class MetricDemo extends LitElement {
+  @state() rawData: '' | 'elements' | 'projects' | 'versions' | 'tests' = '';
+
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
+  static metadata = {
+    tag: 'metrics-demo',
+    version: 'demo'
+  }
+
+  render() {
+    return html`
+    <div mlv-theme="root" mlv-layout="column gap:xl align:horizontal-stretch pad:lg" no-story-container @view-data=${e => this.rawData = e.detail}>
+      <div mlv-layout="column gap:md">
+        <div mlv-layout="row gap:md">
+          <h1 mlv-text="heading lg">@elements/elements</h1>
+          <mlv-badge status="success">version ${MLV_VERSION}</mlv-badge>
+        </div>
+        <p mlv-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
+      </div>
+
+      <section mlv-layout="grid gap:md">
+        <div mlv-layout="column gap:md align:horizontal-stretch span:6">
+          <div mlv-layout="row gap:md align:vertical-center">
+            <h3 mlv-text="body bold">Summary:</h3>
+            <section mlv-layout="row gap:xs align:center">
+              <span mlv-text="body sm muted">Total Available Components</span>
+              <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.length}</mlv-badge></span>
+              <span mlv-text="body sm muted">Total Maglev Instances</span>
+              <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
+            </section>
+          </div>
+          <elements-metrics></elements-metrics>
+        </div>
+        <div mlv-layout="column gap:md align:horizontal-stretch span:6">
+          <div mlv-layout="row gap:md align:vertical-center">
+            <h3 mlv-text="body bold">Test Coverage:</h3>
+            <section mlv-layout="row gap:xs align:center">
+              <span mlv-text="body sm muted">Statements</span>
+              <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.statements.pct)}</span>
+            </section>
+            <section mlv-layout="row gap:xs align:center">
+              <span mlv-text="body sm muted">Lines</span>
+              <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.lines.pct)}</span>
+            </section>
+            <section mlv-layout="row gap:xs align:center">
+              <span mlv-text="body sm muted">Functions</span>
+              <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.functions.pct)}</span>
+            </section>
+            <section mlv-layout="row gap:xs align:center">
+              <span mlv-text="body sm muted">Branches</span>
+              <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.branches.pct)}</span>
+            </section>
+          </div>
+          <mlv-grid style="--scroll-height: calc(50vh - 130px)">
+            <mlv-grid-header>
+              <mlv-grid-column width="350px">File</mlv-grid-column>
+              <mlv-grid-column width="180px">Statements</mlv-grid-column>
+              <mlv-grid-column width="180px">Lines</mlv-grid-column>
+              <mlv-grid-column width="180px">Functions</mlv-grid-column>
+              <mlv-grid-column>Branches</mlv-grid-column>
+            </mlv-grid-header>
+            ${metrics.tests.coverage.map(cov => html`
+              <mlv-grid-row>
+                <mlv-grid-cell><p mlv-text="body truncate">${cov.file}</p></mlv-grid-cell>
+                <mlv-grid-cell>${getCoverageStatus(cov.statements.pct)}</mlv-grid-cell>
+                <mlv-grid-cell>${getCoverageStatus(cov.lines.pct)}</mlv-grid-cell>
+                <mlv-grid-cell>${getCoverageStatus(cov.functions.pct)}</mlv-grid-cell>
+                <mlv-grid-cell>${getCoverageStatus(cov.branches.pct)}</mlv-grid-cell>
+              </mlv-grid-row>
+            `)}
+            <mlv-grid-footer>
+              <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
+              <mlv-button @click=${() => this.rawData = 'tests'} interaction="flat" style="margin-left: auto">view data</mlv-button>
+            </mlv-grid-footer>
+          </mlv-grid>
+          <project-metrics></project-metrics>
+        </div>
+      </section>
+    </div>
+    <mlv-drawer @close=${() => this.rawData = ''} .hidden=${!this.rawData} position="right" modal closable style="--max-width: 720px; --content-padding: 0">
+      <mlv-drawer-header>
+        <div mlv-layout="column gap:md">
+          <h2 mlv-text="heading" style="text-transform: capitalize">${this.rawData} data</h2>
+          <mlv-search>
+            <input type="search" @input=${this.#search} />
+          </mlv-search>
+        </div>
+      </mlv-drawer-header>
+      <div style="padding: 12px; width: 100%;">
+        <mlv-json-viewer expanded>${JSON.stringify(metrics[this.rawData])}</mlv-json-viewer>
+      </div>
+    </mlv-drawer>
+`;
+  }
+
+  #search(e: any) {
+    const value = e.target.value.length ? searchJson(structuredClone(metrics[this.rawData]), e.target.value) : metrics[this.rawData];
+    (this.shadowRoot as any).querySelector('mlv-json-viewer').value = value;
+  }
+}
+
+const searchJson = (json, target) => {
+  const filtered = JSON.stringify(json, (key, value) => {
+    if (Array.isArray(value) || (typeof value === 'object' && value !== null)) {
+      if (key.includes(target) || JSON.stringify(value).includes(target)) {
+        return value;
+      } else {
+        return undefined;
+      }
+    } else {
+      return value;
+    }
+  }, 2);
+
+  return JSON.parse(filtered);
+};
+
+define(MetricDemo);
+
 export const Metrics = {
-  render: () => html`
-<div mlv-theme="root" mlv-layout="column gap:xl align:horizontal-stretch pad:lg" no-story-container>
-  <div mlv-layout="column gap:md">
-    <div mlv-layout="row gap:md">
-      <h1 mlv-text="heading lg">@elements/elements</h1>
-      <mlv-badge status="success">version ${MLV_VERSION}</mlv-badge>
-    </div>
-    <p mlv-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
-  </div>
-
-  <section mlv-layout="grid gap:md">
-    <div mlv-layout="column gap:md align:horizontal-stretch span:6">
-      <div mlv-layout="row gap:md align:vertical-center">
-        <h3 mlv-text="body bold">Summary:</h3>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Total Available Components</span>
-          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.length}</mlv-badge></span>
-          <span mlv-text="body sm muted">Total Maglev Instances</span>
-          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
-        </section>
-      </div>
-      <elements-metrics></elements-metrics>
-    </div>
-
-    <div mlv-layout="column gap:md align:horizontal-stretch span:6">
-      <div mlv-layout="row gap:md align:vertical-center">
-        <h3 mlv-text="body bold">Test Coverage:</h3>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Statements</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.statements.pct)}</span>
-        </section>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Lines</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.lines.pct)}</span>
-        </section>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Functions</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.functions.pct)}</span>
-        </section>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Branches</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.branches.pct)}</span>
-        </section>
-      </div>
-      <mlv-grid style="--scroll-height: calc(50vh - 130px)">
-        <mlv-grid-header>
-          <mlv-grid-column width="350px">File</mlv-grid-column>
-          <mlv-grid-column width="180px">Statements</mlv-grid-column>
-          <mlv-grid-column width="180px">Lines</mlv-grid-column>
-          <mlv-grid-column width="180px">Functions</mlv-grid-column>
-          <mlv-grid-column>Branches</mlv-grid-column>
-        </mlv-grid-header>
-        ${metrics.tests.coverage.map(cov => html`
-          <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="body truncate">${cov.file}</p></mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(cov.statements.pct)}</mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(cov.lines.pct)}</mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(cov.functions.pct)}</mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(cov.branches.pct)}</mlv-grid-cell>
-          </mlv-grid-row>
-        `)}
-        <mlv-grid-footer>
-          <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
-        </mlv-grid-footer>
-      </mlv-grid>
-      <project-metrics></project-metrics>
-    </div>
-  </section>
-</div>
-  `
+  render: () => html`<metrics-demo no-story-container></metrics-demo>`
 };

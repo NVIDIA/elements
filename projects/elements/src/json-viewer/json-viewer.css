@@ -1,0 +1,48 @@
+:host {
+  --_muted-color: var(--mlv-ref-border-color-emphasis);
+  color: inherit;
+  font-family: monospace;
+  display: block;
+  width: 100%;
+}
+
+.array,
+.object {
+  overflow: hidden;
+  padding: 0 0 var(--mlv-ref-size-400) 0;
+}
+
+mlv-json-node {
+  padding: 0 0 0 var(--mlv-ref-size-400);
+  border-left: var(--mlv-ref-border-width-sm) solid var( --_muted-color);
+}
+
+mlv-json-node:first-of-type {
+  margin-top: var(--mlv-ref-size-400) !important;
+}
+
+.array::before,
+.array::after {
+  color: var( --_muted-color);
+  left: calc(-1 * var(--mlv-ref-size-50));
+  position: absolute;
+  display: block;
+  content: '[';
+}
+
+.array::after {
+  content: '],';
+}
+
+.object::before,
+.object::after {
+  color: var( --_muted-color);
+  left: calc(-1 * var(--mlv-ref-size-50));
+  position: absolute;
+  display: block;
+  content: '{';
+}
+
+.object::after {
+  content: '},';
+}
