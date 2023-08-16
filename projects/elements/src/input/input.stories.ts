@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/input/define.js';
+import '@elements/elements/select/define.js';
 import '@elements/elements/icon-button/define.js';
 
 export default {
@@ -125,3 +126,12 @@ export const controlValidation = () => {
   <nve-control-message error="valueMissing">required</nve-control-message>
 </nve-input>`;
 }
+
+export const FitText = {
+  render: () => html`
+<nve-input fit-text>
+  <label>label</label>
+  <input value="123456789012345678901234567890" />
+  <nve-control-message>message</nve-control-message>
+</nve-input>`
+};

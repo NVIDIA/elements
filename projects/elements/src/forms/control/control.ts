@@ -34,6 +34,9 @@ export class Control extends LitElement {
   /** Set current control + label + control message layout */
   @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
+  /** Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select) */
+  @property({ type: Boolean, reflect: true, attribute: 'fit-text' }) fitText = false;
+
   get #label() {
     return this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="label"]')?.assignedElements({ flatten: true })?.[0] as HTMLLabelElement;
   }
@@ -115,8 +118,14 @@ export class Control extends LitElement {
 
       if (this.input && this.#observers.length === 0) {
         this.#setupInput();
+        this.#setupFitText();
       }
     });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#observers.forEach(observer => observer.disconnect());
   }
 
   /** resets control value to initial attribute value and clears any active validation rules */
@@ -143,6 +152,22 @@ export class Control extends LitElement {
     });
   }
 
+  #setupFitText() {
+    if (this.fitText) {
+      this.#getCharacterWidth();
+      this.input.addEventListener('input', () => this.#getCharacterWidth());
+      this.input.addEventListener('change', () => this.#getCharacterWidth());
+    }
+  }
+
+  #getCharacterWidth() {
+    if (this.input.tagName === 'INPUT') {
+      this.style.setProperty('--max-width', `${this.input.value.length * 0.9}ch`)
+    } else if (this.input.tagName === 'SELECT') {
+      this.style.setProperty('--max-width', `${(this.input.options[this.input.selectedIndex].textContent.length * 0.9) + 4}ch`);
+    }
+  }
+
   #polyfillShowPicker() {
     if (!this.input.showPicker) {
       this.input.showPicker = () => this.input.focus();
@@ -156,11 +181,6 @@ export class Control extends LitElement {
       this.input?.size ? this.setAttribute('size', '') : this.removeAttribute('size');
       this.styleStates = { 'no-messages': !this.#visibleMessages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
     }
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.#observers.forEach(observer => observer.disconnect());
   }
 
   #updateAssociations() {

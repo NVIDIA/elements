@@ -1,5 +1,5 @@
 {
-  "created": "2023-09-19T14:57:54.068Z",
+  "created": "2023-09-20T17:12:06.043Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -62,9 +62,9 @@
           "name": "content"
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 1,
-      "coverageTotal": 83.54,
+      "projectTotal": 2,
+      "instanceTotal": 3,
+      "coverageTotal": 74.9375,
       "behavior": "container",
       "status": "beta"
     },
@@ -91,7 +91,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 83.54,
+      "coverageTotal": 74.9375,
       "behavior": "container",
       "status": "beta"
     },
@@ -125,7 +125,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 83.54,
+      "coverageTotal": 74.9375,
       "behavior": "container",
       "status": "beta"
     },
@@ -160,7 +160,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 83.54,
+      "coverageTotal": 74.9375,
       "behavior": "container",
       "status": "beta"
     },
@@ -204,8 +204,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 6,
-      "instanceTotal": 10,
+      "projectTotal": 7,
+      "instanceTotal": 18,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -226,8 +226,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-banner-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-14&t=CAAM7yEBvG18tRRa-0",
       "properties": [],
-      "projectTotal": 2,
-      "instanceTotal": 2,
+      "projectTotal": 3,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -248,8 +248,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-group-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2519-54572&t=CAAM7yEBvG18tRRa-0",
       "properties": [],
-      "projectTotal": 3,
-      "instanceTotal": 5,
+      "projectTotal": 4,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -287,8 +287,8 @@
           "name": "nav-actions"
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 2,
+      "projectTotal": 3,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "navigation",
       "status": "beta"
@@ -325,8 +325,8 @@
         }
       ],
       "projectTotal": 3,
-      "instanceTotal": 10,
-      "coverageTotal": 100,
+      "instanceTotal": 7,
+      "coverageTotal": 97.91499999999999,
       "behavior": "content",
       "status": "stable"
     },
@@ -346,9 +346,9 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-breadcrumb-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1",
       "properties": [],
-      "projectTotal": 3,
-      "instanceTotal": 5,
-      "coverageTotal": 100,
+      "projectTotal": 4,
+      "instanceTotal": 17,
+      "coverageTotal": 97.5,
       "behavior": "content",
       "status": "beta"
     },
@@ -383,8 +383,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 0,
-      "instanceTotal": 0,
+      "projectTotal": 1,
+      "instanceTotal": 2,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -452,8 +452,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 15,
-      "instanceTotal": 71,
+      "projectTotal": 16,
+      "instanceTotal": 92,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -497,8 +497,8 @@
           "name": "footer"
         }
       ],
-      "projectTotal": 6,
-      "instanceTotal": 10,
+      "projectTotal": 7,
+      "instanceTotal": 20,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -525,7 +525,7 @@
         }
       ],
       "projectTotal": 6,
-      "instanceTotal": 10,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -552,7 +552,7 @@
         }
       ],
       "projectTotal": 2,
-      "instanceTotal": 3,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -621,12 +621,16 @@
           "description": "Set current control + label + control message layout"
         },
         {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
-      "projectTotal": 6,
-      "instanceTotal": 13,
+      "projectTotal": 7,
+      "instanceTotal": 15,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -682,6 +686,10 @@
           "description": "Set current control + label + control message layout"
         },
         {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -691,6 +699,59 @@
       "coverageTotal": 100,
       "behavior": "form",
       "status": "pre-release"
+    },
+    {
+      "name": "nve-combobox",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": false,
+      "vqa": true,
+      "responsive": true,
+      "themes": true,
+      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/",
+      "package": true,
+      "since": "0.17.0",
+      "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-combobox-documentation--docs",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-41&mode=design&t=guIM7VohnWYQUEQv-0",
+      "description": "An editable combobox with autocomplete behavior from a given datalist.",
+      "properties": [
+        {
+          "name": "container",
+          "description": "Flat container option is used when embeding component within another containing element"
+        },
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for input",
+          "name": ""
+        },
+        {
+          "description": "slot for icon to be placed before the input",
+          "name": "prefix-icon"
+        }
+      ],
+      "projectTotal": 0,
+      "instanceTotal": 0,
+      "coverageTotal": 98.3325,
+      "behavior": "form",
+      "status": "beta"
     },
     {
       "name": "nve-control",
@@ -716,6 +777,10 @@
           "description": "Set current control + label + control message layout"
         },
         {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -726,9 +791,9 @@
           "name": ""
         }
       ],
-      "projectTotal": 6,
-      "instanceTotal": 10,
-      "coverageTotal": 98.78,
+      "projectTotal": 7,
+      "instanceTotal": 15,
+      "coverageTotal": 98.1275,
       "behavior": "form",
       "status": "stable"
     },
@@ -796,7 +861,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 7,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -824,6 +889,10 @@
         {
           "name": "layout",
           "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
           "name": "reset",
@@ -859,6 +928,10 @@
         {
           "name": "layout",
           "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
           "name": "reset",
@@ -926,8 +999,8 @@
           "name": "default"
         }
       ],
-      "projectTotal": 6,
-      "instanceTotal": 11,
+      "projectTotal": 7,
+      "instanceTotal": 13,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -1002,8 +1075,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-divider-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
       "properties": [],
-      "projectTotal": 2,
-      "instanceTotal": 5,
+      "projectTotal": 3,
+      "instanceTotal": 12,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -1100,8 +1173,8 @@
           "name": "default"
         }
       ],
-      "projectTotal": 0,
-      "instanceTotal": 0,
+      "projectTotal": 1,
+      "instanceTotal": 2,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "pre-release"
@@ -1211,8 +1284,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 14,
+      "projectTotal": 8,
+      "instanceTotal": 29,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -1240,6 +1313,10 @@
         {
           "name": "layout",
           "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
           "name": "reset",
@@ -1287,8 +1364,8 @@
           "name": "footer"
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 9,
+      "projectTotal": 5,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1314,8 +1391,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 8,
+      "projectTotal": 5,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1350,9 +1427,9 @@
           "name": "actions"
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 7,
-      "coverageTotal": 98.46,
+      "projectTotal": 5,
+      "instanceTotal": 9,
+      "coverageTotal": 97.58,
       "behavior": "list",
       "status": "beta"
     },
@@ -1377,8 +1454,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 3,
+      "projectTotal": 4,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1404,9 +1481,9 @@
           "name": ""
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 7,
-      "coverageTotal": 96.96,
+      "projectTotal": 5,
+      "instanceTotal": 9,
+      "coverageTotal": 97.315,
       "behavior": "list",
       "status": "beta"
     },
@@ -1431,8 +1508,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 3,
+      "projectTotal": 3,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1458,8 +1535,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 9,
+      "projectTotal": 5,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1497,9 +1574,9 @@
           "description": "The name of the icon SVG sprite"
         }
       ],
-      "projectTotal": 16,
-      "instanceTotal": 63,
-      "coverageTotal": 93.47,
+      "projectTotal": 17,
+      "instanceTotal": 80,
+      "coverageTotal": 92.8675,
       "behavior": "content",
       "status": "stable"
     },
@@ -1574,8 +1651,8 @@
           "name": "icon"
         }
       ],
-      "projectTotal": 13,
-      "instanceTotal": 37,
+      "projectTotal": 14,
+      "instanceTotal": 54,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -1609,12 +1686,16 @@
           "description": "Set current control + label + control message layout"
         },
         {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
       "projectTotal": 10,
-      "instanceTotal": 22,
+      "instanceTotal": 25,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -1712,8 +1793,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 8,
+      "projectTotal": 4,
+      "instanceTotal": 20,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "stable"
@@ -1740,8 +1821,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 7,
+      "projectTotal": 3,
+      "instanceTotal": 19,
       "coverageTotal": 100,
       "behavior": "navigation",
       "status": "beta"
@@ -1800,8 +1881,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 6,
+      "projectTotal": 3,
+      "instanceTotal": 18,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -1829,6 +1910,10 @@
         {
           "name": "layout",
           "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
           "name": "reset",
@@ -1897,8 +1982,8 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 21,
-      "coverageTotal": 97.36,
+      "instanceTotal": 24,
+      "coverageTotal": 96.1375,
       "behavior": "popover",
       "status": "stable"
     },
@@ -1946,9 +2031,9 @@
           "name": ""
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 2,
-      "coverageTotal": 100,
+      "projectTotal": 3,
+      "instanceTotal": 4,
+      "coverageTotal": 98.61,
       "behavior": "content",
       "status": "beta"
     },
@@ -2003,9 +2088,9 @@
           "name": "footer"
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 2,
-      "coverageTotal": 95.74,
+      "projectTotal": 2,
+      "instanceTotal": 4,
+      "coverageTotal": 91.335,
       "behavior": "container",
       "status": "beta"
     },
@@ -2032,7 +2117,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 2,
-      "coverageTotal": 95.74,
+      "coverageTotal": 91.335,
       "behavior": "container",
       "status": "beta"
     },
@@ -2059,7 +2144,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 95.74,
+      "coverageTotal": 91.335,
       "behavior": "container",
       "status": "beta"
     },
@@ -2094,7 +2179,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 2,
-      "coverageTotal": 95.74,
+      "coverageTotal": 91.335,
       "behavior": "container",
       "status": "beta"
     },
@@ -2121,6 +2206,10 @@
         {
           "name": "layout",
           "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
           "name": "reset",
@@ -2204,7 +2293,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 100,
+      "coverageTotal": 93.75,
       "behavior": "content",
       "status": "beta"
     },
@@ -2266,12 +2355,16 @@
           "description": "Set current control + label + control message layout"
         },
         {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 5,
+      "projectTotal": 5,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -2327,6 +2420,10 @@
           "description": "Set current control + label + control message layout"
         },
         {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -2366,6 +2463,10 @@
           "description": "Set current control + label + control message layout"
         },
         {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -2400,7 +2501,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 70.83,
+      "coverageTotal": 46.8725,
       "behavior": "content",
       "status": "pre-release"
     },
@@ -2429,13 +2530,17 @@
           "description": "Set current control + label + control message layout"
         },
         {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 8,
-      "coverageTotal": 100,
+      "instanceTotal": 11,
+      "coverageTotal": 97.5,
       "behavior": "form",
       "status": "stable"
     },
@@ -2494,8 +2599,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 3,
+      "projectTotal": 3,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -2523,6 +2628,10 @@
         {
           "name": "layout",
           "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
           "name": "reset",
@@ -2572,7 +2681,7 @@
       ],
       "projectTotal": 2,
       "instanceTotal": 3,
-      "coverageTotal": 100,
+      "coverageTotal": 94.4425,
       "behavior": "navigation",
       "status": "beta"
     },
@@ -2632,7 +2741,7 @@
       ],
       "projectTotal": 2,
       "instanceTotal": 3,
-      "coverageTotal": 100,
+      "coverageTotal": 94.4425,
       "behavior": "button",
       "status": "beta"
     },
@@ -2730,12 +2839,16 @@
           "description": "Set current control + label + control message layout"
         },
         {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
       "projectTotal": 6,
-      "instanceTotal": 7,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -2763,6 +2876,10 @@
         {
           "name": "layout",
           "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
           "name": "reset",
@@ -2884,7 +3001,7 @@
         }
       ],
       "projectTotal": 8,
-      "instanceTotal": 14,
+      "instanceTotal": 17,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -2912,6 +3029,10 @@
         {
           "name": "layout",
           "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "fitText",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
           "name": "reset",
@@ -3137,7 +3258,7 @@
         },
         {
           "name": "nve-badge",
-          "instanceTotal": 7
+          "instanceTotal": 4
         },
         {
           "name": "nve-button",
@@ -3252,7 +3373,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 83
+      "instanceTotal": 80
     },
     {
       "name": "app-shell-angular-demo",
@@ -3737,23 +3858,23 @@
       "elementsVersion": "0.11.1",
       "elements": [
         {
-          "name": "nve-button",
-          "instanceTotal": 1
-        },
-        {
           "name": "nve-card",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-card-content",
-          "instanceTotal": 1
+          "instanceTotal": 9
         },
         {
           "name": "nve-card-footer",
-          "instanceTotal": 1
+          "instanceTotal": 9
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-card-content",
+          "instanceTotal": 5
         }
       ],
-      "instanceTotal": 4
+      "instanceTotal": 28
     },
     {
       "name": "ide",
@@ -3801,50 +3922,50 @@
       "elements": [
         {
           "name": "nve-button",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-dropdown",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-control-message",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-control",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-icon-button",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-input",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-notification",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-select",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-textarea",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
         {
           "name": "nve-tooltip",
-          "instanceTotal": 1
+          "instanceTotal": 4
         }
       ],
-      "instanceTotal": 11
+      "instanceTotal": 44
     },
     {
       "name": "@elements/ide",
@@ -3993,14 +4114,14 @@
       "elements": [
         {
           "name": "nve-alert-banner",
-          "instanceTotal": 1
+          "instanceTotal": 7
         },
         {
           "name": "nve-alert",
-          "instanceTotal": 1
+          "instanceTotal": 7
         }
       ],
-      "instanceTotal": 2
+      "instanceTotal": 14
     },
     {
       "name": "@elements/xp-app-shell",
@@ -4008,51 +4129,51 @@
       "elementsVersion": "0.15.0",
       "elements": [
         {
+          "name": "nve-app-header",
+          "instanceTotal": 11
+        },
+        {
+          "name": "nve-breadcrumb",
+          "instanceTotal": 13
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 15
+        },
+        {
           "name": "nve-dropdown",
-          "instanceTotal": 5
+          "instanceTotal": 15
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 12
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 5
+          "instanceTotal": 15
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 14
         },
         {
           "name": "nve-menu-item",
-          "instanceTotal": 5
+          "instanceTotal": 15
         },
         {
           "name": "nve-menu",
-          "instanceTotal": 6
+          "instanceTotal": 16
+        },
+        {
+          "name": "nve-divider",
+          "instanceTotal": 7
         },
         {
           "name": "nve-badge",
           "instanceTotal": 1
-        },
-        {
-          "name": "nve-button",
-          "instanceTotal": 5
-        },
-        {
-          "name": "nve-divider",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-breadcrumb",
-          "instanceTotal": 3
-        },
-        {
-          "name": "nve-icon-button",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-logo",
-          "instanceTotal": 4
-        },
-        {
-          "name": "nve-app-header",
-          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 39
+      "instanceTotal": 134
     },
     {
       "name": "@elements/xp-hub",
@@ -4092,8 +4213,133 @@
       "name": "@elements/MXP_PATH",
       "path": "src/ui/platform/xp/templates/lit-app",
       "elementsVersion": "0.15.0",
-      "elements": [],
-      "instanceTotal": 0
+      "elements": [
+        {
+          "name": "nve-alert-banner",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-alert-group",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-alert",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-accordion",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-app-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-breadcrumb",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-bulk-actions",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-card",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-checkbox",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-dialog",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-divider",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-drawer",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-cell",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-column",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-footer",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-placeholder",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-row",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-menu-item",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-menu",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-pagination",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-panel",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-radio",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-sort-button",
+          "instanceTotal": 2
+        }
+      ],
+      "instanceTotal": 68
     },
     {
       "name": "tracking",
@@ -4259,33 +4505,6 @@
           "covered": 11,
           "skipped": 0,
           "pct": 91.66
-        }
-      },
-      {
-        "file": "elements/src/icon/icon.ts",
-        "lines": {
-          "total": 35,
-          "covered": 33,
-          "skipped": 0,
-          "pct": 94.28
-        },
-        "functions": {
-          "total": 17,
-          "covered": 15,
-          "skipped": 0,
-          "pct": 88.23
-        },
-        "statements": {
-          "total": 46,
-          "covered": 43,
-          "skipped": 0,
-          "pct": 93.47
-        },
-        "branches": {
-          "total": 20,
-          "covered": 14,
-          "skipped": 0,
-          "pct": 70
         }
       },
       {
@@ -5848,10 +6067,10 @@
           "pct": 100
         },
         "branches": {
-          "total": 13,
-          "covered": 12,
+          "total": 19,
+          "covered": 18,
           "skipped": 0,
-          "pct": 92.3
+          "pct": 94.73
         }
       },
       {
@@ -6638,6 +6857,33 @@
         }
       },
       {
+        "file": "elements/src/icon/icon.ts",
+        "lines": {
+          "total": 33,
+          "covered": 33,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 16,
+          "covered": 15,
+          "skipped": 0,
+          "pct": 93.75
+        },
+        "statements": {
+          "total": 44,
+          "covered": 43,
+          "skipped": 0,
+          "pct": 97.72
+        },
+        "branches": {
+          "total": 20,
+          "covered": 16,
+          "skipped": 0,
+          "pct": 80
+        }
+      },
+      {
         "file": "elements/src/icon/define.ts",
         "lines": {
           "total": 3,
@@ -6964,28 +7210,28 @@
       {
         "file": "elements/src/forms/control/control.ts",
         "lines": {
-          "total": 59,
-          "covered": 59,
+          "total": 71,
+          "covered": 71,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 26,
-          "covered": 25,
+          "total": 30,
+          "covered": 29,
           "skipped": 0,
-          "pct": 96.15
+          "pct": 96.66
         },
         "statements": {
-          "total": 82,
-          "covered": 81,
+          "total": 99,
+          "covered": 98,
           "skipped": 0,
-          "pct": 98.78
+          "pct": 98.98
         },
         "branches": {
-          "total": 26,
-          "covered": 26,
+          "total": 32,
+          "covered": 31,
           "skipped": 0,
-          "pct": 100
+          "pct": 96.87
         }
       },
       {
@@ -7072,20 +7318,20 @@
       {
         "file": "elements/src/dropdown/dropdown.ts",
         "lines": {
-          "total": 15,
-          "covered": 15,
+          "total": 17,
+          "covered": 17,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 3,
-          "covered": 3,
+          "total": 5,
+          "covered": 5,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 26,
-          "covered": 26,
+          "total": 28,
+          "covered": 28,
           "skipped": 0,
           "pct": 100
         },
@@ -7553,6 +7799,60 @@
           "covered": 0,
           "skipped": 0,
           "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/combobox/define.ts",
+        "lines": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/combobox/combobox.ts",
+        "lines": {
+          "total": 71,
+          "covered": 71,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 30,
+          "covered": 30,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 97,
+          "covered": 97,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 30,
+          "covered": 28,
+          "skipped": 0,
+          "pct": 93.33
         }
       },
       {
@@ -8153,28 +8453,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1753,
-        "covered": 1702,
+        "total": 1837,
+        "covered": 1788,
         "skipped": 0,
-        "pct": 97.09
+        "pct": 97.33
       },
       "statements": {
-        "total": 2331,
-        "covered": 2262,
+        "total": 2446,
+        "covered": 2379,
         "skipped": 0,
-        "pct": 97.03
+        "pct": 97.26
       },
       "functions": {
-        "total": 684,
-        "covered": 646,
+        "total": 719,
+        "covered": 682,
         "skipped": 0,
-        "pct": 94.44
+        "pct": 94.85
       },
       "branches": {
-        "total": 858,
-        "covered": 777,
+        "total": 900,
+        "covered": 818,
         "skipped": 0,
-        "pct": 90.55
+        "pct": 90.88
       },
       "branchesTrue": {
         "total": 0,

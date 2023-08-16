@@ -28,7 +28,7 @@ export function deepMerge(target, ...sources) {
 
 export function parseVersion(version: string) {
   const [major, minor, patch] = version.split('.').map((v) => parseInt(v, 10));
-  return { major, minor, patch };
+  return { major: major ? major : -1, minor: minor ? minor : -1, patch: patch ? patch : -1 };
 }
 
 export function formatStandardNumber(number: number) {

@@ -21,7 +21,8 @@ describe('GlobalStateService', () => {
       next: 'next',
       start: 'start',
       end: 'end',
-      currentPage: 'current page'
+      currentPage: 'current page',
+      noResults: 'no results'
     });
   });
 
@@ -41,7 +42,8 @@ describe('GlobalStateService', () => {
       next: 'suivante',
       start: 'page de démarrage',
       end: 'page de fin',
-      currentPage: 'page actuelle'
+      currentPage: 'page actuelle',
+      noResults: 'aucun résultat'
     });
 
     expect(I18nService.i18n).toStrictEqual({
@@ -57,7 +59,8 @@ describe('GlobalStateService', () => {
       next: 'suivante',
       start: 'page de démarrage',
       end: 'page de fin',
-      currentPage: 'page actuelle'
+      currentPage: 'page actuelle',
+      noResults: 'aucun résultat'
     });
 
     I18nService.update(original);
