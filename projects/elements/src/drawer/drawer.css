@@ -59,6 +59,7 @@ dialog {
 
 :host([hidden]) {
   display: block !important;
+  position: absolute;
 }
 
 dialog::backdrop {

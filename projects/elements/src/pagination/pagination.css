@@ -28,6 +28,35 @@ label {
   display: flex;
   place-items: center;
   pointer-events: none;
+  text-wrap: nowrap;
+  width: fit-content;
+}
+
+:host([container='flat']),
+:host([container='inline']) {
+  select {
+    opacity: 0;
+  }
+
+  .select-label {
+    background: transparent;
+  }
+}
+
+:host([container='inline']) {
+  select {
+    opacity: 0;
+  }
+
+  nve-select {
+    --width: fit-content;
+    --padding: 0 var(--nve-ref-size-700) 0 var(--nve-ref-size-200);
+    margin-inline-end: 0;
+  }
+
+  label {
+    margin-inline: 0;
+  }
 }
 
 nve-input {

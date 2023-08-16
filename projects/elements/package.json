@@ -497,7 +497,7 @@
         "metrics/data.json"
       ],
       "dependencies": [
-        "test"
+        "test:coverage"
       ]
     },
     "prepublishonly": {

@@ -6,6 +6,7 @@ import '@elements/elements/search/define.js';
 import '@elements/elements/dialog/define.js';
 import '@elements/elements/tooltip/define.js';
 import '@elements/elements/toast/define.js';
+import '@elements/elements/drawer/define.js';
 import '@elements/elements/dropdown/define.js';
 import '@elements/elements/notification/define.js';
 
@@ -68,6 +69,14 @@ export const Interactive = {
       <nve-button id="toast-btn">toast</nve-button>
       <nve-toast anchor="toast-btn" trigger="toast-btn" position="top" close-timeout="1500" hidden>copied!</nve-toast>
 
+      <nve-button id="drawer-btn" size="sm">drawer</nve-button>
+      <nve-drawer hidden closable modal trigger="drawer-btn">
+        <nve-drawer-header>
+          <h3 nve-text="heading semibold sm">Title</h3>
+        </nve-drawer-header>
+        <p nve-text="body">some text content in a drawer</p>
+      </nve-drawer>
+
       <nve-button id="dropdown-btn">dropdown</nve-button>
       <nve-dropdown anchor="dropdown-btn" trigger="dropdown-btn" closable hidden>
         <h3 nve-text="heading">Title</h3>
@@ -94,6 +103,10 @@ export const Interactive = {
         const toast = document.querySelector('nve-toast');
         toast.addEventListener('open', () => toast.hidden = false);
         toast.addEventListener('close', () => toast.hidden = true);
+
+        const drawer = document.querySelector('nve-drawer');
+        drawer.addEventListener('open', () => drawer.hidden = false);
+        drawer.addEventListener('close', () => drawer.hidden = true);
 
         const dropdown = document.querySelector('nve-dropdown');
         dropdown.addEventListener('open', () => dropdown.hidden = false);
