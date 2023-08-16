@@ -69,14 +69,15 @@ export class Icon extends LitElement {
   }
 
   static alias(aliases: { [key: string]: IconName | string }) {
+    // whenDefined has no rejection state
     if (globalThis.customElements?.whenDefined) {
-      customElements.whenDefined('mlv-icon').then(() => {
+      /* eslint-disable @typescript-eslint/no-floating-promises */
+      globalThis.customElements.whenDefined('mlv-icon').then(() => {
         Object.keys(aliases).forEach(alias => {
-          const name = aliases[alias];
-          Icon._iconsRegistry[alias] = Icon._iconsRegistry[name];
+          Icon._iconsRegistry[alias] = Icon._iconsRegistry[aliases[alias]];
           globalThis.document.dispatchEvent(new CustomEvent(`mlv-icon-${alias}`));
         });
-      }).catch(e => console.log(`mlv-icon was never defined: ${e}`));
+      });
     }
   }
 

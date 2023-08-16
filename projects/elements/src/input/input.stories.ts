@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/input/define.js';
+import '@elements/elements/select/define.js';
 import '@elements/elements/icon-button/define.js';
 
 export default {
@@ -125,3 +126,12 @@ export const controlValidation = () => {
   <mlv-control-message error="valueMissing">required</mlv-control-message>
 </mlv-input>`;
 }
+
+export const FitText = {
+  render: () => html`
+<mlv-input fit-text>
+  <label>label</label>
+  <input value="123456789012345678901234567890" />
+  <mlv-control-message>message</mlv-control-message>
+</mlv-input>`
+};

@@ -1,0 +1,56 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { statusBadges } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Combobox/Documentation" parameters={{ badges: statusBadges('mlv-combobox') }} />
+
+# Combobox
+
+<element-metrics tag="mlv-combobox"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/combobox/define.js';
+```
+
+```html
+<mlv-combobox>
+  <label>combobox</label>
+  <input type="search">
+  <datalist>
+    <option value="option 1"></option>
+    <option value="option 2"></option>
+    <option value="option 3"></option>
+  </datalist>
+</mlv-combobox>
+```
+
+<Canvas>
+  <Story id="elements-combobox-examples--default" />
+</Canvas>
+
+## Vertical
+
+<Canvas>
+  <Story id="elements-combobox-examples--vertical" />
+</Canvas>
+
+## Horizontal
+
+<Canvas>
+  <Story id="elements-combobox-examples--horizontal" />
+</Canvas>
+
+## Flat
+
+<element-metrics tag="mlv-combobox" type="property" value="container"></element-metrics>
+
+<Canvas>
+  <Story id="elements-combobox-examples--flat" />
+</Canvas>
+
+<element-status tag="mlv-combobox"></element-status>
+
+## mlv-Combobox
+
+<ArgsTable of="mlv-combobox" />

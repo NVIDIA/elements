@@ -14,6 +14,7 @@ export interface I18nStrings {
   start: string;
   end: string;
   currentPage: string;
+  noResults: string;
 }
 
 const i18nRegistry = {
@@ -29,7 +30,8 @@ const i18nRegistry = {
   next: 'next',
   start: 'start',
   end: 'end',
-  currentPage: 'current page'
+  currentPage: 'current page',
+  noResults: 'no results'
 };
 
 export class I18nService_ {

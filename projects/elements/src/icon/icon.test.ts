@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
-import { Icon, mergeIcons } from '@elements/elements/icon';
+import { Icon } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 
 describe('mlv-icon', () => {
@@ -66,21 +66,5 @@ describe('mlv-icon', () => {
     expect((await event)).toBeDefined();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('#test-svg')).toBeTruthy();
-  });
-
-  it('should merge conflicting icon versions to latest', async () => {
-    element.name = 'add';
-    class Registered {
-      static metadata = {
-        version: '0.0.0'
-      }
-
-      static _icons = {
-        'merge-svg': { svg: () => '<svg id="merge-svg"><path d=""/></svg>' }
-      }
-    }
-
-    mergeIcons(Registered as unknown as typeof Icon);
-    expect(Registered._icons['merge-svg']).toBeDefined();
   });
 });

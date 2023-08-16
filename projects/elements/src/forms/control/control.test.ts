@@ -157,3 +157,77 @@ describe('mlv-control custom', () => {
     expect(element.input.value).toBe('');
   });
 });
+
+describe('mlv-control fit-text input', () => {
+  let fixture: HTMLElement;
+  let element: Control;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-control fit-text>
+        <label>label</label>
+        <input type="text" value="1234" />
+      </mlv-control>
+    `);
+    element = fixture.querySelector('mlv-control');
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should set control width to input text character width', async () => {
+    await elementIsStable(element);
+    expect(element.style.getPropertyValue('--max-width')).toBe(`3.6ch`);
+  });
+
+  it('should update control width to input text character width', async () => {
+    await elementIsStable(element);
+    input.value = '123456789012345678901234567890';
+    input.dispatchEvent(new Event('input'));
+    await elementIsStable(element);
+    expect(element.style.getPropertyValue('--max-width')).toBe(`27ch`);
+  });
+});
+
+describe('mlv-control fit-text select', () => {
+  let fixture: HTMLElement;
+  let element: Control;
+  let input: HTMLSelectElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-control fit-text>
+        <label>label</label>
+        <select>
+          <option value="1">Option 1</option>
+          <option value="2">Option 12345678</option>
+        </select>
+        <mlv-control-message>message</mlv-control-message>
+      </mlv-control>
+    `);
+    element = fixture.querySelector('mlv-control');
+    input = fixture.querySelector('select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should set control width to input text character width', async () => {
+    await elementIsStable(element);
+    expect(element.style.getPropertyValue('--max-width')).toBe(`11.2ch`);
+  });
+
+  it('should update control width to input text character width', async () => {
+    await elementIsStable(element);
+    input.value = '2';
+    input.dispatchEvent(new Event('change'));
+    await elementIsStable(element);
+    expect(element.style.getPropertyValue('--max-width')).toBe(`17.5ch`);
+  });
+});

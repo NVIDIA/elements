@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { LitElement, html } from 'lit';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/input/define.js';
@@ -280,3 +280,35 @@ export const Height = {
   </mlv-select>
 </div>`
 };
+
+export const FitText = {
+  render: () => html`
+<mlv-select fit-text>
+  <label>label</label>
+  <select>
+    <option value="1">Option 1</option>
+    <option value="2">Option 1234</option>
+    <option value="3">Option 1234567812341234123412341234</option>
+  </select>
+  <mlv-control-message>message</mlv-control-message>
+</mlv-select>`
+};
+
+export const Performance = {
+  render: () => html`<mlv-select-performance-demo></mlv-select-performance-demo>`
+}
+
+class SelectPerformanceDemo extends LitElement {
+  render() {
+    return html`
+  <mlv-select>
+    <label>1000 options</label>
+    <select>
+      ${new Array(1000).fill('').map((_, i) => html`<option value="${i}">${i} item</option>`)}
+    </select>
+  </mlv-select>
+    `;
+  }
+}
+
+customElements.get('mlv-select-performance-demo') || customElements.define('mlv-select-performance-demo', SelectPerformanceDemo);
