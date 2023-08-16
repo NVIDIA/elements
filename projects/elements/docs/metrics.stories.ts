@@ -1,4 +1,4 @@
-import { html, LitElement, unsafeCSS } from 'lit';
+import { html, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import { define } from '@elements/elements/internal';
@@ -11,6 +11,9 @@ import '@elements/elements/icon/define.js';
 import '@elements/elements/grid/define.js';
 import '@elements/elements/sort-button/define.js';
 import '@elements/elements/tooltip/define.js';
+import '@elements/elements/drawer/define.js';
+import '@elements/elements/search/define.js';
+import '@elements/elements/json-viewer/define.js';
 import metrics from 'metrics/data.json';
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
@@ -150,11 +153,14 @@ class ElementMetrics extends LitElement {
   render() {
     const element = metrics.elements.find(d => d.name === this.tag);
     return html`
-    <section nve-layout="row gap:sm align:vertical-center">
-      <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
-      <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
-      <div><a href=${element.aria} nve-text="link no-visit label">API Spec</a></div>
-      <div>${element.figma ? html`<a href=${element.figma} nve-text="link no-visit label">Figma</a>` : html`<nve-icon name="warning" status="warning"></nve-icon>`}</div>
+    <section nve-layout="column gap:md">
+      <div nve-layout="row gap:sm align:vertical-center">
+        <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
+        <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
+        <a href=${element.aria} nve-text="link no-visit label">API Spec</a>
+        ${element.figma ? html`<a href=${element.figma} nve-text="link no-visit label">Figma</a>` : nothing}
+      </div>
+      ${element.description ? html`<p nve-text="body">${element.description}</p>` : nothing}
     </section>`;
   }
 
@@ -227,7 +233,10 @@ class ElementsMetrics extends LitElement {
             <nve-grid-cell>${element.figma ? html`<a href=${element.figma} nve-text="link no-visit">Figma</a>` : html`<nve-icon name="warning" status="warning"></nve-icon>`}</nve-grid-cell>
           </nve-grid-row>`
         })}
-        <nve-grid-footer><p nve-text="body muted sm">Report Created on ${reportDate}</p></nve-grid-footer>
+        <nve-grid-footer>
+          <p nve-text="body muted sm">Report Created on ${reportDate}</p>
+          <nve-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'elements', bubbles: true }))} interaction="flat" style="margin-left: auto">view data</nve-button>
+        </nve-grid-footer>
       </nve-grid>
       <nve-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</nve-tooltip>
     `;
@@ -290,7 +299,10 @@ class ProjectMetrics extends LitElement {
             <nve-grid-cell><code nve-text="code">${project.path}</code></nve-grid-cell>
           </nve-grid-row>
         `)}
-        <nve-grid-footer><p nve-text="body muted sm">Report Created on ${reportDate}</p></nve-grid-footer>
+        <nve-grid-footer>
+          <p nve-text="body muted sm">Report Created on ${reportDate}</p>
+          <nve-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'projects', bubbles: true }))} interaction="flat" style="margin-left: auto">view data</nve-button>
+        </nve-grid-footer>
       </nve-grid>
       <nve-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</nve-tooltip>
     `;
@@ -299,75 +311,126 @@ class ProjectMetrics extends LitElement {
 
 define(ProjectMetrics);
 
+class MetricDemo extends LitElement {
+  @state() rawData: '' | 'elements' | 'projects' | 'versions' | 'tests' = '';
+
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
+  static metadata = {
+    tag: 'metrics-demo',
+    version: 'demo'
+  }
+
+  render() {
+    return html`
+    <div nve-theme="root" nve-layout="column gap:xl align:horizontal-stretch pad:lg" no-story-container @view-data=${e => this.rawData = e.detail}>
+      <div nve-layout="column gap:md">
+        <div nve-layout="row gap:md">
+          <h1 nve-text="heading lg">@elements/elements</h1>
+          <nve-badge status="success">version ${MLV_VERSION}</nve-badge>
+        </div>
+        <p nve-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
+      </div>
+
+      <section nve-layout="grid gap:md">
+        <div nve-layout="column gap:md align:horizontal-stretch span:6">
+          <div nve-layout="row gap:md align:vertical-center">
+            <h3 nve-text="body bold">Summary:</h3>
+            <section nve-layout="row gap:xs align:center">
+              <span nve-text="body sm muted">Total Available Components</span>
+              <span nve-text="body sm bold"><nve-badge status="success">${metrics.elements.length}</nve-badge></span>
+              <span nve-text="body sm muted">Total Maglev Instances</span>
+              <span nve-text="body sm bold"><nve-badge status="success">${metrics.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge></span>
+            </section>
+          </div>
+          <elements-metrics></elements-metrics>
+        </div>
+        <div nve-layout="column gap:md align:horizontal-stretch span:6">
+          <div nve-layout="row gap:md align:vertical-center">
+            <h3 nve-text="body bold">Test Coverage:</h3>
+            <section nve-layout="row gap:xs align:center">
+              <span nve-text="body sm muted">Statements</span>
+              <span nve-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.statements.pct)}</span>
+            </section>
+            <section nve-layout="row gap:xs align:center">
+              <span nve-text="body sm muted">Lines</span>
+              <span nve-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.lines.pct)}</span>
+            </section>
+            <section nve-layout="row gap:xs align:center">
+              <span nve-text="body sm muted">Functions</span>
+              <span nve-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.functions.pct)}</span>
+            </section>
+            <section nve-layout="row gap:xs align:center">
+              <span nve-text="body sm muted">Branches</span>
+              <span nve-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.branches.pct)}</span>
+            </section>
+          </div>
+          <nve-grid style="--scroll-height: calc(50vh - 130px)">
+            <nve-grid-header>
+              <nve-grid-column width="350px">File</nve-grid-column>
+              <nve-grid-column width="180px">Statements</nve-grid-column>
+              <nve-grid-column width="180px">Lines</nve-grid-column>
+              <nve-grid-column width="180px">Functions</nve-grid-column>
+              <nve-grid-column>Branches</nve-grid-column>
+            </nve-grid-header>
+            ${metrics.tests.coverage.map(cov => html`
+              <nve-grid-row>
+                <nve-grid-cell><p nve-text="body truncate">${cov.file}</p></nve-grid-cell>
+                <nve-grid-cell>${getCoverageStatus(cov.statements.pct)}</nve-grid-cell>
+                <nve-grid-cell>${getCoverageStatus(cov.lines.pct)}</nve-grid-cell>
+                <nve-grid-cell>${getCoverageStatus(cov.functions.pct)}</nve-grid-cell>
+                <nve-grid-cell>${getCoverageStatus(cov.branches.pct)}</nve-grid-cell>
+              </nve-grid-row>
+            `)}
+            <nve-grid-footer>
+              <p nve-text="body muted sm">Report Created on ${reportDate}</p>
+              <nve-button @click=${() => this.rawData = 'tests'} interaction="flat" style="margin-left: auto">view data</nve-button>
+            </nve-grid-footer>
+          </nve-grid>
+          <project-metrics></project-metrics>
+        </div>
+      </section>
+    </div>
+    <nve-drawer @close=${() => this.rawData = ''} .hidden=${!this.rawData} position="right" modal closable style="--max-width: 720px; --content-padding: 0">
+      <nve-drawer-header>
+        <div nve-layout="column gap:md">
+          <h2 nve-text="heading" style="text-transform: capitalize">${this.rawData} data</h2>
+          <nve-search>
+            <input type="search" @input=${this.#search} />
+          </nve-search>
+        </div>
+      </nve-drawer-header>
+      <div style="padding: 12px; width: 100%;">
+        <nve-json-viewer expanded>${JSON.stringify(metrics[this.rawData])}</nve-json-viewer>
+      </div>
+    </nve-drawer>
+`;
+  }
+
+  #search(e: any) {
+    const value = e.target.value.length ? searchJson(structuredClone(metrics[this.rawData]), e.target.value) : metrics[this.rawData];
+    (this.shadowRoot as any).querySelector('nve-json-viewer').value = value;
+  }
+}
+
+const searchJson = (json, target) => {
+  const filtered = JSON.stringify(json, (key, value) => {
+    if (Array.isArray(value) || (typeof value === 'object' && value !== null)) {
+      if (key.includes(target) || JSON.stringify(value).includes(target)) {
+        return value;
+      } else {
+        return undefined;
+      }
+    } else {
+      return value;
+    }
+  }, 2);
+
+  return JSON.parse(filtered);
+};
+
+define(MetricDemo);
+
 export const Metrics = {
-  render: () => html`
-<div nve-theme="root" nve-layout="column gap:xl align:horizontal-stretch pad:lg" no-story-container>
-  <div nve-layout="column gap:md">
-    <div nve-layout="row gap:md">
-      <h1 nve-text="heading lg">@elements/elements</h1>
-      <nve-badge status="success">version ${MLV_VERSION}</nve-badge>
-    </div>
-    <p nve-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
-  </div>
-
-  <section nve-layout="grid gap:md">
-    <div nve-layout="column gap:md align:horizontal-stretch span:6">
-      <div nve-layout="row gap:md align:vertical-center">
-        <h3 nve-text="body bold">Summary:</h3>
-        <section nve-layout="row gap:xs align:center">
-          <span nve-text="body sm muted">Total Available Components</span>
-          <span nve-text="body sm bold"><nve-badge status="success">${metrics.elements.length}</nve-badge></span>
-          <span nve-text="body sm muted">Total Maglev Instances</span>
-          <span nve-text="body sm bold"><nve-badge status="success">${metrics.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge></span>
-        </section>
-      </div>
-      <elements-metrics></elements-metrics>
-    </div>
-
-    <div nve-layout="column gap:md align:horizontal-stretch span:6">
-      <div nve-layout="row gap:md align:vertical-center">
-        <h3 nve-text="body bold">Test Coverage:</h3>
-        <section nve-layout="row gap:xs align:center">
-          <span nve-text="body sm muted">Statements</span>
-          <span nve-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.statements.pct)}</span>
-        </section>
-        <section nve-layout="row gap:xs align:center">
-          <span nve-text="body sm muted">Lines</span>
-          <span nve-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.lines.pct)}</span>
-        </section>
-        <section nve-layout="row gap:xs align:center">
-          <span nve-text="body sm muted">Functions</span>
-          <span nve-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.functions.pct)}</span>
-        </section>
-        <section nve-layout="row gap:xs align:center">
-          <span nve-text="body sm muted">Branches</span>
-          <span nve-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.branches.pct)}</span>
-        </section>
-      </div>
-      <nve-grid style="--scroll-height: calc(50vh - 130px)">
-        <nve-grid-header>
-          <nve-grid-column width="350px">File</nve-grid-column>
-          <nve-grid-column width="180px">Statements</nve-grid-column>
-          <nve-grid-column width="180px">Lines</nve-grid-column>
-          <nve-grid-column width="180px">Functions</nve-grid-column>
-          <nve-grid-column>Branches</nve-grid-column>
-        </nve-grid-header>
-        ${metrics.tests.coverage.map(cov => html`
-          <nve-grid-row>
-            <nve-grid-cell><p nve-text="body truncate">${cov.file}</p></nve-grid-cell>
-            <nve-grid-cell>${getCoverageStatus(cov.statements.pct)}</nve-grid-cell>
-            <nve-grid-cell>${getCoverageStatus(cov.lines.pct)}</nve-grid-cell>
-            <nve-grid-cell>${getCoverageStatus(cov.functions.pct)}</nve-grid-cell>
-            <nve-grid-cell>${getCoverageStatus(cov.branches.pct)}</nve-grid-cell>
-          </nve-grid-row>
-        `)}
-        <nve-grid-footer>
-          <p nve-text="body muted sm">Report Created on ${reportDate}</p>
-        </nve-grid-footer>
-      </nve-grid>
-      <project-metrics></project-metrics>
-    </div>
-  </section>
-</div>
-  `
+  render: () => html`<metrics-demo no-story-container></metrics-demo>`
 };
