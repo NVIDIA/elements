@@ -48,7 +48,8 @@ describe('i18n.controller', () => {
       previous: 'previous',
       next: 'next',
       start: 'start',
-      end: 'end'
+      end: 'end',
+      noResults: 'no results'
     });
   });
 
@@ -70,7 +71,8 @@ describe('i18n.controller', () => {
       previous: 'previous',
       next: 'next',
       start: 'start',
-      end: 'end'
+      end: 'end',
+      noResults: 'no results'
     });
   });
 })

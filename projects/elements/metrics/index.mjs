@@ -170,6 +170,8 @@ function getElements(coverage, projects) {
     const superclassManifest = elementsManifest.find(e => e.name === manifest.superclass?.name) ?? { };
     const cov = coverage.find(c => c.file.replace('elements/src/', '') === manifest.path.replace('/src/', '').replace('.js', '.ts'));
     const aria = manifest.metadata.aria ? manifest.metadata.aria : superclassManifest.metadata?.aria;
+    const coverageTotal = cov ? (cov.statements.pct + cov.functions.pct + cov.branches.pct + cov.lines.pct) / 4 : 0;
+
     const metadata = {
       name,
       ...superclassManifest.metadata ?? { },
@@ -178,7 +180,7 @@ function getElements(coverage, projects) {
       slots: manifest.slots,
       projectTotal: getProjectTotal(name, projects),
       instanceTotal: getInstanceTotal(name, projects),
-      coverageTotal: cov?.statements?.pct,
+      coverageTotal,
       aria
     };
 

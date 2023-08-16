@@ -50,9 +50,9 @@ function getCoverageStatus(value, message = '') {
   let status = 'unknown';
 
   if (value !== undefined) {
-    if (value > 90) {
+    if (value >= 90) {
       status = 'success';
-    } else if (value > 70) {
+    } else if (value >= 70) {
       status = 'warning';
     } else {
       status = 'danger';
@@ -201,7 +201,7 @@ class ElementsMetrics extends LitElement {
   } = {
     tooltipColumn: null,
     columns: {
-      element: { sort: 'none' },
+      element: { sort: 'none', width: '200px' },
       status: { sort: 'none' },
       coverage: { sort: 'none' },
       spec: { sort: 'none', tooltip: 'Behavior category from W3C and WAI-ARIA Specification' },
