@@ -29,6 +29,24 @@ export const Disabled = {
   `
 };
 
+export const Flat = {
+  render: () => html`
+    <nve-pagination container="flat" value="1" items="100" step="10" skippable></nve-pagination>
+  `
+};
+
+export const Inline = {
+  render: () => html`
+    <nve-pagination container="inline" value="1" items="100" step="10"></nve-pagination>
+  `
+};
+
+export const DisableStep = {
+  render: () => html`
+    <nve-pagination disable-step container="inline" value="1" items="100" step="10"></nve-pagination>
+  `
+};
+
 export const Forms = {
   render: () => html`
     <form id="pagination-form" nve-layout="column gap:md">

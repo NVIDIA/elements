@@ -9,7 +9,8 @@
   --box-shadow: var(--nve-ref-shadow-300);
   --border-bottom: none;
   --height: var(--nve-ref-size-1000);
-  --font-size: var(--nve-ref-font-size-200);
+  --font-size: var(--nve-ref-font-size-100);
+  --font-weight: var(--nve-ref-font-weight-medium);
   display: block;
   width: 100%;
 }
@@ -23,6 +24,7 @@
   color: var(--color);
   height: var(--height);
   font-size: var(--font-size);
+  font-weight: var(--font-weight);
   gap: var(--gap);
   line-height: 0;
   display: flex;

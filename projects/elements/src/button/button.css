@@ -5,7 +5,7 @@
   --padding: 0 var(--nve-ref-size-300);
   --border-radius: var(--nve-ref-border-radius-lg);
   --font-weight: var(--nve-ref-font-weight-semibold);
-  --font-size: var(--nve-ref-font-size-200);
+  --font-size: var(--nve-ref-font-size-100);
   --text-decoration: none;
   --text-align: center;
   --cursor: pointer;
@@ -84,12 +84,12 @@
 
 :host([size='sm']) {
   --height: var(--nve-ref-size-700);
-  --padding: 0 var(--nve-ref-size-200);
 }
 
 :host([size='lg']) {
   --height: var(--nve-ref-size-900);
-  --padding: 0 var(--nve-ref-size-600);
+  --padding: 0 var(--nve-ref-size-400);
+  --font-size: var(--nve-ref-font-size-200);
 }
 
 :host([readonly]) {

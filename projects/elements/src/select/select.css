@@ -162,7 +162,7 @@ slot[name*='option-'] {
   display: contents;
 }
 
-:host([container="flat"]) {
+:host([container='flat']) {
   --border-radius: 0;
   --box-shadow: none;
   
@@ -176,9 +176,18 @@ slot[name*='option-'] {
   }
 }
 
-:host([container="flat"][nve-control]:focus-within) {
+:host([container='flat'][nve-control]:focus-within) {
   & [input] {
     outline: 0 !important;
     border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
+  }
+}
+
+:host([container='inline']) { 
+  --border-radius: 0;
+  --box-shadow: none;
+  
+  & [input] {
+    background: inherit;
   }
 }
