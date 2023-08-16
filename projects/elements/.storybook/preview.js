@@ -186,6 +186,7 @@ export const parameters = {
           'Card',
           'Checkbox',
           'Color',
+          'Combobox',
           'Data Grid',
           [
             'Documentation',

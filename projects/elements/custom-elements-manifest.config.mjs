@@ -25,10 +25,9 @@ function metadataPlugin() {
 
       switch (node.kind) {
         case ts.SyntaxKind.ClassDeclaration:
+          const classDeclaration = moduleDoc.declarations.find((declaration) => declaration.name === node.name?.getText());
+
           node.jsDoc?.forEach((jsDoc) => {
-            const classDeclaration = moduleDoc.declarations.find(
-              (declaration) => declaration.name === node.name?.getText()
-            );
             jsDoc.tags?.forEach((tag) => {
               if (metadata.find((m) => m === tag.tagName?.getText())) {
                 let value = tag.comment;
@@ -43,22 +42,22 @@ function metadataPlugin() {
                 classDeclaration.metadata = { ...classDeclaration.metadata, [tag.tagName?.getText()]: value };
               }
             });
-
-            if (classDeclaration.metadata && classDeclaration.tagName) {
-              classDeclaration.metadata = {
-                unitTests: true,
-                apiReview: true,
-                performance: true,
-                stable: true,
-                vqa: true,
-                responsive: true,
-                themes: true,
-                aria: false,
-                package: JSON.stringify(pkg.exports).includes(classDeclaration.tagName.split('-')[1]),
-                ...classDeclaration.metadata
-              };
-            }
           });
+
+          if (classDeclaration.metadata && classDeclaration.tagName) {
+            classDeclaration.metadata = {
+              unitTests: true,
+              apiReview: true,
+              performance: true,
+              stable: true,
+              vqa: true,
+              responsive: true,
+              themes: true,
+              aria: false,
+              package: JSON.stringify(pkg.exports).includes(classDeclaration.tagName.split('-')[1]),
+              ...classDeclaration.metadata
+            };
+          }
           break;
       }
     }

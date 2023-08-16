@@ -46,6 +46,10 @@ describe('parseVersion', () => {
   it('it should parse a version string', () => {
     expect(parseVersion('1.2.3')).toStrictEqual({ major: 1, minor: 2, patch: 3 });
   });
+
+  it('it should parse a invalid version string', () => {
+    expect(parseVersion('BROKEN_VERSION')).toStrictEqual({ major: -1, minor: -1, patch: -1 });
+  });
 });
 
 describe('formatStandardNumber', () => {

@@ -98,4 +98,12 @@ export class Dropdown extends LitElement {
       </dialog>
     `;
   }
+
+  close() {
+    this.#typePopoverController.close();
+  }
+
+  open() {
+    this.#typePopoverController.open();
+  }
 }
