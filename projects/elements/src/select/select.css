@@ -13,8 +13,17 @@
   --scroll-height: 50vh;
   --_input-background: var(--background);
   --_icon-color: var(--color);
-  width: var(--width);
+  --width: 100%;
+  --max-width: 100%;
+  --min-width: fit-content;
   contain: initial;
+  width: var(--width);
+  max-width: var(--max-width);
+  min-width: var(--min-width);
+}
+
+:host([fit-text]) {
+  --min-width: initial;
 }
 
 [input] {

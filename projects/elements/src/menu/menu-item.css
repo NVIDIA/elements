@@ -8,6 +8,9 @@
   --min-height: var(--nve-ref-size-800);
   --line-height: 0;
   --cursor: pointer;
+  contain: layout;
+  content-visibility: auto;
+  contain-intrinsic-size: auto var(--min-height, initial);
 }
 
 [internal-host] {

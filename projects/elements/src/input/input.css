@@ -11,7 +11,15 @@
   --_icon-height: var(--height);
   --_font-size: var(--font-size);
   --width: 100%;
+  --max-width: 100%;
+  --min-width: fit-content;
   width: var(--width);
+  max-width: var(--max-width);
+  min-width: var(--min-width);
+}
+
+:host([fit-text]) {
+  --max-width: fit-content;
 }
 
 [input] {
@@ -71,20 +79,19 @@ nve-icon-button,
   --border: var(--nve-ref-border-width-md) solid transparent;
 }
 
-:host([container="flat"]) {
+:host([container='flat']) {
   --border-radius: 0;
   --box-shadow: none;
-  --background: inherit;
+
+  & [input] {
+    background: inherit;
+    border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
+  }
 }
 
-:host([container="flat"][nve-control]:focus-within) [input] {
-  outline: 0 !important;
-}
-
-:host([container="flat"]) [input] {
-  border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
-}
-
-:host([container="flat"][nve-control]:focus-within) [input] {
-  border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
+:host([container='flat'][nve-control]:focus-within) {
+  & [input] {
+    outline: 0 !important;
+    border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
+  }
 }
