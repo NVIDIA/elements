@@ -13,6 +13,7 @@
   --min-height: 100%;
   --max-width: 400px;
   --width: 100%;
+  --content-padding: var(--padding);
   display: contents;
 }
 
@@ -25,7 +26,6 @@
 }
 
 dialog {
-  padding: var(--padding);
   border: var(--border);
   background: var(--background);
   color: var(--color);
@@ -71,15 +71,14 @@ dialog::backdrop {
   gap: var(--gap);
 }
 
-.header:has(nve-icon-button) {
-  min-height: var(--nve-ref-size-300);
-}
-
 .content {
+  padding: var(--content-padding);
+  gap: var(--gap);
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: var(--gap);
+  overflow: auto;
+  flex: 1;
 }
 
 nve-icon-button {
