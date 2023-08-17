@@ -182,6 +182,21 @@ describe('nve-select', () => {
     expect(element.matches(':--multiple-overflow')).toBe(true);
   });
 
+  it('should hide tags and display label when a new selection causes a overflow', async () => {
+    expect(element.matches(':--multiple-overflow')).toBe(false);
+    element.style.setProperty('--width', '100px');
+    select.multiple = true;
+    await elementIsStable(element);
+    
+    element.shadowRoot.querySelectorAll('nve-menu-item')[0].click();
+    element.shadowRoot.querySelectorAll('nve-menu-item')[2].click();
+
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(element.matches(':--multiple-overflow')).toBe(true);
+  });
+
   it('should set host :--size state when multiple is used', async () => {
     select.size = 2;
     element.requestUpdate();
