@@ -1,0 +1,38 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Segment Button/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Segment Button Notification
+
+<element-metrics tag="mlv-segment-button"></element-metrics>
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/segment-button/define.js';
+```
+
+```html
+<mlv-segment-button behavior-select>
+  <mlv-button value="sessions" pressed>sessions</mlv-button>
+  <mlv-button value="uploads">uploads</mlv-button>
+  <mlv-button disabled value="settings">settings</mlv-button>
+</mlv-segment-button>
+```
+
+<Canvas>
+  <Story id="elements-segment-button-examples--default" />
+</Canvas>
+
+<LinkedHeader>Icon Buttons</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-segment-button-examples--icon-buttons" />
+</Canvas>
+
+
+<element-status tag={'mlv-segment-button'}></element-status>
+
+<LinkedHeader>mlv-segment-button</LinkedHeader>
+<ArgsTable of="mlv-segment-button" />
