@@ -235,6 +235,7 @@ export const parameters = {
           'Radio',
           'Range',
           'Search',
+          'Segment Button',
           'Select',
           'Sort Button',
           'Switch',
