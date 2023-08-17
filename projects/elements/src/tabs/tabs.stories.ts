@@ -118,3 +118,19 @@ export const StatelessTabs = {
   </nve-tabs>
   `
 };
+
+export const Links = {
+  render: () => html`
+  <nve-tabs>
+    <nve-tabs-item selected>
+      <a href="#">Tab 1</a>
+    </nve-tabs-item>
+    <nve-tabs-item>
+      <a href="#">Tab 2</a>
+    </nve-tabs-item>
+    <nve-tabs-item>
+      <a href="#">Tab 3</a>
+    </nve-tabs-item>
+  </nve-tabs>
+  `
+};
