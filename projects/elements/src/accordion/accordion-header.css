@@ -24,6 +24,12 @@
     color: var(--nve-sys-text-muted-color);
   }
 
+  #titles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nve-ref-space-xxxs);
+  }
+
   #actions {
     display: flex;
     flex-direction: row;

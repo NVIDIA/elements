@@ -1,0 +1,38 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Segment Button/Documentation" parameters={{ badges: ['beta'] }} />
+
+# Segment Button Notification
+
+<element-metrics tag="nve-segment-button"></element-metrics>
+
+<LinkedHeader>Installation</LinkedHeader>
+
+```typescript
+import '@elements/elements/segment-button/define.js';
+```
+
+```html
+<nve-segment-button behavior-select>
+  <nve-button value="sessions" pressed>sessions</nve-button>
+  <nve-button value="uploads">uploads</nve-button>
+  <nve-button disabled value="settings">settings</nve-button>
+</nve-segment-button>
+```
+
+<Canvas>
+  <Story id="elements-segment-button-examples--default" />
+</Canvas>
+
+<LinkedHeader>Icon Buttons</LinkedHeader>
+
+<Canvas>
+  <Story id="elements-segment-button-examples--icon-buttons" />
+</Canvas>
+
+
+<element-status tag={'nve-segment-button'}></element-status>
+
+<LinkedHeader>nve-segment-button</LinkedHeader>
+<ArgsTable of="nve-segment-button" />
