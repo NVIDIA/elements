@@ -44,8 +44,8 @@ export class Control extends LitElement {
 
   /** @private */
   get input() {
-    const slotted = Array.from(this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i => i.matches(inputQuery)) as HTMLInputElement;
-    return slotted ? slotted : this.querySelector<HTMLInputElement>(inputQuery);
+    const slotted = this.querySelector('slot')?.assignedElements()?.find(i => i.matches(inputQuery)) ?? Array.from(this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i => i.matches(inputQuery));
+    return (slotted ? slotted : this.querySelector(inputQuery)) as HTMLInputElement;
   }
 
   /** @private */
