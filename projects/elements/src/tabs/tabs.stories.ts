@@ -118,3 +118,19 @@ export const StatelessTabs = {
   </mlv-tabs>
   `
 };
+
+export const Links = {
+  render: () => html`
+  <mlv-tabs>
+    <mlv-tabs-item selected>
+      <a href="#">Tab 1</a>
+    </mlv-tabs-item>
+    <mlv-tabs-item>
+      <a href="#">Tab 2</a>
+    </mlv-tabs-item>
+    <mlv-tabs-item>
+      <a href="#">Tab 3</a>
+    </mlv-tabs-item>
+  </mlv-tabs>
+  `
+};

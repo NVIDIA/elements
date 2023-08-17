@@ -72,3 +72,19 @@
     outline: Highlight solid 2px; /* --mlv-ref-outline */
   }
 }
+
+::slotted(a) {
+  text-decoration: var(--text-decoration) !important;
+  color: var(--color) !important;
+  gap: var(--gap) !important;
+  display: flex !important;
+  align-items: center !important;
+  outline: 0;
+}
+
+::slotted(a)::after {
+  display: block;
+  content: ' ';
+  inset: 0;
+  position: absolute;
+}
