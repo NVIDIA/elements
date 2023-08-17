@@ -1,11 +1,12 @@
 import { Story, Canvas, Meta } from '@storybook/addon-docs';
-import { LinkedHeader } from './utils.mdx';
+import '@elements/elements/alert/define.js';
+import '@elements/elements/grid/define.js';
 
 <Meta title="About/Changelog" parameters={{ badges: [] }} />
 
 # Changelog
 
-<LinkedHeader>0.15.0 - pending</LinkedHeader>
+## 0.15.0 - 08-17-23
 
 ### Features
 - MVP [segment-button](./?path=/docs/elements-segment-button-documentation--docs) component
@@ -28,8 +29,9 @@ import { LinkedHeader } from './utils.mdx';
 - Fix drawer positioning when hidden
 - Fix VQA button size large
 - Fix VQA dialog close button
+- Fix multi select overflow detection on click
 
-<LinkedHeader>0.14.0 - 08-07-2023</LinkedHeader>
+## 0.14.0 - 08-07-2023
 
 ### Fixes
 - Fix VQA panel
@@ -758,7 +760,7 @@ import { LinkedHeader } from './utils.mdx';
   </nve-grid-row>
 </nve-grid>
 
-<LinkedHeader>0.13.1 - 08-03-2023</LinkedHeader>
+## 0.13.1 - 08-03-2023
 
 ### Fixes
 - Fix select option render when dynamically adding option elements
@@ -771,7 +773,7 @@ import { LinkedHeader } from './utils.mdx';
 - Fix missing panel dependency
 - Fix responsive/compact for select multiple
 
-<LinkedHeader>0.13.0 - 07-26-2023</LinkedHeader>
+## 0.13.0 - 07-26-2023
 
 ### Fixes
 
@@ -794,7 +796,7 @@ import { LinkedHeader } from './utils.mdx';
 
 - Beta [accordion](./?path=/docs/elements-accordion-documentation--docs) component
 
-<LinkedHeader>0.12.0 - 07-20-2023</LinkedHeader>
+## 0.12.0 - 07-20-2023
 
 ### Fixes
 
@@ -816,13 +818,13 @@ import { LinkedHeader } from './utils.mdx';
 
 - `interaction="ghost"` API on button types is now deprecated in favor of `interaction="flat"`
 
-<LinkedHeader>0.11.2 - 06-26-2023</LinkedHeader>
+## 0.11.2 - 06-26-2023
 
 ### Fixes
 
 - enable grid metadata generation
 
-<LinkedHeader>0.11.1 - 06-21-2023</LinkedHeader>
+## 0.11.1 - 06-21-2023
 
 ### Docs
 
@@ -853,7 +855,7 @@ import { LinkedHeader } from './utils.mdx';
 - Fixes sb demo full width styles
 - Improves lint checking
 
-<LinkedHeader>0.11.0 - 05-30-2023</LinkedHeader>
+## 0.11.0 - 05-30-2023
 
 ### Features
 
@@ -889,7 +891,7 @@ import { LinkedHeader } from './utils.mdx';
 - Fixes greedy selector for certain nve-layouts
 - Fixes alignment on nve-control button option
 
-<LinkedHeader>0.10.0 - 04-05-2023</LinkedHeader>
+## 0.10.0 - 04-05-2023
 
 ### Features
 
@@ -909,13 +911,13 @@ import { LinkedHeader } from './utils.mdx';
 - Revamped [interactions](./?path=/docs/foundations-tokens-interactions--docs) tokens docs
 - Detailed Tabs and Panel docs with writtern descriptions of usage
 
-<LinkedHeader>0.9.2 - 03-29-2023</LinkedHeader>
+## 0.9.2 - 03-29-2023
 
 ### Fixes
 
 - fix node specific import for test entrypoint
 
-<LinkedHeader>0.9.1 - 03-29-2023</LinkedHeader>
+## 0.9.1 - 03-29-2023
 
 ### Fixes
 
@@ -928,7 +930,7 @@ import { LinkedHeader } from './utils.mdx';
 
 - Added a [pattern example](./?path=/docs/section-patterns-header--docs) for composing a page header
 
-<LinkedHeader>0.9.0 - 03-21-2023</LinkedHeader>
+## 0.9.0 - 03-21-2023
 
 ### <nve-icon name="warning" status="warning"></nve-icon> Breaking
 
@@ -1079,7 +1081,7 @@ import { LinkedHeader } from './utils.mdx';
   - `--ref-color-pink-magenta-*`
   - `--ref-color-yellow-amber-*`
 
-<LinkedHeader>0.8.2 - 03-10-2023</LinkedHeader>
+## 0.8.2 - 03-10-2023
 
 ### Fixes
 
@@ -1087,7 +1089,7 @@ import { LinkedHeader } from './utils.mdx';
 - fix prevent dialog light dismiss when not closable
 - fix add workaround for incorrect binding when downleveling from native private props in apps
 
-<LinkedHeader>0.8.1 - 02-24-2023</LinkedHeader>
+## 0.8.1 - 02-24-2023
 
 ### Fixes
 
@@ -1104,7 +1106,7 @@ import { LinkedHeader } from './utils.mdx';
 - fix support for global tag scoping use cases
 - fix imrove inline element package version
 
-<LinkedHeader>0.8.0 - 02-07-2023</LinkedHeader>
+## 0.8.0 - 02-07-2023
 
 ### Features
 
@@ -1247,14 +1249,14 @@ import { LinkedHeader } from './utils.mdx';
 - Fix only trigger popover close event on user interactions
 - Fix icon size scale to align with Figma design spec
 
-<LinkedHeader>0.7.1 - 01-12-2023</LinkedHeader>
+## 0.7.1 - 01-12-2023
 
 ### Fixes
 
 - Fix global type references for older TypeScript compatibility
 - Fix alignment issue with icon svg within its host container
 
-<LinkedHeader>0.7.0 - 01-10-2023</LinkedHeader>
+## 0.7.0 - 01-10-2023
 
 ### Features
 
@@ -1277,7 +1279,7 @@ import { LinkedHeader } from './utils.mdx';
   import '@elements/elements/button/define.js';
   ```
 
-<LinkedHeader>0.6.2 - 01-20-2023</LinkedHeader>
+## 0.6.2 - 01-20-2023
 
 ### Fixes
 
@@ -1297,7 +1299,7 @@ import { LinkedHeader } from './utils.mdx';
 - Fix wait until animation complete to remove notification snackbar element
 - Fix popover alignments with center content and scrollable body content
 
-<LinkedHeader>0.6.0 - 12-01-2022</LinkedHeader>
+## 0.6.0 - 12-01-2022
 
 ### Features
 
@@ -1313,7 +1315,7 @@ import { LinkedHeader } from './utils.mdx';
 - Fix root global style attachment used in forms
 - Fix interaction token references
 
-<LinkedHeader>0.5.0 - 11-22-2022</LinkedHeader>
+## 0.5.0 - 11-22-2022
 
 ### Features
 
@@ -1335,21 +1337,21 @@ import { LinkedHeader } from './utils.mdx';
   This allows for more flexibility when using testing themes without overiding the nested element style properties.
 - Rename internals and `--nve-sys-layer-popup-*` to `--nve-sys-layer-popover-*` to align with [popover spec](https://github.com/openui/open-ui/issues/627#issuecomment-1293918937)
 
-<LinkedHeader>0.4.2 - 11-09-2022</LinkedHeader>
+## 0.4.2 - 11-09-2022
 
 - Fix button types not bubbling to parent elements
 - Fix enable textarea cols and rows support
 - Fix overlay token contrast
 - Fix form controls inherit font family
 
-<LinkedHeader>0.4.1 - 11-03-2022</LinkedHeader>
+## 0.4.1 - 11-03-2022
 
 ### Fixes
 
 - Fix keypress active state on buttons to only trigger with spacebar and enter keys
 - Fix DOM based non-HTML5 validation for better framework support (Angular, Vue, React, etc)
 
-<LinkedHeader>0.4.0 - 10-24-2022</LinkedHeader>
+## 0.4.0 - 10-24-2022
 
 ### Features
 
@@ -1378,7 +1380,7 @@ import { LinkedHeader } from './utils.mdx';
 - Add `csso` for css minification
 - Cleanup/align statuses in preparation for additional status components like toasts/snackbars
 
-<LinkedHeader>0.3.2 - 09-27-2022</LinkedHeader>
+## 0.3.2 - 09-27-2022
 
 ### Features
 
@@ -1389,14 +1391,14 @@ import { LinkedHeader } from './utils.mdx';
 - Fixed issue when element placed in shadow root would incorrectly render native chromium icons for form controls
 - Fixed issue around layout of the default `nve-card` content. A `nve-card-content` sub-component was added.
 
-<LinkedHeader>0.3.1 - 09-19-2022</LinkedHeader>
+## 0.3.1 - 09-19-2022
 
 ### Fixes
 
 - `nve-icon-button` co-dependency will automatically register when using isolated imports of form elements
 - Update typography system to support `rem` font size properties
 
-<LinkedHeader>0.3.0 - 09-09-2022</LinkedHeader>
+## 0.3.0 - 09-09-2022
 
 ### Features
 
@@ -1411,7 +1413,7 @@ import { LinkedHeader } from './utils.mdx';
 
 - `nve-button` correctly triggers one event per submit
 
-<LinkedHeader>0.2.1 - 08-09-2022</LinkedHeader>
+## 0.2.1 - 08-09-2022
 
 ### Features
 
@@ -1446,7 +1448,7 @@ import { LinkedHeader } from './utils.mdx';
   - Adds `nve-card-header`
   - Adds `nve-card-footer`
 
-<LinkedHeader>0.1.3 - 07-15-2022</LinkedHeader>
+## 0.1.3 - 07-15-2022
 
 - Initial release of alpha version to artifactory
 - POC version of Button/Icon/Card elements based in Lit/Vite/Storybook build tooling
