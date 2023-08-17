@@ -46,7 +46,7 @@ export class Select extends Control {
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   get #select() {
-    return (this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true })?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement;
+    return this.input as HTMLSelectElement;
   }
 
   get #options() {
@@ -109,7 +109,7 @@ export class Select extends Control {
 
   async updated(props: PropertyValues<this>) {
     super.updated(props);
-    if (this.#select?.size !== 0) {
+    if (this.#select?.size && this.#select?.size !== 0) {
       this._internals.states.add('--size');
     }
 
@@ -130,17 +130,11 @@ export class Select extends Control {
   }
 
   #setupOverflowListener() {
-    this.#resizeObserver = new ResizeObserver((entries) => {
-      if (this.input.multiple && this.#tags.getBoundingClientRect().width > entries[0].contentRect.width - 24) {
-        this._internals.states.add('--multiple-overflow');
-      } else {
-        this._internals.states.delete('--multiple-overflow');
-      }
-    });
+    this.#resizeObserver = new ResizeObserver((entries) => this.#updateMultipleOverflow(entries[0].contentRect.width));
     this.#resizeObserver.observe(this.#input);
   }
 
-  #selectValue(option: HTMLOptionElement, selected: boolean) {
+  async #selectValue(option: HTMLOptionElement, selected: boolean) {
     option.selected = selected;
     this.#select.dispatchEvent(new Event('input', { bubbles: true }));
     this.#select.dispatchEvent(new Event('change', { bubbles: true }));
@@ -148,6 +142,17 @@ export class Select extends Control {
 
     if (!this.#select.multiple) {
       this.#dropdown.hidden = true;
+    } else {
+      await this.updateComplete;
+      this.#updateMultipleOverflow(this.#input.getBoundingClientRect().width);
+    }
+  }
+
+  #updateMultipleOverflow(width: number) {
+    if (this.input?.multiple && this.#tags.getBoundingClientRect().width > width - 24) {
+      this._internals.states.add('--multiple-overflow');
+    } else {
+      this._internals.states.delete('--multiple-overflow');
     }
   }
 }
