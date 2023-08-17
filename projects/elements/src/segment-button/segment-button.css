@@ -1,0 +1,40 @@
+:host {
+  display: inline-flex;
+  line-height: 0;
+}
+
+[internal-host] {
+  background: var(--nve-sys-layer-overlay-accent-background);
+  border-radius: var(--nve-ref-border-radius-full);
+  padding: var(--nve-ref-size-100);
+
+}
+
+::slotted(nve-button) {
+  --nve-sys-interaction-state-base:var(--nve-sys-layer-overlay-accent-background);
+  --height: var(--nve-ref-size-600);
+  --font-size: var(--nve-ref-font-size-100);
+  --font-weight: var(--nve-ref-font-weight-regular);
+  --background:var(--nve-sys-layer-overlay-accent-background);
+}
+
+::slotted([disabled]) {
+  --background: var(--nve-sys-layer-overlay-accent-background);
+  --nve-sys-interaction-state-ratio-disabled: 0;
+}
+
+::slotted([pressed]) {
+  --background: var(--nve-sys-interaction-secondary-background);
+  --nve-sys-interaction-state-base: var(--nve-sys-interaction-secondary-background);
+}
+
+::slotted([focus-within]) {
+  --background: var(--nve-sys-layer-overlay-accent-background);
+  --nve-sys-interaction-state-ratio-disabled: 0;
+}
+
+::slotted(nve-icon-button) {
+  --background: transparent;
+  --height: var(--nve-ref-size-600);
+  --width: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-200));
+}
