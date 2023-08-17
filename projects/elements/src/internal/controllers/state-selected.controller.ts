@@ -36,5 +36,11 @@ export class StateSelectedController<T extends Selected> implements ReactiveCont
       this.host._internals.ariaSelected = null;
       this.host._internals.states.delete('--selected');
     }
+
+    if (this.host._internals?.states.has('--anchor') && this.host.selected) {
+      this.host._internals.ariaSelected = null;
+      this.host._internals.states.add('--selected');
+      this.host.querySelector('a')?.setAttribute('aria-current', 'page');
+    }
   }
 }
