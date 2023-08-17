@@ -11,6 +11,10 @@ class StateSelectedControllerTestElement extends LitElement {
   @property({ type: Boolean }) selected: boolean;
   @property({ type: Boolean }) readonly: boolean;
   declare _internals: ElementInternals;
+
+  render() {
+    return html`<slot></slot>`;
+  }
 }
 
 /**
@@ -66,5 +70,17 @@ describe('state-selected.controller', () => {
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe(null);
     expect(element.matches(':--selected')).toBe(false);
+  });
+
+  it('should appply aria-current="page" if a selected anchor', async () => {
+    const a = document.createElement('a');
+    a.href = '#';
+    element.appendChild(a);
+    element.selected = true;
+    element._internals.states.add('--anchor'); // typically added via type-anchor controller in base button
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    expect(a.getAttribute('aria-current')).toBe('page');
   });
 });
