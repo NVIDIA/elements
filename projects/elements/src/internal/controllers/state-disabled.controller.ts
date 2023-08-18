@@ -24,6 +24,8 @@ export class StateDisabledController<T extends Disabled> implements ReactiveCont
   hostUpdated() {
     if (this.host.disabled !== null && this.host.disabled !== undefined) {
       this.host._internals.ariaDisabled = `${this.host.disabled}`;
+    } else {
+      this.host._internals.ariaDisabled = null;
     }
 
     if (this.host.disabled) {

@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { animationFade, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, Size, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { IconButton } from '@elements/elements/icon-button';
 import styles from './dialog.css?inline';
-import { IconButton } from '../icon-button';
 
 /**
  * @element nve-dialog

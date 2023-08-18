@@ -95,6 +95,7 @@ describe('setupControlValidationStates HTML5 disabled', () => {
 describe('setupControlValidationStates', () => {
   let fixture: HTMLElement;
   let form: HTMLFormElement;
+  let input: HTMLInputElement;
   let control: Control;
   let message: ControlMessage;
 
@@ -111,6 +112,7 @@ describe('setupControlValidationStates', () => {
     control = fixture.querySelector('nve-control');
     message = fixture.querySelector('nve-control-message');
     form = fixture.querySelector('form');
+    input = fixture.querySelector('input');
     setupControlValidationStates(control, [message]);
     await elementIsStable(control);
   });
@@ -166,6 +168,14 @@ describe('setupControlValidationStates', () => {
     expect((await event)).toBeDefined();
     await elementIsStable(control);
     expect(control.input.value).toBe('');
+  });
+
+  it('should reset validation state on invalid event', async () => {
+    message.error = 'customError';
+    input.setCustomValidity('customError');
+    control.input.dispatchEvent(new Event('invalid'));
+    await elementIsStable(control);
+    expect(message.hidden).toBe(false);
   });
 });
 

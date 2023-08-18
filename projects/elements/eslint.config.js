@@ -3,6 +3,7 @@ import typescript from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import lit from 'eslint-plugin-lit';
 import litA11y from 'eslint-plugin-lit-a11y';
+import importPlugin from 'eslint-plugin-import';
 import wc from 'eslint-plugin-wc';
 import rulesdir from 'eslint-plugin-rulesdir';
 
@@ -22,6 +23,7 @@ export default [
       '@typescript-eslint': typescript,
       'rulesdir': rulesdir,
       'wc': wc,
+      'import': importPlugin,
       'lit-a11y': litA11y,
       lit,
     },
@@ -38,6 +40,7 @@ export default [
     },
     rules: {
       ...typescript.configs.recommended.rules,
+      ...litA11y.configs.recommended.rules,
       ...litA11y.configs.recommended.rules,
       'wc/no-constructor-attributes': ['error'],
       'wc/no-invalid-element-name': ['error'],
@@ -63,6 +66,7 @@ export default [
       'lit/prefer-nothing': ['error'],
       'lit/quoted-expressions': ['off'],
       'lit/value-after-constraints': ['error'],
+      'import/extensions': ['error', 'ignorePackages', { 'js': 'always', 'css?inline': 'never' }],
       '@typescript-eslint/no-explicit-any': 'off', // TODO
       '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test' }], // ignore demo/test components that do not need to be exported
       '@typescript-eslint/no-floating-promises': ['error'],
