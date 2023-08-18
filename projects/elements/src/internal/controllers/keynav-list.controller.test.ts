@@ -16,7 +16,8 @@ class KeynavListControllerTestElement extends LitElement {
     return {
       layout: this.layout,
       loop: this.loop,
-      items: this.shadowRoot.querySelectorAll<HTMLElement>('button')
+      items: this.shadowRoot.querySelectorAll<HTMLElement>('button'),
+      dir: this.dir
     }
   }
 
@@ -83,6 +84,27 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
+  });
+
+  it('should support horizontal arrow key navigation with RTL', async () => {
+    element.dir = 'rtl';
+
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
+    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
+
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
+
+    element.keynavListConfig.items[2].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
+    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
   });
 
   it('should support vertical arrow key navigation', async () => {

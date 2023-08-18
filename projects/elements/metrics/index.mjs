@@ -95,7 +95,7 @@ function getCoverage() {
   const coverageJSON = require(resolve('./coverage/coverage-summary.json'));
   return Object.entries(coverageJSON)
     .map(([file, coverage]) => ({ file: file.includes('/src/ui/platform/design-system/') ? file.split('/src/ui/platform/design-system/')[1] : file, ...coverage }))
-    .sort((a, b) => a.statements.pct > b.statements.pct ? 1 : -1)
+    .sort((a, b) => a.lines.pct > b.lines.pct ? 1 : -1)
     .filter(c => !c.file.includes('polyfills'));
 }
 

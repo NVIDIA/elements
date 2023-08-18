@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { I18nService } from './i18n.service.js';
+import { I18nService, I18nService_ } from './i18n.service.js';
 
 describe('GlobalStateService', () => {
   beforeEach(() => {
@@ -61,5 +61,12 @@ describe('GlobalStateService', () => {
     });
 
     I18nService.update(original);
+  });
+
+  it('should not emit event if already initialized', () => {
+    let event = 0;
+    globalThis.document.addEventListener('MLV_ELEMENTS_I18N_UPDATE', () => event++);
+    new I18nService_();
+    expect(event).toBe(0);
   });
 });
