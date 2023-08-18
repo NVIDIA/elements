@@ -1,4 +1,4 @@
-import { afterEach } from 'vitest';
+import { beforeAll, afterAll, vi } from 'vitest';
 import styles from '@elements/elements/index.css?inline';
 
 const sheet = new CSSStyleSheet();
@@ -16,6 +16,13 @@ const log = (...msg) => {
 
 console.warn = log;
 
-afterEach(async () => {
+await vi.dynamicImportSettled();
+
+beforeAll(async () => {
+  await vi.dynamicImportSettled();
+});
+
+afterAll(async () => {
+  await vi.dynamicImportSettled();
   await new Promise(r => setTimeout(r, 0)); // https://github.com/vitest-dev/vitest/issues/2552
 });

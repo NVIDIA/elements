@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
-import { Panel } from './panel';
+import type { Panel } from '@elements/elements/panel';
 import '@elements/elements/panel/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
