@@ -78,4 +78,13 @@ describe('mlv-notification', () => {
     element.shadowRoot.querySelector('mlv-icon-button').click();
     expect((await event)).toBeDefined();
   });
+
+  it('should mlv-animation-complete event to signal when to remove element', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element.shadowRoot as any, 'mlv-animation-complete');
+    await element.remove();
+    expect((await event)).toBeDefined();
+  });
 });

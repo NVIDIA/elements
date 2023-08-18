@@ -86,4 +86,11 @@ describe('mlv-progressive-filter-chip', () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('mlv-select')).toBe(null);
   });
+
+  it('should only update options if valid element is slotted', async () => {
+    const el = document.createElement('div');
+    element.appendChild(el);
+    await elementIsStable(element);
+    expect((element as any).inputs.length).toBe(3);
+  });
 });

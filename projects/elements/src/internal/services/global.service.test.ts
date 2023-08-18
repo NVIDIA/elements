@@ -32,7 +32,7 @@ describe('GlobalStateService', () => {
     });
   });
 
-  it('should log out state when debug() is called', async () => {
+  it('should log out state when debug() is called with provided log', async () => {
     const event = untilEvent(document, 'TEST_EVENT');
     GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
     await event;
@@ -48,5 +48,24 @@ describe('GlobalStateService', () => {
     vi.spyOn(watch, 'fn');
     window.MLV_ELEMENTS.debug(watch.fn);
     expect(watch.fn).toHaveBeenCalled();
+  });
+
+  it('should log out state when debug() is called', async () => {
+    const event = untilEvent(document, 'TEST_EVENT');
+    GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
+    await event;
+
+    expect((await event).detail.elementRegistry).toStrictEqual({
+      one: '0.0.0'
+    });
+
+    const original = console.log;
+    console.log = () => null;
+
+    vi.spyOn(console, 'log');
+    window.MLV_ELEMENTS.debug();
+    expect(console.log).toHaveBeenCalled();
+
+    console.log = original;
   });
 });

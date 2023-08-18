@@ -109,4 +109,19 @@ describe('mlv-pagination', () => {
     expect(element.value).toBe(2);
     expect(Object.fromEntries(new FormData(form)).page).toBe('2');
   });
+
+  it('should show only label when step selection is disabled', async () => {
+    element.disableStep = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('label')).toBeTruthy();
+    expect(element.shadowRoot.querySelector('mlv-select')).toBe(null);
+  });
+
+  it('should set step value on select change', async () => {
+    const select = element.shadowRoot.querySelector<HTMLSelectElement>('select');
+    expect(element.step).toBe(10);
+    select.value = '20';
+    select.dispatchEvent(new Event('change'));
+    expect(element.step).toBe(20);
+  });
 });

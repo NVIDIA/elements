@@ -60,7 +60,7 @@ declare global {
         i18nRegistry: Readonly<{ [key: string]: string }>;
         iconRegistry: Readonly<{ [key: string]: any }>;
       },
-      debug: (log: (...args) => void) => void;
+      debug: (log?: (...args) => void) => void;
     }
   }
 

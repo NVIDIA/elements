@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { Card, CardHeader, CardFooter } from '@elements/elements/card';
+import { Card, CardHeader, CardFooter, CardContent } from '@elements/elements/card';
 import { getFlatDOMTree } from '@elements/elements/internal';
 import '@elements/elements/card/define.js';
 
@@ -9,6 +9,7 @@ describe('mlv-card', () => {
   let fixture: HTMLElement;
   let card: Card;
   let cardHeader: CardHeader;
+  let cardContent: CardContent;
   let cardFooter: CardFooter;
 
   beforeEach(async () => {
@@ -21,13 +22,16 @@ describe('mlv-card', () => {
           <button slot="header-action">header action</button>
           <h2 slot="title">title</h2>
         </mlv-card-header>
+        <mlv-card-content></mlv-card-content>
       </mlv-card>
     `);
     card = fixture.querySelector('mlv-card');
     cardHeader = fixture.querySelector('mlv-card-header');
+    cardContent = fixture.querySelector('mlv-card-content');
     cardFooter = fixture.querySelector('mlv-card-footer');
     await elementIsStable(card);
     await elementIsStable(cardHeader);
+    await elementIsStable(cardContent);
     await elementIsStable(cardFooter);
   });
 
@@ -38,6 +42,7 @@ describe('mlv-card', () => {
   it('should define elements', () => {
     expect(customElements.get('mlv-card')).toBeDefined();
     expect(customElements.get('mlv-card-header')).toBeDefined();
+    expect(customElements.get('mlv-card-content')).toBeDefined();
     expect(customElements.get('mlv-card-footer')).toBeDefined();
   });
 
@@ -51,14 +56,14 @@ describe('mlv-card', () => {
     expect(cardFooter.slot).toBe('footer');
   });
 
-
   it('should have card preserve the heading/content/footer DOM order via slots', async () => {
     await elementIsStable(card);
     await elementIsStable(cardHeader);
     await elementIsStable(cardFooter);
-    
-    const [header, footer] = getFlatDOMTree(card).filter(e => e.tagName.includes('MLV'));
+
+    const [header, content, footer] = getFlatDOMTree(card).filter(e => e.tagName.includes('MLV'));
     expect(header).toBe(cardHeader);
+    expect(content).toBe(cardContent);
     expect(footer).toBe(cardFooter);
   });
 

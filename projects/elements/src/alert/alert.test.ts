@@ -84,4 +84,12 @@ describe('mlv-alert', () => {
     await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector('slot[name=prefix]')).toBeTruthy();
   });
+
+  it('should adjust icon size if icon is a dot svg', async () => {
+    alert.status = 'running';
+    await elementIsStable(alert);
+    const icon = alert.shadowRoot.querySelector('mlv-icon');
+    expect(icon.name).toBe('dot');
+    expect(icon.size).toBe('sm');
+  });
 });

@@ -55,4 +55,11 @@ describe('state-disabled.controller', () => {
     expect(element._internals.ariaDisabled).toBe(null);
     expect(element.matches(':--disabled')).toBe(false);
   });
+
+  it('should remove aria-disabled set to null (element can no longer be disabled)', async () => {
+    element.disabled = null;
+    await elementIsStable(element);
+    expect(element._internals.ariaDisabled).toBe(null);
+    expect(element.matches(':--disabled')).toBe(false);
+  });
 });

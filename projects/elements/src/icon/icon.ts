@@ -2,7 +2,7 @@ import { html, LitElement, PropertyValues } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { Size, useStyles } from '@elements/elements/internal';
+import { parseVersion, Size, useStyles } from '@elements/elements/internal';
 import { ICON_IMPORTS, IconName, IconSVG } from './icons.js';
 import styles from './icon.css?inline';
 
@@ -93,5 +93,17 @@ export class Icon extends LitElement {
     await this.updateComplete;
     await new Promise(r => requestAnimationFrame(r));
     Icon._iconsRegistry[this.name] = { svg: () => svg, ...Icon._iconsRegistry[this.name] };
+  }
+}
+
+export function mergeIcons(RegisteredIcon: typeof Icon) {
+  if (globalThis.customElements?.get) {
+    const registered = parseVersion(RegisteredIcon.metadata.version);
+    const current = parseVersion('PACKAGE_VERSION');
+
+    // determine if a older icon was registered and if so, merge the icons with the latest svgs
+    if (registered.minor <= current.minor && registered.major <= current.major) {
+      RegisteredIcon._icons = { ...RegisteredIcon._icons, ...ICON_IMPORTS };
+    }
   }
 }

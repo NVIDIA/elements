@@ -4,7 +4,6 @@ import process from 'process';
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 const coverage = (process.argv.findIndex((i) => i === '--coverage') !== -1);
-const base = coverage ? 'src' : 'dist';
 const watch = (process.argv.findIndex((i) => i === '--watch') !== -1);
 
 export default defineConfig({
@@ -16,13 +15,15 @@ export default defineConfig({
     exclude: ['@vitest/coverage-istanbul']
   },
   test: {
+    bail: !watch && !coverage ? 1 : 0,
     useAtomics: true,
     retry: 1,
     isolate: coverage,
     singleThread: true,
+    threads: false,
     root: resolve('.'),
     alias: {
-      '@elements/elements': resolve(`./${base}`),
+      '@elements/elements': resolve(`./src/`),
       '../dist/css/module.tokens.css': resolve('./dist/css/module.tokens.css'),
       '../dist/css/theme.high-contrast.css': resolve('./dist/css/theme.high-contrast.css'),
       '../dist/css/theme.reduced-motion.css': resolve('./dist/css/theme.reduced-motion.css'),
@@ -67,13 +68,7 @@ export default defineConfig({
         '**/*.css',
         '**/index.js',
         '**/src/icon/icons/**',
-        '**/src/icon/icons.ts',
-        '**/src/app-header/app-header.ts', // https://github.com/vitest-dev/vitest/issues/3514
-        '**/src/internal/controllers/type-popover.utils.ts', // https://github.com/vitest-dev/vitest/issues/3514
-        '**/src/internal/utils/events.ts', // https://github.com/vitest-dev/vitest/issues/3514
-        '**/src/internal/utils/dom.ts', // https://github.com/vitest-dev/vitest/issues/3514
-        '**/src/internal/utils/focus.ts', // https://github.com/vitest-dev/vitest/issues/3514
-        '**/src/forms/utils/states.ts' // https://github.com/vitest-dev/vitest/issues/3514
+        '**/src/icon/icons.ts'
       ]
     },
     browser: {
@@ -81,7 +76,10 @@ export default defineConfig({
       enabled: true,
       headless: !watch,
       provider: 'playwright',
-      name: 'chromium'
+      name: 'chromium',
+      api: {
+        port: 63316
+      }
     }
   }
 });

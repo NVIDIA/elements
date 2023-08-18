@@ -32,7 +32,7 @@ const i18nRegistry = {
   currentPage: 'current page'
 };
 
-class I18n {
+export class I18nService_ {
   get i18n(): Partial<I18nStrings> {
     return { ...GlobalStateService.state.i18nRegistry };
   }
@@ -48,4 +48,4 @@ class I18n {
   }
 }
 
-export const I18nService = new I18n();
+export const I18nService = new I18nService_();

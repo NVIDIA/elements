@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { animationSlide, I18nController, popoverBaseStyles, PopoverType, Size, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { IconButton } from '@elements/elements/icon-button';
 import styles from './drawer.css?inline';
-import { IconButton } from '../icon-button';
 
 /**
  * @element mlv-drawer
