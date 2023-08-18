@@ -262,6 +262,7 @@
     "chart.js": "4.3.3",
     "emoji-picker-element": "1.18.3",
     "eslint": "8.45.0",
+    "eslint-plugin-import": "2.28.0",
     "eslint-plugin-lit": "1.8.3",
     "eslint-plugin-lit-a11y": "4.1.0",
     "eslint-plugin-rulesdir": "0.2.2",
@@ -308,7 +309,6 @@
       "dependencies": [
         "lint",
         "build",
-        "test",
         "test:coverage",
         "storybook",
         "demos"
@@ -354,7 +354,7 @@
       "command": "git clean -dfX"
     },
     "test": {
-      "command": "PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/vitest/vitest.mjs run --bail=1",
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/vitest/vitest.mjs run",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -369,7 +369,7 @@
       ]
     },
     "test:coverage": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/vitest/vitest.mjs run --coverage --threads=false --bail=1 --browser.api.port=63316",
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/vitest/vitest.mjs run --coverage",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",

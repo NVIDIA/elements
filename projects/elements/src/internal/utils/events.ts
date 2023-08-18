@@ -15,23 +15,23 @@ export function onChildListMutation(element: HTMLElement, fn: (mutation?: Mutati
   return observer;
 }
 
-/* istanbul ignore next */
 export function throttle(func, limit, ...args) {
   let wait = true;
   return () => {
     if (wait) {
       func.apply(this, ...args);
       wait = false;
+      /* istanbul ignore next */
       setTimeout(() => wait = true, limit);
     }
   }
 }
 
-/* istanbul ignore next */
 export function debounce(func, timeout = 0){
   let timer;
   return (...args) => {
     clearTimeout(timer);
+    /* istanbul ignore next */
     timer = setTimeout(() => { func.apply(this, args); }, timeout);
   };
 }
