@@ -51,7 +51,7 @@ export class Icon extends LitElement {
   static _icons = ICON_IMPORTS;
 
   private static get _iconsRegistry() {
-    return (customElements.get('mlv-icon') as any)?._icons ?? { };
+    return (customElements.get('mlv-icon') as any)?._icons ?? Icon._icons
   }
 
   private static set _iconsRegistry(icons: { [key: string]: IconSVG }) {
