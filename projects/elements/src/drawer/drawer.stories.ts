@@ -33,9 +33,14 @@ export const Default = {
         <h3 nve-text="heading semibold sm">Title</h3>
       </nve-drawer-header>
       <p nve-text="body">some text content in a closable drawer</p>
+      <nve-drawer-footer>
+        <div nve-layout="grid gap:sm span-items:6">
+          <nve-button>cancel</nve-button>
+          <nve-button>details</nve-button>
+        </div>
+      </nve-drawer-footer>
     </nve-drawer>
   `,
-  args: { textContent: 'hello there' }
 };
 
 export const Interactive = {
@@ -43,8 +48,13 @@ export const Interactive = {
   render: () => html`
 <nve-button id="drawer-btn">open</nve-button>
 <nve-drawer closable modal hidden position="right">
-  <h3 nve-text="heading">Title</h3>
+  <nve-drawer-header>
+    <h3 nve-text="heading">Heading</h3>
+  </nve-drawer-header>
   <p nve-text="body">some text content in a closable drawer</p>
+  <nve-drawer-footer>
+    <p nve-text="body">some text footer content</p>
+  </nve-drawer-footer>
 </nve-drawer>
 <script>
   const drawer = document.querySelector('nve-drawer');
@@ -62,6 +72,9 @@ export const Small = {
     <h3 nve-text="heading semibold sm">Small</h3>
   </nve-drawer-header>
   <p nve-text="body">some text content in a small drawer</p>
+  <nve-drawer-footer>
+    <p nve-text="body">some text footer content</p>
+  </nve-drawer-footer>
 </nve-drawer>
   `
 };
@@ -73,6 +86,9 @@ export const Large = {
     <h3 nve-text="heading semibold sm">Large</h3>
   </nve-drawer-header>
   <p nve-text="body">some text content in a large drawer</p>
+  <nve-drawer-footer>
+    <p nve-text="body">some text footer content</p>
+  </nve-drawer-footer>
 </nve-drawer>
   `
 };
@@ -84,7 +100,7 @@ export const NonClosable = {
   <h3 nve-text="heading">Non-Closable Drawer</h3>
   <p nve-text="body">escape key and light dismiss will not work here</p>
   <nve-drawer-footer>
-    <nve-button id="cancel-btn">cancel</nve-button>
+    <p nve-text="body">some text footer content</p>
   </nve-drawer-footer>
 </nve-drawer>
 <script>
@@ -110,6 +126,9 @@ export const Position = {
     <h3 nve-text="heading">Left</h3>
   </nve-drawer-header>
   <p nve-text="body">some text content in a left closable drawer</p>
+  <nve-drawer-footer>
+    <p nve-text="body">some text footer content</p>
+  </nve-drawer-footer>
 </nve-drawer>
 
 <nve-drawer closable modal hidden position="right">
@@ -117,6 +136,9 @@ export const Position = {
     <h3 nve-text="heading">Right</h3>
   </nve-drawer-header>
   <p nve-text="body">some text content in a right closable drawer</p>
+  <nve-drawer-footer>
+    <p nve-text="body">some text footer content</p>
+  </nve-drawer-footer>
 </nve-drawer>
 <script>
   const leftDrawer = document.querySelector('nve-drawer[position="left"]');
