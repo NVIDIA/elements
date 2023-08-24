@@ -33,9 +33,14 @@ export const Default = {
         <h3 mlv-text="heading semibold sm">Title</h3>
       </mlv-drawer-header>
       <p mlv-text="body">some text content in a closable drawer</p>
+      <mlv-drawer-footer>
+        <div mlv-layout="grid gap:sm span-items:6">
+          <mlv-button>cancel</mlv-button>
+          <mlv-button>details</mlv-button>
+        </div>
+      </mlv-drawer-footer>
     </mlv-drawer>
   `,
-  args: { textContent: 'hello there' }
 };
 
 export const Interactive = {
@@ -43,8 +48,13 @@ export const Interactive = {
   render: () => html`
 <mlv-button id="drawer-btn">open</mlv-button>
 <mlv-drawer closable modal hidden position="right">
-  <h3 mlv-text="heading">Title</h3>
+  <mlv-drawer-header>
+    <h3 mlv-text="heading">Heading</h3>
+  </mlv-drawer-header>
   <p mlv-text="body">some text content in a closable drawer</p>
+  <mlv-drawer-footer>
+    <p mlv-text="body">some text footer content</p>
+  </mlv-drawer-footer>
 </mlv-drawer>
 <script>
   const drawer = document.querySelector('mlv-drawer');
@@ -62,6 +72,9 @@ export const Small = {
     <h3 mlv-text="heading semibold sm">Small</h3>
   </mlv-drawer-header>
   <p mlv-text="body">some text content in a small drawer</p>
+  <mlv-drawer-footer>
+    <p mlv-text="body">some text footer content</p>
+  </mlv-drawer-footer>
 </mlv-drawer>
   `
 };
@@ -73,6 +86,9 @@ export const Large = {
     <h3 mlv-text="heading semibold sm">Large</h3>
   </mlv-drawer-header>
   <p mlv-text="body">some text content in a large drawer</p>
+  <mlv-drawer-footer>
+    <p mlv-text="body">some text footer content</p>
+  </mlv-drawer-footer>
 </mlv-drawer>
   `
 };
@@ -84,7 +100,7 @@ export const NonClosable = {
   <h3 mlv-text="heading">Non-Closable Drawer</h3>
   <p mlv-text="body">escape key and light dismiss will not work here</p>
   <mlv-drawer-footer>
-    <mlv-button id="cancel-btn">cancel</mlv-button>
+    <p mlv-text="body">some text footer content</p>
   </mlv-drawer-footer>
 </mlv-drawer>
 <script>
@@ -110,6 +126,9 @@ export const Position = {
     <h3 mlv-text="heading">Left</h3>
   </mlv-drawer-header>
   <p mlv-text="body">some text content in a left closable drawer</p>
+  <mlv-drawer-footer>
+    <p mlv-text="body">some text footer content</p>
+  </mlv-drawer-footer>
 </mlv-drawer>
 
 <mlv-drawer closable modal hidden position="right">
@@ -117,6 +136,9 @@ export const Position = {
     <h3 mlv-text="heading">Right</h3>
   </mlv-drawer-header>
   <p mlv-text="body">some text content in a right closable drawer</p>
+  <mlv-drawer-footer>
+    <p mlv-text="body">some text footer content</p>
+  </mlv-drawer-footer>
 </mlv-drawer>
 <script>
   const leftDrawer = document.querySelector('mlv-drawer[position="left"]');

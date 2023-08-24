@@ -163,6 +163,14 @@ export class Panel extends LitElement {
   */
   @property({ type: String }) side: 'left' | 'right' = 'left';
 
+  get #direction() {
+    if (this.side === 'left') {
+      return this.expanded ? 'left' : 'right';
+    } else {
+      return this.expanded ? 'right' : 'left';
+    }
+  }
+
   render() {
     return html`
       <div internal-host>
@@ -172,9 +180,9 @@ export class Panel extends LitElement {
           ${when(
             !this.closable,
             () => html`
-              <mlv-icon-button interaction=${this.expanded ? 'flat' : ''} icon-name="double-chevron" .direction=${this.expanded ? 'left' : 'right'}
+              <mlv-icon-button interaction=${this.expanded ? 'flat' : ''} icon-name="double-chevron"
                 @click=${() => this.#typeExpandableController.toggle()}
-                direction=${this.side}
+                .direction=${this.#direction}
                 .expanded=${this.expanded}
                 .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
               ></mlv-icon-button>

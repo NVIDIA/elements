@@ -1,5 +1,5 @@
 {
-  "created": "2023-08-24T16:52:36.190Z",
+  "created": "2023-08-24T18:59:19.203Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -104,7 +104,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=76-5326&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 6,
-      "instanceTotal": 16,
+      "instanceTotal": 17,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -237,7 +237,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 16,
-      "instanceTotal": 84,
+      "instanceTotal": 86,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -331,8 +331,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-checkbox-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0",
-      "projectTotal": 6,
-      "instanceTotal": 12,
+      "projectTotal": 7,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -541,7 +541,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-divider-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
       "projectTotal": 2,
-      "instanceTotal": 11,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -585,6 +585,25 @@
       "status": "pre-release"
     },
     {
+      "name": "mlv-drawer-footer",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": true,
+      "vqa": true,
+      "responsive": true,
+      "themes": true,
+      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "package": true,
+      "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-drawer-documentation--docs",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0",
+      "projectTotal": 0,
+      "instanceTotal": 0,
+      "coverageTotal": 100,
+      "behavior": "content",
+      "status": "stable"
+    },
+    {
       "name": "mlv-drawer-header",
       "unitTests": true,
       "apiReview": true,
@@ -617,7 +636,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dropdown-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 7,
-      "instanceTotal": 23,
+      "instanceTotal": 24,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -749,8 +768,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "projectTotal": 1,
-      "instanceTotal": 2,
+      "projectTotal": 2,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -788,7 +807,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 16,
-      "instanceTotal": 68,
+      "instanceTotal": 69,
       "coverageTotal": 93.47,
       "behavior": "content",
       "status": "stable"
@@ -900,8 +919,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-menu-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0",
-      "projectTotal": 2,
-      "instanceTotal": 15,
+      "projectTotal": 1,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "navigation",
       "status": "beta"
@@ -919,8 +938,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-menu-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0",
-      "projectTotal": 2,
-      "instanceTotal": 14,
+      "projectTotal": 1,
+      "instanceTotal": 13,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -1016,7 +1035,7 @@
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 95.12,
+      "coverageTotal": 95.74,
       "behavior": "container",
       "status": "beta"
     },
@@ -1035,7 +1054,7 @@
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 95.12,
+      "coverageTotal": 95.74,
       "behavior": "container",
       "status": "beta"
     },
@@ -1054,7 +1073,7 @@
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 95.12,
+      "coverageTotal": 95.74,
       "behavior": "container",
       "status": "beta"
     },
@@ -1073,7 +1092,7 @@
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 95.12,
+      "coverageTotal": 95.74,
       "behavior": "container",
       "status": "beta"
     },
@@ -1413,8 +1432,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tooltip-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-29&t=clRGqnKDRGNhR0Yu-0",
-      "projectTotal": 8,
-      "instanceTotal": 14,
+      "projectTotal": 7,
+      "instanceTotal": 13,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "beta"
@@ -1891,6 +1910,10 @@
       "elementsVersion": "^0.8.0",
       "elements": [
         {
+          "name": "mlv-checkbox",
+          "instanceTotal": 1
+        },
+        {
           "name": "mlv-dialog-header",
           "instanceTotal": 1
         },
@@ -1907,7 +1930,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 4
+      "instanceTotal": 5
     },
     {
       "name": "static-4dgt-labeler",
@@ -1940,7 +1963,7 @@
       "elements": [
         {
           "name": "mlv-button",
-          "instanceTotal": 9
+          "instanceTotal": 10
         },
         {
           "name": "mlv-icon",
@@ -1995,7 +2018,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 24
+      "instanceTotal": 25
     },
     {
       "name": "labeling",
@@ -2004,11 +2027,15 @@
       "elements": [
         {
           "name": "mlv-button",
-          "instanceTotal": 12
+          "instanceTotal": 13
         },
         {
           "name": "mlv-input",
           "instanceTotal": 2
+        },
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 3
         },
         {
           "name": "mlv-dialog-header",
@@ -2043,10 +2070,6 @@
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox",
-          "instanceTotal": 2
-        },
-        {
           "name": "mlv-radio-group",
           "instanceTotal": 1
         },
@@ -2067,7 +2090,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 36
+      "instanceTotal": 38
     },
     {
       "name": "@elements/next-av",
@@ -2092,7 +2115,7 @@
         },
         {
           "name": "mlv-divider",
-          "instanceTotal": 5
+          "instanceTotal": 4
         },
         {
           "name": "mlv-icon-button",
@@ -2100,7 +2123,7 @@
         },
         {
           "name": "mlv-icon",
-          "instanceTotal": 12
+          "instanceTotal": 13
         },
         {
           "name": "mlv-panel-header",
@@ -2124,10 +2147,18 @@
         },
         {
           "name": "mlv-alert",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "mlv-search",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-badge",
           "instanceTotal": 1
         },
         {
@@ -2147,24 +2178,12 @@
           "instanceTotal": 3
         },
         {
+          "name": "mlv-grid-placeholder",
+          "instanceTotal": 1
+        },
+        {
           "name": "mlv-grid-row",
           "instanceTotal": 3
-        },
-        {
-          "name": "mlv-menu-item",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-menu",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-tooltip",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-badge",
-          "instanceTotal": 1
         },
         {
           "name": "mlv-switch",
@@ -2196,10 +2215,6 @@
         },
         {
           "name": "mlv-checkbox",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-dropdown",
           "instanceTotal": 1
         },
         {
@@ -2739,28 +2754,28 @@
       {
         "file": "elements/src/panel/panel.ts",
         "lines": {
-          "total": 26,
-          "covered": 24,
+          "total": 30,
+          "covered": 28,
           "skipped": 0,
-          "pct": 92.3
+          "pct": 93.33
         },
         "functions": {
-          "total": 12,
-          "covered": 10,
+          "total": 13,
+          "covered": 11,
           "skipped": 0,
-          "pct": 83.33
+          "pct": 84.61
         },
         "statements": {
-          "total": 41,
-          "covered": 39,
+          "total": 47,
+          "covered": 45,
           "skipped": 0,
-          "pct": 95.12
+          "pct": 95.74
         },
         "branches": {
-          "total": 8,
-          "covered": 7,
+          "total": 12,
+          "covered": 11,
           "skipped": 0,
-          "pct": 87.5
+          "pct": 91.66
         }
       },
       {
@@ -5626,10 +5641,37 @@
         }
       },
       {
-        "file": "elements/src/drawer/define.ts",
+        "file": "elements/src/drawer/drawer-footer.ts",
         "lines": {
+          "total": 4,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
           "total": 2,
           "covered": 2,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 5,
+          "covered": 5,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/drawer/define.ts",
+        "lines": {
+          "total": 3,
+          "covered": 3,
           "skipped": 0,
           "pct": 100
         },
@@ -5640,8 +5682,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 2,
-          "covered": 2,
+          "total": 3,
+          "covered": 3,
           "skipped": 0,
           "pct": 100
         },
@@ -6574,28 +6616,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1705,
-        "covered": 1654,
+        "total": 1714,
+        "covered": 1663,
         "skipped": 0,
-        "pct": 97
+        "pct": 97.02
       },
       "statements": {
-        "total": 2267,
-        "covered": 2198,
+        "total": 2279,
+        "covered": 2210,
         "skipped": 0,
-        "pct": 96.95
+        "pct": 96.97
       },
       "functions": {
-        "total": 668,
-        "covered": 630,
+        "total": 671,
+        "covered": 633,
         "skipped": 0,
-        "pct": 94.31
+        "pct": 94.33
       },
       "branches": {
-        "total": 836,
-        "covered": 759,
+        "total": 840,
+        "covered": 763,
         "skipped": 0,
-        "pct": 90.78
+        "pct": 90.83
       },
       "branchesTrue": {
         "total": 0,

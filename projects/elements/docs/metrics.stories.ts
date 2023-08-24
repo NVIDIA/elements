@@ -393,7 +393,7 @@ class MetricDemo extends LitElement {
     </div>
     <mlv-drawer @close=${() => this.rawData = ''} .hidden=${!this.rawData} position="right" modal closable style="--max-width: 720px; --content-padding: 0">
       <mlv-drawer-header>
-        <div mlv-layout="column gap:md">
+        <div mlv-layout="column gap:md full">
           <h2 mlv-text="heading" style="text-transform: capitalize">${this.rawData} data</h2>
           <mlv-search>
             <input type="search" @input=${this.#search} />

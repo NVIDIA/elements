@@ -1,6 +1,7 @@
 :host {
   --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color);
-  --padding: var(--mlv-ref-size-400);
+  --min-height: calc(var(--mlv-ref-size-1000) + var(--mlv-ref-size-200));
+  --padding: var(--mlv-ref-size-300);
   display: block;
   width: 100%;
 }
@@ -9,4 +10,7 @@
   border-bottom: var(--border-bottom);
   padding: var(--padding);
   color: var(--color);
+  min-height: var(--min-height);
+  display: flex;
+  align-items: center;
 }
