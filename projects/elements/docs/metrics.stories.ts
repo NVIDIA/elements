@@ -393,7 +393,7 @@ class MetricDemo extends LitElement {
     </div>
     <nve-drawer @close=${() => this.rawData = ''} .hidden=${!this.rawData} position="right" modal closable style="--max-width: 720px; --content-padding: 0">
       <nve-drawer-header>
-        <div nve-layout="column gap:md">
+        <div nve-layout="column gap:md full">
           <h2 nve-text="heading" style="text-transform: capitalize">${this.rawData} data</h2>
           <nve-search>
             <input type="search" @input=${this.#search} />
