@@ -1,6 +1,6 @@
 :host {
   --padding: var(--nve-ref-size-400) ;
-  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --line-height: 1em;
   --gap: var(--nve-ref-space-xs);
   contain: none;
@@ -32,4 +32,8 @@
   margin: 0;
   font-size: var(--nve-ref-font-size-100);
   font-weight: var(--nve-ref-font-weight-normal);
+}
+
+::slotted(nve-tabs) {
+  margin-bottom: calc(-1 * var(--padding));
 }

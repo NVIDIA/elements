@@ -41,3 +41,7 @@
 :host([status='unknown']) {
   --status-color: var(--nve-sys-status-unknown-color);
 }
+
+:host([status='ignored']) {
+  --status-color: var(--nve-sys-status-ignored-color);
+}

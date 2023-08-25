@@ -4,6 +4,7 @@
   --color: var(--nve-sys-layer-canvas-color);
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-500);
   --font-weight: var(--nve-ref-font-weight-medium);
+  --font-size: var(--nve-ref-font-size-200);
   --height: var(--nve-ref-size-1000);
   --min-width: var(--nve-ref-size-1000);
   --justify-content: start;

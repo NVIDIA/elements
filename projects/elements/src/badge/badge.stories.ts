@@ -14,7 +14,7 @@ export const Default = {
 
 export const Status = {
   render: () => html`
-<div nve-layout="row gap:md">
+<div nve-layout="row gap:md align:wrap">
   <nve-badge status="scheduled">scheduled</nve-badge>
   <nve-badge status="queued">queued</nve-badge>
   <nve-badge status="pending">pending</nve-badge>

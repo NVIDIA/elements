@@ -56,10 +56,9 @@ export const Default = {
         ${when(
           args.showFooter,
           () => html`
-          <nve-card-footer>
-            Proceed with Action
-            <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
-          </nve-card-footer>
+            <nve-card-footer>
+              <nve-button style="margin-left: auto">Action</nve-button>
+            </nve-card-footer>
           `
         )}
       </nve-card>
@@ -84,26 +83,18 @@ export const CardWithContentLayout = {
 
 export const MediaCard = {
   render: () => html`
-  <div nve-theme="root" nve-layout="grid gap:md span-items:6 align:stretch" style="height: 480px">
+  <div nve-theme="root" nve-layout="grid gap:md span-items:6 align:stretch" style="height: 380px">
     <nve-card style="height: 100%; width: 100%;">
       <img src="images/test-image-3.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
       <nve-card-content>
         <p>card content</p>
       </nve-card-content>
-      <nve-card-footer>
-        Proceed with Action
-        <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
-      </nve-card-footer>
     </nve-card>
     <nve-card style="height: 100%; width: 100%;">
       <img src="images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
       <nve-card-content>
         <p>card content</p>
       </nve-card-content>
-      <nve-card-footer>
-        Proceed with Action
-        <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
-      </nve-card-footer>
     </nve-card>
   </div>
   `
@@ -163,14 +154,14 @@ export const DescriptionList = {
     </nve-card-header>
     <nve-card-content>
       <dl nve-layout="grid gap:lg">
-        <dt nve-layout="span:4" nve-text="muted">Knot</dt>
-        <dd nve-layout="span:8">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
+        <dt nve-layout="span:4" nve-text="body muted medium">Knot</dt>
+        <dd nve-layout="span:8" nve-text="body">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
 
-        <dt nve-layout="span:4" nve-text="muted">Port</dt>
-        <dd nve-layout="span:8">Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+        <dt nve-layout="span:4" nve-text="body muted medium">Port</dt>
+        <dd nve-layout="span:8" nve-text="body">Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the bow (the front of the vessel).</dd>
 
-        <dt nve-layout="span:4" nve-text="muted">Starboard</dt>
-        <dd nve-layout="span:8">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+        <dt nve-layout="span:4" nve-text="body muted medium">Starboard</dt>
+        <dd nve-layout="span:8" nve-text="body">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
       </dl>
     </nve-card-content>
   </nve-card>
@@ -223,8 +214,10 @@ export const LightTheme = {
     </nve-card-content>
 
     <nve-card-footer>
-      Proceed with Action
-      <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
+      <div nve-layout="grid span-items:6 gap:xs">
+        <nve-button>Cancel</nve-button>  
+        <nve-button>Action</nve-button>
+      </div>
     </nve-card-footer>
   </nve-card>
 </div>
@@ -245,8 +238,10 @@ export const DarkTheme = {
     </nve-card-content>
 
     <nve-card-footer>
-      Proceed with Action
-      <nve-button interaction="emphasize">Proceed <nve-icon name="navigate-to"></nve-icon></nve-button>
+      <div nve-layout="grid span-items:6 gap:xs">
+        <nve-button>Cancel</nve-button>  
+        <nve-button>Action</nve-button>
+      </div>
     </nve-card-footer>
   </nve-card>
 </div>
