@@ -132,6 +132,7 @@ export class Pagination extends LitElement {
     this.#setValue(1);
     /* eslint-disable-next-line */
     this.step = value; // stateful due to internalized select element
+    this.dispatchEvent(new CustomEvent('step-change', { detail: this.step, bubbles: true, composed: true }));
   }
 
   #setValue(value: number) {
