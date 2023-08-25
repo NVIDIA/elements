@@ -62,6 +62,7 @@ export const Status = {
   <nve-alert status="running">running</nve-alert>
   <nve-alert status="restarting">restarting</nve-alert>
   <nve-alert status="stopping">stopping</nve-alert>
+  <nve-alert status="ignored">ignored</nve-alert>
 </div>
   `
 }

@@ -103,11 +103,11 @@ export const parameters = {
         [
           'Getting Started',
           'Changelog',
+          'Metrics',
           'Support',
           'Versioning',
           'Testing',
           'Extensions',
-          'Metrics',
           'Contributions',
           'API Design',
           [

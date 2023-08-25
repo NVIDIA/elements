@@ -37,6 +37,7 @@ export class Badge extends LitElement {
   render() {
     return html`
       <div internal-host>
+        <slot name="icon"></slot>${!this.status?.includes('trend') ? html`<nve-icon name=${statusIcons[this.status]} .size=${statusIcons[this.status] === 'dot' ? 'sm' : undefined as any}></nve-icon>` : ''}</slot>
         <slot></slot>
         <slot name="suffix-icon">
           ${this.status?.includes('trend') ? html`<nve-icon .name=${statusIcons[this.status] as any}></nve-icon>` : ''}

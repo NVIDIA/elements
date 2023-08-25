@@ -13,6 +13,12 @@ import globalStyles from './grid.global.css?inline';
  * @slot - default slot for content
  * @slot footer - slot for nve-grid-footer or nve-bulk-actions
  * @cssprop --background
+ * @cssprop --color
+ * @cssprop --border-radius
+ * @cssprop --box-shadow
+ * @cssprop --font-size
+ * @cssprop --row-height
+ * @cssprop --scroll-height
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-grid-documentation--page
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/

@@ -1,4 +1,0 @@
-
-nve-card-header:has(nve-tabs) {
-  --padding: var(--nve-ref-size-500) var(--nve-ref-size-500) var(--nve-ref-size-200);
-}
