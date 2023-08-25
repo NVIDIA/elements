@@ -38,8 +38,6 @@ describe('nve-badge', () => {
   });
 
   it('should provide trend icon when using a trend status', async () => {
-    expect(element.shadowRoot.querySelector('nve-icon')).toBeFalsy();
-
     element.status = 'trend-up';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('nve-icon').name).toBe('trend-up');

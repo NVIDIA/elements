@@ -14,7 +14,7 @@ export type Position = 'center' | `block-${BlockPosition}` | `inline-${InlinePos
 
 export type SupportStatus = 'accent' | 'warning' | 'success' | 'danger';
 
-export type TaskStatus = 'scheduled' | 'queued' | 'pending' | 'starting' | 'running' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown';
+export type TaskStatus = 'scheduled' | 'queued' | 'pending' | 'starting' | 'running' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored';
 
 export type TrendStatus = 'trend-down' | 'trend-up' | 'trend-neutral';
 
@@ -40,15 +40,16 @@ export const statusIcons: { [key: string]: IconName } = {
   failed: 'x-circle',
   finished: 'checkmark-circle',
   unknown: 'question-mark-circle',
-  queued: 'checklist',
-  running: 'dot',
-  restarting: 'dot',
-  stopping: 'dot',
-  pending: 'dot',
-  starting: 'dot',
+  queued: 'bar-pill-stack',
+  running: 'running',
+  restarting: 'refresh',
+  stopping: 'stop-sign',
+  pending: 'circle-dash',
+  starting: 'circle-dot',
   'trend-up': 'trend-up',
   'trend-down': 'trend-down',
-  'trend-neutral': 'minus'
+  'trend-neutral': 'minus',
+  ignored: 'circle-angled-line'
 };
 
 declare global {

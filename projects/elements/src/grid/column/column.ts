@@ -10,7 +10,15 @@ import styles from './column.css?inline';
  * @element nve-grid-column
  * @slot - default slot for content
  * @slot actions - slot for column actions
- * @cssprop --background
+ * @cssprop --color
+ * @cssprop --padding
+ * @cssprop --font-weight
+ * @cssprop --font-size
+ * @cssprop --height
+ * @cssprop --min-width
+ * @cssprop --justify-content
+ * @cssprop --border-left
+ * @cssprop --border-right
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/

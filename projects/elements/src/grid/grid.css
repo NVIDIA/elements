@@ -5,7 +5,7 @@
   --color: var(--nve-sys-layer-canvas-color);
   --border-radius: var(--nve-ref-border-radius-lg);
   --box-shadow: var(--nve-ref-shadow-100);
-  --font-size: var(--nve-ref-font-size-200);
+  --font-size: var(--nve-ref-font-size-100);
   --row-height: var(--nve-ref-size-900);
   --scroll-height: initial;
   --grid-auto-columns: minmax(0, 1fr);
