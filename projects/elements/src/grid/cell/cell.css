@@ -1,9 +1,10 @@
 :host {
   --color: var(--mlv-sys-layer-canvas-color);
   --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-500);
-  --height: 100%;
   --min-height: var(--row-height);
   --min-width: var(--mlv-ref-size-1000);
+  --font-weight: var(--mlv-ref-font-weight-medium);
+  --height: 100%;
   --border-left: 0;
   --border-right: 0;
   --justify-content: start;
@@ -21,6 +22,7 @@
   border-left: var(--border-left);
   border-right: var(--border-right);
   justify-content: var(--justify-content);
+  font-weight: var(--font-weight);
   display: flex;
   align-items: center;
   outline-offset: -2px;

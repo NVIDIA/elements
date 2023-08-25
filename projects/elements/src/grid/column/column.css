@@ -4,6 +4,7 @@
   --color: var(--mlv-sys-layer-canvas-color);
   --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-500);
   --font-weight: var(--mlv-ref-font-weight-medium);
+  --font-size: var(--mlv-ref-font-size-200);
   --height: var(--mlv-ref-size-1000);
   --min-width: var(--mlv-ref-size-1000);
   --justify-content: start;

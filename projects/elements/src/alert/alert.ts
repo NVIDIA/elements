@@ -59,7 +59,7 @@ export class Alert extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot name="icon"><mlv-icon name=${statusIcons[this.status]} .size=${statusIcons[this.status] === 'dot' ? 'sm' : undefined as any}></mlv-icon></slot>
+        <slot name="icon"><mlv-icon name=${statusIcons[this.status]}></mlv-icon></slot>
         ${this.#prefix.length ? html`<slot name="prefix"></slot>` : ''}
         <slot></slot>
         ${this.#actions.length ? html`<slot name="actions"></slot>` : ''}

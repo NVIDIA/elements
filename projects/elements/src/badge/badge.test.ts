@@ -38,8 +38,6 @@ describe('mlv-badge', () => {
   });
 
   it('should provide trend icon when using a trend status', async () => {
-    expect(element.shadowRoot.querySelector('mlv-icon')).toBeFalsy();
-
     element.status = 'trend-up';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('mlv-icon').name).toBe('trend-up');

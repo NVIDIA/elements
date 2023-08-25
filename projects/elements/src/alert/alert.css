@@ -5,7 +5,7 @@
   --color: var(--mlv-sys-text-color);
   --icon-color: var(--status-color);
   --icon-size: var(--mlv-ref-size-400);
-  --font-weight: var(--mlv-ref-font-weight-semibold);
+  --font-weight: var(--mlv-ref-font-weight-medium);
   --justify-content: start;
   width: auto;
 }
@@ -80,5 +80,19 @@ mlv-icon-button[interaction='flat'] {
 
 :host([status='success']),
 :host([status='danger']) {
+  --color: var(--status-color);
+}
+
+:host([status='scheduled']),
+:host([status='queued']),
+:host([status='pending']),
+:host([status='starting']),
+:host([status='running']),
+:host([status='restarting']),
+:host([status='stopping']),
+:host([status='finished']),
+:host([status='failed']),
+:host([status='unknown']),
+:host([status='ignored']) {
   --color: var(--status-color);
 }

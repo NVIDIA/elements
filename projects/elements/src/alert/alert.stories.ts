@@ -62,6 +62,7 @@ export const Status = {
   <mlv-alert status="running">running</mlv-alert>
   <mlv-alert status="restarting">restarting</mlv-alert>
   <mlv-alert status="stopping">stopping</mlv-alert>
+  <mlv-alert status="ignored">ignored</mlv-alert>
 </div>
   `
 }

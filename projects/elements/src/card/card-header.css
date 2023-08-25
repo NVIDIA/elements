@@ -1,6 +1,6 @@
 :host {
   --padding: var(--mlv-ref-size-400) ;
-  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
+  --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
   --line-height: 1em;
   --gap: var(--mlv-ref-space-xs);
   contain: none;
@@ -32,4 +32,8 @@
   margin: 0;
   font-size: var(--mlv-ref-font-size-100);
   font-weight: var(--mlv-ref-font-weight-normal);
+}
+
+::slotted(mlv-tabs) {
+  margin-bottom: calc(-1 * var(--padding));
 }

@@ -3,10 +3,10 @@
   --background: color-mix(in oklab, var(--color) var(--mlv-sys-contrast-mute-ratio), var(--mlv-sys-contrast-mute-color));
   --gap: var(--mlv-ref-space-xs);
   --color: var(--mlv-sys-status-color);
-  --height: var(--mlv-ref-size-1000);
-  --width: var(--mlv-ref-size-1000);
+  --height: var(--mlv-ref-size-800);
+  --width: var(--mlv-ref-size-800);
   --font-size: calc(var(--width) / 2);
-  --border-radius: var(--mlv-ref-border-radius-sm);
+  --border-radius: calc(var(--height) * .2);
   --font-weight: var(--mlv-ref-font-weight-bold);
   display: inline-block;
 }
@@ -39,14 +39,13 @@
 }
 
 :host([size='sm']) {
-  --width: var(--mlv-ref-size-700);
-  --height: var(--mlv-ref-size-700);
+  --width: var(--mlv-ref-size-600);
+  --height: var(--mlv-ref-size-600);
 }
 
 :host([size='lg']) {
   --width: calc(var(--mlv-ref-size-1000) * 1.55);
   --height: calc(var(--mlv-ref-size-1000) * 1.55);
-  --border-radius: var(--mlv-ref-border-radius-md);
 }
 
 :host([color]) [internal-host] {

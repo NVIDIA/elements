@@ -1,11 +1,10 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { appendRootNodeStyle, useStyles, ContainerElement } from '@elements/elements/internal';
+import { useStyles, ContainerElement } from '@elements/elements/internal';
 import cardStyleSheet from './card.css?inline';
 import cardHeaderStyleSheet from './card-header.css?inline';
 import cardContentStyleSheet from './card-content.css?inline';
 import cardFooterStyleSheet from './card-footer.css?inline';
-import globalStyles from './card.global.css?inline';
 
 /**
  * @element mlv-card
@@ -42,11 +41,6 @@ export class Card extends LitElement implements ContainerElement {
         <slot name="footer"></slot>
       </div>
     `;
-  }
-
-  connectedCallback(): void {
-    super.connectedCallback();
-    appendRootNodeStyle(this, globalStyles);
   }
 }
 

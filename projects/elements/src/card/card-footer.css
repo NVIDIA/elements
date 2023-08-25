@@ -1,5 +1,5 @@
 :host {
-  --padding: var(--mlv-ref-size-500);
+  --padding: var(--mlv-ref-size-400);
   --border-top: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
   contain: none;
 }

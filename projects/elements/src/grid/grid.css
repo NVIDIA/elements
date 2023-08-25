@@ -5,7 +5,7 @@
   --color: var(--mlv-sys-layer-canvas-color);
   --border-radius: var(--mlv-ref-border-radius-lg);
   --box-shadow: var(--mlv-ref-shadow-100);
-  --font-size: var(--mlv-ref-font-size-200);
+  --font-size: var(--mlv-ref-font-size-100);
   --row-height: var(--mlv-ref-size-900);
   --scroll-height: initial;
   --grid-auto-columns: minmax(0, 1fr);

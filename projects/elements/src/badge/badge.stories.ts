@@ -14,7 +14,7 @@ export const Default = {
 
 export const Status = {
   render: () => html`
-<div mlv-layout="row gap:md">
+<div mlv-layout="row gap:md align:wrap">
   <mlv-badge status="scheduled">scheduled</mlv-badge>
   <mlv-badge status="queued">queued</mlv-badge>
   <mlv-badge status="pending">pending</mlv-badge>

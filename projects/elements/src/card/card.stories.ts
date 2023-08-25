@@ -56,10 +56,9 @@ export const Default = {
         ${when(
           args.showFooter,
           () => html`
-          <mlv-card-footer>
-            Proceed with Action
-            <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
-          </mlv-card-footer>
+            <mlv-card-footer>
+              <mlv-button style="margin-left: auto">Action</mlv-button>
+            </mlv-card-footer>
           `
         )}
       </mlv-card>
@@ -84,26 +83,18 @@ export const CardWithContentLayout = {
 
 export const MediaCard = {
   render: () => html`
-  <div mlv-theme="root" mlv-layout="grid gap:md span-items:6 align:stretch" style="height: 480px">
+  <div mlv-theme="root" mlv-layout="grid gap:md span-items:6 align:stretch" style="height: 380px">
     <mlv-card style="height: 100%; width: 100%;">
       <img src="images/test-image-3.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
       <mlv-card-content>
         <p>card content</p>
       </mlv-card-content>
-      <mlv-card-footer>
-        Proceed with Action
-        <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
-      </mlv-card-footer>
     </mlv-card>
     <mlv-card style="height: 100%; width: 100%;">
       <img src="images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
       <mlv-card-content>
         <p>card content</p>
       </mlv-card-content>
-      <mlv-card-footer>
-        Proceed with Action
-        <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
-      </mlv-card-footer>
     </mlv-card>
   </div>
   `
@@ -163,14 +154,14 @@ export const DescriptionList = {
     </mlv-card-header>
     <mlv-card-content>
       <dl mlv-layout="grid gap:lg">
-        <dt mlv-layout="span:4" mlv-text="muted">Knot</dt>
-        <dd mlv-layout="span:8">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
+        <dt mlv-layout="span:4" mlv-text="body muted medium">Knot</dt>
+        <dd mlv-layout="span:8" mlv-text="body">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
 
-        <dt mlv-layout="span:4" mlv-text="muted">Port</dt>
-        <dd mlv-layout="span:8">Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+        <dt mlv-layout="span:4" mlv-text="body muted medium">Port</dt>
+        <dd mlv-layout="span:8" mlv-text="body">Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the bow (the front of the vessel).</dd>
 
-        <dt mlv-layout="span:4" mlv-text="muted">Starboard</dt>
-        <dd mlv-layout="span:8">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+        <dt mlv-layout="span:4" mlv-text="body muted medium">Starboard</dt>
+        <dd mlv-layout="span:8" mlv-text="body">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
       </dl>
     </mlv-card-content>
   </mlv-card>
@@ -223,8 +214,10 @@ export const LightTheme = {
     </mlv-card-content>
 
     <mlv-card-footer>
-      Proceed with Action
-      <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
+      <div mlv-layout="grid span-items:6 gap:xs">
+        <mlv-button>Cancel</mlv-button>  
+        <mlv-button>Action</mlv-button>
+      </div>
     </mlv-card-footer>
   </mlv-card>
 </div>
@@ -245,8 +238,10 @@ export const DarkTheme = {
     </mlv-card-content>
 
     <mlv-card-footer>
-      Proceed with Action
-      <mlv-button interaction="emphasize">Proceed <mlv-icon name="navigate-to"></mlv-icon></mlv-button>
+      <div mlv-layout="grid span-items:6 gap:xs">
+        <mlv-button>Cancel</mlv-button>  
+        <mlv-button>Action</mlv-button>
+      </div>
     </mlv-card-footer>
   </mlv-card>
 </div>
