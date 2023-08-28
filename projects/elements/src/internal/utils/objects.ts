@@ -30,3 +30,7 @@ export function parseVersion(version: string) {
   const [major, minor, patch] = version.split('.').map((v) => parseInt(v, 10));
   return { major, minor, patch };
 }
+
+export function formatStandardNumber(number: number) {
+  return new Intl.NumberFormat().format(number);
+}

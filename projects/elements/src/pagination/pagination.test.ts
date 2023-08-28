@@ -40,6 +40,13 @@ describe('nve-pagination', () => {
     expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('40-50');
   });
 
+  it('should number format items label', async () => {
+    expect(element.shadowRoot.querySelector('label').textContent).toBe('of 100');
+    element.items = 10_000;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('label').textContent).toBe('of 10,000');
+  });
+
   it('should apply aria labels to buttons and select', async () => {
     element.skippable = true;
     await elementIsStable(element);
@@ -135,5 +142,18 @@ describe('nve-pagination', () => {
     const { detail } = await event;
     expect(element.step).toBe(20);
     expect(detail).toBe(20);
+  });
+
+  it('should recompute the current page label if step changes and not on first page', async () => {
+    const select = element.shadowRoot.querySelector<HTMLSelectElement>('select');
+    const selectLabel = element.shadowRoot.querySelector('.select-label');
+    element.value = 2;
+    await elementIsStable(element);
+    expect(selectLabel.textContent).toBe('10-20');
+
+    select.value = '50';
+    select.dispatchEvent(new Event('change'));
+    await element.updateComplete;
+    expect(selectLabel.textContent).toBe('50-100');
   });
 });
