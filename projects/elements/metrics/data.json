@@ -1,5 +1,5 @@
 {
-  "created": "2023-08-28T16:17:11.064Z",
+  "created": "2023-08-28T20:58:32.983Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -237,7 +237,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 17,
-      "instanceTotal": 92,
+      "instanceTotal": 93,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -331,8 +331,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-checkbox-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0",
-      "projectTotal": 8,
-      "instanceTotal": 16,
+      "projectTotal": 7,
+      "instanceTotal": 15,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -350,8 +350,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-checkbox-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0",
-      "projectTotal": 5,
-      "instanceTotal": 5,
+      "projectTotal": 4,
+      "instanceTotal": 4,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -389,7 +389,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/foundations-forms-controls--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 7,
-      "instanceTotal": 14,
+      "instanceTotal": 15,
       "coverageTotal": 98.78,
       "behavior": "form",
       "status": "stable"
@@ -427,7 +427,7 @@
       "storybook": "http://localhost:7789/?path=/docs/foundations-forms-validation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 5,
-      "instanceTotal": 9,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -541,7 +541,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-divider-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
       "projectTotal": 3,
-      "instanceTotal": 13,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -636,7 +636,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dropdown-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 8,
-      "instanceTotal": 28,
+      "instanceTotal": 27,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -807,7 +807,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 17,
-      "instanceTotal": 75,
+      "instanceTotal": 78,
       "coverageTotal": 93.47,
       "behavior": "content",
       "status": "stable"
@@ -1357,7 +1357,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tag-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-10&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 2,
-      "instanceTotal": 2,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -1674,7 +1674,7 @@
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-button",
@@ -1785,7 +1785,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 85
+      "instanceTotal": 86
     },
     {
       "name": "app-shell-angular-demo",
@@ -2111,11 +2111,11 @@
         },
         {
           "name": "nve-button",
-          "instanceTotal": 6
+          "instanceTotal": 7
         },
         {
           "name": "nve-divider",
-          "instanceTotal": 4
+          "instanceTotal": 2
         },
         {
           "name": "nve-icon-button",
@@ -2123,7 +2123,7 @@
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 13
+          "instanceTotal": 15
         },
         {
           "name": "nve-panel-header",
@@ -2155,7 +2155,7 @@
         },
         {
           "name": "nve-dropdown",
-          "instanceTotal": 2
+          "instanceTotal": 1
         },
         {
           "name": "nve-badge",
@@ -2186,6 +2186,10 @@
           "instanceTotal": 3
         },
         {
+          "name": "nve-tag",
+          "instanceTotal": 4
+        },
+        {
           "name": "nve-switch",
           "instanceTotal": 1
         },
@@ -2203,23 +2207,11 @@
         },
         {
           "name": "nve-control-message",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-control",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-checkbox-group",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-checkbox",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-tag",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-accordion-header",
@@ -2234,7 +2226,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 86
+      "instanceTotal": 89
     },
     {
       "name": "@elements/next-common",
@@ -4040,26 +4032,26 @@
       {
         "file": "elements/src/pagination/pagination.ts",
         "lines": {
-          "total": 43,
-          "covered": 43,
+          "total": 51,
+          "covered": 51,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 19,
-          "covered": 19,
+          "total": 21,
+          "covered": 21,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 75,
-          "covered": 75,
+          "total": 84,
+          "covered": 84,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 14,
-          "covered": 14,
+          "total": 16,
+          "covered": 16,
           "skipped": 0,
           "pct": 100
         }
@@ -4418,20 +4410,20 @@
       {
         "file": "elements/src/internal/utils/objects.ts",
         "lines": {
-          "total": 14,
-          "covered": 14,
+          "total": 15,
+          "covered": 15,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 4,
-          "covered": 4,
+          "total": 5,
+          "covered": 5,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 15,
-          "covered": 15,
+          "total": 16,
+          "covered": 16,
           "skipped": 0,
           "pct": 100
         },
@@ -6741,28 +6733,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1713,
-        "covered": 1662,
+        "total": 1722,
+        "covered": 1671,
         "skipped": 0,
-        "pct": 97.02
+        "pct": 97.03
       },
       "statements": {
-        "total": 2278,
-        "covered": 2209,
+        "total": 2288,
+        "covered": 2219,
         "skipped": 0,
-        "pct": 96.97
+        "pct": 96.98
       },
       "functions": {
-        "total": 670,
-        "covered": 632,
+        "total": 673,
+        "covered": 635,
         "skipped": 0,
-        "pct": 94.32
+        "pct": 94.35
       },
       "branches": {
-        "total": 842,
-        "covered": 764,
+        "total": 844,
+        "covered": 766,
         "skipped": 0,
-        "pct": 90.73
+        "pct": 90.75
       },
       "branchesTrue": {
         "total": 0,
