@@ -83,3 +83,10 @@ export const DarkTheme = {
 </div>
   `
 }
+
+
+export const LargeValues = {
+  render: () => html`
+    <mlv-pagination container="inline" value="1" items="10000" step="100"></mlv-pagination>
+  `
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deepMerge, parseVersion } from '@elements/elements/internal';
+import { deepMerge, formatStandardNumber, parseVersion } from '@elements/elements/internal';
 
 describe('deepMerge', () => {
   const obj1 = {
@@ -45,5 +45,11 @@ describe('deepMerge', () => {
 describe('parseVersion', () => {
   it('it should parse a version string', () => {
     expect(parseVersion('1.2.3')).toStrictEqual({ major: 1, minor: 2, patch: 3 });
+  });
+});
+
+describe('formatStandardNumber', () => {
+  it('it should format number to standard locale', () => {
+    expect(formatStandardNumber(1000000)).toBe('1,000,000');
   });
 });
