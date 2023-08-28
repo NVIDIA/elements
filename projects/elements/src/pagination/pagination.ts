@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, I18nController, keyNavigationList, KeynavListConfig, useStyles } from '@elements/elements/internal';
+import { state } from 'lit/decorators/state.js';
+import { attachInternals, formatStandardNumber, I18nController, keyNavigationList, KeynavListConfig, useStyles } from '@elements/elements/internal';
 import styles from './pagination.css?inline';
 
 /**
@@ -34,6 +35,8 @@ export class Pagination extends LitElement {
 
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
+  @state() labelWidth = '100%';
+
   static formAssociated = true;
 
   static styles = useStyles([styles]);
@@ -62,11 +65,11 @@ export class Pagination extends LitElement {
   }
 
   get #selectLabel() {
-    return `${Math.max(1, (this.value - 1) * this.step)}-${((this.value - 1) * this.step) + this.step}`;
+    return `${formatStandardNumber(Math.max(1, (this.value - 1) * this.step))}-${formatStandardNumber(((this.value - 1) * this.step) + this.step)}`;
   }
 
   get #label() {
-    return html`<label>of ${this.items}</label>`;
+    return html`<label>of ${formatStandardNumber(this.items)}</label>`;
   }
 
   get #previousButton() {
@@ -84,6 +87,8 @@ export class Pagination extends LitElement {
   get #endButton() {
     return html`<nve-icon-button @click=${() => this.#setValue(this.items / this.step)} .disabled=${this.disabled || (((this.value - 1) * this.step) + this.step) >= this.items} .ariaLabel=${this.i18n.end} interaction="flat" icon-name="arrow-stop" direction="right"></nve-icon-button>`;
   }
+
+  #resizeObserver: ResizeObserver;
 
   get #select() {
     return this.disableStep ? html`<label>${this.#selectLabel}&nbsp;</label>` : html`
@@ -121,15 +126,30 @@ export class Pagination extends LitElement {
     `;
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'toolbar';
     this._internals.setFormValue(`${this.value}`);
+
+    await this.updateComplete;
+
+    this.#resizeObserver = new ResizeObserver(entries => {
+      if (this.shadowRoot.querySelector('select')) {
+        this.shadowRoot.querySelector('select').style.minWidth = `${entries[0].contentRect.width + 36}px`;
+      }
+    });
+
+    this.#resizeObserver.observe(this.shadowRoot.querySelector('.select-label'));
+  }
+
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.#resizeObserver.unobserve(this);
   }
 
   #setStep(value: number) {
-    this.#setValue(1);
     /* eslint-disable-next-line */
     this.step = value; // stateful due to internalized select element
     this.dispatchEvent(new CustomEvent('step-change', { detail: this.step, bubbles: true, composed: true }));

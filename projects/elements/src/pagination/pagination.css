@@ -50,7 +50,6 @@ label {
 
   nve-select {
     --width: fit-content;
-    --padding: 0 var(--nve-ref-size-700) 0 var(--nve-ref-size-200);
     margin-inline-end: 0;
   }
 
