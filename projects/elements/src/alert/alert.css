@@ -7,15 +7,12 @@
   --icon-size: var(--nve-ref-size-400);
   --font-weight: var(--nve-ref-font-weight-medium);
   --justify-content: start;
+  --min-height: initial;
   width: auto;
 }
 
 [internal-host] {
   --_icon-cancel-color: var(--color);
-}
-
-slot,
-[internal-host] {
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   gap: var(--gap);
@@ -28,7 +25,11 @@ slot,
 }
 
 slot {
-  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: var(--justify-content);
+  gap: var(--gap);
+  min-height: var(--min-height);
 }
 
 slot:not([name='actions']):not([name='prefix']):not([name='icon']) {

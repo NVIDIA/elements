@@ -37,6 +37,13 @@ describe('nve-badge', () => {
     expect(element.shadowRoot.querySelector('slot[name="suffix-icon"]')).toBeTruthy();
   });
 
+  it('should assign unamed icon slots to the first icon slot', async () => {
+    const icon = document.createElement('nve-icon');
+    element.appendChild(icon);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector<HTMLSlotElement>('slot[name="prefix-icon"]').assignedElements()).toContain(icon);
+  });
+
   it('should provide trend icon when using a trend status', async () => {
     element.status = 'trend-up';
     await elementIsStable(element);

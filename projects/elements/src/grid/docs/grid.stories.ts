@@ -810,6 +810,52 @@ export const PanelDetail = {
   `
 };
 
+export const PanelGrid = {
+  render() {
+    return html`
+    <style>
+      nve-panel#panel-grid {
+        min-width: 380px;
+        z-index: 99;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        right: 0;
+      }
+
+      .sb-story nve-panel#panel-grid {
+        height: 700px;
+      }
+
+      body {
+        padding: 0 !important;
+      }
+    </style>
+    <main nve-theme="root" nve-layout="row gap:sm full">
+      <section nve-layout="column gap:md full align:stretch">
+        page content
+      </section>
+      <nve-panel expanded id="panel-grid">
+        <nve-panel-header>
+          <h2 slot="title">Tasks</h2>
+        </nve-panel-header>
+        <nve-grid container="flat" stripe style="--scroll-height: 100vh">
+          <nve-grid-header>
+            ${Object.entries(getItems()[0]).slice(0, 3).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+          </nve-grid-header>
+          ${getItems(20).map(row => html`
+          <nve-grid-row>
+            ${Object.entries(row).slice(0, 3).map(([, cell]) => html`
+            <nve-grid-cell>${cell.label === 'status' ? html`<nve-badge status=${cell.value}>${cell.value}</nve-badge>` : cell.value}</nve-grid-cell>`)}
+          </nve-grid-row>
+        `)}
+        </nve-grid>
+      </nve-panel>
+    </main>
+    `;
+  }
+}
+
 class GridPanelDemo extends LitElement {
   @state() private selectedId: string = null;
 

@@ -44,7 +44,7 @@ export class Icon extends LitElement {
 
   render() {
     return html`
-      <div internal-host>${unsafeSVG(this.svg)}</div>
+      <div internal-host><slot>${unsafeSVG(this.svg)}</slot></div>
     `;
   }
 
