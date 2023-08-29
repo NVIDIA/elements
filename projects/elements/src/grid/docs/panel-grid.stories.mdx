@@ -1,0 +1,42 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Panel Grid" />
+
+# Panel Grid
+
+<element-metrics tag="nve-grid"></element-metrics>
+
+Panel Grid can be used to display key value type data sets for details of a given item in a collection.
+
+```html
+<main nve-layout="row gap:sm full">
+  <section nve-layout="column gap:md full align:stretch">
+    page content
+  </section>
+  <nve-panel expanded>
+    <nve-grid container="flat" stripe>
+      ...
+    </nve-grid>
+  </nve-panel>
+</main>
+```
+
+<Canvas>
+  <Story id="elements-data-grid-examples--panel-grid" />
+</Canvas>
+
+<LinkedHeader>nve-grid</LinkedHeader>
+<ArgsTable of="nve-grid" />
+
+<LinkedHeader>nve-grid-header</LinkedHeader>
+<ArgsTable of="nve-grid-header" />
+
+<LinkedHeader>nve-grid-column</LinkedHeader>
+<ArgsTable of="nve-grid-column" />
+
+<LinkedHeader>nve-grid-row</LinkedHeader>
+<ArgsTable of="nve-grid-row" />
+
+<LinkedHeader>nve-grid-cell</LinkedHeader>
+<ArgsTable of="nve-grid-cell" />

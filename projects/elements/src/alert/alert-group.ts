@@ -14,6 +14,7 @@ import styles from './alert-group.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-group-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2519-54572&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
+ * @description An alert group is an element that displays a group of related and important messages in a way that attracts the user's attention without interrupting the user's task.
  */
 export class AlertGroup extends LitElement {
   static styles = useStyles([styles]);

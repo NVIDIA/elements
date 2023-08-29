@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
 import { TaskStatus, SupportStatus, useStyles, statusIcons, TrendStatus, statusStateStyles, supportStateStyles } from '@elements/elements/internal';
@@ -34,15 +34,32 @@ export class Badge extends LitElement {
     'nve-icon': Icon
   };
 
+  get #size() {
+    return statusIcons[this.status] === 'dot' ? 'sm' : 'md';
+  }
+
   render() {
     return html`
       <div internal-host>
-        <slot name="icon"></slot>${!this.status?.includes('trend') ? html`<nve-icon name=${statusIcons[this.status]} .size=${statusIcons[this.status] === 'dot' ? 'sm' : undefined as any}></nve-icon>` : ''}</slot>
-        <slot></slot>
+        <slot name="prefix-icon">${!this.status?.includes('trend') ? html`<nve-icon name=${statusIcons[this.status]} .size=${this.#size}></nve-icon>` : nothing}</slot>
+        <slot @slotchange=${this.#assignDefaultIcon}></slot>
         <slot name="suffix-icon">
           ${this.status?.includes('trend') ? html`<nve-icon .name=${statusIcons[this.status] as any}></nve-icon>` : ''}
         </slot>
       </div>
     `;
+  }
+
+  async connectedCallback() {
+    super.connectedCallback();
+    await this.updateComplete;
+    this.#assignDefaultIcon();
+  }
+
+  #assignDefaultIcon() {
+    const unassignedIcon = this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements().find(i => i.tagName === 'MLV-ICON' && !i.slot);
+    if (unassignedIcon) {
+      unassignedIcon.slot = 'prefix-icon';
+    }
   }
 }
