@@ -109,6 +109,7 @@ export const parameters = {
           'Testing',
           'Extensions',
           'Contributions',
+          'Requests',
           'API Design',
           [
             'Getting Started',
@@ -201,6 +202,7 @@ export const parameters = {
             'Multi Select',
             'Pagination',
             'Panel Detail',
+            'Panel Grid',
             'Performance',
             'Placeholder',
             'Row Action',
