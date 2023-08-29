@@ -12,14 +12,14 @@ or over time inherits or re-implements another element's API on its own to expos
 access to its otherwise internal implementation details. Example, using a button and icon
 element we can start to see some of these tradeoffs.
 
-<nve-alert status="danger"><p>Don't:</p></nve-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 ```html
 <nve-button icon="info">
   button
 </nve-button>
 ```
 
-<nve-alert status="success"><p>Do:</p></nve-alert>
+<nve-alert status="success">Do:</nve-alert>
 ```html
 <nve-button>
   button <nve-icon name="info"></nve-icon>
@@ -35,14 +35,14 @@ name attribute so the icon must be exposed via `icon`.
 Going further we run into layout conflicts. If the icon needs to change position we
 must provide a secondary “escape hatch” API to change this behavior.
 
-<nve-alert status="danger"><p>Don't:</p></nve-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 ```html
 <nve-button iconplacement="leading" icon="info">
   button
 </nve-button>
 ```
 
-<nve-alert status="success"><p>Do:</p></nve-alert>
+<nve-alert status="success">Do:</nve-alert>
 ```html
 <nve-button>
   <nve-icon name="info"></nve-icon> button
@@ -109,7 +109,7 @@ the light DOM or the control of the consumer. In this example the h1 heading is 
 into the card element. This creates an incorrect DOM structure as only one given h1 can
 exist within the page. This also applies as the page structure should work down from h1-h6.
 
-<nve-alert status="danger"><p>Don't:</p></nve-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 ```html
 <!-- nve-card template -->
 <div>
@@ -127,7 +127,7 @@ exist within the page. This also applies as the page structure should work down 
 </nve-card>
 ```
 
-<nve-alert status="success"><p>Do:</p></nve-alert>
+<nve-alert status="success">Do:</nve-alert>
 ```html
 <!-- nve-card template -->
 <div>

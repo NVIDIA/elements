@@ -176,3 +176,16 @@ export const Themes = {
     </div>
   `
 }
+
+export const Multiline = {
+  render: () => html`
+    <nve-alert-group status="danger">
+      <nve-alert>
+        <div nve-layout="column gap:xs">
+          <p nve-text="body sm medium">Session Paused:</p>
+          <p nve-text="body sm">Failed to verify drives. <a href="#" nve-text="link">Check Status</a></p>
+        </div>
+      </nve-alert>
+    </nve-alert-group>
+  `
+}
