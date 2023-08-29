@@ -22,6 +22,6 @@ Events should be **stateless** only relaying user interaction and avoid changing
 Events should not include verb/action style prefixing such as on or trigger. Many
 frameworks de-sugar event handlers to prefix with keywords like on. Example React `onClose={this.close}`
 
-<mlv-alert status="warning"><p>Warning: use lowercase kebab events as some frameworks do not treat custom events as case sensitive. (<a href="https://custom-elements-everywhere.com/">read more</a>)</p></mlv-alert>
+<mlv-alert status="warning">Warning: use lowercase kebab events as some frameworks do not treat custom events as case sensitive. &nbsp;<a href="https://custom-elements-everywhere.com/">(read more)</a></mlv-alert>
 
-<mlv-alert status="warning"><p>Warning: avoid overloading existing default native custom events to avoid breaking user expectations on event behavior (<a href="https://github.com/vmware-clarity/core/blob/main/projects/core/build/eslint-rules/reserved-event-names.js">read more</a>)</p></mlv-alert>
+<mlv-alert status="warning">Warning: avoid overloading existing default native custom events to avoid breaking user expectations on event behavior &nbsp;<a href="https://github.com/vmware-clarity/core/blob/main/projects/core/build/eslint-rules/reserved-event-names.js">(read more)</a></mlv-alert>

@@ -176,3 +176,16 @@ export const Themes = {
     </div>
   `
 }
+
+export const Multiline = {
+  render: () => html`
+    <mlv-alert-group status="danger">
+      <mlv-alert>
+        <div mlv-layout="column gap:xs">
+          <p mlv-text="body sm medium">Session Paused:</p>
+          <p mlv-text="body sm">Failed to verify drives. <a href="#" mlv-text="link">Check Status</a></p>
+        </div>
+      </mlv-alert>
+    </mlv-alert-group>
+  `
+}

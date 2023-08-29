@@ -133,26 +133,28 @@ export class Pagination extends LitElement {
     this._internals.setFormValue(`${this.value}`);
 
     await this.updateComplete;
-
-    this.#resizeObserver = new ResizeObserver(entries => {
-      if (this.shadowRoot.querySelector('select')) {
-        this.shadowRoot.querySelector('select').style.minWidth = `${entries[0].contentRect.width + 36}px`;
-      }
-    });
-
-    this.#resizeObserver.observe(this.shadowRoot.querySelector('.select-label'));
+    this.#setupLabelWidth();
   }
-
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    this.#resizeObserver.unobserve(this);
+    this.#resizeObserver?.unobserve(this);
+  }
+
+  #setupLabelWidth() {
+    const label = this.shadowRoot.querySelector('.select-label');
+    const select = this.shadowRoot.querySelector('select');
+    if (label && select) {
+      this.#resizeObserver = new ResizeObserver(entries => select.style.minWidth = `${entries[0].contentRect.width + 36}px`);
+      this.#resizeObserver.observe(label);
+    }
   }
 
   #setStep(value: number) {
     /* eslint-disable-next-line */
     this.step = value; // stateful due to internalized select element
     this.dispatchEvent(new CustomEvent('step-change', { detail: this.step, bubbles: true, composed: true }));
+    this.#setValue(this.value);
   }
 
   #setValue(value: number) {

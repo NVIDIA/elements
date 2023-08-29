@@ -12,7 +12,7 @@ as this gives more flexibility to the user without expanding the public API surf
 CSS Custom Property names simple and map them 1:1 to the native CSS property. This lowers the learning
 curve of the API and makes it consistent between other components within the library.
 
-<mlv-alert status="success"><p>Do:</p></mlv-alert>
+<mlv-alert status="success">Do:</mlv-alert>
 ```css
 :host {
   --border: ...
@@ -21,7 +21,7 @@ curve of the API and makes it consistent between other components within the lib
 }
 ```
 
-<mlv-alert status="danger"><p>Don't:</p></mlv-alert>
+<mlv-alert status="danger">Don't:</mlv-alert>
 ```css
 :host {
   --border-color: ...
@@ -39,7 +39,7 @@ a custom element, avoid applying styles other than basic display properties and 
 to the host element. The more styles applied to the host, the easier it is for a consumer to
 override and change the styles in unexpected ways.
 
-<mlv-alert status="danger"><p>Don't:</p></mlv-alert>
+<mlv-alert status="danger">Don't:</mlv-alert>
 ```html
 <!-- element internal template -->
 <slot></slot>
@@ -76,7 +76,7 @@ difficult for both the library authors and consumers.
 To prevent internal style leakage, leverage a internal host element to apply styles
 and expose only the styles as needed to the public facing API.
 
-<mlv-alert status="success"><p>Do:</p></mlv-alert>
+<mlv-alert status="success">Do:</mlv-alert>
 ```html
 <!-- element internal template -->
 <div internal-host>
@@ -112,7 +112,7 @@ Leverage host selectors to customize the element visual state. This avoids expan
 of the element and enabling a single CSS representation of the component. Each visual variant
 is solely responsible for modifying the public API to reflect the appropriate state.
 
-<mlv-alert status="success"><p>Do:</p></mlv-alert>
+<mlv-alert status="success">Do:</mlv-alert>
 ```css
 :host {
   --background: var(--mlv-interaction-background);
@@ -162,7 +162,7 @@ mlv-alert.product-custom:hover {
 
 Visual customizations and theming are now fully compatible throughout the public API of the CSS custom properties.
 
-<mlv-alert status="danger"><p>Don't:</p></mlv-alert>
+<mlv-alert status="danger">Don't:</mlv-alert>
 ```css
 :host {
   background: var(--mlv-interaction-background);
@@ -205,7 +205,7 @@ using the system's intent/purpose tokens. Leveraging State Properties for CSS cu
 properties, element specific design tokens are unnecessary and increase the surface
 area of the API and number of tokens to maintain. (see State Properties for more information)
 
-<mlv-alert status="success"><p>Do:</p></mlv-alert>
+<mlv-alert status="success">Do:</mlv-alert>
 ```css
 :host([status='danger']) {
   --background: var(--mlv-sys-support-danger-color);
@@ -216,7 +216,7 @@ area of the API and number of tokens to maintain. (see State Properties for more
 }
 ```
 
-<mlv-alert status="danger"><p>Don't:</p></mlv-alert>
+<mlv-alert status="danger">Don't:</mlv-alert>
 ```css
 :host([status='danger']) {
   background: var(--mlv-sys-support-danger-color);
@@ -227,7 +227,7 @@ area of the API and number of tokens to maintain. (see State Properties for more
 }
 ```
 
-<mlv-alert status="muted"><p>🏁 Performance: leveraging design tokens with defined intent we drastically reduce the amount of CSS bundled and maintained within the system.</p></mlv-alert>
+<mlv-alert><mlv-icon slot="icon">🏁</mlv-icon> Performance: leveraging design tokens with defined intent we drastically reduce the amount of CSS bundled and maintained within the system.</mlv-alert>
 
 
 ## Element Style APIs
@@ -264,9 +264,9 @@ Margins on a host element make assumptions about the layout that is external to 
 Using a design token/layout system, designers and developers should be able to layout elements/utilities
 consistently and with explicit intent and constraint.
 
-<mlv-alert status="muted"><p>🏁 Performance: Avoiding margins enables <a href="https://developer.chrome.com/blog/css-containment/">CSS containment for better performance</a></p></mlv-alert>
-<mlv-alert status="muted"><p>🎓 Learn: <a href="https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202">Leading Trim</a></p></mlv-alert>
-<mlv-alert status="muted"><p>🎓 Learn: <a href="https://seek-oss.github.io/capsize/">Capsize CSS</a></p></mlv-alert>
+<mlv-alert><mlv-icon slot="icon">🏁</mlv-icon> Performance: Avoiding margins enables &nbsp;<a href="https://developer.chrome.com/blog/css-containment/">CSS containment for better performance</a></mlv-alert>
+<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Learn: &nbsp;<a href="https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202">Leading Trim</a></mlv-alert>
+<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Learn: &nbsp;<a href="https://seek-oss.github.io/capsize/">Capsize CSS</a></mlv-alert>
 
 
 ## Logical Properties
@@ -275,8 +275,8 @@ Use CSS Logical Properties when the styles are applied to text content that may 
 By using logical properties the styles will follow the reading direction of the element. This is needed for i18n
 support when the reading order is reversed by the user preferences in the browser.
 
-<mlv-alert status="muted"><p>🎓 Learn: <a href="https://web.dev/logical-property-shorthands/">CSS Logical Properties</a></p></mlv-alert>
-<mlv-alert status="muted"><p>🎓 Case Study: <a href="https://storybook.core.clarity.design/?path=/docs/stories-forms--internationalization">Example of inverted form controls </a></p></mlv-alert>
+<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Learn: &nbsp;<a href="https://web.dev/logical-property-shorthands/">CSS Logical Properties</a></mlv-alert>
+<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Case Study: &nbsp;<a href="https://storybook.core.clarity.design/?path=/docs/stories-forms--internationalization">Example of inverted form controls </a></mlv-alert>
 
 ## Parts
 
@@ -294,7 +294,7 @@ CSS Parts enable elements to expose DOM elements to consumers that typically wou
 </style>
 ```
 
-<mlv-alert status="warning"><p>Warning: avoid using: CSS Parts can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</p></mlv-alert>
+<mlv-alert status="warning">Warning: avoid using: CSS Parts can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</mlv-alert>
 
 CSS Parts give full control to the application developer however, this comes with a significant
 tradeoff. As more internal elements are exposed they become part of the public API of the element.

@@ -1,11 +1,11 @@
 # MagLev Elements
 
-### Web Components for MagLev UI Apps and framework agnostic UI Development
+### The Design Language for AI/ML Factories Building at the Speed of Light
 
-- [Documentation](https://elements-stage.nvidia.com/ui/storybook/elements)
+- [Documentation](https://elements.nvidia.com/ui/storybook/elements?path=/docs/about-getting-started--docs)
 - [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
-- [Changelog](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/about-changelog--page)
-- [Package](ui/packages/npm:%2F%2F@elements%2Felements)
+- [Changelog](https://elements.nvidia.com/ui/storybook/elements?path=/docs/about-changelog--docs)
+- [Package Maglev](ui/packages/npm:%2F%2F@elements%2Felements)
 
 ## Getting Started
 
@@ -41,12 +41,12 @@ import '@elements/elements/polyfills';
 ```
 
 ## Framework Integrations
-- [Angular](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-angular--page)
-- [Lit](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-lit--page)
-- [Preact](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-preact--page)
-- [React](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-react--page)
-- [TypeScript](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-typescript--page)
-- [Vue](https://elements-stage.nvidia.com/ui/storybook/elements?path=/story/integrations-vue--page)
+- [Angular](https://elements.nvidia.com/ui/storybook/elements?path=/docs/integrations-angular--docs)
+- [Lit](https://elements.nvidia.com/ui/storybook/elements?path=/docs/integrations-lit--docs)
+- [Preact](https://elements.nvidia.com/ui/storybook/elements?path=/docs/integrations-preact--docs)
+- [React](https://elements.nvidia.com/ui/storybook/elements?path=/docs/integrations-react--docs)
+- [TypeScript](https://elements.nvidia.com/ui/storybook/elements?path=/docs/integrations-typescript--docs)
+- [Vue](https://elements.nvidia.com/ui/storybook/elements?path=/docs/integrations-Vue--docs)
 
 
 ## Development
@@ -78,67 +78,3 @@ Develop unit tests with watcher enabled:
 ```bash
 pnpm test:watch
 ```
-
-
-## Deploying
-
-### Version
-
-Bump the `version` field in `package.json` following semantic versioning conventions and ideally adhering to our release cadence.
-We currently aim for one minor version release at the end of each month and additional patch versions for bug fixes.
-
-```json
-{
-  "name": "@elements/elements",
-  "version": "0.5.0",
-  ...
-}
-```
-
-Update the changelog in storybook to reflect the latest version and release notes. `docs/changelog.stories.mdx`
-
-### Build
-
-Validate a proper build and verify expected component APIs and demos by running local Storybook:
-
-```bash
-pnpm i
-pnpm dev
-```
-
-Test storybook make sure everything looks good, then run a local build:
-
-```bash
-pnpm ci:nocache
-```
-
-### Publish
-
-Validate expected artifacts in `/dist` folder, then run a dry publish and validate contents and package size that will be uploaded to artifactory:
-
-```bash
-pnpm publish --dry-run
-```
-
-Finally, run that actual deploy of the new version and verify contents on <a href="https://artifactory.build.nvidia.com/ui/repos/tree/General/elements-ui-npm/@elements/elements/-/@elements">artifactory</a>:
-
-
-```bash
-pnpm publish
-```
-
-### UI Platform Dependencies
-
-After publishing the UI platform (IDE) dependencies can be updated.
-
-```
-src/ui/platform/apps/home/package.json
-src/ui/platform/libs/feedback-elements/package.json
-src/ui/platform/libs/components/package.json
-src/ui/platform/libs/ide/package.json
-src/ui/platform/libs/ide-shell/package.json
-src/ui/platform/plugins/apps-and-services/package.json
-src/ui/platform/shared/elements/package.json
-```
-
-Example Release Commit: https://git-av.nvidia.com/r/c/elements/+/120980

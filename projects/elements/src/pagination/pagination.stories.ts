@@ -52,18 +52,22 @@ export const Forms = {
     <form id="pagination-form" mlv-layout="column gap:md">
       <mlv-pagination name="page" value="1" items="100" step="10" aria-label="pagination controls"></mlv-pagination>
       <mlv-button>submit page 10</mlv-button>
+      <pre></pre>
     </form>
     <script type="module">
       const form = document.querySelector('form');
-      const button = document.querySelector('mlv-button');
-      form.addEventListener('change', () => {
-        button.innerText = 'submit page ' + Object.fromEntries(new FormData(form)).page;
-      });
+      const pre = document.querySelector('form pre');
 
-      form.addEventListener('submit', e => {
+      form.addEventListener('change', updateValues);
+      form.addEventListener('input', updateValues);
+      form.addEventListener('submit', updateValues);
+      form.addEventListener('step-change', updateValues);
+
+      function updateValues(e) {
         e.preventDefault();
-        alert(Object.fromEntries(new FormData(form)).page);
-      });
+        console.log(e);
+        pre.innerText = JSON.stringify({ ...Object.fromEntries(new FormData(form)), step: form.elements.page.step }, null, 2);
+      }
     </script>
   `
 };

@@ -132,14 +132,19 @@ describe('mlv-pagination', () => {
     expect(element.step).toBe(20);
   });
 
-  it('should emit step-change event when step changes', async () => {
-    const event = untilEvent(element, 'step-change');
+  it('should emit step-change, input and change events when step changes', async () => {
+    const stepChange = untilEvent(element, 'step-change');
+    const input = untilEvent(element, 'input');
+    const change = untilEvent(element, 'change');
     const select = element.shadowRoot.querySelector<HTMLSelectElement>('select');
+
     expect(element.step).toBe(10);
     select.value = '20';
     select.dispatchEvent(new Event('change'));
 
-    const { detail } = await event;
+    await input;
+    await change;
+    const { detail } = await stepChange;
     expect(element.step).toBe(20);
     expect(detail).toBe(20);
   });

@@ -1,0 +1,42 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { LinkedHeader } from '../../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Panel Grid" />
+
+# Panel Grid
+
+<element-metrics tag="mlv-grid"></element-metrics>
+
+Panel Grid can be used to display key value type data sets for details of a given item in a collection.
+
+```html
+<main mlv-layout="row gap:sm full">
+  <section mlv-layout="column gap:md full align:stretch">
+    page content
+  </section>
+  <mlv-panel expanded>
+    <mlv-grid container="flat" stripe>
+      ...
+    </mlv-grid>
+  </mlv-panel>
+</main>
+```
+
+<Canvas>
+  <Story id="elements-data-grid-examples--panel-grid" />
+</Canvas>
+
+<LinkedHeader>mlv-grid</LinkedHeader>
+<ArgsTable of="mlv-grid" />
+
+<LinkedHeader>mlv-grid-header</LinkedHeader>
+<ArgsTable of="mlv-grid-header" />
+
+<LinkedHeader>mlv-grid-column</LinkedHeader>
+<ArgsTable of="mlv-grid-column" />
+
+<LinkedHeader>mlv-grid-row</LinkedHeader>
+<ArgsTable of="mlv-grid-row" />
+
+<LinkedHeader>mlv-grid-cell</LinkedHeader>
+<ArgsTable of="mlv-grid-cell" />

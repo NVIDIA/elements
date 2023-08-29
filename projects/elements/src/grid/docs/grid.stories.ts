@@ -810,6 +810,52 @@ export const PanelDetail = {
   `
 };
 
+export const PanelGrid = {
+  render() {
+    return html`
+    <style>
+      mlv-panel#panel-grid {
+        min-width: 380px;
+        z-index: 99;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        right: 0;
+      }
+
+      .sb-story mlv-panel#panel-grid {
+        height: 700px;
+      }
+
+      body {
+        padding: 0 !important;
+      }
+    </style>
+    <main mlv-theme="root" mlv-layout="row gap:sm full">
+      <section mlv-layout="column gap:md full align:stretch">
+        page content
+      </section>
+      <mlv-panel expanded id="panel-grid">
+        <mlv-panel-header>
+          <h2 slot="title">Tasks</h2>
+        </mlv-panel-header>
+        <mlv-grid container="flat" stripe style="--scroll-height: 100vh">
+          <mlv-grid-header>
+            ${Object.entries(getItems()[0]).slice(0, 3).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+          </mlv-grid-header>
+          ${getItems(20).map(row => html`
+          <mlv-grid-row>
+            ${Object.entries(row).slice(0, 3).map(([, cell]) => html`
+            <mlv-grid-cell>${cell.label === 'status' ? html`<mlv-badge status=${cell.value}>${cell.value}</mlv-badge>` : cell.value}</mlv-grid-cell>`)}
+          </mlv-grid-row>
+        `)}
+        </mlv-grid>
+      </mlv-panel>
+    </main>
+    `;
+  }
+}
+
 class GridPanelDemo extends LitElement {
   @state() private selectedId: string = null;
 
