@@ -56,7 +56,7 @@ export const Interactive = {
     <p nve-text="body">some text footer content</p>
   </nve-drawer-footer>
 </nve-drawer>
-<script>
+<script type="module">
   const drawer = document.querySelector('nve-drawer');
   const btn = document.querySelector('#drawer-btn');
   btn.addEventListener('click', () => drawer.hidden = false);
@@ -103,7 +103,7 @@ export const NonClosable = {
     <p nve-text="body">some text footer content</p>
   </nve-drawer-footer>
 </nve-drawer>
-<script>
+<script type="module">
   const drawer = document.querySelector('nve-drawer');
   const open = document.querySelector('#open-btn');
   const cancel = document.querySelector('#cancel-btn');
@@ -140,7 +140,7 @@ export const Position = {
     <p nve-text="body">some text footer content</p>
   </nve-drawer-footer>
 </nve-drawer>
-<script>
+<script type="module">
   const leftDrawer = document.querySelector('nve-drawer[position="left"]');
   document.querySelector('.drawer-btn-left').addEventListener('click', () => {
     leftDrawer.position = 'left';
@@ -155,6 +155,38 @@ export const Position = {
 
   leftDrawer.addEventListener('close', () => leftDrawer.hidden = true);
   rightDrawer.addEventListener('close', () => rightDrawer.hidden = true);
+</script>
+  `
+};
+
+
+export const Inline = {
+  render: () => html`
+<div nve-layout="row align:stretch">
+  <div nve-layout="column gap:md align:stretch">
+    <nve-card style="height: 200px">
+      <nve-card-content>
+        <nve-button>open inline drawer</nve-button>
+      </nve-card-content>
+    </nve-card>
+    <nve-card style="height: 200px"></nve-card>
+  </div>
+
+  <nve-drawer hidden closable modal inline position="right">
+    <nve-drawer-header>
+      <h3 nve-text="heading semibold sm">Small</h3>
+    </nve-drawer-header>
+    <p nve-text="body">some text content in a small drawer</p>
+    <nve-drawer-footer>
+      <p nve-text="body">some text footer content</p>
+    </nve-drawer-footer>
+  </nve-drawer>
+</div>
+<script type="module">
+  const drawer = document.querySelector('nve-drawer');
+  const open = document.querySelector('nve-button');
+  open.addEventListener('click', () => drawer.hidden = false);
+  drawer.addEventListener('close', () => drawer.hidden = true);
 </script>
   `
 };
