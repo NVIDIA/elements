@@ -1,5 +1,5 @@
 :host {
-  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
   --min-height: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-200));
   --padding: var(--nve-ref-size-300);
   display: block;
