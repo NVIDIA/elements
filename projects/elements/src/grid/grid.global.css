@@ -3,6 +3,7 @@ nve-grid-row:has(nve-grid-cell:first-child nve-radio > input:checked) nve-grid-r
 nve-grid-row:has(nve-grid-cell:first-child nve-checkbox > input:checked) nve-grid-row,
 nve-grid-row:has(nve-grid-cell:first-child nve-radio > input:checked) nve-grid-cell,
 nve-grid-row:has(nve-grid-cell:first-child nve-checkbox > input:checked) nve-grid-cell {
+  --background: var(--nve-sys-interaction-highlighted-muted-background);
   --interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
 }
 

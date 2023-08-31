@@ -21,14 +21,6 @@
       }
     },
     "color": {
-      "white": {
-        "value": "#ffffff",
-        "type": "color"
-      },
-      "black": {
-        "value": "#000000",
-        "type": "color"
-      },
       "alpha": {
         "white": {
           "100": {
@@ -1330,7 +1322,7 @@
         },
         "ratio": {
           "value": "100%",
-          "type": "color"
+          "type": "percentage"
         }
       },
       "mute": {
@@ -1340,7 +1332,7 @@
         },
         "ratio": {
           "value": "40%",
-          "type": "color"
+          "type": "percentage"
         }
       }
     },
@@ -1570,9 +1562,11 @@
       }
     },
     "status": {
-      "color": {
-        "value": "{ref.color.gray-denim.1000}",
-        "type": "color"
+      "@": {
+        "color": {
+          "value": "{ref.color.gray-denim.1000}",
+          "type": "color"
+        }
       },
       "scheduled": {
         "color": {

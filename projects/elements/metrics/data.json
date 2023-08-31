@@ -1,5 +1,5 @@
 {
-  "created": "2023-08-29T22:26:02.057Z",
+  "created": "2023-08-31T22:44:01.288Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -9,8 +9,9 @@
     "0.1.3",
     "0.4.1",
     "0.8.0",
-    "0.15.0",
+    "0.16.0",
     "0.11.0",
+    "0.15.0",
     "0.6.0"
   ],
   "elements": [
@@ -544,7 +545,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-divider-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
       "projectTotal": 3,
-      "instanceTotal": 10,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -639,7 +640,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dropdown-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0",
       "projectTotal": 8,
-      "instanceTotal": 27,
+      "instanceTotal": 29,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -810,7 +811,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
       "projectTotal": 17,
-      "instanceTotal": 78,
+      "instanceTotal": 80,
       "coverageTotal": 93.47,
       "behavior": "content",
       "status": "stable"
@@ -903,8 +904,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-logo-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=113-5317&t=iOYah8Uct8CFd69k-0",
-      "projectTotal": 3,
-      "instanceTotal": 19,
+      "projectTotal": 4,
+      "instanceTotal": 20,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -1017,8 +1018,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-pagination-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0",
-      "projectTotal": 2,
-      "instanceTotal": 3,
+      "projectTotal": 3,
+      "instanceTotal": 4,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -1283,8 +1284,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-sort-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=127-8456&t=TYtFvncSeBAKHOMe-0",
-      "projectTotal": 2,
-      "instanceTotal": 4,
+      "projectTotal": 3,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -1360,7 +1361,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tag-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-10&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 2,
-      "instanceTotal": 5,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -1417,7 +1418,7 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=596-34431&t=clRGqnKDRGNhR0Yu-0",
       "projectTotal": 3,
-      "instanceTotal": 3,
+      "instanceTotal": 4,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -1435,8 +1436,8 @@
       "package": true,
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tooltip-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-29&t=clRGqnKDRGNhR0Yu-0",
-      "projectTotal": 7,
-      "instanceTotal": 13,
+      "projectTotal": 8,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "beta"
@@ -2098,7 +2099,7 @@
     {
       "name": "@elements/next-av",
       "path": "src/ui/next/av",
-      "elementsVersion": "0.15.0",
+      "elementsVersion": "0.16.0",
       "elements": [
         {
           "name": "nve-app-header",
@@ -2122,7 +2123,7 @@
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 15
+          "instanceTotal": 17
         },
         {
           "name": "nve-panel-header",
@@ -2150,7 +2151,7 @@
         },
         {
           "name": "nve-divider",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-search",
@@ -2158,11 +2159,15 @@
         },
         {
           "name": "nve-toast",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-dropdown",
-          "instanceTotal": 1
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-tag",
+          "instanceTotal": 6
         },
         {
           "name": "nve-badge",
@@ -2193,10 +2198,6 @@
           "instanceTotal": 3
         },
         {
-          "name": "nve-tag",
-          "instanceTotal": 4
-        },
-        {
           "name": "nve-switch",
           "instanceTotal": 1
         },
@@ -2221,6 +2222,18 @@
           "instanceTotal": 2
         },
         {
+          "name": "nve-tooltip",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-pagination",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-sort-button",
+          "instanceTotal": 1
+        },
+        {
           "name": "nve-accordion-header",
           "instanceTotal": 1
         },
@@ -2231,9 +2244,13 @@
         {
           "name": "nve-accordion",
           "instanceTotal": 1
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 89
+      "instanceTotal": 101
     },
     {
       "name": "@elements/next-common",
@@ -5701,8 +5718,8 @@
       {
         "file": "elements/src/drawer/drawer.ts",
         "lines": {
-          "total": 15,
-          "covered": 15,
+          "total": 16,
+          "covered": 16,
           "skipped": 0,
           "pct": 100
         },
@@ -5713,8 +5730,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 24,
-          "covered": 24,
+          "total": 25,
+          "covered": 25,
           "skipped": 0,
           "pct": 100
         },
@@ -6728,14 +6745,14 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1735,
-        "covered": 1684,
+        "total": 1736,
+        "covered": 1685,
         "skipped": 0,
         "pct": 97.06
       },
       "statements": {
-        "total": 2308,
-        "covered": 2239,
+        "total": 2309,
+        "covered": 2240,
         "skipped": 0,
         "pct": 97.01
       },
