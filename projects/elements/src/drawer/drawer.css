@@ -62,8 +62,32 @@ dialog {
   position: absolute;
 }
 
+:host([inline]) {
+  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-200);
+  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-200);
+  --background: var(--mlv-sys-layer-container-background);
+  --box-shadow: none;
+  --border: 0;
+}
+
+:host([inline])::after {
+  transition: width var(--mlv-ref-animation-duration-200) var(--mlv-ref-animation-easing-100);
+  height: 1px;
+  width: 0;
+  content: '';
+}
+
+:host([inline]:not([hidden]))::after {
+  display: block;
+  width: var(--max-width);
+}
+
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+  background: hsla(0, 0%, 0%, 0.070); /* --mlv-sys-layer-backdrop-background (not available on top layer */
+}
+
+:host([inline]) dialog::backdrop {
+  background: transparent;
 }
 
 .header {

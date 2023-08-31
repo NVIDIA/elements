@@ -3,6 +3,7 @@ mlv-grid-row:has(mlv-grid-cell:first-child mlv-radio > input:checked) mlv-grid-r
 mlv-grid-row:has(mlv-grid-cell:first-child mlv-checkbox > input:checked) mlv-grid-row,
 mlv-grid-row:has(mlv-grid-cell:first-child mlv-radio > input:checked) mlv-grid-cell,
 mlv-grid-row:has(mlv-grid-cell:first-child mlv-checkbox > input:checked) mlv-grid-cell {
+  --background: var(--mlv-sys-interaction-highlighted-muted-background);
   --interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
 }
 

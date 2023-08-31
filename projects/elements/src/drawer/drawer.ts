@@ -47,7 +47,7 @@ export class Drawer extends LitElement {
   /**
    * Determines if a drawer should have a modal backdrop that visually overlays the UI.
    */
-  @property({ type: Boolean }) modal: boolean;
+  @property({ type: Boolean, reflect: true }) modal: boolean;
 
   /**
    * The anchor provides the element that the popover should position relative to.
@@ -61,6 +61,12 @@ export class Drawer extends LitElement {
    * A trigger can accept a idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) trigger: string | HTMLElement;
+
+  /**
+   * Create a inline layout effect while retaining the a11y characteristics and top layer behavior (light dismiss, focus trap, non interactive background)
+   * https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+   */
+  @property({ type: Boolean, reflect: true }) inline: boolean;
 
   /**
    * Determines if popover should be rendered and positioned.

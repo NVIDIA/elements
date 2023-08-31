@@ -56,7 +56,7 @@ export const Interactive = {
     <p mlv-text="body">some text footer content</p>
   </mlv-drawer-footer>
 </mlv-drawer>
-<script>
+<script type="module">
   const drawer = document.querySelector('mlv-drawer');
   const btn = document.querySelector('#drawer-btn');
   btn.addEventListener('click', () => drawer.hidden = false);
@@ -103,7 +103,7 @@ export const NonClosable = {
     <p mlv-text="body">some text footer content</p>
   </mlv-drawer-footer>
 </mlv-drawer>
-<script>
+<script type="module">
   const drawer = document.querySelector('mlv-drawer');
   const open = document.querySelector('#open-btn');
   const cancel = document.querySelector('#cancel-btn');
@@ -140,7 +140,7 @@ export const Position = {
     <p mlv-text="body">some text footer content</p>
   </mlv-drawer-footer>
 </mlv-drawer>
-<script>
+<script type="module">
   const leftDrawer = document.querySelector('mlv-drawer[position="left"]');
   document.querySelector('.drawer-btn-left').addEventListener('click', () => {
     leftDrawer.position = 'left';
@@ -155,6 +155,38 @@ export const Position = {
 
   leftDrawer.addEventListener('close', () => leftDrawer.hidden = true);
   rightDrawer.addEventListener('close', () => rightDrawer.hidden = true);
+</script>
+  `
+};
+
+
+export const Inline = {
+  render: () => html`
+<div mlv-layout="row align:stretch">
+  <div mlv-layout="column gap:md align:stretch">
+    <mlv-card style="height: 200px">
+      <mlv-card-content>
+        <mlv-button>open inline drawer</mlv-button>
+      </mlv-card-content>
+    </mlv-card>
+    <mlv-card style="height: 200px"></mlv-card>
+  </div>
+
+  <mlv-drawer hidden closable modal inline position="right">
+    <mlv-drawer-header>
+      <h3 mlv-text="heading semibold sm">Small</h3>
+    </mlv-drawer-header>
+    <p mlv-text="body">some text content in a small drawer</p>
+    <mlv-drawer-footer>
+      <p mlv-text="body">some text footer content</p>
+    </mlv-drawer-footer>
+  </mlv-drawer>
+</div>
+<script type="module">
+  const drawer = document.querySelector('mlv-drawer');
+  const open = document.querySelector('mlv-button');
+  open.addEventListener('click', () => drawer.hidden = false);
+  drawer.addEventListener('close', () => drawer.hidden = true);
 </script>
   `
 };

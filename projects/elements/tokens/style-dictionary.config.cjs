@@ -3,6 +3,37 @@ const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 const buildPath = process.argv[process.argv.findIndex((i) => i === '--outDir') + 1];
 
 StyleDictionary.registerTransform({
+  name: 'custom/validate',
+  type: 'value',
+  transitive: true,
+  transformer: (obj) => {
+    const { value, type, name, original, filePath } = obj;
+    const isHighContrast = filePath.includes('high-contrast');
+    const isReferenceToken = name.includes('mlv-ref');
+    const isVisualizationToken = name?.includes('mlv-sys-visualization');
+    const isColorToken = type === 'color';
+    const isRawValue = !original.value.startsWith('{');
+    const isPxValue = original.value.endsWith('px');
+    const isSizeToken = name?.includes('mlv-ref-size');
+    const isSpaceToken = name?.includes('mlv-ref-space');
+    const isBorderToken = name?.includes('mlv-ref-border');
+    const isOutlineToken = name?.includes('mlv-ref-outline');
+
+    if (isColorToken && isRawValue && !isReferenceToken && !isVisualizationToken && !isHighContrast) {
+      console.error('\x1b[31m', `Token ${name} is a invalid color. Color must implement a reference to a {ref.*} token to prevent cross theme color divergence`);
+      throw new Error();
+    }
+
+    if (isPxValue && isRawValue && !isSizeToken && !isSpaceToken && !isBorderToken && !isOutlineToken) {
+      console.error('\x1b[31m', `Token ${name} is a invalid size/space value. Value must implement a reference to a {ref.space-*} or {ref.size-*} token to prevent cross theme layout divergence`);
+      throw new Error();
+    }
+
+    return value;
+  },
+});
+
+StyleDictionary.registerTransform({
   name: 'custom/css-calc',
   type: 'value',
   transitive: true,
@@ -89,7 +120,7 @@ function cssOutput(destination) {
   const theme = getTheme(destination);
   return {
     prefix: 'mlv',
-    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css',  'custom/css-calc'],
+    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css',  'custom/css-calc', 'custom/validate'],
     files: [{
       format: 'custom/css',
       destination,
@@ -107,7 +138,7 @@ function jsonOutput(destination) {
   return {
     prefix: 'mlv',
     transformGroup: 'web',
-    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc'],
+    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
     files: [{
       format: 'custom/json',
       destination,
