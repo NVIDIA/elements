@@ -13,6 +13,11 @@
   --height: initial;
 }
 
+:host([status='muted']) {
+  --background: var(--nve-sys-layer-overlay-background);
+  --color: var(--nve-sys-layer-overlay-color);
+}
+
 dialog {
   padding: var(--padding);
   border-radius: var(--border-radius);

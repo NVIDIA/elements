@@ -11,6 +11,7 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
 
 /**
  * @element nve-panel-header
+ * @since 0.10.0
  * @slot title - Title Text
  * @slot subtitle - Subtitle Text
  * @slot action-icon - Extra Action Button (use `nve-icon-button`)
@@ -51,6 +52,7 @@ export class PanelHeader extends LitElement {
 
 /**
  * @element nve-panel-content
+ * @since 0.10.0
  * @slot - This is a default/unnamed slot for panel content content
  * @cssprop --padding
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-panel-documentation--docs
@@ -76,6 +78,7 @@ export class PanelHeader extends LitElement {
 
 /**
  * @element nve-panel-footer
+ * @since 0.10.0
  * @slot - This is a default/unnamed slot for panel footer content
  * @cssprop --padding
  * @cssprop --border-top
@@ -111,6 +114,8 @@ export class PanelHeader extends LitElement {
 
 /**
  * @element nve-panel
+ * @description Panel is inline container for content that is coupled to the content on the page (details, additional actions/options). Alternatively [Drawer](./?path=/docs/elements-drawer-documentation--docs) is out of context of the rest of the page (notifications, navigations, settings).
+ * @since 0.10.0
  * @event open
  * @event close
  * @slot - This is a default/unnamed slot for panel content
