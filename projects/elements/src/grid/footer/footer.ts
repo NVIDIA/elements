@@ -4,6 +4,7 @@ import styles from './footer.css?inline';
 
 /**
  * @element nve-grid-footer
+ * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --color

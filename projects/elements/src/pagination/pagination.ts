@@ -6,6 +6,8 @@ import styles from './pagination.css?inline';
 
 /**
  * @element nve-pagination
+ * @description Pagination is a control that enables users to navigate through pages of content.
+ * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-pagination-documentation--docs

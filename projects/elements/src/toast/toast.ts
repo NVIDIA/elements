@@ -7,6 +7,8 @@ import styles from './toast.css?inline';
 
 /**
  * @element nve-toast
+ * @description A contextual popup that displays a status. Toasts are [triggered](https://w3c.github.io/aria/#tooltip) by clicking, focusing, or tapping an element and cannot have interactive elements within them.
+ * @since 0.6.0
  * @event open
  * @event close
  * @slot default content slot
@@ -61,6 +63,9 @@ export class Toast extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
+  /**
+   * visual treatment to represent a ongoing task or support status
+   */
   @property({ type: String, reflect: true }) status: 'accent' | 'warning' | 'danger' | 'success' | 'muted';
 
   /** @private */

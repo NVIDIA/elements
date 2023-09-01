@@ -6,6 +6,8 @@ import { PropertyValues } from 'lit';
 
 /**
  * @element nve-range
+ * @description A range slider is a control that enables users to choose a value from a continuous range of values.
+ * @since 0.3.0
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-range-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-25&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/slider/

@@ -6,6 +6,7 @@ import globalStyles from './menu-item.global.css?inline';
 
 /**
  * @element nve-menu-item
+ * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --border-radius

@@ -7,6 +7,8 @@ import styles from './alert.css?inline';
 
 /**
  * @element nve-alert
+ * @description Alert is an element that displays a brief, important message in a way that attracts the user's attention without interrupting the user's task.
+ * @since 0.3.0
  * @event close
  * @slot icon
  * @slot prefix
@@ -23,7 +25,6 @@ import styles from './alert.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-documentation--docs
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=76-5326&t=CAAM7yEBvG18tRRa-0
- * @description Alert is an element that displays a brief, important message in a way that attracts the user's attention without interrupting the user's task.
  */
 export class Alert extends LitElement {
   static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
