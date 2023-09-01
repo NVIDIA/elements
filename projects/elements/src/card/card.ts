@@ -8,6 +8,8 @@ import cardFooterStyleSheet from './card-footer.css?inline';
 
 /**
  * @element mlv-card
+ * @description A container for content representing a single entity.
+ * @since 0.1.3
  * @slot - This is a default/unnamed slot for card content
  * @slot header - header element (Use <mlv-card-header> or custom content)
  * @slot content - content element (Use <mlv-card-content> or custom content)
@@ -47,6 +49,7 @@ export class Card extends LitElement implements ContainerElement {
 
 /**
  * @element mlv-card-header
+ * @since 0.1.3
  * @slot - default slot
  * @slot title - Title Text
  * @slot subtitle - Subtitle Text
@@ -89,6 +92,7 @@ export class Card extends LitElement implements ContainerElement {
 
 /**
  * @element mlv-card-content
+ * @since 0.1.3
  * @slot - This is a default/unnamed slot for card content content
  * @cssprop --padding
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page
@@ -112,6 +116,7 @@ export class Card extends LitElement implements ContainerElement {
 
 /**
  * @element mlv-card-footer
+ * @since 0.1.3
  * @slot - This is a default/unnamed slot for card footer content
  * @cssprop --padding
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page

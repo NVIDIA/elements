@@ -1,6 +1,7 @@
 import { html, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
+import showdown from 'showdown';
 import { define } from '@elements/elements/internal';
 import { MLV_VERSION } from '@elements/elements';
 import typography from '@elements/elements/css/module.typography.css?inline';
@@ -159,8 +160,9 @@ class ElementMetrics extends LitElement {
         <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
         <a href=${element.aria} mlv-text="link no-visit label">API Spec</a>
         ${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit label">Figma</a>` : nothing}
+        <a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages" mlv-text="link no-visit label">Released ${element.since}</a>
       </div>
-      ${element.description ? html`<p mlv-text="body">${element.description}</p>` : nothing}
+      ${element.description ? html`<p mlv-text="body" .innerHTML=${new showdown.Converter().makeHtml(element.description)}></p>` : nothing}
     </section>`;
   }
 
@@ -169,7 +171,13 @@ class ElementMetrics extends LitElement {
   }
 }
 
-define(ElementMetrics)
+define(ElementMetrics);
+
+interface MetricColumn {
+  sort: 'ascending' | 'descending' | 'none',
+  width?: string,
+  tooltip?: string
+}
 
 class ElementsMetrics extends LitElement {
   static styles = [unsafeCSS(`${typography}${layout}`)];
@@ -179,18 +187,22 @@ class ElementsMetrics extends LitElement {
     version: 'demo'
   }
 
-  @state() state = {
+  @state() state: {
+    tooltipColumn: string | null,
+    columns: Record<string, MetricColumn>
+  } = {
     tooltipColumn: null,
     columns: {
       element: { sort: 'none' },
       status: { sort: 'none' },
       coverage: { sort: 'none' },
       spec: { sort: 'none', tooltip: 'Behavior category from W3C and WAI-ARIA Specification' },
-      themes: { sort: 'none' },
-      responsive: { sort: 'none' },
-      instances: { sort: 'none', tooltip: 'Number of instances of element directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.' },
-      projects: { sort: 'none', tooltip: 'Number of Maglev Projects which reference the given element.' },
-      figma: { sort: 'none' }
+      released: { sort: 'none', tooltip: 'Version Element was first released', width: '120px' },
+      instances: { sort: 'none', tooltip: 'Number of instances of element directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.', width: '100px' },
+      projects: { sort: 'none', tooltip: 'Number of Maglev Projects which reference the given element.', width: '100px' },
+      figma: { sort: 'none', width: '100px' },
+      themes: { sort: 'none', width: '100px' },
+      responsive: { sort: 'none', width: '100px' },
     }
   };
 
@@ -213,7 +225,7 @@ class ElementsMetrics extends LitElement {
               @mouseover=${() => this.state = { ...this.state, tooltipColumn: name } }
               @mouseleave=${() => this.state = { ...this.state, tooltipColumn: null } }
               id=${name}
-              width="160px">
+              width=${column.width ? column.width : '160px'}>
               ${name.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1").replace(/^./, (match) => match.toUpperCase())}
               <mlv-sort-button .name=${name} .sort=${column.sort as 'ascending' | 'descending' | 'none'} @sort=${e => this.#sort(e)}></mlv-sort-button>
             </mlv-grid-column>
@@ -226,11 +238,12 @@ class ElementsMetrics extends LitElement {
             <mlv-grid-cell>${getStatusBadge(element.status)}</mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(element.coverageTotal)}</mlv-grid-cell>
             <mlv-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} mlv-text="link no-visit">${element.behavior}</a></mlv-grid-cell>
-            <mlv-grid-cell><mlv-icon name="checkmark-circle" status="success"></mlv-icon></mlv-grid-cell>
-            <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="checkmark-circle" status="success"></mlv-icon>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
+            <mlv-grid-cell>${element.since}</mlv-grid-cell>
             <mlv-grid-cell>${element.instanceTotal}</mlv-grid-cell>
             <mlv-grid-cell>${element.projectTotal}</mlv-grid-cell>
             <mlv-grid-cell>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit">Figma</a>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
+            <mlv-grid-cell><mlv-icon name="checkmark-circle" status="success"></mlv-icon></mlv-grid-cell>
+            <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="checkmark-circle" status="success"></mlv-icon>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
           </mlv-grid-row>`
         })}
         <mlv-grid-footer>

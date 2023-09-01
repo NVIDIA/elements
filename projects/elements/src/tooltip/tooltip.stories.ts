@@ -103,6 +103,16 @@ export const Content = {
   `
 };
 
+export const Status = {
+  render: () => html`
+<div mlv-layout="row align:center" style="height: 250px">
+  <mlv-tooltip anchor="btn">default status</mlv-tooltip>
+  <mlv-tooltip anchor="btn" position="bottom" status="muted">muted status</mlv-tooltip>
+  <mlv-button id="btn">button</mlv-button>
+</div>
+  `
+};
+
 export const Position = {
   render: () => html`
 <div mlv-layout="row align:center" style="height: 200px">

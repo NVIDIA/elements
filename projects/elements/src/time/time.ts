@@ -6,6 +6,8 @@ import styles from './time.css?inline';
 
 /**
  * @element mlv-time
+ * @description A time picker is a control that enables users to choose a time value.
+ * @since 0.3.0
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-time-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
  * @vqa false

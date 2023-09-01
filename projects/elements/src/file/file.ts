@@ -6,6 +6,8 @@ import globalStyles from './file.global.css?inline';
 
 /**
  * @element mlv-file
+ * @description A file picker is a control that enables users to choose a file value.
+ * @since 0.3.0
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-file-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  */

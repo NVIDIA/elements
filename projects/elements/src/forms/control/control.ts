@@ -13,6 +13,7 @@ import styles from './control.css?inline';
 
 /**
  * @element mlv-control
+ * @since 0.3.0
  * @cssprop --cursor
  * @cssprop --accent-color
  * @cssprop --color

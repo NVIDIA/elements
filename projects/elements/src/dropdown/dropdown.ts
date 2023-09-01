@@ -7,6 +7,8 @@ import styles from './dropdown.css?inline';
 
 /**
  * @element mlv-dropdown
+ * @description Generic dropdown element for rendering a variety of different content within a dropdown container.
+ * @since 0.6.0
  * @event open
  * @event close
  * @slot - default slot for dropdown content

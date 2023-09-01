@@ -1,5 +1,5 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, statusBadges } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Tooltip/Documentation" parameters={{ badges: statusBadges('mlv-tooltip') }} />
 
@@ -9,7 +9,7 @@ import { LinkedHeader, statusBadges } from '../../docs/utils.mdx';
 
 <element-metrics tag="mlv-tooltip"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/tooltip/define.js';
@@ -25,26 +25,32 @@ import '@elements/elements/tooltip/define.js';
   <Story id="elements-tooltip-examples--default" inline={false} height={280} />
 </Canvas>
 
-<LinkedHeader>Content/Position</LinkedHeader>
+## Content/Position
 
 <Canvas columns={2}>
   <Story id="elements-tooltip-examples--content" inline={false} height={280} />
   <Story id="elements-tooltip-examples--position" inline={false} height={280} />
 </Canvas>
 
-<LinkedHeader>Hint</LinkedHeader>
+## Hint
 
 <Canvas>
   <Story id="elements-tooltip-examples--hint" inline={false} height={200} />
 </Canvas>
 
-<LinkedHeader>Hint & Copy</LinkedHeader>
+## Hint & Copy
 
 <Canvas>
   <Story id="elements-tooltip-examples--hint-copy" inline={false} height={200} />
 </Canvas>
 
-<LinkedHeader>Alignment</LinkedHeader>
+## Status
+
+<Canvas>
+  <Story id="elements-tooltip-examples--status" inline={false} height={280} />
+</Canvas>
+
+## Alignment
 
 <Canvas>
   <Story id="elements-tooltip-examples--alignment" inline={false} height={800} />
@@ -52,6 +58,6 @@ import '@elements/elements/tooltip/define.js';
 
 <element-status tag={'mlv-tooltip'}></element-status>
 
-<LinkedHeader>mlv-tooltip</LinkedHeader>
+## mlv-tooltip
 
 <ArgsTable of="mlv-tooltip" />

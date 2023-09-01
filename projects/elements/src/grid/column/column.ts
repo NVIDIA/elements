@@ -8,6 +8,7 @@ import styles from './column.css?inline';
 
 /**
  * @element mlv-grid-column
+ * @since 0.11.0
  * @slot - default slot for content
  * @slot actions - slot for column actions
  * @cssprop --color

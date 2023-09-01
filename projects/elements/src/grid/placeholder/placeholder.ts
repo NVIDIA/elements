@@ -4,6 +4,7 @@ import styles from './placeholder.css?inline';
 
 /**
  * @element mlv-grid-placeholder
+ * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --color
  * @cssprop --padding

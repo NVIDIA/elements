@@ -7,6 +7,8 @@ import styles from './app-header.css?inline';
 
 /**
  * @element mlv-app-header
+ * @description An element that appears across the top of all pages containing the application name and primary navigation.
+ * @since 0.11.0
  * @cssprop --background
  * @cssprop --padding
  * @cssprop --border-bottom

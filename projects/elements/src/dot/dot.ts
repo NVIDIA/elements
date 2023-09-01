@@ -4,8 +4,9 @@ import { Size, statusStateStyles, supportStateStyles, SupportStatus, TaskStatus,
 import styles from './dot.css?inline';
 
 /**
- * @alpha
  * @element mlv-dot
+ * @description A visual indicator that communicates a status or notification of an associated component.
+ * @since 0.10.0
  * @slot - default content
  * @cssprop --gap
  * @cssprop --font-size
@@ -19,7 +20,6 @@ import styles from './dot.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dot-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=CAAM7yEBvG18tRRa-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
- * @stable false
  */
 export class Dot extends LitElement {
   /** visual treatment to represent a ongoing task status */

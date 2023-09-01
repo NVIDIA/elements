@@ -5,6 +5,7 @@ import styles from './row.css?inline';
 
 /**
  * @element mlv-grid-row
+ * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --border-bottom

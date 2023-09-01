@@ -4,6 +4,7 @@ import styles from './cell.css?inline';
 
 /**
  * @element mlv-grid-cell
+ * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --color

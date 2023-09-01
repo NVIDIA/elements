@@ -5,6 +5,8 @@ import styles from './button.css?inline';
 
 /**
  * @element mlv-button
+ * @description A button is a widget that enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
+ * @since 0.1.3
  * @slot - slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.
  * @cssprop --color
  * @cssprop --background
@@ -18,6 +20,7 @@ import styles from './button.css?inline';
  * @cssprop --height
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
 export class Button extends MlvBaseButton {
   static styles = useStyles([styles]);

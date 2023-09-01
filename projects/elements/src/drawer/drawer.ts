@@ -6,6 +6,8 @@ import styles from './drawer.css?inline';
 
 /**
  * @element mlv-drawer
+ * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigations, settings). Alternatively [Panel](./?path=/docs/elements-panel-documentation--docs) is inline as its content is coupled or closely related to the content on the page (details, additional actions/options).
+ * @since 0.16.0
  * @event open
  * @event close
  * @slot default content slot

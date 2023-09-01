@@ -7,6 +7,8 @@ import styles from './icon-button.css?inline';
 
 /**
  * @element mlv-icon-button
+ * @description An icon button is a button that displays only an icon without a visual label.
+ * @since 0.2.1
  * @slot - default for links
  * @slot icon - icon customization
  * @cssprop --border-radius

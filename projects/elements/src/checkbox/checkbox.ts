@@ -5,6 +5,8 @@ import styles from './checkbox.css?inline';
 
 /**
  * @element mlv-checkbox
+ * @description A checkbox is a control that enables users to choose between two distinct mutually exclusive options (checked or unchecked, on or off) through a single click or tap.
+ * @since 0.3.0
  * @cssprop --width
  * @cssprop --height
  * @cssprop --cursor

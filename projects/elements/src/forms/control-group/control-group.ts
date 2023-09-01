@@ -8,6 +8,7 @@ import styles from './control-group.css?inline';
 
 /**
  * @element mlv-control-group
+ * @since 0.3.0
  * @cssprop --color
  * @cssprop --label-color
  * @cssprop --label-width

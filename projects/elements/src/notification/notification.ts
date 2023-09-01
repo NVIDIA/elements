@@ -7,6 +7,8 @@ import styles from './notification.css?inline';
 
 /**
  * @element mlv-notification
+ * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status.
+ * @since 0.6.0
  * @event open
  * @event close
  * @slot default content slot
@@ -19,7 +21,6 @@ import styles from './notification.css?inline';
  * @cssprop --min-width
  * @cssprop --width
  * @cssprop --mlv-sys-layer-popover-offset
- * @responsive false
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-notification-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/

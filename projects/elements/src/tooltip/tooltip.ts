@@ -6,6 +6,8 @@ import styles from './tooltip.css?inline';
 
 /**
  * @element mlv-tooltip
+ * @description A contextual popup that displays a description for an element. Tooltips are [triggered](https://w3c.github.io/aria/#tooltip) by hovering, focusing, or tapping an element and cannot have interactive elements within them.
+ * @since 0.6.0
  * @event open
  * @event close
  * @slot default content slot
@@ -22,8 +24,6 @@ import styles from './tooltip.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tooltip-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-29&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
- * @performance false
- * @stable false
  */
 export class Tooltip extends LitElement {
   /**
@@ -47,6 +47,11 @@ export class Tooltip extends LitElement {
    * Sets the alignment of the popover relative to the provided anchor element.
    */
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
+
+  /**
+   * visual treatment to represent a ongoing task or support status
+   */
+  @property({ type: String, reflect: true }) status: 'muted';
 
   /**
    * Determines if popover should be rendered and positioned.

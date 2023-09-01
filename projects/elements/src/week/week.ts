@@ -6,6 +6,8 @@ import styles from './week.css?inline';
 
 /**
  * @element mlv-week
+ * @description A week picker is a control that enables users to choose a week value.
+ * @since 0.3.0
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-week-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
  * @vqa false

@@ -11,6 +11,7 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
 
 /**
  * @element mlv-accordion-header
+ * @since 0.12.0
  * @slot title - Title heading
  * @slot subtitle - Subtitle Text
  * @slot actions - Extra Action Button (use `mlv-icon-button`)
@@ -56,6 +57,7 @@ export class AccordionHeader extends LitElement {
 
 /**
  * @element mlv-accordion-content
+ * @since 0.12.0
  * @slot - This is a default/unnamed slot for accordion content content
  * @cssprop --padding
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs
@@ -81,6 +83,8 @@ export class AccordionContent extends LitElement {
 
 /**
  * @element mlv-accordion
+ * @description An accordion is a vertical stack of interactive headings used to toggle the display of further information.
+ * @since 0.12.0
  * @slot - This is a default/unnamed slot for accordion content
  * @slot header - header element (Use `<mlv-accordion-header>` or custom content)
  * @slot content - content element (Use `<mlv-accordion-content>` or custom content)
@@ -186,6 +190,7 @@ export class Accordion extends LitElement implements ContainerElement {
 
 /**
  * @element mlv-accordion-group
+ * @since 0.12.0
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/

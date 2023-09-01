@@ -6,6 +6,8 @@ import styles from './badge.css?inline';
 
 /**
  * @element mlv-badge
+ * @description A visual indicator that communicates a status of a given task or workflow.
+ * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --gap
@@ -17,7 +19,6 @@ import styles from './badge.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-badge-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
- * @stable false
  */
 export class Badge extends LitElement {
   /** visual treatment to represent a ongoing task status */
