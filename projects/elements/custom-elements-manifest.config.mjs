@@ -19,7 +19,8 @@ function metadataPlugin() {
         'stable',
         'performance',
         'package',
-        'description'
+        'description',
+        'since'
       ];
 
       switch (node.kind) {

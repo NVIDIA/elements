@@ -5,8 +5,9 @@ import { inputStyles } from '@elements/elements/input';
 import styles from './date.css?inline';
 
 /**
- * @alpha
  * @element nve-date
+ * @description A date picker is a control that enables users to choose a date value.
+ * @since 0.3.0
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-date-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-38&t=CAAM7yEBvG18tRRa-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date

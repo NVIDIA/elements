@@ -5,8 +5,9 @@ import { Icon } from '@elements/elements/icon';
 import styles from './tag.css?inline';
 
 /**
- * @alpha
  * @element nve-tag
+ * @description A interactive element that represents a category or group of content. Typically used to filter or organize content for one to many relations.
+ * @since 0.10.0
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --color
@@ -18,7 +19,6 @@ import styles from './tag.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tag-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-10&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
- * @stable false
  */
 export class Tag extends MlvBaseButton {
   @property({ type: Boolean }) closable = false;

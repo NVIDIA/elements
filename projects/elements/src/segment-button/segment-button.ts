@@ -6,8 +6,9 @@ import { IconButton } from '@elements/elements/icon-button';
 import { Button } from '@elements/elements/button';
 
 /**
- * @alpha
  * @element nve-segment-button
+ * @description A segment button is a control that enables users to choose between two or more distinct mutually exclusive options.
+ * @since 0.16.0
  * @slot - slotted nve-buttons or nve-icon-buttons
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-segment-button-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=4047-92996&mode=design&t=XPYuD3f2yaKCAMl3-0
