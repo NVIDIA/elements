@@ -5,6 +5,8 @@ import styles from './divider.css?inline';
 
 /**
  * @element nve-divider
+ * @description Divider is a component that separates and distinguishes sections of content or groups of menuitems.
+ * @since 0.12.0
  * @cssprop --color
  * @cssprop --padding
  * @cssprop --size

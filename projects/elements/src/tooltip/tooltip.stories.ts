@@ -103,6 +103,16 @@ export const Content = {
   `
 };
 
+export const Status = {
+  render: () => html`
+<div nve-layout="row align:center" style="height: 250px">
+  <nve-tooltip anchor="btn">default status</nve-tooltip>
+  <nve-tooltip anchor="btn" position="bottom" status="muted">muted status</nve-tooltip>
+  <nve-button id="btn">button</nve-button>
+</div>
+  `
+};
+
 export const Position = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 200px">

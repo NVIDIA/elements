@@ -6,6 +6,8 @@ import styles from './dialog.css?inline';
 
 /**
  * @element nve-dialog
+ * @description Dialog is a component that appears above main content. A modal dialog is used to display critical information that requires users attention. Use `hidden` to show or hide the dialog.
+ * @since 0.6.0
  * @event open
  * @event close
  * @slot default content slot

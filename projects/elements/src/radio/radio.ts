@@ -4,8 +4,9 @@ import { Control } from '@elements/elements/forms';
 import styles from './radio.css?inline';
 
 /**
- * @alpha
  * @element nve-radio
+ * @description A radio button is a control that enables users to choose one option from a list of mutually exclusive options.
+ * @since 0.3.0
  * @cssprop --width
  * @cssprop --height
  * @cssprop --cursor
