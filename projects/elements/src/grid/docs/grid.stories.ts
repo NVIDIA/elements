@@ -837,18 +837,45 @@ export const PanelGrid = {
       </section>
       <mlv-panel expanded id="panel-grid">
         <mlv-panel-header>
-          <h2 slot="title">Tasks</h2>
+          <h2 slot="title">Recording</h2>
         </mlv-panel-header>
         <mlv-grid container="flat" stripe style="--scroll-height: 100vh">
-          <mlv-grid-header>
-            ${Object.entries(getItems()[0]).slice(0, 3).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+          <mlv-grid-header hidden>
+            <mlv-grid-column>Key</mlv-grid-column>
+            <mlv-grid-column>Value</mlv-grid-column>
           </mlv-grid-header>
-          ${getItems(20).map(row => html`
           <mlv-grid-row>
-            ${Object.entries(row).slice(0, 3).map(([, cell]) => html`
-            <mlv-grid-cell>${cell.label === 'status' ? html`<mlv-badge status=${cell.value}>${cell.value}</mlv-badge>` : cell.value}</mlv-grid-cell>`)}
+            <mlv-grid-cell><p mlv-text="label muted">Session ID</p></mlv-grid-cell>
+            <mlv-grid-cell><p mlv-text="label">123456</p></mlv-grid-cell>
           </mlv-grid-row>
-        `)}
+          <mlv-grid-row>
+            <mlv-grid-cell><p mlv-text="label muted">Record Date</p></mlv-grid-cell>
+            <mlv-grid-cell><p mlv-text="label">2023-09-04 11:00</p></mlv-grid-cell>
+          </mlv-grid-row>
+          <mlv-grid-row>
+            <mlv-grid-cell><p mlv-text="label muted">Tag</p></mlv-grid-cell>
+            <mlv-grid-cell><mlv-tag readonly>Production</mlv-tag></mlv-grid-cell>
+          </mlv-grid-row>
+          <mlv-grid-row>
+            <mlv-grid-cell><p mlv-text="label muted">Route ID</p></mlv-grid-cell>
+            <mlv-grid-cell><p mlv-text="label">9876123</p></mlv-grid-cell>
+          </mlv-grid-row>
+          <mlv-grid-row>
+            <mlv-grid-cell><p mlv-text="label muted">Configuration</p></mlv-grid-cell>
+            <mlv-grid-cell><p mlv-text="label">prod-0.1.0</p></mlv-grid-cell>
+          </mlv-grid-row>
+          <mlv-grid-row>
+            <mlv-grid-cell><p mlv-text="label muted">Duration</p></mlv-grid-cell>
+            <mlv-grid-cell><p mlv-text="label">1:23:34</p></mlv-grid-cell>
+          </mlv-grid-row>
+          <mlv-grid-row>
+            <mlv-grid-cell><p mlv-text="label muted">Description</p></mlv-grid-cell>
+            <mlv-grid-cell><p mlv-text="label">local test run</p></mlv-grid-cell>
+          </mlv-grid-row>
+          <mlv-grid-row>
+            <mlv-grid-cell><p mlv-text="label muted">Number of Sensors</p></mlv-grid-cell>
+            <mlv-grid-cell><p mlv-text="label">24</p></mlv-grid-cell>
+          </mlv-grid-row>
         </mlv-grid>
       </mlv-panel>
     </main>

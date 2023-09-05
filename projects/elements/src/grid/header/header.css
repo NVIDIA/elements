@@ -18,3 +18,10 @@
   display: grid;
   min-width: fit-content;
 }
+
+:host([hidden]) {
+  display: block !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  z-index: 0 !important;
+}

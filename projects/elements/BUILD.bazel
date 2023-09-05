@@ -1,7 +1,7 @@
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm//src/ui/platform/design-system/elements:wireit/package_json.bzl", wireit_bin = "bin")
 load("@aspect_rules_js//npm:defs.bzl", "npm_package")
-load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary")
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary", "js_test")
 
 npm_link_all_packages()
 
@@ -47,6 +47,13 @@ js_run_binary(
         "storybook-build"
     ],
     tags = ["ui"],
+)
+
+js_test(
+    name = "test",
+    entry_point = "coverage.mjs",
+    data = [":elements"],
+    tags = ["ui"]
 )
 
 js_library(

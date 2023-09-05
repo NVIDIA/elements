@@ -1,12 +1,16 @@
-import { html } from 'lit';
+import { html, css, LitElement, PropertyValues } from 'lit';
+import { Ref, ref, createRef } from 'lit/directives/ref.js';
+import { customElement } from 'lit/decorators/custom-element.js';
 import { spread } from '@elements/elements/internal';
 import { Tooltip } from '@elements/elements/tooltip';
 import '@elements/elements/card/define.js';
 import '@elements/elements/tooltip/define.js';
 import '@elements/elements/toast/define.js';
 import '@elements/elements/button/define.js';
+import '@elements/elements/badge/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/icon-button/define.js';
+import type { Badge } from '@elements/elements/badge';
 
 export default {
   title: 'Elements/Tooltip/Examples',
@@ -146,5 +150,49 @@ export const Alignment = {
 
   <mlv-card id="card" style="width: 450px; height: 300px;"></mlv-card>
 </div>
+  `
+};
+
+
+@customElement('dynamic-anchor-position-demo')
+class DynamicAnchorPositionDemo extends LitElement {
+  static styles = [css`
+    :host {
+      position: relative;
+      width: 97vw;
+      height: 97vh;
+      display: block;
+      left: 0;
+      transition: left 1s linear;
+      container-type: inline-size;
+    }
+
+    #anchor {
+      top: 50vh;
+      left: 50vw;
+      width: 1px;
+      height: 1px;
+      position: absolute;
+    }
+  `];
+
+  #badge: Ref<Badge> = createRef();
+
+  render() {
+    return html`
+      <div ${ref(this.#badge)} id="anchor"></div>
+      <mlv-tooltip anchor="anchor">tooltip</mlv-tooltip>
+    `;
+  }
+
+  firstUpdated(props: PropertyValues<this>) {
+    super.firstUpdated(props);
+    this.addEventListener('mousemove', e => this.#badge.value.style.inset = `${e.clientY - 15}px auto auto ${e.clientX - 15}px`);
+  }
+}
+
+export const DynamicAnchorPosition = {
+  render: () => html`
+<dynamic-anchor-position-demo></dynamic-anchor-position-demo>
   `
 };
