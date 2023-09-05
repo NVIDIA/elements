@@ -46,8 +46,12 @@ export default defineConfig({
     setupFiles: [resolve('./src/test/setup.ts')], // https://github.com/vitest-dev/vitest/issues/1700
     coverage: {
       provider: 'istanbul',
-      reportsDirectory: resolve('./coverage'),
-      reporter: ['lcov', 'html', 'json-summary'],
+      reportsDirectory: process.env['COVERAGE_OUTPUT_DIR'] ?? resolve('./coverage'),
+      reporter: [
+        ['lcov', { 'file': 'coverage.dat' }],
+        'html',
+        'json-summary'
+      ],
       lines: 90,
       branches: 90,
       functions: 90,
