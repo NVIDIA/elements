@@ -837,18 +837,45 @@ export const PanelGrid = {
       </section>
       <nve-panel expanded id="panel-grid">
         <nve-panel-header>
-          <h2 slot="title">Tasks</h2>
+          <h2 slot="title">Recording</h2>
         </nve-panel-header>
         <nve-grid container="flat" stripe style="--scroll-height: 100vh">
-          <nve-grid-header>
-            ${Object.entries(getItems()[0]).slice(0, 3).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+          <nve-grid-header hidden>
+            <nve-grid-column>Key</nve-grid-column>
+            <nve-grid-column>Value</nve-grid-column>
           </nve-grid-header>
-          ${getItems(20).map(row => html`
           <nve-grid-row>
-            ${Object.entries(row).slice(0, 3).map(([, cell]) => html`
-            <nve-grid-cell>${cell.label === 'status' ? html`<nve-badge status=${cell.value}>${cell.value}</nve-badge>` : cell.value}</nve-grid-cell>`)}
+            <nve-grid-cell><p nve-text="label muted">Session ID</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">123456</p></nve-grid-cell>
           </nve-grid-row>
-        `)}
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Record Date</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">2023-09-04 11:00</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Tag</p></nve-grid-cell>
+            <nve-grid-cell><nve-tag readonly>Production</nve-tag></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Route ID</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">9876123</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Configuration</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">prod-0.1.0</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Duration</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">1:23:34</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Description</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">local test run</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Number of Sensors</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">24</p></nve-grid-cell>
+          </nve-grid-row>
         </nve-grid>
       </nve-panel>
     </main>
