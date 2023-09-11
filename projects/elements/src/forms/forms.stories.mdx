@@ -1,5 +1,4 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
 import '@elements/elements/button/define.js';
 
 <Meta title="Foundations/Forms/Documentation" />
@@ -10,7 +9,7 @@ The form control elements leverage the native browser inputs as its public API.
 This approach allows any framework or library to use the form elements and keeps
 the API simple without obfuscating the native browser APIs.
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 The form elements are split into individual sub imports/entrypoints.
 
@@ -26,7 +25,7 @@ import '@elements/elements/input/define.js';
 </nve-input>
 ```
 
-<LinkedHeader>Framework Integrations</LinkedHeader>
+## Framework Integrations
 
 Each frontend framework typically provides it's own guidance and best practices for creating forms.
 See the links below for specific integration patterns for the following frameworks:
@@ -56,31 +55,31 @@ See the links below for specific integration patterns for the following framewor
 All form elements support the following layouts for label placement, `horizontal`, `horizontal-inline`, `vertical` and `vertical-inline`.
 Vertical is the default label layout for all elements.
 
-<LinkedHeader>Horizontal Inline</LinkedHeader>
+## Horizontal Inline
 
 <Canvas>
   <Story id="foundations-forms-examples--horizontal-inline" />
 </Canvas>
 
-<LinkedHeader>Horizontal</LinkedHeader>
+## Horizontal
 
 <Canvas>
   <Story id="foundations-forms-examples--horizontal" />
 </Canvas>
 
-<LinkedHeader>Vertical</LinkedHeader>
+## Vertical
 
 <Canvas>
   <Story id="foundations-forms-examples--vertical" />
 </Canvas>
 
-<LinkedHeader>Vertical Inline</LinkedHeader>
+## Vertical Inline
 
 <Canvas>
   <Story id="foundations-forms-examples--vertical-inline" />
 </Canvas>
 
-<LinkedHeader>Kitchen Sink</LinkedHeader>
+## Kitchen Sink
 
 <Canvas>
   <Story id="foundations-forms-examples--kitchen-sink" />

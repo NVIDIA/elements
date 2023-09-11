@@ -174,6 +174,8 @@ function getElements(coverage, projects) {
       name,
       ...superclassManifest.metadata ?? { },
       ...manifest.metadata,
+      properties: manifest.members.filter(m => m.description).map(m => ({ name: m.name, description: m.description })),
+      slots: manifest.slots,
       projectTotal: getProjectTotal(name, projects),
       instanceTotal: getInstanceTotal(name, projects),
       coverageTotal: cov?.statements?.pct,

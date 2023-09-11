@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Foundations/Forms/Actions" parameters={{ badges: ['stable'] }} />
+<Meta title="Foundations/Forms/Actions" parameters={{ badges: statusBadges('nve-control') }} />
 
 # Control Actions
 
 Text type controls support prefix and suffix labeling as well as action buttons.
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/input/define.js';
@@ -21,19 +21,19 @@ import '@elements/elements/input/define.js';
 </nve-input>
 ```
 
-<LinkedHeader>Actions</LinkedHeader>
+## Actions
 
 <Canvas>
   <Story id="foundations-forms-examples--actions" />
 </Canvas>
 
-<LinkedHeader>Label Action</LinkedHeader>
+## Label Action
 
 <Canvas>
   <Story id="foundations-forms-examples--label-action" />
 </Canvas>
 
-<LinkedHeader>Prefix/Suffix</LinkedHeader>
+## Prefix/Suffix
 
 <Canvas>
   <Story id="foundations-forms-examples--prefix-suffix" />
@@ -41,6 +41,6 @@ import '@elements/elements/input/define.js';
 
 <element-status tag={'nve-control'}></element-status>
 
-<LinkedHeader>nve-input</LinkedHeader>
+## nve-input
 
 <ArgsTable of="nve-input" />

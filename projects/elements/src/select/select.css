@@ -5,7 +5,7 @@
   --background: var(--nve-sys-interaction-field-background);
   --color: var(--nve-sys-interaction-field-color);
   --border-radius: var(--nve-ref-border-radius-sm);
-  --border: 0;
+  --border: var(--nve-ref-border-width-md) solid transparent;
   --cursor: pointer;
   --width: 100%;
   --font-weight: normal;
@@ -18,7 +18,7 @@
 }
 
 [input] {
-  min-height: var(--height);
+  height: var(--height);
   background: var(--background);
   border: var(--border);
   border-radius: var(--border-radius);

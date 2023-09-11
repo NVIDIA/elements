@@ -64,3 +64,12 @@ nve-icon,
 :host([status='trend-neutral']) {
   --status-color: var(--nve-sys-status-pending-color);
 }
+
+:host([color]) {
+  --background: var(--color);
+  --border-radius: var(--nve-ref-border-radius-sm);
+
+  & [internal-host] {
+    color: var(--nve-sys-layer-canvas-background);
+  }
+}

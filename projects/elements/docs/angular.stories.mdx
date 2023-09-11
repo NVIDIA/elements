@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/addon-docs';
-import { LinkedHeader } from './utils.mdx';
 import '@elements/elements/alert/define.js';
 
 <Meta title="Integrations/Angular" />
@@ -56,7 +55,7 @@ Once added, properties and events can be used via the standard Angular template 
 </nve-alert-group>
 ```
 
-<LinkedHeader>Forms</LinkedHeader>
+## Forms
 
 Maglev Elements provides a suite of form components that leverage standard HTML input types. This enables frameworks
 to take advantage of built in framework features like [Angular Reactive Forms](https://angular.io/guide/reactive-forms) for managing form validation and state.
@@ -99,7 +98,7 @@ export class AppComponent  {
 }
 ```
 
-<LinkedHeader>Legacy Installation</LinkedHeader>
+## Legacy Installation
 
 If your app was created with an older version of the Angular CLI you may to need add or adjust the following to your application.
 
@@ -146,7 +145,7 @@ If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig
 }
 ```
 
-<LinkedHeader>Advanced - Import CSS Source</LinkedHeader>
+## Advanced - Import CSS Source
 
 [Lit](https://lit.dev) as a standard TypeScript based library works mostly out of the box when imported and used within an Angular application source code.
 This enables Lit based Web Components to be authored directly within your Angular application but not require a standalone library/project.

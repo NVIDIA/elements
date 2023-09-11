@@ -1,7 +1,7 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
-import { TaskStatus, SupportStatus, useStyles, statusIcons, TrendStatus, statusStateStyles, supportStateStyles } from '@elements/elements/internal';
+import { TaskStatus, SupportStatus, useStyles, statusIcons, TrendStatus, statusStateStyles, supportStateStyles, ColorPalette, colorStateStyles } from '@elements/elements/internal';
 import styles from './badge.css?inline';
 
 /**
@@ -21,10 +21,17 @@ import styles from './badge.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
 export class Badge extends LitElement {
-  /** visual treatment to represent a ongoing task status */
+  /**
+   * Visual treatment to represent a ongoing task, support or trend status. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=48-710&mode=design)
+   */
   @property({ type: String, reflect: true }) status: TaskStatus | SupportStatus | TrendStatus;
 
-  static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
+  /**
+   * Highlights content to draw attention and convey simple messages. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=56-308&mode=design&t=eeBXUleEIUIAeQQh-0)
+   */
+  @property({ type: String, reflect: true }) color: ColorPalette;
+
+  static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);
 
   static readonly metadata = {
     tag: 'nve-badge',
@@ -42,7 +49,7 @@ export class Badge extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot name="prefix-icon">${!this.status?.includes('trend') ? html`<nve-icon name=${statusIcons[this.status]} .size=${this.#size}></nve-icon>` : nothing}</slot>
+        <slot name="prefix-icon">${!this.status?.includes('trend') && !this.color ? html`<nve-icon name=${statusIcons[this.status]} .size=${this.#size}></nve-icon>` : nothing}</slot>
         <slot @slotchange=${this.#assignDefaultIcon}></slot>
         <slot name="suffix-icon">
           ${this.status?.includes('trend') ? html`<nve-icon .name=${statusIcons[this.status] as any}></nve-icon>` : ''}
