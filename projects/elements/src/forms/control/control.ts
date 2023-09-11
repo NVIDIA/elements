@@ -14,6 +14,7 @@ import styles from './control.css?inline';
 /**
  * @element nve-control
  * @since 0.3.0
+ * @slot - Control input element
  * @cssprop --cursor
  * @cssprop --accent-color
  * @cssprop --color
@@ -27,8 +28,10 @@ import styles from './control.css?inline';
  * @package true
  */
 export class Control extends LitElement {
+  /** Set current visaul state for control. This overrides any validation states active. */
   @property({ type: String }) status: 'warning' | 'error' | 'success' | 'disabled';
 
+  /** Set current control + label + control message layout */
   @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
   get #label() {

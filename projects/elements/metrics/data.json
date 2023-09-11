@@ -1,5 +1,5 @@
 {
-  "created": "2023-09-01T19:20:36.238Z",
+  "created": "2023-09-12T15:21:58.993Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -30,6 +30,38 @@
       "since": "0.12.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs",
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
+      "properties": [
+        {
+          "name": "container",
+          "description": "flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion)"
+        },
+        {
+          "name": "expanded",
+          "description": "Determines whether the accordion is expanded, displaying its contents, or not."
+        },
+        {
+          "name": "disabled",
+          "description": "Determines whether the accordion is expandable"
+        },
+        {
+          "name": "behaviorExpand",
+          "description": "Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)"
+        }
+      ],
+      "slots": [
+        {
+          "description": "This is a default/unnamed slot for accordion content",
+          "name": ""
+        },
+        {
+          "description": "header element (Use `<nve-accordion-header>` or custom content)",
+          "name": "header"
+        },
+        {
+          "description": "content element (Use `<nve-accordion-content>` or custom content)",
+          "name": "content"
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 3,
       "coverageTotal": 83.54,
@@ -50,6 +82,13 @@
       "since": "0.12.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs",
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
+      "properties": [],
+      "slots": [
+        {
+          "description": "This is a default/unnamed slot for accordion content content",
+          "name": ""
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 1,
       "coverageTotal": 83.54,
@@ -70,6 +109,20 @@
       "since": "0.12.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs",
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
+      "properties": [
+        {
+          "name": "behaviorExpand",
+          "description": "Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)"
+        },
+        {
+          "name": "behaviorExpandSingle",
+          "description": "Determines whether or not the accordion should opt-in to stateful expansion of a single accordion at a time"
+        },
+        {
+          "name": "container",
+          "description": "flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion)"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 83.54,
@@ -90,6 +143,21 @@
       "since": "0.12.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs",
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
+      "properties": [],
+      "slots": [
+        {
+          "description": "Title heading",
+          "name": "title"
+        },
+        {
+          "description": "Subtitle Text",
+          "name": "subtitle"
+        },
+        {
+          "description": "Extra Action Button (use `nve-icon-button`)",
+          "name": "actions"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 1,
       "coverageTotal": 83.54,
@@ -111,8 +179,33 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=76-5326&t=CAAM7yEBvG18tRRa-0",
+      "properties": [
+        {
+          "name": "status",
+          "description": "visual treatment to represent a ongoing task or support status"
+        },
+        {
+          "name": "closable",
+          "description": "enable closable alert when placed within a nve-alert-group"
+        }
+      ],
+      "slots": [
+        {
+          "name": "icon"
+        },
+        {
+          "name": "prefix"
+        },
+        {
+          "name": "actions"
+        },
+        {
+          "description": "default content slot",
+          "name": ""
+        }
+      ],
       "projectTotal": 7,
-      "instanceTotal": 20,
+      "instanceTotal": 19,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -132,6 +225,7 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-banner-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-14&t=CAAM7yEBvG18tRRa-0",
+      "properties": [],
       "projectTotal": 3,
       "instanceTotal": 10,
       "coverageTotal": 100,
@@ -153,8 +247,9 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-group-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2519-54572&t=CAAM7yEBvG18tRRa-0",
+      "properties": [],
       "projectTotal": 4,
-      "instanceTotal": 8,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -174,6 +269,24 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-app-header-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-35&t=c9DaB6YRpkhGAp49-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "Use the default slot in `nve-logo` to create an app logo badge within the app header. Include a `<span>` element inside `nve-app-header` to change the default application title.",
+          "name": ""
+        },
+        {
+          "name": "title"
+        },
+        {
+          "description": "For `nve-button` and `nve-icon-button` elements used for navigation behavior. Use the `active` attribute to indicate the current page.",
+          "name": "nav-items"
+        },
+        {
+          "description": "For `nve-icon-button` elements. This will place them in the section of the app header where supplemental actions are located.",
+          "name": "nav-actions"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 14,
       "coverageTotal": 100,
@@ -195,6 +308,22 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-badge-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Visual treatment to represent a ongoing task, support or trend status. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=48-710&mode=design)"
+        },
+        {
+          "name": "color",
+          "description": "Highlights content to draw attention and convey simple messages. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=56-308&mode=design&t=eeBXUleEIUIAeQQh-0)"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 9,
       "coverageTotal": 100,
@@ -216,6 +345,7 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-breadcrumb-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1",
+      "properties": [],
       "projectTotal": 4,
       "instanceTotal": 17,
       "coverageTotal": 100,
@@ -237,6 +367,22 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-bulk-actions-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=141-10016&t=Ypowt9RnBcKNg17i-0",
+      "properties": [
+        {
+          "name": "closable",
+          "description": "Determines if a close button should render"
+        },
+        {
+          "name": "status",
+          "description": "Visual treatment to represent support status"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 2,
       "coverageTotal": 100,
@@ -258,6 +404,54 @@
       "since": "0.1.3",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0",
+      "properties": [
+        {
+          "name": "interaction",
+          "description": "Visual treatment to represent user interaction appearance"
+        },
+        {
+          "name": "size",
+          "description": "Determines size of button"
+        },
+        {
+          "name": "pressed",
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed"
+        },
+        {
+          "name": "expanded",
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded"
+        },
+        {
+          "name": "readonly",
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly"
+        },
+        {
+          "name": "name",
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name"
+        },
+        {
+          "name": "value",
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value"
+        },
+        {
+          "name": "type",
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type"
+        },
+        {
+          "name": "disabled",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled"
+        },
+        {
+          "name": "selected",
+          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+        }
+      ],
+      "slots": [
+        {
+          "description": "slot for button text content or icon, icon placement determined by whether <nve-icon> is inserted before or after text content.",
+          "name": ""
+        }
+      ],
       "projectTotal": 16,
       "instanceTotal": 92,
       "coverageTotal": 100,
@@ -279,6 +473,30 @@
       "since": "0.1.3",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0",
+      "properties": [
+        {
+          "name": "container",
+          "description": "flat (embed into parent container) or full (full parent container width)"
+        }
+      ],
+      "slots": [
+        {
+          "description": "This is a default/unnamed slot for card content",
+          "name": ""
+        },
+        {
+          "description": "header element (Use <nve-card-header> or custom content)",
+          "name": "header"
+        },
+        {
+          "description": "content element (Use <nve-card-content> or custom content)",
+          "name": "content"
+        },
+        {
+          "description": "footer element (Use <nve-card-footer> or custom content)",
+          "name": "footer"
+        }
+      ],
       "projectTotal": 7,
       "instanceTotal": 20,
       "coverageTotal": 100,
@@ -299,6 +517,13 @@
       "since": "0.1.3",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "This is a default/unnamed slot for card content content",
+          "name": ""
+        }
+      ],
       "projectTotal": 6,
       "instanceTotal": 14,
       "coverageTotal": 100,
@@ -319,6 +544,13 @@
       "since": "0.1.3",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-card-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "This is a default/unnamed slot for card footer content",
+          "name": ""
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 11,
       "coverageTotal": 100,
@@ -339,6 +571,25 @@
       "since": "0.1.3",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-card-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot",
+          "name": ""
+        },
+        {
+          "description": "Title Text",
+          "name": "title"
+        },
+        {
+          "description": "Subtitle Text",
+          "name": "subtitle"
+        },
+        {
+          "description": "Header Action Button",
+          "name": "header-action"
+        }
+      ],
       "projectTotal": 4,
       "instanceTotal": 4,
       "coverageTotal": 100,
@@ -360,6 +611,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-checkbox-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0",
       "description": "A checkbox is a control that enables users to choose between two distinct mutually exclusive options (checked or unchecked, on or off) through a single click or tap.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 7,
       "instanceTotal": 15,
       "coverageTotal": 100,
@@ -380,6 +645,12 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-checkbox-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0",
+      "properties": [
+        {
+          "name": "layout",
+          "description": "Set each slotted control + label + control message layout"
+        }
+      ],
       "projectTotal": 4,
       "instanceTotal": 4,
       "coverageTotal": 100,
@@ -401,6 +672,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-color-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=157-16178&t=CAAM7yEBvG18tRRa-0",
       "description": "A color picker is a control that enables users to choose a color value.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -421,6 +706,26 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/foundations-forms-controls--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "slots": [
+        {
+          "description": "Control input element",
+          "name": ""
+        }
+      ],
       "projectTotal": 7,
       "instanceTotal": 15,
       "coverageTotal": 98.78,
@@ -441,6 +746,18 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "layout",
+          "description": "Set each slotted control + label + control message layout"
+        }
+      ],
+      "slots": [
+        {
+          "description": "Control input elements",
+          "name": ""
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -462,6 +779,22 @@
       "since": "0.3.0",
       "storybook": "http://localhost:7789/?path=/docs/foundations-forms-validation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Visual treatment for current form control validation status"
+        },
+        {
+          "name": "error",
+          "description": "Validation error code for current form control\nhttps://developer.mozilla.org/en-US/docs/Web/API/ValidityState"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 10,
       "coverageTotal": 100,
@@ -483,6 +816,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-date-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-38&t=CAAM7yEBvG18tRRa-0",
       "description": "A date picker is a control that enables users to choose a date value.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 4,
       "instanceTotal": 4,
       "coverageTotal": 100,
@@ -504,6 +851,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-datetime-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "description": "A datetime picker is a control that enables users to choose a datetime value.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -525,6 +886,46 @@
       "since": "0.6.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dialog-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0",
+      "properties": [
+        {
+          "name": "position",
+          "description": "Sets the side position of the popover relative to the provided anchor element.\nFor dialog the anchor defaults to the document body."
+        },
+        {
+          "name": "alignment",
+          "description": "Sets the alignment of the popover relative to the provided anchor element.\nIf an arrow exists the alginment will be relative to the arrow against the anchor."
+        },
+        {
+          "name": "size",
+          "description": "Sets the maximum size of the dialog."
+        },
+        {
+          "name": "closable",
+          "description": "Determines if a close button should render within dialog. Non-closable\ndialogs can be used for dialogs that require user confirmation steps."
+        },
+        {
+          "name": "modal",
+          "description": "Determines if a dialog should have a modal backdrop that visually overlays the UI."
+        },
+        {
+          "name": "anchor",
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "trigger",
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "hidden",
+          "description": "Determines if popover should be rendered and positioned."
+        }
+      ],
+      "slots": [
+        {
+          "description": "content slot",
+          "name": "default"
+        }
+      ],
       "projectTotal": 7,
       "instanceTotal": 13,
       "coverageTotal": 100,
@@ -545,6 +946,13 @@
       "since": "0.6.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dialog-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for the dialog footer",
+          "name": ""
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 4,
       "coverageTotal": 100,
@@ -565,6 +973,13 @@
       "since": "0.6.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dialog-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for the dialog header",
+          "name": ""
+        }
+      ],
       "projectTotal": 6,
       "instanceTotal": 8,
       "coverageTotal": 100,
@@ -586,6 +1001,7 @@
       "since": "0.12.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-divider-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
+      "properties": [],
       "projectTotal": 3,
       "instanceTotal": 12,
       "coverageTotal": 100,
@@ -607,8 +1023,24 @@
       "since": "0.10.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dot-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=CAAM7yEBvG18tRRa-0",
-      "projectTotal": 0,
-      "instanceTotal": 0,
+      "properties": [
+        {
+          "name": "status",
+          "description": "visual treatment to represent a ongoing task status"
+        },
+        {
+          "name": "size",
+          "description": "determines size of dot relative to provided text"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default content",
+          "name": ""
+        }
+      ],
+      "projectTotal": 1,
+      "instanceTotal": 1,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "stable"
@@ -628,6 +1060,46 @@
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-drawer-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=4152%3A86953&mode=dev",
+      "properties": [
+        {
+          "name": "position",
+          "description": "Sets the side position of the popover relative to the provided anchor element.\nFor drawer the anchor defaults to the document body."
+        },
+        {
+          "name": "size",
+          "description": "Sets the maximum size of the drawer."
+        },
+        {
+          "name": "closable",
+          "description": "Determines if a close button should render within drawer. Non-closable\ndrawers can be used for drawers that require user confirmation steps."
+        },
+        {
+          "name": "modal",
+          "description": "Determines if a drawer should have a modal backdrop that visually overlays the UI."
+        },
+        {
+          "name": "anchor",
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference.\nDrawers should default to the document body."
+        },
+        {
+          "name": "trigger",
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "inline",
+          "description": "Create a inline layout effect while retaining the a11y characteristics and top layer behavior (light dismiss, focus trap, non interactive background)\nhttps://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/"
+        },
+        {
+          "name": "hidden",
+          "description": "Determines if popover should be rendered and positioned."
+        }
+      ],
+      "slots": [
+        {
+          "description": "content slot",
+          "name": "default"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 2,
       "coverageTotal": 100,
@@ -648,6 +1120,13 @@
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-drawer-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for the drawer footer",
+          "name": ""
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -668,6 +1147,13 @@
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-drawer-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=4152%3A86953&mode=dev",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for the drawer header",
+          "name": ""
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -689,8 +1175,44 @@
       "since": "0.6.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-dropdown-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0",
+      "properties": [
+        {
+          "name": "anchor",
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "trigger",
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "position",
+          "description": "Sets the side position of the popover relative to the provided anchor element."
+        },
+        {
+          "name": "alignment",
+          "description": "Sets the alignment of the popover relative to the provided anchor element.\nIf an arrow exists the alginment will be relative to the arrow against the anchor."
+        },
+        {
+          "name": "closable",
+          "description": "Determines if a close button should render within dropdown. Non-closable\ndropdowns can be used for menu or selection patterns."
+        },
+        {
+          "name": "arrow",
+          "description": "Determines if an arrow should be rendered."
+        },
+        {
+          "name": "hidden",
+          "description": "Determines if popover should be rendered and positioned."
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for dropdown content",
+          "name": ""
+        }
+      ],
       "projectTotal": 8,
-      "instanceTotal": 30,
+      "instanceTotal": 29,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -710,6 +1232,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-file-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "description": "A file picker is a control that enables users to choose a file value.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -731,6 +1267,26 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-grid-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [
+        {
+          "name": "container",
+          "description": "flat (embed into parent container) or full (full parent container width)"
+        },
+        {
+          "name": "stripe",
+          "description": "determine style variant stripe rows"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        },
+        {
+          "description": "slot for nve-grid-footer or nve-bulk-actions",
+          "name": "footer"
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 11,
       "coverageTotal": 100,
@@ -751,6 +1307,13 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 10,
       "coverageTotal": 100,
@@ -771,6 +1334,22 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [
+        {
+          "name": "width",
+          "description": "specify exact width using css value types"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        },
+        {
+          "description": "slot for column actions",
+          "name": "actions"
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 9,
       "coverageTotal": 98.46,
@@ -791,6 +1370,13 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 4,
       "instanceTotal": 5,
       "coverageTotal": 100,
@@ -811,6 +1397,13 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 9,
       "coverageTotal": 96.96,
@@ -831,6 +1424,13 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 5,
       "coverageTotal": 100,
@@ -851,6 +1451,13 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 11,
       "coverageTotal": 100,
@@ -872,8 +1479,26 @@
       "description": "An icon is a graphic symbol designed to visually indicate the purpose of an interface element.",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "status",
+          "description": "SVG status color"
+        },
+        {
+          "name": "size",
+          "description": "SVG size"
+        },
+        {
+          "name": "direction",
+          "description": "Sets the direction of the icon.\nOnly supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)"
+        },
+        {
+          "name": "name",
+          "description": "The name of the icon SVG sprite"
+        }
+      ],
       "projectTotal": 17,
-      "instanceTotal": 81,
+      "instanceTotal": 80,
       "coverageTotal": 93.47,
       "behavior": "content",
       "status": "stable"
@@ -893,6 +1518,62 @@
       "since": "0.2.1",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-icon-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "direction",
+          "description": "Sets the direction of the icon.\nOnly supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)"
+        },
+        {
+          "name": "size",
+          "description": "Sets size of the icon button."
+        },
+        {
+          "name": "interaction",
+          "description": "Visual treatment to represent user interaction appearance"
+        },
+        {
+          "name": "pressed",
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed"
+        },
+        {
+          "name": "expanded",
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded"
+        },
+        {
+          "name": "readonly",
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly"
+        },
+        {
+          "name": "name",
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name"
+        },
+        {
+          "name": "value",
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value"
+        },
+        {
+          "name": "type",
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type"
+        },
+        {
+          "name": "disabled",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled"
+        },
+        {
+          "name": "selected",
+          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default for links",
+          "name": ""
+        },
+        {
+          "description": "icon customization",
+          "name": "icon"
+        }
+      ],
       "projectTotal": 14,
       "instanceTotal": 54,
       "coverageTotal": 100,
@@ -914,6 +1595,24 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "description": "An input is a control that enables users to enter text.",
+      "properties": [
+        {
+          "name": "container",
+          "description": "flat (embed into parent container)"
+        },
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 10,
       "instanceTotal": 25,
       "coverageTotal": 100,
@@ -934,6 +1633,12 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "layout",
+          "description": "Set each slotted control + label + control message layout"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -954,6 +1659,22 @@
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/developer-tools-json-viewer-documentation--docs",
       "figma": false,
+      "properties": [
+        {
+          "name": "value",
+          "description": "JSON value to be displayed"
+        },
+        {
+          "name": "expanded",
+          "description": "expand all nodes"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for json",
+          "name": ""
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -975,6 +1696,22 @@
       "since": "0.10.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-logo-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=113-5317&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "color",
+          "description": "Visual treatment to represent unique color of an application"
+        },
+        {
+          "name": "size",
+          "description": "Determines size of logo"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 4,
       "instanceTotal": 20,
       "coverageTotal": 100,
@@ -996,6 +1733,13 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-menu-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 19,
       "coverageTotal": 100,
@@ -1016,6 +1760,46 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-menu-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0",
+      "properties": [
+        {
+          "name": "selected",
+          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+        },
+        {
+          "name": "pressed",
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed"
+        },
+        {
+          "name": "expanded",
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded"
+        },
+        {
+          "name": "readonly",
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly"
+        },
+        {
+          "name": "name",
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name"
+        },
+        {
+          "name": "value",
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value"
+        },
+        {
+          "name": "type",
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type"
+        },
+        {
+          "name": "disabled",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 18,
       "coverageTotal": 100,
@@ -1037,6 +1821,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-month-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "description": "A month picker is a control that enables users to choose a month value.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -1058,6 +1856,46 @@
       "since": "0.6.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-notification-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "anchor",
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "trigger",
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "position",
+          "description": "Sets the side position of the popover relative to the provided anchor element."
+        },
+        {
+          "name": "alignment",
+          "description": "Sets the alignment of the popover relative to the provided anchor element."
+        },
+        {
+          "name": "closable",
+          "description": "Determines if a close button should render within notification."
+        },
+        {
+          "name": "closeTimeout",
+          "description": "A delayed `close` event will occur determined from the provided millisecond value."
+        },
+        {
+          "name": "hidden",
+          "description": "Determines if popover should be rendered and positioned."
+        },
+        {
+          "name": "status",
+          "description": "Determins the visual status of the notification."
+        }
+      ],
+      "slots": [
+        {
+          "description": "content slot",
+          "name": "default"
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 24,
       "coverageTotal": 97.36,
@@ -1079,6 +1917,7 @@
       "since": "0.6.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-notification-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0",
+      "properties": [],
       "projectTotal": 2,
       "instanceTotal": 3,
       "coverageTotal": 100,
@@ -1100,6 +1939,13 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-pagination-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 4,
       "coverageTotal": 100,
@@ -1121,6 +1967,42 @@
       "since": "0.10.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-panel-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "expanded",
+          "description": "Determines whether or not the panel is fully expanded, displaying its contents, or not."
+        },
+        {
+          "name": "closable",
+          "description": "Determines whether or not the panel will collapse down to an expand icon, or fully hide."
+        },
+        {
+          "name": "behaviorExpand",
+          "description": "Determines whether or not the panel should handle auto-closing behavior vs. defaults to off."
+        },
+        {
+          "name": "side",
+          "description": "Sets the proper collapse icon and collapse animation, based on what side of the page the panel will be used."
+        }
+      ],
+      "slots": [
+        {
+          "description": "This is a default/unnamed slot for panel content",
+          "name": ""
+        },
+        {
+          "description": "header element (Use `<nve-panel-header>` or custom content)",
+          "name": "header"
+        },
+        {
+          "description": "content element (Use `<nve-panel-content>` or custom content)",
+          "name": "content"
+        },
+        {
+          "description": "footer element (Use `<nve-panel-footer>` or custom content)",
+          "name": "footer"
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 3,
       "coverageTotal": 95.74,
@@ -1141,6 +2023,13 @@
       "since": "0.10.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-panel-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "This is a default/unnamed slot for panel content content",
+          "name": ""
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 1,
       "coverageTotal": 95.74,
@@ -1161,6 +2050,13 @@
       "since": "0.10.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-panel-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "This is a default/unnamed slot for panel footer content",
+          "name": ""
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 95.74,
@@ -1181,6 +2077,21 @@
       "since": "0.10.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-panel-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "Title Text",
+          "name": "title"
+        },
+        {
+          "description": "Subtitle Text",
+          "name": "subtitle"
+        },
+        {
+          "description": "Extra Action Button (use `nve-icon-button`)",
+          "name": "action-icon"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 1,
       "coverageTotal": 95.74,
@@ -1202,6 +2113,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/story/elements-password-documentation--page",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "description": "A password is a control that enables users to enter password text.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 1,
       "coverageTotal": 100,
@@ -1223,8 +2148,9 @@
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-progress-bar-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29%3A20&mode=dev",
+      "properties": [],
       "projectTotal": 1,
-      "instanceTotal": 1,
+      "instanceTotal": 2,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "pre-release"
@@ -1244,6 +2170,18 @@
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-filter-chip-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=72%3A5357",
+      "properties": [
+        {
+          "name": "closable",
+          "description": "Determines if a close button should render within filter chip"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -1265,6 +2203,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-radio-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-16&t=iOYah8Uct8CFd69k-0",
       "description": "A radio button is a control that enables users to choose one option from a list of mutually exclusive options.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 7,
       "coverageTotal": 100,
@@ -1285,6 +2237,12 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-radio-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-16&t=iOYah8Uct8CFd69k-0",
+      "properties": [
+        {
+          "name": "layout",
+          "description": "Set each slotted control + label + control message layout"
+        }
+      ],
       "projectTotal": 4,
       "instanceTotal": 5,
       "coverageTotal": 100,
@@ -1306,6 +2264,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-range-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-25&t=iOYah8Uct8CFd69k-0",
       "description": "A range slider is a control that enables users to choose a value from a continuous range of values.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 2,
       "coverageTotal": 100,
@@ -1327,6 +2299,24 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-search-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-22&t=clRGqnKDRGNhR0Yu-0",
       "description": "A search is a control that enables users to enter text to search.",
+      "properties": [
+        {
+          "name": "container",
+          "description": "flat (embed into parent container)"
+        },
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 7,
       "instanceTotal": 8,
       "coverageTotal": 100,
@@ -1348,6 +2338,13 @@
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-segment-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=4047-92996&mode=design&t=XPYuD3f2yaKCAMl3-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "slotted nve-buttons or nve-icon-buttons",
+          "name": ""
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 70.83,
@@ -1369,6 +2366,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-select-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-24&t=clRGqnKDRGNhR0Yu-0",
       "description": "A select is a control that enables users to select an option from a list of options.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 11,
       "coverageTotal": 100,
@@ -1390,6 +2401,46 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-sort-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=127-8456&t=TYtFvncSeBAKHOMe-0",
+      "properties": [
+        {
+          "name": "pressed",
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed"
+        },
+        {
+          "name": "expanded",
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded"
+        },
+        {
+          "name": "readonly",
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly"
+        },
+        {
+          "name": "name",
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name"
+        },
+        {
+          "name": "value",
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value"
+        },
+        {
+          "name": "type",
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type"
+        },
+        {
+          "name": "disabled",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled"
+        },
+        {
+          "name": "selected",
+          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 5,
       "coverageTotal": 100,
@@ -1411,6 +2462,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-switch-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-28&t=clRGqnKDRGNhR0Yu-0",
       "description": "A switch is a control that enables users to switch between two mutually exclusive options (on or off, checked or unchecked) through a single click or tap.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 3,
       "coverageTotal": 100,
@@ -1432,6 +2497,26 @@
       "since": "0.10.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tabs-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [
+        {
+          "name": "vertical",
+          "description": "Determines whether or not the tabs should display in a vertical layout vs. defaulting to horizontal."
+        },
+        {
+          "name": "borderless",
+          "description": "Determines whether or not the tabs should display a border on selected items vs. defaults to show border."
+        },
+        {
+          "name": "behaviorSelect",
+          "description": "Determines whether or not the tabs should handle selection behavior vs. defaults to off."
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for nve-tab-item",
+          "name": ""
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 3,
       "coverageTotal": 100,
@@ -1452,6 +2537,46 @@
       "since": "0.10.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tabs-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [
+        {
+          "name": "selected",
+          "description": "Determines which tab item is selected, defaults to false."
+        },
+        {
+          "name": "pressed",
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed"
+        },
+        {
+          "name": "expanded",
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded"
+        },
+        {
+          "name": "readonly",
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly"
+        },
+        {
+          "name": "name",
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name"
+        },
+        {
+          "name": "value",
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value"
+        },
+        {
+          "name": "type",
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type"
+        },
+        {
+          "name": "disabled",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 3,
       "coverageTotal": 100,
@@ -1473,6 +2598,54 @@
       "since": "0.10.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tag-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-10&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [
+        {
+          "name": "closable",
+          "description": "Determines if tag is closable, if true, a close icon will be rendered. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=3622-86613&mode=design&t=qIZGochM1aUsCdOP-0)"
+        },
+        {
+          "name": "color",
+          "description": "Determines the color of the tag. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=29-10&mode=design&t=uFeSKovl7yrHakis-0)"
+        },
+        {
+          "name": "pressed",
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed"
+        },
+        {
+          "name": "expanded",
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded"
+        },
+        {
+          "name": "readonly",
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly"
+        },
+        {
+          "name": "name",
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name"
+        },
+        {
+          "name": "value",
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value"
+        },
+        {
+          "name": "type",
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type"
+        },
+        {
+          "name": "disabled",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled"
+        },
+        {
+          "name": "selected",
+          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 7,
       "coverageTotal": 100,
@@ -1494,6 +2667,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-textarea-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "description": "A textarea is a control that enables users to enter and edit text.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 6,
       "instanceTotal": 10,
       "coverageTotal": 100,
@@ -1515,6 +2702,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-time-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "description": "A time picker is a control that enables users to choose a time value.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 2,
       "coverageTotal": 100,
@@ -1536,6 +2737,46 @@
       "since": "0.6.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=596-34431&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [
+        {
+          "name": "anchor",
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "trigger",
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "position",
+          "description": "Sets the side position of the popover relative to the provided anchor element."
+        },
+        {
+          "name": "alignment",
+          "description": "Sets the alignment of the popover relative to the provided anchor element."
+        },
+        {
+          "name": "closable",
+          "description": "Determines if a close button should render within toast."
+        },
+        {
+          "name": "closeTimeout",
+          "description": "A delayed `close` event will occur determined from the provided millisecond value."
+        },
+        {
+          "name": "hidden",
+          "description": "Determines if popover should be rendered and positioned."
+        },
+        {
+          "name": "status",
+          "description": "visual treatment to represent a ongoing task or support status"
+        }
+      ],
+      "slots": [
+        {
+          "description": "content slot",
+          "name": "default"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 4,
       "coverageTotal": 100,
@@ -1557,8 +2798,40 @@
       "since": "0.6.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tooltip-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-29&t=clRGqnKDRGNhR0Yu-0",
+      "properties": [
+        {
+          "name": "anchor",
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "trigger",
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference."
+        },
+        {
+          "name": "position",
+          "description": "Sets the side position of the popover relative to the provided anchor element."
+        },
+        {
+          "name": "alignment",
+          "description": "Sets the alignment of the popover relative to the provided anchor element."
+        },
+        {
+          "name": "status",
+          "description": "visual treatment to represent a ongoing task or support status"
+        },
+        {
+          "name": "hidden",
+          "description": "Determines if popover should be rendered and positioned."
+        }
+      ],
+      "slots": [
+        {
+          "description": "content slot",
+          "name": "default"
+        }
+      ],
       "projectTotal": 8,
-      "instanceTotal": 14,
+      "instanceTotal": 17,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -1578,6 +2851,20 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-week-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0",
       "description": "A week picker is a control that enables users to choose a week value.",
+      "properties": [
+        {
+          "name": "status",
+          "description": "Set current visaul state for control. This overrides any validation states active."
+        },
+        {
+          "name": "layout",
+          "description": "Set current control + label + control message layout"
+        },
+        {
+          "name": "reset",
+          "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -1793,15 +3080,11 @@
         },
         {
           "name": "nve-alert",
-          "instanceTotal": 6
+          "instanceTotal": 5
         },
         {
           "name": "nve-badge",
           "instanceTotal": 7
-        },
-        {
-          "name": "nve-icon",
-          "instanceTotal": 5
         },
         {
           "name": "nve-button",
@@ -1818,6 +3101,14 @@
         {
           "name": "nve-card-content",
           "instanceTotal": 3
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-tooltip",
+          "instanceTotal": 2
         },
         {
           "name": "nve-date",
@@ -1842,10 +3133,6 @@
         {
           "name": "nve-select",
           "instanceTotal": 3
-        },
-        {
-          "name": "nve-alert-group",
-          "instanceTotal": 4
         },
         {
           "name": "nve-dialog",
@@ -1880,6 +3167,10 @@
           "instanceTotal": 2
         },
         {
+          "name": "nve-alert-group",
+          "instanceTotal": 3
+        },
+        {
           "name": "nve-dialog-footer",
           "instanceTotal": 1
         },
@@ -1906,13 +3197,9 @@
         {
           "name": "nve-pagination",
           "instanceTotal": 1
-        },
-        {
-          "name": "nve-tooltip",
-          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 86
+      "instanceTotal": 84
     },
     {
       "name": "app-shell-angular-demo",
@@ -2285,12 +3572,16 @@
           "instanceTotal": 2
         },
         {
-          "name": "nve-dropdown",
-          "instanceTotal": 4
+          "name": "nve-dot",
+          "instanceTotal": 1
         },
         {
           "name": "nve-tag",
           "instanceTotal": 6
+        },
+        {
+          "name": "nve-tooltip",
+          "instanceTotal": 3
         },
         {
           "name": "nve-badge",
@@ -2345,8 +3636,8 @@
           "instanceTotal": 2
         },
         {
-          "name": "nve-tooltip",
-          "instanceTotal": 1
+          "name": "nve-dropdown",
+          "instanceTotal": 3
         },
         {
           "name": "nve-pagination",
@@ -2378,14 +3669,14 @@
         },
         {
           "name": "nve-progress-bar",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-logo",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 107
+      "instanceTotal": 110
     },
     {
       "name": "@elements/next-common",
@@ -2453,7 +3744,7 @@
     {
       "name": "@elements/feedback-elements",
       "path": "src/ui/platform/libs/feedback-elements",
-      "elementsVersion": "0.15.0",
+      "elementsVersion": "0.16.0",
       "elements": [
         {
           "name": "nve-button",
@@ -2991,28 +4282,28 @@
       {
         "file": "elements/src/internal/controllers/type-popover.controller.ts",
         "lines": {
-          "total": 74,
-          "covered": 65,
+          "total": 76,
+          "covered": 67,
           "skipped": 0,
-          "pct": 87.83
+          "pct": 88.15
         },
         "functions": {
-          "total": 24,
-          "covered": 17,
+          "total": 25,
+          "covered": 18,
           "skipped": 0,
-          "pct": 70.83
+          "pct": 72
         },
         "statements": {
-          "total": 90,
-          "covered": 75,
+          "total": 93,
+          "covered": 78,
           "skipped": 0,
-          "pct": 83.33
+          "pct": 83.87
         },
         "branches": {
-          "total": 56,
-          "covered": 52,
+          "total": 60,
+          "covered": 54,
           "skipped": 0,
-          "pct": 92.85
+          "pct": 90
         }
       },
       {
@@ -6663,8 +7954,8 @@
       {
         "file": "elements/src/badge/badge.ts",
         "lines": {
-          "total": 12,
-          "covered": 12,
+          "total": 13,
+          "covered": 13,
           "skipped": 0,
           "pct": 100
         },
@@ -6675,16 +7966,16 @@
           "pct": 100
         },
         "statements": {
-          "total": 19,
-          "covered": 19,
+          "total": 20,
+          "covered": 20,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 10,
-          "covered": 9,
+          "total": 12,
+          "covered": 11,
           "skipped": 0,
-          "pct": 90
+          "pct": 91.66
         }
       },
       {
@@ -6880,28 +8171,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1737,
-        "covered": 1686,
+        "total": 1740,
+        "covered": 1689,
         "skipped": 0,
         "pct": 97.06
       },
       "statements": {
-        "total": 2310,
-        "covered": 2241,
+        "total": 2314,
+        "covered": 2245,
         "skipped": 0,
         "pct": 97.01
       },
       "functions": {
-        "total": 679,
-        "covered": 641,
+        "total": 680,
+        "covered": 642,
         "skipped": 0,
-        "pct": 94.4
+        "pct": 94.41
       },
       "branches": {
-        "total": 850,
-        "covered": 771,
+        "total": 856,
+        "covered": 775,
         "skipped": 0,
-        "pct": 90.7
+        "pct": 90.53
       },
       "branchesTrue": {
         "total": 0,

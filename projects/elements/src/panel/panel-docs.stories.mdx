@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Panel/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Panel/Documentation" parameters={{ badges: statusBadges('nve-panel') }} />
 
 # Panels
 
@@ -22,7 +22,7 @@ whether or not the `closable` attribute is set. By default `closable` is false a
 
 Additionally, `<nve-panel>` can be have it's `side` property set to `left` or `right` to get the proper collapse/expand icon and animation.
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/panel/define.js';
@@ -40,7 +40,7 @@ import '@elements/elements/panel/define.js';
   <Story id="elements-panel-examples--default" />
 </Canvas>
 
-<LinkedHeader>Left / Right Side Panels</LinkedHeader>
+## Left / Right Side Panels
 
 <Canvas columns={2}>
   <Story id="elements-panel-examples--left-side-panel" />
@@ -48,7 +48,7 @@ import '@elements/elements/panel/define.js';
 </Canvas>
 
 
-<LinkedHeader>Collapsable Panel with External Trigger</LinkedHeader>
+## Collapsable Panel with External Trigger
 
 An external trigger can be used to expand/collapse or hide/show a panel.
 In this example clicking the button toggles the `expanded` attribute on the `<nve-panel>` between `true` and `false`
@@ -57,7 +57,7 @@ In this example clicking the button toggles the `expanded` attribute on the `<nv
   <Story id="elements-panel-examples--panel-with-trigger" />
 </Canvas>
 
-<LinkedHeader>Closable Panel with External Trigger</LinkedHeader>
+## Closable Panel with External Trigger
 
 This is the same example as above only with the `closable` attribute on the `<nve-panel>`
 set to `true`
@@ -66,7 +66,7 @@ set to `true`
   <Story id="elements-panel-examples--closable-panel" />
 </Canvas>
 
-<LinkedHeader>Panel with Header</LinkedHeader>
+## Panel with Header
 
 The `<nve-panel-header>` sub-component can be slotted into `<nve-panel>` to get default border styling, and additional sub slots within the header.
 
@@ -74,7 +74,7 @@ The `<nve-panel-header>` sub-component can be slotted into `<nve-panel>` to get 
   <Story id="elements-panel-examples--panel-with-header" />
 </Canvas>
 
-<LinkedHeader>Panel with Full Header</LinkedHeader>
+## Panel with Full Header
 
 In this example `<nve-panel-header>` is further slotted with elements for `slot="title"`, `slot="subtitle"`, `<nve-icon-button>` with `slot="action-icon"`
 
@@ -82,13 +82,13 @@ In this example `<nve-panel-header>` is further slotted with elements for `slot=
   <Story id="elements-panel-examples--panel-with-full-header" />
 </Canvas>
 
-<LinkedHeader>Panel with Footer</LinkedHeader>
+## Panel with Footer
 
 <Canvas>
   <Story id="elements-panel-examples--panel-with-footer" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-panel-examples--light-theme" />
@@ -103,14 +103,14 @@ In this example `<nve-panel-header>` is further slotted with elements for `slot=
 
 # Element API
 
-<LinkedHeader>nve-panel</LinkedHeader>
+## nve-panel
 <ArgsTable of="nve-panel" />
 
-<LinkedHeader>nve-panel-header</LinkedHeader>
+## nve-panel-header
 <ArgsTable of="nve-panel-header" />
 
-<LinkedHeader>nve-panel-content</LinkedHeader>
+## nve-panel-content
 <ArgsTable of="nve-panel-content" />
 
-<LinkedHeader>nve-panel-footer</LinkedHeader>
+## nve-panel-footer
 <ArgsTable of="nve-panel-footer" />

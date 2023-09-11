@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Textarea/Documentation" parameters={{ badges: ['stable'] }} />
+<Meta title="Elements/Textarea/Documentation" parameters={{ badges: statusBadges('nve-textarea') }} />
 
 # Textarea
 
 <element-metrics tag="nve-textarea"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/textarea/define.js';
@@ -24,19 +24,19 @@ import '@elements/elements/textarea/define.js';
   <Story id="elements-textarea-examples--textarea" />
 </Canvas>
 
-<LinkedHeader>Vertical</LinkedHeader>
+## Vertical
 
 <Canvas>
   <Story id="elements-textarea-examples--vertical" />
 </Canvas>
 
-<LinkedHeader>Horizontal</LinkedHeader>
+## Horizontal
 
 <Canvas>
   <Story id="elements-textarea-examples--horizontal" />
 </Canvas>
 
-<LinkedHeader>Columns and Rows</LinkedHeader>
+## Columns and Rows
 
 <Canvas>
   <Story id="elements-textarea-examples--columns-and-rows" />
@@ -44,6 +44,6 @@ import '@elements/elements/textarea/define.js';
 
 <element-status tag={'nve-textarea'}></element-status>
 
-<LinkedHeader>nve-textarea</LinkedHeader>
+## nve-textarea
 
 <ArgsTable of="nve-textarea" />

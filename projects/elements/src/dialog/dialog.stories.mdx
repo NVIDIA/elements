@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Dialog/Documentation" />
+<Meta title="Elements/Dialog/Documentation" parameters={{ badges: statusBadges('nve-dialog') }} />
 
 <Story id="internal-integration--empty" />
 
@@ -9,7 +9,7 @@ import { LinkedHeader } from '../../docs/utils.mdx';
 
 <element-metrics tag="nve-dialog"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/dialog/define.js';
@@ -25,43 +25,43 @@ import '@elements/elements/dialog/define.js';
   <Story id="elements-dialog-examples--default" inline={false} height="400px" />
 </Canvas>
 
-<LinkedHeader>Content</LinkedHeader>
+## Content
 
 <Canvas>
   <Story id="elements-dialog-examples--content" inline={false} height="400px" />
 </Canvas>
 
-<LinkedHeader>Small</LinkedHeader>
+## Small
 
 <Canvas>
   <Story id="elements-dialog-examples--small" inline={false} height="400px" />
 </Canvas>
 
-<LinkedHeader>Medium</LinkedHeader>
+## Medium
 
 <Canvas>
   <Story id="elements-dialog-examples--medium" inline={false} height="400px" />
 </Canvas>
 
-<LinkedHeader>Large</LinkedHeader>
+## Large
 
 <Canvas>
   <Story id="elements-dialog-examples--large" inline={false} height="400px" />
 </Canvas>
 
-<LinkedHeader>Non-Closable</LinkedHeader>
+## Non-Closable
 
 <Canvas>
   <Story id="elements-dialog-examples--non-closable" inline={false} height="400px" />
 </Canvas>
 
-<LinkedHeader>Interactive</LinkedHeader>
+## Interactive
 
 <Canvas>
   <Story id="elements-dialog-examples--interactive" inline={false} height="400px" />
 </Canvas>
 
-<LinkedHeader>Position</LinkedHeader>
+## Position
 
 <Canvas>
   <Story id="elements-dialog-examples--position" inline={false} height="800px" />
@@ -69,14 +69,14 @@ import '@elements/elements/dialog/define.js';
 
 <element-status tag={'nve-dialog'}></element-status>
 
-<LinkedHeader>nve-dialog</LinkedHeader>
+## nve-dialog
 
 <ArgsTable of="nve-dialog" />
 
-<LinkedHeader>nve-dialog-header</LinkedHeader>
+## nve-dialog-header
 
 <ArgsTable of="nve-dialog-header" />
 
-<LinkedHeader>nve-dialog-footer</LinkedHeader>
+## nve-dialog-footer
 
 <ArgsTable of="nve-dialog-footer" />
