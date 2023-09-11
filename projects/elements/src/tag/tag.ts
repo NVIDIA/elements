@@ -21,8 +21,10 @@ import styles from './tag.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
 export class Tag extends MlvBaseButton {
+  /** Determines if tag is closable, if true, a close icon will be rendered. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=3622-86613&mode=design&t=qIZGochM1aUsCdOP-0) */
   @property({ type: Boolean }) closable = false;
 
+  /** Determines the color of the tag. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=29-10&mode=design&t=uFeSKovl7yrHakis-0) */
   @property({ type: String, reflect: true }) color: ColorPalette;
 
   #typeClosableController = new TypeClosableController(this);

@@ -86,7 +86,6 @@ export default [
       'rulesdir/reserved-property-names': ['error'],
       'rulesdir/reserved-event-names': ['error'],
       'rulesdir/stateless-property': ['error'],
-      'rulesdir/primitive-property': ['error']
     }
   },
   {
@@ -103,6 +102,7 @@ export default [
     files: [...source],
     ignores: [...ignores, ...tests, ...stories],
     rules: {
+      'rulesdir/primitive-property': ['error'],
       'no-implicit-globals': ['error'],
       'no-restricted-globals': [
         'error',

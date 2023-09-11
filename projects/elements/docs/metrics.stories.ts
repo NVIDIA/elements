@@ -146,6 +146,10 @@ define(ElementStatus)
 class ElementMetrics extends LitElement {
   @property({ type: String }) tag = '';
 
+  @property({ type: String }) type: 'property' | 'slot';
+
+  @property({ type: String }) value: string;
+
   static metadata = {
     tag: 'element-metrics',
     version: 'demo'
@@ -154,16 +158,20 @@ class ElementMetrics extends LitElement {
   render() {
     const element = metrics.elements.find(d => d.name === this.tag);
     return html`
-    <section nve-layout="column gap:md">
-      <div nve-layout="row gap:sm align:vertical-center">
-        <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
-        <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
-        <a href=${element.aria} nve-text="link no-visit label">API Spec</a>
-        ${element.figma ? html`<a href=${element.figma} nve-text="link no-visit label">Figma</a>` : nothing}
-        <a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages" nve-text="link no-visit label">Released ${element.since}</a>
-      </div>
-      ${element.description ? html`<p nve-text="body" .innerHTML=${new showdown.Converter().makeHtml(element.description)}></p>` : nothing}
-    </section>`;
+      ${this.type === 'property' ? html`<div .innerHTML=${new showdown.Converter().makeHtml((element.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
+      ${this.type === 'slot' ? html`<div .innerHTML=${new showdown.Converter().makeHtml((element.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
+      ${!this.type ? html`
+      <section nve-layout="column gap:md">
+        <div nve-layout="row gap:sm align:vertical-center">
+          <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
+          <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
+          <a href=${element.aria} nve-text="link no-visit label">API Spec</a>
+          ${element.figma ? html`<a href=${element.figma} nve-text="link no-visit label">Figma</a>` : nothing}
+          <a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages" nve-text="link no-visit label">Released ${element.since}</a>
+        </div>
+        ${element.description ? html`<div .innerHTML=${new showdown.Converter().makeHtml(element.description).replace('<p>', '<p nve-text="body">')}></div>` : nothing}
+      </section>` : nothing}
+    `; 
   }
 
   createRenderRoot() {

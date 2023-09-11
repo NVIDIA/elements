@@ -1,5 +1,4 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { LinkedHeader } from './utils.mdx';
 import '@elements/elements/alert/define.js';
 
 <Meta title="About/Extensions" parameters={{ badges: ['beta'] }} />
@@ -13,7 +12,7 @@ This path enables your extensions to work in a large variety of frameworks and e
 reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team.
 The rest of this guide will focus on how to integrate specifically for Element integration and best practices for MagLev.
 
-<LinkedHeader>Scoped Registry</LinkedHeader>
+## Scoped Registry
 
 By default Web Components, specifcally the custom elements spec, defines elements on a global registry.
 This can introduce tag name collisions if multiple versions of the same library are loaded. To avoid this
@@ -64,7 +63,7 @@ The `scope` function is used to wrap the element definition with the `ScopedRegi
 all Elements in the entire DOM tree are registered to the scoped registry. Once completed the `domain-login` component
 can be used in any framework that supports Web Components.
 
-<LinkedHeader>Element Scoping without Shadow DOM</LinkedHeader>
+## Element Scoping without Shadow DOM
 
 <nve-alert status="warning">The tag alias strategy is experimental and only for rare use-cases when Shadow DOM cannot be used and the UI is likely global impacting other applications.</nve-alert>
 

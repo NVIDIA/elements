@@ -1,14 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-
-<Meta title="Elements/Button/Documentation" parameters={{ badges: ['stable'] }} />
+<Meta title="Elements/Button/Documentation" parameters={{ badges: statusBadges('nve-button') }} />
 
 # Button
 
 <element-metrics tag="nve-button"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/button/define.js';
@@ -22,25 +21,25 @@ import '@elements/elements/button/define.js';
   <Story id="elements-button-examples--default" />
 </Canvas>
 
-<LinkedHeader>With Icon</LinkedHeader>
+## With Icon
 
 <Canvas>
   <Story id="elements-button-examples--button-with-icon" />
 </Canvas>
 
-<LinkedHeader>Interactions</LinkedHeader>
+## Interactions
 
 <Canvas>
   <Story id="elements-button-examples--interactions" />
 </Canvas>
 
-<LinkedHeader>Flat Interactions</LinkedHeader>
+## Flat Interactions
 
 <Canvas>
   <Story id="elements-button-examples--flat-interactions" />
 </Canvas>
 
-<LinkedHeader>Pressed/Toggle</LinkedHeader>
+## Pressed/Toggle
 
 [aria-pressed documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed)
 
@@ -48,7 +47,7 @@ import '@elements/elements/button/define.js';
   <Story id="elements-button-examples--pressed-toggle" />
 </Canvas>
 
-<LinkedHeader>Flat Selected</LinkedHeader>
+## Flat Selected
 
 [aria-selected documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected)
 
@@ -56,7 +55,7 @@ import '@elements/elements/button/define.js';
   <Story id="elements-button-examples--selected-flat" />
 </Canvas>
 
-<LinkedHeader>Linked Buttons</LinkedHeader>
+## Linked Buttons
 
 Anchors can wrap button instances, however its recommended to slot the anchor into the button.
 
@@ -75,20 +74,20 @@ If you need to slot an icon in a linked button, put `<nve-icon>` adjacent to the
   <Story id="elements-button-examples--link-flat" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-button-examples--light-theme" />
   <Story id="elements-button-examples--dark-theme" />
 </Canvas>
 
-<LinkedHeader>Size</LinkedHeader>
+## Size
 
 <Canvas>
   <Story id="elements-button-examples--size" />
 </Canvas>
 
-<LinkedHeader>Form Control</LinkedHeader>
+## Form Control
 
 Form control option allows a button to be styled like a control field. This is helpful for using button to trigger custom form control components or dropdowns.
 
@@ -98,5 +97,5 @@ Form control option allows a button to be styled like a control field. This is h
 
 <element-status tag={'nve-button'}></element-status>
 
-<LinkedHeader>nve-button</LinkedHeader>
+## nve-button
 <ArgsTable of="nve-button" />

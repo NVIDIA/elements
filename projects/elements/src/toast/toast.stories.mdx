@@ -1,6 +1,5 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader, statusBadges } from '../../docs/utils.mdx';
-
+import { statusBadges } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Toast/Documentation" parameters={{ badges: statusBadges('nve-toast') }}  />
 
@@ -8,7 +7,7 @@ import { LinkedHeader, statusBadges } from '../../docs/utils.mdx';
 
 <element-metrics tag="nve-toast"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/toast/define.js';
@@ -24,7 +23,7 @@ import '@elements/elements/toast/define.js';
   <Story id="elements-toast-examples--default" inline={false} height={200} />
 </Canvas>
 
-<LinkedHeader>Status/Actions</LinkedHeader>
+## Status/Actions
 
 <Canvas columns={2}>
   <Story id="elements-toast-examples--status" inline={false} height={300} />
@@ -33,6 +32,6 @@ import '@elements/elements/toast/define.js';
 
 <element-status tag={'nve-toast'}></element-status>
 
-<LinkedHeader>nve-toast</LinkedHeader>
+## nve-toast
 
 <ArgsTable of="nve-toast" />

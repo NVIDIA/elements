@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Accordion/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Accordion/Documentation" parameters={{ badges: statusBadges('nve-accordion') }} />
 
 # Accordion
 
 <element-metrics tag="nve-accordion"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/accordion/define.js';
@@ -26,61 +26,61 @@ import '@elements/elements/accordion/define.js';
 </nve-accordion>
 ```
 
-<LinkedHeader>Default</LinkedHeader>
+## Default
 
 <Canvas>
   <Story id="elements-accordion-examples--default" />
 </Canvas>
 
-<LinkedHeader>Container Style Full (Stateful)</LinkedHeader>
+## Container Style Full (Stateful)
 
 <Canvas>
   <Story id="elements-accordion-examples--full" />
 </Canvas>
 
-<LinkedHeader>Container Style Inset (Stateful)</LinkedHeader>
+## Container Style Inset (Stateful)
 
 <Canvas>
   <Story id="elements-accordion-examples--inset" />
 </Canvas>
 
-<LinkedHeader>Container Style Flat (Stateful)</LinkedHeader>
+## Container Style Flat (Stateful)
 
 <Canvas>
   <Story id="elements-accordion-examples--flat" />
 </Canvas>
 
-<LinkedHeader>With Actions</LinkedHeader>
+## With Actions
 
 <Canvas>
   <Story id="elements-accordion-examples--with-actions" />
 </Canvas>
 
-<LinkedHeader>Disabled</LinkedHeader>
+## Disabled
 
 <Canvas>
   <Story id="elements-accordion-examples--disabled" />
 </Canvas>
 
-<LinkedHeader>Accordion Group Full</LinkedHeader>
+## Accordion Group Full
 
 <Canvas>
   <Story id="elements-accordion-examples--accordion-group-full" />
 </Canvas>
 
-<LinkedHeader>Accordion Group Inset</LinkedHeader>
+## Accordion Group Inset
 
 <Canvas>
   <Story id="elements-accordion-examples--accordion-group-inset" />
 </Canvas>
 
-<LinkedHeader>Accordion Group Flat</LinkedHeader>
+## Accordion Group Flat
 
 <Canvas>
   <Story id="elements-accordion-examples--accordion-group-flat" />
 </Canvas>
 
-<LinkedHeader>Accordion Group Full - Behavior Expand Single</LinkedHeader>
+## Accordion Group Full - Behavior Expand Single
 
 <Canvas>
   <Story id="elements-accordion-examples--accordion-group-expand-single" />
@@ -89,14 +89,14 @@ import '@elements/elements/accordion/define.js';
 
 <element-status tag={'nve-accordion'}></element-status>
 
-<LinkedHeader>nve-accordion</LinkedHeader>
+## nve-accordion
 <ArgsTable of="nve-accordion" />
 
-<LinkedHeader>nve-accordion-header</LinkedHeader>
+## nve-accordion-header
 <ArgsTable of="nve-accordion-header" />
 
-<LinkedHeader>nve-accordion-content</LinkedHeader>
+## nve-accordion-content
 <ArgsTable of="nve-accordion-content" />
 
-<LinkedHeader>nve-accordion-group</LinkedHeader>
+## nve-accordion-group
 <ArgsTable of="nve-accordion-group" />

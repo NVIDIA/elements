@@ -13,11 +13,13 @@
   --height: var(--nve-ref-size-800);
   --_icon-color: var(--color);
   --width: initial;
+  --min-width: var(--width);
   display: inline-flex;
   position: relative;
   user-select: none;
   white-space: nowrap;
   width: var(--width);
+  min-width: var(--min-width);
 }
 
 [internal-host] {
