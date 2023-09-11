@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../../docs/utils.mdx';
+import { statusBadges } from '../../../docs/utils.mdx';
 
-<Meta title="Elements/Data Grid/Performance" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Data Grid/Performance" parameters={{ badges: statusBadges('mlv-grid') }} />
 
 # Data Grid Performance
 
@@ -18,7 +18,7 @@ Use pagination or batch rendering to improve overal initial render performance.
 
 ## Infinite Scroll
 
-Batch rendering allows rows to dynamically be added for improved performance. The grid will dispatch a `scrollend` event
+Batch rendering allows rows to dynamically be added for improved performance. The grid will dispatch a `scrollboxend` event
 when the user has scrolled to the end of the current scroll box. When the event occurs addtional rows can be appended.
 
 <Story id="elements-data-grid-examples--performance-infinite-scroll" />
@@ -32,7 +32,7 @@ class BatchRenderDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-grid style="--scroll-height: 400px" @scrollend=${() => this.#loadNextGroup()}>
+      <mlv-grid style="--scroll-height: 400px" @scrollboxend=${() => this.#loadNextGroup()}>
         ...
         ${this.rows.map(row => html`<mlv-grid-row>...</mlv-grid-row>`)}
       </mlv-grid>
@@ -93,17 +93,17 @@ class GridVirtualScrollDemo extends LitElement {
 }
 ```
 
-<LinkedHeader>mlv-grid</LinkedHeader>
+## mlv-grid
 <ArgsTable of="mlv-grid" />
 
-<LinkedHeader>mlv-grid-header</LinkedHeader>
+## mlv-grid-header
 <ArgsTable of="mlv-grid-header" />
 
-<LinkedHeader>mlv-grid-column</LinkedHeader>
+## mlv-grid-column
 <ArgsTable of="mlv-grid-column" />
 
-<LinkedHeader>mlv-grid-row</LinkedHeader>
+## mlv-grid-row
 <ArgsTable of="mlv-grid-row" />
 
-<LinkedHeader>mlv-grid-cell</LinkedHeader>
+## mlv-grid-cell
 <ArgsTable of="mlv-grid-cell" />

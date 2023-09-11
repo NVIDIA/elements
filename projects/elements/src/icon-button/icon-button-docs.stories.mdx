@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Icon Button/Documentation" parameters={{ badges: ['stable'] }} />
+<Meta title="Elements/Icon Button/Documentation" parameters={{ badges: statusBadges('mlv-icon-button') }} />
 
 # Icon Button
 
 <element-metrics tag="mlv-icon-button"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/icon-button/define.js';
@@ -21,19 +21,19 @@ import '@elements/elements/icon-button/define.js';
   <Story id="elements-icon-button-examples--default" />
 </Canvas>
 
-<LinkedHeader>Interactions</LinkedHeader>
+## Interactions
 
 <Canvas>
   <Story id="elements-icon-button-examples--interactions" />
 </Canvas>
 
-<LinkedHeader>Flat Interactions</LinkedHeader>
+## Flat Interactions
 
 <Canvas>
   <Story id="elements-icon-button-examples--flat-interactions" />
 </Canvas>
 
-<LinkedHeader>Pressed/Toggle</LinkedHeader>
+## Pressed/Toggle
 
 [aria-pressed documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed)
 
@@ -41,7 +41,7 @@ import '@elements/elements/icon-button/define.js';
   <Story id="elements-icon-button-examples--pressed-toggle" />
 </Canvas>
 
-<LinkedHeader>Flat Selected</LinkedHeader>
+## Flat Selected
 
 [aria-selected documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected)
 
@@ -49,25 +49,25 @@ import '@elements/elements/icon-button/define.js';
   <Story id="elements-icon-button-examples--selected-flat" />
 </Canvas>
 
-<LinkedHeader>Link</LinkedHeader>
+## Link
 
 <Canvas>
   <Story id="elements-icon-button-examples--link" />
 </Canvas>
 
-<LinkedHeader>Custom Icon</LinkedHeader>
+## Custom Icon
 
 <Canvas>
   <Story id="elements-icon-button-examples--custom-icon" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas>
   <Story id="elements-icon-button-examples--themes" />
 </Canvas>
 
-<LinkedHeader>Size</LinkedHeader>
+## Size
 
 <Canvas>
   <Story id="elements-icon-button-examples--size" />
@@ -77,5 +77,5 @@ import '@elements/elements/icon-button/define.js';
 
 <element-status tag={'mlv-icon-button'}></element-status>
 
-<LinkedHeader>mlv-icon-button</LinkedHeader>
+## mlv-icon-button
 <ArgsTable of="mlv-icon-button" />

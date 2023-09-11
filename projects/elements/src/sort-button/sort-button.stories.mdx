@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Sort Button/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Sort Button/Documentation" parameters={{ badges: statusBadges('mlv-sort-button') }} />
 
 # Sort Button
 
 <element-metrics tag="mlv-sort-button"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/sort-button/define.js';
@@ -21,7 +21,7 @@ import '@elements/elements/sort-button/define.js';
   <Story id="elements-sort-button-examples--default" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-sort-button-examples--light-theme" />
@@ -30,5 +30,5 @@ import '@elements/elements/sort-button/define.js';
 
 <element-status tag="mlv-sort-button"></element-status>
 
-<LinkedHeader>mlv-sort-button</LinkedHeader>
+## mlv-sort-button
 <ArgsTable of="mlv-sort-button" />

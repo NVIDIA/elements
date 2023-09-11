@@ -98,8 +98,10 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     await this.#calculatePosition();
   }
 
-  #lightDismiss = ((e: PointerEvent) => {
-    if (clickOutsideElementBounds(e, this.#popover)) {
+  #lightDismiss = (async (e: PointerEvent) => {
+    await this.host.updateComplete;
+    const hasOpenPopover = getFlatDOMTree(this.#popover).find((e: any) => !!e.popoverType && !e.hidden);
+    if (clickOutsideElementBounds(e, this.#popover) && !hasOpenPopover) {
       this.close();
     }
   }).bind(this);

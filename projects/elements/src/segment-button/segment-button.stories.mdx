@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Segment Button/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Segment Button/Documentation" parameters={{ badges: statusBadges('mlv-segment-button') }} />
 
 # Segment Button
 
 <element-metrics tag="mlv-segment-button"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/segment-button/define.js';
@@ -25,7 +25,7 @@ import '@elements/elements/segment-button/define.js';
   <Story id="elements-segment-button-examples--default" />
 </Canvas>
 
-<LinkedHeader>Icon Buttons</LinkedHeader>
+## Icon Buttons
 
 <Canvas>
   <Story id="elements-segment-button-examples--icon-buttons" />
@@ -34,5 +34,5 @@ import '@elements/elements/segment-button/define.js';
 
 <element-status tag={'mlv-segment-button'}></element-status>
 
-<LinkedHeader>mlv-segment-button</LinkedHeader>
+## mlv-segment-button
 <ArgsTable of="mlv-segment-button" />

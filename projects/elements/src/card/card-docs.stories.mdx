@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Card/Documentation" parameters={{ badges: ['stable'] }} />
+<Meta title="Elements/Card/Documentation" parameters={{ badges: statusBadges('mlv-card') }} />
 
 # Card
 
@@ -16,7 +16,7 @@ The following sub-components can be used within `mlv-card` to achieve standard c
 
 Content slotted directly under `mlv-card` is supported for full flexibility of content.
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/card/define.js';
@@ -34,37 +34,37 @@ import '@elements/elements/card/define.js';
   <Story id="elements-card-examples--default" />
 </Canvas>
 
-<LinkedHeader>Media Card</LinkedHeader>
+## Media Card
 
 <Canvas>
   <Story id="elements-card-examples--media-card" />
 </Canvas>
 
-<LinkedHeader>Card with Header</LinkedHeader>
+## Card with Header
 
 <Canvas>
   <Story id="elements-card-examples--card-with-header" />
 </Canvas>
 
-<LinkedHeader>Card with Header and Action</LinkedHeader>
+## Card with Header and Action
 
 <Canvas>
   <Story id="elements-card-examples--card-with-header-and-action" />
 </Canvas>
 
-<LinkedHeader>Card with Header Tabs</LinkedHeader>
+## Card with Header Tabs
 
 <Canvas>
   <Story id="elements-card-examples--tabs" />
 </Canvas>
 
-<LinkedHeader>Card Description List</LinkedHeader>
+## Card Description List
 
 <Canvas>
   <Story id="elements-card-examples--description-list" />
 </Canvas>
 
-<LinkedHeader>Card with Header and Footer</LinkedHeader>
+## Card with Header and Footer
 
 Combining `mlv-card-header`, `mlv-card-content` & `mlv-card-footer` will yield a fully styled card.
 Note how `mlv-card-content` will vertically stretch to fill the card size and the footer will align
@@ -74,13 +74,13 @@ to the bottom of the card.
   <Story id="elements-card-examples--card-with-header-and-footer" />
 </Canvas>
 
-<LinkedHeader>Card With Multiple Content Containers and Full-bleed Divider</LinkedHeader>
+## Card With Multiple Content Containers and Full-bleed Divider
 
 <Canvas>
   <Story id="elements-card-examples--card-with-multiple-contents-and-divider" />
 </Canvas>
 
-<LinkedHeader>Card with Content Layout</LinkedHeader>
+## Card with Content Layout
 
 Layout system is supported when <a href="./?path=/docs/layout-getting-started--docs">mlv-layout</a> attribute
 is used on the `mlv-card-content` element:
@@ -99,13 +99,13 @@ is used on the `mlv-card-content` element:
   <Story id="elements-card-examples--card-with-content-layout" />
 </Canvas>
 
-<LinkedHeader>Container Fill</LinkedHeader>
+## Container Fill
 
 <Canvas>
   <Story id="elements-card-examples--container-fill" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-card-examples--light-theme" />
@@ -114,14 +114,14 @@ is used on the `mlv-card-content` element:
 
 <element-status tag={'mlv-card'}></element-status>
 
-<LinkedHeader>mlv-card</LinkedHeader>
+## mlv-card
 <ArgsTable of="mlv-card" />
 
-<LinkedHeader>mlv-card-header</LinkedHeader>
+## mlv-card-header
 <ArgsTable of="mlv-card-header" />
 
-<LinkedHeader>mlv-card-content</LinkedHeader>
+## mlv-card-content
 <ArgsTable of="mlv-card-content" />
 
-<LinkedHeader>mlv-card-footer</LinkedHeader>
+## mlv-card-footer
 <ArgsTable of="mlv-card-footer" />

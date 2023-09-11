@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Pagination/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Pagination/Documentation" parameters={{ badges: statusBadges('mlv-pagination') }} />
 
 # Pagination
 
 <element-metrics tag="mlv-pagination"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/pagination/define.js';
@@ -59,7 +59,7 @@ Pagination is [form associated component](https://web.dev/more-capable-form-cont
   <Story id="elements-pagination-examples--forms" inline={false} height={240} />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-pagination-examples--light-theme" />
@@ -68,6 +68,6 @@ Pagination is [form associated component](https://web.dev/more-capable-form-cont
 
 <element-status tag="mlv-pagination"></element-status>
 
-<LinkedHeader>mlv-pagination</LinkedHeader>
+## mlv-pagination
 
 <ArgsTable of="mlv-pagination" />

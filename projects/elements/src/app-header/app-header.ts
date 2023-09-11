@@ -9,6 +9,10 @@ import styles from './app-header.css?inline';
  * @element mlv-app-header
  * @description An element that appears across the top of all pages containing the application name and primary navigation.
  * @since 0.11.0
+ * @slot - Use the default slot in `mlv-logo` to create an app logo badge within the app header. Include a `<span>` element inside `mlv-app-header` to change the default application title.
+ * @slot title
+ * @slot nav-items - For `mlv-button` and `mlv-icon-button` elements used for navigation behavior. Use the `active` attribute to indicate the current page.
+ * @slot nav-actions - For `mlv-icon-button` elements. This will place them in the section of the app header where supplemental actions are located.
  * @cssprop --background
  * @cssprop --padding
  * @cssprop --border-bottom

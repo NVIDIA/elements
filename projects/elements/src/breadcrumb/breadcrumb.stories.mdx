@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Breadcrumb/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Breadcrumb/Documentation" parameters={{ badges: statusBadges('mlv-breadcrumb') }} />
 
 # Breadcrumb
 
 <element-metrics tag="mlv-breadcrumb"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/breadcrumb/define.js';
@@ -21,19 +21,19 @@ import '@elements/elements/breadcrumb/define.js';
   <Story id="elements-breadcrumb-examples--default" />
 </Canvas>
 
-<LinkedHeader>With An Icon Button</LinkedHeader>
+## With An Icon Button
 
 <Canvas>
   <Story id="elements-breadcrumb-examples--with-icon-button" />
 </Canvas>
 
-<LinkedHeader>With A Menu</LinkedHeader>
+## With A Menu
 
 <Canvas>
   <Story id="elements-breadcrumb-examples--with-menu" inline={false} height={290}/>
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-breadcrumb-examples--light-theme" />
@@ -42,6 +42,6 @@ import '@elements/elements/breadcrumb/define.js';
 
 <element-status tag={'mlv-breadcrumb'}></element-status>
 
-<LinkedHeader>mlv-breadcrumb</LinkedHeader>
+## mlv-breadcrumb
 
 <ArgsTable of="mlv-breadcrumb" />

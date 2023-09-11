@@ -64,3 +64,12 @@ mlv-icon,
 :host([status='trend-neutral']) {
   --status-color: var(--mlv-sys-status-pending-color);
 }
+
+:host([color]) {
+  --background: var(--color);
+  --border-radius: var(--mlv-ref-border-radius-sm);
+
+  & [internal-host] {
+    color: var(--mlv-sys-layer-canvas-background);
+  }
+}

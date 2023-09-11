@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Internal/JSON Viewer/Documentation" />
+<Meta title="Internal/JSON Viewer/Documentation" parameters={{ badges: statusBadges('mlv-json-viewer') }} />
 
 # JSON Viewer
 
@@ -24,7 +24,7 @@ import '@elements/elements/json-viewer/define.js';
 </mlv-json-viewer>
 ```
 
-<Story id="developer-tools-json-viewer-examples--default" />
+<Story id="internal-json-viewer-examples--default" />
 
 ## Value
 
@@ -37,12 +37,12 @@ import '@elements/elements/json-viewer/define.js';
 </script>
 ```
 
-<Story id="developer-tools-json-viewer-examples--dynamic" />
+<Story id="internal-json-viewer-examples--dynamic" />
 
 <br />
 
 <element-status tag="mlv-json-viewer"></element-status>
 
-<LinkedHeader>mlv-json-viewer</LinkedHeader>
+## mlv-json-viewer
 
 <ArgsTable of="mlv-json-viewer" />

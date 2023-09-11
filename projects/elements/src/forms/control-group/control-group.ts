@@ -9,6 +9,7 @@ import styles from './control-group.css?inline';
 /**
  * @element mlv-control-group
  * @since 0.3.0
+ * @slot - Control input elements
  * @cssprop --color
  * @cssprop --label-color
  * @cssprop --label-width
@@ -18,6 +19,7 @@ import styles from './control-group.css?inline';
  * @package true
  */
 export class ControlGroup extends LitElement {
+  /** Set each slotted control + label + control message layout */
   @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
   get label() {

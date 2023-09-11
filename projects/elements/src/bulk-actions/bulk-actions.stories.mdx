@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Bulk Actions/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Bulk Actions/Documentation" parameters={{ badges: statusBadges('mlv-bulk-actions') }} />
 
 # Bulk Actions
 
 <element-metrics tag="mlv-bulk-actions"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/bulk-actions/define.js';
@@ -21,7 +21,7 @@ import '@elements/elements/bulk-actions/define.js';
   <Story id="elements-bulk-actions-examples--default" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-bulk-actions-examples--light-theme" />
@@ -30,5 +30,5 @@ import '@elements/elements/bulk-actions/define.js';
 
 <element-status tag="mlv-bulk-actions"></element-status>
 
-<LinkedHeader>mlv-badge</LinkedHeader>
+## mlv-bulk-actions
 <ArgsTable of="mlv-bulk-actions" />

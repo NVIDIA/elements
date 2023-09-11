@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Icon/Documentation" parameters={{ badges: ['stable'] }} />
+<Meta title="Elements/Icon/Documentation" parameters={{ badges: statusBadges('mlv-icon') }} />
 
 # Icon
 
@@ -10,7 +10,7 @@ import { LinkedHeader } from '../../docs/utils.mdx';
 The Iconography system is based on exposing an SVG based icon library to a the `<mlv-icon>` element.
 See the searchable [Interactive Icon Catalog](./?path=/docs/foundations-iconography-documentation--docs)
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/icon/define.js';
@@ -25,25 +25,25 @@ import '@elements/elements/icon/define.js';
 </Canvas>
 
 
-<LinkedHeader>All Icons</LinkedHeader>
+## All Icons
 
 <Canvas>
   <Story id="elements-icon-examples--preview-all-icons" />
 </Canvas>
 
-<LinkedHeader>Statuses</LinkedHeader>
+## Statuses
 
 <Canvas>
   <Story id="elements-icon-examples--statuses" />
 </Canvas>
 
-<LinkedHeader>Size</LinkedHeader>
+## Size
 
 <Canvas>
   <Story id="elements-icon-examples--size" />
 </Canvas>
 
-<LinkedHeader>Direction</LinkedHeader>
+## Direction
 
 Sets the direction of the icon.
 Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)
@@ -52,13 +52,13 @@ Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/
   <Story id="elements-icon-examples--direction" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas>
   <Story id="elements-icon-examples--themes" />
 </Canvas>
 
-<LinkedHeader>Registration</LinkedHeader>
+## Registration
 
 SVG paths can be registered and made accessible to the `<mlv-icon>` element. Icons can be defined via a string or async function returning the resulting string.
 
@@ -66,7 +66,7 @@ SVG paths can be registered and made accessible to the `<mlv-icon>` element. Ico
   <Story id="elements-icon-examples--registration" />
 </Canvas>
 
-<LinkedHeader>Alias</LinkedHeader>
+## Alias
 
 Icons can be aliased to a different name. This can be useful for context specific names or migrations between icon sets.
 
@@ -74,7 +74,7 @@ Icons can be aliased to a different name. This can be useful for context specifi
   <Story id="elements-icon-examples--alias" />
 </Canvas>
 
-<LinkedHeader>Source</LinkedHeader>
+## Source
 
 Direct SVG paths can be provided for rendering.
 
@@ -84,5 +84,5 @@ Direct SVG paths can be provided for rendering.
 
 <element-status tag={'mlv-icon'}></element-status>
 
-<LinkedHeader>mlv-icon</LinkedHeader>
+## mlv-icon
 <ArgsTable of="mlv-icon" />

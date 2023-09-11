@@ -125,3 +125,32 @@ export const TrendDarkTheme = {
 </div>
   `
 }
+
+export const Color = {
+  render: () => html`
+<div mlv-layout="row gap:xs align:wrap">
+  <mlv-badge color="red-cardinal">red-cardinal</mlv-badge>
+  <mlv-badge color="gray-slate">gray-slate</mlv-badge>
+  <mlv-badge color="gray-denim">gray-denim</mlv-badge>
+  <mlv-badge color="blue-indigo">blue-indigo</mlv-badge>
+  <mlv-badge color="blue-cobalt">blue-cobalt</mlv-badge>
+  <mlv-badge color="blue-sky">blue-sky</mlv-badge>
+  <mlv-badge color="teal-cyan">teal-cyan</mlv-badge>
+  <mlv-badge color="green-mint">green-mint</mlv-badge>
+  <mlv-badge color="teal-seafoam">teal-seafoam</mlv-badge>
+  <mlv-badge color="green-grass">green-grass</mlv-badge>
+  <mlv-badge color="yellow-amber">yellow-amber</mlv-badge>
+  <mlv-badge color="orange-pumpkin">orange-pumpkin</mlv-badge>
+  <mlv-badge color="red-tomato">red-tomato</mlv-badge>
+  <mlv-badge color="pink-magenta">pink-magenta</mlv-badge>
+  <mlv-badge color="purple-plum">purple-plum</mlv-badge>
+  <mlv-badge color="purple-violet">purple-violet</mlv-badge>
+  <mlv-badge color="purple-lavender">purple-lavender</mlv-badge>
+  <mlv-badge color="pink-rose">pink-rose</mlv-badge>
+  <mlv-badge color="green-jade">green-jade</mlv-badge>
+  <mlv-badge color="lime-pear">lime-pear</mlv-badge>
+  <mlv-badge color="yellow-nova">yellow-nova</mlv-badge>
+  <mlv-badge color="brand-green">brand-green</mlv-badge>
+</div>
+  `
+};

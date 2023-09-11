@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Color/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Color/Documentation" parameters={{ badges: statusBadges('mlv-color') }} />
 
 # Color
 
 <element-metrics tag="mlv-color"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/color/define.js';
@@ -24,19 +24,19 @@ import '@elements/elements/color/define.js';
   <Story id="elements-color-examples--color" />
 </Canvas>
 
-<LinkedHeader>Datalist</LinkedHeader>
+## Datalist
 
 <Canvas>
   <Story id="elements-color-examples--datalist" />
 </Canvas>
 
-<LinkedHeader>Vertical</LinkedHeader>
+## Vertical
 
 <Canvas>
   <Story id="elements-color-examples--vertical" />
 </Canvas>
 
-<LinkedHeader>Horizontal</LinkedHeader>
+## Horizontal
 
 <Canvas>
   <Story id="elements-color-examples--horizontal" />
@@ -44,6 +44,6 @@ import '@elements/elements/color/define.js';
 
 <element-status tag={'mlv-color'}></element-status>
 
-<LinkedHeader>mlv-color</LinkedHeader>
+## mlv-color
 
 <ArgsTable of="mlv-color" />

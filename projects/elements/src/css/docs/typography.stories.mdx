@@ -1,5 +1,4 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../../docs/utils.mdx';
 import '@elements/elements/button/define.js';
 
 <Meta title="Foundations/Typography/Documentation" />
@@ -16,7 +15,7 @@ This enables full control of the visual styling of an element separate from the 
 <p mlv-text="label">label</p>
 ```
 
-<LinkedHeader>Framework Integrations</LinkedHeader>
+## Framework Integrations
 
 Some frameworks and libraries may require additional configuration to use the `mlv-text` attribute. See the links below for specific integration patterns for the following frameworks:
 
@@ -24,67 +23,67 @@ Some frameworks and libraries may require additional configuration to use the `m
   <a href="?path=/docs/integrations-lit--docs#forms"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit Integration</a>
 </mlv-button>
 
-<LinkedHeader>Types</LinkedHeader>
+## Types
 
 <Canvas>
   <Story id="foundations-typography-examples--type" />
 </Canvas>
 
-<LinkedHeader>Colors</LinkedHeader>
+## Colors
 
 <Canvas>
   <Story id="foundations-typography-examples--color" />
 </Canvas>
 
-<LinkedHeader>Weights</LinkedHeader>
+## Weights
 
 <Canvas>
   <Story id="foundations-typography-examples--weights" />
 </Canvas>
 
-<LinkedHeader>Transforms</LinkedHeader>
+## Transforms
 
 <Canvas>
   <Story id="foundations-typography-examples--transforms" />
 </Canvas>
 
-<LinkedHeader>Link</LinkedHeader>
+## Link
 
 <Canvas>
   <Story id="foundations-typography-examples--link" />
 </Canvas>
 
-<LinkedHeader>List</LinkedHeader>
+## List
 
 <Canvas>
   <Story id="foundations-typography-examples--list" />
 </Canvas>
 
-<LinkedHeader>Ordered List</LinkedHeader>
+## Ordered List
 
 <Canvas>
   <Story id="foundations-typography-examples--ordered-list" />
 </Canvas>
 
-<LinkedHeader>Unstyled List</LinkedHeader>
+## Unstyled List
 
 <Canvas>
   <Story id="foundations-typography-examples--unstyled-list" />
 </Canvas>
 
-<LinkedHeader>Headings</LinkedHeader>
+## Headings
 
 <Canvas>
   <Story id="foundations-typography-examples--headings" />
 </Canvas>
 
-<LinkedHeader>Size</LinkedHeader>
+## Size
 
 <Canvas>
   <Story id="foundations-typography-examples--size" />
 </Canvas>
 
-<LinkedHeader>Leading Trim</LinkedHeader>
+## Leading Trim
 
 By default all `mlv-text` attributes use [leading-trim](https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202) to remove excesss whitespace between lines. This provides a more precise layout.
 Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavior it may be necessary to disable this behavior. This can be done by applying `mlv-text="trim:none"`.
@@ -93,7 +92,7 @@ Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavi
   <Story id="foundations-typography-examples--leading-trim" />
 </Canvas>
 
-<LinkedHeader>Tokens</LinkedHeader>
+## Tokens
 
 <Canvas>
   <Story id="foundations-tokens-examples--text" />

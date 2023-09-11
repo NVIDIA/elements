@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Foundations/Forms/Validation" parameters={{ badges: ['stable'] }} />
+<Meta title="Foundations/Forms/Validation" parameters={{ badges: statusBadges('mlv-control') }} />
 
 # Validation
 
@@ -39,7 +39,7 @@ If you are using a framework that manages valdiation like Angular, then `novalid
 </script>
 ```
 
-<LinkedHeader>Reset</LinkedHeader>
+## Reset
 
 Individual controls can be reset by calling the `reset()` method on the control element.
 If controls are in a HTML Form then calling `reset()` on the form will reset all child controls.
@@ -48,13 +48,13 @@ If controls are in a HTML Form then calling `reset()` on the form will reset all
   <Story id="foundations-forms-examples--validation-reset" inline={false} height={400} />
 </Canvas>
 
-<LinkedHeader>Error Groups</LinkedHeader>
+## Error Groups
 
 <Canvas>
   <Story id="foundations-forms-examples--validation-error-group" />
 </Canvas>
 
-<LinkedHeader>Success Groups</LinkedHeader>
+## Success Groups
 
 <Canvas>
   <Story id="foundations-forms-examples--validation-success-group" />

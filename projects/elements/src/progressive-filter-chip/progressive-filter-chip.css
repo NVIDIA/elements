@@ -1,6 +1,7 @@
 :host {
   --gap: var(--mlv-ref-size-50);
   --border-radius: var(--mlv-ref-border-radius-sm);
+  --background: color-mix(in oklab, var(--mlv-sys-interaction-field-background) 95%, var(--mlv-sys-interaction-state-mix));
   width: fit-content;
   min-width: fit-content;
   contain: initial;
@@ -9,26 +10,25 @@
 [internal-host] {
   gap: var(--gap);
   border-radius: var(--border-radius);
-  background: var(--mlv-ref-border-color-muted);
+  background: var(--background);
   display: flex;
   overflow: hidden;
 }
 
-mlv-input,
-mlv-date,
-mlv-select,
+[mlv-control],
 ::slotted(mlv-button) {
   --font-weight: var(--mlv-ref-font-weight-medium);
   --border-radius: 0;
   --width: fit-content;
 }
 
-[internal-host] > :nth-child(2) {
-  --font-weight: var(--mlv-ref-font-weight-regular);
+::slotted([mlv-control]) {
+  --font-weight: var(--mlv-ref-font-weight-medium);
+  --border-radius: 0;
 }
 
-mlv-select {
-  --padding: 0 var(--mlv-ref-size-300);
+[internal-host] > :nth-child(2) {
+  --font-weight: var(--mlv-ref-font-weight-regular);
 }
 
 mlv-select::part(caret) {

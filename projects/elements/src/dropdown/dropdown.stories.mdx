@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Dropdown/Documentation" parameters={{ badges: ['alpha'] }} />
+<Meta title="Elements/Dropdown/Documentation" parameters={{ badges: statusBadges('mlv-dropdown') }} />
 
 <Story id="internal-integration--empty" />
 
@@ -9,7 +9,7 @@ import { LinkedHeader } from '../../docs/utils.mdx';
 
 <element-metrics tag="mlv-dropdown"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/dropdown/define.js';
@@ -25,34 +25,34 @@ import '@elements/elements/dropdown/define.js';
   <Story id="elements-dropdown-examples--default" inline={false} height={300} />
 </Canvas>
 
-<LinkedHeader>Content/Closable</LinkedHeader>
+## Content/Closable
 
 <Canvas columns={2}>
   <Story id="elements-dropdown-examples--content" inline={false} height={300} />
   <Story id="elements-dropdown-examples--closable" inline={false} height={300} />
 </Canvas>
 
-<LinkedHeader>Radio Group Pattern</LinkedHeader>
+## Radio Group Pattern
 
 <Canvas columns={2}>
   <Story id="elements-dropdown-examples--radio-group-interactive" inline={false} height={300} />
   <Story id="elements-dropdown-examples--radio-group" inline={false} height={300} />
 </Canvas>
 
-<LinkedHeader>Checkbox Group Pattern</LinkedHeader>
+## Checkbox Group Pattern
 
 <Canvas columns={2}>
   <Story id="elements-dropdown-examples--checkbox-group-interactive" inline={false} height={300} />
   <Story id="elements-dropdown-examples--checkbox-group" inline={false} height={300} />
 </Canvas>
 
-<LinkedHeader>Arrow</LinkedHeader>
+## Arrow
 
 <Canvas>
   <Story id="elements-dropdown-examples--arrow" inline={false} height={300} />
 </Canvas>
 
-<LinkedHeader>Position</LinkedHeader>
+## Position
 
 <Canvas>
   <Story id="elements-dropdown-examples--position" inline={false} height={600} />
@@ -60,6 +60,6 @@ import '@elements/elements/dropdown/define.js';
 
 <element-status tag={'mlv-dropdown'}></element-status>
 
-<LinkedHeader>mlv-dropdown</LinkedHeader>
+## mlv-dropdown
 
 <ArgsTable of="mlv-dropdown" />

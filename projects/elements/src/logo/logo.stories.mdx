@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Logo/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Logo/Documentation" parameters={{ badges: statusBadges('mlv-logo') }} />
 
 # Logo
 
 <element-metrics tag="mlv-logo"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/logo/define.js';
@@ -21,19 +21,23 @@ import '@elements/elements/logo/define.js';
   <Story id="elements-logo-examples--default" />
 </Canvas>
 
-<LinkedHeader>Size</LinkedHeader>
+## Size
+
+<element-metrics tag="mlv-logo" type="property" value="size"></element-metrics>
 
 <Canvas>
   <Story id="elements-logo-examples--size" />
 </Canvas>
 
-<LinkedHeader>Color</LinkedHeader>
+## Color
+
+<element-metrics tag="mlv-logo" type="property" value="color"></element-metrics>
 
 <Canvas>
   <Story id="elements-logo-examples--color" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-logo-examples--light-theme" />
@@ -42,5 +46,5 @@ import '@elements/elements/logo/define.js';
 
 <element-status tag={'mlv-logo'}></element-status>
 
-<LinkedHeader>mlv-logo</LinkedHeader>
+## mlv-logo
 <ArgsTable of="mlv-logo" />

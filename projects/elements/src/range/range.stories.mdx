@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Range/Documentation" parameters={{ badges: ['stable'] }} />
+<Meta title="Elements/Range/Documentation" parameters={{ badges: statusBadges('mlv-range') }} />
 
 # Range
 
 <element-metrics tag="mlv-range"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/range/define.js';
@@ -24,25 +24,25 @@ import '@elements/elements/range/define.js';
   <Story id="elements-range-examples--range" />
 </Canvas>
 
-<LinkedHeader>Datalist</LinkedHeader>
+## Datalist
 
 <Canvas>
   <Story id="elements-range-examples--datalist" />
 </Canvas>
 
-<LinkedHeader>Step</LinkedHeader>
+## Step
 
 <Canvas>
   <Story id="elements-range-examples--step" />
 </Canvas>
 
-<LinkedHeader>Vertical</LinkedHeader>
+## Vertical
 
 <Canvas>
   <Story id="elements-range-examples--vertical" />
 </Canvas>
 
-<LinkedHeader>Horizontal</LinkedHeader>
+## Horizontal
 
 <Canvas>
   <Story id="elements-range-examples--horizontal" />
@@ -50,6 +50,6 @@ import '@elements/elements/range/define.js';
 
 <element-status tag={'mlv-range'}></element-status>
 
-<LinkedHeader>mlv-range</LinkedHeader>
+## mlv-range
 
 <ArgsTable of="mlv-range" />

@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Source, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Tabs/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Tabs/Documentation" parameters={{ badges: statusBadges('mlv-tabs') }} />
 
 # Tabs
 
@@ -18,7 +18,7 @@ concerns are handled out of the box. <br />
 Try using left/right arrow keys on horizontal tabs or up/down on vertical tabs.
 
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/tabs/define.js';
@@ -38,7 +38,7 @@ import '@elements/elements/tabs/define.js';
   <Story id="elements-tabs-examples--default" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 Dark, and light themes are handled out of the box.
 
@@ -47,7 +47,7 @@ Dark, and light themes are handled out of the box.
   <Story id="elements-tabs-examples--dark-theme" />
 </Canvas>
 
-<LinkedHeader>Borderless Tabs</LinkedHeader>
+## Borderless Tabs
 
 By default Tabs will show a blue border on the selected item. You can disable the border by setting `borderless` on the parent `<mlv-tabs>`
 
@@ -55,7 +55,7 @@ By default Tabs will show a blue border on the selected item. You can disable th
   <Story id="elements-tabs-examples--borderless-tabs" />
 </Canvas>
 
-<LinkedHeader>Tabs with Dot Indicators</LinkedHeader>
+## Tabs with Dot Indicators
 
 Dots and icons can be added by simplply slotting in `<mlv-icon>` or `<mlv-dot>` into your `<mlv-tabs-item>`
 
@@ -63,7 +63,7 @@ Dots and icons can be added by simplply slotting in `<mlv-icon>` or `<mlv-dot>` 
   <Story id="elements-tabs-examples--tabs-with-dots" />
 </Canvas>
 
-<LinkedHeader>Vertical Tabs</LinkedHeader>
+## Vertical Tabs
 
 Tabs can be used as the foundation for a side menu by enabling vertical mode. Simply set `vertical` on `<mlv-tabs>`
 
@@ -71,7 +71,7 @@ Tabs can be used as the foundation for a side menu by enabling vertical mode. Si
   <Story id="elements-tabs-examples--vertical-tabs" />
 </Canvas>
 
-<LinkedHeader>Borderless Vertical Tabs with Icons</LinkedHeader>
+## Borderless Vertical Tabs with Icons
 
 This example shows the combination of vertical tabs, set to borderless, with icons slotted. <br />
 An Icon only collapsed version of vertical tabs could be built off this system.
@@ -80,7 +80,7 @@ An Icon only collapsed version of vertical tabs could be built off this system.
   <Story id="elements-tabs-examples--borderless-vertical-tabs" />
 </Canvas>
 
-<LinkedHeader>Stateless Tabs</LinkedHeader>
+## Stateless Tabs
 
 By default Tabs will be stateless. This means selection behavior will have to be handled by the host application. <br />
 We have provided a way to opt in to stateful selection behavior where click events and keyboard enter will trigger the selection state.
@@ -100,8 +100,8 @@ shows the default stateless behavior, where the host app will have to set/remove
 
 <element-status tag={'mlv-tabs'}></element-status>
 
-<LinkedHeader>mlv-tabs</LinkedHeader>
+## mlv-tabs
 <ArgsTable of="mlv-tabs" />
 
-<LinkedHeader>mlv-tabs-item</LinkedHeader>
+## mlv-tabs-item
 <ArgsTable of="mlv-tabs-item" />

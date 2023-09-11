@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Tag/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Tag/Documentation" parameters={{ badges: statusBadges('mlv-tag') }} />
 
 # Tag
 
 <element-metrics tag="mlv-tag"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/tag/define.js';
@@ -23,11 +23,15 @@ import '@elements/elements/tag/define.js';
 
 ## Closable
 
+<element-metrics tag="mlv-tag" type="property" value="closable"></element-metrics>
+
 <Canvas>
   <Story id="elements-tag-examples--closable" />
 </Canvas>
 
 ## Color
+
+<element-metrics tag="mlv-tag" type="property" value="color"></element-metrics>
 
 <Canvas>
   <Story id="elements-tag-examples--color" />
@@ -35,11 +39,13 @@ import '@elements/elements/tag/define.js';
 
 ## Readonly
 
+<element-metrics tag="mlv-tag" type="property" value="readonly"></element-metrics>
+
 <Canvas>
   <Story id="elements-tag-examples--readonly" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-tag-examples--light-theme" />
@@ -48,5 +54,5 @@ import '@elements/elements/tag/define.js';
 
 <element-status tag={'mlv-tag'}></element-status>
 
-<LinkedHeader>mlv-tag</LinkedHeader>
+## mlv-tag
 <ArgsTable of="mlv-tag" />

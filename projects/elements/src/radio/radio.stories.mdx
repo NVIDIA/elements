@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Radio/Documentation" parameters={{ badges: ['stable'] }} />
+<Meta title="Elements/Radio/Documentation" parameters={{ badges: statusBadges('mlv-radio') }} />
 
 # Radio
 
 <element-metrics tag="mlv-radio"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/radio/define.js';
@@ -38,25 +38,25 @@ import '@elements/elements/radio/define.js';
   <Story id="elements-radio-examples--radio" />
 </Canvas>
 
-<LinkedHeader>Vertical Group</LinkedHeader>
+## Vertical Group
 
 <Canvas>
   <Story id="elements-radio-examples--vertical-group" />
 </Canvas>
 
-<LinkedHeader>Vertical Inline Group</LinkedHeader>
+## Vertical Inline Group
 
 <Canvas>
   <Story id="elements-radio-examples--vertical-inline-group" />
 </Canvas>
 
-<LinkedHeader>Horizontal Group</LinkedHeader>
+## Horizontal Group
 
 <Canvas>
   <Story id="elements-radio-examples--horizontal-group" />
 </Canvas>
 
-<LinkedHeader>Horizontal Inline Group</LinkedHeader>
+## Horizontal Inline Group
 
 <Canvas>
   <Story id="elements-radio-examples--horizontal-inline-group" />
@@ -64,10 +64,10 @@ import '@elements/elements/radio/define.js';
 
 <element-status tag={'mlv-radio'}></element-status>
 
-<LinkedHeader>mlv-radio</LinkedHeader>
+## mlv-radio
 
 <ArgsTable of="mlv-radio" />
 
-<LinkedHeader>mlv-radio-group</LinkedHeader>
+## mlv-radio-group
 
 <ArgsTable of="mlv-radio-group" />

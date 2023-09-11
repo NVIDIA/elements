@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Divider/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Divider/Documentation" parameters={{ badges: statusBadges('mlv-divider') }} />
 
 # Divider
 
 <element-metrics tag="mlv-divider"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/divider/define.js';
@@ -21,31 +21,31 @@ import '@elements/elements/divider/define.js';
   <Story id="elements-divider-examples--default" />
 </Canvas>
 
-<LinkedHeader>Emphasis</LinkedHeader>
+## Emphasis
 
 <Canvas>
   <Story id="elements-divider-examples--emphasis" />
 </Canvas>
 
-<LinkedHeader>Muted</LinkedHeader>
+## Muted
 
 <Canvas>
   <Story id="elements-divider-examples--muted" />
 </Canvas>
 
-<LinkedHeader>Vertical</LinkedHeader>
+## Vertical
 
 <Canvas>
   <Story id="elements-divider-examples--vertical" />
 </Canvas>
 
-<LinkedHeader>Rounded</LinkedHeader>
+## Rounded
 
 <Canvas>
   <Story id="elements-divider-examples--rounded" />
 </Canvas>
 
-<LinkedHeader>Themes</LinkedHeader>
+## Themes
 
 <Canvas columns={2}>
   <Story id="elements-divider-examples--light-theme" />
@@ -54,6 +54,6 @@ import '@elements/elements/divider/define.js';
 
 <element-status tag={'mlv-divider'}></element-status>
 
-<LinkedHeader>mlv-divider</LinkedHeader>
+## mlv-divider
 
 <ArgsTable of="mlv-divider" />

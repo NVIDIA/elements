@@ -17,8 +17,10 @@ import styles from './bulk-actions.css?inline';
  * @stable false
  */
 export class BulkActions extends LitElement {
+  /** Determines if a close button should render */
   @property({ type: Boolean }) closable: boolean;
 
+  /** Visual treatment to represent support status */
   @property({ type: String, reflect: true }) status: 'accent';
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
