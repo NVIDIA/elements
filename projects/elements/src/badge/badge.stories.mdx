@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Badge/Documentation" parameters={{ badges: ['beta'] }} />
+<Meta title="Elements/Badge/Documentation" parameters={{ badges: statusBadges('nve-tooltip') }} />
 
 # Badge
 
 <element-metrics tag="nve-badge"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/badge/define.js';
@@ -21,33 +21,43 @@ import '@elements/elements/badge/define.js';
   <Story id="elements-badge-examples--default" />
 </Canvas>
 
-<LinkedHeader>Status</LinkedHeader>
+## Status
+
+<element-metrics tag="nve-badge" type="property" value="status"></element-metrics>
 
 <Canvas>
   <Story id="elements-badge-examples--status" />
 </Canvas>
 
-<LinkedHeader>Trend</LinkedHeader>
+## Trend
 
 <Canvas>
   <Story id="elements-badge-examples--trend" />
 </Canvas>
 
-<LinkedHeader>Status Themes</LinkedHeader>
+## Status Themes
 
 <Canvas columns={2}>
   <Story id="elements-badge-examples--status-light-theme" />
   <Story id="elements-badge-examples--status-dark-theme" />
 </Canvas>
 
-<LinkedHeader>Trend Themes</LinkedHeader>
+## Trend Themes
 
 <Canvas columns={2}>
   <Story id="elements-badge-examples--trend-light-theme" />
   <Story id="elements-badge-examples--trend-dark-theme" />
 </Canvas>
 
+## Color
+
+<element-metrics tag="nve-badge" type="property" value="color"></element-metrics>
+
+<Canvas>
+  <Story id="elements-badge-examples--color" />
+</Canvas>
+
 <element-status tag="nve-badge"></element-status>
 
-<LinkedHeader>nve-badge</LinkedHeader>
+## nve-badge
 <ArgsTable of="nve-badge" />

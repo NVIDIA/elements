@@ -125,3 +125,32 @@ export const TrendDarkTheme = {
 </div>
   `
 }
+
+export const Color = {
+  render: () => html`
+<div nve-layout="row gap:xs align:wrap">
+  <nve-badge color="red-cardinal">red-cardinal</nve-badge>
+  <nve-badge color="gray-slate">gray-slate</nve-badge>
+  <nve-badge color="gray-denim">gray-denim</nve-badge>
+  <nve-badge color="blue-indigo">blue-indigo</nve-badge>
+  <nve-badge color="blue-cobalt">blue-cobalt</nve-badge>
+  <nve-badge color="blue-sky">blue-sky</nve-badge>
+  <nve-badge color="teal-cyan">teal-cyan</nve-badge>
+  <nve-badge color="green-mint">green-mint</nve-badge>
+  <nve-badge color="teal-seafoam">teal-seafoam</nve-badge>
+  <nve-badge color="green-grass">green-grass</nve-badge>
+  <nve-badge color="yellow-amber">yellow-amber</nve-badge>
+  <nve-badge color="orange-pumpkin">orange-pumpkin</nve-badge>
+  <nve-badge color="red-tomato">red-tomato</nve-badge>
+  <nve-badge color="pink-magenta">pink-magenta</nve-badge>
+  <nve-badge color="purple-plum">purple-plum</nve-badge>
+  <nve-badge color="purple-violet">purple-violet</nve-badge>
+  <nve-badge color="purple-lavender">purple-lavender</nve-badge>
+  <nve-badge color="pink-rose">pink-rose</nve-badge>
+  <nve-badge color="green-jade">green-jade</nve-badge>
+  <nve-badge color="lime-pear">lime-pear</nve-badge>
+  <nve-badge color="yellow-nova">yellow-nova</nve-badge>
+  <nve-badge color="brand-green">brand-green</nve-badge>
+</div>
+  `
+};

@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Checkbox/Documentation" parameters={{ badges: ['stable'] }} />
+<Meta title="Elements/Checkbox/Documentation" parameters={{ badges: statusBadges('nve-checkbox') }} />
 
 # Checkbox
 
 <element-metrics tag="nve-checkbox"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/checkbox/define.js';
@@ -24,25 +24,25 @@ import '@elements/elements/checkbox/define.js';
   <Story id="elements-checkbox-examples--checkbox" />
 </Canvas>
 
-<LinkedHeader>Vertical Group</LinkedHeader>
+## Vertical Group
 
 <Canvas>
   <Story id="elements-checkbox-examples--vertical-group" />
 </Canvas>
 
-<LinkedHeader>Vertical Inline Group</LinkedHeader>
+## Vertical Inline Group
 
 <Canvas>
   <Story id="elements-checkbox-examples--vertical-inline-group" />
 </Canvas>
 
-<LinkedHeader>Horizontal Group</LinkedHeader>
+## Horizontal Group
 
 <Canvas>
   <Story id="elements-checkbox-examples--horizontal-group" />
 </Canvas>
 
-<LinkedHeader>Horizontal Inline Group</LinkedHeader>
+## Horizontal Inline Group
 
 <Canvas>
   <Story id="elements-checkbox-examples--horizontal-inline-group" />
@@ -50,10 +50,10 @@ import '@elements/elements/checkbox/define.js';
 
 <element-status tag={'nve-checkbox'}></element-status>
 
-<LinkedHeader>nve-checkbox</LinkedHeader>
+## nve-checkbox
 
 <ArgsTable of="nve-checkbox" />
 
-<LinkedHeader>nve-checkbox-group</LinkedHeader>
+## nve-checkbox-group
 
 <ArgsTable of="nve-checkbox-group" />

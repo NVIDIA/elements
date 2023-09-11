@@ -1,13 +1,13 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../docs/utils.mdx';
+import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Search/Documentation" parameters={{ badges: ['stable'] }} />
+<Meta title="Elements/Search/Documentation" parameters={{ badges: statusBadges('nve-search') }} />
 
 # Search
 
 <element-metrics tag="nve-search"></element-metrics>
 
-<LinkedHeader>Installation</LinkedHeader>
+## Installation
 
 ```typescript
 import '@elements/elements/search/define.js';
@@ -24,25 +24,25 @@ import '@elements/elements/search/define.js';
   <Story id="elements-search-examples--search" />
 </Canvas>
 
-<LinkedHeader>Inline</LinkedHeader>
+## Inline
 
 <Canvas>
   <Story id="elements-search-examples--inline" />
 </Canvas>
 
-<LinkedHeader>Datalist</LinkedHeader>
+## Datalist
 
 <Canvas>
   <Story id="elements-search-examples--datalist" />
 </Canvas>
 
-<LinkedHeader>Vertical</LinkedHeader>
+## Vertical
 
 <Canvas>
   <Story id="elements-search-examples--vertical" />
 </Canvas>
 
-<LinkedHeader>Horizontal</LinkedHeader>
+## Horizontal
 
 <Canvas>
   <Story id="elements-search-examples--horizontal" />
@@ -50,6 +50,6 @@ import '@elements/elements/search/define.js';
 
 <element-status tag={'nve-search'}></element-status>
 
-<LinkedHeader>nve-search</LinkedHeader>
+## nve-search
 
 <ArgsTable of="nve-search" />

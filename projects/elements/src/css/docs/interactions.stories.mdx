@@ -1,5 +1,4 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
-import { LinkedHeader } from '../../../docs/utils.mdx';
 
 <Meta title="Foundations/Tokens/Interactions" parameters={{ badges: ['beta'] }} />
 
@@ -25,7 +24,7 @@ All UI interactions contain a default set of six interactive states.
 Below are HTML & CSS demonstrating how to consume the interaction design tokens.
 Demos will be replaced with custom elements over time.
 
-<LinkedHeader>Interactions</LinkedHeader>
+## Interactions
 
 The `--nve-sys-interaction-state-ratio-*` provides a step ratio value for each interaction state. This combined with
 the CSS [color-mix](https://developer.chrome.com/blog/css-color-mix/) property allows colors to be dynamically computed from the base color.
@@ -56,30 +55,30 @@ button[selected] {
 }
 ```
 
-<LinkedHeader>Menu</LinkedHeader>
+## Menu
 
 <Canvas>
   <Story id="foundations-tokens-examples--menu" />
 </Canvas>
 
-<LinkedHeader>Container Menu</LinkedHeader>
+## Container Menu
 
 <Canvas>
   <Story id="foundations-tokens-examples--container-menu" />
 </Canvas>
 
-<LinkedHeader>Popover Menu</LinkedHeader>
+## Popover Menu
 
 <Canvas>
   <Story id="foundations-tokens-examples--popover-menu" />
 </Canvas>
 
-<LinkedHeader>Navigation Drawer</LinkedHeader>
+## Navigation Drawer
 
 <Canvas>
   <Story id="foundations-tokens-examples--navigation-drawer" />
 </Canvas>
 
-<LinkedHeader>Interaction Tokens</LinkedHeader>
+## Interaction Tokens
 
 <Story id="foundations-tokens-examples--interaction" />
