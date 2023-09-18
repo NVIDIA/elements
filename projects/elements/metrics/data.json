@@ -1,5 +1,5 @@
 {
-  "created": "2023-09-12T15:21:58.993Z",
+  "created": "2023-09-18T18:09:23.805Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -62,8 +62,8 @@
           "name": "content"
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 3,
+      "projectTotal": 1,
+      "instanceTotal": 1,
       "coverageTotal": 83.54,
       "behavior": "container",
       "status": "beta"
@@ -204,8 +204,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 19,
+      "projectTotal": 6,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -226,8 +226,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-banner-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-14&t=CAAM7yEBvG18tRRa-0",
       "properties": [],
-      "projectTotal": 3,
-      "instanceTotal": 10,
+      "projectTotal": 2,
+      "instanceTotal": 2,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -248,8 +248,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-group-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2519-54572&t=CAAM7yEBvG18tRRa-0",
       "properties": [],
-      "projectTotal": 4,
-      "instanceTotal": 7,
+      "projectTotal": 3,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -287,8 +287,8 @@
           "name": "nav-actions"
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 14,
+      "projectTotal": 2,
+      "instanceTotal": 2,
       "coverageTotal": 100,
       "behavior": "navigation",
       "status": "beta"
@@ -346,8 +346,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-breadcrumb-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1",
       "properties": [],
-      "projectTotal": 4,
-      "instanceTotal": 17,
+      "projectTotal": 3,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -383,8 +383,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 2,
+      "projectTotal": 0,
+      "instanceTotal": 0,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -452,8 +452,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 16,
-      "instanceTotal": 92,
+      "projectTotal": 15,
+      "instanceTotal": 71,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -497,8 +497,8 @@
           "name": "footer"
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 20,
+      "projectTotal": 6,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -525,7 +525,7 @@
         }
       ],
       "projectTotal": 6,
-      "instanceTotal": 14,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -552,7 +552,7 @@
         }
       ],
       "projectTotal": 2,
-      "instanceTotal": 11,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -625,8 +625,8 @@
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 15,
+      "projectTotal": 6,
+      "instanceTotal": 13,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -726,8 +726,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 15,
+      "projectTotal": 6,
+      "instanceTotal": 10,
       "coverageTotal": 98.78,
       "behavior": "form",
       "status": "stable"
@@ -796,7 +796,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 10,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -926,8 +926,8 @@
           "name": "default"
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 13,
+      "projectTotal": 6,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -1002,8 +1002,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-divider-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
       "properties": [],
-      "projectTotal": 3,
-      "instanceTotal": 12,
+      "projectTotal": 2,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -1100,8 +1100,8 @@
           "name": "default"
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 2,
+      "projectTotal": 0,
+      "instanceTotal": 0,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "pre-release"
@@ -1211,8 +1211,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 8,
-      "instanceTotal": 29,
+      "projectTotal": 7,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -1287,8 +1287,8 @@
           "name": "footer"
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 11,
+      "projectTotal": 4,
+      "instanceTotal": 9,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1314,8 +1314,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 10,
+      "projectTotal": 4,
+      "instanceTotal": 8,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1350,8 +1350,8 @@
           "name": "actions"
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 9,
+      "projectTotal": 4,
+      "instanceTotal": 7,
       "coverageTotal": 98.46,
       "behavior": "list",
       "status": "beta"
@@ -1377,8 +1377,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 5,
+      "projectTotal": 3,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1404,8 +1404,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 9,
+      "projectTotal": 4,
+      "instanceTotal": 7,
       "coverageTotal": 96.96,
       "behavior": "list",
       "status": "beta"
@@ -1431,8 +1431,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 5,
+      "projectTotal": 2,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1458,8 +1458,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 11,
+      "projectTotal": 4,
+      "instanceTotal": 9,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1497,8 +1497,8 @@
           "description": "The name of the icon SVG sprite"
         }
       ],
-      "projectTotal": 17,
-      "instanceTotal": 80,
+      "projectTotal": 16,
+      "instanceTotal": 63,
       "coverageTotal": 93.47,
       "behavior": "content",
       "status": "stable"
@@ -1574,8 +1574,8 @@
           "name": "icon"
         }
       ],
-      "projectTotal": 14,
-      "instanceTotal": 54,
+      "projectTotal": 13,
+      "instanceTotal": 37,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -1614,7 +1614,7 @@
         }
       ],
       "projectTotal": 10,
-      "instanceTotal": 25,
+      "instanceTotal": 22,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -1712,8 +1712,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 20,
+      "projectTotal": 3,
+      "instanceTotal": 8,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "stable"
@@ -1740,8 +1740,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 19,
+      "projectTotal": 2,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "navigation",
       "status": "beta"
@@ -1800,8 +1800,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 18,
+      "projectTotal": 2,
+      "instanceTotal": 6,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -1897,7 +1897,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 24,
+      "instanceTotal": 21,
       "coverageTotal": 97.36,
       "behavior": "popover",
       "status": "stable"
@@ -1946,8 +1946,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 4,
+      "projectTotal": 2,
+      "instanceTotal": 2,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -2003,8 +2003,8 @@
           "name": "footer"
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 3,
+      "projectTotal": 1,
+      "instanceTotal": 2,
       "coverageTotal": 95.74,
       "behavior": "container",
       "status": "beta"
@@ -2031,7 +2031,7 @@
         }
       ],
       "projectTotal": 1,
-      "instanceTotal": 1,
+      "instanceTotal": 2,
       "coverageTotal": 95.74,
       "behavior": "container",
       "status": "beta"
@@ -2093,7 +2093,7 @@
         }
       ],
       "projectTotal": 1,
-      "instanceTotal": 1,
+      "instanceTotal": 2,
       "coverageTotal": 95.74,
       "behavior": "container",
       "status": "beta"
@@ -2139,7 +2139,7 @@
       "apiReview": true,
       "performance": true,
       "stable": true,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
       "themes": true,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role",
@@ -2148,12 +2148,72 @@
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-progress-bar-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29%3A20&mode=dev",
-      "properties": [],
+      "properties": [
+        {
+          "name": "value",
+          "description": "current value of the progress indicator"
+        },
+        {
+          "name": "min",
+          "description": "minimum value of the progress indicator"
+        },
+        {
+          "name": "max",
+          "description": "max value of the progress indicator"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 2,
-      "coverageTotal": 100,
       "behavior": "content",
-      "status": "pre-release"
+      "status": "stable"
+    },
+    {
+      "name": "nve-progress-ring",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": true,
+      "vqa": true,
+      "responsive": true,
+      "themes": true,
+      "aria": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role",
+      "package": true,
+      "description": "- The `nve-progress-ring` component is used to indicate the status of a pending task",
+      "since": "- 0.17.0",
+      "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-progress-ring-documentation--docs",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29%3A20&mode=dev",
+      "properties": [
+        {
+          "name": "value",
+          "description": "current value of the progress indicator"
+        },
+        {
+          "name": "min",
+          "description": "minimum value of the progress indicator"
+        },
+        {
+          "name": "max",
+          "description": "max value of the progress indicator"
+        },
+        {
+          "name": "status",
+          "description": "visual treatment to represent a ongoing task status"
+        },
+        {
+          "name": "size",
+          "description": "T-shirt size of the progress indicator"
+        }
+      ],
+      "slots": [
+        {
+          "description": "status-icon",
+          "name": ""
+        }
+      ],
+      "projectTotal": 0,
+      "instanceTotal": 0,
+      "behavior": "content",
+      "status": "stable"
     },
     {
       "name": "nve-progressive-filter-chip",
@@ -2217,8 +2277,8 @@
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 7,
+      "projectTotal": 4,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -2381,7 +2441,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 11,
+      "instanceTotal": 8,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -2441,8 +2501,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 5,
+      "projectTotal": 2,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -2682,7 +2742,7 @@
         }
       ],
       "projectTotal": 6,
-      "instanceTotal": 10,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -2831,7 +2891,7 @@
         }
       ],
       "projectTotal": 8,
-      "instanceTotal": 17,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -3537,15 +3597,15 @@
         },
         {
           "name": "nve-panel-header",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-panel-content",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-panel",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-tabs-item",
@@ -3676,7 +3736,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 110
+      "instanceTotal": 113
     },
     {
       "name": "@elements/next-common",
@@ -3684,23 +3744,23 @@
       "elementsVersion": "0.11.1",
       "elements": [
         {
-          "name": "nve-card",
-          "instanceTotal": 9
-        },
-        {
-          "name": "nve-card-footer",
-          "instanceTotal": 9
-        },
-        {
           "name": "nve-button",
-          "instanceTotal": 5
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-card",
+          "instanceTotal": 1
         },
         {
           "name": "nve-card-content",
-          "instanceTotal": 5
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-card-footer",
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 28
+      "instanceTotal": 4
     },
     {
       "name": "ide",
@@ -3748,50 +3808,50 @@
       "elements": [
         {
           "name": "nve-button",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-dropdown",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-control-message",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-control",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-icon-button",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-input",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-notification",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-select",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-textarea",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "nve-tooltip",
-          "instanceTotal": 4
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 44
+      "instanceTotal": 11
     },
     {
       "name": "@elements/ide",
@@ -3940,14 +4000,14 @@
       "elements": [
         {
           "name": "nve-alert-banner",
-          "instanceTotal": 7
+          "instanceTotal": 1
         },
         {
           "name": "nve-alert",
-          "instanceTotal": 7
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 14
+      "instanceTotal": 2
     },
     {
       "name": "@elements/xp-app-shell",
@@ -3955,51 +4015,51 @@
       "elementsVersion": "0.15.0",
       "elements": [
         {
-          "name": "nve-app-header",
-          "instanceTotal": 11
-        },
-        {
-          "name": "nve-breadcrumb",
-          "instanceTotal": 13
-        },
-        {
-          "name": "nve-button",
-          "instanceTotal": 15
-        },
-        {
           "name": "nve-dropdown",
-          "instanceTotal": 15
-        },
-        {
-          "name": "nve-icon-button",
-          "instanceTotal": 12
+          "instanceTotal": 5
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 15
-        },
-        {
-          "name": "nve-logo",
-          "instanceTotal": 14
+          "instanceTotal": 5
         },
         {
           "name": "nve-menu-item",
-          "instanceTotal": 15
+          "instanceTotal": 5
         },
         {
           "name": "nve-menu",
-          "instanceTotal": 16
-        },
-        {
-          "name": "nve-divider",
-          "instanceTotal": 7
+          "instanceTotal": 6
         },
         {
           "name": "nve-badge",
           "instanceTotal": 1
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-divider",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-breadcrumb",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-app-header",
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 134
+      "instanceTotal": 39
     },
     {
       "name": "@elements/xp-hub",
@@ -4039,133 +4099,8 @@
       "name": "@elements/MXP_PATH",
       "path": "src/ui/platform/xp/templates/lit-app",
       "elementsVersion": "0.15.0",
-      "elements": [
-        {
-          "name": "nve-alert-banner",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-alert-group",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-alert",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-button",
-          "instanceTotal": 4
-        },
-        {
-          "name": "nve-icon-button",
-          "instanceTotal": 4
-        },
-        {
-          "name": "nve-icon",
-          "instanceTotal": 4
-        },
-        {
-          "name": "nve-accordion",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-app-header",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-breadcrumb",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-bulk-actions",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-card",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-checkbox",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-dialog",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-divider",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-drawer",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-dropdown",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-control",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-grid-cell",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-grid-column",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-grid-footer",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-grid",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-grid-header",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-grid-placeholder",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-grid-row",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-logo",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-menu-item",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-menu",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-pagination",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-panel",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-radio",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-sort-button",
-          "instanceTotal": 2
-        }
-      ],
-      "instanceTotal": 68
+      "elements": [],
+      "instanceTotal": 0
     },
     {
       "name": "tracking",
@@ -5333,60 +5268,6 @@
         }
       },
       {
-        "file": "elements/src/progress-bar/progress-bar.ts",
-        "lines": {
-          "total": 5,
-          "covered": 5,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 2,
-          "covered": 2,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 10,
-          "covered": 10,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 2,
-          "covered": 1,
-          "skipped": 0,
-          "pct": 50
-        }
-      },
-      {
-        "file": "elements/src/progress-bar/define.ts",
-        "lines": {
-          "total": 1,
-          "covered": 1,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 0,
-          "covered": 0,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 1,
-          "covered": 1,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 0,
-          "covered": 0,
-          "skipped": 0,
-          "pct": 100
-        }
-      },
-      {
         "file": "elements/src/password/password.ts",
         "lines": {
           "total": 8,
@@ -5936,15 +5817,15 @@
         },
         "functions": {
           "total": 9,
-          "covered": 7,
+          "covered": 8,
           "skipped": 0,
-          "pct": 77.77
+          "pct": 88.88
         },
         "statements": {
           "total": 19,
-          "covered": 17,
+          "covered": 18,
           "skipped": 0,
-          "pct": 89.47
+          "pct": 94.73
         },
         "branches": {
           "total": 5,
@@ -6326,9 +6207,9 @@
         },
         "branches": {
           "total": 6,
-          "covered": 6,
+          "covered": 5,
           "skipped": 0,
-          "pct": 100
+          "pct": 83.33
         }
       },
       {
@@ -8171,28 +8052,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1740,
-        "covered": 1689,
+        "total": 1734,
+        "covered": 1683,
         "skipped": 0,
-        "pct": 97.06
+        "pct": 97.05
       },
       "statements": {
-        "total": 2314,
-        "covered": 2245,
+        "total": 2303,
+        "covered": 2235,
         "skipped": 0,
-        "pct": 97.01
+        "pct": 97.04
       },
       "functions": {
-        "total": 680,
-        "covered": 642,
+        "total": 678,
+        "covered": 641,
         "skipped": 0,
-        "pct": 94.41
+        "pct": 94.54
       },
       "branches": {
-        "total": 856,
-        "covered": 775,
+        "total": 854,
+        "covered": 773,
         "skipped": 0,
-        "pct": 90.53
+        "pct": 90.51
       },
       "branchesTrue": {
         "total": 0,

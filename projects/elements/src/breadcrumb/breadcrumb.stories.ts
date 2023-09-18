@@ -32,7 +32,7 @@ export const WithIconButton = {
   render: () => html`
     <div style="display: flex; align-items: center; justify-content: center; height: 37px">
       <nve-breadcrumb>
-        <nve-icon-button icon-name="home"><a href="javascript: void(0)" aria-label="link to first page"></a></nve-icon-button>
+        <nve-icon-button icon-name="home" size="sm"><a href="javascript: void(0)" aria-label="link to first page"></a></nve-icon-button>
         <nve-button><a href="javascript: void(0)">Item 1</a></nve-button>
         <nve-button><a href="javascript: void(0)">Item 2</a></nve-button>
         <span>You Are Here</span>
@@ -79,7 +79,7 @@ export const LightTheme = {
   render: () => html`
     <nve-card nve-theme="light" style="--border-radius: 4px">
       <nve-breadcrumb>
-        <nve-icon-button icon-name="home"><a href="javascript: void(0)" aria-label="link to first page"></a></nve-icon-button>
+        <nve-icon-button icon-name="home" size="sm"><a href="javascript: void(0)" aria-label="link to first page"></a></nve-icon-button>
         <nve-button><a href="javascript: void(0)">Item 1</a></nve-button>
         <nve-button><a href="javascript: void(0)">Item 2</a></nve-button>
         <span>You Are Here</span>
@@ -92,7 +92,7 @@ export const DarkTheme = {
   render: () => html`
     <nve-card nve-theme="dark" style="--border-radius: 4px">
       <nve-breadcrumb>
-        <nve-icon-button icon-name="home"><a href="javascript: void(0)" aria-label="link to first page"></a></nve-icon-button>
+        <nve-icon-button icon-name="home" size="sm"><a href="javascript: void(0)" aria-label="link to first page"></a></nve-icon-button>
         <nve-button><a href="javascript: void(0)">Item 1</a></nve-button>
         <nve-button><a href="javascript: void(0)">Item 2</a></nve-button>
         <span>You Are Here</span>
