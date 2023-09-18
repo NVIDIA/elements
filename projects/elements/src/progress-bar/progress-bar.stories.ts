@@ -9,6 +9,8 @@ export default {
 export const Default = {
   render: () => html`
     <div mlv-layout="column gap:md pad:lg">
+      <mlv-progress-bar status="danger"></mlv-progress-bar>
+
       <mlv-progress-bar status="accent" value="25"></mlv-progress-bar>
 
       <mlv-progress-bar status="success" value="50"></mlv-progress-bar>

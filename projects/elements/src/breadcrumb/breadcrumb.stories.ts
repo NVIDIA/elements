@@ -32,7 +32,7 @@ export const WithIconButton = {
   render: () => html`
     <div style="display: flex; align-items: center; justify-content: center; height: 37px">
       <mlv-breadcrumb>
-        <mlv-icon-button icon-name="home"><a href="javascript: void(0)" aria-label="link to first page"></a></mlv-icon-button>
+        <mlv-icon-button icon-name="home" size="sm"><a href="javascript: void(0)" aria-label="link to first page"></a></mlv-icon-button>
         <mlv-button><a href="javascript: void(0)">Item 1</a></mlv-button>
         <mlv-button><a href="javascript: void(0)">Item 2</a></mlv-button>
         <span>You Are Here</span>
@@ -79,7 +79,7 @@ export const LightTheme = {
   render: () => html`
     <mlv-card mlv-theme="light" style="--border-radius: 4px">
       <mlv-breadcrumb>
-        <mlv-icon-button icon-name="home"><a href="javascript: void(0)" aria-label="link to first page"></a></mlv-icon-button>
+        <mlv-icon-button icon-name="home" size="sm"><a href="javascript: void(0)" aria-label="link to first page"></a></mlv-icon-button>
         <mlv-button><a href="javascript: void(0)">Item 1</a></mlv-button>
         <mlv-button><a href="javascript: void(0)">Item 2</a></mlv-button>
         <span>You Are Here</span>
@@ -92,7 +92,7 @@ export const DarkTheme = {
   render: () => html`
     <mlv-card mlv-theme="dark" style="--border-radius: 4px">
       <mlv-breadcrumb>
-        <mlv-icon-button icon-name="home"><a href="javascript: void(0)" aria-label="link to first page"></a></mlv-icon-button>
+        <mlv-icon-button icon-name="home" size="sm"><a href="javascript: void(0)" aria-label="link to first page"></a></mlv-icon-button>
         <mlv-button><a href="javascript: void(0)">Item 1</a></mlv-button>
         <mlv-button><a href="javascript: void(0)">Item 2</a></mlv-button>
         <span>You Are Here</span>

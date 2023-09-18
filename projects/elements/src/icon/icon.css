@@ -24,6 +24,11 @@ svg {
   outline: 1px dashed var(--color);
 }
 
+:host([size='xs']) {
+  --width: var(--mlv-ref-size-200);
+  --height: var(--mlv-ref-size-200);
+}
+
 :host([size='sm']) {
   --width: var(--mlv-ref-size-300);
   --height: var(--mlv-ref-size-300);

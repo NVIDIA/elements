@@ -70,5 +70,5 @@
 }
 
 ::slotted(mlv-icon) {
-  --color: inherit;
+  --color: var(--mlv-sys-text-muted-color);
 }

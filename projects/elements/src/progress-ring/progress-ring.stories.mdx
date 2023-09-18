@@ -1,0 +1,58 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { statusBadges } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Progress Ring/Documentation" parameters={{ badges: statusBadges('mlv-progress-ring') }} />
+
+# Progress Ring
+
+<element-metrics tag="mlv-progress-ring"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/progress-ring/define.js';
+```
+
+```html
+<div mlv-layout="row gap:sm pad:md">
+  <mlv-progress-ring></mlv-progress-ring>
+</div>
+```
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--default" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--two" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--three" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--four" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--five" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--six" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--seven" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--eight" />
+</Canvas>
+
+<element-status tag={'mlv-progress-ring'}></element-status>
+
+## mlv-progress-ring
+
+<ArgsTable of="mlv-progress-ring" />

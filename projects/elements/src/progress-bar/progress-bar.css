@@ -45,8 +45,12 @@ progress[value].full::-webkit-progress-value {
   border-bottom-right-radius: var(--mlv-ref-border-radius-full);
 }
 
+progress[value].minWidth::-webkit-progress-value {
+  min-width: 5px;
+}
+
 progress[value]::-moz-progress-bar {
-  border-radius: 100px;
+  border-radius: var(--mlv-ref-border-radius-full);
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   background-color: var(--accent-color);
