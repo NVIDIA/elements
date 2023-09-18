@@ -9,6 +9,8 @@ export default {
 export const Default = {
   render: () => html`
     <div nve-layout="column gap:md pad:lg">
+      <nve-progress-bar status="danger"></nve-progress-bar>
+
       <nve-progress-bar status="accent" value="25"></nve-progress-bar>
 
       <nve-progress-bar status="success" value="50"></nve-progress-bar>

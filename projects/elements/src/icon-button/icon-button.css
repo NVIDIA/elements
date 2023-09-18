@@ -23,7 +23,7 @@
 
 :host([interaction*='ghost']), /** @deprecated ghost */
 :host([interaction*='flat']) {
-  --color: var(--nve-sys-text-color);
+  --color: var(--nve-sys-text-muted-color);
   --padding: 0;
 }
 

@@ -233,6 +233,7 @@ export const parameters = {
           'Panel',
           'Progressive Filter Chip',
           'Progress Bar',
+          'Progress Ring',
           'Password',
           'Radio',
           'Range',
