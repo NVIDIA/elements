@@ -6,6 +6,7 @@
   --border-radius: var(--nve-ref-border-radius-md);
   --color: var(--nve-sys-layer-popover-color);
   --font-size: var(--nve-ref-font-size-200);
+  --font-weight: var(--nve-ref-font-weight-medium);
   --box-shadow: var(--nve-ref-shadow-100);
   --gap: var(--nve-ref-size-200);
   --_gap: var(--gap);
@@ -14,6 +15,7 @@
 dialog {
   background: var(--background);
   font-size: var(--font-size);
+  font-weight: var(--font-weight);
   gap: var(--gap);
   color: var(--color);
   padding: var(--padding);

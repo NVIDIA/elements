@@ -1,0 +1,142 @@
+import { html } from 'lit';
+import '@elements/elements/progress-ring/define.js';
+
+export default {
+  title: 'Elements/Progress Ring/Examples',
+  component: 'nve-progress-ring',
+};
+
+export const Default = {
+  render: () => html`
+    <div nve-layout="row gap:sm pad:md">
+      <nve-progress-ring status="accent"></nve-progress-ring>
+  
+      <nve-progress-ring status="accent" value="66"></nve-progress-ring>
+    </div>
+`};
+
+export const Two = {
+  render: () => html`
+    <div nve-layout="row gap:sm pad:md">
+      <nve-progress-ring status="accent" value="0"></nve-progress-ring>
+
+      <nve-progress-ring status="accent" value="33"></nve-progress-ring>
+
+      <nve-progress-ring status="accent" value="66"></nve-progress-ring>
+
+      <nve-progress-ring status="accent" value="100"></nve-progress-ring>
+    </div>
+`};
+    
+export const Three = {
+  render: () => html`
+    <div nve-layout="row gap:sm pad:md">
+      <nve-progress-ring status="warning" value="75"></nve-progress-ring>
+
+      <nve-progress-ring status="danger" value="75"></nve-progress-ring>
+
+      <nve-progress-ring status="warning"></nve-progress-ring>
+
+      <nve-progress-ring status="danger"></nve-progress-ring>
+    </div>
+`};
+    
+export const Four = {
+  render: () => html`
+    <div nve-layout="row gap:sm pad:md">
+      <nve-progress-ring status="success" value="0"></nve-progress-ring>
+
+      <nve-progress-ring status="warning" value="0"></nve-progress-ring>
+
+      <nve-progress-ring status="danger" value="0"></nve-progress-ring>
+    </div>
+`};
+    
+export const Five = {
+  render: () => html`
+    <div nve-layout="column gap:sm pad:md" nve-text="medium">
+      <div nve-layout="row gap:xs align:center">
+        <nve-progress-ring size="xs" status="success" value="0"></nve-progress-ring>
+        Loading Successful
+      </div>
+
+      <div nve-layout="row gap:xs align:center">
+        <nve-progress-ring size="xs" status="warning" value="0"></nve-progress-ring>
+        Loading Timeout
+      </div>
+
+      <div nve-layout="row gap:xs align:center">
+        <nve-progress-ring size="xs" status="danger" value="0"></nve-progress-ring>
+        Loading Error
+      </div>
+
+      <div nve-layout="row gap:xs align:center">
+        <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
+        Active Loading
+      </div>
+    </div>
+`};
+    
+export const Six = {
+  render: () => html`
+    <div nve-layout="row gap:sm pad:md">
+      <nve-progress-ring status="accent">
+        <nve-icon name="pause" status="accent" slot="status-icon"></nve-icon>
+      </nve-progress-ring>
+    </div>
+`};
+    
+export const Seven = {
+  render: () => html`
+    <div nve-layout="row gap:sm pad:md">
+      <nve-progress-ring status="accent" size="xxs"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="sm"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="md"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="lg"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="xl"></nve-progress-ring>
+    </div>
+
+    <div nve-layout="row gap:sm pad:md">
+      <nve-progress-ring status="danger" size="xxs"></nve-progress-ring>
+      <nve-progress-ring status="danger" size="xs"></nve-progress-ring>
+      <nve-progress-ring status="danger" size="sm"></nve-progress-ring>
+      <nve-progress-ring status="danger" size="md"></nve-progress-ring>
+      <nve-progress-ring status="danger" size="lg"></nve-progress-ring>
+    </div>
+`};
+    
+export const Eight = {
+  render: () => html`
+    <div nve-layout="row gap:sm pad:md">
+      <nve-button>
+        <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
+        Button
+      </nve-button>
+
+      <nve-button interaction="emphasize">
+        <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
+        Button
+      </nve-button>
+
+      <nve-button interaction="destructive">
+        <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
+        Button
+      </nve-button>
+
+      <nve-button>
+        <nve-progress-ring status="neutral" size="xxs" value="33"></nve-progress-ring>
+        Button
+      </nve-button>
+
+      <nve-button interaction="emphasize">
+        <nve-progress-ring status="neutral" size="xxs" value="33"></nve-progress-ring>
+        Button
+      </nve-button>
+
+      <nve-button interaction="destructive">
+        <nve-progress-ring status="neutral" size="xxs" value="33"></nve-progress-ring>
+        Button
+      </nve-button>
+    </div>
+`};

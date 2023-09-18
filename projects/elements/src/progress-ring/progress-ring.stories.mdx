@@ -1,0 +1,58 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { statusBadges } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Progress Ring/Documentation" parameters={{ badges: statusBadges('nve-progress-ring') }} />
+
+# Progress Ring
+
+<element-metrics tag="nve-progress-ring"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/progress-ring/define.js';
+```
+
+```html
+<div nve-layout="row gap:sm pad:md">
+  <nve-progress-ring></nve-progress-ring>
+</div>
+```
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--default" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--two" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--three" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--four" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--five" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--six" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--seven" />
+</Canvas>
+
+<Canvas>
+  <Story id="elements-progress-ring-examples--eight" />
+</Canvas>
+
+<element-status tag={'nve-progress-ring'}></element-status>
+
+## nve-progress-ring
+
+<ArgsTable of="nve-progress-ring" />
