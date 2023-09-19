@@ -6,9 +6,9 @@ import styles from './progress-ring.css?inline';
 
 /**
  * @element mlv-progress-ring
- * @description - The `mlv-progress-ring` component is used to indicate the status of a pending task
- * @since - 0.17.0
- * @slot - status-icon
+ * @description The `mlv-progress-ring` component is used to indicate the status of a pending task. It also serves the basis of the page loading element.
+ * @since 0.17.0
+ * @slot status-icon
  * @cssprop --background-color
  * @cssprop --ring-color
  * @cssprop --ring-background-opacity
@@ -18,8 +18,7 @@ import styles from './progress-ring.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-progress-ring-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29%3A20&mode=dev
- * @vqa true
- * @unitTests false
+ * @stable false
  */
 export class ProgressRing extends LitElement {
   static styles = useStyles([styles]);
@@ -36,19 +35,16 @@ export class ProgressRing extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  /** current value of the progress indicator */  
+  /** The current `value` of the progress ring. When not set, an indeterminate animation will show. */  
   @property({ type: Number }) value?: number;
 
-  /** minimum value of the progress indicator */  
-  @property({ type: Number }) min? = 0;
-
-  /** max value of the progress indicator */  
+  /** The `max` value of the progress ring that the `value` is proportionaly scaled to. */  
   @property({ type: Number }) max? = 100;
 
-  /** visual treatment to represent a ongoing task status */
+  /** There are four visual treatments that represent the `status` of varius tasks. When `status` is set to `warning`, `success` or `danger`, appropriate icons are embedded. */
   @property({ type: String, reflect: true }) status?: SupportStatus | 'neutral' = 'neutral';
 
-  /** T-shirt size of the progress indicator */
+  /** T-shirt `size` of the progress indicator, used to scale the ring. */
   @property({ type: String, reflect: true }) size?: Size | 'xxs' | 'xs' | 'xl';
 
 
@@ -78,7 +74,6 @@ export class ProgressRing extends LitElement {
   updated(props: PropertyValues<this>) {
     super.updated(props);
     this._internals.ariaValueNow = `${this.value === undefined ? '' : this.value}`;
-    this._internals.ariaValueMin = `${this.min}`;
     this._internals.ariaValueMax = `${this.max}`;
   }
 }

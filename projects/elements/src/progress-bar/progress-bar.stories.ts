@@ -9,7 +9,7 @@ export default {
 export const Default = {
   render: () => html`
     <div mlv-layout="column gap:md pad:lg">
-      <mlv-progress-bar status="danger"></mlv-progress-bar>
+      <mlv-progress-bar></mlv-progress-bar>
 
       <mlv-progress-bar status="accent" value="25"></mlv-progress-bar>
 
@@ -18,6 +18,16 @@ export const Default = {
       <mlv-progress-bar status="warning" value="75"></mlv-progress-bar>
 
       <mlv-progress-bar status="danger" value="100"></mlv-progress-bar>
-  </div>
+    </div>
+  `
+};
+
+export const Max = {
+  render: () => html`
+    <div mlv-layout="column gap:md pad:lg">
+      <mlv-progress-bar status="accent" value="25" max="50"></mlv-progress-bar>
+
+      <mlv-progress-bar status="accent" value="45" max="50"></mlv-progress-bar>
+    </div>
   `
 };

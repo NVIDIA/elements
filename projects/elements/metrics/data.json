@@ -1,5 +1,5 @@
 {
-  "created": "2023-09-18T18:09:23.805Z",
+  "created": "2023-09-19T14:57:54.068Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -205,7 +205,7 @@
         }
       ],
       "projectTotal": 6,
-      "instanceTotal": 11,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -325,7 +325,7 @@
         }
       ],
       "projectTotal": 3,
-      "instanceTotal": 9,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "stable"
@@ -2138,82 +2138,75 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": true,
+      "stable": false,
       "vqa": true,
       "responsive": true,
       "themes": true,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role",
       "package": true,
-      "description": "A progress bar is a control that indicates the progress of a task.",
+      "description": "A progress bar is a visual indicator of the status of a running task. Under the hood the native HTML `progress` element is used to achieve proper a11y concerns.",
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-progress-bar-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29%3A20&mode=dev",
       "properties": [
         {
           "name": "value",
-          "description": "current value of the progress indicator"
-        },
-        {
-          "name": "min",
-          "description": "minimum value of the progress indicator"
+          "description": "The current `value` of the progress indicator, set to the native HTML progress element."
         },
         {
           "name": "max",
-          "description": "max value of the progress indicator"
+          "description": "The `max` property sets the highest value that `value` will be scaled to."
         }
       ],
       "projectTotal": 1,
       "instanceTotal": 2,
+      "coverageTotal": 100,
       "behavior": "content",
-      "status": "stable"
+      "status": "beta"
     },
     {
       "name": "mlv-progress-ring",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": true,
+      "stable": false,
       "vqa": true,
       "responsive": true,
       "themes": true,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role",
       "package": true,
-      "description": "- The `mlv-progress-ring` component is used to indicate the status of a pending task",
-      "since": "- 0.17.0",
+      "description": "The `mlv-progress-ring` component is used to indicate the status of a pending task. It also serves the basis of the page loading element.",
+      "since": "0.17.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-progress-ring-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29%3A20&mode=dev",
       "properties": [
         {
           "name": "value",
-          "description": "current value of the progress indicator"
-        },
-        {
-          "name": "min",
-          "description": "minimum value of the progress indicator"
+          "description": "The current `value` of the progress ring. When not set, an indeterminate animation will show."
         },
         {
           "name": "max",
-          "description": "max value of the progress indicator"
+          "description": "The `max` value of the progress ring that the `value` is proportionaly scaled to."
         },
         {
           "name": "status",
-          "description": "visual treatment to represent a ongoing task status"
+          "description": "There are four visual treatments that represent the `status` of varius tasks. When `status` is set to `warning`, `success` or `danger`, appropriate icons are embedded."
         },
         {
           "name": "size",
-          "description": "T-shirt size of the progress indicator"
+          "description": "T-shirt `size` of the progress indicator, used to scale the ring."
         }
       ],
       "slots": [
         {
-          "description": "status-icon",
-          "name": ""
+          "name": "status-icon"
         }
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
+      "coverageTotal": 100,
       "behavior": "content",
-      "status": "stable"
+      "status": "beta"
     },
     {
       "name": "mlv-progressive-filter-chip",
@@ -3140,7 +3133,7 @@
         },
         {
           "name": "mlv-alert",
-          "instanceTotal": 5
+          "instanceTotal": 4
         },
         {
           "name": "mlv-badge",
@@ -3259,7 +3252,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 84
+      "instanceTotal": 83
     },
     {
       "name": "app-shell-angular-demo",
@@ -3645,7 +3638,7 @@
         },
         {
           "name": "mlv-badge",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "mlv-grid-cell",
@@ -3736,7 +3729,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 113
+      "instanceTotal": 114
     },
     {
       "name": "@elements/next-common",
@@ -5268,6 +5261,114 @@
         }
       },
       {
+        "file": "elements/src/progress-ring/progress-ring.ts",
+        "lines": {
+          "total": 12,
+          "covered": 12,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 4,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 17,
+          "covered": 17,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 4,
+          "covered": 3,
+          "skipped": 0,
+          "pct": 75
+        }
+      },
+      {
+        "file": "elements/src/progress-ring/define.ts",
+        "lines": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/progress-bar/progress-bar.ts",
+        "lines": {
+          "total": 5,
+          "covered": 5,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 2,
+          "covered": 2,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 9,
+          "covered": 9,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/progress-bar/define.ts",
+        "lines": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
         "file": "elements/src/password/password.ts",
         "lines": {
           "total": 8,
@@ -5817,15 +5918,15 @@
         },
         "functions": {
           "total": 9,
-          "covered": 8,
+          "covered": 7,
           "skipped": 0,
-          "pct": 88.88
+          "pct": 77.77
         },
         "statements": {
           "total": 19,
-          "covered": 18,
+          "covered": 17,
           "skipped": 0,
-          "pct": 94.73
+          "pct": 89.47
         },
         "branches": {
           "total": 5,
@@ -6207,9 +6308,9 @@
         },
         "branches": {
           "total": 6,
-          "covered": 5,
+          "covered": 6,
           "skipped": 0,
-          "pct": 83.33
+          "pct": 100
         }
       },
       {
@@ -8052,28 +8153,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1734,
-        "covered": 1683,
+        "total": 1753,
+        "covered": 1702,
         "skipped": 0,
-        "pct": 97.05
+        "pct": 97.09
       },
       "statements": {
-        "total": 2303,
-        "covered": 2235,
+        "total": 2331,
+        "covered": 2262,
         "skipped": 0,
-        "pct": 97.04
+        "pct": 97.03
       },
       "functions": {
-        "total": 678,
-        "covered": 641,
+        "total": 684,
+        "covered": 646,
         "skipped": 0,
-        "pct": 94.54
+        "pct": 94.44
       },
       "branches": {
-        "total": 854,
-        "covered": 773,
+        "total": 858,
+        "covered": 777,
         "skipped": 0,
-        "pct": 90.51
+        "pct": 90.55
       },
       "branchesTrue": {
         "total": 0,
