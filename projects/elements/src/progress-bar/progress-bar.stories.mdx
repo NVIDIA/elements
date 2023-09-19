@@ -13,6 +13,10 @@ import { statusBadges } from '../../docs/utils.mdx';
 import '@elements/elements/progress-bar/define.js';
 ```
 
+## Setting the Value
+
+<element-metrics tag="nve-progress-bar" type="property" value="value"></element-metrics>
+
 ```html
 <nve-progress-bar status="accent" value="25"></nve-progress-bar>
 
@@ -25,6 +29,14 @@ import '@elements/elements/progress-bar/define.js';
 
 <Canvas>
   <Story id="elements-progress-bar-examples--default" />
+</Canvas>
+
+## Max Value
+
+<element-metrics tag="nve-progress-bar" type="property" value="max"></element-metrics>
+
+<Canvas>
+  <Story id="elements-progress-bar-examples--max" />
 </Canvas>
 
 <element-status tag={'nve-progress-bar'}></element-status>

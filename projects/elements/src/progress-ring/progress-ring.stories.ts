@@ -15,7 +15,7 @@ export const Default = {
     </div>
 `};
 
-export const Two = {
+export const Values = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
       <nve-progress-ring status="accent" value="0"></nve-progress-ring>
@@ -27,8 +27,19 @@ export const Two = {
       <nve-progress-ring status="accent" value="100"></nve-progress-ring>
     </div>
 `};
+
+export const Max = {
+  render: () => html`
+    <div nve-layout="row gap:sm pad:md">
+      <nve-progress-ring status="accent" max="20" value="5"></nve-progress-ring>
+
+      <nve-progress-ring status="accent" max="20" value="10"></nve-progress-ring>
+      
+      <nve-progress-ring status="accent" max="20" value="15"></nve-progress-ring>
+    </div>
+`};
     
-export const Three = {
+export const Status = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
       <nve-progress-ring status="warning" value="75"></nve-progress-ring>
@@ -41,7 +52,7 @@ export const Three = {
     </div>
 `};
     
-export const Four = {
+export const ZeroValueStatus = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
       <nve-progress-ring status="success" value="0"></nve-progress-ring>
@@ -52,7 +63,7 @@ export const Four = {
     </div>
 `};
     
-export const Five = {
+export const WithText = {
   render: () => html`
     <div nve-layout="column gap:sm pad:md" nve-text="medium">
       <div nve-layout="row gap:xs align:center">
@@ -77,7 +88,7 @@ export const Five = {
     </div>
 `};
     
-export const Six = {
+export const SlottedIcon = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
       <nve-progress-ring status="accent">
@@ -86,7 +97,7 @@ export const Six = {
     </div>
 `};
     
-export const Seven = {
+export const Sizing = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
       <nve-progress-ring status="accent" size="xxs"></nve-progress-ring>
@@ -106,7 +117,7 @@ export const Seven = {
     </div>
 `};
     
-export const Eight = {
+export const WithButton = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
       <nve-button>
