@@ -3641,8 +3641,8 @@
       "instanceTotal": 0
     },
     {
-      "name": "sequential-3d-labeler",
-      "path": "src/ui/labeling/apps/sequential-3d-labeler",
+      "name": "clip-labeler",
+      "path": "src/ui/labeling/apps/clip-labeler",
       "elementsVersion": "^0.8.0",
       "elements": [
         {
