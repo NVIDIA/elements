@@ -11,6 +11,7 @@
     "build": "wireit",
     "build:watch": "wireit",
     "build:icons": "wireit",
+    "build:docs": "wireit",
     "test": "wireit",
     "test:coverage": "wireit",
     "test:watch": "wireit",
@@ -325,6 +326,32 @@
       "command": "pnpm i && pnpm run ci",
       "dependencies": [
         "clean"
+      ]
+    },
+    "build:manifest": {
+      "command": "node ./node_modules/@custom-elements-manifest/analyzer/cem.js analyze  --config ./custom-elements-manifest.config.mjs --outdir ./dist/",
+      "files": [
+        "build/vscode-custom-data.js",
+        "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.stories.mdx",
+        "!src/**/*.test.ts",
+        "custom-elements-manifest.config.mjs"
+      ],
+      "output": [
+        "dist/custom-elements.json"
+      ]
+    },
+    "build:docs": {
+      "command": "node ./metrics/index.mjs",
+      "files": [
+        "dist/custom-elements.json"
+      ],
+      "output": [
+        "metrics/data.json"
+      ],
+      "dependencies": [
+        "build:manifest"
       ]
     },
     "build": {
