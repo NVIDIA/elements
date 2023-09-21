@@ -8,7 +8,7 @@ describe('mlv-icon-button', () => {
   let fixture: HTMLElement;
   let element: IconButton;
   let elementWithAnchor: IconButton;
-  // let elementWithCustomIcon: IconButton;
+  let elementWithCustomIcon: IconButton;
   let anchor: HTMLAnchorElement;
 
   beforeEach(async () => {
@@ -23,7 +23,7 @@ describe('mlv-icon-button', () => {
     `);
     element = fixture.querySelectorAll('mlv-icon-button')[0];
     elementWithAnchor = fixture.querySelectorAll('mlv-icon-button')[1];
-    // elementWithCustomIcon = fixture.querySelectorAll('mlv-icon-button')[2];
+    elementWithCustomIcon = fixture.querySelectorAll('mlv-icon-button')[2];
     anchor = fixture.querySelector('[href]');
   });
 
@@ -55,9 +55,8 @@ describe('mlv-icon-button', () => {
     expect(anchor.slot).toBe('anchor');
   });
 
-  // happy-dom fails to emulate slot dynamic assignments
-  // it('should allow custom icon to be slotted', async () => {
-  //   await elementIsStable(elementWithAnchor);
-  //   expect(elementWithCustomIcon.shadowRoot.querySelector<HTMLSlotElement>('slot').assignedElements()[0]).toBe(fixture.querySelector('slot'));
-  // });
+  it('should allow custom icon to be slotted', async () => {
+    await elementIsStable(elementWithAnchor);
+    expect(elementWithCustomIcon.shadowRoot.querySelector<HTMLSlotElement>('slot').assignedElements()[0]).toBe(fixture.querySelector('span'));
+  });
 });

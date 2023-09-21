@@ -165,7 +165,7 @@ export const FormControl = {
   <mlv-search>
     <input type="search" placeholder="search" aria-label="search" />
   </mlv-search>
-  <mlv-button mlv-control>filter option <mlv-icon name="chevron" direction="down" size="sm"></mlv-icon></mlv-button>
+  <mlv-button mlv-control>filter option <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
 </div>
   `
 }

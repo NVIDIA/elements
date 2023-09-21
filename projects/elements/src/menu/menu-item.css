@@ -1,6 +1,7 @@
 :host {
   --border-radius: var(--mlv-ref-border-radius-xs);
-  --font-size: var(--mlv-ref-font-size-200);
+  --font-size: var(--mlv-ref-font-size-100);
+  --font-weight: var(--mlv-ref-font-weight-medium);
   --color: var(--mlv-sys-interaction-color);
   --padding: var(--mlv-ref-size-200);
   --gap: var(--mlv-ref-space-sm);
@@ -17,6 +18,7 @@
   padding: var(--padding);
   color: var(--color);
   font-size: var(--font-size);
+  font-weight: var(--font-weight);
   border-radius: var(--border-radius);
   gap: var(--gap);
   width: var(--width);

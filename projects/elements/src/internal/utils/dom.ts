@@ -252,3 +252,15 @@ export function getThemeTokens(element = globalThis.document.querySelector(':roo
     )
     .reduce((p, token) => ({ ...p, [token[0]]: styles.getPropertyValue(token[0]) }), {});
 }
+
+export function removeEmptySlotWhitespace(slot: HTMLSlotElement) {
+  if (slotContainsOnlyWhitespace(slot)) {
+    slot.assignedNodes().forEach(node => node.remove());
+  }
+}
+
+export function slotContainsOnlyWhitespace(slot: HTMLSlotElement) {
+  const hasNoElements = !slot.assignedNodes().find(i => i.nodeType !== Node.TEXT_NODE);
+  const hasOnlyEmptyTextNodes = !slot.assignedNodes().find(i => i.nodeType === Node.TEXT_NODE && i.textContent.trim() !== '');
+  return hasNoElements && hasOnlyEmptyTextNodes;
+}

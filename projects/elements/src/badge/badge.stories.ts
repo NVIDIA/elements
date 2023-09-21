@@ -25,6 +25,7 @@ export const Status = {
   <mlv-badge status="finished">finished</mlv-badge>
   <mlv-badge status="failed">failed</mlv-badge>
   <mlv-badge status="unknown">unknown</mlv-badge>
+  <mlv-badge status="ignored">ignored</mlv-badge>
 </div>
   `
 }
@@ -75,6 +76,7 @@ export const StatusLightTheme = {
   <mlv-badge status="finished">finished</mlv-badge>
   <mlv-badge status="failed">failed</mlv-badge>
   <mlv-badge status="unknown">unknown</mlv-badge>
+  <mlv-badge status="ignored">ignored</mlv-badge>
 </div>
   `
 }
@@ -92,6 +94,7 @@ export const StatusDarkTheme = {
   <mlv-badge status="finished">finished</mlv-badge>
   <mlv-badge status="failed">failed</mlv-badge>
   <mlv-badge status="unknown">unknown</mlv-badge>
+  <mlv-badge status="ignored">ignored</mlv-badge>
 </div>
   `
 }

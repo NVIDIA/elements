@@ -36,28 +36,28 @@ export const Header = {
 
           <div mlv-layout="row gap:xl align:vertical-center">
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Session ID</span>
-              <a mlv-text="body sm bold link" href="#">13245768</a>
+              <span mlv-text="body sm muted medium">Session ID</span>
+              <a mlv-text="body sm semibold link" href="#">13245768</a>
             </section>
 
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Driver</span>
-              <span mlv-text="body sm bold">Jane Doe</span>
+              <span mlv-text="body sm muted medium">Driver</span>
+              <span mlv-text="body sm semibold">Jane Doe</span>
             </section>
 
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Co-Pilot</span>
-              <span mlv-text="body sm bold">John Doe</span>
+              <span mlv-text="body sm muted medium">Co-Pilot</span>
+              <span mlv-text="body sm semibold">John Doe</span>
             </section>
 
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Route</span>
-              <span mlv-text="body sm bold">Santa Clara</span>
+              <span mlv-text="body sm muted medium">Route</span>
+              <span mlv-text="body sm semibold">Santa Clara</span>
             </section>
 
             <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Status</span>
-              <span mlv-text="body sm bold"><mlv-badge status="success">complete</mlv-badge></span>
+              <span mlv-text="body sm muted medium">Status</span>
+              <span mlv-text="body sm semibold"><mlv-badge status="success">complete</mlv-badge></span>
             </section>
           </div>
         </section>
@@ -237,16 +237,16 @@ export const Row = {
   render: () => html`
   <div mlv-theme="root">
     <section role="list" mlv-layout="column gap:md pad:md">
-      <mlv-card role="listitem">
+      <mlv-card role="listitem" style="--border-radius: var(--mlv-ref-border-radius-md)">
         <mlv-card-content mlv-layout="grid align:vertical-center align:space-between gap:md">
           <div mlv-layout="span:4 row gap:md align:vertical-center">
-            <img src="https://placehold.co/600x400" style="max-width: 100px" />
+            <img src="https://placehold.co/600x400" style="max-width: 100px; border-radius: var(--mlv-ref-border-radius-sm)" />
             <div mlv-layout="column gap:sm">
-              <h2 mlv-text="heading sm medium">Activity Dashboard</h2>
-              <p mlv-text="body muted">Last saved: Oct 19, 21 by Camru</p>
+              <h2 mlv-text="label medium">Activity Dashboard</h2>
+              <p mlv-text="body sm muted">Last saved: Oct 19, 21 by Camru</p>
             </div>
           </div>
-          <p mlv-text="body" mlv-layout="span:5">A dashboard displaying current project activity grouped by User, Host or IP. Authors: * Camden Rudisill camden@comet.ml</p>
+          <p mlv-text="body sm" mlv-layout="span:5">A dashboard displaying current project activity grouped by User, Host or IP</p>
           <div mlv-layout="span:3 row gap:sm align:right">
             <div mlv-layout="row gap:xs">
               <mlv-icon-button icon-name="eye"></mlv-icon-button>
@@ -258,16 +258,16 @@ export const Row = {
           </div>
         </mlv-card-content>
       </mlv-card>
-      <mlv-card role="listitem">
+      <mlv-card role="listitem" style="--border-radius: var(--mlv-ref-border-radius-md)">
         <mlv-card-content mlv-layout="grid align:vertical-center align:space-between gap:md">
           <div mlv-layout="span:4 row gap:md align:vertical-center">
-            <img src="https://placehold.co/600x400" style="max-width: 100px" />
+            <img src="https://placehold.co/600x400" style="max-width: 100px; border-radius: var(--mlv-ref-border-radius-sm)" />
             <div mlv-layout="column gap:sm">
-              <h2 mlv-text="heading sm medium">Activity Dashboard</h2>
-              <p mlv-text="body muted">Last saved: Oct 19, 21 by Camru</p>
+              <h2 mlv-text="label medium">Activity Dashboard</h2>
+              <p mlv-text="body sm muted">Last saved: Oct 19, 21 by Camru</p>
             </div>
           </div>
-          <p mlv-text="body" mlv-layout="span:5">A dashboard displaying current project activity grouped by User, Host or IP. Authors: * Camden Rudisill camden@comet.ml</p>
+          <p mlv-text="body sm" mlv-layout="span:5">A dashboard displaying current project activity grouped by User, Host or IP</p>
           <div mlv-layout="span:3 row gap:sm align:right">
             <div mlv-layout="row gap:xs">
               <mlv-icon-button icon-name="eye"></mlv-icon-button>

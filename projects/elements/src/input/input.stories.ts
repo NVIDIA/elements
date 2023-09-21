@@ -117,16 +117,6 @@ export const Rounded = {
 </mlv-input>`
 };
 
-export const controlValidation = () => {
-  return html`
-<mlv-input>
-  <label>validation</label>
-  <input required />
-  <mlv-control-message>message</mlv-control-message>
-  <mlv-control-message error="valueMissing">required</mlv-control-message>
-</mlv-input>`;
-}
-
 export const FitText = {
   render: () => html`
 <mlv-input fit-text>

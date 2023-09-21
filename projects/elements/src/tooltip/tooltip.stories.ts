@@ -75,7 +75,7 @@ export const HintCopy = {
   render: () => html`
 <div mlv-layout="row align:center" style="height: 90vh">
   <mlv-tooltip trigger="btn" anchor="btn" hidden>2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</mlv-tooltip>
-  <mlv-toast trigger="btn" anchor="btn" close-timeout="1500" hidden>copied!</mlv-toast>
+  <mlv-toast trigger="btn" anchor="btn" close-timeout="1500" hidden status="success">copied!</mlv-toast>
   <mlv-button interaction="flat" id="btn" aria-label="copy to clipboard">
     <p mlv-text="truncate" style="width: 120px">2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</p><mlv-icon name="copy"></mlv-icon>
   </mlv-button>

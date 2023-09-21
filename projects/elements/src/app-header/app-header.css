@@ -1,6 +1,6 @@
 :host {
   --background: var(--mlv-sys-layer-shell-background);
-  --padding: var(--mlv-ref-space-xs) var(--mlv-ref-space-sm);
+  --padding: var(--mlv-ref-space-xs) var(--mlv-ref-space-lg);
   --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
   contain: initial;
   width: 100%;

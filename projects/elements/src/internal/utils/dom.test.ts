@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox, getThemeTokens } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox, getThemeTokens, removeEmptySlotWhitespace } from '@elements/elements/internal';
 
 @customElement('dom-test-element')
 class TestComponent extends LitElement {
@@ -417,5 +417,36 @@ describe('getCurrentTokens', () => {
   it('should compute and return the current design tokens', async () => {
     const tokens = getThemeTokens();
     expect(tokens).toBeTruthy();
+  });
+});
+
+@customElement('empty-slot-test-element')
+class EmptySlotTestElement extends LitElement {
+  render() {
+    return html`
+      <slot @slotchange=${e => removeEmptySlotWhitespace(e.target)}></slot>
+    `;
+  }
+}
+
+describe('removeEmptySlotWhitespace', () => {
+  let fixture: HTMLElement;
+  let element: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <empty-slot-test-element> </empty-slot-test-element>
+    `);
+
+    element = fixture.querySelector<HTMLElement>('empty-slot-test-element');
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should remove any empty white space from slot to prevent default slot overrides', async () => {
+    await elementIsStable(element);
+    expect(element.innerHTML).toBe('');
   });
 });

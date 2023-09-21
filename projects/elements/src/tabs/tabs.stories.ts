@@ -69,7 +69,7 @@ export const TabsWithDots = {
     <mlv-tabs-item>Tab 3 </mlv-tabs-item>
     <mlv-tabs-item selected>
       Tab 4
-      <mlv-dot status="warning" aria-label="10 notifications">10</mlv-dot>
+      <mlv-dot aria-label="10 notifications">10</mlv-dot>
     </mlv-tabs-item>
     <mlv-tabs-item>Tab 5</mlv-tabs-item>
   </mlv-tabs>

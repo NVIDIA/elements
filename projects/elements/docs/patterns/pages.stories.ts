@@ -114,13 +114,13 @@ const StackedCardsWithPanel = {
         <header mlv-layout="column gap:md pad-top:md pad-right:md pad-left:md align:stretch">
           <section mlv-layout="row align:space-between align:vertical-center">
             <div mlv-layout="row gap:sm align:vertical-center">
-              <mlv-icon-button icon-name="chevron" direction="left" aria-label="navigate-back"></mlv-icon-button>
+              <mlv-icon-button icon-name="arrow" direction="left" aria-label="navigate-back"></mlv-icon-button>
               <h1 mlv-text="heading lg bold">Page Heading</h1>
             </div>
 
             <div mlv-layout="row gap:sm align:vertical-center">
-              <section mlv-layout="column gap:md">
-                <span mlv-text="body sm muted">Created by</span>
+              <section mlv-layout="column gap:sm">
+                <span mlv-text="body sm muted medium">Created by</span>
                 <span mlv-text="body sm semibold">First Last</span>
               </section>
 
@@ -130,17 +130,17 @@ const StackedCardsWithPanel = {
               </section>
 
               <section mlv-layout="column gap:sm">
-                <span mlv-text="body sm muted">Updated</span>
+                <span mlv-text="body sm muted medium">Updated</span>
                 <span mlv-text="body sm semibold">00/00/00</span>
               </section>
 
               <section mlv-layout="column gap:sm">
-                <span mlv-text="body sm muted">Tests Ran</span>
+                <span mlv-text="body sm muted medium">Tests Ran</span>
                 <span mlv-text="body sm semibold">## Times</span>
               </section>
 
               <section mlv-layout="column gap:sm">
-                <span mlv-text="body sm muted">Status</span>
+                <span mlv-text="body sm muted medium">Status</span>
                 <span mlv-text="body sm semibold">Complete</span>
 
               </section>

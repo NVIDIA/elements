@@ -7,6 +7,7 @@
   --padding: var(--mlv-ref-size-150) var(--mlv-ref-size-200);
   --border-radius: var(--mlv-ref-border-radius-sm);
   --font-weight: var(--mlv-ref-font-weight-semibold);
+  --text-transform: capitalize;
   --width: initial;
   --height: initial;
 }
@@ -29,6 +30,7 @@
   border-radius: var(--border-radius);
   width: var(--width);
   height: var(--height);
+  text-transform: var(--text-transform);
   display: inline-flex;
   align-items: center;
   line-height: 1em;
