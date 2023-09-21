@@ -75,7 +75,7 @@ export const HintCopy = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 90vh">
   <nve-tooltip trigger="btn" anchor="btn" hidden>2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</nve-tooltip>
-  <nve-toast trigger="btn" anchor="btn" close-timeout="1500" hidden>copied!</nve-toast>
+  <nve-toast trigger="btn" anchor="btn" close-timeout="1500" hidden status="success">copied!</nve-toast>
   <nve-button interaction="flat" id="btn" aria-label="copy to clipboard">
     <p nve-text="truncate" style="width: 120px">2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</p><nve-icon name="copy"></nve-icon>
   </nve-button>

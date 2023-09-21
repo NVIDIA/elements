@@ -114,13 +114,13 @@ const StackedCardsWithPanel = {
         <header nve-layout="column gap:md pad-top:md pad-right:md pad-left:md align:stretch">
           <section nve-layout="row align:space-between align:vertical-center">
             <div nve-layout="row gap:sm align:vertical-center">
-              <nve-icon-button icon-name="chevron" direction="left" aria-label="navigate-back"></nve-icon-button>
+              <nve-icon-button icon-name="arrow" direction="left" aria-label="navigate-back"></nve-icon-button>
               <h1 nve-text="heading lg bold">Page Heading</h1>
             </div>
 
             <div nve-layout="row gap:sm align:vertical-center">
-              <section nve-layout="column gap:md">
-                <span nve-text="body sm muted">Created by</span>
+              <section nve-layout="column gap:sm">
+                <span nve-text="body sm muted medium">Created by</span>
                 <span nve-text="body sm semibold">First Last</span>
               </section>
 
@@ -130,17 +130,17 @@ const StackedCardsWithPanel = {
               </section>
 
               <section nve-layout="column gap:sm">
-                <span nve-text="body sm muted">Updated</span>
+                <span nve-text="body sm muted medium">Updated</span>
                 <span nve-text="body sm semibold">00/00/00</span>
               </section>
 
               <section nve-layout="column gap:sm">
-                <span nve-text="body sm muted">Tests Ran</span>
+                <span nve-text="body sm muted medium">Tests Ran</span>
                 <span nve-text="body sm semibold">## Times</span>
               </section>
 
               <section nve-layout="column gap:sm">
-                <span nve-text="body sm muted">Status</span>
+                <span nve-text="body sm muted medium">Status</span>
                 <span nve-text="body sm semibold">Complete</span>
 
               </section>
