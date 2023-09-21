@@ -10,4 +10,4 @@
 
 - `/demos` - Suite of standardized demo apps for Elements and Patterns
 - `/elements` - Elements library: curated UI maintained by the MagLev Elements team
-- `/patterns` - Patterns library: community driven UI maintained by MagLev UI
+- `/playground` - In browser prototyping tool

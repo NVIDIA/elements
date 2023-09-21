@@ -1,5 +1,5 @@
 {
-  "created": "2023-09-20T17:12:06.043Z",
+  "created": "2023-09-21T20:01:16.676Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -1076,7 +1076,7 @@
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
       "properties": [],
       "projectTotal": 3,
-      "instanceTotal": 12,
+      "instanceTotal": 13,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -1365,7 +1365,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 11,
+      "instanceTotal": 12,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1392,7 +1392,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 10,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1536,7 +1536,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 11,
+      "instanceTotal": 12,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -2639,7 +2639,7 @@
         }
       ],
       "projectTotal": 3,
-      "instanceTotal": 3,
+      "instanceTotal": 4,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -2809,7 +2809,7 @@
         }
       ],
       "projectTotal": 2,
-      "instanceTotal": 7,
+      "instanceTotal": 6,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -3698,6 +3698,18 @@
           "instanceTotal": 2
         },
         {
+          "name": "mlv-grid-cell",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-grid-row",
+          "instanceTotal": 4
+        },
+        {
           "name": "mlv-button",
           "instanceTotal": 7
         },
@@ -3735,7 +3747,7 @@
         },
         {
           "name": "mlv-divider",
-          "instanceTotal": 3
+          "instanceTotal": 4
         },
         {
           "name": "mlv-search",
@@ -3751,7 +3763,7 @@
         },
         {
           "name": "mlv-tag",
-          "instanceTotal": 6
+          "instanceTotal": 5
         },
         {
           "name": "mlv-tooltip",
@@ -3762,15 +3774,7 @@
           "instanceTotal": 2
         },
         {
-          "name": "mlv-grid-cell",
-          "instanceTotal": 3
-        },
-        {
           "name": "mlv-grid-column",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-grid",
           "instanceTotal": 3
         },
         {
@@ -3782,12 +3786,8 @@
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-row",
-          "instanceTotal": 3
-        },
-        {
           "name": "mlv-switch",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "mlv-date",
@@ -3850,7 +3850,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 114
+      "instanceTotal": 118
     },
     {
       "name": "@elements/next-common",
@@ -4429,28 +4429,28 @@
       {
         "file": "elements/src/internal/utils/dom.ts",
         "lines": {
-          "total": 107,
-          "covered": 90,
+          "total": 112,
+          "covered": 95,
           "skipped": 0,
-          "pct": 84.11
+          "pct": 84.82
         },
         "functions": {
-          "total": 44,
-          "covered": 37,
+          "total": 49,
+          "covered": 42,
           "skipped": 0,
-          "pct": 84.09
+          "pct": 85.71
         },
         "statements": {
-          "total": 115,
-          "covered": 97,
+          "total": 123,
+          "covered": 105,
           "skipped": 0,
-          "pct": 84.34
+          "pct": 85.36
         },
         "branches": {
-          "total": 71,
-          "covered": 58,
+          "total": 77,
+          "covered": 64,
           "skipped": 0,
-          "pct": 81.69
+          "pct": 83.11
         }
       },
       {
@@ -6805,20 +6805,20 @@
       {
         "file": "elements/src/icon-button/icon-button.ts",
         "lines": {
-          "total": 5,
-          "covered": 5,
+          "total": 6,
+          "covered": 6,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 1,
-          "covered": 1,
+          "total": 2,
+          "covered": 2,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 7,
-          "covered": 7,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -8453,28 +8453,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1837,
-        "covered": 1788,
+        "total": 1843,
+        "covered": 1794,
         "skipped": 0,
-        "pct": 97.33
+        "pct": 97.34
       },
       "statements": {
-        "total": 2446,
-        "covered": 2379,
+        "total": 2455,
+        "covered": 2388,
         "skipped": 0,
-        "pct": 97.26
+        "pct": 97.27
       },
       "functions": {
-        "total": 719,
-        "covered": 682,
+        "total": 725,
+        "covered": 688,
         "skipped": 0,
-        "pct": 94.85
+        "pct": 94.89
       },
       "branches": {
-        "total": 900,
-        "covered": 818,
+        "total": 906,
+        "covered": 824,
         "skipped": 0,
-        "pct": 90.88
+        "pct": 90.94
       },
       "branchesTrue": {
         "total": 0,
