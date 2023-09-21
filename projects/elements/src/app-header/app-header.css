@@ -1,6 +1,6 @@
 :host {
   --background: var(--nve-sys-layer-shell-background);
-  --padding: var(--nve-ref-space-xs) var(--nve-ref-space-sm);
+  --padding: var(--nve-ref-space-xs) var(--nve-ref-space-lg);
   --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   contain: initial;
   width: 100%;

@@ -165,7 +165,7 @@ export const FormControl = {
   <nve-search>
     <input type="search" placeholder="search" aria-label="search" />
   </nve-search>
-  <nve-button nve-control>filter option <nve-icon name="chevron" direction="down" size="sm"></nve-icon></nve-button>
+  <nve-button nve-control>filter option <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
 </div>
   `
 }

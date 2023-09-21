@@ -36,28 +36,28 @@ export const Header = {
 
           <div nve-layout="row gap:xl align:vertical-center">
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body sm muted">Session ID</span>
-              <a nve-text="body sm bold link" href="#">13245768</a>
+              <span nve-text="body sm muted medium">Session ID</span>
+              <a nve-text="body sm semibold link" href="#">13245768</a>
             </section>
 
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body sm muted">Driver</span>
-              <span nve-text="body sm bold">Jane Doe</span>
+              <span nve-text="body sm muted medium">Driver</span>
+              <span nve-text="body sm semibold">Jane Doe</span>
             </section>
 
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body sm muted">Co-Pilot</span>
-              <span nve-text="body sm bold">John Doe</span>
+              <span nve-text="body sm muted medium">Co-Pilot</span>
+              <span nve-text="body sm semibold">John Doe</span>
             </section>
 
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body sm muted">Route</span>
-              <span nve-text="body sm bold">Santa Clara</span>
+              <span nve-text="body sm muted medium">Route</span>
+              <span nve-text="body sm semibold">Santa Clara</span>
             </section>
 
             <section nve-layout="row gap:xs align:center">
-              <span nve-text="body sm muted">Status</span>
-              <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
+              <span nve-text="body sm muted medium">Status</span>
+              <span nve-text="body sm semibold"><nve-badge status="success">complete</nve-badge></span>
             </section>
           </div>
         </section>
@@ -237,16 +237,16 @@ export const Row = {
   render: () => html`
   <div nve-theme="root">
     <section role="list" nve-layout="column gap:md pad:md">
-      <nve-card role="listitem">
+      <nve-card role="listitem" style="--border-radius: var(--nve-ref-border-radius-md)">
         <nve-card-content nve-layout="grid align:vertical-center align:space-between gap:md">
           <div nve-layout="span:4 row gap:md align:vertical-center">
-            <img src="https://placehold.co/600x400" style="max-width: 100px" />
+            <img src="https://placehold.co/600x400" style="max-width: 100px; border-radius: var(--nve-ref-border-radius-sm)" />
             <div nve-layout="column gap:sm">
-              <h2 nve-text="heading sm medium">Activity Dashboard</h2>
-              <p nve-text="body muted">Last saved: Oct 19, 21 by Camru</p>
+              <h2 nve-text="label medium">Activity Dashboard</h2>
+              <p nve-text="body sm muted">Last saved: Oct 19, 21 by Camru</p>
             </div>
           </div>
-          <p nve-text="body" nve-layout="span:5">A dashboard displaying current project activity grouped by User, Host or IP. Authors: * Camden Rudisill camden@comet.ml</p>
+          <p nve-text="body sm" nve-layout="span:5">A dashboard displaying current project activity grouped by User, Host or IP</p>
           <div nve-layout="span:3 row gap:sm align:right">
             <div nve-layout="row gap:xs">
               <nve-icon-button icon-name="eye"></nve-icon-button>
@@ -258,16 +258,16 @@ export const Row = {
           </div>
         </nve-card-content>
       </nve-card>
-      <nve-card role="listitem">
+      <nve-card role="listitem" style="--border-radius: var(--nve-ref-border-radius-md)">
         <nve-card-content nve-layout="grid align:vertical-center align:space-between gap:md">
           <div nve-layout="span:4 row gap:md align:vertical-center">
-            <img src="https://placehold.co/600x400" style="max-width: 100px" />
+            <img src="https://placehold.co/600x400" style="max-width: 100px; border-radius: var(--nve-ref-border-radius-sm)" />
             <div nve-layout="column gap:sm">
-              <h2 nve-text="heading sm medium">Activity Dashboard</h2>
-              <p nve-text="body muted">Last saved: Oct 19, 21 by Camru</p>
+              <h2 nve-text="label medium">Activity Dashboard</h2>
+              <p nve-text="body sm muted">Last saved: Oct 19, 21 by Camru</p>
             </div>
           </div>
-          <p nve-text="body" nve-layout="span:5">A dashboard displaying current project activity grouped by User, Host or IP. Authors: * Camden Rudisill camden@comet.ml</p>
+          <p nve-text="body sm" nve-layout="span:5">A dashboard displaying current project activity grouped by User, Host or IP</p>
           <div nve-layout="span:3 row gap:sm align:right">
             <div nve-layout="row gap:xs">
               <nve-icon-button icon-name="eye"></nve-icon-button>
