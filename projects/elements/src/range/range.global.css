@@ -1,9 +1,9 @@
 nve-range input[type='range']::-webkit-slider-thumb {
-  width: var(--nve-ref-size-500);
-  height: var(--nve-ref-size-500);
+  width: var(--nve-ref-size-400);
+  height: var(--nve-ref-size-400);
   background: var(--background);
   border-radius: 50%;
-  margin-top: -6px;
+  margin-top: -5px;
   appearance: var(--_appearance);
 }
 

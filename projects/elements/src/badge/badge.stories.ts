@@ -25,6 +25,7 @@ export const Status = {
   <nve-badge status="finished">finished</nve-badge>
   <nve-badge status="failed">failed</nve-badge>
   <nve-badge status="unknown">unknown</nve-badge>
+  <nve-badge status="ignored">ignored</nve-badge>
 </div>
   `
 }
@@ -75,6 +76,7 @@ export const StatusLightTheme = {
   <nve-badge status="finished">finished</nve-badge>
   <nve-badge status="failed">failed</nve-badge>
   <nve-badge status="unknown">unknown</nve-badge>
+  <nve-badge status="ignored">ignored</nve-badge>
 </div>
   `
 }
@@ -92,6 +94,7 @@ export const StatusDarkTheme = {
   <nve-badge status="finished">finished</nve-badge>
   <nve-badge status="failed">failed</nve-badge>
   <nve-badge status="unknown">unknown</nve-badge>
+  <nve-badge status="ignored">ignored</nve-badge>
 </div>
   `
 }

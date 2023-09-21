@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Size, useStyles } from '@elements/elements/internal';
+import { Size, removeEmptySlotWhitespace, useStyles } from '@elements/elements/internal';
 import { Button } from '@elements/elements/button';
 import { Icon, IconName } from '@elements/elements/icon';
 import styles from './icon-button.css?inline';
@@ -50,7 +50,7 @@ export class IconButton extends Button {
   render() {
     return html`
       <div internal-host interaction-state focus-within>
-        <slot>
+        <slot @slotchange=${e => removeEmptySlotWhitespace(e.target)}>
           <nve-icon .name=${this.iconName} .direction=${this.direction} .size=${this.size}></nve-icon>
         </slot>
       </div>
