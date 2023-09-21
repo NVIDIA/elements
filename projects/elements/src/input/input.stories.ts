@@ -117,16 +117,6 @@ export const Rounded = {
 </nve-input>`
 };
 
-export const controlValidation = () => {
-  return html`
-<nve-input>
-  <label>validation</label>
-  <input required />
-  <nve-control-message>message</nve-control-message>
-  <nve-control-message error="valueMissing">required</nve-control-message>
-</nve-input>`;
-}
-
 export const FitText = {
   render: () => html`
 <nve-input fit-text>

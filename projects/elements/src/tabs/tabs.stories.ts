@@ -69,7 +69,7 @@ export const TabsWithDots = {
     <nve-tabs-item>Tab 3 </nve-tabs-item>
     <nve-tabs-item selected>
       Tab 4
-      <nve-dot status="warning" aria-label="10 notifications">10</nve-dot>
+      <nve-dot aria-label="10 notifications">10</nve-dot>
     </nve-tabs-item>
     <nve-tabs-item>Tab 5</nve-tabs-item>
   </nve-tabs>
