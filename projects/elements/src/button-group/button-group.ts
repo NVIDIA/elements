@@ -21,6 +21,7 @@ import { Button } from '@elements/elements/button';
  * @vqa false
  * @unitTests false
  * @stable false
+ * @axe false
  */
 
 @keyNavigationList<ButtonGroup>()

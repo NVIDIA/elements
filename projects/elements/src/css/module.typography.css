@@ -181,8 +181,12 @@
     color: var(--mlv-sys-text-link-color) !important;
   }
 
+  &[mlv-text~='no-visit']:hover {
+    color: var(--mlv-sys-text-link-hover-color) !important;
+  }
+
   &[mlv-text~='no-underline'] {
-    color: var(--mlv-sys-text-link-color) !important;
+    text-decoration: none !important;
   }
 }
 

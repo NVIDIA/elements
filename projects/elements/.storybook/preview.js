@@ -107,6 +107,7 @@ export const parameters = {
           'Support',
           'Versioning',
           'Testing',
+          'Accessibility',
           'Extensions',
           'Contributions',
           'Requests',

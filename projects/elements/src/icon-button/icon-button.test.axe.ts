@@ -1,0 +1,28 @@
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { runAxe } from '@elements/elements/test/axe.js';
+import { IconButton } from '@elements/elements/icon-button';
+import '@elements/elements/icon-button/define.js';
+
+describe('mlv-icon-button axe', () => {
+  let fixture: HTMLElement;
+  let element: IconButton;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-icon-button aria-label="icon button"></mlv-icon-button>
+    `);
+    element = fixture.querySelectorAll('mlv-icon-button')[0];
+    elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should pass axe check', async () => {
+    const results = await runAxe(['mlv-icon-button']);
+    expect(results.violations.length).toBe(0);
+  });
+});

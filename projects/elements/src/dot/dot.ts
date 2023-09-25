@@ -45,6 +45,11 @@ export class Dot extends LitElement {
     `;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.#internals.role = 'img';
+  }
+
   #updateSlot() {
     this.textContent.length ? this.#internals.states.add('--has-text') : this.#internals.states.delete('--has-text');
   }

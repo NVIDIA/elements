@@ -1,7 +1,7 @@
 import { html, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { clickOutsideElementBounds, ContainerElement, focusElementTimeout, I18nController, useStyles } from '@elements/elements/internal';
+import { clickOutsideElementBounds, ContainerElement, focusElementTimeout, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
 import type { Dropdown } from '@elements/elements/dropdown';
@@ -32,10 +32,6 @@ import styles from './combobox.css?inline';
 export class Combobox extends Control implements ContainerElement {
   /** Flat container option is used when embeding component within another containing element */
   @property({ type: String, reflect: true }) container?: 'flat';
-
-  #i18nController: I18nController<this> = new I18nController<this>(this);
-
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 

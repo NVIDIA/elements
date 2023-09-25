@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { ColorPalette, I18nController, MlvBaseButton, TypeClosableController, useStyles, colorStateStyles } from '@elements/elements/internal';
 import { Icon } from '@elements/elements/icon';
 import styles from './tag.css?inline';
@@ -48,7 +49,7 @@ export class Tag extends MlvBaseButton {
     return html`
       <div internal-host interaction-state focus-within>
         <slot></slot>
-        ${this.closable ? html`<mlv-icon @click=${() => this.#typeClosableController.close()} interaction="flat" name="cancel" size="sm" .ariaLabel=${this.i18n.close}></mlv-icon>` : ''}
+        ${this.closable ? html`<mlv-icon @click=${() => this.#typeClosableController.close()} interaction="flat" name="cancel" size="sm" role="img" aria-label=${ifDefined(this.i18n.close)}></mlv-icon>` : ''}
       </div>
     `;
   }

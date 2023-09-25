@@ -1,0 +1,41 @@
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { runAxe } from '@elements/elements/test/axe.js';
+import { Grid } from '@elements/elements/grid';
+import '@elements/elements/grid/define.js';
+
+describe('mlv-grid axe', () => {
+  let fixture: HTMLElement;
+  let element: Grid;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-grid>
+        <mlv-grid-header>
+          <mlv-grid-column>column 1</mlv-grid-column>
+          <mlv-grid-column>column 2</mlv-grid-column>
+          <mlv-grid-column>column 3</mlv-grid-column>
+          <mlv-grid-column>column 4</mlv-grid-column>
+        </mlv-grid-header>
+        <mlv-grid-row>
+          <mlv-grid-cell>cell 1-1</mlv-grid-cell>
+          <mlv-grid-cell>cell 1-2</mlv-grid-cell>
+          <mlv-grid-cell>cell 1-3</mlv-grid-cell>
+          <mlv-grid-cell>cell 1-4</mlv-grid-cell>
+        </mlv-grid-row>
+      </mlv-grid>
+    `);
+    element = fixture.querySelector('mlv-grid');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should pass axe check', async () => {
+    const results = await runAxe(['mlv-grid']);
+    expect(results.violations.length).toBe(0);
+  });
+});

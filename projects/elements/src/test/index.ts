@@ -1,5 +1,4 @@
 import { TemplateResult, render } from 'lit';
-
 export * from './demo.js';
 
 /**

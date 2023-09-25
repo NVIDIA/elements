@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@elements/element
 import { Textarea } from '@elements/elements/textarea';
 import '@elements/elements/textarea/define.js';
 
-describe('mlv-icon', () => {
+describe('mlv-textarea', () => {
   let fixture: HTMLElement;
   let element: Textarea;
 

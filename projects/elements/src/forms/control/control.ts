@@ -4,7 +4,7 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
-import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList, appendRootNodeStyle, getAttributeListChanges } from '@elements/elements/internal';
+import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList, appendRootNodeStyle, getAttributeListChanges, I18nController } from '@elements/elements/internal';
 import { ControlMessage } from '../control-message/control-message.js';
 import { setupControlValidationStates, setupControlStates, setupControlStatusStates, inputQuery } from '../utils/states.js';
 import { setupControlLayoutStates, isInlineInputType } from '../utils/layout.js';
@@ -36,6 +36,10 @@ export class Control extends LitElement {
 
   /** Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select) */
   @property({ type: Boolean, reflect: true, attribute: 'fit-text' }) fitText = false;
+
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   get #label() {
     return this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="label"]')?.assignedElements({ flatten: true })?.[0] as HTMLLabelElement;

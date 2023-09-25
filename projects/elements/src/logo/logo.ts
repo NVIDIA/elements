@@ -50,7 +50,7 @@ export class Logo extends LitElement {
     `;
   }
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
     this.#internals.role = 'img';
   }

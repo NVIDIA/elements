@@ -27,7 +27,6 @@ describe('mlv-datetime', () => {
     expect(customElements.get('mlv-datetime')).toBeDefined();
   });
 
-
   it('should render calendar suffix icon', () => {
     expect(element.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('calendar');
   });

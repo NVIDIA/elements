@@ -74,6 +74,16 @@ function getStatusBadge(status, message = '') {
   return html`<mlv-badge .status=${statuses[status]}>${status ? status : 'unknown'}${message}</mlv-badge>`
 }
 
+function getA11yStatusBadge(axe: string | boolean, shorthand = false) {
+  if (axe === undefined) {
+    return html`<mlv-badge status="success">${shorthand ? 'Reviewed' : 'Accessibility: Reviewed'}</mlv-badge>`;
+  } else if (axe === false) {
+    return html`<mlv-badge status="pending">${shorthand ? 'Pending' : 'Accessibility: Pending'}</mlv-badge>`
+  } else {
+    return html`<mlv-badge status="warning" style="--text-transform: none"><a href="https://dequeuniversity.com/rules/axe/4.8/${axe}?application=axeAPI" target="_blank">${shorthand ? axe : `Accessibility: ${axe}`}</a></mlv-badge>`
+  }
+}
+
 function getBehaviorCategoryIcon(category: string) {
   return {
     ['navigation']: '🧭',
@@ -165,6 +175,7 @@ class ElementMetrics extends LitElement {
         <div mlv-layout="row gap:sm align:vertical-center">
           <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
           <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
+          <div>${getA11yStatusBadge(element.axe)}</div>
           <a href=${element.aria} mlv-text="link no-visit label">API Spec</a>
           ${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit label">Figma</a>` : nothing}
           <a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages" mlv-text="link no-visit label">Released ${element.since}</a>
@@ -202,10 +213,11 @@ class ElementsMetrics extends LitElement {
     tooltipColumn: null,
     columns: {
       element: { sort: 'none', width: '200px' },
-      status: { sort: 'none' },
-      coverage: { sort: 'none' },
-      spec: { sort: 'none', tooltip: 'Behavior category from W3C and WAI-ARIA Specification' },
-      released: { sort: 'none', tooltip: 'Version Element was first released', width: '120px' },
+      status: { sort: 'none', width: '150px' },
+      coverage: { sort: 'none', width: '150px' },
+      accessibility: { sort: 'none', tooltip: 'Accessibility status from Axe Core API', width: '190px' },
+      spec: { sort: 'none', tooltip: 'Behavior category from W3C and WAI-ARIA Specification', width: '130px' },
+      released: { sort: 'none', tooltip: 'Version Element was first released', width: '100px' },
       instances: { sort: 'none', tooltip: 'Number of instances of element directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.', width: '100px' },
       projects: { sort: 'none', tooltip: 'Number of Maglev Projects which reference the given element.', width: '100px' },
       figma: { sort: 'none', width: '100px' },
@@ -245,6 +257,7 @@ class ElementsMetrics extends LitElement {
             <mlv-grid-cell><a href=${element.storybook.replace('https://elements.nvidia.com/ui/storybook/elements', './')} mlv-text="body link no-visit">${element.name.replace('mlv-', '')}</a></mlv-grid-cell>
             <mlv-grid-cell>${getStatusBadge(element.status)}</mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(element.coverageTotal)}</mlv-grid-cell>
+            <mlv-grid-cell>${getA11yStatusBadge(element.axe, true)}</mlv-grid-cell>
             <mlv-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} mlv-text="link no-visit">${element.behavior}</a></mlv-grid-cell>
             <mlv-grid-cell>${element.since}</mlv-grid-cell>
             <mlv-grid-cell>${element.instanceTotal}</mlv-grid-cell>

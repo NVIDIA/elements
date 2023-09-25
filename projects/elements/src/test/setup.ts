@@ -20,6 +20,13 @@ await vi.dynamicImportSettled();
 
 beforeAll(async () => {
   await vi.dynamicImportSettled();
+
+  // axe does not support ElementInternals AOM yet https://github.com/nvaccess/nvda/issues/15118
+  // this forces the polyfill to run if an AXE test and trigger the AOM reflection
+  if (globalThis.axe) {
+    window.ElementInternals = undefined;
+    await import('element-internals-polyfill');
+  }
 });
 
 afterAll(async () => {

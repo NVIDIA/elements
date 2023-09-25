@@ -168,7 +168,7 @@ describe('base button', () => {
     element.readonly = true;
     await elementIsStable(element);
     expect(element.tabIndex).toBe(-1);
-    expect(element._internals.role).toBe(null);
+    expect(element._internals.role).toBe('none');
     expect(element.getAttribute('role')).toBe(null);
   });
 
