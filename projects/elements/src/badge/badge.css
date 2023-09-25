@@ -12,20 +12,12 @@
   --height: initial;
 }
 
-@supports not (background: color-mix(in oklab, #000 0%, #fff)) {
-  [internal-host] {
-    --background: var(--status-color);
-    border: 1px solid transparent;
-    background-image: linear-gradient(hsla(0, 0%, 0%, 0.8) 0 0) !important;
-  }
-}
-
 [internal-host] {
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   gap: var(--gap);
   background: var(--background);
-  color: var(--status-color);
+  color: color-mix(in oklab, var(--status-color), var(--nve-sys-text-emphasis-color) 16%);
   padding: var(--padding);
   border-radius: var(--border-radius);
   width: var(--width);
@@ -45,6 +37,13 @@
 
 ::slotted([nve-text]) {
   color: inherit !important;
+}
+
+::slotted(a) {
+  margin: 0 !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  line-height: 0 !important;
 }
 
 nve-icon,
@@ -72,6 +71,6 @@ nve-icon,
   --border-radius: var(--nve-ref-border-radius-sm);
 
   & [internal-host] {
-    color: var(--nve-sys-layer-canvas-background);
+    color: var(--nve-sys-contrast-mute-color);
   }
 }

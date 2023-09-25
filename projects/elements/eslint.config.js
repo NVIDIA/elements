@@ -10,7 +10,7 @@ import rulesdir from 'eslint-plugin-rulesdir';
 rulesdir.RULES_DIR = './build/eslint';
 
 const source = ['**/src/**/*.ts', '**/src/**/*.d.ts'];
-const tests = ['**/src/test/*.ts', '**/*.test.ts'];
+const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts'];
 const stories = ['**/*.stories.ts'];
 const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/storybook-build/**'];
 
@@ -69,7 +69,6 @@ export default [
       'import/extensions': ['error', 'ignorePackages', { 'js': 'always', 'css?inline': 'never' }],
       '@typescript-eslint/no-explicit-any': 'off', // TODO
       '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test' }], // ignore demo/test components that do not need to be exported
-      '@typescript-eslint/no-floating-promises': ['error'],
       'lit-a11y/anchor-has-content': 'off', // rule does not check for aria-label
       'lit-a11y/click-events-have-key-events': 'off', // a11y may be handled by @keyNavigationList controller
       'no-unknown-slot': 'off', // currently not working due to pnpm hoisting types
@@ -102,6 +101,7 @@ export default [
     files: [...source],
     ignores: [...ignores, ...tests, ...stories],
     rules: {
+      '@typescript-eslint/no-floating-promises': ['error'],
       'rulesdir/primitive-property': ['error'],
       'no-implicit-globals': ['error'],
       'no-restricted-globals': [
