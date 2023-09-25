@@ -1,18 +1,18 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { SegmentButton } from '@elements/elements/segment-button';
-import '@elements/elements/segment-button/define.js';
+import { ButtonGroup } from '@elements/elements/button-group';
+import '@elements/elements/button-group/define.js';
 
-describe('mlv-segment-button', () => {
+describe('mlv-button-group', () => {
   let fixture: HTMLElement;
-  let element: SegmentButton;
+  let element: ButtonGroup;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-segment-button></mlv-segment-button>
+      <mlv-button-group></mlv-button-group>
     `);
-    element = fixture.querySelector('mlv-segment-button');
+    element = fixture.querySelector('mlv-button-group');
     await elementIsStable(element);
   });
 
@@ -21,6 +21,6 @@ describe('mlv-segment-button', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-segment-button')).toBeDefined();
+    expect(customElements.get('mlv-button-group')).toBeDefined();
   });
 });

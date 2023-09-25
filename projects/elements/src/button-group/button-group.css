@@ -1,0 +1,50 @@
+:host {
+  --mlv-sys-interaction-state-base: var(--background);
+  --background: var(--mlv-sys-interaction-background);
+  --border-radius: var(--mlv-ref-border-radius-sm);
+  --padding: 4px;
+  --width: fit-content;
+  --gap: 2px;
+  width: var(--width);
+}
+
+[internal-host] {
+  background: var(--background);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  gap: var(--gap);
+  overflow: hidden;
+  display: flex;
+}
+
+::slotted(mlv-button) {
+  --height: var(--mlv-ref-size-700);
+  --border-radius: var(--border-radius);
+}
+
+::slotted(mlv-icon-button) {
+  --height: var(--mlv-ref-size-700);
+  --border-radius: var(--mlv-ref-border-radius-sm);
+}
+
+::slotted(mlv-divider) {
+  margin-top: calc(-1 * var(--padding));
+  height: calc(100% + var(--padding));
+}
+
+::slotted(:hover) {
+  --color: var(--mlv-sys-text-emphasis-color);
+}
+
+:host([split]) {
+  --padding: 0;
+  --gap: 0;
+}
+
+:host([interaction='flat']) {
+  --background: transparent;
+}
+
+:host([interaction='rounded']) {
+  --border-radius: var(--mlv-ref-border-radius-lg);
+}
