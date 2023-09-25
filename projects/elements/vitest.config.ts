@@ -4,6 +4,7 @@ import process from 'process';
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 const coverage = (process.argv.findIndex((i) => i === '--coverage') !== -1);
+const axe = (process.argv.findIndex((i) => i === '--axe') !== -1);
 const watch = (process.argv.findIndex((i) => i === '--watch') !== -1);
 
 export default defineConfig({
@@ -30,7 +31,9 @@ export default defineConfig({
       '../dist/css/theme.compact.css': resolve('./dist/css/theme.compact.css'),
       '../dist/css/theme.dark.css': resolve('./dist/css/theme.dark.css')
     },
-    include: [resolve('./src/**/*.test.ts')],
+    include: [
+      axe ? resolve('./src/**/*.test.axe.ts') : resolve('./src/**/*.test.ts')
+    ],
     forceRerunTriggers: ['**/dist/**'],
     watchExclude: ['**/node_modules/**'],
     // Default includes '.cache' which fails under Bazel as its sandbox lives in such a folder.

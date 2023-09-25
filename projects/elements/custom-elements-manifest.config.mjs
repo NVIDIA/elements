@@ -20,7 +20,8 @@ function metadataPlugin() {
         'performance',
         'package',
         'description',
-        'since'
+        'since',
+        'axe'
       ];
 
       switch (node.kind) {

@@ -3,5 +3,5 @@
   "compilerOptions": {
     "types": []
   },
-  "exclude": ["**/*.test.ts", "**/*.stories.ts"]
+  "exclude": ["**/*.test.ts", "**/*.test.axe.ts", "**/*.stories.ts"]
 }

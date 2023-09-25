@@ -27,7 +27,6 @@ describe('nve-date', () => {
     expect(customElements.get('nve-date')).toBeDefined();
   });
 
-
   it('should render calendar suffix icon', () => {
     expect(element.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('calendar');
   });
