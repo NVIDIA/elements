@@ -1,0 +1,87 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { statusBadges } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Button Group/Documentation" parameters={{ badges: statusBadges('nve-button-group') }} />
+
+# Button Group
+
+<element-metrics tag="nve-button-group"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/button-group/define.js';
+```
+
+```html
+<nve-button-group>
+  <nve-icon-button pressed value="vertical" aria-label="split vertical" icon-name="split-vertical"></nve-icon-button>
+  <nve-icon-button value="horizontal" aria-label="split horizontal" icon-name="split-horizontal"></nve-icon-button>
+  <nve-icon-button value="none" aria-label="split none" icon-name="split-none"></nve-icon-button>
+</nve-button-group>
+```
+
+<Canvas>
+  <Story id="elements-button-group-examples--default" />
+</Canvas>
+
+<element-metrics tag="nve-button-group" type="property" value="behaviorSelect"></element-metrics>
+
+## Single Select Icon Buttons
+
+<Canvas>
+  <Story id="elements-button-group-examples--single-select" />
+</Canvas>
+
+## Multi Select Icon Buttons
+
+<Canvas>
+  <Story id="elements-button-group-examples--multi-select" />
+</Canvas>
+
+<element-metrics tag="nve-button-group" type="property" value="interaction"></element-metrics>
+
+## Flat
+
+<Canvas>
+  <Story id="elements-button-group-examples--flat" />
+</Canvas>
+
+## Rounded
+
+<Canvas>
+  <Story id="elements-button-group-examples--rounded" />
+</Canvas>
+
+## Action
+
+For a group of buttons that trigger one-off actions you can use the default `interaction` with no `pressed` states.
+
+<Canvas>
+  <Story id="elements-button-group-examples--action" />
+</Canvas>
+
+## Action Split
+
+For split actions that contain a button and a dropdown trigger use `nve-button` separated from `nve-icon-button` with a `nve-divider`.
+
+<Canvas>
+  <Story id="elements-button-group-examples--action-split" />
+</Canvas>
+
+## Action Split Rounded
+
+<Canvas>
+  <Story id="elements-button-group-examples--action-split-rounded" />
+</Canvas>
+
+## Rounded Icon
+
+<Canvas>
+  <Story id="elements-button-group-examples--rounded-icon" />
+</Canvas>
+
+<element-status tag={'nve-button-group'}></element-status>
+
+## nve-button-group
+<ArgsTable of="nve-button-group" />
