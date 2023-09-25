@@ -1,7 +1,7 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals, ContainerElement, Container } from '@elements/elements/internal';
+import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals, ContainerElement, Container, generateId } from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
 import accordionHeaderStyleSheet from './accordion-header.css?inline';
@@ -34,6 +34,7 @@ export class AccordionHeader extends LitElement {
   render() {
     return html`
       <div internal-host>
+        <slot></slot>
         <div id="titles">
           <slot name="title"></slot>
           <slot name="subtitle"></slot>
@@ -51,6 +52,7 @@ export class AccordionHeader extends LitElement {
     this.slot = 'header';
     attachInternals(this);
     this._internals.role = 'heading';
+    this._internals.ariaLevel = '2';
   }
 }
 
@@ -142,6 +144,10 @@ export class Accordion extends LitElement implements ContainerElement {
     return !!this.querySelector('[slot="actions"]')
   }
 
+  get #header() {
+    return this.shadowRoot.querySelector<HTMLSlotElement>('slot[name=header]').assignedElements()[0];
+  }
+
   #toggle(element: HTMLElement): void {
     if (element.slot === 'actions' || this.disabled) {
       return;
@@ -160,7 +166,7 @@ export class Accordion extends LitElement implements ContainerElement {
           .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
           .ariaControls=${'content'}
           >
-          <slot id="heading" name="header"></slot>
+          <slot name="header"></slot>
 
           <nve-icon-button
             interaction="flat"
@@ -170,10 +176,11 @@ export class Accordion extends LitElement implements ContainerElement {
             ?pressed=${this.expanded}
             ?selected=${!this.disabled && this.hoverActive}
             .expanded=${this.expanded}
+            .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
             ></nve-icon-button>
         </div>
 
-        <div id="content" aria-labelledby="heading">
+        <div id="content">
           <slot></slot>
         </div>
       </div>
@@ -184,6 +191,15 @@ export class Accordion extends LitElement implements ContainerElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'region';
+  }
+
+  async firstUpdated(props: PropertyValues<this>) {
+    super.firstUpdated(props);
+
+    if (this.#header) {
+      this.#header.id ||= generateId();
+      this.setAttribute('aria-labelledby', this.#header.id);
+    }
   }
 }
 

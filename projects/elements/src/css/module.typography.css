@@ -181,8 +181,12 @@
     color: var(--nve-sys-text-link-color) !important;
   }
 
+  &[nve-text~='no-visit']:hover {
+    color: var(--nve-sys-text-link-hover-color) !important;
+  }
+
   &[nve-text~='no-underline'] {
-    color: var(--nve-sys-text-link-color) !important;
+    text-decoration: none !important;
   }
 }
 

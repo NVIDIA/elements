@@ -22,6 +22,6 @@ export class Date extends Control {
   };
 
   protected get suffixContent() {
-    return html`<nve-icon-button icon-name="calendar" interaction="flat" @click=${this.showPicker}></nve-icon-button>`;
+    return html`<nve-icon-button .ariaLabel=${this.i18n.expand} icon-name="calendar" interaction="flat" @click=${this.showPicker}></nve-icon-button>`;
   }
 }

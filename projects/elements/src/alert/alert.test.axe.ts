@@ -1,0 +1,32 @@
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { runAxe } from '@elements/elements/test/axe.js';
+import { Alert } from '@elements/elements/alert';
+import '@elements/elements/alert/define.js';
+
+describe('nve-alert axe', () => {
+  let fixture: HTMLElement;
+  let alert: Alert;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-alert>default</nve-alert>
+      <nve-alert status="accent">accent</nve-alert>
+      <nve-alert status="warning">warning</nve-alert>
+      <nve-alert status="success">success</nve-alert>
+      <nve-alert status="danger">danger</nve-alert>
+    `);
+    alert = fixture.querySelector('nve-alert');
+    await elementIsStable(alert);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should pass axe check', async () => {
+    const results = await runAxe(['nve-alert']);
+    expect(results.violations.length).toBe(0);
+  });
+});

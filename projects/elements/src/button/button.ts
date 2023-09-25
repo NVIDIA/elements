@@ -21,6 +21,7 @@ import styles from './button.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
+ * @axe color-contrast
  */
 export class Button extends MlvBaseButton {
   static styles = useStyles([styles]);

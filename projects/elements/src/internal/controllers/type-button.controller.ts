@@ -31,7 +31,7 @@ export class TypeButtonController<T extends Button> implements ReactiveControlle
     this.host.tabIndex = !this.host.disabled ? 0 : -1;
 
     if (this.host.readonly) {
-      this.host._internals.role = null;
+      this.host._internals.role = 'none';
       this.host.tabIndex = null;
       this.host.removeAttribute('tabindex');
     }

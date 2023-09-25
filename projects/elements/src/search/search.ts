@@ -25,6 +25,6 @@ export class Search extends Control implements ContainerElement {
   };
 
   protected get prefixContent() {
-    return html`<nve-icon-button icon-name="search" interaction="flat" readonly></nve-icon-button>`;
+    return html`<nve-icon-button icon-name="search" interaction="flat" aria-hidden="true" readonly></nve-icon-button>`;
   }
 }
