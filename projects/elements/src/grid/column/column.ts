@@ -73,11 +73,6 @@ export class GridColumn extends LitElement {
     this.addEventListener('sort', (e: CustomEvent) => this.ariaSort = e.detail.next);
   }
 
-  async firstUpdated(props: PropertyValues<this>) {
-    super.firstUpdated(props);
-    await this.updateComplete;
-  }
-
   async updated(props: PropertyValues<this>) {
     super.updated(props);
 

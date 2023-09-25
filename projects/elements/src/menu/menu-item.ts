@@ -24,7 +24,7 @@ import globalStyles from './menu-item.global.css?inline';
  * @stable false
  */
 export class MenuItem extends MlvBaseButton {
-  @property({ type: Boolean, reflect: true }) selected = false;
+  @property({ type: Boolean, reflect: true }) selected: boolean;
 
   static styles = useStyles([styles]);
 

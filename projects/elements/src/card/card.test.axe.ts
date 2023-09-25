@@ -1,0 +1,49 @@
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { runAxe } from '@elements/elements/test/axe.js';
+import { Card, CardHeader, CardFooter, CardContent } from '@elements/elements/card';
+import '@elements/elements/card/define.js';
+
+describe('nve-card axe', () => {
+  let fixture: HTMLElement;
+  let card: Card;
+  let cardHeader: CardHeader;
+  let cardContent: CardContent;
+  let cardFooter: CardFooter;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-card>
+        <nve-card-header>
+          <h2 slot="title">title</h2>
+          <h3 slot="subtitle">subtitle</h3>
+          <button slot="header-action">header action</button>
+        </nve-card-header>
+        <nve-card-content>
+          <p>content</p>
+        </nve-card-content>
+        <nve-card-footer>
+          <p>footer</p>
+        </nve-card-footer>
+      </nve-card>
+    `);
+    card = fixture.querySelector('nve-card');
+    cardHeader = fixture.querySelector('nve-card-header');
+    cardContent = fixture.querySelector('nve-card-content');
+    cardFooter = fixture.querySelector('nve-card-footer');
+    await elementIsStable(card);
+    await elementIsStable(cardHeader);
+    await elementIsStable(cardContent);
+    await elementIsStable(cardFooter);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should pass axe check', async () => {
+    const results = await runAxe(['nve-card']);
+    expect(results.violations.length).toBe(0);
+  });
+});
