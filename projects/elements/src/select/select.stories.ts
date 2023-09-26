@@ -288,10 +288,35 @@ export const FitText = {
   <select>
     <option value="1">Option 1</option>
     <option value="2">Option 1234</option>
-    <option value="3">Option 1234567812341234123412341234</option>
+    <option value="3">Option 1234567809</option>
   </select>
   <nve-control-message>message</nve-control-message>
 </nve-select>`
+};
+
+export const FitContent = {
+  render: () => html`
+<div nve-layout="column gap:lg">
+  <nve-select fit-content>
+    <label>label</label>
+    <select>
+      <option value="1">Option 1</option>
+      <option value="2">Option 1234</option>
+      <option value="3">Option 1234567809</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+
+  <nve-select fit-content layout="horizontal">
+    <label>label</label>
+    <select>
+      <option value="1">Option 1</option>
+      <option value="2">Option 1234</option>
+      <option value="3">Option 1234567809</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+</div>`
 };
 
 export const Performance = {

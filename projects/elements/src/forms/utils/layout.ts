@@ -10,7 +10,11 @@ export const breakpoints = {
 
 export function setupControlLayoutStates(control: Control | ControlGroup) {
   const initalLayout = control.layout;
-  const resizeObserver = new ResizeObserver((entries) => control.layout = getControlLayout(entries[0].contentRect.width, initalLayout));
+  const resizeObserver = new ResizeObserver((entries) => {
+    if (!(control as Control).fitContent) {
+      control.layout = getControlLayout(entries[0].contentRect.width, initalLayout);
+    }
+  });
   resizeObserver.observe(control);
   return resizeObserver;
 }

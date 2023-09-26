@@ -15,6 +15,7 @@
   --width: 100%;
   --content-padding: var(--padding);
   display: contents;
+  contain: none;
 }
 
 :host([size='sm']) {

@@ -3,7 +3,7 @@
   --accent-color: var(--nve-sys-accent-secondary-background);
   --color: var(--nve-sys-interaction-field-color);
   --label-color: var(--nve-sys-interaction-field-color);
-  --control-width: 200px;
+  --control-width: 100%;
   --control-height: auto;
   --_label-width: var(--label-width, 180px);
   --nve-sys-interaction-state-base: var(--background);
@@ -28,6 +28,12 @@
 :host(:--disabled) ::slotted(nve-control-message:not([status])) {
   --cursor: not-allowed;
   --color: var(--nve-sys-text-muted-color);
+}
+
+:host([fit-content]) {
+  --control-width: fit-content;
+  --label-width: fit-content;
+  --width: fit-content;
 }
 
 [input]:focus-within {
