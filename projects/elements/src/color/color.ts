@@ -36,5 +36,7 @@ export class Color extends Control {
 
   async #select() {
     this.input.value = await openEyeDropper();
+    this.input.dispatchEvent(new Event('input', { bubbles: true }));
+    this.input.dispatchEvent(new Event('change', { bubbles: true }));
   }
 }
