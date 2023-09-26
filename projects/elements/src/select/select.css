@@ -6,14 +6,15 @@
   --color: var(--nve-sys-interaction-field-color);
   --border-radius: var(--nve-ref-border-radius-sm);
   --border: var(--nve-ref-border-width-md) solid transparent;
+  --border-bottom: var(--border);
   --cursor: pointer;
-  --width: 100%;
   --font-weight: normal;
   --text-align: start;
   --scroll-height: 50vh;
   --_input-background: var(--background);
   --_icon-color: var(--color);
   --width: 100%;
+  --control-width: var(--width);
   --max-width: 100%;
   --min-width: fit-content;
   contain: initial;
@@ -30,8 +31,9 @@
   height: var(--height);
   background: var(--background);
   border: var(--border);
+  border-bottom: var(--border-bottom);
   border-radius: var(--border-radius);
-  width: var(--width);
+  width: var(--control-width);
   color: var(--color);
   align-items: center;
   display: flex;
@@ -174,10 +176,10 @@ slot[name*='option-'] {
 :host([container='flat']) {
   --border-radius: 0;
   --box-shadow: none;
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
   
   & [input] {
     background: inherit;
-    border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
   }
 
   & nve-tag {
@@ -186,9 +188,10 @@ slot[name*='option-'] {
 }
 
 :host([container='flat'][nve-control]:focus-within) {
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
+
   & [input] {
     outline: 0 !important;
-    border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
   }
 }
 
