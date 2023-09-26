@@ -37,6 +37,9 @@ export class Control extends LitElement {
   /** Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select) */
   @property({ type: Boolean, reflect: true, attribute: 'fit-text' }) fitText = false;
 
+  /** Sets the input to match native default content block */
+  @property({ type: Boolean, reflect: true, attribute: 'fit-content' }) fitContent = false;
+
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;

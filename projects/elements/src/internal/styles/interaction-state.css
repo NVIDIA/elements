@@ -22,7 +22,7 @@
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-disabled);
 }
 
-:host([readonly]) [interaction-state],
-:host(:--readonly) [interaction-state] {
+:host(:not(:--anchor)[readonly]) [interaction-state],
+:host(:not(:--anchor):--readonly) [interaction-state] {
   --nve-sys-interaction-state-ratio: 0;
 }

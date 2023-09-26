@@ -193,6 +193,34 @@ describe('nve-control fit-text input', () => {
   });
 });
 
+describe('nve-control fit-content input', () => {
+  let fixture: HTMLElement;
+  let element: Control;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-control fit-content>
+        <label>label</label>
+        <input type="text" />
+      </nve-control>
+    `);
+    element = fixture.querySelector('nve-control');
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should update control width to input browser default content', async () => {
+    await elementIsStable(element);
+    expect(Math.floor(input.getBoundingClientRect().width) > 100).toBe(true);
+    expect(Math.floor(input.getBoundingClientRect().width) < 200).toBe(true);
+  });
+});
+
 describe('nve-control fit-text select', () => {
   let fixture: HTMLElement;
   let element: Control;
