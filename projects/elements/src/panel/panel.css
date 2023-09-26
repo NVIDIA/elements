@@ -5,6 +5,8 @@
   overflow: hidden;
   -webkit-transition: width 240ms ease;
   -webkit-transition: height 240ms ease;
+  contain: none;
+  position: relative;
 }
 
 [internal-host] {
@@ -16,6 +18,10 @@
   color: var(--color);
   box-shadow: var(--box-shadow);
   background: var(--background);
+}
+
+:host(:not(:--expanded)) {
+  --box-shadow: none;
 }
 
 :host(:not([closable]):not(:--expanded)) {
