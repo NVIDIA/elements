@@ -146,6 +146,21 @@ describe('mlv-select', () => {
     expect(element.shadowRoot.querySelectorAll('mlv-tag').length).toBe(2);
   });
 
+  it('should update tags when using multiple select and options change', async () => {
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('mlv-tag')[0].innerText).toBe('Option 1');
+
+    select.options[0].innerText = 'Option 1 Updated';
+    select.options[0].value = '1-updated';
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('mlv-tag')[0].innerText).toBe('Option 1 Updated');
+  });
+
   it('should deselect option when tag is clicked', async () => {
     select.multiple = true;
     select.options[0].selected = true;

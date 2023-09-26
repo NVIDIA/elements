@@ -1,7 +1,7 @@
 import { PropertyValues, html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { focusElementTimeout, onListboxActivate, useStyles, i18n, I18nController } from '@elements/elements/internal';
+import { focusElementTimeout, onListboxActivate, useStyles, i18n, I18nController, getAttributeListChanges, onChildListMutation } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
@@ -72,7 +72,7 @@ export class Select extends Control {
     return this.shadowRoot.querySelector('.tags')
   }
 
-  #resizeObserver: ResizeObserver;
+  #observers: (MutationObserver | ResizeObserver)[] = [];
 
   protected get prefixContent() {
     return this.input?.multiple ? html`
@@ -103,11 +103,16 @@ export class Select extends Control {
     await this.updateComplete;
     this.#setupCustomSelectUI();
     this.#setupOverflowListener();
+
+    this.#observers.push(
+      getAttributeListChanges(this.#select, ['value'], () => this.requestUpdate()),
+      onChildListMutation(this.#select, () => this.requestUpdate())
+    );
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.#resizeObserver.disconnect();
+    this.#observers.forEach(observer => observer.disconnect());
   }
 
   async updated(props: PropertyValues<this>) {
@@ -133,8 +138,9 @@ export class Select extends Control {
   }
 
   #setupOverflowListener() {
-    this.#resizeObserver = new ResizeObserver((entries) => this.#updateMultipleOverflow(entries[0].contentRect.width));
-    this.#resizeObserver.observe(this.#input);
+    const observer = new ResizeObserver((entries) => this.#updateMultipleOverflow(entries[0].contentRect.width));
+    this.#observers.push(observer);
+    observer.observe(this.#input);
   }
 
   async #selectValue(option: HTMLOptionElement, selected: boolean) {

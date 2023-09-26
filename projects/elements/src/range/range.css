@@ -14,7 +14,7 @@
   height: var(--track-height) !important;
   cursor: var(--cursor) !important;
   margin: 0 !important;
-  width: 100% !important;
+  width: var(--control-width) !important;
   background: transparent;
   align-self: center;
   appearance: var(--_appearance);

@@ -22,7 +22,7 @@
   --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-disabled);
 }
 
-:host([readonly]) [interaction-state],
-:host(:--readonly) [interaction-state] {
+:host(:not(:--anchor)[readonly]) [interaction-state],
+:host(:not(:--anchor):--readonly) [interaction-state] {
   --mlv-sys-interaction-state-ratio: 0;
 }

@@ -1,5 +1,5 @@
 {
-  "created": "2023-09-25T19:28:04.072Z",
+  "created": "2023-09-27T21:44:13.395Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -454,7 +454,7 @@
         }
       ],
       "projectTotal": 15,
-      "instanceTotal": 91,
+      "instanceTotal": 92,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -664,6 +664,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -729,6 +733,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -770,6 +778,10 @@
         {
           "name": "fitText",
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
         },
         {
           "name": "reset",
@@ -820,6 +832,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -832,7 +848,7 @@
       ],
       "projectTotal": 8,
       "instanceTotal": 16,
-      "coverageTotal": 98.1375,
+      "coverageTotal": 98.1425,
       "behavior": "form",
       "status": "stable"
     },
@@ -934,6 +950,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -971,6 +991,10 @@
         {
           "name": "fitText",
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
         },
         {
           "name": "reset",
@@ -1358,6 +1382,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -1404,7 +1432,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 12,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1431,7 +1459,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 11,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1467,7 +1495,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 9,
+      "instanceTotal": 8,
       "coverageTotal": 97.54749999999999,
       "behavior": "list",
       "status": "beta"
@@ -1521,7 +1549,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 9,
+      "instanceTotal": 8,
       "coverageTotal": 97.315,
       "behavior": "list",
       "status": "beta"
@@ -1547,8 +1575,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 5,
+      "projectTotal": 2,
+      "instanceTotal": 4,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1575,7 +1603,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 12,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1728,6 +1756,10 @@
         {
           "name": "fitText",
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
         },
         {
           "name": "reset",
@@ -1954,6 +1986,10 @@
         {
           "name": "fitText",
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
         },
         {
           "name": "reset",
@@ -2252,6 +2288,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -2399,6 +2439,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -2464,6 +2508,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -2507,6 +2555,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -2544,6 +2596,10 @@
         {
           "name": "fitText",
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
         },
         {
           "name": "reset",
@@ -2644,6 +2700,10 @@
         {
           "name": "fitText",
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
         },
         {
           "name": "reset",
@@ -2855,6 +2915,10 @@
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
         },
         {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -2892,6 +2956,10 @@
         {
           "name": "fitText",
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
         },
         {
           "name": "reset",
@@ -3045,6 +3113,10 @@
         {
           "name": "fitText",
           "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)"
+        },
+        {
+          "name": "fitContent",
+          "description": "Sets the input to match native default content block"
         },
         {
           "name": "reset",
@@ -3711,19 +3783,23 @@
         },
         {
           "name": "mlv-grid-cell",
-          "instanceTotal": 4
+          "instanceTotal": 3
         },
         {
           "name": "mlv-grid",
-          "instanceTotal": 4
+          "instanceTotal": 3
         },
         {
           "name": "mlv-grid-row",
-          "instanceTotal": 4
+          "instanceTotal": 3
         },
         {
           "name": "mlv-button",
-          "instanceTotal": 8
+          "instanceTotal": 9
+        },
+        {
+          "name": "mlv-toast",
+          "instanceTotal": 3
         },
         {
           "name": "mlv-icon-button",
@@ -3766,10 +3842,6 @@
           "instanceTotal": 1
         },
         {
-          "name": "mlv-toast",
-          "instanceTotal": 3
-        },
-        {
           "name": "mlv-dot",
           "instanceTotal": 1
         },
@@ -3784,18 +3856,6 @@
         {
           "name": "mlv-badge",
           "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-column",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-grid-header",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-grid-placeholder",
-          "instanceTotal": 1
         },
         {
           "name": "mlv-switch",
@@ -3819,6 +3879,14 @@
         },
         {
           "name": "mlv-control",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-header",
           "instanceTotal": 2
         },
         {
@@ -3862,7 +3930,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 123
+      "instanceTotal": 118
     },
     {
       "name": "@elements/next-common",
@@ -5139,20 +5207,20 @@
       {
         "file": "elements/src/select/select.ts",
         "lines": {
-          "total": 59,
-          "covered": 59,
+          "total": 63,
+          "covered": 63,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 25,
-          "covered": 25,
+          "total": 28,
+          "covered": 28,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 85,
-          "covered": 85,
+          "total": 91,
+          "covered": 91,
           "skipped": 0,
           "pct": 100
         },
@@ -6118,15 +6186,15 @@
         },
         "functions": {
           "total": 9,
-          "covered": 8,
+          "covered": 7,
           "skipped": 0,
-          "pct": 88.88
+          "pct": 77.77
         },
         "statements": {
           "total": 19,
-          "covered": 18,
+          "covered": 17,
           "skipped": 0,
-          "pct": 94.73
+          "pct": 89.47
         },
         "branches": {
           "total": 5,
@@ -7110,8 +7178,8 @@
       {
         "file": "elements/src/forms/utils/layout.ts",
         "lines": {
-          "total": 19,
-          "covered": 19,
+          "total": 21,
+          "covered": 21,
           "skipped": 0,
           "pct": 100
         },
@@ -7122,16 +7190,16 @@
           "pct": 100
         },
         "statements": {
-          "total": 20,
-          "covered": 20,
+          "total": 21,
+          "covered": 21,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 12,
-          "covered": 12,
+          "total": 14,
+          "covered": 13,
           "skipped": 0,
-          "pct": 100
+          "pct": 92.85
         }
       },
       {
@@ -7191,8 +7259,8 @@
       {
         "file": "elements/src/forms/control/control.ts",
         "lines": {
-          "total": 73,
-          "covered": 73,
+          "total": 74,
+          "covered": 74,
           "skipped": 0,
           "pct": 100
         },
@@ -7203,10 +7271,10 @@
           "pct": 96.66
         },
         "statements": {
-          "total": 103,
-          "covered": 102,
+          "total": 105,
+          "covered": 104,
           "skipped": 0,
-          "pct": 99.02
+          "pct": 99.04
         },
         "branches": {
           "total": 32,
@@ -7866,8 +7934,8 @@
       {
         "file": "elements/src/color/color.ts",
         "lines": {
-          "total": 8,
-          "covered": 8,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
@@ -7878,8 +7946,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 13,
-          "covered": 13,
+          "total": 15,
+          "covered": 15,
           "skipped": 0,
           "pct": 100
         },
@@ -8461,28 +8529,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1855,
-        "covered": 1799,
+        "total": 1864,
+        "covered": 1808,
         "skipped": 0,
-        "pct": 96.98
+        "pct": 96.99
       },
       "statements": {
-        "total": 2463,
-        "covered": 2390,
+        "total": 2474,
+        "covered": 2400,
         "skipped": 0,
-        "pct": 97.03
+        "pct": 97
       },
       "functions": {
-        "total": 727,
-        "covered": 691,
+        "total": 730,
+        "covered": 693,
         "skipped": 0,
-        "pct": 95.04
+        "pct": 94.93
       },
       "branches": {
-        "total": 916,
-        "covered": 828,
+        "total": 918,
+        "covered": 829,
         "skipped": 0,
-        "pct": 90.39
+        "pct": 90.3
       },
       "branchesTrue": {
         "total": 0,

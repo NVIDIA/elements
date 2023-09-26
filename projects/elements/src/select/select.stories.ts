@@ -288,10 +288,35 @@ export const FitText = {
   <select>
     <option value="1">Option 1</option>
     <option value="2">Option 1234</option>
-    <option value="3">Option 1234567812341234123412341234</option>
+    <option value="3">Option 1234567809</option>
   </select>
   <mlv-control-message>message</mlv-control-message>
 </mlv-select>`
+};
+
+export const FitContent = {
+  render: () => html`
+<div mlv-layout="column gap:lg">
+  <mlv-select fit-content>
+    <label>label</label>
+    <select>
+      <option value="1">Option 1</option>
+      <option value="2">Option 1234</option>
+      <option value="3">Option 1234567809</option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-select>
+
+  <mlv-select fit-content layout="horizontal">
+    <label>label</label>
+    <select>
+      <option value="1">Option 1</option>
+      <option value="2">Option 1234</option>
+      <option value="3">Option 1234567809</option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-select>
+</div>`
 };
 
 export const Performance = {
