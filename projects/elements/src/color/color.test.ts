@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
 import { Color } from '@elements/elements/color';
 import '@elements/elements/color/define.js';
 
@@ -60,12 +60,16 @@ describe('mlv-color', () => {
         return Promise.resolve({ sRGBHex: '#2d2d2d' });
       }
     }
-  
+
     await elementIsStable(element);
     expect(fixture.querySelector('input').value).toBe('#dfe3e6');
 
+    const input = untilEvent(fixture.querySelector('input'), 'input');
+    const change = untilEvent(fixture.querySelector('input'), 'change');
     element.shadowRoot.querySelector('mlv-icon-button').click();
-    await elementIsStable(element);
+
+    expect(await input).toBeDefined();
+    expect(await change).toBeDefined();
     expect(fixture.querySelector('input').value).toBe('#2d2d2d');
 
     (window as any).EyeDropper = original;

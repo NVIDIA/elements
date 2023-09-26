@@ -6,13 +6,14 @@
   --color: var(--mlv-sys-interaction-field-color);
   --border-radius: var(--mlv-ref-border-radius-sm);
   --border: var(--mlv-ref-border-width-md) solid transparent;
+  --border-bottom: var(--border);
   --cursor: text;
   --font-weight: normal;
   --_icon-height: var(--height);
   --_font-size: var(--font-size);
   --width: 100%;
   --max-width: 100%;
-  --min-width: fit-content;
+  --min-width: initial;
   width: var(--width);
   max-width: var(--max-width);
   min-width: var(--min-width);
@@ -26,6 +27,7 @@
   height: var(--height);
   background: var(--background);
   border: var(--border);
+  border-bottom: var(--border-bottom);
   border-radius: var(--border-radius);
   color: var(--color);
   cursor: var(--cursor);
@@ -82,16 +84,16 @@ mlv-icon-button,
 :host([container='flat']) {
   --border-radius: 0;
   --box-shadow: none;
+  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
 
   & [input] {
     background: inherit;
-    border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
   }
 }
 
 :host([container='flat'][mlv-control]:focus-within) {
+  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-emphasis);
   & [input] {
     outline: 0 !important;
-    border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-emphasis);
   }
 }
