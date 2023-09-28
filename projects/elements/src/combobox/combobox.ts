@@ -68,7 +68,7 @@ export class Combobox extends Control implements ContainerElement {
         <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${this.i18n.select}>
           ${this.options.map(o => html`
           <mlv-menu-item role="option" @click=${() => this.#selectValue(o.value)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${o.value}>
-            <span role="presentation">${o.value.split('').map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>
+            <span role="presentation">${o.value?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>
           </mlv-menu-item>`)}
         </mlv-menu>
       </mlv-dropdown>`;

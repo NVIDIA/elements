@@ -71,8 +71,12 @@
   --font-weight: var(--mlv-ref-font-weight-semibold);
 }
 
+:host([fit-content]:--multiple) [internal-host]:has(mlv-tag) ::slotted(select) {
+  width: var(--mlv-ref-size-1000) !important;
+}
+
 :host(:--multiple) {
-  --padding: 0 var(--mlv-ref-size-100);
+  --padding: 0 var(--mlv-ref-size-300) 0 var(--mlv-ref-size-100);
 
   & [input] {
     padding: var(--padding);

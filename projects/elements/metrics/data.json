@@ -1,5 +1,5 @@
 {
-  "created": "2023-09-27T21:44:13.395Z",
+  "created": "2023-09-29T15:55:54.405Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -454,7 +454,7 @@
         }
       ],
       "projectTotal": 15,
-      "instanceTotal": 92,
+      "instanceTotal": 94,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -672,8 +672,8 @@
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 15,
+      "projectTotal": 8,
+      "instanceTotal": 16,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -847,7 +847,7 @@
         }
       ],
       "projectTotal": 8,
-      "instanceTotal": 16,
+      "instanceTotal": 15,
       "coverageTotal": 98.1425,
       "behavior": "form",
       "status": "stable"
@@ -916,7 +916,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 10,
+      "instanceTotal": 9,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -959,7 +959,7 @@
         }
       ],
       "projectTotal": 4,
-      "instanceTotal": 4,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "pre-release"
@@ -1348,7 +1348,7 @@
         }
       ],
       "projectTotal": 8,
-      "instanceTotal": 29,
+      "instanceTotal": 30,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -1642,7 +1642,7 @@
         }
       ],
       "projectTotal": 17,
-      "instanceTotal": 79,
+      "instanceTotal": 81,
       "coverageTotal": 92.8675,
       "behavior": "content",
       "status": "stable"
@@ -1720,7 +1720,7 @@
         }
       ],
       "projectTotal": 14,
-      "instanceTotal": 54,
+      "instanceTotal": 55,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -2404,8 +2404,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 0,
-      "instanceTotal": 0,
+      "projectTotal": 1,
+      "instanceTotal": 1,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "pre-release"
@@ -2516,8 +2516,8 @@
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 2,
+      "projectTotal": 2,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -2607,7 +2607,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 11,
+      "instanceTotal": 13,
       "coverageTotal": 97.5,
       "behavior": "form",
       "status": "stable"
@@ -3795,7 +3795,7 @@
         },
         {
           "name": "mlv-button",
-          "instanceTotal": 9
+          "instanceTotal": 11
         },
         {
           "name": "mlv-toast",
@@ -3803,11 +3803,11 @@
         },
         {
           "name": "mlv-icon-button",
-          "instanceTotal": 10
+          "instanceTotal": 11
         },
         {
           "name": "mlv-icon",
-          "instanceTotal": 17
+          "instanceTotal": 19
         },
         {
           "name": "mlv-panel-header",
@@ -3842,6 +3842,26 @@
           "instanceTotal": 1
         },
         {
+          "name": "mlv-checkbox",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-date",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 8
+        },
+        {
+          "name": "mlv-progressive-filter-chip",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 4
+        },
+        {
           "name": "mlv-dot",
           "instanceTotal": 1
         },
@@ -3862,24 +3882,12 @@
           "instanceTotal": 2
         },
         {
-          "name": "mlv-date",
+          "name": "mlv-control-message",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-input",
-          "instanceTotal": 8
-        },
-        {
-          "name": "mlv-select",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-control-message",
-          "instanceTotal": 2
-        },
-        {
           "name": "mlv-control",
-          "instanceTotal": 2
+          "instanceTotal": 1
         },
         {
           "name": "mlv-grid-column",
@@ -3891,7 +3899,7 @@
         },
         {
           "name": "mlv-dropdown",
-          "instanceTotal": 3
+          "instanceTotal": 4
         },
         {
           "name": "mlv-menu-item",
@@ -3903,6 +3911,10 @@
         },
         {
           "name": "mlv-pagination",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-range",
           "instanceTotal": 1
         },
         {
@@ -3930,7 +3942,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 118
+      "instanceTotal": 128
     },
     {
       "name": "@elements/next-common",
