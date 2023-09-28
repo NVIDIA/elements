@@ -193,6 +193,16 @@
         padding-$(side): var(--nve-ref-space-$(size));
       }
     }
+
+    &[nve-layout~='pad-x:$(size)'] {
+      padding-left: var(--nve-ref-space-$(size));
+      padding-right: var(--nve-ref-space-$(size));
+    }
+
+    &[nve-layout~='pad-y:$(size)'] {
+      padding-top: var(--nve-ref-space-$(size));
+      padding-bottom: var(--nve-ref-space-$(size));
+    }
   }
 
 
