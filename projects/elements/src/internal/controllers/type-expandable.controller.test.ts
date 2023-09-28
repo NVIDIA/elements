@@ -46,6 +46,7 @@ describe('type-expandable.controller', () => {
     const event = untilEvent(element, 'close');
     element.close();
     expect((await event)).toBeDefined();
+    expect((await event).bubbles).toBe(true);
     expect(element.expanded).toBe(true); // default to stateless
   });
 
@@ -56,6 +57,7 @@ describe('type-expandable.controller', () => {
     const event = untilEvent(element, 'open');
     element.open();
     expect((await event)).toBeDefined();
+    expect((await event).bubbles).toBe(true);
     expect(element.expanded).toBe(false); // default to stateless
   });
 
