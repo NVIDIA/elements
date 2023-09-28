@@ -193,6 +193,16 @@
         padding-$(side): var(--mlv-ref-space-$(size));
       }
     }
+
+    &[mlv-layout~='pad-x:$(size)'] {
+      padding-left: var(--mlv-ref-space-$(size));
+      padding-right: var(--mlv-ref-space-$(size));
+    }
+
+    &[mlv-layout~='pad-y:$(size)'] {
+      padding-top: var(--mlv-ref-space-$(size));
+      padding-bottom: var(--mlv-ref-space-$(size));
+    }
   }
 
 

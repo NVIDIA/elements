@@ -37,8 +37,7 @@ Some frameworks and libraries may require additional configuration to use the `m
 Add the `gap` value to `mlv-layout` to set spacing between elements. For example:
 ```html
 <section mlv-layout="row gap:md">
-```
-```html
+
 <section mlv-layout="grid gap:md">
 ```
 
@@ -97,8 +96,7 @@ The following "t-shirt" spacing values are available:
 Add the `pad` value to `mlv-layout` to set spacing between elements. For example:
 ```html
 <section mlv-layout="row pad:md">
-```
-```html
+
 <section mlv-layout="grid pad:md">
 ```
 
@@ -121,10 +119,40 @@ By default padding will apply to all 4 sides of container, to specify padding on
 - `pad-bottom:md`
 - `pad-left:md`
 
+Or alternatively use the short hand to just pad the x and y axes.
+
+- `pad-x:md`
+- `pad-y:md`
+
 ```html
 <section mlv-layout="row pad-left:md">
 ```
 
+
+
+<Canvas>
+  <Story id="foundations-layout-examples--pad-top" />
+</Canvas>
+
+<Canvas>
+  <Story id="foundations-layout-examples--pad-left" />
+</Canvas>
+
+<Canvas>
+  <Story id="foundations-layout-examples--pad-right" />
+</Canvas>
+
+<Canvas>
+  <Story id="foundations-layout-examples--pad-bottom" />
+</Canvas>
+
+<Canvas>
+  <Story id="foundations-layout-examples--pad-x" />
+</Canvas>
+
+<Canvas>
+  <Story id="foundations-layout-examples--pad-y" />
+</Canvas>
 
 
 <Canvas>
@@ -166,7 +194,7 @@ By default padding will apply to all 4 sides of container, to specify padding on
 
 ## Full width/height on container
 
-For convenience a `mlv-layout="grow"` option can be set to give the container `100% width & height`.
+For convenience a `mlv-layout="grow"` option can be set to give the container 100% width & height.
 This is often useful for giving the root element of a page full height.
 
 ```html
