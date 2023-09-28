@@ -95,6 +95,8 @@ export const PadTop = generateLayoutStory('Padding Top', 'row gap:sm align:stret
 export const PadRight = generateLayoutStory('Padding Right', 'row gap:sm align:stretch pad-right:xxl', 3);
 export const PadBottom = generateLayoutStory('Padding Bottom', 'row gap:sm align:stretch pad-bottom:xxl', 3);
 export const PadLeft = generateLayoutStory('Padding Left', 'row gap:sm align:stretch pad-left:xxl', 3);
+export const PadX = generateLayoutStory('Padding X', 'row gap:sm align:stretch pad-x:xxl', 3);
+export const PadY = generateLayoutStory('Padding Y', 'row gap:sm align:stretch pad-y:xxl', 3);
 
 
 export const GridSpan2 = generateLayoutStory(html`Grid with (<code>span-items:2</code>) specified on parent`, 'grid gap:md span-items:2', 6);
