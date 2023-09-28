@@ -20,7 +20,7 @@ export class TypeExpandableController<T extends TypeExpandable> implements React
   }
 
   open() {
-    this.host.dispatchEvent(new CustomEvent('open'));
+    this.host.dispatchEvent(new CustomEvent('open', { bubbles: true }));
 
     if (this.host.behaviorExpand) {
       this.host.expanded = true;
@@ -28,7 +28,7 @@ export class TypeExpandableController<T extends TypeExpandable> implements React
   }
 
   close() {
-    this.host.dispatchEvent(new CustomEvent('close'));
+    this.host.dispatchEvent(new CustomEvent('close', { bubbles: true }));
 
     if (this.host.behaviorExpand) {
       this.host.expanded = false;
