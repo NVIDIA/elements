@@ -37,6 +37,9 @@ js_run_binary(
         ".playwright",
     ],
     tags = ["ui"],
+    execution_requirements = {
+        "requires-network": "1",
+    },
 )
 
 js_run_binary(
@@ -47,6 +50,9 @@ js_run_binary(
         "storybook-build"
     ],
     tags = ["ui"],
+    execution_requirements = {
+        "requires-network": "1",
+    },
 )
 
 js_test(
