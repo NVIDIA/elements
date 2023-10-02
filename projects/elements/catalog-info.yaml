@@ -1,0 +1,31 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: elements-elements
+  description: "The Design Language for AI/ML Factories Building at the Speed of Light"
+  tags:
+    - elements-ui
+  labels:
+    elements/service: elements-ui
+    elements/sub-team: platform
+    pagerduty_escalation: No
+    team/manager: yawen
+  annotations:
+    backstage.io/linguist: 'https://github.com/backstage/backstage/tree/master/plugins/playlist'
+    backstage.io/source-location: url:https://git-av.nvidia.com/r/plugins/gitiles/elements/+/refs/heads/main/src/ui/platform/design-system/elements
+    vault.io/secrets-path: svccloud/<env>/elements-ui/elements
+  
+  links:
+    - url: https://elements.nvidia.com/ui/storybook/elements?path=/docs/about-getting-started--docs
+      titie: Storybook
+      icon: dashboard
+    - url: https://git-av.nvidia.com/r/plugins/gitiles/elements/+/refs/heads/main/src/ui/platform/design-system/elements/README.md
+      title: runbook
+      icon: dashboard
+
+spec:
+  type: service
+  lifecycle: production
+  owner: elements-ui-platform-team
+  system: ui-platform
