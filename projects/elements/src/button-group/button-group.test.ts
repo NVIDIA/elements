@@ -23,4 +23,9 @@ describe('mlv-button-group', () => {
   it('should define element', () => {
     expect(customElements.get('mlv-button-group')).toBeDefined();
   });
+
+  it('should initialize role group', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('group');
+  });
 });

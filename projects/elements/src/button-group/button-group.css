@@ -2,9 +2,9 @@
   --mlv-sys-interaction-state-base: var(--background);
   --background: var(--mlv-sys-interaction-background);
   --border-radius: var(--mlv-ref-border-radius-sm);
-  --padding: 4px;
+  --padding: var(--mlv-ref-size-300);
   --width: fit-content;
-  --gap: 2px;
+  --gap: var(--mlv-ref-space-xs);
   width: var(--width);
 }
 
@@ -15,6 +15,8 @@
   gap: var(--gap);
   overflow: hidden;
   display: flex;
+  height: 100%;
+  align-items: center;
 }
 
 ::slotted(mlv-button) {
@@ -41,10 +43,18 @@
   --gap: 0;
 }
 
-:host([interaction='flat']) {
+:host([container='flat']) {
   --background: transparent;
 }
 
-:host([interaction='rounded']) {
+:host([container='rounded']) {
   --border-radius: var(--mlv-ref-border-radius-lg);
+}
+
+:host([orientation='vertical']) {
+  --gap: var(--mlv-ref-space-xs);
+
+  & [internal-host] {
+    flex-direction: column;
+  }
 }

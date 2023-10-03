@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox, getThemeTokens, removeEmptySlotWhitespace } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox, getThemeTokens, removeEmptySlotWhitespace, hasHorizontalScrollBar } from '@elements/elements/internal';
 
 @customElement('dom-test-element')
 class TestComponent extends LitElement {
@@ -448,5 +448,28 @@ describe('removeEmptySlotWhitespace', () => {
   it('should remove any empty white space from slot to prevent default slot overrides', async () => {
     await elementIsStable(element);
     expect(element.innerHTML).toBe('');
+  });
+});
+
+describe('hasHorizontalScrollBar', () => {
+  let fixture: HTMLElement;
+  let element: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <div style="overflow: auto; width: 100px; height: 100px;">
+        <div style="width: 200px; height: 200px;"></div>
+      </div>
+    `);
+
+    element = fixture.querySelector('div');
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should determine if element has a horizontal scroll bar', () => {
+    expect(hasHorizontalScrollBar(element)).toBe(true);
   });
 });

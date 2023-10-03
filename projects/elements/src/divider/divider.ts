@@ -16,7 +16,7 @@ import styles from './divider.css?inline';
  * @stable false
  */
 export class Divider extends LitElement {
-  @property({ type: String }) orientation: 'vertical' | 'horizontal' = 'horizontal';
+  @property({ type: String, reflect: true }) orientation: 'vertical' | 'horizontal' = 'horizontal';
 
   static styles = useStyles([styles]);
 

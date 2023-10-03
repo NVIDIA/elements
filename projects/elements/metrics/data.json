@@ -1,5 +1,5 @@
 {
-  "created": "2023-09-29T15:55:54.405Z",
+  "created": "2023-10-02T15:29:36.829Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -64,7 +64,7 @@
       ],
       "projectTotal": 2,
       "instanceTotal": 3,
-      "coverageTotal": 74.6225,
+      "coverageTotal": 84.1275,
       "behavior": "container",
       "status": "beta"
     },
@@ -91,7 +91,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 74.6225,
+      "coverageTotal": 84.1275,
       "behavior": "container",
       "status": "beta"
     },
@@ -125,7 +125,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 74.6225,
+      "coverageTotal": 84.1275,
       "behavior": "container",
       "status": "beta"
     },
@@ -160,7 +160,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 74.6225,
+      "coverageTotal": 84.1275,
       "behavior": "container",
       "status": "beta"
     },
@@ -353,43 +353,6 @@
       "status": "beta"
     },
     {
-      "name": "mlv-bulk-actions",
-      "unitTests": true,
-      "apiReview": true,
-      "performance": true,
-      "stable": false,
-      "vqa": true,
-      "responsive": true,
-      "themes": true,
-      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/",
-      "package": true,
-      "description": "Bulk Actions are used for selecting and running an action on one to many selections by the user.",
-      "since": "0.11.0",
-      "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-bulk-actions-documentation--docs",
-      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=141-10016&t=Ypowt9RnBcKNg17i-0",
-      "properties": [
-        {
-          "name": "closable",
-          "description": "Determines if a close button should render"
-        },
-        {
-          "name": "status",
-          "description": "Visual treatment to represent support status"
-        }
-      ],
-      "slots": [
-        {
-          "description": "default slot for content",
-          "name": ""
-        }
-      ],
-      "projectTotal": 1,
-      "instanceTotal": 2,
-      "coverageTotal": 100,
-      "behavior": "content",
-      "status": "beta"
-    },
-    {
       "name": "mlv-button",
       "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/button/",
       "unitTests": true,
@@ -468,7 +431,7 @@
       "vqa": false,
       "responsive": true,
       "themes": true,
-      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/button/",
+      "aria": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role",
       "package": true,
       "description": "A button group is a control that enables users to choose between two or more distinct mutually exclusive options.",
       "since": "0.16.0",
@@ -481,8 +444,12 @@
           "description": "By default the button group is stateless. Add the `behavior-select` attribute and set to `single` or `multi` to enable stateful selction handling."
         },
         {
-          "name": "interaction",
-          "description": "Set the style of the button group using the `interaction` property. Options are the default display when the attribute is left off, `flat` or `rounded`."
+          "name": "container",
+          "description": "Set the style of the button group using the `container` property. Options are the default display when the attribute is left off, `flat` or `rounded`."
+        },
+        {
+          "name": "orientation",
+          "description": "Determines the orientation direction of the group. Vertical groups are limited to icon buttons only."
         }
       ],
       "slots": [
@@ -493,8 +460,8 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 46.2575,
-      "behavior": "content",
+      "coverageTotal": 55.96,
+      "behavior": "container",
       "status": "pre-release"
     },
     {
@@ -1427,7 +1394,7 @@
           "name": ""
         },
         {
-          "description": "slot for mlv-grid-footer or mlv-bulk-actions",
+          "description": "slot for mlv-grid-footer or mlv-toolbar",
           "name": "footer"
         }
       ],
@@ -2110,7 +2077,7 @@
       "projectTotal": 3,
       "instanceTotal": 4,
       "coverageTotal": 98.61,
-      "behavior": "content",
+      "behavior": "navigation",
       "status": "beta"
     },
     {
@@ -2407,7 +2374,7 @@
       "projectTotal": 1,
       "instanceTotal": 1,
       "coverageTotal": 100,
-      "behavior": "content",
+      "behavior": "navigation",
       "status": "pre-release"
     },
     {
@@ -3032,6 +2999,59 @@
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
+    },
+    {
+      "name": "mlv-toolbar",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": true,
+      "vqa": false,
+      "responsive": true,
+      "themes": true,
+      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/",
+      "package": true,
+      "description": "A toolbar is a container for grouping a set of controls, such as buttons, icon buttons and combobox search.",
+      "since": "0.19.0",
+      "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-toolbar-documentation--docs",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=208%3A27566&mode=dev",
+      "properties": [
+        {
+          "name": "container",
+          "description": "Determines the container visual style."
+        },
+        {
+          "name": "content",
+          "description": "Determines the primary content overflow behavior."
+        },
+        {
+          "name": "orientation",
+          "description": "Determines the orientation direction of the toolbar. Vertical toolbars are limited to icon buttons only."
+        },
+        {
+          "name": "status",
+          "description": "Visual treatment to represent accent color for interactive selections"
+        }
+      ],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        },
+        {
+          "description": "slot for prefix content",
+          "name": "prefix"
+        },
+        {
+          "description": "slot for suffix content",
+          "name": "suffix"
+        }
+      ],
+      "projectTotal": 0,
+      "instanceTotal": 0,
+      "coverageTotal": 98.675,
+      "behavior": "navigation",
+      "status": "pre-release"
     },
     {
       "name": "mlv-tooltip",
@@ -4343,10 +4363,6 @@
           "instanceTotal": 2
         },
         {
-          "name": "mlv-bulk-actions",
-          "instanceTotal": 2
-        },
-        {
           "name": "mlv-card",
           "instanceTotal": 2
         },
@@ -4431,7 +4447,7 @@
           "instanceTotal": 2
         }
       ],
-      "instanceTotal": 68
+      "instanceTotal": 66
     },
     {
       "name": "tracking",
@@ -4463,82 +4479,55 @@
       {
         "file": "elements/src/button-group/button-group.ts",
         "lines": {
-          "total": 22,
-          "covered": 13,
+          "total": 23,
+          "covered": 16,
           "skipped": 0,
-          "pct": 59.09
+          "pct": 69.56
         },
         "functions": {
           "total": 9,
-          "covered": 5,
+          "covered": 6,
           "skipped": 0,
-          "pct": 55.55
+          "pct": 66.66
         },
         "statements": {
-          "total": 29,
-          "covered": 18,
+          "total": 31,
+          "covered": 22,
           "skipped": 0,
-          "pct": 62.06
+          "pct": 70.96
         },
         "branches": {
           "total": 12,
-          "covered": 1,
+          "covered": 2,
           "skipped": 0,
-          "pct": 8.33
-        }
-      },
-      {
-        "file": "elements/src/accordion/accordion.ts",
-        "lines": {
-          "total": 57,
-          "covered": 42,
-          "skipped": 0,
-          "pct": 73.68
-        },
-        "functions": {
-          "total": 25,
-          "covered": 17,
-          "skipped": 0,
-          "pct": 68
-        },
-        "statements": {
-          "total": 88,
-          "covered": 72,
-          "skipped": 0,
-          "pct": 81.81
-        },
-        "branches": {
-          "total": 24,
-          "covered": 18,
-          "skipped": 0,
-          "pct": 75
+          "pct": 16.66
         }
       },
       {
         "file": "elements/src/internal/utils/dom.ts",
         "lines": {
-          "total": 112,
-          "covered": 95,
+          "total": 118,
+          "covered": 100,
           "skipped": 0,
-          "pct": 84.82
+          "pct": 84.74
         },
         "functions": {
-          "total": 49,
-          "covered": 42,
+          "total": 51,
+          "covered": 44,
           "skipped": 0,
-          "pct": 85.71
+          "pct": 86.27
         },
         "statements": {
-          "total": 123,
-          "covered": 105,
+          "total": 129,
+          "covered": 110,
           "skipped": 0,
-          "pct": 85.36
+          "pct": 85.27
         },
         "branches": {
-          "total": 77,
-          "covered": 64,
+          "total": 81,
+          "covered": 66,
           "skipped": 0,
-          "pct": 83.11
+          "pct": 81.48
         }
       },
       {
@@ -4566,6 +4555,33 @@
           "covered": 54,
           "skipped": 0,
           "pct": 90
+        }
+      },
+      {
+        "file": "elements/src/accordion/accordion.ts",
+        "lines": {
+          "total": 57,
+          "covered": 51,
+          "skipped": 0,
+          "pct": 89.47
+        },
+        "functions": {
+          "total": 25,
+          "covered": 20,
+          "skipped": 0,
+          "pct": 80
+        },
+        "statements": {
+          "total": 88,
+          "covered": 81,
+          "skipped": 0,
+          "pct": 92.04
+        },
+        "branches": {
+          "total": 24,
+          "covered": 18,
+          "skipped": 0,
+          "pct": 75
         }
       },
       {
@@ -4786,6 +4802,60 @@
       },
       {
         "file": "elements/src/tooltip/define.ts",
+        "lines": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/toolbar/toolbar.ts",
+        "lines": {
+          "total": 50,
+          "covered": 50,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 25,
+          "covered": 24,
+          "skipped": 0,
+          "pct": 96
+        },
+        "statements": {
+          "total": 77,
+          "covered": 76,
+          "skipped": 0,
+          "pct": 98.7
+        },
+        "branches": {
+          "total": 10,
+          "covered": 10,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/toolbar/define.ts",
         "lines": {
           "total": 1,
           "covered": 1,
@@ -8541,28 +8611,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1864,
-        "covered": 1808,
+        "total": 1922,
+        "covered": 1876,
         "skipped": 0,
-        "pct": 96.99
+        "pct": 97.6
       },
       "statements": {
-        "total": 2474,
-        "covered": 2400,
+        "total": 2560,
+        "covered": 2495,
         "skipped": 0,
-        "pct": 97
+        "pct": 97.46
       },
       "functions": {
-        "total": 730,
-        "covered": 693,
+        "total": 757,
+        "covered": 723,
         "skipped": 0,
-        "pct": 94.93
+        "pct": 95.5
       },
       "branches": {
-        "total": 918,
-        "covered": 829,
+        "total": 932,
+        "covered": 842,
         "skipped": 0,
-        "pct": 90.3
+        "pct": 90.34
       },
       "branchesTrue": {
         "total": 0,

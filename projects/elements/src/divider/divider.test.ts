@@ -32,4 +32,13 @@ describe('mlv-divider', () => {
   it('should initialize role separator', () => {
     expect(element._internals.role).toBe('separator');
   });
+
+  it('should reflect a orientation attribute', async () => {
+    expect(element.orientation).toBe('horizontal');
+    expect(element.getAttribute('orientation')).toBe('horizontal');
+
+    element.orientation = 'vertical';
+    await elementIsStable(element);
+    expect(element.getAttribute('orientation')).toBe('vertical');
+  });
 });

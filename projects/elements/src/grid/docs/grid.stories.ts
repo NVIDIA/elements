@@ -92,11 +92,12 @@ export const MultiSelectBulkActions = {
         ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
       </mlv-grid-row>
     `)}
-    <mlv-bulk-actions closable status="accent" slot="footer">
-      1 selected
-      <mlv-button interaction="flat-destructive">delete</mlv-button>
-      <mlv-icon-button interaction="flat" icon-name="more-actions"></mlv-icon-button>
-    </mlv-bulk-actions>
+    <mlv-toolbar status="accent" slot="footer">
+      <mlv-icon-button interaction="flat" icon-name="cancel" slot="prefix"></mlv-icon-button>
+      <p mlv-text="boxy">1 selected</p>
+      <mlv-button interaction="flat-destructive" slot="suffix">delete</mlv-button>
+      <mlv-icon-button interaction="flat" icon-name="more-actions" slot="suffix"></mlv-icon-button>
+    </mlv-toolbar>
   </mlv-grid>
 </div>
   `

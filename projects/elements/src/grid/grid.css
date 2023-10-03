@@ -77,7 +77,8 @@
   --border-bottom: 0;
 }
 
-::slotted(mlv-bulk-actions) {
+::slotted(mlv-bulk-actions),
+::slotted(mlv-toolbar) {
   position: fixed;
   z-index: 99;
   left: 12px;

@@ -213,6 +213,10 @@
   color: inherit !important;
 }
 
+[mlv-text~='start'] {
+  text-align: start !important
+}
+
 [mlv-text~='center'] {
   text-align: center !important;
 }

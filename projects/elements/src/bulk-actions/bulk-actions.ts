@@ -5,7 +5,7 @@ import { useStyles, TypeClosableController, I18nController } from '@elements/ele
 import styles from './bulk-actions.css?inline';
 
 /**
- * @element mlv-bulk-actions
+ * @deprecated
  * @description Bulk Actions are used for selecting and running an action on one to many selections by the user.
  * @since 0.11.0
  * @event close

@@ -4,7 +4,7 @@ import '@elements/elements/button/define.js';
 import '@elements/elements/icon-button/define.js';
 
 export default {
-  title: 'Elements/Bulk Actions/Examples',
+  title: 'Internal/Bulk Actions/Examples',
   component: 'mlv-bulk-actions',
 };
 

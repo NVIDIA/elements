@@ -37,11 +37,13 @@ mlv-grid-cell:has(> mlv-radio) {
   --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
 }
 
-mlv-grid:has(mlv-bulk-actions:not([hidden]))::part(scrollbox) {
+mlv-grid:has(mlv-bulk-actions:not([hidden]))::part(scrollbox),
+mlv-grid:has(mlv-toolbar:not([hidden]))::part(scrollbox) {
   padding-bottom: var(--mlv-ref-size-1000);
 }
 
-mlv-grid:has(mlv-bulk-actions:not([hidden])) {
+mlv-grid:has(mlv-bulk-actions:not([hidden])),
+mlv-grid:has(mlv-toolbar:not([hidden])) {
   contain: content;
 }
 
