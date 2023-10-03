@@ -418,7 +418,8 @@
       "output": [],
       "dependencies": [
         "playwright",
-        "build"
+        "build",
+        "test"
       ]
     },
     "test:coverage": {
