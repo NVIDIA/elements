@@ -7,7 +7,7 @@ import '@elements/elements/grid/define.js';
 import '@elements/elements/alert/define.js';
 import '@elements/elements/app-header/define.js';
 import '@elements/elements/badge/define.js';
-import '@elements/elements/bulk-actions/define.js';
+import '@elements/elements/toolbar/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/checkbox/define.js';
 import '@elements/elements/card/define.js';
@@ -303,11 +303,12 @@ class KitchenSinkDemo extends LitElement {
 
   get #bulkActions() {
     return this.#selectedCount ? html`
-    <nve-bulk-actions slot="footer" status="accent" closable @close=${() => this.#selectAll(false)}>
-      ${this.#selectedCount} selected
-      <nve-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} interaction="flat">edit</nve-button>
-      <nve-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} interaction="flat-destructive">delete</nve-button>
-    </nve-bulk-actions>` : ''
+    <nve-toolbar slot="footer" status="accent">
+      <nve-icon-button interaction="flat" icon-name="cancel" slot="prefix" @click=${() => this.#selectAll(false)}></nve-icon-button>
+      <p nve-text="body">${this.#selectedCount} selected</p>
+      <nve-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} interaction="flat" slot="suffix">edit</nve-button>
+      <nve-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} interaction="flat-destructive" slot="suffix">delete</nve-button>
+    </nve-toolbar>` : '';
   }
 
   render() {

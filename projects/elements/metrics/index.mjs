@@ -10,7 +10,9 @@ const ariaSpecs = {
     'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
     'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/',
     'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/examples/menubar-navigation/',
-    'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav'
+    'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/examples/menubar-editor/',
+    'https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/',
+    'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav',
   ],
   list: [
     'https://www.w3.org/WAI/ARIA/apg/patterns/grid/',
@@ -20,7 +22,8 @@ const ariaSpecs = {
     'https://www.w3.org/WAI/ARIA/apg/patterns/alert/'
   ],
   container: [
-    'https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/'
+    'https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/',
+    'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role'
   ]
 };
 

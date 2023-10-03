@@ -213,6 +213,10 @@
   color: inherit !important;
 }
 
+[nve-text~='start'] {
+  text-align: start !important
+}
+
 [nve-text~='center'] {
   text-align: center !important;
 }

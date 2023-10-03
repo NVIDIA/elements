@@ -92,11 +92,12 @@ export const MultiSelectBulkActions = {
         ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
       </nve-grid-row>
     `)}
-    <nve-bulk-actions closable status="accent" slot="footer">
-      1 selected
-      <nve-button interaction="flat-destructive">delete</nve-button>
-      <nve-icon-button interaction="flat" icon-name="more-actions"></nve-icon-button>
-    </nve-bulk-actions>
+    <nve-toolbar status="accent" slot="footer">
+      <nve-icon-button interaction="flat" icon-name="cancel" slot="prefix"></nve-icon-button>
+      <p nve-text="boxy">1 selected</p>
+      <nve-button interaction="flat-destructive" slot="suffix">delete</nve-button>
+      <nve-icon-button interaction="flat" icon-name="more-actions" slot="suffix"></nve-icon-button>
+    </nve-toolbar>
   </nve-grid>
 </div>
   `
