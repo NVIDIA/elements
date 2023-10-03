@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import '@elements/elements/button-group/define.js';
+import '@elements/elements/divider/define.js';
 
 export default {
   title: 'Elements/Button Group/Examples',
@@ -28,16 +29,16 @@ export const SingleSelect = {
 export const MultiSelect = {
   render: () => html`
   <nve-button-group behavior-select="multi">
-    <nve-icon-button pressed icon-name="bold"></nve-icon-button>
-    <nve-icon-button icon-name="italic"></nve-icon-button>
-    <nve-icon-button icon-name="strikethrough"></nve-icon-button>
+    <nve-icon-button pressed icon-name="bold" size="sm"></nve-icon-button>
+    <nve-icon-button icon-name="italic" size="sm"></nve-icon-button>
+    <nve-icon-button icon-name="strikethrough" size="sm"></nve-icon-button>
   </nve-button-group>
   `
 };
 
 export const Flat = {
   render: () => html`
-  <nve-button-group interaction="flat">
+  <nve-button-group container="flat">
     <nve-icon-button pressed icon-name="split-vertical"></nve-icon-button>
     <nve-icon-button icon-name="split-horizontal"></nve-icon-button>
     <nve-icon-button icon-name="split-none"></nve-icon-button>
@@ -67,7 +68,7 @@ export const ActionSplit = {
 
 export const ActionSplitRounded = {
   render: () => html`
-  <nve-button-group interaction="rounded">
+  <nve-button-group container="rounded">
     <nve-button>button</nve-button>
     <nve-divider orientation="vertical"></nve-divider>
     <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
@@ -77,7 +78,7 @@ export const ActionSplitRounded = {
 
 export const Rounded = {
   render: () => html`
-  <nve-button-group interaction="rounded" behavior-select="single">
+  <nve-button-group container="rounded" behavior-select="single">
     <nve-button pressed>All Time</nve-button>
     <nve-button>30 Days</nve-button>
     <nve-button>90 Days</nve-button>
@@ -87,7 +88,7 @@ export const Rounded = {
 
 export const RoundedIcon = {
   render: () => html`
-  <nve-button-group interaction="rounded" behavior-select="single">
+  <nve-button-group container="rounded" behavior-select="single">
     <nve-icon-button icon-name="table"></nve-icon-button>
     <nve-icon-button icon-name="image"></nve-icon-button>
   </nve-button-group>

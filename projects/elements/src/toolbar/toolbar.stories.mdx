@@ -1,0 +1,89 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { statusBadges } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Toolbar/Documentation" parameters={{ badges: statusBadges('nve-toolbar') }} />
+
+# Toolbar
+
+<element-metrics tag="nve-toolbar"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/toolbar/define.js';
+```
+
+```html
+<nve-toolbar></nve-toolbar>
+```
+
+## Default
+
+<Canvas>
+  <Story id="elements-toolbar-examples--default" />
+</Canvas>
+
+## Groups
+
+<Canvas>
+  <Story id="elements-toolbar-examples--groups" height={'300px'} inline={false} />
+</Canvas>
+
+## Vertical
+
+<element-metrics tag="nve-toolbar" type="property" value="orientation"></element-metrics>
+
+<Canvas>
+  <Story id="elements-toolbar-examples--vertical" height={'300px'} inline={false} />
+</Canvas>
+
+## Flat
+
+<element-metrics tag="nve-toolbar" type="property" value="container"></element-metrics>
+
+<Canvas>
+  <Story id="elements-toolbar-examples--container-flat" height={'200px'} inline={false} />
+</Canvas>
+
+## Inset
+
+<element-metrics tag="nve-toolbar" type="property" value="container"></element-metrics>
+
+<Canvas>
+  <Story id="elements-toolbar-examples--container-inset" height={'200px'} inline={false} />
+</Canvas>
+
+## Filter
+
+<Canvas>
+  <Story id="elements-toolbar-examples--filter" height={'350px'} inline={false} />
+</Canvas>
+
+## Scroll
+
+<element-metrics tag="nve-toolbar" type="property" value="content"></element-metrics>
+
+<Canvas>
+  <Story id="elements-toolbar-examples--scroll" height={'350px'} inline={false} />
+</Canvas>
+
+## Wrap
+
+<element-metrics tag="nve-toolbar" type="property" value="content"></element-metrics>
+
+<Canvas>
+  <Story id="elements-toolbar-examples--wrap" height={'350px'} inline={false} />
+</Canvas>
+
+## Status
+
+<element-metrics tag="nve-toolbar" type="property" value="status"></element-metrics>
+
+<Canvas>
+  <Story id="elements-toolbar-examples--status" height={'350px'} inline={false} />
+</Canvas>
+
+<element-status tag="nve-toolbar"></element-status>
+
+## nve-toolbar
+<ArgsTable of="nve-toolbar" />

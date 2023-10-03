@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@elements/elements/test';
-import { Accordion, AccordionGroup } from '@elements/elements/accordion';
+import { Accordion, AccordionContent, AccordionGroup, AccordionHeader } from '@elements/elements/accordion';
 import '@elements/elements/accordion/define.js';
 
 
@@ -10,21 +10,33 @@ describe('nve-accordion', () => {
   let parentElement: AccordionGroup;
   let childElement1: Accordion;
   let childElement2: Accordion;
+  let header: AccordionHeader;
+  let content: AccordionContent;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
     <nve-accordion-group>
-      <nve-accordion></nve-accordion>
-      <nve-accordion></nve-accordion>
+      <nve-accordion>
+        <nve-accordion-header>heading</nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
+      <nve-accordion>
+        <nve-accordion-header>heading</nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
     </nve-accordion-group>
     `);
     parentElement = fixture.querySelector('nve-accordion-group');
     childElement1 = fixture.querySelectorAll('nve-accordion')[0];
     childElement2 = fixture.querySelectorAll('nve-accordion')[1];
+    header = fixture.querySelector('nve-accordion-header');
+    content = fixture.querySelector('nve-accordion-content');
 
     await elementIsStable(parentElement);
     await elementIsStable(childElement1);
     await elementIsStable(childElement2);
+    await elementIsStable(header);
+    await elementIsStable(content);
   });
 
   afterEach(() => {
@@ -39,9 +51,17 @@ describe('nve-accordion', () => {
     expect(customElements.get('nve-accordion')).toBeDefined();
   });
 
-  it('should have correct a18y roles', async () => {
+  it('should role group for accordion group', async () => {
     expect(parentElement._internals.role).toBe('group');
+  });
+
+  it('should role region for accordion', async () => {
     expect(childElement1._internals.role).toBe('region');
+  });
+
+  it('should role heading for accordion header', async () => {
+    expect(header._internals.role).toBe('heading');
+    expect(header._internals.ariaLevel).toBe('2');
   });
 
   it('should have proper defaults on parent', () => {

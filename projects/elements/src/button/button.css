@@ -134,7 +134,7 @@
 :host([interaction*='flat']),
 :host([interaction*='ghost']) { /** @deprecated ghost */
   --background: transparent;
-  --padding: 0 var(--nve-ref-size-200);
+  --padding: 0 var(--nve-ref-size-100);
   --_icon-color: var(--color);
 
   &:host(:hover) {
