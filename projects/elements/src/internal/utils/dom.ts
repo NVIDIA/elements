@@ -190,6 +190,10 @@ export function hasScrollBar(el: HTMLElement) {
   return !!(el.scrollTop || (++el.scrollTop && el.scrollTop--));
 }
 
+export function hasHorizontalScrollBar(el: HTMLElement) {
+  return el.scrollWidth > el.clientWidth;
+}
+
 export function waitForScrollEnd(element: HTMLElement) {
   let prevFrame = 0;
   let prevX = element.scrollLeft;
@@ -263,4 +267,15 @@ export function slotContainsOnlyWhitespace(slot: HTMLSlotElement) {
   const hasNoElements = !slot.assignedNodes().find(i => i.nodeType !== Node.TEXT_NODE);
   const hasOnlyEmptyTextNodes = !slot.assignedNodes().find(i => i.nodeType === Node.TEXT_NODE && i.textContent.trim() !== '');
   return hasNoElements && hasOnlyEmptyTextNodes;
+}
+
+export function applySlotContentStates(slot: HTMLSlotElement, element: HTMLElement & { _internals: ElementInternals }) {
+  const nodes = slot.assignedNodes();
+  const name = slot.name ?? 'slot';
+
+  if (nodes.length) {
+    element._internals.states.add(`--has-${name}`);
+  } else {
+    element._internals.states.delete(`--has-${name}`);
+  }
 }

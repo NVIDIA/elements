@@ -2,8 +2,8 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { attachInternals, keyNavigationList, KeynavListConfig, useStyles } from '@elements/elements/internal';
 import styles from './button-group.css?inline';
-import { IconButton } from '@elements/elements/icon-button';
-import { Button } from '@elements/elements/button';
+import type { IconButton } from '@elements/elements/icon-button';
+import type { Button } from '@elements/elements/button';
 
 /**
  * @element nve-button-group
@@ -17,7 +17,7 @@ import { Button } from '@elements/elements/button';
  * @cssprop --gap
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-group-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=4047-92996&mode=design&t=XPYuD3f2yaKCAMl3-0
- * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
+ * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role
  * @vqa false
  * @unitTests false
  * @stable false
@@ -37,12 +37,11 @@ export class ButtonGroup extends LitElement {
   /** By default the button group is stateless. Add the `behavior-select` attribute and set to `single` or `multi` to enable stateful selction handling. */
   @property({ type: String, attribute: 'behavior-select' }) behaviorSelect: 'single' | 'multi';
 
-  /** Set the style of the button group using the `interaction` property. Options are the default display when the attribute is left off, `flat` or `rounded`. */
-  @property({ type: String }) interaction?: undefined | 'flat' | 'rounded';
+  /** Set the style of the button group using the `container` property. Options are the default display when the attribute is left off, `flat` or `rounded`. */
+  @property({ type: String, reflect: true }) container?: undefined | 'flat' | 'rounded';
 
-  // get #buttons() {
-  //   return Array.from(this.querySelectorAll<Button | IconButton>('nve-icon-button, nve-button'));
-  // }
+  /** Determines the orientation direction of the group. Vertical groups are limited to icon buttons only. */
+  @property({ type: String, reflect: true }) orientation?: 'horizontal' | 'vertical' = 'horizontal';
 
   static styles = useStyles([styles]);
 
@@ -81,7 +80,7 @@ export class ButtonGroup extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
-    this._internals.role = 'button';
+    this._internals.role = 'group';
 
     this.addEventListener('click', (e: CustomEvent) => (this.#selectButton(e.target)))
   }
@@ -89,7 +88,7 @@ export class ButtonGroup extends LitElement {
   updated(props) {
     super.updated(props);
 
-    if (this.interaction === 'flat') {
+    if (this.container === 'flat') {
       Array.from(this.querySelectorAll('nve-icon-button')).forEach(btn => {
         btn.interaction = 'flat';
       });

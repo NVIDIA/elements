@@ -23,4 +23,9 @@ describe('nve-button-group', () => {
   it('should define element', () => {
     expect(customElements.get('nve-button-group')).toBeDefined();
   });
+
+  it('should initialize role group', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('group');
+  });
 });
