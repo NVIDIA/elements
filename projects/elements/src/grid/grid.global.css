@@ -37,11 +37,13 @@ nve-grid-cell:has(> nve-radio) {
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
 }
 
-nve-grid:has(nve-bulk-actions:not([hidden]))::part(scrollbox) {
+nve-grid:has(nve-bulk-actions:not([hidden]))::part(scrollbox),
+nve-grid:has(nve-toolbar:not([hidden]))::part(scrollbox) {
   padding-bottom: var(--nve-ref-size-1000);
 }
 
-nve-grid:has(nve-bulk-actions:not([hidden])) {
+nve-grid:has(nve-bulk-actions:not([hidden])),
+nve-grid:has(nve-toolbar:not([hidden])) {
   contain: content;
 }
 
