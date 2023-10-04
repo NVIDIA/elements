@@ -2,9 +2,9 @@
   --nve-sys-interaction-state-base: var(--background);
   --background: var(--nve-sys-interaction-background);
   --border-radius: var(--nve-ref-border-radius-sm);
-  --padding: var(--nve-ref-size-300);
+  --padding: var(--nve-ref-space-xxs);
+  --gap: var(--nve-ref-space-xxxs);
   --width: fit-content;
-  --gap: var(--nve-ref-space-xs);
   width: var(--width);
 }
 
@@ -21,7 +21,8 @@
 
 ::slotted(nve-button) {
   --height: var(--nve-ref-size-700);
-  --border-radius: var(--border-radius);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --font-weight: var(--nve-ref-font-weight-medium);
 }
 
 ::slotted(nve-icon-button) {
@@ -32,15 +33,12 @@
 ::slotted(nve-divider) {
   margin-top: calc(-1 * var(--padding));
   height: calc(100% + var(--padding));
+  --color: color-mix(in oklab, var(--nve-sys-interaction-background) 100%, var(--nve-sys-interaction-color) 50%);
 }
 
-::slotted(:hover) {
+::slotted(nve-button:hover),
+::slotted(nve-icon-button:hover) {
   --color: var(--nve-sys-text-emphasis-color);
-}
-
-:host([split]) {
-  --padding: 0;
-  --gap: 0;
 }
 
 :host([container='flat']) {
@@ -51,10 +49,36 @@
   --border-radius: var(--nve-ref-border-radius-lg);
 }
 
+:host([container='rounded']:not([split])) ::slotted(nve-button),
+:host([container='rounded']:not([split])) ::slotted(nve-icon-button) {
+  --border-radius: var(--nve-ref-border-radius-full);
+}
+
 :host([orientation='vertical']) {
   --gap: var(--nve-ref-space-xs);
 
   & [internal-host] {
     flex-direction: column;
+  }
+}
+
+:host([interaction='emphasize']) ::slotted(nve-divider) {
+  --color: color-mix(in oklab, var(--nve-sys-interaction-emphasize-background) 100%, var(--nve-sys-interaction-emphasize-color) 50%);
+}
+
+:host([interaction='destructive']) ::slotted(nve-divider) {
+  --color: color-mix(in oklab, var(--nve-sys-interaction-destructive-background) 100%, var(--nve-sys-interaction-destructive-color) 50%);
+}
+
+:host([split]) {
+  --padding: 0;
+  --gap: 0;
+
+  & ::slotted(nve-button) {
+    --border-radius: var(--nve-ref-border-radius-none);
+  }
+
+  & ::slotted(nve-icon-button) {
+    --border-radius: var(--nve-ref-border-radius-none);
   }
 }
