@@ -15,9 +15,15 @@ import '@elements/elements/button-group/define.js';
 
 ```html
 <nve-button-group>
-  <nve-icon-button pressed value="vertical" aria-label="split vertical" icon-name="split-vertical"></nve-icon-button>
-  <nve-icon-button value="horizontal" aria-label="split horizontal" icon-name="split-horizontal"></nve-icon-button>
-  <nve-icon-button value="none" aria-label="split none" icon-name="split-none"></nve-icon-button>
+  <nve-icon-button pressed icon-name="split-vertical"></nve-icon-button>
+  <nve-icon-button icon-name="split-horizontal"></nve-icon-button>
+  <nve-icon-button icon-name="split-none"></nve-icon-button>
+</nve-button-group>
+
+<nve-button-group behavior-select="single">
+  <nve-button pressed>10%</nve-button>
+  <nve-button>15%</nve-button>
+  <nve-button>20%</nve-button>
 </nve-button-group>
 ```
 
@@ -39,7 +45,7 @@ import '@elements/elements/button-group/define.js';
   <Story id="elements-button-group-examples--multi-select" />
 </Canvas>
 
-<element-metrics tag="nve-button-group" type="property" value="interaction"></element-metrics>
+<element-metrics tag="nve-button-group" type="property" value="container"></element-metrics>
 
 ## Flat
 
@@ -51,6 +57,12 @@ import '@elements/elements/button-group/define.js';
 
 <Canvas>
   <Story id="elements-button-group-examples--rounded" />
+</Canvas>
+
+## Rounded Icon
+
+<Canvas>
+  <Story id="elements-button-group-examples--rounded-icon" />
 </Canvas>
 
 ## Action
@@ -65,6 +77,8 @@ For a group of buttons that trigger one-off actions you can use the default `int
 
 For split actions that contain a button and a dropdown trigger use `nve-button` separated from `nve-icon-button` with a `nve-divider`.
 
+<element-metrics tag="nve-button-group" type="property" value="interaction"></element-metrics>
+
 <Canvas>
   <Story id="elements-button-group-examples--action-split" />
 </Canvas>
@@ -73,12 +87,6 @@ For split actions that contain a button and a dropdown trigger use `nve-button` 
 
 <Canvas>
   <Story id="elements-button-group-examples--action-split-rounded" />
-</Canvas>
-
-## Rounded Icon
-
-<Canvas>
-  <Story id="elements-button-group-examples--rounded-icon" />
 </Canvas>
 
 <element-status tag={'nve-button-group'}></element-status>
