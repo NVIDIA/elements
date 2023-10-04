@@ -1,9 +1,10 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, keyNavigationList, KeynavListConfig, useStyles } from '@elements/elements/internal';
+import { attachInternals, keyNavigationList, KeynavListConfig, useStyles, Interaction, Size } from '@elements/elements/internal';
 import styles from './button-group.css?inline';
 import type { IconButton } from '@elements/elements/icon-button';
 import type { Button } from '@elements/elements/button';
+import type { Divider } from '@elements/elements/divider';
 
 /**
  * @element mlv-button-group
@@ -43,6 +44,12 @@ export class ButtonGroup extends LitElement {
   /** Determines the orientation direction of the group. Vertical groups are limited to icon buttons only. */
   @property({ type: String, reflect: true }) orientation?: 'horizontal' | 'vertical' = 'horizontal';
 
+  /** The `interaction` property is intended to be used on `mlv-button-group` in combination with `mlv-divider` for color-coded split buttons */
+  @property({ type: String, reflect: true }) interaction: Interaction;
+
+  /** Determines size of button  */
+  @property({ type: String, reflect: true }) size?: Size;
+
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -67,6 +74,10 @@ export class ButtonGroup extends LitElement {
       // Toggle pressed on selected button
       button.pressed = !button.pressed;
     }
+  }
+
+  get #divider() {
+    return Array.from(this.querySelectorAll<Divider>('mlv-divider'));
   }
 
   render() {
@@ -94,6 +105,16 @@ export class ButtonGroup extends LitElement {
       });
     }
 
-    this.toggleAttribute('split', this.querySelector('mlv-divider') !== undefined);
+    if (this.interaction) {
+      Array.from(this.querySelectorAll('mlv-button')).forEach(btn => {
+        btn.interaction = this.interaction;
+      });
+
+      Array.from(this.querySelectorAll('mlv-icon-button')).forEach(btn => {
+        btn.interaction = this.interaction;
+      });
+    }
+
+    this.toggleAttribute('split', !!this.#divider.length);
   }
 }

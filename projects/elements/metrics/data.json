@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-02T15:29:36.829Z",
+  "created": "2023-10-04T19:13:05.698Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -11,6 +11,7 @@
     "0.8.0",
     "0.16.0",
     "0.11.0",
+    "0.18.0",
     "0.6.0",
     "0.17.0"
   ],
@@ -62,9 +63,9 @@
           "name": "content"
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 3,
-      "coverageTotal": 84.1275,
+      "projectTotal": 1,
+      "instanceTotal": 1,
+      "coverageTotal": 74.9375,
       "behavior": "container",
       "status": "beta"
     },
@@ -91,7 +92,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 84.1275,
+      "coverageTotal": 74.9375,
       "behavior": "container",
       "status": "beta"
     },
@@ -125,7 +126,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 84.1275,
+      "coverageTotal": 74.9375,
       "behavior": "container",
       "status": "beta"
     },
@@ -160,7 +161,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 84.1275,
+      "coverageTotal": 74.9375,
       "behavior": "container",
       "status": "beta"
     },
@@ -204,8 +205,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 17,
+      "projectTotal": 6,
+      "instanceTotal": 9,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -226,8 +227,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-banner-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-14&t=CAAM7yEBvG18tRRa-0",
       "properties": [],
-      "projectTotal": 3,
-      "instanceTotal": 10,
+      "projectTotal": 2,
+      "instanceTotal": 2,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -248,8 +249,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-group-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2519-54572&t=CAAM7yEBvG18tRRa-0",
       "properties": [],
-      "projectTotal": 4,
-      "instanceTotal": 6,
+      "projectTotal": 3,
+      "instanceTotal": 4,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -287,8 +288,8 @@
           "name": "nav-actions"
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 14,
+      "projectTotal": 2,
+      "instanceTotal": 2,
       "coverageTotal": 100,
       "behavior": "navigation",
       "status": "beta"
@@ -346,8 +347,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-breadcrumb-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1",
       "properties": [],
-      "projectTotal": 4,
-      "instanceTotal": 17,
+      "projectTotal": 3,
+      "instanceTotal": 5,
       "coverageTotal": 97.5,
       "behavior": "content",
       "status": "beta"
@@ -416,8 +417,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 15,
-      "instanceTotal": 94,
+      "projectTotal": 14,
+      "instanceTotal": 74,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -450,6 +451,14 @@
         {
           "name": "orientation",
           "description": "Determines the orientation direction of the group. Vertical groups are limited to icon buttons only."
+        },
+        {
+          "name": "interaction",
+          "description": "The `interaction` property is intended to be used on `mlv-button-group` in combination with `mlv-divider` for color-coded split buttons"
+        },
+        {
+          "name": "size",
+          "description": "Determines size of button"
         }
       ],
       "slots": [
@@ -460,7 +469,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 55.96,
+      "coverageTotal": 46.2575,
       "behavior": "container",
       "status": "pre-release"
     },
@@ -503,8 +512,8 @@
           "name": "footer"
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 20,
+      "projectTotal": 6,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -531,7 +540,7 @@
         }
       ],
       "projectTotal": 6,
-      "instanceTotal": 14,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -558,7 +567,7 @@
         }
       ],
       "projectTotal": 2,
-      "instanceTotal": 11,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -639,8 +648,8 @@
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
-      "projectTotal": 8,
-      "instanceTotal": 16,
+      "projectTotal": 7,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -813,9 +822,9 @@
           "name": ""
         }
       ],
-      "projectTotal": 8,
-      "instanceTotal": 15,
-      "coverageTotal": 98.1425,
+      "projectTotal": 7,
+      "instanceTotal": 10,
+      "coverageTotal": 98.1275,
       "behavior": "form",
       "status": "stable"
     },
@@ -883,7 +892,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 9,
+      "instanceTotal": 6,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -1029,8 +1038,8 @@
           "name": "default"
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 13,
+      "projectTotal": 6,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -1105,8 +1114,8 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-divider-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
       "properties": [],
-      "projectTotal": 3,
-      "instanceTotal": 14,
+      "projectTotal": 2,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -1203,8 +1212,8 @@
           "name": "default"
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 2,
+      "projectTotal": 0,
+      "instanceTotal": 0,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "pre-release"
@@ -1314,8 +1323,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 8,
-      "instanceTotal": 30,
+      "projectTotal": 7,
+      "instanceTotal": 16,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -1398,8 +1407,8 @@
           "name": "footer"
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 11,
+      "projectTotal": 4,
+      "instanceTotal": 9,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1425,8 +1434,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 10,
+      "projectTotal": 4,
+      "instanceTotal": 8,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1461,9 +1470,9 @@
           "name": "actions"
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 8,
-      "coverageTotal": 97.54749999999999,
+      "projectTotal": 4,
+      "instanceTotal": 6,
+      "coverageTotal": 97.58,
       "behavior": "list",
       "status": "beta"
     },
@@ -1488,8 +1497,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 5,
+      "projectTotal": 3,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1515,8 +1524,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 8,
+      "projectTotal": 4,
+      "instanceTotal": 6,
       "coverageTotal": 97.315,
       "behavior": "list",
       "status": "beta"
@@ -1542,8 +1551,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 4,
+      "projectTotal": 1,
+      "instanceTotal": 2,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1569,8 +1578,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 11,
+      "projectTotal": 4,
+      "instanceTotal": 9,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -1608,8 +1617,8 @@
           "description": "The name of the icon SVG sprite"
         }
       ],
-      "projectTotal": 17,
-      "instanceTotal": 81,
+      "projectTotal": 16,
+      "instanceTotal": 64,
       "coverageTotal": 92.8675,
       "behavior": "content",
       "status": "stable"
@@ -1686,8 +1695,8 @@
           "name": "icon"
         }
       ],
-      "projectTotal": 14,
-      "instanceTotal": 55,
+      "projectTotal": 13,
+      "instanceTotal": 38,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -1734,7 +1743,7 @@
         }
       ],
       "projectTotal": 10,
-      "instanceTotal": 26,
+      "instanceTotal": 23,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -1832,8 +1841,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 20,
+      "projectTotal": 3,
+      "instanceTotal": 8,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "stable"
@@ -1860,8 +1869,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 20,
+      "projectTotal": 2,
+      "instanceTotal": 8,
       "coverageTotal": 100,
       "behavior": "navigation",
       "status": "beta"
@@ -1920,8 +1929,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 19,
+      "projectTotal": 2,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -2025,7 +2034,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 25,
+      "instanceTotal": 21,
       "coverageTotal": 96.1375,
       "behavior": "popover",
       "status": "stable"
@@ -2047,7 +2056,7 @@
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0",
       "properties": [],
       "projectTotal": 2,
-      "instanceTotal": 4,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -2074,8 +2083,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 4,
+      "projectTotal": 2,
+      "instanceTotal": 2,
       "coverageTotal": 98.61,
       "behavior": "navigation",
       "status": "beta"
@@ -2131,8 +2140,8 @@
           "name": "footer"
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 4,
+      "projectTotal": 1,
+      "instanceTotal": 2,
       "coverageTotal": 91.335,
       "behavior": "container",
       "status": "beta"
@@ -2414,8 +2423,8 @@
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
       ],
-      "projectTotal": 5,
-      "instanceTotal": 7,
+      "projectTotal": 4,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -2574,7 +2583,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 13,
+      "instanceTotal": 10,
       "coverageTotal": 97.5,
       "behavior": "form",
       "status": "stable"
@@ -2634,8 +2643,8 @@
           "name": ""
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 5,
+      "projectTotal": 2,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -2891,7 +2900,7 @@
         }
       ],
       "projectTotal": 6,
-      "instanceTotal": 10,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -3049,7 +3058,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 98.675,
+      "coverageTotal": 0,
       "behavior": "navigation",
       "status": "pre-release"
     },
@@ -3101,7 +3110,7 @@
         }
       ],
       "projectTotal": 8,
-      "instanceTotal": 17,
+      "instanceTotal": 15,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -3341,14 +3350,6 @@
       "elementsVersion": "0.15.0",
       "elements": [
         {
-          "name": "mlv-notification-group",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-notification",
-          "instanceTotal": 3
-        },
-        {
           "name": "mlv-grid-cell",
           "instanceTotal": 3
         },
@@ -3445,6 +3446,14 @@
           "instanceTotal": 1
         },
         {
+          "name": "mlv-notification-group",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-notification",
+          "instanceTotal": 2
+        },
+        {
           "name": "mlv-alert-group",
           "instanceTotal": 2
         },
@@ -3477,7 +3486,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 80
+      "instanceTotal": 78
     },
     {
       "name": "app-shell-angular-demo",
@@ -3794,6 +3803,10 @@
           "instanceTotal": 1
         },
         {
+          "name": "mlv-button",
+          "instanceTotal": 12
+        },
+        {
           "name": "mlv-card",
           "instanceTotal": 2
         },
@@ -3812,10 +3825,6 @@
         {
           "name": "mlv-grid-row",
           "instanceTotal": 3
-        },
-        {
-          "name": "mlv-button",
-          "instanceTotal": 11
         },
         {
           "name": "mlv-toast",
@@ -3891,11 +3900,15 @@
         },
         {
           "name": "mlv-tooltip",
-          "instanceTotal": 3
+          "instanceTotal": 4
         },
         {
           "name": "mlv-badge",
           "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 5
         },
         {
           "name": "mlv-switch",
@@ -3916,10 +3929,6 @@
         {
           "name": "mlv-grid-header",
           "instanceTotal": 2
-        },
-        {
-          "name": "mlv-dropdown",
-          "instanceTotal": 4
         },
         {
           "name": "mlv-menu-item",
@@ -3962,7 +3971,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 128
+      "instanceTotal": 131
     },
     {
       "name": "@elements/next-common",
@@ -3970,23 +3979,23 @@
       "elementsVersion": "0.11.1",
       "elements": [
         {
-          "name": "mlv-card",
-          "instanceTotal": 9
-        },
-        {
-          "name": "mlv-card-footer",
-          "instanceTotal": 9
-        },
-        {
           "name": "mlv-button",
-          "instanceTotal": 5
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card",
+          "instanceTotal": 1
         },
         {
           "name": "mlv-card-content",
-          "instanceTotal": 5
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card-footer",
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 28
+      "instanceTotal": 4
     },
     {
       "name": "ide",
@@ -4030,54 +4039,54 @@
     {
       "name": "@elements/feedback-elements",
       "path": "src/ui/platform/libs/feedback-elements",
-      "elementsVersion": "0.16.0",
+      "elementsVersion": "0.18.0",
       "elements": [
         {
           "name": "mlv-button",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-dropdown",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-control-message",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-control",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-icon-button",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-icon",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-input",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-notification",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-select",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-textarea",
-          "instanceTotal": 4
+          "instanceTotal": 1
         },
         {
           "name": "mlv-tooltip",
-          "instanceTotal": 4
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 44
+      "instanceTotal": 11
     },
     {
       "name": "@elements/ide",
@@ -4222,70 +4231,70 @@
     {
       "name": "@elements/platform-elements",
       "path": "src/ui/platform/shared/elements",
-      "elementsVersion": "0.15.0",
+      "elementsVersion": "0.18.0",
       "elements": [
         {
           "name": "mlv-alert-banner",
-          "instanceTotal": 7
+          "instanceTotal": 1
         },
         {
           "name": "mlv-alert",
-          "instanceTotal": 7
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 14
+      "instanceTotal": 2
     },
     {
       "name": "@elements/xp-app-shell",
       "path": "src/ui/platform/xp/app-shell",
-      "elementsVersion": "0.15.0",
+      "elementsVersion": "0.18.0",
       "elements": [
         {
-          "name": "mlv-app-header",
-          "instanceTotal": 11
-        },
-        {
-          "name": "mlv-breadcrumb",
-          "instanceTotal": 13
-        },
-        {
-          "name": "mlv-button",
-          "instanceTotal": 15
-        },
-        {
           "name": "mlv-dropdown",
-          "instanceTotal": 15
-        },
-        {
-          "name": "mlv-icon-button",
-          "instanceTotal": 12
+          "instanceTotal": 5
         },
         {
           "name": "mlv-icon",
-          "instanceTotal": 15
-        },
-        {
-          "name": "mlv-logo",
-          "instanceTotal": 14
+          "instanceTotal": 5
         },
         {
           "name": "mlv-menu-item",
-          "instanceTotal": 15
+          "instanceTotal": 5
         },
         {
           "name": "mlv-menu",
-          "instanceTotal": 16
-        },
-        {
-          "name": "mlv-divider",
-          "instanceTotal": 7
+          "instanceTotal": 6
         },
         {
           "name": "mlv-badge",
           "instanceTotal": 1
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 5
+        },
+        {
+          "name": "mlv-divider",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-breadcrumb",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-logo",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-app-header",
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 134
+      "instanceTotal": 39
     },
     {
       "name": "@elements/xp-hub",
@@ -4317,137 +4326,16 @@
     {
       "name": "@elements/MXP_PATH",
       "path": "src/ui/platform/xp/templates/angular-app",
-      "elementsVersion": "0.15.0",
+      "elementsVersion": "0.18.0",
       "elements": [],
       "instanceTotal": 0
     },
     {
       "name": "@elements/MXP_PATH",
       "path": "src/ui/platform/xp/templates/lit-app",
-      "elementsVersion": "0.15.0",
-      "elements": [
-        {
-          "name": "mlv-alert-banner",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-alert-group",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-alert",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-button",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-icon-button",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-icon",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-accordion",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-app-header",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-breadcrumb",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-card",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-checkbox",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-dialog",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-divider",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-drawer",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-dropdown",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-control",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-cell",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-column",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-footer",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-header",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-placeholder",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-row",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-logo",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-menu-item",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-menu",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-pagination",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-panel",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-radio",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-sort-button",
-          "instanceTotal": 2
-        }
-      ],
-      "instanceTotal": 66
+      "elementsVersion": "0.18.0",
+      "elements": [],
+      "instanceTotal": 0
     },
     {
       "name": "tracking",
@@ -4479,55 +4367,82 @@
       {
         "file": "elements/src/button-group/button-group.ts",
         "lines": {
-          "total": 23,
-          "covered": 16,
+          "total": 22,
+          "covered": 13,
           "skipped": 0,
-          "pct": 69.56
+          "pct": 59.09
         },
         "functions": {
           "total": 9,
-          "covered": 6,
+          "covered": 5,
           "skipped": 0,
-          "pct": 66.66
+          "pct": 55.55
         },
         "statements": {
-          "total": 31,
-          "covered": 22,
+          "total": 29,
+          "covered": 18,
           "skipped": 0,
-          "pct": 70.96
+          "pct": 62.06
         },
         "branches": {
           "total": 12,
-          "covered": 2,
+          "covered": 1,
           "skipped": 0,
-          "pct": 16.66
+          "pct": 8.33
+        }
+      },
+      {
+        "file": "elements/src/accordion/accordion.ts",
+        "lines": {
+          "total": 50,
+          "covered": 38,
+          "skipped": 0,
+          "pct": 76
+        },
+        "functions": {
+          "total": 23,
+          "covered": 15,
+          "skipped": 0,
+          "pct": 65.21
+        },
+        "statements": {
+          "total": 79,
+          "covered": 66,
+          "skipped": 0,
+          "pct": 83.54
+        },
+        "branches": {
+          "total": 20,
+          "covered": 15,
+          "skipped": 0,
+          "pct": 75
         }
       },
       {
         "file": "elements/src/internal/utils/dom.ts",
         "lines": {
-          "total": 118,
-          "covered": 100,
+          "total": 112,
+          "covered": 95,
           "skipped": 0,
-          "pct": 84.74
+          "pct": 84.82
         },
         "functions": {
-          "total": 51,
-          "covered": 44,
+          "total": 49,
+          "covered": 42,
           "skipped": 0,
-          "pct": 86.27
+          "pct": 85.71
         },
         "statements": {
-          "total": 129,
-          "covered": 110,
+          "total": 123,
+          "covered": 105,
           "skipped": 0,
-          "pct": 85.27
+          "pct": 85.36
         },
         "branches": {
-          "total": 81,
-          "covered": 66,
+          "total": 77,
+          "covered": 64,
           "skipped": 0,
-          "pct": 81.48
+          "pct": 83.11
         }
       },
       {
@@ -4555,33 +4470,6 @@
           "covered": 54,
           "skipped": 0,
           "pct": 90
-        }
-      },
-      {
-        "file": "elements/src/accordion/accordion.ts",
-        "lines": {
-          "total": 57,
-          "covered": 51,
-          "skipped": 0,
-          "pct": 89.47
-        },
-        "functions": {
-          "total": 25,
-          "covered": 20,
-          "skipped": 0,
-          "pct": 80
-        },
-        "statements": {
-          "total": 88,
-          "covered": 81,
-          "skipped": 0,
-          "pct": 92.04
-        },
-        "branches": {
-          "total": 24,
-          "covered": 18,
-          "skipped": 0,
-          "pct": 75
         }
       },
       {
@@ -4668,22 +4556,22 @@
       {
         "file": "elements/src/grid/column/column.ts",
         "lines": {
-          "total": 51,
-          "covered": 50,
+          "total": 53,
+          "covered": 52,
           "skipped": 0,
-          "pct": 98.03
+          "pct": 98.11
         },
         "functions": {
-          "total": 13,
-          "covered": 13,
+          "total": 14,
+          "covered": 14,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 63,
-          "covered": 62,
+          "total": 65,
+          "covered": 64,
           "skipped": 0,
-          "pct": 98.41
+          "pct": 98.46
         },
         "branches": {
           "total": 32,
@@ -4802,60 +4690,6 @@
       },
       {
         "file": "elements/src/tooltip/define.ts",
-        "lines": {
-          "total": 1,
-          "covered": 1,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 0,
-          "covered": 0,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 1,
-          "covered": 1,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 0,
-          "covered": 0,
-          "skipped": 0,
-          "pct": 100
-        }
-      },
-      {
-        "file": "elements/src/toolbar/toolbar.ts",
-        "lines": {
-          "total": 50,
-          "covered": 50,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 25,
-          "covered": 24,
-          "skipped": 0,
-          "pct": 96
-        },
-        "statements": {
-          "total": 77,
-          "covered": 76,
-          "skipped": 0,
-          "pct": 98.7
-        },
-        "branches": {
-          "total": 10,
-          "covered": 10,
-          "skipped": 0,
-          "pct": 100
-        }
-      },
-      {
-        "file": "elements/src/toolbar/define.ts",
         "lines": {
           "total": 1,
           "covered": 1,
@@ -5289,20 +5123,20 @@
       {
         "file": "elements/src/select/select.ts",
         "lines": {
-          "total": 63,
-          "covered": 63,
+          "total": 59,
+          "covered": 59,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 28,
-          "covered": 28,
+          "total": 25,
+          "covered": 25,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 91,
-          "covered": 91,
+          "total": 85,
+          "covered": 85,
           "skipped": 0,
           "pct": 100
         },
@@ -5721,8 +5555,8 @@
       {
         "file": "elements/src/password/password.ts",
         "lines": {
-          "total": 6,
-          "covered": 6,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -5733,8 +5567,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 11,
-          "covered": 11,
+          "total": 15,
+          "covered": 15,
           "skipped": 0,
           "pct": 100
         },
@@ -5997,14 +5831,14 @@
           "pct": 100
         },
         "functions": {
-          "total": 2,
-          "covered": 2,
+          "total": 3,
+          "covered": 3,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 10,
-          "covered": 10,
+          "total": 12,
+          "covered": 12,
           "skipped": 0,
           "pct": 100
         },
@@ -7260,8 +7094,8 @@
       {
         "file": "elements/src/forms/utils/layout.ts",
         "lines": {
-          "total": 21,
-          "covered": 21,
+          "total": 19,
+          "covered": 19,
           "skipped": 0,
           "pct": 100
         },
@@ -7272,16 +7106,16 @@
           "pct": 100
         },
         "statements": {
-          "total": 21,
-          "covered": 21,
+          "total": 20,
+          "covered": 20,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 14,
-          "covered": 13,
+          "total": 12,
+          "covered": 12,
           "skipped": 0,
-          "pct": 92.85
+          "pct": 100
         }
       },
       {
@@ -7341,8 +7175,8 @@
       {
         "file": "elements/src/forms/control/control.ts",
         "lines": {
-          "total": 74,
-          "covered": 74,
+          "total": 71,
+          "covered": 71,
           "skipped": 0,
           "pct": 100
         },
@@ -7353,10 +7187,10 @@
           "pct": 96.66
         },
         "statements": {
-          "total": 105,
-          "covered": 104,
+          "total": 99,
+          "covered": 98,
           "skipped": 0,
-          "pct": 99.04
+          "pct": 98.98
         },
         "branches": {
           "total": 32,
@@ -7611,20 +7445,20 @@
       {
         "file": "elements/src/dot/dot.ts",
         "lines": {
-          "total": 10,
-          "covered": 10,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 5,
-          "covered": 5,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 14,
-          "covered": 14,
+          "total": 12,
+          "covered": 12,
           "skipped": 0,
           "pct": 100
         },
@@ -7962,8 +7796,8 @@
       {
         "file": "elements/src/combobox/combobox.ts",
         "lines": {
-          "total": 69,
-          "covered": 69,
+          "total": 71,
+          "covered": 71,
           "skipped": 0,
           "pct": 100
         },
@@ -7974,8 +7808,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 93,
-          "covered": 93,
+          "total": 97,
+          "covered": 97,
           "skipped": 0,
           "pct": 100
         },
@@ -8016,8 +7850,8 @@
       {
         "file": "elements/src/color/color.ts",
         "lines": {
-          "total": 10,
-          "covered": 10,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -8028,8 +7862,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 15,
-          "covered": 15,
+          "total": 13,
+          "covered": 13,
           "skipped": 0,
           "pct": 100
         },
@@ -8611,28 +8445,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1922,
-        "covered": 1876,
+        "total": 1850,
+        "covered": 1797,
         "skipped": 0,
-        "pct": 97.6
+        "pct": 97.13
       },
       "statements": {
-        "total": 2560,
-        "covered": 2495,
+        "total": 2460,
+        "covered": 2389,
         "skipped": 0,
-        "pct": 97.46
+        "pct": 97.11
       },
       "functions": {
-        "total": 757,
-        "covered": 723,
+        "total": 726,
+        "covered": 689,
         "skipped": 0,
-        "pct": 95.5
+        "pct": 94.9
       },
       "branches": {
-        "total": 932,
-        "covered": 842,
+        "total": 912,
+        "covered": 825,
         "skipped": 0,
-        "pct": 90.34
+        "pct": 90.46
       },
       "branchesTrue": {
         "total": 0,

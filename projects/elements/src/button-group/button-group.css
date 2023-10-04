@@ -2,9 +2,9 @@
   --mlv-sys-interaction-state-base: var(--background);
   --background: var(--mlv-sys-interaction-background);
   --border-radius: var(--mlv-ref-border-radius-sm);
-  --padding: var(--mlv-ref-size-300);
+  --padding: var(--mlv-ref-space-xxs);
+  --gap: var(--mlv-ref-space-xxxs);
   --width: fit-content;
-  --gap: var(--mlv-ref-space-xs);
   width: var(--width);
 }
 
@@ -21,7 +21,8 @@
 
 ::slotted(mlv-button) {
   --height: var(--mlv-ref-size-700);
-  --border-radius: var(--border-radius);
+  --border-radius: var(--mlv-ref-border-radius-sm);
+  --font-weight: var(--mlv-ref-font-weight-medium);
 }
 
 ::slotted(mlv-icon-button) {
@@ -32,15 +33,12 @@
 ::slotted(mlv-divider) {
   margin-top: calc(-1 * var(--padding));
   height: calc(100% + var(--padding));
+  --color: color-mix(in oklab, var(--mlv-sys-interaction-background) 100%, var(--mlv-sys-interaction-color) 50%);
 }
 
-::slotted(:hover) {
+::slotted(mlv-button:hover),
+::slotted(mlv-icon-button:hover) {
   --color: var(--mlv-sys-text-emphasis-color);
-}
-
-:host([split]) {
-  --padding: 0;
-  --gap: 0;
 }
 
 :host([container='flat']) {
@@ -51,10 +49,36 @@
   --border-radius: var(--mlv-ref-border-radius-lg);
 }
 
+:host([container='rounded']:not([split])) ::slotted(mlv-button),
+:host([container='rounded']:not([split])) ::slotted(mlv-icon-button) {
+  --border-radius: var(--mlv-ref-border-radius-full);
+}
+
 :host([orientation='vertical']) {
   --gap: var(--mlv-ref-space-xs);
 
   & [internal-host] {
     flex-direction: column;
+  }
+}
+
+:host([interaction='emphasize']) ::slotted(mlv-divider) {
+  --color: color-mix(in oklab, var(--mlv-sys-interaction-emphasize-background) 100%, var(--mlv-sys-interaction-emphasize-color) 50%);
+}
+
+:host([interaction='destructive']) ::slotted(mlv-divider) {
+  --color: color-mix(in oklab, var(--mlv-sys-interaction-destructive-background) 100%, var(--mlv-sys-interaction-destructive-color) 50%);
+}
+
+:host([split]) {
+  --padding: 0;
+  --gap: 0;
+
+  & ::slotted(mlv-button) {
+    --border-radius: var(--mlv-ref-border-radius-none);
+  }
+
+  & ::slotted(mlv-icon-button) {
+    --border-radius: var(--mlv-ref-border-radius-none);
   }
 }
