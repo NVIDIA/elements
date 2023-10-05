@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-04T19:13:05.698Z",
+  "created": "2023-10-05T20:26:36.141Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -65,7 +65,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 74.9375,
+      "coverageTotal": 84.1275,
       "behavior": "container",
       "status": "beta"
     },
@@ -92,7 +92,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 74.9375,
+      "coverageTotal": 84.1275,
       "behavior": "container",
       "status": "beta"
     },
@@ -126,7 +126,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 74.9375,
+      "coverageTotal": 84.1275,
       "behavior": "container",
       "status": "beta"
     },
@@ -161,7 +161,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 74.9375,
+      "coverageTotal": 84.1275,
       "behavior": "container",
       "status": "beta"
     },
@@ -469,7 +469,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 46.2575,
+      "coverageTotal": 61.605,
       "behavior": "container",
       "status": "pre-release"
     },
@@ -824,7 +824,7 @@
       ],
       "projectTotal": 7,
       "instanceTotal": 10,
-      "coverageTotal": 98.1275,
+      "coverageTotal": 98.1425,
       "behavior": "form",
       "status": "stable"
     },
@@ -1472,7 +1472,7 @@
       ],
       "projectTotal": 4,
       "instanceTotal": 6,
-      "coverageTotal": 97.58,
+      "coverageTotal": 97.54749999999999,
       "behavior": "list",
       "status": "beta"
     },
@@ -1602,15 +1602,15 @@
       "properties": [
         {
           "name": "status",
-          "description": "SVG status color"
+          "description": "Visual treatment to represent a ongoing task, support or trend status."
         },
         {
           "name": "size",
-          "description": "SVG size"
+          "description": "Controls the bounding box size of the icon given a t-shirt style value."
         },
         {
           "name": "direction",
-          "description": "Sets the direction of the icon.\nOnly supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)"
+          "description": "Sets the direction of the icon. Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)"
         },
         {
           "name": "name",
@@ -3058,7 +3058,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 0,
+      "coverageTotal": 98.675,
       "behavior": "navigation",
       "status": "pre-release"
     },
@@ -4367,82 +4367,55 @@
       {
         "file": "elements/src/button-group/button-group.ts",
         "lines": {
-          "total": 22,
-          "covered": 13,
-          "skipped": 0,
-          "pct": 59.09
-        },
-        "functions": {
-          "total": 9,
-          "covered": 5,
-          "skipped": 0,
-          "pct": 55.55
-        },
-        "statements": {
-          "total": 29,
-          "covered": 18,
-          "skipped": 0,
-          "pct": 62.06
-        },
-        "branches": {
-          "total": 12,
-          "covered": 1,
-          "skipped": 0,
-          "pct": 8.33
-        }
-      },
-      {
-        "file": "elements/src/accordion/accordion.ts",
-        "lines": {
-          "total": 50,
-          "covered": 38,
-          "skipped": 0,
-          "pct": 76
-        },
-        "functions": {
-          "total": 23,
-          "covered": 15,
-          "skipped": 0,
-          "pct": 65.21
-        },
-        "statements": {
-          "total": 79,
-          "covered": 66,
-          "skipped": 0,
-          "pct": 83.54
-        },
-        "branches": {
-          "total": 20,
-          "covered": 15,
+          "total": 32,
+          "covered": 24,
           "skipped": 0,
           "pct": 75
+        },
+        "functions": {
+          "total": 12,
+          "covered": 8,
+          "skipped": 0,
+          "pct": 66.66
+        },
+        "statements": {
+          "total": 42,
+          "covered": 32,
+          "skipped": 0,
+          "pct": 76.19
+        },
+        "branches": {
+          "total": 14,
+          "covered": 4,
+          "skipped": 0,
+          "pct": 28.57
         }
       },
       {
         "file": "elements/src/internal/utils/dom.ts",
         "lines": {
-          "total": 112,
-          "covered": 95,
+          "total": 118,
+          "covered": 100,
           "skipped": 0,
-          "pct": 84.82
+          "pct": 84.74
         },
         "functions": {
-          "total": 49,
-          "covered": 42,
+          "total": 51,
+          "covered": 44,
           "skipped": 0,
-          "pct": 85.71
+          "pct": 86.27
         },
         "statements": {
-          "total": 123,
-          "covered": 105,
+          "total": 129,
+          "covered": 110,
           "skipped": 0,
-          "pct": 85.36
+          "pct": 85.27
         },
         "branches": {
-          "total": 77,
-          "covered": 64,
+          "total": 81,
+          "covered": 66,
           "skipped": 0,
-          "pct": 83.11
+          "pct": 81.48
         }
       },
       {
@@ -4470,6 +4443,33 @@
           "covered": 54,
           "skipped": 0,
           "pct": 90
+        }
+      },
+      {
+        "file": "elements/src/accordion/accordion.ts",
+        "lines": {
+          "total": 57,
+          "covered": 51,
+          "skipped": 0,
+          "pct": 89.47
+        },
+        "functions": {
+          "total": 25,
+          "covered": 20,
+          "skipped": 0,
+          "pct": 80
+        },
+        "statements": {
+          "total": 88,
+          "covered": 81,
+          "skipped": 0,
+          "pct": 92.04
+        },
+        "branches": {
+          "total": 24,
+          "covered": 18,
+          "skipped": 0,
+          "pct": 75
         }
       },
       {
@@ -4556,22 +4556,22 @@
       {
         "file": "elements/src/grid/column/column.ts",
         "lines": {
-          "total": 53,
-          "covered": 52,
+          "total": 51,
+          "covered": 50,
           "skipped": 0,
-          "pct": 98.11
+          "pct": 98.03
         },
         "functions": {
-          "total": 14,
-          "covered": 14,
+          "total": 13,
+          "covered": 13,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 65,
-          "covered": 64,
+          "total": 63,
+          "covered": 62,
           "skipped": 0,
-          "pct": 98.46
+          "pct": 98.41
         },
         "branches": {
           "total": 32,
@@ -4690,6 +4690,60 @@
       },
       {
         "file": "elements/src/tooltip/define.ts",
+        "lines": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/toolbar/toolbar.ts",
+        "lines": {
+          "total": 50,
+          "covered": 50,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 25,
+          "covered": 24,
+          "skipped": 0,
+          "pct": 96
+        },
+        "statements": {
+          "total": 77,
+          "covered": 76,
+          "skipped": 0,
+          "pct": 98.7
+        },
+        "branches": {
+          "total": 10,
+          "covered": 10,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/toolbar/define.ts",
         "lines": {
           "total": 1,
           "covered": 1,
@@ -5123,20 +5177,20 @@
       {
         "file": "elements/src/select/select.ts",
         "lines": {
-          "total": 59,
-          "covered": 59,
+          "total": 63,
+          "covered": 63,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 25,
-          "covered": 25,
+          "total": 28,
+          "covered": 28,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 85,
-          "covered": 85,
+          "total": 91,
+          "covered": 91,
           "skipped": 0,
           "pct": 100
         },
@@ -5555,8 +5609,8 @@
       {
         "file": "elements/src/password/password.ts",
         "lines": {
-          "total": 8,
-          "covered": 8,
+          "total": 6,
+          "covered": 6,
           "skipped": 0,
           "pct": 100
         },
@@ -5567,8 +5621,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 15,
-          "covered": 15,
+          "total": 11,
+          "covered": 11,
           "skipped": 0,
           "pct": 100
         },
@@ -5831,14 +5885,14 @@
           "pct": 100
         },
         "functions": {
-          "total": 3,
-          "covered": 3,
+          "total": 2,
+          "covered": 2,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 12,
-          "covered": 12,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
@@ -7094,8 +7148,8 @@
       {
         "file": "elements/src/forms/utils/layout.ts",
         "lines": {
-          "total": 19,
-          "covered": 19,
+          "total": 21,
+          "covered": 21,
           "skipped": 0,
           "pct": 100
         },
@@ -7106,16 +7160,16 @@
           "pct": 100
         },
         "statements": {
-          "total": 20,
-          "covered": 20,
+          "total": 21,
+          "covered": 21,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 12,
-          "covered": 12,
+          "total": 14,
+          "covered": 13,
           "skipped": 0,
-          "pct": 100
+          "pct": 92.85
         }
       },
       {
@@ -7175,8 +7229,8 @@
       {
         "file": "elements/src/forms/control/control.ts",
         "lines": {
-          "total": 71,
-          "covered": 71,
+          "total": 74,
+          "covered": 74,
           "skipped": 0,
           "pct": 100
         },
@@ -7187,10 +7241,10 @@
           "pct": 96.66
         },
         "statements": {
-          "total": 99,
-          "covered": 98,
+          "total": 105,
+          "covered": 104,
           "skipped": 0,
-          "pct": 98.98
+          "pct": 99.04
         },
         "branches": {
           "total": 32,
@@ -7445,20 +7499,20 @@
       {
         "file": "elements/src/dot/dot.ts",
         "lines": {
-          "total": 8,
-          "covered": 8,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 4,
-          "covered": 4,
+          "total": 5,
+          "covered": 5,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 12,
-          "covered": 12,
+          "total": 14,
+          "covered": 14,
           "skipped": 0,
           "pct": 100
         },
@@ -7796,8 +7850,8 @@
       {
         "file": "elements/src/combobox/combobox.ts",
         "lines": {
-          "total": 71,
-          "covered": 71,
+          "total": 69,
+          "covered": 69,
           "skipped": 0,
           "pct": 100
         },
@@ -7808,8 +7862,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 97,
-          "covered": 97,
+          "total": 93,
+          "covered": 93,
           "skipped": 0,
           "pct": 100
         },
@@ -7850,8 +7904,8 @@
       {
         "file": "elements/src/color/color.ts",
         "lines": {
-          "total": 8,
-          "covered": 8,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
@@ -7862,8 +7916,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 13,
-          "covered": 13,
+          "total": 15,
+          "covered": 15,
           "skipped": 0,
           "pct": 100
         },
@@ -8445,28 +8499,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1850,
-        "covered": 1797,
+        "total": 1931,
+        "covered": 1884,
         "skipped": 0,
-        "pct": 97.13
+        "pct": 97.56
       },
       "statements": {
-        "total": 2460,
-        "covered": 2389,
+        "total": 2571,
+        "covered": 2505,
         "skipped": 0,
-        "pct": 97.11
+        "pct": 97.43
       },
       "functions": {
-        "total": 726,
-        "covered": 689,
+        "total": 760,
+        "covered": 725,
         "skipped": 0,
-        "pct": 94.9
+        "pct": 95.39
       },
       "branches": {
-        "total": 912,
-        "covered": 825,
+        "total": 934,
+        "covered": 844,
         "skipped": 0,
-        "pct": 90.46
+        "pct": 90.36
       },
       "branchesTrue": {
         "total": 0,

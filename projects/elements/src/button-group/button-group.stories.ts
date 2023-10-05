@@ -9,19 +9,11 @@ export default {
 
 export const Default = {
   render: () => html`
-    <div nve-layout="row gap:sm">
-      <nve-button-group>
-        <nve-icon-button pressed icon-name="split-vertical"></nve-icon-button>
-        <nve-icon-button icon-name="split-horizontal"></nve-icon-button>
-        <nve-icon-button icon-name="split-none"></nve-icon-button>
-      </nve-button-group>
-
-      <nve-button-group behavior-select="single">
-        <nve-button pressed>10%</nve-button>
-        <nve-button>15%</nve-button>
-        <nve-button>20%</nve-button>
-      </nve-button-group>
-    </div>
+    <nve-button-group>
+      <nve-icon-button icon-name="copy"></nve-icon-button>
+      <nve-icon-button icon-name="add-comment"></nve-icon-button>
+      <nve-icon-button icon-name="download"></nve-icon-button>
+    </nve-button-group>
   `
 };
 
@@ -34,12 +26,13 @@ export const SingleSelect = {
   </nve-button-group>
   `
 };
+
 export const MultiSelect = {
   render: () => html`
     <nve-button-group behavior-select="multi">
       <nve-icon-button pressed icon-name="bold" size="sm"></nve-icon-button>
       <nve-icon-button icon-name="italic" size="sm"></nve-icon-button>
-      <nve-icon-button icon-name="strikethrough" size="sm"></nve-icon-button>
+      <nve-icon-button pressed icon-name="strikethrough" size="sm"></nve-icon-button>
     </nve-button-group>
   `
 };

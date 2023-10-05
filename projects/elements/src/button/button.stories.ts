@@ -25,7 +25,7 @@ type ArgTypes = Button & {
 
 export const Default = {
   render: (args: ArgTypes) => html`<nve-button ${spread(args)}>${args.textContent}</nve-button>`,
-  args: { textContent: 'Default', disabled: false }
+  args: { textContent: 'Standard', disabled: false }
 };
 
 export const Emphasize = { ...Default, args: { textContent: 'Emphasize', interaction: 'emphasize' } };
@@ -55,7 +55,7 @@ export const ButtonWithIcon = {
 
 export const Interactions = {
   render: () => html`
-    <nve-button>default</nve-button>
+    <nve-button>standard</nve-button>
     <nve-button interaction="emphasize">emphasize</nve-button>
     <nve-button interaction="destructive">destructive</nve-button>
     <nve-button disabled>disabled</nve-button>
@@ -67,20 +67,21 @@ export const FlatInteractions = {
     <nve-button interaction="flat">flat</nve-button>
     <nve-button interaction="flat-emphasize">flat-emphasize</nve-button>
     <nve-button interaction="flat-destructive">flat-destructive</nve-button>
+    <nve-button interaction="flat" disabled>flat-disabled</nve-button>
   `
 }
 
 export const Size = {
   render: () => html`
     <nve-button size="sm">small button</nve-button>
-    <nve-button>default button</nve-button>
+    <nve-button>standard button</nve-button>
     <nve-button size="lg">large button</nve-button>
   `
 }
 
 export const Link = {
   render: () => html`
-<nve-button><a href="#">default</a></nve-button>
+<nve-button><a href="#">standard</a></nve-button>
 <nve-button interaction="emphasize"><a href="#">emphasize</a></nve-button>
 <nve-button interaction="destructive"><a href="#">destructive</a> <nve-icon name="delete"></nve-icon></nve-button>
 <nve-button disabled><a href="#">disabled</a></nve-button>
@@ -113,7 +114,7 @@ export const LinkFlat = {
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="row gap:sm pad:md">
-  <nve-button>default</nve-button>
+  <nve-button>standard</nve-button>
   <nve-button interaction="emphasize">emphasize</nve-button>
   <nve-button interaction="destructive">destructive</nve-button>
   <nve-button disabled>disabled</nve-button>
@@ -124,7 +125,7 @@ export const LightTheme = {
 export const DarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="row gap:sm pad:md">
-  <nve-button>default</nve-button>
+  <nve-button>standard</nve-button>
   <nve-button interaction="emphasize">emphasize</nve-button>
   <nve-button interaction="destructive">destructive</nve-button>
   <nve-button disabled>disabled</nve-button>
