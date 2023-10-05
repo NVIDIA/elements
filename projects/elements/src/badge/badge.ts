@@ -1,12 +1,12 @@
-import { html, LitElement, nothing } from 'lit';
+import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
-import { TaskStatus, SupportStatus, useStyles, statusIcons, TrendStatus, statusStateStyles, supportStateStyles, ColorPalette, colorStateStyles } from '@elements/elements/internal';
+import { TaskStatus, SupportStatus, useStyles, statusIcons, TrendStatus, statusStateStyles, supportStateStyles, ColorPalette, colorStateStyles, attachInternals, I18nController } from '@elements/elements/internal';
 import styles from './badge.css?inline';
 
 /**
  * @element nve-badge
- * @description A visual indicator that communicates a status of a given task or workflow.
+ * @description A visual indicator that communicates a status description of an associated component. Status badges use short text, color, and icons for quick recognition and are placed near the relevant content.
  * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background
@@ -16,6 +16,7 @@ import styles from './badge.css?inline';
  * @cssprop --padding
  * @cssprop --border-radius
  * @cssprop --font-weight
+ * @cssprop --text-transform
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-badge-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
@@ -46,13 +47,20 @@ export class Badge extends LitElement {
     return statusIcons[this.status] === 'dot' ? 'sm' : 'md';
   }
 
+  /** @private */
+  declare _internals: ElementInternals;
+
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+
   render() {
     return html`
       <div internal-host>
-        <slot name="prefix-icon">${!this.status?.includes('trend') && !this.color ? html`<nve-icon name=${statusIcons[this.status]} .size=${this.#size}></nve-icon>` : nothing}</slot>
-        <slot @slotchange=${this.#assignDefaultIcon}></slot>
+        <slot name="prefix-icon">${!this.status?.includes('trend') && !this.color ? html`<nve-icon name=${statusIcons[this.status]} .size=${this.#size} aria-hidden="true"></nve-icon>` : nothing}</slot>
+        <slot @slotchange=${this.#slotChange}></slot>
         <slot name="suffix-icon">
-          ${this.status?.includes('trend') ? html`<nve-icon .name=${statusIcons[this.status] as any}></nve-icon>` : ''}
+          ${this.status?.includes('trend') ? html`<nve-icon .name=${statusIcons[this.status] as any} aria-hidden="true"></nve-icon>` : nothing}
         </slot>
       </div>
     `;
@@ -60,8 +68,24 @@ export class Badge extends LitElement {
 
   async connectedCallback() {
     super.connectedCallback();
+    attachInternals(this);
     await this.updateComplete;
+    this._internals.role = 'status';
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    this.#assignAriaLabel();
+  }
+
+  #slotChange() {
+    this.#assignAriaLabel();
     this.#assignDefaultIcon();
+  }
+
+  #assignAriaLabel() {
+    const trend = this.status?.includes('trend') ? ` ${this.i18n.trend} ${this.i18n[this.status.split('-')[1]]}` : '';
+    this._internals.ariaLabel = this.textContent + trend;
   }
 
   #assignDefaultIcon() {

@@ -15,6 +15,15 @@ export interface I18nStrings {
   end: string;
   currentPage: string;
   noResults: string;
+  status: string;
+  information: string;
+  warning: string;
+  success: string;
+  danger: string;
+  trend: string;
+  down: string;
+  up: string;
+  neutral: string;
 }
 
 const i18nRegistry = {
@@ -31,7 +40,16 @@ const i18nRegistry = {
   start: 'start',
   end: 'end',
   currentPage: 'current page',
-  noResults: 'no results'
+  noResults: 'no results',
+  status: 'status',
+  information: 'information',
+  warning: 'warning',
+  success: 'success',
+  danger: 'danger',
+  trend: 'trend',
+  down: 'down',
+  up: 'up',
+  neutral: 'neutral'
 };
 
 export class I18nService_ {

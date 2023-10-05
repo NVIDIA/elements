@@ -9,6 +9,7 @@
   --min-height: var(--nve-ref-size-800);
   --line-height: 0;
   --cursor: pointer;
+  --text-transform: capitalize;
   contain: layout;
   content-visibility: auto;
   contain-intrinsic-size: auto var(--min-height, initial);
@@ -25,6 +26,7 @@
   min-width: var(--min-width);
   min-height: var(--min-height);
   cursor: var(--cursor);
+  text-transform: var(--text-transform);
   display: flex;
   align-items: center;
   white-space: nowrap;

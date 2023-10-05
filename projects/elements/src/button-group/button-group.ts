@@ -22,9 +22,7 @@ import type { Divider } from '@elements/elements/divider';
  * @vqa false
  * @unitTests false
  * @stable false
- * @axe false
  */
-
 @keyNavigationList<ButtonGroup>()
 export class ButtonGroup extends LitElement {
   /** @private */

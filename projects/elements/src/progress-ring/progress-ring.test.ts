@@ -35,6 +35,11 @@ describe('nve-progress-ring', () => {
     expect(element._internals.role).toBe('progressbar');
     expect(element._internals.ariaValueNow).toBe('50');
     expect(element._internals.ariaValueMax).toBe('80');
+    expect(element._internals.ariaLabel).toBe('information');
+
+    element.status = 'success';
+    await elementIsStable(element);
+    expect(element._internals.ariaLabel).toBe('success');
   });
 
   it('should default to neutral status', () => {

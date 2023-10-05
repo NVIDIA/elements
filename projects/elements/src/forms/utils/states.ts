@@ -106,7 +106,7 @@ export function setupControlStates(control: Control) {
 
   observers.push(
     getElementUpdate(control.input, 'readonly', value => (value === '' ? true : value) ? states.add('--readonly') : states.delete('--readonly')),
-    getElementUpdate(control.input, 'checked', value => (value === '' ? true : value) ? states.add('--checked') : states.delete('--checked')),
+    getElementUpdate(control.input, 'checked', () => control.input.checked ? states.add('--checked') : states.delete('--checked')),
     getElementUpdate(control.input, 'disabled', value => (value === '' ? true : value) ? states.add('--disabled') : states.delete('--disabled')),
   );
   return observers;

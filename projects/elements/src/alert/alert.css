@@ -8,6 +8,7 @@
   --font-weight: var(--nve-ref-font-weight-medium);
   --justify-content: start;
   --min-height: initial;
+  --text-transform: initial;
   width: auto;
 }
 
@@ -17,9 +18,10 @@
   font-size: var(--font-size);
   gap: var(--gap);
   color: var(--color);
+  justify-content: var(--justify-content);
+  text-transform: var(--text-transform);
   display: flex;
   align-items: center;
-  justify-content: var(--justify-content);
   line-height: 1em;
   height: 100%;
 }

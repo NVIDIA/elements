@@ -1,5 +1,7 @@
 import { html, LitElement } from 'lit';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { useStyles, attachInternals, keyNavigationList, KeynavListConfig } from '@elements/elements/internal';
+import type { MenuItem } from './menu-item.js';
 import styles from './menu.css?inline';
 
 /**
@@ -32,12 +34,14 @@ export class Menu extends LitElement {
   get keynavListConfig(): KeynavListConfig {
     return {
       layout: 'vertical',
-      items: this.querySelectorAll<HTMLElement>('nve-menu-item')
+      items: this.items
     }
   }
 
   /** @private */
   declare _internals: ElementInternals;
+
+  @queryAssignedElements() items!: MenuItem[];
 
   render() {
     return html`

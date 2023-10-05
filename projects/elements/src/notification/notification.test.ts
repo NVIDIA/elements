@@ -42,6 +42,13 @@ describe('nve-notification', () => {
     expect(element._internals.role).toBe('alert');
   });
 
+  it('should set an aria-label for the icon status', async () => {
+    expect(element.shadowRoot.querySelector('nve-icon').ariaLabel).toBe('information');
+    element.status = 'success';
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('nve-icon').ariaLabel).toBe('success');
+  });
+
   it('should default to positioning to inline content', async () => {
     await elementIsStable(element);
     expect(element.position).toBe(undefined);

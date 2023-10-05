@@ -4,7 +4,7 @@
   --height: var(--nve-ref-size-400);
   --border-width: var(--nve-ref-border-width-md);
   --border-radius: var(--nve-ref-border-radius-full);
-  --border-color: hsla(227, 10%, 50%, 0.4);
+  --border-color: var(--nve-ref-border-color);
   --background: transparent;
 }
 

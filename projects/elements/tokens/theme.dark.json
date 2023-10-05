@@ -1429,6 +1429,12 @@
         "background": {
           "value": "{ref.color.blue-cobalt.500}",
           "type": "color"
+        },
+        "muted": {
+          "background": {
+            "value": "{ref.color.blue-cobalt.200}",
+            "type": "color"
+          }
         }
       },
       "disabled": {
@@ -1648,7 +1654,7 @@
       },
       "accent": {
         "color": {
-          "value": "{ref.color.blue-cobalt.800}",
+          "value": "{sys.accent.secondary.background}",
           "type": "color"
         },
         "muted": {

@@ -86,8 +86,8 @@ export function getElementUpdate(element: HTMLElement, key: string, callback: (v
       Object.defineProperty(element, key, {
         get: updatedProp.get,
         set: val => {
-          callback(val);
           updatedProp.set.call(element, val);
+          callback(val);
         },
       });
     } catch {
