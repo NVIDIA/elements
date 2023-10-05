@@ -54,7 +54,7 @@ export class ProgressiveFilterChip extends LitElement {
   #getControlTemplate(el: Element) {
     const slot = html`<slot name=${el.slot} @slotchange=${this.#removeItem}></slot>`;
     if (el.tagName === 'SELECT') {
-      return html`<nve-select multiple-overflow fit-text>${slot}</nve-select>`;
+      return html`<nve-select multiple-overflow ?fit-text=${!(el as HTMLSelectElement).multiple}>${slot}</nve-select>`;
     } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'date') {
       return html`<nve-date>${slot}</nve-date>`;
     } else if (el.tagName === 'INPUT') {

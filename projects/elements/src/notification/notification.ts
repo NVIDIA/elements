@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button';
-import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, SupportStatus, statusIcons, TypePopoverController, useStyles, I18nController } from '@elements/elements/internal';
+import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, SupportStatus, statusIcons, TypePopoverController, useStyles, I18nController, PopoverPosition } from '@elements/elements/internal';
 import styles from './notification.css?inline';
 
 /**
@@ -41,7 +41,7 @@ export class Notification extends LitElement {
   /**
    * Sets the side position of the popover relative to the provided anchor element.
    */
-  @property({ type: String, reflect: true }) position;
+  @property({ type: String, reflect: true }) position: PopoverPosition;
 
   /**
    * Sets the alignment of the popover relative to the provided anchor element.
@@ -64,7 +64,7 @@ export class Notification extends LitElement {
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
   /**
-   * Determins the visual status of the notification.
+   * Determines the visual status of the notification.
    */
   @property({ type: String, reflect: true }) status: SupportStatus;
 
@@ -84,7 +84,7 @@ export class Notification extends LitElement {
 
   get #popoverContent() {
     return html`
-    <nve-icon .name=${statusIcons[this.status]} part="status-icon"></nve-icon>
+    <nve-icon .name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information} part="status-icon"></nve-icon>
     ${this.closable ? html`<nve-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" interaction="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
     <slot></slot>`;
   }

@@ -1,0 +1,55 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { statusBadges } from '../../../docs/utils.mdx';
+
+<Meta title="Elements/Data Grid/Row Groups" parameters={{ badges: statusBadges('nve-grid') }} />
+
+# Data Grid Row Groups
+
+<element-metrics tag="nve-grid-row"></element-metrics>
+
+Row groups can be used to organize related rows of a similar subtype.
+
+```html
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="max-content" aria-label="expand groups" position="fixed"></nve-grid-column>
+    <nve-grid-column>Column 1</nve-grid-column>
+    <nve-grid-column>Column 2</nve-grid-column>
+    <nve-grid-column>Column 3</nve-grid-column>
+    <nve-grid-column>Column 4</nve-grid-column>
+  </nve-grid-header>
+  ...
+    <nve-grid-row>
+      <nve-grid-cell>
+        <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></nve-icon-button>
+      </nve-grid-cell>
+      <nve-grid-cell>Session: 2yuecae</nve-grid-cell>
+      <nve-grid-cell>upload</nve-grid-cell>
+      <nve-grid-cell>pending</nve-grid-cell>
+      <nve-grid-cell>p3</nve-grid-cell>
+      <nve-grid-cell>12/04/22</nve-grid-cell>
+    </nve-grid-row>
+  ...
+</nve-grid>
+```
+
+## Standard
+
+<Canvas>
+  <Story id="elements-data-grid-examples--row-groups" />
+</Canvas>
+
+## nve-grid
+<ArgsTable of="nve-grid" />
+
+## nve-grid-header
+<ArgsTable of="nve-grid-header" />
+
+## nve-grid-column
+<ArgsTable of="nve-grid-column" />
+
+## nve-grid-row
+<ArgsTable of="nve-grid-row" />
+
+## nve-grid-cell
+<ArgsTable of="nve-grid-cell" />
