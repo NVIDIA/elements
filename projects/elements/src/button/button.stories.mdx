@@ -17,42 +17,52 @@ import '@elements/elements/button/define.js';
 <mlv-button>button</mlv-button>
 ```
 
+## Standard
+
 <Canvas>
   <Story id="elements-button-examples--default" />
 </Canvas>
 
-## With Icon
-
-<Canvas>
-  <Story id="elements-button-examples--button-with-icon" />
-</Canvas>
-
 ## Interactions
+
+<element-metrics tag="mlv-button" type="property" value="interaction"></element-metrics>
+
+### Standard
 
 <Canvas>
   <Story id="elements-button-examples--interactions" />
 </Canvas>
 
-## Flat Interactions
+### Flat
 
 <Canvas>
   <Story id="elements-button-examples--flat-interactions" />
 </Canvas>
 
-## Pressed/Toggle
+## Selection Types
 
-[aria-pressed documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed)
+### Pressed
+
+<element-metrics tag="mlv-button" type="property" value="pressed"></element-metrics>
 
 <Canvas>
   <Story id="elements-button-examples--pressed-toggle" />
 </Canvas>
 
-## Flat Selected
+### Selected Flat
 
-[aria-selected documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected)
+<element-metrics tag="mlv-button" type="property" value="selected"></element-metrics>
 
 <Canvas>
   <Story id="elements-button-examples--selected-flat" />
+</Canvas>
+
+## Size
+
+<element-metrics tag="mlv-button" type="property" value="size"></element-metrics>
+
+<Canvas>
+  <Story id="elements-button-examples--size" />
 </Canvas>
 
 ## Linked Buttons
@@ -74,17 +84,17 @@ If you need to slot an icon in a linked button, put `<mlv-icon>` adjacent to the
   <Story id="elements-button-examples--link-flat" />
 </Canvas>
 
+## With Icon
+
+<Canvas>
+  <Story id="elements-button-examples--button-with-icon" />
+</Canvas>
+
 ## Themes
 
 <Canvas columns={2}>
   <Story id="elements-button-examples--light-theme" />
   <Story id="elements-button-examples--dark-theme" />
-</Canvas>
-
-## Size
-
-<Canvas>
-  <Story id="elements-button-examples--size" />
 </Canvas>
 
 ## Form Control

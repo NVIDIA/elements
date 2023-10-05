@@ -25,7 +25,7 @@ type ArgTypes = Button & {
 
 export const Default = {
   render: (args: ArgTypes) => html`<mlv-button ${spread(args)}>${args.textContent}</mlv-button>`,
-  args: { textContent: 'Default', disabled: false }
+  args: { textContent: 'Standard', disabled: false }
 };
 
 export const Emphasize = { ...Default, args: { textContent: 'Emphasize', interaction: 'emphasize' } };
@@ -55,7 +55,7 @@ export const ButtonWithIcon = {
 
 export const Interactions = {
   render: () => html`
-    <mlv-button>default</mlv-button>
+    <mlv-button>standard</mlv-button>
     <mlv-button interaction="emphasize">emphasize</mlv-button>
     <mlv-button interaction="destructive">destructive</mlv-button>
     <mlv-button disabled>disabled</mlv-button>
@@ -67,20 +67,21 @@ export const FlatInteractions = {
     <mlv-button interaction="flat">flat</mlv-button>
     <mlv-button interaction="flat-emphasize">flat-emphasize</mlv-button>
     <mlv-button interaction="flat-destructive">flat-destructive</mlv-button>
+    <mlv-button interaction="flat" disabled>flat-disabled</mlv-button>
   `
 }
 
 export const Size = {
   render: () => html`
     <mlv-button size="sm">small button</mlv-button>
-    <mlv-button>default button</mlv-button>
+    <mlv-button>standard button</mlv-button>
     <mlv-button size="lg">large button</mlv-button>
   `
 }
 
 export const Link = {
   render: () => html`
-<mlv-button><a href="#">default</a></mlv-button>
+<mlv-button><a href="#">standard</a></mlv-button>
 <mlv-button interaction="emphasize"><a href="#">emphasize</a></mlv-button>
 <mlv-button interaction="destructive"><a href="#">destructive</a> <mlv-icon name="delete"></mlv-icon></mlv-button>
 <mlv-button disabled><a href="#">disabled</a></mlv-button>
@@ -113,7 +114,7 @@ export const LinkFlat = {
 export const LightTheme = {
   render: () => html`
 <div mlv-theme="root light" mlv-layout="row gap:sm pad:md">
-  <mlv-button>default</mlv-button>
+  <mlv-button>standard</mlv-button>
   <mlv-button interaction="emphasize">emphasize</mlv-button>
   <mlv-button interaction="destructive">destructive</mlv-button>
   <mlv-button disabled>disabled</mlv-button>
@@ -124,7 +125,7 @@ export const LightTheme = {
 export const DarkTheme = {
   render: () => html`
 <div mlv-theme="root dark" mlv-layout="row gap:sm pad:md">
-  <mlv-button>default</mlv-button>
+  <mlv-button>standard</mlv-button>
   <mlv-button interaction="emphasize">emphasize</mlv-button>
   <mlv-button interaction="destructive">destructive</mlv-button>
   <mlv-button disabled>disabled</mlv-button>

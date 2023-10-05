@@ -20,15 +20,18 @@ export type { IconName, IconNames, IconSVG } from './icons.js';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
 export class Icon extends LitElement {
-  /** SVG status color */
+  /**
+   * Visual treatment to represent a ongoing task, support or trend status.
+   */
   @property({ type: String, reflect: true }) status?: 'warning' | 'danger' | 'success' | 'accent';
 
-  /** SVG size */
+  /**
+   * Controls the bounding box size of the icon given a t-shirt style value.
+   */
   @property({ type: String, reflect: true }) size?: Size | 'xs' | 'xl';
 
   /**
-   * Sets the direction of the icon.
-   * Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)
+   * Sets the direction of the icon. Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)
    */
   @property({ type: String, reflect: true }) direction?: 'up' | 'down' | 'left' | 'right';
 

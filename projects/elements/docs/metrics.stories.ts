@@ -18,6 +18,7 @@ import '@elements/elements/json-viewer/define.js';
 import metrics from 'metrics/data.json';
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
+const showdownOptions = { simplifiedAutoLink: true };
 
 export default {
   title: 'Elements/Data Grid/Examples',
@@ -168,8 +169,8 @@ class ElementMetrics extends LitElement {
   render() {
     const element = metrics.elements.find(d => d.name === this.tag);
     return html`
-      ${this.type === 'property' ? html`<div .innerHTML=${new showdown.Converter().makeHtml((element.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
-      ${this.type === 'slot' ? html`<div .innerHTML=${new showdown.Converter().makeHtml((element.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
+      ${this.type === 'property' ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml((element.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
+      ${this.type === 'slot' ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml((element.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
       ${!this.type ? html`
       <section mlv-layout="column gap:md">
         <div mlv-layout="row gap:sm align:vertical-center">
@@ -180,7 +181,7 @@ class ElementMetrics extends LitElement {
           ${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit label">Figma</a>` : nothing}
           <a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages" mlv-text="link no-visit label">Released ${element.since}</a>
         </div>
-        ${element.description ? html`<div .innerHTML=${new showdown.Converter().makeHtml(element.description).replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
+        ${element.description ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml(element.description).replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
       </section>` : nothing}
     `; 
   }

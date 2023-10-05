@@ -30,28 +30,28 @@ export const Status = {
   render: () => html`
     <div mlv-layout="column gap:md">
       <mlv-alert-group>
-        <mlv-alert>default</mlv-alert>
-        <mlv-alert>default</mlv-alert>
+        <mlv-alert>Standard</mlv-alert>
+        <mlv-alert>Standard</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="accent">
-        <mlv-alert>default</mlv-alert>
-        <mlv-alert>default</mlv-alert>
+        <mlv-alert>Accent</mlv-alert>
+        <mlv-alert>Accent</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">
-        <mlv-alert>warning</mlv-alert>
-        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>Warning</mlv-alert>
+        <mlv-alert>Warning</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="success">
-        <mlv-alert>success</mlv-alert>
-        <mlv-alert>success</mlv-alert>
+        <mlv-alert>Success</mlv-alert>
+        <mlv-alert>Success</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
-        <mlv-alert>danger</mlv-alert>
-        <mlv-alert>danger</mlv-alert>
+        <mlv-alert>Danger</mlv-alert>
+        <mlv-alert>Danger</mlv-alert>
       </mlv-alert-group>
     </div>
   `
@@ -61,28 +61,28 @@ export const Closable = {
   render: () => html`
     <div mlv-layout="column gap:md">
       <mlv-alert-group>
-        <mlv-alert closable>default</mlv-alert>
-        <mlv-alert closable>default</mlv-alert>
+        <mlv-alert closable>Standard</mlv-alert>
+        <mlv-alert closable>Standard</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="accent">
-        <mlv-alert closable>accent</mlv-alert>
-        <mlv-alert closable>accent</mlv-alert>
+        <mlv-alert closable>Accent</mlv-alert>
+        <mlv-alert closable>Accent</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">
-        <mlv-alert closable>warning</mlv-alert>
-        <mlv-alert closable>warning</mlv-alert>
+        <mlv-alert closable>Warning</mlv-alert>
+        <mlv-alert closable>Warning</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="success">
-        <mlv-alert closable>success</mlv-alert>
-        <mlv-alert closable>success</mlv-alert>
+        <mlv-alert closable>Success</mlv-alert>
+        <mlv-alert closable>Success</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
-        <mlv-alert closable>danger</mlv-alert>
-        <mlv-alert closable>danger</mlv-alert>
+        <mlv-alert closable>Danger</mlv-alert>
+        <mlv-alert closable>Danger</mlv-alert>
       </mlv-alert-group>
     </div>
   `
@@ -93,27 +93,27 @@ export const Actions = {
   <div mlv-layout="column gap:md">
     <mlv-alert-group>
       <mlv-alert>
-        default <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Standard <mlv-button slot="actions" interaction="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
     <mlv-alert-group status="accent">
       <mlv-alert>
-        accent <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Standard <mlv-button slot="actions" interaction="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
     <mlv-alert-group status="warning">
       <mlv-alert>
-        warning <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Warning <mlv-button slot="actions" interaction="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
     <mlv-alert-group status="success">
       <mlv-alert>
-        success <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Success <mlv-button slot="actions" interaction="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
     <mlv-alert-group status="danger">
       <mlv-alert>
-        danger <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Danger <mlv-button slot="actions" interaction="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
   </div>
@@ -124,28 +124,28 @@ export const Themes = {
   render: () => html`
     <div mlv-theme="root light" mlv-layout="column gap:md pad:md">
       <mlv-alert-group>
-        <mlv-alert>default</mlv-alert>
-        <mlv-alert>default</mlv-alert>
+        <mlv-alert>Standard</mlv-alert>
+        <mlv-alert>Standard</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="accent">
-        <mlv-alert>accent</mlv-alert>
-        <mlv-alert>accent</mlv-alert>
+        <mlv-alert>Accent</mlv-alert>
+        <mlv-alert>Accent</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">
-        <mlv-alert>warning</mlv-alert>
-        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>Warning</mlv-alert>
+        <mlv-alert>Warning</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="success">
-        <mlv-alert>success</mlv-alert>
-        <mlv-alert>success</mlv-alert>
+        <mlv-alert>Success</mlv-alert>
+        <mlv-alert>Success</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
-        <mlv-alert>danger</mlv-alert>
-        <mlv-alert>danger</mlv-alert>
+        <mlv-alert>Danger</mlv-alert>
+        <mlv-alert>Danger</mlv-alert>
       </mlv-alert-group>
     </div>
     <div mlv-theme="root dark" mlv-layout="column gap:md pad:md">
@@ -155,23 +155,23 @@ export const Themes = {
       </mlv-alert-group>
 
       <mlv-alert-group status="accent">
-        <mlv-alert>accent</mlv-alert>
-        <mlv-alert>accent</mlv-alert>
+        <mlv-alert>Accent</mlv-alert>
+        <mlv-alert>Accent</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="warning">
-        <mlv-alert>warning</mlv-alert>
-        <mlv-alert>warning</mlv-alert>
+        <mlv-alert>Warning</mlv-alert>
+        <mlv-alert>Warning</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="success">
-        <mlv-alert>success</mlv-alert>
-        <mlv-alert>success</mlv-alert>
+        <mlv-alert>Success</mlv-alert>
+        <mlv-alert>Success</mlv-alert>
       </mlv-alert-group>
 
       <mlv-alert-group status="danger">
-        <mlv-alert>danger</mlv-alert>
-        <mlv-alert>danger</mlv-alert>
+        <mlv-alert>Danger</mlv-alert>
+        <mlv-alert>Danger</mlv-alert>
       </mlv-alert-group>
     </div>
   `
