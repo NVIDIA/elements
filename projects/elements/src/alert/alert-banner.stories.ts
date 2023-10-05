@@ -20,7 +20,7 @@ export const Default = {
     html`
 <nve-alert-banner .status=${args.status}>
   <nve-alert closable>
-    <span slot="prefix">default</span> banner message
+    <span slot="prefix">Standard</span> banner message
   </nve-alert>
 </nve-alert-banner>
     `,
@@ -32,31 +32,31 @@ export const Status = {
 <div nve-layout="column gap:md">
   <nve-alert-banner>
     <nve-alert closable>
-      <span slot="prefix">default</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="accent">
     <nve-alert closable>
-      <span slot="prefix">accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="warning">
     <nve-alert closable>
-      <span slot="prefix">warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="success">
     <nve-alert closable>
-      <span slot="prefix">success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="danger">
     <nve-alert closable>
-      <span slot="prefix">danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 </div>
@@ -68,31 +68,31 @@ export const LightTheme = {
 <div nve-theme="root light" nve-layout="column gap:md pad:md">
   <nve-alert-banner>
     <nve-alert closable>
-      <span slot="prefix">default</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="accent">
     <nve-alert closable>
-      <span slot="prefix">accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="warning">
     <nve-alert closable>
-      <span slot="prefix">warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="success">
     <nve-alert closable>
-      <span slot="prefix">success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="danger">
     <nve-alert closable>
-      <span slot="prefix">danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 </div>
@@ -104,31 +104,31 @@ export const DarkTheme = {
 <div nve-theme="root dark" nve-layout="column gap:md pad:md">
 <nve-alert-banner>
     <nve-alert closable>
-      <span slot="prefix">default</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="accent">
     <nve-alert closable>
-      <span slot="prefix">accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="warning">
     <nve-alert closable>
-      <span slot="prefix">warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="success">
     <nve-alert closable>
-      <span slot="prefix">success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 
   <nve-alert-banner status="danger">
     <nve-alert closable>
-      <span slot="prefix">danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+      <span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
     </nve-alert>
   </nve-alert-banner>
 </div>
