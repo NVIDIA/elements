@@ -1,4 +1,5 @@
 import { html, LitElement, PropertyValues } from 'lit';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { useStyles, attachInternals } from '@elements/elements/internal';
 import { Logo } from '@elements/elements/logo';
 import type { IconButton } from '@elements/elements/icon-button';
@@ -34,16 +35,14 @@ export class AppHeader extends LitElement {
     'nve-logo': Logo
   }
 
-  get #navItems() {
-    return Array.from(this.querySelectorAll<Button>('[slot="nav-items"]'));
-  }
+  @queryAssignedElements({ slot: 'nav-items' }) private navItems!: Button[];
 
-  get #navActions() {
-    return Array.from(this.querySelectorAll<IconButton>('[slot="nav-actions"]'));
-  }
+  @queryAssignedElements({ slot: 'nav-actions' }) private navActions!: IconButton[];
+
+  @queryAssignedElements() private slottedElements!: HTMLElement[];
 
   get #slottedLogo() {
-    return this.querySelector<Logo>('nve-logo');
+    return this.slottedElements.find(i => i.tagName === 'MLV-LOGO') as Logo;
   }
 
   render() {
@@ -84,11 +83,11 @@ export class AppHeader extends LitElement {
   }
 
   #updateItems() {
-    this.#navActions
-      .filter(i => i.getAttribute('interaction') === 'emphasize')
-      .forEach(item => item.size = 'sm');
+    this.navActions?.filter(i => i.getAttribute('interaction') === 'emphasize')?.forEach(item => item.size = 'sm');
 
-    [...this.#navItems, ...this.#navActions]
+    const items = this.navItems ?? [];
+    const actions = this.navActions ?? [];
+    [...items, ...actions]
       .filter(i => !i.hasAttribute('interaction'))
       .forEach(item => item.interaction = 'flat');
   }

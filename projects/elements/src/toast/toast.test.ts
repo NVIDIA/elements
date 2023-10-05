@@ -47,6 +47,13 @@ describe('nve-toast', () => {
     expect(element._internals.role).toBe('alert');
   });
 
+  it('should set an aria-label for the icon status', async () => {
+    await elementIsStable(element);
+    element.status = 'success';
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('nve-icon').ariaLabel).toBe('success');
+  });
+
   it('should apply an aria-label to the close button', async () => {
     element.closable = true;
     await elementIsStable(element);

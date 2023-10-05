@@ -33,10 +33,6 @@ dialog::backdrop {
   background: transparent;
 }
 
-dialog:has(nve-icon-button) {
-  padding-right: var(--nve-ref-size-800);
-}
-
 nve-icon-button {
   position: absolute;
   top: 2px;

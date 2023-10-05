@@ -1,11 +1,14 @@
 :host {
   --color: var(--nve-sys-interaction-field-color);
+  --opacity: 1;
   --label-color: var(--nve-sys-interaction-field-color);
+  --label-text-transform: capitalize;
   --_label-width: var(--label-width, 180px);
 }
 
 [internal-host] {
   color: var(--color);
+  opacity: var(--opacity);
 }
 
 ::slotted(label) {
@@ -13,10 +16,12 @@
   font-size: var(--nve-ref-font-size-100) !important;
   color: var(--label-color) !important;
   cursor: var(--cursor) !important;
+  text-transform: var(--label-text-transform) !important;
 }
 
 :host(:--disabled) {
   --color: var(--nve-sys-text-muted-color);
+  --opacity: 0.5;
 }
 
 :host([layout*='horizontal-inline']) ::slotted([nve-control]),

@@ -147,6 +147,83 @@ export const RowAction = {
   `
 };
 
+export const RowGroups = {
+  render: () => html`
+<div nve-theme="root">
+  <nve-grid>
+    <nve-grid-header>
+      <nve-grid-column width="max-content" aria-label="expand groups" position="fixed"></nve-grid-column>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    </nve-grid-header>
+    <nve-grid-row>
+      <nve-grid-cell>
+        <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></nve-icon-button>
+      </nve-grid-cell>
+      <nve-grid-cell>Session: 2yuecae</nve-grid-cell>
+      <nve-grid-cell>upload</nve-grid-cell>
+      <nve-grid-cell>pending</nve-grid-cell>
+      <nve-grid-cell>p3</nve-grid-cell>
+      <nve-grid-cell>12/04/22</nve-grid-cell>
+    </nve-grid-row>
+    <nve-grid-row selected>
+      <nve-grid-cell>
+        <nve-icon-button icon-name="chevron" interaction="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></nve-icon-button>
+      </nve-grid-cell>
+      <nve-grid-cell>Session: mvwgh3t</nve-grid-cell>
+      <nve-grid-cell>upload</nve-grid-cell>
+      <nve-grid-cell>pending</nve-grid-cell>
+      <nve-grid-cell>p0</nve-grid-cell>
+      <nve-grid-cell>12/11/22</nve-grid-cell>
+    </nve-grid-row>
+    <nve-grid-row>
+      <nve-grid-cell></nve-grid-cell>
+      <nve-grid-cell>SSD: mvwgh3t</nve-grid-cell>
+      <nve-grid-cell>validating</nve-grid-cell>
+      <nve-grid-cell>pending</nve-grid-cell>
+      <nve-grid-cell>p0</nve-grid-cell>
+      <nve-grid-cell>12/11/22</nve-grid-cell>
+    </nve-grid-row>
+    <nve-grid-row>
+      <nve-grid-cell></nve-grid-cell>
+      <nve-grid-cell>SSD: qudbd8x</nve-grid-cell>
+      <nve-grid-cell>uploading</nve-grid-cell>
+      <nve-grid-cell>finished</nve-grid-cell>
+      <nve-grid-cell>p0</nve-grid-cell>
+      <nve-grid-cell>12/11/22</nve-grid-cell>
+    </nve-grid-row>
+    <nve-grid-row>
+      <nve-grid-cell></nve-grid-cell>
+      <nve-grid-cell>SSD: j8hvikt</nve-grid-cell>
+      <nve-grid-cell>queuing</nve-grid-cell>
+      <nve-grid-cell>running</nve-grid-cell>
+      <nve-grid-cell>p0</nve-grid-cell>
+      <nve-grid-cell>12/11/22</nve-grid-cell>
+    </nve-grid-row>
+    <nve-grid-row>
+      <nve-grid-cell>
+        <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></nve-icon-button>
+      </nve-grid-cell>
+      <nve-grid-cell>Session: bg5ujqp</nve-grid-cell>
+      <nve-grid-cell>upload</nve-grid-cell>
+      <nve-grid-cell>pending</nve-grid-cell>
+      <nve-grid-cell>p1</nve-grid-cell>
+      <nve-grid-cell>12/12/22</nve-grid-cell>
+    </nve-grid-row>
+    <nve-grid-row>
+      <nve-grid-cell>
+        <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></nve-icon-button>
+      </nve-grid-cell>
+      <nve-grid-cell>Session: 6ruehvh</nve-grid-cell>
+      <nve-grid-cell>upload</nve-grid-cell>
+      <nve-grid-cell>pending</nve-grid-cell>
+      <nve-grid-cell>p2</nve-grid-cell>
+      <nve-grid-cell>12/09/22</nve-grid-cell>
+    </nve-grid-row>
+  </nve-grid>
+</div>
+  `
+};
+
 export const Footer = {
   render: () => html`
 <div nve-theme="root">

@@ -26,7 +26,7 @@ export const Default = {
   render: (args: ArgTypes) => html`
 <nve-notification ${spread(args)}>
   <h3 nve-text="label">Title</h3>
-  <p nve-text="body">some text content in a notification</p>
+  <p nve-text="body">some text content in a notification some text content in a notification some text content in a notification some text content in a notification some text content in a notification</p>
 </nve-notification>
 `,
   args: { position: 'bottom', alignment: 'center', closable: true }

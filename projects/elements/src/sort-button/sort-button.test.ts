@@ -33,6 +33,11 @@ describe('nve-sort-button', () => {
     expect(element._internals.role).toBe('spinbutton');
   });
 
+  it('should use aria-hidden for decorative non-semantic icons', async () => {
+    await elementIsStable(element);
+    expect(icon.getAttribute('aria-hidden')).toBe('true');
+  });
+
   it('should show ascending icon by default', async () => {
     await elementIsStable(element);
     expect(icon.name).toBe('sort-ascending');
