@@ -153,6 +153,17 @@ export const Alignment = {
   `
 };
 
+export const Wrap = {
+  render: () => html`
+<div nve-layout="row align:center" style="height: 250px">
+  <nve-tooltip anchor="btn" style="--width: 200px">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </nve-tooltip>
+  <nve-button id="btn">button</nve-button>
+</div>
+  `
+};
+
 
 @customElement('dynamic-anchor-position-demo')
 class DynamicAnchorPositionDemo extends LitElement {

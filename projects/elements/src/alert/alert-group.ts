@@ -1,6 +1,8 @@
 import { html, LitElement, PropertyValues } from 'lit';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { property } from 'lit/decorators/property.js';
 import { attachInternals, SupportStatus, useStyles } from '@elements/elements/internal';
+import type { Alert } from './alert.js';
 import styles from './alert-group.css?inline';
 
 /**
@@ -30,9 +32,7 @@ export class AlertGroup extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  get #alerts() {
-    return this.querySelectorAll('nve-alert');
-  }
+  @queryAssignedElements() private alerts!: Alert[];
 
   render() {
     return html`
@@ -54,6 +54,6 @@ export class AlertGroup extends LitElement {
   }
 
   #updateStatus() {
-    this.#alerts.forEach(alert => alert.status = this.status);
+    this.alerts.forEach(alert => alert.status = this.status);
   }
 }

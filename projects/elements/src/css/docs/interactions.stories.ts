@@ -45,7 +45,7 @@ export const Interactions = {
   <button selected>selected</button>
   <button disabled>disabled</button>
 </section>
-<section style="--nve-sys-interaction-state-base: var(--nve-ref-color-brand-green-900)">
+<section style="--nve-sys-interaction-state-base: var(--nve-sys-interaction-emphasis-background)">
   <button>button</button>
   <button hover>hover</button>
   <button active>active</button>

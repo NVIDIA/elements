@@ -10,7 +10,7 @@ describe('nve-icon axe', () => {
   let element: Icon;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<nve-icon></nve-icon>`);
+    fixture = await createFixture(html`<nve-icon aria-label="test icon"></nve-icon>`);
     element = fixture.querySelector('nve-icon');
     await elementIsStable(element);
   });
