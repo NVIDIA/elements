@@ -16,11 +16,11 @@ export const Default = {
 export const SupportStatus = {
   render: () => html`
 <div nve-layout="column gap:md">
-  <nve-alert>default</nve-alert>
-  <nve-alert status="accent">accent</nve-alert>
-  <nve-alert status="warning">warning</nve-alert>
-  <nve-alert status="success">success</nve-alert>
-  <nve-alert status="danger">danger</nve-alert>
+  <nve-alert>Standard</nve-alert>
+  <nve-alert status="accent">Accent</nve-alert>
+  <nve-alert status="warning">Warning</nve-alert>
+  <nve-alert status="success">Success</nve-alert>
+  <nve-alert status="danger">Danger</nve-alert>
 </div>
   `
 }
@@ -28,11 +28,11 @@ export const SupportStatus = {
 export const SupportStatusLightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="column gap:md pad:md">
-  <nve-alert>default</nve-alert>
-  <nve-alert status="accent">accent</nve-alert>
-  <nve-alert status="warning">warning</nve-alert>
-  <nve-alert status="success">success</nve-alert>
-  <nve-alert status="danger">danger</nve-alert>
+  <nve-alert>Standard</nve-alert>
+  <nve-alert status="accent">Accent</nve-alert>
+  <nve-alert status="warning">Warning</nve-alert>
+  <nve-alert status="success">Success</nve-alert>
+  <nve-alert status="danger">Danger</nve-alert>
 </div>
   `
 }
@@ -40,11 +40,11 @@ export const SupportStatusLightTheme = {
 export const SupportStatusDarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="column gap:md pad:md">
-  <nve-alert>default</nve-alert>
-  <nve-alert status="accent">accent</nve-alert>
-  <nve-alert status="warning">warning</nve-alert>
-  <nve-alert status="success">success</nve-alert>
-  <nve-alert status="danger">danger</nve-alert>
+  <nve-alert>Standard</nve-alert>
+  <nve-alert status="accent">Accent</nve-alert>
+  <nve-alert status="warning">Warning</nve-alert>
+  <nve-alert status="success">Success</nve-alert>
+  <nve-alert status="danger">Danger</nve-alert>
 </div>
   `
 }
@@ -52,17 +52,17 @@ export const SupportStatusDarkTheme = {
 export const Status = {
   render: () => html`
 <div nve-layout="column gap:md">
-  <nve-alert status="scheduled">scheduled</nve-alert>
-  <nve-alert status="queued">queued</nve-alert>
-  <nve-alert status="finished">finished</nve-alert>
-  <nve-alert status="failed">failed</nve-alert>
-  <nve-alert status="unknown">unknown</nve-alert>
-  <nve-alert status="pending">pending</nve-alert>
-  <nve-alert status="starting">starting</nve-alert>
-  <nve-alert status="running">running</nve-alert>
-  <nve-alert status="restarting">restarting</nve-alert>
-  <nve-alert status="stopping">stopping</nve-alert>
-  <nve-alert status="ignored">ignored</nve-alert>
+  <nve-alert status="scheduled">Scheduled</nve-alert>
+  <nve-alert status="queued">Queued</nve-alert>
+  <nve-alert status="finished">Finished</nve-alert>
+  <nve-alert status="failed">Failed</nve-alert>
+  <nve-alert status="unknown">Unknown</nve-alert>
+  <nve-alert status="pending">Pending</nve-alert>
+  <nve-alert status="starting">Starting</nve-alert>
+  <nve-alert status="running">Running</nve-alert>
+  <nve-alert status="restarting">Restarting</nve-alert>
+  <nve-alert status="stopping">Stopping</nve-alert>
+  <nve-alert status="ignored">Ignored</nve-alert>
 </div>
   `
 }
@@ -70,16 +70,16 @@ export const Status = {
 export const StatusLightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="column gap:md pad:md">
-  <nve-alert status="scheduled">scheduled</nve-alert>
-  <nve-alert status="queued">queued</nve-alert>
-  <nve-alert status="pending">pending</nve-alert>
-  <nve-alert status="starting">starting</nve-alert>
-  <nve-alert status="running">running</nve-alert>
-  <nve-alert status="restarting">restarting</nve-alert>
-  <nve-alert status="stopping">stopping</nve-alert>
-  <nve-alert status="finished">finished</nve-alert>
-  <nve-alert status="failed">failed</nve-alert>
-  <nve-alert status="unknown">unknown</nve-alert>
+  <nve-alert status="scheduled">Scheduled</nve-alert>
+  <nve-alert status="queued">Queued</nve-alert>
+  <nve-alert status="pending">Pending</nve-alert>
+  <nve-alert status="starting">Starting</nve-alert>
+  <nve-alert status="running">Running</nve-alert>
+  <nve-alert status="restarting">Restarting</nve-alert>
+  <nve-alert status="stopping">Stopping</nve-alert>
+  <nve-alert status="finished">Fnished</nve-alert>
+  <nve-alert status="failed">Failed</nve-alert>
+  <nve-alert status="unknown">Unknown</nve-alert>
 </div>
   `
 }
@@ -87,16 +87,16 @@ export const StatusLightTheme = {
 export const StatusDarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="column gap:md pad:md">
-  <nve-alert status="scheduled">scheduled</nve-alert>
-  <nve-alert status="queued">queued</nve-alert>
-  <nve-alert status="pending">pending</nve-alert>
-  <nve-alert status="starting">starting</nve-alert>
-  <nve-alert status="running">running</nve-alert>
-  <nve-alert status="restarting">restarting</nve-alert>
-  <nve-alert status="stopping">stopping</nve-alert>
-  <nve-alert status="finished">finished</nve-alert>
-  <nve-alert status="failed">failed</nve-alert>
-  <nve-alert status="unknown">unknown</nve-alert>
+  <nve-alert status="scheduled">Scheduled</nve-alert>
+  <nve-alert status="queued">Queued</nve-alert>
+  <nve-alert status="pending">Pending</nve-alert>
+  <nve-alert status="starting">Starting</nve-alert>
+  <nve-alert status="running">Running</nve-alert>
+  <nve-alert status="restarting">Restarting</nve-alert>
+  <nve-alert status="stopping">Stopping</nve-alert>
+  <nve-alert status="finished">Finished</nve-alert>
+  <nve-alert status="failed">Failed</nve-alert>
+  <nve-alert status="unknown">Unknown</nve-alert>
 </div>
   `
 }
