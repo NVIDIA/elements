@@ -11,6 +11,7 @@
   --cursor: pointer;
   --gap: var(--mlv-ref-space-xs);
   --height: var(--mlv-ref-size-800);
+  --text-transform: capitalize;
   --_icon-color: var(--color);
   --width: initial;
   --min-width: var(--width);
@@ -35,6 +36,7 @@
   font-size: var(--font-size);
   cursor: var(--cursor);
   gap: var(--gap);
+  text-transform: var(--text-transform);
   display: inline-flex;
   place-items: center;
   justify-content: center;

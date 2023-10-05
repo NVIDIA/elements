@@ -112,6 +112,15 @@ describe('mlv-select', () => {
     expect(dropdown.hidden).toBe(true);
   });
 
+  it('should use aria-hidden for decorative non-semantic icons', async () => {
+    const icons = element.shadowRoot.querySelectorAll('mlv-icon');
+    expect(icons.length).toBe(4);
+    expect(icons[0].getAttribute('aria-hidden')).toBe('true');
+    expect(icons[1].getAttribute('aria-hidden')).toBe('true');
+    expect(icons[2].getAttribute('aria-hidden')).toBe('true');
+    expect(icons[3].getAttribute('aria-hidden')).toBe('true');
+  });
+
   it('should each menu with the aria role of listbox', async () => {
     const menu = element.shadowRoot.querySelector<Menu>('mlv-menu');
     expect(menu.getAttribute('role')).toBe('listbox');

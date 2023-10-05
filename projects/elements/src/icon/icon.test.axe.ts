@@ -10,7 +10,7 @@ describe('mlv-icon axe', () => {
   let element: Icon;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<mlv-icon></mlv-icon>`);
+    fixture = await createFixture(html`<mlv-icon aria-label="test icon"></mlv-icon>`);
     element = fixture.querySelector('mlv-icon');
     await elementIsStable(element);
   });

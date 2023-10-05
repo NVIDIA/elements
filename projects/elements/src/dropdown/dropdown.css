@@ -33,10 +33,6 @@ dialog::backdrop {
   background: transparent;
 }
 
-dialog:has(mlv-icon-button) {
-  padding-right: var(--mlv-ref-size-800);
-}
-
 mlv-icon-button {
   position: absolute;
   top: 2px;

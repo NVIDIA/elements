@@ -2,6 +2,8 @@
   --color: var(--mlv-sys-text-muted-color);
   --font-weight: var(--mlv-ref-font-weight-regular);
   --font-size: var(--mlv-ref-font-size-100);
+  --text-transform: initial;
+  --_alert-text-tranform: var(--text-transform);
   --_alert-font-weight: var(--font-weight);
   --_alert-font-size: var(--font-size);
   --_alert-color: var(--color, initial);
@@ -11,6 +13,7 @@ mlv-alert {
   --color: var(--_alert-color);
   --font-weight:  var(--_alert-font-weight);
   --font-size:  var(--_alert-font-size);
+  --text-transform: var(--_alert-text-tranform);
   --icon-color: var(--color);
 }
 

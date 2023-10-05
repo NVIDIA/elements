@@ -10,7 +10,7 @@ describe('mlv-badge', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-badge></mlv-badge>
+      <mlv-badge>label</mlv-badge>
     `);
     element = fixture.querySelector('mlv-badge');
     await elementIsStable(element);
@@ -22,6 +22,23 @@ describe('mlv-badge', () => {
 
   it('should define element', () => {
     expect(customElements.get('mlv-badge')).toBeDefined();
+  });
+
+  it('should set a default aria role of status', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('status');
+  });
+
+  it('should set a default aria-label', async () => {
+    await elementIsStable(element);
+    expect(element._internals.ariaLabel).toBe('label');
+  });
+
+  it('should set trend specific label when status is a trend', async () => {
+    element.textContent = '+10%';
+    element.status = 'trend-up';
+    await elementIsStable(element);
+    expect(element._internals.ariaLabel).toBe('+10% trend up');
   });
 
   it('should reflect a status', async () => {

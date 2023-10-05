@@ -153,6 +153,17 @@ export const Alignment = {
   `
 };
 
+export const Wrap = {
+  render: () => html`
+<div mlv-layout="row align:center" style="height: 250px">
+  <mlv-tooltip anchor="btn" style="--width: 200px">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </mlv-tooltip>
+  <mlv-button id="btn">button</mlv-button>
+</div>
+  `
+};
+
 
 @customElement('dynamic-anchor-position-demo')
 class DynamicAnchorPositionDemo extends LitElement {

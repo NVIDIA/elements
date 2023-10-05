@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-05T20:26:36.141Z",
+  "created": "2023-10-06T17:25:39.622Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -65,7 +65,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 84.1275,
+      "coverageTotal": 83.80000000000001,
       "behavior": "container",
       "status": "beta"
     },
@@ -92,7 +92,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 84.1275,
+      "coverageTotal": 83.80000000000001,
       "behavior": "container",
       "status": "beta"
     },
@@ -126,7 +126,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 84.1275,
+      "coverageTotal": 83.80000000000001,
       "behavior": "container",
       "status": "beta"
     },
@@ -161,7 +161,7 @@
       ],
       "projectTotal": 1,
       "instanceTotal": 1,
-      "coverageTotal": 84.1275,
+      "coverageTotal": 83.80000000000001,
       "behavior": "container",
       "status": "beta"
     },
@@ -290,7 +290,7 @@
       ],
       "projectTotal": 2,
       "instanceTotal": 2,
-      "coverageTotal": 100,
+      "coverageTotal": 93.75,
       "behavior": "navigation",
       "status": "beta"
     },
@@ -305,7 +305,7 @@
       "themes": true,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img",
       "package": true,
-      "description": "A visual indicator that communicates a status of a given task or workflow.",
+      "description": "A visual indicator that communicates a status description of an associated component. Status badges use short text, color, and icons for quick recognition and are placed near the relevant content.",
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-badge-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0",
@@ -327,7 +327,7 @@
       ],
       "projectTotal": 3,
       "instanceTotal": 7,
-      "coverageTotal": 97.91499999999999,
+      "coverageTotal": 98.2125,
       "behavior": "content",
       "status": "stable"
     },
@@ -349,7 +349,7 @@
       "properties": [],
       "projectTotal": 3,
       "instanceTotal": 5,
-      "coverageTotal": 97.5,
+      "coverageTotal": 91.51,
       "behavior": "content",
       "status": "beta"
     },
@@ -438,7 +438,6 @@
       "since": "0.16.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-button-group-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=4047-92996&mode=design&t=XPYuD3f2yaKCAMl3-0",
-      "axe": false,
       "properties": [
         {
           "name": "behaviorSelect",
@@ -1526,7 +1525,7 @@
       ],
       "projectTotal": 4,
       "instanceTotal": 6,
-      "coverageTotal": 97.315,
+      "coverageTotal": 97.08,
       "behavior": "list",
       "status": "beta"
     },
@@ -1619,7 +1618,7 @@
       ],
       "projectTotal": 16,
       "instanceTotal": 64,
-      "coverageTotal": 92.8675,
+      "coverageTotal": 92.995,
       "behavior": "content",
       "status": "stable"
     },
@@ -2024,7 +2023,7 @@
         },
         {
           "name": "status",
-          "description": "Determins the visual status of the notification."
+          "description": "Determines the visual status of the notification."
         }
       ],
       "slots": [
@@ -2349,7 +2348,7 @@
       ],
       "projectTotal": 0,
       "instanceTotal": 0,
-      "coverageTotal": 93.75,
+      "coverageTotal": 96.875,
       "behavior": "content",
       "status": "beta"
     },
@@ -4448,22 +4447,22 @@
       {
         "file": "elements/src/accordion/accordion.ts",
         "lines": {
-          "total": 57,
-          "covered": 51,
+          "total": 56,
+          "covered": 50,
           "skipped": 0,
-          "pct": 89.47
+          "pct": 89.28
         },
         "functions": {
-          "total": 25,
-          "covered": 20,
+          "total": 24,
+          "covered": 19,
           "skipped": 0,
-          "pct": 80
+          "pct": 79.16
         },
         "statements": {
-          "total": 88,
-          "covered": 81,
+          "total": 85,
+          "covered": 78,
           "skipped": 0,
-          "pct": 92.04
+          "pct": 91.76
         },
         "branches": {
           "total": 24,
@@ -4520,8 +4519,8 @@
           "pct": 97.36
         },
         "branches": {
-          "total": 4,
-          "covered": 4,
+          "total": 6,
+          "covered": 6,
           "skipped": 0,
           "pct": 100
         }
@@ -4790,8 +4789,8 @@
           "pct": 100
         },
         "branches": {
-          "total": 4,
-          "covered": 4,
+          "total": 6,
+          "covered": 6,
           "skipped": 0,
           "pct": 100
         }
@@ -4988,8 +4987,8 @@
       {
         "file": "elements/src/tabs/tabs.ts",
         "lines": {
-          "total": 21,
-          "covered": 21,
+          "total": 22,
+          "covered": 22,
           "skipped": 0,
           "pct": 100
         },
@@ -5000,8 +4999,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 36,
-          "covered": 36,
+          "total": 37,
+          "covered": 37,
           "skipped": 0,
           "pct": 100
         },
@@ -5501,8 +5500,8 @@
       {
         "file": "elements/src/progress-ring/progress-ring.ts",
         "lines": {
-          "total": 12,
-          "covered": 12,
+          "total": 15,
+          "covered": 15,
           "skipped": 0,
           "pct": 100
         },
@@ -5513,16 +5512,16 @@
           "pct": 100
         },
         "statements": {
-          "total": 17,
-          "covered": 17,
+          "total": 22,
+          "covered": 22,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 4,
-          "covered": 3,
+          "total": 8,
+          "covered": 7,
           "skipped": 0,
-          "pct": 75
+          "pct": 87.5
         }
       },
       {
@@ -5852,8 +5851,8 @@
       {
         "file": "elements/src/menu/menu.ts",
         "lines": {
-          "total": 6,
-          "covered": 6,
+          "total": 7,
+          "covered": 7,
           "skipped": 0,
           "pct": 100
         },
@@ -5864,8 +5863,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 10,
-          "covered": 10,
+          "total": 11,
+          "covered": 11,
           "skipped": 0,
           "pct": 100
         },
@@ -6878,22 +6877,22 @@
       {
         "file": "elements/src/icon/icon.ts",
         "lines": {
-          "total": 33,
-          "covered": 33,
+          "total": 36,
+          "covered": 36,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 16,
-          "covered": 15,
+          "total": 17,
+          "covered": 16,
           "skipped": 0,
-          "pct": 93.75
+          "pct": 94.11
         },
         "statements": {
-          "total": 44,
-          "covered": 43,
+          "total": 47,
+          "covered": 46,
           "skipped": 0,
-          "pct": 97.72
+          "pct": 97.87
         },
         "branches": {
           "total": 20,
@@ -6986,22 +6985,22 @@
       {
         "file": "elements/src/grid/header/header.ts",
         "lines": {
-          "total": 21,
-          "covered": 21,
+          "total": 20,
+          "covered": 20,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 13,
-          "covered": 12,
+          "total": 12,
+          "covered": 11,
           "skipped": 0,
-          "pct": 92.3
+          "pct": 91.66
         },
         "statements": {
-          "total": 33,
-          "covered": 32,
+          "total": 30,
+          "covered": 29,
           "skipped": 0,
-          "pct": 96.96
+          "pct": 96.66
         },
         "branches": {
           "total": 4,
@@ -7139,10 +7138,10 @@
           "pct": 100
         },
         "branches": {
-          "total": 47,
-          "covered": 42,
+          "total": 45,
+          "covered": 41,
           "skipped": 0,
-          "pct": 89.36
+          "pct": 91.11
         }
       },
       {
@@ -8228,28 +8227,28 @@
       {
         "file": "elements/src/breadcrumb/breadcrumb.ts",
         "lines": {
-          "total": 20,
-          "covered": 20,
+          "total": 21,
+          "covered": 21,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 14,
-          "covered": 14,
+          "total": 16,
+          "covered": 15,
           "skipped": 0,
-          "pct": 100
+          "pct": 93.75
         },
         "statements": {
-          "total": 35,
-          "covered": 35,
+          "total": 37,
+          "covered": 36,
           "skipped": 0,
-          "pct": 100
+          "pct": 97.29
         },
         "branches": {
-          "total": 10,
+          "total": 12,
           "covered": 9,
           "skipped": 0,
-          "pct": 90
+          "pct": 75
         }
       },
       {
@@ -8282,28 +8281,28 @@
       {
         "file": "elements/src/badge/badge.ts",
         "lines": {
-          "total": 13,
-          "covered": 13,
+          "total": 24,
+          "covered": 24,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 6,
-          "covered": 6,
+          "total": 9,
+          "covered": 9,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 20,
-          "covered": 20,
+          "total": 35,
+          "covered": 35,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 12,
-          "covered": 11,
+          "total": 14,
+          "covered": 13,
           "skipped": 0,
-          "pct": 91.66
+          "pct": 92.85
         }
       },
       {
@@ -8336,28 +8335,28 @@
       {
         "file": "elements/src/app-header/app-header.ts",
         "lines": {
-          "total": 25,
-          "covered": 25,
+          "total": 24,
+          "covered": 24,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 13,
-          "covered": 13,
+          "total": 12,
+          "covered": 12,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 36,
-          "covered": 36,
+          "total": 34,
+          "covered": 34,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 4,
-          "covered": 4,
+          "total": 8,
+          "covered": 6,
           "skipped": 0,
-          "pct": 100
+          "pct": 75
         }
       },
       {
@@ -8408,8 +8407,8 @@
           "pct": 100
         },
         "branches": {
-          "total": 6,
-          "covered": 6,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         }
@@ -8417,20 +8416,20 @@
       {
         "file": "elements/src/alert/alert-group.ts",
         "lines": {
-          "total": 13,
-          "covered": 13,
+          "total": 12,
+          "covered": 12,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 8,
-          "covered": 8,
+          "total": 7,
+          "covered": 7,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 19,
-          "covered": 19,
+          "total": 16,
+          "covered": 16,
           "skipped": 0,
           "pct": 100
         },
@@ -8499,28 +8498,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1931,
-        "covered": 1884,
+        "total": 1947,
+        "covered": 1900,
         "skipped": 0,
-        "pct": 97.56
+        "pct": 97.58
       },
       "statements": {
-        "total": 2571,
-        "covered": 2505,
+        "total": 2587,
+        "covered": 2520,
         "skipped": 0,
-        "pct": 97.43
+        "pct": 97.41
       },
       "functions": {
-        "total": 760,
-        "covered": 725,
+        "total": 762,
+        "covered": 726,
         "skipped": 0,
-        "pct": 95.39
+        "pct": 95.27
       },
       "branches": {
-        "total": 934,
-        "covered": 844,
+        "total": 950,
+        "covered": 857,
         "skipped": 0,
-        "pct": 90.36
+        "pct": 90.21
       },
       "branchesTrue": {
         "total": 0,

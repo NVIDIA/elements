@@ -1,6 +1,7 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals, ContainerElement, Container, generateId } from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
@@ -232,9 +233,7 @@ export class AccordionGroup extends LitElement {
     version: 'PACKAGE_VERSION'
   };
 
-  get #accordions() {
-    return this.querySelectorAll('mlv-accordion');
-  }
+  @queryAssignedElements() private accordions!: Accordion[];
 
   render() {
     return html`
@@ -250,9 +249,9 @@ export class AccordionGroup extends LitElement {
     this._internals.role = 'group';
 
     if (this.behaviorExpandSingle) {
-      this.#accordions.forEach(accordion => {
+      this.accordions.forEach(accordion => {
         accordion.addEventListener('open', () => {
-          this.#accordions.forEach(accordion => accordion.expanded = false);
+          this.accordions.forEach(accordion => accordion.expanded = false);
         });
       });
     }
@@ -264,7 +263,7 @@ export class AccordionGroup extends LitElement {
   }
 
   #updateChildAttributes() {
-    this.#accordions.forEach(accordion => accordion.container = this.container);
-    this.#accordions.forEach(accordion => accordion.behaviorExpand = this.behaviorExpand || this.behaviorExpandSingle);
+    this.accordions.forEach(accordion => accordion.container = this.container);
+    this.accordions.forEach(accordion => accordion.behaviorExpand = this.behaviorExpand || this.behaviorExpandSingle);
   }
 }

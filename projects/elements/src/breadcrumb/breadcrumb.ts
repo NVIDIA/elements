@@ -6,8 +6,6 @@ import { Icon } from '@elements/elements/icon';
 import type { IconButton } from '@elements/elements/icon-button';
 import type { Button } from '@elements/elements/button';
 
-type BreadcrumbFocusable = IconButton | Button;
-
 /**
  * @element mlv-breadcrumb
  * @description Breadcrumb is a component that can help users establish their location while navigating a website with complex URLs and navigation paths.
@@ -26,7 +24,7 @@ type BreadcrumbFocusable = IconButton | Button;
 export class Breadcrumb extends LitElement {
   get keynavListConfig(): KeynavListConfig {
     return {
-      items: Array.from(this.querySelectorAll<BreadcrumbFocusable>('mlv-button, mlv-icon-button'))
+      items: Array.from(this.shadowRoot.querySelectorAll('slot')).flatMap(slot => slot.assignedElements()).filter(e => e.tagName === 'MLV-BUTTON' || e.tagName === 'MLV-ICON-BUTTON') as (IconButton | Button)[]
     }
   }
 

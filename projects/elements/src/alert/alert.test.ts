@@ -48,6 +48,13 @@ describe('mlv-alert', () => {
     expect(alert.shadowRoot.querySelector('mlv-icon').name).toBe('checkmark-circle');
   });
 
+  it('should set an aria-label for the icon status', async () => {
+    expect(alert.shadowRoot.querySelector('mlv-icon').ariaLabel).toBe('information');
+    alert.status = 'success';
+    await elementIsStable(alert);
+    expect(alert.shadowRoot.querySelector('mlv-icon').ariaLabel).toBe('success');
+  });
+
   it('should provide a aria role of alert to describe content', async () => {
     await elementIsStable(alert);
     expect(alert._internals.role).toBe('alert');

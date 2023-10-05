@@ -3,7 +3,7 @@ import { themes } from '@storybook/theming';
 import { excludePrivateFields } from '@elements/elements/internal';
 import styles from '@elements/elements/index.css?inline';
 import font from '@elements/elements/inter.css?inline';
-import branding from '../src/css/theme.branding.css?inline';
+import brand from '@elements/elements/css/theme.brand.css?inline';
 import { MLV_VERSION } from '@elements/elements';
 import { playground } from './playground-url.js';
 import '@elements/elements/polyfills';
@@ -17,7 +17,6 @@ const customElements = await import('@elements/elements/custom-elements.json');
 setCustomElementsManifest(excludePrivateFields(customElements));
 
 const params = new URLSearchParams(window.location.search);
-const experimental = params.get('experimental') === 'true';
 
 export const parameters = {
   badges: ['stable'],
@@ -209,6 +208,7 @@ export const parameters = {
             'Performance',
             'Placeholder',
             'Row Action',
+            'Row Groups',
             'Row Sort',
             'Scroll Height',
             'Single Select',
@@ -280,8 +280,8 @@ const stableThemes = [
 ];
 
 const experimentalThemes = [
-  { value: 'branding', title: 'Branding' },
-  { value: 'branding-dark', title: 'Branding Dark' }
+  { value: 'brand', title: 'Brand Light (experimental)' },
+  { value: 'brand dark', title: 'Brand Dark (experimental)' }
 ];
 
 export const globalTypes = {
@@ -292,7 +292,7 @@ export const globalTypes = {
     toolbar: {
       title: 'Themes',
       showName: true,
-      items: experimental ? [...stableThemes, ...experimentalThemes] : stableThemes
+      items: [...stableThemes, ...experimentalThemes]
     },
   },
   scale: {
@@ -347,15 +347,29 @@ export const globalTypes = {
         { value: 'hardware', title: 'Hardware' }
       ],
     },
-  }
+  },
+  experimental: {
+    name: 'Experimental',
+    description: 'Experimental',
+    defaultValue: true,
+    control: { type: "boolean" },
+    toolbar: {
+      icon: 'beaker',
+      showName: false,
+      items: [
+        { value: 'experimental', title: 'Experimental On' },
+        { value: '', title: 'Experimental Off' },
+      ],
+    },
+  },
 }
 
 const styleSheet = new CSSStyleSheet();
-styleSheet.replaceSync(styles + font + branding);
+styleSheet.replaceSync(styles + font + brand);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
 
 const parentStyle = document.createElement('style');
-parentStyle.innerText = styles + font + branding;
+parentStyle.innerText = styles + font + brand;
 window.parent.document.head.appendChild(parentStyle);
 
 updateTheme('dark');
@@ -382,6 +396,6 @@ const dataTheme = (story, { globals }) => {
 };
 
 export const decorators = [(story, { globals }) => {
-  updateTheme(`${globals.theme ? globals.theme : ''} ${globals.scale ? globals.scale : ''} ${globals.debug ? globals.debug : ''} ${globals.animation ? globals.animation : ''}`);
+  updateTheme([globals.theme, globals.scale, globals.debug, globals.animation, globals.experimental].filter(i => i !== '').join(' '));
   return story();
 }, dataTheme, playground];

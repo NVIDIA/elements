@@ -49,7 +49,16 @@ describe('i18n.controller', () => {
       next: 'next',
       start: 'start',
       end: 'end',
-      noResults: 'no results'
+      noResults: 'no results',
+      status: 'status',
+      information: 'information',
+      warning: 'warning',
+      success: 'success',
+      danger: 'danger',
+      trend: 'trend',
+      down: 'down',
+      up: 'up',
+      neutral: 'neutral'
     });
   });
 
@@ -72,7 +81,16 @@ describe('i18n.controller', () => {
       next: 'next',
       start: 'start',
       end: 'end',
-      noResults: 'no results'
+      noResults: 'no results',
+      status: 'status',
+      information: 'information',
+      warning: 'warning',
+      success: 'success',
+      danger: 'danger',
+      trend: 'trend',
+      down: 'down',
+      up: 'up',
+      neutral: 'neutral'
     });
   });
 })

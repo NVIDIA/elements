@@ -22,11 +22,21 @@ describe('mlv-icon', () => {
     expect(customElements.get('mlv-icon')).toBeDefined();
   });
 
+  it('should provide a aria role of img', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('img');
+  });
+
+  it('should use aria-hidden to semantically hide the SVG in favor of the host element role', async () => {
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('[internal-host]').getAttribute('aria-hidden')).toBe('true');
+  });
+
   it('should update svg reference when "name" is updated', async () => {
     expect(element.name).eq(undefined);
     element.name = 'book';
     await elementIsStable(element);
-    expect(element.shadowRoot.innerHTML).includes('<div internal-host="">');
+    expect(element.shadowRoot.innerHTML).includes('<div internal-host=""');
   });
 
   it('should reflect name attribute for CSS selectors', async () => {

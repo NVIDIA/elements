@@ -26,7 +26,7 @@ export const Default = {
   render: (args: ArgTypes) => html`
 <mlv-notification ${spread(args)}>
   <h3 mlv-text="label">Title</h3>
-  <p mlv-text="body">some text content in a notification</p>
+  <p mlv-text="body">some text content in a notification some text content in a notification some text content in a notification some text content in a notification some text content in a notification</p>
 </mlv-notification>
 `,
   args: { position: 'bottom', alignment: 'center', closable: true }

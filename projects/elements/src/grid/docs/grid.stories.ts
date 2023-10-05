@@ -147,6 +147,83 @@ export const RowAction = {
   `
 };
 
+export const RowGroups = {
+  render: () => html`
+<div mlv-theme="root">
+  <mlv-grid>
+    <mlv-grid-header>
+      <mlv-grid-column width="max-content" aria-label="expand groups" position="fixed"></mlv-grid-column>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+    </mlv-grid-header>
+    <mlv-grid-row>
+      <mlv-grid-cell>
+        <mlv-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></mlv-icon-button>
+      </mlv-grid-cell>
+      <mlv-grid-cell>Session: 2yuecae</mlv-grid-cell>
+      <mlv-grid-cell>upload</mlv-grid-cell>
+      <mlv-grid-cell>pending</mlv-grid-cell>
+      <mlv-grid-cell>p3</mlv-grid-cell>
+      <mlv-grid-cell>12/04/22</mlv-grid-cell>
+    </mlv-grid-row>
+    <mlv-grid-row selected>
+      <mlv-grid-cell>
+        <mlv-icon-button icon-name="chevron" interaction="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></mlv-icon-button>
+      </mlv-grid-cell>
+      <mlv-grid-cell>Session: mvwgh3t</mlv-grid-cell>
+      <mlv-grid-cell>upload</mlv-grid-cell>
+      <mlv-grid-cell>pending</mlv-grid-cell>
+      <mlv-grid-cell>p0</mlv-grid-cell>
+      <mlv-grid-cell>12/11/22</mlv-grid-cell>
+    </mlv-grid-row>
+    <mlv-grid-row>
+      <mlv-grid-cell></mlv-grid-cell>
+      <mlv-grid-cell>SSD: mvwgh3t</mlv-grid-cell>
+      <mlv-grid-cell>validating</mlv-grid-cell>
+      <mlv-grid-cell>pending</mlv-grid-cell>
+      <mlv-grid-cell>p0</mlv-grid-cell>
+      <mlv-grid-cell>12/11/22</mlv-grid-cell>
+    </mlv-grid-row>
+    <mlv-grid-row>
+      <mlv-grid-cell></mlv-grid-cell>
+      <mlv-grid-cell>SSD: qudbd8x</mlv-grid-cell>
+      <mlv-grid-cell>uploading</mlv-grid-cell>
+      <mlv-grid-cell>finished</mlv-grid-cell>
+      <mlv-grid-cell>p0</mlv-grid-cell>
+      <mlv-grid-cell>12/11/22</mlv-grid-cell>
+    </mlv-grid-row>
+    <mlv-grid-row>
+      <mlv-grid-cell></mlv-grid-cell>
+      <mlv-grid-cell>SSD: j8hvikt</mlv-grid-cell>
+      <mlv-grid-cell>queuing</mlv-grid-cell>
+      <mlv-grid-cell>running</mlv-grid-cell>
+      <mlv-grid-cell>p0</mlv-grid-cell>
+      <mlv-grid-cell>12/11/22</mlv-grid-cell>
+    </mlv-grid-row>
+    <mlv-grid-row>
+      <mlv-grid-cell>
+        <mlv-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></mlv-icon-button>
+      </mlv-grid-cell>
+      <mlv-grid-cell>Session: bg5ujqp</mlv-grid-cell>
+      <mlv-grid-cell>upload</mlv-grid-cell>
+      <mlv-grid-cell>pending</mlv-grid-cell>
+      <mlv-grid-cell>p1</mlv-grid-cell>
+      <mlv-grid-cell>12/12/22</mlv-grid-cell>
+    </mlv-grid-row>
+    <mlv-grid-row>
+      <mlv-grid-cell>
+        <mlv-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></mlv-icon-button>
+      </mlv-grid-cell>
+      <mlv-grid-cell>Session: 6ruehvh</mlv-grid-cell>
+      <mlv-grid-cell>upload</mlv-grid-cell>
+      <mlv-grid-cell>pending</mlv-grid-cell>
+      <mlv-grid-cell>p2</mlv-grid-cell>
+      <mlv-grid-cell>12/09/22</mlv-grid-cell>
+    </mlv-grid-row>
+  </mlv-grid>
+</div>
+  `
+};
+
 export const Footer = {
   render: () => html`
 <div mlv-theme="root">

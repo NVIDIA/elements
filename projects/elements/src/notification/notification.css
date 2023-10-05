@@ -8,6 +8,7 @@
   --box-shadow: var(--mlv-ref-shadow-400);
   --min-width: 320px;
   --width: fit-content;
+  --max-width: fit-content;
   width: var(--width);
   position: inherit;
   display: block;
@@ -29,6 +30,7 @@
   border: 0;
   border-left: 6px solid var(--status-color);
   min-width: var(--min-width);
+  max-width: var(--max-width);
   position: relative;
   line-height: 0.8em;
 }

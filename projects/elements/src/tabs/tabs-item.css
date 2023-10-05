@@ -10,6 +10,7 @@
   --color: var(--mlv-sys-text-muted-color);
   --height: var(--mlv-ref-size-800);
   --cursor: pointer;
+  --text-transform: capitalize;
   --mlv-sys-interaction-state-ratio: 0;
 }
 
@@ -26,6 +27,7 @@
   inset: var(--border-inset);
   border-radius: var(--border-radius);
   cursor: var(--cursor);
+  text-transform: var(--text-transform);
   display: inline-flex;
   align-items: center;
   border: 0;

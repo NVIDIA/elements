@@ -22,7 +22,16 @@ describe('GlobalStateService', () => {
       start: 'start',
       end: 'end',
       currentPage: 'current page',
-      noResults: 'no results'
+      noResults: 'no results',
+      status: 'status',
+      information: 'information',
+      warning: 'warning',
+      success: 'success',
+      danger: 'danger',
+      trend: 'trend',
+      down: 'down',
+      up: 'up',
+      neutral: 'neutral'
     });
   });
 
@@ -43,7 +52,16 @@ describe('GlobalStateService', () => {
       start: 'page de démarrage',
       end: 'page de fin',
       currentPage: 'page actuelle',
-      noResults: 'aucun résultat'
+      noResults: 'aucun résultat',
+      status: 'statut',
+      information: 'information',
+      warning: 'avertissement',
+      success: 'succès',
+      danger: 'danger',
+      trend: "s'orienter",
+      down: 'vers le bas',
+      up: 'en haut',
+      neutral: 'neutre'
     });
 
     expect(I18nService.i18n).toStrictEqual({
@@ -60,7 +78,16 @@ describe('GlobalStateService', () => {
       start: 'page de démarrage',
       end: 'page de fin',
       currentPage: 'page actuelle',
-      noResults: 'aucun résultat'
+      noResults: 'aucun résultat',
+      status: 'statut',
+      information: 'information',
+      warning: 'avertissement',
+      success: 'succès',
+      danger: 'danger',
+      trend: "s'orienter",
+      down: 'vers le bas',
+      up: 'en haut',
+      neutral: 'neutre'
     });
 
     I18nService.update(original);

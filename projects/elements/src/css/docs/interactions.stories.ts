@@ -45,7 +45,7 @@ export const Interactions = {
   <button selected>selected</button>
   <button disabled>disabled</button>
 </section>
-<section style="--mlv-sys-interaction-state-base: var(--mlv-ref-color-brand-green-900)">
+<section style="--mlv-sys-interaction-state-base: var(--mlv-sys-interaction-emphasis-background)">
   <button>button</button>
   <button hover>hover</button>
   <button active>active</button>

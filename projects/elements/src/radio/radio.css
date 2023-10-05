@@ -4,7 +4,7 @@
   --height: var(--mlv-ref-size-400);
   --border-width: var(--mlv-ref-border-width-md);
   --border-radius: var(--mlv-ref-border-radius-full);
-  --border-color: hsla(227, 10%, 50%, 0.4);
+  --border-color: var(--mlv-ref-border-color);
   --background: transparent;
 }
 

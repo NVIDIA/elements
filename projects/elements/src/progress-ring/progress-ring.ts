@@ -1,6 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, Size, statusIcons, SupportStatus, useStyles } from '@elements/elements/internal';
+import { attachInternals, I18nController, Size, statusIcons, SupportStatus, useStyles } from '@elements/elements/internal';
 import { Icon } from '@elements/elements/icon';
 import styles from './progress-ring.css?inline';
 
@@ -47,11 +47,14 @@ export class ProgressRing extends LitElement {
   /** T-shirt `size` of the progress indicator, used to scale the ring. */
   @property({ type: String, reflect: true }) size?: Size | 'xxs' | 'xs' | 'xl';
 
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   render() {
     return html`
       <div internal-host ?indeterminate=${this.value === undefined} ?zeroValue=${this.value === 0} >
-        <svg viewBox="0 0 16 16">
+        <svg viewBox="0 0 16 16" role="presentation">
           <circle cx="8px" cy="8px" r="7px" class="background"></circle>
           <circle cx="8px" cy="8px" r="7px" class="ring"
             stroke-dasharray=${this.value / this.max * 44 + 'px' + ' ' + '44px'}>
@@ -59,7 +62,7 @@ export class ProgressRing extends LitElement {
         </svg>
 
         <slot name="status-icon">
-          ${this.status !== 'accent' ? html`<mlv-icon .name=${statusIcons[this.status] as any} .status=${this.status}></mlv-icon>` : ''}
+          ${this.status !== 'accent' ? html`<mlv-icon .name=${statusIcons[this.status] as any} .status=${this.status} aria-hidden="true"></mlv-icon>` : ''}
         </slot>
       </div>
     `;
@@ -75,5 +78,6 @@ export class ProgressRing extends LitElement {
     super.updated(props);
     this._internals.ariaValueNow = `${this.value === undefined ? '' : this.value}`;
     this._internals.ariaValueMax = `${this.max}`;
+    this._internals.ariaLabel = this.i18n[this.status] && this.i18n[this.status] !== 'neutral' ? this.i18n[this.status] : this.i18n.information;
   }
 }

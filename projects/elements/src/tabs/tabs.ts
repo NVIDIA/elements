@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { MlvBaseButton, stateSelected, useStyles, keyNavigationList, KeynavListConfig, attachInternals } from '@elements/elements/internal';
 import tabsItemStyleSheet from './tabs-item.css?inline';
 import tabsStyleSheet from './tabs.css?inline';
@@ -19,6 +20,7 @@ import tabsStyleSheet from './tabs.css?inline';
  * @cssprop --color
  * @cssprop --height
  * @cssprop --cursor
+ * @cssprop --text-transform
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-tabs-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
@@ -68,14 +70,6 @@ export class TabsItem extends MlvBaseButton {
  */
 @keyNavigationList<Tabs>()
 export class Tabs extends LitElement {
-  /** @private */
-  get keynavListConfig(): KeynavListConfig {
-    return {
-      items: this.querySelectorAll<HTMLElement>('mlv-tabs-item'),
-      layout: this.vertical ? 'vertical' : 'horizontal'
-    }
-  }
-
   /**
    * Determines whether or not the tabs should display in a vertical layout vs. defaulting to horizontal.
    */
@@ -97,6 +91,16 @@ export class Tabs extends LitElement {
     tag: 'mlv-tabs',
     version: 'PACKAGE_VERSION'
   };
+
+  /** @private */
+  get keynavListConfig(): KeynavListConfig {
+    return {
+      items: this.items,
+      layout: this.vertical ? 'vertical' : 'horizontal'
+    }
+  }
+
+  @queryAssignedElements() private items!: TabsItem[];
 
   /** @private */
   declare _internals: ElementInternals;

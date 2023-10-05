@@ -3,10 +3,12 @@
   --accent-color: var(--mlv-sys-accent-secondary-background);
   --color: var(--mlv-sys-interaction-field-color);
   --label-color: var(--mlv-sys-interaction-field-color);
+  --label-text-transform: capitalize;
   --control-width: 100%;
   --control-height: auto;
   --_label-width: var(--label-width, 180px);
   --mlv-sys-interaction-state-base: var(--background);
+  --opacity: 1;
 }
 
 ::slotted(*) {
@@ -19,15 +21,21 @@
   font-size: var(--mlv-ref-font-size-100) !important;
   color: var(--label-color) !important;
   cursor: var(--cursor) !important;
+  text-transform: var(--label-text-transform) !important;
   display: inline-block !important;
   line-height: 1em !important;
   align-self: center !important;
+}
+
+::slotted(label:first-letter) {
+  text-transform: capitalize
 }
 
 :host(:--disabled),
 :host(:--disabled) ::slotted(mlv-control-message:not([status])) {
   --cursor: not-allowed;
   --color: var(--mlv-sys-text-muted-color);
+  --opacity: 0.5;
 }
 
 :host([fit-content]) {
@@ -84,6 +92,7 @@ slot[name='messages'] {
 }
 
 [internal-host] {
+  opacity: var(--opacity);
   display: grid;
   width: 100%;
   gap: 8px;

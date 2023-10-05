@@ -1,4 +1,5 @@
 import { html, LitElement, PropertyValues } from 'lit';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { useStyles, attachInternals, debounce } from '@elements/elements/internal';
 import type { GridColumn } from '@elements/elements/grid';
 import styles from './header.css?inline';
@@ -26,9 +27,7 @@ export class GridHeader extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  get #columns() {
-    return Array.from(this.querySelectorAll<GridColumn>('mlv-grid-column'))
-  }
+  @queryAssignedElements() private columns!: GridColumn[];
 
   render() {
     return html`
@@ -54,15 +53,15 @@ export class GridHeader extends LitElement {
 
   async #computeColumnWidths() {
     await this.updateComplete;
-    this.#columns.forEach((c, i) => c.ariaColIndex = `${i + 1}`);
+    this.columns.forEach((c, i) => c.ariaColIndex = `${i + 1}`);
     this.parentElement.style.setProperty('--grid-auto-flow', 'initial');
-    this.parentElement.style.setProperty('--grid-template-column', this.#columns.map((_, i) => `var(--c${i})`).join(' '));
+    this.parentElement.style.setProperty('--grid-template-column', this.columns.map((_, i) => `var(--c${i})`).join(' '));
 
     // compute initial column width
-    this.#columns.forEach((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width : `1fr`));
+    this.columns.forEach((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width : `1fr`));
 
     // compute column width based on content
     await this.updateComplete;
-    this.#columns.forEach((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`));
+    this.columns.forEach((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`));
   }
 }

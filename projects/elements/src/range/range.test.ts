@@ -52,4 +52,12 @@ describe('mlv-range', () => {
     element.querySelector('input').dispatchEvent(new Event('input'));
     expect(element.style.getPropertyValue('--track-width')).toBe('50%');
   });
+
+  it('should update support decimals', async () => {
+    element.input.min = '0.1';
+    element.input.max = '0.9';
+    element.querySelector('input').value = '0.7';
+    await elementIsStable(element);
+    expect(element.style.getPropertyValue('--track-width')).toBe('74%');
+  });
 });

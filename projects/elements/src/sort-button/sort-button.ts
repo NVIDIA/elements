@@ -47,7 +47,7 @@ export class SortButton extends MlvBaseButton {
   render() {
     return html`
       <div internal-host focus-within>
-        <mlv-icon .name=${this.sort === 'descending' ? 'sort-descending' : 'sort-ascending'}></mlv-icon>
+        <mlv-icon .name=${this.sort === 'descending' ? 'sort-descending' : 'sort-ascending'} aria-hidden="true"></mlv-icon>
       </div>
     `;
   }

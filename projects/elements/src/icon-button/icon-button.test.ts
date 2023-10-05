@@ -35,6 +35,17 @@ describe('mlv-icon-button', () => {
     expect(customElements.get('mlv-icon-button')).toBeDefined();
   });
 
+  it('should provide a aria role of button', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('button');
+  });
+
+  it('should use aria-hidden to semantically hide the SVG in favor of the host element role', async () => {
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('[internal-host]').getAttribute('aria-hidden')).toBe('true');
+    expect(element.shadowRoot.querySelector('mlv-icon').getAttribute('aria-hidden')).toBe('true');
+  });
+
   it('should have a default interaction unset', () => {
     expect(element.interaction).eq(undefined);
   });

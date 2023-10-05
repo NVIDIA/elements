@@ -49,9 +49,9 @@ export class IconButton extends Button {
 
   render() {
     return html`
-      <div internal-host interaction-state focus-within>
+      <div internal-host interaction-state focus-within aria-hidden="true">
         <slot @slotchange=${e => removeEmptySlotWhitespace(e.target)}>
-          <mlv-icon .name=${this.iconName} .direction=${this.direction} .size=${this.size}></mlv-icon>
+          <mlv-icon .name=${this.iconName} .direction=${this.direction} .size=${this.size} aria-hidden="true"></mlv-icon>
         </slot>
       </div>
       <slot name="anchor"></slot>

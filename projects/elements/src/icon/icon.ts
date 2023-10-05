@@ -2,7 +2,7 @@ import { html, LitElement, PropertyValues } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { parseVersion, Size, useStyles } from '@elements/elements/internal';
+import { attachInternals, parseVersion, Size, useStyles } from '@elements/elements/internal';
 import { ICON_IMPORTS, IconName, IconSVG } from './icons.js';
 import styles from './icon.css?inline';
 
@@ -47,12 +47,6 @@ export class Icon extends LitElement {
     version: 'PACKAGE_VERSION'
   };
 
-  render() {
-    return html`
-      <div internal-host><slot>${unsafeSVG(this.svg)}</slot></div>
-    `;
-  }
-
   static _icons = ICON_IMPORTS;
 
   private static get _iconsRegistry() {
@@ -61,6 +55,21 @@ export class Icon extends LitElement {
 
   private static set _iconsRegistry(icons: { [key: string]: IconSVG }) {
     (customElements.get('mlv-icon') as any)._icons = { ...Icon._iconsRegistry, ...icons };
+  }
+
+  /** @private */
+  declare _internals: ElementInternals;
+
+  render() {
+    return html`
+      <div internal-host aria-hidden="true"><slot>${unsafeSVG(this.svg)}</slot></div>
+    `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    attachInternals(this);
+    this._internals.role = 'img';
   }
 
   static async add(icons: { [key: string]: IconSVG }) {
