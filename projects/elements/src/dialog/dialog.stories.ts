@@ -44,7 +44,7 @@ export const Interactive = {
   <h3 mlv-text="heading">Title</h3>
   <p mlv-text="body">some text content in a closable dialog</p>
 </mlv-dialog>
-<script>
+<script type="module">
   const dialog = document.querySelector('mlv-dialog');
   const btn = document.querySelector('#dialog-btn');
   btn.addEventListener('click', () => dialog.hidden = false);
@@ -106,7 +106,7 @@ export const NonClosable = {
     <mlv-button id="cancel-btn">cancel</mlv-button>
   </mlv-dialog-footer>
 </mlv-dialog>
-<script>
+<script type="module">
   const dialog = document.querySelector('mlv-dialog');
   const open = document.querySelector('#open-btn');
   const cancel = document.querySelector('#cancel-btn');

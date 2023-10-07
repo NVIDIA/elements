@@ -1,0 +1,35 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { statusBadges } from '../../docs/utils.mdx';
+
+<Meta title="Elements/Page Loader/Documentation" parameters={{ badges: statusBadges('mlv-page-loader') }} />
+
+# PageLoader
+
+<element-metrics tag="mlv-page-loader"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/page-loader/define.js';
+```
+
+```html
+<mlv-page-loader></mlv-page-loader>
+```
+
+## Standard
+
+<Canvas>
+  <Story id="elements-page-loader-examples--default" inline={false} height="400px" />
+</Canvas>
+
+## Interactive
+
+<Canvas>
+  <Story id="elements-page-loader-examples--interactive" inline={false} height="400px" />
+</Canvas>
+
+<element-status tag={'mlv-page-loader'}></element-status>
+
+## mlv-page-loader
+<ArgsTable of="mlv-page-loader" />
