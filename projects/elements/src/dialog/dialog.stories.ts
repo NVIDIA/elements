@@ -44,7 +44,7 @@ export const Interactive = {
   <h3 nve-text="heading">Title</h3>
   <p nve-text="body">some text content in a closable dialog</p>
 </nve-dialog>
-<script>
+<script type="module">
   const dialog = document.querySelector('nve-dialog');
   const btn = document.querySelector('#dialog-btn');
   btn.addEventListener('click', () => dialog.hidden = false);
@@ -106,7 +106,7 @@ export const NonClosable = {
     <nve-button id="cancel-btn">cancel</nve-button>
   </nve-dialog-footer>
 </nve-dialog>
-<script>
+<script type="module">
   const dialog = document.querySelector('nve-dialog');
   const open = document.querySelector('#open-btn');
   const cancel = document.querySelector('#cancel-btn');
