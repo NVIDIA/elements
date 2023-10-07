@@ -232,6 +232,7 @@ export const parameters = {
           'Menu',
           'Month',
           'Notification',
+          'Page Loader',
           'Pagination',
           'Panel',
           'Progressive Filter Chip',

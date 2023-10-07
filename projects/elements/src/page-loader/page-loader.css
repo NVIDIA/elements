@@ -1,0 +1,10 @@
+:host {
+  display: contents;
+}
+dialog {
+  outline: 0;
+}
+
+dialog::backdrop {
+  background: hsla(0, 0%, 0%, 0.5); /* --nve-sys-layer-backdrop-background (not available on top layer */
+}
