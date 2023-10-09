@@ -16,6 +16,9 @@ import styles from './row.css?inline';
  */
 @stateSelected()
 export class GridRow extends LitElement {
+  /**
+   * The `selected` property or attribute can be set to `true` to indicate that the row is in a selected state.
+   */
   @property({ type: Boolean }) selected: boolean;
 
   static styles = useStyles([styles]);

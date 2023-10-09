@@ -45,7 +45,7 @@ function toDeprecationNotice(deprecated) {
   if (!deprecated) {
     return '';
   }
-  return `**Note**: ${isBoolean(deprecated) ? 'This tag has been deprecated.' : declaration.deprecated}\n`
+  return `**Note**: ${isBoolean(deprecated) ? 'This tag has been deprecated.' : deprecated}\n`
 }
 
 function toAttributeValues(attribute) {

@@ -52,6 +52,9 @@ export class Badge extends LitElement {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
   render() {

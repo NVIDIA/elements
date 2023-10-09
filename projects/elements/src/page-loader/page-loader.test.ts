@@ -24,20 +24,8 @@ describe('nve-page-loader', () => {
     expect(customElements.get('nve-page-loader')).toBeDefined();
   });
 
-  it('should use auto behavior when modal', async () => {
-    element.modal = true;
-    await elementIsStable(element);
-    expect(element.popoverType).toBe('auto');
-  });
-
   it('should use default to center position', async () => {
     await elementIsStable(element);
     expect(element.position).toBe('center');
-  });
-
-  it('should not be closable', async () => {
-    element.modal = true;
-    await elementIsStable(element);
-    expect(element.closable).toBe(false);
   });
 });

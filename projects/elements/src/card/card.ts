@@ -11,9 +11,9 @@ import cardFooterStyleSheet from './card-footer.css?inline';
  * @description A container for content representing a single entity.
  * @since 0.1.3
  * @slot - This is a default/unnamed slot for card content
- * @slot header - header element (Use <nve-card-header> or custom content)
- * @slot content - content element (Use <nve-card-content> or custom content)
- * @slot footer - footer element (Use <nve-card-footer> or custom content)
+ * @slot header - header element (Use `<nve-card-header>` or custom content)
+ * @slot content - content element (Use `<nve-card-content>` or custom content)
+ * @slot footer - footer element (Use `<nve-card-footer>` or custom content)
  * @cssprop --background
  * @cssprop --color
  * @cssprop --border-radius

@@ -8,8 +8,8 @@ import styles from './drawer.css?inline';
  * @element nve-drawer
  * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigations, settings). Alternatively [Panel](./?path=/docs/elements-panel-documentation--docs) is inline as its content is coupled or closely related to the content on the page (details, additional actions/options).
  * @since 0.16.0
- * @event open
- * @event close
+ * @event open - Dispatched when the drawer is opened.
+ * @event close - Dispatched when the drawer is closed.
  * @slot default content slot
  * @cssprop --border
  * @cssprop --border-radius
@@ -77,6 +77,9 @@ export class Drawer extends LitElement {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
   /** @private */

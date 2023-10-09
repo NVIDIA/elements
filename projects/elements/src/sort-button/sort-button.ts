@@ -14,7 +14,7 @@ const nextSort = {
  * @element nve-sort-button
  * @description A sort button is a control that enables users to sort a list of items in ascending or descending order.
  * @since 0.11.0
- * @event sort - emits the next sort type
+ * @event sort - Dispatched when the sort button is clicked, returns the current sort value and the next sort value.
  * @slot - default slot for content
  * @cssprop --width
  * @cssprop --height
@@ -24,12 +24,6 @@ const nextSort = {
  * @stable false
  */
 export class SortButton extends MlvBaseButton {
-  @property({ type: String, reflect: true }) sort: 'ascending' | 'descending' | 'none' = 'none';
-
-  #i18nController: I18nController<this> = new I18nController<this>(this);
-
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
-
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -40,6 +34,18 @@ export class SortButton extends MlvBaseButton {
   static elementDefinitions = {
     'nve-icon': Icon
   };
+
+  /**
+   * The current sort value, can be ascending, descending, or none.
+   */
+  @property({ type: String, reflect: true }) sort: 'ascending' | 'descending' | 'none' = 'none';
+
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
+  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
   /** @private */
   declare _internals: ElementInternals;

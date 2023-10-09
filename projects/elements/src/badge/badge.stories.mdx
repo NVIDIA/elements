@@ -1,7 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
 import { statusBadges } from '../../docs/utils.mdx';
 
-<Meta title="Elements/Badge/Documentation" parameters={{ badges: statusBadges('nve-tooltip') }} />
+<Meta title="Elements/Badge/Documentation" parameters={{ badges: statusBadges('nve-badge') }} />
 
 # Badge
 
@@ -25,13 +25,15 @@ import '@elements/elements/badge/define.js';
 
 ## Status
 
-<element-metrics tag="nve-badge" type="property" value="status"></element-metrics>
+<element-api tag="nve-badge" type="property" value="status"></element-api>
 
 <Canvas>
   <Story id="elements-badge-examples--status" />
 </Canvas>
 
 ## Trend
+
+<element-api tag="nve-badge" type="property" value="status"></element-api>
 
 <Canvas>
   <Story id="elements-badge-examples--trend" />
@@ -53,7 +55,7 @@ import '@elements/elements/badge/define.js';
 
 ## Color
 
-<element-metrics tag="nve-badge" type="property" value="color"></element-metrics>
+<element-api tag="nve-badge" type="property" value="color"></element-api>
 
 <Canvas>
   <Story id="elements-badge-examples--color" />
@@ -61,5 +63,4 @@ import '@elements/elements/badge/define.js';
 
 <element-status tag="nve-badge"></element-status>
 
-## nve-badge
-<ArgsTable of="nve-badge" />
+<element-api tag="nve-badge"></element-api>

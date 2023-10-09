@@ -23,6 +23,9 @@ import styles from './icon-button.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
 export class IconButton extends Button {
+  /**
+   * Sets the icon name, which determines which icon to display.
+   */
   @property({ type: String, attribute: 'icon-name' }) iconName: IconName;
 
   /**

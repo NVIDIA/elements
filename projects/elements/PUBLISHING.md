@@ -42,9 +42,13 @@
     pnpm publish --registry https://registry.npmjs.org
     ```
 
+    ```bash
+    pnpm logout --registry https://registry.npmjs.org
+    ```
+
 8. Publish to Maglev
 
-    ```shell
+    ```bash
     pnpm login --scope=@elements --registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/
     ```
 
@@ -52,7 +56,25 @@
     pnpm publish --registry https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/
     ```
 
-9. Deploy documentation after release. Navigate to https://prod.blsm.nvidia.com/elements-sre-deployments/job/release/job/deploy/build
+    ```bash
+    pnpm logout --registry https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/
+    ```
+
+9. Publish to Playground
+
+    ```bash
+    pnpm login --scope=@elements --registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-playground-npm/
+    ```
+
+    ```bash
+    pnpm publish --registry https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-playground-npm/
+    ```
+
+    ```bash
+    pnpm logout --registry https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-playground-npm/
+    ```
+
+10. Deploy documentation after release. Navigate to https://prod.blsm.nvidia.com/elements-sre-deployments/job/release/job/deploy/build
 
     - Set `"Deploy to"` select input to `"sjc4-prod"`
   

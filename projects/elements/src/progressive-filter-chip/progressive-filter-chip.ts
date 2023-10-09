@@ -14,7 +14,7 @@ import styles from './progressive-filter-chip.css?inline';
  * @description A filter chip is a control that enables users to select multiple options from a set of choices.
  * @since 0.16.0
  * @slot - default slot for content
- * @event close - dispatched when close button is clicked
+ * @event close - Dispatched when the filter chip is closed.
  * @cssprop --background
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-filter-chip-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=72%3A5357
@@ -40,6 +40,7 @@ export class ProgressiveFilterChip extends LitElement {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
+  /** Enables internal string values to be updated for internationalization. */
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
   @state() private inputs: Element[] = [];

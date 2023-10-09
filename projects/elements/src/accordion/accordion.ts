@@ -118,10 +118,13 @@ export class Accordion extends LitElement implements ContainerElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
   #typeExpandableController = new TypeExpandableController(this);
 
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
   /**
-   * flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion)
+   * Determines the container styles of component. Flat is used for nesting accordions within other containers. Inset can be used for more complex accordions where content is distinctly separated.
    */
   @property({ type: String, reflect: true }) container?: Container = 'full';
 
@@ -134,9 +137,10 @@ export class Accordion extends LitElement implements ContainerElement {
    * Determines whether the accordion is expandable
    */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
   /**
    * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
-  */
+   */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
   @state() private hoverActive = false;

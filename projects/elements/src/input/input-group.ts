@@ -12,6 +12,10 @@ import styles from './input-group.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
  */
 export class InputGroup extends ControlGroup {
+  /**
+   * @deprecated
+   * (0.19.0) use `nve-progressive-filter-chip` instead
+   */
   @property({ type: String, reflect: true }) type?: 'filter';
 
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
