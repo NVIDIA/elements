@@ -17,7 +17,7 @@ export class TypeClosableController<T extends TypeClosable> implements ReactiveC
 
   close() {
     if (this.host.closable) {
-      this.host.dispatchEvent(new CustomEvent('close'));
+      this.host.dispatchEvent(new CustomEvent('close', { bubbles: true }));
     }
   }
 }
