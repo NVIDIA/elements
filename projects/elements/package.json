@@ -272,6 +272,7 @@
     "@vitest/utils": "0.34.1",
     "axe-core": "4.8.2",
     "chart.js": "4.3.3",
+    "chai": "4.3.10",
     "emoji-picker-element": "1.18.3",
     "eslint": "8.45.0",
     "eslint-plugin-import": "2.28.0",
