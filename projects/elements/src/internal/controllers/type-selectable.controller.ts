@@ -19,7 +19,7 @@ export class TypeSelectableController<T extends TypeSelectable> implements React
   }
 
   select(element: HTMLElement & { selected?: boolean } = this.host) {
-    this.host.dispatchEvent(new CustomEvent('select', { detail: element }));
+    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: element }));
     if (this.host.behaviorSelect) {
       element.selected = true;
     }

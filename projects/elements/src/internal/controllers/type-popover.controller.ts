@@ -151,7 +151,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   close() {
     if (!this.host.hidden && this.#dismissible) {
-      this.host.dispatchEvent(new CustomEvent('close'));
+      this.host.dispatchEvent(new CustomEvent('close', { bubbles: true }));
     }
 
     if (this.#dialog?.open && this.host.hidden) {
@@ -161,7 +161,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   open() {
     if (this.host.hidden) {
-      this.host.dispatchEvent(new CustomEvent('open'));
+      this.host.dispatchEvent(new CustomEvent('open', { bubbles: true }));
     }
   }
 
