@@ -1,6 +1,5 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { state } from 'lit/decorators/state.js';
 import { attachInternals, formatStandardNumber, I18nController, keyNavigationList, KeynavListConfig, useStyles } from '@elements/elements/internal';
 import styles from './pagination.css?inline';
 
@@ -17,27 +16,52 @@ import styles from './pagination.css?inline';
  */
 @keyNavigationList<Pagination>()
 export class Pagination extends LitElement {
+  /**
+   * The current page number.
+   */
   @property({ type: Number }) value = 1;
 
+  /**
+   * The number of items per page.
+   */
   @property({ type: Number }) step = 10;
 
+  /**
+   * The total number of items.
+   */
   @property({ type: Number }) items: number;
 
+  /**
+   * Whether or not the pagination is skippable to start/end.
+   */
   @property({ type: Boolean }) skippable: boolean;
 
+  /**
+   * Whether or not the step selector is disabled.
+   */
   @property({ type: Boolean, attribute: 'disable-step' }) disableStep: boolean;
 
+  /**
+   * Whether or not the pagination is disabled.
+   */
   @property({ type: Boolean }) disabled: boolean;
 
+  /**
+   * The name for the pagination, required to associate it with a form.
+   */
   @property({ type: String }) name: string;
 
+  /**
+   * Determines the container styles of component. Flat is used for nesting within other containers. Inline is used to inline within other inline content.
+   */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
-
-  @state() labelWidth = '100%';
 
   static formAssociated = true;
 

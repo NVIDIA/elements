@@ -186,3 +186,270 @@ function getThemeContent() {
     </div>
     `;
 }
+
+class ThemeGeneratorDemo extends LitElement {
+  static styles = [unsafeCSS(layout), unsafeCSS(typography), css`
+    :host {
+      display: contents;
+    }
+
+    mlv-panel {
+      min-width: 360px;
+      z-index: 99;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+  `];
+
+  @state() private formValues = {
+    'sys-accent-primary-background': '#63a600',
+    'sys-accent-secondary-background': '#006adc',
+    'ref-scale-border-radius': 1,
+    'ref-scale-space': 1,
+    'ref-scale-size': 1,
+    'ref-scale-text': 1,
+  };
+
+  render() {
+    return html`
+<div mlv-layout="column" style="height: 100%">
+  <mlv-app-header>
+    <mlv-logo></mlv-logo>
+    <h2 slot="title">Theme Generator</h2>
+    <mlv-button slot="nav-items" active>Link 1</mlv-button>
+    <mlv-button slot="nav-items">Link 2</mlv-button>
+    <mlv-icon-button icon-name="assist" slot="nav-actions"></mlv-icon-button>
+    <mlv-icon-button icon-name="app-switcher" slot="nav-actions"></mlv-icon-button>
+    <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
+  </mlv-app-header>
+
+  <mlv-alert-banner status="accent">
+    <mlv-alert closable>banner message</mlv-alert>
+  </mlv-alert-banner>
+
+  <div mlv-layout="row" style="width: 100%;">
+    <mlv-panel expanded>
+      <mlv-panel-header>
+        <h2 slot="title">Theme Options</h2>
+      </mlv-panel-header>
+      <mlv-panel-content>
+        <form @input=${this.#input} mlv-layout="column gap:lg">
+          <mlv-color>
+            <label>Accent Color ${this.formValues['sys-accent-secondary-background']}</label>
+            <input type="color" name="sys-accent-primary-background" .value=${this.formValues['sys-accent-primary-background']} />
+          </mlv-color>
+
+          <mlv-color>
+            <label>Secondary Color</label>
+            <input type="color" name="sys-accent-secondary-background" .value=${this.formValues['sys-accent-secondary-background']} />
+          </mlv-color>
+
+          <mlv-range>
+            <label>Space Scale</label>
+            <input type="range" name="ref-scale-space" .value=${this.formValues['ref-space-scale']} min="0.5" max="1.5" step="0.1" />
+          </mlv-range>
+
+          <mlv-range>
+            <label>Size Scale</label>
+            <input type="range" name="ref-scale-size" .value=${this.formValues['ref-size-scale']} min="0.5" max="1.5" step="0.1" />
+          </mlv-range>
+
+          <mlv-range>
+            <label>Text Scale</label>
+            <input type="range" name="ref-scale-text" .value=${this.formValues['ref-text-scale']} min="0.5" max="1.5" step="0.1" />
+          </mlv-range>
+
+          <mlv-range>
+            <label>Border Radius Scale</label>
+            <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-border-radius-scale']} min="0" max="1.5" step="0.1" />
+          </mlv-range>
+
+          <mlv-button type="button" @click=${this.#random} style="position: fixed; bottom: 24px;">random</mlv-button>
+        </form>
+      </mlv-panel-content>
+    </mlv-panel>
+
+    <main mlv-layout="column gap:lg pad:lg full align:horizontal-stretch">
+      <h1 mlv-text="heading lg">Heading</h1>
+        <mlv-card>
+          <mlv-card-header>
+            <div slot="title">Title</div>
+          </mlv-card-header>
+          <mlv-card-content>
+            <div mlv-layout="column gap:lg">
+              <mlv-input layout="horizontal-inline">
+                <label>text label</label>
+                <input />
+                <mlv-control-message>message</mlv-control-message>
+              </mlv-input>
+
+              <mlv-search layout="horizontal-inline">
+                <label>search label</label>
+                <input type="search" placeholder="search" />
+                <mlv-control-message>message</mlv-control-message>
+              </mlv-search>
+
+              <mlv-password layout="horizontal-inline">
+                <label>password label</label>
+                <input type="password" value="123456" autocomplete="off" />
+                <mlv-control-message>message</mlv-control-message>
+              </mlv-password>
+
+              <mlv-select layout="horizontal-inline">
+                <label>select label</label>
+                <select>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+                <mlv-control-message>message</mlv-control-message>
+              </mlv-select>
+
+              <mlv-checkbox-group layout="horizontal-inline">
+                <label>checkbox group label</label>
+                <mlv-checkbox>
+                  <label>checkbox 1</label>
+                  <input type="checkbox" checked />
+                </mlv-checkbox>
+
+                <mlv-checkbox>
+                  <label>checkbox 2</label>
+                  <input type="checkbox" />
+                </mlv-checkbox>
+
+                <mlv-checkbox>
+                  <label>checkbox 3</label>
+                  <input type="checkbox" />
+                </mlv-checkbox>
+              </mlv-checkbox-group>
+
+              <mlv-radio-group layout="horizontal-inline">
+                <label>radio group label</label>
+                <mlv-radio>
+                  <label>radio 1</label>
+                  <input type="radio" checked />
+                </mlv-radio>
+
+                <mlv-radio>
+                  <label>radio 2</label>
+                  <input type="radio" />
+                </mlv-radio>
+
+                <mlv-radio>
+                  <label>radio 3</label>
+                  <input type="radio" />
+                </mlv-radio>
+              </mlv-radio-group>
+
+              <mlv-switch-group layout="horizontal-inline">
+                <label>switch group label</label>
+                <mlv-switch>
+                  <label>switch 1</label>
+                  <input type="checkbox" />
+                </mlv-switch>
+
+                <mlv-switch>
+                  <label>switch 2</label>
+                  <input type="checkbox" checked />
+                </mlv-switch>
+              </mlv-switch-group>
+
+              <mlv-select layout="horizontal-inline">
+                <label>select multiple label</label>
+                <select multiple>
+                  <option value="1">Option 1</option>
+                  <option selected value="2">Option 2</option>
+                  <option selected value="3">Option 3</option>
+                  <option selected value="3">Option 3</option>
+                  <option value="4">Option 4</option>
+                  <option value="5">Option 5</option>
+                </select>
+                <mlv-control-message>message</mlv-control-message>
+              </mlv-select>
+
+              <mlv-textarea layout="horizontal-inline">
+                <label>textarea label</label>
+                <textarea></textarea>
+                <mlv-control-message>message</mlv-control-message>
+              </mlv-textarea>
+            </div>
+          </mlv-card-content>
+          <mlv-card-footer>
+            <div mlv-layout="row gap:xs full">
+              <mlv-button style="margin-left: auto">button</mlv-button>
+              <mlv-button interaction="emphasize">button</mlv-button>
+            </div>
+          </mlv-card-footer>
+        </mlv-card>
+    </main>
+  </div>
+</div>
+    `;
+  }
+
+  #input() {
+    const form = this.shadowRoot?.querySelector('form');
+    const values = Object.fromEntries(new FormData(form as any)) as any;
+    this.#setFormValues(values);
+  }
+
+  #random() {
+    const color = getRandomColor();
+    this.#setFormValues({
+      'sys-accent-primary-background': color,
+      'sys-accent-secondary-background': color,
+      'ref-scale-border-radius': getRandomDecimal(0, 1.5, 2),
+      'ref-scale-space': getRandomDecimal(0.8, 1.5, 2),
+      'ref-scale-size': getRandomDecimal(0.9, 1.5, 2),
+      'ref-scale-text': getRandomDecimal(0.9, 1.5, 2),
+    });
+  }
+
+  #setFormValues(formValues) {
+    this.formValues = formValues;
+    Object.keys(this.formValues).forEach(prop => document.documentElement.style.setProperty(`--mlv-${prop}`, this.formValues[prop]));
+  }
+}
+
+function getRandomColor() {
+  const hue = getRandomDecimal(0, 100, 0);
+  const saturation = getRandomDecimal(0, 100, 0);
+  const lightness = getRandomDecimal(0, 100, 0);
+  return hsltohex(hue, saturation, lightness);
+}
+
+function hsltohex(h, s, l) {
+  l /= 100;
+  const a = s * Math.min(l, 1 - l) / 100;
+  const f = n => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color).toString(16).padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+function getRandomDecimal(min, max, decimalPlaces) {
+  const rand = Math.random() * (max - min) + min;
+  const power = Math.pow(10, decimalPlaces);
+  return Math.floor(rand * power) / power;
+}
+
+customElements.get('mlv-demo-theme-generator') || customElements.define('mlv-demo-theme-generator', ThemeGeneratorDemo);
+
+export const ThemeGenerator = {
+  render: () => html`
+  <style>
+    body,
+    #storybook-root,
+    #root-inner {
+      padding: 0 !important;
+      height: 100% !important;
+    }
+  </style>
+  <div mlv-theme="root">
+    <mlv-demo-theme-generator></mlv-demo-theme-generator>
+  </div>
+  `
+}

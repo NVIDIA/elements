@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-10T18:04:55.474Z",
+  "created": "2023-10-12T17:53:37.684Z",
   "versions": [
     "0.10.0",
     "0.11.1",
@@ -33,8 +33,12 @@
       "figma": "https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630",
       "properties": [
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "container",
-          "description": "flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion)"
+          "description": "Determines the container styles of component. Flat is used for nesting accordions within other containers. Inset can be used for more complex accordions where content is distinctly separated."
         },
         {
           "name": "expanded",
@@ -63,6 +67,60 @@
           "name": "content"
         }
       ],
+      "attributes": [
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        },
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | 'full' | 'inset' | default"
+          },
+          "default": "'full'",
+          "description": "Determines the container styles of component. Flat is used for nesting accordions within other containers. Inset can be used for more complex accordions where content is distinctly separated.",
+          "fieldName": "container"
+        },
+        {
+          "name": "expanded",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether the accordion is expanded, displaying its contents, or not.",
+          "fieldName": "expanded"
+        },
+        {
+          "name": "disabled",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether the accordion is expandable",
+          "fieldName": "disabled"
+        },
+        {
+          "name": "behavior-expand",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)",
+          "fieldName": "behaviorExpand"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--header-padding"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 1,
       "coverageTotal": 83.80000000000001,
@@ -88,6 +146,11 @@
         {
           "description": "This is a default/unnamed slot for accordion content content",
           "name": ""
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--padding"
         }
       ],
       "projectTotal": 1,
@@ -122,6 +185,35 @@
         {
           "name": "container",
           "description": "flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion)"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "behavior-expand",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)",
+          "fieldName": "behaviorExpand"
+        },
+        {
+          "name": "behavior-expand-single",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether or not the accordion should opt-in to stateful expansion of a single accordion at a time",
+          "fieldName": "behaviorExpandSingle"
+        },
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | 'full' | 'inset' | default"
+          },
+          "default": "'full'",
+          "description": "flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion)",
+          "fieldName": "container"
         }
       ],
       "projectTotal": 0,
@@ -183,26 +275,89 @@
       "properties": [
         {
           "name": "status",
-          "description": "visual treatment to represent a ongoing task or support status"
+          "description": "Defines visual treatment to represent a ongoing task or support status."
         },
         {
           "name": "closable",
-          "description": "enable closable alert when placed within a mlv-alert-group"
+          "description": "When used in an `mlv-alert-group` the `closable` property enables alerts to be dismissed within the same group."
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
         {
+          "description": "Icon slot is placed on the left side of the alert. Icons are typically used to represent the alert's status.",
           "name": "icon"
         },
         {
+          "description": "Prefix slot is placed between the icon and the content. Prefixes are typically used to represent the alert's status.",
           "name": "prefix"
         },
         {
+          "description": "Actions are placed on the right side of the alert. Actions are typically buttons, but can also be links. Actions should be used for actions that the user can take to resolve the alert.",
           "name": "actions"
         },
         {
-          "description": "default content slot",
+          "description": "Default content placed inside of the alert.",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'accent' | 'warning' | 'success' | 'danger' | 'running' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored' | 'muted'"
+          },
+          "description": "Defines visual treatment to represent a ongoing task or support status.",
+          "fieldName": "status"
+        },
+        {
+          "name": "closable",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "When used in an `mlv-alert-group` the `closable` property enables alerts to be dismissed within the same group.",
+          "fieldName": "closable"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "description": "Dispatched when the alert is closed within a alert group.",
+          "name": "close"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--icon-color"
+        },
+        {
+          "name": "--icon-size"
+        },
+        {
+          "name": "--font-weight"
+        },
+        {
+          "name": "--justify-content"
+        },
+        {
+          "name": "--min-height"
         }
       ],
       "projectTotal": 6,
@@ -226,7 +381,46 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-banner-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-14&t=CAAM7yEBvG18tRRa-0",
-      "properties": [],
+      "properties": [
+        {
+          "name": "status",
+          "description": "Defines visual treatment to represent a ongoing task or support status."
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'accent' | 'warning' | 'success' | 'danger'"
+          },
+          "description": "Defines visual treatment to represent a ongoing task or support status.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "AlertGroup",
+            "module": "/src/alert/alert-group.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-radius"
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 2,
       "coverageTotal": 100,
@@ -248,7 +442,42 @@
       "since": "0.3.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-group-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2519-54572&t=CAAM7yEBvG18tRRa-0",
-      "properties": [],
+      "properties": [
+        {
+          "name": "status",
+          "description": "Defines visual treatment to represent a ongoing task or support status."
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'accent' | 'warning' | 'success' | 'danger'"
+          },
+          "description": "Defines visual treatment to represent a ongoing task or support status.",
+          "fieldName": "status"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-radius"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 4,
       "coverageTotal": 100,
@@ -288,6 +517,17 @@
           "name": "nav-actions"
         }
       ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--border-bottom"
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 2,
       "coverageTotal": 93.75,
@@ -317,12 +557,65 @@
         {
           "name": "color",
           "description": "Highlights content to draw attention and convey simple messages. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=56-308&mode=design&t=eeBXUleEIUIAeQQh-0)"
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
         {
           "description": "default slot for content",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'running' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored' | 'accent' | 'warning' | 'success' | 'danger' | 'trend-down' | 'trend-up' | 'trend-neutral'"
+          },
+          "description": "Visual treatment to represent a ongoing task, support or trend status. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=48-710&mode=design)",
+          "fieldName": "status"
+        },
+        {
+          "name": "color",
+          "type": {
+            "text": "'red-cardinal' | 'gray-slate' | 'gray-denim' | 'blue-indigo' | 'blue-cobalt' | 'blue-sky' | 'teal-cyan' | 'green-mint' | 'teal-seafoam' | 'green-grass' | 'yellow-amber' | 'orange-pumpkin' | 'red-tomato' | 'pink-magenta' | 'purple-plum' | 'purple-violet' | 'purple-lavender' | 'pink-rose' | 'green-jade' | 'lime-pear' | 'yellow-nova' | 'brand-green'"
+          },
+          "description": "Highlights content to draw attention and convey simple messages. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=56-308&mode=design&t=eeBXUleEIUIAeQQh-0)",
+          "fieldName": "color"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--status-color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--font-weight"
+        },
+        {
+          "name": "--text-transform"
         }
       ],
       "projectTotal": 3,
@@ -347,6 +640,23 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-breadcrumb-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1",
       "properties": [],
+      "cssProperties": [
+        {
+          "name": "--breadcrumb-height"
+        },
+        {
+          "name": "--item-text-size"
+        },
+        {
+          "name": "--item-color"
+        },
+        {
+          "name": "--item-active-color"
+        },
+        {
+          "name": "--item-active-font-weight"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 5,
       "coverageTotal": 91.51,
@@ -372,11 +682,11 @@
       "properties": [
         {
           "name": "interaction",
-          "description": "Visual treatment to represent user interaction appearance"
+          "description": "Visual treatment to represent user interaction appearance."
         },
         {
           "name": "size",
-          "description": "Determines size of button"
+          "description": "Determines size of the button."
         },
         {
           "name": "pressed",
@@ -415,6 +725,156 @@
         {
           "description": "slot for button text content or icon, icon placement determined by whether <mlv-icon> is inserted before or after text content.",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "interaction",
+          "type": {
+            "text": "'emphasize' | 'destructive' | 'flat' | 'flat-emphasize' | 'flat-destructive' | 'inverse' | 'ghost' | 'ghost-emphasize' | 'ghost-destructive'"
+          },
+          "description": "Visual treatment to represent user interaction appearance.",
+          "fieldName": "interaction"
+        },
+        {
+          "name": "size",
+          "type": {
+            "text": "'sm' | 'md' | 'lg' | default"
+          },
+          "description": "Determines size of the button.",
+          "fieldName": "size"
+        },
+        {
+          "name": "pressed",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
+          "fieldName": "pressed",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "expanded",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
+          "fieldName": "expanded",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "readonly",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
+          "fieldName": "readonly",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "text": "string"
+          },
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
+          "fieldName": "name",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "value",
+          "type": {
+            "text": "string"
+          },
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value",
+          "fieldName": "value",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "type",
+          "type": {
+            "text": "'button' | 'submit'"
+          },
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
+          "fieldName": "type",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "disabled",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled",
+          "fieldName": "disabled",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "selected",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
+          "fieldName": "selected",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--font-weight"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--text-decoration"
+        },
+        {
+          "name": "--cursor"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--text-transform"
         }
       ],
       "projectTotal": 14,
@@ -466,6 +926,66 @@
           "name": ""
         }
       ],
+      "attributes": [
+        {
+          "name": "behavior-select",
+          "type": {
+            "text": "'single' | 'multi'"
+          },
+          "description": "By default the button group is stateless. Add the `behavior-select` attribute and set to `single` or `multi` to enable stateful selction handling.",
+          "fieldName": "behaviorSelect"
+        },
+        {
+          "name": "container",
+          "type": {
+            "text": "default | 'flat' | 'rounded' | default"
+          },
+          "description": "Set the style of the button group using the `container` property. Options are the default display when the attribute is left off, `flat` or `rounded`.",
+          "fieldName": "container"
+        },
+        {
+          "name": "orientation",
+          "type": {
+            "text": "'horizontal' | 'vertical' | default"
+          },
+          "default": "'horizontal'",
+          "description": "Determines the orientation direction of the group. Vertical groups are limited to icon buttons only.",
+          "fieldName": "orientation"
+        },
+        {
+          "name": "interaction",
+          "type": {
+            "text": "'emphasize' | 'destructive'"
+          },
+          "description": "The `interaction` property is intended to be used on `mlv-button-group` in combination with `mlv-divider` for color-coded split buttons",
+          "fieldName": "interaction"
+        },
+        {
+          "name": "size",
+          "type": {
+            "text": "'sm' | 'md' | 'lg' | default"
+          },
+          "description": "Determines size of button",
+          "fieldName": "size"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--gap"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 61.605,
@@ -499,16 +1019,40 @@
           "name": ""
         },
         {
-          "description": "header element (Use <mlv-card-header> or custom content)",
+          "description": "header element (Use `<mlv-card-header>` or custom content)",
           "name": "header"
         },
         {
-          "description": "content element (Use <mlv-card-content> or custom content)",
+          "description": "content element (Use `<mlv-card-content>` or custom content)",
           "name": "content"
         },
         {
-          "description": "footer element (Use <mlv-card-footer> or custom content)",
+          "description": "footer element (Use `<mlv-card-footer>` or custom content)",
           "name": "footer"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | 'full' | default"
+          },
+          "description": "flat (embed into parent container) or full (full parent container width)",
+          "fieldName": "container"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--box-shadow"
         }
       ],
       "projectTotal": 6,
@@ -538,6 +1082,11 @@
           "name": ""
         }
       ],
+      "cssProperties": [
+        {
+          "name": "--padding"
+        }
+      ],
       "projectTotal": 6,
       "instanceTotal": 10,
       "coverageTotal": 100,
@@ -563,6 +1112,11 @@
         {
           "description": "This is a default/unnamed slot for card footer content",
           "name": ""
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--padding"
         }
       ],
       "projectTotal": 2,
@@ -604,6 +1158,17 @@
           "name": "header-action"
         }
       ],
+      "cssProperties": [
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--border-bottom"
+        },
+        {
+          "name": "--line-height"
+        }
+      ],
       "projectTotal": 4,
       "instanceTotal": 4,
       "coverageTotal": 100,
@@ -632,7 +1197,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -643,8 +1208,96 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--cursor"
         }
       ],
       "projectTotal": 7,
@@ -671,6 +1324,20 @@
         {
           "name": "layout",
           "description": "Set each slotted control + label + control message layout"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set each slotted control + label + control message layout",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "ControlGroup",
+            "module": "/src/forms/control-group/control-group.js"
+          }
         }
       ],
       "projectTotal": 4,
@@ -701,7 +1368,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -712,8 +1379,85 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 0,
@@ -748,7 +1492,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -757,6 +1501,10 @@
         {
           "name": "fitContent",
           "description": "Sets the input to match native default content block"
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         },
         {
           "name": "reset",
@@ -771,6 +1519,122 @@
         {
           "description": "slot for icon to be placed before the input",
           "name": "prefix-icon"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | default"
+          },
+          "description": "Flat container option is used when embeding component within another containing element",
+          "fieldName": "container"
+        },
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--scroll-height"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--border"
+        },
+        {
+          "name": "--cursor"
+        },
+        {
+          "name": "--font-weight"
+        },
+        {
+          "name": "--width"
         }
       ],
       "projectTotal": 1,
@@ -800,7 +1664,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -811,6 +1675,10 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
         }
@@ -819,6 +1687,78 @@
         {
           "description": "Control input element",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status"
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout"
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText"
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--cursor"
+        },
+        {
+          "name": "--accent-color"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--label-color"
+        },
+        {
+          "name": "--label-width"
+        },
+        {
+          "name": "--control-width"
+        },
+        {
+          "name": "--control-height"
         }
       ],
       "projectTotal": 7,
@@ -851,6 +1791,27 @@
         {
           "description": "Control input elements",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set each slotted control + label + control message layout",
+          "fieldName": "layout"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--label-color"
+        },
+        {
+          "name": "--label-width"
         }
       ],
       "projectTotal": 0,
@@ -890,6 +1851,36 @@
           "name": ""
         }
       ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled' | default"
+          },
+          "description": "Visual treatment for current form control validation status",
+          "fieldName": "status"
+        },
+        {
+          "name": "error",
+          "type": {
+            "text": "keyof ValidityState"
+          },
+          "default": "null",
+          "description": "Validation error code for current form control\nhttps://developer.mozilla.org/en-US/docs/Web/API/ValidityState",
+          "fieldName": "error"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--font-weight"
+        },
+        {
+          "name": "--font-size"
+        }
+      ],
       "projectTotal": 5,
       "instanceTotal": 6,
       "coverageTotal": 100,
@@ -918,7 +1909,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -929,8 +1920,85 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 4,
@@ -961,7 +2029,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -972,8 +2040,85 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 0,
@@ -1029,12 +2174,137 @@
         {
           "name": "hidden",
           "description": "Determines if popover should be rendered and positioned."
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
         {
           "description": "content slot",
           "name": "default"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "position",
+          "type": {
+            "text": "'center' | 'top' | 'bottom' | 'left' | 'right'"
+          },
+          "default": "'center'",
+          "description": "Sets the side position of the popover relative to the provided anchor element.\nFor dialog the anchor defaults to the document body.",
+          "fieldName": "position"
+        },
+        {
+          "name": "alignment",
+          "type": {
+            "text": "'start' | 'end' | 'center'"
+          },
+          "description": "Sets the alignment of the popover relative to the provided anchor element.\nIf an arrow exists the alginment will be relative to the arrow against the anchor.",
+          "fieldName": "alignment"
+        },
+        {
+          "name": "size",
+          "type": {
+            "text": "'sm' | 'md' | 'lg' | default"
+          },
+          "description": "Sets the maximum size of the dialog.",
+          "fieldName": "size"
+        },
+        {
+          "name": "closable",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Determines if a close button should render within dialog. Non-closable\ndialogs can be used for dialogs that require user confirmation steps.",
+          "fieldName": "closable"
+        },
+        {
+          "name": "modal",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Determines if a dialog should have a modal backdrop that visually overlays the UI.",
+          "fieldName": "modal"
+        },
+        {
+          "name": "anchor",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "anchor"
+        },
+        {
+          "name": "trigger",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "trigger"
+        },
+        {
+          "name": "hidden",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if popover should be rendered and positioned.",
+          "fieldName": "hidden"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "description": "Dispatched when the dialog is opened.",
+          "name": "open"
+        },
+        {
+          "description": "Dispatched when the dialog is closed.",
+          "name": "close"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--border"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--box-shadow"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--max-width"
+        },
+        {
+          "name": "--min-height"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-arrow-padding"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-arrow-offset"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-offset"
         }
       ],
       "projectTotal": 6,
@@ -1112,7 +2382,34 @@
       "since": "0.12.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-divider-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-17&t=amYlOylF8PkKNaxU-0",
-      "properties": [],
+      "properties": [
+        {
+          "name": "orientation",
+          "description": "Determines the orientation of the divider."
+        }
+      ],
+      "attributes": [
+        {
+          "name": "orientation",
+          "type": {
+            "text": "'vertical' | 'horizontal'"
+          },
+          "default": "'horizontal'",
+          "description": "Determines the orientation of the divider.",
+          "fieldName": "orientation"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--size"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 8,
       "coverageTotal": 100,
@@ -1137,17 +2434,64 @@
       "properties": [
         {
           "name": "status",
-          "description": "visual treatment to represent a ongoing task status"
+          "description": "Defines visual treatment to represent a ongoing task or support status."
         },
         {
           "name": "size",
-          "description": "determines size of dot relative to provided text"
+          "description": "Determines size of dot relative to provided text."
         }
       ],
       "slots": [
         {
           "description": "default content",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'accent' | 'warning' | 'success' | 'danger' | 'running' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored'"
+          },
+          "description": "Defines visual treatment to represent a ongoing task or support status.",
+          "fieldName": "status"
+        },
+        {
+          "name": "size",
+          "type": {
+            "text": "'sm' | 'md' | 'lg'"
+          },
+          "description": "Determines size of dot relative to provided text.",
+          "fieldName": "size"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--font-weight"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--padding"
         }
       ],
       "projectTotal": 1,
@@ -1203,12 +2547,137 @@
         {
           "name": "hidden",
           "description": "Determines if popover should be rendered and positioned."
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
         {
           "description": "content slot",
           "name": "default"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "position",
+          "type": {
+            "text": "'left' | 'right'"
+          },
+          "default": "'left'",
+          "description": "Sets the side position of the popover relative to the provided anchor element.\nFor drawer the anchor defaults to the document body.",
+          "fieldName": "position"
+        },
+        {
+          "name": "size",
+          "type": {
+            "text": "'sm' | 'md' | 'lg' | default"
+          },
+          "description": "Sets the maximum size of the drawer.",
+          "fieldName": "size"
+        },
+        {
+          "name": "closable",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Determines if a close button should render within drawer. Non-closable\ndrawers can be used for drawers that require user confirmation steps.",
+          "fieldName": "closable"
+        },
+        {
+          "name": "modal",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Determines if a drawer should have a modal backdrop that visually overlays the UI.",
+          "fieldName": "modal"
+        },
+        {
+          "name": "anchor",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference.\nDrawers should default to the document body.",
+          "fieldName": "anchor"
+        },
+        {
+          "name": "trigger",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "trigger"
+        },
+        {
+          "name": "inline",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Create a inline layout effect while retaining the a11y characteristics and top layer behavior (light dismiss, focus trap, non interactive background)\nhttps://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "fieldName": "inline"
+        },
+        {
+          "name": "hidden",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if popover should be rendered and positioned.",
+          "fieldName": "hidden"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "description": "Dispatched when the drawer is opened.",
+          "name": "open"
+        },
+        {
+          "description": "Dispatched when the drawer is closed.",
+          "name": "close"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--border"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--box-shadow"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--max-width"
+        },
+        {
+          "name": "--min-height"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-arrow-padding"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-arrow-offset"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-offset"
         }
       ],
       "projectTotal": 0,
@@ -1314,12 +2783,129 @@
         {
           "name": "hidden",
           "description": "Determines if popover should be rendered and positioned."
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
         {
           "description": "default slot for dropdown content",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "anchor",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "anchor"
+        },
+        {
+          "name": "trigger",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "trigger"
+        },
+        {
+          "name": "position",
+          "type": {
+            "text": "'center' | 'top' | 'bottom' | 'left' | 'right'"
+          },
+          "default": "'bottom'",
+          "description": "Sets the side position of the popover relative to the provided anchor element.",
+          "fieldName": "position"
+        },
+        {
+          "name": "alignment",
+          "type": {
+            "text": "'start' | 'end' | 'center'"
+          },
+          "default": "'start'",
+          "description": "Sets the alignment of the popover relative to the provided anchor element.\nIf an arrow exists the alginment will be relative to the arrow against the anchor.",
+          "fieldName": "alignment"
+        },
+        {
+          "name": "closable",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if a close button should render within dropdown. Non-closable\ndropdowns can be used for menu or selection patterns.",
+          "fieldName": "closable"
+        },
+        {
+          "name": "arrow",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if an arrow should be rendered.",
+          "fieldName": "arrow"
+        },
+        {
+          "name": "hidden",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if popover should be rendered and positioned.",
+          "fieldName": "hidden"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "description": "Dispatched when the dropdown is opened.",
+          "name": "open"
+        },
+        {
+          "description": "Dispatched when the dropdown is closed.",
+          "name": "close"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--border"
+        },
+        {
+          "name": "--arrow-transform"
+        },
+        {
+          "name": "--border"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--box-shadow"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-arrow-padding"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-arrow-offset"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-offset"
         }
       ],
       "projectTotal": 8,
@@ -1350,7 +2936,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -1361,8 +2947,85 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 0,
@@ -1389,11 +3052,11 @@
       "properties": [
         {
           "name": "container",
-          "description": "flat (embed into parent container) or full (full parent container width)"
+          "description": "Determines the container styles of component. Flat is used for nesting the grid within other containers. Full can be used for full edge to edge viewport width grids."
         },
         {
           "name": "stripe",
-          "description": "determine style variant stripe rows"
+          "description": "Determine style variant stripe rows"
         }
       ],
       "slots": [
@@ -1404,6 +3067,47 @@
         {
           "description": "slot for mlv-grid-footer or mlv-toolbar",
           "name": "footer"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | 'full' | default"
+          },
+          "description": "Determines the container styles of component. Flat is used for nesting the grid within other containers. Full can be used for full edge to edge viewport width grids.",
+          "fieldName": "container"
+        },
+        {
+          "name": "stripe",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Determine style variant stripe rows",
+          "fieldName": "stripe"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--box-shadow"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--row-height"
+        },
+        {
+          "name": "--scroll-height"
         }
       ],
       "projectTotal": 4,
@@ -1433,6 +3137,38 @@
           "name": ""
         }
       ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--min-height"
+        },
+        {
+          "name": "--min-width"
+        },
+        {
+          "name": "--font-weight"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--border-left"
+        },
+        {
+          "name": "--border-right"
+        },
+        {
+          "name": "--justify-content"
+        }
+      ],
       "projectTotal": 4,
       "instanceTotal": 8,
       "coverageTotal": 100,
@@ -1456,7 +3192,15 @@
       "properties": [
         {
           "name": "width",
-          "description": "specify exact width using css value types"
+          "description": "Columns can individually have set widths using the `width` property or attribute and a valid CSS value type.\nIf the total width of all columns is less than the grid width then the last column will fill the remaining space.\nBy default columns are evenly devided unless width is explicitly provided. Content within a cell of a given\ncolumn will wrap content to fit the width of the column."
+        },
+        {
+          "name": "position",
+          "description": "The `position` property or attribute can be set to `fixed` or `sticky` to make the column fixed or sticky.\nFixed columns will not scroll horizontally with the grid. Sticky columns will scroll horizontally with the grid\nuntil the column reaches the edge of the grid."
+        },
+        {
+          "name": "columnAlign",
+          "description": "Control the content alignment within a given column."
         }
       ],
       "slots": [
@@ -1467,6 +3211,69 @@
         {
           "description": "slot for column actions",
           "name": "actions"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "width",
+          "type": {
+            "text": "string"
+          },
+          "description": "Columns can individually have set widths using the `width` property or attribute and a valid CSS value type.\nIf the total width of all columns is less than the grid width then the last column will fill the remaining space.\nBy default columns are evenly devided unless width is explicitly provided. Content within a cell of a given\ncolumn will wrap content to fit the width of the column.",
+          "fieldName": "width"
+        },
+        {
+          "name": "position",
+          "type": {
+            "text": "'fixed' | 'sticky' | ''"
+          },
+          "description": "The `position` property or attribute can be set to `fixed` or `sticky` to make the column fixed or sticky.\nFixed columns will not scroll horizontally with the grid. Sticky columns will scroll horizontally with the grid\nuntil the column reaches the edge of the grid.",
+          "fieldName": "position"
+        },
+        {
+          "name": "column-align",
+          "type": {
+            "text": "'start' | 'center' | 'end'"
+          },
+          "description": "Control the content alignment within a given column.",
+          "fieldName": "columnAlign"
+        }
+      ],
+      "events": [
+        {
+          "name": "mlv-grid-column-resize",
+          "type": {
+            "text": "CustomEvent"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--font-weight"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--min-width"
+        },
+        {
+          "name": "--justify-content"
+        },
+        {
+          "name": "--border-left"
+        },
+        {
+          "name": "--border-right"
         }
       ],
       "projectTotal": 4,
@@ -1496,6 +3303,20 @@
           "name": ""
         }
       ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--height"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 3,
       "coverageTotal": 100,
@@ -1521,6 +3342,17 @@
         {
           "description": "default slot for content",
           "name": ""
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-bottom"
+        },
+        {
+          "name": "--padding"
         }
       ],
       "projectTotal": 4,
@@ -1550,6 +3382,14 @@
           "name": ""
         }
       ],
+      "cssProperties": [
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 2,
       "coverageTotal": 100,
@@ -1570,11 +3410,34 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-grid-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0",
-      "properties": [],
+      "properties": [
+        {
+          "name": "selected",
+          "description": "The `selected` property or attribute can be set to `true` to indicate that the row is in a selected state."
+        }
+      ],
       "slots": [
         {
           "description": "default slot for content",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "selected",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "The `selected` property or attribute can be set to `true` to indicate that the row is in a selected state.",
+          "fieldName": "selected"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-bottom"
         }
       ],
       "projectTotal": 4,
@@ -1601,7 +3464,7 @@
       "properties": [
         {
           "name": "status",
-          "description": "Visual treatment to represent a ongoing task, support or trend status."
+          "description": "Visual treatment to represent current support status."
         },
         {
           "name": "size",
@@ -1613,7 +3476,52 @@
         },
         {
           "name": "name",
-          "description": "The name of the icon SVG sprite"
+          "description": "The name of the icon SVG sprite to render."
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'danger' | 'success' | 'accent' | default"
+          },
+          "description": "Visual treatment to represent current support status.",
+          "fieldName": "status"
+        },
+        {
+          "name": "size",
+          "type": {
+            "text": "'sm' | 'md' | 'lg' | 'xs' | 'xl' | default"
+          },
+          "description": "Controls the bounding box size of the icon given a t-shirt style value.",
+          "fieldName": "size"
+        },
+        {
+          "name": "direction",
+          "type": {
+            "text": "'up' | 'down' | 'left' | 'right' | default"
+          },
+          "description": "Sets the direction of the icon. Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)",
+          "fieldName": "direction"
+        },
+        {
+          "name": "name",
+          "type": {
+            "text": "'start' | 'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out'"
+          },
+          "description": "The name of the icon SVG sprite to render.",
+          "fieldName": "name"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--height"
         }
       ],
       "projectTotal": 16,
@@ -1640,6 +3548,10 @@
       "axe": "color-contrast",
       "properties": [
         {
+          "name": "iconName",
+          "description": "Sets the icon name, which determines which icon to display."
+        },
+        {
           "name": "direction",
           "description": "Sets the direction of the icon.\nOnly supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)"
         },
@@ -1649,7 +3561,7 @@
         },
         {
           "name": "interaction",
-          "description": "Visual treatment to represent user interaction appearance"
+          "description": "Visual treatment to represent user interaction appearance."
         },
         {
           "name": "pressed",
@@ -1694,6 +3606,168 @@
           "name": "icon"
         }
       ],
+      "attributes": [
+        {
+          "name": "icon-name",
+          "type": {
+            "text": "'start' | 'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out'"
+          },
+          "description": "Sets the icon name, which determines which icon to display.",
+          "fieldName": "iconName"
+        },
+        {
+          "name": "direction",
+          "type": {
+            "text": "'up' | 'down' | 'left' | 'right'"
+          },
+          "description": "Sets the direction of the icon.\nOnly supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)",
+          "fieldName": "direction"
+        },
+        {
+          "name": "size",
+          "type": {
+            "text": "'sm' | 'md' | 'lg' | default"
+          },
+          "description": "Sets size of the icon button.",
+          "fieldName": "size",
+          "inheritedFrom": {
+            "name": "Button",
+            "module": "/src/button/button.js"
+          }
+        },
+        {
+          "name": "interaction",
+          "type": {
+            "text": "'emphasize' | 'destructive' | 'flat' | 'flat-emphasize' | 'flat-destructive' | 'inverse' | 'ghost' | 'ghost-emphasize' | 'ghost-destructive'"
+          },
+          "description": "Visual treatment to represent user interaction appearance.",
+          "fieldName": "interaction",
+          "inheritedFrom": {
+            "name": "Button",
+            "module": "/src/button/button.js"
+          }
+        },
+        {
+          "name": "pressed",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
+          "fieldName": "pressed",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "expanded",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
+          "fieldName": "expanded",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "readonly",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
+          "fieldName": "readonly",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "text": "string"
+          },
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
+          "fieldName": "name",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "value",
+          "type": {
+            "text": "string"
+          },
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value",
+          "fieldName": "value",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "type",
+          "type": {
+            "text": "'button' | 'submit'"
+          },
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
+          "fieldName": "type",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "disabled",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled",
+          "fieldName": "disabled",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "selected",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
+          "fieldName": "selected",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--line-height"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--font-size"
+        }
+      ],
       "projectTotal": 13,
       "instanceTotal": 39,
       "coverageTotal": 100,
@@ -1718,7 +3792,7 @@
       "properties": [
         {
           "name": "container",
-          "description": "flat (embed into parent container)"
+          "description": "Sets the container type style. Flat is used for inline inputs that are often embeded in other containers or toolbars."
         },
         {
           "name": "status",
@@ -1726,7 +3800,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -1737,8 +3811,116 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | default"
+          },
+          "description": "Sets the container type style. Flat is used for inline inputs that are often embeded in other containers or toolbars.",
+          "fieldName": "container"
+        },
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--border"
+        },
+        {
+          "name": "--cursor"
         }
       ],
       "projectTotal": 10,
@@ -1765,6 +3947,28 @@
         {
           "name": "layout",
           "description": "Set each slotted control + label + control message layout"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "type",
+          "type": {
+            "text": "'filter' | default"
+          },
+          "deprecated": "(0.19.0) use `mlv-progressive-filter-chip` instead",
+          "fieldName": "type"
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set each slotted control + label + control message layout",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "ControlGroup",
+            "module": "/src/forms/control-group/control-group.js"
+          }
         }
       ],
       "projectTotal": 0,
@@ -1801,6 +4005,25 @@
         {
           "description": "default slot for json",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "value",
+          "type": {
+            "text": "object"
+          },
+          "default": "{}",
+          "description": "JSON value to be displayed",
+          "fieldName": "value"
+        },
+        {
+          "name": "expanded",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "expand all nodes",
+          "fieldName": "expanded"
         }
       ],
       "projectTotal": 0,
@@ -1840,6 +4063,50 @@
           "name": ""
         }
       ],
+      "attributes": [
+        {
+          "name": "color",
+          "type": {
+            "text": "'red-cardinal' | 'gray-slate' | 'gray-denim' | 'blue-indigo' | 'blue-cobalt' | 'blue-sky' | 'teal-cyan' | 'green-mint' | 'teal-seafoam' | 'green-grass' | 'yellow-amber' | 'orange-pumpkin' | 'red-tomato' | 'pink-magenta' | 'purple-plum' | 'purple-violet' | 'purple-lavender' | 'pink-rose' | 'green-jade' | 'lime-pear' | 'yellow-nova' | 'brand-green'"
+          },
+          "description": "Visual treatment to represent unique color of an application",
+          "fieldName": "color"
+        },
+        {
+          "name": "size",
+          "type": {
+            "text": "'sm' | 'md' | 'lg' | default"
+          },
+          "description": "Determines size of logo",
+          "fieldName": "size"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--font-weight"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 8,
       "coverageTotal": 100,
@@ -1868,6 +4135,23 @@
           "name": ""
         }
       ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--min-width"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 9,
       "coverageTotal": 100,
@@ -1891,7 +4175,7 @@
       "properties": [
         {
           "name": "selected",
-          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+          "description": "Sets the selected state of the menu item."
         },
         {
           "name": "pressed",
@@ -1928,6 +4212,137 @@
           "name": ""
         }
       ],
+      "attributes": [
+        {
+          "name": "selected",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Sets the selected state of the menu item.",
+          "fieldName": "selected",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "pressed",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
+          "fieldName": "pressed",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "expanded",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
+          "fieldName": "expanded",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "readonly",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
+          "fieldName": "readonly",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "text": "string"
+          },
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
+          "fieldName": "name",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "value",
+          "type": {
+            "text": "string"
+          },
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value",
+          "fieldName": "value",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "type",
+          "type": {
+            "text": "'button' | 'submit'"
+          },
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
+          "fieldName": "type",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "disabled",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled",
+          "fieldName": "disabled",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--min-height"
+        },
+        {
+          "name": "--line-height"
+        },
+        {
+          "name": "--cursor"
+        }
+      ],
       "projectTotal": 3,
       "instanceTotal": 8,
       "coverageTotal": 100,
@@ -1956,7 +4371,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -1967,8 +4382,85 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 0,
@@ -2024,12 +4516,129 @@
         {
           "name": "status",
           "description": "Determines the visual status of the notification."
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
         {
           "description": "content slot",
           "name": "default"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "anchor",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "anchor"
+        },
+        {
+          "name": "trigger",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "trigger"
+        },
+        {
+          "name": "position",
+          "type": {
+            "text": "'center' | 'top' | 'bottom' | 'left' | 'right'"
+          },
+          "description": "Sets the side position of the popover relative to the provided anchor element.",
+          "fieldName": "position"
+        },
+        {
+          "name": "alignment",
+          "type": {
+            "text": "'start' | 'end' | 'center'"
+          },
+          "description": "Sets the alignment of the popover relative to the provided anchor element.",
+          "fieldName": "alignment"
+        },
+        {
+          "name": "closable",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if a close button should render within notification.",
+          "fieldName": "closable"
+        },
+        {
+          "name": "close-timeout",
+          "type": {
+            "text": "number"
+          },
+          "default": "0",
+          "description": "A delayed `close` event will occur determined from the provided millisecond value.",
+          "fieldName": "closeTimeout"
+        },
+        {
+          "name": "hidden",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if popover should be rendered and positioned.",
+          "fieldName": "hidden"
+        },
+        {
+          "name": "status",
+          "type": {
+            "text": "'accent' | 'warning' | 'success' | 'danger'"
+          },
+          "description": "Determines the visual status of the notification.",
+          "fieldName": "status"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "description": "Dispatched when the notification is opened.",
+          "name": "open"
+        },
+        {
+          "description": "Dispatched when the notification is closed.",
+          "name": "close"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--status-color"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--box-shadow"
+        },
+        {
+          "name": "--min-width"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-offset"
         }
       ],
       "projectTotal": 5,
@@ -2053,7 +4662,43 @@
       "since": "0.6.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-notification-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0",
-      "properties": [],
+      "properties": [
+        {
+          "name": "anchor",
+          "description": "Sets the anchor element to which the popover is attached."
+        },
+        {
+          "name": "position",
+          "description": "Sets the position of the popover relative to the anchor element."
+        },
+        {
+          "name": "alignment",
+          "description": "Sets the alignment of the popover relative to the anchor element."
+        }
+      ],
+      "attributes": [
+        {
+          "name": "anchor",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "Sets the anchor element to which the popover is attached.",
+          "fieldName": "anchor"
+        },
+        {
+          "name": "position",
+          "description": "Sets the position of the popover relative to the anchor element.",
+          "fieldName": "position"
+        },
+        {
+          "name": "alignment",
+          "type": {
+            "text": "'start' | 'end' | 'center'"
+          },
+          "description": "Sets the alignment of the popover relative to the anchor element.",
+          "fieldName": "alignment"
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 3,
       "coverageTotal": 100,
@@ -2065,15 +4710,28 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": true,
+      "stable": false,
       "vqa": true,
       "responsive": true,
       "themes": true,
+      "aria": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role",
       "package": true,
-      "description": "Page Loader is a full-screen version of the mlv-progress-ring component, for use when the page should remain unusable as the loader is displayed.",
+      "description": "Page Loader is a full-screen version of the `mlv-progress-ring` component, for use when the page should remain unusable as the loader is displayed.",
       "since": "0.19.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-page-loader-documentation--docs",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=8866%3A125698&mode=dev",
       "properties": [],
+      "slots": [
+        {
+          "description": "default slot for content",
+          "name": ""
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--gap"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
@@ -2095,11 +4753,146 @@
       "since": "0.11.0",
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-pagination-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0",
-      "properties": [],
+      "properties": [
+        {
+          "name": "value",
+          "description": "The current page number."
+        },
+        {
+          "name": "step",
+          "description": "The number of items per page."
+        },
+        {
+          "name": "items",
+          "description": "The total number of items."
+        },
+        {
+          "name": "skippable",
+          "description": "Whether or not the pagination is skippable to start/end."
+        },
+        {
+          "name": "disableStep",
+          "description": "Whether or not the step selector is disabled."
+        },
+        {
+          "name": "disabled",
+          "description": "Whether or not the pagination is disabled."
+        },
+        {
+          "name": "name",
+          "description": "The name for the pagination, required to associate it with a form."
+        },
+        {
+          "name": "container",
+          "description": "Determines the container styles of component. Flat is used for nesting within other containers. Inline is used to inline within other inline content."
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        }
+      ],
       "slots": [
         {
           "description": "default slot for content",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "value",
+          "type": {
+            "text": "number"
+          },
+          "default": "1",
+          "description": "The current page number.",
+          "fieldName": "value"
+        },
+        {
+          "name": "step",
+          "type": {
+            "text": "number"
+          },
+          "default": "10",
+          "description": "The number of items per page.",
+          "fieldName": "step"
+        },
+        {
+          "name": "items",
+          "type": {
+            "text": "number"
+          },
+          "description": "The total number of items.",
+          "fieldName": "items"
+        },
+        {
+          "name": "skippable",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Whether or not the pagination is skippable to start/end.",
+          "fieldName": "skippable"
+        },
+        {
+          "name": "disable-step",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Whether or not the step selector is disabled.",
+          "fieldName": "disableStep"
+        },
+        {
+          "name": "disabled",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Whether or not the pagination is disabled.",
+          "fieldName": "disabled"
+        },
+        {
+          "name": "name",
+          "type": {
+            "text": "string"
+          },
+          "description": "The name for the pagination, required to associate it with a form.",
+          "fieldName": "name"
+        },
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | 'inline' | default"
+          },
+          "description": "Determines the container styles of component. Flat is used for nesting within other containers. Inline is used to inline within other inline content.",
+          "fieldName": "container"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "name": "step-change",
+          "type": {
+            "text": "CustomEvent"
+          }
+        },
+        {
+          "name": "input",
+          "type": {
+            "text": "InputEvent"
+          }
+        },
+        {
+          "name": "change",
+          "type": {
+            "text": "Event"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
         }
       ],
       "projectTotal": 2,
@@ -2139,6 +4932,10 @@
         {
           "name": "side",
           "description": "Sets the proper collapse icon and collapse animation, based on what side of the page the panel will be used."
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
@@ -2157,6 +4954,70 @@
         {
           "description": "footer element (Use `<mlv-panel-footer>` or custom content)",
           "name": "footer"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "expanded",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether or not the panel is fully expanded, displaying its contents, or not.",
+          "fieldName": "expanded"
+        },
+        {
+          "name": "closable",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether or not the panel will collapse down to an expand icon, or fully hide.",
+          "fieldName": "closable"
+        },
+        {
+          "name": "behavior-expand",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether or not the panel should handle auto-closing behavior vs. defaults to off.",
+          "fieldName": "behaviorExpand"
+        },
+        {
+          "name": "side",
+          "type": {
+            "text": "'left' | 'right'"
+          },
+          "default": "'left'",
+          "description": "Sets the proper collapse icon and collapse animation, based on what side of the page the panel will be used.",
+          "fieldName": "side"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "description": "Dispatched when the panel is opened.",
+          "name": "open"
+        },
+        {
+          "description": "Dispatched when the panel is closed.",
+          "name": "close"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--box-shadow"
         }
       ],
       "projectTotal": 1,
@@ -2186,6 +5047,11 @@
           "name": ""
         }
       ],
+      "cssProperties": [
+        {
+          "name": "--padding"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 2,
       "coverageTotal": 91.335,
@@ -2211,6 +5077,17 @@
         {
           "description": "This is a default/unnamed slot for panel footer content",
           "name": ""
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--border-top"
+        },
+        {
+          "name": "--gap"
         }
       ],
       "projectTotal": 0,
@@ -2248,6 +5125,14 @@
           "name": "action-icon"
         }
       ],
+      "cssProperties": [
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--border-bottom"
+        }
+      ],
       "projectTotal": 1,
       "instanceTotal": 2,
       "coverageTotal": 91.335,
@@ -2276,7 +5161,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -2287,8 +5172,85 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 1,
@@ -2320,6 +5282,26 @@
         {
           "name": "max",
           "description": "The `max` property sets the highest value that `value` will be scaled to."
+        }
+      ],
+      "attributes": [
+        {
+          "name": "value",
+          "type": {
+            "text": "number | default"
+          },
+          "default": "0",
+          "description": "The current `value` of the progress indicator, set to the native HTML progress element.",
+          "fieldName": "value"
+        },
+        {
+          "name": "max",
+          "type": {
+            "text": "number"
+          },
+          "default": "100",
+          "description": "The `max` property sets the highest value that `value` will be scaled to.",
+          "fieldName": "max"
         }
       ],
       "projectTotal": 1,
@@ -2359,11 +5341,76 @@
         {
           "name": "size",
           "description": "T-shirt `size` of the progress indicator, used to scale the ring."
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
         {
           "name": "status-icon"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "value",
+          "type": {
+            "text": "number | default"
+          },
+          "description": "The current `value` of the progress ring. When not set, an indeterminate animation will show.",
+          "fieldName": "value"
+        },
+        {
+          "name": "max",
+          "type": {
+            "text": "number"
+          },
+          "default": "100",
+          "description": "The `max` value of the progress ring that the `value` is proportionaly scaled to.",
+          "fieldName": "max"
+        },
+        {
+          "name": "status",
+          "type": {
+            "text": "'accent' | 'warning' | 'success' | 'danger' | 'neutral' | default"
+          },
+          "default": "'neutral'",
+          "description": "There are four visual treatments that represent the `status` of varius tasks. When `status` is set to `warning`, `success` or `danger`, appropriate icons are embedded.",
+          "fieldName": "status"
+        },
+        {
+          "name": "size",
+          "type": {
+            "text": "'sm' | 'md' | 'lg' | 'xxs' | 'xs' | 'xl' | default"
+          },
+          "description": "T-shirt `size` of the progress indicator, used to scale the ring.",
+          "fieldName": "size"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background-color"
+        },
+        {
+          "name": "--ring-color"
+        },
+        {
+          "name": "--ring-background-opacity"
+        },
+        {
+          "name": "--ring-width"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--height"
         }
       ],
       "projectTotal": 0,
@@ -2391,12 +5438,42 @@
         {
           "name": "closable",
           "description": "Determines if a close button should render within filter chip"
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
         {
           "description": "default slot for content",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "closable",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Determines if a close button should render within filter chip",
+          "fieldName": "closable"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "description": "Dispatched when the filter chip is closed.",
+          "name": "close"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
         }
       ],
       "projectTotal": 1,
@@ -2427,7 +5504,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -2438,8 +5515,96 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--cursor"
         }
       ],
       "projectTotal": 4,
@@ -2466,6 +5631,20 @@
         {
           "name": "layout",
           "description": "Set each slotted control + label + control message layout"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set each slotted control + label + control message layout",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "ControlGroup",
+            "module": "/src/forms/control-group/control-group.js"
+          }
         }
       ],
       "projectTotal": 4,
@@ -2496,7 +5675,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -2507,8 +5686,85 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 2,
@@ -2535,7 +5791,7 @@
       "properties": [
         {
           "name": "container",
-          "description": "flat (embed into parent container)"
+          "description": "Flat container option is used when embeding component within another containing element"
         },
         {
           "name": "status",
@@ -2543,7 +5799,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -2554,8 +5810,93 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | default"
+          },
+          "description": "Flat container option is used when embeding component within another containing element",
+          "fieldName": "container"
+        },
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 6,
@@ -2581,12 +5922,20 @@
       "description": "A select is a control that enables users to select an option from a list of options.",
       "properties": [
         {
+          "name": "container",
+          "description": "Flat container option is used when embeding component within another containing element"
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "status",
           "description": "Set current visaul state for control. This overrides any validation states active."
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -2599,6 +5948,107 @@
         {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | 'inline' | default"
+          },
+          "description": "Flat container option is used when embeding component within another containing element",
+          "fieldName": "container"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--border"
         }
       ],
       "projectTotal": 5,
@@ -2623,6 +6073,14 @@
       "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-sort-button-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=127-8456&t=TYtFvncSeBAKHOMe-0",
       "properties": [
+        {
+          "name": "sort",
+          "description": "The current sort value, can be ascending, descending, or none."
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
         {
           "name": "pressed",
           "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed"
@@ -2662,6 +6120,136 @@
           "name": ""
         }
       ],
+      "attributes": [
+        {
+          "name": "sort",
+          "type": {
+            "text": "'ascending' | 'descending' | 'none'"
+          },
+          "default": "'none'",
+          "description": "The current sort value, can be ascending, descending, or none.",
+          "fieldName": "sort"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        },
+        {
+          "name": "pressed",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
+          "fieldName": "pressed",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "expanded",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
+          "fieldName": "expanded",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "readonly",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
+          "fieldName": "readonly",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "text": "string"
+          },
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
+          "fieldName": "name",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "value",
+          "type": {
+            "text": "string"
+          },
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value",
+          "fieldName": "value",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "type",
+          "type": {
+            "text": "'button' | 'submit'"
+          },
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
+          "fieldName": "type",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "disabled",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled",
+          "fieldName": "disabled",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "selected",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
+          "fieldName": "selected",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "sort",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "description": "Dispatched when the sort button is clicked, returns the current sort value and the next sort value."
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--height"
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 3,
       "coverageTotal": 100,
@@ -2690,7 +6278,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -2701,8 +6289,114 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--cursor"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--anchor-width"
+        },
+        {
+          "name": "--anchor-height"
+        },
+        {
+          "name": "--anchor-border-radius"
+        },
+        {
+          "name": "--anchor-background"
         }
       ],
       "projectTotal": 3,
@@ -2744,6 +6438,40 @@
         {
           "description": "default slot for mlv-tab-item",
           "name": ""
+        }
+      ],
+      "attributes": [
+        {
+          "name": "vertical",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether or not the tabs should display in a vertical layout vs. defaulting to horizontal.",
+          "fieldName": "vertical"
+        },
+        {
+          "name": "borderless",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether or not the tabs should display a border on selected items vs. defaults to show border.",
+          "fieldName": "borderless"
+        },
+        {
+          "name": "behavior-select",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines whether or not the tabs should handle selection behavior vs. defaults to off.",
+          "fieldName": "behaviorSelect"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--gap"
         }
       ],
       "projectTotal": 2,
@@ -2806,6 +6534,144 @@
           "name": ""
         }
       ],
+      "attributes": [
+        {
+          "name": "selected",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Determines which tab item is selected, defaults to false.",
+          "fieldName": "selected",
+          "default": "false",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "pressed",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
+          "fieldName": "pressed",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "expanded",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
+          "fieldName": "expanded",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "readonly",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
+          "fieldName": "readonly",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "text": "string"
+          },
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
+          "fieldName": "name",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "value",
+          "type": {
+            "text": "string"
+          },
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value",
+          "fieldName": "value",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "type",
+          "type": {
+            "text": "'button' | 'submit'"
+          },
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
+          "fieldName": "type",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "disabled",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled",
+          "fieldName": "disabled",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--border-width"
+        },
+        {
+          "name": "--border-height"
+        },
+        {
+          "name": "--border-top"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--font-weight"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--cursor"
+        },
+        {
+          "name": "--text-transform"
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 3,
       "coverageTotal": 94.4425,
@@ -2835,6 +6701,10 @@
         {
           "name": "color",
           "description": "Determines the color of the tag. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=29-10&mode=design&t=uFeSKovl7yrHakis-0)"
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         },
         {
           "name": "pressed",
@@ -2875,6 +6745,150 @@
           "name": ""
         }
       ],
+      "attributes": [
+        {
+          "name": "closable",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if tag is closable, if true, a close icon will be rendered. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=3622-86613&mode=design&t=qIZGochM1aUsCdOP-0)",
+          "fieldName": "closable"
+        },
+        {
+          "name": "color",
+          "type": {
+            "text": "'red-cardinal' | 'gray-slate' | 'gray-denim' | 'blue-indigo' | 'blue-cobalt' | 'blue-sky' | 'teal-cyan' | 'green-mint' | 'teal-seafoam' | 'green-grass' | 'yellow-amber' | 'orange-pumpkin' | 'red-tomato' | 'pink-magenta' | 'purple-plum' | 'purple-violet' | 'purple-lavender' | 'pink-rose' | 'green-jade' | 'lime-pear' | 'yellow-nova' | 'brand-green'"
+          },
+          "description": "Determines the color of the tag. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=29-10&mode=design&t=uFeSKovl7yrHakis-0)",
+          "fieldName": "color"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        },
+        {
+          "name": "pressed",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
+          "fieldName": "pressed",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "expanded",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
+          "fieldName": "expanded",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "readonly",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
+          "fieldName": "readonly",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "name",
+          "type": {
+            "text": "string"
+          },
+          "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
+          "fieldName": "name",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "value",
+          "type": {
+            "text": "string"
+          },
+          "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value",
+          "fieldName": "value",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "type",
+          "type": {
+            "text": "'button' | 'submit'"
+          },
+          "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
+          "fieldName": "type",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "disabled",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled",
+          "fieldName": "disabled",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        },
+        {
+          "name": "selected",
+          "type": {
+            "text": "boolean"
+          },
+          "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
+          "fieldName": "selected",
+          "inheritedFrom": {
+            "name": "MlvBaseButton",
+            "module": "/src/internal/base/button.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--font-weight"
+        }
+      ],
       "projectTotal": 2,
       "instanceTotal": 5,
       "coverageTotal": 100,
@@ -2903,7 +6917,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -2914,8 +6928,114 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--height"
+        },
+        {
+          "name": "--width"
+        },
+        {
+          "name": "--min-height"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--cursor"
+        },
+        {
+          "name": "--border"
         }
       ],
       "projectTotal": 6,
@@ -2946,7 +7066,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -2957,8 +7077,85 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 2,
@@ -3014,12 +7211,130 @@
         {
           "name": "status",
           "description": "visual treatment to represent a ongoing task or support status"
+        },
+        {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
         }
       ],
       "slots": [
         {
           "description": "content slot",
           "name": "default"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "anchor",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "anchor"
+        },
+        {
+          "name": "trigger",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "trigger"
+        },
+        {
+          "name": "position",
+          "type": {
+            "text": "'center' | 'top' | 'bottom' | 'left' | 'right'"
+          },
+          "default": "'top'",
+          "description": "Sets the side position of the popover relative to the provided anchor element.",
+          "fieldName": "position"
+        },
+        {
+          "name": "alignment",
+          "type": {
+            "text": "'start' | 'end' | 'center'"
+          },
+          "description": "Sets the alignment of the popover relative to the provided anchor element.",
+          "fieldName": "alignment"
+        },
+        {
+          "name": "closable",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if a close button should render within toast.",
+          "fieldName": "closable"
+        },
+        {
+          "name": "close-timeout",
+          "type": {
+            "text": "number"
+          },
+          "default": "0",
+          "description": "A delayed `close` event will occur determined from the provided millisecond value.",
+          "fieldName": "closeTimeout"
+        },
+        {
+          "name": "hidden",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if popover should be rendered and positioned.",
+          "fieldName": "hidden"
+        },
+        {
+          "name": "status",
+          "type": {
+            "text": "'accent' | 'warning' | 'success' | 'danger' | 'muted'"
+          },
+          "description": "visual treatment to represent a ongoing task or support status",
+          "fieldName": "status"
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n"
+        }
+      ],
+      "events": [
+        {
+          "description": "Dispatched when the toast is opened.",
+          "name": "open"
+        },
+        {
+          "description": "Dispatched when the toast is closed.",
+          "name": "close"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--box-shadow"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-arrow-offset"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-offset"
         }
       ],
       "projectTotal": 3,
@@ -3075,6 +7390,71 @@
           "name": "suffix"
         }
       ],
+      "attributes": [
+        {
+          "name": "container",
+          "type": {
+            "text": "'flat' | 'inset' | default"
+          },
+          "description": "Determines the container visual style.",
+          "fieldName": "container"
+        },
+        {
+          "name": "content",
+          "type": {
+            "text": "'scroll' | 'wrap' | default"
+          },
+          "default": "'scroll'",
+          "description": "Determines the primary content overflow behavior.",
+          "fieldName": "content"
+        },
+        {
+          "name": "orientation",
+          "type": {
+            "text": "'horizontal' | 'vertical' | default"
+          },
+          "default": "'horizontal'",
+          "description": "Determines the orientation direction of the toolbar. Vertical toolbars are limited to icon buttons only.",
+          "fieldName": "orientation"
+        },
+        {
+          "name": "status",
+          "type": {
+            "text": "'accent'"
+          },
+          "description": "Visual treatment to represent accent color for interactive selections",
+          "fieldName": "status"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--min-height"
+        },
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--gap"
+        },
+        {
+          "name": "--border-bottom"
+        },
+        {
+          "name": "--box-shadow"
+        },
+        {
+          "name": "--width"
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 98.675,
@@ -3128,6 +7508,100 @@
           "name": "default"
         }
       ],
+      "attributes": [
+        {
+          "name": "anchor",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The anchor provides the element that the popover should position relative to.\nAnchor can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "anchor"
+        },
+        {
+          "name": "trigger",
+          "type": {
+            "text": "string | HTMLElement"
+          },
+          "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference.",
+          "fieldName": "trigger"
+        },
+        {
+          "name": "position",
+          "type": {
+            "text": "'center' | 'top' | 'bottom' | 'left' | 'right'"
+          },
+          "default": "'top'",
+          "description": "Sets the side position of the popover relative to the provided anchor element.",
+          "fieldName": "position"
+        },
+        {
+          "name": "alignment",
+          "type": {
+            "text": "'start' | 'end' | 'center'"
+          },
+          "description": "Sets the alignment of the popover relative to the provided anchor element.",
+          "fieldName": "alignment"
+        },
+        {
+          "name": "status",
+          "type": {
+            "text": "'muted'"
+          },
+          "description": "visual treatment to represent a ongoing task or support status",
+          "fieldName": "status"
+        },
+        {
+          "name": "hidden",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Determines if popover should be rendered and positioned.",
+          "fieldName": "hidden"
+        }
+      ],
+      "events": [
+        {
+          "description": "Dispatched when the tooltip is opened.",
+          "name": "open"
+        },
+        {
+          "description": "Dispatched when the tooltip is closed.",
+          "name": "close"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--border-radius"
+        },
+        {
+          "name": "--background"
+        },
+        {
+          "name": "--color"
+        },
+        {
+          "name": "--padding"
+        },
+        {
+          "name": "--box-shadow"
+        },
+        {
+          "name": "--font-size"
+        },
+        {
+          "name": "--arrow-transform"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-arrow-padding"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-arrow-offset"
+        },
+        {
+          "name": "--mlv-sys-layer-popover-offset"
+        }
+      ],
       "projectTotal": 8,
       "instanceTotal": 16,
       "coverageTotal": 100,
@@ -3156,7 +7630,7 @@
         },
         {
           "name": "layout",
-          "description": "Set current control + label + control message layout"
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space."
         },
         {
           "name": "fitText",
@@ -3167,8 +7641,85 @@
           "description": "Sets the input to match native default content block"
         },
         {
+          "name": "i18n",
+          "description": "Enables internal string values to be updated for internationalization."
+        },
+        {
           "name": "reset",
           "description": "resets control value to initial attribute value and clears any active validation rules"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "status",
+          "type": {
+            "text": "'warning' | 'error' | 'success' | 'disabled'"
+          },
+          "description": "Set current visaul state for control. This overrides any validation states active.",
+          "fieldName": "status",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "layout",
+          "type": {
+            "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
+          },
+          "description": "Set current control + label + control message layout. Layouts will collapse based on available container space.",
+          "fieldName": "layout",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-text",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select)",
+          "fieldName": "fitText",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "fit-content",
+          "type": {
+            "text": "boolean"
+          },
+          "default": "false",
+          "description": "Sets the input to match native default content block",
+          "fieldName": "fitContent",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        },
+        {
+          "name": "mlv-i18n",
+          "description": "Enables internal string values to be updated for internationalization.",
+          "fieldName": "i18n",
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "reset",
+          "type": {
+            "text": "CustomEvent"
+          },
+          "inheritedFrom": {
+            "name": "Control",
+            "module": "/src/forms/control/control.js"
+          }
         }
       ],
       "projectTotal": 0,
@@ -5729,8 +10280,8 @@
       {
         "file": "elements/src/pagination/pagination.ts",
         "lines": {
-          "total": 55,
-          "covered": 55,
+          "total": 54,
+          "covered": 54,
           "skipped": 0,
           "pct": 100
         },
@@ -5741,8 +10292,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 90,
-          "covered": 90,
+          "total": 88,
+          "covered": 88,
           "skipped": 0,
           "pct": 100
         },
@@ -5783,8 +10334,8 @@
       {
         "file": "elements/src/page-loader/page-loader.ts",
         "lines": {
-          "total": 7,
-          "covered": 7,
+          "total": 5,
+          "covered": 5,
           "skipped": 0,
           "pct": 100
         },
@@ -5795,8 +10346,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 10,
-          "covered": 10,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -8592,16 +13143,16 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1955,
-        "covered": 1908,
+        "total": 1952,
+        "covered": 1905,
         "skipped": 0,
         "pct": 97.59
       },
       "statements": {
-        "total": 2598,
-        "covered": 2531,
+        "total": 2594,
+        "covered": 2527,
         "skipped": 0,
-        "pct": 97.42
+        "pct": 97.41
       },
       "functions": {
         "total": 764,

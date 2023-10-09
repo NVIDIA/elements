@@ -188,6 +188,14 @@
   &[mlv-text~='no-underline'] {
     text-decoration: none !important;
   }
+
+  &[mlv-text~='lg'] {
+    font-size: var(--mlv-ref-font-size-300) !important;
+  }
+
+  &[mlv-text~='sm'] {
+    font-size: var(--mlv-ref-font-size-100) !important;
+  }
 }
 
 [mlv-text~='code'] {

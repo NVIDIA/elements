@@ -1,6 +1,15 @@
 :host {
+  --gap: var(--mlv-ref-space-sm);
   display: contents;
 }
+
+[internal-host] {
+  gap: var(--gap);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 dialog {
   outline: 0;
 }

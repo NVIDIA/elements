@@ -47,6 +47,11 @@
     padding: var(--mlv-ref-size-300) !important;
   }
 
+  .sbdocs.sbdocs-preview,
+  .docblock-source {
+    margin-block: 0 !important;
+  }
+
   .sb-show-main.sb-main-padded:has([no-padding]) {
     padding: 0 !important;
   }
@@ -106,11 +111,18 @@
 
   .sbdocs-preview {
     margin-bottom: 64px !important;
+
+  }
+
+  .sbdocs-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
   }
 
   .sbdocs-title,
-  .sbdocs h1:not([mlv-text]):not([slot]),
-  .sbdocs h2:not([mlv-text]):not([slot]),
+  /* .sbdocs h1:not([mlv-text]):not([slot]), */
+  /* .sbdocs h2:not([mlv-text]):not([slot]), */
   .sbdocs h3:not([mlv-text]):not([slot]),
   .sbdocs h4:not([mlv-text]):not([slot]),
   .sbdocs h5:not([mlv-text]):not([slot]),
@@ -122,6 +134,11 @@
     font-family: var(--mlv-ref-font-family) !important;
     font-weight: var(--mlv-ref-font-weight-regular) !important;
     color: var(--mlv-sys-layer-canvas-color) !important;
+  }
+
+  .sbdocs h2[mlv-text]:not([slot]) {
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   .sbdocs a {
@@ -164,7 +181,7 @@
     font-weight: var(--mlv-ref-font-weight-regular) !important;
   }
 
-  h1.css-wzniqs,
+  /* h1.css-wzniqs, */
   h2.css-wzniqs,
   h3.css-wzniqs {
     display: flex;
@@ -174,10 +191,9 @@
     align-items: center;
   }
 
-
-
-  h1.css-wzniqs {
-    margin-bottom: 16px !important;
+  h2.css-wzniqs {
+    font-weight: var(--mlv-ref-font-weight-regular) !important;
+    font-size: var(--mlv-ref-font-size-600) !important;
   }
 
   .getting-started-logo {
@@ -204,7 +220,7 @@
 
   h2.css-wzniqs {
     margin-top: 48px !important;
-    border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color) !important;
+    border-bottom: 0 !important;
   }
 
   h3.css-wzniqs > svg,
@@ -445,6 +461,25 @@
   .sbdocs.sbdocs-wrapper:has([no-story-container]) .css-q22hxw {
     max-width: initial !important;
     overflow-x: hidden !important;
+  }
+
+  .dynamic-anchor {
+    & a {
+      opacity: 0;
+      margin-left: -24px;
+      padding-right: 8px;
+      cursor: pointer;
+    }
+
+    mlv-icon {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    &:hover a,
+    &:hover mlv-icon {
+      opacity: 1;
+    }
   }
 </style>
 <div hidden style="display: none !important">

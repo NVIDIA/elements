@@ -6,6 +6,10 @@
   outline: var(--mlv-debug-layout-outline, initial);
   outline-offset: 1px;
 
+  &[hidden] {
+    display: none !important;
+  }
+
   &[mlv-layout~='row'],
   &[mlv-layout~='column'] {
     display: flex;

@@ -9,8 +9,8 @@ import styles from './notification.css?inline';
  * @element mlv-notification
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status.
  * @since 0.6.0
- * @event open
- * @event close
+ * @event open - Dispatched when the notification is opened.
+ * @event close - Dispatched when the notification is closed.
  * @slot default content slot
  * @cssprop --border-radius
  * @cssprop --status-color
@@ -70,6 +70,9 @@ export class Notification extends LitElement {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   protected typePopoverController = new TypePopoverController<Notification>(this);

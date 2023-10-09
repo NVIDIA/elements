@@ -31,7 +31,7 @@ export class Control extends LitElement {
   /** Set current visaul state for control. This overrides any validation states active. */
   @property({ type: String }) status: 'warning' | 'error' | 'success' | 'disabled';
 
-  /** Set current control + label + control message layout */
+  /** Set current control + label + control message layout. Layouts will collapse based on available container space. */
   @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
   /** Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select) */
@@ -42,6 +42,7 @@ export class Control extends LitElement {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
+  /** Enables internal string values to be updated for internationalization. */
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   get #label() {

@@ -26,8 +26,6 @@ import styles from './select.css?inline';
  */
 @i18n<Select>()
 export class Select extends Control {
-  @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
-
   static styles = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
@@ -44,8 +42,12 @@ export class Select extends Control {
     'mlv-tag': Tag
   }
 
+  /** Flat container option is used when embeding component within another containing element */
+  @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
+
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
+  /** Enables internal string values to be updated for internationalization. */
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   get #select() {

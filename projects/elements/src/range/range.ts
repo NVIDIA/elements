@@ -34,8 +34,8 @@ export class Range extends Control {
 
   #setTrackWidth(val?: number) {
     const value = val ?? this.input.valueAsNumber;
-    const min = this.input.min ? parseFloat(this.input.min, 10) : 0;
-    const max = this.input.max ? parseFloat(this.input.max, 10) : 100;
+    const min = this.input.min ? parseFloat(this.input.min) : 0;
+    const max = this.input.max ? parseFloat(this.input.max) : 100;
     this.style.setProperty('--track-width', `${Math.floor(((value - min) / (max - min)) * 100)}%`);
   }
 }

@@ -9,8 +9,8 @@ import styles from './toast.css?inline';
  * @element mlv-toast
  * @description A contextual popup that displays a status. Toasts are [triggered](https://w3c.github.io/aria/#tooltip) by clicking, focusing, or tapping an element and cannot have interactive elements within them.
  * @since 0.6.0
- * @event open
- * @event close
+ * @event open - Dispatched when the toast is opened.
+ * @event close - Dispatched when the toast is closed.
  * @slot default content slot
  * @cssprop --padding
  * @cssprop --background
@@ -26,6 +26,17 @@ import styles from './toast.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */
 export class Toast extends LitElement {
+  static styles = useStyles([popoverBaseStyles, styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-toast',
+    version: 'PACKAGE_VERSION'
+  };
+
+  static elementDefinitions = {
+    'mlv-icon-button': IconButton
+  }
+
   /**
    * The anchor provides the element that the popover should position relative to.
    * Anchor can accept a idref string within the same render root or a HTMLElement DOM reference.
@@ -68,28 +79,20 @@ export class Toast extends LitElement {
    */
   @property({ type: String, reflect: true }) status: SupportStatus | 'muted';
 
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
+  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+
   /** @private */
   readonly popoverType: PopoverType = 'manual';
 
   #typePopoverController = new TypePopoverController<Toast>(this);
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
-
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
-
   /** @private */
   declare _internals: ElementInternals;
-
-  static styles = useStyles([popoverBaseStyles, styles]);
-
-  static readonly metadata = {
-    tag: 'mlv-toast',
-    version: 'PACKAGE_VERSION'
-  };
-
-  static elementDefinitions = {
-    'mlv-icon-button': IconButton
-  }
 
   render() {
     return html`

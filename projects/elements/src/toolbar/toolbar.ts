@@ -31,6 +31,15 @@ import styles from './toolbar.css?inline';
  * @vqa false
  */
 export class Toolbar extends LitElement implements ContainerElement {
+  static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);
+
+  static readonly metadata = {
+    tag: 'mlv-toolbar',
+    version: 'PACKAGE_VERSION'
+  };
+
+  static elementDefinitions = { };
+
   /**
    * Determines the container visual style.
    */
@@ -50,15 +59,6 @@ export class Toolbar extends LitElement implements ContainerElement {
    * Visual treatment to represent accent color for interactive selections
    */
   @property({ type: String, reflect: true }) status: 'accent';
-
-  static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);
-
-  static readonly metadata = {
-    tag: 'mlv-toolbar',
-    version: 'PACKAGE_VERSION'
-  };
-
-  static elementDefinitions = { };
 
   /** @private */
   declare _internals: ElementInternals;

@@ -6,9 +6,9 @@ import font from '@elements/elements/inter.css?inline';
 import brand from '@elements/elements/css/theme.brand.css?inline';
 import { MLV_VERSION } from '@elements/elements';
 import { playground } from './playground-url.js';
+import { H1, H2, H3, P } from './markdown.jsx';
 import '@elements/elements/polyfills';
 import '@elements/elements/button/define.js';
-// import '@webcomponents/scoped-custom-element-registry';
 
 const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
@@ -28,6 +28,12 @@ export const parameters = {
   },
   viewMode: 'story',
   docs: {
+    components: {
+      h1: H1,
+      h2: H2,
+      h3: H3,
+      p: P
+    },
     theme: themes.dark,
     transformSource: (src, context) => {
       const excludes = context.id.includes('foundations-tokens-examples--');

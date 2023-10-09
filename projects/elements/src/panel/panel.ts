@@ -116,8 +116,8 @@ export class PanelHeader extends LitElement {
  * @element mlv-panel
  * @description Panel is inline container for content that is coupled to the content on the page (details, additional actions/options). Alternatively [Drawer](./?path=/docs/elements-drawer-documentation--docs) is out of context of the rest of the page (notifications, navigations, settings).
  * @since 0.10.0
- * @event open
- * @event close
+ * @event open - Dispatched when the panel is opened.
+ * @event close - Dispatched when the panel is closed.
  * @slot - This is a default/unnamed slot for panel content
  * @slot header - header element (Use `<mlv-panel-header>` or custom content)
  * @slot content - content element (Use `<mlv-panel-content>` or custom content)
@@ -133,6 +133,26 @@ export class PanelHeader extends LitElement {
 
 @stateExpanded<Panel>()
 export class Panel extends LitElement {
+  /**
+   * Determines whether or not the panel is fully expanded, displaying its contents, or not.
+   */
+  @property({ type: Boolean, reflect: true }) expanded = false;
+
+  /**
+   * Determines whether or not the panel will collapse down to an expand icon, or fully hide.
+  */
+  @property({ type: Boolean }) closable = false;
+
+  /**
+   * Determines whether or not the panel should handle auto-closing behavior vs. defaults to off.
+   */
+  @property({ type: Boolean, attribute: 'behavior-expand'}) behaviorExpand = false;
+
+  /**
+   * Sets the proper collapse icon and collapse animation, based on what side of the page the panel will be used.
+  */
+  @property({ type: String }) side: 'left' | 'right' = 'left';
+
   static styles = useStyles([panelStyleSheet]);
 
   static readonly metadata = {
@@ -150,23 +170,10 @@ export class Panel extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
   #typeExpandableController = new TypeExpandableController(this);
 
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
-  /**
-   * Determines whether or not the panel is fully expanded, displaying its contents, or not.
-   */
-  @property({ type: Boolean, reflect: true }) expanded = false;
-  /**
-   * Determines whether or not the panel will collapse down to an expand icon, or fully hide.
-  */
-  @property({ type: Boolean }) closable = false;
-  /**
-   * Determines whether or not the panel should handle auto-closing behavior vs. defaults to off.
-   */
-  @property({ type: Boolean, attribute: 'behavior-expand'}) behaviorExpand = false;
-  /**
-   * Sets the proper collapse icon and collapse animation, based on what side of the page the panel will be used.
-  */
-  @property({ type: String }) side: 'left' | 'right' = 'left';
 
   get #direction() {
     if (this.side === 'left') {

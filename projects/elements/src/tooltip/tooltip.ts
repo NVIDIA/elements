@@ -8,8 +8,8 @@ import styles from './tooltip.css?inline';
  * @element mlv-tooltip
  * @description A contextual popup that displays a description for an element. Tooltips are [triggered](https://w3c.github.io/aria/#tooltip) by hovering, focusing, or tapping an element and cannot have interactive elements within them.
  * @since 0.6.0
- * @event open
- * @event close
+ * @event open - Dispatched when the tooltip is opened.
+ * @event close - Dispatched when the tooltip is closed.
  * @slot default content slot
  * @cssprop --border-radius
  * @cssprop --background
@@ -26,6 +26,13 @@ import styles from './tooltip.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */
 export class Tooltip extends LitElement {
+  static styles = useStyles([popoverBaseStyles, styles]);
+
+  static readonly metadata = {
+    tag: 'mlv-tooltip',
+    version: 'PACKAGE_VERSION'
+  };
+
   /**
    * The anchor provides the element that the popover should position relative to.
    * Anchor can accept a idref string within the same render root or a HTMLElement DOM reference.
@@ -59,13 +66,6 @@ export class Tooltip extends LitElement {
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
   @query('.arrow') popoverArrow: HTMLElement;
-
-  static styles = useStyles([popoverBaseStyles, styles]);
-
-  static readonly metadata = {
-    tag: 'mlv-tooltip',
-    version: 'PACKAGE_VERSION'
-  };
 
   /** @private */
   readonly popoverType: PopoverType = 'hint';

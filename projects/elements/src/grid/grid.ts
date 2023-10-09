@@ -30,10 +30,14 @@ import globalStyles from './grid.global.css?inline';
 @stateScroll<Grid>()
 @keyNavigationGrid<Grid>()
 export class Grid extends LitElement implements ContainerElement {
-  /** flat (embed into parent container) or full (full parent container width) */
+  /**
+   * Determines the container styles of component. Flat is used for nesting the grid within other containers. Full can be used for full edge to edge viewport width grids.
+   */
   @property({ type: String, reflect: true }) container?: 'flat' | 'full';
 
-  /** determine style variant stripe rows */
+  /**
+   * Determine style variant stripe rows
+   */
   @property({ type: Boolean, reflect: true }) stripe: boolean;
 
   static styles = useStyles([styles]);

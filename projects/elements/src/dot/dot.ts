@@ -22,11 +22,11 @@ import styles from './dot.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
 export class Dot extends LitElement {
-  /** visual treatment to represent a ongoing task status */
+  /** Defines visual treatment to represent a ongoing task or support status. */
   @property({ type: String, reflect: true }) status: SupportStatus | TaskStatus;
 
-  /** determines size of dot relative to provided text */
-  @property({ type: String, reflect: true }) size: Size; // todo: abstract t-shirt sizes to interface
+  /** Determines size of dot relative to provided text. */
+  @property({ type: String, reflect: true }) size: Size;
 
   static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
 

@@ -8,6 +8,7 @@ import typography from '@elements/elements/css/module.typography.css?inline';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/alert/define.js';
 import '@elements/elements/badge/define.js';
+import '@elements/elements/tag/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/grid/define.js';
 import '@elements/elements/sort-button/define.js';
@@ -15,6 +16,7 @@ import '@elements/elements/tooltip/define.js';
 import '@elements/elements/drawer/define.js';
 import '@elements/elements/search/define.js';
 import '@elements/elements/json-viewer/define.js';
+import '@elements/elements/tabs/define.js';
 import metrics from 'metrics/data.json';
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
@@ -116,32 +118,43 @@ class ElementStatus extends LitElement {
     version: 'demo'
   }
 
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
   render() {
     const metadata = metrics.elements.find(d => d.name === this.tag);
     return html`
-    <div className="status-summary" style="margin: 0 0 80px 0">
-      <h2 id="stability" style="gap: 0">Release Status</h2>
-      <p>All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
-      <h3><mlv-badge .status=${metadata.status === 'pre-release' ? 'warning' : 'pending'}>pre-release <mlv-icon name="warning"></mlv-icon></mlv-badge></h3>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <mlv-alert .status=${metadata.figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></mlv-alert>
-        <mlv-alert .status=${metadata.storybook ? 'finished' : 'pending'}>Storybook Preview</mlv-alert>
-        <mlv-alert .status=${metadata.storybook ? 'finished' : 'pending'}>API Documentation</mlv-alert>
-        <mlv-alert .status=${metadata.themes ? 'finished' : 'pending'}>Theme Support</mlv-alert>
+    <div className="status-summary" mlv-layout="column gap:md align:stretch">
+      <div mlv-layout="column gap:xs align:stretch pad-top:xl">
+        <h2 id="stability" mlv-text="heading xl">Release Status</h2>
+        <mlv-divider></mlv-divider>
       </div>
-      <h3><mlv-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <mlv-icon name="schedule"></mlv-icon></mlv-badge></h3>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <mlv-alert .status=${metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</mlv-alert>
-        <mlv-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/about-api-design-getting-started--docs">API Review</a></mlv-alert>
-        <mlv-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</mlv-alert>
-        <mlv-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></mlv-alert>
+      <p mlv-text="body">All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
+      <div mlv-layout="column gap:sm">
+        <mlv-badge .status=${metadata.status === 'pre-release' ? 'warning' : 'pending'}>pre-release <mlv-icon name="warning"></mlv-icon></mlv-badge>
+        <div mlv-layout="column gap:xs">
+          <mlv-alert .status=${metadata.figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></mlv-alert>
+          <mlv-alert .status=${metadata.storybook ? 'finished' : 'pending'}>Storybook Preview</mlv-alert>
+          <mlv-alert .status=${metadata.storybook ? 'finished' : 'pending'}>API Documentation</mlv-alert>
+          <mlv-alert .status=${metadata.themes ? 'finished' : 'pending'}>Theme Support</mlv-alert>
+        </div>
       </div>
-      <h3><mlv-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <mlv-icon name="checkmark-circle"></mlv-icon></mlv-badge></h3>
-      <div style="display: flex; flex-direction: column; gap: 8px">
-        <mlv-alert .status=${metadata.aria ? 'finished' : 'pending'}>No known outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></mlv-alert>
-        <mlv-alert .status=${metadata.performance ? 'finished' : 'pending'}>No known outstanding performance issues</mlv-alert>
-        <mlv-alert .status=${metadata.responsive ? 'finished' : 'pending'}>Adapts to different screen/container sizes</mlv-alert>
-        <mlv-alert .status=${metadata.stable ? 'finished' : 'pending'}>No breaking API changes for at least 90 days</mlv-alert>
+      <div mlv-layout="column gap:sm">
+        <mlv-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <mlv-icon name="schedule"></mlv-icon></mlv-badge>
+        <div mlv-layout="column gap:xs">
+          <mlv-alert .status=${metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</mlv-alert>
+          <mlv-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/about-api-design-getting-started--docs">API Review</a></mlv-alert>
+          <mlv-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</mlv-alert>
+          <mlv-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></mlv-alert>
+        </div>
+      </div>
+      <div mlv-layout="column gap:sm">
+        <mlv-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <mlv-icon name="checkmark-circle"></mlv-icon></mlv-badge>
+        <div mlv-layout="column gap:xs">
+          <mlv-alert .status=${metadata.aria ? 'finished' : 'pending'}>No known outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></mlv-alert>
+          <mlv-alert .status=${metadata.performance ? 'finished' : 'pending'}>No known outstanding performance issues</mlv-alert>
+          <mlv-alert .status=${metadata.responsive ? 'finished' : 'pending'}>Adapts to different screen/container sizes</mlv-alert>
+          <mlv-alert .status=${metadata.stable ? 'finished' : 'pending'}>No breaking API changes for at least 90 days</mlv-alert>
+        </div>
       </div>
     </div>
     `;
@@ -157,41 +170,142 @@ define(ElementStatus)
 class ElementMetrics extends LitElement {
   @property({ type: String }) tag = '';
 
-  @property({ type: String }) type: 'property' | 'slot';
-
-  @property({ type: String }) value: string;
-
   static metadata = {
     tag: 'element-metrics',
     version: 'demo'
   }
+  
+  static styles = [unsafeCSS(`${typography}${layout}`)];
 
   render() {
     const element = metrics.elements.find(d => d.name === this.tag);
     return html`
-      ${this.type === 'property' ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml((element.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
-      ${this.type === 'slot' ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml((element.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
-      ${!this.type ? html`
-      <section mlv-layout="column gap:md">
-        <div mlv-layout="row gap:sm align:vertical-center">
+      <section mlv-layout="column gap:lg">
+        <div mlv-layout="row gap:sm align:center full">
           <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
           <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
           <div>${getA11yStatusBadge(element.axe)}</div>
-          <a href=${element.aria} mlv-text="link no-visit label">API Spec</a>
-          ${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit label">Figma</a>` : nothing}
-          <a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages" mlv-text="link no-visit label">Released ${element.since}</a>
+          <mlv-button size="sm" style="margin-left: auto"><mlv-icon name="checklist" size="sm"></mlv-icon><a href=${element.aria}>API Spec</a></mlv-button>
+        ${element.figma ? html`<mlv-button size="sm"><mlv-icon name="shapes" size="sm"></mlv-icon><a href=${element.figma}>Figma</a></mlv-button>` : nothing}
+          <mlv-button size="sm"><mlv-icon name="merge" size="sm"></mlv-icon><a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages">Released ${element.since}</a></mlv-button>
         </div>
         ${element.description ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml(element.description).replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
-      </section>` : nothing}
-    `; 
-  }
 
-  createRenderRoot() {
-    return this;
+      </section>
+    `; 
   }
 }
 
 define(ElementMetrics);
+
+class ElementAPI extends LitElement {
+  @property({ type: String }) tag = '';
+
+  @property({ type: String }) type: 'property' | 'slot';
+
+  @property({ type: String }) value: string;
+
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
+  static metadata = {
+    tag: 'element-api',
+    version: 'demo'
+  }
+
+  get #element() {
+    return metrics.elements.find(d => d.name === this.tag);
+  }
+
+  #markdown = new showdown.Converter(showdownOptions);
+
+  render() {
+    return html`
+      ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
+      ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
+      ${!this.type ? html`
+        <div mlv-layout="column gap:xs pad-top:xl pad-bottom:lg align:stretch">
+          <h3 mlv-text="heading xl">API - ${this.tag}</h3>
+          <mlv-divider></mlv-divider>
+        </div>
+        <div mlv-layout="column gap:xxl align:stretch">
+          <section mlv-layout="column gap:md" ?hidden=${!this.#element.attributes}>
+            <h3 mlv-text="heading">Properties</h3>
+            <mlv-grid>
+              <mlv-grid-header>
+                <mlv-grid-column width="120px">Property</mlv-grid-column>
+                <mlv-grid-column width="180px">Attribute</mlv-grid-column>
+                <mlv-grid-column>Description</mlv-grid-column>
+                <mlv-grid-column>Type</mlv-grid-column>
+              </mlv-grid-header>
+              ${this.#element.attributes?.map(attr => html`
+              <mlv-grid-row>
+                <mlv-grid-cell><code mlv-text="code">${attr.fieldName}</code></mlv-grid-cell>
+                <mlv-grid-cell><code mlv-text="code">${attr.name}</code></mlv-grid-cell>
+                <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(attr.description ?? '')}></mlv-grid-cell>
+                <mlv-grid-cell>
+                  <div mlv-layout="row gap:xs align:wrap">
+                    ${attr.type?.text ? html`${attr.type?.text.split(' | ').map(i => html`<mlv-tag readonly color="gray-slate">${i.replaceAll("'", '')}</mlv-tag>`)}` : nothing}
+                  </div>
+                </mlv-grid-cell>
+              </mlv-grid-row>`)}
+            </mlv-grid>
+          </section>
+
+          <section mlv-layout="column gap:md" ?hidden=${!this.#element.events}>
+            <h3 mlv-text="heading">Events</h3>
+            <mlv-grid>
+              <mlv-grid-header>
+                <mlv-grid-column>Event</mlv-grid-column>
+                <mlv-grid-column>Description</mlv-grid-column>
+              </mlv-grid-header>
+              ${this.#element.events?.map(event => html`
+              <mlv-grid-row>
+                <mlv-grid-cell>${event.name}</mlv-grid-cell>
+                <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(event.description ?? '')}></mlv-grid-cell>
+              </mlv-grid-row>`)}
+            </mlv-grid>
+          </section>
+
+          <section mlv-layout="column gap:md" ?hidden=${!this.#element.slots}>
+            <h3 mlv-text="heading">Slots</h3>
+            <mlv-grid>
+              <mlv-grid-header>
+                <mlv-grid-column>Slot</mlv-grid-column>
+                <mlv-grid-column>Description</mlv-grid-column>
+              </mlv-grid-header>
+              ${this.#element.slots?.map(slot => html`
+              <mlv-grid-row>
+                <mlv-grid-cell>${slot.name?.length ? slot.name : 'Default'}</mlv-grid-cell>
+                <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(slot.description ?? '')}></mlv-grid-cell>
+              </mlv-grid-row>`)}
+            </mlv-grid>
+          </section>
+
+          <section mlv-layout="column gap:md" ?hidden=${!this.#element.cssProperties}>
+            <h3 mlv-text="heading">CSS Properties</h3>
+            <mlv-grid>
+              <mlv-grid-header>
+                <mlv-grid-column>Name</mlv-grid-column>
+                <mlv-grid-column>Description</mlv-grid-column>
+              </mlv-grid-header>
+              ${this.#element.cssProperties?.map(prop => html`
+              <mlv-grid-row>
+                <mlv-grid-cell>${prop.name}</mlv-grid-cell>
+                <mlv-grid-cell>
+                  ${!prop.name.includes('icon')
+                    ? html`<a mlv-text="link" href=${`https://developer.mozilla.org/en-US/docs/Web/CSS/${prop.name.replace('--', '')}`} target="_blank" rel="none">MDN Documentation</a>`
+                    : nothing}
+                </mlv-grid-cell>
+              </mlv-grid-row>`)}
+            </mlv-grid>
+          </section>
+        </div>
+      ` : nothing}
+    `;
+  }
+}
+
+define(ElementAPI);
 
 interface MetricColumn {
   sort: 'ascending' | 'descending' | 'none',
