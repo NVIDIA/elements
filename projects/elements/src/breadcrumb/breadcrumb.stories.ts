@@ -17,11 +17,11 @@ export default {
 /* eslint-disable */
 export const Default = {
   render: () => html`
-    <div style="display: flex; align-items: center; justify-content: center; height: 37px">
+    <div nve-layout="row align:center">
       <nve-breadcrumb>
-        <nve-button><a href="javascript: void(0)">Item 1</a></nve-button>
-        <nve-button><a href="javascript: void(0)">Item 2</a></nve-button>
-        <nve-button><a href="javascript: void(0)">Item 3</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 3</a></nve-button>
         <span>You Are Here</span>
       </nve-breadcrumb>
     </div>
@@ -30,11 +30,11 @@ export const Default = {
 
 export const WithIconButton = {
   render: () => html`
-    <div style="display: flex; align-items: center; justify-content: center; height: 37px">
+    <div nve-layout="row align:center">
       <nve-breadcrumb>
-        <nve-icon-button icon-name="home" size="sm"><a href="javascript: void(0)" aria-label="link to first page"></a></nve-icon-button>
-        <nve-button><a href="javascript: void(0)">Item 1</a></nve-button>
-        <nve-button><a href="javascript: void(0)">Item 2</a></nve-button>
+        <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
+        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
         <span>You Are Here</span>
       </nve-breadcrumb>
     </div>
@@ -50,8 +50,8 @@ class BreadcrumbMenuDemo extends LitElement {
     return html`
 <nve-breadcrumb>
   <nve-icon-button id=${ddownId + '-btn'} @click=${() => this.menuHidden = false} icon-name="more-actions"></nve-icon-button>
-  <nve-button><a href="javascript: void(0)">Item 4</a></nve-button>
-  <nve-button><a href="javascript: void(0)">Item 5</a></nve-button>
+  <nve-button><a href="#" target="_self">Item 4</a></nve-button>
+  <nve-button><a href="#" target="_self">Item 5</a></nve-button>
   <span>You Are Here</span>
 </nve-breadcrumb>
 <nve-dropdown id=${ddownId}
@@ -77,27 +77,27 @@ export const WithMenu = {
 
 export const LightTheme = {
   render: () => html`
-    <nve-card nve-theme="light" style="--border-radius: 4px">
+    <div nve-theme="root light" nve-layout="pad:lg">
       <nve-breadcrumb>
-        <nve-icon-button icon-name="home" size="sm"><a href="javascript: void(0)" aria-label="link to first page"></a></nve-icon-button>
-        <nve-button><a href="javascript: void(0)">Item 1</a></nve-button>
-        <nve-button><a href="javascript: void(0)">Item 2</a></nve-button>
+        <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
+        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
         <span>You Are Here</span>
       </nve-breadcrumb>
-    </nve-card>
+    </div>
   `
 }
 
 export const DarkTheme = {
   render: () => html`
-    <nve-card nve-theme="dark" style="--border-radius: 4px">
+    <div nve-theme="root dark" nve-layout="pad:lg">
       <nve-breadcrumb>
-        <nve-icon-button icon-name="home" size="sm"><a href="javascript: void(0)" aria-label="link to first page"></a></nve-icon-button>
-        <nve-button><a href="javascript: void(0)">Item 1</a></nve-button>
-        <nve-button><a href="javascript: void(0)">Item 2</a></nve-button>
+        <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
+        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
         <span>You Are Here</span>
       </nve-breadcrumb>
-    </nve-card>
+    </div>
   `
 }
 /* eslint-enable */

@@ -27,6 +27,7 @@ export class AlertGroup extends LitElement {
     version: 'PACKAGE_VERSION'
   };
 
+  /** Defines visual treatment to represent a ongoing task or support status. */
   @property({ type: String, reflect: true }) status: SupportStatus;
 
   /** @private */

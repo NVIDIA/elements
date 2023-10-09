@@ -186,3 +186,270 @@ function getThemeContent() {
     </div>
     `;
 }
+
+class ThemeGeneratorDemo extends LitElement {
+  static styles = [unsafeCSS(layout), unsafeCSS(typography), css`
+    :host {
+      display: contents;
+    }
+
+    nve-panel {
+      min-width: 360px;
+      z-index: 99;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+  `];
+
+  @state() private formValues = {
+    'sys-accent-primary-background': '#63a600',
+    'sys-accent-secondary-background': '#006adc',
+    'ref-scale-border-radius': 1,
+    'ref-scale-space': 1,
+    'ref-scale-size': 1,
+    'ref-scale-text': 1,
+  };
+
+  render() {
+    return html`
+<div nve-layout="column" style="height: 100%">
+  <nve-app-header>
+    <nve-logo></nve-logo>
+    <h2 slot="title">Theme Generator</h2>
+    <nve-button slot="nav-items" active>Link 1</nve-button>
+    <nve-button slot="nav-items">Link 2</nve-button>
+    <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+  </nve-app-header>
+
+  <nve-alert-banner status="accent">
+    <nve-alert closable>banner message</nve-alert>
+  </nve-alert-banner>
+
+  <div nve-layout="row" style="width: 100%;">
+    <nve-panel expanded>
+      <nve-panel-header>
+        <h2 slot="title">Theme Options</h2>
+      </nve-panel-header>
+      <nve-panel-content>
+        <form @input=${this.#input} nve-layout="column gap:lg">
+          <nve-color>
+            <label>Accent Color ${this.formValues['sys-accent-secondary-background']}</label>
+            <input type="color" name="sys-accent-primary-background" .value=${this.formValues['sys-accent-primary-background']} />
+          </nve-color>
+
+          <nve-color>
+            <label>Secondary Color</label>
+            <input type="color" name="sys-accent-secondary-background" .value=${this.formValues['sys-accent-secondary-background']} />
+          </nve-color>
+
+          <nve-range>
+            <label>Space Scale</label>
+            <input type="range" name="ref-scale-space" .value=${this.formValues['ref-space-scale']} min="0.5" max="1.5" step="0.1" />
+          </nve-range>
+
+          <nve-range>
+            <label>Size Scale</label>
+            <input type="range" name="ref-scale-size" .value=${this.formValues['ref-size-scale']} min="0.5" max="1.5" step="0.1" />
+          </nve-range>
+
+          <nve-range>
+            <label>Text Scale</label>
+            <input type="range" name="ref-scale-text" .value=${this.formValues['ref-text-scale']} min="0.5" max="1.5" step="0.1" />
+          </nve-range>
+
+          <nve-range>
+            <label>Border Radius Scale</label>
+            <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-border-radius-scale']} min="0" max="1.5" step="0.1" />
+          </nve-range>
+
+          <nve-button type="button" @click=${this.#random} style="position: fixed; bottom: 24px;">random</nve-button>
+        </form>
+      </nve-panel-content>
+    </nve-panel>
+
+    <main nve-layout="column gap:lg pad:lg full align:horizontal-stretch">
+      <h1 nve-text="heading lg">Heading</h1>
+        <nve-card>
+          <nve-card-header>
+            <div slot="title">Title</div>
+          </nve-card-header>
+          <nve-card-content>
+            <div nve-layout="column gap:lg">
+              <nve-input layout="horizontal-inline">
+                <label>text label</label>
+                <input />
+                <nve-control-message>message</nve-control-message>
+              </nve-input>
+
+              <nve-search layout="horizontal-inline">
+                <label>search label</label>
+                <input type="search" placeholder="search" />
+                <nve-control-message>message</nve-control-message>
+              </nve-search>
+
+              <nve-password layout="horizontal-inline">
+                <label>password label</label>
+                <input type="password" value="123456" autocomplete="off" />
+                <nve-control-message>message</nve-control-message>
+              </nve-password>
+
+              <nve-select layout="horizontal-inline">
+                <label>select label</label>
+                <select>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+                <nve-control-message>message</nve-control-message>
+              </nve-select>
+
+              <nve-checkbox-group layout="horizontal-inline">
+                <label>checkbox group label</label>
+                <nve-checkbox>
+                  <label>checkbox 1</label>
+                  <input type="checkbox" checked />
+                </nve-checkbox>
+
+                <nve-checkbox>
+                  <label>checkbox 2</label>
+                  <input type="checkbox" />
+                </nve-checkbox>
+
+                <nve-checkbox>
+                  <label>checkbox 3</label>
+                  <input type="checkbox" />
+                </nve-checkbox>
+              </nve-checkbox-group>
+
+              <nve-radio-group layout="horizontal-inline">
+                <label>radio group label</label>
+                <nve-radio>
+                  <label>radio 1</label>
+                  <input type="radio" checked />
+                </nve-radio>
+
+                <nve-radio>
+                  <label>radio 2</label>
+                  <input type="radio" />
+                </nve-radio>
+
+                <nve-radio>
+                  <label>radio 3</label>
+                  <input type="radio" />
+                </nve-radio>
+              </nve-radio-group>
+
+              <nve-switch-group layout="horizontal-inline">
+                <label>switch group label</label>
+                <nve-switch>
+                  <label>switch 1</label>
+                  <input type="checkbox" />
+                </nve-switch>
+
+                <nve-switch>
+                  <label>switch 2</label>
+                  <input type="checkbox" checked />
+                </nve-switch>
+              </nve-switch-group>
+
+              <nve-select layout="horizontal-inline">
+                <label>select multiple label</label>
+                <select multiple>
+                  <option value="1">Option 1</option>
+                  <option selected value="2">Option 2</option>
+                  <option selected value="3">Option 3</option>
+                  <option selected value="3">Option 3</option>
+                  <option value="4">Option 4</option>
+                  <option value="5">Option 5</option>
+                </select>
+                <nve-control-message>message</nve-control-message>
+              </nve-select>
+
+              <nve-textarea layout="horizontal-inline">
+                <label>textarea label</label>
+                <textarea></textarea>
+                <nve-control-message>message</nve-control-message>
+              </nve-textarea>
+            </div>
+          </nve-card-content>
+          <nve-card-footer>
+            <div nve-layout="row gap:xs full">
+              <nve-button style="margin-left: auto">button</nve-button>
+              <nve-button interaction="emphasize">button</nve-button>
+            </div>
+          </nve-card-footer>
+        </nve-card>
+    </main>
+  </div>
+</div>
+    `;
+  }
+
+  #input() {
+    const form = this.shadowRoot?.querySelector('form');
+    const values = Object.fromEntries(new FormData(form as any)) as any;
+    this.#setFormValues(values);
+  }
+
+  #random() {
+    const color = getRandomColor();
+    this.#setFormValues({
+      'sys-accent-primary-background': color,
+      'sys-accent-secondary-background': color,
+      'ref-scale-border-radius': getRandomDecimal(0, 1.5, 2),
+      'ref-scale-space': getRandomDecimal(0.8, 1.5, 2),
+      'ref-scale-size': getRandomDecimal(0.9, 1.5, 2),
+      'ref-scale-text': getRandomDecimal(0.9, 1.5, 2),
+    });
+  }
+
+  #setFormValues(formValues) {
+    this.formValues = formValues;
+    Object.keys(this.formValues).forEach(prop => document.documentElement.style.setProperty(`--nve-${prop}`, this.formValues[prop]));
+  }
+}
+
+function getRandomColor() {
+  const hue = getRandomDecimal(0, 100, 0);
+  const saturation = getRandomDecimal(0, 100, 0);
+  const lightness = getRandomDecimal(0, 100, 0);
+  return hsltohex(hue, saturation, lightness);
+}
+
+function hsltohex(h, s, l) {
+  l /= 100;
+  const a = s * Math.min(l, 1 - l) / 100;
+  const f = n => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color).toString(16).padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+function getRandomDecimal(min, max, decimalPlaces) {
+  const rand = Math.random() * (max - min) + min;
+  const power = Math.pow(10, decimalPlaces);
+  return Math.floor(rand * power) / power;
+}
+
+customElements.get('nve-demo-theme-generator') || customElements.define('nve-demo-theme-generator', ThemeGeneratorDemo);
+
+export const ThemeGenerator = {
+  render: () => html`
+  <style>
+    body,
+    #storybook-root,
+    #root-inner {
+      padding: 0 !important;
+      height: 100% !important;
+    }
+  </style>
+  <div nve-theme="root">
+    <nve-demo-theme-generator></nve-demo-theme-generator>
+  </div>
+  `
+}

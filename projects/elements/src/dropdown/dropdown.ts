@@ -9,8 +9,8 @@ import styles from './dropdown.css?inline';
  * @element nve-dropdown
  * @description Generic dropdown element for rendering a variety of different content within a dropdown container.
  * @since 0.6.0
- * @event open
- * @event close
+ * @event open - Dispatched when the dropdown is opened.
+ * @event close - Dispatched when the dropdown is closed.
  * @slot - default slot for dropdown content
  * @cssprop --border
  * @cssprop --arrow-transform
@@ -76,6 +76,9 @@ export class Dropdown extends LitElement {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
   static styles = useStyles([popoverBaseStyles, styles]);

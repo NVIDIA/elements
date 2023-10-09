@@ -8,6 +8,7 @@ import typography from '@elements/elements/css/module.typography.css?inline';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/alert/define.js';
 import '@elements/elements/badge/define.js';
+import '@elements/elements/tag/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/grid/define.js';
 import '@elements/elements/sort-button/define.js';
@@ -15,6 +16,7 @@ import '@elements/elements/tooltip/define.js';
 import '@elements/elements/drawer/define.js';
 import '@elements/elements/search/define.js';
 import '@elements/elements/json-viewer/define.js';
+import '@elements/elements/tabs/define.js';
 import metrics from 'metrics/data.json';
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
@@ -116,32 +118,43 @@ class ElementStatus extends LitElement {
     version: 'demo'
   }
 
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
   render() {
     const metadata = metrics.elements.find(d => d.name === this.tag);
     return html`
-    <div className="status-summary" style="margin: 0 0 80px 0">
-      <h2 id="stability" style="gap: 0">Release Status</h2>
-      <p>All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
-      <h3><nve-badge .status=${metadata.status === 'pre-release' ? 'warning' : 'pending'}>pre-release <nve-icon name="warning"></nve-icon></nve-badge></h3>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <nve-alert .status=${metadata.figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
-        <nve-alert .status=${metadata.storybook ? 'finished' : 'pending'}>Storybook Preview</nve-alert>
-        <nve-alert .status=${metadata.storybook ? 'finished' : 'pending'}>API Documentation</nve-alert>
-        <nve-alert .status=${metadata.themes ? 'finished' : 'pending'}>Theme Support</nve-alert>
+    <div className="status-summary" nve-layout="column gap:md align:stretch">
+      <div nve-layout="column gap:xs align:stretch pad-top:xl">
+        <h2 id="stability" nve-text="heading xl">Release Status</h2>
+        <nve-divider></nve-divider>
       </div>
-      <h3><nve-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <nve-icon name="schedule"></nve-icon></nve-badge></h3>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <nve-alert .status=${metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</nve-alert>
-        <nve-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/about-api-design-getting-started--docs">API Review</a></nve-alert>
-        <nve-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</nve-alert>
-        <nve-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></nve-alert>
+      <p nve-text="body">All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
+      <div nve-layout="column gap:sm">
+        <nve-badge .status=${metadata.status === 'pre-release' ? 'warning' : 'pending'}>pre-release <nve-icon name="warning"></nve-icon></nve-badge>
+        <div nve-layout="column gap:xs">
+          <nve-alert .status=${metadata.figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
+          <nve-alert .status=${metadata.storybook ? 'finished' : 'pending'}>Storybook Preview</nve-alert>
+          <nve-alert .status=${metadata.storybook ? 'finished' : 'pending'}>API Documentation</nve-alert>
+          <nve-alert .status=${metadata.themes ? 'finished' : 'pending'}>Theme Support</nve-alert>
+        </div>
       </div>
-      <h3><nve-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <nve-icon name="checkmark-circle"></nve-icon></nve-badge></h3>
-      <div style="display: flex; flex-direction: column; gap: 8px">
-        <nve-alert .status=${metadata.aria ? 'finished' : 'pending'}>No known outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></nve-alert>
-        <nve-alert .status=${metadata.performance ? 'finished' : 'pending'}>No known outstanding performance issues</nve-alert>
-        <nve-alert .status=${metadata.responsive ? 'finished' : 'pending'}>Adapts to different screen/container sizes</nve-alert>
-        <nve-alert .status=${metadata.stable ? 'finished' : 'pending'}>No breaking API changes for at least 90 days</nve-alert>
+      <div nve-layout="column gap:sm">
+        <nve-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <nve-icon name="schedule"></nve-icon></nve-badge>
+        <div nve-layout="column gap:xs">
+          <nve-alert .status=${metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</nve-alert>
+          <nve-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/about-api-design-getting-started--docs">API Review</a></nve-alert>
+          <nve-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</nve-alert>
+          <nve-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></nve-alert>
+        </div>
+      </div>
+      <div nve-layout="column gap:sm">
+        <nve-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <nve-icon name="checkmark-circle"></nve-icon></nve-badge>
+        <div nve-layout="column gap:xs">
+          <nve-alert .status=${metadata.aria ? 'finished' : 'pending'}>No known outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></nve-alert>
+          <nve-alert .status=${metadata.performance ? 'finished' : 'pending'}>No known outstanding performance issues</nve-alert>
+          <nve-alert .status=${metadata.responsive ? 'finished' : 'pending'}>Adapts to different screen/container sizes</nve-alert>
+          <nve-alert .status=${metadata.stable ? 'finished' : 'pending'}>No breaking API changes for at least 90 days</nve-alert>
+        </div>
       </div>
     </div>
     `;
@@ -157,41 +170,142 @@ define(ElementStatus)
 class ElementMetrics extends LitElement {
   @property({ type: String }) tag = '';
 
-  @property({ type: String }) type: 'property' | 'slot';
-
-  @property({ type: String }) value: string;
-
   static metadata = {
     tag: 'element-metrics',
     version: 'demo'
   }
+  
+  static styles = [unsafeCSS(`${typography}${layout}`)];
 
   render() {
     const element = metrics.elements.find(d => d.name === this.tag);
     return html`
-      ${this.type === 'property' ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml((element.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
-      ${this.type === 'slot' ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml((element.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
-      ${!this.type ? html`
-      <section nve-layout="column gap:md">
-        <div nve-layout="row gap:sm align:vertical-center">
+      <section nve-layout="column gap:lg">
+        <div nve-layout="row gap:sm align:center full">
           <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
           <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
           <div>${getA11yStatusBadge(element.axe)}</div>
-          <a href=${element.aria} nve-text="link no-visit label">API Spec</a>
-          ${element.figma ? html`<a href=${element.figma} nve-text="link no-visit label">Figma</a>` : nothing}
-          <a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages" nve-text="link no-visit label">Released ${element.since}</a>
+          <nve-button size="sm" style="margin-left: auto"><nve-icon name="checklist" size="sm"></nve-icon><a href=${element.aria}>API Spec</a></nve-button>
+        ${element.figma ? html`<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href=${element.figma}>Figma</a></nve-button>` : nothing}
+          <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages">Released ${element.since}</a></nve-button>
         </div>
         ${element.description ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml(element.description).replace('<p>', '<p nve-text="body">')}></div>` : nothing}
-      </section>` : nothing}
-    `; 
-  }
 
-  createRenderRoot() {
-    return this;
+      </section>
+    `; 
   }
 }
 
 define(ElementMetrics);
+
+class ElementAPI extends LitElement {
+  @property({ type: String }) tag = '';
+
+  @property({ type: String }) type: 'property' | 'slot';
+
+  @property({ type: String }) value: string;
+
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
+  static metadata = {
+    tag: 'element-api',
+    version: 'demo'
+  }
+
+  get #element() {
+    return metrics.elements.find(d => d.name === this.tag);
+  }
+
+  #markdown = new showdown.Converter(showdownOptions);
+
+  render() {
+    return html`
+      ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
+      ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
+      ${!this.type ? html`
+        <div nve-layout="column gap:xs pad-top:xl pad-bottom:lg align:stretch">
+          <h3 nve-text="heading xl">API - ${this.tag}</h3>
+          <nve-divider></nve-divider>
+        </div>
+        <div nve-layout="column gap:xxl align:stretch">
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.attributes}>
+            <h3 nve-text="heading">Properties</h3>
+            <nve-grid>
+              <nve-grid-header>
+                <nve-grid-column width="120px">Property</nve-grid-column>
+                <nve-grid-column width="180px">Attribute</nve-grid-column>
+                <nve-grid-column>Description</nve-grid-column>
+                <nve-grid-column>Type</nve-grid-column>
+              </nve-grid-header>
+              ${this.#element.attributes?.map(attr => html`
+              <nve-grid-row>
+                <nve-grid-cell><code nve-text="code">${attr.fieldName}</code></nve-grid-cell>
+                <nve-grid-cell><code nve-text="code">${attr.name}</code></nve-grid-cell>
+                <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(attr.description ?? '')}></nve-grid-cell>
+                <nve-grid-cell>
+                  <div nve-layout="row gap:xs align:wrap">
+                    ${attr.type?.text ? html`${attr.type?.text.split(' | ').map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
+                  </div>
+                </nve-grid-cell>
+              </nve-grid-row>`)}
+            </nve-grid>
+          </section>
+
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.events}>
+            <h3 nve-text="heading">Events</h3>
+            <nve-grid>
+              <nve-grid-header>
+                <nve-grid-column>Event</nve-grid-column>
+                <nve-grid-column>Description</nve-grid-column>
+              </nve-grid-header>
+              ${this.#element.events?.map(event => html`
+              <nve-grid-row>
+                <nve-grid-cell>${event.name}</nve-grid-cell>
+                <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(event.description ?? '')}></nve-grid-cell>
+              </nve-grid-row>`)}
+            </nve-grid>
+          </section>
+
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.slots}>
+            <h3 nve-text="heading">Slots</h3>
+            <nve-grid>
+              <nve-grid-header>
+                <nve-grid-column>Slot</nve-grid-column>
+                <nve-grid-column>Description</nve-grid-column>
+              </nve-grid-header>
+              ${this.#element.slots?.map(slot => html`
+              <nve-grid-row>
+                <nve-grid-cell>${slot.name?.length ? slot.name : 'Default'}</nve-grid-cell>
+                <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(slot.description ?? '')}></nve-grid-cell>
+              </nve-grid-row>`)}
+            </nve-grid>
+          </section>
+
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.cssProperties}>
+            <h3 nve-text="heading">CSS Properties</h3>
+            <nve-grid>
+              <nve-grid-header>
+                <nve-grid-column>Name</nve-grid-column>
+                <nve-grid-column>Description</nve-grid-column>
+              </nve-grid-header>
+              ${this.#element.cssProperties?.map(prop => html`
+              <nve-grid-row>
+                <nve-grid-cell>${prop.name}</nve-grid-cell>
+                <nve-grid-cell>
+                  ${!prop.name.includes('icon')
+                    ? html`<a nve-text="link" href=${`https://developer.mozilla.org/en-US/docs/Web/CSS/${prop.name.replace('--', '')}`} target="_blank" rel="none">MDN Documentation</a>`
+                    : nothing}
+                </nve-grid-cell>
+              </nve-grid-row>`)}
+            </nve-grid>
+          </section>
+        </div>
+      ` : nothing}
+    `;
+  }
+}
+
+define(ElementAPI);
 
 interface MetricColumn {
   sort: 'ascending' | 'descending' | 'none',

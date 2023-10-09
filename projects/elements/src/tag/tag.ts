@@ -22,18 +22,6 @@ import styles from './tag.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
 export class Tag extends MlvBaseButton {
-  /** Determines if tag is closable, if true, a close icon will be rendered. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=3622-86613&mode=design&t=qIZGochM1aUsCdOP-0) */
-  @property({ type: Boolean }) closable = false;
-
-  /** Determines the color of the tag. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=29-10&mode=design&t=uFeSKovl7yrHakis-0) */
-  @property({ type: String, reflect: true }) color: ColorPalette;
-
-  #typeClosableController = new TypeClosableController(this);
-
-  #i18nController: I18nController<this> = new I18nController<this>(this);
-
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
-
   static styles = useStyles([styles, colorStateStyles]);
 
   static readonly metadata = {
@@ -44,6 +32,19 @@ export class Tag extends MlvBaseButton {
   static elementDefinitions = {
     'nve-icon': Icon
   };
+
+  /** Determines if tag is closable, if true, a close icon will be rendered. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=3622-86613&mode=design&t=qIZGochM1aUsCdOP-0) */
+  @property({ type: Boolean }) closable = false;
+
+  /** Determines the color of the tag. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=29-10&mode=design&t=uFeSKovl7yrHakis-0) */
+  @property({ type: String, reflect: true }) color: ColorPalette;
+
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  /** Enables internal string values to be updated for internationalization. */
+  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+
+  #typeClosableController = new TypeClosableController(this);
 
   render() {
     return html`

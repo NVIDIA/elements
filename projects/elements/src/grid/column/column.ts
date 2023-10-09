@@ -26,11 +26,24 @@ import styles from './column.css?inline';
  * @stable false
  */
 export class GridColumn extends LitElement {
-  /** specify exact width using css value types */
+  /**
+   * Columns can individually have set widths using the `width` property or attribute and a valid CSS value type.
+   * If the total width of all columns is less than the grid width then the last column will fill the remaining space.
+   * By default columns are evenly devided unless width is explicitly provided. Content within a cell of a given
+   * column will wrap content to fit the width of the column.
+   */
   @property({ type: String, reflect: true }) width: string;
 
+  /**
+   * The `position` property or attribute can be set to `fixed` or `sticky` to make the column fixed or sticky.
+   * Fixed columns will not scroll horizontally with the grid. Sticky columns will scroll horizontally with the grid
+   * until the column reaches the edge of the grid.
+   */
   @property({ type: String, reflect: true }) position: 'fixed' | 'sticky' | '';
 
+  /**
+   * Control the content alignment within a given column.
+   */
   @property({ type: String, reflect: true, attribute: 'column-align' }) columnAlign: 'start' | 'center' | 'end';
 
   static styles = useStyles([styles]);
