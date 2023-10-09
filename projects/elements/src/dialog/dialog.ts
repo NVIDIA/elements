@@ -8,8 +8,8 @@ import styles from './dialog.css?inline';
  * @element nve-dialog
  * @description Dialog is a component that appears above main content. A modal dialog is used to display critical information that requires users attention. Use `hidden` to show or hide the dialog.
  * @since 0.6.0
- * @event open
- * @event close
+ * @event open - Dispatched when the dialog is opened.
+ * @event close - Dispatched when the dialog is closed.
  * @slot default content slot
  * @cssprop --border
  * @cssprop --border-radius
@@ -75,6 +75,9 @@ export class Dialog extends LitElement {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
   /** @private */

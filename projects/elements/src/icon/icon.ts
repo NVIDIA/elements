@@ -21,7 +21,7 @@ export type { IconName, IconNames, IconSVG } from './icons.js';
  */
 export class Icon extends LitElement {
   /**
-   * Visual treatment to represent a ongoing task, support or trend status.
+   * Visual treatment to represent current support status.
    */
   @property({ type: String, reflect: true }) status?: 'warning' | 'danger' | 'success' | 'accent';
 
@@ -35,7 +35,9 @@ export class Icon extends LitElement {
    */
   @property({ type: String, reflect: true }) direction?: 'up' | 'down' | 'left' | 'right';
 
-  /** The name of the icon SVG sprite */
+  /**
+   * The name of the icon SVG sprite to render.
+   */
   @property({ type: String, reflect: true }) name: IconName;
 
   @state() private svg: string;

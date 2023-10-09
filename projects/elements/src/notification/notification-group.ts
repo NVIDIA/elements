@@ -13,10 +13,19 @@ import styles from './notification-group.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
  */
 export class NotificationGroup extends LitElement {
+  /**
+   * Sets the anchor element to which the popover is attached.
+   */
   @property({ type: String }) anchor: string | HTMLElement;
 
+  /**
+   * Sets the position of the popover relative to the anchor element.
+   */
   @property({ type: String, reflect: true }) position;
 
+  /**
+   * Sets the alignment of the popover relative to the anchor element.
+   */
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
   protected typePopoverController = new TypePopoverController<NotificationGroup>(this);

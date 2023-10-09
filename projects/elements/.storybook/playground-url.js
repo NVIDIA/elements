@@ -16,7 +16,7 @@ export function playground(Story, context) {
     const formattedSource = prettier.default.format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
 
     const files = serialize(addCssContent(createDefaultFiles(formattedSource, context.id), context.id));
-    const url = `https://elements-stage.nvidia.com/ui/elements-playground/?files=${files}&theme=${context.globals.theme}`;
+    const url = `https://elements-stage.nvidia.com/ui/elements-playground/?theme=${context.globals.theme}&story=${context.id}&files=${files}}`;
     const playgroundButton = Object.keys(context.unmappedArgs).length ? nothing : html`<nve-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></nve-button>`;
     return html`${Story()} ${playgroundButton}`;
   }

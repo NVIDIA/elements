@@ -131,6 +131,8 @@ function rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment) {
     if (performRewrite) {
       entry.type.text = Array.from(rewrittenTypes).join(' | ');
     }
+
+    entry.type.text = entry.type.text.split(' | ').map((value) => (value === 'undefined' || value === '') ? 'default' : value).join(' | ');
   }
 
   return {
@@ -193,7 +195,7 @@ const runtimeEnvironment = {};
 
 export default {
   globs: [resolve('./src')],
-  exclude: [resolve('src/**/*.css'), resolve('src/**/*.stories.mdx'), resolve('src/**/*.stories.ts')],
+  exclude: [resolve('src/**/*.css'), resolve('src/**/*.stories.mdx'), resolve('src/**/*.stories.ts'), resolve('src/**/*.test.axe.ts')],
   litelement: true,
   plugins: [basePathPlugin(), extensionPlugin(), orderPlugin(), metadataPlugin(), rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment)],
   overrideModuleCreation: ({ ts, globs }) => {

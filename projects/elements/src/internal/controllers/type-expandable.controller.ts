@@ -5,8 +5,8 @@ export type TypeExpandable = ReactiveElement &  {expanded?: boolean, behaviorExp
 
 /**
  * Controller for enabling expandable behavior for elements.
- * @event open
- * @event close
+ * @event open - Dispatched when the expandable element is opened.
+ * @event close - Dispatched when the expandable element is closed.
  * @prop expanded
  * @prop behaviorExpand?
  */

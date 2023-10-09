@@ -22,7 +22,9 @@ export const inputStyles = styles;
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
  */
 export class Input extends Control implements ContainerElement {
-  /** flat (embed into parent container) */
+  /**
+   * Sets the container type style. Flat is used for inline inputs that are often embeded in other containers or toolbars.
+   */
   @property({ type: String, reflect: true }) container?: 'flat';
 
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);

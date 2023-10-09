@@ -33,12 +33,12 @@ export class Button extends MlvBaseButton {
   };
 
   /**
-   * Visual treatment to represent user interaction appearance
+   * Visual treatment to represent user interaction appearance.
    */
   @property({ type: String, reflect: true }) interaction: Interaction | FlatInteraction | Inverse | GhostInteraction;
 
   /**
-   * Determines size of button 
+   * Determines size of the button.
    */
   @property({ type: String, reflect: true }) size?: Size;
 

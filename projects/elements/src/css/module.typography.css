@@ -188,6 +188,14 @@
   &[nve-text~='no-underline'] {
     text-decoration: none !important;
   }
+
+  &[nve-text~='lg'] {
+    font-size: var(--nve-ref-font-size-300) !important;
+  }
+
+  &[nve-text~='sm'] {
+    font-size: var(--nve-ref-font-size-100) !important;
+  }
 }
 
 [nve-text~='code'] {
