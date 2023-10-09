@@ -35,9 +35,9 @@ export class AppHeader extends LitElement {
     'nve-logo': Logo
   }
 
-  @queryAssignedElements({ slot: 'nav-items' }) private navItems!: Button[];
+  @queryAssignedElements({ slot: 'nav-items', flatten: true }) private navItems!: Button[];
 
-  @queryAssignedElements({ slot: 'nav-actions' }) private navActions!: IconButton[];
+  @queryAssignedElements({ slot: 'nav-actions', flatten: true }) private navActions!: IconButton[];
 
   @queryAssignedElements() private slottedElements!: HTMLElement[];
 

@@ -5,7 +5,7 @@ export type TypeSelectable = ReactiveElement &  { selected?: boolean, behaviorSe
 
 /**
  * Controller for enabling selectable behavior for elements.
- * @event select
+ * @event select - Dispatched when the selectable element is selected.
  * @prop selected
  * @prop behaviorSelect?
  */
