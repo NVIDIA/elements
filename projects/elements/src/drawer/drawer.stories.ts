@@ -1,6 +1,4 @@
 import { html } from 'lit';
-import { spread } from '@elements/elements/internal';
-import { Drawer } from '@elements/elements/drawer';
 import '@elements/elements/card/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/drawer/define.js';
@@ -8,52 +6,53 @@ import '@elements/elements/drawer/define.js';
 export default {
   title: 'Elements/Drawer/Examples',
   component: 'mlv-drawer',
-  inline: false,
-  argTypes: {
-    position: {
-      control: 'inline-radio',
-      options: ['top', 'right', 'bottom', 'left'],
-      defaultValue: 'center'
-    },
-    alignment: {
-      control: 'inline-radio',
-      options: ['start', 'center', 'end'],
-      defaultValue: 'center'
-    }
-  }
+  inline: false
 };
 
-type ArgTypes = Drawer;
-
 export const Default = {
-  inline: false,
-  render: (args: ArgTypes) => html`
-    <mlv-drawer ${spread(args)} closable>
-      <mlv-drawer-header>
-        <h3 mlv-text="heading semibold sm">Title</h3>
-      </mlv-drawer-header>
-      <p mlv-text="body">some text content in a closable drawer</p>
-      <mlv-drawer-footer>
-        <div mlv-layout="grid gap:sm span-items:6">
-          <mlv-button>cancel</mlv-button>
-          <mlv-button>details</mlv-button>
-        </div>
-      </mlv-drawer-footer>
-    </mlv-drawer>
+  render: () => html`
+<mlv-drawer closable>
+  <mlv-drawer-header>
+    <h3 mlv-text="heading semibold sm">Drawer Header</h3>
+  </mlv-drawer-header>
+  <mlv-drawer-content>
+    <p mlv-text="body">drawer content</p>
+  </mlv-drawer-content>
+  <mlv-drawer-footer>
+    <p mlv-text="body">drawer footer</p>
+  </mlv-drawer-footer>
+</mlv-drawer>
+  `,
+};
+
+export const Scroll = {
+  render: () => html`
+<mlv-drawer closable>
+  <mlv-drawer-header>
+    <h3 mlv-text="heading semibold sm">Drawer Header</h3>
+  </mlv-drawer-header>
+  <mlv-drawer-content>
+    <p mlv-text="body" style="height: 2500px">drawer content</p>
+  </mlv-drawer-content>
+  <mlv-drawer-footer>
+    <p mlv-text="body">drawer footer</p>
+  </mlv-drawer-footer>
+</mlv-drawer>
   `,
 };
 
 export const Interactive = {
-  inline: false,
   render: () => html`
 <mlv-button id="drawer-btn">open</mlv-button>
 <mlv-drawer closable modal hidden position="right">
   <mlv-drawer-header>
-    <h3 mlv-text="heading">Heading</h3>
+    <h3 mlv-text="heading">Drawer Header</h3>
   </mlv-drawer-header>
-  <p mlv-text="body">some text content in a closable drawer</p>
+  <mlv-drawer-content>
+    <p mlv-text="body">drawer content</p>
+  </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">some text footer content</p>
+    <p mlv-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
 <script type="module">
@@ -69,11 +68,13 @@ export const Small = {
   render: () => html`
 <mlv-drawer size="sm" closable>
   <mlv-drawer-header>
-    <h3 mlv-text="heading semibold sm">Small</h3>
+    <h3 mlv-text="heading semibold sm">Drawer Header</h3>
   </mlv-drawer-header>
-  <p mlv-text="body">some text content in a small drawer</p>
+  <mlv-drawer-content>
+    <p mlv-text="body">drawer content</p>
+  </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">some text footer content</p>
+    <p mlv-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
   `
@@ -83,11 +84,13 @@ export const Large = {
   render: () => html`
 <mlv-drawer size="lg" closable>
   <mlv-drawer-header>
-    <h3 mlv-text="heading semibold sm">Large</h3>
+    <h3 mlv-text="heading semibold sm">Drawer Header</h3>
   </mlv-drawer-header>
-  <p mlv-text="body">some text content in a large drawer</p>
+  <mlv-drawer-content>
+    <p mlv-text="body">drawer content</p>
+  </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">some text footer content</p>
+    <p mlv-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
   `
@@ -97,10 +100,14 @@ export const NonClosable = {
   render: () => html`
 <mlv-button id="open-btn">open</mlv-button>
 <mlv-drawer hidden modal>
-  <h3 mlv-text="heading">Non-Closable Drawer</h3>
-  <p mlv-text="body">escape key and light dismiss will not work here</p>
+  <mlv-drawer-header>
+    <h3 mlv-text="heading">Drawer Header</h3>
+  </mlv-drawer-header>
+  <mlv-drawer-content>
+    <p mlv-text="body">drawer content</p>
+  </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">some text footer content</p>
+    <p mlv-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
 <script type="module">
@@ -123,19 +130,23 @@ export const Position = {
 
 <mlv-drawer closable modal hidden position="left">
   <mlv-drawer-header>
-    <h3 mlv-text="heading">Left</h3>
+    <h3 mlv-text="heading">Drawer Header Left</h3>
   </mlv-drawer-header>
-  <p mlv-text="body">some text content in a left closable drawer</p>
+  <mlv-drawer-content>
+    <p mlv-text="body">drawer content</p>
+  </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">some text footer content</p>
+    <p mlv-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
 
 <mlv-drawer closable modal hidden position="right">
   <mlv-drawer-header>
-    <h3 mlv-text="heading">Right</h3>
+    <h3 mlv-text="heading">Drawer Header Right</h3>
   </mlv-drawer-header>
-  <p mlv-text="body">some text content in a right closable drawer</p>
+  <mlv-drawer-content>
+    <p mlv-text="body">some text content in a right closable drawer</p>
+  </mlv-drawer-content>
   <mlv-drawer-footer>
     <p mlv-text="body">some text footer content</p>
   </mlv-drawer-footer>
@@ -174,11 +185,13 @@ export const Inline = {
 
   <mlv-drawer hidden closable modal inline position="right">
     <mlv-drawer-header>
-      <h3 mlv-text="heading semibold sm">Small</h3>
+      <h3 mlv-text="heading semibold sm">Drawer Header</h3>
     </mlv-drawer-header>
-    <p mlv-text="body">some text content in a small drawer</p>
+    <mlv-drawer-content>
+      <p mlv-text="body">drawer content</p>
+    </mlv-drawer-content>
     <mlv-drawer-footer>
-      <p mlv-text="body">some text footer content</p>
+      <p mlv-text="body">drawer footer</p>
     </mlv-drawer-footer>
   </mlv-drawer>
 </div>

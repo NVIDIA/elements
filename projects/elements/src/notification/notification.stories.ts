@@ -1,32 +1,18 @@
 import { html } from 'lit';
-import { spread } from '@elements/elements/internal';
-import { Notification } from '@elements/elements/notification';
 import '@elements/elements/notification/define.js';
 import '@elements/elements/button/define.js';
-
+import '@elements/elements/drawer/define.js';
 
 export default {
   title: 'Elements/Notification/Examples',
-  component: 'mlv-notification',
-  argTypes: {
-    position: {
-      control: 'inline-radio',
-      options: ['top', 'right', 'bottom', 'left']
-    },
-    alignment: {
-      control: 'inline-radio',
-      options: ['start', 'center', 'end']
-    }
-  }
+  component: 'mlv-notification'
 };
 
-type ArgTypes = Notification;
-
 export const Default = {
-  render: (args: ArgTypes) => html`
-<mlv-notification ${spread(args)}>
+  render: () => html`
+<mlv-notification>
   <h3 mlv-text="label">Title</h3>
-  <p mlv-text="body">some text content in a notification some text content in a notification some text content in a notification some text content in a notification some text content in a notification</p>
+  <p mlv-text="body">some text content in a notification</p>
 </mlv-notification>
 `,
   args: { position: 'bottom', alignment: 'center', closable: true }
@@ -115,27 +101,55 @@ export const Status = {
 
 export const Position = {
   render: () => html`
-<mlv-notification-group position="bottom" alignment="end">
+<mlv-notification-group position="bottom">
   <mlv-notification closable>
     <h3 mlv-text="label">Title</h3>
     <p mlv-text="body">some text content in a notification</p>
   </mlv-notification>
-  <mlv-notification status="accent" closable>
+  <mlv-notification closable>
     <h3 mlv-text="label">Title</h3>
     <p mlv-text="body">some text content in a notification</p>
   </mlv-notification>
-  <mlv-notification status="success" closable>
-    <h3 mlv-text="label">Title</h3>
-    <p mlv-text="body">some text content in a notification</p>
-  </mlv-notification>
-  <mlv-notification status="warning" closable>
-    <h3 mlv-text="label">Title</h3>
-    <p mlv-text="body">some text content in a notification</p>
-  </mlv-notification>
-  <mlv-notification status="danger" closable>
+  <mlv-notification closable>
     <h3 mlv-text="label">Title</h3>
     <p mlv-text="body">some text content in a notification</p>
   </mlv-notification>
 </mlv-notification-group>
   `
+};
+
+export const Drawer = {
+  render: () => html`
+<mlv-drawer closable position="right">
+  <mlv-drawer-header>
+    <h3 mlv-text="heading semibold sm">Notifications</h3>
+  </mlv-drawer-header>
+  <mlv-notification closable container="flat">
+    <h3 mlv-text="label">Notification</h3>
+    <p mlv-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </mlv-notification>
+  <mlv-notification status="accent" container="flat" closable>
+    <h3 mlv-text="label">Notification</h3>
+    <p mlv-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </mlv-notification>
+  <mlv-notification status="success" container="flat" closable>
+    <h3 mlv-text="label">Notification</h3>
+    <p mlv-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </mlv-notification>
+  <mlv-notification status="warning" container="flat" closable>
+    <h3 mlv-text="label">Notification</h3>
+    <p mlv-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </mlv-notification>
+  <mlv-notification status="danger" container="flat" closable>
+    <h3 mlv-text="label">Notification</h3>
+    <p mlv-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </mlv-notification>
+  <mlv-drawer-footer>
+    <div mlv-layout="grid gap:sm span-items:6">
+      <mlv-button interaction="flat-destructive">Clear All</mlv-button>
+      <mlv-button>Mark All as Read</mlv-button>
+    </div>
+  </mlv-drawer-footer>
+</mlv-drawer>
+  `,
 };

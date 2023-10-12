@@ -549,9 +549,9 @@ class MetricDemo extends LitElement {
           </mlv-search>
         </div>
       </mlv-drawer-header>
-      <div style="padding: 12px; width: 100%;">
+      <mlv-drawer-content>
         <mlv-json-viewer expanded>${JSON.stringify(metrics[this.rawData])}</mlv-json-viewer>
-      </div>
+      </mlv-drawer-content>
     </mlv-drawer>
 `;
   }

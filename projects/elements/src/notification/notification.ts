@@ -68,6 +68,11 @@ export class Notification extends LitElement {
    */
   @property({ type: String, reflect: true }) status: SupportStatus;
 
+  /**
+   * Flat container option is used when embeding within another containing element such as a drawer.
+   */
+  @property({ type: String, reflect: true }) container?: 'flat';
+
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
