@@ -549,9 +549,9 @@ class MetricDemo extends LitElement {
           </nve-search>
         </div>
       </nve-drawer-header>
-      <div style="padding: 12px; width: 100%;">
+      <nve-drawer-content>
         <nve-json-viewer expanded>${JSON.stringify(metrics[this.rawData])}</nve-json-viewer>
-      </div>
+      </nve-drawer-content>
     </nve-drawer>
 `;
   }

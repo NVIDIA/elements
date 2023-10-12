@@ -1,14 +1,14 @@
 {
-  "created": "2023-10-12T17:53:37.684Z",
+  "created": "2023-10-13T16:06:53.717Z",
   "versions": [
     "0.10.0",
     "0.11.1",
     "0.15.0",
-    "0.13.1",
+    "0.19.0",
+    "0.8.0",
     "0.7.1",
     "0.1.3",
     "0.4.1",
-    "0.8.0",
     "0.16.0",
     "0.11.0",
     "0.18.0",
@@ -121,8 +121,8 @@
           "name": "--header-padding"
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 1,
+      "projectTotal": 2,
+      "instanceTotal": 4,
       "coverageTotal": 83.80000000000001,
       "behavior": "container",
       "status": "beta"
@@ -360,8 +360,8 @@
           "name": "--min-height"
         }
       ],
-      "projectTotal": 6,
-      "instanceTotal": 9,
+      "projectTotal": 7,
+      "instanceTotal": 12,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -421,8 +421,8 @@
           "name": "--border-radius"
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 2,
+      "projectTotal": 3,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -478,8 +478,8 @@
           "name": "--border-radius"
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 4,
+      "projectTotal": 4,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "feedback",
       "status": "stable"
@@ -658,7 +658,7 @@
         }
       ],
       "projectTotal": 3,
-      "instanceTotal": 5,
+      "instanceTotal": 8,
       "coverageTotal": 91.51,
       "behavior": "content",
       "status": "beta"
@@ -878,7 +878,7 @@
         }
       ],
       "projectTotal": 14,
-      "instanceTotal": 76,
+      "instanceTotal": 78,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -1055,8 +1055,8 @@
           "name": "--box-shadow"
         }
       ],
-      "projectTotal": 6,
-      "instanceTotal": 10,
+      "projectTotal": 7,
+      "instanceTotal": 13,
       "coverageTotal": 100,
       "behavior": "container",
       "status": "stable"
@@ -1301,7 +1301,7 @@
         }
       ],
       "projectTotal": 7,
-      "instanceTotal": 14,
+      "instanceTotal": 17,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -1340,8 +1340,8 @@
           }
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 4,
+      "projectTotal": 5,
+      "instanceTotal": 7,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -1761,8 +1761,8 @@
           "name": "--control-height"
         }
       ],
-      "projectTotal": 7,
-      "instanceTotal": 11,
+      "projectTotal": 8,
+      "instanceTotal": 13,
       "coverageTotal": 98.1425,
       "behavior": "form",
       "status": "stable"
@@ -1814,8 +1814,8 @@
           "name": "--label-width"
         }
       ],
-      "projectTotal": 0,
-      "instanceTotal": 0,
+      "projectTotal": 1,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -1882,7 +1882,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 6,
+      "instanceTotal": 8,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -2002,7 +2002,7 @@
         }
       ],
       "projectTotal": 4,
-      "instanceTotal": 5,
+      "instanceTotal": 4,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "pre-release"
@@ -2307,8 +2307,8 @@
           "name": "--nve-sys-layer-popover-offset"
         }
       ],
-      "projectTotal": 6,
-      "instanceTotal": 11,
+      "projectTotal": 7,
+      "instanceTotal": 14,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -2410,8 +2410,8 @@
           "name": "--size"
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 8,
+      "projectTotal": 4,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "beta"
@@ -2494,8 +2494,8 @@
           "name": "--padding"
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 1,
+      "projectTotal": 0,
+      "instanceTotal": 0,
       "coverageTotal": 100,
       "behavior": "content",
       "status": "stable"
@@ -2506,7 +2506,7 @@
       "apiReview": true,
       "performance": true,
       "stable": true,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
       "themes": true,
       "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
@@ -2680,11 +2680,38 @@
           "name": "--nve-sys-layer-popover-offset"
         }
       ],
+      "projectTotal": 1,
+      "instanceTotal": 3,
+      "coverageTotal": 100,
+      "behavior": "popover",
+      "status": "stable"
+    },
+    {
+      "name": "nve-drawer-content",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": true,
+      "vqa": true,
+      "responsive": true,
+      "themes": true,
+      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "package": true,
+      "since": "0.16.0",
+      "storybook": "https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-drawer-documentation--docs",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0",
+      "properties": [],
+      "slots": [
+        {
+          "description": "default slot for the drawer content",
+          "name": ""
+        }
+      ],
       "projectTotal": 0,
       "instanceTotal": 0,
       "coverageTotal": 100,
-      "behavior": "popover",
-      "status": "pre-release"
+      "behavior": "content",
+      "status": "stable"
     },
     {
       "name": "nve-drawer-footer",
@@ -2909,7 +2936,7 @@
         }
       ],
       "projectTotal": 8,
-      "instanceTotal": 17,
+      "instanceTotal": 20,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -3111,7 +3138,7 @@
         }
       ],
       "projectTotal": 4,
-      "instanceTotal": 9,
+      "instanceTotal": 12,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -3170,7 +3197,7 @@
         }
       ],
       "projectTotal": 4,
-      "instanceTotal": 8,
+      "instanceTotal": 11,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -3277,7 +3304,7 @@
         }
       ],
       "projectTotal": 4,
-      "instanceTotal": 6,
+      "instanceTotal": 9,
       "coverageTotal": 97.54749999999999,
       "behavior": "list",
       "status": "beta"
@@ -3318,7 +3345,7 @@
         }
       ],
       "projectTotal": 3,
-      "instanceTotal": 3,
+      "instanceTotal": 6,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -3356,7 +3383,7 @@
         }
       ],
       "projectTotal": 4,
-      "instanceTotal": 6,
+      "instanceTotal": 9,
       "coverageTotal": 97.08,
       "behavior": "list",
       "status": "beta"
@@ -3390,8 +3417,8 @@
           "name": "--padding"
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 2,
+      "projectTotal": 2,
+      "instanceTotal": 5,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -3441,7 +3468,7 @@
         }
       ],
       "projectTotal": 4,
-      "instanceTotal": 9,
+      "instanceTotal": 12,
       "coverageTotal": 100,
       "behavior": "list",
       "status": "beta"
@@ -3525,7 +3552,7 @@
         }
       ],
       "projectTotal": 16,
-      "instanceTotal": 65,
+      "instanceTotal": 69,
       "coverageTotal": 92.995,
       "behavior": "content",
       "status": "stable"
@@ -3769,7 +3796,7 @@
         }
       ],
       "projectTotal": 13,
-      "instanceTotal": 39,
+      "instanceTotal": 43,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "stable"
@@ -3923,8 +3950,8 @@
           "name": "--cursor"
         }
       ],
-      "projectTotal": 10,
-      "instanceTotal": 23,
+      "projectTotal": 11,
+      "instanceTotal": 21,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -4152,8 +4179,8 @@
           "name": "--min-width"
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 9,
+      "projectTotal": 4,
+      "instanceTotal": 12,
       "coverageTotal": 100,
       "behavior": "navigation",
       "status": "beta"
@@ -4518,6 +4545,10 @@
           "description": "Determines the visual status of the notification."
         },
         {
+          "name": "container",
+          "description": "Flat container option is used when embeding within another containing element such as a drawer."
+        },
+        {
           "name": "i18n",
           "description": "Enables internal string values to be updated for internationalization."
         }
@@ -4597,6 +4628,14 @@
           "fieldName": "status"
         },
         {
+          "name": "container",
+          "type": {
+            "text": "'flat' | default"
+          },
+          "description": "Flat container option is used when embeding within another containing element such as a drawer.",
+          "fieldName": "container"
+        },
+        {
           "name": "nve-i18n",
           "description": "Enables internal string values to be updated for internationalization.",
           "fieldName": "i18n"
@@ -4642,8 +4681,8 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 21,
-      "coverageTotal": 96.1375,
+      "instanceTotal": 24,
+      "coverageTotal": 96.18750000000001,
       "behavior": "popover",
       "status": "stable"
     },
@@ -4700,7 +4739,7 @@
         }
       ],
       "projectTotal": 2,
-      "instanceTotal": 3,
+      "instanceTotal": 6,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -4895,8 +4934,8 @@
           "name": "--background"
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 2,
+      "projectTotal": 3,
+      "instanceTotal": 5,
       "coverageTotal": 98.61,
       "behavior": "navigation",
       "status": "beta"
@@ -5020,8 +5059,8 @@
           "name": "--box-shadow"
         }
       ],
-      "projectTotal": 1,
-      "instanceTotal": 2,
+      "projectTotal": 2,
+      "instanceTotal": 5,
       "coverageTotal": 91.335,
       "behavior": "container",
       "status": "beta"
@@ -5607,8 +5646,8 @@
           "name": "--cursor"
         }
       ],
-      "projectTotal": 4,
-      "instanceTotal": 5,
+      "projectTotal": 5,
+      "instanceTotal": 8,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -5900,7 +5939,7 @@
         }
       ],
       "projectTotal": 6,
-      "instanceTotal": 7,
+      "instanceTotal": 10,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -6052,7 +6091,7 @@
         }
       ],
       "projectTotal": 5,
-      "instanceTotal": 10,
+      "instanceTotal": 9,
       "coverageTotal": 97.5,
       "behavior": "form",
       "status": "stable"
@@ -6250,8 +6289,8 @@
           "name": "--height"
         }
       ],
-      "projectTotal": 2,
-      "instanceTotal": 3,
+      "projectTotal": 3,
+      "instanceTotal": 6,
       "coverageTotal": 100,
       "behavior": "button",
       "status": "beta"
@@ -6400,7 +6439,7 @@
         }
       ],
       "projectTotal": 3,
-      "instanceTotal": 4,
+      "instanceTotal": 3,
       "coverageTotal": 100,
       "behavior": "form",
       "status": "stable"
@@ -7337,8 +7376,8 @@
           "name": "--nve-sys-layer-popover-offset"
         }
       ],
-      "projectTotal": 3,
-      "instanceTotal": 5,
+      "projectTotal": 4,
+      "instanceTotal": 8,
       "coverageTotal": 100,
       "behavior": "popover",
       "status": "stable"
@@ -7455,8 +7494,8 @@
           "name": "--width"
         }
       ],
-      "projectTotal": 0,
-      "instanceTotal": 0,
+      "projectTotal": 1,
+      "instanceTotal": 3,
       "coverageTotal": 98.675,
       "behavior": "navigation",
       "status": "pre-release"
@@ -8084,70 +8123,182 @@
     {
       "name": "@elements/asset-browser-views",
       "path": "src/ui/flywheel/apps/asset-browser",
-      "elementsVersion": "0.13.1",
+      "elementsVersion": "0.19.0",
       "elements": [
         {
-          "name": "nve-icon-button",
-          "instanceTotal": 7
+          "name": "nve-accordion",
+          "instanceTotal": 3
         },
         {
-          "name": "nve-icon",
-          "instanceTotal": 8
+          "name": "nve-alert-banner",
+          "instanceTotal": 3
         },
         {
-          "name": "nve-grid-cell",
-          "instanceTotal": 1
+          "name": "nve-alert-group",
+          "instanceTotal": 3
         },
         {
-          "name": "nve-grid-column",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-grid-footer",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-grid",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-grid-header",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-grid-row",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-button",
-          "instanceTotal": 2
+          "name": "nve-alert",
+          "instanceTotal": 3
         },
         {
           "name": "nve-breadcrumb",
-          "instanceTotal": 1
+          "instanceTotal": 4
         },
+        {
+          "name": "nve-button",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-card",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-checkbox-group",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-checkbox",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-dialog",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-divider",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-drawer",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-control-group",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-control-message",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-grid-cell",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-grid-column",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-grid-footer",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-grid",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-grid-header",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-grid-placeholder",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-grid-row",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 11
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 12
+        },
+        {
+          "name": "nve-input",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-menu",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-notification-group",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-notification",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-pagination",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-panel",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-radio",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-search",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-sort-button",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-toast",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-toolbar",
+          "instanceTotal": 3
+        }
+      ],
+      "instanceTotal": 139
+    },
+    {
+      "name": "clip-labeler",
+      "path": "src/ui/labeling/apps/clip-labeler",
+      "elementsVersion": "^0.8.0",
+      "elements": [
         {
           "name": "nve-checkbox",
           "instanceTotal": 1
         },
         {
-          "name": "nve-dropdown",
+          "name": "nve-dialog-header",
           "instanceTotal": 1
         },
         {
-          "name": "nve-search",
+          "name": "nve-dialog",
           "instanceTotal": 1
         },
         {
-          "name": "nve-notification-group",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "nve-notification",
+          "name": "nve-icon",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 29
+      "instanceTotal": 5
     },
     {
       "name": "@elements/gt-asset-browser",
@@ -8190,34 +8341,6 @@
       "elementsVersion": "^0.4.1",
       "elements": [],
       "instanceTotal": 0
-    },
-    {
-      "name": "clip-labeler",
-      "path": "src/ui/labeling/apps/clip-labeler",
-      "elementsVersion": "^0.8.0",
-      "elements": [
-        {
-          "name": "nve-checkbox",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-dialog-header",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-dialog",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-icon-button",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-icon",
-          "instanceTotal": 1
-        }
-      ],
-      "instanceTotal": 5
     },
     {
       "name": "static-4dgt-labeler",
@@ -8313,14 +8436,6 @@
       "elementsVersion": "^0.8.0",
       "elements": [
         {
-          "name": "nve-button",
-          "instanceTotal": 13
-        },
-        {
-          "name": "nve-input",
-          "instanceTotal": 2
-        },
-        {
           "name": "nve-checkbox",
           "instanceTotal": 3
         },
@@ -8339,6 +8454,14 @@
         {
           "name": "nve-icon",
           "instanceTotal": 4
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 13
+        },
+        {
+          "name": "nve-input",
+          "instanceTotal": 2
         },
         {
           "name": "nve-alert-group",
@@ -8390,7 +8513,7 @@
         },
         {
           "name": "nve-button",
-          "instanceTotal": 13
+          "instanceTotal": 12
         },
         {
           "name": "nve-card",
@@ -8470,23 +8593,19 @@
         },
         {
           "name": "nve-date",
-          "instanceTotal": 2
+          "instanceTotal": 1
         },
         {
           "name": "nve-control",
-          "instanceTotal": 2
+          "instanceTotal": 1
         },
         {
           "name": "nve-input",
-          "instanceTotal": 8
+          "instanceTotal": 3
         },
         {
           "name": "nve-select",
-          "instanceTotal": 4
-        },
-        {
-          "name": "nve-dot",
-          "instanceTotal": 1
+          "instanceTotal": 3
         },
         {
           "name": "nve-tag",
@@ -8503,14 +8622,6 @@
         {
           "name": "nve-dropdown",
           "instanceTotal": 5
-        },
-        {
-          "name": "nve-switch",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-control-message",
-          "instanceTotal": 1
         },
         {
           "name": "nve-grid-column",
@@ -8545,6 +8656,10 @@
           "instanceTotal": 1
         },
         {
+          "name": "nve-switch",
+          "instanceTotal": 1
+        },
+        {
           "name": "nve-accordion-header",
           "instanceTotal": 1
         },
@@ -8561,7 +8676,7 @@
           "instanceTotal": 2
         }
       ],
-      "instanceTotal": 134
+      "instanceTotal": 122
     },
     {
       "name": "@elements/next-common",
@@ -9092,10 +9207,10 @@
       {
         "file": "elements/src/notification/notification.ts",
         "lines": {
-          "total": 27,
-          "covered": 26,
+          "total": 28,
+          "covered": 27,
           "skipped": 0,
-          "pct": 96.29
+          "pct": 96.42
         },
         "functions": {
           "total": 11,
@@ -9104,10 +9219,10 @@
           "pct": 90.9
         },
         "statements": {
-          "total": 38,
-          "covered": 37,
+          "total": 39,
+          "covered": 38,
           "skipped": 0,
-          "pct": 97.36
+          "pct": 97.43
         },
         "branches": {
           "total": 6,
@@ -12114,10 +12229,37 @@
         }
       },
       {
-        "file": "elements/src/drawer/define.ts",
+        "file": "elements/src/drawer/drawer-content.ts",
         "lines": {
+          "total": 2,
+          "covered": 2,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 1,
+          "covered": 1,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
           "total": 3,
           "covered": 3,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "elements/src/drawer/define.ts",
+        "lines": {
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -12128,8 +12270,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -13143,22 +13285,22 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1952,
-        "covered": 1905,
+        "total": 1956,
+        "covered": 1909,
         "skipped": 0,
         "pct": 97.59
       },
       "statements": {
-        "total": 2594,
-        "covered": 2527,
+        "total": 2599,
+        "covered": 2532,
         "skipped": 0,
-        "pct": 97.41
+        "pct": 97.42
       },
       "functions": {
-        "total": 764,
-        "covered": 728,
+        "total": 765,
+        "covered": 729,
         "skipped": 0,
-        "pct": 95.28
+        "pct": 95.29
       },
       "branches": {
         "total": 950,

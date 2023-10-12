@@ -1,32 +1,18 @@
 import { html } from 'lit';
-import { spread } from '@elements/elements/internal';
-import { Notification } from '@elements/elements/notification';
 import '@elements/elements/notification/define.js';
 import '@elements/elements/button/define.js';
-
+import '@elements/elements/drawer/define.js';
 
 export default {
   title: 'Elements/Notification/Examples',
-  component: 'nve-notification',
-  argTypes: {
-    position: {
-      control: 'inline-radio',
-      options: ['top', 'right', 'bottom', 'left']
-    },
-    alignment: {
-      control: 'inline-radio',
-      options: ['start', 'center', 'end']
-    }
-  }
+  component: 'nve-notification'
 };
 
-type ArgTypes = Notification;
-
 export const Default = {
-  render: (args: ArgTypes) => html`
-<nve-notification ${spread(args)}>
+  render: () => html`
+<nve-notification>
   <h3 nve-text="label">Title</h3>
-  <p nve-text="body">some text content in a notification some text content in a notification some text content in a notification some text content in a notification some text content in a notification</p>
+  <p nve-text="body">some text content in a notification</p>
 </nve-notification>
 `,
   args: { position: 'bottom', alignment: 'center', closable: true }
@@ -115,27 +101,55 @@ export const Status = {
 
 export const Position = {
   render: () => html`
-<nve-notification-group position="bottom" alignment="end">
+<nve-notification-group position="bottom">
   <nve-notification closable>
     <h3 nve-text="label">Title</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
-  <nve-notification status="accent" closable>
+  <nve-notification closable>
     <h3 nve-text="label">Title</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
-  <nve-notification status="success" closable>
-    <h3 nve-text="label">Title</h3>
-    <p nve-text="body">some text content in a notification</p>
-  </nve-notification>
-  <nve-notification status="warning" closable>
-    <h3 nve-text="label">Title</h3>
-    <p nve-text="body">some text content in a notification</p>
-  </nve-notification>
-  <nve-notification status="danger" closable>
+  <nve-notification closable>
     <h3 nve-text="label">Title</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
 </nve-notification-group>
   `
+};
+
+export const Drawer = {
+  render: () => html`
+<nve-drawer closable position="right">
+  <nve-drawer-header>
+    <h3 nve-text="heading semibold sm">Notifications</h3>
+  </nve-drawer-header>
+  <nve-notification closable container="flat">
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </nve-notification>
+  <nve-notification status="accent" container="flat" closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </nve-notification>
+  <nve-notification status="success" container="flat" closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </nve-notification>
+  <nve-notification status="warning" container="flat" closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </nve-notification>
+  <nve-notification status="danger" container="flat" closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">This is a notification in a notification drawer, messages should be succinct.</p>
+  </nve-notification>
+  <nve-drawer-footer>
+    <div nve-layout="grid gap:sm span-items:6">
+      <nve-button interaction="flat-destructive">Clear All</nve-button>
+      <nve-button>Mark All as Read</nve-button>
+    </div>
+  </nve-drawer-footer>
+</nve-drawer>
+  `,
 };

@@ -9,6 +9,7 @@
   --min-width: 320px;
   --width: fit-content;
   --max-width: fit-content;
+  --border: 0;
   width: var(--width);
   position: inherit;
   display: block;
@@ -24,15 +25,14 @@
   border-radius: var(--border-radius);
   background: var(--background);
   color: var(--color);
-  display: flex;
-  flex-direction: column;
   gap: var(--nve-ref-space-sm);
-  border: 0;
+  border: var(--border);
   border-left: 6px solid var(--status-color);
   min-width: var(--min-width);
   max-width: var(--max-width);
+  display: flex;
+  flex-direction: column;
   position: relative;
-  line-height: 0.8em;
 }
 
 .popover:has(nve-icon-button) {
@@ -55,6 +55,20 @@ nve-icon-button {
 
 ::slotted([nve-text]) {
   color: inherit !important;
+}
+
+:host([container='flat']) {
+  --max-width: 100%;
+  --width: 100%;
+  --border-radius: 0;
+  --box-shadow: none;
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --background: var(--nve-sys-layer-overlay-accent-background);
+  --color: var(--nve-sys-layer-overlay-color);
+
+  & .popover {
+    border-bottom: var(--border);
+  }
 }
 
 :host([status='accent']) {
