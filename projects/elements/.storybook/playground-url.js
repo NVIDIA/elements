@@ -82,6 +82,7 @@ function createDefaultFiles(content, storyId) {
         "@lit/reactive-element": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/reactive-element.js",
         "@lit/reactive-element/decorators/property.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/property.js",
         "@lit/reactive-element/decorators/query.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query.js",
+        "@lit/reactive-element/decorators/query-assigned-elements.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query-assigned-elements.js",
         "@lit/reactive-element/decorators/state.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/state.js",
         "@lit-labs/motion": "${CDN_MODULES_URL}/@lit-labs/motion@1.0.3/index.js"
       }
