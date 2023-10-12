@@ -94,4 +94,22 @@ describe('nve-notification', () => {
     await element.remove();
     expect((await event)).toBeDefined();
   });
+
+  it('should reflect a status', async () => {
+    expect(element.status).toBe(undefined);
+    expect(element.hasAttribute('status')).toBe(false);
+
+    element.status = 'accent';
+    await elementIsStable(element);
+    expect(element.getAttribute('status')).toBe('accent');
+  });
+
+  it('should reflect a container', async () => {
+    expect(element.container).toBe(undefined);
+    expect(element.hasAttribute('container')).toBe(false);
+
+    element.container = 'flat';
+    await elementIsStable(element);
+    expect(element.getAttribute('container')).toBe('flat');
+  });
 });
