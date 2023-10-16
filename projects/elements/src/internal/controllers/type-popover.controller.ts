@@ -1,8 +1,9 @@
 import { ReactiveController, ReactiveElement } from 'lit';
 import { clickOutsideElementBounds, getAttributeChanges, getFlatDOMTree } from '../utils/dom.js';
-import { computePopoverPosition, getPopoverCustomCSSProperites, PopoverAlign, PopoverConfig, PopoverPosition, popoverRenderUpdate, PopoverType, setArrowStyles, setPopoverStyles } from './type-popover.utils.js';
+import { computePopoverPosition, getPopoverCustomCSSProperites, PopoverConfig, popoverRenderUpdate, setArrowStyles, setPopoverStyles } from './type-popover.utils.js';
+import type { PopoverAlign, PopoverPosition, PopoverType } from '../types/index.js';
 
-export type { Placement, PopoverAlign as PopoverAlign, PopoverPosition as PopoverPosition, PopoverType as PopoverType } from './type-popover.utils.js';
+export type { Placement, PopoverAlign as PopoverAlign, PopoverPosition as PopoverPosition, PopoverType as PopoverType } from '../types/index.js';
 
 export interface Popover extends ReactiveElement {
   anchor?: HTMLElement | string;

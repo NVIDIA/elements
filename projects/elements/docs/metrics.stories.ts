@@ -23,7 +23,7 @@ const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeS
 const showdownOptions = { simplifiedAutoLink: true };
 
 export default {
-  title: 'Elements/Data Grid/Examples',
+  title: 'Elements/Metrics',
   component: 'mlv-grid',
 };
 
@@ -79,7 +79,7 @@ function getStatusBadge(status, message = '') {
 
 function getA11yStatusBadge(axe: string | boolean, shorthand = false) {
   if (axe === undefined) {
-    return html`<mlv-badge status="success">${shorthand ? 'Reviewed' : 'Accessibility: Reviewed'}</mlv-badge>`;
+    return html`<mlv-badge status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">${shorthand ? 'Reviewed' : 'Accessibility: axe-core'}</a></mlv-badge>`;
   } else if (axe === false) {
     return html`<mlv-badge status="pending">${shorthand ? 'Pending' : 'Accessibility: Pending'}</mlv-badge>`
   } else {
@@ -108,6 +108,29 @@ function basicSort(list: any[], key: string) {
       return a[key] > b[key] ? 1 : -1;
     }
   });
+}
+
+export const RawMetadata = {
+  render: () => html`
+    <div mlv-layout="column gap:lg">
+      <mlv-button>download</mlv-button>
+      <mlv-json-viewer expanded></mlv-json-viewer>
+    </div>
+    <script type="module">
+      const button = document.querySelector('mlv-button');
+      const viewer = document.querySelector('mlv-json-viewer');
+      viewer.value = ${JSON.stringify(metrics)};
+      button.addEventListener('click', () => {
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(viewer.value, null, 2)));
+        element.setAttribute('download', 'metadata.json');
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+      });
+    </script>
+  `
 }
 
 class ElementStatus extends LitElement {
@@ -183,7 +206,7 @@ class ElementMetrics extends LitElement {
       <section mlv-layout="column gap:lg">
         <div mlv-layout="row gap:sm align:center full">
           <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
-          <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
+          <div>${getCoverageStatus(element.tests.coverageTotal, 'coverage: ')}</div>
           <div>${getA11yStatusBadge(element.axe)}</div>
           <mlv-button size="sm" style="margin-left: auto"><mlv-icon name="checklist" size="sm"></mlv-icon><a href=${element.aria}>API Spec</a></mlv-button>
         ${element.figma ? html`<mlv-button size="sm"><mlv-icon name="shapes" size="sm"></mlv-icon><a href=${element.figma}>Figma</a></mlv-button>` : nothing}
@@ -220,15 +243,15 @@ class ElementAPI extends LitElement {
 
   render() {
     return html`
-      ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
-      ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
+      ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
+      ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
       ${!this.type ? html`
         <div mlv-layout="column gap:xs pad-top:xl pad-bottom:lg align:stretch">
           <h3 mlv-text="heading xl">API - ${this.tag}</h3>
           <mlv-divider></mlv-divider>
         </div>
         <div mlv-layout="column gap:xxl align:stretch">
-          <section mlv-layout="column gap:md" ?hidden=${!this.#element.attributes}>
+          <section mlv-layout="column gap:md" ?hidden=${!this.#element.schema.attributes}>
             <h3 mlv-text="heading">Properties</h3>
             <mlv-grid>
               <mlv-grid-header>
@@ -237,7 +260,7 @@ class ElementAPI extends LitElement {
                 <mlv-grid-column>Description</mlv-grid-column>
                 <mlv-grid-column>Type</mlv-grid-column>
               </mlv-grid-header>
-              ${this.#element.attributes?.map(attr => html`
+              ${this.#element.schema.attributes?.map(attr => html`
               <mlv-grid-row>
                 <mlv-grid-cell><code mlv-text="code">${attr.fieldName}</code></mlv-grid-cell>
                 <mlv-grid-cell><code mlv-text="code">${attr.name}</code></mlv-grid-cell>
@@ -245,20 +268,22 @@ class ElementAPI extends LitElement {
                 <mlv-grid-cell>
                   <div mlv-layout="row gap:xs align:wrap">
                     ${attr.type?.text ? html`${attr.type?.text.split(' | ').map(i => html`<mlv-tag readonly color="gray-slate">${i.replaceAll("'", '')}</mlv-tag>`)}` : nothing}
+                    ${attr.enum ? html`${attr.enum.map(i => html`<mlv-tag readonly color="gray-slate">${i.replaceAll("'", '')}</mlv-tag>`)}` : nothing}
+                    ${attr.type && !attr.type.text ? html`<mlv-tag readonly color="gray-slate">${attr.type.replaceAll("'", '')}</mlv-tag>` : nothing}
                   </div>
                 </mlv-grid-cell>
               </mlv-grid-row>`)}
             </mlv-grid>
           </section>
 
-          <section mlv-layout="column gap:md" ?hidden=${!this.#element.events}>
+          <section mlv-layout="column gap:md" ?hidden=${!this.#element.schema.events}>
             <h3 mlv-text="heading">Events</h3>
             <mlv-grid>
               <mlv-grid-header>
                 <mlv-grid-column>Event</mlv-grid-column>
                 <mlv-grid-column>Description</mlv-grid-column>
               </mlv-grid-header>
-              ${this.#element.events?.map(event => html`
+              ${this.#element.schema.events?.map(event => html`
               <mlv-grid-row>
                 <mlv-grid-cell>${event.name}</mlv-grid-cell>
                 <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(event.description ?? '')}></mlv-grid-cell>
@@ -266,14 +291,14 @@ class ElementAPI extends LitElement {
             </mlv-grid>
           </section>
 
-          <section mlv-layout="column gap:md" ?hidden=${!this.#element.slots}>
+          <section mlv-layout="column gap:md" ?hidden=${!this.#element.schema.slots}>
             <h3 mlv-text="heading">Slots</h3>
             <mlv-grid>
               <mlv-grid-header>
                 <mlv-grid-column>Slot</mlv-grid-column>
                 <mlv-grid-column>Description</mlv-grid-column>
               </mlv-grid-header>
-              ${this.#element.slots?.map(slot => html`
+              ${this.#element.schema.slots?.map(slot => html`
               <mlv-grid-row>
                 <mlv-grid-cell>${slot.name?.length ? slot.name : 'Default'}</mlv-grid-cell>
                 <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(slot.description ?? '')}></mlv-grid-cell>
@@ -281,14 +306,14 @@ class ElementAPI extends LitElement {
             </mlv-grid>
           </section>
 
-          <section mlv-layout="column gap:md" ?hidden=${!this.#element.cssProperties}>
+          <section mlv-layout="column gap:md" ?hidden=${!this.#element.schema.cssProperties}>
             <h3 mlv-text="heading">CSS Properties</h3>
             <mlv-grid>
               <mlv-grid-header>
                 <mlv-grid-column>Name</mlv-grid-column>
                 <mlv-grid-column>Description</mlv-grid-column>
               </mlv-grid-header>
-              ${this.#element.cssProperties?.map(prop => html`
+              ${this.#element.schema.cssProperties?.map(prop => html`
               <mlv-grid-row>
                 <mlv-grid-cell>${prop.name}</mlv-grid-cell>
                 <mlv-grid-cell>
@@ -306,6 +331,44 @@ class ElementAPI extends LitElement {
 }
 
 define(ElementAPI);
+
+class ElementsGlossary extends LitElement {
+  static metadata = {
+    tag: 'elements-glossary',
+    version: 'demo'
+  }
+
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
+  #markdown = new showdown.Converter(showdownOptions);
+
+  render() {
+    return html`
+      <section mlv-layout="column gap:md">
+        <h3 mlv-text="heading">Properties</h3>
+        <mlv-grid>
+          <mlv-grid-header>
+            <mlv-grid-column width="150px">Property</mlv-grid-column>
+            <mlv-grid-column>Description</mlv-grid-column>
+            <mlv-grid-column width="350px">Type</mlv-grid-column>
+          </mlv-grid-header>
+          ${metrics.types.props?.map(prop => html`
+          <mlv-grid-row>
+            <mlv-grid-cell><code mlv-text="code">${prop.name}</code></mlv-grid-cell>
+            <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></mlv-grid-cell>
+            <mlv-grid-cell>
+              <div mlv-layout="row gap:xs align:wrap">
+                ${prop.type ? html`${prop.type?.split(' | ').map(i => html`<mlv-tag readonly color="gray-slate">${i.replaceAll("'", '')}</mlv-tag>`)}` : nothing}
+              </div>
+            </mlv-grid-cell>
+          </mlv-grid-row>`)}
+        </mlv-grid>
+      </section>
+    `;
+  }
+}
+
+define(ElementsGlossary);
 
 interface MetricColumn {
   sort: 'ascending' | 'descending' | 'none',
@@ -371,12 +434,12 @@ class ElementsMetrics extends LitElement {
           <mlv-grid-row>
             <mlv-grid-cell><a href=${element.storybook.replace('https://elements.nvidia.com/ui/storybook/elements', './')} mlv-text="body link no-visit">${element.name.replace('mlv-', '')}</a></mlv-grid-cell>
             <mlv-grid-cell>${getStatusBadge(element.status)}</mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(element.coverageTotal)}</mlv-grid-cell>
+            <mlv-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</mlv-grid-cell>
             <mlv-grid-cell>${getA11yStatusBadge(element.axe, true)}</mlv-grid-cell>
             <mlv-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} mlv-text="link no-visit">${element.behavior}</a></mlv-grid-cell>
             <mlv-grid-cell>${element.since}</mlv-grid-cell>
-            <mlv-grid-cell>${element.instanceTotal}</mlv-grid-cell>
-            <mlv-grid-cell>${element.projectTotal}</mlv-grid-cell>
+            <mlv-grid-cell>${element.tests.instanceTotal}</mlv-grid-cell>
+            <mlv-grid-cell>${element.tests.projectTotal}</mlv-grid-cell>
             <mlv-grid-cell>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit">Figma</a>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
             <mlv-grid-cell><mlv-icon name="checkmark-circle" status="success"></mlv-icon></mlv-grid-cell>
             <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="checkmark-circle" status="success"></mlv-icon>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
@@ -424,7 +487,7 @@ class ProjectMetrics extends LitElement {
           projects = column.sort === 'descending' ? projects.reverse() : projects;
         }
         return projects;
-    }, [...metrics.projects]);
+    }, [...metrics.elements.projects]);
   }
 
   render() {
@@ -489,7 +552,7 @@ class MetricDemo extends LitElement {
               <span mlv-text="body sm muted">Total Available Components</span>
               <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.length}</mlv-badge></span>
               <span mlv-text="body sm muted">Total Maglev Instances</span>
-              <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
+              <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
             </section>
           </div>
           <elements-metrics></elements-metrics>
@@ -582,4 +645,8 @@ define(MetricDemo);
 
 export const Metrics = {
   render: () => html`<metrics-demo no-story-container></metrics-demo>`
+};
+
+export const Glossary = {
+  render: () => html`<elements-glossary></elements-glossary>`
 };

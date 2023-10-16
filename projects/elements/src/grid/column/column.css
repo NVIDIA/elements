@@ -1,10 +1,10 @@
 :host {
   --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-200);
   --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-200);
-  --color: var(--mlv-sys-layer-canvas-color);
+  --color: var(--mlv-sys-text-muted-color);
   --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-500);
-  --font-weight: var(--mlv-ref-font-weight-medium);
-  --font-size: var(--mlv-ref-font-size-200);
+  --font-weight: var(--mlv-ref-font-weight-semibold);
+  --font-size: var(--mlv-ref-font-size-100);
   --height: var(--mlv-ref-size-1000);
   --min-width: var(--mlv-ref-size-1000);
   --justify-content: start;

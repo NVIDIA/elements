@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { Button } from '@elements/elements/button';
-import { InlinePosition, spread } from '@elements/elements/internal';
+import { spread } from '@elements/elements/internal';
 import { IconName, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon/define.js';
@@ -20,7 +20,7 @@ export default {
 
 type ArgTypes = Button & {
   iconName: IconName;
-  iconSlotPlacement: InlinePosition;
+  iconSlotPlacement: 'start' | 'center' | 'end';
 }
 
 export const Default = {

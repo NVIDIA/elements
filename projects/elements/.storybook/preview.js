@@ -116,6 +116,7 @@ export const parameters = {
           'Extensions',
           'Contributions',
           'Requests',
+          'Glossary',
           'API Design',
           [
             'Getting Started',

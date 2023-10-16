@@ -306,6 +306,7 @@
     "svgo": "3.0.2",
     "terser": "5.19.2",
     "ts-lit-plugin": "1.2.1",
+    "ts-morph": "20.0.0",
     "typescript": "4.9.5",
     "vite": "4.4.9",
     "vite-plugin-dts": "3.5.1",
@@ -355,6 +356,8 @@
     "build:docs": {
       "command": "node ./metrics/index.mjs",
       "files": [
+        "metrics/index.mjs",
+        "metrics/stories.mjs",
         "dist/custom-elements.json"
       ],
       "output": [
@@ -555,7 +558,8 @@
     "metrics": {
       "command": "node ./metrics/index.mjs",
       "files": [
-        "metrics/index.mjs"
+        "metrics/index.mjs",
+        "metrics/stories.mjs"
       ],
       "output": [
         "metrics/data.json"

@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { ColorPalette, I18nController, MlvBaseButton, TypeClosableController, useStyles, colorStateStyles } from '@elements/elements/internal';
+import { Color, I18nController, MlvBaseButton, TypeClosableController, useStyles, colorStateStyles } from '@elements/elements/internal';
 import { Icon } from '@elements/elements/icon';
 import styles from './tag.css?inline';
 
@@ -37,7 +37,7 @@ export class Tag extends MlvBaseButton {
   @property({ type: Boolean }) closable = false;
 
   /** Determines the color of the tag. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=29-10&mode=design&t=uFeSKovl7yrHakis-0) */
-  @property({ type: String, reflect: true }) color: ColorPalette;
+  @property({ type: String, reflect: true }) color: Color;
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
