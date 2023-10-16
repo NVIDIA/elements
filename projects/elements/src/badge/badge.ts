@@ -1,7 +1,7 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
-import { TaskStatus, SupportStatus, useStyles, statusIcons, TrendStatus, statusStateStyles, supportStateStyles, ColorPalette, colorStateStyles, attachInternals, I18nController } from '@elements/elements/internal';
+import { TaskStatus, SupportStatus, useStyles, statusIcons, TrendStatus, statusStateStyles, supportStateStyles, Color, colorStateStyles, attachInternals, I18nController } from '@elements/elements/internal';
 import styles from './badge.css?inline';
 
 /**
@@ -30,7 +30,7 @@ export class Badge extends LitElement {
   /**
    * Highlights content to draw attention and convey simple messages. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=56-308&mode=design&t=eeBXUleEIUIAeQQh-0)
    */
-  @property({ type: String, reflect: true }) color: ColorPalette;
+  @property({ type: String, reflect: true }) color: Color;
 
   static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);
 

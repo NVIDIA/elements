@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { ColorPalette, useStyles, colorStateStyles, Size } from '@elements/elements/internal';
+import { Color, useStyles, colorStateStyles, Size } from '@elements/elements/internal';
 import styles from './logo.css?inline';
 
 /**
@@ -24,7 +24,7 @@ export class Logo extends LitElement {
   /**
    * Visual treatment to represent unique color of an application
    */
-  @property({ type: String, reflect: true }) color: ColorPalette;
+  @property({ type: String, reflect: true }) color: Color;
 
   /**
    * Determines size of logo

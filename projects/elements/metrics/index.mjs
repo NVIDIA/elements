@@ -2,6 +2,8 @@ import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { createRequire } from 'module';
+import { Project, SyntaxKind } from 'ts-morph';
+import { stories } from './stories.mjs';
 const require = createRequire(import.meta.url);
 
 const ariaSpecs = {
@@ -179,15 +181,20 @@ function getElements(coverage, projects) {
       name,
       ...superclassManifest.metadata ?? { },
       ...manifest.metadata,
-      properties: manifest.members.filter(m => m.description).map(m => ({ name: m.name, description: m.description })),
-      slots: manifest.slots,
-      attributes: manifest.attributes,
-      events: manifest.events,
-      cssProperties: manifest.cssProperties,
-      projectTotal: getProjectTotal(name, projects),
-      instanceTotal: getInstanceTotal(name, projects),
-      coverageTotal,
-      aria
+      aria,
+      schema: {
+        properties: manifest.members.filter(m => m.description).map(m => ({ name: m.name, description: m.description })),
+        slots: manifest.slots,
+        attributes: manifest.attributes,
+        events: manifest.events,
+        cssProperties: manifest.cssProperties,
+      },
+      tests: {
+        projectTotal: getProjectTotal(name, projects),
+        instanceTotal: getInstanceTotal(name, projects),
+        coverageTotal
+      },
+      stories: stories.find(s => s.element.startsWith(name))?.stories ?? [],
     };
 
     metadata.behavior = getBehaviorCategory(manifest);
@@ -197,6 +204,14 @@ function getElements(coverage, projects) {
   }, []).sort((a, b) => a.name < b.name ? -1 : 1);
 }
 
+function getBaseInterface() {
+  const project = new Project();
+  const file = project.addSourceFileAtPath(resolve('src/internal/types/index.ts'));
+  const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find(i => i.getName() === 'MlvElement');
+  const props = base.getStructure().properties.map(n => ({ name: n.name, type: n.type, description: n.docs[0]?.description }));
+  return props;
+}
+
 async function getMetrics() {
   const projects = await getProjects();
   const coverage = getCoverage();
@@ -204,12 +219,17 @@ async function getMetrics() {
   const elements = getElements(coverage, projects);
   const metrics = {
     created: new Date().toISOString(),
-    versions: Array.from(new Set(projects.map(p => p.elementsVersion.replace('^', '').replace('~', '')))),
     elements,
-    projects,
     tests: {
       coverage,
       coverageTotal
+    },
+    elements: {
+      projects,
+      versions: Array.from(new Set(projects.map(p => p.elementsVersion.replace('^', '').replace('~', '')))),
+    },
+    types: {
+      props : getBaseInterface()
     }
   };
 

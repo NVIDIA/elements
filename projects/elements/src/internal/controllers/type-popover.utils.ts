@@ -2,22 +2,12 @@ import { css } from 'lit';
 import { arrow, autoUpdate, computePosition, ComputePositionReturn, flip, Middleware, offset, platform } from '@floating-ui/dom';
 import { offsetParent } from 'composed-offset-position';
 import { parseTokenNumber } from '../utils/dom.js';
+import type { PopoverAlign, PopoverPosition, PopoverSides } from '../types/index.js';
 
 if (!globalThis.process) {
   (globalThis.process as any) = { env: { NODE_ENV: 'production' } }; // floating-ui
 }
 
-/**
- * https://open-ui.org/components/popup.research.explainer#api-shape
- * auto - light dismiss, focus on open, return to trigger
- * manual - no light dismiss, no auto focus
- * hint - no light dismiss, no auto focus, open/close on hover/focus
- */
-export type PopoverType = 'auto' | 'manual' | 'hint';
-export type PopoverAlign = 'start' | 'end' | 'center';
-export type PopoverSides = 'top' | 'bottom' | 'left' | 'right';
-export type PopoverPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
-export type Placement = PopoverPosition | `${PopoverSides}-${PopoverAlign}`;
 
 export interface PopoverConfig {
   position: PopoverPosition,
