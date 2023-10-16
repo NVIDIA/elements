@@ -32,7 +32,7 @@
   --color: var(--nve-sys-text-emphasis-color);
 }
 
-:host([interaction*='flat']:hover) {
+:host(:not([interaction='emphasize'], [interaction='destructive'], [disabled]):hover) {
   --color: var(--nve-sys-text-emphasis-color);
 }
 

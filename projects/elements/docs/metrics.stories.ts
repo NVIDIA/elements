@@ -23,7 +23,7 @@ const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeS
 const showdownOptions = { simplifiedAutoLink: true };
 
 export default {
-  title: 'Elements/Data Grid/Examples',
+  title: 'Elements/Metrics',
   component: 'nve-grid',
 };
 
@@ -79,7 +79,7 @@ function getStatusBadge(status, message = '') {
 
 function getA11yStatusBadge(axe: string | boolean, shorthand = false) {
   if (axe === undefined) {
-    return html`<nve-badge status="success">${shorthand ? 'Reviewed' : 'Accessibility: Reviewed'}</nve-badge>`;
+    return html`<nve-badge status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">${shorthand ? 'Reviewed' : 'Accessibility: axe-core'}</a></nve-badge>`;
   } else if (axe === false) {
     return html`<nve-badge status="pending">${shorthand ? 'Pending' : 'Accessibility: Pending'}</nve-badge>`
   } else {
@@ -108,6 +108,29 @@ function basicSort(list: any[], key: string) {
       return a[key] > b[key] ? 1 : -1;
     }
   });
+}
+
+export const RawMetadata = {
+  render: () => html`
+    <div nve-layout="column gap:lg">
+      <nve-button>download</nve-button>
+      <nve-json-viewer expanded></nve-json-viewer>
+    </div>
+    <script type="module">
+      const button = document.querySelector('nve-button');
+      const viewer = document.querySelector('nve-json-viewer');
+      viewer.value = ${JSON.stringify(metrics)};
+      button.addEventListener('click', () => {
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(viewer.value, null, 2)));
+        element.setAttribute('download', 'metadata.json');
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+      });
+    </script>
+  `
 }
 
 class ElementStatus extends LitElement {
@@ -183,7 +206,7 @@ class ElementMetrics extends LitElement {
       <section nve-layout="column gap:lg">
         <div nve-layout="row gap:sm align:center full">
           <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
-          <div>${getCoverageStatus(element.coverageTotal, 'coverage: ')}</div>
+          <div>${getCoverageStatus(element.tests.coverageTotal, 'coverage: ')}</div>
           <div>${getA11yStatusBadge(element.axe)}</div>
           <nve-button size="sm" style="margin-left: auto"><nve-icon name="checklist" size="sm"></nve-icon><a href=${element.aria}>API Spec</a></nve-button>
         ${element.figma ? html`<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href=${element.figma}>Figma</a></nve-button>` : nothing}
@@ -220,15 +243,15 @@ class ElementAPI extends LitElement {
 
   render() {
     return html`
-      ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
-      ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
+      ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
+      ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       ${!this.type ? html`
         <div nve-layout="column gap:xs pad-top:xl pad-bottom:lg align:stretch">
           <h3 nve-text="heading xl">API - ${this.tag}</h3>
           <nve-divider></nve-divider>
         </div>
         <div nve-layout="column gap:xxl align:stretch">
-          <section nve-layout="column gap:md" ?hidden=${!this.#element.attributes}>
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.schema.attributes}>
             <h3 nve-text="heading">Properties</h3>
             <nve-grid>
               <nve-grid-header>
@@ -237,7 +260,7 @@ class ElementAPI extends LitElement {
                 <nve-grid-column>Description</nve-grid-column>
                 <nve-grid-column>Type</nve-grid-column>
               </nve-grid-header>
-              ${this.#element.attributes?.map(attr => html`
+              ${this.#element.schema.attributes?.map(attr => html`
               <nve-grid-row>
                 <nve-grid-cell><code nve-text="code">${attr.fieldName}</code></nve-grid-cell>
                 <nve-grid-cell><code nve-text="code">${attr.name}</code></nve-grid-cell>
@@ -245,20 +268,22 @@ class ElementAPI extends LitElement {
                 <nve-grid-cell>
                   <div nve-layout="row gap:xs align:wrap">
                     ${attr.type?.text ? html`${attr.type?.text.split(' | ').map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
+                    ${attr.enum ? html`${attr.enum.map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
+                    ${attr.type && !attr.type.text ? html`<nve-tag readonly color="gray-slate">${attr.type.replaceAll("'", '')}</nve-tag>` : nothing}
                   </div>
                 </nve-grid-cell>
               </nve-grid-row>`)}
             </nve-grid>
           </section>
 
-          <section nve-layout="column gap:md" ?hidden=${!this.#element.events}>
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.schema.events}>
             <h3 nve-text="heading">Events</h3>
             <nve-grid>
               <nve-grid-header>
                 <nve-grid-column>Event</nve-grid-column>
                 <nve-grid-column>Description</nve-grid-column>
               </nve-grid-header>
-              ${this.#element.events?.map(event => html`
+              ${this.#element.schema.events?.map(event => html`
               <nve-grid-row>
                 <nve-grid-cell>${event.name}</nve-grid-cell>
                 <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(event.description ?? '')}></nve-grid-cell>
@@ -266,14 +291,14 @@ class ElementAPI extends LitElement {
             </nve-grid>
           </section>
 
-          <section nve-layout="column gap:md" ?hidden=${!this.#element.slots}>
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.schema.slots}>
             <h3 nve-text="heading">Slots</h3>
             <nve-grid>
               <nve-grid-header>
                 <nve-grid-column>Slot</nve-grid-column>
                 <nve-grid-column>Description</nve-grid-column>
               </nve-grid-header>
-              ${this.#element.slots?.map(slot => html`
+              ${this.#element.schema.slots?.map(slot => html`
               <nve-grid-row>
                 <nve-grid-cell>${slot.name?.length ? slot.name : 'Default'}</nve-grid-cell>
                 <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(slot.description ?? '')}></nve-grid-cell>
@@ -281,14 +306,14 @@ class ElementAPI extends LitElement {
             </nve-grid>
           </section>
 
-          <section nve-layout="column gap:md" ?hidden=${!this.#element.cssProperties}>
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.schema.cssProperties}>
             <h3 nve-text="heading">CSS Properties</h3>
             <nve-grid>
               <nve-grid-header>
                 <nve-grid-column>Name</nve-grid-column>
                 <nve-grid-column>Description</nve-grid-column>
               </nve-grid-header>
-              ${this.#element.cssProperties?.map(prop => html`
+              ${this.#element.schema.cssProperties?.map(prop => html`
               <nve-grid-row>
                 <nve-grid-cell>${prop.name}</nve-grid-cell>
                 <nve-grid-cell>
@@ -306,6 +331,44 @@ class ElementAPI extends LitElement {
 }
 
 define(ElementAPI);
+
+class ElementsGlossary extends LitElement {
+  static metadata = {
+    tag: 'elements-glossary',
+    version: 'demo'
+  }
+
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
+  #markdown = new showdown.Converter(showdownOptions);
+
+  render() {
+    return html`
+      <section nve-layout="column gap:md">
+        <h3 nve-text="heading">Properties</h3>
+        <nve-grid>
+          <nve-grid-header>
+            <nve-grid-column width="150px">Property</nve-grid-column>
+            <nve-grid-column>Description</nve-grid-column>
+            <nve-grid-column width="350px">Type</nve-grid-column>
+          </nve-grid-header>
+          ${metrics.types.props?.map(prop => html`
+          <nve-grid-row>
+            <nve-grid-cell><code nve-text="code">${prop.name}</code></nve-grid-cell>
+            <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></nve-grid-cell>
+            <nve-grid-cell>
+              <div nve-layout="row gap:xs align:wrap">
+                ${prop.type ? html`${prop.type?.split(' | ').map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
+              </div>
+            </nve-grid-cell>
+          </nve-grid-row>`)}
+        </nve-grid>
+      </section>
+    `;
+  }
+}
+
+define(ElementsGlossary);
 
 interface MetricColumn {
   sort: 'ascending' | 'descending' | 'none',
@@ -371,12 +434,12 @@ class ElementsMetrics extends LitElement {
           <nve-grid-row>
             <nve-grid-cell><a href=${element.storybook.replace('https://elements.nvidia.com/ui/storybook/elements', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
             <nve-grid-cell>${getStatusBadge(element.status)}</nve-grid-cell>
-            <nve-grid-cell>${getCoverageStatus(element.coverageTotal)}</nve-grid-cell>
+            <nve-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</nve-grid-cell>
             <nve-grid-cell>${getA11yStatusBadge(element.axe, true)}</nve-grid-cell>
             <nve-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} nve-text="link no-visit">${element.behavior}</a></nve-grid-cell>
             <nve-grid-cell>${element.since}</nve-grid-cell>
-            <nve-grid-cell>${element.instanceTotal}</nve-grid-cell>
-            <nve-grid-cell>${element.projectTotal}</nve-grid-cell>
+            <nve-grid-cell>${element.tests.instanceTotal}</nve-grid-cell>
+            <nve-grid-cell>${element.tests.projectTotal}</nve-grid-cell>
             <nve-grid-cell>${element.figma ? html`<a href=${element.figma} nve-text="link no-visit">Figma</a>` : html`<nve-icon name="warning" status="warning"></nve-icon>`}</nve-grid-cell>
             <nve-grid-cell><nve-icon name="checkmark-circle" status="success"></nve-icon></nve-grid-cell>
             <nve-grid-cell>${element.responsive ? html`<nve-icon name="checkmark-circle" status="success"></nve-icon>` : html`<nve-icon name="warning" status="warning"></nve-icon>`}</nve-grid-cell>
@@ -424,7 +487,7 @@ class ProjectMetrics extends LitElement {
           projects = column.sort === 'descending' ? projects.reverse() : projects;
         }
         return projects;
-    }, [...metrics.projects]);
+    }, [...metrics.elements.projects]);
   }
 
   render() {
@@ -489,7 +552,7 @@ class MetricDemo extends LitElement {
               <span nve-text="body sm muted">Total Available Components</span>
               <span nve-text="body sm bold"><nve-badge status="success">${metrics.elements.length}</nve-badge></span>
               <span nve-text="body sm muted">Total Maglev Instances</span>
-              <span nve-text="body sm bold"><nve-badge status="success">${metrics.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge></span>
+              <span nve-text="body sm bold"><nve-badge status="success">${metrics.elements.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge></span>
             </section>
           </div>
           <elements-metrics></elements-metrics>
@@ -582,4 +645,8 @@ define(MetricDemo);
 
 export const Metrics = {
   render: () => html`<metrics-demo no-story-container></metrics-demo>`
+};
+
+export const Glossary = {
+  render: () => html`<elements-glossary></elements-glossary>`
 };
