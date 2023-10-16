@@ -1,7 +1,20 @@
 import pkg from './package.json' assert { type: 'json' };
 import path from 'path';
+import { Project, SyntaxKind } from 'ts-morph';
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
+
+const runtimeEnvironment = {};
+
+const baseInterface = getBaseInterface();
+
+function getBaseInterface() {
+  const project = new Project();
+  const file = project.addSourceFileAtPath(resolve('src/internal/types/index.ts'));
+  const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find(i => i.getName() === 'MlvElement');
+  const props = base.getStructure().properties.reduce((p, n) => ({ ...p, [n.name]: n }), {});
+  return props;
+}
 
 function metadataPlugin() {
   return {
@@ -99,7 +112,7 @@ function orderPlugin() {
 
 // Leverage the TypeScript compiler to evaluate exported string literal (union) types to their compiled type values.
 // Note: https://ts-ast-viewer.com/ is helpful for understanding the TypeScript AST and type checker return values.
-function rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment) {
+function rewriteExportedStringLiteralTypeAliasesPlugin() {
   function quoteWrap(string) {
     return `'${string}'`;
   }
@@ -158,7 +171,7 @@ function rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment) {
             if (node.type.kind === ts.SyntaxKind.UnionType) {
               const typeAlias = node.name.escapedText;
               const { types } = runtimeEnvironment.typeChecker.getTypeAtLocation(node);
-              if (types.every((type) => type.value !== undefined)) {
+              if (types?.every((type) => type.value !== undefined)) {
                 const stringLiterals = types.map((type) => quoteWrap(type.value));
                 stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
               }
@@ -178,6 +191,12 @@ function rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment) {
               for (const attribute of declaration.attributes ?? []) {
                 rewriteTypesText(attribute);
               }
+
+              declaration.attributes?.forEach(attr => {                
+                if (baseInterface[attr.name] && baseInterface[attr.name].docs.length) {
+                  attr.description = baseInterface[attr.name].docs[0]?.description;
+                }
+              });
               break;
             case 'function':
               for (const parameter of declaration.parameters ?? []) {
@@ -191,13 +210,11 @@ function rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment) {
   };
 }
 
-const runtimeEnvironment = {};
-
 export default {
   globs: [resolve('./src')],
   exclude: [resolve('src/**/*.css'), resolve('src/**/*.stories.mdx'), resolve('src/**/*.stories.ts'), resolve('src/**/*.test.axe.ts')],
   litelement: true,
-  plugins: [basePathPlugin(), extensionPlugin(), orderPlugin(), metadataPlugin(), rewriteExportedStringLiteralTypeAliasesPlugin(runtimeEnvironment)],
+  plugins: [basePathPlugin(), extensionPlugin(), orderPlugin(), metadataPlugin(), rewriteExportedStringLiteralTypeAliasesPlugin()],
   overrideModuleCreation: ({ ts, globs }) => {
     const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.lib.json');
     if (!configFile) {
