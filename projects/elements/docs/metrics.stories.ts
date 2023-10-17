@@ -1,4 +1,4 @@
-import { html, LitElement, nothing, unsafeCSS } from 'lit';
+import { html, css, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import showdown from 'showdown';
@@ -228,7 +228,7 @@ class ElementAPI extends LitElement {
 
   @property({ type: String }) value: string;
 
-  static styles = [unsafeCSS(`${typography}${layout}`)];
+  static styles = [unsafeCSS(`${typography}${layout}`), css`:host { width: 100%; display: block; }`];
 
   static metadata = {
     tag: 'element-api',
