@@ -1,6 +1,7 @@
 import { gzipSync } from 'fflate';
 import { html, nothing } from 'lit';
 import packageFile from '../package.json';
+import metrics from 'metrics/data.json';
 
 const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
@@ -16,7 +17,7 @@ export function playground(Story, context) {
     const formattedSource = prettier.default.format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
 
     const files = serialize(addCssContent(createDefaultFiles(formattedSource, context.id), context.id));
-    const url = `https://elements-stage.nvidia.com/ui/elements-playground/?theme=${context.globals.theme}&story=${context.id}&files=${files}}`;
+    const url = `https://elements-stage.nvidia.com/ui/elements-playground/?theme=${context.globals.theme}&story=${context.id}&files=${files}`;
     const playgroundButton = Object.keys(context.unmappedArgs).length ? nothing : html`<nve-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></nve-button>`;
     return html`${Story()} ${playgroundButton}`;
   }
@@ -53,97 +54,60 @@ function serialize(data, compress = true) {
 
 function createDefaultFiles(content, storyId) {
   const ELEMENTS_VERSION = packageFile.version;
-  const CDN_ORIGIN = `https://cdn-stage.nvidia.com`;
-  const CDN_MODULES_URL = `${CDN_ORIGIN}/assets/elements-playground/modules`;
-
+  const CDN_MODULES_URL = `https://esm.nvidia.com`;
+  getImports(content);
   return {
     'index.html': {
-      content: `<!doctype html>
+      content: prettier.default.format(`<!doctype html>
 <html nve-theme="dark">
 <head>
-  <link rel="stylesheet" type="text/css" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/index.css" />
-  <link rel="stylesheet" type="text/css" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/inter.css" />
+  <link rel="stylesheet" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/index.css" />
+  <link rel="stylesheet" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/inter.css" />
   <script type="importmap">
-  {
-    "imports": {
-      "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/",
-      "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/"
-    },
-    "scopes": {
-      "${CDN_ORIGIN}/": {
-        "composed-offset-position": "${CDN_MODULES_URL}/composed-offset-position@0.0.4/dist/composed-offset-position.esm.js",
-        "lit": "${CDN_MODULES_URL}/lit@2.7.4/index.js",
-        "lit/": "${CDN_MODULES_URL}/lit@2.7.4/",
-        "lit-element/lit-element.js": "${CDN_MODULES_URL}/lit-element@3.3.0/development/lit-element.js",
-        "lit-html": "${CDN_MODULES_URL}/lit-html@2.7.4/development/lit-html.js",
-        "lit-html/": "${CDN_MODULES_URL}/lit-html@2.7.4/development/",
-        "@floating-ui/core": "${CDN_MODULES_URL}/@floating-ui/core@1.2.6/dist/floating-ui.core.esm.js",
-        "@floating-ui/dom": "${CDN_MODULES_URL}/@floating-ui/dom@1.2.6/dist/floating-ui.dom.esm.js",
-        "@lit/reactive-element": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/reactive-element.js",
-        "@lit/reactive-element/decorators/property.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/property.js",
-        "@lit/reactive-element/decorators/query.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query.js",
-        "@lit/reactive-element/decorators/query-assigned-elements.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query-assigned-elements.js",
-        "@lit/reactive-element/decorators/state.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/state.js",
-        "@lit-labs/motion": "${CDN_MODULES_URL}/@lit-labs/motion@1.0.3/index.js"
+    {
+      "imports": {
+        "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/",
+        "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/"
+      },
+      "scopes": {
+        "${CDN_MODULES_URL}/": {
+          "composed-offset-position": "${CDN_MODULES_URL}/composed-offset-position@0.0.4/dist/composed-offset-position.esm.js",
+          "lit": "${CDN_MODULES_URL}/lit@2.7.4/index.js",
+          "lit/": "${CDN_MODULES_URL}/lit@2.7.4/",
+          "lit-element/lit-element.js": "${CDN_MODULES_URL}/lit-element@3.3.0/development/lit-element.js",
+          "lit-html": "${CDN_MODULES_URL}/lit-html@2.7.4/development/lit-html.js",
+          "lit-html/": "${CDN_MODULES_URL}/lit-html@2.7.4/development/",
+          "@floating-ui/core": "${CDN_MODULES_URL}/@floating-ui/core@1.2.6/dist/floating-ui.core.esm.js",
+          "@floating-ui/dom": "${CDN_MODULES_URL}/@floating-ui/dom@1.2.6/dist/floating-ui.dom.esm.js",
+          "@lit/reactive-element": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/reactive-element.js",
+          "@lit/reactive-element/decorators/property.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/property.js",
+          "@lit/reactive-element/decorators/query.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query.js",
+          "@lit/reactive-element/decorators/query-assigned-elements.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query-assigned-elements.js",
+          "@lit/reactive-element/decorators/state.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/state.js",
+          "@lit-labs/motion": "${CDN_MODULES_URL}/@lit-labs/motion@1.0.3/index.js"
+        }
       }
     }
-  }
   </script>
-  <script type="module" src="./index.js"></script>
+  <script type="module">
+    ${getImports(content)}
+  </script>
   ${storyId.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
 </head>
-<body nve-layout="column gap:lg pad:lg">
-
-${content}
-
+<body nve-layout="column gap:lg pad:lg full">
+  ${content}
 </body>
-</html>`
-    },
-    'index.ts': {
-      content: `import '@elements/elements/accordion/define.js';
-import '@elements/elements/alert/define.js';
-import '@elements/elements/app-header/define.js';
-import '@elements/elements/badge/define.js';
-import '@elements/elements/breadcrumb/define.js';
-import '@elements/elements/bulk-actions/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/card/define.js';
-import '@elements/elements/checkbox/define.js';
-import '@elements/elements/color/define.js';
-import '@elements/elements/date/define.js';
-import '@elements/elements/datetime/define.js';
-import '@elements/elements/dialog/define.js';
-import '@elements/elements/divider/define.js';
-import '@elements/elements/dot/define.js';
-import '@elements/elements/dropdown/define.js';
-import '@elements/elements/file/define.js';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/grid/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/logo/define.js';
-import '@elements/elements/menu/define.js';
-import '@elements/elements/month/define.js';
-import '@elements/elements/notification/define.js';
-import '@elements/elements/pagination/define.js';
-import '@elements/elements/panel/define.js';
-import '@elements/elements/password/define.js';
-import '@elements/elements/radio/define.js';
-import '@elements/elements/range/define.js';
-import '@elements/elements/search/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/sort-button/define.js';
-import '@elements/elements/switch/define.js';
-import '@elements/elements/tabs/define.js';
-import '@elements/elements/tag/define.js';
-import '@elements/elements/textarea/define.js';
-import '@elements/elements/time/define.js';
-import '@elements/elements/toast/define.js';
-import '@elements/elements/tooltip/define.js';
-import '@elements/elements/week/define.js';`
+</html>`, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120, singleQuote: true })
     }
   };
+}
+
+
+function getImports(content) {
+  return metrics.elements
+    .filter(e => content.includes(e.name) && packageFile.exports[`./${e.name.replace('nve-', '')}/define.js`])
+    .map(e => `import '@elements/elements/${e.name.replace('nve-', '')}/define.js';`)
+    .join('\n');
 }
 
 function addCssContent(defaultFiles, storyId) {
