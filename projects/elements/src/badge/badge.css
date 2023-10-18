@@ -74,3 +74,14 @@ nve-icon,
     color: var(--nve-sys-contrast-mute-color);
   }
 }
+
+:host([container='flat']) {
+  --background: var(--nve-sys-background-color);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --status-color: var(--nve-sys-status-color);
+  --gap: var(--nve-ref-space-xs);
+  --padding: 0;
+  --text-transform: capitalize;
+  --width: initial;
+  --height: initial;
+}

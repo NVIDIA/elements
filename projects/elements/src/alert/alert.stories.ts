@@ -1,5 +1,4 @@
 import { html } from 'lit';
-import { Alert } from '@elements/elements/alert';
 import '@elements/elements/alert/define.js';
 
 export default {
@@ -7,13 +6,11 @@ export default {
   component: 'nve-alert'
 };
 
-type ArgTypes = Alert;
-
 export const Default = {
-  render: (args: ArgTypes) => html`<nve-alert .status=${args.status}>alert message</nve-alert>`
+  render: () => html`<nve-alert>alert message</nve-alert>`
 };
 
-export const SupportStatus = {
+export const Status = {
   render: () => html`
 <div nve-layout="column gap:md">
   <nve-alert>Standard</nve-alert>
@@ -25,7 +22,7 @@ export const SupportStatus = {
   `
 }
 
-export const SupportStatusLightTheme = {
+export const StatusLightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="column gap:md pad:md">
   <nve-alert>Standard</nve-alert>
@@ -37,7 +34,7 @@ export const SupportStatusLightTheme = {
   `
 }
 
-export const SupportStatusDarkTheme = {
+export const StatusDarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="column gap:md pad:md">
   <nve-alert>Standard</nve-alert>
@@ -49,7 +46,7 @@ export const SupportStatusDarkTheme = {
   `
 }
 
-export const Status = {
+export const TaskStatus = {
   render: () => html`
 <div nve-layout="column gap:md">
   <nve-alert status="scheduled">Scheduled</nve-alert>
@@ -67,7 +64,7 @@ export const Status = {
   `
 }
 
-export const StatusLightTheme = {
+export const TaskStatusLightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="column gap:md pad:md">
   <nve-alert status="scheduled">Scheduled</nve-alert>
@@ -84,7 +81,7 @@ export const StatusLightTheme = {
   `
 }
 
-export const StatusDarkTheme = {
+export const TaskStatusDarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="column gap:md pad:md">
   <nve-alert status="scheduled">Scheduled</nve-alert>
