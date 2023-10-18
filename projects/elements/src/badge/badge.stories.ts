@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import '@elements/elements/badge/define.js';
+import '@elements/elements/alert/define.js';
 
 export default {
   title: 'Elements/Badge/Examples',
@@ -8,13 +9,13 @@ export default {
 
 export const Default = {
   render: () => html`
-  <nve-badge status="starting">starting</nve-badge>
+  <nve-badge>badge</nve-badge>
   `
 };
 
 export const Status = {
   render: () => html`
-<div nve-layout="row gap:md align:wrap">
+<div nve-layout="row gap:xs align:wrap">
   <nve-badge status="scheduled">scheduled</nve-badge>
   <nve-badge status="queued">queued</nve-badge>
   <nve-badge status="pending">pending</nve-badge>
@@ -30,31 +31,45 @@ export const Status = {
   `
 }
 
+export const Flat = {
+  render: () => html`
+<div nve-layout="row gap:md align:wrap">
+  <nve-badge container="flat" status="scheduled">scheduled</nve-badge>
+  <nve-badge container="flat" status="queued">queued</nve-badge>
+  <nve-badge container="flat" status="pending">pending</nve-badge>
+  <nve-badge container="flat" status="starting">starting</nve-badge>
+  <nve-badge container="flat" status="running">running</nve-badge>
+  <nve-badge container="flat" status="restarting">restarting</nve-badge>
+  <nve-badge container="flat" status="stopping">stopping</nve-badge>
+  <nve-badge container="flat" status="finished">finished</nve-badge>
+  <nve-badge container="flat" status="failed">failed</nve-badge>
+  <nve-badge container="flat" status="unknown">unknown</nve-badge>
+  <nve-badge container="flat" status="ignored">ignored</nve-badge>
+</div>
+  `
+}
+
+export const Icon = {
+  render: () => html`
+<div nve-layout="row gap:md align:wrap">
+  <nve-badge container="flat" status="scheduled" aria-label="scheduled"></nve-badge>
+  <nve-badge container="flat" status="queued" aria-label="queued"></nve-badge>
+  <nve-badge container="flat" status="pending" aria-label="pending"></nve-badge>
+  <nve-badge container="flat" status="starting" aria-label="starting"></nve-badge>
+  <nve-badge container="flat" status="running" aria-label="running"></nve-badge>
+  <nve-badge container="flat" status="restarting" aria-label="restarting"></nve-badge>
+  <nve-badge container="flat" status="stopping" aria-label="stopping"></nve-badge>
+  <nve-badge container="flat" status="finished" aria-label="finished"></nve-badge>
+  <nve-badge container="flat" status="failed" aria-label="failed"></nve-badge>
+  <nve-badge container="flat" status="unknown" aria-label="unknown"></nve-badge>
+  <nve-badge container="flat" status="ignored" aria-label="ignored"></nve-badge>
+</div>
+  `
+}
+
 export const Support = {
   render: () => html`
 <div nve-layout="row gap:md">
-  <nve-badge status="accent">accent</nve-badge>
-  <nve-badge status="warning">warning</nve-badge>
-  <nve-badge status="success">success</nve-badge>
-  <nve-badge status="danger">danger</nve-badge>
-</div>
-  `
-}
-
-export const SupportLightTheme = {
-  render: () => html`
-<div nve-theme="root light" nve-layout="row gap:md pad:md align:wrap">
-  <nve-badge status="accent">accent</nve-badge>
-  <nve-badge status="warning">warning</nve-badge>
-  <nve-badge status="success">success</nve-badge>
-  <nve-badge status="danger">danger</nve-badge>
-</div>
-  `
-}
-
-export const SupportDarkTheme = {
-  render: () => html`
-<div nve-theme="root dark" nve-layout="row gap:md pad:md align:wrap">
   <nve-badge status="accent">accent</nve-badge>
   <nve-badge status="warning">warning</nve-badge>
   <nve-badge status="success">success</nve-badge>
@@ -102,26 +117,6 @@ export const StatusDarkTheme = {
 export const Trend = {
   render: () => html`
 <div nve-layout="row gap:md">
-  <nve-badge status="trend-neutral">+15%</nve-badge>
-  <nve-badge status="trend-up">+15%</nve-badge>
-  <nve-badge status="trend-down">-15%</nve-badge>
-</div>
-  `
-}
-
-export const TrendLightTheme = {
-  render: () => html`
-<div nve-theme="root light" nve-layout="row gap:md pad:md">
-  <nve-badge status="trend-neutral">+15%</nve-badge>
-  <nve-badge status="trend-up">+15%</nve-badge>
-  <nve-badge status="trend-down">-15%</nve-badge>
-</div>
-  `
-}
-
-export const TrendDarkTheme = {
-  render: () => html`
-<div nve-theme="root dark" nve-layout="row gap:md pad:md">
   <nve-badge status="trend-neutral">+15%</nve-badge>
   <nve-badge status="trend-up">+15%</nve-badge>
   <nve-badge status="trend-down">-15%</nve-badge>
