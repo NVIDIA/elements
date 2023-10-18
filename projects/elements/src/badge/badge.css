@@ -74,3 +74,14 @@ mlv-icon,
     color: var(--mlv-sys-contrast-mute-color);
   }
 }
+
+:host([container='flat']) {
+  --background: var(--mlv-sys-background-color);
+  --border-radius: var(--mlv-ref-border-radius-sm);
+  --status-color: var(--mlv-sys-status-color);
+  --gap: var(--mlv-ref-space-xs);
+  --padding: 0;
+  --text-transform: capitalize;
+  --width: initial;
+  --height: initial;
+}

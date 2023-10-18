@@ -32,6 +32,11 @@ export class Badge extends LitElement {
    */
   @property({ type: String, reflect: true }) color: Color;
 
+  /**
+   * Determines the container styles of component. Flat is used for nesting within other containers.
+   */
+  @property({ type: String, reflect: true }) container?: 'flat';
+
   static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);
 
   static readonly metadata = {

@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import '@elements/elements/badge/define.js';
+import '@elements/elements/alert/define.js';
 
 export default {
   title: 'Elements/Badge/Examples',
@@ -8,13 +9,13 @@ export default {
 
 export const Default = {
   render: () => html`
-  <mlv-badge status="starting">starting</mlv-badge>
+  <mlv-badge>badge</mlv-badge>
   `
 };
 
 export const Status = {
   render: () => html`
-<div mlv-layout="row gap:md align:wrap">
+<div mlv-layout="row gap:xs align:wrap">
   <mlv-badge status="scheduled">scheduled</mlv-badge>
   <mlv-badge status="queued">queued</mlv-badge>
   <mlv-badge status="pending">pending</mlv-badge>
@@ -30,31 +31,45 @@ export const Status = {
   `
 }
 
+export const Flat = {
+  render: () => html`
+<div mlv-layout="row gap:md align:wrap">
+  <mlv-badge container="flat" status="scheduled">scheduled</mlv-badge>
+  <mlv-badge container="flat" status="queued">queued</mlv-badge>
+  <mlv-badge container="flat" status="pending">pending</mlv-badge>
+  <mlv-badge container="flat" status="starting">starting</mlv-badge>
+  <mlv-badge container="flat" status="running">running</mlv-badge>
+  <mlv-badge container="flat" status="restarting">restarting</mlv-badge>
+  <mlv-badge container="flat" status="stopping">stopping</mlv-badge>
+  <mlv-badge container="flat" status="finished">finished</mlv-badge>
+  <mlv-badge container="flat" status="failed">failed</mlv-badge>
+  <mlv-badge container="flat" status="unknown">unknown</mlv-badge>
+  <mlv-badge container="flat" status="ignored">ignored</mlv-badge>
+</div>
+  `
+}
+
+export const Icon = {
+  render: () => html`
+<div mlv-layout="row gap:md align:wrap">
+  <mlv-badge container="flat" status="scheduled" aria-label="scheduled"></mlv-badge>
+  <mlv-badge container="flat" status="queued" aria-label="queued"></mlv-badge>
+  <mlv-badge container="flat" status="pending" aria-label="pending"></mlv-badge>
+  <mlv-badge container="flat" status="starting" aria-label="starting"></mlv-badge>
+  <mlv-badge container="flat" status="running" aria-label="running"></mlv-badge>
+  <mlv-badge container="flat" status="restarting" aria-label="restarting"></mlv-badge>
+  <mlv-badge container="flat" status="stopping" aria-label="stopping"></mlv-badge>
+  <mlv-badge container="flat" status="finished" aria-label="finished"></mlv-badge>
+  <mlv-badge container="flat" status="failed" aria-label="failed"></mlv-badge>
+  <mlv-badge container="flat" status="unknown" aria-label="unknown"></mlv-badge>
+  <mlv-badge container="flat" status="ignored" aria-label="ignored"></mlv-badge>
+</div>
+  `
+}
+
 export const Support = {
   render: () => html`
 <div mlv-layout="row gap:md">
-  <mlv-badge status="accent">accent</mlv-badge>
-  <mlv-badge status="warning">warning</mlv-badge>
-  <mlv-badge status="success">success</mlv-badge>
-  <mlv-badge status="danger">danger</mlv-badge>
-</div>
-  `
-}
-
-export const SupportLightTheme = {
-  render: () => html`
-<div mlv-theme="root light" mlv-layout="row gap:md pad:md align:wrap">
-  <mlv-badge status="accent">accent</mlv-badge>
-  <mlv-badge status="warning">warning</mlv-badge>
-  <mlv-badge status="success">success</mlv-badge>
-  <mlv-badge status="danger">danger</mlv-badge>
-</div>
-  `
-}
-
-export const SupportDarkTheme = {
-  render: () => html`
-<div mlv-theme="root dark" mlv-layout="row gap:md pad:md align:wrap">
   <mlv-badge status="accent">accent</mlv-badge>
   <mlv-badge status="warning">warning</mlv-badge>
   <mlv-badge status="success">success</mlv-badge>
@@ -102,26 +117,6 @@ export const StatusDarkTheme = {
 export const Trend = {
   render: () => html`
 <div mlv-layout="row gap:md">
-  <mlv-badge status="trend-neutral">+15%</mlv-badge>
-  <mlv-badge status="trend-up">+15%</mlv-badge>
-  <mlv-badge status="trend-down">-15%</mlv-badge>
-</div>
-  `
-}
-
-export const TrendLightTheme = {
-  render: () => html`
-<div mlv-theme="root light" mlv-layout="row gap:md pad:md">
-  <mlv-badge status="trend-neutral">+15%</mlv-badge>
-  <mlv-badge status="trend-up">+15%</mlv-badge>
-  <mlv-badge status="trend-down">-15%</mlv-badge>
-</div>
-  `
-}
-
-export const TrendDarkTheme = {
-  render: () => html`
-<div mlv-theme="root dark" mlv-layout="row gap:md pad:md">
   <mlv-badge status="trend-neutral">+15%</mlv-badge>
   <mlv-badge status="trend-up">+15%</mlv-badge>
   <mlv-badge status="trend-down">-15%</mlv-badge>

@@ -1,5 +1,4 @@
 import { html } from 'lit';
-import { Alert } from '@elements/elements/alert';
 import '@elements/elements/alert/define.js';
 
 export default {
@@ -7,13 +6,11 @@ export default {
   component: 'mlv-alert'
 };
 
-type ArgTypes = Alert;
-
 export const Default = {
-  render: (args: ArgTypes) => html`<mlv-alert .status=${args.status}>alert message</mlv-alert>`
+  render: () => html`<mlv-alert>alert message</mlv-alert>`
 };
 
-export const SupportStatus = {
+export const Status = {
   render: () => html`
 <div mlv-layout="column gap:md">
   <mlv-alert>Standard</mlv-alert>
@@ -25,7 +22,7 @@ export const SupportStatus = {
   `
 }
 
-export const SupportStatusLightTheme = {
+export const StatusLightTheme = {
   render: () => html`
 <div mlv-theme="root light" mlv-layout="column gap:md pad:md">
   <mlv-alert>Standard</mlv-alert>
@@ -37,7 +34,7 @@ export const SupportStatusLightTheme = {
   `
 }
 
-export const SupportStatusDarkTheme = {
+export const StatusDarkTheme = {
   render: () => html`
 <div mlv-theme="root dark" mlv-layout="column gap:md pad:md">
   <mlv-alert>Standard</mlv-alert>
@@ -49,7 +46,7 @@ export const SupportStatusDarkTheme = {
   `
 }
 
-export const Status = {
+export const TaskStatus = {
   render: () => html`
 <div mlv-layout="column gap:md">
   <mlv-alert status="scheduled">Scheduled</mlv-alert>
@@ -67,7 +64,7 @@ export const Status = {
   `
 }
 
-export const StatusLightTheme = {
+export const TaskStatusLightTheme = {
   render: () => html`
 <div mlv-theme="root light" mlv-layout="column gap:md pad:md">
   <mlv-alert status="scheduled">Scheduled</mlv-alert>
@@ -84,7 +81,7 @@ export const StatusLightTheme = {
   `
 }
 
-export const StatusDarkTheme = {
+export const TaskStatusDarkTheme = {
   render: () => html`
 <div mlv-theme="root dark" mlv-layout="column gap:md pad:md">
   <mlv-alert status="scheduled">Scheduled</mlv-alert>

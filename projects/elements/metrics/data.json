@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-16T16:43:02.785Z",
+  "created": "2023-10-18T21:06:00.115Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -740,6 +740,10 @@
             "description": "Highlights content to draw attention and convey simple messages. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=56-308&mode=design&t=eeBXUleEIUIAeQQh-0)"
           },
           {
+            "name": "container",
+            "description": "Determines the container styles of component. Flat is used for nesting within other containers."
+          },
+          {
             "name": "i18n",
             "description": "Enables internal string values to be updated for internationalization."
           }
@@ -766,6 +770,14 @@
             },
             "description": "Defines a base color from the theme color palette",
             "fieldName": "color"
+          },
+          {
+            "name": "container",
+            "type": {
+              "text": "'flat' | default"
+            },
+            "description": "Determines the container styles of component. Flat is used for nesting elements within other containers. Inset can be used for more complex elements where content is distinctly separated.",
+            "fieldName": "container"
           },
           {
             "name": "mlv-i18n",
@@ -809,27 +821,27 @@
         {
           "id": "Default",
           "file": "badge.stories.ts",
-          "template": "<mlv-badge status=\"starting\">starting</mlv-badge>\n"
+          "template": "<mlv-badge>badge</mlv-badge>\n"
         },
         {
           "id": "Status",
           "file": "badge.stories.ts",
-          "template": "<div mlv-layout=\"row gap:md align:wrap\">\n  <mlv-badge status=\"scheduled\">scheduled</mlv-badge>\n  <mlv-badge status=\"queued\">queued</mlv-badge>\n  <mlv-badge status=\"pending\">pending</mlv-badge>\n  <mlv-badge status=\"starting\">starting</mlv-badge>\n  <mlv-badge status=\"running\">running</mlv-badge>\n  <mlv-badge status=\"restarting\">restarting</mlv-badge>\n  <mlv-badge status=\"stopping\">stopping</mlv-badge>\n  <mlv-badge status=\"finished\">finished</mlv-badge>\n  <mlv-badge status=\"failed\">failed</mlv-badge>\n  <mlv-badge status=\"unknown\">unknown</mlv-badge>\n  <mlv-badge status=\"ignored\">ignored</mlv-badge>\n</div>\n"
+          "template": "<div mlv-layout=\"row gap:xs align:wrap\">\n  <mlv-badge status=\"scheduled\">scheduled</mlv-badge>\n  <mlv-badge status=\"queued\">queued</mlv-badge>\n  <mlv-badge status=\"pending\">pending</mlv-badge>\n  <mlv-badge status=\"starting\">starting</mlv-badge>\n  <mlv-badge status=\"running\">running</mlv-badge>\n  <mlv-badge status=\"restarting\">restarting</mlv-badge>\n  <mlv-badge status=\"stopping\">stopping</mlv-badge>\n  <mlv-badge status=\"finished\">finished</mlv-badge>\n  <mlv-badge status=\"failed\">failed</mlv-badge>\n  <mlv-badge status=\"unknown\">unknown</mlv-badge>\n  <mlv-badge status=\"ignored\">ignored</mlv-badge>\n</div>\n"
+        },
+        {
+          "id": "Flat",
+          "file": "badge.stories.ts",
+          "template": "<div mlv-layout=\"row gap:md align:wrap\">\n  <mlv-badge container=\"flat\" status=\"scheduled\">scheduled</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"queued\">queued</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"pending\">pending</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"starting\">starting</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"running\">running</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"restarting\">restarting</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"stopping\">stopping</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"finished\">finished</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"failed\">failed</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"unknown\">unknown</mlv-badge>\n  <mlv-badge container=\"flat\" status=\"ignored\">ignored</mlv-badge>\n</div>\n"
+        },
+        {
+          "id": "Icon",
+          "file": "badge.stories.ts",
+          "template": "<div mlv-layout=\"row gap:md align:wrap\">\n  <mlv-badge container=\"flat\" status=\"scheduled\" aria-label=\"scheduled\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"queued\" aria-label=\"queued\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"pending\" aria-label=\"pending\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"starting\" aria-label=\"starting\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"running\" aria-label=\"running\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"restarting\" aria-label=\"restarting\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"stopping\" aria-label=\"stopping\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"finished\" aria-label=\"finished\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"failed\" aria-label=\"failed\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"unknown\" aria-label=\"unknown\"></mlv-badge>\n  <mlv-badge container=\"flat\" status=\"ignored\" aria-label=\"ignored\"></mlv-badge>\n</div>\n"
         },
         {
           "id": "Support",
           "file": "badge.stories.ts",
           "template": "<div mlv-layout=\"row gap:md\">\n  <mlv-badge status=\"accent\">accent</mlv-badge>\n  <mlv-badge status=\"warning\">warning</mlv-badge>\n  <mlv-badge status=\"success\">success</mlv-badge>\n  <mlv-badge status=\"danger\">danger</mlv-badge>\n</div>\n"
-        },
-        {
-          "id": "SupportLightTheme",
-          "file": "badge.stories.ts",
-          "template": "<mlv-badge status=\"accent\">accent</mlv-badge>\n<mlv-badge status=\"warning\">warning</mlv-badge>\n<mlv-badge status=\"success\">success</mlv-badge>\n<mlv-badge status=\"danger\">danger</mlv-badge>\n"
-        },
-        {
-          "id": "SupportDarkTheme",
-          "file": "badge.stories.ts",
-          "template": "<mlv-badge status=\"accent\">accent</mlv-badge>\n<mlv-badge status=\"warning\">warning</mlv-badge>\n<mlv-badge status=\"success\">success</mlv-badge>\n<mlv-badge status=\"danger\">danger</mlv-badge>\n"
         },
         {
           "id": "StatusLightTheme",
@@ -845,16 +857,6 @@
           "id": "Trend",
           "file": "badge.stories.ts",
           "template": "<div mlv-layout=\"row gap:md\">\n  <mlv-badge status=\"trend-neutral\">+15%</mlv-badge>\n  <mlv-badge status=\"trend-up\">+15%</mlv-badge>\n  <mlv-badge status=\"trend-down\">-15%</mlv-badge>\n</div>\n"
-        },
-        {
-          "id": "TrendLightTheme",
-          "file": "badge.stories.ts",
-          "template": "<mlv-badge status=\"trend-neutral\">+15%</mlv-badge>\n<mlv-badge status=\"trend-up\">+15%</mlv-badge>\n<mlv-badge status=\"trend-down\">-15%</mlv-badge>\n"
-        },
-        {
-          "id": "TrendDarkTheme",
-          "file": "badge.stories.ts",
-          "template": "<mlv-badge status=\"trend-neutral\">+15%</mlv-badge>\n<mlv-badge status=\"trend-up\">+15%</mlv-badge>\n<mlv-badge status=\"trend-down\">-15%</mlv-badge>\n"
         },
         {
           "id": "Color",
@@ -14053,8 +14055,8 @@
       {
         "file": "elements/src/badge/badge.ts",
         "lines": {
-          "total": 24,
-          "covered": 24,
+          "total": 25,
+          "covered": 25,
           "skipped": 0,
           "pct": 100
         },
@@ -14065,8 +14067,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 35,
-          "covered": 35,
+          "total": 36,
+          "covered": 36,
           "skipped": 0,
           "pct": 100
         },
@@ -14270,14 +14272,14 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1956,
-        "covered": 1909,
+        "total": 1957,
+        "covered": 1910,
         "skipped": 0,
         "pct": 97.59
       },
       "statements": {
-        "total": 2599,
-        "covered": 2532,
+        "total": 2600,
+        "covered": 2533,
         "skipped": 0,
         "pct": 97.42
       },
