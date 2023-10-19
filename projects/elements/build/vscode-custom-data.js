@@ -5,6 +5,9 @@ import process from 'process';
 import postcss from 'postcss';
 import postcssrc from 'postcss-load-config';
 
+const index = process.argv.findIndex((i) => i === '--outDir') + 1;
+const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
+
 function resolve(relativePath) {
   return path.join(process.cwd(), relativePath);
 }
@@ -256,4 +259,10 @@ const htmlCustomData = {
   valueSets: []
 };
 
-writeJSONFile(resolve('./dist/elements.html-data.json'), htmlCustomData);
+if (!fs.existsSync(dist())) {
+  fs.mkdirSync(dist());
+}
+
+if (!fs.existsSync(dist('elements.html-data.json'))) {
+  writeJSONFile(dist('elements.html-data.json'), htmlCustomData);
+}

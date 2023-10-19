@@ -12,10 +12,10 @@
 
 2. Upate the changelog in storybook to reflect the latest version and release notes. `docs/changelog.stories.mdx`
 
-3. Update metrics metadata.
+3. Update project metadata.
 
     ```bash
-    pnpm run metrics
+    pnpm run build:metadata
     ```
 
 4. Open a release MR for review and merge. Example: https://git-av.nvidia.com/r/c/elements/+/182070

@@ -1,9 +1,10 @@
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'module';
 import { Project, SyntaxKind } from 'ts-morph';
 import { stories } from './stories.mjs';
+
 const require = createRequire(import.meta.url);
 
 const ariaSpecs = {
@@ -97,7 +98,7 @@ async function getProjects() {
 }
 
 function getCoverage() {
-  const coverageJSON = require(resolve('./coverage/coverage-summary.json'));
+  const coverageJSON = JSON.parse(readFileSync(new URL('../coverage/coverage-summary.json', import.meta.url)));
   return Object.entries(coverageJSON)
     .map(([file, coverage]) => ({ file: file.includes('/src/ui/platform/design-system/') ? file.split('/src/ui/platform/design-system/')[1] : file, ...coverage }))
     .sort((a, b) => a.lines.pct > b.lines.pct ? 1 : -1)
@@ -105,7 +106,7 @@ function getCoverage() {
 }
 
 function getManifest() {
-  const elementsSchemaJSON = require(resolve('./dist/custom-elements.json'));
+  const elementsSchemaJSON = JSON.parse(readFileSync(new URL('../dist/custom-elements.json', import.meta.url)));
   return Array.from(new Set(elementsSchemaJSON.modules.flatMap(module => {
     module.declarations.forEach(d => d.path = module.path);
     return module.declarations;
@@ -229,7 +230,7 @@ async function getMetrics() {
       versions: Array.from(new Set(projects.map(p => p.elementsVersion.replace('^', '').replace('~', '')))),
     },
     types: {
-      props : getBaseInterface()
+      props: getBaseInterface()
     }
   };
 
@@ -238,8 +239,4 @@ async function getMetrics() {
 
 const metrics = await getMetrics();
 
-if (!existsSync('./metrics')) {
-  mkdirSync('./metrics');
-}
-
-writeFileSync('./metrics/data.json', JSON.stringify(metrics, null, 2));
+writeFileSync('./build/metadata.json', JSON.stringify(metrics, null, 2));

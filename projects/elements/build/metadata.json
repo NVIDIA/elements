@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-18T21:06:00.115Z",
+  "created": "2023-10-19T20:20:06.437Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -1155,7 +1155,7 @@
       },
       "tests": {
         "projectTotal": 14,
-        "instanceTotal": 78,
+        "instanceTotal": 79,
         "coverageTotal": 100
       },
       "stories": [
@@ -1758,7 +1758,7 @@
       },
       "tests": {
         "projectTotal": 7,
-        "instanceTotal": 17,
+        "instanceTotal": 18,
         "coverageTotal": 100
       },
       "stories": [
@@ -4708,7 +4708,7 @@
       },
       "tests": {
         "projectTotal": 16,
-        "instanceTotal": 69,
+        "instanceTotal": 71,
         "coverageTotal": 92.995
       },
       "stories": [
@@ -5019,7 +5019,7 @@
       },
       "tests": {
         "projectTotal": 13,
-        "instanceTotal": 43,
+        "instanceTotal": 44,
         "coverageTotal": 100
       },
       "stories": [
@@ -7756,7 +7756,7 @@
       },
       "tests": {
         "projectTotal": 6,
-        "instanceTotal": 10,
+        "instanceTotal": 11,
         "coverageTotal": 100
       },
       "stories": [
@@ -14520,7 +14520,7 @@
           },
           {
             "name": "mlv-button",
-            "instanceTotal": 12
+            "instanceTotal": 13
           },
           {
             "name": "mlv-card",
@@ -14536,7 +14536,7 @@
           },
           {
             "name": "mlv-icon",
-            "instanceTotal": 5
+            "instanceTotal": 6
           },
           {
             "name": "mlv-tooltip",
@@ -14560,7 +14560,7 @@
           },
           {
             "name": "mlv-search",
-            "instanceTotal": 1
+            "instanceTotal": 2
           },
           {
             "name": "mlv-select",
@@ -14647,7 +14647,7 @@
             "instanceTotal": 1
           }
         ],
-        "instanceTotal": 86
+        "instanceTotal": 89
       },
       {
         "name": "app-shell-angular-demo",
@@ -15077,11 +15077,11 @@
           },
           {
             "name": "mlv-icon-button",
-            "instanceTotal": 11
+            "instanceTotal": 12
           },
           {
             "name": "mlv-icon",
-            "instanceTotal": 19
+            "instanceTotal": 20
           },
           {
             "name": "mlv-panel-header",
@@ -15121,7 +15121,7 @@
           },
           {
             "name": "mlv-checkbox",
-            "instanceTotal": 1
+            "instanceTotal": 2
           },
           {
             "name": "mlv-combobox",
@@ -15212,7 +15212,7 @@
             "instanceTotal": 2
           }
         ],
-        "instanceTotal": 122
+        "instanceTotal": 125
       },
       {
         "name": "@elements/next-common",

@@ -2,6 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import process from 'process';
 
+const index = process.argv.findIndex((i) => i === '--outDir') + 1;
+const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
+
 function resolve(relativePath) {
   return path.join(process.cwd(), relativePath);
 }
@@ -152,4 +155,8 @@ for (const [path, token] of Object.entries(categorizedTokens)) {
   cssVarCompletions[name] = token;
 }
 
-writeJSONFile(resolve('./dist/elements.css-vars.json'), cssVarCompletions);
+if (!fs.existsSync(dist())) {
+  fs.mkdirSync(dist());
+}
+
+writeJSONFile(dist('elements.css-vars.json'), cssVarCompletions);
