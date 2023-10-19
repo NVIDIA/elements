@@ -9,22 +9,14 @@
     "dev": "wireit",
     "clean": "wireit",
     "build": "wireit",
-    "build:watch": "wireit",
-    "build:icons": "wireit",
-    "build:docs": "wireit",
+    "build:metadata": "wireit",
+    "build:metadata:fast": "wireit",
     "test": "wireit",
-    "test:coverage": "wireit",
     "test:watch": "wireit",
-    "test:axe": "wireit",
     "storybook": "wireit",
-    "storybook:watch": "wireit",
     "lint": "wireit",
-    "lint:eslint": "wireit",
-    "lint:repo": "wireit",
-    "lint:analyzer": "wireit",
     "demos": "wireit",
     "_demos": "wireit",
-    "metrics": "wireit",
     "prepublishonly": "wireit",
     "playwright": "wireit"
   },
@@ -236,10 +228,9 @@
   },
   "dependencies": {
     "@floating-ui/dom": "1.4.5",
-    "@lit-labs/motion": "^1.0.3",
+    "@lit-labs/motion": "1.0.4",
     "composed-offset-position": "^0.0.4",
-    "lit": "^2.7.6",
-    "lit-html": "^2.7.5"
+    "lit": "^2.8.0"
   },
   "optionalDependencies": {
     "@lit-labs/scoped-registry-mixin": "^1.0.1",
@@ -250,6 +241,7 @@
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "0.8.3",
+    "@jspm/generator": "^1.1.12",
     "@lit-labs/virtualizer": "2.0.4",
     "@rollup/plugin-replace": "5.0.2",
     "@rollup/plugin-terser": "0.4.3",
@@ -274,8 +266,8 @@
     "@vitest/coverage-istanbul": "0.34.1",
     "@vitest/utils": "0.34.1",
     "axe-core": "4.8.2",
-    "chart.js": "4.3.3",
     "chai": "4.3.10",
+    "chart.js": "4.3.3",
     "emoji-picker-element": "1.18.3",
     "eslint": "8.45.0",
     "eslint-plugin-import": "2.28.0",
@@ -339,36 +331,27 @@
         "clean"
       ]
     },
-    "build:manifest": {
-      "command": "node ./node_modules/@custom-elements-manifest/analyzer/cem.js analyze  --config ./custom-elements-manifest.config.mjs --outdir ./dist/",
-      "files": [
-        "build/vscode-custom-data.js",
-        "src/**",
-        "!src/**/*.stories.ts",
-        "!src/**/*.stories.mdx",
-        "!src/**/*.test.ts",
-        "custom-elements-manifest.config.mjs"
-      ],
-      "output": [
-        "dist/custom-elements.json"
-      ]
-    },
-    "build:docs": {
-      "command": "node ./metrics/index.mjs",
-      "files": [
-        "metrics/index.mjs",
-        "metrics/stories.mjs",
-        "dist/custom-elements.json"
-      ],
-      "output": [
-        "metrics/data.json"
-      ],
-      "dependencies": [
-        "build:manifest"
-      ]
-    },
     "build": {
+      "clean": false,
+      "dependencies": [
+        "build:vite",
+        "build:manifest",
+        "build:importmap",
+        "build:style-dictionary",
+        "build:css-var-completions",
+        "build:vscode-custom-data"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --mode watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build:vite": {
       "command": "node_modules/vite/bin/vite.js build",
+      "clean": false,
       "files": [
         "build/vscode-custom-data.js",
         "public/**",
@@ -377,7 +360,6 @@
         "!src/**/*.stories.mdx",
         "!src/**/*.test.ts",
         "!src/**/*.test.axe.ts",
-        "tokens/**",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -385,17 +367,118 @@
         "custom-elements-manifest.config.mjs"
       ],
       "output": [
-        "dist/**"
+        "dist/**",
+        "!dist/importmap.cdn.json",
+        "!dist/tokens/**",
+        "!dist/css/module.tokens.css"
       ],
       "dependencies": [
-        "build:icons"
+        "build:icons",
+        "build:manifest",
+        "build:style-dictionary"
       ]
     },
-    "build:watch": {
-      "command": "vite build --mode watch",
-      "service": true,
+    "build:importmap": {
+      "command": "node ./build/importmap.mjs --outDir ./dist",
+      "clean": false,
+      "files": [
+        "build/importmap.mjs"
+      ],
+      "output": [
+        "dist/importmap.cdn.json"
+      ],
       "dependencies": [
-        "build"
+        "build:vite"
+      ]
+    },
+    "build:style-dictionary": {
+      "command": "node ./tokens/style-dictionary.config.cjs --outDir ./dist/",
+      "clean": false,
+      "files": [
+        "tokens/**"
+      ],
+      "output": [
+        "dist/tokens/**",
+        "dist/css/module.tokens.css"
+      ]
+    },
+    "build:css-var-completions": {
+      "command": "node ./build/css-var-completions.js --outDir ./dist",
+      "files": [
+        "build/css-var-completions.js",
+        "tokens/**"
+      ],
+      "output": [
+        "dist/elements.css-vars.json"
+      ]
+    },
+    "build:icons": {
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node ./build/icons.js",
+      "clean": false,
+      "files": [
+        "src/icon/**",
+        "!src/icon/icons.ts",
+        "build/icons.js"
+      ],
+      "output": [
+        "src/icon/icons.ts"
+      ]
+    },
+    "build:manifest": {
+      "command": "node ./node_modules/@custom-elements-manifest/analyzer/cem.js analyze --config ./custom-elements-manifest.config.mjs --outdir ./dist/",
+      "clean": false,
+      "files": [
+        "build/vscode-custom-data.js",
+        "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.stories.mdx",
+        "!src/**/*.test.ts",
+        "custom-elements-manifest.config.mjs"
+      ],
+      "output": [
+        "dist/custom-elements.json"
+      ]
+    },
+    "build:vscode-custom-data": {
+      "command": "node ./build/vscode-custom-data.js --outDir ./dist",
+      "files": [
+        "build/vscode-custom-data.js"
+      ],
+      "output": [
+        "dist/elements.html-data.json"
+      ],
+      "dependencies": [
+        "build:manifest"
+      ]
+    },
+    "build:metadata": {
+      "command": "node ./build/metadata.mjs",
+      "files": [
+        "build/metadata.mjs",
+        "build/stories.mjs",
+        "dist/custom-elements.json"
+      ],
+      "output": [
+        "build/metadata.json"
+      ],
+      "dependencies": [
+        "build:manifest",
+        "test:coverage"
+      ]
+    },
+    "build:metadata:fast": {
+      "command": "node ./build/metadata.mjs",
+      "clean": false,
+      "files": [
+        "build/metadata.mjs",
+        "build/stories.mjs",
+        "dist/custom-elements.json"
+      ],
+      "output": [
+        "build/metadata.json"
+      ],
+      "dependencies": [
+        "build:manifest"
       ]
     },
     "clean": {
@@ -514,18 +597,6 @@
       ],
       "output": []
     },
-    "build:icons": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node ./build/icons.js",
-      "clean": false,
-      "files": [
-        "src/icon/**",
-        "!src/icon/icons.ts",
-        "build/icons.js"
-      ],
-      "output": [
-        "src/icon/icons.ts"
-      ]
-    },
     "storybook": {
       "command": "node_modules/storybook/index.js build --output-dir ./storybook-build",
       "files": [
@@ -541,32 +612,17 @@
       "output": [
         "storybook-build/**"
       ],
-      "dependencies": [
-        "test:coverage"
-      ],
       "env": {
         "NODE_OPTIONS": "--openssl-legacy-provider"
       }
     },
     "storybook:watch": {
-      "command": "node_modules/storybook/index.js dev --port 7777",
+      "command": "node_modules/storybook/index.js dev --port 7778",
       "service": true,
+      "clean": false,
       "env": {
         "NODE_OPTIONS": "--openssl-legacy-provider"
       }
-    },
-    "metrics": {
-      "command": "node ./metrics/index.mjs",
-      "files": [
-        "metrics/index.mjs",
-        "metrics/stories.mjs"
-      ],
-      "output": [
-        "metrics/data.json"
-      ],
-      "dependencies": [
-        "test:coverage"
-      ]
     },
     "prepublishonly": {
       "dependencies": [

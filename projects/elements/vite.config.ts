@@ -3,7 +3,6 @@ import path from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
 import terser from '@rollup/plugin-terser';
-import { execSync } from 'child_process';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import replace from '@rollup/plugin-replace';
 import dts from 'vite-plugin-dts';
@@ -18,10 +17,6 @@ const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
 // https://lit.dev/docs/tools/production/
 export default defineConfig((env) => {
   const mode = env.mode as 'production' | 'watch' | 'test' | 'development';
-  execSync(`node ./node_modules/@custom-elements-manifest/analyzer/cem.js analyze ${mode === 'watch' ? '--quiet' : ''} --config ./custom-elements-manifest.config.mjs --outdir ${dist()}`);
-  execSync(`node ${resolve('./tokens/style-dictionary.config.cjs')} --outDir ${resolve('./')}/dist/`);
-  execSync(`node ${resolve('./build/css-var-completions.js')}`);
-  execSync(`node ${resolve('./build/vscode-custom-data.js')}`);
 
   return {
     resolve: {

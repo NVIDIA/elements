@@ -1,7 +1,8 @@
 import { gzipSync } from 'fflate';
 import { html, nothing } from 'lit';
 import packageFile from '../package.json';
-import metrics from 'metrics/data.json';
+import metrics from 'build/metadata.json';
+import importmap from '@elements/elements/importmap.cdn.json';
 
 const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
@@ -64,30 +65,7 @@ function createDefaultFiles(content, storyId) {
   <link rel="stylesheet" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/index.css" />
   <link rel="stylesheet" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/inter.css" />
   <script type="importmap">
-    {
-      "imports": {
-        "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/",
-        "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/"
-      },
-      "scopes": {
-        "${CDN_MODULES_URL}/": {
-          "composed-offset-position": "${CDN_MODULES_URL}/composed-offset-position@0.0.4/dist/composed-offset-position.esm.js",
-          "lit": "${CDN_MODULES_URL}/lit@2.7.4/index.js",
-          "lit/": "${CDN_MODULES_URL}/lit@2.7.4/",
-          "lit-element/lit-element.js": "${CDN_MODULES_URL}/lit-element@3.3.0/development/lit-element.js",
-          "lit-html": "${CDN_MODULES_URL}/lit-html@2.7.4/development/lit-html.js",
-          "lit-html/": "${CDN_MODULES_URL}/lit-html@2.7.4/development/",
-          "@floating-ui/core": "${CDN_MODULES_URL}/@floating-ui/core@1.2.6/dist/floating-ui.core.esm.js",
-          "@floating-ui/dom": "${CDN_MODULES_URL}/@floating-ui/dom@1.2.6/dist/floating-ui.dom.esm.js",
-          "@lit/reactive-element": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/reactive-element.js",
-          "@lit/reactive-element/decorators/property.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/property.js",
-          "@lit/reactive-element/decorators/query.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query.js",
-          "@lit/reactive-element/decorators/query-assigned-elements.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query-assigned-elements.js",
-          "@lit/reactive-element/decorators/state.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/state.js",
-          "@lit-labs/motion": "${CDN_MODULES_URL}/@lit-labs/motion@1.0.3/index.js"
-        }
-      }
-    }
+    ${JSON.stringify(importmap)}
   </script>
   <script type="module">
     ${getImports(content)}
