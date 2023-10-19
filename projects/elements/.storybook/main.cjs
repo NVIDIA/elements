@@ -36,7 +36,7 @@ module.exports = {
       resolve: {
         alias: {
           '@elements/elements': resolve('./dist'),
-          'metrics': resolve('./metrics')
+          'build': resolve('./build')
         }
       }
     });
