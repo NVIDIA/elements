@@ -17,13 +17,13 @@ import '@elements/elements/drawer/define.js';
 import '@elements/elements/search/define.js';
 import '@elements/elements/json-viewer/define.js';
 import '@elements/elements/tabs/define.js';
-import metrics from 'metrics/data.json';
+import metrics from 'build/metadata.json';
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
 const showdownOptions = { simplifiedAutoLink: true };
 
 export default {
-  title: 'Elements/Metrics',
+  title: 'Internal/Metrics',
   component: 'nve-grid',
 };
 
