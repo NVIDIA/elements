@@ -53,6 +53,17 @@ export const Interactive = {
   `
 };
 
+export const BehaviorTrigger = {
+  inline: false,
+  render: () => html`
+<nve-button id="dialog-btn">open</nve-button>
+<nve-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
+  <h3 nve-text="heading">Title</h3>
+  <p nve-text="body">some text content in a closable dialog</p>
+</nve-dialog>
+  `
+};
+
 export const Content = {
   inline: false,
   render: () => html`

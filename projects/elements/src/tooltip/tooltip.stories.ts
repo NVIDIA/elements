@@ -54,6 +54,15 @@ export const Interactive = {
   `
 };
 
+export const BehaviorTrigger = {
+  render: () => html`
+<div nve-layout="row align:center" style="height: 250px">
+  <nve-tooltip behavior-trigger anchor="action-btn" trigger="action-btn" hidden>hello there</nve-tooltip>
+  <nve-button id="action-btn">button</nve-button>
+</div>
+  `
+};
+
 export const Hint = {
   render: () => html`
 <div nve-layout="block align:vertical-center" style="height: 90vh">

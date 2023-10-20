@@ -71,6 +71,20 @@ when the popover is attempting to close or open based ona user interaction.
 </script>
 ```
 
+## Behavior Trigger
+
+If your use case does not need to control the popover state you can use the `behavior-trigger` property to
+enable automatic state management of the `hidden` state based on the trigger.
+
+<Story id="elements-tooltip-examples--behavior-trigger" inline={false} height={280} />
+
+```html
+<nve-tooltip behavior-trigger trigger="action-btn" hidden>hello there</nve-tooltip>
+<nve-button id="action-btn">button</nve-button>
+```
+
+## Anchor
+
 The `anchor` property defines what element the popover should position itself relative to. For popovers
 like modals this defaults to the document body. The `trigger` property is an optional property that defines
 what element triggers the `open` event.

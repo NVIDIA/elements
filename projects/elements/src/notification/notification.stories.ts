@@ -72,6 +72,16 @@ export const InteractiveStack = {
 `
 };
 
+export const BehaviorTrigger = {
+  render: () => html`
+<nve-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" close-timeout="2000">
+  <h3 nve-text="label">notification</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-button id="notification-btn">show</nve-button>
+`
+};
+
 export const Status = {
   render: () => html`
 <nve-notification-group position="center">
