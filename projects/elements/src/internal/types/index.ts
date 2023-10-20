@@ -148,6 +148,7 @@ declare global {
   interface Window {
     MLV_ELEMENTS: {
       state: {
+        env: 'watch' | 'production' | 'development';
         versions: string[];
         elementRegistry: Readonly<{ [key: string]: string }>;
         i18nRegistry: Readonly<{ [key: string]: string }>;
