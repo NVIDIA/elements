@@ -3,7 +3,7 @@
   --control-height: var(--nve-ref-size-800);
   --cursor: pointer;
   --track-width: 50%;
-  --track-height: 6px;
+  --track-height: var(--nve-ref-size-150);
   --track-border-radius: var(--nve-ref-border-radius-md);
   width: 100%;
 }
