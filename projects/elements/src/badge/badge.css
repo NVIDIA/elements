@@ -31,8 +31,8 @@
 }
 
 :host(:--has-text) {
-  --height: 18px;
-  --width: 18px;
+  --height: calc(var(--nve-ref-size-400) + var(--nve-ref-size-50));
+  --width: calc(var(--nve-ref-size-400) + var(--nve-ref-size-50));
 }
 
 ::slotted([nve-text]) {

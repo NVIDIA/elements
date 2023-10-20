@@ -58,7 +58,6 @@ slot[name="nav-actions"] {
 
 ::slotted(nve-button[slot="nav-items"]) {
   --color: var(--nve-sys-text-muted-color);
-  --border-radius: 2px;
   --font-weight: var(--nve-ref-font-weight-medium);
 }
 

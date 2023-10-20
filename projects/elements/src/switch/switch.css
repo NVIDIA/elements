@@ -4,8 +4,8 @@
   --background: var(--nve-sys-interaction-field-background);
   --width: var(--nve-ref-size-1000);
   --height: var(--nve-ref-size-500);
-  --anchor-width: var(--nve-ref-font-size-200);
-  --anchor-height: var(--nve-ref-font-size-200);
+  --anchor-width: calc(var(--nve-ref-size-300) + var(--nve-ref-size-50));
+  --anchor-height: calc(var(--nve-ref-size-300) + var(--nve-ref-size-50));
   --anchor-border-radius: var(--nve-ref-border-radius-full);
   --anchor-background: var(--nve-sys-interaction-disabled-color);
 }
@@ -38,7 +38,7 @@
   width: var(--width);
   min-height: auto;
   display: flex !important;
-  padding: 0 3px;
+  padding: 0 var(--nve-ref-size-100);
   align-items: center;
   transition-duration: 200ms;
   transition-timing-function: ease-in;
@@ -51,7 +51,7 @@
   --background: var(--nve-sys-interaction-disabled-color);
 }
 
-[input] slot:after {
+[input] slot::after {
   border-radius: var(--anchor-border-radius);
   background: var(--anchor-background);
   height: var(--anchor-height);
@@ -67,7 +67,7 @@
   --background: var(--nve-sys-accent-secondary-background);
   --anchor-background: var(--nve-sys-text-white-color);
 
-  [input] slot:after {
+  [input] slot::after {
     transform: translate(calc(var(--width) / 2), 0);
   }
 }
