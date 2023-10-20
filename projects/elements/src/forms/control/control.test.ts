@@ -181,7 +181,7 @@ describe('nve-control fit-text input', () => {
 
   it('should set control width to input text character width', async () => {
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--max-width')).toBe(`3.6ch`);
+    expect(element.style.getPropertyValue('--control-width')).toBe(`4ch`);
   });
 
   it('should update control width to input text character width', async () => {
@@ -189,7 +189,17 @@ describe('nve-control fit-text input', () => {
     input.value = '123456789012345678901234567890';
     input.dispatchEvent(new Event('input'));
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--max-width')).toBe(`27ch`);
+    expect(element.style.getPropertyValue('--control-width')).toBe(`30ch`);
+  });
+
+  it('should update control width to input text character width with icon offset', async () => {
+    await elementIsStable(element);
+    input.type = 'date';
+    input.value = '';
+    input.dispatchEvent(new Event('input'));
+    await elementIsStable(element);
+    expect(element.style.getPropertyValue('--control-width')).toBe(`4ch`);
+    expect(input.style.maxWidth).toBe(`2ch`);
   });
 });
 
@@ -248,7 +258,7 @@ describe('nve-control fit-text select', () => {
 
   it('should set control width to input text character width', async () => {
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--max-width')).toBe(`11.2ch`);
+    expect(element.style.getPropertyValue('--control-width')).toBe(`12ch`);
   });
 
   it('should update control width to input text character width', async () => {
@@ -256,6 +266,6 @@ describe('nve-control fit-text select', () => {
     input.value = '2';
     input.dispatchEvent(new Event('change'));
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--max-width')).toBe(`17.5ch`);
+    expect(element.style.getPropertyValue('--control-width')).toBe(`19ch`);
   });
 });

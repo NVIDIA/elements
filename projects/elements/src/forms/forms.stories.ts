@@ -688,3 +688,32 @@ export const HorizontalInline = () => {
 </div>
   `;
 };
+
+
+export const FitText = {
+  render: () => html`
+<section nve-layout="column gap:md">
+  <nve-date fit-text>
+    <label>date</label>
+    <input type="date" value="2017-06-01" />
+    <nve-control-message>message</nve-control-message>
+  </nve-date>
+
+  <nve-input fit-text>
+    <label>label</label>
+    <input value="123456789012345678901234567890" />
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
+
+  <nve-select fit-text>
+    <label>label</label>
+    <select>
+      <option value="1">Option 1</option>
+      <option value="2">Option 1234</option>
+      <option value="3">Option 1234567809</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+</section>
+`
+};
