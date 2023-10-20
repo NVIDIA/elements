@@ -63,7 +63,7 @@ slot[name='messages'] {
 
 [internal-host] {
   display: grid;
-  gap: 8px;
+  gap: var(--nve-ref-space-xs);
   align-items: start;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
