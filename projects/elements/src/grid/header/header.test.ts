@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
 import type { Grid, GridColumn, GridHeader } from '@elements/elements/grid';
 import '@elements/elements/grid/define.js';
@@ -92,5 +92,49 @@ describe('nve-grid-header', () => {
     expect(grid.style.getPropertyValue('--c1').includes('minmax(auto, ')).toBe(true);
     expect(grid.style.getPropertyValue('--c2').includes('minmax(auto, ')).toBe(true);
     expect(grid.style.getPropertyValue('--c3').includes('minmax(auto, ')).toBe(true);
+  });
+});
+
+describe('nve-grid-header validation check', () => {
+  let fixture: HTMLElement;
+  let element: GridHeader;
+  const original = console.error;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-grid>
+        <nve-grid-header>
+          <nve-grid-column>column 1</nve-grid-column>
+          <nve-grid-column>column 2</nve-grid-column>
+          <nve-grid-column>column 3</nve-grid-column>
+          <nve-grid-column>column 4</nve-grid-column>
+          <nve-grid-column>column error</nve-grid-column>
+        </nve-grid-header>
+        <nve-grid-row>
+          <nve-grid-cell>cell 1-1</nve-grid-cell>
+          <nve-grid-cell>cell 1-2</nve-grid-cell>
+          <nve-grid-cell>cell 1-3</nve-grid-cell>
+          <nve-grid-cell>cell 1-4</nve-grid-cell>
+        </nve-grid-row>
+      </nve-grid>
+    `);
+    element = fixture.querySelector('nve-grid-header');
+    await elementIsStable(element);
+  });
+
+  beforeEach(() => {
+    console.error = () => null;
+    vi.spyOn(console, 'error');
+    window.MLV_ELEMENTS.state.env = 'development';
+  });
+
+  afterEach(() => {
+    console.error = original;
+    window.MLV_ELEMENTS.state.env = 'production';
+    removeFixture(fixture);
+  });
+
+  it('should warn if the grid columns and cells do no match', async () => { 
+    expect(console.error).toHaveBeenCalledWith('Error: nve-grid-column (5) and nve-grid-cell (4) count mismatch');
   });
 });

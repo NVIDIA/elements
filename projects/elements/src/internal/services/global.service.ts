@@ -5,6 +5,7 @@ export class GlobalState {
     globalThis.MLV_ELEMENTS ??= {
       debug: (log = console.log) => log(`%c@elements/elements\n%c${JSON.stringify(globalThis.MLV_ELEMENTS.state, null, 2)}`, 'color: #69b027', 'color: inherit'),
       state: {
+        env: (import.meta as any).env.MODE,
         versions: [],
         elementRegistry: { },
         i18nRegistry: { },

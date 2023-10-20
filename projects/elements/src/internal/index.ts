@@ -22,6 +22,7 @@ export { popoverBaseStyles as popoverBaseStyles } from './controllers/type-popov
 export * from './controllers/type-submit.controller.js';
 export * from './styles/index.js';
 export * from './services/i18n.service.js';
+export * from './services/log.service.js';
 export * from './docs.js';
 export * from './types/index.js';
 export * from './utils/a11y.js';

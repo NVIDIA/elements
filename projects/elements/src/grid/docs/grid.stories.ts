@@ -18,7 +18,6 @@ import '@elements/elements/panel/define.js';
 import '@elements/elements/radio/define.js';
 import '@elements/elements/search/define.js';
 import '@elements/elements/sort-button/define.js';
-import '@elements/elements/tabs/define.js';
 import '@lit-labs/virtualizer';
 
 export default {
@@ -682,6 +681,16 @@ class GridPerformanceDemo extends LitElement {
       </nve-grid>
       ` : nothing}
     `
+  }
+  
+  connectedCallback() {
+    super.connectedCallback();
+    window.MLV_ELEMENTS.state.env = 'production';
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.MLV_ELEMENTS.state.env = 'watch';
   }
 }
 
