@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { keyNavigationGrid, useStyles, attachInternals, appendRootNodeStyle, generateId, stateScroll, ContainerElement } from '@elements/elements/internal';
 import type { GridHeader } from './header/header.js';
 import type { GridColumn } from './column/column.js';
@@ -54,7 +55,7 @@ export class Grid extends LitElement implements ContainerElement {
   get keynavGridConfig() {
     return {
       columns: this.#columns,
-      rows: [this.querySelector<GridHeader>('nve-grid-header'), ...this.#rows],
+      rows: [this.querySelector<GridHeader>('nve-grid-header'), ...this.rows],
       cells: [...this.#columns, ...this.#cells]
     }
   }
@@ -65,13 +66,13 @@ export class Grid extends LitElement implements ContainerElement {
       scrollOffset: 100
     }
   }
+  
+  @queryAssignedElements({ selector: 'nve-grid-header', flatten: true }) private gridHeader!: GridHeader[];
 
-  get #columns() {
-    return Array.from(this.querySelectorAll<GridColumn>('nve-grid-column'));
-  }
+  @queryAssignedElements({ selector: 'nve-grid-row', flatten: true }) private rows!: GridRow[];
 
-  get #rows() {
-    return Array.from(this.querySelectorAll<GridRow>('nve-grid-row'));
+  get #columns(): GridColumn[] {
+    return this.gridHeader[0].columns;
   }
 
   get #cells() {
