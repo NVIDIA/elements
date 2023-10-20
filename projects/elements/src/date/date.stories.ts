@@ -156,3 +156,13 @@ export const Types = {
 </div>
 `
 }
+
+export const FitText = {
+  render: () => html`
+<nve-date fit-text>
+  <label>date</label>
+  <input type="date" value="2017-06-01" />
+  <nve-control-message>message</nve-control-message>
+</nve-date>
+`
+};
