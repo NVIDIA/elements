@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
 import type { Grid, GridColumn, GridHeader } from '@elements/elements/grid';
 import '@elements/elements/grid/define.js';
@@ -92,5 +92,49 @@ describe('mlv-grid-header', () => {
     expect(grid.style.getPropertyValue('--c1').includes('minmax(auto, ')).toBe(true);
     expect(grid.style.getPropertyValue('--c2').includes('minmax(auto, ')).toBe(true);
     expect(grid.style.getPropertyValue('--c3').includes('minmax(auto, ')).toBe(true);
+  });
+});
+
+describe('mlv-grid-header validation check', () => {
+  let fixture: HTMLElement;
+  let element: GridHeader;
+  const original = console.error;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-grid>
+        <mlv-grid-header>
+          <mlv-grid-column>column 1</mlv-grid-column>
+          <mlv-grid-column>column 2</mlv-grid-column>
+          <mlv-grid-column>column 3</mlv-grid-column>
+          <mlv-grid-column>column 4</mlv-grid-column>
+          <mlv-grid-column>column error</mlv-grid-column>
+        </mlv-grid-header>
+        <mlv-grid-row>
+          <mlv-grid-cell>cell 1-1</mlv-grid-cell>
+          <mlv-grid-cell>cell 1-2</mlv-grid-cell>
+          <mlv-grid-cell>cell 1-3</mlv-grid-cell>
+          <mlv-grid-cell>cell 1-4</mlv-grid-cell>
+        </mlv-grid-row>
+      </mlv-grid>
+    `);
+    element = fixture.querySelector('mlv-grid-header');
+    await elementIsStable(element);
+  });
+
+  beforeEach(() => {
+    console.error = () => null;
+    vi.spyOn(console, 'error');
+    window.MLV_ELEMENTS.state.env = 'development';
+  });
+
+  afterEach(() => {
+    console.error = original;
+    window.MLV_ELEMENTS.state.env = 'production';
+    removeFixture(fixture);
+  });
+
+  it('should warn if the grid columns and cells do no match', async () => { 
+    expect(console.error).toHaveBeenCalledWith('Error: mlv-grid-column (5) and mlv-grid-cell (4) count mismatch');
   });
 });

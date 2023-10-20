@@ -1,8 +1,9 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, attachInternals, debounce } from '@elements/elements/internal';
-import type { GridColumn } from '@elements/elements/grid';
+import { useStyles, attachInternals, debounce, LogService } from '@elements/elements/internal';
+import type { Grid, GridColumn } from '@elements/elements/grid';
 import styles from './header.css?inline';
+import { GlobalStateService } from '@elements/elements/internal/services/global.service';
 
 /**
  * @element mlv-grid-header
@@ -27,7 +28,12 @@ export class GridHeader extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  @queryAssignedElements() private columns!: GridColumn[];
+  /** @private */
+  @queryAssignedElements({ selector: 'mlv-grid-column', flatten: true }) columns!: GridColumn[];
+
+  get #grid() {
+    return this.parentElement as Grid;
+  }
 
   render() {
     return html`
@@ -49,19 +55,29 @@ export class GridHeader extends LitElement {
     await this.updateComplete;
     const debounceFn = debounce(() => this.#computeColumnWidths(), 100);
     new ResizeObserver(debounceFn).observe(this);
+    this.#validateColumns();
   }
 
   async #computeColumnWidths() {
     await this.updateComplete;
     this.columns.forEach((c, i) => c.ariaColIndex = `${i + 1}`);
-    this.parentElement.style.setProperty('--grid-auto-flow', 'initial');
-    this.parentElement.style.setProperty('--grid-template-column', this.columns.map((_, i) => `var(--c${i})`).join(' '));
+    this.#grid.style.setProperty('--grid-auto-flow', 'initial');
+    this.#grid.style.setProperty('--grid-template-column', this.columns.map((_, i) => `var(--c${i})`).join(' '));
 
     // compute initial column width
-    this.columns.forEach((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width : `1fr`));
+    this.columns.forEach((c, i) => this.#grid.style.setProperty(`--c${i}`, c.width ? c.width : `1fr`));
 
     // compute column width based on content
     await this.updateComplete;
-    this.columns.forEach((c, i) => this.parentElement.style.setProperty(`--c${i}`, c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`));
+    this.columns.forEach((c, i) => this.#grid.style.setProperty(`--c${i}`, c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`));
+  }
+
+  #validateColumns() {
+    if (GlobalStateService.state.env !== 'production') {
+      const cells = this.#grid.querySelector('mlv-grid-row')?.querySelectorAll('mlv-grid-cell');
+      if (this.columns && cells && (this.columns.length !== cells.length)) {
+        LogService.error(`Error: mlv-grid-column (${this.columns.length}) and mlv-grid-cell (${cells.length}) count mismatch`);
+      }
+    }
   }
 }
