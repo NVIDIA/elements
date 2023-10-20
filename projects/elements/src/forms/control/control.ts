@@ -170,9 +170,11 @@ export class Control extends LitElement {
 
   #getCharacterWidth() {
     if (this.input.tagName === 'INPUT') {
-      this.style.setProperty('--max-width', `${this.input.value.length * 0.9}ch`)
+      const offset = this.input.type !== 'text' ? 4 : 0;
+      this.style.setProperty('--control-width', `${this.input.value.length + offset}ch`);
+      this.input.style.setProperty('max-width', `${this.input.value.length + 2}ch`, 'important');
     } else if (this.input.tagName === 'SELECT') {
-      this.style.setProperty('--max-width', `${(this.input.options[this.input.selectedIndex].textContent.length * 0.9) + 4}ch`);
+      this.style.setProperty('--control-width', `${(this.input.options[this.input.selectedIndex].textContent.length) + 4}ch`);
     }
   }
 

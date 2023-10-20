@@ -6,4 +6,5 @@
 [mlv-control] input::-webkit-search-cancel-button,
 [mlv-control] input::-webkit-calendar-picker-indicator {
   opacity: 0 !important;
+  display: none !important;
 }

@@ -156,3 +156,13 @@ export const Types = {
 </div>
 `
 }
+
+export const FitText = {
+  render: () => html`
+<mlv-date fit-text>
+  <label>date</label>
+  <input type="date" value="2017-06-01" />
+  <mlv-control-message>message</mlv-control-message>
+</mlv-date>
+`
+};

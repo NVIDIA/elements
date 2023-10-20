@@ -688,3 +688,32 @@ export const HorizontalInline = () => {
 </div>
   `;
 };
+
+
+export const FitText = {
+  render: () => html`
+<section mlv-layout="column gap:md">
+  <mlv-date fit-text>
+    <label>date</label>
+    <input type="date" value="2017-06-01" />
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-date>
+
+  <mlv-input fit-text>
+    <label>label</label>
+    <input value="123456789012345678901234567890" />
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-input>
+
+  <mlv-select fit-text>
+    <label>label</label>
+    <select>
+      <option value="1">Option 1</option>
+      <option value="2">Option 1234</option>
+      <option value="3">Option 1234567809</option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-select>
+</section>
+`
+};
