@@ -3,7 +3,7 @@ mlv-range input[type='range']::-webkit-slider-thumb {
   height: var(--mlv-ref-size-400);
   background: var(--background);
   border-radius: 50%;
-  margin-top: -5px;
+  margin-top: calc((var(--track-height) - var(--mlv-ref-size-400)) / 2);
   appearance: var(--_appearance);
 }
 

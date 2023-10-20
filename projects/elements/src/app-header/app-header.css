@@ -58,7 +58,6 @@ slot[name="nav-actions"] {
 
 ::slotted(mlv-button[slot="nav-items"]) {
   --color: var(--mlv-sys-text-muted-color);
-  --border-radius: 2px;
   --font-weight: var(--mlv-ref-font-weight-medium);
 }
 

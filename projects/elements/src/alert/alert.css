@@ -65,7 +65,7 @@ mlv-icon:not([size='sm']) {
 }
 
 mlv-icon[size='sm'] {
-  padding: 2px;
+  padding: var(--mlv-ref-size-50);
 }
 
 mlv-icon-button:not([icon-name='cancel']) {

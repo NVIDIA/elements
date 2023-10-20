@@ -4,8 +4,8 @@
   --background: var(--mlv-sys-interaction-field-background);
   --width: var(--mlv-ref-size-1000);
   --height: var(--mlv-ref-size-500);
-  --anchor-width: var(--mlv-ref-font-size-200);
-  --anchor-height: var(--mlv-ref-font-size-200);
+  --anchor-width: calc(var(--mlv-ref-size-300) + var(--mlv-ref-size-50));
+  --anchor-height: calc(var(--mlv-ref-size-300) + var(--mlv-ref-size-50));
   --anchor-border-radius: var(--mlv-ref-border-radius-full);
   --anchor-background: var(--mlv-sys-interaction-disabled-color);
 }
@@ -38,7 +38,7 @@
   width: var(--width);
   min-height: auto;
   display: flex !important;
-  padding: 0 3px;
+  padding: 0 var(--mlv-ref-size-100);
   align-items: center;
   transition-duration: 200ms;
   transition-timing-function: ease-in;
@@ -51,7 +51,7 @@
   --background: var(--mlv-sys-interaction-disabled-color);
 }
 
-[input] slot:after {
+[input] slot::after {
   border-radius: var(--anchor-border-radius);
   background: var(--anchor-background);
   height: var(--anchor-height);
@@ -67,7 +67,7 @@
   --background: var(--mlv-sys-accent-secondary-background);
   --anchor-background: var(--mlv-sys-text-white-color);
 
-  [input] slot:after {
+  [input] slot::after {
     transform: translate(calc(var(--width) / 2), 0);
   }
 }

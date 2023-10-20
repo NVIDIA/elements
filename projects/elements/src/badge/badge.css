@@ -31,8 +31,8 @@
 }
 
 :host(:--has-text) {
-  --height: 18px;
-  --width: 18px;
+  --height: calc(var(--mlv-ref-size-400) + var(--mlv-ref-size-50));
+  --width: calc(var(--mlv-ref-size-400) + var(--mlv-ref-size-50));
 }
 
 ::slotted([mlv-text]) {

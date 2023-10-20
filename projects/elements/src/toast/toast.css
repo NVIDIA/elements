@@ -8,7 +8,7 @@
   --font-size: var(--mlv-ref-font-size-200);
   --font-weight: var(--mlv-ref-font-weight-medium);
   --box-shadow: var(--mlv-ref-shadow-100);
-  --gap: var(--mlv-ref-size-200);
+  --gap: var(--mlv-ref-space-xs);
   --_gap: var(--gap);
 }
 

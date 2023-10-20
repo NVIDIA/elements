@@ -25,7 +25,7 @@ li {
 }
 
 ::slotted(mlv-button) {
-  --border-radius: 2px;
+  --border-radius: calc(var(--mlv-ref-border-radius-xs) / 2);
   --font-size: var(--item-text-size);
   --color: var(--item-color);
   --padding: 0 var(--mlv-ref-size-100);
@@ -38,7 +38,7 @@ li {
 }
 
 ::slotted(mlv-icon-button) {
-  --border-radius: 2px;
+  --border-radius: calc(var(--mlv-ref-border-radius-xs) / 2);
   --icon-width: var(--mlv-ref-size-300);
   --icon-height: var(--mlv-ref-size-300);
   --height: var(--breadcrumb-height);

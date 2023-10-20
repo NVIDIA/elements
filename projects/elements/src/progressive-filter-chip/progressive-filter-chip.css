@@ -1,5 +1,5 @@
 :host {
-  --gap: var(--mlv-ref-size-50);
+  --gap: var(--mlv-ref-space-xxxs);
   --border-radius: var(--mlv-ref-border-radius-sm);
   --background: color-mix(in oklab, var(--mlv-sys-interaction-field-background) 95%, var(--mlv-sys-interaction-state-mix));
   width: fit-content;

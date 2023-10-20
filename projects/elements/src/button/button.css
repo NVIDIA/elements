@@ -138,6 +138,7 @@
   --background: transparent;
   --padding: 0 var(--mlv-ref-size-100);
   --text-transform: initial;
+  --border-radius: var(--mlv-ref-border-radius-xs);
   --_icon-color: var(--color);
 
   &:host(:hover) {

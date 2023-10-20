@@ -3,7 +3,7 @@
   --control-height: var(--mlv-ref-size-800);
   --cursor: pointer;
   --track-width: 50%;
-  --track-height: 6px;
+  --track-height: var(--mlv-ref-size-150);
   --track-border-radius: var(--mlv-ref-border-radius-md);
   width: 100%;
 }

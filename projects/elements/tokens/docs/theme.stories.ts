@@ -21,6 +21,8 @@ import '@elements/elements/date/define.js';
 import '@elements/elements/switch/define.js';
 import '@elements/elements/search/define.js';
 import '@elements/elements/password/define.js';
+import '@elements/elements/progress-ring/define.js';
+import '@elements/elements/dot/define.js';
 
 export default {
   title: 'Foundations/Themes/Examples'
@@ -206,6 +208,7 @@ class ThemeGeneratorDemo extends LitElement {
     'sys-accent-primary-background': '#63a600',
     'sys-accent-secondary-background': '#006adc',
     'ref-scale-border-radius': 1,
+    'ref-scale-border-width': 1,
     'ref-scale-space': 1,
     'ref-scale-size': 1,
     'ref-scale-text': 1,
@@ -236,18 +239,13 @@ class ThemeGeneratorDemo extends LitElement {
       <mlv-panel-content>
         <form @input=${this.#input} mlv-layout="column gap:lg">
           <mlv-color>
-            <label>Accent Color ${this.formValues['sys-accent-secondary-background']}</label>
-            <input type="color" name="sys-accent-primary-background" .value=${this.formValues['sys-accent-primary-background']} />
-          </mlv-color>
-
-          <mlv-color>
-            <label>Secondary Color</label>
+            <label>Color</label>
             <input type="color" name="sys-accent-secondary-background" .value=${this.formValues['sys-accent-secondary-background']} />
           </mlv-color>
 
           <mlv-range>
             <label>Space Scale</label>
-            <input type="range" name="ref-scale-space" .value=${this.formValues['ref-space-scale']} min="0.5" max="1.5" step="0.1" />
+            <input type="range" name="ref-scale-space" .value=${this.formValues['ref-space-scale']} min="0.5" max="2" step="0.1" />
           </mlv-range>
 
           <mlv-range>
@@ -262,7 +260,12 @@ class ThemeGeneratorDemo extends LitElement {
 
           <mlv-range>
             <label>Border Radius Scale</label>
-            <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-border-radius-scale']} min="0" max="1.5" step="0.1" />
+            <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-scale-border-radius']} min="0" max="1.5" step="0.1" />
+          </mlv-range>
+
+          <mlv-range>
+            <label>Border Width Scale</label>
+            <input type="range" name="ref-scale-border-width" .value=${this.formValues['ref-scale-border-width']} min="0.5" max="3" step="0.5" />
           </mlv-range>
 
           <mlv-button type="button" @click=${this.#random} style="position: fixed; bottom: 24px;">random</mlv-button>
@@ -278,17 +281,17 @@ class ThemeGeneratorDemo extends LitElement {
           </mlv-card-header>
           <mlv-card-content>
             <div mlv-layout="column gap:lg">
+              <div mlv-layout="row gap:lg align:vertical-center">
+                <mlv-alert status="accent">alert message</mlv-alert>
+                <mlv-icon status="accent" name="person"></mlv-icon>
+                <mlv-dot status="accent"></mlv-dot>
+                <mlv-progress-ring status="accent" size="sm"></mlv-progress-ring>
+              </div>
               <mlv-input layout="horizontal-inline">
                 <label>text label</label>
                 <input />
                 <mlv-control-message>message</mlv-control-message>
               </mlv-input>
-
-              <mlv-search layout="horizontal-inline">
-                <label>search label</label>
-                <input type="search" placeholder="search" />
-                <mlv-control-message>message</mlv-control-message>
-              </mlv-search>
 
               <mlv-password layout="horizontal-inline">
                 <label>password label</label>
@@ -378,7 +381,6 @@ class ThemeGeneratorDemo extends LitElement {
           <mlv-card-footer>
             <div mlv-layout="row gap:xs full">
               <mlv-button style="margin-left: auto">button</mlv-button>
-              <mlv-button interaction="emphasize">button</mlv-button>
             </div>
           </mlv-card-footer>
         </mlv-card>
@@ -399,7 +401,9 @@ class ThemeGeneratorDemo extends LitElement {
     this.#setFormValues({
       'sys-accent-primary-background': color,
       'sys-accent-secondary-background': color,
+      'sys-support-accent-emphasis-color': color,
       'ref-scale-border-radius': getRandomDecimal(0, 1.5, 2),
+      'ref-scale-border-width': getRandomDecimal(1, 3, 0),
       'ref-scale-space': getRandomDecimal(0.8, 1.5, 2),
       'ref-scale-size': getRandomDecimal(0.9, 1.5, 2),
       'ref-scale-text': getRandomDecimal(0.9, 1.5, 2),
@@ -407,8 +411,14 @@ class ThemeGeneratorDemo extends LitElement {
   }
 
   #setFormValues(formValues) {
-    this.formValues = formValues;
-    Object.keys(this.formValues).forEach(prop => document.documentElement.style.setProperty(`--mlv-${prop}`, this.formValues[prop]));
+    this.formValues = {
+      ...formValues,
+      'sys-support-accent-emphasis-color': formValues['sys-accent-secondary-background']
+    };
+
+    Object.keys(this.formValues).forEach(prop => {
+      document.documentElement.style.setProperty(`--mlv-${prop}`, this.formValues[prop]);
+    });
   }
 }
 

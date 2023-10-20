@@ -26,8 +26,8 @@
 
 :host(:not([closable]):not(:--expanded)) {
   [internal-host] {
-    width: 32px !important;
-    height: 32px !important;
+    width: var(--mlv-ref-space-xl) !important;
+    height: var(--mlv-ref-space-xl) !important;
     background: none;
   }
 

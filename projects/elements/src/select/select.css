@@ -85,7 +85,7 @@
   & .tags {
     width: fit-content;
     display: flex;
-    gap: var(--mlv-ref-size-100);
+    gap: var(--mlv-ref-space-xxs);
   }
 
   & .tags-label {

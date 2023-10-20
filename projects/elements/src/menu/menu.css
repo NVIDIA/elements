@@ -1,7 +1,7 @@
 
 :host {
   --padding:0;
-  --gap: var(--mlv-ref-size-100);
+  --gap: var(--mlv-ref-space-xxs);
   --width: min-content;
   --max-width: 100%;
   --min-width: 170px;
