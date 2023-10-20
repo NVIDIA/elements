@@ -17,6 +17,10 @@ class TypePopoverControllerTestElement extends LitElement {
 
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
+  @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger = false;
+
+  @property({ type: Boolean, reflect: true }) hidden = false;
+
   @property({ type: String, reflect: true }) popoverType: 'auto' | 'manual' | 'hint' = 'auto';
 
   @property({ type: Boolean, reflect: true }) arrow = true;
@@ -191,4 +195,50 @@ describe('type-popover.controller', () => {
   //   fixture.appendChild(el);
   //   element.remove();
   // });
+});
+
+describe('type-popover.controller behavior-trigger', () => {
+  let element: TypePopoverControllerTestElement;
+  let button: Button;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+    <mlv-button id="btn">anchor</mlv-button>
+    <type-popover-controller-test-element behavior-trigger trigger="btn" hidden></type-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
+    button = fixture.querySelector('mlv-button');
+    await element.updateComplete;
+    await button.updateComplete;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define test element', () => {
+    expect(customElements.get('type-popover-controller-test-element')).toBeDefined();
+  });
+
+  it('should trigger open event and open automaticaly when using behavior-trigger', async () => {
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.trigger).toBe('btn');
+    expect(element.behaviorTrigger).toBe(true);
+    expect(element.hidden).toBe(true);
+
+    const event = untilEvent(element, 'open');
+    emulateClick(button);
+    expect((await event).target).toBe(element);
+    expect(element.hidden).toBe(false);
+  });
+
+  it('should trigger close event and close automaticaly when using behavior-trigger', async () => {
+    element.hidden = false;
+
+    element.typePopoverController.close();
+    await elementIsStable(element);
+    expect(element.hidden).toBe(true);
+  });
 });

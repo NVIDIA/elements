@@ -14,6 +14,7 @@ export interface Popover extends ReactiveElement {
   popoverArrow?: HTMLElement;
   popoverType?: PopoverType;
   popoverDismissible?: boolean;
+  behaviorTrigger?: boolean;
 }
 
 /**
@@ -29,10 +30,11 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   }
 
   get #anchor() {
-    if (typeof this.host.anchor === 'string' && this.host.anchor?.length) {
-      return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === this.host.anchor);
-    } else if (this.host.anchor && this.host.anchor !== globalThis.document.body) {
-      return this.host.anchor as HTMLElement;
+    const anchor = this.host.anchor ?? this.#trigger;
+    if (typeof anchor === 'string' && anchor?.length) {
+      return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === anchor);
+    } else if (anchor && anchor !== globalThis.document.body) {
+      return anchor as HTMLElement;
     } else {
       return globalThis.document.body;
     }
@@ -158,11 +160,19 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     if (this.#dialog?.open && this.host.hidden) {
       this.#dialog.close();
     }
+
+    if (this.host.behaviorTrigger) {
+      this.host.hidden = true;
+    }
   }
 
   open() {
     if (this.host.hidden) {
       this.host.dispatchEvent(new CustomEvent('open', { bubbles: true }));
+    }
+
+    if (this.host.behaviorTrigger) {
+      this.host.hidden = false;
     }
   }
 

@@ -56,6 +56,11 @@ export class Tooltip extends LitElement {
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
   /**
+   * Determines if popover visibility behavior should be automatically controlled by the trigger.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
+
+  /**
    * visual treatment to represent a ongoing task or support status
    */
   @property({ type: String, reflect: true }) status: 'muted';

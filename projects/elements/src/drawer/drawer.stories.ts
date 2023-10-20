@@ -64,6 +64,23 @@ export const Interactive = {
   `
 };
 
+export const BehaviorTrigger = {
+  render: () => html`
+<mlv-button id="drawer-btn">open</mlv-button>
+<mlv-drawer behavior-trigger trigger="drawer-btn" closable modal hidden position="right">
+  <mlv-drawer-header>
+    <h3 mlv-text="heading">Drawer Header</h3>
+  </mlv-drawer-header>
+  <mlv-drawer-content>
+    <p mlv-text="body">drawer content</p>
+  </mlv-drawer-content>
+  <mlv-drawer-footer>
+    <p mlv-text="body">drawer footer</p>
+  </mlv-drawer-footer>
+</mlv-drawer>
+  `
+};
+
 export const Small = {
   render: () => html`
 <mlv-drawer size="sm" closable>

@@ -70,6 +70,11 @@ export class Drawer extends LitElement {
   @property({ type: Boolean, reflect: true }) inline: boolean;
 
   /**
+   * Determines if popover visibility behavior should be automatically controlled by the trigger.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
+
+  /**
    * Determines if popover should be rendered and positioned.
    */
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */

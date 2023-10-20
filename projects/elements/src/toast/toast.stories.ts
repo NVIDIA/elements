@@ -77,6 +77,15 @@ export const Interactive = {
 `
 };
 
+export const BehaviorTrigger = {
+  render: () => html`
+<div mlv-layout="row align:center" style="height: 90vh">
+  <mlv-button id="btn">copy to clipboard</mlv-button>
+  <mlv-toast trigger="btn" behavior-trigger position="top" close-timeout="1500" hidden>copied!</mlv-toast>
+</div>
+`
+};
+
 export const Alignment = {
   render: () => html`
 <mlv-card id="card" style="width: 450px; height: 300px;"></mlv-card>

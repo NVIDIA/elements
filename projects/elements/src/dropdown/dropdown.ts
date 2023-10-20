@@ -52,6 +52,11 @@ export class Dropdown extends LitElement {
   @property({ type: String, reflect: true }) alignment: PopoverAlign = 'start';
 
   /**
+   * Determines if popover visibility behavior should be automatically controlled by the trigger.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
+
+  /**
    * Determines if a close button should render within dropdown. Non-closable
    * dropdowns can be used for menu or selection patterns.
    */

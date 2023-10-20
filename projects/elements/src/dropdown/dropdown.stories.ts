@@ -1,8 +1,6 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
-import { spread } from '@elements/elements/internal';
-import { Dropdown } from '@elements/elements/dropdown';
 import '@elements/elements/card/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/forms/define.js';
@@ -15,37 +13,16 @@ import '@elements/elements/icon/define.js';
 
 export default {
   title: 'Elements/Dropdown/Examples',
-  component: 'mlv-dropdown',
-  parameters: {
-    badges: ['alpha'],
-    docs: {
-      inlineStories: false,
-      iframeHeight: 500
-    },
-  },
-  argTypes: {
-    position: {
-      control: 'inline-radio',
-      options: ['top', 'right', 'bottom', 'left']
-    },
-    alignment: {
-      control: 'inline-radio',
-      options: ['start', 'center', 'end'],
-      defaultValue: 'start'
-    }
-  }
+  component: 'mlv-dropdown'
 };
 
-type ArgTypes = Dropdown;
-
 export const Default = {
-  render: (args: ArgTypes) => html`
+  render: () => html`
     <div style="height: 250px; width: 100%; display: flex; align-items:center; justify-content: center;">
-      <mlv-dropdown anchor="btn" ${spread(args)}><p mlv-text="body">${args.textContent}</p></mlv-dropdown>
+      <mlv-dropdown anchor="btn"><p mlv-text="body">dropdown content</p></mlv-dropdown>
       <mlv-button id="btn">button</mlv-button>
     </div>
-  `,
-  args: { textContent: 'hello there', position: 'bottom' }
+  `
 };
 
 export const Interactive = {
@@ -61,6 +38,16 @@ export const Interactive = {
   btn.addEventListener('click', () => dropdown.hidden = false);
   dropdown.addEventListener('close', () => dropdown.hidden = true);
 </script>
+  `
+};
+
+export const BehaviorTrigger = {
+  inline: false,
+  render: () => html`
+<mlv-button id="dropdown-btn">open</mlv-button>
+<mlv-dropdown trigger="dropdown-btn" behavior-trigger hidden>
+  <p mlv-text="body">hello there</p>
+</mlv-dropdown>
   `
 };
 

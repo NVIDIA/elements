@@ -54,6 +54,15 @@ export const Interactive = {
   `
 };
 
+export const BehaviorTrigger = {
+  render: () => html`
+<div mlv-layout="row align:center" style="height: 250px">
+  <mlv-tooltip behavior-trigger anchor="action-btn" trigger="action-btn" hidden>hello there</mlv-tooltip>
+  <mlv-button id="action-btn">button</mlv-button>
+</div>
+  `
+};
+
 export const Hint = {
   render: () => html`
 <div mlv-layout="block align:vertical-center" style="height: 90vh">

@@ -60,6 +60,11 @@ export class Toast extends LitElement {
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
   /**
+   * Determines if popover visibility behavior should be automatically controlled by the trigger.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
+
+  /**
    * Determines if a close button should render within toast.
    */
   @property({ type: Boolean }) closable = false;

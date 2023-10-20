@@ -72,6 +72,16 @@ export const InteractiveStack = {
 `
 };
 
+export const BehaviorTrigger = {
+  render: () => html`
+<mlv-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" close-timeout="2000">
+  <h3 mlv-text="label">notification</h3>
+  <p mlv-text="body">some text content in a notification</p>
+</mlv-notification>
+<mlv-button id="notification-btn">show</mlv-button>
+`
+};
+
 export const Status = {
   render: () => html`
 <mlv-notification-group position="center">

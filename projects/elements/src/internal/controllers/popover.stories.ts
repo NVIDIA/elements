@@ -63,14 +63,14 @@ export const Nested = {
 export const Interactive = {
   render: () => html`
     <div mlv-layout="row align:center gap:xl" style="height: 300px">
-      <mlv-tooltip anchor="tooltip-btn" trigger="tooltip-btn" position="top" hidden>hello there</mlv-tooltip>
+      <mlv-tooltip trigger="tooltip-btn" behavior-trigger position="top" hidden>hello there</mlv-tooltip>
       <mlv-button id="tooltip-btn">tooltip</mlv-button>
 
       <mlv-button id="toast-btn">toast</mlv-button>
-      <mlv-toast anchor="toast-btn" trigger="toast-btn" position="top" close-timeout="1500" hidden>copied!</mlv-toast>
+      <mlv-toast trigger="toast-btn" behavior-trigger position="top" close-timeout="1500" hidden>copied!</mlv-toast>
 
       <mlv-button id="drawer-btn" size="sm">drawer</mlv-button>
-      <mlv-drawer hidden closable modal trigger="drawer-btn">
+      <mlv-drawer trigger="drawer-btn" behavior-trigger hidden closable modal>
         <mlv-drawer-header>
           <h3 mlv-text="heading semibold sm">Title</h3>
         </mlv-drawer-header>
@@ -78,48 +78,22 @@ export const Interactive = {
       </mlv-drawer>
 
       <mlv-button id="dropdown-btn">dropdown</mlv-button>
-      <mlv-dropdown anchor="dropdown-btn" trigger="dropdown-btn" closable hidden>
+      <mlv-dropdown trigger="dropdown-btn" behavior-trigger closable hidden>
         <h3 mlv-text="heading">Title</h3>
         <p mlv-text="body">some text content in a dropdown</p>
       </mlv-dropdown>
 
       <mlv-button id="dialog-btn">dialog</mlv-button>
-      <mlv-dialog trigger="dialog-btn" closable modal hidden>
+      <mlv-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
         <h3 mlv-text="heading">Title</h3>
         <p mlv-text="body">some text content in a closable dialog</p>
       </mlv-dialog>
 
       <mlv-button id="notification-btn">notification snackbar</mlv-button>
-      <mlv-notification hidden closable position="bottom" alignment="end" trigger="notification-btn" close-timeout="2000">
+      <mlv-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" alignment="end" close-timeout="2000">
         <h3 mlv-text="label">notification</h3>
         <p mlv-text="body">some text content in a notification</p>  
       </mlv-notification>
-
-      <script type="module">
-        const tooltip = document.querySelector('mlv-tooltip');
-        tooltip.addEventListener('open', () => tooltip.hidden = false);
-        tooltip.addEventListener('close', () => tooltip.hidden = true);
-
-        const toast = document.querySelector('mlv-toast');
-        toast.addEventListener('open', () => toast.hidden = false);
-        toast.addEventListener('close', () => toast.hidden = true);
-
-        const drawer = document.querySelector('mlv-drawer');
-        drawer.addEventListener('open', () => drawer.hidden = false);
-        drawer.addEventListener('close', () => drawer.hidden = true);
-
-        const dropdown = document.querySelector('mlv-dropdown');
-        dropdown.addEventListener('open', () => dropdown.hidden = false);
-        dropdown.addEventListener('close', () => dropdown.hidden = true);
-
-        const dialog = document.querySelector('mlv-dialog');
-        dialog.addEventListener('open', () => dialog.hidden = false);
-        dialog.addEventListener('close', () => dialog.hidden = true);
-
-        const notification = document.querySelector('mlv-notification');
-        notification.addEventListener('open', () => notification.hidden = false);
-        notification.addEventListener('close', () => notification.hidden = true);
-      </script>
     </div>
   `
 }

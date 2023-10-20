@@ -53,6 +53,17 @@ export const Interactive = {
   `
 };
 
+export const BehaviorTrigger = {
+  inline: false,
+  render: () => html`
+<mlv-button id="dialog-btn">open</mlv-button>
+<mlv-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
+  <h3 mlv-text="heading">Title</h3>
+  <p mlv-text="body">some text content in a closable dialog</p>
+</mlv-dialog>
+  `
+};
+
 export const Content = {
   inline: false,
   render: () => html`

@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-19T20:20:06.437Z",
+  "created": "2023-10-20T18:43:23.506Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -2163,7 +2163,7 @@
       "tests": {
         "projectTotal": 1,
         "instanceTotal": 1,
-        "coverageTotal": 98.3325
+        "coverageTotal": 97.655
       },
       "stories": [
         {
@@ -2327,7 +2327,7 @@
       "tests": {
         "projectTotal": 8,
         "instanceTotal": 13,
-        "coverageTotal": 98.1425
+        "coverageTotal": 97.5475
       },
       "stories": [],
       "behavior": "form",
@@ -2614,6 +2614,11 @@
           "id": "Types",
           "file": "date.stories.ts",
           "template": "<div mlv-layout=\"column gap:lg align:stretch\">\n  <mlv-date layout=\"horizontal\">\n    <label>date label</label>\n    <input type=\"date\" />\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-date>\n\n  <mlv-datetime layout=\"horizontal\">\n    <label>datetime label</label>\n    <input type=\"datetime-local\" />\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-datetime>\n\n  <mlv-month layout=\"horizontal\">\n    <label>month label</label>\n    <input type=\"month\" />\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-month>\n\n  <mlv-week layout=\"horizontal\">\n    <label>week label</label>\n    <input type=\"week\" />\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-week>\n\n  <mlv-time layout=\"horizontal\">\n    <label>time label</label>\n    <input type=\"time\" />\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-time>\n\n  <mlv-input-group layout=\"horizontal\">\n    <label>date range</label>\n    <mlv-date>\n      <input type=\"date\" aria-label=\"start date\" value=\"2018-07-22\" />\n    </mlv-date>\n    <mlv-date>\n      <input type=\"date\" aria-label=\"end date\" value=\"2022-07-22\" />\n    </mlv-date>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-input-group>\n</div>\n"
+        },
+        {
+          "id": "FitText",
+          "file": "date.stories.ts",
+          "template": "<mlv-date fit-text>\n  <label>date</label>\n  <input type=\"date\" value=\"2017-06-01\" />\n  <mlv-control-message>message</mlv-control-message>\n</mlv-date>\n"
         }
       ],
       "behavior": "form",
@@ -2811,6 +2816,10 @@
             "description": "The trigger defines what element triggers an `open` interaction event.\nA trigger can accept a idref string within the same render root or a HTMLElement DOM reference."
           },
           {
+            "name": "behaviorTrigger",
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger."
+          },
+          {
             "name": "hidden",
             "description": "Determines if popover should be rendered and positioned."
           },
@@ -2882,6 +2891,14 @@
             },
             "description": "Defines what element triggers an `open` interaction event. A trigger can accept a idref string within the same render root or a HTMLElement DOM reference.",
             "fieldName": "trigger"
+          },
+          {
+            "name": "behavior-trigger",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger.",
+            "fieldName": "behaviorTrigger"
           },
           {
             "name": "hidden",
@@ -2962,6 +2979,11 @@
           "id": "Interactive",
           "file": "dialog.stories.ts",
           "template": "<mlv-button id=\"dialog-btn\">open</mlv-button>\n<mlv-dialog closable modal hidden>\n  <h3 mlv-text=\"heading\">Title</h3>\n  <p mlv-text=\"body\">some text content in a closable dialog</p>\n</mlv-dialog>\n<script type=\"module\">\n  const dialog = document.querySelector(\"mlv-dialog\");\n  const btn = document.querySelector(\"#dialog-btn\");\n  btn.addEventListener(\"click\", () => (dialog.hidden = false));\n  dialog.addEventListener(\"close\", () => (dialog.hidden = true));\n</script>\n"
+        },
+        {
+          "id": "BehaviorTrigger",
+          "file": "dialog.stories.ts",
+          "template": "<mlv-button id=\"dialog-btn\">open</mlv-button>\n<mlv-dialog trigger=\"dialog-btn\" behavior-trigger closable modal hidden>\n  <h3 mlv-text=\"heading\">Title</h3>\n  <p mlv-text=\"body\">some text content in a closable dialog</p>\n</mlv-dialog>\n"
         },
         {
           "id": "Content",
@@ -3337,6 +3359,10 @@
             "description": "Create a inline layout effect while retaining the a11y characteristics and top layer behavior (light dismiss, focus trap, non interactive background)\nhttps://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/"
           },
           {
+            "name": "behaviorTrigger",
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger."
+          },
+          {
             "name": "hidden",
             "description": "Determines if popover should be rendered and positioned."
           },
@@ -3408,6 +3434,14 @@
             },
             "description": "Create a inline layout effect while retaining the a11y characteristics and top layer behavior (light dismiss, focus trap, non interactive background)\nhttps://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
             "fieldName": "inline"
+          },
+          {
+            "name": "behavior-trigger",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger.",
+            "fieldName": "behaviorTrigger"
           },
           {
             "name": "hidden",
@@ -3493,6 +3527,11 @@
           "id": "Interactive",
           "file": "drawer.stories.ts",
           "template": "<mlv-button id=\"drawer-btn\">open</mlv-button>\n<mlv-drawer closable modal hidden position=\"right\">\n  <mlv-drawer-header>\n    <h3 mlv-text=\"heading\">Drawer Header</h3>\n  </mlv-drawer-header>\n  <mlv-drawer-content>\n    <p mlv-text=\"body\">drawer content</p>\n  </mlv-drawer-content>\n  <mlv-drawer-footer>\n    <p mlv-text=\"body\">drawer footer</p>\n  </mlv-drawer-footer>\n</mlv-drawer>\n<script type=\"module\">\n  const drawer = document.querySelector(\"mlv-drawer\");\n  const btn = document.querySelector(\"#drawer-btn\");\n  btn.addEventListener(\"click\", () => (drawer.hidden = false));\n  drawer.addEventListener(\"close\", () => (drawer.hidden = true));\n</script>\n"
+        },
+        {
+          "id": "BehaviorTrigger",
+          "file": "drawer.stories.ts",
+          "template": "<mlv-button id=\"drawer-btn\">open</mlv-button>\n<mlv-drawer behavior-trigger trigger=\"drawer-btn\" closable modal hidden position=\"right\">\n  <mlv-drawer-header>\n    <h3 mlv-text=\"heading\">Drawer Header</h3>\n  </mlv-drawer-header>\n  <mlv-drawer-content>\n    <p mlv-text=\"body\">drawer content</p>\n  </mlv-drawer-content>\n  <mlv-drawer-footer>\n    <p mlv-text=\"body\">drawer footer</p>\n  </mlv-drawer-footer>\n</mlv-drawer>\n"
         },
         {
           "id": "Small",
@@ -3653,6 +3692,10 @@
             "description": "Sets the alignment of the popover relative to the provided anchor element.\nIf an arrow exists the alginment will be relative to the arrow against the anchor."
           },
           {
+            "name": "behaviorTrigger",
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger."
+          },
+          {
             "name": "closable",
             "description": "Determines if a close button should render within dropdown. Non-closable\ndropdowns can be used for menu or selection patterns."
           },
@@ -3709,6 +3752,14 @@
             "default": "'start'",
             "description": "Determines the alignment of the popover relative to the provided anchor element.",
             "fieldName": "alignment"
+          },
+          {
+            "name": "behavior-trigger",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger.",
+            "fieldName": "behaviorTrigger"
           },
           {
             "name": "closable",
@@ -3798,12 +3849,17 @@
         {
           "id": "Default",
           "file": "dropdown.stories.ts",
-          "template": "<div style=\"height: 250px; width: 100%; display: flex; align-items: center; justify-content: center\">\n  <mlv-dropdown anchor=\"btn\" ${spread(args)}><p mlv-text=\"body\">${args.textContent}</p></mlv-dropdown>\n  <mlv-button id=\"btn\">button</mlv-button>\n</div>\n"
+          "template": "<div style=\"height: 250px; width: 100%; display: flex; align-items: center; justify-content: center\">\n  <mlv-dropdown anchor=\"btn\"><p mlv-text=\"body\">dropdown content</p></mlv-dropdown>\n  <mlv-button id=\"btn\">button</mlv-button>\n</div>\n"
         },
         {
           "id": "Interactive",
           "file": "dropdown.stories.ts",
           "template": "<mlv-button id=\"dropdown-btn\">open</mlv-button>\n<mlv-dropdown anchor=\"dropdown-btn\" hidden>\n  <p mlv-text=\"body\">hello there</p>\n</mlv-dropdown>\n<script>\n  const dropdown = document.querySelector(\"mlv-dropdown\");\n  const btn = document.querySelector(\"#dropdown-btn\");\n  btn.addEventListener(\"click\", () => (dropdown.hidden = false));\n  dropdown.addEventListener(\"close\", () => (dropdown.hidden = true));\n</script>\n"
+        },
+        {
+          "id": "BehaviorTrigger",
+          "file": "dropdown.stories.ts",
+          "template": "<mlv-button id=\"dropdown-btn\">open</mlv-button>\n<mlv-dropdown trigger=\"dropdown-btn\" behavior-trigger hidden>\n  <p mlv-text=\"body\">hello there</p>\n</mlv-dropdown>\n"
         },
         {
           "id": "Content",
@@ -5623,10 +5679,6 @@
       "schema": {
         "properties": [
           {
-            "name": "selected",
-            "description": "Sets the selected state of the menu item."
-          },
-          {
             "name": "pressed",
             "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed"
           },
@@ -5653,6 +5705,10 @@
           {
             "name": "disabled",
             "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled"
+          },
+          {
+            "name": "selected",
+            "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
           }
         ],
         "slots": [
@@ -5662,18 +5718,6 @@
           }
         ],
         "attributes": [
-          {
-            "name": "selected",
-            "type": {
-              "text": "boolean"
-            },
-            "description": "Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
-            "fieldName": "selected",
-            "inheritedFrom": {
-              "name": "MlvBaseButton",
-              "module": "/src/internal/base/button.js"
-            }
-          },
           {
             "name": "pressed",
             "type": {
@@ -5754,6 +5798,18 @@
             "default": "false",
             "description": "Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled",
             "fieldName": "disabled",
+            "inheritedFrom": {
+              "name": "MlvBaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "selected",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
+            "fieldName": "selected",
             "inheritedFrom": {
               "name": "MlvBaseButton",
               "module": "/src/internal/base/button.js"
@@ -5982,6 +6038,10 @@
             "description": "Sets the alignment of the popover relative to the provided anchor element."
           },
           {
+            "name": "behaviorTrigger",
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger."
+          },
+          {
             "name": "closable",
             "description": "Determines if a close button should render within notification."
           },
@@ -6044,6 +6104,14 @@
             },
             "description": "Determines the alignment of the popover relative to the provided anchor element.",
             "fieldName": "alignment"
+          },
+          {
+            "name": "behavior-trigger",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger.",
+            "fieldName": "behaviorTrigger"
           },
           {
             "name": "closable",
@@ -6137,7 +6205,7 @@
       "tests": {
         "projectTotal": 5,
         "instanceTotal": 24,
-        "coverageTotal": 96.18750000000001
+        "coverageTotal": 96.25250000000001
       },
       "stories": [
         {
@@ -6164,6 +6232,11 @@
           "id": "InteractiveStack",
           "file": "notification.stories.ts",
           "template": "<mlv-notification-group position=\"bottom\" alignment=\"end\"></mlv-notification-group>\n<mlv-button>generate</mlv-button>\n\n<script type=\"module\">\n  document.querySelector(\"mlv-button\").addEventListener(\"click\", () => {\n    const notification = document.createElement(\"mlv-notification\");\n    notification.closable = true;\n    notification.status = [\"warning\", \"danger\", \"success\", \"accent\", undefined][Math.floor(Math.random() * 5)];\n    notification.innerHTML =\n      '<h3 mlv-text=\"label\">' +\n      (notification.status ?? \"default\") +\n      '</h3><p mlv-text=\"body\">some text content in a notification</p>';\n    notification.closeTimeout = 2000 * (document.querySelectorAll(\"mlv-notification\").length + 1);\n    notification.addEventListener(\"close\", () => notification.remove(), { once: true });\n    document.querySelector(\"mlv-notification-group\").prepend(notification);\n  });\n</script>\n"
+        },
+        {
+          "id": "BehaviorTrigger",
+          "file": "notification.stories.ts",
+          "template": "<mlv-notification trigger=\"notification-btn\" behavior-trigger hidden closable position=\"bottom\" close-timeout=\"2000\">\n  <h3 mlv-text=\"label\">notification</h3>\n  <p mlv-text=\"body\">some text content in a notification</p>\n</mlv-notification>\n<mlv-button id=\"notification-btn\">show</mlv-button>\n"
         },
         {
           "id": "Status",
@@ -9359,6 +9432,10 @@
             "description": "Sets the alignment of the popover relative to the provided anchor element."
           },
           {
+            "name": "behaviorTrigger",
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger."
+          },
+          {
             "name": "closable",
             "description": "Determines if a close button should render within toast."
           },
@@ -9418,6 +9495,14 @@
             },
             "description": "Determines the alignment of the popover relative to the provided anchor element.",
             "fieldName": "alignment"
+          },
+          {
+            "name": "behavior-trigger",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger.",
+            "fieldName": "behaviorTrigger"
           },
           {
             "name": "closable",
@@ -9525,6 +9610,11 @@
           "id": "Interactive",
           "file": "toast.stories.ts",
           "template": "<div mlv-layout=\"row align:center\" style=\"height: 90vh\">\n  <mlv-button id=\"btn\">copy to clipboard</mlv-button>\n  <mlv-toast anchor=\"btn\" position=\"top\" close-timeout=\"1500\" hidden>copied!</mlv-toast>\n</div>\n<script type=\"module\">\n  const btn = document.querySelector(\"#btn\");\n  const toast = document.querySelector(\"mlv-toast\");\n  btn.addEventListener(\"click\", () => (toast.hidden = false));\n  toast.addEventListener(\"close\", () => (toast.hidden = true));\n</script>\n"
+        },
+        {
+          "id": "BehaviorTrigger",
+          "file": "toast.stories.ts",
+          "template": "<div mlv-layout=\"row align:center\" style=\"height: 90vh\">\n  <mlv-button id=\"btn\">copy to clipboard</mlv-button>\n  <mlv-toast trigger=\"btn\" behavior-trigger position=\"top\" close-timeout=\"1500\" hidden>copied!</mlv-toast>\n</div>\n"
         },
         {
           "id": "Alignment",
@@ -9738,6 +9828,10 @@
             "description": "Sets the alignment of the popover relative to the provided anchor element."
           },
           {
+            "name": "behaviorTrigger",
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger."
+          },
+          {
             "name": "status",
             "description": "visual treatment to represent a ongoing task or support status"
           },
@@ -9785,6 +9879,14 @@
             },
             "description": "Determines the alignment of the popover relative to the provided anchor element.",
             "fieldName": "alignment"
+          },
+          {
+            "name": "behavior-trigger",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Determines if popover visibility behavior should be automatically controlled by the trigger.",
+            "fieldName": "behaviorTrigger"
           },
           {
             "name": "status",
@@ -9862,6 +9964,11 @@
           "id": "Interactive",
           "file": "tooltip.stories.ts",
           "template": "<div mlv-layout=\"row align:center\" style=\"height: 250px\">\n  <mlv-tooltip anchor=\"action-btn\" trigger=\"action-btn\" hidden>hello there</mlv-tooltip>\n  <mlv-button id=\"action-btn\">button</mlv-button>\n  <script type=\"module\">\n    const tooltip = document.querySelector('mlv-tooltip[anchor=\"action-btn\"]');\n    tooltip.addEventListener(\"close\", () => (tooltip.hidden = true));\n    tooltip.addEventListener(\"open\", () => (tooltip.hidden = false));\n  </script>\n</div>\n"
+        },
+        {
+          "id": "BehaviorTrigger",
+          "file": "tooltip.stories.ts",
+          "template": "<div mlv-layout=\"row align:center\" style=\"height: 250px\">\n  <mlv-tooltip behavior-trigger anchor=\"action-btn\" trigger=\"action-btn\" hidden>hello there</mlv-tooltip>\n  <mlv-button id=\"action-btn\">button</mlv-button>\n</div>\n"
         },
         {
           "id": "Hint",
@@ -10113,10 +10220,10 @@
       {
         "file": "elements/src/internal/controllers/type-popover.controller.ts",
         "lines": {
-          "total": 76,
-          "covered": 67,
+          "total": 81,
+          "covered": 72,
           "skipped": 0,
-          "pct": 88.15
+          "pct": 88.88
         },
         "functions": {
           "total": 25,
@@ -10125,16 +10232,16 @@
           "pct": 72
         },
         "statements": {
-          "total": 93,
-          "covered": 78,
+          "total": 98,
+          "covered": 83,
           "skipped": 0,
-          "pct": 83.87
+          "pct": 84.69
         },
         "branches": {
-          "total": 60,
-          "covered": 54,
+          "total": 66,
+          "covered": 60,
           "skipped": 0,
-          "pct": 90
+          "pct": 90.9
         }
       },
       {
@@ -10194,10 +10301,10 @@
       {
         "file": "elements/src/notification/notification.ts",
         "lines": {
-          "total": 28,
-          "covered": 27,
+          "total": 29,
+          "covered": 28,
           "skipped": 0,
-          "pct": 96.42
+          "pct": 96.55
         },
         "functions": {
           "total": 11,
@@ -10206,10 +10313,10 @@
           "pct": 90.9
         },
         "statements": {
-          "total": 39,
-          "covered": 38,
+          "total": 41,
+          "covered": 40,
           "skipped": 0,
-          "pct": 97.43
+          "pct": 97.56
         },
         "branches": {
           "total": 6,
@@ -10356,8 +10463,8 @@
       {
         "file": "elements/src/tooltip/tooltip.ts",
         "lines": {
-          "total": 14,
-          "covered": 14,
+          "total": 15,
+          "covered": 15,
           "skipped": 0,
           "pct": 100
         },
@@ -10368,8 +10475,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 18,
-          "covered": 18,
+          "total": 19,
+          "covered": 19,
           "skipped": 0,
           "pct": 100
         },
@@ -10464,8 +10571,8 @@
       {
         "file": "elements/src/toast/toast.ts",
         "lines": {
-          "total": 18,
-          "covered": 18,
+          "total": 19,
+          "covered": 19,
           "skipped": 0,
           "pct": 100
         },
@@ -10476,8 +10583,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 28,
-          "covered": 28,
+          "total": 29,
+          "covered": 29,
           "skipped": 0,
           "pct": 100
         },
@@ -10815,8 +10922,8 @@
       {
         "file": "elements/src/sort-button/sort-button.ts",
         "lines": {
-          "total": 12,
-          "covered": 12,
+          "total": 11,
+          "covered": 11,
           "skipped": 0,
           "pct": 100
         },
@@ -10827,8 +10934,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 18,
-          "covered": 18,
+          "total": 17,
+          "covered": 17,
           "skipped": 0,
           "pct": 100
         },
@@ -11625,8 +11732,8 @@
       {
         "file": "elements/src/menu/menu-item.ts",
         "lines": {
-          "total": 8,
-          "covered": 8,
+          "total": 5,
+          "covered": 5,
           "skipped": 0,
           "pct": 100
         },
@@ -11637,8 +11744,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 10,
-          "covered": 10,
+          "total": 7,
+          "covered": 7,
           "skipped": 0,
           "pct": 100
         },
@@ -12975,8 +13082,8 @@
       {
         "file": "elements/src/forms/control/control.ts",
         "lines": {
-          "total": 74,
-          "covered": 74,
+          "total": 79,
+          "covered": 79,
           "skipped": 0,
           "pct": 100
         },
@@ -12987,16 +13094,16 @@
           "pct": 96.66
         },
         "statements": {
-          "total": 105,
-          "covered": 104,
+          "total": 110,
+          "covered": 109,
           "skipped": 0,
-          "pct": 99.04
+          "pct": 99.09
         },
         "branches": {
-          "total": 32,
-          "covered": 31,
+          "total": 36,
+          "covered": 34,
           "skipped": 0,
-          "pct": 96.87
+          "pct": 94.44
         }
       },
       {
@@ -13083,8 +13190,8 @@
       {
         "file": "elements/src/dropdown/dropdown.ts",
         "lines": {
-          "total": 17,
-          "covered": 17,
+          "total": 18,
+          "covered": 18,
           "skipped": 0,
           "pct": 100
         },
@@ -13095,8 +13202,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 28,
-          "covered": 28,
+          "total": 29,
+          "covered": 29,
           "skipped": 0,
           "pct": 100
         },
@@ -13137,8 +13244,8 @@
       {
         "file": "elements/src/drawer/drawer.ts",
         "lines": {
-          "total": 16,
-          "covered": 16,
+          "total": 17,
+          "covered": 17,
           "skipped": 0,
           "pct": 100
         },
@@ -13149,8 +13256,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 25,
-          "covered": 25,
+          "total": 26,
+          "covered": 26,
           "skipped": 0,
           "pct": 100
         },
@@ -13380,8 +13487,8 @@
       {
         "file": "elements/src/dialog/dialog.ts",
         "lines": {
-          "total": 16,
-          "covered": 16,
+          "total": 17,
+          "covered": 17,
           "skipped": 0,
           "pct": 100
         },
@@ -13392,8 +13499,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 25,
-          "covered": 25,
+          "total": 26,
+          "covered": 26,
           "skipped": 0,
           "pct": 100
         },
@@ -13641,10 +13748,10 @@
           "pct": 100
         },
         "branches": {
-          "total": 30,
-          "covered": 28,
+          "total": 32,
+          "covered": 29,
           "skipped": 0,
-          "pct": 93.33
+          "pct": 90.62
         }
       },
       {
@@ -14272,16 +14379,16 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1957,
-        "covered": 1910,
+        "total": 1969,
+        "covered": 1922,
         "skipped": 0,
-        "pct": 97.59
+        "pct": 97.61
       },
       "statements": {
-        "total": 2600,
-        "covered": 2533,
+        "total": 2613,
+        "covered": 2546,
         "skipped": 0,
-        "pct": 97.42
+        "pct": 97.43
       },
       "functions": {
         "total": 765,
@@ -14290,10 +14397,10 @@
         "pct": 95.29
       },
       "branches": {
-        "total": 950,
-        "covered": 858,
+        "total": 962,
+        "covered": 868,
         "skipped": 0,
-        "pct": 90.31
+        "pct": 90.22
       },
       "branchesTrue": {
         "total": 0,
