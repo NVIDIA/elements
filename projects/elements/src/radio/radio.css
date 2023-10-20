@@ -32,13 +32,13 @@
   border-radius: var(--border-radius);
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 [input] slot::before {
   content: '';
   width: calc(var(--width) / 2);
   height: calc(var(--height) / 2);
-  margin-left: var(--nve-ref-space-xxxs);
   border-radius: var(--border-radius);
 }
 
