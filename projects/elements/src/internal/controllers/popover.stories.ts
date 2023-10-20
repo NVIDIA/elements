@@ -63,14 +63,14 @@ export const Nested = {
 export const Interactive = {
   render: () => html`
     <div nve-layout="row align:center gap:xl" style="height: 300px">
-      <nve-tooltip anchor="tooltip-btn" trigger="tooltip-btn" position="top" hidden>hello there</nve-tooltip>
+      <nve-tooltip trigger="tooltip-btn" behavior-trigger position="top" hidden>hello there</nve-tooltip>
       <nve-button id="tooltip-btn">tooltip</nve-button>
 
       <nve-button id="toast-btn">toast</nve-button>
-      <nve-toast anchor="toast-btn" trigger="toast-btn" position="top" close-timeout="1500" hidden>copied!</nve-toast>
+      <nve-toast trigger="toast-btn" behavior-trigger position="top" close-timeout="1500" hidden>copied!</nve-toast>
 
       <nve-button id="drawer-btn" size="sm">drawer</nve-button>
-      <nve-drawer hidden closable modal trigger="drawer-btn">
+      <nve-drawer trigger="drawer-btn" behavior-trigger hidden closable modal>
         <nve-drawer-header>
           <h3 nve-text="heading semibold sm">Title</h3>
         </nve-drawer-header>
@@ -78,48 +78,22 @@ export const Interactive = {
       </nve-drawer>
 
       <nve-button id="dropdown-btn">dropdown</nve-button>
-      <nve-dropdown anchor="dropdown-btn" trigger="dropdown-btn" closable hidden>
+      <nve-dropdown trigger="dropdown-btn" behavior-trigger closable hidden>
         <h3 nve-text="heading">Title</h3>
         <p nve-text="body">some text content in a dropdown</p>
       </nve-dropdown>
 
       <nve-button id="dialog-btn">dialog</nve-button>
-      <nve-dialog trigger="dialog-btn" closable modal hidden>
+      <nve-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
         <h3 nve-text="heading">Title</h3>
         <p nve-text="body">some text content in a closable dialog</p>
       </nve-dialog>
 
       <nve-button id="notification-btn">notification snackbar</nve-button>
-      <nve-notification hidden closable position="bottom" alignment="end" trigger="notification-btn" close-timeout="2000">
+      <nve-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" alignment="end" close-timeout="2000">
         <h3 nve-text="label">notification</h3>
         <p nve-text="body">some text content in a notification</p>  
       </nve-notification>
-
-      <script type="module">
-        const tooltip = document.querySelector('nve-tooltip');
-        tooltip.addEventListener('open', () => tooltip.hidden = false);
-        tooltip.addEventListener('close', () => tooltip.hidden = true);
-
-        const toast = document.querySelector('nve-toast');
-        toast.addEventListener('open', () => toast.hidden = false);
-        toast.addEventListener('close', () => toast.hidden = true);
-
-        const drawer = document.querySelector('nve-drawer');
-        drawer.addEventListener('open', () => drawer.hidden = false);
-        drawer.addEventListener('close', () => drawer.hidden = true);
-
-        const dropdown = document.querySelector('nve-dropdown');
-        dropdown.addEventListener('open', () => dropdown.hidden = false);
-        dropdown.addEventListener('close', () => dropdown.hidden = true);
-
-        const dialog = document.querySelector('nve-dialog');
-        dialog.addEventListener('open', () => dialog.hidden = false);
-        dialog.addEventListener('close', () => dialog.hidden = true);
-
-        const notification = document.querySelector('nve-notification');
-        notification.addEventListener('open', () => notification.hidden = false);
-        notification.addEventListener('close', () => notification.hidden = true);
-      </script>
     </div>
   `
 }

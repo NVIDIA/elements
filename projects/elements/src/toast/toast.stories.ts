@@ -77,6 +77,15 @@ export const Interactive = {
 `
 };
 
+export const BehaviorTrigger = {
+  render: () => html`
+<div nve-layout="row align:center" style="height: 90vh">
+  <nve-button id="btn">copy to clipboard</nve-button>
+  <nve-toast trigger="btn" behavior-trigger position="top" close-timeout="1500" hidden>copied!</nve-toast>
+</div>
+`
+};
+
 export const Alignment = {
   render: () => html`
 <nve-card id="card" style="width: 450px; height: 300px;"></nve-card>
