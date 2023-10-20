@@ -1,8 +1,0 @@
-
-nve-menu-item:has(a:hover)::part(internal) {
-  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover) !important;
-}
-
-nve-menu-item:has(a:active)::part(internal) {
-  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-active) !important;
-}

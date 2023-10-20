@@ -1,8 +1,6 @@
 import { html } from 'lit';
-import { property } from 'lit/decorators/property.js';
-import { useStyles, attachInternals, MlvBaseButton, appendRootNodeStyle } from '@elements/elements/internal';
+import { useStyles, MlvBaseButton } from '@elements/elements/internal';
 import styles from './menu-item.css?inline';
-import globalStyles from './menu-item.global.css?inline';
 
 /**
  * @element nve-menu-item
@@ -24,11 +22,6 @@ import globalStyles from './menu-item.global.css?inline';
  * @stable false
  */
 export class MenuItem extends MlvBaseButton {
-  /**
-   * Sets the selected state of the menu item.
-   */
-  @property({ type: Boolean, reflect: true }) selected: boolean;
-
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -37,9 +30,6 @@ export class MenuItem extends MlvBaseButton {
   };
 
   static elementDefinitions = { };
-
-  /** @private */
-  declare _internals: ElementInternals;
 
   render() {
     return html`
@@ -51,9 +41,7 @@ export class MenuItem extends MlvBaseButton {
 
   connectedCallback() {
     super.connectedCallback();
-    attachInternals(this);
     this._internals.role = 'menuitem';
     this.type = 'button';
-    appendRootNodeStyle(this, globalStyles);
   }
 }

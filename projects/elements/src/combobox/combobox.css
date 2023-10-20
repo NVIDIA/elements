@@ -85,7 +85,13 @@ nve-dropdown {
 }
 
 nve-menu {
+  contain: content;
   --max-height: var(--scroll-height);
+}
+
+nve-menu-item {
+  contain: content;
+  content-visibility: auto;
 }
 
 nve-menu-item nve-icon {
