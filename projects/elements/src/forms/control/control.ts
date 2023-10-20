@@ -57,10 +57,16 @@ export class Control extends LitElement {
     return this.#messages.filter(i => !i.hasAttribute('hidden'));
   }
 
+  #input: HTMLInputElement;
+
   /** @private */
   get input() {
-    const slotted = this.querySelector('slot')?.assignedElements()?.find(i => i.matches(inputQuery)) ?? Array.from(this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i => i.matches(inputQuery));
-    return (slotted ? slotted : this.querySelector(inputQuery)) as HTMLInputElement;
+    if (!this.#input) {
+      const slotted = this.querySelector('slot')?.assignedElements()?.find(i => i.matches(inputQuery)) ?? Array.from(this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i => i.matches(inputQuery));
+      this.#input = (slotted ? slotted : this.querySelector(inputQuery)) as HTMLInputElement;
+    }
+
+    return this.#input;
   }
 
   /** @private */

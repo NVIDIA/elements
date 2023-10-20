@@ -1,8 +1,0 @@
-
-mlv-menu-item:has(a:hover)::part(internal) {
-  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover) !important;
-}
-
-mlv-menu-item:has(a:active)::part(internal) {
-  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-active) !important;
-}

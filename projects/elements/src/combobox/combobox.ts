@@ -67,8 +67,8 @@ export class Combobox extends Control implements ContainerElement {
       <mlv-dropdown .popoverType=${'manual'} @close=${e => e.target.hidden = true} @open=${e => e.target.hidden = false} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom" alignment="center">
         <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${this.i18n.select}>
           ${this.options.map(o => html`
-          <mlv-menu-item role="option" @click=${() => this.#selectValue(o.value)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${o.value}>
-            <span role="presentation">${o.value?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>
+          <mlv-menu-item role="option" @click=${() => this.#selectValue(o.value)} .selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} .disabled=${o.disabled} aria-label=${o.value}>
+            ${this.options.length < 50 ? html`<span role="presentation">${o.value?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : o.value}
           </mlv-menu-item>`)}
         </mlv-menu>
       </mlv-dropdown>`;
@@ -128,7 +128,7 @@ export class Combobox extends Control implements ContainerElement {
         this.#openListBox();
       }
 
-      if ((e as KeyboardEvent)?.code === 'ArrowDown' && globalThis.document.activeElement === this.input) {
+      if ((e as KeyboardEvent)?.code === 'ArrowDown' && (this.getRootNode() as any).activeElement === this.input) {
         this.#dropdown.querySelector('mlv-menu-item')?.focus();
         e.preventDefault();
       }

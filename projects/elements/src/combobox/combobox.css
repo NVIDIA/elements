@@ -85,7 +85,13 @@ mlv-dropdown {
 }
 
 mlv-menu {
+  contain: content;
   --max-height: var(--scroll-height);
+}
+
+mlv-menu-item {
+  contain: content;
+  content-visibility: auto;
 }
 
 mlv-menu-item mlv-icon {

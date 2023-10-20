@@ -1,4 +1,5 @@
-import { html } from 'lit';
+import { LitElement, html } from 'lit';
+import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture } from '@elements/elements/test';
 import { Combobox } from '@elements/elements/combobox';
@@ -166,5 +167,59 @@ describe('mlv-combobox', () => {
     await elementIsStable(element);
     expect(dropdown.hidden).toBe(false);
     expect(items[0].textContent.trim()).toBe(element.i18n.noResults);
+  });
+});
+
+@customElement('combobox-test-element')
+class ComboboxTestElement extends LitElement {
+  render() {
+    return html`
+    <mlv-combobox>
+      <label>combobox</label>
+      <input type="search" />
+      <datalist>
+        <option value="Option 1"></option>
+        <option value="Option 2"></option>
+        <option value="Option 3"></option>
+      </datalist>
+      <mlv-control-message>message</mlv-control-message>
+    </mlv-combobox>
+    `
+  }
+}
+
+describe('mlv-combobox shadow root', () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <combobox-test-element></combobox-test-element>
+    `);
+    element = fixture.querySelector('combobox-test-element').shadowRoot.querySelector('mlv-combobox');
+    input = fixture.querySelector('combobox-test-element').shadowRoot.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should focus first option if key arrow down is pressed', async () => {
+    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    expect(dropdown.hidden).toBe(true);
+    element.dispatchEvent(new KeyboardEvent('keydown'));
+    await elementIsStable(element);
+    expect(dropdown.hidden).toBe(false);
+
+    emulateClick(input);
+    input.focus();
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown' }));
+    await elementIsStable(element);
+    await elementIsStable(items[0]);
+    expect(items[0].tabIndex).toBe(0);
+    expect(items[0].tagName).toBe(element.shadowRoot.activeElement.tagName);
   });
 });
