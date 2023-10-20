@@ -64,6 +64,23 @@ export const Interactive = {
   `
 };
 
+export const BehaviorTrigger = {
+  render: () => html`
+<nve-button id="drawer-btn">open</nve-button>
+<nve-drawer behavior-trigger trigger="drawer-btn" closable modal hidden position="right">
+  <nve-drawer-header>
+    <h3 nve-text="heading">Drawer Header</h3>
+  </nve-drawer-header>
+  <nve-drawer-content>
+    <p nve-text="body">drawer content</p>
+  </nve-drawer-content>
+  <nve-drawer-footer>
+    <p nve-text="body">drawer footer</p>
+  </nve-drawer-footer>
+</nve-drawer>
+  `
+};
+
 export const Small = {
   render: () => html`
 <nve-drawer size="sm" closable>

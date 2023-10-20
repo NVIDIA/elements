@@ -30,7 +30,7 @@ export class Notification extends LitElement {
    * The anchor provides the element that the popover should position relative to.
    * Anchor can accept a idref string within the same render root or a HTMLElement DOM reference.
    */
-  @property({ type: String }) anchor: string | HTMLElement;
+  @property({ type: String }) anchor: string | HTMLElement = globalThis.document.body;
 
   /**
    * The trigger defines what element triggers an `open` interaction event.
@@ -47,6 +47,11 @@ export class Notification extends LitElement {
    * Sets the alignment of the popover relative to the provided anchor element.
    */
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
+
+  /**
+   * Determines if popover visibility behavior should be automatically controlled by the trigger.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
 
   /**
    * Determines if a close button should render within notification.
