@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
-import { useStyles, attachInternals, MlvBaseButton, I18nController } from '@elements/elements/internal';
+import { useStyles, MlvBaseButton, I18nController } from '@elements/elements/internal';
 import styles from './sort-button.css?inline';
 
 const nextSort = {
@@ -47,9 +47,6 @@ export class SortButton extends MlvBaseButton {
    */
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
-  /** @private */
-  declare _internals: ElementInternals;
-
   render() {
     return html`
       <div internal-host focus-within>
@@ -60,7 +57,6 @@ export class SortButton extends MlvBaseButton {
 
   connectedCallback() {
     super.connectedCallback();
-    attachInternals(this);
     this._internals.role = 'spinbutton';
 
     this.addEventListener('click', () => {
