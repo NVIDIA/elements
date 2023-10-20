@@ -95,7 +95,7 @@ slot[name='messages'] {
   opacity: var(--opacity);
   display: grid;
   width: 100%;
-  gap: 8px;
+  gap: var(--nve-ref-space-xs);
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas: 

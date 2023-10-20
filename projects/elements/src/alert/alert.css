@@ -65,7 +65,7 @@ nve-icon:not([size='sm']) {
 }
 
 nve-icon[size='sm'] {
-  padding: 2px;
+  padding: var(--nve-ref-size-50);
 }
 
 nve-icon-button:not([icon-name='cancel']) {

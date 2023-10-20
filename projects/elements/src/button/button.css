@@ -138,6 +138,7 @@
   --background: transparent;
   --padding: 0 var(--nve-ref-size-100);
   --text-transform: initial;
+  --border-radius: var(--nve-ref-border-radius-xs);
   --_icon-color: var(--color);
 
   &:host(:hover) {
