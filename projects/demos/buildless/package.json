@@ -20,15 +20,6 @@
     }
   },
   "dependencies": {
-    "@floating-ui/core": "1.2.5",
-    "@floating-ui/dom": "1.2.5",
-    "@lit-labs/motion": "1.0.3",
-    "@lit/reactive-element": "1.6.1",
-    "@elements/elements": "workspace:*",
-    "composed-offset-position": "0.0.4",
-    "lit": "2.7.0",
-    "lit-element": "3.3.0",
-    "lit-html": "2.7.0"
   },
   "devDependencies": {
     "http-server": "14.1.1"

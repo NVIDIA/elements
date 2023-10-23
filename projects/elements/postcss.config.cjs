@@ -3,6 +3,6 @@ module.exports = {
     'postcss-mixins': {},
     'postcss-nested': {},
     'postcss-each': {},
-    'postcss-csso': {}
+    'cssnano': { preset: 'default' }
   },
 };
