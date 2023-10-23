@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-26T19:42:22.647Z",
+  "created": "2023-10-26T20:03:20.687Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -12653,9 +12653,9 @@
         },
         "branches": {
           "total": 6,
-          "covered": 6,
+          "covered": 5,
           "skipped": 0,
-          "pct": 100
+          "pct": 83.33
         }
       },
       {
@@ -14625,9 +14625,9 @@
       },
       "branches": {
         "total": 1019,
-        "covered": 919,
+        "covered": 918,
         "skipped": 0,
-        "pct": 90.18
+        "pct": 90.08
       },
       "branchesTrue": {
         "total": 0,
@@ -15746,7 +15746,7 @@
       {
         "name": "@elements/feedback-elements",
         "path": "src/ui/platform/libs/feedback-elements",
-        "elementsVersion": "0.18.0",
+        "elementsVersion": "0.19.0",
         "elements": [
           {
             "name": "mlv-button",
@@ -15958,7 +15958,7 @@
       {
         "name": "@elements/platform-elements",
         "path": "src/ui/platform/shared/elements",
-        "elementsVersion": "0.18.0",
+        "elementsVersion": "0.19.0",
         "elements": [
           {
             "name": "mlv-alert-banner",
