@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "wireit",
-    "preview": "vite preview"
+    "preview": "wireit"
   },
   "wireit": {
     "build": {
@@ -14,14 +14,20 @@
       "files": ["index.html", "vite.config.ts", "package.json"],
       "output": ["dist"],
       "dependencies": ["../../elements:build"]
+    },
+    "preview": {
+      "command": "vite preview",
+      "dependencies": [
+        "build"
+      ]
     }
   },
   "dependencies": {
     "@elements/elements": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "4.9.4",
-    "vite": "4.0.2",
-    "vite-plugin-static-copy": "0.13.0"
+    "typescript": "5.2.2",
+    "vite": "4.5.0",
+    "vite-plugin-static-copy": "0.17.0"
   }
 }

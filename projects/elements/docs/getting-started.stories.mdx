@@ -9,10 +9,12 @@ import '@elements/elements/logo/define.js';
 
 <span id="getting-started-img"></span>
 
-<div className="getting-started-logo">
-  <div><nve-logo></nve-logo><h1>Elements</h1></div>
-  <h3>The Design Language for AI/ML Factories Building at the Speed of Light</h3>
+<div nve-layout="column gap:lg pad-top:md">
+  <div nve-layout="row gap:md align:vertical-center"><nve-logo></nve-logo><h1 nve-text="display sm">Elements</h1></div>
+  <h3 nve-text="heading lg">The Design Language for AI/ML Factories Building at the Speed of Light</h3>
 </div>
+
+<nve-divider></nve-divider>
 
 ```bash
 # add internal registry to local .npmrc file (optional)
@@ -37,7 +39,7 @@ import '@elements/elements/button/define.js';
 <nve-button>hello there</nve-button>
 ```
 
-<hr /><br />
+<nve-divider></nve-divider>
 
 <section nve-layout="row gap:sm align:center">
   <nve-button>
@@ -65,7 +67,7 @@ import '@elements/elements/button/define.js';
     <a href="./?path=/docs/about-getting-started--docs"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#javascript-svg"></use></svg> JavaScript</a>
   </nve-button>
 </section>
-<br />
+
 <section nve-layout="row gap:sm align:center">
   <nve-button>
     <a href="http://nv/elements-slack" target="_blank"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#slack-icon-svg"></use></svg> Slack Support</a>
