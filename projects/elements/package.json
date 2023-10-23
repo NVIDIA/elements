@@ -9,6 +9,13 @@
     "dev": "wireit",
     "clean": "wireit",
     "build": "wireit",
+    "build:vite": "wireit",
+    "build:manifest": "wireit",
+    "build:icons": "wireit",
+    "build:importmap": "wireit",
+    "build:style-dictionary": "wireit",
+    "build:css-var-completions": "wireit",
+    "build:vscode-custom-data": "wireit",
     "build:metadata": "wireit",
     "build:metadata:fast": "wireit",
     "test": "wireit",
@@ -229,24 +236,24 @@
     }
   },
   "dependencies": {
-    "@floating-ui/dom": "1.4.5",
-    "@lit-labs/motion": "1.0.4",
+    "@floating-ui/dom": "1.5.3",
+    "@lit-labs/motion": "^1.0.5",
     "composed-offset-position": "^0.0.4",
-    "lit": "^2.8.0"
+    "lit": "^3.0.0"
   },
   "optionalDependencies": {
-    "@lit-labs/scoped-registry-mixin": "^1.0.1",
+    "@lit-labs/scoped-registry-mixin": "^1.0.2",
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "construct-style-sheets-polyfill": "^3.1.0",
-    "element-internals-polyfill": "^1.3.8",
+    "element-internals-polyfill": "^1.3.9",
     "formdata-polyfill": "^4.0.10"
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "0.8.3",
-    "@jspm/generator": "^1.1.12",
-    "@lit-labs/virtualizer": "2.0.4",
-    "@rollup/plugin-replace": "5.0.2",
-    "@rollup/plugin-terser": "0.4.3",
+    "@custom-elements-manifest/analyzer": "0.9.0",
+    "@jspm/generator": "1.1.12",
+    "@lit-labs/virtualizer": "2.0.8",
+    "@rollup/plugin-replace": "5.0.4",
+    "@rollup/plugin-terser": "0.4.4",
     "@storybook/addon-docs": "7.1.1",
     "@storybook/addon-essentials": "7.1.1",
     "@storybook/addon-links": "7.1.1",
@@ -261,29 +268,28 @@
     "@storybook/theming": "7.1.1",
     "@storybook/web-components": "7.1.1",
     "@storybook/web-components-vite": "7.1.1",
-    "@typescript-eslint/eslint-plugin": "6.1.0",
-    "@typescript-eslint/parser": "6.1.0",
-    "@typescript/lib-dom": "npm:@types/web@0.0.104",
+    "@typescript-eslint/eslint-plugin": "6.8.0",
+    "@typescript-eslint/parser": "6.8.0",
+    "@typescript/lib-dom": "npm:@types/web@0.0.118",
     "@vitest/browser": "0.34.1",
     "@vitest/coverage-istanbul": "0.34.1",
     "@vitest/utils": "0.34.1",
     "axe-core": "4.8.2",
     "chai": "4.3.10",
-    "chart.js": "4.3.3",
-    "emoji-picker-element": "1.18.3",
-    "eslint": "8.45.0",
-    "eslint-plugin-import": "2.28.0",
-    "eslint-plugin-lit": "1.8.3",
+    "chart.js": "4.4.0",
+    "emoji-picker-element": "1.18.4",
+    "eslint": "8.52.0",
+    "eslint-plugin-import": "2.29.0",
+    "eslint-plugin-lit": "1.9.1",
     "eslint-plugin-lit-a11y": "4.1.0",
     "eslint-plugin-rulesdir": "0.2.2",
-    "eslint-plugin-wc": "1.5.0",
-    "fflate": "0.8.0",
+    "eslint-plugin-wc": "2.0.4",
+    "fflate": "0.8.1",
     "glob": "8.0.3",
-    "globals": "13.20.0",
+    "globals": "13.23.0",
     "lit-analyzer": "1.2.1",
     "playwright": "1.36.2",
-    "postcss": "8.4.26",
-    "postcss-csso": "6.0.1",
+    "postcss": "8.4.31",
     "postcss-each": "1.1.0",
     "postcss-load-config": "4.0.1",
     "postcss-mixins": "9.0.4",
@@ -292,20 +298,21 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "regenerator-runtime": "0.13.10",
-    "rollup": "3.26.3",
+    "rollup": "3.29.1",
     "rollup-plugin-minify-html-literals": "1.2.6",
     "showdown": "2.1.0",
+    "cssnano": "6.0.1",
     "storybook": "7.1.1",
     "style-dictionary": "3.8.0",
     "svgo": "3.0.2",
-    "terser": "5.19.2",
+    "terser": "5.22.0",
     "ts-lit-plugin": "1.2.1",
     "ts-morph": "20.0.0",
-    "typescript": "4.9.5",
-    "vite": "4.4.9",
-    "vite-plugin-dts": "3.5.1",
+    "typescript": "5.2.2",
+    "vite": "4.5.0",
+    "vite-plugin-dts": "3.6.0",
     "vitest": "0.34.1",
-    "wireit": "0.10.0"
+    "wireit": "0.14.1"
   },
   "publishConfig": {
     "registry": "https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/"
@@ -349,7 +356,10 @@
       "service": true,
       "dependencies": [
         "build"
-      ]
+      ],
+      "env": {
+        "WIREIT_LOGGER": "simple"
+      }
     },
     "build:vite": {
       "command": "node_modules/vite/bin/vite.js build",
@@ -366,6 +376,7 @@
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts",
+        "postcss.config.cjs",
         "custom-elements-manifest.config.mjs"
       ],
       "output": [
@@ -540,7 +551,10 @@
       "service": true,
       "dependencies": [
         "playwright"
-      ]
+      ],
+      "env": {
+        "WIREIT_LOGGER": "simple"
+      }
     },
     "playwright": {
       "command": "PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/playwright/cli.js install chromium",
@@ -558,10 +572,10 @@
     },
     "_demos": {
       "dependencies": [
-        "../demos/static:build",
-        "../demos/typescript:build",
         "../demos/extensions:build",
-        "../demos/nextjs:build"
+        "../demos/nextjs:build",
+        "../demos/static:build",
+        "../demos/typescript:build"
       ]
     },
     "lint": {
@@ -622,11 +636,12 @@
       }
     },
     "storybook:watch": {
-      "command": "node_modules/storybook/index.js dev --port 7778",
+      "command": "node_modules/storybook/index.js dev --port 7777",
       "service": true,
       "clean": false,
       "env": {
-        "NODE_OPTIONS": "--openssl-legacy-provider"
+        "NODE_OPTIONS": "--openssl-legacy-provider",
+        "WIREIT_LOGGER": "simple"
       }
     },
     "prepublishonly": {
