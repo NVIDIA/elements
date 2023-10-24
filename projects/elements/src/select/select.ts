@@ -51,7 +51,7 @@ export class Select extends Control {
   @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
 
   get #select() {
-    return this.input as HTMLSelectElement;
+    return this.input as unknown as HTMLSelectElement;
   }
 
   get #options() {
