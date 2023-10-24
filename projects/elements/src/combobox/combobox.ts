@@ -1,10 +1,13 @@
-import { html, PropertyValues } from 'lit';
+import { html, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { state } from 'lit/decorators/state.js';
-import { clickOutsideElementBounds, ContainerElement, focusElementTimeout, useStyles } from '@elements/elements/internal';
+import { ContainerElement, createLightDismiss, focusElementTimeout, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
-import type { Dropdown } from '@elements/elements/dropdown';
+import { Icon } from '@elements/elements/icon';
+import { IconButton } from '@elements/elements/icon-button/icon-button';
+import { Menu, MenuItem } from '@elements/elements/menu';
+import { Dropdown } from '@elements/elements/dropdown';
+import { Tag } from '@elements/elements/tag';
 import styles from './combobox.css?inline';
 
 /**
@@ -40,10 +43,29 @@ export class Combobox extends Control implements ContainerElement {
     version: 'PACKAGE_VERSION'
   };
 
-  @state() private options = [{ value: this.i18n.noResults, disabled: true, selected: null }];
+  static elementDefinitions = {
+    'nve-dropdown': Dropdown,
+    'nve-menu': Menu,
+    'nve-menu-item': MenuItem,
+    'nve-icon': Icon,
+    'nve-icon-button': IconButton,
+    'nve-tag': Tag
+  }
 
   get #datalist() {
-    return (this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true })?.find(i => i.tagName === 'DATALIST') ?? this.querySelector('datalist')) as HTMLSelectElement;
+    return (this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true })?.find(i => i.tagName === 'DATALIST' || i.tagName === 'SELECT') ?? this.querySelector('datalist, select')) as HTMLSelectElement;
+  }
+
+  get #select() {
+    return (this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true })?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement;
+  }
+
+  get #options(): HTMLOptionElement[] {
+    return Array.from(this.#datalist?.options ? this.#datalist.options : []);
+  }
+
+  get #items() {
+    return Array.from(this.shadowRoot.querySelectorAll('nve-menu-item'));
   }
 
   get #dropdown() {
@@ -54,22 +76,37 @@ export class Combobox extends Control implements ContainerElement {
     return this.shadowRoot.querySelector('[input]')
   }
 
-  get #hasAvailableOptions() {
-    return this.options[0]?.value !== this.i18n.noResults;
+  get #tags() {
+    return this.shadowRoot.querySelector('.tags')
   }
 
+  get #hasAvailableOptions() {
+    return this.#options.find(o => !o.disabled);
+  }
+
+  #observers: (MutationObserver | ResizeObserver)[] = [];
+
   protected get prefixContent() {
-    return html`<slot name="prefix-icon"></slot>`;
+    return this.#select?.multiple ? html`
+    <div class="tags-label" aria-hidden="true">${this.#select.selectedOptions.length} ${this.i18n.selected}</div>
+    <div class="tags">
+      ${Array.from<HTMLOptionElement>(this.#select.selectedOptions).map(o => html`
+      <nve-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o)}>${o.value}</nve-tag>`)}
+    </div>` : html`<slot name="prefix-icon"></slot>`;
   }
 
   protected get suffixContent() {
+    const multiple = this.#select?.multiple;
+    const options = this.#options;
     return html`
       <nve-dropdown .popoverType=${'manual'} @close=${e => e.target.hidden = true} @open=${e => e.target.hidden = false} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom" alignment="center">
         <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${this.i18n.select}>
-          ${this.options.map(o => html`
-          <nve-menu-item role="option" @click=${() => this.#selectValue(o.value)} .selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} .disabled=${o.disabled} aria-label=${o.value}>
-            ${this.options.length < 50 ? html`<span role="presentation">${o.value?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : o.value}
+          ${options.filter(o => !o.disabled).map(o => html`
+          <nve-menu-item .value=${o.value} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${o.value}>
+            ${multiple ? html`<nve-icon name=${o.selected ? 'check' : ''} size="sm"></nve-icon>` : nothing}
+            ${options.length < 50 ? html`<span role="presentation">${o.value?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : o.value}
           </nve-menu-item>`)}
+          ${options.filter(o => !o.disabled).length === 0 ? html`<nve-menu-item .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}
         </nve-menu>
       </nve-dropdown>`;
   }
@@ -78,10 +115,39 @@ export class Combobox extends Control implements ContainerElement {
     super.firstUpdated(props);
     await this.updateComplete;
     this.input.setAttribute('list', '');
+    this.#setupSingleSelect();
+    this.#setupMultipleSelect();
     this.#setupAutoCompleteKeyEvents();
     this.#setupMenuItemUpdateEvents();
     this.#setupOpenKeyEvents();
     this.#setupLightDismiss();
+    this.#setupOverflowListener();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#observers.forEach(observer => observer.disconnect());
+  }
+
+  #setupSingleSelect() {
+    if (this.#select && !this.#select.multiple && !this.input.value) {
+      const initial = this.#options.find(o => o.hasAttribute('selected'))?.value;
+      this.input.value = initial ?? '';
+    }
+
+    this.input.addEventListener('blur', () => {
+      if (this.#select && !this.#select.multiple && !this.#options.find(o => o.value === this.input.value)) {
+        this.#options.forEach(o => o.selected = false);
+        this.#setInputValue('');
+        this.#setSelectValue({ value: '', selected: false });
+      }
+    });
+  }
+
+  #setupMultipleSelect() {
+    if (this.#select?.multiple) {
+      this._internals.states.add('--multiple');
+    }
   }
 
   #setupAutoCompleteKeyEvents() {
@@ -89,7 +155,7 @@ export class Combobox extends Control implements ContainerElement {
       if (e.code === 'Tab') {
         if (this.#hasAvailableOptions && !this.#dropdown.hidden && this.input.value !== '') {
           e.preventDefault();
-          this.input.value = this.options[0].value;
+          this.#setInputValue(this.#items[0].value);
         }
         this.#dropdown.close();
       }
@@ -102,52 +168,44 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setupLightDismiss() {
-    globalThis.document.addEventListener('pointerup', (e: PointerEvent) => {
-      if (clickOutsideElementBounds(e, this)) {
+    const options = { element: this.shadowRoot.querySelector('nve-dropdown')?.shadowRoot.querySelector('dialog'), focusElement: this.input };
+    createLightDismiss(options, () => {
+      if (!this.#dropdown.hidden) {
         this.#dropdown.close();
-      }
-    });
-
-    this.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.code === 'Escape') {
-        this.#dropdown.close();
-        focusElementTimeout(this.input);
       }
     });
   }
 
   #setupOpenKeyEvents() {
     this.input.addEventListener('pointerdown', () => {
-      if (!this.input.disabled) {
-        this.#openListBox();
-      }
+      this.#openListBox();
     });
 
     this.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (this.#dropdown.hidden && e.code !== 'Tab' && e.code !== 'Escape') {
+      if (e.code !== 'Tab' && e.code !== 'Escape') {
         this.#openListBox();
       }
 
-      if ((e as KeyboardEvent)?.code === 'ArrowDown' && (this.getRootNode() as any).activeElement === this.input) {
-        this.#dropdown.querySelector('nve-menu-item')?.focus();
+      if (e?.code === 'ArrowDown' && (this.getRootNode() as any).activeElement === this.input) {
+        this.#items[0]?.focus();
         e.preventDefault();
       }
     });
   }
 
-  #openListBox() {
-    this.#updateMenuItems();
-    this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
-    this.#dropdown.open();
-  }
+  #selectValue(option: { selected?: boolean; value?: string; }) {
+    if (!this.#select?.multiple) {
+      this.#setInputValue(option.value);
+      this.#dropdown.close();
+      focusElementTimeout(this.input);
+    }
 
-  #selectValue(value: string) {
-    this.input.value = value;
-    this.input.dispatchEvent(new Event('input', { bubbles: true }));
-    this.input.dispatchEvent(new Event('change', { bubbles: true }));
+    if (this.#select) {
+      option.selected = !option.selected;
+      this.#setSelectValue(option);
+    }
+
     this.requestUpdate();
-    this.#dropdown.close();
-    focusElementTimeout(this.input);
   }
 
   #characterAtIndexMatches(character: string, index: number) {
@@ -157,7 +215,52 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #updateMenuItems() {
-    const filtered = Array.from(this.#datalist?.options).filter((o: HTMLOptionElement) => (o.value).toLocaleLowerCase().includes(this.input?.value.toLowerCase()));
-    this.options = filtered.length !== 0 ? filtered : [{ value: this.i18n.noResults, disabled: true, selected: null }] as any;
+    this.#options.forEach(option => {
+      option.disabled = !option.value.toLocaleLowerCase().includes(this.input?.value.toLowerCase());
+    });
+
+    this.requestUpdate();
+  }
+
+  #openListBox() {
+    if (!this.input.disabled && this.#dropdown.hidden) {
+      this.#updateMenuItems();
+      this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
+      this.#dropdown.open();
+    }
+  }
+
+  #setInputValue(value: string) {
+    this.input.value = value;
+    this.input.dispatchEvent(new Event('input', { bubbles: true }));
+    this.input.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  #setSelectValue(option: { value?: string; selected?: boolean; }) {
+    [...this.#options, { value: '', selected: null }].find(o => o.value === option.value).selected = option.selected;
+
+    if (!this.#select.multiple) {
+      this.#select.value = option.value;
+    }
+
+    this.#select.dispatchEvent(new Event('input', { bubbles: true }));
+    this.#select.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  #setupOverflowListener() {
+    if (this.#select?.multiple) {
+      const observer = new ResizeObserver((entries) => this.#updateMultipleOverflow(entries[0].contentRect.width));
+      this.#observers.push(observer);
+      observer.observe(this.#tags);
+    }
+  }
+
+  #updateMultipleOverflow(tagWidth: number) {
+    const INPUT_MIN_WIDTH = 100;
+    if (this.#select?.multiple && tagWidth > this.#input.getBoundingClientRect().width - INPUT_MIN_WIDTH) {
+      this._internals.states.add('--multiple-overflow');
+    } else {
+      this._internals.states.delete('--multiple-overflow');
+    }
   }
 }

@@ -3,7 +3,7 @@ import { clickOutsideElementBounds, getAttributeChanges, getFlatDOMTree } from '
 import { computePopoverPosition, getPopoverCustomCSSProperites, PopoverConfig, popoverRenderUpdate, setArrowStyles, setPopoverStyles } from './type-popover.utils.js';
 import type { PopoverAlign, PopoverPosition, PopoverType } from '../types/index.js';
 
-export type { Placement, PopoverAlign as PopoverAlign, PopoverPosition as PopoverPosition, PopoverType as PopoverType } from '../types/index.js';
+export type { Placement, PopoverAlign, PopoverPosition, PopoverType } from '../types/index.js';
 
 export interface Popover extends ReactiveElement {
   anchor?: HTMLElement | string;
