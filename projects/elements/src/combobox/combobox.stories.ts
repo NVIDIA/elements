@@ -16,18 +16,18 @@ export default {
   component: 'mlv-combobox',
 };
 
-export const Default = {
-  render: () => html`
+export const Default = () => {
+  return html`
   <mlv-combobox>
     <label>label</label>
     <input type="search">
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <mlv-control-message>message</mlv-control-message>
   </mlv-combobox>
@@ -41,12 +41,12 @@ export const Vertical = () => {
     <label>label</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <mlv-control-message>message</mlv-control-message>
   </mlv-combobox>
@@ -55,12 +55,12 @@ export const Vertical = () => {
     <label>disabled</label>
     <input disabled />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <mlv-control-message>message</mlv-control-message>
   </mlv-combobox>
@@ -69,12 +69,12 @@ export const Vertical = () => {
     <label>success</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <mlv-control-message status="success">message</mlv-control-message>
   </mlv-combobox>
@@ -83,12 +83,12 @@ export const Vertical = () => {
     <label>error</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <mlv-control-message status="error">message</mlv-control-message>
   </mlv-combobox>
@@ -102,12 +102,12 @@ export const Horizontal = () => {
     <label>label</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <mlv-control-message>message</mlv-control-message>
   </mlv-combobox>
@@ -116,12 +116,12 @@ export const Horizontal = () => {
     <label>disabled</label>
     <input disabled />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <mlv-control-message>message</mlv-control-message>
   </mlv-combobox>
@@ -130,12 +130,12 @@ export const Horizontal = () => {
     <label>success</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <mlv-control-message status="success">message</mlv-control-message>
   </mlv-combobox>
@@ -144,37 +144,91 @@ export const Horizontal = () => {
     <label>error</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <mlv-control-message status="error">message</mlv-control-message>
   </mlv-combobox>
 </div>`
 };
 
-export const Flat = {
-  render: () => html`
+export const Flat = () => {
+  return html`
   <mlv-combobox container="flat">
     <mlv-icon name="filter" slot="prefix-icon"></mlv-icon>
     <input type="search">
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
   </mlv-combobox>
   `
 };
 
-export const Performance = {
-  render: () => html`<mlv-combobox-performance-demo></mlv-combobox-performance-demo>`
+export const Select = () => {
+  return html`
+<mlv-combobox>
+  <label>label</label>
+  <input type="search">
+  <select>
+    <option value="status"></option>
+    <option value="priority"></option>
+    <option value="date"></option>
+    <option value="session"></option>
+    <option value="configuration"></option>
+    <option value="contains"></option>
+  </select>
+  <mlv-control-message>message</mlv-control-message>
+</mlv-combobox>
+  `
+};
+
+export const MultiSelect = () => {
+  return html`
+  <mlv-combobox>
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option selected value="status"></option>
+      <option selected value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-combobox>
+  `
+};
+
+export const Overflow = () => {
+  return html`
+  <mlv-combobox style="width: 250px">
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option selected value="status"></option>
+      <option selected value="priority"></option>
+      <option selected value="date"></option>
+      <option selected value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-combobox>
+  `
+};
+
+export const Performance = () => {
+  return html`<mlv-combobox-performance-demo></mlv-combobox-performance-demo>`
 }
 
 class ComboboxPerformanceDemo extends LitElement {

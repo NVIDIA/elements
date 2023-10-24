@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-25T22:04:51.199Z",
+  "created": "2023-10-26T19:42:22.647Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -1155,7 +1155,7 @@
       },
       "tests": {
         "projectTotal": 14,
-        "instanceTotal": 117,
+        "instanceTotal": 120,
         "coverageTotal": 100
       },
       "stories": [
@@ -1757,8 +1757,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 7,
-        "instanceTotal": 19,
+        "projectTotal": 8,
+        "instanceTotal": 21,
         "coverageTotal": 100
       },
       "stories": [
@@ -2163,28 +2163,43 @@
       "tests": {
         "projectTotal": 1,
         "instanceTotal": 2,
-        "coverageTotal": 97.655
+        "coverageTotal": 97.46000000000001
       },
       "stories": [
         {
           "id": "Default",
           "file": "combobox.stories.ts",
-          "template": "<mlv-combobox>\n  <label>label</label>\n  <input type=\"search\" />\n  <datalist>\n    <option value=\"Status\"></option>\n    <option value=\"Priority\"></option>\n    <option value=\"Date\"></option>\n    <option value=\"Session\"></option>\n    <option value=\"Configuration\"></option>\n    <option value=\"Contains\"></option>\n  </datalist>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n"
+          "template": "<mlv-combobox>\n  <label>label</label>\n  <input type=\"search\" />\n  <datalist>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </datalist>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n"
         },
         {
           "id": "Vertical",
           "file": "combobox.stories.ts",
-          "template": "<div mlv-layout=\"column gap:lg\">\n  <mlv-combobox>\n    <label>label</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox>\n    <label>disabled</label>\n    <input disabled />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox>\n    <label>success</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n    <mlv-control-message status=\"success\">message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox>\n    <label>error</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n    <mlv-control-message status=\"error\">message</mlv-control-message>\n  </mlv-combobox>\n</div>\n"
+          "template": "<div mlv-layout=\"column gap:lg\">\n  <mlv-combobox>\n    <label>label</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"status\"></option>\n      <option value=\"priority\"></option>\n      <option value=\"date\"></option>\n      <option value=\"session\"></option>\n      <option value=\"configuration\"></option>\n      <option value=\"contains\"></option>\n    </datalist>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox>\n    <label>disabled</label>\n    <input disabled />\n    <datalist>\n      <option value=\"status\"></option>\n      <option value=\"priority\"></option>\n      <option value=\"date\"></option>\n      <option value=\"session\"></option>\n      <option value=\"configuration\"></option>\n      <option value=\"contains\"></option>\n    </datalist>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox>\n    <label>success</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"status\"></option>\n      <option value=\"priority\"></option>\n      <option value=\"date\"></option>\n      <option value=\"session\"></option>\n      <option value=\"configuration\"></option>\n      <option value=\"contains\"></option>\n    </datalist>\n    <mlv-control-message status=\"success\">message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox>\n    <label>error</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"status\"></option>\n      <option value=\"priority\"></option>\n      <option value=\"date\"></option>\n      <option value=\"session\"></option>\n      <option value=\"configuration\"></option>\n      <option value=\"contains\"></option>\n    </datalist>\n    <mlv-control-message status=\"error\">message</mlv-control-message>\n  </mlv-combobox>\n</div>\n"
         },
         {
           "id": "Horizontal",
           "file": "combobox.stories.ts",
-          "template": "<div mlv-layout=\"column gap:lg align:stretch\">\n  <mlv-combobox layout=\"horizontal\">\n    <label>label</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox layout=\"horizontal\">\n    <label>disabled</label>\n    <input disabled />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox layout=\"horizontal\">\n    <label>success</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n    <mlv-control-message status=\"success\">message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox layout=\"horizontal\">\n    <label>error</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n    <mlv-control-message status=\"error\">message</mlv-control-message>\n  </mlv-combobox>\n</div>\n"
+          "template": "<div mlv-layout=\"column gap:lg align:stretch\">\n  <mlv-combobox layout=\"horizontal\">\n    <label>label</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"status\"></option>\n      <option value=\"priority\"></option>\n      <option value=\"date\"></option>\n      <option value=\"session\"></option>\n      <option value=\"configuration\"></option>\n      <option value=\"contains\"></option>\n    </datalist>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox layout=\"horizontal\">\n    <label>disabled</label>\n    <input disabled />\n    <datalist>\n      <option value=\"status\"></option>\n      <option value=\"priority\"></option>\n      <option value=\"date\"></option>\n      <option value=\"session\"></option>\n      <option value=\"configuration\"></option>\n      <option value=\"contains\"></option>\n    </datalist>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox layout=\"horizontal\">\n    <label>success</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"status\"></option>\n      <option value=\"priority\"></option>\n      <option value=\"date\"></option>\n      <option value=\"session\"></option>\n      <option value=\"configuration\"></option>\n      <option value=\"contains\"></option>\n    </datalist>\n    <mlv-control-message status=\"success\">message</mlv-control-message>\n  </mlv-combobox>\n\n  <mlv-combobox layout=\"horizontal\">\n    <label>error</label>\n    <input type=\"search\" />\n    <datalist>\n      <option value=\"status\"></option>\n      <option value=\"priority\"></option>\n      <option value=\"date\"></option>\n      <option value=\"session\"></option>\n      <option value=\"configuration\"></option>\n      <option value=\"contains\"></option>\n    </datalist>\n    <mlv-control-message status=\"error\">message</mlv-control-message>\n  </mlv-combobox>\n</div>\n"
         },
         {
           "id": "Flat",
           "file": "combobox.stories.ts",
-          "template": "<mlv-combobox container=\"flat\">\n  <mlv-icon name=\"filter\" slot=\"prefix-icon\"></mlv-icon>\n  <input type=\"search\" />\n  <datalist>\n    <option value=\"Status\"></option>\n    <option value=\"Priority\"></option>\n    <option value=\"Date\"></option>\n    <option value=\"Session\"></option>\n    <option value=\"Configuration\"></option>\n    <option value=\"Contains\"></option>\n  </datalist>\n</mlv-combobox>\n"
+          "template": "<mlv-combobox container=\"flat\">\n  <mlv-icon name=\"filter\" slot=\"prefix-icon\"></mlv-icon>\n  <input type=\"search\" />\n  <datalist>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </datalist>\n</mlv-combobox>\n"
+        },
+        {
+          "id": "Select",
+          "file": "combobox.stories.ts",
+          "template": "<mlv-combobox>\n  <label>label</label>\n  <input type=\"search\" />\n  <select>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </select>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n"
+        },
+        {
+          "id": "MultiSelect",
+          "file": "combobox.stories.ts",
+          "template": "<mlv-combobox>\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option selected value=\"status\"></option>\n    <option selected value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </select>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n"
+        },
+        {
+          "id": "Overflow",
+          "file": "combobox.stories.ts",
+          "template": "<mlv-combobox style=\"width: 250px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option selected value=\"status\"></option>\n    <option selected value=\"priority\"></option>\n    <option selected value=\"date\"></option>\n    <option selected value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </select>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n"
         },
         {
           "id": "Performance",
@@ -2326,8 +2341,8 @@
       },
       "tests": {
         "projectTotal": 8,
-        "instanceTotal": 31,
-        "coverageTotal": 97.5475
+        "instanceTotal": 34,
+        "coverageTotal": 96.85249999999999
       },
       "stories": [],
       "behavior": "form",
@@ -2456,7 +2471,7 @@
       },
       "tests": {
         "projectTotal": 6,
-        "instanceTotal": 26,
+        "instanceTotal": 29,
         "coverageTotal": 100
       },
       "stories": [],
@@ -2978,7 +2993,7 @@
         {
           "id": "Interactive",
           "file": "dialog.stories.ts",
-          "template": "<mlv-button id=\"dialog-btn\">open</mlv-button>\n<mlv-dialog closable modal hidden>\n  <h3 mlv-text=\"heading\">Title</h3>\n  <p mlv-text=\"body\">some text content in a closable dialog</p>\n</mlv-dialog>\n<script type=\"module\">\n  const dialog = document.querySelector(\"mlv-dialog\");\n  const btn = document.querySelector(\"#dialog-btn\");\n  btn.addEventListener(\"click\", () => (dialog.hidden = false));\n  dialog.addEventListener(\"close\", () => (dialog.hidden = true));\n</script>\n"
+          "template": "<mlv-button id=\"dialog-btn\">open</mlv-button>\n<mlv-dialog trigger=\"dialog-btn\" closable modal hidden>\n  <h3 mlv-text=\"heading\">Title</h3>\n  <p mlv-text=\"body\">some text content in a closable dialog</p>\n</mlv-dialog>\n<script type=\"module\">\n  const dialog = document.querySelector(\"mlv-dialog\");\n  dialog.addEventListener(\"open\", () => (dialog.hidden = false));\n  dialog.addEventListener(\"close\", () => (dialog.hidden = true));\n</script>\n"
         },
         {
           "id": "BehaviorTrigger",
@@ -3842,7 +3857,7 @@
       },
       "tests": {
         "projectTotal": 8,
-        "instanceTotal": 56,
+        "instanceTotal": 59,
         "coverageTotal": 100
       },
       "stories": [
@@ -3854,12 +3869,12 @@
         {
           "id": "Interactive",
           "file": "dropdown.stories.ts",
-          "template": "<mlv-button id=\"dropdown-btn\">open</mlv-button>\n<mlv-dropdown anchor=\"dropdown-btn\" hidden>\n  <p mlv-text=\"body\">hello there</p>\n</mlv-dropdown>\n<script>\n  const dropdown = document.querySelector(\"mlv-dropdown\");\n  const btn = document.querySelector(\"#dropdown-btn\");\n  btn.addEventListener(\"click\", () => (dropdown.hidden = false));\n  dropdown.addEventListener(\"close\", () => (dropdown.hidden = true));\n</script>\n"
+          "template": "<mlv-button id=\"dropdown-btn\">open</mlv-button>\n<mlv-dropdown anchor=\"dropdown-btn\" trigger=\"dropdown-btn\" hidden>\n  <p mlv-text=\"body\">hello there</p>\n</mlv-dropdown>\n<script>\n  const dropdown = document.querySelector(\"mlv-dropdown\");\n  dropdown.addEventListener(\"open\", () => (dropdown.hidden = false));\n  dropdown.addEventListener(\"close\", () => (dropdown.hidden = true));\n</script>\n"
         },
         {
           "id": "BehaviorTrigger",
           "file": "dropdown.stories.ts",
-          "template": "<mlv-button id=\"dropdown-btn\">open</mlv-button>\n<mlv-dropdown trigger=\"dropdown-btn\" behavior-trigger hidden>\n  <p mlv-text=\"body\">hello there</p>\n</mlv-dropdown>\n"
+          "template": "<mlv-button id=\"dropdown-btn\">open</mlv-button>\n<mlv-dropdown anchor=\"dropdown-btn\" trigger=\"dropdown-btn\" behavior-trigger hidden>\n  <p mlv-text=\"body\">hello there</p>\n</mlv-dropdown>\n"
         },
         {
           "id": "Content",
@@ -4764,7 +4779,7 @@
       },
       "tests": {
         "projectTotal": 16,
-        "instanceTotal": 107,
+        "instanceTotal": 110,
         "coverageTotal": 92.995
       },
       "stories": [
@@ -5075,7 +5090,7 @@
       },
       "tests": {
         "projectTotal": 13,
-        "instanceTotal": 80,
+        "instanceTotal": 83,
         "coverageTotal": 100
       },
       "stories": [
@@ -5297,7 +5312,7 @@
       },
       "tests": {
         "projectTotal": 11,
-        "instanceTotal": 39,
+        "instanceTotal": 42,
         "coverageTotal": 100
       },
       "stories": [
@@ -6204,7 +6219,7 @@
       },
       "tests": {
         "projectTotal": 6,
-        "instanceTotal": 42,
+        "instanceTotal": 45,
         "coverageTotal": 96.25250000000001
       },
       "stories": [
@@ -8012,7 +8027,7 @@
       },
       "tests": {
         "projectTotal": 5,
-        "instanceTotal": 27,
+        "instanceTotal": 30,
         "coverageTotal": 97.5
       },
       "stories": [
@@ -9219,7 +9234,7 @@
       },
       "tests": {
         "projectTotal": 7,
-        "instanceTotal": 25,
+        "instanceTotal": 28,
         "coverageTotal": 100
       },
       "stories": [
@@ -9951,7 +9966,7 @@
       },
       "tests": {
         "projectTotal": 8,
-        "instanceTotal": 34,
+        "instanceTotal": 37,
         "coverageTotal": 100
       },
       "stories": [
@@ -10589,6 +10604,33 @@
           "covered": 53,
           "skipped": 0,
           "pct": 91.37
+        }
+      },
+      {
+        "file": "elements/src/combobox/combobox.ts",
+        "lines": {
+          "total": 119,
+          "covered": 118,
+          "skipped": 0,
+          "pct": 99.15
+        },
+        "functions": {
+          "total": 53,
+          "covered": 53,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 166,
+          "covered": 165,
+          "skipped": 0,
+          "pct": 99.39
+        },
+        "branches": {
+          "total": 69,
+          "covered": 63,
+          "skipped": 0,
+          "pct": 91.3
         }
       },
       {
@@ -12133,28 +12175,28 @@
       {
         "file": "elements/src/internal/utils/keynav.ts",
         "lines": {
-          "total": 2,
-          "covered": 2,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 2,
-          "covered": 2,
+          "total": 5,
+          "covered": 5,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 3,
-          "covered": 3,
+          "total": 11,
+          "covered": 11,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 2,
-          "covered": 2,
+          "total": 11,
+          "covered": 10,
           "skipped": 0,
-          "pct": 100
+          "pct": 90.9
         }
       },
       {
@@ -12734,15 +12776,15 @@
         },
         "functions": {
           "total": 12,
-          "covered": 11,
+          "covered": 12,
           "skipped": 0,
-          "pct": 91.66
+          "pct": 100
         },
         "statements": {
           "total": 67,
-          "covered": 66,
+          "covered": 67,
           "skipped": 0,
-          "pct": 98.5
+          "pct": 100
         },
         "branches": {
           "total": 71,
@@ -13313,9 +13355,9 @@
         },
         "branches": {
           "total": 36,
-          "covered": 34,
+          "covered": 33,
           "skipped": 0,
-          "pct": 94.44
+          "pct": 91.66
         }
       },
       {
@@ -13937,33 +13979,6 @@
           "covered": 0,
           "skipped": 0,
           "pct": 100
-        }
-      },
-      {
-        "file": "elements/src/combobox/combobox.ts",
-        "lines": {
-          "total": 69,
-          "covered": 69,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 30,
-          "covered": 30,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 93,
-          "covered": 93,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 32,
-          "covered": 29,
-          "skipped": 0,
-          "pct": 90.62
         }
       },
       {
@@ -14591,28 +14606,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 1981,
-        "covered": 1934,
+        "total": 2039,
+        "covered": 1991,
         "skipped": 0,
-        "pct": 97.62
+        "pct": 97.64
       },
       "statements": {
-        "total": 2626,
-        "covered": 2559,
+        "total": 2707,
+        "covered": 2640,
         "skipped": 0,
-        "pct": 97.44
+        "pct": 97.52
       },
       "functions": {
-        "total": 768,
-        "covered": 732,
+        "total": 794,
+        "covered": 759,
         "skipped": 0,
-        "pct": 95.31
+        "pct": 95.59
       },
       "branches": {
-        "total": 973,
-        "covered": 878,
+        "total": 1019,
+        "covered": 919,
         "skipped": 0,
-        "pct": 90.23
+        "pct": 90.18
       },
       "branchesTrue": {
         "total": 0,
@@ -15203,6 +15218,10 @@
         "elementsVersion": "^0.8.0",
         "elements": [
           {
+            "name": "mlv-checkbox",
+            "instanceTotal": 1
+          },
+          {
             "name": "mlv-dialog-header",
             "instanceTotal": 1
           },
@@ -15219,7 +15238,7 @@
             "instanceTotal": 1
           }
         ],
-        "instanceTotal": 4
+        "instanceTotal": 5
       },
       {
         "name": "@elements/gt-elements",
@@ -15292,7 +15311,7 @@
         "elements": [
           {
             "name": "mlv-checkbox",
-            "instanceTotal": 3
+            "instanceTotal": 4
           },
           {
             "name": "mlv-dialog-header",
@@ -15355,7 +15374,7 @@
             "instanceTotal": 1
           }
         ],
-        "instanceTotal": 38
+        "instanceTotal": 39
       },
       {
         "name": "@elements/next-av",
@@ -15731,47 +15750,47 @@
         "elements": [
           {
             "name": "mlv-button",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-dropdown",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-control-message",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-control",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-icon-button",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-icon",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-input",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-notification",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-select",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-textarea",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-tooltip",
-            "instanceTotal": 18
+            "instanceTotal": 21
           },
           {
             "name": "mlv-alert",
@@ -15794,7 +15813,7 @@
             "instanceTotal": 1
           }
         ],
-        "instanceTotal": 203
+        "instanceTotal": 236
       },
       {
         "name": "@elements/ide",

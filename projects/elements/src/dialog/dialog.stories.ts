@@ -40,14 +40,13 @@ export const Interactive = {
   inline: false,
   render: () => html`
 <mlv-button id="dialog-btn">open</mlv-button>
-<mlv-dialog closable modal hidden>
+<mlv-dialog trigger="dialog-btn" closable modal hidden>
   <h3 mlv-text="heading">Title</h3>
   <p mlv-text="body">some text content in a closable dialog</p>
 </mlv-dialog>
 <script type="module">
   const dialog = document.querySelector('mlv-dialog');
-  const btn = document.querySelector('#dialog-btn');
-  btn.addEventListener('click', () => dialog.hidden = false);
+  dialog.addEventListener('open', () => dialog.hidden = false);
   dialog.addEventListener('close', () => dialog.hidden = true);
 </script>
   `

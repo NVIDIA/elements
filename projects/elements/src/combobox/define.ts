@@ -3,6 +3,7 @@ import { Combobox } from '@elements/elements/combobox';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/dropdown/define.js';
 import '@elements/elements/menu/define.js';
+import '@elements/elements/tag/define.js';
 
 define(Combobox);
 

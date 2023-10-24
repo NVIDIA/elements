@@ -1,5 +1,6 @@
 :host {
   --scroll-height: 25vh;
+  --_input-background: var(--mlv-sys-interaction-field-background);
   contain: initial;
 }
 
@@ -26,41 +27,42 @@
   }
 }
 
-:host(:--multiple-overflow),
-:host([multiple-overflow]) {
-  & .tags {
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-  }
-
-  & .tags-label {
-    display: block;
-  }
+.tags {
+  width: fit-content;
+  display: flex;
+  gap: var(--mlv-ref-size-100);
+  align-items: center;
 }
 
-:host(:--multiple) ::slotted(select[multiple]) {
-  opacity: 0 !important;
-}
-
-:host(:--size) ::slotted(select) {
-  padding: 0 !important;
-  min-height: 100px !important;
-}
-
-:host(:--size) [name='caret'] {
+.tags-label {
+  padding: 0 var(--mlv-ref-size-200);
+  font-size: var(--font-size);
+  cursor: var(--cursor);
+  font-weight: var(--font-weight);
+  text-wrap: nowrap;
   display: none;
+  align-items: center;
+  pointer-events: none;
 }
 
-:host([layout*='horizontal'][size]) {
-  & ::slotted(label) {
-    padding-top: var(--mlv-ref-size-100) !important;
-    align-self: start !important;
-  }
+:host(:--multiple-overflow) .tags {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
 
-  slot[name='label'] {
-    align-self: start;
-  }
+:host(:--multiple-overflow) .tags-label {
+  display: flex;
+}
+
+mlv-tag {
+  --background: color-mix(in oklab, var(--color) 15%, var(--mlv-sys-interaction-field-background));
+  --padding: var(--mlv-ref-size-100) var(--mlv-ref-size-200);
+  --cursor: pointer !important;
+}
+
+::slotted(select) {
+  display: none !important;
 }
 
 :host(:--invalid),
@@ -90,12 +92,17 @@ mlv-menu {
 }
 
 mlv-menu-item {
+  --text-transform: initial;
   contain: content;
   content-visibility: auto;
 }
 
 mlv-menu-item mlv-icon {
   --color: inherit;
+}
+
+mlv-menu-item:not(:--selected) mlv-icon[name='check'] {
+  opacity: 0;
 }
 
 slot:not([name]),

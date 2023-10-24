@@ -29,13 +29,12 @@ export const Interactive = {
   inline: false,
   render: () => html`
 <mlv-button id="dropdown-btn">open</mlv-button>
-<mlv-dropdown anchor="dropdown-btn" hidden>
+<mlv-dropdown anchor="dropdown-btn" trigger="dropdown-btn" hidden>
   <p mlv-text="body">hello there</p>
 </mlv-dropdown>
 <script>
   const dropdown = document.querySelector('mlv-dropdown');
-  const btn = document.querySelector('#dropdown-btn');
-  btn.addEventListener('click', () => dropdown.hidden = false);
+  dropdown.addEventListener('open', () => dropdown.hidden = false);
   dropdown.addEventListener('close', () => dropdown.hidden = true);
 </script>
   `
@@ -45,7 +44,7 @@ export const BehaviorTrigger = {
   inline: false,
   render: () => html`
 <mlv-button id="dropdown-btn">open</mlv-button>
-<mlv-dropdown trigger="dropdown-btn" behavior-trigger hidden>
+<mlv-dropdown anchor="dropdown-btn" trigger="dropdown-btn" behavior-trigger hidden>
   <p mlv-text="body">hello there</p>
 </mlv-dropdown>
   `
