@@ -79,11 +79,13 @@ describe('nve-combobox', () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
     expect(dropdown.hidden).toBe(true);
 
-    element.dispatchEvent(new KeyboardEvent('keydown'));
+    input.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true }));
     await elementIsStable(element);
     expect(dropdown.hidden).toBe(false);
-
-    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Escape' }));
+    
+    const items = element.shadowRoot.querySelectorAll<MenuItem>('nve-menu-item');
+    items[0].focus();
+    items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'Escape', bubbles: true }));
     await elementIsStable(element);
     expect(dropdown.hidden).toBe(true);
   });
@@ -157,7 +159,6 @@ describe('nve-combobox', () => {
 
   it('should show "no results" message if no options are provided', async () => {
     const options = element.querySelectorAll('option');
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('nve-menu-item');
     const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
     expect(dropdown.hidden).toBe(true);
 
@@ -166,9 +167,180 @@ describe('nve-combobox', () => {
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
     expect(dropdown.hidden).toBe(false);
-    expect(items[0].textContent.trim()).toBe(element.i18n.noResults);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>('nve-menu-item')[0].textContent.trim()).toBe(element.i18n.noResults);
   });
 });
+
+
+describe('nve-combobox single select', () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+  let select: HTMLSelectElement;
+  let options: HTMLOptionElement[];
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select>
+          <option selected value="option 1"></option>
+          <option value="option 2"></option>
+          <option value="option 3"></option>
+        </select>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector('nve-combobox');
+    input = fixture.querySelector('input');
+    select = fixture.querySelector('select');
+    options = Array.from(fixture.querySelectorAll('option'));
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get('nve-combobox')).toBeDefined();
+  });
+
+  it('should initialize input to the selected option', async () => {
+    expect(options[0].selected).toBe(true);
+    expect(select.value).toBe('option 1');
+    expect(input.value).toBe('option 1');
+  });
+
+  it('should enforce single select and clear invalid options', async () => {
+    expect(options[0].selected).toBe(true);
+    expect(options[1].selected).toBe(false);
+    expect(options[2].selected).toBe(false);
+    expect(select.value).toBe('option 1');
+    expect(input.value).toBe('option 1');
+
+    input.value = 'invalid option';
+    input.dispatchEvent(new Event('blur', { bubbles: true }));
+
+    await elementIsStable(element);
+    expect(input.value).toBe('');
+    expect(select.value).toBe('');
+    expect(options[0].selected).toBe(false);
+    expect(options[1].selected).toBe(false);
+    expect(options[2].selected).toBe(false);
+  });
+});
+
+
+describe('nve-combobox multi select', () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+  let select: HTMLSelectElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option selected value="option 1"></option>
+          <option selected value="option 2"></option>
+          <option value="option 3"></option>
+        </select>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector('nve-combobox');
+    input = fixture.querySelector('input');
+    select = fixture.querySelector('select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get('nve-combobox')).toBeDefined();
+  });
+
+  it('should initialize :--multiple state', () => {
+    expect(element.matches(':--multiple')).toBe(true);
+  });
+
+  it('should cooresponding menu items and options as selected', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>('nve-menu-item');
+    expect(items[0].selected).toBe(true);
+    expect(items[1].selected).toBe(true);
+    expect(items[2].selected).toBe(undefined);
+    expect(items.length).toBe(3);
+    expect(select.selectedOptions.length).toBe(2);
+  });
+
+  it('should update select when menu item is clicked', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>('nve-menu-item');
+    expect(items[0].selected).toBe(true);
+    expect(items[1].selected).toBe(true);
+    expect(items[2].selected).toBe(undefined);
+    expect(items.length).toBe(3);
+    expect(select.selectedOptions.length).toBe(2);
+
+    emulateClick(items[2]);
+    await elementIsStable(element);
+    expect(items[0].selected).toBe(true);
+    expect(items[1].selected).toBe(true);
+    expect(items[2].selected).toBe(true);
+    expect(items.length).toBe(3);
+    expect(select.selectedOptions.length).toBe(3);
+  });
+
+  it('should remove a selection when a tag is clicked', async () => {
+    const tags = () => element.shadowRoot.querySelectorAll('nve-tag');
+    expect(tags().length).toBe(2);
+    expect(select.selectedOptions.length).toBe(2);
+
+    emulateClick(tags()[0]);
+    await elementIsStable(element);
+    expect(tags().length).toBe(1);
+    expect(select.selectedOptions.length).toBe(1);
+  });
+
+  it('should hide tags and display label when multiple is used and tags overflow container', async () => {
+    expect(element.matches(':--multiple-overflow')).toBe(false);
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+    element.style.setProperty('--width', '50px');
+
+    element.requestUpdate();
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(element.matches(':--multiple-overflow')).toBe(true);
+  });
+
+  it('should hide tags and display label when a new selection causes a overflow', async () => {
+    expect(element.matches(':--multiple-overflow')).toBe(false);
+    element.style.setProperty('--width', '100px');
+    select.multiple = true;
+    await elementIsStable(element);
+    
+    element.shadowRoot.querySelectorAll('nve-menu-item')[0].click();
+    element.shadowRoot.querySelectorAll('nve-menu-item')[2].click();
+
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(element.matches(':--multiple-overflow')).toBe(true);
+  });
+});
+
 
 @customElement('combobox-test-element')
 class ComboboxTestElement extends LitElement {

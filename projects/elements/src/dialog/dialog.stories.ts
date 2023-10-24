@@ -40,14 +40,13 @@ export const Interactive = {
   inline: false,
   render: () => html`
 <nve-button id="dialog-btn">open</nve-button>
-<nve-dialog closable modal hidden>
+<nve-dialog trigger="dialog-btn" closable modal hidden>
   <h3 nve-text="heading">Title</h3>
   <p nve-text="body">some text content in a closable dialog</p>
 </nve-dialog>
 <script type="module">
   const dialog = document.querySelector('nve-dialog');
-  const btn = document.querySelector('#dialog-btn');
-  btn.addEventListener('click', () => dialog.hidden = false);
+  dialog.addEventListener('open', () => dialog.hidden = false);
   dialog.addEventListener('close', () => dialog.hidden = true);
 </script>
   `
