@@ -16,18 +16,18 @@ export default {
   component: 'nve-combobox',
 };
 
-export const Default = {
-  render: () => html`
+export const Default = () => {
+  return html`
   <nve-combobox>
     <label>label</label>
     <input type="search">
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
@@ -41,12 +41,12 @@ export const Vertical = () => {
     <label>label</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
@@ -55,12 +55,12 @@ export const Vertical = () => {
     <label>disabled</label>
     <input disabled />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
@@ -69,12 +69,12 @@ export const Vertical = () => {
     <label>success</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <nve-control-message status="success">message</nve-control-message>
   </nve-combobox>
@@ -83,12 +83,12 @@ export const Vertical = () => {
     <label>error</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <nve-control-message status="error">message</nve-control-message>
   </nve-combobox>
@@ -102,12 +102,12 @@ export const Horizontal = () => {
     <label>label</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
@@ -116,12 +116,12 @@ export const Horizontal = () => {
     <label>disabled</label>
     <input disabled />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
@@ -130,12 +130,12 @@ export const Horizontal = () => {
     <label>success</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <nve-control-message status="success">message</nve-control-message>
   </nve-combobox>
@@ -144,37 +144,91 @@ export const Horizontal = () => {
     <label>error</label>
     <input type="search" />
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
     <nve-control-message status="error">message</nve-control-message>
   </nve-combobox>
 </div>`
 };
 
-export const Flat = {
-  render: () => html`
+export const Flat = () => {
+  return html`
   <nve-combobox container="flat">
     <nve-icon name="filter" slot="prefix-icon"></nve-icon>
     <input type="search">
     <datalist>
-      <option value="Status"></option>
-      <option value="Priority"></option>
-      <option value="Date"></option>
-      <option value="Session"></option>
-      <option value="Configuration"></option>
-      <option value="Contains"></option>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
     </datalist>
   </nve-combobox>
   `
 };
 
-export const Performance = {
-  render: () => html`<nve-combobox-performance-demo></nve-combobox-performance-demo>`
+export const Select = () => {
+  return html`
+<nve-combobox>
+  <label>label</label>
+  <input type="search">
+  <select>
+    <option value="status"></option>
+    <option value="priority"></option>
+    <option value="date"></option>
+    <option value="session"></option>
+    <option value="configuration"></option>
+    <option value="contains"></option>
+  </select>
+  <nve-control-message>message</nve-control-message>
+</nve-combobox>
+  `
+};
+
+export const MultiSelect = () => {
+  return html`
+  <nve-combobox>
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option selected value="status"></option>
+      <option selected value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  `
+};
+
+export const Overflow = () => {
+  return html`
+  <nve-combobox style="width: 250px">
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option selected value="status"></option>
+      <option selected value="priority"></option>
+      <option selected value="date"></option>
+      <option selected value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  `
+};
+
+export const Performance = () => {
+  return html`<nve-combobox-performance-demo></nve-combobox-performance-demo>`
 }
 
 class ComboboxPerformanceDemo extends LitElement {
