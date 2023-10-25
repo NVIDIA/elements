@@ -213,14 +213,24 @@ function getBaseInterface() {
   return props;
 }
 
+function getPatterns() {
+  return stories.find(s => s.element.startsWith('patterns'))?.stories ?? [];
+}
+
 async function getMetrics() {
   const projects = await getProjects();
   const coverage = getCoverage();
   const coverageTotal = coverage.splice(coverage.findIndex(c => c.file === 'total'), 1)[0];
   const elements = getElements(coverage, projects);
+  const patterns = getPatterns();
+
   const metrics = {
     created: new Date().toISOString(),
     elements,
+    patterns,
+    types: {
+      props: getBaseInterface()
+    },
     tests: {
       coverage,
       coverageTotal
@@ -228,9 +238,6 @@ async function getMetrics() {
     elements: {
       projects,
       versions: Array.from(new Set(projects.map(p => p.elementsVersion.replace('^', '').replace('~', '')))),
-    },
-    types: {
-      props: getBaseInterface()
     }
   };
 

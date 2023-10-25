@@ -612,6 +612,9 @@
       "output": [
         "storybook-build/**"
       ],
+      "dependencies": [
+        "build"
+      ],
       "env": {
         "NODE_OPTIONS": "--openssl-legacy-provider"
       }
