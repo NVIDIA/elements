@@ -8,6 +8,10 @@ body[nve-theme],
   text-rendering: optimizeSpeed;
 }
 
+[nve-theme] body {
+  margin: 0;
+}
+
 *:has([nve-popover]) {
   contain: initial;
 }
