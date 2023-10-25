@@ -2,7 +2,10 @@ import glob from 'glob';
 import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
 
-const files = glob.sync('./src/**/*.stories.ts');
+const files = [
+  ...glob.sync('./src/**/*.stories.ts'),
+  ...glob.sync('./docs/patterns/*.stories.ts')
+];
 
 export const stories = files.map(file => getStories(file)).filter(story => story.element);
 

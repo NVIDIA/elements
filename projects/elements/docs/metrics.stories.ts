@@ -23,8 +23,7 @@ const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeS
 const showdownOptions = { simplifiedAutoLink: true };
 
 export default {
-  title: 'Internal/Metrics',
-  component: 'mlv-grid',
+  title: 'Internal/Metrics'
 };
 
 function getMinorVersion(value) {

@@ -8,6 +8,10 @@ body[mlv-theme],
   text-rendering: optimizeSpeed;
 }
 
+[mlv-theme] body {
+  margin: 0;
+}
+
 *:has([mlv-popover]) {
   contain: initial;
 }

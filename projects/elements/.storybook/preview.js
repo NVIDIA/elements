@@ -261,19 +261,14 @@ export const parameters = {
           'Tooltip',
           'Week',
         ],
-        'Section Patterns',
+        'Patterns',
         [
           'Documentation',
-          'Feedback',
           'Header',
+          'Layout',
           'Row',
+          'Trend',
           'Examples'
-        ],
-        'Page Patterns',
-        [
-          'Documentation',
-          'Card',
-          'Panel'
         ],
         'Internal'
       ]
