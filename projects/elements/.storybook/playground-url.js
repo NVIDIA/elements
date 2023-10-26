@@ -55,35 +55,61 @@ function serialize(data, compress = true) {
 
 function createDefaultFiles(content, storyId) {
   const ELEMENTS_VERSION = packageFile.version;
-  const CDN_MODULES_URL = `https://esm.nvidia.com`;
-  getImports(content);
+  const CDN_ORIGIN = `https://cdn-stage.nvidia.com`;
+  const CDN_MODULES_URL = `${CDN_ORIGIN}/assets/elements-playground/modules`;
+
   return {
     'index.html': {
-      content: prettier.default.format(`<!doctype html>
+      content: `<!doctype html>
 <html nve-theme="dark">
 <head>
   <link rel="stylesheet" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/index.css" />
   <link rel="stylesheet" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/inter.css" />
   <script type="importmap">
-    ${JSON.stringify(importmap)}
+  {
+    "imports": {
+      "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/",
+      "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/"
+    },
+    "scopes": {
+      "${CDN_ORIGIN}/": {
+        "composed-offset-position": "${CDN_MODULES_URL}/composed-offset-position@0.0.4/dist/composed-offset-position.esm.js",
+        "lit": "${CDN_MODULES_URL}/lit@2.7.4/index.js",
+        "lit/": "${CDN_MODULES_URL}/lit@2.7.4/",
+        "lit-element/lit-element.js": "${CDN_MODULES_URL}/lit-element@3.3.0/development/lit-element.js",
+        "lit-html": "${CDN_MODULES_URL}/lit-html@2.7.4/development/lit-html.js",
+        "lit-html/": "${CDN_MODULES_URL}/lit-html@2.7.4/development/",
+        "@floating-ui/core": "${CDN_MODULES_URL}/@floating-ui/core@1.2.6/dist/floating-ui.core.esm.js",
+        "@floating-ui/dom": "${CDN_MODULES_URL}/@floating-ui/dom@1.2.6/dist/floating-ui.dom.esm.js",
+        "@lit/reactive-element": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/reactive-element.js",
+        "@lit/reactive-element/decorators/property.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/property.js",
+        "@lit/reactive-element/decorators/query.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query.js",
+        "@lit/reactive-element/decorators/query-assigned-elements.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query-assigned-elements.js",
+        "@lit/reactive-element/decorators/state.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/state.js",
+        "@lit-labs/motion": "${CDN_MODULES_URL}/@lit-labs/motion@1.0.3/index.js"
+      }
+    }
+  }
   </script>
-  <script type="module">
-    ${getImports(content)}
-  </script>
+  <script type="module" src="./index.js"></script>
   ${storyId.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
 </head>
-<body nve-layout="column gap:lg pad:lg full">
-  ${content}
+<body nve-layout="column gap:lg pad:lg">
+
+${content}
+
 </body>
-</html>`, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120, singleQuote: true })
+</html>`
+    },
+    'index.ts': {
+      content: `${getImports(content)}`
     }
   };
 }
 
-
-function getImports(content) {
+function getImports() {
   return metrics.elements
-    .filter(e => content.includes(e.name) && packageFile.exports[`./${e.name.replace('nve-', '')}/define.js`])
+    .filter(e => packageFile.exports[`./${e.name.replace('nve-', '')}/define.js`])
     .map(e => `import '@elements/elements/${e.name.replace('nve-', '')}/define.js';`)
     .join('\n');
 }
