@@ -1,0 +1,46 @@
+{
+  "name": "multi-page-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wireit",
+    "build": "wireit",
+    "preview": "wireit"
+  },
+  "dependencies": {
+    "@elements/elements": "workspace:*",
+    "lit": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "5.2.2",
+    "vite": "4.5.0"
+  },
+  "wireit": {
+    "dev": {
+      "command": "vite",
+      "service": true
+    },
+    "build": {
+      "command": "tsc && vite build",
+      "dependencies": [
+        "../../elements:build"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "files": [
+        "src/**",
+        "package.json",
+        "tsconfig.json",
+        "vite.config.ts"
+      ]
+    },
+    "preview": {
+      "command": "vite preview",
+      "dependencies": [
+        "build"
+      ]
+    }
+  }
+}
