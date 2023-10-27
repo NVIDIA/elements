@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" nve-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <title>Settings</title>
+    <link rel="stylesheet" href="/about/index.css" />
+    <script type="module" src="/about/index.ts"></script>
+  </head>
+  <body>
+    <nve-app-header>
+      <nve-logo></nve-logo>
+      <h2 slot="title">NVIDIA</h2>
+      <nve-button slot="nav-items"><a href="/">Home</a></nve-button>
+      <nve-button slot="nav-items"><a href="/about/">About</a></nve-button>
+      <nve-button slot="nav-items" selected><a href="/settings/">Settings</a></nve-button>
+    </nve-app-header>
+    <main nve-layout="column gap:md pad:lg align:stretch">
+      <h1 nve-text="heading">Settings</h1>
+      <nve-divider></nve-divider>
+    </main>
+  </body>
+</html>
