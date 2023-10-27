@@ -8,6 +8,7 @@ import { stateSelected } from '../controllers/state-selected.controller.js';
 import { typeButton } from '../controllers/type-button.controller.js';
 import { typeAnchor } from '../controllers/type-anchor.controller.js';
 import { typeSubmit } from '../controllers/type-submit.controller.js';
+import { stateCurrent } from '../controllers/state-current.controller.js';
 
 /**
  * Standard button behaviors for custom elements.
@@ -18,6 +19,7 @@ import { typeSubmit } from '../controllers/type-submit.controller.js';
 @typeAnchor<MlvBaseButton>()
 @typeSubmit<MlvBaseButton>()
 @stateActive<MlvBaseButton>()
+@stateCurrent<MlvBaseButton>()
 @statePressed<MlvBaseButton>()
 @stateSelected<MlvBaseButton>()
 @stateDisabled<MlvBaseButton>()
@@ -72,6 +74,12 @@ export class MlvBaseButton extends LitElement {
    * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected
    */
   @property({ type: Boolean, reflect: true }) selected: boolean;
+
+  /**
+   * This Boolean attribute sets the current state, used to represent the current page or navigation link
+   * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current
+   */
+  @property({ type: String, reflect: true }) current: 'page' | 'step';
 
   /**
    * @private

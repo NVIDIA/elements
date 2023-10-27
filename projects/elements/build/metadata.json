@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-26T20:03:20.687Z",
+  "created": "2023-10-27T03:57:58.121Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -419,8 +419,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 8,
-        "instanceTotal": 20,
+        "projectTotal": 9,
+        "instanceTotal": 24,
         "coverageTotal": 100
       },
       "stories": [
@@ -994,6 +994,10 @@
           {
             "name": "selected",
             "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+          },
+          {
+            "name": "current",
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current"
           }
         ],
         "slots": [
@@ -1115,6 +1119,18 @@
               "name": "MlvBaseButton",
               "module": "/src/internal/base/button.js"
             }
+          },
+          {
+            "name": "current",
+            "type": {
+              "text": "'page' | 'step'"
+            },
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
+            "fieldName": "current",
+            "inheritedFrom": {
+              "name": "MlvBaseButton",
+              "module": "/src/internal/base/button.js"
+            }
           }
         ],
         "cssProperties": [
@@ -1154,8 +1170,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 14,
-        "instanceTotal": 120,
+        "projectTotal": 15,
+        "instanceTotal": 114,
         "coverageTotal": 100
       },
       "stories": [
@@ -2340,8 +2356,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 8,
-        "instanceTotal": 34,
+        "projectTotal": 9,
+        "instanceTotal": 28,
         "coverageTotal": 96.85249999999999
       },
       "stories": [],
@@ -2470,8 +2486,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 6,
-        "instanceTotal": 29,
+        "projectTotal": 7,
+        "instanceTotal": 23,
         "coverageTotal": 100
       },
       "stories": [],
@@ -3149,8 +3165,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 5,
-        "instanceTotal": 22,
+        "projectTotal": 6,
+        "instanceTotal": 26,
         "coverageTotal": 100
       },
       "stories": [
@@ -3856,8 +3872,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 8,
-        "instanceTotal": 59,
+        "projectTotal": 9,
+        "instanceTotal": 53,
         "coverageTotal": 100
       },
       "stories": [
@@ -4778,8 +4794,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 16,
-        "instanceTotal": 110,
+        "projectTotal": 17,
+        "instanceTotal": 104,
         "coverageTotal": 92.995
       },
       "stories": [
@@ -4913,6 +4929,10 @@
           {
             "name": "selected",
             "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+          },
+          {
+            "name": "current",
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current"
           }
         ],
         "slots": [
@@ -5062,6 +5082,18 @@
               "name": "MlvBaseButton",
               "module": "/src/internal/base/button.js"
             }
+          },
+          {
+            "name": "current",
+            "type": {
+              "text": "'page' | 'step'"
+            },
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
+            "fieldName": "current",
+            "inheritedFrom": {
+              "name": "MlvBaseButton",
+              "module": "/src/internal/base/button.js"
+            }
           }
         ],
         "cssProperties": [
@@ -5089,8 +5121,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 13,
-        "instanceTotal": 83,
+        "projectTotal": 14,
+        "instanceTotal": 77,
         "coverageTotal": 100
       },
       "stories": [
@@ -5311,8 +5343,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 11,
-        "instanceTotal": 42,
+        "projectTotal": 12,
+        "instanceTotal": 36,
         "coverageTotal": 100
       },
       "stories": [
@@ -5596,7 +5628,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -5633,15 +5665,15 @@
         ]
       },
       "tests": {
-        "projectTotal": 5,
-        "instanceTotal": 32,
+        "projectTotal": 6,
+        "instanceTotal": 36,
         "coverageTotal": 100
       },
       "stories": [
         {
           "id": "Default",
           "file": "menu.stories.ts",
-          "template": "<nve-menu>\n  <nve-menu-item>item 1</nve-menu-item>\n  <nve-menu-item selected>item 2</nve-menu-item>\n  <nve-menu-item>item 3</nve-menu-item>\n  <nve-menu-item>item 4</nve-menu-item>\n</nve-menu>\n"
+          "template": "<nve-menu>\n  <nve-menu-item>item 1</nve-menu-item>\n  <nve-menu-item>item 2</nve-menu-item>\n  <nve-menu-item>item 3</nve-menu-item>\n  <nve-menu-item>item 4</nve-menu-item>\n</nve-menu>\n"
         },
         {
           "id": "Dropdown",
@@ -5652,6 +5684,11 @@
           "id": "Selected",
           "file": "menu.stories.ts",
           "template": "<nve-menu>\n  <nve-menu-item>item 1</nve-menu-item>\n  <nve-menu-item selected>item 2</nve-menu-item>\n  <nve-menu-item>item 3</nve-menu-item>\n  <nve-menu-item>item 4</nve-menu-item>\n</nve-menu>\n"
+        },
+        {
+          "id": "Current",
+          "file": "menu.stories.ts",
+          "template": "<nve-menu>\n  <nve-menu-item>item 1</nve-menu-item>\n  <nve-menu-item current=\"page\">item 2</nve-menu-item>\n  <nve-menu-item>item 3</nve-menu-item>\n  <nve-menu-item>item 4</nve-menu-item>\n</nve-menu>\n"
         },
         {
           "id": "Disabled",
@@ -5672,10 +5709,20 @@
           "id": "Complex",
           "file": "menu.stories.ts",
           "template": "<nve-button id=\"dropdown-menu-btn\">dropdown</nve-button>\n<nve-dropdown anchor=\"dropdown-menu-btn\">\n  <nve-search rounded>\n    <input type=\"search\" placeholder=\"search tools\" aria-label=\"search apps\" />\n  </nve-search>\n  <nve-menu>\n    <nve-menu-item> <nve-logo color=\"pink-rose\" size=\"sm\">Db</nve-logo> Debugger </nve-menu-item>\n    <nve-menu-item> <nve-logo color=\"blue-cobalt\" size=\"sm\">TM</nve-logo> Task Manager </nve-menu-item>\n    <nve-menu-item> <nve-logo color=\"yellow-nova\" size=\"sm\">CI</nve-logo> CI Services </nve-menu-item>\n    <nve-divider></nve-divider>\n    <nve-menu-item> <nve-logo size=\"sm\"></nve-logo> All Apps </nve-menu-item>\n  </nve-menu>\n</nve-dropdown>\n"
+        },
+        {
+          "id": "VerticalNavigationDrawer",
+          "file": "menu.stories.ts",
+          "template": "<div nve-layout=\"column align:stretch full\">\n  <nve-drawer position=\"right\" size=\"sm\" modal closable>\n    <nve-drawer-header>Applications</nve-drawer-header>\n    <nve-drawer-content>\n      <nve-menu>\n        <nve-menu-item>item 1</nve-menu-item>\n        <nve-menu-item current=\"page\">item 2</nve-menu-item>\n        <nve-menu-item>item 3</nve-menu-item>\n        <nve-menu-item>item 4</nve-menu-item>\n      </nve-menu>\n    </nve-drawer-content>\n  </nve-drawer>\n  <nve-card style=\"height: 400px\">\n    <nve-card-header>\n      <div slot=\"title\">Header</div>\n    </nve-card-header>\n    <nve-card-content>\n      <p nve-text=\"body\">Content</p>\n    </nve-card-content>\n  </nve-card>\n</div>\n"
+        },
+        {
+          "id": "VerticalNavigationPanel",
+          "file": "menu.stories.ts",
+          "template": "<nve-card>\n  <nve-card-header>\n    <div slot=\"title\">Header</div>\n  </nve-card-header>\n  <nve-card-content>\n    <p nve-text=\"body\">Content</p>\n  </nve-card-content>\n</nve-card>\n<nve-panel side=\"right\" expanded closable style=\"max-width: 280px; height: 500px\">\n  <nve-panel-header>\n    <h3 slot=\"title\">Applications</h3>\n  </nve-panel-header>\n  <nve-panel-content>\n    <nve-menu>\n      <nve-menu-item>item 1</nve-menu-item>\n      <nve-menu-item current=\"page\">item 2</nve-menu-item>\n      <nve-menu-item>item 3</nve-menu-item>\n      <nve-menu-item>item 4</nve-menu-item>\n    </nve-menu>\n  </nve-panel-content>\n</nve-panel>\n"
         }
       ],
       "behavior": "navigation",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-menu-item",
@@ -5683,7 +5730,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -5724,6 +5771,10 @@
           {
             "name": "selected",
             "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+          },
+          {
+            "name": "current",
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current"
           }
         ],
         "slots": [
@@ -5829,6 +5880,18 @@
               "name": "MlvBaseButton",
               "module": "/src/internal/base/button.js"
             }
+          },
+          {
+            "name": "current",
+            "type": {
+              "text": "'page' | 'step'"
+            },
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
+            "fieldName": "current",
+            "inheritedFrom": {
+              "name": "MlvBaseButton",
+              "module": "/src/internal/base/button.js"
+            }
           }
         ],
         "cssProperties": [
@@ -5865,13 +5928,13 @@
         ]
       },
       "tests": {
-        "projectTotal": 4,
-        "instanceTotal": 28,
+        "projectTotal": 5,
+        "instanceTotal": 32,
         "coverageTotal": 100
       },
       "stories": [],
       "behavior": "button",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-month",
@@ -6218,8 +6281,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 6,
-        "instanceTotal": 45,
+        "projectTotal": 7,
+        "instanceTotal": 39,
         "coverageTotal": 96.25250000000001
       },
       "stories": [
@@ -8026,8 +8089,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 5,
-        "instanceTotal": 30,
+        "projectTotal": 6,
+        "instanceTotal": 24,
         "coverageTotal": 97.5
       },
       "stories": [
@@ -8156,6 +8219,10 @@
           {
             "name": "selected",
             "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+          },
+          {
+            "name": "current",
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current"
           }
         ],
         "slots": [
@@ -8271,6 +8338,18 @@
             },
             "description": "Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
             "fieldName": "selected",
+            "inheritedFrom": {
+              "name": "MlvBaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "current",
+            "type": {
+              "text": "'page' | 'step'"
+            },
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
+            "fieldName": "current",
             "inheritedFrom": {
               "name": "MlvBaseButton",
               "module": "/src/internal/base/button.js"
@@ -8678,6 +8757,10 @@
           {
             "name": "disabled",
             "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled"
+          },
+          {
+            "name": "current",
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current"
           }
         ],
         "slots": [
@@ -8780,6 +8863,18 @@
             "default": "false",
             "description": "Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled",
             "fieldName": "disabled",
+            "inheritedFrom": {
+              "name": "MlvBaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "current",
+            "type": {
+              "text": "'page' | 'step'"
+            },
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
+            "fieldName": "current",
             "inheritedFrom": {
               "name": "MlvBaseButton",
               "module": "/src/internal/base/button.js"
@@ -8894,6 +8989,10 @@
           {
             "name": "selected",
             "description": "This Boolean attribute prevents the selected state if button is part of a multi choice selection group\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected"
+          },
+          {
+            "name": "current",
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current"
           }
         ],
         "slots": [
@@ -9021,6 +9120,18 @@
               "name": "MlvBaseButton",
               "module": "/src/internal/base/button.js"
             }
+          },
+          {
+            "name": "current",
+            "type": {
+              "text": "'page' | 'step'"
+            },
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
+            "fieldName": "current",
+            "inheritedFrom": {
+              "name": "MlvBaseButton",
+              "module": "/src/internal/base/button.js"
+            }
           }
         ],
         "cssProperties": [
@@ -9048,8 +9159,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 3,
-        "instanceTotal": 7,
+        "projectTotal": 4,
+        "instanceTotal": 11,
         "coverageTotal": 100
       },
       "stories": [
@@ -9233,8 +9344,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 7,
-        "instanceTotal": 28,
+        "projectTotal": 8,
+        "instanceTotal": 22,
         "coverageTotal": 100
       },
       "stories": [
@@ -9965,8 +10076,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 8,
-        "instanceTotal": 37,
+        "projectTotal": 9,
+        "instanceTotal": 31,
         "coverageTotal": 100
       },
       "stories": [
@@ -10284,6 +10395,11 @@
         "name": "i18n",
         "type": "Partial<I18nStrings & { __set: boolean; }>",
         "description": "Enables internal string values to be updated for internationalization."
+      },
+      {
+        "name": "current",
+        "type": "'page' | 'step'",
+        "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current"
       },
       {
         "name": "inlinePosition",
@@ -11932,8 +12048,8 @@
       {
         "file": "elements/src/menu/menu.ts",
         "lines": {
-          "total": 7,
-          "covered": 7,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -11944,8 +12060,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 11,
-          "covered": 11,
+          "total": 12,
+          "covered": 12,
           "skipped": 0,
           "pct": 100
         },
@@ -12740,6 +12856,33 @@
         }
       },
       {
+        "file": "elements/src/internal/controllers/state-current.controller.ts",
+        "lines": {
+          "total": 16,
+          "covered": 16,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 6,
+          "covered": 6,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 18,
+          "covered": 18,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 12,
+          "covered": 12,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
         "file": "elements/src/internal/controllers/state-active.controller.ts",
         "lines": {
           "total": 16,
@@ -12823,8 +12966,8 @@
       {
         "file": "elements/src/internal/base/button.ts",
         "lines": {
-          "total": 10,
-          "covered": 10,
+          "total": 11,
+          "covered": 11,
           "skipped": 0,
           "pct": 100
         },
@@ -12835,8 +12978,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 14,
-          "covered": 14,
+          "total": 15,
+          "covered": 15,
           "skipped": 0,
           "pct": 100
         },
@@ -14606,28 +14749,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 2039,
-        "covered": 1991,
+        "total": 2057,
+        "covered": 2009,
         "skipped": 0,
-        "pct": 97.64
+        "pct": 97.66
       },
       "statements": {
-        "total": 2707,
-        "covered": 2640,
+        "total": 2727,
+        "covered": 2660,
         "skipped": 0,
-        "pct": 97.52
+        "pct": 97.54
       },
       "functions": {
-        "total": 794,
-        "covered": 759,
+        "total": 800,
+        "covered": 765,
         "skipped": 0,
-        "pct": 95.59
+        "pct": 95.62
       },
       "branches": {
-        "total": 1019,
-        "covered": 918,
+        "total": 1031,
+        "covered": 930,
         "skipped": 0,
-        "pct": 90.08
+        "pct": 90.2
       },
       "branchesTrue": {
         "total": 0,
@@ -15724,8 +15867,73 @@
         "name": "@elements/docs-app",
         "path": "src/ui/platform/docs/components/docs-app",
         "elementsVersion": "0.10.0",
-        "elements": [],
-        "instanceTotal": 0
+        "elements": [
+          {
+            "name": "nve-alert",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-button",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-divider",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-dropdown",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-control-message",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-control",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-icon-button",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-icon",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-input",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-menu-item",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-menu",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-notification",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-select",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-tag",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-textarea",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-tooltip",
+            "instanceTotal": 1
+          }
+        ],
+        "instanceTotal": 16
       },
       {
         "name": "@elements/components",
@@ -15746,74 +15954,74 @@
       {
         "name": "@elements/feedback-elements",
         "path": "src/ui/platform/libs/feedback-elements",
-        "elementsVersion": "0.19.0",
+        "elementsVersion": "0.18.0",
         "elements": [
           {
             "name": "nve-button",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-dropdown",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-control-message",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-control",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-icon-button",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-icon",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-input",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-notification",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-select",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-textarea",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-tooltip",
-            "instanceTotal": 21
+            "instanceTotal": 14
           },
           {
             "name": "nve-alert",
-            "instanceTotal": 1
+            "instanceTotal": 4
           },
           {
             "name": "nve-divider",
-            "instanceTotal": 1
+            "instanceTotal": 4
           },
           {
             "name": "nve-menu-item",
-            "instanceTotal": 1
+            "instanceTotal": 4
           },
           {
             "name": "nve-menu",
-            "instanceTotal": 1
+            "instanceTotal": 4
           },
           {
             "name": "nve-tag",
-            "instanceTotal": 1
+            "instanceTotal": 4
           }
         ],
-        "instanceTotal": 236
+        "instanceTotal": 174
       },
       {
         "name": "@elements/ide",
