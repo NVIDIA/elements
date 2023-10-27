@@ -123,3 +123,13 @@ export const RoundedIcon = {
     </mlv-button-group>
   `
 };
+
+export const OrientationVertical = {
+  render: () => html`
+    <mlv-button-group orientation="vertical">
+      <mlv-icon-button icon-name="copy"></mlv-icon-button>
+      <mlv-icon-button icon-name="add-comment"></mlv-icon-button>
+      <mlv-icon-button icon-name="download"></mlv-icon-button>
+    </mlv-button-group>
+  `
+};

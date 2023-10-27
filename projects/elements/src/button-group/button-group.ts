@@ -1,10 +1,11 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { attachInternals, keyNavigationList, KeynavListConfig, useStyles, Interaction, Size } from '@elements/elements/internal';
-import styles from './button-group.css?inline';
 import type { IconButton } from '@elements/elements/icon-button';
 import type { Button } from '@elements/elements/button';
 import type { Divider } from '@elements/elements/divider';
+import styles from './button-group.css?inline';
 
 /**
  * @element mlv-button-group
@@ -20,7 +21,6 @@ import type { Divider } from '@elements/elements/divider';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=4047-92996&mode=design&t=XPYuD3f2yaKCAMl3-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role
  * @vqa false
- * @unitTests false
  * @stable false
  */
 @keyNavigationList<ButtonGroup>()
@@ -28,8 +28,8 @@ export class ButtonGroup extends LitElement {
   /** @private */
   get keynavListConfig(): KeynavListConfig {
     return {
-      items: this.querySelectorAll<Button | IconButton>('mlv-icon-button, mlv-button'),
-      layout: 'horizontal'
+      items: this.#buttons,
+      layout: this.orientation
     }
   }
 
@@ -37,7 +37,7 @@ export class ButtonGroup extends LitElement {
   @property({ type: String, attribute: 'behavior-select' }) behaviorSelect: 'single' | 'multi';
 
   /** Set the style of the button group using the `container` property. Options are the default display when the attribute is left off, `flat` or `rounded`. */
-  @property({ type: String, reflect: true }) container?: undefined | 'flat' | 'rounded';
+  @property({ type: String, reflect: true }) container?: 'flat' | 'rounded';
 
   /** Determines the orientation direction of the group. Vertical groups are limited to icon buttons only. */
   @property({ type: String, reflect: true }) orientation?: 'horizontal' | 'vertical' = 'horizontal';
@@ -45,7 +45,7 @@ export class ButtonGroup extends LitElement {
   /** The `interaction` property is intended to be used on `mlv-button-group` in combination with `mlv-divider` for color-coded split buttons */
   @property({ type: String, reflect: true }) interaction: Interaction;
 
-  /** Determines size of button  */
+  /** Determines size of button */
   @property({ type: String, reflect: true }) size?: Size;
 
   static styles = useStyles([styles]);
@@ -58,30 +58,20 @@ export class ButtonGroup extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  #selectButton(button) {
-    if (this.behaviorSelect === undefined || (button.tagName !== 'MLV-BUTTON' && button.tagName !== 'MLV-ICON-BUTTON') || button.disabled) {
-      return;
-    }
+  @queryAssignedElements({ selector: 'mlv-divider' }) private dividers!: Divider[];
 
-    if (this.behaviorSelect === 'single') {
-      // Deselect all buttons first, then select one
-      this.keynavListConfig.items.forEach((i: Button | IconButton) => i.pressed = false);
-      button.pressed = true;
-    }
-    else if (this.behaviorSelect === 'multi') {
-      // Toggle pressed on selected button
-      button.pressed = !button.pressed;
-    }
-  }
+  @queryAssignedElements({ selector: 'mlv-icon-button' }) private iconButtons!: IconButton[];
 
-  get #divider() {
-    return Array.from(this.querySelectorAll<Divider>('mlv-divider'));
+  @queryAssignedElements({ selector: 'mlv-button' }) private buttons!: Button[];
+
+  get #buttons() {
+    return [...this.iconButtons, ...this.buttons];
   }
 
   render() {
     return html`
       <div internal-host>
-        <slot></slot>
+        <slot @slotchange=${this.#syncStyleStates}></slot>
       </div>
     `;
   }
@@ -90,29 +80,32 @@ export class ButtonGroup extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'group';
-
-    this.addEventListener('click', (e: CustomEvent) => (this.#selectButton(e.target)))
+    this.addEventListener('click', e => (this.#selectButton(e.target)))
   }
 
-  updated(props) {
+  updated(props: PropertyValues<this>) {
     super.updated(props);
-
+    this.#syncStyleStates();
+  }
+  
+  #syncStyleStates() {
     if (this.container === 'flat') {
-      Array.from(this.querySelectorAll('mlv-icon-button')).forEach(btn => {
-        btn.interaction = 'flat';
-      });
+      this.#buttons.forEach(btn => btn.interaction = 'flat');
     }
 
     if (this.interaction) {
-      Array.from(this.querySelectorAll('mlv-button')).forEach(btn => {
-        btn.interaction = this.interaction;
-      });
-
-      Array.from(this.querySelectorAll('mlv-icon-button')).forEach(btn => {
-        btn.interaction = this.interaction;
-      });
+      this.#buttons.forEach(btn => btn.interaction = this.interaction);
     }
+  
+    this.dividers.length ? this._internals.states.add('--split') : this._internals.states.delete('--split');
+  }
 
-    this.toggleAttribute('split', !!this.#divider.length);
+  #selectButton(button) {
+    if (this.behaviorSelect === 'single') {
+      this.#buttons.forEach(i => i.pressed = false);
+      button.pressed = true;
+    } else if (this.behaviorSelect === 'multi') {
+      button.pressed = !button.pressed;
+    }
   }
 }

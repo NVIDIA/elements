@@ -1,18 +1,26 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { ButtonGroup } from '@elements/elements/button-group';
+import { createFixture, elementIsStable, emulateClick, removeFixture } from '@elements/elements/test';
+import type { ButtonGroup } from '@elements/elements/button-group';
+import type { IconButton } from '@elements/elements/icon-button';
 import '@elements/elements/button-group/define.js';
+import '@elements/elements/icon-button/define.js';
 
 describe('mlv-button-group', () => {
   let fixture: HTMLElement;
   let element: ButtonGroup;
+  let buttons: IconButton[];
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-button-group></mlv-button-group>
+      <mlv-button-group>
+        <mlv-icon-button icon-name="copy"></mlv-icon-button>
+        <mlv-icon-button icon-name="add-comment"></mlv-icon-button>
+        <mlv-icon-button icon-name="download"></mlv-icon-button>
+      </mlv-button-group>
     `);
     element = fixture.querySelector('mlv-button-group');
+    buttons = Array.from(fixture.querySelectorAll('mlv-icon-button'));
     await elementIsStable(element);
   });
 
@@ -27,5 +35,86 @@ describe('mlv-button-group', () => {
   it('should initialize role group', async () => {
     await elementIsStable(element);
     expect(element._internals.role).toBe('group');
+  });
+
+  it('should sync split state if divider is provided', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':--split')).toBe(false);
+
+    const divider = document.createElement('mlv-divider');
+    element.appendChild(divider);
+
+    await elementIsStable(element);
+    expect(element.matches(':--split')).toBe(true);
+  });
+
+  it('should sync flat container styles', async () => {
+    element.container = 'flat';
+    await elementIsStable(element);
+    expect(buttons[0].interaction).toBe('flat');
+    expect(buttons[1].interaction).toBe('flat');
+    expect(buttons[2].interaction).toBe('flat');
+  });
+
+  it('should sync interaction container styles', async () => {
+    element.interaction = 'emphasize';
+    await elementIsStable(element);
+    expect(buttons[0].interaction).toBe('emphasize');
+    expect(buttons[1].interaction).toBe('emphasize');
+    expect(buttons[2].interaction).toBe('emphasize');
+  });
+
+  it('should sync interaction container styles', async () => {
+    element.interaction = 'emphasize';
+    await elementIsStable(element);
+    expect(buttons[0].interaction).toBe('emphasize');
+    expect(buttons[1].interaction).toBe('emphasize');
+    expect(buttons[2].interaction).toBe('emphasize');
+  });
+
+  it('should be stateless by default', async () => {
+    await elementIsStable(element);
+    emulateClick(buttons[0])
+    expect(buttons[0].pressed).toBe(undefined);
+    expect(buttons[1].pressed).toBe(undefined);
+    expect(buttons[2].pressed).toBe(undefined);
+  });
+
+  it('should have an exclusive press when using behavior-select="single"', async () => {
+    element.behaviorSelect = 'single';
+    await elementIsStable(element);
+
+    emulateClick(buttons[0]);
+    await elementIsStable(element);
+
+    expect(buttons[0].pressed).toBe(true);
+    expect(buttons[1].pressed).toBe(false);
+    expect(buttons[2].pressed).toBe(false);
+
+    emulateClick(buttons[1]);
+    await elementIsStable(element);
+
+    expect(buttons[0].pressed).toBe(false);
+    expect(buttons[1].pressed).toBe(true);
+    expect(buttons[2].pressed).toBe(false);
+  });
+
+  it('should allow multiple buttons in pressed state when using behavior-select="multi"', async () => {
+    element.behaviorSelect = 'multi';
+    await elementIsStable(element);
+
+    emulateClick(buttons[0]);
+    await elementIsStable(element);
+
+    expect(buttons[0].pressed).toBe(true);
+    expect(buttons[1].pressed).toBe(undefined);
+    expect(buttons[2].pressed).toBe(undefined);
+
+    emulateClick(buttons[1]);
+    await elementIsStable(element);
+
+    expect(buttons[0].pressed).toBe(true);
+    expect(buttons[1].pressed).toBe(true);
+    expect(buttons[2].pressed).toBe(undefined);
   });
 });
