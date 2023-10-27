@@ -123,3 +123,13 @@ export const RoundedIcon = {
     </nve-button-group>
   `
 };
+
+export const OrientationVertical = {
+  render: () => html`
+    <nve-button-group orientation="vertical">
+      <nve-icon-button icon-name="copy"></nve-icon-button>
+      <nve-icon-button icon-name="add-comment"></nve-icon-button>
+      <nve-icon-button icon-name="download"></nve-icon-button>
+    </nve-button-group>
+  `
+};

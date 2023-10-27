@@ -49,8 +49,8 @@
   --border-radius: var(--nve-ref-border-radius-lg);
 }
 
-:host([container='rounded']:not([split])) ::slotted(nve-button),
-:host([container='rounded']:not([split])) ::slotted(nve-icon-button) {
+:host([container='rounded']:not(:--split)) ::slotted(nve-button),
+:host([container='rounded']:not(:--split)) ::slotted(nve-icon-button) {
   --border-radius: var(--nve-ref-border-radius-full);
 }
 
@@ -70,7 +70,7 @@
   --color: color-mix(in oklab, var(--nve-sys-interaction-destructive-background) 100%, var(--nve-sys-interaction-destructive-color) 50%);
 }
 
-:host([split]) {
+:host(:--split) {
   --padding: 0;
   --gap: 0;
 
