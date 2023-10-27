@@ -573,6 +573,7 @@
     "_demos": {
       "dependencies": [
         "../demos/extensions:build",
+        "../demos/mpa:build",
         "../demos/nextjs:build",
         "../demos/static:build",
         "../demos/typescript:build"

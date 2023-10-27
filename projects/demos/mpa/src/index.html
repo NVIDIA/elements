@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" mlv-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <title>Index</title>
+    <link rel="stylesheet" href="/index.css" />
+    <script type="module" src="/index.ts"></script>
+  </head>
+  <body>
+    <mlv-app-header>
+      <mlv-logo></mlv-logo>
+      <h2 slot="title">NVIDIA</h2>
+      <mlv-button slot="nav-items" selected><a href="/">Home</a></mlv-button>
+      <mlv-button slot="nav-items"><a href="/about/">About</a></mlv-button>
+      <mlv-button slot="nav-items"><a href="/settings/">Settings</a></mlv-button>
+    </mlv-app-header>
+    <main mlv-layout="column gap:md pad:lg align:stretch">
+      <h1 mlv-text="heading">Home</h1>
+      <mlv-divider></mlv-divider>
+      <p mlv-text="body">
+        A simple multi page app using <a href="https://elements.nvidia.com/ui/storybook/elements" mlv-text="link">@elements/elements</a>.
+      </p>
+    </main>
+  </body>
+</html>
