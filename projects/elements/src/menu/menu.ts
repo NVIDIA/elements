@@ -1,8 +1,9 @@
 import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, attachInternals, keyNavigationList, KeynavListConfig } from '@elements/elements/internal';
+import { useStyles, attachInternals, keyNavigationList, KeynavListConfig, appendRootNodeStyle } from '@elements/elements/internal';
 import type { MenuItem } from './menu-item.js';
 import styles from './menu.css?inline';
+import globalStyles from './menu.global.css?inline';
 
 /**
  * @element mlv-menu
@@ -17,7 +18,6 @@ import styles from './menu.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-menu-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
- * @stable false
  */
 @keyNavigationList<Menu>()
 export class Menu extends LitElement {
@@ -55,5 +55,6 @@ export class Menu extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'menu';
+    appendRootNodeStyle(this, globalStyles);
   }
 }

@@ -6,3 +6,7 @@
   width: 100%;
   contain: none;
 }
+
+::slotted(mlv-menu) {
+  --width: 100%;
+}

@@ -17,6 +17,11 @@
   --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
 }
 
+:host([current]) [interaction-state],
+:host(:--current) [interaction-state] {
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
+}
+
 :host([disabled]) [interaction-state],
 :host(:--disabled) [interaction-state] {
   --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-disabled);

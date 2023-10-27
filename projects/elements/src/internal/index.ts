@@ -7,6 +7,7 @@ export * from './controllers/i18n.controller.js';
 export * from './controllers/keynav-grid.controller.js';
 export * from './controllers/keynav-list.controller.js';
 export * from './controllers/state-active.controller.js';
+export * from './controllers/state-current.controller.js';
 export * from './controllers/state-disabled.controller.js';
 export * from './controllers/state-expanded.controller.js';
 export * from './controllers/state-scroll.controller.js';

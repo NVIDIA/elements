@@ -65,6 +65,9 @@ export interface MlvElement {
   /** Enables internal string values to be updated for internationalization. */
   i18n?: Partial<I18nStrings & { __set: boolean; }>;
 
+  /** This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current */
+  current?: 'page' | 'step';
+
   /** Determines the position of an element along the inline axis. https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Box_alignment_in_grid_layout#the_two_axes_of_a_grid_layout */
   inlinePosition?: 'start' | 'center' | 'end';
 

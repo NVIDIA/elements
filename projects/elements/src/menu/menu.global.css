@@ -1,0 +1,3 @@
+mlv-menu:has(mlv-menu-item:--current) {
+  --padding: 0 0 0 var(--mlv-ref-size-200);
+}
