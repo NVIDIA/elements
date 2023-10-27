@@ -6,3 +6,7 @@
   width: 100%;
   contain: none;
 }
+
+::slotted(nve-menu) {
+  --width: 100%;
+}
