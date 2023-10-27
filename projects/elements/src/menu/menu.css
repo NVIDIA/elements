@@ -1,6 +1,6 @@
 
 :host {
-  --padding:0;
+  --padding: 0;
   --gap: var(--nve-ref-space-xxs);
   --width: min-content;
   --max-width: 100%;
