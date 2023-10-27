@@ -5,6 +5,9 @@ import '@elements/elements/icon/define.js';
 import '@elements/elements/menu/define.js';
 import '@elements/elements/logo/define.js';
 import '@elements/elements/search/define.js';
+import '@elements/elements/drawer/define.js';
+import '@elements/elements/panel/define.js';
+import '@elements/elements/card/define.js';
 
 export default {
   title: 'Elements/Menu/Examples',
@@ -15,7 +18,7 @@ export const Default = {
   render: () => html`
   <nve-menu>
     <nve-menu-item>item 1</nve-menu-item>
-    <nve-menu-item selected>item 2</nve-menu-item>
+    <nve-menu-item>item 2</nve-menu-item>
     <nve-menu-item>item 3</nve-menu-item>
     <nve-menu-item>item 4</nve-menu-item>
   </nve-menu>
@@ -42,6 +45,17 @@ export const Selected = {
   <nve-menu>
     <nve-menu-item>item 1</nve-menu-item>
     <nve-menu-item selected>item 2</nve-menu-item>
+    <nve-menu-item>item 3</nve-menu-item>
+    <nve-menu-item>item 4</nve-menu-item>
+  </nve-menu>
+  `
+};
+
+export const Current = {
+  render: () => html`
+  <nve-menu>
+    <nve-menu-item>item 1</nve-menu-item>
+    <nve-menu-item current="page">item 2</nve-menu-item>
     <nve-menu-item>item 3</nve-menu-item>
     <nve-menu-item>item 4</nve-menu-item>
   </nve-menu>
@@ -104,5 +118,59 @@ export const Complex = {
       </nve-menu-item>
     </nve-menu>
   </nve-dropdown>
+  `
+};
+
+export const VerticalNavigationDrawer = {
+  render: () => html`
+  <div nve-layout="column align:stretch full">
+    <nve-drawer position="right" size="sm" modal closable>
+      <nve-drawer-header>Applications</nve-drawer-header>
+      <nve-drawer-content>
+        <nve-menu>
+          <nve-menu-item>item 1</nve-menu-item>
+          <nve-menu-item current="page">item 2</nve-menu-item>
+          <nve-menu-item>item 3</nve-menu-item>
+          <nve-menu-item>item 4</nve-menu-item>
+        </nve-menu>
+      </nve-drawer-content>
+    </nve-drawer>
+    <nve-card style="height: 400px">
+      <nve-card-header>
+        <div slot="title">Header</div>
+      </nve-card-header>
+      <nve-card-content>
+        <p nve-text="body">Content</p>
+      </nve-card-content>
+    </nve-card>
+  </div>
+  `
+};
+
+export const VerticalNavigationPanel = {
+  render: () => html`
+  <div nve-theme="root" nve-layout="row gap:md align:stretch">
+    <nve-card>
+      <nve-card-header>
+        <div slot="title">Header</div>
+      </nve-card-header>
+      <nve-card-content>
+        <p nve-text="body">Content</p>
+      </nve-card-content>
+    </nve-card>
+    <nve-panel side="right" expanded closable style="max-width:280px; height:500px">
+      <nve-panel-header>
+        <h3 slot="title">Applications</h3>
+      </nve-panel-header>
+      <nve-panel-content>
+        <nve-menu>
+          <nve-menu-item>item 1</nve-menu-item>
+          <nve-menu-item current="page">item 2</nve-menu-item>
+          <nve-menu-item>item 3</nve-menu-item>
+          <nve-menu-item>item 4</nve-menu-item>
+        </nve-menu>
+      </nve-panel-content>
+    </nve-panel>
+  </div>
   `
 };
