@@ -27,12 +27,13 @@
   min-height: var(--min-height);
   cursor: var(--cursor);
   text-transform: var(--text-transform);
+  outline-offset: calc(-1 * var(--nve-ref-size-50));
+  position: relative;
   display: flex;
   align-items: center;
   white-space: nowrap;
   border: 0;
   text-align: left;
-  outline-offset: calc(-1 * var(--nve-ref-size-50));
 }
 
 :host(:--disabled) [interaction-state] {
@@ -50,6 +51,27 @@
 
 :host(:--hover) {
   --color: var(--nve-sys-interaction-hover-color);
+}
+
+:host(:--current) {
+  contain: none;
+  content-visibility: initial;
+}
+
+:host(:--current) [internal-host] {
+  contain: none;
+}
+
+:host(:--current) [internal-host]:after {
+  width: var(--nve-ref-border-width-xl);
+  border-radius: var(--border-radius);
+  background: var(--nve-sys-accent-secondary-background);
+  content: '';
+  display: block;
+  position: absolute;
+  top: var(--nve-ref-size-50);
+  bottom: var(--nve-ref-size-50);
+  left: calc(var(--nve-ref-size-200) * -1);
 }
 
 ::slotted(a) {

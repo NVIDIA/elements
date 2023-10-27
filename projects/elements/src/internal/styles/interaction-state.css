@@ -17,6 +17,11 @@
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
 }
 
+:host([current]) [interaction-state],
+:host(:--current) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+}
+
 :host([disabled]) [interaction-state],
 :host(:--disabled) [interaction-state] {
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-disabled);
