@@ -1,5 +1,5 @@
 {
-  "created": "2023-10-27T03:57:58.121Z",
+  "created": "2023-10-30T20:59:09.297Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -813,8 +813,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 3,
-        "instanceTotal": 8,
+        "projectTotal": 4,
+        "instanceTotal": 9,
         "coverageTotal": 98.2125
       },
       "stories": [
@@ -1171,7 +1171,7 @@
       },
       "tests": {
         "projectTotal": 15,
-        "instanceTotal": 114,
+        "instanceTotal": 115,
         "coverageTotal": 100
       },
       "stories": [
@@ -1219,6 +1219,11 @@
           "id": "RoundedIcon",
           "file": "button-group.stories.ts",
           "template": "<nve-button-group container=\"rounded\" behavior-select=\"single\">\n  <nve-icon-button icon-name=\"table\"></nve-icon-button>\n  <nve-icon-button icon-name=\"image\"></nve-icon-button>\n</nve-button-group>\n"
+        },
+        {
+          "id": "OrientationVertical",
+          "file": "button-group.stories.ts",
+          "template": "<nve-button-group orientation=\"vertical\">\n  <nve-icon-button icon-name=\"copy\"></nve-icon-button>\n  <nve-icon-button icon-name=\"add-comment\"></nve-icon-button>\n  <nve-icon-button icon-name=\"download\"></nve-icon-button>\n</nve-button-group>\n"
         }
       ],
       "behavior": "button",
@@ -1280,7 +1285,7 @@
           {
             "name": "container",
             "type": {
-              "text": "default | 'flat' | 'rounded' | default"
+              "text": "'flat' | 'rounded' | default"
             },
             "description": "Determines the container styles of component. Flat is used for nesting elements within other containers. Inset can be used for more complex elements where content is distinctly separated.",
             "fieldName": "container"
@@ -1332,7 +1337,7 @@
       "tests": {
         "projectTotal": 1,
         "instanceTotal": 1,
-        "coverageTotal": 61.605
+        "coverageTotal": 100
       },
       "stories": [
         {
@@ -1379,6 +1384,11 @@
           "id": "RoundedIcon",
           "file": "button-group.stories.ts",
           "template": "<nve-button-group container=\"rounded\" behavior-select=\"single\">\n  <nve-icon-button icon-name=\"table\"></nve-icon-button>\n  <nve-icon-button icon-name=\"image\"></nve-icon-button>\n</nve-button-group>\n"
+        },
+        {
+          "id": "OrientationVertical",
+          "file": "button-group.stories.ts",
+          "template": "<nve-button-group orientation=\"vertical\">\n  <nve-icon-button icon-name=\"copy\"></nve-icon-button>\n  <nve-icon-button icon-name=\"add-comment\"></nve-icon-button>\n  <nve-icon-button icon-name=\"download\"></nve-icon-button>\n</nve-button-group>\n"
         }
       ],
       "behavior": "container",
@@ -1774,7 +1784,7 @@
       },
       "tests": {
         "projectTotal": 8,
-        "instanceTotal": 21,
+        "instanceTotal": 20,
         "coverageTotal": 100
       },
       "stories": [
@@ -2612,7 +2622,7 @@
       },
       "tests": {
         "projectTotal": 4,
-        "instanceTotal": 5,
+        "instanceTotal": 6,
         "coverageTotal": 100
       },
       "stories": [
@@ -3290,8 +3300,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 1,
-        "instanceTotal": 1,
+        "projectTotal": 2,
+        "instanceTotal": 2,
         "coverageTotal": 100
       },
       "stories": [
@@ -4795,8 +4805,8 @@
       },
       "tests": {
         "projectTotal": 17,
-        "instanceTotal": 104,
-        "coverageTotal": 92.995
+        "instanceTotal": 106,
+        "coverageTotal": 92.8675
       },
       "stories": [
         {
@@ -7292,8 +7302,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 0,
-        "instanceTotal": 0,
+        "projectTotal": 1,
+        "instanceTotal": 1,
         "coverageTotal": 100
       },
       "stories": [
@@ -8656,8 +8666,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 2,
-        "instanceTotal": 4,
+        "projectTotal": 3,
+        "instanceTotal": 5,
         "coverageTotal": 94.4425
       },
       "stories": [
@@ -8921,8 +8931,8 @@
         ]
       },
       "tests": {
-        "projectTotal": 2,
-        "instanceTotal": 4,
+        "projectTotal": 3,
+        "instanceTotal": 5,
         "coverageTotal": 94.4425
       },
       "stories": [],
@@ -9713,7 +9723,7 @@
       },
       "tests": {
         "projectTotal": 4,
-        "instanceTotal": 9,
+        "instanceTotal": 10,
         "coverageTotal": 100
       },
       "stories": [
@@ -10077,7 +10087,7 @@
       },
       "tests": {
         "projectTotal": 9,
-        "instanceTotal": 31,
+        "instanceTotal": 32,
         "coverageTotal": 100
       },
       "stories": [
@@ -10479,33 +10489,6 @@
   },
   "tests": {
     "coverage": [
-      {
-        "file": "elements/src/button-group/button-group.ts",
-        "lines": {
-          "total": 32,
-          "covered": 24,
-          "skipped": 0,
-          "pct": 75
-        },
-        "functions": {
-          "total": 12,
-          "covered": 8,
-          "skipped": 0,
-          "pct": 66.66
-        },
-        "statements": {
-          "total": 42,
-          "covered": 32,
-          "skipped": 0,
-          "pct": 76.19
-        },
-        "branches": {
-          "total": 14,
-          "covered": 4,
-          "skipped": 0,
-          "pct": 28.57
-        }
-      },
       {
         "file": "elements/src/internal/utils/dom.ts",
         "lines": {
@@ -12769,9 +12752,9 @@
         },
         "branches": {
           "total": 6,
-          "covered": 5,
+          "covered": 6,
           "skipped": 0,
-          "pct": 83.33
+          "pct": 100
         }
       },
       {
@@ -13128,22 +13111,22 @@
       {
         "file": "elements/src/icon/icon.ts",
         "lines": {
-          "total": 36,
-          "covered": 36,
+          "total": 34,
+          "covered": 34,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 17,
-          "covered": 16,
+          "total": 16,
+          "covered": 15,
           "skipped": 0,
-          "pct": 94.11
+          "pct": 93.75
         },
         "statements": {
-          "total": 47,
-          "covered": 46,
+          "total": 44,
+          "covered": 43,
           "skipped": 0,
-          "pct": 97.87
+          "pct": 97.72
         },
         "branches": {
           "total": 20,
@@ -13317,8 +13300,8 @@
       {
         "file": "elements/src/grid/grid.ts",
         "lines": {
-          "total": 17,
-          "covered": 17,
+          "total": 18,
+          "covered": 18,
           "skipped": 0,
           "pct": 100
         },
@@ -13329,8 +13312,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 26,
-          "covered": 26,
+          "total": 27,
+          "covered": 27,
           "skipped": 0,
           "pct": 100
         },
@@ -14341,6 +14324,33 @@
         }
       },
       {
+        "file": "elements/src/button-group/button-group.ts",
+        "lines": {
+          "total": 31,
+          "covered": 31,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 12,
+          "covered": 12,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 44,
+          "covered": 44,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 10,
+          "covered": 10,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
         "file": "elements/src/button/define.ts",
         "lines": {
           "total": 1,
@@ -14749,28 +14759,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 2057,
-        "covered": 2009,
+        "total": 2055,
+        "covered": 2015,
         "skipped": 0,
-        "pct": 97.66
+        "pct": 98.05
       },
       "statements": {
         "total": 2727,
-        "covered": 2660,
+        "covered": 2670,
         "skipped": 0,
-        "pct": 97.54
+        "pct": 97.9
       },
       "functions": {
-        "total": 800,
-        "covered": 765,
+        "total": 799,
+        "covered": 768,
         "skipped": 0,
-        "pct": 95.62
+        "pct": 96.12
       },
       "branches": {
-        "total": 1031,
-        "covered": 930,
+        "total": 1027,
+        "covered": 937,
         "skipped": 0,
-        "pct": 90.2
+        "pct": 91.23
       },
       "branchesTrue": {
         "total": 0,
@@ -14877,7 +14887,7 @@
       {
         "name": "dataops",
         "path": "src/ui/dataops",
-        "elementsVersion": "0.10.0",
+        "elementsVersion": "0.19.0",
         "elements": [
           {
             "name": "nve-dialog",
@@ -14889,11 +14899,11 @@
           },
           {
             "name": "nve-button",
-            "instanceTotal": 6
+            "instanceTotal": 7
           },
           {
             "name": "nve-checkbox",
-            "instanceTotal": 5
+            "instanceTotal": 4
           },
           {
             "name": "nve-dropdown",
@@ -14909,15 +14919,35 @@
           },
           {
             "name": "nve-icon",
-            "instanceTotal": 7
+            "instanceTotal": 9
           },
           {
             "name": "nve-input",
             "instanceTotal": 2
           },
           {
+            "name": "nve-badge",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-dot",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-tabs-item",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-tabs",
+            "instanceTotal": 1
+          },
+          {
             "name": "nve-tooltip",
             "instanceTotal": 1
+          },
+          {
+            "name": "nve-date",
+            "instanceTotal": 2
           },
           {
             "name": "nve-dialog-footer",
@@ -14925,6 +14955,10 @@
           },
           {
             "name": "nve-dialog-header",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-progress-ring",
             "instanceTotal": 1
           },
           {
@@ -14948,10 +14982,6 @@
             "instanceTotal": 1
           },
           {
-            "name": "nve-date",
-            "instanceTotal": 1
-          },
-          {
             "name": "nve-radio-group",
             "instanceTotal": 1
           },
@@ -14964,7 +14994,7 @@
             "instanceTotal": 1
           }
         ],
-        "instanceTotal": 60
+        "instanceTotal": 68
       },
       {
         "name": "drivescrubber",
@@ -15340,20 +15370,6 @@
           }
         ],
         "instanceTotal": 1
-      },
-      {
-        "name": "lane-labeler",
-        "path": "src/ui/labeling/apps/lane-labeler",
-        "elementsVersion": "^0.4.1",
-        "elements": [],
-        "instanceTotal": 0
-      },
-      {
-        "name": "scene-labeler",
-        "path": "src/ui/labeling/apps/scene-labeler",
-        "elementsVersion": "^0.4.1",
-        "elements": [],
-        "instanceTotal": 0
       },
       {
         "name": "static-4dgt-labeler",
@@ -15806,7 +15822,7 @@
           },
           {
             "name": "nve-toast",
-            "instanceTotal": 4
+            "instanceTotal": 5
           },
           {
             "name": "nve-toolbar",
@@ -15814,14 +15830,14 @@
           },
           {
             "name": "nve-tooltip",
-            "instanceTotal": 5
+            "instanceTotal": 6
           },
           {
             "name": "nve-week",
             "instanceTotal": 1
           }
         ],
-        "instanceTotal": 200
+        "instanceTotal": 202
       },
       {
         "name": "@elements/next-common",
@@ -16234,7 +16250,7 @@
       {
         "name": "@elements/xp-hub",
         "path": "src/ui/platform/xp/hub",
-        "elementsVersion": "^0.6.0",
+        "elementsVersion": "0.19.0",
         "elements": [
           {
             "name": "nve-card",
@@ -16300,12 +16316,11 @@
     "versions": [
       "0.10.0",
       "0.11.1",
-      "0.15.0",
       "0.19.0",
+      "0.15.0",
       "0.8.0",
       "0.7.1",
       "0.1.3",
-      "0.4.1",
       "0.11.0",
       "0.18.0",
       "0.6.0",
