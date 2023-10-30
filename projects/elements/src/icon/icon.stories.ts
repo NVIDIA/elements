@@ -1,7 +1,6 @@
 /* eslint-disable guard-for-in */
-import { html, LitElement, unsafeCSS } from 'lit';
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { customElement } from 'lit/decorators/custom-element.js';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import typography from '@elements/elements/css/module.typography.css?inline';
 import { Icon, IconName, ICON_NAMES } from '@elements/elements/icon';
@@ -51,7 +50,7 @@ export const IconCatalog = {
   `
 };
 
-@customElement('icon-demo')
+
 class IconDemo extends LitElement {
   static styles = [unsafeCSS(layout), unsafeCSS(typography)];
 
@@ -138,6 +137,8 @@ class IconDemo extends LitElement {
     document.querySelector('nve-notification-group').prepend(notification);
   }
 }
+
+customElements.get('icon-demo') || customElements.define('icon-demo', IconDemo);
 
 export const PreviewAllIcons = {
   render: () => html`
@@ -240,6 +241,50 @@ export const Source = {
     <nve-icon name="https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg" style="--width: 75px; --height: 75px;"></nve-icon>
   `
 }
+
+
+class IconPerformanceDemo extends LitElement {
+  static styles = [unsafeCSS(layout), css`
+  :host {
+    display: block;
+    height: 500px;
+    padding: 24px 0;
+  }
+
+  div {
+    height: 675px;
+    width: 675px;
+    contain: layout;
+    overflow: hidden;
+  }
+  `];
+
+  #multiplier = 1000;
+
+  @state() private show = false;
+
+  @state() private icons = Array(this.#multiplier).fill('').map(() => html`<nve-icon name="user"></nve-icon>`)
+
+  render() {
+    return html`
+      <nve-button @click=${() => this.show = !this.show}>show icons</nve-button>
+      <p>${this.#multiplier}</p>
+      <div>
+        ${this.show ? this.icons : nothing}
+      </div>
+    `
+  }
+}
+
+customElements.get('icon-performance-demo') || customElements.define('icon-performance-demo', IconPerformanceDemo);
+
+export const Performance = {
+  render: () => html`
+<div nve-theme="root">
+  <icon-performance-demo></icon-performance-demo>
+</div>
+  `
+};
 
 const GUI_NAMES = [
   "3d-3d-axis",

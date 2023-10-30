@@ -12,7 +12,7 @@
 }
 
 [internal-host] {
-  background: color-mix(in oklab, var(--background, var(--nve-sys-layer-canvas-background)) 100%, var(--nve-sys-interaction-state-mix) var(--interaction-state-ratio, 0%));
+  background: color-mix(in oklab, var(--background, var(--nve-sys-layer-canvas-background)) 100%, var(--nve-sys-interaction-state-mix) var(--interaction-state-ratio, 0.01%)); /* 0.01 to prevent css optimizer from removing % type */
   color: var(--color);
   padding: var(--padding);
   height: var(--height);
