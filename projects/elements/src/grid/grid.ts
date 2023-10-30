@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
+import { query } from 'lit/decorators/query.js';
 import { keyNavigationGrid, useStyles, attachInternals, appendRootNodeStyle, generateId, stateScroll, ContainerElement } from '@elements/elements/internal';
 import type { GridHeader } from './header/header.js';
 import type { GridColumn } from './column/column.js';
@@ -62,10 +63,12 @@ export class Grid extends LitElement implements ContainerElement {
 
   get stateScrollConfig() {
     return {
-      target: this.shadowRoot.querySelector<HTMLElement>('[part=scrollbox]'),
+      target: this.scrollbox,
       scrollOffset: 100
     }
   }
+
+  @query('[part=scrollbox]', true) private scrollbox!: HTMLElement;
   
   @queryAssignedElements({ selector: 'mlv-grid-header', flatten: true }) private gridHeader!: GridHeader[];
 
