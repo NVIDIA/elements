@@ -106,10 +106,8 @@ export class Icon extends LitElement {
 
   async #render() {
     const svg = await (this.name?.endsWith('.svg') ? fetch(this.name).then(res => res.text()) : Icon._iconsRegistry[this.name]?.svg() ?? Promise.resolve(''));
-    this.svg = svg;
-    await this.updateComplete;
-    await new Promise(r => requestAnimationFrame(r));
     Icon._iconsRegistry[this.name] = { svg: () => svg, ...Icon._iconsRegistry[this.name] };
+    this.svg = svg;
   }
 }
 
