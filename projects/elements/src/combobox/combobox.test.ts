@@ -45,6 +45,11 @@ describe('mlv-combobox', () => {
     expect(items.length).toBe(3);
   });
 
+  it('should default the dropdown to align start to prevent overflow clipping when options are wider than the input itsself', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    expect(dropdown.alignment).toBe('start');
+  });
+
   it('should set width of dropdown when opened', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
     expect(dropdown.hidden).toBe(true);

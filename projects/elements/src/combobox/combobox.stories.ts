@@ -227,6 +227,25 @@ export const Overflow = () => {
   `
 };
 
+export const PopoverOverflow = () => {
+  return html`
+  <mlv-combobox style="width: 100px">
+    <label>label</label>
+    <input type="search">
+    <select>
+      <option value="really-long-text-option-that-keeps-going"></option>  
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+    </select>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-combobox>
+  `
+};
+
 export const Performance = () => {
   return html`<mlv-combobox-performance-demo></mlv-combobox-performance-demo>`
 }
