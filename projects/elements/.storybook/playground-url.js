@@ -94,7 +94,7 @@ function createDefaultFiles(content, storyId) {
   <script type="module" src="./index.js"></script>
   ${storyId.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
 </head>
-<body nve-layout="column gap:lg pad:lg">
+<body nve-layout="${content.split('\n')[0].includes('full') ? '' : 'column gap:lg pad:lg'}">
 
 ${content}
 
