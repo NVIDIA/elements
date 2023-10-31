@@ -73,8 +73,14 @@
     padding: 48px 0;
   }
 
-  .css-q22hxw:has(.full-width) {
+  .css-q22hxw:has(.full-width),
+  .css-q22hxw:has([nve-theme='root'][nve-layout*='full']) {
     max-width: 100% !important;
+  }
+
+  .sbdocs.sbdocs-preview:has([nve-theme='root'][nve-layout*='full']) {
+    width: calc(100% + 72px) !important;
+    margin-left: -36px !important
   }
 
   /* firefox fix */
