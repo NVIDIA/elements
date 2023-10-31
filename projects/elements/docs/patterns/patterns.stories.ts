@@ -48,7 +48,7 @@ export const Row = {
 
 export const Header = {
   render: () => html`
-  <div mlv-theme="root" no-padding>
+  <div mlv-theme="root" mlv-layout="column full align:stretch">
     <mlv-card container="full">
       <mlv-card-content mlv-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
         <div mlv-layout="row gap:sm align:vertical-center">
@@ -65,7 +65,7 @@ export const Header = {
 
 export const HeaderTabs = {
   render: () => html`
-  <div mlv-theme="root" no-padding>
+  <div mlv-theme="root" mlv-layout="column full align:stretch">
     <mlv-card container="full">
       <div mlv-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
         <div mlv-layout="row gap:sm align:vertical-center">
@@ -87,7 +87,7 @@ export const HeaderTabs = {
 
 export const HeaderComplex = {
   render: () => html`
-  <div mlv-theme="root" no-padding>
+  <div mlv-theme="root" mlv-layout="column full align:stretch">
     <mlv-card container="full">
       <section mlv-layout="column gap:lg align:stretch pad-top:md pad-right:xl pad-bottom:md pad-left:xl">
         <div mlv-layout="row gap:md align:center">
@@ -135,7 +135,7 @@ export const HeaderComplex = {
 export const LayoutHeaderFullWidthCards = {
   render: () => {
     return html`
-    <div mlv-theme="root" no-padding>
+    <div mlv-theme="root" mlv-layout="column full align:stretch">
       <mlv-card container="full">
         <div mlv-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
           <div mlv-layout="row gap:sm align:vertical-center">
@@ -174,7 +174,7 @@ export const LayoutHeaderFullWidthCards = {
 export const LayoutHeaderGridCards = {
   render: () => {
     return html`
-    <div mlv-theme="root" no-padding>
+    <div mlv-theme="root" mlv-layout="column full align:stretch">
       <mlv-card container="full">
         <div mlv-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
           <div mlv-layout="row gap:sm align:vertical-center">
@@ -225,7 +225,7 @@ export const LayoutHeaderGridCards = {
 export const LayoutHeaderPanelCards = {
   render: () => {
     return html`
-    <div mlv-theme="root" no-padding>
+    <div mlv-theme="root" mlv-layout="column full align:stretch">
       <mlv-card container="full">
         <div mlv-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
           <div mlv-layout="row gap:sm align:vertical-center">
