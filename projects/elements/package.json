@@ -362,10 +362,9 @@
       }
     },
     "build:vite": {
-      "command": "node_modules/vite/bin/vite.js build",
       "clean": false,
+      "command": "node_modules/vite/bin/vite.js build",
       "files": [
-        "build/vscode-custom-data.js",
         "public/**",
         "src/**",
         "!src/**/*.stories.ts",
@@ -376,14 +375,20 @@
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts",
-        "postcss.config.cjs",
-        "custom-elements-manifest.config.mjs"
+        "postcss.config.cjs"
       ],
       "output": [
         "dist/**",
+        "!dist/custom-elements.json",
+        "!dist/elements.css-vars.json",
+        "!dist/elements.html-data.json",
         "!dist/importmap.cdn.json",
         "!dist/tokens/**",
-        "!dist/css/module.tokens.css"
+        "!dist/css/module.tokens.css",
+        "!dist/css/theme.dark.css",
+        "!dist/css/theme.compact.css",
+        "!dist/css/theme.high-contrast.css",
+        "!dist/css/theme.reduced-motion.css"
       ],
       "dependencies": [
         "build:icons",
@@ -393,7 +398,6 @@
     },
     "build:importmap": {
       "command": "node ./build/importmap.mjs --outDir ./dist",
-      "clean": false,
       "files": [
         "build/importmap.mjs"
       ],
@@ -406,13 +410,16 @@
     },
     "build:style-dictionary": {
       "command": "node ./tokens/style-dictionary.config.cjs --outDir ./dist/",
-      "clean": false,
       "files": [
         "tokens/**"
       ],
       "output": [
         "dist/tokens/**",
-        "dist/css/module.tokens.css"
+        "dist/css/module.tokens.css",
+        "dist/css/theme.dark.css",
+        "dist/css/theme.compact.css",
+        "dist/css/theme.high-contrast.css",
+        "dist/css/theme.reduced-motion.css"
       ]
     },
     "build:css-var-completions": {
@@ -439,9 +446,7 @@
     },
     "build:manifest": {
       "command": "node ./node_modules/@custom-elements-manifest/analyzer/cem.js analyze --config ./custom-elements-manifest.config.mjs --outdir ./dist/",
-      "clean": false,
       "files": [
-        "build/vscode-custom-data.js",
         "src/**",
         "!src/**/*.stories.ts",
         "!src/**/*.stories.mdx",
@@ -481,7 +486,6 @@
     },
     "build:metadata:fast": {
       "command": "node ./build/metadata.mjs",
-      "clean": false,
       "files": [
         "build/metadata.mjs",
         "build/stories.mjs",

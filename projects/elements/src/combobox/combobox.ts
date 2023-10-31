@@ -99,7 +99,7 @@ export class Combobox extends Control implements ContainerElement {
     const multiple = this.#select?.multiple;
     const options = this.#options;
     return html`
-      <nve-dropdown .popoverType=${'manual'} @close=${e => e.target.hidden = true} @open=${e => e.target.hidden = false} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom" alignment="center">
+      <nve-dropdown .popoverType=${'manual'} @close=${e => e.target.hidden = true} @open=${e => e.target.hidden = false} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
         <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${this.i18n.select}>
           ${options.filter(o => !o.disabled).map(o => html`
           <nve-menu-item .value=${o.value} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${o.value}>
