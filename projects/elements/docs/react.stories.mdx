@@ -10,16 +10,16 @@ import '@elements/elements/alert/define.js';
 </mlv-alert>
 
 To use Maglev Elements in [React](https://reactjs.org/) follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps. Once complete
-elements can be imported and used within React jsx and tsx files. The `@lit-labs/react` package must be used to enable React compatibility with Custom Elements.
+elements can be imported and used within React jsx and tsx files. The `@lit/react` package must be used to enable React compatibility with Custom Elements.
 This package will wrap elements into a React component mapping the standard events and properties in a way that React can understand.
 
 ```tsx
 import * as React from 'react';
-import { createComponent } from '@lit-labs/react';
+import { createComponent } from '@lit/react';
 import { Dialog } from '@elements/elements/dialog/index.js';
 import '@elements/elements/dialog/define.js';
 
-const MlvDialog = createComponent({ react: React, tagName: 'mlv-dialog', elementClass: Dialog, events: { onclose: 'close' } });
+export const MlvDialog = createComponent({ react: React, tagName: 'mlv-dialog', elementClass: Dialog, events: { onclose: 'close' } });
 ```
 
 The `MlvDialog` React component can now be used within a React application.
@@ -34,5 +34,5 @@ The `MlvDialog` React component can now be used within a React application.
 </MlvDialog>
 ```
 
-To learn more about the `@lit-labs/react` package, please visit the [documentation](https://github.com/lit/lit/tree/main/packages/labs/react).
-View a working [demo here](https://elements-stage.nvidia.com/ui/elements-playground/?layout=vertical-split&theme=light&files=H4sIAJJwzWQAA81XzXLbNhB%252BFUQXSTMi6Z82bWXJI8fpIQe3naS3qgeYgEQkIMACoGKNhu%252FeXYKkJIrM2BNlkotIcXe%252F%252FYD9wWI3EIrxpzBxqRxMd4NYK8eVG0wHs1dMx26bcYKy26Wa4ZOkchO4hKd8vhxIsU7cclDKOGXwJGQmhfpEDJcgt24ruU04ByWCUPDN8ScXxdbCl8TwFXxJnMvsNIpipgLr6JqHasNoSEVEreXORlyCO%252BVskEm6XRudKxalmuWAHS1SupZ80%252BgsLsLL6%252FAyYsK6yC%252FNO4t%252BQHaOm2N2NjYiczUZkWbauJRm5RYTssMfQmoB2E3rb%252Fi17QzF35L%252FcjDpdw7Sb%252B3dOy8qEhDPWGe8vSn9BI4UUTXWsK2Ws0CvVsAtgD%252FCCa3OsJI%252BaFjRRfiTX1CfTshtGn6EdTW7jWSlgKz9al6AsrgKfwEKvlS63Jwjkns%252Fp%252FhBZYhK9XtJ5Bxea8DFdXgdXkSMb7jUWae7E17Y7s7EAqGqDWhTQFG%252F%252FzNtfh%252BBltfFSmrqhFoHuYB8NPwcRdzGXFyGV%252BFrn%252FMHshBl3bl%252BBMF0em5WANlHCkQ9nLAyDKexExte59E5iHXhArvX2PcOItdWeSZDwIB9pk4bG2UG%252BqVx2%252FMU23OJ9xF4Gff%252Fcm6%252BH%252FG995exBm6OfzfWe%252B8nrANJHy1gn%252Bm4a0MCr4vw%252BuCMqf0X1RmOj%252FJnFvkRqGsc8ugwLFkTw9%252FwAO%252F2wG4WVbPo7FGzrQdiYkMEAyOjNQ6sM6j0Talb6YARDrmDST0A%252Fw0%252BYQgu50EU3ZA4oQZWPs%252FdKvh1UEyqwdnZp%252BO52Q9n5D3GZkJ25IMzInYPmnFSkJXRKRnWm4udxSY%252BjMObpapMdySGT46%252FB7JftAmgPR3ZPcjNnYSSmuDbW0GlXpevb3LntGqwwiZ6sHsIsFSrXEEqgc5dlo3GfjCCNVlH%252FrGJ%252FlxjYeibv%252F%252BSuV9mmFv%252BAbNrtKLS8nGJSGDMdrlRZOSDXAYBbw%252BQLzp3EIxYyzxVZE2zacoIhduEmsbAihsMMk7n892OJBxvGZiTv%252F28SUBSFGVQS8z92rS6lyL%252BNN8B%252B%252FntMdHRq%252F37uLhdG5j5ocHPosYcEA8xvSqJpbb0UXICqUclSQRjXM13B2gF%252BEUtYNrl12%252FHnq9HL0MEC6Qut3gPyeOY4y3gNuFSagK3K8NLbqXifrH4yQNX3%252Bo0JmS8VFA%252FS%252BVDhlkOsdln0Qiucnl5TKy5%252B93H%252Fs32HRsNUXU4xojhW2g4JLUpIzbbJ27tDnKjvqlER9LxTXflYOX6wgw%252B2qeOGmry0Nn%252BKnpZ1dzjHK0ApUn3fTs6tfGxaDTbtxiK4qbRHFm2aurE9LGUd9tW%252BdVry0p5l20fRcZXQmF3%252F6Juxel5yhWJI%252BWliiLS2s9q3y35bGgGB7olThObiNRHb2hJKqyFeiM2z0pfeoXZrxg1jLz984Hc%252FfXOLhV%252FKoU%252BhZsyqdO4CetoB40FcKd1i4XT6Q%252Ba8ikZYncpt2M4IdUy7iWcV1Mf5gLTvO2lCuNL3fidPPHj0TodVTF%252FqSMfhRNHdUOGox5iBTfZuhGBWfkcQnYBj5O63AjGdZRmV25QFP8DkZfA%252B%252F4RAAA%253D).
+To learn more about the `@lit/react` package, please visit the [documentation](https://github.com/lit/lit/blob/main/packages/react/README.md).
+View a working [demo here](https://elements-stage.nvidia.com/ui/elements-playground/d445ba8d-a2c9-41c4-bea9-18a6bbf27100?layout=vertical-split&theme=light&file=index.tsx).
