@@ -11,7 +11,7 @@ export const H2 = (args) => {
   return (
   <div nve-layout="column gap:xs align:stretch pad-top:xl">
     <h2 nve-text="heading xl" id={args.id} className="dynamic-anchor">
-      <a href={`/?path=/docs/${id}#${args.id}`} target="_self"><nve-icon name="link"></nve-icon></a>
+      <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
       {args.children}
     </h2>
     <nve-divider></nve-divider>
