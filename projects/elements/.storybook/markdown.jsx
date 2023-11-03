@@ -11,7 +11,7 @@ export const H2 = (args) => {
   return (
   <div mlv-layout="column gap:xs align:stretch pad-top:xl">
     <h2 mlv-text="heading xl" id={args.id} className="dynamic-anchor">
-      <a href={`/?path=/docs/${id}#${args.id}`} target="_self"><mlv-icon name="link"></mlv-icon></a>
+      <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><mlv-icon name="link"></mlv-icon></a>
       {args.children}
     </h2>
     <mlv-divider></mlv-divider>

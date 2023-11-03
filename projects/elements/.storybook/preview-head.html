@@ -470,23 +470,21 @@
     overflow-x: hidden !important;
   }
 
-  .dynamic-anchor {
-    & a {
-      opacity: 0;
-      margin-left: -24px;
-      padding-right: 8px;
-      cursor: pointer;
-    }
+  .dynamic-anchor a {
+    opacity: 0;
+    margin-left: -24px;
+    padding-right: 8px;
+    cursor: pointer;
+  }
 
-    mlv-icon {
-      cursor: pointer;
-      opacity: 1;
-    }
+  .dynamic-anchor mlv-icon {
+    cursor: pointer;
+    opacity: 1;
+  }
 
-    &:hover a,
-    &:hover mlv-icon {
-      opacity: 1;
-    }
+  .dynamic-anchor:hover a,
+  .dynamic-anchor:hover mlv-icon {
+    opacity: 1;
   }
 
   pre,
