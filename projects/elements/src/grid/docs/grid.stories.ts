@@ -27,101 +27,93 @@ export default {
 
 export const Default = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const MultiSelect = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      <nve-grid-column width="max-content" position="fixed">
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="max-content" position="fixed">
+      <nve-checkbox>
+        <input type="checkbox" aria-label="select all rows" />
+      </nve-checkbox>
+    </nve-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems().map((row, i) => html`
+    <nve-grid-row>
+      <nve-grid-cell>
         <nve-checkbox>
-          <input type="checkbox" aria-label="select all rows" />
+          <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
         </nve-checkbox>
-      </nve-grid-column>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems().map((row, i) => html`
-      <nve-grid-row>
-        <nve-grid-cell>
-          <nve-checkbox>
-            <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
-          </nve-checkbox>
-        </nve-grid-cell>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+      </nve-grid-cell>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const MultiSelectBulkActions = {
   render: () => html`
-<div>
-  <nve-grid style="--scroll-height: 402px">
-    <nve-grid-header>
-      <nve-grid-column width="max-content" position="fixed">
+<nve-grid style="--scroll-height: 402px">
+  <nve-grid-header>
+    <nve-grid-column width="max-content" position="fixed">
+      <nve-checkbox>
+        <input type="checkbox" aria-label="select all rows" />
+      </nve-checkbox>
+    </nve-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems(20).map((row, i) => html`
+    <nve-grid-row .selected=${i === 1}>
+      <nve-grid-cell>
         <nve-checkbox>
-          <input type="checkbox" aria-label="select all rows" />
+          <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
         </nve-checkbox>
-      </nve-grid-column>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems(20).map((row, i) => html`
-      <nve-grid-row .selected=${i === 1}>
-        <nve-grid-cell>
-          <nve-checkbox>
-            <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
-          </nve-checkbox>
-        </nve-grid-cell>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-    <nve-toolbar status="accent" slot="footer">
-      <nve-icon-button interaction="flat" icon-name="cancel" slot="prefix"></nve-icon-button>
-      <p nve-text="boxy">1 selected</p>
-      <nve-button interaction="flat-destructive" slot="suffix">delete</nve-button>
-      <nve-icon-button interaction="flat" icon-name="more-actions" slot="suffix"></nve-icon-button>
-    </nve-toolbar>
-  </nve-grid>
-</div>
+      </nve-grid-cell>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+  <nve-toolbar status="accent" slot="footer">
+    <nve-icon-button interaction="flat" icon-name="cancel" slot="prefix"></nve-icon-button>
+    <p nve-text="boxy">1 selected</p>
+    <nve-button interaction="flat-destructive" slot="suffix">delete</nve-button>
+    <nve-icon-button interaction="flat" icon-name="more-actions" slot="suffix"></nve-icon-button>
+  </nve-toolbar>
+</nve-grid>
   `
 };
 
 export const SingleSelect = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      <nve-grid-column width="max-content" position="fixed"></nve-grid-column>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems().map((row, i) => html`
-      <nve-grid-row>
-        <nve-grid-cell>
-          <nve-radio>
-            <input type="radio" ?checked=${i === 1} name="single-select" .value=${i} aria-label="select row ${i}" />
-          </nve-radio>
-        </nve-grid-cell>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="max-content" position="fixed"></nve-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems().map((row, i) => html`
+    <nve-grid-row>
+      <nve-grid-cell>
+        <nve-radio>
+          <input type="radio" ?checked=${i === 1} name="single-select" .value=${i} aria-label="select row ${i}" />
+        </nve-radio>
+      </nve-grid-cell>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
@@ -148,328 +140,300 @@ export const RowAction = {
 
 export const RowGroups = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      <nve-grid-column width="max-content" aria-label="expand groups" position="fixed"></nve-grid-column>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    <nve-grid-row>
-      <nve-grid-cell>
-        <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></nve-icon-button>
-      </nve-grid-cell>
-      <nve-grid-cell>Session: 2yuecae</nve-grid-cell>
-      <nve-grid-cell>upload</nve-grid-cell>
-      <nve-grid-cell>pending</nve-grid-cell>
-      <nve-grid-cell>p3</nve-grid-cell>
-      <nve-grid-cell>12/04/22</nve-grid-cell>
-    </nve-grid-row>
-    <nve-grid-row selected>
-      <nve-grid-cell>
-        <nve-icon-button icon-name="chevron" interaction="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></nve-icon-button>
-      </nve-grid-cell>
-      <nve-grid-cell>Session: mvwgh3t</nve-grid-cell>
-      <nve-grid-cell>upload</nve-grid-cell>
-      <nve-grid-cell>pending</nve-grid-cell>
-      <nve-grid-cell>p0</nve-grid-cell>
-      <nve-grid-cell>12/11/22</nve-grid-cell>
-    </nve-grid-row>
-    <nve-grid-row>
-      <nve-grid-cell></nve-grid-cell>
-      <nve-grid-cell>SSD: mvwgh3t</nve-grid-cell>
-      <nve-grid-cell>validating</nve-grid-cell>
-      <nve-grid-cell>pending</nve-grid-cell>
-      <nve-grid-cell>p0</nve-grid-cell>
-      <nve-grid-cell>12/11/22</nve-grid-cell>
-    </nve-grid-row>
-    <nve-grid-row>
-      <nve-grid-cell></nve-grid-cell>
-      <nve-grid-cell>SSD: qudbd8x</nve-grid-cell>
-      <nve-grid-cell>uploading</nve-grid-cell>
-      <nve-grid-cell>finished</nve-grid-cell>
-      <nve-grid-cell>p0</nve-grid-cell>
-      <nve-grid-cell>12/11/22</nve-grid-cell>
-    </nve-grid-row>
-    <nve-grid-row>
-      <nve-grid-cell></nve-grid-cell>
-      <nve-grid-cell>SSD: j8hvikt</nve-grid-cell>
-      <nve-grid-cell>queuing</nve-grid-cell>
-      <nve-grid-cell>running</nve-grid-cell>
-      <nve-grid-cell>p0</nve-grid-cell>
-      <nve-grid-cell>12/11/22</nve-grid-cell>
-    </nve-grid-row>
-    <nve-grid-row>
-      <nve-grid-cell>
-        <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></nve-icon-button>
-      </nve-grid-cell>
-      <nve-grid-cell>Session: bg5ujqp</nve-grid-cell>
-      <nve-grid-cell>upload</nve-grid-cell>
-      <nve-grid-cell>pending</nve-grid-cell>
-      <nve-grid-cell>p1</nve-grid-cell>
-      <nve-grid-cell>12/12/22</nve-grid-cell>
-    </nve-grid-row>
-    <nve-grid-row>
-      <nve-grid-cell>
-        <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></nve-icon-button>
-      </nve-grid-cell>
-      <nve-grid-cell>Session: 6ruehvh</nve-grid-cell>
-      <nve-grid-cell>upload</nve-grid-cell>
-      <nve-grid-cell>pending</nve-grid-cell>
-      <nve-grid-cell>p2</nve-grid-cell>
-      <nve-grid-cell>12/09/22</nve-grid-cell>
-    </nve-grid-row>
-  </nve-grid>
-</div>
-  `
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="max-content" aria-label="expand groups" position="fixed"></nve-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></nve-icon-button>
+    </nve-grid-cell>
+    <nve-grid-cell>Session: 2yuecae</nve-grid-cell>
+    <nve-grid-cell>upload</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p3</nve-grid-cell>
+    <nve-grid-cell>12/04/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row selected>
+    <nve-grid-cell>
+      <nve-icon-button icon-name="chevron" interaction="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></nve-icon-button>
+    </nve-grid-cell>
+    <nve-grid-cell>Session: mvwgh3t</nve-grid-cell>
+    <nve-grid-cell>upload</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p0</nve-grid-cell>
+    <nve-grid-cell>12/11/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell></nve-grid-cell>
+    <nve-grid-cell>SSD: mvwgh3t</nve-grid-cell>
+    <nve-grid-cell>validating</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p0</nve-grid-cell>
+    <nve-grid-cell>12/11/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell></nve-grid-cell>
+    <nve-grid-cell>SSD: qudbd8x</nve-grid-cell>
+    <nve-grid-cell>uploading</nve-grid-cell>
+    <nve-grid-cell>finished</nve-grid-cell>
+    <nve-grid-cell>p0</nve-grid-cell>
+    <nve-grid-cell>12/11/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell></nve-grid-cell>
+    <nve-grid-cell>SSD: j8hvikt</nve-grid-cell>
+    <nve-grid-cell>queuing</nve-grid-cell>
+    <nve-grid-cell>running</nve-grid-cell>
+    <nve-grid-cell>p0</nve-grid-cell>
+    <nve-grid-cell>12/11/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></nve-icon-button>
+    </nve-grid-cell>
+    <nve-grid-cell>Session: bg5ujqp</nve-grid-cell>
+    <nve-grid-cell>upload</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p1</nve-grid-cell>
+    <nve-grid-cell>12/12/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></nve-icon-button>
+    </nve-grid-cell>
+    <nve-grid-cell>Session: 6ruehvh</nve-grid-cell>
+    <nve-grid-cell>upload</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p2</nve-grid-cell>
+    <nve-grid-cell>12/09/22</nve-grid-cell>
+  </nve-grid-row>
+</nve-grid>
+`
 };
 
 export const Footer = {
-  render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems(8).map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-    <nve-grid-footer>
-      <p nve-text="body">footer content</p>
-    </nve-grid-footer>
-  </nve-grid>
-</div>
+render: () => html`
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems(8).map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+  <nve-grid-footer>
+    <p nve-text="body">footer content</p>
+  </nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const FooterScrollbar = {
   render: () => html`
-<div>
 <nve-grid style="--scroll-height: 402px">
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems(14).map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-    <nve-grid-footer>
-      <p nve-text="body">footer content</p>
-    </nve-grid-footer>
-  </nve-grid>
-</div>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems(14).map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+  <nve-grid-footer>
+    <p nve-text="body">footer content</p>
+  </nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const Pagination = {
   render: () => html`
-<div>
-  <nve-grid style="--scroll-height: 370px">
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-    <nve-grid-footer>
-      <nve-pagination value="1" items="100" step="10"></nve-pagination>
-    </nve-grid-footer>
-  </nve-grid>
-</div>
+<nve-grid style="--scroll-height: 370px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+  <nve-grid-footer>
+    <nve-pagination value="1" items="100" step="10"></nve-pagination>
+  </nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const Scroll = {
   render: () => html`
-<div>
-  <nve-grid style="--scroll-height: 402px">
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems(100).map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid style="--scroll-height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems(100).map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const ColumnAction = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`
-        <nve-grid-column>
-          ${column.label} <nve-icon-button id="column-${i}-btn" slot="actions"></nve-icon-button>
-        </nve-grid-column>`)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-  <nve-dropdown anchor="column-0-btn" arrow>
-    <nve-search rounded>
-      <input type="search" placeholder="search column" aria-label="search apps" />
-    </nve-search>
-    <nve-menu>
-      <nve-menu-item><nve-icon name="gear"></nve-icon> settings</nve-menu-item>
-      <nve-menu-item><nve-icon name="star"></nve-icon> favorites</nve-menu-item>
-    </nve-menu>
-  </nve-dropdown>
-</div>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`
+      <nve-grid-column>
+        ${column.label} <nve-icon-button id="column-${i}-btn" slot="actions"></nve-icon-button>
+      </nve-grid-column>`)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
+<nve-dropdown anchor="column-0-btn" arrow>
+  <nve-search rounded>
+    <input type="search" placeholder="search column" aria-label="search apps" />
+  </nve-search>
+  <nve-menu>
+    <nve-menu-item><nve-icon name="gear"></nve-icon> settings</nve-menu-item>
+    <nve-menu-item><nve-icon name="star"></nve-icon> favorites</nve-menu-item>
+  </nve-menu>
+</nve-dropdown>
   `
 };
 
 export const ColumnWidth = {
   render: () => html`
-<div>
-  <nve-grid style="--scroll-height: 402px">
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-    <nve-grid-footer>footer content</nve-grid-footer>
-  </nve-grid>
-</div>
+<nve-grid style="--scroll-height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+  <nve-grid-footer>footer content</nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const Content = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems(10).map((row, ir) => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell], ic) => html`<nve-grid-cell>${ir === 3 && ic === 2 ? `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores` : cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems(10).map((row, ir) => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell], ic) => html`<nve-grid-cell>${ir === 3 && ic === 2 ? `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores` : cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const ColumnFixed = {
   render: () => html`
-<div>
-  <nve-grid style="--scroll-height: 402px; max-width: 800px">
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid style="--scroll-height: 402px; max-width: 800px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const ColumnMultiFixed = {
   render: () => html`
-<div>
-  <nve-grid style="--scroll-height: 402px; max-width: 800px">
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column>`)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid style="--scroll-height: 402px; max-width: 800px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column>`)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const ColumnStackFixed = {
   render: () => html`
-<div>
-  <nve-grid style="--scroll-height: 402px; max-width: 800px">
-    <nve-grid-header>
-      <nve-grid-column position="fixed" width="100px">Column 1</nve-grid-column>
-      <nve-grid-column position="fixed" width="100px">Column 2</nve-grid-column>
-      <nve-grid-column width="200px">Column 3</nve-grid-column>
-      <nve-grid-column width="200px">Column 4</nve-grid-column>
-      <nve-grid-column width="200px">Column 5</nve-grid-column>
-      <nve-grid-column width="200px">Column 6</nve-grid-column>
-      <nve-grid-column position="fixed" width="100px">Column 7</nve-grid-column>
-      <nve-grid-column position="fixed" width="100px">Column 8</nve-grid-column>
-    </nve-grid-header>
-    ${grid(10, 8).rows.map(row => html`
-      <nve-grid-row>
-        ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid style="--scroll-height: 402px; max-width: 800px">
+  <nve-grid-header>
+    <nve-grid-column position="fixed" width="100px">Column 1</nve-grid-column>
+    <nve-grid-column position="fixed" width="100px">Column 2</nve-grid-column>
+    <nve-grid-column width="200px">Column 3</nve-grid-column>
+    <nve-grid-column width="200px">Column 4</nve-grid-column>
+    <nve-grid-column width="200px">Column 5</nve-grid-column>
+    <nve-grid-column width="200px">Column 6</nve-grid-column>
+    <nve-grid-column position="fixed" width="100px">Column 7</nve-grid-column>
+    <nve-grid-column position="fixed" width="100px">Column 8</nve-grid-column>
+  </nve-grid-header>
+  ${grid(10, 8).rows.map(row => html`
+    <nve-grid-row>
+      ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const ColumnAlignCenter = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="center">${column.label}</nve-grid-column>`)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="center">${column.label}</nve-grid-column>`)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const ColumnAlignEnd = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="end">${column.label}</nve-grid-column>`)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="end">${column.label}</nve-grid-column>`)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const ColumnAlignStart = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="start">${column.label}</nve-grid-column>`)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="start">${column.label}</nve-grid-column>`)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
@@ -519,28 +483,26 @@ export const DisplaySettings = {
 
 export const RowSort = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      <nve-grid-column>
-        None <nve-sort-button sort="none"></nve-sort-button>
-      </nve-grid-column>
-      <nve-grid-column>
-        Ascending <nve-sort-button sort="ascending"></nve-sort-button>
-      </nve-grid-column>
-      <nve-grid-column>
-        Descending <nve-sort-button sort="descending"></nve-sort-button>
-      </nve-grid-column>
-      <nve-grid-column>Default</nve-grid-column>
-      <nve-grid-column>Default</nve-grid-column>
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column>
+      None <nve-sort-button sort="none"></nve-sort-button>
+    </nve-grid-column>
+    <nve-grid-column>
+      Ascending <nve-sort-button sort="ascending"></nve-sort-button>
+    </nve-grid-column>
+    <nve-grid-column>
+      Descending <nve-sort-button sort="descending"></nve-sort-button>
+    </nve-grid-column>
+    <nve-grid-column>Default</nve-grid-column>
+    <nve-grid-column>Default</nve-grid-column>
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
@@ -594,11 +556,7 @@ class RowSortDemo extends LitElement {
 customElements.get('row-sort-demo') || customElements.define('row-sort-demo', RowSortDemo);
 
 export const RowSortInteractive = {
-  render: () => html`
-<div>
-  <row-sort-demo></row-sort-demo>
-</div>
-  `
+  render: () => html`<row-sort-demo></row-sort-demo>`
 };
 
 class InfiniteScrollDemo extends LitElement {
@@ -645,11 +603,7 @@ class InfiniteScrollDemo extends LitElement {
 customElements.get('infinite-scroll-demo') || customElements.define('infinite-scroll-demo', InfiniteScrollDemo);
 
 export const PerformanceInfiniteScroll = {
-  render: () => html`
-<div>
-  <infinite-scroll-demo></infinite-scroll-demo>
-</div>
-  `
+  render: () => html`<infinite-scroll-demo></infinite-scroll-demo>`
 };
 
 class GridPerformanceDemo extends LitElement {
@@ -697,11 +651,7 @@ class GridPerformanceDemo extends LitElement {
 customElements.get('grid-performance-demo') || customElements.define('grid-performance-demo', GridPerformanceDemo);
 
 export const Performance = {
-  render: () => html`
-<div>
-  <grid-performance-demo></grid-performance-demo>
-</div>
-  `
+  render: () => html`<grid-performance-demo></grid-performance-demo>`
 };
 
 class GridVirtualScrollDemo extends LitElement {
@@ -730,169 +680,152 @@ class GridVirtualScrollDemo extends LitElement {
 customElements.get('grid-virtual-scroll-demo') || customElements.define('grid-virtual-scroll-demo', GridVirtualScrollDemo);
 
 export const PerformanceVirtualScroll = {
-  render: () => html`
-<div>
-  <grid-virtual-scroll-demo></grid-virtual-scroll-demo>
-</div>
-  `
+  render: () => html`<grid-virtual-scroll-demo></grid-virtual-scroll-demo>`
 };
 
 export const Stripe = {
   render: () => html`
-<div>
-  <nve-grid stripe>
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
-      </nve-grid-row>
-    `)}
-  </nve-grid>
-</div>
+<nve-grid stripe>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const Card = {
   render: () => html`
-<div>
-  <nve-card>
-    <nve-card-header>
-      <h2 nve-text="heading sm bold">Data Grid</h2>
-      <h3 nve-text="body muted">Card Example</h3>
-      <nve-icon-button slot="header-action" icon-name="more-actions"></nve-icon-button>
-    </nve-card-header>
-    <nve-grid container="flat" style="--scroll-height: 325px">
-      <nve-grid-header>
-        ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-      </nve-grid-header>
-      ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
-      </nve-grid-row>
-      `)}
-    </nve-grid>
-  </nve-card>
-</div>
-  `
-};
-
-export const CardTabs = {
-  render: () => html`
-<div>
-  <nve-card>
-    <nve-card-header>
-      <h2 nve-text="heading sm bold">Data Grid</h2>
-      <nve-tabs>
-        <nve-tabs-item selected>tab 1</nve-tabs-item>
-        <nve-tabs-item>tab 2</nve-tabs-item>
-        <nve-tabs-item>tab 3</nve-tabs-item>
-      </nve-tabs>
-    </nve-card-header>
-    <nve-grid container="flat" style="--scroll-height: 325px">
-      <nve-grid-header>
-        ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-      </nve-grid-header>
-      ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
-      </nve-grid-row>
-      `)}
-    </nve-grid>
-  </nve-card>
-</div>
-  `
-};
-
-export const Placeholder = {
-  render: () => html`
-<div>
-  <nve-grid style="--scroll-height: 402px">
-    <nve-grid-header>
-      <nve-grid-column></nve-grid-column>
-    </nve-grid-header>
-    <nve-grid-placeholder>
-      Loading...
-    </nve-grid-placeholder>
-  </nve-grid>
-</div>
-  `
-};
-
-export const Full = {
-  render: () => html`
-<div>
-  <nve-grid container="full" style="--scroll-height: 402px">
+<nve-card>
+  <nve-card-header>
+    <h2 nve-text="heading sm bold">Data Grid</h2>
+    <h3 nve-text="body muted">Card Example</h3>
+    <nve-icon-button slot="header-action" icon-name="more-actions"></nve-icon-button>
+  </nve-card-header>
+  <nve-grid container="flat" style="--scroll-height: 325px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
     </nve-grid-header>
-    ${getItems(20).map(row => html`
+    ${getItems().map(row => html`
     <nve-grid-row>
       ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
     </nve-grid-row>
     `)}
   </nve-grid>
-</div>
+</nve-card>
+  `
+};
+
+export const CardTabs = {
+  render: () => html`
+<nve-card>
+  <nve-card-header>
+    <h2 nve-text="heading sm bold">Data Grid</h2>
+    <nve-tabs>
+      <nve-tabs-item selected>tab 1</nve-tabs-item>
+      <nve-tabs-item>tab 2</nve-tabs-item>
+      <nve-tabs-item>tab 3</nve-tabs-item>
+    </nve-tabs>
+  </nve-card-header>
+  <nve-grid container="flat" style="--scroll-height: 325px">
+    <nve-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    </nve-grid-header>
+    ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
+    `)}
+  </nve-grid>
+</nve-card>
+  `
+};
+
+export const Placeholder = {
+  render: () => html`
+<nve-grid style="--scroll-height: 402px">
+  <nve-grid-header>
+    <nve-grid-column></nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-placeholder>
+    Loading...
+  </nve-grid-placeholder>
+</nve-grid>
+  `
+};
+
+export const Full = {
+  render: () => html`
+<nve-grid container="full" style="--scroll-height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems(20).map(row => html`
+  <nve-grid-row>
+    ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+  </nve-grid-row>
+  `)}
+</nve-grid>
   `
 };
 
 export const Flat = {
   render: () => html`
-    <div>
-      <nve-grid container="flat" style="--scroll-height: 402px">
-        <nve-grid-header>
-          ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-        </nve-grid-header>
-        ${getItems(20).map(row => html`
-        <nve-grid-row>
-          ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
-        </nve-grid-row>
-        `)}
-      </nve-grid>
-    </div>`
+<nve-grid container="flat" style="--scroll-height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems(20).map(row => html`
+  <nve-grid-row>
+    ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+  </nve-grid-row>
+  `)}
+</nve-grid>
+  `
 };
 
 export const PanelDetail = {
   render: () => html`
-<div>
-  <div id="grid-detail-panel" nve-layout="row gap:md align:stretch">
-    <nve-grid>
-      <nve-grid-header>
-        ${grid(10, 3).columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-        <nve-grid-column width="max-content" aria-label="details"></nve-grid-column>
-      </nve-grid-header>
-      ${grid(10, 3).rows.map((row, i) => html`
-        <nve-grid-row ?selected=${i === 1}>
-          ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
-          <nve-grid-cell>
-            <nve-icon-button interaction="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
-          </nve-grid-cell>
-        </nve-grid-row>
-      `)}
-    </nve-grid>
-    <nve-panel expanded closable style="min-width: 280px">
-      <nve-panel-header>
-        <h2 slot="title">Row 2 Details</h2>
-      </nve-panel-header>
-      <nve-panel-content>
-        <div nve-layout="column gap:md">
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm muted">Task</label>
-            <p nve-text="eyebrow sm">Workflow</p>
-          </div>
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm muted">Status</label>
-            <nve-badge status="success">Complete</nve-badge>
-          </div>
-          <div nve-layout="column gap:xs">
-            <label nve-text="body sm muted">Priority</label>
-            <nve-badge status="pending">P1</nve-badge>
-          </div>
+<div id="grid-detail-panel" nve-layout="row gap:md align:stretch">
+  <nve-grid>
+    <nve-grid-header>
+      ${grid(10, 3).columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+      <nve-grid-column width="max-content" aria-label="details"></nve-grid-column>
+    </nve-grid-header>
+    ${grid(10, 3).rows.map((row, i) => html`
+      <nve-grid-row ?selected=${i === 1}>
+        ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
+        <nve-grid-cell>
+          <nve-icon-button interaction="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
+        </nve-grid-cell>
+      </nve-grid-row>
+    `)}
+  </nve-grid>
+  <nve-panel expanded closable style="min-width: 280px">
+    <nve-panel-header>
+      <h2 slot="title">Row 2 Details</h2>
+    </nve-panel-header>
+    <nve-panel-content>
+      <div nve-layout="column gap:md">
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Task</label>
+          <p nve-text="eyebrow sm">Workflow</p>
         </div>
-      </nve-panel-content>
-    </nve-panel>
-  </div>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Status</label>
+          <nve-badge status="success">Complete</nve-badge>
+        </div>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Priority</label>
+          <nve-badge status="pending">P1</nve-badge>
+        </div>
+      </div>
+    </nve-panel-content>
+  </nve-panel>
 </div>
   `
 };
@@ -1009,11 +942,7 @@ class GridPanelDemo extends LitElement {
 customElements.get('grid-panel-demo') || customElements.define('grid-panel-demo', GridPanelDemo);
 
 export const PanelDetailInteractive = {
-  render: () => html`
-<div>
-  <grid-panel-demo></grid-panel-demo>
-</div>
-  `
+  render: () => html`<grid-panel-demo></grid-panel-demo>`
 };
 
 class GridDynamicColumnDemo extends LitElement {
@@ -1051,11 +980,7 @@ class GridDynamicColumnDemo extends LitElement {
 customElements.get('grid-dynamic-column-demo') || customElements.define('grid-dynamic-column-demo', GridDynamicColumnDemo);
 
 export const ColumnDynamicFixed = {
-  render: () => html`
-<div>
-  <grid-dynamic-column-demo></grid-dynamic-column-demo>
-</div>
-  `
+  render: () => html`<grid-dynamic-column-demo></grid-dynamic-column-demo>`
 };
 
 export const All = {
@@ -1158,19 +1083,17 @@ export const All = {
 
 export const InvalidDOM = {
   render: () => html`
-<div>
-  <nve-grid>
-    <nve-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
-    </nve-grid-header>
-    <div>invalid</div>
-    ${getItems().map(row => html`
-      <nve-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
-      </nve-grid-row>
-    `)}
-    <span>invalid</span>
-  </nve-grid>
-</div>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  <div>invalid</div>
+  ${getItems().map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+  <span>invalid</span>
+</nve-grid>
   `
 };

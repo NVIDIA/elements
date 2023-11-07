@@ -22,6 +22,7 @@
     "test:watch": "wireit",
     "test:axe": "wireit",
     "test:coverage": "wireit",
+    "test:lighthouse": "wireit",
     "storybook": "wireit",
     "lint": "wireit",
     "demos": "wireit",
@@ -277,6 +278,7 @@
     "axe-core": "4.8.2",
     "chai": "4.3.10",
     "chart.js": "4.4.0",
+    "cssnano": "6.0.1",
     "emoji-picker-element": "1.18.4",
     "eslint": "8.52.0",
     "eslint-plugin-import": "2.29.0",
@@ -287,6 +289,7 @@
     "fflate": "0.8.1",
     "glob": "8.0.3",
     "globals": "13.23.0",
+    "lighthouse": "11.3.0",
     "lit-analyzer": "1.2.1",
     "playwright": "1.36.2",
     "postcss": "8.4.31",
@@ -301,7 +304,6 @@
     "rollup": "3.29.1",
     "rollup-plugin-minify-html-literals": "1.2.6",
     "showdown": "2.1.0",
-    "cssnano": "6.0.1",
     "storybook": "7.1.1",
     "style-dictionary": "3.8.0",
     "svgo": "3.0.2",
@@ -311,6 +313,7 @@
     "typescript": "5.2.2",
     "vite": "4.5.0",
     "vite-plugin-dts": "3.6.0",
+    "vite-plugin-virtual-html": "1.1.16",
     "vitest": "0.34.1",
     "wireit": "0.14.1"
   },
@@ -362,10 +365,11 @@
     },
     "build:vite": {
       "clean": false,
-      "command": "node_modules/vite/bin/vite.js build",
+      "command": "NODE_ENV=production node_modules/vite/bin/vite.js build",
       "files": [
         "public/**",
         "src/**",
+        "!src/test/lighthouse/**",
         "!src/**/*.stories.ts",
         "!src/**/*.stories.mdx",
         "!src/**/*.test.ts",
@@ -393,7 +397,10 @@
         "build:icons",
         "build:manifest",
         "build:style-dictionary"
-      ]
+      ],
+      "env": {
+        "WIREIT_LOGGER": "simple"
+      }
     },
     "build:importmap": {
       "command": "node ./build/importmap.mjs --outDir ./dist",
@@ -447,9 +454,11 @@
       "command": "node ./node_modules/@custom-elements-manifest/analyzer/cem.js analyze --config ./custom-elements-manifest.config.mjs --outdir ./dist/",
       "files": [
         "src/**",
+        "!src/test/**",
         "!src/**/*.stories.ts",
         "!src/**/*.stories.mdx",
         "!src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
         "custom-elements-manifest.config.mjs"
       ],
       "output": [
@@ -480,7 +489,8 @@
       ],
       "dependencies": [
         "build:manifest",
-        "test:coverage"
+        "test:coverage",
+        "test:lighthouse"
       ]
     },
     "build:metadata:fast": {
@@ -504,6 +514,7 @@
       "command": "PLAYWRIGHT_BROWSERS_PATH=.playwright node_modules/vitest/vitest.mjs run",
       "files": [
         "src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts",
@@ -513,6 +524,22 @@
       "dependencies": [
         "playwright",
         "build"
+      ]
+    },
+    "test:lighthouse": {
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || cd .lighthouse/ && NODE_ENV=production PLAYWRIGHT_BROWSERS_PATH=.playwright ../node_modules/vitest/vitest.mjs run --config=vitest.config.ts",
+      "files": [
+        ".lighthouse/**",
+        "!.lighthouse/dist/**",
+        "!.lighthouse/node_modules/**",
+        "src/**/*.test.lighthouse.ts"
+      ],
+      "output": [
+        ".lighthouse/dist"
+      ],
+      "dependencies": [
+        "build",
+        "playwright"
       ]
     },
     "test:axe": {
@@ -590,12 +617,13 @@
       ]
     },
     "lint:eslint": {
-      "command": "node_modules/eslint/bin/eslint.js -c ./eslint.config.js ./src",
+      "command": "node_modules/eslint/bin/eslint.js -c ./eslint.config.js",
       "files": [
         "build/eslint/*.cjs",
         "src/**/*.ts",
         "src/**/*.js",
-        "eslint.config.js"
+        "eslint.config.js",
+        "!./lighthouse/dist/**"
       ],
       "output": []
     },
