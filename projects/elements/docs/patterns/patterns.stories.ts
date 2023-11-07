@@ -1,5 +1,7 @@
 import { html } from 'lit';
 import '@elements/elements/badge/define.js';
+import '@elements/elements/button/define.js';
+import '@elements/elements/icon-button/define.js';
 import '@elements/elements/card/define.js';
 import '@elements/elements/tabs/define.js';
 import '@elements/elements/button/define.js';
@@ -274,6 +276,78 @@ export const LayoutHeaderPanelCards = {
   }
 }
 
+export const ButtonRowFilledIcon = {
+  render: () => html`
+  <div nve-layout="row gap:xs">
+    <nve-icon-button icon-name="double-chevron" direction="up"></nve-icon-button>
+    <nve-icon-button icon-name="chevron" direction="up"></nve-icon-button>
+    <nve-icon-button icon-name="chevron" direction="down"></nve-icon-button>
+    <nve-icon-button icon-name="double-chevron" direction="down"></nve-icon-button>
+  </div>
+  `
+};
+
+export const ButtonRowFlatIcon = {
+  render: () => html`
+  <div nve-layout="row gap:xxxs">
+    <nve-icon-button interaction="flat" icon-name="double-chevron" direction="up"></nve-icon-button>
+    <nve-icon-button interaction="flat" icon-name="chevron" direction="up"></nve-icon-button>
+    <nve-icon-button interaction="flat" icon-name="chevron" direction="down"></nve-icon-button>
+    <nve-icon-button interaction="flat" icon-name="double-chevron" direction="down"></nve-icon-button>
+  </div>
+  `
+};
+
+export const ButtonRowSmallFlatIcon = {
+  render: () => html`
+  <div nve-layout="row gap:xxxs">
+    <nve-icon-button interaction="flat" size="sm" icon-name="double-chevron" direction="up"></nve-icon-button>
+    <nve-icon-button interaction="flat" size="sm" icon-name="chevron" direction="up"></nve-icon-button>
+    <nve-icon-button interaction="flat" size="sm" icon-name="chevron" direction="down"></nve-icon-button>
+    <nve-icon-button interaction="flat" size="sm" icon-name="double-chevron" direction="down"></nve-icon-button>
+  </div>
+  `
+};
+
+export const ButtonRowFlatText = {
+  render: () => html`
+  <div nve-layout="row gap:xxxs">
+    <nve-button interaction="flat">Button CTA</nve-button>
+    <nve-button interaction="flat">Button CTA</nve-button>
+  </div>
+  `
+};
+
+export const ButtonRowFlatTextWithIcon = {
+  render: () => html`
+  <div nve-layout="row gap:xxxs">
+    <nve-button interaction="flat">
+      <nve-icon name="gear" style="--color: var(--nve-sys-text-muted-color)"></nve-icon>
+      Sync MB
+    </nve-button>
+    <nve-button interaction="flat">
+      <nve-icon name="undo" style="--color: var(--nve-sys-text-muted-color)"></nve-icon>
+      Revert Timestamps
+    </nve-button>
+    <nve-button interaction="flat">
+      <nve-icon name="add" style="--color: var(--nve-sys-text-muted-color)"></nve-icon>
+      Add Event
+    </nve-button>
+  </div>
+  `
+};
+
+export const ButtonRowFilledTextWithIcon = {
+  render: () => html`
+  <div nve-layout="row gap:xs">
+    <nve-button>Button CTA</nve-button>
+    <nve-button>Button CTA</nve-button>
+    <nve-button interaction="emphasize">Button CTA</nve-button>
+    <nve-icon-button icon-name="more-actions"></nve-icon-button>
+  </div>
+  `
+};
+
 export const Trend = {
   render: () => html`
   <div nve-layout="column gap:sm">
@@ -319,21 +393,21 @@ export const TrendBottomBadge = {
 
 export const ShortcutFilled = {
   render: () => html`
-    <div nve-text="keyboard-shortcut">CMD + C</div>
+    <div nve-text="code">CMD + C</div>
   `
 };
 
 export const ShortcutFlat = {
   render: () => html`
-    <div nve-text="keyboard-shortcut" style="background: none">CMD + C</div>
+    <div nve-text="code" style="background: none">CMD + C</div>
   `
 };
 
 export const ShortcutDropdown = {
   render: () => html`
-  <nve-button id="keyboard-shortcut-menu">dropdown</nve-button>
+  <nve-button id="code-menu">dropdown</nve-button>
 
-  <nve-dropdown anchor="keyboard-shortcut-menu" trigger="keyboard-shortcut-menu" hidden>
+  <nve-dropdown anchor="code-menu" trigger="code-menu" hidden>
     <nve-menu>
       <nve-menu-item>
         <nve-icon name="edit"></nve-icon> Edit
@@ -342,7 +416,7 @@ export const ShortcutDropdown = {
       <nve-menu-item>
         <nve-icon name="copy"></nve-icon> Copy
         
-        <div nve-text="keyboard-shortcut">CMD + C</div>
+        <div nve-text="code">CMD + C</div>
       </nve-menu-item>
 
       <nve-menu-item>
@@ -358,4 +432,4 @@ export const ShortcutDropdown = {
     dropdown.addEventListener('close', () => dropdown.hidden = true);
   </script>
   `
-};
+  };
