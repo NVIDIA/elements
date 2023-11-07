@@ -4,6 +4,7 @@ import { state } from 'lit/decorators/state.js';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import typography from '@elements/elements/css/module.typography.css?inline';
 import { Icon, IconName, ICON_NAMES } from '@elements/elements/icon';
+import { Size  as IconSize} from '@elements/elements/internal';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/card/define.js';
@@ -72,7 +73,7 @@ class IconDemo extends LitElement {
     <nve-card>
       <nve-card-content nve-layout="column gap:lg">
         <form @input=${this.#input} nve-layout="row gap:md align:vertical-center">
-          <nve-search style="--width: 308px">
+          <nve-search style="--width: 350px">
             <input type="search" @input=${e => this.iconSearchKey = e.target.value} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
           </nve-search>
           <nve-select style="--width: 90px">
@@ -98,10 +99,10 @@ class IconDemo extends LitElement {
 
         <div nve-layout="grid gap:md span-items:2">
           ${ICON_NAMES.filter((iconName) => iconName.includes(this.iconSearchKey)).map((iconName) => html`
-            <nve-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard.">
+            <nve-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." interaction="flat">
               <div nve-layout="column align:center gap:md">
-                <nve-icon ?outline=${this.values.outline} .size=${this.values.size} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></nve-icon>
-                <h3 nve-text="label sm">${iconName}</h3>
+                <nve-icon ?outline=${this.values.outline} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></nve-icon>
+                <h3 nve-text="label sm light muted">${iconName}</h3>
               </div>
             </nve-button>`
     )}
