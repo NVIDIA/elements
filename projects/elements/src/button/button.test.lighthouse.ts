@@ -1,0 +1,20 @@
+import { expect, test, describe } from 'vitest';
+import { runner } from 'elements-lighthouse';
+
+describe('button lighthouse report', () => {
+  test('button should meet lighthouse benchmarks', async () => {
+    const report = await runner.getReport('nve-button', /* html */`
+      <nve-button>button</nve-button>
+      <nve-button interaction="emphasize">button</nve-button>
+      <nve-button interaction="destructive">button</nve-button>
+      <script type="module">
+        import '@elements/elements/button/define.js';
+      </script>
+    `);
+
+    expect(report.scores.performance).toBe(100);
+    expect(report.scores.accessibility).toBe(87);
+    expect(report.scores.bestPractices).toBe(100);
+    expect(report.payload.javascript.kb).toBeLessThan(10.5);
+  });
+});

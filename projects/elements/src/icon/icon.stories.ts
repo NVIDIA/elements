@@ -264,7 +264,7 @@ class IconPerformanceDemo extends LitElement {
 
   @state() private show = false;
 
-  @state() private icons = Array(this.#multiplier).fill('').map(() => html`<nve-icon name="user"></nve-icon>`)
+  @state() private icons = Array(this.#multiplier).fill('').map(() => html`<nve-icon name="person"></nve-icon>`)
 
   render() {
     return html`

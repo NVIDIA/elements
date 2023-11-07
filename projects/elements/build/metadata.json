@@ -1,5 +1,5 @@
 {
-  "created": "2023-11-09T18:24:53.466Z",
+  "created": "2023-12-01T15:09:36.202Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -108,6 +108,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-accordion",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 20.054,
+            "requests": {
+              "index.js": {
+                "kb": 19.454,
+                "name": "index.js"
+              },
+              "caret.svg.js": {
+                "kb": 0.6,
+                "name": "caret.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 1,
         "instanceTotal": 1,
@@ -117,52 +144,52 @@
         {
           "id": "Default",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion>\n  <nve-accordion-header>\n    <div slot=\"title\">Heading</div>\n  </nve-accordion-header>\n\n  <nve-accordion-content>\n    Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n  </nve-accordion-content>\n</nve-accordion>\n"
+          "template": "<div>\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</div>\n"
         },
         {
           "id": "Full",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion behavior-expand>\n  <nve-accordion-header>\n    <div slot=\"title\">Heading</div>\n  </nve-accordion-header>\n\n  <nve-accordion-content>\n    Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n  </nve-accordion-content>\n</nve-accordion>\n"
+          "template": "<div>\n  <nve-accordion behavior-expand>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</div>\n"
         },
         {
           "id": "Disabled",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion behavior-expand disabled>\n  <nve-accordion-header>\n    <div slot=\"title\">Heading</div>\n  </nve-accordion-header>\n\n  <nve-accordion-content>\n    Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n  </nve-accordion-content>\n</nve-accordion>\n"
+          "template": "<div>\n  <nve-accordion behavior-expand disabled>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</div>\n"
         },
         {
           "id": "Inset",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion behavior-expand container=\"inset\">\n  <nve-accordion-header>\n    <div slot=\"title\">Heading</div>\n    <div slot=\"subtitle\">Subheading</div>\n  </nve-accordion-header>\n\n  <nve-accordion-content>\n    Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n  </nve-accordion-content>\n</nve-accordion>\n"
+          "template": "<div>\n  <nve-accordion behavior-expand container=\"inset\">\n    <nve-accordion-header>\n      <div slot=\"title\">Heading</div>\n      <div slot=\"subtitle\">Subheading</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</div>\n"
         },
         {
           "id": "Flat",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion behavior-expand container=\"flat\">\n  <nve-accordion-header>\n    <div slot=\"title\">Heading</div>\n    <div slot=\"subtitle\">Subheading</div>\n  </nve-accordion-header>\n\n  <nve-accordion-content>\n    Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n  </nve-accordion-content>\n</nve-accordion>\n"
+          "template": "<div>\n  <nve-accordion behavior-expand container=\"flat\">\n    <nve-accordion-header>\n      <div slot=\"title\">Heading</div>\n      <div slot=\"subtitle\">Subheading</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</div>\n"
         },
         {
           "id": "WithActions",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion behavior-expand>\n  <nve-accordion-header>\n    <div slot=\"title\">Heading</div>\n\n    <nve-icon-button interaction=\"flat\" icon-name=\"add\" size=\"sm\" slot=\"actions\"></nve-icon-button>\n    <nve-icon-button interaction=\"flat\" icon-name=\"delete\" size=\"sm\" slot=\"actions\"></nve-icon-button>\n  </nve-accordion-header>\n\n  <nve-accordion-content>\n    Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n  </nve-accordion-content>\n</nve-accordion>\n"
+          "template": "<div>\n  <nve-accordion behavior-expand>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading</div>\n\n      <nve-icon-button interaction=\"flat\" icon-name=\"add\" size=\"sm\" slot=\"actions\"></nve-icon-button>\n      <nve-icon-button interaction=\"flat\" icon-name=\"delete\" size=\"sm\" slot=\"actions\"></nve-icon-button>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</div>\n"
         },
         {
           "id": "AccordionGroupFull",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion-group behavior-expand>\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 1</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 2</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 3</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</nve-accordion-group>\n"
+          "template": "<div>\n  <nve-accordion-group behavior-expand>\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 1</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 2</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 3</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n  </nve-accordion-group>\n</div>\n"
         },
         {
           "id": "AccordionGroupInset",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion-group container=\"inset\" behavior-expand>\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 1</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 2</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 3</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</nve-accordion-group>\n"
+          "template": "<div>\n  <nve-accordion-group container=\"inset\" behavior-expand>\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 1</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 2</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 3</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n  </nve-accordion-group>\n</div>\n"
         },
         {
           "id": "AccordionGroupFlat",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion-group container=\"flat\" behavior-expand>\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 1</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 2</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 3</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</nve-accordion-group>\n"
+          "template": "<div>\n  <nve-accordion-group container=\"flat\" behavior-expand>\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 1</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 2</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 3</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n  </nve-accordion-group>\n</div>\n"
         },
         {
           "id": "AccordionGroupExpandSingle",
           "file": "accordion.stories.ts",
-          "template": "<nve-accordion-group behavior-expand-single>\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 1</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 2</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n\n  <nve-accordion>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading 3</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</nve-accordion-group>\n"
+          "template": "<div>\n  <nve-accordion-group behavior-expand-single>\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 1</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 2</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n\n    <nve-accordion>\n      <nve-accordion-header>\n        <div slot=\"title\">Heading 3</div>\n      </nve-accordion-header>\n\n      <nve-accordion-content>\n        Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n      </nve-accordion-content>\n    </nve-accordion>\n  </nve-accordion-group>\n</div>\n"
         }
       ],
       "behavior": "container",
@@ -195,6 +222,33 @@
             "name": "--padding"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-accordion",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 20.054,
+            "requests": {
+              "index.js": {
+                "kb": 19.454,
+                "name": "index.js"
+              },
+              "caret.svg.js": {
+                "kb": 0.6,
+                "name": "caret.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 1,
@@ -264,6 +318,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-accordion",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 20.054,
+            "requests": {
+              "index.js": {
+                "kb": 19.454,
+                "name": "index.js"
+              },
+              "caret.svg.js": {
+                "kb": 0.6,
+                "name": "caret.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
@@ -303,6 +384,33 @@
             "name": "actions"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-accordion",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 20.054,
+            "requests": {
+              "index.js": {
+                "kb": 19.454,
+                "name": "index.js"
+              },
+              "caret.svg.js": {
+                "kb": 0.6,
+                "name": "caret.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 1,
@@ -418,9 +526,36 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-alert",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 20.199,
+            "requests": {
+              "index.js": {
+                "kb": 19.409,
+                "name": "index.js"
+              },
+              "information-circle-stroke.svg.js": {
+                "kb": 0.79,
+                "name": "information-circle-stroke.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 7,
-        "instanceTotal": 15,
+        "projectTotal": 6,
+        "instanceTotal": 11,
         "coverageTotal": 100
       },
       "stories": [
@@ -505,6 +640,37 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-alert-banner",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 21.029,
+            "requests": {
+              "index.js": {
+                "kb": 19.411,
+                "name": "index.js"
+              },
+              "information-circle-stroke.svg.js": {
+                "kb": 0.79,
+                "name": "information-circle-stroke.svg.js"
+              },
+              "cancel.svg.js": {
+                "kb": 0.828,
+                "name": "cancel.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 2,
         "instanceTotal": 2,
@@ -588,9 +754,36 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-alert-group",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 20.201,
+            "requests": {
+              "index.js": {
+                "kb": 19.411,
+                "name": "index.js"
+              },
+              "information-circle-stroke.svg.js": {
+                "kb": 0.79,
+                "name": "information-circle-stroke.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 3,
-        "instanceTotal": 5,
+        "projectTotal": 4,
+        "instanceTotal": 6,
         "coverageTotal": 100
       },
       "stories": [
@@ -674,6 +867,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-app-header",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 20.185,
+            "requests": {
+              "index.js": {
+                "kb": 19.412,
+                "name": "index.js"
+              },
+              "person.svg.js": {
+                "kb": 0.773,
+                "name": "person.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 2,
         "instanceTotal": 2,
@@ -688,17 +908,17 @@
         {
           "id": "AppBadge",
           "file": "app-header.stories.ts",
-          "template": "<nve-app-header>\n  <nve-logo color=\"yellow-nova\">Ab</nve-logo>\n  <h2 slot=\"title\">My App Title</h2>\n  <nve-button slot=\"nav-items\" selected>Link 1</nve-button>\n  <nve-button slot=\"nav-items\">Link 2</nve-button>\n  <nve-icon-button icon-name=\"chat-bubble\" slot=\"nav-actions\"></nve-icon-button>\n  <nve-icon-button icon-name=\"search\" slot=\"nav-actions\"></nve-icon-button>\n  <nve-icon-button icon-name=\"switch-apps\" slot=\"nav-actions\"></nve-icon-button>\n  <nve-icon-button interaction=\"emphasize\" slot=\"nav-actions\" size=\"sm\">EL</nve-icon-button>\n</nve-app-header>\n"
+          "template": "<div>\n  <nve-app-header>\n    <nve-logo color=\"yellow-nova\">Ab</nve-logo>\n    <h2 slot=\"title\">My App Title</h2>\n    <nve-button slot=\"nav-items\" selected>Link 1</nve-button>\n    <nve-button slot=\"nav-items\">Link 2</nve-button>\n    <nve-icon-button icon-name=\"chat-bubble\" slot=\"nav-actions\"></nve-icon-button>\n    <nve-icon-button icon-name=\"search\" slot=\"nav-actions\"></nve-icon-button>\n    <nve-icon-button icon-name=\"switch-apps\" slot=\"nav-actions\"></nve-icon-button>\n    <nve-icon-button interaction=\"emphasize\" slot=\"nav-actions\" size=\"sm\">EL</nve-icon-button>\n  </nve-app-header>\n</div>\n"
         },
         {
           "id": "NavItems",
           "file": "app-header.stories.ts",
-          "template": "<nve-app-header>\n  <nve-logo></nve-logo>\n  <h2 slot=\"title\">Nav Items</h2>\n  <nve-button slot=\"nav-items\">Link 1</nve-button>\n  <nve-button slot=\"nav-items\" selected>Link 2</nve-button>\n  <nve-icon-button icon-name=\"more-actions\" slot=\"nav-items\"></nve-icon-button>\n</nve-app-header>\n"
+          "template": "<div>\n  <nve-app-header>\n    <nve-logo></nve-logo>\n    <h2 slot=\"title\">Nav Items</h2>\n    <nve-button slot=\"nav-items\">Link 1</nve-button>\n    <nve-button slot=\"nav-items\" selected>Link 2</nve-button>\n    <nve-icon-button icon-name=\"more-actions\" slot=\"nav-items\"></nve-icon-button>\n  </nve-app-header>\n</div>\n"
         },
         {
           "id": "NavActions",
           "file": "app-header.stories.ts",
-          "template": "<nve-app-header>\n  <nve-logo></nve-logo>\n  <h2 slot=\"title\">Nav Actions</h2>\n  <nve-icon-button icon-name=\"chat-bubble\" slot=\"nav-actions\"></nve-icon-button>\n  <nve-icon-button icon-name=\"search\" slot=\"nav-actions\"></nve-icon-button>\n  <nve-icon-button icon-name=\"switch-apps\" slot=\"nav-actions\"></nve-icon-button>\n  <nve-icon-button interaction=\"emphasize\" slot=\"nav-actions\" size=\"sm\">EL</nve-icon-button>\n</nve-app-header>\n"
+          "template": "<div>\n  <nve-app-header>\n    <nve-logo></nve-logo>\n    <h2 slot=\"title\">Nav Actions</h2>\n    <nve-icon-button icon-name=\"chat-bubble\" slot=\"nav-actions\"></nve-icon-button>\n    <nve-icon-button icon-name=\"search\" slot=\"nav-actions\"></nve-icon-button>\n    <nve-icon-button icon-name=\"switch-apps\" slot=\"nav-actions\"></nve-icon-button>\n    <nve-icon-button interaction=\"emphasize\" slot=\"nav-actions\" size=\"sm\">EL</nve-icon-button>\n  </nve-app-header>\n</div>\n"
         },
         {
           "id": "LightTheme",
@@ -812,6 +1032,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-badge",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 17.347,
+            "requests": {
+              "index.js": {
+                "kb": 16.557,
+                "name": "index.js"
+              },
+              "information-circle-stroke.svg.js": {
+                "kb": 0.79,
+                "name": "information-circle-stroke.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 4,
         "instanceTotal": 8,
@@ -906,6 +1153,33 @@
             "name": "--item-active-font-weight"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-breadcrumb",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 17.11,
+            "requests": {
+              "index.js": {
+                "kb": 16.446,
+                "name": "index.js"
+              },
+              "chevron.svg.js": {
+                "kb": 0.664,
+                "name": "chevron.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 3,
@@ -1015,7 +1289,7 @@
           {
             "name": "interaction",
             "type": {
-              "text": "'emphasize' | 'destructive' | 'flat' | 'flat-emphasize' | 'flat-destructive' | 'inverse'"
+              "text": "'flat' | 'emphasize' | 'destructive' | 'flat-emphasize' | 'flat-destructive' | 'inverse'"
             },
             "description": "Determines the interaction type of an element.",
             "fieldName": "interaction"
@@ -1174,9 +1448,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-button",
+        "scores": {
+          "performance": 100,
+          "accessibility": 87,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 10.155,
+            "requests": {
+              "index.js": {
+                "kb": 10.155,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 14,
-        "instanceTotal": 83,
+        "projectTotal": 15,
+        "instanceTotal": 82,
         "coverageTotal": 100
       },
       "stories": [
@@ -1339,6 +1636,29 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-button-group",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 9.94,
+            "requests": {
+              "index.js": {
+                "kb": 9.94,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
@@ -1464,6 +1784,29 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-card",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 8.445,
+            "requests": {
+              "index.js": {
+                "kb": 8.445,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 6,
         "instanceTotal": 10,
@@ -1473,22 +1816,22 @@
         {
           "id": "Default",
           "file": "card.stories.ts",
-          "template": "      <nve-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>\n        ${when(\n          args.showHeader,\n          () => html\n          <nve-card-header>\n            <div slot=\"title\">Title</div>\n            <div slot=\"subtitle\">Sub Title</div>\n\n\n            ${when(\n              args.showAction,\n              () => html\n                <nve-icon-button slot=\"header-action\" icon-name=\"more-actions\" interaction=\"flat\"></nve-icon-button>\n              )}\n          </nve-card-header>\n          \n        )}\n\n        <nve-card-content>\n          ${args.content}\n        </nve-card-content>\n\n        ${when(\n          args.showFooter,\n          () => html\n            <nve-card-footer>\n              <nve-button style=\"margin-left: auto\">Action</nve-button>\n            </nve-card-footer>\n          \n        )}\n      </nve-card>"
+          "template": "<div>\n      <nve-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>\n        ${when(\n          args.showHeader,\n          () => html\n          <nve-card-header>\n            <div slot=\"title\">Title</div>\n            <div slot=\"subtitle\">Sub Title</div>\n\n\n            ${when(\n              args.showAction,\n              () => html\n                <nve-icon-button slot=\"header-action\" icon-name=\"more-actions\" interaction=\"flat\"></nve-icon-button>\n              )}\n          </nve-card-header>\n          \n        )}\n\n        <nve-card-content>\n          ${args.content}\n        </nve-card-content>\n\n        ${when(\n          args.showFooter,\n          () => html\n            <nve-card-footer>\n              <nve-button style=\"margin-left: auto\">Action</nve-button>\n            </nve-card-footer>\n          \n        )}\n      </nve-card>\n    </div>"
         },
         {
           "id": "CardWithContentLayout",
           "file": "card.stories.ts",
-          "template": "<nve-card style=\"width: 400px; height: 300px\">\n  <nve-card-content nve-layout=\"row align:space-around\">\n    <div>Item 1</div>\n    <div>Item 2</div>\n    <div>Item 3</div>\n  </nve-card-content>\n</nve-card>\n"
+          "template": "<div>\n  <nve-card style=\"width: 400px; height: 300px\">\n    <nve-card-content nve-layout=\"row align:space-around\">\n      <div>Item 1</div>\n      <div>Item 2</div>\n      <div>Item 3</div>\n    </nve-card-content>\n  </nve-card>\n</div>\n"
         },
         {
           "id": "MediaCard",
           "file": "card.stories.ts",
-          "template": "<nve-card style=\"height: 100%; width: 100%\">\n  <img\n    src=\"images/test-image-3.webp\"\n    alt=\"example visualization for media card demo\"\n    loading=\"lazy\"\n    style=\"width: 100%; height: 100%; object-fit: cover\"\n  />\n  <nve-card-content>\n    <p>card content</p>\n  </nve-card-content>\n</nve-card>\n<nve-card style=\"height: 100%; width: 100%\">\n  <img\n    src=\"images/test-image-2.webp\"\n    alt=\"example visualization for media card demo\"\n    loading=\"lazy\"\n    style=\"width: 100%; height: 100%; object-fit: cover\"\n  />\n  <nve-card-content>\n    <p>card content</p>\n  </nve-card-content>\n</nve-card>\n"
+          "template": "<div nve-layout=\"grid gap:md span-items:6 align:stretch\" style=\"height: 380px\">\n  <nve-card style=\"height: 100%; width: 100%\">\n    <img\n      src=\"images/test-image-3.webp\"\n      alt=\"example visualization for media card demo\"\n      loading=\"lazy\"\n      style=\"width: 100%; height: 100%; object-fit: cover\"\n    />\n    <nve-card-content>\n      <p>card content</p>\n    </nve-card-content>\n  </nve-card>\n  <nve-card style=\"height: 100%; width: 100%\">\n    <img\n      src=\"images/test-image-2.webp\"\n      alt=\"example visualization for media card demo\"\n      loading=\"lazy\"\n      style=\"width: 100%; height: 100%; object-fit: cover\"\n    />\n    <nve-card-content>\n      <p>card content</p>\n    </nve-card-content>\n  </nve-card>\n</div>\n"
         },
         {
           "id": "CardWithMultipleContentsAndDivider",
           "file": "card.stories.ts",
-          "template": "<nve-card style=\"width: 400px; height: 300px\">\n  <nve-card-content nve-layout=\"row align:space-around\">\n    <div>Item 1</div>\n    <div>Item 2</div>\n    <div>Item 3</div>\n  </nve-card-content>\n\n  <hr style=\"width: 100%\" />\n\n  <nve-card-content nve-layout=\"row align:center gap:md\">\n    <div>Item 1</div>\n    <div>Item 2</div>\n    <div>Item 3</div>\n  </nve-card-content>\n</nve-card>\n"
+          "template": "<div>\n  <nve-card style=\"width: 400px; height: 300px\">\n    <nve-card-content nve-layout=\"row align:space-around\">\n      <div>Item 1</div>\n      <div>Item 2</div>\n      <div>Item 3</div>\n    </nve-card-content>\n\n    <hr style=\"width: 100%\" />\n\n    <nve-card-content nve-layout=\"row align:center gap:md\">\n      <div>Item 1</div>\n      <div>Item 2</div>\n      <div>Item 3</div>\n    </nve-card-content>\n  </nve-card>\n</div>\n"
         },
         {
           "id": "CardWithHeader",
@@ -1505,17 +1848,22 @@
         {
           "id": "DescriptionList",
           "file": "card.stories.ts",
-          "template": "<nve-card style=\"width: 650px\">\n  <nve-card-header>\n    <h2 slot=\"title\">Nautical Terms</h2>\n  </nve-card-header>\n  <nve-card-content>\n    <dl nve-layout=\"grid gap:lg\">\n      <dt nve-layout=\"span:4\" nve-text=\"body muted medium\">Knot</dt>\n      <dd nve-layout=\"span:8\" nve-text=\"body\">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>\n\n      <dt nve-layout=\"span:4\" nve-text=\"body muted medium\">Port</dt>\n      <dd nve-layout=\"span:8\" nve-text=\"body\">\n        Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the\n        bow (the front of the vessel).\n      </dd>\n\n      <dt nve-layout=\"span:4\" nve-text=\"body muted medium\">Starboard</dt>\n      <dd nve-layout=\"span:8\" nve-text=\"body\">\n        Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing\n        towards the bow (the front of the vessel).\n      </dd>\n    </dl>\n  </nve-card-content>\n</nve-card>\n"
+          "template": "<div>\n  <nve-card style=\"width: 650px\">\n    <nve-card-header>\n      <h2 slot=\"title\">Nautical Terms</h2>\n    </nve-card-header>\n    <nve-card-content>\n      <dl nve-layout=\"grid gap:lg\">\n        <dt nve-layout=\"span:4\" nve-text=\"body muted medium\">Knot</dt>\n        <dd nve-layout=\"span:8\" nve-text=\"body\">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>\n\n        <dt nve-layout=\"span:4\" nve-text=\"body muted medium\">Port</dt>\n        <dd nve-layout=\"span:8\" nve-text=\"body\">\n          Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the\n          bow (the front of the vessel).\n        </dd>\n\n        <dt nve-layout=\"span:4\" nve-text=\"body muted medium\">Starboard</dt>\n        <dd nve-layout=\"span:8\" nve-text=\"body\">\n          Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing\n          towards the bow (the front of the vessel).\n        </dd>\n      </dl>\n    </nve-card-content>\n  </nve-card>\n</div>\n"
         },
         {
           "id": "Tabs",
           "file": "card.stories.ts",
-          "template": "<nve-card style=\"width: 400px; height: 200px\">\n  <nve-card-header>\n    <div slot=\"title\">Title</div>\n    <nve-tabs>\n      <nve-tabs-item selected>tab 1</nve-tabs-item>\n      <nve-tabs-item>tab 2</nve-tabs-item>\n      <nve-tabs-item>tab 3</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-header>\n\n  <nve-card-content> Card Content </nve-card-content>\n</nve-card>\n"
+          "template": "<div>\n  <nve-card style=\"width: 400px; height: 200px\">\n    <nve-card-header>\n      <div slot=\"title\">Title</div>\n      <nve-tabs>\n        <nve-tabs-item selected>tab 1</nve-tabs-item>\n        <nve-tabs-item>tab 2</nve-tabs-item>\n        <nve-tabs-item>tab 3</nve-tabs-item>\n      </nve-tabs>\n    </nve-card-header>\n\n    <nve-card-content> Card Content </nve-card-content>\n  </nve-card>\n</div>\n"
         },
         {
           "id": "ContainerFill",
           "file": "card.stories.ts",
-          "template": "<nve-card container=\"full\">\n  <nve-card-content> Container Fill </nve-card-content>\n</nve-card>\n"
+          "template": "<div>\n  <nve-card container=\"full\">\n    <nve-card-content> Container Fill </nve-card-content>\n  </nve-card>\n</div>\n"
+        },
+        {
+          "id": "ContainerFlat",
+          "file": "card.stories.ts",
+          "template": "<div>\n  <nve-card container=\"flat\">\n    <nve-card-content> Container Flat </nve-card-content>\n  </nve-card>\n</div>\n"
         },
         {
           "id": "LightTheme",
@@ -1559,6 +1907,29 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-card",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 8.445,
+            "requests": {
+              "index.js": {
+                "kb": 8.445,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 6,
         "instanceTotal": 10,
@@ -1595,6 +1966,29 @@
             "name": "--padding"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-card",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 8.445,
+            "requests": {
+              "index.js": {
+                "kb": 8.445,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 2,
@@ -1650,6 +2044,29 @@
             "name": "--line-height"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-card",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 8.445,
+            "requests": {
+              "index.js": {
+                "kb": 8.445,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 4,
@@ -1787,6 +2204,29 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-checkbox",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.328,
+            "requests": {
+              "index.js": {
+                "kb": 24.328,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 9,
         "instanceTotal": 17,
@@ -1862,6 +2302,29 @@
             }
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-checkbox",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.328,
+            "requests": {
+              "index.js": {
+                "kb": 24.328,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 5,
@@ -1987,6 +2450,33 @@
             }
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-color",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 25.767,
+            "requests": {
+              "index.js": {
+                "kb": 24.697,
+                "name": "index.js"
+              },
+              "dropper.svg.js": {
+                "kb": 1.07,
+                "name": "dropper.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 0,
@@ -2191,10 +2681,37 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-combobox",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 40.678,
+            "requests": {
+              "index.js": {
+                "kb": 39.888,
+                "name": "index.js"
+              },
+              "information-circle-stroke.svg.js": {
+                "kb": 0.79,
+                "name": "information-circle-stroke.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 1,
-        "instanceTotal": 1,
-        "coverageTotal": 97.46000000000001
+        "projectTotal": 2,
+        "instanceTotal": 4,
+        "coverageTotal": 98.55
       },
       "stories": [
         {
@@ -2226,6 +2743,11 @@
           "id": "MultiSelect",
           "file": "combobox.stories.ts",
           "template": "<nve-combobox>\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option selected value=\"status\"></option>\n    <option selected value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </select>\n  <nve-control-message>message</nve-control-message>\n</nve-combobox>\n"
+        },
+        {
+          "id": "Label",
+          "file": "combobox.stories.ts",
+          "template": "<nve-combobox>\n  <label>label</label>\n  <input type=\"search\" />\n  <select>\n    <option value=\"status\">Status</option>\n    <option value=\"priority\">Priority</option>\n    <option value=\"date\">Date</option>\n    <option value=\"session\">Session</option>\n    <option value=\"configuration\">Configuration</option>\n    <option value=\"contains\">Contains</option>\n  </select>\n  <nve-control-message>message</nve-control-message>\n</nve-combobox>\n"
         },
         {
           "id": "Overflow",
@@ -2375,9 +2897,10 @@
           }
         ]
       },
+      "lighthouse": {},
       "tests": {
-        "projectTotal": 7,
-        "instanceTotal": 15,
+        "projectTotal": 8,
+        "instanceTotal": 11,
         "coverageTotal": 96.85249999999999
       },
       "stories": [],
@@ -2433,6 +2956,7 @@
           }
         ]
       },
+      "lighthouse": {},
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
@@ -2505,9 +3029,10 @@
           }
         ]
       },
+      "lighthouse": {},
       "tests": {
-        "projectTotal": 4,
-        "instanceTotal": 10,
+        "projectTotal": 5,
+        "instanceTotal": 6,
         "coverageTotal": 100
       },
       "stories": [],
@@ -2630,9 +3155,36 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-date",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 25.389,
+            "requests": {
+              "index.js": {
+                "kb": 24.479,
+                "name": "index.js"
+              },
+              "calendar.svg.js": {
+                "kb": 0.91,
+                "name": "calendar.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 4,
-        "instanceTotal": 5,
+        "projectTotal": 5,
+        "instanceTotal": 6,
         "coverageTotal": 100
       },
       "stories": [
@@ -2791,9 +3343,36 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-datetime",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 25.392,
+            "requests": {
+              "index.js": {
+                "kb": 24.482,
+                "name": "index.js"
+              },
+              "calendar.svg.js": {
+                "kb": 0.91,
+                "name": "calendar.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 0,
-        "instanceTotal": 0,
+        "projectTotal": 1,
+        "instanceTotal": 1,
         "coverageTotal": 100
       },
       "stories": [
@@ -3015,6 +3594,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-dialog",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 29.942,
+            "requests": {
+              "index.js": {
+                "kb": 29.114,
+                "name": "index.js"
+              },
+              "cancel.svg.js": {
+                "kb": 0.828,
+                "name": "cancel.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 6,
         "instanceTotal": 12,
@@ -3098,6 +3704,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-dialog",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 29.942,
+            "requests": {
+              "index.js": {
+                "kb": 29.114,
+                "name": "index.js"
+              },
+              "cancel.svg.js": {
+                "kb": 0.828,
+                "name": "cancel.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 3,
         "instanceTotal": 4,
@@ -3129,6 +3762,33 @@
             "name": ""
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-dialog",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 29.942,
+            "requests": {
+              "index.js": {
+                "kb": 29.114,
+                "name": "index.js"
+              },
+              "cancel.svg.js": {
+                "kb": 0.828,
+                "name": "cancel.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 6,
@@ -3184,9 +3844,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-divider",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 8.012,
+            "requests": {
+              "index.js": {
+                "kb": 8.012,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 4,
-        "instanceTotal": 13,
+        "projectTotal": 3,
+        "instanceTotal": 8,
         "coverageTotal": 100
       },
       "stories": [
@@ -3308,6 +3991,29 @@
             "name": "--padding"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-dot",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 8.635,
+            "requests": {
+              "index.js": {
+                "kb": 8.635,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 1,
@@ -3558,6 +4264,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-drawer",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 30.2,
+            "requests": {
+              "index.js": {
+                "kb": 29.372,
+                "name": "index.js"
+              },
+              "cancel.svg.js": {
+                "kb": 0.828,
+                "name": "cancel.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
@@ -3636,6 +4369,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-drawer",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 30.2,
+            "requests": {
+              "index.js": {
+                "kb": 29.372,
+                "name": "index.js"
+              },
+              "cancel.svg.js": {
+                "kb": 0.828,
+                "name": "cancel.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
@@ -3668,6 +4428,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-drawer",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 30.2,
+            "requests": {
+              "index.js": {
+                "kb": 29.372,
+                "name": "index.js"
+              },
+              "cancel.svg.js": {
+                "kb": 0.828,
+                "name": "cancel.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
@@ -3699,6 +4486,33 @@
             "name": ""
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-drawer",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 30.2,
+            "requests": {
+              "index.js": {
+                "kb": 29.372,
+                "name": "index.js"
+              },
+              "cancel.svg.js": {
+                "kb": 0.828,
+                "name": "cancel.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 0,
@@ -3891,9 +4705,36 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-dropdown",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 29.93,
+            "requests": {
+              "index.js": {
+                "kb": 29.102,
+                "name": "index.js"
+              },
+              "cancel.svg.js": {
+                "kb": 0.828,
+                "name": "cancel.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 8,
-        "instanceTotal": 23,
+        "instanceTotal": 19,
         "coverageTotal": 100
       },
       "stories": [
@@ -4080,9 +4921,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-file",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.183,
+            "requests": {
+              "index.js": {
+                "kb": 24.183,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 0,
-        "instanceTotal": 0,
+        "projectTotal": 1,
+        "instanceTotal": 1,
         "coverageTotal": 100
       },
       "stories": [
@@ -4183,9 +5047,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-grid",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 21.902,
+            "requests": {
+              "index.js": {
+                "kb": 21.902,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 4,
-        "instanceTotal": 10,
+        "projectTotal": 5,
+        "instanceTotal": 12,
         "coverageTotal": 100
       },
       "stories": [
@@ -4202,7 +5089,7 @@
         {
           "id": "MultiSelectBulkActions",
           "file": "grid.stories.ts",
-          "template": "  <nve-grid style=\"--scroll-height: 402px\">\n    <nve-grid-header>\n      <nve-grid-column width=\"max-content\" position=\"fixed\">\n        <nve-checkbox>\n          <input type=\"checkbox\" aria-label=\"select all rows\" />\n        </nve-checkbox>\n      </nve-grid-column>\n      ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n    </nve-grid-header>\n    ${getItems(20).map((row, i) => html\n      <nve-grid-row .selected=${i === 1}>\n        <nve-grid-cell>\n          <nve-checkbox>\n            <input type=\"checkbox\" ?checked=${i === 1} aria-label=\"select row ${i}\" />\n          </nve-checkbox>\n        </nve-grid-cell>\n        ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n      </nve-grid-row>\n    )}\n    <nve-toolbar status=\"accent\" slot=\"footer\">\n      <nve-icon-button interaction=\"flat\" icon-name=\"cancel\" slot=\"prefix\"></nve-icon-button>\n      <p nve-text=\"boxy\">1 selected</p>\n      <nve-button interaction=\"flat-destructive\" slot=\"suffix\">delete</nve-button>\n      <nve-icon-button interaction=\"flat\" icon-name=\"more-actions\" slot=\"suffix\"></nve-icon-button>\n    </nve-toolbar>\n  </nve-grid>"
+          "template": "<nve-grid style=\"--scroll-height: 402px\">\n  <nve-grid-header>\n    <nve-grid-column width=\"max-content\" position=\"fixed\">\n      <nve-checkbox>\n        <input type=\"checkbox\" aria-label=\"select all rows\" />\n      </nve-checkbox>\n    </nve-grid-column>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems(20).map((row, i) => html\n    <nve-grid-row .selected=${i === 1}>\n      <nve-grid-cell>\n        <nve-checkbox>\n          <input type=\"checkbox\" ?checked=${i === 1} aria-label=\"select row ${i}\" />\n        </nve-checkbox>\n      </nve-grid-cell>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n    </nve-grid-row>\n  )}\n  <nve-toolbar status=\"accent\" slot=\"footer\">\n    <nve-icon-button interaction=\"flat\" icon-name=\"cancel\" slot=\"prefix\"></nve-icon-button>\n    <p nve-text=\"boxy\">1 selected</p>\n    <nve-button interaction=\"flat-destructive\" slot=\"suffix\">delete</nve-button>\n    <nve-icon-button interaction=\"flat\" icon-name=\"more-actions\" slot=\"suffix\"></nve-icon-button>\n  </nve-toolbar>\n</nve-grid>"
         },
         {
           "id": "SingleSelect",
@@ -4212,7 +5099,7 @@
         {
           "id": "RowAction",
           "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n    <nve-grid-column width=\"max-content\" aria-label=\"additonal actions\" position=\"fixed\"></nve-grid-column>\n  </nve-grid-header>\n  ${getItems().map((row, i) => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n    <nve-grid-cell>\n      <nve-icon-button interaction=\"flat\" icon-name=\"more-actions\" aria-label=\"row ${i} actions\"></nve-icon-button>\n    </nve-grid-cell>\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
+          "template": "<div>\n  <nve-grid>\n    <nve-grid-header>\n      ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n      <nve-grid-column width=\"max-content\" aria-label=\"additonal actions\" position=\"fixed\"></nve-grid-column>\n    </nve-grid-header>\n    ${getItems().map((row, i) => html\n    <nve-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n      <nve-grid-cell>\n        <nve-icon-button interaction=\"flat\" icon-name=\"more-actions\" aria-label=\"row ${i} actions\"></nve-icon-button>\n      </nve-grid-cell>\n    </nve-grid-row>\n    )}\n  </nve-grid>\n</div>\n"
         },
         {
           "id": "RowGroups",
@@ -4257,12 +5144,12 @@
         {
           "id": "ColumnFixed",
           "file": "grid.stories.ts",
-          "template": "  <nve-grid style=\"--scroll-height: 402px; max-width: 800px\">\n    <nve-grid-header>\n      ${Object.entries(getItems()[0]).map(([, column], i) => html<nve-grid-column position=${i === 0 ? 'fixed' : ''} width=\"200px\">${column.label}</nve-grid-column> )}\n    </nve-grid-header>\n    ${getItems().map(row => html\n      <nve-grid-row>\n        ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n      </nve-grid-row>\n    )}\n  </nve-grid>"
+          "template": "<nve-grid style=\"--scroll-height: 402px; max-width: 800px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column], i) => html<nve-grid-column position=${i === 0 ? 'fixed' : ''} width=\"200px\">${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems().map(row => html\n    <nve-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n    </nve-grid-row>\n  )}\n</nve-grid>"
         },
         {
           "id": "ColumnMultiFixed",
           "file": "grid.stories.ts",
-          "template": "  <nve-grid style=\"--scroll-height: 402px; max-width: 800px\">\n    <nve-grid-header>\n      ${Object.entries(getItems()[0]).map(([, column], i) => html<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width=\"200px\">${column.label}</nve-grid-column>)}\n    </nve-grid-header>\n    ${getItems().map(row => html\n      <nve-grid-row>\n        ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n      </nve-grid-row>\n    )}\n  </nve-grid>"
+          "template": "<nve-grid style=\"--scroll-height: 402px; max-width: 800px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column], i) => html<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width=\"200px\">${column.label}</nve-grid-column>)}\n  </nve-grid-header>\n  ${getItems().map(row => html\n    <nve-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n    </nve-grid-row>\n  )}\n</nve-grid>"
         },
         {
           "id": "ColumnStackFixed",
@@ -4287,7 +5174,7 @@
         {
           "id": "DisplaySettings",
           "file": "grid.stories.ts",
-          "template": "<nve-dropdown closable anchor=\"column-settings\">\n  <nve-checkbox-group style=\"width: 175px\">\n    <label>Columns</label>\n    <nve-checkbox>\n      <label>Column 1</label>\n      <input type=\"checkbox\" checked />\n    </nve-checkbox>\n    <nve-checkbox>\n      <label>Column 2</label>\n      <input type=\"checkbox\" checked />\n    </nve-checkbox>\n    <nve-checkbox>\n      <label>Column 3</label>\n      <input type=\"checkbox\" checked />\n    </nve-checkbox>\n    <nve-checkbox>\n      <label>Column 4</label>\n      <input type=\"checkbox\" checked />\n    </nve-checkbox>\n  </nve-checkbox-group>\n  <nve-divider></nve-divider>\n  <nve-button interaction=\"flat-destructive\" style=\"--height: initial\">restore settings</nve-button>\n</nve-dropdown>\n<div nve-layout=\"row gap:sm align:vertical-center\">\n  <p nve-text=\"body muted\">1,145 results found</p>\n  <nve-button id=\"column-settings\">Display Settings</nve-button>\n</div>\n<nve-grid nve-layout=\"grow\">\n  <nve-grid-header>\n    ${grid(8, 4).columns.map(column => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${grid(8, 4).rows.map(row => html\n  <nve-grid-row> ${row.cells.map(cell => html<nve-grid-cell>${cell.label}</nve-grid-cell> )} </nve-grid-row>\n  )}\n</nve-grid>\n"
+          "template": "<div nve-layout=\"column gap:md grow\">\n  <nve-dropdown closable anchor=\"column-settings\">\n    <nve-checkbox-group style=\"width: 175px\">\n      <label>Columns</label>\n      <nve-checkbox>\n        <label>Column 1</label>\n        <input type=\"checkbox\" checked />\n      </nve-checkbox>\n      <nve-checkbox>\n        <label>Column 2</label>\n        <input type=\"checkbox\" checked />\n      </nve-checkbox>\n      <nve-checkbox>\n        <label>Column 3</label>\n        <input type=\"checkbox\" checked />\n      </nve-checkbox>\n      <nve-checkbox>\n        <label>Column 4</label>\n        <input type=\"checkbox\" checked />\n      </nve-checkbox>\n    </nve-checkbox-group>\n    <nve-divider></nve-divider>\n    <nve-button interaction=\"flat-destructive\" style=\"--height: initial\">restore settings</nve-button>\n  </nve-dropdown>\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <p nve-text=\"body muted\">1,145 results found</p>\n    <nve-button id=\"column-settings\">Display Settings</nve-button>\n  </div>\n  <nve-grid nve-layout=\"grow\">\n    <nve-grid-header>\n      ${grid(8, 4).columns.map(column => html<nve-grid-column>${column.label}</nve-grid-column> )}\n    </nve-grid-header>\n    ${grid(8, 4).rows.map(row => html\n    <nve-grid-row> ${row.cells.map(cell => html<nve-grid-cell>${cell.label}</nve-grid-cell> )} </nve-grid-row>\n    )}\n  </nve-grid>\n</div>\n"
         },
         {
           "id": "RowSort",
@@ -4347,12 +5234,12 @@
         {
           "id": "PanelDetail",
           "file": "grid.stories.ts",
-          "template": "  <div id=\"grid-detail-panel\" nve-layout=\"row gap:md align:stretch\">\n    <nve-grid>\n      <nve-grid-header>\n        ${grid(10, 3).columns.map(column => html<nve-grid-column>${column.label}</nve-grid-column> )}\n        <nve-grid-column width=\"max-content\" aria-label=\"details\"></nve-grid-column>\n      </nve-grid-header>\n      ${grid(10, 3).rows.map((row, i) => html\n        <nve-grid-row ?selected=${i === 1}>\n          ${row.cells.map(cell => html<nve-grid-cell>${cell.label}</nve-grid-cell> )}\n          <nve-grid-cell>\n            <nve-icon-button interaction=\"flat\" icon-name=\"more-actions\" value=${row.id} aria-label=\"view ${row.id}\"></nve-icon-button>\n          </nve-grid-cell>\n        </nve-grid-row>\n      )}\n    </nve-grid>\n    <nve-panel expanded closable style=\"min-width: 280px\">\n      <nve-panel-header>\n        <h2 slot=\"title\">Row 2 Details</h2>\n      </nve-panel-header>\n      <nve-panel-content>\n        <div nve-layout=\"column gap:md\">\n          <div nve-layout=\"column gap:xs\">\n            <label nve-text=\"body sm muted\">Task</label>\n            <p nve-text=\"eyebrow sm\">Workflow</p>\n          </div>\n          <div nve-layout=\"column gap:xs\">\n            <label nve-text=\"body sm muted\">Status</label>\n            <nve-badge status=\"success\">Complete</nve-badge>\n          </div>\n          <div nve-layout=\"column gap:xs\">\n            <label nve-text=\"body sm muted\">Priority</label>\n            <nve-badge status=\"pending\">P1</nve-badge>\n          </div>\n        </div>\n      </nve-panel-content>\n    </nve-panel>\n  </div>"
+          "template": "<div id=\"grid-detail-panel\" nve-layout=\"row gap:md align:stretch\">\n  <nve-grid>\n    <nve-grid-header>\n      ${grid(10, 3).columns.map(column => html<nve-grid-column>${column.label}</nve-grid-column> )}\n      <nve-grid-column width=\"max-content\" aria-label=\"details\"></nve-grid-column>\n    </nve-grid-header>\n    ${grid(10, 3).rows.map((row, i) => html\n      <nve-grid-row ?selected=${i === 1}>\n        ${row.cells.map(cell => html<nve-grid-cell>${cell.label}</nve-grid-cell> )}\n        <nve-grid-cell>\n          <nve-icon-button interaction=\"flat\" icon-name=\"more-actions\" value=${row.id} aria-label=\"view ${row.id}\"></nve-icon-button>\n        </nve-grid-cell>\n      </nve-grid-row>\n    )}\n  </nve-grid>\n  <nve-panel expanded closable style=\"min-width: 280px\">\n    <nve-panel-header>\n      <h2 slot=\"title\">Row 2 Details</h2>\n    </nve-panel-header>\n    <nve-panel-content>\n      <div nve-layout=\"column gap:md\">\n        <div nve-layout=\"column gap:xs\">\n          <label nve-text=\"body sm muted\">Task</label>\n          <p nve-text=\"eyebrow sm\">Workflow</p>\n        </div>\n        <div nve-layout=\"column gap:xs\">\n          <label nve-text=\"body sm muted\">Status</label>\n          <nve-badge status=\"success\">Complete</nve-badge>\n        </div>\n        <div nve-layout=\"column gap:xs\">\n          <label nve-text=\"body sm muted\">Priority</label>\n          <nve-badge status=\"pending\">P1</nve-badge>\n        </div>\n      </div>\n    </nve-panel-content>\n  </nve-panel>\n</div>"
         },
         {
           "id": "PanelGrid",
           "file": "grid.stories.ts",
-          "template": "      nve-panel#panel-grid {\n        min-width: 380px;\n        z-index: 99;\n        height: 100vh;\n        position: sticky;\n        top: 0;\n        right: 0;\n      }\n\n      .sb-story nve-panel#panel-grid {\n        height: 700px;\n      }\n\n      body {\n        padding: 0 !important;\n      }\n    </style>\n    <main nve-theme=\"root\" nve-layout=\"row gap:sm full\">\n      <section nve-layout=\"column gap:md full align:stretch\">\n        page content\n      </section>\n      <nve-panel expanded id=\"panel-grid\">\n        <nve-panel-header>\n          <h2 slot=\"title\">Recording</h2>\n        </nve-panel-header>\n        <nve-grid container=\"flat\" stripe style=\"--scroll-height: 100vh\">\n          <nve-grid-header hidden>\n            <nve-grid-column>Key</nve-grid-column>\n            <nve-grid-column>Value</nve-grid-column>\n          </nve-grid-header>\n          <nve-grid-row>\n            <nve-grid-cell><p nve-text=\"label muted\">Session ID</p></nve-grid-cell>\n            <nve-grid-cell><p nve-text=\"label\">123456</p></nve-grid-cell>\n          </nve-grid-row>\n          <nve-grid-row>\n            <nve-grid-cell><p nve-text=\"label muted\">Record Date</p></nve-grid-cell>\n            <nve-grid-cell><p nve-text=\"label\">2023-09-04 11:00</p></nve-grid-cell>\n          </nve-grid-row>\n          <nve-grid-row>\n            <nve-grid-cell><p nve-text=\"label muted\">Tag</p></nve-grid-cell>\n            <nve-grid-cell><nve-tag readonly>Production</nve-tag></nve-grid-cell>\n          </nve-grid-row>\n          <nve-grid-row>\n            <nve-grid-cell><p nve-text=\"label muted\">Route ID</p></nve-grid-cell>\n            <nve-grid-cell><p nve-text=\"label\">9876123</p></nve-grid-cell>\n          </nve-grid-row>\n          <nve-grid-row>\n            <nve-grid-cell><p nve-text=\"label muted\">Configuration</p></nve-grid-cell>\n            <nve-grid-cell><p nve-text=\"label\">prod-0.1.0</p></nve-grid-cell>\n          </nve-grid-row>\n          <nve-grid-row>\n            <nve-grid-cell><p nve-text=\"label muted\">Duration</p></nve-grid-cell>\n            <nve-grid-cell><p nve-text=\"label\">1:23:34</p></nve-grid-cell>\n          </nve-grid-row>\n          <nve-grid-row>\n            <nve-grid-cell><p nve-text=\"label muted\">Description</p></nve-grid-cell>\n            <nve-grid-cell><p nve-text=\"label\">local test run</p></nve-grid-cell>\n          </nve-grid-row>\n          <nve-grid-row>\n            <nve-grid-cell><p nve-text=\"label muted\">Number of Sensors</p></nve-grid-cell>\n            <nve-grid-cell><p nve-text=\"label\">24</p></nve-grid-cell>\n          </nve-grid-row>\n        </nve-grid>\n      </nve-panel>"
+          "template": "<style>\n  nve-panel#panel-grid {\n    min-width: 380px;\n    z-index: 99;\n    height: 100vh;\n    position: sticky;\n    top: 0;\n    right: 0;\n  }\n\n  .sb-story nve-panel#panel-grid {\n    height: 700px;\n  }\n\n  body {\n    padding: 0 !important;\n  }\n</style>\n<main nve-layout=\"row gap:sm full\">\n  <section nve-layout=\"column gap:md full align:stretch\">page content</section>\n  <nve-panel expanded id=\"panel-grid\">\n    <nve-panel-header>\n      <h2 slot=\"title\">Recording</h2>\n    </nve-panel-header>\n    <nve-grid container=\"flat\" stripe style=\"--scroll-height: 100vh\">\n      <nve-grid-header hidden>\n        <nve-grid-column>Key</nve-grid-column>\n        <nve-grid-column>Value</nve-grid-column>\n      </nve-grid-header>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Session ID</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">123456</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Record Date</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">2023-09-04 11:00</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Tag</p></nve-grid-cell>\n        <nve-grid-cell><nve-tag readonly>Production</nve-tag></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Route ID</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">9876123</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Configuration</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">prod-0.1.0</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Duration</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">1:23:34</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Description</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">local test run</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Number of Sensors</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">24</p></nve-grid-cell>\n      </nve-grid-row>\n    </nve-grid>\n  </nve-panel>\n</main>\n"
         },
         {
           "id": "PanelDetailInteractive",
@@ -4433,9 +5320,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-grid",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 21.902,
+            "requests": {
+              "index.js": {
+                "kb": 21.902,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 4,
-        "instanceTotal": 9,
+        "projectTotal": 5,
+        "instanceTotal": 10,
         "coverageTotal": 100
       },
       "stories": [],
@@ -4545,9 +5455,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-grid",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 21.902,
+            "requests": {
+              "index.js": {
+                "kb": 21.902,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 4,
-        "instanceTotal": 7,
+        "projectTotal": 5,
+        "instanceTotal": 8,
         "coverageTotal": 97.54749999999999
       },
       "stories": [],
@@ -4590,6 +5523,29 @@
             "name": "--height"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-grid",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 21.902,
+            "requests": {
+              "index.js": {
+                "kb": 21.902,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 3,
@@ -4634,9 +5590,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-grid",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 21.902,
+            "requests": {
+              "index.js": {
+                "kb": 21.902,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 4,
-        "instanceTotal": 7,
+        "projectTotal": 5,
+        "instanceTotal": 8,
         "coverageTotal": 95.34
       },
       "stories": [],
@@ -4673,6 +5652,29 @@
             "name": "--padding"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-grid",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 21.902,
+            "requests": {
+              "index.js": {
+                "kb": 21.902,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 1,
@@ -4729,9 +5731,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-grid",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 21.902,
+            "requests": {
+              "index.js": {
+                "kb": 21.902,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 4,
-        "instanceTotal": 10,
+        "projectTotal": 5,
+        "instanceTotal": 12,
         "coverageTotal": 100
       },
       "stories": [],
@@ -4818,9 +5843,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-icon",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 14.421,
+            "requests": {
+              "index.js": {
+                "kb": 14.421,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 16,
-        "instanceTotal": 79,
+        "instanceTotal": 75,
         "coverageTotal": 92.8675
       },
       "stories": [
@@ -5002,7 +6050,7 @@
           {
             "name": "interaction",
             "type": {
-              "text": "'emphasize' | 'destructive' | 'flat' | 'flat-emphasize' | 'flat-destructive' | 'inverse'"
+              "text": "'flat' | 'emphasize' | 'destructive' | 'flat-emphasize' | 'flat-destructive' | 'inverse'"
             },
             "description": "Determines the interaction type of an element.",
             "fieldName": "interaction",
@@ -5145,9 +6193,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-icon-button",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 17.324,
+            "requests": {
+              "index.js": {
+                "kb": 17.324,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 13,
-        "instanceTotal": 49,
+        "instanceTotal": 45,
         "coverageTotal": 100
       },
       "stories": [
@@ -5380,9 +6451,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-input",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.766,
+            "requests": {
+              "index.js": {
+                "kb": 24.766,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 10,
-        "instanceTotal": 23,
+        "projectTotal": 11,
+        "instanceTotal": 20,
         "coverageTotal": 100
       },
       "stories": [
@@ -5448,6 +6542,29 @@
             }
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-input",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.766,
+            "requests": {
+              "index.js": {
+                "kb": 24.766,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 0,
@@ -5525,6 +6642,7 @@
           }
         ]
       },
+      "lighthouse": {},
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
@@ -5626,6 +6744,29 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-logo",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 9.153,
+            "requests": {
+              "index.js": {
+                "kb": 9.153,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 3,
         "instanceTotal": 8,
@@ -5702,9 +6843,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-menu",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 11.244,
+            "requests": {
+              "index.js": {
+                "kb": 11.244,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 3,
-        "instanceTotal": 13,
+        "projectTotal": 2,
+        "instanceTotal": 8,
         "coverageTotal": 100
       },
       "stories": [
@@ -5756,7 +6920,7 @@
         {
           "id": "VerticalNavigationPanel",
           "file": "menu.stories.ts",
-          "template": "<nve-card>\n  <nve-card-header>\n    <div slot=\"title\">Header</div>\n  </nve-card-header>\n  <nve-card-content>\n    <p nve-text=\"body\">Content</p>\n  </nve-card-content>\n</nve-card>\n<nve-panel side=\"right\" expanded closable style=\"max-width: 280px; height: 500px\">\n  <nve-panel-header>\n    <h3 slot=\"title\">Applications</h3>\n  </nve-panel-header>\n  <nve-panel-content>\n    <nve-menu>\n      <nve-menu-item>item 1</nve-menu-item>\n      <nve-menu-item current=\"page\">item 2</nve-menu-item>\n      <nve-menu-item>item 3</nve-menu-item>\n      <nve-menu-item>item 4</nve-menu-item>\n    </nve-menu>\n  </nve-panel-content>\n</nve-panel>\n"
+          "template": "<div nve-layout=\"row gap:md align:stretch\">\n  <nve-card>\n    <nve-card-header>\n      <div slot=\"title\">Header</div>\n    </nve-card-header>\n    <nve-card-content>\n      <p nve-text=\"body\">Content</p>\n    </nve-card-content>\n  </nve-card>\n  <nve-panel side=\"right\" expanded closable style=\"max-width: 280px; height: 500px\">\n    <nve-panel-header>\n      <h3 slot=\"title\">Applications</h3>\n    </nve-panel-header>\n    <nve-panel-content>\n      <nve-menu>\n        <nve-menu-item>item 1</nve-menu-item>\n        <nve-menu-item current=\"page\">item 2</nve-menu-item>\n        <nve-menu-item>item 3</nve-menu-item>\n        <nve-menu-item>item 4</nve-menu-item>\n      </nve-menu>\n    </nve-panel-content>\n  </nve-panel>\n</div>\n"
         }
       ],
       "behavior": "navigation",
@@ -5965,9 +7129,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-menu",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 11.244,
+            "requests": {
+              "index.js": {
+                "kb": 11.244,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 3,
-        "instanceTotal": 12,
+        "projectTotal": 2,
+        "instanceTotal": 7,
         "coverageTotal": 100
       },
       "stories": [],
@@ -6089,6 +7276,33 @@
             }
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-month",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 25.389,
+            "requests": {
+              "index.js": {
+                "kb": 24.479,
+                "name": "index.js"
+              },
+              "calendar.svg.js": {
+                "kb": 0.91,
+                "name": "calendar.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 0,
@@ -6318,9 +7532,36 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-notification",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 30.288,
+            "requests": {
+              "index.js": {
+                "kb": 29.498,
+                "name": "index.js"
+              },
+              "information-circle-stroke.svg.js": {
+                "kb": 0.79,
+                "name": "information-circle-stroke.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 5,
-        "instanceTotal": 27,
+        "projectTotal": 7,
+        "instanceTotal": 23,
         "coverageTotal": 96.25250000000001
       },
       "stories": [
@@ -6427,9 +7668,36 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-notification",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 30.288,
+            "requests": {
+              "index.js": {
+                "kb": 29.498,
+                "name": "index.js"
+              },
+              "information-circle-stroke.svg.js": {
+                "kb": 0.79,
+                "name": "information-circle-stroke.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 2,
-        "instanceTotal": 4,
+        "instanceTotal": 3,
         "coverageTotal": 100
       },
       "stories": [],
@@ -6464,6 +7732,29 @@
             "name": "--gap"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-page-loader",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.074,
+            "requests": {
+              "index.js": {
+                "kb": 24.074,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 0,
@@ -6643,6 +7934,41 @@
             "name": "--background"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-pagination",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 42.475,
+            "requests": {
+              "index.js": {
+                "kb": 40.545,
+                "name": "index.js"
+              },
+              "caret.svg.js": {
+                "kb": 0.6,
+                "name": "caret.svg.js"
+              },
+              "check.svg.js": {
+                "kb": 0.666,
+                "name": "check.svg.js"
+              },
+              "chevron.svg.js": {
+                "kb": 0.664,
+                "name": "chevron.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 2,
@@ -6825,6 +8151,7 @@
           }
         ]
       },
+      "lighthouse": {},
       "tests": {
         "projectTotal": 1,
         "instanceTotal": 2,
@@ -6916,6 +8243,7 @@
           }
         ]
       },
+      "lighthouse": {},
       "tests": {
         "projectTotal": 1,
         "instanceTotal": 2,
@@ -6959,6 +8287,7 @@
           }
         ]
       },
+      "lighthouse": {},
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
@@ -7007,6 +8336,7 @@
           }
         ]
       },
+      "lighthouse": {},
       "tests": {
         "projectTotal": 1,
         "instanceTotal": 2,
@@ -7132,9 +8462,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-password",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.617,
+            "requests": {
+              "index.js": {
+                "kb": 24.617,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 1,
-        "instanceTotal": 1,
+        "projectTotal": 2,
+        "instanceTotal": 2,
         "coverageTotal": 100
       },
       "stories": [
@@ -7204,6 +8557,29 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-progress-bar",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 8.547,
+            "requests": {
+              "index.js": {
+                "kb": 8.547,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 1,
         "instanceTotal": 2,
@@ -7219,6 +8595,11 @@
           "id": "Max",
           "file": "progress-bar.stories.ts",
           "template": "<div nve-layout=\"column gap:md pad:lg\">\n  <nve-progress-bar status=\"accent\" value=\"25\" max=\"50\"></nve-progress-bar>\n\n  <nve-progress-bar status=\"accent\" value=\"45\" max=\"50\"></nve-progress-bar>\n</div>\n"
+        },
+        {
+          "id": "Labeled",
+          "file": "progress-bar.stories.ts",
+          "template": "<div nve-layout=\"column gap:md pad:lg align:horizontal-stretch\">\n  <div nve-layout=\"row align:space-between\">\n    <p nve-text=\"label muted sm\">Upload Status</p>\n    <p nve-text=\"label emphasis sm\">80%</p>\n  </div>\n\n  <nve-progress-bar status=\"accent\" value=\"80\"></nve-progress-bar>\n</div>\n"
         }
       ],
       "behavior": "content",
@@ -7329,9 +8710,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-progress-ring",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 16.068,
+            "requests": {
+              "index.js": {
+                "kb": 16.068,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 1,
-        "instanceTotal": 1,
+        "projectTotal": 2,
+        "instanceTotal": 3,
         "coverageTotal": 100
       },
       "stories": [
@@ -7442,6 +8846,41 @@
             "name": "--background"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-progressive-filter-chip",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 42.611,
+            "requests": {
+              "index.js": {
+                "kb": 40.435,
+                "name": "index.js"
+              },
+              "caret.svg.js": {
+                "kb": 0.6,
+                "name": "caret.svg.js"
+              },
+              "check.svg.js": {
+                "kb": 0.666,
+                "name": "check.svg.js"
+              },
+              "calendar.svg.js": {
+                "kb": 0.91,
+                "name": "calendar.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 1,
@@ -7610,6 +9049,29 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-radio",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.244,
+            "requests": {
+              "index.js": {
+                "kb": 24.244,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 4,
         "instanceTotal": 5,
@@ -7654,6 +9116,29 @@
             }
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-radio",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.244,
+            "requests": {
+              "index.js": {
+                "kb": 24.244,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 4,
@@ -7779,6 +9264,29 @@
             }
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-range",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.449,
+            "requests": {
+              "index.js": {
+                "kb": 24.449,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 2,
@@ -7956,9 +9464,36 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-search",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 25.263,
+            "requests": {
+              "index.js": {
+                "kb": 24.558,
+                "name": "index.js"
+              },
+              "search.svg.js": {
+                "kb": 0.705,
+                "name": "search.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 6,
-        "instanceTotal": 8,
+        "projectTotal": 7,
+        "instanceTotal": 10,
         "coverageTotal": 100
       },
       "stories": [
@@ -8139,9 +9674,40 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-select",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 40.287,
+            "requests": {
+              "index.js": {
+                "kb": 39.021,
+                "name": "index.js"
+              },
+              "caret.svg.js": {
+                "kb": 0.6,
+                "name": "caret.svg.js"
+              },
+              "check.svg.js": {
+                "kb": 0.666,
+                "name": "check.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 5,
-        "instanceTotal": 14,
+        "projectTotal": 6,
+        "instanceTotal": 10,
         "coverageTotal": 97.5
       },
       "stories": [
@@ -8425,6 +9991,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-sort-button",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 17.566,
+            "requests": {
+              "index.js": {
+                "kb": 16.658,
+                "name": "index.js"
+              },
+              "sort-ascending.svg.js": {
+                "kb": 0.908,
+                "name": "sort-ascending.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 2,
         "instanceTotal": 4,
@@ -8595,6 +10188,29 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-switch",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.331,
+            "requests": {
+              "index.js": {
+                "kb": 24.331,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 3,
         "instanceTotal": 3,
@@ -8705,6 +10321,29 @@
             "name": "--gap"
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-tabs",
+        "scores": {
+          "performance": 100,
+          "accessibility": 87,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 11.329,
+            "requests": {
+              "index.js": {
+                "kb": 11.329,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 3,
@@ -8971,6 +10610,29 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-tabs",
+        "scores": {
+          "performance": 100,
+          "accessibility": 87,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 11.329,
+            "requests": {
+              "index.js": {
+                "kb": 11.329,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 3,
         "instanceTotal": 4,
@@ -9209,9 +10871,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-tag",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 17.364,
+            "requests": {
+              "index.js": {
+                "kb": 17.364,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 3,
-        "instanceTotal": 11,
+        "projectTotal": 2,
+        "instanceTotal": 6,
         "coverageTotal": 100
       },
       "stories": [
@@ -9231,6 +10916,11 @@
           "template": "<nve-tag readonly>topic-tag</nve-tag>\n"
         },
         {
+          "id": "TagGroup",
+          "file": "tag.stories.ts",
+          "template": "<div nve-layout=\"row gap:xs align:vertical-center\">\n  <nve-tag>topic-tag</nve-tag>\n  <nve-tag>topic-tag</nve-tag>\n  <nve-tag>topic-tag</nve-tag>\n  <nve-tag>3+</nve-tag>\n\n  <nve-icon-button interaction=\"flat\" size=\"sm\" icon-name=\"add\"></nve-icon-button>\n</div>\n"
+        },
+        {
           "id": "Color",
           "file": "tag.stories.ts",
           "template": "<div nve-layout=\"row gap:xs align:wrap\">\n  <nve-tag>default-color</nve-tag>\n  <nve-tag color=\"red-cardinal\">red-cardinal</nve-tag>\n  <nve-tag color=\"gray-slate\">gray-slate</nve-tag>\n  <nve-tag color=\"gray-denim\">gray-denim</nve-tag>\n  <nve-tag color=\"blue-indigo\">blue-indigo</nve-tag>\n  <nve-tag color=\"blue-cobalt\">blue-cobalt</nve-tag>\n  <nve-tag color=\"blue-sky\">blue-sky</nve-tag>\n  <nve-tag color=\"teal-cyan\">teal-cyan</nve-tag>\n  <nve-tag color=\"green-mint\">green-mint</nve-tag>\n  <nve-tag color=\"teal-seafoam\">teal-seafoam</nve-tag>\n  <nve-tag color=\"green-grass\">green-grass</nve-tag>\n  <nve-tag color=\"yellow-amber\">yellow-amber</nve-tag>\n  <nve-tag color=\"orange-pumpkin\">orange-pumpkin</nve-tag>\n  <nve-tag color=\"red-tomato\">red-tomato</nve-tag>\n  <nve-tag color=\"pink-magenta\">pink-magenta</nve-tag>\n  <nve-tag color=\"purple-plum\">purple-plum</nve-tag>\n  <nve-tag color=\"purple-violet\">purple-violet</nve-tag>\n  <nve-tag color=\"purple-lavender\">purple-lavender</nve-tag>\n  <nve-tag color=\"pink-rose\">pink-rose</nve-tag>\n  <nve-tag color=\"green-jade\">green-jade</nve-tag>\n  <nve-tag color=\"lime-pear\">lime-pear</nve-tag>\n  <nve-tag color=\"yellow-nova\">yellow-nova</nve-tag>\n  <nve-tag color=\"brand-green\">brand-green</nve-tag>\n</div>\n"
@@ -9244,6 +10934,11 @@
           "id": "DarkTheme",
           "file": "tag.stories.ts",
           "template": "<nve-tag>default-color</nve-tag>\n<nve-tag color=\"red-cardinal\">red-cardinal</nve-tag>\n<nve-tag color=\"gray-slate\">gray-slate</nve-tag>\n<nve-tag color=\"gray-denim\">gray-denim</nve-tag>\n<nve-tag color=\"blue-indigo\">blue-indigo</nve-tag>\n<nve-tag color=\"blue-cobalt\">blue-cobalt</nve-tag>\n<nve-tag color=\"blue-sky\">blue-sky</nve-tag>\n<nve-tag color=\"teal-cyan\">teal-cyan</nve-tag>\n<nve-tag color=\"green-mint\">green-mint</nve-tag>\n<nve-tag color=\"teal-seafoam\">teal-seafoam</nve-tag>\n<nve-tag color=\"green-grass\">green-grass</nve-tag>\n<nve-tag color=\"yellow-amber\">yellow-amber</nve-tag>\n<nve-tag color=\"orange-pumpkin\">orange-pumpkin</nve-tag>\n<nve-tag color=\"red-tomato\">red-tomato</nve-tag>\n<nve-tag color=\"pink-magenta\">pink-magenta</nve-tag>\n<nve-tag color=\"purple-plum\">purple-plum</nve-tag>\n<nve-tag color=\"purple-violet\">purple-violet</nve-tag>\n<nve-tag color=\"purple-lavender\">purple-lavender</nve-tag>\n<nve-tag color=\"pink-rose\">pink-rose</nve-tag>\n<nve-tag color=\"green-jade\">green-jade</nve-tag>\n<nve-tag color=\"lime-pear\">lime-pear</nve-tag>\n<nve-tag color=\"yellow-nova\">yellow-nova</nve-tag>\n<nve-tag color=\"brand-green\">brand-green</nve-tag>\n"
+        },
+        {
+          "id": "Overflow",
+          "file": "tag.stories.ts",
+          "template": "<nve-tag style=\"--width: 150px\">some really long content</nve-tag>\n"
         }
       ],
       "behavior": "button",
@@ -9394,9 +11089,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-textarea",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 24.188,
+            "requests": {
+              "index.js": {
+                "kb": 24.188,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
-        "projectTotal": 6,
-        "instanceTotal": 12,
+        "projectTotal": 7,
+        "instanceTotal": 8,
         "coverageTotal": 100
       },
       "stories": [
@@ -9544,6 +11262,33 @@
             }
           }
         ]
+      },
+      "lighthouse": {
+        "name": "nve-time",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 25.113,
+            "requests": {
+              "index.js": {
+                "kb": 24.477,
+                "name": "index.js"
+              },
+              "clock.svg.js": {
+                "kb": 0.636,
+                "name": "clock.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
       },
       "tests": {
         "projectTotal": 2,
@@ -9762,6 +11507,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-toast",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 29.885,
+            "requests": {
+              "index.js": {
+                "kb": 29.095,
+                "name": "index.js"
+              },
+              "information-circle-stroke.svg.js": {
+                "kb": 0.79,
+                "name": "information-circle-stroke.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 3,
         "instanceTotal": 7,
@@ -9916,6 +11688,37 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-toolbar",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 18.284,
+            "requests": {
+              "index.js": {
+                "kb": 16.466,
+                "name": "index.js"
+              },
+              "add.svg.js": {
+                "kb": 0.711,
+                "name": "add.svg.js"
+              },
+              "delete.svg.js": {
+                "kb": 1.107,
+                "name": "delete.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 1,
         "instanceTotal": 1,
@@ -9925,47 +11728,47 @@
         {
           "id": "Default",
           "file": "toolbar.stories.ts",
-          "template": "<nve-toolbar>\n  <nve-button interaction=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n  <nve-button interaction=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n  <nve-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n</nve-toolbar>\n"
+          "template": "<div>\n  <nve-toolbar>\n    <nve-button interaction=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button interaction=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "ContainerFlat",
           "file": "toolbar.stories.ts",
-          "template": "<nve-toolbar container=\"flat\">\n  <nve-button interaction=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n  <nve-button interaction=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n  <nve-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n</nve-toolbar>\n"
+          "template": "<div>\n  <nve-toolbar container=\"flat\">\n    <nve-button interaction=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button interaction=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "ContainerInset",
           "file": "toolbar.stories.ts",
-          "template": "<nve-toolbar container=\"inset\">\n  <nve-button interaction=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n  <nve-button interaction=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n  <nve-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n</nve-toolbar>\n"
+          "template": "<div>\n  <nve-toolbar container=\"inset\">\n    <nve-button interaction=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button interaction=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "ContainerFull",
           "file": "toolbar.stories.ts",
-          "template": "<nve-toolbar container=\"full\">\n  <nve-button interaction=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n  <nve-button interaction=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n  <nve-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n</nve-toolbar>\n"
+          "template": "<div>\n  <nve-toolbar container=\"full\">\n    <nve-button interaction=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button interaction=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Groups",
           "file": "toolbar.stories.ts",
-          "template": "<nve-toolbar>\n  <nve-select fit-text>\n    <select aria-label=\"element type\">\n      <option value=\"1\">Heading 1</option>\n      <option value=\"2\">Heading 2</option>\n      <option value=\"p\">Paragraph</option>\n    </select>\n    <div slot=\"option-1\">\n      <span nve-text=\"heading\">Heading 1</span>\n    </div>\n    <div slot=\"option-2\">\n      <span nve-text=\"heading sm\">Heading 2</span>\n    </div>\n    <div slot=\"option-3\">\n      <span nve-text=\"body sm\">Paragraph</span>\n    </div>\n  </nve-select>\n\n  <nve-divider></nve-divider>\n\n  <nve-button-group>\n    <nve-icon-button pressed icon-name=\"bars-3-bottom-left\"></nve-icon-button>\n    <nve-icon-button icon-name=\"bars-3-bottom-right\"></nve-icon-button>\n    <nve-icon-button icon-name=\"bars-4\"></nve-icon-button>\n  </nve-button-group>\n\n  <nve-divider></nve-divider>\n\n  <nve-button-group>\n    <nve-icon-button icon-name=\"bold\" size=\"sm\"></nve-icon-button>\n    <nve-icon-button icon-name=\"italic\" size=\"sm\"></nve-icon-button>\n    <nve-icon-button icon-name=\"strikethrough\" size=\"sm\"></nve-icon-button>\n  </nve-button-group>\n\n  <nve-divider></nve-divider>\n\n  <nve-button-group>\n    <nve-icon-button icon-name=\"code\"></nve-icon-button>\n    <nve-icon-button icon-name=\"fork\"></nve-icon-button>\n    <nve-icon-button icon-name=\"merge\"></nve-icon-button>\n  </nve-button-group>\n\n  <nve-button slot=\"suffix\" interaction=\"flat\">Save</nve-button>\n</nve-toolbar>\n"
+          "template": "<div>\n  <nve-toolbar>\n    <nve-select fit-text>\n      <select aria-label=\"element type\">\n        <option value=\"1\">Heading 1</option>\n        <option value=\"2\">Heading 2</option>\n        <option value=\"p\">Paragraph</option>\n      </select>\n      <div slot=\"option-1\">\n        <span nve-text=\"heading\">Heading 1</span>\n      </div>\n      <div slot=\"option-2\">\n        <span nve-text=\"heading sm\">Heading 2</span>\n      </div>\n      <div slot=\"option-3\">\n        <span nve-text=\"body sm\">Paragraph</span>\n      </div>\n    </nve-select>\n\n    <nve-divider></nve-divider>\n\n    <nve-button-group>\n      <nve-icon-button pressed icon-name=\"bars-3-bottom-left\"></nve-icon-button>\n      <nve-icon-button icon-name=\"bars-3-bottom-right\"></nve-icon-button>\n      <nve-icon-button icon-name=\"bars-4\"></nve-icon-button>\n    </nve-button-group>\n\n    <nve-divider></nve-divider>\n\n    <nve-button-group>\n      <nve-icon-button icon-name=\"bold\" size=\"sm\"></nve-icon-button>\n      <nve-icon-button icon-name=\"italic\" size=\"sm\"></nve-icon-button>\n      <nve-icon-button icon-name=\"strikethrough\" size=\"sm\"></nve-icon-button>\n    </nve-button-group>\n\n    <nve-divider></nve-divider>\n\n    <nve-button-group>\n      <nve-icon-button icon-name=\"code\"></nve-icon-button>\n      <nve-icon-button icon-name=\"fork\"></nve-icon-button>\n      <nve-icon-button icon-name=\"merge\"></nve-icon-button>\n    </nve-button-group>\n\n    <nve-button slot=\"suffix\" interaction=\"flat\">Save</nve-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Vertical",
           "file": "toolbar.stories.ts",
-          "template": "<nve-toolbar orientation=\"vertical\">\n  <nve-button-group>\n    <nve-icon-button pressed icon-name=\"bars-3-bottom-left\"></nve-icon-button>\n    <nve-icon-button icon-name=\"bars-3-bottom-right\"></nve-icon-button>\n    <nve-icon-button icon-name=\"bars-4\"></nve-icon-button>\n  </nve-button-group>\n\n  <nve-divider></nve-divider>\n\n  <nve-button-group>\n    <nve-icon-button icon-name=\"bold\" size=\"sm\"></nve-icon-button>\n    <nve-icon-button icon-name=\"italic\" size=\"sm\"></nve-icon-button>\n    <nve-icon-button icon-name=\"strikethrough\"></nve-icon-button>\n  </nve-button-group>\n</nve-toolbar>\n"
+          "template": "<div>\n  <nve-toolbar orientation=\"vertical\">\n    <nve-button-group>\n      <nve-icon-button pressed icon-name=\"bars-3-bottom-left\"></nve-icon-button>\n      <nve-icon-button icon-name=\"bars-3-bottom-right\"></nve-icon-button>\n      <nve-icon-button icon-name=\"bars-4\"></nve-icon-button>\n    </nve-button-group>\n\n    <nve-divider></nve-divider>\n\n    <nve-button-group>\n      <nve-icon-button icon-name=\"bold\" size=\"sm\"></nve-icon-button>\n      <nve-icon-button icon-name=\"italic\" size=\"sm\"></nve-icon-button>\n      <nve-icon-button icon-name=\"strikethrough\"></nve-icon-button>\n    </nve-button-group>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Filter",
           "file": "toolbar.stories.ts",
-          "template": "<nve-toolbar container=\"flat\">\n  <nve-icon-button readonly icon-name=\"filter\" interaction=\"flat\" slot=\"prefix\"></nve-icon-button>\n  <nve-progressive-filter-chip closable>\n    <select aria-label=\"dataset\">\n      <option selected>status</option>\n      <option>workload</option>\n    </select>\n    <select aria-label=\"condition\">\n      <option selected>filter by</option>\n      <option>sort by</option>\n    </select>\n    <select multiple aria-label=\"filter\">\n      <option selected>progress</option>\n      <option>pending</option>\n      <option>success</option>\n      <option>failed</option>\n    </select>\n  </nve-progressive-filter-chip>\n  <nve-combobox container=\"flat\">\n    <input type=\"search\" placeholder=\"Add Filter\" />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n  </nve-combobox>\n  <nve-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n  <nve-button slot=\"suffix\">Save Filters</nve-button>\n</nve-toolbar>\n"
+          "template": "<div>\n  <nve-toolbar container=\"flat\">\n    <nve-icon-button readonly icon-name=\"filter\" interaction=\"flat\" slot=\"prefix\"></nve-icon-button>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </nve-combobox>\n    <nve-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n    <nve-button slot=\"suffix\">Save Filters</nve-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Scroll",
           "file": "toolbar.stories.ts",
-          "template": "<nve-toolbar container=\"flat\">\n  <nve-icon-button readonly icon-name=\"filter\" interaction=\"flat\" slot=\"prefix\"></nve-icon-button>\n  <nve-progressive-filter-chip closable>\n    <select aria-label=\"dataset\">\n      <option>workload</option>\n      <option selected>instance</option>\n    </select>\n    <select aria-label=\"condition\">\n      <option>sort by</option>\n      <option selected>filter by</option>\n    </select>\n    <select aria-label=\"filter\">\n      <option selected>utilization</option>\n      <option>status</option>\n    </select>\n  </nve-progressive-filter-chip>\n  <nve-progressive-filter-chip closable>\n    <select aria-label=\"dataset\">\n      <option selected>status</option>\n      <option>workload</option>\n    </select>\n    <select aria-label=\"condition\">\n      <option selected>filter by</option>\n      <option>sort by</option>\n    </select>\n    <select multiple aria-label=\"filter\">\n      <option selected>progress</option>\n      <option>pending</option>\n      <option>success</option>\n      <option>failed</option>\n    </select>\n  </nve-progressive-filter-chip>\n  <nve-progressive-filter-chip>\n    <select aria-label=\"date type\">\n      <option>recording date</option>\n      <option>process date</option>\n    </select>\n    <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n    <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n  </nve-progressive-filter-chip>\n  <nve-combobox container=\"flat\">\n    <input type=\"search\" placeholder=\"Add Filter\" />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n  </nve-combobox>\n  <nve-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n  <nve-button slot=\"suffix\">Save Filters</nve-button>\n</nve-toolbar>\n"
+          "template": "<div>\n  <nve-toolbar container=\"flat\">\n    <nve-icon-button readonly icon-name=\"filter\" interaction=\"flat\" slot=\"prefix\"></nve-icon-button>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </nve-progressive-filter-chip>\n    <nve-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </nve-combobox>\n    <nve-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n    <nve-button slot=\"suffix\">Save Filters</nve-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Wrap",
           "file": "toolbar.stories.ts",
-          "template": "<nve-toolbar container=\"flat\" content=\"wrap\">\n  <nve-icon-button readonly icon-name=\"filter\" interaction=\"flat\" slot=\"prefix\"></nve-icon-button>\n  <nve-progressive-filter-chip closable>\n    <select aria-label=\"dataset\">\n      <option>workload</option>\n      <option selected>instance</option>\n    </select>\n    <select aria-label=\"condition\">\n      <option>sort by</option>\n      <option selected>filter by</option>\n    </select>\n    <select aria-label=\"filter\">\n      <option selected>utilization</option>\n      <option>status</option>\n    </select>\n  </nve-progressive-filter-chip>\n  <nve-progressive-filter-chip closable>\n    <select aria-label=\"dataset\">\n      <option selected>status</option>\n      <option>workload</option>\n    </select>\n    <select aria-label=\"condition\">\n      <option selected>filter by</option>\n      <option>sort by</option>\n    </select>\n    <select multiple aria-label=\"filter\">\n      <option selected>progress</option>\n      <option>pending</option>\n      <option>success</option>\n      <option>failed</option>\n    </select>\n  </nve-progressive-filter-chip>\n  <nve-progressive-filter-chip>\n    <select aria-label=\"date type\">\n      <option>recording date</option>\n      <option>process date</option>\n    </select>\n    <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n    <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n  </nve-progressive-filter-chip>\n  <nve-combobox container=\"flat\">\n    <input type=\"search\" placeholder=\"Add Filter\" />\n    <datalist>\n      <option value=\"Status\"></option>\n      <option value=\"Priority\"></option>\n      <option value=\"Date\"></option>\n      <option value=\"Session\"></option>\n      <option value=\"Configuration\"></option>\n      <option value=\"Contains\"></option>\n    </datalist>\n  </nve-combobox>\n  <nve-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n  <nve-button slot=\"suffix\">Save Filters</nve-button>\n</nve-toolbar>\n"
+          "template": "<div>\n  <nve-toolbar container=\"flat\" content=\"wrap\">\n    <nve-icon-button readonly icon-name=\"filter\" interaction=\"flat\" slot=\"prefix\"></nve-icon-button>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </nve-progressive-filter-chip>\n    <nve-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </nve-combobox>\n    <nve-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n    <nve-button slot=\"suffix\">Save Filters</nve-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Status",
@@ -10131,9 +11934,32 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-tooltip",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 18.922,
+            "requests": {
+              "index.js": {
+                "kb": 18.922,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 8,
-        "instanceTotal": 24,
+        "instanceTotal": 19,
         "coverageTotal": 100
       },
       "stories": [
@@ -10312,6 +12138,33 @@
           }
         ]
       },
+      "lighthouse": {
+        "name": "nve-week",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 25.388,
+            "requests": {
+              "index.js": {
+                "kb": 24.478,
+                "name": "index.js"
+              },
+              "calendar.svg.js": {
+                "kb": 0.91,
+                "name": "calendar.svg.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
@@ -10345,59 +12198,74 @@
   ],
   "patterns": [
     {
-      "id": "Default",
-      "file": "patterns.stories.ts",
-      "template": "Pattern\n"
+      "id": "StandardHeaderMainPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"flat\" nve-layout=\"grow\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!-- Breadcrumbs -->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-button interaction=\"emphasize\">Emphasized</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "Row",
-      "file": "patterns.stories.ts",
-      "template": "<nve-card role=\"listitem\" container=\"full\">\n  <nve-card-content nve-layout=\"grid align:vertical-center align:space-between gap:md\">\n    <div nve-layout=\"span:4 row gap:md align:vertical-center\">\n      <img\n        src=\"https://placehold.co/600x400\"\n        style=\"max-width: 100px; border-radius: var(--nve-ref-border-radius-sm)\"\n      />\n      <div nve-layout=\"column gap:sm\">\n        <h2 nve-text=\"label medium\">Activity Dashboard</h2>\n        <p nve-text=\"body sm muted\">Last saved: Oct 19, 21 by Camru</p>\n      </div>\n    </div>\n    <p nve-text=\"body sm\" nve-layout=\"span:5\">\n      A dashboard displaying current project activity grouped by User, Host or IP\n    </p>\n    <div nve-layout=\"span:3 row gap:sm align:right\">\n      <div nve-layout=\"row gap:xs\">\n        <nve-icon-button icon-name=\"eye\"></nve-icon-button>\n        <nve-icon-button icon-name=\"copy\"></nve-icon-button>\n        <nve-icon-button icon-name=\"delete\"></nve-icon-button>\n      </div>\n      <nve-divider orientation=\"vertical\"></nve-divider>\n      <nve-button>Add Panel</nve-button>\n    </div>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "TabsHeaderMainPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card\n  container=\"flat\"\n  style=\"--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)\"\n  nve-layout=\"grow\"\n>\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!-- Breadcrumbs -->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-button interaction=\"emphasize\">Emphasized</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n    </div>\n\n    <!-- Tabs -->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "Header",
-      "file": "patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-left:xl pad-right:xl\">\n    <div nve-layout=\"row gap:sm align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n      <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n    </div>\n    <p nve-text=\"body\">content</p>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "StackedMetadataHeaderMainPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"flat\" nve-layout=\"grow\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!-- Breadcrumbs -->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-button interaction=\"emphasize\">Emphasized</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section nve-layout=\"row gap:xl align:vertical-center\">\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Session ID</span>\n        <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Driver</span>\n        <span nve-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Co-Pilot</span>\n        <span nve-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Route</span>\n        <span nve-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Status</span>\n        <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n      </div>\n    </section>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "HeaderTabs",
-      "file": "patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n    <div nve-layout=\"row gap:sm align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n      <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n    </div>\n    <nve-tabs>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n    </nve-tabs>\n  </div>\n</nve-card>\n"
+      "id": "InlineMetadataHeaderMainPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"flat\" nve-layout=\"grow\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Metadata -->\n      <div nve-layout=\"row gap:xl align:vertical-center\">\n        <section nve-layout=\"row gap:xl align:vertical-center\">\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Session ID</span>\n            <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Driver</span>\n            <span nve-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Co-Pilot</span>\n            <span nve-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Route</span>\n            <span nve-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Status</span>\n            <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n          </div>\n        </section>\n\n        <nve-divider orientation=\"vertical\"></nve-divider>\n\n        <!-- Action Buttons -->\n        <section nve-layout=\"row gap:sm align:vertical-center\">\n          <nve-button>Default</nve-button>\n          <nve-button interaction=\"emphasize\">Emphasized</nve-button>\n          <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n        </section>\n      </div>\n    </div>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "HeaderComplex",
-      "file": "patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <section nve-layout=\"column gap:lg align:stretch pad-top:md pad-right:xl pad-bottom:md pad-left:xl\">\n    <div nve-layout=\"row gap:md align:center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n\n      <div nve-layout=\"row gap:sm\" style=\"margin-left: auto\">\n        <nve-icon-button icon-name=\"information-circle-stroke\" aria-label=\"information\"></nve-icon-button>\n        <nve-icon-button icon-name=\"edit\" aria-label=\"edit\"></nve-icon-button>\n        <nve-icon-button icon-name=\"more-actions\" aria-label=\"additional actions\"></nve-icon-button>\n      </div>\n    </div>\n\n    <div nve-layout=\"row gap:xl align:vertical-center\">\n      <section nve-layout=\"row gap:xs align:center\">\n        <span nve-text=\"body sm muted medium\">Session ID</span>\n        <a nve-text=\"body sm semibold link\" href=\"#\">13245768</a>\n      </section>\n\n      <section nve-layout=\"row gap:xs align:center\">\n        <span nve-text=\"body sm muted medium\">Driver</span>\n        <span nve-text=\"body sm semibold\">Jane Doe</span>\n      </section>\n\n      <section nve-layout=\"row gap:xs align:center\">\n        <span nve-text=\"body sm muted medium\">Co-Pilot</span>\n        <span nve-text=\"body sm semibold\">John Doe</span>\n      </section>\n\n      <section nve-layout=\"row gap:xs align:center\">\n        <span nve-text=\"body sm muted medium\">Route</span>\n        <span nve-text=\"body sm semibold\">Santa Clara</span>\n      </section>\n\n      <section nve-layout=\"row gap:xs align:center\">\n        <span nve-text=\"body sm muted medium\">Status</span>\n        <span nve-text=\"body sm semibold\"><nve-badge status=\"success\">complete</nve-badge></span>\n      </section>\n    </div>\n  </section>\n</nve-card>\n"
+      "id": "InlineKitchenSinkHeaderMainPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card\n  container=\"flat\"\n  style=\"--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)\"\n  nve-layout=\"grow\"\n>\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Metadata -->\n      <div nve-layout=\"row gap:xl align:vertical-center\">\n        <section nve-layout=\"row gap:xl align:vertical-center\">\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Session ID</span>\n            <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Driver</span>\n            <span nve-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Co-Pilot</span>\n            <span nve-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Route</span>\n            <span nve-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Status</span>\n            <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n          </div>\n        </section>\n\n        <!--Divider-->\n        <nve-divider orientation=\"vertical\"></nve-divider>\n\n        <!-- Action Buttons -->\n        <section nve-layout=\"row gap:sm align:vertical-center\">\n          <nve-button>Default</nve-button>\n          <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n        </section>\n      </div>\n    </div>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "LayoutHeaderFullWidthCards",
-      "file": "patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n    <div nve-layout=\"row gap:sm align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n      <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n    </div>\n    <nve-tabs>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n    </nve-tabs>\n  </div>\n</nve-card>\n\n<main nve-layout=\"column gap:lg pad-top:lg align:stretch\">\n  <nve-card container=\"full\" style=\"width: 100%; height: 250px\">\n    <nve-card-header>\n      <div slot=\"title\">Card Title</div>\n    </nve-card-header>\n    <nve-card-content>Card Content</nve-card-content>\n  </nve-card>\n  <nve-card container=\"full\" style=\"width: 100%; height: 250px\">\n    <nve-card-header>\n      <div slot=\"title\">Card Title</div>\n    </nve-card-header>\n    <nve-card-content>Card Content</nve-card-content>\n  </nve-card>\n</main>\n"
+      "id": "StackedKitchenSinkHeaderMainPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card\n  container=\"flat\"\n  style=\"--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)\"\n  nve-layout=\"grow\"\n>\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section nve-layout=\"row gap:xl align:vertical-center\">\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Session ID</span>\n        <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Driver</span>\n        <span nve-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Co-Pilot</span>\n        <span nve-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Route</span>\n        <span nve-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Status</span>\n        <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n      </div>\n    </section>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "LayoutHeaderGridCards",
-      "file": "patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n    <div nve-layout=\"row gap:sm align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n      <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n    </div>\n    <nve-tabs>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n    </nve-tabs>\n  </div>\n</nve-card>\n\n<main nve-layout=\"grid gap:lg span-items:6 pad:lg\">\n  <nve-card style=\"height: 250px\">\n    <nve-card-header>\n      <div slot=\"title\">Card Title</div>\n    </nve-card-header>\n    <nve-card-content>Card Content</nve-card-content>\n  </nve-card>\n  <nve-card style=\"height: 250px\">\n    <nve-card-header>\n      <div slot=\"title\">Card Title</div>\n    </nve-card-header>\n    <nve-card-content>Card Content</nve-card-content>\n  </nve-card>\n  <nve-card style=\"height: 250px\">\n    <nve-card-header>\n      <div slot=\"title\">Card Title</div>\n    </nve-card-header>\n    <nve-card-content>Card Content</nve-card-content>\n  </nve-card>\n  <nve-card style=\"height: 250px\">\n    <nve-card-header>\n      <div slot=\"title\">Card Title</div>\n    </nve-card-header>\n    <nve-card-content>Card Content</nve-card-content>\n  </nve-card>\n</main>\n"
+      "id": "StandardHeaderDetailPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"full\" nve-layout=\"grow\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "LayoutHeaderPanelCards",
-      "file": "patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n    <div nve-layout=\"row gap:sm align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n      <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n    </div>\n    <nve-tabs>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n    </nve-tabs>\n  </div>\n</nve-card>\n\n<div nve-layout=\"row\">\n  <section nve-layout=\"column full align:stretch gap:lg pad:lg\">\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n  </section>\n\n  <nve-panel expanded style=\"min-width: 360px; z-index: 99; height: 100vh; position: sticky; top: 0; right: 0\">\n    <nve-panel-header>\n      <h2 slot=\"title\">Panel Heading</h2>\n    </nve-panel-header>\n    <nve-panel-content> Panel Content </nve-panel-content>\n  </nve-panel>\n</div>\n"
+      "id": "TabsHeaderDetailPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"full\" nve-layout=\"grow\">\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n    </div>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "Trend",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"column gap:sm\">\n  <label nve-text=\"label medium sm muted\">Label</label>\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <h3 nve-text=\"heading semibold lg\">198,298</h3>\n    <nve-badge status=\"trend-up\">+15%</nve-badge>\n  </div>\n  <label nve-text=\"label medium sm muted\">Since last week</label>\n</div>\n"
+      "id": "StackedMetadataHeaderDetailPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"full\" nve-layout=\"grow\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section nve-layout=\"row gap:xl align:vertical-center\">\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Session ID</span>\n        <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Driver</span>\n        <span nve-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Co-Pilot</span>\n        <span nve-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Route</span>\n        <span nve-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Status</span>\n        <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n      </div>\n    </section>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "TrendTopBadge",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"column gap:xs\">\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <label nve-text=\"label medium sm muted\">Since last week</label>\n    <nve-badge status=\"trend-up\">+15%</nve-badge>\n  </div>\n  <div nve-layout=\"column gap:sm\">\n    <h3 nve-text=\"heading semibold lg\">198,298</h3>\n    <label nve-text=\"label medium sm muted\">Label</label>\n  </div>\n</div>\n"
+      "id": "InlineMetadataHeaderDetailPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"full\" nve-layout=\"grow\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Metadata -->\n      <div nve-layout=\"row gap:xl align:vertical-center\">\n        <section nve-layout=\"row gap:xl align:vertical-center\">\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Session ID</span>\n            <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Driver</span>\n            <span nve-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Co-Pilot</span>\n            <span nve-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Route</span>\n            <span nve-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Status</span>\n            <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n          </div>\n        </section>\n\n        <!--Divider-->\n        <nve-divider orientation=\"vertical\"></nve-divider>\n\n        <!-- Action Buttons -->\n        <section nve-layout=\"row gap:sm align:vertical-center\">\n          <nve-button>Default</nve-button>\n          <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n        </section>\n      </div>\n    </div>\n  </nve-card-content>\n</nve-card>\n"
     },
     {
-      "id": "TrendBottomBadge",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"column gap:xs\">\n  <div nve-layout=\"column gap:sm\">\n    <label nve-text=\"label medium sm muted\">Label</label>\n    <h3 nve-text=\"heading semibold lg\">198,298</h3>\n  </div>\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <label nve-text=\"label medium sm muted\">Since last week</label>\n    <nve-badge status=\"trend-up\">+15%</nve-badge>\n  </div>\n</div>\n"
+      "id": "InlineKitchenSinkHeaderDetailPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"full\" nve-layout=\"grow\">\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Metadata -->\n      <div nve-layout=\"row gap:xl align:vertical-center\">\n        <section nve-layout=\"row gap:xl align:vertical-center\">\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Session ID</span>\n            <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Driver</span>\n            <span nve-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Co-Pilot</span>\n            <span nve-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Route</span>\n            <span nve-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Status</span>\n            <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n          </div>\n        </section>\n\n        <!--Divider-->\n        <nve-divider orientation=\"vertical\"></nve-divider>\n\n        <!-- Action Buttons -->\n        <section nve-layout=\"row gap:sm align:vertical-center\">\n          <nve-button>Default</nve-button>\n          <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n        </section>\n      </div>\n    </div>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
+    },
+    {
+      "id": "StackedKitchenSinkHeaderDetailPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"full\" nve-layout=\"grow\">\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section nve-layout=\"row gap:xl align:vertical-center\">\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Session ID</span>\n        <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Driver</span>\n        <span nve-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Co-Pilot</span>\n        <span nve-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Route</span>\n        <span nve-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Status</span>\n        <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n      </div>\n    </section>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
+    },
+    {
+      "id": "StandardHeaderViewerPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"full\" style=\"--border-bottom: 0\" nve-layout=\"grow\">\n  <nve-card-content nve-layout=\"row align:space-between align:vertical-center pad-x:xl\">\n    <section nve-layout=\"row gap:sm align:vertical-center\">\n      <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n      <h1 nve-text=\"heading xs semibold\">Page Title</h1>\n    </section>\n\n    <!--Center Controls-->\n    <section nve-layout=\"row align:center align:vertical-center gap:xxxs\">\n      <nve-select container=\"flat\" style=\"--border-bottom: 0\">\n        <select>\n          <option value=\"1\">100%</option>\n          <option value=\"2\">75%</option>\n          <option value=\"3\">50%</option>\n          <option value=\"4\">25%</option>\n        </select>\n      </nve-select>\n      <nve-button-group container=\"flat\" behavior-select=\"single\">\n        <nve-icon-button size=\"sm\" pressed icon-name=\"view-as-grid\"></nve-icon-button>\n        <nve-icon-button size=\"sm\" icon-name=\"split-vertical\"></nve-icon-button>\n        <nve-icon-button size=\"sm\" icon-name=\"split-horizontal\"></nve-icon-button>\n        <nve-icon-button size=\"sm\" icon-name=\"split-none\"></nve-icon-button>\n      </nve-button-group>\n    </section>\n\n    <!-- Action Buttons -->\n    <nve-button-group container=\"flat\">\n      <nve-icon-button size=\"sm\" icon-name=\"download\"></nve-icon-button>\n      <nve-icon-button size=\"sm\" icon-name=\"refresh\"></nve-icon-button>\n      <nve-icon-button size=\"sm\" icon-name=\"more-actions\"></nve-icon-button>\n    </nve-button-group>\n  </nve-card-content>\n</nve-card>\n"
+    },
+    {
+      "id": "StandardHeaderToolbarPage",
+      "file": "header-patterns.stories.ts",
+      "template": "<nve-card container=\"full\" style=\"--border-bottom: 0\" nve-layout=\"grow\">\n  <nve-card-content nve-layout=\"row align:space-between align:vertical-center pad-x:xl\">\n    <!--Left Controls-->\n    <section nve-layout=\"row gap:md align:left align:vertical-center\" style=\"width: 33%\">\n      <div>\n        <nve-button-group container=\"flat\">\n          <nve-icon-button size=\"sm\" icon-name=\"layers\"></nve-icon-button>\n          <nve-icon-button size=\"sm\" icon-name=\"cursor-rays\"></nve-icon-button>\n          <nve-icon-button size=\"sm\" pressed icon-name=\"hand\"></nve-icon-button>\n        </nve-button-group>\n      </div>\n      <div nve-layout=\"row gap:sm\">\n        <nve-button interaction=\"flat\">Edit</nve-button>\n        <nve-button interaction=\"flat\">History</nve-button>\n        <nve-button interaction=\"flat\">Docs</nve-button>\n      </div>\n    </section>\n\n    <h1 nve-text=\"heading xs semibold\">Page Title</h1>\n\n    <!-- Action Buttons -->\n    <nve-button-group container=\"flat\" style=\"width: 33%\" nve-layout=\"row align:right\">\n      <nve-icon-button size=\"sm\" icon-name=\"add-comment\"></nve-icon-button>\n      <nve-icon-button size=\"sm\" icon-name=\"bell\"></nve-icon-button>\n      <nve-icon-button size=\"sm\" icon-name=\"more-actions\"></nve-icon-button>\n    </nve-button-group>\n  </nve-card-content>\n</nve-card>\n"
     }
   ],
   "types": {
@@ -10538,28 +12406,28 @@
       {
         "file": "elements/src/internal/utils/dom.ts",
         "lines": {
-          "total": 125,
-          "covered": 106,
+          "total": 128,
+          "covered": 109,
           "skipped": 0,
-          "pct": 84.8
+          "pct": 85.15
         },
         "functions": {
-          "total": 55,
-          "covered": 48,
+          "total": 56,
+          "covered": 49,
           "skipped": 0,
-          "pct": 87.27
+          "pct": 87.5
         },
         "statements": {
-          "total": 138,
-          "covered": 118,
+          "total": 141,
+          "covered": 121,
           "skipped": 0,
-          "pct": 85.5
+          "pct": 85.81
         },
         "branches": {
-          "total": 85,
-          "covered": 68,
+          "total": 89,
+          "covered": 72,
           "skipped": 0,
-          "pct": 80
+          "pct": 80.89
         }
       },
       {
@@ -10749,33 +12617,6 @@
           "covered": 53,
           "skipped": 0,
           "pct": 91.37
-        }
-      },
-      {
-        "file": "elements/src/combobox/combobox.ts",
-        "lines": {
-          "total": 119,
-          "covered": 118,
-          "skipped": 0,
-          "pct": 99.15
-        },
-        "functions": {
-          "total": 53,
-          "covered": 53,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 166,
-          "covered": 165,
-          "skipped": 0,
-          "pct": 99.39
-        },
-        "branches": {
-          "total": 69,
-          "covered": 63,
-          "skipped": 0,
-          "pct": 91.3
         }
       },
       {
@@ -13184,8 +15025,8 @@
       {
         "file": "elements/src/icon/define.ts",
         "lines": {
-          "total": 3,
-          "covered": 3,
+          "total": 2,
+          "covered": 2,
           "skipped": 0,
           "pct": 100
         },
@@ -13196,8 +15037,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 3,
-          "covered": 3,
+          "total": 2,
+          "covered": 2,
           "skipped": 0,
           "pct": 100
         },
@@ -13346,8 +15187,8 @@
       {
         "file": "elements/src/grid/grid.ts",
         "lines": {
-          "total": 19,
-          "covered": 19,
+          "total": 18,
+          "covered": 18,
           "skipped": 0,
           "pct": 100
         },
@@ -13358,8 +15199,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 28,
-          "covered": 28,
+          "total": 27,
+          "covered": 27,
           "skipped": 0,
           "pct": 100
         },
@@ -14154,6 +15995,33 @@
         }
       },
       {
+        "file": "elements/src/combobox/combobox.ts",
+        "lines": {
+          "total": 119,
+          "covered": 119,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 53,
+          "covered": 53,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 166,
+          "covered": 166,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 69,
+          "covered": 65,
+          "skipped": 0,
+          "pct": 94.2
+        }
+      },
+      {
         "file": "elements/src/color/define.ts",
         "lines": {
           "total": 1,
@@ -14805,28 +16673,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 2069,
-        "covered": 2028,
+        "total": 2070,
+        "covered": 2030,
         "skipped": 0,
-        "pct": 98.01
+        "pct": 98.06
       },
       "statements": {
-        "total": 2747,
-        "covered": 2689,
+        "total": 2748,
+        "covered": 2691,
         "skipped": 0,
-        "pct": 97.88
+        "pct": 97.92
       },
       "functions": {
-        "total": 806,
-        "covered": 775,
+        "total": 807,
+        "covered": 776,
         "skipped": 0,
         "pct": 96.15
       },
       "branches": {
-        "total": 1033,
-        "covered": 941,
+        "total": 1037,
+        "covered": 947,
         "skipped": 0,
-        "pct": 91.09
+        "pct": 91.32
       },
       "branchesTrue": {
         "total": 0,
@@ -15048,14 +16916,6 @@
         "elementsVersion": "0.20.0",
         "elements": [
           {
-            "name": "nve-notification-group",
-            "instanceTotal": 3
-          },
-          {
-            "name": "nve-notification",
-            "instanceTotal": 3
-          },
-          {
             "name": "nve-grid-cell",
             "instanceTotal": 4
           },
@@ -15097,7 +16957,7 @@
           },
           {
             "name": "nve-icon",
-            "instanceTotal": 9
+            "instanceTotal": 8
           },
           {
             "name": "nve-tooltip",
@@ -15176,6 +17036,14 @@
             "instanceTotal": 3
           },
           {
+            "name": "nve-notification-group",
+            "instanceTotal": 2
+          },
+          {
+            "name": "nve-notification",
+            "instanceTotal": 2
+          },
+          {
             "name": "nve-dialog-footer",
             "instanceTotal": 1
           },
@@ -15200,7 +17068,7 @@
             "instanceTotal": 1
           }
         ],
-        "instanceTotal": 109
+        "instanceTotal": 106
       },
       {
         "name": "app-shell-angular-demo",
@@ -15216,11 +17084,11 @@
         "elements": [
           {
             "name": "nve-icon-button",
-            "instanceTotal": 8
+            "instanceTotal": 9
           },
           {
             "name": "nve-icon",
-            "instanceTotal": 9
+            "instanceTotal": 10
           },
           {
             "name": "nve-grid-cell",
@@ -15275,7 +17143,7 @@
             "instanceTotal": 1
           }
         ],
-        "instanceTotal": 31
+        "instanceTotal": 33
       },
       {
         "name": "clip-labeler",
@@ -15508,7 +17376,7 @@
           },
           {
             "name": "nve-button",
-            "instanceTotal": 11
+            "instanceTotal": 13
           },
           {
             "name": "nve-card",
@@ -15540,7 +17408,7 @@
           },
           {
             "name": "nve-icon",
-            "instanceTotal": 21
+            "instanceTotal": 22
           },
           {
             "name": "nve-panel-header",
@@ -15564,7 +17432,7 @@
           },
           {
             "name": "nve-alert",
-            "instanceTotal": 2
+            "instanceTotal": 3
           },
           {
             "name": "nve-divider",
@@ -15572,6 +17440,10 @@
           },
           {
             "name": "nve-search",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-alert-group",
             "instanceTotal": 1
           },
           {
@@ -15596,7 +17468,7 @@
           },
           {
             "name": "nve-dropdown",
-            "instanceTotal": 6
+            "instanceTotal": 7
           },
           {
             "name": "nve-control",
@@ -15651,6 +17523,10 @@
             "instanceTotal": 1
           },
           {
+            "name": "nve-notification",
+            "instanceTotal": 1
+          },
+          {
             "name": "nve-sort-button",
             "instanceTotal": 1
           },
@@ -15675,7 +17551,7 @@
             "instanceTotal": 2
           }
         ],
-        "instanceTotal": 133
+        "instanceTotal": 140
       },
       {
         "name": "@elements/next-common",
@@ -15721,8 +17597,85 @@
         "name": "@elements/vehicle-management",
         "path": "src/ui/platform/apps/vehicle-management",
         "elementsVersion": "0.20.0",
-        "elements": [],
-        "instanceTotal": 0
+        "elements": [
+          {
+            "name": "nve-combobox",
+            "instanceTotal": 3
+          },
+          {
+            "name": "nve-date",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-datetime",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-button",
+            "instanceTotal": 2
+          },
+          {
+            "name": "nve-progress-ring",
+            "instanceTotal": 2
+          },
+          {
+            "name": "nve-notification",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-file",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-input",
+            "instanceTotal": 2
+          },
+          {
+            "name": "nve-password",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-control-message",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-control",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-select",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-textarea",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-grid",
+            "instanceTotal": 2
+          },
+          {
+            "name": "nve-grid-row",
+            "instanceTotal": 2
+          },
+          {
+            "name": "nve-search",
+            "instanceTotal": 2
+          },
+          {
+            "name": "nve-grid-cell",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-grid-column",
+            "instanceTotal": 1
+          },
+          {
+            "name": "nve-grid-header",
+            "instanceTotal": 1
+          }
+        ],
+        "instanceTotal": 27
       },
       {
         "name": "@elements/docs-app",
@@ -15753,71 +17706,51 @@
         "elementsVersion": "0.18.0",
         "elements": [
           {
-            "name": "nve-alert",
-            "instanceTotal": 5
-          },
-          {
             "name": "nve-button",
-            "instanceTotal": 6
-          },
-          {
-            "name": "nve-divider",
-            "instanceTotal": 5
+            "instanceTotal": 1
           },
           {
             "name": "nve-dropdown",
-            "instanceTotal": 6
+            "instanceTotal": 1
           },
           {
             "name": "nve-control-message",
-            "instanceTotal": 6
+            "instanceTotal": 1
           },
           {
             "name": "nve-control",
-            "instanceTotal": 6
+            "instanceTotal": 1
           },
           {
             "name": "nve-icon-button",
-            "instanceTotal": 6
+            "instanceTotal": 1
           },
           {
             "name": "nve-icon",
-            "instanceTotal": 6
+            "instanceTotal": 1
           },
           {
             "name": "nve-input",
-            "instanceTotal": 6
-          },
-          {
-            "name": "nve-menu-item",
-            "instanceTotal": 5
-          },
-          {
-            "name": "nve-menu",
-            "instanceTotal": 5
+            "instanceTotal": 1
           },
           {
             "name": "nve-notification",
-            "instanceTotal": 6
+            "instanceTotal": 1
           },
           {
             "name": "nve-select",
-            "instanceTotal": 6
-          },
-          {
-            "name": "nve-tag",
-            "instanceTotal": 5
+            "instanceTotal": 1
           },
           {
             "name": "nve-textarea",
-            "instanceTotal": 6
+            "instanceTotal": 1
           },
           {
             "name": "nve-tooltip",
-            "instanceTotal": 6
+            "instanceTotal": 1
           }
         ],
-        "instanceTotal": 91
+        "instanceTotal": 11
       },
       {
         "name": "@elements/ide",

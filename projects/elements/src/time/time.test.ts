@@ -28,7 +28,7 @@ describe('nve-time', () => {
   });
 
   it('should render clock suffix icon', () => {
-    expect(element.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('schedule');
+    expect(element.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('clock');
   });
 
   it('should trigger native UI', async () => {
