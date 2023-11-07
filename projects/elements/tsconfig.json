@@ -2,7 +2,6 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "module": "es2022",
-    "allowJs": true,
     "target": "es2022",
     "lib": ["es2022", "dom", "dom.iterable"],
     "typeRoots": ["./node_modules/@types"],
@@ -10,9 +9,8 @@
     "emitDeclarationOnly": true,
     "outDir": "dist/",
     "baseUrl": "./",
-    "rootDir": "./src",
+    "rootDir": "./",
     "moduleResolution": "Node",
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
@@ -20,7 +18,8 @@
     "paths": {
       "@elements/elements": ["./src/index.js"],
       "@elements/elements/*": ["./src/*"],
-      "@elements/elements/*.js": ["./src/*.js"]
+      "@elements/elements/*.js": ["./src/*.js"],
+      "elements-lighthouse": [".lighthouse/index.js"]
     },
     "plugins": [
       {

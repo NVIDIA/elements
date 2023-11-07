@@ -264,7 +264,7 @@ class IconPerformanceDemo extends LitElement {
 
   @state() private show = false;
 
-  @state() private icons = Array(this.#multiplier).fill('').map(() => html`<mlv-icon name="user"></mlv-icon>`)
+  @state() private icons = Array(this.#multiplier).fill('').map(() => html`<mlv-icon name="person"></mlv-icon>`)
 
   render() {
     return html`

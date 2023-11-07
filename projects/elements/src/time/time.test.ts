@@ -28,7 +28,7 @@ describe('mlv-time', () => {
   });
 
   it('should render clock suffix icon', () => {
-    expect(element.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('schedule');
+    expect(element.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('clock');
   });
 
   it('should trigger native UI', async () => {

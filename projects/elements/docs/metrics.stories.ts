@@ -9,6 +9,7 @@ import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/alert/define.js';
 import '@elements/elements/badge/define.js';
 import '@elements/elements/tag/define.js';
+import '@elements/elements/tabs/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/grid/define.js';
 import '@elements/elements/sort-button/define.js';
@@ -47,7 +48,7 @@ function getVersionBadge(value) {
   return html`<mlv-badge status=${status as any}>${pin}</mlv-badge>`;
 }
 
-function getCoverageStatus(value, message = '') {
+function getCoverageStatus(value, message = '', container = 'flat') {
   // get status based on lcov standard coverage ranges
   let status = 'unknown';
 
@@ -62,10 +63,10 @@ function getCoverageStatus(value, message = '') {
   }
 
   const format = status !== 'unknown' ? new Intl.NumberFormat('default', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value / 100) : 'unknown';
-  return html`<mlv-badge status=${status as any}>${message} ${format}</mlv-badge>`;
+  return html`<mlv-badge .container=${container} status=${status as any}>${message} ${format}</mlv-badge>`;
 }
 
-function getStatusBadge(status, message = '') {
+function getStatusBadge(status, message = '', container = 'flat') {
   const statuses = {
     'pre-release': 'warning',
     'beta': 'accent',
@@ -73,17 +74,50 @@ function getStatusBadge(status, message = '') {
     undefined: 'unknown'
   };
 
-  return html`<mlv-badge .status=${statuses[status]}>${status ? status : 'unknown'}${message}</mlv-badge>`
+  return html`<mlv-badge .container=${container} .status=${statuses[status]}>${status ? status : 'unknown'}${message}</mlv-badge>`
 }
 
-function getA11yStatusBadge(axe: string | boolean, shorthand = false) {
+function getA11yStatusBadge(axe: string | boolean, shorthand = false, container = 'flat') {
   if (axe === undefined) {
-    return html`<mlv-badge status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">${shorthand ? 'Reviewed' : 'Accessibility: axe-core'}</a></mlv-badge>`;
+    return html`<mlv-badge .container=${container} status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">${shorthand ? 'Reviewed' : 'Accessibility'}</a></mlv-badge>`;
   } else if (axe === false) {
-    return html`<mlv-badge status="pending">${shorthand ? 'Pending' : 'Accessibility: Pending'}</mlv-badge>`
+    return html`<mlv-badge .container=${container} status="pending">${shorthand ? 'Pending' : 'Accessibility: Pending'}</mlv-badge>`
   } else {
-    return html`<mlv-badge status="warning" style="--text-transform: none"><a href="https://dequeuniversity.com/rules/axe/4.8/${axe}?application=axeAPI" target="_blank">${shorthand ? axe : `Accessibility: ${axe}`}</a></mlv-badge>`
+    return html`<mlv-badge .container=${container} status="warning" style="--text-transform: none"><a href="https://dequeuniversity.com/rules/axe/4.8/${axe}?application=axeAPI" target="_blank">${shorthand ? axe : `Accessibility: ${axe}`}</a></mlv-badge>`
   }
+}
+
+function getLighthouseScoreStatus(score: number) {
+  if (score > 95) {
+    return 'success';
+  } else if (score > 80) {
+    return 'warning';
+  } else if (score !== undefined) {
+    return 'danger';
+  } else {
+    return 'unknown';
+  }
+}
+
+function getLighthouseScores(element, container = '') {
+  const scores = element.lighthouse.scores;
+  const average = scores ? Math.floor((scores.performance + scores.accessibility + scores.bestPractices) / 3) : 0;
+  return scores ? html`
+  <mlv-tooltip style="--background: var(--mlv-sys-layer-overlay-background);" behavior-trigger anchor="lighthouse-badge" trigger="lighthouse-badge" position="bottom" hidden>
+    <div mlv-layout="column gap:sm">
+      <mlv-badge container="flat" .status=${getLighthouseScoreStatus(scores.performance)}>Performance: ${scores.performance}</mlv-badge>
+      <mlv-badge container="flat" .status=${getLighthouseScoreStatus(scores.bestPractices)}>Best Practices: ${scores.bestPractices}</mlv-badge>
+      <mlv-badge container="flat" .status=${getLighthouseScoreStatus(scores.accessibility)}>Accessibility: ${scores.accessibility}</mlv-badge>
+    </div>
+  </mlv-tooltip>
+  <mlv-badge id="lighthouse-badge" .status=${getLighthouseScoreStatus(average)} .container=${container} style="--text-transform: none">
+    <a href="https://developer.chrome.com/docs/lighthouse/overview/" target="_blank">Lighthouse: ${average}</a>
+  </mlv-badge>
+  ` : nothing;
+}
+
+function getPayloadSize(payload, container = 'flat') {
+  return payload?.javascript ? html`<mlv-badge .container=${container} status="success">${container === 'flat' ? nothing : 'Bundle: '}${payload.javascript.kb.toFixed(2)}kb</mlv-badge>` : nothing;
 }
 
 function getBehaviorCategoryIcon(category: string) {
@@ -152,7 +186,7 @@ class ElementStatus extends LitElement {
       </div>
       <p mlv-text="body">All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
       <div mlv-layout="column gap:sm">
-        <mlv-badge .status=${metadata.status === 'pre-release' ? 'warning' : 'pending'}>pre-release <mlv-icon name="warning"></mlv-icon></mlv-badge>
+        <mlv-badge .status=${metadata.status === 'pre-release' ? 'warning' : 'pending'}>pre-release <mlv-icon name="exclamation-triangle"></mlv-icon></mlv-badge>
         <div mlv-layout="column gap:xs">
           <mlv-alert .status=${metadata.figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></mlv-alert>
           <mlv-alert .status=${metadata.storybook ? 'finished' : 'pending'}>Storybook Preview</mlv-alert>
@@ -161,7 +195,7 @@ class ElementStatus extends LitElement {
         </div>
       </div>
       <div mlv-layout="column gap:sm">
-        <mlv-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <mlv-icon name="schedule"></mlv-icon></mlv-badge>
+        <mlv-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <mlv-icon name="clock"></mlv-icon></mlv-badge>
         <div mlv-layout="column gap:xs">
           <mlv-alert .status=${metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</mlv-alert>
           <mlv-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/about-api-design-getting-started--docs">API Review</a></mlv-alert>
@@ -203,18 +237,21 @@ class ElementMetrics extends LitElement {
     const element = metrics.elements.find(d => d.name === this.tag);
     return html`
       <section mlv-layout="column gap:lg">
-        <div mlv-layout="row gap:sm align:center full">
-          <div>${getStatusBadge(element.status, ` ${MLV_VERSION}`)}</div>
-          <div>${getCoverageStatus(element.tests.coverageTotal, 'coverage: ')}</div>
-          <div>${getA11yStatusBadge(element.axe)}</div>
+        <div mlv-layout="row gap:xs align:center full">
+          <div mlv-layout="row gap:sm">
+            ${getStatusBadge(element.status, ` ${MLV_VERSION}`, '')}
+            ${getCoverageStatus(element.tests.coverageTotal, 'coverage: ', '')}
+            ${element.lighthouse?.payload ? getPayloadSize(element.lighthouse?.payload, '') : nothing}
+            ${getLighthouseScores(element)}
+            ${getA11yStatusBadge(element.axe, false, '')}
+          </div>
           <mlv-button size="sm" style="margin-left: auto"><mlv-icon name="checklist" size="sm"></mlv-icon><a href=${element.aria}>API Spec</a></mlv-button>
-        ${element.figma ? html`<mlv-button size="sm"><mlv-icon name="shapes" size="sm"></mlv-icon><a href=${element.figma}>Figma</a></mlv-button>` : nothing}
+          ${element.figma ? html`<mlv-button size="sm"><mlv-icon name="shapes" size="sm"></mlv-icon><a href=${element.figma}>Figma</a></mlv-button>` : nothing}
           <mlv-button size="sm"><mlv-icon name="merge" size="sm"></mlv-icon><a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages">Released ${element.since}</a></mlv-button>
         </div>
         ${element.description ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml(element.description).replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
-
       </section>
-    `; 
+    `;
   }
 }
 
@@ -389,17 +426,21 @@ class ElementsMetrics extends LitElement {
   } = {
     tooltipColumn: null,
     columns: {
-      element: { sort: 'none', width: '200px' },
-      status: { sort: 'none', width: '150px' },
-      coverage: { sort: 'none', width: '150px' },
-      accessibility: { sort: 'none', tooltip: 'Accessibility status from Axe Core API', width: '190px' },
-      spec: { sort: 'none', tooltip: 'Behavior category from W3C and WAI-ARIA Specification', width: '130px' },
-      released: { sort: 'none', tooltip: 'Version Element was first released', width: '100px' },
-      instances: { sort: 'none', tooltip: 'Number of instances of element directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.', width: '100px' },
-      projects: { sort: 'none', tooltip: 'Number of Maglev Projects which reference the given element.', width: '100px' },
-      figma: { sort: 'none', width: '100px' },
-      themes: { sort: 'none', width: '100px' },
-      responsive: { sort: 'none', width: '100px' },
+      element: { sort: 'none', width: '220px' },
+      status: { sort: 'none', width: '170px' },
+      coverage: { sort: 'none', width: '170px' },
+      bundle: { sort: 'none', width: '170px', tooltip: 'Standalone total JavaScript bundle size in kb' },
+      performance: { sort: 'none', width: '170px', tooltip: 'Chrome Lighthouse Performance Score' },
+      accessibility: { sort: 'none', width: '170px', tooltip: 'Chrome Lighthouse Accessibility Score' },
+      bestPractices: { sort: 'none', width: '170px', tooltip: 'Chrome Lighthouse Best Practices Score' },
+      axe: { sort: 'none', tooltip: 'Accessibility status from Axe Core API', width: '170px' },
+      spec: { sort: 'none', tooltip: 'Behavior category from W3C and WAI-ARIA Specification', width: '170px' },
+      released: { sort: 'none', tooltip: 'Version Element was first released', width: '170px' },
+      instances: { sort: 'none', tooltip: 'Number of instances of element directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.', width: '130px' },
+      projects: { sort: 'none', tooltip: 'Number of Maglev Projects which reference the given element.', width: '130px' },
+      figma: { sort: 'none', width: '130px' },
+      themes: { sort: 'none', width: '130px' },
+      responsive: { sort: 'none', width: '130px' },
     }
   };
 
@@ -415,7 +456,14 @@ class ElementsMetrics extends LitElement {
 
   render() {
     return html`
-      <mlv-grid style="--scroll-height: calc(100vh - 210px">
+      <div mlv-layout="row gap:md align:vertical-center pad-bottom:sm">
+        <h3 mlv-text="body bold">Summary:</h3>
+        <section mlv-layout="row gap:xs align:center">
+          <span mlv-text="body sm muted">Total Available Components</span>
+          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.length}</mlv-badge></span>
+        </section>
+      </div>
+      <mlv-grid style="--scroll-height: calc(100vh - 290px)">
         <mlv-grid-header>
           ${Object.entries(this.state.columns).map(([name, column]) => html`
             <mlv-grid-column
@@ -434,14 +482,18 @@ class ElementsMetrics extends LitElement {
             <mlv-grid-cell><a href=${element.storybook.replace('https://elements.nvidia.com/ui/storybook/elements', './')} mlv-text="body link no-visit">${element.name.replace('mlv-', '')}</a></mlv-grid-cell>
             <mlv-grid-cell>${getStatusBadge(element.status)}</mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</mlv-grid-cell>
+            <mlv-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</mlv-grid-cell>
+            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.performance)}>${element.lighthouse.scores?.performance}</mlv-badge></mlv-grid-cell>
+            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.accessibility)}>${element.lighthouse.scores?.accessibility}</mlv-badge></mlv-grid-cell>
+            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.bestPractices)}>${element.lighthouse.scores?.bestPractices}</mlv-badge></mlv-grid-cell>
             <mlv-grid-cell>${getA11yStatusBadge(element.axe, true)}</mlv-grid-cell>
             <mlv-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} mlv-text="link no-visit">${element.behavior}</a></mlv-grid-cell>
             <mlv-grid-cell>${element.since}</mlv-grid-cell>
             <mlv-grid-cell>${element.tests.instanceTotal}</mlv-grid-cell>
             <mlv-grid-cell>${element.tests.projectTotal}</mlv-grid-cell>
-            <mlv-grid-cell>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit">Figma</a>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
+            <mlv-grid-cell>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit">Figma</a>` : html`<mlv-icon name="exclamation-triangle" status="warning"></mlv-icon>`}</mlv-grid-cell>
             <mlv-grid-cell><mlv-icon name="checkmark-circle" status="success"></mlv-icon></mlv-grid-cell>
-            <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="checkmark-circle" status="success"></mlv-icon>` : html`<mlv-icon name="warning" status="warning"></mlv-icon>`}</mlv-grid-cell>
+            <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="checkmark-circle" status="success"></mlv-icon>` : html`<mlv-icon name="exclamation-triangle" status="warning"></mlv-icon>`}</mlv-grid-cell>
           </mlv-grid-row>`
         })}
         <mlv-grid-footer>
@@ -491,7 +543,14 @@ class ProjectMetrics extends LitElement {
 
   render() {
     return html`
-      <mlv-grid style="--scroll-height: calc(50vh - 135px)">
+      <div mlv-layout="row gap:md align:vertical-center pad-bottom:sm">
+        <h3 mlv-text="body bold">Summary:</h3>
+        <section mlv-layout="row gap:xs align:center">
+          <span mlv-text="body sm muted">Total Maglev Instances</span>
+          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
+        </section>
+      </div>
+      <mlv-grid style="--scroll-height: calc(100vh - 290px)">
         <mlv-grid-header>
           ${Object.entries(this.state.columns).map(([name, column]) => html`
             <mlv-grid-column
@@ -512,7 +571,6 @@ class ProjectMetrics extends LitElement {
         `)}
         <mlv-grid-footer>
           <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
-          <mlv-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'projects', bubbles: true }))} interaction="flat" style="margin-left: auto">view data</mlv-button>
         </mlv-grid-footer>
       </mlv-grid>
       <mlv-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</mlv-tooltip>
@@ -522,8 +580,141 @@ class ProjectMetrics extends LitElement {
 
 define(ProjectMetrics);
 
+class LighthouseMetrics extends LitElement {
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
+  static metadata = {
+    tag: 'lighthouse-metrics',
+    version: 'demo'
+  }
+
+  render() {
+    return html`
+      <mlv-grid style="--scroll-height: calc(100vh - 290px)">
+        <mlv-grid-header>
+          <mlv-grid-column>Lighthouse Report</mlv-grid-column>
+          <mlv-grid-column>Performance</mlv-grid-column>
+          <mlv-grid-column>Accessibility</mlv-grid-column>
+          <mlv-grid-column>Best Practices</mlv-grid-column>
+          <mlv-grid-column>Bundle Size</mlv-grid-column>
+        </mlv-grid-header>
+        ${metrics.elements.map(element => html`
+          <mlv-grid-row>
+            <mlv-grid-cell>${element.name}</mlv-grid-cell>
+            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.performance)}>${element.lighthouse.scores?.performance}</mlv-badge></mlv-grid-cell>
+            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.accessibility)}>${element.lighthouse.scores?.accessibility}</mlv-badge></mlv-grid-cell>
+            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.bestPractices)}>${element.lighthouse.scores?.bestPractices}</mlv-badge></mlv-grid-cell>
+            <mlv-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</mlv-grid-cell>
+          </mlv-grid-row>
+        `)}
+        <mlv-grid-footer>
+          <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
+          <a mlv-text="link" href="https://developer.chrome.com/docs/lighthouse/overview/" style="margin-left: auto">Lighthouse</a>
+        </mlv-grid-footer>
+      </mlv-grid>
+    `;
+  }
+}
+
+define(LighthouseMetrics);
+
+class MetricsData extends LitElement {
+  static metadata = {
+    tag: 'metrics-data',
+    version: 'demo'
+  }
+
+  @state() value = { loading: '...' };
+
+  render() {
+    return html`
+    <div mlv-layout="column gap:lg">
+      <mlv-button @click=${this.#download}>download</mlv-button>
+      <mlv-json-viewer .value=${this.value} expanded></mlv-json-viewer>
+    </div>`;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    setTimeout(() => this.value = metrics);
+  }
+
+  #download() {
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(metrics, null, 2)));
+    element.setAttribute('download', 'metadata.json');
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+}
+
+define(MetricsData);
+
+class TestMetrics extends LitElement {
+  static metadata = {
+    tag: 'test-metrics',
+    version: 'demo'
+  }
+
+  static styles = [unsafeCSS(`${typography}${layout}`)];
+
+  render() {
+    return html`
+    <section mlv-layout="column gap:md">
+      <div mlv-layout="row gap:md align:vertical-center">
+        <h3 mlv-text="body bold">Test Coverage:</h3>
+        <section mlv-layout="row gap:xs align:center">
+          <span mlv-text="body sm muted">Statements</span>
+          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.statements.pct)}</span>
+        </section>
+        <section mlv-layout="row gap:xs align:center">
+          <span mlv-text="body sm muted">Lines</span>
+          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.lines.pct)}</span>
+        </section>
+        <section mlv-layout="row gap:xs align:center">
+          <span mlv-text="body sm muted">Functions</span>
+          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.functions.pct)}</span>
+        </section>
+        <section mlv-layout="row gap:xs align:center">
+          <span mlv-text="body sm muted">Branches</span>
+          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.branches.pct)}</span>
+        </section>
+      </div>
+      <mlv-grid style="--scroll-height: calc(100vh - 290px)">
+        <mlv-grid-header>
+          <mlv-grid-column width="350px">File</mlv-grid-column>
+          <mlv-grid-column width="180px">Statements</mlv-grid-column>
+          <mlv-grid-column width="180px">Lines</mlv-grid-column>
+          <mlv-grid-column width="180px">Functions</mlv-grid-column>
+          <mlv-grid-column>Branches</mlv-grid-column>
+        </mlv-grid-header>
+        ${metrics.tests.coverage.map(cov => html`
+          <mlv-grid-row>
+            <mlv-grid-cell><p mlv-text="body truncate">${cov.file}</p></mlv-grid-cell>
+            <mlv-grid-cell>${getCoverageStatus(cov.statements.pct)}</mlv-grid-cell>
+            <mlv-grid-cell>${getCoverageStatus(cov.lines.pct)}</mlv-grid-cell>
+            <mlv-grid-cell>${getCoverageStatus(cov.functions.pct)}</mlv-grid-cell>
+            <mlv-grid-cell>${getCoverageStatus(cov.branches.pct)}</mlv-grid-cell>
+          </mlv-grid-row>
+        `)}
+        <mlv-grid-footer>
+          <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
+          <!-- <mlv-button @click=${() => this.rawData = 'tests'} interaction="flat" style="margin-left: auto">view data</mlv-button> -->
+        </mlv-grid-footer>
+      </mlv-grid>
+    </section>
+    `;
+  }
+}
+
+define(TestMetrics);
+
 class MetricDemo extends LitElement {
   @state() rawData: '' | 'elements' | 'projects' | 'versions' | 'tests' = '';
+
+  @state() tab: 'metrics' | 'test' | 'lighthouse' | 'elements' | 'metadata' = 'metrics';
 
   static styles = [unsafeCSS(`${typography}${layout}`)];
 
@@ -534,7 +725,7 @@ class MetricDemo extends LitElement {
 
   render() {
     return html`
-    <div mlv-layout="column gap:xl align:horizontal-stretch pad:lg" no-story-container @view-data=${e => this.rawData = e.detail}>
+    <div mlv-layout="column gap:md align:horizontal-stretch pad:lg" no-story-container @view-data=${e => this.rawData = e.detail}>
       <div mlv-layout="column gap:md">
         <div mlv-layout="row gap:md">
           <h1 mlv-text="heading lg">@elements/elements</h1>
@@ -543,63 +734,24 @@ class MetricDemo extends LitElement {
         <p mlv-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
       </div>
 
-      <section mlv-layout="grid gap:md">
-        <div mlv-layout="column gap:md align:horizontal-stretch span:6">
-          <div mlv-layout="row gap:md align:vertical-center">
-            <h3 mlv-text="body bold">Summary:</h3>
-            <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Total Available Components</span>
-              <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.length}</mlv-badge></span>
-              <span mlv-text="body sm muted">Total Maglev Instances</span>
-              <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
-            </section>
-          </div>
-          <elements-metrics></elements-metrics>
+      <section mlv-layout="column gap:lg align:stretch pad-top:lg">
+        <div  mlv-layout="column gap:xs align:stretch">
+          <mlv-tabs>
+            <mlv-tabs-item .selected=${this.tab === 'metrics'} @click=${() => this.tab = 'metrics'} selected>Metrics</mlv-tabs-item>
+            <mlv-tabs-item .selected=${this.tab === 'test'} @click=${() => this.tab = 'test'}>Testing &amp; Performance</mlv-tabs-item>
+            <mlv-tabs-item .selected=${this.tab === 'metadata'} @click=${() => this.tab = 'metadata'}>Raw Metadata</mlv-tabs-item>
+            <mlv-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev Projects</mlv-tabs-item>
+          </mlv-tabs>
+          <mlv-divider></mlv-divider>
         </div>
-        <div mlv-layout="column gap:md align:horizontal-stretch span:6">
-          <div mlv-layout="row gap:md align:vertical-center">
-            <h3 mlv-text="body bold">Test Coverage:</h3>
-            <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Statements</span>
-              <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.statements.pct)}</span>
-            </section>
-            <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Lines</span>
-              <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.lines.pct)}</span>
-            </section>
-            <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Functions</span>
-              <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.functions.pct)}</span>
-            </section>
-            <section mlv-layout="row gap:xs align:center">
-              <span mlv-text="body sm muted">Branches</span>
-              <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.branches.pct)}</span>
-            </section>
-          </div>
-          <mlv-grid style="--scroll-height: calc(50vh - 130px)">
-            <mlv-grid-header>
-              <mlv-grid-column width="350px">File</mlv-grid-column>
-              <mlv-grid-column width="180px">Statements</mlv-grid-column>
-              <mlv-grid-column width="180px">Lines</mlv-grid-column>
-              <mlv-grid-column width="180px">Functions</mlv-grid-column>
-              <mlv-grid-column>Branches</mlv-grid-column>
-            </mlv-grid-header>
-            ${metrics.tests.coverage.map(cov => html`
-              <mlv-grid-row>
-                <mlv-grid-cell><p mlv-text="body truncate">${cov.file}</p></mlv-grid-cell>
-                <mlv-grid-cell>${getCoverageStatus(cov.statements.pct)}</mlv-grid-cell>
-                <mlv-grid-cell>${getCoverageStatus(cov.lines.pct)}</mlv-grid-cell>
-                <mlv-grid-cell>${getCoverageStatus(cov.functions.pct)}</mlv-grid-cell>
-                <mlv-grid-cell>${getCoverageStatus(cov.branches.pct)}</mlv-grid-cell>
-              </mlv-grid-row>
-            `)}
-            <mlv-grid-footer>
-              <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
-              <mlv-button @click=${() => this.rawData = 'tests'} interaction="flat" style="margin-left: auto">view data</mlv-button>
-            </mlv-grid-footer>
-          </mlv-grid>
-          <project-metrics></project-metrics>
-        </div>
+        ${this.tab === 'metrics' ? html`<elements-metrics></elements-metrics>` : nothing}
+        ${this.tab === 'test' ? html`
+        <div mlv-layout="grid gap:md span-items:6">
+          <test-metrics></test-metrics>
+          <lighthouse-metrics style="margin-top: 26px;"></lighthouse-metrics>
+        </div>` : nothing}
+        ${this.tab === 'elements' ? html`<project-metrics></project-metrics>` : nothing}
+        ${this.tab === 'metadata' ? html`<metrics-data></metrics-data>` : nothing}
       </section>
     </div>
     <mlv-drawer @close=${() => this.rawData = ''} .hidden=${!this.rawData} position="right" modal closable style="--max-width: 720px; --content-padding: 0">
@@ -644,6 +796,10 @@ define(MetricDemo);
 
 export const Metrics = {
   render: () => html`<metrics-demo no-story-container></metrics-demo>`
+};
+
+export const Maglev = {
+  render: () => html`<project-metrics></project-metrics>`
 };
 
 export const Glossary = {

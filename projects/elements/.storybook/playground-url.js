@@ -2,7 +2,6 @@ import { gzipSync } from 'fflate';
 import { html, nothing } from 'lit';
 import packageFile from '../package.json';
 import metrics from 'build/metadata.json';
-// import importmap from '@elements/elements/importmap.cdn.json';
 
 const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
@@ -94,7 +93,7 @@ function createDefaultFiles(content, storyId) {
   <script type="module" src="./index.js"></script>
   ${storyId.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
 </head>
-<body mlv-layout="${content.split('\n')[0].includes('full') ? '' : 'column gap:lg pad:lg'}">
+<body mlv-layout="${content.split('\n')[0].includes('full') ? '' : 'pad:lg'}">
 
 ${content}
 

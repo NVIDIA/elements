@@ -27,101 +27,93 @@ export default {
 
 export const Default = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const MultiSelect = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      <mlv-grid-column width="max-content" position="fixed">
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column width="max-content" position="fixed">
+      <mlv-checkbox>
+        <input type="checkbox" aria-label="select all rows" />
+      </mlv-checkbox>
+    </mlv-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems().map((row, i) => html`
+    <mlv-grid-row>
+      <mlv-grid-cell>
         <mlv-checkbox>
-          <input type="checkbox" aria-label="select all rows" />
+          <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
         </mlv-checkbox>
-      </mlv-grid-column>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems().map((row, i) => html`
-      <mlv-grid-row>
-        <mlv-grid-cell>
-          <mlv-checkbox>
-            <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
-          </mlv-checkbox>
-        </mlv-grid-cell>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+      </mlv-grid-cell>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const MultiSelectBulkActions = {
   render: () => html`
-<div>
-  <mlv-grid style="--scroll-height: 402px">
-    <mlv-grid-header>
-      <mlv-grid-column width="max-content" position="fixed">
+<mlv-grid style="--scroll-height: 402px">
+  <mlv-grid-header>
+    <mlv-grid-column width="max-content" position="fixed">
+      <mlv-checkbox>
+        <input type="checkbox" aria-label="select all rows" />
+      </mlv-checkbox>
+    </mlv-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems(20).map((row, i) => html`
+    <mlv-grid-row .selected=${i === 1}>
+      <mlv-grid-cell>
         <mlv-checkbox>
-          <input type="checkbox" aria-label="select all rows" />
+          <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
         </mlv-checkbox>
-      </mlv-grid-column>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems(20).map((row, i) => html`
-      <mlv-grid-row .selected=${i === 1}>
-        <mlv-grid-cell>
-          <mlv-checkbox>
-            <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
-          </mlv-checkbox>
-        </mlv-grid-cell>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-    <mlv-toolbar status="accent" slot="footer">
-      <mlv-icon-button interaction="flat" icon-name="cancel" slot="prefix"></mlv-icon-button>
-      <p mlv-text="boxy">1 selected</p>
-      <mlv-button interaction="flat-destructive" slot="suffix">delete</mlv-button>
-      <mlv-icon-button interaction="flat" icon-name="more-actions" slot="suffix"></mlv-icon-button>
-    </mlv-toolbar>
-  </mlv-grid>
-</div>
+      </mlv-grid-cell>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+  <mlv-toolbar status="accent" slot="footer">
+    <mlv-icon-button interaction="flat" icon-name="cancel" slot="prefix"></mlv-icon-button>
+    <p mlv-text="boxy">1 selected</p>
+    <mlv-button interaction="flat-destructive" slot="suffix">delete</mlv-button>
+    <mlv-icon-button interaction="flat" icon-name="more-actions" slot="suffix"></mlv-icon-button>
+  </mlv-toolbar>
+</mlv-grid>
   `
 };
 
 export const SingleSelect = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      <mlv-grid-column width="max-content" position="fixed"></mlv-grid-column>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems().map((row, i) => html`
-      <mlv-grid-row>
-        <mlv-grid-cell>
-          <mlv-radio>
-            <input type="radio" ?checked=${i === 1} name="single-select" .value=${i} aria-label="select row ${i}" />
-          </mlv-radio>
-        </mlv-grid-cell>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column width="max-content" position="fixed"></mlv-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems().map((row, i) => html`
+    <mlv-grid-row>
+      <mlv-grid-cell>
+        <mlv-radio>
+          <input type="radio" ?checked=${i === 1} name="single-select" .value=${i} aria-label="select row ${i}" />
+        </mlv-radio>
+      </mlv-grid-cell>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
@@ -148,328 +140,300 @@ export const RowAction = {
 
 export const RowGroups = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      <mlv-grid-column width="max-content" aria-label="expand groups" position="fixed"></mlv-grid-column>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    <mlv-grid-row>
-      <mlv-grid-cell>
-        <mlv-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></mlv-icon-button>
-      </mlv-grid-cell>
-      <mlv-grid-cell>Session: 2yuecae</mlv-grid-cell>
-      <mlv-grid-cell>upload</mlv-grid-cell>
-      <mlv-grid-cell>pending</mlv-grid-cell>
-      <mlv-grid-cell>p3</mlv-grid-cell>
-      <mlv-grid-cell>12/04/22</mlv-grid-cell>
-    </mlv-grid-row>
-    <mlv-grid-row selected>
-      <mlv-grid-cell>
-        <mlv-icon-button icon-name="chevron" interaction="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></mlv-icon-button>
-      </mlv-grid-cell>
-      <mlv-grid-cell>Session: mvwgh3t</mlv-grid-cell>
-      <mlv-grid-cell>upload</mlv-grid-cell>
-      <mlv-grid-cell>pending</mlv-grid-cell>
-      <mlv-grid-cell>p0</mlv-grid-cell>
-      <mlv-grid-cell>12/11/22</mlv-grid-cell>
-    </mlv-grid-row>
-    <mlv-grid-row>
-      <mlv-grid-cell></mlv-grid-cell>
-      <mlv-grid-cell>SSD: mvwgh3t</mlv-grid-cell>
-      <mlv-grid-cell>validating</mlv-grid-cell>
-      <mlv-grid-cell>pending</mlv-grid-cell>
-      <mlv-grid-cell>p0</mlv-grid-cell>
-      <mlv-grid-cell>12/11/22</mlv-grid-cell>
-    </mlv-grid-row>
-    <mlv-grid-row>
-      <mlv-grid-cell></mlv-grid-cell>
-      <mlv-grid-cell>SSD: qudbd8x</mlv-grid-cell>
-      <mlv-grid-cell>uploading</mlv-grid-cell>
-      <mlv-grid-cell>finished</mlv-grid-cell>
-      <mlv-grid-cell>p0</mlv-grid-cell>
-      <mlv-grid-cell>12/11/22</mlv-grid-cell>
-    </mlv-grid-row>
-    <mlv-grid-row>
-      <mlv-grid-cell></mlv-grid-cell>
-      <mlv-grid-cell>SSD: j8hvikt</mlv-grid-cell>
-      <mlv-grid-cell>queuing</mlv-grid-cell>
-      <mlv-grid-cell>running</mlv-grid-cell>
-      <mlv-grid-cell>p0</mlv-grid-cell>
-      <mlv-grid-cell>12/11/22</mlv-grid-cell>
-    </mlv-grid-row>
-    <mlv-grid-row>
-      <mlv-grid-cell>
-        <mlv-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></mlv-icon-button>
-      </mlv-grid-cell>
-      <mlv-grid-cell>Session: bg5ujqp</mlv-grid-cell>
-      <mlv-grid-cell>upload</mlv-grid-cell>
-      <mlv-grid-cell>pending</mlv-grid-cell>
-      <mlv-grid-cell>p1</mlv-grid-cell>
-      <mlv-grid-cell>12/12/22</mlv-grid-cell>
-    </mlv-grid-row>
-    <mlv-grid-row>
-      <mlv-grid-cell>
-        <mlv-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></mlv-icon-button>
-      </mlv-grid-cell>
-      <mlv-grid-cell>Session: 6ruehvh</mlv-grid-cell>
-      <mlv-grid-cell>upload</mlv-grid-cell>
-      <mlv-grid-cell>pending</mlv-grid-cell>
-      <mlv-grid-cell>p2</mlv-grid-cell>
-      <mlv-grid-cell>12/09/22</mlv-grid-cell>
-    </mlv-grid-row>
-  </mlv-grid>
-</div>
-  `
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column width="max-content" aria-label="expand groups" position="fixed"></mlv-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  <mlv-grid-row>
+    <mlv-grid-cell>
+      <mlv-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></mlv-icon-button>
+    </mlv-grid-cell>
+    <mlv-grid-cell>Session: 2yuecae</mlv-grid-cell>
+    <mlv-grid-cell>upload</mlv-grid-cell>
+    <mlv-grid-cell>pending</mlv-grid-cell>
+    <mlv-grid-cell>p3</mlv-grid-cell>
+    <mlv-grid-cell>12/04/22</mlv-grid-cell>
+  </mlv-grid-row>
+  <mlv-grid-row selected>
+    <mlv-grid-cell>
+      <mlv-icon-button icon-name="chevron" interaction="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></mlv-icon-button>
+    </mlv-grid-cell>
+    <mlv-grid-cell>Session: mvwgh3t</mlv-grid-cell>
+    <mlv-grid-cell>upload</mlv-grid-cell>
+    <mlv-grid-cell>pending</mlv-grid-cell>
+    <mlv-grid-cell>p0</mlv-grid-cell>
+    <mlv-grid-cell>12/11/22</mlv-grid-cell>
+  </mlv-grid-row>
+  <mlv-grid-row>
+    <mlv-grid-cell></mlv-grid-cell>
+    <mlv-grid-cell>SSD: mvwgh3t</mlv-grid-cell>
+    <mlv-grid-cell>validating</mlv-grid-cell>
+    <mlv-grid-cell>pending</mlv-grid-cell>
+    <mlv-grid-cell>p0</mlv-grid-cell>
+    <mlv-grid-cell>12/11/22</mlv-grid-cell>
+  </mlv-grid-row>
+  <mlv-grid-row>
+    <mlv-grid-cell></mlv-grid-cell>
+    <mlv-grid-cell>SSD: qudbd8x</mlv-grid-cell>
+    <mlv-grid-cell>uploading</mlv-grid-cell>
+    <mlv-grid-cell>finished</mlv-grid-cell>
+    <mlv-grid-cell>p0</mlv-grid-cell>
+    <mlv-grid-cell>12/11/22</mlv-grid-cell>
+  </mlv-grid-row>
+  <mlv-grid-row>
+    <mlv-grid-cell></mlv-grid-cell>
+    <mlv-grid-cell>SSD: j8hvikt</mlv-grid-cell>
+    <mlv-grid-cell>queuing</mlv-grid-cell>
+    <mlv-grid-cell>running</mlv-grid-cell>
+    <mlv-grid-cell>p0</mlv-grid-cell>
+    <mlv-grid-cell>12/11/22</mlv-grid-cell>
+  </mlv-grid-row>
+  <mlv-grid-row>
+    <mlv-grid-cell>
+      <mlv-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></mlv-icon-button>
+    </mlv-grid-cell>
+    <mlv-grid-cell>Session: bg5ujqp</mlv-grid-cell>
+    <mlv-grid-cell>upload</mlv-grid-cell>
+    <mlv-grid-cell>pending</mlv-grid-cell>
+    <mlv-grid-cell>p1</mlv-grid-cell>
+    <mlv-grid-cell>12/12/22</mlv-grid-cell>
+  </mlv-grid-row>
+  <mlv-grid-row>
+    <mlv-grid-cell>
+      <mlv-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></mlv-icon-button>
+    </mlv-grid-cell>
+    <mlv-grid-cell>Session: 6ruehvh</mlv-grid-cell>
+    <mlv-grid-cell>upload</mlv-grid-cell>
+    <mlv-grid-cell>pending</mlv-grid-cell>
+    <mlv-grid-cell>p2</mlv-grid-cell>
+    <mlv-grid-cell>12/09/22</mlv-grid-cell>
+  </mlv-grid-row>
+</mlv-grid>
+`
 };
 
 export const Footer = {
-  render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems(8).map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-    <mlv-grid-footer>
-      <p mlv-text="body">footer content</p>
-    </mlv-grid-footer>
-  </mlv-grid>
-</div>
+render: () => html`
+<mlv-grid>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems(8).map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+  <mlv-grid-footer>
+    <p mlv-text="body">footer content</p>
+  </mlv-grid-footer>
+</mlv-grid>
   `
 };
 
 export const FooterScrollbar = {
   render: () => html`
-<div>
 <mlv-grid style="--scroll-height: 402px">
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems(14).map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-    <mlv-grid-footer>
-      <p mlv-text="body">footer content</p>
-    </mlv-grid-footer>
-  </mlv-grid>
-</div>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems(14).map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+  <mlv-grid-footer>
+    <p mlv-text="body">footer content</p>
+  </mlv-grid-footer>
+</mlv-grid>
   `
 };
 
 export const Pagination = {
   render: () => html`
-<div>
-  <mlv-grid style="--scroll-height: 370px">
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-    <mlv-grid-footer>
-      <mlv-pagination value="1" items="100" step="10"></mlv-pagination>
-    </mlv-grid-footer>
-  </mlv-grid>
-</div>
+<mlv-grid style="--scroll-height: 370px">
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+  <mlv-grid-footer>
+    <mlv-pagination value="1" items="100" step="10"></mlv-pagination>
+  </mlv-grid-footer>
+</mlv-grid>
   `
 };
 
 export const Scroll = {
   render: () => html`
-<div>
-  <mlv-grid style="--scroll-height: 402px">
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems(100).map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid style="--scroll-height: 402px">
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems(100).map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const ColumnAction = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`
-        <mlv-grid-column>
-          ${column.label} <mlv-icon-button id="column-${i}-btn" slot="actions"></mlv-icon-button>
-        </mlv-grid-column>`)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-  <mlv-dropdown anchor="column-0-btn" arrow>
-    <mlv-search rounded>
-      <input type="search" placeholder="search column" aria-label="search apps" />
-    </mlv-search>
-    <mlv-menu>
-      <mlv-menu-item><mlv-icon name="gear"></mlv-icon> settings</mlv-menu-item>
-      <mlv-menu-item><mlv-icon name="star"></mlv-icon> favorites</mlv-menu-item>
-    </mlv-menu>
-  </mlv-dropdown>
-</div>
+<mlv-grid>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`
+      <mlv-grid-column>
+        ${column.label} <mlv-icon-button id="column-${i}-btn" slot="actions"></mlv-icon-button>
+      </mlv-grid-column>`)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
+<mlv-dropdown anchor="column-0-btn" arrow>
+  <mlv-search rounded>
+    <input type="search" placeholder="search column" aria-label="search apps" />
+  </mlv-search>
+  <mlv-menu>
+    <mlv-menu-item><mlv-icon name="gear"></mlv-icon> settings</mlv-menu-item>
+    <mlv-menu-item><mlv-icon name="star"></mlv-icon> favorites</mlv-menu-item>
+  </mlv-menu>
+</mlv-dropdown>
   `
 };
 
 export const ColumnWidth = {
   render: () => html`
-<div>
-  <mlv-grid style="--scroll-height: 402px">
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-    <mlv-grid-footer>footer content</mlv-grid-footer>
-  </mlv-grid>
-</div>
+<mlv-grid style="--scroll-height: 402px">
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+  <mlv-grid-footer>footer content</mlv-grid-footer>
+</mlv-grid>
   `
 };
 
 export const Content = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems(10).map((row, ir) => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell], ic) => html`<mlv-grid-cell>${ir === 3 && ic === 2 ? `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores` : cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems(10).map((row, ir) => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell], ic) => html`<mlv-grid-cell>${ir === 3 && ic === 2 ? `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores` : cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const ColumnFixed = {
   render: () => html`
-<div>
-  <mlv-grid style="--scroll-height: 402px; max-width: 800px">
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid style="--scroll-height: 402px; max-width: 800px">
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const ColumnMultiFixed = {
   render: () => html`
-<div>
-  <mlv-grid style="--scroll-height: 402px; max-width: 800px">
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column>`)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid style="--scroll-height: 402px; max-width: 800px">
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column>`)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const ColumnStackFixed = {
   render: () => html`
-<div>
-  <mlv-grid style="--scroll-height: 402px; max-width: 800px">
-    <mlv-grid-header>
-      <mlv-grid-column position="fixed" width="100px">Column 1</mlv-grid-column>
-      <mlv-grid-column position="fixed" width="100px">Column 2</mlv-grid-column>
-      <mlv-grid-column width="200px">Column 3</mlv-grid-column>
-      <mlv-grid-column width="200px">Column 4</mlv-grid-column>
-      <mlv-grid-column width="200px">Column 5</mlv-grid-column>
-      <mlv-grid-column width="200px">Column 6</mlv-grid-column>
-      <mlv-grid-column position="fixed" width="100px">Column 7</mlv-grid-column>
-      <mlv-grid-column position="fixed" width="100px">Column 8</mlv-grid-column>
-    </mlv-grid-header>
-    ${grid(10, 8).rows.map(row => html`
-      <mlv-grid-row>
-        ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid style="--scroll-height: 402px; max-width: 800px">
+  <mlv-grid-header>
+    <mlv-grid-column position="fixed" width="100px">Column 1</mlv-grid-column>
+    <mlv-grid-column position="fixed" width="100px">Column 2</mlv-grid-column>
+    <mlv-grid-column width="200px">Column 3</mlv-grid-column>
+    <mlv-grid-column width="200px">Column 4</mlv-grid-column>
+    <mlv-grid-column width="200px">Column 5</mlv-grid-column>
+    <mlv-grid-column width="200px">Column 6</mlv-grid-column>
+    <mlv-grid-column position="fixed" width="100px">Column 7</mlv-grid-column>
+    <mlv-grid-column position="fixed" width="100px">Column 8</mlv-grid-column>
+  </mlv-grid-header>
+  ${grid(10, 8).rows.map(row => html`
+    <mlv-grid-row>
+      ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const ColumnAlignCenter = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column column-align="center">${column.label}</mlv-grid-column>`)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column column-align="center">${column.label}</mlv-grid-column>`)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const ColumnAlignEnd = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column column-align="end">${column.label}</mlv-grid-column>`)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column column-align="end">${column.label}</mlv-grid-column>`)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const ColumnAlignStart = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column column-align="start">${column.label}</mlv-grid-column>`)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column column-align="start">${column.label}</mlv-grid-column>`)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
@@ -519,28 +483,26 @@ export const DisplaySettings = {
 
 export const RowSort = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      <mlv-grid-column>
-        None <mlv-sort-button sort="none"></mlv-sort-button>
-      </mlv-grid-column>
-      <mlv-grid-column>
-        Ascending <mlv-sort-button sort="ascending"></mlv-sort-button>
-      </mlv-grid-column>
-      <mlv-grid-column>
-        Descending <mlv-sort-button sort="descending"></mlv-sort-button>
-      </mlv-grid-column>
-      <mlv-grid-column>Default</mlv-grid-column>
-      <mlv-grid-column>Default</mlv-grid-column>
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column>
+      None <mlv-sort-button sort="none"></mlv-sort-button>
+    </mlv-grid-column>
+    <mlv-grid-column>
+      Ascending <mlv-sort-button sort="ascending"></mlv-sort-button>
+    </mlv-grid-column>
+    <mlv-grid-column>
+      Descending <mlv-sort-button sort="descending"></mlv-sort-button>
+    </mlv-grid-column>
+    <mlv-grid-column>Default</mlv-grid-column>
+    <mlv-grid-column>Default</mlv-grid-column>
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
@@ -594,11 +556,7 @@ class RowSortDemo extends LitElement {
 customElements.get('row-sort-demo') || customElements.define('row-sort-demo', RowSortDemo);
 
 export const RowSortInteractive = {
-  render: () => html`
-<div>
-  <row-sort-demo></row-sort-demo>
-</div>
-  `
+  render: () => html`<row-sort-demo></row-sort-demo>`
 };
 
 class InfiniteScrollDemo extends LitElement {
@@ -645,11 +603,7 @@ class InfiniteScrollDemo extends LitElement {
 customElements.get('infinite-scroll-demo') || customElements.define('infinite-scroll-demo', InfiniteScrollDemo);
 
 export const PerformanceInfiniteScroll = {
-  render: () => html`
-<div>
-  <infinite-scroll-demo></infinite-scroll-demo>
-</div>
-  `
+  render: () => html`<infinite-scroll-demo></infinite-scroll-demo>`
 };
 
 class GridPerformanceDemo extends LitElement {
@@ -697,11 +651,7 @@ class GridPerformanceDemo extends LitElement {
 customElements.get('grid-performance-demo') || customElements.define('grid-performance-demo', GridPerformanceDemo);
 
 export const Performance = {
-  render: () => html`
-<div>
-  <grid-performance-demo></grid-performance-demo>
-</div>
-  `
+  render: () => html`<grid-performance-demo></grid-performance-demo>`
 };
 
 class GridVirtualScrollDemo extends LitElement {
@@ -730,169 +680,152 @@ class GridVirtualScrollDemo extends LitElement {
 customElements.get('grid-virtual-scroll-demo') || customElements.define('grid-virtual-scroll-demo', GridVirtualScrollDemo);
 
 export const PerformanceVirtualScroll = {
-  render: () => html`
-<div>
-  <grid-virtual-scroll-demo></grid-virtual-scroll-demo>
-</div>
-  `
+  render: () => html`<grid-virtual-scroll-demo></grid-virtual-scroll-demo>`
 };
 
 export const Stripe = {
   render: () => html`
-<div>
-  <mlv-grid stripe>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-      </mlv-grid-row>
-    `)}
-  </mlv-grid>
-</div>
+<mlv-grid stripe>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const Card = {
   render: () => html`
-<div>
-  <mlv-card>
-    <mlv-card-header>
-      <h2 mlv-text="heading sm bold">Data Grid</h2>
-      <h3 mlv-text="body muted">Card Example</h3>
-      <mlv-icon-button slot="header-action" icon-name="more-actions"></mlv-icon-button>
-    </mlv-card-header>
-    <mlv-grid container="flat" style="--scroll-height: 325px">
-      <mlv-grid-header>
-        ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-      </mlv-grid-header>
-      ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-      </mlv-grid-row>
-      `)}
-    </mlv-grid>
-  </mlv-card>
-</div>
-  `
-};
-
-export const CardTabs = {
-  render: () => html`
-<div>
-  <mlv-card>
-    <mlv-card-header>
-      <h2 mlv-text="heading sm bold">Data Grid</h2>
-      <mlv-tabs>
-        <mlv-tabs-item selected>tab 1</mlv-tabs-item>
-        <mlv-tabs-item>tab 2</mlv-tabs-item>
-        <mlv-tabs-item>tab 3</mlv-tabs-item>
-      </mlv-tabs>
-    </mlv-card-header>
-    <mlv-grid container="flat" style="--scroll-height: 325px">
-      <mlv-grid-header>
-        ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-      </mlv-grid-header>
-      ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-      </mlv-grid-row>
-      `)}
-    </mlv-grid>
-  </mlv-card>
-</div>
-  `
-};
-
-export const Placeholder = {
-  render: () => html`
-<div>
-  <mlv-grid style="--scroll-height: 402px">
-    <mlv-grid-header>
-      <mlv-grid-column></mlv-grid-column>
-    </mlv-grid-header>
-    <mlv-grid-placeholder>
-      Loading...
-    </mlv-grid-placeholder>
-  </mlv-grid>
-</div>
-  `
-};
-
-export const Full = {
-  render: () => html`
-<div>
-  <mlv-grid container="full" style="--scroll-height: 402px">
+<mlv-card>
+  <mlv-card-header>
+    <h2 mlv-text="heading sm bold">Data Grid</h2>
+    <h3 mlv-text="body muted">Card Example</h3>
+    <mlv-icon-button slot="header-action" icon-name="more-actions"></mlv-icon-button>
+  </mlv-card-header>
+  <mlv-grid container="flat" style="--scroll-height: 325px">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
-    ${getItems(20).map(row => html`
+    ${getItems().map(row => html`
     <mlv-grid-row>
       ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
     </mlv-grid-row>
     `)}
   </mlv-grid>
-</div>
+</mlv-card>
+  `
+};
+
+export const CardTabs = {
+  render: () => html`
+<mlv-card>
+  <mlv-card-header>
+    <h2 mlv-text="heading sm bold">Data Grid</h2>
+    <mlv-tabs>
+      <mlv-tabs-item selected>tab 1</mlv-tabs-item>
+      <mlv-tabs-item>tab 2</mlv-tabs-item>
+      <mlv-tabs-item>tab 3</mlv-tabs-item>
+    </mlv-tabs>
+  </mlv-card-header>
+  <mlv-grid container="flat" style="--scroll-height: 325px">
+    <mlv-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+    </mlv-grid-header>
+    ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
+    </mlv-grid-row>
+    `)}
+  </mlv-grid>
+</mlv-card>
+  `
+};
+
+export const Placeholder = {
+  render: () => html`
+<mlv-grid style="--scroll-height: 402px">
+  <mlv-grid-header>
+    <mlv-grid-column></mlv-grid-column>
+  </mlv-grid-header>
+  <mlv-grid-placeholder>
+    Loading...
+  </mlv-grid-placeholder>
+</mlv-grid>
+  `
+};
+
+export const Full = {
+  render: () => html`
+<mlv-grid container="full" style="--scroll-height: 402px">
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems(20).map(row => html`
+  <mlv-grid-row>
+    ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
+  </mlv-grid-row>
+  `)}
+</mlv-grid>
   `
 };
 
 export const Flat = {
   render: () => html`
-    <div>
-      <mlv-grid container="flat" style="--scroll-height: 402px">
-        <mlv-grid-header>
-          ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-        </mlv-grid-header>
-        ${getItems(20).map(row => html`
-        <mlv-grid-row>
-          ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-        </mlv-grid-row>
-        `)}
-      </mlv-grid>
-    </div>`
+<mlv-grid container="flat" style="--scroll-height: 402px">
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems(20).map(row => html`
+  <mlv-grid-row>
+    ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
+  </mlv-grid-row>
+  `)}
+</mlv-grid>
+  `
 };
 
 export const PanelDetail = {
   render: () => html`
-<div>
-  <div id="grid-detail-panel" mlv-layout="row gap:md align:stretch">
-    <mlv-grid>
-      <mlv-grid-header>
-        ${grid(10, 3).columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-        <mlv-grid-column width="max-content" aria-label="details"></mlv-grid-column>
-      </mlv-grid-header>
-      ${grid(10, 3).rows.map((row, i) => html`
-        <mlv-grid-row ?selected=${i === 1}>
-          ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
-          <mlv-grid-cell>
-            <mlv-icon-button interaction="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
-          </mlv-grid-cell>
-        </mlv-grid-row>
-      `)}
-    </mlv-grid>
-    <mlv-panel expanded closable style="min-width: 280px">
-      <mlv-panel-header>
-        <h2 slot="title">Row 2 Details</h2>
-      </mlv-panel-header>
-      <mlv-panel-content>
-        <div mlv-layout="column gap:md">
-          <div mlv-layout="column gap:xs">
-            <label mlv-text="body sm muted">Task</label>
-            <p mlv-text="eyebrow sm">Workflow</p>
-          </div>
-          <div mlv-layout="column gap:xs">
-            <label mlv-text="body sm muted">Status</label>
-            <mlv-badge status="success">Complete</mlv-badge>
-          </div>
-          <div mlv-layout="column gap:xs">
-            <label mlv-text="body sm muted">Priority</label>
-            <mlv-badge status="pending">P1</mlv-badge>
-          </div>
+<div id="grid-detail-panel" mlv-layout="row gap:md align:stretch">
+  <mlv-grid>
+    <mlv-grid-header>
+      ${grid(10, 3).columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+      <mlv-grid-column width="max-content" aria-label="details"></mlv-grid-column>
+    </mlv-grid-header>
+    ${grid(10, 3).rows.map((row, i) => html`
+      <mlv-grid-row ?selected=${i === 1}>
+        ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
+        <mlv-grid-cell>
+          <mlv-icon-button interaction="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
+        </mlv-grid-cell>
+      </mlv-grid-row>
+    `)}
+  </mlv-grid>
+  <mlv-panel expanded closable style="min-width: 280px">
+    <mlv-panel-header>
+      <h2 slot="title">Row 2 Details</h2>
+    </mlv-panel-header>
+    <mlv-panel-content>
+      <div mlv-layout="column gap:md">
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm muted">Task</label>
+          <p mlv-text="eyebrow sm">Workflow</p>
         </div>
-      </mlv-panel-content>
-    </mlv-panel>
-  </div>
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm muted">Status</label>
+          <mlv-badge status="success">Complete</mlv-badge>
+        </div>
+        <div mlv-layout="column gap:xs">
+          <label mlv-text="body sm muted">Priority</label>
+          <mlv-badge status="pending">P1</mlv-badge>
+        </div>
+      </div>
+    </mlv-panel-content>
+  </mlv-panel>
 </div>
   `
 };
@@ -1009,11 +942,7 @@ class GridPanelDemo extends LitElement {
 customElements.get('grid-panel-demo') || customElements.define('grid-panel-demo', GridPanelDemo);
 
 export const PanelDetailInteractive = {
-  render: () => html`
-<div>
-  <grid-panel-demo></grid-panel-demo>
-</div>
-  `
+  render: () => html`<grid-panel-demo></grid-panel-demo>`
 };
 
 class GridDynamicColumnDemo extends LitElement {
@@ -1051,11 +980,7 @@ class GridDynamicColumnDemo extends LitElement {
 customElements.get('grid-dynamic-column-demo') || customElements.define('grid-dynamic-column-demo', GridDynamicColumnDemo);
 
 export const ColumnDynamicFixed = {
-  render: () => html`
-<div>
-  <grid-dynamic-column-demo></grid-dynamic-column-demo>
-</div>
-  `
+  render: () => html`<grid-dynamic-column-demo></grid-dynamic-column-demo>`
 };
 
 export const All = {
@@ -1158,19 +1083,17 @@ export const All = {
 
 export const InvalidDOM = {
   render: () => html`
-<div>
-  <mlv-grid>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
-    <div>invalid</div>
-    ${getItems().map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
-    `)}
-    <span>invalid</span>
-  </mlv-grid>
-</div>
+<mlv-grid>
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  <div>invalid</div>
+  ${getItems().map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+  <span>invalid</span>
+</mlv-grid>
   `
 };

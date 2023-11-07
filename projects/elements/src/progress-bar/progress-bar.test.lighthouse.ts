@@ -1,0 +1,18 @@
+import { expect, test, describe } from 'vitest';
+import { runner } from 'elements-lighthouse';
+
+describe('progress-bar lighthouse report', () => {
+  test('progress-bar should meet lighthouse benchmarks', async () => {
+    const report = await runner.getReport('mlv-progress-bar', /* html */`
+      <mlv-progress-bar></mlv-progress-bar>
+      <script type="module">
+        import '@elements/elements/progress-bar/define.js';
+      </script>
+    `);
+
+    expect(report.scores.performance).toBe(100);
+    expect(report.scores.accessibility).toBe(100);
+    expect(report.scores.bestPractices).toBe(100);
+    expect(report.payload.javascript.kb).toBeLessThan(9);
+  });
+});
