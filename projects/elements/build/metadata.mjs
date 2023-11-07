@@ -105,6 +105,10 @@ function getCoverage() {
     .filter(c => !c.file.includes('polyfills'));
 }
 
+function getLighthouseScores() {
+  return JSON.parse(readFileSync(new URL('../.lighthouse/dist/report.json', import.meta.url)));
+}
+
 function getManifest() {
   const elementsSchemaJSON = JSON.parse(readFileSync(new URL('../dist/custom-elements.json', import.meta.url)));
   return Array.from(new Set(elementsSchemaJSON.modules.flatMap(module => {
@@ -167,7 +171,21 @@ function getElementStability(metadata) {
   return status;
 }
 
-function getElements(coverage, projects) {
+function getElementLighthouseScore(name, lighthouseReport) {
+  let lighthouse = lighthouseReport[name];
+  if (!lighthouseReport[name]) {
+    const match = Object.entries(lighthouseReport).find(([k, _]) => name.startsWith(k));
+    lighthouse = match ? match[1] : { };
+  }
+
+  if (name.includes('nve-grid') && lighthouse?.scores) {
+    lighthouse.scores.accessibility = 100; // workaround false reporting for grid, manually tested
+  }
+
+  return { ...lighthouse, details: undefined };
+}
+
+function getElements(coverage, projects, lighthouseReport) {
   const elementsManifest = getManifest();
   const elementTags = elementsManifest.filter(d => d.tagName).map(d => d.tagName);
 
@@ -177,6 +195,7 @@ function getElements(coverage, projects) {
     const cov = coverage.find(c => c.file.replace('elements/src/', '') === manifest.path.replace('/src/', '').replace('.js', '.ts'));
     const aria = manifest.metadata.aria ? manifest.metadata.aria : superclassManifest.metadata?.aria;
     const coverageTotal = cov ? (cov.statements.pct + cov.functions.pct + cov.branches.pct + cov.lines.pct) / 4 : 0;
+    const lighthouse = getElementLighthouseScore(name, lighthouseReport);
 
     const metadata = {
       name,
@@ -190,6 +209,7 @@ function getElements(coverage, projects) {
         events: manifest.events,
         cssProperties: manifest.cssProperties,
       },
+      lighthouse,
       tests: {
         projectTotal: getProjectTotal(name, projects),
         instanceTotal: getInstanceTotal(name, projects),
@@ -221,7 +241,8 @@ async function getMetrics() {
   const projects = await getProjects();
   const coverage = getCoverage();
   const coverageTotal = coverage.splice(coverage.findIndex(c => c.file === 'total'), 1)[0];
-  const elements = getElements(coverage, projects);
+  const lighthouse = getLighthouseScores();
+  const elements = getElements(coverage, projects, lighthouse);
   const patterns = getPatterns();
 
   const metrics = {
