@@ -1,5 +1,7 @@
 import { html } from 'lit';
 import '@elements/elements/badge/define.js';
+import '@elements/elements/button/define.js';
+import '@elements/elements/icon-button/define.js';
 import '@elements/elements/card/define.js';
 import '@elements/elements/tabs/define.js';
 import '@elements/elements/button/define.js';
@@ -274,6 +276,78 @@ export const LayoutHeaderPanelCards = {
   }
 }
 
+export const ButtonRowFilledIcon = {
+  render: () => html`
+  <div mlv-layout="row gap:xs">
+    <mlv-icon-button icon-name="double-chevron" direction="up"></mlv-icon-button>
+    <mlv-icon-button icon-name="chevron" direction="up"></mlv-icon-button>
+    <mlv-icon-button icon-name="chevron" direction="down"></mlv-icon-button>
+    <mlv-icon-button icon-name="double-chevron" direction="down"></mlv-icon-button>
+  </div>
+  `
+};
+
+export const ButtonRowFlatIcon = {
+  render: () => html`
+  <div mlv-layout="row gap:xxxs">
+    <mlv-icon-button interaction="flat" icon-name="double-chevron" direction="up"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" icon-name="chevron" direction="up"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" icon-name="chevron" direction="down"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" icon-name="double-chevron" direction="down"></mlv-icon-button>
+  </div>
+  `
+};
+
+export const ButtonRowSmallFlatIcon = {
+  render: () => html`
+  <div mlv-layout="row gap:xxxs">
+    <mlv-icon-button interaction="flat" size="sm" icon-name="double-chevron" direction="up"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" size="sm" icon-name="chevron" direction="up"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" size="sm" icon-name="chevron" direction="down"></mlv-icon-button>
+    <mlv-icon-button interaction="flat" size="sm" icon-name="double-chevron" direction="down"></mlv-icon-button>
+  </div>
+  `
+};
+
+export const ButtonRowFlatText = {
+  render: () => html`
+  <div mlv-layout="row gap:xxxs">
+    <mlv-button interaction="flat">Button CTA</mlv-button>
+    <mlv-button interaction="flat">Button CTA</mlv-button>
+  </div>
+  `
+};
+
+export const ButtonRowFlatTextWithIcon = {
+  render: () => html`
+  <div mlv-layout="row gap:xxxs">
+    <mlv-button interaction="flat">
+      <mlv-icon name="gear" style="--color: var(--mlv-sys-text-muted-color)"></mlv-icon>
+      Sync MB
+    </mlv-button>
+    <mlv-button interaction="flat">
+      <mlv-icon name="undo" style="--color: var(--mlv-sys-text-muted-color)"></mlv-icon>
+      Revert Timestamps
+    </mlv-button>
+    <mlv-button interaction="flat">
+      <mlv-icon name="add" style="--color: var(--mlv-sys-text-muted-color)"></mlv-icon>
+      Add Event
+    </mlv-button>
+  </div>
+  `
+};
+
+export const ButtonRowFilledTextWithIcon = {
+  render: () => html`
+  <div mlv-layout="row gap:xs">
+    <mlv-button>Button CTA</mlv-button>
+    <mlv-button>Button CTA</mlv-button>
+    <mlv-button interaction="emphasize">Button CTA</mlv-button>
+    <mlv-icon-button icon-name="more-actions"></mlv-icon-button>
+  </div>
+  `
+};
+
 export const Trend = {
   render: () => html`
   <div mlv-layout="column gap:sm">
@@ -319,21 +393,21 @@ export const TrendBottomBadge = {
 
 export const ShortcutFilled = {
   render: () => html`
-    <div mlv-text="keyboard-shortcut">CMD + C</div>
+    <div mlv-text="code">CMD + C</div>
   `
 };
 
 export const ShortcutFlat = {
   render: () => html`
-    <div mlv-text="keyboard-shortcut" style="background: none">CMD + C</div>
+    <div mlv-text="code" style="background: none">CMD + C</div>
   `
 };
 
 export const ShortcutDropdown = {
   render: () => html`
-  <mlv-button id="keyboard-shortcut-menu">dropdown</mlv-button>
+  <mlv-button id="code-menu">dropdown</mlv-button>
 
-  <mlv-dropdown anchor="keyboard-shortcut-menu" trigger="keyboard-shortcut-menu" hidden>
+  <mlv-dropdown anchor="code-menu" trigger="code-menu" hidden>
     <mlv-menu>
       <mlv-menu-item>
         <mlv-icon name="edit"></mlv-icon> Edit
@@ -342,7 +416,7 @@ export const ShortcutDropdown = {
       <mlv-menu-item>
         <mlv-icon name="copy"></mlv-icon> Copy
         
-        <div mlv-text="keyboard-shortcut">CMD + C</div>
+        <div mlv-text="code">CMD + C</div>
       </mlv-menu-item>
 
       <mlv-menu-item>
@@ -358,4 +432,4 @@ export const ShortcutDropdown = {
     dropdown.addEventListener('close', () => dropdown.hidden = true);
   </script>
   `
-};
+  };

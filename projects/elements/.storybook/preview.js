@@ -269,6 +269,7 @@ export const parameters = {
           'Row',
           'Trend',
           'Keyboard Shortcut',
+          'Button Row',
           'Examples'
         ],
         'Internal'

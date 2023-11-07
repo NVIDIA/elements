@@ -198,13 +198,6 @@
   }
 }
 
-[mlv-text~='code'] {
-  font-weight: var(--mlv-ref-font-weight-regular) !important;
-  color: var(--mlv-sys-text-color) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
 [mlv-text~='uppercase'] {
   text-transform: uppercase !important;
 }
@@ -240,7 +233,7 @@
 }
 
 
-[mlv-text~='keyboard-shortcut'] {
+[mlv-text~='code'] {
   background: var(--mlv-sys-interaction-field-background);
   border-radius: var(--mlv-ref-border-radius-xs);
   padding: var(--mlv-ref-size-50) var(--mlv-ref-size-100);
