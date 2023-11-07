@@ -1,7 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { query } from 'lit/decorators/query.js';
 import { keyNavigationGrid, useStyles, attachInternals, appendRootNodeStyle, generateId, ContainerElement, validateSlots } from '@elements/elements/internal';
 import type { GridHeader } from './header/header.js';
 import type { GridColumn } from './column/column.js';
@@ -60,8 +59,6 @@ export class Grid extends LitElement implements ContainerElement {
       cells: [...this.#columns, ...this.#cells]
     }
   }
-
-  @query('[part=scrollbox]', true) private scrollbox!: HTMLElement;
   
   @queryAssignedElements({ selector: 'nve-grid-header', flatten: true }) private gridHeader!: GridHeader[];
 
@@ -82,7 +79,7 @@ export class Grid extends LitElement implements ContainerElement {
     return html`
       <div internal-host>
         <div role="rowgroup" part="scrollbox">
-          <slot></slot>
+          <slot allowed="nve-grid-row nve-grid-header nve-grid-placeholder"></slot>
         </div>
         <slot name="footer"></slot>
       </div>

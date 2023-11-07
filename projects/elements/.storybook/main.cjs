@@ -26,7 +26,7 @@ module.exports = {
       base: config.server ? undefined : '/ui/storybook/elements/',
       server: {
         watch: {
-          ignored: [resolve('node_modules/**'), resolve('.playwright/**'), resolve('.wireit/**'), resolve('coverage/**'), resolve('storybook-build/**'), `!${resolve('dist/**')}`],
+          ignored: [resolve('node_modules/**'), resolve('.playwright/**'), resolve('.lighthouse/**'), resolve('build/**'), resolve('.wireit/**'), resolve('coverage/**'), resolve('storybook-build/**'), `!${resolve('dist/**')}`],
         },
       },
       build: {
