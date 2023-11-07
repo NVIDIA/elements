@@ -12,7 +12,7 @@ rulesdir.RULES_DIR = './build/eslint';
 const source = ['**/src/**/*.ts', '**/src/**/*.d.ts'];
 const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts'];
 const stories = ['**/*.stories.ts'];
-const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/storybook-build/**'];
+const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/storybook-build/**', '**/.lighthouse/**'];
 
 export default [
   'eslint:recommended',

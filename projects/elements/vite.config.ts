@@ -46,7 +46,7 @@ export default defineConfig((env) => {
       watch: mode === 'watch' ? {} : undefined,
       outDir: dist(),
       emptyOutDir: false,
-      target: 'es2021', // temporarily blocked on using esnext or es2022 due to Webpack in IDE plugins https://github.com/webpack/webpack/issues/16330
+      target: 'es2022',
       lib: {
         entry: {
           index: resolve('./src/index.ts'),                                    // imports all independent component entrypoints
@@ -88,7 +88,7 @@ export default defineConfig((env) => {
           },
           replace({ preventAssignment: false, values: { PACKAGE_VERSION: packageFile.version }}),
           mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
-          mode === 'production' ? terser({ ecma: 2020, module: true }) : false // https://github.com/vitejs/vite/issues/8848
+          mode === 'production' ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } }) : false // https://github.com/vitejs/vite/issues/8848
         ]
       }
     }
