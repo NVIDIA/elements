@@ -31,3 +31,16 @@ export const Max = {
     </div>
   `
 };
+
+export const Labeled = {
+  render: () => html`
+    <div nve-layout="column gap:md pad:lg align:horizontal-stretch">
+      <div nve-layout="row align:space-between">
+        <p nve-text="label muted sm">Upload Status</p>
+        <p nve-text="label emphasis sm">80%</p>
+      </div>
+
+      <nve-progress-bar status="accent" value="80"></nve-progress-bar>
+    </div>
+  `
+};
