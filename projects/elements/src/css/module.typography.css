@@ -238,3 +238,13 @@
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
+
+
+[mlv-text~='keyboard-shortcut'] {
+  background: var(--mlv-sys-interaction-field-background);
+  border-radius: var(--mlv-ref-border-radius-xs);
+  padding: var(--mlv-ref-size-50) var(--mlv-ref-size-100);
+  color: var(--mlv-sys-text-color);
+  font-family: monospace;
+  display: inline-block;
+}

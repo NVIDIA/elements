@@ -4,6 +4,8 @@ import '@elements/elements/card/define.js';
 import '@elements/elements/tabs/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/grid/define.js';
+import '@elements/elements/dropdown/define.js';
+import '@elements/elements/menu/define.js';
 import '@elements/elements/panel/define.js';
 import '@elements/elements/icon-button/define.js';
 
@@ -312,5 +314,48 @@ export const TrendBottomBadge = {
       <mlv-badge status="trend-up">+15%</mlv-badge>
     </div>
   </div>
+  `
+};
+
+export const ShortcutFilled = {
+  render: () => html`
+    <div mlv-text="keyboard-shortcut">CMD + C</div>
+  `
+};
+
+export const ShortcutFlat = {
+  render: () => html`
+    <div mlv-text="keyboard-shortcut" style="background: none">CMD + C</div>
+  `
+};
+
+export const ShortcutDropdown = {
+  render: () => html`
+  <mlv-button id="keyboard-shortcut-menu">dropdown</mlv-button>
+
+  <mlv-dropdown anchor="keyboard-shortcut-menu" trigger="keyboard-shortcut-menu" hidden>
+    <mlv-menu>
+      <mlv-menu-item>
+        <mlv-icon name="edit"></mlv-icon> Edit
+      </mlv-menu-item>
+
+      <mlv-menu-item>
+        <mlv-icon name="copy"></mlv-icon> Copy
+        
+        <div mlv-text="keyboard-shortcut">CMD + C</div>
+      </mlv-menu-item>
+
+      <mlv-menu-item>
+        <mlv-icon name="delete"></mlv-icon> Delete
+      </mlv-menu-item>
+    </mlv-menu>
+  </mlv-dropdown>
+
+
+  <script>
+    const dropdown = document.querySelector('mlv-dropdown');
+    dropdown.addEventListener('open', () => dropdown.hidden = false);
+    dropdown.addEventListener('close', () => dropdown.hidden = true);
+  </script>
   `
 };

@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import '@elements/elements/tag/define.js';
+import '@elements/elements/icon-button/define.js';
 
 export default {
   title: 'Elements/Tag/Examples',
@@ -14,37 +15,50 @@ export const Default = {
 
 export const Closable = {
   render: () => html`
-<div mlv-layout="row gap:xs align:wrap">
-  <mlv-tag closable>default-color</mlv-tag>
-  <mlv-tag closable color="red-cardinal">red-cardinal</mlv-tag>
-  <mlv-tag closable color="gray-slate">gray-slate</mlv-tag>
-  <mlv-tag closable color="gray-denim">gray-denim</mlv-tag>
-  <mlv-tag closable color="blue-indigo">blue-indigo</mlv-tag>
-  <mlv-tag closable color="blue-cobalt">blue-cobalt</mlv-tag>
-  <mlv-tag closable color="blue-sky">blue-sky</mlv-tag>
-  <mlv-tag closable color="teal-cyan">teal-cyan</mlv-tag>
-  <mlv-tag closable color="green-mint">green-mint</mlv-tag>
-  <mlv-tag closable color="teal-seafoam">teal-seafoam</mlv-tag>
-  <mlv-tag closable color="green-grass">green-grass</mlv-tag>
-  <mlv-tag closable color="yellow-amber">yellow-amber</mlv-tag>
-  <mlv-tag closable color="orange-pumpkin">orange-pumpkin</mlv-tag>
-  <mlv-tag closable color="red-tomato">red-tomato</mlv-tag>
-  <mlv-tag closable color="pink-magenta">pink-magenta</mlv-tag>
-  <mlv-tag closable color="purple-plum">purple-plum</mlv-tag>
-  <mlv-tag closable color="purple-violet">purple-violet</mlv-tag>
-  <mlv-tag closable color="purple-lavender">purple-lavender</mlv-tag>
-  <mlv-tag closable color="pink-rose">pink-rose</mlv-tag>
-  <mlv-tag closable color="green-jade">green-jade</mlv-tag>
-  <mlv-tag closable color="lime-pear">lime-pear</mlv-tag>
-  <mlv-tag closable color="yellow-nova">yellow-nova</mlv-tag>
-  <mlv-tag closable color="brand-green">brand-green</mlv-tag>
-</div>
+  <div mlv-layout="row gap:xs align:wrap">
+    <mlv-tag closable>default-color</mlv-tag>
+    <mlv-tag closable color="red-cardinal">red-cardinal</mlv-tag>
+    <mlv-tag closable color="gray-slate">gray-slate</mlv-tag>
+    <mlv-tag closable color="gray-denim">gray-denim</mlv-tag>
+    <mlv-tag closable color="blue-indigo">blue-indigo</mlv-tag>
+    <mlv-tag closable color="blue-cobalt">blue-cobalt</mlv-tag>
+    <mlv-tag closable color="blue-sky">blue-sky</mlv-tag>
+    <mlv-tag closable color="teal-cyan">teal-cyan</mlv-tag>
+    <mlv-tag closable color="green-mint">green-mint</mlv-tag>
+    <mlv-tag closable color="teal-seafoam">teal-seafoam</mlv-tag>
+    <mlv-tag closable color="green-grass">green-grass</mlv-tag>
+    <mlv-tag closable color="yellow-amber">yellow-amber</mlv-tag>
+    <mlv-tag closable color="orange-pumpkin">orange-pumpkin</mlv-tag>
+    <mlv-tag closable color="red-tomato">red-tomato</mlv-tag>
+    <mlv-tag closable color="pink-magenta">pink-magenta</mlv-tag>
+    <mlv-tag closable color="purple-plum">purple-plum</mlv-tag>
+    <mlv-tag closable color="purple-violet">purple-violet</mlv-tag>
+    <mlv-tag closable color="purple-lavender">purple-lavender</mlv-tag>
+    <mlv-tag closable color="pink-rose">pink-rose</mlv-tag>
+    <mlv-tag closable color="green-jade">green-jade</mlv-tag>
+    <mlv-tag closable color="lime-pear">lime-pear</mlv-tag>
+    <mlv-tag closable color="yellow-nova">yellow-nova</mlv-tag>
+    <mlv-tag closable color="brand-green">brand-green</mlv-tag>
+  </div>
   `
 };
 
 export const Readonly = {
   render: () => html`
   <mlv-tag readonly>topic-tag</mlv-tag>
+  `
+};
+
+export const TagGroup = {
+  render: () => html`
+   <div mlv-layout="row gap:xs align:vertical-center">
+    <mlv-tag>topic-tag</mlv-tag>
+    <mlv-tag>topic-tag</mlv-tag>
+    <mlv-tag>topic-tag</mlv-tag>
+    <mlv-tag>3+</mlv-tag>
+
+    <mlv-icon-button interaction="flat" size="sm" icon-name="add"></mlv-icon-button>
+  </div>
   `
 };
 
