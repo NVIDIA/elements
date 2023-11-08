@@ -238,3 +238,13 @@
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
+
+
+[nve-text~='keyboard-shortcut'] {
+  background: var(--nve-sys-interaction-field-background);
+  border-radius: var(--nve-ref-border-radius-xs);
+  padding: var(--nve-ref-size-50) var(--nve-ref-size-100);
+  color: var(--nve-sys-text-color);
+  font-family: monospace;
+  display: inline-block;
+}
