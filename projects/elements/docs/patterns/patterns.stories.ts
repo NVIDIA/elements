@@ -4,6 +4,8 @@ import '@elements/elements/card/define.js';
 import '@elements/elements/tabs/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/grid/define.js';
+import '@elements/elements/dropdown/define.js';
+import '@elements/elements/menu/define.js';
 import '@elements/elements/panel/define.js';
 import '@elements/elements/icon-button/define.js';
 
@@ -312,5 +314,48 @@ export const TrendBottomBadge = {
       <nve-badge status="trend-up">+15%</nve-badge>
     </div>
   </div>
+  `
+};
+
+export const ShortcutFilled = {
+  render: () => html`
+    <div nve-text="keyboard-shortcut">CMD + C</div>
+  `
+};
+
+export const ShortcutFlat = {
+  render: () => html`
+    <div nve-text="keyboard-shortcut" style="background: none">CMD + C</div>
+  `
+};
+
+export const ShortcutDropdown = {
+  render: () => html`
+  <nve-button id="keyboard-shortcut-menu">dropdown</nve-button>
+
+  <nve-dropdown anchor="keyboard-shortcut-menu" trigger="keyboard-shortcut-menu" hidden>
+    <nve-menu>
+      <nve-menu-item>
+        <nve-icon name="edit"></nve-icon> Edit
+      </nve-menu-item>
+
+      <nve-menu-item>
+        <nve-icon name="copy"></nve-icon> Copy
+        
+        <div nve-text="keyboard-shortcut">CMD + C</div>
+      </nve-menu-item>
+
+      <nve-menu-item>
+        <nve-icon name="delete"></nve-icon> Delete
+      </nve-menu-item>
+    </nve-menu>
+  </nve-dropdown>
+
+
+  <script>
+    const dropdown = document.querySelector('nve-dropdown');
+    dropdown.addEventListener('open', () => dropdown.hidden = false);
+    dropdown.addEventListener('close', () => dropdown.hidden = true);
+  </script>
   `
 };
