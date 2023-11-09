@@ -1155,3 +1155,22 @@ export const All = {
   </div>
 </div>`
 }
+
+export const InvalidDOM = {
+  render: () => html`
+<div nve-theme="root">
+  <nve-grid>
+    <nve-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    </nve-grid-header>
+    <div>invalid</div>
+    ${getItems().map(row => html`
+      <nve-grid-row>
+        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+      </nve-grid-row>
+    `)}
+    <span>invalid</span>
+  </nve-grid>
+</div>
+  `
+};

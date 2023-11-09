@@ -200,6 +200,18 @@ export const ContainerFill = {
   `
 }
 
+export const ContainerFlat = {
+  render: () => html`
+    <div nve-theme="root">
+      <nve-card container="flat">
+        <nve-card-content>
+          Container Flat
+        </nve-card-content>
+      </nve-card>
+    </div>
+  `
+}
+
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="pad:md align:center">
