@@ -32,3 +32,10 @@
   --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --border-radius: 0;
 }
+
+:host([container='flat']) {
+  --background: transparent;
+  --border-bottom: none;
+  --border-radius: 0;
+  --box-shadow: none;
+}
