@@ -14,8 +14,15 @@ import styles from './search.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/search
  */
 export class Search extends Control implements ContainerElement {
-  /** Flat container option is used when embeding component within another containing element */
+  /**
+   * Flat container option is used when embeding component within another containing element
+   */
   @property({ type: String, reflect: true }) container?: 'flat';
+
+  /**
+   * Sets the rounded visual style of the input.
+   */
+  @property({ type: Boolean, reflect: true }) rounded = false;
 
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 

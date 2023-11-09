@@ -27,6 +27,11 @@ export class Input extends Control implements ContainerElement {
    */
   @property({ type: String, reflect: true }) container?: 'flat';
 
+  /**
+   * Sets the rounded visual style of the input.
+   */
+  @property({ type: Boolean, reflect: true }) rounded = false;
+
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {

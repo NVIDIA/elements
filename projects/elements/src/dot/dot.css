@@ -10,6 +10,7 @@
   --width: var(--mlv-ref-size-300);
   --padding: 0;
   width: auto;
+  display: inline-flex;
 }
 
 [internal-host] {
@@ -42,8 +43,8 @@
 }
 
 :host(:--has-text) {
-  --width: initial;
-  --height: initial;
+  --width: fit-content;
+  --height: fit-content;
   --padding: calc(var(--font-size) * .1) calc(var(--font-size) * .5);
 }
 

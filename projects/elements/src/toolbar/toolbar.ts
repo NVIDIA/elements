@@ -41,9 +41,9 @@ export class Toolbar extends LitElement implements ContainerElement {
   static elementDefinitions = { };
 
   /**
-   * Determines the container visual style.
+   * Determines the container styles of component. Flat is used for nesting elements within other containers or more muted style. Full is used when the element expands the full width of the viewport.
    */
-  @property({ type: String, reflect: true }) container?: 'flat' | 'inset';
+  @property({ type: String, reflect: true }) container?: 'flat' | 'inset' | 'full';
 
   /**
    * Determines the primary content overflow behavior.

@@ -21,6 +21,11 @@
   --padding: 0;
 }
 
+:host([container='full']) {
+  --box-shadow: none;
+  --border-radius: 0;
+}
+
 :host([container='inset']) {
   --border-bottom: 0;
 }

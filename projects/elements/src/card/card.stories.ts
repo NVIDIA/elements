@@ -200,6 +200,18 @@ export const ContainerFill = {
   `
 }
 
+export const ContainerFlat = {
+  render: () => html`
+    <div mlv-theme="root">
+      <mlv-card container="flat">
+        <mlv-card-content>
+          Container Flat
+        </mlv-card-content>
+      </mlv-card>
+    </div>
+  `
+}
+
 export const LightTheme = {
   render: () => html`
 <div mlv-theme="root light" mlv-layout="pad:md align:center">

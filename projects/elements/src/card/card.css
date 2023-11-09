@@ -32,3 +32,10 @@
   --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
   --border-radius: 0;
 }
+
+:host([container='flat']) {
+  --background: transparent;
+  --border-bottom: none;
+  --border-radius: 0;
+  --box-shadow: none;
+}

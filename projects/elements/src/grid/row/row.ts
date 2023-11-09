@@ -25,7 +25,8 @@ export class GridRow extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-grid-row',
-    version: 'PACKAGE_VERSION'
+    version: 'PACKAGE_VERSION',
+    children: ['mlv-grid-cell']
   };
 
   /** @private */

@@ -10,6 +10,7 @@
   --text-transform: capitalize;
   --width: initial;
   --height: initial;
+  display: inline-flex;
 }
 
 [internal-host] {
@@ -27,12 +28,17 @@
   align-items: center;
   line-height: 1em;
   place-items: center;
-  place-content: center;
 }
 
-:host(:--has-text) {
-  --height: calc(var(--mlv-ref-size-400) + var(--mlv-ref-size-50));
-  --width: calc(var(--mlv-ref-size-400) + var(--mlv-ref-size-50));
+slot:not([name]) {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+:host([aria-label]) slot:not([name]) {
+  display: contents;
 }
 
 ::slotted([mlv-text]) {

@@ -1,15 +1,23 @@
 import { GlobalStateService } from './global.service.js';
 
+const prefix = '@elements/elements: ';
+
 export class LogService {
-  static log(args: any) {
+  static log(value, ...args: any) {
     if (GlobalStateService.state.env !== 'production') {
-      console.log(...args);
+      console.log(`${prefix}${value}`, ...args);
+    }
+  }
+
+  static warn(value, ...args: any) {
+    if (GlobalStateService.state.env !== 'production') {
+      console.warn(`${prefix}${value}`, ...args);
     }
   }
 
   static error(value, ...args: any) {
     if (GlobalStateService.state.env !== 'production') {
-      console.error(value, ...args);
+      console.error(`${prefix}${value}`, ...args);
     }
   }
 }

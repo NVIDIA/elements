@@ -1155,3 +1155,22 @@ export const All = {
   </div>
 </div>`
 }
+
+export const InvalidDOM = {
+  render: () => html`
+<div mlv-theme="root">
+  <mlv-grid>
+    <mlv-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+    </mlv-grid-header>
+    <div>invalid</div>
+    ${getItems().map(row => html`
+      <mlv-grid-row>
+        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+      </mlv-grid-row>
+    `)}
+    <span>invalid</span>
+  </mlv-grid>
+</div>
+  `
+};

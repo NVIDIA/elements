@@ -52,6 +52,18 @@ export const ContainerInset = {
   `
 };
 
+export const ContainerFull = {
+  render: () => html`
+  <div mlv-theme="root">
+    <mlv-toolbar container="full">
+      <mlv-button interaction="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
+      <mlv-button interaction="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
+      <mlv-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
+    </mlv-toolbar>
+  </div>
+  `
+};
+
 export const Groups = {
   render: () => html`
   <div mlv-theme="root">

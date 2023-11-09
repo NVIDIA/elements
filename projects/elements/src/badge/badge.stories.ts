@@ -152,3 +152,9 @@ export const Color = {
 </div>
   `
 };
+
+export const Overflow = {
+  render: () => html`
+  <mlv-badge status="pending" style="--width: 150px">some really long content</mlv-badge>
+  `
+};

@@ -1,6 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, attachInternals, debounce, LogService } from '@elements/elements/internal';
+import { useStyles, attachInternals, debounce, LogService, validateSlots } from '@elements/elements/internal';
 import type { Grid, GridColumn } from '@elements/elements/grid';
 import styles from './header.css?inline';
 import { GlobalStateService } from '@elements/elements/internal/services/global.service';
@@ -22,7 +22,8 @@ export class GridHeader extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-grid-header',
-    version: 'PACKAGE_VERSION'
+    version: 'PACKAGE_VERSION',
+    children: ['mlv-grid-column']
   };
 
   /** @private */
@@ -56,6 +57,7 @@ export class GridHeader extends LitElement {
     const debounceFn = debounce(() => this.#computeColumnWidths(), 100);
     new ResizeObserver(debounceFn).observe(this);
     this.#validateColumns();
+    validateSlots(this);
   }
 
   async #computeColumnWidths() {
@@ -76,7 +78,7 @@ export class GridHeader extends LitElement {
     if (GlobalStateService.state.env !== 'production') {
       const cells = this.#grid.querySelector('mlv-grid-row')?.querySelectorAll('mlv-grid-cell');
       if (this.columns && cells && (this.columns.length !== cells.length)) {
-        LogService.error(`Error: mlv-grid-column (${this.columns.length}) and mlv-grid-cell (${cells.length}) count mismatch`);
+        LogService.error(`mlv-grid-column (${this.columns.length}) and mlv-grid-cell (${cells.length}) count mismatch`);
       }
     }
   }

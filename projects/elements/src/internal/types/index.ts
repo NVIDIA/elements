@@ -92,7 +92,7 @@ export interface MlvElement {
   /** Determines the size options of a given element */
   size?: 'sm' | 'md' | 'lg';
 
-  /** Determines the container styles of component. Flat is used for nesting elements within other containers. Inset can be used for more complex elements where content is distinctly separated. */
+  /** Determines the container styles of component. Flat is used for nesting elements within other containers or more muted style. Full is used when the element expands the full width of the viewport. Inset can be used for more complex elements where content is distinctly separated. */
   container?: 'flat' | 'inset' | 'inline' | 'full';
 
   /** Determines the position of an element along both inline and block axis. https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Box_alignment_in_grid_layout#the_two_axes_of_a_grid_layout */
@@ -148,17 +148,15 @@ export const statusIcons: { [key: string]: IconName } = {
 };
 
 declare global {
-  interface Window {
-    MLV_ELEMENTS: {
-      state: {
-        env: 'watch' | 'production' | 'development';
-        versions: string[];
-        elementRegistry: Readonly<{ [key: string]: string }>;
-        i18nRegistry: Readonly<{ [key: string]: string }>;
-        iconRegistry: Readonly<{ [key: string]: any }>;
-      },
-      debug: (log?: (...args) => void) => void;
-    }
+  /* eslint-disable no-var */
+  var MLV_ELEMENTS: {
+    state: {
+      env: 'watch' | 'production' | 'development';
+      versions: string[];
+      elementRegistry: Readonly<{ [key: string]: string }>;
+      i18nRegistry: Readonly<{ [key: string]: string }>;
+    },
+    debug: (log?: (...args) => void) => void;
   }
 
   interface ElementInternals {
