@@ -4,8 +4,6 @@
   --height: var(--nve-ref-size-400);
   display: inline-flex;
   contain: layout;
-  content-visibility: auto;
-  contain-intrinsic-size: var(--width) var(--height);
 }
 
 [internal-host] {

@@ -1,4 +1,5 @@
 import { GlobalStateService } from '../services/global.service.js';
+import { LogService } from '../services/log.service.js';
 import { isFocusable } from './focus.js';
 
 /**
@@ -277,5 +278,18 @@ export function applySlotContentStates(slot: HTMLSlotElement, element: HTMLEleme
     element._internals.states.add(`--has-${name}`);
   } else {
     element._internals.states.delete(`--has-${name}`);
+  }
+}
+
+export function validateSlots(host: HTMLElement) {
+  if (GlobalStateService.state.env !== 'production') {
+    const slots = Array.from(host.shadowRoot.querySelectorAll('slot'));
+    const allowed = (host.constructor as any).metadata.children;
+    slots.forEach(slot => {
+      const invalid = slot.assignedElements().filter(e =>  !allowed.map(i => i.toUpperCase()).includes(e.tagName));
+      if (invalid.length) {
+        LogService.warn(`Invalid slotted elements detected in ${host.tagName.toLocaleLowerCase()}. Allowed ${allowed.join(', ')}`);
+      }
+    });
   }
 }

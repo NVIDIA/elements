@@ -1,8 +1,8 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { query } from 'lit/decorators/query.js';
-import { keyNavigationGrid, useStyles, attachInternals, appendRootNodeStyle, generateId, stateScroll, ContainerElement } from '@elements/elements/internal';
+import { keyNavigationGrid, useStyles, attachInternals, appendRootNodeStyle, generateId, ContainerElement, validateSlots } from '@elements/elements/internal';
 import type { GridHeader } from './header/header.js';
 import type { GridColumn } from './column/column.js';
 import type { GridRow } from './row/row.js';
@@ -29,7 +29,6 @@ import globalStyles from './grid.global.css?inline';
  * @stable false
  * @responsive false
  */
-@stateScroll<Grid>()
 @keyNavigationGrid<Grid>()
 export class Grid extends LitElement implements ContainerElement {
   /**
@@ -46,7 +45,8 @@ export class Grid extends LitElement implements ContainerElement {
 
   static readonly metadata = {
     tag: 'nve-grid',
-    version: 'PACKAGE_VERSION'
+    version: 'PACKAGE_VERSION',
+    children: ['nve-grid-row', 'nve-grid-header', 'nve-grid-placeholder']
   };
 
   static elementDefinitions = {
@@ -58,13 +58,6 @@ export class Grid extends LitElement implements ContainerElement {
       columns: this.#columns,
       rows: [this.querySelector<GridHeader>('nve-grid-header'), ...this.rows],
       cells: [...this.#columns, ...this.#cells]
-    }
-  }
-
-  get stateScrollConfig() {
-    return {
-      target: this.scrollbox,
-      scrollOffset: 100
     }
   }
 
@@ -102,5 +95,10 @@ export class Grid extends LitElement implements ContainerElement {
     this._internals.role = 'grid';
     this.id ||= generateId();
     appendRootNodeStyle(this, globalStyles);
+  }
+
+  async firstUpdated(props: PropertyValues<this>) {
+    super.firstUpdated(props);
+    validateSlots(this);
   }
 }
