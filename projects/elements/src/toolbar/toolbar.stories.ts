@@ -52,6 +52,18 @@ export const ContainerInset = {
   `
 };
 
+export const ContainerFull = {
+  render: () => html`
+  <div nve-theme="root">
+    <nve-toolbar container="full">
+      <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+    </nve-toolbar>
+  </div>
+  `
+};
+
 export const Groups = {
   render: () => html`
   <div nve-theme="root">

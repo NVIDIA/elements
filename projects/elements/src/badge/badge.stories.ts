@@ -152,3 +152,9 @@ export const Color = {
 </div>
   `
 };
+
+export const Overflow = {
+  render: () => html`
+  <nve-badge status="pending" style="--width: 150px">some really long content</nve-badge>
+  `
+};
