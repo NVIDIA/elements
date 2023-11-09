@@ -8,8 +8,7 @@ export class GlobalState {
         env: (import.meta as any).env.MODE,
         versions: [],
         elementRegistry: { },
-        i18nRegistry: { },
-        iconRegistry: { }
+        i18nRegistry: { }
       }
     };
 
