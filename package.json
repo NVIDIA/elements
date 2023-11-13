@@ -1,0 +1,52 @@
+{
+  "name": "elements-workspace",
+  "version": "0.20.0",
+  "type": "module",
+  "scripts": {
+    "ci": "wireit",
+    "version": "wireit",
+    "publish": "wireit",
+    "publish:dryrun": "wireit",
+    "login": "pnpm login --scope=@elements --registry=https://registry.npmjs.org",
+    "login:elements": "pnpm login --scope=@elements --registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/"
+  },
+  "dependencies": {
+    "wireit": "0.14.1"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "./elements:playwright",
+        "./elements-react:playwright",
+        "./demos/extensions:ci",
+        "./demos/mpa:ci",
+        "./demos/nextjs:ci",
+        "./demos/react:ci",
+        "./demos/static:ci",
+        "./demos/typescript:ci",
+        "./elements:ci",
+        "./elements-react:ci"
+      ]
+    },
+    "version": {
+      "command": "node ./build/version.js",
+      "files": [
+        "build/version.js",
+        "package.json"
+      ],
+      "output": []
+    },
+    "publish": {
+      "command": "pnpm run --prefix elements artifactory && pnpm run --prefix elements-react artifactory",
+      "dependencies": [
+        "ci"
+      ]
+    },
+    "publish:dryrun": {
+      "command": "pnpm run --prefix elements artifactory:dryrun && pnpm run --prefix elements-react artifactory:dryrun",
+      "dependencies": [
+        "ci"
+      ]
+    }
+  }
+}

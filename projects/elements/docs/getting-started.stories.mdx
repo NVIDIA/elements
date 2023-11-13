@@ -17,7 +17,10 @@ import '@elements/elements/logo/define.js';
 <nve-divider></nve-divider>
 
 ```bash
-# add internal registry to local .npmrc file (optional)
+# add internal registry to local .npmrc file
+@elements:registry=https://registry.npmjs.org
+
+# or if in Maglev Monorepo
 @elements:registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
 
 # install from registry

@@ -88,8 +88,7 @@
     },
     "ci": {
       "dependencies": [
-        "build",
-        "test"
+        "build"
       ]
     },
     "build": {

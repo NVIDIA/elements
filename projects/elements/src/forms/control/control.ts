@@ -14,6 +14,7 @@ import styles from './control.css?inline';
 /**
  * @element nve-control
  * @since 0.3.0
+ * @entrypoint \@elements/elements/forms
  * @slot - Control input element
  * @cssprop --cursor
  * @cssprop --accent-color

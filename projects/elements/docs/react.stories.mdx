@@ -10,21 +10,12 @@ import '@elements/elements/alert/define.js';
 </nve-alert>
 
 To use Maglev Elements in [React](https://reactjs.org/) follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps. Once complete
-elements can be imported and used within React jsx and tsx files. The `@lit/react` package must be used to enable React compatibility with Custom Elements.
-This package will wrap elements into a React component mapping the standard events and properties in a way that React can understand.
+elements can be imported and used within React jsx and tsx files via the `@elements/elements-react` package. This package must be used to enable React compatibility with Custom Elements.
+This package will wrap the custom elements into a React component, mapping the standard events and properties in a way that React can understand.
 
 ```tsx
-import * as React from 'react';
-import { createComponent } from '@lit/react';
-import { Dialog } from '@elements/elements/dialog/index.js';
-import '@elements/elements/dialog/define.js';
+import { MlvDialog } from '@elements/elements-react/dialog';
 
-export const MlvDialog = createComponent({ react: React, tagName: 'nve-dialog', elementClass: Dialog, events: { onclose: 'close' } });
-```
-
-The `MlvDialog` React component can now be used within a React application.
-
-```tsx
 // - closable - HTML attribute
 // - hidden - can update via attributes or JavaScript property binding
 // - onclose - event listener binding for 'close' custom event
@@ -32,6 +23,16 @@ The `MlvDialog` React component can now be used within a React application.
 <MlvDialog closable modal hidden={!showDialog} onclose={() => setShowDialog(false)}>
   ...
 </MlvDialog>
+```
+
+Documented events are prefixed with `on` in the `elements-react` package. Example, the event `close` will map to `onclose`. Imports also map 1:1 with the core library.
+
+```tsx
+// Standard Web Component
+import { MlvDialog } from '@elements/elements/dialog';
+
+// React Component
+import { MlvDialog } from '@elements/elements-react/dialog';
 ```
 
 To learn more about the `@lit/react` package, please visit the [documentation](https://github.com/lit/lit/blob/main/packages/react/README.md).
