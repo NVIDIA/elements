@@ -293,3 +293,11 @@ export function validateSlots(host: HTMLElement) {
     });
   }
 }
+
+export function getDisplayValue(option: { label?: string, value?: string; }) {
+  if (option) {
+    return option.label ? option.label : option.value;
+  } else {
+    return '';
+  }
+}
