@@ -22,7 +22,7 @@ wireit_bin.wireit_binary(
         "postcss.config.cjs",
         "custom-elements-manifest.config.mjs"
     ],
-    env = { "CI": "true", "WIREIT_CACHE": "none", "npm_lifecycle_event": "ci" },
+    env = { "CI": "true", "WIREIT_CACHE": "none", "npm_lifecycle_event": "ci", "PLAYWRIGHT_BROWSERS_PATH": ".playwright" },
     tags = ["ui"],
 )
 
