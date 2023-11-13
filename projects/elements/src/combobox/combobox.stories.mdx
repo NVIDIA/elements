@@ -1,4 +1,4 @@
-import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
 import { statusBadges } from '../../docs/utils.mdx';
 
 <Meta title="Elements/Combobox/Documentation" parameters={{ badges: statusBadges('nve-combobox') }} />
@@ -35,7 +35,7 @@ import '@elements/elements/combobox/define.js';
 
 The multiple option behavior preserves the native select value behavior. The `value` on the select
 will only reflect the first selected value. To get all selected options check the `selected` property
-on each `<option>` element or the select property `selectedOptions`.
+on each `<option>` element or the select property [selectedOptions](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions).
 
 <Canvas>
   <Story id="elements-combobox-examples--multi-select" />
@@ -49,6 +49,20 @@ that does not match a option in the select, the value will be cleared.
 
 <Canvas>
   <Story id="elements-combobox-examples--select" />
+</Canvas>
+
+## Option Label
+
+Options by default provide a value for the user input. However, a optional label can be provided as well.
+If a option label is provided, the label will be displayed to the user rather than the value.
+
+<nve-alert status="warning">
+  When using labels the text input value will be the option label rather than the option value.
+  The select input will continue to use option value.
+</nve-alert>
+
+<Canvas>
+  <Story id="elements-combobox-examples--label" />
 </Canvas>
 
 ## Overflow
