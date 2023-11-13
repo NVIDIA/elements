@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox, getThemeTokens, removeEmptySlotWhitespace, hasHorizontalScrollBar } from '@elements/elements/internal';
+import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox, getThemeTokens, removeEmptySlotWhitespace, hasHorizontalScrollBar, getDisplayValue } from '@elements/elements/internal';
 
 @customElement('dom-test-element')
 class TestComponent extends LitElement {
@@ -471,5 +471,24 @@ describe('hasHorizontalScrollBar', () => {
 
   it('should determine if element has a horizontal scroll bar', () => {
     expect(hasHorizontalScrollBar(element)).toBe(true);
+  });
+});
+
+describe('getDisplayValue', () => {
+  it('should return the label value if provided', () => {
+    expect(getDisplayValue({ label: 'label', value: '' })).toBe('label');
+    expect(getDisplayValue({ label: 'label', value: 'value' })).toBe('label');
+    expect(getDisplayValue({ label: 'label', value: null })).toBe('label');
+    expect(getDisplayValue({ label: 'label', value: undefined })).toBe('label');
+  });
+
+  it('should return the value if no label is provided', () => {
+    expect(getDisplayValue({ value: 'value', label: '' })).toBe('value');
+    expect(getDisplayValue({ value: 'value', label: null })).toBe('value');
+    expect(getDisplayValue({ value: 'value', label: undefined })).toBe('value');
+  });
+
+  it('should return empty string if no option was provided', () => {
+    expect(getDisplayValue(undefined)).toBe('');
   });
 });

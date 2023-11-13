@@ -209,6 +209,24 @@ export const MultiSelect = () => {
   `
 };
 
+export const Label = () => {
+  return html`
+  <nve-combobox>
+    <label>label</label>
+    <input type="search">
+    <select>
+      <option value="status">Status</option>
+      <option value="priority">Priority</option>
+      <option value="date">Date</option>
+      <option value="session">Session</option>
+      <option value="configuration">Configuration</option>
+      <option value="contains">Contains</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  `
+};
+
 export const Overflow = () => {
   return html`
   <nve-combobox style="width: 250px">
