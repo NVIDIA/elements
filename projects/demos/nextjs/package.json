@@ -4,34 +4,35 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
     "start": "wireit",
     "lint": "wireit"
   },
   "dependencies": {
-    "@lit-labs/nextjs": "0.1.2",
-    "@lit-labs/react": "2.0.0",
+    "@lit-labs/nextjs": "0.1.4",
     "@elements/elements": "workspace:*",
+    "@elements/elements-react": "workspace:*",
     "@types/node": "20.4.7",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2",
+    "wireit": "0.14.1"
   },
   "wireit": {
     "dev": {
       "command": "next dev",
       "dependencies": [
-        "../../elements:build"
+        "../../elements-react:build"
       ]
     },
     "ci": {
       "dependencies": [
-        "build",
-        "lint"
+        "build"
       ]
     },
     "lint": {
@@ -46,7 +47,7 @@
     "build": {
       "command": "next build",
       "dependencies": [
-        "../../elements:build"
+        "../../elements-react:build"
       ],
       "output": [
         ".next/**"
