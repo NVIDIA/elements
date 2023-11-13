@@ -11,6 +11,8 @@ describe('mlv-combobox', () => {
   let fixture: HTMLElement;
   let element: Combobox;
   let input: HTMLInputElement;
+  let options: HTMLOptionElement[];
+  let items: MenuItem[];
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -27,6 +29,8 @@ describe('mlv-combobox', () => {
     `);
     element = fixture.querySelector('mlv-combobox');
     input = fixture.querySelector('input');
+    options = Array.from(fixture.querySelectorAll<HTMLOptionElement>('option'));
+    items = Array.from(element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item'));
     await elementIsStable(element);
   });
 
@@ -41,8 +45,17 @@ describe('mlv-combobox', () => {
   it('should render a menu item for each provided option', async () => {
     emulateClick(input);
     await elementIsStable(element);
+    expect(items.length).toBe(3);
+  });
+
+  it('should reflect each option to a menu item', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
     const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
     expect(items.length).toBe(3);
+    expect(items[0].textContent.trim()).toBe(options[0].value);
+    expect(items[1].textContent.trim()).toBe(options[1].value);
+    expect(items[2].textContent.trim()).toBe(options[2].value);
   });
 
   it('should default the dropdown to align start to prevent overflow clipping when options are wider than the input itsself', async () => {
@@ -218,6 +231,17 @@ describe('mlv-combobox single select', () => {
     expect(input.value).toBe('option 1');
   });
 
+  it('should reflect each option to a menu item', async () => {
+    input.value = '';
+    emulateClick(input);
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    expect(items.length).toBe(3);
+    expect(items[0].textContent.trim()).toBe(options[0].value);
+    expect(items[1].textContent.trim()).toBe(options[1].value);
+    expect(items[2].textContent.trim()).toBe(options[2].value);
+  });
+
   it('should enforce single select and clear invalid options', async () => {
     expect(options[0].selected).toBe(true);
     expect(options[1].selected).toBe(false);
@@ -344,6 +368,30 @@ describe('mlv-combobox multi select', () => {
     await new Promise(resolve => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(true);
   });
+
+  it('should remove overflow if additional space is available', async () => {
+    expect(element.matches(':--multiple-overflow')).toBe(false);
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+    element.style.setProperty('--width', '50px');
+
+    element.requestUpdate();
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(element.matches(':--multiple-overflow')).toBe(true);
+
+    select.options[0].selected = false;
+    select.options[1].selected = false;
+    element.style.setProperty('--width', 'initial');
+
+    element.requestUpdate();
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(element.matches(':--multiple-overflow')).toBe(false);
+  });
 });
 
 
@@ -398,5 +446,80 @@ describe('mlv-combobox shadow root', () => {
     await elementIsStable(items[0]);
     expect(items[0].tabIndex).toBe(0);
     expect(items[0].tagName).toBe(element.shadowRoot.activeElement.tagName);
+  });
+});
+
+describe('mlv-combobox option labels for single select', () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+  let select: HTMLSelectElement;
+  let options: HTMLOptionElement[];
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select>
+          <option selected value="1">option 1</option>
+          <option value="2">option 2</option>
+          <option value="3">option 3</option>
+        </select>
+        <mlv-control-message>message</mlv-control-message>
+      </mlv-combobox>
+    `);
+    element = fixture.querySelector('mlv-combobox');
+    input = fixture.querySelector('input');
+    select = fixture.querySelector('select');
+    options = Array.from(fixture.querySelectorAll('option'));
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get('mlv-combobox')).toBeDefined();
+  });
+
+  it('should initialize input to the selected option label', async () => {
+    expect(options[0].selected).toBe(true);
+    expect(input.value).toBe('option 1');
+  });
+
+  it('should initialize select to the selected option value', async () => {
+    expect(options[0].selected).toBe(true);
+    expect(select.value).toBe('1');
+  });
+
+  it('should reflect each option label to a menu item', async () => {
+    input.value = '';
+    emulateClick(input);
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    expect(items.length).toBe(3);
+    expect(items[0].textContent.trim()).toBe(options[0].label);
+    expect(items[1].textContent.trim()).toBe(options[1].label);
+    expect(items[2].textContent.trim()).toBe(options[2].label);
+  });
+
+  it('should enforce single select and clear invalid options', async () => {
+    expect(options[0].selected).toBe(true);
+    expect(options[1].selected).toBe(false);
+    expect(options[2].selected).toBe(false);
+    expect(select.value).toBe('1');
+    expect(input.value).toBe('option 1');
+
+    input.value = 'invalid option';
+    input.dispatchEvent(new Event('blur', { bubbles: true }));
+
+    await elementIsStable(element);
+    expect(input.value).toBe('');
+    expect(select.value).toBe('');
+    expect(options[0].selected).toBe(false);
+    expect(options[1].selected).toBe(false);
+    expect(options[2].selected).toBe(false);
   });
 });

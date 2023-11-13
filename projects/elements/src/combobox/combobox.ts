@@ -1,6 +1,6 @@
 import { html, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { ContainerElement, createLightDismiss, focusElementTimeout, useStyles } from '@elements/elements/internal';
+import { ContainerElement, createLightDismiss, focusElementTimeout, getDisplayValue, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
 import { Icon } from '@elements/elements/icon';
@@ -91,7 +91,7 @@ export class Combobox extends Control implements ContainerElement {
     <div class="tags-label" aria-hidden="true">${this.#select.selectedOptions.length} ${this.i18n.selected}</div>
     <div class="tags">
       ${Array.from<HTMLOptionElement>(this.#select.selectedOptions).map(o => html`
-      <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o)}>${o.value}</mlv-tag>`)}
+      <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o)}>${getDisplayValue(o)}</mlv-tag>`)}
     </div>` : html`<slot name="prefix-icon"></slot>`;
   }
 
@@ -102,9 +102,9 @@ export class Combobox extends Control implements ContainerElement {
       <mlv-dropdown .popoverType=${'manual'} @close=${e => e.target.hidden = true} @open=${e => e.target.hidden = false} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
         <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${this.i18n.select}>
           ${options.filter(o => !o.disabled).map(o => html`
-          <mlv-menu-item .value=${o.value} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${o.value}>
+          <mlv-menu-item .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
             ${multiple ? html`<mlv-icon name=${o.selected ? 'check' : ''} size="sm"></mlv-icon>` : nothing}
-            ${options.length < 50 ? html`<span role="presentation">${o.value?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : o.value}
+            ${options.length < 50 ? html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : getDisplayValue(o)}
           </mlv-menu-item>`)}
           ${options.filter(o => !o.disabled).length === 0 ? html`<mlv-menu-item .value=${''} disabled>${this.i18n.noResults}</mlv-menu-item>` : nothing}
         </mlv-menu>
@@ -131,12 +131,12 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupSingleSelect() {
     if (this.#select && !this.#select.multiple && !this.input.value) {
-      const initial = this.#options.find(o => o.hasAttribute('selected'))?.value;
-      this.input.value = initial ?? '';
+      const selected = this.#options.find(o => o.hasAttribute('selected'));
+      this.input.value = getDisplayValue(selected);
     }
 
     this.input.addEventListener('blur', () => {
-      if (this.#select && !this.#select.multiple && !this.#options.find(o => o.value === this.input.value)) {
+      if (this.#select && !this.#select.multiple && !this.#options.find(o => getDisplayValue(o) === this.input.value)) {
         this.#options.forEach(o => o.selected = false);
         this.#setInputValue('');
         this.#setSelectValue({ value: '', selected: false });
@@ -193,9 +193,9 @@ export class Combobox extends Control implements ContainerElement {
     });
   }
 
-  #selectValue(option: { selected?: boolean; value?: string; }) {
+  #selectValue(option: { selected?: boolean; label?: string, value?: string; }) {
     if (!this.#select?.multiple) {
-      this.#setInputValue(option.value);
+      this.#setInputValue(getDisplayValue(option));
       this.#dropdown.close();
       focusElementTimeout(this.input);
     }
