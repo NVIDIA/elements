@@ -34,7 +34,8 @@ function metadataPlugin() {
         'package',
         'description',
         'since',
-        'axe'
+        'axe',
+        'entrypoint'
       ];
 
       switch (node.kind) {
@@ -68,9 +69,12 @@ function metadataPlugin() {
               responsive: true,
               themes: true,
               aria: false,
+              entrypoint: '',
               package: JSON.stringify(pkg.exports).includes(classDeclaration.tagName.split('-')[1]),
               ...classDeclaration.metadata
             };
+
+            classDeclaration.metadata.entrypoint = classDeclaration.metadata.entrypoint.replace('\\', '');
           }
           break;
       }
