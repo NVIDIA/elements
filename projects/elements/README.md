@@ -1,17 +1,18 @@
-# MagLev Elements
+# Maglev Elements
 
 ### The Design Language for AI/ML Factories Building at the Speed of Light
 
 - [Documentation](https://elements.nvidia.com/ui/storybook/elements?path=/docs/about-getting-started--docs)
 - [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
 - [Changelog](https://elements.nvidia.com/ui/storybook/elements?path=/docs/about-changelog--docs)
-- [Package Maglev](ui/packages/npm:%2F%2F@elements%2Felements)
+- [Package Artifactory URM](https://registry.npmjs.org
+- [Package Artifactory Maglev](ui/packages/npm:%2F%2F@elements%2Felements)
 
 ## Getting Started
 
 ```bash
 # add internal registry to local .npmrc file (optional)
-@elements/elements:registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
+@elements/elements:registry=https://registry.npmjs.org
 
 # install from registry
 pnpm install @elements/elements

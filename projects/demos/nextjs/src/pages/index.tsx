@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
-import { MlvButton, MlvAlert, MlvDialog } from '../elements/ssr';
+import { MlvButton } from '@elements/elements-react/button';
+import { MlvAlert } from '@elements/elements-react/alert';
+import { MlvDialog } from '@elements/elements-react/dialog';
 
 export default function Home() {
   const [showDialog, setshowDialog] = React.useState(false);

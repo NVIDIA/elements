@@ -9,6 +9,7 @@ import styles from './control-group.css?inline';
 /**
  * @element mlv-control-group
  * @since 0.3.0
+ * @entrypoint \@elements/elements/forms
  * @slot - Control input elements
  * @cssprop --color
  * @cssprop --label-color

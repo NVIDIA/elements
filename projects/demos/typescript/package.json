@@ -4,16 +4,36 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "ci": "wireit",
+    "dev": "wireit",
     "build": "wireit",
     "preview": "wireit"
   },
   "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "dev": {
+      "command": "vite",
+      "service": true
+    },
     "build": {
-      "command": "tsc && vite build",
-      "files": ["index.html", "src/**", "tsconfig.json", "vite.config.ts", "package.json"],
-      "output": ["dist"],
-      "dependencies": ["../../elements:build"]
+      "command": "node_modules/vite/bin/vite.js build",
+      "files": [
+        "index.html",
+        "src/**",
+        "tsconfig.json",
+        "vite.config.ts",
+        "package.json"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../../elements:build"
+      ]
     },
     "preview": {
       "command": "vite preview",
@@ -27,7 +47,7 @@
   },
   "devDependencies": {
     "typescript": "5.2.2",
-    "vite": "4.5.0",
-    "vite-plugin-static-copy": "0.17.0"
+    "vite": "5.0.0",
+    "wireit": "0.14.1"
   }
 }

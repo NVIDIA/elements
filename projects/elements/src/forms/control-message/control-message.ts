@@ -22,6 +22,7 @@ interface AlertStatus {
  * @element mlv-control-message
  * @description Defining a Validity State on a `mlv-control-message` will allow messages to be shown conditionally based on the current HTML5 validity state.
  * @since 0.3.0
+ * @entrypoint \@elements/elements/forms
  * @slot - default slot for content
  * @cssprop --color
  * @cssprop --font-weight
