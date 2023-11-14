@@ -232,12 +232,15 @@
   white-space: nowrap !important;
 }
 
-
 [mlv-text~='code'] {
-  background: var(--mlv-sys-interaction-field-background);
-  border-radius: var(--mlv-ref-border-radius-xs);
-  padding: var(--mlv-ref-size-50) var(--mlv-ref-size-100);
-  color: var(--mlv-sys-text-color);
-  font-family: monospace;
-  display: inline-block;
+  background: var(--mlv-sys-interaction-field-background) !important;
+  border-radius: var(--mlv-ref-border-radius-xs) !important;
+  padding: var(--mlv-ref-size-50) var(--mlv-ref-size-100) !important;
+  color: var(--mlv-sys-text-color) !important;
+  font-family: monospace !important;
+  display: inline-block !important;
+}
+
+[mlv-text~='code'][mlv-text~='flat'] {
+  background: transparent !important;
 }

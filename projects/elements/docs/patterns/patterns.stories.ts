@@ -1,25 +1,17 @@
 import { html } from 'lit';
 import '@elements/elements/badge/define.js';
 import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
 import '@elements/elements/card/define.js';
-import '@elements/elements/tabs/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/grid/define.js';
 import '@elements/elements/dropdown/define.js';
+import '@elements/elements/grid/define.js';
+import '@elements/elements/icon-button/define.js';
 import '@elements/elements/menu/define.js';
 import '@elements/elements/panel/define.js';
-import '@elements/elements/icon-button/define.js';
+import '@elements/elements/tabs/define.js';
 
 export default {
   title: 'Patterns/Examples',
   component: 'patterns'
-};
-
-export const Default = {
-  render: () => html`
-    Pattern
-  `
 };
 
 export const Row = {
@@ -45,92 +37,6 @@ export const Row = {
           <mlv-button>Add Panel</mlv-button>
         </div>
       </mlv-card-content>
-    </mlv-card>
-  </div>
-  `
-}
-
-export const Header = {
-  render: () => html`
-  <div mlv-theme="root" mlv-layout="column full align:stretch">
-    <mlv-card container="full">
-      <mlv-card-content mlv-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-        <div mlv-layout="row gap:sm align:vertical-center">
-          <h1 mlv-text="heading lg semibold">Page Title</h1>
-          <mlv-icon-button icon-name="more-actions" style="margin-left: auto"></mlv-icon-button>
-          <mlv-icon-button icon-name="more-actions"></mlv-icon-button>
-        </div>
-        <p mlv-text="body">content</p>
-      </mlv-card-content>
-    </mlv-card>
-  </div>
-  `
-}
-
-export const HeaderTabs = {
-  render: () => html`
-  <div mlv-theme="root" mlv-layout="column full align:stretch">
-    <mlv-card container="full">
-      <div mlv-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
-        <div mlv-layout="row gap:sm align:vertical-center">
-          <h1 mlv-text="heading lg semibold">Page Title</h1>
-          <mlv-icon-button icon-name="more-actions" style="margin-left: auto"></mlv-icon-button>
-          <mlv-icon-button icon-name="more-actions"></mlv-icon-button>
-        </div>
-        <mlv-tabs>
-          <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
-          <mlv-tabs-item>Tab 2</mlv-tabs-item>
-          <mlv-tabs-item>Tab 3</mlv-tabs-item>
-          <mlv-tabs-item>Tab 3</mlv-tabs-item>
-        </mlv-tabs>
-      </div>
-    </mlv-card>
-  </div>
-  `
-}
-
-export const HeaderComplex = {
-  render: () => html`
-  <div mlv-theme="root" mlv-layout="column full align:stretch">
-    <mlv-card container="full">
-      <section mlv-layout="column gap:lg align:stretch pad-top:md pad-right:xl pad-bottom:md pad-left:xl">
-        <div mlv-layout="row gap:md align:center">
-          <h1 mlv-text="heading lg semibold">Page Title</h1>
-
-          <div mlv-layout="row gap:sm" style="margin-left: auto">
-            <mlv-icon-button icon-name="information-circle-stroke" aria-label="information"></mlv-icon-button>
-            <mlv-icon-button icon-name="edit" aria-label="edit"></mlv-icon-button>
-            <mlv-icon-button icon-name="more-actions" aria-label="additional actions"></mlv-icon-button>
-          </div>
-        </div>
-
-        <div mlv-layout="row gap:xl align:vertical-center">
-          <section mlv-layout="row gap:xs align:center">
-            <span mlv-text="body sm muted medium">Session ID</span>
-            <a mlv-text="body sm semibold link" href="#">13245768</a>
-          </section>
-
-          <section mlv-layout="row gap:xs align:center">
-            <span mlv-text="body sm muted medium">Driver</span>
-            <span mlv-text="body sm semibold">Jane Doe</span>
-          </section>
-
-          <section mlv-layout="row gap:xs align:center">
-            <span mlv-text="body sm muted medium">Co-Pilot</span>
-            <span mlv-text="body sm semibold">John Doe</span>
-          </section>
-
-          <section mlv-layout="row gap:xs align:center">
-            <span mlv-text="body sm muted medium">Route</span>
-            <span mlv-text="body sm semibold">Santa Clara</span>
-          </section>
-
-          <section mlv-layout="row gap:xs align:center">
-            <span mlv-text="body sm muted medium">Status</span>
-            <span mlv-text="body sm semibold"><mlv-badge status="success">complete</mlv-badge></span>
-          </section>
-        </div>
-      </section>
     </mlv-card>
   </div>
   `
@@ -393,13 +299,13 @@ export const TrendBottomBadge = {
 
 export const ShortcutFilled = {
   render: () => html`
-    <div mlv-text="code">CMD + C</div>
+    <kbd mlv-text="code">CMD + C</kbd>
   `
 };
 
 export const ShortcutFlat = {
   render: () => html`
-    <div mlv-text="code" style="background: none">CMD + C</div>
+    <kbd mlv-text="code flat">CMD + C</kbd>
   `
 };
 
@@ -414,9 +320,13 @@ export const ShortcutDropdown = {
       </mlv-menu-item>
 
       <mlv-menu-item>
-        <mlv-icon name="copy"></mlv-icon> Copy
-        
-        <div mlv-text="code">CMD + C</div>
+        <div mlv-layout="row align:space-between grow">
+          <span mlv-layout="row gap:sm align:vertical-center">
+            <mlv-icon name="copy"></mlv-icon> Copy
+          </span>
+
+          <kbd mlv-text="code">CMD + C</kbd>
+        </div>
       </mlv-menu-item>
 
       <mlv-menu-item>
