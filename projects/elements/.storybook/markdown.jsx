@@ -23,7 +23,7 @@ export const H3 = (args) => {
   const id = new URLSearchParams(window.location.search).get('id');
   return (
   <h3 id={args.id} nve-text="heading lg"  nve-layout="pad-top:md" className="dynamic-anchor">
-    <a href={`/?path=/docs/${id}#${args.id}`}><nve-icon name="link"></nve-icon></a>
+    <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
     {args.children}
   </h3>
   )
