@@ -151,3 +151,9 @@ export const DarkTheme = {
 </div>
   `
 }
+
+export const Overflow = {
+  render: () => html`
+  <mlv-tag style="--width: 150px">some really long content</mlv-tag>
+  `
+};

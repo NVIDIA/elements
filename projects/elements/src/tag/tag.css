@@ -10,6 +10,7 @@
   --font-weight: var(--mlv-ref-font-weight-regular);
   --cursor: pointer;
   --height: var(--mlv-ref-size-600);
+  --width: initial;
   display: inline-flex;
   user-select: none;
 }
@@ -24,12 +25,20 @@
   border-radius: var(--border-radius);
   cursor: var(--cursor);
   height: var(--height);
+  width: var(--width);
   display: inline-flex;
   align-items: center;
-  line-height: 1em;
+  line-height: 1.1em;
   place-items: center;
   place-content: center;
   white-space: nowrap;
+}
+
+slot {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
 }
 
 ::slotted([mlv-text]) {
