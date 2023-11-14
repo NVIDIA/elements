@@ -1,25 +1,17 @@
 import { html } from 'lit';
 import '@elements/elements/badge/define.js';
 import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
 import '@elements/elements/card/define.js';
-import '@elements/elements/tabs/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/grid/define.js';
 import '@elements/elements/dropdown/define.js';
+import '@elements/elements/grid/define.js';
+import '@elements/elements/icon-button/define.js';
 import '@elements/elements/menu/define.js';
 import '@elements/elements/panel/define.js';
-import '@elements/elements/icon-button/define.js';
+import '@elements/elements/tabs/define.js';
 
 export default {
   title: 'Patterns/Examples',
   component: 'patterns'
-};
-
-export const Default = {
-  render: () => html`
-    Pattern
-  `
 };
 
 export const Row = {
@@ -45,92 +37,6 @@ export const Row = {
           <nve-button>Add Panel</nve-button>
         </div>
       </nve-card-content>
-    </nve-card>
-  </div>
-  `
-}
-
-export const Header = {
-  render: () => html`
-  <div nve-theme="root" nve-layout="column full align:stretch">
-    <nve-card container="full">
-      <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-        <div nve-layout="row gap:sm align:vertical-center">
-          <h1 nve-text="heading lg semibold">Page Title</h1>
-          <nve-icon-button icon-name="more-actions" style="margin-left: auto"></nve-icon-button>
-          <nve-icon-button icon-name="more-actions"></nve-icon-button>
-        </div>
-        <p nve-text="body">content</p>
-      </nve-card-content>
-    </nve-card>
-  </div>
-  `
-}
-
-export const HeaderTabs = {
-  render: () => html`
-  <div nve-theme="root" nve-layout="column full align:stretch">
-    <nve-card container="full">
-      <div nve-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
-        <div nve-layout="row gap:sm align:vertical-center">
-          <h1 nve-text="heading lg semibold">Page Title</h1>
-          <nve-icon-button icon-name="more-actions" style="margin-left: auto"></nve-icon-button>
-          <nve-icon-button icon-name="more-actions"></nve-icon-button>
-        </div>
-        <nve-tabs>
-          <nve-tabs-item selected>Tab 1</nve-tabs-item>
-          <nve-tabs-item>Tab 2</nve-tabs-item>
-          <nve-tabs-item>Tab 3</nve-tabs-item>
-          <nve-tabs-item>Tab 3</nve-tabs-item>
-        </nve-tabs>
-      </div>
-    </nve-card>
-  </div>
-  `
-}
-
-export const HeaderComplex = {
-  render: () => html`
-  <div nve-theme="root" nve-layout="column full align:stretch">
-    <nve-card container="full">
-      <section nve-layout="column gap:lg align:stretch pad-top:md pad-right:xl pad-bottom:md pad-left:xl">
-        <div nve-layout="row gap:md align:center">
-          <h1 nve-text="heading lg semibold">Page Title</h1>
-
-          <div nve-layout="row gap:sm" style="margin-left: auto">
-            <nve-icon-button icon-name="information-circle-stroke" aria-label="information"></nve-icon-button>
-            <nve-icon-button icon-name="edit" aria-label="edit"></nve-icon-button>
-            <nve-icon-button icon-name="more-actions" aria-label="additional actions"></nve-icon-button>
-          </div>
-        </div>
-
-        <div nve-layout="row gap:xl align:vertical-center">
-          <section nve-layout="row gap:xs align:center">
-            <span nve-text="body sm muted medium">Session ID</span>
-            <a nve-text="body sm semibold link" href="#">13245768</a>
-          </section>
-
-          <section nve-layout="row gap:xs align:center">
-            <span nve-text="body sm muted medium">Driver</span>
-            <span nve-text="body sm semibold">Jane Doe</span>
-          </section>
-
-          <section nve-layout="row gap:xs align:center">
-            <span nve-text="body sm muted medium">Co-Pilot</span>
-            <span nve-text="body sm semibold">John Doe</span>
-          </section>
-
-          <section nve-layout="row gap:xs align:center">
-            <span nve-text="body sm muted medium">Route</span>
-            <span nve-text="body sm semibold">Santa Clara</span>
-          </section>
-
-          <section nve-layout="row gap:xs align:center">
-            <span nve-text="body sm muted medium">Status</span>
-            <span nve-text="body sm semibold"><nve-badge status="success">complete</nve-badge></span>
-          </section>
-        </div>
-      </section>
     </nve-card>
   </div>
   `
@@ -393,13 +299,13 @@ export const TrendBottomBadge = {
 
 export const ShortcutFilled = {
   render: () => html`
-    <div nve-text="code">CMD + C</div>
+    <kbd nve-text="code">CMD + C</kbd>
   `
 };
 
 export const ShortcutFlat = {
   render: () => html`
-    <div nve-text="code" style="background: none">CMD + C</div>
+    <kbd nve-text="code flat">CMD + C</kbd>
   `
 };
 
@@ -414,9 +320,13 @@ export const ShortcutDropdown = {
       </nve-menu-item>
 
       <nve-menu-item>
-        <nve-icon name="copy"></nve-icon> Copy
-        
-        <div nve-text="code">CMD + C</div>
+        <div nve-layout="row align:space-between grow">
+          <span nve-layout="row gap:sm align:vertical-center">
+            <nve-icon name="copy"></nve-icon> Copy
+          </span>
+
+          <kbd nve-text="code">CMD + C</kbd>
+        </div>
       </nve-menu-item>
 
       <nve-menu-item>
