@@ -10,7 +10,7 @@ export default {
 
 export const Default = {
   render: () => html`
-<div nve-theme="root" nve-layout="column gap:md">
+<div nve-layout="column gap:md">
   <nve-bulk-actions closable status="accent">
     123 selected
     <nve-button interaction="flat-destructive">delete</nve-button>
