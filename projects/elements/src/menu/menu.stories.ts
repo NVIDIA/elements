@@ -149,7 +149,7 @@ export const VerticalNavigationDrawer = {
 
 export const VerticalNavigationPanel = {
   render: () => html`
-  <div nve-theme="root" nve-layout="row gap:md align:stretch">
+  <div nve-layout="row gap:md align:stretch">
     <nve-card>
       <nve-card-header>
         <div slot="title">Header</div>

@@ -30,7 +30,7 @@ interface ArgTypes {
 
 export const Default = {
   render: (args: ArgTypes) => html`
-    <div nve-theme="root">
+    <div>
       <nve-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
           args.showHeader,
@@ -69,7 +69,7 @@ export const Default = {
 
 export const CardWithContentLayout = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-card style="width: 400px; height: 300px;">
       <nve-card-content nve-layout="row align:space-around">
         <div>Item 1</div>
@@ -83,7 +83,7 @@ export const CardWithContentLayout = {
 
 export const MediaCard = {
   render: () => html`
-  <div nve-theme="root" nve-layout="grid gap:md span-items:6 align:stretch" style="height: 380px">
+  <div nve-layout="grid gap:md span-items:6 align:stretch" style="height: 380px">
     <nve-card style="height: 100%; width: 100%;">
       <img src="images/test-image-3.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
       <nve-card-content>
@@ -102,7 +102,7 @@ export const MediaCard = {
 
 export const CardWithMultipleContentsAndDivider = {
   render: () => html`
-    <div nve-theme="root">
+    <div>
       <nve-card style="width: 400px; height: 300px;">
         <nve-card-content nve-layout="row align:space-around">
           <div>Item 1</div>
@@ -147,7 +147,7 @@ export const CardWithHeaderAndFooter = {
 
 export const DescriptionList = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-card style="width: 650px">
     <nve-card-header>
       <h2 slot="title">Nautical Terms</h2>
@@ -171,7 +171,7 @@ export const DescriptionList = {
 
 export const Tabs = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-card style="width:400px; height:200px">
     <nve-card-header>
       <div slot="title">Title</div>
@@ -190,7 +190,7 @@ export const Tabs = {
 
 export const ContainerFill = {
   render: () => html`
-    <div nve-theme="root">
+    <div>
       <nve-card container="full">
         <nve-card-content>
           Container Fill
@@ -202,7 +202,7 @@ export const ContainerFill = {
 
 export const ContainerFlat = {
   render: () => html`
-    <div nve-theme="root">
+    <div>
       <nve-card container="flat">
         <nve-card-content>
           Container Flat

@@ -16,9 +16,8 @@ export default {
 /* Main Page Headers */
 export const StandardHeaderMainPage = {
   render: () => html`
-  <div nve-theme="root" nve-layout="column full align:stretch">
-    <nve-card container="flat">
-      <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
+    <nve-card container="flat" nve-layout="grow">
+      <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
         <!-- Breadcrumbs -->
         <nve-breadcrumb>
           <nve-button><a href="#" target="_self">Item 1</a></nve-button>
@@ -37,58 +36,130 @@ export const StandardHeaderMainPage = {
         </div>
       </nve-card-content>
     </nve-card>
-  </div>
-`
+  `
 }
 
 export const TabsHeaderMainPage = {
   render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="flat">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!-- Breadcrumbs -->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
+    <nve-card container="flat" style="--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)" nve-layout="grow">
+      <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
+        <!-- Breadcrumbs -->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
 
-          <div nve-layout="row align:space-between align:vertical-center">
-            <h1 nve-text="heading lg semibold">Page Title</h1>
+        <div nve-layout="row align:space-between align:vertical-center">
+          <h1 nve-text="heading lg semibold">Page Title</h1>
 
-            <!-- Action Buttons -->
-            <div nve-layout="row gap:sm align:vertical-center">
-              <nve-button>Default</nve-button>
-              <nve-button interaction="emphasize">Emphasized</nve-button>
-              <nve-icon-button icon-name="more-actions"></nve-icon-button>
-            </div>
+          <!-- Action Buttons -->
+          <div nve-layout="row gap:sm align:vertical-center">
+            <nve-button>Default</nve-button>
+            <nve-button interaction="emphasize">Emphasized</nve-button>
+            <nve-icon-button icon-name="more-actions"></nve-icon-button>
           </div>
+        </div>
 
-          <!-- Tabs -->
-          <nve-tabs behavior-select>
-            <nve-tabs-item selected>Tab 1</nve-tabs-item>
-            <nve-tabs-item>Tab 2</nve-tabs-item>
-            <nve-tabs-item>Tab 3</nve-tabs-item>
-            <nve-tabs-item>Tab 4</nve-tabs-item>
-          </nve-tabs>
-        </nve-card-content>
-      </nve-card>
-    </div>
+        <!-- Tabs -->
+        <nve-tabs behavior-select>
+          <nve-tabs-item selected>Tab 1</nve-tabs-item>
+          <nve-tabs-item>Tab 2</nve-tabs-item>
+          <nve-tabs-item>Tab 3</nve-tabs-item>
+          <nve-tabs-item>Tab 4</nve-tabs-item>
+        </nve-tabs>
+      </nve-card-content>
+    </nve-card>
   `
 }
 
 export const StackedMetadataHeaderMainPage = {
   render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="flat">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!-- Breadcrumbs -->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
+    <nve-card container="flat" nve-layout="grow">
+      <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
+        <!-- Breadcrumbs -->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
 
-          <div nve-layout="row align:space-between align:vertical-center">
-            <h1 nve-text="heading lg semibold">Page Title</h1>
+        <div nve-layout="row align:space-between align:vertical-center">
+          <h1 nve-text="heading lg semibold">Page Title</h1>
+
+          <!-- Action Buttons -->
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-button>Default</nve-button>
+            <nve-button interaction="emphasize">Emphasized</nve-button>
+            <nve-icon-button icon-name="more-actions"></nve-icon-button>
+          </section>
+        </div>
+
+        <!-- Metadata -->
+        <section nve-layout="row gap:xl align:vertical-center">
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Session ID</span>
+            <a nve-text="body sm bold link" href="#">13245768</a>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Driver</span>
+            <span nve-text="body sm bold">Jane Doe</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Co-Pilot</span>
+            <span nve-text="body sm bold">John Doe</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Route</span>
+            <span nve-text="body sm bold">Santa Clara</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Status</span>
+            <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
+          </div>
+        </section>
+      </nve-card-content>
+    </nve-card>
+  `
+}
+
+export const InlineMetadataHeaderMainPage = {
+  render: () => html`
+    <nve-card container="flat" nve-layout="grow">
+      <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
+        <!--Breadcrumbs-->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
+
+        <div nve-layout="row align:space-between align:vertical-center">
+          <h1 nve-text="heading lg semibold">Page Title</h1>
+
+          <!-- Metadata -->
+          <div nve-layout="row gap:xl align:vertical-center">
+            <section nve-layout="row gap:xl align:vertical-center">
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Session ID</span>
+                <a nve-text="body sm bold link" href="#">13245768</a>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Driver</span>
+                <span nve-text="body sm bold">Jane Doe</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Co-Pilot</span>
+                <span nve-text="body sm bold">John Doe</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Route</span>
+                <span nve-text="body sm bold">Santa Clara</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Status</span>
+                <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
+              </div>
+            </section>
+
+            <nve-divider orientation="vertical"></nve-divider>
 
             <!-- Action Buttons -->
             <section nve-layout="row gap:sm align:vertical-center">
@@ -97,175 +168,56 @@ export const StackedMetadataHeaderMainPage = {
               <nve-icon-button icon-name="more-actions"></nve-icon-button>
             </section>
           </div>
-
-          <!-- Metadata -->
-          <section nve-layout="row gap:xl align:vertical-center">
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Session ID</span>
-              <a nve-text="body sm bold link" href="#">13245768</a>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Driver</span>
-              <span nve-text="body sm bold">Jane Doe</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Co-Pilot</span>
-              <span nve-text="body sm bold">John Doe</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Route</span>
-              <span nve-text="body sm bold">Santa Clara</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Status</span>
-              <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
-            </div>
-          </section>
-        </nve-card-content>
-      </nve-card>
-    </div>
-  `
-}
-
-export const InlineMetadataHeaderMainPage = {
-  render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="flat">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!--Breadcrumbs-->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
-
-          <div nve-layout="row align:space-between align:vertical-center">
-            <h1 nve-text="heading lg semibold">Page Title</h1>
-
-            <!-- Metadata -->
-            <div nve-layout="row gap:md align:vertical-center">
-              <section nve-layout="row gap:xl align:vertical-center">
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Session ID</span>
-                  <a nve-text="body sm bold link" href="#">13245768</a>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Driver</span>
-                  <span nve-text="body sm bold">Jane Doe</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Co-Pilot</span>
-                  <span nve-text="body sm bold">John Doe</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Route</span>
-                  <span nve-text="body sm bold">Santa Clara</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Status</span>
-                  <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
-                </div>
-              </section>
-
-              <nve-divider orientation="vertical"></nve-divider>
-
-              <!-- Action Buttons -->
-              <section nve-layout="row gap:sm align:vertical-center">
-                <nve-button>Default</nve-button>
-                <nve-button interaction="emphasize">Emphasized</nve-button>
-                <nve-icon-button icon-name="more-actions"></nve-icon-button>
-              </section>
-            </div>
-          </div>
-        </nve-card-content>
-      </nve-card>
-    </div>
+        </div>
+      </nve-card-content>
+    </nve-card>
   `
 }
 
 export const InlineKitchenSinkHeaderMainPage = {
   render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="flat">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!--Breadcrumbs-->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
+    <nve-card container="flat" style="--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)" nve-layout="grow">
+      <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
+        <!--Breadcrumbs-->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
 
-          <div nve-layout="row align:space-between align:vertical-center">
-            <section nve-layout="row gap:sm align:vertical-center">
-              <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
-              <h1 nve-text="heading lg semibold">Page Title</h1>
+        <div nve-layout="row align:space-between align:vertical-center">
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
+            <h1 nve-text="heading lg semibold">Page Title</h1>
+          </section>
+
+          <!-- Metadata -->
+          <div nve-layout="row gap:xl align:vertical-center">
+            <section nve-layout="row gap:xl align:vertical-center">
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Session ID</span>
+                <a nve-text="body sm bold link" href="#">13245768</a>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Driver</span>
+                <span nve-text="body sm bold">Jane Doe</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Co-Pilot</span>
+                <span nve-text="body sm bold">John Doe</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Route</span>
+                <span nve-text="body sm bold">Santa Clara</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Status</span>
+                <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
+              </div>
             </section>
 
-            <!-- Metadata -->
-            <div nve-layout="row gap:md align:vertical-center">
-              <section nve-layout="row gap:xl align:vertical-center">
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Session ID</span>
-                  <a nve-text="body sm bold link" href="#">13245768</a>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Driver</span>
-                  <span nve-text="body sm bold">Jane Doe</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Co-Pilot</span>
-                  <span nve-text="body sm bold">John Doe</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Route</span>
-                  <span nve-text="body sm bold">Santa Clara</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Status</span>
-                  <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
-                </div>
-              </section>
-
-              <!--Divider-->
-              <nve-divider orientation="vertical"></nve-divider>
-
-              <!-- Action Buttons -->
-              <section nve-layout="row gap:sm align:vertical-center">
-                <nve-button>Default</nve-button>
-                <nve-icon-button icon-name="more-actions"></nve-icon-button>
-              </section>
-            </div>
-          </div>
-
-          <!--Tabs-->
-          <nve-tabs behavior-select>
-            <nve-tabs-item selected>Tab 1</nve-tabs-item>
-            <nve-tabs-item>Tab 2</nve-tabs-item>
-            <nve-tabs-item>Tab 3</nve-tabs-item>
-            <nve-tabs-item>Tab 4</nve-tabs-item>
-          </nve-tabs>
-        </nve-card-content>
-      </nve-card>
-    </div>
-  `
-}
-
-export const StackedKitchenSinkHeaderMainPage = {
-  render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="flat">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!--Breadcrumbs-->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
-
-          <div nve-layout="row align:space-between align:vertical-center">
-            <section nve-layout="row gap:sm align:vertical-center">
-              <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
-              <h1 nve-text="heading lg semibold">Page Title</h1>
-            </section>
+            <!--Divider-->
+            <nve-divider orientation="vertical"></nve-divider>
 
             <!-- Action Buttons -->
             <section nve-layout="row gap:sm align:vertical-center">
@@ -273,41 +225,77 @@ export const StackedKitchenSinkHeaderMainPage = {
               <nve-icon-button icon-name="more-actions"></nve-icon-button>
             </section>
           </div>
+        </div>
 
-          <!-- Metadata -->
-          <section nve-layout="row gap:xl align:vertical-center">
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Session ID</span>
-              <a nve-text="body sm bold link" href="#">13245768</a>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Driver</span>
-              <span nve-text="body sm bold">Jane Doe</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Co-Pilot</span>
-              <span nve-text="body sm bold">John Doe</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Route</span>
-              <span nve-text="body sm bold">Santa Clara</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Status</span>
-              <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
-            </div>
+        <!--Tabs-->
+        <nve-tabs behavior-select>
+          <nve-tabs-item selected>Tab 1</nve-tabs-item>
+          <nve-tabs-item>Tab 2</nve-tabs-item>
+          <nve-tabs-item>Tab 3</nve-tabs-item>
+          <nve-tabs-item>Tab 4</nve-tabs-item>
+        </nve-tabs>
+      </nve-card-content>
+    </nve-card>
+  `
+}
+
+export const StackedKitchenSinkHeaderMainPage = {
+  render: () => html`
+    <nve-card container="flat" style="--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)" nve-layout="grow">
+      <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
+        <!--Breadcrumbs-->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
+
+        <div nve-layout="row align:space-between align:vertical-center">
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
+            <h1 nve-text="heading lg semibold">Page Title</h1>
           </section>
 
-          <!--Tabs-->
-          <nve-tabs behavior-select>
-            <nve-tabs-item selected>Tab 1</nve-tabs-item>
-            <nve-tabs-item>Tab 2</nve-tabs-item>
-            <nve-tabs-item>Tab 3</nve-tabs-item>
-            <nve-tabs-item>Tab 4</nve-tabs-item>
-          </nve-tabs>
-        </nve-card-content>
-      </nve-card>
-    </div>
+          <!-- Action Buttons -->
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-button>Default</nve-button>
+            <nve-icon-button icon-name="more-actions"></nve-icon-button>
+          </section>
+        </div>
+
+        <!-- Metadata -->
+        <section nve-layout="row gap:xl align:vertical-center">
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Session ID</span>
+            <a nve-text="body sm bold link" href="#">13245768</a>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Driver</span>
+            <span nve-text="body sm bold">Jane Doe</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Co-Pilot</span>
+            <span nve-text="body sm bold">John Doe</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Route</span>
+            <span nve-text="body sm bold">Santa Clara</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Status</span>
+            <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
+          </div>
+        </section>
+
+        <!--Tabs-->
+        <nve-tabs behavior-select>
+          <nve-tabs-item selected>Tab 1</nve-tabs-item>
+          <nve-tabs-item>Tab 2</nve-tabs-item>
+          <nve-tabs-item>Tab 3</nve-tabs-item>
+          <nve-tabs-item>Tab 4</nve-tabs-item>
+        </nve-tabs>
+      </nve-card-content>
+    </nve-card>
   `
 }
 
@@ -316,9 +304,8 @@ export const StackedKitchenSinkHeaderMainPage = {
 /* Detail Page Headers */
 export const StandardHeaderDetailPage = {
   render: () => html`
-  <div nve-theme="root" nve-layout="column full align:stretch">
-    <nve-card container="full">
-      <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
+    <nve-card container="full" nve-layout="grow">
+      <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
           <nve-button><a href="#" target="_self">Item 1</a></nve-button>
@@ -340,245 +327,141 @@ export const StandardHeaderDetailPage = {
         </div>
       </nve-card-content>
     </nve-card>
-  </div>
-`
+  `
 }
 
 export const TabsHeaderDetailPage = {
   render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="full">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!--Breadcrumbs-->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
+    <nve-card container="full" nve-layout="grow">
+      <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
+        <!--Breadcrumbs-->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
 
-          <div nve-layout="row align:space-between align:vertical-center">
-            <section nve-layout="row gap:sm align:vertical-center">
-              <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
-              <h1 nve-text="heading lg semibold">Page Title</h1>
-            </section>
+        <div nve-layout="row align:space-between align:vertical-center">
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
+            <h1 nve-text="heading lg semibold">Page Title</h1>
+          </section>
 
-            <!-- Action Buttons -->
-            <div nve-layout="row gap:sm align:vertical-center">
-              <nve-button>Default</nve-button>
-              <nve-icon-button icon-name="more-actions"></nve-icon-button>
-            </div>
+          <!-- Action Buttons -->
+          <div nve-layout="row gap:sm align:vertical-center">
+            <nve-button>Default</nve-button>
+            <nve-icon-button icon-name="more-actions"></nve-icon-button>
           </div>
+        </div>
 
-          <!--Tabs-->
-          <nve-tabs behavior-select>
-            <nve-tabs-item selected>Tab 1</nve-tabs-item>
-            <nve-tabs-item>Tab 2</nve-tabs-item>
-            <nve-tabs-item>Tab 3</nve-tabs-item>
-            <nve-tabs-item>Tab 4</nve-tabs-item>
-          </nve-tabs>
-        </nve-card-content>
-      </nve-card>
-    </div>
+        <!--Tabs-->
+        <nve-tabs behavior-select>
+          <nve-tabs-item selected>Tab 1</nve-tabs-item>
+          <nve-tabs-item>Tab 2</nve-tabs-item>
+          <nve-tabs-item>Tab 3</nve-tabs-item>
+          <nve-tabs-item>Tab 4</nve-tabs-item>
+        </nve-tabs>
+      </nve-card-content>
+    </nve-card>
   `
 }
 
 export const StackedMetadataHeaderDetailPage = {
   render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="full">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!--Breadcrumbs-->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
+    <nve-card container="full" nve-layout="grow">
+      <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
+        <!--Breadcrumbs-->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
 
-          <div nve-layout="row align:space-between align:vertical-center">
-            <section nve-layout="row gap:sm align:vertical-center">
-              <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
-              <h1 nve-text="heading lg semibold">Page Title</h1>
-            </section>
-
-            <!-- Action Buttons -->
-            <section nve-layout="row gap:sm align:vertical-center">
-              <nve-button>Default</nve-button>
-              <nve-icon-button icon-name="more-actions"></nve-icon-button>
-            </section>
-          </div>
-
-          <!-- Metadata -->
-          <section nve-layout="row gap:xl align:vertical-center">
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Session ID</span>
-              <a nve-text="body sm bold link" href="#">13245768</a>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Driver</span>
-              <span nve-text="body sm bold">Jane Doe</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Co-Pilot</span>
-              <span nve-text="body sm bold">John Doe</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Route</span>
-              <span nve-text="body sm bold">Santa Clara</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Status</span>
-              <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
-            </div>
+        <div nve-layout="row align:space-between align:vertical-center">
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
+            <h1 nve-text="heading lg semibold">Page Title</h1>
           </section>
-        </nve-card-content>
-      </nve-card>
-    </div>
+
+          <!-- Action Buttons -->
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-button>Default</nve-button>
+            <nve-icon-button icon-name="more-actions"></nve-icon-button>
+          </section>
+        </div>
+
+        <!-- Metadata -->
+        <section nve-layout="row gap:xl align:vertical-center">
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Session ID</span>
+            <a nve-text="body sm bold link" href="#">13245768</a>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Driver</span>
+            <span nve-text="body sm bold">Jane Doe</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Co-Pilot</span>
+            <span nve-text="body sm bold">John Doe</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Route</span>
+            <span nve-text="body sm bold">Santa Clara</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Status</span>
+            <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
+          </div>
+        </section>
+      </nve-card-content>
+    </nve-card>
   `
 }
 
 export const InlineMetadataHeaderDetailPage = {
   render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="full">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!--Breadcrumbs-->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
+    <nve-card container="full" nve-layout="grow">
+      <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
+        <!--Breadcrumbs-->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
 
-          <div nve-layout="row align:space-between align:vertical-center">
-            <section nve-layout="row gap:sm align:vertical-center">
-              <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
-              <h1 nve-text="heading lg semibold">Page Title</h1>
+        <div nve-layout="row align:space-between align:vertical-center">
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
+            <h1 nve-text="heading lg semibold">Page Title</h1>
+          </section>
+
+          <!-- Metadata -->
+          <div nve-layout="row gap:xl align:vertical-center">
+            <section nve-layout="row gap:xl align:vertical-center">
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Session ID</span>
+                <a nve-text="body sm bold link" href="#">13245768</a>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Driver</span>
+                <span nve-text="body sm bold">Jane Doe</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Co-Pilot</span>
+                <span nve-text="body sm bold">John Doe</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Route</span>
+                <span nve-text="body sm bold">Santa Clara</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Status</span>
+                <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
+              </div>
             </section>
 
-            <!-- Metadata -->
-            <div nve-layout="row gap:md align:vertical-center">
-              <section nve-layout="row gap:xl align:vertical-center">
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Session ID</span>
-                  <a nve-text="body sm bold link" href="#">13245768</a>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Driver</span>
-                  <span nve-text="body sm bold">Jane Doe</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Co-Pilot</span>
-                  <span nve-text="body sm bold">John Doe</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Route</span>
-                  <span nve-text="body sm bold">Santa Clara</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Status</span>
-                  <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
-                </div>
-              </section>
-
-              <!--Divider-->
-              <nve-divider orientation="vertical"></nve-divider>
-
-              <!-- Action Buttons -->
-              <section nve-layout="row gap:sm align:vertical-center">
-                <nve-button>Default</nve-button>
-                <nve-icon-button icon-name="more-actions"></nve-icon-button>
-              </section>
-            </div>
-          </div>
-        </nve-card-content>
-      </nve-card>
-    </div>
-  `
-}
-
-export const InlineKitchenSinkHeaderDetailPage = {
-  render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="full">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!--Breadcrumbs-->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
-
-          <div nve-layout="row align:space-between align:vertical-center">
-            <section nve-layout="row gap:sm align:vertical-center">
-              <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
-              <h1 nve-text="heading lg semibold">Page Title</h1>
-            </section>
-
-            <!-- Metadata -->
-            <div nve-layout="row gap:md align:vertical-center">
-              <section nve-layout="row gap:xl align:vertical-center">
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Session ID</span>
-                  <a nve-text="body sm bold link" href="#">13245768</a>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Driver</span>
-                  <span nve-text="body sm bold">Jane Doe</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Co-Pilot</span>
-                  <span nve-text="body sm bold">John Doe</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Route</span>
-                  <span nve-text="body sm bold">Santa Clara</span>
-                </div>
-                <div nve-layout="column gap:sm align:left">
-                  <span nve-text="body sm muted">Status</span>
-                  <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
-                </div>
-              </section>
-
-              <!--Divider-->
-              <nve-divider orientation="vertical"></nve-divider>
-
-              <!-- Action Buttons -->
-              <section nve-layout="row gap:sm align:vertical-center">
-                <nve-button>Default</nve-button>
-                <nve-icon-button icon-name="more-actions"></nve-icon-button>
-              </section>
-            </div>
-          </div>
-
-          <!--Tabs-->
-          <nve-tabs behavior-select>
-            <nve-tabs-item selected>Tab 1</nve-tabs-item>
-            <nve-tabs-item>Tab 2</nve-tabs-item>
-            <nve-tabs-item>Tab 3</nve-tabs-item>
-            <nve-tabs-item>Tab 4</nve-tabs-item>
-          </nve-tabs>
-        </nve-card-content>
-      </nve-card>
-    </div>
-  `
-}
-
-export const StackedKitchenSinkHeaderDetailPage = {
-  render: () => html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
-      <nve-card container="full">
-        <nve-card-content nve-layout="column gap:md align:stretch pad-left:xl pad-right:xl">
-          <!--Breadcrumbs-->
-          <nve-breadcrumb>
-            <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-            <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-            <span>You Are Here</span>
-          </nve-breadcrumb>
-
-          <div nve-layout="row align:space-between align:vertical-center">
-            <section nve-layout="row gap:sm align:vertical-center">
-              <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
-              <h1 nve-text="heading lg semibold">Page Title</h1>
-            </section>
+            <!--Divider-->
+            <nve-divider orientation="vertical"></nve-divider>
 
             <!-- Action Buttons -->
             <section nve-layout="row gap:sm align:vertical-center">
@@ -586,41 +469,134 @@ export const StackedKitchenSinkHeaderDetailPage = {
               <nve-icon-button icon-name="more-actions"></nve-icon-button>
             </section>
           </div>
+        </div>
+      </nve-card-content>
+    </nve-card>
+  `
+}
 
-          <!-- Metadata -->
-          <section nve-layout="row gap:xl align:vertical-center">
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Session ID</span>
-              <a nve-text="body sm bold link" href="#">13245768</a>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Driver</span>
-              <span nve-text="body sm bold">Jane Doe</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Co-Pilot</span>
-              <span nve-text="body sm bold">John Doe</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Route</span>
-              <span nve-text="body sm bold">Santa Clara</span>
-            </div>
-            <div nve-layout="row gap:sm align:center">
-              <span nve-text="body sm muted">Status</span>
-              <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
-            </div>
+export const InlineKitchenSinkHeaderDetailPage = {
+  render: () => html`
+    <nve-card container="full" nve-layout="grow">
+      <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
+        <!--Breadcrumbs-->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
+
+        <div nve-layout="row align:space-between align:vertical-center">
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
+            <h1 nve-text="heading lg semibold">Page Title</h1>
           </section>
 
-          <!--Tabs-->
-          <nve-tabs behavior-select>
-            <nve-tabs-item selected>Tab 1</nve-tabs-item>
-            <nve-tabs-item>Tab 2</nve-tabs-item>
-            <nve-tabs-item>Tab 3</nve-tabs-item>
-            <nve-tabs-item>Tab 4</nve-tabs-item>
-          </nve-tabs>
-        </nve-card-content>
-      </nve-card>
-    </div>
+          <!-- Metadata -->
+          <div nve-layout="row gap:xl align:vertical-center">
+            <section nve-layout="row gap:xl align:vertical-center">
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Session ID</span>
+                <a nve-text="body sm bold link" href="#">13245768</a>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Driver</span>
+                <span nve-text="body sm bold">Jane Doe</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Co-Pilot</span>
+                <span nve-text="body sm bold">John Doe</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Route</span>
+                <span nve-text="body sm bold">Santa Clara</span>
+              </div>
+              <div nve-layout="column gap:sm align:left">
+                <span nve-text="body sm muted">Status</span>
+                <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
+              </div>
+            </section>
+
+            <!--Divider-->
+            <nve-divider orientation="vertical"></nve-divider>
+
+            <!-- Action Buttons -->
+            <section nve-layout="row gap:sm align:vertical-center">
+              <nve-button>Default</nve-button>
+              <nve-icon-button icon-name="more-actions"></nve-icon-button>
+            </section>
+          </div>
+        </div>
+
+        <!--Tabs-->
+        <nve-tabs behavior-select>
+          <nve-tabs-item selected>Tab 1</nve-tabs-item>
+          <nve-tabs-item>Tab 2</nve-tabs-item>
+          <nve-tabs-item>Tab 3</nve-tabs-item>
+          <nve-tabs-item>Tab 4</nve-tabs-item>
+        </nve-tabs>
+      </nve-card-content>
+    </nve-card>
+  `
+}
+
+export const StackedKitchenSinkHeaderDetailPage = {
+  render: () => html`
+    <nve-card container="full" nve-layout="grow">
+      <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
+        <!--Breadcrumbs-->
+        <nve-breadcrumb>
+          <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+          <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+          <span>You Are Here</span>
+        </nve-breadcrumb>
+
+        <div nve-layout="row align:space-between align:vertical-center">
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
+            <h1 nve-text="heading lg semibold">Page Title</h1>
+          </section>
+
+          <!-- Action Buttons -->
+          <section nve-layout="row gap:sm align:vertical-center">
+            <nve-button>Default</nve-button>
+            <nve-icon-button icon-name="more-actions"></nve-icon-button>
+          </section>
+        </div>
+
+        <!-- Metadata -->
+        <section nve-layout="row gap:xl align:vertical-center">
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Session ID</span>
+            <a nve-text="body sm bold link" href="#">13245768</a>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Driver</span>
+            <span nve-text="body sm bold">Jane Doe</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Co-Pilot</span>
+            <span nve-text="body sm bold">John Doe</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Route</span>
+            <span nve-text="body sm bold">Santa Clara</span>
+          </div>
+          <div nve-layout="row gap:sm align:center">
+            <span nve-text="body sm muted">Status</span>
+            <span nve-text="body sm bold"><nve-badge status="success">complete</nve-badge></span>
+          </div>
+        </section>
+
+        <!--Tabs-->
+        <nve-tabs behavior-select>
+          <nve-tabs-item selected>Tab 1</nve-tabs-item>
+          <nve-tabs-item>Tab 2</nve-tabs-item>
+          <nve-tabs-item>Tab 3</nve-tabs-item>
+          <nve-tabs-item>Tab 4</nve-tabs-item>
+        </nve-tabs>
+      </nve-card-content>
+    </nve-card>
   `
 }
 
@@ -628,9 +604,8 @@ export const StackedKitchenSinkHeaderDetailPage = {
 /* Viewer Page Headers */
 export const StandardHeaderViewerPage = {
   render: () => html`
-  <div nve-theme="root" nve-layout="column full align:stretch">
-    <nve-card container="full">
-      <nve-card-content nve-layout="row align:space-between align:vertical-center">
+    <nve-card container="full" style="--border-bottom: 0" nve-layout="grow">
+      <nve-card-content nve-layout="row align:space-between align:vertical-center pad-x:xl">
         <section nve-layout="row gap:sm align:vertical-center">
           <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
           <h1 nve-text="heading xs semibold">Page Title</h1>
@@ -662,19 +637,17 @@ export const StandardHeaderViewerPage = {
         </nve-button-group>
       </nve-card-content>
     </nve-card>
-  </div>
-`
+  `
 }
 
 
 /* Toolbar Page Headers */
 export const StandardHeaderToolbarPage = {
   render: () => html`
-  <div nve-theme="root" nve-layout="column full align:stretch">
-    <nve-card container="full">
-      <nve-card-content nve-layout="row align:space-between align:vertical-center">
+    <nve-card container="full" style="--border-bottom: 0" nve-layout="grow">
+      <nve-card-content nve-layout="row align:space-between align:vertical-center pad-x:xl">
         <!--Left Controls-->
-        <section nve-layout="row gap:md align:left align:vertical-center">
+        <section nve-layout="row gap:md align:left align:vertical-center" style="width: 33%">
           <div>
             <nve-button-group container="flat">
               <nve-icon-button size="sm" icon-name="layers"></nve-icon-button>
@@ -692,13 +665,12 @@ export const StandardHeaderToolbarPage = {
         <h1 nve-text="heading xs semibold">Page Title</h1>
 
         <!-- Action Buttons -->
-        <nve-button-group container="flat">
+        <nve-button-group container="flat" style="width: 33%" nve-layout="row align:right">
           <nve-icon-button size="sm" icon-name="add-comment"></nve-icon-button>
           <nve-icon-button size="sm" icon-name="bell"></nve-icon-button>
           <nve-icon-button size="sm" icon-name="more-actions"></nve-icon-button>
         </nve-button-group>
       </nve-card-content>
     </nve-card>
-  </div>
-`
+  `
 }
