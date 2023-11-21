@@ -281,7 +281,7 @@ customElements.get('icon-performance-demo') || customElements.define('icon-perfo
 
 export const Performance = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <icon-performance-demo></icon-performance-demo>
 </div>
   `

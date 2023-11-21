@@ -18,7 +18,7 @@ export default {
 
 export const Default = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-toolbar>
       <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
       <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
@@ -30,7 +30,7 @@ export const Default = {
 
 export const ContainerFlat = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-toolbar container="flat">
       <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
       <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
@@ -42,7 +42,7 @@ export const ContainerFlat = {
 
 export const ContainerInset = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-toolbar container="inset">
       <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
       <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
@@ -54,7 +54,7 @@ export const ContainerInset = {
 
 export const ContainerFull = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-toolbar container="full">
       <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
       <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
@@ -66,7 +66,7 @@ export const ContainerFull = {
 
 export const Groups = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-toolbar>
       <nve-select fit-text>
         <select aria-label="element type">
@@ -117,7 +117,7 @@ export const Groups = {
 
 export const Vertical = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-toolbar orientation="vertical">
       <nve-button-group>
         <nve-icon-button pressed icon-name="bars-3-bottom-left"></nve-icon-button>
@@ -139,7 +139,7 @@ export const Vertical = {
 
 export const Filter = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-toolbar container="flat">
       <nve-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></nve-icon-button>
       <nve-progressive-filter-chip closable>
@@ -178,7 +178,7 @@ export const Filter = {
 
 export const Scroll = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-toolbar container="flat">
       <nve-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></nve-icon-button>
       <nve-progressive-filter-chip closable>
@@ -239,7 +239,7 @@ export const Scroll = {
 
 export const Wrap = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-toolbar container="flat" content="wrap">
       <nve-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></nve-icon-button>
       <nve-progressive-filter-chip closable>

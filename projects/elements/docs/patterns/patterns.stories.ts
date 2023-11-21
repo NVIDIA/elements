@@ -16,7 +16,7 @@ export default {
 
 export const Row = {
   render: () => html`
-  <div nve-theme="root">
+  <div>
     <nve-card role="listitem" container="full">
       <nve-card-content nve-layout="grid align:vertical-center align:space-between gap:md">
         <div nve-layout="span:4 row gap:md align:vertical-center">
@@ -45,7 +45,7 @@ export const Row = {
 export const LayoutHeaderFullWidthCards = {
   render: () => {
     return html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
+    <div nve-layout="column full align:stretch">
       <nve-card container="full">
         <div nve-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
           <div nve-layout="row gap:sm align:vertical-center">
@@ -84,7 +84,7 @@ export const LayoutHeaderFullWidthCards = {
 export const LayoutHeaderGridCards = {
   render: () => {
     return html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
+    <div nve-layout="column full align:stretch">
       <nve-card container="full">
         <div nve-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
           <div nve-layout="row gap:sm align:vertical-center">
@@ -135,7 +135,7 @@ export const LayoutHeaderGridCards = {
 export const LayoutHeaderPanelCards = {
   render: () => {
     return html`
-    <div nve-theme="root" nve-layout="column full align:stretch">
+    <div nve-layout="column full align:stretch">
       <nve-card container="full">
         <div nve-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
           <div nve-layout="row gap:sm align:vertical-center">
