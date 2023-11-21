@@ -27,7 +27,7 @@ export default {
 
 export const Default = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -44,7 +44,7 @@ export const Default = {
 
 export const MultiSelect = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       <nve-grid-column width="max-content" position="fixed">
@@ -71,7 +71,7 @@ export const MultiSelect = {
 
 export const MultiSelectBulkActions = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       <nve-grid-column width="max-content" position="fixed">
@@ -104,7 +104,7 @@ export const MultiSelectBulkActions = {
 
 export const SingleSelect = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       <nve-grid-column width="max-content" position="fixed"></nve-grid-column>
@@ -127,7 +127,7 @@ export const SingleSelect = {
 
 export const RowAction = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -148,7 +148,7 @@ export const RowAction = {
 
 export const RowGroups = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       <nve-grid-column width="max-content" aria-label="expand groups" position="fixed"></nve-grid-column>
@@ -225,7 +225,7 @@ export const RowGroups = {
 
 export const Footer = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -245,7 +245,7 @@ export const Footer = {
 
 export const FooterScrollbar = {
   render: () => html`
-<div nve-theme="root">
+<div>
 <nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -265,7 +265,7 @@ export const FooterScrollbar = {
 
 export const Pagination = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid style="--scroll-height: 370px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -285,7 +285,7 @@ export const Pagination = {
 
 export const Scroll = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -302,7 +302,7 @@ export const Scroll = {
 
 export const ColumnAction = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`
@@ -331,7 +331,7 @@ export const ColumnAction = {
 
 export const ColumnWidth = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</nve-grid-column> `)}
@@ -349,7 +349,7 @@ export const ColumnWidth = {
 
 export const Content = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -366,7 +366,7 @@ export const Content = {
 
 export const ColumnFixed = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid style="--scroll-height: 402px; max-width: 800px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column> `)}
@@ -383,7 +383,7 @@ export const ColumnFixed = {
 
 export const ColumnMultiFixed = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid style="--scroll-height: 402px; max-width: 800px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column>`)}
@@ -400,7 +400,7 @@ export const ColumnMultiFixed = {
 
 export const ColumnStackFixed = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid style="--scroll-height: 402px; max-width: 800px">
     <nve-grid-header>
       <nve-grid-column position="fixed" width="100px">Column 1</nve-grid-column>
@@ -424,7 +424,7 @@ export const ColumnStackFixed = {
 
 export const ColumnAlignCenter = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="center">${column.label}</nve-grid-column>`)}
@@ -441,7 +441,7 @@ export const ColumnAlignCenter = {
 
 export const ColumnAlignEnd = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="end">${column.label}</nve-grid-column>`)}
@@ -458,7 +458,7 @@ export const ColumnAlignEnd = {
 
 export const ColumnAlignStart = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="start">${column.label}</nve-grid-column>`)}
@@ -475,7 +475,7 @@ export const ColumnAlignStart = {
 
 export const DisplaySettings = {
   render: () => html`
-<div nve-theme="root" nve-layout="column gap:md grow">
+<div nve-layout="column gap:md grow">
   <nve-dropdown closable anchor="column-settings">
     <nve-checkbox-group style="width: 175px">
       <label>Columns</label>
@@ -519,7 +519,7 @@ export const DisplaySettings = {
 
 export const RowSort = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       <nve-grid-column>
@@ -595,7 +595,7 @@ customElements.get('row-sort-demo') || customElements.define('row-sort-demo', Ro
 
 export const RowSortInteractive = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <row-sort-demo></row-sort-demo>
 </div>
   `
@@ -646,7 +646,7 @@ customElements.get('infinite-scroll-demo') || customElements.define('infinite-sc
 
 export const PerformanceInfiniteScroll = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <infinite-scroll-demo></infinite-scroll-demo>
 </div>
   `
@@ -698,7 +698,7 @@ customElements.get('grid-performance-demo') || customElements.define('grid-perfo
 
 export const Performance = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <grid-performance-demo></grid-performance-demo>
 </div>
   `
@@ -731,7 +731,7 @@ customElements.get('grid-virtual-scroll-demo') || customElements.define('grid-vi
 
 export const PerformanceVirtualScroll = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <grid-virtual-scroll-demo></grid-virtual-scroll-demo>
 </div>
   `
@@ -739,7 +739,7 @@ export const PerformanceVirtualScroll = {
 
 export const Stripe = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid stripe>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -756,7 +756,7 @@ export const Stripe = {
 
 export const Card = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-card>
     <nve-card-header>
       <h2 nve-text="heading sm bold">Data Grid</h2>
@@ -780,7 +780,7 @@ export const Card = {
 
 export const CardTabs = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-card>
     <nve-card-header>
       <h2 nve-text="heading sm bold">Data Grid</h2>
@@ -807,7 +807,7 @@ export const CardTabs = {
 
 export const Placeholder = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid style="--scroll-height: 402px">
     <nve-grid-header>
       <nve-grid-column></nve-grid-column>
@@ -822,7 +822,7 @@ export const Placeholder = {
 
 export const Full = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid container="full" style="--scroll-height: 402px">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -839,7 +839,7 @@ export const Full = {
 
 export const Flat = {
   render: () => html`
-    <div nve-theme="root">
+    <div>
       <nve-grid container="flat" style="--scroll-height: 402px">
         <nve-grid-header>
           ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
@@ -855,7 +855,7 @@ export const Flat = {
 
 export const PanelDetail = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <div id="grid-detail-panel" nve-layout="row gap:md align:stretch">
     <nve-grid>
       <nve-grid-header>
@@ -918,7 +918,7 @@ export const PanelGrid = {
         padding: 0 !important;
       }
     </style>
-    <main nve-theme="root" nve-layout="row gap:sm full">
+    <main nve-layout="row gap:sm full">
       <section nve-layout="column gap:md full align:stretch">
         page content
       </section>
@@ -1010,7 +1010,7 @@ customElements.get('grid-panel-demo') || customElements.define('grid-panel-demo'
 
 export const PanelDetailInteractive = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <grid-panel-demo></grid-panel-demo>
 </div>
   `
@@ -1052,7 +1052,7 @@ customElements.get('grid-dynamic-column-demo') || customElements.define('grid-dy
 
 export const ColumnDynamicFixed = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <grid-dynamic-column-demo></grid-dynamic-column-demo>
 </div>
   `
@@ -1158,7 +1158,7 @@ export const All = {
 
 export const InvalidDOM = {
   render: () => html`
-<div nve-theme="root">
+<div>
   <nve-grid>
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}

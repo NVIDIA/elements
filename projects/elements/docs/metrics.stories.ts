@@ -534,7 +534,7 @@ class MetricDemo extends LitElement {
 
   render() {
     return html`
-    <div nve-theme="root" nve-layout="column gap:xl align:horizontal-stretch pad:lg" no-story-container @view-data=${e => this.rawData = e.detail}>
+    <div nve-layout="column gap:xl align:horizontal-stretch pad:lg" no-story-container @view-data=${e => this.rawData = e.detail}>
       <div nve-layout="column gap:md">
         <div nve-layout="row gap:md">
           <h1 nve-text="heading lg">@elements/elements</h1>

@@ -345,7 +345,6 @@
       "dependencies": [
         "build:vite",
         "build:manifest",
-        "build:importmap",
         "build:style-dictionary",
         "build:css-var-completions",
         "build:vscode-custom-data"
