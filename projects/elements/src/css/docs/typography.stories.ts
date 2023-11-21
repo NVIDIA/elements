@@ -125,7 +125,7 @@ export const Transforms = {
 
 export const LeadingTrim = {
   render: () => html`
-<div nve-layout="row gap:md" nve-theme="root">
+<div nve-layout="row gap:md">
   <nve-card>
     <nve-card-content nve-layout="column gap:lg">
       <h2 nve-text="heading">leading-trim enabled</h2>
