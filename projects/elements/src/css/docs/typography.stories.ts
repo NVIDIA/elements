@@ -125,7 +125,7 @@ export const Transforms = {
 
 export const LeadingTrim = {
   render: () => html`
-<div mlv-layout="row gap:md" mlv-theme="root">
+<div mlv-layout="row gap:md">
   <mlv-card>
     <mlv-card-content mlv-layout="column gap:lg">
       <h2 mlv-text="heading">leading-trim enabled</h2>

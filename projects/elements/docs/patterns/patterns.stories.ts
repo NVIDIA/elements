@@ -16,7 +16,7 @@ export default {
 
 export const Row = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-card role="listitem" container="full">
       <mlv-card-content mlv-layout="grid align:vertical-center align:space-between gap:md">
         <div mlv-layout="span:4 row gap:md align:vertical-center">
@@ -45,7 +45,7 @@ export const Row = {
 export const LayoutHeaderFullWidthCards = {
   render: () => {
     return html`
-    <div mlv-theme="root" mlv-layout="column full align:stretch">
+    <div mlv-layout="column full align:stretch">
       <mlv-card container="full">
         <div mlv-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
           <div mlv-layout="row gap:sm align:vertical-center">
@@ -84,7 +84,7 @@ export const LayoutHeaderFullWidthCards = {
 export const LayoutHeaderGridCards = {
   render: () => {
     return html`
-    <div mlv-theme="root" mlv-layout="column full align:stretch">
+    <div mlv-layout="column full align:stretch">
       <mlv-card container="full">
         <div mlv-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
           <div mlv-layout="row gap:sm align:vertical-center">
@@ -135,7 +135,7 @@ export const LayoutHeaderGridCards = {
 export const LayoutHeaderPanelCards = {
   render: () => {
     return html`
-    <div mlv-theme="root" mlv-layout="column full align:stretch">
+    <div mlv-layout="column full align:stretch">
       <mlv-card container="full">
         <div mlv-layout="column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom">
           <div mlv-layout="row gap:sm align:vertical-center">

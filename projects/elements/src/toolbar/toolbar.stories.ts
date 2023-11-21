@@ -18,7 +18,7 @@ export default {
 
 export const Default = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-toolbar>
       <mlv-button interaction="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
       <mlv-button interaction="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
@@ -30,7 +30,7 @@ export const Default = {
 
 export const ContainerFlat = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-toolbar container="flat">
       <mlv-button interaction="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
       <mlv-button interaction="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
@@ -42,7 +42,7 @@ export const ContainerFlat = {
 
 export const ContainerInset = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-toolbar container="inset">
       <mlv-button interaction="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
       <mlv-button interaction="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
@@ -54,7 +54,7 @@ export const ContainerInset = {
 
 export const ContainerFull = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-toolbar container="full">
       <mlv-button interaction="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
       <mlv-button interaction="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
@@ -66,7 +66,7 @@ export const ContainerFull = {
 
 export const Groups = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-toolbar>
       <mlv-select fit-text>
         <select aria-label="element type">
@@ -117,7 +117,7 @@ export const Groups = {
 
 export const Vertical = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-toolbar orientation="vertical">
       <mlv-button-group>
         <mlv-icon-button pressed icon-name="bars-3-bottom-left"></mlv-icon-button>
@@ -139,7 +139,7 @@ export const Vertical = {
 
 export const Filter = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-toolbar container="flat">
       <mlv-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></mlv-icon-button>
       <mlv-progressive-filter-chip closable>
@@ -178,7 +178,7 @@ export const Filter = {
 
 export const Scroll = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-toolbar container="flat">
       <mlv-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></mlv-icon-button>
       <mlv-progressive-filter-chip closable>
@@ -239,7 +239,7 @@ export const Scroll = {
 
 export const Wrap = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-toolbar container="flat" content="wrap">
       <mlv-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></mlv-icon-button>
       <mlv-progressive-filter-chip closable>

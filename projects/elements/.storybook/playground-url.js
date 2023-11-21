@@ -2,7 +2,7 @@ import { gzipSync } from 'fflate';
 import { html, nothing } from 'lit';
 import packageFile from '../package.json';
 import metrics from 'build/metadata.json';
-import importmap from '@elements/elements/importmap.cdn.json';
+// import importmap from '@elements/elements/importmap.cdn.json';
 
 const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');

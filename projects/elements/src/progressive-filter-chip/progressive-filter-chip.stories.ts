@@ -11,7 +11,7 @@ export default {
 
 export const Default = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-progressive-filter-chip closable>
       <select aria-label="dataset">
         <option>workload</option>
@@ -51,7 +51,7 @@ export const Layer = {
 
 export const Multiple = {
   render: () => html`
-    <div mlv-theme="root">
+    <div>
       <mlv-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option selected>status</option>
@@ -74,7 +74,7 @@ export const Multiple = {
 
 export const TextInput = {
   render: () => html`
-    <div mlv-theme="root">
+    <div>
       <mlv-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option selected>memory</option>
@@ -93,7 +93,7 @@ export const TextInput = {
 
 export const DateRange = {
   render: () => html`
-    <div mlv-theme="root">
+    <div>
       <mlv-progressive-filter-chip>
         <select aria-label="date type">
           <option>recording date</option>
@@ -108,7 +108,7 @@ export const DateRange = {
 
 export const Custom = {
   render: () => html`
-    <div mlv-theme="root">
+    <div>
       <mlv-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option>GPS</option>

@@ -420,7 +420,7 @@ class KitchenSinkDemo extends LitElement {
 
 export const KitchenSink = {
   render: () => html`
-<div mlv-theme="root" no-story-container>
+<div no-story-container>
   <ksg-demo></ksg-demo>
 </div>
   `

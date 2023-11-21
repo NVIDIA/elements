@@ -69,7 +69,7 @@ export const Default = {
 
 export const AppBadge = {
   render: () => html`
-<div mlv-theme="root">
+<div>
   <mlv-app-header>
     <mlv-logo color="yellow-nova">Ab</mlv-logo>
     <h2 slot="title">My App Title</h2>
@@ -86,7 +86,7 @@ export const AppBadge = {
 
 export const NavItems = {
   render: () => html`
-<div mlv-theme="root">
+<div>
   <mlv-app-header>
     <mlv-logo></mlv-logo>
     <h2 slot="title">Nav Items</h2>
@@ -100,7 +100,7 @@ export const NavItems = {
 
 export const NavActions = {
   render: () => html`
-<div mlv-theme="root">
+<div>
   <mlv-app-header>
     <mlv-logo></mlv-logo>
     <h2 slot="title">Nav Actions</h2>

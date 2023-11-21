@@ -8,7 +8,7 @@ export default {
 
 export const Default = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-accordion>
       <mlv-accordion-header>
         <div slot="title">Heading</div>
@@ -22,7 +22,7 @@ export const Default = {
 
 export const Full = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-accordion behavior-expand>
       <mlv-accordion-header>
         <div slot="title">Heading</div>
@@ -36,7 +36,7 @@ export const Full = {
 
 export const Disabled = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-accordion behavior-expand disabled>
       <mlv-accordion-header>
         <div slot="title">Heading</div>
@@ -50,7 +50,7 @@ export const Disabled = {
 
 export const Inset = {
   render: () =>  html`
-  <div mlv-theme="root">
+  <div>
     <mlv-accordion behavior-expand container="inset">
       <mlv-accordion-header>
         <div slot="title">Heading</div>
@@ -65,7 +65,7 @@ export const Inset = {
 
 export const Flat = {
   render: () =>  html`
-  <div mlv-theme="root">
+  <div>
     <mlv-accordion behavior-expand container="flat">
         <mlv-accordion-header>
           <div slot="title">Heading</div>
@@ -80,7 +80,7 @@ export const Flat = {
 
 export const WithActions = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
       <mlv-accordion behavior-expand>
         <mlv-accordion-header>
           <div slot="title">Heading</div>
@@ -97,7 +97,7 @@ export const WithActions = {
 
 export const AccordionGroupFull = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-accordion-group behavior-expand>
       <mlv-accordion>
         <mlv-accordion-header>
@@ -129,7 +129,7 @@ export const AccordionGroupFull = {
 
 export const AccordionGroupInset = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-accordion-group container="inset" behavior-expand>
       <mlv-accordion>
         <mlv-accordion-header>
@@ -161,7 +161,7 @@ export const AccordionGroupInset = {
 
 export const AccordionGroupFlat = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-accordion-group container="flat" behavior-expand>
       <mlv-accordion>
         <mlv-accordion-header>
@@ -193,7 +193,7 @@ export const AccordionGroupFlat = {
 
 export const AccordionGroupExpandSingle = {
   render: () => html`
-  <div mlv-theme="root">
+  <div>
     <mlv-accordion-group behavior-expand-single>
       <mlv-accordion>
         <mlv-accordion-header>

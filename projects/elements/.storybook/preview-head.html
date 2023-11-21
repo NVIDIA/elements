@@ -39,12 +39,9 @@
   }
 
   .sbdocs.sbdocs-preview {
-    /* emulates built-in conainer layer overides like card, dialog and dropdown */
-    --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-200);
-    --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-200);
-    background: var(--mlv-sys-layer-container-background) !important;
-    box-shadow: var(--mlv-ref-shadow-100) !important;
-    padding: var(--mlv-ref-size-300) !important;
+    --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-100);
+    --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-100);
+    background: transparent !important;
   }
 
   .sbdocs.sbdocs-preview,
@@ -53,19 +50,6 @@
   }
 
   .sb-show-main.sb-main-padded:has([no-padding]) {
-    padding: 0 !important;
-  }
-
-  .sbdocs.sbdocs-preview:has([mlv-theme*='root']) {
-    --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-100);
-    --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-100);
-    background: transparent !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-    width: 100% !important;
-  }
-
-  [mlv-theme*='root']:not([mlv-layout*='pad']) {
     padding: 0 !important;
   }
 

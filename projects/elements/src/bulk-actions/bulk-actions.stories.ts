@@ -10,7 +10,7 @@ export default {
 
 export const Default = {
   render: () => html`
-<div mlv-theme="root" mlv-layout="column gap:md">
+<div mlv-layout="column gap:md">
   <mlv-bulk-actions closable status="accent">
     123 selected
     <mlv-button interaction="flat-destructive">delete</mlv-button>

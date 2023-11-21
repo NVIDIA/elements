@@ -149,7 +149,7 @@ export const VerticalNavigationDrawer = {
 
 export const VerticalNavigationPanel = {
   render: () => html`
-  <div mlv-theme="root" mlv-layout="row gap:md align:stretch">
+  <div mlv-layout="row gap:md align:stretch">
     <mlv-card>
       <mlv-card-header>
         <div slot="title">Header</div>
