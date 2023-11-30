@@ -8,7 +8,7 @@ export default {
 
 export const Default = {
   render: () => html`
-    <div nve-layout="column gap:md pad:lg">
+    <div nve-layout="column gap:md pad:lg grow">
       <nve-progress-bar></nve-progress-bar>
 
       <nve-progress-bar status="accent" value="25"></nve-progress-bar>
@@ -24,7 +24,7 @@ export const Default = {
 
 export const Max = {
   render: () => html`
-    <div nve-layout="column gap:md pad:lg">
+    <div nve-layout="column gap:md pad:lg grow">
       <nve-progress-bar status="accent" value="25" max="50"></nve-progress-bar>
 
       <nve-progress-bar status="accent" value="45" max="50"></nve-progress-bar>
@@ -34,7 +34,7 @@ export const Max = {
 
 export const Labeled = {
   render: () => html`
-    <div nve-layout="column gap:md pad:lg align:horizontal-stretch">
+    <div nve-layout="column gap:md pad:lg align:horizontal-stretch grow">
       <div nve-layout="row align:space-between">
         <p nve-text="label muted sm">Upload Status</p>
         <p nve-text="label emphasis sm">80%</p>
