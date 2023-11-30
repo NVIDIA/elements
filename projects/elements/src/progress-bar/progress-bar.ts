@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { useStyles } from '@elements/elements/internal';
+import { SupportStatus, useStyles } from '@elements/elements/internal';
 import { property } from 'lit/decorators/property.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './progress-bar.css?inline';
@@ -26,6 +26,9 @@ export class ProgressBar extends LitElement {
 
   /** The `max` property sets the highest value that `value` will be scaled to. */  
   @property({ type: Number }) max? = 100;
+
+  /** Defines visual treatment to represent a ongoing task or support status. */
+  @property({ type: String, reflect: true }) status: SupportStatus;
 
   render() {
     const classes = { full: this.value === this.max, minWidth: this.value > 0 };
