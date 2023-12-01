@@ -10,7 +10,8 @@
   --padding: 0;
   --box-shadow: var(--mlv-ref-shadow-500);
   --gap: var(--mlv-ref-space-sm);
-  --min-height: 100%;
+  --top: 0px;
+  --min-height: calc(100% - var(--top));
   --max-width: 400px;
   --width: 100%;
   display: contents;
@@ -33,7 +34,7 @@ dialog {
   max-width: var(--max-width);
   min-height: var(--min-height);
   width: var(--width);
-  top: 0 !important;
+  top: var(--top) !important;
   bottom: 0 !important;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
