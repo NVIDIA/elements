@@ -8,6 +8,7 @@ import '@elements/elements/search/define.js';
 import '@elements/elements/drawer/define.js';
 import '@elements/elements/panel/define.js';
 import '@elements/elements/card/define.js';
+import '@elements/elements/tooltip/define.js';
 
 export default {
   title: 'Elements/Menu/Examples',
@@ -174,3 +175,17 @@ export const VerticalNavigationPanel = {
   </div>
   `
 };
+
+export const MenuItemTooltip = {
+  render: () => html`
+  <mlv-menu>
+    <mlv-menu-item>item 1</mlv-menu-item>
+    <mlv-menu-item id="menu-item-2">
+      item 2
+      <mlv-icon id="warning-icon" size="md" name="exclamation-triangle" style="margin-left: auto"></mlv-icon>
+      <mlv-tooltip trigger="warning-icon" behavior-trigger hidden>This is a warning tooltip</mlv-tooltip>
+    </mlv-menu-item>
+    <mlv-menu-item>item 3</mlv-menu-item>
+  </mlv-menu>
+  `
+}
