@@ -1,3 +1,8 @@
 nve-menu:has(nve-menu-item:--current) {
   --padding: 0 0 0 var(--nve-ref-size-200);
 }
+
+nve-menu:has(nve-tooltip),
+nve-menu:has(nve-tooltip) nve-menu-item {
+  content-visibility: initial;
+}
