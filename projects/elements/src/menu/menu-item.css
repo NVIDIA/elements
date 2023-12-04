@@ -90,7 +90,7 @@
   position: absolute;
 }
 
-::slotted(*:not(a)) {
+::slotted(*:not(a):not(nve-icon)) {
   pointer-events: none;
 }
 
