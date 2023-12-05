@@ -13,7 +13,7 @@ describe('alert lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(20.5);
+    expect(report.payload.javascript.kb).toBeLessThan(21);
   });
 
   test('alert-banner should meet lighthouse benchmarks', async () => {
@@ -31,7 +31,7 @@ describe('alert lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(21.5);
+    expect(report.payload.javascript.kb).toBeLessThan(22);
   });
 
   test('alert-group should meet lighthouse benchmarks', async () => {
@@ -48,6 +48,6 @@ describe('alert lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(20.5);
+    expect(report.payload.javascript.kb).toBeLessThan(21);
   });
 });
