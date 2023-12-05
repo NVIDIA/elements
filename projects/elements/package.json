@@ -23,6 +23,7 @@
     "test:axe": "wireit",
     "test:coverage": "wireit",
     "test:lighthouse": "wireit",
+    "test:lighthouse:all": "LIGHTHOUSE_ALL=true pnpm run test:lighthouse",
     "storybook": "wireit",
     "lint": "wireit",
     "prepublishonly": "wireit",
@@ -241,7 +242,8 @@
     "@floating-ui/dom": "1.5.3",
     "@lit-labs/motion": "^1.0.6",
     "composed-offset-position": "^0.0.4",
-    "lit": "^3.1.0"
+    "lit": "^3.1.0",
+    "lit-html": "^3.1.0"
   },
   "optionalDependencies": {
     "@lit-labs/scoped-registry-mixin": "^1.0.3",
@@ -334,6 +336,7 @@
         "build",
         "test:coverage",
         "test:axe",
+        "test:lighthouse",
         "storybook"
       ]
     },
@@ -535,7 +538,7 @@
       ]
     },
     "test:lighthouse": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || cd .lighthouse/ && NODE_ENV=production ../node_modules/vitest/vitest.mjs run --config=vitest.config.ts",
+      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || NODE_ENV=production node_modules/vitest/vitest.mjs run --config=.lighthouse/vitest.config.ts",
       "files": [
         ".lighthouse/**",
         "!.lighthouse/dist/**",
