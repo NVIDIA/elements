@@ -17,6 +17,7 @@ export class LighthouseRunner {
   async open() {
     this.#browser = await chromium.launch({ args: ['--headless', '--remote-debugging-port=9222'] });
     this.#server = await preview({
+      root: './.lighthouse',
       preview: { port: this.#port, open: false }
     });
   }
@@ -25,12 +26,12 @@ export class LighthouseRunner {
     this.#server.httpServer.close();
     await this.#browser.close();
 
-    const dist = './dist';
+    const dist = '.lighthouse/dist';
     if (!fs.existsSync(dist)) {
       fs.mkdirSync(dist);
     }
 
-    const report = glob.sync(resolve('./dist/**/report.json')).reduce((p, n) => {
+    const report = glob.sync(resolve('.lighthouse/dist/**/report.json')).reduce((p, n) => {
       const file = JSON.parse(fs.readFileSync(n));
       return { ...p, [file.name]: file };
     }, { });
@@ -54,7 +55,7 @@ export class LighthouseRunner {
 
     const runnerResult = await lighthouse(`http://localhost:${this.#port}/${name}`, flags, config as any) as any;
 
-    fs.writeFileSync(`dist/${name}/report.html`, runnerResult.report[1]);
+    fs.writeFileSync(`.lighthouse/dist/${name}/report.html`, runnerResult.report[1]);
 
     const scores = {
       performance: runnerResult.lhr.categories.performance.score * 100,
@@ -102,7 +103,7 @@ export class LighthouseRunner {
       payload
     };
 
-    fs.writeFileSync(`dist/${name}/report.json`, JSON.stringify(this.#report[name], null, 2));
+    fs.writeFileSync(`./.lighthouse/dist/${name}/report.json`, JSON.stringify(this.#report[name], null, 2));
 
     return this.#report[name];
   }
@@ -118,17 +119,17 @@ export class LighthouseRunner {
         target: 'esnext',
         sourcemap: true,
         cssCodeSplit: !hasCustomStyleLinks,
-        outDir: `dist/${name}`
+        outDir: `.lighthouse/dist/${name}`
       },
       resolve: {
         alias: {
-          '@elements/elements': resolve('../dist')
+          '@elements/elements': resolve('./dist')
         }
       },
       plugins: [virtualHtml({
         pages: {
           index: {
-            template: '/index.html',
+            template: 'lighthouse/index.html',
             render(template) {
               if (hasCustomStyleLinks) {
                 return template.replace('</body>', `${content}</body>`).replace(`@import '@elements/elements/index.css';`, '');
