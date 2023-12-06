@@ -79,6 +79,46 @@ export const GapXl = generateLayoutStory('Gap Xl', 'row gap:xl', 5);
 export const GapXxl = generateLayoutStory('Gap Xxl', 'row gap:xxl', 5);
 export const GapXxxl = generateLayoutStory('Gap Xxxl', 'row gap:xxxl', 5);
 
+/* Responsive Layout */
+export const GapResponsive = {
+  render: () => html`
+    <div>
+      <section class="layout-example" nve-layout="row pad:md align:center gap@xs:xxxs gap@sm:xxs gap@md:md gap@lg:xl gap@xl:xxxl">
+        <nve-card></nve-card>
+        <nve-card></nve-card>
+        <nve-card></nve-card>
+        <nve-card></nve-card>
+        <nve-card></nve-card>
+      </section>
+    </div>
+  `
+}
+
+export const PadResponsive = {
+  render: () => html`
+    <div>
+      <section class="layout-example" nve-layout="row pad@xs:xs pad@sm:sm pad@md:md pad@lg:lg pad@xl:xxxl">
+        <nve-card nve-layout="grow"></nve-card>
+      </section>
+    </div>
+  `
+}
+
+
+export const HideResponsive = {
+  render: () => html`
+    <div>
+      <section class="layout-example" nve-layout="row gap:lg">
+        <nve-card></nve-card>
+        <nve-card></nve-card>
+        <nve-card nve-layout="hide@md"></nve-card>
+        <nve-card nve-layout="hide@md"></nve-card>
+        <nve-card nve-layout="hide@lg"></nve-card>
+      </section>
+    </div>
+  `
+}
+
 
 export const PadXxxs = generateLayoutStory('Padding Xxxs', 'row gap:sm align:stretch pad:xxxs', 3);
 export const PadXxs = generateLayoutStory('Padding Xxs', 'row gap:sm align:stretch pad:xxs', 3);
@@ -156,6 +196,30 @@ export const GridVariableSpans = {
     </section>
   `
 }
+
+
+export const ResponsiveGrid = {
+  render: () => html`
+    <section nve-layout="grid gap:md span-items@xs:12 span-items@sm:6 span-items@md:4 span-items@lg:3 span-items@xl:2" class="layout-example">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </section>
+        
+    <section nve-layout="grid gap:md" class="layout-example">
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+    </section>
+  `
+}
+
 
 
 export const Grow = {
