@@ -4,6 +4,7 @@ import { excludePrivateFields } from '@elements/elements/internal';
 import styles from '@elements/elements/index.css?inline';
 import font from '@elements/elements/inter.css?inline';
 import brand from '@elements/elements/css/theme.brand.css?inline';
+import responsiveStyles from '@elements/elements/css/module.responsive.css?inline';
 import { MLV_VERSION } from '@elements/elements';
 import { playground } from './playground-url.js';
 import { H1, H2, H3, P } from './markdown.jsx';
@@ -370,11 +371,11 @@ export const globalTypes = {
 }
 
 const styleSheet = new CSSStyleSheet();
-styleSheet.replaceSync(styles + font + brand);
+styleSheet.replaceSync(styles + font + brand + responsiveStyles);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
 
 const parentStyle = document.createElement('style');
-parentStyle.innerText = styles + font + brand;
+parentStyle.innerText = styles + font + brand + responsiveStyles;
 window.parent.document.head.appendChild(parentStyle);
 
 updateTheme('dark');
