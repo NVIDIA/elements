@@ -5,7 +5,7 @@
 [mlv-layout] {
   outline: var(--mlv-debug-layout-outline, initial);
   outline-offset: 1px;
-
+  
   &[hidden] {
     display: none !important;
   }
@@ -148,45 +148,15 @@
   }
 
 
-  /* Layout Gap Spacing */
-  &[mlv-layout~='gap:xxxs'] {
-    gap: var(--mlv-ref-space-xxxs);
-  }
-
-  &[mlv-layout~='gap:xxs'] {
-    gap: var(--mlv-ref-space-xxs);
-  }
-
-  &[mlv-layout~='gap:xs'] {
-    gap: var(--mlv-ref-space-xs);
-  }
-
-  &[mlv-layout~='gap:sm'] {
-    gap: var(--mlv-ref-space-sm);
-  }
-
-  &[mlv-layout~='gap:md'] {
-    gap: var(--mlv-ref-space-md);
-  }
-
-  &[mlv-layout~='gap:lg'] {
-    gap: var(--mlv-ref-space-lg);
-  }
-
-  &[mlv-layout~='gap:xl'] {
-    gap: var(--mlv-ref-space-xl);
-  }
-
-  &[mlv-layout~='gap:xxl'] {
-    gap: var(--mlv-ref-space-xxl);
-  }
-
-  &[mlv-layout~='gap:xxxl'] {
-    gap: var(--mlv-ref-space-xxxl);
+  /* Fixed Width Layout Gap Spacing */
+  @each $gap-size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+    &[mlv-layout~='gap:$(gap-size)'] {
+      gap: var(--mlv-ref-space-$(gap-size));
+    }
   }
 
 
-  /* Container Padding Spacing */
+  /* Fixed Width Container Padding */
   @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
     &[mlv-layout~='pad:$(size)'] {
       padding: var(--mlv-ref-space-$(size));
@@ -216,7 +186,7 @@
     display: grid;
     align-items: start;
     align-content: start;
-    grid-template-columns: repeat(12, 1fr); /* TODO make 12 columns a design token? */
+    grid-template-columns: repeat(12, 1fr);
     width: 100%;
 
     @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
