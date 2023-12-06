@@ -52,14 +52,15 @@ export default defineConfig((env) => {
           index: resolve('./src/index.ts'),                                    // imports all independent component entrypoints
           'internal/index': resolve('./src/internal/index.ts'),                // internal utilities for @elements/elements
           'scoped/index': resolve('./src/scoped/index.ts'),                    // utilities for scoping elements
-          'polyfills/index': resolve('./src/polyfills/index.ts'),                // optional polyfills for non-chromium envs
+          'polyfills/index': resolve('./src/polyfills/index.ts'),              // optional polyfills for non-chromium envs
           'test/index': resolve('./src/test/index.ts'),                        // internal testing utilities for @elements/elements
           'css/module.typography': resolve('./src/css/module.typography.css'), // base typography styles
           'css/module.layout': resolve('./src/css/module.layout.css'),         // layout utilities
+          'css/module.responsive': resolve('./src/css/module.responsive.css'), // responsive layout utilities
           'css/module.reset': resolve('./src/css/module.reset.css'),           // common reset/base styles
           'css/theme.brand': resolve('./src/css/theme.brand.css'),             // experimental brand theme
           'index.css': resolve('./src/index.css'),                             // global styles including all above style modules
-          ...glob.sync('./src/**/define.ts').reduce((p, i) => {                 // all component entrypoints
+          ...glob.sync('./src/**/define.ts').reduce((p, i) => {                // all component entrypoints
             return { ...p, [i.replace('./src/', '').replace('.ts', '')]: resolve(i) };
           }, { })
         }
