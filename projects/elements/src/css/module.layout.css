@@ -5,7 +5,7 @@
 [nve-layout] {
   outline: var(--nve-debug-layout-outline, initial);
   outline-offset: 1px;
-
+  
   &[hidden] {
     display: none !important;
   }
@@ -148,45 +148,15 @@
   }
 
 
-  /* Layout Gap Spacing */
-  &[nve-layout~='gap:xxxs'] {
-    gap: var(--nve-ref-space-xxxs);
-  }
-
-  &[nve-layout~='gap:xxs'] {
-    gap: var(--nve-ref-space-xxs);
-  }
-
-  &[nve-layout~='gap:xs'] {
-    gap: var(--nve-ref-space-xs);
-  }
-
-  &[nve-layout~='gap:sm'] {
-    gap: var(--nve-ref-space-sm);
-  }
-
-  &[nve-layout~='gap:md'] {
-    gap: var(--nve-ref-space-md);
-  }
-
-  &[nve-layout~='gap:lg'] {
-    gap: var(--nve-ref-space-lg);
-  }
-
-  &[nve-layout~='gap:xl'] {
-    gap: var(--nve-ref-space-xl);
-  }
-
-  &[nve-layout~='gap:xxl'] {
-    gap: var(--nve-ref-space-xxl);
-  }
-
-  &[nve-layout~='gap:xxxl'] {
-    gap: var(--nve-ref-space-xxxl);
+  /* Fixed Width Layout Gap Spacing */
+  @each $gap-size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+    &[nve-layout~='gap:$(gap-size)'] {
+      gap: var(--nve-ref-space-$(gap-size));
+    }
   }
 
 
-  /* Container Padding Spacing */
+  /* Fixed Width Container Padding */
   @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
     &[nve-layout~='pad:$(size)'] {
       padding: var(--nve-ref-space-$(size));
@@ -216,7 +186,7 @@
     display: grid;
     align-items: start;
     align-content: start;
-    grid-template-columns: repeat(12, 1fr); /* TODO make 12 columns a design token? */
+    grid-template-columns: repeat(12, 1fr);
     width: 100%;
 
     @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {

@@ -1,0 +1,43 @@
+/* Applies the all-important container type to the direct parent of any elements using our container query layout utils */
+*:has(> [nve-layout*='gap@']),
+*:has(> [nve-layout*='pad@']),
+*:has(> [nve-layout*='hide@']),
+*:has(> [nve-layout*='span@']),
+*:has(> [nve-layout*='span-items@']) {
+  container-type: inline-size;
+}
+
+[nve-layout] {
+  /* Responsive (Container Query Based) Layout & Padding */
+  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl), (1px, 150px, 300px, 600px, 900px) {
+    @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+      @container (width >= $(breakpoint-value)) {
+        &[nve-layout~='gap@$(breakpoint):$(size)'] {
+          gap: var(--nve-ref-space-$(size));
+        }
+
+        &[nve-layout~='pad@$(breakpoint):$(size)'] {
+          padding: var(--nve-ref-space-$(size));
+        }
+      }
+    }
+
+    /* Responsive (Container Query Based) Hiding of Elements */
+    @container (width < $(breakpoint-value)) {
+      &[nve-layout~='hide@$(breakpoint)'] {
+        display: none;
+      }
+    }
+
+    /* Responsive Grid Breakpoints */
+    &[nve-layout~='grid'] {
+      @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
+        @container (width >= $(breakpoint-value)) {
+          [nve-layout~='span@$(breakpoint):$(num)'], &[nve-layout~='span-items@$(breakpoint):$(num)'] > * {
+            grid-column: span $(num)/span $(num);
+          }
+        }
+      }
+    }
+  }
+}
