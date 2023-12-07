@@ -17,7 +17,7 @@ export function playground(Story, context) {
     const formattedSource = prettier.default.format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
 
     const files = serialize(addCssContent(createDefaultFiles(formattedSource, context.id), context.id));
-    const url = `https://elements-stage.nvidia.com/ui/elements-playground/?theme=${context.globals.theme}&story=${context.id}&files=${files}`;
+    const url = `https://elements-stage.nvidia.com/ui/elements-playground/?theme=${context.globals.theme}&story=${context.id}&files=${files}&version=1`;
     const playgroundButton = Object.keys(context.unmappedArgs).length ? nothing : html`<nve-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></nve-button>`;
     return html`${Story()} ${playgroundButton}`;
   }
@@ -54,42 +54,15 @@ function serialize(data, compress = true) {
 
 function createDefaultFiles(content, storyId) {
   const ELEMENTS_VERSION = packageFile.version;
-  const CDN_ORIGIN = `https://cdn-stage.nvidia.com`;
-  const CDN_MODULES_URL = `${CDN_ORIGIN}/assets/elements-playground/modules`;
+  const CDN_MODULES_URL = `https://esm.nvidia.com`;
 
   return {
     'index.html': {
       content: `<!doctype html>
 <html nve-theme="dark">
 <head>
-  <link rel="stylesheet" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/index.css" />
-  <link rel="stylesheet" href="${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/inter.css" />
-  <script type="importmap">
-  {
-    "imports": {
-      "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/",
-      "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/dist/"
-    },
-    "scopes": {
-      "${CDN_ORIGIN}/": {
-        "composed-offset-position": "${CDN_MODULES_URL}/composed-offset-position@0.0.4/dist/composed-offset-position.esm.js",
-        "lit": "${CDN_MODULES_URL}/lit@2.7.4/index.js",
-        "lit/": "${CDN_MODULES_URL}/lit@2.7.4/",
-        "lit-element/lit-element.js": "${CDN_MODULES_URL}/lit-element@3.3.0/development/lit-element.js",
-        "lit-html": "${CDN_MODULES_URL}/lit-html@2.7.4/development/lit-html.js",
-        "lit-html/": "${CDN_MODULES_URL}/lit-html@2.7.4/development/",
-        "@floating-ui/core": "${CDN_MODULES_URL}/@floating-ui/core@1.2.6/dist/floating-ui.core.esm.js",
-        "@floating-ui/dom": "${CDN_MODULES_URL}/@floating-ui/dom@1.2.6/dist/floating-ui.dom.esm.js",
-        "@lit/reactive-element": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/reactive-element.js",
-        "@lit/reactive-element/decorators/property.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/property.js",
-        "@lit/reactive-element/decorators/query.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query.js",
-        "@lit/reactive-element/decorators/query-assigned-elements.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/query-assigned-elements.js",
-        "@lit/reactive-element/decorators/state.js": "${CDN_MODULES_URL}/@lit/reactive-element@1.6.1/development/decorators/state.js",
-        "@lit-labs/motion": "${CDN_MODULES_URL}/@lit-labs/motion@1.0.3/index.js"
-      }
-    }
-  }
-  </script>
+  <link rel="stylesheet" href="@elements/elements/dist/index.css" />
+  <link rel="stylesheet" href="@elements/elements/dist/inter.css" />
   <script type="module" src="./index.js"></script>
   ${storyId.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
 </head>
@@ -102,6 +75,15 @@ ${content}
     },
     'index.ts': {
       content: `${getImports(content)}`
+    },
+    'importmap.json': {
+      content: `{
+  "imports": {
+    "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}",
+    "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/"
+  }
+}
+`
     }
   };
 }
