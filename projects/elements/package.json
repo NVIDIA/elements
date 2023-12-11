@@ -377,6 +377,7 @@
         "!src/**/*.stories.mdx",
         "!src/**/*.test.ts",
         "!src/**/*.test.axe.ts",
+        "!src/**/*.test.lighthouse.ts",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -494,7 +495,7 @@
       "dependencies": [
         "build:manifest",
         "test:coverage",
-        "test:lighthouse"
+        "test:lighthouse:all"
       ]
     },
     "build:metadata:fast": {
