@@ -264,6 +264,50 @@ export const PopoverOverflow = () => {
   `
 };
 
+export const Reset = () => {
+  return html`
+  <nve-combobox style="width: 500px; --scroll-height: 220px">
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+    </select>
+    <nve-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" interaction="flat"></nve-icon-button>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  <script type="module">
+    document.querySelector('#combobox-reset').addEventListener('click', e => e.target.parentElement.reset());
+  </script>
+  `
+};
+
+export const Footer = () => {
+  return html`
+  <nve-combobox id="combobox-select-all" style="width: 500px; --scroll-height: 200px">
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+      <option value="includes"></option>
+      <option value="user"></option>
+      <option value="progress"></option>
+    </select>
+    <nve-button slot="footer" interaction="flat">action</nve-button>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  `
+};
+
 export const Performance = () => {
   return html`<nve-combobox-performance-demo></nve-combobox-performance-demo>`
 }
