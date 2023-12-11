@@ -28,7 +28,6 @@ import styles from './toolbar.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-toolbar-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=208%3A27566&mode=dev
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
- * @vqa false
  */
 export class Toolbar extends LitElement implements ContainerElement {
   static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);

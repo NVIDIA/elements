@@ -1,5 +1,5 @@
 {
-  "created": "2023-12-11T17:26:11.479Z",
+  "created": "2023-12-12T00:09:10.407Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -540,10 +540,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.52,
+            "kb": 20.518,
             "requests": {
               "index.js": {
-                "kb": 19.73,
+                "kb": 19.728,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -560,7 +560,7 @@
       },
       "tests": {
         "projectTotal": 6,
-        "instanceTotal": 10,
+        "instanceTotal": 11,
         "coverageTotal": 100
       },
       "stories": [
@@ -770,10 +770,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.522,
+            "kb": 20.521,
             "requests": {
               "index.js": {
-                "kb": 19.732,
+                "kb": 19.731,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -790,7 +790,7 @@
       },
       "tests": {
         "projectTotal": 4,
-        "instanceTotal": 7,
+        "instanceTotal": 8,
         "coverageTotal": 100
       },
       "stories": [
@@ -884,10 +884,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.506,
+            "kb": 20.504,
             "requests": {
               "index.js": {
-                "kb": 19.733,
+                "kb": 19.731,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -1050,10 +1050,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.659,
+            "kb": 17.658,
             "requests": {
               "index.js": {
-                "kb": 16.869,
+                "kb": 16.868,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -1133,7 +1133,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -1173,10 +1173,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.412,
+            "kb": 17.413,
             "requests": {
               "index.js": {
-                "kb": 16.748,
+                "kb": 16.749,
                 "name": "index.js"
               },
               "chevron.svg.js": {
@@ -1224,7 +1224,7 @@
         }
       ],
       "behavior": "content",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "mlv-button",
@@ -1468,10 +1468,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.156,
+            "kb": 10.157,
             "requests": {
               "index.js": {
-                "kb": 10.156,
+                "kb": 10.157,
                 "name": "index.js"
               }
             }
@@ -1548,7 +1548,7 @@
       "apiReview": true,
       "performance": true,
       "stable": false,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
       "themes": true,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role",
@@ -1729,7 +1729,7 @@
         }
       ],
       "behavior": "container",
-      "status": "pre-release"
+      "status": "beta"
     },
     {
       "name": "mlv-card",
@@ -3707,10 +3707,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 32.894,
+            "kb": 32.896,
             "requests": {
               "index.js": {
-                "kb": 32.066,
+                "kb": 32.068,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3818,10 +3818,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 32.894,
+            "kb": 32.896,
             "requests": {
               "index.js": {
-                "kb": 32.066,
+                "kb": 32.068,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3878,10 +3878,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 32.894,
+            "kb": 32.896,
             "requests": {
               "index.js": {
-                "kb": 32.066,
+                "kb": 32.068,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3910,7 +3910,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -3960,10 +3960,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.015,
+            "kb": 8.014,
             "requests": {
               "index.js": {
-                "kb": 8.015,
+                "kb": 8.014,
                 "name": "index.js"
               }
             }
@@ -4017,7 +4017,7 @@
         }
       ],
       "behavior": "content",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "mlv-dot",
@@ -4827,10 +4827,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 32.877,
+            "kb": 32.878,
             "requests": {
               "index.js": {
-                "kb": 32.049,
+                "kb": 32.05,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5044,10 +5044,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.542,
+            "kb": 24.541,
             "requests": {
               "index.js": {
-                "kb": 24.542,
+                "kb": 24.541,
                 "name": "index.js"
               }
             }
@@ -5171,10 +5171,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.198,
+            "kb": 22.197,
             "requests": {
               "index.js": {
-                "kb": 22.198,
+                "kb": 22.197,
                 "name": "index.js"
               }
             }
@@ -5445,10 +5445,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.198,
+            "kb": 22.197,
             "requests": {
               "index.js": {
-                "kb": 22.198,
+                "kb": 22.197,
                 "name": "index.js"
               }
             }
@@ -5581,10 +5581,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.198,
+            "kb": 22.197,
             "requests": {
               "index.js": {
-                "kb": 22.198,
+                "kb": 22.197,
                 "name": "index.js"
               }
             }
@@ -5651,10 +5651,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.198,
+            "kb": 22.197,
             "requests": {
               "index.js": {
-                "kb": 22.198,
+                "kb": 22.197,
                 "name": "index.js"
               }
             }
@@ -5718,10 +5718,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.198,
+            "kb": 22.197,
             "requests": {
               "index.js": {
-                "kb": 22.198,
+                "kb": 22.197,
                 "name": "index.js"
               }
             }
@@ -5782,10 +5782,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.198,
+            "kb": 22.197,
             "requests": {
               "index.js": {
-                "kb": 22.198,
+                "kb": 22.197,
                 "name": "index.js"
               }
             }
@@ -5861,10 +5861,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.198,
+            "kb": 22.197,
             "requests": {
               "index.js": {
-                "kb": 22.198,
+                "kb": 22.197,
                 "name": "index.js"
               }
             }
@@ -5974,10 +5974,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.486,
+            "kb": 15.485,
             "requests": {
               "index.js": {
-                "kb": 14.713,
+                "kb": 14.712,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -6329,10 +6329,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.618,
+            "kb": 17.619,
             "requests": {
               "index.js": {
-                "kb": 17.618,
+                "kb": 17.619,
                 "name": "index.js"
               }
             }
@@ -7425,10 +7425,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.743,
+            "kb": 25.742,
             "requests": {
               "index.js": {
-                "kb": 24.833,
+                "kb": 24.832,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -7923,7 +7923,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -8171,7 +8171,7 @@
         }
       ],
       "behavior": "navigation",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "mlv-panel",
@@ -8304,10 +8304,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.069,
+            "kb": 20.07,
             "requests": {
               "index.js": {
-                "kb": 19.268,
+                "kb": 19.269,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8423,10 +8423,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.069,
+            "kb": 20.07,
             "requests": {
               "index.js": {
-                "kb": 19.268,
+                "kb": 19.269,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8494,10 +8494,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.069,
+            "kb": 20.07,
             "requests": {
               "index.js": {
-                "kb": 19.268,
+                "kb": 19.269,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8570,10 +8570,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.069,
+            "kb": 20.07,
             "requests": {
               "index.js": {
-                "kb": 19.268,
+                "kb": 19.269,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8723,10 +8723,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.925,
+            "kb": 25.924,
             "requests": {
               "index.js": {
-                "kb": 24.968,
+                "kb": 24.967,
                 "name": "index.js"
               },
               "eye.svg.js": {
@@ -10062,7 +10062,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -10318,7 +10318,7 @@
         }
       ],
       "behavior": "button",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "mlv-switch",
@@ -10475,10 +10475,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.683,
+            "kb": 24.682,
             "requests": {
               "index.js": {
-                "kb": 24.683,
+                "kb": 24.682,
                 "name": "index.js"
               }
             }
@@ -10610,10 +10610,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.33,
+            "kb": 11.328,
             "requests": {
               "index.js": {
-                "kb": 11.33,
+                "kb": 11.328,
                 "name": "index.js"
               }
             }
@@ -10899,10 +10899,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.33,
+            "kb": 11.328,
             "requests": {
               "index.js": {
-                "kb": 11.33,
+                "kb": 11.328,
                 "name": "index.js"
               }
             }
@@ -11800,10 +11800,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 32.817,
+            "kb": 32.818,
             "requests": {
               "index.js": {
-                "kb": 32.027,
+                "kb": 32.028,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -11864,7 +11864,7 @@
       "apiReview": true,
       "performance": true,
       "stable": true,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
       "themes": true,
       "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/",
@@ -12062,7 +12062,7 @@
         }
       ],
       "behavior": "navigation",
-      "status": "pre-release"
+      "status": "stable"
     },
     {
       "name": "mlv-tooltip",
@@ -14926,9 +14926,9 @@
         },
         "branches": {
           "total": 6,
-          "covered": 5,
+          "covered": 6,
           "skipped": 0,
-          "pct": 83.33
+          "pct": 100
         }
       },
       {
@@ -16979,9 +16979,9 @@
       },
       "branches": {
         "total": 1037,
-        "covered": 946,
+        "covered": 947,
         "skipped": 0,
-        "pct": 91.22
+        "pct": 91.32
       },
       "branchesTrue": {
         "total": 0,
@@ -17739,7 +17739,7 @@
           },
           {
             "name": "mlv-alert",
-            "instanceTotal": 3
+            "instanceTotal": 4
           },
           {
             "name": "mlv-divider",
@@ -17751,7 +17751,7 @@
           },
           {
             "name": "mlv-alert-group",
-            "instanceTotal": 2
+            "instanceTotal": 3
           },
           {
             "name": "mlv-toolbar",
@@ -17858,7 +17858,7 @@
             "instanceTotal": 2
           }
         ],
-        "instanceTotal": 147
+        "instanceTotal": 149
       },
       {
         "name": "@elements/next-common",
