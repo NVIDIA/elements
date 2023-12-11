@@ -12,7 +12,6 @@ import styles from './pagination.css?inline';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-pagination-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
- * @stable false
  */
 @keyNavigationList<Pagination>()
 export class Pagination extends LitElement {
