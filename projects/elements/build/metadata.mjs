@@ -171,10 +171,11 @@ function getElementStability(metadata) {
   return status;
 }
 
-function getElementLighthouseScore(name, lighthouseReport) {
+function getElementLighthouseScore(manifest, lighthouseReport) {
+  const name = manifest.tagName;
   let lighthouse = lighthouseReport[name];
   if (!lighthouseReport[name]) {
-    const match = Object.entries(lighthouseReport).find(([k, _]) => name.startsWith(k));
+    const match = Object.entries(lighthouseReport).find(([k, _]) => name.startsWith(k) || manifest.metadata.entrypoint.replace('@elements/elements/', 'mlv-').startsWith(k));
     lighthouse = match ? match[1] : { };
   }
 
@@ -195,7 +196,7 @@ function getElements(coverage, projects, lighthouseReport) {
     const cov = coverage.find(c => c.file.replace('elements/src/', '') === manifest.path.replace('/src/', '').replace('.js', '.ts'));
     const aria = manifest.metadata.aria ? manifest.metadata.aria : superclassManifest.metadata?.aria;
     const coverageTotal = cov ? (cov.statements.pct + cov.functions.pct + cov.branches.pct + cov.lines.pct) / 4 : 0;
-    const lighthouse = getElementLighthouseScore(name, lighthouseReport);
+    const lighthouse = getElementLighthouseScore(manifest, lighthouseReport);
 
     const metadata = {
       name,

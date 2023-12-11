@@ -117,7 +117,6 @@ export const parameters = {
           'Contributions',
           'Requests',
           'Glossary',
-          'Maglev',
           'API Design',
           [
             'Getting Started',

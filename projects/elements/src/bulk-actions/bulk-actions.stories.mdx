@@ -1,7 +1,6 @@
-import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
-import { statusBadges } from '../../docs/utils.mdx';
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
 
-<Meta title="Internal/Bulk Actions/Documentation" parameters={{ badges: statusBadges('mlv-bulk-actions') }} />
+<Meta title="Internal/Bulk Actions/Documentation" />
 
 # Bulk Actions
 
@@ -18,14 +17,14 @@ import '@elements/elements/bulk-actions/define.js';
 ```
 
 <Canvas>
-  <Story id="elements-bulk-actions-examples--default" />
+  <Story id="internal-bulk-actions-examples--default" />
 </Canvas>
 
 ## Themes
 
 <Canvas columns={2}>
-  <Story id="elements-bulk-actions-examples--light-theme" />
-  <Story id="elements-bulk-actions-examples--dark-theme" />
+  <Story id="internal-bulk-actions-examples--light-theme" />
+  <Story id="internal-bulk-actions-examples--dark-theme" />
 </Canvas>
 
 <element-status tag="mlv-bulk-actions"></element-status>
