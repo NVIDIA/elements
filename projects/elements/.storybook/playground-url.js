@@ -1,5 +1,5 @@
 import { gzipSync } from 'fflate';
-import { html, nothing } from 'lit';
+import { html } from 'lit';
 import packageFile from '../package.json';
 import metrics from 'build/metadata.json';
 
@@ -7,7 +7,8 @@ const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
 
 export function playground(Story, context) {
-  if (context.viewMode === 'story' || Object.keys(context.unmappedArgs).length || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
+  const notAutoForm = Object.keys(context.unmappedArgs).length === 1 && !context.unmappedArgs['onReset']; // storybook sometimes tries to detect form controls and adds actions
+  if (context.viewMode === 'story' || notAutoForm || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
     return Story();
   } else {
     const hasRoot = i => i.match(/nve-theme="root"/g)?.length > 1;
@@ -18,8 +19,7 @@ export function playground(Story, context) {
 
     const files = serialize(addCssContent(createDefaultFiles(formattedSource, context.id), context.id));
     const url = `https://elements-stage.nvidia.com/ui/elements-playground/?theme=${context.globals.theme}&story=${context.id}&files=${files}&version=1`;
-    const playgroundButton = Object.keys(context.unmappedArgs).length ? nothing : html`<nve-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></nve-button>`;
-    return html`${Story()} ${playgroundButton}`;
+    return html`${Story()} <nve-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></nve-button>`;
   }
 }
 
