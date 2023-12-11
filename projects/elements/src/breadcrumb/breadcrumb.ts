@@ -18,7 +18,6 @@ import type { Button } from '@elements/elements/button';
  * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-breadcrumb-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/navigation_role
- * @stable false
  */
 @keyNavigationList<Breadcrumb>()
 export class Breadcrumb extends LitElement {
