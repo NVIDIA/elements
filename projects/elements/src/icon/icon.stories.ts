@@ -72,18 +72,20 @@ class IconDemo extends LitElement {
 
     <mlv-card>
       <mlv-card-content mlv-layout="column gap:lg">
-        <form @input=${this.#input} mlv-layout="row gap:md align:vertical-center">
-          <mlv-search style="--width: 350px">
+        <form @input=${this.#input} mlv-layout="row gap:md align:vertical-center full">
+          <mlv-search style="width: 350px">
             <input type="search" @input=${e => this.iconSearchKey = e.target.value} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
           </mlv-search>
-          <mlv-select style="--width: 90px">
+          <mlv-select style="--width: 90px; --text-transform: none">
             <select aria-label="size" .value=${this.values.size} name="size">
-              <option value="sm">small</option>
-              <option value="">medium</option>
-              <option value="lg">large</option>
+              <option value="xs">xs</option>
+              <option value="sm">sm</option>
+              <option value="">md</option>
+              <option value="lg">lg</option>
+              <option value="xl">xl</option>
             </select>
           </mlv-select>
-          <mlv-select>
+          <mlv-select style="--width: 90px; --text-transform: none">
             <select aria-label="direction" .value=${this.values.direction} name="direction">
               <option value="">up</option>
               <option value="down">down</option>
@@ -112,7 +114,7 @@ class IconDemo extends LitElement {
   `;
   }
 
-  @state() values = { size: 'lg', outline: false, direction: '' };
+  @state() values = { size: 'xl', outline: false, direction: '' };
 
   get #form() {
     return this.shadowRoot.querySelector('form');
