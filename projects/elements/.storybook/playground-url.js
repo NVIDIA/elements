@@ -7,7 +7,7 @@ const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
 
 export function playground(Story, context) {
-  const notAutoForm = Object.keys(context.unmappedArgs).length === 1 && !context.unmappedArgs['onReset']; // storybook sometimes tries to detect form controls and adds actions
+  const notAutoForm = Object.keys(context.unmappedArgs).length > 1 && !context.unmappedArgs['onReset']; // storybook sometimes tries to detect form controls and adds actions
   if (context.viewMode === 'story' || notAutoForm || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
     return Story();
   } else {
