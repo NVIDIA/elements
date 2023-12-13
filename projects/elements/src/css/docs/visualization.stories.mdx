@@ -34,10 +34,10 @@ Below is a simple demo of a visualization library (ChartJS) consuming the tokens
 <Story id="foundations-visualization-examples--utils" inline={false} height="600px" />
 
 ```typescript
-import { getCurrentTokens } from '@elements/elements';
+import { getThemeTokens } from '@elements/elements';
 import Chart from 'chart.js/auto';
 
-const tokens = getCurrentTokens();
+const tokens = getThemeTokens();
 new Chart(document.querySelector('canvas'), {
   type: 'line',
   options: { ... },

@@ -22,7 +22,7 @@ export const H2 = (args) => {
 export const H3 = (args) => {
   const id = new URLSearchParams(window.location.search).get('id');
   return (
-  <h3 id={args.id} mlv-text="heading lg"  mlv-layout="pad-top:md" className="dynamic-anchor">
+  <h3 id={args.id} mlv-text="heading lg"  mlv-layout="pad-top:lg" className="dynamic-anchor">
     <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><mlv-icon name="link"></mlv-icon></a>
     {args.children}
   </h3>

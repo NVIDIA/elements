@@ -134,3 +134,13 @@ export const FitContent = {
   <mlv-control-message>message</mlv-control-message>
 </mlv-input>`
 };
+
+export const Flat = {
+  render: () =>
+    html`
+<mlv-input container="flat">
+  <label>label</label>
+  <input />
+  <mlv-control-message>message</mlv-control-message>
+</mlv-input>`,
+};

@@ -388,7 +388,7 @@ class ElementsGlossary extends LitElement {
             <mlv-grid-column>Description</mlv-grid-column>
             <mlv-grid-column width="350px">Type</mlv-grid-column>
           </mlv-grid-header>
-          ${metrics.types.props?.map(prop => html`
+          ${metrics.types.props?.filter(p => p.name !== '_internals' && p.name !== 'render')?.map(prop => html`
           <mlv-grid-row>
             <mlv-grid-cell><code mlv-text="code">${prop.name}</code></mlv-grid-cell>
             <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></mlv-grid-cell>

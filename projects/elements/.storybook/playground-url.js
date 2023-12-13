@@ -7,19 +7,17 @@ const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
 
 export function playground(Story, context) {
-  const notAutoForm = Object.keys(context.unmappedArgs).length > 1 && !context.unmappedArgs['onReset']; // storybook sometimes tries to detect form controls and adds actions
-  if (context.viewMode === 'story' || notAutoForm || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
-    return Story();
+  const story = Story();
+  // if story is using lit dynamic templating and or args skip generating playground url
+  const usesDynamicArgs = Object.keys(context.unmappedArgs).length && story.values?.length;
+  if (usesDynamicArgs || context.viewMode === 'story' || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
+    return story;
   } else {
-    const hasRoot = i => i.match(/mlv-theme="root"/g)?.length > 1;
-    const src = getRenderString(Story());
-    const lines = src.trim().split('\n').filter(i => !hasRoot(i));
-    const source = (hasRoot(src) ? lines.slice(0, -1).join('\n') : lines.join('\n')).replaceAll('mlv-theme="root ', 'mlv-theme="');
+    const source = getRenderString(story);
     const formattedSource = prettier.default.format(source.replaceAll(' mlv-theme="dark"', '').replaceAll(' mlv-theme="light"', '').replaceAll(' mlv-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
-
     const files = serialize(addCssContent(createDefaultFiles(formattedSource, context.id), context.id));
     const url = `https://elements-stage.nvidia.com/ui/elements-playground/?theme=${context.globals.theme}&story=${context.id}&files=${files}&version=1`;
-    return html`${Story()} <mlv-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></mlv-button>`;
+    return html`${story} <mlv-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></mlv-button>`;
   }
 }
 
