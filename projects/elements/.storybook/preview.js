@@ -38,12 +38,9 @@ export const parameters = {
     theme: themes.dark,
     transformSource: (src, context) => {
       const excludes = context.id.includes('foundations-tokens-examples--');
-      // remove nve-theme="root" from demo source snippets when not used for theming
       let source = src
         .trim()
-        .replace(/<nve-button class="playground-btn">.*<\/nve-button>/g, '')
-        .replaceAll(' nve-theme="root ', ' nve-theme="')
-        .replaceAll(' nve-theme="root"', '');
+        .replace(/<nve-button class="playground-btn">.*<\/nve-button>/g, '');
 
       const lines = source.split('\n').filter(i => i.length ? i.trim().length : false);
       source = lines[0]?.trim() === '<div>' ? lines.slice(1, -1).join('\n') : source;
