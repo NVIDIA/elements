@@ -413,7 +413,7 @@ describe('endOfScrollBox(): ', () => {
   });
 });
 
-describe('getCurrentTokens', () => {
+describe('getThemeTokens', () => {
   it('should compute and return the current design tokens', async () => {
     const tokens = getThemeTokens();
     expect(tokens).toBeTruthy();

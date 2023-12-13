@@ -388,7 +388,7 @@ class ElementsGlossary extends LitElement {
             <nve-grid-column>Description</nve-grid-column>
             <nve-grid-column width="350px">Type</nve-grid-column>
           </nve-grid-header>
-          ${metrics.types.props?.map(prop => html`
+          ${metrics.types.props?.filter(p => p.name !== '_internals' && p.name !== 'render')?.map(prop => html`
           <nve-grid-row>
             <nve-grid-cell><code nve-text="code">${prop.name}</code></nve-grid-cell>
             <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></nve-grid-cell>
