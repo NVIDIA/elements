@@ -134,3 +134,13 @@ export const FitContent = {
   <nve-control-message>message</nve-control-message>
 </nve-input>`
 };
+
+export const Flat = {
+  render: () =>
+    html`
+<nve-input container="flat">
+  <label>label</label>
+  <input />
+  <nve-control-message>message</nve-control-message>
+</nve-input>`,
+};
