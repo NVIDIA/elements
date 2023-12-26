@@ -4,7 +4,7 @@ const withLitSSR = require('@lit-labs/nextjs')(); // https://github.com/lit/lit/
 const nextConfig = {
   // Add your own config here
   reactStrictMode: true,
-  swcMinify: true,
+  swcMinify: true
 };
 
 module.exports = withLitSSR(nextConfig);

@@ -22,7 +22,7 @@ import styles from './alert.css?inline';
  * @cssprop --font-weight
  * @cssprop --justify-content
  * @cssprop --min-height
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-alert-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-alert-documentation--docs
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=76-5326&t=CAAM7yEBvG18tRRa-0
  */

@@ -56,10 +56,10 @@
 
 :host([orientation='vertical']) {
   --gap: var(--mlv-ref-space-xs);
+}
 
-  & [internal-host] {
-    flex-direction: column;
-  }
+:host([orientation='vertical']) [internal-host] {
+  flex-direction: column;
 }
 
 :host([interaction='emphasize']) ::slotted(mlv-divider) {
@@ -73,12 +73,12 @@
 :host(:--split) {
   --padding: 0;
   --gap: 0;
+}
 
-  & ::slotted(mlv-button) {
-    --border-radius: var(--mlv-ref-border-radius-none);
-  }
+:host(:--split) ::slotted(mlv-button) {
+  --border-radius: var(--mlv-ref-border-radius-none);
+}
 
-  & ::slotted(mlv-icon-button) {
-    --border-radius: var(--mlv-ref-border-radius-none);
-  }
+:host(:--split) ::slotted(mlv-icon-button) {
+  --border-radius: var(--mlv-ref-border-radius-none);
 }

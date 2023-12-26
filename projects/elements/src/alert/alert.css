@@ -42,7 +42,6 @@ slot[name] {
   font-weight: var(--mlv-ref-font-weight-semibold);
 }
 
-::slotted(mlv-button[interaction='ghost']), /** @deprecated ghost */
 ::slotted(mlv-button[interaction='flat']) {
   --color: inherit;
 }

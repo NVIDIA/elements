@@ -7,17 +7,11 @@ import styles from './input-group.css?inline';
 
 /**
  * @element mlv-input-group
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-input-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-input-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
  */
 export class InputGroup extends ControlGroup {
-  /**
-   * @deprecated
-   * (0.19.0) use `mlv-progressive-filter-chip` instead
-   */
-  @property({ type: String, reflect: true }) type?: 'filter';
-
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
 
   static readonly metadata = {

@@ -20,17 +20,23 @@ StyleDictionary.registerTransform({
     const isOutlineToken = name?.includes('mlv-ref-outline');
 
     if (isColorToken && isRawValue && !isReferenceToken && !isVisualizationToken && !isHighContrast) {
-      console.error('\x1b[31m', `Token ${name} is a invalid color. Color must implement a reference to a {ref.*} token to prevent cross theme color divergence`);
+      console.error(
+        '\x1b[31m',
+        `Token ${name} is a invalid color. Color must implement a reference to a {ref.*} token to prevent cross theme color divergence`
+      );
       throw new Error();
     }
 
     if (isPxValue && isRawValue && !isSizeToken && !isSpaceToken && !isBorderToken && !isOutlineToken) {
-      console.error('\x1b[31m', `Token ${name} is a invalid size/space value. Value must implement a reference to a {ref.space-*} or {ref.size-*} token to prevent cross theme layout divergence`);
+      console.error(
+        '\x1b[31m',
+        `Token ${name} is a invalid size/space value. Value must implement a reference to a {ref.space-*} or {ref.size-*} token to prevent cross theme layout divergence`
+      );
       throw new Error();
     }
 
     return value;
-  },
+  }
 });
 
 StyleDictionary.registerTransform({
@@ -40,19 +46,23 @@ StyleDictionary.registerTransform({
   matcher: ({ value }) => typeof value === 'string' && value?.includes('*'),
   transformer: ({ value, attributes }) => {
     if (attributes.type === 'font') {
-      const [scale, base] = value.split('*').map(i => i.trim().replace('px', ''));
+      const [scale, base] = value.split('*').map((i) => i.trim().replace('px', ''));
       return `calc(${scale} * ${parseInt(base, 10) / 16}rem)`;
     } else {
       return `calc(${value})`;
     }
-  },
+  }
 });
 
 StyleDictionary.registerFormat({
   name: 'custom/css',
   formatter: ({ dictionary, file, options }) => {
     const selector = options.theme ? `[mlv-theme~='${options.theme}']` : `:root, [mlv-theme~='light']`;
-    return `${fileHeader({ file })}\n${selector} {\n${formattedVariables({ format: 'css', dictionary, outputReferences: options.outputReferences })}\n}`;
+    return `${fileHeader({ file })}\n${selector} {\n${formattedVariables({
+      format: 'css',
+      dictionary,
+      outputReferences: options.outputReferences
+    })}\n}`;
   }
 });
 
@@ -63,7 +73,7 @@ StyleDictionary.registerFormat({
     const content = formattedVariables({ format: 'json', dictionary, outputReferences: true })
       .replaceAll(';', '')
       .split('\n')
-      .map(i => {
+      .map((i) => {
         const [key, value] = i.split(' = ');
         const formattedValue = value.includes('calc') ? value.replace('calc(', '').replace(')', '') : value;
         return `  "${key}": "${formattedValue}"`;
@@ -76,7 +86,10 @@ StyleDictionary.registerFormat({
 function buildTokens() {
   StyleDictionary.extend({
     source: ['./tokens/tokens.json'],
-    platforms: { css: cssOutput(`${buildPath}css/module.tokens.css`), json: jsonOutput(`${buildPath}tokens/tokens.json`) }
+    platforms: {
+      css: cssOutput(`${buildPath}css/module.tokens.css`),
+      json: jsonOutput(`${buildPath}tokens/tokens.json`)
+    }
   }).buildAllPlatforms();
 
   StyleDictionary.extend({
@@ -120,17 +133,19 @@ function cssOutput(destination) {
   const theme = getTheme(destination);
   return {
     prefix: 'mlv',
-    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css',  'custom/css-calc', 'custom/validate'],
-    files: [{
-      format: 'custom/css',
-      destination,
-      filter: theme ? (token) => getTheme(token.filePath) : null
-    }],
+    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
+    files: [
+      {
+        format: 'custom/css',
+        destination,
+        filter: theme ? (token) => getTheme(token.filePath) : null
+      }
+    ],
     options: {
       outputReferences: true,
       theme
     }
-  }
+  };
 }
 
 function jsonOutput(destination) {
@@ -139,11 +154,13 @@ function jsonOutput(destination) {
     prefix: 'mlv',
     transformGroup: 'web',
     transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
-    files: [{
-      format: 'custom/json',
-      destination,
-      filter: theme ? (token) => getTheme(token.filePath) : null
-    }],
+    files: [
+      {
+        format: 'custom/json',
+        destination,
+        filter: theme ? (token) => getTheme(token.filePath) : null
+      }
+    ],
     options: {
       outputReferences: true,
       theme
@@ -154,6 +171,6 @@ function jsonOutput(destination) {
 function getTheme(path) {
   const m = /.*?theme.(.*?)\..*?/g.exec(path);
   return m ? m[1] : false;
-};
+}
 
 buildTokens();

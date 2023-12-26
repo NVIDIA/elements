@@ -48,7 +48,7 @@ function toDeprecationNotice(deprecated) {
   if (!deprecated) {
     return '';
   }
-  return `**Note**: ${isBoolean(deprecated) ? 'This tag has been deprecated.' : deprecated}\n`
+  return `**Note**: ${isBoolean(deprecated) ? 'This tag has been deprecated.' : deprecated}\n`;
 }
 
 function toAttributeValues(attribute) {
@@ -151,8 +151,8 @@ function toCategoryList(categoryName, items) {
     categoryList += items
       .map((item) => {
         const name = item.name ? `**${item.name}**` : '*default*';
-        const description = item.description ? ` - ${item.description}` : ''
-        return `- ${name}${description}\n`
+        const description = item.description ? ` - ${item.description}` : '';
+        return `- ${name}${description}\n`;
       })
       .join('\n');
   }
@@ -245,7 +245,15 @@ function toGlobalAttributes(utilityAttributes) {
 
 // ---
 
-const customElementsManifest = readJSONFile(resolve('./dist/custom-elements.json'));
+const customElementsManifest = await new Promise((r) => {
+  const path = resolve('./dist/custom-elements.json');
+  const timerId = setInterval(() => {
+    if (fs.existsSync(path, 'utf8')) {
+      r(readJSONFile(path));
+      clearInterval(timerId);
+    }
+  }, 100);
+});
 
 const utilityAttributes = await extractAttributeValuesFromSelectors(
   [resolve('./src/css/module.layout.css'), resolve('./src/css/module.typography.css')],

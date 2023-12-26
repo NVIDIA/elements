@@ -66,10 +66,10 @@
 :host(:--checked) {
   --background: var(--mlv-sys-accent-secondary-background);
   --anchor-background: var(--mlv-sys-text-white-color);
+}
 
-  [input] slot::after {
-    transform: translate(calc(var(--width) / 2), 0);
-  }
+:host(:--checked) [input] slot::after {
+  transform: translate(calc(var(--width) / 2), 0);
 }
 
 :host([mlv-control]:focus-within) [input] {

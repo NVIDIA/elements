@@ -7,7 +7,7 @@ function App() {
   const [showDialog, setshowDialog] = React.useState(false);
 
   return (
-    <div mlv-layout="column gap:md align:center" style={{ height: "95vh" }}>
+    <div mlv-layout="column gap:md align:center" style={{ height: '95vh' }}>
       <h1 mlv-text="heading">React</h1>
 
       <MlvButton onClick={() => setshowDialog(!showDialog)}>greeting</MlvButton>

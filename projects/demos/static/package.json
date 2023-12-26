@@ -28,11 +28,10 @@
     }
   },
   "dependencies": {
-    "@elements/elements": "workspace:*"
+    "@elements/elements": "workspace:../../elements"
   },
   "devDependencies": {
-    "typescript": "5.2.2",
-    "vite": "5.0.0",
-    "vite-plugin-static-copy": "0.17.0"
+    "typescript": "5.3.3",
+    "vite": "5.0.10"
   }
 }

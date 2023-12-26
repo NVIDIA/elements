@@ -5,7 +5,6 @@ import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/grid/define.js';
 import '@elements/elements/badge/define.js'
 import '@elements/elements/button/define.js';
-import '@elements/elements/bulk-actions/define.js'
 import '@elements/elements/card/define.js';
 import '@elements/elements/checkbox/define.js';
 import '@elements/elements/dropdown/define.js';

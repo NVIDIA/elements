@@ -75,10 +75,10 @@ mlv-icon,
 :host([color]) {
   --background: var(--color);
   --border-radius: var(--mlv-ref-border-radius-sm);
+}
 
-  & [internal-host] {
-    color: var(--mlv-sys-contrast-mute-color);
-  }
+:host([color]) [internal-host] {
+  color: var(--mlv-sys-contrast-mute-color);
 }
 
 :host([container='flat']) {

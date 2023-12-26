@@ -4,7 +4,6 @@ import { createFixture, removeFixture, elementIsStable } from '@elements/element
 import { defineScopedElement, scope } from '@elements/elements/scoped';
 import { define } from '@elements/elements/internal';
 
-
 export class TestTwoElement extends LitElement {
   static metadata = {
     tag: 'test-element',

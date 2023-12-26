@@ -7,19 +7,17 @@
 }
 
 [internal-host] {
-  --_width: calc(var(--width) * var(--mlv-ref-scale-size, 1));
-  --_height: calc(var(--height) * var(--mlv-ref-scale-size, 1));
   color: var(--color);
-  width: var(--_width);
-  height: var(--_height);
+  width: var(--width);
+  height: var(--height);
   place-self: center;
   display: flex;
   place-items: center;
 }
 
 svg {
-  width: var(--_width);
-  height: var(--_height);
+  width: var(--width);
+  height: var(--height);
 }
 
 :host([outline]) {
@@ -46,14 +44,34 @@ svg {
   --height: var(--mlv-ref-size-600);
 }
 
-/* icons scaled down by 20% to match misalignment export bug in figma icon */
 :host([name='arrow']),
 :host([name='arrow-angle']),
 :host([name='cancel']),
 :host([name='caret']),
 :host([name='chevron']),
 :host([name='double-chevron']) {
-  --mlv-ref-scale-size: 0.8;
+  --width: var(--mlv-ref-size-300);
+  --height: var(--mlv-ref-size-300);
+}
+
+:host([size='sm'][name='arrow']),
+:host([size='sm'][name='arrow-angle']),
+:host([size='sm'][name='cancel']),
+:host([size='sm'][name='caret']),
+:host([size='sm'][name='chevron']),
+:host([size='sm'][name='double-chevron']) {
+  --width: var(--mlv-ref-size-200);
+  --height: var(--mlv-ref-size-200);
+}
+
+:host([size='lg'][name='arrow']),
+:host([size='lg'][name='arrow-angle']),
+:host([size='lg'][name='cancel']),
+:host([size='lg'][name='caret']),
+:host([size='lg'][name='chevron']),
+:host([size='lg'][name='double-chevron']) {
+  --width: var(--mlv-ref-size-400);
+  --height: var(--mlv-ref-size-400);
 }
 
 :host([direction='up']) {

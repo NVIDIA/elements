@@ -8,7 +8,7 @@ import styles from './month.css?inline';
  * @element mlv-month
  * @description A month picker is a control that enables users to choose a month value.
  * @since 0.3.0
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-month-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-month-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month
  * @vqa false
  */

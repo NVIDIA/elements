@@ -46,14 +46,14 @@
   --mlv-sys-interaction-state-lightness: 0%;
   --background: var(--accent-color);
   --check-color: var(--mlv-sys-text-white-color);
+}
 
-  & [input] slot {
-    border: 0;
-  }
+:host(:--checked) [input] slot {
+  border: 0;
+}
 
-  & [input] slot::before {
-    background: var(--check-color);
-  }
+:host(:--checked) [input] slot::before {
+  background: var(--check-color);
 }
 
 :host(:--disabled) {

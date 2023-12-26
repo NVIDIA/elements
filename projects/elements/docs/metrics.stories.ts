@@ -3,7 +3,7 @@ import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import showdown from 'showdown';
 import { define } from '@elements/elements/internal';
-import { MLV_VERSION } from '@elements/elements';
+import { VERSION } from '@elements/elements';
 import typography from '@elements/elements/css/module.typography.css?inline';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/alert/define.js';
@@ -33,7 +33,7 @@ function getMinorVersion(value) {
 
 function getVersionBadge(value) {
   const pin = value.replace('^', '').replace('~', '');
-  const currentVersion = getMinorVersion(MLV_VERSION);
+  const currentVersion = getMinorVersion(VERSION);
   const version = getMinorVersion(pin);
   let status = 'success';
 
@@ -239,7 +239,7 @@ class ElementMetrics extends LitElement {
       <section mlv-layout="column gap:lg">
         <div mlv-layout="row gap:xs align:center full">
           <div mlv-layout="row gap:sm">
-            ${getStatusBadge(element.status, ` ${MLV_VERSION}`, '')}
+            ${getStatusBadge(element.status, ` ${VERSION}`, '')}
             ${getCoverageStatus(element.tests.coverageTotal, 'coverage: ', '')}
             ${element.lighthouse?.payload ? getPayloadSize(element.lighthouse?.payload, '') : nothing}
             ${getLighthouseScores(element)}
@@ -388,7 +388,7 @@ class ElementsGlossary extends LitElement {
             <mlv-grid-column>Description</mlv-grid-column>
             <mlv-grid-column width="350px">Type</mlv-grid-column>
           </mlv-grid-header>
-          ${metrics.types.props?.filter(p => p.name !== '_internals' && p.name !== 'render')?.map(prop => html`
+          ${metrics.types.props?.map(prop => html`
           <mlv-grid-row>
             <mlv-grid-cell><code mlv-text="code">${prop.name}</code></mlv-grid-cell>
             <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></mlv-grid-cell>
@@ -436,8 +436,8 @@ class ElementsMetrics extends LitElement {
       axe: { sort: 'none', tooltip: 'Accessibility status from Axe Core API', width: '170px' },
       spec: { sort: 'none', tooltip: 'Behavior category from W3C and WAI-ARIA Specification', width: '170px' },
       released: { sort: 'none', tooltip: 'Version Element was first released', width: '170px' },
-      instances: { sort: 'none', tooltip: 'Number of instances of element directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.', width: '130px' },
-      projects: { sort: 'none', tooltip: 'Number of Maglev Projects which reference the given element.', width: '130px' },
+      // instances: { sort: 'none', tooltip: 'Number of instances of element directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.', width: '130px' },
+      // projects: { sort: 'none', tooltip: 'Number of Maglev Projects which reference the given element.', width: '130px' },
       figma: { sort: 'none', width: '130px' },
       themes: { sort: 'none', width: '130px' },
       responsive: { sort: 'none', width: '130px' },
@@ -479,7 +479,7 @@ class ElementsMetrics extends LitElement {
         ${this.elements.map(element => {
           return html`
           <mlv-grid-row>
-            <mlv-grid-cell><a href=${element.storybook.replace('https://elements.nvidia.com/ui/storybook/elements', './')} mlv-text="body link no-visit">${element.name.replace('mlv-', '')}</a></mlv-grid-cell>
+            <mlv-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/', './')} mlv-text="body link no-visit">${element.name.replace('mlv-', '')}</a></mlv-grid-cell>
             <mlv-grid-cell>${getStatusBadge(element.status)}</mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</mlv-grid-cell>
             <mlv-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</mlv-grid-cell>
@@ -489,8 +489,8 @@ class ElementsMetrics extends LitElement {
             <mlv-grid-cell>${getA11yStatusBadge(element.axe, true)}</mlv-grid-cell>
             <mlv-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} mlv-text="link no-visit">${element.behavior}</a></mlv-grid-cell>
             <mlv-grid-cell>${element.since}</mlv-grid-cell>
-            <mlv-grid-cell>${element.tests.instanceTotal}</mlv-grid-cell>
-            <mlv-grid-cell>${element.tests.projectTotal}</mlv-grid-cell>
+            <!-- <mlv-grid-cell>${element.tests.instanceTotal}</mlv-grid-cell> -->
+            <!-- <mlv-grid-cell>${element.tests.projectTotal}</mlv-grid-cell> -->
             <mlv-grid-cell>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit">Figma</a>` : html`<mlv-icon name="exclamation-triangle" status="warning"></mlv-icon>`}</mlv-grid-cell>
             <mlv-grid-cell><mlv-icon name="checkmark-circle" status="success"></mlv-icon></mlv-grid-cell>
             <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="checkmark-circle" status="success"></mlv-icon>` : html`<mlv-icon name="exclamation-triangle" status="warning"></mlv-icon>`}</mlv-grid-cell>
@@ -729,7 +729,7 @@ class MetricDemo extends LitElement {
       <div mlv-layout="column gap:md">
         <div mlv-layout="row gap:md">
           <h1 mlv-text="heading lg">@elements/elements</h1>
-          <mlv-badge status="success">version ${MLV_VERSION}</mlv-badge>
+          <mlv-badge status="success">version ${VERSION}</mlv-badge>
         </div>
         <p mlv-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
       </div>
@@ -740,7 +740,7 @@ class MetricDemo extends LitElement {
             <mlv-tabs-item .selected=${this.tab === 'metrics'} @click=${() => this.tab = 'metrics'} selected>Metrics</mlv-tabs-item>
             <mlv-tabs-item .selected=${this.tab === 'test'} @click=${() => this.tab = 'test'}>Testing &amp; Performance</mlv-tabs-item>
             <mlv-tabs-item .selected=${this.tab === 'metadata'} @click=${() => this.tab = 'metadata'}>Raw Metadata</mlv-tabs-item>
-            <mlv-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev Projects</mlv-tabs-item>
+            <!-- <mlv-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev Projects</mlv-tabs-item> -->
           </mlv-tabs>
           <mlv-divider></mlv-divider>
         </div>

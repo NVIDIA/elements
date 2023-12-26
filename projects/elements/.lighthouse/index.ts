@@ -42,6 +42,8 @@ export class LighthouseRunner {
   async getReport(name: string, content: string) {
     await this.#buildPage(name, content);
     const flags: Flags = { logLevel: 'error', output: ['json', 'html'] };
+
+    // https://github.com/GoogleChrome/lighthouse/blob/main/core/config/default-config.js
     const config = {
       extends: 'lighthouse:default',
       settings: {
@@ -53,8 +55,7 @@ export class LighthouseRunner {
       },
     };
 
-    const runnerResult = await lighthouse(`http://localhost:${this.#port}/${name}`, flags, config as any) as any;
-
+    const runnerResult = await lighthouse(`http://localhost:${this.#port}/${name}/index.html`, flags, config as any) as any;
     fs.writeFileSync(`.lighthouse/dist/${name}/report.html`, runnerResult.report[1]);
 
     const scores = {
@@ -62,7 +63,7 @@ export class LighthouseRunner {
       accessibility: runnerResult.lhr.categories.accessibility.score * 100,
       bestPractices: runnerResult.lhr.categories['best-practices'].score * 100
     };
-    
+
     const requests = (runnerResult.lhr.audits['network-requests'].details as any).items;
     const payload = {
       javascript: {
@@ -119,7 +120,16 @@ export class LighthouseRunner {
         target: 'esnext',
         sourcemap: true,
         cssCodeSplit: !hasCustomStyleLinks,
-        outDir: `.lighthouse/dist/${name}`
+        outDir: `.lighthouse/dist/${name}`,
+        rollupOptions: {
+          output: {
+            entryFileNames: `assets/[name].js`,
+            chunkFileNames: `assets/[name].js`,
+            assetFileNames: (assetInfo) => {
+              return `assets/${assetInfo.name}`; 
+            },
+          },
+        },
       },
       resolve: {
         alias: {

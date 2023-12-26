@@ -31,31 +31,6 @@ export const InputGroup = () => {
 `
 };
 
-export const FilterGroupButtons = {
-  render: () => html`
-  <div mlv-layout="row align:vertical-center">
-    <mlv-input-group type="filter">
-      <mlv-button style="width: 65px">GPS</mlv-button>
-      <mlv-select style="width: 75px">
-        <select>
-          <option value="1">contains</option>
-          <option value="2">excludes</option>
-        </select>
-      </mlv-select>
-      <mlv-button style="width: 190px" id="map-btn">37.3706254,-121.9671894</mlv-button>
-      <mlv-icon-button aria-label="remove filter" icon-name="cancel"></mlv-icon-button>
-    </mlv-input-group>
-    <mlv-dropdown anchor="map-btn" trigger="map-btn">
-      <mlv-input>
-        <mlv-icon-button icon-name="location" readonly></mlv-icon-button>
-        <input value="37.3706254,-121.9671894" disabled />
-      </mlv-input>
-      <img src="images/test-map-2.webp" width="300px" alt="non-interactive demo map" />
-    </mlv-dropdown>
-    </div>
-  `
-};
-
 export const FilterGroupRange = {
   render: () => html`
 <div mlv-layout="row align:vertical-center">

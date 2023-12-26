@@ -49,10 +49,8 @@ slot[name='messages'] {
   flex-wrap: wrap;
 }
 
-:host([layout*='-inline']) {
-  & .input-slot {
-    flex-direction: row;
-  }
+:host([layout*='-inline']) .input-slot {
+  flex-direction: row;
 }
 
 .no-messages {
@@ -97,12 +95,12 @@ slot[name='messages'] {
     'label label label'
     'input input input'
     'messages messages messages';;
+}
 
-  &.no-messages {
-    grid-template-areas: 
-      'label label label'
-      'input input input';
-  }
+:host([layout='vertical-inline']) [internal-host].no-messages {
+  grid-template-areas: 
+    'label label label'
+    'input input input';
 }
 
 :host([layout='horizontal']) [internal-host] {
@@ -110,11 +108,11 @@ slot[name='messages'] {
   grid-template-areas:
     'label input input'
     '. messages messages';
+}
 
-  &.no-messages {
-    grid-template-areas: 
-      'label input input';
-  }
+:host([layout='horizontal']) [internal-host].no-messages {
+  grid-template-areas: 
+    'label input input';
 }
 
 :host([layout='horizontal-inline']) [internal-host] {
@@ -122,20 +120,18 @@ slot[name='messages'] {
   grid-template-areas:
     'label input input'
     '. messages messages';
-  
-  &.no-messages {
-    grid-template-areas: 
-      'label input input';
-  }
 }
 
-:host([layout='horizontal']) {
-  & ::slotted(label) {
-    padding-top: var(--mlv-ref-size-100) !important;
-    align-self: start !important;
-  }
+:host([layout='horizontal-inline']) [internal-host].no-messages {
+  grid-template-areas: 
+    'label input input';
+}
 
-  slot[name='label'] {
-    align-self: start;
-  }
+:host([layout='horizontal']) slot[name='label'] {
+  align-self: start;
+}
+
+:host([layout='horizontal']) ::slotted(label) {
+  padding-top: var(--mlv-ref-size-100) !important;
+  align-self: start !important;
 }

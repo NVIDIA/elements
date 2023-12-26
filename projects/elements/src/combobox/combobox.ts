@@ -1,5 +1,6 @@
 import { html, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 import { ContainerElement, createLightDismiss, focusElementTimeout, getDisplayValue, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
@@ -16,7 +17,6 @@ import styles from './combobox.css?inline';
  * @since 0.17.0
  * @slot - default slot for input
  * @slot prefix-icon - slot for icon to be placed before the input
- * @slot footer - slot for dropdown footer content
  * @cssprop --scroll-height
  * @cssprop --padding
  * @cssprop --font-size
@@ -28,7 +28,7 @@ import styles from './combobox.css?inline';
  * @cssprop --cursor
  * @cssprop --font-weight
  * @cssprop --width
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-combobox-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-combobox-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-41&mode=design&t=guIM7VohnWYQUEQv-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
  * @stable false
@@ -85,10 +85,6 @@ export class Combobox extends Control implements ContainerElement {
     return this.#options.find(o => !o.disabled);
   }
 
-  get #hasFooterContent() {
-    return !!this.querySelector('[slot="footer"]');
-  }
-
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
   protected get prefixContent() {
@@ -105,7 +101,7 @@ export class Combobox extends Control implements ContainerElement {
     const options = this.#options;
     return html`
       <mlv-dropdown .popoverType=${'manual'} @close=${e => e.target.hidden = true} @open=${e => e.target.hidden = false} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
-        <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${this.i18n.select}>
+        <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
           ${options.filter(o => !o.disabled).map(o => html`
           <mlv-menu-item .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
             ${multiple ? html`<mlv-icon name=${o.selected ? 'check' : ''} size="sm"></mlv-icon>` : nothing}
@@ -113,7 +109,6 @@ export class Combobox extends Control implements ContainerElement {
           </mlv-menu-item>`)}
           ${options.filter(o => !o.disabled).length === 0 ? html`<mlv-menu-item .value=${''} disabled>${this.i18n.noResults}</mlv-menu-item>` : nothing}
         </mlv-menu>
-        <slot name="footer"></slot>
       </mlv-dropdown>`;
   }
 
@@ -128,19 +123,11 @@ export class Combobox extends Control implements ContainerElement {
     this.#setupOpenKeyEvents();
     this.#setupLightDismiss();
     this.#setupOverflowListener();
-    this.#setupSlotStates();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.#observers.forEach(observer => observer.disconnect());
-  }
-
-  reset() {
-    if (this.#select) {
-      this.#select.selectedIndex = -1;
-    }
-    super.reset();
   }
 
   #setupSingleSelect() {
@@ -275,19 +262,6 @@ export class Combobox extends Control implements ContainerElement {
       this._internals.states.add('--multiple-overflow');
     } else {
       this._internals.states.delete('--multiple-overflow');
-    }
-  }
-
-  #setupSlotStates() {
-    this.#setSlotStates();
-    this.shadowRoot.addEventListener('slotchange', () => this.#setSlotStates());
-  }
-
-  #setSlotStates() {
-    if (this.#hasFooterContent) {
-      this._internals.states.add('--footer-content');
-    } else {
-      this._internals.states.delete('--footer-content');
     }
   }
 }

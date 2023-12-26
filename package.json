@@ -1,52 +1,100 @@
 {
   "name": "elements-workspace",
-  "version": "0.21.0",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
+  "description": "",
   "scripts": {
     "ci": "wireit",
-    "version": "wireit",
-    "publish": "wireit",
-    "publish:dryrun": "wireit",
-    "login": "pnpm login --scope=@elements --registry=https://registry.npmjs.org",
-    "login:elements": "pnpm login --scope=@elements --registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/"
+    "ci:nocache": "pnpm run clean && pnpm i && pnpm run ci",
+    "format": "wireit",
+    "format:fix": "wireit",
+    "clean": "git clean -dfX",
+    "playwright": "wireit",
+    "prepare": "husky install",
+    "release": "semantic-release",
+    "commitlint": "commitlint --edit",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "engines": {
+    "node": "20.10.0",
+    "pnpm": ">=8.13.1"
   },
   "dependencies": {
+    "commitlint": "18.4.3",
     "wireit": "0.14.1"
+  },
+  "devDependencies": {
+    "@amanda-mitchell/semantic-release-npm-multiple": "3.9.0",
+    "@semantic-release/changelog": "6.0.3",
+    "@commitlint/cli": "18.4.3",
+    "@commitlint/config-conventional": "18.4.3",
+    "@semantic-release/commit-analyzer": "11.1.0",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/gitlab": "12.1.1",
+    "@semantic-release/npm": "11.0.2",
+    "@semantic-release/release-notes-generator": "12.1.0",
+    "husky": "8.0.3",
+    "playwright": "1.40.1",
+    "prettier": "3.1.1",
+    "semantic-release": "22.0.12",
+    "semantic-release-replace-plugin": "1.2.7"
+  },
+  "_pnpm": {
+    "overrides": {
+      "@storybook/web-components": {
+        "dependencies": {
+          "lit": "^3.1.0"
+        }
+      },
+      "rollup-plugin-minify-html-literals": {
+        "dependencies": {
+          "rollup": "3.29.1"
+        }
+      },
+      "@amanda-mitchell/semantic-release-npm-multiple": {
+        "dependencies": {
+          "semantic-release": "22.0.12"
+        }
+      }
+    }
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "wireit": {
     "ci": {
       "dependencies": [
-        "./elements:playwright",
-        "./elements-react:playwright",
-        "./demos/extensions:ci",
-        "./demos/mpa:ci",
-        "./demos/nextjs:ci",
-        "./demos/react:ci",
-        "./demos/static:ci",
-        "./demos/typescript:ci",
-        "./elements:ci",
-        "./elements-react:ci"
+        "./projects/demos/extensions:ci",
+        "./projects/demos/mpa:ci",
+        "./projects/demos/nextjs:ci",
+        "./projects/demos/react:ci",
+        "./projects/demos/static:ci",
+        "./projects/demos/typescript:ci",
+        "./projects/elements:ci",
+        "./projects/elements-react:ci"
       ]
     },
-    "version": {
-      "command": "node ./build/version.js",
+    "format": {
+      "command": "prettier --config prettier.config.js --check .",
       "files": [
-        "build/version.js",
-        "package.json"
+        "./**/*.md",
+        "./**/*.js",
+        "./**/*.ts",
+        "./**/*.css",
+        "./**/*.cjs",
+        "./**/*.mjs",
+        "./**/*.json"
       ],
       "output": []
     },
-    "publish": {
-      "command": "pnpm run --prefix elements artifactory && pnpm run --prefix elements-react artifactory",
-      "dependencies": [
-        "ci"
-      ]
+    "format:fix": {
+      "command": "prettier --config prettier.config.js --write ."
     },
-    "publish:dryrun": {
-      "command": "pnpm run --prefix elements artifactory:dryrun && pnpm run --prefix elements-react artifactory:dryrun",
-      "dependencies": [
-        "ci"
-      ]
+    "playwright": {
+      "command": "pnpm exec playwright install chromium --with-deps chromium",
+      "output": [],
+      "files": []
     }
   }
 }

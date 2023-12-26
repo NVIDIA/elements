@@ -11,22 +11,22 @@
 
 :host([vertical]) {
   --gap: var(--mlv-ref-space-xxxs);
+}
 
-  [internal-host] {
-    flex-direction: column;
-  }
+:host([vertical]) [internal-host] {
+  flex-direction: column;
+}
 
-  ::slotted(mlv-tabs-item) {
-    --border-width: var(--mlv-ref-border-width-lg);
-    --border-height: 24px;
-    --border-top: calc(50% - 12px);
-    --border-inset: 0 8px 0 8px;
-    --width: calc(100% - 8px);
-  }
+:host([vertical]) ::slotted(mlv-tabs-item) {
+  --border-width: var(--mlv-ref-border-width-lg);
+  --border-height: 24px;
+  --border-top: calc(50% - 12px);
+  --border-inset: 0 8px 0 8px;
+  --width: calc(100% - 8px);
+}
 
-  ::slotted(mlv-tabs-item:--selected) {
-    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
-  }
+:host([vertical]) ::slotted(mlv-tabs-item:--selected) {
+  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
 }
 
 :host([borderless]) {

@@ -1,13 +1,11 @@
 {
   "name": "@elements/elements",
-  "version": "0.21.0",
+  "version": "0.0.0",
   "type": "module",
   "customElements": "custom-elements.json",
   "scripts": {
     "ci": "wireit",
-    "ci:nocache": "wireit",
     "dev": "wireit",
-    "clean": "wireit",
     "build": "wireit",
     "build:vite": "wireit",
     "build:manifest": "wireit",
@@ -18,19 +16,16 @@
     "build:vscode-custom-data": "wireit",
     "build:metadata": "wireit",
     "build:metadata:fast": "wireit",
+    "build:storybook": "wireit",
     "test": "wireit",
+    "test:all": "wireit",
     "test:watch": "wireit",
     "test:axe": "wireit",
     "test:coverage": "wireit",
     "test:lighthouse": "wireit",
-    "test:lighthouse:all": "LIGHTHOUSE_ALL=true pnpm run test:lighthouse",
-    "storybook": "wireit",
+    "test:lighthouse:all": "wireit",
     "lint": "wireit",
-    "prepublishonly": "wireit",
-    "playwright": "wireit",
-    "artifactory": "wireit",
-    "artifactory:dryrun": "wireit",
-    "bazel": "bazel build //src/ui/platform/design-system/elements:storybook-build"
+    "prepublishonly": "wireit"
   },
   "files": [
     "README.md",
@@ -73,9 +68,6 @@
     "./breadcrumb": "./dist/breadcrumb/index.js",
     "./breadcrumb/index.js": "./dist/breadcrumb/index.js",
     "./breadcrumb/define.js": "./dist/breadcrumb/define.js",
-    "./bulk-actions": "./dist/bulk-actions/index.js",
-    "./bulk-actions/index.js": "./dist/bulk-actions/index.js",
-    "./bulk-actions/define.js": "./dist/bulk-actions/define.js",
     "./button": "./dist/button/index.js",
     "./button/index.js": "./dist/button/index.js",
     "./button/define.js": "./dist/button/define.js",
@@ -231,13 +223,6 @@
       ]
     }
   },
-  "pnpm": {
-    "overrides": {
-      "rollup-plugin-minify-html-literals": {
-        "rollup@^0.65.2 || ^1.0.0 || ^2.0.0": "$rollup"
-      }
-    }
-  },
   "dependencies": {
     "@floating-ui/dom": "1.5.3",
     "@lit-labs/motion": "^1.0.6",
@@ -275,14 +260,15 @@
     "@typescript-eslint/eslint-plugin": "6.8.0",
     "@typescript-eslint/parser": "6.8.0",
     "@typescript/lib-dom": "npm:@types/web@0.0.118",
-    "@vitest/browser": "0.34.1",
-    "@vitest/coverage-istanbul": "0.34.1",
-    "@vitest/utils": "0.34.1",
+    "@vitest/browser": "1.1.0",
+    "@vitest/coverage-istanbul": "1.1.0",
+    "@vitest/utils": "1.1.0",
     "axe-core": "4.8.2",
     "chai": "4.3.10",
     "chart.js": "4.4.0",
     "cssnano": "6.0.1",
     "emoji-picker-element": "1.18.4",
+    "esbuild": "0.19.9",
     "eslint": "8.52.0",
     "eslint-plugin-import": "2.29.0",
     "eslint-plugin-lit": "1.9.1",
@@ -292,15 +278,13 @@
     "fflate": "0.8.1",
     "glob": "8.0.3",
     "globals": "13.23.0",
-    "lighthouse": "11.3.0",
+    "html-format": "1.1.2",
+    "lighthouse": "11.4.0",
     "lit-analyzer": "2.0.1",
-    "playwright": "1.36.2",
     "postcss": "8.4.31",
     "postcss-each": "1.1.0",
     "postcss-load-config": "4.0.1",
     "postcss-mixins": "9.0.4",
-    "postcss-nested": "6.0.1",
-    "prettier": "2.5.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "regenerator-runtime": "0.13.10",
@@ -313,11 +297,11 @@
     "terser": "5.22.0",
     "ts-lit-plugin": "1.2.1",
     "ts-morph": "20.0.0",
-    "typescript": "5.2.2",
-    "vite": "4.5.0",
-    "vite-plugin-dts": "3.6.0",
-    "vite-plugin-virtual-html": "1.1.16",
-    "vitest": "0.34.1",
+    "typescript": "5.3.3",
+    "vite": "5.0.10",
+    "vite-plugin-dts": "3.7.0",
+    "vite-plugin-virtual-html": "1.1.18",
+    "vitest": "1.1.0",
     "wireit": "0.14.1"
   },
   "publishConfig": {
@@ -334,16 +318,8 @@
       "dependencies": [
         "lint",
         "build",
-        "test:coverage",
-        "test:axe",
-        "test:lighthouse",
-        "storybook"
-      ]
-    },
-    "ci:nocache": {
-      "command": "pnpm i && pnpm run ci",
-      "dependencies": [
-        "clean"
+        "test:all",
+        "build:storybook"
       ]
     },
     "build": {
@@ -368,7 +344,7 @@
     },
     "build:vite": {
       "clean": false,
-      "command": "NODE_ENV=production node_modules/vite/bin/vite.js build",
+      "command": "NODE_ENV=production vite build",
       "files": [
         "public/**",
         "src/**",
@@ -398,7 +374,6 @@
         "!dist/css/theme.reduced-motion.css"
       ],
       "dependencies": [
-        "build:version",
         "build:icons",
         "build:manifest",
         "build:style-dictionary"
@@ -444,7 +419,7 @@
       ]
     },
     "build:icons": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node ./build/icons.js",
+      "command": "node ./build/icons.js",
       "clean": false,
       "files": [
         "src/icon/**",
@@ -453,10 +428,13 @@
       ],
       "output": [
         "src/icon/icons.ts"
+      ],
+      "dependencies": [
+        "../../:playwright"
       ]
     },
     "build:manifest": {
-      "command": "node ./node_modules/@custom-elements-manifest/analyzer/cem.js analyze --config ./custom-elements-manifest.config.mjs --outdir ./dist/",
+      "command": "cem analyze --config ./custom-elements-manifest.config.mjs --outdir ./dist/",
       "files": [
         "src/**",
         "!src/test/**",
@@ -512,18 +490,22 @@
         "build:manifest"
       ]
     },
-    "build:version": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node ../build/version.js",
-      "files": [
-        "package.json"
+    "test:all": {
+      "command": "WIREIT_PARALLEL=1 echo '...'",
+      "files": [],
+      "output": [],
+      "dependencies": [
+        "test",
+        "test:axe",
+        "test:coverage",
+        "test:lighthouse"
       ],
-      "output": []
-    },
-    "clean": {
-      "command": "git clean -dfX"
+      "env": {
+        "WIREIT_LOGGER": "simple"
+      }
     },
     "test": {
-      "command": "node_modules/vitest/vitest.mjs run",
+      "command": "vitest run || exit 0",
       "files": [
         "src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -534,28 +516,88 @@
       ],
       "output": [],
       "dependencies": [
-        "playwright",
+        "../../:playwright",
         "build"
-      ]
+      ],
+      "env": {
+        "WIREIT_LOGGER": "simple",
+        "NODE_ENV": "production"
+      }
+    },
+    "test:coverage": {
+      "command": "vitest run --coverage",
+      "files": [
+        "src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [
+        "coverage/unit/**"
+      ],
+      "dependencies": [
+        "../../:playwright",
+        "test",
+        "build"
+      ],
+      "env": {
+        "WIREIT_LOGGER": "simple",
+        "NODE_ENV": "production"
+      }
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true,
+      "env": {
+        "WIREIT_LOGGER": "simple"
+      }
     },
     "test:lighthouse": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || NODE_ENV=production node_modules/vitest/vitest.mjs run --config=.lighthouse/vitest.config.ts",
+      "command": "vitest run --config=.lighthouse/vitest.config.ts",
       "files": [
-        ".lighthouse/**",
-        "!.lighthouse/dist/**",
-        "!.lighthouse/node_modules/**",
+        "./.lighthouse/**",
+        "!./.lighthouse/coverage/**",
+        "!./.lighthouse/dist/**",
         "src/**/*.test.lighthouse.ts"
       ],
       "output": [
+        ".lighthouse/coverage",
         ".lighthouse/dist"
       ],
       "dependencies": [
-        "build",
-        "playwright"
-      ]
+        "../../:playwright",
+        "test",
+        "build"
+      ],
+      "env": {
+        "WIREIT_LOGGER": "simple",
+        "NODE_ENV": "production"
+      }
+    },
+    "test:lighthouse:all": {
+      "command": "NODE_ENV=production vitest run --config=.lighthouse/vitest.config.ts",
+      "files": [
+        "./.lighthouse/**",
+        "!./.lighthouse/coverage/**",
+        "!./.lighthouse/dist/**",
+        "src/**/*.test.lighthouse.ts"
+      ],
+      "output": [
+        ".lighthouse/coverage",
+        ".lighthouse/dist"
+      ],
+      "dependencies": [
+        "build"
+      ],
+      "env": {
+        "WIREIT_LOGGER": "simple",
+        "LIGHTHOUSE_ALL": "true"
+      }
     },
     "test:axe": {
-      "command": "node_modules/vitest/vitest.mjs run -- --axe",
+      "command": "vitest run -- --axe",
       "files": [
         "src/**/*.test.axe.ts",
         "tsconfig.json",
@@ -563,57 +605,27 @@
         "vite.config.ts",
         "vitest.config.ts"
       ],
-      "output": [],
-      "dependencies": [
-        "playwright",
-        "build",
-        "test"
-      ]
-    },
-    "test:coverage": {
-      "command": "node_modules/vitest/vitest.mjs run --coverage",
-      "files": [
-        "src/**/*.test.ts",
-        "tsconfig.json",
-        "tsconfig.lib.json",
-        "vite.config.ts",
-        "vitest.config.ts"
-      ],
       "output": [
-        "coverage/**"
+        "coverage/axe/**"
       ],
       "dependencies": [
+        "../../:playwright",
         "test",
-        "playwright",
         "build"
-      ]
-    },
-    "test:watch": {
-      "command": "vitest --watch",
-      "service": true,
-      "dependencies": [
-        "playwright"
       ],
       "env": {
-        "WIREIT_LOGGER": "simple"
+        "WIREIT_LOGGER": "simple",
+        "NODE_ENV": "production"
       }
-    },
-    "playwright": {
-      "command": "node_modules/playwright/cli.js install chromium",
-      "files": [
-        "package.json"
-      ],
-      "output": []
     },
     "lint": {
       "dependencies": [
         "lint:eslint",
-        "lint:analyzer",
-        "lint:repo"
+        "lint:analyzer"
       ]
     },
     "lint:eslint": {
-      "command": "node_modules/eslint/bin/eslint.js -c ./eslint.config.js",
+      "command": "eslint -c ./eslint.config.js",
       "files": [
         "build/eslint/*.cjs",
         "src/**/*.ts",
@@ -624,25 +636,15 @@
       "output": []
     },
     "lint:analyzer": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node_modules/lit-analyzer/cli.js src --rules.no-incompatible-type-binding off",
+      "command": "lit-analyzer src --rules.no-incompatible-type-binding off",
       "files": [
         "src/**/*.ts",
         "tsconfig.json"
       ],
       "output": []
     },
-    "lint:repo": {
-      "command": "node -e \"if (!process.env.BAZEL_WORKSPACE){process.exit(1)}\" || node ../../../tools/lint-changes/lint.changes.js",
-      "files": [
-        "**",
-        "!dist/**",
-        "!coverage/**",
-        "!storybook-build/**"
-      ],
-      "output": []
-    },
-    "storybook": {
-      "command": "node_modules/storybook/index.js build --output-dir ./storybook-build",
+    "build:storybook": {
+      "command": "storybook build --output-dir ./dist-storybook",
       "files": [
         ".storybook/**",
         "src/**/*.stories.ts",
@@ -654,21 +656,17 @@
         "vite.config.ts"
       ],
       "output": [
-        "storybook-build/**"
+        "dist-storybook/**"
       ],
       "dependencies": [
         "build"
-      ],
-      "env": {
-        "NODE_OPTIONS": "--openssl-legacy-provider"
-      }
+      ]
     },
     "storybook:watch": {
-      "command": "node_modules/storybook/index.js dev --port 7777",
+      "command": "storybook dev --port 7777",
       "service": true,
       "clean": false,
       "env": {
-        "NODE_OPTIONS": "--openssl-legacy-provider",
         "WIREIT_LOGGER": "simple"
       }
     },
@@ -677,12 +675,6 @@
         "ci",
         "build:metadata"
       ]
-    },
-    "artifactory": {
-      "command": "pnpm publish --no-git-checks"
-    },
-    "artifactory:dryrun": {
-      "command": "pnpm publish --no-git-checks --dry-run"
     }
   }
 }

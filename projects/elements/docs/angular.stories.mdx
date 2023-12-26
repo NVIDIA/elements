@@ -5,7 +5,7 @@ import '@elements/elements/alert/define.js';
 
 # Angular Integration
 
-To use Maglev Elements in [Angular](https://angular.io/) follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps.
+To use Elements in [Angular](https://angular.io/) follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps.
 
 ## Static Assets
 
@@ -135,7 +135,7 @@ interface ElementInternals {
 }
 ```
 
-If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig#paths) likely you will need to enable the [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck) to avoid type definition collisions within the monorepo. Alternatively, to avoid `skipLibCheck` use `pnpm` workspaces instead of tsconfig path mapping.
+If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig#paths) likely you will need to enable the [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck) to avoid type definition collisions within the monorepo. Alternatively, to avoid `skipLibCheck` use `npm` workspaces instead of tsconfig path mapping.
 
 ```json
 {
@@ -156,7 +156,7 @@ If you are authoring Lit based components and would like to import external CSS 
 ### 1. Install
 
 ```shell
-pnpm install raw-loader
+npm install raw-loader
 ```
 
 ### 2. Update tsconfig.json

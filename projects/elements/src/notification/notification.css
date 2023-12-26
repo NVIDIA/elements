@@ -65,10 +65,10 @@ mlv-icon-button {
   --border: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
   --background: var(--mlv-sys-layer-overlay-accent-background);
   --color: var(--mlv-sys-layer-overlay-color);
+}
 
-  & .popover {
-    border-bottom: var(--border);
-  }
+:host([container='flat']) .popover {
+  border-bottom: var(--border);
 }
 
 :host([status='accent']) {

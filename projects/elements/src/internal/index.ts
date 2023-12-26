@@ -1,6 +1,6 @@
 
 /**
- * @internal private common utilities for elements elements
+ * @internal private common utilities for Elements
  */
 export * from './base/button.js';
 export * from './controllers/i18n.controller.js';

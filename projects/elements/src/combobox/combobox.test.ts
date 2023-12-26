@@ -340,19 +340,6 @@ describe('mlv-combobox multi select', () => {
     expect(select.selectedOptions.length).toBe(1);
   });
 
-  it('should clear and reset text input and select when reset() is called', async () => {
-    const tags = () => element.shadowRoot.querySelectorAll('mlv-tag');
-    expect(tags().length).toBe(2);
-    expect(select.selectedOptions.length).toBe(2);
-    expect(input.value).toBe('');
-
-    input.value = 'test';
-    element.reset();
-    await elementIsStable(element);
-    expect(select.selectedOptions.length).toBe(0);
-    expect(input.value).toBe('');
-  });
-
   it('should hide tags and display label when multiple is used and tags overflow container', async () => {
     expect(element.matches(':--multiple-overflow')).toBe(false);
     select.multiple = true;

@@ -24,20 +24,18 @@
   --box-shadow: none;
 }
 
-:host(:not([closable]):not(:--expanded)) {
-  [internal-host] {
-    width: var(--mlv-ref-space-xl) !important;
-    height: var(--mlv-ref-space-xl) !important;
-    background: none;
-  }
+:host(:not([closable]):not(:--expanded)) [internal-host] {
+  width: var(--mlv-ref-space-xl) !important;
+  height: var(--mlv-ref-space-xl) !important;
+  background: none;
+}
 
-  slot {
-    display: none;
-  }
+:host(:not([closable]):not(:--expanded)) slot {
+  display: none;
+}
 
-  mlv-icon-button {
-    position: initial;
-  }
+:host(:not([closable]):not(:--expanded)) mlv-icon-button {
+  position: initial;
 }
 
 :host([closable]:not(:--expanded)) {

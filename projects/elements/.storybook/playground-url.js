@@ -1,9 +1,10 @@
 import { gzipSync } from 'fflate';
 import { html } from 'lit';
+import format from 'html-format';
 import packageFile from '../package.json';
 import metrics from 'build/metadata.json';
 
-const prettier = await import('prettier/esm/standalone.mjs');
+// const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
 
 export function playground(Story, context) {
@@ -14,7 +15,11 @@ export function playground(Story, context) {
     return story;
   } else {
     const source = getRenderString(story);
-    const formattedSource = prettier.default.format(source.replaceAll(' mlv-theme="dark"', '').replaceAll(' mlv-theme="light"', '').replaceAll(' mlv-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
+    
+    // prettier 3.0 is async and Storybook decorators cannot be async, temporary workaround using html-format package https://github.com/storybookjs/storybook/issues/10467
+    // const formattedSource = prettier.default.format(source.replaceAll(' mlv-theme="dark"', '').replaceAll(' mlv-theme="light"', '').replaceAll(' mlv-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
+    const formattedSource = format(source.replaceAll(' mlv-theme="dark"', '').replaceAll(' mlv-theme="light"', '').replaceAll(' mlv-theme="root"', ''), ' '.repeat(2), 120);
+
     const files = serialize(addCssContent(createDefaultFiles(formattedSource, context.id), context.id));
     const url = `https://elements-stage.nvidia.com/ui/elements-playground/?theme=${context.globals.theme}&story=${context.id}&files=${files}&version=1`;
     return html`${story} <mlv-button class="playground-btn"><a href="${url}" target="_blank">Playground</a></mlv-button>`;

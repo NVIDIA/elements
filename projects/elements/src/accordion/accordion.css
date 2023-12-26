@@ -50,8 +50,8 @@
 
 :host([disabled]) {
   --cursor: not-allowed;
+}
 
-  ::slotted(mlv-accordion-header) {
-    --cursor: not-allowed;
-  }
+:host([disabled]) ::slotted(mlv-accordion-header) {
+  --cursor: not-allowed;
 }

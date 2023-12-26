@@ -24,7 +24,7 @@ import '@elements/elements/logo/define.js';
 @elements:registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
 
 # install from registry
-pnpm install @elements/elements
+npm install @elements/elements
 ```
 
 ```css
@@ -73,12 +73,18 @@ import '@elements/elements/button/define.js';
 
 <section mlv-layout="row gap:sm align:center">
   <mlv-button>
+    <a href="https://NVIDIA.github.io/elements/api/" target="_blank"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#storybook-svg"></use></svg> API Documentation</a>
+  </mlv-button>
+  <mlv-button>
+    <a href="https://github.com/NVIDIA/elements" target="_blank"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#gitlab-svg"></use></svg> Gitlab Repo</a>
+  </mlv-button>
+  <mlv-button>
     <a href="http://nv/elements-slack" target="_blank"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#slack-icon-svg"></use></svg> Slack Support</a>
   </mlv-button>
   <mlv-button>
     <a href="http://nv/elements-figma" target="_blank"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#figma-svg"></use></svg> Figma Library</a>
   </mlv-button>
-    <mlv-button>
-    <a href="ui/packages/npm:%2F%2F@elements%2Felements" target="_blank"><mlv-icon name="archive" style={{ '--color': 'var(--mlv-sys-accent-primary-background)' }}></mlv-icon> NPM Package</a>
+  <mlv-button>
+    <a href="https://registry.npmjs.org" target="_blank"><mlv-icon name="archive" style={{ '--color': 'var(--mlv-sys-accent-primary-background)' }}></mlv-icon> NPM Package</a>
   </mlv-button>
 </section>

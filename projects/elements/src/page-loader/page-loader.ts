@@ -9,7 +9,7 @@ import { ProgressRing } from '@elements/elements/progress-ring';
  * @since 0.19.0
  * @slot - default slot for content
  * @cssprop --gap
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-page-loader-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-page-loader-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=8866%3A125698&mode=dev
  * @stable false

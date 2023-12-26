@@ -67,17 +67,17 @@
   --padding: var(--mlv-ref-size-200) 0;
   --width: var(--mlv-ref-size-1000);
   --gap: var(--mlv-ref-space-xs);
+}
 
-  & [internal-host],
-  & slot {
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-  }
+:host([orientation='vertical']) [internal-host],
+:host([orientation='vertical']) slot {
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
 
-  ::slotted(mlv-divider) {
-    width: 100%;
-  }
+:host([orientation='vertical']) ::slotted(mlv-divider) {
+  width: 100%;
 }
 
 [name='prefix'],
@@ -119,15 +119,13 @@ slot:not([name]) {
   margin-inline-end: var(--mlv-ref-space-xs);
 }
 
-:host([content='wrap']) {
-  & slot:not([name]) {
-    gap: var(--gap);
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    text-wrap: balance;
-    overflow-x: initial;
-  }
+:host([content='wrap']) slot:not([name]) {
+  gap: var(--gap);
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  text-wrap: balance;
+  overflow-x: initial;
 }
 
 :host(:--scrollbar) slot:not([name]) {

@@ -45,10 +45,10 @@
 :host(:--checked) {
   --mlv-sys-interaction-state-lightness: 0%;
   --border-color: var(--accent-color);
+}
 
-  & [input] slot::before {
-    background: var(--border-color);
-  }
+:host(:--checked) [input] slot::before {
+  background: var(--border-color);
 }
 
 :host(:--disabled) {

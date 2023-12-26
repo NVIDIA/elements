@@ -9,8 +9,6 @@ import '@elements/elements/progressive-filter-chip/define.js';
 import '@elements/elements/input/define.js';
 import '@elements/elements/color/define.js';
 
-import '@elements/elements/bulk-actions/define.js';
-
 export default {
   title: 'Elements/Toolbar/Examples',
   component: 'mlv-toolbar',

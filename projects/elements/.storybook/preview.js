@@ -5,13 +5,14 @@ import styles from '@elements/elements/index.css?inline';
 import font from '@elements/elements/inter.css?inline';
 import brand from '@elements/elements/css/theme.brand.css?inline';
 import responsiveStyles from '@elements/elements/css/module.responsive.css?inline';
-import { MLV_VERSION } from '@elements/elements';
+import { VERSION } from '@elements/elements';
 import { playground } from './playground-url.js';
 import { H1, H2, H3, P } from './markdown.jsx';
 import '@elements/elements/polyfills';
 import '@elements/elements/button/define.js';
 
-const prettier = await import('prettier/esm/standalone.mjs');
+import format from 'html-format';
+// const prettier = await import('prettier/esm/standalone.mjs');
 const parserHTML = await import('prettier/esm/parser-html.mjs');
 const customElements = await import('@elements/elements/custom-elements.json');
 
@@ -44,7 +45,10 @@ export const parameters = {
 
       const lines = source.split('\n').filter(i => i.length ? i.trim().length : false);
       source = lines[0]?.trim() === '<div>' ? lines.slice(1, -1).join('\n') : source;
-      return excludes ? source : prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 }).replaceAll('=""', '');
+
+      // prettier 3.0 is async and Storybook decorators cannot be async, temporary workaround using html-format package https://github.com/storybookjs/storybook/issues/10467
+      // return excludes ? source : (await prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 })).replaceAll('=""', '');
+      return excludes ? source : format(source.replaceAll('=""', ''), ' '.repeat(2), 120);
     }
   },
   badgesConfig: {
@@ -54,7 +58,7 @@ export const parameters = {
         borderColor: 'var(--mlv-sys-support-warning-muted-color)',
         color: 'var(--mlv-sys-support-warning-emphasis-color)',
       },
-      title: `Pre-Release ${MLV_VERSION}`,
+      title: `Pre-Release ${VERSION}`,
       tooltip: {
         title: 'Pre-Release 🚧',
         desc: 'This element or utility is in under pre-release as a work in progress. Breaking API and visual changes may occur during the engineering and UI design review process.',
@@ -66,7 +70,7 @@ export const parameters = {
         borderColor: 'var(--mlv-sys-support-accent-muted-color)',
         color: 'var(--mlv-sys-support-accent-emphasis-color)',
       },
-      title: `Beta ${MLV_VERSION}`,
+      title: `Beta ${VERSION}`,
       tooltip: {
         title: 'Beta 🛠️',
         desc: 'This element or utility is in beta and available for use. The APIs and visual design are stable but in may change as we seek additional feedback.',
@@ -78,7 +82,7 @@ export const parameters = {
         borderColor: 'var(--mlv-sys-support-success-muted-color)',
         color: 'var(--mlv-sys-support-success-emphasis-color)',
       },
-      title: `Stable ${MLV_VERSION}`,
+      title: `Stable ${VERSION}`,
       tooltip: {
         title: 'Stable ✅',
         desc: 'This element or utility is Stable and ready for use.',
@@ -262,7 +266,6 @@ export const parameters = {
         [
           'Documentation',
           'Header',
-          'Panel',
           'Layout',
           'Row',
           'Trend',
@@ -382,8 +385,9 @@ function updateTheme(themes) {
   const manager = window.parent.document.querySelector('html');
   const story = document.querySelector('html');
 
+  manager.setAttribute('mlv-theme', themes);
+
   if (preview) {
-    manager.setAttribute('mlv-theme', themes);
     story.setAttribute('mlv-theme', themes);
     Array.from(document.querySelectorAll('iframe')).forEach(i => i.contentWindow.document.querySelector('html').setAttribute('mlv-theme', themes));
   } else {

@@ -44,7 +44,7 @@ describe('mlv-json-node', () => {
     element.value = { "url": "https://nvidia.com" };
     element.prop = 'site';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-button').textContent).toBe('site: ');
+    expect(element.shadowRoot.querySelector('mlv-button').textContent.trim()).toBe('site:');
   });
 
   it('should render icon button if property name is not available and an object or array value', async () => {

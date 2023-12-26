@@ -60,8 +60,7 @@ mlv-icon-button {
   right: 2px;
 }
 
-::slotted(mlv-button[interaction='flat']), /** @deprecated ghost */
-::slotted(mlv-button[interaction='ghost']) {
+::slotted(mlv-button[interaction='flat']) {
   --color: inherit;
   margin-inline-end: calc(var(--_gap) / -2);
   margin-inline-start: calc(var(--_gap) * 2);
