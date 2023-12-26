@@ -17,14 +17,14 @@ describe('lighthouse report', () => {
     `);
 
     expect(report.payload.css.kb).toBeLessThan(14.9); // total
-    expect(report.payload.css.requests['module.layout.css'].kb).toBeLessThan(1.7);
-    expect(report.payload.css.requests['module.reset.css'].kb).toBeLessThan(1.1);
-    expect(report.payload.css.requests['module.tokens.css'].kb).toBeLessThan(4.9);
-    expect(report.payload.css.requests['module.typography.css'].kb).toBeLessThan(1.3);
-    expect(report.payload.css.requests['theme.compact.css'].kb).toBeLessThan(0.4);
-    expect(report.payload.css.requests['theme.dark.css'].kb).toBeLessThan(4.1);
-    expect(report.payload.css.requests['theme.high-contrast.css'].kb).toBeLessThan(1);
-    expect(report.payload.css.requests['theme.reduced-motion.css'].kb).toBeLessThan(0.5);
+    expect(report.payload.css.requests['module.css'].kb).toBeLessThan(1.6); // module.layout.css
+    expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.1); // module.reset.css
+    expect(report.payload.css.requests['module3.css'].kb).toBeLessThan(4.9); // module.tokens.css
+    expect(report.payload.css.requests['module4.css'].kb).toBeLessThan(1.3); // module.typography.css
+    expect(report.payload.css.requests['theme.css'].kb).toBeLessThan(0.4); // theme.compact.css
+    expect(report.payload.css.requests['theme2.css'].kb).toBeLessThan(4.1); // theme.dark.css
+    expect(report.payload.css.requests['theme3.css'].kb).toBeLessThan(1); // theme.high-contrast.css
+    expect(report.payload.css.requests['theme4.css'].kb).toBeLessThan(0.5); // theme.reduced-motion.css
   });
 
   test('JS Bundles should remain within compressed bundle limits', async () => {
@@ -81,6 +81,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(66);
+    expect(report.payload.javascript.kb).toBeLessThan(61);
   });
 });

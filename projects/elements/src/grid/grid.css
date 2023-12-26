@@ -77,7 +77,6 @@
   --border-bottom: 0;
 }
 
-::slotted(nve-bulk-actions),
 ::slotted(nve-toolbar) {
   position: fixed;
   z-index: 99;

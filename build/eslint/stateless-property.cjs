@@ -6,10 +6,10 @@ const rule = {
   meta: {
     docs: {
       description: 'Prevent stateful mutations on public API properties',
-      category: 'Possible Errors',
+      category: 'Possible Errors'
     },
     schema: [],
-    type: 'problem',
+    type: 'problem'
   },
   create(context) {
     function getProps(node) {
@@ -27,14 +27,13 @@ const rule = {
       'AssignmentExpression[left.object.type=ThisExpression][left.property.type=Identifier]': checkAssigment,
       'ClassDeclaration:exit': () => {
         mutations.forEach((node, name) => {
-          const noExceptions = !['hidden', 'value'].find(i => i === name); // native overrides like input value are by default stateful in browser
+          const noExceptions = !['hidden', 'value'].find((i) => i === name); // native overrides like input value are by default stateful in browser
           if (noExceptions && props.has(name)) {
             context.report({
               node: node.parent,
-              message: `Public API "${name}" should not be stateful or stateful behavior must be opt-in. https://elements.nvidia.com/ui/storybook/elements?path=/story/about-api-design-stateless--page`,
+              message: `Public API "${name}" should not be stateful or stateful behavior must be opt-in. https://NVIDIA.github.io/elements/api/?path=/story/about-api-design-stateless--page`
             });
           }
-  
         });
         props.clear();
         mutations.clear();

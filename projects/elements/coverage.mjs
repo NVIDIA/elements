@@ -1,1 +1,0 @@
-// bazel coverage with js_test needs a entrypoint

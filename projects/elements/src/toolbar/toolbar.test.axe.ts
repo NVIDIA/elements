@@ -6,6 +6,7 @@ import { Toolbar } from '@elements/elements/toolbar';
 import '@elements/elements/toolbar/define.js';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/button-group/define.js';
+import '@elements/elements/button/define.js';
 import '@elements/elements/divider/define.js';
 
 describe('nve-toolbar axe', () => {

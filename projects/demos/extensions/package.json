@@ -46,38 +46,37 @@
     "storybook:watch": "wireit"
   },
   "dependencies": {
-    "@lit-labs/scoped-registry-mixin": "^1.0.1",
-    "@elements/elements": "workspace:*",
+    "@lit-labs/scoped-registry-mixin": "^1.0.3",
+    "@elements/elements": "workspace:../../elements",
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
-    "lit": "^2.7.3",
-    "lit-html": "^2.7.3"
+    "lit": "^3.1.0",
+    "lit-html": "^3.1.0"
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "8.9.0",
-    "@storybook/addon-docs": "7.1.0-alpha.26",
-    "@storybook/addon-essentials": "7.1.0-alpha.26",
-    "@storybook/addon-links": "7.1.0-alpha.26",
-    "@storybook/addons": "7.1.0-alpha.26",
-    "@storybook/blocks": "7.1.0-alpha.26",
-    "@storybook/builder-vite": "7.1.0-alpha.26",
-    "@storybook/channel-postmessage": "7.1.0-alpha.26",
-    "@storybook/channel-websocket": "7.1.0-alpha.26",
-    "@storybook/client-api": "7.1.0-alpha.26",
-    "@storybook/core-common": "7.1.0-alpha.26",
-    "@storybook/preview-api": "7.1.0-alpha.26",
-    "@storybook/theming": "7.1.0-alpha.26",
-    "@storybook/web-components": "7.1.0-alpha.26",
-    "@storybook/web-components-vite": "7.1.0-alpha.26",
-    "@vitest/browser": "0.32.0",
+    "@storybook/addon-docs": "7.1.1",
+    "@storybook/addon-essentials": "7.1.1",
+    "@storybook/addon-links": "7.1.1",
+    "@storybook/addons": "7.1.1",
+    "@storybook/blocks": "7.1.1",
+    "@storybook/builder-vite": "7.1.1",
+    "@storybook/channel-postmessage": "7.1.1",
+    "@storybook/channel-websocket": "7.1.1",
+    "@storybook/client-api": "7.1.1",
+    "@storybook/core-common": "7.1.1",
+    "@storybook/preview-api": "7.1.1",
+    "@storybook/theming": "7.1.1",
+    "@storybook/web-components": "7.1.1",
+    "@storybook/web-components-vite": "7.1.1",
+    "@vitest/browser": "1.1.0",
     "glob": "8.0.3",
-    "playwright": "1.34.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "storybook": "7.1.0-alpha.26",
-    "typescript": "4.9.4",
-    "vite": "4.3.9",
-    "vite-plugin-dts": "2.3.0",
-    "vitest": "0.32.0"
+    "storybook": "7.1.1",
+    "typescript": "5.3.3",
+    "vite": "5.0.10",
+    "vite-plugin-dts": "3.7.0",
+    "vitest": "1.1.0"
   },
   "wireit": {
     "dev": {
@@ -117,7 +116,7 @@
       ]
     },
     "test": {
-      "command": "node_modules/vitest/vitest.mjs run",
+      "command": "vitest run",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -135,7 +134,7 @@
       "service": true
     },
     "storybook": {
-      "command": "node_modules/storybook/index.js build --output-dir ./storybook-build",
+      "command": "storybook-build --output-dir ./storybook-build",
       "files": [
         ".storybook/**",
         "src/**/*.stories.ts",
@@ -150,17 +149,11 @@
       ],
       "dependencies": [
         "build"
-      ],
-      "env": {
-        "NODE_OPTIONS": "--openssl-legacy-provider"
-      }
+      ]
     },
     "storybook:watch": {
-      "command": "node_modules/storybook/index.js dev",
-      "service": true,
-      "env": {
-        "NODE_OPTIONS": "--openssl-legacy-provider"
-      }
+      "command": "storybook dev",
+      "service": true
     }
   }
 }

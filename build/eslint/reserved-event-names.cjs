@@ -7,14 +7,14 @@ const rule = {
     docs: {
       description:
         'This rule catches event overrides that conflicts with a existing event on the HTMLElement base type',
-      category: 'Possible Errors',
+      category: 'Possible Errors'
     },
     schema: [],
-    type: 'problem',
+    type: 'problem'
   },
   create: function (context) {
     return {
-      Decorator: node => {
+      Decorator: (node) => {
         const decoratorName = node.expression.callee.name;
 
         if (decoratorName === 'event') {
@@ -22,13 +22,13 @@ const rule = {
           if (isReservedEvent(propName)) {
             context.report({
               node: node.parent.key,
-              message: `"@${decoratorName} ${propName}" conflicts with a event in the HTMLElement base type. Please choose a different name.`,
+              message: `"@${decoratorName} ${propName}" conflicts with a event in the HTMLElement base type. Please choose a different name.`
             });
           }
         }
-      },
+      }
     };
-  },
+  }
 };
 
 const HTML_EVENTS = [
@@ -277,12 +277,11 @@ const NODE_KEYS = [
   'removeChild'
 ];
 
-const JSX_KEYS = [
-  'ref',
-  'key'
-];
+const JSX_KEYS = ['ref', 'key'];
 
-const reservedPublicEvents = new Set([...HTML_EVENTS, ...ELEMENT_KEYS, ...NODE_KEYS, ...JSX_KEYS].map(p => p.toLowerCase()));
+const reservedPublicEvents = new Set(
+  [...HTML_EVENTS, ...ELEMENT_KEYS, ...NODE_KEYS, ...JSX_KEYS].map((p) => p.toLowerCase())
+);
 
 function isReservedEvent(memberName) {
   memberName = memberName.toLowerCase();
