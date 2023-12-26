@@ -17,7 +17,7 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
  * @slot action-icon - Extra Action Button (use `nve-icon-button`)
  * @cssprop --padding
  * @cssprop --border-bottom
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-panel-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-panel-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
@@ -55,7 +55,7 @@ export class PanelHeader extends LitElement {
  * @since 0.10.0
  * @slot - This is a default/unnamed slot for panel content content
  * @cssprop --padding
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-panel-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-panel-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
@@ -83,7 +83,7 @@ export class PanelHeader extends LitElement {
  * @cssprop --padding
  * @cssprop --border-top
  * @cssprop --gap
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-panel-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-panel-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
@@ -125,7 +125,7 @@ export class PanelHeader extends LitElement {
  * @cssprop --background
  * @cssprop --color
  * @cssprop --box-shadow
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-panel-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-panel-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false

@@ -14,10 +14,11 @@ const generator = new Generator({
 await generator.install({ alias: '@elements/elements', target: './package.json' });
 
 // swap out for custom esm provider
-const generated = JSON.parse(JSON.stringify(generator.getMap(), null, 2)
-  .replaceAll('https://esm.sh', CDN_URL)
-  .replaceAll(`${CDN_URL}/*`, `${CDN_URL}/`)
-  .replaceAll('decorators/property.js', 'decorators/')
+const generated = JSON.parse(
+  JSON.stringify(generator.getMap(), null, 2)
+    .replaceAll('https://esm.sh', CDN_URL)
+    .replaceAll(`${CDN_URL}/*`, `${CDN_URL}/`)
+    .replaceAll('decorators/property.js', 'decorators/')
 );
 
 const importmap = {
@@ -25,7 +26,7 @@ const importmap = {
   imports: {
     '@elements/elements': `${CDN_URL}/${packageFile.name}@${packageFile.version}`,
     '@elements/elements/': `${CDN_URL}/${packageFile.name}@${packageFile.version}/`,
-    'lit': generated.scopes['https://https://esm.sh/']['lit/'],
+    lit: generated.scopes['https://https://esm.sh/']['lit/'],
     'lit/': generated.scopes['https://https://esm.sh/']['lit/']
   },
   // packages used by the library itself
@@ -35,6 +36,6 @@ const importmap = {
       ...generated.scopes['https://https://esm.sh/']
     }
   }
-}
+};
 
 writeFileSync(dist('importmap.cdn.json'), JSON.stringify(importmap, null, 2));

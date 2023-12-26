@@ -37,24 +37,23 @@
 :host(:--selected) {
   --color: var(--nve-sys-text-emphasis-color);
   --font-weight: var(--nve-ref-font-weight-semibold);
+}
 
+:host(:--selected)::after {
+  width: var(--border-width);
+  height: var(--border-height);
+  border-radius: var(--border-radius);
+  background: var(--nve-sys-accent-secondary-background);
+  top: var(--border-top);
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
 
-  &:after {
-    width: var(--border-width);
-    height: var(--border-height);
-    border-radius: var(--border-radius);
-    background: var(--nve-sys-accent-secondary-background);
-    top: var(--border-top);
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-
-  ::slotted(nve-icon) {
-    --color: var(--nve-sys-interaction-color);
-  }
+:host(:--selected) ::slotted(nve-icon) {
+  --color: var(--nve-sys-interaction-color);
 }
 
 :host(:hover:not(:--disabled, :--selected)) {
@@ -67,12 +66,10 @@
   --cursor: not-allowed;
 }
 
-:host(:is(:focus, focused)) {
-  [internal-host] {
-    outline-offset: -3px;
-    outline: 5px auto -webkit-focus-ring-color; /* var(--nve-ref-outline-webkit) */
-    outline: Highlight solid 2px; /* --nve-ref-outline */
-  }
+:host(:is(:focus, focused)) [internal-host] {
+  outline-offset: -3px;
+  outline: 5px auto -webkit-focus-ring-color; /* var(--nve-ref-outline-webkit) */
+  outline: Highlight solid 2px; /* --nve-ref-outline */
 }
 
 ::slotted(a) {

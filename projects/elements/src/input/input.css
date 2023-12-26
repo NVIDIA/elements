@@ -85,15 +85,16 @@ nve-icon-button,
   --border-radius: 0;
   --box-shadow: none;
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
+}
 
-  & [input] {
-    background: inherit;
-  }
+:host([container='flat']) & [input] {
+  background: inherit;
 }
 
 :host([container='flat'][nve-control]:focus-within) {
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
-  & [input] {
-    outline: 0 !important;
-  }
+}
+
+:host([container='flat'][nve-control]:focus-within) [input] {
+  outline: 0 !important;
 }

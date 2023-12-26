@@ -42,7 +42,6 @@ slot[name] {
   font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-::slotted(nve-button[interaction='ghost']), /** @deprecated ghost */
 ::slotted(nve-button[interaction='flat']) {
   --color: inherit;
 }

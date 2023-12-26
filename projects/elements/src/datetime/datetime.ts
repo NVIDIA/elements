@@ -8,7 +8,7 @@ import styles from './datetime.css?inline';
  * @element nve-datetime
  * @description A datetime picker is a control that enables users to choose a datetime value.
  * @since 0.3.0
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-datetime-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-datetime-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
  * @vqa false
  */

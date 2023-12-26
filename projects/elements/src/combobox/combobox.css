@@ -21,10 +21,10 @@
 
 :host(:--multiple) {
   --padding: 0 var(--nve-ref-size-100);
+}
 
-  & [input] {
-    padding: var(--padding);
-  }
+:host(:--multiple) [input] {
+  padding: var(--padding);
 }
 
 .tags {
@@ -113,19 +113,4 @@ slot[name*='option-'] {
 [matches] {
   font-weight: var(--nve-ref-font-weight-medium);
   color: var(--nve-sys-text-emphasis-color);
-}
-
-[name='footer'] {
-  display: none;
-  min-height: var(--nve-ref-size-900);
-  margin: calc(var(--nve-ref-size-200) * -1);
-  width: calc(100% + calc(var(--nve-ref-size-200) * 2));
-  border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
-  padding: 0 var(--nve-ref-size-200);
-  gap: var(--nve-ref-space-sm);
-  justify-content: center;
-}
-
-:host(:--footer-content) [name='footer'] {
-  display: flex;
 }

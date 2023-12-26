@@ -7,7 +7,7 @@ function App() {
   const [showDialog, setshowDialog] = React.useState(false);
 
   return (
-    <div nve-layout="column gap:md align:center" style={{ height: "95vh" }}>
+    <div nve-layout="column gap:md align:center" style={{ height: '95vh' }}>
       <h1 nve-text="heading">React</h1>
 
       <MlvButton onClick={() => setshowDialog(!showDialog)}>greeting</MlvButton>

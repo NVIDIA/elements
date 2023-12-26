@@ -60,8 +60,7 @@ nve-icon-button {
   right: 2px;
 }
 
-::slotted(nve-button[interaction='flat']), /** @deprecated ghost */
-::slotted(nve-button[interaction='ghost']) {
+::slotted(nve-button[interaction='flat']) {
   --color: inherit;
   margin-inline-end: calc(var(--_gap) / -2);
   margin-inline-start: calc(var(--_gap) * 2);
