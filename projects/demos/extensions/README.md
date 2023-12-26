@@ -2,19 +2,19 @@
 
 [Built with Vite](https://vitejs.dev/)
 
-To create reusable UI components that build on top of MagLev Elements we recommend using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components).
+To create reusable UI components that build on top of Elements we recommend using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components).
 This path enables your extensions to work in a large variety of frameworks and environments. We recommend
 reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team.
-The rest of this guide will focus on how to integrate specifically for Element integration and best practices for MagLev.
+The rest of this guide will focus on how to integrate specifically for Element integration and best practices.
 
 ## Getting Started
 
 ```shell
-pnpm i
+npm i
 ```
 
 ```shell
-pnpm run dev
+npm run dev
 ```
 
 ## Scoped Registry
@@ -43,7 +43,7 @@ export class DomainLogin extends ScopedRegistryHost(LitElement) {
     'nve-input': scope(Input, ScopedRegistryHost),
     'nve-password': scope(Password, ScopedRegistryHost),
     'nve-button': scope(Button, ScopedRegistryHost)
-  }
+  };
 
   render() {
     return html`

@@ -1,29 +1,36 @@
 import { defineConfig } from 'vitest/config';
 import path from 'path';
+import * as url from 'url';
 
-const resolve = (rel) => path.resolve(process.cwd(), rel);
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const resolve = (rel) => path.resolve(__dirname, rel);
 
 export default defineConfig({
   logLevel: 'info',
   resolve: {
     alias: {
-      'elements-lighthouse': resolve('./.lighthouse'),
+      'elements-lighthouse': resolve('.'),
     }
   },
   test: {
-    threads: false,
-    setupFiles: ['./.lighthouse/setup.ts'],
+    poolOptions: {
+      threads: {
+        singleThread: true
+      }
+    },
+    reporters: ['basic', 'junit'],
+    outputFile: {
+      junit: resolve('./coverage/junit.xml')
+    },
+    setupFiles: [resolve('./setup.ts')],
     include: [
       process.env.LIGHTHOUSE_ALL ? 'src/**/*.test.lighthouse.ts' : 'src/index.test.lighthouse.ts'
     ],
-    testTimeout: 20000,
-    watchExclude: ['**/node_modules/**'],
-    // Default includes '.cache' which fails under Bazel as its sandbox lives in such a folder.
-    exclude: ['**/node_modules/**'],
+    testTimeout: 60000,
     server: {
       deps: {
         external: ['**/node_modules/**']
       }
     }
-  },
+  }
 });

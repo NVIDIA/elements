@@ -1,6 +1,0 @@
-node_modules
-dist
-storybook-build
-.storybook
-*.stories.mdx
-*.stories.ts

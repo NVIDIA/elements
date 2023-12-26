@@ -56,10 +56,10 @@
 
 :host([orientation='vertical']) {
   --gap: var(--nve-ref-space-xs);
+}
 
-  & [internal-host] {
-    flex-direction: column;
-  }
+:host([orientation='vertical']) [internal-host] {
+  flex-direction: column;
 }
 
 :host([interaction='emphasize']) ::slotted(nve-divider) {
@@ -73,12 +73,12 @@
 :host(:--split) {
   --padding: 0;
   --gap: 0;
+}
 
-  & ::slotted(nve-button) {
-    --border-radius: var(--nve-ref-border-radius-none);
-  }
+:host(:--split) ::slotted(nve-button) {
+  --border-radius: var(--nve-ref-border-radius-none);
+}
 
-  & ::slotted(nve-icon-button) {
-    --border-radius: var(--nve-ref-border-radius-none);
-  }
+:host(:--split) ::slotted(nve-icon-button) {
+  --border-radius: var(--nve-ref-border-radius-none);
 }

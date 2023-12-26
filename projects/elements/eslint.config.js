@@ -7,12 +7,12 @@ import importPlugin from 'eslint-plugin-import';
 import wc from 'eslint-plugin-wc';
 import rulesdir from 'eslint-plugin-rulesdir';
 
-rulesdir.RULES_DIR = './build/eslint';
+rulesdir.RULES_DIR = '../../../build/eslint';
 
 const source = ['**/src/**/*.ts', '**/src/**/*.d.ts'];
 const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts'];
 const stories = ['**/*.stories.ts'];
-const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/storybook-build/**', '**/.lighthouse/**'];
+const ignores = ['**/node_modules/**', '**/dist/**', '**/dist-storybook/**', '**/coverage/**', '**/.lighthouse/**'];
 
 export default [
   'eslint:recommended',
@@ -21,11 +21,11 @@ export default [
     ignores,
     plugins: {
       '@typescript-eslint': typescript,
-      'rulesdir': rulesdir,
-      'wc': wc,
-      'import': importPlugin,
+      rulesdir: rulesdir,
+      wc: wc,
+      import: importPlugin,
       'lit-a11y': litA11y,
-      lit,
+      lit
     },
     languageOptions: {
       parser: typescriptParser,
@@ -66,25 +66,31 @@ export default [
       'lit/prefer-nothing': ['error'],
       'lit/quoted-expressions': ['off'],
       'lit/value-after-constraints': ['error'],
-      'import/extensions': ['error', 'ignorePackages', { 'js': 'always', 'css?inline': 'never' }],
+      'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
       '@typescript-eslint/no-explicit-any': 'off', // TODO
       '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test' }], // ignore demo/test components that do not need to be exported
       'lit-a11y/anchor-has-content': 'off', // rule does not check for aria-label
       'lit-a11y/click-events-have-key-events': 'off', // a11y may be handled by @keyNavigationList controller
-      'no-unknown-slot': 'off', // currently not working due to pnpm hoisting types
+      'no-unknown-slot': ['off'], // currently not working due to hoisting types
       'no-restricted-imports': [
         'error',
         {
           paths: [
-            { name: 'lit/decorators', message: 'import individual decorators https://lit.dev/docs/components/decorators/#importing-decorators' },
-            { name: 'lit/decorators.js', message: 'import individual decorators https://lit.dev/docs/components/decorators/#importing-decorators' }
+            {
+              name: 'lit/decorators',
+              message: 'import individual decorators https://lit.dev/docs/components/decorators/#importing-decorators'
+            },
+            {
+              name: 'lit/decorators.js',
+              message: 'import individual decorators https://lit.dev/docs/components/decorators/#importing-decorators'
+            }
           ],
-          patterns: ['lit-element', 'lit-element/*', 'lit-html', 'lit-html/*'],
-        },
+          patterns: ['lit-element', 'lit-element/*', 'lit-html', 'lit-html/*']
+        }
       ],
       'rulesdir/reserved-property-names': ['error'],
       'rulesdir/reserved-event-names': ['error'],
-      'rulesdir/stateless-property': ['error'],
+      'rulesdir/stateless-property': ['error']
     }
   },
   {
@@ -94,7 +100,7 @@ export default [
       lit
     },
     rules: {
-      'lit/quoted-expressions': ['error'],
+      'lit/quoted-expressions': ['error']
     }
   },
   {
@@ -108,8 +114,8 @@ export default [
         'error',
         { name: 'window', message: 'Use globalThis instead.' },
         { name: 'location', message: 'Use globalThis.location instead.' },
-        { name: 'document', message: 'Use globalThis.document instead.' },
-      ],
+        { name: 'document', message: 'Use globalThis.document instead.' }
+      ]
     }
   }
 ];

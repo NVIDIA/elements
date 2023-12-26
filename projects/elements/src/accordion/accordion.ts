@@ -16,7 +16,7 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
  * @slot title - Title heading
  * @slot subtitle - Subtitle Text
  * @slot actions - Extra Action Button (use `nve-icon-button`)
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
@@ -63,7 +63,7 @@ export class AccordionHeader extends LitElement {
  * @since 0.12.0
  * @slot - This is a default/unnamed slot for accordion content content
  * @cssprop --padding
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
@@ -94,7 +94,7 @@ export class AccordionContent extends LitElement {
  * @cssprop --background
  * @cssprop --color
  * @cssprop --header-padding
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
@@ -212,7 +212,7 @@ export class Accordion extends LitElement implements ContainerElement {
 /**
  * @element nve-accordion-group
  * @since 0.12.0
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-accordion-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false

@@ -14,11 +14,6 @@ export default defineConfig({
     },
     include: [resolve('./src/**/*.test.ts')],
     forceRerunTriggers: ['**/dist/**'],
-    // Default includes '.cache' which fails under Bazel as its sandbox lives in such a folder.
-    exclude: ['**/node_modules/**'],
-    // CPU detection on CI fails due to K8s/Docker.
-    maxThreads: 8,
-    minThreads: 8,
     deps: { external: ['**/node_modules/**'] },
     browser: {
       enabled: true,

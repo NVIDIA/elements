@@ -72,20 +72,18 @@ class IconDemo extends LitElement {
 
     <nve-card>
       <nve-card-content nve-layout="column gap:lg">
-        <form @input=${this.#input} nve-layout="row gap:md align:vertical-center full">
-          <nve-search style="width: 350px">
+        <form @input=${this.#input} nve-layout="row gap:md align:vertical-center">
+          <nve-search style="--width: 350px">
             <input type="search" @input=${e => this.iconSearchKey = e.target.value} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
           </nve-search>
-          <nve-select style="--width: 90px; --text-transform: none">
+          <nve-select style="--width: 90px">
             <select aria-label="size" .value=${this.values.size} name="size">
-              <option value="xs">xs</option>
-              <option value="sm">sm</option>
-              <option value="">md</option>
-              <option value="lg">lg</option>
-              <option value="xl">xl</option>
+              <option value="sm">small</option>
+              <option value="">medium</option>
+              <option value="lg">large</option>
             </select>
           </nve-select>
-          <nve-select style="--width: 90px; --text-transform: none">
+          <nve-select>
             <select aria-label="direction" .value=${this.values.direction} name="direction">
               <option value="">up</option>
               <option value="down">down</option>
@@ -114,7 +112,7 @@ class IconDemo extends LitElement {
   `;
   }
 
-  @state() values = { size: 'xl', outline: false, direction: '' };
+  @state() values = { size: 'lg', outline: false, direction: '' };
 
   get #form() {
     return this.shadowRoot.querySelector('form');

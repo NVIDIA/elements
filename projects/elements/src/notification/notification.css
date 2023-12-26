@@ -65,10 +65,10 @@ nve-icon-button {
   --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --background: var(--nve-sys-layer-overlay-accent-background);
   --color: var(--nve-sys-layer-overlay-color);
+}
 
-  & .popover {
-    border-bottom: var(--border);
-  }
+:host([container='flat']) .popover {
+  border-bottom: var(--border);
 }
 
 :host([status='accent']) {

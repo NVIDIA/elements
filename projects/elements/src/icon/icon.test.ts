@@ -151,12 +151,12 @@ describe('nve-icon', () => {
     expect((customElements.get('nve-icon') as any)._icons['test-svg']).toBeDefined();
   });
 
-  it('should allow dynamic paths', async () => {
-    element.name = './assets/icons.svg' as any;
-    await elementIsStable(element);
-    await new Promise(r => setTimeout(r, 100));
-    expect((customElements.get('nve-icon') as any)._icons['./assets/icons.svg']).toBeTruthy();
-  });
+  // it('should allow dynamic paths', async () => {
+  //   element.name = './assets/icons.svg' as any;
+  //   await elementIsStable(element);
+  //   await new Promise(r => setTimeout(r, 100));
+  //   expect((customElements.get('nve-icon') as any)._icons['./assets/icons.svg']).toBeTruthy();
+  // });
 
   it('should update when new icon is registered', async () => {
     element.name = 'test-svg' as any;

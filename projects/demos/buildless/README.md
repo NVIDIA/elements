@@ -7,9 +7,9 @@ Using [Import Maps](https://web.dev/import-maps-in-all-modern-browsers/) it is p
 ## Getting Started
 
 ```shell
-pnpm i
+npm i
 ```
 
 ```shell
-pnpm run dev
+npm run dev
 ```

@@ -22,11 +22,11 @@ export default defineConfig((env) => {
     resolve: {
       alias: {
         '@elements/elements': resolve('./src'), // tests should run against final build artifacts not source
-        '../dist/css/module.tokens.css': resolve('./dist/css/module.tokens.css'),
-        '../dist/css/theme.high-contrast.css': resolve('./dist/css/theme.high-contrast.css'),
-        '../dist/css/theme.reduced-motion.css': resolve('./dist/css/theme.reduced-motion.css'),
-        '../dist/css/theme.compact.css': resolve('./dist/css/theme.compact.css'),
-        '../dist/css/theme.dark.css': resolve('./dist/css/theme.dark.css')
+        './css/module.tokens.css': resolve('./dist/css/module.tokens.css'),
+        './css/theme.high-contrast.css': resolve('./dist/css/theme.high-contrast.css'),
+        './css/theme.reduced-motion.css': resolve('./dist/css/theme.reduced-motion.css'),
+        './css/theme.compact.css': resolve('./dist/css/theme.compact.css'),
+        './css/theme.dark.css': resolve('./dist/css/theme.dark.css')
       }
     },
     plugins: [
@@ -46,7 +46,8 @@ export default defineConfig((env) => {
       watch: mode === 'watch' ? {} : undefined,
       outDir: dist(),
       emptyOutDir: false,
-      target: 'es2022',
+      sourcemap: true,
+      target: 'esnext',
       lib: {
         entry: {
           index: resolve('./src/index.ts'),                                    // imports all independent component entrypoints
@@ -54,11 +55,11 @@ export default defineConfig((env) => {
           'scoped/index': resolve('./src/scoped/index.ts'),                    // utilities for scoping elements
           'polyfills/index': resolve('./src/polyfills/index.ts'),              // optional polyfills for non-chromium envs
           'test/index': resolve('./src/test/index.ts'),                        // internal testing utilities for @elements/elements
-          'css/module.typography': resolve('./src/css/module.typography.css'), // base typography styles
-          'css/module.layout': resolve('./src/css/module.layout.css'),         // layout utilities
-          'css/module.responsive': resolve('./src/css/module.responsive.css'), // responsive layout utilities
-          'css/module.reset': resolve('./src/css/module.reset.css'),           // common reset/base styles
-          'css/theme.brand': resolve('./src/css/theme.brand.css'),             // experimental brand theme
+          'css/module.typography.css': resolve('./src/css/module.typography.css'), // base typography styles
+          'css/module.layout.css': resolve('./src/css/module.layout.css'),         // layout utilities
+          'css/module.responsive.css': resolve('./src/css/module.responsive.css'), // responsive layout utilities
+          'css/module.reset.css': resolve('./src/css/module.reset.css'),           // common reset/base styles
+          'css/theme.brand.css': resolve('./src/css/theme.brand.css'),             // experimental brand theme
           'index.css': resolve('./src/index.css'),                             // global styles including all above style modules
           ...glob.sync('./src/**/define.ts').reduce((p, i) => {                // all component entrypoints
             return { ...p, [i.replace('./src/', '').replace('.ts', '')]: resolve(i) };
