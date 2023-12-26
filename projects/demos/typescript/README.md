@@ -5,9 +5,9 @@
 ## Getting Started
 
 ```shell
-pnpm i
+npm i
 ```
 
 ```shell
-pnpm run dev
+npm run dev
 ```

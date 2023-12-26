@@ -161,9 +161,10 @@ slot[name='messages'] {
   grid-template-areas:
     'label input input'
     '. messages messages';
+}
 
-  &.no-messages {
-    grid-template-areas: 
-      'label input input';
-  }
+:host([layout='horizontal']) [internal-host].no-messages,
+:host([layout='horizontal-inline']) [internal-host].no-messages {
+  grid-template-areas: 
+    'label input input';
 }

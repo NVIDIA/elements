@@ -7,9 +7,9 @@ This demo app shows how to build a standard mult-page application.
 ## Getting Started
 
 ```shell
-pnpm i
+npm i
 ```
 
 ```shell
-pnpm run dev
+npm run dev
 ```

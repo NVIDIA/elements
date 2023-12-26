@@ -27,7 +27,6 @@
   height: 100%;
 }
 
-:host([container='fill']), /* @deprecated 'fill' */
 :host([container='full']) {
   --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --border-radius: 0;

@@ -9,7 +9,7 @@ export default {
 
 const MlvButton = createComponent(React, 'nve-button', Button);
 
-export const ReactExample = () =>{
+export const ReactExample = () => {
   setTimeout(() => render(<MlvButton>react button</MlvButton>, document.getElementById('react-root')));
   return `<div id="react-root"></div>`;
 };

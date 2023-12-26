@@ -66,10 +66,10 @@
 :host(:--checked) {
   --background: var(--nve-sys-accent-secondary-background);
   --anchor-background: var(--nve-sys-text-white-color);
+}
 
-  [input] slot::after {
-    transform: translate(calc(var(--width) / 2), 0);
-  }
+:host(:--checked) [input] slot::after {
+  transform: translate(calc(var(--width) / 2), 0);
 }
 
 :host([nve-control]:focus-within) [input] {

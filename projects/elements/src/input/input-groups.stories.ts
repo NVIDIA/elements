@@ -31,31 +31,6 @@ export const InputGroup = () => {
 `
 };
 
-export const FilterGroupButtons = {
-  render: () => html`
-  <div nve-layout="row align:vertical-center">
-    <nve-input-group type="filter">
-      <nve-button style="width: 65px">GPS</nve-button>
-      <nve-select style="width: 75px">
-        <select>
-          <option value="1">contains</option>
-          <option value="2">excludes</option>
-        </select>
-      </nve-select>
-      <nve-button style="width: 190px" id="map-btn">37.3706254,-121.9671894</nve-button>
-      <nve-icon-button aria-label="remove filter" icon-name="cancel"></nve-icon-button>
-    </nve-input-group>
-    <nve-dropdown anchor="map-btn" trigger="map-btn">
-      <nve-input>
-        <nve-icon-button icon-name="location" readonly></nve-icon-button>
-        <input value="37.3706254,-121.9671894" disabled />
-      </nve-input>
-      <img src="images/test-map-2.webp" width="300px" alt="non-interactive demo map" />
-    </nve-dropdown>
-    </div>
-  `
-};
-
 export const FilterGroupRange = {
   render: () => html`
 <div nve-layout="row align:vertical-center">

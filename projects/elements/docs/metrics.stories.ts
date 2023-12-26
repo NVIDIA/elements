@@ -3,7 +3,7 @@ import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import showdown from 'showdown';
 import { define } from '@elements/elements/internal';
-import { MLV_VERSION } from '@elements/elements';
+import { VERSION } from '@elements/elements';
 import typography from '@elements/elements/css/module.typography.css?inline';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/alert/define.js';
@@ -33,7 +33,7 @@ function getMinorVersion(value) {
 
 function getVersionBadge(value) {
   const pin = value.replace('^', '').replace('~', '');
-  const currentVersion = getMinorVersion(MLV_VERSION);
+  const currentVersion = getMinorVersion(VERSION);
   const version = getMinorVersion(pin);
   let status = 'success';
 
@@ -239,7 +239,7 @@ class ElementMetrics extends LitElement {
       <section nve-layout="column gap:lg">
         <div nve-layout="row gap:xs align:center full">
           <div nve-layout="row gap:sm">
-            ${getStatusBadge(element.status, ` ${MLV_VERSION}`, '')}
+            ${getStatusBadge(element.status, ` ${VERSION}`, '')}
             ${getCoverageStatus(element.tests.coverageTotal, 'coverage: ', '')}
             ${element.lighthouse?.payload ? getPayloadSize(element.lighthouse?.payload, '') : nothing}
             ${getLighthouseScores(element)}
@@ -388,7 +388,7 @@ class ElementsGlossary extends LitElement {
             <nve-grid-column>Description</nve-grid-column>
             <nve-grid-column width="350px">Type</nve-grid-column>
           </nve-grid-header>
-          ${metrics.types.props?.filter(p => p.name !== '_internals' && p.name !== 'render')?.map(prop => html`
+          ${metrics.types.props?.map(prop => html`
           <nve-grid-row>
             <nve-grid-cell><code nve-text="code">${prop.name}</code></nve-grid-cell>
             <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></nve-grid-cell>
@@ -436,8 +436,8 @@ class ElementsMetrics extends LitElement {
       axe: { sort: 'none', tooltip: 'Accessibility status from Axe Core API', width: '170px' },
       spec: { sort: 'none', tooltip: 'Behavior category from W3C and WAI-ARIA Specification', width: '170px' },
       released: { sort: 'none', tooltip: 'Version Element was first released', width: '170px' },
-      instances: { sort: 'none', tooltip: 'Number of instances of element directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.', width: '130px' },
-      projects: { sort: 'none', tooltip: 'Number of Maglev Projects which reference the given element.', width: '130px' },
+      // instances: { sort: 'none', tooltip: 'Number of instances of element directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.', width: '130px' },
+      // projects: { sort: 'none', tooltip: 'Number of Maglev Projects which reference the given element.', width: '130px' },
       figma: { sort: 'none', width: '130px' },
       themes: { sort: 'none', width: '130px' },
       responsive: { sort: 'none', width: '130px' },
@@ -479,7 +479,7 @@ class ElementsMetrics extends LitElement {
         ${this.elements.map(element => {
           return html`
           <nve-grid-row>
-            <nve-grid-cell><a href=${element.storybook.replace('https://elements.nvidia.com/ui/storybook/elements', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
+            <nve-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
             <nve-grid-cell>${getStatusBadge(element.status)}</nve-grid-cell>
             <nve-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</nve-grid-cell>
             <nve-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</nve-grid-cell>
@@ -489,8 +489,8 @@ class ElementsMetrics extends LitElement {
             <nve-grid-cell>${getA11yStatusBadge(element.axe, true)}</nve-grid-cell>
             <nve-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} nve-text="link no-visit">${element.behavior}</a></nve-grid-cell>
             <nve-grid-cell>${element.since}</nve-grid-cell>
-            <nve-grid-cell>${element.tests.instanceTotal}</nve-grid-cell>
-            <nve-grid-cell>${element.tests.projectTotal}</nve-grid-cell>
+            <!-- <nve-grid-cell>${element.tests.instanceTotal}</nve-grid-cell> -->
+            <!-- <nve-grid-cell>${element.tests.projectTotal}</nve-grid-cell> -->
             <nve-grid-cell>${element.figma ? html`<a href=${element.figma} nve-text="link no-visit">Figma</a>` : html`<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
             <nve-grid-cell><nve-icon name="checkmark-circle" status="success"></nve-icon></nve-grid-cell>
             <nve-grid-cell>${element.responsive ? html`<nve-icon name="checkmark-circle" status="success"></nve-icon>` : html`<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
@@ -729,7 +729,7 @@ class MetricDemo extends LitElement {
       <div nve-layout="column gap:md">
         <div nve-layout="row gap:md">
           <h1 nve-text="heading lg">@elements/elements</h1>
-          <nve-badge status="success">version ${MLV_VERSION}</nve-badge>
+          <nve-badge status="success">version ${VERSION}</nve-badge>
         </div>
         <p nve-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
       </div>
@@ -740,7 +740,7 @@ class MetricDemo extends LitElement {
             <nve-tabs-item .selected=${this.tab === 'metrics'} @click=${() => this.tab = 'metrics'} selected>Metrics</nve-tabs-item>
             <nve-tabs-item .selected=${this.tab === 'test'} @click=${() => this.tab = 'test'}>Testing &amp; Performance</nve-tabs-item>
             <nve-tabs-item .selected=${this.tab === 'metadata'} @click=${() => this.tab = 'metadata'}>Raw Metadata</nve-tabs-item>
-            <nve-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev Projects</nve-tabs-item>
+            <!-- <nve-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev Projects</nve-tabs-item> -->
           </nve-tabs>
           <nve-divider></nve-divider>
         </div>

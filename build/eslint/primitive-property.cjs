@@ -4,10 +4,10 @@ const rule = {
   meta: {
     docs: {
       description: 'Prevent complex types used on public API properties',
-      category: 'Possible Errors',
+      category: 'Possible Errors'
     },
     schema: [],
-    type: 'problem',
+    type: 'problem'
   },
   create(context) {
     function getProps(node) {
@@ -17,18 +17,18 @@ const rule = {
     return {
       'PropertyDefinition > Decorator[expression.callee.name=property]': getProps,
       'ClassDeclaration:exit': () => {
-        properties.forEach(node => {
-          const props = node.expression.arguments.flatMap(args => args.properties);
+        properties.forEach((node) => {
+          const props = node.expression.arguments.flatMap((args) => args.properties);
           const propName = node.parent.key.name;
-          const noExceptions = !['i18n'].find(i => i === propName);
+          const noExceptions = !['i18n'].find((i) => i === propName);
 
-          props.forEach(prop => {
+          props.forEach((prop) => {
             const propType = prop.value.name;
 
             if (noExceptions && prop.key.name === 'type' && (propType === 'Array' || propType === 'Object')) {
               context.report({
                 node: node.parent,
-                message: `Public API "${propName}" with type ${propType} must be a primitive type https://elements.nvidia.com/ui/storybook/elements?path=/story/about-api-design-properties-attributes--page`,
+                message: `Public API "${propName}" with type ${propType} must be a primitive type https://NVIDIA.github.io/elements/api/?path=/story/about-api-design-properties-attributes--page`
               });
             }
           });
