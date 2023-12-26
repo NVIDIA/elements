@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-storybook
+public
+.storybook
+.next
+*.stories.mdx
+*.stories.ts
+*.test.lighthouse.ts
+CHANGELOG.md

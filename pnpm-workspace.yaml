@@ -1,0 +1,9 @@
+packages:
+ - 'projects/demos/extensions'
+ - 'projects/demos/mpa'
+ - 'projects/demos/nextjs'
+ - 'projects/demos/react'
+ - 'projects/demos/static'
+ - 'projects/demos/typescript'
+ - 'projects/elements'
+ - 'projects/elements-react'

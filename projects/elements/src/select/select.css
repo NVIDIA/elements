@@ -77,40 +77,39 @@
 
 :host(:--multiple) {
   --padding: 0 var(--nve-ref-size-300) 0 var(--nve-ref-size-100);
-
-  & [input] {
-    padding: var(--padding);
-  }
-
-  & .tags {
-    width: fit-content;
-    display: flex;
-    gap: var(--nve-ref-space-xxs);
-  }
-
-  & .tags-label {
-    padding: 0 var(--nve-ref-size-200);
-    font-size: var(--font-size);
-    cursor: var(--cursor);
-    font-weight: var(--font-weight);
-    position: absolute;
-    left: 0;
-    display: none;
-    pointer-events: none;
-  }
 }
 
-:host(:--multiple-overflow),
-:host([multiple-overflow]) {
-  & .tags {
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-  }
+:host(:--multiple) [input] {
+  padding: var(--padding);
+}
 
-  & .tags-label {
-    display: block;
-  }
+:host(:--multiple) .tags {
+  width: fit-content;
+  display: flex;
+  gap: var(--nve-ref-space-xxs);
+}
+
+:host(:--multiple) .tags-label {
+  padding: 0 var(--nve-ref-size-200);
+  font-size: var(--font-size);
+  cursor: var(--cursor);
+  font-weight: var(--font-weight);
+  position: absolute;
+  left: 0;
+  display: none;
+  pointer-events: none;
+}
+
+:host(:--multiple-overflow) .tags,
+:host([multiple-overflow]) .tags {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+:host(:--multiple-overflow) .tags-label,
+:host([multiple-overflow]) .tags-label {
+  display: block;
 }
 
 :host(:--multiple) ::slotted(select[multiple]) {
@@ -126,15 +125,13 @@
   display: none;
 }
 
-:host([layout*='horizontal'][size]) {
-  & ::slotted(label) {
-    padding-top: var(--nve-ref-size-100) !important;
-    align-self: start !important;
-  }
+:host([layout*='horizontal'][size]) ::slotted(label) {
+  padding-top: var(--nve-ref-size-100) !important;
+  align-self: start !important;
+}
 
-  slot[name='label'] {
-    align-self: start;
-  }
+:host([layout*='horizontal'][size]) slot[name='label'] {
+  align-self: start;
 }
 
 :host(:--invalid),
@@ -164,12 +161,6 @@ nve-menu {
   --max-height: var(--scroll-height);
 }
 
-nve-menu-item {
-  --text-transform: initial;
-  contain: content;
-  content-visibility: auto;
-}
-
 nve-menu-item:not(:--selected) nve-icon[name='check'] {
   opacity: 0;
 }
@@ -187,29 +178,29 @@ slot[name*='option-'] {
   --border-radius: 0;
   --box-shadow: none;
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
-  
-  & [input] {
-    background: inherit;
-  }
+}
 
-  & nve-tag {
-    --background: var(--nve-sys-interaction-field-background);
-  }
+:host([container='flat']) [input] {
+  background: inherit;
+}
+
+:host([container='flat']) nve-tag {
+  --background: var(--nve-sys-interaction-field-background);
 }
 
 :host([container='flat'][nve-control]:focus-within) {
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
+}
 
-  & [input] {
-    outline: 0 !important;
-  }
+:host([container='flat'][nve-control]:focus-within) [input] {
+  outline: 0 !important;
 }
 
 :host([container='inline']) { 
   --border-radius: 0;
   --box-shadow: none;
-  
-  & [input] {
-    background: inherit;
-  }
+}
+
+:host([container='inline']) [input] {
+  background: inherit;
 }

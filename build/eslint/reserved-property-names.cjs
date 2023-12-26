@@ -6,14 +6,14 @@ const rule = {
   meta: {
     docs: {
       description: 'Prevent property overrides that conflicts with a key in the HTMLElement prototype',
-      category: 'Possible Errors',
+      category: 'Possible Errors'
     },
     schema: [],
-    type: 'problem',
+    type: 'problem'
   },
   create: function (context) {
     return {
-      Decorator: node => {
+      Decorator: (node) => {
         const decoratorName = node.expression.callee.name;
 
         if (decoratorName === 'property' || decoratorName === 'state' || decoratorName === 'event') {
@@ -21,13 +21,13 @@ const rule = {
           if (isReservedProperty(propName)) {
             context.report({
               node: node.parent.key,
-              message: `"@${decoratorName} ${propName}" conflicts with a key in the HTMLElement prototype. Please choose a different name.`,
+              message: `"@${decoratorName} ${propName}" conflicts with a key in the HTMLElement prototype. Please choose a different name.`
             });
           }
         }
-      },
+      }
     };
-  },
+  }
 };
 
 const ARIA_KEYS = [
@@ -76,8 +76,8 @@ const ARIA_KEYS = [
   'ValueMax',
   'ValueMin',
   'ValueNow',
-  'ValueText',
-].map(name => `aria${name}`);
+  'ValueText'
+].map((name) => `aria${name}`);
 
 const HTML_ELEMENT_KEYS = [
   'title',
@@ -325,13 +325,10 @@ const NODE_KEYS = [
   'removeChild'
 ];
 
-const JSX_KEYS = [
-  'ref',
-  'key'
-];
+const JSX_KEYS = ['ref', 'key'];
 
 const reservedPublicProperties = new Set(
-  [...ARIA_KEYS, ...HTML_ELEMENT_KEYS, ...ELEMENT_KEYS, ...NODE_KEYS, ...JSX_KEYS].map(p => p.toLowerCase())
+  [...ARIA_KEYS, ...HTML_ELEMENT_KEYS, ...ELEMENT_KEYS, ...NODE_KEYS, ...JSX_KEYS].map((p) => p.toLowerCase())
 );
 
 function isReservedProperty(memberName) {

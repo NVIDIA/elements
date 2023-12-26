@@ -75,10 +75,10 @@ nve-icon,
 :host([color]) {
   --background: var(--color);
   --border-radius: var(--nve-ref-border-radius-sm);
+}
 
-  & [internal-host] {
-    color: var(--nve-sys-contrast-mute-color);
-  }
+:host([color]) [internal-host] {
+  color: var(--nve-sys-contrast-mute-color);
 }
 
 :host([container='flat']) {

@@ -24,20 +24,18 @@
   --box-shadow: none;
 }
 
-:host(:not([closable]):not(:--expanded)) {
-  [internal-host] {
-    width: var(--nve-ref-space-xl) !important;
-    height: var(--nve-ref-space-xl) !important;
-    background: none;
-  }
+:host(:not([closable]):not(:--expanded)) [internal-host] {
+  width: var(--nve-ref-space-xl) !important;
+  height: var(--nve-ref-space-xl) !important;
+  background: none;
+}
 
-  slot {
-    display: none;
-  }
+:host(:not([closable]):not(:--expanded)) slot {
+  display: none;
+}
 
-  nve-icon-button {
-    position: initial;
-  }
+:host(:not([closable]):not(:--expanded)) nve-icon-button {
+  position: initial;
 }
 
 :host([closable]:not(:--expanded)) {

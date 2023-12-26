@@ -16,7 +16,7 @@ import styles from './switch.css?inline';
  * @cssprop --anchor-height
  * @cssprop --anchor-border-radius
  * @cssprop --anchor-background
- * @storybook https://elements.nvidia.com/ui/storybook/elements?path=/docs/elements-switch-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-switch-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-28&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/switch/
  */

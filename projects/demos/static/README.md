@@ -15,16 +15,16 @@ Using the single bundle approach can make simple HTML prototypes easy but preven
 
 ## Getting Started
 
-Ensure [NodeJS](https://nodejs.org/en/) and [pnpm](https://pnpm.io/) are installed in your development environment.
+Ensure [NodeJS](https://nodejs.org/en/) is installed in your development environment.
 
 ```bash
 # install packages
-pnpm i
+npm i
 ```
 
 ```bash
 # run local dev env
-pnpm run dev
+npm run dev
 ```
 
 ## Build Bundles
@@ -33,30 +33,30 @@ To build the global bundles, import the components desired for your bundle in th
 
 ```bash
 # build for production
-pnpm run build
+npm run build
 ```
 
 Once build you will have the following in the `dist`.
 
 ```
-elements-elements.[version].bundle.js
-elements-elements.[version].bundle.css
-elements-elements.[version].bundle.woff2
-elements-elements.[version].bundle.json
+elements.[version].bundle.js
+elements.[version].bundle.css
+elements.[version].bundle.woff2
+elements.[version].bundle.json
 ```
 
 These files can now be manually copied into your environment for use.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" nve-theme="dark">
   <head>
-    <link rel="stylesheet" href="./elements-elements.0.0.0.bundle.css">
+    <link rel="stylesheet" href="./elements.0.0.0.bundle.css" />
   </head>
   <body nve-text="body">
     <nve-alert>hello there</nve-alert>
 
-    <script type="module" src="./elements-elements.0.0.0.bundle.js"></script>
+    <script type="module" src="./elements.0.0.0.bundle.js"></script>
   </body>
 </html>
 ```

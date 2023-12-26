@@ -1,1 +1,11 @@
+.pnpm-store
 .playwright
+.wireit
+.eslintcache
+.DS_store
+node_modules
+dist
+dist-storybook
+public/api
+coverage
+projects/elements/src/icon/icons.ts

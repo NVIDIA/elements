@@ -11,7 +11,7 @@ const baseInterface = getBaseInterface();
 function getBaseInterface() {
   const project = new Project();
   const file = project.addSourceFileAtPath(resolve('src/internal/types/index.ts'));
-  const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find(i => i.getName() === 'MlvElement');
+  const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find((i) => i.getName() === 'MlvElement');
   const props = base.getStructure().properties.reduce((p, n) => ({ ...p, [n.name]: n }), {});
   return props;
 }
@@ -40,7 +40,9 @@ function metadataPlugin() {
 
       switch (node.kind) {
         case ts.SyntaxKind.ClassDeclaration:
-          const classDeclaration = moduleDoc.declarations.find((declaration) => declaration.name === node.name?.getText());
+          const classDeclaration = moduleDoc.declarations.find(
+            (declaration) => declaration.name === node.name?.getText()
+          );
 
           node.jsDoc?.forEach((jsDoc) => {
             jsDoc.tags?.forEach((tag) => {
@@ -90,7 +92,7 @@ function basePathPlugin() {
       customElementsManifest.modules = JSON.parse(
         JSON.stringify(customElementsManifest.modules).replaceAll(`"/${base}`, '"').replaceAll(`"${base}`, '"')
       );
-    },
+    }
   };
 }
 
@@ -101,7 +103,7 @@ function extensionPlugin() {
       customElementsManifest.modules = JSON.parse(
         JSON.stringify(customElementsManifest.modules).replace(/\.ts"/g, '.js"')
       );
-    },
+    }
   };
 }
 
@@ -110,7 +112,7 @@ function orderPlugin() {
     name: 'order',
     packageLinkPhase({ customElementsManifest }) {
       customElementsManifest.modules.sort((a, b) => (a.path < b.path ? -1 : 1));
-    },
+    }
   };
 }
 
@@ -149,7 +151,10 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
       entry.type.text = Array.from(rewrittenTypes).join(' | ');
     }
 
-    entry.type.text = entry.type.text.split(' | ').map((value) => (value === 'undefined' || value === '') ? 'default' : value).join(' | ');
+    entry.type.text = entry.type.text
+      .split(' | ')
+      .map((value) => (value === 'undefined' || value === '' ? 'default' : value))
+      .join(' | ');
   }
 
   return {
@@ -171,7 +176,7 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
             }
             // Evaluate types that look like this:
             //   export type Interaction = 'emphasize' | 'destructive';
-            //   export type GhostInteraction = 'ghost' | `${'ghost'}-${Interaction}`;
+            //   export type FlatInteraction = 'flat' | `${'flat'}-${interaction}`;
             if (node.type.kind === ts.SyntaxKind.UnionType) {
               const typeAlias = node.name.escapedText;
               const { types } = runtimeEnvironment.typeChecker.getTypeAtLocation(node);
@@ -196,7 +201,7 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
                 rewriteTypesText(attribute);
               }
 
-              declaration.attributes?.forEach(attr => {                
+              declaration.attributes?.forEach((attr) => {
                 if (baseInterface[attr.name] && baseInterface[attr.name].docs.length) {
                   attr.description = baseInterface[attr.name].docs[0]?.description;
                 }
@@ -216,9 +221,20 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
 
 export default {
   globs: [resolve('./src')],
-  exclude: [resolve('src/**/*.css'), resolve('src/**/*.stories.mdx'), resolve('src/**/*.stories.ts'), resolve('src/**/*.test.axe.ts')],
+  exclude: [
+    resolve('src/**/*.css'),
+    resolve('src/**/*.stories.mdx'),
+    resolve('src/**/*.stories.ts'),
+    resolve('src/**/*.test.axe.ts')
+  ],
   litelement: true,
-  plugins: [basePathPlugin(), extensionPlugin(), orderPlugin(), metadataPlugin(), rewriteExportedStringLiteralTypeAliasesPlugin()],
+  plugins: [
+    basePathPlugin(),
+    extensionPlugin(),
+    orderPlugin(),
+    metadataPlugin(),
+    rewriteExportedStringLiteralTypeAliasesPlugin()
+  ],
   overrideModuleCreation: ({ ts, globs }) => {
     const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.lib.json');
     if (!configFile) {
@@ -229,5 +245,5 @@ export default {
     const program = ts.createProgram(globs, options);
     runtimeEnvironment.typeChecker = program.getTypeChecker();
     return program.getSourceFiles().filter((sf) => globs.find((glob) => sf.fileName.includes(glob)));
-  },
+  }
 };

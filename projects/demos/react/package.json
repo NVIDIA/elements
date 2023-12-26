@@ -10,15 +10,15 @@
     "preview": "wireit"
   },
   "dependencies": {
-    "@elements/elements": "workspace:*",
-    "@elements/elements-react": "workspace:*",
+    "@elements/elements": "workspace:../../elements",
+    "@elements/elements-react": "workspace:../../elements-react",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/react": "18.2.18",
     "@vitejs/plugin-react": "4.2.0",
-    "vite": "5.0.0",
+    "vite": "5.0.10",
     "wireit": "0.14.1"
   },
   "browserslist": {

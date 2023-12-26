@@ -50,8 +50,8 @@
 
 :host([disabled]) {
   --cursor: not-allowed;
+}
 
-  ::slotted(nve-accordion-header) {
-    --cursor: not-allowed;
-  }
+:host([disabled]) ::slotted(nve-accordion-header) {
+  --cursor: not-allowed;
 }

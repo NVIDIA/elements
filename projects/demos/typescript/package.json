@@ -20,7 +20,7 @@
       "service": true
     },
     "build": {
-      "command": "node_modules/vite/bin/vite.js build",
+      "command": "vite build",
       "files": [
         "index.html",
         "src/**",
@@ -43,11 +43,11 @@
     }
   },
   "dependencies": {
-    "@elements/elements": "workspace:*"
+    "@elements/elements": "workspace:../../elements"
   },
   "devDependencies": {
-    "typescript": "5.2.2",
-    "vite": "5.0.0",
+    "typescript": "5.3.3",
+    "vite": "5.0.10",
     "wireit": "0.14.1"
   }
 }
