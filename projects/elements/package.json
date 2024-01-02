@@ -304,9 +304,6 @@
     "vitest": "1.1.0",
     "wireit": "0.14.1"
   },
-  "publishConfig": {
-    "registry": "https://artifactory.build.nvidia.com/artifactory/api/npm/elements-ui-npm/"
-  },
   "wireit": {
     "dev": {
       "dependencies": [
