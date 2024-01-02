@@ -1,7 +1,6 @@
 module.exports = {
-  dryRun: true,
   branches: ['main'],
-  tagFormat: '${version}',
+  tagFormat: 'v${version}',
   plugins: [
     [
       '@semantic-release/commit-analyzer',
@@ -26,7 +25,7 @@ module.exports = {
       '@semantic-release/git',
       {
         assets: ['CHANGELOG.md'],
-        message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
+        message: 'chore(release): v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
       }
     ],
     [
@@ -40,7 +39,21 @@ module.exports = {
             results: [
               {
                 file: './projects/elements/dist/index.js',
-                haseChanged: true,
+                hasChanged: true,
+                numMatches: 1,
+                numReplacements: 1
+              }
+            ],
+            countMatches: true
+          },
+          {
+            files: ['./projects/elements/package.json'],
+            from: '"version": "0.0.0"',
+            to: '"version": "${nextRelease.version}"',
+            results: [
+              {
+                file: './projects/elements/package.json',
+                hasChanged: true,
                 numMatches: 1,
                 numReplacements: 1
               }
@@ -54,7 +67,7 @@ module.exports = {
             results: [
               {
                 file: './projects/elements-react/package.json',
-                haseChanged: true,
+                hasChanged: true,
                 numMatches: 2,
                 numReplacements: 2
               }
@@ -68,14 +81,22 @@ module.exports = {
       '@amanda-mitchell/semantic-release-npm-multiple',
       {
         registries: {
-          elements: {
+          urm_elements: {
             npmPublish: true,
             pkgRoot: './projects/elements'
           },
-          react: {
+          urm_react: {
             npmPublish: true,
-            pkgRoot: './projects/react'
-          }
+            pkgRoot: './projects/elements-react'
+          },
+          // elements_elements: {
+          //   npmPublish: true,
+          //   pkgRoot: './projects/elements'
+          // },
+          // elements_react: {
+          //   npmPublish: true,
+          //   pkgRoot: './projects/elements-react'
+          // }
         }
       }
     ]
