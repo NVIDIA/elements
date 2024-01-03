@@ -4,6 +4,8 @@
 
 [![pipeline status](https://github.com/NVIDIA/elements/badges/main/pipeline.svg)](https://github.com/NVIDIA/elements/-/commits/main)
 
+[![Latest Release](https://github.com/NVIDIA/elements/-/badges/release.svg)](https://github.com/NVIDIA/elements/-/releases)
+
 - [Elements Storybook](https://NVIDIA.github.io/elements/)
 - [Elements Playground](http://nv/elements-playground)
 - [Elements Figma](http://nv/elements-figma)
