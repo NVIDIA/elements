@@ -13,8 +13,7 @@
     "playwright": "wireit",
     "prepare": "husky install",
     "release": "semantic-release",
-    "commitlint": "commitlint --edit",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "commitlint": "commitlint --edit"
   },
   "engines": {
     "node": "20.10.0",
