@@ -2,9 +2,7 @@
 
 ## The Design Language for AI/ML Factories Building at the Speed of Light
 
-[![pipeline status](https://github.com/NVIDIA/elements/badges/main/pipeline.svg)](https://github.com/NVIDIA/elements/-/commits/main)
-
-[![Latest Release](https://github.com/NVIDIA/elements/-/badges/release.svg)](https://github.com/NVIDIA/elements/-/releases)
+[![pipeline status](https://github.com/NVIDIA/elements/badges/main/pipeline.svg)](https://github.com/NVIDIA/elements/-/commits/main) [![Latest Release](https://github.com/NVIDIA/elements/-/badges/release.svg)](https://github.com/NVIDIA/elements/-/releases)
 
 - [Elements Storybook](https://NVIDIA.github.io/elements/)
 - [Elements Playground](http://nv/elements-playground)
