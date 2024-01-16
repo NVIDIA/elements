@@ -266,6 +266,7 @@ export const parameters = {
         [
           'Documentation',
           'Header',
+          'Panel',
           'Layout',
           'Row',
           'Trend',
