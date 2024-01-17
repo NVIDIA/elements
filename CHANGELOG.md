@@ -1,3 +1,10 @@
+## [0.21.2](https://github.com/NVIDIA/elements/compare/v0.21.1...v0.21.2) (2024-01-17)
+
+
+### Bug Fixes
+
+* **elements:** combobox ([dd24c42](https://github.com/NVIDIA/elements/commit/dd24c42079b7485e9872c03782466dd6b8f4d631))
+
 ## [0.21.1](https://github.com/NVIDIA/elements/compare/v0.21.0...v0.21.1) (2024-01-02)
 
 
