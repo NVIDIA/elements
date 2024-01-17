@@ -17,6 +17,7 @@ import styles from './combobox.css?inline';
  * @since 0.17.0
  * @slot - default slot for input
  * @slot prefix-icon - slot for icon to be placed before the input
+ * @slot footer - slot for dropdown footer content
  * @cssprop --scroll-height
  * @cssprop --padding
  * @cssprop --font-size
@@ -85,6 +86,10 @@ export class Combobox extends Control implements ContainerElement {
     return this.#options.find(o => !o.disabled);
   }
 
+  get #hasFooterContent() {
+    return !!this.querySelector('[slot="footer"]');
+  }
+
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
   protected get prefixContent() {
@@ -109,6 +114,7 @@ export class Combobox extends Control implements ContainerElement {
           </nve-menu-item>`)}
           ${options.filter(o => !o.disabled).length === 0 ? html`<nve-menu-item .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}
         </nve-menu>
+        <slot name="footer"></slot>
       </nve-dropdown>`;
   }
 
@@ -123,11 +129,19 @@ export class Combobox extends Control implements ContainerElement {
     this.#setupOpenKeyEvents();
     this.#setupLightDismiss();
     this.#setupOverflowListener();
+    this.#setupSlotStates();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.#observers.forEach(observer => observer.disconnect());
+  }
+
+  reset() {
+    if (this.#select) {
+      this.#select.selectedIndex = -1;
+    }
+    super.reset();
   }
 
   #setupSingleSelect() {
@@ -262,6 +276,19 @@ export class Combobox extends Control implements ContainerElement {
       this._internals.states.add('--multiple-overflow');
     } else {
       this._internals.states.delete('--multiple-overflow');
+    }
+  }
+
+  #setupSlotStates() {
+    this.#setSlotStates();
+    this.shadowRoot.addEventListener('slotchange', () => this.#setSlotStates());
+  }
+
+  #setSlotStates() {
+    if (this.#hasFooterContent) {
+      this._internals.states.add('--footer-content');
+    } else {
+      this._internals.states.delete('--footer-content');
     }
   }
 }
