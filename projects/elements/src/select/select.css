@@ -161,6 +161,12 @@ mlv-menu {
   --max-height: var(--scroll-height);
 }
 
+mlv-menu-item {
+  --text-transform: initial;
+  contain: content;
+  content-visibility: auto;
+}
+
 mlv-menu-item:not(:--selected) mlv-icon[name='check'] {
   opacity: 0;
 }

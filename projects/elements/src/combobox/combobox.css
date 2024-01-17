@@ -114,3 +114,18 @@ slot[name*='option-'] {
   font-weight: var(--mlv-ref-font-weight-medium);
   color: var(--mlv-sys-text-emphasis-color);
 }
+
+[name='footer'] {
+  display: none;
+  min-height: var(--mlv-ref-size-900);
+  margin: calc(var(--mlv-ref-size-200) * -1);
+  width: calc(100% + calc(var(--mlv-ref-size-200) * 2));
+  border-top: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  padding: 0 var(--mlv-ref-size-200);
+  gap: var(--mlv-ref-space-sm);
+  justify-content: center;
+}
+
+:host(:--footer-content) [name='footer'] {
+  display: flex;
+}

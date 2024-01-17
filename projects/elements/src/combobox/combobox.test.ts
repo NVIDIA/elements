@@ -354,6 +354,19 @@ describe('mlv-combobox multi select', () => {
     expect(element.matches(':--multiple-overflow')).toBe(true);
   });
 
+  it('should clear and reset text input and select when reset() is called', async () => {
+    const tags = () => element.shadowRoot.querySelectorAll('mlv-tag');
+    expect(tags().length).toBe(2);
+    expect(select.selectedOptions.length).toBe(2);
+    expect(input.value).toBe('');
+
+    input.value = 'test';
+    element.reset();
+    await elementIsStable(element);
+    expect(select.selectedOptions.length).toBe(0);
+    expect(input.value).toBe('');
+  });
+
   it('should hide tags and display label when a new selection causes a overflow', async () => {
     expect(element.matches(':--multiple-overflow')).toBe(false);
     element.style.setProperty('--width', '100px');

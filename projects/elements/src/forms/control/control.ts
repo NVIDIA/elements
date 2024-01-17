@@ -144,10 +144,11 @@ export class Control extends LitElement {
     this.#observers.forEach(observer => observer.disconnect());
   }
 
-  /** resets control value to initial attribute value and clears any active validation rules */
+  /** Resets control value to initial attribute value and clears any active validation rules. */
   reset() {
-    this.dispatchEvent(new CustomEvent('reset', { bubbles: true }));
     this.input.value = this.input.getAttribute('value');
+    this.requestUpdate();
+    this.dispatchEvent(new CustomEvent('reset', { bubbles: true }));
   }
 
   #setupInput() {
