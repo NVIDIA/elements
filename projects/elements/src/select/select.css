@@ -161,6 +161,12 @@ nve-menu {
   --max-height: var(--scroll-height);
 }
 
+nve-menu-item {
+  --text-transform: initial;
+  contain: content;
+  content-visibility: auto;
+}
+
 nve-menu-item:not(:--selected) nve-icon[name='check'] {
   opacity: 0;
 }
