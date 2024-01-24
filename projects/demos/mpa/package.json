@@ -10,13 +10,12 @@
     "preview": "wireit"
   },
   "dependencies": {
-    "@elements/elements": "workspace:../../elements",
-    "lit": "^3.1.0"
+    "@elements/elements": "workspace:../../elements"
   },
   "devDependencies": {
     "typescript": "5.3.3",
     "vite": "5.0.10",
-    "wireit": "0.14.1"
+    "wireit": "0.14.3"
   },
   "wireit": {
     "ci": {
