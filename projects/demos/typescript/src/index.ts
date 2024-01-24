@@ -1,13 +1,6 @@
-import type { Dialog } from '@elements/elements/dialog';
-import type { Button } from '@elements/elements/button';
+import '@elements/elements/app-header/define.js';
 import '@elements/elements/button/define.js';
-import '@elements/elements/dialog/define.js';
+import '@elements/elements/breadcrumb/define.js';
+import '@elements/elements/drawer/define.js';
+import '@elements/elements/menu/define.js';
 import './index.css';
-
-const dialog = document.querySelector<Dialog>('mlv-dialog');
-const button = document.querySelector<Button>('mlv-button');
-
-if (button && dialog) {
-  button.addEventListener('click', () => dialog.hidden = false);
-  dialog.addEventListener('close', () => dialog.hidden = true);
-}
