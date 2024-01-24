@@ -48,6 +48,6 @@
   "devDependencies": {
     "typescript": "5.3.3",
     "vite": "5.0.10",
-    "wireit": "0.14.1"
+    "wireit": "0.14.3"
   }
 }
