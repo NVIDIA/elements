@@ -11,7 +11,7 @@ const resolve = (rel) => path.resolve(process.cwd(), rel);
 export class LighthouseRunner {
   #server: PreviewServer;
   #browser: Browser;
-  #port = 4173;
+  #port = 4174;
   #report = { };
 
   async open() {

@@ -6,6 +6,5 @@
 node_modules
 dist
 dist-storybook
-public/api
 coverage
 projects/elements/src/icon/icons.ts

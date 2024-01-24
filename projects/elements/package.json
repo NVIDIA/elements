@@ -303,7 +303,7 @@
     "vite-plugin-dts": "3.7.0",
     "vite-plugin-virtual-html": "1.1.18",
     "vitest": "1.1.0",
-    "wireit": "0.14.1"
+    "wireit": "0.14.3"
   },
   "wireit": {
     "dev": {

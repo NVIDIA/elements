@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" nve-theme="dark">
+  <head>
+    <title>Elements + Buildless</title>
+    <meta charset="UTF-8" />
+    <meta name="view-transition" content="same-origin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple starter using Elements and TypeScript.">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@elements/elements@0.21.0/dist/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@elements/elements@0.21.0/dist/inter.css" />
+    <style>
+      body:has(*:not(:defined)) * {
+        visibility: hidden;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@elements/elements": "https://https://esm.sh/@elements/elements@0.21.0",
+          "@elements/elements/": "https://https://esm.sh/@elements/elements@0.21.0/"
+        }
+      }
+    </script>
+    <script type="module">
+      import '@elements/elements/app-header/define.js';
+      import '@elements/elements/button/define.js';
+      import '@elements/elements/breadcrumb/define.js';
+      import '@elements/elements/drawer/define.js';
+      import '@elements/elements/menu/define.js';
+    </script>
+  </head>
+  <body>
+    <nve-app-header>
+      <nve-logo></nve-logo>
+      <h2 slot="title">Elements</h2>
+      <nve-button slot="nav-items" selected><a href="/demos/buildless/">Demos</a></nve-button>
+      <nve-button slot="nav-items"><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></nve-button>
+      <nve-button slot="nav-items"><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button>
+      <nve-button slot="nav-items"><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button>
+      <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
+    </nve-app-header>
+    <div nve-layout="row" style="height: 100%">
+      <nve-drawer inline size="sm" style="--top: 48px; display: block">
+        <nve-drawer-header>
+          <div nve-layout="row gap:xs align:vertical-center">Demos</div>
+        </nve-drawer-header>
+        <nve-drawer-content>
+          <nve-menu>
+            <nve-menu-item current="page">
+              <a href="/demos/buildless/">
+                <img src="assets/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+                Buildless
+              </a>
+            </nve-menu-item>
+            <nve-menu-item>
+              <a href="/demos/typescript/">
+                <img src="assets/typescript.svg" width="18px" height="18px" alt="typescript logo" />
+                TypeScript
+              </a>
+            </nve-menu-item>
+            <nve-menu-item>
+              <a href="/demos/angular/">
+                <img src="assets/angular.svg" width="18px" height="18px" alt="angular logo" />
+                Angular
+              </a>
+            </nve-menu-item>
+            <nve-menu-item>
+              <a href="/demos/vue/">
+                <img src="assets/vue.svg" width="18px" height="18px" alt="vue logo" />
+                Vue
+              </a>
+            </nve-menu-item>
+            <nve-menu-item>
+              <a href="/demos/react/">
+                <img src="assets/react.svg" width="18px" height="18px" alt="react logo" />
+                React
+              </a>
+            </nve-menu-item>
+            <nve-menu-item>
+              <nve-icon name="template"></nve-icon>
+              <a href="/demos/mpa/">MPA</a>
+            </nve-menu-item>
+          </nve-menu>
+        </nve-drawer-content>
+      </nve-drawer>
+      <main nve-layout="column gap:lg pad-x:xl pad-y:md align:stretch full">
+        <nve-breadcrumb>
+          <nve-button><a href="/demos/buildless/">Elements</a></nve-button>
+          <nve-button><a href="/demos/buildless/" target="_self">Demos</a></nve-button>
+          <span>Buildless</span>
+        </nve-breadcrumb>
+        <h1 nve-text="heading xl">Buildless</h1>
+        <p nve-text="body">A simple starter using Elements and a buildless CDN.</p>
+        <ul nve-text="list" nve-layout="column gap:xs">
+          <li><a nve-text="link" target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/demos/buildless">Source</a></li>
+          <li><a nve-text="link" target="_blank" href="https://NVIDIA.github.io/elements/api/?path=/docs/integrations-buildless--docs">Documentation</a></li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>
