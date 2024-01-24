@@ -3,6 +3,8 @@ import { resolve } from 'path';
 
 export default defineConfig({
   root: './src',
+  base: '/demos/mpa',
+  publicDir: '../assets',
   build: {
     sourcemap: true,
     outDir: '../dist',

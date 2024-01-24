@@ -1,0 +1,128 @@
+{
+  "name": "pages",
+  "private": true,
+  "scripts": {
+    "ci": "wireit",
+    "preview": "wireit"
+  },
+  "wireit": {
+    "ci": {
+      "command": "echo 'building pages...'",
+      "dependencies": [
+        "pages:demos:angular",
+        "pages:demos:buildless",
+        "pages:demos:mpa",
+        "pages:demos:react",
+        "pages:demos:typescript",
+        "pages:demos:vue",
+        "pages:elements"
+      ],
+      "files": [
+      ],
+      "output": [
+      ]
+    },
+    "pages:demos:angular": {
+      "command": "cp -a ../demos/angular/dist/angular-app/browser/. ./dist/demos/angular",
+      "dependencies": [
+        "../demos/angular:ci",
+        "build"
+      ],
+      "files": [
+      ],
+      "output": [
+        "dist/demos/angular/**"
+      ]
+    },
+    "pages:demos:buildless": {
+      "command": "cp -a ../demos/buildless/dist/. ./dist/demos/buildless/",
+      "dependencies": [
+        "../demos/buildless:ci",
+        "build"
+      ],
+      "files": [
+      ],
+      "output": [
+        "dist/demos/buildless/**"
+      ]
+    },
+    "pages:demos:mpa": {
+      "command": "cp -a ../demos/mpa/dist/. ./dist/demos/mpa",
+      "dependencies": [
+        "../demos/mpa:ci",
+        "build"
+      ],
+      "files": [
+      ],
+      "output": [
+        "dist/demos/mpa/**"
+      ]
+    },
+    "pages:demos:react": {
+      "command": "cp -a ../demos/react/dist/. ./dist/demos/react",
+      "dependencies": [
+        "../demos/react:ci",
+        "build"
+      ],
+      "files": [
+      ],
+      "output": [
+        "dist/demos/react/**"
+      ]
+    },
+    "pages:demos:typescript": {
+      "command": "cp -a ../demos/typescript/dist/. ./dist/demos/typescript",
+      "dependencies": [
+        "../demos/typescript:ci",
+        "build"
+      ],
+      "files": [
+      ],
+      "output": [
+        "dist/demos/typescript/**"
+      ]
+    },
+    "pages:demos:vue": {
+      "command": "cp -a ../demos/vue/dist/. ./dist/demos/vue",
+      "dependencies": [
+        "../demos/vue:ci",
+        "build"
+      ],
+      "files": [
+      ],
+      "output": [
+        "dist/demos/vue/**"
+      ]
+    },
+    "pages:elements": {
+      "command": "cp -a ../elements/dist-storybook/ ./dist/api",
+      "dependencies": [
+        "../elements:build:storybook",
+        "build"
+      ],
+      "files": [
+      ],
+      "output": [
+        "dist/api/**"
+      ]
+    },
+    "build": {
+      "command": "mkdir -p dist/demos && mkdir -p dist/api && cp -a ./index.html dist/ && cp -a ./robots.txt dist/ && cp -a ./assets/. dist/assets/",
+      "files": [
+        "index.html",
+        "robots.txt"
+      ],
+      "output": [
+        "dist/index.html",
+        "dist/robots.txt"
+      ]
+    },
+    "preview": {
+      "command": "cd dist && pnpm exec vite preview"
+    }
+  },
+  "dependencies": {
+    "vite": "5.0.10",
+    "wireit": "0.14.3"
+  }
+}

@@ -19,10 +19,6 @@
     "node": "20.10.0",
     "pnpm": ">=8.13.1"
   },
-  "dependencies": {
-    "commitlint": "18.4.3",
-    "wireit": "0.14.1"
-  },
   "devDependencies": {
     "@amanda-mitchell/semantic-release-npm-multiple": "3.9.0",
     "@semantic-release/changelog": "6.0.3",
@@ -33,30 +29,15 @@
     "@semantic-release/gitlab": "12.1.1",
     "@semantic-release/npm": "11.0.2",
     "@semantic-release/release-notes-generator": "12.1.0",
+    "@tsconfig/node20": "20.1.2",
+    "@types/node": "20.11.6",
+    "commitlint": "18.4.3",
     "husky": "8.0.3",
     "playwright": "1.40.1",
     "prettier": "3.1.1",
     "semantic-release": "22.0.12",
-    "semantic-release-replace-plugin": "1.2.7"
-  },
-  "_pnpm": {
-    "overrides": {
-      "@storybook/web-components": {
-        "dependencies": {
-          "lit": "^3.1.0"
-        }
-      },
-      "rollup-plugin-minify-html-literals": {
-        "dependencies": {
-          "rollup": "3.29.1"
-        }
-      },
-      "@amanda-mitchell/semantic-release-npm-multiple": {
-        "dependencies": {
-          "semantic-release": "22.0.12"
-        }
-      }
-    }
+    "semantic-release-replace-plugin": "1.2.7",
+    "wireit": "0.14.3"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
@@ -64,11 +45,13 @@
   "wireit": {
     "ci": {
       "dependencies": [
+        "./projects/pages:ci",
+        "./projects/demos/angular:ci",
+        "./projects/demos/buildless:ci",
         "./projects/demos/extensions:ci",
         "./projects/demos/mpa:ci",
         "./projects/demos/nextjs:ci",
         "./projects/demos/react:ci",
-        "./projects/demos/static:ci",
         "./projects/demos/typescript:ci",
         "./projects/elements:ci",
         "./projects/elements-react:ci"
