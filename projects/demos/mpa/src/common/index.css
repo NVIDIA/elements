@@ -1,14 +1,5 @@
 @import '@elements/elements/index.css';
-/* @import '@elements/elements/inter.css'; */
-
-body {
-  margin: 0;
-}
-
-main {
-  max-width: 1024px;
-  margin: 0 auto !important;
-}
+@import '@elements/elements/inter.css';
 
 *:not(:defined),
 *:not(:defined) > * {
