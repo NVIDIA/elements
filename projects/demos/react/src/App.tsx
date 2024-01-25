@@ -13,7 +13,7 @@ function App() {
       <MlvAppHeader>
         <MlvLogo></MlvLogo>
         <h2 slot="title">Elements</h2>
-        <MlvButton slot="nav-items" selected><a href="/demos/buildless/">Demos</a></MlvButton>
+        <MlvButton slot="nav-items" selected><a href="/elements/demos/buildless/">Demos</a></MlvButton>
         <MlvButton slot="nav-items"><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></MlvButton>
         <MlvButton slot="nav-items"><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></MlvButton>
         <MlvButton slot="nav-items"><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></MlvButton>
@@ -27,46 +27,46 @@ function App() {
           <MlvDrawerContent>
             <MlvMenu>
               <MlvMenuItem>
-                <a href="/demos/buildless/">
-                  <img src="/demos/react/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+                <a href="/elements/demos/buildless/">
+                  <img src="/elements/demos/react/javascript.svg" width="18px" height="18px" alt="javascript logo" />
                   Buildless
                 </a>
               </MlvMenuItem>
               <MlvMenuItem>
-                <a href="/demos/typescript/">
-                  <img src="/demos/react/typescript.svg" width="18px" height="18px" alt="typescript logo" />
+                <a href="/elements/demos/typescript/">
+                  <img src="/elements/demos/react/typescript.svg" width="18px" height="18px" alt="typescript logo" />
                   TypeScript
                 </a>
               </MlvMenuItem>
               <MlvMenuItem>
-                <a href="/demos/angular/">
-                  <img src="/demos/react/angular.svg" width="18px" height="18px" alt="angular logo" />
+                <a href="/elements/demos/angular/">
+                  <img src="/elements/demos/react/angular.svg" width="18px" height="18px" alt="angular logo" />
                   Angular
                 </a>
               </MlvMenuItem>
               <MlvMenuItem>
-                <a href="/demos/vue/">
-                  <img src="/demos/react/vue.svg" width="18px" height="18px" alt="vue logo" />
+                <a href="/elements/demos/vue/">
+                  <img src="/elements/demos/react/vue.svg" width="18px" height="18px" alt="vue logo" />
                   Vue
                 </a>
               </MlvMenuItem>
               <MlvMenuItem current="page">
-                <a href="/demos/react/">
-                  <img src="/demos/react/react.svg" width="18px" height="18px" alt="react logo" />
+                <a href="/elements/demos/react/">
+                  <img src="/elements/demos/react/react.svg" width="18px" height="18px" alt="react logo" />
                   React
                 </a>
               </MlvMenuItem>
               <MlvMenuItem>
                 <nve-icon name="template"></nve-icon>
-                <a href="/demos/mpa/">MPA</a>
+                <a href="/elements/demos/mpa/">MPA</a>
               </MlvMenuItem>
             </MlvMenu>
           </MlvDrawerContent>
         </MlvDrawer>
         <main nve-layout="column gap:lg pad-x:xl pad-y:md align:stretch">
           <MlvBreadcrumb>
-            <MlvButton><a href="/demos/buildless/">Elements</a></MlvButton>
-            <MlvButton><a href="/demos/buildless/" target="_self">Demos</a></MlvButton>
+            <MlvButton><a href="/elements/demos/buildless/">Elements</a></MlvButton>
+            <MlvButton><a href="/elements/demos/buildless/" target="_self">Demos</a></MlvButton>
             <span>React</span>
           </MlvBreadcrumb>
           <h1 nve-text="heading xl">React</h1>
