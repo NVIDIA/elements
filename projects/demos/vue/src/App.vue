@@ -10,7 +10,7 @@
   <mlv-app-header>
     <mlv-logo></mlv-logo>
     <h2 slot="title">Elements</h2>
-    <mlv-button slot="nav-items" selected=" "><a href="/demos/buildless/">Demos</a></mlv-button>
+    <mlv-button slot="nav-items" selected=" "><a href="/elements/demos/buildless/">Demos</a></mlv-button>
     <mlv-button slot="nav-items"><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></mlv-button>
     <mlv-button slot="nav-items"><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></mlv-button>
     <mlv-button slot="nav-items"><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></mlv-button>
@@ -24,46 +24,46 @@
       <mlv-drawer-content>
         <mlv-menu>
           <mlv-menu-item>
-            <a href="/demos/buildless/">
+            <a href="/elements/demos/buildless/">
               <img src="/javascript.svg" width="18px" height="18px" alt="javascript logo" />
               Buildless
             </a>
           </mlv-menu-item>
           <mlv-menu-item>
-            <a href="/demos/typescript/">
+            <a href="/elements/demos/typescript/">
               <img src="/typescript.svg" width="18px" height="18px" alt="typescript logo" />
               TypeScript
             </a>
           </mlv-menu-item>
           <mlv-menu-item>
-            <a href="/demos/angular/">
+            <a href="/elements/demos/angular/">
               <img src="/angular.svg" width="18px" height="18px" alt="angular logo" />
               Angular
             </a>
           </mlv-menu-item>
           <mlv-menu-item current="page">
-            <a href="/demos/vue/">
+            <a href="/elements/demos/vue/">
               <img src="/vue.svg" width="18px" height="18px" alt="vue logo" />
               Vue
             </a>
           </mlv-menu-item>
           <mlv-menu-item>
-            <a href="/demos/react/">
+            <a href="/elements/demos/react/">
               <img src="/react.svg" width="18px" height="18px" alt="react logo" />
               React
             </a>
           </mlv-menu-item>
           <mlv-menu-item>
             <mlv-icon name="template"></mlv-icon>
-            <a href="/demos/mpa/">MPA</a>
+            <a href="/elements/demos/mpa/">MPA</a>
           </mlv-menu-item>
         </mlv-menu>
       </mlv-drawer-content>
     </mlv-drawer>
     <main mlv-layout="column gap:lg pad-x:xl pad-y:md align:stretch">
       <mlv-breadcrumb>
-        <mlv-button><a href="/demos/buildless/">Elements</a></mlv-button>
-        <mlv-button><a href="/demos/buildless/" target="_self">Demos</a></mlv-button>
+        <mlv-button><a href="/elements/demos/buildless/">Elements</a></mlv-button>
+        <mlv-button><a href="/elements/demos/buildless/" target="_self">Demos</a></mlv-button>
         <span>Vue</span>
       </mlv-breadcrumb>
       <h1 mlv-text="heading xl">Vue</h1>
