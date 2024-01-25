@@ -21,7 +21,7 @@
       "service": true
     },
     "build": {
-      "command": "ng build --base-href /demos/angular/",
+      "command": "ng build --base-href /elements/demos/angular/",
       "files": [
         "src/**",
         "angular.json",
