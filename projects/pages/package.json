@@ -95,7 +95,7 @@
       ]
     },
     "pages:elements": {
-      "command": "cp -a ../elements/dist-storybook/ ./dist/api",
+      "command": "cp -a ../elements/dist-storybook/. ./dist/api",
       "dependencies": [
         "../elements:build:storybook",
         "build"
@@ -107,7 +107,7 @@
       ]
     },
     "build": {
-      "command": "mkdir -p dist/demos && mkdir -p dist/api && cp -a ./index.html dist/ && cp -a ./robots.txt dist/ && cp -a ./assets/. dist/assets/",
+      "command": "mkdir -p dist/demos && mkdir -p dist/api && cp -a ./index.html dist/ && cp -a ./robots.txt dist/",
       "files": [
         "index.html",
         "robots.txt"
@@ -118,7 +118,7 @@
       ]
     },
     "preview": {
-      "command": "cd dist && pnpm exec vite preview"
+      "command": "cd dist && pnpm exec vite preview --base=elements"
     }
   },
   "dependencies": {
