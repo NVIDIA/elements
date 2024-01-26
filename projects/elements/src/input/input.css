@@ -87,7 +87,7 @@ mlv-icon-button,
   --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
 }
 
-:host([container='flat']) & [input] {
+:host([container='flat']) [input] {
   background: inherit;
 }
 
