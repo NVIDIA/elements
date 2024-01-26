@@ -1,3 +1,10 @@
+## [0.21.3](https://github.com/NVIDIA/elements/compare/v0.21.2...v0.21.3) (2024-01-26)
+
+
+### Bug Fixes
+
+* **elements:** flat control styles ([d52b4c0](https://github.com/NVIDIA/elements/commit/d52b4c0ff14bfde72a3cc636c72658637b8db43c))
+
 ## [0.21.2](https://github.com/NVIDIA/elements/compare/v0.21.1...v0.21.2) (2024-01-17)
 
 
