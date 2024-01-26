@@ -89,14 +89,14 @@ module.exports = {
             npmPublish: true,
             pkgRoot: './projects/elements-react'
           },
-          // elements_elements: {
-          //   npmPublish: true,
-          //   pkgRoot: './projects/elements'
-          // },
-          // elements_react: {
-          //   npmPublish: true,
-          //   pkgRoot: './projects/elements-react'
-          // }
+          elements_elements: {
+            npmPublish: true,
+            pkgRoot: './projects/elements'
+          },
+          elements_react: {
+            npmPublish: true,
+            pkgRoot: './projects/elements-react'
+          }
         }
       }
     ]
