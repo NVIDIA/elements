@@ -1,6 +1,6 @@
 :host {
   --scroll-height: 25vh;
-  --_input-background: var(--nve-sys-interaction-field-background);
+  --_input-background: var(--background);
   contain: initial;
 }
 
@@ -56,7 +56,7 @@
 }
 
 nve-tag {
-  --background: color-mix(in oklab, var(--color) 15%, var(--nve-sys-interaction-field-background));
+  --background: color-mix(in oklab, var(--color) 15%, var(--_input-background));
   --padding: var(--nve-ref-size-100) var(--nve-ref-size-200);
   --cursor: pointer !important;
 }
