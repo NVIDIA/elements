@@ -87,7 +87,7 @@ nve-icon-button,
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
 }
 
-:host([container='flat']) & [input] {
+:host([container='flat']) [input] {
   background: inherit;
 }
 
