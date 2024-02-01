@@ -4,6 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "description": "",
+  "packageManager": "pnpm@8.15.1",
+  "engines": {
+    "node": "20.11.0"
+  },
   "scripts": {
     "ci": "wireit",
     "ci:nocache": "pnpm run clean && pnpm i && pnpm run ci",
@@ -11,13 +15,10 @@
     "format:fix": "wireit",
     "clean": "git clean -dfX",
     "playwright": "wireit",
-    "prepare": "husky install",
+    "prepare": "wireit",
     "release": "semantic-release",
-    "commitlint": "commitlint --edit"
-  },
-  "engines": {
-    "node": "20.10.0",
-    "pnpm": ">=8.13.1"
+    "commitlint": "commitlint --edit",
+    "pnpm:devPreinstall": "! test -n \"$CI\" || pnpm config set store-dir .pnpm-store"
   },
   "devDependencies": {
     "@amanda-mitchell/semantic-release-npm-multiple": "3.9.0",
@@ -74,9 +75,21 @@
       "command": "prettier --config prettier.config.js --write ."
     },
     "playwright": {
-      "command": "pnpm exec playwright install chromium --with-deps chromium",
+      "command": "test -n \"$CI\" || pnpm exec playwright install chromium --with-deps chromium",
       "output": [],
       "files": []
+    },
+    "husky": {
+      "command": "test -n \"$CI\" || husky install",
+      "output": [],
+      "files": []
+    },
+    "prepare": {
+      "command": "echo 'preparing repo...'",
+      "dependencies": [
+        "playwright",
+        "husky"
+      ]
     }
   }
 }

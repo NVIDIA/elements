@@ -426,9 +426,6 @@
       ],
       "output": [
         "src/icon/icons.ts"
-      ],
-      "dependencies": [
-        "../../:playwright"
       ]
     },
     "build:manifest": {
@@ -514,7 +511,6 @@
       ],
       "output": [],
       "dependencies": [
-        "../../:playwright",
         "build"
       ],
       "env": {
@@ -536,7 +532,6 @@
         "coverage/unit/**"
       ],
       "dependencies": [
-        "../../:playwright",
         "test",
         "build"
       ],
@@ -573,7 +568,6 @@
         ".lighthouse/dist"
       ],
       "dependencies": [
-        "../../:playwright",
         "test",
         "build"
       ],
@@ -615,7 +609,6 @@
         "coverage/axe/**"
       ],
       "dependencies": [
-        "../../:playwright",
         "test",
         "build"
       ],
