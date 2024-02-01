@@ -4,6 +4,7 @@ import { Dialog } from '@elements/elements/dialog';
 import '@elements/elements/card/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/dialog/define.js';
+import '@elements/elements/accordion/define.js';
 
 export default {
   title: 'Elements/Dialog/Examples',
@@ -59,6 +60,14 @@ export const BehaviorTrigger = {
 <nve-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
   <h3 nve-text="heading">Title</h3>
   <p nve-text="body">some text content in a closable dialog</p>
+
+  <nve-accordion behavior-expand>
+    <nve-accordion-header>
+      <div slot="title">Heading</div>
+    </nve-accordion-header>
+
+    <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+  </nve-accordion>
 </nve-dialog>
   `
 };
