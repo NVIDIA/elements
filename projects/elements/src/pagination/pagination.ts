@@ -1,6 +1,15 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, formatStandardNumber, I18nController, keyNavigationList, KeynavListConfig, useStyles } from '@elements/elements/internal';
+import {
+  attachInternals,
+  formatStandardNumber,
+  I18nController,
+  keyNavigationList,
+  KeynavListConfig,
+  useStyles
+} from '@elements/elements/internal';
+import { IconButton } from '@elements/elements/icon-button';
+import { Select } from '@elements/elements/select';
 import styles from './pagination.css?inline';
 
 /**
@@ -72,6 +81,8 @@ export class Pagination extends LitElement {
   };
 
   static elementDefinitions = {
+    'mlv-icon-button': IconButton,
+    'mlv-select': Select
   };
 
   /** @private */
@@ -79,18 +90,20 @@ export class Pagination extends LitElement {
     return {
       items: this.shadowRoot.querySelectorAll<HTMLElement>('mlv-icon-button, input, select'),
       layout: 'horizontal'
-    }
+    };
   }
 
   /** @private */
   declare _internals: ElementInternals;
 
   get #currentPage() {
-    return ((this.value - 1) * this.step) + this.step;
+    return (this.value - 1) * this.step + this.step;
   }
 
   get #selectLabel() {
-    return `${formatStandardNumber(Math.max(1, (this.value - 1) * this.step))}-${formatStandardNumber(((this.value - 1) * this.step) + this.step)}`;
+    return `${formatStandardNumber(Math.max(1, (this.value - 1) * this.step))}-${formatStandardNumber(
+      (this.value - 1) * this.step + this.step
+    )}`;
   }
 
   get #label() {
@@ -98,35 +111,70 @@ export class Pagination extends LitElement {
   }
 
   get #previousButton() {
-    return html`<mlv-icon-button @click=${() => this.#setValue(this.value - 1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.previous} interaction="flat" icon-name="chevron" direction="left"></mlv-icon-button>`;
+    return html`<mlv-icon-button
+      @click=${() => this.#setValue(this.value - 1)}
+      .disabled=${this.disabled || this.#currentPage <= this.step}
+      .ariaLabel=${this.i18n.previous}
+      interaction="flat"
+      icon-name="chevron"
+      direction="left"
+    ></mlv-icon-button>`;
   }
 
   get #nextButton() {
-    return html`<mlv-icon-button @click=${() => this.#setValue(this.value + 1)} .disabled=${this.disabled || this.#currentPage >= this.items} .ariaLabel=${this.i18n.next} interaction="flat" icon-name="chevron" direction="right"></mlv-icon-button>`;
+    return html`<mlv-icon-button
+      @click=${() => this.#setValue(this.value + 1)}
+      .disabled=${this.disabled || this.#currentPage >= this.items}
+      .ariaLabel=${this.i18n.next}
+      interaction="flat"
+      icon-name="chevron"
+      direction="right"
+    ></mlv-icon-button>`;
   }
 
   get #startButton() {
-    return html`<mlv-icon-button @click=${() => this.#setValue(1)} .disabled=${this.disabled || this.#currentPage <= this.step} .ariaLabel=${this.i18n.start} interaction="flat" icon-name="arrow-stop" direction="left"></mlv-icon-button>`;
+    return html`<mlv-icon-button
+      @click=${() => this.#setValue(1)}
+      .disabled=${this.disabled || this.#currentPage <= this.step}
+      .ariaLabel=${this.i18n.start}
+      interaction="flat"
+      icon-name="arrow-stop"
+      direction="left"
+    ></mlv-icon-button>`;
   }
 
   get #endButton() {
-    return html`<mlv-icon-button @click=${() => this.#setValue(this.items / this.step)} .disabled=${this.disabled || (((this.value - 1) * this.step) + this.step) >= this.items} .ariaLabel=${this.i18n.end} interaction="flat" icon-name="arrow-stop" direction="right"></mlv-icon-button>`;
+    return html`<mlv-icon-button
+      @click=${() => this.#setValue(this.items / this.step)}
+      .disabled=${this.disabled || (this.value - 1) * this.step + this.step >= this.items}
+      .ariaLabel=${this.i18n.end}
+      interaction="flat"
+      icon-name="arrow-stop"
+      direction="right"
+    ></mlv-icon-button>`;
   }
 
   #resizeObserver: ResizeObserver;
 
   get #select() {
-    return this.disableStep ? html`<label>${this.#selectLabel}&nbsp;</label>` : html`
-    <mlv-select .container=${this.container}>
-      <select .ariaLabel=${this.i18n.currentPage} @change=${e => this.#setStep(parseInt(e.target.value, 10))} value=${this.step} .disabled=${this.disabled || this.disableStep}>
-        <option ?selected=${this.step === 10} value="10">10</option>
-        <option ?selected=${this.step === 20} value="20">20</option>
-        <option ?selected=${this.step === 50} value="50">50</option>
-        <option ?selected=${this.step === 100} value="100">100</option>
-      </select>
-      <div class="select-label">${this.#selectLabel}</div>
-    </mlv-select>
-    `;
+    return this.disableStep
+      ? html`<label>${this.#selectLabel}&nbsp;</label>`
+      : html`
+          <mlv-select .container=${this.container}>
+            <select
+              .ariaLabel=${this.i18n.currentPage}
+              @change=${(e) => this.#setStep(parseInt(e.target.value, 10))}
+              value=${this.step}
+              .disabled=${this.disabled || this.disableStep}
+            >
+              <option ?selected=${this.step === 10} value="10">10</option>
+              <option ?selected=${this.step === 20} value="20">20</option>
+              <option ?selected=${this.step === 50} value="50">50</option>
+              <option ?selected=${this.step === 100} value="100">100</option>
+            </select>
+            <div class="select-label">${this.#selectLabel}</div>
+          </mlv-select>
+        `;
   }
 
   render() {
@@ -134,19 +182,10 @@ export class Pagination extends LitElement {
       <div internal-host role="presentation">
         ${this.skippable
           ? html`
-            ${this.#startButton}
-            ${this.#previousButton}
-            ${this.#select}
-            ${this.#label}
-            ${this.#nextButton}
-            ${this.#endButton}
-          `
-          : html`
-            ${this.#select}
-            ${this.#label}
-            ${this.#previousButton}
-            ${this.#nextButton}
-        `}
+              ${this.#startButton} ${this.#previousButton} ${this.#select} ${this.#label} ${this.#nextButton}
+              ${this.#endButton}
+            `
+          : html` ${this.#select} ${this.#label} ${this.#previousButton} ${this.#nextButton} `}
       </div>
     `;
   }
@@ -170,7 +209,9 @@ export class Pagination extends LitElement {
     const label = this.shadowRoot.querySelector('.select-label');
     const select = this.shadowRoot.querySelector('select');
     if (label && select) {
-      this.#resizeObserver = new ResizeObserver(entries => select.style.minWidth = `${entries[0].contentRect.width + 36}px`);
+      this.#resizeObserver = new ResizeObserver(
+        (entries) => (select.style.minWidth = `${entries[0].contentRect.width + 36}px`)
+      );
       this.#resizeObserver.observe(label);
     }
   }
