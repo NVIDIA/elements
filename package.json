@@ -22,9 +22,9 @@
   },
   "devDependencies": {
     "@amanda-mitchell/semantic-release-npm-multiple": "3.9.0",
-    "@semantic-release/changelog": "6.0.3",
     "@commitlint/cli": "18.4.3",
     "@commitlint/config-conventional": "18.4.3",
+    "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "11.1.0",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/gitlab": "12.1.1",
@@ -34,6 +34,7 @@
     "@types/node": "20.11.6",
     "commitlint": "18.4.3",
     "husky": "8.0.3",
+    "lint-staged": "15.2.1",
     "playwright": "1.40.1",
     "prettier": "3.1.1",
     "semantic-release": "22.0.12",
