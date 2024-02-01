@@ -1,13 +1,21 @@
 import { Meta, Markdown } from '@storybook/addon-docs';
-import '@elements/elements/alert/define.js';
-import '@elements/elements/grid/define.js';
+import '@elements/elements/tag/define.js';
+import '@elements/elements/divider/define.js';
 import changelog from '../../../CHANGELOG.md?raw';
 
 <Meta title="About/Changelog" parameters={{ badges: [] }} />
 
-<br />
 # Changelog
-<br />
+
+<div>
+  <h2 nve-text="header">Artifactory Packages</h2>
+  <div nve-layout="row gap:xs">
+    <nve-button style={{'--text-transform': 'none'}} size="sm"><a href="https://registry.npmjs.org">@elements/elements</a></nve-button>
+    <nve-button style={{'--text-transform': 'none'}} size="sm"><a href="https://registry.npmjs.org">@elements/elements-react</a></nve-button>
+  </div>
+</div>
+
+<nve-divider></nve-divider>
 
 <Markdown>{changelog}</Markdown>
 
