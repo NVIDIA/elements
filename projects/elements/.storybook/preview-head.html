@@ -136,6 +136,25 @@
     padding-bottom: 0 !important;
   }
 
+  .sbdocs h1[id*='gitlab'],
+  .sbdocs h2[id*='gitlab'],
+  .sbdocs h3[id*='gitlab'],
+  .sbdocs h3[id*='bug-fixes'] {
+    margin: 0 !important;
+  }
+
+  .sbdocs:has([id*='gitlab']) h1 {
+    margin-bottom: 24px !important;
+  }
+
+  .sbdocs:has([id*='gitlab']) ul {
+    margin: 0 0 48px 0 !important;
+  }
+
+  .sbdocs:has([id*='gitlab']) br {
+    display: none !important;
+  }
+
   .sbdocs a {
     font-family: var(--nve-ref-font-family) !important;
   }
