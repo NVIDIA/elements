@@ -33,43 +33,45 @@ class TypePopoverControllerTestElement extends LitElement {
 
   typePopoverController = new TypePopoverController<TypePopoverControllerTestElement>(this);
 
-  static styles = [css`
-    :host {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+  static styles = [
+    css`
+      :host {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
 
-    dialog {
-      border: 1px solid #ccc;
-      padding: 18px;
-      min-width: 80px;
-      text-align: center;
-      background: #fff;
-      color: #2d2d2d;
-      overflow: visible;
-      position: fixed;
-      margin: 0;
-      z-index: 9999;
-    }
+      dialog {
+        border: 1px solid #ccc;
+        padding: 18px;
+        min-width: 80px;
+        text-align: center;
+        background: #fff;
+        color: #2d2d2d;
+        overflow: visible;
+        position: fixed;
+        margin: 0;
+        z-index: 9999;
+      }
 
-    dialog::backdrop {
-      background: #00000082;
-    }
+      dialog::backdrop {
+        background: #00000082;
+      }
 
-    .arrow {
-      width: 18px;
-      height: 18px;
-      background: #fff;
-      position: absolute;
-    }
+      .arrow {
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        position: absolute;
+      }
 
-    :host(:not([anchor])) .arrow,
-    :host([anchor*='body']) .arrow,
-    :host([position*='center']) .arrow {
-      display: none;
-    }
-  `];
+      :host(:not([anchor])) .arrow,
+      :host([anchor*='body']) .arrow,
+      :host([position*='center']) .arrow {
+        display: none;
+      }
+    `
+  ];
 
   render() {
     return html`
@@ -90,8 +92,12 @@ describe('type-popover.controller', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <nve-button id="btn">anchor</nve-button>
-    <type-popover-controller-test-element .anchor=${'btn'} .trigger=${'btn'} hidden></type-popover-controller-test-element>
+      <nve-button id="btn">anchor</nve-button>
+      <type-popover-controller-test-element
+        .anchor=${'btn'}
+        .trigger=${'btn'}
+        hidden
+      ></type-popover-controller-test-element>
     `);
     element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
     button = fixture.querySelector('nve-button');
@@ -155,12 +161,14 @@ describe('type-popover.controller', () => {
     await elementIsStable(element);
 
     let events = 0;
-    untilEvent(element, 'close').then(() => events++).catch(e => console.log(e));
+    untilEvent(element, 'close')
+      .then(() => events++)
+      .catch((e) => console.log(e));
 
     element.hidden = true;
     await elementIsStable(element);
-    
-    await new Promise(r => setTimeout(() => r(null), 0));
+
+    await new Promise((r) => setTimeout(() => r(null), 0));
     expect(events).toBe(0);
   });
 
@@ -182,10 +190,12 @@ describe('type-popover.controller', () => {
     await elementIsStable(element);
 
     let events = 0;
-    untilEvent(element, 'close').then(() => events++).catch(e => console.log(e));
+    untilEvent(element, 'close')
+      .then(() => events++)
+      .catch((e) => console.log(e));
 
     emulateClick(document.body);
-    await new Promise(r => setTimeout(() => r(null), 0));
+    await new Promise((r) => setTimeout(() => r(null), 0));
     expect(events).toBe(0);
   });
 
@@ -200,15 +210,20 @@ describe('type-popover.controller', () => {
 describe('type-popover.controller behavior-trigger', () => {
   let element: TypePopoverControllerTestElement;
   let button: Button;
+  let dialog: HTMLDialogElement;
   let fixture: HTMLElement;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <nve-button id="btn">anchor</nve-button>
-    <type-popover-controller-test-element behavior-trigger trigger="btn" hidden></type-popover-controller-test-element>
+      <nve-button id="btn">anchor</nve-button>
+      <type-popover-controller-test-element behavior-trigger trigger="btn" hidden
+        ><div></div>
+        div></type-popover-controller-test-element
+      >
     `);
     element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
     button = fixture.querySelector('nve-button');
+    dialog = element.shadowRoot.querySelector('dialog');
     await element.updateComplete;
     await button.updateComplete;
   });
@@ -240,5 +255,25 @@ describe('type-popover.controller behavior-trigger', () => {
     element.typePopoverController.close();
     await elementIsStable(element);
     expect(element.hidden).toBe(true);
+  });
+
+  it('should NOT trigger close if a close event fires from a slotted child element', async () => {
+    element.hidden = false;
+    await elementIsStable(element);
+    const event = untilEvent(element, 'close');
+    element.querySelector('div').dispatchEvent(new Event('close', { bubbles: true }));
+    await event;
+    await elementIsStable(element);
+    expect(element.hidden).toBe(false);
+  });
+
+  it('should NOT trigger close if a cancel event fires from a slotted child element', async () => {
+    element.hidden = false;
+    await elementIsStable(element);
+    const event = untilEvent(element, 'cancel');
+    element.querySelector('div').dispatchEvent(new Event('cancel', { bubbles: true }));
+    await event;
+    await elementIsStable(element);
+    expect(element.hidden).toBe(false);
   });
 });
