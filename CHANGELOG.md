@@ -1,3 +1,10 @@
+## [0.21.4](https://github.com/NVIDIA/elements/compare/v0.21.3...v0.21.4) (2024-02-01)
+
+
+### Bug Fixes
+
+* **elements:** select disabled state ([dc5b8af](https://github.com/NVIDIA/elements/commit/dc5b8af19ceb3507c32973a2e32e85db6720e0a8)), closes [#7](https://github.com/NVIDIA/elements/issues/7)
+
 ## [0.21.3](https://github.com/NVIDIA/elements/compare/v0.21.2...v0.21.3) (2024-01-26)
 
 
