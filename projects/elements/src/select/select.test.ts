@@ -227,4 +227,30 @@ describe('nve-select', () => {
     await elementIsStable(element);
     expect(element.matches(':--size')).toBe(true);
   });
+
+  it('should mark menu items as disabled when coresponding select option is disabled', async () => {
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('nve-menu-item')[0].disabled).toBe(false);
+    expect(element.shadowRoot.querySelectorAll('nve-menu-item')[1].disabled).toBe(false);
+    
+    select.options[0].disabled = true;
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('nve-menu-item')[0].disabled).toBe(true);
+    expect(element.shadowRoot.querySelectorAll('nve-menu-item')[1].disabled).toBe(false);
+  });
+
+  it('should mark menu items as hidden when coresponding select option is hidden', async () => {
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('nve-menu-item')[0].hidden).toBe(false);
+    expect(element.shadowRoot.querySelectorAll('nve-menu-item')[1].hidden).toBe(false);
+    
+    select.options[0].hidden = true;
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll('nve-menu-item')[0].hidden).toBe(true);
+    expect(element.shadowRoot.querySelectorAll('nve-menu-item')[1].hidden).toBe(false);
+  });
 });
