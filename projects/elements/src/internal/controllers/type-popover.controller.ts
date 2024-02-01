@@ -1,6 +1,13 @@
 import { ReactiveController, ReactiveElement } from 'lit';
 import { clickOutsideElementBounds, getAttributeChanges, getFlatDOMTree } from '../utils/dom.js';
-import { computePopoverPosition, getPopoverCustomCSSProperites, PopoverConfig, popoverRenderUpdate, setArrowStyles, setPopoverStyles } from './type-popover.utils.js';
+import {
+  computePopoverPosition,
+  getPopoverCustomCSSProperites,
+  PopoverConfig,
+  popoverRenderUpdate,
+  setArrowStyles,
+  setPopoverStyles
+} from './type-popover.utils.js';
 import type { PopoverAlign, PopoverPosition, PopoverType } from '../types/index.js';
 
 export type { Placement, PopoverAlign, PopoverPosition, PopoverType } from '../types/index.js';
@@ -32,7 +39,9 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   get #anchor() {
     const anchor = this.host.anchor ?? this.#trigger;
     if (typeof anchor === 'string' && anchor?.length) {
-      return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === anchor);
+      return getFlatDOMTree(this.host.parentNode)
+        .filter((el) => el?.id !== '')
+        .find((el) => el.id === anchor);
     } else if (anchor && anchor !== globalThis.document.body) {
       return anchor as HTMLElement;
     } else {
@@ -42,7 +51,9 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   get #trigger() {
     const id = typeof this.host.trigger === 'string' ? this.host.trigger : this.host.trigger?.id;
-    return getFlatDOMTree(this.host.parentNode).filter(el => el?.id !== '').find(el => el.id === id);
+    return getFlatDOMTree(this.host.parentNode)
+      .filter((el) => el?.id !== '')
+      .find((el) => el.id === id);
   }
 
   get #config(): PopoverConfig {
@@ -51,8 +62,8 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
       alignment: this.host.alignment,
       popover: this.#popover,
       anchor: this.#anchor,
-      arrow: this.host.popoverArrow,
-    }
+      arrow: this.host.popoverArrow
+    };
   }
 
   get #dismissible() {
@@ -69,10 +80,17 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   async hostConnected() {
     await this.host.updateComplete;
-    this.#dialog?.addEventListener('close', () => this.close());
-    this.#dialog?.addEventListener('cancel', (event) => {
-      event.preventDefault();
-      this.close();
+    this.#dialog?.addEventListener('close', (e) => {
+      if (e.target === this.#dialog) {
+        this.close();
+      }
+    });
+
+    this.#dialog?.addEventListener('cancel', (e) => {
+      if (e.target === this.#dialog) {
+        e.preventDefault();
+        this.close();
+      }
     });
 
     this.#popoverUpdateDisconnect = popoverRenderUpdate(this.#config, async () => await this.#calculatePosition());
@@ -182,7 +200,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
       const config = { ...this.#config, ...getPopoverCustomCSSProperites(this.host) };
       config.arrow?.removeAttribute('style');
       await this.host.updateComplete;
-      await new Promise(r => requestAnimationFrame(r));
+      await new Promise((r) => requestAnimationFrame(r));
 
       if (config.popover && config.position) {
         const position = await computePopoverPosition(config);

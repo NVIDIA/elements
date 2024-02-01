@@ -4,6 +4,7 @@ import { Dialog } from '@elements/elements/dialog';
 import '@elements/elements/card/define.js';
 import '@elements/elements/button/define.js';
 import '@elements/elements/dialog/define.js';
+import '@elements/elements/accordion/define.js';
 
 export default {
   title: 'Elements/Dialog/Examples',
@@ -59,6 +60,14 @@ export const BehaviorTrigger = {
 <mlv-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
   <h3 mlv-text="heading">Title</h3>
   <p mlv-text="body">some text content in a closable dialog</p>
+
+  <mlv-accordion behavior-expand>
+    <mlv-accordion-header>
+      <div slot="title">Heading</div>
+    </mlv-accordion-header>
+
+    <mlv-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </mlv-accordion-content>
+  </mlv-accordion>
 </mlv-dialog>
   `
 };
