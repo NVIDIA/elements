@@ -36,6 +36,10 @@
   text-align: left;
 }
 
+:host(:--selected) {
+  --color: var(--mlv-sys-interaction-selected-color);
+}
+
 :host(:--disabled) [interaction-state] {
   --mlv-sys-interaction-state-ratio: 0;
 }
@@ -43,10 +47,6 @@
 :host(:--disabled) {
   --cursor: not-allowed;
   --color: var(--mlv-sys-interaction-disabled-color);
-}
-
-:host(:--selected) {
-  --color: var(--mlv-sys-interaction-selected-color);
 }
 
 :host(:--hover) {
