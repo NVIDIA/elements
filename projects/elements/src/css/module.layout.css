@@ -1,11 +1,13 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 [nve-layout] {
   outline: var(--nve-debug-layout-outline, initial);
   outline-offset: 1px;
-  
+
   &[hidden] {
     display: none !important;
   }
@@ -22,6 +24,9 @@
   &[nve-layout~='grow'] {
     height: 100%;
     width: 100%;
+    /* https://defensivecss.dev/tip/flexbox-min-content-size/ */
+    min-width: 0;
+    min-height: 0;
   }
 
   /* Horizontal Layout */
@@ -147,14 +152,12 @@
     gap: none;
   }
 
-
   /* Fixed Width Layout Gap Spacing */
   @each $gap-size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
     &[nve-layout~='gap:$(gap-size)'] {
       gap: var(--nve-ref-space-$(gap-size));
     }
   }
-
 
   /* Fixed Width Container Padding */
   @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
@@ -179,8 +182,6 @@
     }
   }
 
-
-
   /* Grid Layouts */
   &[nve-layout~='grid'] {
     display: grid;
@@ -192,7 +193,7 @@
     @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
       [nve-layout~='span:$(num)'],
       &[nve-layout~='span-items:$(num)'] > * {
-        grid-column: span $(num)/span $(num);
+        grid-column: span $(num) / span $(num);
       }
     }
 
