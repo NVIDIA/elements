@@ -268,7 +268,7 @@ export const Pagination = {
 
 export const Scroll = {
   render: () => html`
-<nve-grid style="--scroll-height: 402px">
+<nve-grid style="height: 402px">
   <nve-grid-header>
     ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
   </nve-grid-header>
@@ -278,6 +278,26 @@ export const Scroll = {
     </nve-grid-row>
   `)}
 </nve-grid>
+  `
+};
+
+export const Grow = {
+  render: () => html`
+<section nve-layout="column gap:lg" style="height: 500px; padding: var(--nve-ref-size-100); border: 1px solid var(--nve-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
+  <nve-search>
+    <input type="search" aria-label="search" placeholder="search" />
+  </nve-search>
+  <nve-grid nve-layout="grow">
+    <nve-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    </nve-grid-header>
+    ${getItems(100).map(row => html`
+      <nve-grid-row>
+        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+      </nve-grid-row>
+    `)}
+  </nve-grid>
+</section>
   `
 };
 
