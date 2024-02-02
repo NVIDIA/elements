@@ -75,21 +75,10 @@
       "command": "prettier --config prettier.config.js --write ."
     },
     "playwright": {
-      "command": "test -n \"$CI\" || pnpm exec playwright install chromium --with-deps chromium",
-      "output": [],
-      "files": []
-    },
-    "husky": {
-      "command": "test -n \"$CI\" || husky install",
-      "output": [],
-      "files": []
+      "command": "pnpm exec playwright install chromium --with-deps chromium"
     },
     "prepare": {
-      "command": "echo 'preparing repo...'",
-      "dependencies": [
-        "playwright",
-        "husky"
-      ]
+      "command": "test -n \"$CI\" || (pnpm run playwright | husky install)"
     }
   }
 }
