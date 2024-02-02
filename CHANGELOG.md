@@ -1,3 +1,11 @@
+## [0.21.5](https://github.com/NVIDIA/elements/compare/v0.21.4...v0.21.5) (2024-02-02)
+
+
+### Bug Fixes
+
+* **elements:** pagination element definitions ([3813ba6](https://github.com/NVIDIA/elements/commit/3813ba66f8341ffb5cf604fec913031d1e6b57c7))
+* **elements:** popover close/cancel events ([e6c4c7a](https://github.com/NVIDIA/elements/commit/e6c4c7af4acc36c6eb285269b9e78891c759f628)), closes [#8](https://github.com/NVIDIA/elements/issues/8)
+
 ## [0.21.4](https://github.com/NVIDIA/elements/compare/v0.21.3...v0.21.4) (2024-02-01)
 
 
