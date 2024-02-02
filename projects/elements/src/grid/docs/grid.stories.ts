@@ -268,7 +268,7 @@ export const Pagination = {
 
 export const Scroll = {
   render: () => html`
-<mlv-grid style="--scroll-height: 402px">
+<mlv-grid style="height: 402px">
   <mlv-grid-header>
     ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
   </mlv-grid-header>
@@ -278,6 +278,26 @@ export const Scroll = {
     </mlv-grid-row>
   `)}
 </mlv-grid>
+  `
+};
+
+export const Grow = {
+  render: () => html`
+<section mlv-layout="column gap:lg" style="height: 500px; padding: var(--mlv-ref-size-100); border: 1px solid var(--mlv-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
+  <mlv-search>
+    <input type="search" aria-label="search" placeholder="search" />
+  </mlv-search>
+  <mlv-grid mlv-layout="grow">
+    <mlv-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+    </mlv-grid-header>
+    ${getItems(100).map(row => html`
+      <mlv-grid-row>
+        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+      </mlv-grid-row>
+    `)}
+  </mlv-grid>
+</section>
   `
 };
 
