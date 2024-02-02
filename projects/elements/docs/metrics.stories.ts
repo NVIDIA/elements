@@ -3,7 +3,6 @@ import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import showdown from 'showdown';
 import { define } from '@elements/elements/internal';
-import { VERSION } from '@elements/elements';
 import typography from '@elements/elements/css/module.typography.css?inline';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/alert/define.js';
@@ -19,6 +18,7 @@ import '@elements/elements/search/define.js';
 import '@elements/elements/json-viewer/define.js';
 import '@elements/elements/tabs/define.js';
 import metrics from 'build/metadata.json';
+import { ELEMENTS_VERSION } from '../.storybook/version.js';
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
 const showdownOptions = { simplifiedAutoLink: true };
@@ -33,7 +33,7 @@ function getMinorVersion(value) {
 
 function getVersionBadge(value) {
   const pin = value.replace('^', '').replace('~', '');
-  const currentVersion = getMinorVersion(VERSION);
+  const currentVersion = getMinorVersion(ELEMENTS_VERSION);
   const version = getMinorVersion(pin);
   let status = 'success';
 
@@ -239,7 +239,7 @@ class ElementMetrics extends LitElement {
       <section mlv-layout="column gap:lg">
         <div mlv-layout="row gap:xs align:center full">
           <div mlv-layout="row gap:sm">
-            ${getStatusBadge(element.status, ` ${VERSION}`, '')}
+            ${getStatusBadge(element.status, ` ${ELEMENTS_VERSION}`, '')}
             ${getCoverageStatus(element.tests.coverageTotal, 'coverage: ', '')}
             ${element.lighthouse?.payload ? getPayloadSize(element.lighthouse?.payload, '') : nothing}
             ${getLighthouseScores(element)}
@@ -729,7 +729,7 @@ class MetricDemo extends LitElement {
       <div mlv-layout="column gap:md">
         <div mlv-layout="row gap:md">
           <h1 mlv-text="heading lg">@elements/elements</h1>
-          <mlv-badge status="success">version ${VERSION}</mlv-badge>
+          <mlv-badge status="success">version ${ELEMENTS_VERSION}</mlv-badge>
         </div>
         <p mlv-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
       </div>

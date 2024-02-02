@@ -2,6 +2,7 @@ import { gzipSync } from 'fflate';
 import { html } from 'lit';
 import format from 'html-format';
 import packageFile from '../package.json';
+import { ELEMENTS_VERSION } from './version.js';
 import metrics from 'build/metadata.json';
 
 // const prettier = await import('prettier/esm/standalone.mjs');
@@ -56,7 +57,6 @@ function serialize(data, compress = true) {
 }
 
 function createDefaultFiles(content, storyId) {
-  const ELEMENTS_VERSION = packageFile.version;
   const CDN_MODULES_URL = `https://https://esm.sh`;
 
   return {
