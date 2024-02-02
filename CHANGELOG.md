@@ -1,3 +1,10 @@
+## [0.21.6](https://github.com/NVIDIA/elements/compare/v0.21.5...v0.21.6) (2024-02-02)
+
+
+### Bug Fixes
+
+* **elements:** layout grow collapse ([db0b54e](https://github.com/NVIDIA/elements/commit/db0b54e84d9482bd7eb2cf6eb4e5a1d7eaff8055))
+
 ## [0.21.5](https://github.com/NVIDIA/elements/compare/v0.21.4...v0.21.5) (2024-02-02)
 
 
