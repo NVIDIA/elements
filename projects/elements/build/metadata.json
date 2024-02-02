@@ -1,5 +1,5 @@
 {
-  "created": "2023-12-29T22:24:13.585Z",
+  "created": "2024-02-02T20:04:06.359Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -118,14 +118,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.892,
+            "kb": 18.261,
             "requests": {
               "index.js": {
-                "kb": 20.292,
+                "kb": 17.67,
                 "name": "index.js"
               },
               "caret.svg.js": {
-                "kb": 0.6,
+                "kb": 0.591,
                 "name": "caret.svg.js"
               }
             }
@@ -234,14 +234,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.892,
+            "kb": 18.261,
             "requests": {
               "index.js": {
-                "kb": 20.292,
+                "kb": 17.67,
                 "name": "index.js"
               },
               "caret.svg.js": {
-                "kb": 0.6,
+                "kb": 0.591,
                 "name": "caret.svg.js"
               }
             }
@@ -330,14 +330,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.892,
+            "kb": 18.261,
             "requests": {
               "index.js": {
-                "kb": 20.292,
+                "kb": 17.67,
                 "name": "index.js"
               },
               "caret.svg.js": {
-                "kb": 0.6,
+                "kb": 0.591,
                 "name": "caret.svg.js"
               }
             }
@@ -398,14 +398,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.892,
+            "kb": 18.261,
             "requests": {
               "index.js": {
-                "kb": 20.292,
+                "kb": 17.67,
                 "name": "index.js"
               },
               "caret.svg.js": {
-                "kb": 0.6,
+                "kb": 0.591,
                 "name": "caret.svg.js"
               }
             }
@@ -540,14 +540,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.86,
+            "kb": 18.314,
             "requests": {
-              "index-.js": {
-                "kb": 20.07,
-                "name": "index-.js"
+              "index.js": {
+                "kb": 17.533,
+                "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -655,19 +655,19 @@
         },
         "payload": {
           "javascript": {
-            "kb": 21.693,
+            "kb": 19.137,
             "requests": {
-              "index-Tr.js": {
-                "kb": 20.075,
-                "name": "index-Tr.js"
+              "index.js": {
+                "kb": 17.537,
+                "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               },
-              "cancel.svg-sx.js": {
-                "kb": 0.828,
-                "name": "cancel.svg-sx.js"
+              "cancel.svg.js": {
+                "kb": 0.819,
+                "name": "cancel.svg.js"
               }
             }
           },
@@ -770,14 +770,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.865,
+            "kb": 18.317,
             "requests": {
-              "index-Qz.js": {
-                "kb": 20.075,
-                "name": "index-Qz.js"
+              "index.js": {
+                "kb": 17.536,
+                "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -884,14 +884,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.846,
+            "kb": 18.299,
             "requests": {
               "index.js": {
-                "kb": 20.073,
+                "kb": 17.535,
                 "name": "index.js"
               },
               "person.svg.js": {
-                "kb": 0.773,
+                "kb": 0.764,
                 "name": "person.svg.js"
               }
             }
@@ -1050,14 +1050,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.877,
+            "kb": 15.41,
             "requests": {
               "index.js": {
-                "kb": 17.087,
+                "kb": 14.629,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -1173,14 +1173,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.895,
+            "kb": 15.398,
             "requests": {
               "index.js": {
-                "kb": 17.231,
+                "kb": 14.743,
                 "name": "index.js"
               },
               "chevron.svg.js": {
-                "kb": 0.664,
+                "kb": 0.655,
                 "name": "chevron.svg.js"
               }
             }
@@ -1468,10 +1468,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.17,
+            "kb": 10.105,
             "requests": {
               "index.js": {
-                "kb": 10.17,
+                "kb": 10.105,
                 "name": "index.js"
               }
             }
@@ -1657,10 +1657,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.959,
+            "kb": 9.949,
             "requests": {
               "index.js": {
-                "kb": 9.959,
+                "kb": 9.949,
                 "name": "index.js"
               }
             }
@@ -1806,10 +1806,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.447,
+            "kb": 8.431,
             "requests": {
               "index.js": {
-                "kb": 8.447,
+                "kb": 8.431,
                 "name": "index.js"
               }
             }
@@ -1930,10 +1930,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.447,
+            "kb": 8.431,
             "requests": {
               "index.js": {
-                "kb": 8.447,
+                "kb": 8.431,
                 "name": "index.js"
               }
             }
@@ -1991,10 +1991,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.447,
+            "kb": 8.431,
             "requests": {
               "index.js": {
-                "kb": 8.447,
+                "kb": 8.431,
                 "name": "index.js"
               }
             }
@@ -2070,10 +2070,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.447,
+            "kb": 8.431,
             "requests": {
               "index.js": {
-                "kb": 8.447,
+                "kb": 8.431,
                 "name": "index.js"
               }
             }
@@ -2133,7 +2133,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -2230,10 +2230,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.496,
+            "kb": 21.906,
             "requests": {
               "index.js": {
-                "kb": 24.496,
+                "kb": 21.906,
                 "name": "index.js"
               }
             }
@@ -2330,10 +2330,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.496,
+            "kb": 21.906,
             "requests": {
               "index.js": {
-                "kb": 24.496,
+                "kb": 21.906,
                 "name": "index.js"
               }
             }
@@ -2393,7 +2393,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -2479,14 +2479,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.877,
+            "kb": 23.276,
             "requests": {
-              "index-n.js": {
-                "kb": 24.807,
-                "name": "index-n.js"
+              "index.js": {
+                "kb": 22.215,
+                "name": "index.js"
               },
               "dropper.svg.js": {
-                "kb": 1.07,
+                "kb": 1.061,
                 "name": "dropper.svg.js"
               }
             }
@@ -2550,6 +2550,10 @@
             "description": "Flat container option is used when embeding component within another containing element"
           },
           {
+            "name": "reset",
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
+          },
+          {
             "name": "status",
             "description": "Set current visaul state for control. This overrides any validation states active."
           },
@@ -2568,10 +2572,6 @@
           {
             "name": "i18n",
             "description": "Enables internal string values to be updated for internationalization."
-          },
-          {
-            "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
           }
         ],
         "slots": [
@@ -2582,6 +2582,10 @@
           {
             "description": "slot for icon to be placed before the input",
             "name": "prefix-icon"
+          },
+          {
+            "description": "slot for dropdown footer content",
+            "name": "footer"
           }
         ],
         "attributes": [
@@ -2710,14 +2714,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 40.13,
+            "kb": 37.729,
             "requests": {
               "index.js": {
-                "kb": 39.34,
+                "kb": 36.948,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -2731,7 +2735,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 98.55
+        "coverageTotal": 97.51500000000001
       },
       "stories": [
         {
@@ -2778,6 +2782,16 @@
           "id": "PopoverOverflow",
           "file": "combobox.stories.ts",
           "template": "<nve-combobox style=\"width: 100px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select>\n    <option value=\"really-long-text-option-that-keeps-going\"></option>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </select>\n  <nve-control-message>message</nve-control-message>\n</nve-combobox>\n"
+        },
+        {
+          "id": "Reset",
+          "file": "combobox.stories.ts",
+          "template": "<nve-combobox style=\"width: 500px; --scroll-height: 220px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </select>\n  <nve-icon-button\n    id=\"combobox-reset\"\n    aria-label=\"clear selection\"\n    icon-name=\"cancel\"\n    interaction=\"flat\"\n  ></nve-icon-button>\n  <nve-control-message>message</nve-control-message>\n</nve-combobox>\n<script type=\"module\">\n  document.querySelector(\"#combobox-reset\").addEventListener(\"click\", (e) => e.target.parentElement.reset());\n</script>\n"
+        },
+        {
+          "id": "Footer",
+          "file": "combobox.stories.ts",
+          "template": "<nve-combobox id=\"combobox-select-all\" style=\"width: 500px; --scroll-height: 200px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n    <option value=\"includes\"></option>\n    <option value=\"user\"></option>\n    <option value=\"progress\"></option>\n  </select>\n  <nve-button slot=\"footer\" interaction=\"flat\">action</nve-button>\n  <nve-control-message>message</nve-control-message>\n</nve-combobox>\n"
         },
         {
           "id": "Performance",
@@ -2836,7 +2850,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "slots": [
@@ -2931,14 +2945,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.926,
+            "kb": 22.313,
             "requests": {
               "index.js": {
-                "kb": 24.136,
+                "kb": 21.532,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -2952,7 +2966,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 96.36500000000001
+        "coverageTotal": 96.37
       },
       "stories": [],
       "behavior": "form",
@@ -3017,14 +3031,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.926,
+            "kb": 22.313,
             "requests": {
               "index.js": {
-                "kb": 24.136,
+                "kb": 21.532,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -3117,14 +3131,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.926,
+            "kb": 22.313,
             "requests": {
               "index.js": {
-                "kb": 24.136,
+                "kb": 21.532,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -3184,7 +3198,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -3270,14 +3284,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.563,
+            "kb": 22.955,
             "requests": {
-              "index-IP.js": {
-                "kb": 24.653,
-                "name": "index-IP.js"
+              "index.js": {
+                "kb": 22.055,
+                "name": "index.js"
               },
               "calendar.svg.js": {
-                "kb": 0.91,
+                "kb": 0.9,
                 "name": "calendar.svg.js"
               }
             }
@@ -3373,7 +3387,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -3459,14 +3473,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.567,
+            "kb": 22.956,
             "requests": {
               "index.js": {
-                "kb": 24.657,
+                "kb": 22.056,
                 "name": "index.js"
               },
               "calendar.svg.js": {
-                "kb": 0.91,
+                "kb": 0.9,
                 "name": "calendar.svg.js"
               }
             }
@@ -3711,15 +3725,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.428,
+            "kb": 27.926,
             "requests": {
               "index.js": {
-                "kb": 29.6,
+                "kb": 27.107,
                 "name": "index.js"
               },
-              "cancel.svg-sx.js": {
-                "kb": 0.828,
-                "name": "cancel.svg-sx.js"
+              "cancel.svg.js": {
+                "kb": 0.819,
+                "name": "cancel.svg.js"
               }
             }
           },
@@ -3748,7 +3762,7 @@
         {
           "id": "BehaviorTrigger",
           "file": "dialog.stories.ts",
-          "template": "<nve-button id=\"dialog-btn\">open</nve-button>\n<nve-dialog trigger=\"dialog-btn\" behavior-trigger closable modal hidden>\n  <h3 nve-text=\"heading\">Title</h3>\n  <p nve-text=\"body\">some text content in a closable dialog</p>\n</nve-dialog>\n"
+          "template": "<nve-button id=\"dialog-btn\">open</nve-button>\n<nve-dialog trigger=\"dialog-btn\" behavior-trigger closable modal hidden>\n  <h3 nve-text=\"heading\">Title</h3>\n  <p nve-text=\"body\">some text content in a closable dialog</p>\n\n  <nve-accordion behavior-expand>\n    <nve-accordion-header>\n      <div slot=\"title\">Heading</div>\n    </nve-accordion-header>\n\n    <nve-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </nve-accordion-content>\n  </nve-accordion>\n</nve-dialog>\n"
         },
         {
           "id": "Content",
@@ -3822,15 +3836,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.428,
+            "kb": 27.926,
             "requests": {
               "index.js": {
-                "kb": 29.6,
+                "kb": 27.107,
                 "name": "index.js"
               },
-              "cancel.svg-sx.js": {
-                "kb": 0.828,
-                "name": "cancel.svg-sx.js"
+              "cancel.svg.js": {
+                "kb": 0.819,
+                "name": "cancel.svg.js"
               }
             }
           },
@@ -3882,15 +3896,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.428,
+            "kb": 27.926,
             "requests": {
               "index.js": {
-                "kb": 29.6,
+                "kb": 27.107,
                 "name": "index.js"
               },
-              "cancel.svg-sx.js": {
-                "kb": 0.828,
-                "name": "cancel.svg-sx.js"
+              "cancel.svg.js": {
+                "kb": 0.819,
+                "name": "cancel.svg.js"
               }
             }
           },
@@ -3964,10 +3978,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.023,
+            "kb": 8.011,
             "requests": {
               "index.js": {
-                "kb": 8.023,
+                "kb": 8.011,
                 "name": "index.js"
               }
             }
@@ -4113,10 +4127,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.472,
+            "kb": 8.462,
             "requests": {
               "index.js": {
-                "kb": 8.472,
+                "kb": 8.462,
                 "name": "index.js"
               }
             }
@@ -4386,15 +4400,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.707,
+            "kb": 28.203,
             "requests": {
               "index.js": {
-                "kb": 29.879,
+                "kb": 27.384,
                 "name": "index.js"
               },
-              "cancel.svg-sx.js": {
-                "kb": 0.828,
-                "name": "cancel.svg-sx.js"
+              "cancel.svg.js": {
+                "kb": 0.819,
+                "name": "cancel.svg.js"
               }
             }
           },
@@ -4492,15 +4506,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.707,
+            "kb": 28.203,
             "requests": {
               "index.js": {
-                "kb": 29.879,
+                "kb": 27.384,
                 "name": "index.js"
               },
-              "cancel.svg-sx.js": {
-                "kb": 0.828,
-                "name": "cancel.svg-sx.js"
+              "cancel.svg.js": {
+                "kb": 0.819,
+                "name": "cancel.svg.js"
               }
             }
           },
@@ -4552,15 +4566,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.707,
+            "kb": 28.203,
             "requests": {
               "index.js": {
-                "kb": 29.879,
+                "kb": 27.384,
                 "name": "index.js"
               },
-              "cancel.svg-sx.js": {
-                "kb": 0.828,
-                "name": "cancel.svg-sx.js"
+              "cancel.svg.js": {
+                "kb": 0.819,
+                "name": "cancel.svg.js"
               }
             }
           },
@@ -4612,15 +4626,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.707,
+            "kb": 28.203,
             "requests": {
               "index.js": {
-                "kb": 29.879,
+                "kb": 27.384,
                 "name": "index.js"
               },
-              "cancel.svg-sx.js": {
-                "kb": 0.828,
-                "name": "cancel.svg-sx.js"
+              "cancel.svg.js": {
+                "kb": 0.819,
+                "name": "cancel.svg.js"
               }
             }
           },
@@ -4831,15 +4845,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.444,
+            "kb": 27.937,
             "requests": {
               "index.js": {
-                "kb": 29.616,
+                "kb": 27.118,
                 "name": "index.js"
               },
-              "cancel.svg-sx.js": {
-                "kb": 0.828,
-                "name": "cancel.svg-sx.js"
+              "cancel.svg.js": {
+                "kb": 0.819,
+                "name": "cancel.svg.js"
               }
             }
           },
@@ -4962,7 +4976,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -5048,10 +5062,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.317,
+            "kb": 21.719,
             "requests": {
               "index.js": {
-                "kb": 24.317,
+                "kb": 21.719,
                 "name": "index.js"
               }
             }
@@ -5175,10 +5189,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.322,
+            "kb": 19.804,
             "requests": {
               "index.js": {
-                "kb": 22.322,
+                "kb": 19.804,
                 "name": "index.js"
               }
             }
@@ -5449,10 +5463,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.322,
+            "kb": 19.804,
             "requests": {
               "index.js": {
-                "kb": 22.322,
+                "kb": 19.804,
                 "name": "index.js"
               }
             }
@@ -5585,10 +5599,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.322,
+            "kb": 19.804,
             "requests": {
               "index.js": {
-                "kb": 22.322,
+                "kb": 19.804,
                 "name": "index.js"
               }
             }
@@ -5655,10 +5669,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.322,
+            "kb": 19.804,
             "requests": {
               "index.js": {
-                "kb": 22.322,
+                "kb": 19.804,
                 "name": "index.js"
               }
             }
@@ -5722,10 +5736,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.322,
+            "kb": 19.804,
             "requests": {
               "index.js": {
-                "kb": 22.322,
+                "kb": 19.804,
                 "name": "index.js"
               }
             }
@@ -5786,10 +5800,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.322,
+            "kb": 19.804,
             "requests": {
               "index.js": {
-                "kb": 22.322,
+                "kb": 19.804,
                 "name": "index.js"
               }
             }
@@ -5865,10 +5879,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.322,
+            "kb": 19.804,
             "requests": {
               "index.js": {
-                "kb": 22.322,
+                "kb": 19.804,
                 "name": "index.js"
               }
             }
@@ -5978,14 +5992,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.879,
+            "kb": 13.422,
             "requests": {
               "index.js": {
-                "kb": 15.106,
+                "kb": 12.658,
                 "name": "index.js"
               },
               "person.svg.js": {
-                "kb": 0.773,
+                "kb": 0.764,
                 "name": "person.svg.js"
               }
             }
@@ -6333,10 +6347,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.069,
+            "kb": 15.442,
             "requests": {
               "index.js": {
-                "kb": 18.069,
+                "kb": 15.442,
                 "name": "index.js"
               }
             }
@@ -6466,7 +6480,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -6592,11 +6606,11 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.924,
+            "kb": 22.295,
             "requests": {
-              "index-Y.js": {
-                "kb": 24.924,
-                "name": "index-Y.js"
+              "index.js": {
+                "kb": 22.295,
+                "name": "index.js"
               }
             }
           },
@@ -6655,14 +6669,6 @@
         ],
         "attributes": [
           {
-            "name": "type",
-            "type": {
-              "text": "'filter' | default"
-            },
-            "deprecated": "(0.19.0) use `nve-progressive-filter-chip` instead",
-            "fieldName": "type"
-          },
-          {
             "name": "layout",
             "type": {
               "text": "'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline'"
@@ -6685,11 +6691,11 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.924,
+            "kb": 22.295,
             "requests": {
-              "index-Y.js": {
-                "kb": 24.924,
-                "name": "index-Y.js"
+              "index.js": {
+                "kb": 22.295,
+                "name": "index.js"
               }
             }
           },
@@ -6709,11 +6715,6 @@
           "id": "InputGroup",
           "file": "input-groups.stories.ts",
           "template": "<nve-input-group>\n  <label>domain</label>\n  <nve-select style=\"width: 130px\">\n    <select aria-label=\"protocol\">\n      <option>https://</option>\n      <option>http://</option>\n    </select>\n  </nve-select>\n  <nve-input>\n    <input placeholder=\"example\" type=\"url\" aria-label=\"host\" />\n    <nve-button interaction=\"flat\" readonly=\"\">.com</nve-button>\n  </nve-input>\n  <nve-control-message>host: 123456</nve-control-message>\n</nve-input-group>\n"
-        },
-        {
-          "id": "FilterGroupButtons",
-          "file": "input-groups.stories.ts",
-          "template": "<div nve-layout=\"row align:vertical-center\">\n  <nve-input-group type=\"filter\">\n    <nve-button style=\"width: 65px\">GPS</nve-button>\n    <nve-select style=\"width: 75px\">\n      <select>\n        <option value=\"1\">contains</option>\n        <option value=\"2\">excludes</option>\n      </select>\n    </nve-select>\n    <nve-button style=\"width: 190px\" id=\"map-btn\">37.3706254,-121.9671894</nve-button>\n    <nve-icon-button aria-label=\"remove filter\" icon-name=\"cancel\"></nve-icon-button>\n  </nve-input-group>\n  <nve-dropdown anchor=\"map-btn\" trigger=\"map-btn\">\n    <nve-input>\n      <nve-icon-button icon-name=\"location\" readonly></nve-icon-button>\n      <input value=\"37.3706254,-121.9671894\" disabled />\n    </nve-input>\n    <img src=\"images/test-map-2.webp\" width=\"300px\" alt=\"non-interactive demo map\" />\n  </nve-dropdown>\n</div>\n"
         },
         {
           "id": "FilterGroupRange",
@@ -6888,10 +6889,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.076,
+            "kb": 9.067,
             "requests": {
               "index.js": {
-                "kb": 9.076,
+                "kb": 9.067,
                 "name": "index.js"
               }
             }
@@ -6988,11 +6989,11 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.301,
+            "kb": 11.292,
             "requests": {
-              "index-iQyOI2.js": {
-                "kb": 11.301,
-                "name": "index-iQyOI2.js"
+              "index.js": {
+                "kb": 11.292,
+                "name": "index.js"
               }
             }
           },
@@ -7280,11 +7281,11 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.301,
+            "kb": 11.292,
             "requests": {
-              "index-iQyOI2.js": {
-                "kb": 11.301,
-                "name": "index-iQyOI2.js"
+              "index.js": {
+                "kb": 11.292,
+                "name": "index.js"
               }
             }
           },
@@ -7343,7 +7344,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -7429,14 +7430,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.565,
+            "kb": 22.956,
             "requests": {
-              "index-Ic4yY.js": {
-                "kb": 24.655,
-                "name": "index-Ic4yY.js"
+              "index.js": {
+                "kb": 22.056,
+                "name": "index.js"
               },
               "calendar.svg.js": {
-                "kb": 0.91,
+                "kb": 0.9,
                 "name": "calendar.svg.js"
               }
             }
@@ -7685,14 +7686,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.699,
+            "kb": 28.274,
             "requests": {
               "index.js": {
-                "kb": 29.909,
+                "kb": 27.493,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -7822,14 +7823,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.699,
+            "kb": 28.274,
             "requests": {
               "index.js": {
-                "kb": 29.909,
+                "kb": 27.493,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -7888,10 +7889,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.721,
+            "kb": 22.253,
             "requests": {
               "index.js": {
-                "kb": 24.721,
+                "kb": 22.253,
                 "name": "index.js"
               }
             }
@@ -8091,22 +8092,22 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.919,
+            "kb": 40.001,
             "requests": {
               "index.js": {
-                "kb": 40.989,
+                "kb": 38.098,
                 "name": "index.js"
               },
               "caret.svg.js": {
-                "kb": 0.6,
+                "kb": 0.591,
                 "name": "caret.svg.js"
               },
               "check.svg.js": {
-                "kb": 0.666,
+                "kb": 0.657,
                 "name": "check.svg.js"
               },
               "chevron.svg.js": {
-                "kb": 0.664,
+                "kb": 0.655,
                 "name": "chevron.svg.js"
               }
             }
@@ -8308,14 +8309,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.602,
+            "kb": 17.983,
             "requests": {
               "index.js": {
-                "kb": 19.801,
+                "kb": 17.191,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
-                "kb": 0.801,
+                "kb": 0.792,
                 "name": "double-chevron.svg.js"
               }
             }
@@ -8427,14 +8428,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.602,
+            "kb": 17.983,
             "requests": {
               "index.js": {
-                "kb": 19.801,
+                "kb": 17.191,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
-                "kb": 0.801,
+                "kb": 0.792,
                 "name": "double-chevron.svg.js"
               }
             }
@@ -8498,14 +8499,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.602,
+            "kb": 17.983,
             "requests": {
               "index.js": {
-                "kb": 19.801,
+                "kb": 17.191,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
-                "kb": 0.801,
+                "kb": 0.792,
                 "name": "double-chevron.svg.js"
               }
             }
@@ -8574,14 +8575,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.602,
+            "kb": 17.983,
             "requests": {
               "index.js": {
-                "kb": 19.801,
+                "kb": 17.191,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
-                "kb": 0.801,
+                "kb": 0.792,
                 "name": "double-chevron.svg.js"
               }
             }
@@ -8641,7 +8642,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -8727,14 +8728,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.676,
+            "kb": 23.075,
             "requests": {
               "index.js": {
-                "kb": 24.719,
+                "kb": 22.127,
                 "name": "index.js"
               },
               "eye.svg.js": {
-                "kb": 0.957,
+                "kb": 0.948,
                 "name": "eye.svg.js"
               }
             }
@@ -8839,10 +8840,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.57,
+            "kb": 8.562,
             "requests": {
               "index.js": {
-                "kb": 8.57,
+                "kb": 8.562,
                 "name": "index.js"
               }
             }
@@ -8993,11 +8994,11 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.693,
+            "kb": 14.255,
             "requests": {
-              "index-6l6y6gl-.js": {
-                "kb": 16.693,
-                "name": "index-6l6y6gl-.js"
+              "index.js": {
+                "kb": 14.255,
+                "name": "index.js"
               }
             }
           },
@@ -9131,22 +9132,22 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.619,
+            "kb": 40.079,
             "requests": {
               "index.js": {
-                "kb": 40.443,
+                "kb": 37.931,
                 "name": "index.js"
               },
               "caret.svg.js": {
-                "kb": 0.6,
+                "kb": 0.591,
                 "name": "caret.svg.js"
               },
               "check.svg.js": {
-                "kb": 0.666,
+                "kb": 0.657,
                 "name": "check.svg.js"
               },
               "calendar.svg.js": {
-                "kb": 0.91,
+                "kb": 0.9,
                 "name": "calendar.svg.js"
               }
             }
@@ -9237,7 +9238,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -9334,10 +9335,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.407,
+            "kb": 21.806,
             "requests": {
               "index.js": {
-                "kb": 24.407,
+                "kb": 21.806,
                 "name": "index.js"
               }
             }
@@ -9403,10 +9404,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.407,
+            "kb": 21.806,
             "requests": {
               "index.js": {
-                "kb": 24.407,
+                "kb": 21.806,
                 "name": "index.js"
               }
             }
@@ -9466,7 +9467,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -9552,10 +9553,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.6,
+            "kb": 22.006,
             "requests": {
               "index.js": {
-                "kb": 24.6,
+                "kb": 22.006,
                 "name": "index.js"
               }
             }
@@ -9649,7 +9650,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -9752,14 +9753,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.412,
+            "kb": 22.808,
             "requests": {
               "index.js": {
-                "kb": 24.707,
+                "kb": 22.112,
                 "name": "index.js"
               },
               "search.svg.js": {
-                "kb": 0.705,
+                "kb": 0.696,
                 "name": "search.svg.js"
               }
             }
@@ -9849,7 +9850,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -9963,18 +9964,18 @@
         },
         "payload": {
           "javascript": {
-            "kb": 40.369,
+            "kb": 37.857,
             "requests": {
               "index.js": {
-                "kb": 39.103,
+                "kb": 36.609,
                 "name": "index.js"
               },
               "caret.svg.js": {
-                "kb": 0.6,
+                "kb": 0.591,
                 "name": "caret.svg.js"
               },
               "check.svg.js": {
-                "kb": 0.666,
+                "kb": 0.657,
                 "name": "check.svg.js"
               }
             }
@@ -10050,6 +10051,16 @@
           "id": "FitContent",
           "file": "select.stories.ts",
           "template": "<div nve-layout=\"column gap:lg\">\n  <nve-select fit-content>\n    <label>label</label>\n    <select>\n      <option value=\"1\">Option 1</option>\n      <option value=\"2\">Option 1234</option>\n      <option value=\"3\">Option 1234567809</option>\n    </select>\n    <nve-control-message>message</nve-control-message>\n  </nve-select>\n\n  <nve-select fit-content layout=\"horizontal\">\n    <label>label</label>\n    <select>\n      <option value=\"1\">Option 1</option>\n      <option value=\"2\">Option 1234</option>\n      <option value=\"3\">Option 1234567809</option>\n    </select>\n    <nve-control-message>message</nve-control-message>\n  </nve-select>\n</div>\n"
+        },
+        {
+          "id": "Placeholder",
+          "file": "select.stories.ts",
+          "template": "<nve-select>\n  <label>label</label>\n  <select>\n    <option value=\"\" selected disabled hidden>Select Option</option>\n    <option value=\"1\">Option 1</option>\n    <option value=\"2\">Option 2</option>\n    <option value=\"3\">Option 3</option>\n  </select>\n  <nve-control-message>message</nve-control-message>\n</nve-select>\n"
+        },
+        {
+          "id": "Disabled",
+          "file": "select.stories.ts",
+          "template": "<nve-select>\n  <label>label</label>\n  <select>\n    <option value=\"1\">Option 1</option>\n    <option value=\"2\" disabled>Option 2</option>\n    <option value=\"3\">Option 3</option>\n  </select>\n  <nve-control-message>message</nve-control-message>\n</nve-select>\n"
         },
         {
           "id": "Performance",
@@ -10281,14 +10292,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.332,
+            "kb": 15.839,
             "requests": {
               "index.js": {
-                "kb": 17.424,
+                "kb": 14.94,
                 "name": "index.js"
               },
               "sort-ascending.svg.js": {
-                "kb": 0.908,
+                "kb": 0.899,
                 "name": "sort-ascending.svg.js"
               }
             }
@@ -10364,7 +10375,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -10479,10 +10490,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.5,
+            "kb": 21.899,
             "requests": {
               "index.js": {
-                "kb": 24.5,
+                "kb": 21.899,
                 "name": "index.js"
               }
             }
@@ -10614,10 +10625,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.351,
+            "kb": 11.342,
             "requests": {
               "index.js": {
-                "kb": 11.351,
+                "kb": 11.342,
                 "name": "index.js"
               }
             }
@@ -10903,10 +10914,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.351,
+            "kb": 11.342,
             "requests": {
               "index.js": {
-                "kb": 11.351,
+                "kb": 11.342,
                 "name": "index.js"
               }
             }
@@ -11165,10 +11176,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.994,
+            "kb": 15.514,
             "requests": {
               "index.js": {
-                "kb": 17.994,
+                "kb": 15.514,
                 "name": "index.js"
               }
             }
@@ -11269,7 +11280,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -11384,10 +11395,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 24.355,
+            "kb": 21.757,
             "requests": {
               "index.js": {
-                "kb": 24.355,
+                "kb": 21.757,
                 "name": "index.js"
               }
             }
@@ -11473,7 +11484,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -11559,15 +11570,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.289,
+            "kb": 22.681,
             "requests": {
               "index.js": {
-                "kb": 24.653,
+                "kb": 22.054,
                 "name": "index.js"
               },
-              "clock.svg-_AGm.js": {
-                "kb": 0.636,
-                "name": "clock.svg-_AGm.js"
+              "clock.svg.js": {
+                "kb": 0.627,
+                "name": "clock.svg.js"
               }
             }
           },
@@ -11804,14 +11815,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 30.358,
+            "kb": 27.845,
             "requests": {
               "index.js": {
-                "kb": 29.568,
+                "kb": 27.064,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
-                "kb": 0.79,
+                "kb": 0.781,
                 "name": "information-circle-stroke.svg.js"
               }
             }
@@ -11986,18 +11997,18 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.988,
+            "kb": 16.283,
             "requests": {
-              "index-.js": {
-                "kb": 17.17,
-                "name": "index-.js"
+              "index.js": {
+                "kb": 14.483,
+                "name": "index.js"
               },
               "add.svg.js": {
-                "kb": 0.711,
+                "kb": 0.702,
                 "name": "add.svg.js"
               },
               "delete.svg.js": {
-                "kb": 1.107,
+                "kb": 1.098,
                 "name": "delete.svg.js"
               }
             }
@@ -12352,7 +12363,7 @@
           },
           {
             "name": "reset",
-            "description": "resets control value to initial attribute value and clears any active validation rules"
+            "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
         "attributes": [
@@ -12438,14 +12449,14 @@
         },
         "payload": {
           "javascript": {
-            "kb": 25.563,
+            "kb": 22.954,
             "requests": {
               "index.js": {
-                "kb": 24.653,
+                "kb": 22.054,
                 "name": "index.js"
               },
               "calendar.svg.js": {
-                "kb": 0.91,
+                "kb": 0.9,
                 "name": "calendar.svg.js"
               }
             }
@@ -12724,28 +12735,28 @@
       {
         "file": "internal/controllers/type-popover.controller.ts",
         "lines": {
-          "total": 81,
-          "covered": 72,
+          "total": 88,
+          "covered": 79,
           "skipped": 0,
-          "pct": 88.88
+          "pct": 89.77
         },
         "functions": {
           "total": 25,
-          "covered": 18,
+          "covered": 19,
           "skipped": 0,
-          "pct": 72
+          "pct": 76
         },
         "statements": {
-          "total": 98,
-          "covered": 83,
+          "total": 100,
+          "covered": 85,
           "skipped": 0,
-          "pct": 84.69
+          "pct": 85
         },
         "branches": {
-          "total": 66,
-          "covered": 60,
+          "total": 70,
+          "covered": 63,
           "skipped": 0,
-          "pct": 90.9
+          "pct": 90
         }
       },
       {
@@ -12908,6 +12919,33 @@
           "covered": 53,
           "skipped": 0,
           "pct": 91.37
+        }
+      },
+      {
+        "file": "combobox/combobox.ts",
+        "lines": {
+          "total": 110,
+          "covered": 109,
+          "skipped": 0,
+          "pct": 99.09
+        },
+        "functions": {
+          "total": 33,
+          "covered": 33,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 124,
+          "covered": 123,
+          "skipped": 0,
+          "pct": 99.19
+        },
+        "branches": {
+          "total": 73,
+          "covered": 67,
+          "skipped": 0,
+          "pct": 91.78
         }
       },
       {
@@ -13993,8 +14031,8 @@
       {
         "file": "pagination/pagination.ts",
         "lines": {
-          "total": 54,
-          "covered": 54,
+          "total": 59,
+          "covered": 59,
           "skipped": 0,
           "pct": 100
         },
@@ -15181,8 +15219,8 @@
       {
         "file": "input/input-group.ts",
         "lines": {
-          "total": 9,
-          "covered": 9,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -15193,8 +15231,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 9,
-          "covered": 9,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -15551,9 +15589,9 @@
         },
         "branches": {
           "total": 45,
-          "covered": 41,
+          "covered": 42,
           "skipped": 0,
-          "pct": 91.11
+          "pct": 93.33
         }
       },
       {
@@ -15640,8 +15678,8 @@
       {
         "file": "forms/control/control.ts",
         "lines": {
-          "total": 71,
-          "covered": 71,
+          "total": 72,
+          "covered": 72,
           "skipped": 0,
           "pct": 100
         },
@@ -15652,10 +15690,10 @@
           "pct": 95
         },
         "statements": {
-          "total": 84,
-          "covered": 83,
+          "total": 85,
+          "covered": 84,
           "skipped": 0,
-          "pct": 98.8
+          "pct": 98.82
         },
         "branches": {
           "total": 36,
@@ -16286,33 +16324,6 @@
         }
       },
       {
-        "file": "combobox/combobox.ts",
-        "lines": {
-          "total": 100,
-          "covered": 100,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 31,
-          "covered": 31,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 113,
-          "covered": 113,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 69,
-          "covered": 65,
-          "skipped": 0,
-          "pct": 94.2
-        }
-      },
-      {
         "file": "color/define.ts",
         "lines": {
           "total": 1,
@@ -16910,28 +16921,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 2103,
-        "covered": 2063,
+        "total": 2125,
+        "covered": 2084,
         "skipped": 0,
-        "pct": 98.09
+        "pct": 98.07
       },
       "statements": {
-        "total": 2507,
-        "covered": 2448,
+        "total": 2520,
+        "covered": 2460,
         "skipped": 0,
-        "pct": 97.64
+        "pct": 97.61
       },
       "functions": {
-        "total": 715,
-        "covered": 683,
+        "total": 717,
+        "covered": 686,
         "skipped": 0,
-        "pct": 95.52
+        "pct": 95.67
       },
       "branches": {
-        "total": 1035,
-        "covered": 944,
+        "total": 1043,
+        "covered": 950,
         "skipped": 0,
-        "pct": 91.2
+        "pct": 91.08
       },
       "branchesTrue": {
         "total": 0,
