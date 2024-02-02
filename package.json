@@ -17,8 +17,7 @@
     "playwright": "wireit",
     "prepare": "wireit",
     "release": "semantic-release",
-    "commitlint": "commitlint --edit",
-    "pnpm:devPreinstall": "! test -n \"$CI\" || pnpm config set store-dir .pnpm-store"
+    "commitlint": "commitlint --edit"
   },
   "devDependencies": {
     "@amanda-mitchell/semantic-release-npm-multiple": "3.9.0",
