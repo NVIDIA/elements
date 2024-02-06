@@ -5,4 +5,5 @@
   font-weight: var(--mlv-ref-font-weight-regular);
   font-size: var(--mlv-ref-font-size-200);
   flex-grow: 1;
+  contain: none;
 }
