@@ -20,13 +20,29 @@ module.exports = {
         changelogFile: 'CHANGELOG.md'
       }
     ],
-    '@semantic-release/gitlab',
     [
-      '@semantic-release/git',
+      '@semantic-release/gitlab',
+      {
+        successComment: `🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/api/?path=/docs/about-changelog--docs)`,
+        assets: [
+          {
+            label: '@elements/elements',
+            type: 'package',
+            url: 'https://registry.npmjs.org'
+          },
+          {
+            label: '@elements/elements-react',
+            type: 'package',
+            url: 'https://registry.npmjs.org'
+          }
+        ]
+      }
+    ][
+      ('@semantic-release/git',
       {
         assets: ['CHANGELOG.md'],
         message: 'chore(release): v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
-      }
+      })
     ],
     [
       'semantic-release-replace-plugin',
