@@ -6,11 +6,15 @@
     <title>Elements</title>
     <script type="module">
       if (location.hostname !== 'localhost') {
-        window.location.replace(`https://NVIDIA.github.io/elements/api/${window.location.search}`);
+        window.location.replace(
+          `https://NVIDIA.github.io/elements/api/${window.location.search}`
+        );
+      } else {
+        document.body.hidden = false;
       }
     </script>
   </head>
-  <body>
+  <body hidden>
     <h1>Pages</h1>
     <a href="/elements/api/">API</a>
     <a href="/elements/demos/buildless/">Demos</a>
