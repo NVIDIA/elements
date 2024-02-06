@@ -225,7 +225,7 @@
     }
   },
   "dependencies": {
-    "@floating-ui/dom": "1.5.3",
+    "@floating-ui/dom": "1.6.1",
     "@lit-labs/motion": "^1.0.6",
     "composed-offset-position": "^0.0.4",
     "lit": "^3.1.0",
@@ -542,8 +542,7 @@
     },
     "test:coverage:gitlab": {
       "command": "node ./build/coverage-gitlab.js",
-      "dependencies": [
-      ],
+      "dependencies": [],
       "env": {
         "WIREIT_LOGGER": "simple"
       }
