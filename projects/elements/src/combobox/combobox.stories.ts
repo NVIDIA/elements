@@ -288,7 +288,7 @@ export const Reset = () => {
 
 export const Footer = () => {
   return html`
-  <nve-combobox id="combobox-select-all" style="width: 500px; --scroll-height: 200px">
+  <nve-combobox style="width: 500px; --scroll-height: 200px">
     <label>label</label>
     <input type="search">
     <select multiple>
@@ -305,6 +305,39 @@ export const Footer = () => {
     <nve-button slot="footer" interaction="flat">action</nve-button>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
+  `
+};
+
+export const SelectAll = () => {
+  return html`
+  <nve-combobox id="combobox-select-all" style="width: 500px; --scroll-height: 200px">
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+      <option value="includes"></option>
+      <option value="user"></option>
+      <option value="progress"></option>
+    </select>
+    <div slot="footer" nve-layout="row align:stretch full">
+      <nve-button interaction="flat">Select All</nve-button>
+      <nve-button interaction="flat">Deselect All</nve-button>
+    </div>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  <script type="module">
+    const combobox = document.querySelector('#combobox-select-all');
+    const [selectAll, deselectAll] = Array.from(combobox.querySelectorAll('nve-button'));
+
+    selectAll.addEventListener('click', () => combobox.selectAll());
+    deselectAll.addEventListener('click', () => combobox.reset());
+    combobox.addEventListener('change', e => console.log(e.target.selectedOptions));
+  </script>
   `
 };
 
