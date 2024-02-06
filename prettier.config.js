@@ -3,5 +3,9 @@ export default {
   tabWidth: 2,
   printWidth: 120,
   semi: true,
-  singleQuote: true
+  singleQuote: true,
+  arrowParens: 'avoid',
+  bracketSameLine: true,
+  embeddedLanguageFormatting: 'off',
+  singleAttributePerLine: false
 };
