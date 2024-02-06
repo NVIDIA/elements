@@ -1,7 +1,13 @@
 import { html, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit-html/directives/if-defined.js';
-import { ContainerElement, createLightDismiss, focusElementTimeout, getDisplayValue, useStyles } from '@elements/elements/internal';
+import {
+  ContainerElement,
+  createLightDismiss,
+  focusElementTimeout,
+  getDisplayValue,
+  useStyles
+} from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
 import { Icon } from '@elements/elements/icon';
@@ -52,14 +58,21 @@ export class Combobox extends Control implements ContainerElement {
     'mlv-icon': Icon,
     'mlv-icon-button': IconButton,
     'mlv-tag': Tag
-  }
+  };
 
   get #datalist() {
-    return (this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true })?.find(i => i.tagName === 'DATALIST' || i.tagName === 'SELECT') ?? this.querySelector('datalist, select')) as HTMLSelectElement;
+    return (this.shadowRoot
+      .querySelector('slot')
+      ?.assignedElements({ flatten: true })
+      ?.find(i => i.tagName === 'DATALIST' || i.tagName === 'SELECT') ??
+      this.querySelector('datalist, select')) as HTMLSelectElement;
   }
 
   get #select() {
-    return (this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true })?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement;
+    return (this.shadowRoot
+      .querySelector('slot')
+      ?.assignedElements({ flatten: true })
+      ?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement;
   }
 
   get #options(): HTMLOptionElement[] {
@@ -75,11 +88,11 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   get #input() {
-    return this.shadowRoot.querySelector('[input]')
+    return this.shadowRoot.querySelector('[input]');
   }
 
   get #tags() {
-    return this.shadowRoot.querySelector('.tags')
+    return this.shadowRoot.querySelector('.tags');
   }
 
   get #hasAvailableOptions() {
@@ -93,29 +106,37 @@ export class Combobox extends Control implements ContainerElement {
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
   protected get prefixContent() {
-    return this.#select?.multiple ? html`
+    return this.#select?.multiple
+      ? html`
     <div class="tags-label" aria-hidden="true">${this.#select.selectedOptions.length} ${this.i18n.selected}</div>
     <div class="tags">
-      ${Array.from<HTMLOptionElement>(this.#select.selectedOptions).map(o => html`
-      <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o)}>${getDisplayValue(o)}</mlv-tag>`)}
-    </div>` : html`<slot name="prefix-icon"></slot>`;
+      ${Array.from<HTMLOptionElement>(this.#select.selectedOptions).map(
+        o => html`
+      <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o)}>${getDisplayValue(o)}</mlv-tag>`
+      )}
+    </div>`
+      : html`<slot name="prefix-icon"></slot>`;
   }
 
   protected get suffixContent() {
     const multiple = this.#select?.multiple;
     const options = this.#options;
     return html`
-      <mlv-dropdown .popoverType=${'manual'} @close=${e => e.target.hidden = true} @open=${e => e.target.hidden = false} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
-        <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
-          ${options.filter(o => !o.disabled).map(o => html`
-          <mlv-menu-item .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
-            ${multiple ? html`<mlv-icon name=${o.selected ? 'check' : ''} size="sm"></mlv-icon>` : nothing}
-            ${options.length < 50 ? html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : getDisplayValue(o)}
-          </mlv-menu-item>`)}
-          ${options.filter(o => !o.disabled).length === 0 ? html`<mlv-menu-item .value=${''} disabled>${this.i18n.noResults}</mlv-menu-item>` : nothing}
-        </mlv-menu>
-        <slot name="footer"></slot>
-      </mlv-dropdown>`;
+    <mlv-dropdown .popoverType=${'manual'} @close=${e => (e.target.hidden = true)} @open=${e => (e.target.hidden = false)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
+      <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
+        ${options
+          .filter(o => !o.disabled)
+          .map(
+            o => html`
+        <mlv-menu-item .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
+          ${multiple ? html`<mlv-icon name=${o.selected ? 'check' : ''} size="sm"></mlv-icon>` : nothing}
+          ${options.length < 50 ? html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : getDisplayValue(o)}
+        </mlv-menu-item>`
+          )}
+        ${options.filter(o => !o.disabled).length === 0 ? html`<mlv-menu-item .value=${''} disabled>${this.i18n.noResults}</mlv-menu-item>` : nothing}
+      </mlv-menu>
+      <slot name="footer"></slot>
+    </mlv-dropdown>`;
   }
 
   async firstUpdated(props: PropertyValues<this>) {
@@ -144,6 +165,14 @@ export class Combobox extends Control implements ContainerElement {
     super.reset();
   }
 
+  /** Select all options provided */
+  selectAll() {
+    this.#options.forEach(o => (o.selected = true));
+    this.requestUpdate();
+    this.#select.dispatchEvent(new Event('input', { bubbles: true }));
+    this.#select.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
   #setupSingleSelect() {
     if (this.#select && !this.#select.multiple && !this.input.value) {
       const selected = this.#options.find(o => o.hasAttribute('selected'));
@@ -152,7 +181,7 @@ export class Combobox extends Control implements ContainerElement {
 
     this.input.addEventListener('blur', () => {
       if (this.#select && !this.#select.multiple && !this.#options.find(o => getDisplayValue(o) === this.input.value)) {
-        this.#options.forEach(o => o.selected = false);
+        this.#options.forEach(o => (o.selected = false));
         this.#setInputValue('');
         this.#setSelectValue({ value: '', selected: false });
       }
@@ -183,7 +212,10 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setupLightDismiss() {
-    const options = { element: this.shadowRoot.querySelector('mlv-dropdown')?.shadowRoot.querySelector('dialog'), focusElement: this.input };
+    const options = {
+      element: this.shadowRoot.querySelector('mlv-dropdown')?.shadowRoot.querySelector('dialog'),
+      focusElement: this.input
+    };
     createLightDismiss(options, () => {
       if (!this.#dropdown.hidden) {
         this.#dropdown.close();
@@ -208,7 +240,7 @@ export class Combobox extends Control implements ContainerElement {
     });
   }
 
-  #selectValue(option: { selected?: boolean; label?: string, value?: string; }) {
+  #selectValue(option: { selected?: boolean; label?: string; value?: string }) {
     if (!this.#select?.multiple) {
       this.#setInputValue(getDisplayValue(option));
       this.#dropdown.close();
@@ -251,7 +283,7 @@ export class Combobox extends Control implements ContainerElement {
     this.input.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
-  #setSelectValue(option: { value?: string; selected?: boolean; }) {
+  #setSelectValue(option: { value?: string; selected?: boolean }) {
     [...this.#options, { value: '', selected: null }].find(o => o.value === option.value).selected = option.selected;
 
     if (!this.#select.multiple) {
@@ -264,7 +296,7 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupOverflowListener() {
     if (this.#select?.multiple) {
-      const observer = new ResizeObserver((entries) => this.#updateMultipleOverflow(entries[0].contentRect.width));
+      const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0].contentRect.width));
       this.#observers.push(observer);
       observer.observe(this.#tags);
     }

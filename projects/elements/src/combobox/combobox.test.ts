@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@elements/elements/test';
 import { Combobox } from '@elements/elements/combobox';
 import type { Menu, MenuItem } from '@elements/elements/menu';
 import type { Dropdown } from '@elements/elements/dropdown';
@@ -68,7 +68,9 @@ describe('mlv-combobox', () => {
     expect(dropdown.hidden).toBe(true);
     emulateClick(input);
     await elementIsStable(element);
-    expect(dropdown.style.getPropertyValue('--min-width')).toBe(`${element.shadowRoot.querySelector('[input]').getBoundingClientRect().width}px`);
+    expect(dropdown.style.getPropertyValue('--min-width')).toBe(
+      `${element.shadowRoot.querySelector('[input]').getBoundingClientRect().width}px`
+    );
   });
 
   it('should each menu with the aria role of listbox', async () => {
@@ -100,7 +102,7 @@ describe('mlv-combobox', () => {
     input.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true }));
     await elementIsStable(element);
     expect(dropdown.hidden).toBe(false);
-    
+
     const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
     items[0].focus();
     items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'Escape', bubbles: true }));
@@ -180,15 +182,16 @@ describe('mlv-combobox', () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
     expect(dropdown.hidden).toBe(true);
 
-    options.forEach(i => i.remove());
+    options.forEach((i) => i.remove());
     element.shadowRoot.dispatchEvent(new Event('slotchange'));
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
     expect(dropdown.hidden).toBe(false);
-    expect(element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item')[0].textContent.trim()).toBe(element.i18n.noResults);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item')[0].textContent.trim()).toBe(
+      element.i18n.noResults
+    );
   });
 });
-
 
 describe('mlv-combobox single select', () => {
   let fixture: HTMLElement;
@@ -260,7 +263,6 @@ describe('mlv-combobox single select', () => {
     expect(options[2].selected).toBe(false);
   });
 });
-
 
 describe('mlv-combobox multi select', () => {
   let fixture: HTMLElement;
@@ -349,8 +351,8 @@ describe('mlv-combobox multi select', () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    await new Promise(r => requestAnimationFrame(r));
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((r) => requestAnimationFrame(r));
+    await new Promise((resolve) => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(true);
   });
 
@@ -372,13 +374,13 @@ describe('mlv-combobox multi select', () => {
     element.style.setProperty('--width', '100px');
     select.multiple = true;
     await elementIsStable(element);
-    
+
     element.shadowRoot.querySelectorAll('mlv-menu-item')[0].click();
     element.shadowRoot.querySelectorAll('mlv-menu-item')[2].click();
 
     await elementIsStable(element);
-    await new Promise(r => requestAnimationFrame(r));
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((r) => requestAnimationFrame(r));
+    await new Promise((resolve) => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(true);
   });
 
@@ -391,8 +393,8 @@ describe('mlv-combobox multi select', () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    await new Promise(r => requestAnimationFrame(r));
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((r) => requestAnimationFrame(r));
+    await new Promise((resolve) => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(true);
 
     select.options[0].selected = false;
@@ -401,28 +403,40 @@ describe('mlv-combobox multi select', () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    await new Promise(r => requestAnimationFrame(r));
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((r) => requestAnimationFrame(r));
+    await new Promise((resolve) => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(false);
   });
-});
 
+  it('should select all options when selectAll() is called', async () => {
+    const tags = () => element.shadowRoot.querySelectorAll('mlv-tag');
+    expect(tags().length).toBe(2);
+    expect(select.selectedOptions.length).toBe(2);
+    expect(input.value).toBe('');
+
+    const event = untilEvent(select, 'change');
+    element.selectAll();
+    await event;
+    expect(select.selectedOptions.length).toBe(3);
+    expect(input.value).toBe('');
+  });
+});
 
 @customElement('combobox-test-element')
 class ComboboxTestElement extends LitElement {
   render() {
     return html`
-    <mlv-combobox>
-      <label>combobox</label>
-      <input type="search" />
-      <datalist>
-        <option value="Option 1"></option>
-        <option value="Option 2"></option>
-        <option value="Option 3"></option>
-      </datalist>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-combobox>
-    `
+      <mlv-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+          <option value="Option 2"></option>
+          <option value="Option 3"></option>
+        </datalist>
+        <mlv-control-message>message</mlv-control-message>
+      </mlv-combobox>
+    `;
   }
 }
 
@@ -432,9 +446,7 @@ describe('mlv-combobox shadow root', () => {
   let input: HTMLInputElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`
-      <combobox-test-element></combobox-test-element>
-    `);
+    fixture = await createFixture(html` <combobox-test-element></combobox-test-element> `);
     element = fixture.querySelector('combobox-test-element').shadowRoot.querySelector('mlv-combobox');
     input = fixture.querySelector('combobox-test-element').shadowRoot.querySelector('input');
     await elementIsStable(element);

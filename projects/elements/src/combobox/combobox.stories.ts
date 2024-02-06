@@ -288,7 +288,7 @@ export const Reset = () => {
 
 export const Footer = () => {
   return html`
-  <mlv-combobox id="combobox-select-all" style="width: 500px; --scroll-height: 200px">
+  <mlv-combobox style="width: 500px; --scroll-height: 200px">
     <label>label</label>
     <input type="search">
     <select multiple>
@@ -305,6 +305,39 @@ export const Footer = () => {
     <mlv-button slot="footer" interaction="flat">action</mlv-button>
     <mlv-control-message>message</mlv-control-message>
   </mlv-combobox>
+  `
+};
+
+export const SelectAll = () => {
+  return html`
+  <mlv-combobox id="combobox-select-all" style="width: 500px; --scroll-height: 200px">
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+      <option value="includes"></option>
+      <option value="user"></option>
+      <option value="progress"></option>
+    </select>
+    <div slot="footer" mlv-layout="row align:stretch full">
+      <mlv-button interaction="flat">Select All</mlv-button>
+      <mlv-button interaction="flat">Deselect All</mlv-button>
+    </div>
+    <mlv-control-message>message</mlv-control-message>
+  </mlv-combobox>
+  <script type="module">
+    const combobox = document.querySelector('#combobox-select-all');
+    const [selectAll, deselectAll] = Array.from(combobox.querySelectorAll('mlv-button'));
+
+    selectAll.addEventListener('click', () => combobox.selectAll());
+    deselectAll.addEventListener('click', () => combobox.reset());
+    combobox.addEventListener('change', e => console.log(e.target.selectedOptions));
+  </script>
   `
 };
 
