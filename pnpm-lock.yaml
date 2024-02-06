@@ -365,8 +365,8 @@ importers:
   projects/elements:
     dependencies:
       '@floating-ui/dom':
-        specifier: 1.5.3
-        version: 1.5.3
+        specifier: 1.6.1
+        version: 1.6.1
       '@lit-labs/motion':
         specifier: ^1.0.6
         version: 1.0.6
@@ -3326,24 +3326,24 @@ packages:
     engines: { node: '>=14' }
     dev: true
 
-  /@floating-ui/core@1.5.2:
+  /@floating-ui/core@1.6.0:
     resolution:
-      { integrity: sha512-Ii3MrfY/GAIN3OhXNzpCKaLxHQfJF9qvwq/kEJYdqDxeIHa01K8sldugal6TmeeXl+WMvhv9cnVzUTaFFJF09A== }
+      { integrity: sha512-PcF++MykgmTj3CIyOQbKA/hDzOAiqI3mhuoN44WRCopIs1sgoDoU4oty4Jtqaj/y3oDU6fnVSm4QG0a3t5i0+g== }
     dependencies:
-      '@floating-ui/utils': 0.1.6
+      '@floating-ui/utils': 0.2.1
     dev: false
 
-  /@floating-ui/dom@1.5.3:
+  /@floating-ui/dom@1.6.1:
     resolution:
-      { integrity: sha512-ClAbQnEqJAKCJOEbbLo5IUlZHkNszqhuxS4fHAVxRPXPya6Ysf2G8KypnYcOTpx6I8xcgF9bbHb6g/2KpbV8qA== }
+      { integrity: sha512-iA8qE43/H5iGozC3W0YSnVSW42Vh522yyM1gj+BqRwVsTNOyr231PsXDaV04yT39PsO0QL2QpbI/M0ZaLUQgRQ== }
     dependencies:
-      '@floating-ui/core': 1.5.2
-      '@floating-ui/utils': 0.1.6
+      '@floating-ui/core': 1.6.0
+      '@floating-ui/utils': 0.2.1
     dev: false
 
-  /@floating-ui/utils@0.1.6:
+  /@floating-ui/utils@0.2.1:
     resolution:
-      { integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A== }
+      { integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q== }
     dev: false
 
   /@formatjs/ecma402-abstract@1.18.0:
