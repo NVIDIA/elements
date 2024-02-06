@@ -5,4 +5,5 @@
   font-weight: var(--nve-ref-font-weight-regular);
   font-size: var(--nve-ref-font-size-200);
   flex-grow: 1;
+  contain: none;
 }
