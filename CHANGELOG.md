@@ -1,3 +1,10 @@
+## [0.21.8](https://github.com/NVIDIA/elements/compare/v0.21.7...v0.21.8) (2024-02-06)
+
+
+### Bug Fixes
+
+* **elements:** clipped descenders in badge ([e3fcca6](https://github.com/NVIDIA/elements/commit/e3fcca61d42a8e452ba0d117097c3decb0bd5134)), closes [#6](https://github.com/NVIDIA/elements/issues/6)
+
 ## [0.21.6](https://github.com/NVIDIA/elements/compare/v0.21.5...v0.21.6) (2024-02-02)
 
 
