@@ -1,15 +1,18 @@
-
 :host {
-  --background: color-mix(in oklab, var(--status-color) var(--nve-sys-contrast-mute-ratio), var(--nve-sys-contrast-mute-color));
+  --background: color-mix(
+    in oklab,
+    var(--status-color) var(--nve-sys-contrast-mute-ratio),
+    var(--nve-sys-contrast-mute-color)
+  );
   --gap: var(--nve-ref-space-xs);
   --font-size: var(--nve-ref-font-size-100);
   --status-color: var(--nve-sys-status-color);
-  --padding: var(--nve-ref-size-150) var(--nve-ref-size-200);
+  --padding: 0 var(--nve-ref-size-200);
   --border-radius: var(--nve-ref-border-radius-sm);
   --font-weight: var(--nve-ref-font-weight-semibold);
   --text-transform: capitalize;
   --width: initial;
-  --height: initial;
+  --height: var(--nve-ref-size-600);
   display: inline-flex;
 }
 
@@ -35,6 +38,7 @@ slot:not([name]) {
   white-space: nowrap;
   overflow: hidden;
   display: block;
+  line-height: 1.15;
 }
 
 :host([aria-label]) slot:not([name]) {
