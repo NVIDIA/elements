@@ -1,5 +1,5 @@
 :host {
-  --color: var(--mlv-sys-support-color);
+  --color: var(--mlv-sys-text-muted-color);
   --width: var(--mlv-ref-size-400);
   --height: var(--mlv-ref-size-400);
   display: inline-flex;
