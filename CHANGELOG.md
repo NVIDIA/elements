@@ -1,3 +1,10 @@
+# [0.22.0](https://github.com/NVIDIA/elements/compare/v0.21.8...v0.22.0) (2024-02-07)
+
+
+### Features
+
+* **elements:** select all method for combobox ([6d40e2c](https://github.com/NVIDIA/elements/commit/6d40e2cfc3a6656b00723f104da7c2ec357b14f8))
+
 ## [0.21.8](https://github.com/NVIDIA/elements/compare/v0.21.7...v0.21.8) (2024-02-06)
 
 
