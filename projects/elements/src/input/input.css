@@ -57,7 +57,7 @@ nve-icon-button,
   align-self: center;
 }
 
-::slotted(nve-button) {
+::slotted(nve-button:not([slot])) {
   --font-size: var(--_font-size);
   --padding: 0 var(--nve-ref-size-200);
   --color: var(--label-color);

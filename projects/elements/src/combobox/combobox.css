@@ -124,6 +124,7 @@ slot[name*='option-'] {
   padding: 0 var(--nve-ref-size-200);
   gap: var(--nve-ref-space-sm);
   justify-content: center;
+  align-items: center;
 }
 
 :host(:--footer-content) [name='footer'] {
