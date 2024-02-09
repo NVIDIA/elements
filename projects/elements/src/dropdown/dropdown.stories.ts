@@ -40,6 +40,26 @@ export const Interactive = {
   `
 };
 
+export const DynamicTrigger = {
+  render: () => html`
+<div id="dynamic-trigger-demo" nve-layout="row align:center" style="height: 250px">
+  <nve-dropdown behavior-trigger hidden>hello there</nve-dropdown>
+  <nve-button>button</nve-button>
+  <nve-button>button</nve-button>
+  <nve-button>button</nve-button>
+  <script type="module">
+    const dropdown = document.querySelector('#dynamic-trigger-demo nve-dropdown');
+    document.querySelector('#dynamic-trigger-demo').addEventListener('mousedown', e => {
+      if (e.target.tagName === 'MLV-BUTTON') {
+        dropdown.anchor = e.target;
+        dropdown.trigger = e.target;
+      }
+    });
+  </script>
+</div>
+  `
+};
+
 export const BehaviorTrigger = {
   inline: false,
   render: () => html`
