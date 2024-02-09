@@ -163,12 +163,12 @@ describe('type-popover.controller', () => {
     let events = 0;
     untilEvent(element, 'close')
       .then(() => events++)
-      .catch((e) => console.log(e));
+      .catch(e => console.log(e));
 
     element.hidden = true;
     await elementIsStable(element);
 
-    await new Promise((r) => setTimeout(() => r(null), 0));
+    await new Promise(r => setTimeout(() => r(null), 0));
     expect(events).toBe(0);
   });
 
@@ -192,10 +192,10 @@ describe('type-popover.controller', () => {
     let events = 0;
     untilEvent(element, 'close')
       .then(() => events++)
-      .catch((e) => console.log(e));
+      .catch(e => console.log(e));
 
     emulateClick(document.body);
-    await new Promise((r) => setTimeout(() => r(null), 0));
+    await new Promise(r => setTimeout(() => r(null), 0));
     expect(events).toBe(0);
   });
 
@@ -216,10 +216,9 @@ describe('type-popover.controller behavior-trigger', () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-button id="btn">anchor</nve-button>
-      <type-popover-controller-test-element behavior-trigger trigger="btn" hidden
-        ><div></div>
-        div></type-popover-controller-test-element
-      >
+      <type-popover-controller-test-element behavior-trigger trigger="btn" hidden>
+        <div></div>
+      </type-popover-controller-test-element>
     `);
     element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
     button = fixture.querySelector('nve-button');
@@ -274,6 +273,78 @@ describe('type-popover.controller behavior-trigger', () => {
     element.querySelector('div').dispatchEvent(new Event('cancel', { bubbles: true }));
     await event;
     await elementIsStable(element);
+    expect(element.hidden).toBe(false);
+  });
+});
+
+describe('type-popover.controller dynamic trigger', () => {
+  let element: TypePopoverControllerTestElement;
+  let buttons: Button[];
+  let dialog: HTMLDialogElement;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-button id="btn-1">anchor</nve-button>
+      <nve-button id="btn-2">anchor</nve-button>
+      <type-popover-controller-test-element behavior-trigger trigger="btn-1" anchor="btn-1" hidden>
+        <div></div>
+      </type-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
+    buttons = Array.from(fixture.querySelectorAll('nve-button'));
+    dialog = element.shadowRoot.querySelector('dialog');
+    await element.updateComplete;
+    await buttons[0].updateComplete;
+    await buttons[1].updateComplete;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should not open popover when previous trigger is removed', async () => {
+    element.trigger = buttons[1];
+    element.anchor = buttons[1];
+    await element.updateComplete;
+
+    buttons[0].click();
+    await element.updateComplete;
+    expect(element.hidden).toBe(true);
+  });
+
+  it('should use the recently updated trigger', async () => {
+    await element.updateComplete;
+    expect(element.hidden).toBe(true);
+
+    element.trigger = buttons[1];
+    element.anchor = buttons[1];
+    await element.updateComplete;
+
+    buttons[1].click();
+    await element.updateComplete;
+    expect(element.hidden).toBe(false);
+  });
+
+  it('should allow dynamic triggers', async () => {
+    await element.updateComplete;
+    expect(element.hidden).toBe(true);
+
+    buttons[0].click();
+    await element.updateComplete;
+    expect(element.hidden).toBe(false);
+
+    element.trigger = buttons[1];
+    element.anchor = buttons[1];
+    element.hidden = true;
+    await element.updateComplete;
+
+    buttons[0].click();
+    await element.updateComplete;
+    expect(element.hidden).toBe(true);
+
+    buttons[1].click();
+    await element.updateComplete;
     expect(element.hidden).toBe(false);
   });
 });
