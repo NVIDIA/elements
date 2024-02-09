@@ -63,6 +63,28 @@ export const BehaviorTrigger = {
   `
 };
 
+export const DynamicTrigger = {
+  render: () => html`
+<div id="dynamic-trigger-demo" mlv-layout="row align:center" style="height: 250px">
+  <mlv-tooltip behavior-trigger hidden>hello there</mlv-tooltip>
+  <div mlv-layout="row gap:xl">
+    <mlv-button>button</mlv-button>
+    <mlv-button>button</mlv-button>
+    <mlv-button>button</mlv-button>
+  </div>
+  <script type="module">
+    const tooltip = document.querySelector('#dynamic-trigger-demo mlv-tooltip');
+    document.querySelector('#dynamic-trigger-demo').addEventListener('mouseover', e => {
+      if (e.target.tagName === 'MLV-BUTTON') {
+        tooltip.anchor = e.target;
+        tooltip.trigger = e.target;
+      }
+    });
+  </script>
+</div>
+  `
+};
+
 export const Hint = {
   render: () => html`
 <div mlv-layout="block align:vertical-center" style="height: 90vh">
