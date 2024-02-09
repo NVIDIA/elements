@@ -63,6 +63,28 @@ export const BehaviorTrigger = {
   `
 };
 
+export const DynamicTrigger = {
+  render: () => html`
+<div id="dynamic-trigger-demo" nve-layout="row align:center" style="height: 250px">
+  <nve-tooltip behavior-trigger hidden>hello there</nve-tooltip>
+  <div nve-layout="row gap:xl">
+    <nve-button>button</nve-button>
+    <nve-button>button</nve-button>
+    <nve-button>button</nve-button>
+  </div>
+  <script type="module">
+    const tooltip = document.querySelector('#dynamic-trigger-demo nve-tooltip');
+    document.querySelector('#dynamic-trigger-demo').addEventListener('mouseover', e => {
+      if (e.target.tagName === 'MLV-BUTTON') {
+        tooltip.anchor = e.target;
+        tooltip.trigger = e.target;
+      }
+    });
+  </script>
+</div>
+  `
+};
+
 export const Hint = {
   render: () => html`
 <div nve-layout="block align:vertical-center" style="height: 90vh">
