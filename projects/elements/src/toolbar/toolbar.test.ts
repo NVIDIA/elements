@@ -104,6 +104,12 @@ describe('nve-toolbar scrollbar state', () => {
     await elementIsStable(element);
     expect(element.matches(':--scrollbar')).toBe(true);
   });
+
+  it('should remove --scrollbar state when there is no center content overflow', async () => {
+    element.querySelector('div:not([slot])').remove();
+    await elementIsStable(element);
+    expect(element.matches(':--scrollbar')).toBe(false);
+  });
 });
 
 describe('nve-toolbar orientation', () => {
