@@ -40,8 +40,8 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     const anchor = this.host.anchor ?? this.#trigger;
     if (typeof anchor === 'string' && anchor?.length) {
       return getFlatDOMTree(this.host.parentNode)
-        .filter((el) => el?.id !== '')
-        .find((el) => el.id === anchor);
+        .filter(el => el?.id !== '')
+        .find(el => el.id === anchor);
     } else if (anchor && anchor !== globalThis.document.body) {
       return anchor as HTMLElement;
     } else {
@@ -50,10 +50,13 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   }
 
   get #trigger() {
-    const id = typeof this.host.trigger === 'string' ? this.host.trigger : this.host.trigger?.id;
-    return getFlatDOMTree(this.host.parentNode)
-      .filter((el) => el?.id !== '')
-      .find((el) => el.id === id);
+    if (typeof this.host.trigger === 'string') {
+      return getFlatDOMTree(this.host.parentNode)
+        .filter(el => el?.id !== '')
+        .find(el => el.id === this.host.trigger);
+    } else {
+      return this.host.trigger as HTMLElement;
+    }
   }
 
   get #config(): PopoverConfig {
@@ -80,13 +83,13 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   async hostConnected() {
     await this.host.updateComplete;
-    this.#dialog?.addEventListener('close', (e) => {
+    this.#dialog?.addEventListener('close', e => {
       if (e.target === this.#dialog) {
         this.close();
       }
     });
 
-    this.#dialog?.addEventListener('cancel', (e) => {
+    this.#dialog?.addEventListener('cancel', e => {
       if (e.target === this.#dialog) {
         e.preventDefault();
         this.close();
@@ -95,11 +98,12 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
     this.#popoverUpdateDisconnect = popoverRenderUpdate(this.#config, async () => await this.#calculatePosition());
     this.#hiddenUpdateObserver = getAttributeChanges(this.host, 'hidden', async () => await this.#update());
-    this.#addTriggerInteractions();
+    this.#setupTriggerInteractions();
     this.host.setAttribute('nve-popover', '');
   }
 
   async hostUpdated() {
+    this.#setupTriggerInteractions();
     await this.host.updateComplete;
     this.#updateVisibility();
     await this.#calculatePosition();
@@ -134,14 +138,39 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     }
   }
 
+  #open = () => this.open();
+  #close = () => this.close();
+  #prevTrigger: HTMLElement;
+
+  #setupTriggerInteractions() {
+    if (this.#prevTrigger !== this.#trigger) {
+      this.#removeTriggerInteractions();
+    }
+
+    this.#addTriggerInteractions();
+  }
+
+  #removeTriggerInteractions() {
+    if (this.#prevTrigger && this.host.popoverType === 'hint') {
+      this.#prevTrigger.removeEventListener('mousemove', this.#open);
+      this.#prevTrigger.removeEventListener('mouseleave', this.#close);
+      this.#prevTrigger.removeEventListener('focus', this.#open);
+      this.#prevTrigger.removeEventListener('focusout', this.#close);
+    } else if (this.#prevTrigger) {
+      this.#prevTrigger.removeEventListener('click', this.#open);
+    }
+  }
+
   #addTriggerInteractions() {
     if (this.#trigger && this.host.popoverType === 'hint') {
-      this.#trigger.addEventListener('mousemove', () => this.open());
-      this.#trigger.addEventListener('mouseleave', () => this.close());
-      this.#trigger.addEventListener('focus', () => this.open());
-      this.#trigger.addEventListener('focusout', () => this.close());
+      this.#trigger.addEventListener('mousemove', this.#open);
+      this.#trigger.addEventListener('mouseleave', this.#close);
+      this.#trigger.addEventListener('focus', this.#open);
+      this.#trigger.addEventListener('focusout', this.#close);
+      this.#prevTrigger = this.#trigger;
     } else if (this.#trigger) {
-      this.#trigger.addEventListener('click', () => this.open());
+      this.#trigger.addEventListener('click', this.#open);
+      this.#prevTrigger = this.#trigger;
     }
   }
 
@@ -200,7 +229,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
       const config = { ...this.#config, ...getPopoverCustomCSSProperites(this.host) };
       config.arrow?.removeAttribute('style');
       await this.host.updateComplete;
-      await new Promise((r) => requestAnimationFrame(r));
+      await new Promise(r => requestAnimationFrame(r));
 
       if (config.popover && config.position) {
         const position = await computePopoverPosition(config);
