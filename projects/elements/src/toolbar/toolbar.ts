@@ -1,7 +1,16 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, statusStateStyles, supportStateStyles, colorStateStyles, ContainerElement, attachInternals, applySlotContentStates, hasHorizontalScrollBar } from '@elements/elements/internal';
+import {
+  useStyles,
+  statusStateStyles,
+  supportStateStyles,
+  colorStateStyles,
+  ContainerElement,
+  attachInternals,
+  applySlotContentStates,
+  hasHorizontalScrollBar
+} from '@elements/elements/internal';
 import type { IconButton } from '@elements/elements/icon-button';
 import type { ButtonGroup } from '@elements/elements/button-group';
 import type { Divider } from '@elements/elements/divider';
@@ -37,7 +46,7 @@ export class Toolbar extends LitElement implements ContainerElement {
     version: 'PACKAGE_VERSION'
   };
 
-  static elementDefinitions = { };
+  static elementDefinitions = {};
 
   /**
    * Determines the container styles of component. Flat is used for nesting elements within other containers or more muted style. Full is used when the element expands the full width of the viewport.
@@ -114,6 +123,7 @@ export class Toolbar extends LitElement implements ContainerElement {
     applySlotContentStates(e.target as HTMLSlotElement, this);
     this.#updateContainers();
     this.#updateOrientation();
+    this.#setScrollbarState();
   }
 
   #setupScrollbarListener() {
@@ -133,14 +143,20 @@ export class Toolbar extends LitElement implements ContainerElement {
 
   #updateContainers() {
     if (this.container !== 'flat' && this.container !== 'inset') {
-      const groups = this.#slottedElements.filter(e => e.tagName.toLowerCase().includes('mlv-button-group')) as ButtonGroup[];
-      groups.forEach(group => group.container = 'flat');
+      const groups = this.#slottedElements.filter(e =>
+        e.tagName.toLowerCase().includes('mlv-button-group')
+      ) as ButtonGroup[];
+      groups.forEach(group => (group.container = 'flat'));
 
-      const controls = this.#slottedElements.filter(e => e.hasAttribute('mlv-control')) as (Control & { container: string })[];
-      controls.forEach(control => control.container = 'flat');
+      const controls = this.#slottedElements.filter(e => e.hasAttribute('mlv-control')) as (Control & {
+        container: string;
+      })[];
+      controls.forEach(control => (control.container = 'flat'));
 
-      const buttons= this.#slottedElements.filter(e => e.tagName.toLowerCase().includes('mlv-button') || e.tagName.toLowerCase().includes('mlv-icon-button')) as (Button | IconButton)[];
-      buttons.forEach(button => button.interaction = 'flat');
+      const buttons = this.#slottedElements.filter(
+        e => e.tagName.toLowerCase().includes('mlv-button') || e.tagName.toLowerCase().includes('mlv-icon-button')
+      ) as (Button | IconButton)[];
+      buttons.forEach(button => (button.interaction = 'flat'));
     }
   }
 
@@ -148,7 +164,9 @@ export class Toolbar extends LitElement implements ContainerElement {
     const dividers = this.#slottedElements.filter(e => e.tagName.toLowerCase().includes('mlv-divider')) as Divider[];
     dividers.forEach(divider => (divider.orientation = this.orientation === 'horizontal' ? 'vertical' : 'horizontal'));
 
-    const groups = this.#slottedElements.filter(e => e.tagName.toLowerCase().includes('mlv-button-group')) as ButtonGroup[];
-    groups.forEach(group => group.orientation = this.orientation);
+    const groups = this.#slottedElements.filter(e =>
+      e.tagName.toLowerCase().includes('mlv-button-group')
+    ) as ButtonGroup[];
+    groups.forEach(group => (group.orientation = this.orientation));
   }
 }
