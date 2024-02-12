@@ -1,4 +1,3 @@
-
 mlv-grid-row:has(mlv-grid-cell:first-child mlv-radio > input:checked) mlv-grid-row,
 mlv-grid-row:has(mlv-grid-cell:first-child mlv-checkbox > input:checked) mlv-grid-row,
 mlv-grid-row:has(mlv-grid-cell:first-child mlv-radio > input:checked) mlv-grid-cell,
@@ -58,23 +57,8 @@ mlv-grid {
     --padding: 0 16px 0 0;
   }
 
-  & [scroller]::-webkit-scrollbar {
-    background: var(--background);
-    width: 12px;
-    height: 12px;
-  }
-
-  & [scroller]::-webkit-scrollbar-track {
-    height: 100vh;
-  }
-
-  & [scroller]::-webkit-scrollbar-thumb {
-    background: var(--mlv-ref-border-color-muted);
-    border: 2px solid var(--background);
-    border-radius: 50px;
-  }
-
-  & [scroller]::-webkit-scrollbar-corner {
-    background: rgba(0,0,0,0);
+  & [scroller] {
+    scrollbar-color: var(--mlv-ref-border-color-muted) var(--background);
+    scrollbar-width: thin;
   }
 }

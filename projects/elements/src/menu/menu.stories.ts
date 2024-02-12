@@ -96,6 +96,19 @@ export const Links = {
   `
 };
 
+export const Scroll = {
+  render: () => html`
+  <mlv-menu style="--max-height: 150px">
+    <mlv-menu-item>item 1</mlv-menu-item>
+    <mlv-menu-item>item 2</mlv-menu-item>
+    <mlv-menu-item>item 3</mlv-menu-item>
+    <mlv-menu-item>item 4</mlv-menu-item>
+    <mlv-menu-item>item 5</mlv-menu-item>
+    <mlv-menu-item>item 6</mlv-menu-item>
+  </mlv-menu>
+  `
+};
+
 export const Complex = {
   render: () => html`
   <mlv-button id="dropdown-menu-btn">dropdown</mlv-button>
