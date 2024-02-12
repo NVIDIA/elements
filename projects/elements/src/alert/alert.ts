@@ -2,7 +2,19 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button';
-import { attachInternals, I18nController, SupportStatus, TaskStatus, statusIcons, TypeClosableController, useStyles, statusStateStyles, supportStateStyles } from '@elements/elements/internal';
+import {
+  attachInternals,
+  I18nController,
+  SupportStatus,
+  TaskStatus,
+  statusIcons,
+  TypeClosableController,
+  useStyles,
+  statusStateStyles,
+  supportStateStyles,
+  appendRootNodeStyle
+} from '@elements/elements/internal';
+import globalStyles from './alert.global.css?inline';
 import styles from './alert.css?inline';
 
 /**
@@ -72,12 +84,14 @@ export class Alert extends LitElement {
         ${this.#actions.length ? html`<slot name="actions"></slot>` : ''}
         ${this.closable ? html`<nve-icon-button @click=${() => this.#typeClosableController.close()} interaction="flat" icon-name="cancel" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
       </div>
+      <slot name="content" part="content"></slot>
     `;
   }
 
   connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
+    appendRootNodeStyle(this, globalStyles);
     this._internals.role = 'alert';
   }
 }
