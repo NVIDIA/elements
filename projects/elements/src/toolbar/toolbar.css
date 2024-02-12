@@ -117,6 +117,8 @@ slot:not([name]) {
   overflow-x: auto;
   overflow-y: hidden;
   margin-inline-end: var(--nve-ref-space-xs);
+  scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
+  scrollbar-width: thin;
 }
 
 :host([content='wrap']) slot:not([name]) {
@@ -130,24 +132,4 @@ slot:not([name]) {
 
 :host(:--scrollbar) slot:not([name]) {
   margin-bottom: -14px;
-}
-
-::-webkit-scrollbar {
-  background: transparent;
-  width: 14px;
-  height: 14px;
-}
-
-::-webkit-scrollbar-track {
-  height: 100vh;
-}
-
-::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid var(--nve-ref-border-color-muted);
-}
-
-::-webkit-scrollbar-corner {
-  background: rgba(0, 0, 0, 0);
 }
