@@ -1,3 +1,12 @@
+## [0.22.1](https://github.com/NVIDIA/elements/compare/v0.22.0...v0.22.1) (2024-02-12)
+
+
+### Bug Fixes
+
+* **elements:** popover dynamic triggers ([5186c0b](https://github.com/NVIDIA/elements/commit/5186c0bb23c7497e610910733ac136560958e439))
+* **elements:** prevent button override in slot ([4daa6e0](https://github.com/NVIDIA/elements/commit/4daa6e0b5674fa669ff9fc24fe34ff3c003bffee))
+* **elements:** update toolbar scroll on slot changes ([f48aec3](https://github.com/NVIDIA/elements/commit/f48aec3213838a84736965905e1d0f25f18d41bd))
+
 # [0.22.0](https://github.com/NVIDIA/elements/compare/v0.21.8...v0.22.0) (2024-02-07)
 
 
