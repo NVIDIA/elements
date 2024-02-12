@@ -96,6 +96,19 @@ export const Links = {
   `
 };
 
+export const Scroll = {
+  render: () => html`
+  <nve-menu style="--max-height: 150px">
+    <nve-menu-item>item 1</nve-menu-item>
+    <nve-menu-item>item 2</nve-menu-item>
+    <nve-menu-item>item 3</nve-menu-item>
+    <nve-menu-item>item 4</nve-menu-item>
+    <nve-menu-item>item 5</nve-menu-item>
+    <nve-menu-item>item 6</nve-menu-item>
+  </nve-menu>
+  `
+};
+
 export const Complex = {
   render: () => html`
   <nve-button id="dropdown-menu-btn">dropdown</nve-button>
