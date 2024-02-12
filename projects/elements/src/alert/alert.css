@@ -1,4 +1,3 @@
-
 :host {
   --gap: var(--mlv-ref-space-xs);
   --font-size: var(--mlv-ref-font-size-100);
@@ -26,6 +25,11 @@
   height: 100%;
 }
 
+slot[part='content'] {
+  display: contents;
+  padding-left: var(--mlv-ref-size-600);
+}
+
 slot {
   display: flex;
   align-items: center;
@@ -38,7 +42,8 @@ slot:not([name='actions']):not([name='prefix']):not([name='icon']) {
   flex-grow: 1;
 }
 
-slot[name] {
+slot[name='prefix'],
+slot[name='actions'] {
   font-weight: var(--mlv-ref-font-weight-semibold);
 }
 
