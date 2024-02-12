@@ -1,0 +1,3 @@
+nve-alert:has([slot='content'])::part(content) {
+  display: block;
+}
