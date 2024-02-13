@@ -1,3 +1,10 @@
+## [0.22.2](https://github.com/NVIDIA/elements/compare/v0.22.1...v0.22.2) (2024-02-13)
+
+
+### Bug Fixes
+
+* **elements:** scroll styles ([f854c71](https://github.com/NVIDIA/elements/commit/f854c710af9487b2fcf854fd5904ecfc1f076b75))
+
 ## [0.22.1](https://github.com/NVIDIA/elements/compare/v0.22.0...v0.22.1) (2024-02-12)
 
 
