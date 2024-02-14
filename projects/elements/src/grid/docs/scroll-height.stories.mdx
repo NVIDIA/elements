@@ -40,6 +40,18 @@ This is helpful for preserving the grid height/fill while dynamic content above 
   <Story id="elements-data-grid-examples--grow" />
 </Canvas>
 
+## Scroll Position
+
+Scroll position can be controlled via the `scrollTo` API.
+
+```javascript
+document.querySelector('nve-grid').scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+```
+
+<Canvas>
+  <Story id="elements-data-grid-examples--scroll-position" inline={false} height={'500px'} />
+</Canvas>
+
 <element-status tag="nve-grid"></element-status>
 
 <element-api tag="nve-grid"></element-api>
