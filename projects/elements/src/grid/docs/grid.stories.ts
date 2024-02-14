@@ -281,6 +281,28 @@ export const Scroll = {
   `
 };
 
+export const ScrollPosition = {
+  render: () => html`
+<nve-grid style="height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems(100).map(row => html`
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
+</nve-grid><br>
+
+<nve-button>scroll top</nve-button>
+<script type="module">
+  document.querySelector('nve-button').addEventListener('click', () => {
+    document.querySelector('nve-grid').scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+  `
+};
+
 export const Grow = {
   render: () => html`
 <section nve-layout="column gap:lg" style="height: 500px; padding: var(--nve-ref-size-100); border: 1px solid var(--nve-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
