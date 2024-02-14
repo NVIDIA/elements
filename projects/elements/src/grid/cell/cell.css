@@ -12,7 +12,11 @@
 }
 
 [internal-host] {
-  background: color-mix(in oklab, var(--background, var(--mlv-sys-layer-canvas-background)) 100%, var(--mlv-sys-interaction-state-mix) var(--interaction-state-ratio, 0.01%)); /* 0.01 to prevent css optimizer from removing % type */
+  background: color-mix(
+    in oklab,
+    var(--background, var(--mlv-sys-layer-canvas-background)) 100%,
+    var(--mlv-sys-interaction-state-mix) var(--interaction-state-ratio, 0.01%)
+  ); /* 0.01 to prevent css optimizer from removing % type */
   color: var(--color);
   padding: var(--padding);
   height: var(--height);
@@ -26,8 +30,4 @@
   display: flex;
   align-items: center;
   outline-offset: -2px;
-}
-
-::slotted(mlv-icon-button) {
-  --border-radius: 0;
 }
