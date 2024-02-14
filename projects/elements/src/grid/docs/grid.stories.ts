@@ -303,13 +303,13 @@ export const ScrollPosition = {
   `
 };
 
-export const Grow = {
+export const FullHeight = {
   render: () => html`
 <section nve-layout="column gap:lg" style="height: 500px; padding: var(--nve-ref-size-100); border: 1px solid var(--nve-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
   <nve-search>
     <input type="search" aria-label="search" placeholder="search" />
   </nve-search>
-  <nve-grid nve-layout="grow">
+  <nve-grid nve-layout="full">
     <nve-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
     </nve-grid-header>
@@ -480,7 +480,7 @@ export const ColumnAlignStart = {
 
 export const DisplaySettings = {
   render: () => html`
-<div nve-layout="column gap:md grow">
+<div nve-layout="column gap:md full">
   <nve-dropdown closable anchor="column-settings">
     <nve-checkbox-group style="width: 175px">
       <label>Columns</label>
@@ -508,7 +508,7 @@ export const DisplaySettings = {
     <p nve-text="body muted">1,145 results found</p>
     <nve-button id="column-settings">Display Settings</nve-button>
   </div>
-  <nve-grid nve-layout="grow">
+  <nve-grid nve-layout="full">
     <nve-grid-header>
       ${grid(8, 4).columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
     </nve-grid-header>

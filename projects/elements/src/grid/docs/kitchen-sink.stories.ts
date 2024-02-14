@@ -318,7 +318,7 @@ class KitchenSinkDemo extends LitElement {
         ${this.#header}
         <div nve-layout="row align:stretch">
           ${this.#settingsDropdown}
-          <div nve-layout="column gap:md pad:md grow">
+          <div nve-layout="column gap:md pad:md full">
             ${this.#actionBar}
             <nve-grid style="--scroll-height: calc(100vh - 330px); --row-height: 48px">
               <nve-grid-header>
