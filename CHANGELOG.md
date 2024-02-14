@@ -1,3 +1,10 @@
+## [0.22.3](https://github.com/NVIDIA/elements/compare/v0.22.2...v0.22.3) (2024-02-14)
+
+
+### Bug Fixes
+
+* **elements:** alert multiline alignment ([efb8817](https://github.com/NVIDIA/elements/commit/efb88171af372bff819b41877d02d7772eb7dbc3))
+
 ## [0.22.2](https://github.com/NVIDIA/elements/compare/v0.22.1...v0.22.2) (2024-02-13)
 
 
