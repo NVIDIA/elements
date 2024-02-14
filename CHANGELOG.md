@@ -1,10 +1,3 @@
-## [0.22.3](https://github.com/NVIDIA/elements/compare/v0.22.2...v0.22.3) (2024-02-13)
-
-
-### Bug Fixes
-
-* **elements:** alert multiline alignment ([efb8817](https://github.com/NVIDIA/elements/commit/efb88171af372bff819b41877d02d7772eb7dbc3))
-
 ## [0.22.2](https://github.com/NVIDIA/elements/compare/v0.22.1...v0.22.2) (2024-02-13)
 
 
@@ -21,7 +14,7 @@
 * **elements:** prevent button override in slot ([4daa6e0](https://github.com/NVIDIA/elements/commit/4daa6e0b5674fa669ff9fc24fe34ff3c003bffee))
 * **elements:** update toolbar scroll on slot changes ([f48aec3](https://github.com/NVIDIA/elements/commit/f48aec3213838a84736965905e1d0f25f18d41bd))
 
-# [0.22.0](https://github.com/NVIDIA/elements/compare/v0.21.8...v0.22.0) (2024-02-07)
+## [0.22.0](https://github.com/NVIDIA/elements/compare/v0.21.8...v0.22.0) (2024-02-07)
 
 
 ### Features
@@ -226,7 +219,7 @@
 
 
 
-### [0.13.1](https://github.com:12051/NVIDIA/elements/compare/v0.13.0...v0.13.1) (2023-12-27)
+## [0.13.1](https://github.com:12051/NVIDIA/elements/compare/v0.13.0...v0.13.1) (2023-12-27)
 
 
 ### Bug Fixes
@@ -272,11 +265,11 @@
 
 
 
-### [0.11.2](https://github.com:12051/NVIDIA/elements/compare/v0.11.1...v0.11.2) (2023-12-27)
+## [0.11.2](https://github.com:12051/NVIDIA/elements/compare/v0.11.1...v0.11.2) (2023-12-27)
 
 
 
-### [0.11.1](https://github.com:12051/NVIDIA/elements/compare/v0.11.0...v0.11.1) (2023-12-27)
+## [0.11.1](https://github.com:12051/NVIDIA/elements/compare/v0.11.0...v0.11.1) (2023-12-27)
 
 
 ### Bug Fixes
@@ -327,7 +320,7 @@
 
 
 
-### [0.9.2](https://github.com:12051/NVIDIA/elements/compare/v0.9.1...v0.9.2) (2023-12-27)
+## [0.9.2](https://github.com:12051/NVIDIA/elements/compare/v0.9.1...v0.9.2) (2023-12-27)
 
 
 ### Bug Fixes
@@ -337,7 +330,7 @@
 
 
 
-### [0.9.1](https://github.com:12051/NVIDIA/elements/compare/v0.9.0...v0.9.1) (2023-12-27)
+## [0.9.1](https://github.com:12051/NVIDIA/elements/compare/v0.9.0...v0.9.1) (2023-12-27)
 
 
 
@@ -357,7 +350,7 @@
 
 
 
-### [0.8.2](https://github.com:12051/NVIDIA/elements/compare/v0.8.1...v0.8.2) (2023-12-27)
+## [0.8.2](https://github.com:12051/NVIDIA/elements/compare/v0.8.1...v0.8.2) (2023-12-27)
 
 
 ### Bug Fixes
@@ -368,7 +361,7 @@
 
 
 
-### [0.8.1](https://github.com:12051/NVIDIA/elements/compare/v0.8.0...v0.8.1) (2023-12-27)
+## [0.8.1](https://github.com:12051/NVIDIA/elements/compare/v0.8.0...v0.8.1) (2023-12-27)
 
 
 ### Bug Fixes
@@ -407,7 +400,7 @@
 
 
 
-### [0.7.1](https://github.com:12051/NVIDIA/elements/compare/v0.7.0...v0.7.1) (2023-12-27)
+## [0.7.1](https://github.com:12051/NVIDIA/elements/compare/v0.7.0...v0.7.1) (2023-12-27)
 
 
 ### Bug Fixes
@@ -431,7 +424,7 @@
 
 
 
-### [0.6.1](https://github.com:12051/NVIDIA/elements/compare/v0.6.0...v0.6.1) (2023-12-27)
+## [0.6.1](https://github.com:12051/NVIDIA/elements/compare/v0.6.0...v0.6.1) (2023-12-27)
 
 
 ### Bug Fixes
@@ -475,7 +468,7 @@
 
 
 
-### [0.4.1](https://github.com:12051/NVIDIA/elements/compare/v0.2.1...v0.4.1) (2023-12-27)
+## [0.4.1](https://github.com:12051/NVIDIA/elements/compare/v0.2.1...v0.4.1) (2023-12-27)
 
 
 ### Bug Fixes
@@ -509,7 +502,7 @@
 
 
 
-### [0.2.1](https://github.com:12051/NVIDIA/elements/compare/v0.2.0...v0.2.1) (2023-12-27)
+## [0.2.1](https://github.com:12051/NVIDIA/elements/compare/v0.2.0...v0.2.1) (2023-12-27)
 
 
 ### Bug Fixes
