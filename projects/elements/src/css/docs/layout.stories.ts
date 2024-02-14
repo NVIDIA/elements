@@ -98,7 +98,7 @@ export const PadResponsive = {
   render: () => html`
     <div>
       <section class="layout-example" mlv-layout="row pad@xs:xs pad@sm:sm pad@md:md pad@lg:lg pad@xl:xxxl">
-        <mlv-card mlv-layout="grow"></mlv-card>
+        <mlv-card mlv-layout="full"></mlv-card>
       </section>
     </div>
   `
@@ -222,9 +222,9 @@ export const ResponsiveGrid = {
 
 
 
-export const Grow = {
+export const Full = {
   render: () => html`
-      <h3 mlv-text="section">Grow Container</h3>
-      <section mlv-layout="row grow"></section>
+      <h3 mlv-text="section">Full Container</h3>
+      <section mlv-layout="row full"></section>
   `
 }

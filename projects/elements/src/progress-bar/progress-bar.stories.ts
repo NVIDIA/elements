@@ -8,7 +8,7 @@ export default {
 
 export const Default = {
   render: () => html`
-    <div mlv-layout="column gap:md pad:lg grow">
+    <div mlv-layout="column gap:md pad:lg full">
       <mlv-progress-bar></mlv-progress-bar>
 
       <mlv-progress-bar status="accent" value="25"></mlv-progress-bar>
@@ -24,7 +24,7 @@ export const Default = {
 
 export const Max = {
   render: () => html`
-    <div mlv-layout="column gap:md pad:lg grow">
+    <div mlv-layout="column gap:md pad:lg full">
       <mlv-progress-bar status="accent" value="25" max="50"></mlv-progress-bar>
 
       <mlv-progress-bar status="accent" value="45" max="50"></mlv-progress-bar>
@@ -34,7 +34,7 @@ export const Max = {
 
 export const Labeled = {
   render: () => html`
-    <div mlv-layout="column gap:md pad:lg align:horizontal-stretch grow">
+    <div mlv-layout="column gap:md pad:lg align:horizontal-stretch full">
       <div mlv-layout="row align:space-between">
         <p mlv-text="label muted sm">Upload Status</p>
         <p mlv-text="label emphasis sm">80%</p>

@@ -303,13 +303,13 @@ export const ScrollPosition = {
   `
 };
 
-export const Grow = {
+export const FullHeight = {
   render: () => html`
 <section mlv-layout="column gap:lg" style="height: 500px; padding: var(--mlv-ref-size-100); border: 1px solid var(--mlv-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
   <mlv-search>
     <input type="search" aria-label="search" placeholder="search" />
   </mlv-search>
-  <mlv-grid mlv-layout="grow">
+  <mlv-grid mlv-layout="full">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
@@ -480,7 +480,7 @@ export const ColumnAlignStart = {
 
 export const DisplaySettings = {
   render: () => html`
-<div mlv-layout="column gap:md grow">
+<div mlv-layout="column gap:md full">
   <mlv-dropdown closable anchor="column-settings">
     <mlv-checkbox-group style="width: 175px">
       <label>Columns</label>
@@ -508,7 +508,7 @@ export const DisplaySettings = {
     <p mlv-text="body muted">1,145 results found</p>
     <mlv-button id="column-settings">Display Settings</mlv-button>
   </div>
-  <mlv-grid mlv-layout="grow">
+  <mlv-grid mlv-layout="full">
     <mlv-grid-header>
       ${grid(8, 4).columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>

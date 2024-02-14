@@ -16,7 +16,7 @@ export default {
 /* Main Page Headers */
 export const StandardHeaderMainPage = {
   render: () => html`
-    <mlv-card container="flat" mlv-layout="grow">
+    <mlv-card container="flat">
       <mlv-card-content mlv-layout="column gap:md align:stretch pad-x:xl">
         <!-- Breadcrumbs -->
         <mlv-breadcrumb>
@@ -41,7 +41,7 @@ export const StandardHeaderMainPage = {
 
 export const TabsHeaderMainPage = {
   render: () => html`
-    <mlv-card container="flat" style="--border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)" mlv-layout="grow">
+    <mlv-card container="flat" style="--border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)">
       <mlv-card-content style="--padding: 0" mlv-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!-- Breadcrumbs -->
         <mlv-breadcrumb>
@@ -74,7 +74,7 @@ export const TabsHeaderMainPage = {
 
 export const StackedMetadataHeaderMainPage = {
   render: () => html`
-    <mlv-card container="flat" mlv-layout="grow">
+    <mlv-card container="flat">
       <mlv-card-content mlv-layout="column gap:md align:stretch pad-x:xl">
         <!-- Breadcrumbs -->
         <mlv-breadcrumb>
@@ -123,7 +123,7 @@ export const StackedMetadataHeaderMainPage = {
 
 export const InlineMetadataHeaderMainPage = {
   render: () => html`
-    <mlv-card container="flat" mlv-layout="grow">
+    <mlv-card container="flat">
       <mlv-card-content mlv-layout="column gap:md align:stretch pad-x:xl">
         <!--Breadcrumbs-->
         <mlv-breadcrumb>
@@ -176,7 +176,7 @@ export const InlineMetadataHeaderMainPage = {
 
 export const InlineKitchenSinkHeaderMainPage = {
   render: () => html`
-    <mlv-card container="flat" style="--border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)" mlv-layout="grow">
+    <mlv-card container="flat" style="--border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)">
       <mlv-card-content style="--padding: 0" mlv-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <mlv-breadcrumb>
@@ -241,7 +241,7 @@ export const InlineKitchenSinkHeaderMainPage = {
 
 export const StackedKitchenSinkHeaderMainPage = {
   render: () => html`
-    <mlv-card container="flat" style="--border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)" mlv-layout="grow">
+    <mlv-card container="flat" style="--border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)">
       <mlv-card-content style="--padding: 0" mlv-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <mlv-breadcrumb>
@@ -304,7 +304,7 @@ export const StackedKitchenSinkHeaderMainPage = {
 /* Detail Page Headers */
 export const StandardHeaderDetailPage = {
   render: () => html`
-    <mlv-card container="full" mlv-layout="grow">
+    <mlv-card container="full">
       <mlv-card-content mlv-layout="column gap:md align:stretch pad-x:xl">
         <!--Breadcrumbs-->
         <mlv-breadcrumb>
@@ -332,7 +332,7 @@ export const StandardHeaderDetailPage = {
 
 export const TabsHeaderDetailPage = {
   render: () => html`
-    <mlv-card container="full" mlv-layout="grow">
+    <mlv-card container="full">
       <mlv-card-content style="--padding: 0" mlv-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <mlv-breadcrumb>
@@ -368,7 +368,7 @@ export const TabsHeaderDetailPage = {
 
 export const StackedMetadataHeaderDetailPage = {
   render: () => html`
-    <mlv-card container="full" mlv-layout="grow">
+    <mlv-card container="full">
       <mlv-card-content mlv-layout="column gap:md align:stretch pad-x:xl">
         <!--Breadcrumbs-->
         <mlv-breadcrumb>
@@ -420,7 +420,7 @@ export const StackedMetadataHeaderDetailPage = {
 
 export const InlineMetadataHeaderDetailPage = {
   render: () => html`
-    <mlv-card container="full" mlv-layout="grow">
+    <mlv-card container="full">
       <mlv-card-content mlv-layout="column gap:md align:stretch pad-x:xl">
         <!--Breadcrumbs-->
         <mlv-breadcrumb>
@@ -477,7 +477,7 @@ export const InlineMetadataHeaderDetailPage = {
 
 export const InlineKitchenSinkHeaderDetailPage = {
   render: () => html`
-    <mlv-card container="full" mlv-layout="grow">
+    <mlv-card container="full">
       <mlv-card-content style="--padding: 0" mlv-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <mlv-breadcrumb>
@@ -542,7 +542,7 @@ export const InlineKitchenSinkHeaderDetailPage = {
 
 export const StackedKitchenSinkHeaderDetailPage = {
   render: () => html`
-    <mlv-card container="full" mlv-layout="grow">
+    <mlv-card container="full">
       <mlv-card-content style="--padding: 0" mlv-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <mlv-breadcrumb>
@@ -604,7 +604,7 @@ export const StackedKitchenSinkHeaderDetailPage = {
 /* Viewer Page Headers */
 export const StandardHeaderViewerPage = {
   render: () => html`
-    <mlv-card container="full" style="--border-bottom: 0" mlv-layout="grow">
+    <mlv-card container="full" style="--border-bottom: 0">
       <mlv-card-content mlv-layout="row align:space-between align:vertical-center pad-x:xl">
         <section mlv-layout="row gap:sm align:vertical-center">
           <mlv-icon-button icon-name="arrow" direction="left" size="sm"></mlv-icon-button>
@@ -644,7 +644,7 @@ export const StandardHeaderViewerPage = {
 /* Toolbar Page Headers */
 export const StandardHeaderToolbarPage = {
   render: () => html`
-    <mlv-card container="full" style="--border-bottom: 0" mlv-layout="grow">
+    <mlv-card container="full" style="--border-bottom: 0">
       <mlv-card-content mlv-layout="row align:space-between align:vertical-center pad-x:xl">
         <!--Left Controls-->
         <section mlv-layout="row gap:md align:left align:vertical-center" style="width: 33%">

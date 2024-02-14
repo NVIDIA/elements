@@ -320,7 +320,7 @@ export const ShortcutDropdown = {
       </mlv-menu-item>
 
       <mlv-menu-item>
-        <div mlv-layout="row align:space-between grow">
+        <div mlv-layout="row align:space-between full">
           <span mlv-layout="row gap:sm align:vertical-center">
             <mlv-icon name="copy"></mlv-icon> Copy
           </span>

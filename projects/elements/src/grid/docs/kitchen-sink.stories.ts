@@ -318,7 +318,7 @@ class KitchenSinkDemo extends LitElement {
         ${this.#header}
         <div mlv-layout="row align:stretch">
           ${this.#settingsDropdown}
-          <div mlv-layout="column gap:md pad:md grow">
+          <div mlv-layout="column gap:md pad:md full">
             ${this.#actionBar}
             <mlv-grid style="--scroll-height: calc(100vh - 330px); --row-height: 48px">
               <mlv-grid-header>
