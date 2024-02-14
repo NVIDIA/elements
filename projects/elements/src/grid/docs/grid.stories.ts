@@ -281,6 +281,28 @@ export const Scroll = {
   `
 };
 
+export const ScrollPosition = {
+  render: () => html`
+<mlv-grid style="height: 402px">
+  <mlv-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
+  </mlv-grid-header>
+  ${getItems(100).map(row => html`
+    <mlv-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
+    </mlv-grid-row>
+  `)}
+</mlv-grid><br>
+
+<mlv-button>scroll top</mlv-button>
+<script type="module">
+  document.querySelector('mlv-button').addEventListener('click', () => {
+    document.querySelector('mlv-grid').scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+  `
+};
+
 export const Grow = {
   render: () => html`
 <section mlv-layout="column gap:lg" style="height: 500px; padding: var(--mlv-ref-size-100); border: 1px solid var(--mlv-ref-border-color-emphasis); resize: vertical; overflow: hidden;">

@@ -1,7 +1,15 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { keyNavigationGrid, useStyles, attachInternals, appendRootNodeStyle, generateId, ContainerElement, validateSlots } from '@elements/elements/internal';
+import {
+  keyNavigationGrid,
+  useStyles,
+  attachInternals,
+  appendRootNodeStyle,
+  generateId,
+  ContainerElement,
+  validateSlots
+} from '@elements/elements/internal';
 import type { GridHeader } from './header/header.js';
 import type { GridColumn } from './column/column.js';
 import type { GridRow } from './row/row.js';
@@ -46,18 +54,16 @@ export class Grid extends LitElement implements ContainerElement {
     children: ['mlv-grid-row', 'mlv-grid-header', 'mlv-grid-placeholder']
   };
 
-  static elementDefinitions = {
-
-  };
+  static elementDefinitions = {};
 
   get keynavGridConfig() {
     return {
       columns: this.#columns,
       rows: [this.querySelector<GridHeader>('mlv-grid-header'), ...this.rows],
       cells: [...this.#columns, ...this.#cells]
-    }
+    };
   }
-  
+
   @queryAssignedElements({ selector: 'mlv-grid-header', flatten: true }) private gridHeader!: GridHeader[];
 
   @queryAssignedElements({ selector: 'mlv-grid-row', flatten: true }) private rows!: GridRow[];
@@ -95,5 +101,11 @@ export class Grid extends LitElement implements ContainerElement {
   async firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
     validateSlots(this);
+  }
+
+  scrollTo(x: number, y: number): void;
+  scrollTo(options?: ScrollToOptions): void;
+  scrollTo(...args): void {
+    this.shadowRoot.querySelector('[part="scrollbox"]').scrollTo(...args);
   }
 }

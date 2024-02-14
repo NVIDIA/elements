@@ -40,6 +40,18 @@ This is helpful for preserving the grid height/fill while dynamic content above 
   <Story id="elements-data-grid-examples--grow" />
 </Canvas>
 
+## Scroll Position
+
+Scroll position can be controlled via the `scrollTo` API.
+
+```javascript
+document.querySelector('mlv-grid').scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+```
+
+<Canvas>
+  <Story id="elements-data-grid-examples--scroll-position" inline={false} height={'500px'} />
+</Canvas>
+
 <element-status tag="mlv-grid"></element-status>
 
 <element-api tag="mlv-grid"></element-api>
