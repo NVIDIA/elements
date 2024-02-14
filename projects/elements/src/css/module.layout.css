@@ -19,9 +19,9 @@
     min-height: 0;
   }
 
-  /* Grow */
   &[nve-layout~='full'],
   &[nve-layout~='grow'] {
+    /** @deprecated - grow is deprecated in favor of full, to distance confustion of flexbox grow behavior */
     height: 100%;
     width: 100%;
     /* https://defensivecss.dev/tip/flexbox-min-content-size/ */
