@@ -40,13 +40,6 @@ module.exports = {
       }
     ],
     [
-      '@semantic-release/git',
-      {
-        assets: ['CHANGELOG.md'],
-        message: 'chore(release): v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
-      }
-    ],
-    [
       'semantic-release-replace-plugin',
       {
         replacements: [
@@ -116,6 +109,13 @@ module.exports = {
             pkgRoot: './projects/elements-react'
           }
         }
+      }
+    ],
+    [
+      '@semantic-release/git',
+      {
+        assets: ['CHANGELOG.md'],
+        message: 'chore(release): v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
       }
     ]
   ]
