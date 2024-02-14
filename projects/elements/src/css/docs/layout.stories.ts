@@ -98,7 +98,7 @@ export const PadResponsive = {
   render: () => html`
     <div>
       <section class="layout-example" nve-layout="row pad@xs:xs pad@sm:sm pad@md:md pad@lg:lg pad@xl:xxxl">
-        <nve-card nve-layout="grow"></nve-card>
+        <nve-card nve-layout="full"></nve-card>
       </section>
     </div>
   `
@@ -222,9 +222,9 @@ export const ResponsiveGrid = {
 
 
 
-export const Grow = {
+export const Full = {
   render: () => html`
-      <h3 nve-text="section">Grow Container</h3>
-      <section nve-layout="row grow"></section>
+      <h3 nve-text="section">Full Container</h3>
+      <section nve-layout="row full"></section>
   `
 }

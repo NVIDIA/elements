@@ -320,7 +320,7 @@ export const ShortcutDropdown = {
       </nve-menu-item>
 
       <nve-menu-item>
-        <div nve-layout="row align:space-between grow">
+        <div nve-layout="row align:space-between full">
           <span nve-layout="row gap:sm align:vertical-center">
             <nve-icon name="copy"></nve-icon> Copy
           </span>
