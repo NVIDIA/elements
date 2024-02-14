@@ -47,3 +47,5 @@ Each project/demo has a set of available and standardized NPM scripts. To build 
 - `dev`: run in watch mode
 - `test`: run unit tests
 - `test:watch`: run unit tests in watch mode
+
+To learn in detail how the repo is built and run see our [build README.md](https://github.com/NVIDIA/elements/-/blob/main/build/README.md).
