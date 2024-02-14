@@ -16,7 +16,7 @@ export default {
 /* Main Page Headers */
 export const StandardHeaderMainPage = {
   render: () => html`
-    <nve-card container="flat" nve-layout="grow">
+    <nve-card container="flat">
       <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
         <!-- Breadcrumbs -->
         <nve-breadcrumb>
@@ -41,7 +41,7 @@ export const StandardHeaderMainPage = {
 
 export const TabsHeaderMainPage = {
   render: () => html`
-    <nve-card container="flat" style="--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)" nve-layout="grow">
+    <nve-card container="flat" style="--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)">
       <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!-- Breadcrumbs -->
         <nve-breadcrumb>
@@ -74,7 +74,7 @@ export const TabsHeaderMainPage = {
 
 export const StackedMetadataHeaderMainPage = {
   render: () => html`
-    <nve-card container="flat" nve-layout="grow">
+    <nve-card container="flat">
       <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
         <!-- Breadcrumbs -->
         <nve-breadcrumb>
@@ -123,7 +123,7 @@ export const StackedMetadataHeaderMainPage = {
 
 export const InlineMetadataHeaderMainPage = {
   render: () => html`
-    <nve-card container="flat" nve-layout="grow">
+    <nve-card container="flat">
       <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
@@ -176,7 +176,7 @@ export const InlineMetadataHeaderMainPage = {
 
 export const InlineKitchenSinkHeaderMainPage = {
   render: () => html`
-    <nve-card container="flat" style="--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)" nve-layout="grow">
+    <nve-card container="flat" style="--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)">
       <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
@@ -241,7 +241,7 @@ export const InlineKitchenSinkHeaderMainPage = {
 
 export const StackedKitchenSinkHeaderMainPage = {
   render: () => html`
-    <nve-card container="flat" style="--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)" nve-layout="grow">
+    <nve-card container="flat" style="--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)">
       <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
@@ -304,7 +304,7 @@ export const StackedKitchenSinkHeaderMainPage = {
 /* Detail Page Headers */
 export const StandardHeaderDetailPage = {
   render: () => html`
-    <nve-card container="full" nve-layout="grow">
+    <nve-card container="full">
       <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
@@ -332,7 +332,7 @@ export const StandardHeaderDetailPage = {
 
 export const TabsHeaderDetailPage = {
   render: () => html`
-    <nve-card container="full" nve-layout="grow">
+    <nve-card container="full">
       <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
@@ -368,7 +368,7 @@ export const TabsHeaderDetailPage = {
 
 export const StackedMetadataHeaderDetailPage = {
   render: () => html`
-    <nve-card container="full" nve-layout="grow">
+    <nve-card container="full">
       <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
@@ -420,7 +420,7 @@ export const StackedMetadataHeaderDetailPage = {
 
 export const InlineMetadataHeaderDetailPage = {
   render: () => html`
-    <nve-card container="full" nve-layout="grow">
+    <nve-card container="full">
       <nve-card-content nve-layout="column gap:md align:stretch pad-x:xl">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
@@ -477,7 +477,7 @@ export const InlineMetadataHeaderDetailPage = {
 
 export const InlineKitchenSinkHeaderDetailPage = {
   render: () => html`
-    <nve-card container="full" nve-layout="grow">
+    <nve-card container="full">
       <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
@@ -542,7 +542,7 @@ export const InlineKitchenSinkHeaderDetailPage = {
 
 export const StackedKitchenSinkHeaderDetailPage = {
   render: () => html`
-    <nve-card container="full" nve-layout="grow">
+    <nve-card container="full">
       <nve-card-content style="--padding: 0" nve-layout="column gap:md align:stretch pad-x:xl pad-top:md">
         <!--Breadcrumbs-->
         <nve-breadcrumb>
@@ -604,7 +604,7 @@ export const StackedKitchenSinkHeaderDetailPage = {
 /* Viewer Page Headers */
 export const StandardHeaderViewerPage = {
   render: () => html`
-    <nve-card container="full" style="--border-bottom: 0" nve-layout="grow">
+    <nve-card container="full" style="--border-bottom: 0">
       <nve-card-content nve-layout="row align:space-between align:vertical-center pad-x:xl">
         <section nve-layout="row gap:sm align:vertical-center">
           <nve-icon-button icon-name="arrow" direction="left" size="sm"></nve-icon-button>
@@ -644,7 +644,7 @@ export const StandardHeaderViewerPage = {
 /* Toolbar Page Headers */
 export const StandardHeaderToolbarPage = {
   render: () => html`
-    <nve-card container="full" style="--border-bottom: 0" nve-layout="grow">
+    <nve-card container="full" style="--border-bottom: 0">
       <nve-card-content nve-layout="row align:space-between align:vertical-center pad-x:xl">
         <!--Left Controls-->
         <section nve-layout="row gap:md align:left align:vertical-center" style="width: 33%">
