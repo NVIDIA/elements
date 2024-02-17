@@ -22,8 +22,9 @@ export class JSONNode extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-button': Button,
-    'nve-icon-button': IconButton
+    [Button.metadata.tag]: Button,
+    [IconButton.metadata.tag]: IconButton,
+    [JSONNode.metadata.tag]: JSONNode
   };
 
   get #isArray() {
@@ -40,8 +41,8 @@ export class JSONNode extends LitElement {
 
   get #expandButton() {
     return this.prop
-      ? html`<nve-button @click=${() => this.expanded = !this.expanded} interaction="flat">${this.prop}: </nve-button>`
-      : html`<nve-icon-button @click=${() => this.expanded = !this.expanded} .direction=${this.expanded ? 'down' : 'right'} interaction="flat" size="sm" icon-name="caret"></nve-icon-button>`
+      ? html`<nve-button @click=${() => (this.expanded = !this.expanded)} interaction="flat">${this.prop}: </nve-button>`
+      : html`<nve-icon-button @click=${() => (this.expanded = !this.expanded)} .direction=${this.expanded ? 'down' : 'right'} interaction="flat" size="sm" icon-name="caret"></nve-icon-button>`;
   }
 
   get #arrayNode() {
@@ -63,12 +64,13 @@ export class JSONNode extends LitElement {
 
   render() {
     return html`<div class=${classMap(this.#classMap)}>
-    ${this.#isArray || this.#isObject 
-      ? html`
+    ${
+      this.#isArray || this.#isObject
+        ? html`
         ${this.#expandButton}
         ${this.expanded && this.#isArray ? this.#arrayNode : nothing}
         ${this.expanded && this.#isObject ? this.#objectNode : nothing}`
-      : this.#value
+        : this.#value
     }
     </div>`;
   }

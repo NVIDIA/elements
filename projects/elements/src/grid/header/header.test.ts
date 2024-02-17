@@ -135,8 +135,6 @@ describe('nve-grid-header validation check', () => {
   });
 
   it('should warn if the grid columns and cells do no match', async () => {
-    expect(console.error).toHaveBeenCalledWith(
-      '@elements/elements: nve-grid-column (5) and nve-grid-cell (4) count mismatch'
-    );
+    expect(console.error).toHaveBeenCalledWith('@elements/elements: grid-column (5) and grid-cell (4) count mismatch');
   });
 });

@@ -3,8 +3,8 @@ import { property } from 'lit/decorators/property.js';
 import { useStyles, attachInternals, appendRootNodeStyle, getAttributeChanges } from '@elements/elements/internal';
 import type { Grid } from '@elements/elements/grid';
 import type { IconButton } from '@elements/elements/icon-button';
+import type { SortButton } from '@elements/elements/sort-button';
 import styles from './column.css?inline';
-
 
 /**
  * @element nve-grid-column
@@ -60,7 +60,7 @@ export class GridColumn extends LitElement {
   }
 
   get #actions() {
-    return Array.from(this.querySelectorAll<IconButton>('nve-sort-button, nve-icon-button[slot=actions]'))
+    return Array.from(this.querySelectorAll<IconButton | SortButton>(`nve-sort-button, nve-icon-button[slot=actions]`));
   }
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
@@ -78,11 +78,13 @@ export class GridColumn extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'columnheader';
-    this.#observers.push(getAttributeChanges(this, 'aria-colindex', () => {
-      this.#computeColumnPositions();
-      this.#computeColumnAlignment();
-    }));
-    this.addEventListener('sort', (e: CustomEvent) => this.ariaSort = e.detail.next);
+    this.#observers.push(
+      getAttributeChanges(this, 'aria-colindex', () => {
+        this.#computeColumnPositions();
+        this.#computeColumnAlignment();
+      })
+    );
+    this.addEventListener('sort', (e: CustomEvent) => (this.ariaSort = e.detail.next));
   }
 
   async updated(props: PropertyValues<this>) {
@@ -112,15 +114,17 @@ export class GridColumn extends LitElement {
 
   #computeColumnPositions() {
     if (this.position === 'fixed') {
-      const columns = Array.from(this.parentElement.querySelectorAll<GridColumn>('nve-grid-column'));
+      const columns = Array.from(this.parentElement.querySelectorAll<GridColumn>(GridColumn.metadata.tag));
       const rightColumns = columns.slice(columns.indexOf(this) + 1, columns.length);
       const position = this.getBoundingClientRect();
       const gridPosition = this.#grid.getBoundingClientRect();
       const side = this.offsetLeft < gridPosition.width / 2 ? 'left' : 'right';
       const leftStyle = position.left - gridPosition.left;
       const rightStyle = rightColumns.reduce((width, c) => width + c.getBoundingClientRect().width, 0);
-      const isLastLeft = this.position && side === 'left' && (this.nextElementSibling as any)?.position !== this.position;
-      const isLastRight = this.position && side === 'right' && (this.previousElementSibling as any)?.position !== this.position;
+      const isLastLeft =
+        this.position && side === 'left' && (this.nextElementSibling as any)?.position !== this.position;
+      const isLastRight =
+        this.position && side === 'right' && (this.previousElementSibling as any)?.position !== this.position;
 
       const positionStyle = `
         nve-grid[id='${this.#grid.id}'] nve-grid-column:nth-child(${this.ariaColIndex}),
@@ -131,14 +135,17 @@ export class GridColumn extends LitElement {
         }
       `;
 
-      const borderStyle = (isLastLeft || isLastRight) ? `
+      const borderStyle =
+        isLastLeft || isLastRight
+          ? `
         nve-grid[id='${this.#grid.id}'] nve-grid-column:nth-child(${this.ariaColIndex}),
         nve-grid[id='${this.#grid.id}'] nve-grid-cell:nth-child(${this.ariaColIndex}) {
           box-shadow: var(--scroll-shadow);
           clip-path: inset(0px ${isLastLeft ? '-4px' : '0'} 0px ${isLastRight ? '-4px' : '0'});
           --border-${side === 'right' ? 'left' : 'right'}: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
         }
-      ` : '';
+      `
+          : '';
 
       if (this.#positionStylesheet) {
         this.#positionStylesheet.replaceSync(`${positionStyle}\n${borderStyle}`);
@@ -155,11 +162,14 @@ export class GridColumn extends LitElement {
   }
 
   #computeColumnAlignment() {
-    appendRootNodeStyle(this.#grid, `
+    appendRootNodeStyle(
+      this.#grid,
+      `
       nve-grid[id='${this.#grid.id}'] nve-grid-column:nth-child(${this.ariaColIndex}),
       nve-grid[id='${this.#grid.id}'] nve-grid-cell:nth-child(${this.ariaColIndex}) {
         --justify-content: ${this.columnAlign}
       }
-    `);
+    `
+    );
   }
 }
