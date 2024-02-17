@@ -23,8 +23,10 @@ import type { Button } from '@elements/elements/button';
 export class Breadcrumb extends LitElement {
   get keynavListConfig(): KeynavListConfig {
     return {
-      items: Array.from(this.shadowRoot.querySelectorAll('slot')).flatMap(slot => slot.assignedElements()).filter(e => e.tagName === 'MLV-BUTTON' || e.tagName === 'MLV-ICON-BUTTON') as (IconButton | Button)[]
-    }
+      items: Array.from(this.shadowRoot.querySelectorAll('slot'))
+        .flatMap(slot => slot.assignedElements())
+        .filter(e => e.tagName === 'MLV-BUTTON' || e.tagName === 'MLV-ICON-BUTTON') as (IconButton | Button)[]
+    };
   }
 
   /** @private */
@@ -38,7 +40,7 @@ export class Breadcrumb extends LitElement {
   };
 
   static elementDefinitions = {
-    'mlv-icon': Icon
+    [Icon.metadata.tag]: Icon
   };
 
   @state() private breadcrumbItems: Element[] = [];
@@ -46,12 +48,14 @@ export class Breadcrumb extends LitElement {
   render() {
     return html`
     <ol internal-host>
-      ${this.breadcrumbItems.map((el, idx) => html`
+      ${this.breadcrumbItems.map(
+        (el, idx) => html`
         <li>
           <slot name=${el.slot} @slotchange=${this.#removeItem}></slot>
-          ${(idx < this.breadcrumbItems.length - 1) ? html`<mlv-icon separator aria-hidden="true" name="chevron" direction="right" size="sm"></mlv-icon>` : nothing}
+          ${idx < this.breadcrumbItems.length - 1 ? html`<mlv-icon separator aria-hidden="true" name="chevron" direction="right" size="sm"></mlv-icon>` : nothing}
         </li>
-      `)}
+      `
+      )}
     </ol>
     <slot hidden-slot @slotchange=${this.#createItems}></slot>`;
   }
@@ -72,13 +76,19 @@ export class Breadcrumb extends LitElement {
     if (e.target && e.target.assignedElements().length) {
       this.#resetItems();
       const items = this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements();
-      items.filter(i => new Set(['MLV-BUTTON', 'MLV-ICON-BUTTON', 'SPAN', 'A']).has(i.tagName)).forEach(i => i.slot = generateId());
-      items.filter(i => new Set(['MLV-BUTTON', 'MLV-ICON-BUTTON']).has(i.tagName)).forEach((i: Button) => i.setAttribute('interaction', 'flat'));
+      items
+        .filter(i => new Set(['MLV-BUTTON', 'MLV-ICON-BUTTON', 'SPAN', 'A']).has(i.tagName))
+        .forEach(i => (i.slot = generateId()));
+      items
+        .filter(i => new Set(['MLV-BUTTON', 'MLV-ICON-BUTTON']).has(i.tagName))
+        .forEach((i: Button) => i.setAttribute('interaction', 'flat'));
       this.breadcrumbItems = items.length ? items : this.breadcrumbItems;
     }
   }
 
   #resetItems() {
-    Array.from(this.shadowRoot.querySelectorAll('slot')).flatMap(i => i.assignedElements()).forEach(i => i.slot = '');
+    Array.from(this.shadowRoot.querySelectorAll('slot'))
+      .flatMap(i => i.assignedElements())
+      .forEach(i => (i.slot = ''));
   }
 }

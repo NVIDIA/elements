@@ -2,7 +2,7 @@ import { define } from '@elements/elements/internal';
 import { Icon, mergeIcons } from '@elements/elements/icon';
 
 define(Icon);
-mergeIcons(customElements.get('mlv-icon') as typeof Icon);
+mergeIcons(customElements.get(Icon.metadata.tag) as typeof Icon);
 
 /** @deprecated aliases */
 Icon.alias({
@@ -10,33 +10,33 @@ Icon.alias({
   'chevron-down': 'chevron',
   'chevron-left': 'chevron',
   'additional-actions': 'more-actions',
-  'analytics': 'pie-chart',
-  'annotation': 'transparent-box',
+  analytics: 'pie-chart',
+  annotation: 'transparent-box',
   'app-switcher': 'switch-apps',
-  'assist': 'chat-bubble',
-  'checkmark': 'check',
-  'date': 'calendar',
-  'docs': 'book',
+  assist: 'chat-bubble',
+  checkmark: 'check',
+  date: 'calendar',
+  docs: 'book',
   'expand-full-screen': 'maximize',
   'expand-panel': 'arrow-stop',
   'collapse-panel': 'arrow-stop',
-  'failed': 'x-circle',
+  failed: 'x-circle',
   'favorite-filled': 'star',
   'favorite-outline': 'star-stroke',
-  'information': 'information-circle-stroke',
-  'maintenance': 'wrench',
+  information: 'information-circle-stroke',
+  maintenance: 'wrench',
   'navigate-to': 'arrow',
   'open-external-link': 'arrow-angle',
-  'location': 'map-pin',
+  location: 'map-pin',
   'pinned-1': 'pin',
-  'project': 'folder',
-  'settings': 'gear',
-  'user': 'person',
+  project: 'folder',
+  settings: 'gear',
+  user: 'person',
   'video-pause': 'pause',
   'video-play': 'play',
   'video-stop': 'stop',
-  'visible': 'eye',
-  'warning': 'exclamation-triangle'
+  visible: 'eye',
+  warning: 'exclamation-triangle'
 });
 
 declare global {

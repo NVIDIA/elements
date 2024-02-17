@@ -135,8 +135,6 @@ describe('mlv-grid-header validation check', () => {
   });
 
   it('should warn if the grid columns and cells do no match', async () => {
-    expect(console.error).toHaveBeenCalledWith(
-      '@elements/elements: mlv-grid-column (5) and mlv-grid-cell (4) count mismatch'
-    );
+    expect(console.error).toHaveBeenCalledWith('@elements/elements: grid-column (5) and grid-cell (4) count mismatch');
   });
 });

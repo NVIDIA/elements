@@ -10,10 +10,10 @@ import {
   ContainerElement,
   validateSlots
 } from '@elements/elements/internal';
-import type { GridHeader } from './header/header.js';
-import type { GridColumn } from './column/column.js';
-import type { GridRow } from './row/row.js';
-import type { GridCell } from './cell/cell.js';
+import { GridHeader } from './header/header.js';
+import { GridColumn } from './column/column.js';
+import { GridRow } from './row/row.js';
+import { GridCell } from './cell/cell.js';
 import styles from './grid.css?inline';
 import globalStyles from './grid.global.css?inline';
 
@@ -22,7 +22,7 @@ import globalStyles from './grid.global.css?inline';
  * @description A grid widget is a container that enables users to navigate the information or interactive elements it contains using directional navigation keys, such as arrow keys, Home, and End. As a generic container widget that offers flexible keyboard navigation, it can serve a wide variety of needs. It can be used for purposes as simple as grouping a collection of checkboxes or navigation links or as complex as creating a full-featured spreadsheet application. - ARIA Authoring Practices Guide
  * @since 0.11.0
  * @slot - default slot for content
- * @slot footer - slot for mlv-grid-footer or mlv-toolbar
+ * @slot footer - slot for grid-footer or toolbar
  * @cssprop --background
  * @cssprop --color
  * @cssprop --border-radius
@@ -58,23 +58,19 @@ export class Grid extends LitElement implements ContainerElement {
 
   get keynavGridConfig() {
     return {
-      columns: this.#columns,
-      rows: [this.querySelector<GridHeader>('mlv-grid-header'), ...this.rows],
-      cells: [...this.#columns, ...this.#cells]
+      columns: this.columns,
+      rows: [this.header, ...this.rows],
+      cells: [...this.columns, ...this.cells]
     };
   }
 
-  @queryAssignedElements({ selector: 'mlv-grid-header', flatten: true }) private gridHeader!: GridHeader[];
+  @queryAssignedElements({ selector: GridHeader.metadata.tag, flatten: true }) private header!: GridHeader;
 
-  @queryAssignedElements({ selector: 'mlv-grid-row', flatten: true }) private rows!: GridRow[];
+  @queryAssignedElements({ selector: GridRow.metadata.tag, flatten: true }) private rows!: GridRow[];
 
-  get #columns(): GridColumn[] {
-    return this.gridHeader[0].columns;
-  }
+  @queryAssignedElements({ selector: GridColumn.metadata.tag, flatten: true }) private columns!: GridColumn[];
 
-  get #cells() {
-    return Array.from(this.querySelectorAll<GridCell>('mlv-grid-cell'));
-  }
+  @queryAssignedElements({ selector: GridCell.metadata.tag, flatten: true }) private cells!: GridColumn[];
 
   /** @private */
   declare _internals: ElementInternals;
@@ -83,7 +79,7 @@ export class Grid extends LitElement implements ContainerElement {
     return html`
       <div internal-host>
         <div role="rowgroup" part="scrollbox">
-          <slot allowed="mlv-grid-row mlv-grid-header mlv-grid-placeholder"></slot>
+          <slot></slot>
         </div>
         <slot name="footer"></slot>
       </div>

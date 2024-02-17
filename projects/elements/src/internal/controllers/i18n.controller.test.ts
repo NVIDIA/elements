@@ -10,8 +10,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 class I18nTestElement extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
-  // mlv-i18n is prefixed with mlv to avoid conflicts with application level i18n utilities
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   render() {
     return html`${JSON.stringify(this.i18n, null, 2)}`;

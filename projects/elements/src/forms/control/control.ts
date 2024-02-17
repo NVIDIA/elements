@@ -4,9 +4,23 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
-import { attachInternals, useStyles, associateLabel, assoicateAriaDescribedBy, associateDataList, appendRootNodeStyle, getAttributeListChanges, I18nController } from '@elements/elements/internal';
+import {
+  attachInternals,
+  useStyles,
+  associateLabel,
+  assoicateAriaDescribedBy,
+  associateDataList,
+  appendRootNodeStyle,
+  getAttributeListChanges,
+  I18nController
+} from '@elements/elements/internal';
 import { ControlMessage } from '../control-message/control-message.js';
-import { setupControlValidationStates, setupControlStates, setupControlStatusStates, inputQuery } from '../utils/states.js';
+import {
+  setupControlValidationStates,
+  setupControlStates,
+  setupControlStatusStates,
+  inputQuery
+} from '../utils/states.js';
 import { setupControlLayoutStates, isInlineInputType } from '../utils/layout.js';
 import globalStyles from './control.global.css?inline';
 import styles from './control.css?inline';
@@ -34,7 +48,11 @@ export class Control extends LitElement {
   @property({ type: String }) status: 'warning' | 'error' | 'success' | 'disabled';
 
   /** Set current control + label + control message layout. Layouts will collapse based on available container space. */
-  @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
+  @property({ type: String, reflect: true }) layout:
+    | 'vertical'
+    | 'vertical-inline'
+    | 'horizontal'
+    | 'horizontal-inline';
 
   /** Sets the input to match the width of the active text content of the control value. Only applicable to vertical input box type controls (input, select) */
   @property({ type: Boolean, reflect: true, attribute: 'fit-text' }) fitText = false;
@@ -45,14 +63,18 @@ export class Control extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /** Enables internal string values to be updated for internationalization. */
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   get #label() {
-    return this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="label"]')?.assignedElements({ flatten: true })?.[0] as HTMLLabelElement;
+    return this.shadowRoot
+      ?.querySelector<HTMLSlotElement>('slot[name="label"]')
+      ?.assignedElements({ flatten: true })?.[0] as HTMLLabelElement;
   }
 
   get #messages() {
-    return (this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="messages"]')?.assignedElements({ flatten: true }) ?? []) as ControlMessage[];
+    return (this.shadowRoot
+      ?.querySelector<HTMLSlotElement>('slot[name="messages"]')
+      ?.assignedElements({ flatten: true }) ?? []) as ControlMessage[];
   }
 
   get #visibleMessages() {
@@ -64,7 +86,13 @@ export class Control extends LitElement {
   /** @private */
   get input() {
     if (!this.#input) {
-      const slotted = this.querySelector('slot')?.assignedElements()?.find(i => i.matches(inputQuery)) ?? Array.from(this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i => i.matches(inputQuery));
+      const slotted =
+        this.querySelector('slot')
+          ?.assignedElements()
+          ?.find(i => i.matches(inputQuery)) ??
+        Array.from(this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i =>
+          i.matches(inputQuery)
+        );
       this.#input = (slotted ? slotted : this.querySelector(inputQuery)) as HTMLInputElement;
     }
 
@@ -83,7 +111,11 @@ export class Control extends LitElement {
 
   @state() private inlineControl = false;
 
-  @state() private styleStates = { 'no-messages': !this.#visibleMessages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
+  @state() private styleStates = {
+    'no-messages': !this.#visibleMessages.length,
+    'no-label': !this.#label,
+    'inline-control': this.inlineControl
+  };
 
   /** @private */
   declare _internals: ElementInternals;
@@ -98,12 +130,13 @@ export class Control extends LitElement {
   };
 
   static elementDefinitions = {
-    'mlv-icon': Icon,
-    'mlv-icon-button': IconButton
-  }
+    [Icon.metadata.tag]: Icon,
+    [IconButton.metadata.tag]: IconButton
+  };
 
   render() {
-    return !this.inlineControl ? html`
+    return !this.inlineControl
+      ? html`
       <div internal-host class=${classMap(this.styleStates)}>
         <slot name="label" ?hidden=${!this.#label}></slot>
         <div input>
@@ -113,7 +146,8 @@ export class Control extends LitElement {
         </div>
         <slot name="messages"></slot>
       </div>
-    ` : html`
+    `
+      : html`
       <div internal-host class=${classMap(this.styleStates)}>
         <div input><slot interaction-state></slot></div>
         <slot name="label"></slot>
@@ -183,7 +217,10 @@ export class Control extends LitElement {
       this.style.setProperty('--control-width', `${this.input.value.length + offset}ch`);
       this.input.style.setProperty('max-width', `${this.input.value.length + 2}ch`, 'important');
     } else if (this.input.tagName === 'SELECT') {
-      this.style.setProperty('--control-width', `${(this.input.options[this.input.selectedIndex].textContent.length) + 4}ch`);
+      this.style.setProperty(
+        '--control-width',
+        `${this.input.options[this.input.selectedIndex].textContent.length + 4}ch`
+      );
     }
   }
 
@@ -198,7 +235,11 @@ export class Control extends LitElement {
       this.inlineControl = isInlineInputType(this.input);
       this.toggleAttribute('multiple', this.input?.multiple);
       this.input?.hasAttribute('size') ? this.setAttribute('size', '') : this.removeAttribute('size');
-      this.styleStates = { 'no-messages': !this.#visibleMessages.length, 'no-label': !this.#label, 'inline-control': this.inlineControl };
+      this.styleStates = {
+        'no-messages': !this.#visibleMessages.length,
+        'no-label': !this.#label,
+        'inline-control': this.inlineControl
+      };
     }
   }
 
@@ -210,7 +251,12 @@ export class Control extends LitElement {
   }
 
   #assignLabel() {
-    const label = this.querySelector('label') || this.shadowRoot.querySelector('slot').assignedNodes({ flatten: true }).find((i: HTMLElement) => i.tagName === 'LABEL') as HTMLLabelElement;
+    const label =
+      this.querySelector('label') ||
+      (this.shadowRoot
+        .querySelector('slot')
+        .assignedNodes({ flatten: true })
+        .find((i: HTMLElement) => i.tagName === 'LABEL') as HTMLLabelElement);
     if (label) {
       label.slot = 'label';
     }
@@ -220,7 +266,7 @@ export class Control extends LitElement {
     try {
       this.input.showPicker();
     } catch {
-      // 
+      //
     }
   }
 }

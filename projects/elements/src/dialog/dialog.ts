@@ -1,6 +1,16 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { animationFade, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, Size, TypePopoverController, useStyles } from '@elements/elements/internal';
+import {
+  animationFade,
+  I18nController,
+  PopoverAlign,
+  popoverBaseStyles,
+  PopoverPosition,
+  PopoverType,
+  Size,
+  TypePopoverController,
+  useStyles
+} from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button';
 import styles from './dialog.css?inline';
 
@@ -83,7 +93,7 @@ export class Dialog extends LitElement {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   /** @private */
   get popoverType(): PopoverType {
@@ -105,8 +115,8 @@ export class Dialog extends LitElement {
   };
 
   static elementDefinitions = {
-    'mlv-icon-button': IconButton
-  }
+    [IconButton.metadata.tag]: IconButton
+  };
 
   render() {
     return html`

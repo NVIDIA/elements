@@ -11,9 +11,9 @@ import cardFooterStyleSheet from './card-footer.css?inline';
  * @description A container for content representing a single entity.
  * @since 0.1.3
  * @slot - This is a default/unnamed slot for card content
- * @slot header - header element (Use `<mlv-card-header>` or custom content)
- * @slot content - content element (Use `<mlv-card-content>` or custom content)
- * @slot footer - footer element (Use `<mlv-card-footer>` or custom content)
+ * @slot header - header element (Use `card-header` or custom content)
+ * @slot content - content element (Use `card-content` or custom content)
+ * @slot footer - footer element (Use `card-footer` or custom content)
  * @cssprop --background
  * @cssprop --color
  * @cssprop --border-radius
@@ -46,7 +46,6 @@ export class Card extends LitElement implements ContainerElement {
   }
 }
 
-
 /**
  * @element mlv-card-header
  * @since 0.1.3
@@ -61,7 +60,7 @@ export class Card extends LitElement implements ContainerElement {
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
- export class CardHeader extends LitElement {
+export class CardHeader extends LitElement {
   static styles = useStyles([cardHeaderStyleSheet]);
 
   static readonly metadata = {
@@ -89,7 +88,6 @@ export class Card extends LitElement implements ContainerElement {
   }
 }
 
-
 /**
  * @element mlv-card-content
  * @since 0.1.3
@@ -99,7 +97,7 @@ export class Card extends LitElement implements ContainerElement {
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
- export class CardContent extends LitElement {
+export class CardContent extends LitElement {
   static styles = useStyles([cardContentStyleSheet]);
 
   static readonly metadata = {
@@ -123,7 +121,7 @@ export class Card extends LitElement implements ContainerElement {
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
- export class CardFooter extends LitElement {
+export class CardFooter extends LitElement {
   static styles = useStyles([cardFooterStyleSheet]);
 
   static readonly metadata = {

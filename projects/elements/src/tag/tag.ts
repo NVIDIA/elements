@@ -1,7 +1,14 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { Color, I18nController, MlvBaseButton, TypeClosableController, useStyles, colorStateStyles } from '@elements/elements/internal';
+import {
+  Color,
+  I18nController,
+  MlvBaseButton,
+  TypeClosableController,
+  useStyles,
+  colorStateStyles
+} from '@elements/elements/internal';
 import { Icon } from '@elements/elements/icon';
 import styles from './tag.css?inline';
 
@@ -30,7 +37,7 @@ export class Tag extends MlvBaseButton {
   };
 
   static elementDefinitions = {
-    'mlv-icon': Icon
+    [Icon.metadata.tag]: Icon
   };
 
   /** Determines if tag is closable, if true, a close icon will be rendered. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=3622-86613&mode=design&t=qIZGochM1aUsCdOP-0) */
@@ -42,7 +49,7 @@ export class Tag extends MlvBaseButton {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /** Enables internal string values to be updated for internationalization. */
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   #typeClosableController = new TypeClosableController(this);
 

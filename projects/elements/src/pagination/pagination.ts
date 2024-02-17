@@ -69,7 +69,7 @@ export class Pagination extends LitElement {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   static formAssociated = true;
 
@@ -81,14 +81,14 @@ export class Pagination extends LitElement {
   };
 
   static elementDefinitions = {
-    'mlv-icon-button': IconButton,
-    'mlv-select': Select
+    [IconButton.metadata.tag]: IconButton,
+    [Select.metadata.tag]: Select
   };
 
   /** @private */
   get keynavListConfig(): KeynavListConfig {
     return {
-      items: this.shadowRoot.querySelectorAll<HTMLElement>('mlv-icon-button, input, select'),
+      items: this.shadowRoot.querySelectorAll<HTMLElement>(`${IconButton.metadata.tag}, input, select`),
       layout: 'horizontal'
     };
   }
@@ -163,7 +163,7 @@ export class Pagination extends LitElement {
           <mlv-select .container=${this.container}>
             <select
               .ariaLabel=${this.i18n.currentPage}
-              @change=${(e) => this.#setStep(parseInt(e.target.value, 10))}
+              @change=${e => this.#setStep(parseInt(e.target.value, 10))}
               value=${this.step}
               .disabled=${this.disabled || this.disableStep}
             >
@@ -180,12 +180,14 @@ export class Pagination extends LitElement {
   render() {
     return html`
       <div internal-host role="presentation">
-        ${this.skippable
-          ? html`
+        ${
+          this.skippable
+            ? html`
               ${this.#startButton} ${this.#previousButton} ${this.#select} ${this.#label} ${this.#nextButton}
               ${this.#endButton}
             `
-          : html` ${this.#select} ${this.#label} ${this.#previousButton} ${this.#nextButton} `}
+            : html` ${this.#select} ${this.#label} ${this.#previousButton} ${this.#nextButton} `
+        }
       </div>
     `;
   }
@@ -210,7 +212,7 @@ export class Pagination extends LitElement {
     const select = this.shadowRoot.querySelector('select');
     if (label && select) {
       this.#resizeObserver = new ResizeObserver(
-        (entries) => (select.style.minWidth = `${entries[0].contentRect.width + 36}px`)
+        entries => (select.style.minWidth = `${entries[0].contentRect.width + 36}px`)
       );
       this.#resizeObserver.observe(label);
     }

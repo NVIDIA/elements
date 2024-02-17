@@ -286,7 +286,7 @@ export const PopoverControllerAlignment = {
 
 class I18nItem extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   render() {
     return html`<mlv-card><pre style="padding: 24px">${JSON.stringify(this.i18n, null, 2)}</pre></mlv-card>`

@@ -52,11 +52,11 @@ export class Icon extends LitElement {
   static _icons = ICON_IMPORTS;
 
   private static get _iconsRegistry() {
-    return (customElements.get('mlv-icon') as any)?._icons ?? Icon._icons
+    return (customElements.get(Icon.metadata.tag) as any)?._icons ?? Icon._icons;
   }
 
   private static set _iconsRegistry(icons: { [key: string]: IconSVG }) {
-    (customElements.get('mlv-icon') as any)._icons = { ...Icon._iconsRegistry, ...icons };
+    (customElements.get(Icon.metadata.tag) as any)._icons = { ...Icon._iconsRegistry, ...icons };
   }
 
   /** @private */
@@ -76,9 +76,11 @@ export class Icon extends LitElement {
 
   static async add(icons: { [key: string]: IconSVG }) {
     if (globalThis.customElements?.whenDefined) {
-      await globalThis.customElements.whenDefined('mlv-icon');
+      await globalThis.customElements.whenDefined(Icon.metadata.tag);
       Icon._iconsRegistry = icons;
-      Object.keys(icons).forEach(name => globalThis?.document?.dispatchEvent(new CustomEvent(`mlv-icon-${name}`)));
+      Object.keys(icons).forEach(name =>
+        globalThis?.document?.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${name}`))
+      );
     }
   }
 
@@ -86,10 +88,10 @@ export class Icon extends LitElement {
     // whenDefined has no rejection state
     if (globalThis.customElements?.whenDefined) {
       /* eslint-disable @typescript-eslint/no-floating-promises */
-      globalThis.customElements.whenDefined('mlv-icon').then(() => {
+      globalThis.customElements.whenDefined(Icon.metadata.tag).then(() => {
         Object.keys(aliases).forEach(alias => {
           Icon._iconsRegistry[alias] = Icon._iconsRegistry[aliases[alias]];
-          globalThis.document.dispatchEvent(new CustomEvent(`mlv-icon-${alias}`));
+          globalThis.document.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${alias}`));
         });
       });
     }
@@ -100,12 +102,16 @@ export class Icon extends LitElement {
     await this.#render();
 
     if (!Icon._iconsRegistry[this.name] || !this.svg) {
-      globalThis?.document?.addEventListener(`mlv-icon-${this.name}`, () => this.requestUpdate(), { once: true });
+      globalThis?.document?.addEventListener(`${Icon.metadata.tag}-${this.name}`, () => this.requestUpdate(), {
+        once: true
+      });
     }
   }
 
   async #render() {
-    const svg = await (this.name?.endsWith('.svg') ? fetch(this.name).then(res => res.text()) : Icon._iconsRegistry[this.name]?.svg() ?? Promise.resolve(''));
+    const svg = await (this.name?.endsWith('.svg')
+      ? fetch(this.name).then(res => res.text())
+      : Icon._iconsRegistry[this.name]?.svg() ?? Promise.resolve(''));
     Icon._iconsRegistry[this.name] = { svg: () => svg, ...Icon._iconsRegistry[this.name] };
     this.svg = svg;
   }

@@ -1,7 +1,14 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { attachInternals, keyNavigationList, KeynavListConfig, useStyles, Interaction, Size } from '@elements/elements/internal';
+import {
+  attachInternals,
+  keyNavigationList,
+  KeynavListConfig,
+  useStyles,
+  Interaction,
+  Size
+} from '@elements/elements/internal';
 import type { IconButton } from '@elements/elements/icon-button';
 import type { Button } from '@elements/elements/button';
 import type { Divider } from '@elements/elements/divider';
@@ -11,7 +18,7 @@ import styles from './button-group.css?inline';
  * @element mlv-button-group
  * @description A button group is a control that enables users to choose between two or more distinct mutually exclusive options.
  * @since 0.16.0
- * @slot - slotted mlv-buttons or mlv-icon-buttons
+ * @slot - slotted `button` or `icon-button`
  * @cssprop --background
  * @cssprop --border-radius
  * @cssprop --padding
@@ -29,7 +36,7 @@ export class ButtonGroup extends LitElement {
     return {
       items: this.#buttons,
       layout: this.orientation
-    }
+    };
   }
 
   /** By default the button group is stateless. Add the `behavior-select` attribute and set to `single` or `multi` to enable stateful selction handling. */
@@ -41,7 +48,7 @@ export class ButtonGroup extends LitElement {
   /** Determines the orientation direction of the group. Vertical groups are limited to icon buttons only. */
   @property({ type: String, reflect: true }) orientation?: 'horizontal' | 'vertical' = 'horizontal';
 
-  /** The `interaction` property is intended to be used on `mlv-button-group` in combination with `mlv-divider` for color-coded split buttons */
+  /** The `interaction` property is intended to be used on `button-group` in combination with `divider` for color-coded split buttons */
   @property({ type: String, reflect: true }) interaction: Interaction;
 
   /** Determines size of button */
@@ -79,29 +86,29 @@ export class ButtonGroup extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'group';
-    this.addEventListener('click', e => (this.#selectButton(e.target)))
+    this.addEventListener('click', e => this.#selectButton(e.target));
   }
 
   updated(props: PropertyValues<this>) {
     super.updated(props);
     this.#syncStyleStates();
   }
-  
+
   #syncStyleStates() {
     if (this.container === 'flat') {
-      this.#buttons.forEach(btn => btn.interaction = 'flat');
+      this.#buttons.forEach(btn => (btn.interaction = 'flat'));
     }
 
     if (this.interaction) {
-      this.#buttons.forEach(btn => btn.interaction = this.interaction);
+      this.#buttons.forEach(btn => (btn.interaction = this.interaction));
     }
-  
+
     this.dividers.length ? this._internals.states.add('--split') : this._internals.states.delete('--split');
   }
 
   #selectButton(button) {
     if (this.behaviorSelect === 'single') {
-      this.#buttons.forEach(i => i.pressed = false);
+      this.#buttons.forEach(i => (i.pressed = false));
       button.pressed = true;
     } else if (this.behaviorSelect === 'multi') {
       button.pressed = !button.pressed;

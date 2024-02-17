@@ -1,7 +1,15 @@
 import { PropertyValues, html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { focusElementTimeout, onListboxActivate, useStyles, i18n, I18nController, getAttributeListChanges, onChildListMutation } from '@elements/elements/internal';
+import {
+  focusElementTimeout,
+  onListboxActivate,
+  useStyles,
+  i18n,
+  I18nController,
+  getAttributeListChanges,
+  onChildListMutation
+} from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
@@ -34,13 +42,13 @@ export class Select extends Control {
   };
 
   static elementDefinitions = {
-    'mlv-dropdown': Dropdown,
-    'mlv-menu': Menu,
-    'mlv-menu-item': MenuItem,
-    'mlv-icon': Icon,
-    'mlv-icon-button': IconButton,
-    'mlv-tag': Tag
-  }
+    [Dropdown.metadata.tag]: Dropdown,
+    [Menu.metadata.tag]: Menu,
+    [MenuItem.metadata.tag]: MenuItem,
+    [Icon.metadata.tag]: Icon,
+    [IconButton.metadata.tag]: IconButton,
+    [Tag.metadata.tag]: Tag
+  };
 
   /** Flat container option is used when embeding component within another containing element */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
@@ -48,7 +56,7 @@ export class Select extends Control {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /** Enables internal string values to be updated for internationalization. */
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   get #select() {
     return this.input as unknown as HTMLSelectElement;
@@ -59,43 +67,51 @@ export class Select extends Control {
   }
 
   get #dropdown() {
-    return this.shadowRoot.querySelector('mlv-dropdown');
+    return this.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
   }
 
   get #menuItems() {
-    return this.shadowRoot.querySelectorAll('mlv-menu-item');
+    return this.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
   }
 
   get #input() {
-    return this.shadowRoot.querySelector('[input]')
+    return this.shadowRoot.querySelector('[input]');
   }
 
   get #tags() {
-    return this.shadowRoot.querySelector('.tags')
+    return this.shadowRoot.querySelector('.tags');
   }
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
   protected get prefixContent() {
-    return this.input?.multiple ? html`
+    return this.input?.multiple
+      ? html`
     <div class="tags-label" aria-hidden="true">${this.#options.filter(o => o.selected).length} ${this.i18n.selected}</div>
     <div class="tags">
-      ${this.#options.filter(o => o.selected).map(o => html`
-      <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o, false)}>${o.textContent}</mlv-tag>`)}
-    </div>` : nothing;
+      ${this.#options
+        .filter(o => o.selected)
+        .map(
+          o => html`
+      <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o, false)}>${o.textContent}</mlv-tag>`
+        )}
+    </div>`
+      : nothing;
   }
 
   protected get suffixContent() {
     return html`
       <mlv-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></mlv-icon>
-      <mlv-dropdown @close=${e => e.target.hidden = true} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
+      <mlv-dropdown @close=${e => (e.target.hidden = true)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
         <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
-          ${this.#options.map((o, i) => html`
+          ${this.#options.map(
+            (o, i) => html`
           <mlv-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} ?disabled=${o.disabled} ?hidden=${!!o.hidden} aria-selected=${o.selected}>
             <slot name="option-${i + 1}">
               <mlv-icon name="check" size="sm" aria-hidden="true"></mlv-icon> ${o.innerText}
             </slot>
-          </mlv-menu-item>`)}
+          </mlv-menu-item>`
+          )}
         </mlv-menu>
       </mlv-dropdown>`;
   }
@@ -140,7 +156,7 @@ export class Select extends Control {
   }
 
   #setupOverflowListener() {
-    const observer = new ResizeObserver((entries) => this.#updateMultipleOverflow(entries[0].contentRect.width));
+    const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0].contentRect.width));
     this.#observers.push(observer);
     observer.observe(this.#input);
   }

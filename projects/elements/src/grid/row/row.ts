@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles, attachInternals, stateSelected } from '@elements/elements/internal';
+import { GridCell } from '../cell/cell.js';
 import styles from './row.css?inline';
 
 /**
@@ -25,7 +26,7 @@ export class GridRow extends LitElement {
   static readonly metadata = {
     tag: 'mlv-grid-row',
     version: 'PACKAGE_VERSION',
-    children: ['mlv-grid-cell']
+    children: [GridCell.metadata.tag]
   };
 
   /** @private */

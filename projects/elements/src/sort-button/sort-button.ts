@@ -5,9 +5,9 @@ import { useStyles, MlvBaseButton, I18nController } from '@elements/elements/int
 import styles from './sort-button.css?inline';
 
 const nextSort = {
-  'none': 'ascending',
-  'ascending': 'descending',
-  'descending': 'none'
+  none: 'ascending',
+  ascending: 'descending',
+  descending: 'none'
 };
 
 /**
@@ -31,7 +31,7 @@ export class SortButton extends MlvBaseButton {
   };
 
   static elementDefinitions = {
-    'mlv-icon': Icon
+    [Icon.metadata.tag]: Icon
   };
 
   /**
@@ -44,7 +44,7 @@ export class SortButton extends MlvBaseButton {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   render() {
     return html`
@@ -60,7 +60,9 @@ export class SortButton extends MlvBaseButton {
 
     this.addEventListener('click', () => {
       this._internals.ariaLabel = `${this.#i18nController.i18n.sort} ${nextSort[this.sort]}`;
-      this.dispatchEvent(new CustomEvent('sort', { detail: { value: this.sort, next: nextSort[this.sort] }, bubbles: true }));
+      this.dispatchEvent(
+        new CustomEvent('sort', { detail: { value: this.sort, next: nextSort[this.sort] }, bubbles: true })
+      );
     });
   }
 }

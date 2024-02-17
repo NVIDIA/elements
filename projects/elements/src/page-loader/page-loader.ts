@@ -1,11 +1,17 @@
-import { html, LitElement } from 'lit';
-import { popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
-import styles from './page-loader.css?inline';
+import { LitElement, html } from 'lit';
+import {
+  popoverBaseStyles,
+  PopoverPosition,
+  PopoverType,
+  TypePopoverController,
+  useStyles
+} from '@elements/elements/internal';
 import { ProgressRing } from '@elements/elements/progress-ring';
+import styles from './page-loader.css?inline';
 
 /**
  * @element mlv-page-loader
- * @description Page Loader is a full-screen version of the `mlv-progress-ring` component, for use when the page should remain unusable as the loader is displayed.
+ * @description Page Loader is a full-screen version of the `progress-ring` component, for use when the page should remain unusable as the loader is displayed.
  * @since 0.19.0
  * @slot - default slot for content
  * @cssprop --gap
@@ -32,8 +38,8 @@ export class PageLoader extends LitElement {
   };
 
   static elementDefinitions = {
-    'mlv-progress-ring': ProgressRing
-  }
+    [ProgressRing.metadata.tag]: ProgressRing
+  };
 
   render() {
     return html`

@@ -1,6 +1,6 @@
 import { getAttributeChanges, getAttributeListChanges, getElementUpdate } from '@elements/elements/internal';
 import type { ControlGroup } from '../control-group/control-group.js';
-import type { ControlMessage } from '../control-message/control-message.js';
+import { ControlMessage } from '../control-message/control-message.js';
 import type { Control } from '../control/control.js';
 
 export const inputQuery = 'input, select, selectmenu, textarea, [mlv-control]';
@@ -11,7 +11,11 @@ export const inputQuery = 'input, select, selectmenu, textarea, [mlv-control]';
  * :--invalid form control is in a invalid state
  */
 export function setupControlValidationStates(control: Control, messages: ControlMessage[]) {
-  if (!control.input.form?.noValidate && !control.input.formNoValidate && !control.input.hasAttribute('formnovalidate')) {
+  if (
+    !control.input.form?.noValidate &&
+    !control.input.formNoValidate &&
+    !control.input.hasAttribute('formnovalidate')
+  ) {
     hideAllValidationMessages(messages);
 
     /**
@@ -25,7 +29,7 @@ export function setupControlValidationStates(control: Control, messages: Control
         showNonValidationMessages(messages);
       }
 
-      hideInactiveValidationMessages(control,  messages);
+      hideInactiveValidationMessages(control, messages);
     };
 
     const resetValidityState = () => {
@@ -34,7 +38,7 @@ export function setupControlValidationStates(control: Control, messages: Control
       control._internals.states.delete('--invalid');
       hideAllValidationMessages(messages);
       showNonValidationMessages(messages);
-    }
+    };
 
     control.input.addEventListener('blur', () => {
       control.input.checkValidity();
@@ -60,7 +64,7 @@ export function setupControlValidationStates(control: Control, messages: Control
     control.input.form?.addEventListener('reset', () => resetValidityState());
   } else {
     control.shadowRoot.addEventListener('slotchange', () => {
-      const messages = Array.from(control.querySelectorAll<ControlMessage>('mlv-control-message'));
+      const messages = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
       if (messages.find(m => m.status === 'error' && !m.hidden)) {
         control._internals.states.delete('--valid');
         control._internals.states.add('--invalid');
@@ -105,9 +109,15 @@ export function setupControlStates(control: Control) {
   });
 
   observers.push(
-    getElementUpdate(control.input, 'readonly', value => (value === '' ? true : value) ? states.add('--readonly') : states.delete('--readonly')),
-    getElementUpdate(control.input, 'checked', () => control.input.checked ? states.add('--checked') : states.delete('--checked')),
-    getElementUpdate(control.input, 'disabled', value => (value === '' ? true : value) ? states.add('--disabled') : states.delete('--disabled')),
+    getElementUpdate(control.input, 'readonly', value =>
+      (value === '' ? true : value) ? states.add('--readonly') : states.delete('--readonly')
+    ),
+    getElementUpdate(control.input, 'checked', () =>
+      control.input.checked ? states.add('--checked') : states.delete('--checked')
+    ),
+    getElementUpdate(control.input, 'disabled', value =>
+      (value === '' ? true : value) ? states.add('--disabled') : states.delete('--disabled')
+    )
   );
   return observers;
 }
@@ -116,7 +126,7 @@ export function setupControlStates(control: Control) {
  * Adds control group interaction states to custom element
  * :--disabled any form control within group is in a disabled state
  */
- export function setupControlGroupStates(controlGroup: ControlGroup) {
+export function setupControlGroupStates(controlGroup: ControlGroup) {
   const inputs = Array.from(controlGroup.inputs);
   if (inputs.filter(i => !i.disabled).length === 0) {
     controlGroup._internals.states.add('--disabled');
@@ -130,7 +140,7 @@ export function setupControlStates(control: Control) {
       } else {
         controlGroup._internals.states.delete('--disabled');
       }
-    }),
+    })
   );
   return observers;
 }
@@ -141,15 +151,18 @@ export function setupControlStates(control: Control) {
  * :--success form control is in a success state
  */
 export function setupControlStatusStates(control: Control | ControlGroup, messages: ControlMessage[]) {
-  updateControlStatusState(control, messages.find(m => !m.hidden));
+  updateControlStatusState(
+    control,
+    messages.find(m => !m.hidden)
+  );
   const observers: MutationObserver[] = [];
   observers.push(
     getAttributeListChanges(control, ['hidden', 'status'], mutation => {
       const target = mutation.target as ControlMessage;
-      if (target.tagName.toLocaleLowerCase() === 'mlv-control-message') {
+      if (target.tagName.toLocaleLowerCase() === ControlMessage.metadata.tag) {
         updateControlStatusState(control, target);
       }
-    }),
+    })
   );
   return observers;
 }
