@@ -1,6 +1,12 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, useStyles, associateAriaLabel, assoicateAriaDescribedBy, associateControlGroup } from '@elements/elements/internal';
+import {
+  attachInternals,
+  useStyles,
+  associateAriaLabel,
+  assoicateAriaDescribedBy,
+  associateControlGroup
+} from '@elements/elements/internal';
 import { ControlMessage } from '../control-message/control-message.js';
 import { setupControlStatusStates, setupControlGroupStates, inputQuery } from '../utils/states.js';
 import { setupControlLayoutStates } from '../utils/layout.js';
@@ -21,7 +27,11 @@ import styles from './control-group.css?inline';
  */
 export class ControlGroup extends LitElement {
   /** Set each slotted control + label + control message layout */
-  @property({ type: String, reflect: true }) layout: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
+  @property({ type: String, reflect: true }) layout:
+    | 'vertical'
+    | 'vertical-inline'
+    | 'horizontal'
+    | 'horizontal-inline';
 
   get label() {
     return this.querySelector<HTMLLabelElement>('label');
@@ -32,7 +42,7 @@ export class ControlGroup extends LitElement {
   }
 
   get #messages() {
-    return Array.from(this.querySelectorAll<ControlMessage>('nve-control-message'));
+    return Array.from(this.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
   }
 
   static styles = useStyles([styles]);
@@ -73,7 +83,7 @@ export class ControlGroup extends LitElement {
   #updateAssociations() {
     this.#assignLabel();
     associateAriaLabel(this.label, this);
-    assoicateAriaDescribedBy(Array.from(this.querySelectorAll<ControlMessage>('nve-control-message')), this);
+    assoicateAriaDescribedBy(Array.from(this.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag)), this);
     associateControlGroup(Array.from(this.inputs));
   }
 

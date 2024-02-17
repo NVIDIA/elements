@@ -12,10 +12,10 @@ const alertStatus: AlertStatus = {
 };
 
 interface AlertStatus {
-  error: 'danger',
-  warning: 'warning',
-  success: 'success',
-  disabled: undefined
+  error: 'danger';
+  warning: 'warning';
+  success: 'success';
+  disabled: undefined;
 }
 
 /**
@@ -33,7 +33,7 @@ interface AlertStatus {
  * @package true
  */
 export class ControlMessage extends LitElement {
-  /** 
+  /**
    * Visual treatment for current form control validation status
    */
   @property({ type: String, reflect: true }) status?: 'warning' | 'error' | 'success' | 'disabled';
@@ -51,7 +51,7 @@ export class ControlMessage extends LitElement {
     version: 'PACKAGE_VERSION'
   };
 
-  get alertStatus(){
+  get alertStatus() {
     if (this.status) {
       return alertStatus[this.status];
     } else if (this.error) {
@@ -62,8 +62,8 @@ export class ControlMessage extends LitElement {
   }
 
   static elementDefinitions = {
-    'nve-alert': Alert
-  }
+    [Alert.metadata.tag]: Alert
+  };
 
   render() {
     return html`

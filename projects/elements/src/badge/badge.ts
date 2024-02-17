@@ -1,7 +1,19 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
-import { TaskStatus, SupportStatus, useStyles, statusIcons, TrendStatus, statusStateStyles, supportStateStyles, Color, colorStateStyles, attachInternals, I18nController } from '@elements/elements/internal';
+import {
+  TaskStatus,
+  SupportStatus,
+  useStyles,
+  statusIcons,
+  TrendStatus,
+  statusStateStyles,
+  supportStateStyles,
+  Color,
+  colorStateStyles,
+  attachInternals,
+  I18nController
+} from '@elements/elements/internal';
 import styles from './badge.css?inline';
 
 /**
@@ -45,7 +57,7 @@ export class Badge extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-icon': Icon
+    [Icon.metadata.tag]: Icon
   };
 
   get #size() {
@@ -60,7 +72,7 @@ export class Badge extends LitElement {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   render() {
     return html`
@@ -97,7 +109,10 @@ export class Badge extends LitElement {
   }
 
   #assignDefaultIcon() {
-    const unassignedIcon = this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements().find(i => i.tagName === 'MLV-ICON' && !i.slot);
+    const unassignedIcon = this.shadowRoot
+      .querySelector<HTMLSlotElement>('slot:not([name])')
+      .assignedElements()
+      .find(i => i.tagName === 'MLV-ICON' && !i.slot);
     if (unassignedIcon) {
       unassignedIcon.slot = 'prefix-icon';
     }

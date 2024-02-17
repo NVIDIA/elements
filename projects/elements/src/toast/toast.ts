@@ -1,8 +1,20 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { IconButton } from '@elements/elements/icon-button';
-import { animationFade, attachInternals, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, statusIcons, SupportStatus, TypePopoverController, useStyles } from '@elements/elements/internal';
-import type { IconName } from '@elements/elements/icon';
+import {
+  animationFade,
+  attachInternals,
+  I18nController,
+  PopoverAlign,
+  popoverBaseStyles,
+  PopoverPosition,
+  PopoverType,
+  statusIcons,
+  SupportStatus,
+  TypePopoverController,
+  useStyles
+} from '@elements/elements/internal';
+import { Icon, type IconName } from '@elements/elements/icon';
 import styles from './toast.css?inline';
 
 /**
@@ -34,8 +46,9 @@ export class Toast extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-icon-button': IconButton
-  }
+    [IconButton.metadata.tag]: IconButton,
+    [Icon.metadata.tag]: Icon
+  };
 
   /**
    * The anchor provides the element that the popover should position relative to.
@@ -89,7 +102,7 @@ export class Toast extends LitElement {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   /** @private */
   readonly popoverType: PopoverType = 'manual';
@@ -102,7 +115,7 @@ export class Toast extends LitElement {
   render() {
     return html`
       <dialog ${animationFade(this)}>
-        <slot name="prefix">${this.status !== 'muted' ? html`<nve-icon .name=${(statusIcons[this.status] as IconName)} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></nve-icon>` : nothing}</slot>
+        <slot name="prefix">${this.status !== 'muted' ? html`<nve-icon .name=${statusIcons[this.status] as IconName} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></nve-icon>` : nothing}</slot>
         ${this.closable ? html`<nve-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" interaction="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : nothing}
         <slot></slot>
       </dialog>

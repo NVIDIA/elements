@@ -29,18 +29,27 @@ export class JSONViewer extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-json-node': JSONNode
+    [JSONNode.metadata.tag]: JSONNode
   };
 
   get #classMap() {
-    return { array: Array.isArray(this.value), object: typeof this.value === 'object' && this.value !== null, expanded: this.expanded };
+    return {
+      array: Array.isArray(this.value),
+      object: typeof this.value === 'object' && this.value !== null,
+      expanded: this.expanded
+    };
   }
 
   render() {
     return html`
     <div class=${classMap(this.#classMap)}>
       <slot @slotchange=${this.#slotchange} hidden></slot>
-      ${Object.entries(this.value).filter(v => v[1] !== null).map(([prop, value]) => html`<nve-json-node .expanded=${this.expanded} .expandedAll=${this.expanded} .prop=${prop} .value=${value}></nve-json-node>`)}
+      ${Object.entries(this.value)
+        .filter(v => v[1] !== null)
+        .map(
+          ([prop, value]) =>
+            html`<nve-json-node .expanded=${this.expanded} .expandedAll=${this.expanded} .prop=${prop} .value=${value}></nve-json-node>`
+        )}
     </div>
     `;
   }

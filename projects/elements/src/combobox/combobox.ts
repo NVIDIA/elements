@@ -52,12 +52,12 @@ export class Combobox extends Control implements ContainerElement {
   };
 
   static elementDefinitions = {
-    'nve-dropdown': Dropdown,
-    'nve-menu': Menu,
-    'nve-menu-item': MenuItem,
-    'nve-icon': Icon,
-    'nve-icon-button': IconButton,
-    'nve-tag': Tag
+    [Dropdown.metadata.tag]: Dropdown,
+    [Menu.metadata.tag]: Menu,
+    [MenuItem.metadata.tag]: MenuItem,
+    [Icon.metadata.tag]: Icon,
+    [IconButton.metadata.tag]: IconButton,
+    [Tag.metadata.tag]: Tag
   };
 
   get #datalist() {
@@ -80,11 +80,11 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   get #items() {
-    return Array.from(this.shadowRoot.querySelectorAll('nve-menu-item'));
+    return Array.from(this.shadowRoot.querySelectorAll(MenuItem.metadata.tag));
   }
 
   get #dropdown() {
-    return this.shadowRoot.querySelector<Dropdown>('nve-dropdown');
+    return this.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
   }
 
   get #input() {
@@ -213,7 +213,7 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupLightDismiss() {
     const options = {
-      element: this.shadowRoot.querySelector('nve-dropdown')?.shadowRoot.querySelector('dialog'),
+      element: this.shadowRoot.querySelector(Dropdown.metadata.tag)?.shadowRoot.querySelector('dialog'),
       focusElement: this.input
     };
     createLightDismiss(options, () => {

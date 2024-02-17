@@ -2,7 +2,19 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
 import { IconButton } from '@elements/elements/icon-button';
-import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverType, SupportStatus, statusIcons, TypePopoverController, useStyles, I18nController, PopoverPosition } from '@elements/elements/internal';
+import {
+  animationFade,
+  attachInternals,
+  PopoverAlign,
+  popoverBaseStyles,
+  PopoverType,
+  SupportStatus,
+  statusIcons,
+  TypePopoverController,
+  useStyles,
+  I18nController,
+  PopoverPosition
+} from '@elements/elements/internal';
 import styles from './notification.css?inline';
 
 /**
@@ -83,7 +95,7 @@ export class Notification extends LitElement {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   protected typePopoverController = new TypePopoverController<Notification>(this);
 
@@ -110,15 +122,17 @@ export class Notification extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-icon': Icon,
-    'nve-icon-button': IconButton
-  }
+    [Icon.metadata.tag]: Icon,
+    [IconButton.metadata.tag]: IconButton
+  };
 
   render() {
     return html`
-    ${this.position
-    ? html`<dialog class="popover" ${animationFade(this, { onComplete: () => this.#complete()})}>${this.#popoverContent}</dialog>`
-    : html`<div class="popover" ${animationFade(this, { onComplete: () => this.#complete()})}>${this.#popoverContent}</div>`}
+    ${
+      this.position
+        ? html`<dialog class="popover" ${animationFade(this, { onComplete: () => this.#complete() })}>${this.#popoverContent}</dialog>`
+        : html`<div class="popover" ${animationFade(this, { onComplete: () => this.#complete() })}>${this.#popoverContent}</div>`
+    }
     `;
   }
 
@@ -129,13 +143,17 @@ export class Notification extends LitElement {
   }
 
   async remove() {
-    this.shadowRoot.addEventListener('nve-animation-complete', () => {
-      super.remove();
-    }, { once: true });
+    this.shadowRoot.addEventListener(
+      'nve-animation-complete',
+      () => {
+        super.remove();
+      },
+      { once: true }
+    );
     this.hidden = true;
   }
 
   #complete() {
-    this.shadowRoot.dispatchEvent(new CustomEvent('nve-animation-complete'))
+    this.shadowRoot.dispatchEvent(new CustomEvent('nve-animation-complete'));
   }
 }
