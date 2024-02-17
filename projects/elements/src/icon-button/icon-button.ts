@@ -47,8 +47,8 @@ export class IconButton extends Button {
   };
 
   static elementDefinitions = {
-    'nve-icon': Icon
-  }
+    [Icon.metadata.tag]: Icon
+  };
 
   render() {
     return html`

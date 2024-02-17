@@ -1,12 +1,19 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, I18nController, Size, statusIcons, SupportStatus, useStyles } from '@elements/elements/internal';
+import {
+  attachInternals,
+  I18nController,
+  Size,
+  statusIcons,
+  SupportStatus,
+  useStyles
+} from '@elements/elements/internal';
 import { Icon } from '@elements/elements/icon';
 import styles from './progress-ring.css?inline';
 
 /**
  * @element nve-progress-ring
- * @description The `nve-progress-ring` component is used to indicate the status of a pending task. It also serves the basis of the page loading element.
+ * @description The `progress-ring` component is used to indicate the status of a pending task. It also serves the basis of the page loading element.
  * @since 0.17.0
  * @slot status-icon
  * @cssprop --background-color
@@ -29,16 +36,16 @@ export class ProgressRing extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-icon': Icon
+    [Icon.metadata.tag]: Icon
   };
 
   /** @private */
   declare _internals: ElementInternals;
 
-  /** The current `value` of the progress ring. When not set, an indeterminate animation will show. */  
+  /** The current `value` of the progress ring. When not set, an indeterminate animation will show. */
   @property({ type: Number }) value?: number;
 
-  /** The `max` value of the progress ring that the `value` is proportionaly scaled to. */  
+  /** The `max` value of the progress ring that the `value` is proportionaly scaled to. */
   @property({ type: Number }) max? = 100;
 
   /** There are four visual treatments that represent the `status` of varius tasks. When `status` is set to `warning`, `success` or `danger`, appropriate icons are embedded. */
@@ -50,7 +57,7 @@ export class ProgressRing extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /** Enables internal string values to be updated for internationalization. */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   render() {
     return html`
@@ -58,7 +65,7 @@ export class ProgressRing extends LitElement {
         <svg viewBox="0 0 16 16" role="presentation">
           <circle cx="8px" cy="8px" r="6.5px" class="background"></circle>
           <circle cx="8px" cy="8px" r="6.5px" class="ring"
-            stroke-dasharray=${this.value / this.max * 44 + 'px' + ' ' + '44px'}>
+            stroke-dasharray=${(this.value / this.max) * 44 + 'px' + ' ' + '44px'}>
           </circle>
         </svg>
 
@@ -79,6 +86,7 @@ export class ProgressRing extends LitElement {
     super.updated(props);
     this._internals.ariaValueNow = `${this.value === undefined ? '' : this.value}`;
     this._internals.ariaValueMax = `${this.max}`;
-    this._internals.ariaLabel = this.i18n[this.status] && this.i18n[this.status] !== 'neutral' ? this.i18n[this.status] : this.i18n.information;
+    this._internals.ariaLabel =
+      this.i18n[this.status] && this.i18n[this.status] !== 'neutral' ? this.i18n[this.status] : this.i18n.information;
   }
 }
