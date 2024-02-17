@@ -2,20 +2,28 @@ import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals, ContainerElement, Container, generateId } from '@elements/elements/internal';
+import {
+  stateExpanded,
+  I18nController,
+  TypeExpandableController,
+  useStyles,
+  attachInternals,
+  ContainerElement,
+  Container,
+  generateId
+} from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
 import accordionHeaderStyleSheet from './accordion-header.css?inline';
 import accordionContentStyleSheet from './accordion-content.css?inline';
 import accordionGroupStyleSheet from './accordion-group.css?inline';
 
-
 /**
  * @element nve-accordion-header
  * @since 0.12.0
  * @slot title - Title heading
  * @slot subtitle - Subtitle Text
- * @slot actions - Extra Action Button (use `nve-icon-button`)
+ * @slot actions - Extra Action Button (use `icon-button`)
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
@@ -57,7 +65,6 @@ export class AccordionHeader extends LitElement {
   }
 }
 
-
 /**
  * @element nve-accordion-content
  * @since 0.12.0
@@ -83,14 +90,13 @@ export class AccordionContent extends LitElement {
   }
 }
 
-
 /**
  * @element nve-accordion
  * @description An accordion is a vertical stack of interactive headings used to toggle the display of further information.
  * @since 0.12.0
  * @slot - This is a default/unnamed slot for accordion content
- * @slot header - header element (Use `<nve-accordion-header>` or custom content)
- * @slot content - content element (Use `<nve-accordion-content>` or custom content)
+ * @slot header - header element (Use `accordion-header` or custom content)
+ * @slot content - content element (Use `accordion-content` or custom content)
  * @cssprop --background
  * @cssprop --color
  * @cssprop --header-padding
@@ -109,7 +115,7 @@ export class Accordion extends LitElement implements ContainerElement {
   };
 
   static elementDefinitions = {
-    'nve-icon-button': IconButton,
+    [IconButton.metadata.tag]: IconButton
   };
 
   /** @private */
@@ -121,7 +127,7 @@ export class Accordion extends LitElement implements ContainerElement {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   /**
    * Determines the container styles of component. Flat is used for nesting accordions within other containers. Inset can be used for more complex accordions where content is distinctly separated.
@@ -146,7 +152,7 @@ export class Accordion extends LitElement implements ContainerElement {
   @state() private hoverActive = false;
 
   get #hasAction(): boolean {
-    return !!this.querySelector('[slot="actions"]')
+    return !!this.querySelector('[slot="actions"]');
   }
 
   get #header() {
@@ -165,9 +171,9 @@ export class Accordion extends LitElement implements ContainerElement {
     return html`
       <div internal-host class=${this.#hasAction ? 'has-action' : ''}>
         <div id="header"
-          @click=${(e) => this.#toggle(e.target)}
-          @mouseenter=${() => this.hoverActive = true}
-          @mouseleave=${() => this.hoverActive = false}
+          @click=${e => this.#toggle(e.target)}
+          @mouseenter=${() => (this.hoverActive = true)}
+          @mouseleave=${() => (this.hoverActive = false)}
           .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
           .ariaControls=${'content'}
           >
@@ -176,7 +182,7 @@ export class Accordion extends LitElement implements ContainerElement {
           <nve-icon-button
             interaction="flat"
             icon-name="caret"
-            direction=${this.expanded ? this.#hasAction ? 'down' : 'up' : this.#hasAction ? 'right' : 'down'}
+            direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
             ?disabled=${this.disabled}
             ?pressed=${this.expanded}
             ?selected=${!this.disabled && this.hoverActive}
@@ -208,7 +214,6 @@ export class Accordion extends LitElement implements ContainerElement {
   }
 }
 
-
 /**
  * @element nve-accordion-group
  * @since 0.12.0
@@ -223,12 +228,12 @@ export class AccordionGroup extends LitElement {
 
   /**
    * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
-  */
-  @property({ type: Boolean, attribute: 'behavior-expand'}) behaviorExpand = false;
+   */
+  @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
   /**
    * Determines whether or not the accordion should opt-in to stateful expansion of a single accordion at a time
-  */
-  @property({ type: Boolean, attribute: 'behavior-expand-single'}) behaviorExpandSingle = false;
+   */
+  @property({ type: Boolean, attribute: 'behavior-expand-single' }) behaviorExpandSingle = false;
   /** flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion) */
   @property({ type: String, reflect: true }) container?: 'flat' | 'full' | 'inset' = 'full';
 
@@ -255,7 +260,7 @@ export class AccordionGroup extends LitElement {
     if (this.behaviorExpandSingle) {
       this.accordions.forEach(accordion => {
         accordion.addEventListener('open', () => {
-          this.accordions.forEach(accordion => accordion.expanded = false);
+          this.accordions.forEach(accordion => (accordion.expanded = false));
         });
       });
     }
@@ -267,7 +272,7 @@ export class AccordionGroup extends LitElement {
   }
 
   #updateChildAttributes() {
-    this.accordions.forEach(accordion => accordion.container = this.container);
-    this.accordions.forEach(accordion => accordion.behaviorExpand = this.behaviorExpand || this.behaviorExpandSingle);
+    this.accordions.forEach(accordion => (accordion.container = this.container));
+    this.accordions.forEach(accordion => (accordion.behaviorExpand = this.behaviorExpand || this.behaviorExpandSingle));
   }
 }

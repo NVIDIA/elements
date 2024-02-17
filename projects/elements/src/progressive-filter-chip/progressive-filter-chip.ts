@@ -1,7 +1,14 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { appendRootNodeStyle, attachInternals, generateId, I18nController, TypeClosableController, useStyles } from '@elements/elements/internal';
+import {
+  appendRootNodeStyle,
+  attachInternals,
+  generateId,
+  I18nController,
+  TypeClosableController,
+  useStyles
+} from '@elements/elements/internal';
 import { Input } from '@elements/elements/input';
 import { Select } from '@elements/elements/select';
 import { Date } from '@elements/elements/date';
@@ -28,11 +35,11 @@ export class ProgressiveFilterChip extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-input': Input,
-    'nve-select': Select,
-    'nve-date': Date,
-    'nve-icon-button': IconButton
-  }
+    [Input.metadata.tag]: Input,
+    [Select.metadata.tag]: Select,
+    [Date.metadata.tag]: Date,
+    [IconButton.metadata.tag]: IconButton
+  };
 
   /** Determines if a close button should render within filter chip */
   @property({ type: Boolean }) closable: boolean;
@@ -40,7 +47,7 @@ export class ProgressiveFilterChip extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /** Enables internal string values to be updated for internationalization. */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   @state() private inputs: Element[] = [];
 
@@ -91,13 +98,17 @@ export class ProgressiveFilterChip extends LitElement {
   #createItems(e: Event) {
     if (e.target && (e.target as HTMLSlotElement).assignedElements().length) {
       this.#resetItems();
-      const items = Array.from(this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements()).filter(i => i.matches('input, select, nve-button, [nve-control]'));
-      items.forEach(i => i.slot = generateId());
+      const items = Array.from(
+        this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements()
+      ).filter(i => i.matches('input, select, nve-button, [nve-control]'));
+      items.forEach(i => (i.slot = generateId()));
       this.inputs = items.length ? items : this.inputs;
     }
   }
 
   #resetItems() {
-    Array.from(this.shadowRoot.querySelectorAll('slot')).flatMap(i => i.assignedElements()).forEach(i => i.slot = '');
+    Array.from(this.shadowRoot.querySelectorAll('slot'))
+      .flatMap(i => i.assignedElements())
+      .forEach(i => (i.slot = ''));
   }
 }

@@ -1,6 +1,14 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { animationSlide, I18nController, popoverBaseStyles, PopoverType, Size, TypePopoverController, useStyles } from '@elements/elements/internal';
+import {
+  animationSlide,
+  I18nController,
+  popoverBaseStyles,
+  PopoverType,
+  Size,
+  TypePopoverController,
+  useStyles
+} from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button';
 import styles from './drawer.css?inline';
 
@@ -84,7 +92,7 @@ export class Drawer extends LitElement {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   /** @private */
   get popoverType(): PopoverType {
@@ -106,8 +114,8 @@ export class Drawer extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-icon-button': IconButton
-  }
+    [IconButton.metadata.tag]: IconButton
+  };
 
   render() {
     return html`

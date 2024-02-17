@@ -10,10 +10,10 @@ import styles from './app-header.css?inline';
  * @element nve-app-header
  * @description An element that appears across the top of all pages containing the application name and primary navigation.
  * @since 0.11.0
- * @slot - Use the default slot in `nve-logo` to create an app logo badge within the app header. Include a `<span>` element inside `nve-app-header` to change the default application title.
+ * @slot - Use the default slot in `logo` to create an app logo badge within the app header. Include a `<span>` element inside `app-header` to change the default application title.
  * @slot title
- * @slot nav-items - For `nve-button` and `nve-icon-button` elements used for navigation behavior. Use the `active` attribute to indicate the current page.
- * @slot nav-actions - For `nve-icon-button` elements. This will place them in the section of the app header where supplemental actions are located.
+ * @slot nav-items - For `button` and `icon-button` elements used for navigation behavior. Use the `active` attribute to indicate the current page.
+ * @slot nav-actions - For `icon-button` elements. This will place them in the section of the app header where supplemental actions are located.
  * @cssprop --background
  * @cssprop --padding
  * @cssprop --border-bottom
@@ -32,8 +32,8 @@ export class AppHeader extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-logo': Logo
-  }
+    [Logo.metadata.tag]: Logo
+  };
 
   @queryAssignedElements({ slot: 'nav-items', flatten: true }) private navItems!: Button[];
 
@@ -42,7 +42,7 @@ export class AppHeader extends LitElement {
   @queryAssignedElements() private slottedElements!: HTMLElement[];
 
   get #slottedLogo() {
-    return this.slottedElements.find(i => i.tagName === 'MLV-LOGO') as Logo;
+    return this.slottedElements.find(i => i.tagName.toLocaleLowerCase() === Logo.metadata.tag) as Logo;
   }
 
   render() {
@@ -83,12 +83,10 @@ export class AppHeader extends LitElement {
   }
 
   #updateItems() {
-    this.navActions?.filter(i => i.getAttribute('interaction') === 'emphasize')?.forEach(item => item.size = 'sm');
+    this.navActions?.filter(i => i.getAttribute('interaction') === 'emphasize')?.forEach(item => (item.size = 'sm'));
 
     const items = this.navItems ?? [];
     const actions = this.navActions ?? [];
-    [...items, ...actions]
-      .filter(i => !i.hasAttribute('interaction'))
-      .forEach(item => item.interaction = 'flat');
+    [...items, ...actions].filter(i => !i.hasAttribute('interaction')).forEach(item => (item.interaction = 'flat'));
   }
 }
