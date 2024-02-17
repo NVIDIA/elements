@@ -1,9 +1,12 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { useStyles, attachInternals, debounce, LogService, validateSlots } from '@elements/elements/internal';
-import type { Grid, GridColumn } from '@elements/elements/grid';
 import styles from './header.css?inline';
 import { GlobalStateService } from '@elements/elements/internal/services/global.service';
+import { GridColumn } from '../column/column.js';
+import { Grid } from '../grid.js';
+import { GridRow } from '../row/row.js';
+import { GridCell } from '../cell/cell.js';
 
 /**
  * @element nve-grid-header
@@ -22,14 +25,14 @@ export class GridHeader extends LitElement {
   static readonly metadata = {
     tag: 'nve-grid-header',
     version: 'PACKAGE_VERSION',
-    children: ['nve-grid-column']
+    children: [GridColumn.metadata.tag]
   };
 
   /** @private */
   declare _internals: ElementInternals;
 
   /** @private */
-  @queryAssignedElements({ selector: 'nve-grid-column', flatten: true }) columns!: GridColumn[];
+  @queryAssignedElements({ selector: GridColumn.metadata.tag, flatten: true }) columns!: GridColumn[];
 
   get #grid() {
     return this.parentElement as Grid;
@@ -61,7 +64,7 @@ export class GridHeader extends LitElement {
 
   async #computeColumnWidths() {
     await this.updateComplete;
-    this.columns.forEach((c, i) => c.ariaColIndex = `${i + 1}`);
+    this.columns.forEach((c, i) => (c.ariaColIndex = `${i + 1}`));
     this.#grid.style.setProperty('--grid-auto-flow', 'initial');
     this.#grid.style.setProperty('--grid-template-column', this.columns.map((_, i) => `var(--c${i})`).join(' '));
 
@@ -70,14 +73,16 @@ export class GridHeader extends LitElement {
 
     // compute column width based on content
     await this.updateComplete;
-    this.columns.forEach((c, i) => this.#grid.style.setProperty(`--c${i}`, c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`));
+    this.columns.forEach((c, i) =>
+      this.#grid.style.setProperty(`--c${i}`, c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`)
+    );
   }
 
   #validateColumns() {
     if (GlobalStateService.state.env !== 'production') {
-      const cells = this.#grid.querySelector('nve-grid-row')?.querySelectorAll('nve-grid-cell');
-      if (this.columns && cells && (this.columns.length !== cells.length)) {
-        LogService.error(`nve-grid-column (${this.columns.length}) and nve-grid-cell (${cells.length}) count mismatch`);
+      const cells = this.#grid.querySelector(GridRow.metadata.tag)?.querySelectorAll(GridCell.metadata.tag);
+      if (this.columns && cells && this.columns.length !== cells.length) {
+        LogService.error(`grid-column (${this.columns.length}) and grid-cell (${cells.length}) count mismatch`);
       }
     }
   }

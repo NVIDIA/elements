@@ -5,6 +5,7 @@ import type { ButtonGroup } from '@elements/elements/button-group';
 import type { IconButton } from '@elements/elements/icon-button';
 import '@elements/elements/button-group/define.js';
 import '@elements/elements/icon-button/define.js';
+import '@elements/elements/divider/define.js';
 
 describe('nve-button-group', () => {
   let fixture: HTMLElement;

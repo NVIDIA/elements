@@ -47,14 +47,14 @@ export class Alert extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-icon': Icon,
-    'nve-icon-button': IconButton
+    [Icon.metadata.tag]: Icon,
+    [IconButton.metadata.tag]: IconButton
   };
 
   /** Defines visual treatment to represent a ongoing task or support status. */
   @property({ type: String, reflect: true }) status: SupportStatus | TaskStatus | 'muted';
 
-  /** When used in an `nve-alert-group` the `closable` property enables alerts to be dismissed within the same group. */
+  /** When used in an `alert-group` the `closable` property enables alerts to be dismissed within the same group. */
   @property({ type: Boolean }) closable = false;
 
   #typeClosableController = new TypeClosableController(this);
@@ -62,7 +62,7 @@ export class Alert extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /** Enables internal string values to be updated for internationalization. */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   get #prefix() {
     return this.querySelectorAll('[slot="prefix"]');

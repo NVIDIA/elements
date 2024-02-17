@@ -1,13 +1,18 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { when } from 'lit/directives/when.js';
-import { stateExpanded, I18nController, TypeExpandableController, useStyles, attachInternals } from '@elements/elements/internal';
+import {
+  stateExpanded,
+  I18nController,
+  TypeExpandableController,
+  useStyles,
+  attachInternals
+} from '@elements/elements/internal';
 import { IconButton } from '@elements/elements/icon-button/icon-button';
 import panelStyleSheet from './panel.css?inline';
 import panelHeaderStyleSheet from './panel-header.css?inline';
 import panelContentStyleSheet from './panel-content.css?inline';
 import panelFooterStyleSheet from './panel-footer.css?inline';
-
 
 /**
  * @element nve-panel-header
@@ -49,7 +54,6 @@ export class PanelHeader extends LitElement {
   }
 }
 
-
 /**
  * @element nve-panel-content
  * @since 0.10.0
@@ -60,7 +64,7 @@ export class PanelHeader extends LitElement {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
  */
- export class PanelContent extends LitElement {
+export class PanelContent extends LitElement {
   static styles = useStyles([panelContentStyleSheet]);
 
   static readonly metadata = {
@@ -75,7 +79,6 @@ export class PanelHeader extends LitElement {
   }
 }
 
-
 /**
  * @element nve-panel-footer
  * @since 0.10.0
@@ -88,7 +91,7 @@ export class PanelHeader extends LitElement {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  * @stable false
  */
- export class PanelFooter extends LitElement {
+export class PanelFooter extends LitElement {
   static styles = useStyles([panelFooterStyleSheet]);
 
   static readonly metadata = {
@@ -110,8 +113,6 @@ export class PanelHeader extends LitElement {
   }
 }
 
-
-
 /**
  * @element nve-panel
  * @description Panel is inline container for content that is coupled to the content on the page (details, additional actions/options). Alternatively [Drawer](./?path=/docs/elements-drawer-documentation--docs) is out of context of the rest of the page (notifications, navigations, settings).
@@ -119,9 +120,9 @@ export class PanelHeader extends LitElement {
  * @event open - Dispatched when the panel is opened.
  * @event close - Dispatched when the panel is closed.
  * @slot - This is a default/unnamed slot for panel content
- * @slot header - header element (Use `<nve-panel-header>` or custom content)
- * @slot content - content element (Use `<nve-panel-content>` or custom content)
- * @slot footer - footer element (Use `<nve-panel-footer>` or custom content)
+ * @slot header - header element (Use `panel-header` or custom content)
+ * @slot content - content element (Use `panel-content` or custom content)
+ * @slot footer - footer element (Use `panel-footer` or custom content)
  * @cssprop --background
  * @cssprop --color
  * @cssprop --box-shadow
@@ -140,17 +141,17 @@ export class Panel extends LitElement {
 
   /**
    * Determines whether or not the panel will collapse down to an expand icon, or fully hide.
-  */
+   */
   @property({ type: Boolean }) closable = false;
 
   /**
    * Determines whether or not the panel should handle auto-closing behavior vs. defaults to off.
    */
-  @property({ type: Boolean, attribute: 'behavior-expand'}) behaviorExpand = false;
+  @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
   /**
    * Sets the proper collapse icon and collapse animation, based on what side of the page the panel will be used.
-  */
+   */
   @property({ type: String }) side: 'left' | 'right' = 'left';
 
   static styles = useStyles([panelStyleSheet]);
@@ -161,7 +162,7 @@ export class Panel extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-icon-button': IconButton
+    [IconButton.metadata.tag]: IconButton
   };
 
   /** @private */
@@ -173,7 +174,7 @@ export class Panel extends LitElement {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   get #direction() {
     if (this.side === 'left') {
@@ -205,7 +206,8 @@ export class Panel extends LitElement {
                 .expanded=${this.expanded}
                 .ariaLabel=${this.expanded ? this.i18n.hide : this.i18n.show}
               ></nve-icon-button>
-            `)}
+            `
+          )}
         </div>
 
         <div class="content">

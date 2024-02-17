@@ -2,7 +2,16 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import { IconButton } from '@elements/elements/icon-button';
-import { animationFade, I18nController, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
+import {
+  animationFade,
+  I18nController,
+  PopoverAlign,
+  popoverBaseStyles,
+  PopoverPosition,
+  PopoverType,
+  TypePopoverController,
+  useStyles
+} from '@elements/elements/internal';
 import styles from './dropdown.css?inline';
 
 /**
@@ -84,7 +93,7 @@ export class Dropdown extends LitElement {
   /**
    * Enables internal string values to be updated for internationalization.
    */
-  @property({ type: Object, attribute: 'nve-i18n' }) i18n = this.#i18nController.i18n;
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   static styles = useStyles([popoverBaseStyles, styles]);
 
@@ -94,8 +103,8 @@ export class Dropdown extends LitElement {
   };
 
   static elementDefinitions = {
-    'nve-icon-button': IconButton
-  }
+    [IconButton.metadata.tag]: IconButton
+  };
 
   render() {
     return html`
