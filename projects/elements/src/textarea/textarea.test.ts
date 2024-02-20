@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { Textarea } from '@elements/elements/textarea';
 import '@elements/elements/textarea/define.js';
 

@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
-import { runAxe } from '@elements/elements/test/axe.js';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { runAxe } from '@nvidia-elements/testing/axe';
 import { Week } from '@elements/elements/week';
 import '@elements/elements/week/define.js';
 

@@ -4,10 +4,10 @@ import process from 'process';
 import * as url from 'url';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-const axe = (process.argv.findIndex((i) => i === '--axe') !== -1);
-const watch = (process.argv.findIndex((i) => i === '--watch') !== -1);
-const coverage = (process.argv.findIndex((i) => i === '--coverage') !== -1);
-const resolve = (rel) => path.resolve(__dirname, rel);
+const axe = process.argv.findIndex(i => i === '--axe') !== -1;
+const watch = process.argv.findIndex(i => i === '--watch') !== -1;
+const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
+const resolve = rel => path.resolve(__dirname, rel);
 
 export default defineConfig({
   root: __dirname,
@@ -31,23 +31,21 @@ export default defineConfig({
       './css/theme.compact.css': resolve('./dist/css/theme.compact.css'),
       './css/theme.dark.css': resolve('./dist/css/theme.dark.css')
     },
-    include: [
-      axe ? resolve('./src/**/*.test.axe.ts') : resolve('./src/**/*.test.ts')
-    ],
+    include: [axe ? resolve('./src/**/*.test.axe.ts') : resolve('./src/**/*.test.ts')],
     reporters: ['basic', 'junit'],
     outputFile: {
       junit: axe ? './coverage/axe/junit.xml' : './coverage/unit/junit.xml'
+    },
+    onConsoleLog(log) {
+      if (log.includes('scheduled an update')) return false;
+      if (log.includes('Lit is in dev mode')) return false;
     },
     setupFiles: [resolve('./src/test/setup.ts')], // https://github.com/vitest-dev/vitest/issues/1700
     coverage: {
       extension: ['.ts'],
       provider: 'istanbul',
       reportsDirectory: axe ? './coverage/axe' : './coverage/unit',
-      reporter: [
-        ['lcov', { 'file': 'coverage.dat' }],
-        'html',
-        'json-summary'
-      ],
+      reporter: [['lcov', { file: 'coverage.dat' }], 'html', 'json-summary'],
       thresholds: {
         lines: 90,
         branches: 90,
@@ -84,7 +82,7 @@ export default defineConfig({
         '**/*.mjs',
         '**/*.test.axe.ts',
         '**/*.test.lighthouse.ts',
-        '**/*.stories.ts',
+        '**/*.stories.ts'
       ]
     },
     browser: {

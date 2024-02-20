@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, emulateClick, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture, emulateClick, untilEvent } from '@nvidia-elements/testing';
 import { SortButton } from '@elements/elements/sort-button';
 import type { Icon } from '@elements/elements/icon';
 import '@elements/elements/sort-button/define.js';
@@ -8,7 +8,7 @@ import '@elements/elements/sort-button/define.js';
 describe('mlv-sort-button', () => {
   let fixture: HTMLElement;
   let element: SortButton;
-  let icon: Icon
+  let icon: Icon;
 
   beforeEach(async () => {
     fixture = await createFixture(html`

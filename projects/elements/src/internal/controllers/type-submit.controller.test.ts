@@ -3,7 +3,7 @@ import { property } from 'lit/decorators/property.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { typeSubmit } from '@elements/elements/internal';
-import { elementIsStable, createFixture, removeFixture, emulateClick, untilEvent } from '@elements/elements/test';
+import { elementIsStable, createFixture, removeFixture, emulateClick, untilEvent } from '@nvidia-elements/testing';
 
 @typeSubmit<TypeSubmitControllerTestElement>()
 @customElement('type-submit-controller-test-element')
@@ -30,11 +30,13 @@ describe('type-submit.controller', () => {
         <type-submit-controller-test-element></type-submit-controller-test-element>
       </form>
     `);
-  
+
     form = fixture.querySelector('form');
     button = fixture.querySelectorAll<TypeSubmitControllerTestElement>('type-submit-controller-test-element')[0];
     buttonInForm = fixture.querySelectorAll<TypeSubmitControllerTestElement>('type-submit-controller-test-element')[1];
-    submitButtonInForm = fixture.querySelectorAll<TypeSubmitControllerTestElement>('type-submit-controller-test-element')[2];
+    submitButtonInForm = fixture.querySelectorAll<TypeSubmitControllerTestElement>(
+      'type-submit-controller-test-element'
+    )[2];
     form.addEventListener('submit', e => e.preventDefault());
     buttonInForm.type = 'button';
   });

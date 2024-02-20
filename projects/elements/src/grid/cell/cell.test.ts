@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { GridCell } from '@elements/elements/grid';
 import '@elements/elements/grid/define.js';
 

@@ -1,11 +1,10 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { statusIcons } from '@elements/elements/internal';
 import { ProgressRing } from '@elements/elements/progress-ring';
 import { Icon } from '@elements/elements/icon';
 import '@elements/elements/progress-ring/define.js';
-
 
 describe('mlv-progress-ring', () => {
   let fixture: HTMLElement;
@@ -53,12 +52,12 @@ describe('mlv-progress-ring', () => {
     await elementIsStable(element);
     expect(element.status).toBe('warning');
     expect(mlvIcon.name).toBe(statusIcons[element.status]);
-    
+
     element.status = 'success';
     await elementIsStable(element);
     expect(element.status).toBe('success');
     expect(mlvIcon.name).toBe(statusIcons[element.status]);
-    
+
     element.status = 'danger';
     await elementIsStable(element);
     expect(element.status).toBe('danger');

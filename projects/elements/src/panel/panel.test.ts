@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { Panel, PanelHeader, PanelFooter } from '@elements/elements/panel';
 import '@elements/elements/panel/define.js';
 import '@elements/elements/icon-button/define.js';
@@ -60,7 +60,9 @@ describe('mlv-panel', () => {
   it('should have panel header preserve the title/subtitle/action DOM order via slots', async () => {
     await elementIsStable(panelHeader);
 
-    const [titleElement, subtitleElement, actionElement] = getFlatDOMTree(panelHeader).filter(e => e.hasAttribute('slot'));
+    const [titleElement, subtitleElement, actionElement] = getFlatDOMTree(panelHeader).filter(e =>
+      e.hasAttribute('slot')
+    );
     expect(titleElement).toBe(panelHeader.querySelector('[slot="title"'));
     expect(subtitleElement).toBe(panelHeader.querySelector('[slot="subtitle"'));
     expect(actionElement).toBe(panelHeader.querySelector('[slot="action-icon"'));

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { Alert } from '@elements/elements/alert';
 import '@elements/elements/alert/define.js';
 
@@ -37,7 +37,7 @@ describe('mlv-alert', () => {
 
     const event = untilEvent(alert, 'close');
     emulateClick(alert.shadowRoot.querySelector('mlv-icon-button'));
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
   });
 
   it('should show status icon if status is proivided', async () => {

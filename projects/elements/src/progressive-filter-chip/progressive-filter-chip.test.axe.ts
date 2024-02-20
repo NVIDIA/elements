@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { runAxe } from '@elements/elements/test/axe.js';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { runAxe } from '@nvidia-elements/testing/axe';
 import { ProgressiveFilterChip } from '@elements/elements/progressive-filter-chip';
 import '@elements/elements/progressive-filter-chip/define.js';
 import '@elements/elements/forms/define.js';

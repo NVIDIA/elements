@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
-import { elementIsStable, createFixture, removeFixture } from '@elements/elements/test';
+import { elementIsStable, createFixture, removeFixture } from '@nvidia-elements/testing';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { keyNavigationList } from '@elements/elements/internal';
 
@@ -18,7 +18,7 @@ class KeynavListControllerTestElement extends LitElement {
       loop: this.loop,
       items: this.shadowRoot.querySelectorAll<HTMLElement>('button'),
       dir: this.dir
-    }
+    };
   }
 
   render() {
@@ -40,9 +40,7 @@ describe('keynav-list.controller', () => {
   let element: KeynavListControllerTestElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(
-      html`<keynav-list-test-element></keynav-list-test-element>`
-    );
+    fixture = await createFixture(html`<keynav-list-test-element></keynav-list-test-element>`);
     element = fixture.querySelector<KeynavListControllerTestElement>('keynav-list-test-element');
     await elementIsStable(element);
     element.keynavListConfig.items[0].focus();
@@ -69,8 +67,12 @@ describe('keynav-list.controller', () => {
 
   it('should support horizontal arrow key navigation', async () => {
     await elementIsStable(element);
-    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
-    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+    );
+    element.keynavListConfig.items[1].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+    );
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
@@ -90,8 +92,12 @@ describe('keynav-list.controller', () => {
     element.dir = 'rtl';
 
     await elementIsStable(element);
-    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
-    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+    );
+    element.keynavListConfig.items[1].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+    );
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
@@ -194,8 +200,12 @@ describe('keynav-list.controller', () => {
     element.setAttribute('mlv-keynav-disabled', '');
 
     await elementIsStable(element);
-    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
-    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+    );
+    element.keynavListConfig.items[1].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+    );
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);

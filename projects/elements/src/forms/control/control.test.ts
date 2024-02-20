@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { Control, ControlMessage } from '@elements/elements/forms';
 import '@elements/elements/forms/define.js';
 
@@ -11,7 +11,6 @@ describe('mlv-control', () => {
   let input: HTMLInputElement;
   let datalist: HTMLDataListElement;
   let message: ControlMessage;
-
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -151,9 +150,9 @@ describe('mlv-control custom', () => {
     const event = untilEvent(element, 'reset');
     element.input.value = 'test';
     await element.updateComplete;
-    
+
     element.reset();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
     expect(element.input.value).toBe('');
   });
 });

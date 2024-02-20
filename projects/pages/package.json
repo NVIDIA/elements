@@ -17,10 +17,8 @@
         "pages:demos:vue",
         "pages:elements"
       ],
-      "files": [
-      ],
-      "output": [
-      ]
+      "files": [],
+      "output": []
     },
     "pages:demos:angular": {
       "command": "cp -a ../demos/angular/dist/angular-app/browser/. ./dist/demos/angular",
@@ -28,8 +26,7 @@
         "../demos/angular:ci",
         "build"
       ],
-      "files": [
-      ],
+      "files": [],
       "output": [
         "dist/demos/angular/**"
       ]
@@ -40,8 +37,7 @@
         "../demos/buildless:ci",
         "build"
       ],
-      "files": [
-      ],
+      "files": [],
       "output": [
         "dist/demos/buildless/**"
       ]
@@ -52,8 +48,7 @@
         "../demos/mpa:ci",
         "build"
       ],
-      "files": [
-      ],
+      "files": [],
       "output": [
         "dist/demos/mpa/**"
       ]
@@ -64,8 +59,7 @@
         "../demos/react:ci",
         "build"
       ],
-      "files": [
-      ],
+      "files": [],
       "output": [
         "dist/demos/react/**"
       ]
@@ -76,8 +70,7 @@
         "../demos/typescript:ci",
         "build"
       ],
-      "files": [
-      ],
+      "files": [],
       "output": [
         "dist/demos/typescript/**"
       ]
@@ -88,8 +81,7 @@
         "../demos/vue:ci",
         "build"
       ],
-      "files": [
-      ],
+      "files": [],
       "output": [
         "dist/demos/vue/**"
       ]
@@ -100,8 +92,7 @@
         "../elements:build:storybook",
         "build"
       ],
-      "files": [
-      ],
+      "files": [],
       "output": [
         "dist/api/**"
       ]
@@ -122,7 +113,6 @@
     }
   },
   "dependencies": {
-    "vite": "5.0.10",
-    "wireit": "0.14.3"
+    "vite": "5.1.3"
   }
 }

@@ -1,8 +1,31 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
-import { getChildren, getFlatDOMTree, getAttributeChanges, getAttributeListChanges, appendRootNodeStyle, getElementUpdate, clickOutsideElementBounds, parseTokenNumber, isContextMenuClick, getFlattenedFocusableItems, getFlattenedDOMTree, validKeyNavigationCode, KeynavCode, define, removeEmptyTextNode, scrollBarWidth, hasScrollBar, endOfScrollBox, getThemeTokens, removeEmptySlotWhitespace, hasHorizontalScrollBar, getDisplayValue } from '@elements/elements/internal';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import {
+  getChildren,
+  getFlatDOMTree,
+  getAttributeChanges,
+  getAttributeListChanges,
+  appendRootNodeStyle,
+  getElementUpdate,
+  clickOutsideElementBounds,
+  parseTokenNumber,
+  isContextMenuClick,
+  getFlattenedFocusableItems,
+  getFlattenedDOMTree,
+  validKeyNavigationCode,
+  KeynavCode,
+  define,
+  removeEmptyTextNode,
+  scrollBarWidth,
+  hasScrollBar,
+  endOfScrollBox,
+  getThemeTokens,
+  removeEmptySlotWhitespace,
+  hasHorizontalScrollBar,
+  getDisplayValue
+} from '@elements/elements/internal';
 
 @customElement('dom-test-element')
 class TestComponent extends LitElement {
@@ -87,7 +110,7 @@ describe('getAttributeChanges', () => {
 
     expect(foo).toBe(null);
 
-    getAttributeChanges(element, 'foo', value => foo = value);
+    getAttributeChanges(element, 'foo', value => (foo = value));
     element.setAttribute('foo', 'bar');
     await new Promise(r => r(''));
     expect(foo).toBe('bar');
@@ -122,7 +145,7 @@ describe('appendRootNodeStyle', () => {
 
     connectedCallback(): void {
       super.connectedCallback();
-      appendRootNodeStyle(this, 'test-one { color: blue }')
+      appendRootNodeStyle(this, 'test-one { color: blue }');
     }
   }
 
@@ -136,7 +159,7 @@ describe('appendRootNodeStyle', () => {
 
     connectedCallback(): void {
       super.connectedCallback();
-      appendRootNodeStyle(this, 'test-two { color: red }')
+      appendRootNodeStyle(this, 'test-two { color: red }');
     }
   }
 
@@ -247,7 +270,9 @@ describe('defineElement', () => {
   let fixture: HTMLElement;
 
   beforeEach(async () => {
-    define(class TestElement extends LitElement { static metadata = { tag: 'define-test-element', version: 'PACKAGE_VERSION' } });
+    define(class TestElement extends LitElement {
+      static metadata = { tag: 'define-test-element', version: 'PACKAGE_VERSION' };
+    });
     fixture = await createFixture(html`
       <define-test-element></define-test-element>
     `);

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { IconButton } from '@elements/elements/icon-button';
 import '@elements/elements/icon-button/define.js';
 
@@ -68,6 +68,8 @@ describe('mlv-icon-button', () => {
 
   it('should allow custom icon to be slotted', async () => {
     await elementIsStable(elementWithAnchor);
-    expect(elementWithCustomIcon.shadowRoot.querySelector<HTMLSlotElement>('slot').assignedElements()[0]).toBe(fixture.querySelector('span'));
+    expect(elementWithCustomIcon.shadowRoot.querySelector<HTMLSlotElement>('slot').assignedElements()[0]).toBe(
+      fixture.querySelector('span')
+    );
   });
 });

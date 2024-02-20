@@ -1,9 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { Accordion, AccordionContent, AccordionGroup, AccordionHeader } from '@elements/elements/accordion';
 import '@elements/elements/accordion/define.js';
-
 
 describe('mlv-accordion', () => {
   let fixture: HTMLElement;
@@ -80,7 +79,7 @@ describe('mlv-accordion', () => {
 
     const event = untilEvent(trigger, 'click');
     emulateClick(trigger);
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
 
     expect(childElement1.expanded).toBe(true);
   });
@@ -92,7 +91,7 @@ describe('mlv-accordion', () => {
 
     const event = untilEvent(trigger, 'click');
     emulateClick(trigger);
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
 
     expect(childElement1.expanded).toBe(false);
   });
@@ -109,7 +108,7 @@ describe('mlv-accordion', () => {
 
     const event = untilEvent(trigger1, 'click');
     emulateClick(trigger1);
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
 
     expect(childElement1.expanded).toBe(true);
     expect(childElement2.expanded).toBe(false);
@@ -120,13 +119,12 @@ describe('mlv-accordion', () => {
     const event3 = untilEvent(childElement2, 'open');
 
     emulateClick(trigger2);
-    expect((await event2)).toBeDefined();
-    expect((await event3)).toBeDefined();
+    expect(await event2).toBeDefined();
+    expect(await event3).toBeDefined();
 
     await elementIsStable(parentElement);
     await elementIsStable(childElement1);
     await elementIsStable(childElement2);
-
 
     // expect(childElement1.expanded).toBe(false); <-- Not working for some reason, unit test should detect first accordion set back to not expanded in this scenario
     expect(childElement2.expanded).toBe(true);

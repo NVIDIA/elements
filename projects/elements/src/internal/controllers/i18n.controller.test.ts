@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { i18n, I18nController } from '@elements/elements/internal';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 
 @i18n<I18nTestElement>()
 @customElement('i18n-test-element')
@@ -14,7 +14,7 @@ class I18nTestElement extends LitElement {
   @property({ type: Object, attribute: 'mlv-i18n' }) i18n = this.#i18nController.i18n;
 
   render() {
-    return html`${JSON.stringify(this.i18n, null, 2)}`
+    return html`${JSON.stringify(this.i18n, null, 2)}`;
   }
 }
 
@@ -93,4 +93,4 @@ describe('i18n.controller', () => {
       neutral: 'neutral'
     });
   });
-})
+});

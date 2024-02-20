@@ -1,10 +1,9 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
-import { runAxe } from '@elements/elements/test/axe.js';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { runAxe } from '@nvidia-elements/testing/axe';
 import { ProgressRing } from '@elements/elements/progress-ring';
 import '@elements/elements/progress-ring/define.js';
-
 
 describe('mlv-progress-ring axe', () => {
   let fixture: HTMLElement;

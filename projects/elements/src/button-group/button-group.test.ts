@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, emulateClick, removeFixture } from '@nvidia-elements/testing';
 import type { ButtonGroup } from '@elements/elements/button-group';
 import type { IconButton } from '@elements/elements/icon-button';
 import '@elements/elements/button-group/define.js';
@@ -74,7 +74,7 @@ describe('mlv-button-group', () => {
 
   it('should be stateless by default', async () => {
     await elementIsStable(element);
-    emulateClick(buttons[0])
+    emulateClick(buttons[0]);
     expect(buttons[0].pressed).toBe(undefined);
     expect(buttons[1].pressed).toBe(undefined);
     expect(buttons[2].pressed).toBe(undefined);

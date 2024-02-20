@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { AppHeader } from '@elements/elements/app-header';
 import { Button } from '@elements/elements/button';
 import { IconButton } from '@elements/elements/icon-button';
@@ -84,7 +84,7 @@ describe('mlv-app-header: app branding', () => {
     await appLogo.updateComplete;
     expect(appLogo.size).toBe('sm');
   });
-  
+
   it('should carryover custom title', () => {
     const appTitle = element.querySelector('h2');
     expect(appTitle.textContent.includes(testTitle)).toBe(true);
@@ -94,7 +94,7 @@ describe('mlv-app-header: app branding', () => {
 describe('mlv-app-header: nav items and actions', () => {
   let fixture: HTMLElement;
   let element: AppHeader;
-  const innerIconBtnText = 'NV'
+  const innerIconBtnText = 'NV';
 
   beforeEach(async () => {
     fixture = await createFixture(html`

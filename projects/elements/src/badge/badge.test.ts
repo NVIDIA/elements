@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { Badge } from '@elements/elements/badge';
 import '@elements/elements/badge/define.js';
 
@@ -58,7 +58,9 @@ describe('mlv-badge', () => {
     const icon = document.createElement('mlv-icon');
     element.appendChild(icon);
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<HTMLSlotElement>('slot[name="prefix-icon"]').assignedElements()).toContain(icon);
+    expect(element.shadowRoot.querySelector<HTMLSlotElement>('slot[name="prefix-icon"]').assignedElements()).toContain(
+      icon
+    );
   });
 
   it('should provide trend icon when using a trend status', async () => {

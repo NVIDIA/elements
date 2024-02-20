@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import type { IconButton } from '@elements/elements/icon-button';
 import type { Grid, GridColumn } from '@elements/elements/grid';
 import '@elements/elements/grid/define.js';
@@ -78,8 +78,11 @@ describe('mlv-grid-column', () => {
     // left side
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('var(--scroll-shadow)')).toBe(false);
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
-    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('--border-right: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)')).toBe(false);
-
+    expect(
+      sheets[sheets.length - 1].cssRules[0].cssText.includes(
+        '--border-right: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)'
+      )
+    ).toBe(false);
 
     columns[0].position = 'fixed';
     await elementIsStable(columns[0]);
@@ -95,7 +98,11 @@ describe('mlv-grid-column', () => {
     // left side
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('var(--scroll-shadow)')).toBe(true);
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
-    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('--border-right: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)')).toBe(true);
+    expect(
+      sheets[sheets.length - 1].cssRules[1].cssText.includes(
+        '--border-right: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)'
+      )
+    ).toBe(true);
   });
 
   it('should update fixed right column position', async () => {
@@ -113,7 +120,11 @@ describe('mlv-grid-column', () => {
     // right side
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('var(--scroll-shadow)')).toBe(true);
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
-    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('--border-left: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)')).toBe(true);
+    expect(
+      sheets[sheets.length - 1].cssRules[1].cssText.includes(
+        '--border-left: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)'
+      )
+    ).toBe(true);
   });
 
   it('should update remove fixed styles when property or column has changed', async () => {
@@ -122,7 +133,6 @@ describe('mlv-grid-column', () => {
     await elementIsStable(grid);
     const sheets = (grid.getRootNode() as any).adoptedStyleSheets;
 
-    
     // position
     expect(columns[3].hasAttribute('right')).toBe(true);
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('position: sticky')).toBe(true);
@@ -133,7 +143,11 @@ describe('mlv-grid-column', () => {
     // right side
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('var(--scroll-shadow)')).toBe(true);
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
-    expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('--border-left: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)')).toBe(true);
+    expect(
+      sheets[sheets.length - 1].cssRules[1].cssText.includes(
+        '--border-left: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)'
+      )
+    ).toBe(true);
 
     columns[3].position = '';
     await elementIsStable(columns[0]);

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { Breadcrumb } from '@elements/elements/breadcrumb';
 import '@elements/elements/breadcrumb/define.js';
 import '@elements/elements/button/define.js';

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { ProgressiveFilterChip } from '@elements/elements/progressive-filter-chip';
 import '@elements/elements/progressive-filter-chip/define.js';
 import '@elements/elements/forms/define.js';
@@ -53,7 +53,7 @@ describe('mlv-progressive-filter-chip', () => {
 
     const event = untilEvent(element, 'close');
     element.shadowRoot.querySelector('mlv-icon-button').click();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
   });
 
   it('should render a mlv-select when a select is slotted', () => {

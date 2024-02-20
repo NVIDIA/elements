@@ -1,9 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { ProgressBar } from '@elements/elements/progress-bar';
 import '@elements/elements/progress-bar/define.js';
-
 
 describe('mlv-progress-bar', () => {
   let fixture: HTMLElement;
