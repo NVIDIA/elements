@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createFixture, removeFixture } from '@elements/elements/test';
+import { createFixture, removeFixture } from '@nvidia-elements/testing';
 import { onChildListMutation, stopEvent, throttle } from '@elements/elements/internal';
 
 describe('stopEvent', () => {
@@ -28,9 +28,7 @@ describe('onChildListMutation', () => {
   let list: HTMLUListElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(
-      html`<ul><li></li></ul>`
-    );
+    fixture = await createFixture(html`<ul><li></li></ul>`);
     list = fixture.querySelector('ul');
   });
 

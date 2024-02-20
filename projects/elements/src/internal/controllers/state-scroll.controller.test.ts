@@ -1,7 +1,7 @@
 import { html, LitElement, css } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { stateScroll } from '@elements/elements/internal';
 
 @stateScroll<StateScrollControllerTestElement>()
@@ -15,10 +15,10 @@ class StateScrollControllerTestElement extends LitElement {
   stateScrollConfig = {
     scrollOffset: 0,
     target: this
-  }
+  };
 
   render() {
-    return html`<div style="width: 100px; height: 100px;"></div>`
+    return html`<div style="width: 100px; height: 100px;"></div>`;
   }
 }
 
@@ -38,7 +38,7 @@ describe('state-scroll.controller', () => {
 
   afterEach(async () => {
     removeFixture(fixture);
-    element._internals.states.delete(':--scrolling')
+    element._internals.states.delete(':--scrolling');
   });
 
   it('should initialize with no scrolling state', async () => {

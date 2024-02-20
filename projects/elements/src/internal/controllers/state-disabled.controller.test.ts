@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { stateDisabled } from '@elements/elements/internal';
 
 @stateDisabled<StateDisabledControllerTestElement>()
@@ -22,7 +22,9 @@ describe('state-disabled.controller', () => {
   let fixture: HTMLElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<state-disabled-controller-test-element></state-disabled-controller-test-element>`);
+    fixture = await createFixture(
+      html`<state-disabled-controller-test-element></state-disabled-controller-test-element>`
+    );
     element = fixture.querySelector<StateDisabledControllerTestElement>('state-disabled-controller-test-element');
   });
 

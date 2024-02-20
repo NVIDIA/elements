@@ -7,6 +7,7 @@
     "lib": ["ESNext", "DOM"],
     "moduleResolution": "Node",
     "strict": true,
+    "baseUrl": "./",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
@@ -18,7 +19,8 @@
     "paths": {
       "extensions-elements-starter": ["./src/index.js"],
       "extensions-elements-starter/*": ["./src/*"],
-      "extensions-elements-starter/*.js": ["./src/*.js"]
+      "extensions-elements-starter/*.js": ["./src/*.js"],
+      "@nvidia-elements/testing": ["node_modules/@nvidia-elements/testing/dist"]
     }
   },
   "include": ["src"]

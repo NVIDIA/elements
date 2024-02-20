@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { TypeExpandableController } from '@elements/elements/internal';
 
 @customElement('type-expandable-controller-test-element')
@@ -31,7 +31,9 @@ describe('type-expandable.controller', () => {
   let fixture: HTMLElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<type-expandable-controller-test-element></type-expandable-controller-test-element>`);
+    fixture = await createFixture(
+      html`<type-expandable-controller-test-element></type-expandable-controller-test-element>`
+    );
     element = fixture.querySelector<TypeExpandableControllerTestElement>('type-expandable-controller-test-element');
   });
 
@@ -45,7 +47,7 @@ describe('type-expandable.controller', () => {
 
     const event = untilEvent(element, 'close');
     element.close();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
     expect((await event).bubbles).toBe(true);
     expect(element.expanded).toBe(true); // default to stateless
   });
@@ -56,7 +58,7 @@ describe('type-expandable.controller', () => {
 
     const event = untilEvent(element, 'open');
     element.open();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
     expect((await event).bubbles).toBe(true);
     expect(element.expanded).toBe(false); // default to stateless
   });

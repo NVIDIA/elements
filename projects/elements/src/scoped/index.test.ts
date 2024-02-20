@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { defineScopedElement, scope } from '@elements/elements/scoped';
 import { define } from '@elements/elements/internal';
 
@@ -8,14 +8,14 @@ export class TestTwoElement extends LitElement {
   static metadata = {
     tag: 'test-element',
     version: ''
-  }
+  };
 }
 
 export class TestElement extends LitElement {
   static metadata = {
     tag: 'test-element',
     version: ''
-  }
+  };
 
   static elementDefinitions = {
     'nve-test-two': TestTwoElement
