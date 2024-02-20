@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { Color } from '@elements/elements/color';
 import '@elements/elements/color/define.js';
 
@@ -59,7 +59,7 @@ describe('nve-color', () => {
       open() {
         return Promise.resolve({ sRGBHex: '#2d2d2d' });
       }
-    }
+    };
 
     await elementIsStable(element);
     expect(fixture.querySelector('input').value).toBe('#dfe3e6');

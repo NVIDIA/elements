@@ -43,11 +43,10 @@
     }
   },
   "dependencies": {
-    "@elements/elements": "workspace:../../elements"
+    "@elements/elements": "workspace:*"
   },
   "devDependencies": {
     "typescript": "5.3.3",
-    "vite": "5.0.10",
-    "wireit": "0.14.3"
+    "vite": "5.1.3"
   }
 }

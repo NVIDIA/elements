@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { Notification } from '@elements/elements/notification';
 import '@elements/elements/notification/define.js';
 
@@ -83,7 +83,7 @@ describe('nve-notification', () => {
 
     const event = untilEvent(element, 'close');
     element.shadowRoot.querySelector('nve-icon-button').click();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
   });
 
   it('should nve-animation-complete event to signal when to remove element', async () => {
@@ -92,7 +92,7 @@ describe('nve-notification', () => {
 
     const event = untilEvent(element.shadowRoot as any, 'nve-animation-complete');
     await element.remove();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
   });
 
   it('should reflect a status', async () => {

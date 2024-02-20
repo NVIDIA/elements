@@ -1,8 +1,15 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture } from '@elements/elements/test';
-import { associateLabel, attachInternals, associateAriaLabel, assoicateAriaDescribedBy, associateDataList, associateControlGroup } from '@elements/elements/internal';
+import { createFixture, removeFixture } from '@nvidia-elements/testing';
+import {
+  associateLabel,
+  attachInternals,
+  associateAriaLabel,
+  assoicateAriaDescribedBy,
+  associateDataList,
+  associateControlGroup
+} from '@elements/elements/internal';
 
 @customElement('element-internals-test-element')
 class ElementInternalsTestElement extends LitElement {

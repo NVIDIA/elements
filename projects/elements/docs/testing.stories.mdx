@@ -4,12 +4,12 @@ import { Meta } from '@storybook/addon-docs';
 
 # Testing
 
-MagLev Elements has a small set of testing utilities for unit testing Lit based
+Elements has a small set of testing utilities for unit testing Lit based
 Custom Elements. These utilities are used to test the elements but also are
 available for external use. The testing utilities can be found at the following entrypoint:
 
 ```typescript
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 ```
 
 Below is a basic test setup for a Lit Web Component. This test was written using [Vitest](https://vitest.dev/).
@@ -19,7 +19,7 @@ mount the custom element, as well as remove that element once the test has compl
 ```typescript
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { Icon, IconVariants } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
 
@@ -49,11 +49,11 @@ on an element will often trigger multiple renders of that template. The `element
 function will wait for pending updates to complete.
 
 ```typescript
-it('should update svg reference when "name" is updated', async () => {
+it('should reflect name attribute for CSS selectors', async () => {
   expect(element.name).eq(undefined);
-  element.name = 'test';
+  element.name = 'book';
   await elementIsStable(element);
-  expect(element.shadowRoot.innerHTML).includes('/assets/icons.svg#test');
+  expect(element.getAttribute('name')).toBe('book');
 });
 ```
 

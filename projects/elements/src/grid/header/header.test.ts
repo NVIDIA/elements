@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import type { Grid, GridColumn, GridHeader } from '@elements/elements/grid';
 import '@elements/elements/grid/define.js';
 
@@ -134,7 +134,9 @@ describe('nve-grid-header validation check', () => {
     removeFixture(fixture);
   });
 
-  it('should warn if the grid columns and cells do no match', async () => { 
-    expect(console.error).toHaveBeenCalledWith('@elements/elements: nve-grid-column (5) and nve-grid-cell (4) count mismatch');
+  it('should warn if the grid columns and cells do no match', async () => {
+    expect(console.error).toHaveBeenCalledWith(
+      '@elements/elements: nve-grid-column (5) and nve-grid-cell (4) count mismatch'
+    );
   });
 });

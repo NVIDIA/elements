@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { Card, CardHeader, CardFooter, CardContent } from '@elements/elements/card';
 import { getFlatDOMTree } from '@elements/elements/internal';
 import '@elements/elements/card/define.js';
@@ -70,7 +70,9 @@ describe('nve-card', () => {
   it('should have card header preserve the title/subtitle/default/action DOM order via slots', async () => {
     await elementIsStable(cardHeader);
 
-    const [titleElement, subtitleElement, actionElement] = getFlatDOMTree(cardHeader).filter(e => e.hasAttribute('slot'));
+    const [titleElement, subtitleElement, actionElement] = getFlatDOMTree(cardHeader).filter(e =>
+      e.hasAttribute('slot')
+    );
     expect(titleElement).toBe(cardHeader.querySelector('[slot="title"]'));
     expect(subtitleElement).toBe(cardHeader.querySelector('[slot="subtitle"]'));
     expect(actionElement).toBe(cardHeader.querySelector('[slot="header-action"]'));

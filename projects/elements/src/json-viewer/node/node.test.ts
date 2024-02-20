@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { JSONNode } from './node.js';
 import '@elements/elements/json-viewer/define.js';
 
@@ -25,7 +25,7 @@ describe('nve-json-node', () => {
   });
 
   it('should render a link if value is a url', async () => {
-    element.value = "https://nvidia.com";
+    element.value = 'https://nvidia.com';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('a')).toBeTruthy();
   });
@@ -41,14 +41,14 @@ describe('nve-json-node', () => {
   });
 
   it('should render property name as button if available and an object or array value', async () => {
-    element.value = { "url": "https://nvidia.com" };
+    element.value = { url: 'https://nvidia.com' };
     element.prop = 'site';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('nve-button').textContent.trim()).toBe('site:');
   });
 
   it('should render icon button if property name is not available and an object or array value', async () => {
-    element.value = { "url": "https://nvidia.com" };
+    element.value = { url: 'https://nvidia.com' };
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('nve-icon-button')).toBeTruthy();
     expect(element.shadowRoot.querySelector('nve-icon-button').direction).toBe('right');
@@ -59,7 +59,7 @@ describe('nve-json-node', () => {
   });
 
   it('should expand if icon button clicked', async () => {
-    element.value = { "url": "https://nvidia.com" };
+    element.value = { url: 'https://nvidia.com' };
     await elementIsStable(element);
     expect(element.expanded).toBe(false);
 
@@ -69,7 +69,7 @@ describe('nve-json-node', () => {
   });
 
   it('should expand if property button clicked', async () => {
-    element.value = { "url": "https://nvidia.com" };
+    element.value = { url: 'https://nvidia.com' };
     element.prop = 'site';
     await elementIsStable(element);
     expect(element.expanded).toBe(false);

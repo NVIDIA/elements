@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createFixture, emulateClick, removeFixture } from '@elements/elements/test';
+import { createFixture, emulateClick, removeFixture } from '@nvidia-elements/testing';
 import { focusElement, isFocusable, onListboxActivate } from '@elements/elements/internal';
 
 describe('isFocusable', () => {
@@ -99,7 +99,7 @@ describe('onListboxActivate', () => {
 
   it('should execute callback when a valid user interaction click', async () => {
     let active = false;
-    onListboxActivate(select, () => active = true);
+    onListboxActivate(select, () => (active = true));
     emulateClick(select);
     expect(active).toBe(true);
   });
@@ -107,53 +107,53 @@ describe('onListboxActivate', () => {
   it('should NOT execute callback when a valid user interaction click and disabled', async () => {
     let active = false;
     select.disabled = true;
-    onListboxActivate(select, () => active = true);
+    onListboxActivate(select, () => (active = true));
     select.dispatchEvent(new Event('pointerdown'));
     expect(active).toBe(false);
   });
 
   it('should execute callback when a valid user interaction keyevent Space', async () => {
     let active = false;
-    onListboxActivate(select, () => active = true);
-    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }))
+    onListboxActivate(select, () => (active = true));
+    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
     expect(active).toBe(true);
   });
 
   it('should execute callback when a valid user interaction keyevent ArrowUp', async () => {
     let active = false;
-    onListboxActivate(select, () => active = true);
-    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'ArrowUp' }))
+    onListboxActivate(select, () => (active = true));
+    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'ArrowUp' }));
     expect(active).toBe(true);
   });
 
   it('should execute callback when a valid user interaction keyevent ArrowDown', async () => {
     let active = false;
-    onListboxActivate(select, () => active = true);
-    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'ArrowDown' }))
+    onListboxActivate(select, () => (active = true));
+    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'ArrowDown' }));
     expect(active).toBe(true);
   });
 
   it('should NOT execute callback when a valid user interaction keyevent Space if disabled', async () => {
     let active = false;
     select.disabled = true;
-    onListboxActivate(select, () => active = true);
-    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }))
+    onListboxActivate(select, () => (active = true));
+    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
     expect(active).toBe(false);
   });
 
   it('should NOT execute callback when a valid user interaction keyevent ArrowUp if disabled', async () => {
     let active = false;
     select.disabled = true;
-    onListboxActivate(select, () => active = true);
-    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'ArrowUp' }))
+    onListboxActivate(select, () => (active = true));
+    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'ArrowUp' }));
     expect(active).toBe(false);
   });
 
   it('should NOT execute callback when a valid user interaction keyevent ArrowDown if disabled', async () => {
     let active = false;
     select.disabled = true;
-    onListboxActivate(select, () => active = true);
-    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'ArrowDown' }))
+    onListboxActivate(select, () => (active = true));
+    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'ArrowDown' }));
     expect(active).toBe(false);
   });
 
@@ -162,7 +162,7 @@ describe('onListboxActivate', () => {
     const event = new KeyboardEvent('keydown', { code: 'Space' });
     vi.spyOn(event, 'preventDefault');
 
-    onListboxActivate(select, () => active = true);
+    onListboxActivate(select, () => (active = true));
     select.dispatchEvent(event);
 
     expect(event.preventDefault).toHaveBeenCalled();
@@ -175,7 +175,7 @@ describe('onListboxActivate', () => {
     const event = new KeyboardEvent('keydown', { code: 'Space' });
     vi.spyOn(event, 'preventDefault');
 
-    onListboxActivate(select, () => active = true);
+    onListboxActivate(select, () => (active = true));
     select.dispatchEvent(event);
 
     expect(event.preventDefault).not.toHaveBeenCalled();

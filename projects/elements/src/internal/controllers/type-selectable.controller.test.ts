@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { TypeSelectableController } from '@elements/elements/internal';
 
 @customElement('type-selectable-controller-test-element')
@@ -23,7 +23,9 @@ describe('type-selectable.controller', () => {
   let fixture: HTMLElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<type-selectable-controller-test-element></type-selectable-controller-test-element>`);
+    fixture = await createFixture(
+      html`<type-selectable-controller-test-element></type-selectable-controller-test-element>`
+    );
     element = fixture.querySelector<TypeSelectableControllerTestElement>('type-selectable-controller-test-element');
   });
 
@@ -37,7 +39,7 @@ describe('type-selectable.controller', () => {
 
     const event = untilEvent(element, 'select');
     element.select();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
     expect(element.selected).toBe(false);
   });
 
@@ -48,7 +50,7 @@ describe('type-selectable.controller', () => {
 
     const event = untilEvent(element, 'select');
     element.select();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
     expect(element.selected).toBe(true);
   });
 });

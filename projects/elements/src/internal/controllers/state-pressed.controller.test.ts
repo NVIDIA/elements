@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { statePressed } from '@elements/elements/internal';
 
 @statePressed<StatePressedControllerTestElement>()
@@ -23,7 +23,9 @@ describe('state-pressed.controller', () => {
   let fixture: HTMLElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<state-pressed-controller-test-element></state-pressed-controller-test-element>`);
+    fixture = await createFixture(
+      html`<state-pressed-controller-test-element></state-pressed-controller-test-element>`
+    );
     element = fixture.querySelector<StatePressedControllerTestElement>('state-pressed-controller-test-element');
   });
 
@@ -51,7 +53,7 @@ describe('state-pressed.controller', () => {
     expect(element.matches(':--pressed')).toBe(false);
   });
 
-  it ('should remove aria-pressed if readonly', async () => {
+  it('should remove aria-pressed if readonly', async () => {
     element.pressed = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe('true');
