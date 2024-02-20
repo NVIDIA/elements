@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { stateSelected } from '@elements/elements/internal';
 
 @stateSelected<StateSelectedControllerTestElement>()
@@ -26,7 +26,9 @@ describe('state-selected.controller', () => {
   let fixture: HTMLElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<state-selected-controller-test-element></state-selected-controller-test-element>`);
+    fixture = await createFixture(
+      html`<state-selected-controller-test-element></state-selected-controller-test-element>`
+    );
     element = fixture.querySelector<StateSelectedControllerTestElement>('state-selected-controller-test-element');
   });
 

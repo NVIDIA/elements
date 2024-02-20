@@ -2,10 +2,10 @@ import { html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MlvBaseButton } from '@elements/elements/internal';
-import { createFixture, elementIsStable, emulateClick, untilEvent, removeFixture } from '@elements/elements/test';
+import { createFixture, elementIsStable, emulateClick, untilEvent, removeFixture } from '@nvidia-elements/testing';
 
 @customElement('base-button-test-element')
-class BaseButtonTestElement extends MlvBaseButton { }
+class BaseButtonTestElement extends MlvBaseButton {}
 
 describe('base button', () => {
   let element: BaseButtonTestElement;
@@ -136,7 +136,7 @@ describe('base button', () => {
     expect(element.matches(':--pressed')).toBe(false);
   });
 
-  it ('should remove aria-pressed if readonly', async () => {
+  it('should remove aria-pressed if readonly', async () => {
     element.pressed = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe('true');

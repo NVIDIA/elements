@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { Tag } from '@elements/elements/tag';
 import '@elements/elements/tag/define.js';
 
@@ -53,6 +53,6 @@ describe('nve-tag', () => {
 
     const event = untilEvent(element, 'close');
     element.shadowRoot.querySelector('nve-icon').click();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
   });
 });

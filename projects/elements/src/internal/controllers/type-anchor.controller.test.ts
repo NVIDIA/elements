@@ -1,9 +1,9 @@
 import { html, LitElement } from 'lit';
-import { customElement  } from 'lit/decorators/custom-element.js';
+import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { typeAnchor } from '@elements/elements/internal';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, emulateClick, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, emulateClick, elementIsStable } from '@nvidia-elements/testing';
 
 @typeAnchor<TypeAnchorTestElement>()
 @customElement('type-anchor-test-element')
@@ -80,7 +80,7 @@ describe('type-anchor.controller', () => {
     expect(element.readonly).toBe(true);
     expect(anchor.style.textDecoration).toBe('');
     expect(element.style.cursor).toBe('');
-    expect((element.matches(':--anchor'))).toBe(true);
+    expect(element.matches(':--anchor')).toBe(true);
   });
 
   it('should allow element to be wrapped in anchor', () => {
@@ -93,7 +93,7 @@ describe('type-anchor.controller', () => {
     expect(elementTwo.readonly).toBe(true);
     expect(anchorTwo.style.textDecoration).toBe('none');
     expect(elementTwo.style.cursor).toBe('pointer');
-    expect((element.matches(':--anchor'))).toBe(true);
+    expect(element.matches(':--anchor')).toBe(true);
   });
 
   it('should allow for element to pick up anchors that have been slotted in the shadow DOM', () => {

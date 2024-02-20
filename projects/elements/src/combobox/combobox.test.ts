@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { Combobox } from '@elements/elements/combobox';
 import type { Menu, MenuItem } from '@elements/elements/menu';
 import type { Dropdown } from '@elements/elements/dropdown';
@@ -182,7 +182,7 @@ describe('nve-combobox', () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
     expect(dropdown.hidden).toBe(true);
 
-    options.forEach((i) => i.remove());
+    options.forEach(i => i.remove());
     element.shadowRoot.dispatchEvent(new Event('slotchange'));
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
@@ -351,8 +351,8 @@ describe('nve-combobox multi select', () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    await new Promise((r) => requestAnimationFrame(r));
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(true);
   });
 
@@ -379,8 +379,8 @@ describe('nve-combobox multi select', () => {
     element.shadowRoot.querySelectorAll('nve-menu-item')[2].click();
 
     await elementIsStable(element);
-    await new Promise((r) => requestAnimationFrame(r));
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(true);
   });
 
@@ -393,8 +393,8 @@ describe('nve-combobox multi select', () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    await new Promise((r) => requestAnimationFrame(r));
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(true);
 
     select.options[0].selected = false;
@@ -403,8 +403,8 @@ describe('nve-combobox multi select', () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    await new Promise((r) => requestAnimationFrame(r));
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
     expect(element.matches(':--multiple-overflow')).toBe(false);
   });
 
