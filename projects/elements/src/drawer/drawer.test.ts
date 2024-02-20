@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { Drawer } from '@elements/elements/drawer';
 import '@elements/elements/drawer/define.js';
 
@@ -71,6 +71,6 @@ describe('nve-drawer', () => {
 
     const event = untilEvent(element, 'close');
     element.shadowRoot.querySelector('nve-icon-button').click();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
   });
 });

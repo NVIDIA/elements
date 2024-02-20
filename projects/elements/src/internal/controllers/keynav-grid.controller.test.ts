@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { keyNavigationGrid } from '@elements/elements/internal';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 
 @keyNavigationGrid<GridKeyNavigationControllerTestElement>()
 @customElement('grid-key-navigation-controller-test-element')
@@ -12,7 +12,7 @@ class GridKeyNavigationControllerTestElement extends LitElement {
       grid: this.shadowRoot.querySelector<HTMLElement>('section'),
       rows: this.shadowRoot.querySelectorAll<HTMLElement>('section > div'),
       cells: this.shadowRoot.querySelectorAll<HTMLElement>('section > div > *')
-    }
+    };
   }
 
   render() {
@@ -61,7 +61,9 @@ describe('grid-key-navigation.controller', () => {
     fixture = await createFixture(
       html`<grid-key-navigation-controller-test-element></grid-key-navigation-controller-test-element>`
     );
-    element = fixture.querySelector<GridKeyNavigationControllerTestElement>('grid-key-navigation-controller-test-element');
+    element = fixture.querySelector<GridKeyNavigationControllerTestElement>(
+      'grid-key-navigation-controller-test-element'
+    );
     element.keynavGridConfig.cells[0].focus();
   });
 
@@ -84,8 +86,12 @@ describe('grid-key-navigation.controller', () => {
   });
 
   it('should support arrow key navigation', async () => {
-    element.keynavGridConfig.cells[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
-    element.keynavGridConfig.cells[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
+    element.keynavGridConfig.cells[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+    );
+    element.keynavGridConfig.cells[1].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+    );
     await elementIsStable(element);
 
     expect(element.keynavGridConfig.cells[0].tabIndex).toBe(-1);
@@ -133,13 +139,17 @@ describe('grid-key-navigation.controller', () => {
     expect(element.keynavGridConfig.cells[2].tabIndex).toBe(-1);
 
     // last cell in grid
-    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true }));
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
+    );
     await elementIsStable(element);
     expect(element.keynavGridConfig.cells[0].tabIndex).toBe(-1);
     expect(element.keynavGridConfig.cells[17].tabIndex).toBe(0);
 
     // first cell in grid
-    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'Home', ctrlKey: true, metaKey: true }));
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'Home', ctrlKey: true, metaKey: true })
+    );
     await elementIsStable(element);
     expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0);
     expect(element.keynavGridConfig.cells[17].tabIndex).toBe(-1);
@@ -199,33 +209,49 @@ describe('grid-key-navigation.controller', () => {
   // https://w3c.github.io/aria-practices/#gridNav_focus
   it('should retain focus on grid cell if more than one interactive item is within cell', async () => {
     await elementIsStable(element);
-    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true }));
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
+    );
     await elementIsStable(element);
     expect(element.keynavGridConfig.cells[17].tabIndex).toBe(0);
     expect(element.shadowRoot.activeElement).toEqual(element.keynavGridConfig.cells[17]);
-    expect(element.shadowRoot.activeElement).not.toEqual(element.keynavGridConfig.cells[17].querySelectorAll('button')[0]);
-    expect(element.shadowRoot.activeElement).not.toEqual(element.keynavGridConfig.cells[17].querySelectorAll('button')[1]);
+    expect(element.shadowRoot.activeElement).not.toEqual(
+      element.keynavGridConfig.cells[17].querySelectorAll('button')[0]
+    );
+    expect(element.shadowRoot.activeElement).not.toEqual(
+      element.keynavGridConfig.cells[17].querySelectorAll('button')[1]
+    );
   });
 
   it('should allow inner interactive elements to be access in the tabflow when cell is active', async () => {
     await elementIsStable(element);
-    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true }));
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
+    );
     await elementIsStable(element);
     expect(element.keynavGridConfig.cells[17].tabIndex).toBe(0);
     expect(element.shadowRoot.activeElement).toEqual(element.keynavGridConfig.cells[17]);
-    expect(element.shadowRoot.activeElement).not.toEqual(element.keynavGridConfig.cells[17].querySelectorAll('button')[0]);
-    expect(element.shadowRoot.activeElement).not.toEqual(element.keynavGridConfig.cells[17].querySelectorAll('button')[1]);
+    expect(element.shadowRoot.activeElement).not.toEqual(
+      element.keynavGridConfig.cells[17].querySelectorAll('button')[0]
+    );
+    expect(element.shadowRoot.activeElement).not.toEqual(
+      element.keynavGridConfig.cells[17].querySelectorAll('button')[1]
+    );
 
     element.keynavGridConfig.cells[17].querySelectorAll('button')[0].focus();
     await elementIsStable(element);
     expect(element.shadowRoot.activeElement).not.toEqual(element.keynavGridConfig.cells[17]);
     expect(element.shadowRoot.activeElement).toEqual(element.keynavGridConfig.cells[17].querySelectorAll('button')[0]);
-    expect(element.shadowRoot.activeElement).not.toEqual(element.keynavGridConfig.cells[17].querySelectorAll('button')[1]);
+    expect(element.shadowRoot.activeElement).not.toEqual(
+      element.keynavGridConfig.cells[17].querySelectorAll('button')[1]
+    );
   });
 
   it('should focus internactive item within cell if only interactive item within cell', async () => {
     await elementIsStable(element);
-    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true }));
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
+    );
     element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
     await elementIsStable(element);
     expect(element.shadowRoot.activeElement).toEqual(element.keynavGridConfig.cells[16].querySelectorAll('button')[0]);
@@ -233,18 +259,24 @@ describe('grid-key-navigation.controller', () => {
 
   it('should retain focus on grid cell if interactive item a complex type (uses key navigation)', async () => {
     await elementIsStable(element);
-    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true }));
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
+    );
     element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
     element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
     await elementIsStable(element);
     expect(element.keynavGridConfig.cells[15].tabIndex).toBe(0);
     expect(element.shadowRoot.activeElement).toEqual(element.keynavGridConfig.cells[15]);
-    expect(element.shadowRoot.activeElement).not.toEqual(element.keynavGridConfig.cells[15].querySelectorAll('input')[0]);
+    expect(element.shadowRoot.activeElement).not.toEqual(
+      element.keynavGridConfig.cells[15].querySelectorAll('input')[0]
+    );
   });
 
   it('should allow complex types to be activated via `enter` key', async () => {
     await elementIsStable(element);
-    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true }));
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
+    );
     element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
     element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
     element.keynavGridConfig.cells[15].dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter', bubbles: true }));
@@ -256,7 +288,9 @@ describe('grid-key-navigation.controller', () => {
 
   it('should allow refocus to cell from cell interactions when pressing key `escape`', async () => {
     await elementIsStable(element);
-    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true }));
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
+    );
     element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
     element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
     element.keynavGridConfig.cells[15].dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter', bubbles: true }));
@@ -274,7 +308,9 @@ describe('grid-key-navigation.controller', () => {
 
   it('should ignore any key navigation inputs when a interactive element is active wihtin a cell', async () => {
     await elementIsStable(element);
-    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true }));
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
+    );
     element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
     element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
     element.keynavGridConfig.cells[15].dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter', bubbles: true }));
@@ -283,7 +319,9 @@ describe('grid-key-navigation.controller', () => {
     expect(element.keynavGridConfig.cells[15].tabIndex).toBe(0);
     expect(element.shadowRoot.activeElement).toEqual(element.keynavGridConfig.cells[15].querySelectorAll('input')[0]);
 
-    element.keynavGridConfig.cells[15].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true }));
+    element.keynavGridConfig.cells[15].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+    );
     await elementIsStable(element);
     expect(element.keynavGridConfig.cells[15].tabIndex).toBe(0);
     expect(element.shadowRoot.activeElement).toEqual(element.keynavGridConfig.cells[15].querySelectorAll('input')[0]);

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { ControlGroup, ControlMessage } from '@elements/elements/forms';
 import '@elements/elements/forms/define.js';
 
@@ -37,22 +37,22 @@ describe('nve-control-group', () => {
     expect(element._internals.role).toBe('group');
   });
 
-  it('should associate label to group', async() => {
+  it('should associate label to group', async () => {
     await elementIsStable(element);
     expect(element.getAttribute('aria-labelledby')).toBe(label.id);
   });
 
-  it('should assign label to label slot', async() => {
+  it('should assign label to label slot', async () => {
     await elementIsStable(element);
     expect(label.slot).toBe('label');
   });
 
-  it('should associate message to group', async() => {
+  it('should associate message to group', async () => {
     await elementIsStable(element);
     expect(element.getAttribute('aria-describedby')).toBe(message.id);
   });
 
-  it('should assign no-label style hook if no visble control label was provided', async() => {
+  it('should assign no-label style hook if no visble control label was provided', async () => {
     label.remove();
     element.requestUpdate();
     await elementIsStable(element);

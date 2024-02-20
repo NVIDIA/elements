@@ -1,6 +1,6 @@
 import { LitElement, unsafeCSS, html, css, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { getItems, grid } from '@elements/elements/test';
+import { getItems, grid } from '../../test/demo.js';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import '@elements/elements/grid/define.js';
 import '@elements/elements/badge/define.js'

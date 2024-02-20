@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { TypeClosableController } from '@elements/elements/internal';
 
 @customElement('type-closable-controller-test-element')
@@ -20,7 +20,9 @@ describe('type-closable.controller', () => {
   let fixture: HTMLElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<type-closable-controller-test-element></type-closable-controller-test-element>`);
+    fixture = await createFixture(
+      html`<type-closable-controller-test-element></type-closable-controller-test-element>`
+    );
     element = fixture.querySelector<TypeClosableControllerTestElement>('type-closable-controller-test-element');
   });
 
@@ -34,10 +36,10 @@ describe('type-closable.controller', () => {
 
     const event = untilEvent(element, 'close');
     element.close();
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
 
     let call = false;
-    element.addEventListener('close', () => call = true);
+    element.addEventListener('close', () => (call = true));
     element.closable = false;
     element.close();
     expect(call).toBe(false);
