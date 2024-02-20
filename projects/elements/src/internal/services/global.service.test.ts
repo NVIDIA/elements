@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { untilEvent } from '@elements/elements/test';
+import { untilEvent } from '@nvidia-elements/testing';
 import { GlobalStateService } from './global.service.js';
 
 describe('GlobalStateService', () => {
   beforeEach(() => {
     window.MLV_ELEMENTS.state.versions = ['PACKAGE_VERSION'];
-    window.MLV_ELEMENTS.state.elementRegistry = { };
+    window.MLV_ELEMENTS.state.elementRegistry = {};
   });
 
   it('should provide an intial state object', () => {

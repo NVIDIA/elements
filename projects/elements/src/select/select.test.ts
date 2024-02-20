@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, emulateClick } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, emulateClick } from '@nvidia-elements/testing';
 import { Select } from '@elements/elements/select';
 import type { Dropdown } from '@elements/elements/dropdown';
 import type { Menu, MenuItem } from '@elements/elements/menu';
@@ -211,7 +211,7 @@ describe('nve-select', () => {
     element.style.setProperty('--width', '100px');
     select.multiple = true;
     await elementIsStable(element);
-    
+
     element.shadowRoot.querySelectorAll('nve-menu-item')[0].click();
     element.shadowRoot.querySelectorAll('nve-menu-item')[2].click();
 
@@ -233,7 +233,7 @@ describe('nve-select', () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('nve-menu-item')[0].disabled).toBe(false);
     expect(element.shadowRoot.querySelectorAll('nve-menu-item')[1].disabled).toBe(false);
-    
+
     select.options[0].disabled = true;
     element.requestUpdate();
     await elementIsStable(element);
@@ -246,7 +246,7 @@ describe('nve-select', () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('nve-menu-item')[0].hidden).toBe(false);
     expect(element.shadowRoot.querySelectorAll('nve-menu-item')[1].hidden).toBe(false);
-    
+
     select.options[0].hidden = true;
     element.requestUpdate();
     await elementIsStable(element);

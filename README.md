@@ -1,6 +1,6 @@
 # Elements
 
-## The Design Language for AI/ML Factories Building at the Speed of Light
+The Design Language for AI/ML Factories Building at the Speed of Light
 
 [![Latest Release](https://github.com/NVIDIA/elements/-/badges/release.svg)](https://github.com/NVIDIA/elements/-/releases)
 [![pipeline status](https://github.com/NVIDIA/elements/badges/main/pipeline.svg)](https://github.com/NVIDIA/elements/-/commits/main)
@@ -21,6 +21,7 @@
 - `/projects/demos` - Suite of standardized demo apps for Elements and Patterns
 - `/projects/elements` - Elements library: curated UI maintained by the Elements team
 - `/projects/elements-react` - Elements React library for React compatibility/support
+- `/projects/testing` - A set of testing utilities for Lit based Web Components.
 
 ## Development
 

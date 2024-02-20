@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@elements/elements/test';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { TabsItem, Tabs } from '@elements/elements/tabs';
 import '@elements/elements/tabs/define.js';
 
@@ -51,7 +51,7 @@ describe('nve-tab', () => {
 
     const event = untilEvent(childElement, 'click');
     emulateClick(childElement);
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
 
     expect(childElement.selected).toBe(true);
   });
@@ -61,7 +61,7 @@ describe('nve-tab', () => {
 
     const event = untilEvent(childElement, 'click');
     emulateClick(childElement);
-    expect((await event)).toBeDefined();
+    expect(await event).toBeDefined();
 
     expect(childElement.selected).toBe(false);
   });
