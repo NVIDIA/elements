@@ -1,3 +1,15 @@
+# [0.23.0](https://github.com/NVIDIA/elements/compare/v0.22.3...v0.23.0) (2024-02-20)
+
+
+### Bug Fixes
+
+* **elements:** grid cell icon button ([a00777c](https://github.com/NVIDIA/elements/commit/a00777c3c145f4336c5aa3fb0888aa79ada587d0))
+
+
+### Features
+
+* **elements:** enable scrollto positioning api for grid ([6c6e1d8](https://github.com/NVIDIA/elements/commit/6c6e1d83f4959114a98c532c3381e03296cddd40))
+
 ## [0.22.3](https://github.com/NVIDIA/elements/compare/v0.22.2...v0.22.3) (2024-02-14)
 
 
