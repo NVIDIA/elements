@@ -18,7 +18,7 @@
   border-radius: var(--border-radius);
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: var(--gap)
+  gap: var(--gap);
 }
 
 slot[name='label'] {
@@ -36,7 +36,7 @@ slot[name='label'] {
   width: fit-content;
 }
 
-::slotted([nve-control]) {
+::slotted([nve-control]) ::slotted([nve-control]) {
   --border-radius: 0 !important;
 }
 
