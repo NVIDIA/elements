@@ -93,10 +93,10 @@ nve-icon-button,
   background: inherit;
 }
 
-:host([container='flat'][nve-control]:focus-within) {
+:host([container='flat']:focus-within) {
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
 }
 
-:host([container='flat'][nve-control]:focus-within) [input] {
+:host([container='flat']:focus-within) [input] {
   outline: 0 !important;
 }
