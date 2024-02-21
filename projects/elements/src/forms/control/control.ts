@@ -161,7 +161,7 @@ export class Control extends LitElement {
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
     this.setAttribute('nve-control', '');
-    this.setAttribute('nve-control', this.querySelector('[nve-control]') ? 'custom' : '');
+    this.setAttribute('nve-control', this.querySelector('[nve-control], [nve-control]') ? 'custom' : '');
 
     this.shadowRoot.addEventListener('slotchange', () => {
       this.#updateStyleStates();
