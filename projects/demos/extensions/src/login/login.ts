@@ -1,7 +1,7 @@
 import { html, LitElement, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
-import { scope } from '@elements/elements/internal';
+import { scope } from '@elements/elements/scoped';
 import { Input } from '@elements/elements/input';
 import { Checkbox } from '@elements/elements/checkbox';
 import { Password } from '@elements/elements/password';
@@ -40,7 +40,7 @@ export class DomainLogin extends ScopedRegistryHost(LitElement) {
     'nve-password': scope(Password, ScopedRegistryHost),
     'nve-checkbox': scope(Checkbox, ScopedRegistryHost),
     'nve-control-message': scope(ControlMessage, ScopedRegistryHost)
-  }
+  };
 
   static styles = [unsafeCSS(styles)];
 
@@ -90,16 +90,16 @@ export class DomainLogin extends ScopedRegistryHost(LitElement) {
 
   checkValidity() {
     const validation = Array.from(this.#form.elements)
-    .flatMap((e: any) => e.validity)
-    .reduce((p, validity) => {
-      const keys = p;
-      for (const key in validity) {
-        if (validity[key]) {
-          keys[key] = true;
+      .flatMap((e: any) => e.validity)
+      .reduce((p, validity) => {
+        const keys = p;
+        for (const key in validity) {
+          if (validity[key]) {
+            keys[key] = true;
+          }
         }
-      }
-      return keys;
-    }, {});
+        return keys;
+      }, {});
     this.#internals.setValidity(validation, 'invalid login');
     this.#internals.checkValidity();
   }
