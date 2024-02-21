@@ -1,4 +1,3 @@
-
 :host {
   --font-size: var(--mlv-ref-font-size-100);
   width: fit-content;
@@ -32,30 +31,27 @@ label {
   width: fit-content;
 }
 
-:host([container='flat']),
-:host([container='inline']) {
-  select {
-    opacity: 0;
-  }
-
-  .select-label {
-    background: transparent;
-  }
+:host([container='flat']) select,
+:host([container='inline']) select {
+  opacity: 0;
 }
 
-:host([container='inline']) {
-  select {
-    opacity: 0;
-  }
+:host([container='flat']) .select-label,
+:host([container='inline']) .select-label {
+  background: transparent;
+}
 
-  mlv-select {
-    --width: fit-content;
-    margin-inline-end: 0;
-  }
+:host([container='inline']) select {
+  opacity: 0;
+}
 
-  label {
-    margin-inline: 0;
-  }
+:host([container='inline']) mlv-select {
+  --width: fit-content;
+  margin-inline-end: 0;
+}
+
+:host([container='inline']) label {
+  margin-inline: 0;
 }
 
 mlv-input {
