@@ -64,7 +64,7 @@
 }
 
 [internal-host]:has(nve-menu:focus-within) [input] {
-  outline: 0 !important
+  outline: 0 !important;
 }
 
 :host(:--selected) {
@@ -134,11 +134,13 @@
   align-self: start;
 }
 
+:host([status='error']),
 :host(:--invalid),
 :host(:--error) {
   --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
 }
 
+:host([status='success']),
 :host(:--success) {
   --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-success-emphasis-color);
 }
@@ -202,7 +204,7 @@ slot[name*='option-'] {
   outline: 0 !important;
 }
 
-:host([container='inline']) { 
+:host([container='inline']) {
   --border-radius: 0;
   --box-shadow: none;
 }
