@@ -68,11 +68,13 @@ nve-icon-button,
   --border-radius: var(--nve-ref-border-radius-full);
 }
 
+:host([status='error']),
 :host(:--invalid),
 :host(:--error) {
   --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
 }
 
+:host([status='success']),
 :host(:--success) {
   --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-success-emphasis-color);
 }
