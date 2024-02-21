@@ -100,7 +100,7 @@ export class ProgressiveFilterChip extends LitElement {
       this.#resetItems();
       const items = Array.from(
         this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements()
-      ).filter(i => i.matches('input, select, nve-button, [nve-control]'));
+      ).filter(i => i.matches('input, select, nve-button, [nve-control], [nve-control]'));
       items.forEach(i => (i.slot = generateId()));
       this.inputs = items.length ? items : this.inputs;
     }
