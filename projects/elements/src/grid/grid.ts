@@ -51,7 +51,7 @@ export class Grid extends LitElement implements ContainerElement {
   static readonly metadata = {
     tag: 'nve-grid',
     version: 'PACKAGE_VERSION',
-    children: ['nve-grid-row', 'nve-grid-header', 'nve-grid-placeholder']
+    children: [GridRow.metadata.tag, GridHeader.metadata.tag]
   };
 
   static elementDefinitions = {};
