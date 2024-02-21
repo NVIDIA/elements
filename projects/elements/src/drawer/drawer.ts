@@ -28,9 +28,6 @@ import styles from './drawer.css?inline';
  * @cssprop --gap
  * @cssprop --max-width
  * @cssprop --min-height
- * @cssprop --nve-sys-layer-popover-arrow-padding
- * @cssprop --nve-sys-layer-popover-arrow-offset
- * @cssprop --nve-sys-layer-popover-offset
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-drawer-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=4152%3A86953&mode=dev
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
