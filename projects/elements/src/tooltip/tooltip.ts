@@ -1,7 +1,16 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
-import { animationFade, attachInternals, PopoverAlign, popoverBaseStyles, PopoverPosition, PopoverType, TypePopoverController, useStyles } from '@elements/elements/internal';
+import {
+  animationFade,
+  attachInternals,
+  PopoverAlign,
+  popoverBaseStyles,
+  PopoverPosition,
+  PopoverType,
+  TypePopoverController,
+  useStyles
+} from '@elements/elements/internal';
 import styles from './tooltip.css?inline';
 
 /**
@@ -18,9 +27,6 @@ import styles from './tooltip.css?inline';
  * @cssprop --box-shadow
  * @cssprop --font-size
  * @cssprop --arrow-transform
- * @cssprop --mlv-sys-layer-popover-arrow-padding
- * @cssprop --mlv-sys-layer-popover-arrow-offset
- * @cssprop --mlv-sys-layer-popover-offset
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-tooltip-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-29&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
