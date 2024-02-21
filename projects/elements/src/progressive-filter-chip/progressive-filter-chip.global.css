@@ -8,3 +8,11 @@ nve-progressive-filter-chip input::-webkit-calendar-picker-indicator {
   opacity: 0 !important;
   display: none !important;
 }
+
+nve-progressive-filter-chip:has([status='error']) {
+  --background: transparent;
+}
+
+nve-progressive-filter-chip nve-select:not(:--multiple)::part(caret) {
+  display: none;
+}
