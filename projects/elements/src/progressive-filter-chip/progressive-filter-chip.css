@@ -1,7 +1,11 @@
 :host {
   --gap: var(--nve-ref-space-xxxs);
   --border-radius: var(--nve-ref-border-radius-sm);
-  --background: color-mix(in oklab, var(--nve-sys-interaction-field-background) 95%, var(--nve-sys-interaction-state-mix));
+  --background: color-mix(
+    in oklab,
+    var(--nve-sys-interaction-field-background) 95%,
+    var(--nve-sys-interaction-state-mix)
+  );
   width: fit-content;
   min-width: fit-content;
   contain: initial;
@@ -22,6 +26,7 @@
   --width: fit-content;
 }
 
+::slotted([nve-control]),
 ::slotted([nve-control]) {
   --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: 0;
