@@ -50,9 +50,9 @@
   }
 
   /* top bar nav button */
-  .css-c3junj .css-888fv8,
+  .css-c3junj .css-1qx8lvn,
   .css-c3junj .css-17dxjer,
-  .css-4ii5m .css-888fv8,
+  .css-4ii5m .css-1qx8lvn,
   .css-4ii5m .css-17dxjer {
     margin: 0 !important;
   }
@@ -159,7 +159,7 @@
   }
 
   button.css-17dxjer,
-  button.css-888fv8 { /* selected/active toolbar buttons */
+  button.css-1qx8lvn { /* selected/active toolbar buttons */
     color: var(--mlv-sys-interaction-selected-color) !important;
     border-bottom-color: var(--mlv-sys-interaction-selected-background) !important;
   }
@@ -183,10 +183,6 @@
 
     .os-scrollbar-vertical {
       right: -2px !important;
-    }
-
-    .search-field {
-      margin-top: 24px !important;
     }
 
     .css-dmaeio,
@@ -247,40 +243,52 @@
     margin-right: 0 !important;
   }
 
-  .sidebar-container .sidebar-item,
-  .sto-1k5e3f,
-  .sto-pbjbky,
-  .css-888fv8 {
+  .css-194spiq {
+    padding: 0 !important;
+  }
+
+  .css-194spiq .search-field {
+    margin-top: 24px !important;
+  }
+
+  .css-159egyp {
+    padding: 0 20px 20px 20px !important;
+  }
+
+  .sidebar-item,
+  .css-1qx8lvn {
     background: transparent !important;
     background-image: linear-gradient(color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio)) 0 0) !important;
     color: var(--mlv-sys-interaction-color) !important;
     border-radius: var(--mlv-ref-border-radius-xs) !important;
-    padding-block: 6px !important;
-    font-size: var(--mlv-ref-font-size-200) !important
+    font-size: var(--mlv-ref-font-size-200) !important;
+    padding-block: 0 !important;
   }
 
-  .css-1qwztpk {
-    margin: 0 !important;
+  .sidebar-item a {
+    padding-block: 0 !important;
   }
 
-  .sidebar-item:hover,
-  .sto-pbjbky:hover {
+  .sidebar-item,
+  .sidebar-item a {
+    min-height: 30px !important;
+    align-items: center !important;
+  }
+
+  .sidebar-item:hover {
     --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
   }
 
-  .sidebar-item[disabled],
-  .sto-pbjbky[disabled] {
+  .sidebar-item[disabled] {
     --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-disabled);
   }
 
-  .sidebar-item:active,
-  .sto-pbjbky:active {
+  .sidebar-item:active {
     --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-active);
   }
 
   .sidebar-item[data-selected='true']:not(#about-getting-started--docs),
-  .sto-pbjbky:has(.sto-1aork4c),
-  .css-888fv8 {
+  .css-1qx8lvn {
     --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
   }
 
