@@ -8,3 +8,11 @@ mlv-progressive-filter-chip input::-webkit-calendar-picker-indicator {
   opacity: 0 !important;
   display: none !important;
 }
+
+mlv-progressive-filter-chip:has([status='error']) {
+  --background: transparent;
+}
+
+mlv-progressive-filter-chip mlv-select:not(:--multiple)::part(caret) {
+  display: none;
+}

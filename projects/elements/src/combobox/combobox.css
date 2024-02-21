@@ -65,11 +65,13 @@ mlv-tag {
   display: none !important;
 }
 
+:host([status='error']),
 :host(:--invalid),
 :host(:--error) {
   --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-danger-emphasis-color);
 }
 
+:host([status='success']),
 :host(:--success) {
   --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-success-emphasis-color);
 }
