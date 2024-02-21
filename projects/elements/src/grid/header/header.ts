@@ -50,7 +50,7 @@ export class GridHeader extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'row';
-    this.addEventListener('mlv-grid-column-resize', () => this.#computeColumnWidths());
+    this.addEventListener('nve-grid-column-resize', () => this.#computeColumnWidths());
   }
 
   async firstUpdated(props: PropertyValues<this>) {

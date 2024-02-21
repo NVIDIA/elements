@@ -99,7 +99,7 @@ export class GridColumn extends LitElement {
     }
 
     if (props.get('width') !== this.width) {
-      this.dispatchEvent(new CustomEvent('mlv-grid-column-resize', { bubbles: true }));
+      this.dispatchEvent(new CustomEvent('nve-grid-column-resize', { bubbles: true }));
     }
   }
 

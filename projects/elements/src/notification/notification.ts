@@ -32,7 +32,6 @@ import styles from './notification.css?inline';
  * @cssprop --box-shadow
  * @cssprop --min-width
  * @cssprop --width
- * @cssprop --mlv-sys-layer-popover-offset
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-notification-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
@@ -144,7 +143,7 @@ export class Notification extends LitElement {
 
   async remove() {
     this.shadowRoot.addEventListener(
-      'mlv-animation-complete',
+      'nve-animation-complete',
       () => {
         super.remove();
       },
@@ -154,6 +153,6 @@ export class Notification extends LitElement {
   }
 
   #complete() {
-    this.shadowRoot.dispatchEvent(new CustomEvent('mlv-animation-complete'));
+    this.shadowRoot.dispatchEvent(new CustomEvent('nve-animation-complete'));
   }
 }

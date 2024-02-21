@@ -86,11 +86,11 @@ describe('mlv-notification', () => {
     expect(await event).toBeDefined();
   });
 
-  it('should mlv-animation-complete event to signal when to remove element', async () => {
+  it('should nve-animation-complete event to signal when to remove element', async () => {
     element.closable = true;
     await elementIsStable(element);
 
-    const event = untilEvent(element.shadowRoot as any, 'mlv-animation-complete');
+    const event = untilEvent(element.shadowRoot as any, 'nve-animation-complete');
     await element.remove();
     expect(await event).toBeDefined();
   });

@@ -52,8 +52,8 @@ describe('mlv-grid-column', () => {
     expect((await event).detail).toBe('accending');
   });
 
-  it('should dispatch mlv-grid-column-resize event if column width changes', async () => {
-    const event = untilEvent(columns[0], 'mlv-grid-column-resize');
+  it('should dispatch nve-grid-column-resize event if column width changes', async () => {
+    const event = untilEvent(columns[0], 'nve-grid-column-resize');
     columns[0].width = '100px';
     expect((await event).target.width).toBe('100px');
   });
