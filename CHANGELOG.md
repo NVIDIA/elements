@@ -6,7 +6,7 @@
 * **elements:** filter chip validation ([e2e46f7](https://github.com/NVIDIA/elements/commit/e2e46f7226fd98c3625c18e9f6598cf051f05f0b))
 * **elements:** pagination select style ([e72257e](https://github.com/NVIDIA/elements/commit/e72257e60fc80567195f117a31524ecfd53d98e7))
 
-# [0.23.0](https://github.com/NVIDIA/elements/compare/v0.22.3...v0.23.0) (2024-02-20)
+## [0.23.0](https://github.com/NVIDIA/elements/compare/v0.22.3...v0.23.0) (2024-02-20)
 
 
 ### Bug Fixes
