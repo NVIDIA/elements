@@ -64,11 +64,11 @@
   --background: var(--mlv-sys-interaction-disabled-color);
 }
 
-:host([mlv-control]:focus-within) [input] {
+:host(:focus-within) [input] {
   outline: 0 !important;
 }
 
-:host([mlv-control]:focus-within) [input] slot {
+:host(:focus-within) [input] slot {
   outline: Highlight solid 2px !important;
   outline: 5px auto -webkit-focus-ring-color !important;
 }
