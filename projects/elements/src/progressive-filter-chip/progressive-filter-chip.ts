@@ -85,7 +85,7 @@ export class ProgressiveFilterChip extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'toolbar';
-    this.setAttribute('mlv-control', '');
+    this.setAttribute('nve-control', '');
     appendRootNodeStyle(this, globalStyles);
   }
 
@@ -100,7 +100,7 @@ export class ProgressiveFilterChip extends LitElement {
       this.#resetItems();
       const items = Array.from(
         this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements()
-      ).filter(i => i.matches('input, select, mlv-button, [mlv-control]'));
+      ).filter(i => i.matches('input, select, mlv-button, [nve-control], [mlv-control]'));
       items.forEach(i => (i.slot = generateId()));
       this.inputs = items.length ? items : this.inputs;
     }

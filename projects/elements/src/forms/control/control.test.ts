@@ -41,8 +41,8 @@ describe('mlv-control', () => {
     expect(customElements.get('mlv-control')).toBeDefined();
   });
 
-  it('should assign mlv-control attribute identifier', async () => {
-    expect(element.hasAttribute('mlv-control')).toBe(true);
+  it('should assign nve-control attribute identifier', async () => {
+    expect(element.hasAttribute('nve-control')).toBe(true);
   });
 
   it('should associate label to input', async () => {
@@ -100,8 +100,8 @@ describe('mlv-control', () => {
     expect(element.hasAttribute('multiple')).toBe(true);
   });
 
-  it('should apply mlv-control attribute with no custom value if native input provided', async () => {
-    expect(element.getAttribute('mlv-control')).toBe('');
+  it('should apply nve-control attribute with no custom value if native input provided', async () => {
+    expect(element.getAttribute('nve-control')).toBe('');
   });
 });
 
@@ -113,7 +113,7 @@ describe('mlv-control custom', () => {
     fixture = await createFixture(html`
       <mlv-control>
         <label>label</label>
-        <div mlv-control tabindex="0" value=""></div>
+        <div nve-control tabindex="0" value=""></div>
       </mlv-control>
     `);
     element = fixture.querySelector('mlv-control');
@@ -125,7 +125,7 @@ describe('mlv-control custom', () => {
   });
 
   it('should apply custom control attribute if slotted input is a custom input type', async () => {
-    expect(element.getAttribute('mlv-control')).toBe('custom');
+    expect(element.getAttribute('nve-control')).toBe('custom');
   });
 
   it('should focus input if custom and does not implement "showPicker"', async () => {

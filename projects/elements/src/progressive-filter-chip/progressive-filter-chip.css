@@ -1,7 +1,11 @@
 :host {
   --gap: var(--mlv-ref-space-xxxs);
   --border-radius: var(--mlv-ref-border-radius-sm);
-  --background: color-mix(in oklab, var(--mlv-sys-interaction-field-background) 95%, var(--mlv-sys-interaction-state-mix));
+  --background: color-mix(
+    in oklab,
+    var(--mlv-sys-interaction-field-background) 95%,
+    var(--mlv-sys-interaction-state-mix)
+  );
   width: fit-content;
   min-width: fit-content;
   contain: initial;
@@ -15,14 +19,15 @@
   overflow: hidden;
 }
 
-[mlv-control],
+[nve-control],
 ::slotted(mlv-button) {
   --font-weight: var(--mlv-ref-font-weight-medium);
   --border-radius: 0;
   --width: fit-content;
 }
 
-::slotted([mlv-control]) {
+::slotted([mlv-control]),
+::slotted([nve-control]) {
   --font-weight: var(--mlv-ref-font-weight-medium);
   --border-radius: 0;
 }

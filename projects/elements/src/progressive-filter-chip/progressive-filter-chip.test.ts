@@ -68,7 +68,7 @@ describe('mlv-progressive-filter-chip', () => {
     expect(element.shadowRoot.querySelector('mlv-date')).toBeTruthy();
   });
 
-  it('should a plain slot when a custom input is slotted', async () => {
+  it('should use a plain slot when a custom input is slotted', async () => {
     element.querySelector('select').remove();
     element.querySelector('[type=text]').remove();
     element.querySelector('[type=date]').remove();

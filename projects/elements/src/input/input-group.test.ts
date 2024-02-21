@@ -34,7 +34,7 @@ describe('mlv-input', () => {
   });
 
   it('should mark first and last controls in group', async () => {
-    const controls = Array.from(fixture.querySelectorAll('[mlv-control]'));
+    const controls = Array.from(fixture.querySelectorAll('[nve-control]'));
     expect(controls[0].hasAttribute('first-control')).toBe(true);
     expect(controls[1].hasAttribute('last-control')).toBe(true);
   });

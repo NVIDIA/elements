@@ -24,6 +24,8 @@
   --opacity: 0.5;
 }
 
+:host([layout*='horizontal-inline']) ::slotted([nve-control]),
+:host([layout*='vertical-inline']) ::slotted([nve-control]),
 :host([layout*='horizontal-inline']) ::slotted([mlv-control]),
 :host([layout*='vertical-inline']) ::slotted([mlv-control]) {
   --control-height: var(--mlv-ref-size-800);
@@ -65,28 +67,27 @@ slot[name='messages'] {
   align-items: start;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
-  grid-template-areas: 
+  grid-template-areas:
     'label label label'
     'input input input'
     'messages messages messages';
 
   &.no-messages {
-    grid-template-areas: 
+    grid-template-areas:
       'label label label'
       'input input input';
   }
 
   &.no-label {
     & slot[name='messages'] {
-      grid-template-areas: 
+      grid-template-areas:
         'input input input'
         'messages messages messages';
     }
   }
 
   &.no-label.no-messages {
-    grid-template-areas: 
-      'input input input';
+    grid-template-areas: 'input input input';
   }
 }
 
@@ -94,11 +95,11 @@ slot[name='messages'] {
   grid-template-areas:
     'label label label'
     'input input input'
-    'messages messages messages';;
+    'messages messages messages';
 }
 
 :host([layout='vertical-inline']) [internal-host].no-messages {
-  grid-template-areas: 
+  grid-template-areas:
     'label label label'
     'input input input';
 }
@@ -111,8 +112,7 @@ slot[name='messages'] {
 }
 
 :host([layout='horizontal']) [internal-host].no-messages {
-  grid-template-areas: 
-    'label input input';
+  grid-template-areas: 'label input input';
 }
 
 :host([layout='horizontal-inline']) [internal-host] {
@@ -123,8 +123,7 @@ slot[name='messages'] {
 }
 
 :host([layout='horizontal-inline']) [internal-host].no-messages {
-  grid-template-areas: 
-    'label input input';
+  grid-template-areas: 'label input input';
 }
 
 :host([layout='horizontal']) slot[name='label'] {

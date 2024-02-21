@@ -1,10 +1,10 @@
-[mlv-control] input::placeholder,
-[mlv-control] textarea::placeholder {
+[nve-control] input::placeholder,
+[nve-control] textarea::placeholder {
   color: var(--mlv-sys-text-placeholder-color) !important;
 }
 
-[mlv-control] input::-webkit-search-cancel-button,
-[mlv-control] input::-webkit-calendar-picker-indicator {
+[nve-control] input::-webkit-search-cancel-button,
+[nve-control] input::-webkit-calendar-picker-indicator {
   opacity: 0 !important;
   display: none !important;
 }

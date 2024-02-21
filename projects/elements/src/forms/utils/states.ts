@@ -3,7 +3,7 @@ import type { ControlGroup } from '../control-group/control-group.js';
 import { ControlMessage } from '../control-message/control-message.js';
 import type { Control } from '../control/control.js';
 
-export const inputQuery = 'input, select, selectmenu, textarea, [mlv-control]';
+export const inputQuery = 'input, select, selectmenu, textarea, [mlv-control], [nve-control]';
 
 /**
  * Adds validation states to custom element

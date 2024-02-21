@@ -143,19 +143,18 @@ export class Toolbar extends LitElement implements ContainerElement {
 
   #updateContainers() {
     if (this.container !== 'flat' && this.container !== 'inset') {
-      const groups = this.#slottedElements.filter(e =>
-        e.tagName.toLowerCase().includes('mlv-button-group')
-      ) as ButtonGroup[];
+      const groups = this.#slottedElements.filter(e => e.matches('mlv-button-group')) as ButtonGroup[];
       groups.forEach(group => (group.container = 'flat'));
 
-      const controls = this.#slottedElements.filter(e => e.hasAttribute('mlv-control')) as (Control & {
+      const controls = this.#slottedElements.filter(e => e.matches('[nve-control], [mlv-control]')) as (Control & {
         container: string;
       })[];
       controls.forEach(control => (control.container = 'flat'));
 
-      const buttons = this.#slottedElements.filter(
-        e => e.tagName.toLowerCase().includes('mlv-button') || e.tagName.toLowerCase().includes('mlv-icon-button')
-      ) as (Button | IconButton)[];
+      const buttons = this.#slottedElements.filter(e => e.matches('mlv-button, mlv-icon-button')) as (
+        | Button
+        | IconButton
+      )[];
       buttons.forEach(button => (button.interaction = 'flat'));
     }
   }
