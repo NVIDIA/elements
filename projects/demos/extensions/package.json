@@ -41,39 +41,20 @@
     "build": "wireit",
     "build:watch": "wireit",
     "test": "wireit",
-    "test:watch": "wireit",
-    "storybook": "wireit",
-    "storybook:watch": "wireit"
+    "test:watch": "wireit"
   },
   "dependencies": {
     "@lit-labs/scoped-registry-mixin": "^1.0.3",
     "@elements/elements": "workspace:*",
+    "@nvidia-elements/testing": "workspace:*",
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
-    "lit": "^3.1.0",
-    "lit-html": "^3.1.0"
+    "lit": "^3.1.0"
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "8.9.0",
     "@nvidia-elements/testing": "workspace:*",
-    "@storybook/addon-docs": "7.1.1",
-    "@storybook/addon-essentials": "7.1.1",
-    "@storybook/addon-links": "7.1.1",
-    "@storybook/addons": "7.1.1",
-    "@storybook/blocks": "7.1.1",
-    "@storybook/builder-vite": "7.1.1",
-    "@storybook/channel-postmessage": "7.1.1",
-    "@storybook/channel-websocket": "7.1.1",
-    "@storybook/client-api": "7.1.1",
-    "@storybook/core-common": "7.1.1",
-    "@storybook/preview-api": "7.1.1",
-    "@storybook/theming": "7.1.1",
-    "@storybook/web-components": "7.1.1",
-    "@storybook/web-components-vite": "7.1.1",
     "@vitest/browser": "1.1.0",
     "glob": "8.0.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "storybook": "7.1.1",
     "typescript": "5.3.3",
     "vite": "5.1.3",
     "vite-plugin-dts": "3.7.2",
@@ -81,9 +62,9 @@
   },
   "wireit": {
     "dev": {
+      "command": "vite",
       "dependencies": [
-        "build:watch",
-        "storybook:watch"
+        "build"
       ]
     },
     "ci": {
@@ -92,9 +73,10 @@
       ]
     },
     "build": {
-      "command": "tsc && vite build",
+      "command": "tsc && vite build --config=vite.config.lib.ts",
       "dependencies": [
-        "../../elements:build"
+        "../../elements:build",
+        "../../testing:ci"
       ],
       "output": [
         "dist/**"
@@ -133,28 +115,6 @@
     },
     "test:watch": {
       "command": "vitest --watch",
-      "service": true
-    },
-    "storybook": {
-      "command": "storybook-build --output-dir ./storybook-build",
-      "files": [
-        ".storybook/**",
-        "src/**/*.stories.ts",
-        "src/**/*.stories.mdx",
-        "package.json",
-        "tsconfig.json",
-        "tsconfig.lib.json",
-        "vite.config.ts"
-      ],
-      "output": [
-        "storybook-build/**"
-      ],
-      "dependencies": [
-        "build"
-      ]
-    },
-    "storybook:watch": {
-      "command": "storybook dev",
       "service": true
     }
   }

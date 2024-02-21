@@ -20,6 +20,7 @@
       "extensions-elements-starter": ["./src/index.js"],
       "extensions-elements-starter/*": ["./src/*"],
       "extensions-elements-starter/*.js": ["./src/*.js"],
+      "@elements/elements": ["node_modules/@elements/elements/dist"],
       "@nvidia-elements/testing": ["node_modules/@nvidia-elements/testing/dist"]
     }
   },
