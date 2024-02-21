@@ -6,11 +6,11 @@ import dts from 'vite-plugin-dts';
 import glob from 'glob';
 
 const packageFile = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)) as any);
-const resolve = (rel) => path.resolve(process.cwd(), rel);
-const index = process.argv.findIndex((i) => i === '--outDir') + 1;
+const resolve = rel => path.resolve(process.cwd(), rel);
+const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
 
-export default defineConfig((env) => {
+export default defineConfig(env => {
   return {
     resolve: {
       alias: {
@@ -20,13 +20,10 @@ export default defineConfig((env) => {
     plugins: [
       {
         ...dts({
-          tsConfigFilePath: './tsconfig.lib.json',
+          tsconfigPath: './tsconfig.lib.json',
           root: resolve('.'),
           entryRoot: resolve('./src'),
-          outputDir: dist(),
-          staticImport: true,
-          noEmitOnError: true,
-          skipDiagnostics: false
+          outDir: dist()
         }),
         enforce: 'pre'
       }
@@ -41,9 +38,10 @@ export default defineConfig((env) => {
       lib: {
         entry: {
           index: resolve('./src/index.ts'),
-          ...glob.sync('./src/**/define.ts').reduce((p, i) => { // all component entrypoints
+          ...glob.sync('./src/**/define.ts').reduce((p, i) => {
+            // all component entrypoints
             return { ...p, [i.replace('./src/', '').replace('.ts', '')]: resolve(i) };
-          }, { })
+          }, {})
         }
       },
       rollupOptions: {
@@ -52,7 +50,7 @@ export default defineConfig((env) => {
         external: [
           ...Object.keys(packageFile.dependencies || {}),
           ...Object.keys(packageFile.optionalDependencies || {})
-        ].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
+        ].map(packageName => new RegExp(`^${packageName}(/.*)?`)),
         output: [
           {
             format: 'esm',
