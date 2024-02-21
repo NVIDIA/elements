@@ -98,13 +98,13 @@
       ]
     },
     "build": {
-      "command": "mkdir -p dist/demos && mkdir -p dist/api && cp -a ./index.html dist/ && cp -a ./robots.txt dist/",
+      "command": "mkdir -p dist/demos && mkdir -p dist/api && cp -a ./_redirects dist/ && cp -a ./robots.txt dist/",
       "files": [
-        "index.html",
+        "_redirects",
         "robots.txt"
       ],
       "output": [
-        "dist/index.html",
+        "dist/_redirects",
         "dist/robots.txt"
       ]
     },
