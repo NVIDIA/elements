@@ -19,9 +19,7 @@
       "@elements/elements": ["./src/index.js"],
       "@elements/elements/*": ["./src/*"],
       "@elements/elements/*.js": ["./src/*.js"],
-      "elements-lighthouse": [".lighthouse/index.js"],
-      "@nvidia-elements/testing": ["node_modules/@nvidia-elements/testing/dist"],
-      "@nvidia-elements/testing/*": ["node_modules/@nvidia-elements/testing/dist/*"]
+      "elements-lighthouse": [".lighthouse/index.js"]
     },
     "plugins": [
       {
