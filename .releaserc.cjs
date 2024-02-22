@@ -13,7 +13,12 @@ module.exports = {
         ]
       }
     ],
-    '@semantic-release/release-notes-generator',
+    [
+      '@semantic-release/release-notes-generator',
+      {
+        preset: 'conventionalcommits'
+      }
+    ],
     [
       '@semantic-release/changelog',
       {
@@ -33,6 +38,11 @@ module.exports = {
           },
           {
             label: '@elements/elements-react',
+            type: 'package',
+            url: 'https://registry.npmjs.org'
+          },
+          {
+            label: '@nvidia-elements/testing',
             type: 'package',
             url: 'https://registry.npmjs.org'
           }
