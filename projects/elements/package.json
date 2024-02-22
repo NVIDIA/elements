@@ -210,6 +210,9 @@
   },
   "typesVersions": {
     "*": {
+      "index": [
+        "dist/index.d.ts"
+      ],
       "*/define": [
         "dist/*/define.d.ts"
       ],
