@@ -138,9 +138,26 @@
 
   .sbdocs h1[id*='gitlab'],
   .sbdocs h2[id*='gitlab'],
-  .sbdocs h3[id*='gitlab'],
-  .sbdocs h3[id*='bug-fixes'] {
+  .sbdocs h3[id*='gitlab'] {
     margin: 0 !important;
+  }
+
+  .sbdocs h2[id*='gitlab'] {
+    margin-top: 48px !important;
+  }
+
+  .sbdocs h2[id*='gitlab']:first-child {
+    margin-top: 0 !important;
+  }
+
+  .sbdocs h3[id*='features'],
+  .sbdocs h3[id*='bug-fixes'] {
+    margin: 8px 0 0 0 !important;
+  }
+
+  .sbdocs h3[id*='features'] + ul,
+  .sbdocs h3[id*='bug-fixes'] + ul {
+    margin-bottom: 12px !important;
   }
 
   .sbdocs:has([id*='gitlab']) h1 {
