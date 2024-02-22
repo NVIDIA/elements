@@ -1,3 +1,15 @@
+# [0.24.0](https://github.com/NVIDIA/elements/compare/v0.23.1...v0.24.0) (2024-02-22)
+
+
+### Bug Fixes
+
+* **elements:** type version paths ([a55efce](https://github.com/NVIDIA/elements/commit/a55efce727f8ccedc9827595ddfffaae86990789))
+
+
+### Features
+
+* **testing:** publish testing package ([4a5a670](https://github.com/NVIDIA/elements/commit/4a5a6706478823b9279855bb9075525091da51f0))
+
 ## [0.23.1](https://github.com/NVIDIA/elements/compare/v0.23.0...v0.23.1) (2024-02-21)
 
 
