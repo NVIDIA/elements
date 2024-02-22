@@ -100,14 +100,10 @@ module.exports = {
             npmPublish: true,
             pkgRoot: './projects/elements-react'
           },
-          // urm_testing: {
-          //   npmPublish: true,
-          //   pkgRoot: './projects/testing'
-          // },
-          // urm_testing: {
-          //   npmPublish: true,
-          //   pkgRoot: './projects/testing'
-          // },
+          urm_testing: {
+            npmPublish: true,
+            pkgRoot: './projects/testing'
+          },
           elements_elements: {
             npmPublish: true,
             pkgRoot: './projects/elements'
@@ -115,15 +111,11 @@ module.exports = {
           elements_react: {
             npmPublish: true,
             pkgRoot: './projects/elements-react'
+          },
+          elements_testing: {
+            npmPublish: true,
+            pkgRoot: './projects/testing'
           }
-          // elements_testing: {
-          //   npmPublish: true,
-          //   pkgRoot: './projects/testing'
-          // },
-          // elements_testing: {
-          //   npmPublish: true,
-          //   pkgRoot: './projects/testing'
-          // },
         }
       }
     ],
