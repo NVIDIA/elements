@@ -1,3 +1,12 @@
+const fs = require('node:fs');
+const { globSync } = require('glob');
+
+const sourceFiles = globSync('./projects/elements/dist/**/*.js')
+  .filter(file => !file.includes('dist/index.js'))
+  .filter(file => fs.readFileSync(file, 'utf8').includes('0.0.0'));
+
+console.log(`${sourceFiles.length} source file inline versions to be updated`);
+
 module.exports = {
   branches: ['main'],
   tagFormat: 'v${version}',
@@ -53,6 +62,11 @@ module.exports = {
       'semantic-release-replace-plugin',
       {
         replacements: [
+          {
+            files: sourceFiles,
+            from: '0.0.0',
+            to: '${nextRelease.version}'
+          },
           {
             files: ['./projects/elements/dist/index.js'],
             from: '0.0.0',

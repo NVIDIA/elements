@@ -28,7 +28,7 @@ export class Search extends Control implements ContainerElement {
 
   static readonly metadata = {
     tag: 'nve-search',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   protected get prefixContent() {

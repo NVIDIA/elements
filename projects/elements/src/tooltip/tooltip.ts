@@ -36,7 +36,7 @@ export class Tooltip extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-tooltip',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   /**

@@ -17,7 +17,7 @@ export class Time extends Control {
 
   static readonly metadata = {
     tag: 'nve-time',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   protected get suffixContent() {

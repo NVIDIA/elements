@@ -25,7 +25,7 @@ export class GridRow extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-grid-row',
-    version: 'PACKAGE_VERSION',
+    version: '0.0.0',
     children: [GridCell.metadata.tag]
   };
 

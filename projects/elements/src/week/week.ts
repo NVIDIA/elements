@@ -17,7 +17,7 @@ export class Week extends Control {
 
   static readonly metadata = {
     tag: 'nve-week',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   protected get suffixContent() {
