@@ -4,12 +4,12 @@ import { GlobalStateService } from './global.service.js';
 
 describe('GlobalStateService', () => {
   beforeEach(() => {
-    window.MLV_ELEMENTS.state.versions = ['PACKAGE_VERSION'];
+    window.MLV_ELEMENTS.state.versions = ['0.0.0'];
     window.MLV_ELEMENTS.state.elementRegistry = {};
   });
 
   it('should provide an intial state object', () => {
-    expect(GlobalStateService.state.versions[0]).toBe('PACKAGE_VERSION');
+    expect(GlobalStateService.state.versions[0]).toBe('0.0.0');
   });
 
   it('should merge state updates', async () => {

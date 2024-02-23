@@ -3,8 +3,8 @@ import { I18nService, I18nService_ } from './i18n.service.js';
 
 describe('GlobalStateService', () => {
   beforeEach(() => {
-    window.MLV_ELEMENTS.state.versions = ['PACKAGE_VERSION'];
-    window.MLV_ELEMENTS.state.elementRegistry = { };
+    window.MLV_ELEMENTS.state.versions = ['0.0.0'];
+    window.MLV_ELEMENTS.state.elementRegistry = {};
   });
 
   it('should provide an intial i18n state', () => {
