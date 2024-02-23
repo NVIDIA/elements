@@ -120,7 +120,7 @@ export class Icon extends LitElement {
 export function mergeIcons(RegisteredIcon: typeof Icon) {
   if (globalThis.customElements?.get) {
     const registered = parseVersion(RegisteredIcon.metadata.version);
-    const current = parseVersion('PACKAGE_VERSION');
+    const current = parseVersion('0.0.0');
 
     // determine if a older icon was registered and if so, merge the icons with the latest svgs
     if (registered.minor <= current.minor && registered.major <= current.major) {
