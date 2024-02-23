@@ -43,7 +43,7 @@ export class Alert extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-alert',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

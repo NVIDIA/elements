@@ -34,7 +34,7 @@ export class PageLoader extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-page-loader',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

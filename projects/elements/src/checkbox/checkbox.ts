@@ -19,6 +19,6 @@ export class Checkbox extends Control {
 
   static readonly metadata = {
     tag: 'nve-checkbox',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 }

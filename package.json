@@ -32,6 +32,7 @@
     "@tsconfig/node20": "20.1.2",
     "@types/node": "20.11.6",
     "commitlint": "18.4.3",
+    "glob": "10.3.10",
     "husky": "8.0.3",
     "lint-staged": "15.2.1",
     "playwright": "1.40.1",

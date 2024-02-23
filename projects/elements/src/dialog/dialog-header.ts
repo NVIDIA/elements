@@ -15,7 +15,7 @@ export class DialogHeader extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-dialog-header',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {

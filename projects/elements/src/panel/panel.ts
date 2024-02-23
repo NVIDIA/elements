@@ -32,7 +32,7 @@ export class PanelHeader extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-panel-header',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {
@@ -69,7 +69,7 @@ export class PanelContent extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-panel-content',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {
@@ -96,7 +96,7 @@ export class PanelFooter extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-panel-footer',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {
@@ -158,7 +158,7 @@ export class Panel extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-panel',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

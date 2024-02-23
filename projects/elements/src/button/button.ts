@@ -29,7 +29,7 @@ export class Button extends MlvBaseButton {
 
   static readonly metadata = {
     tag: 'nve-button',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   /**
