@@ -24,7 +24,7 @@ export class AlertGroup extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-alert-group',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   /** Defines visual treatment to represent a ongoing task or support status. */
@@ -55,6 +55,6 @@ export class AlertGroup extends LitElement {
   }
 
   #updateStatus() {
-    this.alerts.forEach(alert => alert.status = this.status);
+    this.alerts.forEach(alert => (alert.status = this.status));
   }
 }

@@ -8,6 +8,6 @@ export class SwitchGroup extends ControlGroup {
 
   static readonly metadata = {
     tag: 'nve-switch-group',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 }

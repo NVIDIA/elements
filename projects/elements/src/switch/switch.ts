@@ -25,6 +25,6 @@ export class Switch extends Control {
 
   static readonly metadata = {
     tag: 'nve-switch',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 }

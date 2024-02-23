@@ -25,10 +25,10 @@ export class MenuItem extends MlvBaseButton {
 
   static readonly metadata = {
     tag: 'nve-menu-item',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
-  static elementDefinitions = { };
+  static elementDefinitions = {};
 
   render() {
     return html`

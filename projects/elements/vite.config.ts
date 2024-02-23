@@ -4,18 +4,17 @@ import process from 'process';
 import { defineConfig } from 'vite';
 import terser from '@rollup/plugin-terser';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
-import replace from '@rollup/plugin-replace';
 import dts from 'vite-plugin-dts';
 import glob from 'glob';
 
 const packageFile = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)) as any);
-const resolve = (rel) => path.resolve(process.cwd(), rel);
-const index = process.argv.findIndex((i) => i === '--outDir') + 1;
+const resolve = rel => path.resolve(process.cwd(), rel);
+const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
 
 // https://vitejs.dev/config/
 // https://lit.dev/docs/tools/production/
-export default defineConfig((env) => {
+export default defineConfig(env => {
   const mode = env.mode as 'production' | 'watch' | 'test' | 'development';
 
   return {
@@ -50,26 +49,30 @@ export default defineConfig((env) => {
       target: 'esnext',
       lib: {
         entry: {
-          index: resolve('./src/index.ts'),                                    // imports all independent component entrypoints
-          'internal/index': resolve('./src/internal/index.ts'),                // internal utilities for @elements/elements
-          'scoped/index': resolve('./src/scoped/index.ts'),                    // utilities for scoping elements
-          'polyfills/index': resolve('./src/polyfills/index.ts'),              // optional polyfills for non-chromium envs
-          'test/index': resolve('./src/test/index.ts'),                        // internal testing utilities for @elements/elements
+          index: resolve('./src/index.ts'), // imports all independent component entrypoints
+          'internal/index': resolve('./src/internal/index.ts'), // internal utilities for @elements/elements
+          'scoped/index': resolve('./src/scoped/index.ts'), // utilities for scoping elements
+          'polyfills/index': resolve('./src/polyfills/index.ts'), // optional polyfills for non-chromium envs
+          'test/index': resolve('./src/test/index.ts'), // internal testing utilities for @elements/elements
           'css/module.typography.css': resolve('./src/css/module.typography.css'), // base typography styles
-          'css/module.layout.css': resolve('./src/css/module.layout.css'),         // layout utilities
+          'css/module.layout.css': resolve('./src/css/module.layout.css'), // layout utilities
           'css/module.responsive.css': resolve('./src/css/module.responsive.css'), // responsive layout utilities
-          'css/module.reset.css': resolve('./src/css/module.reset.css'),           // common reset/base styles
-          'css/theme.brand.css': resolve('./src/css/theme.brand.css'),             // experimental brand theme
-          'index.css': resolve('./src/index.css'),                             // global styles including all above style modules
-          ...glob.sync('./src/**/define.ts').reduce((p, i) => {                // all component entrypoints
+          'css/module.reset.css': resolve('./src/css/module.reset.css'), // common reset/base styles
+          'css/theme.brand.css': resolve('./src/css/theme.brand.css'), // experimental brand theme
+          'index.css': resolve('./src/index.css'), // global styles including all above style modules
+          ...glob.sync('./src/**/define.ts').reduce((p, i) => {
+            // all component entrypoints
             return { ...p, [i.replace('./src/', '').replace('.ts', '')]: resolve(i) };
-          }, { })
+          }, {})
         }
       },
       rollupOptions: {
         treeshake: false,
         preserveEntrySignatures: 'strict',
-        external: [...Object.keys(packageFile.dependencies || {}), ...Object.keys(packageFile.optionalDependencies || {})].map((packageName) => new RegExp(`^${packageName}(/.*)?`)),
+        external: [
+          ...Object.keys(packageFile.dependencies || {}),
+          ...Object.keys(packageFile.optionalDependencies || {})
+        ].map(packageName => new RegExp(`^${packageName}(/.*)?`)),
         output: [
           {
             format: 'esm',
@@ -88,9 +91,10 @@ export default defineConfig((env) => {
                 .forEach(file => fs.renameSync(dist(file), dist(`css/${file}`)));
             }
           },
-          replace({ preventAssignment: false, values: { PACKAGE_VERSION: packageFile.version }}),
           mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
-          mode === 'production' ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } }) : false // https://github.com/vitejs/vite/issues/8848
+          mode === 'production'
+            ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
+            : false // https://github.com/vitejs/vite/issues/8848
         ]
       }
     }

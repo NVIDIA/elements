@@ -28,7 +28,7 @@ export class AppHeader extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-app-header',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {
