@@ -1,6 +1,13 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Size, statusStateStyles, supportStateStyles, SupportStatus, TaskStatus, useStyles } from '@elements/elements/internal';
+import {
+  Size,
+  statusStateStyles,
+  supportStateStyles,
+  SupportStatus,
+  TaskStatus,
+  useStyles
+} from '@elements/elements/internal';
 import styles from './dot.css?inline';
 
 /**
@@ -32,7 +39,7 @@ export class Dot extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-dot',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   #internals = this.attachInternals();

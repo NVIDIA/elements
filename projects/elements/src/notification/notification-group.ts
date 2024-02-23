@@ -3,7 +3,6 @@ import { property } from 'lit/decorators/property.js';
 import { PopoverAlign, TypePopoverController, useStyles } from '@elements/elements/internal';
 import styles from './notification-group.css?inline';
 
-
 /**
  * @element nve-notification-group
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status.
@@ -34,7 +33,7 @@ export class NotificationGroup extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-notification-group',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {

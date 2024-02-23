@@ -31,7 +31,7 @@ import styles from './progressive-filter-chip.css?inline';
 export class ProgressiveFilterChip extends LitElement {
   static readonly metadata = {
     tag: 'nve-progressive-filter-chip',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

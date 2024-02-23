@@ -1,6 +1,12 @@
 import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, attachInternals, keyNavigationList, KeynavListConfig, appendRootNodeStyle } from '@elements/elements/internal';
+import {
+  useStyles,
+  attachInternals,
+  keyNavigationList,
+  KeynavListConfig,
+  appendRootNodeStyle
+} from '@elements/elements/internal';
 import type { MenuItem } from './menu-item.js';
 import styles from './menu.css?inline';
 import globalStyles from './menu.global.css?inline';
@@ -25,17 +31,17 @@ export class Menu extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-menu',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
-  static elementDefinitions = { };
+  static elementDefinitions = {};
 
   /** @private */
   get keynavListConfig(): KeynavListConfig {
     return {
       layout: 'vertical',
       items: this.items
-    }
+    };
   }
 
   /** @private */

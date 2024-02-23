@@ -15,7 +15,7 @@ export class DialogFooter extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-dialog-footer',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {

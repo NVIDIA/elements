@@ -107,7 +107,7 @@ export class Drawer extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-drawer',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

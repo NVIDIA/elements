@@ -43,7 +43,7 @@ export class Toolbar extends LitElement implements ContainerElement {
 
   static readonly metadata = {
     tag: 'nve-toolbar',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {};
