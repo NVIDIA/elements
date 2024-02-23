@@ -394,7 +394,7 @@ class ElementsGlossary extends LitElement {
             <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></mlv-grid-cell>
             <mlv-grid-cell>
               <div mlv-layout="row gap:xs align:wrap">
-                ${prop.type ? html`${prop.type?.split(' | ').map(i => html`<mlv-tag readonly color="gray-slate">${i.replaceAll("'", '')}</mlv-tag>`)}` : nothing}
+                ${prop.type ? html`${prop.type?.split('|').map(i => i.trim()).filter(i => i.length).map(i => html`<mlv-tag readonly color="gray-slate">${i.replaceAll("'", '')}</mlv-tag>`)}` : nothing}
               </div>
             </mlv-grid-cell>
           </mlv-grid-row>`)}

@@ -63,48 +63,48 @@ async function getSourceFiles(src) {
 }
 
 function getProjectTotal(name, projects) {
-  return projects.reduce((total, project) => total + (project.elements.find((e) => e.name === name) ? 1 : 0), 0);
+  return projects.reduce((total, project) => total + (project.elements.find(e => e.name === name) ? 1 : 0), 0);
 }
 
 function getInstanceTotal(name, projects) {
   return projects
-    .flatMap((project) => project.elements)
-    .filter((e) => e.name === name)
+    .flatMap(project => project.elements)
+    .filter(e => e.name === name)
     .reduce((total, e) => total + e.instanceTotal, 0);
 }
 
 async function getProjects() {
-  const elementTags = getManifest().map((d) => d.tagName);
+  const elementTags = getManifest().map(d => d.tagName);
 
   return Promise.all(
     (await getPackageFiles('../../../'))
-      .filter((path) => !path.includes('design-system') && !path.includes('dist') && !path.includes('deprecated'))
+      .filter(path => !path.includes('design-system') && !path.includes('dist') && !path.includes('deprecated'))
       .reduce((files, path) => {
         const data = require(path);
         return data.dependencies && data?.dependencies['@elements/elements'] ? [...files, { ...data, path }] : files;
       }, [])
-      .map((file) => {
+      .map(file => {
         return {
           package: file.name,
           elements: file.dependencies['@elements/elements'],
           path: file.path.replace('/package.json', '')
         };
       })
-      .map(async (project) => {
+      .map(async project => {
         const sources = await getSourceFiles(project.path);
         const elements = Object.entries(
           sources.reduce((tags, path) => {
             const src = readFileSync(path, 'utf8');
             elementTags
-              .filter((tag) => src.includes(tag))
-              .forEach((tag) => {
+              .filter(tag => src.includes(tag))
+              .forEach(tag => {
                 tags[tag] = tags[tag] ? tags[tag] + 1 : 1;
               });
             return tags;
           }, {})
         )
           .map(([name, instanceTotal]) => ({ name, instanceTotal }))
-          .filter((e) => e.name !== 'undefined');
+          .filter(e => e.name !== 'undefined');
 
         return {
           name: project.package,
@@ -125,7 +125,7 @@ function getCoverage() {
       ...coverage
     }))
     .sort((a, b) => (a.lines.pct > b.lines.pct ? 1 : -1))
-    .filter((c) => !c.file.includes('polyfills'));
+    .filter(c => !c.file.includes('polyfills'));
 }
 
 function getLighthouseScores() {
@@ -136,8 +136,8 @@ function getManifest() {
   const elementsSchemaJSON = JSON.parse(readFileSync(new URL('../dist/custom-elements.json', import.meta.url)));
   return Array.from(
     new Set(
-      elementsSchemaJSON.modules.flatMap((module) => {
-        module.declarations.forEach((d) => (d.path = module.path));
+      elementsSchemaJSON.modules.flatMap(module => {
+        module.declarations.forEach(d => (d.path = module.path));
         return module.declarations;
       })
     )
@@ -165,22 +165,19 @@ function getBehaviorCategory(classDeclaration) {
     return 'popover';
   }
 
-  if (ariaSpecs.feedback.find((i) => i === classDeclaration.metadata.aria)) {
+  if (ariaSpecs.feedback.find(i => i === classDeclaration.metadata.aria)) {
     return 'feedback';
   }
 
-  if (ariaSpecs.navigation.find((i) => i === classDeclaration.metadata.aria)) {
+  if (ariaSpecs.navigation.find(i => i === classDeclaration.metadata.aria)) {
     return 'navigation';
   }
 
-  if (ariaSpecs.list.find((i) => i === classDeclaration.metadata.aria)) {
+  if (ariaSpecs.list.find(i => i === classDeclaration.metadata.aria)) {
     return 'list';
   }
 
-  if (
-    ariaSpecs.container.find((i) => i === classDeclaration.metadata.aria) ||
-    classDeclaration.name.startsWith('Card')
-  ) {
+  if (ariaSpecs.container.find(i => i === classDeclaration.metadata.aria) || classDeclaration.name.startsWith('Card')) {
     return 'container';
   }
 
@@ -227,15 +224,15 @@ function getElementLighthouseScore(manifest, lighthouseReport) {
 
 function getElements(coverage, projects, lighthouseReport) {
   const elementsManifest = getManifest();
-  const elementTags = elementsManifest.filter((d) => d.tagName).map((d) => d.tagName);
+  const elementTags = elementsManifest.filter(d => d.tagName).map(d => d.tagName);
 
   return elementTags
-    .filter((tag) => !tag.includes('demo') && !tag.includes('i18n') && !tag.includes('ui-') && !tag.includes('my-'))
+    .filter(tag => !tag.includes('demo') && !tag.includes('i18n') && !tag.includes('ui-') && !tag.includes('my-'))
     .reduce((elements, name) => {
-      const manifest = elementsManifest.find((e) => e.tagName === name);
-      const superclassManifest = elementsManifest.find((e) => e.name === manifest.superclass?.name) ?? {};
+      const manifest = elementsManifest.find(e => e.tagName === name);
+      const superclassManifest = elementsManifest.find(e => e.name === manifest.superclass?.name) ?? {};
       const cov = coverage.find(
-        (c) => c.file.replace('elements/src/', '') === manifest.path.replace('/src/', '').replace('.js', '.ts')
+        c => c.file.replace('elements/src/', '') === manifest.path.replace('/src/', '').replace('.js', '.ts')
       );
       const aria = manifest.metadata.aria ? manifest.metadata.aria : superclassManifest.metadata?.aria;
       const coverageTotal = cov ? (cov.statements.pct + cov.functions.pct + cov.branches.pct + cov.lines.pct) / 4 : 0;
@@ -248,8 +245,8 @@ function getElements(coverage, projects, lighthouseReport) {
         aria,
         schema: {
           properties: manifest.members
-            .filter((m) => m.description)
-            .map((m) => ({ name: m.name, description: m.description })),
+            .filter(m => m.description)
+            .map(m => ({ name: m.name, description: m.description })),
           slots: manifest.slots,
           attributes: manifest.attributes,
           events: manifest.events,
@@ -261,7 +258,7 @@ function getElements(coverage, projects, lighthouseReport) {
           instanceTotal: getInstanceTotal(name, projects),
           coverageTotal
         },
-        stories: stories.find((s) => s.element.startsWith(name))?.stories ?? []
+        stories: stories.find(s => s.element.startsWith(name))?.stories ?? []
       };
 
       metadata.behavior = getBehaviorCategory(manifest);
@@ -275,22 +272,22 @@ function getElements(coverage, projects, lighthouseReport) {
 function getBaseInterface() {
   const project = new Project();
   const file = project.addSourceFileAtPath(resolve('src/internal/types/index.ts'));
-  const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find((i) => i.getName() === 'MlvElement');
+  const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find(i => i.getName() === 'NveElement');
   const props = base
     .getStructure()
-    .properties.map((n) => ({ name: n.name, type: n.type, description: n.docs[0]?.description }));
+    .properties.map(n => ({ name: n.name, type: n.type, description: n.docs[0]?.description }));
   return props;
 }
 
 function getPatterns() {
-  return stories.find((s) => s.element.startsWith('patterns'))?.stories ?? [];
+  return stories.find(s => s.element.startsWith('patterns'))?.stories ?? [];
 }
 
 async function getMetrics() {
   const projects = []; // await getProjects();
   const coverage = getCoverage();
   const coverageTotal = coverage.splice(
-    coverage.findIndex((c) => c.file === 'total'),
+    coverage.findIndex(c => c.file === 'total'),
     1
   )[0];
   const lighthouse = getLighthouseScores();
@@ -310,10 +307,10 @@ async function getMetrics() {
     },
     elements: {
       projects,
-      versions: Array.from(new Set(projects.map((p) => p.elementsVersion.replace('^', '').replace('~', ''))))
+      versions: Array.from(new Set(projects.map(p => p.elementsVersion.replace('^', '').replace('~', ''))))
     }
   };
-  
+
   return metrics;
 }
 
