@@ -1,3 +1,10 @@
+## [0.24.2](https://github.com/NVIDIA/elements/compare/v0.24.1...v0.24.2) (2024-02-23)
+
+
+### Bug Fixes
+
+* **elements:** inline version for services ([68204ec](https://github.com/NVIDIA/elements/commit/68204ec80e9d4ee342358c252d4a095af4be88f1))
+
 ## [0.24.1](https://github.com/NVIDIA/elements/compare/v0.24.0...v0.24.1) (2024-02-23)
 
 
