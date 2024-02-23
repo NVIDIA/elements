@@ -1,40 +1,92 @@
 import type { IconName } from '@elements/elements/icon';
 import type { I18nStrings } from '../services/i18n.service.js';
 
-export type Color = 'red-cardinal' | 'gray-slate' | 'gray-denim' | 'blue-indigo' | 'blue-cobalt' | 'blue-sky' | 'teal-cyan' | 'green-mint' | 'teal-seafoam' | 'green-grass' | 'yellow-amber' | 'orange-pumpkin' | 'red-tomato' | 'pink-magenta' | 'purple-plum' | 'purple-violet' | 'purple-lavender' | 'pink-rose' | 'green-jade' | 'lime-pear' | 'yellow-nova' | 'brand-green';
+export type Color =
+  | 'red-cardinal'
+  | 'gray-slate'
+  | 'gray-denim'
+  | 'blue-indigo'
+  | 'blue-cobalt'
+  | 'blue-sky'
+  | 'teal-cyan'
+  | 'green-mint'
+  | 'teal-seafoam'
+  | 'green-grass'
+  | 'yellow-amber'
+  | 'orange-pumpkin'
+  | 'red-tomato'
+  | 'pink-magenta'
+  | 'purple-plum'
+  | 'purple-violet'
+  | 'purple-lavender'
+  | 'pink-rose'
+  | 'green-jade'
+  | 'lime-pear'
+  | 'yellow-nova'
+  | 'brand-green';
 
+/** Determines relative size of the element */
 export type Size = 'sm' | 'md' | 'lg';
 
-export type Container = 'flat' | 'inset' | 'full';
+/** Determines relative size of the element */
+export type SizeExpanded = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export type Interaction = 'emphasize' | 'destructive';
+/** Determines the visual prominence or weight of an element. */
+export type Prominence = 'emphasis' | 'muted';
+
+/**
+ * Determines the container bounds of the element
+ * - `flat` element has white space bounds but reduced visual container
+ * - `inline` element container is reduced to fit within inline content such as a block of text
+ * - `inset` element container is optimized for embeding or being inset inside another containing element
+ * - `full` element container is optimized for filling its container bounds
+ */
+export type Container = 'inline' | 'flat' | 'inset' | 'full';
 
 /** Determines the support status color of an element. Should convey intent of the element. */
 export type SupportStatus = 'accent' | 'warning' | 'success' | 'danger';
 
-/** Determines the tak status of an element. Should convey the active state of a process. */
-export type TaskStatus = 'scheduled' | 'queued' | 'pending' | 'starting' | 'running' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored';
+/** Determines the orientation of an element. */
+export type Orientation = 'vertical' | 'horizontal';
 
-/** Determines the trend status of an element. Should convey the trend of a metric. */
-export type TrendStatus = 'trend-down' | 'trend-up' | 'trend-neutral';
+/** Determines the task status of an element. Should convey the active state of a process. */
+export type TaskStatus =
+  | 'scheduled'
+  | 'queued'
+  | 'pending'
+  | 'starting'
+  | 'running'
+  | 'restarting'
+  | 'stopping'
+  | 'finished'
+  | 'failed'
+  | 'unknown'
+  | 'ignored';
 
 /**
  * https://open-ui.org/components/popup.research.explainer#api-shape
- * auto - light dismiss, focus on open, return to trigger
- * manual - no light dismiss, no auto focus
- * hint - no light dismiss, no auto focus, open/close on hover/focus
+ * - `auto` light dismiss, focus on open, return to trigger
+ * - `manual` no light dismiss, no auto focus
+ * - `hint` no light dismiss, no auto focus, open/close on hover/focus
  */
 export type PopoverType = 'auto' | 'manual' | 'hint';
 
+/** Determines the popover alignment relative to its assigned anchor */
 export type PopoverAlign = 'start' | 'end' | 'center';
 
+/** Determines the popover position relative to its assigned anchor and alignment */
 export type PopoverSides = 'top' | 'bottom' | 'left' | 'right';
 
+/** Determines the popover position relative to its assigned anchor */
 export type PopoverPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
 
+/** Determines the overall position of an element relative to its anchor */
 export type Placement = PopoverPosition | `${PopoverSides}-${PopoverAlign}`;
 
-export interface MlvElement {
+/** Determines the overal control layout relative to the control input and labels */
+export type ControlLayout = 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
+
+export interface NveElement {
   /** Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled */
   disabled?: boolean;
 
@@ -63,7 +115,7 @@ export interface MlvElement {
   closable?: boolean;
 
   /** Enables internal string values to be updated for internationalization. */
-  i18n?: Partial<I18nStrings & { __set: boolean; }>;
+  i18n?: Partial<I18nStrings & { __set: boolean }>;
 
   /** This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current */
   current?: 'page' | 'step';
@@ -80,11 +132,33 @@ export interface MlvElement {
   /** Determines the orientation of an element. */
   orientation?: 'vertical' | 'horizontal';
 
-  /** Determines the interaction type of an element. */
-  interaction?: 'emphasize' | 'destructive';
+  /** Determines the visual prominence or weight of an element */
+  prominence?: 'emphasis' | 'muted';
 
   /** Defines a base color from the theme color palette */
-  color?: 'red-cardinal' | 'gray-slate' | 'gray-denim' | 'blue-indigo' | 'blue-cobalt' | 'blue-sky' | 'teal-cyan' | 'green-mint' | 'teal-seafoam' | 'green-grass' | 'yellow-amber' | 'orange-pumpkin' | 'red-tomato' | 'pink-magenta' | 'purple-plum' | 'purple-violet' | 'purple-lavender' | 'pink-rose' | 'green-jade' | 'lime-pear' | 'yellow-nova' | 'brand-green';
+  color?:
+    | 'red-cardinal'
+    | 'gray-slate'
+    | 'gray-denim'
+    | 'blue-indigo'
+    | 'blue-cobalt'
+    | 'blue-sky'
+    | 'teal-cyan'
+    | 'green-mint'
+    | 'teal-seafoam'
+    | 'green-grass'
+    | 'yellow-amber'
+    | 'orange-pumpkin'
+    | 'red-tomato'
+    | 'pink-magenta'
+    | 'purple-plum'
+    | 'purple-violet'
+    | 'purple-lavender'
+    | 'pink-rose'
+    | 'green-jade'
+    | 'lime-pear'
+    | 'yellow-nova'
+    | 'brand-green';
 
   /** Defines the visual treatment to represent a interaction status. (tasks, support, trends) */
   status?: 'accent' | 'warning' | 'success' | 'danger';
@@ -92,11 +166,29 @@ export interface MlvElement {
   /** Determines the size options of a given element */
   size?: 'sm' | 'md' | 'lg';
 
-  /** Determines the container styles of component. Flat is used for nesting elements within other containers or more muted style. Full is used when the element expands the full width of the viewport. Inset can be used for more complex elements where content is distinctly separated. */
-  container?: 'flat' | 'inset' | 'inline' | 'full';
+  /**
+   * Determines the container bounds of the element
+   * - `flat` element has white space bounds but reduced visual container
+   * - `inline` element container is reduced to fit within inline content such as a block of text
+   * - `inset` element container is optimized for embeding or being inset inside another containing element
+   * - `full` element container is optimized for filling its container bounds
+   */
+  container?: 'inline' | 'flat' | 'inset' | 'full';
 
   /** Determines the position of an element along both inline and block axis. https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Box_alignment_in_grid_layout#the_two_axes_of_a_grid_layout */
-  position?: 'center' | 'top' | 'bottom' | 'left' | 'right';
+  position?:
+    | 'top-start'
+    | 'top-end'
+    | 'top-center'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'bottom-center'
+    | 'left-start'
+    | 'left-end'
+    | 'left-center'
+    | 'right-start'
+    | 'right-end'
+    | 'right-center';
 
   /** Determines the alignment of the popover relative to the provided anchor element. */
   alignment?: 'start' | 'end' | 'center';
@@ -118,6 +210,11 @@ export type FlatInteraction = 'flat' | `${'flat'}-${Interaction}`;
 
 /** @deprecated Determines if an element is rendered with an inverse contrast. */
 export type Inverse = 'inverse';
+
+/** @deprecated Determines the trend status of an element. Should convey the trend of a metric. */
+export type TrendStatus = 'trend-down' | 'trend-up' | 'trend-neutral';
+
+export type Interaction = 'emphasize' | 'destructive';
 
 export interface ContainerElement {
   container?: Partial<Container>;
@@ -155,16 +252,16 @@ declare global {
       versions: string[];
       elementRegistry: Readonly<{ [key: string]: string }>;
       i18nRegistry: Readonly<{ [key: string]: string }>;
-    },
+    };
     debug: (log?: (...args) => void) => void;
-  }
+  };
 
   interface ElementInternals {
     states: {
       add: (state: string) => void;
       delete: (state: string) => void;
       has: (state: string) => boolean;
-    }
+    };
   }
 
   interface HTMLElement {
