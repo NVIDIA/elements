@@ -394,7 +394,7 @@ class ElementsGlossary extends LitElement {
             <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></nve-grid-cell>
             <nve-grid-cell>
               <div nve-layout="row gap:xs align:wrap">
-                ${prop.type ? html`${prop.type?.split(' | ').map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
+                ${prop.type ? html`${prop.type?.split('|').map(i => i.trim()).filter(i => i.length).map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
               </div>
             </nve-grid-cell>
           </nve-grid-row>`)}
