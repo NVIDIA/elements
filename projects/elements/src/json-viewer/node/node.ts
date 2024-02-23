@@ -18,7 +18,7 @@ export class JSONNode extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-json-node',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

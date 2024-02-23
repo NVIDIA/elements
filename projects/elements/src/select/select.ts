@@ -38,7 +38,7 @@ export class Select extends Control {
 
   static readonly metadata = {
     tag: 'mlv-select',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

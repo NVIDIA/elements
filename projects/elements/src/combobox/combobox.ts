@@ -48,7 +48,7 @@ export class Combobox extends Control implements ContainerElement {
 
   static readonly metadata = {
     tag: 'mlv-combobox',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

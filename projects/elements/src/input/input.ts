@@ -36,6 +36,6 @@ export class Input extends Control implements ContainerElement {
 
   static readonly metadata = {
     tag: 'mlv-input',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 }

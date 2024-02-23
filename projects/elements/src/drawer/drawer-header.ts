@@ -15,7 +15,7 @@ export class DrawerHeader extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-drawer-header',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {

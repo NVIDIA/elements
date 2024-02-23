@@ -35,7 +35,7 @@ export class Logo extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-logo',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   #internals = this.attachInternals();

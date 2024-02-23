@@ -25,6 +25,6 @@ export class Textarea extends Control {
 
   static readonly metadata = {
     tag: 'mlv-textarea',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 }

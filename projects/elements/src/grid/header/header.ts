@@ -24,7 +24,7 @@ export class GridHeader extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-grid-header',
-    version: 'PACKAGE_VERSION',
+    version: '0.0.0',
     children: [GridColumn.metadata.tag]
   };
 

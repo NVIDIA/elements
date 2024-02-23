@@ -117,7 +117,7 @@ export class Notification extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-notification',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

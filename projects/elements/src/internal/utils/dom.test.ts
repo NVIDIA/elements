@@ -271,7 +271,7 @@ describe('defineElement', () => {
 
   beforeEach(async () => {
     define(class TestElement extends LitElement {
-      static metadata = { tag: 'define-test-element', version: 'PACKAGE_VERSION' };
+      static metadata = { tag: 'define-test-element', version: '0.0.0' };
     });
     fixture = await createFixture(html`
       <define-test-element></define-test-element>

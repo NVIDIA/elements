@@ -50,7 +50,7 @@ export class Grid extends LitElement implements ContainerElement {
 
   static readonly metadata = {
     tag: 'mlv-grid',
-    version: 'PACKAGE_VERSION',
+    version: '0.0.0',
     children: [GridRow.metadata.tag, GridHeader.metadata.tag]
   };
 

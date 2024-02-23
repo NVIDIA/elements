@@ -49,7 +49,7 @@ export class GridColumn extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-grid-column',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   /** @private */

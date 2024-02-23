@@ -30,7 +30,7 @@ export class Card extends LitElement implements ContainerElement {
 
   static readonly metadata = {
     tag: 'mlv-card',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {
@@ -65,7 +65,7 @@ export class CardHeader extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-card-header',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {
@@ -102,7 +102,7 @@ export class CardContent extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-card-content',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {
@@ -126,7 +126,7 @@ export class CardFooter extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-card-footer',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {

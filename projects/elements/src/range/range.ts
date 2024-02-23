@@ -17,7 +17,7 @@ export class Range extends Control {
 
   static readonly metadata = {
     tag: 'mlv-range',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   connectedCallback() {

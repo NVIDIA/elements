@@ -19,11 +19,11 @@ export class Color extends Control {
 
   static readonly metadata = {
     tag: 'mlv-color',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   protected get suffixContent() {
-    return html`<mlv-icon-button .ariaLabel=${this.i18n.expand} icon-name="dropper" interaction="flat" @click=${() =>  this.#select()}></mlv-icon-button>`;
+    return html`<mlv-icon-button .ariaLabel=${this.i18n.expand} icon-name="dropper" interaction="flat" @click=${() => this.#select()}></mlv-icon-button>`;
   }
 
   connectedCallback() {

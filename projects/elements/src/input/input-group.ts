@@ -16,7 +16,7 @@ export class InputGroup extends ControlGroup {
 
   static readonly metadata = {
     tag: 'mlv-input-group',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   async connectedCallback() {

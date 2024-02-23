@@ -40,7 +40,7 @@ export class Toast extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-toast',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

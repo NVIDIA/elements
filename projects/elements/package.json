@@ -247,7 +247,6 @@
     "@lit-labs/virtualizer": "2.0.11",
     "@mdx-js/react": "2.3.0",
     "@nvidia-elements/testing": "workspace:*",
-    "@rollup/plugin-replace": "5.0.4",
     "@rollup/plugin-terser": "0.4.4",
     "@storybook/addon-docs": "7.6.17",
     "@storybook/addon-essentials": "7.6.17",

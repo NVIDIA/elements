@@ -14,6 +14,6 @@ export class RadioGroup extends ControlGroup {
 
   static readonly metadata = {
     tag: 'mlv-radio-group',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 }

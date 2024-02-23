@@ -34,7 +34,7 @@ export class AccordionHeader extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-accordion-header',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   /** @private */
@@ -80,7 +80,7 @@ export class AccordionContent extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-accordion-content',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {
@@ -111,7 +111,7 @@ export class Accordion extends LitElement implements ContainerElement {
 
   static readonly metadata = {
     tag: 'mlv-accordion',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {
@@ -239,7 +239,7 @@ export class AccordionGroup extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-accordion-group',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   @queryAssignedElements() private accordions!: Accordion[];

@@ -1,7 +1,14 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { MlvBaseButton, stateSelected, useStyles, keyNavigationList, KeynavListConfig, attachInternals } from '@elements/elements/internal';
+import {
+  MlvBaseButton,
+  stateSelected,
+  useStyles,
+  keyNavigationList,
+  KeynavListConfig,
+  attachInternals
+} from '@elements/elements/internal';
 import tabsItemStyleSheet from './tabs-item.css?inline';
 import tabsStyleSheet from './tabs.css?inline';
 
@@ -38,7 +45,7 @@ export class TabsItem extends MlvBaseButton {
 
   static readonly metadata = {
     tag: 'mlv-tabs-item',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   render() {
@@ -54,7 +61,6 @@ export class TabsItem extends MlvBaseButton {
     this._internals.role = 'tab';
   }
 }
-
 
 /**
  * @element mlv-tabs
@@ -78,18 +84,18 @@ export class Tabs extends LitElement {
   /**
    * Determines whether or not the tabs should display a border on selected items vs. defaults to show border.
    */
-  @property({ type: Boolean}) borderless = false;
+  @property({ type: Boolean }) borderless = false;
 
   /**
    * Determines whether or not the tabs should handle selection behavior vs. defaults to off.
    */
-  @property({ type: Boolean, attribute: 'behavior-select'}) behaviorSelect = false;
+  @property({ type: Boolean, attribute: 'behavior-select' }) behaviorSelect = false;
 
   static styles = useStyles([tabsStyleSheet]);
 
   static readonly metadata = {
     tag: 'mlv-tabs',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   /** @private */
@@ -97,7 +103,7 @@ export class Tabs extends LitElement {
     return {
       items: this.items,
       layout: this.vertical ? 'vertical' : 'horizontal'
-    }
+    };
   }
 
   @queryAssignedElements() private items!: TabsItem[];
@@ -110,7 +116,7 @@ export class Tabs extends LitElement {
       return;
     }
 
-    this.keynavListConfig.items.forEach((i: TabsItem) => i.selected = false);
+    this.keynavListConfig.items.forEach((i: TabsItem) => (i.selected = false));
     tabItem.selected = true;
   }
 
@@ -128,6 +134,6 @@ export class Tabs extends LitElement {
     this._internals.role = 'tablist';
     this._internals.ariaOrientation = this.vertical ? 'vertical' : 'horizontal';
 
-    this.addEventListener('click', (e: CustomEvent) => (this.#selectTab(e.target)))
+    this.addEventListener('click', (e: CustomEvent) => this.#selectTab(e.target));
   }
 }

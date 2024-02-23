@@ -27,7 +27,7 @@ export class SortButton extends MlvBaseButton {
 
   static readonly metadata = {
     tag: 'mlv-sort-button',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

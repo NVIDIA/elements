@@ -19,6 +19,6 @@ export class Radio extends Control {
 
   static readonly metadata = {
     tag: 'mlv-radio',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 }

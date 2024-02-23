@@ -19,12 +19,10 @@ export class GridFooter extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-grid-footer',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
-  static elementDefinitions = {
-
-  };
+  static elementDefinitions = {};
 
   /** @private */
   _internals: ElementInternals;

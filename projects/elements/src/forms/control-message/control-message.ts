@@ -48,7 +48,7 @@ export class ControlMessage extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-control-message',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   get alertStatus() {

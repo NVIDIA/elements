@@ -17,7 +17,7 @@ export class GridPlaceholder extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-grid-placeholder',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   /** @private */

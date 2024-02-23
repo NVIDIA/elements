@@ -32,7 +32,7 @@ export class ProgressRing extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-progress-ring',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

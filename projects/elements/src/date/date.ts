@@ -18,7 +18,7 @@ export class Date extends Control {
 
   static readonly metadata = {
     tag: 'mlv-date',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   protected get suffixContent() {

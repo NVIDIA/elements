@@ -96,7 +96,7 @@ export class Dropdown extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-dropdown',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

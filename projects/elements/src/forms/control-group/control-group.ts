@@ -49,7 +49,7 @@ export class ControlGroup extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-control-group',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   /** @private */

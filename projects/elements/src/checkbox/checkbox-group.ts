@@ -14,6 +14,6 @@ export class CheckboxGroup extends ControlGroup {
 
   static readonly metadata = {
     tag: 'mlv-checkbox-group',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 }

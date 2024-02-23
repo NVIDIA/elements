@@ -108,7 +108,7 @@ export class Dialog extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-dialog',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

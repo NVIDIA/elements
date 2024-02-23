@@ -18,13 +18,13 @@ export class ProgressBar extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-progress-bar',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
- 
-  /** The current `value` of the progress indicator, set to the native HTML progress element. */  
+
+  /** The current `value` of the progress indicator, set to the native HTML progress element. */
   @property({ type: Number }) value?: number = 0;
 
-  /** The `max` property sets the highest value that `value` will be scaled to. */  
+  /** The `max` property sets the highest value that `value` will be scaled to. */
   @property({ type: Number }) max? = 100;
 
   /** Defines visual treatment to represent a ongoing task or support status. */
@@ -32,7 +32,7 @@ export class ProgressBar extends LitElement {
 
   render() {
     const classes = { full: this.value === this.max, minWidth: this.value > 0 };
-    
+
     return html`
       <progress .max=${this.max} .value=${this.value} class=${classMap(classes)}></progress>
     `;

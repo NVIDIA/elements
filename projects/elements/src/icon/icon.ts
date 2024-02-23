@@ -46,7 +46,7 @@ export class Icon extends LitElement {
 
   static readonly metadata = {
     tag: 'mlv-icon',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static _icons = ICON_IMPORTS;

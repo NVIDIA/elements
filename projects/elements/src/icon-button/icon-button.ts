@@ -43,7 +43,7 @@ export class IconButton extends Button {
 
   static readonly metadata = {
     tag: 'mlv-icon-button',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

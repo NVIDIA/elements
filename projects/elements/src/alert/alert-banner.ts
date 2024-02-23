@@ -21,6 +21,6 @@ export class AlertBanner extends AlertGroup {
 
   static readonly metadata = {
     tag: 'mlv-alert-banner',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 }
