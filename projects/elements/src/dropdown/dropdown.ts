@@ -96,7 +96,7 @@ export class Dropdown extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-dropdown',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

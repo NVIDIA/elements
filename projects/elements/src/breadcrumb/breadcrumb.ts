@@ -36,7 +36,7 @@ export class Breadcrumb extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-breadcrumb',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   static elementDefinitions = {

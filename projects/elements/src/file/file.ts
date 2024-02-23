@@ -16,7 +16,7 @@ export class File extends Control {
 
   static readonly metadata = {
     tag: 'nve-file',
-    version: 'PACKAGE_VERSION'
+    version: '0.0.0'
   };
 
   connectedCallback() {
