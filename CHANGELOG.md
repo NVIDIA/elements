@@ -1,3 +1,10 @@
+## [0.24.1](https://github.com/NVIDIA/elements/compare/v0.24.0...v0.24.1) (2024-02-23)
+
+
+### Bug Fixes
+
+* **elements:** inline versions ([181344f](https://github.com/NVIDIA/elements/commit/181344fdbe9483b38ab172d5fdf353caebe42e9b))
+
 ## [0.24.0](https://github.com/NVIDIA/elements/compare/v0.23.1...v0.24.0) (2024-02-22)
 
 
@@ -519,4 +526,3 @@
 * **elements:** icon registry ([be7bbeb](https://github.com/NVIDIA/elements/commit/be7bbeba770ce2af0db174330f481aecb8d96595))
 * **elements:** safari css support ([bfaca5d](https://github.com/NVIDIA/elements/commit/bfaca5d4bd5c559c5ef03609178b87d80debb698))
 * **elements:** v1 components ([eab8dbc](https://github.com/NVIDIA/elements/commit/eab8dbc00b3c50e41f0bbbdaa8bd2fd8e0ca544b))
-
