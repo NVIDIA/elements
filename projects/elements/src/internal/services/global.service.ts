@@ -3,16 +3,21 @@ import { deepMerge } from '../utils/objects.js';
 export class GlobalState {
   constructor() {
     globalThis.MLV_ELEMENTS ??= {
-      debug: (log = console.log) => log(`%c@elements/elements\n%c${JSON.stringify(globalThis.MLV_ELEMENTS.state, null, 2)}`, 'color: #69b027', 'color: inherit'),
+      debug: (log = console.log) =>
+        log(
+          `%c@elements/elements\n%c${JSON.stringify(globalThis.MLV_ELEMENTS.state, null, 2)}`,
+          'color: #69b027',
+          'color: inherit'
+        ),
       state: {
         env: (import.meta as any).env.MODE,
         versions: [],
-        elementRegistry: { },
-        i18nRegistry: { }
+        elementRegistry: {},
+        i18nRegistry: {}
       }
     };
 
-    globalThis.MLV_ELEMENTS.state.versions = Array.from(new Set([...globalThis.MLV_ELEMENTS.state.versions, 'PACKAGE_VERSION']));
+    globalThis.MLV_ELEMENTS.state.versions = Array.from(new Set([...globalThis.MLV_ELEMENTS.state.versions, '0.0.0']));
   }
 
   get state() {
