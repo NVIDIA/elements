@@ -6,13 +6,13 @@ import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
 
-const resolve = (rel) => path.resolve(process.cwd(), rel);
+const resolve = rel => path.resolve(process.cwd(), rel);
 
 export class LighthouseRunner {
   #server: PreviewServer;
   #browser: Browser;
   #port = 4174;
-  #report = { };
+  #report = {};
 
   async open() {
     this.#browser = await chromium.launch({ args: ['--headless', '--remote-debugging-port=9222'] });
@@ -34,7 +34,7 @@ export class LighthouseRunner {
     const report = glob.sync(resolve('.lighthouse/dist/**/report.json')).reduce((p, n) => {
       const file = JSON.parse(fs.readFileSync(n));
       return { ...p, [file.name]: file };
-    }, { });
+    }, {});
 
     fs.writeFileSync(`${dist}/report.json`, JSON.stringify(report, null, 2));
   }
@@ -51,11 +51,11 @@ export class LighthouseRunner {
         throttlingMethod: 'simulate',
         throttling: {
           cpuSlowdownMultiplier: 1
-        },
-      },
+        }
+      }
     };
 
-    const runnerResult = await lighthouse(`http://localhost:${this.#port}/${name}/index.html`, flags, config as any) as any;
+    const runnerResult = await lighthouse(`http://localhost:${this.#port}/${name}/index.html`, flags, config as any);
     fs.writeFileSync(`.lighthouse/dist/${name}/report.html`, runnerResult.report[1]);
 
     const scores = {
@@ -67,9 +67,13 @@ export class LighthouseRunner {
     const requests = (runnerResult.lhr.audits['network-requests'].details as any).items;
     const payload = {
       javascript: {
-        kb: requests.filter(r => r.mimeType === 'application/javascript').map(r => r.transferSize).reduce((p, n) => p + n, 0) / 1000,
+        kb:
+          requests
+            .filter(r => r.mimeType === 'text/javascript')
+            .map(r => r.transferSize)
+            .reduce((p, n) => p + n, 0) / 1000,
         requests: requests
-          .filter(r => r.mimeType === 'application/javascript')
+          .filter(r => r.mimeType === 'text/javascript')
           .reduce((p, r) => {
             const name = r.url.split('/assets/')[1].replace(/-\w+\.js$/, '.js');
             return {
@@ -78,11 +82,15 @@ export class LighthouseRunner {
                 kb: r.transferSize / 1000,
                 name
               }
-            }
-          }, { })
+            };
+          }, {})
       },
       css: {
-        kb: requests.filter(r => r.mimeType === 'text/css').map(r => r.transferSize).reduce((p, n) => p + n, 0) / 1000,
+        kb:
+          requests
+            .filter(r => r.mimeType === 'text/css')
+            .map(r => r.transferSize)
+            .reduce((p, n) => p + n, 0) / 1000,
         requests: requests
           .filter(r => r.mimeType === 'text/css')
           .reduce((p, r) => {
@@ -93,8 +101,8 @@ export class LighthouseRunner {
                 kb: r.transferSize / 1000,
                 name
               }
-            }
-          }, { })
+            };
+          }, {})
       }
     };
 
@@ -125,31 +133,35 @@ export class LighthouseRunner {
           output: {
             entryFileNames: `assets/[name].js`,
             chunkFileNames: `assets/[name].js`,
-            assetFileNames: (assetInfo) => {
-              return `assets/${assetInfo.name}`; 
-            },
-          },
-        },
+            assetFileNames: assetInfo => {
+              return `assets/${assetInfo.name}`;
+            }
+          }
+        }
       },
       resolve: {
         alias: {
           '@elements/elements': resolve('./dist')
         }
       },
-      plugins: [virtualHtml({
-        pages: {
-          index: {
-            template: 'lighthouse/index.html',
-            render(template) {
-              if (hasCustomStyleLinks) {
-                return template.replace('</body>', `${content}</body>`).replace(`@import '@elements/elements/index.css';`, '');
-              } else {
-                return template.replace('</body>', `${content}</body>`);
+      plugins: [
+        virtualHtml({
+          pages: {
+            index: {
+              template: 'lighthouse/index.html',
+              render(template) {
+                if (hasCustomStyleLinks) {
+                  return template
+                    .replace('</body>', `${content}</body>`)
+                    .replace(`@import '@elements/elements/index.css';`, '');
+                } else {
+                  return template.replace('</body>', `${content}</body>`);
+                }
               }
             }
           }
-        }
-      })]
+        })
+      ]
     });
   }
 }

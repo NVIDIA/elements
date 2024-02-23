@@ -2,7 +2,7 @@ import pkg from './package.json' assert { type: 'json' };
 import path from 'path';
 import { Project, SyntaxKind } from 'ts-morph';
 
-const resolve = (rel) => path.resolve(process.cwd(), rel);
+const resolve = rel => path.resolve(process.cwd(), rel);
 
 const runtimeEnvironment = {};
 
@@ -11,7 +11,7 @@ const baseInterface = getBaseInterface();
 function getBaseInterface() {
   const project = new Project();
   const file = project.addSourceFileAtPath(resolve('src/internal/types/index.ts'));
-  const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find((i) => i.getName() === 'MlvElement');
+  const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find(i => i.getName() === 'NveElement');
   const props = base.getStructure().properties.reduce((p, n) => ({ ...p, [n.name]: n }), {});
   return props;
 }
@@ -41,12 +41,12 @@ function metadataPlugin() {
       switch (node.kind) {
         case ts.SyntaxKind.ClassDeclaration:
           const classDeclaration = moduleDoc.declarations.find(
-            (declaration) => declaration.name === node.name?.getText()
+            declaration => declaration.name === node.name?.getText()
           );
 
-          node.jsDoc?.forEach((jsDoc) => {
-            jsDoc.tags?.forEach((tag) => {
-              if (metadata.find((m) => m === tag.tagName?.getText())) {
+          node.jsDoc?.forEach(jsDoc => {
+            jsDoc.tags?.forEach(tag => {
+              if (metadata.find(m => m === tag.tagName?.getText())) {
                 let value = tag.comment;
                 if (value === 'true') {
                   value = true;
@@ -130,7 +130,7 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
     if (!text) {
       return;
     }
-    const types = text.split('|').map((value) => value.trim());
+    const types = text.split('|').map(value => value.trim());
     const rewrittenTypes = new Set();
     let performRewrite = false;
     for (const type of types) {
@@ -153,7 +153,7 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
 
     entry.type.text = entry.type.text
       .split(' | ')
-      .map((value) => (value === 'undefined' || value === '' ? 'default' : value))
+      .map(value => (value === 'undefined' || value === '' ? 'default' : value))
       .join(' | ');
   }
 
@@ -180,8 +180,8 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
             if (node.type.kind === ts.SyntaxKind.UnionType) {
               const typeAlias = node.name.escapedText;
               const { types } = runtimeEnvironment.typeChecker.getTypeAtLocation(node);
-              if (types?.every((type) => type.value !== undefined)) {
-                const stringLiterals = types.map((type) => quoteWrap(type.value));
+              if (types?.every(type => type.value !== undefined)) {
+                const stringLiterals = types.map(type => quoteWrap(type.value));
                 stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
               }
             }
@@ -201,7 +201,7 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
                 rewriteTypesText(attribute);
               }
 
-              declaration.attributes?.forEach((attr) => {
+              declaration.attributes?.forEach(attr => {
                 if (baseInterface[attr.name] && baseInterface[attr.name].docs.length) {
                   attr.description = baseInterface[attr.name].docs[0]?.description;
                 }
@@ -244,6 +244,6 @@ export default {
     const { options } = ts.parseJsonConfigFileContent(config, ts.sys, process.cwd());
     const program = ts.createProgram(globs, options);
     runtimeEnvironment.typeChecker = program.getTypeChecker();
-    return program.getSourceFiles().filter((sf) => globs.find((glob) => sf.fileName.includes(glob)));
+    return program.getSourceFiles().filter(sf => globs.find(glob => sf.fileName.includes(glob)));
   }
 };
