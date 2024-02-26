@@ -29,7 +29,7 @@ import styles from './tag.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
 export class Tag extends MlvBaseButton {
-  static styles = useStyles([styles, colorStateStyles]);
+  static styles = useStyles([colorStateStyles, styles]);
 
   static readonly metadata = {
     tag: 'mlv-tag',
