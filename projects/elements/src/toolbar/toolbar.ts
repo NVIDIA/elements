@@ -5,7 +5,6 @@ import {
   useStyles,
   statusStateStyles,
   supportStateStyles,
-  colorStateStyles,
   ContainerElement,
   attachInternals,
   applySlotContentStates,
@@ -39,7 +38,7 @@ import styles from './toolbar.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
  */
 export class Toolbar extends LitElement implements ContainerElement {
-  static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);
+  static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
 
   static readonly metadata = {
     tag: 'nve-toolbar',
