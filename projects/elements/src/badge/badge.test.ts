@@ -63,6 +63,12 @@ describe('nve-badge', () => {
     );
   });
 
+  it('should allow custom icon and not render a default icon when using "color"', async () => {
+    element.color = 'blue-cobalt';
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('nve-icon')).toBe(null);
+  });
+
   it('should provide trend icon when using a trend status', async () => {
     element.status = 'trend-up';
     await elementIsStable(element);
