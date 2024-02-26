@@ -1,87 +1,102 @@
+:host {
+  --state-color-base: var(--nve-sys-status-color);
+  --state-color-background: color-mix(
+    in oklab,
+    var(--state-color-base) var(--nve-sys-contrast-mute-ratio),
+    var(--nve-sys-contrast-mute-color)
+  );
+  --state-color: color-mix(in oklab, var(--state-color-base), var(--nve-sys-text-emphasis-color) 16%);
+}
+
+:host([prominence='emphasis']) {
+  --background: var(--state-color);
+  --color: var(--nve-sys-contrast-mute-color);
+}
+
 :host([color='red-cardinal']) {
-  --color: var(--nve-ref-color-red-cardinal-1100);
+  --state-color-base: var(--nve-ref-color-red-cardinal-1100);
 }
 
 :host([color='gray-slate']) {
-  --color: var(--nve-ref-color-gray-slate-1100);
+  --state-color-base: var(--nve-ref-color-gray-slate-1100);
 }
 
 :host([color='gray-denim']) {
-  --color: var(--nve-ref-color-gray-denim-1100);
+  --state-color-base: var(--nve-ref-color-gray-denim-1100);
 }
 
 :host([color='blue-indigo']) {
-  --color: var(--nve-ref-color-blue-indigo-1100);
+  --state-color-base: var(--nve-ref-color-blue-indigo-1100);
 }
 
 :host([color='blue-cobalt']) {
-  --color: var(--nve-ref-color-blue-cobalt-1100);
+  --state-color-base: var(--nve-ref-color-blue-cobalt-1100);
 }
 
 :host([color='blue-sky']) {
-  --color: var(--nve-ref-color-blue-sky-1100);
+  --state-color-base: var(--nve-ref-color-blue-sky-1100);
 }
 
 :host([color='teal-cyan']) {
-  --color: var(--nve-ref-color-teal-cyan-1100);
+  --state-color-base: var(--nve-ref-color-teal-cyan-1100);
 }
 
 :host([color='green-mint']) {
-  --color: var(--nve-ref-color-green-mint-1100);
+  --state-color-base: var(--nve-ref-color-green-mint-1100);
 }
 
 :host([color='teal-seafoam']) {
-  --color: var(--nve-ref-color-teal-seafoam-1100);
+  --state-color-base: var(--nve-ref-color-teal-seafoam-1100);
 }
 
 :host([color='green-grass']) {
-  --color: var(--nve-ref-color-green-grass-1100);
+  --state-color-base: var(--nve-ref-color-green-grass-1100);
 }
 
 :host([color='yellow-amber']) {
-  --color: var(--nve-ref-color-yellow-amber-1100);
+  --state-color-base: var(--nve-ref-color-yellow-amber-1100);
 }
 
 :host([color='orange-pumpkin']) {
-  --color: var(--nve-ref-color-orange-pumpkin-1100);
+  --state-color-base: var(--nve-ref-color-orange-pumpkin-1100);
 }
 
 :host([color='red-tomato']) {
-  --color: var(--nve-ref-color-red-tomato-1100);
+  --state-color-base: var(--nve-ref-color-red-tomato-1100);
 }
 
 :host([color='pink-magenta']) {
-  --color: var(--nve-ref-color-pink-magenta-1100);
+  --state-color-base: var(--nve-ref-color-pink-magenta-1100);
 }
 
 :host([color='purple-plum']) {
-  --color: var(--nve-ref-color-purple-plum-1100);
+  --state-color-base: var(--nve-ref-color-purple-plum-1100);
 }
 
 :host([color='purple-violet']) {
-  --color: var(--nve-ref-color-purple-violet-1100);
+  --state-color-base: var(--nve-ref-color-purple-violet-1100);
 }
 
 :host([color='purple-lavender']) {
-  --color: var(--nve-ref-color-purple-lavender-1100);
+  --state-color-base: var(--nve-ref-color-purple-lavender-1100);
 }
 
 :host([color='pink-rose']) {
-  --color: var(--nve-ref-color-pink-rose-1100);
+  --state-color-base: var(--nve-ref-color-pink-rose-1100);
 }
 
 :host([color='green-jade']) {
-  --color: var(--nve-ref-color-green-jade-1100);
+  --state-color-base: var(--nve-ref-color-green-jade-1100);
 }
 
 :host([color='lime-pear']) {
-  --color: var(--nve-ref-color-lime-pear-1100);
+  --state-color-base: var(--nve-ref-color-lime-pear-1100);
 }
 
 :host([color='yellow-nova']) {
-  --color: var(--nve-ref-color-yellow-nova-1100);
+  --state-color-base: var(--nve-ref-color-yellow-nova-1100);
 }
 
 :host([color='brand-green']) {
-  --color: var(--nve-ref-color-brand-green-1100);
+  --state-color-base: var(--nve-ref-color-brand-green-1100);
 }
