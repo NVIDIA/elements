@@ -1,7 +1,7 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, SupportStatus, useStyles } from '@elements/elements/internal';
+import { attachInternals, Container, SupportStatus, useStyles } from '@elements/elements/internal';
 import type { Alert } from './alert.js';
 import styles from './alert-group.css?inline';
 
@@ -28,7 +28,10 @@ export class AlertGroup extends LitElement {
   };
 
   /** Defines visual treatment to represent a ongoing task or support status. */
-  @property({ type: String, reflect: true }) status: SupportStatus;
+  @property({ type: String, reflect: true }) status?: SupportStatus;
+
+  /** Determines the container bounds of the element */
+  @property({ type: String, reflect: true }) container?: Extract<Container, 'full'>;
 
   /** @private */
   declare _internals: ElementInternals;
