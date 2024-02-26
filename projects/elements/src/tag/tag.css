@@ -1,8 +1,8 @@
-
 :host {
-  --background: color-mix(in oklab, var(--color) var(--nve-sys-contrast-mute-ratio), var(--nve-sys-contrast-mute-color));
+  --background: var(--state-color-background);
+  --color: var(--state-color);
+  --state-color-base: var(--nve-ref-color-blue-cobalt-1100);
   --nve-sys-interaction-state-base: var(--background);
-  --color: var(--nve-ref-color-blue-cobalt-1100);
   --gap: var(--nve-ref-space-xs);
   --font-size: var(--nve-ref-font-size-100);
   --padding: 0 var(--nve-ref-size-200);
@@ -20,7 +20,7 @@
   font-size: var(--font-size);
   gap: var(--gap);
   background: var(--background);
-  color: color-mix(in oklab, var(--color), var(--nve-sys-text-emphasis-color) 16%);
+  color: var(--color);
   padding: var(--padding);
   border-radius: var(--border-radius);
   cursor: var(--cursor);
