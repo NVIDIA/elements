@@ -1,3 +1,11 @@
+## [0.24.3](https://github.com/NVIDIA/elements/compare/v0.24.2...v0.24.3) (2024-02-26)
+
+
+### Bug Fixes
+
+* **elements:** add alert group container override ([0f761bc](https://github.com/NVIDIA/elements/commit/0f761bc81c68a83629055cc137ce9cd237480292))
+* **elements:** allow icon slot for not status badges ([08886e7](https://github.com/NVIDIA/elements/commit/08886e72f4c3b8bcb4e485ae890987f156e2271b))
+
 ## [0.24.2](https://github.com/NVIDIA/elements/compare/v0.24.1...v0.24.2) (2024-02-23)
 
 
