@@ -1,12 +1,11 @@
-
 :host {
-  --background: color-mix(in oklab, var(--color) var(--nve-sys-contrast-mute-ratio), var(--nve-sys-contrast-mute-color));
+  --background: var(--state-color-background);
+  --color: var(--state-color);
   --gap: var(--nve-ref-space-xs);
-  --color: var(--nve-sys-status-color);
   --height: var(--nve-ref-size-800);
   --width: var(--nve-ref-size-800);
   --font-size: calc(var(--width) / 2);
-  --border-radius: calc(var(--height) * .2);
+  --border-radius: calc(var(--height) * 0.2);
   --font-weight: var(--nve-ref-font-weight-bold);
   display: inline-block;
 }
