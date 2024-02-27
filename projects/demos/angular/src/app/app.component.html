@@ -2,9 +2,15 @@
   <nve-logo></nve-logo>
   <h2 slot="title">Elements</h2>
   <nve-button slot="nav-items" selected><a href="/elements/demos/buildless/">Demos</a></nve-button>
-  <nve-button slot="nav-items"><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></nve-button>
-  <nve-button slot="nav-items"><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button>
-  <nve-button slot="nav-items"><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button>
+  <nve-button slot="nav-items"
+    ><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></nve-button
+  >
+  <nve-button slot="nav-items"
+    ><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button
+  >
+  <nve-button slot="nav-items"
+    ><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button
+  >
   <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
 </nve-app-header>
 <div nve-layout="row" style="height: 100%">
@@ -45,6 +51,12 @@
           </a>
         </nve-menu-item>
         <nve-menu-item>
+          <a href="/elements/demos/solidjs/">
+            <img src="assets/solidjs.svg" width="18px" height="18px" alt="solidjs logo" />
+            SolidJS
+          </a>
+        </nve-menu-item>
+        <nve-menu-item>
           <nve-icon name="template"></nve-icon>
           <a href="/elements/demos/mpa/">MPA</a>
         </nve-menu-item>
@@ -60,8 +72,22 @@
     <h1 nve-text="heading xl">Angular</h1>
     <p nve-text="body">A simple starter using Elements and Angular.</p>
     <ul nve-text="list" nve-layout="column gap:xs">
-      <li><a nve-text="link" target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/demos/angular">Source</a></li>
-      <li><a nve-text="link" target="_blank" href="https://NVIDIA.github.io/elements/api/?path=/docs/integrations-angular--docs">Documentation</a></li>
+      <li>
+        <a
+          nve-text="link"
+          target="_blank"
+          href="https://github.com/NVIDIA/elements/-/tree/main/projects/demos/angular"
+          >Source</a
+        >
+      </li>
+      <li>
+        <a
+          nve-text="link"
+          target="_blank"
+          href="https://NVIDIA.github.io/elements/api/?path=/docs/integrations-angular--docs"
+          >Documentation</a
+        >
+      </li>
     </ul>
   </main>
 </div>

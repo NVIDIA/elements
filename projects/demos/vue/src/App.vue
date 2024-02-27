@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  import '@elements/elements/app-header/define.js';
-  import '@elements/elements/button/define.js';
-  import '@elements/elements/breadcrumb/define.js';
-  import '@elements/elements/drawer/define.js';
-  import '@elements/elements/menu/define.js';
+import '@elements/elements/app-header/define.js';
+import '@elements/elements/button/define.js';
+import '@elements/elements/breadcrumb/define.js';
+import '@elements/elements/drawer/define.js';
+import '@elements/elements/menu/define.js';
 </script>
 
 <template>
@@ -11,9 +11,15 @@
     <nve-logo></nve-logo>
     <h2 slot="title">Elements</h2>
     <nve-button slot="nav-items" selected=" "><a href="/elements/demos/buildless/">Demos</a></nve-button>
-    <nve-button slot="nav-items"><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></nve-button>
-    <nve-button slot="nav-items"><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button>
-    <nve-button slot="nav-items"><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button>
+    <nve-button slot="nav-items"
+      ><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></nve-button
+    >
+    <nve-button slot="nav-items"
+      ><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button
+    >
+    <nve-button slot="nav-items"
+      ><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button
+    >
     <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
   </nve-app-header>
   <div nve-layout="row" style="height: 100%">
@@ -54,6 +60,12 @@
             </a>
           </nve-menu-item>
           <nve-menu-item>
+            <a href="/elements/demos/solidjs/">
+              <img src="/solidjs.svg" width="18px" height="18px" alt="solidjs logo" />
+              SolidJS
+            </a>
+          </nve-menu-item>
+          <nve-menu-item>
             <nve-icon name="template"></nve-icon>
             <a href="/elements/demos/mpa/">MPA</a>
           </nve-menu-item>
@@ -69,13 +81,25 @@
       <h1 nve-text="heading xl">Vue</h1>
       <p nve-text="body">A simple starter using Elements and Vue.</p>
       <ul nve-text="list" nve-layout="column gap:xs">
-        <li><a nve-text="link" target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/demos/vue">Source</a></li>
-        <li><a nve-text="link" target="_blank" href="https://NVIDIA.github.io/elements/api/?path=/docs/integrations-vue--docs">Documentation</a></li>
+        <li>
+          <a
+            nve-text="link"
+            target="_blank"
+            href="https://github.com/NVIDIA/elements/-/tree/main/projects/demos/vue"
+            >Source</a
+          >
+        </li>
+        <li>
+          <a
+            nve-text="link"
+            target="_blank"
+            href="https://NVIDIA.github.io/elements/api/?path=/docs/integrations-vue--docs"
+            >Documentation</a
+          >
+        </li>
       </ul>
     </main>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="view-transition" content="same-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A simple starter using Elements in a Multi Page App.">
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+    <meta name="description" content="A simple starter using Elements in a Multi Page App." />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
     <link rel="stylesheet" href="/about/index.css" />
     <script type="module" src="/about/index.ts"></script>
   </head>
@@ -15,9 +15,15 @@
       <nve-logo></nve-logo>
       <h2 slot="title">Elements</h2>
       <nve-button slot="nav-items" selected><a href="/elements/demos/buildless/">Demos</a></nve-button>
-      <nve-button slot="nav-items"><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></nve-button>
-      <nve-button slot="nav-items"><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button>
-      <nve-button slot="nav-items"><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button>
+      <nve-button slot="nav-items"
+        ><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></nve-button
+      >
+      <nve-button slot="nav-items"
+        ><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button
+      >
+      <nve-button slot="nav-items"
+        ><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button
+      >
       <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
     </nve-app-header>
     <div nve-layout="row" style="height: 100%">
@@ -55,6 +61,12 @@
               <a href="/elements/demos/react/">
                 <img src="/react.svg" width="18px" height="18px" alt="react logo" />
                 React
+              </a>
+            </nve-menu-item>
+            <nve-menu-item>
+              <a href="/elements/demos/solidjs/">
+                <img src="/solidjs.svg" width="18px" height="18px" alt="solidjs logo" />
+                SolidJS
               </a>
             </nve-menu-item>
             <nve-menu-item current="page">
