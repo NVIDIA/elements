@@ -1,3 +1,10 @@
+## [0.25.0](https://github.com/NVIDIA/elements/compare/v0.24.4...v0.25.0) (2024-02-27)
+
+
+### Features
+
+* **elements:** first and last pagination events ([a9bc929](https://github.com/NVIDIA/elements/commit/a9bc9295f29a61a8fa037d70057f862c94ad8c5d))
+
 ## [0.24.4](https://github.com/NVIDIA/elements/compare/v0.24.3...v0.24.4) (2024-02-27)
 
 
