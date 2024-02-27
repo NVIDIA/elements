@@ -16,6 +16,10 @@ import styles from './pagination.css?inline';
  * @element nve-pagination
  * @description Pagination is a control that enables users to navigate through pages of content.
  * @since 0.11.0
+ * @event input emits when the value (page) has changed
+ * @event change emits when the value (page) has changed
+ * @event first-page emits when the first page is active
+ * @event last-page emits when the last page is active
  * @slot - default slot for content
  * @cssprop --background
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-pagination-documentation--docs
@@ -98,6 +102,14 @@ export class Pagination extends LitElement {
 
   get #currentPage() {
     return (this.value - 1) * this.step + this.step;
+  }
+
+  get #isLastPage() {
+    return this.items / this.value === this.step;
+  }
+
+  get #isFirstPage() {
+    return this.value === 1;
   }
 
   get #selectLabel() {
@@ -230,5 +242,13 @@ export class Pagination extends LitElement {
     this._internals.setFormValue(`${this.value}`);
     this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, data: `${this.value}` }));
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+
+    if (this.#isLastPage) {
+      this.dispatchEvent(new CustomEvent('last-page', { bubbles: true, composed: true }));
+    }
+
+    if (this.#isFirstPage) {
+      this.dispatchEvent(new CustomEvent('first-page', { bubbles: true, composed: true }));
+    }
   }
 }
