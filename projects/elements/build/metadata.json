@@ -8067,13 +8067,29 @@
             "name": "input",
             "type": {
               "text": "InputEvent"
-            }
+            },
+            "description": "emits when the value (page) has changed"
           },
           {
             "name": "change",
             "type": {
               "text": "Event"
-            }
+            },
+            "description": "emits when the value (page) has changed"
+          },
+          {
+            "name": "last-page",
+            "type": {
+              "text": "CustomEvent"
+            },
+            "description": "emits when the last page is active"
+          },
+          {
+            "name": "first-page",
+            "type": {
+              "text": "CustomEvent"
+            },
+            "description": "emits when the first page is active"
           }
         ],
         "cssProperties": [

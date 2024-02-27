@@ -53,6 +53,15 @@ import '@elements/elements/pagination/define.js';
   <Story id="elements-pagination-examples--disable-step" />
 </Canvas>
 
+## Dynamic Items
+
+If the upper bound of items is unknown the `last-page` event can be used to determine when
+to load additional data and update the pagination with the latest total of items.
+
+<Canvas>
+  <Story id="elements-pagination-examples--dynamic-items" inline={false} height={100} />
+</Canvas>
+
 ## Forms
 
 Pagination is [form associated component](https://web.dev/more-capable-form-controls/#defining-a-form-associated-custom-element) and can be used within FormData.
