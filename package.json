@@ -54,6 +54,7 @@
         "./projects/demos/mpa:ci",
         "./projects/demos/nextjs:ci",
         "./projects/demos/react:ci",
+        "./projects/demos/solidjs:ci",
         "./projects/demos/typescript:ci",
         "./projects/elements:ci",
         "./projects/elements-react:ci",
