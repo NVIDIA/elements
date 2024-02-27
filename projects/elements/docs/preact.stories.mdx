@@ -28,7 +28,7 @@ To add TypeScript types to your TSX files add the element to the `IntrinsicEleme
 
 ```typescript
 // types.d.ts
-import { MlvAlert, MlvAlertGroup } from '@elements/elements/alert-group';
+import type { MlvAlert, MlvAlertGroup } from '@elements/elements/alert-group';
 
 type CustomEvents<K extends string> = { [key in K] : (event: CustomEvent) => void };
 type CustomElement<T, K extends string = ''> = Partial<T & { children: any } & CustomEvents<`on${K}`>>;
