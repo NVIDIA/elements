@@ -3,6 +3,7 @@ import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import type { ControlMessage } from '../control-message/control-message.js';
 import type { Control } from '../control/control.js';
+import type { ControlGroup } from '../control-group/control-group.js';
 import {
   updateControlStatusState,
   setupControlStates,
@@ -373,5 +374,65 @@ describe('hideInactiveValidationMessages', () => {
     expect(messages[1].hidden).toBe(false);
     expect(messages[0].hasAttribute('hidden')).toBe(true);
     expect(messages[1].hasAttribute('hidden')).toBe(false);
+  });
+});
+
+describe('setupControlGroupStates initial', () => {
+  let fixture: HTMLElement;
+  let controlGroup: ControlGroup;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-control-group>
+        <label>control group</label>
+      </nve-control-group>
+    `);
+    controlGroup = fixture.querySelector('nve-control-group');
+    await elementIsStable(controlGroup);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should not apply :--disabled state when no controls are rendered', async () => {
+    await elementIsStable(controlGroup);
+    expect(controlGroup.matches(':--disabled')).toBe(false);
+    expect(controlGroup._internals.states.has('--disabled')).toBe(false);
+  });
+});
+
+describe('setupControlGroupStates', () => {
+  let fixture: HTMLElement;
+  let controlGroup: ControlGroup;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-control-group>
+        <label>control group</label>
+        <nve-control>
+          <label>label</label>
+          <input type="text" />
+        </nve-control>
+      </nve-control-group>
+    `);
+    controlGroup = fixture.querySelector('nve-control-group');
+    await elementIsStable(controlGroup);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should update disabled states', async () => {
+    await elementIsStable(controlGroup);
+    expect(controlGroup.matches(':--disabled')).toBe(false);
+    expect(controlGroup._internals.states.has('--disabled')).toBe(false);
+
+    controlGroup.querySelector('input').setAttribute('disabled', '');
+    await elementIsStable(controlGroup);
+
+    expect(controlGroup.matches(':--disabled')).toBe(true);
+    expect(controlGroup._internals.states.has('--disabled')).toBe(true);
   });
 });
