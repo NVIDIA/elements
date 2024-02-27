@@ -45,6 +45,8 @@ export class ControlGroup extends LitElement {
     return Array.from(this.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
   }
 
+  #observers: (MutationObserver | ResizeObserver)[] = [];
+
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -73,11 +75,18 @@ export class ControlGroup extends LitElement {
 
   firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
-    setupControlGroupStates(this);
-    setupControlLayoutStates(this);
-    setupControlStatusStates(this, this.#messages);
+    this.#observers = [
+      setupControlGroupStates(this),
+      setupControlLayoutStates(this),
+      ...setupControlStatusStates(this, this.#messages)
+    ];
     this.#updateAssociations();
     this.shadowRoot.addEventListener('slotchange', () => this.#updateAssociations());
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#observers.forEach(observer => observer.disconnect());
   }
 
   #updateAssociations() {

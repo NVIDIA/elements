@@ -127,22 +127,16 @@ export function setupControlStates(control: Control) {
  * :--disabled any form control within group is in a disabled state
  */
 export function setupControlGroupStates(controlGroup: ControlGroup) {
-  const inputs = Array.from(controlGroup.inputs);
-  if (inputs.filter(i => !i.disabled).length === 0) {
-    controlGroup._internals.states.add('--disabled');
-  }
+  toggleControlGroupDisabledState(controlGroup);
+  return getAttributeChanges(controlGroup, 'disabled', () => toggleControlGroupDisabledState(controlGroup));
+}
 
-  const observers: MutationObserver[] = [];
-  observers.push(
-    getAttributeChanges(controlGroup, 'disabled', () => {
-      if (inputs.filter(i => !i.disabled).length === 0) {
-        controlGroup._internals.states.add('--disabled');
-      } else {
-        controlGroup._internals.states.delete('--disabled');
-      }
-    })
-  );
-  return observers;
+export function toggleControlGroupDisabledState(controlGroup: ControlGroup) {
+  if (Array.from(controlGroup.inputs).find(i => i.disabled)) {
+    controlGroup._internals.states.add('--disabled');
+  } else {
+    controlGroup._internals.states.delete('--disabled');
+  }
 }
 
 /**
