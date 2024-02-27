@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="view-transition" content="same-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A simple starter using Elements in a Multi Page App.">
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+    <meta name="description" content="A simple starter using Elements in a Multi Page App." />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
     <link rel="stylesheet" href="/settings/index.css" />
     <script type="module" src="/settings/index.ts"></script>
   </head>
@@ -15,9 +15,15 @@
       <mlv-logo></mlv-logo>
       <h2 slot="title">Elements</h2>
       <mlv-button slot="nav-items" selected><a href="/elements/demos/buildless/">Demos</a></mlv-button>
-      <mlv-button slot="nav-items"><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></mlv-button>
-      <mlv-button slot="nav-items"><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></mlv-button>
-      <mlv-button slot="nav-items"><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></mlv-button>
+      <mlv-button slot="nav-items"
+        ><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></mlv-button
+      >
+      <mlv-button slot="nav-items"
+        ><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></mlv-button
+      >
+      <mlv-button slot="nav-items"
+        ><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></mlv-button
+      >
       <mlv-icon-button icon-name="switch-apps" slot="nav-actions"></mlv-icon-button>
     </mlv-app-header>
     <div mlv-layout="row" style="height: 100%">
@@ -55,6 +61,12 @@
               <a href="/elements/demos/react/">
                 <img src="/react.svg" width="18px" height="18px" alt="react logo" />
                 React
+              </a>
+            </mlv-menu-item>
+            <mlv-menu-item>
+              <a href="/elements/demos/solidjs/">
+                <img src="/solidjs.svg" width="18px" height="18px" alt="solidjs logo" />
+                SolidJS
               </a>
             </mlv-menu-item>
             <mlv-menu-item current="page">

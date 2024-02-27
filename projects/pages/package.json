@@ -13,6 +13,7 @@
         "pages:demos:buildless",
         "pages:demos:mpa",
         "pages:demos:react",
+        "pages:demos:solidjs",
         "pages:demos:typescript",
         "pages:demos:vue",
         "pages:elements"
@@ -62,6 +63,17 @@
       "files": [],
       "output": [
         "dist/demos/react/**"
+      ]
+    },
+    "pages:demos:solidjs": {
+      "command": "cp -a ../demos/solidjs/dist/. ./dist/demos/solidjs",
+      "dependencies": [
+        "../demos/solidjs:ci",
+        "build"
+      ],
+      "files": [],
+      "output": [
+        "dist/demos/solidjs/**"
       ]
     },
     "pages:demos:typescript": {
