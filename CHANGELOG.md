@@ -1,3 +1,10 @@
+## [0.24.4](https://github.com/NVIDIA/elements/compare/v0.24.3...v0.24.4) (2024-02-27)
+
+
+### Bug Fixes
+
+* **elements:** control group status ([92e5981](https://github.com/NVIDIA/elements/commit/92e59814ce64dd0c7939c7b1e1050cfcd3b6c1c0))
+
 ## [0.24.3](https://github.com/NVIDIA/elements/compare/v0.24.2...v0.24.3) (2024-02-26)
 
 
