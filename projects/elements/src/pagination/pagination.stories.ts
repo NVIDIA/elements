@@ -88,9 +88,28 @@ export const DarkTheme = {
   `
 }
 
-
 export const LargeValues = {
   render: () => html`
     <mlv-pagination container="inline" value="1" items="10000" step="100"></mlv-pagination>
+  `
+}
+
+export const DynamicItems = {
+  render: () => html`
+    <mlv-pagination disable-step container="inline" value="1" items="100" step="20"></mlv-pagination>
+
+    <script type="module">
+      const pagination = document.querySelector('mlv-pagination');
+      let items = loadItems();
+
+      pagination.addEventListener('last-page', async () => {
+        items = [...items, ...loadItems()];
+        pagination.items = items.length;
+      });
+
+      function loadItems() {
+        return new Array(100).fill('');
+      }
+    </script>
   `
 }

@@ -163,6 +163,28 @@ describe('mlv-pagination', () => {
     expect(detail).toBe(20);
   });
 
+  it('should emit last-page when the last page is active', async () => {
+    const lastPage = untilEvent(element, 'last-page');
+    element.skippable = true;
+    await elementIsStable(element);
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="right"]'));
+    await lastPage;
+    expect(element.value).toBe(10);
+  });
+
+  it('should emit last-page when the first page is active', async () => {
+    const firstPage = untilEvent(element, 'first-page');
+    element.skippable = true;
+    await elementIsStable(element);
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="right"]'));
+    await elementIsStable(element);
+    expect(element.value).toBe(10);
+
+    emulateClick(element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="left"]'));
+    await firstPage;
+    expect(element.value).toBe(1);
+  });
+
   it('should recompute the current page label if step changes and not on first page', async () => {
     const select = element.shadowRoot.querySelector<HTMLSelectElement>('select');
     const selectLabel = element.shadowRoot.querySelector('.select-label');
