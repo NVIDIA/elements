@@ -16,6 +16,7 @@
     "build:vscode-custom-data": "wireit",
     "build:metadata": "wireit",
     "build:metadata:fast": "wireit",
+    "build:metadata:elements": "wireit",
     "build:storybook": "wireit",
     "test": "wireit",
     "test:all": "wireit",
@@ -482,6 +483,15 @@
       ],
       "output": [
         "build/metadata.json"
+      ],
+      "dependencies": [
+        "build:manifest"
+      ]
+    },
+    "build:metadata:elements": {
+      "command": "node ./build/metadata.elements.mjs",
+      "files": [
+        "build/metadata.elements.mjs"
       ],
       "dependencies": [
         "build:manifest"
