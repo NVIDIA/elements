@@ -18,6 +18,7 @@ import '@elements/elements/search/define.js';
 import '@elements/elements/json-viewer/define.js';
 import '@elements/elements/tabs/define.js';
 import metrics from 'build/metadata.json';
+import metricsMaglev from 'build/metadata.elements.json';
 import { ELEMENTS_VERSION } from '../.storybook/version.js';
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
@@ -37,11 +38,11 @@ function getVersionBadge(value) {
   const version = getMinorVersion(pin);
   let status = 'success';
 
-  if ((currentVersion - version) > 2) {
+  if ((currentVersion - version) > 5) {
     status = 'warning';
   }
 
-  if ((currentVersion - version) > 4 || value.includes('workspace')) {
+  if ((currentVersion - version) > 10 || value.includes('workspace')) {
     status = 'danger';
   }
 
@@ -524,9 +525,9 @@ class ProjectMetrics extends LitElement {
   @state() state = {
     tooltipColumn: null,
     columns: {
-      project: { sort: 'none', width: '250px' },
-      '@elements/elements': { sort: 'none', width: '200px' },
-      instanceTotal: { sort: 'none', width: '200px', tooltip: 'Number of instances of elements directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.' },
+      project: { sort: 'none', width: '300px' },
+      '@elements/elements': { sort: 'none', width: '300px' },
+      instanceTotal: { sort: 'none', width: '300px', tooltip: 'Number of instances of elements directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.' },
       source: { sort: 'none', width: '' },
     }
   };
@@ -538,7 +539,7 @@ class ProjectMetrics extends LitElement {
           projects = column.sort === 'descending' ? projects.reverse() : projects;
         }
         return projects;
-    }, [...metrics.elements.projects]);
+    }, [...metricsMaglev.projects]);
   }
 
   render() {
@@ -547,7 +548,7 @@ class ProjectMetrics extends LitElement {
         <h3 mlv-text="body bold">Summary:</h3>
         <section mlv-layout="row gap:xs align:center">
           <span mlv-text="body sm muted">Total Maglev Instances</span>
-          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
+          <span mlv-text="body sm bold"><mlv-badge status="success">${metricsMaglev.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
         </section>
       </div>
       <mlv-grid style="--scroll-height: calc(100vh - 290px)">
@@ -563,7 +564,7 @@ class ProjectMetrics extends LitElement {
         </mlv-grid-header>
         ${this.projects.sort((a, b) => getMinorVersion(a.elementsVersion) > getMinorVersion(b.elementsVersion) ? -1 : 1 ).map(project => html`
           <mlv-grid-row>
-            <mlv-grid-cell>${project.name}</mlv-grid-cell>
+            <mlv-grid-cell>${project.name ?? 'unknown'}</mlv-grid-cell>
             <mlv-grid-cell>${getVersionBadge(project.elementsVersion)}</mlv-grid-cell>
             <mlv-grid-cell>${project.instanceTotal}</mlv-grid-cell>
             <mlv-grid-cell><code mlv-text="code">${project.path}</code></mlv-grid-cell>
@@ -739,8 +740,8 @@ class MetricDemo extends LitElement {
           <mlv-tabs>
             <mlv-tabs-item .selected=${this.tab === 'metrics'} @click=${() => this.tab = 'metrics'} selected>Metrics</mlv-tabs-item>
             <mlv-tabs-item .selected=${this.tab === 'test'} @click=${() => this.tab = 'test'}>Testing &amp; Performance</mlv-tabs-item>
+            <mlv-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev</mlv-tabs-item>
             <mlv-tabs-item .selected=${this.tab === 'metadata'} @click=${() => this.tab = 'metadata'}>Raw Metadata</mlv-tabs-item>
-            <!-- <mlv-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev Projects</mlv-tabs-item> -->
           </mlv-tabs>
           <mlv-divider></mlv-divider>
         </div>

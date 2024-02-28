@@ -1,0 +1,1644 @@
+{
+  "created": "2024-02-29T15:59:23.145Z",
+  "projects": [
+    {
+      "name": "@elements/ddb-dump-roadcast-frontend",
+      "path": "src/ui/undefined",
+      "elementsVersion": "^0.22.3",
+      "elements": [
+        {
+          "name": "mlv-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-footer",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-pagination",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 8
+    },
+    {
+      "name": "core",
+      "path": "src/ui/core",
+      "elementsVersion": "0.10.0",
+      "elements": [
+        {
+          "name": "mlv-button",
+          "instanceTotal": 6
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-control",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 5
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-textarea",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 23
+    },
+    {
+      "name": "curation",
+      "path": "src/ui/curation",
+      "elementsVersion": "^0.11.1",
+      "elements": [
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-switch",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 2
+    },
+    {
+      "name": "daas",
+      "path": "src/ui/daas",
+      "elementsVersion": "^0.11.1",
+      "elements": [
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-row",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-footer",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-header",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 10
+    },
+    {
+      "name": "dataops",
+      "path": "src/ui/dataops",
+      "elementsVersion": "0.19.0",
+      "elements": [
+        {
+          "name": "mlv-dialog",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-notification",
+          "instanceTotal": 15
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 7
+        },
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-control",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 9
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-badge",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dot",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-tabs-item",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-tabs",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-date",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dialog-footer",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dialog-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-progress-ring",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-textarea",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-card",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-checkbox-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-radio-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-radio",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-control-message",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 68
+    },
+    {
+      "name": "drivescrubber",
+      "path": "src/ui/drivescrubber",
+      "elementsVersion": "0.20.0",
+      "elements": [
+        {
+          "name": "mlv-grid-cell",
+          "instanceTotal": 5
+        },
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 6
+        },
+        {
+          "name": "mlv-grid-row",
+          "instanceTotal": 5
+        },
+        {
+          "name": "mlv-badge",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 16
+        },
+        {
+          "name": "mlv-card",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-card-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card-content",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 11
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 6
+        },
+        {
+          "name": "mlv-date",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-control-message",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-control",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-search",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-dialog",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-grid-header",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-grid-placeholder",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-sort-button",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-toast",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 7
+        },
+        {
+          "name": "mlv-input-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-checkbox-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-divider",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-button-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-alert-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-alert",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-tabs-item",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-tabs",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-notification-group",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-notification",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-alert-banner",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dialog-footer",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dialog-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-footer",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-pagination",
+          "instanceTotal": 2
+        }
+      ],
+      "instanceTotal": 137
+    },
+    {
+      "name": "app-shell-angular-demo",
+      "path": "src/ui/examples/app-shell/angular",
+      "elementsVersion": "0.10.0",
+      "elements": [],
+      "instanceTotal": 0
+    },
+    {
+      "path": "src/ui/examples/applications/angular",
+      "elementsVersion": "0.18.0",
+      "elements": [],
+      "instanceTotal": 0
+    },
+    {
+      "path": "src/ui/examples/applications/lit",
+      "elementsVersion": "0.18.0",
+      "elements": [],
+      "instanceTotal": 0
+    },
+    {
+      "name": "@elements/lit-library-example",
+      "path": "src/ui/examples/libraries/lit",
+      "elementsVersion": "0.18.0",
+      "elements": [
+        {
+          "name": "mlv-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-row",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 5
+    },
+    {
+      "name": "@elements/asset-browser-views",
+      "path": "src/ui/flywheel/apps/asset-browser",
+      "elementsVersion": "0.19.0",
+      "elements": [
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 9
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 10
+        },
+        {
+          "name": "mlv-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-footer",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-row",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-breadcrumb",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-search",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-notification-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-notification",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 33
+    },
+    {
+      "name": "clip-labeler",
+      "path": "src/ui/labeling/apps/clip-labeler",
+      "elementsVersion": "^0.20.0",
+      "elements": [
+        {
+          "name": "mlv-alert-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-alert",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dialog-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dialog",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dot",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 8
+    },
+    {
+      "name": "@elements/gt-asset-browser",
+      "path": "src/ui/labeling/apps/gt-asset-browser",
+      "elementsVersion": "^0.8.1",
+      "elements": [
+        {
+          "name": "mlv-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 2
+    },
+    {
+      "name": "@elements/label-class-editor",
+      "path": "src/ui/labeling/apps/label-class-editor",
+      "elementsVersion": "^0.20.0",
+      "elements": [
+        {
+          "name": "mlv-button",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 1
+    },
+    {
+      "name": "static-4dgt-labeler",
+      "path": "src/ui/labeling/apps/static-4dgt-labeler",
+      "elementsVersion": "^0.20.0",
+      "elements": [
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dialog-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dialog",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dot",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 6
+    },
+    {
+      "name": "@elements/gt-elements",
+      "path": "src/ui/labeling/libs/gt-elements",
+      "elementsVersion": "^0.20.0",
+      "elements": [
+        {
+          "name": "mlv-button",
+          "instanceTotal": 13
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 7
+        },
+        {
+          "name": "mlv-alert-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-alert",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-search",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-checkbox-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-radio-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-radio",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-time",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-badge",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-textarea",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-button-group",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-switch",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 49
+    },
+    {
+      "name": "labeling",
+      "path": "src/ui/labeling",
+      "elementsVersion": "^0.20.0",
+      "elements": [
+        {
+          "name": "mlv-alert-group",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-alert",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 5
+        },
+        {
+          "name": "mlv-dialog-header",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-dialog",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-dot",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 10
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 16
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-search",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-card-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-checkbox-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-radio-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-radio",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-time",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-badge",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-textarea",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-button-group",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-switch",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-progress-ring",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 75
+    },
+    {
+      "name": "@elements/job-validator",
+      "path": "src/ui/labeling/tools/job-validator",
+      "elementsVersion": "^0.20.0",
+      "elements": [
+        {
+          "name": "mlv-badge",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 4
+    },
+    {
+      "name": "@elements/next-av",
+      "path": "src/ui/next/av",
+      "elementsVersion": "0.23.1",
+      "elements": [
+        {
+          "name": "mlv-app-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 17
+        },
+        {
+          "name": "mlv-card",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-card-content",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-grid-cell",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-grid-row",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 19
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 26
+        },
+        {
+          "name": "mlv-menu-item",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-menu",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-panel",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-progressive-filter-chip",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-toast",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-alert-group",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-alert",
+          "instanceTotal": 6
+        },
+        {
+          "name": "mlv-divider",
+          "instanceTotal": 7
+        },
+        {
+          "name": "mlv-panel-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-panel-content",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-tabs-item",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-tabs",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 11
+        },
+        {
+          "name": "mlv-search",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-toolbar",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-combobox",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-date",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 10
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-tag",
+          "instanceTotal": 7
+        },
+        {
+          "name": "mlv-progress-ring",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-badge",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-grid-header",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-sort-button",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-card-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-pagination",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-button-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dialog-footer",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dialog-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dialog",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dot",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-range",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-logo",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-notification",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-switch",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-accordion-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-accordion-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-accordion",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-progress-bar",
+          "instanceTotal": 2
+        }
+      ],
+      "instanceTotal": 202
+    },
+    {
+      "name": "@elements/next-common",
+      "path": "src/ui/next/common",
+      "elementsVersion": "0.11.1",
+      "elements": [
+        {
+          "name": "mlv-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card-footer",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 4
+    },
+    {
+      "name": "ide",
+      "path": "src/ui/platform/apps/home",
+      "elementsVersion": "0.11.0",
+      "elements": [
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 2
+        }
+      ],
+      "instanceTotal": 3
+    },
+    {
+      "name": "@elements/vehicle-management",
+      "path": "src/ui/platform/apps/vehicle-management",
+      "elementsVersion": "0.20.0",
+      "elements": [
+        {
+          "name": "mlv-file",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-control-message",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-control",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-progress-bar",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-combobox",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-date",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-datetime",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-progress-ring",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-notification",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-password",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-textarea",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-row",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-search",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-header",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 33
+    },
+    {
+      "name": "@elements/docs-app",
+      "path": "src/ui/platform/docs/components/docs-app",
+      "elementsVersion": "0.10.0",
+      "elements": [],
+      "instanceTotal": 0
+    },
+    {
+      "name": "@elements/components",
+      "path": "src/ui/platform/libs/components",
+      "elementsVersion": "0.11.0",
+      "elements": [
+        {
+          "name": "mlv-logo",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-tag",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 4
+    },
+    {
+      "name": "@elements/feedback-elements",
+      "path": "src/ui/platform/libs/feedback-elements",
+      "elementsVersion": "0.18.0",
+      "elements": [
+        {
+          "name": "mlv-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-control-message",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-control",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-notification",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-textarea",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 11
+    },
+    {
+      "name": "@elements/ide",
+      "path": "src/ui/platform/libs/ide",
+      "elementsVersion": "0.11.0",
+      "elements": [
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-breadcrumb",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 2
+    },
+    {
+      "name": "@elements/ide-shell",
+      "path": "src/ui/platform/libs/ide-shell",
+      "elementsVersion": "0.11.0",
+      "elements": [
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-logo",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-breadcrumb",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 4
+    },
+    {
+      "name": "apps-and-services",
+      "path": "src/ui/platform/plugins/apps-and-services",
+      "elementsVersion": "0.11.0",
+      "elements": [
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-alert",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-card",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-card-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-card-content",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-card-footer",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-checkbox-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-checkbox",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-date",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dialog-footer",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dialog-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dialog",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-control-message",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-control",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-notification",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-password",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-radio-group",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-radio",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-range",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-search",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-select",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-switch",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-textarea",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-toast",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 2
+        }
+      ],
+      "instanceTotal": 46
+    },
+    {
+      "name": "@elements/web-utils",
+      "path": "src/ui/platform/sdk/web-utils",
+      "elementsVersion": "0.11.1",
+      "elements": [],
+      "instanceTotal": 0
+    },
+    {
+      "name": "@elements/platform-elements",
+      "path": "src/ui/platform/shared/elements",
+      "elementsVersion": "0.21.0",
+      "elements": [
+        {
+          "name": "mlv-alert-banner",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-alert",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 2
+    },
+    {
+      "name": "@elements/xp-app-shell",
+      "path": "src/ui/platform/xp/app-shell",
+      "elementsVersion": "0.21.0",
+      "elements": [
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 5
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 5
+        },
+        {
+          "name": "mlv-menu-item",
+          "instanceTotal": 5
+        },
+        {
+          "name": "mlv-menu",
+          "instanceTotal": 6
+        },
+        {
+          "name": "mlv-badge",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-button",
+          "instanceTotal": 5
+        },
+        {
+          "name": "mlv-divider",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-breadcrumb",
+          "instanceTotal": 3
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-logo",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-app-header",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 38
+    },
+    {
+      "name": "@elements/xp-server",
+      "path": "src/ui/platform/xp/server",
+      "elementsVersion": "^0.6.0",
+      "elements": [],
+      "instanceTotal": 0
+    },
+    {
+      "name": "tracking",
+      "path": "src/ui/tracking/apps/tracking",
+      "elementsVersion": "^0.20.0",
+      "elements": [
+        {
+          "name": "mlv-control",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 5
+    },
+    {
+      "name": "@elements/tracking-elements",
+      "path": "src/ui/tracking/libs/elements",
+      "elementsVersion": "0.20.0",
+      "elements": [
+        {
+          "name": "mlv-button",
+          "instanceTotal": 4
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-input-group",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-input",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-tooltip",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-tabs-item",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-tabs",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-color",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-notification",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 16
+    },
+    {
+      "path": "src/ui/uploads/ui",
+      "elementsVersion": "0.21.0",
+      "elements": [
+        {
+          "name": "mlv-divider",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-grid-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-grid-row",
+          "instanceTotal": 2
+        },
+        {
+          "name": "mlv-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-progress-ring",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-switch",
+          "instanceTotal": 1
+        },
+        {
+          "name": "mlv-toolbar",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 13
+    }
+  ]
+}
