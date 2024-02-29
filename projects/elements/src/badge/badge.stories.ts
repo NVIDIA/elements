@@ -31,7 +31,7 @@ export const Status = {
   `
 }
 
-export const Flat = {
+export const StatusFlat = {
   render: () => html`
 <div nve-layout="row gap:md align:wrap">
   <nve-badge container="flat" status="scheduled">scheduled</nve-badge>
@@ -49,7 +49,7 @@ export const Flat = {
   `
 }
 
-export const Icon = {
+export const StatusIcon = {
   render: () => html`
 <div nve-layout="row gap:md align:wrap">
   <nve-badge container="flat" status="scheduled" aria-label="scheduled"></nve-badge>
@@ -126,29 +126,87 @@ export const Trend = {
 
 export const Color = {
   render: () => html`
-<div nve-layout="row gap:xs align:wrap">
-  <nve-badge color="red-cardinal">red-cardinal</nve-badge>
-  <nve-badge color="gray-slate">gray-slate</nve-badge>
-  <nve-badge color="gray-denim">gray-denim</nve-badge>
-  <nve-badge color="blue-indigo">blue-indigo</nve-badge>
-  <nve-badge color="blue-cobalt">blue-cobalt</nve-badge>
-  <nve-badge color="blue-sky">blue-sky</nve-badge>
-  <nve-badge color="teal-cyan">teal-cyan</nve-badge>
-  <nve-badge color="green-mint">green-mint</nve-badge>
-  <nve-badge color="teal-seafoam">teal-seafoam</nve-badge>
-  <nve-badge color="green-grass">green-grass</nve-badge>
-  <nve-badge color="yellow-amber">yellow-amber</nve-badge>
-  <nve-badge color="orange-pumpkin">orange-pumpkin</nve-badge>
-  <nve-badge color="red-tomato">red-tomato</nve-badge>
-  <nve-badge color="pink-magenta">pink-magenta</nve-badge>
-  <nve-badge color="purple-plum">purple-plum</nve-badge>
-  <nve-badge color="purple-violet">purple-violet</nve-badge>
-  <nve-badge color="purple-lavender">purple-lavender</nve-badge>
-  <nve-badge color="pink-rose">pink-rose</nve-badge>
-  <nve-badge color="green-jade">green-jade</nve-badge>
-  <nve-badge color="lime-pear">lime-pear</nve-badge>
-  <nve-badge color="yellow-nova">yellow-nova</nve-badge>
-  <nve-badge color="brand-green">brand-green</nve-badge>
+<div nve-layout="row gap:sm align:wrap">
+  <nve-badge color="red-cardinal"><nve-icon name="placeholder"></nve-icon> red-cardinal</nve-badge>
+  <nve-badge color="gray-slate"><nve-icon name="placeholder"></nve-icon> gray-slate</nve-badge>
+  <nve-badge color="gray-denim"><nve-icon name="placeholder"></nve-icon> gray-denim</nve-badge>
+  <nve-badge color="blue-indigo"><nve-icon name="placeholder"></nve-icon> blue-indigo</nve-badge>
+  <nve-badge color="blue-cobalt"><nve-icon name="placeholder"></nve-icon> blue-cobalt</nve-badge>
+  <nve-badge color="blue-sky"><nve-icon name="placeholder"></nve-icon> blue-sky</nve-badge>
+  <nve-badge color="teal-cyan"><nve-icon name="placeholder"></nve-icon> teal-cyan</nve-badge>
+  <nve-badge color="green-mint"><nve-icon name="placeholder"></nve-icon> green-mint</nve-badge>
+  <nve-badge color="teal-seafoam"><nve-icon name="placeholder"></nve-icon> teal-seafoam</nve-badge>
+  <nve-badge color="green-grass"><nve-icon name="placeholder"></nve-icon> green-grass</nve-badge>
+  <nve-badge color="yellow-amber"><nve-icon name="placeholder"></nve-icon> yellow-amber</nve-badge>
+  <nve-badge color="orange-pumpkin"><nve-icon name="placeholder"></nve-icon> orange-pumpkin</nve-badge>
+  <nve-badge color="red-tomato"><nve-icon name="placeholder"></nve-icon> red-tomato</nve-badge>
+  <nve-badge color="pink-magenta"><nve-icon name="placeholder"></nve-icon> pink-magenta</nve-badge>
+  <nve-badge color="purple-plum"><nve-icon name="placeholder"></nve-icon> purple-plum</nve-badge>
+  <nve-badge color="purple-violet"><nve-icon name="placeholder"></nve-icon> purple-violet</nve-badge>
+  <nve-badge color="purple-lavender"><nve-icon name="placeholder"></nve-icon> purple-lavender</nve-badge>
+  <nve-badge color="pink-rose"><nve-icon name="placeholder"></nve-icon> pink-rose</nve-badge>
+  <nve-badge color="green-jade"><nve-icon name="placeholder"></nve-icon> green-jade</nve-badge>
+  <nve-badge color="lime-pear"><nve-icon name="placeholder"></nve-icon> lime-pear</nve-badge>
+  <nve-badge color="yellow-nova"><nve-icon name="placeholder"></nve-icon> yellow-nova</nve-badge>
+  <nve-badge color="brand-green"><nve-icon name="placeholder"></nve-icon> brand-green</nve-badge>
+</div>
+  `
+};
+
+export const Prominence = {
+  render: () => html`
+<div nve-layout="row gap:sm align:wrap">
+  <nve-badge prominence="emphasis" color="red-cardinal"><nve-icon name="placeholder"></nve-icon> red-cardinal</nve-badge>
+  <nve-badge prominence="emphasis" color="gray-slate"><nve-icon name="placeholder"></nve-icon> gray-slate</nve-badge>
+  <nve-badge prominence="emphasis" color="gray-denim"><nve-icon name="placeholder"></nve-icon> gray-denim</nve-badge>
+  <nve-badge prominence="emphasis" color="blue-indigo"><nve-icon name="placeholder"></nve-icon> blue-indigo</nve-badge>
+  <nve-badge prominence="emphasis" color="blue-cobalt"><nve-icon name="placeholder"></nve-icon> blue-cobalt</nve-badge>
+  <nve-badge prominence="emphasis" color="blue-sky"><nve-icon name="placeholder"></nve-icon> blue-sky</nve-badge>
+  <nve-badge prominence="emphasis" color="teal-cyan"><nve-icon name="placeholder"></nve-icon> teal-cyan</nve-badge>
+  <nve-badge prominence="emphasis" color="green-mint"><nve-icon name="placeholder"></nve-icon> green-mint</nve-badge>
+  <nve-badge prominence="emphasis" color="teal-seafoam"><nve-icon name="placeholder"></nve-icon> teal-seafoam</nve-badge>
+  <nve-badge prominence="emphasis" color="green-grass"><nve-icon name="placeholder"></nve-icon> green-grass</nve-badge>
+  <nve-badge prominence="emphasis" color="yellow-amber"><nve-icon name="placeholder"></nve-icon> yellow-amber</nve-badge>
+  <nve-badge prominence="emphasis" color="orange-pumpkin"><nve-icon name="placeholder"></nve-icon> orange-pumpkin</nve-badge>
+  <nve-badge prominence="emphasis" color="red-tomato"><nve-icon name="placeholder"></nve-icon> red-tomato</nve-badge>
+  <nve-badge prominence="emphasis" color="pink-magenta"><nve-icon name="placeholder"></nve-icon> pink-magenta</nve-badge>
+  <nve-badge prominence="emphasis" color="purple-plum"><nve-icon name="placeholder"></nve-icon> purple-plum</nve-badge>
+  <nve-badge prominence="emphasis" color="purple-violet"><nve-icon name="placeholder"></nve-icon> purple-violet</nve-badge>
+  <nve-badge prominence="emphasis" color="purple-lavender"><nve-icon name="placeholder"></nve-icon> purple-lavender</nve-badge>
+  <nve-badge prominence="emphasis" color="pink-rose"><nve-icon name="placeholder"></nve-icon> pink-rose</nve-badge>
+  <nve-badge prominence="emphasis" color="green-jade"><nve-icon name="placeholder"></nve-icon> green-jade</nve-badge>
+  <nve-badge prominence="emphasis" color="lime-pear"><nve-icon name="placeholder"></nve-icon> lime-pear</nve-badge>
+  <nve-badge prominence="emphasis" color="yellow-nova"><nve-icon name="placeholder"></nve-icon> yellow-nova</nve-badge>
+  <nve-badge prominence="emphasis" color="brand-green"><nve-icon name="placeholder"></nve-icon> brand-green</nve-badge>
+</div>
+  `
+};
+
+export const Flat = {
+  render: () => html`
+<div nve-layout="row gap:sm align:wrap">
+  <nve-badge container="flat" color="red-cardinal"><nve-icon name="placeholder"></nve-icon> red-cardinal</nve-badge>
+  <nve-badge container="flat" color="gray-slate"><nve-icon name="placeholder"></nve-icon> gray-slate</nve-badge>
+  <nve-badge container="flat" color="gray-denim"><nve-icon name="placeholder"></nve-icon> gray-denim</nve-badge>
+  <nve-badge container="flat" color="blue-indigo"><nve-icon name="placeholder"></nve-icon> blue-indigo</nve-badge>
+  <nve-badge container="flat" color="blue-cobalt"><nve-icon name="placeholder"></nve-icon> blue-cobalt</nve-badge>
+  <nve-badge container="flat" color="blue-sky"><nve-icon name="placeholder"></nve-icon> blue-sky</nve-badge>
+  <nve-badge container="flat" color="teal-cyan"><nve-icon name="placeholder"></nve-icon> teal-cyan</nve-badge>
+  <nve-badge container="flat" color="green-mint"><nve-icon name="placeholder"></nve-icon> green-mint</nve-badge>
+  <nve-badge container="flat" color="teal-seafoam"><nve-icon name="placeholder"></nve-icon> teal-seafoam</nve-badge>
+  <nve-badge container="flat" color="green-grass"><nve-icon name="placeholder"></nve-icon> green-grass</nve-badge>
+  <nve-badge container="flat" color="yellow-amber"><nve-icon name="placeholder"></nve-icon> yellow-amber</nve-badge>
+  <nve-badge container="flat" color="orange-pumpkin"><nve-icon name="placeholder"></nve-icon> orange-pumpkin</nve-badge>
+  <nve-badge container="flat" color="red-tomato"><nve-icon name="placeholder"></nve-icon> red-tomato</nve-badge>
+  <nve-badge container="flat" color="pink-magenta"><nve-icon name="placeholder"></nve-icon> pink-magenta</nve-badge>
+  <nve-badge container="flat" color="purple-plum"><nve-icon name="placeholder"></nve-icon> purple-plum</nve-badge>
+  <nve-badge container="flat" color="purple-violet"><nve-icon name="placeholder"></nve-icon> purple-violet</nve-badge>
+  <nve-badge container="flat" color="purple-lavender"><nve-icon name="placeholder"></nve-icon> purple-lavender</nve-badge>
+  <nve-badge container="flat" color="pink-rose"><nve-icon name="placeholder"></nve-icon> pink-rose</nve-badge>
+  <nve-badge container="flat" color="green-jade"><nve-icon name="placeholder"></nve-icon> green-jade</nve-badge>
+  <nve-badge container="flat" color="lime-pear"><nve-icon name="placeholder"></nve-icon> lime-pear</nve-badge>
+  <nve-badge container="flat" color="yellow-nova"><nve-icon name="placeholder"></nve-icon> yellow-nova</nve-badge>
+  <nve-badge container="flat" color="brand-green"><nve-icon name="placeholder"></nve-icon> brand-green</nve-badge>
 </div>
   `
 };
