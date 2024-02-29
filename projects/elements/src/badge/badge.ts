@@ -12,7 +12,8 @@ import {
   Color,
   colorStateStyles,
   attachInternals,
-  I18nController
+  I18nController,
+  Prominence
 } from '@elements/elements/internal';
 import styles from './badge.css?inline';
 
@@ -48,6 +49,9 @@ export class Badge extends LitElement {
    * Determines the container styles of component. Flat is used for nesting within other containers.
    */
   @property({ type: String, reflect: true }) container?: 'flat';
+
+  /** Determines the visual prominence or weight */
+  @property({ type: String, reflect: true }) prominence?: Extract<Prominence, 'emphasis'>;
 
   static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);
 

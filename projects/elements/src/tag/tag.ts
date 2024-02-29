@@ -7,7 +7,8 @@ import {
   MlvBaseButton,
   TypeClosableController,
   useStyles,
-  colorStateStyles
+  colorStateStyles,
+  Prominence
 } from '@elements/elements/internal';
 import { Icon } from '@elements/elements/icon';
 import styles from './tag.css?inline';
@@ -45,6 +46,9 @@ export class Tag extends MlvBaseButton {
 
   /** Determines the color of the tag. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=29-10&mode=design&t=uFeSKovl7yrHakis-0) */
   @property({ type: String, reflect: true }) color: Color;
+
+  /** Determines the visual prominence or weight */
+  @property({ type: String, reflect: true }) prominence?: Extract<Prominence, 'emphasis'>;
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 

@@ -1,5 +1,5 @@
 {
-  "created": "2024-02-23T23:14:11.002Z",
+  "created": "2024-02-29T14:54:05.582Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -118,10 +118,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.304,
+            "kb": 18.275,
             "requests": {
               "index.js": {
-                "kb": 17.72,
+                "kb": 17.691,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -234,10 +234,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.304,
+            "kb": 18.275,
             "requests": {
               "index.js": {
-                "kb": 17.72,
+                "kb": 17.691,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -330,10 +330,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.304,
+            "kb": 18.275,
             "requests": {
               "index.js": {
-                "kb": 17.72,
+                "kb": 17.691,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -398,10 +398,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.304,
+            "kb": 18.275,
             "requests": {
               "index.js": {
-                "kb": 17.72,
+                "kb": 17.691,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -540,10 +540,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.481,
+            "kb": 18.518,
             "requests": {
               "index.js": {
-                "kb": 17.707,
+                "kb": 17.744,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -609,16 +609,48 @@
           {
             "name": "status",
             "description": "Defines visual treatment to represent a ongoing task or support status."
+          },
+          {
+            "name": "prominence",
+            "description": "Determines the visual prominence or weight, emphasis is used for banner style alerts"
+          },
+          {
+            "name": "container",
+            "description": "Determines the container bounds of the element"
           }
         ],
         "attributes": [
           {
             "name": "status",
             "type": {
-              "text": "'accent' | 'warning' | 'success' | 'danger'"
+              "text": "'accent' | 'warning' | 'success' | 'danger' | default"
             },
             "description": "Defines the visual treatment to represent a interaction status. (tasks, support, trends)",
             "fieldName": "status",
+            "inheritedFrom": {
+              "name": "AlertGroup",
+              "module": "/src/alert/alert-group.js"
+            }
+          },
+          {
+            "name": "prominence",
+            "type": {
+              "text": "Extract<Prominence, 'emphasis'> | default"
+            },
+            "description": "Determines the visual prominence or weight of an element",
+            "fieldName": "prominence",
+            "inheritedFrom": {
+              "name": "AlertGroup",
+              "module": "/src/alert/alert-group.js"
+            }
+          },
+          {
+            "name": "container",
+            "type": {
+              "text": "Extract<Container, 'full'> | default"
+            },
+            "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
+            "fieldName": "container",
             "inheritedFrom": {
               "name": "AlertGroup",
               "module": "/src/alert/alert-group.js"
@@ -655,10 +687,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.298,
+            "kb": 19.334,
             "requests": {
               "index.js": {
-                "kb": 17.712,
+                "kb": 17.748,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -728,16 +760,40 @@
           {
             "name": "status",
             "description": "Defines visual treatment to represent a ongoing task or support status."
+          },
+          {
+            "name": "prominence",
+            "description": "Determines the visual prominence or weight, emphasis is used for banner style alerts"
+          },
+          {
+            "name": "container",
+            "description": "Determines the container bounds of the element"
           }
         ],
         "attributes": [
           {
             "name": "status",
             "type": {
-              "text": "'accent' | 'warning' | 'success' | 'danger'"
+              "text": "'accent' | 'warning' | 'success' | 'danger' | default"
             },
             "description": "Defines the visual treatment to represent a interaction status. (tasks, support, trends)",
             "fieldName": "status"
+          },
+          {
+            "name": "prominence",
+            "type": {
+              "text": "Extract<Prominence, 'emphasis'> | default"
+            },
+            "description": "Determines the visual prominence or weight of an element",
+            "fieldName": "prominence"
+          },
+          {
+            "name": "container",
+            "type": {
+              "text": "Extract<Container, 'full'> | default"
+            },
+            "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
+            "fieldName": "container"
           }
         ],
         "cssProperties": [
@@ -770,10 +826,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.485,
+            "kb": 18.521,
             "requests": {
               "index.js": {
-                "kb": 17.711,
+                "kb": 17.747,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -813,6 +869,11 @@
           "id": "Actions",
           "file": "alert-group.stories.ts",
           "template": "<div nve-layout=\"column gap:md\">\n  <nve-alert-group>\n    <nve-alert> Standard <nve-button slot=\"actions\" interaction=\"flat\">action</nve-button> </nve-alert>\n  </nve-alert-group>\n  <nve-alert-group status=\"accent\">\n    <nve-alert> Standard <nve-button slot=\"actions\" interaction=\"flat\">action</nve-button> </nve-alert>\n  </nve-alert-group>\n  <nve-alert-group status=\"warning\">\n    <nve-alert> Warning <nve-button slot=\"actions\" interaction=\"flat\">action</nve-button> </nve-alert>\n  </nve-alert-group>\n  <nve-alert-group status=\"success\">\n    <nve-alert> Success <nve-button slot=\"actions\" interaction=\"flat\">action</nve-button> </nve-alert>\n  </nve-alert-group>\n  <nve-alert-group status=\"danger\">\n    <nve-alert> Danger <nve-button slot=\"actions\" interaction=\"flat\">action</nve-button> </nve-alert>\n  </nve-alert-group>\n</div>\n"
+        },
+        {
+          "id": "Prominence",
+          "file": "alert-group.stories.ts",
+          "template": "<div nve-layout=\"column gap:md\">\n  <nve-alert-group prominence=\"emphasis\" container=\"full\">\n    <nve-alert closable\n      ><span slot=\"prefix\">Standard</span> banner message\n      <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a></nve-alert\n    >\n  </nve-alert-group>\n\n  <nve-alert-group status=\"accent\" prominence=\"emphasis\" container=\"full\">\n    <nve-alert closable\n      ><span slot=\"prefix\">Accent</span> banner message\n      <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a></nve-alert\n    >\n  </nve-alert-group>\n\n  <nve-alert-group status=\"warning\" prominence=\"emphasis\" container=\"full\">\n    <nve-alert closable\n      ><span slot=\"prefix\">Warning</span> banner message\n      <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a></nve-alert\n    >\n  </nve-alert-group>\n\n  <nve-alert-group status=\"success\" prominence=\"emphasis\" container=\"full\">\n    <nve-alert closable\n      ><span slot=\"prefix\">Success</span> banner message\n      <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a></nve-alert\n    >\n  </nve-alert-group>\n\n  <nve-alert-group status=\"danger\" prominence=\"emphasis\" container=\"full\">\n    <nve-alert closable\n      ><span slot=\"prefix\">Danger</span> banner message\n      <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a></nve-alert\n    >\n  </nve-alert-group>\n</div>\n"
         },
         {
           "id": "Themes",
@@ -884,10 +945,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.467,
+            "kb": 18.503,
             "requests": {
               "index.js": {
-                "kb": 17.71,
+                "kb": 17.746,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -973,6 +1034,10 @@
             "description": "Determines the container styles of component. Flat is used for nesting within other containers."
           },
           {
+            "name": "prominence",
+            "description": "Determines the visual prominence or weight"
+          },
+          {
             "name": "i18n",
             "description": "Enables internal string values to be updated for internationalization."
           }
@@ -1007,6 +1072,14 @@
             },
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
             "fieldName": "container"
+          },
+          {
+            "name": "prominence",
+            "type": {
+              "text": "Extract<Prominence, 'emphasis'> | default"
+            },
+            "description": "Determines the visual prominence or weight of an element",
+            "fieldName": "prominence"
           },
           {
             "name": "i18n",
@@ -1050,15 +1123,11 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.432,
+            "kb": 14.658,
             "requests": {
               "index.js": {
                 "kb": 14.658,
                 "name": "index.js"
-              },
-              "information-circle-stroke.svg.js": {
-                "kb": 0.774,
-                "name": "information-circle-stroke.svg.js"
               }
             }
           },
@@ -1085,12 +1154,12 @@
           "template": "<div nve-layout=\"row gap:xs align:wrap\">\n  <nve-badge status=\"scheduled\">scheduled</nve-badge>\n  <nve-badge status=\"queued\">queued</nve-badge>\n  <nve-badge status=\"pending\">pending</nve-badge>\n  <nve-badge status=\"starting\">starting</nve-badge>\n  <nve-badge status=\"running\">running</nve-badge>\n  <nve-badge status=\"restarting\">restarting</nve-badge>\n  <nve-badge status=\"stopping\">stopping</nve-badge>\n  <nve-badge status=\"finished\">finished</nve-badge>\n  <nve-badge status=\"failed\">failed</nve-badge>\n  <nve-badge status=\"unknown\">unknown</nve-badge>\n  <nve-badge status=\"ignored\">ignored</nve-badge>\n</div>\n"
         },
         {
-          "id": "Flat",
+          "id": "StatusFlat",
           "file": "badge.stories.ts",
           "template": "<div nve-layout=\"row gap:md align:wrap\">\n  <nve-badge container=\"flat\" status=\"scheduled\">scheduled</nve-badge>\n  <nve-badge container=\"flat\" status=\"queued\">queued</nve-badge>\n  <nve-badge container=\"flat\" status=\"pending\">pending</nve-badge>\n  <nve-badge container=\"flat\" status=\"starting\">starting</nve-badge>\n  <nve-badge container=\"flat\" status=\"running\">running</nve-badge>\n  <nve-badge container=\"flat\" status=\"restarting\">restarting</nve-badge>\n  <nve-badge container=\"flat\" status=\"stopping\">stopping</nve-badge>\n  <nve-badge container=\"flat\" status=\"finished\">finished</nve-badge>\n  <nve-badge container=\"flat\" status=\"failed\">failed</nve-badge>\n  <nve-badge container=\"flat\" status=\"unknown\">unknown</nve-badge>\n  <nve-badge container=\"flat\" status=\"ignored\">ignored</nve-badge>\n</div>\n"
         },
         {
-          "id": "Icon",
+          "id": "StatusIcon",
           "file": "badge.stories.ts",
           "template": "<div nve-layout=\"row gap:md align:wrap\">\n  <nve-badge container=\"flat\" status=\"scheduled\" aria-label=\"scheduled\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"queued\" aria-label=\"queued\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"pending\" aria-label=\"pending\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"starting\" aria-label=\"starting\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"running\" aria-label=\"running\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"restarting\" aria-label=\"restarting\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"stopping\" aria-label=\"stopping\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"finished\" aria-label=\"finished\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"failed\" aria-label=\"failed\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"unknown\" aria-label=\"unknown\"></nve-badge>\n  <nve-badge container=\"flat\" status=\"ignored\" aria-label=\"ignored\"></nve-badge>\n</div>\n"
         },
@@ -1117,7 +1186,17 @@
         {
           "id": "Color",
           "file": "badge.stories.ts",
-          "template": "<div nve-layout=\"row gap:xs align:wrap\">\n  <nve-badge color=\"red-cardinal\">red-cardinal</nve-badge>\n  <nve-badge color=\"gray-slate\">gray-slate</nve-badge>\n  <nve-badge color=\"gray-denim\">gray-denim</nve-badge>\n  <nve-badge color=\"blue-indigo\">blue-indigo</nve-badge>\n  <nve-badge color=\"blue-cobalt\">blue-cobalt</nve-badge>\n  <nve-badge color=\"blue-sky\">blue-sky</nve-badge>\n  <nve-badge color=\"teal-cyan\">teal-cyan</nve-badge>\n  <nve-badge color=\"green-mint\">green-mint</nve-badge>\n  <nve-badge color=\"teal-seafoam\">teal-seafoam</nve-badge>\n  <nve-badge color=\"green-grass\">green-grass</nve-badge>\n  <nve-badge color=\"yellow-amber\">yellow-amber</nve-badge>\n  <nve-badge color=\"orange-pumpkin\">orange-pumpkin</nve-badge>\n  <nve-badge color=\"red-tomato\">red-tomato</nve-badge>\n  <nve-badge color=\"pink-magenta\">pink-magenta</nve-badge>\n  <nve-badge color=\"purple-plum\">purple-plum</nve-badge>\n  <nve-badge color=\"purple-violet\">purple-violet</nve-badge>\n  <nve-badge color=\"purple-lavender\">purple-lavender</nve-badge>\n  <nve-badge color=\"pink-rose\">pink-rose</nve-badge>\n  <nve-badge color=\"green-jade\">green-jade</nve-badge>\n  <nve-badge color=\"lime-pear\">lime-pear</nve-badge>\n  <nve-badge color=\"yellow-nova\">yellow-nova</nve-badge>\n  <nve-badge color=\"brand-green\">brand-green</nve-badge>\n</div>\n"
+          "template": "<div nve-layout=\"row gap:sm align:wrap\">\n  <nve-badge color=\"red-cardinal\"><nve-icon name=\"placeholder\"></nve-icon> red-cardinal</nve-badge>\n  <nve-badge color=\"gray-slate\"><nve-icon name=\"placeholder\"></nve-icon> gray-slate</nve-badge>\n  <nve-badge color=\"gray-denim\"><nve-icon name=\"placeholder\"></nve-icon> gray-denim</nve-badge>\n  <nve-badge color=\"blue-indigo\"><nve-icon name=\"placeholder\"></nve-icon> blue-indigo</nve-badge>\n  <nve-badge color=\"blue-cobalt\"><nve-icon name=\"placeholder\"></nve-icon> blue-cobalt</nve-badge>\n  <nve-badge color=\"blue-sky\"><nve-icon name=\"placeholder\"></nve-icon> blue-sky</nve-badge>\n  <nve-badge color=\"teal-cyan\"><nve-icon name=\"placeholder\"></nve-icon> teal-cyan</nve-badge>\n  <nve-badge color=\"green-mint\"><nve-icon name=\"placeholder\"></nve-icon> green-mint</nve-badge>\n  <nve-badge color=\"teal-seafoam\"><nve-icon name=\"placeholder\"></nve-icon> teal-seafoam</nve-badge>\n  <nve-badge color=\"green-grass\"><nve-icon name=\"placeholder\"></nve-icon> green-grass</nve-badge>\n  <nve-badge color=\"yellow-amber\"><nve-icon name=\"placeholder\"></nve-icon> yellow-amber</nve-badge>\n  <nve-badge color=\"orange-pumpkin\"><nve-icon name=\"placeholder\"></nve-icon> orange-pumpkin</nve-badge>\n  <nve-badge color=\"red-tomato\"><nve-icon name=\"placeholder\"></nve-icon> red-tomato</nve-badge>\n  <nve-badge color=\"pink-magenta\"><nve-icon name=\"placeholder\"></nve-icon> pink-magenta</nve-badge>\n  <nve-badge color=\"purple-plum\"><nve-icon name=\"placeholder\"></nve-icon> purple-plum</nve-badge>\n  <nve-badge color=\"purple-violet\"><nve-icon name=\"placeholder\"></nve-icon> purple-violet</nve-badge>\n  <nve-badge color=\"purple-lavender\"><nve-icon name=\"placeholder\"></nve-icon> purple-lavender</nve-badge>\n  <nve-badge color=\"pink-rose\"><nve-icon name=\"placeholder\"></nve-icon> pink-rose</nve-badge>\n  <nve-badge color=\"green-jade\"><nve-icon name=\"placeholder\"></nve-icon> green-jade</nve-badge>\n  <nve-badge color=\"lime-pear\"><nve-icon name=\"placeholder\"></nve-icon> lime-pear</nve-badge>\n  <nve-badge color=\"yellow-nova\"><nve-icon name=\"placeholder\"></nve-icon> yellow-nova</nve-badge>\n  <nve-badge color=\"brand-green\"><nve-icon name=\"placeholder\"></nve-icon> brand-green</nve-badge>\n</div>\n"
+        },
+        {
+          "id": "Prominence",
+          "file": "badge.stories.ts",
+          "template": "<div nve-layout=\"row gap:sm align:wrap\">\n  <nve-badge prominence=\"emphasis\" color=\"red-cardinal\"\n    ><nve-icon name=\"placeholder\"></nve-icon> red-cardinal</nve-badge\n  >\n  <nve-badge prominence=\"emphasis\" color=\"gray-slate\"><nve-icon name=\"placeholder\"></nve-icon> gray-slate</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"gray-denim\"><nve-icon name=\"placeholder\"></nve-icon> gray-denim</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"blue-indigo\"><nve-icon name=\"placeholder\"></nve-icon> blue-indigo</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"blue-cobalt\"><nve-icon name=\"placeholder\"></nve-icon> blue-cobalt</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"blue-sky\"><nve-icon name=\"placeholder\"></nve-icon> blue-sky</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"teal-cyan\"><nve-icon name=\"placeholder\"></nve-icon> teal-cyan</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"green-mint\"><nve-icon name=\"placeholder\"></nve-icon> green-mint</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"teal-seafoam\"\n    ><nve-icon name=\"placeholder\"></nve-icon> teal-seafoam</nve-badge\n  >\n  <nve-badge prominence=\"emphasis\" color=\"green-grass\"><nve-icon name=\"placeholder\"></nve-icon> green-grass</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"yellow-amber\"\n    ><nve-icon name=\"placeholder\"></nve-icon> yellow-amber</nve-badge\n  >\n  <nve-badge prominence=\"emphasis\" color=\"orange-pumpkin\"\n    ><nve-icon name=\"placeholder\"></nve-icon> orange-pumpkin</nve-badge\n  >\n  <nve-badge prominence=\"emphasis\" color=\"red-tomato\"><nve-icon name=\"placeholder\"></nve-icon> red-tomato</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"pink-magenta\"\n    ><nve-icon name=\"placeholder\"></nve-icon> pink-magenta</nve-badge\n  >\n  <nve-badge prominence=\"emphasis\" color=\"purple-plum\"><nve-icon name=\"placeholder\"></nve-icon> purple-plum</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"purple-violet\"\n    ><nve-icon name=\"placeholder\"></nve-icon> purple-violet</nve-badge\n  >\n  <nve-badge prominence=\"emphasis\" color=\"purple-lavender\"\n    ><nve-icon name=\"placeholder\"></nve-icon> purple-lavender</nve-badge\n  >\n  <nve-badge prominence=\"emphasis\" color=\"pink-rose\"><nve-icon name=\"placeholder\"></nve-icon> pink-rose</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"green-jade\"><nve-icon name=\"placeholder\"></nve-icon> green-jade</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"lime-pear\"><nve-icon name=\"placeholder\"></nve-icon> lime-pear</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"yellow-nova\"><nve-icon name=\"placeholder\"></nve-icon> yellow-nova</nve-badge>\n  <nve-badge prominence=\"emphasis\" color=\"brand-green\"><nve-icon name=\"placeholder\"></nve-icon> brand-green</nve-badge>\n</div>\n"
+        },
+        {
+          "id": "Flat",
+          "file": "badge.stories.ts",
+          "template": "<div nve-layout=\"row gap:sm align:wrap\">\n  <nve-badge container=\"flat\" color=\"red-cardinal\"><nve-icon name=\"placeholder\"></nve-icon> red-cardinal</nve-badge>\n  <nve-badge container=\"flat\" color=\"gray-slate\"><nve-icon name=\"placeholder\"></nve-icon> gray-slate</nve-badge>\n  <nve-badge container=\"flat\" color=\"gray-denim\"><nve-icon name=\"placeholder\"></nve-icon> gray-denim</nve-badge>\n  <nve-badge container=\"flat\" color=\"blue-indigo\"><nve-icon name=\"placeholder\"></nve-icon> blue-indigo</nve-badge>\n  <nve-badge container=\"flat\" color=\"blue-cobalt\"><nve-icon name=\"placeholder\"></nve-icon> blue-cobalt</nve-badge>\n  <nve-badge container=\"flat\" color=\"blue-sky\"><nve-icon name=\"placeholder\"></nve-icon> blue-sky</nve-badge>\n  <nve-badge container=\"flat\" color=\"teal-cyan\"><nve-icon name=\"placeholder\"></nve-icon> teal-cyan</nve-badge>\n  <nve-badge container=\"flat\" color=\"green-mint\"><nve-icon name=\"placeholder\"></nve-icon> green-mint</nve-badge>\n  <nve-badge container=\"flat\" color=\"teal-seafoam\"><nve-icon name=\"placeholder\"></nve-icon> teal-seafoam</nve-badge>\n  <nve-badge container=\"flat\" color=\"green-grass\"><nve-icon name=\"placeholder\"></nve-icon> green-grass</nve-badge>\n  <nve-badge container=\"flat\" color=\"yellow-amber\"><nve-icon name=\"placeholder\"></nve-icon> yellow-amber</nve-badge>\n  <nve-badge container=\"flat\" color=\"orange-pumpkin\"><nve-icon name=\"placeholder\"></nve-icon> orange-pumpkin</nve-badge>\n  <nve-badge container=\"flat\" color=\"red-tomato\"><nve-icon name=\"placeholder\"></nve-icon> red-tomato</nve-badge>\n  <nve-badge container=\"flat\" color=\"pink-magenta\"><nve-icon name=\"placeholder\"></nve-icon> pink-magenta</nve-badge>\n  <nve-badge container=\"flat\" color=\"purple-plum\"><nve-icon name=\"placeholder\"></nve-icon> purple-plum</nve-badge>\n  <nve-badge container=\"flat\" color=\"purple-violet\"><nve-icon name=\"placeholder\"></nve-icon> purple-violet</nve-badge>\n  <nve-badge container=\"flat\" color=\"purple-lavender\"\n    ><nve-icon name=\"placeholder\"></nve-icon> purple-lavender</nve-badge\n  >\n  <nve-badge container=\"flat\" color=\"pink-rose\"><nve-icon name=\"placeholder\"></nve-icon> pink-rose</nve-badge>\n  <nve-badge container=\"flat\" color=\"green-jade\"><nve-icon name=\"placeholder\"></nve-icon> green-jade</nve-badge>\n  <nve-badge container=\"flat\" color=\"lime-pear\"><nve-icon name=\"placeholder\"></nve-icon> lime-pear</nve-badge>\n  <nve-badge container=\"flat\" color=\"yellow-nova\"><nve-icon name=\"placeholder\"></nve-icon> yellow-nova</nve-badge>\n  <nve-badge container=\"flat\" color=\"brand-green\"><nve-icon name=\"placeholder\"></nve-icon> brand-green</nve-badge>\n</div>\n"
         },
         {
           "id": "Overflow",
@@ -1173,10 +1252,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.423,
+            "kb": 15.395,
             "requests": {
               "index.js": {
-                "kb": 14.775,
+                "kb": 14.747,
                 "name": "index.js"
               },
               "chevron.svg.js": {
@@ -1468,10 +1547,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.138,
+            "kb": 10.123,
             "requests": {
               "index.js": {
-                "kb": 10.138,
+                "kb": 10.123,
                 "name": "index.js"
               }
             }
@@ -1657,10 +1736,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.957,
+            "kb": 9.942,
             "requests": {
               "index.js": {
-                "kb": 9.957,
+                "kb": 9.942,
                 "name": "index.js"
               }
             }
@@ -1806,10 +1885,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.44,
+            "kb": 8.424,
             "requests": {
               "index.js": {
-                "kb": 8.44,
+                "kb": 8.424,
                 "name": "index.js"
               }
             }
@@ -1930,10 +2009,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.44,
+            "kb": 8.424,
             "requests": {
               "index.js": {
-                "kb": 8.44,
+                "kb": 8.424,
                 "name": "index.js"
               }
             }
@@ -1991,10 +2070,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.44,
+            "kb": 8.424,
             "requests": {
               "index.js": {
-                "kb": 8.44,
+                "kb": 8.424,
                 "name": "index.js"
               }
             }
@@ -2070,10 +2149,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.44,
+            "kb": 8.424,
             "requests": {
               "index.js": {
-                "kb": 8.44,
+                "kb": 8.424,
                 "name": "index.js"
               }
             }
@@ -2230,10 +2309,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.034,
+            "kb": 22.095,
             "requests": {
               "index.js": {
-                "kb": 22.034,
+                "kb": 22.095,
                 "name": "index.js"
               }
             }
@@ -2330,10 +2409,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.034,
+            "kb": 22.095,
             "requests": {
               "index.js": {
-                "kb": 22.034,
+                "kb": 22.095,
                 "name": "index.js"
               }
             }
@@ -2479,10 +2558,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.415,
+            "kb": 23.466,
             "requests": {
               "index.js": {
-                "kb": 22.361,
+                "kb": 22.412,
                 "name": "index.js"
               },
               "dropper.svg.js": {
@@ -2718,10 +2797,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 38.113,
+            "kb": 38.284,
             "requests": {
               "index.js": {
-                "kb": 37.339,
+                "kb": 37.51,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -2954,10 +3033,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.432,
+            "kb": 22.495,
             "requests": {
               "index.js": {
-                "kb": 21.658,
+                "kb": 21.721,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3040,10 +3119,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.432,
+            "kb": 22.495,
             "requests": {
               "index.js": {
-                "kb": 21.658,
+                "kb": 21.721,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3140,10 +3219,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.432,
+            "kb": 22.495,
             "requests": {
               "index.js": {
-                "kb": 21.658,
+                "kb": 21.721,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3293,10 +3372,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.083,
+            "kb": 23.138,
             "requests": {
               "index.js": {
-                "kb": 22.19,
+                "kb": 22.245,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3482,10 +3561,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.085,
+            "kb": 23.14,
             "requests": {
               "index.js": {
-                "kb": 22.192,
+                "kb": 22.247,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3725,10 +3804,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.233,
+            "kb": 28.209,
             "requests": {
               "index.js": {
-                "kb": 27.421,
+                "kb": 27.397,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3836,10 +3915,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.233,
+            "kb": 28.209,
             "requests": {
               "index.js": {
-                "kb": 27.421,
+                "kb": 27.397,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3896,10 +3975,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.233,
+            "kb": 28.209,
             "requests": {
               "index.js": {
-                "kb": 27.421,
+                "kb": 27.397,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3978,10 +4057,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.022,
+            "kb": 8.004,
             "requests": {
               "index.js": {
-                "kb": 8.022,
+                "kb": 8.004,
                 "name": "index.js"
               }
             }
@@ -4127,10 +4206,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.471,
+            "kb": 8.455,
             "requests": {
               "index.js": {
-                "kb": 8.471,
+                "kb": 8.455,
                 "name": "index.js"
               }
             }
@@ -4391,10 +4470,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.512,
+            "kb": 28.485,
             "requests": {
               "index.js": {
-                "kb": 27.7,
+                "kb": 27.673,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4497,10 +4576,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.512,
+            "kb": 28.485,
             "requests": {
               "index.js": {
-                "kb": 27.7,
+                "kb": 27.673,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4557,10 +4636,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.512,
+            "kb": 28.485,
             "requests": {
               "index.js": {
-                "kb": 27.7,
+                "kb": 27.673,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4617,10 +4696,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.512,
+            "kb": 28.485,
             "requests": {
               "index.js": {
-                "kb": 27.7,
+                "kb": 27.673,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4827,10 +4906,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.228,
+            "kb": 28.2,
             "requests": {
               "index.js": {
-                "kb": 27.416,
+                "kb": 27.388,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5049,10 +5128,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 21.852,
+            "kb": 21.911,
             "requests": {
               "index.js": {
-                "kb": 21.852,
+                "kb": 21.911,
                 "name": "index.js"
               }
             }
@@ -5176,10 +5255,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.611,
+            "kb": 19.58,
             "requests": {
               "index.js": {
-                "kb": 19.611,
+                "kb": 19.58,
                 "name": "index.js"
               }
             }
@@ -5460,10 +5539,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.611,
+            "kb": 19.58,
             "requests": {
               "index.js": {
-                "kb": 19.611,
+                "kb": 19.58,
                 "name": "index.js"
               }
             }
@@ -5596,10 +5675,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.611,
+            "kb": 19.58,
             "requests": {
               "index.js": {
-                "kb": 19.611,
+                "kb": 19.58,
                 "name": "index.js"
               }
             }
@@ -5666,10 +5745,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.611,
+            "kb": 19.58,
             "requests": {
               "index.js": {
-                "kb": 19.611,
+                "kb": 19.58,
                 "name": "index.js"
               }
             }
@@ -5733,10 +5812,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.611,
+            "kb": 19.58,
             "requests": {
               "index.js": {
-                "kb": 19.611,
+                "kb": 19.58,
                 "name": "index.js"
               }
             }
@@ -5797,10 +5876,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.611,
+            "kb": 19.58,
             "requests": {
               "index.js": {
-                "kb": 19.611,
+                "kb": 19.58,
                 "name": "index.js"
               }
             }
@@ -5876,10 +5955,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.611,
+            "kb": 19.58,
             "requests": {
               "index.js": {
-                "kb": 19.611,
+                "kb": 19.58,
                 "name": "index.js"
               }
             }
@@ -5989,10 +6068,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 13.461,
+            "kb": 13.43,
             "requests": {
               "index.js": {
-                "kb": 12.704,
+                "kb": 12.673,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -6344,10 +6423,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.52,
+            "kb": 15.489,
             "requests": {
               "index.js": {
-                "kb": 15.52,
+                "kb": 15.489,
                 "name": "index.js"
               }
             }
@@ -6603,10 +6682,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.454,
+            "kb": 22.497,
             "requests": {
               "index.js": {
-                "kb": 22.454,
+                "kb": 22.497,
                 "name": "index.js"
               }
             }
@@ -6688,10 +6767,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.454,
+            "kb": 22.497,
             "requests": {
               "index.js": {
-                "kb": 22.454,
+                "kb": 22.497,
                 "name": "index.js"
               }
             }
@@ -6886,10 +6965,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.075,
+            "kb": 9.122,
             "requests": {
               "index.js": {
-                "kb": 9.075,
+                "kb": 9.122,
                 "name": "index.js"
               }
             }
@@ -6986,10 +7065,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.252,
+            "kb": 11.237,
             "requests": {
               "index.js": {
-                "kb": 11.252,
+                "kb": 11.237,
                 "name": "index.js"
               }
             }
@@ -7283,10 +7362,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.252,
+            "kb": 11.237,
             "requests": {
               "index.js": {
-                "kb": 11.252,
+                "kb": 11.237,
                 "name": "index.js"
               }
             }
@@ -7432,10 +7511,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.084,
+            "kb": 23.14,
             "requests": {
               "index.js": {
-                "kb": 22.191,
+                "kb": 22.247,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -7685,10 +7764,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.591,
+            "kb": 28.563,
             "requests": {
               "index.js": {
-                "kb": 27.817,
+                "kb": 27.789,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7822,10 +7901,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.591,
+            "kb": 28.563,
             "requests": {
               "index.js": {
-                "kb": 27.817,
+                "kb": 27.789,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7888,10 +7967,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.65,
+            "kb": 22.623,
             "requests": {
               "index.js": {
-                "kb": 22.65,
+                "kb": 22.623,
                 "name": "index.js"
               }
             }
@@ -8107,10 +8186,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 40.395,
+            "kb": 40.607,
             "requests": {
               "index.js": {
-                "kb": 38.513,
+                "kb": 38.725,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -8136,7 +8215,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 98.61
+        "coverageTotal": 98.8625
       },
       "stories": [
         {
@@ -8188,6 +8267,11 @@
           "id": "LargeValues",
           "file": "pagination.stories.ts",
           "template": "<nve-pagination container=\"inline\" value=\"1\" items=\"10000\" step=\"100\"></nve-pagination>\n"
+        },
+        {
+          "id": "DynamicItems",
+          "file": "pagination.stories.ts",
+          "template": "<nve-pagination disable-step container=\"inline\" value=\"1\" items=\"100\" step=\"20\"></nve-pagination>\n\n<script type=\"module\">\n  const pagination = document.querySelector(\"nve-pagination\");\n  let items = loadItems();\n\n  pagination.addEventListener(\"last-page\", async () => {\n    items = [...items, ...loadItems()];\n    pagination.items = items.length;\n  });\n\n  function loadItems() {\n    return new Array(100).fill(\"\");\n  }\n</script>\n"
         }
       ],
       "behavior": "navigation",
@@ -8324,10 +8408,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.028,
+            "kb": 17.996,
             "requests": {
               "index.js": {
-                "kb": 17.243,
+                "kb": 17.211,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8443,10 +8527,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.028,
+            "kb": 17.996,
             "requests": {
               "index.js": {
-                "kb": 17.243,
+                "kb": 17.211,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8514,10 +8598,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.028,
+            "kb": 17.996,
             "requests": {
               "index.js": {
-                "kb": 17.243,
+                "kb": 17.211,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8590,10 +8674,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.028,
+            "kb": 17.996,
             "requests": {
               "index.js": {
-                "kb": 17.243,
+                "kb": 17.211,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8743,10 +8827,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.203,
+            "kb": 23.253,
             "requests": {
               "index.js": {
-                "kb": 22.262,
+                "kb": 22.312,
                 "name": "index.js"
               },
               "eye.svg.js": {
@@ -8855,10 +8939,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.57,
+            "kb": 8.555,
             "requests": {
               "index.js": {
-                "kb": 8.57,
+                "kb": 8.555,
                 "name": "index.js"
               }
             }
@@ -9009,10 +9093,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.291,
+            "kb": 14.261,
             "requests": {
               "index.js": {
-                "kb": 14.291,
+                "kb": 14.261,
                 "name": "index.js"
               }
             }
@@ -9147,10 +9231,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 40.449,
+            "kb": 40.683,
             "requests": {
               "index.js": {
-                "kb": 38.322,
+                "kb": 38.556,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -9355,10 +9439,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 21.936,
+            "kb": 21.999,
             "requests": {
               "index.js": {
-                "kb": 21.936,
+                "kb": 21.999,
                 "name": "index.js"
               }
             }
@@ -9424,10 +9508,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 21.936,
+            "kb": 21.999,
             "requests": {
               "index.js": {
-                "kb": 21.936,
+                "kb": 21.999,
                 "name": "index.js"
               }
             }
@@ -9573,10 +9657,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.112,
+            "kb": 22.179,
             "requests": {
               "index.js": {
-                "kb": 22.112,
+                "kb": 22.179,
                 "name": "index.js"
               }
             }
@@ -9773,10 +9857,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.949,
+            "kb": 23.001,
             "requests": {
               "index.js": {
-                "kb": 22.26,
+                "kb": 22.312,
                 "name": "index.js"
               },
               "search.svg.js": {
@@ -9984,10 +10068,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 38.244,
+            "kb": 38.405,
             "requests": {
               "index.js": {
-                "kb": 37.01,
+                "kb": 37.171,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -10312,10 +10396,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.866,
+            "kb": 15.841,
             "requests": {
               "index.js": {
-                "kb": 14.974,
+                "kb": 14.949,
                 "name": "index.js"
               },
               "sort-ascending.svg.js": {
@@ -10510,10 +10594,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.026,
+            "kb": 22.082,
             "requests": {
               "index.js": {
-                "kb": 22.026,
+                "kb": 22.082,
                 "name": "index.js"
               }
             }
@@ -10645,10 +10729,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.351,
+            "kb": 11.335,
             "requests": {
               "index.js": {
-                "kb": 11.351,
+                "kb": 11.335,
                 "name": "index.js"
               }
             }
@@ -10934,10 +11018,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.351,
+            "kb": 11.335,
             "requests": {
               "index.js": {
-                "kb": 11.351,
+                "kb": 11.335,
                 "name": "index.js"
               }
             }
@@ -10982,6 +11066,10 @@
           {
             "name": "color",
             "description": "Determines the color of the tag. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=29-10&mode=design&t=uFeSKovl7yrHakis-0)"
+          },
+          {
+            "name": "prominence",
+            "description": "Determines the visual prominence or weight"
           },
           {
             "name": "i18n",
@@ -11047,6 +11135,14 @@
             },
             "description": "Defines a base color from the theme color palette",
             "fieldName": "color"
+          },
+          {
+            "name": "prominence",
+            "type": {
+              "text": "Extract<Prominence, 'emphasis'> | default"
+            },
+            "description": "Determines the visual prominence or weight of an element",
+            "fieldName": "prominence"
           },
           {
             "name": "i18n",
@@ -11196,10 +11292,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.549,
+            "kb": 15.561,
             "requests": {
               "index.js": {
-                "kb": 15.549,
+                "kb": 15.561,
                 "name": "index.js"
               }
             }
@@ -11240,6 +11336,11 @@
           "id": "Color",
           "file": "tag.stories.ts",
           "template": "<div nve-layout=\"row gap:xs align:wrap\">\n  <nve-tag>default-color</nve-tag>\n  <nve-tag color=\"red-cardinal\">red-cardinal</nve-tag>\n  <nve-tag color=\"gray-slate\">gray-slate</nve-tag>\n  <nve-tag color=\"gray-denim\">gray-denim</nve-tag>\n  <nve-tag color=\"blue-indigo\">blue-indigo</nve-tag>\n  <nve-tag color=\"blue-cobalt\">blue-cobalt</nve-tag>\n  <nve-tag color=\"blue-sky\">blue-sky</nve-tag>\n  <nve-tag color=\"teal-cyan\">teal-cyan</nve-tag>\n  <nve-tag color=\"green-mint\">green-mint</nve-tag>\n  <nve-tag color=\"teal-seafoam\">teal-seafoam</nve-tag>\n  <nve-tag color=\"green-grass\">green-grass</nve-tag>\n  <nve-tag color=\"yellow-amber\">yellow-amber</nve-tag>\n  <nve-tag color=\"orange-pumpkin\">orange-pumpkin</nve-tag>\n  <nve-tag color=\"red-tomato\">red-tomato</nve-tag>\n  <nve-tag color=\"pink-magenta\">pink-magenta</nve-tag>\n  <nve-tag color=\"purple-plum\">purple-plum</nve-tag>\n  <nve-tag color=\"purple-violet\">purple-violet</nve-tag>\n  <nve-tag color=\"purple-lavender\">purple-lavender</nve-tag>\n  <nve-tag color=\"pink-rose\">pink-rose</nve-tag>\n  <nve-tag color=\"green-jade\">green-jade</nve-tag>\n  <nve-tag color=\"lime-pear\">lime-pear</nve-tag>\n  <nve-tag color=\"yellow-nova\">yellow-nova</nve-tag>\n  <nve-tag color=\"brand-green\">brand-green</nve-tag>\n</div>\n"
+        },
+        {
+          "id": "Prominence",
+          "file": "tag.stories.ts",
+          "template": "<div nve-layout=\"row gap:xs align:wrap\">\n  <nve-tag prominence=\"emphasis\" color=\"red-cardinal\">red-cardinal</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"gray-slate\">gray-slate</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"gray-denim\">gray-denim</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"blue-indigo\">blue-indigo</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"blue-cobalt\">blue-cobalt</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"blue-sky\">blue-sky</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"teal-cyan\">teal-cyan</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"green-mint\">green-mint</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"teal-seafoam\">teal-seafoam</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"green-grass\">green-grass</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"yellow-amber\">yellow-amber</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"orange-pumpkin\">orange-pumpkin</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"red-tomato\">red-tomato</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"pink-magenta\">pink-magenta</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"purple-plum\">purple-plum</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"purple-violet\">purple-violet</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"purple-lavender\">purple-lavender</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"pink-rose\">pink-rose</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"green-jade\">green-jade</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"lime-pear\">lime-pear</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"yellow-nova\">yellow-nova</nve-tag>\n  <nve-tag prominence=\"emphasis\" color=\"brand-green\">brand-green</nve-tag>\n</div>\n"
         },
         {
           "id": "LightTheme",
@@ -11415,10 +11516,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 21.889,
+            "kb": 21.951,
             "requests": {
               "index.js": {
-                "kb": 21.889,
+                "kb": 21.951,
                 "name": "index.js"
               }
             }
@@ -11590,10 +11691,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.809,
+            "kb": 22.865,
             "requests": {
               "index.js": {
-                "kb": 22.189,
+                "kb": 22.245,
                 "name": "index.js"
               },
               "clock.svg.js": {
@@ -11829,10 +11930,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.148,
+            "kb": 28.119,
             "requests": {
               "index.js": {
-                "kb": 27.374,
+                "kb": 27.345,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -12011,10 +12112,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.275,
+            "kb": 15.936,
             "requests": {
               "index.js": {
-                "kb": 14.489,
+                "kb": 14.15,
                 "name": "index.js"
               },
               "add.svg.js": {
@@ -12249,10 +12350,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.3,
+            "kb": 19.287,
             "requests": {
               "index.js": {
-                "kb": 19.3,
+                "kb": 19.287,
                 "name": "index.js"
               }
             }
@@ -12459,10 +12560,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.082,
+            "kb": 23.138,
             "requests": {
               "index.js": {
-                "kb": 22.189,
+                "kb": 22.245,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -13366,8 +13467,8 @@
       {
         "file": "tag/tag.ts",
         "lines": {
-          "total": 11,
-          "covered": 11,
+          "total": 12,
+          "covered": 12,
           "skipped": 0,
           "pct": 100
         },
@@ -13378,8 +13479,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 13,
-          "covered": 13,
+          "total": 14,
+          "covered": 14,
           "skipped": 0,
           "pct": 100
         },
@@ -14122,28 +14223,28 @@
       {
         "file": "pagination/pagination.ts",
         "lines": {
-          "total": 59,
-          "covered": 59,
+          "total": 67,
+          "covered": 67,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 22,
-          "covered": 22,
+          "total": 24,
+          "covered": 24,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 88,
-          "covered": 88,
+          "total": 100,
+          "covered": 100,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 18,
-          "covered": 17,
+          "total": 22,
+          "covered": 21,
           "skipped": 0,
-          "pct": 94.44
+          "pct": 95.45
         }
       },
       {
@@ -15059,9 +15160,9 @@
         },
         "branches": {
           "total": 6,
-          "covered": 5,
+          "covered": 6,
           "skipped": 0,
-          "pct": 83.33
+          "pct": 100
         }
       },
       {
@@ -15634,8 +15735,8 @@
       {
         "file": "forms/utils/states.ts",
         "lines": {
-          "total": 85,
-          "covered": 85,
+          "total": 81,
+          "covered": 81,
           "skipped": 0,
           "pct": 100
         },
@@ -15646,16 +15747,16 @@
           "pct": 100
         },
         "statements": {
-          "total": 102,
-          "covered": 102,
+          "total": 98,
+          "covered": 98,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 45,
-          "covered": 42,
+          "total": 43,
+          "covered": 40,
           "skipped": 0,
-          "pct": 93.33
+          "pct": 93.02
         }
       },
       {
@@ -15715,20 +15816,20 @@
       {
         "file": "forms/control-group/control-group.ts",
         "lines": {
-          "total": 22,
-          "covered": 22,
+          "total": 24,
+          "covered": 24,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 6,
-          "covered": 6,
+          "total": 9,
+          "covered": 9,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 23,
-          "covered": 23,
+          "total": 26,
+          "covered": 26,
           "skipped": 0,
           "pct": 100
         },
@@ -16714,8 +16815,8 @@
       {
         "file": "badge/badge.ts",
         "lines": {
-          "total": 25,
-          "covered": 25,
+          "total": 26,
+          "covered": 26,
           "skipped": 0,
           "pct": 100
         },
@@ -16726,8 +16827,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 26,
-          "covered": 26,
+          "total": 27,
+          "covered": 27,
           "skipped": 0,
           "pct": 100
         },
@@ -16849,8 +16950,8 @@
       {
         "file": "alert/alert-group.ts",
         "lines": {
-          "total": 12,
-          "covered": 12,
+          "total": 14,
+          "covered": 14,
           "skipped": 0,
           "pct": 100
         },
@@ -16861,8 +16962,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 13,
-          "covered": 13,
+          "total": 15,
+          "covered": 15,
           "skipped": 0,
           "pct": 100
         },
@@ -16931,28 +17032,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 2168,
-        "covered": 2119,
+        "total": 2178,
+        "covered": 2129,
         "skipped": 0,
-        "pct": 97.73
+        "pct": 97.75
       },
       "statements": {
-        "total": 2536,
-        "covered": 2474,
+        "total": 2551,
+        "covered": 2489,
         "skipped": 0,
-        "pct": 97.55
+        "pct": 97.56
       },
       "functions": {
-        "total": 714,
-        "covered": 686,
+        "total": 719,
+        "covered": 691,
         "skipped": 0,
-        "pct": 96.07
+        "pct": 96.1
       },
       "branches": {
-        "total": 1049,
-        "covered": 954,
+        "total": 1051,
+        "covered": 957,
         "skipped": 0,
-        "pct": 90.94
+        "pct": 91.05
       },
       "branchesTrue": {
         "total": 0,
