@@ -51,3 +51,37 @@
   --background: var(--mlv-sys-support-danger-muted-color);
   --icon-color: var(--mlv-sys-support-danger-emphasis-color);
 }
+
+:host([container='full']) {
+  --border-radius: 0;
+}
+
+:host([prominence='emphasis']) {
+  --color: var(--mlv-sys-text-white-color);
+  --icon-color: var(--color);
+}
+
+:host([prominence='emphasis'][status='accent']) {
+  --background: var(--mlv-sys-support-accent-color);
+  --icon-color: var(--color);
+}
+
+:host([prominence='emphasis'][status='success']) {
+  --background: var(--mlv-sys-support-success-color);
+  --icon-color: var(--color);
+}
+
+:host([prominence='emphasis'][status='warning']) {
+  --background: var(--mlv-sys-support-warning-color);
+  --icon-color: var(--color);
+  --color: var(--mlv-sys-text-black-color);
+}
+
+:host([prominence='emphasis'][status='danger']) {
+  --background: var(--mlv-sys-support-danger-color);
+  --icon-color: var(--color);
+}
+
+:host([prominence='emphasis']) ::slotted(mlv-alert) {
+  --font-weight: var(--mlv-ref-font-weight-regular);
+}

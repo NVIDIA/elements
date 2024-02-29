@@ -92,6 +92,35 @@ export const Color = {
   `
 };
 
+export const Prominence = {
+  render: () => html`
+<div mlv-layout="row gap:xs align:wrap">
+  <mlv-tag prominence="emphasis" color="red-cardinal">red-cardinal</mlv-tag>
+  <mlv-tag prominence="emphasis" color="gray-slate">gray-slate</mlv-tag>
+  <mlv-tag prominence="emphasis" color="gray-denim">gray-denim</mlv-tag>
+  <mlv-tag prominence="emphasis" color="blue-indigo">blue-indigo</mlv-tag>
+  <mlv-tag prominence="emphasis" color="blue-cobalt">blue-cobalt</mlv-tag>
+  <mlv-tag prominence="emphasis" color="blue-sky">blue-sky</mlv-tag>
+  <mlv-tag prominence="emphasis" color="teal-cyan">teal-cyan</mlv-tag>
+  <mlv-tag prominence="emphasis" color="green-mint">green-mint</mlv-tag>
+  <mlv-tag prominence="emphasis" color="teal-seafoam">teal-seafoam</mlv-tag>
+  <mlv-tag prominence="emphasis" color="green-grass">green-grass</mlv-tag>
+  <mlv-tag prominence="emphasis" color="yellow-amber">yellow-amber</mlv-tag>
+  <mlv-tag prominence="emphasis" color="orange-pumpkin">orange-pumpkin</mlv-tag>
+  <mlv-tag prominence="emphasis" color="red-tomato">red-tomato</mlv-tag>
+  <mlv-tag prominence="emphasis" color="pink-magenta">pink-magenta</mlv-tag>
+  <mlv-tag prominence="emphasis" color="purple-plum">purple-plum</mlv-tag>
+  <mlv-tag prominence="emphasis" color="purple-violet">purple-violet</mlv-tag>
+  <mlv-tag prominence="emphasis" color="purple-lavender">purple-lavender</mlv-tag>
+  <mlv-tag prominence="emphasis" color="pink-rose">pink-rose</mlv-tag>
+  <mlv-tag prominence="emphasis" color="green-jade">green-jade</mlv-tag>
+  <mlv-tag prominence="emphasis" color="lime-pear">lime-pear</mlv-tag>
+  <mlv-tag prominence="emphasis" color="yellow-nova">yellow-nova</mlv-tag>
+  <mlv-tag prominence="emphasis" color="brand-green">brand-green</mlv-tag>
+</div>
+  `
+};
+
 export const LightTheme = {
   render: () => html`
 <div mlv-theme="root light" mlv-layout="row gap:xs align:wrap pad:sm" style="background: var(--mlv-sys-layer-container-background) !important;">

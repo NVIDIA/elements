@@ -121,6 +121,32 @@ export const Actions = {
   `
 }
 
+export const Prominence = {
+  render: () => html`
+    <div mlv-layout="column gap:md">
+      <mlv-alert-group prominence="emphasis" container="full">
+        <mlv-alert closable><span slot="prefix">Standard</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a></mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="accent" prominence="emphasis" container="full">
+        <mlv-alert closable><span slot="prefix">Accent</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a></mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="warning" prominence="emphasis" container="full">
+        <mlv-alert closable><span slot="prefix">Warning</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a></mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="success" prominence="emphasis" container="full">
+        <mlv-alert closable><span slot="prefix">Success</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a></mlv-alert>
+      </mlv-alert-group>
+
+      <mlv-alert-group status="danger" prominence="emphasis" container="full">
+        <mlv-alert closable><span slot="prefix">Danger</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a></mlv-alert>
+      </mlv-alert-group>
+    </div>
+  `
+}
+
 export const Themes = {
   render: () => html`
     <div mlv-theme="root light" mlv-layout="column gap:md pad:md">
