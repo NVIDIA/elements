@@ -51,3 +51,37 @@
   --background: var(--nve-sys-support-danger-muted-color);
   --icon-color: var(--nve-sys-support-danger-emphasis-color);
 }
+
+:host([container='full']) {
+  --border-radius: 0;
+}
+
+:host([prominence='emphasis']) {
+  --color: var(--nve-sys-text-white-color);
+  --icon-color: var(--color);
+}
+
+:host([prominence='emphasis'][status='accent']) {
+  --background: var(--nve-sys-support-accent-color);
+  --icon-color: var(--color);
+}
+
+:host([prominence='emphasis'][status='success']) {
+  --background: var(--nve-sys-support-success-color);
+  --icon-color: var(--color);
+}
+
+:host([prominence='emphasis'][status='warning']) {
+  --background: var(--nve-sys-support-warning-color);
+  --icon-color: var(--color);
+  --color: var(--nve-sys-text-black-color);
+}
+
+:host([prominence='emphasis'][status='danger']) {
+  --background: var(--nve-sys-support-danger-color);
+  --icon-color: var(--color);
+}
+
+:host([prominence='emphasis']) ::slotted(nve-alert) {
+  --font-weight: var(--nve-ref-font-weight-regular);
+}

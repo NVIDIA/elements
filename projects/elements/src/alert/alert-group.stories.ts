@@ -121,6 +121,32 @@ export const Actions = {
   `
 }
 
+export const Prominence = {
+  render: () => html`
+    <div nve-layout="column gap:md">
+      <nve-alert-group prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="accent" prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="warning" prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="success" prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group status="danger" prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
+    </div>
+  `
+}
+
 export const Themes = {
   render: () => html`
     <div nve-theme="root light" nve-layout="column gap:md pad:md">
