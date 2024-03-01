@@ -1,3 +1,14 @@
+## [0.26.1](https://github.com/NVIDIA/elements/compare/v0.26.0...v0.26.1) (2024-03-01)
+
+
+### Bug Fixes
+
+* **elements:** borderless tabs ([6168d62](https://github.com/NVIDIA/elements/commit/6168d623f1f98b9c841d320a248d642a233d8993))
+* **elements:** combobox async light dismiss ([1234ec5](https://github.com/NVIDIA/elements/commit/1234ec5beef333b6a7bca488f3455f67cf8f00b5))
+* **elements:** dynamic aria orientation tabs ([54002ba](https://github.com/NVIDIA/elements/commit/54002bae58952a6ac02bc99fbb97f3144f64568e))
+* **elements:** grid keynav ([0c02862](https://github.com/NVIDIA/elements/commit/0c028623dc8a27fe6b6bde48337469bc6b6222c3))
+* **elements:** inline control layout ([8f23ba1](https://github.com/NVIDIA/elements/commit/8f23ba1b32bc377d10fa30e65423cbff77958bd7))
+
 ## [0.26.0](https://github.com/NVIDIA/elements/compare/v0.25.0...v0.26.0) (2024-03-01)
 
 
