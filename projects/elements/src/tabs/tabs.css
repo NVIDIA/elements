@@ -1,4 +1,3 @@
-
 :host {
   --gap: var(--nve-ref-space-xs);
 }
@@ -29,9 +28,7 @@
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
-:host([borderless]) {
-  ::slotted(nve-tabs-item) {
-    --border-width: 0;
-    --border-height: 0;
-  }
+:host([borderless]) ::slotted(nve-tabs-item) {
+  --border-width: 0;
+  --border-height: 0;
 }
