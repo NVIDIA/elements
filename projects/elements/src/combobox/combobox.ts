@@ -211,9 +211,11 @@ export class Combobox extends Control implements ContainerElement {
     this.shadowRoot.addEventListener('slotchange', () => this.#updateMenuItems());
   }
 
-  #setupLightDismiss() {
+  async #setupLightDismiss() {
+    const dropdown = this.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    await dropdown.updateComplete;
     const options = {
-      element: this.shadowRoot.querySelector(Dropdown.metadata.tag)?.shadowRoot.querySelector('dialog'),
+      element: dropdown?.shadowRoot.querySelector('dialog'),
       focusElement: this.input
     };
     createLightDismiss(options, () => {
