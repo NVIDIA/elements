@@ -59,17 +59,13 @@ export class GridColumn extends LitElement {
     return this.parentElement.parentElement as Grid;
   }
 
-  get #actions() {
-    return Array.from(this.querySelectorAll<IconButton | SortButton>(`nve-sort-button, nve-icon-button[slot=actions]`));
-  }
-
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
   render() {
     return html`
       <div internal-host focusable="active">
         <slot></slot>
-        <slot name="actions" @slotchange=${this.#updateActions}></slot>
+        <slot name="actions"></slot>
       </div>
     `;
   }
@@ -101,13 +97,6 @@ export class GridColumn extends LitElement {
     if (props.get('width') !== this.width) {
       this.dispatchEvent(new CustomEvent('nve-grid-column-resize', { bubbles: true }));
     }
-  }
-
-  #updateActions() {
-    this.#actions.forEach(action => {
-      action.interaction = 'flat';
-      action.iconName = action.iconName ? action.iconName : 'more-actions';
-    });
   }
 
   #positionStylesheet: CSSStyleSheet;
