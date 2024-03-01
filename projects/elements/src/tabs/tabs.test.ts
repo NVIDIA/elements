@@ -65,4 +65,26 @@ describe('mlv-tab', () => {
 
     expect(childElement.selected).toBe(false);
   });
+
+  it('should set the correct aria-orientation based on the tab orientation', async () => {
+    expect(parentElement.vertical).toBe(false);
+    expect(parentElement._internals.ariaOrientation).toBe('horizontal');
+
+    parentElement.vertical = true;
+    await elementIsStable(parentElement);
+
+    expect(parentElement.vertical).toBe(true);
+    expect(parentElement._internals.ariaOrientation).toBe('vertical');
+  });
+
+  it('should set the correct keynav orientation', async () => {
+    expect(parentElement.vertical).toBe(false);
+    expect(parentElement.keynavListConfig.layout).toBe('horizontal');
+
+    parentElement.vertical = true;
+    await elementIsStable(parentElement);
+
+    expect(parentElement.vertical).toBe(true);
+    expect(parentElement.keynavListConfig.layout).toBe('vertical');
+  });
 });

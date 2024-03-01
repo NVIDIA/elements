@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import {
@@ -132,8 +132,11 @@ export class Tabs extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'tablist';
-    this._internals.ariaOrientation = this.vertical ? 'vertical' : 'horizontal';
-
     this.addEventListener('click', (e: CustomEvent) => this.#selectTab(e.target));
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    this._internals.ariaOrientation = this.vertical ? 'vertical' : 'horizontal';
   }
 }
