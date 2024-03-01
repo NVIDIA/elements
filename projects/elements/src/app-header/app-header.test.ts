@@ -42,6 +42,10 @@ describe('nve-app-header: defaults', () => {
     expect(defaultTitle).not.toBeNull();
     expect(defaultTitle.textContent).toBe('NVIDIA');
   });
+
+  it('should have a navigation role', () => {
+    expect(element._internals.role).toBe('navigation');
+  });
 });
 
 describe('nve-app-header: app branding', () => {
