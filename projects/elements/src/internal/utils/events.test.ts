@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@nvidia-elements/testing';
-import { onChildListMutation, stopEvent, throttle } from '@elements/elements/internal';
+import { debounce, onChildListMutation, stopEvent, throttle } from '@elements/elements/internal';
 
 describe('stopEvent', () => {
   it('should cause event to prevent default behavior (preventDefault)', async () => {
@@ -59,6 +59,17 @@ describe('throttle', () => {
     fn();
     fn();
     fn();
+    await new Promise(r => setTimeout(() => r(null), 10));
+    expect(argFn).toBeCalledTimes(1);
+  });
+});
+
+describe('debounce', () => {
+  it('should debounce functions calls within given time', async () => {
+    const argFn = vi.fn();
+    const fn = debounce(argFn);
+    fn();
+    await new Promise(r => setTimeout(() => r(null), 10));
     expect(argFn).toBeCalledTimes(1);
   });
 });
