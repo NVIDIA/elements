@@ -1,3 +1,10 @@
+## [0.26.0](https://github.com/NVIDIA/elements/compare/v0.25.0...v0.26.0) (2024-03-01)
+
+
+### Features
+
+* **elements:** enable explicit emphasis ([54c5907](https://github.com/NVIDIA/elements/commit/54c5907924602680628c00d155af302be0a97611))
+
 ## [0.25.0](https://github.com/NVIDIA/elements/compare/v0.24.4...v0.25.0) (2024-02-27)
 
 
