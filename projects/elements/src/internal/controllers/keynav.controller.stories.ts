@@ -57,7 +57,7 @@ export function keyNavigationGridController() {
       return html`
         <p>Selected: ${this.selected}</p>
         <p>Active: ${this.active}</p>
-        <section @mlv-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
+        <section @nve-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
           ${Array.from(Array(10).keys()).map(() => Array.from(Array(10).keys())).map((r, ri) => html`<div class="row">
             ${r.map(c => html`<div class="cell">
               <button ?selected=${this.selected === `${ri}-${c}`} @click=${(e: any) => (this.selected = e.target.innerText)}>${ri}-${c}</button>
@@ -90,7 +90,7 @@ export function keyNavigationListController() {
       return html`
         <p>Selected: ${this.selected}</p>
         <p>Active: ${this.active}</p>
-        <section @mlv-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
+        <section @nve-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
           ${Array.from(Array(10).keys()).map(i => html`<div>
             <button ?selected=${this.selected === `${i}`} @click=${(e: any) => (this.selected = e.target.innerText)}>${i}</button>
           </div>`)}
@@ -120,7 +120,7 @@ export function keyNavigationListControllerVertical() {
       return html`
         <p>Selected: ${this.selected}</p>
         <p>Active: ${this.active}</p>
-        <section class="vertical" @mlv-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
+        <section class="vertical" @nve-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
           ${Array.from(Array(10).keys()).map(i => html`<div>
             <button ?selected=${this.selected === `${i}`} @click=${(e: any) => (this.selected = e.target.innerText)}>${i}</button>
           </div>`)}
@@ -152,7 +152,7 @@ export function keyNavigationListLoopController() {
       return html`
         <p>Selected: ${this.selected}</p>
         <p>Active: ${this.active}</p>
-        <section class="vertical" @mlv-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
+        <section class="vertical" @nve-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
           ${Array.from(Array(10).keys()).map(i => html`<div>
             <button ?selected=${this.selected === `${i}`} @click=${(e: any) => (this.selected = e.target.innerText)}>${i}</button>
           </div>`)}

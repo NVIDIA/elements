@@ -58,6 +58,12 @@ describe('mlv-grid', () => {
   it('should default to no :--scrolling state', () => {
     expect(element.matches(':--scrolling')).toBe(false);
   });
+
+  it('should enable keynav control from keynav controller', async () => {
+    await elementIsStable(element);
+    expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0);
+    expect(element.keynavGridConfig.cells[1].tabIndex).toBe(-1);
+  });
 });
 
 describe('mlv-grid id check', () => {
@@ -100,7 +106,7 @@ describe('mlv-grid id check', () => {
   });
 });
 
-describe('mlv-grid', () => {
+describe('mlv-grid scroll', () => {
   let fixture: HTMLElement;
   let element: Grid;
 

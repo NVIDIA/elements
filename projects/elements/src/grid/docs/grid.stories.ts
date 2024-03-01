@@ -329,7 +329,7 @@ export const ColumnAction = {
   <mlv-grid-header>
     ${Object.entries(getItems()[0]).map(([, column], i) => html`
       <mlv-grid-column>
-        ${column.label} <mlv-icon-button id="column-${i}-btn" slot="actions"></mlv-icon-button>
+        ${column.label} <mlv-icon-button id="column-${i}-btn" icon-name="more-actions" slot="actions"></mlv-icon-button>
       </mlv-grid-column>`)}
   </mlv-grid-header>
   ${getItems().map(row => html`

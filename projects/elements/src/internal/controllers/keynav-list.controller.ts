@@ -28,7 +28,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
       manageTabindex: true,
       loop: false,
       dir: this.host.getAttribute('rtl'),
-      ...this.host.keynavListConfig,
+      ...this.host.keynavListConfig
     };
   }
 
@@ -68,7 +68,12 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
       const activeItem = this.#getActiveItem(e);
       if (activeItem) {
         const { loop, layout, dir } = this.#config;
-        const { next, previous } = getNextKeyListItem(activeItem, Array.from(this.#config.items), { loop, layout, dir, code: e.code as KeynavCode });
+        const { next, previous } = getNextKeyListItem(activeItem, Array.from(this.#config.items), {
+          loop,
+          layout,
+          dir,
+          code: e.code as KeynavCode
+        });
 
         if (next !== previous) {
           this.#setActiveItem(e, this.#config.items[next], this.#config.items[previous]);
@@ -92,8 +97,14 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
       e.preventDefault();
     }
 
-    const detail = { activeItem, previousItem, code: e.code, metaKey: e.ctrlKey || e.metaKey, items: this.#config.items };
-    activeItem.dispatchEvent(new CustomEvent('mlv-key-change', { bubbles: true, detail }));
+    const detail = {
+      activeItem,
+      previousItem,
+      code: e.code,
+      metaKey: e.ctrlKey || e.metaKey,
+      items: this.#config.items
+    };
+    activeItem.dispatchEvent(new CustomEvent('nve-key-change', { bubbles: true, detail }));
   }
 }
 
