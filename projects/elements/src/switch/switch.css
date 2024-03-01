@@ -8,6 +8,7 @@
   --anchor-height: calc(var(--mlv-ref-size-300) + var(--mlv-ref-size-50));
   --anchor-border-radius: var(--mlv-ref-border-radius-full);
   --anchor-background: var(--mlv-sys-interaction-disabled-color);
+  display: inline-block;
 }
 
 ::slotted(input) {
@@ -61,6 +62,7 @@
   transition-duration: 200ms;
   transition-timing-function: ease-in;
   transition-property: transform;
+  pointer-events: none;
 }
 
 :host(:--checked) {

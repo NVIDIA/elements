@@ -7,6 +7,7 @@
   --border-color: var(--mlv-ref-border-color);
   --background: transparent;
   --check-color: transparent;
+  display: inline-block;
 }
 
 ::slotted(input) {

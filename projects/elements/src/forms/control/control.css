@@ -150,6 +150,7 @@ slot[name='messages'] {
   & ::slotted(label) {
     font-weight: var(--mlv-ref-font-weight-regular) !important;
     color: var(--color) !important;
+    width: 100%;
   }
 }
 
