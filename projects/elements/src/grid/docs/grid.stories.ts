@@ -329,7 +329,7 @@ export const ColumnAction = {
   <nve-grid-header>
     ${Object.entries(getItems()[0]).map(([, column], i) => html`
       <nve-grid-column>
-        ${column.label} <nve-icon-button id="column-${i}-btn" slot="actions"></nve-icon-button>
+        ${column.label} <nve-icon-button id="column-${i}-btn" icon-name="more-actions" slot="actions"></nve-icon-button>
       </nve-grid-column>`)}
   </nve-grid-header>
   ${getItems().map(row => html`

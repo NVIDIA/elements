@@ -1,6 +1,5 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import {
   keyNavigationGrid,
   useStyles,
@@ -58,19 +57,27 @@ export class Grid extends LitElement implements ContainerElement {
 
   get keynavGridConfig() {
     return {
-      columns: this.columns,
-      rows: [this.header, ...this.rows],
-      cells: [...this.columns, ...this.cells]
+      columns: this.#columns,
+      rows: [this.#header, ...this.#rows],
+      cells: [...this.#columns, ...this.#cells]
     };
   }
 
-  @queryAssignedElements({ selector: GridHeader.metadata.tag, flatten: true }) private header!: GridHeader;
+  get #rows() {
+    return Array.from(this.querySelectorAll<GridRow>(GridRow.metadata.tag));
+  }
 
-  @queryAssignedElements({ selector: GridRow.metadata.tag, flatten: true }) private rows!: GridRow[];
+  get #header() {
+    return this.querySelector<GridHeader>(GridHeader.metadata.tag);
+  }
 
-  @queryAssignedElements({ selector: GridColumn.metadata.tag, flatten: true }) private columns!: GridColumn[];
+  get #columns() {
+    return Array.from(this.querySelectorAll<GridColumn>(GridColumn.metadata.tag));
+  }
 
-  @queryAssignedElements({ selector: GridCell.metadata.tag, flatten: true }) private cells!: GridColumn[];
+  get #cells() {
+    return Array.from(this.querySelectorAll<GridCell>(GridCell.metadata.tag));
+  }
 
   /** @private */
   declare _internals: ElementInternals;

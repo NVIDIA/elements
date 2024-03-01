@@ -1,7 +1,19 @@
 import { ReactiveController, ReactiveElement } from 'lit';
 import { onChildListMutation, throttle } from '../utils/events.js';
-import { validKeyNavigationCode, isContextMenuClick, getFlattenedDOMTree, getFlattenedFocusableItems, KeynavCode } from '../utils/dom.js';
-import { focusElement, getActiveElement, initializeKeyListItems, setActiveKeyListItem, isSimpleFocusable } from '../utils/focus.js';
+import {
+  validKeyNavigationCode,
+  isContextMenuClick,
+  getFlattenedDOMTree,
+  getFlattenedFocusableItems,
+  KeynavCode
+} from '../utils/dom.js';
+import {
+  focusElement,
+  getActiveElement,
+  initializeKeyListItems,
+  setActiveKeyListItem,
+  isSimpleFocusable
+} from '../utils/focus.js';
 
 export interface KeynavGridConfig {
   grid?: HTMLElement;
@@ -56,7 +68,12 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     this.#config.grid.addEventListener('keyup', (e: KeyboardEvent) => this.#updateCellActivation(e));
     this.#config.grid.addEventListener('keydown', (e: KeyboardEvent) => this.#keynavCell(e));
     this.#config.grid.addEventListener('mouseup', (e: MouseEvent) => this.#clickCell(e));
-    this.#observers.push(onChildListMutation(this.host, throttle(() => initializeKeyListItems(this.#hostCells), 500)));
+    this.#observers.push(
+      onChildListMutation(
+        this.host,
+        throttle(() => initializeKeyListItems(this.#hostCells), 500)
+      )
+    );
   }
 
   hostDisconnected() {
@@ -77,10 +94,12 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
       const { x, y } = getNextKeyGridItem(this.#hostCells, this.#hostRows, {
         code: e.code,
         ctrlKey: e.ctrlKey,
-        dir: this.host.dir,
+        dir: this.host.dir
       });
 
-      const nextCell = Array.from(getFlattenedDOMTree(this.#hostRows[y])).filter(c => !!this.#hostCells.find(i => i === c))[x];
+      const nextCell = Array.from(getFlattenedDOMTree(this.#hostRows[y])).filter(
+        c => !!this.#hostCells.find(i => i === c)
+      )[x];
       this.#setActiveCell(e, nextCell);
       e.preventDefault();
     }
@@ -114,7 +133,11 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
   }
 }
 
-export function getNextKeyGridItem(cells: HTMLElement[], rows: HTMLElement[], config: { code: KeynavCode | string; ctrlKey: boolean; dir: string }) {
+export function getNextKeyGridItem(
+  cells: HTMLElement[],
+  rows: HTMLElement[],
+  config: { code: KeynavCode | string; ctrlKey: boolean; dir: string }
+) {
   const currentCell = cells.find(i => i.tabIndex === 0) as HTMLElement;
   const currentRow = rows.find(r => getFlattenedDOMTree(r).find(c => c === currentCell)) as HTMLElement;
   const currentRowCells = Array.from(getFlattenedDOMTree(currentRow)).filter(c => !!cells.find(i => i === c));
