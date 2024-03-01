@@ -1,4 +1,3 @@
-
 :host {
   --gap: var(--mlv-ref-space-xs);
 }
@@ -29,9 +28,7 @@
   --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
 }
 
-:host([borderless]) {
-  ::slotted(mlv-tabs-item) {
-    --border-width: 0;
-    --border-height: 0;
-  }
+:host([borderless]) ::slotted(mlv-tabs-item) {
+  --border-width: 0;
+  --border-height: 0;
 }
