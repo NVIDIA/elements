@@ -191,6 +191,17 @@ describe('nve-combobox', () => {
       element.i18n.noResults
     );
   });
+
+  it('should apply the --footer-content state styles when footer content is slotted', async () => {
+    expect(element.matches(':--footer-content')).toBe(false);
+
+    const footer = document.createElement('div');
+    footer.setAttribute('slot', 'footer');
+    element.appendChild(footer);
+    await elementIsStable(element);
+
+    expect(element.matches(':--footer-content')).toBe(true);
+  });
 });
 
 describe('nve-combobox single select', () => {
