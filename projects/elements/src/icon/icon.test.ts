@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { Icon } from '@elements/elements/icon';
 import '@elements/elements/icon/define.js';
@@ -16,6 +16,7 @@ describe('mlv-icon', () => {
 
   afterEach(() => {
     removeFixture(fixture);
+    vi.restoreAllMocks();
   });
 
   it('should define element', () => {
@@ -153,23 +154,30 @@ describe('mlv-icon', () => {
     expect((customElements.get('mlv-icon') as any)._icons['test-svg']).toBeDefined();
   });
 
-  // it('should allow dynamic paths', async () => {
-  //   element.name = './assets/icons.svg' as any;
-  //   await elementIsStable(element);
-  //   await new Promise(r => setTimeout(r, 100));
-  //   expect((customElements.get('mlv-icon') as any)._icons['./assets/icons.svg']).toBeTruthy();
-  // });
-
-  it('should update when new icon is registered', async () => {
-    element.name = 'test-svg' as any;
+  it('should requestUpdate when new icon is registered', async () => {
+    const spy = vi.spyOn(element, 'requestUpdate');
+    element.name = 'test-svg-request-update' as any;
     await elementIsStable(element);
 
-    const event = untilEvent(document, 'mlv-icon-test-svg');
+    const event = untilEvent(document, 'mlv-icon-test-svg-request-update');
+
     (customElements.get('mlv-icon') as any).add({
-      'test-svg': { svg: () => '<svg id="test-svg"><path d=""/></svg>' }
+      'test-svg-request-update': { svg: () => '<svg id="test-svg-request-update"><path d=""/></svg>' }
     });
+
     expect(await event).toBeDefined();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should fetch icon if using an svg extension', async () => {
+    const original = window.fetch;
+    window.fetch = vi
+      .fn()
+      .mockImplementation(() => new Promise(r => r({ text: () => '<svg id="test.svg"><path d=""/></svg>' })));
+
+    element.name = 'test.svg' as any;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('#test-svg')).toBeTruthy();
+    expect(window.fetch).toHaveBeenCalled();
+    window.fetch = original;
   });
 });

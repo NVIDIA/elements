@@ -1,10 +1,18 @@
 import { html, LitElement, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { useStyles, keyNavigationList, KeynavListConfig, attachInternals, generateId } from '@elements/elements/internal';
+import {
+  useStyles,
+  keyNavigationList,
+  KeynavListConfig,
+  attachInternals,
+  generateId,
+  isFocusable
+} from '@elements/elements/internal';
 import styles from './breadcrumb.css?inline';
 import { Icon } from '@elements/elements/icon';
 import type { IconButton } from '@elements/elements/icon-button';
 import type { Button } from '@elements/elements/button';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 
 /**
  * @element mlv-breadcrumb
@@ -25,7 +33,7 @@ export class Breadcrumb extends LitElement {
     return {
       items: Array.from(this.shadowRoot.querySelectorAll('slot'))
         .flatMap(slot => slot.assignedElements())
-        .filter(e => e.tagName === 'MLV-BUTTON' || e.tagName === 'MLV-ICON-BUTTON') as (IconButton | Button)[]
+        .filter(e => isFocusable(e)) as HTMLElement[]
     };
   }
 
@@ -44,6 +52,8 @@ export class Breadcrumb extends LitElement {
   };
 
   @state() private breadcrumbItems: Element[] = [];
+
+  @queryAssignedElements({ slot: '', flatten: true }) private items!: HTMLElement[];
 
   render() {
     return html`
@@ -76,12 +86,8 @@ export class Breadcrumb extends LitElement {
     if (e.target && e.target.assignedElements().length) {
       this.#resetItems();
       const items = this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements();
-      items
-        .filter(i => new Set(['MLV-BUTTON', 'MLV-ICON-BUTTON', 'SPAN', 'A']).has(i.tagName))
-        .forEach(i => (i.slot = generateId()));
-      items
-        .filter(i => new Set(['MLV-BUTTON', 'MLV-ICON-BUTTON']).has(i.tagName))
-        .forEach((i: Button) => i.setAttribute('interaction', 'flat'));
+      items.filter(i => i.matches('mlv-button, mlv-icon-button, span, a')).forEach(i => (i.slot = generateId()));
+      items.filter(i => i.matches('mlv-button, mlv-icon-button')).forEach((i: Button) => (i.interaction = 'flat'));
       this.breadcrumbItems = items.length ? items : this.breadcrumbItems;
     }
   }
