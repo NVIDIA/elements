@@ -9,11 +9,12 @@ import { isFocusable } from './focus.js';
  * https://www.abeautifulsite.net/posts/querying-through-shadow-roots/
  */
 export function getFlatDOMTree(node: Node, depth = 10): HTMLElement[] {
-  return (Array.from(getChildren(node)).reduce((prev: any[], next: any) => {
-    const nextChild = Array.from(getChildren(next)).map((i: any) => [i, getFlatDOMTree(i, depth)]);
-    return [...prev, [next, [...nextChild]]];
-  }, []) as any[])
-    .flat(depth);
+  return (
+    Array.from(getChildren(node)).reduce((prev: any[], next: any) => {
+      const nextChild = Array.from(getChildren(next)).map((i: any) => [i, getFlatDOMTree(i, depth)]);
+      return [...prev, [next, [...nextChild]]];
+    }, []) as any[]
+  ).flat(depth);
 }
 
 export function getChildren(node: any): NodeListOf<HTMLElement> {
@@ -89,7 +90,7 @@ export function getElementUpdate(element: HTMLElement, key: string, callback: (v
         set: val => {
           updatedProp.set.call(element, val);
           callback(val);
-        },
+        }
       });
     } catch {
       // try/catch for cases where prop may have already been defined
@@ -114,18 +115,27 @@ export function parseTokenNumber(value: string) {
  */
 export function scope(element: any, Mixin: any) {
   return class extends Mixin(element) {
-    static elementDefinitions = Object.entries({ ...element.elementDefinitions }).reduce((p, [tag, el]) => ({ ...p, [tag]: scope(el, Mixin) }), {})
+    static elementDefinitions = Object.entries({ ...element.elementDefinitions }).reduce(
+      (p, [tag, el]) => ({ ...p, [tag]: scope(el, Mixin) }),
+      {}
+    );
   };
 }
 
-export function define(element: CustomElementConstructor & { metadata: { version: string; tag: string } }, config = { suffix: '' }) {
+export function define(
+  element: CustomElementConstructor & { metadata: { version: string; tag: string } },
+  config = { suffix: '' }
+) {
   const { tag, version } = element.metadata;
   const suffix = config.suffix ? `-${config.suffix}` : '';
   const tagName = `${tag}${suffix}`;
   if (!customElements.get(tagName)) {
     customElements.define(tagName, element);
     GlobalStateService.dispatch('MLV_ELEMENT_DEFINE', { elementRegistry: { [tagName]: version } });
-  } else if (GlobalStateService.state.elementRegistry[tagName] !== version && globalThis?.location?.hostname === 'localhost') {
+  } else if (
+    GlobalStateService.state.elementRegistry[tagName] !== version &&
+    globalThis?.location?.hostname === 'localhost'
+  ) {
     console.warn(`Element ${tagName} version ${version} already defined, please check for duplicate package versions.`);
   }
 }
@@ -139,9 +149,12 @@ export function getFlattenedFocusableItems(element: Node, depth = 10) {
 }
 
 export function getFlattenedDOMTree(node: Node, depth = 10): HTMLElement[] {
-  return (Array.from(getChildren(node)).reduce((p: Node[], n: Node) => (
-    [...p, [n, [...Array.from(getChildren(n)).map(i => [i, getFlattenedDOMTree(i, depth)])]]]
-  ), []) as HTMLElement[]).flat(depth);
+  return (
+    Array.from(getChildren(node)).reduce(
+      (p: Node[], n: Node) => [...p, [n, [...Array.from(getChildren(n)).map(i => [i, getFlattenedDOMTree(i, depth)])]]],
+      []
+    ) as HTMLElement[]
+  ).flat(depth);
 }
 
 export function validKeyNavigationCode(e: KeyboardEvent) {
@@ -195,28 +208,6 @@ export function hasHorizontalScrollBar(el: HTMLElement) {
   return el.scrollWidth > el.clientWidth;
 }
 
-export function waitForScrollEnd(element: HTMLElement) {
-  let prevFrame = 0;
-  let prevX = element.scrollLeft;
-  let prevY = element.scrollTop;
-
-  return new Promise(resolve => {
-    function tick(frames) {
-      if (frames >= 500 || frames - prevFrame > 20) {
-        resolve(null);
-      } else {
-        if (element.scrollTop !== prevX || element.scrollLeft !== prevY) {
-          prevFrame = frames;
-          prevX = element.scrollTop;
-          prevY = element.scrollLeft;
-        }
-        requestAnimationFrame(tick.bind(null, frames + 1))
-      }
-    }
-    tick(0);
-  });
-}
-
 export function endOfScrollBox(element: HTMLElement, offset = 0) {
   return element.scrollTop + element.offsetHeight + offset >= element.scrollHeight;
 }
@@ -228,7 +219,8 @@ export async function openEyeDropper(): Promise<string> {
 /**
  * provides a object with key/value of the currently applied design tokens
  */
-export function getThemeTokens(element = globalThis.document.querySelector(':root')) { // default root or provided element
+export function getThemeTokens(element = globalThis.document.querySelector(':root')) {
+  // default root or provided element
   const styles = getComputedStyle(element);
   let parent = null;
 
@@ -244,12 +236,11 @@ export function getThemeTokens(element = globalThis.document.querySelector(':roo
       (finalArr, sheet) =>
         finalArr.concat(
           [...sheet.cssRules]
-            .filter((rule) => rule.type === 1)
+            .filter(rule => rule.type === 1)
             .reduce((propValArr, rule) => {
-              const props = [...rule.style].filter(p => p.trim().includes('--mlv')).map((propName) => [
-                propName.trim(),
-                rule.style.getPropertyValue(propName).trim(),
-              ]);
+              const props = [...rule.style]
+                .filter(p => p.trim().includes('--mlv'))
+                .map(propName => [propName.trim(), rule.style.getPropertyValue(propName).trim()]);
               return [...propValArr, ...props];
             }, [])
         ),
@@ -266,7 +257,9 @@ export function removeEmptySlotWhitespace(slot: HTMLSlotElement) {
 
 export function slotContainsOnlyWhitespace(slot: HTMLSlotElement) {
   const hasNoElements = !slot.assignedNodes().find(i => i.nodeType !== Node.TEXT_NODE);
-  const hasOnlyEmptyTextNodes = !slot.assignedNodes().find(i => i.nodeType === Node.TEXT_NODE && i.textContent.trim() !== '');
+  const hasOnlyEmptyTextNodes = !slot
+    .assignedNodes()
+    .find(i => i.nodeType === Node.TEXT_NODE && i.textContent.trim() !== '');
   return hasNoElements && hasOnlyEmptyTextNodes;
 }
 
@@ -286,15 +279,17 @@ export function validateSlots(host: HTMLElement) {
     const slots = Array.from(host.shadowRoot.querySelectorAll('slot'));
     const allowed = (host.constructor as any).metadata.children;
     slots.forEach(slot => {
-      const invalid = slot.assignedElements().filter(e =>  !allowed.map(i => i.toUpperCase()).includes(e.tagName));
+      const invalid = slot.assignedElements().filter(e => !allowed.map(i => i.toUpperCase()).includes(e.tagName));
       if (invalid.length) {
-        LogService.warn(`Invalid slotted elements detected in ${host.tagName.toLocaleLowerCase()}. Allowed ${allowed.join(', ')}`);
+        LogService.warn(
+          `Invalid slotted elements detected in ${host.tagName.toLocaleLowerCase()}. Allowed ${allowed.join(', ')}`
+        );
       }
     });
   }
 }
 
-export function getDisplayValue(option: { label?: string, value?: string; }) {
+export function getDisplayValue(option: { label?: string; value?: string }) {
   if (option) {
     return option.label ? option.label : option.value;
   } else {
