@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
+import { IconButton } from '@elements/elements/icon-button';
 import { inputStyles } from '@elements/elements/input';
 import styles from './time.css?inline';
 
@@ -18,6 +19,10 @@ export class Time extends Control {
   static readonly metadata = {
     tag: 'nve-time',
     version: '0.0.0'
+  };
+
+  static elementDefinitions = {
+    [IconButton.metadata.tag]: IconButton
   };
 
   protected get suffixContent() {

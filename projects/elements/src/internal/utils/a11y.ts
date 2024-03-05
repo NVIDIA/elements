@@ -2,7 +2,7 @@ import { generateId } from './dom.js';
 
 export function attachInternals(element: HTMLElement & { _internals?: ElementInternals }) {
   if (element._internals === undefined) {
-    element._internals = element.attachInternals();
+    element._internals = element.attachInternals() as unknown as ElementInternals;
   }
 }
 
@@ -22,7 +22,7 @@ export function associateAriaLabel(label: HTMLElement, element: HTMLElement) {
 
 export function assoicateAriaDescribedBy(messages: HTMLElement[], element: HTMLElement) {
   if (messages.length && element) {
-    const ids = messages.map(m => m.id = generateId()).join(' ');
+    const ids = messages.map(m => (m.id = generateId())).join(' ');
     element.setAttribute('aria-describedby', ids);
   }
 }
@@ -37,6 +37,6 @@ export function associateDataList(datalist: HTMLDataListElement, element: HTMLIn
 export function associateControlGroup(elements: HTMLInputElement[]) {
   if (!elements.find(e => e?.name?.length)) {
     const name = generateId();
-    elements.forEach(e => e.name = name);
+    elements.forEach(e => (e.name = name));
   }
 }

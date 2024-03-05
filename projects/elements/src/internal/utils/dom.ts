@@ -252,7 +252,7 @@ export function getThemeTokens(element = globalThis.document.querySelector(':roo
 
 export function removeEmptySlotWhitespace(slot: HTMLSlotElement) {
   if (slotContainsOnlyWhitespace(slot)) {
-    slot.assignedNodes().forEach(node => node.remove());
+    slot.assignedNodes().forEach((node: any) => node.remove());
   }
 }
 
