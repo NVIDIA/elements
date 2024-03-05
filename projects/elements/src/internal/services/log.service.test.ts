@@ -3,11 +3,11 @@ import { LogService } from './log.service.js';
 
 describe('LogService', () => {
   beforeEach(() => {
-    window.MLV_ELEMENTS.state.env = 'development';
+    window.NVE_ELEMENTS.state.env = 'development';
   });
 
   afterEach(() => {
-    window.MLV_ELEMENTS.state.env = 'production';
+    window.NVE_ELEMENTS.state.env = 'production';
   });
 
   it('should log out values if in development', async () => {
@@ -46,7 +46,7 @@ describe('LogService', () => {
     vi.spyOn(console, 'warn');
     vi.spyOn(console, 'error');
 
-    window.MLV_ELEMENTS.state.env = 'production';
+    window.NVE_ELEMENTS.state.env = 'production';
     LogService.log('test');
     LogService.warn('test');
     LogService.error('test');
