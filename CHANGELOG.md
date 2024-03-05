@@ -1,3 +1,10 @@
+## [0.26.2](https://github.com/NVIDIA/elements/compare/v0.26.1...v0.26.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* **elements:** icon static registry fallback ([28a2fdf](https://github.com/NVIDIA/elements/commit/28a2fdf6182ef706252d77c0dc8fdadf0b8088e5))
+
 ## [0.26.1](https://github.com/NVIDIA/elements/compare/v0.26.0...v0.26.1) (2024-03-01)
 
 
