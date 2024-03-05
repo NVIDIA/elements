@@ -122,21 +122,22 @@ export function scope(element: any, Mixin: any) {
   };
 }
 
-export function define(
-  element: CustomElementConstructor & { metadata: { version: string; tag: string } },
-  config = { suffix: '' }
-) {
-  const { tag, version } = element.metadata;
-  const suffix = config.suffix ? `-${config.suffix}` : '';
-  const tagName = `${tag}${suffix}`;
+export function define(Element: CustomElementConstructor & { metadata: { version: string; tag: string } }) {
+  defineInternal(Element, Element.metadata.tag.replace('mlv', 'nve'));
+  defineInternal(class extends Element {}, Element.metadata.tag);
+}
+
+function defineInternal(element: CustomElementConstructor & { metadata: { version: string } }, tagName: string) {
+  const { version } = element.metadata;
+  const tag = tagName.replace('nve-', '').replace('nve-', '');
   if (!customElements.get(tagName)) {
     customElements.define(tagName, element);
-    GlobalStateService.dispatch('MLV_ELEMENT_DEFINE', { elementRegistry: { [tagName]: version } });
+    GlobalStateService.dispatch('NVE_ELEMENT_DEFINE', { elementRegistry: { [tag]: version } });
   } else if (
-    GlobalStateService.state.elementRegistry[tagName] !== version &&
+    GlobalStateService.state.elementRegistry[tag] !== version &&
     globalThis?.location?.hostname === 'localhost'
   ) {
-    console.warn(`Element ${tagName} version ${version} already defined, please check for duplicate package versions.`);
+    console.warn(`Element ${tag} version ${version} already defined, please check for duplicate package versions.`);
   }
 }
 

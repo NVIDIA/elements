@@ -4,8 +4,8 @@ import { GlobalStateService } from './global.service.js';
 
 describe('GlobalStateService', () => {
   beforeEach(() => {
-    window.MLV_ELEMENTS.state.versions = ['0.0.0'];
-    window.MLV_ELEMENTS.state.elementRegistry = {};
+    window.NVE_ELEMENTS.state.versions = ['0.0.0'];
+    window.NVE_ELEMENTS.state.elementRegistry = {};
   });
 
   it('should provide an intial state object', () => {
@@ -46,7 +46,7 @@ describe('GlobalStateService', () => {
     };
 
     vi.spyOn(watch, 'fn');
-    window.MLV_ELEMENTS.debug(watch.fn);
+    window.NVE_ELEMENTS.debug(watch.fn);
     expect(watch.fn).toHaveBeenCalled();
   });
 
@@ -63,7 +63,26 @@ describe('GlobalStateService', () => {
     console.log = () => null;
 
     vi.spyOn(console, 'log');
-    window.MLV_ELEMENTS.debug();
+    window.NVE_ELEMENTS.debug();
+    expect(console.log).toHaveBeenCalled();
+
+    console.log = original;
+  });
+
+  it('should log out state when debug() is called on MLV_ELEMENTS', async () => {
+    const event = untilEvent(document, 'TEST_EVENT');
+    GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
+    await event;
+
+    expect((await event).detail.elementRegistry).toStrictEqual({
+      one: '0.0.0'
+    });
+
+    const original = console.log;
+    console.log = () => null;
+
+    vi.spyOn(console, 'log');
+    (window as any).MLV_ELEMENTS.debug();
     expect(console.log).toHaveBeenCalled();
 
     console.log = original;

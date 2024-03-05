@@ -15,16 +15,16 @@ import { stateCurrent } from '../controllers/state-current.controller.js';
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
-@typeButton<MlvBaseButton>()
-@typeAnchor<MlvBaseButton>()
-@typeSubmit<MlvBaseButton>()
-@stateActive<MlvBaseButton>()
-@stateCurrent<MlvBaseButton>()
-@statePressed<MlvBaseButton>()
-@stateSelected<MlvBaseButton>()
-@stateDisabled<MlvBaseButton>()
-@stateExpanded<MlvBaseButton>()
-export class MlvBaseButton extends LitElement {
+@typeButton<BaseButton>()
+@typeAnchor<BaseButton>()
+@typeSubmit<BaseButton>()
+@stateActive<BaseButton>()
+@stateCurrent<BaseButton>()
+@statePressed<BaseButton>()
+@stateSelected<BaseButton>()
+@stateDisabled<BaseButton>()
+@stateExpanded<BaseButton>()
+export class BaseButton extends LitElement {
   static formAssociated = true;
 
   /**
