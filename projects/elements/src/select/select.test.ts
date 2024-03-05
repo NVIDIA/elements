@@ -228,6 +228,25 @@ describe('mlv-select', () => {
     expect(element.matches(':--size')).toBe(true);
   });
 
+  it('should apply disabled styles to tags when disabled with multiple selection', async () => {
+    select.multiple = true;
+    select.options[0].selected = true;
+
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    expect(getComputedStyle(element.shadowRoot.querySelector('mlv-tag')).pointerEvents).toBe('auto');
+    expect(getComputedStyle(element.shadowRoot.querySelector('mlv-tag')).getPropertyValue('--cursor')).toBe('pointer');
+
+    select.disabled = true;
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(getComputedStyle(element.shadowRoot.querySelector('mlv-tag')).pointerEvents).toBe('none');
+    expect(getComputedStyle(element.shadowRoot.querySelector('mlv-tag')).getPropertyValue('--cursor')).toBe(
+      'not-allowed'
+    );
+  });
+
   it('should mark menu items as disabled when coresponding select option is disabled', async () => {
     element.requestUpdate();
     await elementIsStable(element);

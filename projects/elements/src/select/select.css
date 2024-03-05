@@ -155,6 +155,11 @@ mlv-tag {
   --cursor: pointer !important;
 }
 
+:host(:--disabled) mlv-tag {
+  pointer-events: none !important;
+  --cursor: not-allowed !important;
+}
+
 mlv-dropdown {
   --padding: var(--mlv-ref-size-200);
 }

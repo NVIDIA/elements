@@ -207,6 +207,21 @@ export const Multiple = {
 </mlv-select>`
 };
 
+export const MultipleDisabled = {
+  render: () => html`
+<mlv-select>
+  <label>label</label>
+  <select multiple disabled>
+    <option value="1">Option 1</option>
+    <option value="2" selected>Option 2</option>
+    <option value="3" selected>Option 3</option>
+    <option value="4" selected>Option 4</option>
+    <option value="5">Option 5</option>
+  </select>
+  <mlv-control-message>message</mlv-control-message>
+</mlv-select>`
+};
+
 export const MultipleOverflow = {
   render: () => html`
 <mlv-select style="--width: 250px">
