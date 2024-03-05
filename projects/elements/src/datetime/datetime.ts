@@ -2,6 +2,7 @@ import { html } from 'lit';
 import { useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
+import { IconButton } from '@elements/elements/icon-button';
 import styles from './datetime.css?inline';
 
 /**
@@ -18,6 +19,10 @@ export class Datetime extends Control {
   static readonly metadata = {
     tag: 'nve-datetime',
     version: '0.0.0'
+  };
+
+  static elementDefinitions = {
+    [IconButton.metadata.tag]: IconButton
   };
 
   protected get suffixContent() {

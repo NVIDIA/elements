@@ -7,6 +7,7 @@
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
+    "build:tsc": "wireit",
     "build:vite": "wireit",
     "build:manifest": "wireit",
     "build:icons": "wireit",
@@ -265,7 +266,7 @@
     "@storybook/web-components-vite": "7.6.17",
     "@typescript-eslint/eslint-plugin": "6.8.0",
     "@typescript-eslint/parser": "6.8.0",
-    "@typescript/lib-dom": "npm:@types/web@0.0.118",
+    "@typescript/lib-dom": "npm:@types/web@0.0.140",
     "@vitest/browser": "1.1.0",
     "@vitest/coverage-istanbul": "1.1.0",
     "@vitest/utils": "1.1.0",
@@ -326,6 +327,7 @@
     "build": {
       "clean": false,
       "dependencies": [
+        "build:tsc",
         "build:vite",
         "build:manifest",
         "build:style-dictionary",
@@ -342,6 +344,19 @@
       "env": {
         "WIREIT_LOGGER": "simple"
       }
+    },
+    "build:tsc": {
+      "command": "tsc --project ./tsconfig.lib.json --noEmit --emitDeclarationOnly false",
+      "files": [
+        "src/**/*.ts",
+        "src/**/*.stories.ts",
+        "!src/**/*.test.ts",
+        "!src/**/*.test.axe.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json"
+      ]
     },
     "build:vite": {
       "clean": false,

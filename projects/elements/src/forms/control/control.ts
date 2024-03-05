@@ -129,11 +129,6 @@ export class Control extends LitElement {
     version: '0.0.0'
   };
 
-  static elementDefinitions = {
-    [Icon.metadata.tag]: Icon,
-    [IconButton.metadata.tag]: IconButton
-  };
-
   render() {
     return !this.inlineControl
       ? html`
@@ -219,7 +214,7 @@ export class Control extends LitElement {
     } else if (this.input.tagName === 'SELECT') {
       this.style.setProperty(
         '--control-width',
-        `${this.input.options[this.input.selectedIndex].textContent.length + 4}ch`
+        `${(this.input as unknown as HTMLSelectElement).options[(this.input as unknown as HTMLSelectElement).selectedIndex].textContent.length + 4}ch`
       );
     }
   }
