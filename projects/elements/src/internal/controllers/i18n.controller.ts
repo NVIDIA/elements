@@ -12,18 +12,19 @@ export class I18nController<T extends I18n> implements ReactiveController {
     return { ...I18nService.i18n, ...this.host.i18n, __set: false };
   }
 
-  #overides: Partial<I18nStrings> = { };
+  #overides: Partial<I18nStrings> = {};
 
   constructor(private host: T) {
     this.host.addController(this);
-    globalThis.document.addEventListener('MLV_ELEMENTS_I18N_UPDATE', () => this.#update());
+    globalThis.document.addEventListener('NVE_ELEMENTS_I18N_UPDATE', () => this.#update());
   }
 
   hostUpdated() {
-    if (this.host.i18n.__set === undefined) { // if set is undefined then an override has been applied
+    if (this.host.i18n.__set === undefined) {
+      // if set is undefined then an override has been applied
       this.#overides = this.host.i18n;
     }
-    
+
     if (!this.host.i18n.__set) {
       this.#update();
     }

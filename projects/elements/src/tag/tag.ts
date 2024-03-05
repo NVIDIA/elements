@@ -4,7 +4,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import {
   Color,
   I18nController,
-  MlvBaseButton,
+  BaseButton,
   TypeClosableController,
   useStyles,
   colorStateStyles,
@@ -29,7 +29,7 @@ import styles from './tag.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-10&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
-export class Tag extends MlvBaseButton {
+export class Tag extends BaseButton {
   static styles = useStyles([colorStateStyles, styles]);
 
   static readonly metadata = {
