@@ -3,7 +3,7 @@ import { AlertGroup } from '@elements/elements/alert';
 import '@elements/elements/alert/define.js';
 
 export default {
-  title: 'Elements/Alert Banner/Examples',
+  title: 'Deprecated/Alert Banner/Examples',
   component: 'nve-alert-banner',
   argTypes: {
     status: {
