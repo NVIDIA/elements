@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { MlvBaseButton, TypePopoverController, PopoverPosition, spread, PopoverAlign, popoverBaseStyles, animationFade, I18nController } from '@elements/elements/internal';
+import { BaseButton, TypePopoverController, PopoverPosition, spread, PopoverAlign, popoverBaseStyles, animationFade, I18nController } from '@elements/elements/internal';
 import { I18nService } from '@elements/elements';
 import '@elements/elements/card/define.js';
 import '@elements/elements/button/define.js';
@@ -16,7 +16,7 @@ export default {
  * nessesary button behaviors and states.
  */
 export const baseButton = () => {
-  class UIButton extends MlvBaseButton {
+  class UIButton extends BaseButton {
     static styles = [css`
       :host {
         --background: hsl(0, 0%, 90%);

@@ -59,12 +59,13 @@ export class I18nService_ {
 
   constructor() {
     if (Object.keys(GlobalStateService.state.i18nRegistry).length === 0) {
-      GlobalStateService.dispatch('MLV_ELEMENTS_I18N_UPDATE', { i18nRegistry });
+      GlobalStateService.dispatch('NVE_ELEMENTS_I18N_UPDATE', { i18nRegistry });
     }
   }
 
-  update(i18nRegistry: Partial<typeof window.MLV_ELEMENTS.state.i18nRegistry>) { // eslint-disable-line no-restricted-globals
-    GlobalStateService.dispatch('MLV_ELEMENTS_I18N_UPDATE', { i18nRegistry });
+  update(i18nRegistry: Partial<typeof window.NVE_ELEMENTS.state.i18nRegistry>) {
+    // eslint-disable-line no-restricted-globals
+    GlobalStateService.dispatch('NVE_ELEMENTS_I18N_UPDATE', { i18nRegistry });
   }
 }
 

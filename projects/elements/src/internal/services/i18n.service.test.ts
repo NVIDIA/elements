@@ -3,8 +3,8 @@ import { I18nService, I18nService_ } from './i18n.service.js';
 
 describe('GlobalStateService', () => {
   beforeEach(() => {
-    window.MLV_ELEMENTS.state.versions = ['0.0.0'];
-    window.MLV_ELEMENTS.state.elementRegistry = {};
+    window.NVE_ELEMENTS.state.versions = ['0.0.0'];
+    window.NVE_ELEMENTS.state.elementRegistry = {};
   });
 
   it('should provide an intial i18n state', () => {
@@ -95,7 +95,7 @@ describe('GlobalStateService', () => {
 
   it('should not emit event if already initialized', () => {
     let event = 0;
-    globalThis.document.addEventListener('MLV_ELEMENTS_I18N_UPDATE', () => event++);
+    globalThis.document.addEventListener('NVE_ELEMENTS_I18N_UPDATE', () => event++);
     new I18nService_();
     expect(event).toBe(0);
   });
