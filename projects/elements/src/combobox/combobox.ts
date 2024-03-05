@@ -10,11 +10,10 @@ import {
 } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
-import { Icon } from '@elements/elements/icon';
-import { IconButton } from '@elements/elements/icon-button/icon-button';
 import { Menu, MenuItem } from '@elements/elements/menu';
 import { Dropdown } from '@elements/elements/dropdown';
 import { Tag } from '@elements/elements/tag';
+import { Icon } from '@elements/elements/icon';
 import styles from './combobox.css?inline';
 
 /**
@@ -52,11 +51,10 @@ export class Combobox extends Control implements ContainerElement {
   };
 
   static elementDefinitions = {
+    [Icon.metadata.tag]: Icon,
     [Dropdown.metadata.tag]: Dropdown,
     [Menu.metadata.tag]: Menu,
     [MenuItem.metadata.tag]: MenuItem,
-    [Icon.metadata.tag]: Icon,
-    [IconButton.metadata.tag]: IconButton,
     [Tag.metadata.tag]: Tag
   };
 
@@ -80,7 +78,7 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   get #items() {
-    return Array.from(this.shadowRoot.querySelectorAll(MenuItem.metadata.tag));
+    return Array.from(this.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag));
   }
 
   get #dropdown() {

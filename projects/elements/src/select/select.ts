@@ -12,7 +12,6 @@ import {
 } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { Icon } from '@elements/elements/icon';
-import { IconButton } from '@elements/elements/icon-button/icon-button';
 import { Menu, MenuItem } from '@elements/elements/menu';
 import { Dropdown } from '@elements/elements/dropdown';
 import { Tag } from '@elements/elements/tag';
@@ -42,11 +41,10 @@ export class Select extends Control {
   };
 
   static elementDefinitions = {
+    [Icon.metadata.tag]: Icon,
     [Dropdown.metadata.tag]: Dropdown,
     [Menu.metadata.tag]: Menu,
     [MenuItem.metadata.tag]: MenuItem,
-    [Icon.metadata.tag]: Icon,
-    [IconButton.metadata.tag]: IconButton,
     [Tag.metadata.tag]: Tag
   };
 

@@ -3,6 +3,7 @@ import { property } from 'lit/decorators/property.js';
 import { useStyles, ContainerElement } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
+import { IconButton } from '@elements/elements/icon-button';
 import styles from './search.css?inline';
 
 /**
@@ -29,6 +30,10 @@ export class Search extends Control implements ContainerElement {
   static readonly metadata = {
     tag: 'mlv-search',
     version: '0.0.0'
+  };
+
+  static elementDefinitions = {
+    [IconButton.metadata.tag]: IconButton
   };
 
   protected get prefixContent() {

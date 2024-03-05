@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { appendRootNodeStyle, openEyeDropper, useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
+import { IconButton } from '@elements/elements/icon-button';
 import { inputStyles } from '@elements/elements/input';
 import globalStyles from './color.global.css?inline';
 import styles from './color.css?inline';
@@ -20,6 +21,10 @@ export class Color extends Control {
   static readonly metadata = {
     tag: 'mlv-color',
     version: '0.0.0'
+  };
+
+  static elementDefinitions = {
+    [IconButton.metadata.tag]: IconButton
   };
 
   protected get suffixContent() {

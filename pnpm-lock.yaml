@@ -419,8 +419,8 @@ importers:
         specifier: 6.8.0
         version: 6.8.0(eslint@8.52.0)(typescript@5.3.3)
       '@typescript/lib-dom':
-        specifier: npm:@types/web@0.0.118
-        version: /@types/web@0.0.118
+        specifier: npm:@types/web@0.0.140
+        version: /@types/web@0.0.140
       '@vitest/browser':
         specifier: 1.1.0
         version: 1.1.0(playwright@1.40.1)(vitest@1.1.0)
@@ -6811,9 +6811,9 @@ packages:
       { integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA== }
     dev: true
 
-  /@types/web@0.0.118:
+  /@types/web@0.0.140:
     resolution:
-      { integrity: sha512-q8RWjmSa8npKJmh3zTQ5H7c+5FweoE2FjHdwBAriYCP7YubNoi1CPgYnF+1Tg6V9IFPT0FoI1KzJMCYNxys7sA== }
+      { integrity: sha512-uBeH71RjueNd68iI5LJHi0EYg9f+eFczOJFJ1mEdw0Kw3UC54UPhEgw/HYpY/jc9GB0HhAnZnyF6sCmP+IQKPg== }
     dev: true
 
   /@types/ws@8.5.10:
