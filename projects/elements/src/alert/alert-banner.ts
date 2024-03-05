@@ -4,6 +4,7 @@ import { AlertGroup } from './alert-group.js';
 import styles from './alert-banner.css?inline';
 
 /**
+ * @deprecated
  * @element nve-alert-banner
  * @description An alert banner is an element that displays a brief, important message outside the context of the current page.
  * @cssprop --gap
