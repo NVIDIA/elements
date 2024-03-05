@@ -1,11 +1,11 @@
 import { html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { MlvBaseButton } from '@elements/elements/internal';
+import { BaseButton } from '@elements/elements/internal';
 import { createFixture, elementIsStable, emulateClick, untilEvent, removeFixture } from '@nvidia-elements/testing';
 
 @customElement('base-button-test-element')
-class BaseButtonTestElement extends MlvBaseButton {}
+class BaseButtonTestElement extends BaseButton {}
 
 describe('base button', () => {
   let element: BaseButtonTestElement;

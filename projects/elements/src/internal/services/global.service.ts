@@ -2,10 +2,10 @@ import { deepMerge } from '../utils/objects.js';
 
 export class GlobalState {
   constructor() {
-    globalThis.MLV_ELEMENTS ??= {
+    globalThis.NVE_ELEMENTS ??= {
       debug: (log = console.log) =>
         log(
-          `%c@elements/elements\n%c${JSON.stringify(globalThis.MLV_ELEMENTS.state, null, 2)}`,
+          `%cElements\n%c${JSON.stringify(globalThis.NVE_ELEMENTS.state, null, 2)}`,
           'color: #69b027',
           'color: inherit'
         ),
@@ -17,16 +17,17 @@ export class GlobalState {
       }
     };
 
-    globalThis.MLV_ELEMENTS.state.versions = Array.from(new Set([...globalThis.MLV_ELEMENTS.state.versions, '0.0.0']));
+    globalThis.MLV_ELEMENTS = globalThis.NVE_ELEMENTS;
+    globalThis.NVE_ELEMENTS.state.versions = Array.from(new Set([...globalThis.NVE_ELEMENTS.state.versions, '0.0.0']));
   }
 
   get state() {
-    return globalThis.MLV_ELEMENTS.state;
+    return globalThis.NVE_ELEMENTS.state;
   }
 
-  dispatch(type: string, state: Partial<typeof globalThis.MLV_ELEMENTS.state>) {
-    globalThis.MLV_ELEMENTS.state = deepMerge(globalThis.MLV_ELEMENTS.state, state);
-    globalThis?.document?.dispatchEvent(new CustomEvent(type, { detail: globalThis.MLV_ELEMENTS.state }));
+  dispatch(type: string, state: Partial<typeof globalThis.NVE_ELEMENTS.state>) {
+    globalThis.NVE_ELEMENTS.state = deepMerge(globalThis.NVE_ELEMENTS.state, state);
+    globalThis?.document?.dispatchEvent(new CustomEvent(type, { detail: globalThis.NVE_ELEMENTS.state }));
   }
 }
 

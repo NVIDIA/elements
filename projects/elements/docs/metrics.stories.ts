@@ -38,11 +38,11 @@ function getVersionBadge(value) {
   const version = getMinorVersion(pin);
   let status = 'success';
 
-  if ((currentVersion - version) > 5) {
+  if ((currentVersion - version) > 10) {
     status = 'warning';
   }
 
-  if ((currentVersion - version) > 10 || value.includes('workspace')) {
+  if ((currentVersion - version) > 15 || value.includes('workspace')) {
     status = 'danger';
   }
 

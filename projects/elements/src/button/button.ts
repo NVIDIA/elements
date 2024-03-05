@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { MlvBaseButton, useStyles, Interaction, Inverse, FlatInteraction, Size } from '@elements/elements/internal';
+import { BaseButton, useStyles, Interaction, Inverse, FlatInteraction, Size } from '@elements/elements/internal';
 import styles from './button.css?inline';
 
 /**
@@ -24,7 +24,7 @@ import styles from './button.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  * @axe color-contrast
  */
-export class Button extends MlvBaseButton {
+export class Button extends BaseButton {
   static styles = useStyles([styles]);
 
   static readonly metadata = {

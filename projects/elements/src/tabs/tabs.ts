@@ -2,7 +2,7 @@ import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import {
-  MlvBaseButton,
+  BaseButton,
   stateSelected,
   useStyles,
   keyNavigationList,
@@ -35,7 +35,7 @@ import tabsStyleSheet from './tabs.css?inline';
  * @responsive false
  */
 @stateSelected<TabsItem>()
-export class TabsItem extends MlvBaseButton {
+export class TabsItem extends BaseButton {
   /**
    * Determines which tab item is selected, defaults to false.
    */

@@ -680,12 +680,12 @@ class GridPerformanceDemo extends LitElement {
   
   connectedCallback() {
     super.connectedCallback();
-    window.MLV_ELEMENTS.state.env = 'production';
+    window.NVE_ELEMENTS.state.env = 'production';
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.MLV_ELEMENTS.state.env = 'watch';
+    window.NVE_ELEMENTS.state.env = 'watch';
   }
 }
 

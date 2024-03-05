@@ -52,11 +52,11 @@ export class Icon extends LitElement {
   static _icons = ICON_IMPORTS;
 
   private static get _iconsRegistry() {
-    return (customElements.get(Icon.metadata.tag) as any)?._icons ?? Icon._icons;
+    return (customElements.get(this.metadata.tag) as any)?._icons ?? Icon._icons;
   }
 
   private static set _iconsRegistry(icons: { [key: string]: IconSVG }) {
-    (customElements.get(Icon.metadata.tag) as any)._icons = { ...Icon._iconsRegistry, ...icons };
+    (customElements.get(this.metadata.tag) as any)._icons = { ...Icon._iconsRegistry, ...icons };
   }
 
   /** @private */

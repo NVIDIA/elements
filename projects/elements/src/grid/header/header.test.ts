@@ -125,12 +125,12 @@ describe('mlv-grid-header validation check', () => {
   beforeEach(() => {
     console.error = () => null;
     vi.spyOn(console, 'error');
-    window.MLV_ELEMENTS.state.env = 'development';
+    window.NVE_ELEMENTS.state.env = 'development';
   });
 
   afterEach(() => {
     console.error = original;
-    window.MLV_ELEMENTS.state.env = 'production';
+    window.NVE_ELEMENTS.state.env = 'production';
     removeFixture(fixture);
   });
 

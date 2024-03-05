@@ -246,7 +246,7 @@ export const statusIcons: { [key: string]: IconName } = {
 
 declare global {
   /* eslint-disable no-var */
-  var MLV_ELEMENTS: {
+  var NVE_ELEMENTS: {
     state: {
       env: 'watch' | 'production' | 'development';
       versions: string[];
