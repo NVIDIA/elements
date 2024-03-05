@@ -184,7 +184,6 @@ export const parameters = {
         [
           'Accordion',
           'Alert',
-          'Alert Banner',
           'Alert Group',
           'App Header',
           'Badge',
@@ -274,7 +273,8 @@ export const parameters = {
           'Button Row',
           'Examples'
         ],
-        'Internal'
+        'Internal',
+        'Deprecated'
       ]
     }
   }
