@@ -3,6 +3,7 @@ import { state } from 'lit/decorators/state.js';
 import { useStyles } from '@elements/elements/internal';
 import { Control } from '@elements/elements/forms';
 import { inputStyles } from '@elements/elements/input';
+import { IconButton } from '@elements/elements/icon-button';
 import styles from './password.css?inline';
 
 /**
@@ -20,6 +21,10 @@ export class Password extends Control {
   static readonly metadata = {
     tag: 'nve-password',
     version: '0.0.0'
+  };
+
+  static elementDefinitions = {
+    [IconButton.metadata.tag]: IconButton
   };
 
   protected get suffixContent() {
