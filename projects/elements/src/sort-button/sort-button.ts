@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@elements/elements/icon';
-import { useStyles, MlvBaseButton, I18nController } from '@elements/elements/internal';
+import { useStyles, BaseButton, I18nController } from '@elements/elements/internal';
 import styles from './sort-button.css?inline';
 
 const nextSort = {
@@ -22,7 +22,7 @@ const nextSort = {
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=127-8456&t=TYtFvncSeBAKHOMe-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
  */
-export class SortButton extends MlvBaseButton {
+export class SortButton extends BaseButton {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
