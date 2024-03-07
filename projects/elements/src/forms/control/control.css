@@ -9,6 +9,7 @@
   --_label-width: var(--label-width, 180px);
   --nve-sys-interaction-state-base: var(--background);
   --opacity: 1;
+  contain: content;
 }
 
 ::slotted(*) {
@@ -52,10 +53,15 @@
 :host([nve-control]) ::slotted(input:focus),
 :host([nve-control]) ::slotted(select:focus),
 :host([nve-control]) ::slotted(textarea:focus),
-:host([nve-control='custom']) [input],
 :host([nve-control]:focus-within) [internal-host]:has(nve-icon-button:focus) [input],
 [internal-host]:has(nve-icon-button) {
   outline: 0 !important;
+}
+
+@container style(--control-type: custom) {
+  [input] {
+    outline: 0 !important;
+  }
 }
 
 ::slotted(nve-button[nve-control]),
