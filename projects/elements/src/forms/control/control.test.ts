@@ -92,16 +92,12 @@ describe('nve-control', () => {
     expect(element.hasAttribute('multiple')).toBe(true);
   });
 
-  it('should apply custom control attribute if slotted input is a custom input type', async () => {
-    expect(element.hasAttribute('multiple')).toBe(false);
-    element.input.multiple = true;
-    element.shadowRoot.dispatchEvent(new Event('slotchange'));
-    await elementIsStable(element);
-    expect(element.hasAttribute('multiple')).toBe(true);
+  it('should apply nve-control attribute', async () => {
+    expect(element.getAttribute('nve-control')).toBe('');
   });
 
-  it('should apply nve-control attribute with no custom value if native input provided', async () => {
-    expect(element.getAttribute('nve-control')).toBe('');
+  it('should not apply custom control style state if slotted input is a native input type', () => {
+    expect(getComputedStyle(element).getPropertyValue('--control-type')).toBe('');
   });
 });
 
@@ -113,7 +109,7 @@ describe('nve-control custom', () => {
     fixture = await createFixture(html`
       <nve-control>
         <label>label</label>
-        <div nve-control tabindex="0" value=""></div>
+        <div nve-control="custom" tabindex="0" value=""></div>
       </nve-control>
     `);
     element = fixture.querySelector('nve-control');
@@ -122,10 +118,6 @@ describe('nve-control custom', () => {
 
   afterEach(() => {
     removeFixture(fixture);
-  });
-
-  it('should apply custom control attribute if slotted input is a custom input type', async () => {
-    expect(element.getAttribute('nve-control')).toBe('custom');
   });
 
   it('should focus input if custom and does not implement "showPicker"', async () => {
@@ -154,6 +146,10 @@ describe('nve-control custom', () => {
     element.reset();
     expect(await event).toBeDefined();
     expect(element.input.value).toBe('');
+  });
+
+  it('should apply custom control style state if slotted input is a custom input type', () => {
+    expect(getComputedStyle(element).getPropertyValue('--control-type')).toBe('custom');
   });
 });
 

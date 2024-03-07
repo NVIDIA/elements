@@ -116,12 +116,16 @@
   opacity: 0 !important;
 }
 
-:host(:--size) ::slotted(select) {
-  padding: 0 !important;
-  min-height: 100px !important;
+:host(:--size) {
+  --height: calc(var(--nve-ref-size-800) * var(--size));
 }
 
-:host(:--size) [name='caret'] {
+:host(:--size) [input] {
+  overflow: auto;
+  display: block;
+}
+
+:host(:--size) [input] slot:not([name]) {
   display: none;
 }
 
