@@ -1,3 +1,10 @@
+## [0.26.3](https://github.com/NVIDIA/elements/compare/v0.26.2...v0.26.3) (2024-03-07)
+
+
+### Bug Fixes
+
+* **elements:** disabled multi-select ([990d8f4](https://github.com/NVIDIA/elements/commit/990d8f43a4a055c2f1ca1a6aa0af39f099d04649))
+
 ## [0.26.2](https://github.com/NVIDIA/elements/compare/v0.26.1...v0.26.2) (2024-03-05)
 
 
