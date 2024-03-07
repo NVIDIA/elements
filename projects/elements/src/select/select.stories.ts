@@ -242,21 +242,21 @@ export const Size = {
 <div mlv-layout="column gap:xl">
   <mlv-select>
     <label>label</label>
-    <select size="3">
+    <select size="5">
       <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
+      <option value="2" selected>Option 2</option>
       <option value="3">Option 3</option>
       <option value="4">Option 4</option>
       <option value="5">Option 5</option>
     </select>
     <mlv-control-message>message</mlv-control-message>
   </mlv-select>
-  <hr />
-  <mlv-select layout="horizontal">
+
+  <mlv-select>
     <label>label</label>
     <select size="3">
       <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
+      <option value="2" selected>Option 2</option>
       <option value="3">Option 3</option>
       <option value="4">Option 4</option>
       <option value="5">Option 5</option>

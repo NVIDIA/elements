@@ -1,4 +1,4 @@
-import { LitElement, html, nothing, TemplateResult } from 'lit';
+import { LitElement, html, nothing, TemplateResult, PropertyValues } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
@@ -156,7 +156,6 @@ export class Control extends LitElement {
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
     this.setAttribute('nve-control', '');
-    this.setAttribute('nve-control', this.querySelector('[nve-control], [mlv-control]') ? 'custom' : '');
 
     this.shadowRoot.addEventListener('slotchange', () => {
       this.#updateStyleStates();

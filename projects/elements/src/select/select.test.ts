@@ -273,3 +273,46 @@ describe('mlv-select', () => {
     expect(element.shadowRoot.querySelectorAll('mlv-menu-item')[1].hidden).toBe(false);
   });
 });
+
+describe('mlv-select size', () => {
+  let fixture: HTMLElement;
+  let element: Select;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-select>
+        <label>label</label>
+        <select size="3">
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+          <option value="4">Option 4</option>
+          <option value="5">Option 5</option>
+        </select>
+      </mlv-select>
+    `);
+    element = fixture.querySelector('mlv-select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get('mlv-select')).toBeDefined();
+  });
+
+  it('should render select as inline outside of a dropdown', () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    expect(dropdown).toBe(null);
+  });
+
+  it('should be in a :--size state', () => {
+    expect(element.matches(':--size')).toBe(true);
+  });
+
+  it('should set --size property', () => {
+    expect(getComputedStyle(element).getPropertyValue('--size')).toBe('3.75'); // size (3) + 0.75 buffer
+  });
+});

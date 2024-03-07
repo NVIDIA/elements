@@ -517,7 +517,7 @@ export const Custom = () => {
   return html`
 <mlv-control>
   <label>custom emoji label</label>
-  <my-emoji mlv-control></my-emoji>
+  <my-emoji nve-control></my-emoji>
   <mlv-control-message>message <span id="emoji"></span></mlv-control-message>
 </mlv-control>
 <script>
