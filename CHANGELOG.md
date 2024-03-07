@@ -1,3 +1,10 @@
+## [0.26.4](https://github.com/NVIDIA/elements/compare/v0.26.3...v0.26.4) (2024-03-07)
+
+
+### Bug Fixes
+
+* **elements:** select size ([bf462ee](https://github.com/NVIDIA/elements/commit/bf462eef8bdb4cc86ba16ddafa71d7b9809fb1c7))
+
 ## [0.26.3](https://github.com/NVIDIA/elements/compare/v0.26.2...v0.26.3) (2024-03-07)
 
 
