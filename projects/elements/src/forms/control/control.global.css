@@ -8,3 +8,7 @@
   opacity: 0 !important;
   display: none !important;
 }
+
+[nve-control]:has([nve-control]) {
+  --control-type: custom;
+}

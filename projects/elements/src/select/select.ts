@@ -97,21 +97,28 @@ export class Select extends Control {
       : nothing;
   }
 
-  protected get suffixContent() {
+  get #menu() {
     return html`
+    <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
+      ${this.#options.map(
+        (o, i) => html`
+      <nve-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} ?disabled=${o.disabled} ?hidden=${!!o.hidden} aria-selected=${o.selected}>
+        <slot name="option-${i + 1}">
+          <nve-icon name="check" size="sm" aria-hidden="true"></nve-icon> ${o.innerText}
+        </slot>
+      </nve-menu-item>`
+      )}
+    </nve-menu>`;
+  }
+
+  protected get suffixContent() {
+    return this.input.size === 0
+      ? html`
       <nve-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></nve-icon>
       <nve-dropdown @close=${e => (e.target.hidden = true)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
-        <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
-          ${this.#options.map(
-            (o, i) => html`
-          <nve-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} ?disabled=${o.disabled} ?hidden=${!!o.hidden} aria-selected=${o.selected}>
-            <slot name="option-${i + 1}">
-              <nve-icon name="check" size="sm" aria-hidden="true"></nve-icon> ${o.innerText}
-            </slot>
-          </nve-menu-item>`
-          )}
-        </nve-menu>
-      </nve-dropdown>`;
+        ${this.#menu}
+      </nve-dropdown>`
+      : this.#menu;
   }
 
   async firstUpdated(props: PropertyValues<this>) {
@@ -135,6 +142,7 @@ export class Select extends Control {
     super.updated(props);
     if (this.#select?.size && this.#select?.size !== 0) {
       this._internals.states.add('--size');
+      this.style.setProperty('--size', `${this.#select?.size + 0.75}`);
     }
 
     if (this.#select?.multiple && this.#select?.size === 0) {
@@ -165,7 +173,7 @@ export class Select extends Control {
     this.#select.dispatchEvent(new Event('change', { bubbles: true }));
     this.requestUpdate();
 
-    if (!this.#select.multiple) {
+    if (!this.#select.multiple && this.#dropdown) {
       this.#dropdown.hidden = true;
     } else {
       await this.updateComplete;
