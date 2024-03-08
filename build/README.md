@@ -41,7 +41,11 @@ The following are the repo wide tools that apply to all source code and projects
 
 - [Semantic Release](https://github.com/semantic-release/semantic-release)
 
-  A open source tool for managing automatic publishing and deployment of libraries and packages following semver.
+  A open source tool for managing automatic publishing and deployment of libraries and packages following semver. Executes a release in the CI environment after every successful build. No human is directly involved in the release process and the releases are guaranteed to be unromantic and unsentimental.
+
+- [NodeJS/Corepack](https://nodejs.org/api/corepack.html)
+
+  Corepack is a tool to help with managing versions of your package managers. It identifies the package manager is configured for the repo, transparently install it if needed, and run it without requiring explicit user interactions. This ensures that everyone will use exactly the same package manager version without them having to manually synchronize it each time an update is made.
 
 - [PNPM Package Manager](https://pnpm.io/)
 

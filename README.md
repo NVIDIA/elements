@@ -50,3 +50,33 @@ Each project/demo has a set of available and standardized NPM scripts. To build 
 - `test:watch`: run unit tests in watch mode
 
 To learn in detail how the repo is built and run see our [build README.md](https://github.com/NVIDIA/elements/-/blob/main/build/README.md).
+
+### Branching
+
+The Gitlab repo enforces branches to use the `topic/` prefix for branches to be merged. Example `topic/my-bug-fix`. Once a MR is merged the topic branch will automatically be deleted from the remote repo on Gitlab.
+
+### Commit Messages
+
+The repo uses [Semantic Release](https://semantic-release.gitbook.io/semantic-release/) to manage package changes. Commit messages determine the type of release on merge. [Commit Lint](https://commitlint.js.org/) will enforce and catch any formating issues in commits.
+
+```
+fix(elements): disabled multi-select
+```
+
+[Example Commit](https://github.com/NVIDIA/elements/-/commit/990d8f43a4a055c2f1ca1a6aa0af39f099d04649)
+
+| Types   | Description                                                     |
+| ------- | --------------------------------------------------------------- |
+| `fix`   | bug fixes, performance fixes                                    |
+| `feat`  | new features, components, APIs                                  |
+| `chore` | non production code modifications, build tooling, internal docs |
+
+| Scopes           | Description                |
+| ---------------- | -------------------------- |
+| `demos`          | `/projects/demos`          |
+| `elements`       | `/projects/elements`       |
+| `elements-react` | `/projects/elements-react` |
+| `labs`           | `/labs`                    |
+| `pages`          | `/pages`                   |
+| `playground`     | `/playground`              |
+| `testing`        | `/testing`                 |
