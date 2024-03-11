@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 import terser from '@rollup/plugin-terser';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import dts from 'vite-plugin-dts';
-import glob from 'glob';
+import { globSync } from 'glob';
 
 const packageFile = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)) as any);
 const resolve = rel => path.resolve(process.cwd(), rel);
@@ -20,12 +20,7 @@ export default defineConfig(env => {
   return {
     resolve: {
       alias: {
-        '@elements/elements': resolve('./src'), // tests should run against final build artifacts not source
-        './css/module.tokens.css': resolve('./dist/css/module.tokens.css'),
-        './css/theme.high-contrast.css': resolve('./dist/css/theme.high-contrast.css'),
-        './css/theme.reduced-motion.css': resolve('./dist/css/theme.reduced-motion.css'),
-        './css/theme.compact.css': resolve('./dist/css/theme.compact.css'),
-        './css/theme.dark.css': resolve('./dist/css/theme.dark.css')
+        '@elements/elements': resolve('./src') // tests should run against final build artifacts not source
       }
     },
     plugins: [
@@ -58,11 +53,10 @@ export default defineConfig(env => {
           'css/module.layout.css': resolve('./src/css/module.layout.css'), // layout utilities
           'css/module.responsive.css': resolve('./src/css/module.responsive.css'), // responsive layout utilities
           'css/module.reset.css': resolve('./src/css/module.reset.css'), // common reset/base styles
-          'css/theme.brand.css': resolve('./src/css/theme.brand.css'), // experimental brand theme
           'index.css': resolve('./src/index.css'), // global styles including all above style modules
-          ...glob.sync('./src/**/define.ts').reduce((p, i) => {
+          ...globSync('./src/**/define.ts').reduce((p, i) => {
             // all component entrypoints
-            return { ...p, [i.replace('./src/', '').replace('.ts', '')]: resolve(i) };
+            return { ...p, [i.replace('src/', '').replace('.ts', '')]: resolve(i) };
           }, {})
         }
       },

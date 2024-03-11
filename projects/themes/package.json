@@ -1,0 +1,63 @@
+{
+  "name": "@nvidia-elements/themes",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Elements themes and tokens",
+  "scripts": {
+    "ci": "wireit",
+    "build": "wireit"
+  },
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "devDependencies": {
+    "glob": "10.3.10",
+    "style-dictionary": "3.8.0"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./*": "./dist/*"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build": {
+      "dependencies": [
+        "build:css-var-completions",
+        "build:style-dictionary"
+      ]
+    },
+    "build:style-dictionary": {
+      "command": "node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js",
+      "files": [
+        "src/**",
+        "build/style-dictionary.config.js",
+        "build/style-dictionary.alias.js"
+      ],
+      "output": [
+        "dist/"
+      ],
+      "env": {
+        "WIREIT_LOGGER": "simple"
+      }
+    },
+    "build:css-var-completions": {
+      "command": "node ./build/css-var-completions.js",
+      "files": [
+        "build/css-var-completions.js",
+        "src/**"
+      ],
+      "output": [
+        "dist/css-vars.json"
+      ],
+      "dependencies": [
+        "build:style-dictionary"
+      ]
+    }
+  }
+}

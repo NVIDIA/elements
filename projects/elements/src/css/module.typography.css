@@ -1,17 +1,33 @@
 /* https://seek-oss.github.io/capsize/ */
-:is([nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'], [nve-text~='eyebrow'])::before {
+:is(
+    [nve-text~='display'],
+    [nve-text~='heading'],
+    [nve-text~='body'],
+    [nve-text~='label'],
+    [nve-text~='eyebrow']
+  )::before {
   content: '';
   margin-bottom: -0.1818em;
   display: table;
 }
 
-:is([nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'], [nve-text~='eyebrow'])[nve-text]::after {
+:is(
+    [nve-text~='display'],
+    [nve-text~='heading'],
+    [nve-text~='body'],
+    [nve-text~='label'],
+    [nve-text~='eyebrow']
+  )[nve-text]::after {
   content: '';
   margin-top: -0.1818em;
   display: table;
 }
 
-[nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'], [nve-text~='eyebrow'] {
+[nve-text~='display'],
+[nve-text~='heading'],
+[nve-text~='body'],
+[nve-text~='label'],
+[nve-text~='eyebrow'] {
   font-family: var(--nve-ref-font-family) !important;
   font-weight: var(--nve-ref-font-weight-regular) !important;
   color: var(--nve-sys-text-color) !important;
@@ -80,7 +96,7 @@
 
 [nve-text~='label'] {
   font-size: var(--nve-ref-font-size-200) !important;
-  font-weight: var(--nve-ref-font-weight-semibold) !important;
+  font-weight: var(--nve-ref-font-weight-medium) !important;
 
   &[nve-text~='xl'] {
     font-size: var(--nve-ref-font-size-400) !important;
@@ -215,7 +231,7 @@
 }
 
 [nve-text~='start'] {
-  text-align: start !important
+  text-align: start !important;
 }
 
 [nve-text~='center'] {

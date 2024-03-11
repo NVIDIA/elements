@@ -33,12 +33,12 @@ describe('nve-color', () => {
 
   it('should default the color to the input background if not set', async () => {
     await elementIsStable(element);
-    expect(fixture.querySelector('input').value).toBe('#dfe3e6');
+    expect(fixture.querySelector('input').value).toBe('#dde1e4');
   });
 
   it('should apply default if custom default is provided', async () => {
     await elementIsStable(element);
-    expect(fixture.querySelector('input').value).toBe('#dfe3e6');
+    expect(fixture.querySelector('input').value).toBe('#dde1e4');
   });
 
   it('should not apply default if custom default is provided', async () => {
@@ -62,7 +62,7 @@ describe('nve-color', () => {
     };
 
     await elementIsStable(element);
-    expect(fixture.querySelector('input').value).toBe('#dfe3e6');
+    expect(fixture.querySelector('input').value).toBe('#dde1e4');
 
     const input = untilEvent(fixture.querySelector('input'), 'input');
     const change = untilEvent(fixture.querySelector('input'), 'change');

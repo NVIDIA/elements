@@ -3,7 +3,7 @@ import path from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
-import glob from 'glob';
+import { globSync } from 'glob';
 
 const packageFile = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)) as any);
 const resolve = rel => path.resolve(process.cwd(), rel);
@@ -38,9 +38,9 @@ export default defineConfig(env => {
       lib: {
         entry: {
           index: resolve('./src/index.ts'),
-          ...glob.sync('./src/**/define.ts').reduce((p, i) => {
+          ...globSync('./src/**/define.ts').reduce((p, i) => {
             // all component entrypoints
-            return { ...p, [i.replace('./src/', '').replace('.ts', '')]: resolve(i) };
+            return { ...p, [i.replace('src/', '').replace('.ts', '')]: resolve(i) };
           }, {})
         }
       },
