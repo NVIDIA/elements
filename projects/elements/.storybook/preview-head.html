@@ -32,6 +32,21 @@
       }
     }
 
+    .sbdocs-content {
+      h1.css-wzniqs:not([nve-text]),
+      h2.css-wzniqs:not([nve-text]),
+      h3.css-wzniqs:not([nve-text]),
+      li:not([nve-text]),
+      a:not([nve-text]) {
+        color: var(--nve-sys-layer-canvas-color) !important;
+        font-family: var(--nve-ref-font-family) !important;
+      }
+
+      a:not([nve-text]) {
+        text-decoration: underline;
+      }
+    }
+
     .playground-btn {
       position: absolute;
       z-index: 99;
@@ -88,11 +103,6 @@
       color: var(--nve-ref-color-white) !important;
       background: var(--nve-ref-color-gray-denim-1200) !important;
       background: color-mix(in oklab, var(--nve-ref-color-gray-denim-1200), white 2%) !important;
-    }
-
-    [nve-theme*='brand'] .prismjs {
-      background: var(--nve-ref-color-gray-slate-1200) !important;
-      background: color-mix(in oklab, var(--nve-ref-color-gray-slate-1200), white 2%) !important;
     }
 
     [nve-theme*='dark'] .prismjs {

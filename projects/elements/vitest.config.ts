@@ -24,12 +24,7 @@ export default defineConfig({
       }
     },
     alias: {
-      '@elements/elements': resolve('./src'),
-      './css/module.tokens.css': resolve('./dist/css/module.tokens.css'),
-      './css/theme.high-contrast.css': resolve('./dist/css/theme.high-contrast.css'),
-      './css/theme.reduced-motion.css': resolve('./dist/css/theme.reduced-motion.css'),
-      './css/theme.compact.css': resolve('./dist/css/theme.compact.css'),
-      './css/theme.dark.css': resolve('./dist/css/theme.dark.css')
+      '@elements/elements': resolve('./src')
     },
     include: [axe ? resolve('./src/**/*.test.axe.ts') : resolve('./src/**/*.test.ts')],
     reporters: ['basic', 'junit'],
