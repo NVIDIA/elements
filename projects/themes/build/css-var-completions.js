@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import process from 'process';
 
-const index = process.argv.findIndex((i) => i === '--outDir') + 1;
-const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
+const buildPath = 'dist/';
+const sourcePath = 'src/';
 
 function resolve(relativePath) {
   return path.join(process.cwd(), relativePath);
@@ -79,11 +79,11 @@ function resolveTokenValue(value, tokenDictionary) {
 
 // ---
 
-const baseTokenDictionary = loadTokenDictionary('./tokens/tokens.json');
-const compactThemeTokenDictionary = loadTokenDictionary('./tokens/theme.compact.json');
-const darkThemeTokenDictionary = loadTokenDictionary('./tokens/theme.dark.json');
-const highContrastThemeTokenDictionary = loadTokenDictionary('./tokens/theme.high-contrast.json');
-const reducedMotionThemeTokenDictionary = loadTokenDictionary('./tokens/theme.reduced-motion.json');
+const baseTokenDictionary = loadTokenDictionary(`${sourcePath}/index.json`);
+const compactThemeTokenDictionary = loadTokenDictionary(`${sourcePath}/compact.json`);
+const darkThemeTokenDictionary = loadTokenDictionary(`${sourcePath}/dark.json`);
+const highContrastThemeTokenDictionary = loadTokenDictionary(`${sourcePath}/high-contrast.json`);
+const reducedMotionThemeTokenDictionary = loadTokenDictionary(`${sourcePath}/reduced-motion.json`);
 
 const categorizedTokens = {};
 
@@ -126,7 +126,7 @@ function valuesMatch(values) {
 }
 
 function categoryValuesMatch(values, categories) {
-  return valuesMatch(categories.map((category) => values[category]));
+  return valuesMatch(categories.map(category => values[category]));
 }
 
 // Consolidate categorized token values that are the same.
@@ -151,12 +151,17 @@ for (const token of Object.values(categorizedTokens)) {
 // Collect all tokens with their paths transformed to css variable identifiers.
 const cssVarCompletions = {};
 for (const [path, token] of Object.entries(categorizedTokens)) {
-  const name = `--nve-${path.replaceAll('.', '-')}`;
-  cssVarCompletions[name] = token;
+  cssVarCompletions[`--nve-${path.replaceAll('.', '-')}`] = token;
+  cssVarCompletions[`--nve-${path.replaceAll('.', '-')}`] = token;
 }
 
-if (!fs.existsSync(dist())) {
-  fs.mkdirSync(dist());
+if (!fs.existsSync(`${buildPath}`)) {
+  fs.mkdirSync(`${buildPath}`);
 }
 
-writeJSONFile(dist('elements.css-vars.json'), cssVarCompletions);
+if (!fs.existsSync('../elements/dist')) {
+  fs.mkdirSync('../elements/dist');
+}
+
+writeJSONFile(`${buildPath}/css-vars.json`, cssVarCompletions);
+writeJSONFile('../elements/dist/elements.css-vars.json', cssVarCompletions);

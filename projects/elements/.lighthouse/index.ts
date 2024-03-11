@@ -4,7 +4,7 @@ import { preview, build, PreviewServer } from 'vite';
 import virtualHtml from 'vite-plugin-virtual-html';
 import fs from 'fs';
 import path from 'path';
-import glob from 'glob';
+import { globSync } from 'glob';
 
 const resolve = rel => path.resolve(process.cwd(), rel);
 
@@ -31,7 +31,7 @@ export class LighthouseRunner {
       fs.mkdirSync(dist);
     }
 
-    const report = glob.sync(resolve('.lighthouse/dist/**/report.json')).reduce((p, n) => {
+    const report = globSync(resolve('.lighthouse/dist/**/report.json')).reduce((p, n) => {
       const file = JSON.parse(fs.readFileSync(n));
       return { ...p, [file.name]: file };
     }, {});

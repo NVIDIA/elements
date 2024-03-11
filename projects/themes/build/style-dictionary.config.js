@@ -1,12 +1,51 @@
-const StyleDictionary = require('style-dictionary');
+import StyleDictionary from 'style-dictionary';
+import { globSync } from 'glob';
+
 const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
-const buildPath = process.argv[process.argv.findIndex((i) => i === '--outDir') + 1];
+const buildPath = 'dist/';
+const sourcePath = 'src/';
+
+StyleDictionary.registerFormat({
+  name: 'custom/schema',
+  formatter: dictionary => {
+    const schema = {
+      $schema: 'http://json-schema.org/draft-07/schema',
+      definitions: {
+        reference: {
+          type: 'string',
+          enum: dictionary.allProperties.map(property => `{${property.path.join('.')}.value}`)
+        }
+      },
+      type: 'object',
+      patternProperties: {
+        '.*': {
+          anyOf: [
+            {
+              type: 'object',
+              required: ['value'],
+              properties: {
+                value: {
+                  anyOf: [{ $ref: '#/definitions/reference' }, { type: 'string' }]
+                }
+              }
+            },
+            {
+              $ref: '#'
+            }
+          ]
+        }
+      }
+    };
+
+    return JSON.stringify(schema, null, 2);
+  }
+});
 
 StyleDictionary.registerTransform({
   name: 'custom/validate',
   type: 'value',
   transitive: true,
-  transformer: (obj) => {
+  transformer: obj => {
     const { value, type, name, original, filePath } = obj;
     const isHighContrast = filePath.includes('high-contrast');
     const isReferenceToken = name.includes('nve-ref');
@@ -46,7 +85,7 @@ StyleDictionary.registerTransform({
   matcher: ({ value }) => typeof value === 'string' && value?.includes('*'),
   transformer: ({ value, attributes }) => {
     if (attributes.type === 'font') {
-      const [scale, base] = value.split('*').map((i) => i.trim().replace('px', ''));
+      const [scale, base] = value.split('*').map(i => i.trim().replace('px', ''));
       return `calc(${scale} * ${parseInt(base, 10) / 16}rem)`;
     } else {
       return `calc(${value})`;
@@ -57,8 +96,12 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerFormat({
   name: 'custom/css',
   formatter: ({ dictionary, file, options }) => {
-    const selector = options.theme ? `[nve-theme~='${options.theme}']` : `:root, [nve-theme~='light']`;
-    return `${fileHeader({ file })}\n${selector} {\n${formattedVariables({
+    const experimental = dictionary.allTokens.find(t => t.name.includes('experimental')) ? '/** @experimental */' : '';
+    const selector =
+      options.theme !== 'index'
+        ? `[nve-theme~='${options.theme}'], [nve-theme~='${options.theme}']`
+        : `:root, [nve-theme~='light'], [nve-theme~='light']`;
+    return `${fileHeader({ file })}${experimental}\n${selector} {\n${formattedVariables({
       format: 'css',
       dictionary,
       outputReferences: options.outputReferences
@@ -73,7 +116,7 @@ StyleDictionary.registerFormat({
     const content = formattedVariables({ format: 'json', dictionary, outputReferences: true })
       .replaceAll(';', '')
       .split('\n')
-      .map((i) => {
+      .map(i => {
         const [key, value] = i.split(' = ');
         const formattedValue = value.includes('calc') ? value.replace('calc(', '').replace(')', '') : value;
         return `  "${key}": "${formattedValue}"`;
@@ -84,61 +127,42 @@ StyleDictionary.registerFormat({
 });
 
 function buildTokens() {
+  const themes = globSync(`${sourcePath}*.json`).filter(path => !path.includes('index'));
+  console.log(themes);
   StyleDictionary.extend({
-    source: ['./tokens/tokens.json'],
+    source: [`${sourcePath}index.json`],
     platforms: {
-      css: cssOutput(`${buildPath}css/module.tokens.css`),
-      json: jsonOutput(`${buildPath}tokens/tokens.json`)
+      css: cssOutput(`${buildPath}index.css`),
+      json: jsonOutput(`${buildPath}index.json`),
+      schema: schemaOutput(`${buildPath}schema.json`)
     }
   }).buildAllPlatforms();
 
-  StyleDictionary.extend({
-    include: ['./tokens/tokens.json'],
-    source: ['./tokens/theme.dark.json'],
-    platforms: { json: jsonOutput(`${buildPath}tokens/tokens.dark.json`) }
-  }).buildAllPlatforms();
+  themes.forEach(path => {
+    const theme = getTheme(path);
 
-  StyleDictionary.extend({
-    include: ['./tokens/tokens.json'],
-    source: ['./tokens/theme.high-contrast.json'],
-    platforms: { json: jsonOutput(`${buildPath}tokens/tokens.high-contrast.json`) }
-  }).buildAllPlatforms();
-
-  StyleDictionary.extend({
-    include: ['./tokens/tokens.json'],
-    source: ['./tokens/theme.dark.json'],
-    platforms: { css: cssOutput(`${buildPath}css/theme.dark.css`) }
-  }).buildAllPlatforms();
-
-  StyleDictionary.extend({
-    include: ['./tokens/tokens.json'],
-    source: ['./tokens/theme.compact.json'],
-    platforms: { css: cssOutput(`${buildPath}css/theme.compact.css`) }
-  }).buildAllPlatforms();
-
-  StyleDictionary.extend({
-    include: ['./tokens/tokens.json'],
-    source: ['./tokens/theme.high-contrast.json'],
-    platforms: { css: cssOutput(`${buildPath}css/theme.high-contrast.css`) }
-  }).buildAllPlatforms();
-
-  StyleDictionary.extend({
-    include: ['./tokens/tokens.json'],
-    source: ['./tokens/theme.reduced-motion.json'],
-    platforms: { css: cssOutput(`${buildPath}css/theme.reduced-motion.css`) }
-  }).buildAllPlatforms();
+    StyleDictionary.extend({
+      include: [`${sourcePath}index.json`],
+      source: [`${sourcePath}${theme}.json`],
+      platforms: {
+        css: cssOutput(`${buildPath}${theme}.css`),
+        json: jsonOutput(`${buildPath}${theme}.json`)
+      }
+    }).buildAllPlatforms();
+  });
 }
 
 function cssOutput(destination) {
   const theme = getTheme(destination);
+
   return {
-    prefix: 'mlv',
+    prefix: 'nve',
     transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
     files: [
       {
         format: 'custom/css',
         destination,
-        filter: theme ? (token) => getTheme(token.filePath) : null
+        filter: theme !== 'index' ? token => getTheme(token.filePath) !== 'index' : null
       }
     ],
     options: {
@@ -151,14 +175,14 @@ function cssOutput(destination) {
 function jsonOutput(destination) {
   const theme = getTheme(destination);
   return {
-    prefix: 'mlv',
+    prefix: 'nve',
     transformGroup: 'web',
     transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
     files: [
       {
         format: 'custom/json',
         destination,
-        filter: theme ? (token) => getTheme(token.filePath) : null
+        filter: theme !== 'index' ? token => getTheme(token.filePath) !== 'index' : null
       }
     ],
     options: {
@@ -168,9 +192,26 @@ function jsonOutput(destination) {
   };
 }
 
+function schemaOutput(destination) {
+  return {
+    prefix: 'nve',
+    transformGroup: 'web',
+    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
+    files: [
+      {
+        format: 'custom/schema',
+        destination
+      }
+    ],
+    options: {
+      outputReferences: true
+    }
+  };
+}
+
 function getTheme(path) {
-  const m = /.*?theme.(.*?)\..*?/g.exec(path);
-  return m ? m[1] : false;
+  // console.log(path.replace('dist/', '').replace(`src/`, '').split('.'))
+  return path.replace('dist/', '').replace(`src/`, '').split('.')[0];
 }
 
 buildTokens();

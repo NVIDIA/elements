@@ -1,5 +1,8 @@
 html[nve-theme],
 body[nve-theme],
+[nve-theme~='root'],
+html[nve-theme],
+body[nve-theme],
 [nve-theme~='root'] {
   color-scheme: var(--nve-sys-color-scheme) !important;
   background: var(--nve-sys-layer-canvas-background) !important;
@@ -8,6 +11,7 @@ body[nve-theme],
   text-rendering: optimizeSpeed;
 }
 
+[nve-theme] body,
 [nve-theme] body {
   margin: 0;
 }
@@ -16,6 +20,7 @@ body[nve-theme],
   contain: initial;
 }
 
+[nve-theme~='debug'],
 [nve-theme~='debug'] {
   --nve-debug-outline-width: 2px;
   --nve-debug-layout-outline: var(--nve-debug-outline-width) solid var(--nve-ref-color-purple-plum-900);
@@ -23,6 +28,7 @@ body[nve-theme],
   --nve-debug-typography-outline: var(--nve-debug-outline-width) solid var(--nve-ref-color-yellow-amber-900);
 }
 
+[nve-theme~='debug'][nve-theme~='dark'],
 [nve-theme~='debug'][nve-theme~='dark'] {
   --nve-debug-outline-width: 1px;
 }

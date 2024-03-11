@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
-import tokenJSON from '@elements/elements/tokens/tokens.json';
-import tokenJSONDark from '@elements/elements/tokens/tokens.dark.json';
-import tokenJSONHighContrast from '@elements/elements/tokens/tokens.high-contrast.json';
+import tokenJSON from '@nvidia-elements/themes/index.json';
+import tokenJSONDark from '@nvidia-elements/themes/dark.json';
+import tokenJSONHighContrast from '@nvidia-elements/themes/high-contrast.json';
 import '@elements/elements/icon-button/define.js';
 import '@elements/elements/toast/define.js';
 
@@ -73,8 +73,6 @@ export const Interaction = {
   ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-emphasis')))}
   <h3 class="sbdocs-h2">Destructive</h3>
   ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-destructive')))}
-  <h3 class="sbdocs-h2">Secondary</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-secondary')))}
   <h3 class="sbdocs-h2">Highlighted</h3>
   ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-highlighted')))}
   <h3 class="sbdocs-h2">Selected</h3>
@@ -210,7 +208,7 @@ function getColorScale(color) {
 function getFormattedTokens(tokens, filter?: (toke: string) => boolean) {
   return Object.entries(tokens)
     .filter(([name]) => filter ? filter(name) : true)
-    .map(([name]) => ({ prop: `--${name}`, value: getTokenValue(name, tokenJSON[name]) }))
+    .map(([name]) => ({ prop: `--${name.replace('nve', 'mlv')}`, value: getTokenValue(name, tokenJSON[name]) }))
     .reduce((prev, next) => ({ ...prev, [next.prop]: next.value }), { });
 }
 
