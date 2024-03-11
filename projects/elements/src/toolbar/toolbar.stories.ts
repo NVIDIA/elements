@@ -18,9 +18,9 @@ export const Default = {
   render: () => html`
   <div>
     <nve-toolbar>
-      <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
-      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button container="inline" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   </div>
   `
@@ -30,8 +30,8 @@ export const ContainerFlat = {
   render: () => html`
   <div>
     <nve-toolbar container="flat">
-      <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
       <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   </div>
@@ -42,8 +42,8 @@ export const ContainerInset = {
   render: () => html`
   <div>
     <nve-toolbar container="inset">
-      <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
       <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   </div>
@@ -54,8 +54,8 @@ export const ContainerFull = {
   render: () => html`
   <div>
     <nve-toolbar container="full">
-      <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
       <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   </div>
@@ -167,7 +167,7 @@ export const Filter = {
           <option value="Contains"></option>
         </datalist>
       </nve-combobox>
-      <nve-icon-button aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
+      <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
       <nve-button slot="suffix">Save Filters</nve-button>
     </nve-toolbar>
   </div>
@@ -228,7 +228,7 @@ export const Scroll = {
           <option value="Contains"></option>
         </datalist>
       </nve-combobox>
-      <nve-icon-button aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
+      <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
       <nve-button slot="suffix">Save Filters</nve-button>
     </nve-toolbar>
   </div>
@@ -289,7 +289,7 @@ export const Wrap = {
           <option value="Contains"></option>
         </datalist>
       </nve-combobox>
-      <nve-icon-button aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
+      <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
       <nve-button slot="suffix">Save Filters</nve-button>
     </nve-toolbar>
   </div>

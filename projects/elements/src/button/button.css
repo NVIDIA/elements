@@ -88,8 +88,8 @@
   --nve-sys-interaction-state-ratio: 0;
 }
 
-:host([container='flat']:not([interaction]):not([disabled]):hover) [interaction-state] {
-  --nve-sys-interaction-state-ratio: 8%;
+:host([container='flat']:not([interaction]):not([disabled]):not([readonly])) {
+  --nve-sys-interaction-state-ratio-hover: 8%;
 }
 
 :host([size='sm']) {

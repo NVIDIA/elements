@@ -1,4 +1,5 @@
 {
+  "$schema": "../dist/schema.json",
   "ref": {
     "border": {
       "color": {

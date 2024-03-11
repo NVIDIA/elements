@@ -12,8 +12,6 @@
     "build:manifest": "wireit",
     "build:icons": "wireit",
     "build:importmap": "wireit",
-    "build:style-dictionary": "wireit",
-    "build:css-var-completions": "wireit",
     "build:vscode-custom-data": "wireit",
     "build:metadata": "wireit",
     "build:metadata:fast": "wireit",
@@ -45,7 +43,6 @@
     "./custom-elements.json": "./dist/custom-elements.json",
     "./elements.css-vars.json": "./dist/elements.css-vars.json",
     "./elements.html-data.json": "./dist/elements.html-data.json",
-    "./tokens/tokens.json": "./dist/tokens/tokens.json",
     "./assets/*": "./dist/assets/*",
     "./css/*": "./dist/css/*",
     ".": "./dist/index.js",
@@ -232,6 +229,7 @@
   "dependencies": {
     "@floating-ui/dom": "1.6.1",
     "@lit-labs/motion": "^1.0.6",
+    "@nvidia-elements/themes": "0.0.0",
     "composed-offset-position": "^0.0.4",
     "lit": "^3.1.0",
     "lit-html": "^3.1.0"
@@ -247,6 +245,7 @@
     "@custom-elements-manifest/analyzer": "0.9.0",
     "@jspm/generator": "1.1.12",
     "@lit-labs/virtualizer": "2.0.11",
+    "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@rollup/plugin-terser": "0.4.4",
     "@storybook/addon-docs": "8.0.0",
@@ -275,7 +274,7 @@
     "eslint-plugin-rulesdir": "0.2.2",
     "eslint-plugin-wc": "2.0.4",
     "fflate": "0.8.1",
-    "glob": "8.0.3",
+    "glob": "10.3.10",
     "globals": "13.23.0",
     "html-format": "1.1.2",
     "lighthouse": "11.4.0",
@@ -321,8 +320,6 @@
         "build:tsc",
         "build:vite",
         "build:manifest",
-        "build:style-dictionary",
-        "build:css-var-completions",
         "build:vscode-custom-data"
       ]
     },
@@ -372,18 +369,12 @@
         "!dist/custom-elements.json",
         "!dist/elements.css-vars.json",
         "!dist/elements.html-data.json",
-        "!dist/importmap.cdn.json",
-        "!dist/tokens/**",
-        "!dist/css/module.tokens.css",
-        "!dist/css/theme.dark.css",
-        "!dist/css/theme.compact.css",
-        "!dist/css/theme.high-contrast.css",
-        "!dist/css/theme.reduced-motion.css"
+        "!dist/importmap.cdn.json"
       ],
       "dependencies": [
         "build:icons",
         "build:manifest",
-        "build:style-dictionary"
+        "../themes:build"
       ],
       "env": {
         "WIREIT_LOGGER": "simple"
@@ -399,30 +390,6 @@
       ],
       "dependencies": [
         "build:vite"
-      ]
-    },
-    "build:style-dictionary": {
-      "command": "node ./tokens/style-dictionary.config.cjs --outDir ./dist/",
-      "files": [
-        "tokens/**"
-      ],
-      "output": [
-        "dist/tokens/**",
-        "dist/css/module.tokens.css",
-        "dist/css/theme.dark.css",
-        "dist/css/theme.compact.css",
-        "dist/css/theme.high-contrast.css",
-        "dist/css/theme.reduced-motion.css"
-      ]
-    },
-    "build:css-var-completions": {
-      "command": "node ./build/css-var-completions.js --outDir ./dist",
-      "files": [
-        "build/css-var-completions.js",
-        "tokens/**"
-      ],
-      "output": [
-        "dist/elements.css-vars.json"
       ]
     },
     "build:icons": {

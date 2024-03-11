@@ -22,6 +22,7 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 - `/projects/elements` - Elements library: curated UI maintained by the Elements team
 - `/projects/elements-react` - Elements React library for React compatibility/support
 - `/projects/testing` - A set of testing utilities for Lit based Web Components.
+- `/projects/themes` - Elements Theme library: provides a set of supported themes for Element based projects
 
 ## Development
 

@@ -5,26 +5,26 @@ describe('lighthouse report', () => {
   test('CSS bundles should remain within compressed bundle limits', async () => {
     const report = await runner.getReport('css-bundles', /* html */`
       <script type="module">
+        import('@nvidia-elements/themes/index.css');
+        import('@nvidia-elements/themes/compact.css');
+        import('@nvidia-elements/themes/dark.css');
+        import('@nvidia-elements/themes/high-contrast.css');
+        import('@nvidia-elements/themes/reduced-motion.css');
         import('@elements/elements/css/module.layout.css');
         import('@elements/elements/css/module.reset.css');
-        import('@elements/elements/css/module.tokens.css');
         import('@elements/elements/css/module.typography.css');
-        import('@elements/elements/css/theme.compact.css');
-        import('@elements/elements/css/theme.dark.css');
-        import('@elements/elements/css/theme.high-contrast.css');
-        import('@elements/elements/css/theme.reduced-motion.css');
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(14.9); // total
-    expect(report.payload.css.requests['module.css'].kb).toBeLessThan(1.6); // module.layout.css
-    expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.1); // module.reset.css
-    expect(report.payload.css.requests['module3.css'].kb).toBeLessThan(4.9); // module.tokens.css
-    expect(report.payload.css.requests['module4.css'].kb).toBeLessThan(1.3); // module.typography.css
-    expect(report.payload.css.requests['theme.css'].kb).toBeLessThan(0.4); // theme.compact.css
-    expect(report.payload.css.requests['theme2.css'].kb).toBeLessThan(4.1); // theme.dark.css
-    expect(report.payload.css.requests['theme3.css'].kb).toBeLessThan(1); // theme.high-contrast.css
-    expect(report.payload.css.requests['theme4.css'].kb).toBeLessThan(0.5); // theme.reduced-motion.css
+    expect(report.payload.css.kb).toBeLessThan(14.8); // total
+    expect(report.payload.css.requests['index.css'].kb).toBeLessThan(4.9); // @nvidia-elements/themes/index.css
+    expect(report.payload.css.requests['compact.css'].kb).toBeLessThan(0.4); // @nvidia-elements/themes/compact.css
+    expect(report.payload.css.requests['dark.css'].kb).toBeLessThan(4.1); // @nvidia-elements/themes/dark.css
+    expect(report.payload.css.requests['high.css'].kb).toBeLessThan(1); // @nvidia-elements/themes/high-contrast.css
+    expect(report.payload.css.requests['reduced.css'].kb).toBeLessThan(0.6); // @nvidia-elements/themes/reduced-motion.css
+    expect(report.payload.css.requests['module.css'].kb).toBeLessThan(1.6); // @elements/elements/css/module.layout.css
+    expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.2); // @elements/elements/css/module.reset.css
+    expect(report.payload.css.requests['module3.css'].kb).toBeLessThan(1.3); // @elements/elements/css/module.typography.css
   });
 
   test('JS Bundles should remain within compressed bundle limits', async () => {

@@ -1,11 +1,22 @@
 {
+  "$schema": "../dist/schema.json",
   "ref": {
     "scale": {
-      "text": { "value": "1" },
-      "size": { "value": "1" },
-      "space": { "value": "1" },
-      "border-radius": { "value": "1" },
-      "border-width": { "value": "1" }
+      "text": {
+        "value": "1"
+      },
+      "size": {
+        "value": "1"
+      },
+      "space": {
+        "value": "1"
+      },
+      "border-radius": {
+        "value": "1"
+      },
+      "border-width": {
+        "value": "1"
+      }
     },
     "size": {
       "50": {
@@ -101,11 +112,11 @@
     },
     "color": {
       "white": {
-        "value": "#ffffff",
+        "value": "hsl(0, 0%, 100%)",
         "type": "color"
       },
       "black": {
-        "value": "#000000",
+        "value": "hsl(0, 0%, 0%)",
         "type": "color"
       },
       "alpha": {
@@ -212,1101 +223,1101 @@
       },
       "brand-green": {
         "100": {
-          "value": "#fcfdfa",
+          "value": "hsl(80, 43%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#f8fcf0",
+          "value": "hsl(80, 67%, 96%)",
           "type": "color"
         },
         "300": {
-          "value": "#EEfadc",
+          "value": "hsl(84, 75%, 92%)",
           "type": "color"
         },
         "400": {
-          "value": "#E4f7c7",
+          "value": "hsl(84, 75%, 87%)",
           "type": "color"
         },
         "500": {
-          "value": "#d8f2b0",
+          "value": "hsl(84, 72%, 82%)",
           "type": "color"
         },
         "600": {
-          "value": "#c1dE8E",
+          "value": "hsl(82, 55%, 71%)",
           "type": "color"
         },
         "700": {
-          "value": "#a7cf63",
+          "value": "hsl(82, 53%, 60%)",
           "type": "color"
         },
         "800": {
-          "value": "#80b807",
+          "value": "hsl(79, 93%, 37%)",
           "type": "color"
         },
         "900": {
-          "value": "#63a600",
+          "value": "hsl(84, 100%, 33%)",
           "type": "color"
         },
         "1000": {
-          "value": "#76b900",
+          "value": "hsl(82, 100%, 36%)",
           "type": "color"
         },
         "1100": {
-          "value": "#538300",
+          "value": "hsl(82, 100%, 25%)",
           "type": "color"
         },
         "1200": {
-          "value": "#253609",
+          "value": "hsl(83, 71%, 12%)",
           "type": "color"
         }
       },
       "yellow-nova": {
         "100": {
-          "value": "#fdfdf9",
+          "value": "hsl(60, 50%, 98%)",
           "type": "color"
         },
         "200": {
-          "value": "#fffce8",
+          "value": "hsl(52, 100%, 95%)",
           "type": "color"
         },
         "300": {
-          "value": "#fffbd1",
+          "value": "hsl(55, 100%, 91%)",
           "type": "color"
         },
         "400": {
-          "value": "#fff8bb",
+          "value": "hsl(54, 100%, 86%)",
           "type": "color"
         },
         "500": {
-          "value": "#fef2a4",
+          "value": "hsl(52, 97%, 82%)",
           "type": "color"
         },
         "600": {
-          "value": "#f9e68c",
+          "value": "hsl(50, 90%, 76%)",
           "type": "color"
         },
         "700": {
-          "value": "#efd36c",
+          "value": "hsl(47, 80%, 68%)",
           "type": "color"
         },
         "800": {
-          "value": "#ebbc00",
+          "value": "hsl(48, 100%, 46%)",
           "type": "color"
         },
         "900": {
-          "value": "#f5d90a",
+          "value": "hsl(53, 92%, 50%)",
           "type": "color"
         },
         "1000": {
-          "value": "#dc9b01",
+          "value": "hsl(42, 99%, 43%)",
           "type": "color"
         },
         "1100": {
-          "value": "#946800",
+          "value": "hsl(42, 100%, 29%)",
           "type": "color"
         },
         "1200": {
-          "value": "#35290f",
+          "value": "hsl(41, 55%, 13%)",
           "type": "color"
         }
       },
       "lime-pear": {
         "100": {
-          "value": "#fcfdfa",
+          "value": "hsl(80, 42%, 98%)",
           "type": "color"
         },
         "200": {
-          "value": "#f8fcf0",
+          "value": "hsl(80, 66%, 96%)",
           "type": "color"
         },
         "300": {
-          "value": "#effadc",
+          "value": "hsl(82, 75%, 92%)",
           "type": "color"
         },
         "400": {
-          "value": "#e5f7c7",
+          "value": "hsl(83, 75%, 87%)",
           "type": "color"
         },
         "500": {
-          "value": "#daf2b0",
+          "value": "hsl(82, 71%, 82%)",
           "type": "color"
         },
         "600": {
-          "value": "#c9e894",
+          "value": "hsl(82, 64%, 74%)",
           "type": "color"
         },
         "700": {
-          "value": "#abd16a",
+          "value": "hsl(82, 52%, 61%)",
           "type": "color"
         },
         "800": {
-          "value": "#86ba2c",
+          "value": "hsl(82, 61%, 45%)",
           "type": "color"
         },
         "900": {
-          "value": "#99d52a",
+          "value": "hsl(81, 67%, 50%)",
           "type": "color"
         },
         "1000": {
-          "value": "#8dc926",
+          "value": "hsl(82, 68%, 46%)",
           "type": "color"
         },
         "1100": {
-          "value": "#50770d",
+          "value": "hsl(82, 80%, 25%)",
           "type": "color"
         },
         "1200": {
-          "value": "#233209",
+          "value": "hsl(82, 69%, 11%)",
           "type": "color"
         }
       },
       "green-jade": {
         "100": {
-          "value": "#fbfefc",
+          "value": "hsl(140, 60%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#f2fcf5",
+          "value": "hsl(138, 62%, 96%)",
           "type": "color"
         },
         "300": {
-          "value": "#e9f9ee",
+          "value": "hsl(139, 57%, 94%)",
           "type": "color"
         },
         "400": {
-          "value": "#ddf3e4",
+          "value": "hsl(139, 47%, 91%)",
           "type": "color"
         },
         "500": {
-          "value": "#ccebd7",
+          "value": "hsl(141, 43%, 86%)",
           "type": "color"
         },
         "600": {
-          "value": "#b4dfc4",
+          "value": "hsl(142, 40%, 79%)",
           "type": "color"
         },
         "700": {
-          "value": "#92ceac",
+          "value": "hsl(146, 38%, 69%)",
           "type": "color"
         },
         "800": {
-          "value": "#5bb98c",
+          "value": "hsl(151, 40%, 54%)",
           "type": "color"
         },
         "900": {
-          "value": "#30a46c",
+          "value": "hsl(151, 54%, 41%)",
           "type": "color"
         },
         "1000": {
-          "value": "#299764",
+          "value": "hsl(152, 57%, 37%)",
           "type": "color"
         },
         "1100": {
-          "value": "#18794e",
+          "value": "hsl(153, 66%, 28%)",
           "type": "color"
         },
         "1200": {
-          "value": "#153226",
+          "value": "hsl(155, 40%, 13%)",
           "type": "color"
         }
       },
       "pink-rose": {
         "100": {
-          "value": "#fffcfe",
+          "value": "hsl(320, 100%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#fff7fc",
+          "value": "hsl(322, 100%, 98%)",
           "type": "color"
         },
         "300": {
-          "value": "#feeef8",
+          "value": "hsl(323, 88%, 96%)",
           "type": "color"
         },
         "400": {
-          "value": "#fce5f3",
+          "value": "hsl(323, 79%, 94%)",
           "type": "color"
         },
         "500": {
-          "value": "#f9d8ec",
+          "value": "hsl(324, 73%, 91%)",
           "type": "color"
         },
         "600": {
-          "value": "#f3c6e2",
+          "value": "hsl(323, 65%, 86%)",
           "type": "color"
         },
         "700": {
-          "value": "#ecadd4",
+          "value": "hsl(323, 62%, 80%)",
           "type": "color"
         },
         "800": {
-          "value": "#e38ec3",
+          "value": "hsl(323, 60%, 72%)",
           "type": "color"
         },
         "900": {
-          "value": "#d6409f",
+          "value": "hsl(322, 64%, 54%)",
           "type": "color"
         },
         "1000": {
-          "value": "#d23197",
+          "value": "hsl(322, 64%, 50%)",
           "type": "color"
         },
         "1100": {
-          "value": "#cd1d8d",
+          "value": "hsl(322, 75%, 45%)",
           "type": "color"
         },
         "1200": {
-          "value": "#3b0a2a",
+          "value": "hsl(321, 71%, 13%)",
           "type": "color"
         }
       },
       "purple-lavender": {
         "100": {
-          "value": "#fefcfe",
+          "value": "hsl(300, 50%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#fdfaff",
+          "value": "hsl(276, 100%, 99%)",
           "type": "color"
         },
         "300": {
-          "value": "#f9f1fe",
+          "value": "hsl(277, 86%, 97%)",
           "type": "color"
         },
         "400": {
-          "value": "#f3e7fc",
+          "value": "hsl(274, 77%, 94%)",
           "type": "color"
         },
         "500": {
-          "value": "#eddbf9",
+          "value": "hsl(276, 71%, 91%)",
           "type": "color"
         },
         "600": {
-          "value": "#e3ccf4",
+          "value": "hsl(274, 64%, 87%)",
           "type": "color"
         },
         "700": {
-          "value": "#d3b4ed",
+          "value": "hsl(273, 61%, 81%)",
           "type": "color"
         },
         "800": {
-          "value": "#be93e4",
+          "value": "hsl(272, 60%, 73%)",
           "type": "color"
         },
         "900": {
-          "value": "#8e4ec6",
+          "value": "hsl(272, 51%, 54%)",
           "type": "color"
         },
         "1000": {
-          "value": "#8445bc",
+          "value": "hsl(272, 47%, 50%)",
           "type": "color"
         },
         "1100": {
-          "value": "#793aaf",
+          "value": "hsl(272, 50%, 45%)",
           "type": "color"
         },
         "1200": {
-          "value": "#2b0e44",
+          "value": "hsl(272, 65%, 16%)",
           "type": "color"
         }
       },
       "purple-violet": {
         "100": {
-          "value": "#fdfcfe",
+          "value": "hsl(270, 50%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#fbfaff",
+          "value": "hsl(252, 100%, 99%)",
           "type": "color"
         },
         "300": {
-          "value": "#f5f2ff",
+          "value": "hsl(254, 100%, 97%)",
           "type": "color"
         },
         "400": {
-          "value": "#ede9fe",
+          "value": "hsl(251, 91%, 95%)",
           "type": "color"
         },
         "500": {
-          "value": "#e4defc",
+          "value": "hsl(252, 83%, 92%)",
           "type": "color"
         },
         "600": {
-          "value": "#d7cff9",
+          "value": "hsl(251, 77%, 89%)",
           "type": "color"
         },
         "700": {
-          "value": "#c4b8f3",
+          "value": "hsl(252, 71%, 83%)",
           "type": "color"
         },
         "800": {
-          "value": "#aa99ec",
+          "value": "hsl(252, 68%, 76%)",
           "type": "color"
         },
         "900": {
-          "value": "#6e56cf",
+          "value": "hsl(252, 55%, 57%)",
           "type": "color"
         },
         "1000": {
-          "value": "#644fc1",
+          "value": "hsl(251, 47%, 53%)",
           "type": "color"
         },
         "1100": {
-          "value": "#5746af",
+          "value": "hsl(250, 42%, 48%)",
           "type": "color"
         },
         "1200": {
-          "value": "#20134b",
+          "value": "hsl(254, 59%, 18%)",
           "type": "color"
         }
       },
       "purple-plum": {
         "100": {
-          "value": "#fefcff",
+          "value": "hsl(280, 100%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#fff8ff",
+          "value": "hsl(300, 100%, 98%)",
           "type": "color"
         },
         "300": {
-          "value": "#fceffc",
+          "value": "hsl(300, 68%, 96%)",
           "type": "color"
         },
         "400": {
-          "value": "#f9e5f9",
+          "value": "hsl(300, 62%, 93%)",
           "type": "color"
         },
         "500": {
-          "value": "#f3d9f4",
+          "value": "hsl(298, 55%, 90%)",
           "type": "color"
         },
         "600": {
-          "value": "#ebc8ed",
+          "value": "hsl(297, 50%, 85%)",
           "type": "color"
         },
         "700": {
-          "value": "#dfafe3",
+          "value": "hsl(295, 48%, 78%)",
           "type": "color"
         },
         "800": {
-          "value": "#cf91d8",
+          "value": "hsl(292, 47%, 70%)",
           "type": "color"
         },
         "900": {
-          "value": "#ab4aba",
+          "value": "hsl(292, 44%, 51%)",
           "type": "color"
         },
         "1000": {
-          "value": "#a43cb4",
+          "value": "hsl(292, 50%, 47%)",
           "type": "color"
         },
         "1100": {
-          "value": "#9c2bad",
+          "value": "hsl(292, 60%, 42%)",
           "type": "color"
         },
         "1200": {
-          "value": "#340c3b",
+          "value": "hsl(291, 66%, 13%)",
           "type": "color"
         }
       },
       "pink-magenta": {
         "100": {
-          "value": "#fffcfd",
+          "value": "hsl(340, 100%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#fff7fb",
+          "value": "hsl(330, 100%, 98%)",
           "type": "color"
         },
         "300": {
-          "value": "#feeff6",
+          "value": "hsl(332, 88%, 96%)",
           "type": "color"
         },
         "400": {
-          "value": "#fce5f0",
+          "value": "hsl(331, 79%, 94%)",
           "type": "color"
         },
         "500": {
-          "value": "#f9d8e7",
+          "value": "hsl(333, 73%, 91%)",
           "type": "color"
         },
         "600": {
-          "value": "#f4c6db",
+          "value": "hsl(333, 67%, 86%)",
           "type": "color"
         },
         "700": {
-          "value": "#edadc8",
+          "value": "hsl(335, 64%, 80%)",
           "type": "color"
         },
         "800": {
-          "value": "#e58fb1",
+          "value": "hsl(336, 62%, 72%)",
           "type": "color"
         },
         "900": {
-          "value": "#e03177",
+          "value": "hsl(336, 73%, 53%)",
           "type": "color"
         },
         "1000": {
-          "value": "#ff4590",
+          "value": "hsl(336, 100%, 63%)",
           "type": "color"
         },
         "1100": {
-          "value": "#d31e66",
+          "value": "hsl(336, 75%, 47%)",
           "type": "color"
         },
         "1200": {
-          "value": "#3d0d1d",
+          "value": "hsl(340, 64%, 14%)",
           "type": "color"
         }
       },
       "red-tomato": {
         "100": {
-          "value": "#fffcfc",
+          "value": "hsl(0, 100%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#fff8f7",
+          "value": "hsl(7, 100%, 98%)",
           "type": "color"
         },
         "300": {
-          "value": "#fff0ee",
+          "value": "hsl(7, 100%, 96%)",
           "type": "color"
         },
         "400": {
-          "value": "#ffe6e2",
+          "value": "hsl(8, 100%, 94%)",
           "type": "color"
         },
         "500": {
-          "value": "#fdd8d3",
+          "value": "hsl(7, 91%, 91%)",
           "type": "color"
         },
         "600": {
-          "value": "#fac7be",
+          "value": "hsl(9, 85%, 86%)",
           "type": "color"
         },
         "700": {
-          "value": "#f3b0a2",
+          "value": "hsl(10, 77%, 79%)",
           "type": "color"
         },
         "800": {
-          "value": "#ea9280",
+          "value": "hsl(10, 71%, 71%)",
           "type": "color"
         },
         "900": {
-          "value": "#e54d2e",
+          "value": "hsl(10, 77%, 53%)",
           "type": "color"
         },
         "1000": {
-          "value": "#db4324",
+          "value": "hsl(10, 71%, 50%)",
           "type": "color"
         },
         "1100": {
-          "value": "#ca3214",
+          "value": "hsl(10, 82%, 43%)",
           "type": "color"
         },
         "1200": {
-          "value": "#341711",
+          "value": "hsl(10, 50%, 13%)",
           "type": "color"
         }
       },
       "orange-pumpkin": {
         "100": {
-          "value": "#fefcfb",
+          "value": "hsl(20, 60%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#fef8f4",
+          "value": "hsl(24, 83%, 97%)",
           "type": "color"
         },
         "300": {
-          "value": "#fff1e7",
+          "value": "hsl(25, 100%, 95%)",
           "type": "color"
         },
         "400": {
-          "value": "#ffe8d7",
+          "value": "hsl(25, 100%, 92%)",
           "type": "color"
         },
         "500": {
-          "value": "#ffdcc3",
+          "value": "hsl(25, 100%, 88%)",
           "type": "color"
         },
         "600": {
-          "value": "#ffcca7",
+          "value": "hsl(25, 100%, 82%)",
           "type": "color"
         },
         "700": {
-          "value": "#ffb381",
+          "value": "hsl(24, 100%, 75%)",
           "type": "color"
         },
         "800": {
-          "value": "#fa934e",
+          "value": "hsl(24, 94%, 64%)",
           "type": "color"
         },
         "900": {
-          "value": "#f76808",
+          "value": "hsl(24, 93%, 50%)",
           "type": "color"
         },
         "1000": {
-          "value": "#ed5f00",
+          "value": "hsl(24, 100%, 46%)",
           "type": "color"
         },
         "1100": {
-          "value": "#bd4b00",
+          "value": "hsl(24, 100%, 37%)",
           "type": "color"
         },
         "1200": {
-          "value": "#451e11",
+          "value": "hsl(15, 60%, 16%)",
           "type": "color"
         }
       },
       "yellow-amber": {
         "100": {
-          "value": "#fefdfb",
+          "value": "hsl(40, 60%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#fff9ed",
+          "value": "hsl(40, 100%, 96%)",
           "type": "color"
         },
         "300": {
-          "value": "#fff4d5",
+          "value": "hsl(44, 100%, 91%)",
           "type": "color"
         },
         "400": {
-          "value": "#ffecbc",
+          "value": "hsl(43, 100%, 86%)",
           "type": "color"
         },
         "500": {
-          "value": "#ffe3a2",
+          "value": "hsl(42, 100%, 81%)",
           "type": "color"
         },
         "600": {
-          "value": "#ffd386",
+          "value": "hsl(38, 100%, 76%)",
           "type": "color"
         },
         "700": {
-          "value": "#f3ba63",
+          "value": "hsl(36, 85%, 67%)",
           "type": "color"
         },
         "800": {
-          "value": "#ee9d2b",
+          "value": "hsl(35, 85%, 55%)",
           "type": "color"
         },
         "900": {
-          "value": "#ffb224",
+          "value": "hsl(39, 100%, 57%)",
           "type": "color"
         },
         "1000": {
-          "value": "#ffa01c",
+          "value": "hsl(35, 100%, 55%)",
           "type": "color"
         },
         "1100": {
-          "value": "#ad5700",
+          "value": "hsl(30, 100%, 33%)",
           "type": "color"
         },
         "1200": {
-          "value": "#4e2009",
+          "value": "hsl(20, 79%, 17%)",
           "type": "color"
         }
       },
       "green-grass": {
         "100": {
-          "value": "#fbfefb",
+          "value": "hsl(120, 60%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#f3fcf3",
+          "value": "hsl(120, 60%, 97%)",
           "type": "color"
         },
         "300": {
-          "value": "#ebf9eb",
+          "value": "hsl(120, 53%, 94%)",
           "type": "color"
         },
         "400": {
-          "value": "#dff3df",
+          "value": "hsl(120, 45%, 91%)",
           "type": "color"
         },
         "500": {
-          "value": "#ceebcf",
+          "value": "hsl(122, 42%, 86%)",
           "type": "color"
         },
         "600": {
-          "value": "#b7dfba",
+          "value": "hsl(124, 38%, 79%)",
           "type": "color"
         },
         "700": {
-          "value": "#97cf9c",
+          "value": "hsl(125, 36%, 70%)",
           "type": "color"
         },
         "800": {
-          "value": "#65ba75",
+          "value": "hsl(131, 38%, 56%)",
           "type": "color"
         },
         "900": {
-          "value": "#46a758",
+          "value": "hsl(131, 40%, 46%)",
           "type": "color"
         },
         "1000": {
-          "value": "#3d9a50",
+          "value": "hsl(132, 43%, 42%)",
           "type": "color"
         },
         "1100": {
-          "value": "#297c3b",
+          "value": "hsl(133, 50%, 32%)",
           "type": "color"
         },
         "1200": {
-          "value": "#1b311e",
+          "value": "hsl(128, 28%, 14%)",
           "type": "color"
         }
       },
       "teal-seafoam": {
         "100": {
-          "value": "#fafefd",
+          "value": "hsl(165, 66%, 98%)",
           "type": "color"
         },
         "200": {
-          "value": "#f1fcfa",
+          "value": "hsl(169, 64%, 96%)",
           "type": "color"
         },
         "300": {
-          "value": "#e7f9f5",
+          "value": "hsl(167, 60%, 94%)",
           "type": "color"
         },
         "400": {
-          "value": "#d9f3ee",
+          "value": "hsl(168, 52%, 90%)",
           "type": "color"
         },
         "500": {
-          "value": "#c7ebe5",
+          "value": "hsl(170, 47%, 85%)",
           "type": "color"
         },
         "600": {
-          "value": "#afdfd7",
+          "value": "hsl(170, 42%, 78%)",
           "type": "color"
         },
         "700": {
-          "value": "#8dcec3",
+          "value": "hsl(170, 39%, 68%)",
           "type": "color"
         },
         "800": {
-          "value": "#53b9ab",
+          "value": "hsl(172, 42%, 52%)",
           "type": "color"
         },
         "900": {
-          "value": "#12a594",
+          "value": "hsl(173, 80%, 35%)",
           "type": "color"
         },
         "1000": {
-          "value": "#0e9888",
+          "value": "hsl(173, 83%, 32%)",
           "type": "color"
         },
         "1100": {
-          "value": "#067a6f",
+          "value": "hsl(174, 90%, 25%)",
           "type": "color"
         },
         "1200": {
-          "value": "#10302b",
+          "value": "hsl(171, 50%, 12%)",
           "type": "color"
         }
       },
       "green-mint": {
         "100": {
-          "value": "#f9fefd",
+          "value": "hsl(168, 71%, 98%)",
           "type": "color"
         },
         "200": {
-          "value": "#effefa",
+          "value": "hsl(164, 88%, 96%)",
           "type": "color"
         },
         "300": {
-          "value": "#e1fbf4",
+          "value": "hsl(164, 76%, 93%)",
           "type": "color"
         },
         "400": {
-          "value": "#d2f7ed",
+          "value": "hsl(164, 69%, 89%)",
           "type": "color"
         },
         "500": {
-          "value": "#c0efe3",
+          "value": "hsl(165, 59%, 84%)",
           "type": "color"
         },
         "600": {
-          "value": "#a5e4d4",
+          "value": "hsl(165, 53%, 77%)",
           "type": "color"
         },
         "700": {
-          "value": "#7dd4c0",
+          "value": "hsl(166, 50%, 66%)",
           "type": "color"
         },
         "800": {
-          "value": "#40c4aa",
+          "value": "hsl(168, 52%, 51%)",
           "type": "color"
         },
         "900": {
-          "value": "#70e1c8",
+          "value": "hsl(167, 65%, 66%)",
           "type": "color"
         },
         "1000": {
-          "value": "#69d9c1",
+          "value": "hsl(167, 59%, 63%)",
           "type": "color"
         },
         "1100": {
-          "value": "#147d6f",
+          "value": "hsl(172, 72%, 28%)",
           "type": "color"
         },
         "1200": {
-          "value": "#09342e",
+          "value": "hsl(172, 70%, 12%)",
           "type": "color"
         }
       },
       "teal-cyan": {
         "100": {
-          "value": "#fafdfe",
+          "value": "hsl(195, 66%, 98%)",
           "type": "color"
         },
         "200": {
-          "value": "#f2fcfd",
+          "value": "hsl(185, 73%, 97%)",
           "type": "color"
         },
         "300": {
-          "value": "#e7f9fb",
+          "value": "hsl(186, 71%, 94%)",
           "type": "color"
         },
         "400": {
-          "value": "#d8f3f6",
+          "value": "hsl(186, 62%, 90%)",
           "type": "color"
         },
         "500": {
-          "value": "#c4eaef",
+          "value": "hsl(187, 57%, 85%)",
           "type": "color"
         },
         "600": {
-          "value": "#aadee6",
+          "value": "hsl(188, 54%, 78%)",
           "type": "color"
         },
         "700": {
-          "value": "#84cdda",
+          "value": "hsl(189, 53%, 68%)",
           "type": "color"
         },
         "800": {
-          "value": "#3db9cf",
+          "value": "hsl(189, 60%, 52%)",
           "type": "color"
         },
         "900": {
-          "value": "#05a2c2",
+          "value": "hsl(190, 95%, 39%)",
           "type": "color"
         },
         "1000": {
-          "value": "#0894b3",
+          "value": "hsl(191, 91%, 36%)",
           "type": "color"
         },
         "1100": {
-          "value": "#0c7792",
+          "value": "hsl(192, 84%, 31%)",
           "type": "color"
         },
         "1200": {
-          "value": "#04313c",
+          "value": "hsl(192, 87%, 12%)",
           "type": "color"
         }
       },
       "blue-sky": {
         "100": {
-          "value": "#f9feff",
+          "value": "hsl(190, 100%, 98%)",
           "type": "color"
         },
         "200": {
-          "value": "#f1fcff",
+          "value": "hsl(193, 100%, 97%)",
           "type": "color"
         },
         "300": {
-          "value": "#e4f9ff",
+          "value": "hsl(193, 100%, 94%)",
           "type": "color"
         },
         "400": {
-          "value": "#d5f4fd",
+          "value": "hsl(193, 90%, 91%)",
           "type": "color"
         },
         "500": {
-          "value": "#c1ecf9",
+          "value": "hsl(194, 82%, 86%)",
           "type": "color"
         },
         "600": {
-          "value": "#a4dff1",
+          "value": "hsl(194, 73%, 79%)",
           "type": "color"
         },
         "700": {
-          "value": "#79cfea",
+          "value": "hsl(194, 72%, 69%)",
           "type": "color"
         },
         "800": {
-          "value": "#2ebde5",
+          "value": "hsl(193, 77%, 53%)",
           "type": "color"
         },
         "900": {
-          "value": "#68ddfd",
+          "value": "hsl(193, 97%, 70%)",
           "type": "color"
         },
         "1000": {
-          "value": "#5fd4f4",
+          "value": "hsl(193, 87%, 66%)",
           "type": "color"
         },
         "1100": {
-          "value": "#0078a1",
+          "value": "hsl(195, 100%, 31%)",
           "type": "color"
         },
         "1200": {
-          "value": "#003242",
+          "value": "hsl(195, 100%, 12%)",
           "type": "color"
         }
       },
       "blue-cobalt": {
         "100": {
-          "value": "#fbfdff",
+          "value": "hsl(210, 100%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#f5faff",
+          "value": "hsl(210, 100%, 98%)",
           "type": "color"
         },
         "300": {
-          "value": "#edf6ff",
+          "value": "hsl(210, 100%, 96%)",
           "type": "color"
         },
         "400": {
-          "value": "#e1f0ff",
+          "value": "hsl(210, 100%, 94%)",
           "type": "color"
         },
         "500": {
-          "value": "#cee7fe",
+          "value": "hsl(209, 96%, 90%)",
           "type": "color"
         },
         "600": {
-          "value": "#b7d9f8",
+          "value": "hsl(209, 82%, 84%)",
           "type": "color"
         },
         "700": {
-          "value": "#96c7f2",
+          "value": "hsl(208, 78%, 76%)",
           "type": "color"
         },
         "800": {
-          "value": "#5eb0ef",
+          "value": "hsl(206, 81%, 65%)",
           "type": "color"
         },
         "900": {
-          "value": "#0091ff",
+          "value": "hsl(206, 100%, 50%)",
           "type": "color"
         },
         "1000": {
-          "value": "#086ae3",
+          "value": "hsl(213, 93%, 46%)",
           "type": "color"
         },
         "1100": {
-          "value": "#006adc",
+          "value": "hsl(211, 100%, 43%)",
           "type": "color"
         },
         "1200": {
-          "value": "#00254d",
+          "value": "hsl(211, 100%, 15%)",
           "type": "color"
         }
       },
       "blue-indigo": {
         "100": {
-          "value": "#fdfdfe",
+          "value": "hsl(240, 33%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#f8faff",
+          "value": "hsl(223, 100%, 98%)",
           "type": "color"
         },
         "300": {
-          "value": "#f0f4ff",
+          "value": "hsl(224, 100%, 97%)",
           "type": "color"
         },
         "400": {
-          "value": "#e6edfe",
+          "value": "hsl(222, 92%, 94%)",
           "type": "color"
         },
         "500": {
-          "value": "#d9e2fc",
+          "value": "hsl(225, 85%, 92%)",
           "type": "color"
         },
         "600": {
-          "value": "#c6d4f9",
+          "value": "hsl(224, 81%, 87%)",
           "type": "color"
         },
         "700": {
-          "value": "#aec0f5",
+          "value": "hsl(225, 78%, 82%)",
           "type": "color"
         },
         "800": {
-          "value": "#8da4ef",
+          "value": "hsl(226, 75%, 74%)",
           "type": "color"
         },
         "900": {
-          "value": "#3e63dd",
+          "value": "hsl(226, 70%, 55%)",
           "type": "color"
         },
         "1000": {
-          "value": "#3a5ccc",
+          "value": "hsl(226, 58%, 51%)",
           "type": "color"
         },
         "1100": {
-          "value": "#3451b2",
+          "value": "hsl(226, 54%, 45%)",
           "type": "color"
         },
         "1200": {
-          "value": "#101d46",
+          "value": "hsl(226, 62%, 16%)",
           "type": "color"
         }
       },
       "gray-denim": {
         "100": {
-          "value": "#fbfcfd",
+          "value": "hsl(210, 33%, 98%)",
           "type": "color"
         },
         "200": {
-          "value": "#f9f9fb",
+          "value": "hsl(240, 20%, 98%)",
           "type": "color"
         },
         "300": {
-          "value": "#f0f1f5",
+          "value": "hsl(228, 20%, 95%)",
           "type": "color"
         },
         "400": {
-          "value": "#eaecf0",
+          "value": "hsl(220, 16%, 92%)",
           "type": "color"
         },
         "500": {
-          "value": "#e4e6ec",
+          "value": "hsl(225, 17%, 91%)",
           "type": "color"
         },
         "600": {
-          "value": "#dee1e8",
+          "value": "hsl(222, 17%, 89%)",
           "type": "color"
         },
         "700": {
-          "value": "#d5d8e1",
+          "value": "hsl(225, 16%, 85%)",
           "type": "color"
         },
         "800": {
-          "value": "#bdc1d0",
+          "value": "hsl(227, 16%, 77%)",
           "type": "color"
         },
         "900": {
-          "value": "#82899b",
+          "value": "hsl(223, 11%, 55%)",
           "type": "color"
         },
         "1000": {
-          "value": "#777e92",
+          "value": "hsl(224, 11%, 52%)",
           "type": "color"
         },
         "1100": {
-          "value": "#64697d",
+          "value": "hsl(228, 11%, 44%)",
           "type": "color"
         },
         "1200": {
-          "value": "#23242b",
+          "value": "hsl(233, 10%, 15%)",
           "type": "color"
         }
       },
       "gray-slate": {
         "100": {
-          "value": "#fbfcfd",
+          "value": "hsl(210, 33%, 98%)",
           "type": "color"
         },
         "200": {
-          "value": "#f8f9fa",
+          "value": "hsl(210, 16%, 97%)",
           "type": "color"
         },
         "300": {
-          "value": "#f0f1f4",
+          "value": "hsl(225, 15%, 94%)",
           "type": "color"
         },
         "400": {
-          "value": "#ebecef",
+          "value": "hsl(225, 11%, 92%)",
           "type": "color"
         },
         "500": {
-          "value": "#e6e8eb",
+          "value": "hsl(216, 11%, 91%)",
           "type": "color"
         },
         "600": {
-          "value": "#dfe3e6",
+          "value": "hsl(206, 12%, 88%)",
           "type": "color"
         },
         "700": {
-          "value": "#d7dbdf",
+          "value": "hsl(210, 11%, 85%)",
           "type": "color"
         },
         "800": {
-          "value": "#c1c8cd",
+          "value": "hsl(205, 10%, 78%)",
           "type": "color"
         },
         "900": {
-          "value": "#889096",
+          "value": "hsl(206, 6%, 56%)",
           "type": "color"
         },
         "1000": {
-          "value": "#7e868c",
+          "value": "hsl(206, 5%, 52%)",
           "type": "color"
         },
         "1100": {
-          "value": "#676f74",
+          "value": "hsl(203, 5%, 42%)",
           "type": "color"
         },
         "1200": {
-          "value": "#11181c",
+          "value": "hsl(202, 24%, 8%)",
           "type": "color"
         }
       },
       "red-cardinal": {
         "100": {
-          "value": "#fffcfc",
+          "value": "hsl(0, 100%, 99%)",
           "type": "color"
         },
         "200": {
-          "value": "#fff8f8",
+          "value": "hsl(0, 100%, 98%)",
           "type": "color"
         },
         "300": {
-          "value": "#ffefef",
+          "value": "hsl(0, 100%, 96%)",
           "type": "color"
         },
         "400": {
-          "value": "#ffe5e5",
+          "value": "hsl(0, 100%, 94%)",
           "type": "color"
         },
         "500": {
-          "value": "#fdd8d8",
+          "value": "hsl(0, 90%, 92%)",
           "type": "color"
         },
         "600": {
-          "value": "#f9c6c6",
+          "value": "hsl(0, 81%, 87%)",
           "type": "color"
         },
         "700": {
-          "value": "#f3aeaf",
+          "value": "hsl(359, 74%, 81%)",
           "type": "color"
         },
         "800": {
-          "value": "#eb9091",
+          "value": "hsl(359, 69%, 74%)",
           "type": "color"
         },
         "900": {
-          "value": "#e5484d",
+          "value": "hsl(358, 75%, 59%)",
           "type": "color"
         },
         "1000": {
-          "value": "#dc3d43",
+          "value": "hsl(358, 69%, 55%)",
           "type": "color"
         },
         "1100": {
-          "value": "#cd2b31",
+          "value": "hsl(358, 65%, 48%)",
           "type": "color"
         },
         "1200": {
-          "value": "#381316",
+          "value": "hsl(355, 49%, 14%)",
           "type": "color"
         }
       }
@@ -1567,13 +1578,23 @@
     },
     "animation": {
       "duration": {
-        "100": { "value": "0" },
-        "200": { "value": "200ms" },
-        "300": { "value": "400ms" },
-        "400": { "value": "800ms" }
+        "100": {
+          "value": "0"
+        },
+        "200": {
+          "value": "200ms"
+        },
+        "300": {
+          "value": "400ms"
+        },
+        "400": {
+          "value": "800ms"
+        }
       },
-      "easing" : {
-        "100": { "value": "ease-in-out" }
+      "easing": {
+        "100": {
+          "value": "ease-in-out"
+        }
       }
     }
   },
@@ -1732,18 +1753,6 @@
           "type": "color"
         }
       },
-      "emphasize": {
-        "color": {
-          "value": "{sys.text.white.color}",
-          "type": "color",
-          "deprecated": true
-        },
-        "background": {
-          "value": "{sys.accent.primary.background}",
-          "type": "color",
-          "deprecated": true
-        }
-      },
       "emphasis": {
         "color": {
           "value": "{sys.text.white.color}",
@@ -1761,16 +1770,6 @@
         },
         "background": {
           "value": "{ref.color.red-cardinal.1100}",
-          "type": "color"
-        }
-      },
-      "secondary": {
-        "color": {
-          "value": "{sys.text.white.color}",
-          "type": "color"
-        },
-        "background": {
-          "value": "{sys.accent.secondary.background}",
           "type": "color"
         }
       },
@@ -2154,81 +2153,81 @@
         "diverging": {
           "virdis": {
             "100": {
-              "value": "#fde725",
+              "value": "hsl(54, 98%, 56%)",
               "type": "color"
             },
             "200": {
-              "value": "#d2e21b",
+              "value": "hsl(65, 78%, 49%)",
               "type": "color"
             },
             "300": {
-              "value": "#a5db36",
+              "value": "hsl(80, 69%, 53%)",
               "type": "color"
             },
             "400": {
-              "value": "#7ad151",
+              "value": "hsl(101, 58%, 56%)",
               "type": "color"
             },
             "500": {
-              "value": "#54c568",
+              "value": "hsl(131, 49%, 55%)",
               "type": "color"
             },
             "600": {
-              "value": "#35b779",
+              "value": "hsl(151, 55%, 46%)",
               "type": "color"
             },
             "700": {
-              "value": "#22a884",
+              "value": "hsl(164, 66%, 39%)",
               "type": "color"
             },
             "800": {
-              "value": "#1f988b",
+              "value": "hsl(174, 66%, 35%)",
               "type": "color"
             },
             "900": {
-              "value": "#23888e",
+              "value": "hsl(183, 60%, 34%)",
               "type": "color"
             },
             "1000": {
-              "value": "#31688e",
+              "value": "hsl(205, 48%, 37%)",
               "type": "color"
             },
             "1100": {
-              "value": "#39568c",
+              "value": "hsl(219, 42%, 38%)",
               "type": "color"
             },
             "1200": {
-              "value": "#414487",
+              "value": "hsl(237, 35%, 39%)",
               "type": "color"
             },
             "1300": {
-              "value": "#472f7d",
+              "value": "hsl(258, 45%, 33%)",
               "type": "color"
             },
             "1400": {
-              "value": "#481a6c",
+              "value": "hsl(274, 61%, 26%)",
               "type": "color"
             },
             "1500": {
-              "value": "#440154",
+              "value": "hsl(288, 97%, 16%)",
               "type": "color"
             }
           },
           "red-green": {
             "100": {
-              "value": "#ad3035",
+              "value": "hsl(358, 56%, 43%)",
               "type": "color"
             },
             "200": {
-              "value": "#dc3d43",
+              "value": "hsl(358, 69%, 55%)",
               "type": "color"
             },
             "300": {
-              "value": "#fa5c61",
+              "value": "hsl(358, 94%, 67%)",
               "type": "color"
             },
             "400": {
-              "value": "#fab3b4",
+              "value": "hsl(359, 87%, 84%)",
               "type": "color"
             },
             "500": {
@@ -2236,19 +2235,19 @@
               "type": "color"
             },
             "600": {
-              "value": "#9be9a8",
+              "value": "hsl(130, 63%, 76%)",
               "type": "color"
             },
             "700": {
-              "value": "#40c463",
+              "value": "hsl(136, 52%, 51%)",
               "type": "color"
             },
             "800": {
-              "value": "#30a14e",
+              "value": "hsl(136, 54%, 41%)",
               "type": "color"
             },
             "900": {
-              "value": "#216e39",
+              "value": "hsl(139, 53%, 28%)",
               "type": "color"
             }
           }
