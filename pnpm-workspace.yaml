@@ -1,5 +1,4 @@
 packages:
-  - 'projects/testing'
   - 'projects/demos/angular'
   - 'projects/demos/buildless'
   - 'projects/demos/extensions'
@@ -12,3 +11,5 @@ packages:
   - 'projects/pages'
   - 'projects/elements'
   - 'projects/elements-react'
+  - 'projects/testing'
+  - 'projects/themes'

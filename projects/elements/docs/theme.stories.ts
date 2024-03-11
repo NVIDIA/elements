@@ -1,5 +1,4 @@
 import { html, css, LitElement, unsafeCSS } from 'lit';
-import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import typography from '@elements/elements/css/module.typography.css?inline';
@@ -227,9 +226,9 @@ class ThemeGeneratorDemo extends LitElement {
     <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
   </nve-app-header>
 
-  <nve-alert-banner status="accent">
+  <nve-alert-group status="accent" prominence="emphasis" container="full">
     <nve-alert closable>banner message</nve-alert>
-  </nve-alert-banner>
+  </nve-alert-group>
 
   <div nve-layout="row" style="width: 100%;">
     <nve-panel expanded>

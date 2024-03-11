@@ -1,10 +1,12 @@
-import glob from 'glob';
+import { globSync } from 'glob';
 import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
 
-const files = [...glob.sync('./src/**/*.stories.ts'), ...glob.sync('./docs/patterns/*.stories.ts')];
+const files = [...globSync('./src/**/*.stories.ts'), ...glob.sync('./docs/patterns/*.stories.ts')];
 
-export const stories = (await Promise.all(files.map(async (file) => await getStories(file)))).filter((story) => story.element);
+export const stories = (await Promise.all(files.map(async file => await getStories(file)))).filter(
+  story => story.element
+);
 
 async function getStories(filePath) {
   const project = new Project();
@@ -13,12 +15,12 @@ async function getStories(filePath) {
   const element = file
     .getChildrenOfKind(SyntaxKind.ExportAssignment)[0]
     .getDescendantsOfKind(SyntaxKind.Identifier)
-    .find((el) => el.getText() === 'component')
+    .find(el => el.getText() === 'component')
     ?.getNextSiblings()[1]
     ?.getText()
     ?.replace(/'/g, '');
 
-  const formattedStories = stories.map(async (story) => {
+  const formattedStories = stories.map(async story => {
     const id = story.getDescendantsOfKind(SyntaxKind.Identifier)[0].getText();
     const file = story.getSourceFile().getBaseName();
     let template = story

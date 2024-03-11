@@ -54,6 +54,11 @@ module.exports = {
             label: '@nvidia-elements/testing',
             type: 'package',
             url: 'https://registry.npmjs.org'
+          },
+          {
+            label: '@nvidia-elements/themes',
+            type: 'package',
+            url: 'https://registry.npmjs.org'
           }
         ]
       }
@@ -83,22 +88,22 @@ module.exports = {
           },
           {
             files: ['./projects/elements/package.json'],
-            from: '"version": "0.0.0"',
-            to: '"version": "${nextRelease.version}"',
+            from: '"0.0.0"',
+            to: '"${nextRelease.version}"',
             results: [
               {
                 file: './projects/elements/package.json',
                 hasChanged: true,
-                numMatches: 1,
-                numReplacements: 1
+                numMatches: 2,
+                numReplacements: 2
               }
             ],
             countMatches: true
           },
           {
             files: ['./projects/elements-react/package.json'],
-            from: '0.0.0',
-            to: '${nextRelease.version}',
+            from: '"0.0.0"',
+            to: '"${nextRelease.version}"',
             results: [
               {
                 file: './projects/elements-react/package.json',
@@ -116,6 +121,10 @@ module.exports = {
       '@amanda-mitchell/semantic-release-npm-multiple',
       {
         registries: {
+          urm_themes: {
+            npmPublish: true,
+            pkgRoot: './projects/themes'
+          },
           urm_elements: {
             npmPublish: true,
             pkgRoot: './projects/elements'
@@ -127,6 +136,10 @@ module.exports = {
           urm_testing: {
             npmPublish: true,
             pkgRoot: './projects/testing'
+          },
+          elements_themes: {
+            npmPublish: true,
+            pkgRoot: './projects/themes'
           },
           elements_elements: {
             npmPublish: true,
