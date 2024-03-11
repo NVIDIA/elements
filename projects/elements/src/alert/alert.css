@@ -34,7 +34,7 @@ slot {
   display: flex;
   align-items: center;
   justify-content: var(--justify-content);
-  gap: var(--gap);
+  gap: var(--mlv-ref-space-xxs);
   min-height: var(--min-height);
 }
 
@@ -77,7 +77,7 @@ mlv-icon-button:not([icon-name='cancel']) {
   margin-left: auto;
 }
 
-mlv-icon-button[interaction='flat'] {
+mlv-icon-button {
   --color: var(--_icon-cancel-color);
 }
 

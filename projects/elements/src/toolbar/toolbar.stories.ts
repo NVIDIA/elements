@@ -18,9 +18,9 @@ export const Default = {
   render: () => html`
   <div>
     <mlv-toolbar>
-      <mlv-button container="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button container="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-      <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
+      <mlv-button container="inline"><mlv-icon name="add"></mlv-icon> create</mlv-button>
+      <mlv-button container="inline"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
+      <mlv-icon-button container="inline" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
     </mlv-toolbar>
   </div>
   `
@@ -30,8 +30,8 @@ export const ContainerFlat = {
   render: () => html`
   <div>
     <mlv-toolbar container="flat">
-      <mlv-button container="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button container="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
+      <mlv-button container="inline"><mlv-icon name="add"></mlv-icon> create</mlv-button>
+      <mlv-button container="inline"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
       <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
     </mlv-toolbar>
   </div>
@@ -42,8 +42,8 @@ export const ContainerInset = {
   render: () => html`
   <div>
     <mlv-toolbar container="inset">
-      <mlv-button container="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button container="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
+      <mlv-button container="inline"><mlv-icon name="add"></mlv-icon> create</mlv-button>
+      <mlv-button container="inline"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
       <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
     </mlv-toolbar>
   </div>
@@ -54,8 +54,8 @@ export const ContainerFull = {
   render: () => html`
   <div>
     <mlv-toolbar container="full">
-      <mlv-button container="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button container="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
+      <mlv-button container="inline"><mlv-icon name="add"></mlv-icon> create</mlv-button>
+      <mlv-button container="inline"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
       <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
     </mlv-toolbar>
   </div>
@@ -167,7 +167,7 @@ export const Filter = {
           <option value="Contains"></option>
         </datalist>
       </mlv-combobox>
-      <mlv-icon-button aria-label="clear filters" icon-name="cancel" slot="suffix"></mlv-icon-button>
+      <mlv-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></mlv-icon-button>
       <mlv-button slot="suffix">Save Filters</mlv-button>
     </mlv-toolbar>
   </div>
@@ -228,7 +228,7 @@ export const Scroll = {
           <option value="Contains"></option>
         </datalist>
       </mlv-combobox>
-      <mlv-icon-button aria-label="clear filters" icon-name="cancel" slot="suffix"></mlv-icon-button>
+      <mlv-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></mlv-icon-button>
       <mlv-button slot="suffix">Save Filters</mlv-button>
     </mlv-toolbar>
   </div>
@@ -289,7 +289,7 @@ export const Wrap = {
           <option value="Contains"></option>
         </datalist>
       </mlv-combobox>
-      <mlv-icon-button aria-label="clear filters" icon-name="cancel" slot="suffix"></mlv-icon-button>
+      <mlv-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></mlv-icon-button>
       <mlv-button slot="suffix">Save Filters</mlv-button>
     </mlv-toolbar>
   </div>

@@ -1,0 +1,77 @@
+{
+  "$schema": "../dist/schema.json",
+  "theme-ddb": {
+    "experimental": {
+      "value": "true"
+    }
+  },
+  "ref": {
+    "color": {
+      "gray-denim": {
+        "100": {
+          "value": "hsl(225, 5%, 5%)",
+          "type": "color"
+        },
+        "200": {
+          "value": "hsl(225, 5%, 11%)",
+          "type": "color"
+        },
+        "300": {
+          "value": "hsl(224, 5%, 14%)",
+          "type": "color"
+        },
+        "400": {
+          "value": "hsl(225, 5%, 16%)",
+          "type": "color"
+        },
+        "500": {
+          "value": "hsl(223, 5%, 18%)",
+          "type": "color"
+        },
+        "600": {
+          "value": "hsl(222, 5%, 21%)",
+          "type": "color"
+        },
+        "700": {
+          "value": "hsl(227, 5%, 24%)",
+          "type": "color"
+        },
+        "800": {
+          "value": "hsl(228, 5%, 32%)",
+          "type": "color"
+        },
+        "900": {
+          "value": "hsl(225, 5%, 44%)",
+          "type": "color"
+        },
+        "1000": {
+          "value": "hsl(225, 5%, 50%)",
+          "type": "color"
+        },
+        "1100": {
+          "value": "hsl(228, 5%, 63%)",
+          "type": "color"
+        },
+        "1200": {
+          "value": "hsl(220, 5%, 93%)",
+          "type": "color"
+        }
+      }
+    },
+    "scale": {
+      "text": { "value": "0.9" },
+      "border-radius": { "value": "0.2" },
+      "border-width": { "value": "0.9" }
+    }
+  },
+  "sys": {
+    "accent": {
+      "secondary": {
+        "background": {
+          "value": "{ref.color.brand-green.900}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

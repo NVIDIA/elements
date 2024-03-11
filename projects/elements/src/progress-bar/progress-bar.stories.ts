@@ -34,9 +34,9 @@ export const Max = {
 
 export const Labeled = {
   render: () => html`
-    <div mlv-layout="column gap:md pad:lg align:horizontal-stretch full">
+    <div mlv-layout="column gap:xxxs pad:lg align:horizontal-stretch grow">
       <div mlv-layout="row align:space-between">
-        <p mlv-text="label muted sm">Upload Status</p>
+        <p mlv-text="label sm">Upload Status</p>
         <p mlv-text="label emphasis sm">80%</p>
       </div>
 

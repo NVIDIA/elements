@@ -1,4 +1,5 @@
 {
+  "$schema": "../dist/schema.json",
   "ref": {
     "scale": {
       "size": { "value": "0.95" },

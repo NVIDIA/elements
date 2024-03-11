@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { addons, types, useGlobals } from '@storybook/manager-api';
 
 import '@elements/elements/forms/define.js';
@@ -11,20 +11,13 @@ import '@elements/elements/divider/define.js';
 import '@elements/elements/tooltip/define.js';
 import '@elements/elements/icon-button/define.js';
 
-// updateTheme('dark');
-
 function updateTheme(themes) {
-  const preview = window.parent.document.querySelector('#storybook-preview-wrapper');
-  const manager = window.parent.document.querySelector('html') as HTMLElement;
-  const story = document.querySelector('html')  as HTMLElement;
-  manager.setAttribute('mlv-theme', themes);
+  const previewIframe = document.querySelector('#storybook-preview-iframe');
+  const manager = document.querySelector('html') as HTMLElement;
+  manager.setAttribute('nve-theme', themes);
 
-  if (preview) {
-    story.setAttribute('mlv-theme', themes);
-    Array.from(document.querySelectorAll('iframe')).forEach((i: HTMLIFrameElement) => i.contentWindow?.document?.querySelector('html')?.setAttribute('mlv-theme', themes));
-  } else {
-    const nestedStories = Array.from(window.parent.document.querySelectorAll('iframe')).map(i => i.contentWindow?.document.querySelector('html'));
-    nestedStories.forEach(i => i?.setAttribute('mlv-theme', manager.getAttribute('mlv-theme') as string));
+  if (previewIframe) {
+    previewIframe.contentDocument.querySelector('html')?.setAttribute('nve-theme', themes);
   }
 }
 
@@ -41,12 +34,13 @@ const ThemePicker = () => {
         <mlv-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
           <mlv-select style={{'--background': 'transparent', '--min-width': '180px'}}>
             <label>Theme</label>
-            <select size={5} defaultValue={globals.theme} onChange={e => updateGlobals({ theme: e.target.value })}>
+            <select size={6} defaultValue={globals.theme} onChange={e => updateGlobals({ theme: e.target.value })}>
               <option value="light">Light</option>
               <option value="dark">Dark</option>
               <option value="high-contrast">High Contrast</option>
+              <option value="dark ddb">DDB (experimental)</option>
               <option value="brand">Brand Light (experimental)</option>
-              <option value="brand dark">Brand Dark (experimental)</option>
+              <option value="dark brand brand-dark">Brand Dark (experimental)</option>
             </select>
           </mlv-select>
         </mlv-drawer-content>

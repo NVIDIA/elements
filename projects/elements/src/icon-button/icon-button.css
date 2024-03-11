@@ -23,7 +23,7 @@
 
 :host([interaction*='flat']), /* deprecated */
 :host([container*='flat']) {
-  --color: var(--mlv-sys-text-muted-color) !important;
+  --color: var(--mlv-sys-text-muted-color);
   --padding: 0;
 }
 

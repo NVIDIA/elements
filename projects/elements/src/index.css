@@ -1,8 +1,9 @@
-@import './css/module.tokens.css';
-@import './css/theme.high-contrast.css';
-@import './css/theme.reduced-motion.css';
-@import './css/theme.compact.css';
-@import './css/theme.dark.css';
+@import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/high-contrast.css';
+@import '@nvidia-elements/themes/reduced-motion.css';
+@import '@nvidia-elements/themes/compact.css';
+@import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/elements.css';
 @import './css/module.reset.css';
 @import './css/module.layout.css';
 @import './css/module.typography.css';

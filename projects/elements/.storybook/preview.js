@@ -1,9 +1,13 @@
 import { setCustomElementsManifest } from '@storybook/web-components';
 import { themes } from '@storybook/theming';
 import { excludePrivateFields } from '@elements/elements/internal';
-import styles from '@elements/elements/index.css?inline';
 import font from '@elements/elements/inter.css?inline';
-import brand from '@elements/elements/css/theme.brand.css?inline';
+// import theme from '@nvidia-elements/themes/index.css?inline';
+// import dark from '@nvidia-elements/themes/dark.css?inline';
+import ddb from '@nvidia-elements/themes/ddb.css?inline';
+import brand from '@nvidia-elements/themes/brand.css?inline';
+import brandDark from '@nvidia-elements/themes/brand-dark.css?inline';
+import styles from '@elements/elements/index.css?inline';
 import responsiveStyles from '@elements/elements/css/module.responsive.css?inline';
 import { playground } from './playground-url.js';
 import { H1, H2, H3, P } from './markdown.jsx';
@@ -250,8 +254,9 @@ const stableThemes = [
 ];
 
 const experimentalThemes = [
+  { value: 'dark ddb', title: 'DBB (experimental)' },
   { value: 'brand', title: 'Brand Light (experimental)' },
-  { value: 'brand dark', title: 'Brand Dark (experimental)' }
+  { value: 'dark brand-dark', title: 'Brand Dark (experimental)' }
 ];
 
 export const globalTypes = {
@@ -335,19 +340,15 @@ export const globalTypes = {
 }
 
 const styleSheet = new CSSStyleSheet();
-styleSheet.replaceSync(styles + font + brand + responsiveStyles);
+styleSheet.replaceSync(styles + font + brand + brandDark + ddb + responsiveStyles);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
 
 const parentStyle = document.createElement('style');
-parentStyle.innerText = styles + font + brand + responsiveStyles;
+parentStyle.innerText = styles + font + brand + brandDark + ddb + responsiveStyles;
 window.parent.document.head.appendChild(parentStyle);
 
-const dataTheme = (story, { globals }) => {
-  localStorage.setItem('mlv-data-theme', globals.dataTheme);
-  const fn = (...args) => story(args);
-  return fn();
-};
-
-export const decorators = [(story) => {
+export const decorators = [(story, { globals }) => {
+  const themes = window.parent.document.querySelector('[nve-theme]').getAttribute('nve-theme');
+  window.document.querySelector('html').setAttribute('nve-theme', themes);
   return story();
-}, dataTheme, playground];
+}, playground];

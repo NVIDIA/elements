@@ -150,11 +150,12 @@ export class Toolbar extends LitElement implements ContainerElement {
       })[];
       controls.forEach(control => (control.container = 'flat'));
 
-      const buttons = this.#slottedElements.filter(e => e.matches('mlv-button, mlv-icon-button')) as (
-        | Button
-        | IconButton
-      )[];
-      buttons.forEach(button => (button.container = 'flat'));
+      (this.#slottedElements.filter(e => e.matches('mlv-button')) as Button[]).forEach(
+        button => (button.container = 'inline')
+      );
+      (this.#slottedElements.filter(e => e.matches('mlv-icon-button')) as IconButton[]).forEach(
+        button => (button.container = 'flat')
+      );
     }
   }
 

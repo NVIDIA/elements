@@ -1,0 +1,217 @@
+import StyleDictionary from 'style-dictionary';
+import { globSync } from 'glob';
+
+const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
+const buildPath = 'dist/';
+const sourcePath = 'src/';
+
+StyleDictionary.registerFormat({
+  name: 'custom/schema',
+  formatter: dictionary => {
+    const schema = {
+      $schema: 'http://json-schema.org/draft-07/schema',
+      definitions: {
+        reference: {
+          type: 'string',
+          enum: dictionary.allProperties.map(property => `{${property.path.join('.')}.value}`)
+        }
+      },
+      type: 'object',
+      patternProperties: {
+        '.*': {
+          anyOf: [
+            {
+              type: 'object',
+              required: ['value'],
+              properties: {
+                value: {
+                  anyOf: [{ $ref: '#/definitions/reference' }, { type: 'string' }]
+                }
+              }
+            },
+            {
+              $ref: '#'
+            }
+          ]
+        }
+      }
+    };
+
+    return JSON.stringify(schema, null, 2);
+  }
+});
+
+StyleDictionary.registerTransform({
+  name: 'custom/validate',
+  type: 'value',
+  transitive: true,
+  transformer: obj => {
+    const { value, type, name, original, filePath } = obj;
+    const isHighContrast = filePath.includes('high-contrast');
+    const isReferenceToken = name.includes('nve-ref');
+    const isVisualizationToken = name?.includes('nve-sys-visualization');
+    const isColorToken = type === 'color';
+    const isRawValue = !original.value.startsWith('{');
+    const isPxValue = original.value.endsWith('px');
+    const isSizeToken = name?.includes('nve-ref-size');
+    const isSpaceToken = name?.includes('nve-ref-space');
+    const isBorderToken = name?.includes('nve-ref-border');
+    const isOutlineToken = name?.includes('nve-ref-outline');
+
+    if (isColorToken && isRawValue && !isReferenceToken && !isVisualizationToken && !isHighContrast) {
+      console.error(
+        '\x1b[31m',
+        `Token ${name} is a invalid color. Color must implement a reference to a {ref.*} token to prevent cross theme color divergence`
+      );
+      throw new Error();
+    }
+
+    if (isPxValue && isRawValue && !isSizeToken && !isSpaceToken && !isBorderToken && !isOutlineToken) {
+      console.error(
+        '\x1b[31m',
+        `Token ${name} is a invalid size/space value. Value must implement a reference to a {ref.space-*} or {ref.size-*} token to prevent cross theme layout divergence`
+      );
+      throw new Error();
+    }
+
+    return value;
+  }
+});
+
+StyleDictionary.registerTransform({
+  name: 'custom/css-calc',
+  type: 'value',
+  transitive: true,
+  matcher: ({ value }) => typeof value === 'string' && value?.includes('*'),
+  transformer: ({ value, attributes }) => {
+    if (attributes.type === 'font') {
+      const [scale, base] = value.split('*').map(i => i.trim().replace('px', ''));
+      return `calc(${scale} * ${parseInt(base, 10) / 16}rem)`;
+    } else {
+      return `calc(${value})`;
+    }
+  }
+});
+
+StyleDictionary.registerFormat({
+  name: 'custom/css',
+  formatter: ({ dictionary, file, options }) => {
+    const experimental = dictionary.allTokens.find(t => t.name.includes('experimental')) ? '/** @experimental */' : '';
+    const selector =
+      options.theme !== 'index'
+        ? `[nve-theme~='${options.theme}'], [mlv-theme~='${options.theme}']`
+        : `:root, [nve-theme~='light'], [mlv-theme~='light']`;
+    return `${fileHeader({ file })}${experimental}\n${selector} {\n${formattedVariables({
+      format: 'css',
+      dictionary,
+      outputReferences: options.outputReferences
+    })}\n}`;
+  }
+});
+
+StyleDictionary.registerFormat({
+  name: 'custom/json',
+  transformGroup: 'web',
+  formatter: ({ dictionary }) => {
+    const content = formattedVariables({ format: 'json', dictionary, outputReferences: true })
+      .replaceAll(';', '')
+      .split('\n')
+      .map(i => {
+        const [key, value] = i.split(' = ');
+        const formattedValue = value.includes('calc') ? value.replace('calc(', '').replace(')', '') : value;
+        return `  "${key}": "${formattedValue}"`;
+      })
+      .join(',\n');
+    return `{\n${content}\n}`;
+  }
+});
+
+function buildTokens() {
+  const themes = globSync(`${sourcePath}*.json`).filter(path => !path.includes('index'));
+  console.log(themes);
+  StyleDictionary.extend({
+    source: [`${sourcePath}index.json`],
+    platforms: {
+      css: cssOutput(`${buildPath}index.css`),
+      json: jsonOutput(`${buildPath}index.json`),
+      schema: schemaOutput(`${buildPath}schema.json`)
+    }
+  }).buildAllPlatforms();
+
+  themes.forEach(path => {
+    const theme = getTheme(path);
+
+    StyleDictionary.extend({
+      include: [`${sourcePath}index.json`],
+      source: [`${sourcePath}${theme}.json`],
+      platforms: {
+        css: cssOutput(`${buildPath}${theme}.css`),
+        json: jsonOutput(`${buildPath}${theme}.json`)
+      }
+    }).buildAllPlatforms();
+  });
+}
+
+function cssOutput(destination) {
+  const theme = getTheme(destination);
+
+  return {
+    prefix: 'nve',
+    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
+    files: [
+      {
+        format: 'custom/css',
+        destination,
+        filter: theme !== 'index' ? token => getTheme(token.filePath) !== 'index' : null
+      }
+    ],
+    options: {
+      outputReferences: true,
+      theme
+    }
+  };
+}
+
+function jsonOutput(destination) {
+  const theme = getTheme(destination);
+  return {
+    prefix: 'nve',
+    transformGroup: 'web',
+    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
+    files: [
+      {
+        format: 'custom/json',
+        destination,
+        filter: theme !== 'index' ? token => getTheme(token.filePath) !== 'index' : null
+      }
+    ],
+    options: {
+      outputReferences: true,
+      theme
+    }
+  };
+}
+
+function schemaOutput(destination) {
+  return {
+    prefix: 'nve',
+    transformGroup: 'web',
+    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
+    files: [
+      {
+        format: 'custom/schema',
+        destination
+      }
+    ],
+    options: {
+      outputReferences: true
+    }
+  };
+}
+
+function getTheme(path) {
+  // console.log(path.replace('dist/', '').replace(`src/`, '').split('.'))
+  return path.replace('dist/', '').replace(`src/`, '').split('.')[0];
+}
+
+buildTokens();

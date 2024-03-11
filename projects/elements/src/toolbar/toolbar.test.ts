@@ -199,6 +199,6 @@ describe('mlv-toolbar container', () => {
     expect(fixture.querySelector('mlv-select').container).toBe('flat');
     expect(fixture.querySelector('mlv-button-group').container).toBe('flat');
     expect(fixture.querySelector('mlv-icon-button').container).toBe('flat');
-    expect(fixture.querySelector('mlv-button').container).toBe('flat');
+    expect(fixture.querySelector('mlv-button').container).toBe('inline');
   });
 });

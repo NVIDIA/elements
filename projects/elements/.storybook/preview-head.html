@@ -32,6 +32,21 @@
       }
     }
 
+    .sbdocs-content {
+      h1.css-wzniqs:not([mlv-text]),
+      h2.css-wzniqs:not([mlv-text]),
+      h3.css-wzniqs:not([mlv-text]),
+      li:not([mlv-text]),
+      a:not([mlv-text]) {
+        color: var(--mlv-sys-layer-canvas-color) !important;
+        font-family: var(--mlv-ref-font-family) !important;
+      }
+
+      a:not([mlv-text]) {
+        text-decoration: underline;
+      }
+    }
+
     .playground-btn {
       position: absolute;
       z-index: 99;
@@ -50,7 +65,7 @@
     }
 
     .css-q22hxw:has(.full-width),
-    .css-q22hxw:has([mlv-theme='root'][mlv-layout*='full']) {
+    .css-q22hxw:has([nve-theme='root'][mlv-layout*='full']) {
       max-width: 100% !important;
     }
 
@@ -90,12 +105,7 @@
       background: color-mix(in oklab, var(--mlv-ref-color-gray-denim-1200), white 2%) !important;
     }
 
-    [mlv-theme*='brand'] .prismjs {
-      background: var(--mlv-ref-color-gray-slate-1200) !important;
-      background: color-mix(in oklab, var(--mlv-ref-color-gray-slate-1200), white 2%) !important;
-    }
-
-    [mlv-theme*='dark'] .prismjs {
+    [nve-theme*='dark'] .prismjs {
       background: var(--mlv-sys-layer-container-background) !important;
       background: color-mix(in oklab, var(--mlv-sys-layer-container-background), white 2%) !important;
     }
@@ -191,7 +201,7 @@
       --background: var(--mlv-sys-layer-overlay-color);
     }
 
-    [mlv-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
+    [nve-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
       background-image: url(images/test-image-2.webp) !important;
       object-fit: fill !important;
       background-repeat: no-repeat !important;
@@ -199,7 +209,7 @@
       box-shadow: inset 0 0 0 1000px rgb(11 12 15 / 88%) !important;
     }
 
-    [mlv-theme*='dark'] .sbdocs-content:has(#getting-started-img) {
+    [nve-theme*='dark'] .sbdocs-content:has(#getting-started-img) {
       filter: drop-shadow(0 50px 50px rgb(11 12 15 / 95%));
     }
 
@@ -208,7 +218,7 @@
     }
 
     @media (min-width: 1440px) {
-      [mlv-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
+      [nve-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
         background-position: center 15vh !important;
       }
 
@@ -218,7 +228,7 @@
     }
 
     @media (min-width: 1920px) {
-      [mlv-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
+      [nve-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
         background-position: center 18vh !important;
       }
     }

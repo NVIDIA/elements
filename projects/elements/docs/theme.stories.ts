@@ -1,5 +1,4 @@
 import { html, css, LitElement, unsafeCSS } from 'lit';
-import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import typography from '@elements/elements/css/module.typography.css?inline';
@@ -227,9 +226,9 @@ class ThemeGeneratorDemo extends LitElement {
     <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>
 
-  <mlv-alert-banner status="accent">
+  <mlv-alert-group status="accent" prominence="emphasis" container="full">
     <mlv-alert closable>banner message</mlv-alert>
-  </mlv-alert-banner>
+  </mlv-alert-group>
 
   <div mlv-layout="row" style="width: 100%;">
     <mlv-panel expanded>
