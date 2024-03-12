@@ -73,7 +73,7 @@ export class AppLogin extends LitElement {
           <input ?checked=${this.formValues.remember} type="checkbox" name="remember" />
         </mlv-checkbox>
 
-        <mlv-button interaction="emphasize">Login</mlv-button>
+        <mlv-button interaction="emphasis">Login</mlv-button>
       </form>
       <pre>${JSON.stringify(this.formValues, null, 2)}</pre>
       <mlv-notification ?hidden=${!this.showNotification} @close=${() => this.showNotification = false} close-timeout="2000" status="success" position="top">Submited: ${JSON.stringify(this.formValues)}</mlv-notification>

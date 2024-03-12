@@ -94,27 +94,27 @@ export const Actions = {
   <div mlv-layout="column gap:md">
     <mlv-alert-group>
       <mlv-alert>
-        Standard <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Standard <mlv-button slot="actions" container="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
     <mlv-alert-group status="accent">
       <mlv-alert>
-        Standard <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Standard <mlv-button slot="actions" container="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
     <mlv-alert-group status="warning">
       <mlv-alert>
-        Warning <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Warning <mlv-button slot="actions" container="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
     <mlv-alert-group status="success">
       <mlv-alert>
-        Success <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Success <mlv-button slot="actions" container="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
     <mlv-alert-group status="danger">
       <mlv-alert>
-        Danger <mlv-button slot="actions" interaction="flat">action</mlv-button>
+        Danger <mlv-button slot="actions" container="flat">action</mlv-button>
       </mlv-alert>
     </mlv-alert-group>
   </div>

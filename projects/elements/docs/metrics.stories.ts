@@ -499,7 +499,7 @@ class ElementsMetrics extends LitElement {
         })}
         <mlv-grid-footer>
           <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
-          <mlv-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'elements', bubbles: true }))} interaction="flat" style="margin-left: auto">view data</mlv-button>
+          <mlv-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'elements', bubbles: true }))} container="flat" style="margin-left: auto">view data</mlv-button>
         </mlv-grid-footer>
       </mlv-grid>
       <mlv-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</mlv-tooltip>
@@ -702,7 +702,7 @@ class TestMetrics extends LitElement {
         `)}
         <mlv-grid-footer>
           <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
-          <!-- <mlv-button @click=${() => this.rawData = 'tests'} interaction="flat" style="margin-left: auto">view data</mlv-button> -->
+          <!-- <mlv-button @click=${() => this.rawData = 'tests'} container="flat" style="margin-left: auto">view data</mlv-button> -->
         </mlv-grid-footer>
       </mlv-grid>
     </section>

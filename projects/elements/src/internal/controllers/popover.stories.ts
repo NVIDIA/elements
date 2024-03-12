@@ -47,7 +47,7 @@ export const Nested = {
     <mlv-tooltip anchor="tooltip-btn" position="top">hello there</mlv-tooltip>
     <mlv-search rounded>
       <label>search dataset</label>
-      <mlv-icon-button id="tooltip-btn" icon-name="information-circle-stroke" interaction="flat" aria-label="more details" slot="label"></mlv-icon-button>
+      <mlv-icon-button id="tooltip-btn" icon-name="information-circle-stroke" container="flat" aria-label="more details" slot="label"></mlv-icon-button>
       <input type="search" placeholder="search" />
     </mlv-search>
   </mlv-dropdown>

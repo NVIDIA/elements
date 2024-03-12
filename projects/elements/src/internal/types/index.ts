@@ -135,6 +135,9 @@ export interface NveElement {
   /** Determines the visual prominence or weight of an element */
   prominence?: 'emphasis' | 'muted';
 
+  /** Provides a way to indicate the intended use case for a button or similar interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors. */
+  interaction?: 'emphasis' | 'destructive';
+
   /** Defines a base color from the theme color palette */
   color?:
     | 'red-cardinal'
@@ -206,7 +209,7 @@ export interface NveElement {
 }
 
 /** @deprecated Determines the interaction type of a flat container element. */
-export type FlatInteraction = 'flat' | `${'flat'}-${Interaction}`;
+export type FlatInteraction = 'flat' | 'flat-emphasize' | `${'flat'}-${Interaction}`;
 
 /** @deprecated Determines if an element is rendered with an inverse contrast. */
 export type Inverse = 'inverse';
@@ -214,7 +217,8 @@ export type Inverse = 'inverse';
 /** @deprecated Determines the trend status of an element. Should convey the trend of a metric. */
 export type TrendStatus = 'trend-down' | 'trend-up' | 'trend-neutral';
 
-export type Interaction = 'emphasize' | 'destructive';
+/** The Interaction type provides a way to indicate the intended use case for a button or other interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors. */
+export type Interaction = 'emphasis' | 'destructive';
 
 export interface ContainerElement {
   container?: Partial<Container>;

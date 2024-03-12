@@ -47,36 +47,37 @@ slot {
   min-height: 0;
 }
 
-slot[name="nav-items"] {
+slot[name='nav-items'] {
   margin: 0 auto 0 var(--mlv-ref-space-xxl);
   gap: var(--mlv-ref-space-xxs);
 }
 
-slot[name="nav-actions"] {
+slot[name='nav-actions'] {
   align-items: center;
 }
 
-::slotted(mlv-button[slot="nav-items"]) {
+::slotted(mlv-button[slot='nav-items']) {
   --color: var(--mlv-sys-text-muted-color);
   --font-weight: var(--mlv-ref-font-weight-medium);
 }
 
-::slotted(mlv-button[slot="nav-items"][selected]) {
+::slotted(mlv-button[slot='nav-items'][selected]) {
   --color: var(--mlv-sys-text-emphasis-color);
   --text-decoration: none;
   --mlv-sys-interaction-state-ratio-active: 0;
   --font-weight: var(--mlv-ref-font-weight-semibold);
 }
 
-::slotted(mlv-icon-button[slot="nav-items"][selected]) {
+::slotted(mlv-icon-button[slot='nav-items'][selected]) {
   --color: var(--mlv-sys-text-emphasis-color);
 }
 
-::slotted(mlv-button[slot="nav-items"]:hover),
-::slotted(mlv-button[slot="nav-items"]:focus) {
+::slotted(mlv-button[slot='nav-items']:hover),
+::slotted(mlv-button[slot='nav-items']:focus) {
   --text-decoration: underline;
 }
 
-::slotted(mlv-icon-button[interaction='emphasize']) {
+::slotted(mlv-icon-button[interaction='emphasize']), /* deprecated */
+::slotted(mlv-icon-button[interaction='emphasis']) {
   margin-inline-start: var(--mlv-ref-space-lg);
 }

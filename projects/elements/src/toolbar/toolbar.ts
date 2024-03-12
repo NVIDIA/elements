@@ -154,7 +154,7 @@ export class Toolbar extends LitElement implements ContainerElement {
         | Button
         | IconButton
       )[];
-      buttons.forEach(button => (button.interaction = 'flat'));
+      buttons.forEach(button => (button.container = 'flat'));
     }
   }
 

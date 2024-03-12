@@ -1,5 +1,5 @@
 {
-  "created": "2024-02-29T14:54:05.582Z",
+  "created": "2024-03-12T16:36:58.383Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -118,10 +118,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.275,
+            "kb": 18.527,
             "requests": {
               "index.js": {
-                "kb": 17.691,
+                "kb": 17.943,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -139,7 +139,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 83.6625
+        "coverageTotal": 90.415
       },
       "stories": [
         {
@@ -170,7 +170,7 @@
         {
           "id": "WithActions",
           "file": "accordion.stories.ts",
-          "template": "<div>\n  <mlv-accordion behavior-expand>\n    <mlv-accordion-header>\n      <div slot=\"title\">Heading</div>\n\n      <mlv-icon-button interaction=\"flat\" icon-name=\"add\" size=\"sm\" slot=\"actions\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"flat\" icon-name=\"delete\" size=\"sm\" slot=\"actions\"></mlv-icon-button>\n    </mlv-accordion-header>\n\n    <mlv-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </mlv-accordion-content>\n  </mlv-accordion>\n</div>\n"
+          "template": "<div>\n  <mlv-accordion behavior-expand>\n    <mlv-accordion-header>\n      <div slot=\"title\">Heading</div>\n\n      <mlv-icon-button container=\"flat\" icon-name=\"add\" size=\"sm\" slot=\"actions\"></mlv-icon-button>\n      <mlv-icon-button container=\"flat\" icon-name=\"delete\" size=\"sm\" slot=\"actions\"></mlv-icon-button>\n    </mlv-accordion-header>\n\n    <mlv-accordion-content>\n      Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.\n    </mlv-accordion-content>\n  </mlv-accordion>\n</div>\n"
         },
         {
           "id": "AccordionGroupFull",
@@ -234,10 +234,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.275,
+            "kb": 18.527,
             "requests": {
               "index.js": {
-                "kb": 17.691,
+                "kb": 17.943,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -255,7 +255,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 83.6625
+        "coverageTotal": 90.415
       },
       "stories": [],
       "behavior": "container",
@@ -330,10 +330,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.275,
+            "kb": 18.527,
             "requests": {
               "index.js": {
-                "kb": 17.691,
+                "kb": 17.943,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -351,7 +351,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 83.6625
+        "coverageTotal": 90.415
       },
       "stories": [],
       "behavior": "container",
@@ -398,10 +398,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.275,
+            "kb": 18.527,
             "requests": {
               "index.js": {
-                "kb": 17.691,
+                "kb": 17.943,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -419,7 +419,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 83.6625
+        "coverageTotal": 90.415
       },
       "stories": [],
       "behavior": "container",
@@ -540,10 +540,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.518,
+            "kb": 18.755,
             "requests": {
               "index.js": {
-                "kb": 17.744,
+                "kb": 17.981,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -687,10 +687,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.334,
+            "kb": 19.571,
             "requests": {
               "index.js": {
-                "kb": 17.748,
+                "kb": 17.985,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -826,10 +826,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.521,
+            "kb": 18.758,
             "requests": {
               "index.js": {
-                "kb": 17.747,
+                "kb": 17.984,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -868,7 +868,7 @@
         {
           "id": "Actions",
           "file": "alert-group.stories.ts",
-          "template": "<div mlv-layout=\"column gap:md\">\n  <mlv-alert-group>\n    <mlv-alert> Standard <mlv-button slot=\"actions\" interaction=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n  <mlv-alert-group status=\"accent\">\n    <mlv-alert> Standard <mlv-button slot=\"actions\" interaction=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n  <mlv-alert-group status=\"warning\">\n    <mlv-alert> Warning <mlv-button slot=\"actions\" interaction=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n  <mlv-alert-group status=\"success\">\n    <mlv-alert> Success <mlv-button slot=\"actions\" interaction=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n  <mlv-alert-group status=\"danger\">\n    <mlv-alert> Danger <mlv-button slot=\"actions\" interaction=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n</div>\n"
+          "template": "<div mlv-layout=\"column gap:md\">\n  <mlv-alert-group>\n    <mlv-alert> Standard <mlv-button slot=\"actions\" container=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n  <mlv-alert-group status=\"accent\">\n    <mlv-alert> Standard <mlv-button slot=\"actions\" container=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n  <mlv-alert-group status=\"warning\">\n    <mlv-alert> Warning <mlv-button slot=\"actions\" container=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n  <mlv-alert-group status=\"success\">\n    <mlv-alert> Success <mlv-button slot=\"actions\" container=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n  <mlv-alert-group status=\"danger\">\n    <mlv-alert> Danger <mlv-button slot=\"actions\" container=\"flat\">action</mlv-button> </mlv-alert>\n  </mlv-alert-group>\n</div>\n"
         },
         {
           "id": "Prominence",
@@ -945,10 +945,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.503,
+            "kb": 18.74,
             "requests": {
               "index.js": {
-                "kb": 17.746,
+                "kb": 17.983,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -966,7 +966,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 93.75
+        "coverageTotal": 100
       },
       "stories": [
         {
@@ -977,7 +977,7 @@
         {
           "id": "AppBadge",
           "file": "app-header.stories.ts",
-          "template": "<div>\n  <mlv-app-header>\n    <mlv-logo color=\"yellow-nova\">Ab</mlv-logo>\n    <h2 slot=\"title\">My App Title</h2>\n    <mlv-button slot=\"nav-items\" selected>Link 1</mlv-button>\n    <mlv-button slot=\"nav-items\">Link 2</mlv-button>\n    <mlv-icon-button icon-name=\"chat-bubble\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button icon-name=\"search\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button icon-name=\"switch-apps\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button interaction=\"emphasize\" slot=\"nav-actions\" size=\"sm\">EL</mlv-icon-button>\n  </mlv-app-header>\n</div>\n"
+          "template": "<div>\n  <mlv-app-header>\n    <mlv-logo color=\"yellow-nova\">Ab</mlv-logo>\n    <h2 slot=\"title\">My App Title</h2>\n    <mlv-button slot=\"nav-items\" selected>Link 1</mlv-button>\n    <mlv-button slot=\"nav-items\">Link 2</mlv-button>\n    <mlv-icon-button icon-name=\"chat-bubble\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button icon-name=\"search\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button icon-name=\"switch-apps\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button interaction=\"emphasis\" slot=\"nav-actions\" size=\"sm\">EL</mlv-icon-button>\n  </mlv-app-header>\n</div>\n"
         },
         {
           "id": "NavItems",
@@ -987,17 +987,17 @@
         {
           "id": "NavActions",
           "file": "app-header.stories.ts",
-          "template": "<div>\n  <mlv-app-header>\n    <mlv-logo></mlv-logo>\n    <h2 slot=\"title\">Nav Actions</h2>\n    <mlv-icon-button icon-name=\"chat-bubble\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button icon-name=\"search\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button icon-name=\"switch-apps\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button interaction=\"emphasize\" slot=\"nav-actions\" size=\"sm\">EL</mlv-icon-button>\n  </mlv-app-header>\n</div>\n"
+          "template": "<div>\n  <mlv-app-header>\n    <mlv-logo></mlv-logo>\n    <h2 slot=\"title\">Nav Actions</h2>\n    <mlv-icon-button icon-name=\"chat-bubble\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button icon-name=\"search\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button icon-name=\"switch-apps\" slot=\"nav-actions\"></mlv-icon-button>\n    <mlv-icon-button interaction=\"emphasis\" slot=\"nav-actions\" size=\"sm\">EL</mlv-icon-button>\n  </mlv-app-header>\n</div>\n"
         },
         {
           "id": "LightTheme",
           "file": "app-header.stories.ts",
-          "template": "<mlv-app-header>\n  <mlv-logo color=\"orange-pumpkin\">Lt</mlv-logo>\n  <h2 slot=\"title\">Light Theme</h2>\n  <mlv-button slot=\"nav-items\">Link 1</mlv-button>\n  <mlv-icon-button interaction=\"emphasize\" slot=\"nav-actions\" size=\"sm\">EL</mlv-icon-button>\n</mlv-app-header>\n"
+          "template": "<mlv-app-header>\n  <mlv-logo color=\"orange-pumpkin\">Lt</mlv-logo>\n  <h2 slot=\"title\">Light Theme</h2>\n  <mlv-button slot=\"nav-items\">Link 1</mlv-button>\n  <mlv-icon-button interaction=\"emphasis\" slot=\"nav-actions\" size=\"sm\">EL</mlv-icon-button>\n</mlv-app-header>\n"
         },
         {
           "id": "DarkTheme",
           "file": "app-header.stories.ts",
-          "template": "<mlv-app-header>\n  <mlv-logo color=\"orange-pumpkin\">Dt</mlv-logo>\n  <h2 slot=\"title\">Dark Theme</h2>\n  <mlv-button slot=\"nav-items\">Link 1</mlv-button>\n  <mlv-icon-button interaction=\"emphasize\" slot=\"nav-actions\" size=\"sm\">EL</mlv-icon-button>\n</mlv-app-header>\n"
+          "template": "<mlv-app-header>\n  <mlv-logo color=\"orange-pumpkin\">Dt</mlv-logo>\n  <h2 slot=\"title\">Dark Theme</h2>\n  <mlv-button slot=\"nav-items\">Link 1</mlv-button>\n  <mlv-icon-button interaction=\"emphasis\" slot=\"nav-actions\" size=\"sm\">EL</mlv-icon-button>\n</mlv-app-header>\n"
         }
       ],
       "behavior": "navigation",
@@ -1123,10 +1123,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.658,
+            "kb": 14.674,
             "requests": {
               "index.js": {
-                "kb": 14.658,
+                "kb": 14.674,
                 "name": "index.js"
               }
             }
@@ -1252,10 +1252,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.395,
+            "kb": 15.57,
             "requests": {
               "index.js": {
-                "kb": 14.747,
+                "kb": 14.922,
                 "name": "index.js"
               },
               "chevron.svg.js": {
@@ -1273,7 +1273,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 90.61500000000001
+        "coverageTotal": 94.2775
       },
       "stories": [
         {
@@ -1325,12 +1325,16 @@
       "schema": {
         "properties": [
           {
-            "name": "interaction",
-            "description": "Visual treatment to represent user interaction appearance."
+            "name": "container",
+            "description": "Determines the container of the button. Flat is used for nesting within other containers or more muted style. Inline is used for inline content such as text."
           },
           {
             "name": "size",
             "description": "Determines size of the button."
+          },
+          {
+            "name": "interaction",
+            "description": "The Interaction type provides a way to indicate the intended use case for a button or other interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors."
           },
           {
             "name": "pressed",
@@ -1377,12 +1381,12 @@
         ],
         "attributes": [
           {
-            "name": "interaction",
+            "name": "container",
             "type": {
-              "text": "'flat' | 'emphasize' | 'destructive' | 'flat-emphasize' | 'flat-destructive' | 'inverse'"
+              "text": "'flat' | 'inline'"
             },
-            "description": "Visual treatment to represent user interaction appearance.",
-            "fieldName": "interaction"
+            "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
+            "fieldName": "container"
           },
           {
             "name": "size",
@@ -1393,6 +1397,14 @@
             "fieldName": "size"
           },
           {
+            "name": "interaction",
+            "type": {
+              "text": "'emphasis' | 'destructive' | 'flat' | 'flat-emphasize' | 'flat-emphasis' | 'flat-destructive' | 'inverse'"
+            },
+            "description": "Provides a way to indicate the intended use case for a button or similar interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors.",
+            "fieldName": "interaction"
+          },
+          {
             "name": "pressed",
             "type": {
               "text": "boolean"
@@ -1400,7 +1412,7 @@
             "description": "Determines if an element is pressed as a stand alone interaction. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
             "fieldName": "pressed",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -1412,7 +1424,7 @@
             "description": "Determines if an element is expanded, typically following a disclosure pattern. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
             "fieldName": "expanded",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -1424,7 +1436,7 @@
             "description": "Sets a interactive element to be in a readonly content state. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
             "fieldName": "readonly",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -1436,7 +1448,7 @@
             "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
             "fieldName": "name",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -1448,7 +1460,7 @@
             "description": "Defines the value associated with the elmeents's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value",
             "fieldName": "value",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -1460,7 +1472,7 @@
             "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
             "fieldName": "type",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -1473,7 +1485,7 @@
             "description": "Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled",
             "fieldName": "disabled",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -1485,7 +1497,7 @@
             "description": "Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
             "fieldName": "selected",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -1497,7 +1509,7 @@
             "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
             "fieldName": "current",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           }
@@ -1547,10 +1559,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.123,
+            "kb": 10.308,
             "requests": {
               "index.js": {
-                "kb": 10.123,
+                "kb": 10.308,
                 "name": "index.js"
               }
             }
@@ -1595,12 +1607,12 @@
         {
           "id": "ActionSplit",
           "file": "button-group.stories.ts",
-          "template": "<div mlv-layout=\"row gap:sm\">\n  <mlv-button-group>\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group interaction=\"emphasize\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group interaction=\"destructive\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n</div>\n"
+          "template": "<div mlv-layout=\"row gap:sm\">\n  <mlv-button-group>\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group interaction=\"emphasis\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group interaction=\"destructive\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n</div>\n"
         },
         {
           "id": "ActionSplitRounded",
           "file": "button-group.stories.ts",
-          "template": "<div mlv-layout=\"row gap:sm\">\n  <mlv-button-group container=\"rounded\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group container=\"rounded\" interaction=\"emphasize\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group container=\"rounded\" interaction=\"destructive\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n</div>\n"
+          "template": "<div mlv-layout=\"row gap:sm\">\n  <mlv-button-group container=\"rounded\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group container=\"rounded\" interaction=\"emphasis\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group container=\"rounded\" interaction=\"destructive\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n</div>\n"
         },
         {
           "id": "Rounded",
@@ -1618,7 +1630,7 @@
           "template": "<mlv-button-group orientation=\"vertical\">\n  <mlv-icon-button icon-name=\"copy\"></mlv-icon-button>\n  <mlv-icon-button icon-name=\"add-comment\"></mlv-icon-button>\n  <mlv-icon-button icon-name=\"download\"></mlv-icon-button>\n</mlv-button-group>\n"
         }
       ],
-      "behavior": "button",
+      "behavior": "content",
       "status": "stable"
     },
     {
@@ -1695,9 +1707,9 @@
           {
             "name": "interaction",
             "type": {
-              "text": "'emphasize' | 'destructive'"
+              "text": "'emphasis' | 'destructive'"
             },
-            "description": "The `interaction` property is intended to be used on `button-group` in combination with `divider` for color-coded split buttons",
+            "description": "Provides a way to indicate the intended use case for a button or similar interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors.",
             "fieldName": "interaction"
           },
           {
@@ -1736,10 +1748,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.942,
+            "kb": 9.976,
             "requests": {
               "index.js": {
-                "kb": 9.942,
+                "kb": 9.976,
                 "name": "index.js"
               }
             }
@@ -1784,12 +1796,12 @@
         {
           "id": "ActionSplit",
           "file": "button-group.stories.ts",
-          "template": "<div mlv-layout=\"row gap:sm\">\n  <mlv-button-group>\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group interaction=\"emphasize\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group interaction=\"destructive\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n</div>\n"
+          "template": "<div mlv-layout=\"row gap:sm\">\n  <mlv-button-group>\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group interaction=\"emphasis\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group interaction=\"destructive\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n</div>\n"
         },
         {
           "id": "ActionSplitRounded",
           "file": "button-group.stories.ts",
-          "template": "<div mlv-layout=\"row gap:sm\">\n  <mlv-button-group container=\"rounded\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group container=\"rounded\" interaction=\"emphasize\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group container=\"rounded\" interaction=\"destructive\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n</div>\n"
+          "template": "<div mlv-layout=\"row gap:sm\">\n  <mlv-button-group container=\"rounded\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group container=\"rounded\" interaction=\"emphasis\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n\n  <mlv-button-group container=\"rounded\" interaction=\"destructive\">\n    <mlv-button>button</mlv-button>\n    <mlv-divider orientation=\"vertical\"></mlv-divider>\n    <mlv-icon-button icon-name=\"caret\" size=\"sm\" direction=\"down\"></mlv-icon-button>\n  </mlv-button-group>\n</div>\n"
         },
         {
           "id": "Rounded",
@@ -1885,10 +1897,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.424,
+            "kb": 8.445,
             "requests": {
               "index.js": {
-                "kb": 8.424,
+                "kb": 8.445,
                 "name": "index.js"
               }
             }
@@ -1908,7 +1920,7 @@
         {
           "id": "Default",
           "file": "card.stories.ts",
-          "template": "<div>\n      <mlv-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>\n        ${when(\n          args.showHeader,\n          () => html\n          <mlv-card-header>\n            <div slot=\"title\">Title</div>\n            <div slot=\"subtitle\">Sub Title</div>\n\n\n            ${when(\n              args.showAction,\n              () => html\n                <mlv-icon-button slot=\"header-action\" icon-name=\"more-actions\" interaction=\"flat\"></mlv-icon-button>\n              )}\n          </mlv-card-header>\n          \n        )}\n\n        <mlv-card-content>\n          ${args.content}\n        </mlv-card-content>\n\n        ${when(\n          args.showFooter,\n          () => html\n            <mlv-card-footer>\n              <mlv-button style=\"margin-left: auto\">Action</mlv-button>\n            </mlv-card-footer>\n          \n        )}\n      </mlv-card>\n    </div>"
+          "template": "<div>\n      <mlv-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>\n        ${when(\n          args.showHeader,\n          () => html\n          <mlv-card-header>\n            <div slot=\"title\">Title</div>\n            <div slot=\"subtitle\">Sub Title</div>\n\n\n            ${when(\n              args.showAction,\n              () => html\n                <mlv-icon-button slot=\"header-action\" icon-name=\"more-actions\" container=\"flat\"></mlv-icon-button>\n              )}\n          </mlv-card-header>\n          \n        )}\n\n        <mlv-card-content>\n          ${args.content}\n        </mlv-card-content>\n\n        ${when(\n          args.showFooter,\n          () => html\n            <mlv-card-footer>\n              <mlv-button style=\"margin-left: auto\">Action</mlv-button>\n            </mlv-card-footer>\n          \n        )}\n      </mlv-card>\n    </div>"
         },
         {
           "id": "CardWithContentLayout",
@@ -2009,10 +2021,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.424,
+            "kb": 8.445,
             "requests": {
               "index.js": {
-                "kb": 8.424,
+                "kb": 8.445,
                 "name": "index.js"
               }
             }
@@ -2070,10 +2082,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.424,
+            "kb": 8.445,
             "requests": {
               "index.js": {
-                "kb": 8.424,
+                "kb": 8.445,
                 "name": "index.js"
               }
             }
@@ -2149,10 +2161,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.424,
+            "kb": 8.445,
             "requests": {
               "index.js": {
-                "kb": 8.424,
+                "kb": 8.445,
                 "name": "index.js"
               }
             }
@@ -2309,10 +2321,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.095,
+            "kb": 22.339,
             "requests": {
               "index.js": {
-                "kb": 22.095,
+                "kb": 22.339,
                 "name": "index.js"
               }
             }
@@ -2409,10 +2421,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.095,
+            "kb": 22.339,
             "requests": {
               "index.js": {
-                "kb": 22.095,
+                "kb": 22.339,
                 "name": "index.js"
               }
             }
@@ -2558,10 +2570,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.466,
+            "kb": 23.723,
             "requests": {
               "index.js": {
-                "kb": 22.412,
+                "kb": 22.669,
                 "name": "index.js"
               },
               "dropper.svg.js": {
@@ -2797,10 +2809,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 38.284,
+            "kb": 38.541,
             "requests": {
               "index.js": {
-                "kb": 37.51,
+                "kb": 37.767,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -2818,7 +2830,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 97.535
+        "coverageTotal": 98.2875
       },
       "stories": [
         {
@@ -2869,17 +2881,17 @@
         {
           "id": "Reset",
           "file": "combobox.stories.ts",
-          "template": "<mlv-combobox style=\"width: 500px; --scroll-height: 220px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </select>\n  <mlv-icon-button\n    id=\"combobox-reset\"\n    aria-label=\"clear selection\"\n    icon-name=\"cancel\"\n    interaction=\"flat\"\n  ></mlv-icon-button>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n<script type=\"module\">\n  document.querySelector(\"#combobox-reset\").addEventListener(\"click\", (e) => e.target.parentElement.reset());\n</script>\n"
+          "template": "<mlv-combobox style=\"width: 500px; --scroll-height: 220px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n  </select>\n  <mlv-icon-button\n    id=\"combobox-reset\"\n    aria-label=\"clear selection\"\n    icon-name=\"cancel\"\n    container=\"flat\"\n  ></mlv-icon-button>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n<script type=\"module\">\n  document.querySelector(\"#combobox-reset\").addEventListener(\"click\", (e) => e.target.parentElement.reset());\n</script>\n"
         },
         {
           "id": "Footer",
           "file": "combobox.stories.ts",
-          "template": "<mlv-combobox style=\"width: 500px; --scroll-height: 200px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n    <option value=\"includes\"></option>\n    <option value=\"user\"></option>\n    <option value=\"progress\"></option>\n  </select>\n  <mlv-button slot=\"footer\" interaction=\"flat\">action</mlv-button>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n"
+          "template": "<mlv-combobox style=\"width: 500px; --scroll-height: 200px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n    <option value=\"includes\"></option>\n    <option value=\"user\"></option>\n    <option value=\"progress\"></option>\n  </select>\n  <mlv-button slot=\"footer\" container=\"flat\">action</mlv-button>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n"
         },
         {
           "id": "SelectAll",
           "file": "combobox.stories.ts",
-          "template": "<mlv-combobox id=\"combobox-select-all\" style=\"width: 500px; --scroll-height: 200px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n    <option value=\"includes\"></option>\n    <option value=\"user\"></option>\n    <option value=\"progress\"></option>\n  </select>\n  <div slot=\"footer\" mlv-layout=\"row align:stretch full\">\n    <mlv-button interaction=\"flat\">Select All</mlv-button>\n    <mlv-button interaction=\"flat\">Deselect All</mlv-button>\n  </div>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n<script type=\"module\">\n  const combobox = document.querySelector(\"#combobox-select-all\");\n  const [selectAll, deselectAll] = Array.from(combobox.querySelectorAll(\"mlv-button\"));\n\n  selectAll.addEventListener(\"click\", () => combobox.selectAll());\n  deselectAll.addEventListener(\"click\", () => combobox.reset());\n  combobox.addEventListener(\"change\", (e) => console.log(e.target.selectedOptions));\n</script>\n"
+          "template": "<mlv-combobox id=\"combobox-select-all\" style=\"width: 500px; --scroll-height: 200px\">\n  <label>label</label>\n  <input type=\"search\" />\n  <select multiple>\n    <option value=\"status\"></option>\n    <option value=\"priority\"></option>\n    <option value=\"date\"></option>\n    <option value=\"session\"></option>\n    <option value=\"configuration\"></option>\n    <option value=\"contains\"></option>\n    <option value=\"includes\"></option>\n    <option value=\"user\"></option>\n    <option value=\"progress\"></option>\n  </select>\n  <div slot=\"footer\" mlv-layout=\"row align:stretch full\">\n    <mlv-button container=\"flat\">Select All</mlv-button>\n    <mlv-button container=\"flat\">Deselect All</mlv-button>\n  </div>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-combobox>\n<script type=\"module\">\n  const combobox = document.querySelector(\"#combobox-select-all\");\n  const [selectAll, deselectAll] = Array.from(combobox.querySelectorAll(\"mlv-button\"));\n\n  selectAll.addEventListener(\"click\", () => combobox.selectAll());\n  deselectAll.addEventListener(\"click\", () => combobox.reset());\n  combobox.addEventListener(\"change\", (e) => console.log(e.target.selectedOptions));\n</script>\n"
         },
         {
           "id": "Performance",
@@ -3033,10 +3045,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.495,
+            "kb": 22.745,
             "requests": {
               "index.js": {
-                "kb": 21.721,
+                "kb": 21.971,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3054,7 +3066,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 96.035
+        "coverageTotal": 96.63250000000001
       },
       "stories": [],
       "behavior": "form",
@@ -3119,10 +3131,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.495,
+            "kb": 22.745,
             "requests": {
               "index.js": {
-                "kb": 21.721,
+                "kb": 21.971,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3219,10 +3231,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.495,
+            "kb": 22.745,
             "requests": {
               "index.js": {
-                "kb": 21.721,
+                "kb": 21.971,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3372,10 +3384,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.138,
+            "kb": 23.39,
             "requests": {
               "index.js": {
-                "kb": 22.245,
+                "kb": 22.497,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3561,10 +3573,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.14,
+            "kb": 23.392,
             "requests": {
               "index.js": {
-                "kb": 22.247,
+                "kb": 22.499,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3804,10 +3816,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.209,
+            "kb": 28.429,
             "requests": {
               "index.js": {
-                "kb": 27.397,
+                "kb": 27.617,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3846,7 +3858,7 @@
         {
           "id": "Content",
           "file": "dialog.stories.ts",
-          "template": "<mlv-dialog closable>\n  <mlv-dialog-header>\n    <h3 mlv-text=\"heading semibold\">title</h3>\n  </mlv-dialog-header>\n  <p mlv-text=\"body\">some text content in a closable dialog</p>\n  <mlv-dialog-footer>\n    <mlv-button>cancel</mlv-button>\n    <mlv-button interaction=\"emphasize\">action</mlv-button>\n  </mlv-dialog-footer>\n</mlv-dialog>\n"
+          "template": "<mlv-dialog closable>\n  <mlv-dialog-header>\n    <h3 mlv-text=\"heading semibold\">title</h3>\n  </mlv-dialog-header>\n  <p mlv-text=\"body\">some text content in a closable dialog</p>\n  <mlv-dialog-footer>\n    <mlv-button>cancel</mlv-button>\n    <mlv-button interaction=\"emphasis\">action</mlv-button>\n  </mlv-dialog-footer>\n</mlv-dialog>\n"
         },
         {
           "id": "Small",
@@ -3915,10 +3927,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.209,
+            "kb": 28.429,
             "requests": {
               "index.js": {
-                "kb": 27.397,
+                "kb": 27.617,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3975,10 +3987,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.209,
+            "kb": 28.429,
             "requests": {
               "index.js": {
-                "kb": 27.397,
+                "kb": 27.617,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4057,10 +4069,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.004,
+            "kb": 8.024,
             "requests": {
               "index.js": {
-                "kb": 8.004,
+                "kb": 8.024,
                 "name": "index.js"
               }
             }
@@ -4206,10 +4218,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.455,
+            "kb": 8.474,
             "requests": {
               "index.js": {
-                "kb": 8.455,
+                "kb": 8.474,
                 "name": "index.js"
               }
             }
@@ -4470,10 +4482,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.485,
+            "kb": 28.707,
             "requests": {
               "index.js": {
-                "kb": 27.673,
+                "kb": 27.895,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4576,10 +4588,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.485,
+            "kb": 28.707,
             "requests": {
               "index.js": {
-                "kb": 27.673,
+                "kb": 27.895,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4636,10 +4648,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.485,
+            "kb": 28.707,
             "requests": {
               "index.js": {
-                "kb": 27.673,
+                "kb": 27.895,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4696,10 +4708,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.485,
+            "kb": 28.707,
             "requests": {
               "index.js": {
-                "kb": 27.673,
+                "kb": 27.895,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4906,10 +4918,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.2,
+            "kb": 28.425,
             "requests": {
               "index.js": {
-                "kb": 27.388,
+                "kb": 27.613,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5128,10 +5140,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 21.911,
+            "kb": 22.182,
             "requests": {
               "index.js": {
-                "kb": 21.911,
+                "kb": 22.182,
                 "name": "index.js"
               }
             }
@@ -5255,10 +5267,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.58,
+            "kb": 19.737,
             "requests": {
               "index.js": {
-                "kb": 19.58,
+                "kb": 19.737,
                 "name": "index.js"
               }
             }
@@ -5288,7 +5300,7 @@
         {
           "id": "MultiSelectBulkActions",
           "file": "grid.stories.ts",
-          "template": "<mlv-grid style=\"--scroll-height: 402px\">\n  <mlv-grid-header>\n    <mlv-grid-column width=\"max-content\" position=\"fixed\">\n      <mlv-checkbox>\n        <input type=\"checkbox\" aria-label=\"select all rows\" />\n      </mlv-checkbox>\n    </mlv-grid-column>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<mlv-grid-column>${column.label}</mlv-grid-column> )}\n  </mlv-grid-header>\n  ${getItems(20).map((row, i) => html\n  <mlv-grid-row .selected=\"${i\" =\"\" =\"\" =\"1}\">\n    <mlv-grid-cell>\n      <mlv-checkbox>\n        <input type=\"checkbox\" ?checked=\"${i\" =\"\" =\"\" =\"1}\" aria-label=\"select row ${i}\" />\n      </mlv-checkbox>\n    </mlv-grid-cell>\n    ${Object.entries(row).map(([, cell]) => html<mlv-grid-cell>${cell.value}</mlv-grid-cell> )}\n  </mlv-grid-row>\n  )}\n  <mlv-toolbar status=\"accent\" slot=\"footer\">\n    <mlv-icon-button interaction=\"flat\" icon-name=\"cancel\" slot=\"prefix\"></mlv-icon-button>\n    <p mlv-text=\"boxy\">1 selected</p>\n    <mlv-button interaction=\"flat-destructive\" slot=\"suffix\">delete</mlv-button>\n    <mlv-icon-button interaction=\"flat\" icon-name=\"more-actions\" slot=\"suffix\"></mlv-icon-button>\n  </mlv-toolbar>\n</mlv-grid>\n"
+          "template": "<mlv-grid style=\"--scroll-height: 402px\">\n  <mlv-grid-header>\n    <mlv-grid-column width=\"max-content\" position=\"fixed\">\n      <mlv-checkbox>\n        <input type=\"checkbox\" aria-label=\"select all rows\" />\n      </mlv-checkbox>\n    </mlv-grid-column>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<mlv-grid-column>${column.label}</mlv-grid-column> )}\n  </mlv-grid-header>\n  ${getItems(20).map((row, i) => html\n  <mlv-grid-row .selected=\"${i\" =\"\" =\"\" =\"1}\">\n    <mlv-grid-cell>\n      <mlv-checkbox>\n        <input type=\"checkbox\" ?checked=\"${i\" =\"\" =\"\" =\"1}\" aria-label=\"select row ${i}\" />\n      </mlv-checkbox>\n    </mlv-grid-cell>\n    ${Object.entries(row).map(([, cell]) => html<mlv-grid-cell>${cell.value}</mlv-grid-cell> )}\n  </mlv-grid-row>\n  )}\n  <mlv-toolbar status=\"accent\" slot=\"footer\">\n    <mlv-icon-button container=\"flat\" icon-name=\"cancel\" slot=\"prefix\"></mlv-icon-button>\n    <p mlv-text=\"boxy\">1 selected</p>\n    <mlv-button container=\"flat\" interaction=\"destructive\" slot=\"suffix\">delete</mlv-button>\n    <mlv-icon-button container=\"flat\" icon-name=\"more-actions\" slot=\"suffix\"></mlv-icon-button>\n  </mlv-toolbar>\n</mlv-grid>\n"
         },
         {
           "id": "SingleSelect",
@@ -5298,12 +5310,12 @@
         {
           "id": "RowAction",
           "file": "grid.stories.ts",
-          "template": "<div>\n  <mlv-grid>\n    <mlv-grid-header>\n      ${Object.entries(getItems()[0]).map(([, column]) => html<mlv-grid-column>${column.label}</mlv-grid-column> )}\n      <mlv-grid-column width=\"max-content\" aria-label=\"additonal actions\" position=\"fixed\"></mlv-grid-column>\n    </mlv-grid-header>\n    ${getItems().map((row, i) => html\n    <mlv-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<mlv-grid-cell>${cell.value}</mlv-grid-cell> )}\n      <mlv-grid-cell>\n        <mlv-icon-button interaction=\"flat\" icon-name=\"more-actions\" aria-label=\"row ${i} actions\"></mlv-icon-button>\n      </mlv-grid-cell>\n    </mlv-grid-row>\n    )}\n  </mlv-grid>\n</div>\n"
+          "template": "<div>\n  <mlv-grid>\n    <mlv-grid-header>\n      ${Object.entries(getItems()[0]).map(([, column]) => html<mlv-grid-column>${column.label}</mlv-grid-column> )}\n      <mlv-grid-column width=\"max-content\" aria-label=\"additonal actions\" position=\"fixed\"></mlv-grid-column>\n    </mlv-grid-header>\n    ${getItems().map((row, i) => html\n    <mlv-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<mlv-grid-cell>${cell.value}</mlv-grid-cell> )}\n      <mlv-grid-cell>\n        <mlv-icon-button container=\"flat\" icon-name=\"more-actions\" aria-label=\"row ${i} actions\"></mlv-icon-button>\n      </mlv-grid-cell>\n    </mlv-grid-row>\n    )}\n  </mlv-grid>\n</div>\n"
         },
         {
           "id": "RowGroups",
           "file": "grid.stories.ts",
-          "template": "<mlv-grid>\n  <mlv-grid-header>\n    <mlv-grid-column width=\"max-content\" aria-label=\"expand groups\" position=\"fixed\"></mlv-grid-column>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<mlv-grid-column>${column.label}</mlv-grid-column> )}\n  </mlv-grid-header>\n  <mlv-grid-row>\n    <mlv-grid-cell>\n      <mlv-icon-button\n        icon-name=\"chevron\"\n        interaction=\"flat\"\n        direction=\"right\"\n        aria-label=\"view session 2yuecae SSD uploads\"\n      ></mlv-icon-button>\n    </mlv-grid-cell>\n    <mlv-grid-cell>Session: 2yuecae</mlv-grid-cell>\n    <mlv-grid-cell>upload</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p3</mlv-grid-cell>\n    <mlv-grid-cell>12/04/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row selected>\n    <mlv-grid-cell>\n      <mlv-icon-button\n        icon-name=\"chevron\"\n        interaction=\"flat\"\n        direction=\"down\"\n        aria-label=\"view session mvwgh3t SSD uploads\"\n      ></mlv-icon-button>\n    </mlv-grid-cell>\n    <mlv-grid-cell>Session: mvwgh3t</mlv-grid-cell>\n    <mlv-grid-cell>upload</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p0</mlv-grid-cell>\n    <mlv-grid-cell>12/11/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell></mlv-grid-cell>\n    <mlv-grid-cell>SSD: mvwgh3t</mlv-grid-cell>\n    <mlv-grid-cell>validating</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p0</mlv-grid-cell>\n    <mlv-grid-cell>12/11/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell></mlv-grid-cell>\n    <mlv-grid-cell>SSD: qudbd8x</mlv-grid-cell>\n    <mlv-grid-cell>uploading</mlv-grid-cell>\n    <mlv-grid-cell>finished</mlv-grid-cell>\n    <mlv-grid-cell>p0</mlv-grid-cell>\n    <mlv-grid-cell>12/11/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell></mlv-grid-cell>\n    <mlv-grid-cell>SSD: j8hvikt</mlv-grid-cell>\n    <mlv-grid-cell>queuing</mlv-grid-cell>\n    <mlv-grid-cell>running</mlv-grid-cell>\n    <mlv-grid-cell>p0</mlv-grid-cell>\n    <mlv-grid-cell>12/11/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell>\n      <mlv-icon-button\n        icon-name=\"chevron\"\n        interaction=\"flat\"\n        direction=\"right\"\n        aria-label=\"view session bg5ujqp SSD uploads\"\n      ></mlv-icon-button>\n    </mlv-grid-cell>\n    <mlv-grid-cell>Session: bg5ujqp</mlv-grid-cell>\n    <mlv-grid-cell>upload</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p1</mlv-grid-cell>\n    <mlv-grid-cell>12/12/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell>\n      <mlv-icon-button\n        icon-name=\"chevron\"\n        interaction=\"flat\"\n        direction=\"right\"\n        aria-label=\"view session 6ruehvh SSD uploads\"\n      ></mlv-icon-button>\n    </mlv-grid-cell>\n    <mlv-grid-cell>Session: 6ruehvh</mlv-grid-cell>\n    <mlv-grid-cell>upload</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p2</mlv-grid-cell>\n    <mlv-grid-cell>12/09/22</mlv-grid-cell>\n  </mlv-grid-row>\n</mlv-grid>\n"
+          "template": "<mlv-grid>\n  <mlv-grid-header>\n    <mlv-grid-column width=\"max-content\" aria-label=\"expand groups\" position=\"fixed\"></mlv-grid-column>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<mlv-grid-column>${column.label}</mlv-grid-column> )}\n  </mlv-grid-header>\n  <mlv-grid-row>\n    <mlv-grid-cell>\n      <mlv-icon-button\n        icon-name=\"chevron\"\n        container=\"flat\"\n        direction=\"right\"\n        aria-label=\"view session 2yuecae SSD uploads\"\n      ></mlv-icon-button>\n    </mlv-grid-cell>\n    <mlv-grid-cell>Session: 2yuecae</mlv-grid-cell>\n    <mlv-grid-cell>upload</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p3</mlv-grid-cell>\n    <mlv-grid-cell>12/04/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row selected>\n    <mlv-grid-cell>\n      <mlv-icon-button\n        icon-name=\"chevron\"\n        container=\"flat\"\n        direction=\"down\"\n        aria-label=\"view session mvwgh3t SSD uploads\"\n      ></mlv-icon-button>\n    </mlv-grid-cell>\n    <mlv-grid-cell>Session: mvwgh3t</mlv-grid-cell>\n    <mlv-grid-cell>upload</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p0</mlv-grid-cell>\n    <mlv-grid-cell>12/11/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell></mlv-grid-cell>\n    <mlv-grid-cell>SSD: mvwgh3t</mlv-grid-cell>\n    <mlv-grid-cell>validating</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p0</mlv-grid-cell>\n    <mlv-grid-cell>12/11/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell></mlv-grid-cell>\n    <mlv-grid-cell>SSD: qudbd8x</mlv-grid-cell>\n    <mlv-grid-cell>uploading</mlv-grid-cell>\n    <mlv-grid-cell>finished</mlv-grid-cell>\n    <mlv-grid-cell>p0</mlv-grid-cell>\n    <mlv-grid-cell>12/11/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell></mlv-grid-cell>\n    <mlv-grid-cell>SSD: j8hvikt</mlv-grid-cell>\n    <mlv-grid-cell>queuing</mlv-grid-cell>\n    <mlv-grid-cell>running</mlv-grid-cell>\n    <mlv-grid-cell>p0</mlv-grid-cell>\n    <mlv-grid-cell>12/11/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell>\n      <mlv-icon-button\n        icon-name=\"chevron\"\n        container=\"flat\"\n        direction=\"right\"\n        aria-label=\"view session bg5ujqp SSD uploads\"\n      ></mlv-icon-button>\n    </mlv-grid-cell>\n    <mlv-grid-cell>Session: bg5ujqp</mlv-grid-cell>\n    <mlv-grid-cell>upload</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p1</mlv-grid-cell>\n    <mlv-grid-cell>12/12/22</mlv-grid-cell>\n  </mlv-grid-row>\n  <mlv-grid-row>\n    <mlv-grid-cell>\n      <mlv-icon-button\n        icon-name=\"chevron\"\n        container=\"flat\"\n        direction=\"right\"\n        aria-label=\"view session 6ruehvh SSD uploads\"\n      ></mlv-icon-button>\n    </mlv-grid-cell>\n    <mlv-grid-cell>Session: 6ruehvh</mlv-grid-cell>\n    <mlv-grid-cell>upload</mlv-grid-cell>\n    <mlv-grid-cell>pending</mlv-grid-cell>\n    <mlv-grid-cell>p2</mlv-grid-cell>\n    <mlv-grid-cell>12/09/22</mlv-grid-cell>\n  </mlv-grid-row>\n</mlv-grid>\n"
         },
         {
           "id": "Footer",
@@ -5338,7 +5350,7 @@
         {
           "id": "ColumnAction",
           "file": "grid.stories.ts",
-          "template": "<mlv-grid>\n  <mlv-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column], i) => html\n    <mlv-grid-column>\n      ${column.label} <mlv-icon-button id=\"column-${i}-btn\" slot=\"actions\"></mlv-icon-button> </mlv-grid-column\n    >)}\n  </mlv-grid-header>\n  ${getItems().map(row => html\n  <mlv-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<mlv-grid-cell>${cell.value}</mlv-grid-cell> )}\n  </mlv-grid-row>\n  )}\n</mlv-grid>\n<mlv-dropdown anchor=\"column-0-btn\" arrow>\n  <mlv-search rounded>\n    <input type=\"search\" placeholder=\"search column\" aria-label=\"search apps\" />\n  </mlv-search>\n  <mlv-menu>\n    <mlv-menu-item><mlv-icon name=\"gear\"></mlv-icon> settings</mlv-menu-item>\n    <mlv-menu-item><mlv-icon name=\"star\"></mlv-icon> favorites</mlv-menu-item>\n  </mlv-menu>\n</mlv-dropdown>\n"
+          "template": "<mlv-grid>\n  <mlv-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column], i) => html\n    <mlv-grid-column>\n      ${column.label}\n      <mlv-icon-button id=\"column-${i}-btn\" icon-name=\"more-actions\" slot=\"actions\"></mlv-icon-button> </mlv-grid-column\n    >)}\n  </mlv-grid-header>\n  ${getItems().map(row => html\n  <mlv-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<mlv-grid-cell>${cell.value}</mlv-grid-cell> )}\n  </mlv-grid-row>\n  )}\n</mlv-grid>\n<mlv-dropdown anchor=\"column-0-btn\" arrow>\n  <mlv-search rounded>\n    <input type=\"search\" placeholder=\"search column\" aria-label=\"search apps\" />\n  </mlv-search>\n  <mlv-menu>\n    <mlv-menu-item><mlv-icon name=\"gear\"></mlv-icon> settings</mlv-menu-item>\n    <mlv-menu-item><mlv-icon name=\"star\"></mlv-icon> favorites</mlv-menu-item>\n  </mlv-menu>\n</mlv-dropdown>\n"
         },
         {
           "id": "ColumnWidth",
@@ -5443,7 +5455,7 @@
         {
           "id": "PanelDetail",
           "file": "grid.stories.ts",
-          "template": "<div id=\"grid-detail-panel\" mlv-layout=\"row gap:md align:stretch\">\n  <mlv-grid>\n    <mlv-grid-header>\n      ${grid(10, 3).columns.map(column => html<mlv-grid-column>${column.label}</mlv-grid-column> )}\n      <mlv-grid-column width=\"max-content\" aria-label=\"details\"></mlv-grid-column>\n    </mlv-grid-header>\n    ${grid(10, 3).rows.map((row, i) => html\n    <mlv-grid-row ?selected=\"${i\" =\"\" =\"\" =\"1}\">\n      ${row.cells.map(cell => html<mlv-grid-cell>${cell.label}</mlv-grid-cell> )}\n      <mlv-grid-cell>\n        <mlv-icon-button\n          interaction=\"flat\"\n          icon-name=\"more-actions\"\n          value=\"${row.id}\"\n          aria-label=\"view ${row.id}\"\n        ></mlv-icon-button>\n      </mlv-grid-cell>\n    </mlv-grid-row>\n    )}\n  </mlv-grid>\n  <mlv-panel expanded closable style=\"min-width: 280px\">\n    <mlv-panel-header>\n      <h2 slot=\"title\">Row 2 Details</h2>\n    </mlv-panel-header>\n    <mlv-panel-content>\n      <div mlv-layout=\"column gap:md\">\n        <div mlv-layout=\"column gap:xs\">\n          <label mlv-text=\"body sm muted\">Task</label>\n          <p mlv-text=\"eyebrow sm\">Workflow</p>\n        </div>\n        <div mlv-layout=\"column gap:xs\">\n          <label mlv-text=\"body sm muted\">Status</label>\n          <mlv-badge status=\"success\">Complete</mlv-badge>\n        </div>\n        <div mlv-layout=\"column gap:xs\">\n          <label mlv-text=\"body sm muted\">Priority</label>\n          <mlv-badge status=\"pending\">P1</mlv-badge>\n        </div>\n      </div>\n    </mlv-panel-content>\n  </mlv-panel>\n</div>\n"
+          "template": "<div id=\"grid-detail-panel\" mlv-layout=\"row gap:md align:stretch\">\n  <mlv-grid>\n    <mlv-grid-header>\n      ${grid(10, 3).columns.map(column => html<mlv-grid-column>${column.label}</mlv-grid-column> )}\n      <mlv-grid-column width=\"max-content\" aria-label=\"details\"></mlv-grid-column>\n    </mlv-grid-header>\n    ${grid(10, 3).rows.map((row, i) => html\n    <mlv-grid-row ?selected=\"${i\" =\"\" =\"\" =\"1}\">\n      ${row.cells.map(cell => html<mlv-grid-cell>${cell.label}</mlv-grid-cell> )}\n      <mlv-grid-cell>\n        <mlv-icon-button\n          container=\"flat\"\n          icon-name=\"more-actions\"\n          value=\"${row.id}\"\n          aria-label=\"view ${row.id}\"\n        ></mlv-icon-button>\n      </mlv-grid-cell>\n    </mlv-grid-row>\n    )}\n  </mlv-grid>\n  <mlv-panel expanded closable style=\"min-width: 280px\">\n    <mlv-panel-header>\n      <h2 slot=\"title\">Row 2 Details</h2>\n    </mlv-panel-header>\n    <mlv-panel-content>\n      <div mlv-layout=\"column gap:md\">\n        <div mlv-layout=\"column gap:xs\">\n          <label mlv-text=\"body sm muted\">Task</label>\n          <p mlv-text=\"eyebrow sm\">Workflow</p>\n        </div>\n        <div mlv-layout=\"column gap:xs\">\n          <label mlv-text=\"body sm muted\">Status</label>\n          <mlv-badge status=\"success\">Complete</mlv-badge>\n        </div>\n        <div mlv-layout=\"column gap:xs\">\n          <label mlv-text=\"body sm muted\">Priority</label>\n          <mlv-badge status=\"pending\">P1</mlv-badge>\n        </div>\n      </div>\n    </mlv-panel-content>\n  </mlv-panel>\n</div>\n"
         },
         {
           "id": "PanelGrid",
@@ -5539,10 +5551,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.58,
+            "kb": 19.737,
             "requests": {
               "index.js": {
-                "kb": 19.58,
+                "kb": 19.737,
                 "name": "index.js"
               }
             }
@@ -5675,10 +5687,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.58,
+            "kb": 19.737,
             "requests": {
               "index.js": {
-                "kb": 19.58,
+                "kb": 19.737,
                 "name": "index.js"
               }
             }
@@ -5692,7 +5704,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 97.405
+        "coverageTotal": 97.205
       },
       "stories": [],
       "behavior": "list",
@@ -5745,10 +5757,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.58,
+            "kb": 19.737,
             "requests": {
               "index.js": {
-                "kb": 19.58,
+                "kb": 19.737,
                 "name": "index.js"
               }
             }
@@ -5812,10 +5824,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.58,
+            "kb": 19.737,
             "requests": {
               "index.js": {
-                "kb": 19.58,
+                "kb": 19.737,
                 "name": "index.js"
               }
             }
@@ -5876,10 +5888,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.58,
+            "kb": 19.737,
             "requests": {
               "index.js": {
-                "kb": 19.58,
+                "kb": 19.737,
                 "name": "index.js"
               }
             }
@@ -5955,10 +5967,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.58,
+            "kb": 19.737,
             "requests": {
               "index.js": {
-                "kb": 19.58,
+                "kb": 19.737,
                 "name": "index.js"
               }
             }
@@ -6068,10 +6080,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 13.43,
+            "kb": 13.441,
             "requests": {
               "index.js": {
-                "kb": 12.673,
+                "kb": 12.684,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -6089,7 +6101,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 88.2975
+        "coverageTotal": 95
       },
       "stories": [
         {
@@ -6116,7 +6128,7 @@
         {
           "id": "Interactions",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"emphasize\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n"
+          "template": "<mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"emphasis\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n"
         },
         {
           "id": "Size",
@@ -6126,32 +6138,32 @@
         {
           "id": "FlatInteractions",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button interaction=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"flat-emphasize\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"flat-destructive\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"flat\" icon-name=\"menu\" disabled></mlv-icon-button>\n"
+          "template": "<mlv-icon-button container=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button container=\"flat\" interaction=\"emphasis\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button container=\"flat\" interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button container=\"flat\" icon-name=\"menu\" disabled></mlv-icon-button>\n"
         },
         {
           "id": "PressedToggle",
           "file": "icon-button.stories.ts",
-          "template": "<div mlv-layout=\"row gap:sm pad-bottom:md\">\n  <mlv-icon-button icon-name=\"filter-stroke\"></mlv-icon-button>\n  <mlv-icon-button pressed icon-name=\"filter\"></mlv-icon-button>\n</div>\n\n<div mlv-layout=\"row gap:sm\">\n  <mlv-icon-button icon-name=\"eye-hidden\" interaction=\"flat\" aria-label=\"show\"></mlv-icon-button>\n  <mlv-icon-button pressed icon-name=\"eye\" interaction=\"flat\" aria-label=\"hide\"></mlv-icon-button>\n</div>\n"
+          "template": "<div mlv-layout=\"row gap:sm pad-bottom:md\">\n  <mlv-icon-button icon-name=\"filter-stroke\"></mlv-icon-button>\n  <mlv-icon-button pressed icon-name=\"filter\"></mlv-icon-button>\n</div>\n\n<div mlv-layout=\"row gap:sm\">\n  <mlv-icon-button icon-name=\"eye-hidden\" container=\"flat\" aria-label=\"show\"></mlv-icon-button>\n  <mlv-icon-button pressed icon-name=\"eye\" container=\"flat\" aria-label=\"hide\"></mlv-icon-button>\n</div>\n"
         },
         {
           "id": "SelectedFlat",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button selected icon-name=\"split-vertical\" aria-label=\"split vertical\" interaction=\"flat\"></mlv-icon-button>\n<mlv-icon-button icon-name=\"split-horizontal\" aria-label=\"split horizontal\" interaction=\"flat\"></mlv-icon-button>\n<mlv-icon-button icon-name=\"split-none\" aria-label=\"preview\" interaction=\"flat\"></mlv-icon-button>\n"
+          "template": "<mlv-icon-button selected icon-name=\"split-vertical\" aria-label=\"split vertical\" container=\"flat\"></mlv-icon-button>\n<mlv-icon-button icon-name=\"split-horizontal\" aria-label=\"split horizontal\" container=\"flat\"></mlv-icon-button>\n<mlv-icon-button icon-name=\"split-none\" aria-label=\"preview\" container=\"flat\"></mlv-icon-button>\n"
         },
         {
           "id": "CustomIcon",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button interaction=\"emphasize\">ML</mlv-icon-button>\n<mlv-icon-button>🎉</mlv-icon-button>\n<mlv-icon-button> 🔗 <a href=\"#\" aria-label=\"custom icon button\"></a> </mlv-icon-button>\n"
+          "template": "<mlv-icon-button interaction=\"emphasis\">ML</mlv-icon-button>\n<mlv-icon-button>🎉</mlv-icon-button>\n<mlv-icon-button> 🔗 <a href=\"#\" aria-label=\"custom icon button\"></a> </mlv-icon-button>\n"
         },
         {
           "id": "Link",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button icon-name=\"menu\">\n  <a href=\"#\" aria-label=\"link to page\"></a>\n</mlv-icon-button>\n<mlv-icon-button interaction=\"flat\" icon-name=\"menu\">\n  <a href=\"#\" aria-label=\"link to page\"></a>\n</mlv-icon-button>\n"
+          "template": "<mlv-icon-button icon-name=\"menu\">\n  <a href=\"#\" aria-label=\"link to page\"></a>\n</mlv-icon-button>\n<mlv-icon-button container=\"flat\" icon-name=\"menu\">\n  <a href=\"#\" aria-label=\"link to page\"></a>\n</mlv-icon-button>\n"
         },
         {
           "id": "Themes",
           "file": "icon-button.stories.ts",
-          "template": "      <mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"emphasize\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"inverse\" icon-name=\"menu\"></mlv-icon-button>\n    </div>\n    <div mlv-theme=\"root dark\">\n      <mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"emphasize\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"inverse\" icon-name=\"menu\"></mlv-icon-button>"
+          "template": "      <mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"emphasis\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button container=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n    </div>\n    <div mlv-theme=\"root dark\">\n      <mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"emphasis\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button container=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>"
         }
       ],
       "behavior": "content",
@@ -6189,8 +6201,12 @@
             "description": "Sets size of the icon button."
           },
           {
+            "name": "container",
+            "description": "Determines the container of the button. Flat is used for nesting within other containers or more muted style. Inline is used for inline content such as text."
+          },
+          {
             "name": "interaction",
-            "description": "Visual treatment to represent user interaction appearance."
+            "description": "The Interaction type provides a way to indicate the intended use case for a button or other interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors."
           },
           {
             "name": "pressed",
@@ -6269,11 +6285,23 @@
             }
           },
           {
+            "name": "container",
+            "type": {
+              "text": "'flat' | 'inline'"
+            },
+            "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
+            "fieldName": "container",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
+          },
+          {
             "name": "interaction",
             "type": {
-              "text": "'flat' | 'emphasize' | 'destructive' | 'flat-emphasize' | 'flat-destructive' | 'inverse'"
+              "text": "'emphasis' | 'destructive' | 'flat' | 'flat-emphasize' | 'flat-emphasis' | 'flat-destructive' | 'inverse'"
             },
-            "description": "Visual treatment to represent user interaction appearance.",
+            "description": "Provides a way to indicate the intended use case for a button or similar interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors.",
             "fieldName": "interaction",
             "inheritedFrom": {
               "name": "Button",
@@ -6288,7 +6316,7 @@
             "description": "Determines if an element is pressed as a stand alone interaction. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
             "fieldName": "pressed",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -6300,7 +6328,7 @@
             "description": "Determines if an element is expanded, typically following a disclosure pattern. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
             "fieldName": "expanded",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -6312,7 +6340,7 @@
             "description": "Sets a interactive element to be in a readonly content state. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
             "fieldName": "readonly",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -6324,7 +6352,7 @@
             "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
             "fieldName": "name",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -6336,7 +6364,7 @@
             "description": "Defines the value associated with the elmeents's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value",
             "fieldName": "value",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -6348,7 +6376,7 @@
             "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
             "fieldName": "type",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -6361,7 +6389,7 @@
             "description": "Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled",
             "fieldName": "disabled",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -6373,7 +6401,7 @@
             "description": "Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
             "fieldName": "selected",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -6385,7 +6413,7 @@
             "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
             "fieldName": "current",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           }
@@ -6423,10 +6451,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.489,
+            "kb": 15.735,
             "requests": {
               "index.js": {
-                "kb": 15.489,
+                "kb": 15.735,
                 "name": "index.js"
               }
             }
@@ -6467,7 +6495,7 @@
         {
           "id": "Interactions",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"emphasize\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n"
+          "template": "<mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"emphasis\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n"
         },
         {
           "id": "Size",
@@ -6477,32 +6505,32 @@
         {
           "id": "FlatInteractions",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button interaction=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"flat-emphasize\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"flat-destructive\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button interaction=\"flat\" icon-name=\"menu\" disabled></mlv-icon-button>\n"
+          "template": "<mlv-icon-button container=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button container=\"flat\" interaction=\"emphasis\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button container=\"flat\" interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n<mlv-icon-button container=\"flat\" icon-name=\"menu\" disabled></mlv-icon-button>\n"
         },
         {
           "id": "PressedToggle",
           "file": "icon-button.stories.ts",
-          "template": "<div mlv-layout=\"row gap:sm pad-bottom:md\">\n  <mlv-icon-button icon-name=\"filter-stroke\"></mlv-icon-button>\n  <mlv-icon-button pressed icon-name=\"filter\"></mlv-icon-button>\n</div>\n\n<div mlv-layout=\"row gap:sm\">\n  <mlv-icon-button icon-name=\"eye-hidden\" interaction=\"flat\" aria-label=\"show\"></mlv-icon-button>\n  <mlv-icon-button pressed icon-name=\"eye\" interaction=\"flat\" aria-label=\"hide\"></mlv-icon-button>\n</div>\n"
+          "template": "<div mlv-layout=\"row gap:sm pad-bottom:md\">\n  <mlv-icon-button icon-name=\"filter-stroke\"></mlv-icon-button>\n  <mlv-icon-button pressed icon-name=\"filter\"></mlv-icon-button>\n</div>\n\n<div mlv-layout=\"row gap:sm\">\n  <mlv-icon-button icon-name=\"eye-hidden\" container=\"flat\" aria-label=\"show\"></mlv-icon-button>\n  <mlv-icon-button pressed icon-name=\"eye\" container=\"flat\" aria-label=\"hide\"></mlv-icon-button>\n</div>\n"
         },
         {
           "id": "SelectedFlat",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button selected icon-name=\"split-vertical\" aria-label=\"split vertical\" interaction=\"flat\"></mlv-icon-button>\n<mlv-icon-button icon-name=\"split-horizontal\" aria-label=\"split horizontal\" interaction=\"flat\"></mlv-icon-button>\n<mlv-icon-button icon-name=\"split-none\" aria-label=\"preview\" interaction=\"flat\"></mlv-icon-button>\n"
+          "template": "<mlv-icon-button selected icon-name=\"split-vertical\" aria-label=\"split vertical\" container=\"flat\"></mlv-icon-button>\n<mlv-icon-button icon-name=\"split-horizontal\" aria-label=\"split horizontal\" container=\"flat\"></mlv-icon-button>\n<mlv-icon-button icon-name=\"split-none\" aria-label=\"preview\" container=\"flat\"></mlv-icon-button>\n"
         },
         {
           "id": "CustomIcon",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button interaction=\"emphasize\">ML</mlv-icon-button>\n<mlv-icon-button>🎉</mlv-icon-button>\n<mlv-icon-button> 🔗 <a href=\"#\" aria-label=\"custom icon button\"></a> </mlv-icon-button>\n"
+          "template": "<mlv-icon-button interaction=\"emphasis\">ML</mlv-icon-button>\n<mlv-icon-button>🎉</mlv-icon-button>\n<mlv-icon-button> 🔗 <a href=\"#\" aria-label=\"custom icon button\"></a> </mlv-icon-button>\n"
         },
         {
           "id": "Link",
           "file": "icon-button.stories.ts",
-          "template": "<mlv-icon-button icon-name=\"menu\">\n  <a href=\"#\" aria-label=\"link to page\"></a>\n</mlv-icon-button>\n<mlv-icon-button interaction=\"flat\" icon-name=\"menu\">\n  <a href=\"#\" aria-label=\"link to page\"></a>\n</mlv-icon-button>\n"
+          "template": "<mlv-icon-button icon-name=\"menu\">\n  <a href=\"#\" aria-label=\"link to page\"></a>\n</mlv-icon-button>\n<mlv-icon-button container=\"flat\" icon-name=\"menu\">\n  <a href=\"#\" aria-label=\"link to page\"></a>\n</mlv-icon-button>\n"
         },
         {
           "id": "Themes",
           "file": "icon-button.stories.ts",
-          "template": "      <mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"emphasize\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"inverse\" icon-name=\"menu\"></mlv-icon-button>\n    </div>\n    <div mlv-theme=\"root dark\">\n      <mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"emphasize\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"inverse\" icon-name=\"menu\"></mlv-icon-button>"
+          "template": "      <mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"emphasis\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button container=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>\n    </div>\n    <div mlv-theme=\"root dark\">\n      <mlv-icon-button icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"emphasis\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button interaction=\"destructive\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button container=\"flat\" icon-name=\"menu\"></mlv-icon-button>\n      <mlv-icon-button disabled icon-name=\"menu\"></mlv-icon-button>"
         }
       ],
       "behavior": "button",
@@ -6682,10 +6710,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.497,
+            "kb": 22.746,
             "requests": {
               "index.js": {
-                "kb": 22.497,
+                "kb": 22.746,
                 "name": "index.js"
               }
             }
@@ -6705,17 +6733,17 @@
         {
           "id": "Actions",
           "file": "actions.stories.ts",
-          "template": "<mlv-input>\n  <label>label</label>\n  <mlv-icon-button icon-name=\"search\" interaction=\"flat\" readonly></mlv-icon-button>\n  <input type=\"text\" />\n  <mlv-icon-button icon-name=\"cancel\" interaction=\"flat\" aria-label=\"clear\"></mlv-icon-button>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-input>\n"
+          "template": "<mlv-input>\n  <label>label</label>\n  <mlv-icon-button icon-name=\"search\" container=\"flat\" readonly></mlv-icon-button>\n  <input type=\"text\" />\n  <mlv-icon-button icon-name=\"cancel\" container=\"flat\" aria-label=\"clear\"></mlv-icon-button>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-input>\n"
         },
         {
           "id": "LabelAction",
           "file": "actions.stories.ts",
-          "template": "<mlv-input>\n  <label>label</label>\n  <mlv-icon-button\n    icon-name=\"information-circle-stroke\"\n    interaction=\"flat\"\n    aria-label=\"more details\"\n    slot=\"label\"\n  ></mlv-icon-button>\n  <input type=\"text\" />\n  <mlv-control-message>message</mlv-control-message>\n</mlv-input>\n"
+          "template": "<mlv-input>\n  <label>label</label>\n  <mlv-icon-button\n    icon-name=\"information-circle-stroke\"\n    container=\"flat\"\n    aria-label=\"more details\"\n    slot=\"label\"\n  ></mlv-icon-button>\n  <input type=\"text\" />\n  <mlv-control-message>message</mlv-control-message>\n</mlv-input>\n"
         },
         {
           "id": "PrefixSuffix",
           "file": "actions.stories.ts",
-          "template": "<mlv-input>\n  <label>label</label>\n  <mlv-button interaction=\"flat\" readonly>https://</mlv-button>\n  <input type=\"text\" />\n  <mlv-button interaction=\"flat\" readonly>.com</mlv-button>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-input>\n"
+          "template": "<mlv-input>\n  <label>label</label>\n  <mlv-button container=\"flat\" readonly>https://</mlv-button>\n  <input type=\"text\" />\n  <mlv-button container=\"flat\" readonly>.com</mlv-button>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-input>\n"
         }
       ],
       "behavior": "form",
@@ -6767,10 +6795,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.497,
+            "kb": 22.746,
             "requests": {
               "index.js": {
-                "kb": 22.497,
+                "kb": 22.746,
                 "name": "index.js"
               }
             }
@@ -6790,12 +6818,12 @@
         {
           "id": "InputGroup",
           "file": "input-groups.stories.ts",
-          "template": "<mlv-input-group>\n  <label>domain</label>\n  <mlv-select style=\"width: 130px\">\n    <select aria-label=\"protocol\">\n      <option>https://</option>\n      <option>http://</option>\n    </select>\n  </mlv-select>\n  <mlv-input>\n    <input placeholder=\"example\" type=\"url\" aria-label=\"host\" />\n    <mlv-button interaction=\"flat\" readonly=\"\">.com</mlv-button>\n  </mlv-input>\n  <mlv-control-message>host: 123456</mlv-control-message>\n</mlv-input-group>\n"
+          "template": "<mlv-input-group>\n  <label>domain</label>\n  <mlv-select style=\"width: 130px\">\n    <select aria-label=\"protocol\">\n      <option>https://</option>\n      <option>http://</option>\n    </select>\n  </mlv-select>\n  <mlv-input>\n    <input placeholder=\"example\" type=\"url\" aria-label=\"host\" />\n    <mlv-button container=\"flat\" readonly=\"\">.com</mlv-button>\n  </mlv-input>\n  <mlv-control-message>host: 123456</mlv-control-message>\n</mlv-input-group>\n"
         },
         {
           "id": "FilterGroupRange",
           "file": "input-groups.stories.ts",
-          "template": "<div mlv-layout=\"row align:vertical-center\">\n  <mlv-input-group>\n    <mlv-select style=\"width: 150px\">\n      <select aria-label=\"date type\">\n        <option value=\"1\">recording date</option>\n        <option value=\"2\">process date</option>\n      </select>\n    </mlv-select>\n    <mlv-date style=\"width: 220px\">\n      <mlv-button interaction=\"flat\" readonly=\"\">start</mlv-button>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n    </mlv-date>\n    <mlv-date style=\"width: 220px\">\n      <mlv-button interaction=\"flat\" readonly=\"\">end</mlv-button>\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </mlv-date>\n    <mlv-icon-button aria-label=\"remove filter\" icon-name=\"cancel\"></mlv-icon-button>\n  </mlv-input-group>\n</div>\n"
+          "template": "<div mlv-layout=\"row align:vertical-center\">\n  <mlv-input-group>\n    <mlv-select style=\"width: 150px\">\n      <select aria-label=\"date type\">\n        <option value=\"1\">recording date</option>\n        <option value=\"2\">process date</option>\n      </select>\n    </mlv-select>\n    <mlv-date style=\"width: 220px\">\n      <mlv-button container=\"flat\" readonly=\"\">start</mlv-button>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n    </mlv-date>\n    <mlv-date style=\"width: 220px\">\n      <mlv-button container=\"flat\" readonly=\"\">end</mlv-button>\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </mlv-date>\n    <mlv-icon-button aria-label=\"remove filter\" icon-name=\"cancel\"></mlv-icon-button>\n  </mlv-input-group>\n</div>\n"
         }
       ],
       "behavior": "form",
@@ -6965,10 +6993,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.122,
+            "kb": 9.145,
             "requests": {
               "index.js": {
-                "kb": 9.122,
+                "kb": 9.145,
                 "name": "index.js"
               }
             }
@@ -7065,10 +7093,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.237,
+            "kb": 11.258,
             "requests": {
               "index.js": {
-                "kb": 11.237,
+                "kb": 11.258,
                 "name": "index.js"
               }
             }
@@ -7218,7 +7246,7 @@
             "description": "Determines if an element is pressed as a stand alone interaction. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
             "fieldName": "pressed",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -7230,7 +7258,7 @@
             "description": "Determines if an element is expanded, typically following a disclosure pattern. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
             "fieldName": "expanded",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -7242,7 +7270,7 @@
             "description": "Sets a interactive element to be in a readonly content state. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
             "fieldName": "readonly",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -7254,7 +7282,7 @@
             "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
             "fieldName": "name",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -7266,7 +7294,7 @@
             "description": "Defines the value associated with the elmeents's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value",
             "fieldName": "value",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -7278,7 +7306,7 @@
             "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
             "fieldName": "type",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -7291,7 +7319,7 @@
             "description": "Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled",
             "fieldName": "disabled",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -7303,7 +7331,7 @@
             "description": "Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
             "fieldName": "selected",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -7315,7 +7343,7 @@
             "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
             "fieldName": "current",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           }
@@ -7362,10 +7390,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.237,
+            "kb": 11.258,
             "requests": {
               "index.js": {
-                "kb": 11.237,
+                "kb": 11.258,
                 "name": "index.js"
               }
             }
@@ -7382,7 +7410,7 @@
         "coverageTotal": 100
       },
       "stories": [],
-      "behavior": "button",
+      "behavior": "navigation",
       "status": "stable"
     },
     {
@@ -7511,10 +7539,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.14,
+            "kb": 23.388,
             "requests": {
               "index.js": {
-                "kb": 22.247,
+                "kb": 22.495,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -7764,10 +7792,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.563,
+            "kb": 28.78,
             "requests": {
               "index.js": {
-                "kb": 27.789,
+                "kb": 28.006,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7901,10 +7929,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.563,
+            "kb": 28.78,
             "requests": {
               "index.js": {
-                "kb": 27.789,
+                "kb": 28.006,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7967,10 +7995,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.623,
+            "kb": 22.639,
             "requests": {
               "index.js": {
-                "kb": 22.623,
+                "kb": 22.639,
                 "name": "index.js"
               }
             }
@@ -8186,10 +8214,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 40.607,
+            "kb": 40.88,
             "requests": {
               "index.js": {
-                "kb": 38.725,
+                "kb": 38.998,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -8408,10 +8436,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.996,
+            "kb": 18.236,
             "requests": {
               "index.js": {
-                "kb": 17.211,
+                "kb": 17.451,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8443,7 +8471,7 @@
         {
           "id": "Default",
           "file": "panel.stories.ts",
-          "template": "      <div mlv-theme=\"root ${args.theme}\">\n        <mlv-panel behavior-expand id=${args.showTrigger ? trigger-closable-${args.closable} : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>\n        ${when(\n            args.showHeader,\n            () => html\n            <mlv-panel-header>\n              <div slot=\"title\">${args.title}</div>\n              <div slot=\"subtitle\">${args.subtitle}</div>\n\n              ${when(\n                args.showActionIcon,\n                () => html<mlv-icon-button interaction=\"flat\" slot=\"action-icon\" icon-name=\"more-actions\" @click=${() => customActionHandler()}></mlv-icon-button>\n              )}\n            </mlv-panel-header>\n            \n          )}\n\n          <mlv-panel-content mlv-layout=\"column gap:md\">\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Release</label>\n              <p mlv-text=\"label semibold sm\">RainbowBridge/08-18-2021AM/A2A</p>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Date</label>\n              <p mlv-text=\"label semibold sm\">2021-08-18</p>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">State</label>\n              <mlv-badge status=\"finished\">Indexed</mlv-badge>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Driver</label>\n              <p mlv-text=\"label semibold sm\">Kenjiro Ono</p>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Copilot</label>\n              <p mlv-text=\"label semibold sm\">Kenichi Yoshii</p>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">GVS</label>\n              <a href=\"#\" mlv-text=\"link body sm\">http://testbot/testbot/view/content...</a>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Session ID</label>\n              <a href=\"#\" mlv-text=\"link body sm\">Experiment 12345</a>\n            </div>\n          </mlv-panel-content>\n\n          ${when(\n            args.showFooter,\n            () => html\n            <mlv-panel-footer>\n              <mlv-button interaction=\"flat-destructive\">Destructive</mlv-button>\n              <mlv-button>Default</mlv-button>\n            </mlv-panel-footer>\n            \n          )}\n        </mlv-panel>\n      </div>\n\n      ${when(\n          args.showTrigger,\n          () => html\n            <mlv-button interaction=\"emphasize\" @click=${() => togglePanel(args.closable)}>Toggle Panel</mlv-button>\n          \n        )}\n    </section>\n\n    ${when(\n      args.showActionIcon,\n      () => html<mlv-notification-group position=\"bottom\" alignment=\"end\"></mlv-notification-group>"
+          "template": "      <div mlv-theme=\"root ${args.theme}\">\n        <mlv-panel behavior-expand id=${args.showTrigger ? trigger-closable-${args.closable} : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>\n        ${when(\n            args.showHeader,\n            () => html\n            <mlv-panel-header>\n              <div slot=\"title\">${args.title}</div>\n              <div slot=\"subtitle\">${args.subtitle}</div>\n\n              ${when(\n                args.showActionIcon,\n                () => html<mlv-icon-button container=\"flat\" slot=\"action-icon\" icon-name=\"more-actions\" @click=${() => customActionHandler()}></mlv-icon-button>\n              )}\n            </mlv-panel-header>\n            \n          )}\n\n          <mlv-panel-content mlv-layout=\"column gap:md\">\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Release</label>\n              <p mlv-text=\"label semibold sm\">RainbowBridge/08-18-2021AM/A2A</p>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Date</label>\n              <p mlv-text=\"label semibold sm\">2021-08-18</p>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">State</label>\n              <mlv-badge status=\"finished\">Indexed</mlv-badge>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Driver</label>\n              <p mlv-text=\"label semibold sm\">Kenjiro Ono</p>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Copilot</label>\n              <p mlv-text=\"label semibold sm\">Kenichi Yoshii</p>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">GVS</label>\n              <a href=\"#\" mlv-text=\"link body sm\">http://testbot/testbot/view/content...</a>\n            </div>\n\n            <div mlv-layout=\"column gap:xs\">\n              <label mlv-text=\"body sm medium muted\">Session ID</label>\n              <a href=\"#\" mlv-text=\"link body sm\">Experiment 12345</a>\n            </div>\n          </mlv-panel-content>\n\n          ${when(\n            args.showFooter,\n            () => html\n            <mlv-panel-footer>\n              <mlv-button interaction=\"destructive\" container=\"flat\">Destructive</mlv-button>\n              <mlv-button>Default</mlv-button>\n            </mlv-panel-footer>\n            \n          )}\n        </mlv-panel>\n      </div>\n\n      ${when(\n          args.showTrigger,\n          () => html\n            <mlv-button interaction=\"emphasis\" @click=${() => togglePanel(args.closable)}>Toggle Panel</mlv-button>\n          \n        )}\n    </section>\n\n    ${when(\n      args.showActionIcon,\n      () => html<mlv-notification-group position=\"bottom\" alignment=\"end\"></mlv-notification-group>"
         },
         {
           "id": "LeftSidePanel",
@@ -8527,10 +8555,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.996,
+            "kb": 18.236,
             "requests": {
               "index.js": {
-                "kb": 17.211,
+                "kb": 17.451,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8598,10 +8626,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.996,
+            "kb": 18.236,
             "requests": {
               "index.js": {
-                "kb": 17.211,
+                "kb": 17.451,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8674,10 +8702,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 17.996,
+            "kb": 18.236,
             "requests": {
               "index.js": {
-                "kb": 17.211,
+                "kb": 17.451,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8827,10 +8855,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.253,
+            "kb": 23.51,
             "requests": {
               "index.js": {
-                "kb": 22.312,
+                "kb": 22.569,
                 "name": "index.js"
               },
               "eye.svg.js": {
@@ -8939,10 +8967,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.555,
+            "kb": 8.572,
             "requests": {
               "index.js": {
-                "kb": 8.555,
+                "kb": 8.572,
                 "name": "index.js"
               }
             }
@@ -9093,10 +9121,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.261,
+            "kb": 14.28,
             "requests": {
               "index.js": {
-                "kb": 14.261,
+                "kb": 14.28,
                 "name": "index.js"
               }
             }
@@ -9156,7 +9184,7 @@
         {
           "id": "WithButton",
           "file": "progress-ring.stories.ts",
-          "template": "<div mlv-layout=\"row gap:sm pad:md\">\n  <mlv-button>\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button interaction=\"emphasize\">\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button interaction=\"destructive\">\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button>\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\" value=\"33\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button interaction=\"emphasize\">\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\" value=\"33\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button interaction=\"destructive\">\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\" value=\"33\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n</div>\n"
+          "template": "<div mlv-layout=\"row gap:sm pad:md\">\n  <mlv-button>\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button interaction=\"emphasis\">\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button interaction=\"destructive\">\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button>\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\" value=\"33\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button interaction=\"emphasis\">\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\" value=\"33\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n\n  <mlv-button interaction=\"destructive\">\n    <mlv-progress-ring status=\"neutral\" size=\"xxs\" value=\"33\"></mlv-progress-ring>\n    Button\n  </mlv-button>\n</div>\n"
         }
       ],
       "behavior": "content",
@@ -9231,10 +9259,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 40.683,
+            "kb": 40.963,
             "requests": {
               "index.js": {
-                "kb": 38.556,
+                "kb": 38.836,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -9439,10 +9467,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 21.999,
+            "kb": 22.248,
             "requests": {
               "index.js": {
-                "kb": 21.999,
+                "kb": 22.248,
                 "name": "index.js"
               }
             }
@@ -9508,10 +9536,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 21.999,
+            "kb": 22.248,
             "requests": {
               "index.js": {
-                "kb": 21.999,
+                "kb": 22.248,
                 "name": "index.js"
               }
             }
@@ -9657,10 +9685,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.179,
+            "kb": 22.427,
             "requests": {
               "index.js": {
-                "kb": 22.179,
+                "kb": 22.427,
                 "name": "index.js"
               }
             }
@@ -9857,10 +9885,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.001,
+            "kb": 23.251,
             "requests": {
               "index.js": {
-                "kb": 22.312,
+                "kb": 22.562,
                 "name": "index.js"
               },
               "search.svg.js": {
@@ -10068,10 +10096,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 38.405,
+            "kb": 38.73,
             "requests": {
               "index.js": {
-                "kb": 37.171,
+                "kb": 37.496,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -10093,7 +10121,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 97.5
+        "coverageTotal": 98.9575
       },
       "stories": [
         {
@@ -10109,7 +10137,7 @@
         {
           "id": "Prefix",
           "file": "select.stories.ts",
-          "template": "<mlv-select>\n  <mlv-button interaction=\"flat\" readonly>location</mlv-button>\n  <select>\n    <option value=\"1\">Option 1</option>\n    <option value=\"2\">Option 2</option>\n    <option value=\"3\">Option 3</option>\n  </select>\n</mlv-select>\n"
+          "template": "<mlv-select>\n  <mlv-button container=\"flat\" readonly>location</mlv-button>\n  <select>\n    <option value=\"1\">Option 1</option>\n    <option value=\"2\">Option 2</option>\n    <option value=\"3\">Option 3</option>\n  </select>\n</mlv-select>\n"
         },
         {
           "id": "Flat",
@@ -10132,6 +10160,11 @@
           "template": "<mlv-select>\n  <label>label</label>\n  <select multiple>\n    <option value=\"1\">Option 1</option>\n    <option value=\"2\" selected>Option 2</option>\n    <option value=\"3\" selected>Option 3</option>\n    <option value=\"4\" selected>Option 4</option>\n    <option value=\"5\">Option 5</option>\n  </select>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-select>\n"
         },
         {
+          "id": "MultipleDisabled",
+          "file": "select.stories.ts",
+          "template": "<mlv-select>\n  <label>label</label>\n  <select multiple disabled>\n    <option value=\"1\">Option 1</option>\n    <option value=\"2\" selected>Option 2</option>\n    <option value=\"3\" selected>Option 3</option>\n    <option value=\"4\" selected>Option 4</option>\n    <option value=\"5\">Option 5</option>\n  </select>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-select>\n"
+        },
+        {
           "id": "MultipleOverflow",
           "file": "select.stories.ts",
           "template": "<mlv-select style=\"--width: 250px\">\n  <label>label</label>\n  <select multiple>\n    <option value=\"1\">Option 1</option>\n    <option value=\"2\" selected>Option 2</option>\n    <option value=\"3\" selected>Option 3</option>\n    <option value=\"4\" selected>Option 4</option>\n    <option value=\"5\" selected>Option 5</option>\n  </select>\n  <mlv-control-message>message</mlv-control-message>\n</mlv-select>\n"
@@ -10139,7 +10172,7 @@
         {
           "id": "Size",
           "file": "select.stories.ts",
-          "template": "<div mlv-layout=\"column gap:xl\">\n  <mlv-select>\n    <label>label</label>\n    <select size=\"3\">\n      <option value=\"1\">Option 1</option>\n      <option value=\"2\">Option 2</option>\n      <option value=\"3\">Option 3</option>\n      <option value=\"4\">Option 4</option>\n      <option value=\"5\">Option 5</option>\n    </select>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-select>\n  <hr />\n  <mlv-select layout=\"horizontal\">\n    <label>label</label>\n    <select size=\"3\">\n      <option value=\"1\">Option 1</option>\n      <option value=\"2\">Option 2</option>\n      <option value=\"3\">Option 3</option>\n      <option value=\"4\">Option 4</option>\n      <option value=\"5\">Option 5</option>\n    </select>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-select>\n</div>\n"
+          "template": "<div mlv-layout=\"column gap:xl\">\n  <mlv-select>\n    <label>label</label>\n    <select size=\"5\">\n      <option value=\"1\">Option 1</option>\n      <option value=\"2\" selected>Option 2</option>\n      <option value=\"3\">Option 3</option>\n      <option value=\"4\">Option 4</option>\n      <option value=\"5\">Option 5</option>\n    </select>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-select>\n\n  <mlv-select>\n    <label>label</label>\n    <select size=\"3\">\n      <option value=\"1\">Option 1</option>\n      <option value=\"2\" selected>Option 2</option>\n      <option value=\"3\">Option 3</option>\n      <option value=\"4\">Option 4</option>\n      <option value=\"5\">Option 5</option>\n    </select>\n    <mlv-control-message>message</mlv-control-message>\n  </mlv-select>\n</div>\n"
         },
         {
           "id": "Height",
@@ -10267,7 +10300,7 @@
             "description": "Determines if an element is pressed as a stand alone interaction. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
             "fieldName": "pressed",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10279,7 +10312,7 @@
             "description": "Determines if an element is expanded, typically following a disclosure pattern. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
             "fieldName": "expanded",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10291,7 +10324,7 @@
             "description": "Sets a interactive element to be in a readonly content state. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
             "fieldName": "readonly",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10303,7 +10336,7 @@
             "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
             "fieldName": "name",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10315,7 +10348,7 @@
             "description": "Defines the value associated with the elmeents's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value",
             "fieldName": "value",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10327,7 +10360,7 @@
             "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
             "fieldName": "type",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10340,7 +10373,7 @@
             "description": "Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled",
             "fieldName": "disabled",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10352,7 +10385,7 @@
             "description": "Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
             "fieldName": "selected",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10364,7 +10397,7 @@
             "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
             "fieldName": "current",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           }
@@ -10396,10 +10429,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.841,
+            "kb": 15.856,
             "requests": {
               "index.js": {
-                "kb": 14.949,
+                "kb": 14.964,
                 "name": "index.js"
               },
               "sort-ascending.svg.js": {
@@ -10436,7 +10469,7 @@
           "template": "<mlv-sort-button></mlv-sort-button>\n<mlv-sort-button sort=\"ascending\"></mlv-sort-button>\n<mlv-sort-button sort=\"descending\"></mlv-sort-button>\n"
         }
       ],
-      "behavior": "button",
+      "behavior": "content",
       "status": "stable"
     },
     {
@@ -10594,10 +10627,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.082,
+            "kb": 22.336,
             "requests": {
               "index.js": {
-                "kb": 22.082,
+                "kb": 22.336,
                 "name": "index.js"
               }
             }
@@ -10729,10 +10762,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.335,
+            "kb": 11.366,
             "requests": {
               "index.js": {
-                "kb": 11.335,
+                "kb": 11.366,
                 "name": "index.js"
               }
             }
@@ -10746,7 +10779,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 94.4425
+        "coverageTotal": 100
       },
       "stories": [
         {
@@ -10868,7 +10901,7 @@
             "fieldName": "selected",
             "default": "false",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10880,7 +10913,7 @@
             "description": "Determines if an element is pressed as a stand alone interaction. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
             "fieldName": "pressed",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10892,7 +10925,7 @@
             "description": "Determines if an element is expanded, typically following a disclosure pattern. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
             "fieldName": "expanded",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10904,7 +10937,7 @@
             "description": "Sets a interactive element to be in a readonly content state. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
             "fieldName": "readonly",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10916,7 +10949,7 @@
             "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
             "fieldName": "name",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10928,7 +10961,7 @@
             "description": "Defines the value associated with the elmeents's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value",
             "fieldName": "value",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10940,7 +10973,7 @@
             "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
             "fieldName": "type",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10953,7 +10986,7 @@
             "description": "Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled",
             "fieldName": "disabled",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -10965,7 +10998,7 @@
             "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
             "fieldName": "current",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           }
@@ -11018,10 +11051,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.335,
+            "kb": 11.366,
             "requests": {
               "index.js": {
-                "kb": 11.335,
+                "kb": 11.366,
                 "name": "index.js"
               }
             }
@@ -11035,10 +11068,10 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 94.4425
+        "coverageTotal": 100
       },
       "stories": [],
-      "behavior": "button",
+      "behavior": "navigation",
       "status": "beta"
     },
     {
@@ -11157,7 +11190,7 @@
             "description": "Determines if an element is pressed as a stand alone interaction. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
             "fieldName": "pressed",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -11169,7 +11202,7 @@
             "description": "Determines if an element is expanded, typically following a disclosure pattern. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
             "fieldName": "expanded",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -11181,7 +11214,7 @@
             "description": "Sets a interactive element to be in a readonly content state. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
             "fieldName": "readonly",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -11193,7 +11226,7 @@
             "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
             "fieldName": "name",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -11205,7 +11238,7 @@
             "description": "Defines the value associated with the elmeents's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value",
             "fieldName": "value",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -11217,7 +11250,7 @@
             "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
             "fieldName": "type",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -11230,7 +11263,7 @@
             "description": "Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled",
             "fieldName": "disabled",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -11242,7 +11275,7 @@
             "description": "Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
             "fieldName": "selected",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           },
@@ -11254,7 +11287,7 @@
             "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
             "fieldName": "current",
             "inheritedFrom": {
-              "name": "MlvBaseButton",
+              "name": "BaseButton",
               "module": "/src/internal/base/button.js"
             }
           }
@@ -11292,10 +11325,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.561,
+            "kb": 15.585,
             "requests": {
               "index.js": {
-                "kb": 15.561,
+                "kb": 15.585,
                 "name": "index.js"
               }
             }
@@ -11330,7 +11363,7 @@
         {
           "id": "TagGroup",
           "file": "tag.stories.ts",
-          "template": "<div mlv-layout=\"row gap:xs align:vertical-center\">\n  <mlv-tag>topic-tag</mlv-tag>\n  <mlv-tag>topic-tag</mlv-tag>\n  <mlv-tag>topic-tag</mlv-tag>\n  <mlv-tag>3+</mlv-tag>\n\n  <mlv-icon-button interaction=\"flat\" size=\"sm\" icon-name=\"add\"></mlv-icon-button>\n</div>\n"
+          "template": "<div mlv-layout=\"row gap:xs align:vertical-center\">\n  <mlv-tag>topic-tag</mlv-tag>\n  <mlv-tag>topic-tag</mlv-tag>\n  <mlv-tag>topic-tag</mlv-tag>\n  <mlv-tag>3+</mlv-tag>\n\n  <mlv-icon-button container=\"flat\" size=\"sm\" icon-name=\"add\"></mlv-icon-button>\n</div>\n"
         },
         {
           "id": "Color",
@@ -11358,7 +11391,7 @@
           "template": "<mlv-tag style=\"--width: 150px\">some really long content</mlv-tag>\n"
         }
       ],
-      "behavior": "button",
+      "behavior": "content",
       "status": "stable"
     },
     {
@@ -11516,10 +11549,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 21.951,
+            "kb": 22.199,
             "requests": {
               "index.js": {
-                "kb": 21.951,
+                "kb": 22.199,
                 "name": "index.js"
               }
             }
@@ -11691,10 +11724,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.865,
+            "kb": 23.116,
             "requests": {
               "index.js": {
-                "kb": 22.245,
+                "kb": 22.496,
                 "name": "index.js"
               },
               "clock.svg.js": {
@@ -11930,10 +11963,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.119,
+            "kb": 28.339,
             "requests": {
               "index.js": {
-                "kb": 27.345,
+                "kb": 27.565,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -11967,7 +12000,7 @@
         {
           "id": "Actions",
           "file": "toast.stories.ts",
-          "template": "<div mlv-layout=\"row align:center\" style=\"height: 200px\">\n  <mlv-toast position=\"top\"> default <mlv-button interaction=\"flat\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"success\" position=\"right\"> success <mlv-button interaction=\"flat\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"warning\" position=\"bottom\"> warning <mlv-button interaction=\"flat\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"danger\" position=\"left\"> danger <mlv-button interaction=\"flat\">action</mlv-button> </mlv-toast>\n</div>\n"
+          "template": "<div mlv-layout=\"row align:center\" style=\"height: 200px\">\n  <mlv-toast position=\"top\"> default <mlv-button container=\"flat\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"success\" position=\"right\"> success <mlv-button container=\"flat\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"warning\" position=\"bottom\"> warning <mlv-button container=\"flat\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"danger\" position=\"left\"> danger <mlv-button container=\"flat\">action</mlv-button> </mlv-toast>\n</div>\n"
         },
         {
           "id": "Interactive",
@@ -12112,10 +12145,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.936,
+            "kb": 15.952,
             "requests": {
               "index.js": {
-                "kb": 14.15,
+                "kb": 14.166,
                 "name": "index.js"
               },
               "add.svg.js": {
@@ -12143,27 +12176,27 @@
         {
           "id": "Default",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <mlv-toolbar>\n    <mlv-button interaction=\"flat\"><mlv-icon name=\"add\"></mlv-icon> create</mlv-button>\n    <mlv-button interaction=\"flat\"><mlv-icon name=\"delete\"></mlv-icon> delete</mlv-button>\n    <mlv-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></mlv-icon-button>\n  </mlv-toolbar>\n</div>\n"
+          "template": "<div>\n  <mlv-toolbar>\n    <mlv-button container=\"flat\"><mlv-icon name=\"add\"></mlv-icon> create</mlv-button>\n    <mlv-button container=\"flat\"><mlv-icon name=\"delete\"></mlv-icon> delete</mlv-button>\n    <mlv-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></mlv-icon-button>\n  </mlv-toolbar>\n</div>\n"
         },
         {
           "id": "ContainerFlat",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <mlv-toolbar container=\"flat\">\n    <mlv-button interaction=\"flat\"><mlv-icon name=\"add\"></mlv-icon> create</mlv-button>\n    <mlv-button interaction=\"flat\"><mlv-icon name=\"delete\"></mlv-icon> delete</mlv-button>\n    <mlv-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></mlv-icon-button>\n  </mlv-toolbar>\n</div>\n"
+          "template": "<div>\n  <mlv-toolbar container=\"flat\">\n    <mlv-button container=\"flat\"><mlv-icon name=\"add\"></mlv-icon> create</mlv-button>\n    <mlv-button container=\"flat\"><mlv-icon name=\"delete\"></mlv-icon> delete</mlv-button>\n    <mlv-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></mlv-icon-button>\n  </mlv-toolbar>\n</div>\n"
         },
         {
           "id": "ContainerInset",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <mlv-toolbar container=\"inset\">\n    <mlv-button interaction=\"flat\"><mlv-icon name=\"add\"></mlv-icon> create</mlv-button>\n    <mlv-button interaction=\"flat\"><mlv-icon name=\"delete\"></mlv-icon> delete</mlv-button>\n    <mlv-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></mlv-icon-button>\n  </mlv-toolbar>\n</div>\n"
+          "template": "<div>\n  <mlv-toolbar container=\"inset\">\n    <mlv-button container=\"flat\"><mlv-icon name=\"add\"></mlv-icon> create</mlv-button>\n    <mlv-button container=\"flat\"><mlv-icon name=\"delete\"></mlv-icon> delete</mlv-button>\n    <mlv-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></mlv-icon-button>\n  </mlv-toolbar>\n</div>\n"
         },
         {
           "id": "ContainerFull",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <mlv-toolbar container=\"full\">\n    <mlv-button interaction=\"flat\"><mlv-icon name=\"add\"></mlv-icon> create</mlv-button>\n    <mlv-button interaction=\"flat\"><mlv-icon name=\"delete\"></mlv-icon> delete</mlv-button>\n    <mlv-icon-button interaction=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></mlv-icon-button>\n  </mlv-toolbar>\n</div>\n"
+          "template": "<div>\n  <mlv-toolbar container=\"full\">\n    <mlv-button container=\"flat\"><mlv-icon name=\"add\"></mlv-icon> create</mlv-button>\n    <mlv-button container=\"flat\"><mlv-icon name=\"delete\"></mlv-icon> delete</mlv-button>\n    <mlv-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></mlv-icon-button>\n  </mlv-toolbar>\n</div>\n"
         },
         {
           "id": "Groups",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <mlv-toolbar>\n    <mlv-select fit-text>\n      <select aria-label=\"element type\">\n        <option value=\"1\">Heading 1</option>\n        <option value=\"2\">Heading 2</option>\n        <option value=\"p\">Paragraph</option>\n      </select>\n      <div slot=\"option-1\">\n        <span mlv-text=\"heading\">Heading 1</span>\n      </div>\n      <div slot=\"option-2\">\n        <span mlv-text=\"heading sm\">Heading 2</span>\n      </div>\n      <div slot=\"option-3\">\n        <span mlv-text=\"body sm\">Paragraph</span>\n      </div>\n    </mlv-select>\n\n    <mlv-divider></mlv-divider>\n\n    <mlv-button-group>\n      <mlv-icon-button pressed icon-name=\"bars-3-bottom-left\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"bars-3-bottom-right\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"bars-4\"></mlv-icon-button>\n    </mlv-button-group>\n\n    <mlv-divider></mlv-divider>\n\n    <mlv-button-group>\n      <mlv-icon-button icon-name=\"bold\" size=\"sm\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"italic\" size=\"sm\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"strikethrough\" size=\"sm\"></mlv-icon-button>\n    </mlv-button-group>\n\n    <mlv-divider></mlv-divider>\n\n    <mlv-button-group>\n      <mlv-icon-button icon-name=\"code\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"fork\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"merge\"></mlv-icon-button>\n    </mlv-button-group>\n\n    <mlv-button slot=\"suffix\" interaction=\"flat\">Save</mlv-button>\n  </mlv-toolbar>\n</div>\n"
+          "template": "<div>\n  <mlv-toolbar>\n    <mlv-select fit-text>\n      <select aria-label=\"element type\">\n        <option value=\"1\">Heading 1</option>\n        <option value=\"2\">Heading 2</option>\n        <option value=\"p\">Paragraph</option>\n      </select>\n      <div slot=\"option-1\">\n        <span mlv-text=\"heading\">Heading 1</span>\n      </div>\n      <div slot=\"option-2\">\n        <span mlv-text=\"heading sm\">Heading 2</span>\n      </div>\n      <div slot=\"option-3\">\n        <span mlv-text=\"body sm\">Paragraph</span>\n      </div>\n    </mlv-select>\n\n    <mlv-divider></mlv-divider>\n\n    <mlv-button-group>\n      <mlv-icon-button pressed icon-name=\"bars-3-bottom-left\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"bars-3-bottom-right\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"bars-4\"></mlv-icon-button>\n    </mlv-button-group>\n\n    <mlv-divider></mlv-divider>\n\n    <mlv-button-group>\n      <mlv-icon-button icon-name=\"bold\" size=\"sm\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"italic\" size=\"sm\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"strikethrough\" size=\"sm\"></mlv-icon-button>\n    </mlv-button-group>\n\n    <mlv-divider></mlv-divider>\n\n    <mlv-button-group>\n      <mlv-icon-button icon-name=\"code\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"fork\"></mlv-icon-button>\n      <mlv-icon-button icon-name=\"merge\"></mlv-icon-button>\n    </mlv-button-group>\n\n    <mlv-button slot=\"suffix\" container=\"flat\">Save</mlv-button>\n  </mlv-toolbar>\n</div>\n"
         },
         {
           "id": "Vertical",
@@ -12173,17 +12206,17 @@
         {
           "id": "Filter",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <mlv-toolbar container=\"flat\">\n    <mlv-icon-button readonly icon-name=\"filter\" interaction=\"flat\" slot=\"prefix\"></mlv-icon-button>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </mlv-combobox>\n    <mlv-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></mlv-icon-button>\n    <mlv-button slot=\"suffix\">Save Filters</mlv-button>\n  </mlv-toolbar>\n</div>\n"
+          "template": "<div>\n  <mlv-toolbar container=\"flat\">\n    <mlv-icon-button readonly icon-name=\"filter\" container=\"flat\" slot=\"prefix\"></mlv-icon-button>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </mlv-combobox>\n    <mlv-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></mlv-icon-button>\n    <mlv-button slot=\"suffix\">Save Filters</mlv-button>\n  </mlv-toolbar>\n</div>\n"
         },
         {
           "id": "Scroll",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <mlv-toolbar container=\"flat\">\n    <mlv-icon-button readonly icon-name=\"filter\" interaction=\"flat\" slot=\"prefix\"></mlv-icon-button>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </mlv-progressive-filter-chip>\n    <mlv-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </mlv-combobox>\n    <mlv-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></mlv-icon-button>\n    <mlv-button slot=\"suffix\">Save Filters</mlv-button>\n  </mlv-toolbar>\n</div>\n"
+          "template": "<div>\n  <mlv-toolbar container=\"flat\">\n    <mlv-icon-button readonly icon-name=\"filter\" container=\"flat\" slot=\"prefix\"></mlv-icon-button>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </mlv-progressive-filter-chip>\n    <mlv-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </mlv-combobox>\n    <mlv-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></mlv-icon-button>\n    <mlv-button slot=\"suffix\">Save Filters</mlv-button>\n  </mlv-toolbar>\n</div>\n"
         },
         {
           "id": "Wrap",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <mlv-toolbar container=\"flat\" content=\"wrap\">\n    <mlv-icon-button readonly icon-name=\"filter\" interaction=\"flat\" slot=\"prefix\"></mlv-icon-button>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </mlv-progressive-filter-chip>\n    <mlv-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </mlv-combobox>\n    <mlv-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></mlv-icon-button>\n    <mlv-button slot=\"suffix\">Save Filters</mlv-button>\n  </mlv-toolbar>\n</div>\n"
+          "template": "<div>\n  <mlv-toolbar container=\"flat\" content=\"wrap\">\n    <mlv-icon-button readonly icon-name=\"filter\" container=\"flat\" slot=\"prefix\"></mlv-icon-button>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </mlv-progressive-filter-chip>\n    <mlv-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </mlv-progressive-filter-chip>\n    <mlv-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </mlv-combobox>\n    <mlv-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></mlv-icon-button>\n    <mlv-button slot=\"suffix\">Save Filters</mlv-button>\n  </mlv-toolbar>\n</div>\n"
         },
         {
           "id": "Status",
@@ -12350,10 +12383,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.287,
+            "kb": 19.301,
             "requests": {
               "index.js": {
-                "kb": 19.287,
+                "kb": 19.301,
                 "name": "index.js"
               }
             }
@@ -12393,12 +12426,12 @@
         {
           "id": "Hint",
           "file": "tooltip.stories.ts",
-          "template": "<div mlv-layout=\"block align:vertical-center\" style=\"height: 90vh\">\n  <mlv-tooltip anchor=\"action-btn\" position=\"right\" trigger=\"action-btn\" hidden\n    >Preview in progress CI tasks for the active host</mlv-tooltip\n  >\n  <div mlv-layout=\"row gap:xs align:vertical-center\">\n    <h2 mlv-text=\"section\">Preview</h2>\n    <mlv-icon-button interaction=\"flat\" icon-name=\"information-circle-stroke\" id=\"action-btn\"></mlv-icon-button>\n  </div>\n  <script type=\"module\">\n    const tooltip = document.querySelector('mlv-tooltip[anchor=\"action-btn\"]');\n    tooltip.addEventListener(\"close\", () => (tooltip.hidden = true));\n    tooltip.addEventListener(\"open\", () => (tooltip.hidden = false));\n  </script>\n</div>\n"
+          "template": "<div mlv-layout=\"block align:vertical-center\" style=\"height: 90vh\">\n  <mlv-tooltip anchor=\"action-btn\" position=\"right\" trigger=\"action-btn\" hidden\n    >Preview in progress CI tasks for the active host</mlv-tooltip\n  >\n  <div mlv-layout=\"row gap:xs align:vertical-center\">\n    <h2 mlv-text=\"section\">Preview</h2>\n    <mlv-icon-button container=\"flat\" icon-name=\"information-circle-stroke\" id=\"action-btn\"></mlv-icon-button>\n  </div>\n  <script type=\"module\">\n    const tooltip = document.querySelector('mlv-tooltip[anchor=\"action-btn\"]');\n    tooltip.addEventListener(\"close\", () => (tooltip.hidden = true));\n    tooltip.addEventListener(\"open\", () => (tooltip.hidden = false));\n  </script>\n</div>\n"
         },
         {
           "id": "HintCopy",
           "file": "tooltip.stories.ts",
-          "template": "<div mlv-layout=\"row align:center\" style=\"height: 90vh\">\n  <mlv-tooltip trigger=\"btn\" anchor=\"btn\" hidden>2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</mlv-tooltip>\n  <mlv-toast trigger=\"btn\" anchor=\"btn\" close-timeout=\"1500\" hidden status=\"success\">copied!</mlv-toast>\n  <mlv-button interaction=\"flat\" id=\"btn\" aria-label=\"copy to clipboard\">\n    <p mlv-text=\"truncate\" style=\"width: 120px\">2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</p>\n    <mlv-icon name=\"copy\"></mlv-icon>\n  </mlv-button>\n</div>\n\n<script type=\"module\">\n  const toast = document.querySelector(\"mlv-toast\");\n  const tooltip = document.querySelector(\"mlv-tooltip\");\n  tooltip.addEventListener(\"close\", () => (tooltip.hidden = true));\n  tooltip.addEventListener(\"open\", (e) => (tooltip.hidden = !toast.hidden));\n  toast.addEventListener(\"close\", () => (toast.hidden = true));\n  toast.addEventListener(\"open\", () => {\n    toast.hidden = false;\n    tooltip.hidden = true;\n  });\n</script>\n"
+          "template": "<div mlv-layout=\"row align:center\" style=\"height: 90vh\">\n  <mlv-tooltip trigger=\"btn\" anchor=\"btn\" hidden>2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</mlv-tooltip>\n  <mlv-toast trigger=\"btn\" anchor=\"btn\" close-timeout=\"1500\" hidden status=\"success\">copied!</mlv-toast>\n  <mlv-button container=\"flat\" id=\"btn\" aria-label=\"copy to clipboard\">\n    <p mlv-text=\"truncate\" style=\"width: 120px\">2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</p>\n    <mlv-icon name=\"copy\"></mlv-icon>\n  </mlv-button>\n</div>\n\n<script type=\"module\">\n  const toast = document.querySelector(\"mlv-toast\");\n  const tooltip = document.querySelector(\"mlv-tooltip\");\n  tooltip.addEventListener(\"close\", () => (tooltip.hidden = true));\n  tooltip.addEventListener(\"open\", (e) => (tooltip.hidden = !toast.hidden));\n  toast.addEventListener(\"close\", () => (toast.hidden = true));\n  toast.addEventListener(\"open\", () => {\n    toast.hidden = false;\n    tooltip.hidden = true;\n  });\n</script>\n"
         },
         {
           "id": "Content",
@@ -12560,10 +12593,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.138,
+            "kb": 23.386,
             "requests": {
               "index.js": {
-                "kb": 22.245,
+                "kb": 22.493,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -12613,22 +12646,22 @@
     {
       "id": "StandardHeaderMainPage",
       "file": "header-patterns.stories.ts",
-      "template": "<mlv-card container=\"flat\">\n  <mlv-card-content mlv-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!-- Breadcrumbs -->\n    <mlv-breadcrumb>\n      <mlv-button><a href=\"#\" target=\"_self\">Item 1</a></mlv-button>\n      <span>You Are Here</span>\n    </mlv-breadcrumb>\n\n    <div mlv-layout=\"row align:space-between align:vertical-center\">\n      <h1 mlv-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <section mlv-layout=\"row gap:sm align:vertical-center\">\n        <mlv-button>Default</mlv-button>\n        <mlv-button interaction=\"emphasize\">Emphasized</mlv-button>\n        <mlv-icon-button icon-name=\"more-actions\"></mlv-icon-button>\n      </section>\n    </div>\n  </mlv-card-content>\n</mlv-card>\n"
+      "template": "<mlv-card container=\"flat\">\n  <mlv-card-content mlv-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!-- Breadcrumbs -->\n    <mlv-breadcrumb>\n      <mlv-button><a href=\"#\" target=\"_self\">Item 1</a></mlv-button>\n      <span>You Are Here</span>\n    </mlv-breadcrumb>\n\n    <div mlv-layout=\"row align:space-between align:vertical-center\">\n      <h1 mlv-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <section mlv-layout=\"row gap:sm align:vertical-center\">\n        <mlv-button>Default</mlv-button>\n        <mlv-button interaction=\"emphasis\">Emphasis</mlv-button>\n        <mlv-icon-button icon-name=\"more-actions\"></mlv-icon-button>\n      </section>\n    </div>\n  </mlv-card-content>\n</mlv-card>\n"
     },
     {
       "id": "TabsHeaderMainPage",
       "file": "header-patterns.stories.ts",
-      "template": "<mlv-card\n  container=\"flat\"\n  style=\"--border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)\"\n>\n  <mlv-card-content style=\"--padding: 0\" mlv-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!-- Breadcrumbs -->\n    <mlv-breadcrumb>\n      <mlv-button><a href=\"#\" target=\"_self\">Item 1</a></mlv-button>\n      <span>You Are Here</span>\n    </mlv-breadcrumb>\n\n    <div mlv-layout=\"row align:space-between align:vertical-center\">\n      <h1 mlv-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <div mlv-layout=\"row gap:sm align:vertical-center\">\n        <mlv-button>Default</mlv-button>\n        <mlv-button interaction=\"emphasize\">Emphasized</mlv-button>\n        <mlv-icon-button icon-name=\"more-actions\"></mlv-icon-button>\n      </div>\n    </div>\n\n    <!-- Tabs -->\n    <mlv-tabs behavior-select>\n      <mlv-tabs-item selected>Tab 1</mlv-tabs-item>\n      <mlv-tabs-item>Tab 2</mlv-tabs-item>\n      <mlv-tabs-item>Tab 3</mlv-tabs-item>\n      <mlv-tabs-item>Tab 4</mlv-tabs-item>\n    </mlv-tabs>\n  </mlv-card-content>\n</mlv-card>\n"
+      "template": "<mlv-card\n  container=\"flat\"\n  style=\"--border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)\"\n>\n  <mlv-card-content style=\"--padding: 0\" mlv-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!-- Breadcrumbs -->\n    <mlv-breadcrumb>\n      <mlv-button><a href=\"#\" target=\"_self\">Item 1</a></mlv-button>\n      <span>You Are Here</span>\n    </mlv-breadcrumb>\n\n    <div mlv-layout=\"row align:space-between align:vertical-center\">\n      <h1 mlv-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <div mlv-layout=\"row gap:sm align:vertical-center\">\n        <mlv-button>Default</mlv-button>\n        <mlv-button interaction=\"emphasis\">Emphasis</mlv-button>\n        <mlv-icon-button icon-name=\"more-actions\"></mlv-icon-button>\n      </div>\n    </div>\n\n    <!-- Tabs -->\n    <mlv-tabs behavior-select>\n      <mlv-tabs-item selected>Tab 1</mlv-tabs-item>\n      <mlv-tabs-item>Tab 2</mlv-tabs-item>\n      <mlv-tabs-item>Tab 3</mlv-tabs-item>\n      <mlv-tabs-item>Tab 4</mlv-tabs-item>\n    </mlv-tabs>\n  </mlv-card-content>\n</mlv-card>\n"
     },
     {
       "id": "StackedMetadataHeaderMainPage",
       "file": "header-patterns.stories.ts",
-      "template": "<mlv-card container=\"flat\">\n  <mlv-card-content mlv-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!-- Breadcrumbs -->\n    <mlv-breadcrumb>\n      <mlv-button><a href=\"#\" target=\"_self\">Item 1</a></mlv-button>\n      <span>You Are Here</span>\n    </mlv-breadcrumb>\n\n    <div mlv-layout=\"row align:space-between align:vertical-center\">\n      <h1 mlv-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <section mlv-layout=\"row gap:sm align:vertical-center\">\n        <mlv-button>Default</mlv-button>\n        <mlv-button interaction=\"emphasize\">Emphasized</mlv-button>\n        <mlv-icon-button icon-name=\"more-actions\"></mlv-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section mlv-layout=\"row gap:xl align:vertical-center\">\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Session ID</span>\n        <a mlv-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Driver</span>\n        <span mlv-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Co-Pilot</span>\n        <span mlv-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Route</span>\n        <span mlv-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Status</span>\n        <span mlv-text=\"body sm bold\"><mlv-badge status=\"success\">complete</mlv-badge></span>\n      </div>\n    </section>\n  </mlv-card-content>\n</mlv-card>\n"
+      "template": "<mlv-card container=\"flat\">\n  <mlv-card-content mlv-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!-- Breadcrumbs -->\n    <mlv-breadcrumb>\n      <mlv-button><a href=\"#\" target=\"_self\">Item 1</a></mlv-button>\n      <span>You Are Here</span>\n    </mlv-breadcrumb>\n\n    <div mlv-layout=\"row align:space-between align:vertical-center\">\n      <h1 mlv-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <section mlv-layout=\"row gap:sm align:vertical-center\">\n        <mlv-button>Default</mlv-button>\n        <mlv-button interaction=\"emphasis\">Emphasis</mlv-button>\n        <mlv-icon-button icon-name=\"more-actions\"></mlv-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section mlv-layout=\"row gap:xl align:vertical-center\">\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Session ID</span>\n        <a mlv-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Driver</span>\n        <span mlv-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Co-Pilot</span>\n        <span mlv-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Route</span>\n        <span mlv-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div mlv-layout=\"row gap:sm align:center\">\n        <span mlv-text=\"body sm muted\">Status</span>\n        <span mlv-text=\"body sm bold\"><mlv-badge status=\"success\">complete</mlv-badge></span>\n      </div>\n    </section>\n  </mlv-card-content>\n</mlv-card>\n"
     },
     {
       "id": "InlineMetadataHeaderMainPage",
       "file": "header-patterns.stories.ts",
-      "template": "<mlv-card container=\"flat\">\n  <mlv-card-content mlv-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <mlv-breadcrumb>\n      <mlv-button><a href=\"#\" target=\"_self\">Item 1</a></mlv-button>\n      <span>You Are Here</span>\n    </mlv-breadcrumb>\n\n    <div mlv-layout=\"row align:space-between align:vertical-center\">\n      <h1 mlv-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Metadata -->\n      <div mlv-layout=\"row gap:xl align:vertical-center\">\n        <section mlv-layout=\"row gap:xl align:vertical-center\">\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Session ID</span>\n            <a mlv-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Driver</span>\n            <span mlv-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Co-Pilot</span>\n            <span mlv-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Route</span>\n            <span mlv-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Status</span>\n            <span mlv-text=\"body sm bold\"><mlv-badge status=\"success\">complete</mlv-badge></span>\n          </div>\n        </section>\n\n        <mlv-divider orientation=\"vertical\"></mlv-divider>\n\n        <!-- Action Buttons -->\n        <section mlv-layout=\"row gap:sm align:vertical-center\">\n          <mlv-button>Default</mlv-button>\n          <mlv-button interaction=\"emphasize\">Emphasized</mlv-button>\n          <mlv-icon-button icon-name=\"more-actions\"></mlv-icon-button>\n        </section>\n      </div>\n    </div>\n  </mlv-card-content>\n</mlv-card>\n"
+      "template": "<mlv-card container=\"flat\">\n  <mlv-card-content mlv-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <mlv-breadcrumb>\n      <mlv-button><a href=\"#\" target=\"_self\">Item 1</a></mlv-button>\n      <span>You Are Here</span>\n    </mlv-breadcrumb>\n\n    <div mlv-layout=\"row align:space-between align:vertical-center\">\n      <h1 mlv-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Metadata -->\n      <div mlv-layout=\"row gap:xl align:vertical-center\">\n        <section mlv-layout=\"row gap:xl align:vertical-center\">\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Session ID</span>\n            <a mlv-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Driver</span>\n            <span mlv-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Co-Pilot</span>\n            <span mlv-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Route</span>\n            <span mlv-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div mlv-layout=\"column gap:sm align:left\">\n            <span mlv-text=\"body sm muted\">Status</span>\n            <span mlv-text=\"body sm bold\"><mlv-badge status=\"success\">complete</mlv-badge></span>\n          </div>\n        </section>\n\n        <mlv-divider orientation=\"vertical\"></mlv-divider>\n\n        <!-- Action Buttons -->\n        <section mlv-layout=\"row gap:sm align:vertical-center\">\n          <mlv-button>Default</mlv-button>\n          <mlv-button interaction=\"emphasis\">Emphasis</mlv-button>\n          <mlv-icon-button icon-name=\"more-actions\"></mlv-icon-button>\n        </section>\n      </div>\n    </div>\n  </mlv-card-content>\n</mlv-card>\n"
     },
     {
       "id": "InlineKitchenSinkHeaderMainPage",
@@ -12678,7 +12711,7 @@
     {
       "id": "StandardHeaderToolbarPage",
       "file": "header-patterns.stories.ts",
-      "template": "<mlv-card container=\"full\" style=\"--border-bottom: 0\">\n  <mlv-card-content mlv-layout=\"row align:space-between align:vertical-center pad-x:xl\">\n    <!--Left Controls-->\n    <section mlv-layout=\"row gap:md align:left align:vertical-center\" style=\"width: 33%\">\n      <div>\n        <mlv-button-group container=\"flat\">\n          <mlv-icon-button size=\"sm\" icon-name=\"layers\"></mlv-icon-button>\n          <mlv-icon-button size=\"sm\" icon-name=\"cursor-rays\"></mlv-icon-button>\n          <mlv-icon-button size=\"sm\" pressed icon-name=\"hand\"></mlv-icon-button>\n        </mlv-button-group>\n      </div>\n      <div mlv-layout=\"row gap:sm\">\n        <mlv-button interaction=\"flat\">Edit</mlv-button>\n        <mlv-button interaction=\"flat\">History</mlv-button>\n        <mlv-button interaction=\"flat\">Docs</mlv-button>\n      </div>\n    </section>\n\n    <h1 mlv-text=\"heading xs semibold\">Page Title</h1>\n\n    <!-- Action Buttons -->\n    <mlv-button-group container=\"flat\" style=\"width: 33%\" mlv-layout=\"row align:right\">\n      <mlv-icon-button size=\"sm\" icon-name=\"add-comment\"></mlv-icon-button>\n      <mlv-icon-button size=\"sm\" icon-name=\"bell\"></mlv-icon-button>\n      <mlv-icon-button size=\"sm\" icon-name=\"more-actions\"></mlv-icon-button>\n    </mlv-button-group>\n  </mlv-card-content>\n</mlv-card>\n"
+      "template": "<mlv-card container=\"full\" style=\"--border-bottom: 0\">\n  <mlv-card-content mlv-layout=\"row align:space-between align:vertical-center pad-x:xl\">\n    <!--Left Controls-->\n    <section mlv-layout=\"row gap:md align:left align:vertical-center\" style=\"width: 33%\">\n      <div>\n        <mlv-button-group container=\"flat\">\n          <mlv-icon-button size=\"sm\" icon-name=\"layers\"></mlv-icon-button>\n          <mlv-icon-button size=\"sm\" icon-name=\"cursor-rays\"></mlv-icon-button>\n          <mlv-icon-button size=\"sm\" pressed icon-name=\"hand\"></mlv-icon-button>\n        </mlv-button-group>\n      </div>\n      <div mlv-layout=\"row gap:sm\">\n        <mlv-button container=\"flat\">Edit</mlv-button>\n        <mlv-button container=\"flat\">History</mlv-button>\n        <mlv-button container=\"flat\">Docs</mlv-button>\n      </div>\n    </section>\n\n    <h1 mlv-text=\"heading xs semibold\">Page Title</h1>\n\n    <!-- Action Buttons -->\n    <mlv-button-group container=\"flat\" style=\"width: 33%\" mlv-layout=\"row align:right\">\n      <mlv-icon-button size=\"sm\" icon-name=\"add-comment\"></mlv-icon-button>\n      <mlv-icon-button size=\"sm\" icon-name=\"bell\"></mlv-icon-button>\n      <mlv-icon-button size=\"sm\" icon-name=\"more-actions\"></mlv-icon-button>\n    </mlv-button-group>\n  </mlv-card-content>\n</mlv-card>\n"
     }
   ],
   "types": {
@@ -12764,6 +12797,11 @@
         "description": "Determines the visual prominence or weight of an element"
       },
       {
+        "name": "interaction",
+        "type": "'emphasis' | 'destructive'",
+        "description": "Provides a way to indicate the intended use case for a button or similar interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors."
+      },
+      {
         "name": "color",
         "type": "| 'red-cardinal'\n| 'gray-slate'\n| 'gray-denim'\n| 'blue-indigo'\n| 'blue-cobalt'\n| 'blue-sky'\n| 'teal-cyan'\n| 'green-mint'\n| 'teal-seafoam'\n| 'green-grass'\n| 'yellow-amber'\n| 'orange-pumpkin'\n| 'red-tomato'\n| 'pink-magenta'\n| 'purple-plum'\n| 'purple-violet'\n| 'purple-lavender'\n| 'pink-rose'\n| 'green-jade'\n| 'lime-pear'\n| 'yellow-nova'\n| 'brand-green'",
         "description": "Defines a base color from the theme color palette"
@@ -12817,33 +12855,6 @@
   "tests": {
     "coverage": [
       {
-        "file": "internal/utils/dom.ts",
-        "lines": {
-          "total": 128,
-          "covered": 109,
-          "skipped": 0,
-          "pct": 85.15
-        },
-        "functions": {
-          "total": 56,
-          "covered": 49,
-          "skipped": 0,
-          "pct": 87.5
-        },
-        "statements": {
-          "total": 142,
-          "covered": 121,
-          "skipped": 0,
-          "pct": 85.21
-        },
-        "branches": {
-          "total": 89,
-          "covered": 72,
-          "skipped": 0,
-          "pct": 80.89
-        }
-      },
-      {
         "file": "internal/controllers/type-popover.controller.ts",
         "lines": {
           "total": 104,
@@ -12871,30 +12882,30 @@
         }
       },
       {
-        "file": "accordion/accordion.ts",
+        "file": "internal/utils/dom.ts",
         "lines": {
-          "total": 59,
-          "covered": 53,
+          "total": 121,
+          "covered": 112,
           "skipped": 0,
-          "pct": 89.83
+          "pct": 92.56
         },
         "functions": {
-          "total": 23,
-          "covered": 18,
+          "total": 54,
+          "covered": 50,
           "skipped": 0,
-          "pct": 78.26
+          "pct": 92.59
         },
         "statements": {
-          "total": 83,
-          "covered": 76,
+          "total": 131,
+          "covered": 122,
           "skipped": 0,
-          "pct": 91.56
+          "pct": 93.12
         },
         "branches": {
-          "total": 24,
-          "covered": 18,
+          "total": 78,
+          "covered": 69,
           "skipped": 0,
-          "pct": 75
+          "pct": 88.46
         }
       },
       {
@@ -12925,12 +12936,39 @@
         }
       },
       {
+        "file": "accordion/accordion.ts",
+        "lines": {
+          "total": 58,
+          "covered": 55,
+          "skipped": 0,
+          "pct": 94.82
+        },
+        "functions": {
+          "total": 23,
+          "covered": 21,
+          "skipped": 0,
+          "pct": 91.3
+        },
+        "statements": {
+          "total": 83,
+          "covered": 80,
+          "skipped": 0,
+          "pct": 96.38
+        },
+        "branches": {
+          "total": 24,
+          "covered": 19,
+          "skipped": 0,
+          "pct": 79.16
+        }
+      },
+      {
         "file": "breadcrumb/breadcrumb.ts",
         "lines": {
-          "total": 28,
-          "covered": 27,
+          "total": 25,
+          "covered": 24,
           "skipped": 0,
-          "pct": 96.42
+          "pct": 96
         },
         "functions": {
           "total": 16,
@@ -12939,16 +12977,16 @@
           "pct": 93.75
         },
         "statements": {
-          "total": 37,
-          "covered": 36,
+          "total": 38,
+          "covered": 37,
           "skipped": 0,
-          "pct": 97.29
+          "pct": 97.36
         },
         "branches": {
-          "total": 12,
+          "total": 10,
           "covered": 9,
           "skipped": 0,
-          "pct": 75
+          "pct": 90
         }
       },
       {
@@ -13006,66 +13044,12 @@
         }
       },
       {
-        "file": "icon/icon.ts",
-        "lines": {
-          "total": 38,
-          "covered": 37,
-          "skipped": 0,
-          "pct": 97.36
-        },
-        "functions": {
-          "total": 14,
-          "covered": 12,
-          "skipped": 0,
-          "pct": 85.71
-        },
-        "statements": {
-          "total": 41,
-          "covered": 39,
-          "skipped": 0,
-          "pct": 95.12
-        },
-        "branches": {
-          "total": 20,
-          "covered": 15,
-          "skipped": 0,
-          "pct": 75
-        }
-      },
-      {
-        "file": "grid/column/column.ts",
-        "lines": {
-          "total": 47,
-          "covered": 46,
-          "skipped": 0,
-          "pct": 97.87
-        },
-        "functions": {
-          "total": 8,
-          "covered": 8,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 50,
-          "covered": 49,
-          "skipped": 0,
-          "pct": 98
-        },
-        "branches": {
-          "total": 32,
-          "covered": 30,
-          "skipped": 0,
-          "pct": 93.75
-        }
-      },
-      {
         "file": "internal/controllers/keynav-grid.controller.ts",
         "lines": {
-          "total": 69,
-          "covered": 68,
+          "total": 71,
+          "covered": 69,
           "skipped": 0,
-          "pct": 98.55
+          "pct": 97.18
         },
         "functions": {
           "total": 23,
@@ -13087,12 +13071,39 @@
         }
       },
       {
+        "file": "grid/column/column.ts",
+        "lines": {
+          "total": 43,
+          "covered": 42,
+          "skipped": 0,
+          "pct": 97.67
+        },
+        "functions": {
+          "total": 7,
+          "covered": 7,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 46,
+          "covered": 45,
+          "skipped": 0,
+          "pct": 97.82
+        },
+        "branches": {
+          "total": 30,
+          "covered": 28,
+          "skipped": 0,
+          "pct": 93.33
+        }
+      },
+      {
         "file": "forms/control/control.ts",
         "lines": {
-          "total": 75,
-          "covered": 74,
+          "total": 73,
+          "covered": 72,
           "skipped": 0,
-          "pct": 98.66
+          "pct": 98.63
         },
         "functions": {
           "total": 20,
@@ -13101,50 +13112,23 @@
           "pct": 95
         },
         "statements": {
-          "total": 85,
-          "covered": 84,
+          "total": 83,
+          "covered": 82,
           "skipped": 0,
-          "pct": 98.82
+          "pct": 98.79
         },
         "branches": {
-          "total": 36,
-          "covered": 33,
+          "total": 34,
+          "covered": 32,
           "skipped": 0,
-          "pct": 91.66
-        }
-      },
-      {
-        "file": "combobox/combobox.ts",
-        "lines": {
-          "total": 117,
-          "covered": 116,
-          "skipped": 0,
-          "pct": 99.14
-        },
-        "functions": {
-          "total": 35,
-          "covered": 35,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 129,
-          "covered": 128,
-          "skipped": 0,
-          "pct": 99.22
-        },
-        "branches": {
-          "total": 73,
-          "covered": 67,
-          "skipped": 0,
-          "pct": 91.78
+          "pct": 94.11
         }
       },
       {
         "file": "week/week.ts",
         "lines": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -13155,8 +13139,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -13359,8 +13343,8 @@
       {
         "file": "time/time.ts",
         "lines": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -13371,8 +13355,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -13521,28 +13505,28 @@
       {
         "file": "tabs/tabs.ts",
         "lines": {
-          "total": 22,
-          "covered": 22,
+          "total": 23,
+          "covered": 23,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 10,
-          "covered": 10,
+          "total": 11,
+          "covered": 11,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 37,
-          "covered": 37,
+          "total": 38,
+          "covered": 38,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
           "total": 9,
-          "covered": 7,
+          "covered": 9,
           "skipped": 0,
-          "pct": 77.77
+          "pct": 100
         }
       },
       {
@@ -13710,28 +13694,28 @@
       {
         "file": "select/select.ts",
         "lines": {
-          "total": 64,
-          "covered": 64,
+          "total": 67,
+          "covered": 67,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 28,
-          "covered": 28,
+          "total": 29,
+          "covered": 29,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 91,
-          "covered": 91,
+          "total": 96,
+          "covered": 96,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 20,
-          "covered": 18,
+          "total": 24,
+          "covered": 23,
           "skipped": 0,
-          "pct": 90
+          "pct": 95.83
         }
       },
       {
@@ -13764,8 +13748,8 @@
       {
         "file": "search/search.ts",
         "lines": {
-          "total": 6,
-          "covered": 6,
+          "total": 7,
+          "covered": 7,
           "skipped": 0,
           "pct": 100
         },
@@ -13776,8 +13760,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 7,
-          "covered": 7,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -13818,8 +13802,8 @@
       {
         "file": "scoped/index.ts",
         "lines": {
-          "total": 3,
-          "covered": 3,
+          "total": 7,
+          "covered": 7,
           "skipped": 0,
           "pct": 100
         },
@@ -13830,16 +13814,16 @@
           "pct": 100
         },
         "statements": {
-          "total": 4,
-          "covered": 4,
+          "total": 7,
+          "covered": 7,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 2,
-          "covered": 2,
+          "total": 6,
+          "covered": 4,
           "skipped": 0,
-          "pct": 100
+          "pct": 66.66
         }
       },
       {
@@ -14142,8 +14126,8 @@
       {
         "file": "password/password.ts",
         "lines": {
-          "total": 7,
-          "covered": 7,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -14154,8 +14138,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 9,
-          "covered": 9,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
@@ -14385,8 +14369,8 @@
       {
         "file": "month/month.ts",
         "lines": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -14397,8 +14381,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -14743,21 +14727,21 @@
         },
         "functions": {
           "total": 9,
-          "covered": 7,
+          "covered": 9,
           "skipped": 0,
-          "pct": 77.77
+          "pct": 100
         },
         "statements": {
           "total": 19,
-          "covered": 17,
+          "covered": 19,
           "skipped": 0,
-          "pct": 89.47
+          "pct": 100
         },
         "branches": {
           "total": 5,
-          "covered": 3,
+          "covered": 4,
           "skipped": 0,
-          "pct": 60
+          "pct": 80
         }
       },
       {
@@ -14925,8 +14909,8 @@
       {
         "file": "internal/services/global.service.ts",
         "lines": {
-          "total": 7,
-          "covered": 7,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -14937,8 +14921,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 7,
-          "covered": 7,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -15517,6 +15501,33 @@
         }
       },
       {
+        "file": "icon/icon.ts",
+        "lines": {
+          "total": 38,
+          "covered": 38,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 14,
+          "covered": 14,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 41,
+          "covered": 41,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 20,
+          "covered": 16,
+          "skipped": 0,
+          "pct": 80
+        }
+      },
+      {
         "file": "icon/define.ts",
         "lines": {
           "total": 3,
@@ -15681,20 +15692,20 @@
       {
         "file": "grid/grid.ts",
         "lines": {
-          "total": 17,
-          "covered": 17,
+          "total": 21,
+          "covered": 21,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 5,
-          "covered": 5,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 21,
-          "covered": 21,
+          "total": 34,
+          "covered": 34,
           "skipped": 0,
           "pct": 100
         },
@@ -16356,8 +16367,8 @@
       {
         "file": "datetime/datetime.ts",
         "lines": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -16368,8 +16379,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -16410,8 +16421,8 @@
       {
         "file": "date/date.ts",
         "lines": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -16422,8 +16433,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 3,
-          "covered": 3,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
           "pct": 100
         },
@@ -16462,6 +16473,33 @@
         }
       },
       {
+        "file": "combobox/combobox.ts",
+        "lines": {
+          "total": 119,
+          "covered": 119,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 35,
+          "covered": 35,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 131,
+          "covered": 131,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 73,
+          "covered": 68,
+          "skipped": 0,
+          "pct": 93.15
+        }
+      },
+      {
         "file": "color/define.ts",
         "lines": {
           "total": 1,
@@ -16491,8 +16529,8 @@
       {
         "file": "color/color.ts",
         "lines": {
-          "total": 10,
-          "covered": 10,
+          "total": 11,
+          "covered": 11,
           "skipped": 0,
           "pct": 100
         },
@@ -16503,8 +16541,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 11,
-          "covered": 11,
+          "total": 12,
+          "covered": 12,
           "skipped": 0,
           "pct": 100
         },
@@ -16734,8 +16772,8 @@
       {
         "file": "button/button.ts",
         "lines": {
-          "total": 5,
-          "covered": 5,
+          "total": 6,
+          "covered": 6,
           "skipped": 0,
           "pct": 100
         },
@@ -16746,8 +16784,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 5,
-          "covered": 5,
+          "total": 6,
+          "covered": 6,
           "skipped": 0,
           "pct": 100
         },
@@ -16881,16 +16919,16 @@
           "pct": 100
         },
         "statements": {
-          "total": 26,
-          "covered": 26,
+          "total": 24,
+          "covered": 24,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 8,
-          "covered": 6,
+          "total": 4,
+          "covered": 4,
           "skipped": 0,
-          "pct": 75
+          "pct": 100
         }
       },
       {
@@ -17032,28 +17070,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 2178,
-        "covered": 2129,
+        "total": 2187,
+        "covered": 2152,
         "skipped": 0,
-        "pct": 97.75
+        "pct": 98.39
       },
       "statements": {
-        "total": 2551,
-        "covered": 2489,
+        "total": 2567,
+        "covered": 2526,
         "skipped": 0,
-        "pct": 97.56
+        "pct": 98.4
       },
       "functions": {
-        "total": 719,
-        "covered": 691,
+        "total": 723,
+        "covered": 705,
         "skipped": 0,
-        "pct": 96.1
+        "pct": 97.51
       },
       "branches": {
-        "total": 1051,
-        "covered": 957,
+        "total": 1038,
+        "covered": 962,
         "skipped": 0,
-        "pct": 91.05
+        "pct": 92.67
       },
       "branchesTrue": {
         "total": 0,
@@ -17062,9 +17100,5 @@
         "pct": 100
       }
     }
-  },
-  "elements": {
-    "projects": [],
-    "versions": []
   }
 }

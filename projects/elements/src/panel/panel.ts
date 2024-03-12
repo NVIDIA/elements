@@ -193,7 +193,7 @@ export class Panel extends LitElement {
           ${when(
             !this.closable,
             () => html`
-              <mlv-icon-button interaction=${this.expanded ? 'flat' : ''} icon-name="double-chevron"
+              <mlv-icon-button container=${this.expanded ? 'flat' : ''} icon-name="double-chevron"
                 @click=${() => this.#typeExpandableController.toggle()}
                 .direction=${this.#direction}
                 .expanded=${this.expanded}
@@ -201,7 +201,7 @@ export class Panel extends LitElement {
               ></mlv-icon-button>
             `,
             () => html`
-              <mlv-icon-button interaction="flat" icon-name="cancel"
+              <mlv-icon-button container="flat" icon-name="cancel"
                 @click=${() => this.#typeExpandableController.close()}
                 .expanded=${this.expanded}
                 .ariaLabel=${this.expanded ? this.i18n.hide : this.i18n.show}

@@ -26,6 +26,6 @@ export class Time extends Control {
   };
 
   protected get suffixContent() {
-    return html`<mlv-icon-button .ariaLabel=${this.i18n.expand} icon-name="clock" interaction="flat" @click=${this.showPicker}></mlv-icon-button>`;
+    return html`<mlv-icon-button .ariaLabel=${this.i18n.expand} icon-name="clock" container="flat" @click=${this.showPicker}></mlv-icon-button>`;
   }
 }

@@ -125,7 +125,7 @@ export const WithButton = {
         Button
       </mlv-button>
 
-      <mlv-button interaction="emphasize">
+      <mlv-button interaction="emphasis">
         <mlv-progress-ring status="neutral" size="xxs"></mlv-progress-ring>
         Button
       </mlv-button>
@@ -140,7 +140,7 @@ export const WithButton = {
         Button
       </mlv-button>
 
-      <mlv-button interaction="emphasize">
+      <mlv-button interaction="emphasis">
         <mlv-progress-ring status="neutral" size="xxs" value="33"></mlv-progress-ring>
         Button
       </mlv-button>

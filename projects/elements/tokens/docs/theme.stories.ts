@@ -118,9 +118,9 @@ function getThemeContent() {
     <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px">
     <div mlv-layout="row gap:sm">
         <mlv-icon-button icon-name="person"></mlv-icon-button>
-        <mlv-icon-button icon-name="person" interaction="emphasize"></mlv-icon-button>
+        <mlv-icon-button icon-name="person" interaction="emphasis"></mlv-icon-button>
         <mlv-icon-button icon-name="person" interaction="destructive"></mlv-icon-button>
-        <mlv-icon-button icon-name="person" interaction="flat"></mlv-icon-button>
+        <mlv-icon-button icon-name="person" container="flat"></mlv-icon-button>
         <mlv-icon-button icon-name="person" disabled></mlv-icon-button>
       </div>
       <div mlv-layout="row gap:sm">
@@ -132,7 +132,7 @@ function getThemeContent() {
       </div>
       <div mlv-layout="row gap:sm">
         <mlv-button>default</mlv-button>
-        <mlv-button interaction="emphasize">emphasize</mlv-button>
+        <mlv-button interaction="emphasis">emphasis</mlv-button>
         <mlv-button interaction="destructive">destructive</mlv-button>
         <mlv-button disabled="">disabled</mlv-button>
       </div>
@@ -224,7 +224,7 @@ class ThemeGeneratorDemo extends LitElement {
     <mlv-button slot="nav-items">Link 2</mlv-button>
     <mlv-icon-button icon-name="assist" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button icon-name="app-switcher" slot="nav-actions"></mlv-icon-button>
-    <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
+    <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>
 
   <mlv-alert-banner status="accent">

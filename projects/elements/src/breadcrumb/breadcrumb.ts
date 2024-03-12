@@ -10,7 +10,6 @@ import {
 } from '@elements/elements/internal';
 import styles from './breadcrumb.css?inline';
 import { Icon } from '@elements/elements/icon';
-import type { IconButton } from '@elements/elements/icon-button';
 import type { Button } from '@elements/elements/button';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 
@@ -87,7 +86,7 @@ export class Breadcrumb extends LitElement {
       this.#resetItems();
       const items = this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements();
       items.filter(i => i.matches('mlv-button, mlv-icon-button, span, a')).forEach(i => (i.slot = generateId()));
-      items.filter(i => i.matches('mlv-button, mlv-icon-button')).forEach((i: Button) => (i.interaction = 'flat'));
+      items.filter(i => i.matches('mlv-button, mlv-icon-button')).forEach((i: Button) => (i.container = 'flat'));
       this.breadcrumbItems = items.length ? items : this.breadcrumbItems;
     }
   }

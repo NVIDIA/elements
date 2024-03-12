@@ -11,7 +11,7 @@ export const Default = {
   render: () => html`
   <form mlv-layout="column gap:md" style="width: 400px">
     <domain-login name="login"></domain-login>
-    <mlv-button interaction="emphasize" style="margin-left: auto">login</mlv-button>
+    <mlv-button interaction="emphasis" style="margin-left: auto">login</mlv-button>
   </form>
   <script type="module">
     const form = document.querySelector('form');

@@ -28,7 +28,7 @@ export class Color extends Control {
   };
 
   protected get suffixContent() {
-    return html`<mlv-icon-button .ariaLabel=${this.i18n.expand} icon-name="dropper" interaction="flat" @click=${() => this.#select()}></mlv-icon-button>`;
+    return html`<mlv-icon-button .ariaLabel=${this.i18n.expand} icon-name="dropper" container="flat" @click=${() => this.#select()}></mlv-icon-button>`;
   }
 
   connectedCallback() {

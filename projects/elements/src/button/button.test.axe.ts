@@ -11,7 +11,7 @@ describe('mlv-button', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-button interaction="emphasize">emphasize</mlv-button> <!-- failing -->
+      <mlv-button interaction="emphasis">emphasis</mlv-button> <!-- failing -->
       <mlv-button>default</mlv-button>
       <mlv-button interaction="destructive">destructive</mlv-button>
       <mlv-button disabled>disabled</mlv-button>
@@ -27,7 +27,7 @@ describe('mlv-button', () => {
 
   it('should pass axe check', async () => {
     const results = await runAxe(['mlv-button'], {
-      rules: { 'color-contrast': { enabled: false } } // interaction emphasize fails minimum color-contrast
+      rules: { 'color-contrast': { enabled: false } } // interaction emphasis fails minimum color-contrast
     });
     expect(results.violations.length).toBe(0);
   });

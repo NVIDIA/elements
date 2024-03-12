@@ -118,7 +118,7 @@ export class Drawer extends LitElement {
     return html`
     <dialog ${animationSlide(this)}>
       <div class="header">
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" .ariaLabel=${this.i18n.close} interaction="flat"></mlv-icon-button>` : ''}
+        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" .ariaLabel=${this.i18n.close} container="flat"></mlv-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
       <div class="content">

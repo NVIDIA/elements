@@ -31,7 +31,7 @@ class AppHeaderDefaultDemo extends LitElement {
   <mlv-icon-button icon-name="chat-bubble" slot="nav-actions" @click=${() => alert('Thanks for clicking the feedback icon button!')}></mlv-icon-button>
   <mlv-icon-button icon-name="search" slot="nav-actions" @click=${() => alert('Thanks for clicking the search icon button!')}></mlv-icon-button>
   <mlv-icon-button icon-name="switch-apps" id=${ddownOneId + '-btn'} slot="nav-actions" @click=${() => this.activeId = ddownOneId}></mlv-icon-button>
-  <mlv-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasize" slot="nav-actions">EL</mlv-icon-button>
+  <mlv-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasis" slot="nav-actions">EL</mlv-icon-button>
 </mlv-app-header>
 <mlv-dropdown id=${ddownOneId}
   anchor=${ddownOneId + '-btn'}
@@ -78,7 +78,7 @@ export const AppBadge = {
     <mlv-icon-button icon-name="chat-bubble" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button icon-name="search" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button icon-name="switch-apps" slot="nav-actions"></mlv-icon-button>
-    <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
+    <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>
 </div>
   `
@@ -107,7 +107,7 @@ export const NavActions = {
     <mlv-icon-button icon-name="chat-bubble" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button icon-name="search" slot="nav-actions"></mlv-icon-button>
     <mlv-icon-button icon-name="switch-apps" slot="nav-actions"></mlv-icon-button>
-    <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
+    <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>
 </div>
   `
@@ -120,7 +120,7 @@ export const LightTheme = {
     <mlv-logo color="orange-pumpkin">Lt</mlv-logo>
     <h2 slot="title">Light Theme</h2>
     <mlv-button slot="nav-items">Link 1</mlv-button>
-    <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
+    <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>
 </div>
   `
@@ -133,7 +133,7 @@ export const DarkTheme = {
     <mlv-logo color="orange-pumpkin">Dt</mlv-logo>
     <h2 slot="title">Dark Theme</h2>
     <mlv-button slot="nav-items">Link 1</mlv-button>
-    <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
+    <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
   </mlv-app-header>
 </div>
   `

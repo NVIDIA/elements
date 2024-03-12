@@ -41,8 +41,8 @@ export class JSONNode extends LitElement {
 
   get #expandButton() {
     return this.prop
-      ? html`<mlv-button @click=${() => (this.expanded = !this.expanded)} interaction="flat">${this.prop}: </mlv-button>`
-      : html`<mlv-icon-button @click=${() => (this.expanded = !this.expanded)} .direction=${this.expanded ? 'down' : 'right'} interaction="flat" size="sm" icon-name="caret"></mlv-icon-button>`;
+      ? html`<mlv-button @click=${() => (this.expanded = !this.expanded)} container="flat">${this.prop}: </mlv-button>`
+      : html`<mlv-icon-button @click=${() => (this.expanded = !this.expanded)} .direction=${this.expanded ? 'down' : 'right'} container="flat" size="sm" icon-name="caret"></mlv-icon-button>`;
   }
 
   get #arrayNode() {

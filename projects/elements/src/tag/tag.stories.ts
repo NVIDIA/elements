@@ -57,7 +57,7 @@ export const TagGroup = {
     <mlv-tag>topic-tag</mlv-tag>
     <mlv-tag>3+</mlv-tag>
 
-    <mlv-icon-button interaction="flat" size="sm" icon-name="add"></mlv-icon-button>
+    <mlv-icon-button container="flat" size="sm" icon-name="add"></mlv-icon-button>
   </div>
   `
 };

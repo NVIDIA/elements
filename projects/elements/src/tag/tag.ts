@@ -61,7 +61,7 @@ export class Tag extends BaseButton {
     return html`
       <div internal-host interaction-state focus-within>
         <slot></slot>
-        ${this.closable ? html`<mlv-icon @click=${() => this.#typeClosableController.close()} interaction="flat" name="cancel" size="sm" role="img" aria-label=${ifDefined(this.i18n.close)}></mlv-icon>` : ''}
+        ${this.closable ? html`<mlv-icon @click=${() => this.#typeClosableController.close()} container="flat" name="cancel" size="sm" role="img" aria-label=${ifDefined(this.i18n.close)}></mlv-icon>` : ''}
       </div>
     `;
   }

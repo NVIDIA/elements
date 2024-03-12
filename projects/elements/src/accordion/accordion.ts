@@ -180,7 +180,7 @@ export class Accordion extends LitElement implements ContainerElement {
           <slot name="header"></slot>
 
           <mlv-icon-button
-            interaction="flat"
+            container="flat"
             icon-name="caret"
             direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
             ?disabled=${this.disabled}

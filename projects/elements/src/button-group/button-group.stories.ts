@@ -66,7 +66,7 @@ export const ActionSplit = {
         <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
       </mlv-button-group>
       
-      <mlv-button-group interaction="emphasize">
+      <mlv-button-group interaction="emphasis">
         <mlv-button>button</mlv-button>
         <mlv-divider orientation="vertical"></mlv-divider>
         <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
@@ -90,7 +90,7 @@ export const ActionSplitRounded = {
         <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
       </mlv-button-group>
       
-      <mlv-button-group container="rounded" interaction="emphasize">
+      <mlv-button-group container="rounded" interaction="emphasis">
         <mlv-button>button</mlv-button>
         <mlv-divider orientation="vertical"></mlv-divider>
         <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>

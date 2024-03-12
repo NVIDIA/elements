@@ -82,7 +82,7 @@ export const Content = {
   <p mlv-text="body">some text content in a closable dialog</p>
   <mlv-dialog-footer>
     <mlv-button>cancel</mlv-button>
-    <mlv-button interaction="emphasize">action</mlv-button>
+    <mlv-button interaction="emphasis">action</mlv-button>
   </mlv-dialog-footer>
 </mlv-dialog>
   `

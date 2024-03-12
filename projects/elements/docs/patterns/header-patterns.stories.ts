@@ -30,7 +30,7 @@ export const StandardHeaderMainPage = {
           <!-- Action Buttons -->
           <section mlv-layout="row gap:sm align:vertical-center">
             <mlv-button>Default</mlv-button>
-            <mlv-button interaction="emphasize">Emphasized</mlv-button>
+            <mlv-button interaction="emphasis">Emphasis</mlv-button>
             <mlv-icon-button icon-name="more-actions"></mlv-icon-button>
           </section>
         </div>
@@ -55,7 +55,7 @@ export const TabsHeaderMainPage = {
           <!-- Action Buttons -->
           <div mlv-layout="row gap:sm align:vertical-center">
             <mlv-button>Default</mlv-button>
-            <mlv-button interaction="emphasize">Emphasized</mlv-button>
+            <mlv-button interaction="emphasis">Emphasis</mlv-button>
             <mlv-icon-button icon-name="more-actions"></mlv-icon-button>
           </div>
         </div>
@@ -88,7 +88,7 @@ export const StackedMetadataHeaderMainPage = {
           <!-- Action Buttons -->
           <section mlv-layout="row gap:sm align:vertical-center">
             <mlv-button>Default</mlv-button>
-            <mlv-button interaction="emphasize">Emphasized</mlv-button>
+            <mlv-button interaction="emphasis">Emphasis</mlv-button>
             <mlv-icon-button icon-name="more-actions"></mlv-icon-button>
           </section>
         </div>
@@ -164,7 +164,7 @@ export const InlineMetadataHeaderMainPage = {
             <!-- Action Buttons -->
             <section mlv-layout="row gap:sm align:vertical-center">
               <mlv-button>Default</mlv-button>
-              <mlv-button interaction="emphasize">Emphasized</mlv-button>
+              <mlv-button interaction="emphasis">Emphasis</mlv-button>
               <mlv-icon-button icon-name="more-actions"></mlv-icon-button>
             </section>
           </div>
@@ -656,9 +656,9 @@ export const StandardHeaderToolbarPage = {
             </mlv-button-group>
           </div>
           <div mlv-layout="row gap:sm">
-            <mlv-button interaction="flat">Edit</mlv-button>
-            <mlv-button interaction="flat">History</mlv-button>
-            <mlv-button interaction="flat">Docs</mlv-button>
+            <mlv-button container="flat">Edit</mlv-button>
+            <mlv-button container="flat">History</mlv-button>
+            <mlv-button container="flat">Docs</mlv-button>
           </div>
         </section>
 

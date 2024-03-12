@@ -69,7 +69,7 @@ export const Default = {
 
               ${when(
                 args.showActionIcon,
-                () => html`<mlv-icon-button interaction="flat" slot="action-icon" icon-name="more-actions" @click=${() => customActionHandler()}></mlv-icon-button>`
+                () => html`<mlv-icon-button container="flat" slot="action-icon" icon-name="more-actions" @click=${() => customActionHandler()}></mlv-icon-button>`
               )}
             </mlv-panel-header>
             `
@@ -116,7 +116,7 @@ export const Default = {
             args.showFooter,
             () => html`
             <mlv-panel-footer>
-              <mlv-button interaction="flat-destructive">Destructive</mlv-button>
+              <mlv-button interaction="destructive" container="flat">Destructive</mlv-button>
               <mlv-button>Default</mlv-button>
             </mlv-panel-footer>
             `
@@ -127,7 +127,7 @@ export const Default = {
       ${when(
           args.showTrigger,
           () => html`
-            <mlv-button interaction="emphasize" @click=${() => togglePanel(args.closable)}>Toggle Panel</mlv-button>
+            <mlv-button interaction="emphasis" @click=${() => togglePanel(args.closable)}>Toggle Panel</mlv-button>
           `
         )}
     </section>

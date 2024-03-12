@@ -62,12 +62,21 @@
   flex-direction: column;
 }
 
-:host([interaction='emphasize']) ::slotted(mlv-divider) {
-  --color: color-mix(in oklab, var(--mlv-sys-interaction-emphasize-background) 100%, var(--mlv-sys-interaction-emphasize-color) 50%);
+:host([interaction='emphasize']) ::slotted(mlv-divider), /* deprecated */
+:host([interaction='emphasis']) ::slotted(mlv-divider) {
+  --color: color-mix(
+    in oklab,
+    var(--mlv-sys-interaction-emphasis-background) 100%,
+    var(--mlv-sys-interaction-emphasis-color) 50%
+  );
 }
 
 :host([interaction='destructive']) ::slotted(mlv-divider) {
-  --color: color-mix(in oklab, var(--mlv-sys-interaction-destructive-background) 100%, var(--mlv-sys-interaction-destructive-color) 50%);
+  --color: color-mix(
+    in oklab,
+    var(--mlv-sys-interaction-destructive-background) 100%,
+    var(--mlv-sys-interaction-destructive-color) 50%
+  );
 }
 
 :host(:--split) {

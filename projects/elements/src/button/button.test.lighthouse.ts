@@ -5,7 +5,7 @@ describe('button lighthouse report', () => {
   test('button should meet lighthouse benchmarks', async () => {
     const report = await runner.getReport('mlv-button', /* html */`
       <mlv-button>button</mlv-button>
-      <mlv-button interaction="emphasize">button</mlv-button>
+      <mlv-button interaction="emphasis">button</mlv-button>
       <mlv-button interaction="destructive">button</mlv-button>
       <script type="module">
         import '@elements/elements/button/define.js';

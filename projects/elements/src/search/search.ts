@@ -37,6 +37,6 @@ export class Search extends Control implements ContainerElement {
   };
 
   protected get prefixContent() {
-    return html`<mlv-icon-button icon-name="search" interaction="flat" aria-hidden="true" readonly></mlv-icon-button>`;
+    return html`<mlv-icon-button icon-name="search" container="flat" aria-hidden="true" readonly></mlv-icon-button>`;
   }
 }

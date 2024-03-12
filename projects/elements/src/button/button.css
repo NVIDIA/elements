@@ -88,6 +88,10 @@
   --mlv-sys-interaction-state-ratio: 0;
 }
 
+:host([container='flat']:not([interaction]):not([disabled]):hover) [interaction-state] {
+  --mlv-sys-interaction-state-ratio: 8%;
+}
+
 :host([size='sm']) {
   --height: var(--mlv-ref-size-700);
 }
@@ -103,9 +107,10 @@
   --cursor: cursor;
 }
 
-:host([interaction='emphasize']) {
-  --color: var(--mlv-sys-interaction-emphasize-color);
-  --background: var(--mlv-sys-interaction-emphasize-background);
+:host([interaction='emphasize']), /* deprecated */
+:host([interaction='emphasis']) {
+  --color: var(--mlv-sys-interaction-emphasis-color);
+  --background: var(--mlv-sys-interaction-emphasis-background);
   --mlv-sys-interaction-state-mix: var(--mlv-ref-color-black);
 }
 
@@ -116,6 +121,7 @@
 }
 
 :host([interaction='inverse']) {
+  /* deprecated */
   --color: var(--mlv-sys-interaction-background);
   --background: var(--mlv-sys-interaction-color);
 }
@@ -135,56 +141,91 @@
   --color: var(--mlv-sys-text-white-color);
 }
 
-:host([interaction*='flat']) {
+:host([interaction*='flat']), /* deprecated */
+:host([container*='flat']),
+:host([container*='inline']) {
   --background: transparent;
-  --padding: 0 var(--mlv-ref-size-100);
   --text-transform: initial;
   --border-radius: var(--mlv-ref-border-radius-xs);
   --_icon-color: var(--color);
 }
 
-:host([interaction*='flat']:hover) {
+:host([container*='flat'][interaction]:hover) {
+  --background: color-mix(
+    in oklab,
+    var(--color) var(--mlv-sys-contrast-mute-ratio),
+    var(--mlv-sys-contrast-mute-color)
+  );
+}
+
+:host([container*='flat'][interaction='emphasis']) {
+  --color: var(--mlv-sys-interaction-emphasis-background);
+}
+
+:host([container*='flat'][interaction='destructive']) {
+  --color: var(--mlv-sys-interaction-destructive-background);
+}
+
+:host([container*='inline']) {
+  --padding: 0;
+}
+
+:host([interaction*='flat']:hover), /* deprecated */
+:host([container*='inline']:hover) {
   --background: transparent;
   --text-decoration: underline;
 }
 
-:host([interaction*='flat']:hover) [interaction-state] {
+:host([interaction*='flat']:hover) [interaction-state], /* deprecated */
+:host([container*='inline']:hover) [interaction-state] {
   --mlv-sys-interaction-state-ratio: 0;
 }
 
-:host([interaction*='flat']:--active) {
+:host([interaction*='flat']:--active), /* deprecated */
+:host([container*='inline']:--active) {
   --background: transparent;
   --text-decoration: underline;
 }
 
-:host([interaction*='flat']:--disabled) {
+:host([interaction*='flat']:--disabled), /* deprecated */
+:host([container*='flat']:--disabled),
+:host([container*='inline']:--disabled) {
   --color: var(--mlv-sys-interaction-disabled-color);
   --background: transparent;
   --text-decoration: none !important;
 }
 
-:host([interaction*='flat']:--disabled) [interaction-state] {
+:host([interaction*='flat']:--disabled) [interaction-state], /* deprecated */
+:host([container*='flat']:--disabled) [interaction-state],
+:host([container*='inline']:--disabled) [interaction-state] {
   --mlv-sys-interaction-state-ratio: 0;
 }
 
-:host([interaction*='flat']:--selected) {
+:host([interaction*='flat']:--selected), /* deprecated */
+:host([container*='flat']:--selected),
+:host([container*='inline']:--selected) {
   --color: var(--mlv-sys-interaction-selected-color);
   --background: transparent;
 }
 
-:host([interaction*='flat']:--selected) [interaction-state] {
+:host([interaction*='flat']:--selected) [interaction-state], /* deprecated */
+:host([container*='flat']:--selected) [interaction-state],
+:host([container*='inline']:--selected) [interaction-state] {
   --mlv-sys-interaction-state-ratio: 0;
 }
 
-:host([interaction*='flat'][readonly]:not(:--anchor)) {
+:host([interaction*='flat'][readonly]:not(:--anchor)), /* deprecated */
+:host([container*='inline'][readonly]:not(:--anchor)) {
   --text-decoration: none;
   --cursor: cursor;
 }
 
-:host([interaction*='flat-destructive']) {
+:host([interaction*='flat-destructive']), /* deprecated */
+:host([container='inline'][interaction='destructive']) {
   --color: var(--mlv-sys-interaction-destructive-background);
 }
 
-:host([interaction*='flat-emphasize']) {
-  --color: var(--mlv-sys-interaction-emphasize-background);
+:host([interaction*='flat-emphasize']), /* deprecated */
+:host([container='inline'][interaction='emphasis']) {
+  --color: var(--mlv-sys-interaction-emphasis-background);
 }

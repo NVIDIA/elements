@@ -91,7 +91,7 @@ export const Hint = {
   <mlv-tooltip anchor="action-btn" position="right" trigger="action-btn" hidden>Preview in progress CI tasks for the active host</mlv-tooltip>
   <div mlv-layout="row gap:xs align:vertical-center">
     <h2 mlv-text="section">Preview</h2>
-    <mlv-icon-button interaction="flat" icon-name="information-circle-stroke" id="action-btn"></mlv-icon-button>
+    <mlv-icon-button container="flat" icon-name="information-circle-stroke" id="action-btn"></mlv-icon-button>
   </div>
   <script type="module">
     const tooltip = document.querySelector('mlv-tooltip[anchor="action-btn"]');
@@ -107,7 +107,7 @@ export const HintCopy = {
 <div mlv-layout="row align:center" style="height: 90vh">
   <mlv-tooltip trigger="btn" anchor="btn" hidden>2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</mlv-tooltip>
   <mlv-toast trigger="btn" anchor="btn" close-timeout="1500" hidden status="success">copied!</mlv-toast>
-  <mlv-button interaction="flat" id="btn" aria-label="copy to clipboard">
+  <mlv-button container="flat" id="btn" aria-label="copy to clipboard">
     <p mlv-text="truncate" style="width: 120px">2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</p><mlv-icon name="copy"></mlv-icon>
   </mlv-button>
 </div>

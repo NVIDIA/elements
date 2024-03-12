@@ -105,7 +105,7 @@ export const ValidationReset = () => {
   <mlv-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" value="test@nvidia.com" />
-    <mlv-icon-button aria-label="reset" icon-name="cancel" interaction="flat" type="button"></mlv-icon-button>
+    <mlv-icon-button aria-label="reset" icon-name="cancel" container="flat" type="button"></mlv-icon-button>
     <mlv-control-message error="valueMissing">required</mlv-control-message>
     <mlv-control-message error="patternMismatch">invalid NVIDIA email</mlv-control-message>
   </mlv-input>

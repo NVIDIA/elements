@@ -57,7 +57,7 @@ export class DomainLogin extends ScopedRegistryHost(LitElement) {
         <input type="password" />
       </mlv-password>
 
-      <mlv-button interaction="emphasize">Login</mlv-button>
+      <mlv-button interaction="emphasis">Login</mlv-button>
     `;
   }
 }

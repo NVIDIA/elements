@@ -37,4 +37,22 @@ describe('mlv-button', () => {
     await elementIsStable(element);
     expect(element.tabIndex).toBe(-1);
   });
+
+  it('should reflect a interaction value', async () => {
+    expect(element.interaction).toBe(undefined);
+    expect(element.hasAttribute('interaction')).toBe(false);
+
+    element.interaction = 'emphasis';
+    await elementIsStable(element);
+    expect(element.getAttribute('interaction')).toBe('emphasis');
+  });
+
+  it('should reflect a container value', async () => {
+    expect(element.container).toBe(undefined);
+    expect(element.hasAttribute('container')).toBe(false);
+
+    element.container = 'inline';
+    await elementIsStable(element);
+    expect(element.getAttribute('container')).toBe('inline');
+  });
 });

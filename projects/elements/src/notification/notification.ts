@@ -109,7 +109,7 @@ export class Notification extends LitElement {
   get #popoverContent() {
     return html`
     <mlv-icon .name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information} part="status-icon"></mlv-icon>
-    ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" interaction="flat" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
+    ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" container="flat" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
     <slot></slot>`;
   }
 

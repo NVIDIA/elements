@@ -18,9 +18,9 @@ export const Default = {
   render: () => html`
   <div>
     <mlv-toolbar>
-      <mlv-button interaction="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button interaction="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-      <mlv-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
+      <mlv-button container="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
+      <mlv-button container="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
+      <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
     </mlv-toolbar>
   </div>
   `
@@ -30,9 +30,9 @@ export const ContainerFlat = {
   render: () => html`
   <div>
     <mlv-toolbar container="flat">
-      <mlv-button interaction="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button interaction="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-      <mlv-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
+      <mlv-button container="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
+      <mlv-button container="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
+      <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
     </mlv-toolbar>
   </div>
   `
@@ -42,9 +42,9 @@ export const ContainerInset = {
   render: () => html`
   <div>
     <mlv-toolbar container="inset">
-      <mlv-button interaction="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button interaction="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-      <mlv-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
+      <mlv-button container="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
+      <mlv-button container="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
+      <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
     </mlv-toolbar>
   </div>
   `
@@ -54,9 +54,9 @@ export const ContainerFull = {
   render: () => html`
   <div>
     <mlv-toolbar container="full">
-      <mlv-button interaction="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button interaction="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-      <mlv-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
+      <mlv-button container="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
+      <mlv-button container="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
+      <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
     </mlv-toolbar>
   </div>
   `
@@ -107,7 +107,7 @@ export const Groups = {
         <mlv-icon-button icon-name="merge"></mlv-icon-button>
       </mlv-button-group>
 
-      <mlv-button slot="suffix" interaction="flat">Save</mlv-button>
+      <mlv-button slot="suffix" container="flat">Save</mlv-button>
     </mlv-toolbar>
   </div>
   `
@@ -139,7 +139,7 @@ export const Filter = {
   render: () => html`
   <div>
     <mlv-toolbar container="flat">
-      <mlv-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></mlv-icon-button>
+      <mlv-icon-button readonly icon-name="filter" container="flat" slot="prefix"></mlv-icon-button>
       <mlv-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option selected>status</option>
@@ -178,7 +178,7 @@ export const Scroll = {
   render: () => html`
   <div>
     <mlv-toolbar container="flat">
-      <mlv-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></mlv-icon-button>
+      <mlv-icon-button readonly icon-name="filter" container="flat" slot="prefix"></mlv-icon-button>
       <mlv-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option>workload</option>
@@ -239,7 +239,7 @@ export const Wrap = {
   render: () => html`
   <div>
     <mlv-toolbar container="flat" content="wrap">
-      <mlv-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></mlv-icon-button>
+      <mlv-icon-button readonly icon-name="filter" container="flat" slot="prefix"></mlv-icon-button>
       <mlv-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option>workload</option>

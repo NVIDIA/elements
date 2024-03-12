@@ -277,7 +277,7 @@ export const Reset = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </select>
-    <mlv-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" interaction="flat"></mlv-icon-button>
+    <mlv-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" container="flat"></mlv-icon-button>
     <mlv-control-message>message</mlv-control-message>
   </mlv-combobox>
   <script type="module">
@@ -302,7 +302,7 @@ export const Footer = () => {
       <option value="user"></option>
       <option value="progress"></option>
     </select>
-    <mlv-button slot="footer" interaction="flat">action</mlv-button>
+    <mlv-button slot="footer" container="flat">action</mlv-button>
     <mlv-control-message>message</mlv-control-message>
   </mlv-combobox>
   `
@@ -325,8 +325,8 @@ export const SelectAll = () => {
       <option value="progress"></option>
     </select>
     <div slot="footer" mlv-layout="row align:stretch full">
-      <mlv-button interaction="flat">Select All</mlv-button>
-      <mlv-button interaction="flat">Deselect All</mlv-button>
+      <mlv-button container="flat">Select All</mlv-button>
+      <mlv-button container="flat">Deselect All</mlv-button>
     </div>
     <mlv-control-message>message</mlv-control-message>
   </mlv-combobox>
@@ -442,7 +442,7 @@ class ProgressiveFilterDemo extends LitElement {
           ['select', () => html`<mlv-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value="${v}">${v}</option>`)}</select></mlv-select>`]
         ], () => html`<mlv-combobox><input type="text" placeholder="value" disabled /></mlv-combobox>`)}
       </mlv-progressive-filter-chip>`)}
-      <mlv-button interaction="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
+      <mlv-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
         <mlv-icon name="add"></mlv-icon> Add Filter
       </mlv-button>
     `;

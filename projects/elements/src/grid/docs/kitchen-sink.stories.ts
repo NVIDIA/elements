@@ -119,7 +119,7 @@ class KitchenSinkDemo extends LitElement {
       <mlv-button slot="nav-items">Link 2</mlv-button>
       <mlv-icon-button icon-name="chat-bubble" slot="nav-actions"></mlv-icon-button>
       <mlv-icon-button icon-name="switch-apps" slot="nav-actions"></mlv-icon-button>
-      <mlv-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</mlv-icon-button>
+      <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
     </mlv-app-header>
     `
   }
@@ -179,7 +179,7 @@ class KitchenSinkDemo extends LitElement {
       </div>
       <div mlv-layout="span:5"></div>
       <div mlv-layout="row gap:sm align:bottom span:4" style="margin-left: auto">
-        <mlv-button @click=${() => this.showCreateWorkflowDialog = true} interaction="emphasize">create</mlv-button>
+        <mlv-button @click=${() => this.showCreateWorkflowDialog = true} interaction="emphasis">create</mlv-button>
       </div>
     </div>`
   }
@@ -304,10 +304,10 @@ class KitchenSinkDemo extends LitElement {
   get #bulkActions() {
     return this.#selectedCount ? html`
     <mlv-toolbar slot="footer" status="accent">
-      <mlv-icon-button interaction="flat" icon-name="cancel" slot="prefix" @click=${() => this.#selectAll(false)}></mlv-icon-button>
+      <mlv-icon-button container="flat" icon-name="cancel" slot="prefix" @click=${() => this.#selectAll(false)}></mlv-icon-button>
       <p mlv-text="body">${this.#selectedCount} selected</p>
-      <mlv-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} interaction="flat" slot="suffix">edit</mlv-button>
-      <mlv-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} interaction="flat-destructive" slot="suffix">delete</mlv-button>
+      <mlv-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} container="flat" slot="suffix">edit</mlv-button>
+      <mlv-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} container="flat" interaction="destructive" slot="suffix">delete</mlv-button>
     </mlv-toolbar>` : '';
   }
 
@@ -350,7 +350,7 @@ class KitchenSinkDemo extends LitElement {
                 ${this.columns.region.visible ? html`<mlv-grid-cell>${workflow.region}</mlv-grid-cell>` : ''}
                 ${this.columns.created.visible ? html`<mlv-grid-cell>${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(workflow.created)}</mlv-grid-cell>` : ''}
                 <mlv-grid-cell>
-                  <mlv-icon-button interaction="flat" icon-name="more-actions" @click=${() => this.workflowDetail = workflow}></mlv-icon-button>
+                  <mlv-icon-button container="flat" icon-name="more-actions" @click=${() => this.workflowDetail = workflow}></mlv-icon-button>
                 </mlv-grid-cell>
               </mlv-grid-row>`)}
               ${this.#placeholder}

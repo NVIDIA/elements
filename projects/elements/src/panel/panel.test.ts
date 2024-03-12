@@ -18,7 +18,7 @@ describe('mlv-panel', () => {
         <mlv-panel-footer></mlv-panel-footer>
         <p>content</p>
         <mlv-panel-header>
-          <mlv-icon-button interaction="flat" slot="action-icon" icon-name="more-actions"></mlv-icon-button>
+          <mlv-icon-button container="flat" slot="action-icon" icon-name="more-actions"></mlv-icon-button>
           <h3 slot="subtitle">subtitle</h3>
           <h2 slot="title">title</h2>
         </mlv-panel-header>

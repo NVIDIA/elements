@@ -101,7 +101,7 @@ class IconDemo extends LitElement {
 
         <div mlv-layout="grid gap:md span-items:2">
           ${ICON_NAMES.filter((iconName) => iconName.includes(this.iconSearchKey)).map((iconName) => html`
-            <mlv-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." interaction="flat">
+            <mlv-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." container="flat">
               <div mlv-layout="column align:center gap:md">
                 <mlv-icon ?outline=${this.values.outline} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></mlv-icon>
                 <h3 mlv-text="label sm light muted">${iconName}</h3>

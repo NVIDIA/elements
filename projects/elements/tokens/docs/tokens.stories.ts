@@ -265,7 +265,7 @@ function renderTokenTable(tokens) {
         return html`<tr @mouseenter="${(e) => _toggleCopyIcon(e, true)}" @mouseleave="${(e) => _toggleCopyIcon(e, false)}">
         <td>
           ${name}
-          <mlv-icon-button style="opacity: 0; margin-top: -18px" title="Copy '${name}' to clipboard" icon-name="copy" interaction="flat" @click="${() => copyTokenName(name)}"></mlv-icon-button>
+          <mlv-icon-button style="opacity: 0; margin-top: -18px" title="Copy '${name}' to clipboard" icon-name="copy" container="flat" @click="${() => copyTokenName(name)}"></mlv-icon-button>
         </td>
         <td>
           <code style="user-select: none">${value}</code>

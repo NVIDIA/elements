@@ -10,7 +10,7 @@ export default {
   argTypes: {
     interaction: {
       control: 'inline-radio',
-      options: ['emphasize', 'destructive', 'flat']
+      options: ['emphasis', 'destructive', 'flat']
     },
     iconName: {
       control: 'inline-radio',
@@ -26,7 +26,7 @@ export const Default = {
   args: { disabled: false, iconName: 'menu', interaction: '' }
 };
 
-export const Emphasize = { ...Default, args: { iconName: 'menu', interaction: 'emphasize' } };
+export const Emphasize = { ...Default, args: { iconName: 'menu', interaction: 'emphasis' } };
 export const Destructive = { ...Default, args: {  iconName: 'menu', interaction: 'destructive' } };
 export const Flat = { ...Default, args: {  iconName: 'menu', interaction: 'flat' } };
 export const Disabled = { ...Default, args: {  iconName: 'menu', disabled: true } };
@@ -34,7 +34,7 @@ export const Disabled = { ...Default, args: {  iconName: 'menu', disabled: true 
 export const Interactions = {
   render: () => html`
     <mlv-icon-button icon-name="menu"></mlv-icon-button>
-    <mlv-icon-button interaction="emphasize" icon-name="menu"></mlv-icon-button>
+    <mlv-icon-button interaction="emphasis" icon-name="menu"></mlv-icon-button>
     <mlv-icon-button interaction="destructive" icon-name="menu"></mlv-icon-button>
     <mlv-icon-button disabled icon-name="menu"></mlv-icon-button>
   `
@@ -50,10 +50,10 @@ export const Size = {
 
 export const FlatInteractions = {
   render: () => html`
-    <mlv-icon-button interaction="flat" icon-name="menu"></mlv-icon-button>
-    <mlv-icon-button interaction="flat-emphasize" icon-name="menu"></mlv-icon-button>
-    <mlv-icon-button interaction="flat-destructive" icon-name="menu"></mlv-icon-button>
-    <mlv-icon-button interaction="flat" icon-name="menu" disabled></mlv-icon-button>
+    <mlv-icon-button container="flat" icon-name="menu"></mlv-icon-button>
+    <mlv-icon-button container="flat" interaction="emphasis" icon-name="menu"></mlv-icon-button>
+    <mlv-icon-button container="flat" interaction="destructive" icon-name="menu"></mlv-icon-button>
+    <mlv-icon-button container="flat" icon-name="menu" disabled></mlv-icon-button>
   `
 }
 
@@ -65,23 +65,23 @@ export const PressedToggle = {
   </div>
 
   <div mlv-layout="row gap:sm">
-    <mlv-icon-button icon-name="eye-hidden" interaction="flat" aria-label="show"></mlv-icon-button>
-    <mlv-icon-button pressed icon-name="eye" interaction="flat" aria-label="hide"></mlv-icon-button>
+    <mlv-icon-button icon-name="eye-hidden" container="flat" aria-label="show"></mlv-icon-button>
+    <mlv-icon-button pressed icon-name="eye" container="flat" aria-label="hide"></mlv-icon-button>
   </div>
   `
 }
 
 export const SelectedFlat = {
   render: () => html`
-    <mlv-icon-button selected icon-name="split-vertical" aria-label="split vertical" interaction="flat"></mlv-icon-button>
-    <mlv-icon-button icon-name="split-horizontal" aria-label="split horizontal" interaction="flat"></mlv-icon-button>
-    <mlv-icon-button icon-name="split-none" aria-label="preview" interaction="flat"></mlv-icon-button>
+    <mlv-icon-button selected icon-name="split-vertical" aria-label="split vertical" container="flat"></mlv-icon-button>
+    <mlv-icon-button icon-name="split-horizontal" aria-label="split horizontal" container="flat"></mlv-icon-button>
+    <mlv-icon-button icon-name="split-none" aria-label="preview" container="flat"></mlv-icon-button>
   `
 }
 
 export const CustomIcon = {
   render: () => html`
-    <mlv-icon-button interaction="emphasize">ML</mlv-icon-button>
+    <mlv-icon-button interaction="emphasis">ML</mlv-icon-button>
     <mlv-icon-button>🎉</mlv-icon-button>
     <mlv-icon-button>
       🔗 <a href="#" aria-label="custom icon button"></a>
@@ -94,7 +94,7 @@ export const Link = {
     <mlv-icon-button icon-name="menu">
       <a href="#" aria-label="link to page"></a>
     </mlv-icon-button>
-    <mlv-icon-button interaction="flat" icon-name="menu">
+    <mlv-icon-button container="flat" icon-name="menu">
       <a href="#" aria-label="link to page"></a>
     </mlv-icon-button>
   `
@@ -104,19 +104,17 @@ export const Themes = {
   render: () => html`
     <div mlv-theme="root light">
       <mlv-icon-button icon-name="menu"></mlv-icon-button>
-      <mlv-icon-button interaction="emphasize" icon-name="menu"></mlv-icon-button>
+      <mlv-icon-button interaction="emphasis" icon-name="menu"></mlv-icon-button>
       <mlv-icon-button interaction="destructive" icon-name="menu"></mlv-icon-button>
-      <mlv-icon-button interaction="flat" icon-name="menu"></mlv-icon-button>
+      <mlv-icon-button container="flat" icon-name="menu"></mlv-icon-button>
       <mlv-icon-button disabled icon-name="menu"></mlv-icon-button>
-      <mlv-icon-button interaction="inverse" icon-name="menu"></mlv-icon-button>
     </div>
     <div mlv-theme="root dark">
       <mlv-icon-button icon-name="menu"></mlv-icon-button>
-      <mlv-icon-button interaction="emphasize" icon-name="menu"></mlv-icon-button>
+      <mlv-icon-button interaction="emphasis" icon-name="menu"></mlv-icon-button>
       <mlv-icon-button interaction="destructive" icon-name="menu"></mlv-icon-button>
-      <mlv-icon-button interaction="flat" icon-name="menu"></mlv-icon-button>
+      <mlv-icon-button container="flat" icon-name="menu"></mlv-icon-button>
       <mlv-icon-button disabled icon-name="menu"></mlv-icon-button>
-      <mlv-icon-button interaction="inverse" icon-name="menu"></mlv-icon-button>
     </div>
   `
 }
