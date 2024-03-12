@@ -81,7 +81,7 @@
       "command": "pnpm exec playwright install chromium --with-deps chromium"
     },
     "prepare": {
-      "command": "test -n \"$CI\" || (pnpm run playwright | husky install)"
+      "command": "test -n \"$CI\" || (pnpm run playwright & husky install)"
     }
   }
 }
