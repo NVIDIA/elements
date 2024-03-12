@@ -33,14 +33,19 @@ export class Button extends BaseButton {
   };
 
   /**
-   * Visual treatment to represent user interaction appearance.
+   * Determines the container of the button. Flat is used for nesting within other containers or more muted style. Inline is used for inline content such as text.
    */
-  @property({ type: String, reflect: true }) interaction: 'flat' | Interaction | FlatInteraction | Inverse;
+  @property({ type: String, reflect: true }) container: 'flat' | 'inline';
 
   /**
    * Determines size of the button.
    */
   @property({ type: String, reflect: true }) size?: Size;
+
+  /**
+   * The Interaction type provides a way to indicate the intended use case for a button or other interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors.
+   */
+  @property({ type: String, reflect: true }) interaction: Interaction | FlatInteraction | Inverse;
 
   render() {
     return html`

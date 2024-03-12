@@ -193,7 +193,7 @@ export class Panel extends LitElement {
           ${when(
             !this.closable,
             () => html`
-              <nve-icon-button interaction=${this.expanded ? 'flat' : ''} icon-name="double-chevron"
+              <nve-icon-button container=${this.expanded ? 'flat' : ''} icon-name="double-chevron"
                 @click=${() => this.#typeExpandableController.toggle()}
                 .direction=${this.#direction}
                 .expanded=${this.expanded}
@@ -201,7 +201,7 @@ export class Panel extends LitElement {
               ></nve-icon-button>
             `,
             () => html`
-              <nve-icon-button interaction="flat" icon-name="cancel"
+              <nve-icon-button container="flat" icon-name="cancel"
                 @click=${() => this.#typeExpandableController.close()}
                 .expanded=${this.expanded}
                 .ariaLabel=${this.expanded ? this.i18n.hide : this.i18n.show}

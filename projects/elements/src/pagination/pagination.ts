@@ -127,7 +127,7 @@ export class Pagination extends LitElement {
       @click=${() => this.#setValue(this.value - 1)}
       .disabled=${this.disabled || this.#currentPage <= this.step}
       .ariaLabel=${this.i18n.previous}
-      interaction="flat"
+      container="flat"
       icon-name="chevron"
       direction="left"
     ></nve-icon-button>`;
@@ -138,7 +138,7 @@ export class Pagination extends LitElement {
       @click=${() => this.#setValue(this.value + 1)}
       .disabled=${this.disabled || this.#currentPage >= this.items}
       .ariaLabel=${this.i18n.next}
-      interaction="flat"
+      container="flat"
       icon-name="chevron"
       direction="right"
     ></nve-icon-button>`;
@@ -149,7 +149,7 @@ export class Pagination extends LitElement {
       @click=${() => this.#setValue(1)}
       .disabled=${this.disabled || this.#currentPage <= this.step}
       .ariaLabel=${this.i18n.start}
-      interaction="flat"
+      container="flat"
       icon-name="arrow-stop"
       direction="left"
     ></nve-icon-button>`;
@@ -160,7 +160,7 @@ export class Pagination extends LitElement {
       @click=${() => this.#setValue(this.items / this.step)}
       .disabled=${this.disabled || (this.value - 1) * this.step + this.step >= this.items}
       .ariaLabel=${this.i18n.end}
-      interaction="flat"
+      container="flat"
       icon-name="arrow-stop"
       direction="right"
     ></nve-icon-button>`;

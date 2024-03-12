@@ -101,7 +101,7 @@ class IconDemo extends LitElement {
 
         <div nve-layout="grid gap:md span-items:2">
           ${ICON_NAMES.filter((iconName) => iconName.includes(this.iconSearchKey)).map((iconName) => html`
-            <nve-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." interaction="flat">
+            <nve-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." container="flat">
               <div nve-layout="column align:center gap:md">
                 <nve-icon ?outline=${this.values.outline} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></nve-icon>
                 <h3 nve-text="label sm light muted">${iconName}</h3>

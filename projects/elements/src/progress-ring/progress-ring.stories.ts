@@ -125,7 +125,7 @@ export const WithButton = {
         Button
       </nve-button>
 
-      <nve-button interaction="emphasize">
+      <nve-button interaction="emphasis">
         <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
         Button
       </nve-button>
@@ -140,7 +140,7 @@ export const WithButton = {
         Button
       </nve-button>
 
-      <nve-button interaction="emphasize">
+      <nve-button interaction="emphasis">
         <nve-progress-ring status="neutral" size="xxs" value="33"></nve-progress-ring>
         Button
       </nve-button>
