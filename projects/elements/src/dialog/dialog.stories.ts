@@ -82,7 +82,7 @@ export const Content = {
   <p nve-text="body">some text content in a closable dialog</p>
   <nve-dialog-footer>
     <nve-button>cancel</nve-button>
-    <nve-button interaction="emphasize">action</nve-button>
+    <nve-button interaction="emphasis">action</nve-button>
   </nve-dialog-footer>
 </nve-dialog>
   `

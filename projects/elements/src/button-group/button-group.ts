@@ -96,7 +96,7 @@ export class ButtonGroup extends LitElement {
 
   #syncStyleStates() {
     if (this.container === 'flat') {
-      this.#buttons.forEach(btn => (btn.interaction = 'flat'));
+      this.#buttons.forEach(btn => (btn.container = 'flat'));
     }
 
     if (this.interaction) {

@@ -119,7 +119,7 @@ class KitchenSinkDemo extends LitElement {
       <nve-button slot="nav-items">Link 2</nve-button>
       <nve-icon-button icon-name="chat-bubble" slot="nav-actions"></nve-icon-button>
       <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
-      <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+      <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
     </nve-app-header>
     `
   }
@@ -179,7 +179,7 @@ class KitchenSinkDemo extends LitElement {
       </div>
       <div nve-layout="span:5"></div>
       <div nve-layout="row gap:sm align:bottom span:4" style="margin-left: auto">
-        <nve-button @click=${() => this.showCreateWorkflowDialog = true} interaction="emphasize">create</nve-button>
+        <nve-button @click=${() => this.showCreateWorkflowDialog = true} interaction="emphasis">create</nve-button>
       </div>
     </div>`
   }
@@ -304,10 +304,10 @@ class KitchenSinkDemo extends LitElement {
   get #bulkActions() {
     return this.#selectedCount ? html`
     <nve-toolbar slot="footer" status="accent">
-      <nve-icon-button interaction="flat" icon-name="cancel" slot="prefix" @click=${() => this.#selectAll(false)}></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="cancel" slot="prefix" @click=${() => this.#selectAll(false)}></nve-icon-button>
       <p nve-text="body">${this.#selectedCount} selected</p>
-      <nve-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} interaction="flat" slot="suffix">edit</nve-button>
-      <nve-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} interaction="flat-destructive" slot="suffix">delete</nve-button>
+      <nve-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} container="flat" slot="suffix">edit</nve-button>
+      <nve-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} container="flat" interaction="destructive" slot="suffix">delete</nve-button>
     </nve-toolbar>` : '';
   }
 
@@ -350,7 +350,7 @@ class KitchenSinkDemo extends LitElement {
                 ${this.columns.region.visible ? html`<nve-grid-cell>${workflow.region}</nve-grid-cell>` : ''}
                 ${this.columns.created.visible ? html`<nve-grid-cell>${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(workflow.created)}</nve-grid-cell>` : ''}
                 <nve-grid-cell>
-                  <nve-icon-button interaction="flat" icon-name="more-actions" @click=${() => this.workflowDetail = workflow}></nve-icon-button>
+                  <nve-icon-button container="flat" icon-name="more-actions" @click=${() => this.workflowDetail = workflow}></nve-icon-button>
                 </nve-grid-cell>
               </nve-grid-row>`)}
               ${this.#placeholder}

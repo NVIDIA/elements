@@ -5,7 +5,7 @@ describe('button lighthouse report', () => {
   test('button should meet lighthouse benchmarks', async () => {
     const report = await runner.getReport('nve-button', /* html */`
       <nve-button>button</nve-button>
-      <nve-button interaction="emphasize">button</nve-button>
+      <nve-button interaction="emphasis">button</nve-button>
       <nve-button interaction="destructive">button</nve-button>
       <script type="module">
         import '@elements/elements/button/define.js';

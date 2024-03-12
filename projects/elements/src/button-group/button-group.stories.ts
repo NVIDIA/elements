@@ -66,7 +66,7 @@ export const ActionSplit = {
         <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
       </nve-button-group>
       
-      <nve-button-group interaction="emphasize">
+      <nve-button-group interaction="emphasis">
         <nve-button>button</nve-button>
         <nve-divider orientation="vertical"></nve-divider>
         <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
@@ -90,7 +90,7 @@ export const ActionSplitRounded = {
         <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
       </nve-button-group>
       
-      <nve-button-group container="rounded" interaction="emphasize">
+      <nve-button-group container="rounded" interaction="emphasis">
         <nve-button>button</nve-button>
         <nve-divider orientation="vertical"></nve-divider>
         <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>

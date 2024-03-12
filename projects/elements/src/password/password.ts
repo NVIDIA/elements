@@ -28,7 +28,7 @@ export class Password extends Control {
   };
 
   protected get suffixContent() {
-    return html`<nve-icon-button @click=${() => this.#toggleVisibility()} .pressed=${this.pressed} .iconName=${this.pressed ? 'hidden' : 'visible'} interaction="flat" .ariaLabel=${this.pressed ? this.i18n.hide : this.i18n.show}></nve-icon-button>`;
+    return html`<nve-icon-button @click=${() => this.#toggleVisibility()} .pressed=${this.pressed} .iconName=${this.pressed ? 'hidden' : 'visible'} container="flat" .ariaLabel=${this.pressed ? this.i18n.hide : this.i18n.show}></nve-icon-button>`;
   }
 
   #toggleVisibility() {

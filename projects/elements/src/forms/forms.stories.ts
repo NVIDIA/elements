@@ -92,17 +92,17 @@ export const KitchenSink = {
 
     <nve-input layout="vertical-inline">
       <label>prefix/suffix label</label>
-      <nve-button interaction="flat" readonly>https://</nve-button>
+      <nve-button container="flat" readonly>https://</nve-button>
       <input type="text" />
-      <nve-button interaction="flat" readonly>.com</nve-button>
+      <nve-button container="flat" readonly>.com</nve-button>
       <nve-control-message>message</nve-control-message>
     </nve-input>
 
     <nve-input layout="vertical-inline">
       <label>actions label</label>
-      <nve-icon-button icon-name="search" interaction="flat" readonly></nve-icon-button>
+      <nve-icon-button icon-name="search" container="flat" readonly></nve-icon-button>
       <input type="text" />
-      <nve-icon-button icon-name="cancel" interaction="flat" aria-label="clear"></nve-icon-button>
+      <nve-icon-button icon-name="cancel" container="flat" aria-label="clear"></nve-icon-button>
       <nve-control-message>message</nve-control-message>
     </nve-input>
 
@@ -127,7 +127,7 @@ export const KitchenSink = {
       </nve-select>
       <nve-input>
         <input placeholder="example" aria-label="host" />
-        <nve-button interaction="flat" readonly="">.com</nve-button>
+        <nve-button container="flat" readonly="">.com</nve-button>
       </nve-input>
       <nve-control-message>Host ID: 123456</nve-control-message>
     </nve-input-group>

@@ -62,12 +62,21 @@
   flex-direction: column;
 }
 
-:host([interaction='emphasize']) ::slotted(nve-divider) {
-  --color: color-mix(in oklab, var(--nve-sys-interaction-emphasize-background) 100%, var(--nve-sys-interaction-emphasize-color) 50%);
+:host([interaction='emphasize']) ::slotted(nve-divider), /* deprecated */
+:host([interaction='emphasis']) ::slotted(nve-divider) {
+  --color: color-mix(
+    in oklab,
+    var(--nve-sys-interaction-emphasis-background) 100%,
+    var(--nve-sys-interaction-emphasis-color) 50%
+  );
 }
 
 :host([interaction='destructive']) ::slotted(nve-divider) {
-  --color: color-mix(in oklab, var(--nve-sys-interaction-destructive-background) 100%, var(--nve-sys-interaction-destructive-color) 50%);
+  --color: color-mix(
+    in oklab,
+    var(--nve-sys-interaction-destructive-background) 100%,
+    var(--nve-sys-interaction-destructive-color) 50%
+  );
 }
 
 :host(:--split) {

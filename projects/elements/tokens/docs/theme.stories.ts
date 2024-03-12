@@ -118,9 +118,9 @@ function getThemeContent() {
     <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px">
     <div nve-layout="row gap:sm">
         <nve-icon-button icon-name="person"></nve-icon-button>
-        <nve-icon-button icon-name="person" interaction="emphasize"></nve-icon-button>
+        <nve-icon-button icon-name="person" interaction="emphasis"></nve-icon-button>
         <nve-icon-button icon-name="person" interaction="destructive"></nve-icon-button>
-        <nve-icon-button icon-name="person" interaction="flat"></nve-icon-button>
+        <nve-icon-button icon-name="person" container="flat"></nve-icon-button>
         <nve-icon-button icon-name="person" disabled></nve-icon-button>
       </div>
       <div nve-layout="row gap:sm">
@@ -132,7 +132,7 @@ function getThemeContent() {
       </div>
       <div nve-layout="row gap:sm">
         <nve-button>default</nve-button>
-        <nve-button interaction="emphasize">emphasize</nve-button>
+        <nve-button interaction="emphasis">emphasis</nve-button>
         <nve-button interaction="destructive">destructive</nve-button>
         <nve-button disabled="">disabled</nve-button>
       </div>
@@ -224,7 +224,7 @@ class ThemeGeneratorDemo extends LitElement {
     <nve-button slot="nav-items">Link 2</nve-button>
     <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
     <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
-    <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+    <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
   </nve-app-header>
 
   <nve-alert-banner status="accent">

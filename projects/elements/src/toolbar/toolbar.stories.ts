@@ -18,9 +18,9 @@ export const Default = {
   render: () => html`
   <div>
     <nve-toolbar>
-      <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
-      <nve-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   </div>
   `
@@ -30,9 +30,9 @@ export const ContainerFlat = {
   render: () => html`
   <div>
     <nve-toolbar container="flat">
-      <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
-      <nve-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   </div>
   `
@@ -42,9 +42,9 @@ export const ContainerInset = {
   render: () => html`
   <div>
     <nve-toolbar container="inset">
-      <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
-      <nve-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   </div>
   `
@@ -54,9 +54,9 @@ export const ContainerFull = {
   render: () => html`
   <div>
     <nve-toolbar container="full">
-      <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
-      <nve-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   </div>
   `
@@ -107,7 +107,7 @@ export const Groups = {
         <nve-icon-button icon-name="merge"></nve-icon-button>
       </nve-button-group>
 
-      <nve-button slot="suffix" interaction="flat">Save</nve-button>
+      <nve-button slot="suffix" container="flat">Save</nve-button>
     </nve-toolbar>
   </div>
   `
@@ -139,7 +139,7 @@ export const Filter = {
   render: () => html`
   <div>
     <nve-toolbar container="flat">
-      <nve-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></nve-icon-button>
+      <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
       <nve-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option selected>status</option>
@@ -178,7 +178,7 @@ export const Scroll = {
   render: () => html`
   <div>
     <nve-toolbar container="flat">
-      <nve-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></nve-icon-button>
+      <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
       <nve-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option>workload</option>
@@ -239,7 +239,7 @@ export const Wrap = {
   render: () => html`
   <div>
     <nve-toolbar container="flat" content="wrap">
-      <nve-icon-button readonly icon-name="filter" interaction="flat" slot="prefix"></nve-icon-button>
+      <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
       <nve-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option>workload</option>

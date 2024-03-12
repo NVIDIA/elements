@@ -69,7 +69,7 @@ export const Default = {
 
               ${when(
                 args.showActionIcon,
-                () => html`<nve-icon-button interaction="flat" slot="action-icon" icon-name="more-actions" @click=${() => customActionHandler()}></nve-icon-button>`
+                () => html`<nve-icon-button container="flat" slot="action-icon" icon-name="more-actions" @click=${() => customActionHandler()}></nve-icon-button>`
               )}
             </nve-panel-header>
             `
@@ -116,7 +116,7 @@ export const Default = {
             args.showFooter,
             () => html`
             <nve-panel-footer>
-              <nve-button interaction="flat-destructive">Destructive</nve-button>
+              <nve-button interaction="destructive" container="flat">Destructive</nve-button>
               <nve-button>Default</nve-button>
             </nve-panel-footer>
             `
@@ -127,7 +127,7 @@ export const Default = {
       ${when(
           args.showTrigger,
           () => html`
-            <nve-button interaction="emphasize" @click=${() => togglePanel(args.closable)}>Toggle Panel</nve-button>
+            <nve-button interaction="emphasis" @click=${() => togglePanel(args.closable)}>Toggle Panel</nve-button>
           `
         )}
     </section>
