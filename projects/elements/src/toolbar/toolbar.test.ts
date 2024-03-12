@@ -198,7 +198,7 @@ describe('nve-toolbar container', () => {
     await elementIsStable(element);
     expect(fixture.querySelector('nve-select').container).toBe('flat');
     expect(fixture.querySelector('nve-button-group').container).toBe('flat');
-    expect(fixture.querySelector('nve-icon-button').interaction).toBe('flat');
-    expect(fixture.querySelector('nve-button').interaction).toBe('flat');
+    expect(fixture.querySelector('nve-icon-button').container).toBe('flat');
+    expect(fixture.querySelector('nve-button').container).toBe('flat');
   });
 });

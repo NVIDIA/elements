@@ -31,7 +31,7 @@ class AppHeaderDefaultDemo extends LitElement {
   <nve-icon-button icon-name="chat-bubble" slot="nav-actions" @click=${() => alert('Thanks for clicking the feedback icon button!')}></nve-icon-button>
   <nve-icon-button icon-name="search" slot="nav-actions" @click=${() => alert('Thanks for clicking the search icon button!')}></nve-icon-button>
   <nve-icon-button icon-name="switch-apps" id=${ddownOneId + '-btn'} slot="nav-actions" @click=${() => this.activeId = ddownOneId}></nve-icon-button>
-  <nve-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasize" slot="nav-actions">EL</nve-icon-button>
+  <nve-icon-button id=${ddownTwoId + '-btn'} @click=${() => this.activeId = ddownTwoId} interaction="emphasis" slot="nav-actions">EL</nve-icon-button>
 </nve-app-header>
 <nve-dropdown id=${ddownOneId}
   anchor=${ddownOneId + '-btn'}
@@ -78,7 +78,7 @@ export const AppBadge = {
     <nve-icon-button icon-name="chat-bubble" slot="nav-actions"></nve-icon-button>
     <nve-icon-button icon-name="search" slot="nav-actions"></nve-icon-button>
     <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
-    <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+    <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
   </nve-app-header>
 </div>
   `
@@ -107,7 +107,7 @@ export const NavActions = {
     <nve-icon-button icon-name="chat-bubble" slot="nav-actions"></nve-icon-button>
     <nve-icon-button icon-name="search" slot="nav-actions"></nve-icon-button>
     <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
-    <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+    <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
   </nve-app-header>
 </div>
   `
@@ -120,7 +120,7 @@ export const LightTheme = {
     <nve-logo color="orange-pumpkin">Lt</nve-logo>
     <h2 slot="title">Light Theme</h2>
     <nve-button slot="nav-items">Link 1</nve-button>
-    <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+    <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
   </nve-app-header>
 </div>
   `
@@ -133,7 +133,7 @@ export const DarkTheme = {
     <nve-logo color="orange-pumpkin">Dt</nve-logo>
     <h2 slot="title">Dark Theme</h2>
     <nve-button slot="nav-items">Link 1</nve-button>
-    <nve-icon-button interaction="emphasize" slot="nav-actions" size="sm">EL</nve-icon-button>
+    <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
   </nve-app-header>
 </div>
   `

@@ -11,7 +11,7 @@ export const Default = {
   render: () => html`
   <form nve-layout="column gap:md" style="width: 400px">
     <domain-login name="login"></domain-login>
-    <nve-button interaction="emphasize" style="margin-left: auto">login</nve-button>
+    <nve-button interaction="emphasis" style="margin-left: auto">login</nve-button>
   </form>
   <script type="module">
     const form = document.querySelector('form');

@@ -57,7 +57,7 @@ export class DomainLogin extends ScopedRegistryHost(LitElement) {
         <input type="password" />
       </nve-password>
 
-      <nve-button interaction="emphasize">Login</nve-button>
+      <nve-button interaction="emphasis">Login</nve-button>
     `;
   }
 }

@@ -86,10 +86,10 @@ export const MultiSelectBulkActions = {
     </nve-grid-row>
   `)}
   <nve-toolbar status="accent" slot="footer">
-    <nve-icon-button interaction="flat" icon-name="cancel" slot="prefix"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="cancel" slot="prefix"></nve-icon-button>
     <p nve-text="boxy">1 selected</p>
-    <nve-button interaction="flat-destructive" slot="suffix">delete</nve-button>
-    <nve-icon-button interaction="flat" icon-name="more-actions" slot="suffix"></nve-icon-button>
+    <nve-button container="flat" interaction="destructive" slot="suffix">delete</nve-button>
+    <nve-icon-button container="flat" icon-name="more-actions" slot="suffix"></nve-icon-button>
   </nve-toolbar>
 </nve-grid>
   `
@@ -128,7 +128,7 @@ export const RowAction = {
       <nve-grid-row>
         ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
         <nve-grid-cell>
-          <nve-icon-button interaction="flat" icon-name="more-actions" aria-label="row ${i} actions"></nve-icon-button>
+          <nve-icon-button container="flat" icon-name="more-actions" aria-label="row ${i} actions"></nve-icon-button>
         </nve-grid-cell>
       </nve-grid-row>
     `)}
@@ -146,7 +146,7 @@ export const RowGroups = {
   </nve-grid-header>
   <nve-grid-row>
     <nve-grid-cell>
-      <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></nve-icon-button>
+      <nve-icon-button icon-name="chevron" container="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></nve-icon-button>
     </nve-grid-cell>
     <nve-grid-cell>Session: 2yuecae</nve-grid-cell>
     <nve-grid-cell>upload</nve-grid-cell>
@@ -156,7 +156,7 @@ export const RowGroups = {
   </nve-grid-row>
   <nve-grid-row selected>
     <nve-grid-cell>
-      <nve-icon-button icon-name="chevron" interaction="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></nve-icon-button>
+      <nve-icon-button icon-name="chevron" container="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></nve-icon-button>
     </nve-grid-cell>
     <nve-grid-cell>Session: mvwgh3t</nve-grid-cell>
     <nve-grid-cell>upload</nve-grid-cell>
@@ -190,7 +190,7 @@ export const RowGroups = {
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>
-      <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></nve-icon-button>
+      <nve-icon-button icon-name="chevron" container="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></nve-icon-button>
     </nve-grid-cell>
     <nve-grid-cell>Session: bg5ujqp</nve-grid-cell>
     <nve-grid-cell>upload</nve-grid-cell>
@@ -200,7 +200,7 @@ export const RowGroups = {
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>
-      <nve-icon-button icon-name="chevron" interaction="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></nve-icon-button>
+      <nve-icon-button icon-name="chevron" container="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></nve-icon-button>
     </nve-grid-cell>
     <nve-grid-cell>Session: 6ruehvh</nve-grid-cell>
     <nve-grid-cell>upload</nve-grid-cell>
@@ -841,7 +841,7 @@ export const PanelDetail = {
       <nve-grid-row ?selected=${i === 1}>
         ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
         <nve-grid-cell>
-          <nve-icon-button interaction="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
+          <nve-icon-button container="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
         </nve-grid-cell>
       </nve-grid-row>
     `)}
@@ -963,11 +963,11 @@ class GridPanelDemo extends LitElement {
           <nve-grid-row ?selected=${this.selectedId === row.id}>
             ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
             <nve-grid-cell>
-              <nve-icon-button @click=${() => this.selectedId = row.id} interaction="flat" icon-name="more-actions"></nve-icon-button>
+              <nve-icon-button @click=${() => this.selectedId = row.id} container="flat" icon-name="more-actions"></nve-icon-button>
             </nve-grid-cell>
           </nve-grid-row>`)}
           <nve-grid-footer>
-            <nve-icon-button aria-label="show grid options" interaction="flat" icon-name="more-actions"></nve-icon-button>
+            <nve-icon-button aria-label="show grid options" container="flat" icon-name="more-actions"></nve-icon-button>
           </nve-grid-footer>
         </nve-grid>
         <nve-panel closable ?expanded=${!!this.selectedId} @close=${() => this.selectedId = null} style="min-width: 280px">
@@ -1005,7 +1005,7 @@ class GridDynamicColumnDemo extends LitElement {
             ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
           </nve-grid-row>`)}
           <nve-grid-footer>
-            <nve-button interaction="flat" @click=${this.#update}>add column</nve-button>
+            <nve-button container="flat" @click=${this.#update}>add column</nve-button>
           </nve-grid-footer>
         </nve-grid>
       </div>

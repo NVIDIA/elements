@@ -1,69 +1,54 @@
 import { html } from 'lit';
-import { when } from 'lit/directives/when.js';
-import { Button } from '@elements/elements/button';
-import { spread } from '@elements/elements/internal';
-import { IconName, ICON_NAMES } from '@elements/elements/icon';
 import '@elements/elements/button/define.js';
 import '@elements/elements/icon/define.js';
 import '@elements/elements/search/define.js';
 
 export default {
   title: 'Elements/Button/Examples',
-  component: 'nve-button',
-  argTypes: {
-    interaction: {
-      control: 'inline-radio',
-      options: ['emphasize', 'destructive', 'flat']
-    }
-  }
+  component: 'nve-button'
 };
-
-type ArgTypes = Button & {
-  iconName: IconName;
-  iconSlotPlacement: 'start' | 'center' | 'end';
-}
 
 export const Default = {
-  render: (args: ArgTypes) => html`<nve-button ${spread(args)}>${args.textContent}</nve-button>`,
-  args: { textContent: 'Standard', disabled: false }
+  render: () => html`<nve-button>standard</nve-button>`
 };
-
-export const Emphasize = { ...Default, args: { textContent: 'Emphasize', interaction: 'emphasize' } };
-export const Flat = { ...Default, args: { textContent: 'Flat', interaction: 'flat' } };
-export const Destructive = { ...Default, args: { textContent: 'Destructive', interaction: 'destructive' } };
-export const Disabled = { ...Default, args: { textContent: 'Disabled', disabled: true } };
 
 export const ButtonWithIcon = {
-  render: (args: ArgTypes) => html`
-  <nve-button ${spread(args)}>
-    ${when(args.iconSlotPlacement === 'start',() => html`<nve-icon .name=${args.iconName}></nve-icon>`)}
-      ${args.textContent}
-    ${when(args.iconSlotPlacement === 'end',() => html`<nve-icon .name=${args.iconName}></nve-icon>`)}
-  </nve-button>`,
-  args: { textContent: 'Button Icon', disabled: false, interaction: 'emphasize', iconName: 'edit', iconSlotPlacement: 'end' },
-  argTypes: {
-    iconName: {
-      control: 'select',
-      options: ICON_NAMES
-    },
-    iconSlotPlacement: {
-      control: 'inline-radio',
-      options: ['start', 'end']
-    },
-  }
+  render: () => html`
+    <nve-button><nve-icon name="person"></nve-icon> button</nve-button>
+    <nve-button>button <nve-icon name="person"></nve-icon></nve-button>
+  `
 };
 
-export const Interactions = {
+export const Interaction = {
   render: () => html`
     <nve-button>standard</nve-button>
-    <nve-button interaction="emphasize">emphasize</nve-button>
+    <nve-button interaction="emphasis">emphasis</nve-button>
     <nve-button interaction="destructive">destructive</nve-button>
     <nve-button disabled>disabled</nve-button>
   `
 }
 
-export const FlatInteractions = {
+export const Flat = {
   render: () => html`
+    <nve-button container="flat">standard</nve-button>
+    <nve-button container="flat" interaction="emphasis">emphasis</nve-button>
+    <nve-button container="flat" interaction="destructive">destructive</nve-button>
+    <nve-button container="flat" disabled>disabled</nve-button>
+  `
+}
+
+export const Inline = {
+  render: () => html`
+    <nve-button container="inline">standard</nve-button>
+    <nve-button container="inline" interaction="emphasis">emphasis</nve-button>
+    <nve-button container="inline" interaction="destructive">destructive</nve-button>
+    <nve-button container="inline" disabled>disabled</nve-button>
+  `
+}
+
+export const Deprecated = {
+  render: () => html`
+    <nve-button interaction="emphasize">emphasize</nve-button>
     <nve-button interaction="flat">flat</nve-button>
     <nve-button interaction="flat-emphasize">flat-emphasize</nve-button>
     <nve-button interaction="flat-destructive">flat-destructive</nve-button>
@@ -82,8 +67,8 @@ export const Size = {
 export const Link = {
   render: () => html`
 <nve-button><a href="#">standard</a></nve-button>
-<nve-button interaction="emphasize"><a href="#">emphasize</a></nve-button>
-<nve-button interaction="destructive"><a href="#">destructive</a> <nve-icon name="delete"></nve-icon></nve-button>
+<nve-button interaction="emphasis"><a href="#">emphasis</a></nve-button>
+<nve-button interaction="destructive"><a href="#">destructive</a></nve-button>
 <nve-button disabled><a href="#">disabled</a></nve-button>
   `
 }
@@ -97,17 +82,17 @@ export const PressedToggle = {
 
 export const SelectedFlat = {
   render: () => html`
-    <nve-button selected interaction="flat">selected</nve-button>
-    <nve-button interaction="flat">unselected</nve-button>
-    <nve-button interaction="flat">unselected</nve-button>
+    <nve-button selected container="flat">selected</nve-button>
+    <nve-button container="flat">unselected</nve-button>
+    <nve-button container="flat">unselected</nve-button>
   `
 }
 
 export const LinkFlat = {
   render: () => html`
-<nve-button interaction="flat"><a href="#">flat</a></nve-button>
-<nve-button interaction="flat-emphasize"><a href="#">flat-emphasize</a></nve-button>
-<nve-button interaction="flat-destructive"><a href="#">flat-destructive</a></nve-button>
+<nve-button container="flat"><a href="#">flat</a></nve-button>
+<nve-button container="flat" interaction="emphasis"><a href="#">flat emphasis</a></nve-button>
+<nve-button container="flat" interaction="destructive"><a href="#">flat destructive</a></nve-button>
   `
 }
 
@@ -115,7 +100,7 @@ export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="row gap:sm pad:md">
   <nve-button>standard</nve-button>
-  <nve-button interaction="emphasize">emphasize</nve-button>
+  <nve-button interaction="emphasis">emphasis</nve-button>
   <nve-button interaction="destructive">destructive</nve-button>
   <nve-button disabled>disabled</nve-button>
 </div>
@@ -126,7 +111,7 @@ export const DarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="row gap:sm pad:md">
   <nve-button>standard</nve-button>
-  <nve-button interaction="emphasize">emphasize</nve-button>
+  <nve-button interaction="emphasis">emphasis</nve-button>
   <nve-button interaction="destructive">destructive</nve-button>
   <nve-button disabled>disabled</nve-button>
 </div>

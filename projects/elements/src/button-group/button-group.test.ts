@@ -52,25 +52,25 @@ describe('nve-button-group', () => {
   it('should sync flat container styles', async () => {
     element.container = 'flat';
     await elementIsStable(element);
-    expect(buttons[0].interaction).toBe('flat');
-    expect(buttons[1].interaction).toBe('flat');
-    expect(buttons[2].interaction).toBe('flat');
+    expect(buttons[0].container).toBe('flat');
+    expect(buttons[1].container).toBe('flat');
+    expect(buttons[2].container).toBe('flat');
   });
 
   it('should sync interaction container styles', async () => {
-    element.interaction = 'emphasize';
+    element.interaction = 'emphasis';
     await elementIsStable(element);
-    expect(buttons[0].interaction).toBe('emphasize');
-    expect(buttons[1].interaction).toBe('emphasize');
-    expect(buttons[2].interaction).toBe('emphasize');
+    expect(buttons[0].interaction).toBe('emphasis');
+    expect(buttons[1].interaction).toBe('emphasis');
+    expect(buttons[2].interaction).toBe('emphasis');
   });
 
   it('should sync interaction container styles', async () => {
-    element.interaction = 'emphasize';
+    element.interaction = 'emphasis';
     await elementIsStable(element);
-    expect(buttons[0].interaction).toBe('emphasize');
-    expect(buttons[1].interaction).toBe('emphasize');
-    expect(buttons[2].interaction).toBe('emphasize');
+    expect(buttons[0].interaction).toBe('emphasis');
+    expect(buttons[1].interaction).toBe('emphasis');
+    expect(buttons[2].interaction).toBe('emphasis');
   });
 
   it('should be stateless by default', async () => {

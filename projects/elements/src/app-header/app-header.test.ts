@@ -104,10 +104,10 @@ describe('nve-app-header: nav items and actions', () => {
     fixture = await createFixture(html`
       <nve-app-header>
         <nve-button id="default-flat-btn" slot="nav-items">A</nve-button>
-        <nve-button id="override-flat-btn" interaction="emphasize" slot="nav-items">B</nve-button>
+        <nve-button id="override-flat-btn" interaction="emphasis" slot="nav-items">B</nve-button>
         <nve-icon-button id="default-icon-btn" icon-name="gear" slot="nav-items"></nve-icon-button>
         <nve-icon-button id="default-action-btn" icon-name="person" slot="nav-actions"></nve-icon-button>
-        <nve-icon-button id="override-action-btn" interaction="emphasize" slot="nav-actions">${innerIconBtnText}</nve-icon-button>
+        <nve-icon-button id="override-action-btn" interaction="emphasis" slot="nav-actions">${innerIconBtnText}</nve-icon-button>
       </nve-app-header>
     `);
     element = fixture.querySelector('nve-app-header');
@@ -120,27 +120,27 @@ describe('nve-app-header: nav items and actions', () => {
 
   it('should provide a default interaction type to actions', () => {
     const defaultFlatItem = element.querySelector<Button>('#default-flat-btn');
-    expect(defaultFlatItem.interaction).toBe('flat');
+    expect(defaultFlatItem.container).toBe('flat');
   });
 
-  it('should set emphasize buttons to size sm', async () => {
+  it('should set emphasis buttons to size sm', async () => {
     element.requestUpdate();
     await element.updateComplete;
     const navActionOverride = element.querySelector<Button>('#override-action-btn');
-    expect(navActionOverride.interaction).toBe('emphasize');
+    expect(navActionOverride.interaction).toBe('emphasis');
     expect(navActionOverride.size).toBe('sm');
   });
 
   it('should not override set interaction types', () => {
     const navItemOverride = element.querySelector<Button>('#override-flat-btn');
     const navActionOverride = element.querySelector<IconButton>('#override-action-btn');
-    expect(navItemOverride.interaction).toBe('emphasize');
-    expect(navActionOverride.interaction).toBe('emphasize');
+    expect(navItemOverride.interaction).toBe('emphasis');
+    expect(navActionOverride.interaction).toBe('emphasis');
     expect(navActionOverride.textContent).toBe(innerIconBtnText);
   });
 
-  it('should set emphasized buttons to size sm if not set', () => {
-    expect(element.querySelector<IconButton>('nve-icon-button:not([interaction="emphasize"])').size).toBe(undefined);
-    expect(element.querySelector<IconButton>('nve-icon-button[interaction="emphasize"]').size).toBe('sm');
+  it('should set emphasis buttons to size sm if not set', () => {
+    expect(element.querySelector<IconButton>('nve-icon-button:not([interaction="emphasis"])').size).toBe(undefined);
+    expect(element.querySelector<IconButton>('nve-icon-button[interaction="emphasis"]').size).toBe('sm');
   });
 });

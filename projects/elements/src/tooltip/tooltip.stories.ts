@@ -91,7 +91,7 @@ export const Hint = {
   <nve-tooltip anchor="action-btn" position="right" trigger="action-btn" hidden>Preview in progress CI tasks for the active host</nve-tooltip>
   <div nve-layout="row gap:xs align:vertical-center">
     <h2 nve-text="section">Preview</h2>
-    <nve-icon-button interaction="flat" icon-name="information-circle-stroke" id="action-btn"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="information-circle-stroke" id="action-btn"></nve-icon-button>
   </div>
   <script type="module">
     const tooltip = document.querySelector('nve-tooltip[anchor="action-btn"]');
@@ -107,7 +107,7 @@ export const HintCopy = {
 <div nve-layout="row align:center" style="height: 90vh">
   <nve-tooltip trigger="btn" anchor="btn" hidden>2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</nve-tooltip>
   <nve-toast trigger="btn" anchor="btn" close-timeout="1500" hidden status="success">copied!</nve-toast>
-  <nve-button interaction="flat" id="btn" aria-label="copy to clipboard">
+  <nve-button container="flat" id="btn" aria-label="copy to clipboard">
     <p nve-text="truncate" style="width: 120px">2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</p><nve-icon name="copy"></nve-icon>
   </nve-button>
 </div>

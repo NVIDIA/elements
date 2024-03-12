@@ -11,7 +11,7 @@ describe('nve-button', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-button interaction="emphasize">emphasize</nve-button> <!-- failing -->
+      <nve-button interaction="emphasis">emphasis</nve-button> <!-- failing -->
       <nve-button>default</nve-button>
       <nve-button interaction="destructive">destructive</nve-button>
       <nve-button disabled>disabled</nve-button>
@@ -27,7 +27,7 @@ describe('nve-button', () => {
 
   it('should pass axe check', async () => {
     const results = await runAxe(['nve-button'], {
-      rules: { 'color-contrast': { enabled: false } } // interaction emphasize fails minimum color-contrast
+      rules: { 'color-contrast': { enabled: false } } // interaction emphasis fails minimum color-contrast
     });
     expect(results.violations.length).toBe(0);
   });
