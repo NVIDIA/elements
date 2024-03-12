@@ -43,7 +43,7 @@ export const Default = {
             ${when(
               args.showAction,
               () => html`
-                <nve-icon-button slot="header-action" icon-name="more-actions" interaction="flat"></nve-icon-button>
+                <nve-icon-button slot="header-action" icon-name="more-actions" container="flat"></nve-icon-button>
               `)}
           </nve-card-header>
           `

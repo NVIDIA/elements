@@ -277,7 +277,7 @@ export const Reset = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </select>
-    <nve-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" interaction="flat"></nve-icon-button>
+    <nve-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" container="flat"></nve-icon-button>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
   <script type="module">
@@ -302,7 +302,7 @@ export const Footer = () => {
       <option value="user"></option>
       <option value="progress"></option>
     </select>
-    <nve-button slot="footer" interaction="flat">action</nve-button>
+    <nve-button slot="footer" container="flat">action</nve-button>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
   `
@@ -325,8 +325,8 @@ export const SelectAll = () => {
       <option value="progress"></option>
     </select>
     <div slot="footer" nve-layout="row align:stretch full">
-      <nve-button interaction="flat">Select All</nve-button>
-      <nve-button interaction="flat">Deselect All</nve-button>
+      <nve-button container="flat">Select All</nve-button>
+      <nve-button container="flat">Deselect All</nve-button>
     </div>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
@@ -442,7 +442,7 @@ class ProgressiveFilterDemo extends LitElement {
           ['select', () => html`<nve-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value="${v}">${v}</option>`)}</select></nve-select>`]
         ], () => html`<nve-combobox><input type="text" placeholder="value" disabled /></nve-combobox>`)}
       </nve-progressive-filter-chip>`)}
-      <nve-button interaction="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
+      <nve-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
         <nve-icon name="add"></nve-icon> Add Filter
       </nve-button>
     `;

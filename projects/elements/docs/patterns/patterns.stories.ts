@@ -196,10 +196,10 @@ export const ButtonRowFilledIcon = {
 export const ButtonRowFlatIcon = {
   render: () => html`
   <div nve-layout="row gap:xxxs">
-    <nve-icon-button interaction="flat" icon-name="double-chevron" direction="up"></nve-icon-button>
-    <nve-icon-button interaction="flat" icon-name="chevron" direction="up"></nve-icon-button>
-    <nve-icon-button interaction="flat" icon-name="chevron" direction="down"></nve-icon-button>
-    <nve-icon-button interaction="flat" icon-name="double-chevron" direction="down"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="double-chevron" direction="up"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="chevron" direction="up"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="chevron" direction="down"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="double-chevron" direction="down"></nve-icon-button>
   </div>
   `
 };
@@ -207,10 +207,10 @@ export const ButtonRowFlatIcon = {
 export const ButtonRowSmallFlatIcon = {
   render: () => html`
   <div nve-layout="row gap:xxxs">
-    <nve-icon-button interaction="flat" size="sm" icon-name="double-chevron" direction="up"></nve-icon-button>
-    <nve-icon-button interaction="flat" size="sm" icon-name="chevron" direction="up"></nve-icon-button>
-    <nve-icon-button interaction="flat" size="sm" icon-name="chevron" direction="down"></nve-icon-button>
-    <nve-icon-button interaction="flat" size="sm" icon-name="double-chevron" direction="down"></nve-icon-button>
+    <nve-icon-button container="flat" size="sm" icon-name="double-chevron" direction="up"></nve-icon-button>
+    <nve-icon-button container="flat" size="sm" icon-name="chevron" direction="up"></nve-icon-button>
+    <nve-icon-button container="flat" size="sm" icon-name="chevron" direction="down"></nve-icon-button>
+    <nve-icon-button container="flat" size="sm" icon-name="double-chevron" direction="down"></nve-icon-button>
   </div>
   `
 };
@@ -218,8 +218,8 @@ export const ButtonRowSmallFlatIcon = {
 export const ButtonRowFlatText = {
   render: () => html`
   <div nve-layout="row gap:xxxs">
-    <nve-button interaction="flat">Button CTA</nve-button>
-    <nve-button interaction="flat">Button CTA</nve-button>
+    <nve-button container="flat">Button CTA</nve-button>
+    <nve-button container="flat">Button CTA</nve-button>
   </div>
   `
 };
@@ -227,15 +227,15 @@ export const ButtonRowFlatText = {
 export const ButtonRowFlatTextWithIcon = {
   render: () => html`
   <div nve-layout="row gap:xxxs">
-    <nve-button interaction="flat">
+    <nve-button container="flat">
       <nve-icon name="gear" style="--color: var(--nve-sys-text-muted-color)"></nve-icon>
       Sync MB
     </nve-button>
-    <nve-button interaction="flat">
+    <nve-button container="flat">
       <nve-icon name="undo" style="--color: var(--nve-sys-text-muted-color)"></nve-icon>
       Revert Timestamps
     </nve-button>
-    <nve-button interaction="flat">
+    <nve-button container="flat">
       <nve-icon name="add" style="--color: var(--nve-sys-text-muted-color)"></nve-icon>
       Add Event
     </nve-button>
@@ -248,7 +248,7 @@ export const ButtonRowFilledTextWithIcon = {
   <div nve-layout="row gap:xs">
     <nve-button>Button CTA</nve-button>
     <nve-button>Button CTA</nve-button>
-    <nve-button interaction="emphasize">Button CTA</nve-button>
+    <nve-button interaction="emphasis">Button CTA</nve-button>
     <nve-icon-button icon-name="more-actions"></nve-icon-button>
   </div>
   `

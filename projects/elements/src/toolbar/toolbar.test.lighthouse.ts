@@ -5,9 +5,9 @@ describe('toolbar lighthouse report', () => {
   test('toolbar should meet lighthouse benchmarks', async () => {
     const report = await runner.getReport('nve-toolbar', /* html */`
       <nve-toolbar>
-        <nve-button interaction="flat"><nve-icon name="add"></nve-icon> create</nve-button>
-        <nve-button interaction="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
-        <nve-icon-button interaction="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+        <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
+        <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+        <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
       </nve-toolbar>
       <script type="module">
         import '@elements/elements/toolbar/define.js';
