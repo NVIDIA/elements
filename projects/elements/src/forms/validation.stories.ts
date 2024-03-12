@@ -105,7 +105,7 @@ export const ValidationReset = () => {
   <nve-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" value="test@nvidia.com" />
-    <nve-icon-button aria-label="reset" icon-name="cancel" interaction="flat" type="button"></nve-icon-button>
+    <nve-icon-button aria-label="reset" icon-name="cancel" container="flat" type="button"></nve-icon-button>
     <nve-control-message error="valueMissing">required</nve-control-message>
     <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
   </nve-input>

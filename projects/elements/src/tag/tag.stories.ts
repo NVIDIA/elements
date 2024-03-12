@@ -57,7 +57,7 @@ export const TagGroup = {
     <nve-tag>topic-tag</nve-tag>
     <nve-tag>3+</nve-tag>
 
-    <nve-icon-button interaction="flat" size="sm" icon-name="add"></nve-icon-button>
+    <nve-icon-button container="flat" size="sm" icon-name="add"></nve-icon-button>
   </div>
   `
 };

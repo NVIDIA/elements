@@ -499,7 +499,7 @@ class ElementsMetrics extends LitElement {
         })}
         <nve-grid-footer>
           <p nve-text="body muted sm">Report Created on ${reportDate}</p>
-          <nve-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'elements', bubbles: true }))} interaction="flat" style="margin-left: auto">view data</nve-button>
+          <nve-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'elements', bubbles: true }))} container="flat" style="margin-left: auto">view data</nve-button>
         </nve-grid-footer>
       </nve-grid>
       <nve-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</nve-tooltip>
@@ -702,7 +702,7 @@ class TestMetrics extends LitElement {
         `)}
         <nve-grid-footer>
           <p nve-text="body muted sm">Report Created on ${reportDate}</p>
-          <!-- <nve-button @click=${() => this.rawData = 'tests'} interaction="flat" style="margin-left: auto">view data</nve-button> -->
+          <!-- <nve-button @click=${() => this.rawData = 'tests'} container="flat" style="margin-left: auto">view data</nve-button> -->
         </nve-grid-footer>
       </nve-grid>
     </section>

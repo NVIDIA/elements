@@ -13,9 +13,9 @@ export const Actions = () => {
   return html`
 <nve-input>
   <label>label</label>
-  <nve-icon-button icon-name="search" interaction="flat" readonly></nve-icon-button>
+  <nve-icon-button icon-name="search" container="flat" readonly></nve-icon-button>
   <input type="text" />
-  <nve-icon-button icon-name="cancel" interaction="flat" aria-label="clear"></nve-icon-button>
+  <nve-icon-button icon-name="cancel" container="flat" aria-label="clear"></nve-icon-button>
   <nve-control-message>message</nve-control-message>
 </nve-input>`
 };
@@ -24,7 +24,7 @@ export const LabelAction = () => {
   return html`
 <nve-input>
   <label>label</label>
-  <nve-icon-button icon-name="information-circle-stroke" interaction="flat" aria-label="more details" slot="label"></nve-icon-button>
+  <nve-icon-button icon-name="information-circle-stroke" container="flat" aria-label="more details" slot="label"></nve-icon-button>
   <input type="text" />
   <nve-control-message>message</nve-control-message>
 </nve-input>`
@@ -34,9 +34,9 @@ export const PrefixSuffix = () => {
   return html`
 <nve-input>
   <label>label</label>
-  <nve-button interaction="flat" readonly>https://</nve-button>
+  <nve-button container="flat" readonly>https://</nve-button>
   <input type="text" />
-  <nve-button interaction="flat" readonly>.com</nve-button>
+  <nve-button container="flat" readonly>.com</nve-button>
   <nve-control-message>message</nve-control-message>
 </nve-input>`
 }

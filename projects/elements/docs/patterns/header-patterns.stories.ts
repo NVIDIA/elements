@@ -30,7 +30,7 @@ export const StandardHeaderMainPage = {
           <!-- Action Buttons -->
           <section nve-layout="row gap:sm align:vertical-center">
             <nve-button>Default</nve-button>
-            <nve-button interaction="emphasize">Emphasized</nve-button>
+            <nve-button interaction="emphasis">Emphasis</nve-button>
             <nve-icon-button icon-name="more-actions"></nve-icon-button>
           </section>
         </div>
@@ -55,7 +55,7 @@ export const TabsHeaderMainPage = {
           <!-- Action Buttons -->
           <div nve-layout="row gap:sm align:vertical-center">
             <nve-button>Default</nve-button>
-            <nve-button interaction="emphasize">Emphasized</nve-button>
+            <nve-button interaction="emphasis">Emphasis</nve-button>
             <nve-icon-button icon-name="more-actions"></nve-icon-button>
           </div>
         </div>
@@ -88,7 +88,7 @@ export const StackedMetadataHeaderMainPage = {
           <!-- Action Buttons -->
           <section nve-layout="row gap:sm align:vertical-center">
             <nve-button>Default</nve-button>
-            <nve-button interaction="emphasize">Emphasized</nve-button>
+            <nve-button interaction="emphasis">Emphasis</nve-button>
             <nve-icon-button icon-name="more-actions"></nve-icon-button>
           </section>
         </div>
@@ -164,7 +164,7 @@ export const InlineMetadataHeaderMainPage = {
             <!-- Action Buttons -->
             <section nve-layout="row gap:sm align:vertical-center">
               <nve-button>Default</nve-button>
-              <nve-button interaction="emphasize">Emphasized</nve-button>
+              <nve-button interaction="emphasis">Emphasis</nve-button>
               <nve-icon-button icon-name="more-actions"></nve-icon-button>
             </section>
           </div>
@@ -656,9 +656,9 @@ export const StandardHeaderToolbarPage = {
             </nve-button-group>
           </div>
           <div nve-layout="row gap:sm">
-            <nve-button interaction="flat">Edit</nve-button>
-            <nve-button interaction="flat">History</nve-button>
-            <nve-button interaction="flat">Docs</nve-button>
+            <nve-button container="flat">Edit</nve-button>
+            <nve-button container="flat">History</nve-button>
+            <nve-button container="flat">Docs</nve-button>
           </div>
         </section>
 
