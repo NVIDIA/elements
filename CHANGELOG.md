@@ -1,3 +1,10 @@
+## [0.26.5](https://github.com/NVIDIA/elements/compare/v0.26.4...v0.26.5) (2024-03-13)
+
+
+### Bug Fixes
+
+* **elements:** button api alignments ([87c2497](https://github.com/NVIDIA/elements/commit/87c24972ce5edb7dd0ff6015323c7b144e152072))
+
 ## [0.26.4](https://github.com/NVIDIA/elements/compare/v0.26.3...v0.26.4) (2024-03-07)
 
 
