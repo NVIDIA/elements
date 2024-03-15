@@ -106,6 +106,7 @@ export class Grid extends LitElement implements ContainerElement {
     validateSlots(this);
   }
 
+  /* eslint no-dupe-class-members: 0 */
   scrollTo(x: number, y: number): void;
   scrollTo(options?: ScrollToOptions): void;
   scrollTo(...args): void {

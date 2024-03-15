@@ -1,6 +1,6 @@
 import { html, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { ifDefined } from 'lit-html/directives/if-defined.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import {
   ContainerElement,
   createLightDismiss,
@@ -146,9 +146,9 @@ export class Combobox extends Control implements ContainerElement {
     this.#setupAutoCompleteKeyEvents();
     this.#setupMenuItemUpdateEvents();
     this.#setupOpenKeyEvents();
-    this.#setupLightDismiss();
     this.#setupOverflowListener();
     this.#setupSlotStates();
+    await this.#setupLightDismiss();
   }
 
   disconnectedCallback() {

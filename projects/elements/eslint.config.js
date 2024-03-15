@@ -7,7 +7,7 @@ import importPlugin from 'eslint-plugin-import';
 import wc from 'eslint-plugin-wc';
 import rulesdir from 'eslint-plugin-rulesdir';
 
-rulesdir.RULES_DIR = '../../../build/eslint';
+rulesdir.RULES_DIR = '../../build/eslint';
 
 const source = ['**/src/**/*.ts', '**/src/**/*.d.ts'];
 const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts'];
@@ -115,6 +115,18 @@ export default [
         { name: 'window', message: 'Use globalThis instead.' },
         { name: 'location', message: 'Use globalThis.location instead.' },
         { name: 'document', message: 'Use globalThis.document instead.' }
+      ],
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@elements/elements/**/*.css', '@elements/elements/**/*.css?inline'],
+              message:
+                'inline CSS utils are not allowed in library APIs to prevent performance issues, use shadow DOM encapsulated CSS instead'
+            }
+          ]
+        }
       ]
     }
   }
