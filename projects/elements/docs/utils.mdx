@@ -1,7 +1,0 @@
-import metrics from 'build/metadata.json';
-
-export const statusBadges = (tag) => {
-  import('./metrics.stories');
-  const status = metrics.elements.find((d) => d.name === tag).status;
-  return status === 'pre-release' ? ['alpha'] : [status];
-};

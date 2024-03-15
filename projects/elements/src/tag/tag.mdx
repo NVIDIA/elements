@@ -1,0 +1,58 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Default, Color, Prominence, Closable, TagGroup, Readonly, Overflow } from './tag.stories';
+
+<Meta title="Elements/Tag/Documentation" />
+
+# Tag
+
+<element-metrics tag="nve-tag"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/tag/define.js';
+```
+
+```html
+<nve-tag></nve-tag>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Color
+
+<element-api tag="nve-tag" type="property" value="color"></element-api>
+
+<Canvas of={Color} />
+
+## Emphasis
+
+<element-api tag="nve-tag" type="property" value="prominence"></element-api>
+
+<Canvas of={Prominence} />
+
+## Closable
+
+<element-api tag="nve-tag" type="property" value="closable"></element-api>
+
+<Canvas of={Closable} />
+
+## Readonly
+
+<element-api tag="nve-tag" type="property" value="readonly"></element-api>
+
+<Canvas of={Readonly} />
+
+## Tag Group
+
+<Canvas of={TagGroup} />
+
+## Overflow
+
+<Canvas of={Overflow} />
+
+<element-status tag="nve-tag"></element-status>
+
+<element-api tag="nve-tag"></element-api>

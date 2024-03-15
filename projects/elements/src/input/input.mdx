@@ -1,0 +1,61 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Input, Vertical, Horizontal, Rounded, Flat, FitContent, FitText } from './input.stories';
+
+<Meta title="Elements/Input/Documentation" />
+
+# Input
+
+<element-metrics tag="nve-input"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/input/define.js';
+```
+
+```html
+<nve-input>
+  <label>label</label>
+  <input type="text" />
+</nve-input>
+```
+
+## Standard
+
+<Canvas of={Input} />
+
+## Layout
+
+<element-api tag="nve-input" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+## Rounded
+
+<Canvas of={Rounded} />
+
+## Flat
+
+<Canvas of={Flat} />
+
+## Fit Content
+
+<element-api tag="nve-input" type="property" value="fitContent"></element-api>
+
+<Canvas of={FitContent} />
+
+## Fit Text
+
+<element-api tag="nve-input" type="property" value="fitText"></element-api>
+
+<Canvas of={FitText} />
+
+<element-status tag="nve-input"></element-status>
+
+<element-api tag="nve-input"></element-api>
