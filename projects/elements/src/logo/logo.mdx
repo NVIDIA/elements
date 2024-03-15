@@ -1,0 +1,38 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Default, Size, Color } from './logo.stories';
+
+<Meta title="Elements/Logo/Documentation" />
+
+# Logo
+
+<element-metrics tag="nve-logo"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/logo/define.js';
+```
+
+```html
+<nve-logo></nve-logo>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Size
+
+<element-api tag="nve-logo" type="property" value="size"></element-api>
+
+<Canvas of={Size} />
+
+## Color
+
+<element-api tag="nve-logo" type="property" value="color"></element-api>
+
+<Canvas of={Color} />
+
+<element-status tag="nve-logo"></element-status>
+
+<element-api tag="nve-logo"></element-api>

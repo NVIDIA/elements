@@ -1,0 +1,45 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Month, Datalist, Vertical, Horizontal } from './month.stories';
+
+<Meta title="Elements/Month/Documentation"  />
+
+# Month
+
+<element-metrics tag="nve-month"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/month/define.js';
+```
+
+```html
+<nve-month>
+  <label>label</label>
+  <input type="month" />
+</nve-month>
+```
+
+## Standard
+
+<Canvas of={Month} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="nve-month" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="nve-month"></element-status>
+
+<element-api tag="nve-month"></element-api>

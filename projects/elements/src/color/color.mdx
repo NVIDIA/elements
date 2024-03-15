@@ -1,0 +1,45 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Color, Datalist, Vertical, Horizontal } from './color.stories';
+
+<Meta title="Elements/Color/Documentation" />
+
+# Color
+
+<element-metrics tag="nve-color"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/color/define.js';
+```
+
+```html
+<nve-color>
+  <label>label</label>
+  <input type="color" />
+</nve-color>
+```
+
+## Standard
+
+<Canvas of={Color} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="nve-color" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="nve-color"></element-status>
+
+<element-api tag="nve-color"></element-api>

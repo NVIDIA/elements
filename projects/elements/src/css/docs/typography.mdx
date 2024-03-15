@@ -1,0 +1,78 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import '@elements/elements/button/define.js';
+import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, Headings, Size, LeadingTrim } from './typography.stories';
+import { Text } from '../../../tokens/docs/tokens.stories';
+
+<Meta title="Foundations/Typography/Documentation" />
+
+# Typography
+
+The Typography utilities provides a flexible API to apply typography styles explicitly to elements.
+This enables full control of the visual styling of an element separate from the HTML semantics.
+
+```html
+<p nve-text="display">display</p>
+<p nve-text="heading">heading</p>
+<p nve-text="body">body</p>
+<p nve-text="label">label</p>
+<p nve-text="code">cmd+c</p>
+```
+
+## Framework Integrations
+
+Some frameworks and libraries may require additional configuration to use the `nve-text` attribute. See the links below for specific integration patterns for the following frameworks:
+
+<nve-button>
+  <a href="?path=/docs/integrations-lit--docs#forms"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit Integration</a>
+</nve-button>
+
+## Types
+
+<Canvas of={Type} />
+
+## Colors
+
+<Canvas of={Color} />
+
+## Weights
+
+<Canvas of={Weights} />
+
+## Transforms
+
+<Canvas of={Transforms} />
+
+## Link
+
+<Canvas of={Link} />
+
+## List
+
+<Canvas of={List} />
+
+## Ordered List
+
+<Canvas of={OrderedList} />
+
+## Unstyled List
+
+<Canvas of={UnstyledList} />
+
+## Headings
+
+<Canvas of={Headings} />
+
+## Size
+
+<Canvas of={Size} />
+
+## Leading Trim
+
+By default all `nve-text` attributes use [leading-trim](https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202) to remove excesss whitespace between lines. This provides a more precise layout.
+Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavior it may be necessary to disable this behavior. This can be done by applying `nve-text="trim:none"`.
+
+<Canvas of={LeadingTrim} />
+
+## Tokens
+
+<Canvas of={Text} />
