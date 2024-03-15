@@ -1,5 +1,4 @@
 import type { CSSResult } from 'lit';
-import { property } from 'lit/decorators/property.js';
 import { useStyles, appendRootNodeStyle } from '@elements/elements/internal';
 import { ControlGroup } from '@elements/elements/forms';
 import globalStyles from './input-group.global.css?inline';
