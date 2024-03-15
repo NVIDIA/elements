@@ -1,0 +1,45 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Week, Datalist, Vertical, Horizontal } from './week.stories';
+
+<Meta title="Elements/Week/Documentation" />
+
+# Week
+
+<element-metrics tag="nve-week"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/week/define.js';
+```
+
+```html
+<nve-week>
+  <label>label</label>
+  <input type="week" />
+</nve-week>
+```
+
+## Standard
+
+<Canvas of={Week} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="nve-week" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="nve-week"></element-status>
+
+<element-api tag="nve-week"></element-api>

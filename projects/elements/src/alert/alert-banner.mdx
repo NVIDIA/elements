@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Status } from './alert-banner.stories';
+import '@elements/elements/alert/define.js';
+
+<Meta title="Deprecated/Alert Banner/Documentation" />
+
+# Alert Banner
+
+<nve-alert-group status="warning">
+  <nve-alert>Deprecated: use <code>nve-alert-group</code></nve-alert>
+</nve-alert-group>
+
+## Installation
+
+```typescript
+import '@elements/elements/alert/define.js';
+```
+
+```html
+<nve-alert-banner status="success">
+  <nve-alert>success message</nve-alert>
+  <nve-alert>success message</nve-alert>
+</nve-alert-banner>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Status
+
+<element-api tag="nve-alert-group" type="property" value="status"></element-api>
+
+<Canvas of={Status} />
+
+<element-status tag="nve-alert-banner"></element-status>
+
+<element-api tag="nve-alert-banner"></element-api>
+
+<element-api tag="nve-alert"></element-api>

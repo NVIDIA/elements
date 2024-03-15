@@ -1,0 +1,57 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Interactive, Content, Closable, RadioGroupInteractive, RadioGroup, CheckboxGroupInteractive, CheckboxGroup, Arrow, Position, BehaviorTrigger } from './dropdown.stories';
+
+<Meta title="Elements/Dropdown/Documentation" />
+
+# Dropdown
+
+<element-metrics tag="nve-dropdown"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/dropdown/define.js';
+```
+
+```html
+<nve-dropdown anchor="btn">hello there</nve-dropdown>
+<nve-button id="btn">button</nve-button>
+```
+
+## Standard
+
+<Canvas of={Interactive} story={{ inline: false, height: '400px' }} />
+<Canvas of={Default} story={{ inline: false, height: '400px' }} />
+
+## Content/Closable
+
+<Canvas of={Content} story={{ inline: false, height: '400px' }} />
+<Canvas of={Closable} story={{ inline: false, height: '400px' }} />
+
+## Radio Group Pattern
+
+<Canvas of={RadioGroupInteractive} story={{ inline: false, height: '400px' }} />
+<Canvas of={RadioGroup} story={{ inline: false, height: '400px' }} />
+
+## Checkbox Group Pattern
+
+<Canvas of={CheckboxGroupInteractive} story={{ inline: false, height: '400px' }} />
+<Canvas of={CheckboxGroup} story={{ inline: false, height: '400px' }} />
+
+## Arrow
+
+<Canvas of={Arrow} story={{ inline: false, height: '400px' }} />
+
+## Position
+
+<Canvas of={Position} story={{ inline: false, height: '600px' }} />
+
+## Behavior Trigger
+
+<element-api tag="nve-dropdown" type="property" value="behaviorTrigger"></element-api>
+
+<Canvas of={BehaviorTrigger} story={{ inline: false, height: '600px' }} />
+
+<element-status tag="nve-dropdown"></element-status>
+
+<element-api tag="nve-dropdown"></element-api>

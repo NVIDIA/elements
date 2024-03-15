@@ -1,0 +1,30 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Default, Interactive } from './page-loader.stories';
+
+<Meta title="Elements/Page Loader/Documentation" />
+
+# Page Loader
+
+<element-metrics tag="nve-page-loader"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/page-loader/define.js';
+```
+
+```html
+<nve-page-loader></nve-page-loader>
+```
+
+## Standard
+
+<Canvas of={Default} story={{ inline: false, height: '400px' }} />
+
+## Interactive
+
+<Canvas of={Interactive} story={{ inline: false, height: '400px' }} />
+
+<element-status tag="nve-page-loader"></element-status>
+
+<element-api tag="nve-page-loader"></element-api>

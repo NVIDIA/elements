@@ -1,32 +1,41 @@
-const path = require('path');
-const { mergeConfig } = require('vite');
+import * as path from 'path';
+import { mergeConfig } from 'vite';
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
-
-// https://storybook.js.org/docs/react/faq#how-do-i-fix-module-resolution-while-using-pnpm-plug-n-play
-const wrapForPnp = (packageName) => path.dirname(require.resolve(path.join(packageName, 'package.json')));
 
 export default {
   staticDirs: ['../.storybook/assets'],
   stories: [
-    '../docs/**/*.stories.mdx',
+    '../docs/**/*.mdx',
     '../docs/**/*.stories.ts',
-    '../src/**/*.stories.mdx',
+    '../src/**/*.mdx',
     '../src/**/*.stories.ts',
-    '../src/**/*.stories.tsx',
-    '../tokens/**/*.stories.mdx',
+    '../tokens/**/*.mdx',
     '../tokens/**/*.stories.ts'
   ],
-  addons: [wrapForPnp('@storybook/addon-links'), wrapForPnp('@storybook/addon-essentials')],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-mdx-gfm'
+  ],
   framework: {
-    name: wrapForPnp('@storybook/web-components-vite')
+    name: '@storybook/web-components-vite',
+    options: {}
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      assetsInclude: ['/sb-preview/runtime.js'],
       server: {
         watch: {
-          ignored: [resolve('node_modules/**'), resolve('.playwright/**'), resolve('.lighthouse/**'), resolve('build/**'), resolve('.wireit/**'), resolve('coverage/**'), resolve('dist-storybook/**'), `!${resolve('dist/**')}`],
+          ignored: [
+            resolve('node_modules/**'),
+            resolve('.playwright/**'),
+            resolve('.lighthouse/**'),
+            resolve('.wireit/**'),
+            resolve('build/**'),
+            resolve('coverage/**'),
+            resolve('dist-storybook/**'),
+            `!${resolve('dist/**')}`
+          ],
         },
       },
       build: {

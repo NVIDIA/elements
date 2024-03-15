@@ -1,0 +1,49 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Range, Datalist, Step, Vertical, Horizontal } from './range.stories';
+
+<Meta title="Elements/Range/Documentation" />
+
+# Range
+
+<element-metrics tag="nve-range"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/range/define.js';
+```
+
+```html
+<nve-range>
+  <label>label</label>
+  <input type="range" />
+</nve-range>
+```
+
+## Standard
+
+<Canvas of={Range} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Step
+
+<Canvas of={Step} />
+
+## Layout
+
+<element-api tag="nve-range" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="nve-range"></element-status>
+
+<element-api tag="nve-range"></element-api>

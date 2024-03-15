@@ -1,0 +1,45 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Datetime, Datalist, Horizontal, Vertical } from './datetime.stories';
+
+<Meta title="Elements/Datetime/Documentation" />
+
+# Datetime
+
+<element-metrics tag="nve-datetime"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/datetime/define.js';
+```
+
+```html
+<nve-datetime>
+  <label>label</label>
+  <input type="datetime-local" />
+</nve-datetime>
+```
+
+## Standard
+
+<Canvas of={Datetime} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="nve-datetime" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="nve-datetime"></element-status>
+
+<element-api tag="nve-datetime"></element-api>

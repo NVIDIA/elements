@@ -1,0 +1,37 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Pagination } from './grid.stories';
+
+<Meta title="Elements/Data Grid/Pagination" />
+
+# Data Grid Pagination
+
+<element-metrics tag="nve-grid"></element-metrics>
+
+The pagination pattern should be used when working with large data sets that need to be
+incrementally loaded or filtered for performance or usablity.
+
+```html
+<nve-grid>
+  ...
+
+  <nve-grid-footer>
+    <nve-pagination value="1" items="100" step="10"></nve-pagination>
+  </nve-grid-footer>
+</nve-grid>
+```
+
+## Pagination
+
+<Canvas of={Pagination} />
+
+<element-status tag="nve-grid"></element-status>
+
+<element-api tag="nve-grid"></element-api>
+
+<element-api tag="nve-grid-header"></element-api>
+
+<element-api tag="nve-grid-column"></element-api>
+
+<element-api tag="nve-grid-row"></element-api>
+
+<element-api tag="nve-grid-cell"></element-api>
