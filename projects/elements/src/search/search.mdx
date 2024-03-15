@@ -1,0 +1,49 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Search, Inline, Datalist, Vertical, Horizontal } from './search.stories';
+
+<Meta title="Elements/Search/Documentation" />
+
+# Search
+
+<element-metrics tag="nve-search"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/search/define.js';
+```
+
+```html
+<nve-search>
+  <label>label</label>
+  <input type="search" />
+</nve-search>
+```
+
+## Standard
+
+<Canvas of={Search} />
+
+## Inline
+
+<Canvas of={Inline} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="nve-search" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="nve-search"></element-status>
+
+<element-api tag="nve-search"></element-api>

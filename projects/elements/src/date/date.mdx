@@ -1,0 +1,49 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Date, Datalist, Vertical, Horizontal, FitText } from './date.stories';
+
+<Meta title="Elements/Date/Documentation" />
+
+# Date
+
+<element-metrics tag="nve-date"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/date/define.js';
+```
+
+```html
+<nve-date>
+  <label>label</label>
+  <input type="date" />
+</nve-date>
+```
+
+## Standard
+
+<Canvas of={Date} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="nve-date" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+## Fit Text
+
+<Canvas of={FitText} />
+
+<element-status tag="nve-date"></element-status>
+
+<element-api tag="nve-date"></element-api>

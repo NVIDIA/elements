@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Checkbox, VerticalGroup, VerticalInlineGroup, HorizontalGroup, HorizontalInlineGroup } from './checkbox.stories';
+
+<Meta title="Elements/Checkbox/Documentation" />
+
+# Checkbox
+
+<element-metrics tag="nve-checkbox"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/checkbox/define.js';
+```
+
+```html
+<nve-checkbox>
+  <label>label</label>
+  <input type="checkbox" />
+</nve-checkbox>
+```
+
+## Standard
+
+<Canvas of={Checkbox} />
+
+## Layout
+
+<element-api tag="nve-checkbox-group" type="property" value="layout"></element-api>
+
+### Vertical Group
+
+<Canvas of={VerticalGroup} />
+
+### Vertical Inline Group
+
+<Canvas of={VerticalInlineGroup} />
+
+### Horizontal Group
+
+<Canvas of={HorizontalGroup} />
+
+### Horizontal Inline Group
+
+<Canvas of={HorizontalInlineGroup} />
+
+<element-status tag="nve-checkbox"></element-status>
+
+<element-api tag="nve-checkbox"></element-api>
+
+<element-api tag="nve-checkbox-group"></element-api>

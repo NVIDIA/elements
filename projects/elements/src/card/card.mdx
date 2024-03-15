@@ -1,0 +1,98 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, MediaCard, CardWithHeader, CardWithHeaderAndAction, Tabs, DescriptionList, CardWithHeaderAndFooter, CardWithMultipleContentsAndDivider, CardWithContentLayout, ContainerFill } from './card.stories';
+
+<Meta title="Elements/Card/Documentation" />
+
+# Card
+
+<element-metrics tag="nve-card"></element-metrics>
+
+Card is composed of a `nve-card` container element and several sub-components with default styling.
+The following sub-components can be used within `nve-card` to achieve standard card layouts:
+
+- `nve-card-header`
+- `nve-card-content`
+- `nve-card-footer`
+
+Content slotted directly under `nve-card` is supported for full flexibility of content.
+
+## Installation
+
+```typescript
+import '@elements/elements/card/define.js';
+```
+
+```html
+<nve-card>
+  <nve-card-content>
+    Card Content
+  </nve-card-content>
+</nve-card>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Media Card
+
+<Canvas of={MediaCard} />
+
+## Card with Header
+
+<Canvas of={CardWithHeader} />
+
+## Card with Header and Action
+
+<Canvas of={CardWithHeaderAndAction} />
+
+## Card with Header Tabs
+
+<Canvas of={Tabs} />
+
+## Card Description List
+
+<Canvas of={DescriptionList} />
+
+## Card with Header and Footer
+
+Combining `nve-card-header`, `nve-card-content` & `nve-card-footer` will yield a fully styled card.
+Note how `nve-card-content` will vertically stretch to fill the card size and the footer will align
+to the bottom of the card.
+
+<Canvas of={CardWithHeaderAndFooter} />
+
+## Card With Multiple Content Containers and Full-bleed Divider
+
+<Canvas of={CardWithMultipleContentsAndDivider} />
+
+## Card with Content Layout
+
+Layout system is supported when <a href="./?path=/docs/layout-getting-started--docs">nve-layout</a> attribute
+is used on the `nve-card-content` element:
+
+```html
+<nve-card>
+  <nve-card-content nve-layout="row align:space-around">
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
+  </nve-card-content>
+</nve-card>
+```
+
+<Canvas of={CardWithContentLayout} />
+
+## Container Fill
+
+<Canvas of={ContainerFill} />
+
+<element-status tag="nve-card"></element-status>
+
+<element-api tag="nve-card"></element-api>
+
+<element-api tag="nve-card-header"></element-api>
+
+<element-api tag="nve-card-content"></element-api>
+
+<element-api tag="nve-card-footer"></element-api>

@@ -1,0 +1,68 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Status, StatusFlat, StatusIcon, Color, Flat, Prominence, Overflow } from './badge.stories';
+
+<Meta title="Elements/Badge/Documentation" />
+
+# Badge
+
+<element-metrics tag="nve-badge"></element-metrics>
+
+<nve-alert>For interactive elements use the <a href="./?path=/docs/elements-tag-documentation--docs">tag element</a></nve-alert>
+
+## Installation
+
+```typescript
+import '@elements/elements/badge/define.js';
+```
+
+```html
+<nve-badge status="starting"></nve-badge>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Status
+
+<element-api tag="nve-badge" type="property" value="status"></element-api>
+
+<Canvas of={Status} />
+
+### Flat
+
+<element-api tag="nve-badge" type="property" value="container"></element-api>
+
+<Canvas of={StatusFlat} />
+
+### Icon
+
+<element-api tag="nve-badge" type="property" value="container"></element-api>
+
+<Canvas of={StatusIcon} />
+
+## Color
+
+<element-api tag="nve-badge" type="property" value="color"></element-api>
+
+<Canvas of={Color} />
+
+### Flat
+
+<element-api tag="nve-badge" type="property" value="container"></element-api>
+
+<Canvas of={Flat} />
+
+### Emphasis
+
+<element-api tag="nve-badge" type="property" value="prominence"></element-api>
+
+<Canvas of={Prominence} />
+
+## Overflow
+
+<Canvas of={Overflow} />
+
+<element-status tag="nve-badge"></element-status>
+
+<element-api tag="nve-badge"></element-api>

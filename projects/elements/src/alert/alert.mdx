@@ -1,0 +1,32 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Status } from './alert.stories';
+
+<Meta title="Elements/Alert/Documentation" />
+
+# Alert
+
+<element-metrics tag="nve-alert"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/alert/define.js';
+```
+
+```html
+<nve-alert status="success">success message</nve-alert>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Status
+
+<element-api tag="nve-alert" type="property" value="status"></element-api>
+
+<Canvas of={Status} />
+
+<element-status tag="nve-alert"></element-status>
+
+<element-api tag="nve-alert"></element-api>

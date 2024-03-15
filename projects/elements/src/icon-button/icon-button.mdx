@@ -1,0 +1,64 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Interactions, FlatInteractions, PressedToggle, SelectedFlat, Link, CustomIcon, Themes, Size } from './icon-button.stories';
+
+<Meta title="Elements/Icon Button/Documentation" />
+
+# Icon Button
+
+<element-metrics tag="nve-icon-button"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/icon-button/define.js';
+```
+
+```html
+<nve-icon-button icon-name="person"></nve-icon-button>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Interactions
+
+<Canvas of={Interactions} />
+
+## Flat Interactions
+
+<Canvas of={FlatInteractions} />
+
+## Pressed/Toggle
+
+[aria-pressed documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed)
+
+<Canvas of={PressedToggle} />
+
+## Flat Selected
+
+[aria-selected documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected)
+
+<Canvas of={SelectedFlat} />
+
+## Link
+
+<Canvas of={Link} />
+
+## Custom Icon
+
+<Canvas of={CustomIcon} />
+
+## Themes
+
+<Canvas of={Themes} />
+
+## Size
+
+<Canvas of={Size} />
+
+# Element API
+
+<element-status tag="nve-icon-button"></element-status>
+
+<element-api tag="nve-icon-button"></element-api>

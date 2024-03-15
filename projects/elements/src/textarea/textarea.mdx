@@ -1,0 +1,45 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Textarea, Vertical, Horizontal, ColumnsAndRows } from './textarea.stories';
+
+<Meta title="Elements/Textarea/Documentation" />
+
+# Textarea
+
+<element-metrics tag="nve-textarea"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/textarea/define.js';
+```
+
+```html
+<nve-textarea>
+  <label>label</label>
+  <textarea></textarea>
+</nve-textarea>
+```
+
+## Standard
+
+<Canvas of={Textarea} />
+
+## Layout
+
+<element-api tag="nve-textarea" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+### Columns and Rows
+
+<Canvas of={ColumnsAndRows} />
+
+<element-status tag="nve-textarea"></element-status>
+
+<element-api tag="nve-textarea"></element-api>
