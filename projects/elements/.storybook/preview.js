@@ -5,11 +5,10 @@ import styles from '@elements/elements/index.css?inline';
 import font from '@elements/elements/inter.css?inline';
 import brand from '@elements/elements/css/theme.brand.css?inline';
 import responsiveStyles from '@elements/elements/css/module.responsive.css?inline';
-import { VERSION } from '@elements/elements';
 import { playground } from './playground-url.js';
 import { H1, H2, H3, P } from './markdown.jsx';
-import '@elements/elements/polyfills';
 import '@elements/elements/button/define.js';
+import '../docs/metrics.stories';
 
 import format from 'html-format';
 // const prettier = await import('prettier/esm/standalone.mjs');
@@ -37,57 +36,21 @@ export const parameters = {
       p: P
     },
     theme: themes.dark,
-    transformSource: (src, context) => {
-      const excludes = context.id.includes('foundations-tokens-examples--');
-      let source = src
-        .trim()
-        .replace(/<mlv-button class="playground-btn">.*<\/mlv-button>/g, '');
-
-      const lines = source.split('\n').filter(i => i.length ? i.trim().length : false);
-      source = lines[0]?.trim() === '<div>' ? lines.slice(1, -1).join('\n') : source;
-
-      // prettier 3.0 is async and Storybook decorators cannot be async, temporary workaround using html-format package https://github.com/storybookjs/storybook/issues/10467
-      // return excludes ? source : (await prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 })).replaceAll('=""', '');
-      return excludes ? source : format(source.replaceAll('=""', ''), ' '.repeat(2), 120);
+    source: {
+      transform: (src, context) => {
+        const excludes = context.id.includes('foundations-tokens-examples--');
+        let source = src
+          .trim()
+          .replace(/<mlv-button class="playground-btn" size="sm">.*<\/mlv-button>/g, '');
+  
+        const lines = source.split('\n').filter(i => i.length ? i.trim().length : false);
+        source = lines[0]?.trim() === '<div>' ? lines.slice(1, -1).join('\n') : source;
+  
+        // prettier 3.0 is async and Storybook decorators cannot be async, temporary workaround using html-format package https://github.com/storybookjs/storybook/issues/10467
+        // return excludes ? source : (await prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 })).replaceAll('=""', '');
+        return excludes ? source : format(source.replaceAll('=""', ''), ' '.repeat(2), 120);
+      }
     }
-  },
-  badgesConfig: {
-    alpha: {
-      styles: {
-        backgroundColor: 'var(--mlv-sys-support-warning-muted-color)',
-        borderColor: 'var(--mlv-sys-support-warning-muted-color)',
-        color: 'var(--mlv-sys-support-warning-emphasis-color)',
-      },
-      title: `Pre-Release ${VERSION}`,
-      tooltip: {
-        title: 'Pre-Release 🚧',
-        desc: 'This element or utility is in under pre-release as a work in progress. Breaking API and visual changes may occur during the engineering and UI design review process.',
-      }
-    },
-    beta: {
-      styles: {
-        backgroundColor: 'var(--mlv-sys-support-accent-muted-color)',
-        borderColor: 'var(--mlv-sys-support-accent-muted-color)',
-        color: 'var(--mlv-sys-support-accent-emphasis-color)',
-      },
-      title: `Beta ${VERSION}`,
-      tooltip: {
-        title: 'Beta 🛠️',
-        desc: 'This element or utility is in beta and available for use. The APIs and visual design are stable but in may change as we seek additional feedback.',
-      }
-    },
-    stable: {
-      styles: {
-        backgroundColor: 'var(--mlv-sys-support-success-muted-color)',
-        borderColor: 'var(--mlv-sys-support-success-muted-color)',
-        color: 'var(--mlv-sys-support-success-emphasis-color)',
-      },
-      title: `Stable ${VERSION}`,
-      tooltip: {
-        title: 'Stable ✅',
-        desc: 'This element or utility is Stable and ready for use.',
-      }
-    },
   },
   darkMode: {
     stylePreview: true,
@@ -379,31 +342,12 @@ const parentStyle = document.createElement('style');
 parentStyle.innerText = styles + font + brand + responsiveStyles;
 window.parent.document.head.appendChild(parentStyle);
 
-updateTheme('dark');
-
-function updateTheme(themes) {
-  const preview = window.parent.document.querySelector('#storybook-preview-wrapper');
-  const manager = window.parent.document.querySelector('html');
-  const story = document.querySelector('html');
-
-  manager.setAttribute('mlv-theme', themes);
-
-  if (preview) {
-    story.setAttribute('mlv-theme', themes);
-    Array.from(document.querySelectorAll('iframe')).forEach(i => i.contentWindow.document.querySelector('html').setAttribute('mlv-theme', themes));
-  } else {
-    const nestedStories = Array.from(window.parent.document.querySelectorAll('iframe')).map(i => i.contentWindow.document.querySelector('html'));
-    nestedStories.forEach(i => i.setAttribute('mlv-theme', manager.getAttribute('mlv-theme')));
-  }
-}
-
 const dataTheme = (story, { globals }) => {
   localStorage.setItem('mlv-data-theme', globals.dataTheme);
   const fn = (...args) => story(args);
   return fn();
 };
 
-export const decorators = [(story, { globals }) => {
-  updateTheme([globals.theme, globals.scale, globals.debug, globals.animation, globals.experimental].filter(i => i !== '').join(' '));
+export const decorators = [(story) => {
   return story();
 }, dataTheme, playground];

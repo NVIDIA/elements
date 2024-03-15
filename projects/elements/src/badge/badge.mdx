@@ -1,0 +1,68 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Status, StatusFlat, StatusIcon, Color, Flat, Prominence, Overflow } from './badge.stories';
+
+<Meta title="Elements/Badge/Documentation" />
+
+# Badge
+
+<element-metrics tag="mlv-badge"></element-metrics>
+
+<mlv-alert>For interactive elements use the <a href="./?path=/docs/elements-tag-documentation--docs">tag element</a></mlv-alert>
+
+## Installation
+
+```typescript
+import '@elements/elements/badge/define.js';
+```
+
+```html
+<mlv-badge status="starting"></mlv-badge>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Status
+
+<element-api tag="mlv-badge" type="property" value="status"></element-api>
+
+<Canvas of={Status} />
+
+### Flat
+
+<element-api tag="mlv-badge" type="property" value="container"></element-api>
+
+<Canvas of={StatusFlat} />
+
+### Icon
+
+<element-api tag="mlv-badge" type="property" value="container"></element-api>
+
+<Canvas of={StatusIcon} />
+
+## Color
+
+<element-api tag="mlv-badge" type="property" value="color"></element-api>
+
+<Canvas of={Color} />
+
+### Flat
+
+<element-api tag="mlv-badge" type="property" value="container"></element-api>
+
+<Canvas of={Flat} />
+
+### Emphasis
+
+<element-api tag="mlv-badge" type="property" value="prominence"></element-api>
+
+<Canvas of={Prominence} />
+
+## Overflow
+
+<Canvas of={Overflow} />
+
+<element-status tag="mlv-badge"></element-status>
+
+<element-api tag="mlv-badge"></element-api>

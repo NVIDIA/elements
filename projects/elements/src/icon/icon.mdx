@@ -1,0 +1,73 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, PreviewAllIcons, Statuses, Size, Direction, Themes, Registration, Alias, Source } from './icon.stories';
+
+<Meta title="Elements/Icon/Documentation" />
+
+# Icon
+
+<element-metrics tag="mlv-icon"></element-metrics>
+
+The Iconography system is based on exposing an SVG based icon library to a the `<mlv-icon>` element.
+See the searchable [Interactive Icon Catalog](./?path=/docs/foundations-iconography-documentation--docs)
+
+## Installation
+
+```typescript
+import '@elements/elements/icon/define.js';
+```
+
+```html
+<mlv-icon name="person"></mlv-icon>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## All Icons
+
+<Canvas of={PreviewAllIcons} />
+
+## Status
+
+<element-api tag="mlv-icon" type="property" value="status"></element-api>
+
+<Canvas of={Statuses} />
+
+## Size
+
+<element-api tag="mlv-icon" type="property" value="size"></element-api>
+
+<Canvas of={Size} />
+
+## Direction
+
+<element-api tag="mlv-icon" type="property" value="direction"></element-api>
+
+<Canvas of={Direction} />
+
+## Themes
+
+<Canvas of={Themes} />
+
+## Registration
+
+SVG paths can be registered and made accessible to the `<mlv-icon>` element. Icons can be defined via a string or async function returning the resulting string.
+
+<Canvas of={Registration} />
+
+## Alias
+
+Icons can be aliased to a different name. This can be useful for context specific names or migrations between icon sets.
+
+<Canvas of={Alias} />
+
+## Source
+
+Direct SVG paths can be provided for rendering.
+
+<Canvas of={Source} />
+
+<element-status tag="mlv-icon"></element-status>
+
+<element-api tag="mlv-icon"></element-api>

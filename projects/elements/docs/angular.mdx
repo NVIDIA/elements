@@ -1,0 +1,202 @@
+import { Meta } from '@storybook/addon-docs';
+import '@elements/elements/alert/define.js';
+
+<Meta title="Integrations/Angular" />
+
+# Angular Integration
+
+<div mlv-layout="row gap:xs">
+  <mlv-button>
+    <a href="https://NVIDIA.github.io/elements/demos/angular/"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#angular-svg"></use></svg> Demo</a>
+  </mlv-button>
+  <mlv-button>
+    <mlv-icon name="code"></mlv-icon> <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/demos/angular">Source</a>
+  </mlv-button>
+</div>
+
+To use Elements in [Angular](https://angular.io/) follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps.
+
+## Static Assets
+
+For versions prior to 0.8.1 add the following to your app's `angular.json` config, which will copy the `@elements/elements` icon asset file into your local Angular build.
+
+```json
+/*
+ * ./angular.json
+ * projects.appName.architect.build.options.assets:
+ */
+"assets": [
+  ...
+  {
+    "glob": "**/*",
+    "input": "./node_modules/@elements/elements/dist/assets",
+    "output": "/assets/"
+  }
+]
+```
+
+Next import the element into a root Angular module and add `CUSTOM_ELEMENTS_SCHEMA` to the Angular module to allow web components to be used within your templates.
+
+```javascript
+/* ./src/shared.module.ts */
+
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import '@elements/elements/alert-group/define.js';
+
+@NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  ...
+})
+```
+
+Once added, properties and events can be used via the standard Angular template syntax.
+
+```html
+<!--
+  - [attr.hidden] - HTML Boolean attribute
+  - status - HTML attribute
+  - [closable] - can update via attributes or JavaScript property binding
+  - (close) - event listener binding for 'close' custom event
+-->
+
+<mlv-alert-group status="success" [attr.hidden]="!showAlert">
+  <mlv-alert [closable]="true" (close)="showAlert = false">hello there!</mlv-alert>
+</mlv-alert-group>
+```
+
+## Forms
+
+Maglev Elements provides a suite of form components that leverage standard HTML input types. This enables frameworks
+to take advantage of built in framework features like [Angular Reactive Forms](https://angular.io/guide/reactive-forms) for managing form validation and state.
+
+<mlv-alert>To integrate custom form control types into Elements checkout our <a href="./?path=/docs/elements-form-control-documentation--docs#custom-controls" onClick="location.reload()">custom control</a> documentation.</mlv-alert>
+
+```html
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mlv-input>
+    <label>first name</label>
+    <input type="text" formControlName="firstName" />
+    <mlv-control-message *ngIf="form.controls.firstName.invalid && (form.controls.firstName.dirty || form.controls.firstName.touched)">required</mlv-control-message>
+  </mlv-input>
+  <button>submit</button>
+</form>
+```
+
+```typescript
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
+})
+export class AppComponent  {
+  form: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      firstName: ['', Validators.required]
+    });
+  }
+
+  submit() {
+    this.form.controls.custom.markAsTouched();
+    console.log(this.form.value);
+  }
+}
+```
+
+## Legacy Installation
+
+If your app was created with an older version of the Angular CLI you may to need add or adjust the following to your application.
+
+### Styles
+
+If you don't have a global `styles.scss` add one to your app's `angular.json` config.
+
+```json
+/*
+ * ./angular.json
+ * projects.appName.architect.build.options.styles:
+ */
+"styles": [
+  "./src/styles.scss"
+],
+```
+
+```css
+/* ./styles.css */
+@import '@elements/elements/dist/index.css';
+@import '@elements/elements/dist/inter.css';
+```
+
+### TypeScript
+
+If you are not on typescript >= version `4.5.x` you will need to add this type declaration to use isolated element imports:
+
+```typescript
+/* ./src/declarations.d.ts */
+
+interface ElementInternals {
+  any: any;
+}
+```
+
+If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig#paths) likely you will need to enable the [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck) to avoid type definition collisions within the monorepo. Alternatively, to avoid `skipLibCheck` use `npm` workspaces instead of tsconfig path mapping.
+
+```json
+{
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}
+```
+
+## Advanced - Import CSS Source
+
+[Lit](https://lit.dev) as a standard TypeScript based library works mostly out of the box when imported and used within an Angular application source code.
+This enables Lit based Web Components to be authored directly within your Angular application but not require a standalone library/project.
+If you are authoring Lit based components and would like to import external CSS files (similar to [Vite Inlined Imports](https://vitejs.dev/guide/features.html#disabling-css-injection-into-the-page)) additonal Angular CLI configuration is needed.
+
+<mlv-alert status="accent">Imports like Webpack !raw-loader and Vite ?inline are not Web standard and likely to be migrated in the future to <a href="https://web.dev/css-module-scripts/">Import Assertions</a></mlv-alert>
+
+### 1. Install
+
+```shell
+npm install raw-loader
+```
+
+### 2. Update tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+  }
+}
+```
+
+### 3. Update Types
+
+```typescript
+// declarations.d.ts
+declare module 'raw-loader!*.css' {
+  const content: string;
+  export = content;
+}
+```
+
+### 4. Import Styles
+
+```typescript
+import { unsafeCSS } from 'lit';
+import typography from 'raw-loader!node_modules/@elements/elements/css/module.typography.css';
+import layout from 'raw-loader!node_modules/@elements/elements/css/module.layout.css';
+
+// Lit Component
+static override styles = [
+  css`${unsafeCSS(typography)}`,
+  css`${unsafeCSS(layout)}`
+];
+```

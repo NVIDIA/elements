@@ -1,0 +1,106 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, MultiSelect, Select, Label, Overflow, Vertical, Horizontal, Flat, Footer, Reset, SelectAll } from './combobox.stories';
+
+<Meta title="Elements/Combobox/Documentation" />
+
+# Combobox
+
+<element-metrics tag="mlv-combobox"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/combobox/define.js';
+```
+
+```html
+<mlv-combobox>
+  <label>combobox</label>
+  <input type="search">
+  <datalist>
+    <option value="option 1"></option>
+    <option value="option 2"></option>
+    <option value="option 3"></option>
+  </datalist>
+</mlv-combobox>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Multi Select
+
+The multiple option behavior preserves the native select value behavior. The `value` on the select
+will only reflect the first selected value. To get all selected options check the `selected` property
+on each `<option>` element or the select property [selectedOptions](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions).
+
+<Canvas of={MultiSelect} />
+
+## Single Select
+
+Single select is similar to the default datalist behavior. However, by using a single selection select,
+the combobox will enforce and only allow values from the select to be used. If a invalid value is entered
+that does not match a option in the select, the value will be cleared.
+
+<Canvas of={Select} />
+
+## Option Label
+
+Options by default provide a value for the user input. However, an optional label can be provided as well.
+If an option label is provided, the label will be displayed to the user rather than the value.
+
+<mlv-alert status="warning">
+  When using labels the text input value will be the option label rather than the option value.
+  The select input will continue to use option value.
+</mlv-alert>
+
+<Canvas of={Label} />
+
+## Overflow
+
+If the multiple tags overflow the parent container a simple text label will be shown instead.
+
+<Canvas of={Overflow} />
+
+## Layout
+
+<element-api tag="mlv-combobox" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+## Container
+
+<element-api tag="mlv-combobox" type="property" value="container"></element-api>
+
+### Flat
+
+<Canvas of={Flat} />
+
+## Footer
+
+<element-api tag="mlv-combobox" type="slot" value="footer"></element-api>
+
+<Canvas of={Footer} />
+
+## Reset
+
+<element-api tag="mlv-combobox" type="property" value="reset"></element-api>
+
+<Canvas of={Reset} inline={false} height={300} />
+
+## Select All
+
+<element-api tag="mlv-combobox" type="property" value="selectAll"></element-api>
+
+<Canvas of={SelectAll} inline={false} height={330} />
+
+<element-status tag="mlv-combobox"></element-status>
+
+<element-api tag="mlv-combobox"></element-api>

@@ -1,0 +1,49 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Range, Datalist, Step, Vertical, Horizontal } from './range.stories';
+
+<Meta title="Elements/Range/Documentation" />
+
+# Range
+
+<element-metrics tag="mlv-range"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/range/define.js';
+```
+
+```html
+<mlv-range>
+  <label>label</label>
+  <input type="range" />
+</mlv-range>
+```
+
+## Standard
+
+<Canvas of={Range} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Step
+
+<Canvas of={Step} />
+
+## Layout
+
+<element-api tag="mlv-range" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="mlv-range"></element-status>
+
+<element-api tag="mlv-range"></element-api>

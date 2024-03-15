@@ -1,0 +1,40 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Stripe } from './grid.stories';
+
+<Meta title="Elements/Data Grid/Stripe" />
+
+# Data Grid Stripe
+
+<element-metrics tag="mlv-grid"></element-metrics>
+
+```html
+<mlv-grid stripe>
+  <mlv-grid-header>
+    <mlv-grid-column>Column 1</mlv-grid-column>
+    <mlv-grid-column>Column 2</mlv-grid-column>
+    <mlv-grid-column>Column 3</mlv-grid-column>
+    <mlv-grid-column>Column 4</mlv-grid-column>
+  </mlv-grid-header>
+  <mlv-grid-row>
+    <mlv-grid-cell>cell 1-1</mlv-grid-cell>
+    <mlv-grid-cell>cell 1-2</mlv-grid-cell>
+    <mlv-grid-cell>cell 1-3</mlv-grid-cell>
+    <mlv-grid-cell>cell 1-4</mlv-grid-cell>
+  </mlv-grid-row>
+  ...
+</mlv-grid>
+```
+
+<Canvas of={Stripe} />
+
+<element-status tag="mlv-grid"></element-status>
+
+<element-api tag="mlv-grid"></element-api>
+
+<element-api tag="mlv-grid-header"></element-api>
+
+<element-api tag="mlv-grid-column"></element-api>
+
+<element-api tag="mlv-grid-row"></element-api>
+
+<element-api tag="mlv-grid-cell"></element-api>

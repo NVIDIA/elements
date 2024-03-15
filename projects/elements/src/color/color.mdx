@@ -1,0 +1,45 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Color, Datalist, Vertical, Horizontal } from './color.stories';
+
+<Meta title="Elements/Color/Documentation" />
+
+# Color
+
+<element-metrics tag="mlv-color"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/color/define.js';
+```
+
+```html
+<mlv-color>
+  <label>label</label>
+  <input type="color" />
+</mlv-color>
+```
+
+## Standard
+
+<Canvas of={Color} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="mlv-color" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="mlv-color"></element-status>
+
+<element-api tag="mlv-color"></element-api>

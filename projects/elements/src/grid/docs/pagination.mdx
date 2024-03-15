@@ -1,0 +1,37 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Pagination } from './grid.stories';
+
+<Meta title="Elements/Data Grid/Pagination" />
+
+# Data Grid Pagination
+
+<element-metrics tag="mlv-grid"></element-metrics>
+
+The pagination pattern should be used when working with large data sets that need to be
+incrementally loaded or filtered for performance or usablity.
+
+```html
+<mlv-grid>
+  ...
+
+  <mlv-grid-footer>
+    <mlv-pagination value="1" items="100" step="10"></mlv-pagination>
+  </mlv-grid-footer>
+</mlv-grid>
+```
+
+## Pagination
+
+<Canvas of={Pagination} />
+
+<element-status tag="mlv-grid"></element-status>
+
+<element-api tag="mlv-grid"></element-api>
+
+<element-api tag="mlv-grid-header"></element-api>
+
+<element-api tag="mlv-grid-column"></element-api>
+
+<element-api tag="mlv-grid-row"></element-api>
+
+<element-api tag="mlv-grid-cell"></element-api>

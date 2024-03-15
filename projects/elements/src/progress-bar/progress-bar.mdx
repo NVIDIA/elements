@@ -1,0 +1,48 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Default, Max, Labeled } from './progress-bar.stories';
+
+<Meta title="Elements/Progress Bar/Documentation" />
+
+# Progress Bar
+
+<element-metrics tag="mlv-progress-bar"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/progress-bar/define.js';
+```
+
+## Setting the Value
+
+<element-api tag="mlv-progress-bar" type="property" value="value"></element-api>
+
+```html
+<mlv-progress-bar status="accent" value="25"></mlv-progress-bar>
+
+<mlv-progress-bar status="success" value="50"></mlv-progress-bar>
+
+<mlv-progress-bar status="warning" value="75"></mlv-progress-bar>
+
+<mlv-progress-bar status="danger" value="100"></mlv-progress-bar>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Max Value
+
+<element-api tag="mlv-progress-bar" type="property" value="max"></element-api>
+
+<Canvas of={Max} />
+
+## Label Display
+
+Progress bars may have their labels and numerical values displayed above its visual indicator.
+
+<Canvas of={Labeled} />
+
+<element-status tag="mlv-progress-bar"></element-status>
+
+<element-api tag="mlv-progress-bar"></element-api>

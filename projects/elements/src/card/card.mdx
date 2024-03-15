@@ -1,0 +1,98 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, MediaCard, CardWithHeader, CardWithHeaderAndAction, Tabs, DescriptionList, CardWithHeaderAndFooter, CardWithMultipleContentsAndDivider, CardWithContentLayout, ContainerFill } from './card.stories';
+
+<Meta title="Elements/Card/Documentation" />
+
+# Card
+
+<element-metrics tag="mlv-card"></element-metrics>
+
+Card is composed of a `mlv-card` container element and several sub-components with default styling.
+The following sub-components can be used within `mlv-card` to achieve standard card layouts:
+
+- `mlv-card-header`
+- `mlv-card-content`
+- `mlv-card-footer`
+
+Content slotted directly under `mlv-card` is supported for full flexibility of content.
+
+## Installation
+
+```typescript
+import '@elements/elements/card/define.js';
+```
+
+```html
+<mlv-card>
+  <mlv-card-content>
+    Card Content
+  </mlv-card-content>
+</mlv-card>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Media Card
+
+<Canvas of={MediaCard} />
+
+## Card with Header
+
+<Canvas of={CardWithHeader} />
+
+## Card with Header and Action
+
+<Canvas of={CardWithHeaderAndAction} />
+
+## Card with Header Tabs
+
+<Canvas of={Tabs} />
+
+## Card Description List
+
+<Canvas of={DescriptionList} />
+
+## Card with Header and Footer
+
+Combining `mlv-card-header`, `mlv-card-content` & `mlv-card-footer` will yield a fully styled card.
+Note how `mlv-card-content` will vertically stretch to fill the card size and the footer will align
+to the bottom of the card.
+
+<Canvas of={CardWithHeaderAndFooter} />
+
+## Card With Multiple Content Containers and Full-bleed Divider
+
+<Canvas of={CardWithMultipleContentsAndDivider} />
+
+## Card with Content Layout
+
+Layout system is supported when <a href="./?path=/docs/layout-getting-started--docs">mlv-layout</a> attribute
+is used on the `mlv-card-content` element:
+
+```html
+<mlv-card>
+  <mlv-card-content mlv-layout="row align:space-around">
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
+  </mlv-card-content>
+</mlv-card>
+```
+
+<Canvas of={CardWithContentLayout} />
+
+## Container Fill
+
+<Canvas of={ContainerFill} />
+
+<element-status tag="mlv-card"></element-status>
+
+<element-api tag="mlv-card"></element-api>
+
+<element-api tag="mlv-card-header"></element-api>
+
+<element-api tag="mlv-card-content"></element-api>
+
+<element-api tag="mlv-card-footer"></element-api>

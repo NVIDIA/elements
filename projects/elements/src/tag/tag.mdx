@@ -1,0 +1,58 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Default, Color, Prominence, Closable, TagGroup, Readonly, Overflow } from './tag.stories';
+
+<Meta title="Elements/Tag/Documentation" />
+
+# Tag
+
+<element-metrics tag="mlv-tag"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/tag/define.js';
+```
+
+```html
+<mlv-tag></mlv-tag>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Color
+
+<element-api tag="mlv-tag" type="property" value="color"></element-api>
+
+<Canvas of={Color} />
+
+## Emphasis
+
+<element-api tag="mlv-tag" type="property" value="prominence"></element-api>
+
+<Canvas of={Prominence} />
+
+## Closable
+
+<element-api tag="mlv-tag" type="property" value="closable"></element-api>
+
+<Canvas of={Closable} />
+
+## Readonly
+
+<element-api tag="mlv-tag" type="property" value="readonly"></element-api>
+
+<Canvas of={Readonly} />
+
+## Tag Group
+
+<Canvas of={TagGroup} />
+
+## Overflow
+
+<Canvas of={Overflow} />
+
+<element-status tag="mlv-tag"></element-status>
+
+<element-api tag="mlv-tag"></element-api>

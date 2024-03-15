@@ -1,0 +1,32 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Status } from './alert.stories';
+
+<Meta title="Elements/Alert/Documentation" />
+
+# Alert
+
+<element-metrics tag="mlv-alert"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/alert/define.js';
+```
+
+```html
+<mlv-alert status="success">success message</mlv-alert>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Status
+
+<element-api tag="mlv-alert" type="property" value="status"></element-api>
+
+<Canvas of={Status} />
+
+<element-status tag="mlv-alert"></element-status>
+
+<element-api tag="mlv-alert"></element-api>

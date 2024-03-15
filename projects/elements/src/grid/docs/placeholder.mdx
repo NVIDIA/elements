@@ -1,0 +1,39 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Placeholder } from './grid.stories';
+
+<Meta title="Elements/Data Grid/Placeholder" />
+
+# Data Grid Placeholder
+
+<element-metrics tag="mlv-grid-placeholder"></element-metrics>
+
+Placeholder can be used to display a message when data is being loaded for the grid.
+
+```html
+<mlv-grid style="--scroll-height: 333px">
+  <mlv-grid-header>
+    <mlv-grid-column></mlv-grid-column>
+  </mlv-grid-header>
+  <mlv-grid-placeholder>
+    Loading...
+  </mlv-grid-placeholder>
+</mlv-grid>
+```
+
+## Placeholder
+
+<Canvas of={Placeholder} />
+
+<element-status tag="mlv-grid"></element-status>
+
+<element-api tag="mlv-grid-placeholder"></element-api>
+
+<element-api tag="mlv-grid"></element-api>
+
+<element-api tag="mlv-grid-header"></element-api>
+
+<element-api tag="mlv-grid-column"></element-api>
+
+<element-api tag="mlv-grid-row"></element-api>
+
+<element-api tag="mlv-grid-cell"></element-api>

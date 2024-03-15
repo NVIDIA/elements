@@ -1,0 +1,65 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Radio, VerticalGroup, VerticalInlineGroup, HorizontalGroup, HorizontalInlineGroup } from './radio.stories';
+
+<Meta title="Elements/Radio/Documentation" />
+
+# Radio
+
+<element-metrics tag="mlv-radio"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/radio/define.js';
+```
+
+```html
+<mlv-radio-group>
+  <label>label</label>
+  <mlv-radio>
+    <label>radio 1</label>
+    <input type="radio" checked />
+  </mlv-radio>
+
+  <mlv-radio>
+    <label>radio 2</label>
+    <input type="radio" />
+  </mlv-radio>
+
+  <mlv-radio>
+    <label>radio 3</label>
+    <input type="radio" />
+  </mlv-radio>
+  <mlv-control-message>message</mlv-control-message>
+</mlv-radio-group>
+```
+
+## Standard
+
+<Canvas of={Radio} />
+
+## Layout
+
+<element-api tag="mlv-checkbox-group" type="property" value="layout"></element-api>
+
+### Vertical Group
+
+<Canvas of={VerticalGroup} />
+
+### Vertical Inline Group
+
+<Canvas of={VerticalInlineGroup} />
+
+### Horizontal Group
+
+<Canvas of={HorizontalGroup} />
+
+### Horizontal Inline Group
+
+<Canvas of={HorizontalInlineGroup} />
+
+<element-status tag="mlv-radio"></element-status>
+
+<element-api tag="mlv-radio"></element-api>
+
+<element-api tag="mlv-radio-group"></element-api>

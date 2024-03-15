@@ -1,0 +1,39 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Interactive, Default, Status, Actions, BehaviorTrigger } from './toast.stories';
+
+<Meta title="Elements/Toast/Documentation" />
+
+# Toast
+
+<element-metrics tag="mlv-toast"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/toast/define.js';
+```
+
+```html
+<mlv-toast anchor="btn" position="bottom">hello there</mlv-toast>
+<mlv-button id="btn">button</mlv-button>
+```
+
+## Standard
+
+<Canvas of={Interactive} story={{ inline: false, height: 200 }} />
+<Canvas of={Default} story={{ inline: false, height: 200 }} />
+
+## Status/Actions
+
+<Canvas of={Status} story={{ inline: false, height: 300 }} />
+<Canvas of={Actions} story={{ inline: false, height: 300 }} />
+
+## Behavior Trigger
+
+<element-api tag="mlv-toast" type="property" value="behaviorTrigger"></element-api>
+
+<Canvas of={BehaviorTrigger} story={{ inline: false, height: 300 }} />
+
+<element-status tag="mlv-toast"></element-status>
+
+<element-api tag="mlv-toast"></element-api>

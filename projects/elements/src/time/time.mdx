@@ -1,0 +1,46 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Time, Datalist, Vertical, Horizontal } from './time.stories';
+
+<Meta title="Elements/Time/Documentation" />
+
+# Time
+
+<element-metrics tag="mlv-time"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/time/define.js';
+```
+
+```html
+<mlv-time>
+  <label>label</label>
+  <input type="time" min="09:00" max="18:00" value="12:00" />
+  <mlv-control-message>message</mlv-control-message>
+</mlv-time>
+```
+
+## Standard
+
+<Canvas of={Time} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="mlv-time" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="mlv-time"></element-status>
+
+<element-api tag="mlv-time"></element-api>

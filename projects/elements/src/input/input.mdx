@@ -1,0 +1,61 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Input, Vertical, Horizontal, Rounded, Flat, FitContent, FitText } from './input.stories';
+
+<Meta title="Elements/Input/Documentation" />
+
+# Input
+
+<element-metrics tag="mlv-input"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/input/define.js';
+```
+
+```html
+<mlv-input>
+  <label>label</label>
+  <input type="text" />
+</mlv-input>
+```
+
+## Standard
+
+<Canvas of={Input} />
+
+## Layout
+
+<element-api tag="mlv-input" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+## Rounded
+
+<Canvas of={Rounded} />
+
+## Flat
+
+<Canvas of={Flat} />
+
+## Fit Content
+
+<element-api tag="mlv-input" type="property" value="fitContent"></element-api>
+
+<Canvas of={FitContent} />
+
+## Fit Text
+
+<element-api tag="mlv-input" type="property" value="fitText"></element-api>
+
+<Canvas of={FitText} />
+
+<element-status tag="mlv-input"></element-status>
+
+<element-api tag="mlv-input"></element-api>

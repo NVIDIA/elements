@@ -1,0 +1,39 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { DisplaySettings } from './grid.stories';
+
+<Meta title="Elements/Data Grid/Display Settings" />
+
+# Data Grid Display Settings
+
+<element-metrics tag="mlv-grid-column"></element-metrics>
+
+Display settings are placed above the data grid leveraging dropdowns to provide various configuration options.
+Columns can be hidden via the `hidden` attribute or conditionaly rendered in DOM. Display settings can include
+column visibility or advanced filtering options.
+
+```html
+<section mlv-layout="row gap:md align:stretch">
+  <mlv-panel expanded closable>
+    ...
+  </mlv-panel>
+
+  <div mlv-layout="column gap:md">
+    <mlv-button>display settings</mlv-button>
+    <mlv-grid>
+      ...
+    </mlv-grid>
+  </div>
+</section>
+```
+
+<Canvas of={DisplaySettings} story={{ inline: false, height: '450px' }} />
+
+<element-api tag="mlv-grid"></element-api>
+
+<element-api tag="mlv-grid-header"></element-api>
+
+<element-api tag="mlv-grid-column"></element-api>
+
+<element-api tag="mlv-grid-row"></element-api>
+
+<element-api tag="mlv-grid-cell"></element-api>

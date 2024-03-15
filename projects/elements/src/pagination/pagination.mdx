@@ -1,0 +1,59 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Default, Skippable, Disabled, Flat, Inline, DisableStep, DynamicItems, Forms } from './pagination.stories';
+
+<Meta title="Elements/Pagination/Documentation" />
+
+# Pagination
+
+<element-metrics tag="mlv-pagination"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/pagination/define.js';
+```
+
+```html
+<mlv-pagination value="1" items="100" step="20"></mlv-pagination>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Skippable
+
+<Canvas of={Skippable} />
+
+## Disabled
+
+<Canvas of={Disabled} />
+
+## Flat
+
+<Canvas of={Flat} />
+
+## Inline
+
+<Canvas of={Inline} />
+
+## Disable Step
+
+<Canvas of={DisableStep} />
+
+## Dynamic Items
+
+If the upper bound of items is unknown the `last-page` event can be used to determine when
+to load additional data and update the pagination with the latest total of items.
+
+<Canvas of={DynamicItems} story={{ inline: false, height: 100 }} />
+
+## Forms
+
+Pagination is [form associated component](https://web.dev/more-capable-form-controls/#defining-a-form-associated-custom-element) and can be used within FormData.
+
+<Canvas of={Forms} story={{ inline: false, height: 240 }} />
+
+<element-status tag="mlv-pagination"></element-status>
+
+<element-api tag="mlv-pagination"></element-api>

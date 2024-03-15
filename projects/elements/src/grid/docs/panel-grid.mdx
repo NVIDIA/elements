@@ -1,0 +1,37 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { PanelGrid } from './grid.stories';
+
+<Meta title="Elements/Data Grid/Panel Grid" />
+
+# Panel Grid
+
+<element-metrics tag="mlv-grid"></element-metrics>
+
+Panel Grid can be used to display key value type data sets for details of a given item in a collection.
+
+```html
+<main mlv-layout="row gap:sm full">
+  <section mlv-layout="column gap:md full align:stretch">
+    page content
+  </section>
+  <mlv-panel expanded>
+    <mlv-grid container="flat" stripe>
+      ...
+    </mlv-grid>
+  </mlv-panel>
+</main>
+```
+
+<Canvas of={PanelGrid} />
+
+<element-status tag="mlv-grid"></element-status>
+
+<element-api tag="mlv-grid"></element-api>
+
+<element-api tag="mlv-grid-header"></element-api>
+
+<element-api tag="mlv-grid-column"></element-api>
+
+<element-api tag="mlv-grid-row"></element-api>
+
+<element-api tag="mlv-grid-cell"></element-api>

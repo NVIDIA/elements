@@ -7,7 +7,7 @@ export default {
   component: 'mlv-input',
 };
 
-export const radio = {
+export const Radio = {
   render: () => html`
   <mlv-radio-group>
     <label>label</label>

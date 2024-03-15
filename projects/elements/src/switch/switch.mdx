@@ -1,0 +1,49 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Switch, VerticalGroup, VerticalInlineGroup, HorizontalGroup, HorizontalInlineGroup } from './switch.stories';
+
+<Meta title="Elements/Switch/Documentation" />
+
+# Switch
+
+<element-metrics tag="mlv-switch"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/switch/define.js';
+```
+
+```html
+<mlv-switch>
+  <label>label</label>
+  <input type="checkbox" />
+</mlv-switch>
+```
+
+## Standard
+
+<Canvas of={Switch} />
+
+## Layout
+
+<element-api tag="mlv-switch-group" type="property" value="layout"></element-api>
+
+### Vertical Group
+
+<Canvas of={VerticalGroup} />
+
+### Vertical Inline Group
+
+<Canvas of={VerticalInlineGroup} />
+
+### Horizontal Group
+
+<Canvas of={HorizontalGroup} />
+
+### Horizontal Inline Group
+
+<Canvas of={HorizontalInlineGroup} />
+
+<element-status tag="mlv-switch"></element-status>
+
+<element-api tag="mlv-switch"></element-api>

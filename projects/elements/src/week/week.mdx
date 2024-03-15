@@ -1,0 +1,45 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Week, Datalist, Vertical, Horizontal } from './week.stories';
+
+<Meta title="Elements/Week/Documentation" />
+
+# Week
+
+<element-metrics tag="mlv-week"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/week/define.js';
+```
+
+```html
+<mlv-week>
+  <label>label</label>
+  <input type="week" />
+</mlv-week>
+```
+
+## Standard
+
+<Canvas of={Week} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="mlv-week" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="mlv-week"></element-status>
+
+<element-api tag="mlv-week"></element-api>

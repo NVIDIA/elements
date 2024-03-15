@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Status } from './alert-banner.stories';
+import '@elements/elements/alert/define.js';
+
+<Meta title="Deprecated/Alert Banner/Documentation" />
+
+# Alert Banner
+
+<mlv-alert-group status="warning">
+  <mlv-alert>Deprecated: use <code>mlv-alert-group</code></mlv-alert>
+</mlv-alert-group>
+
+## Installation
+
+```typescript
+import '@elements/elements/alert/define.js';
+```
+
+```html
+<mlv-alert-banner status="success">
+  <mlv-alert>success message</mlv-alert>
+  <mlv-alert>success message</mlv-alert>
+</mlv-alert-banner>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Status
+
+<element-api tag="mlv-alert-group" type="property" value="status"></element-api>
+
+<Canvas of={Status} />
+
+<element-status tag="mlv-alert-banner"></element-status>
+
+<element-api tag="mlv-alert-banner"></element-api>
+
+<element-api tag="mlv-alert"></element-api>

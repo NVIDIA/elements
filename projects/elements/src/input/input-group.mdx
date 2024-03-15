@@ -1,0 +1,43 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { InputGroup, FilterGroupRange  } from './input-group.stories';
+
+<Meta title="Elements/Input Group/Documentation" />
+
+# Input Group
+
+<element-metrics tag="mlv-input-group"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/input/define.js';
+```
+
+```html
+<mlv-input-group>
+  <label>domain</label>
+  <mlv-select style="width: 130px">
+    <select aria-label="protocol">
+      <option>https://</option>
+      <option>http://</option>
+    </select>
+  </mlv-select>
+  <mlv-input>
+    <input placeholder="example" type="url" aria-label="host" />
+    <mlv-button container="flat" readonly="">.com</mlv-button>
+  </mlv-input>
+  <mlv-control-message>host: 123456</mlv-control-message>
+</mlv-input-group>
+```
+
+## Standard
+
+<Canvas of={InputGroup} />
+
+## Range Group
+
+<Canvas of={FilterGroupRange} />
+
+<element-status tag="mlv-input-group"></element-status>
+
+<element-api tag="mlv-input-group"></element-api>

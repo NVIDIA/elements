@@ -1,0 +1,37 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { File, Vertical, Horizontal } from './file.stories';
+
+<Meta title="Elements/File/Documentation" />
+
+# File
+
+<element-metrics tag="mlv-file"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/file/define.js';
+```
+
+```html
+<mlv-file>
+  <label>label</label>
+  <input type="file" />
+</mlv-file>
+```
+
+## Standard
+
+<Canvas of={File} />
+
+## Vertical
+
+<Canvas of={Vertical} />
+
+## Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="mlv-file"></element-status>
+
+<element-api tag="mlv-file"></element-api>

@@ -1,0 +1,48 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { SingleSelect } from './grid.stories';
+
+<Meta title="Elements/Data Grid/Single Select" />
+
+# Data Grid Single Select
+
+<element-metrics tag="mlv-grid-row"></element-metrics>
+
+Single selection enables users to use a radio list association to select one item at a time.
+To enable single select, place a `mlv-radio` input as the first grid cell of each row. Set the `name`
+attribute on each radio to ensure they associate to the same radio group.
+
+```html
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column width="max-content" aria-label="single selection"></mlv-grid-column>
+    <mlv-grid-column>Column</mlv-grid-column>
+    ...
+  </mlv-grid-header>
+  <mlv-grid-row selected>
+    <mlv-grid-cell>
+      <mlv-radio>
+        <input type="radio" name="single-select" checked aria-label="select row 1">
+      </mlv-radio>
+    </mlv-grid-cell>
+    <mlv-grid-cell>Cell</mlv-grid-cell>
+    ...
+  </mlv-grid-row>
+  ...
+</mlv-grid>
+```
+
+## Single Select
+
+<Canvas of={SingleSelect} />
+
+<element-status tag="mlv-grid"></element-status>
+
+<element-api tag="mlv-grid"></element-api>
+
+<element-api tag="mlv-grid-header"></element-api>
+
+<element-api tag="mlv-grid-column"></element-api>
+
+<element-api tag="mlv-grid-row"></element-api>
+
+<element-api tag="mlv-grid-cell"></element-api>

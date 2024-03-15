@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Checkbox, VerticalGroup, VerticalInlineGroup, HorizontalGroup, HorizontalInlineGroup } from './checkbox.stories';
+
+<Meta title="Elements/Checkbox/Documentation" />
+
+# Checkbox
+
+<element-metrics tag="mlv-checkbox"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/checkbox/define.js';
+```
+
+```html
+<mlv-checkbox>
+  <label>label</label>
+  <input type="checkbox" />
+</mlv-checkbox>
+```
+
+## Standard
+
+<Canvas of={Checkbox} />
+
+## Layout
+
+<element-api tag="mlv-checkbox-group" type="property" value="layout"></element-api>
+
+### Vertical Group
+
+<Canvas of={VerticalGroup} />
+
+### Vertical Inline Group
+
+<Canvas of={VerticalInlineGroup} />
+
+### Horizontal Group
+
+<Canvas of={HorizontalGroup} />
+
+### Horizontal Inline Group
+
+<Canvas of={HorizontalInlineGroup} />
+
+<element-status tag="mlv-checkbox"></element-status>
+
+<element-api tag="mlv-checkbox"></element-api>
+
+<element-api tag="mlv-checkbox-group"></element-api>

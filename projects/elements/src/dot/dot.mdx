@@ -1,0 +1,46 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Status, SupportStatus, Number, Size } from './dot.stories';
+
+<Meta title="Elements/Dot/Documentation" />
+
+# Dot Notification
+
+<element-metrics tag="mlv-dot"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/dot/define.js';
+```
+
+```html
+<mlv-dot status="starting"></mlv-dot>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Status
+
+<element-api tag="mlv-badge" type="property" value="status"></element-api>
+
+<Canvas of={Status} />
+
+## Support
+
+<Canvas of={SupportStatus} />
+
+## Number
+
+<Canvas of={Number} />
+
+## Size
+
+<element-api tag="mlv-badge" type="property" value="size"></element-api>
+
+<Canvas of={Size} />
+
+<element-status tag="mlv-dot"></element-status>
+
+<element-api tag="mlv-dot"></element-api>

@@ -1,0 +1,38 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Actions, LabelAction, PrefixSuffix } from './actions.stories';
+
+<Meta title="Foundations/Forms/Actions" />
+
+# Control Actions
+
+Text type controls support prefix and suffix labeling as well as action buttons.
+
+## Installation
+
+```typescript
+import '@elements/elements/input/define.js';
+```
+
+```html
+<mlv-input>
+  <label>label</label>
+  <input type="text" />
+  <mlv-icon-button icon-name="cancel" container="flat" aria-label="clear"></mlv-icon-button>
+</mlv-input>
+```
+
+## Actions
+
+<Canvas of={Actions} />
+
+## Label Action
+
+<Canvas of={LabelAction} />
+
+## Prefix/Suffix
+
+<Canvas of={PrefixSuffix} />
+
+<element-status tag="mlv-control"></element-status>
+
+<element-api tag="mlv-control"></element-api>

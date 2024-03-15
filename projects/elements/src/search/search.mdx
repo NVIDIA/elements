@@ -1,0 +1,49 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Search, Inline, Datalist, Vertical, Horizontal } from './search.stories';
+
+<Meta title="Elements/Search/Documentation" />
+
+# Search
+
+<element-metrics tag="mlv-search"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/search/define.js';
+```
+
+```html
+<mlv-search>
+  <label>label</label>
+  <input type="search" />
+</mlv-search>
+```
+
+## Standard
+
+<Canvas of={Search} />
+
+## Inline
+
+<Canvas of={Inline} />
+
+## Datalist
+
+<Canvas of={Datalist} />
+
+## Layout
+
+<element-api tag="mlv-search" type="property" value="layout"></element-api>
+
+### Vertical
+
+<Canvas of={Vertical} />
+
+### Horizontal
+
+<Canvas of={Horizontal} />
+
+<element-status tag="mlv-search"></element-status>
+
+<element-api tag="mlv-search"></element-api>

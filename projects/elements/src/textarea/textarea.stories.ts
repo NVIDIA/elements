@@ -74,7 +74,7 @@ export const Horizontal = {
 </div>`
 };
 
-export const controlValidation = () => {
+export const ControlValidation = () => {
   return html`
 <mlv-textarea>
   <label>validation</label>
@@ -84,7 +84,7 @@ export const controlValidation = () => {
 </mlv-textarea>`;
 }
 
-export const columnsAndRows = () => {
+export const ColumnsAndRows = () => {
   return html`
 <mlv-textarea>
   <label>label</label>
