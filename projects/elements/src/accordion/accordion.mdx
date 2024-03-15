@@ -1,0 +1,82 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Default, Full, AccordionGroupInset, AccordionGroupExpandSingle, AccordionGroupFlat, Inset, Flat, WithActions, Disabled } from './accordion.stories';
+
+<Meta title="Elements/Accordion/Documentation" />
+
+# Accordion
+
+<element-metrics tag="nve-accordion"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/accordion/define.js';
+```
+
+```html
+<nve-accordion>
+  <nve-accordion-header>
+    <div slot="title">Heading</div>
+  </nve-accordion-header>
+
+  <nve-accordion-content>
+    Content
+  </nve-accordion-content>
+</nve-accordion>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Container
+
+<element-api tag="nve-accordion" type="property" value="container"></element-api>
+
+<Canvas of={Full} />
+
+### Inset
+
+<Canvas of={AccordionGroupInset} />
+
+### Full
+
+<Canvas of={AccordionGroupExpandSingle} />
+
+### Flat
+
+<Canvas of={AccordionGroupFlat} />
+
+## Container Single
+
+<element-api tag="nve-accordion" type="property" value="container"></element-api>
+
+### Full
+
+<Canvas of={Full} />
+
+### Inset
+
+<Canvas of={Inset} />
+
+### Flat
+
+<Canvas of={Flat} />
+
+## Actions
+
+<Canvas of={WithActions} />
+
+## Disabled
+
+<Canvas of={Disabled} />
+
+<element-status tag="nve-accordion"></element-status>
+
+<element-api tag="nve-accordion"></element-api>
+
+<element-api tag="nve-accordion-header"></element-api>
+
+<element-api tag="nve-accordion-content"></element-api>
+
+<element-api tag="nve-accordion-group"></element-api>

@@ -1,0 +1,43 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { InputGroup, FilterGroupRange  } from './input-group.stories';
+
+<Meta title="Elements/Input Group/Documentation" />
+
+# Input Group
+
+<element-metrics tag="nve-input-group"></element-metrics>
+
+## Installation
+
+```typescript
+import '@elements/elements/input/define.js';
+```
+
+```html
+<nve-input-group>
+  <label>domain</label>
+  <nve-select style="width: 130px">
+    <select aria-label="protocol">
+      <option>https://</option>
+      <option>http://</option>
+    </select>
+  </nve-select>
+  <nve-input>
+    <input placeholder="example" type="url" aria-label="host" />
+    <nve-button container="flat" readonly="">.com</nve-button>
+  </nve-input>
+  <nve-control-message>host: 123456</nve-control-message>
+</nve-input-group>
+```
+
+## Standard
+
+<Canvas of={InputGroup} />
+
+## Range Group
+
+<Canvas of={FilterGroupRange} />
+
+<element-status tag="nve-input-group"></element-status>
+
+<element-api tag="nve-input-group"></element-api>

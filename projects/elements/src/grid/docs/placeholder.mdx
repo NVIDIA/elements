@@ -1,0 +1,39 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Placeholder } from './grid.stories';
+
+<Meta title="Elements/Data Grid/Placeholder" />
+
+# Data Grid Placeholder
+
+<element-metrics tag="nve-grid-placeholder"></element-metrics>
+
+Placeholder can be used to display a message when data is being loaded for the grid.
+
+```html
+<nve-grid style="--scroll-height: 333px">
+  <nve-grid-header>
+    <nve-grid-column></nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-placeholder>
+    Loading...
+  </nve-grid-placeholder>
+</nve-grid>
+```
+
+## Placeholder
+
+<Canvas of={Placeholder} />
+
+<element-status tag="nve-grid"></element-status>
+
+<element-api tag="nve-grid-placeholder"></element-api>
+
+<element-api tag="nve-grid"></element-api>
+
+<element-api tag="nve-grid-header"></element-api>
+
+<element-api tag="nve-grid-column"></element-api>
+
+<element-api tag="nve-grid-row"></element-api>
+
+<element-api tag="nve-grid-cell"></element-api>

@@ -1,0 +1,60 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { Statuses as IconStatus } from '../../icon/icon.stories';
+import { SupportStatus as DotStatus } from '../../dot/dot.stories';
+import { Status as AlertStatus } from '../../alert/alert.stories';
+import { Status as AlertGroupStatus, Prominence } from '../../alert/alert-group.stories';
+import { Status as NotificationStatus } from '../../notification/notification.stories';
+import { Status as ToastStatus } from '../../toast/toast.stories';
+import { Support, Accent } from '../../../tokens/docs/tokens.stories';
+
+<Meta title="Foundations/Tokens/Support" />
+
+# Support
+
+Support colors are used in combination of text or iconography to convey status of
+an element or interation. Status type components inlcude `alerts`, `badges`, `tags` and `form control` messages.
+
+- `default`
+- `accent`
+- `success`
+- `warning`
+- `danger`
+
+## Icon Support
+
+<Canvas of={IconStatus} />
+
+## Dot Support
+
+<Canvas of={DotStatus} />
+
+## Alert Support
+
+<Canvas of={AlertStatus} />
+
+## Alert Group
+
+<Canvas of={AlertGroupStatus} />
+
+## Alert Group Banner
+
+<Canvas of={Prominence} />
+
+## Notification Snackbar
+
+<Canvas of={NotificationStatus} story={{ inline: false, height: '500px' }} />
+
+## Toasts
+
+<Canvas of={ToastStatus} story={{ inline: false, height: '300px' }} />
+
+## Support Tokens
+
+<Story of={Support} />
+
+## Accent Tokens
+
+Accent tokens are used as system wide color accents. Components using accent colors
+inlcude checkboxes, radios, range inputs and form controls.
+
+<Story of={Accent} />

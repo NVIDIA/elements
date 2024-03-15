@@ -1,0 +1,97 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { GridSpan2, GridSpan6, GridAlignTop, GridAlignVerticalCenter, GridAlignBottom, GridAlignHorizontalCenter, GridAlignCenter, GridAlignCenterAndBottom, GridAlignTopAndRight, GridAlignCenterAndRight, GridAlignBottomAndRight, GridAlignHorizontalStretch, GridAlignVerticalStretch, GridAlignFullStretch } from './layout.stories';
+
+<Meta title="Foundations/Layout/Grid" />
+
+# Grid
+
+CSS _Grid_ based layouts can be achieved with _little to no CSS_ using the `nve-layout` attribute.
+The system is based on a 12 column layout.
+
+Set `nve-layout="grid"` on a container element and add additional item spanning (`span-items:...`) and `gap:...` values.
+
+- `nve-layout="grid gap:md span-items:1"`
+- `nve-layout="grid gap:md span-items:2"`
+- `nve-layout="grid gap:md span-items:3"`
+- `nve-layout="grid gap:md span-items:..."`
+- `nve-layout="grid gap:md span-items:12"`
+
+Or specify column spanning (`span:...`) on the individual items (1-12):
+
+- `nve-layout="span:1"`
+- `nve-layout="span:2"`
+- `nve-layout="span:3"`
+- `nve-layout="span:..."`
+- `nve-layout="span:12"`
+
+Similar to the Horizontal and Vertical _Flexbox_ based system you can also add alignment values:
+
+- `align:left`
+- `align:right`
+- `align:top`
+- `align:bottom`
+- `align:center`
+- `align:horizontal-center`
+- `align:vertical-center`
+- `align:stretch`
+- `align:horizontal-stretch`
+- `align:vertical-stretch`
+
+## Grid Layout Examples
+
+```html
+<!--  Specify column spanning on the parent -->
+<section nve-layout="grid span-items:3">
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+</section>
+
+<!--  Specify column spanning on the children -->
+<section nve-layout="grid gap:md">
+  <nve-card nve-layout="span:6"></nve-card>
+  <nve-card nve-layout="span:6"></nve-card>
+  <nve-card nve-layout="span:4"></nve-card>
+  <nve-card nve-layout="span:4"></nve-card>
+  <nve-card nve-layout="span:4"></nve-card>
+  <nve-card nve-layout="span:4"></nve-card>
+</section>
+
+<!--  Grid with alignment options -->
+<section nve-layout="grid gap:md align:center">
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+</section>
+```
+
+<Canvas of={GridSpan2} />
+
+<Canvas of={GridSpan6} />
+
+<Canvas of={GridAlignTop} />
+
+<Canvas of={GridAlignVerticalCenter} />
+
+<Canvas of={GridAlignBottom} />
+
+<Canvas of={GridAlignHorizontalCenter} />
+
+<Canvas of={GridAlignCenter} />
+
+<Canvas of={GridAlignCenterAndBottom} />
+
+<Canvas of={GridAlignTopAndRight} />
+
+<Canvas of={GridAlignCenterAndRight} />
+
+<Canvas of={GridAlignBottomAndRight} />
+
+<Canvas of={GridAlignHorizontalStretch} />
+
+<Canvas of={GridAlignVerticalStretch} />
+
+<Canvas of={GridAlignFullStretch} />

@@ -15,7 +15,7 @@ export default {
   title: 'Foundations/Tokens/Examples'
 };
 
-export const layersDemo = {
+export const LayersDemo = {
   render: () => html`
     <style>
       body {

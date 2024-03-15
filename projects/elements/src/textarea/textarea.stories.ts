@@ -74,7 +74,7 @@ export const Horizontal = {
 </div>`
 };
 
-export const controlValidation = () => {
+export const ControlValidation = () => {
   return html`
 <nve-textarea>
   <label>validation</label>
@@ -84,7 +84,7 @@ export const controlValidation = () => {
 </nve-textarea>`;
 }
 
-export const columnsAndRows = () => {
+export const ColumnsAndRows = () => {
   return html`
 <nve-textarea>
   <label>label</label>
