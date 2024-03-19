@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs';
-import { Placeholder } from './grid.stories';
+import { Placeholder, PlaceholderRetry } from './grid.stories';
 
 <Meta title="Elements/Data Grid/Placeholder" />
 
@@ -7,22 +7,26 @@ import { Placeholder } from './grid.stories';
 
 <element-metrics tag="nve-grid-placeholder"></element-metrics>
 
-Placeholder can be used to display a message when data is being loaded for the grid.
+Placeholder can be used to display a message when data is being loaded for the grid or empty states for datasets.
 
 ```html
-<nve-grid style="--scroll-height: 333px">
+<nve-grid style="min-height: 400px">
   <nve-grid-header>
     <nve-grid-column></nve-grid-column>
   </nve-grid-header>
   <nve-grid-placeholder>
-    Loading...
+    <nve-progress-ring status="accent" size="lg"></nve-progress-ring>
   </nve-grid-placeholder>
 </nve-grid>
 ```
 
-## Placeholder
+## Loading
 
 <Canvas of={Placeholder} />
+
+## Retry
+
+<Canvas of={PlaceholderRetry} />
 
 <element-status tag="nve-grid"></element-status>
 

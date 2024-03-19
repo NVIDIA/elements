@@ -47,6 +47,8 @@
 }
 
 [part='scrollbox'] {
+  height: 100%;
+  width: 100%;
   max-height: var(--scroll-height);
   min-height: var(--scroll-height);
   contain: layout;
