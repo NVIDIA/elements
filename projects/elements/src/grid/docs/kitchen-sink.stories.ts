@@ -175,7 +175,9 @@ class KitchenSinkDemo extends LitElement {
       </nve-search>
       <div nve-layout="row gap:sm align:vertical-center span:3">
         <p nve-text="body muted">1,145 results found</p>
-        <nve-button id="column-settings-btn" @click=${() => this.workflowGridSettings = !this.workflowGridSettings}>display settings</nve-button>
+        <nve-button id="column-settings-btn" container="flat" @click=${() => this.workflowGridSettings = !this.workflowGridSettings}>
+          <nve-icon name="gear"></nve-icon>  display settings
+        </nve-button>
       </div>
       <div nve-layout="span:5"></div>
       <div nve-layout="row gap:sm align:bottom span:4" style="margin-left: auto">

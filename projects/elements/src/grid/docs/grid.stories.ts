@@ -13,6 +13,7 @@ import '@elements/elements/icon-button/define.js';
 import '@elements/elements/tabs/define.js';
 import '@elements/elements/menu/define.js';
 import '@elements/elements/pagination/define.js';
+import '@elements/elements/progress-ring/define.js';
 import '@elements/elements/panel/define.js';
 import '@elements/elements/radio/define.js';
 import '@elements/elements/search/define.js';
@@ -146,7 +147,7 @@ export const RowGroups = {
   </nve-grid-header>
   <nve-grid-row>
     <nve-grid-cell>
-      <nve-icon-button icon-name="chevron" container="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></nve-icon-button>
+      <nve-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></nve-icon-button>
     </nve-grid-cell>
     <nve-grid-cell>Session: 2yuecae</nve-grid-cell>
     <nve-grid-cell>upload</nve-grid-cell>
@@ -156,7 +157,7 @@ export const RowGroups = {
   </nve-grid-row>
   <nve-grid-row selected>
     <nve-grid-cell>
-      <nve-icon-button icon-name="chevron" container="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></nve-icon-button>
+      <nve-icon-button icon-name="caret" container="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></nve-icon-button>
     </nve-grid-cell>
     <nve-grid-cell>Session: mvwgh3t</nve-grid-cell>
     <nve-grid-cell>upload</nve-grid-cell>
@@ -190,7 +191,7 @@ export const RowGroups = {
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>
-      <nve-icon-button icon-name="chevron" container="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></nve-icon-button>
+      <nve-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></nve-icon-button>
     </nve-grid-cell>
     <nve-grid-cell>Session: bg5ujqp</nve-grid-cell>
     <nve-grid-cell>upload</nve-grid-cell>
@@ -200,7 +201,7 @@ export const RowGroups = {
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>
-      <nve-icon-button icon-name="chevron" container="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></nve-icon-button>
+      <nve-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></nve-icon-button>
     </nve-grid-cell>
     <nve-grid-cell>Session: 6ruehvh</nve-grid-cell>
     <nve-grid-cell>upload</nve-grid-cell>
@@ -277,6 +278,7 @@ export const Scroll = {
       ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
     </nve-grid-row>
   `)}
+  <nve-grid-footer>footer</nve-grid-footer>
 </nve-grid>
   `
 };
@@ -788,13 +790,31 @@ export const CardTabs = {
 
 export const Placeholder = {
   render: () => html`
-<nve-grid style="--scroll-height: 402px">
+<nve-grid style="min-height: 400px">
   <nve-grid-header>
     <nve-grid-column></nve-grid-column>
   </nve-grid-header>
   <nve-grid-placeholder>
-    Loading...
+    <nve-progress-ring status="accent" size="lg"></nve-progress-ring>
   </nve-grid-placeholder>
+</nve-grid>
+  `
+};
+
+export const PlaceholderRetry = {
+  render: () => html`
+<nve-grid style="min-height: 400px">
+  <nve-grid-header>
+    <nve-grid-column></nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-placeholder>
+    <div nve-layout="column gap:md align:center">
+      <h2 nve-text="heading">Data not found</h2>
+      <p nve-text="body">Try adjusting filter settings or try again later.</p>
+      <nve-button>Retry</nve-button>
+    </div>
+  </nve-grid-placeholder>
+  <nve-grid-footer>footer</nve-grid-footer>
 </nve-grid>
   `
 };
@@ -841,7 +861,7 @@ export const PanelDetail = {
       <nve-grid-row ?selected=${i === 1}>
         ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
         <nve-grid-cell>
-          <nve-icon-button container="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
+          <nve-icon-button container="flat" icon-name="expand-details" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
         </nve-grid-cell>
       </nve-grid-row>
     `)}
@@ -963,11 +983,11 @@ class GridPanelDemo extends LitElement {
           <nve-grid-row ?selected=${this.selectedId === row.id}>
             ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
             <nve-grid-cell>
-              <nve-icon-button @click=${() => this.selectedId = row.id} container="flat" icon-name="more-actions"></nve-icon-button>
+              <nve-icon-button @click=${() => this.selectedId = row.id} container="flat" icon-name="expand-details"></nve-icon-button>
             </nve-grid-cell>
           </nve-grid-row>`)}
           <nve-grid-footer>
-            <nve-icon-button aria-label="show grid options" container="flat" icon-name="more-actions"></nve-icon-button>
+            <nve-icon-button aria-label="show grid options" container="flat" icon-name="expand-details"></nve-icon-button>
           </nve-grid-footer>
         </nve-grid>
         <nve-panel closable ?expanded=${!!this.selectedId} @close=${() => this.selectedId = null} style="min-width: 280px">
