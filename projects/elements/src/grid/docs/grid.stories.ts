@@ -13,6 +13,7 @@ import '@elements/elements/icon-button/define.js';
 import '@elements/elements/tabs/define.js';
 import '@elements/elements/menu/define.js';
 import '@elements/elements/pagination/define.js';
+import '@elements/elements/progress-ring/define.js';
 import '@elements/elements/panel/define.js';
 import '@elements/elements/radio/define.js';
 import '@elements/elements/search/define.js';
@@ -146,7 +147,7 @@ export const RowGroups = {
   </mlv-grid-header>
   <mlv-grid-row>
     <mlv-grid-cell>
-      <mlv-icon-button icon-name="chevron" container="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></mlv-icon-button>
+      <mlv-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></mlv-icon-button>
     </mlv-grid-cell>
     <mlv-grid-cell>Session: 2yuecae</mlv-grid-cell>
     <mlv-grid-cell>upload</mlv-grid-cell>
@@ -156,7 +157,7 @@ export const RowGroups = {
   </mlv-grid-row>
   <mlv-grid-row selected>
     <mlv-grid-cell>
-      <mlv-icon-button icon-name="chevron" container="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></mlv-icon-button>
+      <mlv-icon-button icon-name="caret" container="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></mlv-icon-button>
     </mlv-grid-cell>
     <mlv-grid-cell>Session: mvwgh3t</mlv-grid-cell>
     <mlv-grid-cell>upload</mlv-grid-cell>
@@ -190,7 +191,7 @@ export const RowGroups = {
   </mlv-grid-row>
   <mlv-grid-row>
     <mlv-grid-cell>
-      <mlv-icon-button icon-name="chevron" container="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></mlv-icon-button>
+      <mlv-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></mlv-icon-button>
     </mlv-grid-cell>
     <mlv-grid-cell>Session: bg5ujqp</mlv-grid-cell>
     <mlv-grid-cell>upload</mlv-grid-cell>
@@ -200,7 +201,7 @@ export const RowGroups = {
   </mlv-grid-row>
   <mlv-grid-row>
     <mlv-grid-cell>
-      <mlv-icon-button icon-name="chevron" container="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></mlv-icon-button>
+      <mlv-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></mlv-icon-button>
     </mlv-grid-cell>
     <mlv-grid-cell>Session: 6ruehvh</mlv-grid-cell>
     <mlv-grid-cell>upload</mlv-grid-cell>
@@ -277,6 +278,7 @@ export const Scroll = {
       ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
     </mlv-grid-row>
   `)}
+  <mlv-grid-footer>footer</mlv-grid-footer>
 </mlv-grid>
   `
 };
@@ -788,13 +790,31 @@ export const CardTabs = {
 
 export const Placeholder = {
   render: () => html`
-<mlv-grid style="--scroll-height: 402px">
+<mlv-grid style="min-height: 400px">
   <mlv-grid-header>
     <mlv-grid-column></mlv-grid-column>
   </mlv-grid-header>
   <mlv-grid-placeholder>
-    Loading...
+    <mlv-progress-ring status="accent" size="lg"></mlv-progress-ring>
   </mlv-grid-placeholder>
+</mlv-grid>
+  `
+};
+
+export const PlaceholderRetry = {
+  render: () => html`
+<mlv-grid style="min-height: 400px">
+  <mlv-grid-header>
+    <mlv-grid-column></mlv-grid-column>
+  </mlv-grid-header>
+  <mlv-grid-placeholder>
+    <div mlv-layout="column gap:md align:center">
+      <h2 mlv-text="heading">Data not found</h2>
+      <p mlv-text="body">Try adjusting filter settings or try again later.</p>
+      <mlv-button>Retry</mlv-button>
+    </div>
+  </mlv-grid-placeholder>
+  <mlv-grid-footer>footer</mlv-grid-footer>
 </mlv-grid>
   `
 };
@@ -841,7 +861,7 @@ export const PanelDetail = {
       <mlv-grid-row ?selected=${i === 1}>
         ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
         <mlv-grid-cell>
-          <mlv-icon-button container="flat" icon-name="more-actions" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
+          <mlv-icon-button container="flat" icon-name="expand-details" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
         </mlv-grid-cell>
       </mlv-grid-row>
     `)}
@@ -963,11 +983,11 @@ class GridPanelDemo extends LitElement {
           <mlv-grid-row ?selected=${this.selectedId === row.id}>
             ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
             <mlv-grid-cell>
-              <mlv-icon-button @click=${() => this.selectedId = row.id} container="flat" icon-name="more-actions"></mlv-icon-button>
+              <mlv-icon-button @click=${() => this.selectedId = row.id} container="flat" icon-name="expand-details"></mlv-icon-button>
             </mlv-grid-cell>
           </mlv-grid-row>`)}
           <mlv-grid-footer>
-            <mlv-icon-button aria-label="show grid options" container="flat" icon-name="more-actions"></mlv-icon-button>
+            <mlv-icon-button aria-label="show grid options" container="flat" icon-name="expand-details"></mlv-icon-button>
           </mlv-grid-footer>
         </mlv-grid>
         <mlv-panel closable ?expanded=${!!this.selectedId} @close=${() => this.selectedId = null} style="min-width: 280px">

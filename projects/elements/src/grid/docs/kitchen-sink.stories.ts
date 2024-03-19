@@ -175,7 +175,9 @@ class KitchenSinkDemo extends LitElement {
       </mlv-search>
       <div mlv-layout="row gap:sm align:vertical-center span:3">
         <p mlv-text="body muted">1,145 results found</p>
-        <mlv-button id="column-settings-btn" @click=${() => this.workflowGridSettings = !this.workflowGridSettings}>display settings</mlv-button>
+        <mlv-button id="column-settings-btn" container="flat" @click=${() => this.workflowGridSettings = !this.workflowGridSettings}>
+          <mlv-icon name="gear"></mlv-icon>  display settings
+        </mlv-button>
       </div>
       <div mlv-layout="span:5"></div>
       <div mlv-layout="row gap:sm align:bottom span:4" style="margin-left: auto">

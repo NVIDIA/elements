@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs';
-import { Placeholder } from './grid.stories';
+import { Placeholder, PlaceholderRetry } from './grid.stories';
 
 <Meta title="Elements/Data Grid/Placeholder" />
 
@@ -7,22 +7,26 @@ import { Placeholder } from './grid.stories';
 
 <element-metrics tag="mlv-grid-placeholder"></element-metrics>
 
-Placeholder can be used to display a message when data is being loaded for the grid.
+Placeholder can be used to display a message when data is being loaded for the grid or empty states for datasets.
 
 ```html
-<mlv-grid style="--scroll-height: 333px">
+<mlv-grid style="min-height: 400px">
   <mlv-grid-header>
     <mlv-grid-column></mlv-grid-column>
   </mlv-grid-header>
   <mlv-grid-placeholder>
-    Loading...
+    <mlv-progress-ring status="accent" size="lg"></mlv-progress-ring>
   </mlv-grid-placeholder>
 </mlv-grid>
 ```
 
-## Placeholder
+## Loading
 
 <Canvas of={Placeholder} />
+
+## Retry
+
+<Canvas of={PlaceholderRetry} />
 
 <element-status tag="mlv-grid"></element-status>
 
