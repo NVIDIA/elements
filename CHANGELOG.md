@@ -1,3 +1,10 @@
+## [0.27.0](https://github.com/NVIDIA/elements/compare/v0.26.6...v0.27.0) (2024-03-20)
+
+
+### Features
+
+* **themes:** add themes package ([423df40](https://github.com/NVIDIA/elements/commit/423df40313832dcb0a52b5f49104705c9aa92032))
+
 ## [0.26.6](https://github.com/NVIDIA/elements/compare/v0.26.5...v0.26.6) (2024-03-20)
 
 
