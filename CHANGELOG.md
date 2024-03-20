@@ -1,3 +1,10 @@
+## [0.26.6](https://github.com/NVIDIA/elements/compare/v0.26.5...v0.26.6) (2024-03-20)
+
+
+### Bug Fixes
+
+* **elements:** grid placeholder ([2b88634](https://github.com/NVIDIA/elements/commit/2b88634e45ac114c919efa8b778fde94758102ba))
+
 ## [0.26.5](https://github.com/NVIDIA/elements/compare/v0.26.4...v0.26.5) (2024-03-13)
 
 
