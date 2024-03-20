@@ -25,7 +25,6 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-panel-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
- * @stable false
  */
 export class PanelHeader extends LitElement {
   static styles = useStyles([panelHeaderStyleSheet]);
@@ -62,7 +61,6 @@ export class PanelHeader extends LitElement {
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-panel-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
- * @stable false
  */
 export class PanelContent extends LitElement {
   static styles = useStyles([panelContentStyleSheet]);
@@ -89,7 +87,6 @@ export class PanelContent extends LitElement {
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-panel-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
- * @stable false
  */
 export class PanelFooter extends LitElement {
   static styles = useStyles([panelFooterStyleSheet]);
@@ -129,7 +126,6 @@ export class PanelFooter extends LitElement {
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-panel-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
- * @stable false
  */
 
 @stateExpanded<Panel>()

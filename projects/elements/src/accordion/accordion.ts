@@ -27,7 +27,6 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
- * @stable false
  */
 export class AccordionHeader extends LitElement {
   static styles = useStyles([accordionHeaderStyleSheet]);
@@ -73,7 +72,6 @@ export class AccordionHeader extends LitElement {
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
- * @stable false
  */
 export class AccordionContent extends LitElement {
   static styles = useStyles([accordionContentStyleSheet]);
@@ -103,7 +101,6 @@ export class AccordionContent extends LitElement {
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
- * @stable false
  */
 @stateExpanded<Accordion>()
 export class Accordion extends LitElement implements ContainerElement {
@@ -220,7 +217,6 @@ export class Accordion extends LitElement implements ContainerElement {
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
- * @stable false
  */
 export class AccordionGroup extends LitElement {
   declare _internals: ElementInternals;

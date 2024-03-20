@@ -1,12 +1,12 @@
 {
-  "created": "2024-03-12T16:36:58.383Z",
+  "created": "2024-03-20T22:27:50.128Z",
   "elements": [
     {
       "name": "nve-accordion",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -194,14 +194,14 @@
         }
       ],
       "behavior": "container",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-accordion-content",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -259,14 +259,14 @@
       },
       "stories": [],
       "behavior": "container",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-accordion-group",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -355,14 +355,14 @@
       },
       "stories": [],
       "behavior": "container",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-accordion-header",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -423,7 +423,7 @@
       },
       "stories": [],
       "behavior": "container",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-alert",
@@ -566,23 +566,38 @@
       "stories": [
         {
           "id": "Default",
-          "file": "alert-banner.stories.ts",
-          "template": "<nve-alert-banner .status=\"${args.status}\">\n  <nve-alert closable> <span slot=\"prefix\">Standard</span> banner message </nve-alert>\n</nve-alert-banner>\n"
+          "file": "alert.stories.ts",
+          "template": "<nve-alert>alert message</nve-alert>\n"
         },
         {
           "id": "Status",
-          "file": "alert-banner.stories.ts",
-          "template": "<div nve-layout=\"column gap:md\">\n  <nve-alert-banner>\n    <nve-alert closable>\n      <span slot=\"prefix\">Standard</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n    </nve-alert>\n  </nve-alert-banner>\n\n  <nve-alert-banner status=\"accent\">\n    <nve-alert closable>\n      <span slot=\"prefix\">Accent</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n    </nve-alert>\n  </nve-alert-banner>\n\n  <nve-alert-banner status=\"warning\">\n    <nve-alert closable>\n      <span slot=\"prefix\">Warning</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n    </nve-alert>\n  </nve-alert-banner>\n\n  <nve-alert-banner status=\"success\">\n    <nve-alert closable>\n      <span slot=\"prefix\">Success</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n    </nve-alert>\n  </nve-alert-banner>\n\n  <nve-alert-banner status=\"danger\">\n    <nve-alert closable>\n      <span slot=\"prefix\">Danger</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n    </nve-alert>\n  </nve-alert-banner>\n</div>\n"
+          "file": "alert.stories.ts",
+          "template": "<div nve-layout=\"column gap:md\">\n  <nve-alert>Standard</nve-alert>\n  <nve-alert status=\"accent\">Accent</nve-alert>\n  <nve-alert status=\"warning\">Warning</nve-alert>\n  <nve-alert status=\"success\">Success</nve-alert>\n  <nve-alert status=\"danger\">Danger</nve-alert>\n</div>\n"
         },
         {
-          "id": "LightTheme",
-          "file": "alert-banner.stories.ts",
-          "template": "<nve-alert-banner>\n  <nve-alert closable>\n    <span slot=\"prefix\">Standard</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n\n<nve-alert-banner status=\"accent\">\n  <nve-alert closable>\n    <span slot=\"prefix\">Accent</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n\n<nve-alert-banner status=\"warning\">\n  <nve-alert closable>\n    <span slot=\"prefix\">Warning</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n\n<nve-alert-banner status=\"success\">\n  <nve-alert closable>\n    <span slot=\"prefix\">Success</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n\n<nve-alert-banner status=\"danger\">\n  <nve-alert closable>\n    <span slot=\"prefix\">Danger</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n"
+          "id": "StatusLightTheme",
+          "file": "alert.stories.ts",
+          "template": "<nve-alert>Standard</nve-alert>\n<nve-alert status=\"accent\">Accent</nve-alert>\n<nve-alert status=\"warning\">Warning</nve-alert>\n<nve-alert status=\"success\">Success</nve-alert>\n<nve-alert status=\"danger\">Danger</nve-alert>\n"
         },
         {
-          "id": "DarkTheme",
-          "file": "alert-banner.stories.ts",
-          "template": "<nve-alert-banner>\n  <nve-alert closable>\n    <span slot=\"prefix\">Standard</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n\n<nve-alert-banner status=\"accent\">\n  <nve-alert closable>\n    <span slot=\"prefix\">Accent</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n\n<nve-alert-banner status=\"warning\">\n  <nve-alert closable>\n    <span slot=\"prefix\">Warning</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n\n<nve-alert-banner status=\"success\">\n  <nve-alert closable>\n    <span slot=\"prefix\">Success</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n\n<nve-alert-banner status=\"danger\">\n  <nve-alert closable>\n    <span slot=\"prefix\">Danger</span> banner message <a href=\"#\" nve-text=\"link\" slot=\"actions\">view details</a>\n  </nve-alert>\n</nve-alert-banner>\n"
+          "id": "StatusDarkTheme",
+          "file": "alert.stories.ts",
+          "template": "<nve-alert>Standard</nve-alert>\n<nve-alert status=\"accent\">Accent</nve-alert>\n<nve-alert status=\"warning\">Warning</nve-alert>\n<nve-alert status=\"success\">Success</nve-alert>\n<nve-alert status=\"danger\">Danger</nve-alert>\n"
+        },
+        {
+          "id": "TaskStatus",
+          "file": "alert.stories.ts",
+          "template": "<div nve-layout=\"column gap:md\">\n  <nve-alert status=\"scheduled\">Scheduled</nve-alert>\n  <nve-alert status=\"queued\">Queued</nve-alert>\n  <nve-alert status=\"finished\">Finished</nve-alert>\n  <nve-alert status=\"failed\">Failed</nve-alert>\n  <nve-alert status=\"unknown\">Unknown</nve-alert>\n  <nve-alert status=\"pending\">Pending</nve-alert>\n  <nve-alert status=\"starting\">Starting</nve-alert>\n  <nve-alert status=\"running\">Running</nve-alert>\n  <nve-alert status=\"restarting\">Restarting</nve-alert>\n  <nve-alert status=\"stopping\">Stopping</nve-alert>\n  <nve-alert status=\"ignored\">Ignored</nve-alert>\n</div>\n"
+        },
+        {
+          "id": "TaskStatusLightTheme",
+          "file": "alert.stories.ts",
+          "template": "<nve-alert status=\"scheduled\">Scheduled</nve-alert>\n<nve-alert status=\"queued\">Queued</nve-alert>\n<nve-alert status=\"pending\">Pending</nve-alert>\n<nve-alert status=\"starting\">Starting</nve-alert>\n<nve-alert status=\"running\">Running</nve-alert>\n<nve-alert status=\"restarting\">Restarting</nve-alert>\n<nve-alert status=\"stopping\">Stopping</nve-alert>\n<nve-alert status=\"finished\">Fnished</nve-alert>\n<nve-alert status=\"failed\">Failed</nve-alert>\n<nve-alert status=\"unknown\">Unknown</nve-alert>\n"
+        },
+        {
+          "id": "TaskStatusDarkTheme",
+          "file": "alert.stories.ts",
+          "template": "<nve-alert status=\"scheduled\">Scheduled</nve-alert>\n<nve-alert status=\"queued\">Queued</nve-alert>\n<nve-alert status=\"pending\">Pending</nve-alert>\n<nve-alert status=\"starting\">Starting</nve-alert>\n<nve-alert status=\"running\">Running</nve-alert>\n<nve-alert status=\"restarting\">Restarting</nve-alert>\n<nve-alert status=\"stopping\">Stopping</nve-alert>\n<nve-alert status=\"finished\">Finished</nve-alert>\n<nve-alert status=\"failed\">Failed</nve-alert>\n<nve-alert status=\"unknown\">Unknown</nve-alert>\n"
         }
       ],
       "behavior": "feedback",
@@ -894,7 +909,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": false,
       "themes": true,
@@ -1638,7 +1653,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -1820,7 +1835,7 @@
         }
       ],
       "behavior": "container",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-card",
@@ -2450,9 +2465,9 @@
       "apiReview": true,
       "performance": true,
       "stable": true,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
-      "themes": true,
+      "themes": false,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color",
       "entrypoint": "",
       "package": true,
@@ -2616,7 +2631,7 @@
         }
       ],
       "behavior": "form",
-      "status": "pre-release"
+      "status": "stable"
     },
     {
       "name": "nve-combobox",
@@ -2809,10 +2824,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 38.541,
+            "kb": 38.544,
             "requests": {
               "index.js": {
-                "kb": 37.767,
+                "kb": 37.77,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3264,9 +3279,9 @@
       "apiReview": true,
       "performance": true,
       "stable": true,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
-      "themes": true,
+      "themes": false,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date",
       "entrypoint": "",
       "package": true,
@@ -3409,43 +3424,28 @@
       },
       "stories": [
         {
-          "id": "Date",
-          "file": "date.stories.ts",
-          "template": "<nve-date>\n  <label>date</label>\n  <input type=\"date\" />\n  <nve-control-message>message</nve-control-message>\n</nve-date>\n"
+          "id": "Datetime",
+          "file": "datetime.stories.ts",
+          "template": "<nve-datetime>\n  <label>date</label>\n  <input type=\"datetime-local\" />\n  <nve-control-message>message</nve-control-message>\n</nve-datetime>\n"
         },
         {
           "id": "Datalist",
-          "file": "date.stories.ts",
-          "template": "<nve-date>\n  <label>label</label>\n  <input type=\"date\" />\n  <nve-control-message>message</nve-control-message>\n  <datalist>\n    <option value=\"2018-07-22\"></option>\n    <option value=\"2018-01-01\"></option>\n    <option value=\"2018-12-31\"></option>\n  </datalist>\n</nve-date>\n"
+          "file": "datetime.stories.ts",
+          "template": "<nve-month>\n  <label>label</label>\n  <input type=\"datetime-local\" />\n  <nve-control-message>message</nve-control-message>\n  <datalist>\n    <option value=\"2018-06-07T00:00\"></option>\n    <option value=\"2018-06-12T19:30\"></option>\n    <option value=\"2018-06-14T00:00\"></option>\n  </datalist>\n</nve-month>\n"
         },
         {
           "id": "Vertical",
-          "file": "date.stories.ts",
-          "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-date>\n    <label>label</label>\n    <input type=\"date\" />\n    <nve-control-message>message</nve-control-message>\n  </nve-date>\n\n  <nve-date>\n    <label>disabled</label>\n    <input type=\"date\" disabled />\n    <nve-control-message>message</nve-control-message>\n  </nve-date>\n\n  <nve-date>\n    <label>success</label>\n    <input type=\"date\" />\n    <nve-control-message status=\"success\">message</nve-control-message>\n  </nve-date>\n\n  <nve-date>\n    <label>error</label>\n    <input type=\"date\" />\n    <nve-control-message status=\"error\">message</nve-control-message>\n  </nve-date>\n</div>\n"
+          "file": "datetime.stories.ts",
+          "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-datetime>\n    <label>label</label>\n    <input type=\"datetime-local\" />\n    <nve-control-message>message</nve-control-message>\n  </nve-datetime>\n\n  <nve-datetime>\n    <label>disabled</label>\n    <input type=\"datetime-local\" disabled />\n    <nve-control-message>message</nve-control-message>\n  </nve-datetime>\n\n  <nve-datetime>\n    <label>success</label>\n    <input type=\"datetime-local\" />\n    <nve-control-message status=\"success\">message</nve-control-message>\n  </nve-datetime>\n\n  <nve-datetime>\n    <label>error</label>\n    <input type=\"datetime-local\" />\n    <nve-control-message status=\"error\">message</nve-control-message>\n  </nve-datetime>\n</div>\n"
         },
         {
           "id": "Horizontal",
-          "file": "date.stories.ts",
-          "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-date layout=\"horizontal\">\n    <label>label</label>\n    <input type=\"date\" />\n    <nve-control-message>message</nve-control-message>\n  </nve-date>\n\n  <nve-date layout=\"horizontal\">\n    <label>disabled</label>\n    <input type=\"date\" disabled />\n    <nve-control-message>message</nve-control-message>\n  </nve-date>\n\n  <nve-date layout=\"horizontal\">\n    <label>success</label>\n    <input type=\"date\" />\n    <nve-control-message status=\"success\">message</nve-control-message>\n  </nve-date>\n\n  <nve-date layout=\"horizontal\">\n    <label>error</label>\n    <input type=\"date\" />\n    <nve-control-message status=\"error\">message</nve-control-message>\n  </nve-date>\n</div>\n"
-        },
-        {
-          "id": "Range",
-          "file": "date.stories.ts",
-          "template": "<nve-input-group>\n  <label>date range</label>\n  <nve-date>\n    <input type=\"date\" aria-label=\"start date\" value=\"2018-07-22\" />\n  </nve-date>\n  <nve-date>\n    <input type=\"date\" aria-label=\"end date\" value=\"2022-07-22\" />\n  </nve-date>\n  <nve-control-message>message</nve-control-message>\n</nve-input-group>\n"
-        },
-        {
-          "id": "Types",
-          "file": "date.stories.ts",
-          "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-date layout=\"horizontal\">\n    <label>date label</label>\n    <input type=\"date\" />\n    <nve-control-message>message</nve-control-message>\n  </nve-date>\n\n  <nve-datetime layout=\"horizontal\">\n    <label>datetime label</label>\n    <input type=\"datetime-local\" />\n    <nve-control-message>message</nve-control-message>\n  </nve-datetime>\n\n  <nve-month layout=\"horizontal\">\n    <label>month label</label>\n    <input type=\"month\" />\n    <nve-control-message>message</nve-control-message>\n  </nve-month>\n\n  <nve-week layout=\"horizontal\">\n    <label>week label</label>\n    <input type=\"week\" />\n    <nve-control-message>message</nve-control-message>\n  </nve-week>\n\n  <nve-time layout=\"horizontal\">\n    <label>time label</label>\n    <input type=\"time\" />\n    <nve-control-message>message</nve-control-message>\n  </nve-time>\n\n  <nve-input-group layout=\"horizontal\">\n    <label>date range</label>\n    <nve-date>\n      <input type=\"date\" aria-label=\"start date\" value=\"2018-07-22\" />\n    </nve-date>\n    <nve-date>\n      <input type=\"date\" aria-label=\"end date\" value=\"2022-07-22\" />\n    </nve-date>\n    <nve-control-message>message</nve-control-message>\n  </nve-input-group>\n</div>\n"
-        },
-        {
-          "id": "FitText",
-          "file": "date.stories.ts",
-          "template": "<nve-date fit-text>\n  <label>date</label>\n  <input type=\"date\" value=\"2017-06-01\" />\n  <nve-control-message>message</nve-control-message>\n</nve-date>\n"
+          "file": "datetime.stories.ts",
+          "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-datetime layout=\"horizontal\">\n    <label>label</label>\n    <input type=\"datetime-local\" />\n    <nve-control-message>message</nve-control-message>\n  </nve-datetime>\n\n  <nve-datetime layout=\"horizontal\">\n    <label>disabled</label>\n    <input type=\"datetime-local\" disabled />\n    <nve-control-message>message</nve-control-message>\n  </nve-datetime>\n\n  <nve-datetime layout=\"horizontal\">\n    <label>success</label>\n    <input type=\"datetime-local\" />\n    <nve-control-message status=\"success\">message</nve-control-message>\n  </nve-datetime>\n\n  <nve-datetime layout=\"horizontal\">\n    <label>error</label>\n    <input type=\"datetime-local\" />\n    <nve-control-message status=\"error\">message</nve-control-message>\n  </nve-datetime>\n</div>\n"
         }
       ],
       "behavior": "form",
-      "status": "pre-release"
+      "status": "stable"
     },
     {
       "name": "nve-datetime",
@@ -3453,9 +3453,9 @@
       "apiReview": true,
       "performance": true,
       "stable": true,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
-      "themes": true,
+      "themes": false,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local",
       "entrypoint": "",
       "package": true,
@@ -3619,7 +3619,7 @@
         }
       ],
       "behavior": "form",
-      "status": "pre-release"
+      "status": "stable"
     },
     {
       "name": "nve-dialog",
@@ -5288,199 +5288,9 @@
       },
       "stories": [
         {
-          "id": "Default",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "MultiSelect",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    <nve-grid-column width=\"max-content\" position=\"fixed\">\n      <nve-checkbox>\n        <input type=\"checkbox\" aria-label=\"select all rows\" />\n      </nve-checkbox>\n    </nve-grid-column>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems().map((row, i) => html\n  <nve-grid-row>\n    <nve-grid-cell>\n      <nve-checkbox>\n        <input type=\"checkbox\" ?checked=\"${i\" =\"\" =\"\" =\"1}\" aria-label=\"select row ${i}\" />\n      </nve-checkbox>\n    </nve-grid-cell>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "MultiSelectBulkActions",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"--scroll-height: 402px\">\n  <nve-grid-header>\n    <nve-grid-column width=\"max-content\" position=\"fixed\">\n      <nve-checkbox>\n        <input type=\"checkbox\" aria-label=\"select all rows\" />\n      </nve-checkbox>\n    </nve-grid-column>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems(20).map((row, i) => html\n  <nve-grid-row .selected=\"${i\" =\"\" =\"\" =\"1}\">\n    <nve-grid-cell>\n      <nve-checkbox>\n        <input type=\"checkbox\" ?checked=\"${i\" =\"\" =\"\" =\"1}\" aria-label=\"select row ${i}\" />\n      </nve-checkbox>\n    </nve-grid-cell>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n  <nve-toolbar status=\"accent\" slot=\"footer\">\n    <nve-icon-button container=\"flat\" icon-name=\"cancel\" slot=\"prefix\"></nve-icon-button>\n    <p nve-text=\"boxy\">1 selected</p>\n    <nve-button container=\"flat\" interaction=\"destructive\" slot=\"suffix\">delete</nve-button>\n    <nve-icon-button container=\"flat\" icon-name=\"more-actions\" slot=\"suffix\"></nve-icon-button>\n  </nve-toolbar>\n</nve-grid>\n"
-        },
-        {
-          "id": "SingleSelect",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    <nve-grid-column width=\"max-content\" position=\"fixed\"></nve-grid-column>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems().map((row, i) => html\n  <nve-grid-row>\n    <nve-grid-cell>\n      <nve-radio>\n        <input\n          type=\"radio\"\n          ?checked=\"${i\"\n          =\"\"\n          =\"\"\n          =\"1}\"\n          name=\"single-select\"\n          .value=\"${i}\"\n          aria-label=\"select row ${i}\"\n        />\n      </nve-radio>\n    </nve-grid-cell>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "RowAction",
-          "file": "grid.stories.ts",
-          "template": "<div>\n  <nve-grid>\n    <nve-grid-header>\n      ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n      <nve-grid-column width=\"max-content\" aria-label=\"additonal actions\" position=\"fixed\"></nve-grid-column>\n    </nve-grid-header>\n    ${getItems().map((row, i) => html\n    <nve-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n      <nve-grid-cell>\n        <nve-icon-button container=\"flat\" icon-name=\"more-actions\" aria-label=\"row ${i} actions\"></nve-icon-button>\n      </nve-grid-cell>\n    </nve-grid-row>\n    )}\n  </nve-grid>\n</div>\n"
-        },
-        {
-          "id": "RowGroups",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    <nve-grid-column width=\"max-content\" aria-label=\"expand groups\" position=\"fixed\"></nve-grid-column>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  <nve-grid-row>\n    <nve-grid-cell>\n      <nve-icon-button\n        icon-name=\"chevron\"\n        container=\"flat\"\n        direction=\"right\"\n        aria-label=\"view session 2yuecae SSD uploads\"\n      ></nve-icon-button>\n    </nve-grid-cell>\n    <nve-grid-cell>Session: 2yuecae</nve-grid-cell>\n    <nve-grid-cell>upload</nve-grid-cell>\n    <nve-grid-cell>pending</nve-grid-cell>\n    <nve-grid-cell>p3</nve-grid-cell>\n    <nve-grid-cell>12/04/22</nve-grid-cell>\n  </nve-grid-row>\n  <nve-grid-row selected>\n    <nve-grid-cell>\n      <nve-icon-button\n        icon-name=\"chevron\"\n        container=\"flat\"\n        direction=\"down\"\n        aria-label=\"view session mvwgh3t SSD uploads\"\n      ></nve-icon-button>\n    </nve-grid-cell>\n    <nve-grid-cell>Session: mvwgh3t</nve-grid-cell>\n    <nve-grid-cell>upload</nve-grid-cell>\n    <nve-grid-cell>pending</nve-grid-cell>\n    <nve-grid-cell>p0</nve-grid-cell>\n    <nve-grid-cell>12/11/22</nve-grid-cell>\n  </nve-grid-row>\n  <nve-grid-row>\n    <nve-grid-cell></nve-grid-cell>\n    <nve-grid-cell>SSD: mvwgh3t</nve-grid-cell>\n    <nve-grid-cell>validating</nve-grid-cell>\n    <nve-grid-cell>pending</nve-grid-cell>\n    <nve-grid-cell>p0</nve-grid-cell>\n    <nve-grid-cell>12/11/22</nve-grid-cell>\n  </nve-grid-row>\n  <nve-grid-row>\n    <nve-grid-cell></nve-grid-cell>\n    <nve-grid-cell>SSD: qudbd8x</nve-grid-cell>\n    <nve-grid-cell>uploading</nve-grid-cell>\n    <nve-grid-cell>finished</nve-grid-cell>\n    <nve-grid-cell>p0</nve-grid-cell>\n    <nve-grid-cell>12/11/22</nve-grid-cell>\n  </nve-grid-row>\n  <nve-grid-row>\n    <nve-grid-cell></nve-grid-cell>\n    <nve-grid-cell>SSD: j8hvikt</nve-grid-cell>\n    <nve-grid-cell>queuing</nve-grid-cell>\n    <nve-grid-cell>running</nve-grid-cell>\n    <nve-grid-cell>p0</nve-grid-cell>\n    <nve-grid-cell>12/11/22</nve-grid-cell>\n  </nve-grid-row>\n  <nve-grid-row>\n    <nve-grid-cell>\n      <nve-icon-button\n        icon-name=\"chevron\"\n        container=\"flat\"\n        direction=\"right\"\n        aria-label=\"view session bg5ujqp SSD uploads\"\n      ></nve-icon-button>\n    </nve-grid-cell>\n    <nve-grid-cell>Session: bg5ujqp</nve-grid-cell>\n    <nve-grid-cell>upload</nve-grid-cell>\n    <nve-grid-cell>pending</nve-grid-cell>\n    <nve-grid-cell>p1</nve-grid-cell>\n    <nve-grid-cell>12/12/22</nve-grid-cell>\n  </nve-grid-row>\n  <nve-grid-row>\n    <nve-grid-cell>\n      <nve-icon-button\n        icon-name=\"chevron\"\n        container=\"flat\"\n        direction=\"right\"\n        aria-label=\"view session 6ruehvh SSD uploads\"\n      ></nve-icon-button>\n    </nve-grid-cell>\n    <nve-grid-cell>Session: 6ruehvh</nve-grid-cell>\n    <nve-grid-cell>upload</nve-grid-cell>\n    <nve-grid-cell>pending</nve-grid-cell>\n    <nve-grid-cell>p2</nve-grid-cell>\n    <nve-grid-cell>12/09/22</nve-grid-cell>\n  </nve-grid-row>\n</nve-grid>\n"
-        },
-        {
-          "id": "Footer",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems(8).map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n  <nve-grid-footer>\n    <p nve-text=\"body\">footer content</p>\n  </nve-grid-footer>\n</nve-grid>\n"
-        },
-        {
-          "id": "FooterScrollbar",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"--scroll-height: 402px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems(14).map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n  <nve-grid-footer>\n    <p nve-text=\"body\">footer content</p>\n  </nve-grid-footer>\n</nve-grid>\n"
-        },
-        {
-          "id": "Pagination",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"--scroll-height: 370px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n  <nve-grid-footer>\n    <nve-pagination value=\"1\" items=\"100\" step=\"10\"></nve-pagination>\n  </nve-grid-footer>\n</nve-grid>\n"
-        },
-        {
-          "id": "Scroll",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"height: 402px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems(100).map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "ScrollPosition",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"height: 402px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems(100).map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )} </nve-grid\n><br />\n\n<nve-button>scroll top</nve-button>\n<script type=\"module\">\n  document.querySelector(\"nve-button\").addEventListener(\"click\", () => {\n    document.querySelector(\"nve-grid\").scrollTo({ top: 0, behavior: \"smooth\" });\n  });\n</script>\n"
-        },
-        {
-          "id": "FullHeight",
-          "file": "grid.stories.ts",
-          "template": "<section\n  nve-layout=\"column gap:lg\"\n  style=\"\n    height: 500px;\n    padding: var(--nve-ref-size-100);\n    border: 1px solid var(--nve-ref-border-color-emphasis);\n    resize: vertical;\n    overflow: hidden;\n  \"\n>\n  <nve-search>\n    <input type=\"search\" aria-label=\"search\" placeholder=\"search\" />\n  </nve-search>\n  <nve-grid nve-layout=\"full\">\n    <nve-grid-header>\n      ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n    </nve-grid-header>\n    ${getItems(100).map(row => html\n    <nve-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n    </nve-grid-row>\n    )}\n  </nve-grid>\n</section>\n"
-        },
-        {
-          "id": "ColumnAction",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column], i) => html\n    <nve-grid-column>\n      ${column.label}\n      <nve-icon-button id=\"column-${i}-btn\" icon-name=\"more-actions\" slot=\"actions\"></nve-icon-button> </nve-grid-column\n    >)}\n  </nve-grid-header>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n</nve-grid>\n<nve-dropdown anchor=\"column-0-btn\" arrow>\n  <nve-search rounded>\n    <input type=\"search\" placeholder=\"search column\" aria-label=\"search apps\" />\n  </nve-search>\n  <nve-menu>\n    <nve-menu-item><nve-icon name=\"gear\"></nve-icon> settings</nve-menu-item>\n    <nve-menu-item><nve-icon name=\"star\"></nve-icon> favorites</nve-menu-item>\n  </nve-menu>\n</nve-dropdown>\n"
-        },
-        {
-          "id": "ColumnWidth",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"--scroll-height: 402px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column], i) => html<nve-grid-column width=\"${i !== 4 ? '300px' : ''}\"\n      >${column.label}</nve-grid-column\n    >\n    )}\n  </nve-grid-header>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n  <nve-grid-footer>footer content</nve-grid-footer>\n</nve-grid>\n"
-        },
-        {
-          "id": "Content",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems(10).map((row, ir) => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell], ic) => html<nve-grid-cell\n      >${ir === 3 && ic === 2 ? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium\n      voluptatum deleniti atque corrupti quos dolores : cell.value}</nve-grid-cell\n    >\n    )}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "ColumnFixed",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"--scroll-height: 402px; max-width: 800px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column], i) => html<nve-grid-column position=${i === 0 ? 'fixed' : ''} width=\"200px\">${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems().map(row => html\n    <nve-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n    </nve-grid-row>\n  )}\n</nve-grid>"
-        },
-        {
-          "id": "ColumnMultiFixed",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"--scroll-height: 402px; max-width: 800px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column], i) => html<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width=\"200px\">${column.label}</nve-grid-column>)}\n  </nve-grid-header>\n  ${getItems().map(row => html\n    <nve-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n    </nve-grid-row>\n  )}\n</nve-grid>"
-        },
-        {
-          "id": "ColumnStackFixed",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"--scroll-height: 402px; max-width: 800px\">\n  <nve-grid-header>\n    <nve-grid-column position=\"fixed\" width=\"100px\">Column 1</nve-grid-column>\n    <nve-grid-column position=\"fixed\" width=\"100px\">Column 2</nve-grid-column>\n    <nve-grid-column width=\"200px\">Column 3</nve-grid-column>\n    <nve-grid-column width=\"200px\">Column 4</nve-grid-column>\n    <nve-grid-column width=\"200px\">Column 5</nve-grid-column>\n    <nve-grid-column width=\"200px\">Column 6</nve-grid-column>\n    <nve-grid-column position=\"fixed\" width=\"100px\">Column 7</nve-grid-column>\n    <nve-grid-column position=\"fixed\" width=\"100px\">Column 8</nve-grid-column>\n  </nve-grid-header>\n  ${grid(10, 8).rows.map(row => html\n  <nve-grid-row> ${row.cells.map(cell => html<nve-grid-cell>${cell.label}</nve-grid-cell> )} </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "ColumnAlignCenter",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column column-align=\"center\"\n      >${column.label}</nve-grid-column\n    >)}\n  </nve-grid-header>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "ColumnAlignEnd",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column column-align=\"end\"\n      >${column.label}</nve-grid-column\n    >)}\n  </nve-grid-header>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "ColumnAlignStart",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column column-align=\"start\"\n      >${column.label}</nve-grid-column\n    >)}\n  </nve-grid-header>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "DisplaySettings",
-          "file": "grid.stories.ts",
-          "template": "<div nve-layout=\"column gap:md full\">\n  <nve-dropdown closable anchor=\"column-settings\">\n    <nve-checkbox-group style=\"width: 175px\">\n      <label>Columns</label>\n      <nve-checkbox>\n        <label>Column 1</label>\n        <input type=\"checkbox\" checked />\n      </nve-checkbox>\n      <nve-checkbox>\n        <label>Column 2</label>\n        <input type=\"checkbox\" checked />\n      </nve-checkbox>\n      <nve-checkbox>\n        <label>Column 3</label>\n        <input type=\"checkbox\" checked />\n      </nve-checkbox>\n      <nve-checkbox>\n        <label>Column 4</label>\n        <input type=\"checkbox\" checked />\n      </nve-checkbox>\n    </nve-checkbox-group>\n    <nve-divider></nve-divider>\n    <nve-button interaction=\"flat-destructive\" style=\"--height: initial\">restore settings</nve-button>\n  </nve-dropdown>\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <p nve-text=\"body muted\">1,145 results found</p>\n    <nve-button id=\"column-settings\">Display Settings</nve-button>\n  </div>\n  <nve-grid nve-layout=\"full\">\n    <nve-grid-header>\n      ${grid(8, 4).columns.map(column => html<nve-grid-column>${column.label}</nve-grid-column> )}\n    </nve-grid-header>\n    ${grid(8, 4).rows.map(row => html\n    <nve-grid-row> ${row.cells.map(cell => html<nve-grid-cell>${cell.label}</nve-grid-cell> )} </nve-grid-row>\n    )}\n  </nve-grid>\n</div>\n"
-        },
-        {
-          "id": "RowSort",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    <nve-grid-column> None <nve-sort-button sort=\"none\"></nve-sort-button> </nve-grid-column>\n    <nve-grid-column> Ascending <nve-sort-button sort=\"ascending\"></nve-sort-button> </nve-grid-column>\n    <nve-grid-column> Descending <nve-sort-button sort=\"descending\"></nve-sort-button> </nve-grid-column>\n    <nve-grid-column>Default</nve-grid-column>\n    <nve-grid-column>Default</nve-grid-column>\n  </nve-grid-header>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "RowSortInteractive",
-          "file": "grid.stories.ts",
-          "template": "<row-sort-demo></row-sort-demo>\n"
-        },
-        {
-          "id": "PerformanceInfiniteScroll",
-          "file": "grid.stories.ts",
-          "template": "<infinite-scroll-demo></infinite-scroll-demo>\n"
-        },
-        {
-          "id": "Performance",
-          "file": "grid.stories.ts",
-          "template": "<grid-performance-demo></grid-performance-demo>\n"
-        },
-        {
-          "id": "PerformanceVirtualScroll",
-          "file": "grid.stories.ts",
-          "template": "<grid-virtual-scroll-demo></grid-virtual-scroll-demo>\n"
-        },
-        {
-          "id": "Stripe",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid stripe>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "Card",
-          "file": "grid.stories.ts",
-          "template": "<nve-card>\n  <nve-card-header>\n    <h2 nve-text=\"heading sm bold\">Data Grid</h2>\n    <h3 nve-text=\"body muted\">Card Example</h3>\n    <nve-icon-button slot=\"header-action\" icon-name=\"more-actions\"></nve-icon-button>\n  </nve-card-header>\n  <nve-grid container=\"flat\" style=\"--scroll-height: 325px\">\n    <nve-grid-header>\n      ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n    </nve-grid-header>\n    ${getItems().map(row => html\n    <nve-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n    </nve-grid-row>\n    )}\n  </nve-grid>\n</nve-card>\n"
-        },
-        {
-          "id": "CardTabs",
-          "file": "grid.stories.ts",
-          "template": "<nve-card>\n  <nve-card-header>\n    <h2 nve-text=\"heading sm bold\">Data Grid</h2>\n    <nve-tabs>\n      <nve-tabs-item selected>tab 1</nve-tabs-item>\n      <nve-tabs-item>tab 2</nve-tabs-item>\n      <nve-tabs-item>tab 3</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-header>\n  <nve-grid container=\"flat\" style=\"--scroll-height: 325px\">\n    <nve-grid-header>\n      ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n    </nve-grid-header>\n    ${getItems().map(row => html\n    <nve-grid-row>\n      ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n    </nve-grid-row>\n    )}\n  </nve-grid>\n</nve-card>\n"
-        },
-        {
-          "id": "Placeholder",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid style=\"--scroll-height: 402px\">\n  <nve-grid-header>\n    <nve-grid-column></nve-grid-column>\n  </nve-grid-header>\n  <nve-grid-placeholder> Loading... </nve-grid-placeholder>\n</nve-grid>\n"
-        },
-        {
-          "id": "Full",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid container=\"full\" style=\"--scroll-height: 402px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems(20).map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "Flat",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid container=\"flat\" style=\"--scroll-height: 402px\">\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  ${getItems(20).map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell>)}\n  </nve-grid-row>\n  )}\n</nve-grid>\n"
-        },
-        {
-          "id": "PanelDetail",
-          "file": "grid.stories.ts",
-          "template": "<div id=\"grid-detail-panel\" nve-layout=\"row gap:md align:stretch\">\n  <nve-grid>\n    <nve-grid-header>\n      ${grid(10, 3).columns.map(column => html<nve-grid-column>${column.label}</nve-grid-column> )}\n      <nve-grid-column width=\"max-content\" aria-label=\"details\"></nve-grid-column>\n    </nve-grid-header>\n    ${grid(10, 3).rows.map((row, i) => html\n    <nve-grid-row ?selected=\"${i\" =\"\" =\"\" =\"1}\">\n      ${row.cells.map(cell => html<nve-grid-cell>${cell.label}</nve-grid-cell> )}\n      <nve-grid-cell>\n        <nve-icon-button\n          container=\"flat\"\n          icon-name=\"more-actions\"\n          value=\"${row.id}\"\n          aria-label=\"view ${row.id}\"\n        ></nve-icon-button>\n      </nve-grid-cell>\n    </nve-grid-row>\n    )}\n  </nve-grid>\n  <nve-panel expanded closable style=\"min-width: 280px\">\n    <nve-panel-header>\n      <h2 slot=\"title\">Row 2 Details</h2>\n    </nve-panel-header>\n    <nve-panel-content>\n      <div nve-layout=\"column gap:md\">\n        <div nve-layout=\"column gap:xs\">\n          <label nve-text=\"body sm muted\">Task</label>\n          <p nve-text=\"eyebrow sm\">Workflow</p>\n        </div>\n        <div nve-layout=\"column gap:xs\">\n          <label nve-text=\"body sm muted\">Status</label>\n          <nve-badge status=\"success\">Complete</nve-badge>\n        </div>\n        <div nve-layout=\"column gap:xs\">\n          <label nve-text=\"body sm muted\">Priority</label>\n          <nve-badge status=\"pending\">P1</nve-badge>\n        </div>\n      </div>\n    </nve-panel-content>\n  </nve-panel>\n</div>\n"
-        },
-        {
-          "id": "PanelGrid",
-          "file": "grid.stories.ts",
-          "template": "<style>\n  nve-panel#panel-grid {\n    min-width: 380px;\n    z-index: 99;\n    height: 100vh;\n    position: sticky;\n    top: 0;\n    right: 0;\n  }\n\n  .sb-story nve-panel#panel-grid {\n    height: 700px;\n  }\n\n  body {\n    padding: 0 !important;\n  }\n</style>\n<main nve-layout=\"row gap:sm full\">\n  <section nve-layout=\"column gap:md full align:stretch\">page content</section>\n  <nve-panel expanded id=\"panel-grid\">\n    <nve-panel-header>\n      <h2 slot=\"title\">Recording</h2>\n    </nve-panel-header>\n    <nve-grid container=\"flat\" stripe style=\"--scroll-height: 100vh\">\n      <nve-grid-header hidden>\n        <nve-grid-column>Key</nve-grid-column>\n        <nve-grid-column>Value</nve-grid-column>\n      </nve-grid-header>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Session ID</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">123456</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Record Date</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">2023-09-04 11:00</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Tag</p></nve-grid-cell>\n        <nve-grid-cell><nve-tag readonly>Production</nve-tag></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Route ID</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">9876123</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Configuration</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">prod-0.1.0</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Duration</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">1:23:34</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Description</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">local test run</p></nve-grid-cell>\n      </nve-grid-row>\n      <nve-grid-row>\n        <nve-grid-cell><p nve-text=\"label muted\">Number of Sensors</p></nve-grid-cell>\n        <nve-grid-cell><p nve-text=\"label\">24</p></nve-grid-cell>\n      </nve-grid-row>\n    </nve-grid>\n  </nve-panel>\n</main>\n"
-        },
-        {
-          "id": "PanelDetailInteractive",
-          "file": "grid.stories.ts",
-          "template": "<grid-panel-demo></grid-panel-demo>\n"
-        },
-        {
-          "id": "ColumnDynamicFixed",
-          "file": "grid.stories.ts",
-          "template": "<grid-dynamic-column-demo></grid-dynamic-column-demo>\n"
-        },
-        {
-          "id": "All",
-          "file": "grid.stories.ts",
-          "template": "<div nve-layout=\"grid gap:lg span-items:4 pad:md\">\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Grid</h2>\n    ${Default.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Multi Select</h2>\n    ${MultiSelect.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Multi Select Bulk Actions</h2>\n    ${MultiSelectBulkActions.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Single Select</h2>\n    ${SingleSelect.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Card Tabs</h2>\n    ${CardTabs.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Panel Detail</h2>\n    ${PanelDetail.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Column Multi Fixed</h2>\n    ${ColumnMultiFixed.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Column Fixed</h2>\n    ${ColumnFixed.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Column Dynamic Fixed</h2>\n    ${ColumnDynamicFixed.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Column Width</h2>\n    ${ColumnWidth.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Footer</h2>\n    ${Footer.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Scroll</h2>\n    ${Scroll.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Column Align center</h2>\n    ${ColumnAlignCenter.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Column Align End</h2>\n    ${ColumnAlignEnd.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Row Action</h2>\n    ${RowAction.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Row Sort</h2>\n    ${RowSort.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Pagination</h2>\n    ${Pagination.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Stripe</h2>\n    ${Stripe.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Card</h2>\n    ${Card.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Placeholder</h2>\n    ${Placeholder.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Full</h2>\n    ${Full.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Flat</h2>\n    ${Flat.render()}\n  </div>\n  <div nve-layout=\"column gap:md align:stretch\">\n    <h2 nve-text=\"heading\">Content Width</h2>\n    ${Content.render()}\n  </div>\n</div>\n"
-        },
-        {
-          "id": "InvalidDOM",
-          "file": "grid.stories.ts",
-          "template": "<nve-grid>\n  <nve-grid-header>\n    ${Object.entries(getItems()[0]).map(([, column]) => html<nve-grid-column>${column.label}</nve-grid-column> )}\n  </nve-grid-header>\n  <div>invalid</div>\n  ${getItems().map(row => html\n  <nve-grid-row>\n    ${Object.entries(row).map(([, cell]) => html<nve-grid-cell>${cell.value}</nve-grid-cell> )}\n  </nve-grid-row>\n  )}\n  <span>invalid</span>\n</nve-grid>\n"
+          "id": "KitchenSink",
+          "file": "kitchen-sink.stories.ts",
+          "template": "<div no-story-container>\n  <ksg-demo></ksg-demo>\n</div>\n"
         }
       ],
       "behavior": "list",
@@ -6731,19 +6541,29 @@
       },
       "stories": [
         {
-          "id": "Actions",
-          "file": "actions.stories.ts",
-          "template": "<nve-input>\n  <label>label</label>\n  <nve-icon-button icon-name=\"search\" container=\"flat\" readonly></nve-icon-button>\n  <input type=\"text\" />\n  <nve-icon-button icon-name=\"cancel\" container=\"flat\" aria-label=\"clear\"></nve-icon-button>\n  <nve-control-message>message</nve-control-message>\n</nve-input>\n"
+          "id": "Radio",
+          "file": "radio.stories.ts",
+          "template": "<nve-radio-group>\n  <label>label</label>\n  <nve-radio>\n    <label>radio 1</label>\n    <input type=\"radio\" checked />\n  </nve-radio>\n\n  <nve-radio>\n    <label>radio 2</label>\n    <input type=\"radio\" />\n  </nve-radio>\n\n  <nve-radio>\n    <label>radio 3</label>\n    <input type=\"radio\" />\n  </nve-radio>\n  <nve-control-message>message</nve-control-message>\n</nve-radio-group>\n"
         },
         {
-          "id": "LabelAction",
-          "file": "actions.stories.ts",
-          "template": "<nve-input>\n  <label>label</label>\n  <nve-icon-button\n    icon-name=\"information-circle-stroke\"\n    container=\"flat\"\n    aria-label=\"more details\"\n    slot=\"label\"\n  ></nve-icon-button>\n  <input type=\"text\" />\n  <nve-control-message>message</nve-control-message>\n</nve-input>\n"
+          "id": "VerticalGroup",
+          "file": "radio.stories.ts",
+          "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-radio-group>\n    <label>label</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message>message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group>\n    <label>disabled</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked disabled />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" disabled />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" disabled />\n    </nve-radio>\n    <nve-control-message>disabled message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group>\n    <label>success</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message status=\"success\">success message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group>\n    <label>error</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message status=\"error\">error message</nve-control-message>\n  </nve-radio-group>\n</div>\n"
         },
         {
-          "id": "PrefixSuffix",
-          "file": "actions.stories.ts",
-          "template": "<nve-input>\n  <label>label</label>\n  <nve-button container=\"flat\" readonly>https://</nve-button>\n  <input type=\"text\" />\n  <nve-button container=\"flat\" readonly>.com</nve-button>\n  <nve-control-message>message</nve-control-message>\n</nve-input>\n"
+          "id": "VerticalInlineGroup",
+          "file": "radio.stories.ts",
+          "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-radio-group layout=\"vertical-inline\">\n    <label>label</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message>message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group layout=\"vertical-inline\">\n    <label>disabled</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked disabled />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" disabled />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" disabled />\n    </nve-radio>\n    <nve-control-message>disabled message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group layout=\"vertical-inline\">\n    <label>success</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message status=\"success\">success message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group layout=\"vertical-inline\">\n    <label>error</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message status=\"error\">error message</nve-control-message>\n  </nve-radio-group>\n</div>\n"
+        },
+        {
+          "id": "HorizontalGroup",
+          "file": "radio.stories.ts",
+          "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-radio-group layout=\"horizontal\">\n    <label>label</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message>message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group layout=\"horizontal\">\n    <label>disabled</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked disabled />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" disabled />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" disabled />\n    </nve-radio>\n    <nve-control-message>disabled message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group layout=\"horizontal\">\n    <label>success</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message status=\"success\">success message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group layout=\"horizontal\">\n    <label>error</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message status=\"error\">error message</nve-control-message>\n  </nve-radio-group>\n</div>\n"
+        },
+        {
+          "id": "HorizontalInlineGroup",
+          "file": "radio.stories.ts",
+          "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-radio-group layout=\"horizontal-inline\">\n    <label>label</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message>message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group layout=\"horizontal-inline\">\n    <label>disabled</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked disabled />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" disabled />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" disabled />\n    </nve-radio>\n    <nve-control-message>disabled message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group layout=\"horizontal-inline\">\n    <label>success</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message status=\"success\">success message</nve-control-message>\n  </nve-radio-group>\n\n  <nve-radio-group layout=\"horizontal-inline\">\n    <label>error</label>\n    <nve-radio>\n      <label>radio 1</label>\n      <input type=\"radio\" checked />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 2</label>\n      <input type=\"radio\" />\n    </nve-radio>\n\n    <nve-radio>\n      <label>radio 3</label>\n      <input type=\"radio\" />\n    </nve-radio>\n    <nve-control-message status=\"error\">error message</nve-control-message>\n  </nve-radio-group>\n</div>\n"
         }
       ],
       "behavior": "form",
@@ -6817,12 +6637,12 @@
       "stories": [
         {
           "id": "InputGroup",
-          "file": "input-groups.stories.ts",
+          "file": "input-group.stories.ts",
           "template": "<nve-input-group>\n  <label>domain</label>\n  <nve-select style=\"width: 130px\">\n    <select aria-label=\"protocol\">\n      <option>https://</option>\n      <option>http://</option>\n    </select>\n  </nve-select>\n  <nve-input>\n    <input placeholder=\"example\" type=\"url\" aria-label=\"host\" />\n    <nve-button container=\"flat\" readonly=\"\">.com</nve-button>\n  </nve-input>\n  <nve-control-message>host: 123456</nve-control-message>\n</nve-input-group>\n"
         },
         {
           "id": "FilterGroupRange",
-          "file": "input-groups.stories.ts",
+          "file": "input-group.stories.ts",
           "template": "<div nve-layout=\"row align:vertical-center\">\n  <nve-input-group>\n    <nve-select style=\"width: 150px\">\n      <select aria-label=\"date type\">\n        <option value=\"1\">recording date</option>\n        <option value=\"2\">process date</option>\n      </select>\n    </nve-select>\n    <nve-date style=\"width: 220px\">\n      <nve-button container=\"flat\" readonly=\"\">start</nve-button>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n    </nve-date>\n    <nve-date style=\"width: 220px\">\n      <nve-button container=\"flat\" readonly=\"\">end</nve-button>\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </nve-date>\n    <nve-icon-button aria-label=\"remove filter\" icon-name=\"cancel\"></nve-icon-button>\n  </nve-input-group>\n</div>\n"
         }
       ],
@@ -6842,7 +6662,7 @@
       "package": true,
       "description": "The JSON Viewer is a custom element that renders JSON data in a easy to read format. This can be used for prototyping and quickly displaying and debugging data. The JSON View is not a substitute for treeview patterns.",
       "since": "0.16.0",
-      "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/developer-tools-json-viewer-documentation--docs",
+      "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/internal-json-viewer-documentation--docs",
       "figma": false,
       "schema": {
         "properties": [
@@ -7419,9 +7239,9 @@
       "apiReview": true,
       "performance": true,
       "stable": true,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
-      "themes": true,
+      "themes": false,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month",
       "entrypoint": "",
       "package": true,
@@ -7585,7 +7405,7 @@
         }
       ],
       "behavior": "form",
-      "status": "pre-release"
+      "status": "stable"
     },
     {
       "name": "nve-notification",
@@ -7961,7 +7781,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -8027,7 +7847,7 @@
         }
       ],
       "behavior": "popover",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-pagination",
@@ -8310,7 +8130,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -8515,14 +8335,14 @@
         }
       ],
       "behavior": "container",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-panel-content",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -8580,14 +8400,14 @@
       },
       "stories": [],
       "behavior": "container",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-panel-footer",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -8651,14 +8471,14 @@
       },
       "stories": [],
       "behavior": "container",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-panel-header",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -8727,7 +8547,7 @@
       },
       "stories": [],
       "behavior": "container",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-password",
@@ -8903,7 +8723,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -9000,18 +8820,18 @@
         {
           "id": "Labeled",
           "file": "progress-bar.stories.ts",
-          "template": "<div nve-layout=\"column gap:md pad:lg align:horizontal-stretch full\">\n  <div nve-layout=\"row align:space-between\">\n    <p nve-text=\"label muted sm\">Upload Status</p>\n    <p nve-text=\"label emphasis sm\">80%</p>\n  </div>\n\n  <nve-progress-bar status=\"accent\" value=\"80\"></nve-progress-bar>\n</div>\n"
+          "template": "<div nve-layout=\"column gap:xxxs pad:lg align:horizontal-stretch grow\">\n  <div nve-layout=\"row align:space-between\">\n    <p nve-text=\"label sm\">Upload Status</p>\n    <p nve-text=\"label emphasis sm\">80%</p>\n  </div>\n\n  <nve-progress-bar status=\"accent\" value=\"80\"></nve-progress-bar>\n</div>\n"
         }
       ],
       "behavior": "content",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-progress-ring",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -9188,14 +9008,14 @@
         }
       ],
       "behavior": "content",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-progressive-filter-chip",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": true,
       "themes": true,
@@ -9328,7 +9148,7 @@
         }
       ],
       "behavior": "navigation",
-      "status": "beta"
+      "status": "stable"
     },
     {
       "name": "nve-radio",
@@ -10686,7 +10506,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": false,
       "themes": true,
@@ -10837,7 +10657,7 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": false,
+      "stable": true,
       "vqa": true,
       "responsive": false,
       "themes": true,
@@ -11585,12 +11405,12 @@
           "template": "<div nve-layout=\"column gap:lg align:stretch\">\n  <nve-textarea layout=\"horizontal\">\n    <label>label</label>\n    <textarea></textarea>\n    <nve-control-message>message</nve-control-message>\n  </nve-textarea>\n\n  <nve-textarea layout=\"horizontal\">\n    <label>disabled</label>\n    <textarea disabled></textarea>\n    <nve-control-message>message</nve-control-message>\n  </nve-textarea>\n\n  <nve-textarea layout=\"horizontal\">\n    <label>success</label>\n    <textarea></textarea>\n    <nve-control-message status=\"success\">message</nve-control-message>\n  </nve-textarea>\n\n  <nve-textarea layout=\"horizontal\">\n    <label>error</label>\n    <textarea></textarea>\n    <nve-control-message status=\"error\">message</nve-control-message>\n  </nve-textarea>\n</div>\n"
         },
         {
-          "id": "controlValidation",
+          "id": "ControlValidation",
           "file": "textarea.stories.ts",
           "template": "<nve-textarea>\n  <label>validation</label>\n  <textarea required></textarea>\n  <nve-control-message>message</nve-control-message>\n  <nve-control-message error=\"valueMissing\">required</nve-control-message>\n</nve-textarea>\n"
         },
         {
-          "id": "columnsAndRows",
+          "id": "ColumnsAndRows",
           "file": "textarea.stories.ts",
           "template": "<nve-textarea>\n  <label>label</label>\n  <textarea rows=\"15\" cols=\"40\"></textarea>\n  <nve-control-message>message</nve-control-message>\n</nve-textarea>\n"
         }
@@ -11604,9 +11424,9 @@
       "apiReview": true,
       "performance": true,
       "stable": true,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
-      "themes": true,
+      "themes": false,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time",
       "entrypoint": "",
       "package": true,
@@ -11770,7 +11590,7 @@
         }
       ],
       "behavior": "form",
-      "status": "pre-release"
+      "status": "stable"
     },
     {
       "name": "nve-toast",
@@ -12176,22 +11996,22 @@
         {
           "id": "Default",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <nve-toolbar>\n    <nve-button container=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button container=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
+          "template": "<div>\n  <nve-toolbar>\n    <nve-button container=\"inline\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button container=\"inline\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button container=\"inline\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "ContainerFlat",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <nve-toolbar container=\"flat\">\n    <nve-button container=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button container=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
+          "template": "<div>\n  <nve-toolbar container=\"flat\">\n    <nve-button container=\"inline\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button container=\"inline\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "ContainerInset",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <nve-toolbar container=\"inset\">\n    <nve-button container=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button container=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
+          "template": "<div>\n  <nve-toolbar container=\"inset\">\n    <nve-button container=\"inline\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button container=\"inline\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "ContainerFull",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <nve-toolbar container=\"full\">\n    <nve-button container=\"flat\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button container=\"flat\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
+          "template": "<div>\n  <nve-toolbar container=\"full\">\n    <nve-button container=\"inline\"><nve-icon name=\"add\"></nve-icon> create</nve-button>\n    <nve-button container=\"inline\"><nve-icon name=\"delete\"></nve-icon> delete</nve-button>\n    <nve-icon-button container=\"flat\" icon-name=\"gear\" slot=\"suffix\" aria-label=\"settings\"></nve-icon-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Groups",
@@ -12206,17 +12026,17 @@
         {
           "id": "Filter",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <nve-toolbar container=\"flat\">\n    <nve-icon-button readonly icon-name=\"filter\" container=\"flat\" slot=\"prefix\"></nve-icon-button>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </nve-combobox>\n    <nve-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n    <nve-button slot=\"suffix\">Save Filters</nve-button>\n  </nve-toolbar>\n</div>\n"
+          "template": "<div>\n  <nve-toolbar container=\"flat\">\n    <nve-icon-button readonly icon-name=\"filter\" container=\"flat\" slot=\"prefix\"></nve-icon-button>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </nve-combobox>\n    <nve-icon-button container=\"flat\" aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n    <nve-button slot=\"suffix\">Save Filters</nve-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Scroll",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <nve-toolbar container=\"flat\">\n    <nve-icon-button readonly icon-name=\"filter\" container=\"flat\" slot=\"prefix\"></nve-icon-button>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </nve-progressive-filter-chip>\n    <nve-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </nve-combobox>\n    <nve-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n    <nve-button slot=\"suffix\">Save Filters</nve-button>\n  </nve-toolbar>\n</div>\n"
+          "template": "<div>\n  <nve-toolbar container=\"flat\">\n    <nve-icon-button readonly icon-name=\"filter\" container=\"flat\" slot=\"prefix\"></nve-icon-button>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </nve-progressive-filter-chip>\n    <nve-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </nve-combobox>\n    <nve-icon-button container=\"flat\" aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n    <nve-button slot=\"suffix\">Save Filters</nve-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Wrap",
           "file": "toolbar.stories.ts",
-          "template": "<div>\n  <nve-toolbar container=\"flat\" content=\"wrap\">\n    <nve-icon-button readonly icon-name=\"filter\" container=\"flat\" slot=\"prefix\"></nve-icon-button>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </nve-progressive-filter-chip>\n    <nve-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </nve-combobox>\n    <nve-icon-button aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n    <nve-button slot=\"suffix\">Save Filters</nve-button>\n  </nve-toolbar>\n</div>\n"
+          "template": "<div>\n  <nve-toolbar container=\"flat\" content=\"wrap\">\n    <nve-icon-button readonly icon-name=\"filter\" container=\"flat\" slot=\"prefix\"></nve-icon-button>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option>workload</option>\n        <option selected>instance</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option>sort by</option>\n        <option selected>filter by</option>\n      </select>\n      <select aria-label=\"filter\">\n        <option selected>utilization</option>\n        <option>status</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip closable>\n      <select aria-label=\"dataset\">\n        <option selected>status</option>\n        <option>workload</option>\n      </select>\n      <select aria-label=\"condition\">\n        <option selected>filter by</option>\n        <option>sort by</option>\n      </select>\n      <select multiple aria-label=\"filter\">\n        <option selected>progress</option>\n        <option>pending</option>\n        <option>success</option>\n        <option>failed</option>\n      </select>\n    </nve-progressive-filter-chip>\n    <nve-progressive-filter-chip>\n      <select aria-label=\"date type\">\n        <option>recording date</option>\n        <option>process date</option>\n      </select>\n      <input type=\"date\" value=\"2022-05-11\" aria-label=\"start date\" />\n      <input type=\"date\" value=\"2022-12-07\" aria-label=\"end date\" />\n    </nve-progressive-filter-chip>\n    <nve-combobox container=\"flat\">\n      <input type=\"search\" placeholder=\"Add Filter\" />\n      <datalist>\n        <option value=\"Status\"></option>\n        <option value=\"Priority\"></option>\n        <option value=\"Date\"></option>\n        <option value=\"Session\"></option>\n        <option value=\"Configuration\"></option>\n        <option value=\"Contains\"></option>\n      </datalist>\n    </nve-combobox>\n    <nve-icon-button container=\"flat\" aria-label=\"clear filters\" icon-name=\"cancel\" slot=\"suffix\"></nve-icon-button>\n    <nve-button slot=\"suffix\">Save Filters</nve-button>\n  </nve-toolbar>\n</div>\n"
         },
         {
           "id": "Status",
@@ -12473,9 +12293,9 @@
       "apiReview": true,
       "performance": true,
       "stable": true,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
-      "themes": true,
+      "themes": false,
       "aria": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week",
       "entrypoint": "",
       "package": true,
@@ -12639,79 +12459,89 @@
         }
       ],
       "behavior": "form",
-      "status": "pre-release"
+      "status": "stable"
     }
   ],
   "patterns": [
     {
-      "id": "StandardHeaderMainPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"flat\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!-- Breadcrumbs -->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-button interaction=\"emphasis\">Emphasis</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "Row",
+      "file": "patterns.stories.ts",
+      "template": "<div>\n  <nve-card role=\"listitem\" container=\"full\">\n    <nve-card-content nve-layout=\"grid align:vertical-center align:space-between gap:md\">\n      <div nve-layout=\"span:4 row gap:md align:vertical-center\">\n        <img\n          src=\"https://placehold.co/600x400\"\n          style=\"max-width: 100px; border-radius: var(--nve-ref-border-radius-sm)\"\n        />\n        <div nve-layout=\"column gap:sm\">\n          <h2 nve-text=\"label medium\">Activity Dashboard</h2>\n          <p nve-text=\"body sm muted\">Last saved: Oct 19, 21 by Camru</p>\n        </div>\n      </div>\n      <p nve-text=\"body sm\" nve-layout=\"span:5\">\n        A dashboard displaying current project activity grouped by User, Host or IP\n      </p>\n      <div nve-layout=\"span:3 row gap:sm align:right\">\n        <div nve-layout=\"row gap:xs\">\n          <nve-icon-button icon-name=\"eye\"></nve-icon-button>\n          <nve-icon-button icon-name=\"copy\"></nve-icon-button>\n          <nve-icon-button icon-name=\"delete\"></nve-icon-button>\n        </div>\n        <nve-divider orientation=\"vertical\"></nve-divider>\n        <nve-button>Add Panel</nve-button>\n      </div>\n    </nve-card-content>\n  </nve-card>\n</div>\n"
     },
     {
-      "id": "TabsHeaderMainPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card\n  container=\"flat\"\n  style=\"--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)\"\n>\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!-- Breadcrumbs -->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-button interaction=\"emphasis\">Emphasis</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n    </div>\n\n    <!-- Tabs -->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "LayoutHeaderFullWidthCards",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"column full align:stretch\">\n  <nve-card container=\"full\">\n    <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n        <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n      <nve-tabs>\n        <nve-tabs-item selected>Tab 1</nve-tabs-item>\n        <nve-tabs-item>Tab 2</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n      </nve-tabs>\n    </div>\n  </nve-card>\n\n  <main nve-layout=\"column gap:lg pad-top:lg align:stretch\">\n    <nve-card container=\"full\" style=\"width: 100%; height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n    <nve-card container=\"full\" style=\"width: 100%; height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n  </main>\n</div>\n"
     },
     {
-      "id": "StackedMetadataHeaderMainPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"flat\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!-- Breadcrumbs -->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-button interaction=\"emphasis\">Emphasis</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section nve-layout=\"row gap:xl align:vertical-center\">\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Session ID</span>\n        <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Driver</span>\n        <span nve-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Co-Pilot</span>\n        <span nve-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Route</span>\n        <span nve-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Status</span>\n        <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n      </div>\n    </section>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "LayoutHeaderGridCards",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"column full align:stretch\">\n  <nve-card container=\"full\">\n    <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n        <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n      <nve-tabs>\n        <nve-tabs-item selected>Tab 1</nve-tabs-item>\n        <nve-tabs-item>Tab 2</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n      </nve-tabs>\n    </div>\n  </nve-card>\n\n  <main nve-layout=\"grid gap:lg span-items:6 pad:lg\">\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n  </main>\n</div>\n"
     },
     {
-      "id": "InlineMetadataHeaderMainPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"flat\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n\n      <!-- Metadata -->\n      <div nve-layout=\"row gap:xl align:vertical-center\">\n        <section nve-layout=\"row gap:xl align:vertical-center\">\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Session ID</span>\n            <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Driver</span>\n            <span nve-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Co-Pilot</span>\n            <span nve-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Route</span>\n            <span nve-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Status</span>\n            <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n          </div>\n        </section>\n\n        <nve-divider orientation=\"vertical\"></nve-divider>\n\n        <!-- Action Buttons -->\n        <section nve-layout=\"row gap:sm align:vertical-center\">\n          <nve-button>Default</nve-button>\n          <nve-button interaction=\"emphasis\">Emphasis</nve-button>\n          <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n        </section>\n      </div>\n    </div>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "LayoutHeaderPanelCards",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"column full align:stretch\">\n  <nve-card container=\"full\">\n    <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n        <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n      <nve-tabs>\n        <nve-tabs-item selected>Tab 1</nve-tabs-item>\n        <nve-tabs-item>Tab 2</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n      </nve-tabs>\n    </div>\n  </nve-card>\n\n  <div nve-layout=\"row\">\n    <section nve-layout=\"column full align:stretch gap:lg pad:lg\">\n      <nve-card style=\"height: 250px\">\n        <nve-card-header>\n          <div slot=\"title\">Card Title</div>\n        </nve-card-header>\n        <nve-card-content>Card Content</nve-card-content>\n      </nve-card>\n      <nve-card style=\"height: 250px\">\n        <nve-card-header>\n          <div slot=\"title\">Card Title</div>\n        </nve-card-header>\n        <nve-card-content>Card Content</nve-card-content>\n      </nve-card>\n    </section>\n\n    <nve-panel expanded style=\"min-width: 360px; z-index: 99; height: 100vh; position: sticky; top: 0; right: 0\">\n      <nve-panel-header>\n        <h2 slot=\"title\">Panel Heading</h2>\n      </nve-panel-header>\n      <nve-panel-content> Panel Content </nve-panel-content>\n    </nve-panel>\n  </div>\n</div>\n"
     },
     {
-      "id": "InlineKitchenSinkHeaderMainPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card\n  container=\"flat\"\n  style=\"--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)\"\n>\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Metadata -->\n      <div nve-layout=\"row gap:xl align:vertical-center\">\n        <section nve-layout=\"row gap:xl align:vertical-center\">\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Session ID</span>\n            <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Driver</span>\n            <span nve-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Co-Pilot</span>\n            <span nve-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Route</span>\n            <span nve-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Status</span>\n            <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n          </div>\n        </section>\n\n        <!--Divider-->\n        <nve-divider orientation=\"vertical\"></nve-divider>\n\n        <!-- Action Buttons -->\n        <section nve-layout=\"row gap:sm align:vertical-center\">\n          <nve-button>Default</nve-button>\n          <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n        </section>\n      </div>\n    </div>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "ButtonRowFilledIcon",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"row gap:xs\">\n  <nve-icon-button icon-name=\"double-chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button icon-name=\"chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button icon-name=\"chevron\" direction=\"down\"></nve-icon-button>\n  <nve-icon-button icon-name=\"double-chevron\" direction=\"down\"></nve-icon-button>\n</div>\n"
     },
     {
-      "id": "StackedKitchenSinkHeaderMainPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card\n  container=\"flat\"\n  style=\"--border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)\"\n>\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section nve-layout=\"row gap:xl align:vertical-center\">\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Session ID</span>\n        <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Driver</span>\n        <span nve-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Co-Pilot</span>\n        <span nve-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Route</span>\n        <span nve-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Status</span>\n        <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n      </div>\n    </section>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "ButtonRowFlatIcon",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"row gap:xxxs\">\n  <nve-icon-button container=\"flat\" icon-name=\"double-chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" icon-name=\"chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" icon-name=\"chevron\" direction=\"down\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" icon-name=\"double-chevron\" direction=\"down\"></nve-icon-button>\n</div>\n"
     },
     {
-      "id": "StandardHeaderDetailPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "ButtonRowSmallFlatIcon",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"row gap:xxxs\">\n  <nve-icon-button container=\"flat\" size=\"sm\" icon-name=\"double-chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" size=\"sm\" icon-name=\"chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" size=\"sm\" icon-name=\"chevron\" direction=\"down\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" size=\"sm\" icon-name=\"double-chevron\" direction=\"down\"></nve-icon-button>\n</div>\n"
     },
     {
-      "id": "TabsHeaderDetailPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n    </div>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "ButtonRowFlatText",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"row gap:xxxs\">\n  <nve-button container=\"flat\">Button CTA</nve-button>\n  <nve-button container=\"flat\">Button CTA</nve-button>\n</div>\n"
     },
     {
-      "id": "StackedMetadataHeaderDetailPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section nve-layout=\"row gap:xl align:vertical-center\">\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Session ID</span>\n        <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Driver</span>\n        <span nve-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Co-Pilot</span>\n        <span nve-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Route</span>\n        <span nve-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Status</span>\n        <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n      </div>\n    </section>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "ButtonRowFlatTextWithIcon",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"row gap:xxxs\">\n  <nve-button container=\"flat\">\n    <nve-icon name=\"gear\" style=\"--color: var(--nve-sys-text-muted-color)\"></nve-icon>\n    Sync MB\n  </nve-button>\n  <nve-button container=\"flat\">\n    <nve-icon name=\"undo\" style=\"--color: var(--nve-sys-text-muted-color)\"></nve-icon>\n    Revert Timestamps\n  </nve-button>\n  <nve-button container=\"flat\">\n    <nve-icon name=\"add\" style=\"--color: var(--nve-sys-text-muted-color)\"></nve-icon>\n    Add Event\n  </nve-button>\n</div>\n"
     },
     {
-      "id": "InlineMetadataHeaderDetailPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <nve-card-content nve-layout=\"column gap:md align:stretch pad-x:xl\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Metadata -->\n      <div nve-layout=\"row gap:xl align:vertical-center\">\n        <section nve-layout=\"row gap:xl align:vertical-center\">\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Session ID</span>\n            <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Driver</span>\n            <span nve-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Co-Pilot</span>\n            <span nve-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Route</span>\n            <span nve-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Status</span>\n            <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n          </div>\n        </section>\n\n        <!--Divider-->\n        <nve-divider orientation=\"vertical\"></nve-divider>\n\n        <!-- Action Buttons -->\n        <section nve-layout=\"row gap:sm align:vertical-center\">\n          <nve-button>Default</nve-button>\n          <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n        </section>\n      </div>\n    </div>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "ButtonRowFilledTextWithIcon",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"row gap:xs\">\n  <nve-button>Button CTA</nve-button>\n  <nve-button>Button CTA</nve-button>\n  <nve-button interaction=\"emphasis\">Button CTA</nve-button>\n  <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n</div>\n"
     },
     {
-      "id": "InlineKitchenSinkHeaderDetailPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Metadata -->\n      <div nve-layout=\"row gap:xl align:vertical-center\">\n        <section nve-layout=\"row gap:xl align:vertical-center\">\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Session ID</span>\n            <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Driver</span>\n            <span nve-text=\"body sm bold\">Jane Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Co-Pilot</span>\n            <span nve-text=\"body sm bold\">John Doe</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Route</span>\n            <span nve-text=\"body sm bold\">Santa Clara</span>\n          </div>\n          <div nve-layout=\"column gap:sm align:left\">\n            <span nve-text=\"body sm muted\">Status</span>\n            <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n          </div>\n        </section>\n\n        <!--Divider-->\n        <nve-divider orientation=\"vertical\"></nve-divider>\n\n        <!-- Action Buttons -->\n        <section nve-layout=\"row gap:sm align:vertical-center\">\n          <nve-button>Default</nve-button>\n          <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n        </section>\n      </div>\n    </div>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "Trend",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"column gap:sm\">\n  <label nve-text=\"label medium sm muted\">Label</label>\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <h3 nve-text=\"heading semibold lg\">198,298</h3>\n    <nve-badge status=\"trend-up\">+15%</nve-badge>\n  </div>\n  <label nve-text=\"label medium sm muted\">Since last week</label>\n</div>\n"
     },
     {
-      "id": "StackedKitchenSinkHeaderDetailPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"full\">\n  <nve-card-content style=\"--padding: 0\" nve-layout=\"column gap:md align:stretch pad-x:xl pad-top:md\">\n    <!--Breadcrumbs-->\n    <nve-breadcrumb>\n      <nve-button><a href=\"#\" target=\"_self\">Item 1</a></nve-button>\n      <nve-button><a href=\"#\" target=\"_self\">Item 2</a></nve-button>\n      <span>You Are Here</span>\n    </nve-breadcrumb>\n\n    <div nve-layout=\"row align:space-between align:vertical-center\">\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n      </section>\n\n      <!-- Action Buttons -->\n      <section nve-layout=\"row gap:sm align:vertical-center\">\n        <nve-button>Default</nve-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </section>\n    </div>\n\n    <!-- Metadata -->\n    <section nve-layout=\"row gap:xl align:vertical-center\">\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Session ID</span>\n        <a nve-text=\"body sm bold link\" href=\"#\">13245768</a>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Driver</span>\n        <span nve-text=\"body sm bold\">Jane Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Co-Pilot</span>\n        <span nve-text=\"body sm bold\">John Doe</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Route</span>\n        <span nve-text=\"body sm bold\">Santa Clara</span>\n      </div>\n      <div nve-layout=\"row gap:sm align:center\">\n        <span nve-text=\"body sm muted\">Status</span>\n        <span nve-text=\"body sm bold\"><nve-badge status=\"success\">complete</nve-badge></span>\n      </div>\n    </section>\n\n    <!--Tabs-->\n    <nve-tabs behavior-select>\n      <nve-tabs-item selected>Tab 1</nve-tabs-item>\n      <nve-tabs-item>Tab 2</nve-tabs-item>\n      <nve-tabs-item>Tab 3</nve-tabs-item>\n      <nve-tabs-item>Tab 4</nve-tabs-item>\n    </nve-tabs>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "TrendTopBadge",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"column gap:xs\">\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <label nve-text=\"label medium sm muted\">Since last week</label>\n    <nve-badge status=\"trend-up\">+15%</nve-badge>\n  </div>\n  <div nve-layout=\"column gap:sm\">\n    <h3 nve-text=\"heading semibold lg\">198,298</h3>\n    <label nve-text=\"label medium sm muted\">Label</label>\n  </div>\n</div>\n"
     },
     {
-      "id": "StandardHeaderViewerPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"full\" style=\"--border-bottom: 0\">\n  <nve-card-content nve-layout=\"row align:space-between align:vertical-center pad-x:xl\">\n    <section nve-layout=\"row gap:sm align:vertical-center\">\n      <nve-icon-button icon-name=\"arrow\" direction=\"left\" size=\"sm\"></nve-icon-button>\n      <h1 nve-text=\"heading xs semibold\">Page Title</h1>\n    </section>\n\n    <!--Center Controls-->\n    <section nve-layout=\"row align:center align:vertical-center gap:xxxs\">\n      <nve-select container=\"flat\" style=\"--border-bottom: 0\">\n        <select>\n          <option value=\"1\">100%</option>\n          <option value=\"2\">75%</option>\n          <option value=\"3\">50%</option>\n          <option value=\"4\">25%</option>\n        </select>\n      </nve-select>\n      <nve-button-group container=\"flat\" behavior-select=\"single\">\n        <nve-icon-button size=\"sm\" pressed icon-name=\"view-as-grid\"></nve-icon-button>\n        <nve-icon-button size=\"sm\" icon-name=\"split-vertical\"></nve-icon-button>\n        <nve-icon-button size=\"sm\" icon-name=\"split-horizontal\"></nve-icon-button>\n        <nve-icon-button size=\"sm\" icon-name=\"split-none\"></nve-icon-button>\n      </nve-button-group>\n    </section>\n\n    <!-- Action Buttons -->\n    <nve-button-group container=\"flat\">\n      <nve-icon-button size=\"sm\" icon-name=\"download\"></nve-icon-button>\n      <nve-icon-button size=\"sm\" icon-name=\"refresh\"></nve-icon-button>\n      <nve-icon-button size=\"sm\" icon-name=\"more-actions\"></nve-icon-button>\n    </nve-button-group>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "TrendBottomBadge",
+      "file": "patterns.stories.ts",
+      "template": "<div nve-layout=\"column gap:xs\">\n  <div nve-layout=\"column gap:sm\">\n    <label nve-text=\"label medium sm muted\">Label</label>\n    <h3 nve-text=\"heading semibold lg\">198,298</h3>\n  </div>\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <label nve-text=\"label medium sm muted\">Since last week</label>\n    <nve-badge status=\"trend-up\">+15%</nve-badge>\n  </div>\n</div>\n"
     },
     {
-      "id": "StandardHeaderToolbarPage",
-      "file": "header-patterns.stories.ts",
-      "template": "<nve-card container=\"full\" style=\"--border-bottom: 0\">\n  <nve-card-content nve-layout=\"row align:space-between align:vertical-center pad-x:xl\">\n    <!--Left Controls-->\n    <section nve-layout=\"row gap:md align:left align:vertical-center\" style=\"width: 33%\">\n      <div>\n        <nve-button-group container=\"flat\">\n          <nve-icon-button size=\"sm\" icon-name=\"layers\"></nve-icon-button>\n          <nve-icon-button size=\"sm\" icon-name=\"cursor-rays\"></nve-icon-button>\n          <nve-icon-button size=\"sm\" pressed icon-name=\"hand\"></nve-icon-button>\n        </nve-button-group>\n      </div>\n      <div nve-layout=\"row gap:sm\">\n        <nve-button container=\"flat\">Edit</nve-button>\n        <nve-button container=\"flat\">History</nve-button>\n        <nve-button container=\"flat\">Docs</nve-button>\n      </div>\n    </section>\n\n    <h1 nve-text=\"heading xs semibold\">Page Title</h1>\n\n    <!-- Action Buttons -->\n    <nve-button-group container=\"flat\" style=\"width: 33%\" nve-layout=\"row align:right\">\n      <nve-icon-button size=\"sm\" icon-name=\"add-comment\"></nve-icon-button>\n      <nve-icon-button size=\"sm\" icon-name=\"bell\"></nve-icon-button>\n      <nve-icon-button size=\"sm\" icon-name=\"more-actions\"></nve-icon-button>\n    </nve-button-group>\n  </nve-card-content>\n</nve-card>\n"
+      "id": "ShortcutFilled",
+      "file": "patterns.stories.ts",
+      "template": "<kbd nve-text=\"code\">CMD + C</kbd>\n"
+    },
+    {
+      "id": "ShortcutFlat",
+      "file": "patterns.stories.ts",
+      "template": "<kbd nve-text=\"code flat\">CMD + C</kbd>\n"
+    },
+    {
+      "id": "ShortcutDropdown",
+      "file": "patterns.stories.ts",
+      "template": "<nve-button id=\"code-menu\">dropdown</nve-button>\n\n<nve-dropdown anchor=\"code-menu\" trigger=\"code-menu\" hidden>\n  <nve-menu>\n    <nve-menu-item> <nve-icon name=\"edit\"></nve-icon> Edit </nve-menu-item>\n\n    <nve-menu-item>\n      <div nve-layout=\"row align:space-between full\">\n        <span nve-layout=\"row gap:sm align:vertical-center\"> <nve-icon name=\"copy\"></nve-icon> Copy </span>\n\n        <kbd nve-text=\"code\">CMD + C</kbd>\n      </div>\n    </nve-menu-item>\n\n    <nve-menu-item> <nve-icon name=\"delete\"></nve-icon> Delete </nve-menu-item>\n  </nve-menu>\n</nve-dropdown>\n\n<script>\n  const dropdown = document.querySelector(\"nve-dropdown\");\n  dropdown.addEventListener(\"open\", () => (dropdown.hidden = false));\n  dropdown.addEventListener(\"close\", () => (dropdown.hidden = true));\n</script>\n"
     }
   ],
   "types": {

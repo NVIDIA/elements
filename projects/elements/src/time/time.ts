@@ -11,7 +11,7 @@ import styles from './time.css?inline';
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-time-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
- * @vqa false
+ * @themes false
  */
 export class Time extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
