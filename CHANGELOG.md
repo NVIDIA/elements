@@ -1,3 +1,10 @@
+## [0.27.1](https://github.com/NVIDIA/elements/compare/v0.27.0...v0.27.1) (2024-03-20)
+
+
+### Bug Fixes
+
+* **themes:** publish artifacts ([eda0ef2](https://github.com/NVIDIA/elements/commit/eda0ef2db9aa673bb067e229e2d314ec9820cc09))
+
 ## [0.27.0](https://github.com/NVIDIA/elements/compare/v0.26.6...v0.27.0) (2024-03-20)
 
 
