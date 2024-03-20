@@ -140,7 +140,6 @@ export class Combobox extends Control implements ContainerElement {
   async firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
     await this.updateComplete;
-    this.input.setAttribute('list', '');
     this.#setupSingleSelect();
     this.#setupMultipleSelect();
     this.#setupAutoCompleteKeyEvents();
@@ -149,6 +148,7 @@ export class Combobox extends Control implements ContainerElement {
     this.#setupOverflowListener();
     this.#setupSlotStates();
     await this.#setupLightDismiss();
+    this.input.setAttribute('list', '');
   }
 
   disconnectedCallback() {
@@ -177,7 +177,7 @@ export class Combobox extends Control implements ContainerElement {
       this.input.value = getDisplayValue(selected);
     }
 
-    this.input.addEventListener('blur', () => {
+    this.#dropdown.addEventListener('close', async () => {
       if (this.#select && !this.#select.multiple && !this.#options.find(o => getDisplayValue(o) === this.input.value)) {
         this.#options.forEach(o => (o.selected = false));
         this.#setInputValue('');
@@ -198,6 +198,7 @@ export class Combobox extends Control implements ContainerElement {
         if (this.#hasAvailableOptions && !this.#dropdown.hidden && this.input.value !== '') {
           e.preventDefault();
           this.#setInputValue(this.#items[0].value);
+          this.#setSelectValue(this.#options.find(o => (o.label ? o.label : o.value) === this.#items[0].value));
         }
         this.#dropdown.close();
       }
@@ -286,12 +287,12 @@ export class Combobox extends Control implements ContainerElement {
   #setSelectValue(option: { value?: string; selected?: boolean }) {
     [...this.#options, { value: '', selected: null }].find(o => o.value === option.value).selected = option.selected;
 
-    if (!this.#select.multiple) {
+    if (this.#select && !this.#select.multiple) {
       this.#select.value = option.value;
     }
 
-    this.#select.dispatchEvent(new Event('input', { bubbles: true }));
-    this.#select.dispatchEvent(new Event('change', { bubbles: true }));
+    this.#select?.dispatchEvent(new Event('input', { bubbles: true }));
+    this.#select?.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   #setupOverflowListener() {
