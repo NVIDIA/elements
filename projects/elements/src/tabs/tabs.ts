@@ -31,7 +31,6 @@ import tabsStyleSheet from './tabs.css?inline';
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-tabs-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
- * @stable false
  * @responsive false
  */
 @stateSelected<TabsItem>()
@@ -72,7 +71,6 @@ export class TabsItem extends BaseButton {
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  * @responsive false
- * @stable false
  */
 @keyNavigationList<Tabs>()
 export class Tabs extends LitElement {
