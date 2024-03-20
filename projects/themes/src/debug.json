@@ -1,0 +1,17 @@
+{
+  "$schema": "../dist/schema.json",
+  "debug": {
+    "outline-width": {
+      "value": "{ref.size.50}"
+    },
+    "layout-outline": {
+      "value": "var(--nve-debug-outline-width) solid var(--nve-ref-color-purple-plum-900)"
+    },
+    "element-outline": {
+      "value": "var(--nve-debug-outline-width) solid var(--nve-ref-color-brand-green-900)"
+    },
+    "typography-outline": {
+      "value": "var(--nve-debug-outline-width) solid var(--nve-ref-color-yellow-amber-900)"
+    }
+  }
+}
