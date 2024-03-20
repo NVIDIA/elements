@@ -11,7 +11,7 @@ import styles from './month.css?inline';
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-month-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month
- * @vqa false
+ * @themes false
  */
 export class Month extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
