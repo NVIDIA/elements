@@ -1,3 +1,10 @@
+## [0.27.2](https://github.com/NVIDIA/elements/compare/v0.27.1...v0.27.2) (2024-03-20)
+
+
+### Bug Fixes
+
+* **elements:** combobox input value ([4464a2b](https://github.com/NVIDIA/elements/commit/4464a2b002f246c65cc88196a610a888f7e48c5f))
+
 ## [0.27.1](https://github.com/NVIDIA/elements/compare/v0.27.0...v0.27.1) (2024-03-20)
 
 
