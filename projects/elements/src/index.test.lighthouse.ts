@@ -11,7 +11,6 @@ describe('lighthouse report', () => {
         import('@nvidia-elements/themes/high-contrast.css');
         import('@nvidia-elements/themes/reduced-motion.css');
         import('@elements/elements/css/module.layout.css');
-        import('@elements/elements/css/module.reset.css');
         import('@elements/elements/css/module.typography.css');
       </script>
     `);
@@ -23,8 +22,7 @@ describe('lighthouse report', () => {
     expect(report.payload.css.requests['high.css'].kb).toBeLessThan(1); // @nvidia-elements/themes/high-contrast.css
     expect(report.payload.css.requests['reduced.css'].kb).toBeLessThan(0.6); // @nvidia-elements/themes/reduced-motion.css
     expect(report.payload.css.requests['module.css'].kb).toBeLessThan(1.6); // @elements/elements/css/module.layout.css
-    expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.2); // @elements/elements/css/module.reset.css
-    expect(report.payload.css.requests['module3.css'].kb).toBeLessThan(1.3); // @elements/elements/css/module.typography.css
+    expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.3); // @elements/elements/css/module.typography.css
   });
 
   test('JS Bundles should remain within compressed bundle limits', async () => {
