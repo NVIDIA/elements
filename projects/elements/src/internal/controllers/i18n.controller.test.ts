@@ -34,7 +34,7 @@ describe('i18n.controller', () => {
     await elementIsStable(element);
 
     expect(element.i18n).toStrictEqual({
-      __set: true,
+      __set: false,
       close: 'close',
       currentPage: 'current page',
       expand: 'expand',

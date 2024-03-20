@@ -42,6 +42,10 @@ describe('nve-combobox', () => {
     expect(customElements.get('nve-combobox')).toBeDefined();
   });
 
+  it('should remove native data list association', async () => {
+    expect(input.getAttribute('list')).toBe('');
+  });
+
   it('should render a menu item for each provided option', async () => {
     emulateClick(input);
     await elementIsStable(element);
@@ -257,6 +261,8 @@ describe('nve-combobox single select', () => {
   });
 
   it('should enforce single select and clear invalid options', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
+
     expect(options[0].selected).toBe(true);
     expect(options[1].selected).toBe(false);
     expect(options[2].selected).toBe(false);
@@ -264,7 +270,7 @@ describe('nve-combobox single select', () => {
     expect(input.value).toBe('option 1');
 
     input.value = 'invalid option';
-    input.dispatchEvent(new Event('blur', { bubbles: true }));
+    dropdown.dispatchEvent(new CustomEvent('close', { bubbles: true }));
 
     await elementIsStable(element);
     expect(input.value).toBe('');
@@ -272,6 +278,50 @@ describe('nve-combobox single select', () => {
     expect(options[0].selected).toBe(false);
     expect(options[1].selected).toBe(false);
     expect(options[2].selected).toBe(false);
+  });
+
+  it('should set input and select value when item is clicked on partial match', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
+
+    input.value = 'opt';
+    input.dispatchEvent(new Event('keydown', { bubbles: true }));
+
+    await elementIsStable(element);
+    expect(dropdown.hidden).toBe(false);
+
+    const items = Array.from(element.shadowRoot.querySelectorAll<MenuItem>('nve-menu-item'));
+    emulateClick(items[1]);
+    expect(input.value).toBe('option 2');
+    expect(select.value).toBe('option 2');
+  });
+
+  it('should preserve partial search while focusing within selection dropdown', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
+
+    input.value = 'opt';
+    input.dispatchEvent(new Event('keydown', { bubbles: true }));
+
+    await elementIsStable(element);
+    expect(dropdown.hidden).toBe(false);
+
+    expect(input.value).toBe('opt');
+    expect(select.value).toBe('option 1');
+  });
+
+  it('should autocomplete on tab if there is a partial match to first available option', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
+
+    expect(dropdown.hidden).toBe(true);
+    element.dispatchEvent(new KeyboardEvent('keydown'));
+    await elementIsStable(element);
+    expect(dropdown.hidden).toBe(false);
+
+    input.value = 'opt';
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }));
+    await elementIsStable(element);
+    expect(dropdown.hidden).toBe(true);
+    expect(input.value).toBe('option 1');
+    expect(select.value).toBe('option 1');
   });
 });
 
@@ -542,6 +592,8 @@ describe('nve-combobox option labels for single select', () => {
   });
 
   it('should enforce single select and clear invalid options', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>('nve-dropdown');
+
     expect(options[0].selected).toBe(true);
     expect(options[1].selected).toBe(false);
     expect(options[2].selected).toBe(false);
@@ -549,7 +601,7 @@ describe('nve-combobox option labels for single select', () => {
     expect(input.value).toBe('option 1');
 
     input.value = 'invalid option';
-    input.dispatchEvent(new Event('blur', { bubbles: true }));
+    dropdown.dispatchEvent(new CustomEvent('close', { bubbles: true }));
 
     await elementIsStable(element);
     expect(input.value).toBe('');
