@@ -192,7 +192,7 @@ class ElementStatus extends LitElement {
           <nve-alert .status=${metadata.figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
           <nve-alert .status=${metadata.storybook ? 'finished' : 'pending'}>Storybook Preview</nve-alert>
           <nve-alert .status=${metadata.storybook ? 'finished' : 'pending'}>API Documentation</nve-alert>
-          <nve-alert .status=${metadata.themes ? 'finished' : 'pending'}>Theme Support</nve-alert>
+          <nve-alert .status=${metadata.themes ? 'finished' : 'pending'}>Fully Themeable</nve-alert>
         </div>
       </div>
       <div nve-layout="column gap:sm">
@@ -480,7 +480,7 @@ class ElementsMetrics extends LitElement {
         ${this.elements.map(element => {
           return html`
           <nve-grid-row>
-            <nve-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
+            <nve-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/api/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
             <nve-grid-cell>${getStatusBadge(element.status)}</nve-grid-cell>
             <nve-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</nve-grid-cell>
             <nve-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</nve-grid-cell>
