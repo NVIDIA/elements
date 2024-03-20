@@ -52,7 +52,6 @@ export default defineConfig(env => {
           'css/module.typography.css': resolve('./src/css/module.typography.css'), // base typography styles
           'css/module.layout.css': resolve('./src/css/module.layout.css'), // layout utilities
           'css/module.responsive.css': resolve('./src/css/module.responsive.css'), // responsive layout utilities
-          'css/module.reset.css': resolve('./src/css/module.reset.css'), // common reset/base styles
           'index.css': resolve('./src/index.css'), // global styles including all above style modules
           ...globSync('./src/**/define.ts').reduce((p, i) => {
             // all component entrypoints

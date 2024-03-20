@@ -4,6 +4,25 @@ import { globSync } from 'glob';
 const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 const buildPath = 'dist/';
 const sourcePath = 'src/';
+const baseReset = `
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
+html[nve-theme], html[nve-theme], body[nve-theme], body[nve-theme], [nve-theme~='root'], [nve-theme~='root'] {
+  color-scheme: var(--nve-sys-color-scheme) !important;
+  background: var(--nve-sys-layer-canvas-background) !important;
+  color: var(--nve-sys-layer-canvas-color) !important;
+  font-family: var(--nve-ref-font-family) !important;
+  text-rendering: optimizeSpeed;
+}
+
+[nve-theme] body, [nve-theme] body {
+  margin: 0;
+}
+
+*:has([nve-popover]) {
+  contain: initial;
+}`;
 
 StyleDictionary.registerFormat({
   name: 'custom/schema',
@@ -101,11 +120,13 @@ StyleDictionary.registerFormat({
       options.theme !== 'index'
         ? `[nve-theme~='${options.theme}'], [nve-theme~='${options.theme}']`
         : `:root, [nve-theme~='light'], [nve-theme~='light']`;
-    return `${fileHeader({ file })}${experimental}\n${selector} {\n${formattedVariables({
-      format: 'css',
-      dictionary,
-      outputReferences: options.outputReferences
-    })}\n}`;
+    return `${fileHeader({ file })}${experimental}${options.theme === 'index' ? `${baseReset}\n` : ''}${selector} {\n${formattedVariables(
+      {
+        format: 'css',
+        dictionary,
+        outputReferences: options.outputReferences
+      }
+    )}\n}`;
   }
 });
 
