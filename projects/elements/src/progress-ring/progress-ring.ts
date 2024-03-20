@@ -25,7 +25,6 @@ import styles from './progress-ring.css?inline';
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-progress-ring-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29%3A20&mode=dev
- * @stable false
  */
 export class ProgressRing extends LitElement {
   static styles = useStyles([styles]);
