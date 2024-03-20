@@ -11,7 +11,7 @@ import styles from './datetime.css?inline';
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-datetime-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
- * @vqa false
+ * @themes false
  */
 export class Datetime extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);

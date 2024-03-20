@@ -11,7 +11,7 @@ import styles from './week.css?inline';
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-week-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
- * @vqa false
+ * @themes false
  */
 export class Week extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);

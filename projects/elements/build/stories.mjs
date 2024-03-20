@@ -2,7 +2,7 @@ import { globSync } from 'glob';
 import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
 
-const files = [...globSync('./src/**/*.stories.ts'), ...glob.sync('./docs/patterns/*.stories.ts')];
+const files = [...globSync('./src/**/*.stories.ts'), ...globSync('./docs/patterns/*.stories.ts')];
 
 export const stories = (await Promise.all(files.map(async file => await getStories(file)))).filter(
   story => story.element

@@ -13,7 +13,7 @@ import styles from './color.css?inline';
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-color-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=157-16178&t=CAAM7yEBvG18tRRa-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color
- * @vqa false
+ * @themes false
  */
 export class Color extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);

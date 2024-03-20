@@ -192,7 +192,7 @@ class ElementStatus extends LitElement {
           <mlv-alert .status=${metadata.figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></mlv-alert>
           <mlv-alert .status=${metadata.storybook ? 'finished' : 'pending'}>Storybook Preview</mlv-alert>
           <mlv-alert .status=${metadata.storybook ? 'finished' : 'pending'}>API Documentation</mlv-alert>
-          <mlv-alert .status=${metadata.themes ? 'finished' : 'pending'}>Theme Support</mlv-alert>
+          <mlv-alert .status=${metadata.themes ? 'finished' : 'pending'}>Fully Themeable</mlv-alert>
         </div>
       </div>
       <div mlv-layout="column gap:sm">
@@ -480,7 +480,7 @@ class ElementsMetrics extends LitElement {
         ${this.elements.map(element => {
           return html`
           <mlv-grid-row>
-            <mlv-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/', './')} mlv-text="body link no-visit">${element.name.replace('mlv-', '')}</a></mlv-grid-cell>
+            <mlv-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/api/', './')} mlv-text="body link no-visit">${element.name.replace('mlv-', '')}</a></mlv-grid-cell>
             <mlv-grid-cell>${getStatusBadge(element.status)}</mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</mlv-grid-cell>
             <mlv-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</mlv-grid-cell>
