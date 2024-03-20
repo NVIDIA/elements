@@ -5,7 +5,7 @@
 }
 
 [mlv-layout] {
-  outline: var(--mlv-debug-layout-outline, initial);
+  outline: var(--nve-debug-layout-outline, initial);
   outline-offset: 1px;
 
   &[hidden] {

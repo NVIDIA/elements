@@ -606,9 +606,15 @@ importers:
 
   projects/themes:
     devDependencies:
+      cssnano:
+        specifier: 6.0.1
+        version: 6.0.1(postcss@8.4.31)
       glob:
         specifier: 10.3.10
         version: 10.3.10
+      postcss:
+        specifier: 8.4.31
+        version: 8.4.31
       style-dictionary:
         specifier: 3.8.0
         version: 3.8.0
@@ -6464,7 +6470,7 @@ packages:
       '@vue/shared': 3.4.15
       estree-walker: 2.0.2
       magic-string: 0.30.5
-      postcss: 8.4.33
+      postcss: 8.4.35
       source-map-js: 1.0.2
 
   /@vue/compiler-ssr@3.4.15:
@@ -16419,6 +16425,7 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: true
 
   /postcss@8.4.35:
     resolution:
@@ -19745,7 +19752,7 @@ packages:
       '@types/node': 20.11.6
       esbuild: 0.19.9
       less: 4.2.0
-      postcss: 8.4.33
+      postcss: 8.4.35
       rollup: 4.9.1
       sass: 1.69.7
       terser: 5.26.0

@@ -33,7 +33,7 @@
   color: var(--mlv-sys-text-color) !important;
   white-space: initial;
   margin: 0;
-  outline: var(--mlv-debug-typography-outline, initial);
+  outline: var(--nve-debug-typography-outline, initial);
 }
 
 [mlv-text~='trim:none']::before,

@@ -13,7 +13,9 @@
     "dist/**/*"
   ],
   "devDependencies": {
+    "cssnano": "6.0.1",
     "glob": "10.3.10",
+    "postcss": "8.4.31",
     "style-dictionary": "3.8.0"
   },
   "exports": {
@@ -33,7 +35,7 @@
       ]
     },
     "build:style-dictionary": {
-      "command": "node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js",
+      "command": "node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js",
       "files": [
         "src/**",
         "build/style-dictionary.config.js",
