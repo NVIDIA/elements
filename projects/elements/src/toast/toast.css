@@ -1,6 +1,6 @@
 :host {
   --nve-sys-layer-popover-arrow-offset: var(--nve-ref-size-100);
-  --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-400);
   --nve-sys-layer-popover-offset: var(--nve-ref-space-md);
   --background: var(--nve-sys-layer-popover-background);
   --border-radius: var(--nve-ref-border-radius-md);
@@ -60,7 +60,9 @@ nve-icon-button {
   right: 2px;
 }
 
-::slotted(nve-button[interaction='flat']) {
+::slotted(nve-button[interaction='flat']), /* deprecated */
+::slotted(nve-button[container='flat']),
+::slotted(nve-button[container='inline']) {
   --color: inherit;
   margin-inline-end: calc(var(--_gap) / -2);
   margin-inline-start: calc(var(--_gap) * 2);
