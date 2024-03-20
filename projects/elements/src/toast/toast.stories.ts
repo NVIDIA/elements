@@ -47,16 +47,16 @@ export const Actions = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 200px">
   <nve-toast position="top">
-    default <nve-button container="flat">action</nve-button>
+    default <nve-button container="inline">action</nve-button>
   </nve-toast>
   <nve-toast status="success" position="right">
-    success <nve-button container="flat">action</nve-button>
+    success <nve-button container="inline">action</nve-button>
   </nve-toast>
   <nve-toast status="warning" position="bottom">
-    warning <nve-button container="flat">action</nve-button>
+    warning <nve-button container="inline">action</nve-button>
   </nve-toast>
   <nve-toast status="danger" position="left">
-    danger <nve-button container="flat">action</nve-button>
+    danger <nve-button container="inline">action</nve-button>
   </nve-toast>
 </div>
   `
