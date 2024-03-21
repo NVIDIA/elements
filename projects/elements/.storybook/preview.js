@@ -348,7 +348,7 @@ parentStyle.innerText = styles + font + brand + brandDark + ddb + responsiveStyl
 window.parent.document.head.appendChild(parentStyle);
 
 export const decorators = [(story, { globals }) => {
-  const themes = window.parent.document.querySelector('[nve-theme]').getAttribute('nve-theme');
+  const themes = window.parent.document.querySelector('[nve-theme]')?.getAttribute('nve-theme') ?? globals.theme;
   window.document.querySelector('html').setAttribute('nve-theme', themes);
   return story();
 }, playground];
