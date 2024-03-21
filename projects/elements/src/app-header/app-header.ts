@@ -84,7 +84,7 @@ export class AppHeader extends LitElement {
   #updateItems() {
     this.navActions?.filter(i => i.getAttribute('interaction') === 'emphasis')?.forEach(item => (item.size = 'sm'));
     [...this.navItems, ...this.navActions]
-      .filter(i => !i.hasAttribute('container'))
+      .filter(i => !i.hasAttribute('container') && !i.hasAttribute('interaction'))
       .forEach(item => (item.container = 'flat'));
   }
 }

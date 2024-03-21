@@ -131,6 +131,15 @@ describe('mlv-app-header: nav items and actions', () => {
     expect(navActionOverride.size).toBe('sm');
   });
 
+  it('should preserve the default container for buttons with a custom interaction type', async () => {
+    const navItemOverride = element.querySelector<Button>('#override-flat-btn');
+    const navActionOverride = element.querySelector<IconButton>('#override-action-btn');
+    expect(navItemOverride.interaction).toBe('emphasis');
+    expect(navActionOverride.interaction).toBe('emphasis');
+    expect(navItemOverride.container).toBe(undefined);
+    expect(navActionOverride.container).toBe(undefined);
+  });
+
   it('should not override set interaction types', () => {
     const navItemOverride = element.querySelector<Button>('#override-flat-btn');
     const navActionOverride = element.querySelector<IconButton>('#override-action-btn');
