@@ -1,3 +1,12 @@
+## [0.27.3](https://github.com/NVIDIA/elements/compare/v0.27.2...v0.27.3) (2024-03-21)
+
+
+### Bug Fixes
+
+* **elements:** app-header interaction button defaults ([08c8632](https://github.com/NVIDIA/elements/commit/08c8632c47884926ca7d02c33fb62f8e113df54d))
+* **elements:** toast button action ([d76db3b](https://github.com/NVIDIA/elements/commit/d76db3b6913a69d0a58f308a894f5d3dee542458))
+* **themes:** improve performance ([13f5092](https://github.com/NVIDIA/elements/commit/13f5092ec1a64019c9080e91b8c3e2ac93eeaa21))
+
 ## [0.27.2](https://github.com/NVIDIA/elements/compare/v0.27.1...v0.27.2) (2024-03-20)
 
 
