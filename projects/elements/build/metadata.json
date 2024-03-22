@@ -1,5 +1,5 @@
 {
-  "created": "2024-03-20T22:27:50.128Z",
+  "created": "2024-03-27T17:50:50.237Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -11820,7 +11820,7 @@
         {
           "id": "Actions",
           "file": "toast.stories.ts",
-          "template": "<div nve-layout=\"row align:center\" style=\"height: 200px\">\n  <nve-toast position=\"top\"> default <nve-button container=\"flat\">action</nve-button> </nve-toast>\n  <nve-toast status=\"success\" position=\"right\"> success <nve-button container=\"flat\">action</nve-button> </nve-toast>\n  <nve-toast status=\"warning\" position=\"bottom\"> warning <nve-button container=\"flat\">action</nve-button> </nve-toast>\n  <nve-toast status=\"danger\" position=\"left\"> danger <nve-button container=\"flat\">action</nve-button> </nve-toast>\n</div>\n"
+          "template": "<div nve-layout=\"row align:center\" style=\"height: 200px\">\n  <nve-toast position=\"top\"> default <nve-button container=\"inline\">action</nve-button> </nve-toast>\n  <nve-toast status=\"success\" position=\"right\"> success <nve-button container=\"inline\">action</nve-button> </nve-toast>\n  <nve-toast status=\"warning\" position=\"bottom\"> warning <nve-button container=\"inline\">action</nve-button> </nve-toast>\n  <nve-toast status=\"danger\" position=\"left\"> danger <nve-button container=\"inline\">action</nve-button> </nve-toast>\n</div>\n"
         },
         {
           "id": "Interactive",
@@ -12092,6 +12092,10 @@
           {
             "name": "hidden",
             "description": "Determines if popover should be rendered and positioned."
+          },
+          {
+            "name": "openDelay",
+            "description": "A delayed `open` event will occur determined from the provided millisecond value."
           }
         ],
         "slots": [
@@ -12158,6 +12162,15 @@
             "default": "false",
             "description": "Determines if popover should be rendered and positioned.",
             "fieldName": "hidden"
+          },
+          {
+            "name": "open-delay",
+            "type": {
+              "text": "number"
+            },
+            "default": "0",
+            "description": "A delayed `open` event will occur determined from the provided millisecond value.",
+            "fieldName": "openDelay"
           }
         ],
         "events": [
@@ -12237,6 +12250,11 @@
           "id": "BehaviorTrigger",
           "file": "tooltip.stories.ts",
           "template": "<div nve-layout=\"row align:center\" style=\"height: 250px\">\n  <nve-tooltip behavior-trigger anchor=\"action-btn\" trigger=\"action-btn\" hidden>hello there</nve-tooltip>\n  <nve-button id=\"action-btn\">button</nve-button>\n</div>\n"
+        },
+        {
+          "id": "OpenDelay",
+          "file": "tooltip.stories.ts",
+          "template": "<div nve-layout=\"row align:center gap:sm\" style=\"height: 250px\">\n  <nve-tooltip behavior-trigger anchor=\"delay-tooltip-1\" trigger=\"delay-tooltip-1\" open-delay=\"500\" hidden\n    >delayed tooltip</nve-tooltip\n  >\n  <nve-button id=\"delay-tooltip-1\">button</nve-button>\n\n  <nve-tooltip behavior-trigger anchor=\"delay-tooltip-2\" trigger=\"delay-tooltip-2\" open-delay=\"500\" hidden\n    >delayed tooltip</nve-tooltip\n  >\n  <nve-button id=\"delay-tooltip-2\">button</nve-button>\n\n  <nve-tooltip behavior-trigger anchor=\"delay-tooltip-3\" trigger=\"delay-tooltip-3\" open-delay=\"500\" hidden\n    >delayed tooltip</nve-tooltip\n  >\n  <nve-button id=\"delay-tooltip-3\">button</nve-button>\n</div>\n"
         },
         {
           "id": "DynamicTrigger",
