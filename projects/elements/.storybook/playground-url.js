@@ -23,7 +23,7 @@ export function playground(Story, context) {
 
     const files = serialize(addCssContent(createDefaultFiles(formattedSource, context.id), context.id));
     const url = `https://elements-stage.nvidia.com/ui/elements-playground/?theme=${context.globals.theme}&story=${context.id}&files=${files}&version=1`;
-    return html`${story} <mlv-button class="playground-btn" size="sm"><a href="${url}" target="_blank">Playground</a></mlv-button>`;
+    return html`${story} <nve-button class="playground-btn" size="sm"><a href="${url}" target="_blank">Playground</a></nve-button>`;
   }
 }
 

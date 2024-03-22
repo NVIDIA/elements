@@ -75,6 +75,23 @@ const ThemePicker = () => {
             </mlv-switch>
           </mlv-switch-group>
         </mlv-drawer-content>
+        <mlv-divider style={{'width': '100%'}}></mlv-divider>
+        <mlv-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
+          <mlv-switch-group>
+            <label>API <mlv-icon-button slot="label" id="api-hint-btn" container="flat" icon-name="information-circle-stroke" size="sm" style={{'--height': '12px'}}></mlv-icon-button></label>
+            {/* <mlv-switch>
+              <label>Maglev Scope</label>
+              <input type="checkbox" value="scope" defaultChecked={globals.scope === 'mlv'} onChange={e => updateGlobals({ scope: e.target.checked ? 'mlv' : 'nve' })} />
+            </mlv-switch> */}
+            <mlv-switch>
+              <label>React</label>
+              <input type="checkbox" value="sourceType" defaultChecked={globals.sourceType === 'react'} onChange={e => updateGlobals({ sourceType: e.target.checked ? 'react' : 'html' })} />
+            </mlv-switch>
+          </mlv-switch-group>
+          <mlv-tooltip behavior-trigger anchor="api-hint-btn" trigger="api-hint-btn" hidden style={{'--width': '280px'}}>
+            <p mlv-text="body sm">Preview code blocks with <code>@nvidia-elements/react</code> components or the <code>nve</code> namespace.</p>
+          </mlv-tooltip>
+        </mlv-drawer-content>
       </mlv-drawer>
     </div>) : ''
   );

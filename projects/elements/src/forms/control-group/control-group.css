@@ -131,6 +131,5 @@ slot[name='messages'] {
 }
 
 :host([layout='horizontal']) ::slotted(label) {
-  padding-top: var(--mlv-ref-size-100) !important;
   align-self: start !important;
 }
