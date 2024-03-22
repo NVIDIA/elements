@@ -76,6 +76,11 @@ export class Tooltip extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
 
+  /**
+   * A delayed `open` event will occur determined from the provided millisecond value.
+   */
+  @property({ type: Number, attribute: 'open-delay' }) openDelay = 0;
+
   @query('.arrow') popoverArrow: HTMLElement;
 
   /** @private */

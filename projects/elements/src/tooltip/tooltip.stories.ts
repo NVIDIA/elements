@@ -63,6 +63,21 @@ export const BehaviorTrigger = {
   `
 };
 
+export const OpenDelay = {
+  render: () => html`
+<div mlv-layout="row align:center gap:sm" style="height: 250px">
+  <mlv-tooltip behavior-trigger anchor="delay-tooltip-1" trigger="delay-tooltip-1" open-delay="500" hidden>delayed tooltip</mlv-tooltip>
+  <mlv-button id="delay-tooltip-1">button</mlv-button>
+
+  <mlv-tooltip behavior-trigger anchor="delay-tooltip-2" trigger="delay-tooltip-2" open-delay="500" hidden>delayed tooltip</mlv-tooltip>
+  <mlv-button id="delay-tooltip-2">button</mlv-button>
+
+  <mlv-tooltip behavior-trigger anchor="delay-tooltip-3" trigger="delay-tooltip-3" open-delay="500" hidden>delayed tooltip</mlv-tooltip>
+  <mlv-button id="delay-tooltip-3">button</mlv-button>
+</div>
+  `
+};
+
 export const DynamicTrigger = {
   render: () => html`
 <div id="dynamic-trigger-demo" mlv-layout="row align:center" style="height: 250px">

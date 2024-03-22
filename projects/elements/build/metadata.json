@@ -1,5 +1,5 @@
 {
-  "created": "2024-03-20T22:27:50.128Z",
+  "created": "2024-03-27T17:50:50.237Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -11820,7 +11820,7 @@
         {
           "id": "Actions",
           "file": "toast.stories.ts",
-          "template": "<div mlv-layout=\"row align:center\" style=\"height: 200px\">\n  <mlv-toast position=\"top\"> default <mlv-button container=\"flat\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"success\" position=\"right\"> success <mlv-button container=\"flat\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"warning\" position=\"bottom\"> warning <mlv-button container=\"flat\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"danger\" position=\"left\"> danger <mlv-button container=\"flat\">action</mlv-button> </mlv-toast>\n</div>\n"
+          "template": "<div mlv-layout=\"row align:center\" style=\"height: 200px\">\n  <mlv-toast position=\"top\"> default <mlv-button container=\"inline\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"success\" position=\"right\"> success <mlv-button container=\"inline\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"warning\" position=\"bottom\"> warning <mlv-button container=\"inline\">action</mlv-button> </mlv-toast>\n  <mlv-toast status=\"danger\" position=\"left\"> danger <mlv-button container=\"inline\">action</mlv-button> </mlv-toast>\n</div>\n"
         },
         {
           "id": "Interactive",
@@ -12092,6 +12092,10 @@
           {
             "name": "hidden",
             "description": "Determines if popover should be rendered and positioned."
+          },
+          {
+            "name": "openDelay",
+            "description": "A delayed `open` event will occur determined from the provided millisecond value."
           }
         ],
         "slots": [
@@ -12158,6 +12162,15 @@
             "default": "false",
             "description": "Determines if popover should be rendered and positioned.",
             "fieldName": "hidden"
+          },
+          {
+            "name": "open-delay",
+            "type": {
+              "text": "number"
+            },
+            "default": "0",
+            "description": "A delayed `open` event will occur determined from the provided millisecond value.",
+            "fieldName": "openDelay"
           }
         ],
         "events": [
@@ -12237,6 +12250,11 @@
           "id": "BehaviorTrigger",
           "file": "tooltip.stories.ts",
           "template": "<div mlv-layout=\"row align:center\" style=\"height: 250px\">\n  <mlv-tooltip behavior-trigger anchor=\"action-btn\" trigger=\"action-btn\" hidden>hello there</mlv-tooltip>\n  <mlv-button id=\"action-btn\">button</mlv-button>\n</div>\n"
+        },
+        {
+          "id": "OpenDelay",
+          "file": "tooltip.stories.ts",
+          "template": "<div mlv-layout=\"row align:center gap:sm\" style=\"height: 250px\">\n  <mlv-tooltip behavior-trigger anchor=\"delay-tooltip-1\" trigger=\"delay-tooltip-1\" open-delay=\"500\" hidden\n    >delayed tooltip</mlv-tooltip\n  >\n  <mlv-button id=\"delay-tooltip-1\">button</mlv-button>\n\n  <mlv-tooltip behavior-trigger anchor=\"delay-tooltip-2\" trigger=\"delay-tooltip-2\" open-delay=\"500\" hidden\n    >delayed tooltip</mlv-tooltip\n  >\n  <mlv-button id=\"delay-tooltip-2\">button</mlv-button>\n\n  <mlv-tooltip behavior-trigger anchor=\"delay-tooltip-3\" trigger=\"delay-tooltip-3\" open-delay=\"500\" hidden\n    >delayed tooltip</mlv-tooltip\n  >\n  <mlv-button id=\"delay-tooltip-3\">button</mlv-button>\n</div>\n"
         },
         {
           "id": "DynamicTrigger",

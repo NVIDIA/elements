@@ -18,6 +18,7 @@ export interface Popover extends ReactiveElement {
   position?: PopoverPosition;
   alignment?: PopoverAlign;
   closeTimeout?: number;
+  openDelay?: number;
   popoverArrow?: HTMLElement;
   popoverType?: PopoverType;
   popoverDismissible?: boolean;
@@ -138,8 +139,9 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     }
   }
 
-  #open = () => this.open();
-  #close = () => this.close();
+  #openDelayTimeout = null;
+  #_close = () => this.close();
+  #_open = () => this.#open();
   #prevTrigger: HTMLElement;
 
   #setupTriggerInteractions() {
@@ -152,24 +154,24 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   #removeTriggerInteractions() {
     if (this.#prevTrigger && this.host.popoverType === 'hint') {
-      this.#prevTrigger.removeEventListener('mousemove', this.#open);
-      this.#prevTrigger.removeEventListener('mouseleave', this.#close);
-      this.#prevTrigger.removeEventListener('focus', this.#open);
-      this.#prevTrigger.removeEventListener('focusout', this.#close);
+      this.#prevTrigger.removeEventListener('mousemove', this.#_open);
+      this.#prevTrigger.removeEventListener('mouseleave', this.#_close);
+      this.#prevTrigger.removeEventListener('focus', this.#_open);
+      this.#prevTrigger.removeEventListener('focusout', this.#_close);
     } else if (this.#prevTrigger) {
-      this.#prevTrigger.removeEventListener('click', this.#open);
+      this.#prevTrigger.removeEventListener('click', this.#_open);
     }
   }
 
   #addTriggerInteractions() {
     if (this.#trigger && this.host.popoverType === 'hint') {
-      this.#trigger.addEventListener('mousemove', this.#open);
-      this.#trigger.addEventListener('mouseleave', this.#close);
-      this.#trigger.addEventListener('focus', this.#open);
-      this.#trigger.addEventListener('focusout', this.#close);
+      this.#trigger.addEventListener('mousemove', this.#_open);
+      this.#trigger.addEventListener('mouseleave', this.#_close);
+      this.#trigger.addEventListener('focus', this.#_open);
+      this.#trigger.addEventListener('focusout', this.#_close);
       this.#prevTrigger = this.#trigger;
     } else if (this.#trigger) {
-      this.#trigger.addEventListener('click', this.#open);
+      this.#trigger.addEventListener('click', this.#_open);
       this.#prevTrigger = this.#trigger;
     }
   }
@@ -180,26 +182,9 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     }
   }
 
-  #updateVisibility() {
-    if (this.#dialog) {
-      (this.host as any).inert = this.host.hidden;
-      if (!this.host.hidden && !this.#dialog.open && this.host.popoverType === 'auto') {
-        this.#dialog.showModal();
-      } else if (this.host.hidden) {
-        this.#dialog.close();
-      }
-    }
-  }
-
-  #updateAnchorState() {
-    if (this.host.hidden) {
-      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.delete('anchor-active');
-    } else {
-      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.add('anchor-active');
-    }
-  }
-
   close() {
+    this.#clearOpenDelay();
+
     if (!this.host.hidden && this.#dismissible) {
       this.host.dispatchEvent(new CustomEvent('close', { bubbles: true }));
     }
@@ -220,6 +205,47 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
     if (this.host.behaviorTrigger) {
       this.host.hidden = false;
+    }
+  }
+
+  #open() {
+    if (this.host.openDelay) {
+      this.#openDelay();
+    } else {
+      this.open();
+    }
+  }
+
+  #openDelay() {
+    this.#clearOpenDelay();
+    this.#openDelayTimeout = setTimeout(() => {
+      if (this.#openDelayTimeout) {
+        this.open();
+      }
+    }, this.host.openDelay);
+  }
+
+  #clearOpenDelay() {
+    clearTimeout(this.#openDelayTimeout);
+    this.#openDelayTimeout = null;
+  }
+
+  #updateVisibility() {
+    if (this.#dialog) {
+      (this.host as any).inert = this.host.hidden;
+      if (!this.host.hidden && !this.#dialog.open && this.host.popoverType === 'auto') {
+        this.#dialog.showModal();
+      } else if (this.host.hidden) {
+        this.#dialog.close();
+      }
+    }
+  }
+
+  #updateAnchorState() {
+    if (this.host.hidden) {
+      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.delete('anchor-active');
+    } else {
+      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.add('anchor-active');
     }
   }
 
