@@ -1,19 +1,27 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, emulateMouseEnter, emulateMouseLeave } from '@nvidia-elements/testing';
 import { Tooltip } from '@elements/elements/tooltip';
+import { Button } from '@elements/elements/button';
 import '@elements/elements/tooltip/define.js';
+import '@elements/elements/button/define.js';
 
 describe('nve-tooltip', () => {
   let fixture: HTMLElement;
-  let element: Tooltip;
+  let tooltip: Tooltip;
+  let tooltip2: Tooltip;
+  let trigger: Button;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-tooltip>hello</nve-tooltip>
+      <nve-tooltip id="tooltip-1">hello</nve-tooltip>
+      
+      <nve-tooltip behavior-trigger id="tooltip-2" anchor="trigger" trigger="trigger" open-delay="500" hidden>delayed tooltip</nve-tooltip>
+      <nve-button id="trigger">button</nve-button>
     `);
-    element = fixture.querySelector('nve-tooltip');
-    await elementIsStable(element);
+    tooltip = fixture.querySelector('nve-tooltip#tooltip-1');
+    tooltip2 = fixture.querySelector('nve-tooltip#tooltip-2');
+    trigger = fixture.querySelector('nve-button');
   });
 
   afterEach(() => {
@@ -25,23 +33,62 @@ describe('nve-tooltip', () => {
   });
 
   it('should render arrow by default', async () => {
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('.arrow').tagName).toBe('DIV');
+    await elementIsStable(tooltip);
+    expect(tooltip.shadowRoot.querySelector('.arrow').tagName).toBe('DIV');
   });
 
   // https://open-ui.org/components/popup.research.explainer#api-shape
   it('should default to hint behavior', async () => {
-    await elementIsStable(element);
-    expect(element.popoverType).toBe('hint');
+    await elementIsStable(tooltip);
+    expect(tooltip.popoverType).toBe('hint');
   });
 
   it('should default to positioning on the top of an anchor', async () => {
-    await elementIsStable(element);
-    expect(element.position).toBe('top');
+    await elementIsStable(tooltip);
+    expect(tooltip.position).toBe('top');
   });
 
   it('should initialize role type of tooltip', async () => {
-    await elementIsStable(element);
-    expect(element._internals.role).toBe('tooltip');
+    await elementIsStable(tooltip);
+    expect(tooltip._internals.role).toBe('tooltip');
+  });
+
+  it('should default with an open delay set to 0', async () => {
+    await elementIsStable(tooltip);
+    expect(tooltip.openDelay).toBe(0);
+  });
+
+  it('should default with an open delay set to 0', async () => {
+    await elementIsStable(tooltip);
+    expect(tooltip.openDelay).toBe(0);
+  });
+
+  it('if open-delay attrute set, should set openDelay property', async () => {
+    await elementIsStable(tooltip2);
+    expect(tooltip2.openDelay).toBe(500);
+  });
+
+  it('if open-delay and behavior-trigger set, should display tooltip after waiting for delayed time', async () => {
+    await elementIsStable(tooltip2);
+    await elementIsStable(trigger);
+
+    expect(tooltip2.hidden).toBe(true);
+
+    emulateMouseEnter(trigger);
+    await elementIsStable(tooltip2);
+    await elementIsStable(trigger);
+
+    expect(tooltip2.hidden).toBe(true);
+
+    await new Promise(r => setTimeout(() => r(null), 1000));
+    await elementIsStable(tooltip2);
+
+    expect(tooltip2.hidden).toBe(false);
+
+    emulateMouseLeave(trigger);
+    await elementIsStable(tooltip2);
+    await elementIsStable(trigger);
+
+    expect(tooltip2.hidden).toBe(true);
   });
 });

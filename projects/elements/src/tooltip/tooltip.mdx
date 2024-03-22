@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs';
-import { Interactive, Default, Content, Position, Wrap, Hint, HintCopy, Status, BehaviorTrigger, Alignment, DynamicAnchorPosition } from './tooltip.stories';
+import { Interactive, Default, Content, Position, Wrap, Hint, HintCopy, Status, BehaviorTrigger, OpenDelay, Alignment, DynamicAnchorPosition } from './tooltip.stories';
 
 <Meta title="Elements/Tooltip/Documentation" />
 
@@ -49,6 +49,13 @@ import '@elements/elements/tooltip/define.js';
 <element-api tag="nve-tooltip" type="property" value="behaviorTrigger"></element-api>
 
 <Canvas of={BehaviorTrigger} story={{ inline: false, height: 200 }} />
+
+## Open Delay
+
+Optionally, add a delay to tooltip opening, with `open-delay` attribute (set in milliseconds) -
+useful when displaying tooltips on datagrid items to avoid overwhelming the UX as the user hovers over rows.
+
+<Canvas of={OpenDelay} story={{ inline: false, height: 200 }} />
 
 ## Alignment
 
