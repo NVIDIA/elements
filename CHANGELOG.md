@@ -1,3 +1,11 @@
+## [0.27.4](https://github.com/NVIDIA/elements/compare/v0.27.3...v0.27.4) (2024-03-22)
+
+
+### Bug Fixes
+
+* **elements-react:** support scope prefix ([b53f5b4](https://github.com/NVIDIA/elements/commit/b53f5b4fa0ed8316975c63fe617b8d1fd53eb9c5))
+* **themes:** support theme fonts ([203938a](https://github.com/NVIDIA/elements/commit/203938af9372abff51895bcaa37cbc74b96ed446))
+
 ## [0.27.3](https://github.com/NVIDIA/elements/compare/v0.27.2...v0.27.3) (2024-03-21)
 
 
