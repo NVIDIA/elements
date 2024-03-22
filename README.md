@@ -81,3 +81,4 @@ fix(core): disabled multi-select
 | `pages`          | `/pages`                   |
 | `playground`     | `/playground`              |
 | `testing`        | `/testing`                 |
+| `themes`         | `/themes`                  |

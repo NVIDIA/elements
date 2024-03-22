@@ -1,13 +1,14 @@
 import { setCustomElementsManifest } from '@storybook/web-components';
 import { themes } from '@storybook/theming';
 import { excludePrivateFields } from '@elements/elements/internal';
-import font from '@elements/elements/inter.css?inline';
-// import theme from '@nvidia-elements/themes/index.css?inline';
-// import dark from '@nvidia-elements/themes/dark.css?inline';
+import styles from '@elements/elements/index.css?inline';
+// import theme from '@nvidia-elements/themes/index.css?inline'; // using backwards compatible theme above
+// import dark from '@nvidia-elements/themes/dark.css?inline'; // using backwards compatible theme above
+import fontInter from '@nvidia-elements/themes/fonts/inter.css?inline';
+import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline';
 import ddb from '@nvidia-elements/themes/ddb.css?inline';
 import brand from '@nvidia-elements/themes/brand.css?inline';
 import brandDark from '@nvidia-elements/themes/brand-dark.css?inline';
-import styles from '@elements/elements/index.css?inline';
 import responsiveStyles from '@elements/elements/css/module.responsive.css?inline';
 import { playground } from './playground-url.js';
 import { H1, H2, H3, P } from './markdown.jsx';
@@ -15,13 +16,12 @@ import '@elements/elements/button/define.js';
 import '../docs/metrics.stories';
 
 import format from 'html-format';
-// const prettier = await import('prettier/esm/standalone.mjs');
-const parserHTML = await import('prettier/esm/parser-html.mjs');
 const customElements = await import('@elements/elements/custom-elements.json');
 
 setCustomElementsManifest(excludePrivateFields(customElements));
 
-const params = new URLSearchParams(window.location.search);
+const camelCase = str => str.replace(/\s*-\s*\w/g, parts => parts[parts.length-1].toUpperCase());
+const pascalCase = str => camelCase(str).replace(/^\w/, s => s.toUpperCase());
 
 export const parameters = {
   badges: ['stable'],
@@ -41,18 +41,26 @@ export const parameters = {
     },
     theme: themes.dark,
     source: {
-      transform: (src, context) => {
+      transform: (source, context) => {
         const excludes = context.id.includes('foundations-tokens-examples--');
-        let source = src
-          .trim()
-          .replace(/<nve-button class="playground-btn" size="sm">.*<\/nve-button>/g, '');
-  
-        const lines = source.split('\n').filter(i => i.length ? i.trim().length : false);
-        source = lines[0]?.trim() === '<div>' ? lines.slice(1, -1).join('\n') : source;
-  
-        // prettier 3.0 is async and Storybook decorators cannot be async, temporary workaround using html-format package https://github.com/storybookjs/storybook/issues/10467
-        // return excludes ? source : (await prettier.default.format(source, { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 })).replaceAll('=""', '');
-        return excludes ? source : format(source.replaceAll('=""', ''), ' '.repeat(2), 120);
+        
+        // remove playground button
+        source = source.trim().replace(/<nve-button class="playground-btn" size="sm">.*<\/nve-button>/g, '')
+
+        // basic html formatting
+        source = excludes ? source : format(source.replaceAll('=""', ''), ' '.repeat(2), 120); // https://github.com/storybookjs/storybook/issues/10467
+
+        // replace tag names with appropriate global configuration
+        source = source.replaceAll(/(nve-[\w-]*|nve-[\w-]*)/g, (_, value) => {
+          const isElement = !value.includes('nve-layout') && !value.includes('nve-text');
+          const isReact = context.globals.sourceType === 'react';
+
+          value = isElement ? value.replaceAll('mlv', context.globals.scope).replaceAll('nve', context.globals.scope) : value;
+          value = isReact && isElement ? pascalCase(value) : value;
+          return value;
+        });
+
+        return source;
       }
     }
   },
@@ -323,32 +331,45 @@ export const globalTypes = {
       ],
     },
   },
-  experimental: {
-    name: 'Experimental',
-    description: 'Experimental',
-    defaultValue: true,
-    control: { type: "boolean" },
+  scope: {
+    name: 'Scope',
+    description: 'Scope',
+    defaultValue: 'mlv',
     toolbar: {
       icon: 'beaker',
       showName: false,
       items: [
-        { value: 'experimental', title: 'Experimental On' },
-        { value: '', title: 'Experimental Off' },
+        { value: 'mlv', title: 'mlv' },
+        { value: 'nve', title: 'nve' }
+      ],
+    },
+  },
+  sourceType: {
+    name: 'Source Type',
+    description: 'Source Type',
+    defaultValue: 'html',
+    toolbar: {
+      icon: 'beaker',
+      showName: false,
+      items: [
+        { value: 'html', title: 'html' },
+        { value: 'react', title: 'react' },
       ],
     },
   },
 }
 
 const styleSheet = new CSSStyleSheet();
-styleSheet.replaceSync(styles + font + brand + brandDark + ddb + responsiveStyles);
+styleSheet.replaceSync(styles + fontInter + fontNvidiaSans + brand + brandDark + ddb + responsiveStyles);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
 
 const parentStyle = document.createElement('style');
-parentStyle.innerText = styles + font + brand + brandDark + ddb + responsiveStyles;
+parentStyle.innerText = styles + fontInter + fontNvidiaSans + brand + brandDark + ddb + responsiveStyles;
 window.parent.document.head.appendChild(parentStyle);
 
 export const decorators = [(story, { globals }) => {
   const themes = window.parent.document.querySelector('[nve-theme]')?.getAttribute('nve-theme') ?? globals.theme;
   window.document.querySelector('html').setAttribute('nve-theme', themes);
+  localStorage.setItem('nve-data-theme', globals.dataTheme);
   return story();
 }, playground];
