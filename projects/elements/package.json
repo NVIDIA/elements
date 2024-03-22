@@ -374,6 +374,7 @@
       "dependencies": [
         "build:icons",
         "build:manifest",
+        "build:inter",
         "../themes:build"
       ],
       "env": {
@@ -402,6 +403,20 @@
       ],
       "output": [
         "src/icon/icons.ts"
+      ]
+    },
+    "build:inter": {
+      "command": "node ./build/inter.js",
+      "clean": false,
+      "dependencies": [
+        "../themes:build"
+      ],
+      "files": [
+        "build/inter.js"
+      ],
+      "output": [
+        "dist/inter.css",
+        "dist/inter.woff"
       ]
     },
     "build:manifest": {
