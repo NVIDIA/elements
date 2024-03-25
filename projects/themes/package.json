@@ -40,7 +40,8 @@
       "files": [
         "src/**",
         "build/style-dictionary.config.js",
-        "build/style-dictionary.alias.js"
+        "build/style-dictionary.alias.js",
+        "build/style-dictionary.minify.js"
       ],
       "output": [
         "dist/"

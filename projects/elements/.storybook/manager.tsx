@@ -23,7 +23,7 @@ function updateTheme(themes) {
 
 const ThemePicker = () => {
   const [globals, updateGlobals] = useGlobals();
-  const themes = [globals.theme, globals.scale, globals.debug, globals.animation, globals.experimental, globals.systemOptions].filter(i => i !== '').join(' ');
+  const themes = [globals.theme, globals.scale, globals.debug, globals.animation, globals.experimental, globals.systemOptions].filter(i => i !== '').join(' ').trim();
   updateTheme(themes);
 
   return (
@@ -38,9 +38,9 @@ const ThemePicker = () => {
               <option value="light">Light</option>
               <option value="dark">Dark</option>
               <option value="high-contrast">High Contrast</option>
-              <option value="dark ddb">DDB (experimental)</option>
-              <option value="brand">Brand Light (experimental)</option>
-              <option value="dark brand brand-dark">Brand Dark (experimental)</option>
+              <option value="ddb-dark">DDB Dark (experimental)</option>
+              <option value="brand">Brand (experimental)</option>
+              <option value="brand-dark">Brand Dark (experimental)</option>
             </select>
           </nve-select>
         </nve-drawer-content>
