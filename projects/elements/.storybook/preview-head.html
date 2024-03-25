@@ -7,44 +7,33 @@
     body,
     .sbdocs-wrapper {
       height: 100%;
-      background: var(--mlv-sys-layer-canvas-background, #0b0c0f) !important;
-      color: var(--mlv-sys-layer-canvas-color) !important;
+      background: var(--nve-sys-layer-canvas-background, #0b0c0f) !important;
+      color: var(--nve-sys-layer-canvas-color) !important;
+    }
+
+    html,
+    body,
+    * {
+      font-family: var(--nve-ref-font-family) !important;
+    }
+
+    .prismjs,
+    .prismjs *,
+    code {
+      font-family: var(--nve-ref-font-family-roboto-mono) !important;
     }
 
     html {
-      scrollbar-color: var(--mlv-ref-border-color-muted) var(--mlv-sys-layer-canvas-background, transparent);
+      scrollbar-color: var(--nve-ref-border-color-muted) var(--nve-sys-layer-canvas-background, transparent);
       scrollbar-width: thin;
     }
 
     body,
     .sbdocs.sbdocs-preview,
     .sbdocs.sbdocs-wrapper {
-      font-family: var(--mlv-ref-font-family) !important;
-      font-weight: var(--mlv-ref-font-weight-regular) !important;
-      font-size: var(--mlv-ref-font-size-200);
-    }
-
-    .css-q22hxw :where(div:not(.sb-anchor, .sb-unstyled, .sb-unstyled div)) {
-      font-family: var(--mlv-ref-font-family) !important;
-
-      & a {
-        font-family: var(--mlv-ref-font-family) !important;
-      }
-    }
-
-    .sbdocs-content {
-      h1.css-wzniqs:not([mlv-text]),
-      h2.css-wzniqs:not([mlv-text]),
-      h3.css-wzniqs:not([mlv-text]),
-      li:not([mlv-text]),
-      a:not([mlv-text]) {
-        color: var(--mlv-sys-layer-canvas-color) !important;
-        font-family: var(--mlv-ref-font-family) !important;
-      }
-
-      a:not([mlv-text]) {
-        text-decoration: underline;
-      }
+      font-family: var(--nve-ref-font-family) !important;
+      font-weight: var(--nve-ref-font-weight-regular) !important;
+      font-size: var(--nve-ref-font-size-200);
     }
 
     .playground-btn {
@@ -70,8 +59,8 @@
     }
 
     .sbdocs-preview {
-      --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-100);
-      --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-100);
+      --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-100);
+      --nve-sys-interaction-background: var(--nve-sys-interaction-background-100);
       background: transparent !important;
       box-shadow: none !important;
       margin: 0 !important;
@@ -112,25 +101,25 @@
     }
 
     figcaption {
-      font-size: var(--mlv-ref-font-size-200) !important;
-      font-weight: var(--mlv-ref-font-weight-regular) !important;
+      font-size: var(--nve-ref-font-size-200) !important;
+      font-weight: var(--nve-ref-font-weight-regular) !important;
     }
 
     .prismjs {
-      color: var(--mlv-ref-color-white) !important;
-      background: var(--mlv-ref-color-gray-denim-1200) !important;
-      background: color-mix(in oklab, var(--mlv-ref-color-gray-denim-1200), white 2%) !important;
+      color: var(--nve-ref-color-white) !important;
+      background: var(--nve-ref-color-gray-denim-1200) !important;
+      background: color-mix(in oklab, var(--nve-ref-color-gray-denim-1200), white 2%) !important;
     }
 
     [nve-theme*='dark'] .prismjs {
-      background: var(--mlv-sys-layer-container-background) !important;
-      background: color-mix(in oklab, var(--mlv-sys-layer-container-background), white 2%) !important;
+      background: var(--nve-sys-layer-container-background) !important;
+      background: color-mix(in oklab, var(--nve-sys-layer-container-background), white 2%) !important;
     }
 
     .docblock-source {
       margin-block: 0 !important;
       border: 0 !important;
-      background: var(--mlv-sys-layer-container-background) !important;
+      background: var(--nve-sys-layer-container-background) !important;
       box-shadow: none !important;
     }
 
@@ -159,9 +148,9 @@
       background: none !important;
 
       & .docblock-code-toggle {
-        background: var(--mlv-sys-interaction-background) !important;
-        color: var(--mlv-sys-interaction-color) !important;
-        border-radius: var(--mlv-ref-border-radius-lg) !important;
+        background: var(--nve-sys-interaction-background) !important;
+        color: var(--nve-sys-interaction-color) !important;
+        border-radius: var(--nve-ref-border-radius-lg) !important;
         outline-offset: -4px !important;
       }
     }
@@ -172,18 +161,18 @@
 
     .sbdocs {
       & code {
-        color: var(--mlv-sys-layer-overlay-color) !important;
-        background: var(--mlv-sys-layer-overlay-background) !important;
+        color: var(--nve-sys-layer-overlay-color) !important;
+        background: var(--nve-sys-layer-overlay-background) !important;
         border: 0 !important;
       }
 
       & .sbdocs-a {
-        font-family: var(--mlv-ref-font-family) !important;
-        color: var(--mlv-sys-text-link-color) !important;
+        font-family: var(--nve-ref-font-family) !important;
+        color: var(--nve-sys-text-link-color) !important;
         text-decoration: underline !important;
 
         &:hover {
-          color: var(--mlv-sys-text-link-hover-color) !important;
+          color: var(--nve-sys-text-link-hover-color) !important;
         }
       }
 
@@ -202,9 +191,8 @@
     }
 
     .docs-story section.layout-example {
-      background-color: var(--mlv-sys-interaction-background);
-      border: var(--mlv-ref-border-width-lg) solid var(--mlv-ref-border-color-emphasis);
-      margin-block: var(--mlv-ref-space-sm) var(--mlv-ref-space-xl) !important;
+      border: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-emphasis);
+      margin-block: var(--nve-ref-space-sm) var(--nve-ref-space-xl) !important;
       min-height: 200px !important;
     }
 
@@ -215,7 +203,7 @@
     .docs-story section.layout-example > mlv-card {
       min-width: 60px !important;
       min-height: 60px !important;
-      --background: var(--mlv-sys-layer-overlay-color);
+      --background: var(--mlv-sys-layer-overlay-background);
     }
 
     [nve-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
@@ -231,7 +219,7 @@
     }
 
     .sbdocs.sbdocs-wrapper {
-      padding: var(--mlv-ref-space-xl) !important;
+      padding: var(--nve-ref-space-xl) !important;
     }
 
     @media (min-width: 1440px) {
@@ -240,7 +228,7 @@
       }
 
       .sbdocs.sbdocs-wrapper {
-        padding: calc(var(--mlv-ref-space-xl) * 2) var(--mlv-ref-space-xl) !important;
+        padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl) !important;
       }
     }
 

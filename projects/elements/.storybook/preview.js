@@ -6,17 +6,18 @@ import styles from '@elements/elements/index.css?inline';
 // import dark from '@nvidia-elements/themes/dark.css?inline'; // using backwards compatible theme above
 import fontInter from '@nvidia-elements/themes/fonts/inter.css?inline';
 import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline';
-import ddb from '@nvidia-elements/themes/ddb.css?inline';
+import ddb from '@nvidia-elements/themes/ddb-dark.css?inline';
 import brand from '@nvidia-elements/themes/brand.css?inline';
 import brandDark from '@nvidia-elements/themes/brand-dark.css?inline';
 import responsiveStyles from '@elements/elements/css/module.responsive.css?inline';
 import { playground } from './playground-url.js';
 import { H1, H2, H3, P } from './markdown.jsx';
 import '@elements/elements/button/define.js';
-import '../docs/metrics.stories';
-
 import format from 'html-format';
+
 const customElements = await import('@elements/elements/custom-elements.json');
+
+import('../docs/metrics.stories');
 
 setCustomElementsManifest(excludePrivateFields(customElements));
 
@@ -255,18 +256,6 @@ export const parameters = {
   }
 };
 
-const stableThemes = [
-  { value: '', title: 'Light' },
-  { value: 'dark', title: 'Dark' },
-  { value: 'high-contrast', title: 'High Contrast' }
-];
-
-const experimentalThemes = [
-  { value: 'dark ddb', title: 'DBB (experimental)' },
-  { value: 'brand', title: 'Brand Light (experimental)' },
-  { value: 'dark brand-dark', title: 'Brand Dark (experimental)' }
-];
-
 export const globalTypes = {
   theme: {
     name: 'Themes',
@@ -275,7 +264,14 @@ export const globalTypes = {
     toolbar: {
       title: 'Themes',
       showName: true,
-      items: [...stableThemes, ...experimentalThemes]
+      items: [
+        { value: '', title: 'Light' },
+        { value: 'high-contrast', title: 'High Contrast' },
+        { value: 'brand', title: 'Brand (experimental)' },
+        { value: 'dark', title: 'Dark' },
+        { value: 'brand-dark', title: 'Brand Dark (experimental)' },
+        { value: 'ddb-dark', title: 'DBB Dark (experimental)' },
+      ]
     },
   },
   scale: {
@@ -369,7 +365,7 @@ window.parent.document.head.appendChild(parentStyle);
 
 export const decorators = [(story, { globals }) => {
   const themes = window.parent.document.querySelector('[nve-theme]')?.getAttribute('nve-theme') ?? globals.theme;
-  window.document.querySelector('html').setAttribute('nve-theme', themes);
+  window.document.querySelector('html').setAttribute('nve-theme', themes.trim());
   localStorage.setItem('nve-data-theme', globals.dataTheme);
   return story();
 }, playground];
