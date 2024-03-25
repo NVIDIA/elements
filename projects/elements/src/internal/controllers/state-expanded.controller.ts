@@ -2,7 +2,7 @@ import { ReactiveController, ReactiveElement } from 'lit';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
- * Adds expanded support for interactive custom elements including CSS State psuedo-selector :--expanded and aria-expanded.
+ * Adds expanded support for interactive custom elements including CSS State psuedo-selector :state(expanded) and aria-expanded.
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded
  */
@@ -27,14 +27,14 @@ export class StateExpandedController<T extends Expanded> implements ReactiveCont
     }
 
     if (this.host.expanded) {
-      this.host._internals.states.add('--expanded');
+      this.host._internals.states.add('expanded');
     } else {
-      this.host._internals.states.delete('--expanded');
+      this.host._internals.states.delete('expanded');
     }
 
     if (this.host.readonly) {
       this.host._internals.ariaExpanded = null;
-      this.host._internals.states.delete('--expanded');
+      this.host._internals.states.delete('expanded');
     }
   }
 }

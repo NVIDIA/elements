@@ -36,7 +36,7 @@
   --font-weight: var(--nve-ref-font-weight-regular);
 }
 
-nve-select:not(:--multiple)::part(caret) {
+nve-select:not(:state(multiple))::part(caret) {
   display: none;
 }
 

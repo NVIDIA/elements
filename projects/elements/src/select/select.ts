@@ -141,12 +141,12 @@ export class Select extends Control {
   async updated(props: PropertyValues<this>) {
     super.updated(props);
     if (this.#select?.size && this.#select?.size !== 0) {
-      this._internals.states.add('--size');
+      this._internals.states.add('size');
       this.style.setProperty('--size', `${this.#select?.size + 0.75}`);
     }
 
     if (this.#select?.multiple && this.#select?.size === 0) {
-      this._internals.states.add('--multiple');
+      this._internals.states.add('multiple');
     }
   }
 
@@ -183,9 +183,9 @@ export class Select extends Control {
 
   #updateMultipleOverflow(width: number) {
     if (this.input?.multiple && this.#tags.getBoundingClientRect().width > width - 24) {
-      this._internals.states.add('--multiple-overflow');
+      this._internals.states.add('multiple-overflow');
     } else {
-      this._internals.states.delete('--multiple-overflow');
+      this._internals.states.delete('multiple-overflow');
     }
   }
 }

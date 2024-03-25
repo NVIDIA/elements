@@ -14,7 +14,7 @@ class StatePressedControllerTestElement extends LitElement {
 }
 
 /**
- * In real browsers the State CSS selector is `:--pressed` rather than the polyfilled `:--pressed]` selector for vitest/js-dom env
+ * In real browsers the State CSS selector is `:state(pressed)` rather than the polyfilled `:state(pressed)]` selector for vitest/js-dom env
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  * https://github.com/calebdwilliams/element-internals-polyfill#state-api
  */
@@ -36,32 +36,32 @@ describe('state-pressed.controller', () => {
   it('should initialize aria-pressed as null', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe(null);
-    expect(element.matches(':--pressed')).toBe(false);
+    expect(element.matches(':state(pressed)')).toBe(false);
   });
 
   it('should initialize aria-pressed as null if pressed not applied', async () => {
     element.pressed = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe('true');
-    expect(element.matches(':--pressed')).toBe(true);
+    expect(element.matches(':state(pressed)')).toBe(true);
   });
 
   it('should initialize aria-pressed as false if pressed=false applied', async () => {
     element.pressed = false;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe('false');
-    expect(element.matches(':--pressed')).toBe(false);
+    expect(element.matches(':state(pressed)')).toBe(false);
   });
 
   it('should remove aria-pressed if readonly', async () => {
     element.pressed = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe('true');
-    expect(element.matches(':--pressed')).toBe(true);
+    expect(element.matches(':state(pressed)')).toBe(true);
 
     element.readonly = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe(null);
-    expect(element.matches(':--pressed')).toBe(false);
+    expect(element.matches(':state(pressed)')).toBe(false);
   });
 });
