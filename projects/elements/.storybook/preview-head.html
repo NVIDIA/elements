@@ -11,6 +11,18 @@
       color: var(--nve-sys-layer-canvas-color) !important;
     }
 
+    html,
+    body,
+    * {
+      font-family: var(--nve-ref-font-family) !important;
+    }
+
+    .prismjs,
+    .prismjs *,
+    code {
+      font-family: var(--nve-ref-font-family-roboto-mono) !important;
+    }
+
     html {
       scrollbar-color: var(--nve-ref-border-color-muted) var(--nve-sys-layer-canvas-background, transparent);
       scrollbar-width: thin;
@@ -22,29 +34,6 @@
       font-family: var(--nve-ref-font-family) !important;
       font-weight: var(--nve-ref-font-weight-regular) !important;
       font-size: var(--nve-ref-font-size-200);
-    }
-
-    .css-q22hxw :where(div:not(.sb-anchor, .sb-unstyled, .sb-unstyled div)) {
-      font-family: var(--nve-ref-font-family) !important;
-
-      & a {
-        font-family: var(--nve-ref-font-family) !important;
-      }
-    }
-
-    .sbdocs-content {
-      h1.css-wzniqs:not([nve-text]),
-      h2.css-wzniqs:not([nve-text]),
-      h3.css-wzniqs:not([nve-text]),
-      li:not([nve-text]),
-      a:not([nve-text]) {
-        color: var(--nve-sys-layer-canvas-color) !important;
-        font-family: var(--nve-ref-font-family) !important;
-      }
-
-      a:not([nve-text]) {
-        text-decoration: underline;
-      }
     }
 
     .playground-btn {
@@ -202,7 +191,6 @@
     }
 
     .docs-story section.layout-example {
-      background-color: var(--nve-sys-interaction-background);
       border: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-emphasis);
       margin-block: var(--nve-ref-space-sm) var(--nve-ref-space-xl) !important;
       min-height: 200px !important;
@@ -215,7 +203,7 @@
     .docs-story section.layout-example > nve-card {
       min-width: 60px !important;
       min-height: 60px !important;
-      --background: var(--nve-sys-layer-overlay-color);
+      --background: var(--nve-sys-layer-overlay-background);
     }
 
     [nve-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
