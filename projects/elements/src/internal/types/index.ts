@@ -260,14 +260,6 @@ declare global {
     debug: (log?: (...args) => void) => void;
   };
 
-  interface ElementInternals {
-    states: {
-      add: (state: string) => void;
-      delete: (state: string) => void;
-      has: (state: string) => boolean;
-    };
-  }
-
   interface HTMLElement {
     'mlv-text': string;
     'mlv-layout': string;
