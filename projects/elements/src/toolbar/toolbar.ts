@@ -134,9 +134,9 @@ export class Toolbar extends LitElement implements ContainerElement {
 
   #setScrollbarState() {
     if (hasHorizontalScrollBar(this.#scrollbox)) {
-      this._internals.states.add('--scrollbar');
+      this._internals.states.add('scrollbar');
     } else {
-      this._internals.states.delete('--scrollbar');
+      this._internals.states.delete('scrollbar');
     }
   }
 

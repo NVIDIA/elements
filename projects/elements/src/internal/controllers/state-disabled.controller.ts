@@ -2,7 +2,7 @@ import { ReactiveController, ReactiveElement } from 'lit';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
- * Adds disabled support for interactive custom elements including CSS State psuedo-selector :--disabled and aria-disabled.
+ * Adds disabled support for interactive custom elements including CSS State psuedo-selector :state(disabled) and aria-disabled.
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled
  */
@@ -29,9 +29,9 @@ export class StateDisabledController<T extends Disabled> implements ReactiveCont
     }
 
     if (this.host.disabled) {
-      this.host._internals.states.add('--disabled');
+      this.host._internals.states.add('disabled');
     } else {
-      this.host._internals.states.delete('--disabled');
+      this.host._internals.states.delete('disabled');
     }
 
     if (this.host.readonly) {

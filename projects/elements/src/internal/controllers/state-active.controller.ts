@@ -2,7 +2,7 @@ import { ReactiveController, ReactiveElement } from 'lit';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
- * Adds CSS State psuedo-selector :--active behavior for keydown space/enter for custom elements
+ * Adds CSS State psuedo-selector :state(active) behavior for keydown space/enter for custom elements
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  */
 export function stateActive<T extends Active>(): ClassDecorator {
@@ -28,7 +28,7 @@ export class StateActiveController<T extends Active> implements ReactiveControll
 
   #emulateActive(e: any) {
     if (!this.host.disabled && this.#isValidKeyEvent(e)) {
-      this.host._internals.states.add('--active');
+      this.host._internals.states.add('active');
     }
 
     if (e.code === 'Space' && e.target === this.host) {
@@ -37,7 +37,7 @@ export class StateActiveController<T extends Active> implements ReactiveControll
   }
 
   #emulateInactive() {
-    this.host._internals.states.delete('--active');
+    this.host._internals.states.delete('active');
   }
 
   #isValidKeyEvent(e: KeyboardEvent) {

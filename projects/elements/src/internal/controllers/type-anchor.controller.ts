@@ -1,4 +1,4 @@
-import { ReactiveController, ReactiveElement  } from 'lit';
+import { ReactiveController, ReactiveElement } from 'lit';
 import { removeEmptyTextNode } from '../utils/dom.js';
 import { attachInternals } from '../utils/a11y.js';
 
@@ -9,7 +9,11 @@ export function typeAnchor<T extends Anchor>(): ClassDecorator {
   return (target: any) => target.addInitializer((instance: T) => new TypeAnchorController(instance));
 }
 
-export interface Anchor extends ReactiveElement { disabled: boolean; readonly: boolean; _internals: ElementInternals }
+export interface Anchor extends ReactiveElement {
+  disabled: boolean;
+  readonly: boolean;
+  _internals: ElementInternals;
+}
 
 export class TypeAnchorController<T extends Anchor> implements ReactiveController {
   get #anchor() {
@@ -18,11 +22,16 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
 
   get #slottedAnchor() {
     // return elements that have been nested in a slot
-    return this.host.querySelector<HTMLSlotElement>('slot, slot[name=anchor]')?.assignedElements()?.find((e: any) => e?.tagName === 'A') || this.host.querySelector<HTMLAnchorElement>('a');
+    return (
+      this.host
+        .querySelector<HTMLSlotElement>('slot, slot[name=anchor]')
+        ?.assignedElements()
+        ?.find((e: any) => e?.tagName === 'A') || this.host.querySelector<HTMLAnchorElement>('a')
+    );
   }
 
   get #parentAnchor() {
-    return this.host.parentElement?.tagName === 'A' ? this.host.parentElement as HTMLAnchorElement : null;
+    return this.host.parentElement?.tagName === 'A' ? (this.host.parentElement as HTMLAnchorElement) : null;
   }
 
   get #defaultSlot() {
@@ -45,9 +54,9 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
 
     if (this.#anchor) {
       this.host.readonly = true;
-      this.host._internals?.states.add('--anchor');
+      this.host._internals?.states.add('anchor');
     } else {
-      this.host._internals?.states.delete('--anchor');
+      this.host._internals?.states.delete('anchor');
     }
 
     if (this.#parentAnchor) {

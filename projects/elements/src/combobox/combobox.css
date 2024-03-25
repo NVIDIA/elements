@@ -15,15 +15,15 @@
   outline: 0 !important;
 }
 
-:host(:--selected) {
+:host(:state(selected)) {
   --font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-:host(:--multiple) {
+:host(:state(multiple)) {
   --padding: 0 var(--nve-ref-size-100);
 }
 
-:host(:--multiple) [input] {
+:host(:state(multiple)) [input] {
   padding: var(--padding);
 }
 
@@ -45,13 +45,13 @@
   pointer-events: none;
 }
 
-:host(:--multiple-overflow) .tags {
+:host(:state(multiple-overflow)) .tags {
   opacity: 0;
   pointer-events: none;
   position: absolute;
 }
 
-:host(:--multiple-overflow) .tags-label {
+:host(:state(multiple-overflow)) .tags-label {
   display: flex;
 }
 
@@ -66,17 +66,17 @@ nve-tag {
 }
 
 :host([status='error']),
-:host(:--invalid),
-:host(:--error) {
+:host(:state(invalid)),
+:host(:state(error)) {
   --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
 }
 
 :host([status='success']),
-:host(:--success) {
+:host(:state(success)) {
   --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-success-emphasis-color);
 }
 
-:host(:--disabled) {
+:host(:state(disabled)) {
   --border: var(--nve-ref-border-width-md) solid transparent;
 }
 
@@ -103,7 +103,7 @@ nve-menu-item nve-icon {
   --color: inherit;
 }
 
-nve-menu-item:not(:--selected) nve-icon[name='check'] {
+nve-menu-item:not(:state(selected)) nve-icon[name='check'] {
   opacity: 0;
 }
 
@@ -129,6 +129,6 @@ slot[name*='option-'] {
   align-items: center;
 }
 
-:host(:--footer-content) [name='footer'] {
+:host(:state(footer-content)) [name='footer'] {
   display: flex;
 }

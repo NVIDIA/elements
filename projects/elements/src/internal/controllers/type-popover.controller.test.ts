@@ -134,9 +134,9 @@ describe('type-popover.controller', () => {
     expect(element.inert).toBe(false);
   });
 
-  it('should update :--anchor-active state on anchor', async () => {
+  it('should update :state(anchor-active) state on anchor', async () => {
     await elementIsStable(element);
-    expect(button.matches(':--anchor-active')).toBe(false);
+    expect(button.matches(':state(anchor-active)')).toBe(false);
 
     // happy-dom not trigger attribute observer
     // element.setAttribute('hidden', '');

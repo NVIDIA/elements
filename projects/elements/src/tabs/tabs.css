@@ -24,7 +24,7 @@
   --width: calc(100% - 8px);
 }
 
-:host([vertical]) ::slotted(nve-tabs-item:--selected) {
+:host([vertical]) ::slotted(nve-tabs-item:state(selected)) {
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 

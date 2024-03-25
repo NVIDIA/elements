@@ -92,8 +92,8 @@
   align-items: end;
 }
 
-:host(:--has-prefix) [name='prefix'],
-:host(:--has-suffix) [name='suffix'] {
+:host(:state(has-prefix)) [name='prefix'],
+:host(:state(has-suffix)) [name='suffix'] {
   display: flex;
 }
 
@@ -131,6 +131,6 @@ slot:not([name]) {
   overflow-x: initial;
 }
 
-:host(:--scrollbar) slot:not([name]) {
+:host(:state(scrollbar)) slot:not([name]) {
   margin-bottom: -14px;
 }
