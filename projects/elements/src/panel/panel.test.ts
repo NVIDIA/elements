@@ -86,7 +86,7 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('left');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
-    expect(panel.matches(':--expanded')).toBe(true);
+    expect(panel.matches(':state(expanded)')).toBe(true);
 
     panel.expanded = false;
 
@@ -94,7 +94,7 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('right');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
-    expect(panel.matches(':--expanded')).toBe(false);
+    expect(panel.matches(':state(expanded)')).toBe(false);
   });
 
   it('should flip collapse icon direction when panel side set to "right" mode', async () => {
@@ -116,7 +116,7 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('left');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
-    expect(panel.matches(':--expanded')).toBe(true);
+    expect(panel.matches(':state(expanded)')).toBe(true);
 
     panel.shadowRoot.querySelector('nve-icon-button').click();
 
@@ -125,7 +125,7 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('right');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
-    expect(panel.matches(':--expanded')).toBe(false);
+    expect(panel.matches(':state(expanded)')).toBe(false);
   });
 
   it('should collapse right side panel when icon button clicked', async () => {
@@ -136,7 +136,7 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('right');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
-    expect(panel.matches(':--expanded')).toBe(true);
+    expect(panel.matches(':state(expanded)')).toBe(true);
 
     panel.shadowRoot.querySelector('nve-icon-button').click();
 
@@ -145,6 +145,6 @@ describe('nve-panel', () => {
     expect(panel.shadowRoot.querySelector('nve-icon-button').getAttribute('direction')).toBe('left');
     expect(panel.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
-    expect(panel.matches(':--expanded')).toBe(false);
+    expect(panel.matches(':state(expanded)')).toBe(false);
   });
 });

@@ -19,7 +19,7 @@
   --interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
-:host(:--selected) ::slotted(nve-grid-cell) {
+:host(:state(selected)) ::slotted(nve-grid-cell) {
   --background: var(--nve-sys-interaction-highlighted-muted-background);
   --interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
 }

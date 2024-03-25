@@ -185,15 +185,15 @@ describe('nve-select', () => {
     expect(element.shadowRoot.querySelectorAll('nve-tag').length).toBe(1);
   });
 
-  it('should set host :--multiple state when multiple is used', async () => {
+  it('should set host :state(multiple) state when multiple is used', async () => {
     select.multiple = true;
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.matches(':--multiple')).toBe(true);
+    expect(element.matches(':state(multiple)')).toBe(true);
   });
 
   it('should hide tags and display label when multiple is used and tags overflow container', async () => {
-    expect(element.matches(':--multiple-overflow')).toBe(false);
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
     select.multiple = true;
     select.options[0].selected = true;
     select.options[1].selected = true;
@@ -203,11 +203,11 @@ describe('nve-select', () => {
     await elementIsStable(element);
     await new Promise(r => requestAnimationFrame(r));
     await new Promise(resolve => setTimeout(resolve, 0));
-    expect(element.matches(':--multiple-overflow')).toBe(true);
+    expect(element.matches(':state(multiple-overflow)')).toBe(true);
   });
 
   it('should hide tags and display label when a new selection causes a overflow', async () => {
-    expect(element.matches(':--multiple-overflow')).toBe(false);
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
     element.style.setProperty('--width', '100px');
     select.multiple = true;
     await elementIsStable(element);
@@ -218,14 +218,14 @@ describe('nve-select', () => {
     // await elementIsStable(element);
     // await new Promise(r => requestAnimationFrame(r));
     // await new Promise(resolve => setTimeout(resolve, 0));
-    // expect(element.matches(':--multiple-overflow')).toBe(true);
+    // expect(element.matches(':state(multiple-overflow)')).toBe(true);
   });
 
-  it('should set host :--size state when multiple is used', async () => {
+  it('should set host :state(size) state when multiple is used', async () => {
     select.size = 2;
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.matches(':--size')).toBe(true);
+    expect(element.matches(':state(size)')).toBe(true);
   });
 
   it('should apply disabled styles to tags when disabled with multiple selection', async () => {
@@ -308,8 +308,8 @@ describe('nve-select size', () => {
     expect(dropdown).toBe(null);
   });
 
-  it('should be in a :--size state', () => {
-    expect(element.matches(':--size')).toBe(true);
+  it('should be in a :state(size) state', () => {
+    expect(element.matches(':state(size)')).toBe(true);
   });
 
   it('should set --size property', () => {

@@ -29,21 +29,21 @@ describe('state-active.controller', () => {
   });
 
   it('should add active state on mousedown', async () => {
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
 
     element.dispatchEvent(new MouseEvent('mousedown'));
-    expect(element.matches(':--active')).toBe(true);
+    expect(element.matches(':state(active)')).toBe(true);
 
     element.dispatchEvent(new MouseEvent('mouseup'));
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
   });
 
   it('should not add active state if element is disabled', async () => {
     element.disabled = true;
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
 
     element.dispatchEvent(new MouseEvent('mousedown'));
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
   });
 
   it('should not trigger scroll behavior when Space is pressed', async () => {
@@ -56,32 +56,32 @@ describe('state-active.controller', () => {
   });
 
   it('should add active state on space keypress', async () => {
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
 
     element.dispatchEvent(new KeyboardEvent('keypress', { code: 'Space' }));
-    expect(element.matches(':--active')).toBe(true);
+    expect(element.matches(':state(active)')).toBe(true);
 
     element.dispatchEvent(new KeyboardEvent('keyup'));
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
   });
 
   it('should add active state on enter keypress', async () => {
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
 
     element.dispatchEvent(new KeyboardEvent('keypress', { code: 'Enter' }));
-    expect(element.matches(':--active')).toBe(true);
+    expect(element.matches(':state(active)')).toBe(true);
 
     element.dispatchEvent(new KeyboardEvent('keyup'));
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
   });
 
   it('should not add active state on any invalid keypress', async () => {
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
 
     element.dispatchEvent(new KeyboardEvent('keypress', { code: 'KeyK' }));
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
 
     element.dispatchEvent(new KeyboardEvent('keyup'));
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
   });
 });

@@ -35,117 +35,117 @@ describe('base button', () => {
   });
 
   it('should add active state on mousedown', async () => {
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
 
     element.dispatchEvent(new MouseEvent('mousedown'));
-    expect(element.matches(':--active')).toBe(true);
+    expect(element.matches(':state(active)')).toBe(true);
 
     element.dispatchEvent(new MouseEvent('mouseup'));
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
   });
 
   it('should not add active state if element is disabled', async () => {
     element.disabled = true;
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
 
     element.dispatchEvent(new MouseEvent('mousedown'));
-    expect(element.matches(':--active')).toBe(false);
+    expect(element.matches(':state(active)')).toBe(false);
   });
 
   it('should initialize aria-disabled', async () => {
     element.disabled = true;
     await elementIsStable(element);
     expect(element._internals.ariaDisabled).toBe('true');
-    expect(element.matches(':--disabled')).toBe(true);
+    expect(element.matches(':state(disabled)')).toBe(true);
   });
 
   it('should update aria-disabled when disabled API is updated', async () => {
     element.disabled = true;
     await elementIsStable(element);
     expect(element._internals.ariaDisabled).toBe('true');
-    expect(element.matches(':--disabled')).toBe(true);
+    expect(element.matches(':state(disabled)')).toBe(true);
 
     element.disabled = false;
     await elementIsStable(element);
     expect(element._internals.ariaDisabled).toBe('false');
-    expect(element.matches(':--disabled')).toBe(false);
+    expect(element.matches(':state(disabled)')).toBe(false);
   });
 
   it('should remove aria-disabled if readonly', async () => {
     element.readonly = true;
     await elementIsStable(element);
     expect(element._internals.ariaDisabled).toBe(null);
-    expect(element.matches(':--disabled')).toBe(false);
+    expect(element.matches(':state(disabled)')).toBe(false);
   });
 
   it('should initialize aria-expanded as null', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaExpanded).toBe(null);
-    expect(element.matches(':--expanded')).toBe(false);
+    expect(element.matches(':state(expanded)')).toBe(false);
   });
 
   it('should initialize aria-expanded as null if expanded not applied', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaExpanded).toBe(null);
-    expect(element.matches(':--expanded')).toBe(false);
+    expect(element.matches(':state(expanded)')).toBe(false);
   });
 
   it('should initialize aria-expanded as true if expanded applied', async () => {
     element.expanded = true;
     await elementIsStable(element);
     expect(element._internals.ariaExpanded).toBe('true');
-    expect(element.matches(':--expanded')).toBe(true);
+    expect(element.matches(':state(expanded)')).toBe(true);
   });
 
   it('should initialize aria-expanded as false if expanded=false is applied', async () => {
     element.expanded = false;
     await elementIsStable(element);
     expect(element._internals.ariaExpanded).toBe('false');
-    expect(element.matches(':--expanded')).toBe(false);
+    expect(element.matches(':state(expanded)')).toBe(false);
   });
 
   it('should remove aria-expanded if readonly', async () => {
     element.expanded = true;
     await elementIsStable(element);
     expect(element._internals.ariaExpanded).toBe('true');
-    expect(element.matches(':--expanded')).toBe(true);
+    expect(element.matches(':state(expanded)')).toBe(true);
 
     element.readonly = true;
     await elementIsStable(element);
     expect(element._internals.ariaExpanded).toBe(null);
-    expect(element.matches(':--expanded')).toBe(false);
+    expect(element.matches(':state(expanded)')).toBe(false);
   });
 
   it('should initialize aria-pressed as null', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe(null);
-    expect(element.matches(':--pressed')).toBe(false);
+    expect(element.matches(':state(pressed)')).toBe(false);
   });
 
   it('should initialize aria-pressed as null if pressed not applied', async () => {
     element.pressed = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe('true');
-    expect(element.matches(':--pressed')).toBe(true);
+    expect(element.matches(':state(pressed)')).toBe(true);
   });
 
   it('should initialize aria-pressed as false if pressed=false applied', async () => {
     element.pressed = false;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe('false');
-    expect(element.matches(':--pressed')).toBe(false);
+    expect(element.matches(':state(pressed)')).toBe(false);
   });
 
   it('should remove aria-pressed if readonly', async () => {
     element.pressed = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe('true');
-    expect(element.matches(':--pressed')).toBe(true);
+    expect(element.matches(':state(pressed)')).toBe(true);
 
     element.readonly = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe(null);
-    expect(element.matches(':--pressed')).toBe(false);
+    expect(element.matches(':state(pressed)')).toBe(false);
   });
 
   it('should initialize tabindex 0 for focus behavior', async () => {

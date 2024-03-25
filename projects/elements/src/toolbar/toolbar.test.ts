@@ -76,7 +76,7 @@ describe('nve-toolbar', () => {
 
   it('should not apply --scrollbar state when there is no center content overflow', async () => {
     await elementIsStable(element);
-    expect(element.matches(':--scrollbar')).toBe(false);
+    expect(element.matches(':state(scrollbar)')).toBe(false);
   });
 });
 
@@ -102,13 +102,13 @@ describe('nve-toolbar scrollbar state', () => {
 
   it('should apply --scrollbar state when there is center content overflow', async () => {
     await elementIsStable(element);
-    expect(element.matches(':--scrollbar')).toBe(true);
+    expect(element.matches(':state(scrollbar)')).toBe(true);
   });
 
   it('should remove --scrollbar state when there is no center content overflow', async () => {
     element.querySelector('div:not([slot])').remove();
     await elementIsStable(element);
-    expect(element.matches(':--scrollbar')).toBe(false);
+    expect(element.matches(':state(scrollbar)')).toBe(false);
   });
 });
 

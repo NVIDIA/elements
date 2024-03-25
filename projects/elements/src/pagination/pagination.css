@@ -64,6 +64,6 @@ nve-select {
   --width: 10ch;
 }
 
-nve-icon-button:--disabled {
+nve-icon-button:state(disabled) {
   --nve-sys-interaction-state-ratio-disabled: 0 !important;
 }
