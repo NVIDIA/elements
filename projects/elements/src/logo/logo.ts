@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Color, useStyles, colorStateStyles, Size } from '@elements/elements/internal';
+import { Color, useStyles, colorStateStyles, Size, attachInternals } from '@elements/elements/internal';
 import styles from './logo.css?inline';
 
 /**
@@ -38,7 +38,7 @@ export class Logo extends LitElement {
     version: '0.0.0'
   };
 
-  #internals = this.attachInternals();
+  _internals: ElementInternals;
 
   render() {
     return html`
@@ -52,6 +52,7 @@ export class Logo extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.#internals.role = 'img';
+    attachInternals(this);
+    this._internals.role = 'img';
   }
 }

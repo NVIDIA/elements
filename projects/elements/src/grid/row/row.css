@@ -19,7 +19,7 @@
   --interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
 }
 
-:host(:--selected) ::slotted(mlv-grid-cell) {
+:host(:state(selected)) ::slotted(mlv-grid-cell) {
   --background: var(--mlv-sys-interaction-highlighted-muted-background);
   --interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
 }

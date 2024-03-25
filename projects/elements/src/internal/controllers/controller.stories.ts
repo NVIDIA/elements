@@ -40,25 +40,25 @@ export const baseButton = () => {
         --background: hsl(0, 0%, 95%);
       }
 
-      :host(:--active) {
+      :host(:state(active)) {
         --background: hsl(0, 0%, 85%);
       }
 
-      :host(:--pressed) {
+      :host(:state(pressed)) {
         --background: hsl(0, 0%, 85%);
       }
 
-      :host(:--expanded) {
+      :host(:state(expanded)) {
         --background: hsl(0, 0%, 85%);
       }
 
-      :host(:--disabled) {
+      :host(:state(disabled)) {
         --background: hsl(0, 0%, 80%);
         --color: hsl(0, 0%, 60%);
         --cursor: not-allowed;
       }
 
-      :host(:--readonly) {
+      :host(:state(readonly)) {
         --cursor: initial;
         --color: blue;
       }

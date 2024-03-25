@@ -19,7 +19,7 @@
   text-transform: var(--label-text-transform) !important;
 }
 
-:host(:--disabled) {
+:host(:state(disabled)) {
   --color: var(--mlv-sys-text-muted-color);
   --opacity: 0.5;
 }

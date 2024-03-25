@@ -36,7 +36,7 @@
   --font-weight: var(--mlv-ref-font-weight-regular);
 }
 
-mlv-select:not(:--multiple)::part(caret) {
+mlv-select:not(:state(multiple))::part(caret) {
   display: none;
 }
 

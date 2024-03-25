@@ -55,8 +55,8 @@ describe('mlv-grid', () => {
     expect(element.id.startsWith('_')).toBe(true);
   });
 
-  it('should default to no :--scrolling state', () => {
-    expect(element.matches(':--scrolling')).toBe(false);
+  it('should default to no :state(scrolling) state', () => {
+    expect(element.matches(':state(scrolling)')).toBe(false);
   });
 
   it('should enable keynav control from keynav controller', async () => {

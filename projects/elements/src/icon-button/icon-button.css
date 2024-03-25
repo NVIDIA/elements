@@ -32,14 +32,14 @@
   --mlv-sys-interaction-state-ratio: 0 !important;
 }
 
-:host([interaction*='flat']:--selected), /* deprecated */
-:host([container*='flat']:--selected),
+:host([interaction*='flat']:state(selected)), /* deprecated */
+:host([container*='flat']:state(selected)),
 :host(:not([interaction='emphasis'], [interaction='destructive'], [disabled]):hover) {
   --color: var(--mlv-sys-text-emphasis-color) !important;
 }
 
-:host([interaction*='flat']:--pressed), /* deprecated */
-:host([container*='flat']:--pressed) {
+:host([interaction*='flat']:state(pressed)), /* deprecated */
+:host([container*='flat']:state(pressed)) {
   --color: var(--mlv-sys-text-emphasis-color) !important;
   --background: none !important;
 }

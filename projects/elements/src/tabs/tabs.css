@@ -24,7 +24,7 @@
   --width: calc(100% - 8px);
 }
 
-:host([vertical]) ::slotted(mlv-tabs-item:--selected) {
+:host([vertical]) ::slotted(mlv-tabs-item:state(selected)) {
   --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
 }
 

@@ -47,7 +47,7 @@
   position: relative;
 }
 
-:host(:--disabled:--checked) [input] slot {
+:host(:state(disabled):state(checked)) [input] slot {
   --anchor-background: var(--mlv-sys-interaction-disabled-background);
   --background: var(--mlv-sys-interaction-disabled-color);
 }
@@ -65,12 +65,12 @@
   pointer-events: none;
 }
 
-:host(:--checked) {
+:host(:state(checked)) {
   --background: var(--mlv-sys-accent-secondary-background);
   --anchor-background: var(--mlv-sys-text-white-color);
 }
 
-:host(:--checked) [input] slot::after {
+:host(:state(checked)) [input] slot::after {
   transform: translate(calc(var(--width) / 2), 0);
 }
 

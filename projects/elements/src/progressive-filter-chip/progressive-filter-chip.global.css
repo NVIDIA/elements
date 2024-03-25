@@ -13,6 +13,6 @@ mlv-progressive-filter-chip:has([status='error']) {
   --background: transparent;
 }
 
-mlv-progressive-filter-chip mlv-select:not(:--multiple)::part(caret) {
+mlv-progressive-filter-chip mlv-select:not(:state(multiple))::part(caret) {
   display: none;
 }

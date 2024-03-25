@@ -7,8 +7,8 @@ export const inputQuery = 'input, select, selectmenu, textarea, [mlv-control], [
 
 /**
  * Adds validation states to custom element
- * :--valid form control is in a valid state
- * :--invalid form control is in a invalid state
+ * :state(valid) form control is in a valid state
+ * :state(invalid) form control is in a invalid state
  */
 export function setupControlValidationStates(control: Control, messages: ControlMessage[]) {
   if (
@@ -23,8 +23,8 @@ export function setupControlValidationStates(control: Control, messages: Control
      */
     const updateValidityState = () => {
       if (control.input.validity?.valid) {
-        control._internals.states.delete('--invalid');
-        control._internals.states.add('--valid');
+        control._internals.states.delete('invalid');
+        control._internals.states.add('valid');
         control.status = null;
         showNonValidationMessages(messages);
       }
@@ -34,8 +34,8 @@ export function setupControlValidationStates(control: Control, messages: Control
 
     const resetValidityState = () => {
       control.status = null;
-      control._internals.states.delete('--valid');
-      control._internals.states.delete('--invalid');
+      control._internals.states.delete('valid');
+      control._internals.states.delete('invalid');
       hideAllValidationMessages(messages);
       showNonValidationMessages(messages);
     };
@@ -56,8 +56,8 @@ export function setupControlValidationStates(control: Control, messages: Control
       }
 
       control.status = 'error';
-      control._internals.states.delete('--valid');
-      control._internals.states.add('--invalid');
+      control._internals.states.delete('valid');
+      control._internals.states.add('invalid');
     });
 
     control.addEventListener('reset', () => resetValidityState());
@@ -66,11 +66,11 @@ export function setupControlValidationStates(control: Control, messages: Control
     control.shadowRoot.addEventListener('slotchange', () => {
       const messages = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
       if (messages.find(m => m.status === 'error' && !m.hidden)) {
-        control._internals.states.delete('--valid');
-        control._internals.states.add('--invalid');
+        control._internals.states.delete('valid');
+        control._internals.states.add('invalid');
       } else {
-        control._internals.states.delete('--invalid');
-        control._internals.states.add('--valid');
+        control._internals.states.delete('invalid');
+        control._internals.states.add('valid');
       }
     });
   }
@@ -78,45 +78,45 @@ export function setupControlValidationStates(control: Control, messages: Control
 
 /**
  * Adds control interaction states to custom element
- * :--checked form control is in a checked state
- * :--disabled form control is in a disabled state
- * :--readonly form control is in a readonly state
- * :--touched form control was focused and then blurred
- * :--dirty form control was modified by user
+ * :state(checked) form control is in a checked state
+ * :state(disabled) form control is in a disabled state
+ * :state(readonly) form control is in a readonly state
+ * :state(touched) form control was focused and then blurred
+ * :state(dirty) form control was modified by user
  */
 export function setupControlStates(control: Control) {
   const observers: MutationObserver[] = [];
   const states = control._internals.states;
-  control.input.checked ? states.add('--checked') : states.delete('--checked');
-  control.input.addEventListener('focus', () => control._internals.states.add('--focus'));
-  control.input.addEventListener('input', () => control._internals.states.add('--dirty'));
+  control.input.checked ? states.add('checked') : states.delete('checked');
+  control.input.addEventListener('focus', () => control._internals.states.add('focus'));
+  control.input.addEventListener('input', () => control._internals.states.add('dirty'));
   control.input.addEventListener('blur', () => {
-    control._internals.states.add('--touched');
-    control._internals.states.delete('--focus');
+    control._internals.states.add('touched');
+    control._internals.states.delete('focus');
   });
 
   control.input.getRootNode().addEventListener('change', (e: any) => {
     if (e.target.name === control.input?.name) {
-      control.input.checked ? states.add('--checked') : states.delete('--checked');
+      control.input.checked ? states.add('checked') : states.delete('checked');
     }
   });
 
   control.input.form?.addEventListener('reset', () => {
-    control._internals.states.delete('--touched');
-    control._internals.states.delete('--dirty');
-    control._internals.states.delete('--error');
-    control._internals.states.delete('--success');
+    control._internals.states.delete('touched');
+    control._internals.states.delete('dirty');
+    control._internals.states.delete('error');
+    control._internals.states.delete('success');
   });
 
   observers.push(
     getElementUpdate(control.input, 'readonly', value =>
-      (value === '' ? true : value) ? states.add('--readonly') : states.delete('--readonly')
+      (value === '' ? true : value) ? states.add('readonly') : states.delete('readonly')
     ),
     getElementUpdate(control.input, 'checked', () =>
-      control.input.checked ? states.add('--checked') : states.delete('--checked')
+      control.input.checked ? states.add('checked') : states.delete('checked')
     ),
     getElementUpdate(control.input, 'disabled', value =>
-      (value === '' ? true : value) ? states.add('--disabled') : states.delete('--disabled')
+      (value === '' ? true : value) ? states.add('disabled') : states.delete('disabled')
     )
   );
   return observers;
@@ -124,7 +124,7 @@ export function setupControlStates(control: Control) {
 
 /**
  * Adds control group interaction states to custom element
- * :--disabled any form control within group is in a disabled state
+ * :state(disabled) any form control within group is in a disabled state
  */
 export function setupControlGroupStates(controlGroup: ControlGroup) {
   toggleControlGroupDisabledState(controlGroup);
@@ -133,16 +133,16 @@ export function setupControlGroupStates(controlGroup: ControlGroup) {
 
 export function toggleControlGroupDisabledState(controlGroup: ControlGroup) {
   if (Array.from(controlGroup.inputs).find(i => i.disabled)) {
-    controlGroup._internals.states.add('--disabled');
+    controlGroup._internals.states.add('disabled');
   } else {
-    controlGroup._internals.states.delete('--disabled');
+    controlGroup._internals.states.delete('disabled');
   }
 }
 
 /**
  * Adds control status states to custom element
- * :--error form control is in a error state
- * :--success form control is in a success state
+ * :state(error) form control is in a error state
+ * :state(success) form control is in a success state
  */
 export function setupControlStatusStates(control: Control | ControlGroup, messages: ControlMessage[]) {
   updateControlStatusState(
@@ -162,8 +162,8 @@ export function setupControlStatusStates(control: Control | ControlGroup, messag
 }
 
 export function updateControlStatusState(control: Control | ControlGroup, message: ControlMessage) {
-  control._internals.states.delete('--error');
-  control._internals.states.delete('--success');
+  control._internals.states.delete('error');
+  control._internals.states.delete('success');
 
   if (message?.status?.length && !message?.hidden) {
     control._internals.states.add(`--${message.status}`);

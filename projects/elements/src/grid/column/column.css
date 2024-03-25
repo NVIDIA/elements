@@ -47,10 +47,9 @@
   :host(:hover) ::slotted(mlv-sort-button) {
     opacity: 1;
   }
-
 }
 
-::slotted(mlv-icon-button:--anchor-active),
-::slotted(mlv-sort-button:--anchor-active) {
+::slotted(mlv-icon-button:state(anchor-active)),
+::slotted(mlv-sort-button:state(anchor-active)) {
   opacity: 1;
 }

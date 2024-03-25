@@ -40,13 +40,13 @@ describe('mlv-button-group', () => {
 
   it('should sync split state if divider is provided', async () => {
     await elementIsStable(element);
-    expect(element.matches(':--split')).toBe(false);
+    expect(element.matches(':state(split)')).toBe(false);
 
     const divider = document.createElement('mlv-divider');
     element.appendChild(divider);
 
     await elementIsStable(element);
-    expect(element.matches(':--split')).toBe(true);
+    expect(element.matches(':state(split)')).toBe(true);
   });
 
   it('should sync flat container styles', async () => {

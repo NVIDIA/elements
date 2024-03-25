@@ -39,10 +39,10 @@
   left: 0;
 }
 
-:host(:--disabled) {
+:host(:state(disabled)) {
   --background: var(--mlv-sys-interaction-disabled-background);
 }
 
-:host(:not(:--disabled):hover) [input] {
+:host(:not(:state(disabled)):hover) [input] {
   filter: brightness(0.9);
 }

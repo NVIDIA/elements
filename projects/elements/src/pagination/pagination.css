@@ -64,6 +64,6 @@ mlv-select {
   --width: 10ch;
 }
 
-mlv-icon-button:--disabled {
+mlv-icon-button:state(disabled) {
   --mlv-sys-interaction-state-ratio-disabled: 0 !important;
 }

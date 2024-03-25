@@ -32,8 +32,8 @@
   text-transform: capitalize;
 }
 
-:host(:--disabled),
-:host(:--disabled) ::slotted(mlv-control-message:not([status])) {
+:host(:state(disabled)),
+:host(:state(disabled)) ::slotted(mlv-control-message:not([status])) {
   --cursor: not-allowed;
   --color: var(--mlv-sys-text-muted-color);
   --opacity: 0.5;

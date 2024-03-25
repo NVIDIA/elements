@@ -67,29 +67,29 @@
   outline: 0 !important;
 }
 
-:host(:--selected) {
+:host(:state(selected)) {
   --font-weight: var(--mlv-ref-font-weight-semibold);
 }
 
-:host([fit-content]:--multiple) [internal-host]:has(mlv-tag) ::slotted(select) {
+:host([fit-content]:state(multiple)) [internal-host]:has(mlv-tag) ::slotted(select) {
   width: var(--mlv-ref-size-1000) !important;
 }
 
-:host(:--multiple) {
+:host(:state(multiple)) {
   --padding: 0 var(--mlv-ref-size-300) 0 var(--mlv-ref-size-100);
 }
 
-:host(:--multiple) [input] {
+:host(:state(multiple)) [input] {
   padding: var(--padding);
 }
 
-:host(:--multiple) .tags {
+:host(:state(multiple)) .tags {
   width: fit-content;
   display: flex;
   gap: var(--mlv-ref-space-xxs);
 }
 
-:host(:--multiple) .tags-label {
+:host(:state(multiple)) .tags-label {
   padding: 0 var(--mlv-ref-size-200);
   font-size: var(--font-size);
   cursor: var(--cursor);
@@ -100,32 +100,32 @@
   pointer-events: none;
 }
 
-:host(:--multiple-overflow) .tags,
+:host(:state(multiple-overflow)) .tags,
 :host([multiple-overflow]) .tags {
   opacity: 0;
   pointer-events: none;
   position: absolute;
 }
 
-:host(:--multiple-overflow) .tags-label,
+:host(:state(multiple-overflow)) .tags-label,
 :host([multiple-overflow]) .tags-label {
   display: block;
 }
 
-:host(:--multiple) ::slotted(select[multiple]) {
+:host(:state(multiple)) ::slotted(select[multiple]) {
   opacity: 0 !important;
 }
 
-:host(:--size) {
+:host(:state(size)) {
   --height: calc(var(--mlv-ref-size-800) * var(--size));
 }
 
-:host(:--size) [input] {
+:host(:state(size)) [input] {
   overflow: auto;
   display: block;
 }
 
-:host(:--size) [input] slot:not([name]) {
+:host(:state(size)) [input] slot:not([name]) {
   display: none;
 }
 
@@ -139,17 +139,17 @@
 }
 
 :host([status='error']),
-:host(:--invalid),
-:host(:--error) {
+:host(:state(invalid)),
+:host(:state(error)) {
   --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-danger-emphasis-color);
 }
 
 :host([status='success']),
-:host(:--success) {
+:host(:state(success)) {
   --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-success-emphasis-color);
 }
 
-:host(:--disabled) {
+:host(:state(disabled)) {
   --border: var(--mlv-ref-border-width-md) solid transparent;
 }
 
@@ -159,7 +159,7 @@ mlv-tag {
   --cursor: pointer !important;
 }
 
-:host(:--disabled) mlv-tag {
+:host(:state(disabled)) mlv-tag {
   pointer-events: none !important;
   --cursor: not-allowed !important;
 }
@@ -178,7 +178,7 @@ mlv-menu-item {
   content-visibility: auto;
 }
 
-mlv-menu-item:not(:--selected) mlv-icon[name='check'] {
+mlv-menu-item:not(:state(selected)) mlv-icon[name='check'] {
   opacity: 0;
 }
 

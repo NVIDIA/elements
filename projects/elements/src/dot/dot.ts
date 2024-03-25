@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import {
+  attachInternals,
   Size,
   statusStateStyles,
   supportStateStyles,
@@ -42,7 +43,7 @@ export class Dot extends LitElement {
     version: '0.0.0'
   };
 
-  #internals = this.attachInternals();
+  _internals: ElementInternals;
 
   render() {
     return html`
@@ -54,10 +55,11 @@ export class Dot extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.#internals.role = 'img';
+    attachInternals(this);
+    this._internals.role = 'img';
   }
 
   #updateSlot() {
-    this.textContent.length ? this.#internals.states.add('--has-text') : this.#internals.states.delete('--has-text');
+    this.textContent.length ? this._internals.states.add('has-text') : this._internals.states.delete('has-text');
   }
 }

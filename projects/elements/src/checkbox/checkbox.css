@@ -43,25 +43,25 @@
   margin-left: var(--mlv-ref-space-xxxs);
 }
 
-:host(:--checked) {
+:host(:state(checked)) {
   --mlv-sys-interaction-state-lightness: 0%;
   --background: var(--accent-color);
   --check-color: var(--mlv-sys-text-white-color);
 }
 
-:host(:--checked) [input] slot {
+:host(:state(checked)) [input] slot {
   border: 0;
 }
 
-:host(:--checked) [input] slot::before {
+:host(:state(checked)) [input] slot::before {
   background: var(--check-color);
 }
 
-:host(:--disabled) {
+:host(:state(disabled)) {
   --background: var(--mlv-sys-interaction-disabled-background);
 }
 
-:host(:--checked:--disabled) {
+:host(:state(checked):state(disabled)) {
   --background: var(--mlv-sys-interaction-disabled-color);
 }
 

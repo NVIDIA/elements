@@ -1,4 +1,3 @@
-
 :host {
   --gap: var(--mlv-ref-space-xs);
   --font-size: var(--mlv-ref-font-size-100);
@@ -42,10 +41,10 @@
   --font-size: var(--mlv-ref-font-size-200);
 }
 
-:host(:--has-text) {
+:host(:state(has-text)) {
   --width: fit-content;
   --height: fit-content;
-  --padding: calc(var(--font-size) * .1) calc(var(--font-size) * .5);
+  --padding: calc(var(--font-size) * 0.1) calc(var(--font-size) * 0.5);
 }
 
 ::slotted([mlv-text]) {

@@ -197,14 +197,14 @@ describe('mlv-combobox', () => {
   });
 
   it('should apply the --footer-content state styles when footer content is slotted', async () => {
-    expect(element.matches(':--footer-content')).toBe(false);
+    expect(element.matches(':state(footer-content)')).toBe(false);
 
     const footer = document.createElement('div');
     footer.setAttribute('slot', 'footer');
     element.appendChild(footer);
     await elementIsStable(element);
 
-    expect(element.matches(':--footer-content')).toBe(true);
+    expect(element.matches(':state(footer-content)')).toBe(true);
   });
 });
 
@@ -358,8 +358,8 @@ describe('mlv-combobox multi select', () => {
     expect(customElements.get('mlv-combobox')).toBeDefined();
   });
 
-  it('should initialize :--multiple state', () => {
-    expect(element.matches(':--multiple')).toBe(true);
+  it('should initialize :state(multiple) state', () => {
+    expect(element.matches(':state(multiple)')).toBe(true);
   });
 
   it('should cooresponding menu items and options as selected', async () => {
@@ -404,7 +404,7 @@ describe('mlv-combobox multi select', () => {
   });
 
   it('should hide tags and display label when multiple is used and tags overflow container', async () => {
-    expect(element.matches(':--multiple-overflow')).toBe(false);
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
     select.multiple = true;
     select.options[0].selected = true;
     select.options[1].selected = true;
@@ -414,7 +414,7 @@ describe('mlv-combobox multi select', () => {
     await elementIsStable(element);
     await new Promise(r => requestAnimationFrame(r));
     await new Promise(resolve => setTimeout(resolve, 0));
-    expect(element.matches(':--multiple-overflow')).toBe(true);
+    expect(element.matches(':state(multiple-overflow)')).toBe(true);
   });
 
   it('should clear and reset text input and select when reset() is called', async () => {
@@ -431,7 +431,7 @@ describe('mlv-combobox multi select', () => {
   });
 
   it('should hide tags and display label when a new selection causes a overflow', async () => {
-    expect(element.matches(':--multiple-overflow')).toBe(false);
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
     element.style.setProperty('--width', '100px');
     select.multiple = true;
     await elementIsStable(element);
@@ -442,11 +442,11 @@ describe('mlv-combobox multi select', () => {
     await elementIsStable(element);
     await new Promise(r => requestAnimationFrame(r));
     await new Promise(resolve => setTimeout(resolve, 0));
-    expect(element.matches(':--multiple-overflow')).toBe(true);
+    expect(element.matches(':state(multiple-overflow)')).toBe(true);
   });
 
   it('should remove overflow if additional space is available', async () => {
-    expect(element.matches(':--multiple-overflow')).toBe(false);
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
     select.multiple = true;
     select.options[0].selected = true;
     select.options[1].selected = true;
@@ -456,7 +456,7 @@ describe('mlv-combobox multi select', () => {
     await elementIsStable(element);
     await new Promise(r => requestAnimationFrame(r));
     await new Promise(resolve => setTimeout(resolve, 0));
-    expect(element.matches(':--multiple-overflow')).toBe(true);
+    expect(element.matches(':state(multiple-overflow)')).toBe(true);
 
     select.options[0].selected = false;
     select.options[1].selected = false;
@@ -466,7 +466,7 @@ describe('mlv-combobox multi select', () => {
     await elementIsStable(element);
     await new Promise(r => requestAnimationFrame(r));
     await new Promise(resolve => setTimeout(resolve, 0));
-    expect(element.matches(':--multiple-overflow')).toBe(false);
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
   });
 
   it('should select all options when selectAll() is called', async () => {

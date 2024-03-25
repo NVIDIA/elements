@@ -69,17 +69,17 @@ mlv-icon-button,
 }
 
 :host([status='error']),
-:host(:--invalid),
-:host(:--error) {
+:host(:state(invalid)),
+:host(:state(error)) {
   --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-danger-emphasis-color);
 }
 
 :host([status='success']),
-:host(:--success) {
+:host(:state(success)) {
   --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-success-emphasis-color);
 }
 
-:host(:--disabled) {
+:host(:state(disabled)) {
   --border: var(--mlv-ref-border-width-md) solid transparent;
 }
 

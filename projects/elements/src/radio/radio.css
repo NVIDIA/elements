@@ -43,16 +43,16 @@
   border-radius: var(--border-radius);
 }
 
-:host(:--checked) {
+:host(:state(checked)) {
   --mlv-sys-interaction-state-lightness: 0%;
   --border-color: var(--accent-color);
 }
 
-:host(:--checked) [input] slot::before {
+:host(:state(checked)) [input] slot::before {
   background: var(--border-color);
 }
 
-:host(:--disabled) {
+:host(:state(disabled)) {
   --border-color: var(--mlv-sys-interaction-disabled-background);
 }
 

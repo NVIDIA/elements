@@ -1,4 +1,3 @@
-
 :host {
   --border-width: 100%;
   --border-height: var(--mlv-ref-border-width-xl);
@@ -23,7 +22,14 @@
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   line-height: var(--mlv-ref-font-size-500);
-  background-image: linear-gradient(color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio)) 0 0) !important;
+  background-image: linear-gradient(
+    color-mix(
+        in oklab,
+        var(--mlv-sys-interaction-state-base) 100%,
+        var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio)
+      )
+      0 0
+  ) !important;
   inset: var(--border-inset);
   border-radius: var(--border-radius);
   cursor: var(--cursor);
@@ -34,12 +40,12 @@
   position: relative;
 }
 
-:host(:--selected) {
+:host(:state(selected)) {
   --color: var(--mlv-sys-text-emphasis-color);
   --font-weight: var(--mlv-ref-font-weight-semibold);
 }
 
-:host(:--selected)::after {
+:host(:state(selected))::after {
   width: var(--border-width);
   height: var(--border-height);
   border-radius: var(--border-radius);
@@ -52,16 +58,16 @@
   left: 0;
 }
 
-:host(:--selected) ::slotted(mlv-icon) {
+:host(:state(selected)) ::slotted(mlv-icon) {
   --color: var(--mlv-sys-interaction-color);
 }
 
-:host(:hover:not(:--disabled, :--selected)) {
+:host(:hover:not(:state(disabled), :state(selected))) {
   --color: var(--mlv-sys-text-emphasis-color);
   --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
 }
 
-:host(:--disabled) {
+:host(:state(disabled)) {
   --color: var(--mlv-sys-interaction-disabled-color);
   --cursor: not-allowed;
 }

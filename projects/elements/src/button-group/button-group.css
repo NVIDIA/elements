@@ -49,8 +49,8 @@
   --border-radius: var(--mlv-ref-border-radius-lg);
 }
 
-:host([container='rounded']:not(:--split)) ::slotted(mlv-button),
-:host([container='rounded']:not(:--split)) ::slotted(mlv-icon-button) {
+:host([container='rounded']:not(:state(split))) ::slotted(mlv-button),
+:host([container='rounded']:not(:state(split))) ::slotted(mlv-icon-button) {
   --border-radius: var(--mlv-ref-border-radius-full);
 }
 
@@ -79,15 +79,15 @@
   );
 }
 
-:host(:--split) {
+:host(:state(split)) {
   --padding: 0;
   --gap: 0;
 }
 
-:host(:--split) ::slotted(mlv-button) {
+:host(:state(split)) ::slotted(mlv-button) {
   --border-radius: var(--mlv-ref-border-radius-none);
 }
 
-:host(:--split) ::slotted(mlv-icon-button) {
+:host(:state(split)) ::slotted(mlv-icon-button) {
   --border-radius: var(--mlv-ref-border-radius-none);
 }
