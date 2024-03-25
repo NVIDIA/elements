@@ -39,39 +39,39 @@ describe('state-selected.controller', () => {
   it('should initialize aria-selected as null', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe(null);
-    expect(element.matches(':--selected')).toBe(false);
+    expect(element.matches(':state(selected)')).toBe(false);
   });
 
   it('should initialize aria-selected as null if selected not applied', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe(null);
-    expect(element.matches(':--selected')).toBe(false);
+    expect(element.matches(':state(selected)')).toBe(false);
   });
 
   it('should initialize aria-selected as true if selected applied', async () => {
     element.selected = true;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe('true');
-    expect(element.matches(':--selected')).toBe(true);
+    expect(element.matches(':state(selected)')).toBe(true);
   });
 
   it('should initialize aria-selected as false if selected=false is applied', async () => {
     element.selected = false;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe('false');
-    expect(element.matches(':--selected')).toBe(false);
+    expect(element.matches(':state(selected)')).toBe(false);
   });
 
   it('should remove aria-selected if readonly', async () => {
     element.selected = true;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe('true');
-    expect(element.matches(':--selected')).toBe(true);
+    expect(element.matches(':state(selected)')).toBe(true);
 
     element.readonly = true;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe(null);
-    expect(element.matches(':--selected')).toBe(false);
+    expect(element.matches(':state(selected)')).toBe(false);
   });
 
   it('should appply aria-current="page" if a selected anchor', async () => {
@@ -79,7 +79,7 @@ describe('state-selected.controller', () => {
     a.href = '#';
     element.appendChild(a);
     element.selected = true;
-    element._internals.states.add('--anchor'); // typically added via type-anchor controller in base button
+    element._internals.states.add('anchor'); // typically added via type-anchor controller in base button
     element.requestUpdate();
     await elementIsStable(element);
 

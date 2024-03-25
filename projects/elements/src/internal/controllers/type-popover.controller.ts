@@ -193,9 +193,9 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   #updateAnchorState() {
     if (this.host.hidden) {
-      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.delete('--anchor-active');
+      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.delete('anchor-active');
     } else {
-      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.add('--anchor-active');
+      (this.#anchor as HTMLElement & { _internals: ElementInternals })?._internals?.states.add('anchor-active');
     }
   }
 

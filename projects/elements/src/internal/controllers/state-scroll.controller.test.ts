@@ -38,12 +38,12 @@ describe('state-scroll.controller', () => {
 
   afterEach(async () => {
     removeFixture(fixture);
-    element._internals.states.delete(':--scrolling');
+    element._internals.states.delete(':state(scrolling)');
   });
 
   it('should initialize with no scrolling state', async () => {
     await elementIsStable(element);
-    expect(element.matches(':--scrolling')).toBe(false);
+    expect(element.matches(':state(scrolling)')).toBe(false);
   });
 
   it('should add scrolling state on scroll', async () => {
@@ -51,7 +51,7 @@ describe('state-scroll.controller', () => {
     element.scrollLeft = 10;
     element.dispatchEvent(new Event('scroll', { bubbles: true }));
     await event;
-    expect(element.matches(':--scrolling')).toBe(true);
+    expect(element.matches(':state(scrolling)')).toBe(true);
   });
 
   it('should remove scrolling state on scrollend', async () => {
@@ -59,7 +59,7 @@ describe('state-scroll.controller', () => {
     element.scrollLeft = 10;
     element.dispatchEvent(new Event('scrollend', { bubbles: true }));
     await event;
-    expect(element.matches(':--scrolling')).toBe(false);
+    expect(element.matches(':state(scrolling)')).toBe(false);
   });
 
   it('should dispatch scrollend event when scroll reaches end of scrollbox', async () => {
@@ -85,13 +85,13 @@ describe('state-scroll.controller', () => {
     element.scrollLeft = 10;
     element.dispatchEvent(new Event('scroll', { bubbles: true }));
     await event;
-    expect(element.matches(':--scrolling')).toBe(true);
+    expect(element.matches(':state(scrolling)')).toBe(true);
 
     element.stateScrollConfig.target = undefined;
     const eventElement = untilEvent(element, 'scroll');
     element.scrollLeft = 10;
     element.dispatchEvent(new Event('scroll', { bubbles: true }));
     await eventElement;
-    expect(element.matches(':--scrolling')).toBe(true);
+    expect(element.matches(':state(scrolling)')).toBe(true);
   });
 });

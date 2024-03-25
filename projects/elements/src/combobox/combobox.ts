@@ -188,7 +188,7 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupMultipleSelect() {
     if (this.#select?.multiple) {
-      this._internals.states.add('--multiple');
+      this._internals.states.add('multiple');
     }
   }
 
@@ -306,9 +306,9 @@ export class Combobox extends Control implements ContainerElement {
   #updateMultipleOverflow(tagWidth: number) {
     const INPUT_MIN_WIDTH = 100;
     if (this.#select?.multiple && tagWidth > this.#input.getBoundingClientRect().width - INPUT_MIN_WIDTH) {
-      this._internals.states.add('--multiple-overflow');
+      this._internals.states.add('multiple-overflow');
     } else {
-      this._internals.states.delete('--multiple-overflow');
+      this._internals.states.delete('multiple-overflow');
     }
   }
 
@@ -319,9 +319,9 @@ export class Combobox extends Control implements ContainerElement {
 
   #setSlotStates() {
     if (this.#hasFooterContent) {
-      this._internals.states.add('--footer-content');
+      this._internals.states.add('footer-content');
     } else {
-      this._internals.states.delete('--footer-content');
+      this._internals.states.delete('footer-content');
     }
   }
 }

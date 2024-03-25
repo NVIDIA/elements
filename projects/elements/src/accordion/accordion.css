@@ -37,7 +37,7 @@
   gap: var(--nve-ref-space-xxs);
 }
 
-:host(:not(:--expanded)) #content {
+:host(:not(:state(expanded))) #content {
   display: none;
 }
 
