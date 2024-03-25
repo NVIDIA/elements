@@ -1,3 +1,12 @@
+## [0.27.5](https://github.com/NVIDIA/elements/compare/v0.27.4...v0.27.5) (2024-03-25)
+
+
+### Bug Fixes
+
+* **elements:** add custom-state-set polyfill ([57cfc4f](https://github.com/NVIDIA/elements/commit/57cfc4f3a56c204c7685bdb1611f707f058949a0))
+* **elements:** update to latest custom-state-set syntax ([8f517a5](https://github.com/NVIDIA/elements/commit/8f517a5482454fbc15ce7593ebb05b7ccbd1194a))
+* **themes:** normalize theme name paths ([fb4ea7a](https://github.com/NVIDIA/elements/commit/fb4ea7ae220adc403258f48d6545f62b3bdb586d))
+
 ## [0.27.4](https://github.com/NVIDIA/elements/compare/v0.27.3...v0.27.4) (2024-03-22)
 
 
