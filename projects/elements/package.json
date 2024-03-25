@@ -35,6 +35,7 @@
   ],
   "sideEffects": [
     "./dist/polyfills/index.js",
+    "./dist/polyfills/custom-state-set.js",
     "./dist/test/index.js",
     "./**/define.js"
   ],
