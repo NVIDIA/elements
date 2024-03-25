@@ -1,3 +1,10 @@
+## [0.27.6](https://github.com/NVIDIA/elements/compare/v0.27.5...v0.27.6) (2024-03-25)
+
+
+### Bug Fixes
+
+* **elements:** polyfill side effect ([ab0bd02](https://github.com/NVIDIA/elements/commit/ab0bd02749848fe7c19c6d219c707d2a267ea6d6))
+
 ## [0.27.5](https://github.com/NVIDIA/elements/compare/v0.27.4...v0.27.5) (2024-03-25)
 
 
