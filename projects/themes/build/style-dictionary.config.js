@@ -118,9 +118,9 @@ StyleDictionary.registerFormat({
     const experimental = dictionary.allTokens.find(t => t.name.includes('experimental')) ? '/** @experimental */' : '';
     const selector =
       options.theme !== 'index'
-        ? `[nve-theme~='${options.theme}'], [nve-theme~='${options.theme}']`
+        ? `[nve-theme*='${options.theme}'], [nve-theme*='${options.theme}']`
         : `:root, [nve-theme~='light'], [nve-theme~='light']`;
-    return `${fileHeader({ file })}${experimental}${options.theme === 'index' ? `${baseReset}\n` : ''}${selector} {\n${formattedVariables(
+    return `${fileHeader({ file })}${experimental}\n${options.theme === 'index' ? `${baseReset}\n` : ''}${selector} {\n${formattedVariables(
       {
         format: 'css',
         dictionary,
