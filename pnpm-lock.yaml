@@ -53,8 +53,8 @@ importers:
         specifier: 15.2.1
         version: 15.2.1
       playwright:
-        specifier: 1.40.1
-        version: 1.40.1
+        specifier: 1.42.1
+        version: 1.42.1
       prettier:
         specifier: 3.2.5
         version: 3.2.5
@@ -170,7 +170,7 @@ importers:
         version: 8.9.0
       '@vitest/browser':
         specifier: 1.1.0
-        version: 1.1.0(playwright@1.40.1)(vitest@1.1.0)
+        version: 1.1.0(playwright@1.42.1)(vitest@1.1.0)
       glob:
         specifier: 10.3.10
         version: 10.3.10
@@ -349,7 +349,7 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       element-internals-polyfill:
-        specifier: ^1.3.9
+        specifier: ^1.3.10
         version: 1.3.10
       formdata-polyfill:
         specifier: ^4.0.10
@@ -401,11 +401,11 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(eslint@8.57.0)(typescript@5.3.3)
       '@typescript/lib-dom':
-        specifier: npm:@types/web@0.0.140
-        version: /@types/web@0.0.140
+        specifier: npm:@types/web@0.0.142
+        version: /@types/web@0.0.142
       '@vitest/browser':
         specifier: 1.1.0
-        version: 1.1.0(playwright@1.40.1)(vitest@1.1.0)
+        version: 1.1.0(playwright@1.42.1)(vitest@1.1.0)
       '@vitest/coverage-istanbul':
         specifier: 1.1.0
         version: 1.1.0(vitest@1.1.0)
@@ -535,7 +535,7 @@ importers:
         version: 18.2.18
       '@vitest/browser':
         specifier: 1.1.0
-        version: 1.1.0(playwright@1.40.1)(vitest@1.1.0)
+        version: 1.1.0(playwright@1.42.1)(vitest@1.1.0)
       '@vitest/coverage-istanbul':
         specifier: 1.1.0
         version: 1.1.0(vitest@1.1.0)
@@ -6124,9 +6124,9 @@ packages:
       { integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA== }
     dev: true
 
-  /@types/web@0.0.140:
+  /@types/web@0.0.142:
     resolution:
-      { integrity: sha512-uBeH71RjueNd68iI5LJHi0EYg9f+eFczOJFJ1mEdw0Kw3UC54UPhEgw/HYpY/jc9GB0HhAnZnyF6sCmP+IQKPg== }
+      { integrity: sha512-QWDvMW+P3sdq8rhiw3dNyBR64O5adSY80gBjRd2xI3BADGsAFpAglblWucsGUjKVKyPm4EbYZkvFs7BRxPsBOg== }
     dev: true
 
   /@types/ws@8.5.10:
@@ -6329,7 +6329,7 @@ packages:
       vue: 3.4.15(typescript@5.3.3)
     dev: true
 
-  /@vitest/browser@1.1.0(playwright@1.40.1)(vitest@1.1.0):
+  /@vitest/browser@1.1.0(playwright@1.42.1)(vitest@1.1.0):
     resolution:
       { integrity: sha512-59Uwoiw/zAQPmqgIKrzev8HNfeNlD8Q/nDyP9Xqg1D3kaM0tcOT/wk5RnZFW5f0JdguK0c1+vSeOPUSrOja1hQ== }
     peerDependencies:
@@ -6347,7 +6347,7 @@ packages:
     dependencies:
       estree-walker: 3.0.3
       magic-string: 0.30.5
-      playwright: 1.40.1
+      playwright: 1.42.1
       sirv: 2.0.4
       vitest: 1.1.0(@types/node@20.11.6)(@vitest/browser@1.1.0)(terser@5.22.0)
     dev: true
@@ -6757,9 +6757,9 @@ packages:
       acorn: 8.11.3
     dev: true
 
-  /acorn-walk@8.3.1:
+  /acorn-walk@8.3.2:
     resolution:
-      { integrity: sha512-TgUZgYvqZprrl7YldZNoa9OciCAyZR+Ejm9eXzKCmjsF5IKp/wgQ7Z/ZpjpGTIUPwrHQIcYeI8qDh4PsEwxMbw== }
+      { integrity: sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A== }
     engines: { node: '>=0.4.0' }
     dev: true
 
@@ -15895,20 +15895,20 @@ packages:
       pathe: 1.1.1
     dev: true
 
-  /playwright-core@1.40.1:
+  /playwright-core@1.42.1:
     resolution:
-      { integrity: sha512-+hkOycxPiV534c4HhpfX6yrlawqVUzITRKwHAmYfmsVreltEl6fAZJ3DPfLMOODw0H3s1Itd6MDCWmP1fl/QvQ== }
+      { integrity: sha512-mxz6zclokgrke9p1vtdy/COWBH+eOZgYUVVU34C73M+4j4HLlQJHtfcqiqqxpP0o8HhMkflvfbquLX5dg6wlfA== }
     engines: { node: '>=16' }
     hasBin: true
     dev: true
 
-  /playwright@1.40.1:
+  /playwright@1.42.1:
     resolution:
-      { integrity: sha512-2eHI7IioIpQ0bS1Ovg/HszsN/XKNwEG1kbzSDDmADpclKc7CyqkHw7Mg2JCz/bbCxg25QUPcjksoMW7JcIFQmw== }
+      { integrity: sha512-PgwB03s2DZBcNRoW+1w9E+VkLBxweib6KTXM0M3tkiT4jVxKSi6PmVJ591J+0u10LUrgxB7dLRbiJqO5s2QPMg== }
     engines: { node: '>=16' }
     hasBin: true
     dependencies:
-      playwright-core: 1.40.1
+      playwright-core: 1.42.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -18820,9 +18820,9 @@ packages:
       { integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw== }
     dev: true
 
-  /tinypool@0.8.1:
+  /tinypool@0.8.2:
     resolution:
-      { integrity: sha512-zBTCK0cCgRROxvs9c0CGK838sPkeokNGdQVUUwHAbynHFlmyJYj825f/oRs528HaIJ97lo0pLIlDUzwN+IorWg== }
+      { integrity: sha512-SUszKYe5wgsxnNOVlBYO6IC+8VGWdVGZWAqUxp3UErNBtptZvWbwyUOyzNL59zigz2rCA92QiL3wvG+JDSdJdQ== }
     engines: { node: '>=14.0.0' }
     dev: true
 
@@ -19836,13 +19836,13 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.11.6
-      '@vitest/browser': 1.1.0(playwright@1.40.1)(vitest@1.1.0)
+      '@vitest/browser': 1.1.0(playwright@1.42.1)(vitest@1.1.0)
       '@vitest/expect': 1.1.0
       '@vitest/runner': 1.1.0
       '@vitest/snapshot': 1.1.0
       '@vitest/spy': 1.1.0
       '@vitest/utils': 1.1.0
-      acorn-walk: 8.3.1
+      acorn-walk: 8.3.2
       cac: 6.7.14
       chai: 4.3.10
       debug: 4.3.4
@@ -19854,7 +19854,7 @@ packages:
       std-env: 3.7.0
       strip-literal: 1.3.0
       tinybench: 2.5.1
-      tinypool: 0.8.1
+      tinypool: 0.8.2
       vite: 5.1.3(@types/node@20.11.6)(terser@5.22.0)
       vite-node: 1.1.0(@types/node@20.11.6)(terser@5.22.0)
       why-is-node-running: 2.2.2
