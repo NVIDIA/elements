@@ -35,7 +35,7 @@
     "glob": "10.3.10",
     "husky": "8.0.3",
     "lint-staged": "15.2.1",
-    "playwright": "1.40.1",
+    "playwright": "1.42.1",
     "prettier": "3.2.5",
     "semantic-release": "22.0.12",
     "semantic-release-replace-plugin": "1.2.7",

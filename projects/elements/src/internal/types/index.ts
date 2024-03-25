@@ -260,14 +260,6 @@ declare global {
     debug: (log?: (...args) => void) => void;
   };
 
-  interface ElementInternals {
-    states: {
-      add: (state: string) => void;
-      delete: (state: string) => void;
-      has: (state: string) => boolean;
-    };
-  }
-
   interface HTMLElement {
     'nve-text': string;
     'nve-layout': string;
