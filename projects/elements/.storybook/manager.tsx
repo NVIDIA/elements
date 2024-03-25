@@ -1,6 +1,7 @@
 import React from 'react';
 import { addons, types, useGlobals } from '@storybook/manager-api';
 
+import '@elements/elements/polyfills';
 import '@elements/elements/forms/define.js';
 import '@elements/elements/select/define.js';
 import '@elements/elements/switch/define.js';
