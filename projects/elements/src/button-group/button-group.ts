@@ -102,7 +102,7 @@ export class ButtonGroup extends LitElement {
       this.#buttons.forEach(btn => (btn.interaction = this.interaction));
     }
 
-    this.dividers.length ? this._internals.states.add('--split') : this._internals.states.delete('--split');
+    this.dividers.length ? this._internals.states.add('split') : this._internals.states.delete('split');
   }
 
   #selectButton(button) {

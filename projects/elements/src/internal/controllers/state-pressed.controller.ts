@@ -2,7 +2,7 @@ import { ReactiveController, ReactiveElement } from 'lit';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
- * Adds pressed support for interactive custom elements including CSS State psuedo-selector :--pressed and aria-pressed.
+ * Adds pressed support for interactive custom elements including CSS State psuedo-selector :state(pressed) and aria-pressed.
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed
  */
@@ -27,14 +27,14 @@ export class StatePressedController<T extends Pressed> implements ReactiveContro
     }
 
     if (this.host.pressed) {
-      this.host._internals.states.add('--pressed');
+      this.host._internals.states.add('pressed');
     } else {
-      this.host._internals.states.delete('--pressed');
+      this.host._internals.states.delete('pressed');
     }
 
     if (this.host.readonly) {
       this.host._internals.ariaPressed = null;
-      this.host._internals.states.delete('--pressed');
+      this.host._internals.states.delete('pressed');
     }
   }
 }

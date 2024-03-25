@@ -39,39 +39,39 @@ describe('state-current.controller', () => {
   it('should initialize aria-current as null', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaCurrent).toBe(null);
-    expect(element.matches(':--current')).toBe(false);
+    expect(element.matches(':state(current)')).toBe(false);
   });
 
   it('should initialize aria-current as null if current not applied', async () => {
     await elementIsStable(element);
     expect(element._internals.ariaCurrent).toBe(null);
-    expect(element.matches(':--current')).toBe(false);
+    expect(element.matches(':state(current)')).toBe(false);
   });
 
   it('should initialize aria-current if current applied', async () => {
     element.current = 'page';
     await elementIsStable(element);
     expect(element._internals.ariaCurrent).toBe('page');
-    expect(element.matches(':--current')).toBe(true);
+    expect(element.matches(':state(current)')).toBe(true);
   });
 
   it('should initialize aria-current as step if current=step is applied', async () => {
     element.current = 'step';
     await elementIsStable(element);
     expect(element._internals.ariaCurrent).toBe('step');
-    expect(element.matches(':--current')).toBe(true);
+    expect(element.matches(':state(current)')).toBe(true);
   });
 
   it('should remove aria-current if readonly', async () => {
     element.current = 'page';
     await elementIsStable(element);
     expect(element._internals.ariaCurrent).toBe('page');
-    expect(element.matches(':--current')).toBe(true);
+    expect(element.matches(':state(current)')).toBe(true);
 
     element.readonly = true;
     await elementIsStable(element);
     expect(element._internals.ariaCurrent).toBe(null);
-    expect(element.matches(':--current')).toBe(false);
+    expect(element.matches(':state(current)')).toBe(false);
   });
 
   it('should appply aria-current="page" if a current anchor', async () => {
@@ -79,7 +79,7 @@ describe('state-current.controller', () => {
     a.href = '#';
     element.appendChild(a);
     element.current = 'page';
-    element._internals.states.add('--anchor'); // typically added via type-anchor controller in base button
+    element._internals.states.add('anchor'); // typically added via type-anchor controller in base button
     element.requestUpdate();
     await elementIsStable(element);
 

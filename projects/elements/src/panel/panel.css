@@ -20,29 +20,29 @@
   background: var(--background);
 }
 
-:host(:not(:--expanded)) {
+:host(:not(:state(expanded))) {
   --box-shadow: none;
 }
 
-:host(:not([closable]):not(:--expanded)) [internal-host] {
+:host(:not([closable]):not(:state(expanded))) [internal-host] {
   width: var(--nve-ref-space-xl) !important;
   height: var(--nve-ref-space-xl) !important;
   background: none;
 }
 
-:host(:not([closable]):not(:--expanded)) slot {
+:host(:not([closable]):not(:state(expanded))) slot {
   display: none;
 }
 
-:host(:not([closable]):not(:--expanded)) nve-icon-button {
+:host(:not([closable]):not(:state(expanded))) nve-icon-button {
   position: initial;
 }
 
-:host([closable]:not(:--expanded)) {
+:host([closable]:not(:state(expanded))) {
   display: none;
 }
 
-:host([side="right"]) {
+:host([side='right']) {
   float: right;
 }
 

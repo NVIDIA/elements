@@ -69,17 +69,17 @@ nve-icon-button,
 }
 
 :host([status='error']),
-:host(:--invalid),
-:host(:--error) {
+:host(:state(invalid)),
+:host(:state(error)) {
   --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
 }
 
 :host([status='success']),
-:host(:--success) {
+:host(:state(success)) {
   --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-success-emphasis-color);
 }
 
-:host(:--disabled) {
+:host(:state(disabled)) {
   --border: var(--nve-ref-border-width-md) solid transparent;
 }
 

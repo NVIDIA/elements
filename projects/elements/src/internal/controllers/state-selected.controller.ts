@@ -2,7 +2,7 @@ import { ReactiveController, ReactiveElement } from 'lit';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
- * Adds selected support for interactive custom elements including CSS State psuedo-selector :--selected and aria-selected.
+ * Adds selected support for interactive custom elements including CSS State psuedo-selector :state(selected) and aria-selected.
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected
  */
@@ -27,19 +27,19 @@ export class StateSelectedController<T extends Selected> implements ReactiveCont
     }
 
     if (this.host.selected) {
-      this.host._internals.states.add('--selected');
+      this.host._internals.states.add('selected');
     } else {
-      this.host._internals.states.delete('--selected');
+      this.host._internals.states.delete('selected');
     }
 
     if (this.host.readonly) {
       this.host._internals.ariaSelected = null;
-      this.host._internals.states.delete('--selected');
+      this.host._internals.states.delete('selected');
     }
 
-    if (this.host._internals?.states.has('--anchor') && this.host.selected) {
+    if (this.host._internals?.states.has('anchor') && this.host.selected) {
       this.host._internals.ariaSelected = null;
-      this.host._internals.states.add('--selected');
+      this.host._internals.states.add('selected');
       this.host.querySelector('a')?.setAttribute('aria-current', 'page');
     }
   }
