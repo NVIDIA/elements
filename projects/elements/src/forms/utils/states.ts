@@ -166,7 +166,7 @@ export function updateControlStatusState(control: Control | ControlGroup, messag
   control._internals.states.delete('success');
 
   if (message?.status?.length && !message?.hidden) {
-    control._internals.states.add(`--${message.status}`);
+    control._internals.states.add(message.status);
   }
 }
 

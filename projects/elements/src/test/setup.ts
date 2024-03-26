@@ -1,17 +1,6 @@
-import { beforeAll } from 'vitest';
 import styles from '@elements/elements/index.css?inline';
 
 const sheet = new CSSStyleSheet();
 sheet.replaceSync(`${styles}`);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
 document.documentElement.setAttribute('mlv-theme', '');
-
-beforeAll(async () => {
-  // axe does not support ElementInternals AOM yet https://github.com/nvaccess/nvda/issues/15118
-  // this forces the polyfill to run if an AXE test and trigger the AOM reflection
-  if (globalThis.axe) {
-    window.ElementInternals = undefined;
-    // await import('@elements/elements/polyfills'); // re-enable for axe only once :state() supported in latest Playwright Chromium
-  }
-  await import('@elements/elements/polyfills'); // temporary need for ./polyfills/custom-state-set until :state() supported in latest Playwright Chromium
-});

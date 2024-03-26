@@ -35,7 +35,14 @@ describe('mlv-grid axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-grid']);
+    const results = await runAxe(['mlv-grid'], {
+      rules: {
+        // axe does not support ElementInternals AOM yet https://github.com/dequelabs/axe-core/issues/4259
+        'aria-required-parent': { enabled: false },
+        'aria-required-children': { enabled: false },
+        'aria-allowed-attr': { enabled: false }
+      }
+    });
     expect(results.violations.length).toBe(0);
   });
 });
