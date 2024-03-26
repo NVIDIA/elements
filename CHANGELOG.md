@@ -1,3 +1,10 @@
+## [0.27.7](https://github.com/NVIDIA/elements/compare/v0.27.6...v0.27.7) (2024-03-26)
+
+
+### Bug Fixes
+
+* **elements:** enable custom states polyfill by default ([5893f00](https://github.com/NVIDIA/elements/commit/5893f00a79e2325022125dcc5a28bfec269f7a29))
+
 ## [0.27.6](https://github.com/NVIDIA/elements/compare/v0.27.5...v0.27.6) (2024-03-25)
 
 
