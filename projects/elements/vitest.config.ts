@@ -89,6 +89,11 @@ export default defineConfig({
       name: 'chromium',
       api: {
         port: axe ? 63317 : 63316
+      },
+      providerOptions: {
+        launch: {
+          args: ['--enable-experimental-web-platform-features']
+        }
       }
     }
   }

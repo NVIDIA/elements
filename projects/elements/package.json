@@ -54,6 +54,7 @@
     "./test/index.js": "./dist/test/index.js",
     "./polyfills": "./dist/polyfills/index.js",
     "./polyfills/index.js": "./dist/polyfills/index.js",
+    "./polyfills/custom-state-set.js": "./dist/polyfills/custom-state-set.js",
     "./accordion": "./dist/accordion/index.js",
     "./accordion/index.js": "./dist/accordion/index.js",
     "./accordion/define.js": "./dist/accordion/define.js",
@@ -599,7 +600,7 @@
       }
     },
     "test:axe": {
-      "command": "vitest run -- --axe",
+      "command": "vitest run --config=vitest.config.ts -- --axe",
       "files": [
         "src/**/*.test.axe.ts",
         "tsconfig.json",
