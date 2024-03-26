@@ -3,6 +3,13 @@ import { LogService } from '../services/log.service.js';
 import { isFocusable } from './focus.js';
 
 /**
+ * CustomStateSet Polyfill for :state() syntax downleveled to legacy :--state syntax (Chromium < v123.?)
+ * Can be removed once Chromium stable ships stable :state() API by default
+ * This import is in this file to ensure it is setup before a define() call
+ */
+import '@elements/elements/polyfills/custom-state-set.js';
+
+/**
  * Preserves visual DOM ordering when using slots within Shadow DOM
  * See additional information/resources on Shadow DOM linear traversal
  * https://nolanlawson.com/2021/02/13/managing-focus-in-the-shadow-dom/

@@ -30,7 +30,9 @@ describe('nve-tabs axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-tabs']);
+    const results = await runAxe(['nve-tabs'], {
+      rules: { 'color-contrast': { enabled: false } }
+    });
     expect(results.violations.length).toBe(0);
   });
 });

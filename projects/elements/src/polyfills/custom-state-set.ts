@@ -3,11 +3,7 @@
  * https://html.spec.whatwg.org/multipage/custom-elements.html#exposing-custom-element-states
  */
 
-try {
-  globalThis.document.body.matches(':state(supported)');
-} catch {
-  customStateSetPolyfill();
-}
+setupCustomStateSetPolyfill();
 
 class CustomStateSetPolyfill extends Set {
   #stateSet = null;
@@ -41,6 +37,16 @@ class CustomStateSetPolyfill extends Set {
   }
 }
 
+export function setupCustomStateSetPolyfill() {
+  try {
+    globalThis.document.body.matches(':state(supported)');
+  } catch {
+    if (globalThis.HTMLElement) {
+      customStateSetPolyfill();
+    }
+  }
+}
+
 function customStateSetPolyfill() {
   const attachInternals = HTMLElement.prototype.attachInternals;
   Object.defineProperty(HTMLElement.prototype, 'attachInternals', {
@@ -68,5 +74,5 @@ function customStateSetPolyfill() {
 }
 
 function replaceToLegacyState(value: string) {
-  return value.replace(/:state\(([^\)]+)\)/g, ':where(:state($1), :--$1, [state-$1])'); // eslint-disable-line
+  return value.replace(/:state\(([^\)]+)\)/g, ':--$1'); // eslint-disable-line
 }
