@@ -1,6 +1,5 @@
 import { setCustomElementsManifest } from '@storybook/web-components';
 import { themes } from '@storybook/theming';
-import '@elements/elements/polyfills';
 import { excludePrivateFields } from '@elements/elements/internal';
 import styles from '@elements/elements/index.css?inline';
 // import theme from '@nvidia-elements/themes/index.css?inline'; // using backwards compatible theme above
