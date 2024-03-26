@@ -582,8 +582,8 @@ importers:
   projects/testing:
     dependencies:
       axe-core:
-        specifier: 4.8.2
-        version: 4.8.2
+        specifier: 4.9.0
+        version: 4.9.0
       lit:
         specifier: ^3.1.2
         version: 3.1.2
@@ -7211,6 +7211,13 @@ packages:
     resolution:
       { integrity: sha512-/dlp0fxyM3R8YW7MFzaHWXrf4zzbr0vaYb23VBFCl83R7nWNPg/yaQw2Dc8jzCMmDVLhSdzH8MjrsuIUuvX+6g== }
     engines: { node: '>=4' }
+    dev: true
+
+  /axe-core@4.9.0:
+    resolution:
+      { integrity: sha512-H5orY+M2Fr56DWmMFpMrq5Ge93qjNdPVqzBv5gWK3aD1OvjBEJlEzxf09z93dGVQeI0LiW+aCMIx1QtShC/zUw== }
+    engines: { node: '>=4' }
+    dev: false
 
   /axobject-query@2.2.0:
     resolution:

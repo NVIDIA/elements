@@ -15,7 +15,9 @@ export class LighthouseRunner {
   #report = {};
 
   async open() {
-    this.#browser = await chromium.launch({ args: ['--headless', '--remote-debugging-port=9222'] });
+    this.#browser = await chromium.launch({
+      args: ['--headless', '--remote-debugging-port=9222', '--enable-experimental-web-platform-features']
+    });
     this.#server = await preview({
       root: './.lighthouse',
       preview: { port: this.#port, open: false }

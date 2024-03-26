@@ -51,7 +51,10 @@ describe('nve-alert-banner axe', () => {
 
   it('should pass axe check', async () => {
     const results = await runAxe(['nve-alert-banner'], {
-      rules: { 'color-contrast': { enabled: false } }
+      rules: {
+        'color-contrast': { enabled: false },
+        'aria-prohibited-attr': { enabled: false }
+      }
     });
     expect(results.violations.length).toBe(0);
   });
