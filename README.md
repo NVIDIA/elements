@@ -15,6 +15,7 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 - [Contribution Guidelines](https://NVIDIA.github.io/elements/api/?path=/docs/about-contributions--docs)
 - [Feature request](https://github.com/NVIDIA/elements/-/issues/new?issuable_template=feature)
 - [Bug report](https://github.com/NVIDIA/elements/-/issues/new?issuable_template=default)
+- [Slack Support](https://nvidia.enterprise.slack.com/archives/C03BDL2UCGK)
 
 ## Projects
 
@@ -45,6 +46,7 @@ pnpm run ci
 Each project/demo has a set of available and standardized NPM scripts. To build and test all projects run `pnpm run ci` in the root of this directory.
 
 - `ci`: run full build/lint/test
+- `ci:nocache`: clear all caches/dependencies then reinstall/build/lint/test
 - `build`: run library build
 - `dev`: run in watch mode
 - `test`: run unit tests
@@ -52,16 +54,26 @@ Each project/demo has a set of available and standardized NPM scripts. To build 
 
 To learn in detail how the repo is built and run see our [build README.md](https://github.com/NVIDIA/elements/-/blob/main/build/README.md).
 
-### Branching
+## Workflow
 
-The Gitlab repo enforces branches to use the `topic/` prefix for branches to be merged. Example `topic/my-bug-fix`. Once a MR is merged the topic branch will automatically be deleted from the remote repo on Gitlab.
+Before creating a branch or merge request be sure to make a [new issue or feature request](https://github.com/NVIDIA/elements/-/issues/new) first for the team to evaluate. This will help ensure that your work aligns with the goals of the project and that you are not duplicating effort.
+
+### Create a Branch
+
+The Gitlab repo enforces branches to use the `topic/` prefix for branches to be merged. Example `topic/bug-fix`. Once a MR is merged the topic branch will automatically be deleted from the remote repo on Gitlab.
+
+```shell
+git checkout -b topic/bug-fix
+```
+
+Once your branch is created, make your source code changes. Once your changes are complete run `pnpm run ci` in the root of the repo to run all the builds and tests. If all tests pass, you are ready to create a MR.
 
 ### Commit Messages
 
 The repo uses [Semantic Release](https://semantic-release.gitbook.io/semantic-release/) to manage package changes. Commit messages determine the type of release on merge. [Commit Lint](https://commitlint.js.org/) will enforce and catch any formating issues in commits.
 
-```
-fix(core): disabled multi-select
+```shell
+git commit -a -m "fix(core): disabled multi-select"
 ```
 
 [Example Commit](https://github.com/NVIDIA/elements/-/commit/990d8f43a4a055c2f1ca1a6aa0af39f099d04649)
@@ -70,15 +82,58 @@ fix(core): disabled multi-select
 | ------- | --------------------------------------------------------------- |
 | `fix`   | bug fixes, performance fixes                                    |
 | `feat`  | new features, components, APIs                                  |
-| `chore` | non production code modifications, build tooling, internal docs |
+| `chore` | non production code modifications, build tooling, documentation |
 
 | Scopes           | Description                |
 | ---------------- | -------------------------- |
 | `demos`          | `/projects/demos`          |
 | `elements`       | `/projects/elements`       |
 | `elements-react` | `/projects/elements-react` |
-| `labs`           | `/labs`                    |
-| `pages`          | `/pages`                   |
-| `playground`     | `/playground`              |
-| `testing`        | `/testing`                 |
-| `themes`         | `/themes`                  |
+| `labs`           | `/projects/labs`           |
+| `pages`          | `/projects/pages`          |
+| `playground`     | `/projects/playground`     |
+| `testing`        | `/projects/testing`        |
+| `themes`         | `/projects/themes`         |
+
+Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
+
+### Opening a Merge Request
+
+Once you have commited your changes to your branch locally, push them to the remote Gitlab repository.
+
+```bash
+git push --set-upstream origin topic/bug-fix
+```
+
+Open a new [Merge Request](https://github.com/NVIDIA/elements/-/merge_requests) in GitLab. Request review from the team members and apply the appropriate labels it the GitLab UI for example, `type:fix` and `scope:elements`. View Gitlab updates in the [#elements-ci](https://nvidia.enterprise.slack.com/archives/C06QATGH15M) Slack Channel.
+
+#### Ammending Commit
+
+**If there are changes requested**, make the requested changes locally and ammend the commit.
+
+```shell
+git commit -a --amend --no-edit
+```
+
+This will add the changes to your existing commit. Then push the updated commit back to the remote branch for review.
+
+```shell
+git push --force origin topic/bug-fix
+```
+
+#### Rebasing Commit
+
+Sometimes changes are merged to main before your MR is approved. To update your local branch to contain the latest changes from main you will need to rebase.
+
+```shell
+git checkout main # Switch to main branch
+git pull # Pull down any new changes
+git checkout topic/bug-fix # Switch back to your topic branch
+git rebase main # Rebase your branch onto the latest main
+```
+
+You may have to resolve any merge conflicts that arise from this process. Once complete, push the updated branch back to the remote repository for review.
+
+### Release
+
+Once your Merge Request is approved, you can merge it into `main` via the Gitlab UI. This will trigger a [new release](https://github.com/NVIDIA/elements/-/releases) of the package automatically. The version number will be bumped based on the type of commit (see above). The [changelog](https://NVIDIA.github.io/elements/api/?path=/docs/about-changelog--docs) will also be updated with the changes from the commits in the MR.
