@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { Card, CardHeader, CardContent, CardFooter } from '@elements/elements/card';
+import { define } from '@nvidia-elements/core/internal';
+import { Card, CardHeader, CardContent, CardFooter } from '@nvidia-elements/core/card';
 
 define(Card);
 define(CardHeader);

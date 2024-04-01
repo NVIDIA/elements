@@ -1,5 +1,5 @@
 import type { CSSResult } from 'lit';
-import { useStyles } from '@elements/elements/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import { AlertGroup } from './alert-group.js';
 import styles from './alert-banner.css?inline';
 

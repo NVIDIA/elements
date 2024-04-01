@@ -1,5 +1,5 @@
 {
-  "created": "2024-03-27T17:50:50.237Z",
+  "created": "2024-04-01T19:17:30.535Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -118,10 +118,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.527,
+            "kb": 18.796,
             "requests": {
               "index.js": {
-                "kb": 17.943,
+                "kb": 18.212,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -234,10 +234,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.527,
+            "kb": 18.796,
             "requests": {
               "index.js": {
-                "kb": 17.943,
+                "kb": 18.212,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -330,10 +330,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.527,
+            "kb": 18.796,
             "requests": {
               "index.js": {
-                "kb": 17.943,
+                "kb": 18.212,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -398,10 +398,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.527,
+            "kb": 18.796,
             "requests": {
               "index.js": {
-                "kb": 17.943,
+                "kb": 18.212,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -540,10 +540,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.755,
+            "kb": 19.054,
             "requests": {
               "index.js": {
-                "kb": 17.981,
+                "kb": 18.28,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -702,10 +702,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.571,
+            "kb": 19.87,
             "requests": {
               "index.js": {
-                "kb": 17.985,
+                "kb": 18.284,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -841,10 +841,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.758,
+            "kb": 19.057,
             "requests": {
               "index.js": {
-                "kb": 17.984,
+                "kb": 18.283,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -960,10 +960,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.74,
+            "kb": 19.04,
             "requests": {
               "index.js": {
-                "kb": 17.983,
+                "kb": 18.283,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -1138,10 +1138,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.674,
+            "kb": 14.953,
             "requests": {
               "index.js": {
-                "kb": 14.674,
+                "kb": 14.953,
                 "name": "index.js"
               }
             }
@@ -1267,10 +1267,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.57,
+            "kb": 15.85,
             "requests": {
               "index.js": {
-                "kb": 14.922,
+                "kb": 15.202,
                 "name": "index.js"
               },
               "chevron.svg.js": {
@@ -1574,10 +1574,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.308,
+            "kb": 10.577,
             "requests": {
               "index.js": {
-                "kb": 10.308,
+                "kb": 10.577,
                 "name": "index.js"
               }
             }
@@ -1763,10 +1763,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.976,
+            "kb": 10.253,
             "requests": {
               "index.js": {
-                "kb": 9.976,
+                "kb": 10.253,
                 "name": "index.js"
               }
             }
@@ -1912,10 +1912,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.445,
+            "kb": 8.736,
             "requests": {
               "index.js": {
-                "kb": 8.445,
+                "kb": 8.736,
                 "name": "index.js"
               }
             }
@@ -2036,10 +2036,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.445,
+            "kb": 8.736,
             "requests": {
               "index.js": {
-                "kb": 8.445,
+                "kb": 8.736,
                 "name": "index.js"
               }
             }
@@ -2097,10 +2097,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.445,
+            "kb": 8.736,
             "requests": {
               "index.js": {
-                "kb": 8.445,
+                "kb": 8.736,
                 "name": "index.js"
               }
             }
@@ -2176,10 +2176,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.445,
+            "kb": 8.736,
             "requests": {
               "index.js": {
-                "kb": 8.445,
+                "kb": 8.736,
                 "name": "index.js"
               }
             }
@@ -2336,10 +2336,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.339,
+            "kb": 22.598,
             "requests": {
               "index.js": {
-                "kb": 22.339,
+                "kb": 22.598,
                 "name": "index.js"
               }
             }
@@ -2436,10 +2436,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.339,
+            "kb": 22.598,
             "requests": {
               "index.js": {
-                "kb": 22.339,
+                "kb": 22.598,
                 "name": "index.js"
               }
             }
@@ -2585,10 +2585,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.723,
+            "kb": 23.993,
             "requests": {
               "index.js": {
-                "kb": 22.669,
+                "kb": 22.939,
                 "name": "index.js"
               },
               "dropper.svg.js": {
@@ -2691,7 +2691,7 @@
           },
           {
             "description": "slot for icon to be placed before the input",
-            "name": "prefix-icon"
+            "name": "prefix"
           },
           {
             "description": "slot for dropdown footer content",
@@ -2824,10 +2824,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 38.544,
+            "kb": 38.914,
             "requests": {
               "index.js": {
-                "kb": 37.77,
+                "kb": 38.14,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -2845,7 +2845,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 98.2875
+        "coverageTotal": 98.05
       },
       "stories": [
         {
@@ -3060,10 +3060,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.745,
+            "kb": 23.004,
             "requests": {
               "index.js": {
-                "kb": 21.971,
+                "kb": 22.23,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3146,10 +3146,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.745,
+            "kb": 23.004,
             "requests": {
               "index.js": {
-                "kb": 21.971,
+                "kb": 22.23,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3246,10 +3246,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.745,
+            "kb": 23.004,
             "requests": {
               "index.js": {
-                "kb": 21.971,
+                "kb": 22.23,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3399,10 +3399,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.39,
+            "kb": 23.659,
             "requests": {
               "index.js": {
-                "kb": 22.497,
+                "kb": 22.766,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3573,10 +3573,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.392,
+            "kb": 23.664,
             "requests": {
               "index.js": {
-                "kb": 22.499,
+                "kb": 22.771,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3816,10 +3816,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.429,
+            "kb": 28.725,
             "requests": {
               "index.js": {
-                "kb": 27.617,
+                "kb": 27.913,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3927,10 +3927,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.429,
+            "kb": 28.725,
             "requests": {
               "index.js": {
-                "kb": 27.617,
+                "kb": 27.913,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3987,10 +3987,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.429,
+            "kb": 28.725,
             "requests": {
               "index.js": {
-                "kb": 27.617,
+                "kb": 27.913,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4069,10 +4069,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.024,
+            "kb": 8.304,
             "requests": {
               "index.js": {
-                "kb": 8.024,
+                "kb": 8.304,
                 "name": "index.js"
               }
             }
@@ -4218,10 +4218,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.474,
+            "kb": 8.771,
             "requests": {
               "index.js": {
-                "kb": 8.474,
+                "kb": 8.771,
                 "name": "index.js"
               }
             }
@@ -4482,10 +4482,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.707,
+            "kb": 29,
             "requests": {
               "index.js": {
-                "kb": 27.895,
+                "kb": 28.188,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4588,10 +4588,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.707,
+            "kb": 29,
             "requests": {
               "index.js": {
-                "kb": 27.895,
+                "kb": 28.188,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4648,10 +4648,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.707,
+            "kb": 29,
             "requests": {
               "index.js": {
-                "kb": 27.895,
+                "kb": 28.188,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4708,10 +4708,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.707,
+            "kb": 29,
             "requests": {
               "index.js": {
-                "kb": 27.895,
+                "kb": 28.188,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4918,10 +4918,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.425,
+            "kb": 28.746,
             "requests": {
               "index.js": {
-                "kb": 27.613,
+                "kb": 27.934,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5140,10 +5140,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.182,
+            "kb": 22.438,
             "requests": {
               "index.js": {
-                "kb": 22.182,
+                "kb": 22.438,
                 "name": "index.js"
               }
             }
@@ -5267,10 +5267,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.737,
+            "kb": 20.011,
             "requests": {
               "index.js": {
-                "kb": 19.737,
+                "kb": 20.011,
                 "name": "index.js"
               }
             }
@@ -5361,10 +5361,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.737,
+            "kb": 20.011,
             "requests": {
               "index.js": {
-                "kb": 19.737,
+                "kb": 20.011,
                 "name": "index.js"
               }
             }
@@ -5497,10 +5497,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.737,
+            "kb": 20.011,
             "requests": {
               "index.js": {
-                "kb": 19.737,
+                "kb": 20.011,
                 "name": "index.js"
               }
             }
@@ -5567,10 +5567,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.737,
+            "kb": 20.011,
             "requests": {
               "index.js": {
-                "kb": 19.737,
+                "kb": 20.011,
                 "name": "index.js"
               }
             }
@@ -5634,10 +5634,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.737,
+            "kb": 20.011,
             "requests": {
               "index.js": {
-                "kb": 19.737,
+                "kb": 20.011,
                 "name": "index.js"
               }
             }
@@ -5698,10 +5698,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.737,
+            "kb": 20.011,
             "requests": {
               "index.js": {
-                "kb": 19.737,
+                "kb": 20.011,
                 "name": "index.js"
               }
             }
@@ -5777,10 +5777,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.737,
+            "kb": 20.011,
             "requests": {
               "index.js": {
-                "kb": 19.737,
+                "kb": 20.011,
                 "name": "index.js"
               }
             }
@@ -5890,10 +5890,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 13.441,
+            "kb": 13.721,
             "requests": {
               "index.js": {
-                "kb": 12.684,
+                "kb": 12.964,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -6057,12 +6057,8 @@
         ],
         "slots": [
           {
-            "description": "default for links",
+            "description": "default",
             "name": ""
-          },
-          {
-            "description": "icon customization",
-            "name": "icon"
           }
         ],
         "attributes": [
@@ -6261,10 +6257,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.735,
+            "kb": 16.014,
             "requests": {
               "index.js": {
-                "kb": 15.735,
+                "kb": 16.014,
                 "name": "index.js"
               }
             }
@@ -6520,10 +6516,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.746,
+            "kb": 23.017,
             "requests": {
               "index.js": {
-                "kb": 22.746,
+                "kb": 23.017,
                 "name": "index.js"
               }
             }
@@ -6615,10 +6611,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.746,
+            "kb": 23.017,
             "requests": {
               "index.js": {
-                "kb": 22.746,
+                "kb": 23.017,
                 "name": "index.js"
               }
             }
@@ -6813,10 +6809,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.145,
+            "kb": 9.442,
             "requests": {
               "index.js": {
-                "kb": 9.145,
+                "kb": 9.442,
                 "name": "index.js"
               }
             }
@@ -6913,10 +6909,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.258,
+            "kb": 11.524,
             "requests": {
               "index.js": {
-                "kb": 11.258,
+                "kb": 11.524,
                 "name": "index.js"
               }
             }
@@ -7210,10 +7206,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.258,
+            "kb": 11.524,
             "requests": {
               "index.js": {
-                "kb": 11.258,
+                "kb": 11.524,
                 "name": "index.js"
               }
             }
@@ -7359,10 +7355,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.388,
+            "kb": 23.66,
             "requests": {
               "index.js": {
-                "kb": 22.495,
+                "kb": 22.767,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -7612,10 +7608,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.78,
+            "kb": 29.08,
             "requests": {
               "index.js": {
-                "kb": 28.006,
+                "kb": 28.306,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7749,10 +7745,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.78,
+            "kb": 29.08,
             "requests": {
               "index.js": {
-                "kb": 28.006,
+                "kb": 28.306,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7815,10 +7811,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.639,
+            "kb": 22.968,
             "requests": {
               "index.js": {
-                "kb": 22.639,
+                "kb": 22.968,
                 "name": "index.js"
               }
             }
@@ -8034,10 +8030,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 40.88,
+            "kb": 41.222,
             "requests": {
               "index.js": {
-                "kb": 38.998,
+                "kb": 39.34,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -8256,10 +8252,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.236,
+            "kb": 18.518,
             "requests": {
               "index.js": {
-                "kb": 17.451,
+                "kb": 17.733,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8375,10 +8371,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.236,
+            "kb": 18.518,
             "requests": {
               "index.js": {
-                "kb": 17.451,
+                "kb": 17.733,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8446,10 +8442,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.236,
+            "kb": 18.518,
             "requests": {
               "index.js": {
-                "kb": 17.451,
+                "kb": 17.733,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8522,10 +8518,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.236,
+            "kb": 18.518,
             "requests": {
               "index.js": {
-                "kb": 17.451,
+                "kb": 17.733,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8675,10 +8671,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.51,
+            "kb": 23.777,
             "requests": {
               "index.js": {
-                "kb": 22.569,
+                "kb": 22.836,
                 "name": "index.js"
               },
               "eye.svg.js": {
@@ -8787,10 +8783,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.572,
+            "kb": 8.86,
             "requests": {
               "index.js": {
-                "kb": 8.572,
+                "kb": 8.86,
                 "name": "index.js"
               }
             }
@@ -8941,10 +8937,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.28,
+            "kb": 14.554,
             "requests": {
               "index.js": {
-                "kb": 14.28,
+                "kb": 14.554,
                 "name": "index.js"
               }
             }
@@ -9079,10 +9075,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 40.963,
+            "kb": 41.306,
             "requests": {
               "index.js": {
-                "kb": 38.836,
+                "kb": 39.179,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -9287,10 +9283,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.248,
+            "kb": 22.508,
             "requests": {
               "index.js": {
-                "kb": 22.248,
+                "kb": 22.508,
                 "name": "index.js"
               }
             }
@@ -9356,10 +9352,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.248,
+            "kb": 22.508,
             "requests": {
               "index.js": {
-                "kb": 22.248,
+                "kb": 22.508,
                 "name": "index.js"
               }
             }
@@ -9505,10 +9501,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.427,
+            "kb": 22.687,
             "requests": {
               "index.js": {
-                "kb": 22.427,
+                "kb": 22.687,
                 "name": "index.js"
               }
             }
@@ -9705,10 +9701,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.251,
+            "kb": 23.514,
             "requests": {
               "index.js": {
-                "kb": 22.562,
+                "kb": 22.825,
                 "name": "index.js"
               },
               "search.svg.js": {
@@ -9916,10 +9912,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 38.73,
+            "kb": 39.071,
             "requests": {
               "index.js": {
-                "kb": 37.496,
+                "kb": 37.837,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -10249,10 +10245,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.856,
+            "kb": 16.123,
             "requests": {
               "index.js": {
-                "kb": 14.964,
+                "kb": 15.231,
                 "name": "index.js"
               },
               "sort-ascending.svg.js": {
@@ -10447,10 +10443,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.336,
+            "kb": 22.596,
             "requests": {
               "index.js": {
-                "kb": 22.336,
+                "kb": 22.596,
                 "name": "index.js"
               }
             }
@@ -10582,10 +10578,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.366,
+            "kb": 11.637,
             "requests": {
               "index.js": {
-                "kb": 11.366,
+                "kb": 11.637,
                 "name": "index.js"
               }
             }
@@ -10871,10 +10867,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.366,
+            "kb": 11.637,
             "requests": {
               "index.js": {
-                "kb": 11.366,
+                "kb": 11.637,
                 "name": "index.js"
               }
             }
@@ -11145,10 +11141,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.585,
+            "kb": 15.868,
             "requests": {
               "index.js": {
-                "kb": 15.585,
+                "kb": 15.868,
                 "name": "index.js"
               }
             }
@@ -11369,10 +11365,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.199,
+            "kb": 22.472,
             "requests": {
               "index.js": {
-                "kb": 22.199,
+                "kb": 22.472,
                 "name": "index.js"
               }
             }
@@ -11544,10 +11540,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.116,
+            "kb": 23.388,
             "requests": {
               "index.js": {
-                "kb": 22.496,
+                "kb": 22.768,
                 "name": "index.js"
               },
               "clock.svg.js": {
@@ -11783,10 +11779,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.339,
+            "kb": 28.688,
             "requests": {
               "index.js": {
-                "kb": 27.565,
+                "kb": 27.914,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -11965,10 +11961,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.952,
+            "kb": 16.24,
             "requests": {
               "index.js": {
-                "kb": 14.166,
+                "kb": 14.454,
                 "name": "index.js"
               },
               "add.svg.js": {
@@ -11990,7 +11986,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 98.2
+        "coverageTotal": 98.35249999999999
       },
       "stories": [
         {
@@ -12216,10 +12212,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.301,
+            "kb": 19.668,
             "requests": {
               "index.js": {
-                "kb": 19.301,
+                "kb": 19.668,
                 "name": "index.js"
               }
             }
@@ -12431,10 +12427,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.386,
+            "kb": 23.659,
             "requests": {
               "index.js": {
-                "kb": 22.493,
+                "kb": 22.766,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -12690,6 +12686,11 @@
         "description": "Defines what element triggers an `open` interaction event. A trigger can accept a idref string within the same render root or a HTMLElement DOM reference."
       },
       {
+        "name": "slots",
+        "type": "'default' | 'prefix' | 'suffix' | 'header' | 'footer' | 'actions' | 'icon'",
+        "description": "Defines what public Slot names are available to the element."
+      },
+      {
         "name": "_internals",
         "type": "ElementInternals",
         "description": ""
@@ -12705,28 +12706,28 @@
       {
         "file": "internal/controllers/type-popover.controller.ts",
         "lines": {
-          "total": 104,
-          "covered": 90,
+          "total": 115,
+          "covered": 106,
           "skipped": 0,
-          "pct": 86.53
+          "pct": 92.17
         },
         "functions": {
-          "total": 22,
-          "covered": 19,
+          "total": 23,
+          "covered": 21,
           "skipped": 0,
-          "pct": 86.36
+          "pct": 91.3
         },
         "statements": {
-          "total": 113,
-          "covered": 96,
+          "total": 124,
+          "covered": 113,
           "skipped": 0,
-          "pct": 84.95
+          "pct": 91.12
         },
         "branches": {
-          "total": 78,
-          "covered": 70,
+          "total": 82,
+          "covered": 74,
           "skipped": 0,
-          "pct": 89.74
+          "pct": 90.24
         }
       },
       {
@@ -13029,8 +13030,8 @@
       {
         "file": "tooltip/tooltip.ts",
         "lines": {
-          "total": 17,
-          "covered": 17,
+          "total": 18,
+          "covered": 18,
           "skipped": 0,
           "pct": 100
         },
@@ -13041,8 +13042,8 @@
           "pct": 100
         },
         "statements": {
-          "total": 19,
-          "covered": 19,
+          "total": 21,
+          "covered": 21,
           "skipped": 0,
           "pct": 100
         },
@@ -13083,22 +13084,22 @@
       {
         "file": "toolbar/toolbar.ts",
         "lines": {
-          "total": 48,
-          "covered": 48,
+          "total": 50,
+          "covered": 50,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 18,
-          "covered": 17,
+          "total": 20,
+          "covered": 19,
           "skipped": 0,
-          "pct": 94.44
+          "pct": 95
         },
         "statements": {
-          "total": 61,
-          "covered": 60,
+          "total": 63,
+          "covered": 62,
           "skipped": 0,
-          "pct": 98.36
+          "pct": 98.41
         },
         "branches": {
           "total": 8,
@@ -14352,20 +14353,20 @@
       {
         "file": "logo/logo.ts",
         "lines": {
-          "total": 9,
-          "covered": 9,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 3,
-          "covered": 3,
+          "total": 2,
+          "covered": 2,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 9,
-          "covered": 9,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
@@ -14830,9 +14831,9 @@
         },
         "branches": {
           "total": 32,
-          "covered": 27,
+          "covered": 28,
           "skipped": 0,
-          "pct": 84.37
+          "pct": 87.5
         }
       },
       {
@@ -14919,8 +14920,8 @@
       {
         "file": "internal/controllers/type-anchor.controller.ts",
         "lines": {
-          "total": 25,
-          "covered": 25,
+          "total": 26,
+          "covered": 26,
           "skipped": 0,
           "pct": 100
         },
@@ -15162,8 +15163,8 @@
       {
         "file": "internal/controllers/i18n.controller.ts",
         "lines": {
-          "total": 11,
-          "covered": 11,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
@@ -15174,14 +15175,14 @@
           "pct": 85.71
         },
         "statements": {
-          "total": 14,
-          "covered": 13,
+          "total": 13,
+          "covered": 12,
           "skipped": 0,
-          "pct": 92.85
+          "pct": 92.3
         },
         "branches": {
-          "total": 4,
-          "covered": 4,
+          "total": 2,
+          "covered": 2,
           "skipped": 0,
           "pct": 100
         }
@@ -15972,20 +15973,20 @@
       {
         "file": "dot/dot.ts",
         "lines": {
-          "total": 11,
-          "covered": 11,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 4,
-          "covered": 4,
+          "total": 3,
+          "covered": 3,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 11,
-          "covered": 11,
+          "total": 10,
+          "covered": 10,
           "skipped": 0,
           "pct": 100
         },
@@ -16323,28 +16324,28 @@
       {
         "file": "combobox/combobox.ts",
         "lines": {
-          "total": 119,
-          "covered": 119,
+          "total": 120,
+          "covered": 120,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 35,
-          "covered": 35,
+          "total": 36,
+          "covered": 36,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 131,
-          "covered": 131,
+          "total": 133,
+          "covered": 133,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 73,
-          "covered": 68,
+          "total": 77,
+          "covered": 71,
           "skipped": 0,
-          "pct": 93.15
+          "pct": 92.2
         }
       },
       {
@@ -16773,8 +16774,8 @@
           "pct": 100
         },
         "branches": {
-          "total": 4,
-          "covered": 4,
+          "total": 6,
+          "covered": 6,
           "skipped": 0,
           "pct": 100
         }
@@ -16918,28 +16919,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 2187,
-        "covered": 2152,
+        "total": 2200,
+        "covered": 2170,
         "skipped": 0,
-        "pct": 98.39
+        "pct": 98.63
       },
       "statements": {
-        "total": 2567,
-        "covered": 2526,
+        "total": 2581,
+        "covered": 2546,
         "skipped": 0,
-        "pct": 98.4
+        "pct": 98.64
       },
       "functions": {
-        "total": 723,
-        "covered": 705,
+        "total": 725,
+        "covered": 708,
         "skipped": 0,
-        "pct": 97.51
+        "pct": 97.65
       },
       "branches": {
-        "total": 1038,
-        "covered": 962,
+        "total": 1046,
+        "covered": 970,
         "skipped": 0,
-        "pct": 92.67
+        "pct": 92.73
       },
       "branchesTrue": {
         "total": 0,

@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Notification, NotificationGroup } from '@elements/elements/notification';
-import '@elements/elements/icon-button/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Notification, NotificationGroup } from '@nvidia-elements/core/notification';
+import '@nvidia-elements/core/icon-button/define.js';
 
 define(Notification);
 define(NotificationGroup);

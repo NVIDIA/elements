@@ -8,7 +8,7 @@ import {
   generateId,
   ContainerElement,
   validateSlots
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import { GridHeader } from './header/header.js';
 import { GridColumn } from './column/column.js';
 import { GridRow } from './row/row.js';
