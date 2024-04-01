@@ -1,3 +1,11 @@
+## [0.28.0](https://github.com/NVIDIA/elements/compare/v0.27.7...v0.28.0) (2024-04-01)
+
+
+### Features
+
+* **elements:** delay option to nve-tooltip ([e72bc31](https://github.com/NVIDIA/elements/commit/e72bc31cfc6213743ebaf8433f8b8062dd5589b7))
+* **testing:** add emulate mouse over and out functions ([c147fb6](https://github.com/NVIDIA/elements/commit/c147fb64b1e6add01929b901ceba4c6fcb89ae2e))
+
 ## [0.27.7](https://github.com/NVIDIA/elements/compare/v0.27.6...v0.27.7) (2024-03-26)
 
 
