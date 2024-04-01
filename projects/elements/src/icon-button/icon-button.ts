@@ -1,16 +1,15 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Size, removeEmptySlotWhitespace, useStyles } from '@elements/elements/internal';
-import { Button } from '@elements/elements/button';
-import { Icon, IconName } from '@elements/elements/icon';
+import { Size, removeEmptySlotWhitespace, useStyles } from '@nvidia-elements/core/internal';
+import { Button } from '@nvidia-elements/core/button';
+import { Icon, IconName } from '@nvidia-elements/core/icon';
 import styles from './icon-button.css?inline';
 
 /**
  * @element nve-icon-button
  * @description An icon button is a button that displays only an icon without a visual label.
  * @since 0.2.1
- * @slot - default for links
- * @slot icon - icon customization
+ * @slot - default
  * @cssprop --border-radius
  * @cssprop --padding
  * @cssprop --line-height

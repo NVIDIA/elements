@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { PopoverAlign, TypePopoverController, useStyles } from '@elements/elements/internal';
+import { PopoverAlign, TypePopoverController, useStyles } from '@nvidia-elements/core/internal';
 import styles from './notification-group.css?inline';
 
 /**

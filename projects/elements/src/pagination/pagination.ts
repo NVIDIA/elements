@@ -7,9 +7,9 @@ import {
   keyNavigationList,
   KeynavListConfig,
   useStyles
-} from '@elements/elements/internal';
-import { IconButton } from '@elements/elements/icon-button';
-import { Select } from '@elements/elements/select';
+} from '@nvidia-elements/core/internal';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Select } from '@nvidia-elements/core/select';
 import styles from './pagination.css?inline';
 
 /**

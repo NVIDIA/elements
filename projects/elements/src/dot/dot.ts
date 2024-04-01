@@ -8,7 +8,7 @@ import {
   SupportStatus,
   TaskStatus,
   useStyles
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import styles from './dot.css?inline';
 
 /**

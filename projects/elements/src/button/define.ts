@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { Button } from '@elements/elements/button';
+import { define } from '@nvidia-elements/core/internal';
+import { Button } from '@nvidia-elements/core/button';
 
 define(Button);
 

@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Textarea } from '@elements/elements/textarea';
-import '@elements/elements/forms/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Textarea } from '@nvidia-elements/core/textarea';
+import '@nvidia-elements/core/forms/define.js';
 
 define(Textarea);
 

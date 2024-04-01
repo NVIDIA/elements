@@ -11,8 +11,8 @@ import {
   ContainerElement,
   Container,
   generateId
-} from '@elements/elements/internal';
-import { IconButton } from '@elements/elements/icon-button/icon-button';
+} from '@nvidia-elements/core/internal';
+import { IconButton } from '@nvidia-elements/core/icon-button/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
 import accordionHeaderStyleSheet from './accordion-header.css?inline';
 import accordionContentStyleSheet from './accordion-content.css?inline';

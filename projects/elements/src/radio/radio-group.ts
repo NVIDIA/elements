@@ -1,6 +1,6 @@
 import type { CSSResult } from 'lit';
-import { useStyles } from '@elements/elements/internal';
-import { ControlGroup } from '@elements/elements/forms';
+import { useStyles } from '@nvidia-elements/core/internal';
+import { ControlGroup } from '@nvidia-elements/core/forms';
 import styles from './radio-group.css?inline';
 
 /**

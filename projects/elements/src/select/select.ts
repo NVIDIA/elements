@@ -9,12 +9,12 @@ import {
   I18nController,
   getAttributeListChanges,
   onChildListMutation
-} from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
-import { Icon } from '@elements/elements/icon';
-import { Menu, MenuItem } from '@elements/elements/menu';
-import { Dropdown } from '@elements/elements/dropdown';
-import { Tag } from '@elements/elements/tag';
+} from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
+import { Icon } from '@nvidia-elements/core/icon';
+import { Menu, MenuItem } from '@nvidia-elements/core/menu';
+import { Dropdown } from '@nvidia-elements/core/dropdown';
+import { Tag } from '@nvidia-elements/core/tag';
 import styles from './select.css?inline';
 
 /**

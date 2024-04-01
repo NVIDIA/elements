@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { useStyles } from '@elements/elements/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './dialog-footer.css?inline';
 
 /**

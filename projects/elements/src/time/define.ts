@@ -1,7 +1,7 @@
-import { define } from '@elements/elements/internal';
-import { Time } from '@elements/elements/time';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/forms/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Time } from '@nvidia-elements/core/time';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/forms/define.js';
 
 define(Time);
 
