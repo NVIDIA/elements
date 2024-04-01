@@ -1,8 +1,8 @@
 import { html } from 'lit';
-import { appendRootNodeStyle, openEyeDropper, useStyles } from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
-import { IconButton } from '@elements/elements/icon-button';
-import { inputStyles } from '@elements/elements/input';
+import { appendRootNodeStyle, openEyeDropper, useStyles } from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { inputStyles } from '@nvidia-elements/core/input';
 import globalStyles from './color.global.css?inline';
 import styles from './color.css?inline';
 

@@ -1,6 +1,6 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Icon } from '@elements/elements/icon';
+import { Icon } from '@nvidia-elements/core/icon';
 import {
   TaskStatus,
   SupportStatus,
@@ -14,7 +14,7 @@ import {
   attachInternals,
   I18nController,
   Prominence
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import styles from './badge.css?inline';
 
 /**

@@ -1,4 +1,4 @@
-import { getAttributeChanges, getAttributeListChanges, getElementUpdate } from '@elements/elements/internal';
+import { getAttributeChanges, getAttributeListChanges, getElementUpdate } from '@nvidia-elements/core/internal';
 import type { ControlGroup } from '../control-group/control-group.js';
 import { ControlMessage } from '../control-message/control-message.js';
 import type { Control } from '../control/control.js';

@@ -1,4 +1,4 @@
-import type { IconName } from '@elements/elements/icon';
+import type { IconName } from '@nvidia-elements/core/icon';
 import type { I18nStrings } from '../services/i18n.service.js';
 
 export type Color =
@@ -202,11 +202,16 @@ export interface NveElement {
   /** Defines what element triggers an `open` interaction event. A trigger can accept a idref string within the same render root or a HTMLElement DOM reference. */
   trigger?: string | HTMLElement;
 
+  /** Defines what public Slot names are available to the element. */
+  slots?: 'default' | 'prefix' | 'suffix' | 'header' | 'footer' | 'actions' | 'icon';
+
   /** @private A instance of `ElementInternals` that is set dynamically by the applied decorators/controllers */
   _internals: ElementInternals;
 
   render: any;
 }
+
+export type SlotName = 'default' | 'prefix' | 'suffix' | 'header' | 'footer' | 'actions' | 'icon';
 
 /** @deprecated Determines the interaction type of a flat container element. */
 export type FlatInteraction = 'flat' | 'flat-emphasize' | `${'flat'}-${Interaction}`;

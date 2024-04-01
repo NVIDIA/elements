@@ -1,6 +1,6 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { IconButton } from '@elements/elements/icon-button';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import {
   animationFade,
   attachInternals,
@@ -13,8 +13,8 @@ import {
   SupportStatus,
   TypePopoverController,
   useStyles
-} from '@elements/elements/internal';
-import { Icon, type IconName } from '@elements/elements/icon';
+} from '@nvidia-elements/core/internal';
+import { Icon, type IconName } from '@nvidia-elements/core/icon';
 import styles from './toast.css?inline';
 
 /**

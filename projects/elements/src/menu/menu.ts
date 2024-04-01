@@ -6,7 +6,7 @@ import {
   keyNavigationList,
   KeynavListConfig,
   appendRootNodeStyle
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import type { MenuItem } from './menu-item.js';
 import styles from './menu.css?inline';
 import globalStyles from './menu.global.css?inline';

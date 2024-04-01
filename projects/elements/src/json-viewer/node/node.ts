@@ -1,9 +1,9 @@
 import { html, nothing, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { useStyles } from '@elements/elements/internal';
-import { IconButton } from '@elements/elements/icon-button';
-import { Button } from '@elements/elements/button';
+import { useStyles } from '@nvidia-elements/core/internal';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Button } from '@nvidia-elements/core/button';
 import styles from './node.css?inline';
 
 /** @private */

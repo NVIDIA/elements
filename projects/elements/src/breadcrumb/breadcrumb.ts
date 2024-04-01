@@ -7,10 +7,10 @@ import {
   attachInternals,
   generateId,
   isFocusable
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import styles from './breadcrumb.css?inline';
-import { Icon } from '@elements/elements/icon';
-import type { Button } from '@elements/elements/button';
+import { Icon } from '@nvidia-elements/core/icon';
+import type { Button } from '@nvidia-elements/core/button';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 
 /**

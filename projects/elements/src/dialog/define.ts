@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Dialog, DialogHeader, DialogFooter } from '@elements/elements/dialog';
-import '@elements/elements/icon-button/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Dialog, DialogHeader, DialogFooter } from '@nvidia-elements/core/dialog';
+import '@nvidia-elements/core/icon-button/define.js';
 
 define(Dialog);
 define(DialogHeader);

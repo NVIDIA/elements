@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Radio, RadioGroup } from '@elements/elements/radio';
-import '@elements/elements/forms/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Radio, RadioGroup } from '@nvidia-elements/core/radio';
+import '@nvidia-elements/core/forms/define.js';
 
 define(Radio);
 define(RadioGroup);

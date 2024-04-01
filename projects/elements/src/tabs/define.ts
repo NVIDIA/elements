@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { TabsItem, Tabs } from '@elements/elements/tabs';
+import { define } from '@nvidia-elements/core/internal';
+import { TabsItem, Tabs } from '@nvidia-elements/core/tabs';
 
 define(TabsItem);
 define(Tabs);

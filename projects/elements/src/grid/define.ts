@@ -1,7 +1,7 @@
-import { define } from '@elements/elements/internal';
-import { Grid, GridColumn, GridRow, GridCell, GridFooter, GridHeader, GridPlaceholder } from '@elements/elements/grid';
-import '@elements/elements/sort-button/define.js';
-import '@elements/elements/icon/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Grid, GridColumn, GridRow, GridCell, GridFooter, GridHeader, GridPlaceholder } from '@nvidia-elements/core/grid';
+import '@nvidia-elements/core/sort-button/define.js';
+import '@nvidia-elements/core/icon/define.js';
 
 define(Grid);
 define(GridColumn);

@@ -1,9 +1,9 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, attachInternals } from '@elements/elements/internal';
-import { Logo } from '@elements/elements/logo';
-import type { IconButton } from '@elements/elements/icon-button';
-import type { Button } from '@elements/elements/button';
+import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
+import { Logo } from '@nvidia-elements/core/logo';
+import type { IconButton } from '@nvidia-elements/core/icon-button';
+import type { Button } from '@nvidia-elements/core/button';
 import styles from './app-header.css?inline';
 
 /**

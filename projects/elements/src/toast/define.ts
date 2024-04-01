@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Toast } from '@elements/elements/toast';
-import '@elements/elements/icon-button/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Toast } from '@nvidia-elements/core/toast';
+import '@nvidia-elements/core/icon-button/define.js';
 
 define(Toast);
 

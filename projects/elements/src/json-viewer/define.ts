@@ -1,9 +1,9 @@
-import { define } from '@elements/elements/internal';
+import { define } from '@nvidia-elements/core/internal';
 import { JSONNode } from './node/node.js';
 import { JSONViewer } from './index.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/button/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/button/define.js';
 
 define(JSONViewer);
 define(JSONNode);

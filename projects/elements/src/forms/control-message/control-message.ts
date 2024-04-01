@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles } from '@elements/elements/internal';
-import { Alert } from '@elements/elements/alert';
+import { useStyles } from '@nvidia-elements/core/internal';
+import { Alert } from '@nvidia-elements/core/alert';
 import styles from './control-message.css?inline';
 
 const alertStatus: AlertStatus = {

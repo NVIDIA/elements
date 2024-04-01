@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Panel, PanelHeader, PanelContent, PanelFooter } from '@elements/elements/panel';
-import '@elements/elements/icon-button/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Panel, PanelHeader, PanelContent, PanelFooter } from '@nvidia-elements/core/panel';
+import '@nvidia-elements/core/icon-button/define.js';
 
 define(Panel);
 define(PanelHeader);

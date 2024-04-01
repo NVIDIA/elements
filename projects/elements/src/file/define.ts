@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { File } from '@elements/elements/file';
-import '@elements/elements/forms/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { File } from '@nvidia-elements/core/file';
+import '@nvidia-elements/core/forms/define.js';
 
 define(File);
 

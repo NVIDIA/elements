@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { useStyles, BaseButton } from '@elements/elements/internal';
+import { useStyles, BaseButton } from '@nvidia-elements/core/internal';
 import styles from './menu-item.css?inline';
 
 /**

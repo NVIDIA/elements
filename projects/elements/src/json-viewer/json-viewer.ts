@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { useStyles } from '@elements/elements/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import { JSONNode } from './node/node.js';
 import styles from './json-viewer.css?inline';
 

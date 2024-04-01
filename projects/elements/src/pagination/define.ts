@@ -1,7 +1,7 @@
-import { define } from '@elements/elements/internal';
-import { Pagination } from '@elements/elements/pagination';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/select/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Pagination } from '@nvidia-elements/core/pagination';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/select/define.js';
 
 define(Pagination);
 

@@ -1,7 +1,7 @@
-import { define } from '@elements/elements/internal';
-import { Month } from '@elements/elements/month';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/forms/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Month } from '@nvidia-elements/core/month';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/forms/define.js';
 
 define(Month);
 

@@ -1,9 +1,9 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, ContainerElement } from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
-import { inputStyles } from '@elements/elements/input';
-import { IconButton } from '@elements/elements/icon-button';
+import { useStyles, ContainerElement } from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
+import { inputStyles } from '@nvidia-elements/core/input';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './search.css?inline';
 
 /**

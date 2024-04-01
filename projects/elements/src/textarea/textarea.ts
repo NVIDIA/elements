@@ -1,6 +1,6 @@
 import type { CSSResult } from 'lit';
-import { useStyles } from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
+import { useStyles } from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
 import styles from './textarea.css?inline';
 
 /**

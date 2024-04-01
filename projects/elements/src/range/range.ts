@@ -1,5 +1,5 @@
-import { appendRootNodeStyle, getElementUpdate, useStyles } from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
+import { appendRootNodeStyle, getElementUpdate, useStyles } from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
 import globalStyles from './range.global.css?inline';
 import styles from './range.css?inline';
 import { PropertyValues } from 'lit';

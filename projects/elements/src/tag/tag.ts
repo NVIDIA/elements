@@ -9,8 +9,8 @@ import {
   useStyles,
   colorStateStyles,
   Prominence
-} from '@elements/elements/internal';
-import { Icon } from '@elements/elements/icon';
+} from '@nvidia-elements/core/internal';
+import { Icon } from '@nvidia-elements/core/icon';
 import styles from './tag.css?inline';
 
 /**

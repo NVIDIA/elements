@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
-import { IconButton } from '@elements/elements/icon-button';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import {
   animationFade,
   I18nController,
@@ -11,7 +11,7 @@ import {
   PopoverType,
   TypePopoverController,
   useStyles
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import styles from './dropdown.css?inline';
 
 /**

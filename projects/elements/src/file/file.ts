@@ -1,6 +1,6 @@
 import type { CSSResult } from 'lit';
-import { appendRootNodeStyle, useStyles } from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
+import { appendRootNodeStyle, useStyles } from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
 import styles from './file.css?inline';
 import globalStyles from './file.global.css?inline';
 

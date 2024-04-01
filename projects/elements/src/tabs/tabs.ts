@@ -8,7 +8,7 @@ import {
   keyNavigationList,
   KeynavListConfig,
   attachInternals
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import tabsItemStyleSheet from './tabs-item.css?inline';
 import tabsStyleSheet from './tabs.css?inline';
 

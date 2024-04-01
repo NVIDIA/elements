@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, attachInternals, stateSelected } from '@elements/elements/internal';
+import { useStyles, attachInternals, stateSelected } from '@nvidia-elements/core/internal';
 import { GridCell } from '../cell/cell.js';
 import styles from './row.css?inline';
 

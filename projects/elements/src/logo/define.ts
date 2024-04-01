@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { Logo } from '@elements/elements/logo';
+import { define } from '@nvidia-elements/core/internal';
+import { Logo } from '@nvidia-elements/core/logo';
 
 define(Logo);
 

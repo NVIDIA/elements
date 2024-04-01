@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { ProgressBar } from '@elements/elements/progress-bar';
+import { define } from '@nvidia-elements/core/internal';
+import { ProgressBar } from '@nvidia-elements/core/progress-bar';
 
 define(ProgressBar);
 

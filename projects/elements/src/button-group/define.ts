@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { ButtonGroup } from '@elements/elements/button-group';
+import { define } from '@nvidia-elements/core/internal';
+import { ButtonGroup } from '@nvidia-elements/core/button-group';
 
 define(ButtonGroup);
 

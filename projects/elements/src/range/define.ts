@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Range } from '@elements/elements/range';
-import '@elements/elements/forms/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Range } from '@nvidia-elements/core/range';
+import '@nvidia-elements/core/forms/define.js';
 
 define(Range);
 

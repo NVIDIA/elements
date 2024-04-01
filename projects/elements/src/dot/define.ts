@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { Dot } from '@elements/elements/dot';
+import { define } from '@nvidia-elements/core/internal';
+import { Dot } from '@nvidia-elements/core/dot';
 
 define(Dot);
 

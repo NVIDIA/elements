@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Icon } from '@elements/elements/icon';
-import { IconButton } from '@elements/elements/icon-button';
+import { Icon } from '@nvidia-elements/core/icon';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import {
   animationFade,
   attachInternals,
@@ -14,7 +14,7 @@ import {
   useStyles,
   I18nController,
   PopoverPosition
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import styles from './notification.css?inline';
 
 /**

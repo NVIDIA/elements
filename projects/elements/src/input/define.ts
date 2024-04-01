@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Input, InputGroup } from '@elements/elements/input';
-import '@elements/elements/forms/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Input, InputGroup } from '@nvidia-elements/core/input';
+import '@nvidia-elements/core/forms/define.js';
 
 define(Input);
 define(InputGroup);

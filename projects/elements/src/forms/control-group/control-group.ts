@@ -6,7 +6,7 @@ import {
   associateAriaLabel,
   assoicateAriaDescribedBy,
   associateControlGroup
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import { ControlMessage } from '../control-message/control-message.js';
 import { setupControlStatusStates, setupControlGroupStates, inputQuery } from '../utils/states.js';
 import { setupControlLayoutStates } from '../utils/layout.js';

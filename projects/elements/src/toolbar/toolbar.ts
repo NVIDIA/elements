@@ -9,12 +9,12 @@ import {
   attachInternals,
   applySlotContentStates,
   hasHorizontalScrollBar
-} from '@elements/elements/internal';
-import type { IconButton } from '@elements/elements/icon-button';
-import type { ButtonGroup } from '@elements/elements/button-group';
-import type { Divider } from '@elements/elements/divider';
-import type { Button } from '@elements/elements/button';
-import type { Control } from '@elements/elements/forms';
+} from '@nvidia-elements/core/internal';
+import type { IconButton } from '@nvidia-elements/core/icon-button';
+import type { ButtonGroup } from '@nvidia-elements/core/button-group';
+import type { Divider } from '@nvidia-elements/core/divider';
+import type { Button } from '@nvidia-elements/core/button';
+import type { Control } from '@nvidia-elements/core/forms';
 import styles from './toolbar.css?inline';
 
 /**

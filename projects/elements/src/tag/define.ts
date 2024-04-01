@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Tag } from '@elements/elements/tag';
-import '@elements/elements/icon/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Tag } from '@nvidia-elements/core/tag';
+import '@nvidia-elements/core/icon/define.js';
 
 define(Tag);
 

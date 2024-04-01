@@ -20,7 +20,8 @@ export default defineConfig(env => {
   return {
     resolve: {
       alias: {
-        '@elements/elements': resolve('./src') // tests should run against final build artifacts not source
+        '@nvidia-elements/core': resolve('./src'),
+        '@elements/elements': resolve('./src')
       }
     },
     plugins: [
@@ -45,10 +46,10 @@ export default defineConfig(env => {
       lib: {
         entry: {
           index: resolve('./src/index.ts'), // imports all independent component entrypoints
-          'internal/index': resolve('./src/internal/index.ts'), // internal utilities for @elements/elements
+          'internal/index': resolve('./src/internal/index.ts'), // internal utilities for @nvidia-elements/core
           'scoped/index': resolve('./src/scoped/index.ts'), // utilities for scoping elements
           'polyfills/index': resolve('./src/polyfills/index.ts'), // optional polyfills for non-chromium envs
-          'test/index': resolve('./src/test/index.ts'), // internal testing utilities for @elements/elements
+          'test/index': resolve('./src/test/index.ts'), // internal testing utilities for @nvidia-elements/core
           'css/module.typography.css': resolve('./src/css/module.typography.css'), // base typography styles
           'css/module.layout.css': resolve('./src/css/module.layout.css'), // layout utilities
           'css/module.responsive.css': resolve('./src/css/module.responsive.css'), // responsive layout utilities

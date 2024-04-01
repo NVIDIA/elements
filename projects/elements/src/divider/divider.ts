@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, attachInternals } from '@elements/elements/internal';
+import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
 import styles from './divider.css?inline';
 
 /**

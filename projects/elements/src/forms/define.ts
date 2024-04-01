@@ -1,7 +1,7 @@
-import { define } from '@elements/elements/internal';
-import { Control, ControlGroup, ControlMessage } from '@elements/elements/forms';
-import '@elements/elements/alert/define.js';
-import '@elements/elements/icon/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Control, ControlGroup, ControlMessage } from '@nvidia-elements/core/forms';
+import '@nvidia-elements/core/alert/define.js';
+import '@nvidia-elements/core/icon/define.js';
 
 define(Control);
 define(ControlGroup);

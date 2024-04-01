@@ -1,8 +1,8 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, attachInternals, debounce, LogService, validateSlots } from '@elements/elements/internal';
+import { useStyles, attachInternals, debounce, LogService, validateSlots } from '@nvidia-elements/core/internal';
 import styles from './header.css?inline';
-import { GlobalStateService } from '@elements/elements/internal/services/global.service';
+import { GlobalStateService } from '@nvidia-elements/core/internal/services/global.service';
 import { GridColumn } from '../column/column.js';
 import { Grid } from '../grid.js';
 import { GridRow } from '../row/row.js';
