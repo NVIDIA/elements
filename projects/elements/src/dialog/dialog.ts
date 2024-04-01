@@ -10,8 +10,8 @@ import {
   Size,
   TypePopoverController,
   useStyles
-} from '@elements/elements/internal';
-import { IconButton } from '@elements/elements/icon-button';
+} from '@nvidia-elements/core/internal';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './dialog.css?inline';
 
 /**

@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { Menu, MenuItem } from '@elements/elements/menu';
+import { define } from '@nvidia-elements/core/internal';
+import { Menu, MenuItem } from '@nvidia-elements/core/menu';
 
 define(Menu);
 define(MenuItem);

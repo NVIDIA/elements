@@ -1,9 +1,7 @@
-import { LitElement, html, nothing, TemplateResult, PropertyValues } from 'lit';
+import { LitElement, html, nothing, TemplateResult } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { Icon } from '@elements/elements/icon';
-import { IconButton } from '@elements/elements/icon-button/icon-button';
 import {
   attachInternals,
   useStyles,
@@ -13,7 +11,7 @@ import {
   appendRootNodeStyle,
   getAttributeListChanges,
   I18nController
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import { ControlMessage } from '../control-message/control-message.js';
 import {
   setupControlValidationStates,

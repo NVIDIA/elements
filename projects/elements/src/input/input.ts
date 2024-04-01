@@ -1,7 +1,7 @@
 import type { CSSResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, ContainerElement } from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
+import { useStyles, ContainerElement } from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
 import styles from './input.css?inline';
 
 export const inputStyles = styles;

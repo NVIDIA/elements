@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { Divider } from '@elements/elements/divider';
+import { define } from '@nvidia-elements/core/internal';
+import { Divider } from '@nvidia-elements/core/divider';
 
 define(Divider);
 

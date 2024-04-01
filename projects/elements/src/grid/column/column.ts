@@ -1,9 +1,7 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, attachInternals, appendRootNodeStyle, getAttributeChanges } from '@elements/elements/internal';
-import type { Grid } from '@elements/elements/grid';
-import type { IconButton } from '@elements/elements/icon-button';
-import type { SortButton } from '@elements/elements/sort-button';
+import { useStyles, attachInternals, appendRootNodeStyle, getAttributeChanges } from '@nvidia-elements/core/internal';
+import type { Grid } from '@nvidia-elements/core/grid';
 import styles from './column.css?inline';
 
 /**

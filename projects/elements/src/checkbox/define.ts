@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Checkbox, CheckboxGroup } from '@elements/elements/checkbox';
-import '@elements/elements/forms/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Checkbox, CheckboxGroup } from '@nvidia-elements/core/checkbox';
+import '@nvidia-elements/core/forms/define.js';
 
 define(Checkbox);
 define(CheckboxGroup);

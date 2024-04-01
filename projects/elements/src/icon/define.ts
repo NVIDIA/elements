@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { Icon, mergeIcons } from '@elements/elements/icon';
+import { define } from '@nvidia-elements/core/internal';
+import { Icon, mergeIcons } from '@nvidia-elements/core/icon';
 
 define(Icon);
 mergeIcons(customElements.get(Icon.metadata.tag) as typeof Icon);

@@ -1,8 +1,8 @@
 import { html } from 'lit';
-import { useStyles } from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
-import { IconButton } from '@elements/elements/icon-button';
-import { inputStyles } from '@elements/elements/input';
+import { useStyles } from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { inputStyles } from '@nvidia-elements/core/input';
 import styles from './time.css?inline';
 
 /**

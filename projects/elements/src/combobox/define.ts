@@ -1,9 +1,9 @@
-import { define } from '@elements/elements/internal';
-import { Combobox } from '@elements/elements/combobox';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/dropdown/define.js';
-import '@elements/elements/menu/define.js';
-import '@elements/elements/tag/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Combobox } from '@nvidia-elements/core/combobox';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
+import '@nvidia-elements/core/menu/define.js';
+import '@nvidia-elements/core/tag/define.js';
 
 define(Combobox);
 

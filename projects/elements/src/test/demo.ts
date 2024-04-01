@@ -1,4 +1,4 @@
-import { generateId } from '@elements/elements/internal';
+import { generateId } from '@nvidia-elements/core/internal';
 
 export interface DemoItem {
   field1: { label: string; value: string | number };

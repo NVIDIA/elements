@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Drawer, DrawerContent, DrawerFooter, DrawerHeader } from '@elements/elements/drawer';
-import '@elements/elements/icon-button/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Drawer, DrawerContent, DrawerFooter, DrawerHeader } from '@nvidia-elements/core/drawer';
+import '@nvidia-elements/core/icon-button/define.js';
 
 define(Drawer);
 define(DrawerFooter);

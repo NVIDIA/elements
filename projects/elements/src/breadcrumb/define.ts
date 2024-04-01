@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Breadcrumb } from '@elements/elements/breadcrumb';
-import '@elements/elements/icon/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Breadcrumb } from '@nvidia-elements/core/breadcrumb';
+import '@nvidia-elements/core/icon/define.js';
 
 define(Breadcrumb);
 

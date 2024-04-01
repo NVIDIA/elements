@@ -1,5 +1,5 @@
 import { ReactiveController, ReactiveElement } from 'lit';
-import { attachInternals, endOfScrollBox } from '@elements/elements/internal';
+import { attachInternals, endOfScrollBox } from '@nvidia-elements/core/internal';
 
 /**
  * Adds active scroll state detection
