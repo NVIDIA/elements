@@ -8,11 +8,11 @@ import {
   I18nController,
   TypeClosableController,
   useStyles
-} from '@elements/elements/internal';
-import { Input } from '@elements/elements/input';
-import { Select } from '@elements/elements/select';
-import { Date } from '@elements/elements/date';
-import { IconButton } from '@elements/elements/icon-button';
+} from '@nvidia-elements/core/internal';
+import { Input } from '@nvidia-elements/core/input';
+import { Select } from '@nvidia-elements/core/select';
+import { Date } from '@nvidia-elements/core/date';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import globalStyles from './progressive-filter-chip.global.css?inline';
 import styles from './progressive-filter-chip.css?inline';
 

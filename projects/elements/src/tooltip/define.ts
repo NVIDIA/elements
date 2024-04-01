@@ -1,5 +1,5 @@
-import { define } from '@elements/elements/internal';
-import { Tooltip } from '@elements/elements/tooltip';
+import { define } from '@nvidia-elements/core/internal';
+import { Tooltip } from '@nvidia-elements/core/tooltip';
 
 define(Tooltip);
 

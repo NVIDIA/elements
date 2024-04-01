@@ -5,8 +5,8 @@ import {
   PopoverType,
   TypePopoverController,
   useStyles
-} from '@elements/elements/internal';
-import { ProgressRing } from '@elements/elements/progress-ring';
+} from '@nvidia-elements/core/internal';
+import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 import styles from './page-loader.css?inline';
 
 /**

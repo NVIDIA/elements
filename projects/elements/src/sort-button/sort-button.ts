@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Icon } from '@elements/elements/icon';
-import { useStyles, BaseButton, I18nController } from '@elements/elements/internal';
+import { Icon } from '@nvidia-elements/core/icon';
+import { useStyles, BaseButton, I18nController } from '@nvidia-elements/core/internal';
 import styles from './sort-button.css?inline';
 
 const nextSort = {

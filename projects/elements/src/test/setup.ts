@@ -1,4 +1,4 @@
-import styles from '@elements/elements/index.css?inline';
+import styles from '@nvidia-elements/core/index.css?inline';
 
 const sheet = new CSSStyleSheet();
 sheet.replaceSync(`${styles}`);

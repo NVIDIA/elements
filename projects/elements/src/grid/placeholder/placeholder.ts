@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { useStyles, attachInternals } from '@elements/elements/internal';
+import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
 import styles from './placeholder.css?inline';
 
 /**

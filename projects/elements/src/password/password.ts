@@ -1,9 +1,9 @@
 import { html } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { useStyles } from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
-import { inputStyles } from '@elements/elements/input';
-import { IconButton } from '@elements/elements/icon-button';
+import { useStyles } from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
+import { inputStyles } from '@nvidia-elements/core/input';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './password.css?inline';
 
 /**

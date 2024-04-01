@@ -7,13 +7,13 @@ import {
   focusElementTimeout,
   getDisplayValue,
   useStyles
-} from '@elements/elements/internal';
-import { Control } from '@elements/elements/forms';
-import { inputStyles } from '@elements/elements/input';
-import { Menu, MenuItem } from '@elements/elements/menu';
-import { Dropdown } from '@elements/elements/dropdown';
-import { Tag } from '@elements/elements/tag';
-import { Icon } from '@elements/elements/icon';
+} from '@nvidia-elements/core/internal';
+import { Control } from '@nvidia-elements/core/forms';
+import { inputStyles } from '@nvidia-elements/core/input';
+import { Menu, MenuItem } from '@nvidia-elements/core/menu';
+import { Dropdown } from '@nvidia-elements/core/dropdown';
+import { Tag } from '@nvidia-elements/core/tag';
+import { Icon } from '@nvidia-elements/core/icon';
 import styles from './combobox.css?inline';
 
 /**
@@ -21,7 +21,7 @@ import styles from './combobox.css?inline';
  * @description An editable combobox with autocomplete behavior from a given datalist.
  * @since 0.17.0
  * @slot - default slot for input
- * @slot prefix-icon - slot for icon to be placed before the input
+ * @slot prefix - slot for icon to be placed before the input
  * @slot footer - slot for dropdown footer content
  * @cssprop --scroll-height
  * @cssprop --padding
@@ -113,7 +113,7 @@ export class Combobox extends Control implements ContainerElement {
       <nve-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o)}>${getDisplayValue(o)}</nve-tag>`
       )}
     </div>`
-      : html`<slot name="prefix-icon"></slot>`;
+      : html`<slot name="prefix"></slot>`;
   }
 
   protected get suffixContent() {

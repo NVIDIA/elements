@@ -1,10 +1,10 @@
-import { define } from '@elements/elements/internal';
-import { ProgressiveFilterChip } from '@elements/elements/progressive-filter-chip';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/date/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { ProgressiveFilterChip } from '@nvidia-elements/core/progressive-filter-chip';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/date/define.js';
 
 define(ProgressiveFilterChip);
 
