@@ -7,7 +7,7 @@ import { isFocusable } from './focus.js';
  * Can be removed once Chromium stable ships stable :state() API by default
  * This import is in this file to ensure it is setup before a define() call
  */
-import '@elements/elements/polyfills/custom-state-set.js';
+import '@nvidia-elements/core/polyfills/custom-state-set.js';
 
 /**
  * Preserves visual DOM ordering when using slots within Shadow DOM

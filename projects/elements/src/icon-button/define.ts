@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { IconButton } from '@elements/elements/icon-button';
-import '@elements/elements/icon/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import '@nvidia-elements/core/icon/define.js';
 
 define(IconButton);
 

@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { SortButton } from '@elements/elements/sort-button';
-import '@elements/elements/icon/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { SortButton } from '@nvidia-elements/core/sort-button';
+import '@nvidia-elements/core/icon/define.js';
 
 define(SortButton);
 

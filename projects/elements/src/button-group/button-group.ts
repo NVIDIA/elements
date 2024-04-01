@@ -8,10 +8,10 @@ import {
   useStyles,
   Interaction,
   Size
-} from '@elements/elements/internal';
-import type { IconButton } from '@elements/elements/icon-button';
-import type { Button } from '@elements/elements/button';
-import type { Divider } from '@elements/elements/divider';
+} from '@nvidia-elements/core/internal';
+import type { IconButton } from '@nvidia-elements/core/icon-button';
+import type { Button } from '@nvidia-elements/core/button';
+import type { Divider } from '@nvidia-elements/core/divider';
 import styles from './button-group.css?inline';
 
 /**

@@ -1,6 +1,6 @@
-import { define } from '@elements/elements/internal';
-import { Toolbar } from '@elements/elements/toolbar';
-import '@elements/elements/icon/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Toolbar } from '@nvidia-elements/core/toolbar';
+import '@nvidia-elements/core/icon/define.js';
 
 define(Toolbar);
 

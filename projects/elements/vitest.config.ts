@@ -24,6 +24,7 @@ export default defineConfig({
       }
     },
     alias: {
+      '@nvidia-elements/core': resolve('./src'),
       '@elements/elements': resolve('./src')
     },
     include: [axe ? resolve('./src/**/*.test.axe.ts') : resolve('./src/**/*.test.ts')],

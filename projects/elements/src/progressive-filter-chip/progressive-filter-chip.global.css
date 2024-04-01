@@ -13,6 +13,10 @@ nve-progressive-filter-chip:has([status='error']) {
   --background: transparent;
 }
 
+nve-progressive-filter-chip nve-select:not(:state(multiple)) {
+  --padding: 0 var(--nve-ref-size-200);
+}
+
 nve-progressive-filter-chip nve-select:not(:state(multiple))::part(caret) {
   display: none;
 }

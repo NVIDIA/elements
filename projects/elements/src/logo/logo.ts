@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Color, useStyles, colorStateStyles, Size, attachInternals } from '@elements/elements/internal';
+import { Color, useStyles, colorStateStyles, Size, attachInternals } from '@nvidia-elements/core/internal';
 import styles from './logo.css?inline';
 
 /**

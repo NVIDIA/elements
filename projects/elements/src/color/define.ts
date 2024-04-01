@@ -1,7 +1,7 @@
-import { define } from '@elements/elements/internal';
-import { Color } from '@elements/elements/color';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/forms/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Color } from '@nvidia-elements/core/color';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/forms/define.js';
 
 define(Color);
 

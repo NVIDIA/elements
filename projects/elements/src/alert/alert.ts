@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Icon } from '@elements/elements/icon';
-import { IconButton } from '@elements/elements/icon-button';
+import { Icon } from '@nvidia-elements/core/icon';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import {
   attachInternals,
   I18nController,
@@ -13,7 +13,7 @@ import {
   statusStateStyles,
   supportStateStyles,
   appendRootNodeStyle
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import globalStyles from './alert.global.css?inline';
 import styles from './alert.css?inline';
 

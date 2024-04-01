@@ -2,7 +2,7 @@ import { html, LitElement, PropertyValues } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { attachInternals, parseVersion, Size, useStyles } from '@elements/elements/internal';
+import { attachInternals, parseVersion, Size, useStyles } from '@nvidia-elements/core/internal';
 import { ICON_IMPORTS, IconName, IconSVG } from './icons.js';
 import styles from './icon.css?inline';
 

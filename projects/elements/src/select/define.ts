@@ -1,10 +1,10 @@
-import { define } from '@elements/elements/internal';
-import { Select } from '@elements/elements/select';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/dropdown/define.js';
-import '@elements/elements/menu/define.js';
-import '@elements/elements/tag/define.js';
+import { define } from '@nvidia-elements/core/internal';
+import { Select } from '@nvidia-elements/core/select';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
+import '@nvidia-elements/core/menu/define.js';
+import '@nvidia-elements/core/tag/define.js';
 
 define(Select);
 

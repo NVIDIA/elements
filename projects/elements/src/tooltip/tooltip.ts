@@ -10,7 +10,7 @@ import {
   PopoverType,
   TypePopoverController,
   useStyles
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 import styles from './tooltip.css?inline';
 
 /**
