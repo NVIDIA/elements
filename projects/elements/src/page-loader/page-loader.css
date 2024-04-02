@@ -1,5 +1,5 @@
 :host {
-  --gap: var(--mlv-ref-space-sm);
+  --gap: var(--nve-ref-space-sm);
   display: contents;
 }
 
@@ -15,5 +15,5 @@ dialog {
 }
 
 dialog::backdrop {
-  background: hsla(0, 0%, 0%, 0.5); /* --mlv-sys-layer-backdrop-background (not available on top layer */
+  background: hsla(0, 0%, 0%, 0.5); /* --nve-sys-layer-backdrop-background (not available on top layer */
 }

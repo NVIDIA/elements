@@ -1,7 +1,7 @@
 :host {
-  --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-500);
-  --border-top: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
-  --gap: var(--mlv-ref-space-sm);
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-500);
+  --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
+  --gap: var(--nve-ref-space-sm);
 }
 
 footer[internal-host] {

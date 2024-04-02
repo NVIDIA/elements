@@ -1,10 +1,10 @@
 :host {
-  --gap: var(--mlv-ref-space-xs);
-  --font-size: var(--mlv-ref-font-size-100);
-  --color: var(--mlv-sys-text-color);
+  --gap: var(--nve-ref-space-xs);
+  --font-size: var(--nve-ref-font-size-100);
+  --color: var(--nve-sys-text-color);
   --icon-color: var(--status-color);
-  --icon-size: var(--mlv-ref-size-400);
-  --font-weight: var(--mlv-ref-font-weight-medium);
+  --icon-size: var(--nve-ref-size-400);
+  --font-weight: var(--nve-ref-font-weight-medium);
   --justify-content: start;
   --min-height: initial;
   --text-transform: initial;
@@ -27,14 +27,14 @@
 
 slot[part='content'] {
   display: contents;
-  padding-left: var(--mlv-ref-size-600);
+  padding-left: var(--nve-ref-size-600);
 }
 
 slot {
   display: flex;
   align-items: center;
   justify-content: var(--justify-content);
-  gap: var(--mlv-ref-space-xxs);
+  gap: var(--nve-ref-space-xxs);
   min-height: var(--min-height);
 }
 
@@ -44,7 +44,7 @@ slot:not([name='actions']):not([name='prefix']):not([name='icon']) {
 
 slot[name='prefix'],
 slot[name='actions'] {
-  font-weight: var(--mlv-ref-font-weight-semibold);
+  font-weight: var(--nve-ref-font-weight-semibold);
 }
 
 ::slotted(mlv-button[interaction='flat']) {
@@ -56,7 +56,7 @@ slot[name='actions'] {
 }
 
 slot[name='prefix'] {
-  margin-inline-end: var(--mlv-ref-space-lg);
+  margin-inline-end: var(--nve-ref-space-lg);
 }
 
 mlv-icon {
@@ -69,7 +69,7 @@ mlv-icon:not([size='sm']) {
 }
 
 mlv-icon[size='sm'] {
-  padding: var(--mlv-ref-size-50);
+  padding: var(--nve-ref-size-50);
 }
 
 mlv-icon-button:not([icon-name='cancel']) {

@@ -1,6 +1,6 @@
 [nve-control] input::placeholder,
 [nve-control] textarea::placeholder {
-  color: var(--mlv-sys-text-placeholder-color) !important;
+  color: var(--nve-sys-text-placeholder-color) !important;
 }
 
 [nve-control] input::-webkit-search-cancel-button,

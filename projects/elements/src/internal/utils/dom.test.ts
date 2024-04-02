@@ -258,11 +258,11 @@ describe('parseTokenNumber', () => {
     expect(parseTokenNumber('calc(1 * 0px)')).toBe(0);
 
     // raw custom property value
-    expect(parseTokenNumber('calc(var(--mlv-ref-scale-size) * 10px)')).toBe(10);
-    expect(parseTokenNumber('calc(var(--mlv-ref-scale-size) * -10px)')).toBe(-10);
-    expect(parseTokenNumber('calc(var(--mlv-ref-scale-size) * 1px)')).toBe(1);
-    expect(parseTokenNumber('calc(var(--mlv-ref-scale-size) * 0px)')).toBe(0);
-    expect(parseTokenNumber('calc(var(--mlv-ref-scale-size) * 0)')).toBe(0);
+    expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 10px)')).toBe(10);
+    expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * -10px)')).toBe(-10);
+    expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 1px)')).toBe(1);
+    expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 0px)')).toBe(0);
+    expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 0)')).toBe(0);
   });
 });
 

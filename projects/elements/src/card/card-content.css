@@ -1,5 +1,5 @@
 :host {
-  --padding: var(--mlv-ref-size-400);
+  --padding: var(--nve-ref-size-400);
   padding: var(--padding);
   color: var(--color);
   flex-grow: 1;

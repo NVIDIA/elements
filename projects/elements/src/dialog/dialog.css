@@ -1,16 +1,16 @@
 :host {
-  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-300);
-  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-300);
-  --mlv-sys-layer-popover-arrow-padding: 6px;
-  --mlv-sys-layer-popover-arrow-offset: 4px;
-  --mlv-sys-layer-popover-offset: var(--mlv-ref-space-xxl);
-  --border: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
-  --border-radius: var(--mlv-ref-border-radius-lg);
-  --background: var(--mlv-sys-layer-overlay-background);
-  --color: var(--mlv-sys-layer-overlay-color);
-  --padding: var(--mlv-ref-size-400);
-  --box-shadow: var(--mlv-ref-shadow-500);
-  --gap: var(--mlv-ref-space-sm);
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-layer-popover-arrow-padding: 6px;
+  --nve-sys-layer-popover-arrow-offset: 4px;
+  --nve-sys-layer-popover-offset: var(--nve-ref-space-xxl);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --border-radius: var(--nve-ref-border-radius-lg);
+  --background: var(--nve-sys-layer-overlay-background);
+  --color: var(--nve-sys-layer-overlay-color);
+  --padding: var(--nve-ref-size-400);
+  --box-shadow: var(--nve-ref-shadow-500);
+  --gap: var(--nve-ref-space-sm);
   --max-width: 600px;
   --min-height: 250px;
   --width: 100%;
@@ -47,7 +47,7 @@ dialog::backdrop {
 }
 
 .header:has(mlv-icon-button) {
-  min-height: var(--mlv-ref-size-300);
+  min-height: var(--nve-ref-size-300);
 }
 
 .content {

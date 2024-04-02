@@ -1,9 +1,9 @@
 :host {
-  --mlv-sys-interaction-state-base: var(--background);
-  --background: var(--mlv-sys-interaction-background);
-  --border-radius: var(--mlv-ref-border-radius-sm);
-  --padding: var(--mlv-ref-space-xxs);
-  --gap: var(--mlv-ref-space-xxxs);
+  --nve-sys-interaction-state-base: var(--background);
+  --background: var(--nve-sys-interaction-background);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --padding: var(--nve-ref-space-xxs);
+  --gap: var(--nve-ref-space-xxxs);
   --width: fit-content;
   width: var(--width);
 }
@@ -20,25 +20,25 @@
 }
 
 ::slotted(mlv-button) {
-  --height: var(--mlv-ref-size-700);
-  --border-radius: var(--mlv-ref-border-radius-sm);
-  --font-weight: var(--mlv-ref-font-weight-medium);
+  --height: var(--nve-ref-size-700);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --font-weight: var(--nve-ref-font-weight-medium);
 }
 
 ::slotted(mlv-icon-button) {
-  --height: var(--mlv-ref-size-700);
-  --border-radius: var(--mlv-ref-border-radius-sm);
+  --height: var(--nve-ref-size-700);
+  --border-radius: var(--nve-ref-border-radius-sm);
 }
 
 ::slotted(mlv-divider) {
   margin-top: calc(-1 * var(--padding));
   height: calc(100% + var(--padding));
-  --color: color-mix(in oklab, var(--mlv-sys-interaction-background) 100%, var(--mlv-sys-interaction-color) 50%);
+  --color: color-mix(in oklab, var(--nve-sys-interaction-background) 100%, var(--nve-sys-interaction-color) 50%);
 }
 
 ::slotted(mlv-button:hover),
 ::slotted(mlv-icon-button:hover) {
-  --color: var(--mlv-sys-text-emphasis-color);
+  --color: var(--nve-sys-text-emphasis-color);
 }
 
 :host([container='flat']) {
@@ -46,16 +46,16 @@
 }
 
 :host([container='rounded']) {
-  --border-radius: var(--mlv-ref-border-radius-full);
+  --border-radius: var(--nve-ref-border-radius-full);
 }
 
 :host([container='rounded']:not(:state(split))) ::slotted(mlv-button),
 :host([container='rounded']:not(:state(split))) ::slotted(mlv-icon-button) {
-  --border-radius: var(--mlv-ref-border-radius-full);
+  --border-radius: var(--nve-ref-border-radius-full);
 }
 
 :host([orientation='vertical']) {
-  --gap: var(--mlv-ref-space-xs);
+  --gap: var(--nve-ref-space-xs);
 }
 
 :host([orientation='vertical']) [internal-host] {
@@ -66,16 +66,16 @@
 :host([interaction='emphasis']) ::slotted(mlv-divider) {
   --color: color-mix(
     in oklab,
-    var(--mlv-sys-interaction-emphasis-background) 100%,
-    var(--mlv-sys-interaction-emphasis-color) 50%
+    var(--nve-sys-interaction-emphasis-background) 100%,
+    var(--nve-sys-interaction-emphasis-color) 50%
   );
 }
 
 :host([interaction='destructive']) ::slotted(mlv-divider) {
   --color: color-mix(
     in oklab,
-    var(--mlv-sys-interaction-destructive-background) 100%,
-    var(--mlv-sys-interaction-destructive-color) 50%
+    var(--nve-sys-interaction-destructive-background) 100%,
+    var(--nve-sys-interaction-destructive-color) 50%
   );
 }
 
@@ -85,9 +85,9 @@
 }
 
 :host(:state(split)) ::slotted(mlv-button) {
-  --border-radius: var(--mlv-ref-border-radius-none);
+  --border-radius: var(--nve-ref-border-radius-none);
 }
 
 :host(:state(split)) ::slotted(mlv-icon-button) {
-  --border-radius: var(--mlv-ref-border-radius-none);
+  --border-radius: var(--nve-ref-border-radius-none);
 }

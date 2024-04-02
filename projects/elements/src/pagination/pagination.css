@@ -1,5 +1,5 @@
 :host {
-  --font-size: var(--mlv-ref-font-size-100);
+  --font-size: var(--nve-ref-font-size-100);
   width: fit-content;
   display: inline-flex;
   contain: initial;
@@ -11,16 +11,16 @@
 }
 
 label {
-  color: var(--mlv-sys-text-muted-color);
-  font-size: var(--mlv-ref-font-size-100);
-  margin-inline: var(--mlv-ref-size-100);
+  color: var(--nve-sys-text-muted-color);
+  font-size: var(--nve-ref-font-size-100);
+  margin-inline: var(--nve-ref-size-100);
   white-space: nowrap;
 }
 
 .select-label {
-  background: var(--mlv-sys-interaction-field-background);
-  color: var(--mlv-sys-interaction-field-color);
-  padding: 0 var(--mlv-ref-size-200);
+  background: var(--nve-sys-interaction-field-background);
+  color: var(--nve-sys-interaction-field-color);
+  padding: 0 var(--nve-ref-size-200);
   font-size: var(--font-size);
   position: absolute;
   inset: 2px;
@@ -55,15 +55,15 @@ label {
 }
 
 mlv-input {
-  margin-inline-end: var(--mlv-ref-size-200);
+  margin-inline-end: var(--nve-ref-size-200);
   --width: 6ch;
 }
 
 mlv-select {
-  margin-inline-end: var(--mlv-ref-size-200);
+  margin-inline-end: var(--nve-ref-size-200);
   --width: 10ch;
 }
 
 mlv-icon-button:state(disabled) {
-  --mlv-sys-interaction-state-ratio-disabled: 0 !important;
+  --nve-sys-interaction-state-ratio-disabled: 0 !important;
 }

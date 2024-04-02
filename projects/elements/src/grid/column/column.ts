@@ -129,7 +129,7 @@ export class GridColumn extends LitElement {
         mlv-grid[id='${this.#grid.id}'] mlv-grid-cell:nth-child(${this.ariaColIndex}) {
           box-shadow: var(--scroll-shadow);
           clip-path: inset(0px ${isLastLeft ? '-4px' : '0'} 0px ${isLastRight ? '-4px' : '0'});
-          --border-${side === 'right' ? 'left' : 'right'}: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+          --border-${side === 'right' ? 'left' : 'right'}: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
         }
       `
           : '';

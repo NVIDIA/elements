@@ -80,7 +80,7 @@ describe('mlv-grid-column', () => {
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
     expect(
       sheets[sheets.length - 1].cssRules[0].cssText.includes(
-        '--border-right: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)'
+        '--border-right: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)'
       )
     ).toBe(false);
 
@@ -100,7 +100,7 @@ describe('mlv-grid-column', () => {
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
     expect(
       sheets[sheets.length - 1].cssRules[1].cssText.includes(
-        '--border-right: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)'
+        '--border-right: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)'
       )
     ).toBe(true);
   });
@@ -122,7 +122,7 @@ describe('mlv-grid-column', () => {
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
     expect(
       sheets[sheets.length - 1].cssRules[1].cssText.includes(
-        '--border-left: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)'
+        '--border-left: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)'
       )
     ).toBe(true);
   });
@@ -145,7 +145,7 @@ describe('mlv-grid-column', () => {
     expect(sheets[sheets.length - 1].cssRules[1].cssText.includes('clip-path: inset(0px 0 0px -4px)')).toBe(false);
     expect(
       sheets[sheets.length - 1].cssRules[1].cssText.includes(
-        '--border-left: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted)'
+        '--border-left: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)'
       )
     ).toBe(true);
 

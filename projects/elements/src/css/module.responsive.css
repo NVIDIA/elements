@@ -13,11 +13,11 @@
     @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
       @container (width >= $(breakpoint-value)) {
         &[mlv-layout~='gap@$(breakpoint):$(size)'] {
-          gap: var(--mlv-ref-space-$(size));
+          gap: var(--nve-ref-space-$(size));
         }
 
         &[mlv-layout~='pad@$(breakpoint):$(size)'] {
-          padding: var(--mlv-ref-space-$(size));
+          padding: var(--nve-ref-space-$(size));
         }
       }
     }
@@ -33,8 +33,9 @@
     &[mlv-layout~='grid'] {
       @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
         @container (width >= $(breakpoint-value)) {
-          [mlv-layout~='span@$(breakpoint):$(num)'], &[mlv-layout~='span-items@$(breakpoint):$(num)'] > * {
-            grid-column: span $(num)/span $(num);
+          [mlv-layout~='span@$(breakpoint):$(num)'],
+          &[mlv-layout~='span-items@$(breakpoint):$(num)'] > * {
+            grid-column: span $(num) / span $(num);
           }
         }
       }

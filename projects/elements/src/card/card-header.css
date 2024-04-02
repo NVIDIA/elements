@@ -1,8 +1,8 @@
 :host {
-  --padding: var(--mlv-ref-size-400) ;
-  --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  --padding: var(--nve-ref-size-400);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --line-height: 1em;
-  --gap: var(--mlv-ref-space-xs);
+  --gap: var(--nve-ref-space-xs);
   contain: none;
 }
 
@@ -24,14 +24,14 @@
 
 ::slotted([slot='title']) {
   margin: 0;
-  font-size: var(--mlv-ref-font-size-200);
-  font-weight: var(--mlv-ref-font-weight-bold);
+  font-size: var(--nve-ref-font-size-200);
+  font-weight: var(--nve-ref-font-weight-bold);
 }
 
 ::slotted([slot='subtitle']) {
   margin: 0;
-  font-size: var(--mlv-ref-font-size-100);
-  font-weight: var(--mlv-ref-font-weight-normal);
+  font-size: var(--nve-ref-font-size-100);
+  font-weight: var(--nve-ref-font-weight-normal);
 }
 
 ::slotted(mlv-tabs) {

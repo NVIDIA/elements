@@ -1,12 +1,12 @@
 :host {
   --background: var(--state-color-background);
   --color: var(--state-color);
-  --gap: var(--mlv-ref-space-xs);
-  --height: var(--mlv-ref-size-800);
-  --width: var(--mlv-ref-size-800);
+  --gap: var(--nve-ref-space-xs);
+  --height: var(--nve-ref-size-800);
+  --width: var(--nve-ref-size-800);
   --font-size: calc(var(--width) / 2);
   --border-radius: calc(var(--height) * 0.2);
-  --font-weight: var(--mlv-ref-font-weight-bold);
+  --font-weight: var(--nve-ref-font-weight-bold);
   display: inline-block;
 }
 
@@ -38,13 +38,13 @@
 }
 
 :host([size='sm']) {
-  --width: var(--mlv-ref-size-600);
-  --height: var(--mlv-ref-size-600);
+  --width: var(--nve-ref-size-600);
+  --height: var(--nve-ref-size-600);
 }
 
 :host([size='lg']) {
-  --width: calc(var(--mlv-ref-size-1000) * 1.55);
-  --height: calc(var(--mlv-ref-size-1000) * 1.55);
+  --width: calc(var(--nve-ref-size-1000) * 1.55);
+  --height: calc(var(--nve-ref-size-1000) * 1.55);
 }
 
 :host([color]) [internal-host] {

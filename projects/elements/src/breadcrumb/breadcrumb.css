@@ -1,12 +1,13 @@
 :host {
-  --breadcrumb-height: var(--mlv-ref-size-500);
-  --item-text-size: var(--mlv-ref-font-size-50);
-  --item-color: var(--mlv-sys-text-muted-color);
-  --item-active-color: var(--mlv-sys-text-emphasis-color);
-  --item-active-font-weight: var(--mlv-ref-font-weight-semibold);
+  --breadcrumb-height: var(--nve-ref-size-500);
+  --item-text-size: var(--nve-ref-font-size-50);
+  --item-color: var(--nve-sys-text-muted-color);
+  --item-active-color: var(--nve-sys-text-emphasis-color);
+  --item-active-font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-ol, li {
+ol,
+li {
   list-style-type: none;
   padding: 0;
   display: flex;
@@ -14,7 +15,7 @@ ol, li {
   min-height: 0;
   align-items: flex-start;
   justify-content: stretch;
-  gap: var(--mlv-ref-space-xxs);
+  gap: var(--nve-ref-space-xxs);
 }
 
 li {
@@ -25,12 +26,12 @@ li {
 }
 
 ::slotted(mlv-button) {
-  --border-radius: calc(var(--mlv-ref-border-radius-xs) / 2);
+  --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
   --font-size: var(--item-text-size);
   --color: var(--item-color);
-  --padding: 0 var(--mlv-ref-size-100);
+  --padding: 0 var(--nve-ref-size-100);
   --height: var(--breadcrumb-height);
-  --font-weight: var(--mlv-ref-font-weight-medium);
+  --font-weight: var(--nve-ref-font-weight-medium);
 }
 
 ::slotted(mlv-button:hover) {
@@ -38,9 +39,9 @@ li {
 }
 
 ::slotted(mlv-icon-button) {
-  --border-radius: calc(var(--mlv-ref-border-radius-xs) / 2);
-  --icon-width: var(--mlv-ref-size-300);
-  --icon-height: var(--mlv-ref-size-300);
+  --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
+  --icon-width: var(--nve-ref-size-300);
+  --icon-height: var(--nve-ref-size-300);
   --height: var(--breadcrumb-height);
   --width: var(--breadcrumb-height);
   --font-size: var(--item-text-size);
@@ -48,8 +49,8 @@ li {
 }
 
 mlv-icon[separator] {
-  --height: var(--mlv-ref-size-200);
-  --width: var(--mlv-ref-size-200);
+  --height: var(--nve-ref-size-200);
+  --width: var(--nve-ref-size-200);
   --color: var(--item-color);
 }
 

@@ -1,15 +1,15 @@
 :host {
   --background: var(--state-color-background);
   --color: var(--state-color);
-  --state-color-base: var(--mlv-ref-color-blue-cobalt-1100);
-  --mlv-sys-interaction-state-base: var(--background);
-  --gap: var(--mlv-ref-space-xs);
-  --font-size: var(--mlv-ref-font-size-100);
-  --padding: 0 var(--mlv-ref-size-200);
-  --border-radius: var(--mlv-ref-border-radius-xxl);
-  --font-weight: var(--mlv-ref-font-weight-regular);
+  --state-color-base: var(--nve-ref-color-blue-cobalt-1100);
+  --nve-sys-interaction-state-base: var(--background);
+  --gap: var(--nve-ref-space-xs);
+  --font-size: var(--nve-ref-font-size-100);
+  --padding: 0 var(--nve-ref-size-200);
+  --border-radius: var(--nve-ref-border-radius-xxl);
+  --font-weight: var(--nve-ref-font-weight-regular);
   --cursor: pointer;
-  --height: var(--mlv-ref-size-600);
+  --height: var(--nve-ref-size-600);
   --width: initial;
   display: inline-flex;
   user-select: none;

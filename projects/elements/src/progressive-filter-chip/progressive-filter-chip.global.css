@@ -1,6 +1,6 @@
 mlv-progressive-filter-chip input::placeholder,
 mlv-progressive-filter-chip textarea::placeholder {
-  color: var(--mlv-sys-text-placeholder-color) !important;
+  color: var(--nve-sys-text-placeholder-color) !important;
 }
 
 mlv-progressive-filter-chip input::-webkit-search-cancel-button,
@@ -14,7 +14,7 @@ mlv-progressive-filter-chip:has([status='error']) {
 }
 
 mlv-progressive-filter-chip mlv-select:not(:state(multiple)) {
-  --padding: 0 var(--mlv-ref-size-200);
+  --padding: 0 var(--nve-ref-size-200);
 }
 
 mlv-progressive-filter-chip mlv-select:not(:state(multiple))::part(caret) {

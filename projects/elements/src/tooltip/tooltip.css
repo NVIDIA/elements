@@ -1,21 +1,21 @@
 :host {
-  --mlv-sys-layer-popover-arrow-padding: 6px;
-  --mlv-sys-layer-popover-arrow-offset: 2px;
-  --mlv-sys-layer-popover-offset: 2px;
-  --border-radius: var(--mlv-ref-border-radius-sm);
-  --background: var(--mlv-sys-layer-popover-background);
-  --color: var(--mlv-sys-layer-popover-color);
-  --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
-  --box-shadow: var(--mlv-ref-shadow-500);
-  --font-size: var(--mlv-ref-font-size-100);
+  --nve-sys-layer-popover-arrow-padding: 6px;
+  --nve-sys-layer-popover-arrow-offset: 2px;
+  --nve-sys-layer-popover-offset: 2px;
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --background: var(--nve-sys-layer-popover-background);
+  --color: var(--nve-sys-layer-popover-color);
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+  --box-shadow: var(--nve-ref-shadow-500);
+  --font-size: var(--nve-ref-font-size-100);
   --arrow-transform: translate(0, -2px) rotate(-45deg);
   --width: max-content;
   --height: initial;
 }
 
 :host([status='muted']) {
-  --background: var(--mlv-sys-layer-overlay-background);
-  --color: var(--mlv-sys-layer-overlay-color);
+  --background: var(--nve-sys-layer-overlay-background);
+  --color: var(--nve-sys-layer-overlay-color);
 }
 
 dialog {
@@ -31,15 +31,15 @@ dialog {
 }
 
 dialog:has(mlv-icon-button) {
-  padding-right: var(--mlv-ref-size-800);
+  padding-right: var(--nve-ref-size-800);
 }
 
 .arrow {
-  width: var(--mlv-ref-size-300);
-  height: var(--mlv-ref-size-300);
+  width: var(--nve-ref-size-300);
+  height: var(--nve-ref-size-300);
   background: var(--background);
   transform: var(--arrow-transform);
-  border-radius: var(--mlv-ref-size-50);
+  border-radius: var(--nve-ref-size-50);
   position: absolute;
 }
 

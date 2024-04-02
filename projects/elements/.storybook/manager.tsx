@@ -28,8 +28,11 @@ const ThemePicker = () => {
 
   return (
     globals.theme || globals.theme === '' ?
-    (<div style={{ 'display': 'flex', 'justifyContent': 'end', 'width': '100%'}}>
-      <mlv-button selected container="flat" id="dropdown-btn">System Options</mlv-button>
+    (<div style={{ 'display': 'flex', 'width': '100%'}}>
+      <mlv-button container="flat"><a target="_blank" href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html">Playground</a></mlv-button>
+      <mlv-button container="flat"><a target="_blank" href="https://NVIDIA.github.io/elements/demos/">Demos</a></mlv-button>
+      <mlv-button container="flat"><a target="_blank" href="https://github.com/NVIDIA/elements">Gitlab</a></mlv-button>
+      <mlv-button container="flat" id="dropdown-btn" style={{ 'margin-left': 'auto' }}>System Options</mlv-button>
       <mlv-drawer id="system-options-drawer" position="right" size="sm" anchor="dropdown-btn" trigger="dropdown-btn" behavior-trigger closable hidden mlv-layout="column gap:md align:horizontal-stretch" style={{'--top': '47px', '--box-shadow': '0'}}>
         <mlv-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
           <mlv-select style={{'--background': 'transparent', '--min-width': '180px'}}>

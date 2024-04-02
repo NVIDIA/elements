@@ -1,6 +1,6 @@
 :host {
   --padding: 0;
-  --gap: var(--mlv-ref-space-xxs);
+  --gap: var(--nve-ref-space-xxs);
   --width: min-content;
   --max-width: 100%;
   --min-width: 170px;
@@ -23,6 +23,6 @@
   max-height: var(--max-height);
   margin: 0;
   overflow-y: auto;
-  scrollbar-color: var(--mlv-ref-border-color-muted) var(--background, transparent);
+  scrollbar-color: var(--nve-ref-border-color-muted) var(--background, transparent);
   scrollbar-width: thin;
 }

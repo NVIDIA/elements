@@ -1,12 +1,12 @@
 :host {
-  --border-radius: var(--mlv-ref-border-radius-xs);
-  --font-size: var(--mlv-ref-font-size-100);
-  --font-weight: var(--mlv-ref-font-weight-medium);
-  --color: var(--mlv-sys-interaction-color);
-  --padding: var(--mlv-ref-size-200);
-  --gap: var(--mlv-ref-space-sm);
+  --border-radius: var(--nve-ref-border-radius-xs);
+  --font-size: var(--nve-ref-font-size-100);
+  --font-weight: var(--nve-ref-font-weight-medium);
+  --color: var(--nve-sys-interaction-color);
+  --padding: var(--nve-ref-size-200);
+  --gap: var(--nve-ref-space-sm);
   --width: 100%;
-  --min-height: var(--mlv-ref-size-800);
+  --min-height: var(--nve-ref-size-800);
   --line-height: 0;
   --cursor: pointer;
   --text-transform: capitalize;
@@ -27,7 +27,7 @@
   min-height: var(--min-height);
   cursor: var(--cursor);
   text-transform: var(--text-transform);
-  outline-offset: calc(-1 * var(--mlv-ref-size-50));
+  outline-offset: calc(-1 * var(--nve-ref-size-50));
   position: relative;
   display: flex;
   align-items: center;
@@ -37,20 +37,20 @@
 }
 
 :host(:state(selected)) {
-  --color: var(--mlv-sys-interaction-selected-color);
+  --color: var(--nve-sys-interaction-selected-color);
 }
 
 :host(:state(disabled)) [interaction-state] {
-  --mlv-sys-interaction-state-ratio: 0;
+  --nve-sys-interaction-state-ratio: 0;
 }
 
 :host(:state(disabled)) {
   --cursor: not-allowed;
-  --color: var(--mlv-sys-interaction-disabled-color);
+  --color: var(--nve-sys-interaction-disabled-color);
 }
 
 :host(:state(hover)) {
-  --color: var(--mlv-sys-interaction-hover-color);
+  --color: var(--nve-sys-interaction-hover-color);
 }
 
 :host(:state(current)) {
@@ -63,15 +63,15 @@
 }
 
 :host(:state(current)) [internal-host]:after {
-  width: var(--mlv-ref-border-width-xl);
+  width: var(--nve-ref-border-width-xl);
   border-radius: var(--border-radius);
-  background: var(--mlv-sys-accent-secondary-background);
+  background: var(--nve-sys-accent-secondary-background);
   content: '';
   display: block;
   position: absolute;
-  top: var(--mlv-ref-size-50);
-  bottom: var(--mlv-ref-size-50);
-  left: calc(var(--mlv-ref-size-200) * -1);
+  top: var(--nve-ref-size-50);
+  bottom: var(--nve-ref-size-50);
+  left: calc(var(--nve-ref-size-200) * -1);
 }
 
 ::slotted(a) {
@@ -99,5 +99,5 @@
 }
 
 ::slotted(mlv-icon) {
-  --color: var(--mlv-sys-text-muted-color);
+  --color: var(--nve-sys-text-muted-color);
 }

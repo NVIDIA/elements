@@ -4,8 +4,8 @@ import { animationFade, getComputedStyleWithFallback } from '@elements/elements/
 describe('animationFade', () => {
   it('should return a animation config object for lit animation', () => {
     const element = document.createElement('div');
-    element.style.setProperty('--mlv-ref-animation-duration-200', '200ms');
-    element.style.setProperty('--mlv-ref-animation-easing-100', 'ease-in-out');
+    element.style.setProperty('--nve-ref-animation-duration-200', '200ms');
+    element.style.setProperty('--nve-ref-animation-easing-100', 'ease-in-out');
 
     const keyframeOptions = (animationFade(element) as any).values[0].keyframeOptions;
     expect(keyframeOptions.duration).toEqual(200);

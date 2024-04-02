@@ -1,11 +1,11 @@
 :host {
-  --mlv-sys-layer-popover-offset: var(--mlv-ref-space-xl);
-  --border-radius: var(--mlv-ref-border-radius-md);
-  --status-color: var(--mlv-sys-support-color);
-  --background: var(--mlv-sys-layer-popover-background);
-  --color: var(--mlv-sys-layer-popover-color);
-  --padding: var(--mlv-ref-size-500) var(--mlv-ref-size-900);
-  --box-shadow: var(--mlv-ref-shadow-400);
+  --nve-sys-layer-popover-offset: var(--nve-ref-space-xl);
+  --border-radius: var(--nve-ref-border-radius-md);
+  --status-color: var(--nve-sys-support-color);
+  --background: var(--nve-sys-layer-popover-background);
+  --color: var(--nve-sys-layer-popover-color);
+  --padding: var(--nve-ref-size-500) var(--nve-ref-size-900);
+  --box-shadow: var(--nve-ref-shadow-400);
   --min-width: 320px;
   --width: fit-content;
   --max-width: fit-content;
@@ -25,7 +25,7 @@
   border-radius: var(--border-radius);
   background: var(--background);
   color: var(--color);
-  gap: var(--mlv-ref-space-sm);
+  gap: var(--nve-ref-space-sm);
   border: var(--border);
   border-left: 6px solid var(--status-color);
   min-width: var(--min-width);
@@ -36,7 +36,7 @@
 }
 
 .popover:has(mlv-icon-button) {
-  padding-right: var(--mlv-ref-size-1000);
+  padding-right: var(--nve-ref-size-1000);
 }
 
 mlv-icon-button {
@@ -62,9 +62,9 @@ mlv-icon-button {
   --width: 100%;
   --border-radius: 0;
   --box-shadow: none;
-  --border: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
-  --background: var(--mlv-sys-layer-overlay-accent-background);
-  --color: var(--mlv-sys-layer-overlay-color);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --background: var(--nve-sys-layer-overlay-accent-background);
+  --color: var(--nve-sys-layer-overlay-color);
 }
 
 :host([container='flat']) .popover {
@@ -72,18 +72,18 @@ mlv-icon-button {
 }
 
 :host([status='accent']) {
-  --status-color: var(--mlv-sys-support-accent-color);
+  --status-color: var(--nve-sys-support-accent-color);
 }
 
 :host([status='success']) {
-  --status-color: var(--mlv-sys-support-success-color);
+  --status-color: var(--nve-sys-support-success-color);
 }
 
 :host([status='warning']) {
-  --status-color: var(--mlv-sys-support-warning-color);
-  --status-color: color-mix(in oklab, var(--mlv-sys-support-warning-color) 90%, var(--mlv-sys-contrast-mute-color));
+  --status-color: var(--nve-sys-support-warning-color);
+  --status-color: color-mix(in oklab, var(--nve-sys-support-warning-color) 90%, var(--nve-sys-contrast-mute-color));
 }
 
 :host([status='danger']) {
-  --status-color: var(--mlv-sys-support-danger-color);
+  --status-color: var(--nve-sys-support-danger-color);
 }

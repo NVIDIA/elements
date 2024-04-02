@@ -1,25 +1,25 @@
 :host {
   --cursor: pointer;
-  --accent-color: var(--mlv-sys-accent-secondary-background);
-  --color: var(--mlv-sys-interaction-field-color);
-  --label-color: var(--mlv-sys-interaction-field-color);
+  --accent-color: var(--nve-sys-accent-secondary-background);
+  --color: var(--nve-sys-interaction-field-color);
+  --label-color: var(--nve-sys-interaction-field-color);
   --label-text-transform: capitalize;
   --control-width: 100%;
   --control-height: auto;
   --_label-width: var(--label-width, 180px);
-  --mlv-sys-interaction-state-base: var(--background);
+  --nve-sys-interaction-state-base: var(--background);
   --opacity: 1;
   contain: content;
 }
 
 ::slotted(*) {
-  color-scheme: var(--mlv-sys-color-scheme);
+  color-scheme: var(--nve-sys-color-scheme);
   font-family: inherit;
 }
 
 ::slotted(label) {
-  font-weight: var(--mlv-ref-font-weight-medium) !important;
-  font-size: var(--mlv-ref-font-size-100) !important;
+  font-weight: var(--nve-ref-font-weight-medium) !important;
+  font-size: var(--nve-ref-font-size-100) !important;
   color: var(--label-color) !important;
   cursor: var(--cursor) !important;
   text-transform: var(--label-text-transform) !important;
@@ -35,7 +35,7 @@
 :host(:state(disabled)),
 :host(:state(disabled)) ::slotted(mlv-control-message:not([status])) {
   --cursor: not-allowed;
-  --color: var(--mlv-sys-text-muted-color);
+  --color: var(--nve-sys-text-muted-color);
   --opacity: 0.5;
 }
 
@@ -102,7 +102,7 @@ slot[name='messages'] {
   opacity: var(--opacity);
   display: grid;
   width: 100%;
-  gap: var(--mlv-ref-space-xs);
+  gap: var(--nve-ref-space-xs);
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas:
@@ -154,7 +154,7 @@ slot[name='messages'] {
   }
 
   & ::slotted(label) {
-    font-weight: var(--mlv-ref-font-weight-regular) !important;
+    font-weight: var(--nve-ref-font-weight-regular) !important;
     color: var(--color) !important;
     width: 100%;
   }

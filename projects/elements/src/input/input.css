@@ -1,11 +1,11 @@
 :host {
-  --padding: 0 var(--mlv-ref-size-200);
-  --font-size: var(--mlv-ref-font-size-100);
-  --height: var(--mlv-ref-size-800);
-  --background: var(--mlv-sys-interaction-field-background);
-  --color: var(--mlv-sys-interaction-field-color);
-  --border-radius: var(--mlv-ref-border-radius-sm);
-  --border: var(--mlv-ref-border-width-md) solid transparent;
+  --padding: 0 var(--nve-ref-size-200);
+  --font-size: var(--nve-ref-font-size-100);
+  --height: var(--nve-ref-size-800);
+  --background: var(--nve-sys-interaction-field-background);
+  --color: var(--nve-sys-interaction-field-color);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --border: var(--nve-ref-border-width-md) solid transparent;
   --border-bottom: var(--border);
   --cursor: text;
   --font-weight: normal;
@@ -59,34 +59,34 @@ mlv-icon-button,
 
 ::slotted(mlv-button:not([slot])) {
   --font-size: var(--_font-size);
-  --padding: 0 var(--mlv-ref-size-200);
+  --padding: 0 var(--nve-ref-size-200);
   --color: var(--label-color);
   --height: 100%;
 }
 
 :host([rounded]) {
-  --border-radius: var(--mlv-ref-border-radius-full);
+  --border-radius: var(--nve-ref-border-radius-full);
 }
 
 :host([status='error']),
 :host(:state(invalid)),
 :host(:state(error)) {
-  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-danger-emphasis-color);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
 }
 
 :host([status='success']),
 :host(:state(success)) {
-  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-success-emphasis-color);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-success-emphasis-color);
 }
 
 :host(:state(disabled)) {
-  --border: var(--mlv-ref-border-width-md) solid transparent;
+  --border: var(--nve-ref-border-width-md) solid transparent;
 }
 
 :host([container='flat']) {
   --border-radius: 0;
   --box-shadow: none;
-  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
 }
 
 :host([container='flat']) [input] {
@@ -94,7 +94,7 @@ mlv-icon-button,
 }
 
 :host([container='flat']:focus-within) {
-  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-emphasis);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
 }
 
 :host([container='flat']:focus-within) [input] {

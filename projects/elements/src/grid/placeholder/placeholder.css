@@ -1,12 +1,16 @@
 :host {
-  --color: var(--mlv-sys-layer-canvas-color);
-  --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-300);
+  --color: var(--nve-sys-layer-canvas-color);
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
   position: absolute;
   inset: 28px 0 0 0;
 }
 
 [internal-host] {
-  background: color-mix(in oklab, var(--background, var(--mlv-sys-layer-canvas-background)) 100%, var(--mlv-sys-interaction-state-mix) var(--interaction-state-ratio, 0.01%));
+  background: color-mix(
+    in oklab,
+    var(--background, var(--nve-sys-layer-canvas-background)) 100%,
+    var(--nve-sys-interaction-state-mix) var(--interaction-state-ratio, 0.01%)
+  );
   color: var(--color);
   padding: var(--padding);
   font-size: var(--font-size);

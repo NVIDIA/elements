@@ -1,6 +1,6 @@
 :host {
-  --background: var(--mlv-sys-layer-container-accent-background);
-  --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  --background: var(--nve-sys-layer-container-accent-background);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --padding: 0 1px 0 0;
   position: sticky;
   z-index: 100;

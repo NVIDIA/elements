@@ -1,10 +1,10 @@
 :host {
   --cursor: pointer;
-  --width: var(--mlv-ref-size-400);
-  --height: var(--mlv-ref-size-400);
-  --border-width: var(--mlv-ref-border-width-md);
-  --border-radius: var(--mlv-ref-border-radius-full);
-  --border-color: var(--mlv-ref-border-color);
+  --width: var(--nve-ref-size-400);
+  --height: var(--nve-ref-size-400);
+  --border-width: var(--nve-ref-border-width-md);
+  --border-radius: var(--nve-ref-border-radius-full);
+  --border-color: var(--nve-ref-border-color);
   --background: transparent;
   display: inline-block;
 }
@@ -44,7 +44,7 @@
 }
 
 :host(:state(checked)) {
-  --mlv-sys-interaction-state-lightness: 0%;
+  --nve-sys-interaction-state-lightness: 0%;
   --border-color: var(--accent-color);
 }
 
@@ -53,7 +53,7 @@
 }
 
 :host(:state(disabled)) {
-  --border-color: var(--mlv-sys-interaction-disabled-background);
+  --border-color: var(--nve-sys-interaction-disabled-background);
 }
 
 :host(:focus-within) [input] {

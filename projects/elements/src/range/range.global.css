@@ -1,16 +1,16 @@
 mlv-range input[type='range']::-webkit-slider-thumb {
-  width: var(--mlv-ref-size-400);
-  height: var(--mlv-ref-size-400);
+  width: var(--nve-ref-size-400);
+  height: var(--nve-ref-size-400);
   background: var(--background);
   border-radius: 50%;
-  margin-top: calc((var(--track-height) - var(--mlv-ref-size-400)) / 2);
+  margin-top: calc((var(--track-height) - var(--nve-ref-size-400)) / 2);
   appearance: var(--_appearance);
 }
 
-mlv-range input[type=range]::-webkit-slider-runnable-track {
-  background: var(--mlv-sys-interaction-background);
+mlv-range input[type='range']::-webkit-slider-runnable-track {
+  background: var(--nve-sys-interaction-background);
   height: var(--track-height);
-  border-radius: var(--mlv-ref-border-radius-lg);
+  border-radius: var(--nve-ref-border-radius-lg);
   align-self: center;
 }
 

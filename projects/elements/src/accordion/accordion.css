@@ -1,10 +1,10 @@
 :host {
-  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-200);
-  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-200);
-  --background: var(--mlv-sys-layer-container-background);
-  --color: var(--mlv-sys-layer-canvas-color);
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);
+  --background: var(--nve-sys-layer-container-background);
+  --color: var(--nve-sys-layer-canvas-color);
   --border-radius: 0;
-  --header-padding: var(--mlv-ref-size-300) var(--mlv-ref-size-400);
+  --header-padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
   --cursor: pointer;
   width: 100%;
   contain: none;
@@ -34,7 +34,7 @@
 [internal-host].has-action #header {
   flex-direction: row-reverse;
   justify-content: start;
-  gap: var(--mlv-ref-space-xxs);
+  gap: var(--nve-ref-space-xxs);
 }
 
 :host(:not(:state(expanded))) #content {
@@ -42,7 +42,7 @@
 }
 
 :host([container='inset']) {
-  --border-radius: var(--mlv-ref-border-radius-md);
+  --border-radius: var(--nve-ref-border-radius-md);
 }
 
 :host([container='flat']) {

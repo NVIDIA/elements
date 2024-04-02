@@ -1,14 +1,14 @@
 :host {
-  --color: var(--mlv-sys-text-muted-color);
-  --width: var(--mlv-ref-size-400);
-  --height: var(--mlv-ref-size-400);
+  --color: var(--nve-sys-text-muted-color);
+  --width: var(--nve-ref-size-400);
+  --height: var(--nve-ref-size-400);
   display: inline-flex;
   contain: layout;
 }
 
 [internal-host] {
-  --_width: calc(var(--width) * var(--mlv-ref-scale-size, 1));
-  --_height: calc(var(--height) * var(--mlv-ref-scale-size, 1));
+  --_width: calc(var(--width) * var(--nve-ref-scale-size, 1));
+  --_height: calc(var(--height) * var(--nve-ref-scale-size, 1));
   color: var(--color);
   width: var(--_width);
   height: var(--_height);
@@ -27,23 +27,23 @@ svg {
 }
 
 :host([size='xs']) {
-  --width: var(--mlv-ref-size-200);
-  --height: var(--mlv-ref-size-200);
+  --width: var(--nve-ref-size-200);
+  --height: var(--nve-ref-size-200);
 }
 
 :host([size='sm']) {
-  --width: var(--mlv-ref-size-300);
-  --height: var(--mlv-ref-size-300);
+  --width: var(--nve-ref-size-300);
+  --height: var(--nve-ref-size-300);
 }
 
 :host([size='lg']) {
-  --width: var(--mlv-ref-size-500);
-  --height: var(--mlv-ref-size-500);
+  --width: var(--nve-ref-size-500);
+  --height: var(--nve-ref-size-500);
 }
 
 :host([size='xl']) {
-  --width: var(--mlv-ref-size-600);
-  --height: var(--mlv-ref-size-600);
+  --width: var(--nve-ref-size-600);
+  --height: var(--nve-ref-size-600);
 }
 
 /* icons scaled down by 20% to match misalignment export bug in figma icon */
@@ -53,7 +53,7 @@ svg {
 :host([name='caret']),
 :host([name='chevron']),
 :host([name='double-chevron']) {
-  --mlv-ref-scale-size: 0.8;
+  --nve-ref-scale-size: 0.8;
 }
 
 :host([direction='up']) {
@@ -73,19 +73,19 @@ svg {
 }
 
 :host([status='success']) {
-  --color: var(--mlv-sys-support-success-color);
+  --color: var(--nve-sys-support-success-color);
 }
 
 :host([status='warning']) {
-  --color: var(--mlv-sys-support-warning-color);
+  --color: var(--nve-sys-support-warning-color);
 }
 
 :host([status='danger']) {
-  --color: var(--mlv-sys-support-danger-color);
+  --color: var(--nve-sys-support-danger-color);
 }
 
 :host([status='accent']) {
-  --color: var(--mlv-sys-support-accent-color);
+  --color: var(--nve-sys-support-accent-color);
 }
 
 /** @deprecated (left) 0.14.0 */

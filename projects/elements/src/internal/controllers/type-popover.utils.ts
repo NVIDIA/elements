@@ -1,5 +1,14 @@
 import { css } from 'lit';
-import { arrow, autoUpdate, computePosition, ComputePositionReturn, flip, Middleware, offset, platform } from '@floating-ui/dom';
+import {
+  arrow,
+  autoUpdate,
+  computePosition,
+  ComputePositionReturn,
+  flip,
+  Middleware,
+  offset,
+  platform
+} from '@floating-ui/dom';
 import { offsetParent } from 'composed-offset-position';
 import { parseTokenNumber } from '../utils/dom.js';
 import type { PopoverAlign, PopoverPosition, PopoverSides } from '../types/index.js';
@@ -8,17 +17,16 @@ if (!globalThis.process) {
   (globalThis.process as any) = { env: { NODE_ENV: 'production' } }; // floating-ui
 }
 
-
 export interface PopoverConfig {
-  position: PopoverPosition,
-  alignment?: PopoverAlign,
-  popover: HTMLElement,
-  anchor: HTMLElement,
-  arrow?: HTMLElement,
-  offset?: number,
-  arrowOffset?: number,
-  arrowPadding?: number,
-  strategy?: 'fixed' | 'absolute'
+  position: PopoverPosition;
+  alignment?: PopoverAlign;
+  popover: HTMLElement;
+  anchor: HTMLElement;
+  arrow?: HTMLElement;
+  offset?: number;
+  arrowOffset?: number;
+  arrowPadding?: number;
+  strategy?: 'fixed' | 'absolute';
 }
 
 export const popoverBaseStyles = css`
@@ -59,9 +67,9 @@ dialog {
 export function getPopoverCustomCSSProperites(element: HTMLElement) {
   const styles = getComputedStyle(element);
   return {
-    offset: parseTokenNumber(styles.getPropertyValue('--mlv-sys-layer-popover-offset')),
-    arrowOffset: parseTokenNumber(styles.getPropertyValue('--mlv-sys-layer-popover-arrow-offset')),
-    arrowPadding: parseTokenNumber(styles.getPropertyValue('--mlv-sys-layer-popover-arrow-padding'))
+    offset: parseTokenNumber(styles.getPropertyValue('--nve-sys-layer-popover-offset')),
+    arrowOffset: parseTokenNumber(styles.getPropertyValue('--nve-sys-layer-popover-arrow-offset')),
+    arrowPadding: parseTokenNumber(styles.getPropertyValue('--nve-sys-layer-popover-arrow-padding'))
   };
 }
 
@@ -90,34 +98,40 @@ export function computePopoverPosition(config: PopoverConfig) {
     config.arrow ? arrow({ element: config.arrow, padding: config.arrowPadding }) : null,
     config.anchor !== globalThis.document.body ? flip() : null
   ].filter(i => !!i);
-  const placement = `${config.position}${config.alignment === 'start' || config.alignment === 'end' ? `-${config.alignment}` : ''}` as `${PopoverSides}-${Exclude<PopoverAlign, 'center'>}`;
-  return computePosition(
-    config.anchor,
-    config.popover,
-    {
-      placement: config.position !== 'center' ? placement : undefined,
-      middleware,
-      strategy: 'fixed',
-      platform: {
-        ...platform,
-        // https://floating-ui.com/docs/platform#shadow-dom-fix
-        getOffsetParent: (element: HTMLElement) => platform.getOffsetParent(element, offsetParent),
-      }
+  const placement =
+    `${config.position}${config.alignment === 'start' || config.alignment === 'end' ? `-${config.alignment}` : ''}` as `${PopoverSides}-${Exclude<PopoverAlign, 'center'>}`;
+  return computePosition(config.anchor, config.popover, {
+    placement: config.position !== 'center' ? placement : undefined,
+    middleware,
+    strategy: 'fixed',
+    platform: {
+      ...platform,
+      // https://floating-ui.com/docs/platform#shadow-dom-fix
+      getOffsetParent: (element: HTMLElement) => platform.getOffsetParent(element, offsetParent)
     }
-  );
+  });
 }
 
 function getOffsetMiddleware(config: PopoverConfig): Middleware {
   return offset(({ rects }) => {
     if (config.position === 'center') {
-      const height = config.anchor === globalThis.document.body ? globalThis.document.documentElement.clientHeight : rects.reference.height;
-      return -rects.reference.height + ((height / 2) - (rects.floating.height / 2));
+      const height =
+        config.anchor === globalThis.document.body
+          ? globalThis.document.documentElement.clientHeight
+          : rects.reference.height;
+      return -rects.reference.height + (height / 2 - rects.floating.height / 2);
     } else if (config.anchor === globalThis.document.body) {
       const crossAxis = { start: config.offset, end: -config.offset, undefined: 0, center: 0 };
-      return { mainAxis: config.position === 'top' || config.position === 'bottom' ? -rects.floating.height - config.offset : -rects.floating.width - config.offset, crossAxis: crossAxis[config.alignment] };
+      return {
+        mainAxis:
+          config.position === 'top' || config.position === 'bottom'
+            ? -rects.floating.height - config.offset
+            : -rects.floating.width - config.offset,
+        crossAxis: crossAxis[config.alignment]
+      };
     } else {
       const arrowWidth = config.arrow?.getBoundingClientRect()?.width;
-      return { mainAxis: arrowWidth ? (arrowWidth / 2) + config.offset : config.offset };
+      return { mainAxis: arrowWidth ? arrowWidth / 2 + config.offset : config.offset };
     }
   });
 }

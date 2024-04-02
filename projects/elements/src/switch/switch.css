@@ -1,13 +1,13 @@
 :host {
   --cursor: pointer;
-  --border-radius: var(--mlv-ref-border-radius-xxl);
-  --background: var(--mlv-sys-interaction-field-background);
-  --width: var(--mlv-ref-size-1000);
-  --height: var(--mlv-ref-size-500);
-  --anchor-width: calc(var(--mlv-ref-size-300) + var(--mlv-ref-size-50));
-  --anchor-height: calc(var(--mlv-ref-size-300) + var(--mlv-ref-size-50));
-  --anchor-border-radius: var(--mlv-ref-border-radius-xxl);
-  --anchor-background: var(--mlv-sys-interaction-disabled-color);
+  --border-radius: var(--nve-ref-border-radius-xxl);
+  --background: var(--nve-sys-interaction-field-background);
+  --width: var(--nve-ref-size-1000);
+  --height: var(--nve-ref-size-500);
+  --anchor-width: calc(var(--nve-ref-size-300) + var(--nve-ref-size-50));
+  --anchor-height: calc(var(--nve-ref-size-300) + var(--nve-ref-size-50));
+  --anchor-border-radius: var(--nve-ref-border-radius-xxl);
+  --anchor-background: var(--nve-sys-interaction-disabled-color);
   display: inline-block;
 }
 
@@ -39,7 +39,7 @@
   width: var(--width);
   min-height: auto;
   display: flex !important;
-  padding: 0 var(--mlv-ref-size-100);
+  padding: 0 var(--nve-ref-size-100);
   align-items: center;
   transition-duration: 200ms;
   transition-timing-function: ease-in;
@@ -48,8 +48,8 @@
 }
 
 :host(:state(disabled):state(checked)) [input] slot {
-  --anchor-background: var(--mlv-sys-interaction-disabled-background);
-  --background: var(--mlv-sys-interaction-disabled-color);
+  --anchor-background: var(--nve-sys-interaction-disabled-background);
+  --background: var(--nve-sys-interaction-disabled-color);
 }
 
 [input] slot::after {
@@ -66,8 +66,8 @@
 }
 
 :host(:state(checked)) {
-  --background: var(--mlv-sys-accent-secondary-background);
-  --anchor-background: var(--mlv-sys-text-white-color);
+  --background: var(--nve-sys-accent-secondary-background);
+  --anchor-background: var(--nve-sys-text-white-color);
 }
 
 :host(:state(checked)) [input] slot::after {

@@ -1,16 +1,16 @@
 :host {
-  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-300);
-  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-300);
-  --mlv-sys-layer-popover-arrow-padding: 6px;
-  --mlv-sys-layer-popover-arrow-offset: 4px;
-  --mlv-sys-layer-popover-offset: 4px;
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-layer-popover-arrow-padding: 6px;
+  --nve-sys-layer-popover-arrow-offset: 4px;
+  --nve-sys-layer-popover-offset: 4px;
   --arrow-transform: translate(0, -2px) rotate(-45deg);
-  --border: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
-  --border-radius: var(--mlv-ref-border-radius-md);
-  --background: var(--mlv-sys-layer-overlay-background);
-  --color: var(--mlv-sys-layer-overlay-color);
-  --padding: var(--mlv-ref-size-400);
-  --box-shadow: var(--mlv-ref-shadow-400);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --border-radius: var(--nve-ref-border-radius-md);
+  --background: var(--nve-sys-layer-overlay-background);
+  --color: var(--nve-sys-layer-overlay-color);
+  --padding: var(--nve-ref-size-400);
+  --box-shadow: var(--nve-ref-shadow-400);
   --width: fit-content;
   --min-width: fit-content;
   --_divider-padding: var(--padding);
@@ -23,7 +23,7 @@ dialog {
   background: var(--background);
   color: var(--color);
   box-shadow: var(--box-shadow);
-  gap: var(--mlv-ref-space-sm);
+  gap: var(--nve-ref-space-sm);
   width: var(--width);
   min-width: var(--min-width);
   outline: 0;
@@ -40,14 +40,14 @@ mlv-icon-button {
 }
 
 .arrow {
-  width: var(--mlv-ref-size-400);
-  height: var(--mlv-ref-size-400);
+  width: var(--nve-ref-size-400);
+  height: var(--nve-ref-size-400);
   background: var(--background);
   transform: var(--arrow-transform);
-  border-top-left-radius: var(--mlv-ref-border-radius-xs);
+  border-top-left-radius: var(--nve-ref-border-radius-xs);
   position: absolute;
   border-left: var(--border);
-  border-top:  var(--border);
+  border-top: var(--border);
 }
 
 :host([position*='top']) {

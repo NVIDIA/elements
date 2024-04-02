@@ -1,12 +1,12 @@
 :host {
-  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-200);
-  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-200);
-  --background: var(--mlv-sys-layer-container-background);
-  --color: var(--mlv-sys-layer-canvas-color);
-  --border-radius: var(--mlv-ref-border-radius-lg);
-  --box-shadow: var(--mlv-ref-shadow-100);
-  --font-size: var(--mlv-ref-font-size-100);
-  --row-height: var(--mlv-ref-size-900);
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);
+  --background: var(--nve-sys-layer-container-background);
+  --color: var(--nve-sys-layer-canvas-color);
+  --border-radius: var(--nve-ref-border-radius-lg);
+  --box-shadow: var(--nve-ref-shadow-100);
+  --font-size: var(--nve-ref-font-size-100);
+  --row-height: var(--nve-ref-size-900);
   --scroll-height: initial;
   --grid-auto-columns: minmax(0, 1fr);
   --scroll-width: 0;
@@ -54,7 +54,7 @@
   contain: layout;
   overflow: auto;
   position: relative;
-  scrollbar-color: var(--mlv-ref-border-color-muted) var(--background);
+  scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
   scrollbar-width: thin;
 }
 
@@ -74,7 +74,7 @@
 }
 
 :host([stripe]) ::slotted(mlv-grid-row:nth-child(odd)) {
-  --background: var(--mlv-sys-layer-container-accent-background);
+  --background: var(--nve-sys-layer-container-accent-background);
 }
 
 ::slotted(mlv-grid-row:last-child) {

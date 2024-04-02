@@ -1,7 +1,7 @@
 :host {
-  --background: var(--mlv-sys-layer-container-background);
-  --color: var(--mlv-sys-layer-canvas-color);
-  --box-shadow: var(--mlv-ref-shadow-300);
+  --background: var(--nve-sys-layer-container-background);
+  --color: var(--nve-sys-layer-canvas-color);
+  --box-shadow: var(--nve-ref-shadow-300);
   overflow: hidden;
   -webkit-transition: width 240ms ease;
   -webkit-transition: height 240ms ease;
@@ -25,8 +25,8 @@
 }
 
 :host(:not([closable]):not(:state(expanded))) [internal-host] {
-  width: var(--mlv-ref-space-xl) !important;
-  height: var(--mlv-ref-space-xl) !important;
+  width: var(--nve-ref-space-xl) !important;
+  height: var(--nve-ref-space-xl) !important;
   background: none;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .header {
-  min-height: var(--mlv-ref-size-900);
+  min-height: var(--nve-ref-size-900);
 }
 
 .content {
@@ -59,7 +59,7 @@
 
 mlv-icon-button {
   position: absolute;
-  top: var(--mlv-ref-size-100);
-  right: var(--mlv-ref-size-100);
+  top: var(--nve-ref-size-100);
+  right: var(--nve-ref-size-100);
   z-index: 99;
 }

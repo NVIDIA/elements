@@ -1,12 +1,12 @@
 :host {
-  --gap: var(--mlv-ref-space-xs);
-  --font-size: var(--mlv-ref-font-size-100);
-  --font-weight: var(--mlv-ref-font-weight-semibold);
+  --gap: var(--nve-ref-space-xs);
+  --font-size: var(--nve-ref-font-size-100);
+  --font-weight: var(--nve-ref-font-weight-semibold);
   --background: var(--status-color);
-  --color: var(--mlv-sys-text-white-color);
-  --border-radius: var(--mlv-ref-border-radius-full);
-  --height: var(--mlv-ref-size-300);
-  --width: var(--mlv-ref-size-300);
+  --color: var(--nve-sys-text-white-color);
+  --border-radius: var(--nve-ref-border-radius-full);
+  --height: var(--nve-ref-size-300);
+  --width: var(--nve-ref-size-300);
   --padding: 0;
   width: auto;
   display: inline-flex;
@@ -30,15 +30,15 @@
 }
 
 :host([size='sm']) {
-  --height: var(--mlv-ref-size-200);
-  --width: var(--mlv-ref-size-200);
-  --font-size: var(--mlv-ref-font-size-50);
+  --height: var(--nve-ref-size-200);
+  --width: var(--nve-ref-size-200);
+  --font-size: var(--nve-ref-font-size-50);
 }
 
 :host([size='lg']) {
-  --height: var(--mlv-ref-size-400);
-  --width: var(--mlv-ref-size-400);
-  --font-size: var(--mlv-ref-font-size-200);
+  --height: var(--nve-ref-size-400);
+  --width: var(--nve-ref-size-400);
+  --font-size: var(--nve-ref-font-size-200);
 }
 
 :host(:state(has-text)) {
@@ -52,5 +52,5 @@
 }
 
 :host([status='warning']) {
-  --color: var(--mlv-sys-text-black-color);
+  --color: var(--nve-sys-text-black-color);
 }

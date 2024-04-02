@@ -1,12 +1,12 @@
 :host {
-  --background: var(--mlv-sys-layer-container-background);
-  --color: var(--mlv-sys-layer-canvas-color);
-  --padding: 0 var(--mlv-ref-size-300);
-  --min-height: var(--mlv-ref-size-1000);
-  --border-radius: var(--mlv-ref-border-radius-sm);
-  --gap: var(--mlv-ref-space-sm);
+  --background: var(--nve-sys-layer-container-background);
+  --color: var(--nve-sys-layer-canvas-color);
+  --padding: 0 var(--nve-ref-size-300);
+  --min-height: var(--nve-ref-size-1000);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --gap: var(--nve-ref-space-sm);
   --border-bottom: 0;
-  --box-shadow: var(--mlv-ref-shadow-100);
+  --box-shadow: var(--nve-ref-shadow-100);
   --width: 100%;
   contain: initial;
 }
@@ -14,8 +14,8 @@
 :host([container='flat']),
 :host([container='inset']) {
   --background: transparent;
-  --padding: var(--mlv-ref-size-100);
-  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
+  --padding: var(--nve-ref-size-100);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
   --box-shadow: none;
   --border-radius: 0;
   --padding: 0;
@@ -31,23 +31,23 @@
 }
 
 :host([container='flat']:focus-within) {
-  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-emphasis);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
 }
 
 :host([status='accent']) {
-  --background: var(--mlv-sys-support-accent-color);
-  --color: var(--mlv-sys-text-white-color);
+  --background: var(--nve-sys-support-accent-color);
+  --color: var(--nve-sys-text-white-color);
 }
 
 :host([status='accent']) ::slotted(mlv-button),
 :host([status='accent']) ::slotted(mlv-icon-button),
 :host([status='accent']) mlv-icon-button {
-  --color: var(--mlv-sys-text-white-color) !important;
-  --_icon-color: var(--mlv-sys-text-white-color) !important;
+  --color: var(--nve-sys-text-white-color) !important;
+  --_icon-color: var(--nve-sys-text-white-color) !important;
 }
 
 :host([status='accent']) ::slotted([mlv-text]) {
-  color: var(--mlv-sys-text-white-color) !important;
+  color: var(--nve-sys-text-white-color) !important;
 }
 
 [internal-host] {
@@ -65,9 +65,9 @@
 }
 
 :host([orientation='vertical']) {
-  --padding: var(--mlv-ref-size-200) 0;
-  --width: var(--mlv-ref-size-1000);
-  --gap: var(--mlv-ref-space-xs);
+  --padding: var(--nve-ref-size-200) 0;
+  --width: var(--nve-ref-size-1000);
+  --gap: var(--nve-ref-space-xs);
 }
 
 :host([orientation='vertical']) [internal-host],
@@ -117,8 +117,8 @@ slot:not([name]) {
   text-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
-  margin-inline-end: var(--mlv-ref-space-xs);
-  scrollbar-color: var(--mlv-ref-border-color-muted) var(--background);
+  margin-inline-end: var(--nve-ref-space-xs);
+  scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
   scrollbar-width: thin;
 }
 

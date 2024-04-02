@@ -6,8 +6,8 @@ export function animationFade(host: HTMLElement, options?: Options): DirectiveRe
     skipInitial: true,
     properties: ['opacity'],
     keyframeOptions: {
-      duration: '--mlv-ref-animation-duration-200',
-      easing: '--mlv-ref-animation-easing-100'
+      duration: '--nve-ref-animation-duration-200',
+      easing: '--nve-ref-animation-easing-100'
     },
     ...options
   };
@@ -30,8 +30,8 @@ export function animationSlide(host: HTMLElement, options?: Options): DirectiveR
   const defaultOptions = {
     properties: ['left', 'right'],
     keyframeOptions: {
-      duration: '--mlv-ref-animation-duration-200',
-      easing: '--mlv-ref-animation-easing-100'
+      duration: '--nve-ref-animation-duration-200',
+      easing: '--nve-ref-animation-easing-100'
     },
     ...options
   };

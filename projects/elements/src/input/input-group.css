@@ -1,8 +1,8 @@
 :host {
-  --background: var(--mlv-sys-support-color);
-  --color: var(--mlv-sys-interaction-field-color);
-  --border-radius: var(--mlv-ref-border-radius-sm);
-  --gap: calc(var(--mlv-ref-space-xxxs) / 2);
+  --background: var(--nve-sys-support-color);
+  --color: var(--nve-sys-interaction-field-color);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --gap: calc(var(--nve-ref-space-xxxs) / 2);
   width: fit-content;
   contain: none;
 }
@@ -26,13 +26,13 @@ slot[name='label'] {
 }
 
 ::slotted(mlv-icon-button) {
-  --background: var(--mlv-sys-interaction-field-background);
-  --color: var(--mlv-sys-support-emphasis-color);
+  --background: var(--nve-sys-interaction-field-background);
+  --color: var(--nve-sys-support-emphasis-color);
   --border-radius: 0;
 }
 
 ::slotted(mlv-select) {
-  --padding: 0 var(--mlv-ref-size-200);
+  --padding: 0 var(--nve-ref-size-200);
   width: fit-content;
 }
 
@@ -41,9 +41,9 @@ slot[name='label'] {
 }
 
 ::slotted([first-control]) {
-  --border-radius: var(--mlv-ref-border-radius-sm) 0 0 var(--mlv-ref-border-radius-sm) !important;
+  --border-radius: var(--nve-ref-border-radius-sm) 0 0 var(--nve-ref-border-radius-sm) !important;
 }
 
 ::slotted([last-control]) {
-  --border-radius: 0 var(--mlv-ref-border-radius-sm) var(--mlv-ref-border-radius-sm) 0 !important;
+  --border-radius: 0 var(--nve-ref-border-radius-sm) var(--nve-ref-border-radius-sm) 0 !important;
 }

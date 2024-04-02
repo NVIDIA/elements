@@ -1,6 +1,6 @@
 :host {
-  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color);
-  --padding: var(--mlv-ref-size-400);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
+  --padding: var(--nve-ref-size-400);
   display: block;
   width: calc(100% + calc(var(--padding) * 2));
   margin: 0 calc(var(--padding) * -1) var(--padding) calc(var(--padding) * -1);

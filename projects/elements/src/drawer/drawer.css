@@ -1,15 +1,15 @@
 :host {
-  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-300);
-  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-300);
-  --mlv-sys-layer-popover-arrow-padding: 0;
-  --mlv-sys-layer-popover-arrow-offset: 0;
-  --mlv-sys-layer-popover-offset: 0;
-  --border: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
-  --background: var(--mlv-sys-layer-overlay-background);
-  --color: var(--mlv-sys-layer-overlay-color);
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-layer-popover-arrow-padding: 0;
+  --nve-sys-layer-popover-arrow-offset: 0;
+  --nve-sys-layer-popover-offset: 0;
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --background: var(--nve-sys-layer-overlay-background);
+  --color: var(--nve-sys-layer-overlay-color);
   --padding: 0;
-  --box-shadow: var(--mlv-ref-shadow-500);
-  --gap: var(--mlv-ref-space-sm);
+  --box-shadow: var(--nve-ref-shadow-500);
+  --gap: var(--nve-ref-space-sm);
   --top: 0px;
   --min-height: calc(100% - var(--top));
   --max-width: 400px;
@@ -41,24 +41,24 @@ dialog {
   max-height: 100%;
 }
 
-:host([position="left"]) dialog {
+:host([position='left']) dialog {
   right: initial !important;
   left: 0 !important;
   border-left: 0;
 }
 
-:host([position="left"][hidden]) dialog {
+:host([position='left'][hidden]) dialog {
   right: initial !important;
   left: -400px !important;
 }
 
-:host([position="right"]) dialog {
+:host([position='right']) dialog {
   left: initial !important;
   right: 0 !important;
   border-right: 0;
 }
 
-:host([position="right"][hidden]) dialog {
+:host([position='right'][hidden]) dialog {
   left: initial !important;
   right: -400px !important;
 }
@@ -69,15 +69,15 @@ dialog {
 }
 
 :host([inline]) {
-  --mlv-sys-interaction-background: var(--mlv-sys-interaction-background-200);
-  --mlv-sys-interaction-field-background: var(--mlv-sys-interaction-background-200);
-  --background: var(--mlv-sys-layer-container-background);
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);
+  --background: var(--nve-sys-layer-container-background);
   --box-shadow: none;
   --border: 0;
 }
 
 :host([inline])::after {
-  transition: width var(--mlv-ref-animation-duration-200) var(--mlv-ref-animation-easing-100);
+  transition: width var(--nve-ref-animation-duration-200) var(--nve-ref-animation-easing-100);
   height: 1px;
   width: 0;
   content: '';
@@ -89,7 +89,7 @@ dialog {
 }
 
 dialog::backdrop {
-  background: hsla(0, 0%, 0%, 0.070); /* --mlv-sys-layer-backdrop-background (not available on top layer */
+  background: hsla(0, 0%, 0%, 0.07); /* --nve-sys-layer-backdrop-background (not available on top layer */
 }
 
 :host([inline]) dialog::backdrop {
@@ -102,7 +102,7 @@ dialog::backdrop {
 }
 
 .content {
-  padding: var(--padding);  
+  padding: var(--padding);
   display: flex;
   flex-direction: column;
   align-items: start;

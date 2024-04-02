@@ -155,30 +155,30 @@
   /* Fixed Width Layout Gap Spacing */
   @each $gap-size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
     &[mlv-layout~='gap:$(gap-size)'] {
-      gap: var(--mlv-ref-space-$(gap-size));
+      gap: var(--nve-ref-space-$(gap-size));
     }
   }
 
   /* Fixed Width Container Padding */
   @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
     &[mlv-layout~='pad:$(size)'] {
-      padding: var(--mlv-ref-space-$(size));
+      padding: var(--nve-ref-space-$(size));
     }
 
     @each $side in top, left, right, bottom {
       &[mlv-layout~='pad-$(side):$(size)'] {
-        padding-$(side): var(--mlv-ref-space-$(size));
+        padding-$(side): var(--nve-ref-space-$(size));
       }
     }
 
     &[mlv-layout~='pad-x:$(size)'] {
-      padding-left: var(--mlv-ref-space-$(size));
-      padding-right: var(--mlv-ref-space-$(size));
+      padding-left: var(--nve-ref-space-$(size));
+      padding-right: var(--nve-ref-space-$(size));
     }
 
     &[mlv-layout~='pad-y:$(size)'] {
-      padding-top: var(--mlv-ref-space-$(size));
-      padding-bottom: var(--mlv-ref-space-$(size));
+      padding-top: var(--nve-ref-space-$(size));
+      padding-bottom: var(--nve-ref-space-$(size));
     }
   }
 

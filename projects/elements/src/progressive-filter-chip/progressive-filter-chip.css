@@ -1,10 +1,10 @@
 :host {
-  --gap: var(--mlv-ref-space-xxxs);
-  --border-radius: var(--mlv-ref-border-radius-sm);
+  --gap: var(--nve-ref-space-xxxs);
+  --border-radius: var(--nve-ref-border-radius-sm);
   --background: color-mix(
     in oklab,
-    var(--mlv-sys-interaction-field-background) 95%,
-    var(--mlv-sys-interaction-state-mix)
+    var(--nve-sys-interaction-field-background) 95%,
+    var(--nve-sys-interaction-state-mix)
   );
   width: fit-content;
   min-width: fit-content;
@@ -21,19 +21,19 @@
 
 [nve-control],
 ::slotted(mlv-button) {
-  --font-weight: var(--mlv-ref-font-weight-medium);
+  --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: 0;
   --width: fit-content;
 }
 
 ::slotted([mlv-control]),
 ::slotted([nve-control]) {
-  --font-weight: var(--mlv-ref-font-weight-medium);
+  --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: 0;
 }
 
 [internal-host] > :nth-child(2) {
-  --font-weight: var(--mlv-ref-font-weight-regular);
+  --font-weight: var(--nve-ref-font-weight-regular);
 }
 
 mlv-select:not(:state(multiple))::part(caret) {
@@ -42,5 +42,5 @@ mlv-select:not(:state(multiple))::part(caret) {
 
 mlv-icon-button {
   --border-radius: 0;
-  --padding: var(--mlv-ref-size-300);
+  --padding: var(--nve-ref-size-300);
 }

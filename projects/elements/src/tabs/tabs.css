@@ -1,5 +1,5 @@
 :host {
-  --gap: var(--mlv-ref-space-xs);
+  --gap: var(--nve-ref-space-xs);
 }
 
 [internal-host] {
@@ -9,7 +9,7 @@
 }
 
 :host([vertical]) {
-  --gap: var(--mlv-ref-space-xxxs);
+  --gap: var(--nve-ref-space-xxxs);
 }
 
 :host([vertical]) [internal-host] {
@@ -17,7 +17,7 @@
 }
 
 :host([vertical]) ::slotted(mlv-tabs-item) {
-  --border-width: var(--mlv-ref-border-width-lg);
+  --border-width: var(--nve-ref-border-width-lg);
   --border-height: 24px;
   --border-top: calc(50% - 12px);
   --border-inset: 0 8px 0 8px;
@@ -25,7 +25,7 @@
 }
 
 :host([vertical]) ::slotted(mlv-tabs-item:state(selected)) {
-  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
 :host([borderless]) ::slotted(mlv-tabs-item) {

@@ -1,8 +1,8 @@
 :host {
-  --color: var(--mlv-ref-border-color);
+  --color: var(--nve-ref-border-color);
   --border-radius: 0;
   --padding: 0;
-  --size: var(--mlv-ref-border-width-sm);
+  --size: var(--nve-ref-border-width-sm);
 }
 
 [internal-host] {
@@ -20,7 +20,7 @@
   width: var(--size);
 }
 
-:host([orientation="vertical"]) [internal-host] {
+:host([orientation='vertical']) [internal-host] {
   height: 100%;
   width: var(--size);
 }

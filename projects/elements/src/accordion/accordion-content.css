@@ -1,9 +1,9 @@
 :host {
-  --padding: var(--mlv-ref-size-300) var(--mlv-ref-size-400);
+  --padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
   padding: var(--padding);
   color: var(--color);
-  font-weight: var(--mlv-ref-font-weight-regular);
-  font-size: var(--mlv-ref-font-size-200);
+  font-weight: var(--nve-ref-font-weight-regular);
+  font-size: var(--nve-ref-font-size-200);
   flex-grow: 1;
   contain: none;
 }

@@ -1,23 +1,23 @@
 :host {
-  --status-color: var(--mlv-sys-status-color);
+  --status-color: var(--nve-sys-status-color);
 }
 
 :host([status='muted']) {
-  --status-color: var(--mlv-sys-text-muted-color);
+  --status-color: var(--nve-sys-text-muted-color);
 }
 
 :host([status='accent']) {
-  --status-color: var(--mlv-sys-support-accent-emphasis-color);
+  --status-color: var(--nve-sys-support-accent-emphasis-color);
 }
 
 :host([status='success']) {
-  --status-color: var(--mlv-sys-support-success-emphasis-color);
+  --status-color: var(--nve-sys-support-success-emphasis-color);
 }
 
 :host([status='warning']) {
-  --status-color: var(--mlv-sys-support-warning-emphasis-color);
+  --status-color: var(--nve-sys-support-warning-emphasis-color);
 }
 
 :host([status='danger']) {
-  --status-color: var(--mlv-sys-support-danger-emphasis-color);
+  --status-color: var(--nve-sys-support-danger-emphasis-color);
 }

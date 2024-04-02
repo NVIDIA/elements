@@ -1,6 +1,6 @@
 :host {
-  --mlv-sys-layer-popover-offset: var(--mlv-ref-space-xxl);
-  --box-shadow: var(--mlv-ref-shadow-200);
+  --nve-sys-layer-popover-offset: var(--nve-ref-space-xxl);
+  --box-shadow: var(--nve-ref-shadow-200);
   position: fixed;
   top: 0;
   left: 0;
@@ -10,5 +10,5 @@
 [internal-host] {
   display: flex;
   flex-direction: column-reverse;
-  gap: var(--mlv-ref-space-sm);
+  gap: var(--nve-ref-space-sm);
 }

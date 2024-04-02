@@ -1,14 +1,14 @@
 :host {
-  --mlv-sys-layer-popover-arrow-offset: var(--mlv-ref-size-100);
-  --padding: var(--mlv-ref-size-200) var(--mlv-ref-size-400);
-  --mlv-sys-layer-popover-offset: var(--mlv-ref-space-md);
-  --background: var(--mlv-sys-layer-popover-background);
-  --border-radius: var(--mlv-ref-border-radius-md);
-  --color: var(--mlv-sys-layer-popover-color);
-  --font-size: var(--mlv-ref-font-size-200);
-  --font-weight: var(--mlv-ref-font-weight-medium);
-  --box-shadow: var(--mlv-ref-shadow-100);
-  --gap: var(--mlv-ref-space-xs);
+  --nve-sys-layer-popover-arrow-offset: var(--nve-ref-size-100);
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-400);
+  --nve-sys-layer-popover-offset: var(--nve-ref-space-md);
+  --background: var(--nve-sys-layer-popover-background);
+  --border-radius: var(--nve-ref-border-radius-md);
+  --color: var(--nve-sys-layer-popover-color);
+  --font-size: var(--nve-ref-font-size-200);
+  --font-weight: var(--nve-ref-font-weight-medium);
+  --box-shadow: var(--nve-ref-shadow-100);
+  --gap: var(--nve-ref-space-xs);
   --_gap: var(--gap);
 }
 
@@ -27,26 +27,26 @@ dialog {
 }
 
 dialog:has(mlv-icon-button) {
-  padding-right: var(--mlv-ref-size-800);
+  padding-right: var(--nve-ref-size-800);
 }
 
 :host([status='accent']) {
-  --background: var(--mlv-sys-support-accent-color);
+  --background: var(--nve-sys-support-accent-color);
 }
 
 :host([status='success']) {
-  --background: var(--mlv-sys-support-success-color);
-  --color: var(--mlv-sys-text-white-color);
+  --background: var(--nve-sys-support-success-color);
+  --color: var(--nve-sys-text-white-color);
 }
 
 :host([status='warning']) {
-  --background: var(--mlv-sys-support-warning-color);
-  --color: var(--mlv-sys-text-black-color);
+  --background: var(--nve-sys-support-warning-color);
+  --color: var(--nve-sys-text-black-color);
 }
 
 :host([status='danger']) {
-  --background: var(--mlv-sys-support-danger-color);
-  --color: var(--mlv-sys-text-white-color);
+  --background: var(--nve-sys-support-danger-color);
+  --color: var(--nve-sys-text-white-color);
 }
 
 mlv-icon {

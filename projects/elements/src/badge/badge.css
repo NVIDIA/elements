@@ -1,15 +1,15 @@
 :host {
   --background: var(--state-color-background);
   --color: var(--state-color);
-  --gap: var(--mlv-ref-space-xs);
-  --font-size: var(--mlv-ref-font-size-100);
+  --gap: var(--nve-ref-space-xs);
+  --font-size: var(--nve-ref-font-size-100);
   --icon-color: var(--color);
-  --padding: 0 var(--mlv-ref-size-200);
-  --border-radius: var(--mlv-ref-border-radius-sm);
-  --font-weight: var(--mlv-ref-font-weight-semibold);
+  --padding: 0 var(--nve-ref-size-200);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --font-weight: var(--nve-ref-font-weight-semibold);
   --text-transform: capitalize;
   --width: initial;
-  --height: var(--mlv-ref-size-600);
+  --height: var(--nve-ref-size-600);
   display: inline-flex;
 }
 
@@ -56,8 +56,8 @@ slot:not([name]) {
 mlv-icon,
 ::slotted(mlv-icon) {
   --color: var(--icon-color);
-  --width: var(--mlv-ref-size-300);
-  --height: var(--mlv-ref-size-300);
+  --width: var(--nve-ref-size-300);
+  --height: var(--nve-ref-size-300);
 }
 
 :host([status]) {
@@ -66,21 +66,21 @@ mlv-icon,
 
 /* trend status */
 :host([status='trend-down']) {
-  --state-color-base: var(--mlv-sys-visualization-trend-negative-emphasis-color);
+  --state-color-base: var(--nve-sys-visualization-trend-negative-emphasis-color);
 }
 
 :host([status='trend-up']) {
-  --state-color-base: var(--mlv-sys-visualization-trend-positive-emphasis-color);
+  --state-color-base: var(--nve-sys-visualization-trend-positive-emphasis-color);
 }
 
 :host([status='trend-neutral']) {
-  --state-color-base: var(--mlv-sys-status-pending-color);
+  --state-color-base: var(--nve-sys-status-pending-color);
 }
 
 :host([container='flat']) {
-  --background: var(--mlv-sys-background-color);
-  --border-radius: var(--mlv-ref-border-radius-sm);
-  --gap: var(--mlv-ref-space-xs);
+  --background: var(--nve-sys-background-color);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --gap: var(--nve-ref-space-xs);
   --padding: 0;
   --text-transform: capitalize;
   --width: initial;

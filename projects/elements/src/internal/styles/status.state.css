@@ -1,47 +1,47 @@
 :host {
-  --status-color: var(--mlv-sys-status-color);
+  --status-color: var(--nve-sys-status-color);
 }
 
 :host([status='scheduled']) {
-  --status-color: var(--mlv-sys-status-scheduled-color);
+  --status-color: var(--nve-sys-status-scheduled-color);
 }
 
 :host([status='queued']) {
-  --status-color: var(--mlv-sys-status-queued-color);
+  --status-color: var(--nve-sys-status-queued-color);
 }
 
 :host([status='pending']) {
-  --status-color: var(--mlv-sys-status-pending-color);
+  --status-color: var(--nve-sys-status-pending-color);
 }
 
 :host([status='starting']) {
-  --status-color: var(--mlv-sys-status-starting-color);
+  --status-color: var(--nve-sys-status-starting-color);
 }
 
 :host([status='running']) {
-  --status-color: var(--mlv-sys-status-running-color);
+  --status-color: var(--nve-sys-status-running-color);
 }
 
 :host([status='restarting']) {
-  --status-color: var(--mlv-sys-status-restarting-color);
+  --status-color: var(--nve-sys-status-restarting-color);
 }
 
 :host([status='stopping']) {
-  --status-color: var(--mlv-sys-status-stopping-color);
+  --status-color: var(--nve-sys-status-stopping-color);
 }
 
 :host([status='finished']) {
-  --status-color: var(--mlv-sys-status-finished-color);
+  --status-color: var(--nve-sys-status-finished-color);
 }
 
 :host([status='failed']) {
-  --status-color: var(--mlv-sys-status-failed-color);
+  --status-color: var(--nve-sys-status-failed-color);
 }
 
 :host([status='unknown']) {
-  --status-color: var(--mlv-sys-status-unknown-color);
+  --status-color: var(--nve-sys-status-unknown-color);
 }
 
 :host([status='ignored']) {
-  --status-color: var(--mlv-sys-status-ignored-color);
+  --status-color: var(--nve-sys-status-ignored-color);
 }

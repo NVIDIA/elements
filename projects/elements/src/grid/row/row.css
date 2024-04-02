@@ -1,10 +1,10 @@
 :host {
-  --border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   contain: layout;
   display: block;
   min-width: max-content;
   content-visibility: auto;
-  contain-intrinsic-size: auto var(--row-height, var(--mlv-ref-size-900));
+  contain-intrinsic-size: auto var(--row-height, var(--nve-ref-size-900));
 }
 
 [internal-host] {
@@ -16,10 +16,10 @@
 }
 
 :host(:hover) ::slotted(mlv-grid-cell) {
-  --interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
+  --interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
 :host(:state(selected)) ::slotted(mlv-grid-cell) {
-  --background: var(--mlv-sys-interaction-highlighted-muted-background);
-  --interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
+  --background: var(--nve-sys-interaction-highlighted-muted-background);
+  --interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
 }

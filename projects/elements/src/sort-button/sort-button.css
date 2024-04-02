@@ -1,7 +1,7 @@
 :host {
-  --width: var(--mlv-ref-size-800);
-  --height: var(--mlv-ref-size-800);
-  --border-radius: var(--mlv-ref-border-radius-full);
+  --width: var(--nve-ref-size-800);
+  --height: var(--nve-ref-size-800);
+  --border-radius: var(--nve-ref-border-radius-full);
 }
 
 [internal-host] {
@@ -22,11 +22,11 @@
 }
 
 mlv-icon {
-  --color: var(--mlv-sys-text-placeholder-color);
+  --color: var(--nve-sys-text-placeholder-color);
   cursor: pointer;
 }
 
 :host([sort='ascending']) mlv-icon,
 :host([sort='descending']) mlv-icon {
-  --color: var(--mlv-sys-text-emphasis-color);
+  --color: var(--nve-sys-text-emphasis-color);
 }

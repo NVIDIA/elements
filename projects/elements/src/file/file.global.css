@@ -14,7 +14,7 @@ mlv-file > input::file-selector-button {
   font-size: var(--font-size);
   cursor: var(--cursor);
   gap: var(--gap);
-  margin-right: var(--mlv-ref-space-sm);
+  margin-right: var(--nve-ref-space-sm);
   display: inline-flex;
   place-items: center;
   appearance: none;
@@ -22,17 +22,17 @@ mlv-file > input::file-selector-button {
 }
 
 mlv-file > input::file-selector-button:hover {
-  --color: var(--mlv-sys-interaction-hover-color);
-  --background: var(--mlv-sys-interaction-background);
+  --color: var(--nve-sys-interaction-hover-color);
+  --background: var(--nve-sys-interaction-background);
 }
 
 mlv-file > input::file-selector-button:active {
-  --color: var(--mlv-sys-interaction-active-color);
-  --background: var(--mlv-sys-interaction-background);
+  --color: var(--nve-sys-interaction-active-color);
+  --background: var(--nve-sys-interaction-background);
 }
 
 mlv-file > input::file-selector-button:disabled {
-  --color: var(--mlv-sys-interaction-disabled-color);
-  --background: var(--mlv-sys-interaction-disabled-background);
+  --color: var(--nve-sys-interaction-disabled-color);
+  --background: var(--nve-sys-interaction-disabled-background);
   --cursor: not-allowed;
 }

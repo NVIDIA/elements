@@ -1,11 +1,11 @@
 :host {
-  --padding: 0 var(--mlv-ref-size-800) 0 var(--mlv-ref-size-200);
-  --font-size: var(--mlv-ref-font-size-100);
-  --height: var(--mlv-ref-size-800);
-  --background: var(--mlv-sys-interaction-field-background);
-  --color: var(--mlv-sys-interaction-field-color);
-  --border-radius: var(--mlv-ref-border-radius-sm);
-  --border: var(--mlv-ref-border-width-md) solid transparent;
+  --padding: 0 var(--nve-ref-size-800) 0 var(--nve-ref-size-200);
+  --font-size: var(--nve-ref-font-size-100);
+  --height: var(--nve-ref-size-800);
+  --background: var(--nve-sys-interaction-field-background);
+  --color: var(--nve-sys-interaction-field-color);
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --border: var(--nve-ref-border-width-md) solid transparent;
   --border-bottom: var(--border);
   --cursor: pointer;
   --font-weight: normal;
@@ -42,7 +42,7 @@
 }
 
 [name='caret'] {
-  right: var(--mlv-ref-size-300);
+  right: var(--nve-ref-size-300);
   align-self: center;
   pointer-events: none;
   position: absolute;
@@ -68,15 +68,15 @@
 }
 
 :host(:state(selected)) {
-  --font-weight: var(--mlv-ref-font-weight-semibold);
+  --font-weight: var(--nve-ref-font-weight-semibold);
 }
 
 :host([fit-content]:state(multiple)) [internal-host]:has(mlv-tag) ::slotted(select) {
-  width: var(--mlv-ref-size-1000) !important;
+  width: var(--nve-ref-size-1000) !important;
 }
 
 :host(:state(multiple)) {
-  --padding: 0 var(--mlv-ref-size-300) 0 var(--mlv-ref-size-100);
+  --padding: 0 var(--nve-ref-size-300) 0 var(--nve-ref-size-100);
 }
 
 :host(:state(multiple)) [input] {
@@ -86,11 +86,11 @@
 :host(:state(multiple)) .tags {
   width: fit-content;
   display: flex;
-  gap: var(--mlv-ref-space-xxs);
+  gap: var(--nve-ref-space-xxs);
 }
 
 :host(:state(multiple)) .tags-label {
-  padding: 0 var(--mlv-ref-size-200);
+  padding: 0 var(--nve-ref-size-200);
   font-size: var(--font-size);
   cursor: var(--cursor);
   font-weight: var(--font-weight);
@@ -117,7 +117,7 @@
 }
 
 :host(:state(size)) {
-  --height: calc(var(--mlv-ref-size-800) * var(--size));
+  --height: calc(var(--nve-ref-size-800) * var(--size));
 }
 
 :host(:state(size)) [input] {
@@ -130,7 +130,7 @@
 }
 
 :host([layout*='horizontal'][size]) ::slotted(label) {
-  padding-top: var(--mlv-ref-size-100) !important;
+  padding-top: var(--nve-ref-size-100) !important;
   align-self: start !important;
 }
 
@@ -141,21 +141,21 @@
 :host([status='error']),
 :host(:state(invalid)),
 :host(:state(error)) {
-  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-danger-emphasis-color);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
 }
 
 :host([status='success']),
 :host(:state(success)) {
-  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-success-emphasis-color);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-success-emphasis-color);
 }
 
 :host(:state(disabled)) {
-  --border: var(--mlv-ref-border-width-md) solid transparent;
+  --border: var(--nve-ref-border-width-md) solid transparent;
 }
 
 mlv-tag {
   --background: color-mix(in oklab, var(--color) 15%, var(--_input-background));
-  --padding: var(--mlv-ref-size-100) var(--mlv-ref-size-200);
+  --padding: var(--nve-ref-size-100) var(--nve-ref-size-200);
   --cursor: pointer !important;
 }
 
@@ -165,7 +165,7 @@ mlv-tag {
 }
 
 mlv-dropdown {
-  --padding: var(--mlv-ref-size-200);
+  --padding: var(--nve-ref-size-200);
 }
 
 mlv-menu {
@@ -194,7 +194,7 @@ slot[name*='option-'] {
 :host([container='flat']) {
   --border-radius: 0;
   --box-shadow: none;
-  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
 }
 
 :host([container='flat']) [input] {
@@ -202,11 +202,11 @@ slot[name*='option-'] {
 }
 
 :host([container='flat']) mlv-tag {
-  --background: var(--mlv-sys-interaction-field-background);
+  --background: var(--nve-sys-interaction-field-background);
 }
 
 :host([container='flat']:focus-within) {
-  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-emphasis);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
 }
 
 :host([container='flat']:focus-within) [input] {

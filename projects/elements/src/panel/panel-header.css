@@ -1,6 +1,6 @@
 :host {
-  --padding: var(--mlv-ref-size-300) 0 var(--mlv-ref-size-300) var(--mlv-ref-size-400);
-  --border-bottom: var(--mlv-ref-border-width-md) solid var(--mlv-ref-border-color-muted);
+  --padding: var(--nve-ref-size-300) 0 var(--nve-ref-size-300) var(--nve-ref-size-400);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
 }
 
 [internal-host] {
@@ -13,20 +13,20 @@
   align-items: center;
 }
 
-::slotted([slot="title"]) {
+::slotted([slot='title']) {
   margin: 0;
-  font-size: var(--mlv-ref-font-size-200);
-  font-weight: var(--mlv-ref-font-weight-semibold);
+  font-size: var(--nve-ref-font-size-200);
+  font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-::slotted([slot="subtitle"]) {
+::slotted([slot='subtitle']) {
   margin: 0;
-  font-size: var(--mlv-ref-font-size-100);
-  font-weight: var(--mlv-ref-font-weight-normal);
-  color: var(--mlv-sys-text-muted-color);
+  font-size: var(--nve-ref-font-size-100);
+  font-weight: var(--nve-ref-font-weight-normal);
+  color: var(--nve-sys-text-muted-color);
 }
 
-::slotted([slot="action-icon"]) {
+::slotted([slot='action-icon']) {
   position: absolute;
   top: 14px;
   right: 48px;

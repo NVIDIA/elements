@@ -1,12 +1,12 @@
 :host {
-  --padding: var(--mlv-ref-size-200);
-  --font-size: var(--mlv-ref-font-size-200);
+  --padding: var(--nve-ref-size-200);
+  --font-size: var(--nve-ref-font-size-200);
   --height: 100px;
   --width: 100%;
   --min-height: 100px;
-  --background: var(--mlv-sys-interaction-field-background);
-  --color: var(--mlv-sys-interaction-field-color);
-  --border-radius: var(--mlv-ref-border-radius-sm);
+  --background: var(--nve-sys-interaction-field-background);
+  --color: var(--nve-sys-interaction-field-color);
+  --border-radius: var(--nve-ref-border-radius-sm);
   --cursor: text;
   --border: 0;
   display: block;
@@ -35,7 +35,7 @@
 }
 
 :host([layout*='horizontal']) ::slotted(label) {
-  padding-top: var(--mlv-ref-size-100) !important;
+  padding-top: var(--nve-ref-size-100) !important;
   align-self: start !important;
 }
 
@@ -46,14 +46,14 @@
 :host([status='error']),
 :host(:state(invalid)),
 :host(:state(error)) {
-  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-danger-emphasis-color);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
 }
 
 :host([status='success']),
 :host(:state(success)) {
-  --border: var(--mlv-ref-border-width-md) solid var(--mlv-sys-support-success-emphasis-color);
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-success-emphasis-color);
 }
 
 :host(:state(disabled)) {
-  --border: var(--mlv-ref-border-width-md) solid transparent;
+  --border: var(--nve-ref-border-width-md) solid transparent;
 }

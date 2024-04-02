@@ -3,46 +3,46 @@
 }
 
 :host([status='accent']) {
-  --accent-color: var(--mlv-sys-support-accent-color);
+  --accent-color: var(--nve-sys-support-accent-color);
 }
 
 :host([status='success']) {
-  --accent-color: var(--mlv-sys-support-success-color);
+  --accent-color: var(--nve-sys-support-success-color);
 }
 
 :host([status='warning']) {
-  --accent-color: var(--mlv-sys-support-warning-color);
+  --accent-color: var(--nve-sys-support-warning-color);
 }
 
 :host([status='danger']) {
-  --accent-color: var(--mlv-sys-support-danger-color);
+  --accent-color: var(--nve-sys-support-danger-color);
 }
 
 progress {
-  -webkit-appearance:none;
-  -moz-appearance:none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
-  background-color: var(--mlv-sys-interaction-field-background);
-  border-radius: var(--mlv-ref-border-radius-full);
-  height: var(--mlv-ref-size-200);
+  background-color: var(--nve-sys-interaction-field-background);
+  border-radius: var(--nve-ref-border-radius-full);
+  height: var(--nve-ref-size-200);
   width: 100%;
 }
 
 progress[value]::-webkit-progress-bar {
-  background-color: var(--mlv-sys-interaction-field-background);
-  border-radius: var(--mlv-ref-border-radius-full);
+  background-color: var(--nve-sys-interaction-field-background);
+  border-radius: var(--nve-ref-border-radius-full);
 }
 
 progress[value]::-webkit-progress-value {
-  border-radius: var(--mlv-ref-border-radius-full);
+  border-radius: var(--nve-ref-border-radius-full);
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   background-color: var(--accent-color);
 }
 
 progress[value].full::-webkit-progress-value {
-  border-top-right-radius: var(--mlv-ref-border-radius-full);
-  border-bottom-right-radius: var(--mlv-ref-border-radius-full);
+  border-top-right-radius: var(--nve-ref-border-radius-full);
+  border-bottom-right-radius: var(--nve-ref-border-radius-full);
 }
 
 progress[value].minWidth::-webkit-progress-value {
@@ -50,7 +50,7 @@ progress[value].minWidth::-webkit-progress-value {
 }
 
 progress[value]::-moz-progress-bar {
-  border-radius: var(--mlv-ref-border-radius-full);
+  border-radius: var(--nve-ref-border-radius-full);
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   background-color: var(--accent-color);

@@ -1,5 +1,5 @@
 :host {
-  --padding: var(--mlv-ref-size-400) var(--mlv-ref-size-500) var(--mlv-ref-size-500);
+  --padding: var(--nve-ref-size-400) var(--nve-ref-size-500) var(--nve-ref-size-500);
 }
 
 [internal-host] {
@@ -8,13 +8,13 @@
 }
 
 :host([container='flat']) [internal-host] {
-  gap: var(--mlv-ref-size-50);
+  gap: var(--nve-ref-size-50);
 }
 
 :host([container='inset']) [internal-host] {
-  gap: var(--mlv-ref-space-md);
+  gap: var(--nve-ref-space-md);
 }
 
 :host([container='full']) ::slotted(mlv-accordion:not(:last-child)) {
-  border-bottom: var(--mlv-ref-border-width-sm) solid var(--mlv-ref-border-color-muted);
+  border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
 }
