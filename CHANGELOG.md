@@ -1,3 +1,10 @@
+## [0.28.1](https://github.com/NVIDIA/elements/compare/v0.28.0...v0.28.1) (2024-04-02)
+
+
+### Bug Fixes
+
+* **elements:** update internal imports ([ae13c39](https://github.com/NVIDIA/elements/commit/ae13c39b116837961d518ed86c208b7550b2ad1b))
+
 ## [0.28.0](https://github.com/NVIDIA/elements/compare/v0.27.7...v0.28.0) (2024-04-01)
 
 
