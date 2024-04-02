@@ -11,13 +11,13 @@
   justify-content: space-between;
   align-items: center;
 
-  ::slotted([slot="title"]) {
+  ::slotted([slot='title']) {
     margin: 0;
     font-size: var(--nve-ref-font-size-200);
     font-weight: var(--nve-ref-font-weight-medium);
   }
 
-  ::slotted([slot="subtitle"]) {
+  ::slotted([slot='subtitle']) {
     margin: 0;
     font-size: var(--nve-ref-font-size-100);
     font-weight: var(--nve-ref-font-weight-regular);

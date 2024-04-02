@@ -6,7 +6,11 @@
 }
 
 [internal-host] {
-  background: color-mix(in oklab, var(--background, var(--nve-sys-layer-canvas-background)) 100%, var(--nve-sys-interaction-state-mix) var(--interaction-state-ratio, 0.01%));
+  background: color-mix(
+    in oklab,
+    var(--background, var(--nve-sys-layer-canvas-background)) 100%,
+    var(--nve-sys-interaction-state-mix) var(--interaction-state-ratio, 0.01%)
+  );
   color: var(--color);
   padding: var(--padding);
   font-size: var(--font-size);

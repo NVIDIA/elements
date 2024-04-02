@@ -7,7 +7,7 @@ nve-range input[type='range']::-webkit-slider-thumb {
   appearance: var(--_appearance);
 }
 
-nve-range input[type=range]::-webkit-slider-runnable-track {
+nve-range input[type='range']::-webkit-slider-runnable-track {
   background: var(--nve-sys-interaction-background);
   height: var(--track-height);
   border-radius: var(--nve-ref-border-radius-lg);
