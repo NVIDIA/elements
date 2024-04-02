@@ -98,7 +98,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     });
 
     this.#popoverUpdateDisconnect = popoverRenderUpdate(this.#config, async () => await this.#calculatePosition());
-    this.#hiddenUpdateObserver = getAttributeChanges(this.host, 'hidden', async () => await this.#update());
+    this.#hiddenUpdateObserver = getAttributeChanges(this.host, 'hidden', async () => await this.#render());
     this.#setupTriggerInteractions();
     this.host.setAttribute('nve-popover', '');
   }
@@ -115,13 +115,15 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     this.#hiddenUpdateObserver?.disconnect();
   }
 
-  async #update() {
+  async #render() {
+    this.host.style.pointerEvents = 'none';
     this.host.requestUpdate();
     this.#updateVisibility();
     this.#toggleLightDismiss();
     this.#closeTimeout();
     this.#updateAnchorState();
     await this.#calculatePosition();
+    this.host.style.pointerEvents = 'initial';
   }
 
   #lightDismiss = (async (e: PointerEvent) => {
@@ -147,9 +149,8 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
   #setupTriggerInteractions() {
     if (this.#prevTrigger !== this.#trigger) {
       this.#removeTriggerInteractions();
+      this.#addTriggerInteractions();
     }
-
-    this.#addTriggerInteractions();
   }
 
   #removeTriggerInteractions() {
