@@ -5,12 +5,11 @@
   --ring-width: 2px;
   --width: var(--nve-ref-size-800);
   --height: var(--nve-ref-size-800);
-  
+
   width: var(--width);
   height: var(--height);
   container-type: size;
 }
-
 
 :host([size='xxs']) {
   --ring-width: 3px;
@@ -123,7 +122,8 @@ circle.ring {
   display: none;
 }
 
-::slotted(nve-icon), nve-icon {
+::slotted(nve-icon),
+nve-icon {
   --width: 50cqw;
   --height: 50cqh;
   --color: var(--ring-color);
@@ -133,8 +133,6 @@ circle.ring {
   --width: 100cqw;
   --height: 100cqh;
 }
-
-
 
 @keyframes spin-infinite {
   0% {

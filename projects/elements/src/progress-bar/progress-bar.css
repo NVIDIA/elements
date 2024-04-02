@@ -19,8 +19,8 @@
 }
 
 progress {
-  -webkit-appearance:none;
-  -moz-appearance:none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   background-color: var(--nve-sys-interaction-field-background);
   border-radius: var(--nve-ref-border-radius-full);
