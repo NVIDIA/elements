@@ -1,3 +1,10 @@
+## [0.28.3](https://github.com/NVIDIA/elements/compare/v0.28.2...v0.28.3) (2024-04-02)
+
+
+### Bug Fixes
+
+* **elements:** popover calculation state ([b9a5eb0](https://github.com/NVIDIA/elements/commit/b9a5eb05b94bc48c551d45a392ede5ac55a10c8c))
+
 ## [0.28.2](https://github.com/NVIDIA/elements/compare/v0.28.1...v0.28.2) (2024-04-02)
 
 
