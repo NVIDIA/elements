@@ -6,7 +6,7 @@
   --gap: var(--nve-ref-space-xs);
   --font-size: var(--nve-ref-font-size-100);
   --padding: 0 var(--nve-ref-size-200);
-  --border-radius: var(--nve-ref-border-radius-lg);
+  --border-radius: var(--nve-ref-border-radius-xxl);
   --font-weight: var(--nve-ref-font-weight-regular);
   --cursor: pointer;
   --height: var(--nve-ref-size-600);
