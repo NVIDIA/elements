@@ -20,7 +20,7 @@
   width: var(--size);
 }
 
-:host([orientation="vertical"]) [internal-host] {
+:host([orientation='vertical']) [internal-host] {
   height: 100%;
   width: var(--size);
 }

@@ -14,7 +14,7 @@
 
 nve-json-node {
   padding: 0 0 0 var(--nve-ref-size-400);
-  border-left: var(--nve-ref-border-width-sm) solid var( --_muted-color);
+  border-left: var(--nve-ref-border-width-sm) solid var(--_muted-color);
 }
 
 nve-json-node:first-of-type {
@@ -23,7 +23,7 @@ nve-json-node:first-of-type {
 
 .array::before,
 .array::after {
-  color: var( --_muted-color);
+  color: var(--_muted-color);
   left: calc(-1 * var(--nve-ref-size-50));
   position: absolute;
   display: block;
@@ -36,7 +36,7 @@ nve-json-node:first-of-type {
 
 .object::before,
 .object::after {
-  color: var( --_muted-color);
+  color: var(--_muted-color);
   left: calc(-1 * var(--nve-ref-size-50));
   position: absolute;
   display: block;

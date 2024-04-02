@@ -13,20 +13,20 @@
   align-items: center;
 }
 
-::slotted([slot="title"]) {
+::slotted([slot='title']) {
   margin: 0;
   font-size: var(--nve-ref-font-size-200);
   font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-::slotted([slot="subtitle"]) {
+::slotted([slot='subtitle']) {
   margin: 0;
   font-size: var(--nve-ref-font-size-100);
   font-weight: var(--nve-ref-font-weight-normal);
   color: var(--nve-sys-text-muted-color);
 }
 
-::slotted([slot="action-icon"]) {
+::slotted([slot='action-icon']) {
   position: absolute;
   top: 14px;
   right: 48px;
