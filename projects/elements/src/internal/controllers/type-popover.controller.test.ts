@@ -134,6 +134,12 @@ describe('type-popover.controller', () => {
     expect(element.inert).toBe(false);
   });
 
+  it('should set pointer events to initial when completing computing position to avoid user interaction interference', async () => {
+    element.hidden = true;
+    await elementIsStable(element);
+    expect(element.style.pointerEvents).toBe('initial');
+  });
+
   it('should update :state(anchor-active) state on anchor', async () => {
     await elementIsStable(element);
     expect(button.matches(':state(anchor-active)')).toBe(false);
