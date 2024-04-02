@@ -47,7 +47,7 @@ nve-icon-button {
   border-top-left-radius: var(--nve-ref-border-radius-xs);
   position: absolute;
   border-left: var(--border);
-  border-top:  var(--border);
+  border-top: var(--border);
 }
 
 :host([position*='top']) {

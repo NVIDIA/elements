@@ -1,6 +1,6 @@
 :host {
   display: block;
-  border-left: var(--nve-ref-border-width-sm) solid var( --_muted-color);
+  border-left: var(--nve-ref-border-width-sm) solid var(--_muted-color);
   padding-left: var(--nve-ref-size-400);
   color: inherit;
 }
@@ -14,7 +14,8 @@
   align-items: center;
 }
 
-.array, .object {
+.array,
+.object {
   flex-direction: column;
   padding-bottom: var(--nve-ref-size-500);
 }
@@ -45,27 +46,27 @@ pre {
   content: '},';
   position: absolute;
   display: block;
-  color: var( --_muted-color);
+  color: var(--_muted-color);
 }
 
 .array nve-button::after,
 .object nve-button::after,
 .array nve-icon-button::after,
 .object nve-icon-button::after {
-  content: "{";
+  content: '{';
   position: absolute;
   display: block;
   top: var(--nve-ref-border-width-sm);
   right: calc(-1 * var(--nve-ref-size-250));
-  color: var( --_muted-color);
+  color: var(--_muted-color);
 }
 
 nve-icon-button {
   --padding: 0;
   --height: var(--nve-ref-size-500);
   --width: var(--nve-ref-size-400);
-  --color: var( --_muted-color);
-  margin-left: calc(-1 * var(--nve-ref-size-100))
+  --color: var(--_muted-color);
+  margin-left: calc(-1 * var(--nve-ref-size-100));
 }
 
 .array nve-button::after {
@@ -78,7 +79,7 @@ nve-icon-button {
 
 .object:not(.expanded) nve-button::after {
   content: '{...';
-    right: calc(-1 * var(--nve-ref-size-800));
+  right: calc(-1 * var(--nve-ref-size-800));
 }
 
 .array:not(.expanded) nve-button::after {
@@ -87,7 +88,7 @@ nve-icon-button {
 }
 
 .comma {
-  color: var( --_muted-color);
+  color: var(--_muted-color);
 }
 
 a {

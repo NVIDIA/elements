@@ -11,8 +11,8 @@
 
 nve-alert {
   --color: var(--_alert-color);
-  --font-weight:  var(--_alert-font-weight);
-  --font-size:  var(--_alert-font-size);
+  --font-weight: var(--_alert-font-weight);
+  --font-size: var(--_alert-font-size);
   --text-transform: var(--_alert-text-tranform);
   --icon-color: var(--color);
 }

@@ -6,7 +6,8 @@
   --item-active-font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-ol, li {
+ol,
+li {
   list-style-type: none;
   padding: 0;
   display: flex;
