@@ -1,3 +1,10 @@
+## [0.28.2](https://github.com/NVIDIA/elements/compare/v0.28.1...v0.28.2) (2024-04-02)
+
+
+### Bug Fixes
+
+* **themes:** ddb theme fixes ([ff7ad64](https://github.com/NVIDIA/elements/commit/ff7ad649e720f6978139de59245e19380ef39684))
+
 ## [0.28.1](https://github.com/NVIDIA/elements/compare/v0.28.0...v0.28.1) (2024-04-02)
 
 
