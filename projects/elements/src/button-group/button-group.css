@@ -46,7 +46,7 @@
 }
 
 :host([container='rounded']) {
-  --border-radius: var(--nve-ref-border-radius-lg);
+  --border-radius: var(--nve-ref-border-radius-full);
 }
 
 :host([container='rounded']:not(:state(split))) ::slotted(nve-button),
