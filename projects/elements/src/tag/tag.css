@@ -6,7 +6,7 @@
   --gap: var(--mlv-ref-space-xs);
   --font-size: var(--mlv-ref-font-size-100);
   --padding: 0 var(--mlv-ref-size-200);
-  --border-radius: var(--mlv-ref-border-radius-lg);
+  --border-radius: var(--mlv-ref-border-radius-xxl);
   --font-weight: var(--mlv-ref-font-weight-regular);
   --cursor: pointer;
   --height: var(--mlv-ref-size-600);

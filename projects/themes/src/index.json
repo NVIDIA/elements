@@ -1461,6 +1461,10 @@
           "value": "{ref.scale.border-radius} * 24px",
           "type": "borderRadius"
         },
+        "xxl": {
+          "value": "{ref.scale.border-radius} * 48px",
+          "type": "borderRadius"
+        },
         "full": {
           "value": "999px",
           "type": "borderRadius"
