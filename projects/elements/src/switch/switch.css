@@ -1,12 +1,12 @@
 :host {
   --cursor: pointer;
-  --border-radius: var(--nve-ref-border-radius-full);
+  --border-radius: var(--nve-ref-border-radius-xxl);
   --background: var(--nve-sys-interaction-field-background);
   --width: var(--nve-ref-size-1000);
   --height: var(--nve-ref-size-500);
   --anchor-width: calc(var(--nve-ref-size-300) + var(--nve-ref-size-50));
   --anchor-height: calc(var(--nve-ref-size-300) + var(--nve-ref-size-50));
-  --anchor-border-radius: var(--nve-ref-border-radius-full);
+  --anchor-border-radius: var(--nve-ref-border-radius-xxl);
   --anchor-background: var(--nve-sys-interaction-disabled-color);
   display: inline-block;
 }
