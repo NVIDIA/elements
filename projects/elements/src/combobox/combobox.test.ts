@@ -206,6 +206,10 @@ describe('nve-combobox', () => {
 
     expect(element.matches(':state(footer-content)')).toBe(true);
   });
+
+  it('should provide a prefix-icon slot', async () => {
+    expect(element.shadowRoot.querySelector('slot[name="prefix-icon"]')).toBeTruthy();
+  });
 });
 
 describe('nve-combobox single select', () => {
