@@ -1,3 +1,10 @@
+## [0.28.6](https://github.com/NVIDIA/elements/compare/v0.28.5...v0.28.6) (2024-04-03)
+
+
+### Bug Fixes
+
+* **themes:** base styles ([d3f548d](https://github.com/NVIDIA/elements/commit/d3f548d636818839b825ce75b178dee1026e53de))
+
 ## [0.28.5](https://github.com/NVIDIA/elements/compare/v0.28.4...v0.28.5) (2024-04-03)
 
 
