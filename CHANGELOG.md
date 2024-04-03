@@ -1,3 +1,10 @@
+## [0.28.4](https://github.com/NVIDIA/elements/compare/v0.28.3...v0.28.4) (2024-04-03)
+
+
+### Bug Fixes
+
+* **elements:** combobox icon slot ([b7eafaf](https://github.com/NVIDIA/elements/commit/b7eafaf663468aa4e2d19143bb34895412ee7532))
+
 ## [0.28.3](https://github.com/NVIDIA/elements/compare/v0.28.2...v0.28.3) (2024-04-02)
 
 
