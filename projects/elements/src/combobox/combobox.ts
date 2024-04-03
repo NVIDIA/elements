@@ -21,7 +21,7 @@ import styles from './combobox.css?inline';
  * @description An editable combobox with autocomplete behavior from a given datalist.
  * @since 0.17.0
  * @slot - default slot for input
- * @slot prefix - slot for icon to be placed before the input
+ * @slot prefix-icon - slot for icon to be placed before the input
  * @slot footer - slot for dropdown footer content
  * @cssprop --scroll-height
  * @cssprop --padding
@@ -113,7 +113,7 @@ export class Combobox extends Control implements ContainerElement {
       <nve-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o)}>${getDisplayValue(o)}</nve-tag>`
       )}
     </div>`
-      : html`<slot name="prefix"></slot>`;
+      : html`<slot name="prefix-icon"></slot>`;
   }
 
   protected get suffixContent() {
