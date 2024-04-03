@@ -9,10 +9,10 @@ html { box-sizing: border-box; }
 *, *:before, *:after { box-sizing: inherit; }
 
 html[nve-theme], html[mlv-theme], body[nve-theme], body[mlv-theme], [nve-theme~='root'], [mlv-theme~='root'] {
-  color-scheme: var(--mlv-sys-color-scheme) !important;
-  background: var(--mlv-sys-layer-canvas-background) !important;
-  color: var(--mlv-sys-layer-canvas-color) !important;
-  font-family: var(--mlv-ref-font-family) !important;
+  color-scheme: var(--nve-sys-color-scheme) !important;
+  background: var(--nve-sys-layer-canvas-background) !important;
+  color: var(--nve-sys-layer-canvas-color) !important;
+  font-family: var(--nve-ref-font-family) !important;
   text-rendering: optimizeSpeed;
 }
 
