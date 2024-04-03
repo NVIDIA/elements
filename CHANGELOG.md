@@ -1,3 +1,10 @@
+## [0.28.5](https://github.com/NVIDIA/elements/compare/v0.28.4...v0.28.5) (2024-04-03)
+
+
+### Bug Fixes
+
+* **elements:** internal css var references ([2d92684](https://github.com/NVIDIA/elements/commit/2d92684bd39b9f876554d63ebae41af896900a59))
+
 ## [0.28.4](https://github.com/NVIDIA/elements/compare/v0.28.3...v0.28.4) (2024-04-03)
 
 
