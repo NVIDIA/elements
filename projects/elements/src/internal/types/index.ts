@@ -41,7 +41,7 @@ export type Prominence = 'emphasis' | 'muted';
  * - `inset` element container is optimized for embeding or being inset inside another containing element
  * - `full` element container is optimized for filling its container bounds
  */
-export type Container = 'inline' | 'flat' | 'inset' | 'full';
+export type Container = 'inline' | 'flat' | 'inset' | 'full' | 'condensed';
 
 /** Determines the support status color of an element. Should convey intent of the element. */
 export type SupportStatus = 'accent' | 'warning' | 'success' | 'danger';
