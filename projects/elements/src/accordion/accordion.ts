@@ -231,7 +231,7 @@ export class AccordionGroup extends LitElement {
    */
   @property({ type: Boolean, attribute: 'behavior-expand-single' }) behaviorExpandSingle = false;
   /** flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion) */
-  @property({ type: String, reflect: true }) container?: 'flat' | 'full' | 'inset' = 'full';
+  @property({ type: String, reflect: true }) container?: Container = 'full';
 
   static readonly metadata = {
     tag: 'nve-accordion-group',
