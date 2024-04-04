@@ -16,15 +16,15 @@
     "clean": "git clean -dfX",
     "playwright": "wireit",
     "prepare": "wireit",
-    "release": "semantic-release",
+    "release": "wireit",
     "commitlint": "commitlint --edit"
   },
   "devDependencies": {
-    "@amanda-mitchell/semantic-release-npm-multiple": "3.9.0",
     "@commitlint/cli": "18.4.3",
     "@commitlint/config-conventional": "18.4.3",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "11.1.0",
+    "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/gitlab": "12.1.1",
     "@semantic-release/npm": "11.0.2",
@@ -38,6 +38,7 @@
     "playwright": "1.42.1",
     "prettier": "3.2.5",
     "semantic-release": "22.0.12",
+    "semantic-release-monorepo": "8.0.2",
     "semantic-release-replace-plugin": "1.2.7",
     "wireit": "0.14.4"
   },
@@ -59,6 +60,15 @@
         "./projects/elements:ci",
         "./projects/elements-react:ci",
         "./projects/testing:ci"
+      ]
+    },
+    "release": {
+      "command": "WIREIT_PARALLEL=1 echo 'Releasing...'",
+      "dependencies": [
+        "./projects/themes:release",
+        "./projects/testing:release",
+        "./projects/elements:release",
+        "./projects/elements-react:release"
       ]
     },
     "format": {
