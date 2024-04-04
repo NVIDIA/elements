@@ -1,0 +1,68 @@
+:host {
+  --width: auto;
+  --font-size: var(--nve-ref-font-size-100);
+  --font-weight: var(--nve-ref-font-weight-medium);
+  --border-radius: var(--nve-ref-border-radius-xl);
+  --color: var(--nve-sys-text-muted-color);
+  --cursor: pointer;
+  --text-transform: capitalize;
+  --nve-sys-interaction-state-ratio: 0;
+}
+
+[internal-host] {
+  width: var(--width);
+  gap: var(--nve-ref-space-xs);
+  padding: var(--nve-ref-size-200);
+  color: var(--color);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  line-height: var(--nve-ref-font-size-500);
+  background-image: linear-gradient(
+    color-mix(
+        in oklab,
+        var(--nve-sys-interaction-state-base) 100%,
+        var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)
+      )
+      0 0
+  ) !important;
+  border-radius: var(--border-radius);
+  cursor: var(--cursor);
+  text-transform: var(--text-transform);
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  position: relative;
+}
+
+[internal-host] mlv-progress-ring,
+[internal-host] mlv-icon-button {
+  cursor: pointer;
+}
+
+[internal-host] mlv-icon-button#number-icon {
+  box-sizing: content-box;
+  border: 2px solid var(--color);
+  border-radius: 100%;
+  --height: var(--nve-ref-size-600);
+  --width: var(--nve-ref-size-600);
+}
+
+:host(:state(selected)) {
+  --color: var(--nve-sys-text-emphasis-color);
+  --font-weight: var(--nve-ref-font-weight-semibold);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+}
+:host(:state(disabled)) {
+  --color: var(--nve-sys-interaction-disabled-color);
+  --cursor: not-allowed;
+}
+
+:host(:hover:not(:state(disabled), :state(selected))) {
+  --color: var(--nve-sys-text-emphasis-color);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+}
+
+:host(:state(selected)) mlv-icon-button,
+:host(:hover:not(:state(disabled))) mlv-icon-button {
+  --color: var(--nve-sys-text-emphasis-color);
+}

@@ -1,0 +1,35 @@
+:host {
+  --gap: var(--nve-ref-space-lg);
+}
+
+[internal-host] {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+}
+
+:host([vertical]) [internal-host] {
+  flex-direction: column;
+}
+
+:host(:not([vertical])) ::slotted(mlv-stepper-item:not(:last-child))::after {
+  content: '';
+  position: absolute;
+  width: var(--gap);
+  top: 50%;
+  border: 1px dashed var(--mlv-ref-border-color-muted);
+}
+
+:host([vertical]) ::slotted(mlv-stepper-item:not(:last-child))::after {
+  content: '';
+  position: absolute;
+  height: var(--gap);
+  left: var(--mlv-ref-size-500);
+  top: 100%;
+  border: 1px dashed var(--mlv-ref-border-color-muted);
+}
+
+:host([vertical]:not([container='condensed'])) ::slotted(mlv-stepper-item) {
+  --width: 100%;
+}

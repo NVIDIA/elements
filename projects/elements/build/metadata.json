@@ -1,5 +1,5 @@
 {
-  "created": "2024-04-01T19:17:30.535Z",
+  "created": "2024-04-11T20:34:54.178Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -63,7 +63,7 @@
           {
             "name": "container",
             "type": {
-              "text": "'inline' | 'flat' | 'inset' | 'full' | default"
+              "text": "'inline' | 'flat' | 'inset' | 'full' | 'condensed' | default"
             },
             "default": "'full'",
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
@@ -313,7 +313,7 @@
           {
             "name": "container",
             "type": {
-              "text": "'flat' | 'full' | 'inset' | default"
+              "text": "'inline' | 'flat' | 'inset' | 'full' | 'condensed' | default"
             },
             "default": "'full'",
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
@@ -1138,10 +1138,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.953,
+            "kb": 14.949,
             "requests": {
               "index.js": {
-                "kb": 14.953,
+                "kb": 14.949,
                 "name": "index.js"
               }
             }
@@ -1267,10 +1267,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.85,
+            "kb": 15.846,
             "requests": {
               "index.js": {
-                "kb": 15.202,
+                "kb": 15.198,
                 "name": "index.js"
               },
               "chevron.svg.js": {
@@ -1763,10 +1763,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.253,
+            "kb": 10.243,
             "requests": {
               "index.js": {
-                "kb": 10.253,
+                "kb": 10.243,
                 "name": "index.js"
               }
             }
@@ -2336,10 +2336,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.598,
+            "kb": 22.594,
             "requests": {
               "index.js": {
-                "kb": 22.598,
+                "kb": 22.594,
                 "name": "index.js"
               }
             }
@@ -2436,10 +2436,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.598,
+            "kb": 22.594,
             "requests": {
               "index.js": {
-                "kb": 22.598,
+                "kb": 22.594,
                 "name": "index.js"
               }
             }
@@ -2585,10 +2585,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.993,
+            "kb": 23.99,
             "requests": {
               "index.js": {
-                "kb": 22.939,
+                "kb": 22.936,
                 "name": "index.js"
               },
               "dropper.svg.js": {
@@ -2691,7 +2691,7 @@
           },
           {
             "description": "slot for icon to be placed before the input",
-            "name": "prefix"
+            "name": "prefix-icon"
           },
           {
             "description": "slot for dropdown footer content",
@@ -2824,10 +2824,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 38.914,
+            "kb": 38.922,
             "requests": {
               "index.js": {
-                "kb": 38.14,
+                "kb": 38.148,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3060,10 +3060,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.004,
+            "kb": 23,
             "requests": {
               "index.js": {
-                "kb": 22.23,
+                "kb": 22.226,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3146,10 +3146,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.004,
+            "kb": 23,
             "requests": {
               "index.js": {
-                "kb": 22.23,
+                "kb": 22.226,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3246,10 +3246,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.004,
+            "kb": 23,
             "requests": {
               "index.js": {
-                "kb": 22.23,
+                "kb": 22.226,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3399,10 +3399,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.659,
+            "kb": 23.656,
             "requests": {
               "index.js": {
-                "kb": 22.766,
+                "kb": 22.763,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3573,10 +3573,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.664,
+            "kb": 23.661,
             "requests": {
               "index.js": {
-                "kb": 22.771,
+                "kb": 22.768,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3816,10 +3816,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.725,
+            "kb": 28.741,
             "requests": {
               "index.js": {
-                "kb": 27.913,
+                "kb": 27.929,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3927,10 +3927,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.725,
+            "kb": 28.741,
             "requests": {
               "index.js": {
-                "kb": 27.913,
+                "kb": 27.929,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3987,10 +3987,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.725,
+            "kb": 28.741,
             "requests": {
               "index.js": {
-                "kb": 27.913,
+                "kb": 27.929,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4069,10 +4069,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.304,
+            "kb": 8.3,
             "requests": {
               "index.js": {
-                "kb": 8.304,
+                "kb": 8.3,
                 "name": "index.js"
               }
             }
@@ -4218,10 +4218,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.771,
+            "kb": 8.77,
             "requests": {
               "index.js": {
-                "kb": 8.771,
+                "kb": 8.77,
                 "name": "index.js"
               }
             }
@@ -4482,10 +4482,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29,
+            "kb": 29.017,
             "requests": {
               "index.js": {
-                "kb": 28.188,
+                "kb": 28.205,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4588,10 +4588,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29,
+            "kb": 29.017,
             "requests": {
               "index.js": {
-                "kb": 28.188,
+                "kb": 28.205,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4648,10 +4648,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29,
+            "kb": 29.017,
             "requests": {
               "index.js": {
-                "kb": 28.188,
+                "kb": 28.205,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4708,10 +4708,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29,
+            "kb": 29.017,
             "requests": {
               "index.js": {
-                "kb": 28.188,
+                "kb": 28.205,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4918,10 +4918,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.746,
+            "kb": 28.763,
             "requests": {
               "index.js": {
-                "kb": 27.934,
+                "kb": 27.951,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5140,10 +5140,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.438,
+            "kb": 22.432,
             "requests": {
               "index.js": {
-                "kb": 22.438,
+                "kb": 22.432,
                 "name": "index.js"
               }
             }
@@ -5267,10 +5267,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.011,
+            "kb": 20.003,
             "requests": {
               "index.js": {
-                "kb": 20.011,
+                "kb": 20.003,
                 "name": "index.js"
               }
             }
@@ -5361,10 +5361,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.011,
+            "kb": 20.003,
             "requests": {
               "index.js": {
-                "kb": 20.011,
+                "kb": 20.003,
                 "name": "index.js"
               }
             }
@@ -5497,10 +5497,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.011,
+            "kb": 20.003,
             "requests": {
               "index.js": {
-                "kb": 20.011,
+                "kb": 20.003,
                 "name": "index.js"
               }
             }
@@ -5567,10 +5567,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.011,
+            "kb": 20.003,
             "requests": {
               "index.js": {
-                "kb": 20.011,
+                "kb": 20.003,
                 "name": "index.js"
               }
             }
@@ -5634,10 +5634,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.011,
+            "kb": 20.003,
             "requests": {
               "index.js": {
-                "kb": 20.011,
+                "kb": 20.003,
                 "name": "index.js"
               }
             }
@@ -5698,10 +5698,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.011,
+            "kb": 20.003,
             "requests": {
               "index.js": {
-                "kb": 20.011,
+                "kb": 20.003,
                 "name": "index.js"
               }
             }
@@ -5777,10 +5777,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.011,
+            "kb": 20.003,
             "requests": {
               "index.js": {
-                "kb": 20.011,
+                "kb": 20.003,
                 "name": "index.js"
               }
             }
@@ -5890,10 +5890,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 13.721,
+            "kb": 13.718,
             "requests": {
               "index.js": {
-                "kb": 12.964,
+                "kb": 12.961,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -6257,10 +6257,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.014,
+            "kb": 16.013,
             "requests": {
               "index.js": {
-                "kb": 16.014,
+                "kb": 16.013,
                 "name": "index.js"
               }
             }
@@ -6516,10 +6516,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.017,
+            "kb": 23.012,
             "requests": {
               "index.js": {
-                "kb": 23.017,
+                "kb": 23.012,
                 "name": "index.js"
               }
             }
@@ -6611,10 +6611,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.017,
+            "kb": 23.012,
             "requests": {
               "index.js": {
-                "kb": 23.017,
+                "kb": 23.012,
                 "name": "index.js"
               }
             }
@@ -6809,10 +6809,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.442,
+            "kb": 9.439,
             "requests": {
               "index.js": {
-                "kb": 9.442,
+                "kb": 9.439,
                 "name": "index.js"
               }
             }
@@ -6909,10 +6909,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.524,
+            "kb": 11.518,
             "requests": {
               "index.js": {
-                "kb": 11.524,
+                "kb": 11.518,
                 "name": "index.js"
               }
             }
@@ -7206,10 +7206,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.524,
+            "kb": 11.518,
             "requests": {
               "index.js": {
-                "kb": 11.524,
+                "kb": 11.518,
                 "name": "index.js"
               }
             }
@@ -7355,10 +7355,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.66,
+            "kb": 23.657,
             "requests": {
               "index.js": {
-                "kb": 22.767,
+                "kb": 22.764,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -7608,10 +7608,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.08,
+            "kb": 29.095,
             "requests": {
               "index.js": {
-                "kb": 28.306,
+                "kb": 28.321,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7745,10 +7745,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.08,
+            "kb": 29.095,
             "requests": {
               "index.js": {
-                "kb": 28.306,
+                "kb": 28.321,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7811,10 +7811,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.968,
+            "kb": 22.986,
             "requests": {
               "index.js": {
-                "kb": 22.968,
+                "kb": 22.986,
                 "name": "index.js"
               }
             }
@@ -8030,10 +8030,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 41.222,
+            "kb": 41.232,
             "requests": {
               "index.js": {
-                "kb": 39.34,
+                "kb": 39.35,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -8252,10 +8252,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.518,
+            "kb": 18.517,
             "requests": {
               "index.js": {
-                "kb": 17.733,
+                "kb": 17.732,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8371,10 +8371,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.518,
+            "kb": 18.517,
             "requests": {
               "index.js": {
-                "kb": 17.733,
+                "kb": 17.732,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8442,10 +8442,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.518,
+            "kb": 18.517,
             "requests": {
               "index.js": {
-                "kb": 17.733,
+                "kb": 17.732,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8518,10 +8518,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.518,
+            "kb": 18.517,
             "requests": {
               "index.js": {
-                "kb": 17.733,
+                "kb": 17.732,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8671,10 +8671,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.777,
+            "kb": 23.774,
             "requests": {
               "index.js": {
-                "kb": 22.836,
+                "kb": 22.833,
                 "name": "index.js"
               },
               "eye.svg.js": {
@@ -8783,10 +8783,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.86,
+            "kb": 8.856,
             "requests": {
               "index.js": {
-                "kb": 8.86,
+                "kb": 8.856,
                 "name": "index.js"
               }
             }
@@ -8937,10 +8937,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.554,
+            "kb": 14.55,
             "requests": {
               "index.js": {
-                "kb": 14.554,
+                "kb": 14.55,
                 "name": "index.js"
               }
             }
@@ -9075,10 +9075,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 41.306,
+            "kb": 41.311,
             "requests": {
               "index.js": {
-                "kb": 39.179,
+                "kb": 39.184,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -9283,10 +9283,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.508,
+            "kb": 22.504,
             "requests": {
               "index.js": {
-                "kb": 22.508,
+                "kb": 22.504,
                 "name": "index.js"
               }
             }
@@ -9352,10 +9352,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.508,
+            "kb": 22.504,
             "requests": {
               "index.js": {
-                "kb": 22.508,
+                "kb": 22.504,
                 "name": "index.js"
               }
             }
@@ -9501,10 +9501,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.687,
+            "kb": 22.681,
             "requests": {
               "index.js": {
-                "kb": 22.687,
+                "kb": 22.681,
                 "name": "index.js"
               }
             }
@@ -9701,10 +9701,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.514,
+            "kb": 23.511,
             "requests": {
               "index.js": {
-                "kb": 22.825,
+                "kb": 22.822,
                 "name": "index.js"
               },
               "search.svg.js": {
@@ -9912,10 +9912,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.071,
+            "kb": 39.079,
             "requests": {
               "index.js": {
-                "kb": 37.837,
+                "kb": 37.845,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -10245,10 +10245,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.123,
+            "kb": 16.121,
             "requests": {
               "index.js": {
-                "kb": 15.231,
+                "kb": 15.229,
                 "name": "index.js"
               },
               "sort-ascending.svg.js": {
@@ -10287,6 +10287,411 @@
       ],
       "behavior": "content",
       "status": "stable"
+    },
+    {
+      "name": "mlv-stepper",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": false,
+      "vqa": false,
+      "responsive": true,
+      "themes": true,
+      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "entrypoint": "",
+      "package": false,
+      "description": "Stepper enables a multi-step workflow allowing a user to complete a goal in a specefic sequence.",
+      "since": "0.30.0",
+      "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0",
+      "schema": {
+        "properties": [
+          {
+            "name": "vertical",
+            "description": "Determines whether or not the stepper should display in a vertical layout vs. defaulting to horizontal."
+          },
+          {
+            "name": "container",
+            "description": "Determines whether or not the stepper should display in condensed format with no text labels."
+          },
+          {
+            "name": "behaviorSelect",
+            "description": "Determines whether or not the stepper should handle selection behavior vs. defaults to off."
+          }
+        ],
+        "slots": [
+          {
+            "description": "default slot for mlv-tab-item",
+            "name": ""
+          }
+        ],
+        "attributes": [
+          {
+            "name": "vertical",
+            "type": {
+              "text": "boolean"
+            },
+            "default": "false",
+            "description": "Determines whether or not the stepper should display in a vertical layout vs. defaulting to horizontal.",
+            "fieldName": "vertical"
+          },
+          {
+            "name": "container",
+            "type": {
+              "text": "'inline' | 'flat' | 'inset' | 'full' | 'condensed' | default"
+            },
+            "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
+            "fieldName": "container"
+          },
+          {
+            "name": "behavior-select",
+            "type": {
+              "text": "boolean"
+            },
+            "default": "false",
+            "description": "Determines whether or not the stepper should handle selection behavior vs. defaults to off.",
+            "fieldName": "behaviorSelect"
+          }
+        ],
+        "cssProperties": [
+          {
+            "name": "--gap"
+          }
+        ]
+      },
+      "lighthouse": {
+        "name": "mlv-stepper",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 19.733,
+            "requests": {
+              "index.js": {
+                "kb": 19.733,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
+      "tests": {
+        "projectTotal": 0,
+        "instanceTotal": 0,
+        "coverageTotal": 94.1175
+      },
+      "stories": [
+        {
+          "id": "Default",
+          "file": "stepper.stories.ts",
+          "template": "<mlv-stepper behavior-select>\n  <mlv-stepper-item status=\"success\">Step 1</mlv-stepper-item>\n  <mlv-stepper-item status=\"danger\">Step 2</mlv-stepper-item>\n  <mlv-stepper-item selected>Step 3</mlv-stepper-item>\n  <mlv-stepper-item status=\"pending\">Step 4</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n</mlv-stepper>\n"
+        },
+        {
+          "id": "Condensed",
+          "file": "stepper.stories.ts",
+          "template": "<mlv-stepper behavior-select container=\"condensed\">\n  <mlv-stepper-item status=\"success\">Step 1</mlv-stepper-item>\n  <mlv-stepper-item status=\"danger\">Step 2</mlv-stepper-item>\n  <mlv-stepper-item selected>Step 3</mlv-stepper-item>\n  <mlv-stepper-item status=\"pending\">Step 4</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n</mlv-stepper>\n"
+        },
+        {
+          "id": "VerticalStepper",
+          "file": "stepper.stories.ts",
+          "template": "<mlv-stepper vertical behavior-select style=\"width: 150px\">\n  <mlv-stepper-item selected>Step 1</mlv-stepper-item>\n  <mlv-stepper-item>Step 2</mlv-stepper-item>\n  <mlv-stepper-item>Step 3</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n  <mlv-stepper-item>Step 5</mlv-stepper-item>\n</mlv-stepper>\n"
+        },
+        {
+          "id": "VerticalCondensedStepper",
+          "file": "stepper.stories.ts",
+          "template": "<mlv-stepper vertical container=\"condensed\" behavior-select>\n  <mlv-stepper-item selected>Step 1</mlv-stepper-item>\n  <mlv-stepper-item>Step 2</mlv-stepper-item>\n  <mlv-stepper-item>Step 3</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n  <mlv-stepper-item>Step 5</mlv-stepper-item>\n</mlv-stepper>\n"
+        },
+        {
+          "id": "StatelessStepper",
+          "file": "stepper.stories.ts",
+          "template": "<mlv-stepper>\n  <mlv-stepper-item selected>Step 1</mlv-stepper-item>\n  <mlv-stepper-item>Step 2</mlv-stepper-item>\n  <mlv-stepper-item>Step 3</mlv-stepper-item>\n  <mlv-stepper-item>Step 4</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n</mlv-stepper>\n"
+        }
+      ],
+      "behavior": "navigation",
+      "status": "pre-release"
+    },
+    {
+      "name": "mlv-stepper-item",
+      "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "unitTests": true,
+      "apiReview": true,
+      "performance": true,
+      "stable": true,
+      "vqa": false,
+      "responsive": true,
+      "themes": true,
+      "entrypoint": "",
+      "package": true,
+      "since": "0.30.0",
+      "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=SR1GmFYykivamkZc-0",
+      "schema": {
+        "properties": [
+          {
+            "name": "selected",
+            "description": "Determines which tab item is selected, defaults to false."
+          },
+          {
+            "name": "status",
+            "description": "There are four visual treatments that represent the `status` of varius tasks. When `status` is set to `warning`, `success` or `danger`, appropriate icons are embedded."
+          },
+          {
+            "name": "container",
+            "description": "Determines whether or not the stepper should display in condensed format with no text labels."
+          },
+          {
+            "name": "pressed",
+            "description": "Use for buttons that are toggle button types.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed"
+          },
+          {
+            "name": "expanded",
+            "description": "Use for button that are used for expanding/collapsing content.\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded"
+          },
+          {
+            "name": "readonly",
+            "description": "Similar to input readonly, sets a button sematically as visual treatment only\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly"
+          },
+          {
+            "name": "name",
+            "description": "The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name"
+          },
+          {
+            "name": "value",
+            "description": "Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value"
+          },
+          {
+            "name": "type",
+            "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type"
+          },
+          {
+            "name": "disabled",
+            "description": "This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled"
+          },
+          {
+            "name": "current",
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link\nhttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current"
+          }
+        ],
+        "slots": [
+          {
+            "description": "default slot for step text",
+            "name": ""
+          },
+          {
+            "description": "status-icon custom slotted step icon",
+            "name": ""
+          }
+        ],
+        "attributes": [
+          {
+            "name": "selected",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected",
+            "fieldName": "selected",
+            "default": "false",
+            "inheritedFrom": {
+              "name": "BaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "status",
+            "type": {
+              "text": "'accent' | 'warning' | 'success' | 'danger' | 'pending' | default"
+            },
+            "description": "Defines the visual treatment to represent a interaction status. (tasks, support, trends)",
+            "fieldName": "status"
+          },
+          {
+            "name": "container",
+            "type": {
+              "text": "'inline' | 'flat' | 'inset' | 'full' | 'condensed' | default"
+            },
+            "default": "'condensed'",
+            "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
+            "fieldName": "container"
+          },
+          {
+            "name": "index",
+            "fieldName": "index"
+          },
+          {
+            "name": "pressed",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Determines if an element is pressed as a stand alone interaction. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed",
+            "fieldName": "pressed",
+            "inheritedFrom": {
+              "name": "BaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "expanded",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Determines if an element is expanded, typically following a disclosure pattern. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded",
+            "fieldName": "expanded",
+            "inheritedFrom": {
+              "name": "BaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "readonly",
+            "type": {
+              "text": "boolean"
+            },
+            "description": "Sets a interactive element to be in a readonly content state. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly",
+            "fieldName": "readonly",
+            "inheritedFrom": {
+              "name": "BaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "name",
+            "type": {
+              "text": "string"
+            },
+            "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
+            "fieldName": "name",
+            "inheritedFrom": {
+              "name": "BaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "value",
+            "type": {
+              "text": "string"
+            },
+            "description": "Defines the value associated with the elmeents's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value",
+            "fieldName": "value",
+            "inheritedFrom": {
+              "name": "BaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "type",
+            "type": {
+              "text": "'button' | 'submit'"
+            },
+            "description": "Defines the button behavior when associated within an <form> element.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type",
+            "fieldName": "type",
+            "inheritedFrom": {
+              "name": "BaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "disabled",
+            "type": {
+              "text": "boolean"
+            },
+            "default": "false",
+            "description": "Determines if an element is disabled. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled",
+            "fieldName": "disabled",
+            "inheritedFrom": {
+              "name": "BaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          },
+          {
+            "name": "current",
+            "type": {
+              "text": "'page' | 'step'"
+            },
+            "description": "This Boolean attribute sets the current state, used to represent the current page or navigation link. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current",
+            "fieldName": "current",
+            "inheritedFrom": {
+              "name": "BaseButton",
+              "module": "/src/internal/base/button.js"
+            }
+          }
+        ],
+        "cssProperties": [
+          {
+            "name": "--font-size"
+          },
+          {
+            "name": "--border-width"
+          },
+          {
+            "name": "--border-height"
+          },
+          {
+            "name": "--border-top"
+          },
+          {
+            "name": "--width"
+          },
+          {
+            "name": "--font-size"
+          },
+          {
+            "name": "--font-weight"
+          },
+          {
+            "name": "--border-radius"
+          },
+          {
+            "name": "--color"
+          },
+          {
+            "name": "--height"
+          },
+          {
+            "name": "--cursor"
+          },
+          {
+            "name": "--text-transform"
+          }
+        ]
+      },
+      "lighthouse": {
+        "name": "mlv-stepper",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100
+        },
+        "payload": {
+          "javascript": {
+            "kb": 19.733,
+            "requests": {
+              "index.js": {
+                "kb": 19.733,
+                "name": "index.js"
+              }
+            }
+          },
+          "css": {
+            "kb": 0,
+            "requests": {}
+          }
+        }
+      },
+      "tests": {
+        "projectTotal": 0,
+        "instanceTotal": 0,
+        "coverageTotal": 94.1175
+      },
+      "stories": [],
+      "behavior": "navigation",
+      "status": "pre-release"
     },
     {
       "name": "mlv-switch",
@@ -10443,10 +10848,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.596,
+            "kb": 22.595,
             "requests": {
               "index.js": {
-                "kb": 22.596,
+                "kb": 22.595,
                 "name": "index.js"
               }
             }
@@ -10578,10 +10983,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.637,
+            "kb": 11.632,
             "requests": {
               "index.js": {
-                "kb": 11.637,
+                "kb": 11.632,
                 "name": "index.js"
               }
             }
@@ -10867,10 +11272,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.637,
+            "kb": 11.632,
             "requests": {
               "index.js": {
-                "kb": 11.637,
+                "kb": 11.632,
                 "name": "index.js"
               }
             }
@@ -11365,10 +11770,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.472,
+            "kb": 22.468,
             "requests": {
               "index.js": {
-                "kb": 22.472,
+                "kb": 22.468,
                 "name": "index.js"
               }
             }
@@ -11540,10 +11945,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.388,
+            "kb": 23.385,
             "requests": {
               "index.js": {
-                "kb": 22.768,
+                "kb": 22.765,
                 "name": "index.js"
               },
               "clock.svg.js": {
@@ -11779,10 +12184,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.688,
+            "kb": 28.703,
             "requests": {
               "index.js": {
-                "kb": 27.914,
+                "kb": 27.929,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -11961,10 +12366,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.24,
+            "kb": 16.234,
             "requests": {
               "index.js": {
-                "kb": 14.454,
+                "kb": 14.448,
                 "name": "index.js"
               },
               "add.svg.js": {
@@ -12212,10 +12617,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.668,
+            "kb": 19.687,
             "requests": {
               "index.js": {
-                "kb": 19.668,
+                "kb": 19.687,
                 "name": "index.js"
               }
             }
@@ -12427,10 +12832,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.659,
+            "kb": 23.655,
             "requests": {
               "index.js": {
-                "kb": 22.766,
+                "kb": 22.762,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -12706,10 +13111,10 @@
       {
         "file": "internal/controllers/type-popover.controller.ts",
         "lines": {
-          "total": 115,
-          "covered": 106,
+          "total": 117,
+          "covered": 108,
           "skipped": 0,
-          "pct": 92.17
+          "pct": 92.3
         },
         "functions": {
           "total": 23,
@@ -12718,16 +13123,16 @@
           "pct": 91.3
         },
         "statements": {
-          "total": 124,
-          "covered": 113,
+          "total": 126,
+          "covered": 115,
           "skipped": 0,
-          "pct": 91.12
+          "pct": 91.26
         },
         "branches": {
           "total": 82,
-          "covered": 74,
+          "covered": 73,
           "skipped": 0,
-          "pct": 90.24
+          "pct": 89.02
         }
       },
       {
@@ -13461,6 +13866,60 @@
       },
       {
         "file": "switch/define.ts",
+        "lines": {
+          "total": 2,
+          "covered": 2,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 2,
+          "covered": 2,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      {
+        "file": "stepper/stepper.ts",
+        "lines": {
+          "total": 33,
+          "covered": 33,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 16,
+          "covered": 16,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 51,
+          "covered": 51,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 17,
+          "covered": 13,
+          "skipped": 0,
+          "pct": 76.47
+        }
+      },
+      {
+        "file": "stepper/define.ts",
         "lines": {
           "total": 2,
           "covered": 2,
@@ -16919,28 +17378,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 2200,
-        "covered": 2170,
+        "total": 2237,
+        "covered": 2207,
         "skipped": 0,
-        "pct": 98.63
+        "pct": 98.65
       },
       "statements": {
-        "total": 2581,
-        "covered": 2546,
+        "total": 2636,
+        "covered": 2601,
         "skipped": 0,
-        "pct": 98.64
+        "pct": 98.67
       },
       "functions": {
-        "total": 725,
-        "covered": 708,
+        "total": 741,
+        "covered": 724,
         "skipped": 0,
-        "pct": 97.65
+        "pct": 97.7
       },
       "branches": {
-        "total": 1046,
-        "covered": 970,
+        "total": 1063,
+        "covered": 982,
         "skipped": 0,
-        "pct": 92.73
+        "pct": 92.38
       },
       "branchesTrue": {
         "total": 0,
