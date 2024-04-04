@@ -1,3 +1,10 @@
+## [0.28.7](https://github.com/NVIDIA/elements/compare/v0.28.6...v0.28.7) (2024-04-04)
+
+
+### Bug Fixes
+
+* **themes:** ddb theme fixes + update git ignore ([ee64c37](https://github.com/NVIDIA/elements/commit/ee64c374c7309221c54d8a7eeb04e3cb8e7ecc35))
+
 ## [0.28.6](https://github.com/NVIDIA/elements/compare/v0.28.5...v0.28.6) (2024-04-03)
 
 
