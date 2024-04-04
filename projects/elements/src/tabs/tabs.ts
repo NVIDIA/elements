@@ -77,12 +77,12 @@ export class Tabs extends LitElement {
   /**
    * Determines whether or not the tabs should display in a vertical layout vs. defaulting to horizontal.
    */
-  @property({ type: Boolean }) vertical = false;
+  @property({ type: Boolean, reflect: true }) vertical = false;
 
   /**
    * Determines whether or not the tabs should display a border on selected items vs. defaults to show border.
    */
-  @property({ type: Boolean }) borderless = false;
+  @property({ type: Boolean, reflect: true }) borderless = false;
 
   /**
    * Determines whether or not the tabs should handle selection behavior vs. defaults to off.
