@@ -228,6 +228,7 @@ export const parameters = {
           'Select',
           'Sort Button',
           'Switch',
+          'Stepper',
           'Tabs',
           'Tag',
           'Textarea',
