@@ -8,3 +8,4 @@ dist
 dist-storybook
 coverage
 projects/elements/src/icon/icons.ts
+v8-compile-cache-0
