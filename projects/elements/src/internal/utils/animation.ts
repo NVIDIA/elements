@@ -51,7 +51,7 @@ export function animationSlide(host: HTMLElement, options?: Options): DirectiveR
 }
 
 export function getComputedStyleWithFallback(element: HTMLElement, property: string) {
-  const styles = getComputedStyle(element);
-  const computedValue = styles.getPropertyValue(property);
-  return computedValue?.length ? computedValue : element.style.getPropertyValue(property);
+  const styles = globalThis.getComputedStyle?.(element);
+  const computedValue = styles?.getPropertyValue(property);
+  return computedValue?.length ? computedValue : element.style?.getPropertyValue(property);
 }
