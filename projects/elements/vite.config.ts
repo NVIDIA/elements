@@ -54,14 +54,13 @@ export default defineConfig(env => {
           'css/module.layout.css': resolve('./src/css/module.layout.css'), // layout utilities
           'css/module.responsive.css': resolve('./src/css/module.responsive.css'), // responsive layout utilities
           'index.css': resolve('./src/index.css'), // global styles including all above style modules
-          ...globSync('./src/**/define.ts').reduce((p, i) => {
+          ...[...globSync('./src/**/define.ts'), ...globSync('./src/**/index.ts')].reduce((p, i) => {
             // all component entrypoints
             return { ...p, [i.replace('src/', '').replace('.ts', '')]: resolve(i) };
           }, {})
         }
       },
       rollupOptions: {
-        treeshake: false,
         preserveEntrySignatures: 'strict',
         external: [
           ...Object.keys(packageFile.dependencies || {}),
@@ -85,10 +84,11 @@ export default defineConfig(env => {
                 .forEach(file => fs.renameSync(dist(file), dist(`css/${file}`)));
             }
           },
-          mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
-          mode === 'production'
-            ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
-            : false // https://github.com/vitejs/vite/issues/8848
+          mode === 'production' ? (minifyHTML as any).default() : false // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
+          // temporary disable for angular 12
+          // mode === 'production'
+          //   ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
+          //   : false // https://github.com/vitejs/vite/issues/8848
         ]
       }
     }

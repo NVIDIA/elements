@@ -10,6 +10,7 @@ describe('lighthouse report', () => {
         import('@nvidia-elements/themes/dark.css');
         import('@nvidia-elements/themes/high-contrast.css');
         import('@nvidia-elements/themes/reduced-motion.css');
+        import('@nvidia-elements/themes/ddb-dark.css');
         import('@elements/elements/css/module.layout.css');
         import('@elements/elements/css/module.typography.css');
       </script>
@@ -21,6 +22,7 @@ describe('lighthouse report', () => {
     expect(report.payload.css.requests['dark.css'].kb).toBeLessThan(4.1); // @nvidia-elements/themes/dark.css
     expect(report.payload.css.requests['high.css'].kb).toBeLessThan(1); // @nvidia-elements/themes/high-contrast.css
     expect(report.payload.css.requests['reduced.css'].kb).toBeLessThan(0.6); // @nvidia-elements/themes/reduced-motion.css
+    expect(report.payload.css.requests['ddb.css'].kb).toBeLessThan(0.75); // @nvidia-elements/themes/ddb-dark.css
     expect(report.payload.css.requests['module.css'].kb).toBeLessThan(1.6); // @elements/elements/css/module.layout.css
     expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.3); // @elements/elements/css/module.typography.css
   });
