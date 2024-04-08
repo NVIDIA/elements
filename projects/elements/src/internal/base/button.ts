@@ -9,6 +9,7 @@ import { typeButton } from '../controllers/type-button.controller.js';
 import { typeAnchor } from '../controllers/type-anchor.controller.js';
 import { typeSubmit } from '../controllers/type-submit.controller.js';
 import { stateCurrent } from '../controllers/state-current.controller.js';
+import { attachInternals } from '../utils/a11y.js';
 
 /**
  * Standard button behaviors for custom elements.
@@ -86,6 +87,11 @@ export class BaseButton extends LitElement {
    * A instance of `ElementInternals` that is set dynamically by the applied decorators/controllers
    */
   declare _internals: ElementInternals;
+
+  connectedCallback() {
+    super.connectedCallback();
+    attachInternals(this);
+  }
 
   render() {
     return html`<div internal-host><slot></slot></div>`;
