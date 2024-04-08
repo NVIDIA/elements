@@ -1,3 +1,10 @@
+## [0.28.8](https://github.com/NVIDIA/elements/compare/v0.28.7...v0.28.8) (2024-04-08)
+
+
+### Bug Fixes
+
+* **ssr:** small ssr fixes ([0d1e36a](https://github.com/NVIDIA/elements/commit/0d1e36a555b7aa8299429468f0f3f4393d39891c))
+
 ## [0.28.7](https://github.com/NVIDIA/elements/compare/v0.28.6...v0.28.7) (2024-04-04)
 
 
