@@ -1,3 +1,10 @@
+## [0.28.9](https://github.com/NVIDIA/elements/compare/v0.28.8...v0.28.9) (2024-04-08)
+
+
+### Bug Fixes
+
+* **elements:** side effect issue, ng12 minify issue ([b4fadb6](https://github.com/NVIDIA/elements/commit/b4fadb6dd3836f292f77d61818d801157c4e1c11))
+
 ## [0.28.8](https://github.com/NVIDIA/elements/compare/v0.28.7...v0.28.8) (2024-04-08)
 
 
