@@ -59,6 +59,17 @@ function App() {
                 </a>
               </MlvMenuItem>
               <MlvMenuItem>
+                <a href="/elements/demos/angular-legacy/" style={{ textTransform: 'none' }}>
+                  <img
+                    src="/elements/demos/react/angular-legacy.svg"
+                    width="18px"
+                    height="18px"
+                    alt="angular legacy logo"
+                  />
+                  Angular Legacy (v12/2021)
+                </a>
+              </MlvMenuItem>
+              <MlvMenuItem>
                 <a href="/elements/demos/vue/">
                   <img src="/elements/demos/react/vue.svg" width="18px" height="18px" alt="vue logo" />
                   Vue
