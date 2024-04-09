@@ -26,8 +26,7 @@
     "test:lighthouse": "wireit",
     "test:lighthouse:all": "wireit",
     "lint": "wireit",
-    "prepublishonly": "wireit",
-    "release": "wireit"
+    "prepublishonly": "wireit"
   },
   "files": [
     "README.md",
@@ -675,12 +674,6 @@
       "dependencies": [
         "ci",
         "build:metadata"
-      ]
-    },
-    "release": {
-      "command": "echo 'Releasing @nvidia-elements/core'; pnpm exec semantic-release",
-      "dependencies": [
-        "../themes:release"
       ]
     }
   }
