@@ -14,9 +14,7 @@ function getBaseConfig(config = { basePath: '' }) {
   const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
 
   return {
-    ci: !DRY_RUN,
     dryRun: DRY_RUN,
-    verifyConditions: !DRY_RUN,
     extends: 'semantic-release-monorepo',
     branches: ['main'],
     tagFormat: 'v${version}',
