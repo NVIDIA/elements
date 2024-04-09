@@ -65,10 +65,28 @@
     "release": {
       "command": "echo 'Releasing...'",
       "dependencies": [
-        "./projects/themes:release",
-        "./projects/testing:release",
-        "./projects/elements:release",
-        "./projects/elements-react:release"
+        "release:themes",
+        "release:testing",
+        "release:elements",
+        "release:elements-react"
+      ]
+    },
+    "release:themes": {
+      "command": "cd projects/themes && pnpm exec semantic-release"
+    },
+    "release:testing": {
+      "command": "cd projects/testing && pnpm exec semantic-release"
+    },
+    "release:elements": {
+      "command": "cd projects/elements && pnpm exec semantic-release",
+      "dependencies": [
+        "release:themes"
+      ]
+    },
+    "release:elements-react": {
+      "command": "cd projects/elements-react && pnpm exec semantic-release",
+      "dependencies": [
+        "release:elements"
       ]
     },
     "format": {

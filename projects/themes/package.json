@@ -5,8 +5,7 @@
   "description": "Elements themes and tokens",
   "scripts": {
     "ci": "wireit",
-    "build": "wireit",
-    "release": "wireit"
+    "build": "wireit"
   },
   "files": [
     "README.md",
@@ -63,9 +62,6 @@
       "dependencies": [
         "build:style-dictionary"
       ]
-    },
-    "release": {
-      "command": "echo 'Releasing @nvidia-elements/themes'; pnpm exec semantic-release"
     }
   }
 }
