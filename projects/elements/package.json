@@ -232,7 +232,7 @@
   "dependencies": {
     "@floating-ui/dom": "1.6.1",
     "@lit-labs/motion": "^1.0.6",
-    "@nvidia-elements/themes": "workspace:^0.0.0",
+    "@nvidia-elements/themes": "workspace:^*",
     "composed-offset-position": "^0.0.4",
     "lit": "^3.1.0",
     "lit-html": "^3.1.0"
