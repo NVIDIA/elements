@@ -12,6 +12,9 @@ function getBaseConfig(config = { basePath: '' }) {
   const projectPath = resolve('../', config.basePath);
   const packageFilePath = resolve(projectPath, 'package.json');
   const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
+  console.log('packageFilePath: ', packageFilePath);
+  console.log('packageFile: ', packageFile);
+  console.log('CHANGELOG Path: ', resolve('../CHANGELOG.md'));
 
   return {
     dryRun: DRY_RUN,
