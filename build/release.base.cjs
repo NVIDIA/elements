@@ -12,7 +12,6 @@ function getBaseConfig(config = { basePath: '' }) {
   const projectPath = resolve('../', config.basePath);
   const packageFilePath = resolve(projectPath, 'package.json');
   const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
-  const scope = packageFile.name.split('/')[0];
 
   return {
     dryRun: DRY_RUN,
@@ -83,8 +82,8 @@ function getBaseConfig(config = { basePath: '' }) {
         {
           execCwd: projectPath,
           publishCmd: [
-            `pnpm publish --no-git-checks --${scope}:registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
-            `pnpm publish --no-git-checks --${scope}:registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
+            `pnpm publish --no-git-checks --registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
+            `pnpm publish --no-git-checks --registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
           ].join(' && ')
         }
       ],
