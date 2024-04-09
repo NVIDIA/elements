@@ -83,7 +83,7 @@ function getBaseConfig(config = { basePath: '' }) {
         {
           execCwd: projectPath,
           publishCmd: [
-            `pnpm publish --no-git-checks --${scope}:registry-$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
+            `pnpm publish --no-git-checks --${scope}:registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
             `pnpm publish --no-git-checks --${scope}:registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
           ].join(' && ')
         }
