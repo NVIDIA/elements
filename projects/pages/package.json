@@ -10,6 +10,7 @@
       "command": "echo 'building pages...'",
       "dependencies": [
         "pages:demos:angular",
+        "pages:demos:angular-legacy",
         "pages:demos:buildless",
         "pages:demos:mpa",
         "pages:demos:react",
@@ -30,6 +31,17 @@
       "files": [],
       "output": [
         "dist/demos/angular/**"
+      ]
+    },
+    "pages:demos:angular-legacy": {
+      "command": "cp -a ../demos/angular-legacy/dist/angular-app/. ./dist/demos/angular-legacy",
+      "dependencies": [
+        "../demos/angular-legacy:ci",
+        "build"
+      ],
+      "files": [],
+      "output": [
+        "dist/demos/angular-legacy/**"
       ]
     },
     "pages:demos:buildless": {
@@ -121,7 +133,11 @@
       ]
     },
     "preview": {
-      "command": "cd dist && pnpm exec vite preview --base=elements"
+      "command": "cd dist && pnpm exec vite preview --base=elements",
+      "dependencies": [
+        "ci"
+      ],
+      "files": []
     }
   },
   "dependencies": {
