@@ -1,5 +1,6 @@
 packages:
   - 'projects/demos/angular'
+  - 'projects/demos/angular-legacy'
   - 'projects/demos/buildless'
   - 'projects/demos/extensions'
   - 'projects/demos/mpa'
