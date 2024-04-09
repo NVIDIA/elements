@@ -63,7 +63,7 @@
       ]
     },
     "release": {
-      "command": "WIREIT_PARALLEL=1 echo 'Releasing...'",
+      "command": "echo 'Releasing...'",
       "dependencies": [
         "./projects/themes:release",
         "./projects/testing:release",
