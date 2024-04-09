@@ -330,7 +330,7 @@ importers:
         specifier: ^1.0.6
         version: 1.0.6
       '@nvidia-elements/themes':
-        specifier: workspace:^0.0.0
+        specifier: workspace:^*
         version: link:../themes
       composed-offset-position:
         specifier: ^0.0.4
@@ -530,7 +530,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2(@types/react@18.2.18)
       '@elements/elements':
-        specifier: workspace:^0.0.0
+        specifier: workspace:^*
         version: link:../elements
     devDependencies:
       '@types/react':
