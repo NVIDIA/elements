@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const resolve = (...value) => path.resolve(__dirname, ...value);
 
-const DRY_RUN = false;
+const DRY_RUN = true;
 
 /**
  * https://github.com/semantic-release/semantic-release
