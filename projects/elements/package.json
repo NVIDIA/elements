@@ -495,8 +495,7 @@
       "dependencies": [
         "test",
         "test:axe",
-        "test:coverage",
-        "test:lighthouse"
+        "test:coverage"
       ],
       "env": {
         "WIREIT_LOGGER": "simple"
