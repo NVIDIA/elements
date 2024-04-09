@@ -10,7 +10,10 @@ import '@nvidia-elements/core/alert/define.js';
     <a href="https://NVIDIA.github.io/elements/demos/angular/"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#angular-svg"></use></svg> Demo</a>
   </mlv-button>
   <mlv-button>
-    <mlv-icon name="code"></mlv-icon> <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/demos/angular">Source</a>
+    <mlv-icon name="code"></mlv-icon> <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/demos/angular">Source Latest v17</a>
+  </mlv-button>
+  <mlv-button>
+    <mlv-icon name="code"></mlv-icon> <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/demos/angular-legacy">Legacy v12</a>
   </mlv-button>
 </div>
 
@@ -92,17 +95,39 @@ export class AppComponent  {
 }
 ```
 
-## Legacy Installation
-
-If your app was created with an older version of the Angular CLI you may to need add or adjust the following to your application.
+## Legacy Installations
 
 ### Angular 12
 
-<mlv-alert-group status="warning">
+<mlv-alert-group status="danger">
   <mlv-alert>Angular 12 is past its support lifecycle and will not receive security updates. Applications should migrate as soon as possible to the <a href="https://angular.dev/update">latest release</a>.</mlv-alert>
 </mlv-alert-group>
 
-Due to Angular 12 using a outdated version of Webpack and ESBuild that do not support standard CSS and JavaScript language features. The latest current version of Elements that Angular 12 supports is `0.20.0`.
+Angular 12 is not officially supported due to its older dependencies (ESBuild, Webpack) not supporting browser standard JavaScript (es2020) and CSS features.
+To use elements in Angular 12 when upgrading is not possible, the [static import bundles](https://github.com/NVIDIA/elements/-/tree/main/projects/demos/static?ref_type=heads) can be copied into the Angular CLI assets and referenced.
+
+<mlv-alert status="warning">Static bundles are strongly discouraged as it will include all component code and not support any performance optimizations
+such as tree-shaking.</mlv-alert>
+
+```json
+"assets": [
+  "@elements/elements/bundles/elements.0.30.0.bundle.css",
+  "@elements/elements/bundles/elements.0.30.0.bundle.js"
+]
+```
+
+```html
+<!doctype html>
+<html lang="en" mlv-theme="dark">
+  <head>
+    <link rel="stylesheet" href="assets/elements.0.30.0.bundle.css" />
+  </head>
+  <body mlv-layout="column gap:md pad:lg">
+    <mlv-alert>hello there</mlv-alert>
+    <script type="module" src="/assets/elements.0.30.0.bundle.js"></script>
+  </body>
+</html>
+```
 
 ### Styles
 

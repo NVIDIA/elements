@@ -22,30 +22,7 @@ Ensure [NodeJS](https://nodejs.org/en/) and [pnpm](https://pnpm.io/) are install
 pnpm i
 ```
 
-```bash
-# run local dev env
-pnpm run dev
-```
-
-## Build Bundles
-
-To build the global bundles, import the components desired for your bundle in the `index.html`.
-
-```bash
-# build for production
-pnpm run build
-```
-
-Once build you will have the following in the `dist`.
-
-```
-elements.[version].bundle.js
-elements.[version].bundle.icons.js
-elements.[version].bundle.css
-elements.[version].bundle.woff2
-```
-
-These files can now be manually copied into your environment for use.
+Copy the bundles into your environment:
 
 ```html
 <!DOCTYPE html>
@@ -59,4 +36,11 @@ These files can now be manually copied into your environment for use.
     <script type="module" src="./elements.[version].bundle.js"></script>
   </body>
 </html>
+```
+
+## Preview Demo
+
+```bash
+# run local dev env
+pnpm run preview
 ```
