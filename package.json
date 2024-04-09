@@ -50,6 +50,7 @@
       "dependencies": [
         "./projects/pages:ci",
         "./projects/demos/angular:ci",
+        "./projects/demos/angular-legacy:ci",
         "./projects/demos/buildless:ci",
         "./projects/demos/extensions:ci",
         "./projects/demos/mpa:ci",
