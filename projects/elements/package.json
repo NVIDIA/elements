@@ -37,6 +37,7 @@
     "./dist/polyfills/index.js",
     "./dist/polyfills/custom-state-set.js",
     "./dist/test/index.js",
+    "./dist/bundles/*.js",
     "./**/define.js"
   ],
   "exports": {
@@ -55,6 +56,7 @@
     "./polyfills": "./dist/polyfills/index.js",
     "./polyfills/index.js": "./dist/polyfills/index.js",
     "./polyfills/custom-state-set.js": "./dist/polyfills/custom-state-set.js",
+    "./bundles/*": "./dist/bundles/*",
     "./accordion": "./dist/accordion/index.js",
     "./accordion/index.js": "./dist/accordion/index.js",
     "./accordion/define.js": "./dist/accordion/define.js",
@@ -323,6 +325,7 @@
       "dependencies": [
         "build:tsc",
         "build:vite",
+        "build:bundle",
         "build:manifest",
         "build:vscode-custom-data"
       ]
@@ -385,6 +388,20 @@
       "env": {
         "WIREIT_LOGGER": "simple"
       }
+    },
+    "build:bundle": {
+      "clean": false,
+      "command": "NODE_ENV=production vite build --config vite.bundle.ts",
+      "files": [
+        "vite.bundle.ts",
+        "package.json"
+      ],
+      "output": [
+        "dist/bundles"
+      ],
+      "dependencies": [
+        "build:vite"
+      ]
     },
     "build:importmap": {
       "command": "node ./build/importmap.mjs --outDir ./dist",
