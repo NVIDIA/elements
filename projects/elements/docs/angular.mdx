@@ -14,39 +14,22 @@ import '@elements/elements/alert/define.js';
   </mlv-button>
 </div>
 
-To use Elements in [Angular](https://angular.io/) follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps.
+To use Elements in [Angular](https://angular.dev/) follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps.
 
-## Static Assets
-
-For versions prior to 0.8.1 add the following to your app's `angular.json` config, which will copy the `@elements/elements` icon asset file into your local Angular build.
-
-```json
-/*
- * ./angular.json
- * projects.appName.architect.build.options.assets:
- */
-"assets": [
-  ...
-  {
-    "glob": "**/*",
-    "input": "./node_modules/@elements/elements/dist/assets",
-    "output": "/assets/"
-  }
-]
-```
-
-Next import the element into a root Angular module and add `CUSTOM_ELEMENTS_SCHEMA` to the Angular module to allow web components to be used within your templates.
+Next import the element your Angular component and add `CUSTOM_ELEMENTS_SCHEMA` to the schemas to allow web components to be used within your template.
 
 ```javascript
-/* ./src/shared.module.ts */
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import '@elements/elements/alert/define.js';
 
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import '@elements/elements/alert-group/define.js';
-
-@NgModule({
+@Component({
+  selector: 'app-root',
+  standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  ...
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
+export class AppComponent { }
 ```
 
 Once added, properties and events can be used via the standard Angular template syntax.
@@ -84,12 +67,14 @@ to take advantage of built in framework features like [Angular Reactive Forms](h
 
 ```typescript
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'my-app',
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  styleUrl: './app.component.css'
 })
 export class AppComponent  {
   form: FormGroup;
@@ -110,6 +95,14 @@ export class AppComponent  {
 ## Legacy Installation
 
 If your app was created with an older version of the Angular CLI you may to need add or adjust the following to your application.
+
+### Angular 12
+
+<mlv-alert-group status="warning">
+  <mlv-alert>Angular 12 is past its support lifecycle and will not receive security updates. Applications should migrate as soon as possible to the <a href="https://angular.dev/update">latest release</a>.</mlv-alert>
+</mlv-alert-group>
+
+Due to Angular 12 using a outdated version of Webpack and ESBuild that do not support standard CSS and JavaScript language features. The latest current version of Elements that Angular 12 supports is `0.20.0`.
 
 ### Styles
 
