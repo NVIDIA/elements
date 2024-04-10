@@ -10,6 +10,7 @@ const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
  */
 module.exports = {
   dryRun: DRY_RUN,
+  ci: false,
   extends: 'semantic-release-monorepo',
   branches: ['main'],
   tagFormat: 'v${version}',
