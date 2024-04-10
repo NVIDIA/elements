@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/themes",
-  "version": "1.0.0",
+  "version": "0.28.10",
   "type": "module",
   "description": "Elements themes and tokens",
   "scripts": {
