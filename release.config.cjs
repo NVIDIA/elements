@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 
-const DRY_RUN = false;
+const DRY_RUN = true;
 const packageFilePath = `${process.cwd()}/package.json`;
 const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
 
@@ -32,6 +32,12 @@ module.exports = {
       }
     ],
     [
+      '@semantic-release/changelog',
+      {
+        changelogFile: 'CHANGELOG.md'
+      }
+    ],
+    [
       'semantic-release-replace-plugin',
       {
         replacements: [
@@ -52,30 +58,6 @@ module.exports = {
         ]
       }
     ],
-    '@semantic-release/changelog',
-    [
-      '@semantic-release/gitlab',
-      {
-        successComment:
-          '🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/api/?path=/docs/about-changelog--docs)',
-        assets: [
-          {
-            label: packageFile.name,
-            type: 'package',
-            url: `https://registry.npmjs.org'/', '%2F')}`
-          }
-        ]
-      }
-    ],
-    [
-      '@semantic-release/exec',
-      {
-        publishCmd: [
-          `pnpm publish --no-git-checks --registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
-          `pnpm publish --no-git-checks --registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
-        ].join(' && ')
-      }
-    ],
     [
       '@semantic-release/git',
       {
@@ -83,5 +65,28 @@ module.exports = {
         message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
       }
     ]
+    // [
+    //   '@semantic-release/gitlab',
+    //   {
+    //     successComment:
+    //       '🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/api/?path=/docs/about-changelog--docs)',
+    //     assets: [
+    //       {
+    //         label: packageFile.name,
+    //         type: 'package',
+    //         url: `https://registry.npmjs.org'/', '%2F')}`
+    //       }
+    //     ]
+    //   }
+    // ],
+    // [
+    //   '@semantic-release/exec',
+    //   {
+    //     publishCmd: [
+    //       `pnpm publish --no-git-checks --registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
+    //       `pnpm publish --no-git-checks --registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
+    //     ].join(' && ')
+    //   }
+    // ]
   ]
 };
