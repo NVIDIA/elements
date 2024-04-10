@@ -32,7 +32,7 @@ const ThemePicker = () => {
       <nve-button container="flat"><a target="_blank" href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html">Playground</a></nve-button>
       <nve-button container="flat"><a target="_blank" href="https://NVIDIA.github.io/elements/demos/">Demos</a></nve-button>
       <nve-button container="flat"><a target="_blank" href="https://github.com/NVIDIA/elements">Gitlab</a></nve-button>
-      <nve-button container="flat" id="dropdown-btn" style={{ 'margin-left': 'auto' }}>System Options</nve-button>
+      <nve-button container="flat" id="dropdown-btn" style={{ marginLeft: 'auto' }}>System Options</nve-button>
       <nve-drawer id="system-options-drawer" position="right" size="sm" anchor="dropdown-btn" trigger="dropdown-btn" behavior-trigger closable hidden nve-layout="column gap:md align:horizontal-stretch" style={{'--top': '47px', '--box-shadow': '0'}}>
         <nve-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
           <nve-select style={{'--background': 'transparent', '--min-width': '180px'}}>
