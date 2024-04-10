@@ -13,7 +13,6 @@ module.exports = {
   // ci: false, // enable to bypass local dry run https://github.com/semantic-release/semantic-release/issues/1316
   extends: 'semantic-release-monorepo',
   branches: ['main'],
-  tagFormat: 'v${version}',
   plugins: [
     [
       '@semantic-release/commit-analyzer',
