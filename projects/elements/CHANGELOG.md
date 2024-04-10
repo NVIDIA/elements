@@ -1,3 +1,10 @@
+## [@elements/elements-v0.28.15](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.28.14...@elements/elements-v0.28.15) (2024-04-10)
+
+
+### Bug Fixes
+
+* **elements:** theme dependency ([8eaa194](https://github.com/NVIDIA/elements/commit/8eaa19431b22334e0918a2948d10dadcf099412c))
+
 ## [@elements/elements-v0.28.14](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.28.13...@elements/elements-v0.28.14) (2024-04-10)
 
 
