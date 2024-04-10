@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 
-const DRY_RUN = true;
+const DRY_RUN = false;
 const packageFilePath = `${process.cwd()}/package.json`;
 const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
 
