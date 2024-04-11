@@ -1,11 +1,11 @@
 import { html } from 'lit';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/date/define.js';
-import '@elements/elements/dropdown/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/icon-button/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/date/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Elements/Input Group/Examples',

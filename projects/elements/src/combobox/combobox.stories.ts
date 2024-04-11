@@ -2,14 +2,14 @@ import { html, LitElement, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { choose } from 'lit/directives/choose.js';
-import '@elements/elements/progressive-filter-chip/define.js';
-import '@elements/elements/combobox/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/tag/define.js';
-import '@elements/elements/date/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/dropdown/define.js';
+import '@nvidia-elements/core/progressive-filter-chip/define.js';
+import '@nvidia-elements/core/combobox/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/tag/define.js';
+import '@nvidia-elements/core/date/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
 
 export default {
   title: 'Elements/Combobox/Examples',

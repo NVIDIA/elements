@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { IconButton } from '@elements/elements/icon-button';
 import { spread } from '@elements/elements/internal';
 import { ICON_NAMES } from '@elements/elements/icon';
-import '@elements/elements/icon-button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Elements/Icon Button/Examples',

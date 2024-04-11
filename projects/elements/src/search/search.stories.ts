@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/search/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/search/define.js';
 
 export default {
   title: 'Elements/Search/Examples',

@@ -3,13 +3,13 @@ import { Ref, ref, createRef } from 'lit/directives/ref.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { spread } from '@elements/elements/internal';
 import { Tooltip } from '@elements/elements/tooltip';
-import '@elements/elements/card/define.js';
-import '@elements/elements/tooltip/define.js';
-import '@elements/elements/toast/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/badge/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/icon-button/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/tooltip/define.js';
+import '@nvidia-elements/core/toast/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/badge/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 import type { Badge } from '@elements/elements/badge';
 
 export default {

@@ -1,7 +1,7 @@
 import { html } from 'lit';
-import '@elements/elements/notification/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/drawer/define.js';
+import '@nvidia-elements/core/notification/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/drawer/define.js';
 
 export default {
   title: 'Elements/Notification/Examples',

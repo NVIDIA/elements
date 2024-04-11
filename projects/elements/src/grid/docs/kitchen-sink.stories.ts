@@ -3,23 +3,23 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import typography from '@elements/elements/css/module.typography.css?inline';
-import '@elements/elements/grid/define.js';
-import '@elements/elements/alert/define.js';
-import '@elements/elements/app-header/define.js';
-import '@elements/elements/badge/define.js';
-import '@elements/elements/toolbar/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/checkbox/define.js';
-import '@elements/elements/card/define.js';
-import '@elements/elements/dialog/define.js';
-import '@elements/elements/dropdown/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/logo/define.js';
-import '@elements/elements/notification/define.js';
-import '@elements/elements/panel/define.js'
-import '@elements/elements/search/define.js';
-import '@elements/elements/select/define.js';
+import '@nvidia-elements/core/grid/define.js';
+import '@nvidia-elements/core/alert/define.js';
+import '@nvidia-elements/core/app-header/define.js';
+import '@nvidia-elements/core/badge/define.js';
+import '@nvidia-elements/core/toolbar/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/checkbox/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/dialog/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/logo/define.js';
+import '@nvidia-elements/core/notification/define.js';
+import '@nvidia-elements/core/panel/define.js'
+import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/select/define.js';
 import { generateId } from '@elements/elements/internal';
 
 export default {

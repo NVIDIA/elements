@@ -1,7 +1,7 @@
 import { html } from 'lit';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/month/define.js';
-import '@elements/elements/datetime/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/month/define.js';
+import '@nvidia-elements/core/datetime/define.js';
 
 export default {
   title: 'Elements/Datetime/Examples',

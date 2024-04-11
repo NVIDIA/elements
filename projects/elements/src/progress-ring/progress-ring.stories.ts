@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@elements/elements/progress-ring/define.js';
+import '@nvidia-elements/core/progress-ring/define.js';
 
 export default {
   title: 'Elements/Progress Ring/Examples',

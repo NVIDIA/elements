@@ -1,15 +1,15 @@
 import { html } from 'lit';
-import '@elements/elements/card/define.js';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/dropdown/define.js';
-import '@elements/elements/dialog/define.js';
-import '@elements/elements/tooltip/define.js';
-import '@elements/elements/search/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/tooltip/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
+import '@nvidia-elements/core/dialog/define.js';
+import '@nvidia-elements/core/tooltip/define.js';
+import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/tooltip/define.js';
 
 export default {
   title: 'Foundations/Tokens/Examples'

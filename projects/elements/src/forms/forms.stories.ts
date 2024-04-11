@@ -1,23 +1,23 @@
 import { html } from 'lit';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/password/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/search/define.js';
-import '@elements/elements/checkbox/define.js';
-import '@elements/elements/radio/define.js';
-import '@elements/elements/range/define.js';
-import '@elements/elements/time/define.js';
-import '@elements/elements/date/define.js';
-import '@elements/elements/color/define.js';
-import '@elements/elements/datetime/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/switch/define.js';
-import '@elements/elements/week/define.js';
-import '@elements/elements/file/define.js';
-import '@elements/elements/month/define.js';
-import '@elements/elements/textarea/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/password/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/checkbox/define.js';
+import '@nvidia-elements/core/radio/define.js';
+import '@nvidia-elements/core/range/define.js';
+import '@nvidia-elements/core/time/define.js';
+import '@nvidia-elements/core/date/define.js';
+import '@nvidia-elements/core/color/define.js';
+import '@nvidia-elements/core/datetime/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/switch/define.js';
+import '@nvidia-elements/core/week/define.js';
+import '@nvidia-elements/core/file/define.js';
+import '@nvidia-elements/core/month/define.js';
+import '@nvidia-elements/core/textarea/define.js';
 
 export default {
   title: 'Foundations/Forms/Examples'

@@ -2,13 +2,13 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import 'emoji-picker-element';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/search/define.js';
-import '@elements/elements/range/define.js';
-import '@elements/elements/textarea/define.js';
-import '@elements/elements/checkbox/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/range/define.js';
+import '@nvidia-elements/core/textarea/define.js';
+import '@nvidia-elements/core/checkbox/define.js';
 
 export default {
   title: 'Foundations/Forms/Examples',

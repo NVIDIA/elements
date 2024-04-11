@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import { AlertGroup } from '@elements/elements/alert';
-import '@elements/elements/alert/define.js';
+import { AlertGroup } from '@nvidia-elements/core/alert';
+import '@nvidia-elements/core/alert/define.js';
 
 export default {
   title: 'Deprecated/Alert Banner/Examples',

@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@elements/elements/progress-bar/define.js';
+import '@nvidia-elements/core/progress-bar/define.js';
 
 export default {
   title: 'Elements/Progress Bar/Examples',

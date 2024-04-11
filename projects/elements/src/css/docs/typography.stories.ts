@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@elements/elements/card/define.js';
+import '@nvidia-elements/core/card/define.js';
 
 export default {
   title: 'Foundations/Typography/Examples'

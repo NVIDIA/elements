@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import '@elements/elements/tag/define.js';
-import '@elements/elements/icon-button/define.js';
+import '@nvidia-elements/core/tag/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Elements/Tag/Examples',

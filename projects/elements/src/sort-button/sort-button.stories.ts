@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@elements/elements/sort-button/define.js';
+import '@nvidia-elements/core/sort-button/define.js';
 
 export default {
   title: 'Elements/Sort Button/Examples',

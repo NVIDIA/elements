@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@elements/elements/page-loader/define.js';
+import '@nvidia-elements/core/page-loader/define.js';
 
 export default {
   title: 'Elements/Page Loader/Examples',

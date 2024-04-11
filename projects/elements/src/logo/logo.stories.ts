@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@elements/elements/logo/define.js';
+import '@nvidia-elements/core/logo/define.js';
 
 export default {
   title: 'Elements/Logo/Examples',

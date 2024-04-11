@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@elements/elements/accordion/define.js';
+import '@nvidia-elements/core/accordion/define.js';
 
 export default {
   title: 'Elements/Accordion/Examples',

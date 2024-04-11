@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { define } from '@elements/elements/internal';
-import '@elements/elements/json-viewer/define.js';
+import '@nvidia-elements/core/json-viewer/define.js';
 import metrics from 'build/metadata.json';
 
 export default {

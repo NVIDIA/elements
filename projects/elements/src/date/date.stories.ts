@@ -1,11 +1,11 @@
 import { html } from 'lit';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/date/define.js';
-import '@elements/elements/datetime/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/month/define.js';
-import '@elements/elements/week/define.js';
-import '@elements/elements/time/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/date/define.js';
+import '@nvidia-elements/core/datetime/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/month/define.js';
+import '@nvidia-elements/core/week/define.js';
+import '@nvidia-elements/core/time/define.js';
 
 export default {
   title: 'Elements/Date/Examples',

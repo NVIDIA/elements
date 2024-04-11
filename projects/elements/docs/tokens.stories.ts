@@ -3,8 +3,8 @@ import { styleMap } from 'lit/directives/style-map.js';
 import tokenJSON from '@nvidia-elements/themes/index.json';
 import tokenJSONDark from '@nvidia-elements/themes/dark.json';
 import tokenJSONHighContrast from '@nvidia-elements/themes/high-contrast.json';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/toast/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/toast/define.js';
 
 export default {
   title: 'Foundations/Tokens/Examples'

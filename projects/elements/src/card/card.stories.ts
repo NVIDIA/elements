@@ -1,10 +1,10 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
-import '@elements/elements/card/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/tabs/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/tabs/define.js';
 
 export default {
   title: 'Elements/Card/Examples',

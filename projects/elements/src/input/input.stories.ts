@@ -1,8 +1,8 @@
 import { html } from 'lit';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/icon-button/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Elements/Input/Examples',
