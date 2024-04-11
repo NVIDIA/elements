@@ -1,10 +1,10 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { Panel, PanelHeader, PanelFooter } from '@elements/elements/panel';
-import '@elements/elements/panel/define.js';
-import '@elements/elements/icon-button/define.js';
-import { getFlatDOMTree } from '@elements/elements/internal';
+import { Panel, PanelHeader, PanelFooter } from '@nvidia-elements/core/panel';
+import '@nvidia-elements/core/panel/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import { getFlatDOMTree } from '@nvidia-elements/core/internal';
 
 describe('nve-panel', () => {
   let fixture: HTMLElement;

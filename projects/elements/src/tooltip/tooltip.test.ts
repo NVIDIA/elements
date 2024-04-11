@@ -1,10 +1,10 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, emulateMouseEnter, emulateMouseLeave } from '@nvidia-elements/testing';
-import { Tooltip } from '@elements/elements/tooltip';
-import { Button } from '@elements/elements/button';
-import '@elements/elements/tooltip/define.js';
-import '@elements/elements/button/define.js';
+import { Tooltip } from '@nvidia-elements/core/tooltip';
+import { Button } from '@nvidia-elements/core/button';
+import '@nvidia-elements/core/tooltip/define.js';
+import '@nvidia-elements/core/button/define.js';
 
 describe('nve-tooltip', () => {
   let fixture: HTMLElement;

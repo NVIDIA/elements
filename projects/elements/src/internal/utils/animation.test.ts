@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { animationFade, getComputedStyleWithFallback } from '@elements/elements/internal';
+import { animationFade, getComputedStyleWithFallback } from '@nvidia-elements/core/internal';
 
 describe('animationFade', () => {
   it('should return a animation config object for lit animation', () => {

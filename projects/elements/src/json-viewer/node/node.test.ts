@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { JSONNode } from './node.js';
-import '@elements/elements/json-viewer/define.js';
+import '@nvidia-elements/core/json-viewer/define.js';
 
 describe('nve-json-node', () => {
   let fixture: HTMLElement;

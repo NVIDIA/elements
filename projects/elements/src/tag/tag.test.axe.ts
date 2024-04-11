@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Tag } from '@elements/elements/tag';
-import '@elements/elements/tag/define.js';
+import { Tag } from '@nvidia-elements/core/tag';
+import '@nvidia-elements/core/tag/define.js';
 
 describe('nve-tag', () => {
   let fixture: HTMLElement;

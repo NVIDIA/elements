@@ -1,9 +1,9 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, emulateClick, untilEvent } from '@nvidia-elements/testing';
-import { SortButton } from '@elements/elements/sort-button';
-import type { Icon } from '@elements/elements/icon';
-import '@elements/elements/sort-button/define.js';
+import { SortButton } from '@nvidia-elements/core/sort-button';
+import type { Icon } from '@nvidia-elements/core/icon';
+import '@nvidia-elements/core/sort-button/define.js';
 
 describe('nve-sort-button', () => {
   let fixture: HTMLElement;

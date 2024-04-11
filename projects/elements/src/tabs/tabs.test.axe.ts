@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { TabsItem, Tabs } from '@elements/elements/tabs';
-import '@elements/elements/tabs/define.js';
+import { TabsItem, Tabs } from '@nvidia-elements/core/tabs';
+import '@nvidia-elements/core/tabs/define.js';
 
 describe('nve-tabs axe', () => {
   let fixture: HTMLElement;

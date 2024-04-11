@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import { Toast } from '@elements/elements/toast';
-import '@elements/elements/toast/define.js';
+import { Toast } from '@nvidia-elements/core/toast';
+import '@nvidia-elements/core/toast/define.js';
 
 describe('nve-toast', () => {
   let fixture: HTMLElement;

@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import { Notification } from '@elements/elements/notification';
-import '@elements/elements/notification/define.js';
+import { Notification } from '@nvidia-elements/core/notification';
+import '@nvidia-elements/core/notification/define.js';
 
 describe('nve-notification', () => {
   let fixture: HTMLElement;

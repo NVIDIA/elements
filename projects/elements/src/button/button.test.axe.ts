@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Button } from '@elements/elements/button';
-import '@elements/elements/button/define.js';
+import { Button } from '@nvidia-elements/core/button';
+import '@nvidia-elements/core/button/define.js';
 
 describe('nve-button', () => {
   let fixture: HTMLElement;

@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import { Color } from '@elements/elements/color';
-import '@elements/elements/color/define.js';
+import { Color } from '@nvidia-elements/core/color';
+import '@nvidia-elements/core/color/define.js';
 
 describe('nve-color', () => {
   let fixture: HTMLElement;
