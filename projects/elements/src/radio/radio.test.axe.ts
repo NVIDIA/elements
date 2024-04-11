@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Radio } from '@elements/elements/radio';
-import '@elements/elements/radio/define.js';
+import { Radio } from '@nvidia-elements/core/radio';
+import '@nvidia-elements/core/radio/define.js';
 
 describe('mlv-radio axe', () => {
   let fixture: HTMLElement;

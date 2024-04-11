@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { typeButton } from '@elements/elements/internal';
+import { typeButton } from '@nvidia-elements/core/internal';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 
 @typeButton<TypeButtonControllerTestElement>()

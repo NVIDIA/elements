@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { JSONViewer } from '@elements/elements/json-viewer';
-import '@elements/elements/json-viewer/define.js';
+import { JSONViewer } from '@nvidia-elements/core/json-viewer';
+import '@nvidia-elements/core/json-viewer/define.js';
 
 describe('mlv-json-viewer', () => {
   let fixture: HTMLElement;

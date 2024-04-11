@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { Week } from '@elements/elements/week';
-import '@elements/elements/week/define.js';
+import { Week } from '@nvidia-elements/core/week';
+import '@nvidia-elements/core/week/define.js';
 
 describe('mlv-week', () => {
   let fixture: HTMLElement;

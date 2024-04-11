@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { DialogHeader } from '@elements/elements/dialog';
-import '@elements/elements/dialog/define.js';
+import { DialogHeader } from '@nvidia-elements/core/dialog';
+import '@nvidia-elements/core/dialog/define.js';
 
 describe('mlv-dialog-header', () => {
   let fixture: HTMLElement;

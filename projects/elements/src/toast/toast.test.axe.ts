@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Toast } from '@elements/elements/toast';
-import '@elements/elements/toast/define.js';
+import { Toast } from '@nvidia-elements/core/toast';
+import '@nvidia-elements/core/toast/define.js';
 
 describe('mlv-toast', () => {
   let fixture: HTMLElement;

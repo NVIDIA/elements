@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
-import { Alert } from '@elements/elements/alert';
-import '@elements/elements/alert/define.js';
+import { Alert } from '@nvidia-elements/core/alert';
+import '@nvidia-elements/core/alert/define.js';
 
 describe('mlv-alert', () => {
   let fixture: HTMLElement;

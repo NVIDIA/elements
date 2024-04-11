@@ -1,11 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture } from '@nvidia-elements/testing';
-import type { ButtonGroup } from '@elements/elements/button-group';
-import type { IconButton } from '@elements/elements/icon-button';
-import '@elements/elements/button-group/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/divider/define.js';
+import type { ButtonGroup } from '@nvidia-elements/core/button-group';
+import type { IconButton } from '@nvidia-elements/core/icon-button';
+import '@nvidia-elements/core/button-group/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/divider/define.js';
 
 describe('mlv-button-group', () => {
   let fixture: HTMLElement;

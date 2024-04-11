@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { DrawerContent } from '@elements/elements/drawer';
-import '@elements/elements/drawer/define.js';
+import { DrawerContent } from '@nvidia-elements/core/drawer';
+import '@nvidia-elements/core/drawer/define.js';
 
 describe('mlv-drawer-content', () => {
   let fixture: HTMLElement;

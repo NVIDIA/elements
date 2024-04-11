@@ -2,11 +2,11 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { AppHeader } from '@elements/elements/app-header';
-import '@elements/elements/app-header/define.js';
-import '@elements/elements/logo/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
+import { AppHeader } from '@nvidia-elements/core/app-header';
+import '@nvidia-elements/core/app-header/define.js';
+import '@nvidia-elements/core/logo/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 describe('mlv-app-header axe', () => {
   let fixture: HTMLElement;

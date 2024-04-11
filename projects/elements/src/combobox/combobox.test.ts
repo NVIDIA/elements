@@ -2,10 +2,10 @@ import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
-import { Combobox } from '@elements/elements/combobox';
-import type { Menu, MenuItem } from '@elements/elements/menu';
-import type { Dropdown } from '@elements/elements/dropdown';
-import '@elements/elements/combobox/define.js';
+import { Combobox } from '@nvidia-elements/core/combobox';
+import type { Menu, MenuItem } from '@nvidia-elements/core/menu';
+import type { Dropdown } from '@nvidia-elements/core/dropdown';
+import '@nvidia-elements/core/combobox/define.js';
 
 describe('mlv-combobox', () => {
   let fixture: HTMLElement;

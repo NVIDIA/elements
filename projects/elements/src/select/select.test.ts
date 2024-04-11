@@ -1,10 +1,10 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, emulateClick } from '@nvidia-elements/testing';
-import { Select } from '@elements/elements/select';
-import type { Dropdown } from '@elements/elements/dropdown';
-import type { Menu, MenuItem } from '@elements/elements/menu';
-import '@elements/elements/select/define.js';
+import { Select } from '@nvidia-elements/core/select';
+import type { Dropdown } from '@nvidia-elements/core/dropdown';
+import type { Menu, MenuItem } from '@nvidia-elements/core/menu';
+import '@nvidia-elements/core/select/define.js';
 
 describe('mlv-select', () => {
   let fixture: HTMLElement;

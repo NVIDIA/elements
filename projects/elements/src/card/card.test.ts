@@ -1,9 +1,9 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { Card, CardHeader, CardFooter, CardContent } from '@elements/elements/card';
-import { getFlatDOMTree } from '@elements/elements/internal';
-import '@elements/elements/card/define.js';
+import { Card, CardHeader, CardFooter, CardContent } from '@nvidia-elements/core/card';
+import { getFlatDOMTree } from '@nvidia-elements/core/internal';
+import '@nvidia-elements/core/card/define.js';
 
 describe('mlv-card', () => {
   let fixture: HTMLElement;

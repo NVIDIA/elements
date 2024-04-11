@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { Dot } from '@elements/elements/dot';
-import '@elements/elements/dot/define.js';
+import { Dot } from '@nvidia-elements/core/dot';
+import '@nvidia-elements/core/dot/define.js';
 
 describe('mlv-dot', () => {
   let fixture: HTMLElement;

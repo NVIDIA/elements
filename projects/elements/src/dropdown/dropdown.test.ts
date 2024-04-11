@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import { Dropdown } from '@elements/elements/dropdown';
-import '@elements/elements/dropdown/define.js';
+import { Dropdown } from '@nvidia-elements/core/dropdown';
+import '@nvidia-elements/core/dropdown/define.js';
 
 describe('mlv-dropdown', () => {
   let fixture: HTMLElement;

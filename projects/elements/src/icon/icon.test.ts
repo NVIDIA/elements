@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import { Icon } from '@elements/elements/icon';
-import '@elements/elements/icon/define.js';
+import { Icon } from '@nvidia-elements/core/icon';
+import '@nvidia-elements/core/icon/define.js';
 
 describe('mlv-icon', () => {
   let fixture: HTMLElement;

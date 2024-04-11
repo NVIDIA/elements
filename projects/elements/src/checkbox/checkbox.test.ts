@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { Checkbox } from '@elements/elements/checkbox';
-import '@elements/elements/checkbox/define.js';
+import { Checkbox } from '@nvidia-elements/core/checkbox';
+import '@nvidia-elements/core/checkbox/define.js';
 
 describe('mlv-checkbox', () => {
   let fixture: HTMLElement;

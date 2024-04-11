@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { Badge } from '@elements/elements/badge';
-import '@elements/elements/badge/define.js';
+import { Badge } from '@nvidia-elements/core/badge';
+import '@nvidia-elements/core/badge/define.js';
 
 describe('mlv-badge', () => {
   let fixture: HTMLElement;

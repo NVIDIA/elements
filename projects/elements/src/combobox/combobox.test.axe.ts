@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Combobox } from '@elements/elements/combobox';
-import '@elements/elements/combobox/define.js';
+import { Combobox } from '@nvidia-elements/core/combobox';
+import '@nvidia-elements/core/combobox/define.js';
 
 describe('mlv-combobox axe', () => {
   let fixture: HTMLElement;

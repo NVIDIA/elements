@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Divider } from '@elements/elements/divider';
-import '@elements/elements/divider/define.js';
+import { Divider } from '@nvidia-elements/core/divider';
+import '@nvidia-elements/core/divider/define.js';
 
 describe('mlv-divider', () => {
   let fixture: HTMLElement;

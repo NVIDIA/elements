@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Menu } from '@elements/elements/menu';
-import '@elements/elements/menu/define.js';
+import { Menu } from '@nvidia-elements/core/menu';
+import '@nvidia-elements/core/menu/define.js';
 
 describe('mlv-menu axe', () => {
   let fixture: HTMLElement;

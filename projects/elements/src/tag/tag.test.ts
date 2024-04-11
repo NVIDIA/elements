@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
-import { Tag } from '@elements/elements/tag';
-import '@elements/elements/tag/define.js';
+import { Tag } from '@nvidia-elements/core/tag';
+import '@nvidia-elements/core/tag/define.js';
 
 describe('mlv-tag', () => {
   let fixture: HTMLElement;

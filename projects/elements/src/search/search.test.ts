@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { Search } from '@elements/elements/search';
-import '@elements/elements/search/define.js';
+import { Search } from '@nvidia-elements/core/search';
+import '@nvidia-elements/core/search/define.js';
 
 describe('mlv-search', () => {
   let fixture: HTMLElement;

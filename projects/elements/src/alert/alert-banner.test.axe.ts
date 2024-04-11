@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { AlertBanner } from '@elements/elements/alert';
-import '@elements/elements/alert/define.js';
+import { AlertBanner } from '@nvidia-elements/core/alert';
+import '@nvidia-elements/core/alert/define.js';
 
 describe('mlv-alert-banner axe', () => {
   let fixture: HTMLElement;

@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { AccordionGroup } from '@elements/elements/accordion';
-import '@elements/elements/accordion/define.js';
+import { AccordionGroup } from '@nvidia-elements/core/accordion';
+import '@nvidia-elements/core/accordion/define.js';
 
 describe('mlv-accordion axe', () => {
   let fixture: HTMLElement;

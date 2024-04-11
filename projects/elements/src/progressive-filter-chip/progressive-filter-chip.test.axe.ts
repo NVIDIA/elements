@@ -2,9 +2,9 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { ProgressiveFilterChip } from '@elements/elements/progressive-filter-chip';
-import '@elements/elements/progressive-filter-chip/define.js';
-import '@elements/elements/forms/define.js';
+import { ProgressiveFilterChip } from '@nvidia-elements/core/progressive-filter-chip';
+import '@nvidia-elements/core/progressive-filter-chip/define.js';
+import '@nvidia-elements/core/forms/define.js';
 
 describe('mlv-progressive-filter-chip axe', () => {
   let fixture: HTMLElement;

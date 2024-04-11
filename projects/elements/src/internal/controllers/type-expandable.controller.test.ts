@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import { TypeExpandableController } from '@elements/elements/internal';
+import { TypeExpandableController } from '@nvidia-elements/core/internal';
 
 @customElement('type-expandable-controller-test-element')
 class TypeExpandableControllerTestElement extends LitElement {

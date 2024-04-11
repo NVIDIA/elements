@@ -2,10 +2,10 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Breadcrumb } from '@elements/elements/breadcrumb';
-import '@elements/elements/breadcrumb/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
+import { Breadcrumb } from '@nvidia-elements/core/breadcrumb';
+import '@nvidia-elements/core/breadcrumb/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 describe('mlv-breadcrumb', () => {
   let fixture: HTMLElement;

@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Pagination } from '@elements/elements/pagination';
-import '@elements/elements/pagination/define.js';
+import { Pagination } from '@nvidia-elements/core/pagination';
+import '@nvidia-elements/core/pagination/define.js';
 
 describe('mlv-pagination', () => {
   let fixture: HTMLElement;

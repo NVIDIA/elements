@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { Password } from '@elements/elements/password';
-import '@elements/elements/password/define.js';
+import { Password } from '@nvidia-elements/core/password';
+import '@nvidia-elements/core/password/define.js';
 
 describe('mlv-password', () => {
   let fixture: HTMLElement;
