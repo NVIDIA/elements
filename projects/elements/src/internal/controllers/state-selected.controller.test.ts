@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { stateSelected } from '@elements/elements/internal';
+import { stateSelected } from '@nvidia-elements/core/internal';
 
 @stateSelected<StateSelectedControllerTestElement>()
 @customElement('state-selected-controller-test-element')

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { onKeys } from '@elements/elements/internal';
+import { onKeys } from '@nvidia-elements/core/internal';
 
 describe('onKeys', () => {
   it('should call function when a single key is pressed', async () => {

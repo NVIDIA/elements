@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { Switch } from '@elements/elements/switch';
-import '@elements/elements/switch/define.js';
+import { Switch } from '@nvidia-elements/core/switch';
+import '@nvidia-elements/core/switch/define.js';
 
 describe('nve-switch', () => {
   let fixture: HTMLElement;

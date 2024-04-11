@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { i18n, I18nController } from '@elements/elements/internal';
+import { i18n, I18nController } from '@nvidia-elements/core/internal';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 
 @i18n<I18nTestElement>()

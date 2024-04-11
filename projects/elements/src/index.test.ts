@@ -1,20 +1,20 @@
 import { describe, expect, it } from 'vitest';
 
 // root entrypoint types
-import type { Color } from '@elements/elements';
-import type { Color as ColorFromPath } from '@elements/elements/index.js';
+import type { Color } from '@nvidia-elements/core';
+import type { Color as ColorFromPath } from '@nvidia-elements/core/index.js';
 
 // multi-entrypoint
-import { Dot } from '@elements/elements/dot';
-import { Dot as DotFromPath } from '@elements/elements/dot/index.js';
+import { Dot } from '@nvidia-elements/core/dot';
+import { Dot as DotFromPath } from '@nvidia-elements/core/dot/index.js';
 
 // multi-entrypoint types
-import type { Dot as DotType } from '@elements/elements/dot';
-import type { Dot as DotTypeFromPath } from '@elements/elements/dot/index.js';
+import type { Dot as DotType } from '@nvidia-elements/core/dot';
+import type { Dot as DotTypeFromPath } from '@nvidia-elements/core/dot/index.js';
 
 // multi-entrypoint define
-import * as dot from '@elements/elements/dot/define';
-import * as dot2 from '@elements/elements/dot/define.js';
+import * as dot from '@nvidia-elements/core/dot/define';
+import * as dot2 from '@nvidia-elements/core/dot/define.js';
 
 describe('entrypoint paths and type checking', () => {
   it('should allow root entrypoint', () => {

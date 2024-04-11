@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { defineScopedElement, scope } from '@elements/elements/scoped';
-import { define } from '@elements/elements/internal';
+import { defineScopedElement, scope } from '@nvidia-elements/core/scoped';
+import { define } from '@nvidia-elements/core/internal';
 
 export class TestTwoElement extends LitElement {
   static metadata = {

@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Datetime } from '@elements/elements/datetime';
-import '@elements/elements/datetime/define.js';
+import { Datetime } from '@nvidia-elements/core/datetime';
+import '@nvidia-elements/core/datetime/define.js';
 
 describe('nve-datetime axe', () => {
   let fixture: HTMLElement;

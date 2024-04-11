@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Time } from '@elements/elements/time';
-import '@elements/elements/time/define.js';
+import { Time } from '@nvidia-elements/core/time';
+import '@nvidia-elements/core/time/define.js';
 
 describe('nve-time', () => {
   let fixture: HTMLElement;

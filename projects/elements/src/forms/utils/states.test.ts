@@ -14,7 +14,7 @@ import {
   hideAllControlMessages,
   hideInactiveValidationMessages
 } from './states.js';
-import '@elements/elements/forms/define.js';
+import '@nvidia-elements/core/forms/define.js';
 
 describe('updateControlStatusState', () => {
   let fixture: HTMLElement;

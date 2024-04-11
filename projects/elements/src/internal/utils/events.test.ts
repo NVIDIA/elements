@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@nvidia-elements/testing';
-import { debounce, onChildListMutation, stopEvent, throttle } from '@elements/elements/internal';
+import { debounce, onChildListMutation, stopEvent, throttle } from '@nvidia-elements/core/internal';
 
 describe('stopEvent', () => {
   it('should cause event to prevent default behavior (preventDefault)', async () => {
