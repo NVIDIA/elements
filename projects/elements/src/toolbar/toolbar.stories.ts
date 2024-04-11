@@ -1,13 +1,13 @@
 import { html } from 'lit';
-import '@elements/elements/toolbar/define.js';
-import '@elements/elements/combobox/define.js';
-import '@elements/elements/button-group/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/divider/define.js';
-import '@elements/elements/progressive-filter-chip/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/color/define.js';
+import '@nvidia-elements/core/toolbar/define.js';
+import '@nvidia-elements/core/combobox/define.js';
+import '@nvidia-elements/core/button-group/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/progressive-filter-chip/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/color/define.js';
 
 export default {
   title: 'Elements/Toolbar/Examples',

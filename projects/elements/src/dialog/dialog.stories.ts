@@ -1,10 +1,10 @@
 import { html } from 'lit';
 import { spread } from '@elements/elements/internal';
 import { Dialog } from '@elements/elements/dialog';
-import '@elements/elements/card/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/dialog/define.js';
-import '@elements/elements/accordion/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/dialog/define.js';
+import '@nvidia-elements/core/accordion/define.js';
 
 export default {
   title: 'Elements/Dialog/Examples',

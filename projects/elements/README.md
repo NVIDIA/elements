@@ -32,7 +32,7 @@ import '@elements/elements/card/define.js';
 import '@elements/elements/icon/define.js';
 
 // import specific element type references
-import { Button } from '@elements/elements';
+import { Button } from '@elements/elements/button';
 
 // optional (polyfills for non-chromium browsers)
 import '@elements/elements/polyfills';

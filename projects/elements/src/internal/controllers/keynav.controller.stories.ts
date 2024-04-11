@@ -1,9 +1,9 @@
 import { css, html, LitElement } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { keyNavigationGrid, keyNavigationList, KeynavListConfig } from '@elements/elements/internal';
-import '@elements/elements/card/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Internal/Controllers'

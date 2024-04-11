@@ -1,9 +1,9 @@
 import { LitElement, html } from 'lit';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/logo/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/logo/define.js';
 
 export default {
   title: 'Elements/Select/Examples',
