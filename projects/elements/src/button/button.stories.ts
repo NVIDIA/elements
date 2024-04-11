@@ -1,7 +1,7 @@
 import { html } from 'lit';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/search/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/search/define.js';
 
 export default {
   title: 'Elements/Button/Examples',

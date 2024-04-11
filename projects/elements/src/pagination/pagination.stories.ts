@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import '@elements/elements/pagination/define.js';
-import '@elements/elements/button/define.js';
+import '@nvidia-elements/core/pagination/define.js';
+import '@nvidia-elements/core/button/define.js';
 
 export default {
   title: 'Elements/Pagination/Examples',

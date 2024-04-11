@@ -6,13 +6,13 @@ import typography from '@elements/elements/css/module.typography.css?inline';
 import layout from '@elements/elements/css/module.layout.css?inline';
 import { defineScopedElement } from '@elements/elements/scoped';
 import { IconButton } from '@elements/elements/icon-button';
-import '@elements/elements/button/define.js';
-import '@elements/elements/notification/define.js';
-import '@elements/elements/password/define.js';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/checkbox/define.js';
-import '@elements/elements/button/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/notification/define.js';
+import '@nvidia-elements/core/password/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/checkbox/define.js';
+import '@nvidia-elements/core/button/define.js';
 
 defineScopedElement('plugin', IconButton);
 

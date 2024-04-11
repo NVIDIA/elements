@@ -21,7 +21,6 @@ export default defineConfig(env => {
     resolve: {
       alias: {
         '@nvidia-elements/core': resolve('./src')
-        // '@elements/elements': resolve('./src')
       }
     },
     plugins: [
@@ -84,11 +83,10 @@ export default defineConfig(env => {
                 .forEach(file => fs.renameSync(dist(file), dist(`css/${file}`)));
             }
           },
-          mode === 'production' ? (minifyHTML as any).default() : false // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
-          // temporary disable for angular 12
-          // mode === 'production'
-          //   ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
-          //   : false // https://github.com/vitejs/vite/issues/8848
+          mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
+          mode === 'production'
+            ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
+            : false // https://github.com/vitejs/vite/issues/8848
         ]
       }
     }

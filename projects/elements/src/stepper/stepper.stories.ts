@@ -1,8 +1,8 @@
 import { html } from 'lit';
-import '@elements/elements/stepper/define.js';
-import '@elements/elements/card/define.js';
-import '@elements/elements/dot/define.js';
-import '@elements/elements/icon/define.js';
+import '@nvidia-elements/core/stepper/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/dot/define.js';
+import '@nvidia-elements/core/icon/define.js';
 
 export default {
   title: 'Elements/Stepper/Examples',

@@ -5,14 +5,14 @@ import layout from '@elements/elements/css/module.layout.css?inline';
 import typography from '@elements/elements/css/module.typography.css?inline';
 import { Icon, IconName, ICON_NAMES } from '@elements/elements/icon';
 import { Size  as IconSize} from '@elements/elements/internal';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/card/define.js';
-import '@elements/elements/search/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/checkbox/define.js';
-import '@elements/elements/divider/define.js';
-import '@elements/elements/notification/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/checkbox/define.js';
+import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/notification/define.js';
 
 export default {
   title: 'Elements/Icon/Examples',

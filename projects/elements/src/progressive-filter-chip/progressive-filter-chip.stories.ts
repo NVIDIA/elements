@@ -1,8 +1,8 @@
 import { html } from 'lit';
-import '@elements/elements/progressive-filter-chip/define.js';
-import '@elements/elements/input/define.js';
-import '@elements/elements/card/define.js';
-import '@elements/elements/select/define.js';
+import '@nvidia-elements/core/progressive-filter-chip/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/select/define.js';
 
 export default {
   title: 'Elements/Progressive Filter Chip/Examples',

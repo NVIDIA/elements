@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import '@elements/elements/badge/define.js';
-import '@elements/elements/alert/define.js';
+import '@nvidia-elements/core/badge/define.js';
+import '@nvidia-elements/core/alert/define.js';
 
 export default {
   title: 'Elements/Badge/Examples',

@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@elements/elements/dot/define.js';
+import '@nvidia-elements/core/dot/define.js';
 
 export default {
   title: 'Elements/Dot/Examples',
