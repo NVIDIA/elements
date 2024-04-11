@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import '@elements/elements/alert/define.js';
+import '@nvidia-elements/core/alert/define.js';
 
 export default {
   title: 'Elements/Alert/Examples',

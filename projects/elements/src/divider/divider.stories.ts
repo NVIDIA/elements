@@ -1,7 +1,7 @@
 import { html } from 'lit';
-import '@elements/elements/divider/define.js';
-import '@elements/elements/card/define.js';
-import '@elements/elements/icon-button/define.js';
+import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Elements/Divider/Examples',

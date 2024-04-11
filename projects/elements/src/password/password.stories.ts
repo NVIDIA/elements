@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/password/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/password/define.js';
 
 export default {
   title: 'Elements/Password/Examples',

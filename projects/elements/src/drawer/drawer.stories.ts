@@ -1,7 +1,7 @@
 import { html } from 'lit';
-import '@elements/elements/card/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/drawer/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/drawer/define.js';
 
 export default {
   title: 'Elements/Drawer/Examples',
