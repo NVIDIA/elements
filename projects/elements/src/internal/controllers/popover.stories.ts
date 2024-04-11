@@ -1,14 +1,14 @@
 import { html } from 'lit';
-import '@elements/elements/forms/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/search/define.js';
-import '@elements/elements/dialog/define.js';
-import '@elements/elements/tooltip/define.js';
-import '@elements/elements/toast/define.js';
-import '@elements/elements/drawer/define.js';
-import '@elements/elements/dropdown/define.js';
-import '@elements/elements/notification/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/dialog/define.js';
+import '@nvidia-elements/core/tooltip/define.js';
+import '@nvidia-elements/core/toast/define.js';
+import '@nvidia-elements/core/drawer/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
+import '@nvidia-elements/core/notification/define.js';
 
 export default {
   title: 'Foundations/Popovers/Examples'

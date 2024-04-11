@@ -2,22 +2,22 @@ import { LitElement, unsafeCSS, html, css, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { getItems, grid } from '../../test/demo.js';
 import layout from '@elements/elements/css/module.layout.css?inline';
-import '@elements/elements/grid/define.js';
-import '@elements/elements/badge/define.js'
-import '@elements/elements/button/define.js';
-import '@elements/elements/card/define.js';
-import '@elements/elements/checkbox/define.js';
-import '@elements/elements/dropdown/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/tabs/define.js';
-import '@elements/elements/menu/define.js';
-import '@elements/elements/pagination/define.js';
-import '@elements/elements/progress-ring/define.js';
-import '@elements/elements/panel/define.js';
-import '@elements/elements/radio/define.js';
-import '@elements/elements/search/define.js';
-import '@elements/elements/sort-button/define.js';
+import '@nvidia-elements/core/grid/define.js';
+import '@nvidia-elements/core/badge/define.js'
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/checkbox/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/tabs/define.js';
+import '@nvidia-elements/core/menu/define.js';
+import '@nvidia-elements/core/pagination/define.js';
+import '@nvidia-elements/core/progress-ring/define.js';
+import '@nvidia-elements/core/panel/define.js';
+import '@nvidia-elements/core/radio/define.js';
+import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/sort-button/define.js';
 import '@lit-labs/virtualizer';
 
 export default {

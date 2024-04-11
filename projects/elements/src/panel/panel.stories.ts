@@ -1,11 +1,11 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import type { Panel } from '@elements/elements/panel';
-import '@elements/elements/panel/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/notification/define.js';
+import '@nvidia-elements/core/panel/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/notification/define.js';
 
 export default {
   title: 'Elements/Panel/Examples',
