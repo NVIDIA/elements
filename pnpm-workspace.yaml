@@ -6,6 +6,7 @@ packages:
   - 'projects/demos/nextjs'
   - 'projects/demos/react'
   - 'projects/demos/solidjs'
+  - 'projects/demos/static'
   - 'projects/demos/typescript'
   - 'projects/demos/vue'
   - 'projects/pages'
