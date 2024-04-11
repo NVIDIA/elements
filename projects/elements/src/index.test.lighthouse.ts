@@ -67,6 +67,7 @@ describe('lighthouse report', () => {
         import '@elements/elements/search/define.js';
         import '@elements/elements/select/define.js';
         import '@elements/elements/sort-button/define.js';
+        import '@elements/elements/stepper/define.js';
         import '@elements/elements/switch/define.js';
         import '@elements/elements/tabs/define.js';
         import '@elements/elements/tag/define.js';
@@ -81,6 +82,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(61);
+    expect(report.payload.javascript.kb).toBeLessThan(61.4);
   });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Icon, mergeIcons } from '@elements/elements/icon';
+import { Icon, mergeIcons } from '@nvidia-elements/core/icon';
 
 describe('nve-icon static', () => {
   it('should return static registry if icon is not yet registered', () => {

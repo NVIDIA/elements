@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { keyNavigationGrid } from '@elements/elements/internal';
+import { keyNavigationGrid } from '@nvidia-elements/core/internal';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 
 @keyNavigationGrid<GridKeyNavigationControllerTestElement>()

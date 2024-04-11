@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Input } from '@elements/elements/input';
-import '@elements/elements/input/define.js';
+import { Input } from '@nvidia-elements/core/input';
+import '@nvidia-elements/core/input/define.js';
 
 describe('nve-input axe', () => {
   let fixture: HTMLElement;

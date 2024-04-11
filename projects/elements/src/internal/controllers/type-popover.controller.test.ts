@@ -3,9 +3,9 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@nvidia-elements/testing';
-import { PopoverAlign, PopoverPosition, TypePopoverController } from '@elements/elements/internal';
-import type { Button } from '@elements/elements/button';
-import '@elements/elements/button/define.js';
+import { PopoverAlign, PopoverPosition, TypePopoverController } from '@nvidia-elements/core/internal';
+import type { Button } from '@nvidia-elements/core/button';
+import '@nvidia-elements/core/button/define.js';
 
 @customElement('type-popover-controller-test-element')
 class TypePopoverControllerTestElement extends LitElement {
