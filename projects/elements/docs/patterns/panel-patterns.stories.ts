@@ -1,14 +1,14 @@
 import { html } from 'lit';
-import '@elements/elements/accordion/define.js';
-import '@elements/elements/badge/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/divider/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/notification/define.js';
-import '@elements/elements/panel/define.js';
-import '@elements/elements/search/define.js';
-import '@elements/elements/tabs/define.js';
-import '@elements/elements/tag/define.js';
+import '@nvidia-elements/core/accordion/define.js';
+import '@nvidia-elements/core/badge/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/notification/define.js';
+import '@nvidia-elements/core/panel/define.js';
+import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/tabs/define.js';
+import '@nvidia-elements/core/tag/define.js';
 
 export default {
   title: 'Patterns/Examples',

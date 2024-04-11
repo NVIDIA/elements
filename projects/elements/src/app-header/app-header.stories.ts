@@ -1,14 +1,14 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
-import '@elements/elements/app-header/define.js';
-import '@elements/elements/logo/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/icon-button/define.js';
-import '@elements/elements/menu/define.js';
-import '@elements/elements/divider/define.js';
-import '@elements/elements/dropdown/define.js';
+import '@nvidia-elements/core/app-header/define.js';
+import '@nvidia-elements/core/logo/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/menu/define.js';
+import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
 
 export default {
   title: 'Elements/App Header/Examples',

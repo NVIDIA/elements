@@ -45,6 +45,7 @@ export default {
       resolve: {
         alias: {
           '@elements/elements': resolve('./dist'),
+          '@nvidia-elements/core': resolve('./dist'),
           'build': resolve('./build')
         }
       }

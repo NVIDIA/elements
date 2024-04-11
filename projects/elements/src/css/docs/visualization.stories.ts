@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import '@elements/elements/card/define.js';
-import '@elements/elements/select/define.js';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/select/define.js';
 import { getThemeTokens } from '@elements/elements';
 import Chart from 'chart.js/auto';
 

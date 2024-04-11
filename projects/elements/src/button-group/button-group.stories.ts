@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import '@elements/elements/button-group/define.js';
-import '@elements/elements/divider/define.js';
+import '@nvidia-elements/core/button-group/define.js';
+import '@nvidia-elements/core/divider/define.js';
 
 export default {
   title: 'Elements/Button Group/Examples',
