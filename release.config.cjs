@@ -54,6 +54,11 @@ module.exports = {
               }
             ],
             countMatches: true
+          },
+          {
+            files: [`${process.cwd()}/dist/**/*.js`],
+            from: '"0.0.0"',
+            to: '"${nextRelease.version}"'
           }
         ]
       }
