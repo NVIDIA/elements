@@ -1,0 +1,42 @@
+{
+  "name": "static-elements-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "wireit",
+    "preview": "wireit"
+  },
+  "dependencies": {
+    "@elements/elements": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "5.3.3",
+    "vite": "5.1.3"
+  },
+  "wireit": {
+    "build": {
+      "command": "vite build",
+      "files": [
+        "index.html",
+        "vite.config.ts",
+        "package.json"
+      ],
+      "output": [
+        "dist"
+      ],
+      "dependencies": [
+        "../../elements:build"
+      ]
+    },
+    "preview": {
+      "command": "vite preview",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    }
+  }
+}
