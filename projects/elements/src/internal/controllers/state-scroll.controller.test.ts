@@ -2,7 +2,7 @@ import { html, LitElement, css } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import { stateScroll } from '@elements/elements/internal';
+import { stateScroll } from '@nvidia-elements/core/internal';
 
 @stateScroll<StateScrollControllerTestElement>()
 @customElement('state-scroll-controller-test-element')

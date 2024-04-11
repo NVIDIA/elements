@@ -20,8 +20,8 @@ export default defineConfig(env => {
   return {
     resolve: {
       alias: {
-        '@nvidia-elements/core': resolve('./src'),
-        '@elements/elements': resolve('./src')
+        '@nvidia-elements/core': resolve('./src')
+        // '@elements/elements': resolve('./src')
       }
     },
     plugins: [

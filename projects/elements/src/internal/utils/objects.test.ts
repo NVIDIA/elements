@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deepMerge, formatStandardNumber, parseVersion } from '@elements/elements/internal';
+import { deepMerge, formatStandardNumber, parseVersion } from '@nvidia-elements/core/internal';
 
 describe('deepMerge', () => {
   const obj1 = {
@@ -26,8 +26,8 @@ describe('deepMerge', () => {
       a: 'a',
       b: 'b',
       c: {
-        d: "override d",
-        e: "e",
+        d: 'override d',
+        e: 'e',
         f: 'f',
         g: [1, 2, 3, 4]
       }

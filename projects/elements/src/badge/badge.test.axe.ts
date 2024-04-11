@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import '@elements/elements/badge/define.js';
+import '@nvidia-elements/core/badge/define.js';
 
 describe('nve-badge axe', () => {
   it('should pass axe check for status', async () => {

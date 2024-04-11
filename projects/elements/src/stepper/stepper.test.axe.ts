@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { StepperItem, Stepper } from '@elements/elements/stepper';
-import '@elements/elements/stepper/define.js';
+import { StepperItem, Stepper } from '@nvidia-elements/core/stepper';
+import '@nvidia-elements/core/stepper/define.js';
 
 describe('nve-stepper axe', () => {
   let fixture: HTMLElement;

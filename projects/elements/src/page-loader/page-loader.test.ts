@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { PageLoader } from '@elements/elements/page-loader';
-import '@elements/elements/page-loader/define.js';
+import { PageLoader } from '@nvidia-elements/core/page-loader';
+import '@nvidia-elements/core/page-loader/define.js';
 
 describe('nve-page-loader', () => {
   let fixture: HTMLElement;
