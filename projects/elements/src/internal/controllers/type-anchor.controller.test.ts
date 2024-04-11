@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
-import { typeAnchor } from '@elements/elements/internal';
+import { typeAnchor } from '@nvidia-elements/core/internal';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, emulateClick, elementIsStable } from '@nvidia-elements/testing';
 

@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { PanelFooter } from '@elements/elements/panel';
-import '@elements/elements/panel/define.js';
+import { PanelFooter } from '@nvidia-elements/core/panel';
+import '@nvidia-elements/core/panel/define.js';
 
 describe('nve-panel-footer', () => {
   let fixture: HTMLElement;

@@ -9,7 +9,7 @@ import {
   assoicateAriaDescribedBy,
   associateDataList,
   associateControlGroup
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 
 @customElement('element-internals-test-element')
 class ElementInternalsTestElement extends LitElement {

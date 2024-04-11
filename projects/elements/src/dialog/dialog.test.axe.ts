@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Dialog } from '@elements/elements/dialog';
-import '@elements/elements/dialog/define.js';
+import { Dialog } from '@nvidia-elements/core/dialog';
+import '@nvidia-elements/core/dialog/define.js';
 
 describe('nve-dialog axe', () => {
   let fixture: HTMLElement;

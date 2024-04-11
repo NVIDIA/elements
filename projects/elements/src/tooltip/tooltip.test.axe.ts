@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { Tooltip } from '@elements/elements/tooltip';
-import '@elements/elements/tooltip/define.js';
+import { Tooltip } from '@nvidia-elements/core/tooltip';
+import '@nvidia-elements/core/tooltip/define.js';
 
 describe('nve-tooltip axe', () => {
   let fixture: HTMLElement;

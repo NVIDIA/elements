@@ -25,7 +25,7 @@ import {
   removeEmptySlotWhitespace,
   hasHorizontalScrollBar,
   getDisplayValue
-} from '@elements/elements/internal';
+} from '@nvidia-elements/core/internal';
 
 @customElement('dom-test-element')
 class TestComponent extends LitElement {

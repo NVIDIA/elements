@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { GridRow } from '@elements/elements/grid';
-import '@elements/elements/grid/define.js';
+import { GridRow } from '@nvidia-elements/core/grid';
+import '@nvidia-elements/core/grid/define.js';
 
 describe('nve-grid-row', () => {
   let fixture: HTMLElement;

@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { ControlGroup, ControlMessage } from '@elements/elements/forms';
-import '@elements/elements/forms/define.js';
+import { ControlGroup, ControlMessage } from '@nvidia-elements/core/forms';
+import '@nvidia-elements/core/forms/define.js';
 
 describe('nve-control-group', () => {
   let fixture: HTMLElement;

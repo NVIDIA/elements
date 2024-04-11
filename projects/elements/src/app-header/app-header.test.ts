@@ -1,14 +1,14 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { AppHeader } from '@elements/elements/app-header';
-import { Button } from '@elements/elements/button';
-import { IconButton } from '@elements/elements/icon-button';
-import { Logo } from '@elements/elements/logo';
-import '@elements/elements/app-header/define.js';
-import '@elements/elements/logo/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/icon-button/define.js';
+import { AppHeader } from '@nvidia-elements/core/app-header';
+import { Button } from '@nvidia-elements/core/button';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Logo } from '@nvidia-elements/core/logo';
+import '@nvidia-elements/core/app-header/define.js';
+import '@nvidia-elements/core/logo/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 describe('nve-app-header: defaults', () => {
   let fixture: HTMLElement;

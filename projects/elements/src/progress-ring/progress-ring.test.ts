@@ -1,10 +1,10 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { statusIcons } from '@elements/elements/internal';
-import { ProgressRing } from '@elements/elements/progress-ring';
-import { Icon } from '@elements/elements/icon';
-import '@elements/elements/progress-ring/define.js';
+import { statusIcons } from '@nvidia-elements/core/internal';
+import { ProgressRing } from '@nvidia-elements/core/progress-ring';
+import { Icon } from '@nvidia-elements/core/icon';
+import '@nvidia-elements/core/progress-ring/define.js';
 
 describe('nve-progress-ring', () => {
   let fixture: HTMLElement;

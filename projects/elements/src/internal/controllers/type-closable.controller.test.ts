@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import { TypeClosableController } from '@elements/elements/internal';
+import { TypeClosableController } from '@nvidia-elements/core/internal';
 
 @customElement('type-closable-controller-test-element')
 class TypeClosableControllerTestElement extends LitElement {
