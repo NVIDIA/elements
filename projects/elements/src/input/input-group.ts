@@ -19,8 +19,8 @@ export class InputGroup extends ControlGroup {
   };
 
   async connectedCallback() {
-    super.connectedCallback();
     appendRootNodeStyle(this, globalStyles);
+    super.connectedCallback();
     await this.updateComplete;
     const controls = Array.from(this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements());
     controls[0].setAttribute('first-control', '');
