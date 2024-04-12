@@ -416,7 +416,7 @@ class ThemeGeneratorDemo extends LitElement {
     };
 
     Object.keys(this.formValues).forEach(prop => {
-      document.documentElement.style.setProperty(`--mlv-${prop}`, this.formValues[prop]);
+      document.documentElement.style.setProperty(`--nve-${prop}`, this.formValues[prop]);
     });
   }
 }

@@ -1,5 +1,5 @@
 {
-  "created": "2024-04-16T00:32:16.177Z",
+  "created": "2024-04-16T15:36:52.674Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -63,7 +63,7 @@
           {
             "name": "container",
             "type": {
-              "text": "Extract<Container, 'flat' | 'full' | 'inset'> | default"
+              "text": "'flat' | 'full' | 'inset' | default"
             },
             "default": "'full'",
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
@@ -313,7 +313,7 @@
           {
             "name": "container",
             "type": {
-              "text": "Extract<Container, 'flat' | 'full' | 'inset'> | default"
+              "text": "'flat' | 'full' | 'inset' | default"
             },
             "default": "'full'",
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
@@ -650,7 +650,7 @@
           {
             "name": "prominence",
             "type": {
-              "text": "Extract<Prominence, 'emphasis'> | default"
+              "text": "'emphasis' | default"
             },
             "description": "Determines the visual prominence or weight of an element",
             "fieldName": "prominence",
@@ -662,7 +662,7 @@
           {
             "name": "container",
             "type": {
-              "text": "Extract<Container, 'full'> | default"
+              "text": "'full' | default"
             },
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
             "fieldName": "container",
@@ -797,7 +797,7 @@
           {
             "name": "prominence",
             "type": {
-              "text": "Extract<Prominence, 'emphasis'> | default"
+              "text": "'emphasis' | default"
             },
             "description": "Determines the visual prominence or weight of an element",
             "fieldName": "prominence"
@@ -805,7 +805,7 @@
           {
             "name": "container",
             "type": {
-              "text": "Extract<Container, 'full'> | default"
+              "text": "'full' | default"
             },
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
             "fieldName": "container"
@@ -1091,7 +1091,7 @@
           {
             "name": "prominence",
             "type": {
-              "text": "Extract<Prominence, 'emphasis'> | default"
+              "text": "'emphasis' | default"
             },
             "description": "Determines the visual prominence or weight of an element",
             "fieldName": "prominence"
@@ -10338,7 +10338,7 @@
           {
             "name": "container",
             "type": {
-              "text": "Extract<Container, 'condensed'> | default"
+              "text": "'condensed' | default"
             },
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
             "fieldName": "container"
@@ -10368,10 +10368,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.788,
+            "kb": 19.84,
             "requests": {
               "index.js": {
-                "kb": 19.788,
+                "kb": 19.84,
                 "name": "index.js"
               }
             }
@@ -10506,7 +10506,7 @@
           {
             "name": "status",
             "type": {
-              "text": "Extract<SupportStatus, 'accent' | 'danger' | 'success'> | 'pending' | default"
+              "text": "| Extract<SupportStatus, 'accent' | 'danger' | 'success'>\n    | 'pending' | default"
             },
             "description": "Defines the visual treatment to represent a interaction status. (tasks, support, trends)",
             "fieldName": "status"
@@ -10514,7 +10514,7 @@
           {
             "name": "container",
             "type": {
-              "text": "Extract<Container, 'condensed'> | default"
+              "text": "'condensed' | default"
             },
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
             "fieldName": "container"
@@ -10657,10 +10657,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.788,
+            "kb": 19.84,
             "requests": {
               "index.js": {
-                "kb": 19.788,
+                "kb": 19.84,
                 "name": "index.js"
               }
             }
@@ -11380,7 +11380,7 @@
           {
             "name": "prominence",
             "type": {
-              "text": "Extract<Prominence, 'emphasis'> | default"
+              "text": "'emphasis' | default"
             },
             "description": "Determines the visual prominence or weight of an element",
             "fieldName": "prominence"
