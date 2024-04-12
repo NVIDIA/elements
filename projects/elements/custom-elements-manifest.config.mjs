@@ -130,7 +130,13 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
     if (!text) {
       return;
     }
-    const types = text.split('|').map(value => value.trim());
+
+    if (text.startsWith('Extract')) {
+      entry.type.text = text.replace('Extract<', '').replace('> | ', ' | ').split(',')[1].trim();
+    }
+
+    let types = text.split('|').map(value => value.trim());
+
     const rewrittenTypes = new Set();
     let performRewrite = false;
     for (const type of types) {
@@ -184,6 +190,15 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
                 const stringLiterals = types.map(type => quoteWrap(type.value));
                 stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
               }
+            }
+          }
+          break;
+        case ts.SyntaxKind.TypeReference:
+          if (node.typeName.escapedText === 'Extract') {
+            const { types } = runtimeEnvironment.typeChecker.getTypeAtLocation(node);
+            if (types?.every(type => type.value !== undefined)) {
+              const stringLiterals = types.map(type => quoteWrap(type.value));
+              stringLiteralsByTypeAlias.set(node.getFullText(), stringLiterals);
             }
           }
           break;
