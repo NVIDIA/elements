@@ -40,13 +40,13 @@ describe('nve-breadcrumb', () => {
     expect(element.querySelector('span').slot.includes('_')).toBe(true);
   });
 
-  it('should decorate clickable elements with flat', async () => {
+  it('should decorate clickable elements with inline', async () => {
     const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
 
-    expect(element.querySelector('nve-icon-button').container.includes('flat')).toBe(true);
-    expect(element.querySelector('nve-button').container.includes('flat')).toBe(true);
+    expect(element.querySelector('nve-icon-button').container.includes('inline')).toBe(true);
+    expect(element.querySelector('nve-button').container.includes('inline')).toBe(true);
   });
 
   it('should remove wrapper slot if a child is removed', async () => {
