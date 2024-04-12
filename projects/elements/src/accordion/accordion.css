@@ -37,8 +37,12 @@
   gap: var(--nve-ref-space-xxs);
 }
 
-:host(:not(:state(expanded))) #content {
+#content {
   display: none;
+}
+
+:host(:state(expanded)) #content {
+  display: block;
 }
 
 :host([container='inset']) {
