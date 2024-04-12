@@ -149,11 +149,13 @@ export class Accordion extends LitElement implements ContainerElement {
   @state() private hoverActive = false;
 
   get #hasAction(): boolean {
-    return !!this.querySelector('[slot="actions"]');
+    return !!(
+      this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="actions"]')?.assignedElements({ flatten: true }) ?? []
+    ).length;
   }
 
   get #header() {
-    return this.shadowRoot.querySelector<HTMLSlotElement>('slot[name=header]').assignedElements()[0];
+    return this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name=header]')?.assignedElements()[0];
   }
 
   #toggle(element: HTMLElement): void {

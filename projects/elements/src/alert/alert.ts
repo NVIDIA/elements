@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { Icon } from '@nvidia-elements/core/icon';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import {
@@ -64,24 +65,20 @@ export class Alert extends LitElement {
   /** Enables internal string values to be updated for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
-  get #prefix() {
-    return this.querySelectorAll('[slot="prefix"]');
-  }
+  @queryAssignedElements({ slot: 'prefix', flatten: true }) private prefixItems!: any[];
 
-  get #actions() {
-    return this.querySelectorAll('[slot="actions"]');
-  }
+  @queryAssignedElements({ slot: 'actions', flatten: true }) private actionItems!: any[];
 
   /** @private */
   declare _internals: ElementInternals;
 
   render() {
     return html`
-      <div internal-host>
+      <div internal-host @slotchange=${() => this.requestUpdate()}>
         <slot name="icon"><mlv-icon name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></mlv-icon></slot>
-        ${this.#prefix.length ? html`<slot name="prefix"></slot>` : ''}
+        <slot name="prefix" ?hidden=${!this.prefixItems.length}></slot>
         <slot></slot>
-        ${this.#actions.length ? html`<slot name="actions"></slot>` : ''}
+        <slot name="actions" ?hidden=${!this.actionItems.length}></slot>
         ${this.closable ? html`<mlv-icon-button @click=${() => this.#typeClosableController.close()} container="flat" icon-name="cancel" size="sm" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
       </div>
       <slot name="content" part="content"></slot>
