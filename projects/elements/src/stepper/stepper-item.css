@@ -1,7 +1,7 @@
 :host {
   --width: auto;
   --font-size: var(--nve-ref-font-size-100);
-  --font-weight: var(--nve-ref-font-weight-medium);
+  --font-weight: var(--nve-ref-font-weight-semibold);
   --border-radius: var(--nve-ref-border-radius-xl);
   --color: var(--nve-sys-text-muted-color);
   --cursor: pointer;
@@ -12,7 +12,7 @@
 [internal-host] {
   width: var(--width);
   gap: var(--nve-ref-space-xs);
-  padding: var(--nve-ref-size-200);
+  padding: var(--nve-ref-size-200) var(--nve-ref-size-300) var(--nve-ref-size-200) var(--nve-ref-size-200);
   color: var(--color);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
@@ -34,17 +34,25 @@
   position: relative;
 }
 
-[internal-host] nve-progress-ring,
-[internal-host] nve-icon-button {
+nve-progress-ring,
+nve-icon-button {
   cursor: pointer;
 }
 
-[internal-host] nve-icon-button#number-icon {
+nve-icon-button#number-icon {
   box-sizing: content-box;
-  border: 2px solid var(--color);
+  border: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
   border-radius: 100%;
   --height: var(--nve-ref-size-600);
   --width: var(--nve-ref-size-600);
+  --background: transparent;
+}
+nve-icon-button[interaction='emphasis'] {
+  --background: var(--nve-sys-support-success-color);
+}
+
+nve-icon-button[interaction='danger'] {
+  --background-color: var(--nve-sys-support-danger-color);
 }
 
 :host(:state(selected)) {
@@ -65,4 +73,7 @@
 :host(:state(selected)) nve-icon-button,
 :host(:hover:not(:state(disabled))) nve-icon-button {
   --color: var(--nve-sys-text-emphasis-color);
+}
+:host([container='condensed']) div {
+  padding: var(--nve-ref-size-200);
 }
