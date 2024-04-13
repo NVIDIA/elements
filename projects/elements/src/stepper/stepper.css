@@ -18,16 +18,16 @@
   position: absolute;
   width: var(--gap);
   top: 50%;
-  border: 1px dashed var(--mlv-ref-border-color-muted);
+  border: var(--nve-ref-border-width-sm) dashed var(--nve-ref-border-color);
 }
 
 :host([vertical]) ::slotted(mlv-stepper-item:not(:last-child))::after {
   content: '';
   position: absolute;
   height: var(--gap);
-  left: var(--mlv-ref-size-500);
+  left: var(--nve-ref-size-500);
   top: 100%;
-  border: 1px dashed var(--mlv-ref-border-color-muted);
+  border: var(--nve-ref-border-width-sm) dashed var(--nve-ref-border-color);
 }
 
 :host([vertical]:not([container='condensed'])) ::slotted(mlv-stepper-item) {
