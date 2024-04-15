@@ -1,3 +1,10 @@
+## [@elements/elements-v0.28.16](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.28.15...@elements/elements-v0.28.16) (2024-04-15)
+
+
+### Bug Fixes
+
+* **elements:** stepper visual fixes ([e69c80e](https://github.com/NVIDIA/elements/commit/e69c80ebee0b597ab59c976c3ae22e89a0c345a7))
+
 ## [@elements/elements-v0.28.15](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.28.14...@elements/elements-v0.28.15) (2024-04-10)
 
 
