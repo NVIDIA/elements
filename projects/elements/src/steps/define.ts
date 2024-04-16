@@ -1,0 +1,12 @@
+import { define } from '@nvidia-elements/core/internal';
+import { StepsItem, Steps } from '@nvidia-elements/core/steps';
+
+define(StepsItem);
+define(Steps);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'mlv-steps-item': StepsItem;
+    'mlv-steps': Steps;
+  }
+}

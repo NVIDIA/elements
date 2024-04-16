@@ -1,0 +1,38 @@
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { runAxe } from '@nvidia-elements/testing/axe';
+import { StepsItem, Steps } from '@nvidia-elements/core/steps';
+import '@nvidia-elements/core/steps/define.js';
+
+describe('mlv-steps axe', () => {
+  let fixture: HTMLElement;
+  let steps: Steps;
+  let item: StepsItem;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <mlv-steps>
+        <mlv-steps-item>Step 1</mlv-steps-item>
+        <mlv-steps-item selected>Step 2</mlv-steps-item>
+        <mlv-steps-item disabled>Step 3</mlv-steps-item>
+      </mlv-steps>
+    `);
+    steps = fixture.querySelector('mlv-steps');
+    item = fixture.querySelector('mlv-steps-item');
+
+    await elementIsStable(steps);
+    await elementIsStable(item);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should pass axe check', async () => {
+    const results = await runAxe(['mlv-steps'], {
+      rules: { 'color-contrast': { enabled: false } }
+    });
+    expect(results.violations.length).toBe(0);
+  });
+});

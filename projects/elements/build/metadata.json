@@ -1,5 +1,5 @@
 {
-  "created": "2024-04-16T15:36:52.674Z",
+  "created": "2024-04-16T20:50:30.319Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -118,10 +118,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.861,
+            "kb": 18.87,
             "requests": {
               "index.js": {
-                "kb": 18.277,
+                "kb": 18.286,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -234,10 +234,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.861,
+            "kb": 18.87,
             "requests": {
               "index.js": {
-                "kb": 18.277,
+                "kb": 18.286,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -330,10 +330,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.861,
+            "kb": 18.87,
             "requests": {
               "index.js": {
-                "kb": 18.277,
+                "kb": 18.286,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -398,10 +398,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.861,
+            "kb": 18.87,
             "requests": {
               "index.js": {
-                "kb": 18.277,
+                "kb": 18.286,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -540,10 +540,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.88,
+            "kb": 18.89,
             "requests": {
               "index.js": {
-                "kb": 18.106,
+                "kb": 18.116,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -702,10 +702,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.696,
+            "kb": 19.706,
             "requests": {
               "index.js": {
-                "kb": 18.11,
+                "kb": 18.12,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -841,10 +841,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.883,
+            "kb": 18.893,
             "requests": {
               "index.js": {
-                "kb": 18.109,
+                "kb": 18.119,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -960,10 +960,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.865,
+            "kb": 18.875,
             "requests": {
               "index.js": {
-                "kb": 18.108,
+                "kb": 18.118,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -1138,10 +1138,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.964,
+            "kb": 14.976,
             "requests": {
               "index.js": {
-                "kb": 14.964,
+                "kb": 14.976,
                 "name": "index.js"
               }
             }
@@ -1267,10 +1267,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.847,
+            "kb": 15.858,
             "requests": {
               "index.js": {
-                "kb": 15.199,
+                "kb": 15.21,
                 "name": "index.js"
               },
               "chevron.svg.js": {
@@ -1574,10 +1574,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.58,
+            "kb": 10.588,
             "requests": {
               "index.js": {
-                "kb": 10.58,
+                "kb": 10.588,
                 "name": "index.js"
               }
             }
@@ -1763,10 +1763,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.236,
+            "kb": 10.242,
             "requests": {
               "index.js": {
-                "kb": 10.236,
+                "kb": 10.242,
                 "name": "index.js"
               }
             }
@@ -1912,10 +1912,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.729,
+            "kb": 8.737,
             "requests": {
               "index.js": {
-                "kb": 8.729,
+                "kb": 8.737,
                 "name": "index.js"
               }
             }
@@ -2036,10 +2036,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.729,
+            "kb": 8.737,
             "requests": {
               "index.js": {
-                "kb": 8.729,
+                "kb": 8.737,
                 "name": "index.js"
               }
             }
@@ -2097,10 +2097,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.729,
+            "kb": 8.737,
             "requests": {
               "index.js": {
-                "kb": 8.729,
+                "kb": 8.737,
                 "name": "index.js"
               }
             }
@@ -2176,10 +2176,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.729,
+            "kb": 8.737,
             "requests": {
               "index.js": {
-                "kb": 8.729,
+                "kb": 8.737,
                 "name": "index.js"
               }
             }
@@ -2336,10 +2336,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.381,
+            "kb": 22.392,
             "requests": {
               "index.js": {
-                "kb": 22.381,
+                "kb": 22.392,
                 "name": "index.js"
               }
             }
@@ -2436,10 +2436,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.381,
+            "kb": 22.392,
             "requests": {
               "index.js": {
-                "kb": 22.381,
+                "kb": 22.392,
                 "name": "index.js"
               }
             }
@@ -2585,10 +2585,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.75,
+            "kb": 23.762,
             "requests": {
               "index.js": {
-                "kb": 22.696,
+                "kb": 22.708,
                 "name": "index.js"
               },
               "dropper.svg.js": {
@@ -2824,10 +2824,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.799,
+            "kb": 39.796,
             "requests": {
               "index.js": {
-                "kb": 39.025,
+                "kb": 39.022,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3060,10 +3060,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.828,
+            "kb": 22.84,
             "requests": {
               "index.js": {
-                "kb": 22.054,
+                "kb": 22.066,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3146,10 +3146,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.828,
+            "kb": 22.84,
             "requests": {
               "index.js": {
-                "kb": 22.054,
+                "kb": 22.066,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3246,10 +3246,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.828,
+            "kb": 22.84,
             "requests": {
               "index.js": {
-                "kb": 22.054,
+                "kb": 22.066,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3399,10 +3399,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.429,
+            "kb": 23.44,
             "requests": {
               "index.js": {
-                "kb": 22.536,
+                "kb": 22.547,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3573,10 +3573,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.433,
+            "kb": 23.445,
             "requests": {
               "index.js": {
-                "kb": 22.54,
+                "kb": 22.552,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -4069,10 +4069,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.295,
+            "kb": 8.304,
             "requests": {
               "index.js": {
-                "kb": 8.295,
+                "kb": 8.304,
                 "name": "index.js"
               }
             }
@@ -4218,10 +4218,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.766,
+            "kb": 8.775,
             "requests": {
               "index.js": {
-                "kb": 8.766,
+                "kb": 8.775,
                 "name": "index.js"
               }
             }
@@ -4482,10 +4482,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.874,
+            "kb": 28.872,
             "requests": {
               "index.js": {
-                "kb": 28.062,
+                "kb": 28.06,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4588,10 +4588,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.874,
+            "kb": 28.872,
             "requests": {
               "index.js": {
-                "kb": 28.062,
+                "kb": 28.06,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4648,10 +4648,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.874,
+            "kb": 28.872,
             "requests": {
               "index.js": {
-                "kb": 28.062,
+                "kb": 28.06,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4708,10 +4708,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.874,
+            "kb": 28.872,
             "requests": {
               "index.js": {
-                "kb": 28.062,
+                "kb": 28.06,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4918,10 +4918,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.452,
+            "kb": 29.447,
             "requests": {
               "index.js": {
-                "kb": 28.64,
+                "kb": 28.635,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5140,10 +5140,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.198,
+            "kb": 22.207,
             "requests": {
               "index.js": {
-                "kb": 22.198,
+                "kb": 22.207,
                 "name": "index.js"
               }
             }
@@ -5267,10 +5267,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.309,
+            "kb": 20.32,
             "requests": {
               "index.js": {
-                "kb": 20.309,
+                "kb": 20.32,
                 "name": "index.js"
               }
             }
@@ -5361,10 +5361,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.309,
+            "kb": 20.32,
             "requests": {
               "index.js": {
-                "kb": 20.309,
+                "kb": 20.32,
                 "name": "index.js"
               }
             }
@@ -5497,10 +5497,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.309,
+            "kb": 20.32,
             "requests": {
               "index.js": {
-                "kb": 20.309,
+                "kb": 20.32,
                 "name": "index.js"
               }
             }
@@ -5567,10 +5567,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.309,
+            "kb": 20.32,
             "requests": {
               "index.js": {
-                "kb": 20.309,
+                "kb": 20.32,
                 "name": "index.js"
               }
             }
@@ -5634,10 +5634,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.309,
+            "kb": 20.32,
             "requests": {
               "index.js": {
-                "kb": 20.309,
+                "kb": 20.32,
                 "name": "index.js"
               }
             }
@@ -5698,10 +5698,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.309,
+            "kb": 20.32,
             "requests": {
               "index.js": {
-                "kb": 20.309,
+                "kb": 20.32,
                 "name": "index.js"
               }
             }
@@ -5777,10 +5777,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.309,
+            "kb": 20.32,
             "requests": {
               "index.js": {
-                "kb": 20.309,
+                "kb": 20.32,
                 "name": "index.js"
               }
             }
@@ -5890,10 +5890,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 13.7,
+            "kb": 13.709,
             "requests": {
               "index.js": {
-                "kb": 12.943,
+                "kb": 12.952,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -6257,10 +6257,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.062,
+            "kb": 16.071,
             "requests": {
               "index.js": {
-                "kb": 16.062,
+                "kb": 16.071,
                 "name": "index.js"
               }
             }
@@ -6516,10 +6516,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.801,
+            "kb": 22.813,
             "requests": {
               "index.js": {
-                "kb": 22.801,
+                "kb": 22.813,
                 "name": "index.js"
               }
             }
@@ -6611,10 +6611,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.801,
+            "kb": 22.813,
             "requests": {
               "index.js": {
-                "kb": 22.801,
+                "kb": 22.813,
                 "name": "index.js"
               }
             }
@@ -6809,10 +6809,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.439,
+            "kb": 9.447,
             "requests": {
               "index.js": {
-                "kb": 9.439,
+                "kb": 9.447,
                 "name": "index.js"
               }
             }
@@ -6909,10 +6909,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.549,
+            "kb": 11.556,
             "requests": {
               "index.js": {
-                "kb": 11.549,
+                "kb": 11.556,
                 "name": "index.js"
               }
             }
@@ -7206,10 +7206,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.549,
+            "kb": 11.556,
             "requests": {
               "index.js": {
-                "kb": 11.549,
+                "kb": 11.556,
                 "name": "index.js"
               }
             }
@@ -7355,10 +7355,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.429,
+            "kb": 23.44,
             "requests": {
               "index.js": {
-                "kb": 22.536,
+                "kb": 22.547,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -7608,10 +7608,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.632,
+            "kb": 29.631,
             "requests": {
               "index.js": {
-                "kb": 28.858,
+                "kb": 28.857,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7745,10 +7745,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.632,
+            "kb": 29.631,
             "requests": {
               "index.js": {
-                "kb": 28.858,
+                "kb": 28.857,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7811,10 +7811,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.027,
+            "kb": 23.037,
             "requests": {
               "index.js": {
-                "kb": 23.027,
+                "kb": 23.037,
                 "name": "index.js"
               }
             }
@@ -8030,10 +8030,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.395,
+            "kb": 42.389,
             "requests": {
               "index.js": {
-                "kb": 40.513,
+                "kb": 40.507,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -8252,10 +8252,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.563,
+            "kb": 18.57,
             "requests": {
               "index.js": {
-                "kb": 17.778,
+                "kb": 17.785,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8371,10 +8371,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.563,
+            "kb": 18.57,
             "requests": {
               "index.js": {
-                "kb": 17.778,
+                "kb": 17.785,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8442,10 +8442,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.563,
+            "kb": 18.57,
             "requests": {
               "index.js": {
-                "kb": 17.778,
+                "kb": 17.785,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8518,10 +8518,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.563,
+            "kb": 18.57,
             "requests": {
               "index.js": {
-                "kb": 17.778,
+                "kb": 17.785,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8671,10 +8671,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.549,
+            "kb": 23.561,
             "requests": {
               "index.js": {
-                "kb": 22.608,
+                "kb": 22.62,
                 "name": "index.js"
               },
               "eye.svg.js": {
@@ -8783,10 +8783,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.852,
+            "kb": 8.862,
             "requests": {
               "index.js": {
-                "kb": 8.852,
+                "kb": 8.862,
                 "name": "index.js"
               }
             }
@@ -8937,10 +8937,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.557,
+            "kb": 14.566,
             "requests": {
               "index.js": {
-                "kb": 14.557,
+                "kb": 14.566,
                 "name": "index.js"
               }
             }
@@ -9075,10 +9075,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.364,
+            "kb": 42.361,
             "requests": {
               "index.js": {
-                "kb": 40.237,
+                "kb": 40.234,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -9283,10 +9283,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.287,
+            "kb": 22.299,
             "requests": {
               "index.js": {
-                "kb": 22.287,
+                "kb": 22.299,
                 "name": "index.js"
               }
             }
@@ -9352,10 +9352,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.287,
+            "kb": 22.299,
             "requests": {
               "index.js": {
-                "kb": 22.287,
+                "kb": 22.299,
                 "name": "index.js"
               }
             }
@@ -9501,10 +9501,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.469,
+            "kb": 22.478,
             "requests": {
               "index.js": {
-                "kb": 22.469,
+                "kb": 22.478,
                 "name": "index.js"
               }
             }
@@ -9701,10 +9701,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.295,
+            "kb": 23.306,
             "requests": {
               "index.js": {
-                "kb": 22.606,
+                "kb": 22.617,
                 "name": "index.js"
               },
               "search.svg.js": {
@@ -9912,10 +9912,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.954,
+            "kb": 39.95,
             "requests": {
               "index.js": {
-                "kb": 38.72,
+                "kb": 38.716,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -10245,10 +10245,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.146,
+            "kb": 16.156,
             "requests": {
               "index.js": {
-                "kb": 15.254,
+                "kb": 15.264,
                 "name": "index.js"
               },
               "sort-ascending.svg.js": {
@@ -10289,7 +10289,7 @@
       "status": "stable"
     },
     {
-      "name": "mlv-stepper",
+      "name": "mlv-steps",
       "unitTests": true,
       "apiReview": true,
       "performance": true,
@@ -10300,28 +10300,28 @@
       "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
       "entrypoint": "",
       "package": true,
-      "description": "Stepper enables a multi-step workflow allowing a user to complete a goal in a specefic sequence.",
-      "since": "0.29.0",
-      "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs",
+      "description": "Steps enables a multi-step workflow allowing a user to complete a goal in a specefic sequence.",
+      "since": "0.30.0",
+      "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-steps-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=8txdFlcqmipufrZs-0",
       "schema": {
         "properties": [
           {
             "name": "vertical",
-            "description": "Determines whether or not the stepper should display in a vertical layout vs. defaulting to horizontal."
+            "description": "Determines whether or not the steps should display in a vertical layout vs. defaulting to horizontal."
           },
           {
             "name": "container",
-            "description": "Determines whether or not the stepper should display in condensed format with no text labels."
+            "description": "Determines whether or not the steps should display in condensed format with no text labels."
           },
           {
             "name": "behaviorSelect",
-            "description": "Determines whether or not the stepper should handle selection behavior vs. defaults to off."
+            "description": "Determines whether or not the steps should handle selection behavior vs. defaults to off."
           }
         ],
         "slots": [
           {
-            "description": "default slot for mlv-tab-item",
+            "description": "default slot for mlv-steps-item",
             "name": ""
           }
         ],
@@ -10332,7 +10332,7 @@
               "text": "boolean"
             },
             "default": "false",
-            "description": "Determines whether or not the stepper should display in a vertical layout vs. defaulting to horizontal.",
+            "description": "Determines whether or not the steps should display in a vertical layout vs. defaulting to horizontal.",
             "fieldName": "vertical"
           },
           {
@@ -10349,7 +10349,7 @@
               "text": "boolean"
             },
             "default": "false",
-            "description": "Determines whether or not the stepper should handle selection behavior vs. defaults to off.",
+            "description": "Determines whether or not the steps should handle selection behavior vs. defaults to off.",
             "fieldName": "behaviorSelect"
           }
         ],
@@ -10360,7 +10360,7 @@
         ]
       },
       "lighthouse": {
-        "name": "mlv-stepper",
+        "name": "mlv-steps",
         "scores": {
           "performance": 100,
           "accessibility": 100,
@@ -10368,10 +10368,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.84,
+            "kb": 19.844,
             "requests": {
               "index.js": {
-                "kb": 19.84,
+                "kb": 19.844,
                 "name": "index.js"
               }
             }
@@ -10385,40 +10385,40 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 94.1175
+        "coverageTotal": 85.125
       },
       "stories": [
         {
           "id": "Default",
-          "file": "stepper.stories.ts",
-          "template": "<mlv-stepper behavior-select>\n  <mlv-stepper-item status=\"success\">Step 1</mlv-stepper-item>\n  <mlv-stepper-item status=\"danger\">Step 2</mlv-stepper-item>\n  <mlv-stepper-item selected>Step 3</mlv-stepper-item>\n  <mlv-stepper-item status=\"pending\">Step 4</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n</mlv-stepper>\n"
+          "file": "steps.stories.ts",
+          "template": "<mlv-steps behavior-select>\n  <mlv-steps-item status=\"success\">Step 1</mlv-steps-item>\n  <mlv-steps-item status=\"danger\">Step 2</mlv-steps-item>\n  <mlv-steps-item selected>Step 3</mlv-steps-item>\n  <mlv-steps-item status=\"pending\">Step 4</mlv-steps-item>\n  <mlv-steps-item disabled>Disabled</mlv-steps-item>\n</mlv-steps>\n"
         },
         {
           "id": "Condensed",
-          "file": "stepper.stories.ts",
-          "template": "<mlv-stepper behavior-select container=\"condensed\">\n  <mlv-stepper-item status=\"success\">Step 1</mlv-stepper-item>\n  <mlv-stepper-item status=\"danger\">Step 2</mlv-stepper-item>\n  <mlv-stepper-item selected>Step 3</mlv-stepper-item>\n  <mlv-stepper-item status=\"pending\">Step 4</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n</mlv-stepper>\n"
+          "file": "steps.stories.ts",
+          "template": "<mlv-steps behavior-select container=\"condensed\">\n  <mlv-steps-item status=\"success\">Step 1</mlv-steps-item>\n  <mlv-steps-item status=\"danger\">Step 2</mlv-steps-item>\n  <mlv-steps-item selected>Step 3</mlv-steps-item>\n  <mlv-steps-item status=\"pending\">Step 4</mlv-steps-item>\n  <mlv-steps-item disabled>Disabled</mlv-steps-item>\n</mlv-steps>\n"
         },
         {
-          "id": "VerticalStepper",
-          "file": "stepper.stories.ts",
-          "template": "<mlv-stepper vertical behavior-select style=\"width: 150px\">\n  <mlv-stepper-item selected>Step 1</mlv-stepper-item>\n  <mlv-stepper-item>Step 2</mlv-stepper-item>\n  <mlv-stepper-item>Step 3</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n  <mlv-stepper-item>Step 5</mlv-stepper-item>\n</mlv-stepper>\n"
+          "id": "VerticalSteps",
+          "file": "steps.stories.ts",
+          "template": "<mlv-steps vertical behavior-select style=\"width: 150px\">\n  <mlv-steps-item selected>Step 1</mlv-steps-item>\n  <mlv-steps-item>Step 2</mlv-steps-item>\n  <mlv-steps-item>Step 3</mlv-steps-item>\n  <mlv-steps-item disabled>Disabled</mlv-steps-item>\n  <mlv-steps-item>Step 5</mlv-steps-item>\n</mlv-steps>\n"
         },
         {
-          "id": "VerticalCondensedStepper",
-          "file": "stepper.stories.ts",
-          "template": "<mlv-stepper vertical container=\"condensed\" behavior-select>\n  <mlv-stepper-item selected>Step 1</mlv-stepper-item>\n  <mlv-stepper-item>Step 2</mlv-stepper-item>\n  <mlv-stepper-item>Step 3</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n  <mlv-stepper-item>Step 5</mlv-stepper-item>\n</mlv-stepper>\n"
+          "id": "VerticalCondensedSteps",
+          "file": "steps.stories.ts",
+          "template": "<mlv-steps vertical container=\"condensed\" behavior-select>\n  <mlv-steps-item selected>Step 1</mlv-steps-item>\n  <mlv-steps-item>Step 2</mlv-steps-item>\n  <mlv-steps-item>Step 3</mlv-steps-item>\n  <mlv-steps-item disabled>Disabled</mlv-steps-item>\n  <mlv-steps-item>Step 5</mlv-steps-item>\n</mlv-steps>\n"
         },
         {
-          "id": "StatelessStepper",
-          "file": "stepper.stories.ts",
-          "template": "<mlv-stepper>\n  <mlv-stepper-item selected>Step 1</mlv-stepper-item>\n  <mlv-stepper-item>Step 2</mlv-stepper-item>\n  <mlv-stepper-item>Step 3</mlv-stepper-item>\n  <mlv-stepper-item>Step 4</mlv-stepper-item>\n  <mlv-stepper-item disabled>Disabled</mlv-stepper-item>\n</mlv-stepper>\n"
+          "id": "StatelessSteps",
+          "file": "steps.stories.ts",
+          "template": "<mlv-steps>\n  <mlv-steps-item selected>Step 1</mlv-steps-item>\n  <mlv-steps-item>Step 2</mlv-steps-item>\n  <mlv-steps-item>Step 3</mlv-steps-item>\n  <mlv-steps-item>Step 4</mlv-steps-item>\n  <mlv-steps-item disabled>Disabled</mlv-steps-item>\n</mlv-steps>\n"
         }
       ],
       "behavior": "navigation",
       "status": "beta"
     },
     {
-      "name": "mlv-stepper-item",
+      "name": "mlv-steps-item",
       "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
       "unitTests": true,
       "apiReview": true,
@@ -10429,14 +10429,14 @@
       "themes": true,
       "entrypoint": "",
       "package": true,
-      "since": "0.29.0",
-      "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs",
+      "since": "0.30.0",
+      "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-steps-documentation--docs",
       "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5348&mode=design&t=WcDb2p9I7zwJ9GhW-0",
       "schema": {
         "properties": [
           {
             "name": "selected",
-            "description": "Determines which tab item is selected, defaults to false."
+            "description": "Determines which item is selected, defaults to false."
           },
           {
             "name": "status",
@@ -10444,7 +10444,7 @@
           },
           {
             "name": "container",
-            "description": "Determines whether or not the stepper should display in condensed format with no text labels."
+            "description": "Determines whether or not the steps should display in condensed format with no text labels."
           },
           {
             "name": "pressed",
@@ -10649,7 +10649,7 @@
         ]
       },
       "lighthouse": {
-        "name": "mlv-stepper",
+        "name": "mlv-steps",
         "scores": {
           "performance": 100,
           "accessibility": 100,
@@ -10657,10 +10657,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.84,
+            "kb": 19.844,
             "requests": {
               "index.js": {
-                "kb": 19.84,
+                "kb": 19.844,
                 "name": "index.js"
               }
             }
@@ -10674,7 +10674,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 94.1175
+        "coverageTotal": 85.125
       },
       "stories": [],
       "behavior": "navigation",
@@ -10835,10 +10835,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.382,
+            "kb": 22.393,
             "requests": {
               "index.js": {
-                "kb": 22.382,
+                "kb": 22.393,
                 "name": "index.js"
               }
             }
@@ -10970,10 +10970,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.624,
+            "kb": 11.631,
             "requests": {
               "index.js": {
-                "kb": 11.624,
+                "kb": 11.631,
                 "name": "index.js"
               }
             }
@@ -11259,10 +11259,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.624,
+            "kb": 11.631,
             "requests": {
               "index.js": {
-                "kb": 11.624,
+                "kb": 11.631,
                 "name": "index.js"
               }
             }
@@ -11533,10 +11533,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.869,
+            "kb": 15.879,
             "requests": {
               "index.js": {
-                "kb": 15.869,
+                "kb": 15.879,
                 "name": "index.js"
               }
             }
@@ -11757,10 +11757,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.262,
+            "kb": 22.273,
             "requests": {
               "index.js": {
-                "kb": 22.262,
+                "kb": 22.273,
                 "name": "index.js"
               }
             }
@@ -11932,10 +11932,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.156,
+            "kb": 23.168,
             "requests": {
               "index.js": {
-                "kb": 22.536,
+                "kb": 22.548,
                 "name": "index.js"
               },
               "clock.svg.js": {
@@ -12171,10 +12171,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.45,
+            "kb": 29.446,
             "requests": {
               "index.js": {
-                "kb": 28.676,
+                "kb": 28.672,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -12353,10 +12353,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.228,
+            "kb": 16.239,
             "requests": {
               "index.js": {
-                "kb": 14.442,
+                "kb": 14.453,
                 "name": "index.js"
               },
               "add.svg.js": {
@@ -12604,10 +12604,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.666,
+            "kb": 19.66,
             "requests": {
               "index.js": {
-                "kb": 19.666,
+                "kb": 19.66,
                 "name": "index.js"
               }
             }
@@ -12819,10 +12819,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.427,
+            "kb": 23.438,
             "requests": {
               "index.js": {
-                "kb": 22.534,
+                "kb": 22.545,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -13147,6 +13147,33 @@
           "covered": 69,
           "skipped": 0,
           "pct": 88.46
+        }
+      },
+      {
+        "file": "steps/steps.ts",
+        "lines": {
+          "total": 33,
+          "covered": 31,
+          "skipped": 0,
+          "pct": 93.93
+        },
+        "functions": {
+          "total": 16,
+          "covered": 15,
+          "skipped": 0,
+          "pct": 93.75
+        },
+        "statements": {
+          "total": 50,
+          "covered": 47,
+          "skipped": 0,
+          "pct": 94
+        },
+        "branches": {
+          "total": 17,
+          "covered": 10,
+          "skipped": 0,
+          "pct": 58.82
         }
       },
       {
@@ -13879,34 +13906,7 @@
         }
       },
       {
-        "file": "stepper/stepper.ts",
-        "lines": {
-          "total": 33,
-          "covered": 33,
-          "skipped": 0,
-          "pct": 100
-        },
-        "functions": {
-          "total": 16,
-          "covered": 16,
-          "skipped": 0,
-          "pct": 100
-        },
-        "statements": {
-          "total": 50,
-          "covered": 50,
-          "skipped": 0,
-          "pct": 100
-        },
-        "branches": {
-          "total": 17,
-          "covered": 13,
-          "skipped": 0,
-          "pct": 76.47
-        }
-      },
-      {
-        "file": "stepper/define.ts",
+        "file": "steps/define.ts",
         "lines": {
           "total": 2,
           "covered": 2,
@@ -17366,27 +17366,27 @@
       "file": "total",
       "lines": {
         "total": 2240,
-        "covered": 2210,
+        "covered": 2208,
         "skipped": 0,
-        "pct": 98.66
+        "pct": 98.57
       },
       "statements": {
         "total": 2638,
-        "covered": 2603,
+        "covered": 2600,
         "skipped": 0,
-        "pct": 98.67
+        "pct": 98.55
       },
       "functions": {
         "total": 744,
-        "covered": 727,
+        "covered": 726,
         "skipped": 0,
-        "pct": 97.71
+        "pct": 97.58
       },
       "branches": {
         "total": 1061,
-        "covered": 980,
+        "covered": 977,
         "skipped": 0,
-        "pct": 92.36
+        "pct": 92.08
       },
       "branchesTrue": {
         "total": 0,

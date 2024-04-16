@@ -85,7 +85,7 @@ export const Layers = {
         <h2>container</h2>
         <ul>
           <li>cards</li>
-          <li>steppers</li>
+          <li>steps</li>
           <li>tabs</li>
         </ul>
       </div>

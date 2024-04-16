@@ -1,0 +1,72 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Default, Condensed, VerticalSteps, VerticalCondensedSteps, StatelessSteps } from './steps.stories';
+
+<Meta title="Elements/Steps/Documentation" />
+
+# Steps
+
+<element-metrics tag="mlv-steps"></element-metrics>
+
+By showing less information at a time, multi-step workflows allow users to focus better on the content pertinent to each step and decrease the chance of errors.
+
+The Steps component is composed of a `<mlv-steps>` parent element and multiple `<mlv-steps-item>` elements slotted as children. <br />
+The `selected` attribute applied by the host application will give the selected step the proper selected styles.
+
+The `disabled` attribute can be applied to an item to get the proper visual cues and prevent interaction. <br />
+All default interaction, hover and active states are handled by the elements.
+
+Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
+concerns are handled out of the box. <br />
+Try using left/right arrow keys on horizontal steps or up/down on vertical steps.
+
+## Installation
+
+```typescript
+import '@elements/elements/steps/define.js';
+```
+
+```html
+<mlv-steps behavior-select>
+  <mlv-steps-item status="success">Step 1</mlv-steps-item>
+  <mlv-steps-item status="danger">Step 2</mlv-steps-item>
+  <mlv-steps-item selected>Step 3</mlv-steps-item>
+  <mlv-steps-item status="pending">Step 4</mlv-steps-item>
+  <mlv-steps-item disabled>Disabled</mlv-steps-item>
+</mlv-steps>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Condensed
+
+Steps can be displayed in a condensed view where the text labels are hidden. Set `container="condensed"` on `<mlv-steps>`
+
+<Canvas of={Condensed} />
+
+## Vertical Steps
+
+Steps can be used as the foundation for a side menu by enabling vertical mode. Simply set `vertical` on `<mlv-steps>`
+
+<Canvas of={VerticalSteps} />
+
+## Vertical Condensed Steps
+
+<Canvas of={VerticalCondensedSteps} />
+
+## Stateless Steps
+
+By default Steps will be stateless. This means selection behavior will have to be handled by the host application. <br />
+We have provided a way to opt in to stateful selection behavior where click events and keyboard enter will trigger the selection state.
+
+In all other examples on this page `behavior-select` is set on the parent `<mlv-steps>` to opt into stateful behavior. The following example
+shows the default stateless behavior, where the host app will have to set/remove the `selected` attribute on child `<mlv-steps-item>`.
+
+<Canvas of={StatelessSteps} />
+
+<element-status tag="mlv-steps"></element-status>
+
+<element-api tag="mlv-steps"></element-api>
+
+<element-api tag="mlv-steps-item"></element-api>
