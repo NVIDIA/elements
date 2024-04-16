@@ -129,7 +129,7 @@ export class Accordion extends LitElement implements ContainerElement {
   /**
    * Determines the container styles of component. Flat is used for nesting accordions within other containers. Inset can be used for more complex accordions where content is distinctly separated.
    */
-  @property({ type: String, reflect: true }) container?: Container = 'full';
+  @property({ type: String, reflect: true }) container?: Extract<Container, 'flat' | 'full' | 'inset'> = 'full';
 
   /**
    * Determines whether the accordion is expanded, displaying its contents, or not.
@@ -228,12 +228,14 @@ export class AccordionGroup extends LitElement {
    * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
    */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
+
   /**
    * Determines whether or not the accordion should opt-in to stateful expansion of a single accordion at a time
    */
   @property({ type: Boolean, attribute: 'behavior-expand-single' }) behaviorExpandSingle = false;
+
   /** flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion) */
-  @property({ type: String, reflect: true }) container?: Container = 'full';
+  @property({ type: String, reflect: true }) container?: Extract<Container, 'flat' | 'full' | 'inset'> = 'full';
 
   static readonly metadata = {
     tag: 'mlv-accordion-group',

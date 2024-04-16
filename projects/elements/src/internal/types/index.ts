@@ -40,6 +40,7 @@ export type Prominence = 'emphasis' | 'muted';
  * - `inline` element container is reduced to fit within inline content such as a block of text
  * - `inset` element container is optimized for embeding or being inset inside another containing element
  * - `full` element container is optimized for filling its container bounds
+ * - `condensed` element container is optimized for small, summarized or contained spaces
  */
 export type Container = 'inline' | 'flat' | 'inset' | 'full' | 'condensed';
 

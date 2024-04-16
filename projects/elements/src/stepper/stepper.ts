@@ -44,15 +44,20 @@ export class StepperItem extends BaseButton {
    * Determines which tab item is selected, defaults to false.
    */
   @property({ type: Boolean, reflect: true }) selected = false;
+
   /**
    * There are four visual treatments that represent the `status` of varius tasks. When `status` is set to `warning`, `success` or `danger`, appropriate icons are embedded.
    */
-  @property({ type: String, reflect: true }) status?: SupportStatus | 'pending';
+  @property({ type: String, reflect: true }) status?:
+    | Extract<SupportStatus, 'accent' | 'danger' | 'success'>
+    | 'pending';
+
   /**
    * Determines whether or not the stepper should display in condensed format with no text labels.
    */
-  @property({ type: String, reflect: true }) container?: Container = 'condensed';
+  @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
 
+  /** @private */
   @property({ type: Number }) index;
 
   static styles = useStyles([stepperItemStyleSheet]);
@@ -108,7 +113,7 @@ export class Stepper extends LitElement {
   /**
    * Determines whether or not the stepper should display in condensed format with no text labels.
    */
-  @property({ type: String, reflect: true }) container?: Container;
+  @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
 
   /**
    * Determines whether or not the stepper should handle selection behavior vs. defaults to off.
