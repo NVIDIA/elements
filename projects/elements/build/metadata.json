@@ -1,5 +1,5 @@
 {
-  "created": "2024-04-11T20:34:54.178Z",
+  "created": "2024-04-16T00:32:16.177Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -10294,16 +10294,16 @@
       "apiReview": true,
       "performance": true,
       "stable": false,
-      "vqa": false,
+      "vqa": true,
       "responsive": true,
       "themes": true,
       "aria": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
       "entrypoint": "",
-      "package": false,
+      "package": true,
       "description": "Stepper enables a multi-step workflow allowing a user to complete a goal in a specefic sequence.",
-      "since": "0.30.0",
+      "since": "0.29.0",
       "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs",
-      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=8txdFlcqmipufrZs-0",
       "schema": {
         "properties": [
           {
@@ -10415,7 +10415,7 @@
         }
       ],
       "behavior": "navigation",
-      "status": "pre-release"
+      "status": "beta"
     },
     {
       "name": "nve-stepper-item",
@@ -10423,15 +10423,15 @@
       "unitTests": true,
       "apiReview": true,
       "performance": true,
-      "stable": true,
-      "vqa": false,
+      "stable": false,
+      "vqa": true,
       "responsive": true,
       "themes": true,
       "entrypoint": "",
       "package": true,
-      "since": "0.30.0",
+      "since": "0.29.0",
       "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs",
-      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=SR1GmFYykivamkZc-0",
+      "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5348&mode=design&t=WcDb2p9I7zwJ9GhW-0",
       "schema": {
         "properties": [
           {
@@ -10485,8 +10485,8 @@
             "name": ""
           },
           {
-            "description": "status-icon custom slotted step icon",
-            "name": ""
+            "description": "custom slotted step icon",
+            "name": "status-icon"
           }
         ],
         "attributes": [
@@ -10627,12 +10627,6 @@
             "name": "--font-size"
           },
           {
-            "name": "--border-width"
-          },
-          {
-            "name": "--border-height"
-          },
-          {
             "name": "--border-top"
           },
           {
@@ -10649,12 +10643,6 @@
           },
           {
             "name": "--color"
-          },
-          {
-            "name": "--height"
-          },
-          {
-            "name": "--cursor"
           },
           {
             "name": "--text-transform"
@@ -10691,7 +10679,7 @@
       },
       "stories": [],
       "behavior": "navigation",
-      "status": "pre-release"
+      "status": "beta"
     },
     {
       "name": "nve-switch",
