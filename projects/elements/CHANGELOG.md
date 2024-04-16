@@ -1,3 +1,10 @@
+## [@elements/elements-v0.29.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.28.16...@elements/elements-v0.29.0) (2024-04-16)
+
+
+### Features
+
+* **elements:** release stepper component ([f887806](https://github.com/NVIDIA/elements/commit/f8878061fb7d9cab79ecbdf17db5c458e8e54f0f))
+
 ## [@elements/elements-v0.28.16](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.28.15...@elements/elements-v0.28.16) (2024-04-15)
 
 
