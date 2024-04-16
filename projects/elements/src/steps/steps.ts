@@ -12,8 +12,8 @@ import {
   SupportStatus,
   Container
 } from '@nvidia-elements/core/internal';
-import stepperItemStyleSheet from './stepper-item.css?inline';
-import stepperStyleSheet from './stepper.css?inline';
+import stepsItemStyleSheet from './steps-item.css?inline';
+import stepsStyleSheet from './steps.css?inline';
 
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
@@ -21,8 +21,8 @@ import '@nvidia-elements/core/progress-ring/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 /**
- * @element nve-stepper-item
- * @since 0.29.0
+ * @element nve-steps-item
+ * @since 0.30.0
  * @slot - default slot for step text
  * @slot status-icon - custom slotted step icon
  * @cssprop --font-size
@@ -33,15 +33,15 @@ import '@nvidia-elements/core/icon-button/define.js';
  * @cssprop --border-radius
  * @cssprop --color
  * @cssprop --text-transform
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-steps-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5348&mode=design&t=WcDb2p9I7zwJ9GhW-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  * @stable false
  */
-@stateSelected<StepperItem>()
-export class StepperItem extends BaseButton {
+@stateSelected<StepsItem>()
+export class StepsItem extends BaseButton {
   /**
-   * Determines which tab item is selected, defaults to false.
+   * Determines which item is selected, defaults to false.
    */
   @property({ type: Boolean, reflect: true }) selected = false;
 
@@ -53,17 +53,17 @@ export class StepperItem extends BaseButton {
     | 'pending';
 
   /**
-   * Determines whether or not the stepper should display in condensed format with no text labels.
+   * Determines whether or not the steps should display in condensed format with no text labels.
    */
   @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
 
   /** @private */
   @property({ type: Number }) index;
 
-  static styles = useStyles([stepperItemStyleSheet]);
+  static styles = useStyles([stepsItemStyleSheet]);
 
   static readonly metadata = {
-    tag: 'nve-stepper-item',
+    tag: 'nve-steps-item',
     version: '0.0.0'
   };
 
@@ -93,37 +93,37 @@ export class StepperItem extends BaseButton {
 }
 
 /**
- * @element nve-stepper
- * @description Stepper enables a multi-step workflow allowing a user to complete a goal in a specefic sequence.
- * @since 0.29.0
- * @slot - default slot for nve-tab-item
+ * @element nve-steps
+ * @description Steps enables a multi-step workflow allowing a user to complete a goal in a specefic sequence.
+ * @since 0.30.0
+ * @slot - default slot for nve-steps-item
  * @cssprop --gap
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-steps-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=8txdFlcqmipufrZs-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  * @stable false
  */
-@keyNavigationList<Stepper>()
-export class Stepper extends LitElement {
+@keyNavigationList<Steps>()
+export class Steps extends LitElement {
   /**
-   * Determines whether or not the stepper should display in a vertical layout vs. defaulting to horizontal.
+   * Determines whether or not the steps should display in a vertical layout vs. defaulting to horizontal.
    */
   @property({ type: Boolean, reflect: true }) vertical = false;
 
   /**
-   * Determines whether or not the stepper should display in condensed format with no text labels.
+   * Determines whether or not the steps should display in condensed format with no text labels.
    */
   @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
 
   /**
-   * Determines whether or not the stepper should handle selection behavior vs. defaults to off.
+   * Determines whether or not the steps should handle selection behavior vs. defaults to off.
    */
   @property({ type: Boolean, attribute: 'behavior-select' }) behaviorSelect = false;
 
-  static styles = useStyles([stepperStyleSheet]);
+  static styles = useStyles([stepsStyleSheet]);
 
   static readonly metadata = {
-    tag: 'nve-stepper',
+    tag: 'nve-steps',
     version: '0.0.0'
   };
 
@@ -135,18 +135,18 @@ export class Stepper extends LitElement {
     };
   }
 
-  @queryAssignedElements() private steps!: StepperItem[];
+  @queryAssignedElements() private steps!: StepsItem[];
 
   /** @private */
   declare _internals: ElementInternals;
 
-  #selectTab(stepperItem) {
-    if (!this.behaviorSelect || stepperItem.tagName !== 'MLV-STEPPER-ITEM' || stepperItem.disabled) {
+  #selectTab(stepsItem) {
+    if (!this.behaviorSelect || stepsItem.tagName !== 'MLV-STEPS-ITEM' || stepsItem.disabled) {
       return;
     }
 
-    this.keynavListConfig.items.forEach((i: StepperItem) => (i.selected = false));
-    stepperItem.selected = true;
+    this.keynavListConfig.items.forEach((i: StepsItem) => (i.selected = false));
+    stepsItem.selected = true;
   }
 
   render() {
