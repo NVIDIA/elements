@@ -1,3 +1,11 @@
+## [@elements/elements-v0.29.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.29.0...@elements/elements-v0.29.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* **elements:** bump deps ([36f874e](https://github.com/NVIDIA/elements/commit/36f874e671338dba2101fd93d99fc7b36d7fc151))
+* **elements:** dynamic render and ssr improvements ([3731461](https://github.com/NVIDIA/elements/commit/373146158b1e439cdb86669dea2c96215c9e26f3))
+
 ## [@elements/elements-v0.29.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.28.16...@elements/elements-v0.29.0) (2024-04-16)
 
 
