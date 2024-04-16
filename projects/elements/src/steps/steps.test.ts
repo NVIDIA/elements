@@ -1,22 +1,22 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
-import { StepperItem, Stepper } from '@nvidia-elements/core/stepper';
-import '@nvidia-elements/core/stepper/define.js';
+import { StepsItem, Steps } from '@nvidia-elements/core/steps';
+import '@nvidia-elements/core/steps/define.js';
 
-describe('nve-tab', () => {
+describe('nve-steps', () => {
   let fixture: HTMLElement;
-  let parentElement: Stepper;
-  let childElement: StepperItem;
+  let parentElement: Steps;
+  let childElement: StepsItem;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <nve-stepper>
-      <nve-stepper-item></nve-stepper-item>
-    </nve-stepper>
+    <nve-steps>
+      <nve-steps-item></nve-steps-item>
+    </nve-steps>
     `);
-    parentElement = fixture.querySelector('nve-stepper');
-    childElement = fixture.querySelector('nve-stepper-item');
+    parentElement = fixture.querySelector('nve-steps');
+    childElement = fixture.querySelector('nve-steps-item');
 
     await elementIsStable(parentElement);
     await elementIsStable(childElement);
@@ -27,11 +27,11 @@ describe('nve-tab', () => {
   });
 
   it('should define parentElement', () => {
-    expect(customElements.get('nve-stepper')).toBeDefined();
+    expect(customElements.get('nve-steps')).toBeDefined();
   });
 
   it('should define childElement', () => {
-    expect(customElements.get('nve-stepper-item')).toBeDefined();
+    expect(customElements.get('nve-steps-item')).toBeDefined();
   });
 
   it('should have correct a18y roles', async () => {
@@ -65,7 +65,7 @@ describe('nve-tab', () => {
     expect(childElement.selected).toBe(false);
   });
 
-  it('should set the correct aria-orientation based on the tab orientation', async () => {
+  it('should set the correct aria-orientation based on the steps orientation', async () => {
     expect(parentElement.vertical).toBe(false);
     expect(parentElement._internals.ariaOrientation).toBe('horizontal');
 
