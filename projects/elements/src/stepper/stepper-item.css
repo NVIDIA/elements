@@ -47,6 +47,7 @@ mlv-icon-button#number-icon {
   --width: var(--nve-ref-size-600);
   --background: transparent;
 }
+
 mlv-icon-button[interaction='emphasis'] {
   --background: var(--nve-sys-support-success-color);
 }
@@ -60,6 +61,7 @@ mlv-icon-button[interaction='danger'] {
   --font-weight: var(--nve-ref-font-weight-semibold);
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
+
 :host(:state(disabled)) {
   --color: var(--nve-sys-interaction-disabled-color);
   --cursor: not-allowed;
@@ -74,6 +76,7 @@ mlv-icon-button[interaction='danger'] {
 :host(:hover:not(:state(disabled))) mlv-icon-button {
   --color: var(--nve-sys-text-emphasis-color);
 }
+
 :host([container='condensed']) div {
   padding: var(--nve-ref-size-200);
 }
