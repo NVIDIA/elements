@@ -22,26 +22,21 @@ import '@nvidia-elements/core/icon-button/define.js';
 
 /**
  * @element nve-stepper-item
- * @since 0.30.0
+ * @since 0.29.0
  * @slot - default slot for step text
- * @slot - status-icon custom slotted step icon
+ * @slot status-icon - custom slotted step icon
  * @cssprop --font-size
- * @cssprop --border-width
- * @cssprop --border-height
  * @cssprop --border-top
  * @cssprop --width
  * @cssprop --font-size
  * @cssprop --font-weight
  * @cssprop --border-radius
  * @cssprop --color
- * @cssprop --height
- * @cssprop --cursor
  * @cssprop --text-transform
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=SR1GmFYykivamkZc-0
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5348&mode=design&t=WcDb2p9I7zwJ9GhW-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
- * @unitTests false
- * @vqa false
+ * @stable false
  */
 @stateSelected<StepperItem>()
 export class StepperItem extends BaseButton {
@@ -95,15 +90,12 @@ export class StepperItem extends BaseButton {
 /**
  * @element nve-stepper
  * @description Stepper enables a multi-step workflow allowing a user to complete a goal in a specefic sequence.
- * @since 0.30.0
+ * @since 0.29.0
  * @slot - default slot for nve-tab-item
  * @cssprop --gap
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-stepper-documentation--docs
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0
+ * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=8txdFlcqmipufrZs-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
- * @unitTests false
- * @vqa false
- * @package false
  * @stable false
  */
 @keyNavigationList<Stepper>()
