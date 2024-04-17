@@ -57,6 +57,7 @@
         "./projects/demos/react:ci",
         "./projects/demos/solidjs:ci",
         "./projects/demos/typescript:ci",
+        "./projects/labs/lighthouse:ci",
         "./projects/elements:ci",
         "./projects/elements-react:ci",
         "./projects/testing:ci"
