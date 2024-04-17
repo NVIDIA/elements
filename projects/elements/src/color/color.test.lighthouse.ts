@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('color lighthouse report', () => {
   test('color should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-color', /* html */`
-        <mlv-color>
+    const report = await runner.getReport('nve-color', /* html */`
+        <nve-color>
           <label>label</label>
           <input type="color" />
-        </mlv-color>
+        </nve-color>
         <script type="module">
           import '@elements/elements/color/define.js';
         </script>

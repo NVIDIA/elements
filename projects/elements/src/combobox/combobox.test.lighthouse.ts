@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('combobox lighthouse report', () => {
   test('combobox should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-combobox', /* html */`
-      <mlv-combobox>
+    const report = await runner.getReport('nve-combobox', /* html */`
+      <nve-combobox>
         <label>combobox</label>
         <input type="search" />
         <datalist>
@@ -12,8 +12,8 @@ describe('combobox lighthouse report', () => {
           <option value="Option 2"></option>
           <option value="Option 3"></option>
         </datalist>
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-combobox>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
       <script type="module">
         import '@elements/elements/combobox/define.js';
       </script>

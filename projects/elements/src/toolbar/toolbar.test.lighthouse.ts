@@ -1,14 +1,14 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('toolbar lighthouse report', () => {
   test('toolbar should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-toolbar', /* html */`
-      <mlv-toolbar>
-        <mlv-button container="flat"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-        <mlv-button container="flat"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-        <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
-      </mlv-toolbar>
+    const report = await runner.getReport('nve-toolbar', /* html */`
+      <nve-toolbar>
+        <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
+        <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>
+        <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      </nve-toolbar>
       <script type="module">
         import '@elements/elements/toolbar/define.js';
       </script>

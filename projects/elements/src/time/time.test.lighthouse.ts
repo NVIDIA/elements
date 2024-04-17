@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('time lighthouse report', () => {
   test('time should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-time', /* html */`
-      <mlv-time>
+    const report = await runner.getReport('nve-time', /* html */`
+      <nve-time>
         <label>label</label>
         <input type="time" />
-      </mlv-time>
+      </nve-time>
       <script type="module">
         import '@elements/elements/time/define.js';
       </script>

@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('icon-button lighthouse report', () => {
   test('icon-button should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-icon-button', /* html */`
-      <mlv-icon-button aria-label="icon button"></mlv-icon-button>
+    const report = await runner.getReport('nve-icon-button', /* html */`
+      <nve-icon-button aria-label="icon button"></nve-icon-button>
       <script type="module">
         import '@elements/elements/icon-button/define.js';
       </script>

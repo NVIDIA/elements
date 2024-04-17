@@ -1,19 +1,19 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('panel lighthouse report', () => {
   test('panel should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-panel', /* html */`
-      <mlv-panel behavior-expand expanded style="width:280px; height:100vh">
-        <mlv-panel-header>
+    const report = await runner.getReport('nve-panel', /* html */`
+      <nve-panel behavior-expand expanded style="width:280px; height:100vh">
+        <nve-panel-header>
           <div slot="title">Title</div>
           <div slot="subtitle"></div>
-        </mlv-panel-header>
+        </nve-panel-header>
 
-        <mlv-panel-content mlv-layout="column gap:md">
-          <p mlv-text="body">content</p>
-        </mlv-panel-content>
-      </mlv-panel>
+        <nve-panel-content nve-layout="column gap:md">
+          <p nve-text="body">content</p>
+        </nve-panel-content>
+      </nve-panel>
       <script type="module">
         import '@elements/elements/panel/define.js';
       </script>

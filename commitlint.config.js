@@ -10,6 +10,23 @@ export default {
     'subject-full-stop': [2, 'never', '.'],
     'subject-max-length': [2, 'always', 100],
     'type-enum': [2, 'always', ['chore', 'fix', 'feat']],
-    'type-empty': [2, 'never']
+    'type-empty': [2, 'never'],
+    'scope-empty': [2, 'never'],
+    'scope-enum': [
+      2,
+      'always',
+      [
+        'ci',
+        'docs',
+        'demos',
+        'elements',
+        'elements-react',
+        'pages',
+        'playground',
+        'testing',
+        'themes',
+        'labs-lighthouse'
+      ]
+    ]
   }
 };

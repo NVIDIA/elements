@@ -1,11 +1,11 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('tooltip lighthouse report', () => {
   test('tooltip should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-tooltip', /* html */`
+    const report = await runner.getReport('nve-tooltip', /* html */`
       <button id="btn">button</button>
-      <mlv-tooltip trigger="btn" anchor="btn">tooltip</mlv-tooltip>
+      <nve-tooltip trigger="btn" anchor="btn">tooltip</nve-tooltip>
       <script type="module">
         import '@elements/elements/tooltip/define.js';
       </script>

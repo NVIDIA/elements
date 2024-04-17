@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('notification lighthouse report', () => {
   test('notification should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-notification', /* html */`
-      <mlv-notification>hello</mlv-notification>
+    const report = await runner.getReport('nve-notification', /* html */`
+      <nve-notification>hello</nve-notification>
       <script type="module">
         import '@elements/elements/notification/define.js';
       </script>

@@ -1,14 +1,14 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('breadcrumb lighthouse report', () => {
   test('breadcrumb should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-breadcrumb', /* html */`
-      <mlv-breadcrumb>
-        <mlv-icon-button icon-name="home" aria-label="link to first page"></mlv-icon-button>
-        <mlv-button>Item</mlv-button>
+    const report = await runner.getReport('nve-breadcrumb', /* html */`
+      <nve-breadcrumb>
+        <nve-icon-button icon-name="home" aria-label="link to first page"></nve-icon-button>
+        <nve-button>Item</nve-button>
         <span>Static item</span>
-      </mlv-breadcrumb>
+      </nve-breadcrumb>
       <script type="module">
         import '@elements/elements/breadcrumb/define.js';
       </script>

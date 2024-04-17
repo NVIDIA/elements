@@ -1,17 +1,17 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('accordion lighthouse report', () => {
   test('accordion should meet a lighthouse performance score of 100', async () => {
-    const report = await runner.getReport('mlv-accordion', /* html */`
-      <mlv-accordion>
-        <mlv-accordion-header>
+    const report = await runner.getReport('nve-accordion', /* html */`
+      <nve-accordion>
+        <nve-accordion-header>
           <div slot="title">Heading</div>
-        </mlv-accordion-header>
-        <mlv-accordion-content>
+        </nve-accordion-header>
+        <nve-accordion-content>
           Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-        </mlv-accordion-content>
-      </mlv-accordion>
+        </nve-accordion-content>
+      </nve-accordion>
       <script type="module">
         import '@elements/elements/accordion/define.js';
       </script>

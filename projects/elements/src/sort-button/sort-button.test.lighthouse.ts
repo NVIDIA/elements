@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('sort-button lighthouse report', () => {
   test('sort-button should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-sort-button', /* html */`
-      <mlv-sort-button aria-label="sort"></mlv-sort-button>
+    const report = await runner.getReport('nve-sort-button', /* html */`
+      <nve-sort-button aria-label="sort"></nve-sort-button>
       <script type="module">
         import '@elements/elements/sort-button/define.js';
       </script>

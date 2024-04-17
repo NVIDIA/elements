@@ -1,11 +1,11 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('toast lighthouse report', () => {
   test('toast should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-toast', /* html */`
+    const report = await runner.getReport('nve-toast', /* html */`
       <button id="btn">button</button>
-      <mlv-toast trigger="btn" anchor="btn">toast</mlv-toast>
+      <nve-toast trigger="btn" anchor="btn">toast</nve-toast>
       <script type="module">
         import '@elements/elements/toast/define.js';
       </script>

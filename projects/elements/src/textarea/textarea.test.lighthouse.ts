@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('textarea lighthouse report', () => {
   test('textarea should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-textarea', /* html */`
-      <mlv-textarea>
+    const report = await runner.getReport('nve-textarea', /* html */`
+      <nve-textarea>
         <label>label</label>
         <textarea></textarea>
-      </mlv-textarea>
+      </nve-textarea>
       <script type="module">
         import '@elements/elements/textarea/define.js';
       </script>

@@ -1,22 +1,22 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('card lighthouse report', () => {
   test('card should meet lighthhouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-card', /* html */`
-      <mlv-card>
-        <mlv-card-header>
+    const report = await runner.getReport('nve-card', /* html */`
+      <nve-card>
+        <nve-card-header>
           <h2 slot="title">title</h2>
           <h3 slot="subtitle">subtitle</h3>
           <button slot="header-action">header action</button>
-        </mlv-card-header>
-        <mlv-card-content>
+        </nve-card-header>
+        <nve-card-content>
           <p>content</p>
-        </mlv-card-content>
-        <mlv-card-footer>
+        </nve-card-content>
+        <nve-card-footer>
           <p>footer</p>
-        </mlv-card-footer>
-      </mlv-card>
+        </nve-card-footer>
+      </nve-card>
       <script type="module">
         import '@elements/elements/card/define.js';
       </script>

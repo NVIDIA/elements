@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('month lighthouse report', () => {
   test('month should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-month', /* html */`
-      <mlv-month>
+    const report = await runner.getReport('nve-month', /* html */`
+      <nve-month>
         <label>label</label>
         <input type="month" />
-      </mlv-month>
+      </nve-month>
       <script type="module">
         import '@elements/elements/month/define.js';
       </script>

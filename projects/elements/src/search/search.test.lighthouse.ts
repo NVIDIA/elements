@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('search lighthouse report', () => {
   test('search should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-search', /* html */`
-      <mlv-search>
+    const report = await runner.getReport('nve-search', /* html */`
+      <nve-search>
         <label>label</label>
         <input type="search" />
-      </mlv-search>
+      </nve-search>
       <script type="module">
         import '@elements/elements/search/define.js';
       </script>

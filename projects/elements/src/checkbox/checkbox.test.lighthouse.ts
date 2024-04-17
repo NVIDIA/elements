@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('checkbox lighthouse report', () => {
   test('checkbox should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-checkbox', /* html */`
-        <mlv-checkbox>
+    const report = await runner.getReport('nve-checkbox', /* html */`
+        <nve-checkbox>
           <label>label</label>
           <input type="checkbox" />
-        </mlv-checkbox>
+        </nve-checkbox>
         <script type="module">
           import '@elements/elements/checkbox/define.js';
         </script>

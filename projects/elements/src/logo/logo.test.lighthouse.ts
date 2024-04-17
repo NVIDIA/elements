@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('logo lighthouse report', () => {
   test('logo should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-logo', /* html */`
-      <mlv-logo aria-label="logo"></mlv-logo>
+    const report = await runner.getReport('nve-logo', /* html */`
+      <nve-logo aria-label="logo"></nve-logo>
       <script type="module">
         import '@elements/elements/logo/define.js';
       </script>

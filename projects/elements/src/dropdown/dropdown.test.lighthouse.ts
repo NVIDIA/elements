@@ -1,11 +1,11 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('dropdown lighthouse report', () => {
   test('dropdown should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-dropdown', /* html */`
+    const report = await runner.getReport('nve-dropdown', /* html */`
       <button id="btn">button</button>
-      <mlv-dropdown trigger="btn" anchor="btn" closable>hello</mlv-dropdown>
+      <nve-dropdown trigger="btn" anchor="btn" closable>hello</nve-dropdown>
       <script type="module">
         import '@elements/elements/dropdown/define.js';
       </script>

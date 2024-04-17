@@ -1,15 +1,15 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('menu lighthouse report', () => {
   test('menu should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-menu', /* html */`
-      <mlv-menu>
-        <mlv-menu-item>item 1</mlv-menu-item>
-        <mlv-menu-item>item 2</mlv-menu-item>
-        <mlv-menu-item>item 3</mlv-menu-item>
-        <mlv-menu-item>item 4</mlv-menu-item>
-      </mlv-menu>
+    const report = await runner.getReport('nve-menu', /* html */`
+      <nve-menu>
+        <nve-menu-item>item 1</nve-menu-item>
+        <nve-menu-item>item 2</nve-menu-item>
+        <nve-menu-item>item 3</nve-menu-item>
+        <nve-menu-item>item 4</nve-menu-item>
+      </nve-menu>
       <script type="module">
         import '@elements/elements/menu/define.js';
       </script>

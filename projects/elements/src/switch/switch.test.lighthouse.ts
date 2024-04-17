@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('switch lighthouse report', () => {
   test('switch should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-switch', /* html */`
-      <mlv-switch>
+    const report = await runner.getReport('nve-switch', /* html */`
+      <nve-switch>
         <label>label</label>
         <input type="checkbox" />
-      </mlv-switch>
+      </nve-switch>
       <script type="module">
         import '@elements/elements/switch/define.js';
       </script>

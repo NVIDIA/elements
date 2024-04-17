@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('progress-ring lighthouse report', () => {
   test('progress-ring should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-progress-ring', /* html */`
-      <mlv-progress-ring aria-label="progress"></mlv-progress-ring>
+    const report = await runner.getReport('nve-progress-ring', /* html */`
+      <nve-progress-ring aria-label="progress"></nve-progress-ring>
       <script type="module">
         import '@elements/elements/progress-ring/define.js';
       </script>

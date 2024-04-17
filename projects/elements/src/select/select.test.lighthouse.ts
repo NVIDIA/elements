@@ -1,17 +1,17 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('select lighthouse report', () => {
   test('select should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-select', /* html */`
-      <mlv-select>
+    const report = await runner.getReport('nve-select', /* html */`
+      <nve-select>
         <label>label</label>
         <select>
           <option value="1">Option 1</option>
           <option value="2">Option 2</option>
           <option value="3">Option 3</option>
         </select>
-      </mlv-select>
+      </nve-select>
       <script type="module">
         import '@elements/elements/select/define.js';
       </script>

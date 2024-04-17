@@ -1,15 +1,15 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('app-header lighthouse report', () => {
   test('app-header should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-app-header', /* html */`
-      <mlv-app-header>
-        <mlv-logo size="lg" aria-label="NV Logo">NV</mlv-logo>
+    const report = await runner.getReport('nve-app-header', /* html */`
+      <nve-app-header>
+        <nve-logo size="lg" aria-label="NV Logo">NV</nve-logo>
         <h2 slot="title">header</h2>
-        <mlv-button slot="nav-items">item</mlv-button>
-        <mlv-icon-button icon-name="person" slot="nav-actions" aria-label="profile"></mlv-icon-button>
-      </mlv-app-header>
+        <nve-button slot="nav-items">item</nve-button>
+        <nve-icon-button icon-name="person" slot="nav-actions" aria-label="profile"></nve-icon-button>
+      </nve-app-header>
       <script type="module">
         import '@elements/elements/alert/define.js';
       </script>

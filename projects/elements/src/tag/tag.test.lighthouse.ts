@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('tag lighthouse report', () => {
   test('tag should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-tag', /* html */`
-      <mlv-tag>tag</mlv-tag>
+    const report = await runner.getReport('nve-tag', /* html */`
+      <nve-tag>tag</nve-tag>
       <script type="module">
         import '@elements/elements/tag/define.js';
       </script>

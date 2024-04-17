@@ -1,18 +1,18 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('dialog lighthouse report', () => {
   test('dialog should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-dialog', /* html */`
-      <mlv-dialog closable modal>
-        <mlv-dialog-header>
+    const report = await runner.getReport('nve-dialog', /* html */`
+      <nve-dialog closable modal>
+        <nve-dialog-header>
           <h3>header</h3>
-        </mlv-dialog-header>
+        </nve-dialog-header>
         <p>content</p>
-        <mlv-dialog-footer>
+        <nve-dialog-footer>
           <p>footer</p>
-        </mlv-dialog-footer>
-      </mlv-dialog>
+        </nve-dialog-footer>
+      </nve-dialog>
       <script type="module">
         import '@elements/elements/dialog/define.js';
       </script>

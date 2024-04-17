@@ -1,10 +1,10 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('pagination lighthouse report', () => {
   test('pagination should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-pagination', /* html */`
-      <mlv-pagination name="page" value="1" step="10" items="100"></mlv-pagination>
+    const report = await runner.getReport('nve-pagination', /* html */`
+      <nve-pagination name="page" value="1" step="10" items="100"></nve-pagination>
       <script type="module">
         import '@elements/elements/pagination/define.js';
       </script>

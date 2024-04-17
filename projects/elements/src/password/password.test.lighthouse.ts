@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('password lighthouse report', () => {
   test('password should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-password', /* html */`
-      <mlv-password>
+    const report = await runner.getReport('nve-password', /* html */`
+      <nve-password>
         <label>label</label>
         <input type="password" />
-      </mlv-password>
+      </nve-password>
       <script type="module">
         import '@elements/elements/password/define.js';
       </script>

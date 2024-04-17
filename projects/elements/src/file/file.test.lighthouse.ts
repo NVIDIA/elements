@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('file lighthouse report', () => {
   test('file should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('mlv-file', /* html */`
-      <mlv-file>
+    const report = await runner.getReport('nve-file', /* html */`
+      <nve-file>
         <label>label</label>
         <input type="file" />
-      </mlv-file>
+      </nve-file>
       <script type="module">
         import '@elements/elements/file/define.js';
       </script>
