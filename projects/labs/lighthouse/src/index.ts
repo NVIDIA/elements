@@ -1,4 +1,5 @@
-import lighthouse, { Flags } from 'lighthouse';
+import lighthouse, { Config, Flags, FormattedIcu } from 'lighthouse';
+import Details from 'lighthouse/types/lhr/audit-details';
 import { Browser, chromium } from 'playwright';
 import { preview, build, PreviewServer } from 'vite';
 import virtualHtml from 'vite-plugin-virtual-html';
@@ -6,7 +7,19 @@ import fs from 'fs';
 import path from 'path';
 import { globSync } from 'glob';
 
+process.env.NODE_ENV = 'production';
+
+const ROOT_DIR = 'dist-lighthouse';
+const DIST_DIR = `${ROOT_DIR}/dist`;
 const resolve = rel => path.resolve(process.cwd(), rel);
+
+interface NetworkRequest {
+  mimeType: string;
+  transferSize: number;
+  url: string;
+}
+
+type NetworkRequestDetails = FormattedIcu<Details> & { items: NetworkRequest[] };
 
 export class LighthouseRunner {
   #server: PreviewServer;
@@ -15,11 +28,16 @@ export class LighthouseRunner {
   #report = {};
 
   async open() {
+    if (!fs.existsSync(DIST_DIR)) {
+      fs.mkdirSync(ROOT_DIR);
+      fs.mkdirSync(DIST_DIR);
+    }
+
     this.#browser = await chromium.launch({
       args: ['--headless', '--remote-debugging-port=9222', '--enable-experimental-web-platform-features']
     });
     this.#server = await preview({
-      root: './.lighthouse',
+      root: ROOT_DIR,
       preview: { port: this.#port, open: false }
     });
   }
@@ -28,25 +46,25 @@ export class LighthouseRunner {
     this.#server.httpServer.close();
     await this.#browser.close();
 
-    const dist = '.lighthouse/dist';
-    if (!fs.existsSync(dist)) {
-      fs.mkdirSync(dist);
+    if (!fs.existsSync(DIST_DIR)) {
+      fs.mkdirSync(ROOT_DIR);
+      fs.mkdirSync(DIST_DIR);
     }
 
-    const report = globSync(resolve('.lighthouse/dist/**/report.json')).reduce((p, n) => {
-      const file = JSON.parse(fs.readFileSync(n));
+    const report = globSync(resolve(`${DIST_DIR}/**/report.json`)).reduce((p, n) => {
+      const file = JSON.parse(fs.readFileSync(n) as unknown as string);
       return { ...p, [file.name]: file };
     }, {});
 
-    fs.writeFileSync(`${dist}/report.json`, JSON.stringify(report, null, 2));
+    fs.writeFileSync(`${DIST_DIR}/report.json`, JSON.stringify(report, null, 2));
   }
 
-  async getReport(name: string, content: string) {
+  async getReport(name, content) {
     await this.#buildPage(name, content);
     const flags: Flags = { logLevel: 'error', output: ['json', 'html'] };
 
     // https://github.com/GoogleChrome/lighthouse/blob/main/core/config/default-config.js
-    const config = {
+    const config: Config = {
       extends: 'lighthouse:default',
       settings: {
         onlyCategories: ['performance', 'accessibility', 'best-practices'],
@@ -57,8 +75,8 @@ export class LighthouseRunner {
       }
     };
 
-    const runnerResult = await lighthouse(`http://localhost:${this.#port}/${name}/index.html`, flags, config as any);
-    fs.writeFileSync(`.lighthouse/dist/${name}/report.html`, runnerResult.report[1]);
+    const runnerResult = await lighthouse(`http://localhost:${this.#port}/${name}/index.html`, flags, config);
+    fs.writeFileSync(`${DIST_DIR}/${name}/report.html`, runnerResult.report[1]);
 
     const scores = {
       performance: runnerResult.lhr.categories.performance.score * 100,
@@ -66,7 +84,7 @@ export class LighthouseRunner {
       bestPractices: runnerResult.lhr.categories['best-practices'].score * 100
     };
 
-    const requests = (runnerResult.lhr.audits['network-requests'].details as any).items;
+    const requests = (runnerResult.lhr.audits['network-requests'].details as NetworkRequestDetails).items;
     const payload = {
       javascript: {
         kb:
@@ -114,12 +132,12 @@ export class LighthouseRunner {
       payload
     };
 
-    fs.writeFileSync(`./.lighthouse/dist/${name}/report.json`, JSON.stringify(this.#report[name], null, 2));
+    fs.writeFileSync(`${DIST_DIR}/${name}/report.json`, JSON.stringify(this.#report[name], null, 2));
 
     return this.#report[name];
   }
 
-  #buildPage(name: string, content: string) {
+  #buildPage(name, content) {
     const hasCustomStyleLinks = [...content.matchAll('<link')].length;
 
     return build({
@@ -130,7 +148,7 @@ export class LighthouseRunner {
         target: 'esnext',
         sourcemap: true,
         cssCodeSplit: !hasCustomStyleLinks,
-        outDir: `.lighthouse/dist/${name}`,
+        outDir: `${DIST_DIR}/${name}`,
         rollupOptions: {
           output: {
             entryFileNames: `assets/[name].js`,
@@ -141,16 +159,11 @@ export class LighthouseRunner {
           }
         }
       },
-      resolve: {
-        alias: {
-          '@elements/elements': resolve('./dist')
-        }
-      },
       plugins: [
         virtualHtml({
           pages: {
             index: {
-              template: 'lighthouse/index.html',
+              template: `/vitest.lighthouse.html`,
               render(template) {
                 if (hasCustomStyleLinks) {
                   return template

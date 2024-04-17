@@ -9,6 +9,7 @@ packages:
   - 'projects/demos/static'
   - 'projects/demos/typescript'
   - 'projects/demos/vue'
+  - 'projects/labs/lighthouse'
   - 'projects/pages'
   - 'projects/elements'
   - 'projects/elements-react'

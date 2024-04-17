@@ -1,0 +1,99 @@
+{
+  "name": "@nvidia-elements/lighthouse",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Lighthouse Utilities for Vite",
+  "scripts": {
+    "ci": "wireit",
+    "lint": "wireit",
+    "build": "wireit"
+  },
+  "files": [
+    "README.md",
+    "package.json",
+    "src/**/*"
+  ],
+  "dependencies": {
+    "glob": "10.3.10",
+    "lighthouse": "11.4.0",
+    "playwright": "1.42.1",
+    "vite": "5.2.9",
+    "vite-plugin-virtual-html": "1.1.19"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "7.2.0",
+    "@typescript-eslint/parser": "7.2.0",
+    "eslint-plugin-import": "2.29.1",
+    "globals": "13.23.0",
+    "typescript": "5.3.3",
+    "vite-plugin-dts": "3.7.2",
+    "vitest": "1.1.0"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/index.js",
+    "./index.js": "./dist/index.js",
+    "./vite-setup": "./dist/vite-setup.js",
+    "./vite-setup.js": "./dist/vite-setup.js",
+    "./vite": "./dist/vite.js",
+    "./vite.js": "./dist/vite.js"
+  },
+  "typesVersions": {
+    "*": {
+      "index": [
+        "dist/index.d.ts"
+      ],
+      "axe": [
+        "dist/axe.d.ts"
+      ],
+      "*": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "lint",
+        "build"
+      ]
+    },
+    "build": {
+      "dependencies": [
+        "build:tsc",
+        "build:vite"
+      ]
+    },
+    "build:vite": {
+      "clean": false,
+      "command": "vite build",
+      "files": [
+        "src/**",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist"
+      ]
+    },
+    "build:tsc": {
+      "command": "tsc --project ./tsconfig.lib.json --noEmit --emitDeclarationOnly false",
+      "files": [
+        "src/**/*.ts",
+        "!src/**/*.test.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json"
+      ],
+      "output": []
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
+      "files": [
+        "eslint.config.js"
+      ],
+      "output": []
+    }
+  }
+}

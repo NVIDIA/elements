@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from 'elements-lighthouse';
+import { runner } from '@nvidia-elements/lighthouse';
 
 describe('grid lighthouse report', () => {
   test('grid should meet lighthouse benchmarks', async () => {
@@ -24,7 +24,7 @@ describe('grid lighthouse report', () => {
     `);
 
     expect(report.scores.performance).toBe(100);
-    expect(report.scores.accessibility).toBe(76);
+    expect(report.scores.accessibility).toBe(83);
     expect(report.scores.bestPractices).toBe(100);
     expect(report.payload.javascript.kb).toBeLessThan(20.4);
   });
