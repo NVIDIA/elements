@@ -1,3 +1,10 @@
+## [@elements/elements-v0.30.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.29.1...@elements/elements-v0.30.0) (2024-04-17)
+
+
+### Features
+
+* **elements:** rename stepper to steps ([433158c](https://github.com/NVIDIA/elements/commit/433158cedbd76d8aa2680642b38e55645be5d7e8))
+
 ## [@elements/elements-v0.29.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.29.0...@elements/elements-v0.29.1) (2024-04-16)
 
 
