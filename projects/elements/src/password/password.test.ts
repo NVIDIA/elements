@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Password } from '@nvidia-elements/core/password';
 import '@nvidia-elements/core/password/define.js';
 
-describe('nve-password', () => {
+describe(Password.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Password;
 
@@ -15,7 +16,7 @@ describe('nve-password', () => {
         <input type="password" />
       </nve-password>
     `);
-    element = fixture.querySelector('nve-password');
+    element = fixture.querySelector(Password.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,23 +25,23 @@ describe('nve-password', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-password')).toBeDefined();
+    expect(customElements.get(Password.metadata.tag)).toBeDefined();
   });
 
   it('should toggle the input type when the visibility icon is pressed', async () => {
     expect(fixture.querySelector('input').type).toBe('password');
-    expect(element.shadowRoot.querySelector('nve-icon-button').iconName).toBe('visible');
+    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe('visible');
 
-    element.shadowRoot.querySelector('nve-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     await elementIsStable(element);
 
     expect(fixture.querySelector('input').type).toBe('text');
-    expect(element.shadowRoot.querySelector('nve-icon-button').iconName).toBe('hidden');
+    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe('hidden');
   });
 
   it('should apply an aria-label to the password visibility button', async () => {
     await elementIsStable(element);
-    const button = element.shadowRoot.querySelector('nve-icon-button');
+    const button = element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag);
     expect(button.ariaLabel).toBe('show');
     button.click();
     await elementIsStable(element);

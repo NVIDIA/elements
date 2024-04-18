@@ -10,7 +10,7 @@ import '@nvidia-elements/core/logo/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
-describe('nve-app-header: defaults', () => {
+describe(AppHeader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: AppHeader;
 
@@ -18,7 +18,7 @@ describe('nve-app-header: defaults', () => {
     fixture = await createFixture(html`
       <nve-app-header></nve-app-header>
     `);
-    element = fixture.querySelector('nve-app-header');
+    element = fixture.querySelector(AppHeader.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -27,11 +27,11 @@ describe('nve-app-header: defaults', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-app-header')).toBeDefined();
+    expect(customElements.get(AppHeader.metadata.tag)).toBeDefined();
   });
 
   it('should include default logo', () => {
-    const defaultLogo = element.shadowRoot?.querySelector('nve-logo');
+    const defaultLogo = element.shadowRoot?.querySelector(Logo.metadata.tag);
     expect(defaultLogo).not.toBeNull();
     expect(defaultLogo.getAttribute('size')).toBe('sm');
     expect(defaultLogo.getAttribute('aria-label')).toBe('NVIDIA');
@@ -48,7 +48,7 @@ describe('nve-app-header: defaults', () => {
   });
 });
 
-describe('nve-app-header: app branding', () => {
+describe(`${AppHeader.metadata.tag}: branding`, () => {
   let fixture: HTMLElement;
   let element: AppHeader;
   const testShortcode = 'Hi';
@@ -61,7 +61,7 @@ describe('nve-app-header: app branding', () => {
         <h2 slot="title">${testTitle}</h2>
       </nve-app-header>
     `);
-    element = fixture.querySelector('nve-app-header');
+    element = fixture.querySelector(AppHeader.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -70,7 +70,7 @@ describe('nve-app-header: app branding', () => {
   });
 
   it('should carryover logo customizations', async () => {
-    const appLogo = element.querySelector<Logo>('nve-logo');
+    const appLogo = element.querySelector<Logo>(Logo.metadata.tag);
     await elementIsStable(appLogo);
     expect(appLogo.getAttribute('size')).toBe('lg');
     expect(appLogo.textContent.includes(testShortcode)).toBe(true);
@@ -82,7 +82,7 @@ describe('nve-app-header: app branding', () => {
   });
 
   it('should set logo to sm if no customization is provided', async () => {
-    const appLogo = element.querySelector<Logo>('nve-logo');
+    const appLogo = element.querySelector<Logo>(Logo.metadata.tag);
     appLogo.removeAttribute('size');
     element.shadowRoot.querySelector('slot').dispatchEvent(new Event('slotchange'));
     await appLogo.updateComplete;
@@ -95,7 +95,7 @@ describe('nve-app-header: app branding', () => {
   });
 });
 
-describe('nve-app-header: nav items and actions', () => {
+describe(`${AppHeader.metadata.tag}: nav items and actions`, () => {
   let fixture: HTMLElement;
   let element: AppHeader;
   const innerIconBtnText = 'NV';
@@ -110,7 +110,7 @@ describe('nve-app-header: nav items and actions', () => {
         <nve-icon-button id="override-action-btn" interaction="emphasis" slot="nav-actions">${innerIconBtnText}</nve-icon-button>
       </nve-app-header>
     `);
-    element = fixture.querySelector('nve-app-header');
+    element = fixture.querySelector(AppHeader.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -149,7 +149,9 @@ describe('nve-app-header: nav items and actions', () => {
   });
 
   it('should set emphasis buttons to size sm if not set', () => {
-    expect(element.querySelector<IconButton>('nve-icon-button:not([interaction="emphasis"])').size).toBe(undefined);
-    expect(element.querySelector<IconButton>('nve-icon-button[interaction="emphasis"]').size).toBe('sm');
+    expect(element.querySelector<IconButton>(`${IconButton.metadata.tag}:not([interaction="emphasis"])`).size).toBe(
+      undefined
+    );
+    expect(element.querySelector<IconButton>(`${IconButton.metadata.tag}[interaction="emphasis"]`).size).toBe('sm');
   });
 });

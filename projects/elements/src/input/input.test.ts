@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { Input } from '@nvidia-elements/core/input';
 import '@nvidia-elements/core/input/define.js';
 
-describe('nve-input', () => {
+describe(Input.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Input;
 
@@ -15,7 +15,7 @@ describe('nve-input', () => {
         <input type="text" />
       </nve-input>
     `);
-    element = fixture.querySelector('nve-input');
+    element = fixture.querySelector(Input.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,6 +24,6 @@ describe('nve-input', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-input')).toBeDefined();
+    expect(customElements.get(Input.metadata.tag)).toBeDefined();
   });
 });

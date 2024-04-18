@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { PanelHeader } from '@nvidia-elements/core/panel';
 import '@nvidia-elements/core/panel/define.js';
 
-describe('nve-panel-header', () => {
+describe(PanelHeader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: PanelHeader;
 
@@ -14,7 +14,7 @@ describe('nve-panel-header', () => {
         <nve-panel-header>hello</nve-panel-header>
       </nve-panel>
     `);
-    element = fixture.querySelector('nve-panel-header');
+    element = fixture.querySelector(PanelHeader.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('nve-panel-header', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-panel-header')).toBeDefined();
+    expect(customElements.get(PanelHeader.metadata.tag)).toBeDefined();
   });
 
   it('should render with the header default slot', async () => {

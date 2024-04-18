@@ -1,9 +1,9 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import type { ControlMessage } from '../control-message/control-message.js';
-import type { Control } from '../control/control.js';
-import type { ControlGroup } from '../control-group/control-group.js';
+import { ControlMessage } from '../control-message/control-message.js';
+import { Control } from '../control/control.js';
+import { ControlGroup } from '../control-group/control-group.js';
 import {
   updateControlStatusState,
   setupControlStates,
@@ -29,8 +29,8 @@ describe('updateControlStatusState', () => {
         <nve-control-message>message</nve-control-message>
       </nve-control>
     `);
-    control = fixture.querySelector('nve-control');
-    message = fixture.querySelector('nve-control-message');
+    control = fixture.querySelector(Control.metadata.tag);
+    message = fixture.querySelector(ControlMessage.metadata.tag);
     await elementIsStable(control);
   });
 
@@ -69,8 +69,8 @@ describe('setupControlValidationStates HTML5 disabled', () => {
         <nve-control-message>message</nve-control-message>
       </nve-control>
     `);
-    control = fixture.querySelector('nve-control');
-    message = fixture.querySelector('nve-control-message');
+    control = fixture.querySelector(Control.metadata.tag);
+    message = fixture.querySelector(ControlMessage.metadata.tag);
     setupControlValidationStates(control, [message]);
     await elementIsStable(control);
   });
@@ -122,8 +122,8 @@ describe('setupControlValidationStates', () => {
         </nve-control>
       </form>
     `);
-    control = fixture.querySelector('nve-control');
-    message = fixture.querySelector('nve-control-message');
+    control = fixture.querySelector(Control.metadata.tag);
+    message = fixture.querySelector(ControlMessage.metadata.tag);
     form = fixture.querySelector('form');
     input = fixture.querySelector('input');
     setupControlValidationStates(control, [message]);
@@ -205,7 +205,7 @@ describe('setupControlStates', () => {
         <nve-control-message>message</nve-control-message>
       </nve-control>
     `);
-    control = fixture.querySelector('nve-control');
+    control = fixture.querySelector(Control.metadata.tag);
     setupControlStates(control);
     input = fixture.querySelector<HTMLInputElement & { readonly: boolean }>('input');
     await elementIsStable(control);
@@ -292,7 +292,10 @@ describe('setupControlStates', () => {
 
 describe('showNonValidationMessages', () => {
   it('should show all messages that do not have a validation requirement', async () => {
-    const messages = [document.createElement('nve-control-message'), document.createElement('nve-control-message')];
+    const messages = [
+      document.createElement(ControlMessage.metadata.tag),
+      document.createElement(ControlMessage.metadata.tag)
+    ];
 
     messages[0].setAttribute('error', 'valueMissing');
     messages[0].hidden = true;
@@ -307,7 +310,10 @@ describe('showNonValidationMessages', () => {
 
 describe('hideAllValidationMessages', () => {
   it('should hide all messages with a validation requirement', async () => {
-    const messages = [document.createElement('nve-control-message'), document.createElement('nve-control-message')];
+    const messages = [
+      document.createElement(ControlMessage.metadata.tag),
+      document.createElement(ControlMessage.metadata.tag)
+    ];
 
     messages[0].setAttribute('error', 'valueMissing');
 
@@ -323,7 +329,10 @@ describe('hideAllValidationMessages', () => {
 describe('showActiveValidationMessages', () => {
   it('should only messages wich have active validation rules', async () => {
     const controlMock = { input: { validity: { valueMissing: true } } } as Control;
-    const messages = [document.createElement('nve-control-message'), document.createElement('nve-control-message')];
+    const messages = [
+      document.createElement(ControlMessage.metadata.tag),
+      document.createElement(ControlMessage.metadata.tag)
+    ];
 
     messages[0].error = 'valueMissing';
     messages[0].hidden = true;
@@ -340,7 +349,10 @@ describe('showActiveValidationMessages', () => {
 
 describe('hideAllControlMessages', () => {
   it('should hide all control messages', async () => {
-    const messages = [document.createElement('nve-control-message'), document.createElement('nve-control-message')];
+    const messages = [
+      document.createElement(ControlMessage.metadata.tag),
+      document.createElement(ControlMessage.metadata.tag)
+    ];
 
     document.body.append(...messages);
 
@@ -364,7 +376,10 @@ describe('hideAllControlMessages', () => {
 describe('hideInactiveValidationMessages', () => {
   it('should hide all validation messages if control is valid', async () => {
     const controlMock = { input: { validity: { valid: true } } } as Control;
-    const messages = [document.createElement('nve-control-message'), document.createElement('nve-control-message')];
+    const messages = [
+      document.createElement(ControlMessage.metadata.tag),
+      document.createElement(ControlMessage.metadata.tag)
+    ];
 
     messages[0].error = 'valueMissing';
 
@@ -387,7 +402,7 @@ describe('setupControlGroupStates initial', () => {
         <label>control group</label>
       </nve-control-group>
     `);
-    controlGroup = fixture.querySelector('nve-control-group');
+    controlGroup = fixture.querySelector(ControlGroup.metadata.tag);
     await elementIsStable(controlGroup);
   });
 
@@ -416,7 +431,7 @@ describe('setupControlGroupStates', () => {
         </nve-control>
       </nve-control-group>
     `);
-    controlGroup = fixture.querySelector('nve-control-group');
+    controlGroup = fixture.querySelector(ControlGroup.metadata.tag);
     await elementIsStable(controlGroup);
   });
 

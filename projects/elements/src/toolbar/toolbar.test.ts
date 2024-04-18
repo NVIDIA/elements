@@ -2,6 +2,11 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { Toolbar } from '@nvidia-elements/core/toolbar';
+import { ButtonGroup } from '@nvidia-elements/core/button-group';
+import { Divider } from '@nvidia-elements/core/divider';
+import { Select } from '@nvidia-elements/core/select';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/toolbar/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/button-group/define.js';
@@ -9,7 +14,7 @@ import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
-describe('nve-toolbar', () => {
+describe(Toolbar.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Toolbar;
 
@@ -21,7 +26,7 @@ describe('nve-toolbar', () => {
         <div slot="suffix">suffix</div>
       </nve-toolbar>
     `);
-    element = fixture.querySelector('nve-toolbar');
+    element = fixture.querySelector(Toolbar.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -30,7 +35,7 @@ describe('nve-toolbar', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-toolbar')).toBeDefined();
+    expect(customElements.get(Toolbar.metadata.tag)).toBeDefined();
   });
 
   it('should initialize role toolbar', async () => {
@@ -80,7 +85,7 @@ describe('nve-toolbar', () => {
   });
 });
 
-describe('nve-toolbar scrollbar state', () => {
+describe(`${Toolbar.metadata.tag}: scrollbar state`, () => {
   let fixture: HTMLElement;
   let element: Toolbar;
 
@@ -92,7 +97,7 @@ describe('nve-toolbar scrollbar state', () => {
         <div slot="suffix">suffix</div>
       </nve-toolbar>
     `);
-    element = fixture.querySelector('nve-toolbar');
+    element = fixture.querySelector(Toolbar.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -112,7 +117,7 @@ describe('nve-toolbar scrollbar state', () => {
   });
 });
 
-describe('nve-toolbar orientation', () => {
+describe(`${Toolbar.metadata.tag}: orientation`, () => {
   let fixture: HTMLElement;
   let element: Toolbar;
 
@@ -134,7 +139,7 @@ describe('nve-toolbar orientation', () => {
         </nve-button-group>
       </nve-toolbar>
     `);
-    element = fixture.querySelector('nve-toolbar');
+    element = fixture.querySelector(Toolbar.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -144,17 +149,17 @@ describe('nve-toolbar orientation', () => {
 
   it('should sync orientation of slotted elements', async () => {
     await elementIsStable(element);
-    expect(fixture.querySelector('nve-button-group').orientation).toBe('vertical');
-    expect(fixture.querySelector('nve-divider').orientation).toBe('horizontal');
+    expect(fixture.querySelector<ButtonGroup>(ButtonGroup.metadata.tag).orientation).toBe('vertical');
+    expect(fixture.querySelector<Divider>(Divider.metadata.tag).orientation).toBe('horizontal');
 
     element.orientation = 'horizontal';
     await elementIsStable(element);
-    expect(fixture.querySelector('nve-button-group').orientation).toBe('horizontal');
-    expect(fixture.querySelector('nve-divider').orientation).toBe('vertical');
+    expect(fixture.querySelector<ButtonGroup>(ButtonGroup.metadata.tag).orientation).toBe('horizontal');
+    expect(fixture.querySelector<Divider>(Divider.metadata.tag).orientation).toBe('vertical');
   });
 });
 
-describe('nve-toolbar container', () => {
+describe(`${Toolbar.metadata.tag}: container`, () => {
   let fixture: HTMLElement;
   let element: Toolbar;
 
@@ -179,7 +184,7 @@ describe('nve-toolbar container', () => {
         <nve-icon-button icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
       </nve-toolbar>
     `);
-    element = fixture.querySelector('nve-toolbar');
+    element = fixture.querySelector(Toolbar.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -189,16 +194,16 @@ describe('nve-toolbar container', () => {
 
   it('should sync container of slotted elements', async () => {
     await elementIsStable(element);
-    expect(fixture.querySelector('nve-select').container).toBe(undefined);
-    expect(fixture.querySelector('nve-button-group').container).toBe(undefined);
-    expect(fixture.querySelector('nve-icon-button').interaction).toBe(undefined);
-    expect(fixture.querySelector('nve-button').interaction).toBe(undefined);
+    expect(fixture.querySelector<Select>(Select.metadata.tag).container).toBe(undefined);
+    expect(fixture.querySelector<ButtonGroup>(ButtonGroup.metadata.tag).container).toBe(undefined);
+    expect(fixture.querySelector<IconButton>(IconButton.metadata.tag).interaction).toBe(undefined);
+    expect(fixture.querySelector<Button>(Button.metadata.tag).interaction).toBe(undefined);
 
     element.container = undefined;
     await elementIsStable(element);
-    expect(fixture.querySelector('nve-select').container).toBe('flat');
-    expect(fixture.querySelector('nve-button-group').container).toBe('flat');
-    expect(fixture.querySelector('nve-icon-button').container).toBe('flat');
-    expect(fixture.querySelector('nve-button').container).toBe('inline');
+    expect(fixture.querySelector<Select>(Select.metadata.tag).container).toBe('flat');
+    expect(fixture.querySelector<ButtonGroup>(ButtonGroup.metadata.tag).container).toBe('flat');
+    expect(fixture.querySelector<IconButton>(IconButton.metadata.tag).container).toBe('flat');
+    expect(fixture.querySelector<Button>(Button.metadata.tag).container).toBe('inline');
   });
 });

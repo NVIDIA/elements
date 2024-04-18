@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { PageLoader } from '@nvidia-elements/core/page-loader';
 import '@nvidia-elements/core/page-loader/define.js';
 
-describe('nve-page-loader', () => {
+describe(PageLoader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: PageLoader;
 
@@ -12,7 +12,7 @@ describe('nve-page-loader', () => {
     fixture = await createFixture(html`
       <nve-page-loader></nve-page-loader>
     `);
-    element = fixture.querySelector('nve-page-loader');
+    element = fixture.querySelector(PageLoader.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,7 +21,7 @@ describe('nve-page-loader', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-page-loader')).toBeDefined();
+    expect(customElements.get(PageLoader.metadata.tag)).toBeDefined();
   });
 
   it('should use default to center position', async () => {

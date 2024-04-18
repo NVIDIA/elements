@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { Divider } from '@nvidia-elements/core/divider';
 import '@nvidia-elements/core/divider/define.js';
 
-describe('nve-divider', () => {
+describe(Divider.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Divider;
 
@@ -12,7 +12,7 @@ describe('nve-divider', () => {
     fixture = await createFixture(html`
       <nve-divider></nve-divider>
     `);
-    element = fixture.querySelectorAll('nve-divider')[0];
+    element = fixture.querySelectorAll<Divider>(Divider.metadata.tag)[0];
     await elementIsStable(element);
   });
 
@@ -21,7 +21,7 @@ describe('nve-divider', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-divider')).toBeDefined();
+    expect(customElements.get(Divider.metadata.tag)).toBeDefined();
   });
 
   it('orientation should default to "horizontal"', () => {

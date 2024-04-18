@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { Grid } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
-describe('nve-grid', () => {
+describe(Grid.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Grid;
 
@@ -31,7 +31,7 @@ describe('nve-grid', () => {
         </nve-grid-row>
       </nve-grid>
     `);
-    element = fixture.querySelector('nve-grid');
+    element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -40,7 +40,7 @@ describe('nve-grid', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-grid')).toBeDefined();
+    expect(customElements.get(Grid.metadata.tag)).toBeDefined();
   });
 
   it('should set to have the grid role of grid', () => {
@@ -66,7 +66,7 @@ describe('nve-grid', () => {
   });
 });
 
-describe('nve-grid id check', () => {
+describe(`${Grid.metadata.tag}: id check`, () => {
   let fixture: HTMLElement;
   let element: Grid;
 
@@ -93,7 +93,7 @@ describe('nve-grid id check', () => {
         </nve-grid-row>
       </nve-grid>
     `);
-    element = fixture.querySelector('nve-grid');
+    element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -106,7 +106,7 @@ describe('nve-grid id check', () => {
   });
 });
 
-describe('nve-grid scroll', () => {
+describe(`${Grid.metadata.tag}: scroll`, () => {
   let fixture: HTMLElement;
   let element: Grid;
 
@@ -145,7 +145,7 @@ describe('nve-grid scroll', () => {
         </nve-grid-row>
       </nve-grid>
     `);
-    element = fixture.querySelector('nve-grid');
+    element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);
   });
 
