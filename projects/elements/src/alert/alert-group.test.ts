@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { Alert, AlertGroup } from '@nvidia-elements/core/alert';
 import '@nvidia-elements/core/alert/define.js';
 
-describe('nve-alert-group', () => {
+describe(AlertGroup.metadata.tag, () => {
   let fixture: HTMLElement;
   let alerts: NodeListOf<Alert>;
   let alertGroup: AlertGroup;
@@ -16,8 +16,8 @@ describe('nve-alert-group', () => {
         <nve-alert>alert</nve-alert>
       </nve-alert-group>
     `);
-    alerts = fixture.querySelectorAll('nve-alert');
-    alertGroup = fixture.querySelector('nve-alert-group');
+    alerts = fixture.querySelectorAll(Alert.metadata.tag);
+    alertGroup = fixture.querySelector(AlertGroup.metadata.tag);
     await elementIsStable(alertGroup);
   });
 
@@ -26,8 +26,8 @@ describe('nve-alert-group', () => {
   });
 
   it('should define elements', () => {
-    expect(customElements.get('nve-alert')).toBeDefined();
-    expect(customElements.get('nve-alert-group')).toBeDefined();
+    expect(customElements.get(Alert.metadata.tag)).toBeDefined();
+    expect(customElements.get(AlertGroup.metadata.tag)).toBeDefined();
   });
 
   it('should provide a aria role of group to describe content', async () => {
@@ -49,7 +49,7 @@ describe('nve-alert-group', () => {
   it('should sync group status to newly added alerts', async () => {
     alertGroup.status = 'success';
     await elementIsStable(alertGroup);
-    const alert = document.createElement('nve-alert');
+    const alert = document.createElement(Alert.metadata.tag) as Alert;
     expect(alert.status).toBe(undefined);
 
     alertGroup.appendChild(alert);

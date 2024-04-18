@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { DialogFooter } from '@nvidia-elements/core/dialog';
 import '@nvidia-elements/core/dialog/define.js';
 
-describe('nve-dialog-footer', () => {
+describe(DialogFooter.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: DialogFooter;
 
@@ -14,7 +14,7 @@ describe('nve-dialog-footer', () => {
         <nve-dialog-footer>hello</nve-dialog-footer>
       </nve-dialog>
     `);
-    element = fixture.querySelector('nve-dialog-footer');
+    element = fixture.querySelector(DialogFooter.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('nve-dialog-footer', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-dialog-footer')).toBeDefined();
+    expect(customElements.get(DialogFooter.metadata.tag)).toBeDefined();
   });
 
   it('should render with the footer default slot', async () => {

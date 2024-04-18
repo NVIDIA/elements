@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Dialog } from '@nvidia-elements/core/dialog';
 import '@nvidia-elements/core/dialog/define.js';
 
-describe('nve-dialog', () => {
+describe(Dialog.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Dialog;
 
@@ -12,7 +13,7 @@ describe('nve-dialog', () => {
     fixture = await createFixture(html`
       <nve-dialog>hello</nve-dialog>
     `);
-    element = fixture.querySelector('nve-dialog');
+    element = fixture.querySelector(Dialog.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,15 +22,17 @@ describe('nve-dialog', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-dialog')).toBeDefined();
+    expect(customElements.get(Dialog.metadata.tag)).toBeDefined();
   });
 
   it('should render close button when closable', async () => {
-    expect(element.shadowRoot.querySelector('nve-icon-button')).toBe(null);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
 
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon-button').tagName).toBe('MLV-ICON-BUTTON');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
   });
 
   it('should use manual behavior when non-modal', async () => {
@@ -67,7 +70,7 @@ describe('nve-dialog', () => {
   it('should apply an aria-label to the close button', async () => {
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
   });
 
   it('should emit close event when close button clicked', async () => {
@@ -75,7 +78,7 @@ describe('nve-dialog', () => {
     await elementIsStable(element);
 
     const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector('nve-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
 });

@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { Logo } from '@nvidia-elements/core/logo';
 import '@nvidia-elements/core/logo/define.js';
 
-describe('nve-logo', () => {
+describe(Logo.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Logo;
 
@@ -12,7 +12,7 @@ describe('nve-logo', () => {
     fixture = await createFixture(html`
       <nve-logo></nve-logo>
     `);
-    element = fixture.querySelector('nve-logo');
+    element = fixture.querySelector(Logo.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,7 +21,7 @@ describe('nve-logo', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-logo')).toBeDefined();
+    expect(customElements.get(Logo.metadata.tag)).toBeDefined();
   });
 
   it('should reflect a color palatte value', async () => {

@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvid
 import { Control, ControlMessage } from '@nvidia-elements/core/forms';
 import '@nvidia-elements/core/forms/define.js';
 
-describe('nve-control', () => {
+describe(Control.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Control;
   let label: HTMLLabelElement;
@@ -24,11 +24,11 @@ describe('nve-control', () => {
         </datalist>
       </nve-control>
     `);
-    element = fixture.querySelector('nve-control');
+    element = fixture.querySelector(Control.metadata.tag);
     label = fixture.querySelector('label');
     input = fixture.querySelector('input');
     datalist = fixture.querySelector('datalist');
-    message = fixture.querySelector('nve-control-message');
+    message = fixture.querySelector(ControlMessage.metadata.tag);
     await elementIsStable(element);
     await elementIsStable(message);
   });
@@ -38,7 +38,7 @@ describe('nve-control', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-control')).toBeDefined();
+    expect(customElements.get(Control.metadata.tag)).toBeDefined();
   });
 
   it('should assign nve-control attribute identifier', async () => {
@@ -101,7 +101,7 @@ describe('nve-control', () => {
   });
 });
 
-describe('nve-control custom', () => {
+describe(`${Control.metadata.tag}: custom`, () => {
   let fixture: HTMLElement;
   let element: Control;
 
@@ -112,7 +112,7 @@ describe('nve-control custom', () => {
         <div nve-control="custom" tabindex="0" value=""></div>
       </nve-control>
     `);
-    element = fixture.querySelector('nve-control');
+    element = fixture.querySelector(Control.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -130,7 +130,7 @@ describe('nve-control custom', () => {
   });
 
   it('should create a control instance without throwing due to not yet slotted input', async () => {
-    const control = document.createElement('nve-control');
+    const control = document.createElement(Control.metadata.tag);
     control.id = 'nve-control-instance';
     document.body.appendChild(control);
 
@@ -153,7 +153,7 @@ describe('nve-control custom', () => {
   });
 });
 
-describe('nve-control fit-text input', () => {
+describe(`${Control.metadata.tag}: fit-text input`, () => {
   let fixture: HTMLElement;
   let element: Control;
   let input: HTMLInputElement;
@@ -165,7 +165,7 @@ describe('nve-control fit-text input', () => {
         <input type="text" value="1234" />
       </nve-control>
     `);
-    element = fixture.querySelector('nve-control');
+    element = fixture.querySelector(Control.metadata.tag);
     input = fixture.querySelector('input');
     await elementIsStable(element);
   });
@@ -198,7 +198,7 @@ describe('nve-control fit-text input', () => {
   });
 });
 
-describe('nve-control fit-content input', () => {
+describe(`${Control.metadata.tag}: fit-content input`, () => {
   let fixture: HTMLElement;
   let element: Control;
   let input: HTMLInputElement;
@@ -210,7 +210,7 @@ describe('nve-control fit-content input', () => {
         <input type="text" />
       </nve-control>
     `);
-    element = fixture.querySelector('nve-control');
+    element = fixture.querySelector(Control.metadata.tag);
     input = fixture.querySelector('input');
     await elementIsStable(element);
   });
@@ -226,7 +226,7 @@ describe('nve-control fit-content input', () => {
   });
 });
 
-describe('nve-control fit-text select', () => {
+describe(`${Control.metadata.tag}: fit-text select`, () => {
   let fixture: HTMLElement;
   let element: Control;
   let input: HTMLSelectElement;
@@ -242,7 +242,7 @@ describe('nve-control fit-text select', () => {
         <nve-control-message>message</nve-control-message>
       </nve-control>
     `);
-    element = fixture.querySelector('nve-control');
+    element = fixture.querySelector(Control.metadata.tag);
     input = fixture.querySelector('select');
     await elementIsStable(element);
   });

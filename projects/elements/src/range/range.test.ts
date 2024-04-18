@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { Range } from '@nvidia-elements/core/range';
 import '@nvidia-elements/core/range/define.js';
 
-describe('nve-range', () => {
+describe(Range.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Range;
 
@@ -15,7 +15,7 @@ describe('nve-range', () => {
         <input type="range" value="50" />
       </nve-range>
     `);
-    element = fixture.querySelector('nve-range');
+    element = fixture.querySelector(Range.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,7 +24,7 @@ describe('nve-range', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-range')).toBeDefined();
+    expect(customElements.get(Range.metadata.tag)).toBeDefined();
   });
 
   it('should set the custom track width', async () => {

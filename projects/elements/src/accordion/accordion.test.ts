@@ -2,9 +2,10 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { Accordion, AccordionContent, AccordionGroup, AccordionHeader } from '@nvidia-elements/core/accordion';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import '@nvidia-elements/core/accordion/define.js';
 
-describe('nve-accordion', () => {
+describe(Accordion.metadata.tag, () => {
   let fixture: HTMLElement;
   let parentElement: AccordionGroup;
   let childElement1: Accordion;
@@ -25,11 +26,11 @@ describe('nve-accordion', () => {
       </nve-accordion>
     </nve-accordion-group>
     `);
-    parentElement = fixture.querySelector('nve-accordion-group');
-    childElement1 = fixture.querySelectorAll('nve-accordion')[0];
-    childElement2 = fixture.querySelectorAll('nve-accordion')[1];
-    header = fixture.querySelector('nve-accordion-header');
-    content = fixture.querySelector('nve-accordion-content');
+    parentElement = fixture.querySelector(AccordionGroup.metadata.tag);
+    childElement1 = fixture.querySelectorAll<Accordion>(Accordion.metadata.tag)[0];
+    childElement2 = fixture.querySelectorAll<Accordion>(Accordion.metadata.tag)[1];
+    header = fixture.querySelector(AccordionHeader.metadata.tag);
+    content = fixture.querySelector(AccordionContent.metadata.tag);
 
     await elementIsStable(parentElement);
     await elementIsStable(childElement1);
@@ -43,11 +44,11 @@ describe('nve-accordion', () => {
   });
 
   it('should define parentElement', () => {
-    expect(customElements.get('nve-accordion-group')).toBeDefined();
+    expect(customElements.get(AccordionGroup.metadata.tag)).toBeDefined();
   });
 
   it('should define childElement', () => {
-    expect(customElements.get('nve-accordion')).toBeDefined();
+    expect(customElements.get(Accordion.metadata.tag)).toBeDefined();
   });
 
   it('should role group for accordion group', async () => {
@@ -104,7 +105,7 @@ describe('nve-accordion', () => {
     await elementIsStable(childElement1);
     await elementIsStable(childElement2);
 
-    const trigger1 = childElement1.shadowRoot.querySelector('nve-icon-button');
+    const trigger1 = childElement1.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag);
 
     const event = untilEvent(trigger1, 'click');
     emulateClick(trigger1);
@@ -113,7 +114,7 @@ describe('nve-accordion', () => {
     expect(childElement1.expanded).toBe(true);
     expect(childElement2.expanded).toBe(false);
 
-    const trigger2 = childElement2.shadowRoot.querySelector('nve-icon-button');
+    const trigger2 = childElement2.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag);
 
     const event2 = untilEvent(trigger2, 'click');
     const event3 = untilEvent(childElement2, 'open');
