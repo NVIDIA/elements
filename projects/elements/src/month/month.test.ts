@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Month } from '@nvidia-elements/core/month';
 import '@nvidia-elements/core/month/define.js';
 
-describe('nve-month', () => {
+describe(Month.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Month;
 
@@ -15,7 +16,7 @@ describe('nve-month', () => {
         <input type="month" />
       </nve-month>
     `);
-    element = fixture.querySelector('nve-month');
+    element = fixture.querySelector(Month.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,15 +25,15 @@ describe('nve-month', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-month')).toBeDefined();
+    expect(customElements.get(Month.metadata.tag)).toBeDefined();
   });
 
   it('should render calendar suffix icon', () => {
-    expect(element.shadowRoot.querySelector('nve-icon-button').getAttribute('icon-name')).toBe('calendar');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('calendar');
   });
 
   it('should trigger native UI', async () => {
-    element.shadowRoot.querySelector('nve-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     await elementIsStable(element);
     expect(element.input.matches(':focus')).toBe(false);
   });

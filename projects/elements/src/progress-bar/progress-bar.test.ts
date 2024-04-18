@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { ProgressBar } from '@nvidia-elements/core/progress-bar';
 import '@nvidia-elements/core/progress-bar/define.js';
 
-describe('nve-progress-bar', () => {
+describe(ProgressBar.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: ProgressBar;
 
@@ -12,7 +12,7 @@ describe('nve-progress-bar', () => {
     fixture = await createFixture(html`
       <nve-progress-bar></nve-progress-bar>
     `);
-    element = fixture.querySelector('nve-progress-bar');
+    element = fixture.querySelector(ProgressBar.metadata.tag);
   });
 
   afterEach(() => {
@@ -20,7 +20,7 @@ describe('nve-progress-bar', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-progress-bar')).toBeDefined();
+    expect(customElements.get(ProgressBar.metadata.tag)).toBeDefined();
   });
 
   it('should set properties on its native progress element', async () => {

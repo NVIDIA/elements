@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Dropdown } from '@nvidia-elements/core/dropdown';
 import '@nvidia-elements/core/dropdown/define.js';
 
-describe('nve-dropdown', () => {
+describe(Dropdown.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Dropdown;
 
@@ -12,7 +13,7 @@ describe('nve-dropdown', () => {
     fixture = await createFixture(html`
       <nve-dropdown>hello</nve-dropdown>
     `);
-    element = fixture.querySelector('nve-dropdown');
+    element = fixture.querySelector(Dropdown.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,14 +22,16 @@ describe('nve-dropdown', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-dropdown')).toBeDefined();
+    expect(customElements.get(Dropdown.metadata.tag)).toBeDefined();
   });
 
   it('should render close button when closable', async () => {
-    expect(element.shadowRoot.querySelector('nve-icon-button')).toBe(null);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon-button').tagName).toBe('MLV-ICON-BUTTON');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
   });
 
   it('should render arrow when set', async () => {
@@ -52,7 +55,7 @@ describe('nve-dropdown', () => {
   it('should apply an aria-label to the close button', async () => {
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
   });
 
   it('should emit close event when close button clicked', async () => {
@@ -60,7 +63,7 @@ describe('nve-dropdown', () => {
     await elementIsStable(element);
 
     const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector('nve-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
 });

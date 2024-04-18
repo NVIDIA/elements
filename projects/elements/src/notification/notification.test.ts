@@ -2,9 +2,11 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
 import { Notification } from '@nvidia-elements/core/notification';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/notification/define.js';
 
-describe('nve-notification', () => {
+describe(Notification.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Notification;
 
@@ -12,7 +14,7 @@ describe('nve-notification', () => {
     fixture = await createFixture(html`
       <nve-notification>hello</nve-notification>
     `);
-    element = fixture.querySelector('nve-notification');
+    element = fixture.querySelector(Notification.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,14 +23,16 @@ describe('nve-notification', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-notification')).toBeDefined();
+    expect(customElements.get(Notification.metadata.tag)).toBeDefined();
   });
 
   it('should render close button when closable', async () => {
-    expect(element.shadowRoot.querySelector('nve-icon-button')).toBe(null);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon-button').tagName).toBe('MLV-ICON-BUTTON');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
   });
 
   // https://open-ui.org/components/popup.research.explainer#api-shape
@@ -43,10 +47,10 @@ describe('nve-notification', () => {
   });
 
   it('should set an aria-label for the icon status', async () => {
-    expect(element.shadowRoot.querySelector('nve-icon').ariaLabel).toBe('information');
+    expect(element.shadowRoot.querySelector(Icon.metadata.tag).ariaLabel).toBe('information');
     element.status = 'success';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon').ariaLabel).toBe('success');
+    expect(element.shadowRoot.querySelector(Icon.metadata.tag).ariaLabel).toBe('success');
   });
 
   it('should default to positioning to inline content', async () => {
@@ -82,7 +86,7 @@ describe('nve-notification', () => {
     await elementIsStable(element);
 
     const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector('nve-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
 

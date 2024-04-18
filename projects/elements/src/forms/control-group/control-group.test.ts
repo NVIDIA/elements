@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { ControlGroup, ControlMessage } from '@nvidia-elements/core/forms';
 import '@nvidia-elements/core/forms/define.js';
 
-describe('nve-control-group', () => {
+describe(ControlGroup.metadata.tag, () => {
   let fixture: HTMLElement;
   let label: HTMLLabelElement;
   let element: ControlGroup;
@@ -17,8 +17,8 @@ describe('nve-control-group', () => {
         <nve-control-message>message</nve-control-message>
       </nve-control-group>
     `);
-    element = fixture.querySelector('nve-control-group');
-    message = fixture.querySelector('nve-control-message');
+    element = fixture.querySelector(ControlGroup.metadata.tag);
+    message = fixture.querySelector(ControlMessage.metadata.tag);
     label = fixture.querySelector('label');
     await elementIsStable(element);
     await elementIsStable(message);
@@ -29,7 +29,7 @@ describe('nve-control-group', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-control-group')).toBeDefined();
+    expect(customElements.get(ControlGroup.metadata.tag)).toBeDefined();
   });
 
   it('should provide a aria role of group to describe content', async () => {
