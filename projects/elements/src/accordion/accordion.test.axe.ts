@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { AccordionGroup } from '@nvidia-elements/core/accordion';
 import '@nvidia-elements/core/accordion/define.js';
 
-describe('nve-accordion axe', () => {
+describe(AccordionGroup.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: AccordionGroup;
 
@@ -25,7 +25,7 @@ describe('nve-accordion axe', () => {
       </nve-accordion>
     </nve-accordion-group>
     `);
-    element = fixture.querySelector('nve-accordion-group');
+    element = fixture.querySelector(AccordionGroup.metadata.tag);
 
     await elementIsStable(element);
   });
@@ -35,7 +35,7 @@ describe('nve-accordion axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-accordion-group']);
+    const results = await runAxe([AccordionGroup.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });
