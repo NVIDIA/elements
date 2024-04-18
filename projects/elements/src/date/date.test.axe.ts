@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Date } from '@nvidia-elements/core/date';
 import '@nvidia-elements/core/date/define.js';
 
-describe('nve-date axe', () => {
+describe(Date.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Date;
 
@@ -16,7 +16,7 @@ describe('nve-date axe', () => {
         <input type="date" />
       </nve-date>
     `);
-    element = fixture.querySelector('nve-date');
+    element = fixture.querySelector(Date.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('nve-date axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-date']);
+    const results = await runAxe([Date.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

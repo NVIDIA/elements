@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { File } from '@nvidia-elements/core/file';
 import '@nvidia-elements/core/file/define.js';
 
-describe('nve-file axe', () => {
+describe(File.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: File;
 
@@ -16,7 +16,7 @@ describe('nve-file axe', () => {
         <input type="file" />
       </nve-file>
     `);
-    element = fixture.querySelector('nve-file');
+    element = fixture.querySelector(File.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('nve-file axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-file']);
+    const results = await runAxe([File.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

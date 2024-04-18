@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Checkbox } from '@nvidia-elements/core/checkbox';
 import '@nvidia-elements/core/checkbox/define.js';
 
-describe('nve-checkbox axe', () => {
+describe(Checkbox.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Checkbox;
 
@@ -16,7 +16,7 @@ describe('nve-checkbox axe', () => {
         <input type="checkbox" />
       </nve-checkbox>
     `);
-    element = fixture.querySelector('nve-checkbox');
+    element = fixture.querySelector(Checkbox.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('nve-checkbox axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-checkbox']);
+    const results = await runAxe([Checkbox.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

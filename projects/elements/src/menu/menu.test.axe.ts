@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Menu } from '@nvidia-elements/core/menu';
 import '@nvidia-elements/core/menu/define.js';
 
-describe('nve-menu axe', () => {
+describe(Menu.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Menu;
 
@@ -17,7 +17,7 @@ describe('nve-menu axe', () => {
         <nve-menu-item>item 3</nve-menu-item>
       </nve-menu>
     `);
-    element = fixture.querySelector('nve-menu');
+    element = fixture.querySelector(Menu.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -26,7 +26,7 @@ describe('nve-menu axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-menu']);
+    const results = await runAxe([Menu.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

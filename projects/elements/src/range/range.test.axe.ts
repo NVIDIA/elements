@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Range } from '@nvidia-elements/core/range';
 import '@nvidia-elements/core/range/define.js';
 
-describe('nve-range', () => {
+describe(Range.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Range;
 
@@ -16,7 +16,7 @@ describe('nve-range', () => {
         <input type="range" value="50" />
       </nve-range>
     `);
-    element = fixture.querySelector('nve-range');
+    element = fixture.querySelector(Range.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('nve-range', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-range']);
+    const results = await runAxe([Range.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

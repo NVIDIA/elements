@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Color } from '@nvidia-elements/core/color';
 import '@nvidia-elements/core/color/define.js';
 
-describe('nve-color axe', () => {
+describe(Color.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Color;
 
@@ -16,7 +16,7 @@ describe('nve-color axe', () => {
         <input type="color" />
       </nve-color>
     `);
-    element = fixture.querySelector('nve-color');
+    element = fixture.querySelector(Color.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('nve-color axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-color']);
+    const results = await runAxe([Color.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });
