@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { DrawerContent } from '@nvidia-elements/core/drawer';
 import '@nvidia-elements/core/drawer/define.js';
 
-describe('mlv-drawer-content', () => {
+describe(DrawerContent.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: DrawerContent;
 
@@ -14,7 +14,7 @@ describe('mlv-drawer-content', () => {
         <mlv-drawer-content>hello</mlv-drawer-content>
       </mlv-drawer>
     `);
-    element = fixture.querySelector('mlv-drawer-content');
+    element = fixture.querySelector(DrawerContent.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,6 +23,6 @@ describe('mlv-drawer-content', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-drawer-content')).toBeDefined();
+    expect(customElements.get(DrawerContent.metadata.tag)).toBeDefined();
   });
 });

@@ -4,13 +4,13 @@ import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvid
 import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/icon/define.js';
 
-describe('mlv-icon', () => {
+describe(Icon.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Icon;
 
   beforeEach(async () => {
     fixture = await createFixture(html`<mlv-icon></mlv-icon>`);
-    element = fixture.querySelector('mlv-icon');
+    element = fixture.querySelector(Icon.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -20,7 +20,7 @@ describe('mlv-icon', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-icon')).toBeDefined();
+    expect(customElements.get(Icon.metadata.tag)).toBeDefined();
   });
 
   it('should provide a aria role of img', async () => {
@@ -141,17 +141,17 @@ describe('mlv-icon', () => {
     });
 
     await elementIsStable(element);
-    expect((customElements.get('mlv-icon') as any)._iconsRegistry['chevron-up']).toStrictEqual(
-      (customElements.get('mlv-icon') as any)._iconsRegistry['chevron']
+    expect((customElements.get(Icon.metadata.tag) as any)._iconsRegistry['chevron-up']).toStrictEqual(
+      (customElements.get(Icon.metadata.tag) as any)._iconsRegistry['chevron']
     );
   });
 
   it('should allow icons to be registered', async () => {
-    await (customElements.get('mlv-icon') as any).add({
+    await (customElements.get(Icon.metadata.tag) as any).add({
       'test-svg': { svg: () => '<svg id="test-svg"><path d=""/></svg>' }
     });
 
-    expect((customElements.get('mlv-icon') as any)._icons['test-svg']).toBeDefined();
+    expect((customElements.get(Icon.metadata.tag) as any)._icons['test-svg']).toBeDefined();
   });
 
   it('should requestUpdate when new icon is registered', async () => {
@@ -161,7 +161,7 @@ describe('mlv-icon', () => {
 
     const event = untilEvent(document, 'mlv-icon-test-svg-request-update');
 
-    (customElements.get('mlv-icon') as any).add({
+    (customElements.get(Icon.metadata.tag) as any).add({
       'test-svg-request-update': { svg: () => '<svg id="test-svg-request-update"><path d=""/></svg>' }
     });
 

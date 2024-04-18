@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Drawer } from '@nvidia-elements/core/drawer';
 import '@nvidia-elements/core/drawer/define.js';
 
-describe('mlv-drawer', () => {
+describe(Drawer.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Drawer;
 
@@ -12,7 +13,7 @@ describe('mlv-drawer', () => {
     fixture = await createFixture(html`
       <mlv-drawer>hello</mlv-drawer>
     `);
-    element = fixture.querySelector('mlv-drawer');
+    element = fixture.querySelector(Drawer.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,15 +22,17 @@ describe('mlv-drawer', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-drawer')).toBeDefined();
+    expect(customElements.get(Drawer.metadata.tag)).toBeDefined();
   });
 
   it('should render close button when closable', async () => {
-    expect(element.shadowRoot.querySelector('mlv-icon-button')).toBe(null);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
 
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
   });
 
   it('should use manual behavior when non-modal', async () => {
@@ -62,7 +65,7 @@ describe('mlv-drawer', () => {
   it('should apply an aria-label to the close button', async () => {
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
   });
 
   it('should emit close event when close button clicked', async () => {
@@ -70,7 +73,7 @@ describe('mlv-drawer', () => {
     await elementIsStable(element);
 
     const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector('mlv-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
 });

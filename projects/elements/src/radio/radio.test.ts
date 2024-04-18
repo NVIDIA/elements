@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { Radio } from '@nvidia-elements/core/radio';
 import '@nvidia-elements/core/radio/define.js';
 
-describe('mlv-radio', () => {
+describe(Radio.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Radio;
 
@@ -15,7 +15,7 @@ describe('mlv-radio', () => {
         <input type="radio" />
       </mlv-radio>
     `);
-    element = fixture.querySelector('mlv-radio');
+    element = fixture.querySelector(Radio.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,6 +24,6 @@ describe('mlv-radio', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-radio')).toBeDefined();
+    expect(customElements.get(Radio.metadata.tag)).toBeDefined();
   });
 });

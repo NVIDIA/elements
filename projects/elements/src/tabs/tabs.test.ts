@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent
 import { TabsItem, Tabs } from '@nvidia-elements/core/tabs';
 import '@nvidia-elements/core/tabs/define.js';
 
-describe('mlv-tab', () => {
+describe(Tabs.metadata.tag, () => {
   let fixture: HTMLElement;
   let parentElement: Tabs;
   let childElement: TabsItem;
@@ -15,8 +15,8 @@ describe('mlv-tab', () => {
       <mlv-tabs-item></mlv-tabs-item>
     </mlv-tabs>
     `);
-    parentElement = fixture.querySelector('mlv-tabs');
-    childElement = fixture.querySelector('mlv-tabs-item');
+    parentElement = fixture.querySelector(Tabs.metadata.tag);
+    childElement = fixture.querySelector(TabsItem.metadata.tag);
 
     await elementIsStable(parentElement);
     await elementIsStable(childElement);
@@ -27,11 +27,11 @@ describe('mlv-tab', () => {
   });
 
   it('should define parentElement', () => {
-    expect(customElements.get('mlv-tabs')).toBeDefined();
+    expect(customElements.get(Tabs.metadata.tag)).toBeDefined();
   });
 
   it('should define childElement', () => {
-    expect(customElements.get('mlv-tabs-item')).toBeDefined();
+    expect(customElements.get(TabsItem.metadata.tag)).toBeDefined();
   });
 
   it('should have correct a18y roles', async () => {

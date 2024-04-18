@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { Checkbox } from '@nvidia-elements/core/checkbox';
 import '@nvidia-elements/core/checkbox/define.js';
 
-describe('mlv-checkbox', () => {
+describe(Checkbox.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Checkbox;
 
@@ -15,7 +15,7 @@ describe('mlv-checkbox', () => {
         <input type="checkbox" />
       </mlv-checkbox>
     `);
-    element = fixture.querySelector('mlv-checkbox');
+    element = fixture.querySelector(Checkbox.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,6 +24,6 @@ describe('mlv-checkbox', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-checkbox')).toBeDefined();
+    expect(customElements.get(Checkbox.metadata.tag)).toBeDefined();
   });
 });

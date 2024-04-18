@@ -2,11 +2,12 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { Panel, PanelHeader, PanelFooter } from '@nvidia-elements/core/panel';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { getFlatDOMTree } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/panel/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
-import { getFlatDOMTree } from '@nvidia-elements/core/internal';
 
-describe('mlv-panel', () => {
+describe(Panel.metadata.tag, () => {
   let fixture: HTMLElement;
   let panel: Panel;
   let panelHeader: PanelHeader;
@@ -24,9 +25,9 @@ describe('mlv-panel', () => {
         </mlv-panel-header>
       </mlv-panel>
     `);
-    panel = fixture.querySelector('mlv-panel');
-    panelHeader = fixture.querySelector('mlv-panel-header');
-    panelFooter = fixture.querySelector('mlv-panel-footer');
+    panel = fixture.querySelector(Panel.metadata.tag);
+    panelHeader = fixture.querySelector(PanelHeader.metadata.tag);
+    panelFooter = fixture.querySelector(PanelFooter.metadata.tag);
 
     panel.expanded = true;
     panel.behaviorExpand = true;
@@ -41,10 +42,10 @@ describe('mlv-panel', () => {
   });
 
   it('should define elements', () => {
-    expect(customElements.get('mlv-panel')).toBeDefined();
-    expect(customElements.get('mlv-panel-header')).toBeDefined();
-    expect(customElements.get('mlv-panel-footer')).toBeDefined();
-    expect(customElements.get('mlv-icon-button')).toBeDefined();
+    expect(customElements.get(Panel.metadata.tag)).toBeDefined();
+    expect(customElements.get(PanelHeader.metadata.tag)).toBeDefined();
+    expect(customElements.get(PanelFooter.metadata.tag)).toBeDefined();
+    expect(customElements.get(IconButton.metadata.tag)).toBeDefined();
   });
 
   it('should have card preserve the heading/content/footer DOM order via slots', async () => {
@@ -52,7 +53,9 @@ describe('mlv-panel', () => {
     await elementIsStable(panelHeader);
     await elementIsStable(panelFooter);
 
-    const [header, footer] = getFlatDOMTree(panel).filter(e => e.tagName.includes('MLV-PANEL'));
+    const [header, footer] = getFlatDOMTree(panel).filter(e =>
+      e.tagName.toLocaleLowerCase().includes(Panel.metadata.tag)
+    );
     expect(header).toBe(panelHeader);
     expect(footer).toBe(panelFooter);
   });
@@ -70,60 +73,68 @@ describe('mlv-panel', () => {
 
   it('should replace collapse icon with cancel icon when closable', async () => {
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('left');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('direction')).toBe('left');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
 
     panel.closable = true;
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('cancel');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('hide');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('cancel');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('hide');
   });
 
   it('should replace collapse icon with expand icon when collapsed, and update aria attributes', async () => {
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('left');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('direction')).toBe('left');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
     expect(panel.matches(':state(expanded)')).toBe(true);
 
     panel.expanded = false;
 
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('right');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('expand');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('direction')).toBe('right');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
     expect(panel.matches(':state(expanded)')).toBe(false);
   });
 
   it('should flip collapse icon direction when panel side set to "right" mode', async () => {
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('double-chevron');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('left');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('double-chevron');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('direction')).toBe('left');
 
     panel.setAttribute('side', 'right');
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('double-chevron');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('right');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('double-chevron');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('direction')).toBe('right');
   });
 
   it('should collapse left side panel when icon button clicked', async () => {
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('double-chevron');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('left');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('double-chevron');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('direction')).toBe('left');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
     expect(panel.matches(':state(expanded)')).toBe(true);
 
-    panel.shadowRoot.querySelector('mlv-icon-button').click();
+    panel.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
 
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('double-chevron');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('right');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('expand');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('double-chevron');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('direction')).toBe('right');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
     expect(panel.matches(':state(expanded)')).toBe(false);
   });
@@ -131,19 +142,21 @@ describe('mlv-panel', () => {
   it('should collapse right side panel when icon button clicked', async () => {
     panel.side = 'right';
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').tagName).toBe('MLV-ICON-BUTTON');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('double-chevron');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('right');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('close');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('double-chevron');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('direction')).toBe('right');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
     expect(panel._internals.ariaExpanded).toBe('true');
     expect(panel.matches(':state(expanded)')).toBe(true);
 
-    panel.shadowRoot.querySelector('mlv-icon-button').click();
+    panel.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
 
     await elementIsStable(panel);
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('double-chevron');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').getAttribute('direction')).toBe('left');
-    expect(panel.shadowRoot.querySelector('mlv-icon-button').ariaLabel).toBe('expand');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('double-chevron');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('direction')).toBe('left');
+    expect(panel.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('expand');
     expect(panel._internals.ariaExpanded).toBe('false');
     expect(panel.matches(':state(expanded)')).toBe(false);
   });

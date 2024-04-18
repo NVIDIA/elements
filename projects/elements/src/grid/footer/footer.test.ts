@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { GridFooter } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
-describe('mlv-grid-footer', () => {
+describe(GridFooter.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: GridFooter;
 
@@ -12,7 +12,7 @@ describe('mlv-grid-footer', () => {
     fixture = await createFixture(html`
       <mlv-grid-footer>footer</mlv-grid-footer>
     `);
-    element = fixture.querySelector('mlv-grid-footer');
+    element = fixture.querySelector(GridFooter.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,7 +21,7 @@ describe('mlv-grid-footer', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-grid-footer')).toBeDefined();
+    expect(customElements.get(GridFooter.metadata.tag)).toBeDefined();
   });
 
   it('should set footer to have the grid role of row', () => {

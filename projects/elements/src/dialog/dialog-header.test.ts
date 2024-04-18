@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { DialogHeader } from '@nvidia-elements/core/dialog';
 import '@nvidia-elements/core/dialog/define.js';
 
-describe('mlv-dialog-header', () => {
+describe(DialogHeader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: DialogHeader;
 
@@ -14,7 +14,7 @@ describe('mlv-dialog-header', () => {
         <mlv-dialog-header>hello</mlv-dialog-header>
       </mlv-dialog>
     `);
-    element = fixture.querySelector('mlv-dialog-header');
+    element = fixture.querySelector(DialogHeader.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('mlv-dialog-header', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-dialog-header')).toBeDefined();
+    expect(customElements.get(DialogHeader.metadata.tag)).toBeDefined();
   });
 
   it('should render with the header default slot', async () => {

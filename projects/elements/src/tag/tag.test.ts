@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { Icon } from '@nvidia-elements/core/icon';
 import { Tag } from '@nvidia-elements/core/tag';
 import '@nvidia-elements/core/tag/define.js';
 
-describe('mlv-tag', () => {
+describe(Tag.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Tag;
 
@@ -12,7 +13,7 @@ describe('mlv-tag', () => {
     fixture = await createFixture(html`
       <mlv-tag></mlv-tag>
     `);
-    element = fixture.querySelector('mlv-tag');
+    element = fixture.querySelector(Tag.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,7 +22,7 @@ describe('mlv-tag', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-tag')).toBeDefined();
+    expect(customElements.get(Tag.metadata.tag)).toBeDefined();
   });
 
   it('should reflect a color', async () => {
@@ -35,11 +36,11 @@ describe('mlv-tag', () => {
 
   it('should show close icon if closable', async () => {
     expect(element.closable).toBe(false);
-    expect(element.shadowRoot.querySelector('mlv-icon')).toBeFalsy();
+    expect(element.shadowRoot.querySelector(Icon.metadata.tag)).toBeFalsy();
 
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon')).toBeTruthy();
+    expect(element.shadowRoot.querySelector(Icon.metadata.tag)).toBeTruthy();
   });
 
   it('should be an interctive button type', async () => {
@@ -52,7 +53,7 @@ describe('mlv-tag', () => {
     await elementIsStable(element);
 
     const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector('mlv-icon').click();
+    element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).click();
     expect(await event).toBeDefined();
   });
 });

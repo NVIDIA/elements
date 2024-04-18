@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { Dot } from '@nvidia-elements/core/dot';
 import '@nvidia-elements/core/dot/define.js';
 
-describe('mlv-dot', () => {
+describe(Dot.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Dot;
 
@@ -12,7 +12,7 @@ describe('mlv-dot', () => {
     fixture = await createFixture(html`
       <mlv-dot></mlv-dot>
     `);
-    element = fixture.querySelector('mlv-dot');
+    element = fixture.querySelector(Dot.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,7 +21,7 @@ describe('mlv-dot', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-dot')).toBeDefined();
+    expect(customElements.get(Dot.metadata.tag)).toBeDefined();
   });
 
   it('should reflect a status', async () => {

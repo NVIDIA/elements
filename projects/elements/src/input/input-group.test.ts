@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { InputGroup } from '@nvidia-elements/core/input';
 import '@nvidia-elements/core/input/define.js';
 
-describe('mlv-input', () => {
+describe(InputGroup.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: InputGroup;
 
@@ -21,7 +21,7 @@ describe('mlv-input', () => {
         </mlv-input>
       </mlv-input-group>
     `);
-    element = fixture.querySelector('mlv-input-group');
+    element = fixture.querySelector(InputGroup.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -30,7 +30,7 @@ describe('mlv-input', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-input-group')).toBeDefined();
+    expect(customElements.get(InputGroup.metadata.tag)).toBeDefined();
   });
 
   it('should mark first and last controls in group', async () => {

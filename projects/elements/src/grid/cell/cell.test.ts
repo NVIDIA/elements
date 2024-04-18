@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { GridCell } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
-describe('mlv-grid-cell', () => {
+describe(GridCell.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: GridCell;
 
@@ -12,7 +12,7 @@ describe('mlv-grid-cell', () => {
     fixture = await createFixture(html`
       <mlv-grid-cell>cell</mlv-grid-cell>
     `);
-    element = fixture.querySelector('mlv-grid-cell');
+    element = fixture.querySelector(GridCell.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,7 +21,7 @@ describe('mlv-grid-cell', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-grid-cell')).toBeDefined();
+    expect(customElements.get(GridCell.metadata.tag)).toBeDefined();
   });
 
   it('should set cells to have the grid role of cell', () => {

@@ -1,12 +1,15 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, emulateClick } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Select } from '@nvidia-elements/core/select';
-import type { Dropdown } from '@nvidia-elements/core/dropdown';
-import type { Menu, MenuItem } from '@nvidia-elements/core/menu';
+import { Dropdown } from '@nvidia-elements/core/dropdown';
+import { Menu, MenuItem } from '@nvidia-elements/core/menu';
+import { Icon } from '@nvidia-elements/core/icon';
+import { Tag } from '@nvidia-elements/core/tag';
 import '@nvidia-elements/core/select/define.js';
 
-describe('mlv-select', () => {
+describe(Select.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Select;
   let select: HTMLSelectElement;
@@ -28,7 +31,7 @@ describe('mlv-select', () => {
         </select>
       </mlv-select>
     `);
-    element = fixture.querySelector('mlv-select');
+    element = fixture.querySelector(Select.metadata.tag);
     select = fixture.querySelector('select');
     await elementIsStable(element);
   });
@@ -38,27 +41,27 @@ describe('mlv-select', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-select')).toBeDefined();
+    expect(customElements.get(Select.metadata.tag)).toBeDefined();
   });
 
   it('should show icon if not a multiple select type', async () => {
-    expect(element.shadowRoot.querySelector('mlv-icon-button')).toBeDefined();
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBeDefined();
     fixture.querySelector('select').multiple = true;
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon-button')).toBe(null);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
   });
 
   it('should show icon if not a size select type', async () => {
-    expect(element.shadowRoot.querySelector('mlv-icon-button')).toBeDefined();
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBeDefined();
     fixture.querySelector('select').size = 3;
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon-button')).toBe(null);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
   });
 
   it('should render a menu for each provided option', async () => {
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items.length).toBe(3);
   });
 
@@ -93,7 +96,7 @@ describe('mlv-select', () => {
   });
 
   it('should show custom dropdown menu when clicked', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
     emulateClick(select);
     element.requestUpdate();
@@ -101,7 +104,7 @@ describe('mlv-select', () => {
   });
 
   it('should hide dropdown when closed', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
     emulateClick(select);
     element.requestUpdate();
@@ -113,7 +116,7 @@ describe('mlv-select', () => {
   });
 
   it('should use aria-hidden for decorative non-semantic icons', async () => {
-    const icons = element.shadowRoot.querySelectorAll('mlv-icon');
+    const icons = element.shadowRoot.querySelectorAll(Icon.metadata.tag);
     expect(icons.length).toBe(4);
     expect(icons[0].getAttribute('aria-hidden')).toBe('true');
     expect(icons[1].getAttribute('aria-hidden')).toBe('true');
@@ -122,27 +125,27 @@ describe('mlv-select', () => {
   });
 
   it('should each menu with the aria role of listbox', async () => {
-    const menu = element.shadowRoot.querySelector<Menu>('mlv-menu');
+    const menu = element.shadowRoot.querySelector<Menu>(Menu.metadata.tag);
     expect(menu.getAttribute('role')).toBe('listbox');
   });
 
   it('should each menu item with the aria role of option', async () => {
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items[0].getAttribute('role')).toBe('option');
     expect(items[1].getAttribute('role')).toBe('option');
     expect(items[2].getAttribute('role')).toBe('option');
   });
 
   it('should close dropdown when menu item is selected', async () => {
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
-    expect(element.shadowRoot.querySelector('mlv-dropdown').hidden).toBe(true);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag).hidden).toBe(true);
 
     emulateClick(select);
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-dropdown').hidden).toBe(false);
+    expect(element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag).hidden).toBe(false);
 
     emulateClick(items[0]);
-    expect(element.shadowRoot.querySelector('mlv-dropdown').hidden).toBe(true);
+    expect(element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag).hidden).toBe(true);
   });
 
   it('should render tags when using multiple select', async () => {
@@ -152,7 +155,7 @@ describe('mlv-select', () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelectorAll('mlv-tag').length).toBe(2);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(2);
   });
 
   it('should update tags when using multiple select and options change', async () => {
@@ -162,12 +165,12 @@ describe('mlv-select', () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelectorAll('mlv-tag')[0].innerText).toBe('Option 1');
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag)[0].innerText).toBe('Option 1');
 
     select.options[0].innerText = 'Option 1 Updated';
     select.options[0].value = '1-updated';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelectorAll('mlv-tag')[0].innerText).toBe('Option 1 Updated');
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag)[0].innerText).toBe('Option 1 Updated');
   });
 
   it('should deselect option when tag is clicked', async () => {
@@ -177,12 +180,12 @@ describe('mlv-select', () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelectorAll('mlv-tag').length).toBe(2);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(2);
 
     // remove tag/deselect option
-    emulateClick(element.shadowRoot.querySelectorAll('mlv-tag')[0]);
+    emulateClick(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag)[0]);
     await element.updateComplete;
-    expect(element.shadowRoot.querySelectorAll('mlv-tag').length).toBe(1);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(1);
   });
 
   it('should set host :state(multiple) state when multiple is used', async () => {
@@ -212,8 +215,8 @@ describe('mlv-select', () => {
     select.multiple = true;
     await elementIsStable(element);
 
-    element.shadowRoot.querySelectorAll('mlv-menu-item')[0].click();
-    element.shadowRoot.querySelectorAll('mlv-menu-item')[2].click();
+    element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].click();
+    element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[2].click();
 
     // await elementIsStable(element);
     // await new Promise(r => requestAnimationFrame(r));
@@ -235,14 +238,16 @@ describe('mlv-select', () => {
     element.requestUpdate();
     await elementIsStable(element);
 
-    expect(getComputedStyle(element.shadowRoot.querySelector('mlv-tag')).pointerEvents).toBe('auto');
-    expect(getComputedStyle(element.shadowRoot.querySelector('mlv-tag')).getPropertyValue('--cursor')).toBe('pointer');
+    expect(getComputedStyle(element.shadowRoot.querySelector<Tag>(Tag.metadata.tag)).pointerEvents).toBe('auto');
+    expect(getComputedStyle(element.shadowRoot.querySelector<Tag>(Tag.metadata.tag)).getPropertyValue('--cursor')).toBe(
+      'pointer'
+    );
 
     select.disabled = true;
     element.requestUpdate();
     await elementIsStable(element);
-    expect(getComputedStyle(element.shadowRoot.querySelector('mlv-tag')).pointerEvents).toBe('none');
-    expect(getComputedStyle(element.shadowRoot.querySelector('mlv-tag')).getPropertyValue('--cursor')).toBe(
+    expect(getComputedStyle(element.shadowRoot.querySelector<Tag>(Tag.metadata.tag)).pointerEvents).toBe('none');
+    expect(getComputedStyle(element.shadowRoot.querySelector<Tag>(Tag.metadata.tag)).getPropertyValue('--cursor')).toBe(
       'not-allowed'
     );
   });
@@ -250,31 +255,31 @@ describe('mlv-select', () => {
   it('should mark menu items as disabled when coresponding select option is disabled', async () => {
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelectorAll('mlv-menu-item')[0].disabled).toBe(false);
-    expect(element.shadowRoot.querySelectorAll('mlv-menu-item')[1].disabled).toBe(false);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].disabled).toBe(false);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1].disabled).toBe(false);
 
     select.options[0].disabled = true;
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelectorAll('mlv-menu-item')[0].disabled).toBe(true);
-    expect(element.shadowRoot.querySelectorAll('mlv-menu-item')[1].disabled).toBe(false);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].disabled).toBe(true);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1].disabled).toBe(false);
   });
 
   it('should mark menu items as hidden when coresponding select option is hidden', async () => {
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelectorAll('mlv-menu-item')[0].hidden).toBe(false);
-    expect(element.shadowRoot.querySelectorAll('mlv-menu-item')[1].hidden).toBe(false);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].hidden).toBe(false);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1].hidden).toBe(false);
 
     select.options[0].hidden = true;
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelectorAll('mlv-menu-item')[0].hidden).toBe(true);
-    expect(element.shadowRoot.querySelectorAll('mlv-menu-item')[1].hidden).toBe(false);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].hidden).toBe(true);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1].hidden).toBe(false);
   });
 });
 
-describe('mlv-select size', () => {
+describe(`${Select.metadata.tag}: size`, () => {
   let fixture: HTMLElement;
   let element: Select;
 
@@ -291,7 +296,7 @@ describe('mlv-select size', () => {
         </select>
       </mlv-select>
     `);
-    element = fixture.querySelector('mlv-select');
+    element = fixture.querySelector(Select.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -300,11 +305,11 @@ describe('mlv-select size', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-select')).toBeDefined();
+    expect(customElements.get(Select.metadata.tag)).toBeDefined();
   });
 
   it('should render select as inline outside of a dropdown', () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown).toBe(null);
   });
 

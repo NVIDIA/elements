@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { Grid } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
-describe('mlv-grid', () => {
+describe(Grid.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Grid;
 
@@ -31,7 +31,7 @@ describe('mlv-grid', () => {
         </mlv-grid-row>
       </mlv-grid>
     `);
-    element = fixture.querySelector('mlv-grid');
+    element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -40,7 +40,7 @@ describe('mlv-grid', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-grid')).toBeDefined();
+    expect(customElements.get(Grid.metadata.tag)).toBeDefined();
   });
 
   it('should set to have the grid role of grid', () => {
@@ -66,7 +66,7 @@ describe('mlv-grid', () => {
   });
 });
 
-describe('mlv-grid id check', () => {
+describe(`${Grid.metadata.tag}: id check`, () => {
   let fixture: HTMLElement;
   let element: Grid;
 
@@ -93,7 +93,7 @@ describe('mlv-grid id check', () => {
         </mlv-grid-row>
       </mlv-grid>
     `);
-    element = fixture.querySelector('mlv-grid');
+    element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -106,7 +106,7 @@ describe('mlv-grid id check', () => {
   });
 });
 
-describe('mlv-grid scroll', () => {
+describe(`${Grid.metadata.tag}: scroll`, () => {
   let fixture: HTMLElement;
   let element: Grid;
 
@@ -145,7 +145,7 @@ describe('mlv-grid scroll', () => {
         </mlv-grid-row>
       </mlv-grid>
     `);
-    element = fixture.querySelector('mlv-grid');
+    element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);
   });
 

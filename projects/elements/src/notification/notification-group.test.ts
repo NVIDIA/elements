@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { NotificationGroup } from '@nvidia-elements/core/notification';
 import '@nvidia-elements/core/notification/define.js';
 
-describe('mlv-notification', () => {
+describe(NotificationGroup.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: NotificationGroup;
 
@@ -14,7 +14,7 @@ describe('mlv-notification', () => {
 
       </mlv-notification-group>
     `);
-    element = fixture.querySelector('mlv-notification-group');
+    element = fixture.querySelector(NotificationGroup.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,6 +23,6 @@ describe('mlv-notification', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-notification-group')).toBeDefined();
+    expect(customElements.get(NotificationGroup.metadata.tag)).toBeDefined();
   });
 });

@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { DrawerHeader } from '@nvidia-elements/core/drawer';
 import '@nvidia-elements/core/drawer/define.js';
 
-describe('mlv-drawer-header', () => {
+describe(DrawerHeader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: DrawerHeader;
 
@@ -14,7 +14,7 @@ describe('mlv-drawer-header', () => {
         <mlv-drawer-header>hello</mlv-drawer-header>
       </mlv-drawer>
     `);
-    element = fixture.querySelector('mlv-drawer-header');
+    element = fixture.querySelector(DrawerHeader.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('mlv-drawer-header', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-drawer-header')).toBeDefined();
+    expect(customElements.get(DrawerHeader.metadata.tag)).toBeDefined();
   });
 
   it('should render with the header default slot', async () => {

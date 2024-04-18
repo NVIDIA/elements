@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { Switch } from '@nvidia-elements/core/switch';
 import '@nvidia-elements/core/switch/define.js';
 
-describe('mlv-switch', () => {
+describe(Switch.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Switch;
 
@@ -15,7 +15,7 @@ describe('mlv-switch', () => {
         <input type="checkbox" />
       </mlv-switch>
     `);
-    element = fixture.querySelector('mlv-switch');
+    element = fixture.querySelector(Switch.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,6 +24,6 @@ describe('mlv-switch', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-switch')).toBeDefined();
+    expect(customElements.get(Switch.metadata.tag)).toBeDefined();
   });
 });

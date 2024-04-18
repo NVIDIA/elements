@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { File } from '@nvidia-elements/core/file';
 import '@nvidia-elements/core/file/define.js';
 
-describe('mlv-file', () => {
+describe(File.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: File;
 
@@ -15,7 +15,7 @@ describe('mlv-file', () => {
         <input type="file" />
       </mlv-file>
     `);
-    element = fixture.querySelector('mlv-file');
+    element = fixture.querySelector(File.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,7 +24,7 @@ describe('mlv-file', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-file')).toBeDefined();
+    expect(customElements.get(File.metadata.tag)).toBeDefined();
   });
 
   it('should append global styles needed for file pseudo selectors', () => {

@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { PanelFooter } from '@nvidia-elements/core/panel';
 import '@nvidia-elements/core/panel/define.js';
 
-describe('mlv-panel-footer', () => {
+describe(PanelFooter.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: PanelFooter;
 
@@ -14,7 +14,7 @@ describe('mlv-panel-footer', () => {
         <mlv-panel-footer>hello</mlv-panel-footer>
       </mlv-panel>
     `);
-    element = fixture.querySelector('mlv-panel-footer');
+    element = fixture.querySelector(PanelFooter.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('mlv-panel-footer', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-panel-footer')).toBeDefined();
+    expect(customElements.get(PanelFooter.metadata.tag)).toBeDefined();
   });
 
   it('should render with the footer default slot', async () => {

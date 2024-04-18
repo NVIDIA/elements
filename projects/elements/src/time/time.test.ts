@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Time } from '@nvidia-elements/core/time';
 import '@nvidia-elements/core/time/define.js';
 
-describe('mlv-time', () => {
+describe(Time.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Time;
 
@@ -15,7 +16,7 @@ describe('mlv-time', () => {
         <input type="time" />
       </mlv-time>
     `);
-    element = fixture.querySelector('mlv-time');
+    element = fixture.querySelector(Time.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,15 +25,15 @@ describe('mlv-time', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-time')).toBeDefined();
+    expect(customElements.get(Time.metadata.tag)).toBeDefined();
   });
 
   it('should render clock suffix icon', () => {
-    expect(element.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('clock');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('clock');
   });
 
   it('should trigger native UI', async () => {
-    element.shadowRoot.querySelector('mlv-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     await elementIsStable(element);
     expect(element.input.matches(':focus')).toBe(false);
   });

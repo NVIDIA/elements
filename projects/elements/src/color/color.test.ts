@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Color } from '@nvidia-elements/core/color';
 import '@nvidia-elements/core/color/define.js';
 
-describe('mlv-color', () => {
+describe(Color.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Color;
 
@@ -15,7 +16,7 @@ describe('mlv-color', () => {
         <input type="color" />
       </mlv-color>
     `);
-    element = fixture.querySelector('mlv-color');
+    element = fixture.querySelector(Color.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,11 +25,11 @@ describe('mlv-color', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-color')).toBeDefined();
+    expect(customElements.get(Color.metadata.tag)).toBeDefined();
   });
 
   it('should have a color picker button defined', () => {
-    expect(element.shadowRoot.querySelector('mlv-icon-button')).toBeDefined();
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBeDefined();
   });
 
   it('should default the color to the input background if not set', async () => {
@@ -42,7 +43,7 @@ describe('mlv-color', () => {
   });
 
   it('should not apply default if custom default is provided', async () => {
-    const element = document.createElement('mlv-color');
+    const element = document.createElement(Color.metadata.tag) as Color;
     const input = document.createElement('input');
     input.value = '#fff';
 
@@ -66,7 +67,7 @@ describe('mlv-color', () => {
 
     const input = untilEvent(fixture.querySelector('input'), 'input');
     const change = untilEvent(fixture.querySelector('input'), 'change');
-    element.shadowRoot.querySelector('mlv-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
 
     expect(await input).toBeDefined();
     expect(await change).toBeDefined();

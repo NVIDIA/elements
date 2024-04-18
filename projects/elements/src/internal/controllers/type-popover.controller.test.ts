@@ -4,7 +4,7 @@ import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@nvidia-elements/testing';
 import { PopoverAlign, PopoverPosition, TypePopoverController } from '@nvidia-elements/core/internal';
-import type { Button } from '@nvidia-elements/core/button';
+import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/button/define.js';
 
 @customElement('type-popover-controller-test-element')
@@ -100,7 +100,7 @@ describe('type-popover.controller', () => {
       ></type-popover-controller-test-element>
     `);
     element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
-    button = fixture.querySelector('mlv-button');
+    button = fixture.querySelector(Button.metadata.tag);
     dialog = element.shadowRoot.querySelector('dialog');
     await element.updateComplete;
     await button.updateComplete;
@@ -157,7 +157,7 @@ describe('type-popover.controller', () => {
     element.hidden = false;
     await elementIsStable(element);
     const event = untilEvent(element, 'close');
-    const closeBtn = dialog.querySelector('mlv-button');
+    const closeBtn = dialog.querySelector(Button.metadata.tag);
     emulateClick(closeBtn);
     expect((await event).target).toBe(element);
   });
@@ -227,7 +227,7 @@ describe('type-popover.controller behavior-trigger', () => {
       </type-popover-controller-test-element>
     `);
     element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
-    button = fixture.querySelector('mlv-button');
+    button = fixture.querySelector(Button.metadata.tag);
     dialog = element.shadowRoot.querySelector('dialog');
     await element.updateComplete;
     await button.updateComplete;
@@ -298,7 +298,7 @@ describe('type-popover.controller dynamic trigger', () => {
       </type-popover-controller-test-element>
     `);
     element = fixture.querySelector<TypePopoverControllerTestElement>('type-popover-controller-test-element');
-    buttons = Array.from(fixture.querySelectorAll('mlv-button'));
+    buttons = Array.from(fixture.querySelectorAll(Button.metadata.tag));
     dialog = element.shadowRoot.querySelector('dialog');
     await element.updateComplete;
     await buttons[0].updateComplete;

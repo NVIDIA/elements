@@ -18,7 +18,7 @@ export class TestElement extends LitElement {
   };
 
   static elementDefinitions = {
-    'mlv-test-two': TestTwoElement
+    'nve-test-two': TestTwoElement
   };
 }
 
@@ -49,6 +49,6 @@ describe('scoped element', () => {
   });
 
   it('should have static defined dependencies', () => {
-    expect(TestElement.elementDefinitions['mlv-test-two']).toBe(TestTwoElement);
+    expect(TestElement.elementDefinitions['nve-test-two']).toBe(TestTwoElement);
   });
 });

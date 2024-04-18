@@ -2,9 +2,10 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Icon } from '@nvidia-elements/core/icon/icon';
 import '@nvidia-elements/core/icon-button/define.js';
 
-describe('mlv-icon-button', () => {
+describe(IconButton.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: IconButton;
   let elementWithAnchor: IconButton;
@@ -21,9 +22,9 @@ describe('mlv-icon-button', () => {
         <span>🎉</span>
       </mlv-icon-button>
     `);
-    element = fixture.querySelectorAll('mlv-icon-button')[0];
-    elementWithAnchor = fixture.querySelectorAll('mlv-icon-button')[1];
-    elementWithCustomIcon = fixture.querySelectorAll('mlv-icon-button')[2];
+    element = fixture.querySelectorAll<IconButton>(IconButton.metadata.tag)[0];
+    elementWithAnchor = fixture.querySelectorAll<IconButton>(IconButton.metadata.tag)[1];
+    elementWithCustomIcon = fixture.querySelectorAll<IconButton>(IconButton.metadata.tag)[2];
     anchor = fixture.querySelector('[href]');
   });
 
@@ -32,7 +33,7 @@ describe('mlv-icon-button', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-icon-button')).toBeDefined();
+    expect(customElements.get(IconButton.metadata.tag)).toBeDefined();
   });
 
   it('should provide a aria role of button', async () => {
@@ -43,7 +44,7 @@ describe('mlv-icon-button', () => {
   it('should use aria-hidden to semantically hide the SVG in favor of the host element role', async () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('[internal-host]').getAttribute('aria-hidden')).toBe('true');
-    expect(element.shadowRoot.querySelector('mlv-icon').getAttribute('aria-hidden')).toBe('true');
+    expect(element.shadowRoot.querySelector(Icon.metadata.tag).getAttribute('aria-hidden')).toBe('true');
   });
 
   it('should have a default interaction unset', () => {
@@ -58,7 +59,7 @@ describe('mlv-icon-button', () => {
     expect(element.iconName).toBe('cancel');
     element.iconName = 'cancel';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon').name).toBe('cancel');
+    expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('cancel');
   });
 
   it('should allow anchor to be slotted', async () => {

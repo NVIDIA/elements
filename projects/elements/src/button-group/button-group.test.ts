@@ -1,13 +1,14 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture } from '@nvidia-elements/testing';
-import type { ButtonGroup } from '@nvidia-elements/core/button-group';
-import type { IconButton } from '@nvidia-elements/core/icon-button';
+import { ButtonGroup } from '@nvidia-elements/core/button-group';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Divider } from '@nvidia-elements/core/divider';
 import '@nvidia-elements/core/button-group/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/divider/define.js';
 
-describe('mlv-button-group', () => {
+describe(ButtonGroup.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: ButtonGroup;
   let buttons: IconButton[];
@@ -20,8 +21,8 @@ describe('mlv-button-group', () => {
         <mlv-icon-button icon-name="download"></mlv-icon-button>
       </mlv-button-group>
     `);
-    element = fixture.querySelector('mlv-button-group');
-    buttons = Array.from(fixture.querySelectorAll('mlv-icon-button'));
+    element = fixture.querySelector(ButtonGroup.metadata.tag);
+    buttons = Array.from(fixture.querySelectorAll(IconButton.metadata.tag));
     await elementIsStable(element);
   });
 
@@ -30,7 +31,7 @@ describe('mlv-button-group', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-button-group')).toBeDefined();
+    expect(customElements.get(ButtonGroup.metadata.tag)).toBeDefined();
   });
 
   it('should initialize role group', async () => {
@@ -42,7 +43,7 @@ describe('mlv-button-group', () => {
     await elementIsStable(element);
     expect(element.matches(':state(split)')).toBe(false);
 
-    const divider = document.createElement('mlv-divider');
+    const divider = document.createElement(Divider.metadata.tag);
     element.appendChild(divider);
 
     await elementIsStable(element);

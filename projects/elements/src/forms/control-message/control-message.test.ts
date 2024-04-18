@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { Alert } from '@nvidia-elements/core/alert';
 import { ControlMessage } from '@nvidia-elements/core/forms';
 import '@nvidia-elements/core/forms/define.js';
 
-describe('mlv-control-message', () => {
+describe(ControlMessage.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: ControlMessage;
 
@@ -12,7 +13,7 @@ describe('mlv-control-message', () => {
     fixture = await createFixture(html`
       <mlv-control-message></mlv-control-message>
     `);
-    element = fixture.querySelector('mlv-control-message');
+    element = fixture.querySelector(ControlMessage.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,7 +22,7 @@ describe('mlv-control-message', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-control-message')).toBeDefined();
+    expect(customElements.get(ControlMessage.metadata.tag)).toBeDefined();
   });
 
   it('should self assign to the messages slot for controls', () => {
@@ -29,7 +30,7 @@ describe('mlv-control-message', () => {
   });
 
   it('should assign correct alert state based on control validation state', async () => {
-    const alert = element.shadowRoot.querySelector('mlv-alert');
+    const alert = element.shadowRoot.querySelector<Alert>(Alert.metadata.tag);
     expect(alert.status).toBe(undefined);
 
     element.status = 'success';
@@ -52,6 +53,6 @@ describe('mlv-control-message', () => {
   it('should set the alert status to danger if message has a validation error applied', async () => {
     element.error = 'valueMissing';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-alert').status).toBe('danger');
+    expect(element.shadowRoot.querySelector<Alert>(Alert.metadata.tag).status).toBe('danger');
   });
 });

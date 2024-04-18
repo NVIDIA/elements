@@ -3,11 +3,12 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { Combobox } from '@nvidia-elements/core/combobox';
-import type { Menu, MenuItem } from '@nvidia-elements/core/menu';
-import type { Dropdown } from '@nvidia-elements/core/dropdown';
+import { Menu, MenuItem } from '@nvidia-elements/core/menu';
+import { Dropdown } from '@nvidia-elements/core/dropdown';
+import { Tag } from '@nvidia-elements/core/tag';
 import '@nvidia-elements/core/combobox/define.js';
 
-describe('mlv-combobox', () => {
+describe(Combobox.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Combobox;
   let input: HTMLInputElement;
@@ -27,10 +28,10 @@ describe('mlv-combobox', () => {
         <mlv-control-message>message</mlv-control-message>
       </mlv-combobox>
     `);
-    element = fixture.querySelector('mlv-combobox');
+    element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');
     options = Array.from(fixture.querySelectorAll<HTMLOptionElement>('option'));
-    items = Array.from(element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item'));
+    items = Array.from(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag));
     await elementIsStable(element);
   });
 
@@ -39,7 +40,7 @@ describe('mlv-combobox', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-combobox')).toBeDefined();
+    expect(customElements.get(Combobox.metadata.tag)).toBeDefined();
   });
 
   it('should remove native data list association', async () => {
@@ -55,7 +56,7 @@ describe('mlv-combobox', () => {
   it('should reflect each option to a menu item', async () => {
     emulateClick(input);
     await elementIsStable(element);
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items.length).toBe(3);
     expect(items[0].textContent.trim()).toBe(options[0].value);
     expect(items[1].textContent.trim()).toBe(options[1].value);
@@ -63,12 +64,12 @@ describe('mlv-combobox', () => {
   });
 
   it('should default the dropdown to align start to prevent overflow clipping when options are wider than the input itsself', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.alignment).toBe('start');
   });
 
   it('should set width of dropdown when opened', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
     emulateClick(input);
     await elementIsStable(element);
@@ -78,21 +79,21 @@ describe('mlv-combobox', () => {
   });
 
   it('should each menu with the aria role of listbox', async () => {
-    const menu = element.shadowRoot.querySelector<Menu>('mlv-menu');
+    const menu = element.shadowRoot.querySelector<Menu>(Menu.metadata.tag);
     expect(menu.getAttribute('role')).toBe('listbox');
   });
 
   it('should each menu item with the aria role of option', async () => {
     emulateClick(input);
     await elementIsStable(element);
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items[0].getAttribute('role')).toBe('option');
     expect(items[1].getAttribute('role')).toBe('option');
     expect(items[2].getAttribute('role')).toBe('option');
   });
 
   it('should show options on keydown', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
@@ -100,14 +101,14 @@ describe('mlv-combobox', () => {
   });
 
   it('should hide options on escape keypress', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
 
     input.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true }));
     await elementIsStable(element);
     expect(dropdown.hidden).toBe(false);
 
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     items[0].focus();
     items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'Escape', bubbles: true }));
     await elementIsStable(element);
@@ -115,7 +116,7 @@ describe('mlv-combobox', () => {
   });
 
   it('should close dropdown when menu item is selected', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
 
     element.dispatchEvent(new KeyboardEvent('keydown'));
@@ -124,8 +125,8 @@ describe('mlv-combobox', () => {
   });
 
   it('should focus first option if key arrow down is pressed', async () => {
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
@@ -141,7 +142,7 @@ describe('mlv-combobox', () => {
   });
 
   it('should hide dropdown on keydown and is a tab event', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
     expect(dropdown.hidden).toBe(true);
     element.dispatchEvent(new KeyboardEvent('keydown'));
@@ -154,7 +155,7 @@ describe('mlv-combobox', () => {
   });
 
   it('should autocomplete on tab if there is a partial match to first available option', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
     expect(dropdown.hidden).toBe(true);
     element.dispatchEvent(new KeyboardEvent('keydown'));
@@ -169,8 +170,8 @@ describe('mlv-combobox', () => {
   });
 
   it('should set the input value if a option is clicked', async () => {
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
 
     element.dispatchEvent(new KeyboardEvent('keydown'));
@@ -183,7 +184,7 @@ describe('mlv-combobox', () => {
 
   it('should show "no results" message if no options are provided', async () => {
     const options = element.querySelectorAll('option');
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
 
     options.forEach(i => i.remove());
@@ -191,7 +192,7 @@ describe('mlv-combobox', () => {
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
     expect(dropdown.hidden).toBe(false);
-    expect(element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item')[0].textContent.trim()).toBe(
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].textContent.trim()).toBe(
       element.i18n.noResults
     );
   });
@@ -212,7 +213,7 @@ describe('mlv-combobox', () => {
   });
 });
 
-describe('mlv-combobox single select', () => {
+describe(`${Combobox.metadata.tag}: single select`, () => {
   let fixture: HTMLElement;
   let element: Combobox;
   let input: HTMLInputElement;
@@ -232,7 +233,7 @@ describe('mlv-combobox single select', () => {
         <mlv-control-message>message</mlv-control-message>
       </mlv-combobox>
     `);
-    element = fixture.querySelector('mlv-combobox');
+    element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');
     select = fixture.querySelector('select');
     options = Array.from(fixture.querySelectorAll('option'));
@@ -244,7 +245,7 @@ describe('mlv-combobox single select', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-combobox')).toBeDefined();
+    expect(customElements.get(Combobox.metadata.tag)).toBeDefined();
   });
 
   it('should initialize input to the selected option', async () => {
@@ -257,7 +258,7 @@ describe('mlv-combobox single select', () => {
     input.value = '';
     emulateClick(input);
     await elementIsStable(element);
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items.length).toBe(3);
     expect(items[0].textContent.trim()).toBe(options[0].value);
     expect(items[1].textContent.trim()).toBe(options[1].value);
@@ -265,7 +266,7 @@ describe('mlv-combobox single select', () => {
   });
 
   it('should enforce single select and clear invalid options', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
     expect(options[0].selected).toBe(true);
     expect(options[1].selected).toBe(false);
@@ -285,7 +286,7 @@ describe('mlv-combobox single select', () => {
   });
 
   it('should set input and select value when item is clicked on partial match', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
     input.value = 'opt';
     input.dispatchEvent(new Event('keydown', { bubbles: true }));
@@ -293,14 +294,14 @@ describe('mlv-combobox single select', () => {
     await elementIsStable(element);
     expect(dropdown.hidden).toBe(false);
 
-    const items = Array.from(element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item'));
+    const items = Array.from(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag));
     emulateClick(items[1]);
     expect(input.value).toBe('option 2');
     expect(select.value).toBe('option 2');
   });
 
   it('should preserve partial search while focusing within selection dropdown', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
     input.value = 'opt';
     input.dispatchEvent(new Event('keydown', { bubbles: true }));
@@ -313,7 +314,7 @@ describe('mlv-combobox single select', () => {
   });
 
   it('should autocomplete on tab if there is a partial match to first available option', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
     expect(dropdown.hidden).toBe(true);
     element.dispatchEvent(new KeyboardEvent('keydown'));
@@ -329,7 +330,7 @@ describe('mlv-combobox single select', () => {
   });
 });
 
-describe('mlv-combobox multi select', () => {
+describe(`${Combobox.metadata.tag}: multi select`, () => {
   let fixture: HTMLElement;
   let element: Combobox;
   let input: HTMLInputElement;
@@ -348,7 +349,7 @@ describe('mlv-combobox multi select', () => {
         <mlv-control-message>message</mlv-control-message>
       </mlv-combobox>
     `);
-    element = fixture.querySelector('mlv-combobox');
+    element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');
     select = fixture.querySelector('select');
     await elementIsStable(element);
@@ -359,7 +360,7 @@ describe('mlv-combobox multi select', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-combobox')).toBeDefined();
+    expect(customElements.get(Combobox.metadata.tag)).toBeDefined();
   });
 
   it('should initialize :state(multiple) state', () => {
@@ -369,7 +370,7 @@ describe('mlv-combobox multi select', () => {
   it('should cooresponding menu items and options as selected', async () => {
     emulateClick(input);
     await elementIsStable(element);
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items[0].selected).toBe(true);
     expect(items[1].selected).toBe(true);
     expect(items[2].selected).toBe(undefined);
@@ -380,7 +381,7 @@ describe('mlv-combobox multi select', () => {
   it('should update select when menu item is clicked', async () => {
     emulateClick(input);
     await elementIsStable(element);
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items[0].selected).toBe(true);
     expect(items[1].selected).toBe(true);
     expect(items[2].selected).toBe(undefined);
@@ -397,7 +398,7 @@ describe('mlv-combobox multi select', () => {
   });
 
   it('should remove a selection when a tag is clicked', async () => {
-    const tags = () => element.shadowRoot.querySelectorAll('mlv-tag');
+    const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
     expect(tags().length).toBe(2);
     expect(select.selectedOptions.length).toBe(2);
 
@@ -422,7 +423,7 @@ describe('mlv-combobox multi select', () => {
   });
 
   it('should clear and reset text input and select when reset() is called', async () => {
-    const tags = () => element.shadowRoot.querySelectorAll('mlv-tag');
+    const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
     expect(tags().length).toBe(2);
     expect(select.selectedOptions.length).toBe(2);
     expect(input.value).toBe('');
@@ -440,8 +441,8 @@ describe('mlv-combobox multi select', () => {
     select.multiple = true;
     await elementIsStable(element);
 
-    element.shadowRoot.querySelectorAll('mlv-menu-item')[0].click();
-    element.shadowRoot.querySelectorAll('mlv-menu-item')[2].click();
+    element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].click();
+    element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[2].click();
 
     await elementIsStable(element);
     await new Promise(r => requestAnimationFrame(r));
@@ -474,7 +475,7 @@ describe('mlv-combobox multi select', () => {
   });
 
   it('should select all options when selectAll() is called', async () => {
-    const tags = () => element.shadowRoot.querySelectorAll('mlv-tag');
+    const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
     expect(tags().length).toBe(2);
     expect(select.selectedOptions.length).toBe(2);
     expect(input.value).toBe('');
@@ -505,14 +506,14 @@ class ComboboxTestElement extends LitElement {
   }
 }
 
-describe('mlv-combobox shadow root', () => {
+describe(`${Combobox.metadata.tag}: shadow root`, () => {
   let fixture: HTMLElement;
   let element: Combobox;
   let input: HTMLInputElement;
 
   beforeEach(async () => {
     fixture = await createFixture(html` <combobox-test-element></combobox-test-element> `);
-    element = fixture.querySelector('combobox-test-element').shadowRoot.querySelector('mlv-combobox');
+    element = fixture.querySelector('combobox-test-element').shadowRoot.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('combobox-test-element').shadowRoot.querySelector('input');
     await elementIsStable(element);
   });
@@ -522,8 +523,8 @@ describe('mlv-combobox shadow root', () => {
   });
 
   it('should focus first option if key arrow down is pressed', async () => {
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.hidden).toBe(true);
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
@@ -539,7 +540,7 @@ describe('mlv-combobox shadow root', () => {
   });
 });
 
-describe('mlv-combobox option labels for single select', () => {
+describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
   let fixture: HTMLElement;
   let element: Combobox;
   let input: HTMLInputElement;
@@ -559,7 +560,7 @@ describe('mlv-combobox option labels for single select', () => {
         <mlv-control-message>message</mlv-control-message>
       </mlv-combobox>
     `);
-    element = fixture.querySelector('mlv-combobox');
+    element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');
     select = fixture.querySelector('select');
     options = Array.from(fixture.querySelectorAll('option'));
@@ -571,7 +572,7 @@ describe('mlv-combobox option labels for single select', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-combobox')).toBeDefined();
+    expect(customElements.get(Combobox.metadata.tag)).toBeDefined();
   });
 
   it('should initialize input to the selected option label', async () => {
@@ -588,7 +589,7 @@ describe('mlv-combobox option labels for single select', () => {
     input.value = '';
     emulateClick(input);
     await elementIsStable(element);
-    const items = element.shadowRoot.querySelectorAll<MenuItem>('mlv-menu-item');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items.length).toBe(3);
     expect(items[0].textContent.trim()).toBe(options[0].label);
     expect(items[1].textContent.trim()).toBe(options[1].label);
@@ -596,7 +597,7 @@ describe('mlv-combobox option labels for single select', () => {
   });
 
   it('should enforce single select and clear invalid options', async () => {
-    const dropdown = element.shadowRoot.querySelector<Dropdown>('mlv-dropdown');
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
     expect(options[0].selected).toBe(true);
     expect(options[1].selected).toBe(false);

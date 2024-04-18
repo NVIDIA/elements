@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { Divider } from '@nvidia-elements/core/divider';
 import '@nvidia-elements/core/divider/define.js';
 
-describe('mlv-divider', () => {
+describe(Divider.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Divider;
 
@@ -12,7 +12,7 @@ describe('mlv-divider', () => {
     fixture = await createFixture(html`
       <mlv-divider></mlv-divider>
     `);
-    element = fixture.querySelectorAll('mlv-divider')[0];
+    element = fixture.querySelectorAll<Divider>(Divider.metadata.tag)[0];
     await elementIsStable(element);
   });
 
@@ -21,7 +21,7 @@ describe('mlv-divider', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-divider')).toBeDefined();
+    expect(customElements.get(Divider.metadata.tag)).toBeDefined();
   });
 
   it('orientation should default to "horizontal"', () => {

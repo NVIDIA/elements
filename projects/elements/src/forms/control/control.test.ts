@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvid
 import { Control, ControlMessage } from '@nvidia-elements/core/forms';
 import '@nvidia-elements/core/forms/define.js';
 
-describe('mlv-control', () => {
+describe(Control.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Control;
   let label: HTMLLabelElement;
@@ -24,11 +24,11 @@ describe('mlv-control', () => {
         </datalist>
       </mlv-control>
     `);
-    element = fixture.querySelector('mlv-control');
+    element = fixture.querySelector(Control.metadata.tag);
     label = fixture.querySelector('label');
     input = fixture.querySelector('input');
     datalist = fixture.querySelector('datalist');
-    message = fixture.querySelector('mlv-control-message');
+    message = fixture.querySelector(ControlMessage.metadata.tag);
     await elementIsStable(element);
     await elementIsStable(message);
   });
@@ -38,7 +38,7 @@ describe('mlv-control', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-control')).toBeDefined();
+    expect(customElements.get(Control.metadata.tag)).toBeDefined();
   });
 
   it('should assign nve-control attribute identifier', async () => {
@@ -101,7 +101,7 @@ describe('mlv-control', () => {
   });
 });
 
-describe('mlv-control custom', () => {
+describe(`${Control.metadata.tag}: custom`, () => {
   let fixture: HTMLElement;
   let element: Control;
 
@@ -112,7 +112,7 @@ describe('mlv-control custom', () => {
         <div nve-control="custom" tabindex="0" value=""></div>
       </mlv-control>
     `);
-    element = fixture.querySelector('mlv-control');
+    element = fixture.querySelector(Control.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -130,11 +130,11 @@ describe('mlv-control custom', () => {
   });
 
   it('should create a control instance without throwing due to not yet slotted input', async () => {
-    const control = document.createElement('mlv-control');
-    control.id = 'mlv-control-instance';
+    const control = document.createElement(Control.metadata.tag);
+    control.id = 'nve-control-instance';
     document.body.appendChild(control);
 
-    expect(document.querySelector('#mlv-control-instance')).toBeDefined();
+    expect(document.querySelector('#nve-control-instance')).toBeDefined();
     control.remove();
   });
 
@@ -153,7 +153,7 @@ describe('mlv-control custom', () => {
   });
 });
 
-describe('mlv-control fit-text input', () => {
+describe(`${Control.metadata.tag}: fit-text input`, () => {
   let fixture: HTMLElement;
   let element: Control;
   let input: HTMLInputElement;
@@ -165,7 +165,7 @@ describe('mlv-control fit-text input', () => {
         <input type="text" value="1234" />
       </mlv-control>
     `);
-    element = fixture.querySelector('mlv-control');
+    element = fixture.querySelector(Control.metadata.tag);
     input = fixture.querySelector('input');
     await elementIsStable(element);
   });
@@ -198,7 +198,7 @@ describe('mlv-control fit-text input', () => {
   });
 });
 
-describe('mlv-control fit-content input', () => {
+describe(`${Control.metadata.tag}: fit-content input`, () => {
   let fixture: HTMLElement;
   let element: Control;
   let input: HTMLInputElement;
@@ -210,7 +210,7 @@ describe('mlv-control fit-content input', () => {
         <input type="text" />
       </mlv-control>
     `);
-    element = fixture.querySelector('mlv-control');
+    element = fixture.querySelector(Control.metadata.tag);
     input = fixture.querySelector('input');
     await elementIsStable(element);
   });
@@ -226,7 +226,7 @@ describe('mlv-control fit-content input', () => {
   });
 });
 
-describe('mlv-control fit-text select', () => {
+describe(`${Control.metadata.tag}: fit-text select`, () => {
   let fixture: HTMLElement;
   let element: Control;
   let input: HTMLSelectElement;
@@ -242,7 +242,7 @@ describe('mlv-control fit-text select', () => {
         <mlv-control-message>message</mlv-control-message>
       </mlv-control>
     `);
-    element = fixture.querySelector('mlv-control');
+    element = fixture.querySelector(Control.metadata.tag);
     input = fixture.querySelector('select');
     await elementIsStable(element);
   });

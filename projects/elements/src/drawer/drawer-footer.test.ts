@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { DrawerFooter } from '@nvidia-elements/core/drawer';
 import '@nvidia-elements/core/drawer/define.js';
 
-describe('mlv-drawer-footer', () => {
+describe(DrawerFooter.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: DrawerFooter;
 
@@ -14,7 +14,7 @@ describe('mlv-drawer-footer', () => {
         <mlv-drawer-footer>hello</mlv-drawer-footer>
       </mlv-drawer>
     `);
-    element = fixture.querySelector('mlv-drawer-footer');
+    element = fixture.querySelector(DrawerFooter.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('mlv-drawer-footer', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-drawer-footer')).toBeDefined();
+    expect(customElements.get(DrawerFooter.metadata.tag)).toBeDefined();
   });
 
   it('should render with the footer default slot', async () => {

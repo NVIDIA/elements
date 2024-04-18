@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Date } from '@nvidia-elements/core/date';
 import '@nvidia-elements/core/date/define.js';
 
-describe('mlv-date', () => {
+describe(Date.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Date;
 
@@ -15,7 +16,7 @@ describe('mlv-date', () => {
         <input type="date" />
       </mlv-date>
     `);
-    element = fixture.querySelector('mlv-date');
+    element = fixture.querySelector(Date.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,15 +25,15 @@ describe('mlv-date', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-date')).toBeDefined();
+    expect(customElements.get(Date.metadata.tag)).toBeDefined();
   });
 
   it('should render calendar suffix icon', () => {
-    expect(element.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('calendar');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('calendar');
   });
 
   it('should trigger native UI', async () => {
-    element.shadowRoot.querySelector('mlv-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     await elementIsStable(element);
     expect(element.input.matches(':focus')).toBe(false);
   });

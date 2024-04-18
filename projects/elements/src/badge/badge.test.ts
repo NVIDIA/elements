@@ -2,9 +2,10 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { Badge } from '@nvidia-elements/core/badge';
+import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/badge/define.js';
 
-describe('mlv-badge', () => {
+describe(Badge.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Badge;
 
@@ -12,7 +13,7 @@ describe('mlv-badge', () => {
     fixture = await createFixture(html`
       <mlv-badge>label</mlv-badge>
     `);
-    element = fixture.querySelector('mlv-badge');
+    element = fixture.querySelector(Badge.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,7 +22,7 @@ describe('mlv-badge', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-badge')).toBeDefined();
+    expect(customElements.get(Badge.metadata.tag)).toBeDefined();
   });
 
   it('should set a default aria role of status', async () => {
@@ -55,7 +56,7 @@ describe('mlv-badge', () => {
   });
 
   it('should assign unamed icon slots to the first icon slot', async () => {
-    const icon = document.createElement('mlv-icon');
+    const icon = document.createElement(Icon.metadata.tag);
     element.appendChild(icon);
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector<HTMLSlotElement>('slot[name="prefix-icon"]').assignedElements()).toContain(
@@ -66,20 +67,20 @@ describe('mlv-badge', () => {
   it('should allow custom icon and not render a default icon when using "color"', async () => {
     element.color = 'blue-cobalt';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon')).toBe(null);
+    expect(element.shadowRoot.querySelector(Icon.metadata.tag)).toBe(null);
   });
 
   it('should provide trend icon when using a trend status', async () => {
     element.status = 'trend-up';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon').name).toBe('trend-up');
+    expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('trend-up');
 
     element.status = 'trend-down';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon').name).toBe('trend-down');
+    expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('trend-down');
 
     element.status = 'trend-neutral';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('mlv-icon').name).toBe('minus');
+    expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('minus');
   });
 });

@@ -1,10 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Search } from '@nvidia-elements/core/search';
 import '@nvidia-elements/core/search/define.js';
 
-describe('mlv-search', () => {
+describe(Search.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Search;
 
@@ -15,7 +16,7 @@ describe('mlv-search', () => {
         <input type="search" />
       </mlv-search>
     `);
-    element = fixture.querySelector('mlv-search');
+    element = fixture.querySelector(Search.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,10 +25,10 @@ describe('mlv-search', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-search')).toBeDefined();
+    expect(customElements.get(Search.metadata.tag)).toBeDefined();
   });
 
   it('should render search prefix icon', () => {
-    expect(element.shadowRoot.querySelector('mlv-icon-button').getAttribute('icon-name')).toBe('search');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('search');
   });
 });

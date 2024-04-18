@@ -196,8 +196,8 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[5].tabIndex).toBe(-1);
   });
 
-  it('should disable key nav if host has mlv-keynav-disabled attribute', async () => {
-    element.setAttribute('mlv-keynav-disabled', '');
+  it('should disable key nav if host has nve-keynav-disabled attribute', async () => {
+    element.setAttribute('nve-keynav-disabled', '');
 
     await elementIsStable(element);
     element.keynavListConfig.items[0].dispatchEvent(

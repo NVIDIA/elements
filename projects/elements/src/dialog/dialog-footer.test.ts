@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { DialogFooter } from '@nvidia-elements/core/dialog';
 import '@nvidia-elements/core/dialog/define.js';
 
-describe('mlv-dialog-footer', () => {
+describe(DialogFooter.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: DialogFooter;
 
@@ -14,7 +14,7 @@ describe('mlv-dialog-footer', () => {
         <mlv-dialog-footer>hello</mlv-dialog-footer>
       </mlv-dialog>
     `);
-    element = fixture.querySelector('mlv-dialog-footer');
+    element = fixture.querySelector(DialogFooter.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('mlv-dialog-footer', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-dialog-footer')).toBeDefined();
+    expect(customElements.get(DialogFooter.metadata.tag)).toBeDefined();
   });
 
   it('should render with the footer default slot', async () => {

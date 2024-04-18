@@ -36,9 +36,9 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     this.host.addController(this);
   }
 
-  /** @private attr mlv-keynav-disabled is an internal API for advanced use cases only */
+  /** @private attr nve-keynav-disabled is an internal API for advanced use cases only */
   get #keynavDisabled() {
-    return this.host.hasAttribute('mlv-keynav-disabled');
+    return this.host.hasAttribute('nve-keynav-disabled');
   }
 
   async hostConnected() {

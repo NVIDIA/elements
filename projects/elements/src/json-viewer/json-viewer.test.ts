@@ -1,10 +1,10 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { JSONViewer } from '@nvidia-elements/core/json-viewer';
+import { JSONViewer, JSONNode } from '@nvidia-elements/core/json-viewer';
 import '@nvidia-elements/core/json-viewer/define.js';
 
-describe('mlv-json-viewer', () => {
+describe(JSONViewer.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: JSONViewer;
 
@@ -14,7 +14,7 @@ describe('mlv-json-viewer', () => {
         { "list": [1, 2, 3], "object": { "a": 1, "b": 2, "c": { "value": 3 } } }
       </mlv-json-viewer>
     `);
-    element = fixture.querySelector('mlv-json-viewer');
+    element = fixture.querySelector(JSONViewer.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,19 +23,19 @@ describe('mlv-json-viewer', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('mlv-json-viewer')).toBeDefined();
+    expect(customElements.get(JSONViewer.metadata.tag)).toBeDefined();
   });
 
   it('should render JSON via slot', async () => {
     element.requestUpdate();
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelectorAll('mlv-json-node').length).toBe(2);
+    expect(element.shadowRoot.querySelectorAll(JSONNode.metadata.tag).length).toBe(2);
   });
 
   it('should show top level nodes when expanded', async () => {
     element.expanded = true;
     await elementIsStable(element);
-    const [nodeOne, nodeTwo] = Array.from(element.shadowRoot.querySelectorAll('mlv-json-node'));
+    const [nodeOne, nodeTwo] = Array.from(element.shadowRoot.querySelectorAll<JSONNode>(JSONNode.metadata.tag));
     expect(nodeOne.expanded).toBe(true);
     expect(nodeTwo.expanded).toBe(true);
   });
@@ -44,11 +44,11 @@ describe('mlv-json-viewer', () => {
     element.expandedAll = true;
     await elementIsStable(element);
 
-    const node = Array.from(element.shadowRoot.querySelectorAll('mlv-json-node'))[1];
+    const node = Array.from(element.shadowRoot.querySelectorAll<JSONNode>(JSONNode.metadata.tag))[1];
     node.expanded = true;
 
     await elementIsStable(node);
-    const deepNodes = Array.from(node.shadowRoot.querySelectorAll('mlv-json-node'));
+    const deepNodes = Array.from(node.shadowRoot.querySelectorAll<JSONNode>(JSONNode.metadata.tag));
 
     expect(deepNodes.length).toBe(3);
   });
