@@ -2,10 +2,10 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, emulateClick, untilEvent } from '@nvidia-elements/testing';
 import { SortButton } from '@nvidia-elements/core/sort-button';
-import type { Icon } from '@nvidia-elements/core/icon';
+import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/sort-button/define.js';
 
-describe('nve-sort-button', () => {
+describe(SortButton.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: SortButton;
   let icon: Icon;
@@ -14,8 +14,8 @@ describe('nve-sort-button', () => {
     fixture = await createFixture(html`
       <nve-sort-button></nve-sort-button>
     `);
-    element = fixture.querySelector('nve-sort-button');
-    icon = element.shadowRoot.querySelector('nve-icon');
+    element = fixture.querySelector(SortButton.metadata.tag);
+    icon = element.shadowRoot.querySelector(Icon.metadata.tag);
     await elementIsStable(element);
     await elementIsStable(icon);
   });
@@ -25,7 +25,7 @@ describe('nve-sort-button', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-sort-button')).toBeDefined();
+    expect(customElements.get(SortButton.metadata.tag)).toBeDefined();
   });
 
   it('should initialize role spinbutton', async () => {

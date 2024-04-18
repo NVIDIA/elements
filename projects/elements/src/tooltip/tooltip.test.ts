@@ -6,7 +6,7 @@ import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/tooltip/define.js';
 import '@nvidia-elements/core/button/define.js';
 
-describe('nve-tooltip', () => {
+describe(Tooltip.metadata.tag, () => {
   let fixture: HTMLElement;
   let tooltip: Tooltip;
   let tooltip2: Tooltip;
@@ -19,9 +19,9 @@ describe('nve-tooltip', () => {
       <nve-tooltip behavior-trigger id="tooltip-2" anchor="trigger" trigger="trigger" open-delay="500" hidden>delayed tooltip</nve-tooltip>
       <nve-button id="trigger">button</nve-button>
     `);
-    tooltip = fixture.querySelector('nve-tooltip#tooltip-1');
-    tooltip2 = fixture.querySelector('nve-tooltip#tooltip-2');
-    trigger = fixture.querySelector('nve-button');
+    tooltip = fixture.querySelector('#tooltip-1');
+    tooltip2 = fixture.querySelector('#tooltip-2');
+    trigger = fixture.querySelector(Button.metadata.tag);
   });
 
   afterEach(() => {
@@ -29,7 +29,7 @@ describe('nve-tooltip', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-tooltip')).toBeDefined();
+    expect(customElements.get(Tooltip.metadata.tag)).toBeDefined();
   });
 
   it('should render arrow by default', async () => {

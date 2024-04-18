@@ -2,11 +2,13 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { Breadcrumb } from '@nvidia-elements/core/breadcrumb';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/breadcrumb/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
-describe('nve-breadcrumb', () => {
+describe(Breadcrumb.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Breadcrumb;
 
@@ -18,7 +20,7 @@ describe('nve-breadcrumb', () => {
         <span>Static item</span>
       </nve-breadcrumb>
     `);
-    element = fixture.querySelector('nve-breadcrumb');
+    element = fixture.querySelector(Breadcrumb.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -27,7 +29,7 @@ describe('nve-breadcrumb', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-breadcrumb')).toBeDefined();
+    expect(customElements.get(Breadcrumb.metadata.tag)).toBeDefined();
   });
 
   it('should assign elements to defined slot', async () => {
@@ -35,8 +37,8 @@ describe('nve-breadcrumb', () => {
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
 
-    expect(element.querySelector('nve-icon-button').slot.includes('_')).toBe(true);
-    expect(element.querySelector('nve-button').slot.includes('_')).toBe(true);
+    expect(element.querySelector(IconButton.metadata.tag).slot.includes('_')).toBe(true);
+    expect(element.querySelector(Button.metadata.tag).slot.includes('_')).toBe(true);
     expect(element.querySelector('span').slot.includes('_')).toBe(true);
   });
 
@@ -45,8 +47,8 @@ describe('nve-breadcrumb', () => {
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
 
-    expect(element.querySelector('nve-icon-button').container.includes('inline')).toBe(true);
-    expect(element.querySelector('nve-button').container.includes('inline')).toBe(true);
+    expect(element.querySelector<IconButton>(IconButton.metadata.tag).container.includes('inline')).toBe(true);
+    expect(element.querySelector<Button>(Button.metadata.tag).container.includes('inline')).toBe(true);
   });
 
   it('should remove wrapper slot if a child is removed', async () => {
@@ -55,7 +57,7 @@ describe('nve-breadcrumb', () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('li').length).toBe(3);
 
-    element.querySelector('nve-icon-button').remove();
+    element.querySelector(IconButton.metadata.tag).remove();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('li').length).toBe(2);
   });
@@ -66,7 +68,7 @@ describe('nve-breadcrumb', () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('li').length).toBe(3);
 
-    const button = document.createElement('nve-button');
+    const button = document.createElement(Button.metadata.tag);
     element.append(button);
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);

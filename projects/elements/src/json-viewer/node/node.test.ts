@@ -1,10 +1,12 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Button } from '@nvidia-elements/core/button';
 import { JSONNode } from './node.js';
 import '@nvidia-elements/core/json-viewer/define.js';
 
-describe('nve-json-node', () => {
+describe(JSONNode.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: JSONNode;
 
@@ -12,7 +14,7 @@ describe('nve-json-node', () => {
     fixture = await createFixture(html`
       <nve-json-node></nve-json-node>
     `);
-    element = fixture.querySelector('nve-json-node');
+    element = fixture.querySelector(JSONNode.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,7 +23,7 @@ describe('nve-json-node', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-json-node')).toBeDefined();
+    expect(customElements.get(JSONNode.metadata.tag)).toBeDefined();
   });
 
   it('should render a link if value is a url', async () => {
@@ -44,18 +46,18 @@ describe('nve-json-node', () => {
     element.value = { url: 'https://nvidia.com' };
     element.prop = 'site';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-button').textContent.trim()).toBe('site:');
+    expect(element.shadowRoot.querySelector(Button.metadata.tag).textContent.trim()).toBe('site:');
   });
 
   it('should render icon button if property name is not available and an object or array value', async () => {
     element.value = { url: 'https://nvidia.com' };
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon-button')).toBeTruthy();
-    expect(element.shadowRoot.querySelector('nve-icon-button').direction).toBe('right');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBeTruthy();
+    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).direction).toBe('right');
 
     element.expanded = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon-button').direction).toBe('down');
+    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).direction).toBe('down');
   });
 
   it('should expand if icon button clicked', async () => {
@@ -63,7 +65,7 @@ describe('nve-json-node', () => {
     await elementIsStable(element);
     expect(element.expanded).toBe(false);
 
-    element.shadowRoot.querySelector('nve-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     await elementIsStable(element);
     expect(element.expanded).toBe(true);
   });
@@ -74,7 +76,7 @@ describe('nve-json-node', () => {
     await elementIsStable(element);
     expect(element.expanded).toBe(false);
 
-    element.shadowRoot.querySelector('nve-button').click();
+    element.shadowRoot.querySelector<Button>(Button.metadata.tag).click();
     await elementIsStable(element);
     expect(element.expanded).toBe(true);
   });

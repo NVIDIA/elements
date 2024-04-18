@@ -4,7 +4,7 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { Textarea } from '@nvidia-elements/core/textarea';
 import '@nvidia-elements/core/textarea/define.js';
 
-describe('nve-textarea', () => {
+describe(Textarea.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Textarea;
 
@@ -15,7 +15,7 @@ describe('nve-textarea', () => {
         <textarea></textarea>
       </nve-textarea>
     `);
-    element = fixture.querySelector('nve-textarea');
+    element = fixture.querySelector(Textarea.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,6 +24,6 @@ describe('nve-textarea', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-textarea')).toBeDefined();
+    expect(customElements.get(Textarea.metadata.tag)).toBeDefined();
   });
 });

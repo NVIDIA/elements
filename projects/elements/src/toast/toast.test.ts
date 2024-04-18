@@ -1,10 +1,12 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Toast } from '@nvidia-elements/core/toast';
+import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/toast/define.js';
 
-describe('nve-toast', () => {
+describe(Toast.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Toast;
 
@@ -12,7 +14,7 @@ describe('nve-toast', () => {
     fixture = await createFixture(html`
       <nve-toast>hello</nve-toast>
     `);
-    element = fixture.querySelector('nve-toast');
+    element = fixture.querySelector(Toast.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -21,14 +23,16 @@ describe('nve-toast', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-toast')).toBeDefined();
+    expect(customElements.get(Toast.metadata.tag)).toBeDefined();
   });
 
   it('should render close button when closable', async () => {
-    expect(element.shadowRoot.querySelector('nve-icon-button')).toBe(null);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon-button').tagName).toBe('MLV-ICON-BUTTON');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
   });
 
   // https://open-ui.org/components/popup.research.explainer#api-shape
@@ -51,19 +55,19 @@ describe('nve-toast', () => {
     await elementIsStable(element);
     element.status = 'success';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon').ariaLabel).toBe('success');
+    expect(element.shadowRoot.querySelector(Icon.metadata.tag).ariaLabel).toBe('success');
   });
 
   it('should apply an aria-label to the close button', async () => {
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon-button').ariaLabel).toBe('close');
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
   });
 
   it('should hide status icon if muted', async () => {
     element.status = 'muted';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('nve-icon')).toBe(null);
+    expect(element.shadowRoot.querySelector(Icon.metadata.tag)).toBe(null);
   });
 
   it('should emit close event when close button clicked', async () => {
@@ -71,7 +75,7 @@ describe('nve-toast', () => {
     await elementIsStable(element);
 
     const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector('nve-icon-button').click();
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
 });

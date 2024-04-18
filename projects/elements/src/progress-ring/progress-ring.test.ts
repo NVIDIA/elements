@@ -6,7 +6,7 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/progress-ring/define.js';
 
-describe('nve-progress-ring', () => {
+describe(ProgressRing.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: ProgressRing;
 
@@ -14,7 +14,7 @@ describe('nve-progress-ring', () => {
     fixture = await createFixture(html`
       <nve-progress-ring></nve-progress-ring>
     `);
-    element = fixture.querySelector('nve-progress-ring');
+    element = fixture.querySelector(ProgressRing.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('nve-progress-ring', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-progress-ring')).toBeDefined();
+    expect(customElements.get(ProgressRing.metadata.tag)).toBeDefined();
   });
 
   it('should set aria attributes', async () => {
@@ -46,7 +46,7 @@ describe('nve-progress-ring', () => {
   });
 
   it('should contain icons when status not equals accent', async () => {
-    const mlvIcon = element.shadowRoot.querySelector('nve-icon') as Icon;
+    const mlvIcon = element.shadowRoot.querySelector(Icon.metadata.tag) as Icon;
 
     element.status = 'warning';
     await elementIsStable(element);

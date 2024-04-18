@@ -1,12 +1,11 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
-import type { IconButton } from '@nvidia-elements/core/icon-button';
-import type { Grid, GridColumn } from '@nvidia-elements/core/grid';
+import { Grid, GridColumn } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
-describe('nve-grid-column', () => {
+describe(GridColumn.metadata.tag, () => {
   let fixture: HTMLElement;
   let grid: Grid;
   let columns: GridColumn[];
@@ -28,8 +27,8 @@ describe('nve-grid-column', () => {
         </nve-grid-row>
       </nve-grid>
     `);
-    grid = fixture.querySelector('nve-grid');
-    columns = Array.from(fixture.querySelectorAll('nve-grid-column'));
+    grid = fixture.querySelector(Grid.metadata.tag);
+    columns = Array.from(fixture.querySelectorAll(GridColumn.metadata.tag));
     await elementIsStable(columns[0]);
   });
 
@@ -38,7 +37,7 @@ describe('nve-grid-column', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-grid-column')).toBeDefined();
+    expect(customElements.get(GridColumn.metadata.tag)).toBeDefined();
   });
 
   it('should set columns to have the grid role of columnheader', () => {

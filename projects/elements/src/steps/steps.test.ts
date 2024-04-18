@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent
 import { StepsItem, Steps } from '@nvidia-elements/core/steps';
 import '@nvidia-elements/core/steps/define.js';
 
-describe('nve-steps', () => {
+describe(Steps.metadata.tag, () => {
   let fixture: HTMLElement;
   let parentElement: Steps;
   let childElement: StepsItem;
@@ -15,8 +15,8 @@ describe('nve-steps', () => {
       <nve-steps-item></nve-steps-item>
     </nve-steps>
     `);
-    parentElement = fixture.querySelector('nve-steps');
-    childElement = fixture.querySelector('nve-steps-item');
+    parentElement = fixture.querySelector(Steps.metadata.tag);
+    childElement = fixture.querySelector(StepsItem.metadata.tag);
 
     await elementIsStable(parentElement);
     await elementIsStable(childElement);
@@ -27,11 +27,11 @@ describe('nve-steps', () => {
   });
 
   it('should define parentElement', () => {
-    expect(customElements.get('nve-steps')).toBeDefined();
+    expect(customElements.get(Steps.metadata.tag)).toBeDefined();
   });
 
   it('should define childElement', () => {
-    expect(customElements.get('nve-steps-item')).toBeDefined();
+    expect(customElements.get(StepsItem.metadata.tag)).toBeDefined();
   });
 
   it('should have correct a18y roles', async () => {

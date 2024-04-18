@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { Menu } from '@nvidia-elements/core/menu';
 import '@nvidia-elements/core/menu/define.js';
 
-describe('nve-menu', () => {
+describe(Menu.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Menu;
 
@@ -16,7 +16,7 @@ describe('nve-menu', () => {
         <nve-menu-item>item 3</nve-menu-item>
       </nve-menu>
     `);
-    element = fixture.querySelector('nve-menu');
+    element = fixture.querySelector(Menu.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('nve-menu', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-menu')).toBeDefined();
+    expect(customElements.get(Menu.metadata.tag)).toBeDefined();
   });
 
   it('should initialize role menu', async () => {

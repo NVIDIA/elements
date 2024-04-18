@@ -1,10 +1,10 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import type { Grid, GridColumn, GridHeader } from '@nvidia-elements/core/grid';
+import { Grid, GridColumn, GridHeader } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
-describe('nve-grid-header', () => {
+describe(GridHeader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: GridHeader;
   let grid: Grid;
@@ -27,9 +27,9 @@ describe('nve-grid-header', () => {
         </nve-grid-row>
       </nve-grid>
     `);
-    element = fixture.querySelector('nve-grid-header');
-    grid = fixture.querySelector('nve-grid');
-    columns = Array.from(fixture.querySelectorAll('nve-grid-column'));
+    element = fixture.querySelector(GridHeader.metadata.tag);
+    grid = fixture.querySelector(Grid.metadata.tag);
+    columns = Array.from(fixture.querySelectorAll(GridColumn.metadata.tag));
     await elementIsStable(element);
   });
 
@@ -38,7 +38,7 @@ describe('nve-grid-header', () => {
   });
 
   it('should define element', async () => {
-    expect(customElements.get('nve-grid-header')).toBeDefined();
+    expect(customElements.get(GridHeader.metadata.tag)).toBeDefined();
   });
 
   it('should set header to have the grid role of row', async () => {
@@ -58,7 +58,7 @@ describe('nve-grid-header', () => {
     expect(columns[2].ariaColIndex).toBe('3');
     expect(columns[3].ariaColIndex).toBe('4');
 
-    const newColumn = document.createElement('nve-grid-column');
+    const newColumn = document.createElement(GridColumn.metadata.tag);
     newColumn.textContent = 'column 5';
     element.appendChild(newColumn);
     await elementIsStable(element);
@@ -95,7 +95,7 @@ describe('nve-grid-header', () => {
   });
 });
 
-describe('nve-grid-header validation check', () => {
+describe(`${GridHeader.metadata.tag}: validation check`, () => {
   let fixture: HTMLElement;
   let element: GridHeader;
   const original = console.error;
@@ -118,7 +118,7 @@ describe('nve-grid-header validation check', () => {
         </nve-grid-row>
       </nve-grid>
     `);
-    element = fixture.querySelector('nve-grid-header');
+    element = fixture.querySelector(GridHeader.metadata.tag);
     await elementIsStable(element);
   });
 
