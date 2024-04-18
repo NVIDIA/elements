@@ -4,13 +4,13 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/button/define.js';
 
-describe('nve-button', () => {
+describe(Button.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Button;
 
   beforeEach(async () => {
     fixture = await createFixture(html`<nve-button>hello there</nve-button>`);
-    element = fixture.querySelector('nve-button');
+    element = fixture.querySelector(Button.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -19,7 +19,7 @@ describe('nve-button', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-button')).toBeDefined();
+    expect(customElements.get(Button.metadata.tag)).toBeDefined();
   });
 
   it('should initialize tabindex 0 for focus behavior', async () => {

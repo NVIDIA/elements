@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { GridPlaceholder } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
-describe('nve-grid-placeholder', () => {
+describe(GridPlaceholder.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: GridPlaceholder;
 
@@ -14,7 +14,7 @@ describe('nve-grid-placeholder', () => {
 
       </nve-grid-placeholder>
     `);
-    element = fixture.querySelector('nve-grid-placeholder');
+    element = fixture.querySelector(GridPlaceholder.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('nve-grid-placeholder', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-grid-placeholder')).toBeDefined();
+    expect(customElements.get(GridPlaceholder.metadata.tag)).toBeDefined();
   });
 
   it('should set placeholder to have the grid role of row', () => {

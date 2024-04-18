@@ -3,9 +3,10 @@ import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import type { IconButton } from '@nvidia-elements/core/icon-button';
 import { Pagination } from '@nvidia-elements/core/pagination';
+import { Select } from '@nvidia-elements/core/select';
 import '@nvidia-elements/core/pagination/define.js';
 
-describe('nve-pagination', () => {
+describe(Pagination.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Pagination;
 
@@ -15,7 +16,7 @@ describe('nve-pagination', () => {
         <nve-pagination name="page" .value=${1} .step=${10} .items=${100}></nve-pagination>
       </form>
     `);
-    element = fixture.querySelector('nve-pagination');
+    element = fixture.querySelector(Pagination.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,7 +25,7 @@ describe('nve-pagination', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-pagination')).toBeDefined();
+    expect(customElements.get(Pagination.metadata.tag)).toBeDefined();
   });
 
   it('should have a role of toolbar', async () => {
@@ -135,7 +136,7 @@ describe('nve-pagination', () => {
     element.disableStep = true;
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('label')).toBeTruthy();
-    expect(element.shadowRoot.querySelector('nve-select')).toBe(null);
+    expect(element.shadowRoot.querySelector(Select.metadata.tag)).toBe(null);
   });
 
   it('should set step value on select change', async () => {

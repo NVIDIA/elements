@@ -5,7 +5,7 @@ import { Card, CardHeader, CardFooter, CardContent } from '@nvidia-elements/core
 import { getFlatDOMTree } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/card/define.js';
 
-describe('nve-card', () => {
+describe(Card.metadata.tag, () => {
   let fixture: HTMLElement;
   let card: Card;
   let cardHeader: CardHeader;
@@ -25,10 +25,10 @@ describe('nve-card', () => {
         <nve-card-content></nve-card-content>
       </nve-card>
     `);
-    card = fixture.querySelector('nve-card');
-    cardHeader = fixture.querySelector('nve-card-header');
-    cardContent = fixture.querySelector('nve-card-content');
-    cardFooter = fixture.querySelector('nve-card-footer');
+    card = fixture.querySelector(Card.metadata.tag);
+    cardHeader = fixture.querySelector(CardHeader.metadata.tag);
+    cardContent = fixture.querySelector(CardContent.metadata.tag);
+    cardFooter = fixture.querySelector(CardFooter.metadata.tag);
     await elementIsStable(card);
     await elementIsStable(cardHeader);
     await elementIsStable(cardContent);
@@ -40,10 +40,10 @@ describe('nve-card', () => {
   });
 
   it('should define elements', () => {
-    expect(customElements.get('nve-card')).toBeDefined();
-    expect(customElements.get('nve-card-header')).toBeDefined();
-    expect(customElements.get('nve-card-content')).toBeDefined();
-    expect(customElements.get('nve-card-footer')).toBeDefined();
+    expect(customElements.get(Card.metadata.tag)).toBeDefined();
+    expect(customElements.get(CardHeader.metadata.tag)).toBeDefined();
+    expect(customElements.get(CardContent.metadata.tag)).toBeDefined();
+    expect(customElements.get(CardFooter.metadata.tag)).toBeDefined();
   });
 
   it('should have the nve-card-header self define the header slot', async () => {

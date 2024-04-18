@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/
 import { GridRow } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
-describe('nve-grid-row', () => {
+describe(GridRow.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: GridRow;
 
@@ -14,7 +14,7 @@ describe('nve-grid-row', () => {
 
       </nve-grid-row>
     `);
-    element = fixture.querySelector('nve-grid-row');
+    element = fixture.querySelector(GridRow.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('nve-grid-row', () => {
   });
 
   it('should define element', () => {
-    expect(customElements.get('nve-grid-row')).toBeDefined();
+    expect(customElements.get(GridRow.metadata.tag)).toBeDefined();
   });
 
   it('should set row to have the grid role of row', () => {
