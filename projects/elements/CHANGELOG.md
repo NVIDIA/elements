@@ -1,3 +1,10 @@
+## [@elements/elements-v0.31.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.30.0...@elements/elements-v0.31.0) (2024-04-18)
+
+
+### Features
+
+* **elements:** static bundle support ([2c116bc](https://github.com/NVIDIA/elements/commit/2c116bc924ebbc5f35da6b05a1412821de035b1e))
+
 ## [@elements/elements-v0.30.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.29.1...@elements/elements-v0.30.0) (2024-04-17)
 
 
