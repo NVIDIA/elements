@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Search } from '@nvidia-elements/core/search';
 import '@nvidia-elements/core/search/define.js';
 
-describe('nve-search axe', () => {
+describe(Search.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Search;
 
@@ -16,7 +16,7 @@ describe('nve-search axe', () => {
         <input type="search" />
       </nve-search>
     `);
-    element = fixture.querySelector('nve-search');
+    element = fixture.querySelector(Search.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('nve-search axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-search']);
+    const results = await runAxe([Search.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

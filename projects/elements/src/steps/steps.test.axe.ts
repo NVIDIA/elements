@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { StepsItem, Steps } from '@nvidia-elements/core/steps';
 import '@nvidia-elements/core/steps/define.js';
 
-describe('nve-steps axe', () => {
+describe(Steps.metadata.tag, () => {
   let fixture: HTMLElement;
   let steps: Steps;
   let item: StepsItem;
@@ -18,8 +18,8 @@ describe('nve-steps axe', () => {
         <nve-steps-item disabled>Step 3</nve-steps-item>
       </nve-steps>
     `);
-    steps = fixture.querySelector('nve-steps');
-    item = fixture.querySelector('nve-steps-item');
+    steps = fixture.querySelector(Steps.metadata.tag);
+    item = fixture.querySelector(StepsItem.metadata.tag);
 
     await elementIsStable(steps);
     await elementIsStable(item);
@@ -30,7 +30,7 @@ describe('nve-steps axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-steps'], {
+    const results = await runAxe([Steps.metadata.tag], {
       rules: { 'color-contrast': { enabled: false } }
     });
     expect(results.violations.length).toBe(0);

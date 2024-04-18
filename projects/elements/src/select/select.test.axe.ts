@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Select } from '@nvidia-elements/core/select';
 import '@nvidia-elements/core/select/define.js';
 
-describe('nve-select axe', () => {
+describe(Select.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Select;
 
@@ -26,7 +26,7 @@ describe('nve-select axe', () => {
         </select>
       </nve-select>
     `);
-    element = fixture.querySelector('nve-select');
+    element = fixture.querySelector(Select.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -35,7 +35,7 @@ describe('nve-select axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-select']);
+    const results = await runAxe([Select.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

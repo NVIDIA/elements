@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { TabsItem, Tabs } from '@nvidia-elements/core/tabs';
 import '@nvidia-elements/core/tabs/define.js';
 
-describe('nve-tabs axe', () => {
+describe(Tabs.metadata.tag, () => {
   let fixture: HTMLElement;
   let tabs: Tabs;
   let item: TabsItem;
@@ -18,8 +18,8 @@ describe('nve-tabs axe', () => {
         <nve-tabs-item disabled>Tab 3</nve-tabs-item>
       </nve-tabs>
     `);
-    tabs = fixture.querySelector('nve-tabs');
-    item = fixture.querySelector('nve-tabs-item');
+    tabs = fixture.querySelector(Tabs.metadata.tag);
+    item = fixture.querySelector(TabsItem.metadata.tag);
 
     await elementIsStable(tabs);
     await elementIsStable(item);
@@ -30,7 +30,7 @@ describe('nve-tabs axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-tabs'], {
+    const results = await runAxe([Tabs.metadata.tag], {
       rules: { 'color-contrast': { enabled: false } }
     });
     expect(results.violations.length).toBe(0);

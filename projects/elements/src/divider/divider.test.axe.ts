@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Divider } from '@nvidia-elements/core/divider';
 import '@nvidia-elements/core/divider/define.js';
 
-describe('nve-divider', () => {
+describe(Divider.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Divider;
 
@@ -13,7 +13,7 @@ describe('nve-divider', () => {
     fixture = await createFixture(html`
       <nve-divider></nve-divider>
     `);
-    element = fixture.querySelector('nve-divider');
+    element = fixture.querySelector(Divider.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('nve-divider', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-divider']);
+    const results = await runAxe([Divider.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

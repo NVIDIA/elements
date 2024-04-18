@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Card, CardHeader, CardFooter, CardContent } from '@nvidia-elements/core/card';
 import '@nvidia-elements/core/card/define.js';
 
-describe('nve-card axe', () => {
+describe(Card.metadata.tag, () => {
   let fixture: HTMLElement;
   let card: Card;
   let cardHeader: CardHeader;
@@ -28,10 +28,10 @@ describe('nve-card axe', () => {
         </nve-card-footer>
       </nve-card>
     `);
-    card = fixture.querySelector('nve-card');
-    cardHeader = fixture.querySelector('nve-card-header');
-    cardContent = fixture.querySelector('nve-card-content');
-    cardFooter = fixture.querySelector('nve-card-footer');
+    card = fixture.querySelector(Card.metadata.tag);
+    cardHeader = fixture.querySelector(CardHeader.metadata.tag);
+    cardContent = fixture.querySelector(CardContent.metadata.tag);
+    cardFooter = fixture.querySelector(CardFooter.metadata.tag);
     await elementIsStable(card);
     await elementIsStable(cardHeader);
     await elementIsStable(cardContent);
@@ -43,7 +43,7 @@ describe('nve-card axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-card']);
+    const results = await runAxe([Card.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });
