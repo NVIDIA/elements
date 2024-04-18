@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Dot } from '@nvidia-elements/core/dot';
 import '@nvidia-elements/core/dot/define.js';
 
-describe('nve-dot axe', () => {
+describe(Dot.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Dot;
 
@@ -13,7 +13,7 @@ describe('nve-dot axe', () => {
     fixture = await createFixture(html`
       <nve-dot aria-label="dot"></nve-dot>
     `);
-    element = fixture.querySelector('nve-dot');
+    element = fixture.querySelector(Dot.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('nve-dot axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-dot']);
+    const results = await runAxe([Dot.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

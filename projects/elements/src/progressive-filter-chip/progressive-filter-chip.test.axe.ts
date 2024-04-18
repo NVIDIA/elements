@@ -6,7 +6,7 @@ import { ProgressiveFilterChip } from '@nvidia-elements/core/progressive-filter-
 import '@nvidia-elements/core/progressive-filter-chip/define.js';
 import '@nvidia-elements/core/forms/define.js';
 
-describe('nve-progressive-filter-chip axe', () => {
+describe(ProgressiveFilterChip.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: ProgressiveFilterChip;
 
@@ -21,7 +21,7 @@ describe('nve-progressive-filter-chip axe', () => {
         <input type="date" value="2021-01-01" aria-label="date input" />
       </nve-progressive-filter-chip>
     `);
-    element = fixture.querySelector('nve-progressive-filter-chip');
+    element = fixture.querySelector(ProgressiveFilterChip.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -30,7 +30,7 @@ describe('nve-progressive-filter-chip axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-progressive-filter-chip']);
+    const results = await runAxe([ProgressiveFilterChip.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

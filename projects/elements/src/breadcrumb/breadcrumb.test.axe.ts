@@ -7,7 +7,7 @@ import '@nvidia-elements/core/breadcrumb/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
-describe('nve-breadcrumb', () => {
+describe(Breadcrumb.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Breadcrumb;
 
@@ -19,7 +19,7 @@ describe('nve-breadcrumb', () => {
         <span>Static item</span>
       </nve-breadcrumb>
     `);
-    element = fixture.querySelector('nve-breadcrumb');
+    element = fixture.querySelector(Breadcrumb.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -28,7 +28,7 @@ describe('nve-breadcrumb', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-breadcrumb']);
+    const results = await runAxe([Breadcrumb.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Toast } from '@nvidia-elements/core/toast';
 import '@nvidia-elements/core/toast/define.js';
 
-describe('nve-toast', () => {
+describe(Toast.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Toast;
 
@@ -14,7 +14,7 @@ describe('nve-toast', () => {
       <button id="btn">button</button>
       <nve-toast trigger="btn" anchor="btn">toast</nve-toast>
     `);
-    element = fixture.querySelector('nve-toast');
+    element = fixture.querySelector(Toast.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('nve-toast', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-toast']);
+    const results = await runAxe([Toast.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

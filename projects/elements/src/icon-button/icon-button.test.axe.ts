@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import '@nvidia-elements/core/icon-button/define.js';
 
-describe('nve-icon-button axe', () => {
+describe(IconButton.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: IconButton;
 
@@ -13,7 +13,7 @@ describe('nve-icon-button axe', () => {
     fixture = await createFixture(html`
       <nve-icon-button aria-label="icon button"></nve-icon-button>
     `);
-    element = fixture.querySelectorAll('nve-icon-button')[0];
+    element = fixture.querySelectorAll<IconButton>(IconButton.metadata.tag)[0];
     elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('nve-icon-button axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-icon-button']);
+    const results = await runAxe([IconButton.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

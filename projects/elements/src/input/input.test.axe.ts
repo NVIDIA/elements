@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Input } from '@nvidia-elements/core/input';
 import '@nvidia-elements/core/input/define.js';
 
-describe('nve-input axe', () => {
+describe(Input.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Input;
 
@@ -16,7 +16,7 @@ describe('nve-input axe', () => {
         <input type="text" />
       </nve-input>
     `);
-    element = fixture.querySelector('nve-input');
+    element = fixture.querySelector(Input.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('nve-input axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-input']);
+    const results = await runAxe([Input.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });
