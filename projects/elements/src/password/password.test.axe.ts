@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Password } from '@nvidia-elements/core/password';
 import '@nvidia-elements/core/password/define.js';
 
-describe('nve-password', () => {
+describe(Password.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Password;
 
@@ -16,7 +16,7 @@ describe('nve-password', () => {
         <input type="password" />
       </nve-password>
     `);
-    element = fixture.querySelector('nve-password');
+    element = fixture.querySelector(Password.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('nve-password', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-password']);
+    const results = await runAxe([Password.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

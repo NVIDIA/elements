@@ -6,7 +6,7 @@ import { ButtonGroup } from '@nvidia-elements/core/button-group';
 import '@nvidia-elements/core/button-group/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
-describe('nve-button-group axe', () => {
+describe(ButtonGroup.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: ButtonGroup;
 
@@ -18,7 +18,7 @@ describe('nve-button-group axe', () => {
       <nve-icon-button icon-name="split-none" aria-label="split none"></nve-icon-button>
     </nve-button-group>
     `);
-    element = fixture.querySelector('nve-button-group');
+    element = fixture.querySelector(ButtonGroup.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -27,7 +27,7 @@ describe('nve-button-group axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-button-group']);
+    const results = await runAxe([ButtonGroup.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

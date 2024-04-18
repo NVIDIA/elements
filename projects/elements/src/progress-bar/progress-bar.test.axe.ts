@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { ProgressBar } from '@nvidia-elements/core/progress-bar';
 import '@nvidia-elements/core/progress-bar/define.js';
 
-describe('nve-progress-bar axe', () => {
+describe(ProgressBar.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: ProgressBar;
 
@@ -13,7 +13,7 @@ describe('nve-progress-bar axe', () => {
     fixture = await createFixture(html`
       <nve-progress-bar></nve-progress-bar>
     `);
-    element = fixture.querySelector('nve-progress-bar');
+    element = fixture.querySelector(ProgressBar.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('nve-progress-bar axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-progress-bar']);
+    const results = await runAxe([ProgressBar.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

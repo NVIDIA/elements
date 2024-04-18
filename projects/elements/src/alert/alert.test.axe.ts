@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Alert } from '@nvidia-elements/core/alert';
 import '@nvidia-elements/core/alert/define.js';
 
-describe('nve-alert axe', () => {
+describe(Alert.metadata.tag, () => {
   let fixture: HTMLElement;
   let alert: Alert;
 
@@ -17,7 +17,7 @@ describe('nve-alert axe', () => {
       <nve-alert status="success">success</nve-alert>
       <nve-alert status="danger">danger</nve-alert>
     `);
-    alert = fixture.querySelector('nve-alert');
+    alert = fixture.querySelector(Alert.metadata.tag);
     await elementIsStable(alert);
   });
 
@@ -26,7 +26,7 @@ describe('nve-alert axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['nve-alert']);
+    const results = await runAxe([Alert.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });
