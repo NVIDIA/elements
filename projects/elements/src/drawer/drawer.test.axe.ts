@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Drawer } from '@nvidia-elements/core/drawer';
 import '@nvidia-elements/core/drawer/define.js';
 
-describe('mlv-drawer axe', () => {
+describe(Drawer.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Drawer;
 
@@ -13,7 +13,7 @@ describe('mlv-drawer axe', () => {
     fixture = await createFixture(html`
       <mlv-drawer closable>hello</mlv-drawer>
     `);
-    element = fixture.querySelector('mlv-drawer');
+    element = fixture.querySelector(Drawer.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('mlv-drawer axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-drawer']);
+    const results = await runAxe([Drawer.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

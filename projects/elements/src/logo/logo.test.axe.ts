@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Logo } from '@nvidia-elements/core/logo';
 import '@nvidia-elements/core/logo/define.js';
 
-describe('mlv-logo', () => {
+describe(Logo.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Logo;
 
@@ -13,7 +13,7 @@ describe('mlv-logo', () => {
     fixture = await createFixture(html`
       <mlv-logo aria-label="logo"></mlv-logo>
     `);
-    element = fixture.querySelector('mlv-logo');
+    element = fixture.querySelector(Logo.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('mlv-logo', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-logo']);
+    const results = await runAxe([Logo.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

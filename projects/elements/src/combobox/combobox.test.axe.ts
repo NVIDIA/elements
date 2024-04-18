@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Combobox } from '@nvidia-elements/core/combobox';
 import '@nvidia-elements/core/combobox/define.js';
 
-describe('mlv-combobox axe', () => {
+describe(Combobox.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Combobox;
 
@@ -22,7 +22,7 @@ describe('mlv-combobox axe', () => {
         <mlv-control-message>message</mlv-control-message>
       </mlv-combobox>
     `);
-    element = fixture.querySelector('mlv-combobox');
+    element = fixture.querySelector(Combobox.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -31,7 +31,7 @@ describe('mlv-combobox axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-combobox']);
+    const results = await runAxe([Combobox.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

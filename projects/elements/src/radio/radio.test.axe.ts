@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Radio } from '@nvidia-elements/core/radio';
 import '@nvidia-elements/core/radio/define.js';
 
-describe('mlv-radio axe', () => {
+describe(Radio.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Radio;
 
@@ -16,7 +16,7 @@ describe('mlv-radio axe', () => {
         <input type="radio" />
       </mlv-radio>
     `);
-    element = fixture.querySelector('mlv-radio');
+    element = fixture.querySelector(Radio.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('mlv-radio axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-radio']);
+    const results = await runAxe([Radio.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

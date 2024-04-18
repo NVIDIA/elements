@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Panel } from '@nvidia-elements/core/panel';
 import '@nvidia-elements/core/panel/define.js';
 
-describe('mlv-panel', () => {
+describe(Panel.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Panel;
 
@@ -22,7 +22,7 @@ describe('mlv-panel', () => {
         </mlv-panel-content>
       </mlv-panel>
     `);
-    element = fixture.querySelector('mlv-panel');
+    element = fixture.querySelector(Panel.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -31,7 +31,7 @@ describe('mlv-panel', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-panel']);
+    const results = await runAxe([Panel.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

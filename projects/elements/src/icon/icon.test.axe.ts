@@ -5,13 +5,13 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/icon/define.js';
 
-describe('mlv-icon axe', () => {
+describe(Icon.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Icon;
 
   beforeEach(async () => {
     fixture = await createFixture(html`<mlv-icon aria-label="test icon"></mlv-icon>`);
-    element = fixture.querySelector('mlv-icon');
+    element = fixture.querySelector(Icon.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -20,7 +20,7 @@ describe('mlv-icon axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-icon']);
+    const results = await runAxe([Icon.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

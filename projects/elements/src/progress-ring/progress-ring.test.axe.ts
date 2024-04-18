@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 import '@nvidia-elements/core/progress-ring/define.js';
 
-describe('mlv-progress-ring axe', () => {
+describe(ProgressRing.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: ProgressRing;
 
@@ -13,7 +13,7 @@ describe('mlv-progress-ring axe', () => {
     fixture = await createFixture(html`
       <mlv-progress-ring aria-label="progress"></mlv-progress-ring>
     `);
-    element = fixture.querySelector('mlv-progress-ring');
+    element = fixture.querySelector(ProgressRing.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('mlv-progress-ring axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-progress-ring']);
+    const results = await runAxe([ProgressRing.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

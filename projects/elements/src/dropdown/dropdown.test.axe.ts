@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Dropdown } from '@nvidia-elements/core/dropdown';
 import '@nvidia-elements/core/dropdown/define.js';
 
-describe('mlv-dropdown', () => {
+describe(Dropdown.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Dropdown;
 
@@ -14,7 +14,7 @@ describe('mlv-dropdown', () => {
       <button id="btn">button</button>
       <mlv-dropdown trigger="btn" anchor="btn" closable>hello</mlv-dropdown>
     `);
-    element = fixture.querySelector('mlv-dropdown');
+    element = fixture.querySelector(Dropdown.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('mlv-dropdown', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-dropdown']);
+    const results = await runAxe([Dropdown.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

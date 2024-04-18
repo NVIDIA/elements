@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { PageLoader } from '@nvidia-elements/core/page-loader';
 import '@nvidia-elements/core/page-loader/define.js';
 
-describe('mlv-page-loader', () => {
+describe(PageLoader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: PageLoader;
 
@@ -13,7 +13,7 @@ describe('mlv-page-loader', () => {
     fixture = await createFixture(html`
       <mlv-page-loader aria-label="page-loader"></mlv-page-loader>
     `);
-    element = fixture.querySelector('mlv-page-loader');
+    element = fixture.querySelector(PageLoader.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('mlv-page-loader', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-page-loader']);
+    const results = await runAxe([PageLoader.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Pagination } from '@nvidia-elements/core/pagination';
 import '@nvidia-elements/core/pagination/define.js';
 
-describe('mlv-pagination', () => {
+describe(Pagination.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Pagination;
 
@@ -15,7 +15,7 @@ describe('mlv-pagination', () => {
         <mlv-pagination name="page" .value=${1} .step=${10} .items=${100}></mlv-pagination>
       </form>
     `);
-    element = fixture.querySelector('mlv-pagination');
+    element = fixture.querySelector(Pagination.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -24,7 +24,7 @@ describe('mlv-pagination', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-pagination']);
+    const results = await runAxe([Pagination.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

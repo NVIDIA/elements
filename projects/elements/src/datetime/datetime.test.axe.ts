@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Datetime } from '@nvidia-elements/core/datetime';
 import '@nvidia-elements/core/datetime/define.js';
 
-describe('mlv-datetime axe', () => {
+describe(Datetime.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Datetime;
 
@@ -16,7 +16,7 @@ describe('mlv-datetime axe', () => {
         <input type="datetime" />
       </mlv-datetime>
     `);
-    element = fixture.querySelector('mlv-datetime');
+    element = fixture.querySelector(Datetime.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('mlv-datetime axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-datetime']);
+    const results = await runAxe([Datetime.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

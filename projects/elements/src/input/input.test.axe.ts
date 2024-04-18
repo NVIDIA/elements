@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Input } from '@nvidia-elements/core/input';
 import '@nvidia-elements/core/input/define.js';
 
-describe('mlv-input axe', () => {
+describe(Input.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Input;
 
@@ -16,7 +16,7 @@ describe('mlv-input axe', () => {
         <input type="text" />
       </mlv-input>
     `);
-    element = fixture.querySelector('mlv-input');
+    element = fixture.querySelector(Input.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('mlv-input axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-input']);
+    const results = await runAxe([Input.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

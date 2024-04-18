@@ -8,7 +8,7 @@ import '@nvidia-elements/core/logo/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
-describe('mlv-app-header axe', () => {
+describe(AppHeader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: AppHeader;
 
@@ -21,7 +21,7 @@ describe('mlv-app-header axe', () => {
         <mlv-icon-button icon-name="person" slot="nav-actions" aria-label="profile"></mlv-icon-button>
       </mlv-app-header>
     `);
-    element = fixture.querySelector('mlv-app-header');
+    element = fixture.querySelector(AppHeader.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -30,7 +30,7 @@ describe('mlv-app-header axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-app-header']);
+    const results = await runAxe([AppHeader.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

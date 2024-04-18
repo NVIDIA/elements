@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { StepsItem, Steps } from '@nvidia-elements/core/steps';
 import '@nvidia-elements/core/steps/define.js';
 
-describe('mlv-steps axe', () => {
+describe(Steps.metadata.tag, () => {
   let fixture: HTMLElement;
   let steps: Steps;
   let item: StepsItem;
@@ -18,8 +18,8 @@ describe('mlv-steps axe', () => {
         <mlv-steps-item disabled>Step 3</mlv-steps-item>
       </mlv-steps>
     `);
-    steps = fixture.querySelector('mlv-steps');
-    item = fixture.querySelector('mlv-steps-item');
+    steps = fixture.querySelector(Steps.metadata.tag);
+    item = fixture.querySelector(StepsItem.metadata.tag);
 
     await elementIsStable(steps);
     await elementIsStable(item);
@@ -30,7 +30,7 @@ describe('mlv-steps axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-steps'], {
+    const results = await runAxe([Steps.metadata.tag], {
       rules: { 'color-contrast': { enabled: false } }
     });
     expect(results.violations.length).toBe(0);

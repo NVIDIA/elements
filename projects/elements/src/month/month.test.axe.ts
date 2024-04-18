@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Month } from '@nvidia-elements/core/month';
 import '@nvidia-elements/core/month/define.js';
 
-describe('mlv-month axe', () => {
+describe(Month.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Month;
 
@@ -16,7 +16,7 @@ describe('mlv-month axe', () => {
         <input type="month" />
       </mlv-month>
     `);
-    element = fixture.querySelector('mlv-month');
+    element = fixture.querySelector(Month.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('mlv-month axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-month']);
+    const results = await runAxe([Month.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

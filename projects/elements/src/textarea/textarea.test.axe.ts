@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Textarea } from '@nvidia-elements/core/textarea';
 import '@nvidia-elements/core/textarea/define.js';
 
-describe('mlv-textarea axe', () => {
+describe(Textarea.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Textarea;
 
@@ -16,7 +16,7 @@ describe('mlv-textarea axe', () => {
         <textarea></textarea>
       </mlv-textarea>
     `);
-    element = fixture.querySelector('mlv-textarea');
+    element = fixture.querySelector(Textarea.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('mlv-textarea axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-textarea']);
+    const results = await runAxe([Textarea.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

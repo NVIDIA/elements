@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { SortButton } from '@nvidia-elements/core/sort-button';
 import '@nvidia-elements/core/sort-button/define.js';
 
-describe('mlv-sort-button axe', () => {
+describe(SortButton.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: SortButton;
 
@@ -13,7 +13,7 @@ describe('mlv-sort-button axe', () => {
     fixture = await createFixture(html`
       <mlv-sort-button aria-label="sort"></mlv-sort-button>
     `);
-    element = fixture.querySelector('mlv-sort-button');
+    element = fixture.querySelector(SortButton.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('mlv-sort-button axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-sort-button']);
+    const results = await runAxe([SortButton.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

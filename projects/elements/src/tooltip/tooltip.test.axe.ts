@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Tooltip } from '@nvidia-elements/core/tooltip';
 import '@nvidia-elements/core/tooltip/define.js';
 
-describe('mlv-tooltip axe', () => {
+describe(Tooltip.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Tooltip;
 
@@ -14,7 +14,7 @@ describe('mlv-tooltip axe', () => {
       <button id="btn">button</button>
       <mlv-tooltip trigger="btn" anchor="btn">tooltip</mlv-tooltip>
     `);
-    element = fixture.querySelector('mlv-tooltip');
+    element = fixture.querySelector(Tooltip.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -23,7 +23,7 @@ describe('mlv-tooltip axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-tooltip']);
+    const results = await runAxe([Tooltip.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Dialog } from '@nvidia-elements/core/dialog';
 import '@nvidia-elements/core/dialog/define.js';
 
-describe('mlv-dialog axe', () => {
+describe(Dialog.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Dialog;
 
@@ -21,7 +21,7 @@ describe('mlv-dialog axe', () => {
         </mlv-dialog-footer>
       </mlv-dialog>
     `);
-    element = fixture.querySelector('mlv-dialog');
+    element = fixture.querySelector(Dialog.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -30,7 +30,7 @@ describe('mlv-dialog axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-dialog']);
+    const results = await runAxe([Dialog.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

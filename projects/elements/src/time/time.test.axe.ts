@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Time } from '@nvidia-elements/core/time';
 import '@nvidia-elements/core/time/define.js';
 
-describe('mlv-time', () => {
+describe(Time.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Time;
 
@@ -16,7 +16,7 @@ describe('mlv-time', () => {
         <input type="time" />
       </mlv-time>
     `);
-    element = fixture.querySelector('mlv-time');
+    element = fixture.querySelector(Time.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('mlv-time', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-time']);
+    const results = await runAxe([Time.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

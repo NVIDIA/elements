@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Grid } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
-describe('mlv-grid axe', () => {
+describe(Grid.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Grid;
 
@@ -26,7 +26,7 @@ describe('mlv-grid axe', () => {
         </mlv-grid-row>
       </mlv-grid>
     `);
-    element = fixture.querySelector('mlv-grid');
+    element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -35,7 +35,7 @@ describe('mlv-grid axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-grid'], {
+    const results = await runAxe([Grid.metadata.tag], {
       rules: {
         // axe does not support ElementInternals AOM yet https://github.com/dequelabs/axe-core/issues/4259
         'aria-required-parent': { enabled: false },

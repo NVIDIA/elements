@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Tag } from '@nvidia-elements/core/tag';
 import '@nvidia-elements/core/tag/define.js';
 
-describe('mlv-tag', () => {
+describe(Tag.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Tag;
 
@@ -36,7 +36,7 @@ describe('mlv-tag', () => {
       <mlv-tag color="yellow-nova">yellow-nova</mlv-tag>
       <mlv-tag color="brand-green">brand-green</mlv-tag>
     `);
-    element = fixture.querySelector('mlv-tag');
+    element = fixture.querySelector(Tag.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -45,7 +45,7 @@ describe('mlv-tag', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-tag']);
+    const results = await runAxe([Tag.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

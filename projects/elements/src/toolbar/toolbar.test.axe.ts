@@ -9,7 +9,7 @@ import '@nvidia-elements/core/button-group/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/divider/define.js';
 
-describe('mlv-toolbar axe', () => {
+describe(Toolbar.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Toolbar;
 
@@ -33,7 +33,7 @@ describe('mlv-toolbar axe', () => {
       <mlv-button slot="suffix" container="flat">Save</mlv-button>
     </mlv-toolbar>
     `);
-    element = fixture.querySelector('mlv-toolbar');
+    element = fixture.querySelector(Toolbar.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -42,7 +42,7 @@ describe('mlv-toolbar axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-toolbar']);
+    const results = await runAxe([Toolbar.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

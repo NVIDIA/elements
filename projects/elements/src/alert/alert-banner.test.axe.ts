@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { AlertBanner } from '@nvidia-elements/core/alert';
 import '@nvidia-elements/core/alert/define.js';
 
-describe('mlv-alert-banner axe', () => {
+describe(AlertBanner.metadata.tag, () => {
   let fixture: HTMLElement;
   let alertGroup: AlertBanner;
 
@@ -41,7 +41,7 @@ describe('mlv-alert-banner axe', () => {
         </mlv-alert>
       </mlv-alert-banner>
     `);
-    alertGroup = fixture.querySelector('mlv-alert-banner');
+    alertGroup = fixture.querySelector(AlertBanner.metadata.tag);
     await elementIsStable(alertGroup);
   });
 
@@ -50,7 +50,7 @@ describe('mlv-alert-banner axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-alert-banner'], {
+    const results = await runAxe([AlertBanner.metadata.tag], {
       rules: {
         'color-contrast': { enabled: false },
         'aria-prohibited-attr': { enabled: false }

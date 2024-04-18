@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Switch } from '@nvidia-elements/core/switch';
 import '@nvidia-elements/core/switch/define.js';
 
-describe('mlv-switch', () => {
+describe(Switch.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Switch;
 
@@ -16,7 +16,7 @@ describe('mlv-switch', () => {
         <input type="checkbox" />
       </mlv-switch>
     `);
-    element = fixture.querySelector('mlv-switch');
+    element = fixture.querySelector(Switch.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -25,7 +25,7 @@ describe('mlv-switch', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-switch']);
+    const results = await runAxe([Switch.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

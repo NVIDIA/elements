@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { AlertGroup } from '@nvidia-elements/core/alert';
 import '@nvidia-elements/core/alert/define.js';
 
-describe('mlv-alert-group axe', () => {
+describe(AlertGroup.metadata.tag, () => {
   let fixture: HTMLElement;
   let alertGroup: AlertGroup;
 
@@ -36,7 +36,7 @@ describe('mlv-alert-group axe', () => {
         <mlv-alert>danger</mlv-alert>
       </mlv-alert-group>
     `);
-    alertGroup = fixture.querySelector('mlv-alert-group');
+    alertGroup = fixture.querySelector(AlertGroup.metadata.tag);
     await elementIsStable(alertGroup);
   });
 
@@ -45,7 +45,7 @@ describe('mlv-alert-group axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-alert-group']);
+    const results = await runAxe([AlertGroup.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

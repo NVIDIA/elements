@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Notification } from '@nvidia-elements/core/notification';
 import '@nvidia-elements/core/notification/define.js';
 
-describe('mlv-notification', () => {
+describe(Notification.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Notification;
 
@@ -13,7 +13,7 @@ describe('mlv-notification', () => {
     fixture = await createFixture(html`
       <mlv-notification>hello</mlv-notification>
     `);
-    element = fixture.querySelector('mlv-notification');
+    element = fixture.querySelector(Notification.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -22,7 +22,7 @@ describe('mlv-notification', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-notification']);
+    const results = await runAxe([Notification.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

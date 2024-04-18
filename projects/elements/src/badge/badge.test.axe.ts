@@ -2,9 +2,10 @@ import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
+import { Badge } from '@nvidia-elements/core/badge';
 import '@nvidia-elements/core/badge/define.js';
 
-describe('mlv-badge axe', () => {
+describe(Badge.metadata.tag, () => {
   it('should pass axe check for status', async () => {
     const fixture = await createFixture(html`
       <mlv-badge status="scheduled">scheduled</mlv-badge>
@@ -20,8 +21,8 @@ describe('mlv-badge axe', () => {
       <mlv-badge status="ignored">ignored</mlv-badge>
     `);
 
-    await elementIsStable(fixture.querySelector('mlv-badge'));
-    const results = await runAxe(['mlv-badge']);
+    await elementIsStable(fixture.querySelector(Badge.metadata.tag));
+    const results = await runAxe([Badge.metadata.tag]);
     expect(results.violations.length).toBe(0);
     removeFixture(fixture);
   });
@@ -33,8 +34,8 @@ describe('mlv-badge axe', () => {
       <mlv-badge status="trend-down">-15%</mlv-badge>
     `);
 
-    await elementIsStable(fixture.querySelector('mlv-badge'));
-    const results = await runAxe(['mlv-badge']);
+    await elementIsStable(fixture.querySelector(Badge.metadata.tag));
+    const results = await runAxe([Badge.metadata.tag]);
     expect(results.violations.length).toBe(0);
     removeFixture(fixture);
   });
@@ -65,8 +66,8 @@ describe('mlv-badge axe', () => {
       <mlv-badge color="brand-green">brand-green</mlv-badge>
     `);
 
-    await elementIsStable(fixture.querySelector('mlv-badge'));
-    const results = await runAxe(['mlv-badge']);
+    await elementIsStable(fixture.querySelector(Badge.metadata.tag));
+    const results = await runAxe([Badge.metadata.tag]);
     expect(results.violations.length).toBe(0);
     removeFixture(fixture);
   });

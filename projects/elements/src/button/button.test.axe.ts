@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/button/define.js';
 
-describe('mlv-button', () => {
+describe(Button.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Button;
 
@@ -17,7 +17,7 @@ describe('mlv-button', () => {
       <mlv-button disabled>disabled</mlv-button>
       <mlv-button pressed>pressed</mlv-button>
     `);
-    element = fixture.querySelector('mlv-button');
+    element = fixture.querySelector(Button.metadata.tag);
     await elementIsStable(element);
   });
 
@@ -26,7 +26,7 @@ describe('mlv-button', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-button'], {
+    const results = await runAxe([Button.metadata.tag], {
       rules: { 'color-contrast': { enabled: false } } // interaction emphasis fails minimum color-contrast
     });
     expect(results.violations.length).toBe(0);

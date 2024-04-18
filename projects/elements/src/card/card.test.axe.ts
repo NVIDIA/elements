@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { Card, CardHeader, CardFooter, CardContent } from '@nvidia-elements/core/card';
 import '@nvidia-elements/core/card/define.js';
 
-describe('mlv-card axe', () => {
+describe(Card.metadata.tag, () => {
   let fixture: HTMLElement;
   let card: Card;
   let cardHeader: CardHeader;
@@ -28,10 +28,10 @@ describe('mlv-card axe', () => {
         </mlv-card-footer>
       </mlv-card>
     `);
-    card = fixture.querySelector('mlv-card');
-    cardHeader = fixture.querySelector('mlv-card-header');
-    cardContent = fixture.querySelector('mlv-card-content');
-    cardFooter = fixture.querySelector('mlv-card-footer');
+    card = fixture.querySelector(Card.metadata.tag);
+    cardHeader = fixture.querySelector(CardHeader.metadata.tag);
+    cardContent = fixture.querySelector(CardContent.metadata.tag);
+    cardFooter = fixture.querySelector(CardFooter.metadata.tag);
     await elementIsStable(card);
     await elementIsStable(cardHeader);
     await elementIsStable(cardContent);
@@ -43,7 +43,7 @@ describe('mlv-card axe', () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe(['mlv-card']);
+    const results = await runAxe([Card.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });
