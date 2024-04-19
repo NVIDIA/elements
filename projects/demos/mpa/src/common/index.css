@@ -1,7 +1,0 @@
-@import '@elements/elements/index.css';
-@import '@elements/elements/inter.css';
-
-*:not(:defined),
-*:not(:defined) > * {
-	visibility: hidden;
-}

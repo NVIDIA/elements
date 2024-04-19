@@ -18,7 +18,7 @@ export default {
       [
         'ci',
         'docs',
-        'demos',
+        'starters',
         'elements',
         'elements-react',
         'pages',
