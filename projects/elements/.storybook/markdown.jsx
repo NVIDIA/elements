@@ -34,3 +34,16 @@ export const P = (args) => {
     <p nve-text="body">{args.children}</p>
   )
 }
+
+export const Ul = (args) => {
+  return (
+    <ul nve-text="list">{args.children}</ul>
+  )
+}
+
+
+export const UL = (args) => {
+  return (
+    <ul nve-text="list">{args.children}</ul>
+  )
+}

@@ -19,7 +19,7 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 
 ## Projects
 
-- `/projects/demos` - Suite of standardized demo apps for Elements and Patterns
+- `/projects/starters` - Suite of standardized starter apps for Elements and Patterns
 - `/projects/elements` - Elements library: curated UI maintained by the Elements team
 - `/projects/elements-react` - Elements React library for React compatibility/support
 - `/projects/testing` - A set of testing utilities for Lit based Web Components.
@@ -87,7 +87,7 @@ git commit -a -m "fix(core): disabled multi-select"
 
 | Scopes            | Description                |
 | ----------------- | -------------------------- |
-| `demos`           | `/projects/demos`          |
+| `starters`        | `/projects/starters`       |
 | `elements`        | `/projects/elements`       |
 | `elements-react`  | `/projects/elements-react` |
 | `pages`           | `/projects/pages`          |

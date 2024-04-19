@@ -1,0 +1,67 @@
+{
+  "name": "angular-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "ci": "wireit",
+    "start": "wireit",
+    "build": "wireit",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "start": {
+      "command": "ng serve",
+      "service": true
+    },
+    "build": {
+      "command": "ng build --base-href /elements/starters/angular/",
+      "files": [
+        "src/**",
+        "angular.json",
+        "tsconfig.json",
+        "tsconfig.app.json",
+        "package.json"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../../elements:build"
+      ]
+    }
+  },
+  "dependencies": {
+    "@elements/elements": "workspace:*",
+    "@angular/animations": "17.1.0",
+    "@angular/common": "17.1.0",
+    "@angular/compiler": "17.1.0",
+    "@angular/core": "17.1.0",
+    "@angular/forms": "17.1.0",
+    "@angular/platform-browser": "17.1.0",
+    "@angular/platform-browser-dynamic": "17.1.0",
+    "@angular/router": "17.1.0",
+    "rxjs": "7.8.1",
+    "tslib": "2.6.2",
+    "zone.js": "0.14.3"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "17.1.0",
+    "@angular/cli": "17.1.0",
+    "@angular/compiler-cli": "17.1.0",
+    "@types/jasmine": "5.1.4",
+    "jasmine-core": "5.1.1",
+    "karma": "6.4.2",
+    "karma-chrome-launcher": "3.2.0",
+    "karma-coverage": "2.2.1",
+    "karma-jasmine": "5.1.0",
+    "karma-jasmine-html-reporter": "2.1.0",
+    "typescript": "5.3.3"
+  }
+}

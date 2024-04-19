@@ -23,91 +23,91 @@
       "output": []
     },
     "pages:demos:angular": {
-      "command": "cp -a ../demos/angular/dist/angular-app/browser/. ./dist/demos/angular",
+      "command": "cp -a ../starters/angular/dist/angular-app/browser/. ./dist/starters/angular",
       "dependencies": [
-        "../demos/angular:ci",
+        "../starters/angular:ci",
         "build"
       ],
       "files": [],
       "output": [
-        "dist/demos/angular/**"
+        "dist/starters/angular/**"
       ]
     },
     "pages:demos:angular-legacy": {
-      "command": "cp -a ../demos/angular-legacy/dist/angular-app/. ./dist/demos/angular-legacy",
+      "command": "cp -a ../starters/angular-legacy/dist/angular-app/. ./dist/starters/angular-legacy",
       "dependencies": [
-        "../demos/angular-legacy:ci",
+        "../starters/angular-legacy:ci",
         "build"
       ],
       "files": [],
       "output": [
-        "dist/demos/angular-legacy/**"
+        "dist/starters/angular-legacy/**"
       ]
     },
     "pages:demos:buildless": {
-      "command": "cp -a ../demos/buildless/dist/. ./dist/demos/buildless/",
+      "command": "cp -a ../starters/buildless/dist/. ./dist/starters/buildless/",
       "dependencies": [
-        "../demos/buildless:ci",
+        "../starters/buildless:ci",
         "build"
       ],
       "files": [],
       "output": [
-        "dist/demos/buildless/**"
+        "dist/starters/buildless/**"
       ]
     },
     "pages:demos:mpa": {
-      "command": "cp -a ../demos/mpa/dist/. ./dist/demos/mpa",
+      "command": "cp -a ../starters/mpa/dist/. ./dist/starters/mpa",
       "dependencies": [
-        "../demos/mpa:ci",
+        "../starters/mpa:ci",
         "build"
       ],
       "files": [],
       "output": [
-        "dist/demos/mpa/**"
+        "dist/starters/mpa/**"
       ]
     },
     "pages:demos:react": {
-      "command": "cp -a ../demos/react/dist/. ./dist/demos/react",
+      "command": "cp -a ../starters/react/dist/. ./dist/starters/react",
       "dependencies": [
-        "../demos/react:ci",
+        "../starters/react:ci",
         "build"
       ],
       "files": [],
       "output": [
-        "dist/demos/react/**"
+        "dist/starters/react/**"
       ]
     },
     "pages:demos:solidjs": {
-      "command": "cp -a ../demos/solidjs/dist/. ./dist/demos/solidjs",
+      "command": "cp -a ../starters/solidjs/dist/. ./dist/starters/solidjs",
       "dependencies": [
-        "../demos/solidjs:ci",
+        "../starters/solidjs:ci",
         "build"
       ],
       "files": [],
       "output": [
-        "dist/demos/solidjs/**"
+        "dist/starters/solidjs/**"
       ]
     },
     "pages:demos:typescript": {
-      "command": "cp -a ../demos/typescript/dist/. ./dist/demos/typescript",
+      "command": "cp -a ../starters/typescript/dist/. ./dist/starters/typescript",
       "dependencies": [
-        "../demos/typescript:ci",
+        "../starters/typescript:ci",
         "build"
       ],
       "files": [],
       "output": [
-        "dist/demos/typescript/**"
+        "dist/starters/typescript/**"
       ]
     },
     "pages:demos:vue": {
-      "command": "cp -a ../demos/vue/dist/. ./dist/demos/vue",
+      "command": "cp -a ../starters/vue/dist/. ./dist/starters/vue",
       "dependencies": [
-        "../demos/vue:ci",
+        "../starters/vue:ci",
         "build"
       ],
       "files": [],
       "output": [
-        "dist/demos/vue/**"
+        "dist/starters/vue/**"
       ]
     },
     "pages:elements": {
@@ -122,7 +122,7 @@
       ]
     },
     "build": {
-      "command": "mkdir -p dist/demos && mkdir -p dist/api && cp -a ./_redirects dist/ && cp -a ./robots.txt dist/",
+      "command": "mkdir -p dist/starters && mkdir -p dist/api && cp -a ./_redirects dist/ && cp -a ./robots.txt dist/",
       "files": [
         "_redirects",
         "robots.txt"

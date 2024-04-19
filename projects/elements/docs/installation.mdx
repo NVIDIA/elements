@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="About/Installation" />
+
+# Installation
+
+## Artifactory
+
+Elements packages are published on Artifactory.
+
+- [Elements](https://registry.npmjs.org
+- [Elements React](https://registry.npmjs.org
+- [Themes](https://registry.npmjs.org
+- [Testing](https://registry.npmjs.org
+
+To setup the artifactory add the following references to the `.npmrc` file in your repository.
+
+```bash
+@elements:registry=https://registry.npmjs.org
+@nve:registry=https://registry.npmjs.org
+```
+
+## Maglev
+
+If you are in the Maglev Monorepo the following configuration should already be set in the `.npmrc`.
+
+```bash
+registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
+```

@@ -1,0 +1,37 @@
+{
+  "name": "buildless-elements-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit"
+  },
+  "wireit": {
+    "ci": {
+      "command": "mkdir -p dist && cp -a ./assets dist/assets/ && cp -a ./src/index.html dist/",
+      "files": [
+        "src/index.html",
+        "assets/**"
+      ],
+      "output": [
+        "dist"
+      ]
+    },
+    "dev": {
+      "command": "cd dist && http-server",
+      "service": true,
+      "files": [
+        "index.html",
+        "package.json"
+      ],
+      "dependencies": [
+        "ci"
+      ]
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "14.1.1"
+  }
+}
