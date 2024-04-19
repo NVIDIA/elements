@@ -168,7 +168,15 @@ export class Select extends Control {
   }
 
   async #selectValue(option: HTMLOptionElement, selected: boolean) {
-    option.selected = selected;
+    if (this.#select.multiple || (!this.#select.multiple && option.value !== this.#select.value)) {
+      option.selected = selected;
+    }
+
+    // native select only the first selected option determines the select input value
+    if (this.#select.selectedOptions.length < 1) {
+      this.#select.value = selected ? option.value : '';
+    }
+
     this.#select.dispatchEvent(new Event('input', { bubbles: true }));
     this.#select.dispatchEvent(new Event('change', { bubbles: true }));
     this.requestUpdate();

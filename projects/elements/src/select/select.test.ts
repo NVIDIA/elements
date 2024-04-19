@@ -173,6 +173,77 @@ describe(Select.metadata.tag, () => {
     expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag)[0].innerText).toBe('Option 1 Updated');
   });
 
+  it('should only allow value to change and preserve default selected option when single select', async () => {
+    select.multiple = false;
+    select.options[0].removeAttribute('selected');
+    select.options[1].setAttribute('selected', '');
+
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(select.value).toBe('2');
+
+    emulateClick(select);
+    await elementIsStable(element);
+
+    emulateClick(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0]);
+    await element.updateComplete;
+    expect(select.value).toBe('1');
+    expect(select.options[0].selected).toBe(true);
+    expect(select.options[1].selected).toBe(false);
+    expect(select.options[0].hasAttribute('selected')).toBe(false);
+    expect(select.options[1].hasAttribute('selected')).toBe(true);
+  });
+
+  it('should not allow deselection of selected value if single select', async () => {
+    select.multiple = false;
+    select.options[0].removeAttribute('selected');
+    select.options[1].setAttribute('selected', '');
+
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(select.value).toBe('2');
+
+    emulateClick(select);
+    await elementIsStable(element);
+
+    // select first item
+    emulateClick(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0]);
+    await element.updateComplete;
+    expect(select.value).toBe('1');
+    expect(select.options[0].selected).toBe(true);
+    expect(select.options[1].selected).toBe(false);
+    expect(select.options[0].hasAttribute('selected')).toBe(false);
+    expect(select.options[1].hasAttribute('selected')).toBe(true);
+
+    // select first item again retaining selected state
+    emulateClick(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0]);
+    await element.updateComplete;
+    expect(select.value).toBe('1');
+    expect(select.options[0].selected).toBe(true);
+    expect(select.options[1].selected).toBe(false);
+    expect(select.options[0].hasAttribute('selected')).toBe(false);
+    expect(select.options[1].hasAttribute('selected')).toBe(true);
+  });
+
+  it('should allow deselection of selected value if multi select', async () => {
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = false;
+
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    emulateClick(select);
+    await elementIsStable(element);
+
+    // deselect first item
+    emulateClick(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0]);
+    await element.updateComplete;
+    expect(select.value).toBe('');
+    expect(select.options[0].selected).toBe(false);
+    expect(select.options[1].selected).toBe(false);
+  });
+
   it('should deselect option when tag is clicked', async () => {
     select.multiple = true;
     select.options[0].selected = true;
