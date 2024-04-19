@@ -11,7 +11,7 @@ import brand from '@nvidia-elements/themes/brand.css?inline';
 import brandDark from '@nvidia-elements/themes/brand-dark.css?inline';
 import responsiveStyles from '@elements/elements/css/module.responsive.css?inline';
 import { playground } from './playground-url.js';
-import { H1, H2, H3, P } from './markdown.jsx';
+import { H1, H2, H3, P, UL } from './markdown.jsx';
 import '@elements/elements/button/define.js';
 import format from 'html-format';
 
@@ -38,7 +38,8 @@ export const parameters = {
       h1: H1,
       h2: H2,
       h3: H3,
-      p: P
+      p: P,
+      ul: UL
     },
     theme: themes.dark,
     source: {
@@ -85,6 +86,7 @@ export const parameters = {
         'About',
         [
           'Getting Started',
+          'Installation',
           'Changelog',
           'Metrics',
           'Support',

@@ -34,3 +34,16 @@ export const P = (args) => {
     <p mlv-text="body">{args.children}</p>
   )
 }
+
+export const Ul = (args) => {
+  return (
+    <ul mlv-text="list">{args.children}</ul>
+  )
+}
+
+
+export const UL = (args) => {
+  return (
+    <ul mlv-text="list">{args.children}</ul>
+  )
+}

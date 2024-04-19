@@ -27,7 +27,9 @@
 [mlv-text~='heading'],
 [mlv-text~='body'],
 [mlv-text~='label'],
-[mlv-text~='eyebrow'] {
+[mlv-text~='eyebrow'],
+[mlv-text~='list'],
+[mlv-text~='list'] li {
   font-family: var(--nve-ref-font-family) !important;
   font-weight: var(--nve-ref-font-weight-regular) !important;
   color: var(--nve-sys-text-color) !important;
