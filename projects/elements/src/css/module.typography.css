@@ -27,7 +27,9 @@
 [nve-text~='heading'],
 [nve-text~='body'],
 [nve-text~='label'],
-[nve-text~='eyebrow'] {
+[nve-text~='eyebrow'],
+[nve-text~='list'],
+[nve-text~='list'] li {
   font-family: var(--nve-ref-font-family) !important;
   font-weight: var(--nve-ref-font-weight-regular) !important;
   color: var(--nve-sys-text-color) !important;
