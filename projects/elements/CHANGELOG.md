@@ -1,3 +1,10 @@
+## [@elements/elements-v0.31.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.31.0...@elements/elements-v0.31.1) (2024-04-20)
+
+
+### Bug Fixes
+
+* **elements:** native select state ([9361616](https://github.com/NVIDIA/elements/commit/9361616794a2745deb1a6477b9a9fa8e23eb13c6))
+
 ## [@elements/elements-v0.31.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.30.0...@elements/elements-v0.31.0) (2024-04-18)
 
 
