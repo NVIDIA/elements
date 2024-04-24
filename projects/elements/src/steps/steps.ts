@@ -94,7 +94,7 @@ export class StepsItem extends BaseButton {
 
 /**
  * @element nve-steps
- * @description Steps enables a multi-step workflow allowing a user to complete a goal in a specefic sequence.
+ * @description Steps enables a multi-step workflow allowing a user to complete a goal in a specific sequence.
  * @since 0.30.0
  * @slot - default slot for nve-steps-item
  * @cssprop --gap
