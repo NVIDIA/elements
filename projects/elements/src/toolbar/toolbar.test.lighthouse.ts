@@ -10,7 +10,7 @@ describe('toolbar lighthouse report', () => {
         <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
       </nve-toolbar>
       <script type="module">
-        import '@elements/elements/toolbar/define.js';
+        import '@nvidia-elements/core/toolbar/define.js';
       </script>
     `);
 

@@ -6,7 +6,7 @@ describe('divider lighthouse report', () => {
     const report = await runner.getReport('nve-divider', /* html */`
       <nve-divider></nve-divider>
       <script type="module">
-        import '@elements/elements/divider/define.js';
+        import '@nvidia-elements/core/divider/define.js';
       </script>
     `);
 

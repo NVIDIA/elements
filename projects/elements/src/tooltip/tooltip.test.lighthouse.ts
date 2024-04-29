@@ -7,7 +7,7 @@ describe('tooltip lighthouse report', () => {
       <button id="btn">button</button>
       <nve-tooltip trigger="btn" anchor="btn">tooltip</nve-tooltip>
       <script type="module">
-        import '@elements/elements/tooltip/define.js';
+        import '@nvidia-elements/core/tooltip/define.js';
       </script>
     `);
 

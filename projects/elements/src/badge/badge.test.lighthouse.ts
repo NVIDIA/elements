@@ -6,7 +6,7 @@ describe('badge lighthouse report', () => {
     const report = await runner.getReport('nve-badge', /* html */`
       <nve-badge>badge</nve-badge>
       <script type="module">
-        import '@elements/elements/badge/define.js';
+        import '@nvidia-elements/core/badge/define.js';
       </script>
     `);
 

@@ -10,7 +10,7 @@ describe('button-group lighthouse report', () => {
         <nve-icon-button icon-name="split-none" aria-label="split none"></nve-icon-button>
       </nve-button-group>
       <script type="module">
-        import '@elements/elements/button-group/define.js';
+        import '@nvidia-elements/core/button-group/define.js';
       </script>
     `);
 

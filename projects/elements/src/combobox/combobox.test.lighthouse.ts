@@ -15,7 +15,7 @@ describe('combobox lighthouse report', () => {
         <nve-control-message>message</nve-control-message>
       </nve-combobox>
       <script type="module">
-        import '@elements/elements/combobox/define.js';
+        import '@nvidia-elements/core/combobox/define.js';
       </script>
     `);
 

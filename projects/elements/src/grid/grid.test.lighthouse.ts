@@ -19,7 +19,7 @@ describe('grid lighthouse report', () => {
         </nve-grid-row>
       </nve-grid>
       <script type="module">
-        import '@elements/elements/grid/define.js';
+        import '@nvidia-elements/core/grid/define.js';
       </script>
     `);
 
