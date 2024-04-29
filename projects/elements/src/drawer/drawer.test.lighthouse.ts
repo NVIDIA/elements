@@ -6,7 +6,7 @@ describe('drawer lighthouse report', () => {
     const report = await runner.getReport('nve-drawer', /* html */`
       <nve-drawer closable>hello</nve-drawer>
       <script type="module">
-        import '@elements/elements/drawer/define.js';
+        import '@nvidia-elements/core/drawer/define.js';
       </script>
     `);
 

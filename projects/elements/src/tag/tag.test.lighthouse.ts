@@ -6,7 +6,7 @@ describe('tag lighthouse report', () => {
     const report = await runner.getReport('nve-tag', /* html */`
       <nve-tag>tag</nve-tag>
       <script type="module">
-        import '@elements/elements/tag/define.js';
+        import '@nvidia-elements/core/tag/define.js';
       </script>
     `);
 

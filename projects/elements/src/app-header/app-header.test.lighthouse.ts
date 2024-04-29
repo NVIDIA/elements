@@ -11,7 +11,7 @@ describe('app-header lighthouse report', () => {
         <nve-icon-button icon-name="person" slot="nav-actions" aria-label="profile"></nve-icon-button>
       </nve-app-header>
       <script type="module">
-        import '@elements/elements/alert/define.js';
+        import '@nvidia-elements/core/alert/define.js';
       </script>
     `);
 

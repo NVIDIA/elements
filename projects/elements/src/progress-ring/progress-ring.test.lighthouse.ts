@@ -6,7 +6,7 @@ describe('progress-ring lighthouse report', () => {
     const report = await runner.getReport('nve-progress-ring', /* html */`
       <nve-progress-ring aria-label="progress"></nve-progress-ring>
       <script type="module">
-        import '@elements/elements/progress-ring/define.js';
+        import '@nvidia-elements/core/progress-ring/define.js';
       </script>
     `);
 

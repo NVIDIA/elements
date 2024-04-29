@@ -6,7 +6,7 @@ describe('page-loader lighthouse report', () => {
     const report = await runner.getReport('nve-page-loader', /* html */`
       <nve-page-loader aria-label="page-loader"></nve-page-loader>
       <script type="module">
-        import '@elements/elements/page-loader/define.js';
+        import '@nvidia-elements/core/page-loader/define.js';
       </script>
     `);
 

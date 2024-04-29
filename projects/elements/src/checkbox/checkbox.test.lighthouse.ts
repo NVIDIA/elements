@@ -9,7 +9,7 @@ describe('checkbox lighthouse report', () => {
           <input type="checkbox" />
         </nve-checkbox>
         <script type="module">
-          import '@elements/elements/checkbox/define.js';
+          import '@nvidia-elements/core/checkbox/define.js';
         </script>
       `);
 
