@@ -14,7 +14,7 @@ describe('dialog lighthouse report', () => {
         </nve-dialog-footer>
       </nve-dialog>
       <script type="module">
-        import '@elements/elements/dialog/define.js';
+        import '@nvidia-elements/core/dialog/define.js';
       </script>
     `);
 

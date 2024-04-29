@@ -9,7 +9,7 @@ describe('switch lighthouse report', () => {
         <input type="checkbox" />
       </nve-switch>
       <script type="module">
-        import '@elements/elements/switch/define.js';
+        import '@nvidia-elements/core/switch/define.js';
       </script>
     `);
 

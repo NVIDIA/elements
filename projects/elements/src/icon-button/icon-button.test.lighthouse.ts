@@ -6,7 +6,7 @@ describe('icon-button lighthouse report', () => {
     const report = await runner.getReport('nve-icon-button', /* html */`
       <nve-icon-button aria-label="icon button"></nve-icon-button>
       <script type="module">
-        import '@elements/elements/icon-button/define.js';
+        import '@nvidia-elements/core/icon-button/define.js';
       </script>
     `);
 

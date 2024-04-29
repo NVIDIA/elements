@@ -582,7 +582,8 @@
       "files": [
         "src/**/*.test.lighthouse.ts",
         "vitest.lighthouse.html",
-        "vitest.lighthouse.ts"
+        "vitest.lighthouse.ts",
+        "vitest.lighthouse.build.ts"
       ],
       "output": [
         ".lighthouse"

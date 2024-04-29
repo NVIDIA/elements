@@ -9,7 +9,7 @@ describe('input lighthouse report', () => {
         <input type="text" />
       </nve-input>
       <script type="module">
-        import '@elements/elements/input/define.js';
+        import '@nvidia-elements/core/input/define.js';
       </script>
     `);
 
