@@ -44,7 +44,7 @@ function getCoverage() {
 }
 
 function getLighthouseScores() {
-  return JSON.parse(readFileSync(new URL('../.lighthouse/dist/report.json', import.meta.url)));
+  return JSON.parse(readFileSync(new URL('../.lighthouse/report.json', import.meta.url)));
 }
 
 function getManifest() {
@@ -121,16 +121,16 @@ function getElementStability(metadata) {
 }
 
 function getElementLighthouseScore(manifest, lighthouseReport) {
-  const name = manifest.tagName;
+  const name = manifest.tagName.replace('mlv-', 'nve-');
   let lighthouse = lighthouseReport[name];
   if (!lighthouseReport[name]) {
     const match = Object.entries(lighthouseReport).find(
-      ([k, _]) => name.startsWith(k) || manifest.metadata.entrypoint.replace('@elements/elements/', 'mlv-').startsWith(k)
+      ([k, _]) => name.startsWith(k) || manifest.metadata.entrypoint.replace('@elements/elements/', 'nve-').startsWith(k)
     );
     lighthouse = match ? match[1] : {};
   }
 
-  if (name.includes('mlv-grid') && lighthouse?.scores) {
+  if (name.includes('nve-grid') && lighthouse?.scores) {
     lighthouse.scores.accessibility = 100; // workaround false reporting for grid, manually tested
   }
 
