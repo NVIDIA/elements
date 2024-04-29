@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import { spread } from '@elements/elements/internal';
-import { Toast } from '@elements/elements/toast';
+import { spread } from '@nvidia-elements/core/internal';
+import { Toast } from '@nvidia-elements/core/toast';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/toast/define.js';
