@@ -1,10 +1,10 @@
 /* eslint-disable guard-for-in */
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import layout from '@elements/elements/css/module.layout.css?inline';
-import typography from '@elements/elements/css/module.typography.css?inline';
-import { Icon, IconName, ICON_NAMES } from '@elements/elements/icon';
-import { Size  as IconSize} from '@elements/elements/internal';
+import layout from '@nvidia-elements/core/css/module.layout.css?inline';
+import typography from '@nvidia-elements/core/css/module.typography.css?inline';
+import { Icon, IconName, ICON_NAMES } from '@nvidia-elements/core/icon';
+import { Size  as IconSize} from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/card/define.js';
