@@ -77,7 +77,9 @@ export default defineConfig({
         '**/*.mjs',
         '**/*.test.axe.ts',
         '**/*.test.lighthouse.ts',
-        '**/*.stories.ts'
+        '**/*.stories.ts',
+        'vite.*.ts',
+        'vitest.*.ts'
       ]
     },
     browser: {
