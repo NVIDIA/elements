@@ -11,7 +11,7 @@ describe('menu lighthouse report', () => {
         <nve-menu-item>item 4</nve-menu-item>
       </nve-menu>
       <script type="module">
-        import '@elements/elements/menu/define.js';
+        import '@nvidia-elements/core/menu/define.js';
       </script>
     `);
 

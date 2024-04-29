@@ -6,7 +6,7 @@ describe('notification lighthouse report', () => {
     const report = await runner.getReport('nve-notification', /* html */`
       <nve-notification>hello</nve-notification>
       <script type="module">
-        import '@elements/elements/notification/define.js';
+        import '@nvidia-elements/core/notification/define.js';
       </script>
     `);
 

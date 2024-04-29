@@ -15,7 +15,7 @@ describe('panel lighthouse report', () => {
         </nve-panel-content>
       </nve-panel>
       <script type="module">
-        import '@elements/elements/panel/define.js';
+        import '@nvidia-elements/core/panel/define.js';
       </script>
     `);
 

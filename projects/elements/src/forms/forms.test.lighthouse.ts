@@ -25,7 +25,7 @@ describe('forms lighthouse report', () => {
         </nve-control>
       </nve-control-group>
       <script type="module">
-        import '@elements/elements/forms/define.js';
+        import '@nvidia-elements/core/forms/define.js';
       </script>
     `);
 

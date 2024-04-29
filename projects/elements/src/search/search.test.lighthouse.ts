@@ -9,7 +9,7 @@ describe('search lighthouse report', () => {
         <input type="search" />
       </nve-search>
       <script type="module">
-        import '@elements/elements/search/define.js';
+        import '@nvidia-elements/core/search/define.js';
       </script>
     `);
 

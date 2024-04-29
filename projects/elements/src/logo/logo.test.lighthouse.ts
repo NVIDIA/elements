@@ -6,7 +6,7 @@ describe('logo lighthouse report', () => {
     const report = await runner.getReport('nve-logo', /* html */`
       <nve-logo aria-label="logo"></nve-logo>
       <script type="module">
-        import '@elements/elements/logo/define.js';
+        import '@nvidia-elements/core/logo/define.js';
       </script>
     `);
 
