@@ -1,7 +1,6 @@
 node_modules
 dist
-dist-storybook
-dist-lighthouse
+.lighthouse
 public
 .storybook
 .next
