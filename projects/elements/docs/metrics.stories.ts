@@ -2,9 +2,9 @@ import { html, css, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import showdown from 'showdown';
-import { define } from '@elements/elements/internal';
-import typography from '@elements/elements/css/module.typography.css?inline';
-import layout from '@elements/elements/css/module.layout.css?inline';
+import { define } from '@nvidia-elements/core/internal';
+import typography from '@nvidia-elements/core/css/module.typography.css?inline';
+import layout from '@nvidia-elements/core/css/module.layout.css?inline';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/tag/define.js';
@@ -526,7 +526,7 @@ class ProjectMetrics extends LitElement {
     tooltipColumn: null,
     columns: {
       project: { sort: 'none', width: '300px' },
-      '@elements/elements': { sort: 'none', width: '300px' },
+      elements: { sort: 'none', width: '300px' },
       instanceTotal: { sort: 'none', width: '300px', tooltip: 'Number of instances of elements directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.' },
       source: { sort: 'none', width: '' },
     }
@@ -729,7 +729,7 @@ class MetricDemo extends LitElement {
     <div mlv-layout="column gap:md align:horizontal-stretch pad:lg" no-story-container @view-data=${e => this.rawData = e.detail}>
       <div mlv-layout="column gap:md">
         <div mlv-layout="row gap:md">
-          <h1 mlv-text="heading lg">@elements/elements</h1>
+          <h1 mlv-text="heading lg">Elements</h1>
           <mlv-badge status="success">version ${ELEMENTS_VERSION}</mlv-badge>
         </div>
         <p mlv-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>

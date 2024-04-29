@@ -1,8 +1,8 @@
 import { html, css, LitElement, PropertyValues } from 'lit';
 import { Ref, ref, createRef } from 'lit/directives/ref.js';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { spread } from '@elements/elements/internal';
-import { Tooltip } from '@elements/elements/tooltip';
+import { spread } from '@nvidia-elements/core/internal';
+import { Tooltip } from '@nvidia-elements/core/tooltip';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
 import '@nvidia-elements/core/toast/define.js';
@@ -10,7 +10,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
-import type { Badge } from '@elements/elements/badge';
+import type { Badge } from '@nvidia-elements/core/badge';
 
 export default {
   title: 'Elements/Tooltip/Examples',

@@ -1,8 +1,8 @@
 import { LitElement, unsafeCSS, html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
-import layout from '@elements/elements/css/module.layout.css?inline';
-import typography from '@elements/elements/css/module.typography.css?inline';
+import layout from '@nvidia-elements/core/css/module.layout.css?inline';
+import typography from '@nvidia-elements/core/css/module.typography.css?inline';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/app-header/define.js';
@@ -20,7 +20,7 @@ import '@nvidia-elements/core/notification/define.js';
 import '@nvidia-elements/core/panel/define.js'
 import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/select/define.js';
-import { generateId } from '@elements/elements/internal';
+import { generateId } from '@nvidia-elements/core/internal';
 
 export default {
   title: 'Elements/Data Grid/Examples',

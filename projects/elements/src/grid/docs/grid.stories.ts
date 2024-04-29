@@ -1,7 +1,7 @@
 import { LitElement, unsafeCSS, html, css, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { getItems, grid } from '../../test/demo.js';
-import layout from '@elements/elements/css/module.layout.css?inline';
+import layout from '@nvidia-elements/core/css/module.layout.css?inline';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/badge/define.js'
 import '@nvidia-elements/core/button/define.js';

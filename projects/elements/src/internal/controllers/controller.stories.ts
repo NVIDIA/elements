@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { BaseButton, TypePopoverController, PopoverPosition, spread, PopoverAlign, popoverBaseStyles, animationFade, I18nController } from '@elements/elements/internal';
-import { I18nService } from '@elements/elements';
+import { BaseButton, TypePopoverController, PopoverPosition, spread, PopoverAlign, popoverBaseStyles, animationFade, I18nController } from '@nvidia-elements/core/internal';
+import { I18nService } from '@nvidia-elements/core';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
