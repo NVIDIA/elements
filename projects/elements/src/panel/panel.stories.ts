@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
-import type { Panel } from '@elements/elements/panel';
+import type { Panel } from '@nvidia-elements/core/panel';
 import '@nvidia-elements/core/panel/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';

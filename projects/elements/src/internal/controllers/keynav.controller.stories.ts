@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { keyNavigationGrid, keyNavigationList, KeynavListConfig } from '@elements/elements/internal';
+import { keyNavigationGrid, keyNavigationList, KeynavListConfig } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';

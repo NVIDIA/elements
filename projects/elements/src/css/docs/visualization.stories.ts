@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/select/define.js';
-import { getThemeTokens } from '@elements/elements';
+import { getThemeTokens } from '@nvidia-elements/core';
 import Chart from 'chart.js/auto';
 
 export default {
@@ -38,7 +38,7 @@ export const Utils = {
       </nve-card>
     </div>
     <script type="module">
-      const tokens = window.__tokens; // import { getThemeTokens } from '@elements/elements';
+      const tokens = window.__tokens; // import { getThemeTokens } from '@nvidia-elements/core';
       const Chart = window.__Chart; // import Chart from 'chart.js/auto';
       const select = document.querySelector('#visualization-demo-select');
       const canvas = document.querySelector('canvas');

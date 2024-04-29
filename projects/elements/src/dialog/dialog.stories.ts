@@ -1,6 +1,6 @@
 import { html } from 'lit';
-import { spread } from '@elements/elements/internal';
-import { Dialog } from '@elements/elements/dialog';
+import { spread } from '@nvidia-elements/core/internal';
+import { Dialog } from '@nvidia-elements/core/dialog';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/dialog/define.js';
