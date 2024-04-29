@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { createComponent } from '@lit-labs/react';
-import { Button } from '@elements/elements/button';
+import { Button } from '@nvidia-elements/core/button';
 
 export default {
   title: 'Internal/Integration'

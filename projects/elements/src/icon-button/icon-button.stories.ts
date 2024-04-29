@@ -1,7 +1,7 @@
 import { html } from 'lit';
-import { IconButton } from '@elements/elements/icon-button';
-import { spread } from '@elements/elements/internal';
-import { ICON_NAMES } from '@elements/elements/icon';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { spread } from '@nvidia-elements/core/internal';
+import { ICON_NAMES } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
