@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { define } from '@elements/elements/internal';
+import { define } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/json-viewer/define.js';
 import metrics from 'build/metadata.json';
 
