@@ -9,7 +9,7 @@ describe('month lighthouse report', () => {
         <input type="month" />
       </nve-month>
       <script type="module">
-        import '@elements/elements/month/define.js';
+        import '@nvidia-elements/core/month/define.js';
       </script>
     `);
 

@@ -9,7 +9,7 @@ describe('range lighthouse report', () => {
         <input type="range" value="50" />
       </nve-range>
       <script type="module">
-        import '@elements/elements/range/define.js';
+        import '@nvidia-elements/core/range/define.js';
       </script>
     `);
 

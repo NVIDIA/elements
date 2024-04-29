@@ -13,7 +13,7 @@ describe('select lighthouse report', () => {
         </select>
       </nve-select>
       <script type="module">
-        import '@elements/elements/select/define.js';
+        import '@nvidia-elements/core/select/define.js';
       </script>
     `);
 

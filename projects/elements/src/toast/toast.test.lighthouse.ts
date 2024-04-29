@@ -7,7 +7,7 @@ describe('toast lighthouse report', () => {
       <button id="btn">button</button>
       <nve-toast trigger="btn" anchor="btn">toast</nve-toast>
       <script type="module">
-        import '@elements/elements/toast/define.js';
+        import '@nvidia-elements/core/toast/define.js';
       </script>
     `);
 

@@ -6,7 +6,7 @@ describe('sort-button lighthouse report', () => {
     const report = await runner.getReport('nve-sort-button', /* html */`
       <nve-sort-button aria-label="sort"></nve-sort-button>
       <script type="module">
-        import '@elements/elements/sort-button/define.js';
+        import '@nvidia-elements/core/sort-button/define.js';
       </script>
     `);
 

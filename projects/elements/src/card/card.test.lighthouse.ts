@@ -18,7 +18,7 @@ describe('card lighthouse report', () => {
         </nve-card-footer>
       </nve-card>
       <script type="module">
-        import '@elements/elements/card/define.js';
+        import '@nvidia-elements/core/card/define.js';
       </script>
     `);
 

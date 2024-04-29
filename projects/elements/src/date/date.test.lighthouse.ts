@@ -9,7 +9,7 @@ describe('date lighthouse report', () => {
         <input type="date" />
       </nve-date>
       <script type="module">
-        import '@elements/elements/date/define.js';
+        import '@nvidia-elements/core/date/define.js';
       </script>
     `);
 

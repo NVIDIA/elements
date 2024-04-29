@@ -6,7 +6,7 @@ describe('dot lighthouse report', () => {
     const report = await runner.getReport('nve-dot', /* html */`
       <nve-dot>1</nve-dot>
       <script type="module">
-        import '@elements/elements/dot/define.js';
+        import '@nvidia-elements/core/dot/define.js';
       </script>
     `);
 
