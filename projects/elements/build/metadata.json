@@ -1,5 +1,5 @@
 {
-  "created": "2024-04-16T20:50:30.319Z",
+  "created": "2024-05-01T14:52:27.902Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -118,10 +118,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.87,
+            "kb": 18.642,
             "requests": {
               "index.js": {
-                "kb": 18.286,
+                "kb": 18.058,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -234,10 +234,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.87,
+            "kb": 18.642,
             "requests": {
               "index.js": {
-                "kb": 18.286,
+                "kb": 18.058,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -330,10 +330,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.87,
+            "kb": 18.642,
             "requests": {
               "index.js": {
-                "kb": 18.286,
+                "kb": 18.058,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -398,10 +398,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.87,
+            "kb": 18.642,
             "requests": {
               "index.js": {
-                "kb": 18.286,
+                "kb": 18.058,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -540,10 +540,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.89,
+            "kb": 18.744,
             "requests": {
               "index.js": {
-                "kb": 18.116,
+                "kb": 17.97,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -694,7 +694,7 @@
         ]
       },
       "lighthouse": {
-        "name": "nve-alert-banner",
+        "name": "nve-alert",
         "scores": {
           "performance": 100,
           "accessibility": 100,
@@ -702,19 +702,15 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.706,
+            "kb": 18.744,
             "requests": {
               "index.js": {
-                "kb": 18.12,
+                "kb": 17.97,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
                 "kb": 0.774,
                 "name": "information-circle-stroke.svg.js"
-              },
-              "cancel.svg.js": {
-                "kb": 0.812,
-                "name": "cancel.svg.js"
               }
             }
           },
@@ -841,10 +837,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.893,
+            "kb": 18.747,
             "requests": {
               "index.js": {
-                "kb": 18.119,
+                "kb": 17.973,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -960,10 +956,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.875,
+            "kb": 18.729,
             "requests": {
               "index.js": {
-                "kb": 18.118,
+                "kb": 17.972,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -1138,10 +1134,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.976,
+            "kb": 14.794,
             "requests": {
               "index.js": {
-                "kb": 14.976,
+                "kb": 14.794,
                 "name": "index.js"
               }
             }
@@ -1267,10 +1263,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.858,
+            "kb": 15.719,
             "requests": {
               "index.js": {
-                "kb": 15.21,
+                "kb": 15.071,
                 "name": "index.js"
               },
               "chevron.svg.js": {
@@ -1574,10 +1570,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.588,
+            "kb": 10.585,
             "requests": {
               "index.js": {
-                "kb": 10.588,
+                "kb": 10.585,
                 "name": "index.js"
               }
             }
@@ -1763,10 +1759,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.242,
+            "kb": 10.238,
             "requests": {
               "index.js": {
-                "kb": 10.242,
+                "kb": 10.238,
                 "name": "index.js"
               }
             }
@@ -1912,10 +1908,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.737,
+            "kb": 8.734,
             "requests": {
               "index.js": {
-                "kb": 8.737,
+                "kb": 8.734,
                 "name": "index.js"
               }
             }
@@ -2036,10 +2032,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.737,
+            "kb": 8.734,
             "requests": {
               "index.js": {
-                "kb": 8.737,
+                "kb": 8.734,
                 "name": "index.js"
               }
             }
@@ -2097,10 +2093,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.737,
+            "kb": 8.734,
             "requests": {
               "index.js": {
-                "kb": 8.737,
+                "kb": 8.734,
                 "name": "index.js"
               }
             }
@@ -2176,10 +2172,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.737,
+            "kb": 8.734,
             "requests": {
               "index.js": {
-                "kb": 8.737,
+                "kb": 8.734,
                 "name": "index.js"
               }
             }
@@ -2336,10 +2332,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.392,
+            "kb": 22.224,
             "requests": {
               "index.js": {
-                "kb": 22.392,
+                "kb": 22.224,
                 "name": "index.js"
               }
             }
@@ -2436,10 +2432,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.392,
+            "kb": 22.224,
             "requests": {
               "index.js": {
-                "kb": 22.392,
+                "kb": 22.224,
                 "name": "index.js"
               }
             }
@@ -2585,10 +2581,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.762,
+            "kb": 23.595,
             "requests": {
               "index.js": {
-                "kb": 22.708,
+                "kb": 22.541,
                 "name": "index.js"
               },
               "dropper.svg.js": {
@@ -2824,10 +2820,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.796,
+            "kb": 39.633,
             "requests": {
               "index.js": {
-                "kb": 39.022,
+                "kb": 38.859,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3060,10 +3056,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.84,
+            "kb": 22.61,
             "requests": {
               "index.js": {
-                "kb": 22.066,
+                "kb": 21.836,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3146,10 +3142,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.84,
+            "kb": 22.61,
             "requests": {
               "index.js": {
-                "kb": 22.066,
+                "kb": 21.836,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3246,10 +3242,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.84,
+            "kb": 22.61,
             "requests": {
               "index.js": {
-                "kb": 22.066,
+                "kb": 21.836,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3399,10 +3395,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.44,
+            "kb": 23.272,
             "requests": {
               "index.js": {
-                "kb": 22.547,
+                "kb": 22.379,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3573,10 +3569,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.445,
+            "kb": 23.277,
             "requests": {
               "index.js": {
-                "kb": 22.552,
+                "kb": 22.384,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3816,10 +3812,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.602,
+            "kb": 28.412,
             "requests": {
               "index.js": {
-                "kb": 27.79,
+                "kb": 27.6,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3927,10 +3923,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.602,
+            "kb": 28.412,
             "requests": {
               "index.js": {
-                "kb": 27.79,
+                "kb": 27.6,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3987,10 +3983,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.602,
+            "kb": 28.412,
             "requests": {
               "index.js": {
-                "kb": 27.79,
+                "kb": 27.6,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4069,10 +4065,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.304,
+            "kb": 8.302,
             "requests": {
               "index.js": {
-                "kb": 8.304,
+                "kb": 8.302,
                 "name": "index.js"
               }
             }
@@ -4218,10 +4214,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.775,
+            "kb": 8.771,
             "requests": {
               "index.js": {
-                "kb": 8.775,
+                "kb": 8.771,
                 "name": "index.js"
               }
             }
@@ -4482,10 +4478,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.872,
+            "kb": 28.675,
             "requests": {
               "index.js": {
-                "kb": 28.06,
+                "kb": 27.863,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4588,10 +4584,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.872,
+            "kb": 28.675,
             "requests": {
               "index.js": {
-                "kb": 28.06,
+                "kb": 27.863,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4648,10 +4644,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.872,
+            "kb": 28.675,
             "requests": {
               "index.js": {
-                "kb": 28.06,
+                "kb": 27.863,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4708,10 +4704,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.872,
+            "kb": 28.675,
             "requests": {
               "index.js": {
-                "kb": 28.06,
+                "kb": 27.863,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4918,10 +4914,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.447,
+            "kb": 29.236,
             "requests": {
               "index.js": {
-                "kb": 28.635,
+                "kb": 28.424,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5140,10 +5136,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.207,
+            "kb": 22.044,
             "requests": {
               "index.js": {
-                "kb": 22.207,
+                "kb": 22.044,
                 "name": "index.js"
               }
             }
@@ -5267,10 +5263,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.32,
+            "kb": 20.194,
             "requests": {
               "index.js": {
-                "kb": 20.32,
+                "kb": 20.194,
                 "name": "index.js"
               }
             }
@@ -5361,10 +5357,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.32,
+            "kb": 20.194,
             "requests": {
               "index.js": {
-                "kb": 20.32,
+                "kb": 20.194,
                 "name": "index.js"
               }
             }
@@ -5497,10 +5493,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.32,
+            "kb": 20.194,
             "requests": {
               "index.js": {
-                "kb": 20.32,
+                "kb": 20.194,
                 "name": "index.js"
               }
             }
@@ -5567,10 +5563,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.32,
+            "kb": 20.194,
             "requests": {
               "index.js": {
-                "kb": 20.32,
+                "kb": 20.194,
                 "name": "index.js"
               }
             }
@@ -5634,10 +5630,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.32,
+            "kb": 20.194,
             "requests": {
               "index.js": {
-                "kb": 20.32,
+                "kb": 20.194,
                 "name": "index.js"
               }
             }
@@ -5698,10 +5694,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.32,
+            "kb": 20.194,
             "requests": {
               "index.js": {
-                "kb": 20.32,
+                "kb": 20.194,
                 "name": "index.js"
               }
             }
@@ -5777,10 +5773,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.32,
+            "kb": 20.194,
             "requests": {
               "index.js": {
-                "kb": 20.32,
+                "kb": 20.194,
                 "name": "index.js"
               }
             }
@@ -5890,10 +5886,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 13.709,
+            "kb": 13.582,
             "requests": {
               "index.js": {
-                "kb": 12.952,
+                "kb": 12.825,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -6257,10 +6253,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.071,
+            "kb": 15.885,
             "requests": {
               "index.js": {
-                "kb": 16.071,
+                "kb": 15.885,
                 "name": "index.js"
               }
             }
@@ -6516,10 +6512,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.813,
+            "kb": 22.631,
             "requests": {
               "index.js": {
-                "kb": 22.813,
+                "kb": 22.631,
                 "name": "index.js"
               }
             }
@@ -6611,10 +6607,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.813,
+            "kb": 22.631,
             "requests": {
               "index.js": {
-                "kb": 22.813,
+                "kb": 22.631,
                 "name": "index.js"
               }
             }
@@ -6809,10 +6805,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.447,
+            "kb": 9.443,
             "requests": {
               "index.js": {
-                "kb": 9.447,
+                "kb": 9.443,
                 "name": "index.js"
               }
             }
@@ -6909,10 +6905,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.556,
+            "kb": 11.551,
             "requests": {
               "index.js": {
-                "kb": 11.556,
+                "kb": 11.551,
                 "name": "index.js"
               }
             }
@@ -7206,10 +7202,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.556,
+            "kb": 11.551,
             "requests": {
               "index.js": {
-                "kb": 11.556,
+                "kb": 11.551,
                 "name": "index.js"
               }
             }
@@ -7355,10 +7351,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.44,
+            "kb": 23.274,
             "requests": {
               "index.js": {
-                "kb": 22.547,
+                "kb": 22.381,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -7608,10 +7604,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.631,
+            "kb": 29.444,
             "requests": {
               "index.js": {
-                "kb": 28.857,
+                "kb": 28.67,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7745,10 +7741,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.631,
+            "kb": 29.444,
             "requests": {
               "index.js": {
-                "kb": 28.857,
+                "kb": 28.67,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7811,10 +7807,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.037,
+            "kb": 22.906,
             "requests": {
               "index.js": {
-                "kb": 23.037,
+                "kb": 22.906,
                 "name": "index.js"
               }
             }
@@ -8030,10 +8026,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.389,
+            "kb": 42.144,
             "requests": {
               "index.js": {
-                "kb": 40.507,
+                "kb": 40.262,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -8252,10 +8248,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.57,
+            "kb": 18.36,
             "requests": {
               "index.js": {
-                "kb": 17.785,
+                "kb": 17.575,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8371,10 +8367,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.57,
+            "kb": 18.36,
             "requests": {
               "index.js": {
-                "kb": 17.785,
+                "kb": 17.575,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8442,10 +8438,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.57,
+            "kb": 18.36,
             "requests": {
               "index.js": {
-                "kb": 17.785,
+                "kb": 17.575,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8518,10 +8514,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.57,
+            "kb": 18.36,
             "requests": {
               "index.js": {
-                "kb": 17.785,
+                "kb": 17.575,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8671,10 +8667,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.561,
+            "kb": 23.38,
             "requests": {
               "index.js": {
-                "kb": 22.62,
+                "kb": 22.439,
                 "name": "index.js"
               },
               "eye.svg.js": {
@@ -8783,10 +8779,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.862,
+            "kb": 8.857,
             "requests": {
               "index.js": {
-                "kb": 8.862,
+                "kb": 8.857,
                 "name": "index.js"
               }
             }
@@ -8937,10 +8933,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.566,
+            "kb": 14.381,
             "requests": {
               "index.js": {
-                "kb": 14.566,
+                "kb": 14.381,
                 "name": "index.js"
               }
             }
@@ -9075,10 +9071,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.361,
+            "kb": 42.26,
             "requests": {
               "index.js": {
-                "kb": 40.234,
+                "kb": 40.133,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -9283,10 +9279,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.299,
+            "kb": 22.132,
             "requests": {
               "index.js": {
-                "kb": 22.299,
+                "kb": 22.132,
                 "name": "index.js"
               }
             }
@@ -9352,10 +9348,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.299,
+            "kb": 22.132,
             "requests": {
               "index.js": {
-                "kb": 22.299,
+                "kb": 22.132,
                 "name": "index.js"
               }
             }
@@ -9501,10 +9497,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.478,
+            "kb": 22.313,
             "requests": {
               "index.js": {
-                "kb": 22.478,
+                "kb": 22.313,
                 "name": "index.js"
               }
             }
@@ -9701,10 +9697,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.306,
+            "kb": 23.126,
             "requests": {
               "index.js": {
-                "kb": 22.617,
+                "kb": 22.437,
                 "name": "index.js"
               },
               "search.svg.js": {
@@ -9912,10 +9908,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.95,
+            "kb": 39.846,
             "requests": {
               "index.js": {
-                "kb": 38.716,
+                "kb": 38.612,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -9937,7 +9933,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 98.9575
+        "coverageTotal": 98.4825
       },
       "stories": [
         {
@@ -10245,10 +10241,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.156,
+            "kb": 15.964,
             "requests": {
               "index.js": {
-                "kb": 15.264,
+                "kb": 15.072,
                 "name": "index.js"
               },
               "sort-ascending.svg.js": {
@@ -10368,10 +10364,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.844,
+            "kb": 19.616,
             "requests": {
               "index.js": {
-                "kb": 19.844,
+                "kb": 19.616,
                 "name": "index.js"
               }
             }
@@ -10385,7 +10381,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 85.125
+        "coverageTotal": 94.1175
       },
       "stories": [
         {
@@ -10657,10 +10653,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.844,
+            "kb": 19.616,
             "requests": {
               "index.js": {
-                "kb": 19.844,
+                "kb": 19.616,
                 "name": "index.js"
               }
             }
@@ -10674,7 +10670,7 @@
       "tests": {
         "projectTotal": 0,
         "instanceTotal": 0,
-        "coverageTotal": 85.125
+        "coverageTotal": 94.1175
       },
       "stories": [],
       "behavior": "navigation",
@@ -10835,10 +10831,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.393,
+            "kb": 22.226,
             "requests": {
               "index.js": {
-                "kb": 22.393,
+                "kb": 22.226,
                 "name": "index.js"
               }
             }
@@ -10970,10 +10966,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.631,
+            "kb": 11.627,
             "requests": {
               "index.js": {
-                "kb": 11.631,
+                "kb": 11.627,
                 "name": "index.js"
               }
             }
@@ -11259,10 +11255,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.631,
+            "kb": 11.627,
             "requests": {
               "index.js": {
-                "kb": 11.631,
+                "kb": 11.627,
                 "name": "index.js"
               }
             }
@@ -11533,10 +11529,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.879,
+            "kb": 15.578,
             "requests": {
               "index.js": {
-                "kb": 15.879,
+                "kb": 15.578,
                 "name": "index.js"
               }
             }
@@ -11757,10 +11753,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.273,
+            "kb": 22.106,
             "requests": {
               "index.js": {
-                "kb": 22.273,
+                "kb": 22.106,
                 "name": "index.js"
               }
             }
@@ -11932,10 +11928,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.168,
+            "kb": 23.002,
             "requests": {
               "index.js": {
-                "kb": 22.548,
+                "kb": 22.382,
                 "name": "index.js"
               },
               "clock.svg.js": {
@@ -12171,10 +12167,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.446,
+            "kb": 29.225,
             "requests": {
               "index.js": {
-                "kb": 28.672,
+                "kb": 28.451,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -12353,10 +12349,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.239,
+            "kb": 16.133,
             "requests": {
               "index.js": {
-                "kb": 14.453,
+                "kb": 14.347,
                 "name": "index.js"
               },
               "add.svg.js": {
@@ -12604,10 +12600,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.66,
+            "kb": 19.67,
             "requests": {
               "index.js": {
-                "kb": 19.66,
+                "kb": 19.67,
                 "name": "index.js"
               }
             }
@@ -12819,10 +12815,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.438,
+            "kb": 23.272,
             "requests": {
               "index.js": {
-                "kb": 22.545,
+                "kb": 22.379,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -12868,88 +12864,7 @@
       "status": "stable"
     }
   ],
-  "patterns": [
-    {
-      "id": "Row",
-      "file": "patterns.stories.ts",
-      "template": "<div>\n  <nve-card role=\"listitem\" container=\"full\">\n    <nve-card-content nve-layout=\"grid align:vertical-center align:space-between gap:md\">\n      <div nve-layout=\"span:4 row gap:md align:vertical-center\">\n        <img\n          src=\"https://placehold.co/600x400\"\n          style=\"max-width: 100px; border-radius: var(--nve-ref-border-radius-sm)\"\n        />\n        <div nve-layout=\"column gap:sm\">\n          <h2 nve-text=\"label medium\">Activity Dashboard</h2>\n          <p nve-text=\"body sm muted\">Last saved: Oct 19, 21 by Camru</p>\n        </div>\n      </div>\n      <p nve-text=\"body sm\" nve-layout=\"span:5\">\n        A dashboard displaying current project activity grouped by User, Host or IP\n      </p>\n      <div nve-layout=\"span:3 row gap:sm align:right\">\n        <div nve-layout=\"row gap:xs\">\n          <nve-icon-button icon-name=\"eye\"></nve-icon-button>\n          <nve-icon-button icon-name=\"copy\"></nve-icon-button>\n          <nve-icon-button icon-name=\"delete\"></nve-icon-button>\n        </div>\n        <nve-divider orientation=\"vertical\"></nve-divider>\n        <nve-button>Add Panel</nve-button>\n      </div>\n    </nve-card-content>\n  </nve-card>\n</div>\n"
-    },
-    {
-      "id": "LayoutHeaderFullWidthCards",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"column full align:stretch\">\n  <nve-card container=\"full\">\n    <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n        <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n      <nve-tabs>\n        <nve-tabs-item selected>Tab 1</nve-tabs-item>\n        <nve-tabs-item>Tab 2</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n      </nve-tabs>\n    </div>\n  </nve-card>\n\n  <main nve-layout=\"column gap:lg pad-top:lg align:stretch\">\n    <nve-card container=\"full\" style=\"width: 100%; height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n    <nve-card container=\"full\" style=\"width: 100%; height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n  </main>\n</div>\n"
-    },
-    {
-      "id": "LayoutHeaderGridCards",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"column full align:stretch\">\n  <nve-card container=\"full\">\n    <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n        <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n      <nve-tabs>\n        <nve-tabs-item selected>Tab 1</nve-tabs-item>\n        <nve-tabs-item>Tab 2</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n      </nve-tabs>\n    </div>\n  </nve-card>\n\n  <main nve-layout=\"grid gap:lg span-items:6 pad:lg\">\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n    <nve-card style=\"height: 250px\">\n      <nve-card-header>\n        <div slot=\"title\">Card Title</div>\n      </nve-card-header>\n      <nve-card-content>Card Content</nve-card-content>\n    </nve-card>\n  </main>\n</div>\n"
-    },
-    {
-      "id": "LayoutHeaderPanelCards",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"column full align:stretch\">\n  <nve-card container=\"full\">\n    <div nve-layout=\"column gap:md align:stretch pad-top:md pad-left:xl pad-right:xl pad-bottom\">\n      <div nve-layout=\"row gap:sm align:vertical-center\">\n        <h1 nve-text=\"heading lg semibold\">Page Title</h1>\n        <nve-icon-button icon-name=\"more-actions\" style=\"margin-left: auto\"></nve-icon-button>\n        <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n      </div>\n      <nve-tabs>\n        <nve-tabs-item selected>Tab 1</nve-tabs-item>\n        <nve-tabs-item>Tab 2</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n        <nve-tabs-item>Tab 3</nve-tabs-item>\n      </nve-tabs>\n    </div>\n  </nve-card>\n\n  <div nve-layout=\"row\">\n    <section nve-layout=\"column full align:stretch gap:lg pad:lg\">\n      <nve-card style=\"height: 250px\">\n        <nve-card-header>\n          <div slot=\"title\">Card Title</div>\n        </nve-card-header>\n        <nve-card-content>Card Content</nve-card-content>\n      </nve-card>\n      <nve-card style=\"height: 250px\">\n        <nve-card-header>\n          <div slot=\"title\">Card Title</div>\n        </nve-card-header>\n        <nve-card-content>Card Content</nve-card-content>\n      </nve-card>\n    </section>\n\n    <nve-panel expanded style=\"min-width: 360px; z-index: 99; height: 100vh; position: sticky; top: 0; right: 0\">\n      <nve-panel-header>\n        <h2 slot=\"title\">Panel Heading</h2>\n      </nve-panel-header>\n      <nve-panel-content> Panel Content </nve-panel-content>\n    </nve-panel>\n  </div>\n</div>\n"
-    },
-    {
-      "id": "ButtonRowFilledIcon",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"row gap:xs\">\n  <nve-icon-button icon-name=\"double-chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button icon-name=\"chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button icon-name=\"chevron\" direction=\"down\"></nve-icon-button>\n  <nve-icon-button icon-name=\"double-chevron\" direction=\"down\"></nve-icon-button>\n</div>\n"
-    },
-    {
-      "id": "ButtonRowFlatIcon",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"row gap:xxxs\">\n  <nve-icon-button container=\"flat\" icon-name=\"double-chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" icon-name=\"chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" icon-name=\"chevron\" direction=\"down\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" icon-name=\"double-chevron\" direction=\"down\"></nve-icon-button>\n</div>\n"
-    },
-    {
-      "id": "ButtonRowSmallFlatIcon",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"row gap:xxxs\">\n  <nve-icon-button container=\"flat\" size=\"sm\" icon-name=\"double-chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" size=\"sm\" icon-name=\"chevron\" direction=\"up\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" size=\"sm\" icon-name=\"chevron\" direction=\"down\"></nve-icon-button>\n  <nve-icon-button container=\"flat\" size=\"sm\" icon-name=\"double-chevron\" direction=\"down\"></nve-icon-button>\n</div>\n"
-    },
-    {
-      "id": "ButtonRowFlatText",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"row gap:xxxs\">\n  <nve-button container=\"flat\">Button CTA</nve-button>\n  <nve-button container=\"flat\">Button CTA</nve-button>\n</div>\n"
-    },
-    {
-      "id": "ButtonRowFlatTextWithIcon",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"row gap:xxxs\">\n  <nve-button container=\"flat\">\n    <nve-icon name=\"gear\" style=\"--color: var(--nve-sys-text-muted-color)\"></nve-icon>\n    Sync MB\n  </nve-button>\n  <nve-button container=\"flat\">\n    <nve-icon name=\"undo\" style=\"--color: var(--nve-sys-text-muted-color)\"></nve-icon>\n    Revert Timestamps\n  </nve-button>\n  <nve-button container=\"flat\">\n    <nve-icon name=\"add\" style=\"--color: var(--nve-sys-text-muted-color)\"></nve-icon>\n    Add Event\n  </nve-button>\n</div>\n"
-    },
-    {
-      "id": "ButtonRowFilledTextWithIcon",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"row gap:xs\">\n  <nve-button>Button CTA</nve-button>\n  <nve-button>Button CTA</nve-button>\n  <nve-button interaction=\"emphasis\">Button CTA</nve-button>\n  <nve-icon-button icon-name=\"more-actions\"></nve-icon-button>\n</div>\n"
-    },
-    {
-      "id": "Trend",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"column gap:sm\">\n  <label nve-text=\"label medium sm muted\">Label</label>\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <h3 nve-text=\"heading semibold lg\">198,298</h3>\n    <nve-badge status=\"trend-up\">+15%</nve-badge>\n  </div>\n  <label nve-text=\"label medium sm muted\">Since last week</label>\n</div>\n"
-    },
-    {
-      "id": "TrendTopBadge",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"column gap:xs\">\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <label nve-text=\"label medium sm muted\">Since last week</label>\n    <nve-badge status=\"trend-up\">+15%</nve-badge>\n  </div>\n  <div nve-layout=\"column gap:sm\">\n    <h3 nve-text=\"heading semibold lg\">198,298</h3>\n    <label nve-text=\"label medium sm muted\">Label</label>\n  </div>\n</div>\n"
-    },
-    {
-      "id": "TrendBottomBadge",
-      "file": "patterns.stories.ts",
-      "template": "<div nve-layout=\"column gap:xs\">\n  <div nve-layout=\"column gap:sm\">\n    <label nve-text=\"label medium sm muted\">Label</label>\n    <h3 nve-text=\"heading semibold lg\">198,298</h3>\n  </div>\n  <div nve-layout=\"row gap:sm align:vertical-center\">\n    <label nve-text=\"label medium sm muted\">Since last week</label>\n    <nve-badge status=\"trend-up\">+15%</nve-badge>\n  </div>\n</div>\n"
-    },
-    {
-      "id": "ShortcutFilled",
-      "file": "patterns.stories.ts",
-      "template": "<kbd nve-text=\"code\">CMD + C</kbd>\n"
-    },
-    {
-      "id": "ShortcutFlat",
-      "file": "patterns.stories.ts",
-      "template": "<kbd nve-text=\"code flat\">CMD + C</kbd>\n"
-    },
-    {
-      "id": "ShortcutDropdown",
-      "file": "patterns.stories.ts",
-      "template": "<nve-button id=\"code-menu\">dropdown</nve-button>\n\n<nve-dropdown anchor=\"code-menu\" trigger=\"code-menu\" hidden>\n  <nve-menu>\n    <nve-menu-item> <nve-icon name=\"edit\"></nve-icon> Edit </nve-menu-item>\n\n    <nve-menu-item>\n      <div nve-layout=\"row align:space-between full\">\n        <span nve-layout=\"row gap:sm align:vertical-center\"> <nve-icon name=\"copy\"></nve-icon> Copy </span>\n\n        <kbd nve-text=\"code\">CMD + C</kbd>\n      </div>\n    </nve-menu-item>\n\n    <nve-menu-item> <nve-icon name=\"delete\"></nve-icon> Delete </nve-menu-item>\n  </nve-menu>\n</nve-dropdown>\n\n<script>\n  const dropdown = document.querySelector(\"nve-dropdown\");\n  dropdown.addEventListener(\"open\", () => (dropdown.hidden = false));\n  dropdown.addEventListener(\"close\", () => (dropdown.hidden = true));\n</script>\n"
-    }
-  ],
+  "patterns": [],
   "types": {
     "props": [
       {
@@ -13150,33 +13065,6 @@
         }
       },
       {
-        "file": "steps/steps.ts",
-        "lines": {
-          "total": 33,
-          "covered": 31,
-          "skipped": 0,
-          "pct": 93.93
-        },
-        "functions": {
-          "total": 16,
-          "covered": 15,
-          "skipped": 0,
-          "pct": 93.75
-        },
-        "statements": {
-          "total": 50,
-          "covered": 47,
-          "skipped": 0,
-          "pct": 94
-        },
-        "branches": {
-          "total": 17,
-          "covered": 10,
-          "skipped": 0,
-          "pct": 58.82
-        }
-      },
-      {
         "file": "panel/panel.ts",
         "lines": {
           "total": 33,
@@ -13347,8 +13235,8 @@
           "pct": 97.67
         },
         "functions": {
-          "total": 7,
-          "covered": 7,
+          "total": 6,
+          "covered": 6,
           "skipped": 0,
           "pct": 100
         },
@@ -13906,6 +13794,33 @@
         }
       },
       {
+        "file": "steps/steps.ts",
+        "lines": {
+          "total": 33,
+          "covered": 33,
+          "skipped": 0,
+          "pct": 100
+        },
+        "functions": {
+          "total": 16,
+          "covered": 16,
+          "skipped": 0,
+          "pct": 100
+        },
+        "statements": {
+          "total": 50,
+          "covered": 50,
+          "skipped": 0,
+          "pct": 100
+        },
+        "branches": {
+          "total": 17,
+          "covered": 13,
+          "skipped": 0,
+          "pct": 76.47
+        }
+      },
+      {
         "file": "steps/define.ts",
         "lines": {
           "total": 2,
@@ -13989,8 +13904,8 @@
       {
         "file": "select/select.ts",
         "lines": {
-          "total": 67,
-          "covered": 67,
+          "total": 70,
+          "covered": 70,
           "skipped": 0,
           "pct": 100
         },
@@ -14001,16 +13916,16 @@
           "pct": 100
         },
         "statements": {
-          "total": 96,
-          "covered": 96,
+          "total": 99,
+          "covered": 99,
           "skipped": 0,
           "pct": 100
         },
         "branches": {
-          "total": 24,
-          "covered": 23,
+          "total": 33,
+          "covered": 31,
           "skipped": 0,
-          "pct": 95.83
+          "pct": 93.93
         }
       },
       {
@@ -16122,20 +16037,20 @@
       {
         "file": "forms/control-group/control-group.ts",
         "lines": {
-          "total": 24,
-          "covered": 24,
+          "total": 23,
+          "covered": 23,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 9,
-          "covered": 9,
+          "total": 8,
+          "covered": 8,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 26,
-          "covered": 26,
+          "total": 25,
+          "covered": 25,
           "skipped": 0,
           "pct": 100
         },
@@ -16770,20 +16685,20 @@
       {
         "file": "combobox/combobox.ts",
         "lines": {
-          "total": 120,
-          "covered": 120,
+          "total": 119,
+          "covered": 119,
           "skipped": 0,
           "pct": 100
         },
         "functions": {
-          "total": 36,
-          "covered": 36,
+          "total": 35,
+          "covered": 35,
           "skipped": 0,
           "pct": 100
         },
         "statements": {
-          "total": 133,
-          "covered": 133,
+          "total": 132,
+          "covered": 132,
           "skipped": 0,
           "pct": 100
         },
@@ -17365,28 +17280,28 @@
     "coverageTotal": {
       "file": "total",
       "lines": {
-        "total": 2240,
-        "covered": 2208,
+        "total": 2241,
+        "covered": 2211,
         "skipped": 0,
-        "pct": 98.57
+        "pct": 98.66
       },
       "statements": {
-        "total": 2638,
-        "covered": 2600,
+        "total": 2639,
+        "covered": 2604,
         "skipped": 0,
-        "pct": 98.55
+        "pct": 98.67
       },
       "functions": {
-        "total": 744,
-        "covered": 726,
+        "total": 741,
+        "covered": 724,
         "skipped": 0,
-        "pct": 97.58
+        "pct": 97.7
       },
       "branches": {
-        "total": 1061,
-        "covered": 977,
+        "total": 1070,
+        "covered": 988,
         "skipped": 0,
-        "pct": 92.08
+        "pct": 92.33
       },
       "branchesTrue": {
         "total": 0,

@@ -44,7 +44,7 @@ function getCoverage() {
 }
 
 function getLighthouseScores() {
-  return JSON.parse(readFileSync(new URL('../.lighthouse/dist/report.json', import.meta.url)));
+  return JSON.parse(readFileSync(new URL('../.lighthouse/report.json', import.meta.url)));
 }
 
 function getManifest() {
@@ -121,7 +121,7 @@ function getElementStability(metadata) {
 }
 
 function getElementLighthouseScore(manifest, lighthouseReport) {
-  const name = manifest.tagName;
+  const name = manifest.tagName.replace('nve-', 'nve-');
   let lighthouse = lighthouseReport[name];
   if (!lighthouseReport[name]) {
     const match = Object.entries(lighthouseReport).find(

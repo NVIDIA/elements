@@ -9,9 +9,12 @@ import { globSync } from 'glob';
 
 process.env.NODE_ENV = 'production';
 
-const ROOT_DIR = 'dist-lighthouse';
-const DIST_DIR = `${ROOT_DIR}/dist`;
 const resolve = rel => path.resolve(process.cwd(), rel);
+
+const ROOT_DIR = '.lighthouse';
+const DIST_DIR = `${ROOT_DIR}/dist`;
+const CUSTOM_CONFIG_PATH = resolve('./vitest.lighthouse.build.ts');
+const HAS_CUSTOM_BUILD_CONFIG = fs.existsSync(CUSTOM_CONFIG_PATH);
 
 interface NetworkRequest {
   mimeType: string;
@@ -56,7 +59,7 @@ export class LighthouseRunner {
       return { ...p, [file.name]: file };
     }, {});
 
-    fs.writeFileSync(`${DIST_DIR}/report.json`, JSON.stringify(report, null, 2));
+    fs.writeFileSync(`${ROOT_DIR}/report.json`, JSON.stringify(report, null, 2));
   }
 
   async getReport(name, content) {
@@ -141,7 +144,7 @@ export class LighthouseRunner {
     const hasCustomStyleLinks = [...content.matchAll('<link')].length;
 
     return build({
-      configFile: false,
+      configFile: HAS_CUSTOM_BUILD_CONFIG ? resolve('./vitest.lighthouse.build.ts') : false,
       logLevel: 'error',
       base: `/${name}`,
       build: {
@@ -165,13 +168,7 @@ export class LighthouseRunner {
             index: {
               template: `/vitest.lighthouse.html`,
               render(template) {
-                if (hasCustomStyleLinks) {
-                  return template
-                    .replace('</body>', `${content}</body>`)
-                    .replace(`@import '@elements/elements/index.css';`, '');
-                } else {
-                  return template.replace('</body>', `${content}</body>`);
-                }
+                return template.replace('</body>', `${content}</body>`);
               }
             }
           }

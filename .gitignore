@@ -6,7 +6,7 @@
 node_modules
 dist
 dist-storybook
-dist-lighthouse
+.lighthouse
 coverage
 projects/elements/src/icon/icons.ts
 v8-compile-cache-0
