@@ -9,7 +9,7 @@ describe('color lighthouse report', () => {
           <input type="color" />
         </nve-color>
         <script type="module">
-          import '@elements/elements/color/define.js';
+          import '@nvidia-elements/core/color/define.js';
         </script>
       `);
 

@@ -9,7 +9,7 @@ describe('radio lighthouse report', () => {
         <input type="radio" />
       </nve-radio>
       <script type="module">
-        import '@elements/elements/radio/define.js';
+        import '@nvidia-elements/core/radio/define.js';
       </script>
     `);
 

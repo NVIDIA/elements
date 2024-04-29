@@ -13,7 +13,7 @@ describe('accordion lighthouse report', () => {
         </nve-accordion-content>
       </nve-accordion>
       <script type="module">
-        import '@elements/elements/accordion/define.js';
+        import '@nvidia-elements/core/accordion/define.js';
       </script>
     `);
 

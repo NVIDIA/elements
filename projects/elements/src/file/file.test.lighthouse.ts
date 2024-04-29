@@ -9,7 +9,7 @@ describe('file lighthouse report', () => {
         <input type="file" />
       </nve-file>
       <script type="module">
-        import '@elements/elements/file/define.js';
+        import '@nvidia-elements/core/file/define.js';
       </script>
     `);
 

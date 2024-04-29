@@ -6,7 +6,7 @@ describe('progress-bar lighthouse report', () => {
     const report = await runner.getReport('nve-progress-bar', /* html */`
       <nve-progress-bar></nve-progress-bar>
       <script type="module">
-        import '@elements/elements/progress-bar/define.js';
+        import '@nvidia-elements/core/progress-bar/define.js';
       </script>
     `);
 

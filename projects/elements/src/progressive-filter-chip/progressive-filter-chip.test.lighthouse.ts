@@ -13,7 +13,7 @@ describe('progressive-filter-chip lighthouse report', () => {
         <input type="date" value="2021-01-01" aria-label="date input" />
       </nve-progressive-filter-chip>
       <script type="module">
-        import '@elements/elements/progressive-filter-chip/define.js';
+        import '@nvidia-elements/core/progressive-filter-chip/define.js';
       </script>
     `);
 

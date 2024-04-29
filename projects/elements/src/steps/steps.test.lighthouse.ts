@@ -10,7 +10,7 @@ describe('steps lighthouse report', () => {
         <nve-steps-item disabled>Step 3</nve-steps-item>
       </nve-steps>
       <script type="module">
-        import '@elements/elements/steps/define.js';
+        import '@nvidia-elements/core/steps/define.js';
       </script>
     `);
 

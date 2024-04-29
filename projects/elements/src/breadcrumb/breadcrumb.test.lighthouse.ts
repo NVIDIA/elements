@@ -10,7 +10,7 @@ describe('breadcrumb lighthouse report', () => {
         <span>Static item</span>
       </nve-breadcrumb>
       <script type="module">
-        import '@elements/elements/breadcrumb/define.js';
+        import '@nvidia-elements/core/breadcrumb/define.js';
       </script>
     `);
 

@@ -10,7 +10,7 @@ describe('tabs lighthouse report', () => {
         <nve-tabs-item disabled>Tab 3</nve-tabs-item>
       </nve-tabs>
       <script type="module">
-        import '@elements/elements/tabs/define.js';
+        import '@nvidia-elements/core/tabs/define.js';
       </script>
     `);
 

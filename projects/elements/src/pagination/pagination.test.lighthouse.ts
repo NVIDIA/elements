@@ -6,7 +6,7 @@ describe('pagination lighthouse report', () => {
     const report = await runner.getReport('nve-pagination', /* html */`
       <nve-pagination name="page" value="1" step="10" items="100"></nve-pagination>
       <script type="module">
-        import '@elements/elements/pagination/define.js';
+        import '@nvidia-elements/core/pagination/define.js';
       </script>
     `);
 

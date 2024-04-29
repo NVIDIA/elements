@@ -9,7 +9,7 @@ describe('week lighthouse report', () => {
         <input type="week" />
       </nve-week>
       <script type="module">
-        import '@elements/elements/week/define.js';
+        import '@nvidia-elements/core/week/define.js';
       </script>
     `);
 

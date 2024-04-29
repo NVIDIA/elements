@@ -9,7 +9,7 @@ describe('textarea lighthouse report', () => {
         <textarea></textarea>
       </nve-textarea>
       <script type="module">
-        import '@elements/elements/textarea/define.js';
+        import '@nvidia-elements/core/textarea/define.js';
       </script>
     `);
 

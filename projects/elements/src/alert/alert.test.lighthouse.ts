@@ -6,7 +6,7 @@ describe('alert lighthouse report', () => {
     const report = await runner.getReport('nve-alert', /* html */`
       <nve-alert>alert</nve-alert>
       <script type="module">
-        import '@elements/elements/alert/define.js';
+        import '@nvidia-elements/core/alert/define.js';
       </script>
     `);
 
@@ -23,7 +23,7 @@ describe('alert lighthouse report', () => {
         <nve-alert>default</nve-alert>
       </nve-alert-group>
       <script type="module">
-        import '@elements/elements/alert/define.js';
+        import '@nvidia-elements/core/alert/define.js';
       </script>
     `);
 

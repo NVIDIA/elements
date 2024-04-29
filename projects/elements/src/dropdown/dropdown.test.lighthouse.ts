@@ -7,7 +7,7 @@ describe('dropdown lighthouse report', () => {
       <button id="btn">button</button>
       <nve-dropdown trigger="btn" anchor="btn" closable>hello</nve-dropdown>
       <script type="module">
-        import '@elements/elements/dropdown/define.js';
+        import '@nvidia-elements/core/dropdown/define.js';
       </script>
     `);
 

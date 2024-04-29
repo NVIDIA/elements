@@ -9,7 +9,7 @@ describe('password lighthouse report', () => {
         <input type="password" />
       </nve-password>
       <script type="module">
-        import '@elements/elements/password/define.js';
+        import '@nvidia-elements/core/password/define.js';
       </script>
     `);
 
