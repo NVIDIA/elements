@@ -1,0 +1,75 @@
+{
+  "name": "storybook-workspace",
+  "version": "0.0.0",
+  "type": "module",
+  "customElements": "custom-elements.json",
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit"
+  },
+  "dependencies": {
+    "@elements/elements": "workspace:^",
+    "@elements/elements-react": "workspace:^",
+    "@nvidia-elements/testing": "workspace:^",
+    "@nvidia-elements/themes": "workspace:^",
+    "fflate": "0.8.1",
+    "html-format": "1.1.2",
+    "lit": "3.1.3",
+    "showdown": "2.1.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "8.0.0",
+    "@storybook/addon-essentials": "8.0.0",
+    "@storybook/addon-links": "8.0.0",
+    "@storybook/addon-mdx-gfm": "8.0.0",
+    "@storybook/blocks": "8.0.0",
+    "@storybook/theming": "8.0.0",
+    "@storybook/web-components": "8.0.0",
+    "@storybook/web-components-vite": "8.0.0",
+    "storybook": "8.0.0",
+    "typescript": "5.3.3",
+    "vite": "5.2.9",
+    "vite-plugin-dts": "3.7.2"
+  },
+  "wireit": {
+    "dev": {
+      "command": "storybook dev --port 7777",
+      "service": true,
+      "clean": false,
+      "env": {
+        "WIREIT_LOGGER": "simple"
+      }
+    },
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build": {
+      "command": "storybook build --output-dir ./dist",
+      "files": [
+        ".storybook/**",
+        "src/**",
+        "package.json",
+        "tsconfig.json",
+        "../elements/src/**/*.mdx",
+        "../elements/src/**/*.stories.ts",
+        "../elements-react/docs/**/*.mdx",
+        "../elements-react/docs/**/*.stories.tsx",
+        "../labs/lighthouse/docs/**/*.mdx",
+        "../labs/lighthouse/docs/**/*.stories.ts",
+        "../testing/docs/**/*.mdx",
+        "../testing/docs/**/*.stories.ts",
+        "../themes/docs/**/*.mdx",
+        "../themes/docs/**/*.stories.t"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../elements:build"
+      ]
+    }
+  }
+}

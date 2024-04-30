@@ -9,20 +9,20 @@
     "ci": {
       "command": "echo 'building pages...'",
       "dependencies": [
-        "pages:demos:angular",
-        "pages:demos:angular-legacy",
-        "pages:demos:buildless",
-        "pages:demos:mpa",
-        "pages:demos:react",
-        "pages:demos:solidjs",
-        "pages:demos:typescript",
-        "pages:demos:vue",
-        "pages:elements"
+        "pages:starters:angular",
+        "pages:starters:angular-legacy",
+        "pages:starters:buildless",
+        "pages:starters:mpa",
+        "pages:starters:react",
+        "pages:starters:solidjs",
+        "pages:starters:typescript",
+        "pages:starters:vue",
+        "pages:storybook"
       ],
       "files": [],
       "output": []
     },
-    "pages:demos:angular": {
+    "pages:starters:angular": {
       "command": "cp -a ../starters/angular/dist/angular-app/browser/. ./dist/starters/angular",
       "dependencies": [
         "../starters/angular:ci",
@@ -33,7 +33,7 @@
         "dist/starters/angular/**"
       ]
     },
-    "pages:demos:angular-legacy": {
+    "pages:starters:angular-legacy": {
       "command": "cp -a ../starters/angular-legacy/dist/angular-app/. ./dist/starters/angular-legacy",
       "dependencies": [
         "../starters/angular-legacy:ci",
@@ -44,7 +44,7 @@
         "dist/starters/angular-legacy/**"
       ]
     },
-    "pages:demos:buildless": {
+    "pages:starters:buildless": {
       "command": "cp -a ../starters/buildless/dist/. ./dist/starters/buildless/",
       "dependencies": [
         "../starters/buildless:ci",
@@ -55,7 +55,7 @@
         "dist/starters/buildless/**"
       ]
     },
-    "pages:demos:mpa": {
+    "pages:starters:mpa": {
       "command": "cp -a ../starters/mpa/dist/. ./dist/starters/mpa",
       "dependencies": [
         "../starters/mpa:ci",
@@ -66,7 +66,7 @@
         "dist/starters/mpa/**"
       ]
     },
-    "pages:demos:react": {
+    "pages:starters:react": {
       "command": "cp -a ../starters/react/dist/. ./dist/starters/react",
       "dependencies": [
         "../starters/react:ci",
@@ -77,7 +77,7 @@
         "dist/starters/react/**"
       ]
     },
-    "pages:demos:solidjs": {
+    "pages:starters:solidjs": {
       "command": "cp -a ../starters/solidjs/dist/. ./dist/starters/solidjs",
       "dependencies": [
         "../starters/solidjs:ci",
@@ -88,7 +88,7 @@
         "dist/starters/solidjs/**"
       ]
     },
-    "pages:demos:typescript": {
+    "pages:starters:typescript": {
       "command": "cp -a ../starters/typescript/dist/. ./dist/starters/typescript",
       "dependencies": [
         "../starters/typescript:ci",
@@ -99,7 +99,7 @@
         "dist/starters/typescript/**"
       ]
     },
-    "pages:demos:vue": {
+    "pages:starters:vue": {
       "command": "cp -a ../starters/vue/dist/. ./dist/starters/vue",
       "dependencies": [
         "../starters/vue:ci",
@@ -110,10 +110,10 @@
         "dist/starters/vue/**"
       ]
     },
-    "pages:elements": {
-      "command": "cp -a ../elements/dist-storybook/. ./dist/api",
+    "pages:storybook": {
+      "command": "cp -a ../storybook/dist/. ./dist/api",
       "dependencies": [
-        "../elements:build:storybook",
+        "../storybook:build",
         "build"
       ],
       "files": [],
