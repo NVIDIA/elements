@@ -7,10 +7,10 @@ import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/toast/define.js';
 
 export default {
-  title: 'Foundations/Tokens/Examples'
+  title: 'Foundations/Themes/Examples'
 };
 
-export const Default = {
+export const All = {
   render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON))}`
 };
 
