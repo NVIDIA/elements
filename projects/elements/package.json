@@ -16,7 +16,6 @@
     "build:metadata": "wireit",
     "build:metadata:fast": "wireit",
     "build:metadata:elements": "wireit",
-    "build:storybook": "wireit",
     "test": "wireit",
     "test:all": "wireit",
     "test:watch": "wireit",
@@ -42,6 +41,7 @@
   ],
   "exports": {
     "./package.json": "./package.json",
+    "./CHANGELOG.md": "./CHANGELOG.md",
     "./custom-elements.json": "./dist/custom-elements.json",
     "./elements.css-vars.json": "./dist/elements.css-vars.json",
     "./elements.html-data.json": "./dist/elements.html-data.json",
@@ -238,8 +238,8 @@
     "@lit-labs/motion": "^1.0.7",
     "@nvidia-elements/themes": "workspace:^",
     "composed-offset-position": "^0.0.4",
-    "lit": "^3.1.2",
-    "lit-html": "^3.1.2"
+    "lit": "^3.1.3",
+    "lit-html": "^3.1.3"
   },
   "optionalDependencies": {
     "@lit-labs/scoped-registry-mixin": "^1.0.3",
@@ -255,14 +255,6 @@
     "@nvidia-elements/testing": "workspace:^",
     "@nvidia-elements/lighthouse": "workspace:^",
     "@rollup/plugin-terser": "0.4.4",
-    "@storybook/addon-docs": "8.0.0",
-    "@storybook/addon-essentials": "8.0.0",
-    "@storybook/addon-links": "8.0.0",
-    "@storybook/addon-mdx-gfm": "8.0.0",
-    "@storybook/blocks": "8.0.0",
-    "@storybook/theming": "8.0.0",
-    "@storybook/web-components": "8.0.0",
-    "@storybook/web-components-vite": "8.0.0",
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
     "@typescript/lib-dom": "npm:@types/web@0.0.142",
@@ -270,7 +262,6 @@
     "@vitest/coverage-istanbul": "1.1.0",
     "@vitest/utils": "1.1.0",
     "chai": "4.3.10",
-    "chart.js": "4.4.0",
     "cssnano": "6.0.1",
     "emoji-picker-element": "1.18.4",
     "esbuild": "0.19.9",
@@ -280,10 +271,8 @@
     "eslint-plugin-lit-a11y": "4.1.2",
     "eslint-plugin-rulesdir": "0.2.2",
     "eslint-plugin-wc": "2.0.4",
-    "fflate": "0.8.1",
     "glob": "10.3.10",
     "globals": "13.23.0",
-    "html-format": "1.1.2",
     "lighthouse": "11.4.0",
     "lit-analyzer": "2.0.1",
     "postcss": "8.4.31",
@@ -293,8 +282,6 @@
     "regenerator-runtime": "0.13.10",
     "rollup": "3.29.1",
     "rollup-plugin-minify-html-literals": "1.2.6",
-    "showdown": "2.1.0",
-    "storybook": "8.0.0",
     "style-dictionary": "3.8.0",
     "svgo": "3.0.2",
     "terser": "5.30.3",
@@ -309,15 +296,14 @@
     "dev": {
       "dependencies": [
         "build:watch",
-        "storybook:watch"
+        "../storybook:dev"
       ]
     },
     "ci": {
       "dependencies": [
         "lint",
         "build",
-        "test:all",
-        "build:storybook"
+        "test:all"
       ]
     },
     "build": {
@@ -661,33 +647,6 @@
         "tsconfig.json"
       ],
       "output": []
-    },
-    "build:storybook": {
-      "command": "storybook build --output-dir ./dist-storybook",
-      "files": [
-        ".storybook/**",
-        "src/**/*.stories.ts",
-        "src/**/*.stories.mdx",
-        "docs/**",
-        "package.json",
-        "tsconfig.json",
-        "tsconfig.lib.json",
-        "vite.config.ts"
-      ],
-      "output": [
-        "dist-storybook/**"
-      ],
-      "dependencies": [
-        "build"
-      ]
-    },
-    "storybook:watch": {
-      "command": "storybook dev --port 7777",
-      "service": true,
-      "clean": false,
-      "env": {
-        "WIREIT_LOGGER": "simple"
-      }
     },
     "prepublishonly": {
       "dependencies": [

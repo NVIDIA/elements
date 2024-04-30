@@ -17,9 +17,9 @@ import '@nvidia-elements/core/drawer/define.js';
 import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/json-viewer/define.js';
 import '@nvidia-elements/core/tabs/define.js';
-import metrics from 'build/metadata.json';
-import metricsMaglev from 'build/metadata.elements.json';
-import { ELEMENTS_VERSION } from '../.storybook/version.js';
+import metrics from '../../../elements/build/metadata.json';
+import metricsMaglev from '../../../elements/build/metadata.elements.json';
+import { ELEMENTS_VERSION } from '../../.storybook/version.js';
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
 const showdownOptions = { simplifiedAutoLink: true };
