@@ -1,7 +1,7 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import '@nvidia-elements/core/button/define.js';
 import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, Headings, Size, LeadingTrim } from './typography.stories';
-import { Text } from '../../../docs/tokens.stories';
+import { Text } from '../../../../themes/docs/tokens.stories';
 
 <Meta title="Foundations/Typography/Documentation" />
 
@@ -22,9 +22,11 @@ This enables full control of the visual styling of an element separate from the 
 
 Some frameworks and libraries may require additional configuration to use the `nve-text` attribute. See the links below for specific integration patterns for the following frameworks:
 
-<nve-button>
-  <a href="?path=/docs/integrations-lit--docs#forms"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit Integration</a>
-</nve-button>
+<div nve-layout="row align:center">
+  <nve-button>
+    <a href="?path=/docs/integrations-lit--docs#forms"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit Integration</a>
+  </nve-button>
+</div>
 
 ## Types
 
