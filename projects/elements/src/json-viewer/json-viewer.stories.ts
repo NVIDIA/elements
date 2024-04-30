@@ -1,7 +1,8 @@
 import { html, LitElement } from 'lit';
+import { state } from 'lit/decorators/state.js';
 import { define } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/json-viewer/define.js';
-import metrics from 'build/metadata.json';
+
 
 export default {
   title: 'Internal/JSON Viewer/Examples',
@@ -17,13 +18,20 @@ export const Default = {
 };
 
 class DyanamicJSONDemo extends LitElement {
+  @state() metrics = {};
+
   static metadata = {
     tag: 'dynamic-json-demo',
     version: 'demo'
   }
 
+  async connectedCallback() {
+    super.connectedCallback();
+    this.metrics = await import('../../build/metadata.json');
+  }
+
   render() {
-    return html`<nve-json-viewer .value=${metrics}></nve-json-viewer>`
+    return html`<nve-json-viewer .value=${this.metrics}></nve-json-viewer>`
   }
 }
 

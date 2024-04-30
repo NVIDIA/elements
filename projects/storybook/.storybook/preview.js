@@ -1,6 +1,5 @@
 import { setCustomElementsManifest } from '@storybook/web-components';
 import { themes } from '@storybook/theming';
-import { excludePrivateFields } from '@elements/elements/internal';
 import styles from '@elements/elements/index.css?inline';
 // import theme from '@nvidia-elements/themes/index.css?inline'; // using backwards compatible theme above
 // import dark from '@nvidia-elements/themes/dark.css?inline'; // using backwards compatible theme above
@@ -17,9 +16,9 @@ import format from 'html-format';
 
 const customElements = await import('@elements/elements/custom-elements.json');
 
-import('../docs/metrics.stories');
+import('../src/about/metrics.stories');
 
-setCustomElementsManifest(excludePrivateFields(customElements));
+setCustomElementsManifest(excludePrivateFields(customElements)); // excludePrivateFields
 
 const camelCase = str => str.replace(/\s*-\s*\w/g, parts => parts[parts.length-1].toUpperCase());
 const pascalCase = str => camelCase(str).replace(/^\w/, s => s.toUpperCase());
@@ -112,9 +111,10 @@ export const parameters = {
         'Integrations',
         'Foundations',
         [
-          'Tokens',
+          'Themes',
           [
             'Documentation',
+            'Design Tokens',
             'Size & Space',
             'Objects',
             'Layers',
@@ -123,11 +123,6 @@ export const parameters = {
             'Status',
             'Color',
             'Animation',
-            'Examples'
-          ],
-          'Themes',
-          [
-            'Documentation',
             'Examples'
           ],
           'Typography',
@@ -252,6 +247,8 @@ export const parameters = {
           'Button Row',
           'Examples'
         ],
+        'Testing',
+        'Labs',
         'Internal',
         'Deprecated'
       ]
@@ -372,3 +369,22 @@ export const decorators = [(story, { globals }) => {
   localStorage.setItem('nve-data-theme', globals.dataTheme);
   return story();
 }, playground];
+
+function excludePrivateFields(manifest) {
+  return {
+    ...manifest,
+    ...(manifest.modules && {
+      modules: manifest.modules?.map((module) => ({
+        ...module,
+        ...(module.declarations && {
+          declarations: module.declarations?.map((declaration) => ({
+            ...declaration,
+            ...(declaration.members && {
+              members: declaration.members?.filter((members) => members.privacy !== 'private' && !members.static && members.name !== 'i18n' && members.name !== '_internals')
+            })
+          }))
+        })
+      }))
+    })
+  };
+}

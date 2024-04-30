@@ -1,7 +1,7 @@
 import React from 'react';
 import { Unstyled } from '@storybook/blocks';
-import '@nvidia-elements/core/icon/define.js';
-import '@nvidia-elements/core/divider/define.js';
+// import '@nvidia-elements/core/icon/define.js';
+// import '@nvidia-elements/core/divider/define.js';
 
 export const H1 = ({ children }) => (
   <Unstyled>

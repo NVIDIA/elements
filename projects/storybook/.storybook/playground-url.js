@@ -1,9 +1,9 @@
 import { gzipSync } from 'fflate';
 import { html } from 'lit';
 import format from 'html-format';
-import packageFile from '../package.json';
+import packageFile from '@nvidia-elements/core/package.json';
 import { ELEMENTS_VERSION } from './version.js';
-import metrics from 'build/metadata.json';
+import metrics from '../../elements/build/metadata.json';
 
 export function playground(Story, context) {
   const story = Story();
@@ -12,15 +12,19 @@ export function playground(Story, context) {
   if (usesDynamicArgs || context.viewMode === 'story' || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
     return story;
   } else {
-    const source = getRenderString(story);
-    
-    // prettier 3.0 is async and Storybook decorators cannot be async, temporary workaround using html-format package https://github.com/storybookjs/storybook/issues/10467
-    // const formattedSource = prettier.default.format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
-    const formattedSource = format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), ' '.repeat(2), 120);
+    let source = story;
 
-    const files = serialize(addCssContent(createDefaultFiles(formattedSource, context), context));
-    const url = `https://elements-stage.nvidia.com/ui/elements-playground/?story=${context.id}&files=${files}&version=1`;
-    return html`${story} <nve-button class="playground-btn" size="sm"><a href="${url}" target="_blank">Playground</a></nve-button>`;
+    try {
+      source = getRenderString(story);
+      // prettier 3.0 is async and Storybook decorators cannot be async, temporary workaround using html-format package https://github.com/storybookjs/storybook/issues/10467
+      // const formattedSource = prettier.default.format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
+      const formattedSource = format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), ' '.repeat(2), 120);
+      const files = serialize(addCssContent(createDefaultFiles(formattedSource, context), context));
+      const url = `https://elements-stage.nvidia.com/ui/elements-playground/?story=${context.id}&files=${files}&version=1`;
+      return html`${story} <nve-button class="playground-btn" size="sm"><a href="${url}" target="_blank">Playground</a></nve-button>`;
+    } catch {
+      return source;
+    }
   }
 }
 
