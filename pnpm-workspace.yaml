@@ -14,5 +14,6 @@ packages:
   - 'projects/pages'
   - 'projects/elements'
   - 'projects/elements-react'
+  - 'projects/storybook'
   - 'projects/testing'
   - 'projects/themes'
