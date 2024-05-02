@@ -35,6 +35,10 @@ The configuration for the entire pipeline can be found in the root [.github/work
 
   Issues templates provide an easy way for users to file bugs or feature requests. This helps ensure the teams get the information they need to have a productive discussion with users.
 
+- [Security Audits](https://docs.gitlab.com/ee/user/application_security/sast/index.html)
+
+  Security audits such as runtime, dependency and secret detection scanning.
+
 ## Build
 
 The following are the repo wide tools that apply to all source code and projects.
