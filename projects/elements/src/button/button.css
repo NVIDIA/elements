@@ -202,14 +202,34 @@
 }
 
 :host([interaction*='flat']:state(selected)), /* deprecated */
-:host([container*='flat']:state(selected)),
 :host([container*='inline']:state(selected)) {
   --color: var(--nve-sys-interaction-selected-color);
   --background: transparent;
 }
 
+:host([container*='flat']:state(selected)) {
+  --color: var(--nve-sys-interaction-selected-color);
+}
+
+:host([container*='flat'][interaction='emphasis']:state(selected)) {
+  --color: var(--nve-sys-interaction-emphasis-background);
+  --background: color-mix(
+    in oklab,
+    var(--color) var(--nve-sys-contrast-mute-ratio),
+    var(--nve-sys-contrast-mute-color)
+  );
+}
+
+:host([container*='flat'][interaction='destructive']:state(selected)) {
+  --color: var(--nve-sys-interaction-destructive-background);
+  --background: color-mix(
+    in oklab,
+    var(--color) var(--nve-sys-contrast-mute-ratio),
+    var(--nve-sys-contrast-mute-color)
+  );
+}
+
 :host([interaction*='flat']:state(selected)) [interaction-state], /* deprecated */
-:host([container*='flat']:state(selected)) [interaction-state],
 :host([container*='inline']:state(selected)) [interaction-state] {
   --nve-sys-interaction-state-ratio: 0;
 }
