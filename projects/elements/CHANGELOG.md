@@ -1,3 +1,10 @@
+## [@elements/elements-v0.31.2](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.31.1...@elements/elements-v0.31.2) (2024-05-02)
+
+
+### Bug Fixes
+
+* **elements:** fix selected state of flat buttons ([20ac473](https://github.com/NVIDIA/elements/commit/20ac473b0a3e0b9a7b51df51327c57e46f30f1b0))
+
 ## [@elements/elements-v0.31.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.31.0...@elements/elements-v0.31.1) (2024-04-20)
 
 
