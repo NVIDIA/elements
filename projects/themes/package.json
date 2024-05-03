@@ -48,10 +48,7 @@
       ],
       "output": [
         "dist/"
-      ],
-      "env": {
-        "WIREIT_LOGGER": "simple"
-      }
+      ]
     },
     "build:css-var-completions": {
       "command": "node ./build/css-var-completions.js",
