@@ -127,7 +127,7 @@ export class Combobox extends Control implements ContainerElement {
           .map(
             o => html`
         <mlv-menu-item .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
-          ${multiple ? html`<mlv-icon name=${o.selected ? 'check' : ''} size="sm"></mlv-icon>` : nothing}
+          ${multiple ? html`<mlv-icon .name=${o.selected ? 'check' : undefined} size="sm"></mlv-icon>` : nothing}
           ${options.length < 50 ? html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : getDisplayValue(o)}
         </mlv-menu-item>`
           )}

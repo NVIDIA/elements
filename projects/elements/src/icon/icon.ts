@@ -38,7 +38,7 @@ export class Icon extends LitElement {
   /**
    * The name of the icon SVG sprite to render.
    */
-  @property({ type: String, reflect: true }) name: IconName;
+  @property({ type: String, reflect: true }) name?: IconName;
 
   @state() private svg: string;
 

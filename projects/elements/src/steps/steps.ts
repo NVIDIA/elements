@@ -1,5 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { state } from 'lit/decorators/state.js';
 import { when } from 'lit/directives/when.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import {
@@ -58,7 +59,7 @@ export class StepsItem extends BaseButton {
   @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
 
   /** @private */
-  @property({ type: Number }) index;
+  @state() index;
 
   static styles = useStyles([stepsItemStyleSheet]);
 

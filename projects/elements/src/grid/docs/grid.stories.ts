@@ -107,7 +107,7 @@ export const SingleSelect = {
     <mlv-grid-row>
       <mlv-grid-cell>
         <mlv-radio>
-          <input type="radio" ?checked=${i === 1} name="single-select" .value=${i} aria-label="select row ${i}" />
+          <input type="radio" ?checked=${i === 1} name="single-select" .value=${`${i}`} aria-label="select row ${i}" />
         </mlv-radio>
       </mlv-grid-cell>
       ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}

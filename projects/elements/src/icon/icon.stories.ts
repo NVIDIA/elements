@@ -210,8 +210,8 @@ export const Themes = {
 
 export const Registration = {
   render: () => html`
-    <mlv-icon name="inference-ai-posters" style="--width: 75px; --height: 75px;"></mlv-icon>
-    <mlv-icon name="automotive-vehicles-autonomous-car-side" style="--width: 75px; --height: 75px;"></mlv-icon>
+    <mlv-icon name=${'inference-ai-posters' as any} style="--width: 75px; --height: 75px;"></mlv-icon>
+    <mlv-icon name=${'automotive-vehicles-autonomous-car-side' as any} style="--width: 75px; --height: 75px;"></mlv-icon>
 
     <script type="module">
       customElements.get('mlv-icon').add({
@@ -229,7 +229,7 @@ export const Registration = {
 export const Alias = {
   render: () => html`
     <mlv-icon name="chevron"></mlv-icon>
-    <mlv-icon name="chevron-up"></mlv-icon>
+    <mlv-icon name=${'chevron-up' as any}></mlv-icon>
 
     <script type="module">
       customElements.get('mlv-icon').alias({
@@ -241,7 +241,7 @@ export const Alias = {
 
 export const Source = {
   render: () => html`
-    <mlv-icon name="https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg" style="--width: 75px; --height: 75px;"></mlv-icon>
+    <mlv-icon name=${'https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg' as any} style="--width: 75px; --height: 75px;"></mlv-icon>
   `
 }
 
@@ -818,11 +818,11 @@ export const Branding = {
   render: () => html`
     <div mlv-layout="column gap:md">
       <div mlv-layout="row align:wrap gap:xs">
-        ${GUI_NAMES.map(name => html`<mlv-icon name="${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/line/${name}.svg`}" size="xl"></mlv-icon>`)}
+        ${GUI_NAMES.map(name => html`<mlv-icon name="${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/line/${name}.svg` as any}" size="xl"></mlv-icon>`)}
       </div>
       <mlv-divider></mlv-divider>
       <div mlv-layout="row align:wrap gap:xs">
-        ${GUI_NAMES.map(name => html`<mlv-icon name="${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/fill/${name}.svg`}" size="xl"></mlv-icon>`)}
+        ${GUI_NAMES.map(name => html`<mlv-icon name="${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/fill/${name}.svg` as any}" size="xl"></mlv-icon>`)}
       </div>
     </div>
   `
