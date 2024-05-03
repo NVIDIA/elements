@@ -33,7 +33,7 @@ export class ProgressBar extends LitElement {
     const classes = { full: this.value === this.max, minWidth: this.value > 0 };
 
     return html`
-      <progress .max=${this.max} .value=${this.value} class=${classMap(classes)}></progress>
+      <progress .max=${this.max as number} .value=${this.value as number} class=${classMap(classes)}></progress>
     `;
   }
 }
