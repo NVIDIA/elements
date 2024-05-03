@@ -321,10 +321,7 @@
       "service": true,
       "dependencies": [
         "build"
-      ],
-      "env": {
-        "WIREIT_LOGGER": "simple"
-      }
+      ]
     },
     "build:tsc": {
       "command": "tsc --project ./tsconfig.lib.json --noEmit --emitDeclarationOnly false",
@@ -370,10 +367,7 @@
         "build:manifest",
         "build:inter",
         "../themes:build"
-      ],
-      "env": {
-        "WIREIT_LOGGER": "simple"
-      }
+      ]
     },
     "build:bundle": {
       "clean": false,
@@ -502,10 +496,7 @@
         "test:axe",
         "test:coverage",
         "test:lighthouse"
-      ],
-      "env": {
-        "WIREIT_LOGGER": "simple"
-      }
+      ]
     },
     "test": {
       "command": "vitest run || exit 0",
@@ -523,7 +514,6 @@
         "../testing:ci"
       ],
       "env": {
-        "WIREIT_LOGGER": "simple",
         "NODE_ENV": "production"
       }
     },
@@ -545,23 +535,16 @@
         "build"
       ],
       "env": {
-        "WIREIT_LOGGER": "simple",
         "NODE_ENV": "production"
       }
     },
     "test:coverage:gitlab": {
       "command": "node ./build/coverage-gitlab.js",
-      "dependencies": [],
-      "env": {
-        "WIREIT_LOGGER": "simple"
-      }
+      "dependencies": []
     },
     "test:watch": {
       "command": "vitest --watch",
-      "service": true,
-      "env": {
-        "WIREIT_LOGGER": "simple"
-      }
+      "service": true
     },
     "test:lighthouse": {
       "command": "vitest run --config=vitest.lighthouse.ts",
@@ -579,7 +562,6 @@
         "../labs/lighthouse:ci"
       ],
       "env": {
-        "WIREIT_LOGGER": "simple",
         "NODE_ENV": "production"
       }
     },
@@ -598,7 +580,6 @@
         "../labs/lighthouse:ci"
       ],
       "env": {
-        "WIREIT_LOGGER": "simple",
         "LIGHTHOUSE_ALL": "true"
       }
     },
@@ -619,7 +600,6 @@
         "build"
       ],
       "env": {
-        "WIREIT_LOGGER": "simple",
         "NODE_ENV": "production"
       }
     },
@@ -641,7 +621,7 @@
       "output": []
     },
     "lint:analyzer": {
-      "command": "lit-analyzer src --rules.no-incompatible-type-binding off",
+      "command": "lit-analyzer src --strict",
       "files": [
         "src/**/*.ts",
         "tsconfig.json"

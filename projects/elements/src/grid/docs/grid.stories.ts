@@ -107,7 +107,7 @@ export const SingleSelect = {
     <nve-grid-row>
       <nve-grid-cell>
         <nve-radio>
-          <input type="radio" ?checked=${i === 1} name="single-select" .value=${i} aria-label="select row ${i}" />
+          <input type="radio" ?checked=${i === 1} name="single-select" .value=${`${i}`} aria-label="select row ${i}" />
         </nve-radio>
       </nve-grid-cell>
       ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
