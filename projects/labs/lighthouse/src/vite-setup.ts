@@ -1,10 +1,9 @@
-import { beforeAll, afterAll } from 'vitest';
 import { runner } from './index.js';
 
-beforeAll(async () => {
+export async function setup() {
   await runner.open();
-});
 
-afterAll(async () => {
-  await runner.close();
-});
+  return async () => {
+    await runner.close();
+  };
+}
