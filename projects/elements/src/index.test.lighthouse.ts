@@ -16,13 +16,13 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(14.8); // total
-    expect(report.payload.css.requests['index.css'].kb).toBeLessThan(5.1); // @nvidia-elements/themes/index.css
+    expect(report.payload.css.kb).toBeLessThan(16); // total
+    expect(report.payload.css.requests['index.css'].kb).toBeLessThan(5.9); // @nvidia-elements/themes/index.css
     expect(report.payload.css.requests['compact.css'].kb).toBeLessThan(0.4); // @nvidia-elements/themes/compact.css
-    expect(report.payload.css.requests['dark.css'].kb).toBeLessThan(4.1); // @nvidia-elements/themes/dark.css
+    expect(report.payload.css.requests['dark.css'].kb).toBeLessThan(4.9); // @nvidia-elements/themes/dark.css
     expect(report.payload.css.requests['high.css'].kb).toBeLessThan(1); // @nvidia-elements/themes/high-contrast.css
     expect(report.payload.css.requests['reduced.css'].kb).toBeLessThan(0.6); // @nvidia-elements/themes/reduced-motion.css
-    expect(report.payload.css.requests['ddb.css'].kb).toBeLessThan(0.75); // @nvidia-elements/themes/ddb-dark.css
+    expect(report.payload.css.requests['ddb.css'].kb).toBeLessThan(0.8); // @nvidia-elements/themes/ddb-dark.css
     expect(report.payload.css.requests['module.css'].kb).toBeLessThan(1.6); // @nvidia-elements/core/css/module.layout.css
     expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.3); // @nvidia-elements/core/css/module.typography.css
   });
