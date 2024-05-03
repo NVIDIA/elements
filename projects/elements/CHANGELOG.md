@@ -1,3 +1,10 @@
+## [@elements/elements-v0.31.3](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.31.2...@elements/elements-v0.31.3) (2024-05-03)
+
+
+### Bug Fixes
+
+* **themes:** convert to oklch color model ([4de8a8e](https://github.com/NVIDIA/elements/commit/4de8a8e17099e7540987dd32720447c50f0bf026))
+
 ## [@elements/elements-v0.31.2](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.31.1...@elements/elements-v0.31.2) (2024-05-02)
 
 
