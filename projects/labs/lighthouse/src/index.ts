@@ -27,7 +27,7 @@ type NetworkRequestDetails = FormattedIcu<Details> & { items: NetworkRequest[] }
 export class LighthouseRunner {
   #server: PreviewServer;
   #browser: Browser;
-  #port = 4174;
+  #port = 4175;
   #report = {};
 
   async open() {
@@ -36,16 +36,23 @@ export class LighthouseRunner {
       fs.mkdirSync(DIST_DIR);
     }
 
+    console.log('Starting Chromium...');
     this.#browser = await chromium.launch({
       args: ['--headless', '--remote-debugging-port=9222', '--enable-experimental-web-platform-features']
     });
+
+    console.log('Starting Vite Server...');
     this.#server = await preview({
       root: ROOT_DIR,
       preview: { port: this.#port, open: false }
     });
+
+    this.#port = this.#server.httpServer.address().port;
   }
 
   async close() {
+    console.log('Stopping Chromium...');
+    console.log('Stopping Vite Server...');
     this.#server.httpServer.close();
     await this.#browser.close();
 
@@ -60,6 +67,7 @@ export class LighthouseRunner {
     }, {});
 
     fs.writeFileSync(`${ROOT_DIR}/report.json`, JSON.stringify(report, null, 2));
+    console.log(`Lighthouse report written to ${ROOT_DIR}/report.json`);
   }
 
   async getReport(name, content) {
