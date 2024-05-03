@@ -36,10 +36,7 @@
     "dev": {
       "command": "storybook dev --port 7777",
       "service": true,
-      "clean": false,
-      "env": {
-        "WIREIT_LOGGER": "simple"
-      }
+      "clean": false
     },
     "ci": {
       "dependencies": [
