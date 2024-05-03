@@ -7,7 +7,7 @@ const defaultConfig = {
     bail: 2,
     isolate: false,
     fileParallelism: false,
-    onConsoleLog(log: string, type: 'stdout' | 'stderr'): boolean | void {
+    onConsoleLog(log: string): boolean | void {
       if (log.includes('plugin vite-plugin-virtual-html')) {
         return false;
       }

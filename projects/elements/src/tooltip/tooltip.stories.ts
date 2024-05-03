@@ -221,7 +221,6 @@ class DynamicAnchorPositionDemo extends LitElement {
       display: block;
       left: 0;
       transition: left 1s linear;
-      container-type: inline-size;
     }
 
     #anchor {
