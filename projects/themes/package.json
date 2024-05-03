@@ -39,7 +39,7 @@
       ]
     },
     "build:style-dictionary": {
-      "command": "node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js",
+      "command": "node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js && node ./build/version.js",
       "files": [
         "src/**",
         "build/style-dictionary.config.js",
