@@ -3,13 +3,17 @@ import { deepMerge } from './utils.js';
 const defaultConfig = {
   logLevel: 'info',
   test: {
-    poolOptions: {
-      threads: {
-        singleThread: true
+    retry: 1,
+    bail: 2,
+    isolate: false,
+    fileParallelism: false,
+    onConsoleLog(log: string, type: 'stdout' | 'stderr'): boolean | void {
+      if (log.includes('plugin vite-plugin-virtual-html')) {
+        return false;
       }
     },
     reporters: ['basic'],
-    setupFiles: ['@nvidia-elements/lighthouse/vite-setup.js'],
+    globalSetup: ['@nvidia-elements/lighthouse/vite-setup.js'],
     include: [process.env.LIGHTHOUSE_ALL ? 'src/**/*.test.lighthouse.ts' : 'src/index.test.lighthouse.ts'],
     testTimeout: 60000,
     server: {
