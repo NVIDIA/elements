@@ -11,7 +11,7 @@ describe(Color.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-color>
+    <mlv-color style="--background: #dde1e4">
         <label>label</label>
         <input type="color" />
       </mlv-color>
