@@ -72,7 +72,7 @@ class IconDemo extends LitElement {
 
     <mlv-card>
       <mlv-card-content mlv-layout="column gap:lg">
-        <form @input=${this.#input} mlv-layout="row gap:md align:vertical-center full">
+        <form @submit=${e => e.preventDefault()} @input=${this.#input} mlv-layout="row gap:md align:vertical-center full">
           <mlv-search style="width: 350px">
             <input type="search" @input=${e => this.iconSearchKey = e.target.value} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
           </mlv-search>
