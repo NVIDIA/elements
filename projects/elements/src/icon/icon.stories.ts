@@ -72,7 +72,7 @@ class IconDemo extends LitElement {
 
     <nve-card>
       <nve-card-content nve-layout="column gap:lg">
-        <form @input=${this.#input} nve-layout="row gap:md align:vertical-center full">
+        <form @submit=${e => e.preventDefault()} @input=${this.#input} nve-layout="row gap:md align:vertical-center full">
           <nve-search style="width: 350px">
             <input type="search" @input=${e => this.iconSearchKey = e.target.value} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
           </nve-search>
