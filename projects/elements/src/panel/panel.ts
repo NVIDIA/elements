@@ -189,7 +189,7 @@ export class Panel extends LitElement {
           ${when(
             !this.closable,
             () => html`
-              <mlv-icon-button container=${this.expanded ? 'flat' : ''} icon-name="double-chevron"
+              <mlv-icon-button .container=${this.expanded ? 'flat' : undefined} icon-name="double-chevron"
                 @click=${() => this.#typeExpandableController.toggle()}
                 .direction=${this.#direction}
                 .expanded=${this.expanded}

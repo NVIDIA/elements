@@ -394,7 +394,7 @@ class ComboboxDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-button id="filter-btn" ?pressed=${this.value.filter(v => v.name.length).length}><mlv-icon name="filter"></mlv-icon> </mlv-icon>filters</mlv-button>
+      <mlv-button id="filter-btn" ?pressed=${!!this.value.filter(v => v.name.length).length}><mlv-icon name="filter"></mlv-icon> </mlv-icon>filters</mlv-button>
       <mlv-dropdown id="one" hidden trigger="filter-btn" anchor="filter-btn" @open=${e => e.target.hidden = false} @close=${e => e.target.hidden = true} style="--min-width: 400px; --min-height: 500px;">
         <mlv-progressive-filter-demo @change=${e => this.value = e.detail} .value=${this.value} .schema=${schema}></mlv-progressive-filter-demo>
       </mlv-dropdown>
@@ -442,7 +442,7 @@ class ProgressiveFilterDemo extends LitElement {
           ['select', () => html`<mlv-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value="${v}">${v}</option>`)}</select></mlv-select>`]
         ], () => html`<mlv-combobox><input type="text" placeholder="value" disabled /></mlv-combobox>`)}
       </mlv-progressive-filter-chip>`)}
-      <mlv-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
+      <mlv-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || !!this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
         <mlv-icon name="add"></mlv-icon> Add Filter
       </mlv-button>
     `;

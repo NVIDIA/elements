@@ -48,7 +48,7 @@ export const Inline = {
 
 export const Deprecated = {
   render: () => html`
-    <mlv-button interaction="emphasize">emphasize</mlv-button>
+    <mlv-button interaction=${'emphasize' as any}>emphasize</mlv-button>
     <mlv-button interaction="flat">flat</mlv-button>
     <mlv-button interaction="flat-emphasize">flat-emphasize</mlv-button>
     <mlv-button interaction="flat-destructive">flat-destructive</mlv-button>

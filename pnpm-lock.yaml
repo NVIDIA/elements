@@ -16,6 +16,12 @@ importers:
       '@elements/elements':
         specifier: workspace:^
         version: link:projects/elements
+      '@nvidia-elements/core':
+        specifier: workspace:@elements/elements@^
+        version: link:projects/elements
+      '@nvidia-elements/core-react':
+        specifier: workspace:@elements/elements-react@^
+        version: link:projects/elements-react
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:projects/themes
@@ -115,8 +121,8 @@ importers:
         version: 4.0.10
     devDependencies:
       '@custom-elements-manifest/analyzer':
-        specifier: 0.9.0
-        version: 0.9.0
+        specifier: 0.10.2
+        version: 0.10.2
       '@jspm/generator':
         specifier: 1.1.12
         version: 1.1.12(google-protobuf@3.21.2)
@@ -190,8 +196,8 @@ importers:
         specifier: 11.4.0
         version: 11.4.0
       lit-analyzer:
-        specifier: 2.0.1
-        version: 2.0.1
+        specifier: 2.0.3
+        version: 2.0.3
       postcss:
         specifier: 8.4.31
         version: 8.4.31
@@ -223,8 +229,8 @@ importers:
         specifier: 5.30.3
         version: 5.30.3
       ts-lit-plugin:
-        specifier: 1.2.1
-        version: 1.2.1
+        specifier: 2.0.2
+        version: 2.0.2
       ts-morph:
         specifier: 20.0.0
         version: 20.0.0
@@ -692,11 +698,11 @@ importers:
 
   projects/storybook:
     dependencies:
-      '@elements/elements':
-        specifier: workspace:^
+      '@nvidia-elements/core':
+        specifier: workspace:@elements/elements@^
         version: link:../elements
-      '@elements/elements-react':
-        specifier: workspace:^
+      '@nvidia-elements/core-react':
+        specifier: workspace:@elements/elements-react@^
         version: link:../elements-react
       '@nvidia-elements/testing':
         specifier: workspace:^
@@ -5384,9 +5390,9 @@ packages:
     engines: { node: '>=4.0.0' }
     dev: true
 
-  /@custom-elements-manifest/analyzer@0.9.0:
+  /@custom-elements-manifest/analyzer@0.10.2:
     resolution:
-      { integrity: sha512-aYCc+CmUamFG3FbHO2m1hz/qik61pgYIJkN986k2BPamQmgomST1ZnRngDjUSt6RmO8NrZydxUzg+AKdEaE4EA== }
+      { integrity: sha512-YkfAfaNGSulnXxyIAHU3K8Z7bYGmIU2MlPvEaQPXnWUaIFMo0p3VEVYvByvENnVCQKPPDyjlkCm73u/zRnRvMA== }
     hasBin: true
     dependencies:
       '@custom-elements-manifest/find-dependencies': 0.0.5
@@ -5398,7 +5404,7 @@ packages:
       custom-elements-manifest: 1.0.0
       debounce: 1.2.1
       globby: 11.0.4
-      typescript: 4.3.5
+      typescript: 5.4.5
     dev: true
 
   /@custom-elements-manifest/find-dependencies@0.0.5:
@@ -6553,15 +6559,6 @@ packages:
       { integrity: sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug== }
     dev: true
 
-  /@mrmlnc/readdir-enhanced@2.2.1:
-    resolution:
-      { integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g== }
-    engines: { node: '>=4' }
-    dependencies:
-      call-me-maybe: 1.0.2
-      glob-to-regexp: 0.3.0
-    dev: true
-
   /@multiformats/multiaddr-to-uri@9.0.7:
     resolution:
       { integrity: sha512-i3ldtPMN6XJt+MCi34hOl0wGuGEHfWWMw6lmNag5BpckPwPTf9XGOOFMmh7ed/uO3Vjah/g173iOe61HTQVoBA== }
@@ -6723,12 +6720,6 @@ packages:
     dependencies:
       '@nodelib/fs.stat': 2.0.5
       run-parallel: 1.2.0
-
-  /@nodelib/fs.stat@1.1.3:
-    resolution:
-      { integrity: sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw== }
-    engines: { node: '>= 6' }
-    dev: true
 
   /@nodelib/fs.stat@2.0.5:
     resolution:
@@ -9571,7 +9562,7 @@ packages:
       { integrity: sha512-XVKH79pk4d3EHRhofete8eAnqto1e8mCRAqPV00KLNFzCWSe8sWmLnqKCqkPNARC6nksMaGrATnA5sPDRllMpQ== }
     engines: { node: '>=10.0.0' }
     dependencies:
-      semver: 7.5.4
+      semver: 7.6.0
     dev: true
 
   /@webassemblyjs/ast@1.11.1:
@@ -11111,11 +11102,6 @@ packages:
       set-function-length: 1.1.1
     dev: true
 
-  /call-me-maybe@1.0.2:
-    resolution:
-      { integrity: sha512-HpX65o1Hnr9HH25ojC1YGs7HCQLq0GCOibSaWER0eNpgJ/Z1MZv2mTc7+xh6WOPxbRVcmgbv4hGU+uSQ/2xFZQ== }
-    dev: true
-
   /callsites@3.1.0:
     resolution:
       { integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ== }
@@ -11493,15 +11479,6 @@ packages:
       string-width: 3.1.0
       strip-ansi: 5.2.0
       wrap-ansi: 5.1.0
-    dev: true
-
-  /cliui@6.0.0:
-    resolution:
-      { integrity: sha512-t6wbgtoCXvAzst7QgXxJYqPt0usEfbgQdftEPbLL/cvv6HPE5VgvqCuAIDR0NgU52ds6rFwqrgakNLrHEjCbrQ== }
-    dependencies:
-      string-width: 4.2.3
-      strip-ansi: 6.0.1
-      wrap-ansi: 6.2.0
     dev: true
 
   /cliui@7.0.4:
@@ -14144,21 +14121,6 @@ packages:
     resolution:
       { integrity: sha512-/d9sfos4yxzpwkDkuN7k2SqFKtYNmCTzgfEpz82x34IM9/zc8KGxQoXg1liNC/izpRM/MBdt44Nmx41ZWqk+FQ== }
 
-  /fast-glob@2.2.7:
-    resolution:
-      { integrity: sha512-g1KuQwHOZAmOZMuBtHdxDtju+T2RT8jgCC9aANsbpdiDDTSnjgfuVsIBNKbUeJI3oKMRExcfNDtJl4OhbffMsw== }
-    engines: { node: '>=4.0.0' }
-    dependencies:
-      '@mrmlnc/readdir-enhanced': 2.2.1
-      '@nodelib/fs.stat': 1.1.3
-      glob-parent: 3.1.0
-      is-glob: 4.0.3
-      merge2: 1.4.1
-      micromatch: 3.1.10(supports-color@6.1.0)
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /fast-glob@3.3.2:
     resolution:
       { integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow== }
@@ -14887,11 +14849,6 @@ packages:
     engines: { node: '>=10.13.0' }
     dependencies:
       is-glob: 4.0.3
-    dev: true
-
-  /glob-to-regexp@0.3.0:
-    resolution:
-      { integrity: sha512-Iozmtbqv0noj0uDDqoL0zNq0VBEfK2YFoMAZoxJe4cwphvLR+JskfF30QhXHOR4m3KrE6NLRYw+U9MRXvifyig== }
     dev: true
 
   /glob-to-regexp@0.4.1:
@@ -17463,26 +17420,9 @@ packages:
       wrap-ansi: 9.0.0
     dev: true
 
-  /lit-analyzer@1.2.1:
+  /lit-analyzer@2.0.3:
     resolution:
-      { integrity: sha512-OEARBhDidyaQENavLbzpTKbEmu5rnAI+SdYsH4ia1BlGlLiqQXoym7uH1MaRPtwtUPbkhUfT4OBDZ+74VHc3Cg== }
-    hasBin: true
-    dependencies:
-      chalk: 2.4.2
-      didyoumean2: 4.1.0
-      fast-glob: 2.2.7
-      parse5: 5.1.0
-      ts-simple-type: 1.0.7
-      vscode-css-languageservice: 4.3.0
-      vscode-html-languageservice: 3.1.0
-      web-component-analyzer: 1.1.7
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /lit-analyzer@2.0.1:
-    resolution:
-      { integrity: sha512-4bHJLCbxywMHd9bnVkLDkCSHXs/KrlwUks75EhYtJNdzH07O5BSVdZdadbw4T2AvuYxb0xRO4ZjqgQJCkp8Kjg== }
+      { integrity: sha512-XiAjnwVipNrKav7r3CSEZpWt+mwYxrhPRVC7h8knDmn/HWTzzWJvPe+mwBcL2brn4xhItAMzZhFC8tzzqHKmiQ== }
     hasBin: true
     dependencies:
       '@vscode/web-custom-data': 0.4.8
@@ -24795,13 +24735,12 @@ packages:
     engines: { node: '>=6.10' }
     dev: true
 
-  /ts-lit-plugin@1.2.1:
+  /ts-lit-plugin@2.0.2:
     resolution:
-      { integrity: sha512-k/Me+aT1N9ckC/KuJCAlAJgCHFezOxuOGOzBE0q42xnKbJnUMNl08WqWF6C7OKecCPHIMRk5Wj5o6MDsmt9+qA== }
+      { integrity: sha512-DPXlVxhjWHxg8AyBLcfSYt2JXgpANV1ssxxwjY98o26gD8MzeiM68HFW9c2VeDd1CjoR3w7B/6/uKxwBQe+ioA== }
     dependencies:
-      lit-analyzer: 1.2.1
-    transitivePeerDependencies:
-      - supports-color
+      lit-analyzer: 2.0.3
+      web-component-analyzer: 2.0.0
     dev: true
 
   /ts-morph@20.0.0:
@@ -24810,11 +24749,6 @@ packages:
     dependencies:
       '@ts-morph/common': 0.21.0
       code-block-writer: 12.0.0
-    dev: true
-
-  /ts-simple-type@1.0.7:
-    resolution:
-      { integrity: sha512-zKmsCQs4dZaeSKjEA7pLFDv7FHHqAFLPd0Mr//OIJvu8M+4p4bgSFJwZSEBEg3ec9W7RzRz1vi8giiX0+mheBQ== }
     dev: true
 
   /ts-simple-type@2.0.0-next.0:
@@ -24987,13 +24921,6 @@ packages:
     dependencies:
       is-typedarray: 1.0.0
 
-  /typescript@3.9.10:
-    resolution:
-      { integrity: sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q== }
-    engines: { node: '>=4.2.0' }
-    hasBin: true
-    dev: true
-
   /typescript@4.3.5:
     resolution:
       { integrity: sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA== }
@@ -25013,6 +24940,13 @@ packages:
       { integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw== }
     engines: { node: '>=14.17' }
     hasBin: true
+
+  /typescript@5.4.5:
+    resolution:
+      { integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ== }
+    engines: { node: '>=14.17' }
+    hasBin: true
+    dev: true
 
   /typical@4.0.0:
     resolution:
@@ -25912,17 +25846,6 @@ packages:
       defaults: 1.0.4
     dev: true
 
-  /web-component-analyzer@1.1.7:
-    resolution:
-      { integrity: sha512-SqCqN4nU9fU+j0CKXJQ8E4cslLsaezhagY6xoi+hoNPPd55GzR6MY1r5jkoJUVu+g4Wy4uB+JglTt7au4vQ1uA== }
-    hasBin: true
-    dependencies:
-      fast-glob: 3.3.2
-      ts-simple-type: 1.0.7
-      typescript: 3.9.10
-      yargs: 15.4.1
-    dev: true
-
   /web-component-analyzer@2.0.0:
     resolution:
       { integrity: sha512-UEvwfpD+XQw99sLKiH5B1T4QwpwNyWJxp59cnlRwFfhUW6JsQpw5jMeMwi7580sNou8YL3kYoS7BWLm+yJ/jVQ== }
@@ -26686,15 +26609,6 @@ packages:
       decamelize: 1.2.0
     dev: true
 
-  /yargs-parser@18.1.3:
-    resolution:
-      { integrity: sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ== }
-    engines: { node: '>=6' }
-    dependencies:
-      camelcase: 5.3.1
-      decamelize: 1.2.0
-    dev: true
-
   /yargs-parser@20.2.9:
     resolution:
       { integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w== }
@@ -26720,24 +26634,6 @@ packages:
       which-module: 2.0.1
       y18n: 4.0.3
       yargs-parser: 13.1.2
-    dev: true
-
-  /yargs@15.4.1:
-    resolution:
-      { integrity: sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A== }
-    engines: { node: '>=8' }
-    dependencies:
-      cliui: 6.0.0
-      decamelize: 1.2.0
-      find-up: 4.1.0
-      get-caller-file: 2.0.5
-      require-directory: 2.1.1
-      require-main-filename: 2.0.0
-      set-blocking: 2.0.0
-      string-width: 4.2.3
-      which-module: 2.0.1
-      y18n: 4.0.3
-      yargs-parser: 18.1.3
     dev: true
 
   /yargs@16.2.0:

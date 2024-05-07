@@ -35,7 +35,7 @@ export class Button extends BaseButton {
   /**
    * Determines the container of the button. Flat is used for nesting within other containers or more muted style. Inline is used for inline content such as text.
    */
-  @property({ type: String, reflect: true }) container: 'flat' | 'inline';
+  @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
   /**
    * Determines size of the button.
