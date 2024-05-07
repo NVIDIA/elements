@@ -82,10 +82,10 @@ const ThemePicker = () => {
         <mlv-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
           <mlv-switch-group>
             <label>API <mlv-icon-button slot="label" id="api-hint-btn" container="flat" icon-name="information-circle-stroke" size="sm" style={{'--height': '12px'}}></mlv-icon-button></label>
-            {/* <mlv-switch>
+            <mlv-switch>
               <label>Maglev Scope</label>
               <input type="checkbox" value="scope" defaultChecked={globals.scope === 'mlv'} onChange={e => updateGlobals({ scope: e.target.checked ? 'mlv' : 'nve' })} />
-            </mlv-switch> */}
+            </mlv-switch>
             <mlv-switch>
               <label>React</label>
               <input type="checkbox" value="sourceType" defaultChecked={globals.sourceType === 'react'} onChange={e => updateGlobals({ sourceType: e.target.checked ? 'react' : 'html' })} />

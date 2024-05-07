@@ -10,7 +10,8 @@ import brand from '@nvidia-elements/themes/brand.css?inline';
 import brandDark from '@nvidia-elements/themes/brand-dark.css?inline';
 import responsiveStyles from '@nvidia-elements/core/css/module.responsive.css?inline';
 import { playground } from './playground-url.js';
-import { H1, H2, H3, P, UL, OL } from './markdown.jsx';
+import { updateScope } from './utils.js';
+import { H1, H2, H3, P, UL, OL, PRE } from './markdown.jsx';
 import '@nvidia-elements/core/button/define.js';
 import format from 'html-format';
 
@@ -19,9 +20,6 @@ const customElements = await import('@nvidia-elements/core/custom-elements.json'
 import('../src/about/metrics.stories');
 
 setCustomElementsManifest(excludePrivateFields(customElements)); // excludePrivateFields
-
-const camelCase = str => str.replace(/\s*-\s*\w/g, parts => parts[parts.length-1].toUpperCase());
-const pascalCase = str => camelCase(str).replace(/^\w/, s => s.toUpperCase());
 
 export const parameters = {
   badges: ['stable'],
@@ -39,7 +37,8 @@ export const parameters = {
       h3: H3,
       p: P,
       ul: UL,
-      ol: OL
+      ol: OL,
+      pre: PRE
     },
     theme: themes.dark,
     source: {
@@ -52,17 +51,7 @@ export const parameters = {
         // basic html formatting
         source = excludes ? source : format(source.replaceAll('=""', ''), ' '.repeat(2), 120); // https://github.com/storybookjs/storybook/issues/10467
 
-        // replace tag names with appropriate global configuration
-        source = source.replaceAll(/(mlv-[\w-]*|nve-[\w-]*)/g, (_, value) => {
-          const isElement = !value.includes('mlv-layout') && !value.includes('mlv-text');
-          const isReact = context.globals.sourceType === 'react';
-
-          value = isElement ? value.replaceAll('mlv', context.globals.scope).replaceAll('nve', context.globals.scope) : value;
-          value = isReact && isElement ? pascalCase(value) : value;
-          return value;
-        });
-
-        return source;
+        return updateScope(source, { scope: context.globals.scope, sourceType: context.globals.sourceType  });
       }
     }
   },
@@ -367,7 +356,7 @@ window.parent.document.head.appendChild(parentStyle);
 export const decorators = [(story, { globals }) => {
   const themes = window.parent.document.querySelector('[nve-theme]')?.getAttribute('nve-theme') ?? globals.theme;
   window.document.querySelector('html').setAttribute('nve-theme', themes.trim());
-  localStorage.setItem('nve-data-theme', globals.dataTheme);
+  window.NVE_SB_GLOBALS = globals;
   return story();
 }, playground];
 
