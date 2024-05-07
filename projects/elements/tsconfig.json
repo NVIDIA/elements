@@ -18,11 +18,7 @@
     "paths": {
       "@nvidia-elements/core": ["./src/index.js"],
       "@nvidia-elements/core/*": ["./src/*"],
-      "@nvidia-elements/core/*.js": ["./src/*.js"],
-      "@elements/elements": ["./src/index.js"],
-      "@elements/elements/*": ["./src/*"],
-      "@elements/elements/*.js": ["./src/*.js"],
-      "elements-lighthouse": [".lighthouse/index.js"]
+      "@nvidia-elements/core/*.js": ["./src/*.js"]
     },
     "plugins": [
       {
