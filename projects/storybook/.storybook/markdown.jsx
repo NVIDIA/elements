@@ -1,7 +1,7 @@
 import React from 'react';
 import { Unstyled } from '@storybook/blocks';
-// import '@nvidia-elements/core/icon/define.js';
-// import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/divider/define.js';
 
 export const H1 = ({ children }) => (
   <Unstyled>
@@ -47,7 +47,15 @@ export const P = (args) => {
 export const UL = (args) => {
   return (
   <Unstyled>
-    <ul nve-text="list">{args.children}</ul>
+    <ul nve-text="list" nve-layout="column gap:xs">{args.children}</ul>
+  </Unstyled>
+  )
+}
+
+export const OL = (args) => {
+  return (
+  <Unstyled>
+    <ol nve-text="list" nve-layout="column gap:xs">{args.children}</ol>
   </Unstyled>
   )
 }

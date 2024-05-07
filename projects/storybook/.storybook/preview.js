@@ -1,6 +1,6 @@
 import { setCustomElementsManifest } from '@storybook/web-components';
 import { themes } from '@storybook/theming';
-import styles from '@elements/elements/index.css?inline';
+import styles from '@nvidia-elements/core/index.css?inline';
 // import theme from '@nvidia-elements/themes/index.css?inline'; // using backwards compatible theme above
 // import dark from '@nvidia-elements/themes/dark.css?inline'; // using backwards compatible theme above
 import fontInter from '@nvidia-elements/themes/fonts/inter.css?inline';
@@ -8,13 +8,13 @@ import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline
 import ddb from '@nvidia-elements/themes/ddb-dark.css?inline';
 import brand from '@nvidia-elements/themes/brand.css?inline';
 import brandDark from '@nvidia-elements/themes/brand-dark.css?inline';
-import responsiveStyles from '@elements/elements/css/module.responsive.css?inline';
+import responsiveStyles from '@nvidia-elements/core/css/module.responsive.css?inline';
 import { playground } from './playground-url.js';
-import { H1, H2, H3, P, UL } from './markdown.jsx';
-import '@elements/elements/button/define.js';
+import { H1, H2, H3, P, UL, OL } from './markdown.jsx';
+import '@nvidia-elements/core/button/define.js';
 import format from 'html-format';
 
-const customElements = await import('@elements/elements/custom-elements.json');
+const customElements = await import('@nvidia-elements/core/custom-elements.json');
 
 import('../src/about/metrics.stories');
 
@@ -38,7 +38,8 @@ export const parameters = {
       h2: H2,
       h3: H3,
       p: P,
-      ul: UL
+      ul: UL,
+      ol: OL
     },
     theme: themes.dark,
     source: {
