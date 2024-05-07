@@ -1,5 +1,7 @@
 import React from 'react';
-import { Unstyled } from '@storybook/blocks';
+import { Unstyled, Source } from '@storybook/blocks';
+import { addons } from '@storybook/preview-api';
+import { updateScope } from './utils.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/divider/define.js';
 
@@ -58,4 +60,20 @@ export const OL = (args) => {
     <ol nve-text="list" nve-layout="column gap:xs">{args.children}</ol>
   </Unstyled>
   )
+}
+
+export const PRE = (args) => {
+  // workaround https://github.com/storybookjs/storybook/issues/20634
+  const globals = { ...addons.getChannel().data.setGlobals[0].globals, ...window.NVE_SB_GLOBALS };
+
+  if (args.children?.props?.children) {
+    const code = updateScope(args.children.props.children, {
+      scope: globals?.scope ?? 'mlv',
+      sourceType: globals?.sourceType ?? ''
+    });
+
+    return (<Source dark code={code} type={args.children.props.className.replace('language-', '')} />)
+  } else {
+    return (args.children)
+  }
 }
