@@ -394,7 +394,7 @@ class ComboboxDemo extends LitElement {
 
   render() {
     return html`
-      <nve-button id="filter-btn" ?pressed=${this.value.filter(v => v.name.length).length}><nve-icon name="filter"></nve-icon> </nve-icon>filters</nve-button>
+      <nve-button id="filter-btn" ?pressed=${!!this.value.filter(v => v.name.length).length}><nve-icon name="filter"></nve-icon> </nve-icon>filters</nve-button>
       <nve-dropdown id="one" hidden trigger="filter-btn" anchor="filter-btn" @open=${e => e.target.hidden = false} @close=${e => e.target.hidden = true} style="--min-width: 400px; --min-height: 500px;">
         <nve-progressive-filter-demo @change=${e => this.value = e.detail} .value=${this.value} .schema=${schema}></nve-progressive-filter-demo>
       </nve-dropdown>
@@ -442,7 +442,7 @@ class ProgressiveFilterDemo extends LitElement {
           ['select', () => html`<nve-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value="${v}">${v}</option>`)}</select></nve-select>`]
         ], () => html`<nve-combobox><input type="text" placeholder="value" disabled /></nve-combobox>`)}
       </nve-progressive-filter-chip>`)}
-      <nve-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
+      <nve-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || !!this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
         <nve-icon name="add"></nve-icon> Add Filter
       </nve-button>
     `;

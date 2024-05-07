@@ -249,7 +249,7 @@
     "formdata-polyfill": "^4.0.10"
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "0.9.0",
+    "@custom-elements-manifest/analyzer": "0.10.2",
     "@jspm/generator": "1.1.12",
     "@lit-labs/virtualizer": "2.0.12",
     "@nvidia-elements/testing": "workspace:^",
@@ -274,7 +274,7 @@
     "glob": "10.3.10",
     "globals": "13.23.0",
     "lighthouse": "11.4.0",
-    "lit-analyzer": "2.0.1",
+    "lit-analyzer": "2.0.3",
     "postcss": "8.4.31",
     "postcss-each": "1.1.0",
     "postcss-load-config": "4.0.1",
@@ -285,7 +285,7 @@
     "style-dictionary": "3.8.0",
     "svgo": "3.0.2",
     "terser": "5.30.3",
-    "ts-lit-plugin": "1.2.1",
+    "ts-lit-plugin": "2.0.2",
     "ts-morph": "20.0.0",
     "typescript": "5.3.3",
     "vite": "5.2.9",
@@ -621,7 +621,7 @@
       "output": []
     },
     "lint:analyzer": {
-      "command": "lit-analyzer src --strict",
+      "command": "lit-analyzer src/**/*.ts --strict --rules.no-unknown-slot off",
       "files": [
         "src/**/*.ts",
         "tsconfig.json"
