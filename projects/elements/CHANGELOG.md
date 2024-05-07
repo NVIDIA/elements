@@ -1,3 +1,10 @@
+## [@elements/elements-v0.32.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.31.3...@elements/elements-v0.32.0) (2024-05-07)
+
+
+### Features
+
+* **elements:** update icons library ([eddd8cc](https://github.com/NVIDIA/elements/commit/eddd8ccd14d76967e4bdacfec04321e1541802e8))
+
 ## [@elements/elements-v0.31.3](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.31.2...@elements/elements-v0.31.3) (2024-05-03)
 
 
