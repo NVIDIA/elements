@@ -62,7 +62,7 @@ export class ProgressRing extends LitElement {
         </svg>
 
         <slot name="status-icon">
-          ${this.status !== 'accent' ? html`<nve-icon .name=${statusIcons[this.status] as any} .status=${this.status} aria-hidden="true"></nve-icon>` : ''}
+          ${this.status !== 'accent' ? html`<nve-icon .name=${statusIcons[this.status] as any} .status=${this.status as any} aria-hidden="true"></nve-icon>` : ''}
         </slot>
       </div>
     `;
