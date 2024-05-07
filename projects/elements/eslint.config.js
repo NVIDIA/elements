@@ -85,7 +85,7 @@ export default [
               message: 'import individual decorators https://lit.dev/docs/components/decorators/#importing-decorators'
             }
           ],
-          patterns: ['lit-element', 'lit-element/*', 'lit-html', 'lit-html/*', '@elements/elements/test']
+          patterns: ['lit-element', 'lit-element/*', 'lit-html', 'lit-html/*']
         }
       ],
       'rulesdir/reserved-property-names': ['error'],

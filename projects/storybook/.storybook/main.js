@@ -46,10 +46,8 @@ export default {
           '@storybook/addon-docs': resolve('node_modules/@storybook/addon-docs'),
           '@nvidia-elements/themes/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/themes/CHANGELOG.md?raw'),
           '@nvidia-elements/testing/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/testing/CHANGELOG.md?raw'),
-          '@nvidia-elements/core/CHANGELOG.md?raw': resolve('node_modules/@elements/elements/CHANGELOG.md?raw'),
-          '@nvidia-elements/core/internal': resolve('node_modules/@elements/elements/dist/internal'),
-          '@nvidia-elements/core': '@elements/elements', // temporary alias until 1.0
-          '@nvidia-elements/core-react': '@elements/elements-react', // temporary alias until 1.0
+          '@nvidia-elements/core/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/core/CHANGELOG.md?raw'),
+          '@nvidia-elements/core/internal': resolve('node_modules/@nvidia-elements/core/dist/internal')
         }
       }
     });

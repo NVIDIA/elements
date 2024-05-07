@@ -2,6 +2,7 @@ import { createRequire } from 'module';
 import { resolve } from 'node:path';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { readdir } from 'node:fs/promises';
+import { SCOPE } from '@nvidia-elements/core';
 
 const require = createRequire(import.meta.url);
 
@@ -55,9 +56,9 @@ function getManifest() {
 }
 
 function getElementsVersion(data) {
-  const dependencies = data?.dependencies && data?.dependencies['@elements/elements'];
-  const devDependencies = data?.devDependencies && data?.devDependencies['@elements/elements'];
-  const peerDependencies = data?.peerDependencies && data?.peerDependencies['@elements/elements'];
+  const dependencies = data?.dependencies && data?.dependencies[`${SCOPE}/elements`];
+  const devDependencies = data?.devDependencies && data?.devDependencies[`${SCOPE}/elements`];
+  const peerDependencies = data?.peerDependencies && data?.peerDependencies[`${SCOPE}/elements`];
   return dependencies || devDependencies || peerDependencies;
 }
 
