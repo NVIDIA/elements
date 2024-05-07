@@ -19,6 +19,7 @@
     "showdown": "2.1.0"
   },
   "devDependencies": {
+    "@storybook/core-events": "8.0.0",
     "@storybook/addon-docs": "8.0.0",
     "@storybook/addon-essentials": "8.0.0",
     "@storybook/addon-links": "8.0.0",
