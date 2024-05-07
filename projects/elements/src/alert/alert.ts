@@ -26,6 +26,7 @@ import styles from './alert.css?inline';
  * @slot icon - Icon slot is placed on the left side of the alert. Icons are typically used to represent the alert's status.
  * @slot prefix - Prefix slot is placed between the icon and the content. Prefixes are typically used to represent the alert's status.
  * @slot actions - Actions are placed on the right side of the alert. Actions are typically buttons, but can also be links. Actions should be used for actions that the user can take to resolve the alert.
+ * @slot content - Content for large overflow text.
  * @slot - Default content placed inside of the alert.
  * @cssprop --gap
  * @cssprop --font-size
@@ -53,7 +54,7 @@ export class Alert extends LitElement {
   };
 
   /** Defines visual treatment to represent a ongoing task or support status. */
-  @property({ type: String, reflect: true }) status: SupportStatus | TaskStatus | 'muted';
+  @property({ type: String, reflect: true }) status?: SupportStatus | TaskStatus | 'muted';
 
   /** When used in an `alert-group` the `closable` property enables alerts to be dismissed within the same group. */
   @property({ type: Boolean }) closable = false;
