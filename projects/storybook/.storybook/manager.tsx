@@ -1,15 +1,15 @@
 import React from 'react';
 import { addons, types, useGlobals } from '@storybook/manager-api';
 
-import '@elements/elements/forms/define.js';
-import '@elements/elements/select/define.js';
-import '@elements/elements/switch/define.js';
-import '@elements/elements/icon/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/drawer/define.js';
-import '@elements/elements/divider/define.js';
-import '@elements/elements/tooltip/define.js';
-import '@elements/elements/icon-button/define.js';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/switch/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/drawer/define.js';
+import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/tooltip/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 function updateTheme(themes) {
   const previewIframe = document.querySelector('#storybook-preview-iframe');

@@ -3,6 +3,7 @@ import { html } from 'lit';
 import format from 'html-format';
 import packageFile from '@nvidia-elements/core/package.json';
 import { ELEMENTS_VERSION } from './version.js';
+import { SCOPE } from '@nvidia-elements/core';
 import metrics from '../../elements/build/metadata.json';
 
 export function playground(Story, context) {
@@ -67,8 +68,8 @@ function createDefaultFiles(content, context) {
       content: `<!doctype html>
 <html mlv-theme="${themes}">
 <head>
-  <link rel="stylesheet" href="@elements/elements/dist/index.css" />
-  <link rel="stylesheet" href="@elements/elements/dist/inter.css" />
+  <link rel="stylesheet" href="${SCOPE}/elements/dist/index.css" />
+  <link rel="stylesheet" href="${SCOPE}/elements/dist/inter.css" />
   <script type="module" src="./index.js"></script>
   ${context.id.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
 </head>
@@ -85,8 +86,8 @@ ${content}
     'importmap.json': {
       content: `{
   "imports": {
-    "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}",
-    "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@${ELEMENTS_VERSION}/"
+    "${SCOPE}/elements": "${CDN_MODULES_URL}/${SCOPE}/elements@${ELEMENTS_VERSION}",
+    "${SCOPE}/elements/": "${CDN_MODULES_URL}/${SCOPE}/elements@${ELEMENTS_VERSION}/"
   }
 }
 `
@@ -97,7 +98,7 @@ ${content}
 function getImports() {
   return metrics.elements
     .filter(e => packageFile.exports[`./${e.name.replace('mlv-', '')}/define.js`])
-    .map(e => `import '@elements/elements/${e.name.replace('mlv-', '')}/define.js';`)
+    .map(e => `import '${SCOPE}/elements/${e.name.replace('mlv-', '')}/define.js';`)
     .join('\n');
 }
 

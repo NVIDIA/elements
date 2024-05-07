@@ -1,5 +1,5 @@
 {
-  "created": "2024-05-01T14:52:27.902Z",
+  "created": "2024-05-07T17:18:47.375Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -118,10 +118,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.642,
+            "kb": 18.691,
             "requests": {
               "index.js": {
-                "kb": 18.058,
+                "kb": 18.107,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -234,10 +234,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.642,
+            "kb": 18.691,
             "requests": {
               "index.js": {
-                "kb": 18.058,
+                "kb": 18.107,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -330,10 +330,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.642,
+            "kb": 18.691,
             "requests": {
               "index.js": {
-                "kb": 18.058,
+                "kb": 18.107,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -398,10 +398,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.642,
+            "kb": 18.691,
             "requests": {
               "index.js": {
-                "kb": 18.058,
+                "kb": 18.107,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -470,6 +470,10 @@
             "name": "actions"
           },
           {
+            "description": "Content for large overflow text.",
+            "name": "content"
+          },
+          {
             "description": "Default content placed inside of the alert.",
             "name": ""
           }
@@ -478,7 +482,7 @@
           {
             "name": "status",
             "type": {
-              "text": "'accent' | 'warning' | 'success' | 'danger' | 'running' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored' | 'muted'"
+              "text": "'accent' | 'warning' | 'success' | 'danger' | 'running' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored' | 'muted' | default"
             },
             "description": "Defines the visual treatment to represent a interaction status. (tasks, support, trends)",
             "fieldName": "status"
@@ -540,10 +544,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.744,
+            "kb": 18.765,
             "requests": {
               "index.js": {
-                "kb": 17.97,
+                "kb": 17.991,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -674,22 +678,46 @@
         ],
         "cssProperties": [
           {
-            "name": "--gap"
+            "name": "--gap",
+            "inheritedFrom": {
+              "name": "AlertGroup",
+              "module": "/src/alert/alert-group.js"
+            }
           },
           {
-            "name": "--color"
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "AlertGroup",
+              "module": "/src/alert/alert-group.js"
+            }
           },
           {
-            "name": "--padding"
+            "name": "--padding",
+            "inheritedFrom": {
+              "name": "AlertGroup",
+              "module": "/src/alert/alert-group.js"
+            }
           },
           {
-            "name": "--font-size"
+            "name": "--font-size",
+            "inheritedFrom": {
+              "name": "AlertGroup",
+              "module": "/src/alert/alert-group.js"
+            }
           },
           {
-            "name": "--background"
+            "name": "--background",
+            "inheritedFrom": {
+              "name": "AlertGroup",
+              "module": "/src/alert/alert-group.js"
+            }
           },
           {
-            "name": "--border-radius"
+            "name": "--border-radius",
+            "inheritedFrom": {
+              "name": "AlertGroup",
+              "module": "/src/alert/alert-group.js"
+            }
           }
         ]
       },
@@ -702,10 +730,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.744,
+            "kb": 18.765,
             "requests": {
               "index.js": {
-                "kb": 17.97,
+                "kb": 17.991,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -837,10 +865,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.747,
+            "kb": 18.768,
             "requests": {
               "index.js": {
-                "kb": 17.973,
+                "kb": 17.994,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -956,10 +984,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.729,
+            "kb": 18.751,
             "requests": {
               "index.js": {
-                "kb": 17.972,
+                "kb": 17.994,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -1394,7 +1422,7 @@
           {
             "name": "container",
             "type": {
-              "text": "'flat' | 'inline'"
+              "text": "'flat' | 'inline' | default"
             },
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
             "fieldName": "container"
@@ -1570,10 +1598,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.585,
+            "kb": 10.607,
             "requests": {
               "index.js": {
-                "kb": 10.585,
+                "kb": 10.607,
                 "name": "index.js"
               }
             }
@@ -2238,6 +2266,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "status",
@@ -2319,7 +2365,53 @@
             "name": "--height"
           },
           {
-            "name": "--cursor"
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ]
       },
@@ -2332,10 +2424,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.224,
+            "kb": 22.246,
             "requests": {
               "index.js": {
-                "kb": 22.224,
+                "kb": 22.246,
                 "name": "index.js"
               }
             }
@@ -2408,6 +2500,16 @@
             "description": "Set each slotted control + label + control message layout"
           }
         ],
+        "slots": [
+          {
+            "description": "Control input elements",
+            "name": "",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "layout",
@@ -2416,6 +2518,29 @@
             },
             "description": "Determines the overall layout of the element.",
             "fieldName": "layout",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          }
+        ],
+        "cssProperties": [
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          },
+          {
+            "name": "--label-width",
             "inheritedFrom": {
               "name": "ControlGroup",
               "module": "/src/forms/control-group/control-group.js"
@@ -2432,10 +2557,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.224,
+            "kb": 22.246,
             "requests": {
               "index.js": {
-                "kb": 22.224,
+                "kb": 22.246,
                 "name": "index.js"
               }
             }
@@ -2496,6 +2621,24 @@
           {
             "name": "reset",
             "description": "Resets control value to initial attribute value and clears any active validation rules."
+          }
+        ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ],
         "attributes": [
@@ -2570,6 +2713,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -2581,10 +2775,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.595,
+            "kb": 23.616,
             "requests": {
               "index.js": {
-                "kb": 22.541,
+                "kb": 22.562,
                 "name": "index.js"
               },
               "dropper.svg.js": {
@@ -2683,7 +2877,11 @@
         "slots": [
           {
             "description": "default slot for input",
-            "name": ""
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           },
           {
             "description": "slot for icon to be placed before the input",
@@ -2692,6 +2890,14 @@
           {
             "description": "slot for dropdown footer content",
             "name": "footer"
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ],
         "attributes": [
@@ -2792,7 +2998,11 @@
             "name": "--background"
           },
           {
-            "name": "--color"
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           },
           {
             "name": "--border-radius"
@@ -2801,13 +3011,52 @@
             "name": "--border"
           },
           {
-            "name": "--cursor"
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           },
           {
             "name": "--font-weight"
           },
           {
             "name": "--width"
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ]
       },
@@ -2820,10 +3069,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.633,
+            "kb": 39.671,
             "requests": {
               "index.js": {
-                "kb": 38.859,
+                "kb": 38.897,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3056,10 +3305,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.61,
+            "kb": 22.635,
             "requests": {
               "index.js": {
-                "kb": 21.836,
+                "kb": 21.861,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3142,10 +3391,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.61,
+            "kb": 22.635,
             "requests": {
               "index.js": {
-                "kb": 21.836,
+                "kb": 21.861,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3242,10 +3491,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.61,
+            "kb": 22.635,
             "requests": {
               "index.js": {
-                "kb": 21.836,
+                "kb": 21.861,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3310,6 +3559,24 @@
           {
             "name": "reset",
             "description": "Resets control value to initial attribute value and clears any active validation rules."
+          }
+        ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ],
         "attributes": [
@@ -3384,6 +3651,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -3395,10 +3713,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.272,
+            "kb": 23.295,
             "requests": {
               "index.js": {
-                "kb": 22.379,
+                "kb": 22.402,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3486,6 +3804,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "status",
@@ -3558,6 +3894,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -3569,10 +3956,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.277,
+            "kb": 23.299,
             "requests": {
               "index.js": {
-                "kb": 22.384,
+                "kb": 22.406,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3812,10 +4199,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.412,
+            "kb": 28.445,
             "requests": {
               "index.js": {
-                "kb": 27.6,
+                "kb": 27.633,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3923,10 +4310,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.412,
+            "kb": 28.445,
             "requests": {
               "index.js": {
-                "kb": 27.6,
+                "kb": 27.633,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -3983,10 +4370,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.412,
+            "kb": 28.445,
             "requests": {
               "index.js": {
-                "kb": 27.6,
+                "kb": 27.633,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4478,10 +4865,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.675,
+            "kb": 28.71,
             "requests": {
               "index.js": {
-                "kb": 27.863,
+                "kb": 27.898,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4584,10 +4971,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.675,
+            "kb": 28.71,
             "requests": {
               "index.js": {
-                "kb": 27.863,
+                "kb": 27.898,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4644,10 +5031,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.675,
+            "kb": 28.71,
             "requests": {
               "index.js": {
-                "kb": 27.863,
+                "kb": 27.898,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4704,10 +5091,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.675,
+            "kb": 28.71,
             "requests": {
               "index.js": {
-                "kb": 27.863,
+                "kb": 27.898,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4914,10 +5301,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.236,
+            "kb": 29.277,
             "requests": {
               "index.js": {
-                "kb": 28.424,
+                "kb": 28.465,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5053,6 +5440,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "status",
@@ -5125,6 +5530,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -5136,10 +5592,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.044,
+            "kb": 22.066,
             "requests": {
               "index.js": {
-                "kb": 22.044,
+                "kb": 22.066,
                 "name": "index.js"
               }
             }
@@ -5859,7 +6315,7 @@
           {
             "name": "name",
             "type": {
-              "text": "'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'start' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out'"
+              "text": "'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'start' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out' | default"
             },
             "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
             "fieldName": "name"
@@ -6054,7 +6510,11 @@
         "slots": [
           {
             "description": "default",
-            "name": ""
+            "name": "",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
           }
         ],
         "attributes": [
@@ -6089,7 +6549,7 @@
           {
             "name": "container",
             "type": {
-              "text": "'flat' | 'inline'"
+              "text": "'flat' | 'inline' | default"
             },
             "description": "\nDetermines the container bounds of the element\n- `flat` element has white space bounds but reduced visual container\n- `inline` element container is reduced to fit within inline content such as a block of text\n- `inset` element container is optimized for embeding or being inset inside another containing element\n- `full` element container is optimized for filling its container bounds",
             "fieldName": "container",
@@ -6222,25 +6682,87 @@
         ],
         "cssProperties": [
           {
-            "name": "--border-radius"
+            "name": "--border-radius",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
           },
           {
-            "name": "--padding"
+            "name": "--padding",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
           },
           {
             "name": "--line-height"
           },
           {
-            "name": "--gap"
+            "name": "--gap",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
           },
           {
-            "name": "--height"
+            "name": "--height",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
           },
           {
             "name": "--width"
           },
           {
-            "name": "--font-size"
+            "name": "--font-size",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
+          },
+          {
+            "name": "--background",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
+          },
+          {
+            "name": "--font-weight",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
+          },
+          {
+            "name": "--text-decoration",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
+          },
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
+          },
+          {
+            "name": "--text-transform",
+            "inheritedFrom": {
+              "name": "Button",
+              "module": "/src/button/button.js"
+            }
           }
         ]
       },
@@ -6253,10 +6775,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.885,
+            "kb": 15.924,
             "requests": {
               "index.js": {
-                "kb": 15.885,
+                "kb": 15.924,
                 "name": "index.js"
               }
             }
@@ -6389,6 +6911,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "container",
@@ -6499,7 +7039,53 @@
             "name": "--border"
           },
           {
-            "name": "--cursor"
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ]
       },
@@ -6512,10 +7098,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.631,
+            "kb": 22.658,
             "requests": {
               "index.js": {
-                "kb": 22.631,
+                "kb": 22.658,
                 "name": "index.js"
               }
             }
@@ -6583,6 +7169,16 @@
             "description": "Set each slotted control + label + control message layout"
           }
         ],
+        "slots": [
+          {
+            "description": "Control input elements",
+            "name": "",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "layout",
@@ -6591,6 +7187,29 @@
             },
             "description": "Determines the overall layout of the element.",
             "fieldName": "layout",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          }
+        ],
+        "cssProperties": [
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          },
+          {
+            "name": "--label-width",
             "inheritedFrom": {
               "name": "ControlGroup",
               "module": "/src/forms/control-group/control-group.js"
@@ -6607,10 +7226,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.631,
+            "kb": 22.658,
             "requests": {
               "index.js": {
-                "kb": 22.631,
+                "kb": 22.658,
                 "name": "index.js"
               }
             }
@@ -7268,6 +7887,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "status",
@@ -7340,6 +7977,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -7351,10 +8039,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.274,
+            "kb": 23.297,
             "requests": {
               "index.js": {
-                "kb": 22.381,
+                "kb": 22.404,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -7604,10 +8292,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.444,
+            "kb": 29.485,
             "requests": {
               "index.js": {
-                "kb": 28.67,
+                "kb": 28.711,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7741,10 +8429,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.444,
+            "kb": 29.485,
             "requests": {
               "index.js": {
-                "kb": 28.67,
+                "kb": 28.711,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -8026,10 +8714,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.144,
+            "kb": 42.19,
             "requests": {
               "index.js": {
-                "kb": 40.262,
+                "kb": 40.308,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -8248,10 +8936,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.36,
+            "kb": 18.405,
             "requests": {
               "index.js": {
-                "kb": 17.575,
+                "kb": 17.62,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8367,10 +9055,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.36,
+            "kb": 18.405,
             "requests": {
               "index.js": {
-                "kb": 17.575,
+                "kb": 17.62,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8438,10 +9126,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.36,
+            "kb": 18.405,
             "requests": {
               "index.js": {
-                "kb": 17.575,
+                "kb": 17.62,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8514,10 +9202,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.36,
+            "kb": 18.405,
             "requests": {
               "index.js": {
-                "kb": 17.575,
+                "kb": 17.62,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -8582,6 +9270,24 @@
           {
             "name": "reset",
             "description": "Resets control value to initial attribute value and clears any active validation rules."
+          }
+        ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ],
         "attributes": [
@@ -8656,6 +9362,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -8667,10 +9424,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.38,
+            "kb": 23.403,
             "requests": {
               "index.js": {
-                "kb": 22.439,
+                "kb": 22.462,
                 "name": "index.js"
               },
               "eye.svg.js": {
@@ -9071,10 +9828,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.26,
+            "kb": 42.294,
             "requests": {
               "index.js": {
-                "kb": 40.133,
+                "kb": 40.167,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -9185,6 +9942,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "status",
@@ -9266,7 +10041,53 @@
             "name": "--height"
           },
           {
-            "name": "--cursor"
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ]
       },
@@ -9279,10 +10100,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.132,
+            "kb": 22.154,
             "requests": {
               "index.js": {
-                "kb": 22.132,
+                "kb": 22.154,
                 "name": "index.js"
               }
             }
@@ -9324,6 +10145,16 @@
             "description": "Set each slotted control + label + control message layout"
           }
         ],
+        "slots": [
+          {
+            "description": "Control input elements",
+            "name": "",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "layout",
@@ -9332,6 +10163,29 @@
             },
             "description": "Determines the overall layout of the element.",
             "fieldName": "layout",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          }
+        ],
+        "cssProperties": [
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "ControlGroup",
+              "module": "/src/forms/control-group/control-group.js"
+            }
+          },
+          {
+            "name": "--label-width",
             "inheritedFrom": {
               "name": "ControlGroup",
               "module": "/src/forms/control-group/control-group.js"
@@ -9348,10 +10202,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.132,
+            "kb": 22.154,
             "requests": {
               "index.js": {
-                "kb": 22.132,
+                "kb": 22.154,
                 "name": "index.js"
               }
             }
@@ -9412,6 +10266,24 @@
           {
             "name": "reset",
             "description": "Resets control value to initial attribute value and clears any active validation rules."
+          }
+        ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ],
         "attributes": [
@@ -9486,6 +10358,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -9497,10 +10420,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.313,
+            "kb": 22.336,
             "requests": {
               "index.js": {
-                "kb": 22.313,
+                "kb": 22.336,
                 "name": "index.js"
               }
             }
@@ -9597,6 +10520,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "container",
@@ -9686,6 +10627,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -9697,10 +10689,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.126,
+            "kb": 23.147,
             "requests": {
               "index.js": {
-                "kb": 22.437,
+                "kb": 22.458,
                 "name": "index.js"
               },
               "search.svg.js": {
@@ -9795,6 +10787,24 @@
           {
             "name": "reset",
             "description": "Resets control value to initial attribute value and clears any active validation rules."
+          }
+        ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ],
         "attributes": [
@@ -9896,6 +10906,55 @@
           },
           {
             "name": "--border"
+          },
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ]
       },
@@ -9908,10 +10967,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.846,
+            "kb": 39.867,
             "requests": {
               "index.js": {
-                "kb": 38.612,
+                "kb": 38.633,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -10364,10 +11423,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.616,
+            "kb": 19.638,
             "requests": {
               "index.js": {
-                "kb": 19.616,
+                "kb": 19.638,
                 "name": "index.js"
               }
             }
@@ -10516,10 +11575,6 @@
             "fieldName": "container"
           },
           {
-            "name": "index",
-            "fieldName": "index"
-          },
-          {
             "name": "pressed",
             "type": {
               "text": "boolean"
@@ -10653,10 +11708,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.616,
+            "kb": 19.638,
             "requests": {
               "index.js": {
-                "kb": 19.616,
+                "kb": 19.638,
                 "name": "index.js"
               }
             }
@@ -10717,6 +11772,24 @@
           {
             "name": "reset",
             "description": "Resets control value to initial attribute value and clears any active validation rules."
+          }
+        ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ],
         "attributes": [
@@ -10794,7 +11867,11 @@
         ],
         "cssProperties": [
           {
-            "name": "--cursor"
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           },
           {
             "name": "--border-radius"
@@ -10819,6 +11896,48 @@
           },
           {
             "name": "--anchor-background"
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ]
       },
@@ -10831,10 +11950,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.226,
+            "kb": 22.251,
             "requests": {
               "index.js": {
-                "kb": 22.226,
+                "kb": 22.251,
                 "name": "index.js"
               }
             }
@@ -11641,6 +12760,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "status",
@@ -11737,10 +12874,56 @@
             "name": "--border-radius"
           },
           {
-            "name": "--cursor"
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           },
           {
             "name": "--border"
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
           }
         ]
       },
@@ -11753,10 +12936,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.106,
+            "kb": 22.128,
             "requests": {
               "index.js": {
-                "kb": 22.106,
+                "kb": 22.128,
                 "name": "index.js"
               }
             }
@@ -11845,6 +13028,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "status",
@@ -11917,6 +13118,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -11928,10 +13180,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.002,
+            "kb": 23.024,
             "requests": {
               "index.js": {
-                "kb": 22.382,
+                "kb": 22.404,
                 "name": "index.js"
               },
               "clock.svg.js": {
@@ -12167,10 +13419,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.225,
+            "kb": 29.272,
             "requests": {
               "index.js": {
-                "kb": 28.451,
+                "kb": 28.498,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -12732,6 +13984,24 @@
             "description": "Resets control value to initial attribute value and clears any active validation rules."
           }
         ],
+        "slots": [
+          {
+            "description": "Control input element",
+            "name": "",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "description": "Label element",
+            "name": "label",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
+        ],
         "attributes": [
           {
             "name": "status",
@@ -12804,6 +14074,57 @@
               "module": "/src/forms/control/control.js"
             }
           }
+        ],
+        "cssProperties": [
+          {
+            "name": "--cursor",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--accent-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-color",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--label-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-width",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          },
+          {
+            "name": "--control-height",
+            "inheritedFrom": {
+              "name": "Control",
+              "module": "/src/forms/control/control.js"
+            }
+          }
         ]
       },
       "lighthouse": {
@@ -12815,10 +14136,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.272,
+            "kb": 23.295,
             "requests": {
               "index.js": {
-                "kb": 22.379,
+                "kb": 22.402,
                 "name": "index.js"
               },
               "calendar.svg.js": {

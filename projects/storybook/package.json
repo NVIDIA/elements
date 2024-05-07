@@ -9,8 +9,8 @@
     "build": "wireit"
   },
   "dependencies": {
-    "@elements/elements": "workspace:^",
-    "@elements/elements-react": "workspace:^",
+    "@nvidia-elements/core": "workspace:@elements/elements@^",
+    "@nvidia-elements/core-react": "workspace:@elements/elements-react@^",
     "@nvidia-elements/testing": "workspace:^",
     "@nvidia-elements/themes": "workspace:^",
     "fflate": "0.8.1",
@@ -59,7 +59,7 @@
         "../testing/docs/**/*.mdx",
         "../testing/docs/**/*.stories.ts",
         "../themes/docs/**/*.mdx",
-        "../themes/docs/**/*.stories.t"
+        "../themes/docs/**/*.stories.ts"
       ],
       "output": [
         "dist/**"
