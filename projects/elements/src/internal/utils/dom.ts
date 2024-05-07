@@ -297,7 +297,7 @@ export function validateSlots(host: HTMLElement) {
   }
 }
 
-export function getDisplayValue(option: { label?: string; value?: string }) {
+export function getDisplayValue(option: { label?: string; value?: string }): string {
   if (option) {
     return option.label ? option.label : option.value;
   } else {
