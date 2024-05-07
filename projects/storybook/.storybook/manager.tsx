@@ -82,10 +82,10 @@ const ThemePicker = () => {
         <nve-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
           <nve-switch-group>
             <label>API <nve-icon-button slot="label" id="api-hint-btn" container="flat" icon-name="information-circle-stroke" size="sm" style={{'--height': '12px'}}></nve-icon-button></label>
-            {/* <nve-switch>
+            <nve-switch>
               <label>Maglev Scope</label>
               <input type="checkbox" value="scope" defaultChecked={globals.scope === 'mlv'} onChange={e => updateGlobals({ scope: e.target.checked ? 'mlv' : 'nve' })} />
-            </nve-switch> */}
+            </nve-switch>
             <nve-switch>
               <label>React</label>
               <input type="checkbox" value="sourceType" defaultChecked={globals.sourceType === 'react'} onChange={e => updateGlobals({ sourceType: e.target.checked ? 'react' : 'html' })} />
