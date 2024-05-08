@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
+import terser from '@rollup/plugin-terser';
+import minifyHTML from 'rollup-plugin-minify-html-literals';
 import dts from 'vite-plugin-dts';
 import { globSync } from 'glob';
 
@@ -11,10 +13,12 @@ const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
 
 export default defineConfig(env => {
+  const mode = env.mode as 'production' | 'watch' | 'test' | 'development';
+
   return {
     resolve: {
       alias: {
-        'extensions-elements-starter': resolve('./src')
+        'lit-library-starter': resolve('./src')
       }
     },
     plugins: [
@@ -30,10 +34,11 @@ export default defineConfig(env => {
     ],
     build: {
       cssCodeSplit: true,
-      minify: false,
-      watch: env.mode === 'watch' ? {} : undefined,
+      minify: false, // https://github.com/vitejs/vite/issues/8848
+      watch: mode === 'watch' ? {} : undefined,
       outDir: dist(),
       emptyOutDir: false,
+      sourcemap: true,
       target: 'esnext',
       lib: {
         entry: {
@@ -49,6 +54,7 @@ export default defineConfig(env => {
         preserveEntrySignatures: 'strict',
         external: [
           ...Object.keys(packageFile.dependencies || {}),
+          ...Object.keys(packageFile.peerDependencies || {}),
           ...Object.keys(packageFile.optionalDependencies || {})
         ].map(packageName => new RegExp(`^${packageName}(/.*)?`)),
         output: [
@@ -59,6 +65,12 @@ export default defineConfig(env => {
             assetFileNames: '[name].[ext]',
             entryFileNames: '[name].js'
           }
+        ],
+        plugins: [
+          mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
+          mode === 'production'
+            ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
+            : false // https://github.com/vitejs/vite/issues/8848
         ]
       }
     }

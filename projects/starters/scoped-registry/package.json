@@ -1,0 +1,121 @@
+{
+  "name": "scoped-registry-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/index.js",
+    "./index.js": "./dist/index.js",
+    "./login": "./dist/login/index.js",
+    "./login/index.js": "./dist/login/index.js",
+    "./login/define.js": "./dist/login/define.js"
+  },
+  "sideEffects": [
+    "./**/define.js"
+  ],
+  "typesVersions": {
+    "*": {
+      "*/define": [
+        "dist/*/define.d.ts"
+      ],
+      "*/define.js": [
+        "dist/*/define.d.ts"
+      ],
+      "*/index.js": [
+        "dist/*/index.d.ts"
+      ],
+      "*": [
+        "dist/*/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "build:watch": "wireit",
+    "test": "wireit",
+    "test:watch": "wireit"
+  },
+  "dependencies": {
+    "@lit-labs/scoped-registry-mixin": "^1.0.3",
+    "@elements/elements": "workspace:*",
+    "@nvidia-elements/testing": "workspace:*",
+    "@webcomponents/scoped-custom-element-registry": "^0.0.9",
+    "lit": "3.1.3"
+  },
+  "devDependencies": {
+    "@nvidia-elements/testing": "workspace:*",
+    "@vitest/browser": "1.1.0",
+    "glob": "10.3.10",
+    "typescript": "5.3.3",
+    "vite": "5.2.9",
+    "vite-plugin-dts": "3.7.2",
+    "vitest": "1.1.0"
+  },
+  "wireit": {
+    "dev": {
+      "command": "vite",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "ci": {
+      "dependencies": [
+        "build",
+        "test"
+      ]
+    },
+    "build": {
+      "command": "tsc && vite build --config=vite.config.ts",
+      "dependencies": [
+        "../../elements:build",
+        "../../testing:ci"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "files": [
+        "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.stories.mdx",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --mode watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test": {
+      "command": "vitest run",
+      "files": [
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../../testing:ci"
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    }
+  }
+}
