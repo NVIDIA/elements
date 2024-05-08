@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v0.28.12](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.28.11...@nvidia-elements/themes-v0.28.12) (2024-05-08)
+
+
+### Bug Fixes
+
+* **themes:** add neutral palette ([cab1a49](https://github.com/NVIDIA/elements/commit/cab1a4945b26dae6774901174f150798da96bbb7))
+
 ## [@nvidia-elements/themes-v0.28.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.28.10...@nvidia-elements/themes-v0.28.11) (2024-05-03)
 
 
