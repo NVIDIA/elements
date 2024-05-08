@@ -1,3 +1,10 @@
+## [@elements/elements-v0.33.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.0...@elements/elements-v0.33.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* **elements:** password internal icon ([0a6952e](https://github.com/NVIDIA/elements/commit/0a6952e53cba5d892ce926b16b26de1cf5b9af8a))
+
 ## [@elements/elements-v0.33.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.32.0...@elements/elements-v0.33.0) (2024-05-08)
 
 
