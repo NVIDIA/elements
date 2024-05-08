@@ -1,3 +1,10 @@
+## [@elements/elements-v0.33.2](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.1...@elements/elements-v0.33.2) (2024-05-08)
+
+
+### Bug Fixes
+
+* **themes:** add neutral palette ([cab1a49](https://github.com/NVIDIA/elements/commit/cab1a4945b26dae6774901174f150798da96bbb7))
+
 ## [@elements/elements-v0.33.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.0...@elements/elements-v0.33.1) (2024-05-08)
 
 
