@@ -17,7 +17,8 @@
     "playwright": "wireit",
     "prepare": "wireit",
     "release": "wireit",
-    "commitlint": "commitlint --edit"
+    "commitlint": "commitlint --edit",
+    "gitlab:coverage": "wireit"
   },
   "devDependencies": {
     "@commitlint/cli": "19.2.1",
@@ -119,6 +120,10 @@
     },
     "prepare": {
       "command": "test -n \"$CI\" || (pnpm run playwright & husky install)"
+    },
+    "gitlab:coverage": {
+      "command": "node ./build/gitlab-coverage.js",
+      "dependencies": []
     }
   }
 }

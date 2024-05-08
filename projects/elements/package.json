@@ -21,7 +21,6 @@
     "test:watch": "wireit",
     "test:axe": "wireit",
     "test:coverage": "wireit",
-    "test:coverage:gitlab": "wireit",
     "test:lighthouse": "wireit",
     "test:lighthouse:all": "wireit",
     "lint": "wireit",
@@ -537,10 +536,6 @@
       "env": {
         "NODE_ENV": "production"
       }
-    },
-    "test:coverage:gitlab": {
-      "command": "node ./build/coverage-gitlab.js",
-      "dependencies": []
     },
     "test:watch": {
       "command": "vitest --watch",
