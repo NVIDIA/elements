@@ -1,4 +1,4 @@
-import { DomainLogin } from 'extensions-elements-starter/login';
+import { DomainLogin } from './login.js';
 
 customElements.get('domain-login') || customElements.define('domain-login', DomainLogin);
 

@@ -63,6 +63,7 @@ export default defineConfig(env => {
         preserveEntrySignatures: 'strict',
         external: [
           ...Object.keys(packageFile.dependencies || {}),
+          ...Object.keys(packageFile.peerDependencies || {}),
           ...Object.keys(packageFile.optionalDependencies || {})
         ].map(packageName => new RegExp(`^${packageName}(/.*)?`)),
         output: [
