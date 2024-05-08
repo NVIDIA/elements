@@ -1,5 +1,5 @@
 {
-  "name": "extensions-elements-starter",
+  "name": "lit-library-starter",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -44,17 +44,17 @@
     "test:watch": "wireit"
   },
   "dependencies": {
-    "@lit-labs/scoped-registry-mixin": "^1.0.3",
-    "@elements/elements": "workspace:*",
-    "@nvidia-elements/testing": "workspace:*",
-    "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "lit": "3.1.3"
   },
+  "peerDependencies": {
+    "@elements/elements": "workspace:*"
+  },
   "devDependencies": {
-    "@happy-dom/global-registrator": "8.9.0",
     "@nvidia-elements/testing": "workspace:*",
+    "@rollup/plugin-terser": "0.4.4",
     "@vitest/browser": "1.1.0",
     "glob": "10.3.10",
+    "rollup-plugin-minify-html-literals": "1.2.6",
     "typescript": "5.3.3",
     "vite": "5.2.9",
     "vite-plugin-dts": "3.7.2",
@@ -69,11 +69,12 @@
     },
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "test"
       ]
     },
     "build": {
-      "command": "tsc && vite build --config=vite.config.lib.ts",
+      "command": "NODE_ENV=production tsc && vite build",
       "dependencies": [
         "../../elements:build",
         "../../testing:ci"
