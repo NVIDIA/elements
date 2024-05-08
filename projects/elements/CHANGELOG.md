@@ -1,3 +1,10 @@
+## [@elements/elements-v0.33.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.32.0...@elements/elements-v0.33.0) (2024-05-08)
+
+
+### Features
+
+* **elements:** add outline icon ([aaae89f](https://github.com/NVIDIA/elements/commit/aaae89f6264e90fe22c6b52da7df8565aa425499))
+
 ## [@elements/elements-v0.32.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.31.3...@elements/elements-v0.32.0) (2024-05-07)
 
 
