@@ -1,9 +1,8 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import type { DomainLogin } from 'extensions-elements-starter/login';
-import '@webcomponents/scoped-custom-element-registry';
-import 'extensions-elements-starter/login/define.js';
+import type { DomainLogin } from 'lit-library-starter/login';
+import 'lit-library-starter/login/define.js';
 
 describe('domain-login', () => {
   let fixture: HTMLElement;

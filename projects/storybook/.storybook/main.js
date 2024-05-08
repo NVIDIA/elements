@@ -14,6 +14,7 @@ export default {
     '../../elements-react/docs/**/*.stories.tsx',
     '../../labs/lighthouse/docs/**/*.mdx',
     '../../labs/lighthouse/docs/**/*.stories.ts',
+    '../../starters/lit-library/src/**/*.stories.ts',
     '../../testing/docs/**/*.mdx',
     '../../testing/docs/**/*.stories.ts',
     '../../themes/docs/**/*.mdx',

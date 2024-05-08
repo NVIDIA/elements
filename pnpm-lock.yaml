@@ -291,7 +291,7 @@ importers:
         version: 5.2.9(@types/node@20.11.6)(terser@5.30.3)
       vite-plugin-dts:
         specifier: 3.7.2
-        version: 3.7.2(@types/node@20.11.6)(rollup@3.29.1)(typescript@5.3.3)(vite@5.2.9)
+        version: 3.7.2(@types/node@20.11.6)(rollup@2.79.1)(typescript@5.3.3)(vite@5.2.9)
       vite-plugin-virtual-html:
         specifier: 1.1.18
         version: 1.1.18(@types/node@20.11.6)
@@ -334,7 +334,7 @@ importers:
         version: 5.3.3
       vite-plugin-dts:
         specifier: 3.7.2
-        version: 3.7.2(@types/node@20.11.6)(rollup@3.29.1)(typescript@5.3.3)(vite@5.2.9)
+        version: 3.7.2(@types/node@20.11.6)(rollup@2.79.1)(typescript@5.3.3)(vite@5.2.9)
       vitest:
         specifier: 1.1.0
         version: 1.1.0(@types/node@20.11.6)(@vitest/browser@1.1.0)
@@ -506,33 +506,30 @@ importers:
         specifier: 14.1.1
         version: 14.1.1
 
-  projects/starters/extensions:
+  projects/starters/lit-library:
     dependencies:
-      '@lit-labs/scoped-registry-mixin':
-        specifier: ^1.0.3
-        version: 1.0.3
       '@elements/elements':
         specifier: workspace:*
         version: link:../../elements
-      '@nvidia-elements/testing':
-        specifier: workspace:*
-        version: link:../../testing
-      '@webcomponents/scoped-custom-element-registry':
-        specifier: ^0.0.9
-        version: 0.0.9
       lit:
         specifier: 3.1.3
         version: 3.1.3
     devDependencies:
-      '@happy-dom/global-registrator':
-        specifier: 8.9.0
-        version: 8.9.0
+      '@nvidia-elements/testing':
+        specifier: workspace:*
+        version: link:../../testing
+      '@rollup/plugin-terser':
+        specifier: 0.4.4
+        version: 0.4.4(rollup@2.79.1)
       '@vitest/browser':
         specifier: 1.1.0
         version: 1.1.0(playwright@1.42.1)(vitest@1.1.0)
       glob:
         specifier: 10.3.10
         version: 10.3.10
+      rollup-plugin-minify-html-literals:
+        specifier: 1.2.6
+        version: 1.2.6(rollup@2.79.1)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -541,7 +538,7 @@ importers:
         version: 5.2.9(@types/node@20.11.6)(terser@5.30.3)
       vite-plugin-dts:
         specifier: 3.7.2
-        version: 3.7.2(@types/node@20.11.6)(rollup@3.29.1)(typescript@5.3.3)(vite@5.2.9)
+        version: 3.7.2(@types/node@20.11.6)(rollup@2.79.1)(typescript@5.3.3)(vite@5.2.9)
       vitest:
         specifier: 1.1.0
         version: 1.1.0(@types/node@20.11.6)(@vitest/browser@1.1.0)
@@ -619,6 +616,43 @@ importers:
       vite:
         specifier: 5.2.9
         version: 5.2.9(@types/node@20.11.6)(terser@5.30.3)
+
+  projects/starters/scoped-registry:
+    dependencies:
+      '@lit-labs/scoped-registry-mixin':
+        specifier: ^1.0.3
+        version: 1.0.3
+      '@elements/elements':
+        specifier: workspace:*
+        version: link:../../elements
+      '@nvidia-elements/testing':
+        specifier: workspace:*
+        version: link:../../testing
+      '@webcomponents/scoped-custom-element-registry':
+        specifier: ^0.0.9
+        version: 0.0.9
+      lit:
+        specifier: 3.1.3
+        version: 3.1.3
+    devDependencies:
+      '@vitest/browser':
+        specifier: 1.1.0
+        version: 1.1.0(playwright@1.42.1)(vitest@1.1.0)
+      glob:
+        specifier: 10.3.10
+        version: 10.3.10
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
+      vite:
+        specifier: 5.2.9
+        version: 5.2.9(@types/node@20.11.6)(terser@5.30.3)
+      vite-plugin-dts:
+        specifier: 3.7.2
+        version: 3.7.2(@types/node@20.11.6)(rollup@2.79.1)(typescript@5.3.3)(vite@5.2.9)
+      vitest:
+        specifier: 1.1.0
+        version: 1.1.0(@types/node@20.11.6)(@vitest/browser@1.1.0)
 
   projects/starters/solidjs:
     dependencies:
@@ -719,6 +753,9 @@ importers:
       lit:
         specifier: 3.1.3
         version: 3.1.3
+      lit-library-starter:
+        specifier: workspace:^
+        version: link:../starters/lit-library
       showdown:
         specifier: 2.1.0
         version: 2.1.0
@@ -761,7 +798,7 @@ importers:
         version: 5.2.9(@types/node@20.11.6)(terser@5.30.3)
       vite-plugin-dts:
         specifier: 3.7.2
-        version: 3.7.2(@types/node@20.11.6)(rollup@3.29.1)(typescript@5.3.3)(vite@5.2.9)
+        version: 3.7.2(@types/node@20.11.6)(rollup@2.79.1)(typescript@5.3.3)(vite@5.2.9)
 
   projects/testing:
     dependencies:
@@ -786,7 +823,7 @@ importers:
         version: 5.2.9(@types/node@20.11.6)(terser@5.30.3)
       vite-plugin-dts:
         specifier: 3.7.2
-        version: 3.7.2(@types/node@20.11.6)(rollup@3.29.1)(typescript@5.3.3)(vite@5.2.9)
+        version: 3.7.2(@types/node@20.11.6)(rollup@2.79.1)(typescript@5.3.3)(vite@5.2.9)
 
   projects/themes:
     devDependencies:
@@ -2170,6 +2207,7 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.24.0
+    dev: true
 
   /@babel/parser@7.24.0:
     resolution:
@@ -6075,15 +6113,6 @@ packages:
       { integrity: sha512-u8A+DameixqpeyHzvnJWTGj+wfiskQOYHzSiJscCWVfMkIT3rxnbHMtGh3lMthaRY21nbUOK71WcsCnCrXhBJQ== }
     dev: true
 
-  /@happy-dom/global-registrator@8.9.0:
-    resolution:
-      { integrity: sha512-Kw/YMNv1kmH862kQUzXM6K0Y4AW5b0I/+2EIopVc7edurBwY8LHSKd5gJzEEQvdgapSeDJowhOCgL0tkhJWi4A== }
-    dependencies:
-      happy-dom: 8.9.0
-    transitivePeerDependencies:
-      - encoding
-    dev: true
-
   /@humanwhocodes/config-array@0.11.14:
     resolution:
       { integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg== }
@@ -6410,7 +6439,7 @@ packages:
       { integrity: sha512-+DywdIJIIR30K0UGdWkn3iPlVvuSfmvo4qUlPTz1hEizksPD4Vl8TrwuXwi4HTIQ2XugYK3WXaWfWqqLEzbrxg== }
     requiresBuild: true
     dependencies:
-      '@lit/reactive-element': 2.0.2
+      '@lit/reactive-element': 2.0.4
       lit: 3.1.3
     dev: false
 
@@ -6421,12 +6450,6 @@ packages:
       '@lit/reactive-element': 2.0.4
       lit: 3.1.3
       lit-html: 3.1.3
-    dev: false
-
-  /@lit-labs/ssr-dom-shim@1.1.2:
-    resolution:
-      { integrity: sha512-jnOD+/+dSrfTWYfSXBXlo5l5f0q1UuJo3tkbMDCYA2lKUYq79jaxqtGEvnRoh049nt1vdo1+45RinipU6FGY2g== }
-    requiresBuild: true
     dev: false
 
   /@lit-labs/ssr-dom-shim@1.2.0:
@@ -6479,14 +6502,6 @@ packages:
       '@types/react': 17 || 18
     dependencies:
       '@types/react': 18.2.18
-    dev: false
-
-  /@lit/reactive-element@2.0.2:
-    resolution:
-      { integrity: sha512-SVOwLAWUQg3Ji1egtOt1UiFe4zdDpnWHyc5qctSceJ5XIu0Uc76YmGpIjZgx9YJ0XtdW0Jm507sDvjOu+HnB8w== }
-    requiresBuild: true
-    dependencies:
-      '@lit-labs/ssr-dom-shim': 1.1.2
     dev: false
 
   /@lit/reactive-element@2.0.4:
@@ -7139,6 +7154,22 @@ packages:
       react: 18.2.0
     dev: true
 
+  /@rollup/plugin-terser@0.4.4(rollup@2.79.1):
+    resolution:
+      { integrity: sha512-XHeJC5Bgvs8LfukDwWZp7yeqin6ns8RTl2B9avbejt6tZqsqvVoWI7ZTQrcNsfKEDWBTnTxM8nMDkO2IFFbd0A== }
+    engines: { node: '>=14.0.0' }
+    peerDependencies:
+      rollup: ^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      rollup: 2.79.1
+      serialize-javascript: 6.0.1
+      smob: 1.4.1
+      terser: 5.30.3
+    dev: true
+
   /@rollup/plugin-terser@0.4.4(rollup@3.29.1):
     resolution:
       { integrity: sha512-XHeJC5Bgvs8LfukDwWZp7yeqin6ns8RTl2B9avbejt6tZqsqvVoWI7ZTQrcNsfKEDWBTnTxM8nMDkO2IFFbd0A== }
@@ -7153,6 +7184,22 @@ packages:
       serialize-javascript: 6.0.1
       smob: 1.4.1
       terser: 5.30.3
+    dev: true
+
+  /@rollup/pluginutils@5.1.0(rollup@2.79.1):
+    resolution:
+      { integrity: sha512-XTIWOPPcpvyKI6L1NHo0lFlCyznUEyPmPY1mc3KpPVDYulHSTvyeLNVW00QTLIAFNhR3kYnJTQHeGqU4M3n09g== }
+    engines: { node: '>=14.0.0' }
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@types/estree': 1.0.5
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+      rollup: 2.79.1
     dev: true
 
   /@rollup/pluginutils@5.1.0(rollup@3.29.1):
@@ -9465,11 +9512,11 @@ packages:
     resolution:
       { integrity: sha512-XcJQVOaxTKCnth1vCxEChteGuwG6wqnUHxAm1DO3gCz0+uXKaJNx8/digSz4dLALCy8n2lKq24jSUs8segoqIw== }
     dependencies:
-      '@babel/parser': 7.23.6
+      '@babel/parser': 7.24.0
       '@vue/shared': 3.4.15
       entities: 4.5.0
       estree-walker: 2.0.2
-      source-map-js: 1.0.2
+      source-map-js: 1.2.0
 
   /@vue/compiler-dom@3.4.15:
     resolution:
@@ -12252,7 +12299,7 @@ packages:
     engines: { node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0' }
     dependencies:
       mdn-data: 2.0.28
-      source-map-js: 1.0.2
+      source-map-js: 1.2.0
     dev: true
 
   /css-tree@2.3.1:
@@ -12268,11 +12315,6 @@ packages:
     resolution:
       { integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw== }
     engines: { node: '>= 6' }
-    dev: true
-
-  /css.escape@1.5.1:
-    resolution:
-      { integrity: sha512-YUifsXXuknHlUsmlgyY0PKzgPOr7/FjCePfHNt0jxm83wHZi44VDMQ7/fGNkjY3/jV1MC+1CmZbaHzugyeRtpg== }
     dev: true
 
   /css@2.2.4:
@@ -15084,21 +15126,6 @@ packages:
       wordwrap: 1.0.0
     optionalDependencies:
       uglify-js: 3.17.4
-    dev: true
-
-  /happy-dom@8.9.0:
-    resolution:
-      { integrity: sha512-JZwJuGdR7ko8L61136YzmrLv7LgTh5b8XaEM3P709mLjyQuXJ3zHTDXvUtBBahRjGlcYW0zGjIiEWizoTUGKfA== }
-    dependencies:
-      css.escape: 1.5.1
-      he: 1.2.0
-      iconv-lite: 0.6.3
-      node-fetch: 2.7.0
-      webidl-conversions: 7.0.0
-      whatwg-encoding: 2.0.0
-      whatwg-mimetype: 3.0.0
-    transitivePeerDependencies:
-      - encoding
     dev: true
 
   /has-bigints@1.0.2:
@@ -22677,6 +22704,17 @@ packages:
       { integrity: sha512-s+pyvQeIKIZ0dx5iJiQk1tPLJAWln39+MI5jtM8wnyws+G5azk+dMnMX0qfbqNetKKNgcWWOdi0sfm+FbQbgdQ== }
     engines: { node: '>=10.0.0' }
 
+  /rollup-plugin-minify-html-literals@1.2.6(rollup@2.79.1):
+    resolution:
+      { integrity: sha512-JRq2fjlCTiw0zu+1Sy3ClHGCxA79dWGr4HLHWSQgd060StVW9fBVksuj8Xw/suPkNSGClJf/4xNQ1MF6JeXPaw== }
+    peerDependencies:
+      rollup: ^0.65.2 || ^1.0.0 || ^2.0.0
+    dependencies:
+      minify-html-literals: 1.3.5
+      rollup: 2.79.1
+      rollup-pluginutils: 2.8.2
+    dev: true
+
   /rollup-plugin-minify-html-literals@1.2.6(rollup@3.29.1):
     resolution:
       { integrity: sha512-JRq2fjlCTiw0zu+1Sy3ClHGCxA79dWGr4HLHWSQgd060StVW9fBVksuj8Xw/suPkNSGClJf/4xNQ1MF6JeXPaw== }
@@ -22693,6 +22731,15 @@ packages:
       { integrity: sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ== }
     dependencies:
       estree-walker: 0.6.1
+    dev: true
+
+  /rollup@2.79.1:
+    resolution:
+      { integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw== }
+    engines: { node: '>=10.0.0' }
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.3
     dev: true
 
   /rollup@3.29.1:
@@ -23589,6 +23636,7 @@ packages:
     resolution:
       { integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw== }
     engines: { node: '>=0.10.0' }
+    dev: true
 
   /source-map-js@1.2.0:
     resolution:
@@ -25449,6 +25497,31 @@ packages:
       - terser
     dev: true
 
+  /vite-plugin-dts@3.7.2(@types/node@20.11.6)(rollup@2.79.1)(typescript@5.3.3)(vite@5.2.9):
+    resolution:
+      { integrity: sha512-kg//1nDA01b8rufJf4TsvYN8LMkdwv0oBYpiQi6nRwpHyue+wTlhrBiqgipdFpMnW1oOYv6ywmzE5B0vg6vSEA== }
+    engines: { node: ^14.18.0 || >=16.0.0 }
+    peerDependencies:
+      typescript: '*'
+      vite: '*'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+    dependencies:
+      '@microsoft/api-extractor': 7.39.0(@types/node@20.11.6)
+      '@rollup/pluginutils': 5.1.0(rollup@2.79.1)
+      '@vue/language-core': 1.8.27(typescript@5.3.3)
+      debug: 4.3.4(supports-color@6.1.0)
+      kolorist: 1.8.0
+      typescript: 5.3.3
+      vite: 5.2.9(@types/node@20.11.6)(terser@5.30.3)
+      vue-tsc: 1.8.27(typescript@5.3.3)
+    transitivePeerDependencies:
+      - '@types/node'
+      - rollup
+      - supports-color
+    dev: true
+
   /vite-plugin-dts@3.7.2(@types/node@20.11.6)(rollup@3.29.1)(typescript@5.3.3)(vite@5.2.9):
     resolution:
       { integrity: sha512-kg//1nDA01b8rufJf4TsvYN8LMkdwv0oBYpiQi6nRwpHyue+wTlhrBiqgipdFpMnW1oOYv6ywmzE5B0vg6vSEA== }
@@ -25870,12 +25943,6 @@ packages:
   /webidl-conversions@3.0.1:
     resolution:
       { integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ== }
-
-  /webidl-conversions@7.0.0:
-    resolution:
-      { integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g== }
-    engines: { node: '>=12' }
-    dev: true
 
   /webpack-dev-middleware@3.7.3(webpack@5.74.0):
     resolution:
@@ -26306,12 +26373,6 @@ packages:
     engines: { node: '>=12' }
     dependencies:
       iconv-lite: 0.6.3
-    dev: true
-
-  /whatwg-mimetype@3.0.0:
-    resolution:
-      { integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q== }
-    engines: { node: '>=12' }
     dev: true
 
   /whatwg-url@5.0.0:
