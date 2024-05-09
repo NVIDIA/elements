@@ -58,8 +58,8 @@ Each element should provide a standalone entrypoint for consumption. This enable
 consumers to choose which elements to load/import, improving performance and API stability.
 
 ```typescript
-import  { MlvButton } from '@elements/elements/button';
-import  { MlvDialog } from '@elements/elements/dialog';
+import  { Button } from '@nvidia-elements/core/button';
+import  { Dialog } from '@nvidia-elements/core/dialog';
 ```
 
 ## Side Effects & Registration
@@ -69,9 +69,9 @@ Rather side effects like registration should be isolated to a single file.
 
 ```typescript
 // example define.js
-import '@elements/elements/icon/define.js';
-import '@elements/elements/button/define.js';
-import { MlvDialog } from './dialog.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/button/define.js';
+import { Dialog } from './dialog.js';
 
 customElements.get('nve-dialog') || customElements.define('nve-dialog', MlvDialog);
 ```
@@ -80,8 +80,8 @@ If an element depends on other elements then those elements should be included i
 the registration file as well to ensure a proper dependency tree is constructed.
 
 ```typescript
-import '@elements/elements/button/define.js';
-import '@elements/elements/dialog/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/dialog/define.js';
 ```
 
 Isolated registration allows the consumer to control when an element should be loaded.

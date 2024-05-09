@@ -8,3 +8,4 @@ public
 *.stories.ts
 *.test.lighthouse.ts
 CHANGELOG.md
+pnpm-lock.yaml
