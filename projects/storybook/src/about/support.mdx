@@ -72,19 +72,19 @@ To enable and support cutting edge features for our users the primary browser su
 If a browser API is reasonably supported via a polyfill then it may be added to our optional polyfill bundle.
 
 ```javascript
-import '@elements/elements/polyfills';
+import '@nvidia-elements/core/polyfills';
 ```
 
 ## Versioning
 
-The `@elements/elements` pacakge follows [semver](https://semver.org/) and is currently pre 1.0. Changes can be found in the [Changelog](./?path=/docs/about-changelog--docs). A debug utility is available
+The Elements package follows [semver](https://semver.org/) and is currently pre 1.0. Changes can be found in the [Changelog](./?path=/docs/about-changelog--docs). A debug utility is available
 on the global window object to help identify the active versions being used at runtime. This log will list out all the registered elements and active versions.
 
 - API <strong>Breaking</strong> changes are maximum once per <strong>three months</strong>.
 - API <strong>Deprecations</strong> are supported for minimum of <strong>three months</strong>.
 
 ```typescript
-window.MLV_ELEMENTS.debug()
+window.NVE_ELEMENTS.debug()
 ```
 
 ```json

@@ -8,7 +8,7 @@ To use Elements in [Preact](https://preactjs.com/) follow the [instalation getti
 elements can be imported and used within Preact jsx and tsx files.
 
 ```javascript
-import '@elements/elements/alert-group/define.js';
+import '@nvidia-elements/core/alert/define.js';
 ```
 
 Once added, properties and events can be used via the standard Preact template syntax.
@@ -27,7 +27,7 @@ To add TypeScript types to your TSX files add the element to the `IntrinsicEleme
 
 ```typescript
 // types.d.ts
-import type { MlvAlert, MlvAlertGroup } from '@elements/elements/alert-group';
+import type { Alert, AlertGroup } from '@nvidia-elements/core/alert';
 
 type CustomEvents<K extends string> = { [key in K] : (event: CustomEvent) => void };
 type CustomElement<T, K extends string = ''> = Partial<T & { children: any } & CustomEvents<`on${K}`>>;
@@ -35,8 +35,8 @@ type CustomElement<T, K extends string = ''> = Partial<T & { children: any } & C
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      ['nve-alert']: CustomElement<MlvAlert>;
-      ['nve-alert-group']: CustomElement<MlvAlertGroup>;
+      ['nve-alert']: CustomElement<Alert>;
+      ['nve-alert-group']: CustomElement<AlertGroup>;
     }
   }
 }
