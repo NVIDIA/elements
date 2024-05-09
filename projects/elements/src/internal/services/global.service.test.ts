@@ -69,7 +69,7 @@ describe('GlobalStateService', () => {
     console.log = original;
   });
 
-  it('should log out state when debug() is called on MLV_ELEMENTS', async () => {
+  it('should log out state when debug() is called on NVE_ELEMENTS', async () => {
     const event = untilEvent(document, 'TEST_EVENT');
     GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
     await event;
@@ -82,7 +82,7 @@ describe('GlobalStateService', () => {
     console.log = () => null;
 
     vi.spyOn(console, 'log');
-    (window as any).MLV_ELEMENTS.debug();
+    (window as any).NVE_ELEMENTS.debug();
     expect(console.log).toHaveBeenCalled();
 
     console.log = original;

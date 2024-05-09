@@ -72,7 +72,7 @@ export const PRE = (args) => {
       sourceType: globals?.sourceType ?? ''
     });
 
-    return (<Source dark code={code} type={args.children.props.className.replace('language-', '')} />)
+    return (<Source dark code={code} language={args.children.props.className.replace('language-', '')} />)
   } else {
     return (args.children)
   }

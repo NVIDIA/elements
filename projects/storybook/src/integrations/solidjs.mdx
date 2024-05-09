@@ -17,7 +17,7 @@ To use Elements in [SolidJS](https://www.solidjs.com/) follow the [instalation g
 elements can be imported and used within SolidJS jsx and tsx files.
 
 ```javascript
-import '@elements/elements/alert-group/define.js';
+import '@nvidia-elements/core/alert-group/define.js';
 ```
 
 Once added, properties and events can be used via the standard template syntax.
@@ -36,7 +36,7 @@ To add TypeScript types to your TSX files add the element to the `IntrinsicEleme
 
 ```typescript
 // types.d.ts
-import type { MlvAlert, MlvAlertGroup } from '@elements/elements/alert-group';
+import type { Alert, AlertGroup } from '@nvidia-elements/core/alert';
 
 type CustomEvents<K extends string> = { [key in K]: (event: CustomEvent) => void; };
 type CustomElement<T, K extends string = ""> = Partial<T & { children: any } & CustomEvents<`on${K}`>>;
@@ -44,8 +44,8 @@ type CustomElement<T, K extends string = ""> = Partial<T & { children: any } & C
 declare module 'solid-js' {
   namespace JSX {
     interface IntrinsicElements {
-      ['mlv-alert']: CustomElement<MlvAlert>;
-      ['mlv-alert-group']: CustomElement<MlvAlertGroup>;
+      ['mlv-alert']: CustomElement<Alert>;
+      ['mlv-alert-group']: CustomElement<AlertGroup>;
     }
   }
 }

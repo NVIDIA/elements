@@ -3,6 +3,10 @@ const camelCase = str => str.replace(/\s*-\s*\w/g, parts => parts[parts.length-1
 
 const pascalCase = str => camelCase(str).replace(/^\w/, s => s.toUpperCase());
 
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export function updateScope(source, config) {
   const { scope, sourceType } = config;
 
@@ -13,6 +17,9 @@ export function updateScope(source, config) {
       value = isElement ? value.replaceAll('mlv', scope).replaceAll('nve', scope) : value;
       value = isReact && isElement ? pascalCase(value) : value;
       return value;
+    })
+    .replaceAll(/(Mlv[\w-]*|Nve[\w-]*)/g, (_, value) => {
+      return value.replaceAll('Mlv', capitalize(scope)).replaceAll('Nve', capitalize(scope));
     })
     .replaceAll(/(@elements\/[\w-]*|@nve\/[\w-]*)/g, (_, value) => {
       const scopeImports = {

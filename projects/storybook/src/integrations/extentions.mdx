@@ -25,10 +25,10 @@ create a scoped registry based on the in progress [Scoped Custom Element Registr
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
-import { scope } from '@elements/elements/scoped';
-import { Input } from '@elements/elements/input';
-import { Password } from '@elements/elements/password';
-import { Button } from '@elements/elements/button';
+import { scope } from '@nvidia-elements/core/scoped';
+import { Input } from '@nvidia-elements/core/input';
+import { Password } from '@nvidia-elements/core/password';
+import { Button } from '@nvidia-elements/core/button';
 import '@webcomponents/scoped-custom-element-registry';
 
 @customElement('domain-login')
@@ -67,8 +67,8 @@ can be used in any framework that supports Web Components.
 <mlv-alert status="warning">The tag alias strategy is experimental and only for rare use-cases when Shadow DOM cannot be used and the UI is likely global impacting other applications.</mlv-alert>
 
 ```typescript
-import { IconButton } from '@elements/elements/icon-button';
-import { defineScopedElement } from '@elements/elements/scoped';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { defineScopedElement } from '@nvidia-elements/core/scoped';
 import '@webcomponents/scoped-custom-element-registry';
 
 defineScopedElement('plugin', IconButton);

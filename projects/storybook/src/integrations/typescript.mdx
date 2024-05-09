@@ -18,8 +18,8 @@ Once complete elements can be imported and used within TS files. The Element cla
 definitions can be imported via [type imports](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) to use for static type checking.
 
 ```typescript
-import '@elements/elements/alert/define.js'; // import and register element to DOM
-import type { Alert } from '@elements/elements/alert'; // import type definition
+import '@nvidia-elements/core/alert/define.js'; // import and register element to DOM
+import type { Alert } from '@nvidia-elements/core/alert'; // import type definition
 
 // type can now be used for static type checking in interfaces and for generic type arguments
 const alert = document.querySelector<Alert>('mlv-alert');

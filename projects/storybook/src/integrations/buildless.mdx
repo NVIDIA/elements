@@ -20,14 +20,14 @@ use elements without build tooling such as Vite or Rollup for easy in browser **
 <!DOCTYPE html>
 <html lang="en" mlv-theme="dark">
   <head>
-    <title>Import Map Starter + @elements/elements</title>
+    <title>Import Map Starter + @nvidia-elements/core</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./node_modules/@elements/elements/dist/index.css" />
+    <link rel="stylesheet" type="text/css" href="./node_modules/@nvidia-elements/core/dist/index.css" />
     <script type="importmap">
       {
         "imports": {
-          "@elements/elements": "./node_modules/@elements/elements/dist/",
-          "@elements/elements/": "./node_modules/@elements/elements/dist/",
+          "@nvidia-elements/core": "./node_modules/@nvidia-elements/core/dist/",
+          "@nvidia-elements/core/": "./node_modules/@nvidia-elements/core/dist/",
           "composed-offset-position": "./node_modules/composed-offset-position/dist/composed-offset-position.esm.js",
           "lit": "./node_modules/lit/index.js",
           "lit/": "./node_modules/lit/",
@@ -39,7 +39,7 @@ use elements without build tooling such as Vite or Rollup for easy in browser **
           "@lit-labs/motion": "./node_modules/@lit-labs/motion/index.js",
           "@floating-ui/dom": "./node_modules/@floating-ui/dom/dist/floating-ui.dom.esm.js",
           "@floating-ui/core": "./node_modules/@floating-ui/core/dist/floating-ui.core.esm.js",
-          "@elements/elements/": "./node_modules/@elements/elements/dist/"
+          "@nvidia-elements/core/": "./node_modules/@nvidia-elements/core/dist/"
         }
       }
     </script>
@@ -48,7 +48,7 @@ use elements without build tooling such as Vite or Rollup for easy in browser **
     <mlv-alert status="success">hello world</mlv-alert>
 
     <script type="module">
-      import '@elements/elements/alert/define.js';
+      import '@nvidia-elements/core/alert/define.js';
     </script>
   </body>
 </html>
@@ -65,13 +65,13 @@ Using import maps more complex UI components can be created without build toolin
 <!doctype html>
 <html mlv-theme="light">
 <head>
- <link rel="stylesheet" type="text/css" href="https://cdn-stage.nvidia.com/assets/elements-playground/modules/@elements/elements@0.11.2/dist/index.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn-stage.nvidia.com/assets/elements-playground/modules/@elements/elements@0.11.2/dist/inter.css" />
+ <link rel="stylesheet" type="text/css" href="https://cdn-stage.nvidia.com/assets/elements-playground/modules/@nvidia-elements/core@0.11.2/dist/index.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn-stage.nvidia.com/assets/elements-playground/modules/@nvidia-elements/core@0.11.2/dist/inter.css" />
   <script type="importmap">
     {
       "imports": {
-        "@elements/elements": "./node_modules/@elements/elements/dist/",
-        "@elements/elements/": "./node_modules/@elements/elements/dist/"
+        "@nvidia-elements/core": "./node_modules/@nvidia-elements/core/dist/",
+        "@nvidia-elements/core/": "./node_modules/@nvidia-elements/core/dist/"
         "composed-offset-position": "./node_modules/composed-offset-position/dist/composed-offset-position.esm.js",
         "lit": "./node_modules/lit/index.js",
         "lit/": "./node_modules/lit/",
@@ -83,7 +83,7 @@ Using import maps more complex UI components can be created without build toolin
         "@lit-labs/motion": "./node_modules/@lit-labs/motion/index.js",
         "@floating-ui/dom": "./node_modules/@floating-ui/dom/dist/floating-ui.dom.esm.js",
         "@floating-ui/core": "./node_modules/@floating-ui/core/dist/floating-ui.core.esm.js",
-        "@elements/elements/": "./node_modules/@elements/elements/dist/"
+        "@nvidia-elements/core/": "./node_modules/@nvidia-elements/core/dist/"
       }
     }
   </script>
@@ -94,9 +94,9 @@ Using import maps more complex UI components can be created without build toolin
 
     <script type="module">
       import { html, LitElement } from 'lit';
-      import typography from '@elements/elements/css/module.typography.css' assert { type: 'css' };
-      import layout from '@elements/elements/css/module.layout.css' assert { type: 'css' };
-      import '@elements/elements/badge/define.js';
+      import typography from '@nvidia-elements/core/css/module.typography.css' assert { type: 'css' };
+      import layout from '@nvidia-elements/core/css/module.layout.css' assert { type: 'css' };
+      import '@nvidia-elements/core/badge/define.js';
 
       class AppStatusLabel extends LitElement {
         static styles = [typography, layout];
