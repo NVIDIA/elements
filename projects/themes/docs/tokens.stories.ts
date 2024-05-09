@@ -11,113 +11,113 @@ export default {
 };
 
 export const All = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context))}`
 };
 
 export const Size = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-size')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-size')))}`
 };
 
 export const Space = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-space')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-space')))}`
 };
 
 export const Color = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-color')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-color')))}`
 };
 
 export const BorderColor = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-border-color')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-border-color')))}`
 };
 
 export const BorderWidth = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-border-width')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-border-width')))}`
 };
 
 export const BorderRadius = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-border-radius')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-border')))}`
 };
 
 export const Opacity = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-opacity')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-opacity')))}`
 };
 
 export const Shadow = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-shadow')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-shadow')))}`
 };
 
 export const Text = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-font') || value.includes('sys-text')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-font') || value.includes('sys-text')))}`
 };
 
 export const Status = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-status') && !['neutral', 'danger', 'success', 'warning', 'accent'].find(i => value.includes(i))))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-status') && !['neutral', 'danger', 'success', 'warning', 'accent'].find(i => value.includes(i))))}`
 };
 
 export const Support = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-support') ))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-support')))}`
 };
 
 export const Accent = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-accent')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-accent')))}`
 };
 
 export const Animation = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('ref-animation')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-animation')))}`
 };
 
 export const Interaction = {
-  render: () => html`
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.endsWith('sys-interaction-background') || value.endsWith('sys-interaction-color')))}
+  render: (_, context) => html`
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.endsWith('sys-interaction-background') || value.endsWith('sys-interaction-color')))}
   <h3 class="sbdocs-h2">Emphasis</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-emphasis')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-interaction-emphasis')))}
   <h3 class="sbdocs-h2">Destructive</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-destructive')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-interaction-destructive')))}
   <h3 class="sbdocs-h2">Highlighted</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-highlighted')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-interaction-highlighted')))}
   <h3 class="sbdocs-h2">Selected</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-selected')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-interaction-selected')))}
   <h3 class="sbdocs-h2">Disabled</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-disabled')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-interaction-disabled')))}
   <h3 class="sbdocs-h2">Field</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-interaction-field')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-interaction-field')))}
   `
 };
 
 export const Layer = {
-  render: () => html`
+  render: (_, context) => html`
   <h3 class="sbdocs-h2">Canvas</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-layer-canvas')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-layer-canvas')))}
   <h3 class="sbdocs-h2">Shell</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-layer-shell')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-layer-shell')))}
   <h3 class="sbdocs-h2">Container</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-layer-container')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-layer-container')))}
   <h3 class="sbdocs-h2">Overlay</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-layer-overlay')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-layer-overlay')))}
   <h3 class="sbdocs-h2">Popover</h3>
-  ${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-layer-popover')))}
+  ${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-layer-popover')))}
   `
 };
 
 export const VisualizationCategorical = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-visualization-categorical')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-visualization-categorical')))}`
 };
 
 export const VisualizationSequentialDivergingVirdis = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-visualization-sequential-diverging-virdis')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-visualization-sequential-diverging-virdis')))}`
 };
 
 export const VisualizationSequentialDivergingRedGreen = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-visualization-sequential-diverging-red-green')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-visualization-sequential-diverging-red-green')))}`
 };
 
 export const VisualizationTrend = {
-  render: () => html`${renderTokenTable(getFormattedTokens(tokenJSON, value => value.includes('sys-visualization-trend')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-visualization-trend')))}`
 };
 
 export const ContrastInvert = {
-  render: () => {
-    const tokens = Object.keys(getFormattedTokens(tokenJSON, value => value.includes('ref-color-green-grass'))).map(k => html`<div style="width: 50px; height: 50px; background: var(${k})"></div>`);
+  render: (_, context) => {
+    const tokens = Object.keys(getFormattedTokens(tokenJSON, context, value => value.includes('ref-color-green-grass'))).map(k => html`<div style="width: 50px; height: 50px; background: var(${k})"></div>`);
     return html`
     <div nve-layout="column gap:sm">
       <div nve-layout="row gap:md align:vertical-center"><p nve-text="label emphasis bold">light</p><div nve-theme="root light" nve-layout="row">${tokens}</div></div>
@@ -205,10 +205,10 @@ function getColorScale(color) {
   </div>`;
 }
 
-function getFormattedTokens(tokens, filter?: (toke: string) => boolean) {
+function getFormattedTokens(tokens, context: any, filter?: (toke: string) => boolean) {
   return Object.entries(tokens)
     .filter(([name]) => filter ? filter(name) : true)
-    .map(([name]) => ({ prop: `--${name.replace('nve', 'mlv')}`, value: getTokenValue(name, tokenJSON[name]) }))
+    .map(([name]) => ({ prop: `--${name.replace('nve', context.globals.scope)}`, value: getTokenValue(name, tokenJSON[name]) }))
     .reduce((prev, next) => ({ ...prev, [next.prop]: next.value }), { });
 }
 

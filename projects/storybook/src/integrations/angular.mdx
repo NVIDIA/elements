@@ -23,7 +23,7 @@ Next import the element your Angular component and add `CUSTOM_ELEMENTS_SCHEMA` 
 
 ```javascript
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@elements/elements/alert/define.js';
+import '@nvidia-elements/core/alert/define.js';
 
 @Component({
   selector: 'app-root',
@@ -111,8 +111,8 @@ such as tree-shaking.</nve-alert>
 
 ```json
 "assets": [
-  "@elements/elements/bundles/elements.0.30.0.bundle.css",
-  "@elements/elements/bundles/elements.0.30.0.bundle.js"
+  "@nvidia-elements/core/bundles/elements.0.30.0.bundle.css",
+  "@nvidia-elements/core/bundles/elements.0.30.0.bundle.js"
 ]
 ```
 
@@ -145,8 +145,8 @@ If you don't have a global `styles.scss` add one to your app's `angular.json` co
 
 ```css
 /* ./styles.css */
-@import '@elements/elements/dist/index.css';
-@import '@elements/elements/dist/inter.css';
+@import '@nvidia-elements/core/dist/index.css';
+@import '@nvidia-elements/core/dist/inter.css';
 ```
 
 ### TypeScript
@@ -209,8 +209,8 @@ declare module 'raw-loader!*.css' {
 
 ```typescript
 import { unsafeCSS } from 'lit';
-import typography from 'raw-loader!node_modules/@elements/elements/css/module.typography.css';
-import layout from 'raw-loader!node_modules/@elements/elements/css/module.layout.css';
+import typography from 'raw-loader!node_modules/@nvidia-elements/core/css/module.typography.css';
+import layout from 'raw-loader!node_modules/@nvidia-elements/core/css/module.layout.css';
 
 // Lit Component
 static override styles = [
