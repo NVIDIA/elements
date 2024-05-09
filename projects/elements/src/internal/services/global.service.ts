@@ -17,7 +17,9 @@ export class GlobalState {
       }
     };
 
+    /** @deprecated MLV_ELEMENTS */
     globalThis.MLV_ELEMENTS = globalThis.NVE_ELEMENTS;
+
     globalThis.NVE_ELEMENTS.state.versions = Array.from(new Set([...globalThis.NVE_ELEMENTS.state.versions, '0.0.0']));
   }
 

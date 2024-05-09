@@ -16,7 +16,7 @@ Tokens can be consumed via CSS Custom Properties, however data visualizatiion li
 APIs. To make it easier to theme these libraries a utility function is provided to convert the active theme tokens to a JavaScript object.
 
 ```typescript
-import { getThemeTokens } from '@elements/elements';
+import { getThemeTokens } from '@nvidia-elements/core';
 
 const tokens = getThemeTokens();
 
@@ -36,7 +36,7 @@ Below is a simple demo of a visualization library (ChartJS) consuming the tokens
 <Canvas of={Utils} story={{ inline: false, height: '600px' }} />
 
 ```typescript
-import { getThemeTokens } from '@elements/elements';
+import { getThemeTokens } from '@nvidia-elements/core';
 import Chart from 'chart.js/auto';
 
 const tokens = getThemeTokens();

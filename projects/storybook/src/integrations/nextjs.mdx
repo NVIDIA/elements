@@ -37,8 +37,8 @@ module.exports = withLitSSR(nextConfig);
 ```tsx
 import * as React from 'react';
 import { createComponent } from '@lit-labs/react';
-import { Dialog } from '@elements/elements/dialog/index.js';
-import '@elements/elements/dialog/define.js';
+import { Dialog } from '@nvidia-elements/core/dialog/index.js';
+import '@nvidia-elements/core/dialog/define.js';
 
 const MlvDialog = createComponent({ react: React, tagName: 'nve-dialog', elementClass: Dialog, events: { onclose: 'close' } });
 ```
@@ -65,8 +65,8 @@ import { createComponent } from '@lit-labs/react';
 import dynamic from 'next/dynamic';
 
 export const MlvDialog = dynamic(async () => {
-  import('@elements/elements/dialog/define.js');
-  const { Dialog } = await import('@elements/elements/dialog');
+  import('@nvidia-elements/core/dialog/define.js');
+  const { Dialog } = await import('@nvidia-elements/core/dialog');
   return createComponent({ react: React, tagName: Dialog.metadata.tag, elementClass: Dialog, events: { onclose: 'close' } });
 }, { ssr: false });
 ```
