@@ -1,3 +1,10 @@
+## [@elements/elements-v0.33.3](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.2...@elements/elements-v0.33.3) (2024-05-10)
+
+
+### Bug Fixes
+
+* **elements:** toolbar slots in chrome v125 ([414310b](https://github.com/NVIDIA/elements/commit/414310bc047e6c4437cc5313a42876ef1f04542c))
+
 ## [@elements/elements-v0.33.2](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.1...@elements/elements-v0.33.2) (2024-05-08)
 
 
