@@ -276,9 +276,9 @@ export function applySlotContentStates(slot: HTMLSlotElement, element: HTMLEleme
   const name = slot.name ?? 'slot';
 
   if (nodes.length) {
-    element._internals.states.add(`--has-${name}`);
+    element._internals.states.add(`has-${name}`);
   } else {
-    element._internals.states.delete(`--has-${name}`);
+    element._internals.states.delete(`has-${name}`);
   }
 }
 
