@@ -39,6 +39,9 @@ class CustomStateSetPolyfill extends Set {
 
 export function setupCustomStateSetPolyfill() {
   try {
+    if (globalThis.happyDOM) {
+      throw new Error(':state() unsupported in happy-dom');
+    }
     globalThis.document.body.matches(':state(supported)');
   } catch {
     if (globalThis.HTMLElement) {
