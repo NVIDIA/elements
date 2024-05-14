@@ -1,3 +1,10 @@
+## [@elements/elements-v0.33.4](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.3...@elements/elements-v0.33.4) (2024-05-14)
+
+
+### Bug Fixes
+
+* **elements:** custom states happy-dom polyfill ([1c1d718](https://github.com/NVIDIA/elements/commit/1c1d7183c1c5a21fc0cb31d93c2a17ddd4178f4c))
+
 ## [@elements/elements-v0.33.3](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.2...@elements/elements-v0.33.3) (2024-05-10)
 
 
