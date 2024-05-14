@@ -13,7 +13,7 @@ as this gives more flexibility to the user without expanding the public API surf
 CSS Custom Property names simple and map them 1:1 to the native CSS property. This lowers the learning
 curve of the API and makes it consistent between other components within the library.
 
-<mlv-alert status="success">Do:</mlv-alert>
+<nve-alert status="success">Do:</nve-alert>
 
 ```css
 :host {
@@ -23,7 +23,7 @@ curve of the API and makes it consistent between other components within the lib
 }
 ```
 
-<mlv-alert status="danger">Don't:</mlv-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 
 ```css
 :host {
@@ -42,7 +42,7 @@ a custom element, avoid applying styles other than basic display properties and 
 to the host element. The more styles applied to the host, the easier it is for a consumer to
 override and change the styles in unexpected ways.
 
-<mlv-alert status="danger">Don't:</mlv-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 
 ```html
 <!-- element internal template -->
@@ -80,7 +80,7 @@ difficult for both the library authors and consumers.
 To prevent internal style leakage, leverage a internal host element to apply styles
 and expose only the styles as needed to the public facing API.
 
-<mlv-alert status="success">Do:</mlv-alert>
+<nve-alert status="success">Do:</nve-alert>
 
 ```html
 <!-- element internal template -->
@@ -117,7 +117,7 @@ Leverage host selectors to customize the element visual state. This avoids expan
 of the element and enabling a single CSS representation of the component. Each visual variant
 is solely responsible for modifying the public API to reflect the appropriate state.
 
-<mlv-alert status="success">Do:</mlv-alert>
+<nve-alert status="success">Do:</nve-alert>
 
 ```css
 :host {
@@ -168,7 +168,7 @@ mlv-alert.product-custom:hover {
 
 Visual customizations and theming are now fully compatible throughout the public API of the CSS custom properties.
 
-<mlv-alert status="danger">Don't:</mlv-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 
 ```css
 :host {
@@ -211,7 +211,7 @@ using the system's intent/purpose tokens. Leveraging State Properties for CSS cu
 properties, element specific design tokens are unnecessary and increase the surface
 area of the API and number of tokens to maintain. (see State Properties for more information)
 
-<mlv-alert status="success">Do:</mlv-alert>
+<nve-alert status="success">Do:</nve-alert>
 
 ```css
 :host([status='danger']) {
@@ -223,7 +223,7 @@ area of the API and number of tokens to maintain. (see State Properties for more
 }
 ```
 
-<mlv-alert status="danger">Don't:</mlv-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 
 ```css
 :host([status='danger']) {
@@ -235,7 +235,7 @@ area of the API and number of tokens to maintain. (see State Properties for more
 }
 ```
 
-<mlv-alert><mlv-icon slot="icon">🏁</mlv-icon> Performance: leveraging design tokens with defined intent we drastically reduce the amount of CSS bundled and maintained within the system.</mlv-alert>
+<nve-alert><nve-icon slot="icon">🏁</nve-icon> Performance: leveraging design tokens with defined intent we drastically reduce the amount of CSS bundled and maintained within the system.</nve-alert>
 
 ## Element Style APIs
 
@@ -246,9 +246,9 @@ For custom states and behaviors, styles can be hooked into the public API of a r
 - behaviors `closable` | `draggable`
 
 ```html
-<mlv-accordion-panel expanded>
+<nve-accordion-panel expanded>
   <p>hello there!</p>
-</mlv-accordion-panel>
+</nve-accordion-panel>
 
 <style>
 /* element internal styles */
@@ -270,9 +270,9 @@ Margins on a host element make assumptions about the layout that is external to 
 Using a design token/layout system, designers and developers should be able to layout elements/utilities
 consistently and with explicit intent and constraint.
 
-<mlv-alert><mlv-icon slot="icon">🏁</mlv-icon> Performance: Avoiding margins enables &nbsp;<a href="https://developer.chrome.com/blog/css-containment/">CSS containment for better performance</a></mlv-alert>
-<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Learn: &nbsp;<a href="https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202">Leading Trim</a></mlv-alert>
-<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Learn: &nbsp;<a href="https://seek-oss.github.io/capsize/">Capsize CSS</a></mlv-alert>
+<nve-alert><nve-icon slot="icon">🏁</nve-icon> Performance: Avoiding margins enables &nbsp;<a href="https://developer.chrome.com/blog/css-containment/">CSS containment for better performance</a></nve-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: &nbsp;<a href="https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202">Leading Trim</a></nve-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: &nbsp;<a href="https://seek-oss.github.io/capsize/">Capsize CSS</a></nve-alert>
 
 ## Logical Properties
 
@@ -280,8 +280,8 @@ Use CSS Logical Properties when the styles are applied to text content that may 
 By using logical properties the styles will follow the reading direction of the element. This is needed for i18n
 support when the reading order is reversed by the user preferences in the browser.
 
-<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Learn: &nbsp;<a href="https://web.dev/logical-property-shorthands/">CSS Logical Properties</a></mlv-alert>
-<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Case Study: &nbsp;<a href="https://storybook.core.clarity.design/?path=/docs/stories-forms--internationalization">Example of inverted form controls </a></mlv-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: &nbsp;<a href="https://web.dev/logical-property-shorthands/">CSS Logical Properties</a></nve-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Case Study: &nbsp;<a href="https://storybook.core.clarity.design/?path=/docs/stories-forms--internationalization">Example of inverted form controls </a></nve-alert>
 
 ## Parts
 
@@ -299,7 +299,7 @@ CSS Parts enable elements to expose DOM elements to consumers that typically wou
 </style>
 ```
 
-<mlv-alert status="warning">Warning: avoid using: CSS Parts can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</mlv-alert>
+<nve-alert status="warning">Warning: avoid using: CSS Parts can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</nve-alert>
 
 CSS Parts give full control to the application developer however, this comes with a significant
 tradeoff. As more internal elements are exposed they become part of the public API of the element.
@@ -311,7 +311,7 @@ its own well defined and versioned API.
 
 ```html
 <!-- mlv-dialog internal template -->
-<mlv-icon-button part="close-icon"></mlv-icon-button>
+<nve-icon-button part="close-icon"></nve-icon-button>
 
 <!-- consumer css -->
 <style>
@@ -331,3 +331,30 @@ any context, regardless if the element is in a datagrid, dashboard or article co
 accomplished by leveraging APIs like ResizeObserver and in the future Container Queries.
 
 <Story of={Responsive} />
+
+## Performance &amp; Imports
+
+Component specific styles can be extracted and imported from a separate CSS file.
+
+```typescript
+import styles from './badge.css?inline';
+
+export class Badge extends LitElement {
+
+  static styles = useStyles([styles]);
+
+  ...
+}
+```
+
+Components should not import theme files or text/layout utilities. These stylesheets are
+designed for global application level styles. Imports will cause the styles to be inlined
+at runtime and create severe performance penalties to consumers of the component.
+
+<nve-alert status="danger">Don't:</nve-alert>
+
+```typescript
+import theme from '@nvidia-elements/themes/dist/index.css?inline';
+import layout from '@nvidia-elements/core/dist/css/module.layout.css?inline';
+import typography from '@nvidia-elements/core/dist/css/module.typography.css?inline';
+```
