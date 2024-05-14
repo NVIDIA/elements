@@ -331,3 +331,30 @@ any context, regardless if the element is in a datagrid, dashboard or article co
 accomplished by leveraging APIs like ResizeObserver and in the future Container Queries.
 
 <Story of={Responsive} />
+
+## Performance &amp; Imports
+
+Component specific styles can be extracted and imported from a separate CSS file.
+
+```typescript
+import styles from './badge.css?inline';
+
+export class Badge extends LitElement {
+
+  static styles = useStyles([styles]);
+
+  ...
+}
+```
+
+Components should not import theme files or text/layout utilities. These stylesheets are
+designed for global application level styles. Imports will cause the styles to be inlined
+at runtime and create severe performance penalties to consumers of the component.
+
+<nve-alert status="danger">Don't:</nve-alert>
+
+```typescript
+import theme from '@nvidia-elements/themes/dist/index.css?inline';
+import layout from '@nvidia-elements/core/dist/css/module.layout.css?inline';
+import typography from '@nvidia-elements/core/dist/css/module.typography.css?inline';
+```
