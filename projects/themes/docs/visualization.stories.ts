@@ -83,24 +83,17 @@ export const Utils = {
           labels: Array(7).fill('').map((_, i) => 2017 + i),
           datasets: ['cyan', 'seafoam', 'grass', 'pear', 'nova', 'amber', 'pumpkin', 'red', 'rose', 'lavender', 'violet'].map(label => {
             const color = getComputedStyle(document.body).getPropertyValue('--mlv-sys-visualization-categorical-' + label);
-            function hexToRGB(hex, alpha = 1) {
-              const r = parseInt(hex.slice(1, 3), 16);
-              const g = parseInt(hex.slice(3, 5), 16);
-              const b = parseInt(hex.slice(5, 7), 16);
-              if (alpha) {
-                return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
-              } else {
-                return "rgb(" + r + ", " + g + ", " + b + ")";
-              }
+            function applyOpacityToColor(color, opacity) {
+              return 'color-mix(in oklch, '+ color + ', transparent ' + (100 - opacity * 100) + '%)';
             }
 
-            const alpha = (type === 'line' || type === 'bar' || type === 'bubble') ? 1 : 0.5;
+            const opacity = (type === 'line' || type === 'bar' || type === 'bubble') ? 1 : 0.5;
 
             return {
               label: label,
               data: Array(7).fill('').map((_, i) => Math.floor(Math.random() * (90 - 10 + 1) + 10)),
-              backgroundColor: hexToRGB(color, alpha),
-              borderColor: hexToRGB(color, alpha)
+              backgroundColor: applyOpacityToColor(color, opacity),
+              borderColor: applyOpacityToColor(color, opacity)
             };
           }),
         };
