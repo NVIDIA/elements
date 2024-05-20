@@ -13,7 +13,11 @@ export default defineConfig({
     },
     include: [resolve('./src/**/*.test.ts')],
     forceRerunTriggers: ['**/dist/**'],
-    deps: { external: ['**/node_modules/**'] },
+    server: {
+      deps: {
+        external: ['**/node_modules/**']
+      }
+    },
     browser: {
       enabled: true,
       headless: !watch,
