@@ -45,7 +45,7 @@
     }
 
     &.css-1x6cwi2 {
-      --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+      --nve-sys-interaction-state-ratio: 0%;
     }
   }
 
@@ -56,6 +56,7 @@
     border-radius: var(--nve-ref-border-radius-xs) !important;
     font-size: var(--nve-ref-font-size-200) !important;
     padding-block: 0 !important;
+    padding-inline: 28px 6px !important;
     align-items: center !important;
 
     &:hover {
@@ -71,7 +72,7 @@
     }
 
     &[data-selected='true']:not(#about-getting-started--docs) {
-      --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+      --nve-sys-interaction-state-ratio: 0%;
     }
 
     & svg[width='14'],
@@ -80,27 +81,43 @@
     }
 
     & a {
-      padding-left: 48px;
+      padding-left: 26px;
     }
   }
 
-  .css-1ut08p0,
-  .css-92gwvb .css-1h0aucu,
-  a .css-99l9qv {
-    display: none !important;
+  .css-d3imve {
+    padding-inline: 8px !important;
   }
 
   .css-92gwvb {
+    background: none !important;
     color: var(--nve-sys-text-muted-color) !important;
-    padding: 0 8px 0 0 !important;
+    padding: 0 8px 0 4px !important;
+    min-width: 97%;
+  }
+
+  .css-p33hfx {
+    padding-left: 45px !important;
   }
 
   .css-1xavl7t {
-    padding-inline: 6px !important;
+    padding-left: 36px !important;
+  }
+
+  .css-1qs63ah {
+    font-weight: 500;
+    text-transform: capitalize;
+    font-size: 14px !important;
+    padding: 8px 8px !important;
+    margin-top: 2px !important;
+  }
+
+  [data-selected='true'] .css-1xavl7t a {
+    font-weight: 600;
   }
 
   [data-item-id*='--docs'] a {
-    padding-left: 18px;
+    padding-left: 0;
   }
 
   [data-test-id='sb-preview-toolbar'] {
