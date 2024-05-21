@@ -21,13 +21,13 @@ export class ProgressBar extends LitElement {
   };
 
   /** The current `value` of the progress indicator, set to the native HTML progress element. */
-  @property({ type: Number }) value?: number = 0;
+  @property({ type: Number }) value?: number = 0; // Todo add animating state when value not set
 
   /** The `max` property sets the highest value that `value` will be scaled to. */
   @property({ type: Number }) max? = 100;
 
   /** Defines visual treatment to represent a ongoing task or support status. */
-  @property({ type: String, reflect: true }) status: SupportStatus;
+  @property({ type: String, reflect: true }) status: SupportStatus; // TODO FIX THIS DEFAULT TO NOT SET WILL BREAK, add default for brand color
 
   render() {
     const classes = { full: this.value === this.max, minWidth: this.value > 0 };
