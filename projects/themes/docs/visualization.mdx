@@ -1,4 +1,4 @@
-import { Canvas, Meta } from '@storybook/addon-docs';
+import { Canvas, Story, Meta } from '@storybook/addon-docs';
 import { VisualizationCategorical, VisualizationSequentialDivergingVirdis, VisualizationSequentialDivergingRedGreen, VisualizationTrend } from './tokens.stories';
 import { Utils } from './visualization.stories';
 
@@ -62,18 +62,18 @@ new Chart(document.querySelector('canvas'), {
 The categorical tokens are used for visualizations that represent various categories or groups.
 These values are useful when the data has distinct groups but no natural numerical order.
 
-<Canvas of={VisualizationCategorical} />
+<Story of={VisualizationCategorical} />
 
 ## Sequential Diverging Virdis
 
 The diverging tokens are used for visualizations that represent two opposing values or groups of data. This can be useful for data with a natural center and the goal is to highlight the differences or deviations from the center.
 
-<Canvas of={VisualizationSequentialDivergingVirdis} />
+<Story of={VisualizationSequentialDivergingVirdis} />
 
 ## Sequential Diverging Red Green
 
-<Canvas of={VisualizationSequentialDivergingRedGreen} />
+<Story of={VisualizationSequentialDivergingRedGreen} />
 
 ## Trend
 
-<Canvas of={VisualizationTrend} />
+<Story of={VisualizationTrend} />
