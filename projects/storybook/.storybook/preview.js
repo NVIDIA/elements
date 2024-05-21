@@ -43,13 +43,11 @@ export const parameters = {
     theme: themes.dark,
     source: {
       transform: (source, context) => {
-        const excludes = context.id.includes('foundations-tokens-examples--');
-        
-        // remove playground button
+        // remove playground button from view source code in Storybook
         source = source.trim().replace(/<nve-button class="playground-btn" size="sm">.*<\/nve-button>/g, '')
 
         // basic html formatting
-        source = excludes ? source : format(source.replaceAll('=""', ''), ' '.repeat(2), 120); // https://github.com/storybookjs/storybook/issues/10467
+        source = format(source.replaceAll('=""', ''), ' '.repeat(2), 120); // https://github.com/storybookjs/storybook/issues/10467
 
         return updateScope(source, { scope: context.globals.scope, sourceType: context.globals.sourceType  });
       }
