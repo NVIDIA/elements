@@ -107,6 +107,13 @@ addons.register('my-addon', () => {
     render: () => <ThemePicker />,
   });
 });
+  
+addons.setConfig({
+  sidebar: {
+    showRoots: true,
+    collapsedRoots: ['about', 'integrations', 'foundations', 'elements', 'patterns', 'testing', 'labs', 'internal', 'deprecated'],
+  },
+});
 
 declare global {
   namespace JSX {
