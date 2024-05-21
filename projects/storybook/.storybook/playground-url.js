@@ -10,7 +10,7 @@ export function playground(Story, context) {
   const story = Story();
   // if story is using lit dynamic templating and or args skip generating playground url
   const usesDynamicArgs = Object.keys(context.unmappedArgs).length && story.values?.length;
-  if (usesDynamicArgs || context.viewMode === 'story' || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('elements-data-grid-examples--performance')) {
+  if (usesDynamicArgs || context.viewMode === 'story' || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('foundations-typography') ||context.id.includes('elements-data-grid-examples--performance')) {
     return story;
   } else {
     let source = story;
