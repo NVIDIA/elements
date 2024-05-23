@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v0.28.13](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.28.12...@nvidia-elements/themes-v0.28.13) (2024-05-23)
+
+
+### Bug Fixes
+
+* **docs:** disable broken playground links ([e7d09f2](https://github.com/NVIDIA/elements/commit/e7d09f2d2674a21d9dd19cba360efc21c3506efe))
+
 ## [@nvidia-elements/themes-v0.28.12](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.28.11...@nvidia-elements/themes-v0.28.12) (2024-05-08)
 
 
