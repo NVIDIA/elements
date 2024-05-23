@@ -25,6 +25,7 @@ export default {
         'playground',
         'testing',
         'themes',
+        'labs-behaviors-alpine',
         'labs-lighthouse'
       ]
     ]
