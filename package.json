@@ -102,7 +102,7 @@
       ]
     },
     "release:labs-behaviors-alpine": {
-      "command": "cd labs/behaviors-alpine && pnpm exec semantic-release",
+      "command": "cd projects/labs/behaviors-alpine && pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
