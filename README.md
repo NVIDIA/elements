@@ -95,7 +95,7 @@ git commit -a -m "fix(core): disabled multi-select"
 | `testing`         | `/projects/testing`        |
 | `themes`          | `/projects/themes`         |
 | `labs`            | `/projects/labs`           |
-| `labs-lighthouse` | `/labs/themes`             |
+| `labs-lighthouse` | `/labs/lighthouse`         |
 
 Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
 
