@@ -11,6 +11,7 @@ packages:
   - 'projects/starters/static'
   - 'projects/starters/typescript'
   - 'projects/starters/vue'
+  - 'projects/labs/behaviors-alpine'
   - 'projects/labs/lighthouse'
   - 'projects/pages'
   - 'projects/elements'
