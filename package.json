@@ -79,7 +79,8 @@
         "release:themes",
         "release:testing",
         "release:elements",
-        "release:elements-react"
+        "release:elements-react",
+        "release:labs-behaviors-alpine"
       ]
     },
     "release:themes": {
@@ -96,6 +97,12 @@
     },
     "release:elements-react": {
       "command": "cd projects/elements-react && pnpm exec semantic-release",
+      "dependencies": [
+        "release:elements"
+      ]
+    },
+    "release:labs-behaviors-alpine": {
+      "command": "cd labs/behaviors-alpine && pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
