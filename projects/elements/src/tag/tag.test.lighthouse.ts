@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/lighthouse';
+import { runner } from '@nvidia-elements/testing-lighthouse';
 
 describe('tag lighthouse report', () => {
   test('tag should meet lighthouse benchmarks', async () => {

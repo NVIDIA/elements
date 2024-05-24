@@ -1,12 +1,6 @@
-import { Meta } from '@storybook/addon-docs';
+# @nvidia-elements/testing-lighthouse
 
-<Meta title="Labs/Lighthouse" />
-
-# Lighthouse
-
-<nve-alert status="warning">Currently internal package. Public API not yet available.</nve-alert>
-
-The `@nvidia-elements/lighthouse` project provides utilities for running Lighthouse audits via Vite. This will run a series of Accessibility, Performance and Best Practice tests against each component in isolation. Due to the isolation required for the tests, the average test takes around 5-6 seconds to complete.
+The `@nvidia-elements/testing-lighthouse` project provides utilities for running Lighthouse audits via Vite. This will run a series of Accessibility, Performance and Best Practice tests against each component in isolation. Due to the isolation required for the tests, the average test takes around 5-6 seconds to complete.
 
 ## Install
 
@@ -16,7 +10,7 @@ The `@nvidia-elements/lighthouse` project provides utilities for running Lightho
 ```
 
 ```shell
-pnpm install @nvidia-elements/lighthouse --save-dev
+pnpm install @nvidia-elements/testing-lighthouse --save-dev
 ```
 
 ## Configure Vitest
@@ -25,7 +19,7 @@ Create a vite.lighthouse.ts file in your project root with the following content
 
 ```typescript
 import { defineConfig } from 'vitest/config';
-import { createConfig } from '@nvidia-elements/lighthouse/vite';
+import { createConfig } from '@nvidia-elements/testing-lighthouse/vite';
 
 export default defineConfig(
   createConfig({
@@ -66,7 +60,7 @@ Create a test file example: `src/badge/badge.test.lighthouse.ts`
 
 ```typescript
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/lighthouse';
+import { runner } from '@nvidia-elements/testing-lighthouse';
 
 describe('badge lighthouse report', () => {
   test('badge should meet lighthouse benchmarks', async () => {
