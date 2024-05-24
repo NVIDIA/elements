@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitest/config';
-import { createConfig } from '@nvidia-elements/lighthouse/vite';
+import { createConfig } from '@nvidia-elements/testing-lighthouse/vite';
 
 export default defineConfig(
   createConfig({

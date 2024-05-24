@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/lighthouse';
+import { runner } from '@nvidia-elements/testing-lighthouse';
 
 describe('combobox lighthouse report', () => {
   test('combobox should meet lighthouse benchmarks', async () => {

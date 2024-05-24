@@ -1,5 +1,5 @@
 {
-  "name": "@nvidia-elements/lighthouse",
+  "name": "@nvidia-elements/testing-lighthouse",
   "version": "0.0.0",
   "type": "module",
   "description": "Lighthouse Utilities for Vite",
