@@ -14,9 +14,7 @@ class StatePressedControllerTestElement extends LitElement {
 }
 
 /**
- * In real browsers the State CSS selector is `:state(pressed)` rather than the polyfilled `:state(pressed)]` selector for vitest/js-dom env
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
- * https://github.com/calebdwilliams/element-internals-polyfill#state-api
  */
 describe('state-pressed.controller', () => {
   let element: StatePressedControllerTestElement;

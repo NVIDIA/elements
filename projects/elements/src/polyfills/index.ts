@@ -10,7 +10,7 @@
 import 'construct-style-sheets-polyfill';
 import 'element-internals-polyfill';
 import 'formdata-polyfill';
-// import './custom-state-set.js'; // once chromium ships custom states, enable this line and remove the corresponding line in internals/utils/dom.ts
+import './custom-state-set.js';
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute
