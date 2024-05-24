@@ -6,6 +6,7 @@ import styles from './menu-item.css?inline';
  * @element nve-menu-item
  * @since 0.11.0
  * @slot - default slot for content
+ * @slot suffix - slot for suffix icon
  * @cssprop --background
  * @cssprop --border-radius
  * @cssprop --font-size
@@ -34,6 +35,7 @@ export class MenuItem extends BaseButton {
     return html`
       <div internal-host interaction-state focus-within part="internal">
         <slot></slot>
+        <slot name="suffix"></slot>
       </div>
     `;
   }

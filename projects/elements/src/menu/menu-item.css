@@ -101,3 +101,7 @@
 ::slotted(nve-icon) {
   --color: var(--nve-sys-text-muted-color);
 }
+
+::slotted([slot='suffix']) {
+  margin-left: auto;
+}
