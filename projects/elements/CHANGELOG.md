@@ -1,3 +1,10 @@
+## [@elements/elements-v0.33.5](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.4...@elements/elements-v0.33.5) (2024-05-24)
+
+
+### Bug Fixes
+
+* **elements:** update custom state set ([fef25c7](https://github.com/NVIDIA/elements/commit/fef25c7c7a31ed340d05cc9dc41301fd7be1cc79))
+
 ## [@elements/elements-v0.33.4](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.3...@elements/elements-v0.33.4) (2024-05-14)
 
 
