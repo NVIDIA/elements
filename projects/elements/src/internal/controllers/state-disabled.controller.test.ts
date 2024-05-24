@@ -15,7 +15,6 @@ class StateDisabledControllerTestElement extends LitElement {
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
- * https://github.com/calebdwilliams/element-internals-polyfill#state-api
  */
 describe('state-disabled.controller', () => {
   let element: StateDisabledControllerTestElement;

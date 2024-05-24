@@ -1,5 +1,5 @@
 {
-  "created": "2024-05-07T17:18:47.375Z",
+  "created": "2024-05-21T15:42:41.519Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -118,10 +118,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.691,
+            "kb": 18.482,
             "requests": {
               "index.js": {
-                "kb": 18.107,
+                "kb": 17.898,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -234,10 +234,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.691,
+            "kb": 18.482,
             "requests": {
               "index.js": {
-                "kb": 18.107,
+                "kb": 17.898,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -330,10 +330,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.691,
+            "kb": 18.482,
             "requests": {
               "index.js": {
-                "kb": 18.107,
+                "kb": 17.898,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -398,10 +398,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.691,
+            "kb": 18.482,
             "requests": {
               "index.js": {
-                "kb": 18.107,
+                "kb": 17.898,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -544,10 +544,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.765,
+            "kb": 18.554,
             "requests": {
               "index.js": {
-                "kb": 17.991,
+                "kb": 17.78,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -730,10 +730,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.765,
+            "kb": 18.554,
             "requests": {
               "index.js": {
-                "kb": 17.991,
+                "kb": 17.78,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -865,10 +865,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.768,
+            "kb": 18.556,
             "requests": {
               "index.js": {
-                "kb": 17.994,
+                "kb": 17.782,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -984,10 +984,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.751,
+            "kb": 18.539,
             "requests": {
               "index.js": {
-                "kb": 17.994,
+                "kb": 17.782,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -1162,10 +1162,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.794,
+            "kb": 14.589,
             "requests": {
               "index.js": {
-                "kb": 14.794,
+                "kb": 14.589,
                 "name": "index.js"
               }
             }
@@ -1291,10 +1291,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.719,
+            "kb": 15.505,
             "requests": {
               "index.js": {
-                "kb": 15.071,
+                "kb": 14.857,
                 "name": "index.js"
               },
               "chevron.svg.js": {
@@ -1598,10 +1598,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.607,
+            "kb": 10.348,
             "requests": {
               "index.js": {
-                "kb": 10.607,
+                "kb": 10.348,
                 "name": "index.js"
               }
             }
@@ -1787,10 +1787,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 10.238,
+            "kb": 9.98,
             "requests": {
               "index.js": {
-                "kb": 10.238,
+                "kb": 9.98,
                 "name": "index.js"
               }
             }
@@ -1936,10 +1936,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.734,
+            "kb": 8.457,
             "requests": {
               "index.js": {
-                "kb": 8.734,
+                "kb": 8.457,
                 "name": "index.js"
               }
             }
@@ -2060,10 +2060,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.734,
+            "kb": 8.457,
             "requests": {
               "index.js": {
-                "kb": 8.734,
+                "kb": 8.457,
                 "name": "index.js"
               }
             }
@@ -2121,10 +2121,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.734,
+            "kb": 8.457,
             "requests": {
               "index.js": {
-                "kb": 8.734,
+                "kb": 8.457,
                 "name": "index.js"
               }
             }
@@ -2200,10 +2200,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.734,
+            "kb": 8.457,
             "requests": {
               "index.js": {
-                "kb": 8.734,
+                "kb": 8.457,
                 "name": "index.js"
               }
             }
@@ -2424,10 +2424,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.246,
+            "kb": 22.017,
             "requests": {
               "index.js": {
-                "kb": 22.246,
+                "kb": 22.017,
                 "name": "index.js"
               }
             }
@@ -2557,10 +2557,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.246,
+            "kb": 22.017,
             "requests": {
               "index.js": {
-                "kb": 22.246,
+                "kb": 22.017,
                 "name": "index.js"
               }
             }
@@ -2775,10 +2775,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.616,
+            "kb": 23.389,
             "requests": {
               "index.js": {
-                "kb": 22.562,
+                "kb": 22.335,
                 "name": "index.js"
               },
               "dropper.svg.js": {
@@ -3069,10 +3069,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.671,
+            "kb": 39.436,
             "requests": {
               "index.js": {
-                "kb": 38.897,
+                "kb": 38.662,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3305,10 +3305,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.635,
+            "kb": 22.413,
             "requests": {
               "index.js": {
-                "kb": 21.861,
+                "kb": 21.639,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3391,10 +3391,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.635,
+            "kb": 22.413,
             "requests": {
               "index.js": {
-                "kb": 21.861,
+                "kb": 21.639,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3491,10 +3491,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.635,
+            "kb": 22.413,
             "requests": {
               "index.js": {
-                "kb": 21.861,
+                "kb": 21.639,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -3713,10 +3713,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.295,
+            "kb": 23.071,
             "requests": {
               "index.js": {
-                "kb": 22.402,
+                "kb": 22.178,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -3956,10 +3956,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.299,
+            "kb": 23.075,
             "requests": {
               "index.js": {
-                "kb": 22.406,
+                "kb": 22.182,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -4199,10 +4199,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.445,
+            "kb": 28.268,
             "requests": {
               "index.js": {
-                "kb": 27.633,
+                "kb": 27.456,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4310,10 +4310,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.445,
+            "kb": 28.268,
             "requests": {
               "index.js": {
-                "kb": 27.633,
+                "kb": 27.456,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4370,10 +4370,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.445,
+            "kb": 28.268,
             "requests": {
               "index.js": {
-                "kb": 27.633,
+                "kb": 27.456,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4452,10 +4452,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.302,
+            "kb": 8.035,
             "requests": {
               "index.js": {
-                "kb": 8.302,
+                "kb": 8.035,
                 "name": "index.js"
               }
             }
@@ -4601,10 +4601,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.771,
+            "kb": 8.505,
             "requests": {
               "index.js": {
-                "kb": 8.771,
+                "kb": 8.505,
                 "name": "index.js"
               }
             }
@@ -4865,10 +4865,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.71,
+            "kb": 28.53,
             "requests": {
               "index.js": {
-                "kb": 27.898,
+                "kb": 27.718,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -4971,10 +4971,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.71,
+            "kb": 28.53,
             "requests": {
               "index.js": {
-                "kb": 27.898,
+                "kb": 27.718,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5031,10 +5031,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.71,
+            "kb": 28.53,
             "requests": {
               "index.js": {
-                "kb": 27.898,
+                "kb": 27.718,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5091,10 +5091,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 28.71,
+            "kb": 28.53,
             "requests": {
               "index.js": {
-                "kb": 27.898,
+                "kb": 27.718,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5301,10 +5301,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.277,
+            "kb": 29.046,
             "requests": {
               "index.js": {
-                "kb": 28.465,
+                "kb": 28.234,
                 "name": "index.js"
               },
               "cancel.svg.js": {
@@ -5592,10 +5592,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.066,
+            "kb": 21.834,
             "requests": {
               "index.js": {
-                "kb": 22.066,
+                "kb": 21.834,
                 "name": "index.js"
               }
             }
@@ -5719,10 +5719,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.194,
+            "kb": 19.964,
             "requests": {
               "index.js": {
-                "kb": 20.194,
+                "kb": 19.964,
                 "name": "index.js"
               }
             }
@@ -5813,10 +5813,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.194,
+            "kb": 19.964,
             "requests": {
               "index.js": {
-                "kb": 20.194,
+                "kb": 19.964,
                 "name": "index.js"
               }
             }
@@ -5949,10 +5949,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.194,
+            "kb": 19.964,
             "requests": {
               "index.js": {
-                "kb": 20.194,
+                "kb": 19.964,
                 "name": "index.js"
               }
             }
@@ -6019,10 +6019,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.194,
+            "kb": 19.964,
             "requests": {
               "index.js": {
-                "kb": 20.194,
+                "kb": 19.964,
                 "name": "index.js"
               }
             }
@@ -6086,10 +6086,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.194,
+            "kb": 19.964,
             "requests": {
               "index.js": {
-                "kb": 20.194,
+                "kb": 19.964,
                 "name": "index.js"
               }
             }
@@ -6150,10 +6150,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.194,
+            "kb": 19.964,
             "requests": {
               "index.js": {
-                "kb": 20.194,
+                "kb": 19.964,
                 "name": "index.js"
               }
             }
@@ -6229,10 +6229,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 20.194,
+            "kb": 19.964,
             "requests": {
               "index.js": {
-                "kb": 20.194,
+                "kb": 19.964,
                 "name": "index.js"
               }
             }
@@ -6315,7 +6315,7 @@
           {
             "name": "name",
             "type": {
-              "text": "'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'start' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out' | default"
+              "text": "'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'ancestors' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'color-palette' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'inspect' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'outline' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'start' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out' | default"
             },
             "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
             "fieldName": "name"
@@ -6342,10 +6342,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 13.582,
+            "kb": 13.367,
             "requests": {
               "index.js": {
-                "kb": 12.825,
+                "kb": 12.61,
                 "name": "index.js"
               },
               "person.svg.js": {
@@ -6521,7 +6521,7 @@
           {
             "name": "icon-name",
             "type": {
-              "text": "'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'start' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out'"
+              "text": "'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'ancestors' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'color-palette' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'inspect' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'outline' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'start' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out'"
             },
             "description": "Sets the icon name, which determines which icon to display.",
             "fieldName": "iconName"
@@ -6775,10 +6775,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.924,
+            "kb": 15.698,
             "requests": {
               "index.js": {
-                "kb": 15.924,
+                "kb": 15.698,
                 "name": "index.js"
               }
             }
@@ -7098,10 +7098,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.658,
+            "kb": 22.44,
             "requests": {
               "index.js": {
-                "kb": 22.658,
+                "kb": 22.44,
                 "name": "index.js"
               }
             }
@@ -7226,10 +7226,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.658,
+            "kb": 22.44,
             "requests": {
               "index.js": {
-                "kb": 22.658,
+                "kb": 22.44,
                 "name": "index.js"
               }
             }
@@ -7424,10 +7424,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 9.443,
+            "kb": 9.173,
             "requests": {
               "index.js": {
-                "kb": 9.443,
+                "kb": 9.173,
                 "name": "index.js"
               }
             }
@@ -7524,10 +7524,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.551,
+            "kb": 11.288,
             "requests": {
               "index.js": {
-                "kb": 11.551,
+                "kb": 11.288,
                 "name": "index.js"
               }
             }
@@ -7821,10 +7821,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.551,
+            "kb": 11.288,
             "requests": {
               "index.js": {
-                "kb": 11.551,
+                "kb": 11.288,
                 "name": "index.js"
               }
             }
@@ -8039,10 +8039,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.297,
+            "kb": 23.072,
             "requests": {
               "index.js": {
-                "kb": 22.404,
+                "kb": 22.179,
                 "name": "index.js"
               },
               "calendar.svg.js": {
@@ -8292,10 +8292,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.485,
+            "kb": 29.24,
             "requests": {
               "index.js": {
-                "kb": 28.711,
+                "kb": 28.466,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -8429,10 +8429,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.485,
+            "kb": 29.24,
             "requests": {
               "index.js": {
-                "kb": 28.711,
+                "kb": 28.466,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -8495,10 +8495,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.906,
+            "kb": 22.678,
             "requests": {
               "index.js": {
-                "kb": 22.906,
+                "kb": 22.678,
                 "name": "index.js"
               }
             }
@@ -8714,10 +8714,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.19,
+            "kb": 41.99,
             "requests": {
               "index.js": {
-                "kb": 40.308,
+                "kb": 40.108,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -8936,10 +8936,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.405,
+            "kb": 18.183,
             "requests": {
               "index.js": {
-                "kb": 17.62,
+                "kb": 17.398,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -9055,10 +9055,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.405,
+            "kb": 18.183,
             "requests": {
               "index.js": {
-                "kb": 17.62,
+                "kb": 17.398,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -9126,10 +9126,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.405,
+            "kb": 18.183,
             "requests": {
               "index.js": {
-                "kb": 17.62,
+                "kb": 17.398,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -9202,10 +9202,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 18.405,
+            "kb": 18.183,
             "requests": {
               "index.js": {
-                "kb": 17.62,
+                "kb": 17.398,
                 "name": "index.js"
               },
               "double-chevron.svg.js": {
@@ -9424,10 +9424,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.403,
+            "kb": 23.189,
             "requests": {
               "index.js": {
-                "kb": 22.462,
+                "kb": 22.248,
                 "name": "index.js"
               },
               "eye.svg.js": {
@@ -9536,10 +9536,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.857,
+            "kb": 8.579,
             "requests": {
               "index.js": {
-                "kb": 8.857,
+                "kb": 8.579,
                 "name": "index.js"
               }
             }
@@ -9690,10 +9690,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.381,
+            "kb": 14.153,
             "requests": {
               "index.js": {
-                "kb": 14.381,
+                "kb": 14.153,
                 "name": "index.js"
               }
             }
@@ -9828,10 +9828,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.294,
+            "kb": 42.056,
             "requests": {
               "index.js": {
-                "kb": 40.167,
+                "kb": 39.929,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -10100,10 +10100,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.154,
+            "kb": 21.925,
             "requests": {
               "index.js": {
-                "kb": 22.154,
+                "kb": 21.925,
                 "name": "index.js"
               }
             }
@@ -10202,10 +10202,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.154,
+            "kb": 21.925,
             "requests": {
               "index.js": {
-                "kb": 22.154,
+                "kb": 21.925,
                 "name": "index.js"
               }
             }
@@ -10420,10 +10420,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.336,
+            "kb": 22.105,
             "requests": {
               "index.js": {
-                "kb": 22.336,
+                "kb": 22.105,
                 "name": "index.js"
               }
             }
@@ -10689,10 +10689,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.147,
+            "kb": 22.928,
             "requests": {
               "index.js": {
-                "kb": 22.458,
+                "kb": 22.239,
                 "name": "index.js"
               },
               "search.svg.js": {
@@ -10967,10 +10967,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.867,
+            "kb": 39.632,
             "requests": {
               "index.js": {
-                "kb": 38.633,
+                "kb": 38.398,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -11300,10 +11300,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.964,
+            "kb": 15.751,
             "requests": {
               "index.js": {
-                "kb": 15.072,
+                "kb": 14.859,
                 "name": "index.js"
               },
               "sort-ascending.svg.js": {
@@ -11423,10 +11423,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.638,
+            "kb": 19.417,
             "requests": {
               "index.js": {
-                "kb": 19.638,
+                "kb": 19.417,
                 "name": "index.js"
               }
             }
@@ -11708,10 +11708,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.638,
+            "kb": 19.417,
             "requests": {
               "index.js": {
-                "kb": 19.638,
+                "kb": 19.417,
                 "name": "index.js"
               }
             }
@@ -11950,10 +11950,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.251,
+            "kb": 22.021,
             "requests": {
               "index.js": {
-                "kb": 22.251,
+                "kb": 22.021,
                 "name": "index.js"
               }
             }
@@ -12085,10 +12085,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.627,
+            "kb": 11.359,
             "requests": {
               "index.js": {
-                "kb": 11.627,
+                "kb": 11.359,
                 "name": "index.js"
               }
             }
@@ -12374,10 +12374,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.627,
+            "kb": 11.359,
             "requests": {
               "index.js": {
-                "kb": 11.627,
+                "kb": 11.359,
                 "name": "index.js"
               }
             }
@@ -12648,10 +12648,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 15.578,
+            "kb": 15.363,
             "requests": {
               "index.js": {
-                "kb": 15.578,
+                "kb": 15.363,
                 "name": "index.js"
               }
             }
@@ -12936,10 +12936,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.128,
+            "kb": 21.896,
             "requests": {
               "index.js": {
-                "kb": 22.128,
+                "kb": 21.896,
                 "name": "index.js"
               }
             }
@@ -13180,10 +13180,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.024,
+            "kb": 22.799,
             "requests": {
               "index.js": {
-                "kb": 22.404,
+                "kb": 22.179,
                 "name": "index.js"
               },
               "clock.svg.js": {
@@ -13419,10 +13419,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 29.272,
+            "kb": 29.044,
             "requests": {
               "index.js": {
-                "kb": 28.498,
+                "kb": 28.27,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -13601,10 +13601,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 16.133,
+            "kb": 15.92,
             "requests": {
               "index.js": {
-                "kb": 14.347,
+                "kb": 14.134,
                 "name": "index.js"
               },
               "add.svg.js": {
@@ -13852,10 +13852,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.67,
+            "kb": 19.408,
             "requests": {
               "index.js": {
-                "kb": 19.67,
+                "kb": 19.408,
                 "name": "index.js"
               }
             }
@@ -14136,10 +14136,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 23.295,
+            "kb": 23.071,
             "requests": {
               "index.js": {
-                "kb": 22.402,
+                "kb": 22.178,
                 "name": "index.js"
               },
               "calendar.svg.js": {
