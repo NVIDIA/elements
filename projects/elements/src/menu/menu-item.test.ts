@@ -24,10 +24,6 @@ describe(MenuItem.metadata.tag, () => {
     expect(customElements.get(MenuItem.metadata.tag)).toBeDefined();
   });
 
-  it('should define element', () => {
-    expect(customElements.get(MenuItem.metadata.tag)).toBeDefined();
-  });
-
   it('should initialize role menuitem', async () => {
     await elementIsStable(element);
     expect(element._internals.role).toBe('menuitem');
@@ -42,5 +38,9 @@ describe(MenuItem.metadata.tag, () => {
     element.disabled = true;
     await elementIsStable(element);
     expect(element.tabIndex).toBe(-1);
+  });
+
+  it('should provide suffix slot', async () => {
+    expect(element.shadowRoot.querySelector('slot[name="suffix"]')).toBeTruthy();
   });
 });
