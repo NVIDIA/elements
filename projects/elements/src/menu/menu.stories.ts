@@ -96,6 +96,14 @@ export const Links = {
   `
 };
 
+export const Suffix = {
+  render: () => html`
+  <nve-menu>
+    <nve-menu-item><nve-icon name="person" slot="suffix"></nve-icon>profile</nve-menu-item>
+  </nve-menu>
+  `
+};
+
 export const Scroll = {
   render: () => html`
   <nve-menu style="--max-height: 150px">
