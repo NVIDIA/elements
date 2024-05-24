@@ -109,7 +109,7 @@ git push --set-upstream origin topic/bug-fix
 
 Open a new [Merge Request](https://github.com/NVIDIA/elements/-/merge_requests) in GitLab. Request review from the team members and apply the appropriate labels it the GitLab UI for example, `type:fix` and `scope:elements`. View Gitlab updates in the [#elements-ci](https://nvidia.enterprise.slack.com/archives/C06QATGH15M) Slack Channel.
 
-#### Ammending Commit
+#### Amending Commit
 
 **If there are changes requested**, make the requested changes locally and ammend the commit.
 
