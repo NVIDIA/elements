@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs';
-import { Default, Selected, Current, Disabled, Icons, Scroll, Dropdown, VerticalNavigationDrawer, VerticalNavigationPanel, MenuItemTooltip, Complex, Links } from './menu.stories';
+import { Default, Selected, Current, Disabled, Icons, Scroll, Dropdown, VerticalNavigationDrawer, VerticalNavigationPanel, MenuItemTooltip, Complex, Links, Suffix } from './menu.stories';
 
 <Meta title="Elements/Menu/Documentation" />
 
@@ -82,6 +82,12 @@ Navigation should be relevant and contextual to the page content.
 ## Links
 
 <Canvas of={Links} />
+
+## Suffix Slot
+
+Menu item has a default slot for content, additionally a `suffix` slot is provided for icons that should be displayed to the right.
+
+<Canvas of={Suffix} />
 
 <element-status tag="mlv-menu"></element-status>
 

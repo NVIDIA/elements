@@ -96,6 +96,14 @@ export const Links = {
   `
 };
 
+export const Suffix = {
+  render: () => html`
+  <mlv-menu>
+    <mlv-menu-item><mlv-icon name="person" slot="suffix"></mlv-icon>profile</mlv-menu-item>
+  </mlv-menu>
+  `
+};
+
 export const Scroll = {
   render: () => html`
   <mlv-menu style="--max-height: 150px">

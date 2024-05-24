@@ -1,5 +1,5 @@
 {
-  "created": "2024-05-21T15:42:41.519Z",
+  "created": "2024-05-24T19:13:04.344Z",
   "elements": [
     {
       "name": "mlv-accordion",
@@ -3069,10 +3069,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.436,
+            "kb": 39.46,
             "requests": {
               "index.js": {
-                "kb": 38.662,
+                "kb": 38.686,
                 "name": "index.js"
               },
               "information-circle-stroke.svg.js": {
@@ -7524,10 +7524,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.288,
+            "kb": 11.318,
             "requests": {
               "index.js": {
-                "kb": 11.288,
+                "kb": 11.318,
                 "name": "index.js"
               }
             }
@@ -7578,6 +7578,11 @@
           "id": "Links",
           "file": "menu.stories.ts",
           "template": "<mlv-menu>\n  <mlv-menu-item><mlv-icon name=\"person\"></mlv-icon><a href=\"#\">profile</a></mlv-menu-item>\n  <mlv-menu-item><mlv-icon name=\"gear\"></mlv-icon> <a href=\"#\">settings</a></mlv-menu-item>\n  <mlv-menu-item><mlv-icon name=\"star\"></mlv-icon> <a href=\"#\">favorites</a></mlv-menu-item>\n  <mlv-menu-item><mlv-icon name=\"logout\"></mlv-icon> <a href=\"#\">logout</a></mlv-menu-item>\n</mlv-menu>\n"
+        },
+        {
+          "id": "Suffix",
+          "file": "menu.stories.ts",
+          "template": "<mlv-menu>\n  <mlv-menu-item><mlv-icon name=\"person\" slot=\"suffix\"></mlv-icon><a href=\"#\">profile</a></mlv-menu-item>\n</mlv-menu>\n"
         },
         {
           "id": "Scroll",
@@ -7666,6 +7671,10 @@
           {
             "description": "default slot for content",
             "name": ""
+          },
+          {
+            "description": "slot for suffix icon",
+            "name": "suffix"
           }
         ],
         "attributes": [
@@ -7821,10 +7830,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 11.288,
+            "kb": 11.318,
             "requests": {
               "index.js": {
-                "kb": 11.288,
+                "kb": 11.318,
                 "name": "index.js"
               }
             }
@@ -8714,10 +8723,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 41.99,
+            "kb": 42.01,
             "requests": {
               "index.js": {
-                "kb": 40.108,
+                "kb": 40.128,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -9828,10 +9837,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 42.056,
+            "kb": 42.076,
             "requests": {
               "index.js": {
-                "kb": 39.929,
+                "kb": 39.949,
                 "name": "index.js"
               },
               "caret.svg.js": {
@@ -10967,10 +10976,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 39.632,
+            "kb": 39.653,
             "requests": {
               "index.js": {
-                "kb": 38.398,
+                "kb": 38.419,
                 "name": "index.js"
               },
               "caret.svg.js": {
