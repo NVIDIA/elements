@@ -12,7 +12,7 @@ packages:
   - 'projects/starters/typescript'
   - 'projects/starters/vue'
   - 'projects/labs/behaviors-alpine'
-  - 'projects/labs/lighthouse'
+  - 'projects/labs/testing-lighthouse'
   - 'projects/pages'
   - 'projects/elements'
   - 'projects/elements-react'

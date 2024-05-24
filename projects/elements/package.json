@@ -252,7 +252,7 @@
     "@jspm/generator": "1.1.12",
     "@lit-labs/virtualizer": "2.0.12",
     "@nvidia-elements/testing": "workspace:^",
-    "@nvidia-elements/lighthouse": "workspace:^",
+    "@nvidia-elements/testing-lighthouse": "workspace:^",
     "@rollup/plugin-terser": "0.4.4",
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
@@ -553,7 +553,7 @@
       ],
       "dependencies": [
         "build",
-        "../labs/lighthouse:ci"
+        "../labs/testing-lighthouse:ci"
       ],
       "env": {
         "NODE_ENV": "production"
@@ -571,7 +571,7 @@
       ],
       "dependencies": [
         "build",
-        "../labs/lighthouse:ci"
+        "../labs/testing-lighthouse:ci"
       ],
       "env": {
         "LIGHTHOUSE_ALL": "true"
