@@ -48,6 +48,7 @@ export default defineConfig(env => {
           'internal/index': resolve('./src/internal/index.ts'), // internal utilities for @nvidia-elements/core
           'scoped/index': resolve('./src/scoped/index.ts'), // utilities for scoping elements
           'polyfills/index': resolve('./src/polyfills/index.ts'), // optional polyfills for non-chromium envs
+          'polyfills/custom-state-set': resolve('./src/polyfills/custom-state-set.ts'), // optional polyfills for non-chromium envs
           'test/index': resolve('./src/test/index.ts'), // internal testing utilities for @nvidia-elements/core
           'css/module.typography.css': resolve('./src/css/module.typography.css'), // base typography styles
           'css/module.layout.css': resolve('./src/css/module.layout.css'), // layout utilities
