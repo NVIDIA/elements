@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/lighthouse';
+import { runner } from '@nvidia-elements/testing-lighthouse';
 
 describe('accordion lighthouse report', () => {
   test('accordion should meet a lighthouse performance score of 100', async () => {

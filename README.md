@@ -24,7 +24,6 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 - `/projects/elements-react` - Elements React library for React compatibility/support
 - `/projects/testing` - A set of testing utilities for Lit based Web Components.
 - `/projects/themes` - Elements Theme library: provides a set of supported themes for Element based projects
-- `/labs/lighthouse` - Experimental Lighthouse + Vite testing utilities
 
 ## Development
 
@@ -85,17 +84,18 @@ git commit -a -m "fix(core): disabled multi-select"
 | `feat`  | new features, components, APIs                                  |
 | `chore` | non production code modifications, build tooling, documentation |
 
-| Scopes            | Description                |
-| ----------------- | -------------------------- |
-| `starters`        | `/projects/starters`       |
-| `elements`        | `/projects/elements`       |
-| `elements-react`  | `/projects/elements-react` |
-| `pages`           | `/projects/pages`          |
-| `playground`      | `/projects/playground`     |
-| `testing`         | `/projects/testing`        |
-| `themes`          | `/projects/themes`         |
-| `labs`            | `/projects/labs`           |
-| `labs-lighthouse` | `/labs/lighthouse`         |
+| Scopes                    | Description                |
+| ------------------------- | -------------------------- |
+| `starters`                | `/projects/starters`       |
+| `elements`                | `/projects/elements`       |
+| `elements-react`          | `/projects/elements-react` |
+| `pages`                   | `/projects/pages`          |
+| `playground`              | `/projects/playground`     |
+| `testing`                 | `/projects/testing`        |
+| `themes`                  | `/projects/themes`         |
+| `labs`                    | `/projects/labs`           |
+| `labs-behaviors-alpine`   | `/labs/behaviors-alpine`   |
+| `labs-testing-lighthouse` | `/labs/testing-lighthouse` |
 
 Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
 
