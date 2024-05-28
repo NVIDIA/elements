@@ -1,3 +1,10 @@
+## [@elements/elements-v0.34.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.5...@elements/elements-v0.34.0) (2024-05-28)
+
+
+### Features
+
+* **elements:** menu item suffix slot ([5398123](https://github.com/NVIDIA/elements/commit/5398123b2e19af21cd7db4ea6631ff381146c590))
+
 ## [@elements/elements-v0.33.5](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.4...@elements/elements-v0.33.5) (2024-05-24)
 
 
