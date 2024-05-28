@@ -18,6 +18,8 @@ export const Default = {
 export const Values = {
   render: () => html`
     <div mlv-layout="row gap:sm pad:md">
+      <mlv-progress-ring status="accent"></mlv-progress-ring>
+
       <mlv-progress-ring status="accent" value="0"></mlv-progress-ring>
 
       <mlv-progress-ring status="accent" value="33"></mlv-progress-ring>

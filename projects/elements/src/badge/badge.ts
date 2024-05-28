@@ -22,6 +22,8 @@ import styles from './badge.css?inline';
  * @description A visual indicator that communicates a status description of an associated component. Status badges use short text, color, and icons for quick recognition and are placed near the relevant content.
  * @since 0.11.0
  * @slot - default slot for content
+ * @slot prefix-icon - slot for prefix icon
+ * @slot suffix-icon - slot for suffix icon
  * @cssprop --background
  * @cssprop --gap
  * @cssprop --font-size

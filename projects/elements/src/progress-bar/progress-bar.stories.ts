@@ -9,7 +9,7 @@ export default {
 export const Default = {
   render: () => html`
     <div mlv-layout="column gap:md pad:lg full">
-      <mlv-progress-bar></mlv-progress-bar>
+      <mlv-progress-bar value="0"></mlv-progress-bar>
 
       <mlv-progress-bar status="accent" value="25"></mlv-progress-bar>
 
@@ -41,6 +41,14 @@ export const Labeled = {
       </div>
 
       <mlv-progress-bar status="accent" value="80"></mlv-progress-bar>
+    </div>
+  `
+};
+
+export const Indeterminate = {
+  render: () => html`
+    <div mlv-layout="column gap:md pad:lg full">
+      <mlv-progress-bar></mlv-progress-bar>
     </div>
   `
 };
