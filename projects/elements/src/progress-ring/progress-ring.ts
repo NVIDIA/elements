@@ -53,7 +53,7 @@ export class ProgressRing extends LitElement {
 
   render() {
     return html`
-      <div internal-host ?indeterminate=${this.value === undefined} ?zeroValue=${this.value === 0} >
+      <div internal-host ?indeterminate=${this.value === undefined} ?zeroValue=${this.value === 0}>
         <svg viewBox="0 0 16 16" role="presentation">
           <circle cx="8px" cy="8px" r="6.5px" class="background"></circle>
           <circle cx="8px" cy="8px" r="6.5px" class="ring"

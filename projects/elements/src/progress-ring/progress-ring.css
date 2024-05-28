@@ -117,8 +117,7 @@ circle.ring {
   animation: 2s linear 0s infinite normal none running spin-infinite;
 }
 
-[internal-host][zeroValue] circle.ring,
-[internal-host][zeroValue] circle.background {
+[internal-host][zeroValue] circle.ring {
   display: none;
 }
 
