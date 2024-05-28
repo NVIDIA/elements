@@ -1,5 +1,5 @@
 {
-  "created": "2024-05-24T19:13:04.344Z",
+  "created": "2024-05-30T15:25:23.700Z",
   "elements": [
     {
       "name": "nve-accordion",
@@ -1085,6 +1085,14 @@
           {
             "description": "default slot for content",
             "name": ""
+          },
+          {
+            "description": "slot for prefix icon",
+            "name": "prefix-icon"
+          },
+          {
+            "description": "slot for suffix icon",
+            "name": "suffix-icon"
           }
         ],
         "attributes": [
@@ -7582,7 +7590,7 @@
         {
           "id": "Suffix",
           "file": "menu.stories.ts",
-          "template": "<nve-menu>\n  <nve-menu-item><nve-icon name=\"person\" slot=\"suffix\"></nve-icon><a href=\"#\">profile</a></nve-menu-item>\n</nve-menu>\n"
+          "template": "<nve-menu>\n  <nve-menu-item><nve-icon name=\"person\" slot=\"suffix\"></nve-icon>profile</nve-menu-item>\n</nve-menu>\n"
         },
         {
           "id": "Scroll",
@@ -8504,10 +8512,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 22.678,
+            "kb": 22.674,
             "requests": {
               "index.js": {
-                "kb": 22.678,
+                "kb": 22.674,
                 "name": "index.js"
               }
             }
@@ -9513,7 +9521,6 @@
             "type": {
               "text": "number | default"
             },
-            "default": "0",
             "description": "Defines the value associated with the elmeents's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value",
             "fieldName": "value"
           },
@@ -9529,10 +9536,16 @@
           {
             "name": "status",
             "type": {
-              "text": "'accent' | 'warning' | 'success' | 'danger'"
+              "text": "'accent' | 'warning' | 'success' | 'danger' | 'neutral'"
             },
+            "default": "'neutral'",
             "description": "Defines the visual treatment to represent a interaction status. (tasks, support, trends)",
             "fieldName": "status"
+          }
+        ],
+        "cssProperties": [
+          {
+            "name": "--height"
           }
         ]
       },
@@ -9545,10 +9558,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 8.579,
+            "kb": 8.742,
             "requests": {
               "index.js": {
-                "kb": 8.579,
+                "kb": 8.742,
                 "name": "index.js"
               }
             }
@@ -9568,7 +9581,7 @@
         {
           "id": "Default",
           "file": "progress-bar.stories.ts",
-          "template": "<div nve-layout=\"column gap:md pad:lg full\">\n  <nve-progress-bar></nve-progress-bar>\n\n  <nve-progress-bar status=\"accent\" value=\"25\"></nve-progress-bar>\n\n  <nve-progress-bar status=\"success\" value=\"50\"></nve-progress-bar>\n\n  <nve-progress-bar status=\"warning\" value=\"75\"></nve-progress-bar>\n\n  <nve-progress-bar status=\"danger\" value=\"100\"></nve-progress-bar>\n</div>\n"
+          "template": "<div nve-layout=\"column gap:md pad:lg full\">\n  <nve-progress-bar value=\"0\"></nve-progress-bar>\n\n  <nve-progress-bar status=\"accent\" value=\"25\"></nve-progress-bar>\n\n  <nve-progress-bar status=\"success\" value=\"50\"></nve-progress-bar>\n\n  <nve-progress-bar status=\"warning\" value=\"75\"></nve-progress-bar>\n\n  <nve-progress-bar status=\"danger\" value=\"100\"></nve-progress-bar>\n</div>\n"
         },
         {
           "id": "Max",
@@ -9579,6 +9592,11 @@
           "id": "Labeled",
           "file": "progress-bar.stories.ts",
           "template": "<div nve-layout=\"column gap:xxxs pad:lg align:horizontal-stretch grow\">\n  <div nve-layout=\"row align:space-between\">\n    <p nve-text=\"label sm\">Upload Status</p>\n    <p nve-text=\"label emphasis sm\">80%</p>\n  </div>\n\n  <nve-progress-bar status=\"accent\" value=\"80\"></nve-progress-bar>\n</div>\n"
+        },
+        {
+          "id": "Indeterminate",
+          "file": "progress-bar.stories.ts",
+          "template": "<div nve-layout=\"column gap:md pad:lg full\">\n  <nve-progress-bar></nve-progress-bar>\n</div>\n"
         }
       ],
       "behavior": "content",
@@ -9699,10 +9717,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 14.153,
+            "kb": 14.147,
             "requests": {
               "index.js": {
-                "kb": 14.153,
+                "kb": 14.147,
                 "name": "index.js"
               }
             }
@@ -9727,7 +9745,7 @@
         {
           "id": "Values",
           "file": "progress-ring.stories.ts",
-          "template": "<div nve-layout=\"row gap:sm pad:md\">\n  <nve-progress-ring status=\"accent\" value=\"0\"></nve-progress-ring>\n\n  <nve-progress-ring status=\"accent\" value=\"33\"></nve-progress-ring>\n\n  <nve-progress-ring status=\"accent\" value=\"66\"></nve-progress-ring>\n\n  <nve-progress-ring status=\"accent\" value=\"100\"></nve-progress-ring>\n</div>\n"
+          "template": "<div nve-layout=\"row gap:sm pad:md\">\n  <nve-progress-ring status=\"accent\"></nve-progress-ring>\n\n  <nve-progress-ring status=\"accent\" value=\"0\"></nve-progress-ring>\n\n  <nve-progress-ring status=\"accent\" value=\"33\"></nve-progress-ring>\n\n  <nve-progress-ring status=\"accent\" value=\"66\"></nve-progress-ring>\n\n  <nve-progress-ring status=\"accent\" value=\"100\"></nve-progress-ring>\n</div>\n"
         },
         {
           "id": "Max",
@@ -11432,10 +11450,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.417,
+            "kb": 19.412,
             "requests": {
               "index.js": {
-                "kb": 19.417,
+                "kb": 19.412,
                 "name": "index.js"
               }
             }
@@ -11717,10 +11735,10 @@
         },
         "payload": {
           "javascript": {
-            "kb": 19.417,
+            "kb": 19.412,
             "requests": {
               "index.js": {
-                "kb": 19.417,
+                "kb": 19.412,
                 "name": "index.js"
               }
             }
@@ -15630,8 +15648,8 @@
           "pct": 100
         },
         "branches": {
-          "total": 0,
-          "covered": 0,
+          "total": 2,
+          "covered": 2,
           "skipped": 0,
           "pct": 100
         }
@@ -18628,10 +18646,10 @@
         "pct": 97.7
       },
       "branches": {
-        "total": 1070,
-        "covered": 988,
+        "total": 1072,
+        "covered": 990,
         "skipped": 0,
-        "pct": 92.33
+        "pct": 92.35
       },
       "branchesTrue": {
         "total": 0,

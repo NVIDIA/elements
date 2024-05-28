@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs';
-import { Default, Max, Labeled } from './progress-bar.stories';
+import { Default, Max, Labeled, Indeterminate } from './progress-bar.stories';
 
 <Meta title="Elements/Progress Bar/Documentation" />
 
@@ -42,6 +42,14 @@ import '@nvidia-elements/core/progress-bar/define.js';
 Progress bars may have their labels and numerical values displayed above its visual indicator.
 
 <Canvas of={Labeled} />
+
+## Indeterminate (Horizontal Loading Indicator)
+
+Progress bars may will display as an animated loading indicator when no `value` attribute is set.
+
+Additionally, leave off the `status` attribute for the default brand green color.
+
+<Canvas of={Indeterminate} />
 
 <element-status tag="nve-progress-bar"></element-status>
 
