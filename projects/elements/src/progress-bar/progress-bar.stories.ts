@@ -9,7 +9,7 @@ export default {
 export const Default = {
   render: () => html`
     <div nve-layout="column gap:md pad:lg full">
-      <nve-progress-bar></nve-progress-bar>
+      <nve-progress-bar value="0"></nve-progress-bar>
 
       <nve-progress-bar status="accent" value="25"></nve-progress-bar>
 
@@ -41,6 +41,14 @@ export const Labeled = {
       </div>
 
       <nve-progress-bar status="accent" value="80"></nve-progress-bar>
+    </div>
+  `
+};
+
+export const Indeterminate = {
+  render: () => html`
+    <div nve-layout="column gap:md pad:lg full">
+      <nve-progress-bar></nve-progress-bar>
     </div>
   `
 };

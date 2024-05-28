@@ -18,6 +18,8 @@ export const Default = {
 export const Values = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
+      <nve-progress-ring status="accent"></nve-progress-ring>
+
       <nve-progress-ring status="accent" value="0"></nve-progress-ring>
 
       <nve-progress-ring status="accent" value="33"></nve-progress-ring>
