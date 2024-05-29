@@ -1,0 +1,144 @@
+{
+  "name": "@nvidia-elements/code",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./dist/index.js",
+    "./index.js": "./dist/index.js",
+    "./codeblock": "./dist/codeblock/index.js",
+    "./codeblock/index.js": "./dist/codeblock/index.js",
+    "./codeblock/define.js": "./dist/codeblock/define.js",
+    "./codeblock/languages/css": "./dist/codeblock/languages/css.js",
+    "./codeblock/languages/css.js": "./dist/codeblock/languages/css.js",
+    "./codeblock/languages/go": "./dist/codeblock/languages/go.js",
+    "./codeblock/languages/go.js": "./dist/codeblock/languages/go.js",
+    "./codeblock/languages/javascript": "./dist/codeblock/languages/javascript.js",
+    "./codeblock/languages/javascript.js": "./dist/codeblock/languages/javascript.js",
+    "./codeblock/languages/json": "./dist/codeblock/languages/json.js",
+    "./codeblock/languages/json.js": "./dist/codeblock/languages/json.js",
+    "./codeblock/languages/markdown": "./dist/codeblock/languages/markdown.js",
+    "./codeblock/languages/markdown.js": "./dist/codeblock/languages/markdown.js",
+    "./codeblock/languages/python": "./dist/codeblock/languages/python.js",
+    "./codeblock/languages/python.js": "./dist/codeblock/languages/python.js",
+    "./codeblock/languages/typescript": "./dist/codeblock/languages/typescript.js",
+    "./codeblock/languages/typescript.js": "./dist/codeblock/languages/typescript.js",
+    "./codeblock/languages/xml": "./dist/codeblock/languages/xml.js",
+    "./codeblock/languages/xml.js": "./dist/codeblock/languages/xml.js",
+    "./codeblock/languages/yaml": "./dist/codeblock/languages/yaml.js",
+    "./codeblock/languages/yaml.js": "./dist/codeblock/languages/yaml.js"
+  },
+  "sideEffects": [
+    "./**/define.js",
+    "./dist/codeblock/languages/*.js"
+  ],
+  "typesVersions": {
+    "*": {
+      "*/define": [
+        "dist/*/define.d.ts"
+      ],
+      "*/define.js": [
+        "dist/*/define.d.ts"
+      ],
+      "*/index.js": [
+        "dist/*/index.d.ts"
+      ],
+      "*": [
+        "dist/*/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "build:watch": "wireit",
+    "test": "wireit",
+    "test:watch": "wireit"
+  },
+  "dependencies": {
+    "highlight.js": "11.9.0",
+    "lit": "^3.1.3"
+  },
+  "peerDependencies": {
+    "@elements/elements": "workspace:*"
+  },
+  "devDependencies": {
+    "@nvidia-elements/testing": "workspace:*",
+    "@rollup/plugin-terser": "0.4.4",
+    "@vitest/browser": "1.1.0",
+    "glob": "10.3.10",
+    "rollup-plugin-minify-html-literals": "1.2.6",
+    "typescript": "5.3.3",
+    "vite": "5.2.9",
+    "vite-plugin-dts": "3.7.2",
+    "vitest": "1.1.0"
+  },
+  "wireit": {
+    "dev": {
+      "command": "vite",
+      "dependencies": [
+        "build",
+        "build:watch",
+        "../../storybook:dev"
+      ]
+    },
+    "ci": {
+      "dependencies": [
+        "build",
+        "test"
+      ]
+    },
+    "build": {
+      "command": "NODE_ENV=production tsc && vite build",
+      "dependencies": [
+        "../../elements:build",
+        "../../testing:ci"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "files": [
+        "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.stories.mdx",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --mode watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test": {
+      "command": "vitest run",
+      "files": [
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../../testing:ci"
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    }
+  }
+}
