@@ -211,7 +211,9 @@
     "./tooltip/define.js": "./dist/tooltip/define.js",
     "./week": "./dist/week/index.js",
     "./week/index.js": "./dist/week/index.js",
-    "./week/define.js": "./dist/week/define.js"
+    "./week/define.js": "./dist/week/define.js",
+    "./internal": "./dist/internal/index.js",
+    "./internal/index.js": "./dist/internal/index.js"
   },
   "typesVersions": {
     "*": {
