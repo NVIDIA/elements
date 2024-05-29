@@ -1,0 +1,201 @@
+:host {
+  all: initial;
+  display: block;
+  visibility: inherit;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  contain: layout; /* https://developer.mozilla.org/en-US/docs/Web/CSS/contain */
+  pointer-events: inherit;
+  outline: var(--nve-debug-element-outline, initial);
+  color-scheme: var(--nve-sys-color-scheme);
+}
+
+:host {
+  --background: var(--nve-sys-layer-container-background);
+  --font-family: var(--nve-ref-font-family-roboto-mono);
+  --padding: var(--nve-ref-space-sm);
+  --border-radius: var(--nve-ref-border-radius-lg);
+  display: block;
+  overflow: hidden;
+}
+
+[internal-host] {
+  position: relative;
+  overflow: auto;
+  background: var(--background);
+  border-radius: var(--border-radius);
+  font-family: var(--font-family);
+  height: 100%;
+}
+
+pre {
+  padding: var(--padding);
+  margin: 0;
+  min-height: fit-content;
+  min-width: fit-content;
+}
+
+[name='actions'] {
+  display: block;
+  position: fixed;
+  top: 4px;
+  right: 4px;
+}
+
+:host([container='flat']) {
+  --background: none;
+}
+
+:host([container='inline']) {
+  --background: none;
+  --padding: 0;
+}
+
+[nve-text~='code'] {
+  margin: 0;
+}
+
+.hljs {
+  color: var(--nve-sys-text-color);
+}
+
+.hljs-keyword,
+.hljs-type,
+.hljs-literal,
+.hljs-meta,
+.hljs-section,
+.hljs-tag,
+.hljs-name,
+.hljs-bullet,
+.hljs-attribute,
+.hljs-selector-tag,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-pseudo {
+  color: var(--nve-ref-color-blue-cobalt-1100);
+}
+
+.hljs-built_in {
+  color: var(--nve-ref-color-yellow-nova-1100);
+}
+
+.hljs-number,
+.hljs-comment,
+.hljs-doctag,
+.hljs-quote {
+  color: var(--nve-ref-color-green-grass-1100);
+}
+
+.hljs-regexp {
+  color: var(--nve-ref-color-pink-rose-1100);
+}
+
+.hljs-string,
+.hljs-subst,
+.hljs-symbol,
+.hljs-code,
+.hljs-link,
+.hljs-selector-attr {
+  color: var(--nve-ref-color-red-tomato-1100);
+}
+
+.hljs-variable,
+.hljs-attr,
+.hljs-title {
+  color: var(--nve-sys-text-color);
+}
+
+.hljs-title.class_ {
+  color: var(--nve-ref-color-teal-seafoam-1100);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: var(--nve-ref-font-weight-bold);
+}
+
+.hljs-deletion {
+  color: var(--nve-ref-color-red-cardinal-1100);
+}
+
+.hljs-addition {
+  color: var(--nve-ref-color-lime-pear-1100);
+}
+
+.language-css {
+  .hljs-built_in {
+    color: var(--nve-ref-color-blue-sky-1100);
+  }
+}
+
+.language-xml {
+  .hljs-attr {
+    color: var(--nve-ref-color-blue-sky-1100);
+  }
+}
+
+:host([nve-theme~='light']) {
+  .hljs-keyword,
+  .hljs-type,
+  .hljs-literal {
+    color: var(--nve-ref-color-purple-violet-1100);
+  }
+
+  .hljs-regexp,
+  .hljs-selector-tag,
+  .hljs-selector-id,
+  .hljs-selector-class,
+  .hljs-selector-pseudo,
+  .hljs-attribute {
+    color: var(--nve-ref-color-red-tomato-1100);
+  }
+
+  .hljs-meta {
+    color: var(--nve-ref-color-gray-slate-1100);
+  }
+
+  .hljs-selector-attr {
+    color: var(--nve-ref-color-blue-indigo-1100);
+  }
+
+  .language-css {
+    .hljs-built_in {
+      color: var(--nve-ref-color-blue-indigo-1100);
+    }
+  }
+
+  .language-xml {
+    .hljs-tag {
+      color: var(--nve-sys-text-color);
+    }
+
+    .hljs-name,
+    .hljs-attr {
+      color: var(--nve-ref-color-red-tomato-1100);
+    }
+
+    .hljs-string {
+      color: var(--nve-ref-color-purple-violet-1100);
+    }
+  }
+}
+
+.hljs-linenumber {
+  color: var(--nve-ref-color-gray-slate-1100);
+  margin-right: 30px;
+  display: inline-block;
+  width: 30px;
+  text-align: right;
+  user-select: none;
+}
+
+.hljs-highlight {
+  background-color: color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 80%);
+  box-shadow: inset 2px 0 0 color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 20%);
+  display: inline-block;
+  width: 100%;
+}
