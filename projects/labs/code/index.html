@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" nve-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <title>TypeScript Starter + @elements/elements</title>
+  </head>
+  <body nve-text="body" nve-layout="column gap:md pad:lg">
+    <nve-codeblock language="typescript" container="" line-numbers highlight="5, 10,15">
+      import { LitElement, html } from 'lit'; import { property, customElement } from 'lit/decorators.js'; /** * Adds
+      two numbers together and returns the result. * @param {number} value1 The first value * @param {number} value2 The
+      second value */ function addNumbers(value1, value2) { return value1 + value2; } @customElement('my-element')
+      export class MyElement extends LitElement { @property() greet = 'nobody'; bool = false; pi: number = Math.PI;
+      regex = /[a-z]/; override render() { return html`
+      <p>Hello <b>${this.greet}</b>!</p>
+      `; } }
+    </nve-codeblock>
+    <script type="module">
+      import '@elements/elements/index.css';
+      import './dist/codeblock/languages/javascript.js';
+      import './dist/codeblock/languages/typescript.js';
+      import './dist/codeblock/define.js';
+    </script>
+  </body>
+</html>
