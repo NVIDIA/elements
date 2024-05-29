@@ -95,6 +95,7 @@ git commit -a -m "fix(elements): disabled multi-select"
 | `themes`                  | `/projects/themes`         |
 | `labs`                    | `/projects/labs`           |
 | `labs-behaviors-alpine`   | `/labs/behaviors-alpine`   |
+| `labs-code`               | `/labs/code`               |
 | `labs-testing-lighthouse` | `/labs/testing-lighthouse` |
 
 Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
@@ -135,6 +136,10 @@ git rebase main # Rebase your branch onto the latest main
 ```
 
 You may have to resolve any merge conflicts that arise from this process. Once complete, push the updated branch back to the remote repository for review.
+
+### New Project
+
+When creating a new project, ex: `./projects/labs/code`, make sure to add the project to the `pnpm-workspace.yaml` located at the root directory.
 
 ### Release
 

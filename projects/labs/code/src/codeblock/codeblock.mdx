@@ -1,0 +1,51 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import { Default, Code, Flat, Theme, LineNumbers, Highlight } from './codeblock.stories';
+
+<Meta title="Labs/Code/Codeblock/Documentation" />
+
+# Codeblock
+
+## Installation
+
+Note: language must be imported before codeblock
+
+```typescript
+import '@nvidia-elements/code/codeblock/languages/typescript.js';
+import '@nvidia-elements/code/codeblock/define.js';
+```
+
+```html
+<nve-codeblock language="typescript">
+function getTime(): number {
+  return new Date().getTime();
+}
+</nve-codeblock>
+```
+
+## Default
+
+<Canvas of={Default} />
+
+## Code
+
+Code can be set via the `code` attribute of the component.
+
+<Canvas of={Code} />
+
+## Container
+
+<Canvas of={Flat} />
+
+## Theme
+
+A Theme can be set independant of the global theme using the `nve-theme` attribute.
+
+<Canvas of={Theme} />
+
+## Line Numbers
+
+<Canvas of={LineNumbers} />
+
+## Highlight
+
+<Canvas of={Highlight} />
