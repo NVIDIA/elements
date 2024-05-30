@@ -267,3 +267,18 @@ export const Alignment = {
 </div>
   `
 };
+
+export const HeaderFooter = {
+  render: () => html `
+<mlv-dropdown anchor="btn" closable>
+  <mlv-dropdown-header>
+    <h3 mlv-text="heading semibold sm">heading</h3>
+  </mlv-dropdown-header>
+  <p mlv-text="body">some text content in a closable dropdown</p>
+  <mlv-dropdown-footer>
+    <p mlv-text="body">footer</p>
+  </mlv-dropdown-footer>
+</mlv-dropdown>
+<mlv-button id="btn">button</mlv-button>
+`
+}

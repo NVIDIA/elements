@@ -1,5 +1,5 @@
 {
-  "created": "2024-06-04T23:15:04.870Z",
+  "created": "2024-06-05T15:19:25.879Z",
   "types": {
     "props": [
       {
@@ -3310,10 +3310,64 @@
           }
         },
         {
+          "file": "dropdown/dropdown-header.ts",
+          "lines": {
+            "total": 5,
+            "covered": 5,
+            "skipped": 0,
+            "pct": 100
+          },
+          "functions": {
+            "total": 2,
+            "covered": 2,
+            "skipped": 0,
+            "pct": 100
+          },
+          "statements": {
+            "total": 5,
+            "covered": 5,
+            "skipped": 0,
+            "pct": 100
+          },
+          "branches": {
+            "total": 0,
+            "covered": 0,
+            "skipped": 0,
+            "pct": 100
+          }
+        },
+        {
+          "file": "dropdown/dropdown-footer.ts",
+          "lines": {
+            "total": 5,
+            "covered": 5,
+            "skipped": 0,
+            "pct": 100
+          },
+          "functions": {
+            "total": 2,
+            "covered": 2,
+            "skipped": 0,
+            "pct": 100
+          },
+          "statements": {
+            "total": 5,
+            "covered": 5,
+            "skipped": 0,
+            "pct": 100
+          },
+          "branches": {
+            "total": 0,
+            "covered": 0,
+            "skipped": 0,
+            "pct": 100
+          }
+        },
+        {
           "file": "dropdown/define.ts",
           "lines": {
-            "total": 1,
-            "covered": 1,
+            "total": 3,
+            "covered": 3,
             "skipped": 0,
             "pct": 100
           },
@@ -3324,8 +3378,8 @@
             "pct": 100
           },
           "statements": {
-            "total": 1,
-            "covered": 1,
+            "total": 3,
+            "covered": 3,
             "skipped": 0,
             "pct": 100
           },
@@ -4420,22 +4474,22 @@
       "coverageTotal": {
         "file": "total",
         "lines": {
-          "total": 2241,
-          "covered": 2211,
+          "total": 2253,
+          "covered": 2223,
           "skipped": 0,
           "pct": 98.66
         },
         "statements": {
-          "total": 2639,
-          "covered": 2604,
+          "total": 2651,
+          "covered": 2616,
           "skipped": 0,
           "pct": 98.67
         },
         "functions": {
-          "total": 741,
-          "covered": 724,
+          "total": 745,
+          "covered": 728,
           "skipped": 0,
-          "pct": 97.7
+          "pct": 97.71
         },
         "branches": {
           "total": 1072,
@@ -9781,10 +9835,129 @@
             "id": "Alignment",
             "file": "dropdown.stories.ts",
             "template": "<mlv-dropdown anchor=\"card\" position=\"top\" alignment=\"start\">top start</mlv-dropdown>\n<mlv-dropdown anchor=\"card\" position=\"top\" alignment=\"center\">top center</mlv-dropdown>\n<mlv-dropdown anchor=\"card\" position=\"top\" alignment=\"end\">top end</mlv-dropdown>\n\n<mlv-dropdown anchor=\"card\" position=\"right\" alignment=\"start\">right start</mlv-dropdown>\n<mlv-dropdown anchor=\"card\" position=\"right\" alignment=\"center\">right center</mlv-dropdown>\n<mlv-dropdown anchor=\"card\" position=\"right\" alignment=\"end\">right end</mlv-dropdown>\n\n<mlv-dropdown anchor=\"card\" position=\"bottom\" alignment=\"start\">bottom start</mlv-dropdown>\n<mlv-dropdown anchor=\"card\" position=\"bottom\" alignment=\"center\">bottom center</mlv-dropdown>\n<mlv-dropdown anchor=\"card\" position=\"bottom\" alignment=\"end\">bottom end</mlv-dropdown>\n\n<mlv-dropdown anchor=\"card\" position=\"left\" alignment=\"start\">left start</mlv-dropdown>\n<mlv-dropdown anchor=\"card\" position=\"left\" alignment=\"center\">left center</mlv-dropdown>\n<mlv-dropdown anchor=\"card\" position=\"left\" alignment=\"end\">left end</mlv-dropdown>\n\n<mlv-card id=\"card\" style=\"width: 450px; height: 300px\"></mlv-card>\n"
+          },
+          {
+            "id": "HeaderFooter",
+            "file": "dropdown.stories.ts",
+            "template": "<mlv-dropdown anchor=\"btn\" closable>\n  <mlv-dropdown-header>\n    <h3 mlv-text=\"heading semibold sm\">heading</h3>\n  </mlv-dropdown-header>\n  <p mlv-text=\"body\">some text content in a closable dropdown</p>\n  <mlv-dropdown-footer>\n    <p mlv-text=\"body\">footer</p>\n  </mlv-dropdown-footer>\n</mlv-dropdown>\n<mlv-button id=\"btn\">button</mlv-button>\n"
           }
         ],
         "behavior": "popover",
         "status": "stable"
+      },
+      {
+        "name": "nve-dropdown-footer",
+        "unitTests": true,
+        "apiReview": true,
+        "performance": true,
+        "stable": true,
+        "vqa": true,
+        "responsive": true,
+        "themes": true,
+        "entrypoint": "",
+        "package": true,
+        "since": "0.36.0",
+        "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-dialog-documentation--docs",
+        "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0",
+        "schema": {
+          "properties": [],
+          "slots": [
+            {
+              "description": "default slot for the dropdown footer",
+              "name": ""
+            }
+          ]
+        },
+        "lighthouse": {
+          "name": "nve-dropdown",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "bestPractices": 100
+          },
+          "payload": {
+            "javascript": {
+              "kb": 29.046,
+              "requests": {
+                "index.js": {
+                  "kb": 28.234,
+                  "name": "index.js"
+                },
+                "cancel.svg.js": {
+                  "kb": 0.812,
+                  "name": "cancel.svg.js"
+                }
+              }
+            },
+            "css": {
+              "kb": 0,
+              "requests": {}
+            }
+          }
+        },
+        "tests": {
+          "coverageTotal": 100
+        },
+        "stories": [],
+        "behavior": "content",
+        "status": "beta"
+      },
+      {
+        "name": "nve-dropdown-header",
+        "unitTests": true,
+        "apiReview": true,
+        "performance": true,
+        "stable": true,
+        "vqa": true,
+        "responsive": true,
+        "themes": true,
+        "entrypoint": "",
+        "package": true,
+        "since": "0.36.0",
+        "storybook": "https://NVIDIA.github.io/elements/api/?path=/docs/elements-dialog-documentation--docs",
+        "figma": "https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0",
+        "schema": {
+          "properties": [],
+          "slots": [
+            {
+              "description": "default slot for the dropdown header",
+              "name": ""
+            }
+          ]
+        },
+        "lighthouse": {
+          "name": "nve-dropdown",
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "bestPractices": 100
+          },
+          "payload": {
+            "javascript": {
+              "kb": 29.046,
+              "requests": {
+                "index.js": {
+                  "kb": 28.234,
+                  "name": "index.js"
+                },
+                "cancel.svg.js": {
+                  "kb": 0.812,
+                  "name": "cancel.svg.js"
+                }
+              }
+            },
+            "css": {
+              "kb": 0,
+              "requests": {}
+            }
+          }
+        },
+        "tests": {
+          "coverageTotal": 100
+        },
+        "stories": [],
+        "behavior": "content",
+        "status": "beta"
       },
       {
         "name": "nve-file",
@@ -19432,8 +19605,8 @@
         {
           "file": "dropdown/index.tsx",
           "lines": {
-            "total": 2,
-            "covered": 2,
+            "total": 6,
+            "covered": 6,
             "skipped": 0,
             "pct": 100
           },
@@ -19444,8 +19617,8 @@
             "pct": 100
           },
           "statements": {
-            "total": 2,
-            "covered": 2,
+            "total": 6,
+            "covered": 6,
             "skipped": 0,
             "pct": 100
           },
@@ -19919,16 +20092,16 @@
       "coverageTotal": {
         "file": "total",
         "lines": {
-          "total": 165,
-          "covered": 162,
+          "total": 169,
+          "covered": 166,
           "skipped": 0,
-          "pct": 98.18
+          "pct": 98.22
         },
         "statements": {
-          "total": 165,
-          "covered": 162,
+          "total": 169,
+          "covered": 166,
           "skipped": 0,
-          "pct": 98.18
+          "pct": 98.22
         },
         "functions": {
           "total": 0,

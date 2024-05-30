@@ -13,6 +13,7 @@
   --box-shadow: var(--nve-ref-shadow-400);
   --width: fit-content;
   --min-width: fit-content;
+  --gap: var(--nve-ref-space-sm);
   --_divider-padding: var(--padding);
 }
 
@@ -33,10 +34,28 @@ dialog::backdrop {
   background: transparent;
 }
 
+.header {
+  display: flex;
+  gap: var(--gap);
+}
+
+.header:has(mlv-icon-button) {
+  min-height: var(--nve-ref-size-300);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--gap);
+  padding: var(--padding) 0 var(--padding) 0;
+}
+
 mlv-icon-button {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 8px;
+  right: 8px;
+  z-index: 99;
 }
 
 .arrow {
