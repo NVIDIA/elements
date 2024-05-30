@@ -12,7 +12,6 @@ export default defineConfig({
       'lit-library-starter': resolve(`./src`)
     },
     include: [resolve('./src/**/*.test.ts')],
-    forceRerunTriggers: ['**/dist/**'],
     server: {
       deps: {
         external: ['**/node_modules/**']
