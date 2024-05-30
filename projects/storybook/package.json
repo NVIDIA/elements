@@ -11,12 +11,11 @@
   "dependencies": {
     "@nvidia-elements/core": "workspace:@elements/elements@^",
     "@nvidia-elements/core-react": "workspace:@elements/elements-react@^",
-    "@nvidia-elements/testing": "workspace:^",
-    "@nvidia-elements/themes": "workspace:^",
+    "@nvidia-elements/testing": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
     "fflate": "0.8.1",
     "html-format": "1.1.2",
     "lit": "3.1.3",
-    "lit-library-starter": "workspace:^",
     "showdown": "2.1.0"
   },
   "devDependencies": {
