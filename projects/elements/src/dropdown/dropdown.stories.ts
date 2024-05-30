@@ -267,3 +267,18 @@ export const Alignment = {
 </div>
   `
 };
+
+export const HeaderFooter = {
+  render: () => html `
+<nve-dropdown anchor="btn" closable>
+  <nve-dropdown-header>
+    <h3 nve-text="heading semibold sm">heading</h3>
+  </nve-dropdown-header>
+  <p nve-text="body">some text content in a closable dropdown</p>
+  <nve-dropdown-footer>
+    <p nve-text="body">footer</p>
+  </nve-dropdown-footer>
+</nve-dropdown>
+<nve-button id="btn">button</nve-button>
+`
+}

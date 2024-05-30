@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Default, Interactive, Content, Closable, RadioGroupInteractive, RadioGroup, CheckboxGroupInteractive, CheckboxGroup, Arrow, Position, BehaviorTrigger } from './dropdown.stories';
+import { Default, Interactive, Content, Closable, RadioGroupInteractive, RadioGroup, CheckboxGroupInteractive, CheckboxGroup, Arrow, Position, BehaviorTrigger, HeaderFooter } from './dropdown.stories';
 
 <Meta title="Elements/Dropdown/Documentation" />
 
@@ -52,6 +52,14 @@ import '@nvidia-elements/core/dropdown/define.js';
 
 <Canvas of={BehaviorTrigger} story={{ inline: false, height: '600px' }} />
 
+## Header Footer
+
+<Canvas of ={HeaderFooter} story={{ inline: false, height: '400px' }}/>
+
 <element-status tag="nve-dropdown"></element-status>
 
 <element-api tag="nve-dropdown"></element-api>
+
+<element-api tag="nve-dropdown-header"></element-api>
+
+<element-api tag="nve-dropdown-footer"></element-api>
