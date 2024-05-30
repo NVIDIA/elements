@@ -1,3 +1,10 @@
+## [@elements/elements-v0.35.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.34.0...@elements/elements-v0.35.0) (2024-05-30)
+
+
+### Features
+
+* **elements:** add animated indeterminate state to progress-bar ([bf93fe0](https://github.com/NVIDIA/elements/commit/bf93fe0df9636c971a5b9ac5c2a63437c0c4260a))
+
 ## [@elements/elements-v0.34.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.33.5...@elements/elements-v0.34.0) (2024-05-28)
 
 
