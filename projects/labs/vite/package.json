@@ -1,0 +1,32 @@
+{
+  "name": "@nvidia-elements/vite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "wireit"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "peerDependencies": {
+    "@rollup/plugin-terser": "0.4.4",
+    "@vitest/browser": "1.6.0",
+    "@vitest/coverage-istanbul": "1.6.0",
+    "glob": "10.3.10",
+    "rollup": "3.29.1",
+    "rollup-plugin-minify-html-literals": "1.2.6",
+    "terser": "5.30.3",
+    "typescript": "5.3.3",
+    "vite": "5.2.11",
+    "vite-plugin-dts": "3.9.1",
+    "vitest": "1.6.0"
+  },
+  "wireit": {
+    "build": {
+      "files": [
+        "src"
+      ]
+    }
+  }
+}

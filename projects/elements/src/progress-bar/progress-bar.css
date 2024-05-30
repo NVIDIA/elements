@@ -1,5 +1,6 @@
 :host {
   width: 100%;
+  line-height: 0;
   --height: var(--nve-ref-size-200);
 }
 
