@@ -1,0 +1,76 @@
+import process from 'process';
+
+const watch = process.argv.findIndex(i => i === '--watch') !== -1;
+const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
+
+/** @type {import('vitest').UserConfig} */
+export const libraryTestConfig = {
+  test: {
+    include: ['./src/**/*.test.ts'],
+    retry: 1,
+    isolate: coverage,
+    bail: !watch && !coverage ? 2 : 0,
+    optimizeDeps: {
+      exclude: ['@vitest/coverage-istanbul']
+    },
+    server: {
+      deps: {
+        external: ['**/node_modules/**']
+      }
+    },
+    reporters: ['basic', 'junit'],
+    outputFile: {
+      junit: './coverage/unit/junit.xml'
+    },
+    onConsoleLog(log) {
+      if (log.includes('scheduled an update')) return false;
+      if (log.includes('Lit is in dev mode')) return false;
+    },
+    browser: {
+      isolate: coverage,
+      slowHijackESM: false,
+      enabled: true,
+      headless: !watch,
+      provider: 'playwright',
+      name: 'chromium'
+    },
+    coverage: {
+      extension: ['.ts'],
+      provider: 'istanbul',
+      reportsDirectory: './coverage/unit',
+      reporter: [['lcov', { file: 'coverage.dat' }], 'html', 'json-summary'],
+      thresholds: {
+        lines: 90,
+        branches: 90,
+        functions: 90,
+        statements: 90
+      },
+      watermarks: {
+        statements: [80, 90],
+        functions: [80, 90],
+        branches: [80, 90],
+        lines: [80, 90]
+      },
+      include: ['src'],
+      exclude: [
+        '**/test/**',
+        '**/dist/**',
+        '**/build/**',
+        '**/.lighthouse/**',
+        '**/.storybook/**',
+        '**/.wireit/**',
+        '**/.pnpm/**',
+        '**/*.test.ts',
+        '**/*.css.js',
+        '**/*.css',
+        '**/*.cjs',
+        '**/*.mjs',
+        '**/*.test.axe.ts',
+        '**/*.test.lighthouse.ts',
+        '**/*.stories.ts',
+        'vite.*.ts',
+        'vitest.*.ts'
+      ]
+    }
+  }
+};

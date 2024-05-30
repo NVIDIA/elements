@@ -6,6 +6,7 @@ import virtualHtml from 'vite-plugin-virtual-html';
 import fs from 'fs';
 import path from 'path';
 import { globSync } from 'glob';
+import { AddressInfo } from 'net';
 
 process.env.NODE_ENV = 'production';
 
@@ -27,7 +28,7 @@ type NetworkRequestDetails = FormattedIcu<Details> & { items: NetworkRequest[] }
 export class LighthouseRunner {
   #server: PreviewServer;
   #browser: Browser;
-  #port = 4175;
+  #port = 4176;
   #report = {};
 
   async open() {
@@ -47,7 +48,7 @@ export class LighthouseRunner {
       preview: { port: this.#port, open: false }
     });
 
-    this.#port = this.#server.httpServer.address().port;
+    this.#port = (this.#server.httpServer.address() as AddressInfo).port;
   }
 
   async close() {
