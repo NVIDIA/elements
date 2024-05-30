@@ -26,7 +26,8 @@ export default {
         'testing',
         'themes',
         'labs-behaviors-alpine',
-        'labs-testing-lighthouse'
+        'labs-testing-lighthouse',
+        'labs-vite'
       ]
     ]
   }
