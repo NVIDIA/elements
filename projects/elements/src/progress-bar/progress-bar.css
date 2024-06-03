@@ -2,6 +2,8 @@
   width: 100%;
   line-height: 0;
   --height: var(--nve-ref-size-200);
+  --opacity: 1;
+  --accent-color: var(--nve-sys-interaction-color);
 }
 
 :host([status='accent']) {
@@ -20,10 +22,6 @@
   --accent-color: var(--nve-sys-support-danger-color);
 }
 
-:host([status='neutral']) {
-  --accent-color: var(--mlv-sys-accent-primary-background); /* brand green */
-}
-
 progress {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -31,20 +29,12 @@ progress {
   background-color: var(--nve-sys-interaction-field-background);
   border-radius: var(--nve-ref-border-radius-full);
   height: var(--height);
+  opacity: var(--opacity);
   width: 100%;
 }
 
-progress.indeterminate {
-  animation: 1s ease-out 0s infinite normal none running horizontal-animation;
-  --height: var(--nve-ref-size-150);
-}
-
-progress[value].indeterminate::-webkit-progress-value {
-  border-radius: 0;
-}
-
 progress[value]::-webkit-progress-bar {
-  background-color: var(--nve-sys-interaction-field-background);
+  background-color: inherit;
   border-radius: var(--nve-ref-border-radius-full);
 }
 
@@ -71,17 +61,49 @@ progress[value]::-moz-progress-bar {
   background-color: var(--accent-color);
 }
 
-@keyframes horizontal-animation {
+:host(:not([value])) {
+  --height: var(--nve-ref-size-100);
+  --opacity: 0.75;
+}
+
+progress.indeterminate {
+  --accent-color-faded: color-mix(in srgb, var(--accent-color), transparent 90%);
+  --indeterminate-gradient: linear-gradient(to right, var(--accent-color-faded) 10%, var(--accent-color));
+  --indeterminate-gradient-reverse: linear-gradient(to left, var(--accent-color-faded) 10%, var(--accent-color));
+  will-change: transform;
+  background-image: var(--indeterminate-gradient);
+  animation: indeterminate-animation 2.4s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+progress[value].indeterminate::-webkit-progress-value {
+  border-radius: 0;
+  background-color: transparent !important;
+}
+
+@keyframes indeterminate-animation {
   0% {
-    width: 0;
-    opacity: 0;
+    transform: scaleX(0.015);
+    transform-origin: 0% 0%;
+  }
+  25% {
+    transform: scaleX(0.4);
   }
   50% {
-    width: 50%;
-    opacity: 1;
+    transform: scaleX(0.015);
+    transform-origin: 100% 0%;
+    background-image: var(--indeterminate-gradient);
+  }
+  50.1% {
+    transform: scaleX(0.015);
+    transform-origin: 100% 0%;
+    background-image: var(--indeterminate-gradient-reverse);
+  }
+  75% {
+    transform: scaleX(0.4);
   }
   100% {
-    width: 100%;
-    opacity: 0;
+    transform: scaleX(0.015);
+    transform-origin: 0% 0%;
+    background-image: var(--indeterminate-gradient-reverse);
   }
 }

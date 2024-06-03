@@ -47,8 +47,24 @@ export const Labeled = {
 
 export const Indeterminate = {
   render: () => html`
-    <div mlv-layout="column gap:md pad:lg full">
-      <mlv-progress-bar></mlv-progress-bar>
+    <mlv-progress-bar></mlv-progress-bar>
+  `
+};
+
+export const IndeterminateStatusColors = {
+  render: () => html`
+    <div mlv-layout="column gap:md full">
+      <mlv-progress-bar status="accent"></mlv-progress-bar>
+
+      <mlv-progress-bar status="warning"></mlv-progress-bar>
+
+      <mlv-progress-bar status="danger"></mlv-progress-bar>
     </div>
+  `
+};
+
+export const IndeterminateCustomColor = {
+  render: () => html`
+    <mlv-progress-bar style="--accent-color: var(--mlv-sys-accent-primary-background); --height: var(--nve-ref-size-150); --opacity: 1;"></mlv-progress-bar>
   `
 };
