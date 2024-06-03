@@ -4,7 +4,7 @@ import format from 'html-format';
 import packageFile from '@nvidia-elements/core/package.json';
 import { ELEMENTS_VERSION } from './version.js';
 import { SCOPE } from '@nvidia-elements/core';
-import metrics from '../../elements/build/metadata.json';
+import metrics from '../../internals/metadata/metadata.json';
 
 export function playground(Story, context) {
   const story = Story();
@@ -96,7 +96,7 @@ ${content}
 }
 
 function getImports() {
-  return metrics.elements
+  return metrics['@nvidia-elements/core'].elements
     .filter(e => packageFile.exports[`./${e.name.replace('mlv-', '')}/define.js`])
     .map(e => `import '${SCOPE}/elements/${e.name.replace('mlv-', '')}/define.js';`)
     .join('\n');

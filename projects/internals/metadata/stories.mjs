@@ -2,13 +2,12 @@ import { globSync } from 'glob';
 import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
 
-const files = [...globSync('./src/**/*.stories.ts'), ...globSync('./docs/patterns/*.stories.ts')];
+export async function getStories(paths) {
+  const filePaths = paths.flatMap(p => globSync(p));
+  return (await Promise.all(filePaths.map(async p => await getStoriesFromFile(p)))).filter(story => story.element);
+}
 
-export const stories = (await Promise.all(files.map(async file => await getStories(file)))).filter(
-  story => story.element
-);
-
-async function getStories(filePath) {
+async function getStoriesFromFile(filePath) {
   const project = new Project();
   const file = project.addSourceFileAtPath(filePath);
   const stories = file.getChildrenOfKind(SyntaxKind.VariableStatement);
@@ -18,7 +17,8 @@ async function getStories(filePath) {
     .find(el => el.getText() === 'component')
     ?.getNextSiblings()[1]
     ?.getText()
-    ?.replace(/'/g, '');
+    ?.replace(/'/g, '')
+    ?.replace('mlv-', 'nve-');
 
   const formattedStories = stories.map(async story => {
     const id = story.getDescendantsOfKind(SyntaxKind.Identifier)[0].getText();
@@ -31,7 +31,7 @@ async function getStories(filePath) {
       .trim();
 
     if (template) {
-      if (template.includes('mlv-theme')) {
+      if (template.includes('mlv-theme') || template.includes('nve-theme')) {
         const lines = template?.split('\n');
         template = lines.splice(1, lines.length - 2).join('\n');
       }

@@ -27,7 +27,7 @@ const rule = {
       'AssignmentExpression[left.object.type=ThisExpression][left.property.type=Identifier]': checkAssigment,
       'ClassDeclaration:exit': () => {
         mutations.forEach((node, name) => {
-          const noExceptions = !['hidden', 'value'].find((i) => i === name); // native overrides like input value are by default stateful in browser
+          const noExceptions = !['hidden', 'value'].find(i => i === name); // native overrides like input value are by default stateful in browser
           if (noExceptions && props.has(name)) {
             context.report({
               node: node.parent,

@@ -17,9 +17,11 @@ import '@nvidia-elements/core/drawer/define.js';
 import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/json-viewer/define.js';
 import '@nvidia-elements/core/tabs/define.js';
-import metrics from '../../../elements/build/metadata.json';
-import metricsMaglev from '../../../elements/build/metadata.elements.json';
+import metrics from '../../../internals/metadata/metadata.json';
+import metricsMaglev from '../../../internals/metadata/elements.json';
 import { ELEMENTS_VERSION } from '../../.storybook/version.js';
+
+metrics['@nvidia-elements/core'].elements.forEach(e => e.name = e.name.replace('nve-', 'mlv-')); // temporary
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
 const showdownOptions = { simplifiedAutoLink: true };
@@ -178,7 +180,7 @@ class ElementStatus extends LitElement {
   static styles = [unsafeCSS(`${typography}${layout}`)];
 
   render() {
-    const metadata = metrics.elements.find(d => d.name === this.tag);
+    const metadata = metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag);
     return html`
     <div className="status-summary" mlv-layout="column gap:md align:stretch">
       <div mlv-layout="column gap:xs align:stretch pad-top:xl">
@@ -235,7 +237,7 @@ class ElementMetrics extends LitElement {
   static styles = [unsafeCSS(`${typography}${layout}`)];
 
   render() {
-    const element = metrics.elements.find(d => d.name === this.tag);
+    const element = metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag);
     return html`
       <section mlv-layout="column gap:lg">
         <div mlv-layout="row gap:xs align:center full">
@@ -273,7 +275,7 @@ class ElementAPI extends LitElement {
   }
 
   get #element() {
-    return metrics.elements.find(d => d.name === this.tag);
+    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag);
   }
 
   #markdown = new showdown.Converter(showdownOptions);
@@ -452,7 +454,7 @@ class ElementsMetrics extends LitElement {
           elements = column.sort === 'descending' ? elements.reverse() : elements;
         }
         return elements;
-    }, [...metrics.elements]);
+    }, [...metrics['@nvidia-elements/core'].elements]);
   }
 
   render() {
@@ -461,7 +463,7 @@ class ElementsMetrics extends LitElement {
         <h3 mlv-text="body bold">Summary:</h3>
         <section mlv-layout="row gap:xs align:center">
           <span mlv-text="body sm muted">Total Available Components</span>
-          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics.elements.length}</mlv-badge></span>
+          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics['@nvidia-elements/core'].elements.length}</mlv-badge></span>
         </section>
       </div>
       <mlv-grid style="--scroll-height: calc(100vh - 290px)">
@@ -490,8 +492,6 @@ class ElementsMetrics extends LitElement {
             <mlv-grid-cell>${getA11yStatusBadge(element.axe, true)}</mlv-grid-cell>
             <mlv-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} mlv-text="link no-visit">${element.behavior}</a></mlv-grid-cell>
             <mlv-grid-cell>${element.since}</mlv-grid-cell>
-            <!-- <mlv-grid-cell>${element.tests.instanceTotal}</mlv-grid-cell> -->
-            <!-- <mlv-grid-cell>${element.tests.projectTotal}</mlv-grid-cell> -->
             <mlv-grid-cell>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit">Figma</a>` : html`<mlv-icon name="exclamation-triangle" status="warning"></mlv-icon>`}</mlv-grid-cell>
             <mlv-grid-cell><mlv-icon name="checkmark-circle" status="success"></mlv-icon></mlv-grid-cell>
             <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="checkmark-circle" status="success"></mlv-icon>` : html`<mlv-icon name="exclamation-triangle" status="warning"></mlv-icon>`}</mlv-grid-cell>
@@ -599,7 +599,7 @@ class LighthouseMetrics extends LitElement {
           <mlv-grid-column>Best Practices</mlv-grid-column>
           <mlv-grid-column>Bundle Size</mlv-grid-column>
         </mlv-grid-header>
-        ${metrics.elements.map(element => html`
+        ${metrics['@nvidia-elements/core'].elements.map(element => html`
           <mlv-grid-row>
             <mlv-grid-cell>${element.name}</mlv-grid-cell>
             <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.performance)}>${element.lighthouse.scores?.performance}</mlv-badge></mlv-grid-cell>
@@ -668,19 +668,19 @@ class TestMetrics extends LitElement {
         <h3 mlv-text="body bold">Test Coverage:</h3>
         <section mlv-layout="row gap:xs align:center">
           <span mlv-text="body sm muted">Statements</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.statements.pct)}</span>
+          <span mlv-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.statements.pct)}</span>
         </section>
         <section mlv-layout="row gap:xs align:center">
           <span mlv-text="body sm muted">Lines</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.lines.pct)}</span>
+          <span mlv-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.lines.pct)}</span>
         </section>
         <section mlv-layout="row gap:xs align:center">
           <span mlv-text="body sm muted">Functions</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.functions.pct)}</span>
+          <span mlv-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.functions.pct)}</span>
         </section>
         <section mlv-layout="row gap:xs align:center">
           <span mlv-text="body sm muted">Branches</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics.tests.coverageTotal.branches.pct)}</span>
+          <span mlv-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.branches.pct)}</span>
         </section>
       </div>
       <mlv-grid style="--scroll-height: calc(100vh - 290px)">
@@ -691,7 +691,7 @@ class TestMetrics extends LitElement {
           <mlv-grid-column width="180px">Functions</mlv-grid-column>
           <mlv-grid-column>Branches</mlv-grid-column>
         </mlv-grid-header>
-        ${metrics.tests.coverage.map(cov => html`
+        ${metrics['@nvidia-elements/core'].tests.coverage.map(cov => html`
           <mlv-grid-row>
             <mlv-grid-cell><p mlv-text="body truncate">${cov.file}</p></mlv-grid-cell>
             <mlv-grid-cell>${getCoverageStatus(cov.statements.pct)}</mlv-grid-cell>
