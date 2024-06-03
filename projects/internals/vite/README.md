@@ -1,4 +1,4 @@
-# @nvidia-elements/vite
+# @internals/vite
 
 This project is a private and internal API for the elements repo. This provides default Vite build and test configs for our projects.
 
@@ -10,7 +10,7 @@ The default configs are standard Vite configuration objects. The objects can be 
 // vite.config.ts
 import { resolve } from 'path';
 import { UserConfig, defineConfig, mergeConfig } from 'vite';
-import { libraryBuildConfig } from '@nvidia-elements/vite';
+import { libraryBuildConfig } from '@internals/vite';
 
 export default defineConfig(() => {
   const config: UserConfig = {
@@ -29,7 +29,7 @@ export default defineConfig(() => {
 // vitest.config.ts
 import { resolve } from 'path';
 import { defineConfig, mergeConfig } from 'vitest/config';
-import { libraryTestConfig } from '@nvidia-elements/vite';
+import { libraryTestConfig } from '@internals/vite';
 
 export default defineConfig(() => {
   const config = {

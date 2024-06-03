@@ -17,12 +17,12 @@ const rule = {
     return {
       'PropertyDefinition > Decorator[expression.callee.name=property]': getProps,
       'ClassDeclaration:exit': () => {
-        properties.forEach((node) => {
-          const props = node.expression.arguments.flatMap((args) => args.properties);
+        properties.forEach(node => {
+          const props = node.expression.arguments.flatMap(args => args.properties);
           const propName = node.parent.key.name;
-          const noExceptions = !['i18n'].find((i) => i === propName);
+          const noExceptions = !['i18n'].find(i => i === propName);
 
-          props.forEach((prop) => {
+          props.forEach(prop => {
             const propType = prop.value.name;
 
             if (noExceptions && prop.key.name === 'type' && (propType === 'Array' || propType === 'Object')) {

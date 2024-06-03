@@ -65,7 +65,7 @@ export class TabsItem extends BaseButton {
  * @element nve-tabs
  * @description Tabs provide a selection UX, typically used for swapping content shown on a page, or within a navigation context.
  * @since 0.10.0
- * @slot - default slot for nve-tab-item
+ * @slot - default slot for tab-item
  * @cssprop --gap
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-tabs-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0

@@ -1,0 +1,46 @@
+{
+  "name": "@nve-internal/metadata",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "ci": "wireit",
+    "build": "wireit",
+    "build:elements": "wireit"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build": {
+      "clean": false,
+      "command": "node ./metadata.mjs",
+      "files": [
+        "metadata.mjs",
+        "build/stories.mjs"
+      ],
+      "output": [
+        "metadata.json"
+      ],
+      "dependencies": [
+        "../../elements:ci",
+        "../../elements-react:ci",
+        "../../testing:ci",
+        "../../labs/behaviors-alpine:ci"
+      ]
+    },
+    "build:elements": {
+      "command": "node ./elements.mjs",
+      "files": [
+        "elements.mjs"
+      ],
+      "dependencies": [
+        "../../elements:build:manifest"
+      ]
+    }
+  },
+  "dependencies": {
+    "ts-morph": "20.0.0"
+  }
+}
