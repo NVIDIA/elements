@@ -1,24 +1,21 @@
-import { defineConfig } from 'vitest/config';
-import path from 'path';
-import process from 'process';
+import { resolve } from 'path';
+import { defineConfig, mergeConfig } from 'vitest/config';
+import { libraryTestConfig } from '@nve-internals/vite';
 
-const resolve = rel => path.resolve(process.cwd(), rel);
-const watch = process.argv.findIndex(i => i === '--watch') !== -1;
-
-export default defineConfig({
-  test: {
-    root: resolve('.'),
-    alias: {
-      codeblock: resolve(`./src`)
-    },
-    include: [resolve('./src/**/*.test.ts')],
-    forceRerunTriggers: ['**/dist/**'],
-    deps: { external: ['**/node_modules/**'] },
-    browser: {
-      enabled: true,
-      headless: !watch,
-      provider: 'playwright',
-      name: 'chromium'
+export default defineConfig(() => {
+  const config = {
+    test: {
+      alias: { '@nvidia-elements/code': resolve(import.meta.dirname, './src') },
+      coverage: {
+        thresholds: {
+          lines: 21,
+          branches: 11,
+          functions: 33,
+          statements: 21
+        }
+      }
     }
-  }
+  };
+
+  return mergeConfig(libraryTestConfig, config);
 });

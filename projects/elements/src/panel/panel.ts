@@ -19,7 +19,7 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
  * @since 0.10.0
  * @slot title - Title Text
  * @slot subtitle - Subtitle Text
- * @slot action-icon - Extra Action Button (use `nve-icon-button`)
+ * @slot action-icon - Extra Action Button
  * @cssprop --padding
  * @cssprop --border-bottom
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-panel-documentation--docs
