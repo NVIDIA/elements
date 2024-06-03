@@ -13,9 +13,6 @@
     "build:icons": "wireit",
     "build:importmap": "wireit",
     "build:vscode-custom-data": "wireit",
-    "build:metadata": "wireit",
-    "build:metadata:fast": "wireit",
-    "build:metadata:elements": "wireit",
     "test": "wireit",
     "test:all": "wireit",
     "test:watch": "wireit",
@@ -255,7 +252,7 @@
     "@lit-labs/virtualizer": "2.0.12",
     "@nvidia-elements/testing": "workspace:*",
     "@nvidia-elements/testing-lighthouse": "workspace:*",
-    "@nvidia-elements/vite": "workspace:*",
+    "@nve-internals/vite": "workspace:*",
     "@rollup/plugin-terser": "0.4.4",
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
@@ -365,7 +362,7 @@
         "build:manifest",
         "build:inter",
         "../themes:build",
-        "../labs/vite:build"
+        "../internals/vite:build"
       ]
     },
     "build:bundle": {
@@ -447,45 +444,6 @@
         "build:manifest"
       ]
     },
-    "build:metadata": {
-      "command": "node ./build/metadata.mjs",
-      "files": [
-        "build/metadata.mjs",
-        "build/stories.mjs",
-        "dist/custom-elements.json"
-      ],
-      "output": [
-        "build/metadata.json"
-      ],
-      "dependencies": [
-        "build:manifest",
-        "test:coverage",
-        "test:lighthouse:all"
-      ]
-    },
-    "build:metadata:fast": {
-      "command": "node ./build/metadata.mjs",
-      "files": [
-        "build/metadata.mjs",
-        "build/stories.mjs",
-        "dist/custom-elements.json"
-      ],
-      "output": [
-        "build/metadata.json"
-      ],
-      "dependencies": [
-        "build:manifest"
-      ]
-    },
-    "build:metadata:elements": {
-      "command": "node ./build/metadata.elements.mjs",
-      "files": [
-        "build/metadata.elements.mjs"
-      ],
-      "dependencies": [
-        "build:manifest"
-      ]
-    },
     "test:all": {
       "command": "WIREIT_PARALLEL=1 echo '...'",
       "files": [],
@@ -550,7 +508,8 @@
         "vitest.lighthouse.build.ts"
       ],
       "output": [
-        ".lighthouse"
+        ".lighthouse",
+        "coverage/lighthouse/**"
       ],
       "dependencies": [
         "build",
@@ -579,19 +538,18 @@
       }
     },
     "test:axe": {
-      "command": "vitest run --config=vitest.config.ts -- --axe",
+      "command": "vitest run --config=vitest.axe.ts",
       "files": [
         "src/**/*.test.axe.ts",
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts",
-        "vitest.config.ts"
+        "vitest.axe.ts"
       ],
       "output": [
         "coverage/axe/**"
       ],
       "dependencies": [
-        "test",
         "build"
       ],
       "env": {
@@ -607,7 +565,7 @@
     "lint:eslint": {
       "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
       "files": [
-        "build/eslint/*.cjs",
+        "../internals/eslint/*.cjs",
         "src/**/*.ts",
         "src/**/*.js",
         "eslint.config.js",
@@ -626,7 +584,7 @@
     "prepublishonly": {
       "dependencies": [
         "ci",
-        "build:metadata"
+        "../internals/metadata:ci"
       ]
     }
   }

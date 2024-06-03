@@ -67,7 +67,8 @@
         "dist/**"
       ],
       "dependencies": [
-        "../elements:build"
+        "../elements:build",
+        "../starters/lit-library:ci"
       ]
     }
   }

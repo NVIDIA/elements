@@ -5,18 +5,12 @@ import { libraryTestConfig } from '@nve-internals/vite';
 export default defineConfig(() => {
   const config = {
     test: {
+      include: ['./src/**/*.test.axe.ts'],
+      exclude: [],
       alias: { '@nvidia-elements/core': resolve(import.meta.dirname, './src') },
       setupFiles: [resolve(import.meta.dirname, './src/test/setup.ts')],
-      coverage: {
-        exclude: [
-          '**/docs/**',
-          '**/polyfills/**',
-          '**/index.js',
-          '**/src/index.ts',
-          '**/src/icon/icons/**',
-          '**/src/icon/icons.ts',
-          '**/internal/docs.ts'
-        ]
+      outputFile: {
+        junit: './coverage/axe/junit.xml'
       }
     }
   };

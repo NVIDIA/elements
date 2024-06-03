@@ -86,6 +86,7 @@ git commit -a -m "fix(elements): disabled multi-select"
 
 | Scopes                    | Description                |
 | ------------------------- | -------------------------- |
+| `ci`                      | `/projects/internals`      |
 | `starters`                | `/projects/starters`       |
 | `elements`                | `/projects/elements`       |
 | `elements-react`          | `/projects/elements-react` |

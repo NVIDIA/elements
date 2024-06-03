@@ -1,4 +1,4 @@
-import { deepMerge } from './utils.js';
+import { mergeConfig } from 'vitest/config';
 
 const defaultConfig = {
   logLevel: 'info',
@@ -12,7 +12,7 @@ const defaultConfig = {
         return false;
       }
     },
-    reporters: ['basic'],
+    reporters: ['basic', 'junit'],
     globalSetup: ['@nvidia-elements/testing-lighthouse/vite-setup.js'],
     include: [process.env.LIGHTHOUSE_ALL ? 'src/**/*.test.lighthouse.ts' : 'src/index.test.lighthouse.ts'],
     testTimeout: 60000,
@@ -24,4 +24,4 @@ const defaultConfig = {
   }
 };
 
-export const createConfig = config => deepMerge(defaultConfig, config);
+export const createConfig = config => mergeConfig(defaultConfig, config);
