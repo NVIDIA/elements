@@ -2,7 +2,7 @@ import { createRequire } from 'module';
 import { resolve } from 'node:path';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { readdir } from 'node:fs/promises';
-import { SCOPE } from '@nvidia-elements/core';
+import { SCOPE } from '../../elements/dist/index.js';
 
 const require = createRequire(import.meta.url);
 
@@ -31,11 +31,15 @@ async function getSourceFiles(src) {
   const files = [];
   for await (const file of getFiles(src)) {
     if (
-      file.endsWith('.ts') ||
-      file.endsWith('.js') ||
-      file.endsWith('.html') ||
-      file.endsWith('.md') ||
-      file.endsWith('.mdx')
+      (file.endsWith('.ts') ||
+        file.endsWith('.js') ||
+        file.endsWith('.html') ||
+        file.endsWith('.md') ||
+        file.endsWith('.mdx')) &&
+      !file.includes('.wireit') &&
+      !file.includes('dist') &&
+      !file.includes('node_modules') &&
+      !file.endsWith('.d.ts')
     ) {
       files.push(file);
     }
@@ -44,7 +48,9 @@ async function getSourceFiles(src) {
 }
 
 function getManifest() {
-  const elementsSchemaJSON = JSON.parse(readFileSync(new URL('../dist/custom-elements.json', import.meta.url)));
+  const elementsSchemaJSON = JSON.parse(
+    readFileSync(new URL('../../elements/dist/custom-elements.json', import.meta.url))
+  );
   return Array.from(
     new Set(
       elementsSchemaJSON.modules.flatMap(module => {
@@ -64,7 +70,7 @@ function getElementsVersion(data) {
 
 async function getProjects() {
   const elementTags = getManifest().map(d => d.tagName);
-  const path = '../../../Internal/elements';
+  const path = '../../../../elements';
 
   return Promise.all(
     (await getPackageFiles(path))
@@ -86,7 +92,7 @@ async function getProjects() {
           sources.reduce((tags, path) => {
             const src = readFileSync(path, 'utf8');
             elementTags
-              .filter(tag => src.includes(tag))
+              .filter(tag => tag && src.includes(tag))
               .forEach(tag => {
                 tags[tag] = tags[tag] ? tags[tag] + 1 : 1;
               });
@@ -110,4 +116,4 @@ async function getProjects() {
 const projects = await getProjects();
 const created = new Date().toISOString();
 
-writeFileSync('./build/metadata.elements.json', JSON.stringify({ created, projects }, null, 2));
+writeFileSync('./elements.json', JSON.stringify({ created, projects }, null, 2));

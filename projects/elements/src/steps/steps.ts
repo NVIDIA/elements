@@ -97,7 +97,7 @@ export class StepsItem extends BaseButton {
  * @element nve-steps
  * @description Steps enables a multi-step workflow allowing a user to complete a goal in a specific sequence.
  * @since 0.30.0
- * @slot - default slot for nve-steps-item
+ * @slot - default slot for steps-item
  * @cssprop --gap
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-steps-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=8txdFlcqmipufrZs-0

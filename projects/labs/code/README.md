@@ -1,4 +1,4 @@
-# Lit Library + Elements
+# @nvidia-elements/code
 
 [Built with Vite](https://vitejs.dev/)
 
