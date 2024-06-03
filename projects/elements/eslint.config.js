@@ -7,7 +7,7 @@ import importPlugin from 'eslint-plugin-import';
 import wc from 'eslint-plugin-wc';
 import rulesdir from 'eslint-plugin-rulesdir';
 
-rulesdir.RULES_DIR = '../../build/eslint';
+rulesdir.RULES_DIR = '../internals/eslint';
 
 const source = ['**/src/**/*.ts', '**/src/**/*.d.ts'];
 const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts'];

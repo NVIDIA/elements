@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { UserConfig, defineConfig, mergeConfig } from 'vite';
-import { libraryBuildConfig } from '@nvidia-elements/vite';
+import { libraryBuildConfig } from '@internals/vite';
 
 export default defineConfig(() => {
   const config: UserConfig = {

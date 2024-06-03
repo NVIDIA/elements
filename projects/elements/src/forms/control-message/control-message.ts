@@ -20,7 +20,7 @@ interface AlertStatus {
 
 /**
  * @element nve-control-message
- * @description Defining a Validity State on a `nve-control-message` will allow messages to be shown conditionally based on the current HTML5 validity state.
+ * @description Defining a Validity State on a control-message will allow messages to be shown conditionally based on the current HTML5 validity state.
  * @since 0.3.0
  * @entrypoint \@elements/elements/forms
  * @slot - default slot for content

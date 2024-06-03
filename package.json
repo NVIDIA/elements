@@ -108,6 +108,12 @@
         "release:elements"
       ]
     },
+    "release:code": {
+      "command": "cd projects/labs/code && pnpm exec semantic-release",
+      "dependencies": [
+        "release:elements"
+      ]
+    },
     "format": {
       "command": "prettier --config prettier.config.js --check .",
       "files": [
@@ -131,7 +137,7 @@
       "command": "test -n \"$CI\" || (pnpm run playwright & husky install)"
     },
     "gitlab:coverage": {
-      "command": "node ./build/gitlab-coverage.js",
+      "command": "node ./projects/internals/gitlab/index.js",
       "dependencies": []
     }
   }

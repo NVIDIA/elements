@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { defineConfig, mergeConfig } from 'vitest/config';
-import { libraryTestConfig } from '@nvidia-elements/vite';
+import { libraryTestConfig } from '@internals/vite';
 
 export default defineConfig(() => {
   const config = {
@@ -21,5 +21,5 @@ export default defineConfig(() => {
     }
   };
 
-  return mergeConfig(config, libraryTestConfig);
+  return mergeConfig(libraryTestConfig, config);
 });
