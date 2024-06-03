@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs';
-import { Default, Max, Labeled, Indeterminate } from './progress-bar.stories';
+import { Default, Max, Labeled, Indeterminate, IndeterminateStatusColors, IndeterminateCustomColor } from './progress-bar.stories';
 
 <Meta title="Elements/Progress Bar/Documentation" />
 
@@ -43,13 +43,21 @@ Progress bars may have their labels and numerical values displayed above its vis
 
 <Canvas of={Labeled} />
 
-## Indeterminate (Horizontal Loading Indicator)
+## Indeterminate Animation (Horizontal Loading Indicator)
 
 Progress bars may will display as an animated loading indicator when no `value` attribute is set.
 
-Additionally, leave off the `status` attribute for the default brand green color.
+Leave off the `status` attribute for the `neutral` color.
 
 <Canvas of={Indeterminate} />
+
+Or in combination with `status` colors.
+
+<Canvas of={IndeterminateStatusColors} />
+
+Alternatively, set the `--accent-color` css property for a branded progress bar style.
+
+<Canvas of={IndeterminateCustomColor} />
 
 <element-status tag="nve-progress-bar"></element-status>
 
