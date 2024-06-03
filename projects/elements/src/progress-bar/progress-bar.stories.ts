@@ -47,8 +47,24 @@ export const Labeled = {
 
 export const Indeterminate = {
   render: () => html`
-    <div nve-layout="column gap:md pad:lg full">
-      <nve-progress-bar></nve-progress-bar>
+    <nve-progress-bar></nve-progress-bar>
+  `
+};
+
+export const IndeterminateStatusColors = {
+  render: () => html`
+    <div nve-layout="column gap:md full">
+      <nve-progress-bar status="accent"></nve-progress-bar>
+
+      <nve-progress-bar status="warning"></nve-progress-bar>
+
+      <nve-progress-bar status="danger"></nve-progress-bar>
     </div>
+  `
+};
+
+export const IndeterminateCustomColor = {
+  render: () => html`
+    <nve-progress-bar style="--accent-color: var(--nve-sys-accent-primary-background); --height: var(--nve-ref-size-150); --opacity: 1;"></nve-progress-bar>
   `
 };
