@@ -371,9 +371,6 @@ importers:
 
   projects/labs/code:
     dependencies:
-      '@elements/elements':
-        specifier: workspace:^
-        version: link:../../elements
       highlight.js:
         specifier: 11.9.0
         version: 11.9.0
@@ -381,6 +378,9 @@ importers:
         specifier: ^3.1.3
         version: 3.1.3
     devDependencies:
+      '@elements/elements':
+        specifier: workspace:^
+        version: link:../../elements
       '@internals/vite':
         specifier: workspace:*
         version: link:../../internals/vite
