@@ -439,7 +439,7 @@ class ProgressiveFilterDemo extends LitElement {
           ['text', () => html`<nve-combobox><input type="text" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} placeholder="value" /></nve-combobox>`],
           ['number', () => html`<nve-combobox><input type="number" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></nve-combobox>`],
           ['date', () => html`<nve-date><input type="date" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></nve-date>`],
-          ['select', () => html`<nve-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value="${v}">${v}</option>`)}</select></nve-select>`]
+          ['select', () => html`<nve-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value=${v}>${v}</option>`)}</select></nve-select>`]
         ], () => html`<nve-combobox><input type="text" placeholder="value" disabled /></nve-combobox>`)}
       </nve-progressive-filter-chip>`)}
       <nve-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || !!this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">

@@ -1,6 +1,6 @@
 import globals from 'globals';
-import typescript from '@typescript-eslint/eslint-plugin';
-import typescriptParser from '@typescript-eslint/parser';
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
 import lit from 'eslint-plugin-lit';
 import litA11y from 'eslint-plugin-lit-a11y';
 import importPlugin from 'eslint-plugin-import';
@@ -12,15 +12,18 @@ rulesdir.RULES_DIR = '../internals/eslint';
 const source = ['**/src/**/*.ts', '**/src/**/*.d.ts'];
 const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts'];
 const stories = ['**/*.stories.ts'];
-const ignores = ['**/node_modules/**', '**/dist/**', '**/dist-storybook/**', '**/coverage/**', '**/.lighthouse/**'];
+const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**'];
 
 export default [
-  'eslint:recommended',
+  {
+    files: [...source],
+    rules: eslint.configs.recommended.rules
+  },
   {
     files: [...source, ...tests, ...stories],
     ignores,
     plugins: {
-      '@typescript-eslint': typescript,
+      '@typescript-eslint': tseslint.plugin,
       rulesdir: rulesdir,
       wc: wc,
       import: importPlugin,
@@ -28,7 +31,7 @@ export default [
       lit
     },
     languageOptions: {
-      parser: typescriptParser,
+      parser: tseslint.parser,
       parserOptions: {
         project: './tsconfig.json',
         ecmaVersion: 'latest',
@@ -39,7 +42,7 @@ export default [
       }
     },
     rules: {
-      ...typescript.configs.recommended.rules,
+      ...tseslint.configs.recommended.rules,
       ...litA11y.configs.recommended.rules,
       ...litA11y.configs.recommended.rules,
       'wc/no-constructor-attributes': ['error'],
@@ -64,7 +67,7 @@ export default [
       'lit/no-useless-template-literals': ['error'],
       'lit/no-value-attribute': ['error'],
       'lit/prefer-nothing': ['error'],
-      'lit/quoted-expressions': ['off'],
+      'lit/quoted-expressions': ['error'],
       'lit/value-after-constraints': ['error'],
       'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
       '@typescript-eslint/no-explicit-any': 'off', // TODO
@@ -91,16 +94,6 @@ export default [
       'rulesdir/reserved-property-names': ['error'],
       'rulesdir/reserved-event-names': ['error'],
       'rulesdir/stateless-property': ['error']
-    }
-  },
-  {
-    files: [...source],
-    ignores: [...ignores, ...stories],
-    plugins: {
-      lit
-    },
-    rules: {
-      'lit/quoted-expressions': ['error']
     }
   },
   {
