@@ -71,6 +71,7 @@
     "@elements/elements": "workspace:^"
   },
   "devDependencies": {
+    "@elements/elements": "workspace:^",
     "@nvidia-elements/testing": "workspace:*",
     "@nve-internals/vite": "workspace:*",
     "@rollup/plugin-terser": "0.4.4",
