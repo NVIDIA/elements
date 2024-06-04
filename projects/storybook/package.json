@@ -56,6 +56,8 @@
         "../elements/src/**/*.stories.ts",
         "../elements-react/docs/**/*.mdx",
         "../elements-react/docs/**/*.stories.tsx",
+        "../labs/code/docs/**/*.mdx",
+        "../labs/code/docs/**/*.stories.ts",
         "../labs/testing-lighthouse/docs/**/*.mdx",
         "../labs/testing-lighthouse/docs/**/*.stories.ts",
         "../testing/docs/**/*.mdx",
@@ -68,6 +70,7 @@
       ],
       "dependencies": [
         "../elements:build",
+        "../labs/code:build",
         "../starters/lit-library:ci"
       ]
     }
