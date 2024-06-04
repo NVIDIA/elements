@@ -9,3 +9,4 @@ public
 *.test.lighthouse.ts
 CHANGELOG.md
 pnpm-lock.yaml
+projects/labs/code/index.html
