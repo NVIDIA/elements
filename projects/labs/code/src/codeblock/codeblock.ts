@@ -15,6 +15,14 @@ hljs.registerLanguage('shell', shell);
  * @element nve-codeblock
  * @description A container for content representing programming languages.
  * @since 0.1.0
+ * @slot actions - slot for action bar
+ * @cssprop --background
+ * @cssprop --padding
+ * @cssprop --border-radius
+ * @cssprop --font-family
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/labs-code-codeblock-documentation--docs
+ * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=12982-3305&t=3Qq325PlfuYlknS6-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/practices/structural-roles/
  */
 export class CodeBlock extends LitElement implements ContainerElement {
   static readonly metadata = {
@@ -22,14 +30,43 @@ export class CodeBlock extends LitElement implements ContainerElement {
     version: '0.0.0'
   };
 
+  /**
+   * Determines the container styles of component. Flat is used for nesting within other containers.
+   */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
-  @property({ type: String }) language?: string;
+  /**
+   * Programming language to be used to process the codeblock.
+   */
+  @property({ type: String }) language:
+    | 'css'
+    | 'go'
+    | 'html'
+    | 'javascript'
+    | 'json'
+    | 'markdown'
+    | 'python'
+    | 'shell'
+    | 'typescript'
+    | 'xml'
+    | 'yaml' = 'shell';
 
+  /**
+   * Text code to be process into a codeblock.
+   */
   @property({ type: String }) code?: string;
 
+  /**
+   * Adds styling to show the line numbers of the codeblock.
+   */
   @property({ attribute: 'line-numbers', type: Boolean }) lineNumbers?: Boolean;
 
+  /**
+   * Adds styling to highlight the provided code lines.
+   * For multiple lines: use Comma seperated values, ex: (1,5,7).
+   * For range of lines, use hyphen seperated values, ex: (1-5).
+   * You can combine both such as: ex: (1,5,10-15,20).
+   */
   @property({ type: String }) highlight?: string;
 
   @state() private formattedCode?: string;
@@ -68,14 +105,9 @@ export class CodeBlock extends LitElement implements ContainerElement {
   }
 
   #updateCode(): void {
-    const code = this.#source;
+    const code = this.#source.trim();
     if (!code) {
       return;
-    }
-
-    // default language
-    if (!this.language) {
-      this.language = 'shell';
     }
 
     // apply highlightjs

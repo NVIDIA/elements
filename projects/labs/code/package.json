@@ -19,6 +19,8 @@
     "./codeblock/languages/css.js": "./dist/codeblock/languages/css.js",
     "./codeblock/languages/go": "./dist/codeblock/languages/go.js",
     "./codeblock/languages/go.js": "./dist/codeblock/languages/go.js",
+    "./codeblock/languages/html": "./dist/codeblock/languages/html.js",
+    "./codeblock/languages/html.js": "./dist/codeblock/languages/html.js",
     "./codeblock/languages/javascript": "./dist/codeblock/languages/javascript.js",
     "./codeblock/languages/javascript.js": "./dist/codeblock/languages/javascript.js",
     "./codeblock/languages/json": "./dist/codeblock/languages/json.js",
