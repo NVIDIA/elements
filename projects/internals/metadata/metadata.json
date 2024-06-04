@@ -1,5 +1,5 @@
 {
-  "created": "2024-06-03T22:58:38.075Z",
+  "created": "2024-06-04T23:15:04.870Z",
   "types": {
     "props": [
       {
@@ -19963,8 +19963,8 @@
   "@nvidia-elements/code": {
     "name": "@nvidia-elements/code",
     "version": "0.0.0",
-    "readme": "# Lit Library + Elements\n\n[Built with Vite](https://vitejs.dev/)\n\nTo create reusable UI components that build on top of Elements we recommend using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components). This path enables your extensions to work in a large variety of frameworks and environments. We recommend reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team. The rest of this guide will focus on how to integrate specifically for Element integration and best practices.\n\n## Getting Started\n\n```shell\npnpm i\n\npnpm run dev\n```\n\n## Tasks\n\n| Command          | Description                                            |\n| ---------------- | ------------------------------------------------------ |\n| `pnpm run build` | Build library source                                   |\n| `pnpm run test`  | Run library tests                                      |\n| `pnpm run ci`    | Build and run all library CI requirements (build/test) |\n",
-    "changelog": "# Changelog",
+    "readme": "# @nvidia-elements/code\n\n[Built with Vite](https://vitejs.dev/)\n\nTo create reusable UI components that build on top of Elements we recommend using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components). This path enables your extensions to work in a large variety of frameworks and environments. We recommend reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team. The rest of this guide will focus on how to integrate specifically for Element integration and best practices.\n\n## Getting Started\n\n```shell\npnpm i\n\npnpm run dev\n```\n\n## Tasks\n\n| Command          | Description                                            |\n| ---------------- | ------------------------------------------------------ |\n| `pnpm run build` | Build library source                                   |\n| `pnpm run test`  | Run library tests                                      |\n| `pnpm run ci`    | Build and run all library CI requirements (build/test) |\n",
+    "changelog": "",
     "tests": {
       "coverage": [
         {
