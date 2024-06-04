@@ -116,7 +116,7 @@
       ]
     },
     "build:watch": {
-      "command": "vite build --mode watch",
+      "command": "vite build --watch",
       "service": true,
       "dependencies": [
         "build"
