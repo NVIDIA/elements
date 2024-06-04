@@ -16,7 +16,7 @@ export default {
 };
 
 @customElement('app-header-default-demo')
-class AppHeaderDefaultDemo extends LitElement {
+class AppHeaderDefaultDemo extends LitElement { /* eslint no-unused-vars: 0 */
   @state() private activeId = '';
 
   render() {

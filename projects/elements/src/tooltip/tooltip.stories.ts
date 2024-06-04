@@ -212,7 +212,7 @@ export const Wrap = {
 
 
 @customElement('dynamic-anchor-position-demo')
-class DynamicAnchorPositionDemo extends LitElement {
+class DynamicAnchorPositionDemo extends LitElement { /* eslint no-unused-vars: 0 */
   static styles = [css`
     :host {
       position: relative;

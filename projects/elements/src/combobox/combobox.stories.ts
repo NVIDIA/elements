@@ -439,7 +439,7 @@ class ProgressiveFilterDemo extends LitElement {
           ['text', () => html`<mlv-combobox><input type="text" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} placeholder="value" /></mlv-combobox>`],
           ['number', () => html`<mlv-combobox><input type="number" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></mlv-combobox>`],
           ['date', () => html`<mlv-date><input type="date" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></mlv-date>`],
-          ['select', () => html`<mlv-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value="${v}">${v}</option>`)}</select></mlv-select>`]
+          ['select', () => html`<mlv-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value=${v}>${v}</option>`)}</select></mlv-select>`]
         ], () => html`<mlv-combobox><input type="text" placeholder="value" disabled /></mlv-combobox>`)}
       </mlv-progressive-filter-chip>`)}
       <mlv-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || !!this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">

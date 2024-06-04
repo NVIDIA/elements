@@ -371,7 +371,7 @@ class SelectPerformanceDemo extends LitElement {
   <mlv-select>
     <label>1000 options</label>
     <select>
-      ${new Array(1000).fill('').map((_, i) => html`<option value="${i}">${i} item</option>`)}
+      ${new Array(1000).fill('').map((_, i) => html`<option value=${i}>${i} item</option>`)}
     </select>
   </mlv-select>
     `;

@@ -490,6 +490,7 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
 @customElement('combobox-test-element')
 class ComboboxTestElement extends LitElement {
+  /* eslint no-unused-vars: 0 */
   render() {
     return html`
       <mlv-combobox>
