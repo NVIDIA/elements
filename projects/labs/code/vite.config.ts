@@ -12,6 +12,7 @@ export default defineConfig(() => {
         entry: {
           'codeblock/languages/css': resolve(import.meta.dirname, './src/codeblock/languages/css.ts'),
           'codeblock/languages/go': resolve(import.meta.dirname, './src/codeblock/languages/go.ts'),
+          'codeblock/languages/html': resolve(import.meta.dirname, './src/codeblock/languages/html.ts'),
           'codeblock/languages/javascript': resolve(import.meta.dirname, './src/codeblock/languages/javascript.ts'),
           'codeblock/languages/json': resolve(import.meta.dirname, './src/codeblock/languages/json.ts'),
           'codeblock/languages/markdown': resolve(import.meta.dirname, './src/codeblock/languages/markdown.ts'),
