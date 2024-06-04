@@ -115,7 +115,7 @@ const options = [
 ];
 
 @customElement('radio-group-interactive-demo')
-class RadioGroupInteractiveDemo extends LitElement {
+class RadioGroupInteractiveDemo extends LitElement { /* eslint no-unused-vars: 0 */
   @state() private show = false;
   @state() private selected = options[0];
 
@@ -171,7 +171,7 @@ const checkboxes = [
 ];
 
 @customElement('checkbox-group-interactive-demo')
-class CheckboxGroupInteractiveDemo extends LitElement {  
+class CheckboxGroupInteractiveDemo extends LitElement { /* eslint no-unused-vars: 0 */
   @state() private show = false;
   @state() private suites = { '1': true, '2': false, '3': false };
 

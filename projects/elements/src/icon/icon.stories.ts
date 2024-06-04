@@ -818,11 +818,11 @@ export const Branding = {
   render: () => html`
     <div nve-layout="column gap:md">
       <div nve-layout="row align:wrap gap:xs">
-        ${GUI_NAMES.map(name => html`<nve-icon name="${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/line/${name}.svg` as any}" size="xl"></nve-icon>`)}
+        ${GUI_NAMES.map(name => html`<nve-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/line/${name}.svg` as any} size="xl"></nve-icon>`)}
       </div>
       <nve-divider></nve-divider>
       <div nve-layout="row align:wrap gap:xs">
-        ${GUI_NAMES.map(name => html`<nve-icon name="${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/fill/${name}.svg` as any}" size="xl"></nve-icon>`)}
+        ${GUI_NAMES.map(name => html`<nve-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/fill/${name}.svg` as any} size="xl"></nve-icon>`)}
       </div>
     </div>
   `
