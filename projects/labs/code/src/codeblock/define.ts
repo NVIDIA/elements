@@ -1,4 +1,4 @@
-import { define } from '@nvidia-elements/core/internal';
+import { define } from '@elements/elements/internal';
 import { CodeBlock } from './codeblock.js';
 
 define(CodeBlock);
