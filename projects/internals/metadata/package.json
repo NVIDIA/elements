@@ -27,6 +27,7 @@
         "../../elements:ci",
         "../../elements-react:ci",
         "../../testing:ci",
+        "../../labs/code:ci",
         "../../labs/behaviors-alpine:ci"
       ]
     },
