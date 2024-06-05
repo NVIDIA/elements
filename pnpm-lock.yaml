@@ -849,10 +849,10 @@ importers:
         specifier: workspace:*
         version: link:../labs/code
       '@nvidia-elements/core':
-        specifier: workspace:@elements/elements@^
+        specifier: workspace:@elements/elements@*
         version: link:../elements
       '@nvidia-elements/core-react':
-        specifier: workspace:@elements/elements-react@^
+        specifier: workspace:@elements/elements-react@*
         version: link:../elements-react
       '@nvidia-elements/testing':
         specifier: workspace:*
