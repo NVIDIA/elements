@@ -80,15 +80,29 @@ export class Select extends Control {
     return this.shadowRoot.querySelector('.tags');
   }
 
+  get #numberOfSelectedItems() {
+    return this.#options.filter(o => o.selected).length;
+  }
+
+  get #placeholderOption() {
+    return this.#options.find(o => o.selected && o.hidden && o.disabled);
+  }
+
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
+  get #multipleSelectLabel() {
+    const option = this.#placeholderOption;
+    const label = option ? this.#placeholderOption.innerText : `${this.#numberOfSelectedItems} ${this.i18n.selected}`;
+    return html`<div class="tags-label ${this.#placeholderOption ? 'placeholder' : ''}" aria-hidden="true">${label}</div>`;
+  }
+
   protected get prefixContent() {
-    return this.input?.multiple
+    return this.#select?.multiple
       ? html`
-    <div class="tags-label" aria-hidden="true">${this.#options.filter(o => o.selected).length} ${this.i18n.selected}</div>
+    ${this.#multipleSelectLabel}
     <div class="tags">
       ${this.#options
-        .filter(o => o.selected)
+        .filter(o => o.selected && o !== this.#placeholderOption)
         .map(
           o => html`
       <nve-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o, false)}>${o.textContent}</nve-tag>`
@@ -100,19 +114,21 @@ export class Select extends Control {
   get #menu() {
     return html`
     <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
-      ${this.#options.map(
-        (o, i) => html`
+      ${this.#options
+        .filter(o => o !== this.#placeholderOption)
+        .map(
+          (o, i) => html`
       <nve-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} ?disabled=${o.disabled} ?hidden=${!!o.hidden} aria-selected=${o.selected}>
         <slot name="option-${i + 1}">
           <nve-icon name="check" size="sm" aria-hidden="true"></nve-icon> ${o.innerText}
         </slot>
       </nve-menu-item>`
-      )}
+        )}
     </nve-menu>`;
   }
 
   protected get suffixContent() {
-    return this.input.size === 0
+    return this.#select.size === 0
       ? html`
       <nve-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></nve-icon>
       <nve-dropdown @close=${e => (e.target.hidden = true)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
@@ -190,7 +206,7 @@ export class Select extends Control {
   }
 
   #updateMultipleOverflow(width: number) {
-    if (this.input?.multiple && this.#tags.getBoundingClientRect().width > width - 24) {
+    if (this.#select?.multiple && this.#tags.getBoundingClientRect().width > width - 24) {
       this._internals.states.add('multiple-overflow');
     } else {
       this._internals.states.delete('multiple-overflow');
