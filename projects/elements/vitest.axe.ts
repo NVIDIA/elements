@@ -6,7 +6,6 @@ export default defineConfig(() => {
   const config = {
     test: {
       include: ['./src/**/*.test.axe.ts'],
-      exclude: [],
       alias: { '@nvidia-elements/core': resolve(import.meta.dirname, './src') },
       setupFiles: [resolve(import.meta.dirname, './src/test/setup.ts')],
       outputFile: {

@@ -9,8 +9,8 @@
     "build": "wireit"
   },
   "dependencies": {
-    "@nvidia-elements/core": "workspace:@elements/elements@^",
-    "@nvidia-elements/core-react": "workspace:@elements/elements-react@^",
+    "@nvidia-elements/core": "workspace:@elements/elements@*",
+    "@nvidia-elements/core-react": "workspace:@elements/elements-react@*",
     "@nvidia-elements/testing": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
