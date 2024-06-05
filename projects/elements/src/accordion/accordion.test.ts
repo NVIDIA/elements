@@ -4,6 +4,7 @@ import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent
 import { Accordion, AccordionContent, AccordionGroup, AccordionHeader } from '@nvidia-elements/core/accordion';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import '@nvidia-elements/core/accordion/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 
 describe(Accordion.metadata.tag, () => {
   let fixture: HTMLElement;
@@ -155,5 +156,34 @@ describe(Accordion.metadata.tag, () => {
     expect(parentElement.container).toBe('inset');
     expect(childElement1.container).toBe('inset');
     expect(childElement2.container).toBe('inset');
+  });
+});
+
+describe(`${Accordion.metadata.tag} - Actions`, () => {
+  let fixture: HTMLElement;
+  let element: Accordion;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+    <nve-accordion-group>
+      <nve-accordion>
+        <nve-accordion-header>
+          heading
+          <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
+        </nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
+    </nve-accordion-group>
+    `);
+    element = fixture.querySelector<Accordion>(Accordion.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should align caret icon button to left side if an action is provided by consumer', () => {
+    expect(element.shadowRoot.querySelector('.has-action')).toBeTruthy();
   });
 });
