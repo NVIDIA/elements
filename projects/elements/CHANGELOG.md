@@ -1,3 +1,10 @@
+## [@elements/elements-v0.36.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.35.0...@elements/elements-v0.36.0) (2024-06-05)
+
+
+### Features
+
+* **elements:** dropdown header and footer ([d6d849b](https://github.com/NVIDIA/elements/commit/d6d849b93bc356a2e1c6f62aa0c8f394ce878300))
+
 ## [@elements/elements-v0.35.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.34.0...@elements/elements-v0.35.0) (2024-05-30)
 
 
