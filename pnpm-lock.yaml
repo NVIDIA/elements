@@ -9143,7 +9143,7 @@ packages:
       magic-string: 0.30.10
       playwright: 1.44.0
       sirv: 2.0.4
-      vitest: 1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)
+      vitest: 1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)(terser@5.30.3)
 
   /@vitest/coverage-istanbul@1.6.0(vitest@1.6.0):
     resolution: {integrity: sha512-h/BwpXehkkS0qsNCS00QxiupAqVkNi0WT19BR0dQvlge5oHghoSVLx63fABYFoKxVb7Ue7+k6V2KokmQ1zdMpg==}
@@ -9159,7 +9159,7 @@ packages:
       magicast: 0.3.4
       picocolors: 1.0.0
       test-exclude: 6.0.0
-      vitest: 1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)
+      vitest: 1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)(terser@5.30.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -23676,6 +23676,7 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: true
 
   /vitest@1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)(terser@5.30.3):
     resolution: {integrity: sha512-H5r/dN06swuFnzNFhq/dnz37bPXnq8xB2xB5JOVk8K09rUtoeNN+LHWkoQ0A/i3hvbUKKcCei9KpbxqHMLhLLA==}
