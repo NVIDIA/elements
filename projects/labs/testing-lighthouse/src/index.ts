@@ -49,14 +49,10 @@ export class LighthouseRunner {
     });
 
     this.#port = (this.#server.httpServer.address() as AddressInfo).port;
+    console.log(`Vite Server running at port ${this.#port}`);
   }
 
   async close() {
-    console.log('Stopping Chromium...');
-    console.log('Stopping Vite Server...');
-    this.#server.httpServer.close();
-    await this.#browser.close();
-
     if (!fs.existsSync(DIST_DIR)) {
       fs.mkdirSync(ROOT_DIR);
       fs.mkdirSync(DIST_DIR);
@@ -69,6 +65,11 @@ export class LighthouseRunner {
 
     fs.writeFileSync(`${ROOT_DIR}/report.json`, JSON.stringify(report, null, 2));
     console.log(`Lighthouse report written to ${ROOT_DIR}/report.json`);
+
+    console.log('Stopping Chromium...');
+    console.log('Stopping Vite Server...');
+    this.#server.httpServer.close();
+    await this.#browser.close();
   }
 
   async getReport(name, content) {
