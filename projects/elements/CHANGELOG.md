@@ -1,3 +1,10 @@
+## [@elements/elements-v0.37.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.36.0...@elements/elements-v0.37.0) (2024-06-05)
+
+
+### Features
+
+* **elements:** update animation on progress-bar css and example code ([b7dd165](https://github.com/NVIDIA/elements/commit/b7dd165d2c55e259917ea0178fc0d0d8f3de808c))
+
 ## [@elements/elements-v0.36.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.35.0...@elements/elements-v0.36.0) (2024-06-05)
 
 
