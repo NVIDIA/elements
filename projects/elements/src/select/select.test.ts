@@ -323,6 +323,27 @@ describe(Select.metadata.tag, () => {
     );
   });
 
+  it('should show placeholder label for multiple select if a hidden option is provided', async () => {
+    expect(element.matches(':state(multiple)')).toBe(false);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(0);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag).length).toBe(3);
+    expect(element.shadowRoot.querySelector('.tags-label.placeholder')).toBeFalsy();
+
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[0].hidden = true;
+    select.options[0].disabled = true;
+
+    element.requestUpdate();
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(element.matches(':state(multiple)')).toBe(true);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(0);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag).length).toBe(2);
+    expect(element.shadowRoot.querySelector('.tags-label.placeholder')).toBeTruthy();
+  });
+
   it('should mark menu items as disabled when coresponding select option is disabled', async () => {
     element.requestUpdate();
     await elementIsStable(element);

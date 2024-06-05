@@ -108,8 +108,9 @@
 }
 
 :host(:state(multiple-overflow)) .tags-label,
-:host([multiple-overflow]) .tags-label {
-  display: block;
+:host([multiple-overflow]) .tags-label,
+.placeholder.tags-label {
+  display: block !important;
 }
 
 :host(:state(multiple)) ::slotted(select[multiple]) {

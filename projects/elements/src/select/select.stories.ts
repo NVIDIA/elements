@@ -348,6 +348,20 @@ export const Placeholder = {
 </mlv-select>`
 };
 
+export const PlaceholderMultiple = {
+  render: () => html`
+<mlv-select>
+  <label>label</label>
+  <select multiple>
+    <option value="" selected disabled hidden>Select Option</option>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </select>
+  <mlv-control-message>message</mlv-control-message>
+</mlv-select>`
+};
+
 export const Disabled = {
   render: () => html`
 <mlv-select>
