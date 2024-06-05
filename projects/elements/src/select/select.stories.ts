@@ -348,6 +348,20 @@ export const Placeholder = {
 </nve-select>`
 };
 
+export const PlaceholderMultiple = {
+  render: () => html`
+<nve-select>
+  <label>label</label>
+  <select multiple>
+    <option value="" selected disabled hidden>Select Option</option>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </select>
+  <nve-control-message>message</nve-control-message>
+</nve-select>`
+};
+
 export const Disabled = {
   render: () => html`
 <nve-select>
