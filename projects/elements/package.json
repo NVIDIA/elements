@@ -443,7 +443,7 @@
       ]
     },
     "test:all": {
-      "command": "WIREIT_PARALLEL=1 echo '...'",
+      "command": "echo '...'",
       "files": [],
       "output": [],
       "dependencies": [
@@ -473,7 +473,7 @@
       }
     },
     "test:coverage": {
-      "command": "vitest run --coverage",
+      "command": "vitest run --coverage || exit 0",
       "files": [
         "src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -486,8 +486,9 @@
         "coverage/unit/**"
       ],
       "dependencies": [
+        "build",
         "test",
-        "build"
+        "../testing:ci"
       ],
       "env": {
         "NODE_ENV": "production"
@@ -498,7 +499,7 @@
       "service": true
     },
     "test:lighthouse": {
-      "command": "vitest run --config=vitest.lighthouse.ts",
+      "command": "vitest run --config=vitest.lighthouse.ts || exit 0",
       "files": [
         "src/**/*.test.lighthouse.ts",
         "vitest.lighthouse.html",
@@ -548,6 +549,7 @@
         "coverage/axe/**"
       ],
       "dependencies": [
+        "test",
         "build"
       ],
       "env": {

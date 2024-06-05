@@ -151,7 +151,6 @@
         "coverage/unit/**"
       ],
       "dependencies": [
-        "test",
         "build",
         "../../testing:ci"
       ]
