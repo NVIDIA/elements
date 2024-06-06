@@ -1,0 +1,42 @@
+import { describe, expect, it } from 'vitest';
+import { shiftLeft } from './strings.js';
+
+const resultTwoSpaceIndent = `function getTime(): number {
+  return new Date().getTime();
+}`;
+
+const resultFourSpaceIndent = `function getTime(): number {
+    return new Date().getTime();
+}`;
+
+const newlines = `
+function getTime(): number {
+  return new Date().getTime();
+}
+`;
+
+const twoSpaceIndent = `
+  function getTime(): number {
+    return new Date().getTime();
+  }
+`;
+
+const fourSpaceIndent = `
+    function getTime(): number {
+        return new Date().getTime();
+    }
+`;
+
+describe('shiftLeft', () => {
+  it('it should remove leading newlines', () => {
+    expect(shiftLeft(newlines)).toBe(resultTwoSpaceIndent);
+  });
+
+  it('it should remove leading newlines and whitespace (2 space indent)', () => {
+    expect(shiftLeft(twoSpaceIndent)).toBe(resultTwoSpaceIndent);
+  });
+
+  it('it should remove leading newlines and whitespace (4 space indent)', () => {
+    expect(shiftLeft(fourSpaceIndent)).toBe(resultFourSpaceIndent);
+  });
+});

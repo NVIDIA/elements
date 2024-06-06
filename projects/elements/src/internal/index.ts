@@ -1,4 +1,3 @@
-
 /**
  * @internal private common utilities for Elements
  */
@@ -32,5 +31,6 @@ export * from './utils/animation.js';
 export * from './utils/dom.js';
 export * from './utils/events.js';
 export * from './utils/objects.js';
+export * from './utils/strings.js';
 export * from './utils/focus.js';
 export * from './utils/keynav.js';
