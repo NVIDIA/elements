@@ -1504,7 +1504,7 @@
           "type": "borderRadius"
         },
         "lg": {
-          "value": "{ref.scale.border-radius} * 16px",
+          "value": "{ref.scale.border-radius} * 14px",
           "type": "borderRadius"
         },
         "xl": {
