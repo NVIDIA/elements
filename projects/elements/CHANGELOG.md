@@ -1,3 +1,10 @@
+## [@elements/elements-v0.37.2](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.1...@elements/elements-v0.37.2) (2024-06-06)
+
+
+### Bug Fixes
+
+* **elements:** accordion caret placement ([5aae1b3](https://github.com/NVIDIA/elements/commit/5aae1b33e93e2fcb307e93c8dfd453ed6f93cd66)), closes [#35](https://github.com/NVIDIA/elements/issues/35)
+
 ## [@elements/elements-v0.37.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.0...@elements/elements-v0.37.1) (2024-06-06)
 
 
