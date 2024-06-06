@@ -47,7 +47,9 @@ export const parameters = {
         source = source.trim().replace(/<nve-button class="playground-btn" size="sm">.*<\/nve-button>/g, '')
 
         // basic html formatting
-        source = format(source.replaceAll('=""', ''), ' '.repeat(2), 120); // https://github.com/storybookjs/storybook/issues/10467
+        if (!source.includes('nve-codeblock')) { // skip formatting if codeblock to preserve story source formatting
+          source = format(source.replaceAll('=""', ''), ' '.repeat(2), 120); // https://github.com/storybookjs/storybook/issues/10467
+        }
 
         return updateScope(source, { scope: context.globals.scope, sourceType: context.globals.sourceType  });
       }
