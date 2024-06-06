@@ -1,3 +1,10 @@
+## [@elements/elements-v0.37.3](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.2...@elements/elements-v0.37.3) (2024-06-06)
+
+
+### Bug Fixes
+
+* **elements:** placeholder display for multiple select ([a7fcdfc](https://github.com/NVIDIA/elements/commit/a7fcdfc7372b10fb0f9d998e3237c1b81880ec0b)), closes [#33](https://github.com/NVIDIA/elements/issues/33)
+
 ## [@elements/elements-v0.37.2](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.1...@elements/elements-v0.37.2) (2024-06-06)
 
 
