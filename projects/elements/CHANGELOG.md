@@ -1,3 +1,10 @@
+## [@elements/elements-v0.37.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.0...@elements/elements-v0.37.1) (2024-06-06)
+
+
+### Bug Fixes
+
+* **elements:** multi line string format ([87a2dd6](https://github.com/NVIDIA/elements/commit/87a2dd6b4b107ef3b376abea5ec1869984e03919))
+
 ## [@elements/elements-v0.37.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.36.0...@elements/elements-v0.37.0) (2024-06-05)
 
 
