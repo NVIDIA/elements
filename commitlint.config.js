@@ -28,7 +28,8 @@ export default {
         'themes',
         'labs-behaviors-alpine',
         'labs-code',
-        'labs-testing-lighthouse'
+        'labs-testing-lighthouse',
+        'labs-snippets'
       ]
     ]
   }
