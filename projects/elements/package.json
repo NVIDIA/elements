@@ -353,7 +353,10 @@
         "!dist/custom-elements.json",
         "!dist/elements.css-vars.json",
         "!dist/elements.html-data.json",
-        "!dist/importmap.cdn.json"
+        "!dist/importmap.cdn.json",
+        "!dist/inter.css",
+        "!dist/inter.woff",
+        "!dist/bundles/**"
       ],
       "dependencies": [
         "build:icons",
@@ -371,7 +374,7 @@
         "package.json"
       ],
       "output": [
-        "dist/bundles"
+        "dist/bundles/**"
       ],
       "dependencies": [
         "build:vite"
