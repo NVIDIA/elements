@@ -1,6 +1,5 @@
 packages:
   - 'projects/starters/angular'
-  - 'projects/starters/angular-legacy'
   - 'projects/starters/buildless'
   - 'projects/starters/lit-library'
   - 'projects/starters/mpa'
