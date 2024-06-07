@@ -34,6 +34,7 @@ export default defineConfig(env => {
       watch: env.mode === 'watch' ? {} : undefined,
       outDir: dist(),
       emptyOutDir: false,
+      sourcemap: true,
       target: 'esnext',
       lib: {
         entry: {
@@ -55,7 +56,6 @@ export default defineConfig(env => {
         output: [
           {
             format: 'esm',
-            sourcemap: true,
             preserveModules: true,
             assetFileNames: '[name].[ext]',
             entryFileNames: '[name].js'

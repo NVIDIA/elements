@@ -9,6 +9,10 @@ export async function setup() {
   }
 
   return async () => {
-    await runnerInstance.close();
+    try {
+      await runnerInstance.close();
+    } catch {
+      console.log('Failed to close browsers...');
+    }
   };
 }
