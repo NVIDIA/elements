@@ -67,17 +67,6 @@ const App: Component = () => {
                 </a>
               </nve-menu-item>
               <nve-menu-item>
-                <a href="/elements/starters/angular-legacy/" style="text-transform: none;">
-                  <img
-                    src="/elements/starters/solidjs/angular-legacy.svg"
-                    width="18px"
-                    height="18px"
-                    alt="angular legacy logo"
-                  />
-                  Angular Legacy (v12/2021)
-                </a>
-              </nve-menu-item>
-              <nve-menu-item>
                 <a href="/elements/starters/vue/">
                   <img src="/elements/starters/solidjs/vue.svg" width="18px" height="18px" alt="vue logo" />
                   Vue
