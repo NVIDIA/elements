@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v0.28.14](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.28.13...@nvidia-elements/themes-v0.28.14) (2024-06-07)
+
+
+### Bug Fixes
+
+* **themes:** border radius token adjustment ([4b285d2](https://github.com/NVIDIA/elements/commit/4b285d2126a58653c111c2051ce1cd12323e45d6))
+
 ## [@nvidia-elements/themes-v0.28.13](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.28.12...@nvidia-elements/themes-v0.28.13) (2024-05-23)
 
 
