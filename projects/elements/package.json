@@ -11,6 +11,7 @@
     "build:vite": "wireit",
     "build:manifest": "wireit",
     "build:icons": "wireit",
+    "build:snippets": "wireit",
     "build:importmap": "wireit",
     "build:vscode-custom-data": "wireit",
     "test": "wireit",
@@ -750,6 +751,7 @@
     "@lit-labs/virtualizer": "2.0.12",
     "@nvidia-elements/testing": "workspace:*",
     "@nvidia-elements/testing-lighthouse": "workspace:*",
+    "@nvidia-elements/snippets": "workspace:*",
     "@nve-internals/vite": "workspace:*",
     "@rollup/plugin-terser": "0.4.4",
     "@typescript/lib-dom": "npm:@types/web@0.0.147",
@@ -851,6 +853,7 @@
         "!dist/elements.css-vars.json",
         "!dist/elements.html-data.json",
         "!dist/importmap.cdn.json",
+        "!dist/snippets.json",
         "!dist/inter.css",
         "!dist/inter.woff",
         "!dist/bundles/**"
@@ -899,6 +902,15 @@
       ],
       "output": [
         "src/icon/icons.ts"
+      ]
+    },
+    "build:snippets": {
+      "command": "@nve-snippets",
+      "files": [
+        "**/*.snippet.html"
+      ],
+      "output": [
+        "dist/snippets.json"
       ]
     },
     "build:inter": {
