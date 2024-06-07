@@ -1,3 +1,10 @@
+## [@elements/elements-v0.37.4](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.3...@elements/elements-v0.37.4) (2024-06-07)
+
+
+### Bug Fixes
+
+* **elements:** update tag and button components to reflect updated border radius token ([53977b8](https://github.com/NVIDIA/elements/commit/53977b8a3b4729d9cfcb0616d92ff418113f079b))
+
 ## [@elements/elements-v0.37.3](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.2...@elements/elements-v0.37.3) (2024-06-06)
 
 
