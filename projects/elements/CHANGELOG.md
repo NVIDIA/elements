@@ -1,3 +1,10 @@
+## [@elements/elements-v0.37.5](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.4...@elements/elements-v0.37.5) (2024-06-07)
+
+
+### Bug Fixes
+
+* **elements:** dropdown content spacing ([4bb9b1a](https://github.com/NVIDIA/elements/commit/4bb9b1a6f177ff4497aada56d225a027306a3063))
+
 ## [@elements/elements-v0.37.4](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.3...@elements/elements-v0.37.4) (2024-06-07)
 
 
