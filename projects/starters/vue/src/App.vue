@@ -47,12 +47,6 @@ import '@elements/elements/menu/define.js';
               Angular
             </a>
           </mlv-menu-item>
-          <mlv-menu-item>
-            <a href="/elements/starters/angular-legacy/" style="text-transform: none;">
-              <img src="/angular-legacy.svg" width="18px" height="18px" alt="angular legacy logo" />
-              Angular Legacy (v12/2021)
-            </a>
-          </mlv-menu-item>
           <mlv-menu-item current="page">
             <a href="/elements/starters/vue/">
               <img src="/vue.svg" width="18px" height="18px" alt="vue logo" />
