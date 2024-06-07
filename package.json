@@ -61,7 +61,6 @@
         "./projects/labs/testing-lighthouse:ci",
         "./projects/pages:ci",
         "./projects/starters/angular:ci",
-        "./projects/starters/angular-legacy:ci",
         "./projects/starters/buildless:ci",
         "./projects/starters/lit-library:ci",
         "./projects/starters/mpa:ci",

@@ -10,7 +10,6 @@
       "command": "echo 'building pages...'",
       "dependencies": [
         "pages:starters:angular",
-        "pages:starters:angular-legacy",
         "pages:starters:buildless",
         "pages:starters:mpa",
         "pages:starters:react",
@@ -31,17 +30,6 @@
       "files": [],
       "output": [
         "dist/starters/angular/**"
-      ]
-    },
-    "pages:starters:angular-legacy": {
-      "command": "cp -a ../starters/angular-legacy/dist/angular-app/. ./dist/starters/angular-legacy",
-      "dependencies": [
-        "../starters/angular-legacy:ci",
-        "build"
-      ],
-      "files": [],
-      "output": [
-        "dist/starters/angular-legacy/**"
       ]
     },
     "pages:starters:buildless": {
