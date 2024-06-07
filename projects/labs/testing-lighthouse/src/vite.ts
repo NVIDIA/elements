@@ -1,6 +1,4 @@
-import { mergeConfig } from 'vitest/config';
-
-const defaultConfig = {
+export const lighthouseConfig = {
   logLevel: 'info',
   test: {
     retry: 1,
@@ -23,5 +21,3 @@ const defaultConfig = {
     }
   }
 };
-
-export const createConfig = config => mergeConfig(defaultConfig, config);
