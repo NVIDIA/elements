@@ -18,16 +18,14 @@ pnpm install @nvidia-elements/testing-lighthouse --save-dev
 Create a vite.lighthouse.ts file in your project root with the following content:
 
 ```typescript
-import { defineConfig } from 'vitest/config';
-import { createConfig } from '@nvidia-elements/testing-lighthouse/vite';
+import { mergeConfig } from 'vitest/config';
+import { lighthouseConfig } from '@nvidia-elements/testing-lighthouse/vite';
 
-export default defineConfig(
-  createConfig({
-    test: {
-      include: [process.env.LIGHTHOUSE_ALL ? 'src/**/*.test.lighthouse.ts' : 'src/index.test.lighthouse.ts']
-    }
-  })
-);
+export default mergeConfig(lighthouseConfig, {
+  test: {
+    include: [process.env.LIGHTHOUSE_ALL ? 'src/**/*.test.lighthouse.ts' : 'src/index.test.lighthouse.ts']
+  }
+});
 ```
 
 ## Base Template
