@@ -1,14 +1,14 @@
 import { runner } from './index.js';
 
-let init = false;
+let runnerInstance = null;
 
 export async function setup() {
-  if (!init) {
-    init = true;
-    await runner.open();
+  if (!runnerInstance) {
+    runnerInstance = runner;
+    await runnerInstance.open();
   }
 
   return async () => {
-    await runner.close();
+    await runnerInstance.close();
   };
 }
