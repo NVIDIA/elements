@@ -47,7 +47,8 @@
         "build/style-dictionary.minify.js"
       ],
       "output": [
-        "dist/"
+        "dist/",
+        "!dist/css-vars.json"
       ]
     },
     "build:css-var-completions": {
