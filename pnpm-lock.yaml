@@ -142,6 +142,9 @@ importers:
       '@nve-internals/vite':
         specifier: workspace:*
         version: link:../internals/vite
+      '@nvidia-elements/snippets':
+        specifier: workspace:*
+        version: link:../labs/snippets
       '@nvidia-elements/testing-lighthouse':
         specifier: workspace:*
         version: link:../labs/testing-lighthouse
@@ -417,6 +420,18 @@ importers:
       vitest:
         specifier: 1.6.0
         version: 1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)
+
+  projects/labs/snippets:
+    dependencies:
+      chalk:
+        specifier: 5.3.0
+        version: 5.3.0
+      glob:
+        specifier: 10.3.10
+        version: 10.3.10
+      parse5:
+        specifier: 7.1.2
+        version: 7.1.2
 
   projects/labs/testing-lighthouse:
     dependencies:
@@ -7002,7 +7017,7 @@ packages:
     engines: {node: ^16.14.0 || >=18.0.0}
     dependencies:
       '@tufjs/canonical-json': 2.0.0
-      minimatch: 9.0.3
+      minimatch: 9.0.4
     dev: true
 
   /@types/alpinejs@3.13.10:
@@ -7690,7 +7705,7 @@ packages:
       magic-string: 0.30.10
       playwright: 1.44.1
       sirv: 2.0.4
-      vitest: 1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)
+      vitest: 1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)(terser@5.30.3)
 
   /@vitest/coverage-istanbul@1.6.0(vitest@1.6.0):
     resolution: {integrity: sha512-h/BwpXehkkS0qsNCS00QxiupAqVkNi0WT19BR0dQvlge5oHghoSVLx63fABYFoKxVb7Ue7+k6V2KokmQ1zdMpg==}
@@ -7706,7 +7721,7 @@ packages:
       magicast: 0.3.4
       picocolors: 1.0.0
       test-exclude: 6.0.0
-      vitest: 1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)
+      vitest: 1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)(terser@5.30.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -8905,7 +8920,6 @@ packages:
   /chalk@5.3.0:
     resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: true
 
   /change-case@4.1.2:
     resolution: {integrity: sha512-bSxY2ws9OtviILG1EiY5K7NNxkqg/JnRnFxLtKQ96JaviiIxi7djMrSd0ECT9AC+lttClmYwKw53BWpOMblo7A==}
@@ -11908,7 +11922,7 @@ packages:
     resolution: {integrity: sha512-t7sv42WkwFkyKbivUCglsQW5YWMskWtbEf4MNKX5u/CCWHKSPzN4FtBQGsQZgCLbxOzpVlcbWVK5KB3auIOjSw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      minimatch: 9.0.3
+      minimatch: 9.0.4
     dev: true
 
   /ignore@5.3.0:
@@ -18598,6 +18612,7 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: true
 
   /vite-node@1.6.0(@types/node@20.11.6)(terser@5.30.3):
     resolution: {integrity: sha512-de6HJgzC+TFzOu0NTC4RAIsyf/DY/ibWDYQUcuEA84EMHhcefTUGkjFHKKEJhQN4A+6I0u++kr3l36ZF2d7XRw==}
@@ -18975,6 +18990,7 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: true
 
   /vitest@1.6.0(@types/node@20.11.6)(@vitest/browser@1.6.0)(terser@5.30.3):
     resolution: {integrity: sha512-H5r/dN06swuFnzNFhq/dnz37bPXnq8xB2xB5JOVk8K09rUtoeNN+LHWkoQ0A/i3hvbUKKcCei9KpbxqHMLhLLA==}
