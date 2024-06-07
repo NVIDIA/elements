@@ -60,7 +60,6 @@ export default defineConfig(env => {
         output: [
           {
             format: 'esm',
-            sourcemap: true,
             preserveModules: true,
             assetFileNames: '[name].[ext]',
             entryFileNames: '[name].js'

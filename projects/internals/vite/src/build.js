@@ -54,7 +54,6 @@ export const libraryBuildConfig = {
       output: [
         {
           format: 'esm',
-          sourcemap: true,
           preserveModules: true,
           assetFileNames: '[name].[ext]',
           entryFileNames: '[name].js'
