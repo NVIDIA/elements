@@ -43,14 +43,6 @@ dialog::backdrop {
   min-height: var(--nve-ref-size-300);
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: var(--gap);
-  padding: var(--padding) 0 var(--padding) 0;
-}
-
 nve-icon-button {
   position: absolute;
   top: 8px;
@@ -85,10 +77,12 @@ nve-icon-button {
   --arrow-transform: translate(-2px, 0) rotate(45deg);
 }
 
+::slotted(nve-menu),
 ::slotted(nve-menu) {
   --width: 100%;
 }
 
+::slotted(nve-divider),
 ::slotted(nve-divider) {
   margin: 0 calc(-1 * var(--_divider-padding));
 }

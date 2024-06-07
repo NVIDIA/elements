@@ -2,7 +2,7 @@
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
   --padding: var(--nve-ref-size-400);
   width: calc(100% + calc(var(--padding) * 2));
-  margin: 0 calc(var(--padding) * -1) 0 calc(var(--padding) * -1);
+  margin: 0 calc(var(--padding) * -1) var(--padding) calc(var(--padding) * -1);
 }
 
 [internal-host] {
