@@ -9,8 +9,9 @@
     "node": "20.11.0"
   },
   "scripts": {
-    "ci": "wireit",
+    "ci": "pnpm run ci:validate && node ./projects/internals/gitlab/cache-validate.js",
     "ci:nocache": "pnpm run clean && pnpm i && pnpm run ci",
+    "ci:validate": "wireit",
     "format": "wireit",
     "format:fix": "wireit",
     "clean": "git clean -dfX",
@@ -52,7 +53,7 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "wireit": {
-    "ci": {
+    "ci:validate": {
       "dependencies": [
         "./projects/elements:ci",
         "./projects/elements-react:ci",
