@@ -8,5 +8,6 @@ define(Password);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-password': Password;
+    'nve-password': Password;
   }
 }

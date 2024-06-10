@@ -8,5 +8,6 @@ define(Datetime);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-datetime': Datetime;
+    'nve-datetime': Datetime;
   }
 }

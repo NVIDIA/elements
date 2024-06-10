@@ -124,7 +124,7 @@ export function scope(element: any, Mixin: any) {
 
 export function define(Element: CustomElementConstructor & { metadata: { version: string; tag: string } }) {
   defineInternal(Element, Element.metadata.tag.replace('mlv', 'nve'));
-  defineInternal(class extends Element {}, Element.metadata.tag);
+  defineInternal(class extends Element {}, Element.metadata.tag.replace('nve', 'mlv'));
 }
 
 function defineInternal(element: CustomElementConstructor & { metadata: { version: string } }, tagName: string) {

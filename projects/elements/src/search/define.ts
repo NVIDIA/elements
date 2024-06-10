@@ -8,5 +8,6 @@ define(Search);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-search': Search;
+    'nve-search': Search;
   }
 }

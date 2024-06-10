@@ -6,5 +6,6 @@ define(Tooltip);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-tooltip': Tooltip;
+    'nve-tooltip': Tooltip;
   }
 }

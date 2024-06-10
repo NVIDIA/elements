@@ -7,5 +7,6 @@ define(Breadcrumb);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-breadcrumb': Breadcrumb;
+    'nve-breadcrumb': Breadcrumb;
   }
 }
