@@ -239,6 +239,9 @@ export const parameters = {
         ],
         'Testing',
         'Labs',
+        [
+          'Documentation'
+        ],
         'Internal',
         'Deprecated'
       ]
