@@ -1,0 +1,30 @@
+import { Meta, Canvas } from '@storybook/addon-docs';
+import '@nvidia-elements/core/grid/define.js';
+
+<Meta title="Labs/Documentation" />
+
+<h1 mlv-text="display">Labs <mlv-icon name="beaker" size="xl"></mlv-icon></h1>
+
+Labs projects are experimental packages we are actively seeking feedback on. They
+may not be ready for production use and APIs may change frequently.
+
+Once a lab project is considered stable, it will be moved from `@nve-labs` to the
+main `@nve` package scope. Labs projects may be deprecated or removed at any time.
+
+<mlv-grid>
+  <mlv-grid-header>
+    <mlv-grid-column>Package</mlv-grid-column>
+    <mlv-grid-column>Description</mlv-grid-column>
+    <mlv-grid-column>Status</mlv-grid-column>
+  </mlv-grid-header>
+  <mlv-grid-row>
+    <mlv-grid-cell><code mlv-text="code">@nvidia-elements/code</code></mlv-grid-cell>
+    <mlv-grid-cell>A package containing UI components for displaying and editing source code.</mlv-grid-cell>
+    <mlv-grid-cell>In Development</mlv-grid-cell>
+  </mlv-grid-row>
+  <mlv-grid-row>
+    <mlv-grid-cell><code mlv-text="code">@nvidia-elements/behaviors-alpine</code></mlv-grid-cell>
+    <mlv-grid-cell>A package containing AlpineJS utilities.</mlv-grid-cell>
+    <mlv-grid-cell>In Development</mlv-grid-cell>
+  </mlv-grid-row>
+</mlv-grid>
