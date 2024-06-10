@@ -64,6 +64,15 @@ module.exports = {
       }
     ],
     [
+      '@semantic-release/exec',
+      {
+        publishCmd: [
+          `pnpm publish --no-git-checks --registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
+          `pnpm publish --no-git-checks --registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
+        ].join(' && ')
+      }
+    ],
+    [
       '@semantic-release/git',
       {
         assets: ['CHANGELOG.md', 'package.json', 'projects/**/package.json', 'projects/**/CHANGELOG.md'],
@@ -82,15 +91,6 @@ module.exports = {
             url: `https://registry.npmjs.org'/', '%2F')}`
           }
         ]
-      }
-    ],
-    [
-      '@semantic-release/exec',
-      {
-        publishCmd: [
-          `pnpm publish --no-git-checks --registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
-          `pnpm publish --no-git-checks --registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
-        ].join(' && ')
       }
     ]
   ]
