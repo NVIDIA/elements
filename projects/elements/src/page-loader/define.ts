@@ -7,5 +7,6 @@ define(PageLoader);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-page-loader': PageLoader;
+    'nve-page-loader': PageLoader;
   }
 }

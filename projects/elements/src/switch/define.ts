@@ -9,5 +9,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'nve-switch': Switch;
     'nve-switch-group': SwitchGroup;
+    'nve-switch': Switch;
+    'nve-switch-group': SwitchGroup;
   }
 }

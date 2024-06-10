@@ -12,5 +12,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'nve-json-viewer': JSONViewer;
     'nve-json-node': JSONNode;
+    'nve-json-viewer': JSONViewer;
+    'nve-json-node': JSONNode;
   }
 }
