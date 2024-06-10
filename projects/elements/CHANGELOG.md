@@ -1,3 +1,10 @@
+## [@elements/elements-v0.37.6](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.5...@elements/elements-v0.37.6) (2024-06-10)
+
+
+### Bug Fixes
+
+* **elements:** add alias types ([1e1d113](https://github.com/NVIDIA/elements/commit/1e1d113c787b76a638d007b480fe7df336f9f39f))
+
 ## [@elements/elements-v0.37.5](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.4...@elements/elements-v0.37.5) (2024-06-07)
 
 
