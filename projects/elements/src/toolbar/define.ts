@@ -7,5 +7,6 @@ define(Toolbar);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-toolbar': Toolbar;
+    'nve-toolbar': Toolbar;
   }
 }
