@@ -8,5 +8,6 @@ define(Pagination);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-pagination': Pagination;
+    'nve-pagination': Pagination;
   }
 }
