@@ -7,6 +7,7 @@ define(Datetime);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-datetime': Datetime;
     'mlv-datetime': Datetime;
   }
 }

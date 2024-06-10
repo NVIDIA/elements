@@ -7,6 +7,7 @@ define(Pagination);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-pagination': Pagination;
     'mlv-pagination': Pagination;
   }
 }

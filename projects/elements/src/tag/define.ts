@@ -6,6 +6,7 @@ define(Tag);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-tag': Tag;
     'mlv-tag': Tag;
   }
 }

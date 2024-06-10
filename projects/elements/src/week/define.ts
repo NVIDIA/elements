@@ -7,6 +7,7 @@ define(Week);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-week': Week;
     'mlv-week': Week;
   }
 }

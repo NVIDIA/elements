@@ -9,6 +9,9 @@ define(ControlMessage);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-control': Control;
+    'nve-control-group': ControlGroup;
+    'nve-control-message': ControlMessage;
     'mlv-control': Control;
     'mlv-control-group': ControlGroup;
     'mlv-control-message': ControlMessage;

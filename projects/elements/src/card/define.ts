@@ -8,6 +8,10 @@ define(CardFooter);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-card': Card;
+    'nve-card-header': CardHeader;
+    'nve-card-content': CardContent;
+    'nve-card-footer': CardFooter;
     'mlv-card': Card;
     'mlv-card-header': CardHeader;
     'mlv-card-content': CardContent;

@@ -7,6 +7,8 @@ define(SwitchGroup);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-switch': Switch;
+    'nve-switch-group': SwitchGroup;
     'mlv-switch': Switch;
     'mlv-switch-group': SwitchGroup;
   }

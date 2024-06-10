@@ -6,6 +6,7 @@ define(Textarea);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-textarea': Textarea;
     'mlv-textarea': Textarea;
   }
 }

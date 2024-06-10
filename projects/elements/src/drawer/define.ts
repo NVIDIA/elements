@@ -9,6 +9,10 @@ define(DrawerContent);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-drawer': Drawer;
+    'nve-drawer-footer': DrawerFooter;
+    'nve-drawer-header': DrawerHeader;
+    'nve-drawer-content': DrawerContent;
     'mlv-drawer': Drawer;
     'mlv-drawer-footer': DrawerFooter;
     'mlv-drawer-header': DrawerHeader;

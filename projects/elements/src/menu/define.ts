@@ -6,6 +6,8 @@ define(MenuItem);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-menu': Menu;
+    'nve-menu-item': MenuItem;
     'mlv-menu': Menu;
     'mlv-menu-item': MenuItem;
   }

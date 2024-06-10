@@ -7,6 +7,8 @@ define(InputGroup);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-input': Input;
+    'nve-input-group': InputGroup;
     'mlv-input': Input;
     'mlv-input-group': InputGroup;
   }

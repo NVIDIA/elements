@@ -7,6 +7,7 @@ define(Color);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-color': Color;
     'mlv-color': Color;
   }
 }

@@ -9,6 +9,7 @@ define(Combobox);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-combobox': Combobox;
     'mlv-combobox': Combobox;
   }
 }

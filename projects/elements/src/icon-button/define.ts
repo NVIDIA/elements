@@ -6,6 +6,7 @@ define(IconButton);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-icon-button': IconButton;
     'mlv-icon-button': IconButton;
   }
 }

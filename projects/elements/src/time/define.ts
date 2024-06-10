@@ -7,6 +7,7 @@ define(Time);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-time': Time;
     'mlv-time': Time;
   }
 }

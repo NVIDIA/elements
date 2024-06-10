@@ -7,7 +7,9 @@ define(RadioGroup);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'mlv-radio': Radio;
-    'mlv-radio-group': RadioGroup;
+    'nve-radio': Radio;
+    'nve-radio-group': RadioGroup;
+    'mlv-radio': Radio /** @depreacated */;
+    'mlv-radio-group': RadioGroup /** @depreacated */;
   }
 }

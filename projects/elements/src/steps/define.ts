@@ -6,6 +6,8 @@ define(Steps);
 
 declare global {
   interface HTMLElementTagNameMap {
+    'nve-steps-item': StepsItem;
+    'nve-steps': Steps;
     'mlv-steps-item': StepsItem;
     'mlv-steps': Steps;
   }

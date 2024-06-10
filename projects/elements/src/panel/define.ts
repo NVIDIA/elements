@@ -9,9 +9,13 @@ define(PanelFooter);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'mlv-panel': Panel;
-    'mlv-panel-header': PanelHeader;
-    'mlv-panel-content': PanelContent;
-    'mlv-panel-footer': PanelFooter;
+    'nve-panel': Panel;
+    'nve-panel-header': PanelHeader;
+    'nve-panel-content': PanelContent;
+    'nve-panel-footer': PanelFooter;
+    'mlv-panel': Panel /** @depreacated */;
+    'mlv-panel-header': PanelHeader /** @depreacated */;
+    'mlv-panel-content': PanelContent /** @depreacated */;
+    'mlv-panel-footer': PanelFooter /** @depreacated */;
   }
 }
