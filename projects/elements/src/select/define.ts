@@ -11,5 +11,6 @@ define(Select);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-select': Select;
+    'nve-select': Select;
   }
 }

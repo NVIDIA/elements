@@ -11,5 +11,8 @@ declare global {
     'nve-dialog': Dialog;
     'nve-dialog-header': DialogHeader;
     'nve-dialog-footer': DialogFooter;
+    'nve-dialog': Dialog;
+    'nve-dialog-header': DialogHeader;
+    'nve-dialog-footer': DialogFooter;
   }
 }

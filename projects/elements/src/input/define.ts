@@ -9,5 +9,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'nve-input': Input;
     'nve-input-group': InputGroup;
+    'nve-input': Input;
+    'nve-input-group': InputGroup;
   }
 }

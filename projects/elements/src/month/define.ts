@@ -8,5 +8,6 @@ define(Month);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-month': Month;
+    'nve-month': Month;
   }
 }

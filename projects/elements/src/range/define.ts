@@ -7,5 +7,6 @@ define(Range);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-range': Range;
+    'nve-range': Range;
   }
 }
