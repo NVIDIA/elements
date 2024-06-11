@@ -41,6 +41,9 @@
 
 :host([status='accent']) ::slotted(nve-button),
 :host([status='accent']) ::slotted(nve-icon-button),
+:host([status='accent']) nve-icon-button,
+:host([status='accent']) ::slotted(nve-button),
+:host([status='accent']) ::slotted(nve-icon-button),
 :host([status='accent']) nve-icon-button {
   --color: var(--nve-sys-text-white-color) !important;
   --_icon-color: var(--nve-sys-text-white-color) !important;
@@ -77,6 +80,7 @@
   margin: 0;
 }
 
+:host([orientation='vertical']) ::slotted(nve-divider),
 :host([orientation='vertical']) ::slotted(nve-divider) {
   width: 100%;
 }
@@ -99,12 +103,16 @@
 
 ::slotted(nve-combobox),
 ::slotted(nve-search),
+::slotted(nve-input),
+::slotted(nve-combobox),
+::slotted(nve-search),
 ::slotted(nve-input) {
   --border-bottom: 0;
   min-width: 20cqw;
   flex: 1;
 }
 
+::slotted(nve-select),
 ::slotted(nve-select) {
   --border-bottom: 0;
 }
