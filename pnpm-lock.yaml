@@ -20,6 +20,9 @@ importers:
       '@elements/elements-react':
         specifier: workspace:*
         version: link:projects/elements-react
+      '@nvidia-elements/code':
+        specifier: workspace:*
+        version: link:projects/labs/code
       '@nvidia-elements/core':
         specifier: workspace:@elements/elements@*
         version: link:projects/elements
