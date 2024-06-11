@@ -26,7 +26,7 @@ dialog {
   justify-content: center;
 }
 
-dialog:has(mlv-icon-button) {
+dialog:has(nve-icon-button) {
   padding-right: var(--nve-ref-size-800);
 }
 
@@ -49,11 +49,11 @@ dialog:has(mlv-icon-button) {
   --color: var(--nve-sys-text-white-color);
 }
 
-mlv-icon {
+nve-icon {
   --color: inherit;
 }
 
-mlv-icon-button {
+nve-icon-button {
   --color: inherit;
   position: absolute;
   top: 2px;
@@ -61,8 +61,10 @@ mlv-icon-button {
 }
 
 ::slotted(mlv-button[interaction='flat']), /* deprecated */
-::slotted(mlv-button[container='flat']),
-::slotted(mlv-button[container='inline']) {
+::slotted(mlv-button[container='flat']), /* deprecated */
+::slotted(mlv-button[container='inline']), /* deprecated */
+::slotted(nve-button[container='flat']),
+::slotted(nve-button[container='inline']) {
   --color: inherit;
   margin-inline-end: calc(var(--_gap) / -2);
   margin-inline-start: calc(var(--_gap) * 2);

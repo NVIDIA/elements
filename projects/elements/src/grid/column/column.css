@@ -30,26 +30,40 @@
   white-space: nowrap;
 }
 
+:host([width='max-content']) {
+  --padding: var(--nve-ref-size-300);
+}
+
 ::slotted(mlv-sort-button),
-::slotted(mlv-icon-button) {
+::slotted(mlv-icon-button),
+::slotted(nve-sort-button),
+::slotted(nve-icon-button) {
   margin-inline-start: auto;
 }
 
 @media (hover: hover) {
   ::slotted(mlv-icon-button),
-  ::slotted(mlv-sort-button) {
+  ::slotted(mlv-sort-button),
+  ::slotted(nve-icon-button),
+  ::slotted(nve-sort-button) {
     opacity: 0;
   }
 
   :host(:focus-within) ::slotted(mlv-icon-button),
   :host(:focus-within) ::slotted(mlv-sort-button),
   :host(:hover) ::slotted(mlv-icon-button),
-  :host(:hover) ::slotted(mlv-sort-button) {
+  :host(:hover) ::slotted(mlv-sort-button),
+  :host(:focus-within) ::slotted(nve-icon-button),
+  :host(:focus-within) ::slotted(nve-sort-button),
+  :host(:hover) ::slotted(nve-icon-button),
+  :host(:hover) ::slotted(nve-sort-button) {
     opacity: 1;
   }
 }
 
 ::slotted(mlv-icon-button:state(anchor-active)),
-::slotted(mlv-sort-button:state(anchor-active)) {
+::slotted(mlv-sort-button:state(anchor-active)),
+::slotted(nve-icon-button:state(anchor-active)),
+::slotted(nve-sort-button:state(anchor-active)) {
   opacity: 1;
 }

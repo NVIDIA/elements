@@ -19,25 +19,29 @@
   align-items: center;
 }
 
-::slotted(mlv-button) {
+::slotted(nve-button) {
   --height: var(--nve-ref-size-700);
   --border-radius: var(--nve-ref-border-radius-sm);
   --font-weight: var(--nve-ref-font-weight-medium);
 }
 
-::slotted(mlv-icon-button) {
+::slotted(mlv-icon-button),
+::slotted(nve-icon-button) {
   --height: var(--nve-ref-size-700);
   --border-radius: var(--nve-ref-border-radius-sm);
 }
 
-::slotted(mlv-divider) {
+::slotted(mlv-divider),
+::slotted(nve-divider) {
   margin-top: calc(-1 * var(--padding));
   height: calc(100% + var(--padding));
   --color: color-mix(in oklab, var(--nve-sys-interaction-background) 100%, var(--nve-sys-interaction-color) 50%);
 }
 
 ::slotted(mlv-button:hover),
-::slotted(mlv-icon-button:hover) {
+::slotted(mlv-icon-button:hover),
+::slotted(nve-button:hover),
+::slotted(nve-icon-button:hover) {
   --color: var(--nve-sys-text-emphasis-color);
 }
 
@@ -50,7 +54,9 @@
 }
 
 :host([container='rounded']:not(:state(split))) ::slotted(mlv-button),
-:host([container='rounded']:not(:state(split))) ::slotted(mlv-icon-button) {
+:host([container='rounded']:not(:state(split))) ::slotted(mlv-icon-button),
+:host([container='rounded']:not(:state(split))) ::slotted(nve-button),
+:host([container='rounded']:not(:state(split))) ::slotted(nve-icon-button) {
   --border-radius: var(--nve-ref-border-radius-full);
 }
 
@@ -63,7 +69,8 @@
 }
 
 :host([interaction='emphasize']) ::slotted(mlv-divider), /* deprecated */
-:host([interaction='emphasis']) ::slotted(mlv-divider) {
+:host([interaction='emphasis']) ::slotted(mlv-divider),
+:host([interaction='emphasis']) ::slotted(nve-divider) {
   --color: color-mix(
     in oklab,
     var(--nve-sys-interaction-emphasis-background) 100%,
@@ -71,7 +78,8 @@
   );
 }
 
-:host([interaction='destructive']) ::slotted(mlv-divider) {
+:host([interaction='destructive']) ::slotted(mlv-divider),
+:host([interaction='destructive']) ::slotted(nve-divider) {
   --color: color-mix(
     in oklab,
     var(--nve-sys-interaction-destructive-background) 100%,
@@ -84,10 +92,12 @@
   --gap: 0;
 }
 
-:host(:state(split)) ::slotted(mlv-button) {
+:host(:state(split)) ::slotted(mlv-button),
+:host(:state(split)) ::slotted(nve-button) {
   --border-radius: var(--nve-ref-border-radius-none);
 }
 
-:host(:state(split)) ::slotted(mlv-icon-button) {
+:host(:state(split)) ::slotted(mlv-icon-button),
+:host(:state(split)) ::slotted(nve-icon-button) {
   --border-radius: var(--nve-ref-border-radius-none);
 }

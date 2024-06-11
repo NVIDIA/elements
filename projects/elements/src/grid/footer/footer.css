@@ -16,6 +16,7 @@
   align-items: center;
 }
 
-::slotted(mlv-pagination) {
+::slotted(mlv-pagination),
+::slotted(nve-pagination) {
   margin-inline: auto calc(-1 * var(--nve-ref-size-300));
 }

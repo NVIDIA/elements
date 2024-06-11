@@ -90,15 +90,18 @@
   position: absolute;
 }
 
-::slotted(*:not(a):not(mlv-icon)) {
+::slotted(*:not(a):not(mlv-icon)),
+::slotted(*:not(a):not(nve-icon)) {
   pointer-events: none;
 }
 
-::slotted(mlv-divider) {
+::slotted(mlv-divider),
+::slotted(nve-divider) {
   margin: 0 calc(-1 * var(--padding));
 }
 
-::slotted(mlv-icon) {
+::slotted(mlv-icon),
+::slotted(nve-icon) {
   --color: var(--nve-sys-text-muted-color);
 }
 

@@ -47,7 +47,8 @@ slot[name='actions'] {
   font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-::slotted(mlv-button[interaction='flat']) {
+::slotted(mlv-button[interaction='flat']),
+::slotted(nve-button[interaction='flat']) {
   --color: inherit;
 }
 
@@ -59,25 +60,25 @@ slot[name='prefix'] {
   margin-inline-end: var(--nve-ref-space-lg);
 }
 
-mlv-icon {
+nve-icon {
   --color: var(--icon-color);
 }
 
-mlv-icon:not([size='sm']) {
+nve-icon:not([size='sm']) {
   --width: var(--icon-size);
   --height: var(--icon-size);
 }
 
-mlv-icon[size='sm'] {
+nve-icon[size='sm'] {
   padding: var(--nve-ref-size-50);
 }
 
-mlv-icon-button:not([icon-name='cancel']) {
+nve-icon-button:not([icon-name='cancel']) {
   --color: var(--icon-color);
   margin-left: auto;
 }
 
-mlv-icon-button {
+nve-icon-button {
   --color: var(--_icon-cancel-color);
 }
 

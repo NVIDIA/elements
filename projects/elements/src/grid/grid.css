@@ -69,19 +69,23 @@
   --background: inherit;
 }
 
-:host([container*='flat']) ::slotted(mlv-grid-header) {
+:host([container*='flat']) ::slotted(mlv-grid-header),
+:host([container*='flat']) ::slotted(nve-grid-header) {
   --background: inherit;
 }
 
-:host([stripe]) ::slotted(mlv-grid-row:nth-child(odd)) {
+:host([stripe]) ::slotted(mlv-grid-row:nth-child(odd)),
+:host([stripe]) ::slotted(nve-grid-row:nth-child(odd)) {
   --background: var(--nve-sys-layer-container-accent-background);
 }
 
+::slotted(nve-grid-row:last-child),
 ::slotted(mlv-grid-row:last-child) {
   --border-bottom: 0;
 }
 
-::slotted(mlv-toolbar) {
+::slotted(mlv-toolbar),
+::slotted(nve-toolbar) {
   position: fixed;
   z-index: 99;
   left: 12px;

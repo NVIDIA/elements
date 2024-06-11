@@ -30,7 +30,7 @@
   padding: 2px 0 0 0;
 }
 
-mlv-button {
+nve-button {
   --padding: 0;
   --height: var(--nve-ref-size-500);
 }
@@ -49,10 +49,10 @@ pre {
   color: var(--_muted-color);
 }
 
-.array mlv-button::after,
-.object mlv-button::after,
-.array mlv-icon-button::after,
-.object mlv-icon-button::after {
+.array nve-button::after,
+.object nve-button::after,
+.array nve-icon-button::after,
+.object nve-icon-button::after {
   content: '{';
   position: absolute;
   display: block;
@@ -61,7 +61,7 @@ pre {
   color: var(--_muted-color);
 }
 
-mlv-icon-button {
+nve-icon-button {
   --padding: 0;
   --height: var(--nve-ref-size-500);
   --width: var(--nve-ref-size-400);
@@ -69,7 +69,7 @@ mlv-icon-button {
   margin-left: calc(-1 * var(--nve-ref-size-100));
 }
 
-.array mlv-button::after {
+.array nve-button::after {
   content: '[';
 }
 
@@ -77,12 +77,12 @@ mlv-icon-button {
   content: '],';
 }
 
-.object:not(.expanded) mlv-button::after {
+.object:not(.expanded) nve-button::after {
   content: '{...';
   right: calc(-1 * var(--nve-ref-size-800));
 }
 
-.array:not(.expanded) mlv-button::after {
+.array:not(.expanded) nve-button::after {
   content: '[...';
   right: calc(-1 * var(--nve-ref-size-800));
 }

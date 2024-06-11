@@ -45,7 +45,7 @@ slot {
   color: inherit !important;
 }
 
-mlv-icon {
+nve-icon {
   --color: inherit;
   cursor: var(--cursor);
 }

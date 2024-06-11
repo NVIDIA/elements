@@ -34,6 +34,7 @@
   font-weight: var(--nve-ref-font-weight-normal);
 }
 
-::slotted(mlv-tabs) {
+::slotted(mlv-tabs),
+::slotted(nve-tabs) {
   margin-bottom: calc(-1 * var(--padding));
 }

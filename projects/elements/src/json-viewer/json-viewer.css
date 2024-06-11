@@ -12,12 +12,12 @@
   padding: 0 0 var(--nve-ref-size-400) 0;
 }
 
-mlv-json-node {
+nve-json-node {
   padding: 0 0 0 var(--nve-ref-size-400);
   border-left: var(--nve-ref-border-width-sm) solid var(--_muted-color);
 }
 
-mlv-json-node:first-of-type {
+nve-json-node:first-of-type {
   margin-top: var(--nve-ref-size-400) !important;
 }
 

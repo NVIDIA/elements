@@ -11,7 +11,7 @@
   position: absolute;
 }
 
-[internal-host]:has(mlv-menu:focus-within) [input] {
+[internal-host]:has(nve-menu:focus-within) [input] {
   outline: 0 !important;
 }
 
@@ -55,7 +55,7 @@
   display: flex;
 }
 
-mlv-tag {
+nve-tag {
   --background: color-mix(in oklab, var(--color) 15%, var(--_input-background));
   --padding: var(--nve-ref-size-100) var(--nve-ref-size-200);
   --cursor: pointer !important;
@@ -84,26 +84,26 @@ mlv-tag {
   display: contents;
 }
 
-mlv-dropdown {
+nve-dropdown {
   --padding: var(--nve-ref-size-200);
 }
 
-mlv-menu {
+nve-menu {
   contain: content;
   --max-height: var(--scroll-height);
 }
 
-mlv-menu-item {
+nve-menu-item {
   --text-transform: initial;
   contain: content;
   content-visibility: auto;
 }
 
-mlv-menu-item mlv-icon {
+nve-menu-item nve-icon {
   --color: inherit;
 }
 
-mlv-menu-item:not(:state(selected)) mlv-icon[name='check'] {
+nve-menu-item:not(:state(selected)) nve-icon[name='check'] {
   opacity: 0;
 }
 

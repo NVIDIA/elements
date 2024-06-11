@@ -9,7 +9,7 @@
   --_alert-color: var(--color, initial);
 }
 
-mlv-alert {
+nve-alert {
   --color: var(--_alert-color);
   --font-weight: var(--_alert-font-weight);
   --font-size: var(--_alert-font-size);

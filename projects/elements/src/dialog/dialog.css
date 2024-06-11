@@ -46,7 +46,7 @@ dialog::backdrop {
   gap: var(--gap);
 }
 
-.header:has(mlv-icon-button) {
+.header:has(nve-icon-button) {
   min-height: var(--nve-ref-size-300);
 }
 
@@ -57,7 +57,7 @@ dialog::backdrop {
   gap: var(--gap);
 }
 
-mlv-icon-button {
+nve-icon-button {
   position: absolute;
   top: 8px;
   right: 8px;

@@ -53,8 +53,9 @@ slot:not([name]) {
   line-height: 0 !important;
 }
 
-mlv-icon,
-::slotted(mlv-icon) {
+nve-icon,
+::slotted(mlv-icon),
+::slotted(nve-icon) {
   --color: var(--icon-color);
   --width: var(--nve-ref-size-300);
   --height: var(--nve-ref-size-300);

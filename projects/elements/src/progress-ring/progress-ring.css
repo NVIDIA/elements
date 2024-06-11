@@ -122,13 +122,14 @@ circle.ring {
 }
 
 ::slotted(mlv-icon),
-mlv-icon {
+::slotted(nve-icon),
+nve-icon {
   --width: 50cqw;
   --height: 50cqh;
   --color: var(--ring-color);
 }
 
-[internal-host][zeroValue] mlv-icon {
+[internal-host][zeroValue] nve-icon {
   --width: 100cqw;
   --height: 100cqh;
 }

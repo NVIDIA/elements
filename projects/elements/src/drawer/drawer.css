@@ -110,7 +110,7 @@ dialog::backdrop {
   flex: 1;
 }
 
-mlv-icon-button {
+nve-icon-button {
   position: absolute;
   top: 8px;
   right: 8px;

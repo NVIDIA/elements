@@ -20,7 +20,8 @@
 }
 
 [nve-control],
-::slotted(mlv-button) {
+::slotted(nve-button),
+::slotted(mlve-button) {
   --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: 0;
   --width: fit-content;
@@ -36,11 +37,11 @@
   --font-weight: var(--nve-ref-font-weight-regular);
 }
 
-mlv-select:not(:state(multiple))::part(caret) {
+nve-select:not(:state(multiple))::part(caret) {
   display: none;
 }
 
-mlv-icon-button {
+nve-icon-button {
   --border-radius: 0;
   --padding: var(--nve-ref-size-300);
 }

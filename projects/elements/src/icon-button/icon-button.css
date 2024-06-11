@@ -48,7 +48,7 @@
   font-size: var(--font-size);
 }
 
-mlv-icon {
+nve-icon {
   --color: var(--_icon-color);
   pointer-events: none;
 }

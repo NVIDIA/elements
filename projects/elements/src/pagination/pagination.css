@@ -45,7 +45,7 @@ label {
   opacity: 0;
 }
 
-:host([container='inline']) mlv-select {
+:host([container='inline']) nve-select {
   --width: fit-content;
   margin-inline-end: 0;
 }
@@ -54,16 +54,16 @@ label {
   margin-inline: 0;
 }
 
-mlv-input {
+nve-input {
   margin-inline-end: var(--nve-ref-size-200);
   --width: 6ch;
 }
 
-mlv-select {
+nve-select {
   margin-inline-end: var(--nve-ref-size-200);
   --width: 10ch;
 }
 
-mlv-icon-button:state(disabled) {
+nve-icon-button:state(disabled) {
   --nve-sys-interaction-state-ratio-disabled: 0 !important;
 }

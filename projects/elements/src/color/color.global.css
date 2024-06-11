@@ -1,3 +1,4 @@
-mlv-color input::-webkit-color-swatch {
+mlv-color input::-webkit-color-swatch,
+nve-color input::-webkit-color-swatch {
   border: none !important;
 }

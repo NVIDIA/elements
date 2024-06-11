@@ -34,12 +34,12 @@
   position: relative;
 }
 
-mlv-progress-ring,
-mlv-icon-button {
+nve-progress-ring,
+nve-icon-button {
   cursor: pointer;
 }
 
-mlv-icon-button#number-icon {
+nve-icon-button#number-icon {
   box-sizing: content-box;
   border: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
   border-radius: 100%;
@@ -48,11 +48,11 @@ mlv-icon-button#number-icon {
   --background: transparent;
 }
 
-mlv-icon-button[interaction='emphasis'] {
+nve-icon-button[interaction='emphasis'] {
   --background: var(--nve-sys-support-success-color);
 }
 
-mlv-icon-button[interaction='danger'] {
+nve-icon-button[interaction='danger'] {
   --background-color: var(--nve-sys-support-danger-color);
 }
 
@@ -72,8 +72,8 @@ mlv-icon-button[interaction='danger'] {
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
-:host(:state(selected)) mlv-icon-button,
-:host(:hover:not(:state(disabled))) mlv-icon-button {
+:host(:state(selected)) nve-icon-button,
+:host(:hover:not(:state(disabled))) nve-icon-button {
   --color: var(--nve-sys-text-emphasis-color);
 }
 

@@ -35,11 +35,11 @@
   position: relative;
 }
 
-.popover:has(mlv-icon-button) {
+.popover:has(nve-icon-button) {
   padding-right: var(--nve-ref-size-1000);
 }
 
-mlv-icon-button {
+nve-icon-button {
   --color: inherit;
   position: absolute;
   top: 6px;

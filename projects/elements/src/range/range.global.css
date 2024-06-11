@@ -1,4 +1,5 @@
-mlv-range input[type='range']::-webkit-slider-thumb {
+mlv-range input[type='range']::-webkit-slider-thumb,
+nve-range input[type='range']::-webkit-slider-thumb {
   width: var(--nve-ref-size-400);
   height: var(--nve-ref-size-400);
   background: var(--background);
@@ -7,13 +8,15 @@ mlv-range input[type='range']::-webkit-slider-thumb {
   appearance: var(--_appearance);
 }
 
-mlv-range input[type='range']::-webkit-slider-runnable-track {
+mlv-range input[type='range']::-webkit-slider-runnable-track,
+nve-range input[type='range']::-webkit-slider-runnable-track {
   background: var(--nve-sys-interaction-background);
   height: var(--track-height);
   border-radius: var(--nve-ref-border-radius-lg);
   align-self: center;
 }
 
-mlv-range:has(datalist) {
+mlv-range:has(datalist),
+nve-range:has(datalist) {
   --_appearance: auto !important;
 }

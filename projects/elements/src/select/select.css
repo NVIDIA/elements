@@ -63,7 +63,7 @@
   display: block !important;
 }
 
-[internal-host]:has(mlv-menu:focus-within) [input] {
+[internal-host]:has(nve-menu:focus-within) [input] {
   outline: 0 !important;
 }
 
@@ -71,7 +71,7 @@
   --font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-:host([fit-content]:state(multiple)) [internal-host]:has(mlv-tag) ::slotted(select) {
+:host([fit-content]:state(multiple)) [internal-host]:has(nve-tag) ::slotted(select) {
   width: var(--nve-ref-size-1000) !important;
 }
 
@@ -154,36 +154,36 @@
   --border: var(--nve-ref-border-width-md) solid transparent;
 }
 
-mlv-tag {
+nve-tag {
   --background: color-mix(in oklab, var(--color) 15%, var(--_input-background));
   --padding: var(--nve-ref-size-100) var(--nve-ref-size-200);
   --cursor: pointer !important;
 }
 
-:host(:state(disabled)) mlv-tag {
+:host(:state(disabled)) nve-tag {
   pointer-events: none !important;
   --cursor: not-allowed !important;
 }
 
-mlv-dropdown {
+nve-dropdown {
   --padding: var(--nve-ref-size-200);
 }
 
-mlv-menu {
+nve-menu {
   --max-height: var(--scroll-height);
 }
 
-mlv-menu-item {
+nve-menu-item {
   --text-transform: initial;
   contain: content;
   content-visibility: auto;
 }
 
-mlv-menu-item:not(:state(selected)) mlv-icon[name='check'] {
+nve-menu-item:not(:state(selected)) nve-icon[name='check'] {
   opacity: 0;
 }
 
-mlv-menu-item mlv-icon {
+nve-menu-item nve-icon {
   --color: inherit;
 }
 
@@ -202,7 +202,7 @@ slot[name*='option-'] {
   background: inherit;
 }
 
-:host([container='flat']) mlv-tag {
+:host([container='flat']) nve-tag {
   --background: var(--nve-sys-interaction-field-background);
 }
 

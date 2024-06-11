@@ -25,7 +25,7 @@ li {
   height: var(--breadcrumb-height);
 }
 
-::slotted(mlv-button) {
+::slotted(mlv-button) ::slotted(nve-button) {
   --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
   --font-size: var(--item-text-size);
   --color: var(--item-color);
@@ -34,11 +34,13 @@ li {
   --font-weight: var(--nve-ref-font-weight-medium);
 }
 
-::slotted(mlv-button:hover) {
+::slotted(mlv-button:hover),
+::slotted(nve-button:hover) {
   --text-decoration: underline;
 }
 
-::slotted(mlv-icon-button) {
+::slotted(mlv-icon-button),
+::slotted(nve-icon-button) {
   --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
   --icon-width: var(--nve-ref-size-300);
   --icon-height: var(--nve-ref-size-300);
@@ -48,7 +50,7 @@ li {
   --color: var(--item-color);
 }
 
-mlv-icon[separator] {
+nve-icon[separator] {
   --height: var(--nve-ref-size-200);
   --width: var(--nve-ref-size-200);
   --color: var(--item-color);

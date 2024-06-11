@@ -34,7 +34,7 @@
   display: none;
 }
 
-:host(:not([closable]):not(:state(expanded))) mlv-icon-button {
+:host(:not([closable]):not(:state(expanded))) nve-icon-button {
   position: initial;
 }
 
@@ -57,7 +57,7 @@
   flex-grow: 1;
 }
 
-mlv-icon-button {
+nve-icon-button {
   position: absolute;
   top: var(--nve-ref-size-100);
   right: var(--nve-ref-size-100);

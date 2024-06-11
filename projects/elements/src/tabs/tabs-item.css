@@ -58,7 +58,8 @@
   left: 0;
 }
 
-:host(:state(selected)) ::slotted(mlv-icon) {
+:host(:state(selected)) ::slotted(mlv-icon),
+:host(:state(selected)) ::slotted(nve-icon) {
   --color: var(--nve-sys-interaction-color);
 }
 

@@ -21,12 +21,12 @@
   overflow: hidden;
 }
 
-mlv-icon {
+nve-icon {
   --color: var(--nve-sys-text-placeholder-color);
   cursor: pointer;
 }
 
-:host([sort='ascending']) mlv-icon,
-:host([sort='descending']) mlv-icon {
+:host([sort='ascending']) nve-icon,
+:host([sort='descending']) nve-icon {
   --color: var(--nve-sys-text-emphasis-color);
 }

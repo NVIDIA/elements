@@ -30,7 +30,7 @@ dialog {
   white-space: initial;
 }
 
-dialog:has(mlv-icon-button) {
+dialog:has(nve-icon-button) {
   padding-right: var(--nve-ref-size-800);
 }
 
@@ -43,7 +43,7 @@ dialog:has(mlv-icon-button) {
   position: absolute;
 }
 
-mlv-icon-button {
+nve-icon-button {
   --color: inherit;
   position: absolute;
   top: 2px;
