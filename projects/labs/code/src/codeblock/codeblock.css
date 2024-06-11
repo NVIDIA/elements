@@ -15,7 +15,7 @@
   --background: var(--nve-sys-layer-container-background);
   --font-family: var(--nve-ref-font-family-roboto-mono);
   --padding: var(--nve-ref-space-sm);
-  --border-radius: var(--nve-ref-border-radius-lg);
+  --border-radius: var(--nve-ref-border-radius-md);
   display: block;
   overflow: hidden;
 }
@@ -151,7 +151,7 @@ pre {
   }
 
   .hljs-meta {
-    color: var(--nve-ref-color-gray-slate-1100);
+    color: var(--nve-sys-text-muted-color);
   }
 
   .hljs-selector-attr {
@@ -182,16 +182,26 @@ pre {
 
 .hljs-linenumber {
   color: var(--nve-ref-color-gray-slate-1100);
-  margin-right: 30px;
+  margin-right: 24px;
   display: inline-block;
-  width: 30px;
+  width: 24px;
   text-align: right;
   user-select: none;
 }
 
 .hljs-highlight {
-  background-color: color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 80%);
-  box-shadow: inset 2px 0 0 color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 20%);
   display: inline-block;
+  position: relative;
+  z-index: 0;
   width: 100%;
+
+  &::after {
+    background-color: color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 80%);
+    box-shadow: inset 2px 0 0 color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 20%);
+    position: absolute;
+    inset: 0 calc(var(--padding) * -1);
+    display: block;
+    content: '';
+    z-index: -1;
+  }
 }
