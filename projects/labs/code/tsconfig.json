@@ -1,25 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es2022",
-    "skipLibCheck": true,
-    "module": "es2022",
-    "lib": ["es2022", "dom", "dom.iterable"],
-    "typeRoots": ["./node_modules/@types"],
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "dist/",
-    "baseUrl": "./",
-    "rootDir": "./",
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
+    "target": "ESNext",
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
+    "baseUrl": "./",
+    "resolveJsonModule": true,
     "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
     "paths": {
       "@nvidia-elements/code": ["./src/index.js"],
       "@nvidia-elements/code/*": ["./src/*"],
       "@nvidia-elements/code/*.js": ["./src/*.js"]
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*.ts"]
 }
