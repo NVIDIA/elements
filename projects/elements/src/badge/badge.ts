@@ -118,7 +118,7 @@ export class Badge extends LitElement {
     const unassignedIcon = this.shadowRoot
       .querySelector<HTMLSlotElement>('slot:not([name])')
       .assignedElements()
-      .find(i => i.tagName === 'MLV-ICON' && !i.slot);
+      .find(i => i.matches('nve-icon, nve-icon') && !i.slot);
     if (unassignedIcon) {
       unassignedIcon.slot = 'prefix-icon';
     }

@@ -123,8 +123,8 @@ export function scope(element: any, Mixin: any) {
 }
 
 export function define(Element: CustomElementConstructor & { metadata: { version: string; tag: string } }) {
-  defineInternal(Element, Element.metadata.tag.replace('mlv', 'nve'));
-  defineInternal(class extends Element {}, Element.metadata.tag.replace('nve', 'mlv'));
+  defineInternal(Element, Element.metadata.tag.replace('nve', 'mlv'));
+  defineInternal(class extends Element {}, Element.metadata.tag.replace('mlv', 'nve'));
 }
 
 function defineInternal(element: CustomElementConstructor & { metadata: { version: string } }, tagName: string) {
@@ -296,4 +296,9 @@ export function getDisplayValue(option: { label?: string; value?: string }): str
   } else {
     return '';
   }
+}
+
+/** returns a combination of nve and mlv for a prefixed tag selector */
+export function tagSelector(selector: string) {
+  return `${selector}, ${selector.replaceAll('nve-', 'nve-')}`;
 }

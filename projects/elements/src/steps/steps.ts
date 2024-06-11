@@ -142,7 +142,7 @@ export class Steps extends LitElement {
   declare _internals: ElementInternals;
 
   #selectTab(stepsItem) {
-    if (!this.behaviorSelect || stepsItem.tagName !== 'MLV-STEPS-ITEM' || stepsItem.disabled) {
+    if (!this.behaviorSelect || !stepsItem.matches('nve-steps-item, nve-steps-item') || stepsItem.disabled) {
       return;
     }
 

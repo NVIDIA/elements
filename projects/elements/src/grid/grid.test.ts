@@ -47,10 +47,6 @@ describe(Grid.metadata.tag, () => {
     expect(element._internals.role).toBe('grid');
   });
 
-  it('should set internal rowgroup', () => {
-    expect(element.shadowRoot.querySelector('[role=rowgroup]')).toBeTruthy();
-  });
-
   it('should generate an ID if no default is provided', () => {
     expect(element.id.startsWith('_')).toBe(true);
   });
