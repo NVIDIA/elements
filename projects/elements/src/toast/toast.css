@@ -61,6 +61,8 @@ nve-icon-button {
 }
 
 ::slotted(nve-button[interaction='flat']), /* deprecated */
+::slotted(nve-button[container='flat']), /* deprecated */
+::slotted(nve-button[container='inline']), /* deprecated */
 ::slotted(nve-button[container='flat']),
 ::slotted(nve-button[container='inline']) {
   --color: inherit;
