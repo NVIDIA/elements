@@ -36,7 +36,7 @@ export class Select extends Control {
   static styles = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-select',
+    tag: 'nve-select',
     version: '0.0.0'
   };
 
@@ -105,7 +105,7 @@ export class Select extends Control {
         .filter(o => o.selected && o !== this.#placeholderOption)
         .map(
           o => html`
-      <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o, false)}>${o.textContent}</mlv-tag>`
+      <nve-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o, false)}>${o.textContent}</nve-tag>`
         )}
     </div>`
       : nothing;
@@ -113,27 +113,27 @@ export class Select extends Control {
 
   get #menu() {
     return html`
-    <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
+    <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
       ${this.#options
         .filter(o => o !== this.#placeholderOption)
         .map(
           (o, i) => html`
-      <mlv-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} ?disabled=${o.disabled} ?hidden=${!!o.hidden} aria-selected=${o.selected}>
+      <nve-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} ?disabled=${o.disabled} ?hidden=${!!o.hidden} aria-selected=${o.selected}>
         <slot name="option-${i + 1}">
-          <mlv-icon name="check" size="sm" aria-hidden="true"></mlv-icon> ${o.innerText}
+          <nve-icon name="check" size="sm" aria-hidden="true"></nve-icon> ${o.innerText}
         </slot>
-      </mlv-menu-item>`
+      </nve-menu-item>`
         )}
-    </mlv-menu>`;
+    </nve-menu>`;
   }
 
   protected get suffixContent() {
     return this.#select.size === 0
       ? html`
-      <mlv-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></mlv-icon>
-      <mlv-dropdown @close=${e => (e.target.hidden = true)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
+      <nve-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></nve-icon>
+      <nve-dropdown @close=${e => (e.target.hidden = true)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
         ${this.#menu}
-      </mlv-dropdown>`
+      </nve-dropdown>`
       : this.#menu;
   }
 

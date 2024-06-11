@@ -12,7 +12,7 @@ describe(Dropdown.metadata.tag, () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <button id="btn">button</button>
-      <mlv-dropdown trigger="btn" anchor="btn" closable>hello</mlv-dropdown>
+      <nve-dropdown trigger="btn" anchor="btn" closable>hello</nve-dropdown>
     `);
     element = fixture.querySelector(Dropdown.metadata.tag);
     await elementIsStable(element);

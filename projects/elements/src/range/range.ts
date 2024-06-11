@@ -16,7 +16,7 @@ export class Range extends Control {
   static styles = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-range',
+    tag: 'nve-range',
     version: '0.0.0'
   };
 

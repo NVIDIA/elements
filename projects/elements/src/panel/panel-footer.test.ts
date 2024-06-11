@@ -10,9 +10,9 @@ describe(PanelFooter.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-panel>
-        <mlv-panel-footer>hello</mlv-panel-footer>
-      </mlv-panel>
+      <nve-panel>
+        <nve-panel-footer>hello</nve-panel-footer>
+      </nve-panel>
     `);
     element = fixture.querySelector(PanelFooter.metadata.tag);
     await elementIsStable(element);

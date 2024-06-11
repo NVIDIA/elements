@@ -10,7 +10,7 @@ describe(Icon.metadata.tag, () => {
   let element: Icon;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<mlv-icon aria-label="test icon"></mlv-icon>`);
+    fixture = await createFixture(html`<nve-icon aria-label="test icon"></nve-icon>`);
     element = fixture.querySelector(Icon.metadata.tag);
     await elementIsStable(element);
   });

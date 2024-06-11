@@ -23,7 +23,7 @@ export class ProgressRing extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-progress-ring',
+    tag: 'nve-progress-ring',
     version: '0.0.0'
   };
 
@@ -62,7 +62,7 @@ export class ProgressRing extends LitElement {
         </svg>
 
         <slot name="status-icon">
-          ${this.status !== 'accent' ? html`<mlv-icon .name=${statusIcons[this.status] as any} .status=${this.status as any} aria-hidden="true"></mlv-icon>` : ''}
+          ${this.status !== 'accent' ? html`<nve-icon .name=${statusIcons[this.status] as any} .status=${this.status as any} aria-hidden="true"></nve-icon>` : ''}
         </slot>
       </div>
     `;

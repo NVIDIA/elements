@@ -39,7 +39,7 @@ export class Toast extends LitElement {
   static styles = useStyles([popoverBaseStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-toast',
+    tag: 'nve-toast',
     version: '0.0.0'
   };
 
@@ -113,8 +113,8 @@ export class Toast extends LitElement {
   render() {
     return html`
       <dialog ${animationFade(this)}>
-        <slot name="prefix">${this.status !== 'muted' ? html`<mlv-icon .name=${statusIcons[this.status] as IconName} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></mlv-icon>` : nothing}</slot>
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" container="flat" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : nothing}
+        <slot name="prefix">${this.status !== 'muted' ? html`<nve-icon .name=${statusIcons[this.status] as IconName} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></nve-icon>` : nothing}</slot>
+        ${this.closable ? html`<nve-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" container="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : nothing}
         <slot></slot>
       </dialog>
     `;

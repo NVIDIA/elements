@@ -29,7 +29,7 @@ export class Card extends LitElement implements ContainerElement {
   static styles = useStyles([cardStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-card',
+    tag: 'nve-card',
     version: '0.0.0'
   };
 
@@ -64,7 +64,7 @@ export class CardHeader extends LitElement {
   static styles = useStyles([cardHeaderStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-card-header',
+    tag: 'nve-card-header',
     version: '0.0.0'
   };
 
@@ -101,7 +101,7 @@ export class CardContent extends LitElement {
   static styles = useStyles([cardContentStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-card-content',
+    tag: 'nve-card-content',
     version: '0.0.0'
   };
 
@@ -125,7 +125,7 @@ export class CardFooter extends LitElement {
   static styles = useStyles([cardFooterStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-card-footer',
+    tag: 'nve-card-footer',
     version: '0.0.0'
   };
 

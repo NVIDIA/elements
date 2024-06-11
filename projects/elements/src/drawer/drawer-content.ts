@@ -14,7 +14,7 @@ export class DrawerContent extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-drawer-content',
+    tag: 'nve-drawer-content',
     version: '0.0.0'
   };
 

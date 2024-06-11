@@ -11,7 +11,7 @@ describe(Dropdown.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-dropdown>hello</mlv-dropdown>
+      <nve-dropdown>hello</nve-dropdown>
     `);
     element = fixture.querySelector(Dropdown.metadata.tag);
     await elementIsStable(element);

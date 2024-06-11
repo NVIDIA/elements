@@ -23,7 +23,7 @@ export class AlertGroup extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-alert-group',
+    tag: 'nve-alert-group',
     version: '0.0.0'
   };
 

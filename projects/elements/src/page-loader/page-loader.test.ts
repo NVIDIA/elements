@@ -10,7 +10,7 @@ describe(PageLoader.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-page-loader></mlv-page-loader>
+      <nve-page-loader></nve-page-loader>
     `);
     element = fixture.querySelector(PageLoader.metadata.tag);
     await elementIsStable(element);

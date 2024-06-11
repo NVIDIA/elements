@@ -16,7 +16,7 @@ export class GridPlaceholder extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-grid-placeholder',
+    tag: 'nve-grid-placeholder',
     version: '0.0.0'
   };
 

@@ -14,7 +14,7 @@ export class InputGroup extends ControlGroup {
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-input-group',
+    tag: 'nve-input-group',
     version: '0.0.0'
   };
 

@@ -23,11 +23,11 @@ describe('updateControlStatusState', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control>
+      <nve-control>
         <label>label</label>
         <input type="text" required />
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-control>
+        <nve-control-message>message</nve-control-message>
+      </nve-control>
     `);
     control = fixture.querySelector(Control.metadata.tag);
     message = fixture.querySelector(ControlMessage.metadata.tag);
@@ -63,11 +63,11 @@ describe('setupControlValidationStates HTML5 disabled', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control>
+      <nve-control>
         <label>label</label>
         <input type="text" formnovalidate required />
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-control>
+        <nve-control-message>message</nve-control-message>
+      </nve-control>
     `);
     control = fixture.querySelector(Control.metadata.tag);
     message = fixture.querySelector(ControlMessage.metadata.tag);
@@ -115,11 +115,11 @@ describe('setupControlValidationStates', () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <form>
-        <mlv-control>
+        <nve-control>
           <label>label</label>
           <input type="text" required value="" />
-          <mlv-control-message>message</mlv-control-message>
-        </mlv-control>
+          <nve-control-message>message</nve-control-message>
+        </nve-control>
       </form>
     `);
     control = fixture.querySelector(Control.metadata.tag);
@@ -199,11 +199,11 @@ describe('setupControlStates', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control>
+      <nve-control>
         <label>label</label>
         <input type="text" required name="input" />
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-control>
+        <nve-control-message>message</nve-control-message>
+      </nve-control>
     `);
     control = fixture.querySelector(Control.metadata.tag);
     setupControlStates(control);
@@ -398,9 +398,9 @@ describe('setupControlGroupStates initial', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control-group>
+      <nve-control-group>
         <label>control group</label>
-      </mlv-control-group>
+      </nve-control-group>
     `);
     controlGroup = fixture.querySelector(ControlGroup.metadata.tag);
     await elementIsStable(controlGroup);
@@ -423,13 +423,13 @@ describe('setupControlGroupStates', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control-group>
+      <nve-control-group>
         <label>control group</label>
-        <mlv-control>
+        <nve-control>
           <label>label</label>
           <input type="text" />
-        </mlv-control>
-      </mlv-control-group>
+        </nve-control>
+      </nve-control-group>
     `);
     controlGroup = fixture.querySelector(ControlGroup.metadata.tag);
     await elementIsStable(controlGroup);

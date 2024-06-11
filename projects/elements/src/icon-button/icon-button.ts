@@ -41,7 +41,7 @@ export class IconButton extends Button {
   static styles = useStyles([...Button.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-icon-button',
+    tag: 'nve-icon-button',
     version: '0.0.0'
   };
 
@@ -53,7 +53,7 @@ export class IconButton extends Button {
     return html`
       <div internal-host interaction-state focus-within aria-hidden="true">
         <slot @slotchange=${e => removeEmptySlotWhitespace(e.target)}>
-          <mlv-icon .name=${this.iconName} .direction=${this.direction} .size=${this.size} aria-hidden="true"></mlv-icon>
+          <nve-icon .name=${this.iconName} .direction=${this.direction} .size=${this.size} aria-hidden="true"></nve-icon>
         </slot>
       </div>
       <slot name="anchor"></slot>

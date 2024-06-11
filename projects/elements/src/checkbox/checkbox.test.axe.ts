@@ -11,10 +11,10 @@ describe(Checkbox.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>label</label>
         <input type="checkbox" />
-      </mlv-checkbox>
+      </nve-checkbox>
     `);
     element = fixture.querySelector(Checkbox.metadata.tag);
     await elementIsStable(element);

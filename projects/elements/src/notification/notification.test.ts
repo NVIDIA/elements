@@ -12,7 +12,7 @@ describe(Notification.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-notification>hello</mlv-notification>
+      <nve-notification>hello</nve-notification>
     `);
     element = fixture.querySelector(Notification.metadata.tag);
     await elementIsStable(element);

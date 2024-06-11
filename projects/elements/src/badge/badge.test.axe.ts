@@ -8,17 +8,17 @@ import '@nvidia-elements/core/badge/define.js';
 describe(Badge.metadata.tag, () => {
   it('should pass axe check for status', async () => {
     const fixture = await createFixture(html`
-      <mlv-badge status="scheduled">scheduled</mlv-badge>
-      <mlv-badge status="queued">queued</mlv-badge>
-      <mlv-badge status="pending">pending</mlv-badge>
-      <mlv-badge status="starting">starting</mlv-badge>
-      <mlv-badge status="running">running</mlv-badge>
-      <mlv-badge status="restarting">restarting</mlv-badge>
-      <mlv-badge status="stopping">stopping</mlv-badge>
-      <mlv-badge status="finished">finished</mlv-badge>
-      <mlv-badge status="failed">failed</mlv-badge>
-      <mlv-badge status="unknown">unknown</mlv-badge>
-      <mlv-badge status="ignored">ignored</mlv-badge>
+      <nve-badge status="scheduled">scheduled</nve-badge>
+      <nve-badge status="queued">queued</nve-badge>
+      <nve-badge status="pending">pending</nve-badge>
+      <nve-badge status="starting">starting</nve-badge>
+      <nve-badge status="running">running</nve-badge>
+      <nve-badge status="restarting">restarting</nve-badge>
+      <nve-badge status="stopping">stopping</nve-badge>
+      <nve-badge status="finished">finished</nve-badge>
+      <nve-badge status="failed">failed</nve-badge>
+      <nve-badge status="unknown">unknown</nve-badge>
+      <nve-badge status="ignored">ignored</nve-badge>
     `);
 
     await elementIsStable(fixture.querySelector(Badge.metadata.tag));
@@ -29,9 +29,9 @@ describe(Badge.metadata.tag, () => {
 
   it('should pass axe check for trend', async () => {
     const fixture = await createFixture(html`
-      <mlv-badge status="trend-neutral">+15%</mlv-badge>
-      <mlv-badge status="trend-up">+15%</mlv-badge>
-      <mlv-badge status="trend-down">-15%</mlv-badge>
+      <nve-badge status="trend-neutral">+15%</nve-badge>
+      <nve-badge status="trend-up">+15%</nve-badge>
+      <nve-badge status="trend-down">-15%</nve-badge>
     `);
 
     await elementIsStable(fixture.querySelector(Badge.metadata.tag));
@@ -42,28 +42,28 @@ describe(Badge.metadata.tag, () => {
 
   it('should pass axe check for color', async () => {
     const fixture = await createFixture(html`
-      <mlv-badge color="red-cardinal">red-cardinal</mlv-badge>
-      <mlv-badge color="gray-slate">gray-slate</mlv-badge>
-      <mlv-badge color="gray-denim">gray-denim</mlv-badge>
-      <mlv-badge color="blue-indigo">blue-indigo</mlv-badge>
-      <mlv-badge color="blue-cobalt">blue-cobalt</mlv-badge>
-      <mlv-badge color="blue-sky">blue-sky</mlv-badge>
-      <mlv-badge color="teal-cyan">teal-cyan</mlv-badge>
-      <mlv-badge color="green-mint">green-mint</mlv-badge>
-      <mlv-badge color="teal-seafoam">teal-seafoam</mlv-badge>
-      <mlv-badge color="green-grass">green-grass</mlv-badge>
-      <mlv-badge color="yellow-amber">yellow-amber</mlv-badge>
-      <mlv-badge color="orange-pumpkin">orange-pumpkin</mlv-badge>
-      <mlv-badge color="red-tomato">red-tomato</mlv-badge>
-      <mlv-badge color="pink-magenta">pink-magenta</mlv-badge>
-      <mlv-badge color="purple-plum">purple-plum</mlv-badge>
-      <mlv-badge color="purple-violet">purple-violet</mlv-badge>
-      <mlv-badge color="purple-lavender">purple-lavender</mlv-badge>
-      <mlv-badge color="pink-rose">pink-rose</mlv-badge>
-      <mlv-badge color="green-jade">green-jade</mlv-badge>
-      <mlv-badge color="lime-pear">lime-pear</mlv-badge>
-      <mlv-badge color="yellow-nova">yellow-nova</mlv-badge>
-      <mlv-badge color="brand-green">brand-green</mlv-badge>
+      <nve-badge color="red-cardinal">red-cardinal</nve-badge>
+      <nve-badge color="gray-slate">gray-slate</nve-badge>
+      <nve-badge color="gray-denim">gray-denim</nve-badge>
+      <nve-badge color="blue-indigo">blue-indigo</nve-badge>
+      <nve-badge color="blue-cobalt">blue-cobalt</nve-badge>
+      <nve-badge color="blue-sky">blue-sky</nve-badge>
+      <nve-badge color="teal-cyan">teal-cyan</nve-badge>
+      <nve-badge color="green-mint">green-mint</nve-badge>
+      <nve-badge color="teal-seafoam">teal-seafoam</nve-badge>
+      <nve-badge color="green-grass">green-grass</nve-badge>
+      <nve-badge color="yellow-amber">yellow-amber</nve-badge>
+      <nve-badge color="orange-pumpkin">orange-pumpkin</nve-badge>
+      <nve-badge color="red-tomato">red-tomato</nve-badge>
+      <nve-badge color="pink-magenta">pink-magenta</nve-badge>
+      <nve-badge color="purple-plum">purple-plum</nve-badge>
+      <nve-badge color="purple-violet">purple-violet</nve-badge>
+      <nve-badge color="purple-lavender">purple-lavender</nve-badge>
+      <nve-badge color="pink-rose">pink-rose</nve-badge>
+      <nve-badge color="green-jade">green-jade</nve-badge>
+      <nve-badge color="lime-pear">lime-pear</nve-badge>
+      <nve-badge color="yellow-nova">yellow-nova</nve-badge>
+      <nve-badge color="brand-green">brand-green</nve-badge>
     `);
 
     await elementIsStable(fixture.querySelector(Badge.metadata.tag));

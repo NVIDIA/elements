@@ -12,11 +12,11 @@ describe(Tabs.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-tabs>
-        <mlv-tabs-item>Tab 1</mlv-tabs-item>
-        <mlv-tabs-item selected>Tab 2</mlv-tabs-item>
-        <mlv-tabs-item disabled>Tab 3</mlv-tabs-item>
-      </mlv-tabs>
+      <nve-tabs>
+        <nve-tabs-item>Tab 1</nve-tabs-item>
+        <nve-tabs-item selected>Tab 2</nve-tabs-item>
+        <nve-tabs-item disabled>Tab 3</nve-tabs-item>
+      </nve-tabs>
     `);
     tabs = fixture.querySelector(Tabs.metadata.tag);
     item = fixture.querySelector(TabsItem.metadata.tag);

@@ -16,7 +16,7 @@ describe(AppHeader.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-app-header></mlv-app-header>
+      <nve-app-header></nve-app-header>
     `);
     element = fixture.querySelector(AppHeader.metadata.tag);
     await elementIsStable(element);
@@ -56,10 +56,10 @@ describe(`${AppHeader.metadata.tag}: branding`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-app-header>
-        <mlv-logo size="lg">${testShortcode}</mlv-logo>
+      <nve-app-header>
+        <nve-logo size="lg">${testShortcode}</nve-logo>
         <h2 slot="title">${testTitle}</h2>
-      </mlv-app-header>
+      </nve-app-header>
     `);
     element = fixture.querySelector(AppHeader.metadata.tag);
     await elementIsStable(element);
@@ -102,13 +102,13 @@ describe(`${AppHeader.metadata.tag}: nav items and actions`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-app-header>
-        <mlv-button id="default-flat-btn" slot="nav-items">A</mlv-button>
-        <mlv-button id="override-flat-btn" interaction="emphasis" slot="nav-items">B</mlv-button>
-        <mlv-icon-button id="default-icon-btn" icon-name="gear" slot="nav-items"></mlv-icon-button>
-        <mlv-icon-button id="default-action-btn" icon-name="person" slot="nav-actions"></mlv-icon-button>
-        <mlv-icon-button id="override-action-btn" interaction="emphasis" slot="nav-actions">${innerIconBtnText}</mlv-icon-button>
-      </mlv-app-header>
+      <nve-app-header>
+        <nve-button id="default-flat-btn" slot="nav-items">A</nve-button>
+        <nve-button id="override-flat-btn" interaction="emphasis" slot="nav-items">B</nve-button>
+        <nve-icon-button id="default-icon-btn" icon-name="gear" slot="nav-items"></nve-icon-button>
+        <nve-icon-button id="default-action-btn" icon-name="person" slot="nav-actions"></nve-icon-button>
+        <nve-icon-button id="override-action-btn" interaction="emphasis" slot="nav-actions">${innerIconBtnText}</nve-icon-button>
+      </nve-app-header>
     `);
     element = fixture.querySelector(AppHeader.metadata.tag);
     await elementIsStable(element);

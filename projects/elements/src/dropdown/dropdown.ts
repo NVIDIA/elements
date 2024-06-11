@@ -95,7 +95,7 @@ export class Dropdown extends LitElement {
   static styles = useStyles([popoverBaseStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-dropdown',
+    tag: 'nve-dropdown',
     version: '0.0.0'
   };
 
@@ -107,7 +107,7 @@ export class Dropdown extends LitElement {
     return html`
     <dialog ${animationFade(this)}>
       <slot name="header"></slot>
-      ${this.closable ? html`<mlv-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
+      ${this.closable ? html`<nve-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
       <slot></slot>
       <slot name="footer"></slot>
       ${this.arrow ? html`<div class="arrow"></div>` : ''}

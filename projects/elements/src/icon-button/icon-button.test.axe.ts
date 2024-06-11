@@ -11,7 +11,7 @@ describe(IconButton.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-icon-button aria-label="icon button"></mlv-icon-button>
+      <nve-icon-button aria-label="icon button"></nve-icon-button>
     `);
     element = fixture.querySelectorAll<IconButton>(IconButton.metadata.tag)[0];
     elementIsStable(element);

@@ -11,7 +11,7 @@ describe(Dialog.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-dialog>hello</mlv-dialog>
+      <nve-dialog>hello</nve-dialog>
     `);
     element = fixture.querySelector(Dialog.metadata.tag);
     await elementIsStable(element);

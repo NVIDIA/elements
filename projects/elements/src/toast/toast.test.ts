@@ -12,7 +12,7 @@ describe(Toast.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-toast>hello</mlv-toast>
+      <nve-toast>hello</nve-toast>
     `);
     element = fixture.querySelector(Toast.metadata.tag);
     await elementIsStable(element);

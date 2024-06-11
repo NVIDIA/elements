@@ -11,9 +11,9 @@ describe(Tabs.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <mlv-tabs>
-      <mlv-tabs-item></mlv-tabs-item>
-    </mlv-tabs>
+    <nve-tabs>
+      <nve-tabs-item></nve-tabs-item>
+    </nve-tabs>
     `);
     parentElement = fixture.querySelector(Tabs.metadata.tag);
     childElement = fixture.querySelector(TabsItem.metadata.tag);

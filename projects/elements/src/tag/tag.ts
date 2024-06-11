@@ -33,7 +33,7 @@ export class Tag extends BaseButton {
   static styles = useStyles([colorStateStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-tag',
+    tag: 'nve-tag',
     version: '0.0.0'
   };
 
@@ -61,7 +61,7 @@ export class Tag extends BaseButton {
     return html`
       <div internal-host interaction-state focus-within>
         <slot></slot>
-        ${this.closable ? html`<mlv-icon @click=${() => this.#typeClosableController.close()} container="flat" name="cancel" size="sm" role="img" aria-label=${ifDefined(this.i18n.close)}></mlv-icon>` : ''}
+        ${this.closable ? html`<nve-icon @click=${() => this.#typeClosableController.close()} container="flat" name="cancel" size="sm" role="img" aria-label=${ifDefined(this.i18n.close)}></nve-icon>` : ''}
       </div>
     `;
   }

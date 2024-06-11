@@ -11,7 +11,7 @@ describe(Logo.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-logo aria-label="logo"></mlv-logo>
+      <nve-logo aria-label="logo"></nve-logo>
     `);
     element = fixture.querySelector(Logo.metadata.tag);
     await elementIsStable(element);

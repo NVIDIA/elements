@@ -10,9 +10,9 @@ describe(GridPlaceholder.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-grid-placeholder>
+      <nve-grid-placeholder>
 
-      </mlv-grid-placeholder>
+      </nve-grid-placeholder>
     `);
     element = fixture.querySelector(GridPlaceholder.metadata.tag);
     await elementIsStable(element);

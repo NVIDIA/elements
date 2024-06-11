@@ -10,9 +10,9 @@ describe(DialogFooter.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-dialog>
-        <mlv-dialog-footer>hello</mlv-dialog-footer>
-      </mlv-dialog>
+      <nve-dialog>
+        <nve-dialog-footer>hello</nve-dialog-footer>
+      </nve-dialog>
     `);
     element = fixture.querySelector(DialogFooter.metadata.tag);
     await elementIsStable(element);

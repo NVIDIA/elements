@@ -19,7 +19,7 @@ export class Password extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-password',
+    tag: 'nve-password',
     version: '0.0.0'
   };
 
@@ -28,7 +28,7 @@ export class Password extends Control {
   };
 
   protected get suffixContent() {
-    return html`<mlv-icon-button @click=${() => this.#toggleVisibility()} .pressed=${this.pressed} .iconName=${this.pressed ? 'eye-hidden' : 'eye'} container="flat" .ariaLabel=${this.pressed ? this.i18n.hide : this.i18n.show}></mlv-icon-button>`;
+    return html`<nve-icon-button @click=${() => this.#toggleVisibility()} .pressed=${this.pressed} .iconName=${this.pressed ? 'eye-hidden' : 'eye'} container="flat" .ariaLabel=${this.pressed ? this.i18n.hide : this.i18n.show}></nve-icon-button>`;
   }
 
   #toggleVisibility() {

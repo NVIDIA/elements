@@ -11,16 +11,15 @@ describe(Panel.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-panel behavior-expand expanded style="width:280px; height:100vh">
-        <mlv-panel-header>
+      <nve-panel behavior-expand expanded style="width:280px; height:100vh">
+        <nve-panel-header>
           <div slot="title">Title</div>
           <div slot="subtitle"></div>
-        </mlv-panel-header>
-
-        <mlv-panel-content mlv-layout="column gap:md">
-          <p mlv-text="body">content</p>
-        </mlv-panel-content>
-      </mlv-panel>
+        </nve-panel-header>
+        <nve-panel-content>
+          <p>content</p>
+        </nve-panel-content>
+      </nve-panel>
     `);
     element = fixture.querySelector(Panel.metadata.tag);
     await elementIsStable(element);

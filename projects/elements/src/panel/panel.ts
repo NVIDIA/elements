@@ -30,7 +30,7 @@ export class PanelHeader extends LitElement {
   static styles = useStyles([panelHeaderStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-panel-header',
+    tag: 'nve-panel-header',
     version: '0.0.0'
   };
 
@@ -66,7 +66,7 @@ export class PanelContent extends LitElement {
   static styles = useStyles([panelContentStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-panel-content',
+    tag: 'nve-panel-content',
     version: '0.0.0'
   };
 
@@ -92,7 +92,7 @@ export class PanelFooter extends LitElement {
   static styles = useStyles([panelFooterStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-panel-footer',
+    tag: 'nve-panel-footer',
     version: '0.0.0'
   };
 
@@ -153,7 +153,7 @@ export class Panel extends LitElement {
   static styles = useStyles([panelStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-panel',
+    tag: 'nve-panel',
     version: '0.0.0'
   };
 
@@ -189,19 +189,19 @@ export class Panel extends LitElement {
           ${when(
             !this.closable,
             () => html`
-              <mlv-icon-button .container=${this.expanded ? 'flat' : undefined} icon-name="double-chevron"
+              <nve-icon-button .container=${this.expanded ? 'flat' : undefined} icon-name="double-chevron"
                 @click=${() => this.#typeExpandableController.toggle()}
                 .direction=${this.#direction}
                 .expanded=${this.expanded}
                 .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
-              ></mlv-icon-button>
+              ></nve-icon-button>
             `,
             () => html`
-              <mlv-icon-button container="flat" icon-name="cancel"
+              <nve-icon-button container="flat" icon-name="cancel"
                 @click=${() => this.#typeExpandableController.close()}
                 .expanded=${this.expanded}
                 .ariaLabel=${this.expanded ? this.i18n.hide : this.i18n.show}
-              ></mlv-icon-button>
+              ></nve-icon-button>
             `
           )}
         </div>

@@ -10,7 +10,7 @@ describe(ProgressBar.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-progress-bar></mlv-progress-bar>
+      <nve-progress-bar></nve-progress-bar>
     `);
     element = fixture.querySelector(ProgressBar.metadata.tag);
   });

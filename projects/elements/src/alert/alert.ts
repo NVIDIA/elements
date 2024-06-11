@@ -44,7 +44,7 @@ export class Alert extends LitElement {
   static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
 
   static readonly metadata = {
-    tag: 'mlv-alert',
+    tag: 'nve-alert',
     version: '0.0.0'
   };
 
@@ -76,11 +76,11 @@ export class Alert extends LitElement {
   render() {
     return html`
       <div internal-host @slotchange=${() => this.requestUpdate()}>
-        <slot name="icon"><mlv-icon name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></mlv-icon></slot>
+        <slot name="icon"><nve-icon name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></nve-icon></slot>
         <slot name="prefix" ?hidden=${!this.prefixItems.length}></slot>
         <slot></slot>
         <slot name="actions" ?hidden=${!this.actionItems.length}></slot>
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.#typeClosableController.close()} container="flat" icon-name="cancel" size="sm" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button @click=${() => this.#typeClosableController.close()} container="flat" icon-name="cancel" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
       </div>
       <slot name="content" part="content"></slot>
     `;

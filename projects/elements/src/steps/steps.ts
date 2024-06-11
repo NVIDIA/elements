@@ -64,7 +64,7 @@ export class StepsItem extends BaseButton {
   static styles = useStyles([stepsItemStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-steps-item',
+    tag: 'nve-steps-item',
     version: '0.0.0'
   };
 
@@ -77,10 +77,10 @@ export class StepsItem extends BaseButton {
     return html`
       <div internal-host focus-within>  
         <slot name="status-icon">
-          ${this.status === undefined ? html`<mlv-icon-button readonly id="number-icon" .disabled=${this.disabled}>${this.index}</mlv-icon-button>` : ''}
-          ${this.status === 'success' ? html`<mlv-icon-button readonly size="sm" interaction="emphasis" icon-name="check"></mlv-icon-button>` : ''}
-          ${this.status === 'danger' ? html`<mlv-icon-button readonly size="sm" interaction="destructive" icon-name="exclamation-circle"></mlv-icon-button>` : ''}
-          ${this.status === 'pending' ? html`<mlv-progress-ring status="accent" size="sm"></mlv-progress-ring>` : ''}
+          ${this.status === undefined ? html`<nve-icon-button readonly id="number-icon" .disabled=${this.disabled}>${this.index}</nve-icon-button>` : ''}
+          ${this.status === 'success' ? html`<nve-icon-button readonly size="sm" interaction="emphasis" icon-name="check"></nve-icon-button>` : ''}
+          ${this.status === 'danger' ? html`<nve-icon-button readonly size="sm" interaction="destructive" icon-name="exclamation-circle"></nve-icon-button>` : ''}
+          ${this.status === 'pending' ? html`<nve-progress-ring status="accent" size="sm"></nve-progress-ring>` : ''}
         </slot>
         ${when(this.container !== 'condensed', () => html`<slot></slot>`)}
       </div>
@@ -124,7 +124,7 @@ export class Steps extends LitElement {
   static styles = useStyles([stepsStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-steps',
+    tag: 'nve-steps',
     version: '0.0.0'
   };
 
@@ -142,7 +142,7 @@ export class Steps extends LitElement {
   declare _internals: ElementInternals;
 
   #selectTab(stepsItem) {
-    if (!this.behaviorSelect || stepsItem.tagName !== 'MLV-STEPS-ITEM' || stepsItem.disabled) {
+    if (!this.behaviorSelect || !stepsItem.matches('nve-steps-item, mlv-steps-item') || stepsItem.disabled) {
       return;
     }
 

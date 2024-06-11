@@ -18,7 +18,7 @@ export class GridFooter extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-grid-footer',
+    tag: 'nve-grid-footer',
     version: '0.0.0'
   };
 

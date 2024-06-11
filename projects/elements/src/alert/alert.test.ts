@@ -12,7 +12,7 @@ describe(Alert.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-alert>default</mlv-alert>
+      <nve-alert>default</nve-alert>
     `);
     alert = fixture.querySelector(Alert.metadata.tag);
     await elementIsStable(alert);

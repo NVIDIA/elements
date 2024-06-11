@@ -14,15 +14,15 @@ describe(Control.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control>
+      <nve-control>
         <label>label</label>
         <input type="text" />
-        <mlv-control-message></mlv-control-message>
+        <nve-control-message></nve-control-message>
         <datalist>
           <option value="1">one</option>
           <option value="2">two</option>
         </datalist>
-      </mlv-control>
+      </nve-control>
     `);
     element = fixture.querySelector(Control.metadata.tag);
     label = fixture.querySelector('label');
@@ -107,10 +107,10 @@ describe(`${Control.metadata.tag}: custom`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control>
+      <nve-control>
         <label>label</label>
         <div nve-control="custom" tabindex="0" value=""></div>
-      </mlv-control>
+      </nve-control>
     `);
     element = fixture.querySelector(Control.metadata.tag);
     await elementIsStable(element);
@@ -160,10 +160,10 @@ describe(`${Control.metadata.tag}: fit-text input`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control fit-text>
+      <nve-control fit-text>
         <label>label</label>
         <input type="text" value="1234" />
-      </mlv-control>
+      </nve-control>
     `);
     element = fixture.querySelector(Control.metadata.tag);
     input = fixture.querySelector('input');
@@ -205,10 +205,10 @@ describe(`${Control.metadata.tag}: fit-content input`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control fit-content>
+      <nve-control fit-content>
         <label>label</label>
         <input type="text" />
-      </mlv-control>
+      </nve-control>
     `);
     element = fixture.querySelector(Control.metadata.tag);
     input = fixture.querySelector('input');
@@ -233,14 +233,14 @@ describe(`${Control.metadata.tag}: fit-text select`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control fit-text>
+      <nve-control fit-text>
         <label>label</label>
         <select>
           <option value="1">Option 1</option>
           <option value="2">Option 12345678</option>
         </select>
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-control>
+        <nve-control-message>message</nve-control-message>
+      </nve-control>
     `);
     element = fixture.querySelector(Control.metadata.tag);
     input = fixture.querySelector('select');

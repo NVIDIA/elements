@@ -10,7 +10,7 @@ describe(GridFooter.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-grid-footer>footer</mlv-grid-footer>
+      <nve-grid-footer>footer</nve-grid-footer>
     `);
     element = fixture.querySelector(GridFooter.metadata.tag);
     await elementIsStable(element);

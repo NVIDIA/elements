@@ -43,7 +43,7 @@ export class TabsItem extends BaseButton {
   static styles = useStyles([tabsItemStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-tabs-item',
+    tag: 'nve-tabs-item',
     version: '0.0.0'
   };
 
@@ -92,7 +92,7 @@ export class Tabs extends LitElement {
   static styles = useStyles([tabsStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-tabs',
+    tag: 'nve-tabs',
     version: '0.0.0'
   };
 
@@ -110,7 +110,7 @@ export class Tabs extends LitElement {
   declare _internals: ElementInternals;
 
   #selectTab(tabItem) {
-    if (!this.behaviorSelect || tabItem.tagName !== 'MLV-TABS-ITEM' || tabItem.disabled) {
+    if (!this.behaviorSelect || !tabItem.matches('nve-tabs-item, mlv-tabs-item') || tabItem.disabled) {
       return;
     }
 

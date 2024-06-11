@@ -11,7 +11,7 @@ describe(Select.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-select>
+      <nve-select>
         <label>label</label>
         <select>
           <option value="1">Option 1</option>
@@ -24,7 +24,7 @@ describe(Select.metadata.tag, () => {
             </template>
           </option>
         </select>
-      </mlv-select>
+      </nve-select>
     `);
     element = fixture.querySelector(Select.metadata.tag);
     await elementIsStable(element);

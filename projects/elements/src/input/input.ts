@@ -35,7 +35,7 @@ export class Input extends Control implements ContainerElement {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-input',
+    tag: 'nve-input',
     version: '0.0.0'
   };
 }

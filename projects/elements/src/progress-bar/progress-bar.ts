@@ -19,7 +19,7 @@ export class ProgressBar extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-progress-bar',
+    tag: 'nve-progress-bar',
     version: '0.0.0'
   };
 

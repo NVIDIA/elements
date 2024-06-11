@@ -32,7 +32,7 @@ export class PageLoader extends LitElement {
   static styles = useStyles([popoverBaseStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-page-loader',
+    tag: 'nve-page-loader',
     version: '0.0.0'
   };
 
@@ -44,7 +44,7 @@ export class PageLoader extends LitElement {
     return html`
       <dialog>
         <div internal-host>
-          <mlv-progress-ring status="accent" size="xl"></mlv-progress-ring>
+          <nve-progress-ring status="accent" size="xl"></nve-progress-ring>
           <slot></slot>
         </div>
       </dialog>

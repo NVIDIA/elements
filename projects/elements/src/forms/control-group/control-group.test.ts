@@ -12,10 +12,10 @@ describe(ControlGroup.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control-group>
+      <nve-control-group>
         <label>group</label>
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-control-group>
+        <nve-control-message>message</nve-control-message>
+      </nve-control-group>
     `);
     element = fixture.querySelector(ControlGroup.metadata.tag);
     message = fixture.querySelector(ControlMessage.metadata.tag);

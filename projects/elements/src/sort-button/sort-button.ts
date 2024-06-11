@@ -26,7 +26,7 @@ export class SortButton extends BaseButton {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-sort-button',
+    tag: 'nve-sort-button',
     version: '0.0.0'
   };
 
@@ -49,7 +49,7 @@ export class SortButton extends BaseButton {
   render() {
     return html`
       <div internal-host focus-within>
-        <mlv-icon .name=${this.sort === 'descending' ? 'sort-descending' : 'sort-ascending'} aria-hidden="true"></mlv-icon>
+        <nve-icon .name=${this.sort === 'descending' ? 'sort-descending' : 'sort-ascending'} aria-hidden="true"></nve-icon>
       </div>
     `;
   }

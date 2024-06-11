@@ -10,6 +10,10 @@ function capitalize(string) {
 export function updateScope(source, config) {
   const { scope, sourceType } = config;
 
+  if (source.includes('@nve-labs') || source.includes('nve-codeblock')) {
+    return source;
+  }
+
   return source
     .replaceAll(/(mlv-[\w-]*|nve-[\w-]*)/g, (_, value) => {
       const isElement = !value.includes('mlv-layout') && !value.includes('mlv-text');

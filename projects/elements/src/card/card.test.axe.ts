@@ -14,19 +14,19 @@ describe(Card.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-card>
-        <mlv-card-header>
+      <nve-card>
+        <nve-card-header>
           <h2 slot="title">title</h2>
           <h3 slot="subtitle">subtitle</h3>
           <button slot="header-action">header action</button>
-        </mlv-card-header>
-        <mlv-card-content>
+        </nve-card-header>
+        <nve-card-content>
           <p>content</p>
-        </mlv-card-content>
-        <mlv-card-footer>
+        </nve-card-content>
+        <nve-card-footer>
           <p>footer</p>
-        </mlv-card-footer>
-      </mlv-card>
+        </nve-card-footer>
+      </nve-card>
     `);
     card = fixture.querySelector(Card.metadata.tag);
     cardHeader = fixture.querySelector(CardHeader.metadata.tag);

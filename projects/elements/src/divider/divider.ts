@@ -23,7 +23,7 @@ export class Divider extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-divider',
+    tag: 'nve-divider',
     version: '0.0.0'
   };
 

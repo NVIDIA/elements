@@ -11,7 +11,7 @@ describe(Badge.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-badge>label</mlv-badge>
+      <nve-badge>label</nve-badge>
     `);
     element = fixture.querySelector(Badge.metadata.tag);
     await elementIsStable(element);

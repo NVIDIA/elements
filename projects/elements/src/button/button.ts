@@ -28,7 +28,7 @@ export class Button extends BaseButton {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-button',
+    tag: 'nve-button',
     version: '0.0.0'
   };
 

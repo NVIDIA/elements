@@ -11,7 +11,7 @@ describe(ProgressRing.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-progress-ring aria-label="progress"></mlv-progress-ring>
+      <nve-progress-ring aria-label="progress"></nve-progress-ring>
     `);
     element = fixture.querySelector(ProgressRing.metadata.tag);
     await elementIsStable(element);

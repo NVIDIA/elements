@@ -14,10 +14,10 @@ describe(Tooltip.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-tooltip id="tooltip-1">hello</mlv-tooltip>
+      <nve-tooltip id="tooltip-1">hello</nve-tooltip>
       
-      <mlv-tooltip behavior-trigger id="tooltip-2" anchor="trigger" trigger="trigger" open-delay="500" hidden>delayed tooltip</mlv-tooltip>
-      <mlv-button id="trigger">button</mlv-button>
+      <nve-tooltip behavior-trigger id="tooltip-2" anchor="trigger" trigger="trigger" open-delay="500" hidden>delayed tooltip</nve-tooltip>
+      <nve-button id="trigger">button</nve-button>
     `);
     tooltip = fixture.querySelector('#tooltip-1');
     tooltip2 = fixture.querySelector('#tooltip-2');

@@ -76,7 +76,7 @@ class TypePopoverControllerTestElement extends LitElement {
   render() {
     return html`
       <dialog hidden>
-        <mlv-button @click=${() => this.typePopoverController.close()}>Close</mlv-button>
+        <nve-button @click=${() => this.typePopoverController.close()}>Close</nve-button>
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
       </dialog>
@@ -92,7 +92,7 @@ describe('type-popover.controller', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-button id="btn">anchor</mlv-button>
+      <nve-button id="btn">anchor</nve-button>
       <type-popover-controller-test-element
         .anchor=${'btn'}
         .trigger=${'btn'}
@@ -221,7 +221,7 @@ describe('type-popover.controller behavior-trigger', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-button id="btn">anchor</mlv-button>
+      <nve-button id="btn">anchor</nve-button>
       <type-popover-controller-test-element behavior-trigger trigger="btn" hidden>
         <div></div>
       </type-popover-controller-test-element>
@@ -291,8 +291,8 @@ describe('type-popover.controller dynamic trigger', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-button id="btn-1">anchor</mlv-button>
-      <mlv-button id="btn-2">anchor</mlv-button>
+      <nve-button id="btn-1">anchor</nve-button>
+      <nve-button id="btn-2">anchor</nve-button>
       <type-popover-controller-test-element behavior-trigger trigger="btn-1" anchor="btn-1" hidden>
         <div></div>
       </type-popover-controller-test-element>

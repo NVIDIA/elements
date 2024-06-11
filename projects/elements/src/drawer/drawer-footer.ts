@@ -14,7 +14,7 @@ export class DrawerFooter extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-drawer-footer',
+    tag: 'nve-drawer-footer',
     version: '0.0.0'
   };
 

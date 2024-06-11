@@ -46,7 +46,7 @@ export class GridColumn extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-grid-column',
+    tag: 'nve-grid-column',
     version: '0.0.0'
   };
 
@@ -114,8 +114,10 @@ export class GridColumn extends LitElement {
         this.position && side === 'right' && (this.previousElementSibling as any)?.position !== this.position;
 
       const positionStyle = `
-        mlv-grid[id='${this.#grid.id}'] mlv-grid-column:nth-child(${this.ariaColIndex}),
-        mlv-grid[id='${this.#grid.id}'] mlv-grid-cell:nth-child(${this.ariaColIndex}) {
+        [id='${this.#grid.id}'] mlv-grid-column:nth-child(${this.ariaColIndex}),
+        [id='${this.#grid.id}'] mlv-grid-cell:nth-child(${this.ariaColIndex}),
+        [id='${this.#grid.id}'] nve-grid-column:nth-child(${this.ariaColIndex}),
+        [id='${this.#grid.id}'] nve-grid-cell:nth-child(${this.ariaColIndex}) {
           position: sticky;
           z-index: 99;
           ${side === 'left' ? `left: ${leftStyle}px;` : `right: ${rightStyle}px;`}
@@ -125,8 +127,10 @@ export class GridColumn extends LitElement {
       const borderStyle =
         isLastLeft || isLastRight
           ? `
-        mlv-grid[id='${this.#grid.id}'] mlv-grid-column:nth-child(${this.ariaColIndex}),
-        mlv-grid[id='${this.#grid.id}'] mlv-grid-cell:nth-child(${this.ariaColIndex}) {
+        [id='${this.#grid.id}'] mlv-grid-column:nth-child(${this.ariaColIndex}),
+        [id='${this.#grid.id}'] mlv-grid-cell:nth-child(${this.ariaColIndex}),
+        [id='${this.#grid.id}'] nve-grid-column:nth-child(${this.ariaColIndex}),
+        [id='${this.#grid.id}'] nve-grid-cell:nth-child(${this.ariaColIndex}) {
           box-shadow: var(--scroll-shadow);
           clip-path: inset(0px ${isLastLeft ? '-4px' : '0'} 0px ${isLastRight ? '-4px' : '0'});
           --border-${side === 'right' ? 'left' : 'right'}: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
@@ -149,14 +153,18 @@ export class GridColumn extends LitElement {
   }
 
   #computeColumnAlignment() {
-    appendRootNodeStyle(
-      this.#grid,
+    if (this.columnAlign !== undefined) {
+      appendRootNodeStyle(
+        this.#grid,
+        `
+        [id='${this.#grid.id}'] mlv-grid-column:nth-child(${this.ariaColIndex}),
+        [id='${this.#grid.id}'] mlv-grid-cell:nth-child(${this.ariaColIndex}),
+        [id='${this.#grid.id}'] nve-grid-column:nth-child(${this.ariaColIndex}),
+        [id='${this.#grid.id}'] nve-grid-cell:nth-child(${this.ariaColIndex}) {
+          --justify-content: ${this.columnAlign}
+        }
       `
-      mlv-grid[id='${this.#grid.id}'] mlv-grid-column:nth-child(${this.ariaColIndex}),
-      mlv-grid[id='${this.#grid.id}'] mlv-grid-cell:nth-child(${this.ariaColIndex}) {
-        --justify-content: ${this.columnAlign}
-      }
-    `
-    );
+      );
+    }
   }
 }

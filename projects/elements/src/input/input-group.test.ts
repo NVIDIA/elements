@@ -10,16 +10,16 @@ describe(InputGroup.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-input-group>
-        <mlv-input>
+      <nve-input-group>
+        <nve-input>
           <label>label</label>
           <input type="text" />
-        </mlv-input>
-        <mlv-input>
+        </nve-input>
+        <nve-input>
           <label>label</label>
           <input type="text" />
-        </mlv-input>
-      </mlv-input-group>
+        </nve-input>
+      </nve-input-group>
     `);
     element = fixture.querySelector(InputGroup.metadata.tag);
     await elementIsStable(element);

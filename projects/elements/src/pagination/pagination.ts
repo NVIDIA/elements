@@ -80,7 +80,7 @@ export class Pagination extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-pagination',
+    tag: 'nve-pagination',
     version: '0.0.0'
   };
 
@@ -123,47 +123,47 @@ export class Pagination extends LitElement {
   }
 
   get #previousButton() {
-    return html`<mlv-icon-button
+    return html`<nve-icon-button
       @click=${() => this.#setValue(this.value - 1)}
       .disabled=${this.disabled || this.#currentPage <= this.step}
       .ariaLabel=${this.i18n.previous}
       container="flat"
       icon-name="chevron"
       direction="left"
-    ></mlv-icon-button>`;
+    ></nve-icon-button>`;
   }
 
   get #nextButton() {
-    return html`<mlv-icon-button
+    return html`<nve-icon-button
       @click=${() => this.#setValue(this.value + 1)}
       .disabled=${this.disabled || this.#currentPage >= this.items}
       .ariaLabel=${this.i18n.next}
       container="flat"
       icon-name="chevron"
       direction="right"
-    ></mlv-icon-button>`;
+    ></nve-icon-button>`;
   }
 
   get #startButton() {
-    return html`<mlv-icon-button
+    return html`<nve-icon-button
       @click=${() => this.#setValue(1)}
       .disabled=${this.disabled || this.#currentPage <= this.step}
       .ariaLabel=${this.i18n.start}
       container="flat"
       icon-name="arrow-stop"
       direction="left"
-    ></mlv-icon-button>`;
+    ></nve-icon-button>`;
   }
 
   get #endButton() {
-    return html`<mlv-icon-button
+    return html`<nve-icon-button
       @click=${() => this.#setValue(this.items / this.step)}
       .disabled=${this.disabled || (this.value - 1) * this.step + this.step >= this.items}
       .ariaLabel=${this.i18n.end}
       container="flat"
       icon-name="arrow-stop"
       direction="right"
-    ></mlv-icon-button>`;
+    ></nve-icon-button>`;
   }
 
   #resizeObserver: ResizeObserver;
@@ -172,7 +172,7 @@ export class Pagination extends LitElement {
     return this.disableStep
       ? html`<label>${this.#selectLabel}&nbsp;</label>`
       : html`
-          <mlv-select .container=${this.container}>
+          <nve-select .container=${this.container}>
             <select
               .ariaLabel=${this.i18n.currentPage}
               @change=${e => this.#setStep(parseInt(e.target.value, 10))}
@@ -185,7 +185,7 @@ export class Pagination extends LitElement {
               <option ?selected=${this.step === 100} value="100">100</option>
             </select>
             <div class="select-label">${this.#selectLabel}</div>
-          </mlv-select>
+          </nve-select>
         `;
   }
 

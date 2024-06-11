@@ -10,9 +10,9 @@ describe(JSONViewer.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-json-viewer>
+      <nve-json-viewer>
         { "list": [1, 2, 3], "object": { "a": 1, "b": 2, "c": { "value": 3 } } }
-      </mlv-json-viewer>
+      </nve-json-viewer>
     `);
     element = fixture.querySelector(JSONViewer.metadata.tag);
     await elementIsStable(element);

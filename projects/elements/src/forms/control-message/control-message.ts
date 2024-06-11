@@ -47,7 +47,7 @@ export class ControlMessage extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-control-message',
+    tag: 'nve-control-message',
     version: '0.0.0'
   };
 
@@ -68,9 +68,9 @@ export class ControlMessage extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <mlv-alert .status=${this.alertStatus}>
+        <nve-alert .status=${this.alertStatus}>
           <slot></slot>
-        </mlv-alert>
+        </nve-alert>
       </div>
     `;
   }

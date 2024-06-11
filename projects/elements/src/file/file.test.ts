@@ -10,10 +10,10 @@ describe(File.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-file>
+      <nve-file>
         <label>label</label>
         <input type="file" />
-      </mlv-file>
+      </nve-file>
     `);
     element = fixture.querySelector(File.metadata.tag);
     await elementIsStable(element);

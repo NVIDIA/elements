@@ -13,7 +13,7 @@ export class RadioGroup extends ControlGroup {
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-radio-group',
+    tag: 'nve-radio-group',
     version: '0.0.0'
   };
 }

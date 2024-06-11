@@ -11,10 +11,10 @@ describe(Radio.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-radio>
+      <nve-radio>
         <label>label</label>
         <input type="radio" />
-      </mlv-radio>
+      </nve-radio>
     `);
     element = fixture.querySelector(Radio.metadata.tag);
     await elementIsStable(element);

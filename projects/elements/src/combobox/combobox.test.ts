@@ -17,7 +17,7 @@ describe(Combobox.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-combobox>
+      <nve-combobox>
         <label>combobox</label>
         <input type="search" />
         <datalist>
@@ -25,8 +25,8 @@ describe(Combobox.metadata.tag, () => {
           <option value="Option 2"></option>
           <option value="Option 3"></option>
         </datalist>
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-combobox>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
     `);
     element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');
@@ -222,7 +222,7 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-combobox>
+      <nve-combobox>
         <label>combobox</label>
         <input type="search" />
         <select>
@@ -230,8 +230,8 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
           <option value="option 2"></option>
           <option value="option 3"></option>
         </select>
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-combobox>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
     `);
     element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');
@@ -338,7 +338,7 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-combobox>
+      <nve-combobox>
         <label>combobox</label>
         <input type="search" />
         <select multiple>
@@ -346,8 +346,8 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
           <option selected value="option 2"></option>
           <option value="option 3"></option>
         </select>
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-combobox>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
     `);
     element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');
@@ -493,7 +493,7 @@ class ComboboxTestElement extends LitElement {
   /* eslint no-unused-vars: 0 */
   render() {
     return html`
-      <mlv-combobox>
+      <nve-combobox>
         <label>combobox</label>
         <input type="search" />
         <datalist>
@@ -501,8 +501,8 @@ class ComboboxTestElement extends LitElement {
           <option value="Option 2"></option>
           <option value="Option 3"></option>
         </datalist>
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-combobox>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
     `;
   }
 }
@@ -550,7 +550,7 @@ describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-combobox>
+      <nve-combobox>
         <label>combobox</label>
         <input type="search" />
         <select>
@@ -558,8 +558,8 @@ describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
           <option value="2">option 2</option>
           <option value="3">option 3</option>
         </select>
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-combobox>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
     `);
     element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');

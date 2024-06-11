@@ -42,7 +42,7 @@ export class Breadcrumb extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-breadcrumb',
+    tag: 'nve-breadcrumb',
     version: '0.0.0'
   };
 
@@ -61,7 +61,7 @@ export class Breadcrumb extends LitElement {
         (el, idx) => html`
         <li>
           <slot name=${el.slot} @slotchange=${this.#removeItem}></slot>
-          ${idx < this.breadcrumbItems.length - 1 ? html`<mlv-icon separator aria-hidden="true" name="chevron" direction="right" size="sm"></mlv-icon>` : nothing}
+          ${idx < this.breadcrumbItems.length - 1 ? html`<nve-icon separator aria-hidden="true" name="chevron" direction="right" size="sm"></nve-icon>` : nothing}
         </li>
       `
       )}
@@ -85,8 +85,12 @@ export class Breadcrumb extends LitElement {
     if (e.target && e.target.assignedElements().length) {
       this.#resetItems();
       const items = this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements();
-      items.filter(i => i.matches('mlv-button, mlv-icon-button, span, a')).forEach(i => (i.slot = generateId()));
-      items.filter(i => i.matches('mlv-button, mlv-icon-button')).forEach((i: Button) => (i.container = 'inline'));
+      items
+        .filter(i => i.matches('nve-button, nve-icon-button, mlv-button, mlv-icon-button, span, a'))
+        .forEach(i => (i.slot = generateId()));
+      items
+        .filter(i => i.matches('nve-button, nve-icon-button, mlv-button, mlv-icon-button'))
+        .forEach((i: Button) => (i.container = 'inline'));
       this.breadcrumbItems = items.length ? items : this.breadcrumbItems;
     }
   }

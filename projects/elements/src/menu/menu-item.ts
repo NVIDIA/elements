@@ -25,7 +25,7 @@ export class MenuItem extends BaseButton {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-menu-item',
+    tag: 'nve-menu-item',
     version: '0.0.0'
   };
 

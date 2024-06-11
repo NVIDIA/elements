@@ -12,11 +12,11 @@ describe(Steps.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-steps>
-        <mlv-steps-item>Step 1</mlv-steps-item>
-        <mlv-steps-item selected>Step 2</mlv-steps-item>
-        <mlv-steps-item disabled>Step 3</mlv-steps-item>
-      </mlv-steps>
+      <nve-steps>
+        <nve-steps-item>Step 1</nve-steps-item>
+        <nve-steps-item selected>Step 2</nve-steps-item>
+        <nve-steps-item disabled>Step 3</nve-steps-item>
+      </nve-steps>
     `);
     steps = fixture.querySelector(Steps.metadata.tag);
     item = fixture.querySelector(StepsItem.metadata.tag);

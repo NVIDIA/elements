@@ -12,20 +12,20 @@ describe(GridHeader.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-grid>
-        <mlv-grid-header>
-          <mlv-grid-column>column 1</mlv-grid-column>
-          <mlv-grid-column>column 2</mlv-grid-column>
-          <mlv-grid-column>column 3</mlv-grid-column>
-          <mlv-grid-column>column 4</mlv-grid-column>
-        </mlv-grid-header>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 1-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-4</mlv-grid-cell>
-        </mlv-grid-row>
-      </mlv-grid>
+      <nve-grid>
+        <nve-grid-header>
+          <nve-grid-column>column 1</nve-grid-column>
+          <nve-grid-column>column 2</nve-grid-column>
+          <nve-grid-column>column 3</nve-grid-column>
+          <nve-grid-column>column 4</nve-grid-column>
+        </nve-grid-header>
+        <nve-grid-row>
+          <nve-grid-cell>cell 1-1</nve-grid-cell>
+          <nve-grid-cell>cell 1-2</nve-grid-cell>
+          <nve-grid-cell>cell 1-3</nve-grid-cell>
+          <nve-grid-cell>cell 1-4</nve-grid-cell>
+        </nve-grid-row>
+      </nve-grid>
     `);
     element = fixture.querySelector(GridHeader.metadata.tag);
     grid = fixture.querySelector(Grid.metadata.tag);
@@ -102,21 +102,21 @@ describe(`${GridHeader.metadata.tag}: validation check`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-grid>
-        <mlv-grid-header>
-          <mlv-grid-column>column 1</mlv-grid-column>
-          <mlv-grid-column>column 2</mlv-grid-column>
-          <mlv-grid-column>column 3</mlv-grid-column>
-          <mlv-grid-column>column 4</mlv-grid-column>
-          <mlv-grid-column>column error</mlv-grid-column>
-        </mlv-grid-header>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 1-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-4</mlv-grid-cell>
-        </mlv-grid-row>
-      </mlv-grid>
+      <nve-grid>
+        <nve-grid-header>
+          <nve-grid-column>column 1</nve-grid-column>
+          <nve-grid-column>column 2</nve-grid-column>
+          <nve-grid-column>column 3</nve-grid-column>
+          <nve-grid-column>column 4</nve-grid-column>
+          <nve-grid-column>column error</nve-grid-column>
+        </nve-grid-header>
+        <nve-grid-row>
+          <nve-grid-cell>cell 1-1</nve-grid-cell>
+          <nve-grid-cell>cell 1-2</nve-grid-cell>
+          <nve-grid-cell>cell 1-3</nve-grid-cell>
+          <nve-grid-cell>cell 1-4</nve-grid-cell>
+        </nve-grid-row>
+      </nve-grid>
     `);
     element = fixture.querySelector(GridHeader.metadata.tag);
     await elementIsStable(element);

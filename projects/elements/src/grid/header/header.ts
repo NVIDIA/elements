@@ -23,7 +23,7 @@ export class GridHeader extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-grid-header',
+    tag: 'nve-grid-header',
     version: '0.0.0',
     children: [GridColumn.metadata.tag]
   };
@@ -32,7 +32,11 @@ export class GridHeader extends LitElement {
   declare _internals: ElementInternals;
 
   /** @private */
-  @queryAssignedElements({ selector: GridColumn.metadata.tag, flatten: true }) columns!: GridColumn[];
+  @queryAssignedElements({
+    selector: `${GridColumn.metadata.tag}, ${GridColumn.metadata.tag.replace('nve-', 'mlv-')}`,
+    flatten: true
+  })
+  columns!: GridColumn[];
 
   get #grid() {
     return this.parentElement as Grid;

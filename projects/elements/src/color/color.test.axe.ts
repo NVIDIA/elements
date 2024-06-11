@@ -11,10 +11,10 @@ describe(Color.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-color>
+      <nve-color>
         <label>label</label>
         <input type="color" />
-      </mlv-color>
+      </nve-color>
     `);
     element = fixture.querySelector(Color.metadata.tag);
     await elementIsStable(element);

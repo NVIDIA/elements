@@ -56,18 +56,18 @@ export class ButtonGroup extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-button-group',
+    tag: 'nve-button-group',
     version: '0.0.0'
   };
 
   /** @private */
   declare _internals: ElementInternals;
 
-  @queryAssignedElements({ selector: 'mlv-divider' }) private dividers!: Divider[];
+  @queryAssignedElements({ selector: 'nve-divider, mlv-divider' }) private dividers!: Divider[];
 
-  @queryAssignedElements({ selector: 'mlv-icon-button' }) private iconButtons!: IconButton[];
+  @queryAssignedElements({ selector: 'nve-icon-button, mlv-icon-button' }) private iconButtons!: IconButton[];
 
-  @queryAssignedElements({ selector: 'mlv-button' }) private buttons!: Button[];
+  @queryAssignedElements({ selector: 'nve-button, mlv-button' }) private buttons!: Button[];
 
   get #buttons() {
     return [...this.iconButtons, ...this.buttons];

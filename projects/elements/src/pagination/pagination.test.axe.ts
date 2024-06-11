@@ -12,7 +12,7 @@ describe(Pagination.metadata.tag, () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <form>
-        <mlv-pagination name="page" .value=${1} .step=${10} .items=${100}></mlv-pagination>
+        <nve-pagination name="page" .value=${1} .step=${10} .items=${100}></nve-pagination>
       </form>
     `);
     element = fixture.querySelector(Pagination.metadata.tag);

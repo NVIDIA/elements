@@ -24,7 +24,7 @@ export class JSONViewer extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-json-viewer',
+    tag: 'nve-json-viewer',
     version: '0.0.0'
   };
 
@@ -48,7 +48,7 @@ export class JSONViewer extends LitElement {
         .filter(v => v[1] !== null)
         .map(
           ([prop, value]) =>
-            html`<mlv-json-node .expanded=${this.expanded} .expandedAll=${this.expanded} .prop=${prop} .value=${value}></mlv-json-node>`
+            html`<nve-json-node .expanded=${this.expanded} .expandedAll=${this.expanded} .prop=${prop} .value=${value}></nve-json-node>`
         )}
     </div>
     `;

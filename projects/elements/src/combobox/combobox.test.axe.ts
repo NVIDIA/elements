@@ -11,7 +11,7 @@ describe(Combobox.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-combobox>
+      <nve-combobox>
         <label>combobox</label>
         <input type="search" />
         <datalist>
@@ -19,8 +19,8 @@ describe(Combobox.metadata.tag, () => {
           <option value="Option 2"></option>
           <option value="Option 3"></option>
         </datalist>
-        <mlv-control-message>message</mlv-control-message>
-      </mlv-combobox>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
     `);
     element = fixture.querySelector(Combobox.metadata.tag);
     await elementIsStable(element);

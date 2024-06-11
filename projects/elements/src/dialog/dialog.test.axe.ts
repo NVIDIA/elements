@@ -11,15 +11,15 @@ describe(Dialog.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-dialog closable modal>
-        <mlv-dialog-header>
+      <nve-dialog closable modal>
+        <nve-dialog-header>
           <h3>header</h3>
-        </mlv-dialog-header>
+        </nve-dialog-header>
         <p>content</p>
-        <mlv-dialog-footer>
+        <nve-dialog-footer>
           <p>footer</p>
-        </mlv-dialog-footer>
-      </mlv-dialog>
+        </nve-dialog-footer>
+      </nve-dialog>
     `);
     element = fixture.querySelector(Dialog.metadata.tag);
     await elementIsStable(element);

@@ -14,12 +14,12 @@ describe(AppHeader.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-app-header>
-        <mlv-logo size="lg" aria-label="NV Logo">NV</mlv-logo>
+      <nve-app-header>
+        <nve-logo size="lg" aria-label="NV Logo">NV</nve-logo>
         <h2 slot="title">header</h2>
-        <mlv-button slot="nav-items">item</mlv-button>
-        <mlv-icon-button icon-name="person" slot="nav-actions" aria-label="profile"></mlv-icon-button>
-      </mlv-app-header>
+        <nve-button slot="nav-items">item</nve-button>
+        <nve-icon-button icon-name="person" slot="nav-actions" aria-label="profile"></nve-icon-button>
+      </nve-app-header>
     `);
     element = fixture.querySelector(AppHeader.metadata.tag);
     await elementIsStable(element);

@@ -11,10 +11,10 @@ describe(Search.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-search>
+      <nve-search>
         <label>label</label>
         <input type="search" />
-      </mlv-search>
+      </nve-search>
     `);
     element = fixture.querySelector(Search.metadata.tag);
     await elementIsStable(element);

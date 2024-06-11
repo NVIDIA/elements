@@ -11,30 +11,30 @@ describe(AlertGroup.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-alert-group>
-        <mlv-alert>default</mlv-alert>
-        <mlv-alert>default</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group>
+        <nve-alert>default</nve-alert>
+        <nve-alert>default</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="accent">
-        <mlv-alert>default</mlv-alert>
-        <mlv-alert>default</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="accent">
+        <nve-alert>default</nve-alert>
+        <nve-alert>default</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="warning">
-        <mlv-alert>warning</mlv-alert>
-        <mlv-alert>warning</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="warning">
+        <nve-alert>warning</nve-alert>
+        <nve-alert>warning</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="success">
-        <mlv-alert>success</mlv-alert>
-        <mlv-alert>success</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="success">
+        <nve-alert>success</nve-alert>
+        <nve-alert>success</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="danger">
-        <mlv-alert>danger</mlv-alert>
-        <mlv-alert>danger</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="danger">
+        <nve-alert>danger</nve-alert>
+        <nve-alert>danger</nve-alert>
+      </nve-alert-group>
     `);
     alertGroup = fixture.querySelector(AlertGroup.metadata.tag);
     await elementIsStable(alertGroup);

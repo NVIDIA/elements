@@ -10,26 +10,26 @@ describe(Grid.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-grid>
-        <mlv-grid-header>
-          <mlv-grid-column>column 1</mlv-grid-column>
-          <mlv-grid-column>column 2</mlv-grid-column>
-          <mlv-grid-column>column 3</mlv-grid-column>
-          <mlv-grid-column>column 4</mlv-grid-column>
-        </mlv-grid-header>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 1-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-4</mlv-grid-cell>
-        </mlv-grid-row>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 2-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 2-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 2-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 2-4</mlv-grid-cell>
-        </mlv-grid-row>
-      </mlv-grid>
+      <nve-grid>
+        <nve-grid-header>
+          <nve-grid-column>column 1</nve-grid-column>
+          <nve-grid-column>column 2</nve-grid-column>
+          <nve-grid-column>column 3</nve-grid-column>
+          <nve-grid-column>column 4</nve-grid-column>
+        </nve-grid-header>
+        <nve-grid-row>
+          <nve-grid-cell>cell 1-1</nve-grid-cell>
+          <nve-grid-cell>cell 1-2</nve-grid-cell>
+          <nve-grid-cell>cell 1-3</nve-grid-cell>
+          <nve-grid-cell>cell 1-4</nve-grid-cell>
+        </nve-grid-row>
+        <nve-grid-row>
+          <nve-grid-cell>cell 2-1</nve-grid-cell>
+          <nve-grid-cell>cell 2-2</nve-grid-cell>
+          <nve-grid-cell>cell 2-3</nve-grid-cell>
+          <nve-grid-cell>cell 2-4</nve-grid-cell>
+        </nve-grid-row>
+      </nve-grid>
     `);
     element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);
@@ -45,10 +45,6 @@ describe(Grid.metadata.tag, () => {
 
   it('should set to have the grid role of grid', () => {
     expect(element._internals.role).toBe('grid');
-  });
-
-  it('should set internal rowgroup', () => {
-    expect(element.shadowRoot.querySelector('[role=rowgroup]')).toBeTruthy();
   });
 
   it('should generate an ID if no default is provided', () => {
@@ -72,26 +68,26 @@ describe(`${Grid.metadata.tag}: id check`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-grid id="test">
-        <mlv-grid-header>
-          <mlv-grid-column>column 1</mlv-grid-column>
-          <mlv-grid-column>column 2</mlv-grid-column>
-          <mlv-grid-column>column 3</mlv-grid-column>
-          <mlv-grid-column>column 4</mlv-grid-column>
-        </mlv-grid-header>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 1-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-4</mlv-grid-cell>
-        </mlv-grid-row>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 2-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 2-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 2-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 2-4</mlv-grid-cell>
-        </mlv-grid-row>
-      </mlv-grid>
+      <nve-grid id="test">
+        <nve-grid-header>
+          <nve-grid-column>column 1</nve-grid-column>
+          <nve-grid-column>column 2</nve-grid-column>
+          <nve-grid-column>column 3</nve-grid-column>
+          <nve-grid-column>column 4</nve-grid-column>
+        </nve-grid-header>
+        <nve-grid-row>
+          <nve-grid-cell>cell 1-1</nve-grid-cell>
+          <nve-grid-cell>cell 1-2</nve-grid-cell>
+          <nve-grid-cell>cell 1-3</nve-grid-cell>
+          <nve-grid-cell>cell 1-4</nve-grid-cell>
+        </nve-grid-row>
+        <nve-grid-row>
+          <nve-grid-cell>cell 2-1</nve-grid-cell>
+          <nve-grid-cell>cell 2-2</nve-grid-cell>
+          <nve-grid-cell>cell 2-3</nve-grid-cell>
+          <nve-grid-cell>cell 2-4</nve-grid-cell>
+        </nve-grid-row>
+      </nve-grid>
     `);
     element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);
@@ -112,38 +108,38 @@ describe(`${Grid.metadata.tag}: scroll`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-grid style="height: 100px">
-        <mlv-grid-header>
-          <mlv-grid-column>column 1</mlv-grid-column>
-          <mlv-grid-column>column 2</mlv-grid-column>
-          <mlv-grid-column>column 3</mlv-grid-column>
-          <mlv-grid-column>column 4</mlv-grid-column>
-        </mlv-grid-header>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 1-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-4</mlv-grid-cell>
-        </mlv-grid-row>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 2-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 2-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 2-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 2-4</mlv-grid-cell>
-        </mlv-grid-row>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 3-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 3-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 3-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 3-4</mlv-grid-cell>
-        </mlv-grid-row>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 4-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 4-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 4-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 4-4</mlv-grid-cell>
-        </mlv-grid-row>
-      </mlv-grid>
+      <nve-grid style="height: 100px">
+        <nve-grid-header>
+          <nve-grid-column>column 1</nve-grid-column>
+          <nve-grid-column>column 2</nve-grid-column>
+          <nve-grid-column>column 3</nve-grid-column>
+          <nve-grid-column>column 4</nve-grid-column>
+        </nve-grid-header>
+        <nve-grid-row>
+          <nve-grid-cell>cell 1-1</nve-grid-cell>
+          <nve-grid-cell>cell 1-2</nve-grid-cell>
+          <nve-grid-cell>cell 1-3</nve-grid-cell>
+          <nve-grid-cell>cell 1-4</nve-grid-cell>
+        </nve-grid-row>
+        <nve-grid-row>
+          <nve-grid-cell>cell 2-1</nve-grid-cell>
+          <nve-grid-cell>cell 2-2</nve-grid-cell>
+          <nve-grid-cell>cell 2-3</nve-grid-cell>
+          <nve-grid-cell>cell 2-4</nve-grid-cell>
+        </nve-grid-row>
+        <nve-grid-row>
+          <nve-grid-cell>cell 3-1</nve-grid-cell>
+          <nve-grid-cell>cell 3-2</nve-grid-cell>
+          <nve-grid-cell>cell 3-3</nve-grid-cell>
+          <nve-grid-cell>cell 3-4</nve-grid-cell>
+        </nve-grid-row>
+        <nve-grid-row>
+          <nve-grid-cell>cell 4-1</nve-grid-cell>
+          <nve-grid-cell>cell 4-2</nve-grid-cell>
+          <nve-grid-cell>cell 4-3</nve-grid-cell>
+          <nve-grid-cell>cell 4-4</nve-grid-cell>
+        </nve-grid-row>
+      </nve-grid>
     `);
     element = fixture.querySelector(Grid.metadata.tag);
     await elementIsStable(element);

@@ -15,11 +15,11 @@ describe(ButtonGroup.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-button-group>
-        <mlv-icon-button icon-name="copy"></mlv-icon-button>
-        <mlv-icon-button icon-name="add-comment"></mlv-icon-button>
-        <mlv-icon-button icon-name="download"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group>
+        <nve-icon-button icon-name="copy"></nve-icon-button>
+        <nve-icon-button icon-name="add-comment"></nve-icon-button>
+        <nve-icon-button icon-name="download"></nve-icon-button>
+      </nve-button-group>
     `);
     element = fixture.querySelector(ButtonGroup.metadata.tag);
     buttons = Array.from(fixture.querySelectorAll(IconButton.metadata.tag));

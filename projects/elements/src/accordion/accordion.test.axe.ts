@@ -11,19 +11,19 @@ describe(AccordionGroup.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <mlv-accordion-group>
-      <mlv-accordion behavior-expand>
-        <mlv-accordion-header>header</mlv-accordion-header>
-        <mlv-accordion-content>content</mlv-accordion-content>
-      </mlv-accordion>
-      <mlv-accordion behavior-expand>
-        <mlv-accordion-header>
+    <nve-accordion-group>
+      <nve-accordion behavior-expand>
+        <nve-accordion-header>header</nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
+      <nve-accordion behavior-expand>
+        <nve-accordion-header>
           <div slot="title">title</div>
           <div slot="subtitle">subtitle</div>
-        </mlv-accordion-header>
-        <mlv-accordion-content>content</mlv-accordion-content>
-      </mlv-accordion>
-    </mlv-accordion-group>
+        </nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
+    </nve-accordion-group>
     `);
     element = fixture.querySelector(AccordionGroup.metadata.tag);
 

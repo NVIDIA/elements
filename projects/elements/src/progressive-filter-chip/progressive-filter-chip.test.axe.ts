@@ -12,14 +12,14 @@ describe(ProgressiveFilterChip.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-progressive-filter-chip>
+      <nve-progressive-filter-chip>
         <select aria-label="select">
           <option value="1">option 1</option>
           <option value="2">option 2</option>
         </select>
         <input type="text" value="text value" aria-label="text input" />
         <input type="date" value="2021-01-01" aria-label="date input" />
-      </mlv-progressive-filter-chip>
+      </nve-progressive-filter-chip>
     `);
     element = fixture.querySelector(ProgressiveFilterChip.metadata.tag);
     await elementIsStable(element);

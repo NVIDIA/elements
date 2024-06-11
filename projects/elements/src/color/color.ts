@@ -19,7 +19,7 @@ export class Color extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-color',
+    tag: 'nve-color',
     version: '0.0.0'
   };
 
@@ -28,7 +28,7 @@ export class Color extends Control {
   };
 
   protected get suffixContent() {
-    return html`<mlv-icon-button .ariaLabel=${this.i18n.expand} icon-name="dropper" container="flat" @click=${() => this.#select()}></mlv-icon-button>`;
+    return html`<nve-icon-button .ariaLabel=${this.i18n.expand} icon-name="dropper" container="flat" @click=${() => this.#select()}></nve-icon-button>`;
   }
 
   connectedCallback() {

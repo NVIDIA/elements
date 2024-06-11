@@ -21,7 +21,7 @@
 
 [nve-control],
 ::slotted(nve-button),
-::slotted(mlve-button) {
+::slotted(mlv-button) {
   --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: 0;
   --width: fit-content;

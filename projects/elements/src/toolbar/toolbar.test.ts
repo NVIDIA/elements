@@ -20,11 +20,11 @@ describe(Toolbar.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-toolbar>
+      <nve-toolbar>
         <div slot="prefix">prefix</div>
         <div>content</div>
         <div slot="suffix">suffix</div>
-      </mlv-toolbar>
+      </nve-toolbar>
     `);
     element = fixture.querySelector(Toolbar.metadata.tag);
     await elementIsStable(element);
@@ -91,11 +91,11 @@ describe(`${Toolbar.metadata.tag}: scrollbar state`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-toolbar style="width: 200px">
+      <nve-toolbar style="width: 200px">
         <div slot="prefix">prefix</div>
         <div>content content content content content content</div>
         <div slot="suffix">suffix</div>
-      </mlv-toolbar>
+      </nve-toolbar>
     `);
     element = fixture.querySelector(Toolbar.metadata.tag);
     await elementIsStable(element);
@@ -123,21 +123,21 @@ describe(`${Toolbar.metadata.tag}: orientation`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-toolbar orientation="vertical">
-        <mlv-button-group>
-          <mlv-icon-button pressed icon-name="bars-3-bottom-left"></mlv-icon-button>
-          <mlv-icon-button icon-name="bars-3-bottom-right"></mlv-icon-button>
-          <mlv-icon-button icon-name="bars-4"></mlv-icon-button>
-        </mlv-button-group>
+      <nve-toolbar orientation="vertical">
+        <nve-button-group>
+          <nve-icon-button pressed icon-name="bars-3-bottom-left"></nve-icon-button>
+          <nve-icon-button icon-name="bars-3-bottom-right"></nve-icon-button>
+          <nve-icon-button icon-name="bars-4"></nve-icon-button>
+        </nve-button-group>
 
-        <mlv-divider></mlv-divider>
+        <nve-divider></nve-divider>
 
-        <mlv-button-group>
-          <mlv-icon-button icon-name="bold" size="sm"></mlv-icon-button>
-          <mlv-icon-button icon-name="italic" size="sm"></mlv-icon-button>
-          <mlv-icon-button icon-name="strikethrough"></mlv-icon-button>
-        </mlv-button-group>
-      </mlv-toolbar>
+        <nve-button-group>
+          <nve-icon-button icon-name="bold" size="sm"></nve-icon-button>
+          <nve-icon-button icon-name="italic" size="sm"></nve-icon-button>
+          <nve-icon-button icon-name="strikethrough"></nve-icon-button>
+        </nve-button-group>
+      </nve-toolbar>
     `);
     element = fixture.querySelector(Toolbar.metadata.tag);
     await elementIsStable(element);
@@ -165,24 +165,24 @@ describe(`${Toolbar.metadata.tag}: container`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-toolbar container="flat">
-        <mlv-select>
+      <nve-toolbar container="flat">
+        <nve-select>
           <select aria-label="element type">
             <option value="1">Heading 1</option>
             <option value="2">Heading 2</option>
             <option value="p">Paragraph</option>
           </select>
-        </mlv-select>
+        </nve-select>
 
-        <mlv-button-group>
-          <mlv-icon-button pressed icon-name="bars-3-bottom-left"></mlv-icon-button>
-          <mlv-icon-button icon-name="bars-3-bottom-right"></mlv-icon-button>
-          <mlv-icon-button icon-name="bars-4"></mlv-icon-button>
-        </mlv-button-group>
+        <nve-button-group>
+          <nve-icon-button pressed icon-name="bars-3-bottom-left"></nve-icon-button>
+          <nve-icon-button icon-name="bars-3-bottom-right"></nve-icon-button>
+          <nve-icon-button icon-name="bars-4"></nve-icon-button>
+        </nve-button-group>
 
-        <mlv-button><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-        <mlv-icon-button icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
-      </mlv-toolbar>
+        <nve-button><nve-icon name="delete"></nve-icon> delete</nve-button>
+        <nve-icon-button icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      </nve-toolbar>
     `);
     element = fixture.querySelector(Toolbar.metadata.tag);
     await elementIsStable(element);

@@ -18,7 +18,7 @@ export class Radio extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-radio',
+    tag: 'nve-radio',
     version: '0.0.0'
   };
 }

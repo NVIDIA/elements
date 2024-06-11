@@ -12,7 +12,7 @@ describe(JSONNode.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-json-node></mlv-json-node>
+      <nve-json-node></nve-json-node>
     `);
     element = fixture.querySelector(JSONNode.metadata.tag);
     await elementIsStable(element);

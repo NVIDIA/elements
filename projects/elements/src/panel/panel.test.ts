@@ -15,15 +15,15 @@ describe(Panel.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-panel>
-        <mlv-panel-footer></mlv-panel-footer>
+      <nve-panel>
+        <nve-panel-footer></nve-panel-footer>
         <p>content</p>
-        <mlv-panel-header>
-          <mlv-icon-button container="flat" slot="action-icon" icon-name="more-actions"></mlv-icon-button>
+        <nve-panel-header>
+          <nve-icon-button container="flat" slot="action-icon" icon-name="more-actions"></nve-icon-button>
           <h3 slot="subtitle">subtitle</h3>
           <h2 slot="title">title</h2>
-        </mlv-panel-header>
-      </mlv-panel>
+        </nve-panel-header>
+      </nve-panel>
     `);
     panel = fixture.querySelector(Panel.metadata.tag);
     panelHeader = fixture.querySelector(PanelHeader.metadata.tag);

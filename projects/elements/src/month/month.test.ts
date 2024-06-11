@@ -11,10 +11,10 @@ describe(Month.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-month>
+      <nve-month>
         <label>label</label>
         <input type="month" />
-      </mlv-month>
+      </nve-month>
     `);
     element = fixture.querySelector(Month.metadata.tag);
     await elementIsStable(element);

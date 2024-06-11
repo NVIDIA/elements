@@ -14,13 +14,13 @@ describe(IconButton.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-icon-button></mlv-icon-button>
-      <mlv-icon-button>
+      <nve-icon-button></nve-icon-button>
+      <nve-icon-button>
         <a href="#" aria-label="link to page"></a>
-      </mlv-icon-button>
-      <mlv-icon-button>
+      </nve-icon-button>
+      <nve-icon-button>
         <span>🎉</span>
-      </mlv-icon-button>
+      </nve-icon-button>
     `);
     element = fixture.querySelectorAll<IconButton>(IconButton.metadata.tag)[0];
     elementWithAnchor = fixture.querySelectorAll<IconButton>(IconButton.metadata.tag)[1];
@@ -51,7 +51,7 @@ describe(IconButton.metadata.tag, () => {
     expect(element.interaction).eq(undefined);
   });
 
-  it('should update "name" on child mlv-icon when "icon" is updated on parent', async () => {
+  it('should update "name" on child nve-icon when "icon" is updated on parent', async () => {
     expect(element.iconName).eq(undefined);
     element.iconName = 'cancel';
     await elementIsStable(element);

@@ -10,10 +10,10 @@ describe(Textarea.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-textarea>
+      <nve-textarea>
         <label>label</label>
         <textarea></textarea>
-      </mlv-textarea>
+      </nve-textarea>
     `);
     element = fixture.querySelector(Textarea.metadata.tag);
     await elementIsStable(element);

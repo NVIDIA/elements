@@ -30,7 +30,7 @@ export class Menu extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-menu',
+    tag: 'nve-menu',
     version: '0.0.0'
   };
 

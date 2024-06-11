@@ -10,9 +10,9 @@ describe(DropdownFooter.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-dropdown>
-        <mlv-dropdown-footer>hello</mlv-dropdown-footer>
-      </mlv-dropdown>
+      <nve-dropdown>
+        <nve-dropdown-footer>hello</nve-dropdown-footer>
+      </nve-dropdown>
     `);
     element = fixture.querySelector(DropdownFooter.metadata.tag);
     await elementIsStable(element);

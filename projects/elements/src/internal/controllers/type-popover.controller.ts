@@ -100,7 +100,7 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     this.#popoverUpdateDisconnect = popoverRenderUpdate(this.#config, async () => await this.#calculatePosition());
     this.#hiddenUpdateObserver = getAttributeChanges(this.host, 'hidden', async () => await this.#render());
     this.#setupTriggerInteractions();
-    this.host.setAttribute('mlv-popover', '');
+    this.host.setAttribute('nve-popover', '');
   }
 
   async hostUpdated() {

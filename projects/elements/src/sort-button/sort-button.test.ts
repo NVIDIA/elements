@@ -12,7 +12,7 @@ describe(SortButton.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-sort-button></mlv-sort-button>
+      <nve-sort-button></nve-sort-button>
     `);
     element = fixture.querySelector(SortButton.metadata.tag);
     icon = element.shadowRoot.querySelector(Icon.metadata.tag);

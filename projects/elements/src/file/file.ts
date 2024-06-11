@@ -15,7 +15,7 @@ export class File extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-file',
+    tag: 'nve-file',
     version: '0.0.0'
   };
 

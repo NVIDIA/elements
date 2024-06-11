@@ -10,10 +10,10 @@ describe(Range.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-range>
+      <nve-range>
         <label>label</label>
         <input type="range" value="50" />
-      </mlv-range>
+      </nve-range>
     `);
     element = fixture.querySelector(Range.metadata.tag);
     await elementIsStable(element);

@@ -26,7 +26,7 @@ export class AppHeader extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-app-header',
+    tag: 'nve-app-header',
     version: '0.0.0'
   };
 
@@ -48,7 +48,7 @@ export class AppHeader extends LitElement {
     return html`
       <div internal-host>
         <div app-branding>
-          <slot @slotchange=${this.#sizeLogo}><mlv-logo size="sm" aria-label="NVIDIA"></mlv-logo></slot>
+          <slot @slotchange=${this.#sizeLogo}><nve-logo size="sm" aria-label="NVIDIA"></nve-logo></slot>
           <slot name="title">
             <h2>NVIDIA</h2>
           </slot>

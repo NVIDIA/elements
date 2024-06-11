@@ -11,10 +11,10 @@ describe(AlertGroup.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-alert-group>
-        <mlv-alert>alert</mlv-alert>
-        <mlv-alert>alert</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group>
+        <nve-alert>alert</nve-alert>
+        <nve-alert>alert</nve-alert>
+      </nve-alert-group>
     `);
     alerts = fixture.querySelectorAll(Alert.metadata.tag);
     alertGroup = fixture.querySelector(AlertGroup.metadata.tag);

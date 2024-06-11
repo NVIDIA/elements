@@ -41,7 +41,7 @@ export class Toolbar extends LitElement implements ContainerElement {
   static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
 
   static readonly metadata = {
-    tag: 'mlv-toolbar',
+    tag: 'nve-toolbar',
     version: '0.0.0'
   };
 
@@ -142,7 +142,9 @@ export class Toolbar extends LitElement implements ContainerElement {
 
   #updateContainers() {
     if (this.container !== 'flat' && this.container !== 'inset') {
-      const groups = this.#slottedElements.filter(e => e.matches('mlv-button-group')) as ButtonGroup[];
+      const groups = this.#slottedElements.filter(e =>
+        e.matches('nve-button-group, mlv-button-group')
+      ) as ButtonGroup[];
       groups.forEach(group => (group.container = 'flat'));
 
       const controls = this.#slottedElements.filter(e => e.matches('[nve-control], [mlv-control]')) as (Control & {
@@ -150,22 +152,20 @@ export class Toolbar extends LitElement implements ContainerElement {
       })[];
       controls.forEach(control => (control.container = 'flat'));
 
-      (this.#slottedElements.filter(e => e.matches('mlv-button')) as Button[]).forEach(
+      (this.#slottedElements.filter(e => e.matches('nve-button, mlv-button')) as Button[]).forEach(
         button => (button.container = 'inline')
       );
-      (this.#slottedElements.filter(e => e.matches('mlv-icon-button')) as IconButton[]).forEach(
+      (this.#slottedElements.filter(e => e.matches('nve-icon-button, mlv-icon-button')) as IconButton[]).forEach(
         button => (button.container = 'flat')
       );
     }
   }
 
   #updateOrientation() {
-    const dividers = this.#slottedElements.filter(e => e.tagName.toLowerCase().includes('mlv-divider')) as Divider[];
+    const dividers = this.#slottedElements.filter(e => e.matches('nve-divider, mlv-divider')) as Divider[];
     dividers.forEach(divider => (divider.orientation = this.orientation === 'horizontal' ? 'vertical' : 'horizontal'));
 
-    const groups = this.#slottedElements.filter(e =>
-      e.tagName.toLowerCase().includes('mlv-button-group')
-    ) as ButtonGroup[];
+    const groups = this.#slottedElements.filter(e => e.matches('nve-button-group, mlv-button-group')) as ButtonGroup[];
     groups.forEach(group => (group.orientation = this.orientation));
   }
 }

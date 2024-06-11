@@ -108,15 +108,15 @@ export class Notification extends LitElement {
 
   get #popoverContent() {
     return html`
-    <mlv-icon .name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information} part="status-icon"></mlv-icon>
-    ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" container="flat" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
+    <nve-icon .name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information} part="status-icon"></nve-icon>
+    ${this.closable ? html`<nve-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" container="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
     <slot></slot>`;
   }
 
   static styles = useStyles([popoverBaseStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-notification',
+    tag: 'nve-notification',
     version: '0.0.0'
   };
 

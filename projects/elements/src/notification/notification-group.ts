@@ -32,7 +32,7 @@ export class NotificationGroup extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-notification-group',
+    tag: 'nve-notification-group',
     version: '0.0.0'
   };
 

@@ -17,7 +17,7 @@ export class JSONNode extends LitElement {
   @property({ type: Boolean, attribute: 'expanded-all', reflect: true }) expandedAll: boolean;
 
   static readonly metadata = {
-    tag: 'mlv-json-node',
+    tag: 'nve-json-node',
     version: '0.0.0'
   };
 
@@ -41,16 +41,16 @@ export class JSONNode extends LitElement {
 
   get #expandButton() {
     return this.prop
-      ? html`<mlv-button @click=${() => (this.expanded = !this.expanded)} container="flat">${this.prop}: </mlv-button>`
-      : html`<mlv-icon-button @click=${() => (this.expanded = !this.expanded)} .direction=${this.expanded ? 'down' : 'right'} container="flat" size="sm" icon-name="caret"></mlv-icon-button>`;
+      ? html`<nve-button @click=${() => (this.expanded = !this.expanded)} container="flat">${this.prop}: </nve-button>`
+      : html`<nve-icon-button @click=${() => (this.expanded = !this.expanded)} .direction=${this.expanded ? 'down' : 'right'} container="flat" size="sm" icon-name="caret"></nve-icon-button>`;
   }
 
   get #arrayNode() {
-    return html`${this.value.filter(i => i !== null).map(value => html`<mlv-json-node .value=${value} .expandedAll=${this.expandedAll}></mlv-json-node>`)}`;
+    return html`${this.value.filter(i => i !== null).map(value => html`<nve-json-node .value=${value} .expandedAll=${this.expandedAll}></nve-json-node>`)}`;
   }
 
   get #objectNode() {
-    return html`${Object.entries(this.value).map(([k, v]) => html`<mlv-json-node .prop=${k} .value=${v} .expandedAll=${this.expandedAll}></mlv-json-node>`)}`;
+    return html`${Object.entries(this.value).map(([k, v]) => html`<nve-json-node .prop=${k} .value=${v} .expandedAll=${this.expandedAll}></nve-json-node>`)}`;
   }
 
   get #value() {

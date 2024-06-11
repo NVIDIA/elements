@@ -16,14 +16,14 @@ describe(ProgressiveFilterChip.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-progressive-filter-chip>
+      <nve-progressive-filter-chip>
         <select>
           <option value="1">option 1</option>
           <option value="2">option 2</option>
         </select>
         <input type="text" value="text value" />
         <input type="date" value="2021-01-01" />
-      </mlv-progressive-filter-chip>
+      </nve-progressive-filter-chip>
     `);
     element = fixture.querySelector(ProgressiveFilterChip.metadata.tag);
     await elementIsStable(element);
@@ -61,15 +61,15 @@ describe(ProgressiveFilterChip.metadata.tag, () => {
     expect(await event).toBeDefined();
   });
 
-  it('should render a mlv-select when a select is slotted', () => {
+  it('should render a nve-select when a select is slotted', () => {
     expect(element.shadowRoot.querySelector(Select.metadata.tag)).toBeTruthy();
   });
 
-  it('should render a mlv-input when a text input is slotted', () => {
+  it('should render a nve-input when a text input is slotted', () => {
     expect(element.shadowRoot.querySelector(Input.metadata.tag)).toBeTruthy();
   });
 
-  it('should render a mlv-date when a date input is slotted', () => {
+  it('should render a nve-date when a date input is slotted', () => {
     expect(element.shadowRoot.querySelector(Date.metadata.tag)).toBeTruthy();
   });
 

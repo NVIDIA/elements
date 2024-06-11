@@ -14,7 +14,7 @@ export class DialogFooter extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-dialog-footer',
+    tag: 'nve-dialog-footer',
     version: '0.0.0'
   };
 

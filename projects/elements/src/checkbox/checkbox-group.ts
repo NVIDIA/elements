@@ -13,7 +13,7 @@ export class CheckboxGroup extends ControlGroup {
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-checkbox-group',
+    tag: 'nve-checkbox-group',
     version: '0.0.0'
   };
 }

@@ -12,11 +12,11 @@ describe(ButtonGroup.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <mlv-button-group>
-      <mlv-icon-button pressed icon-name="split-vertical" aria-label="split vertical"></mlv-icon-button>
-      <mlv-icon-button icon-name="split-horizontal" aria-label="split horizontal"></mlv-icon-button>
-      <mlv-icon-button icon-name="split-none" aria-label="split none"></mlv-icon-button>
-    </mlv-button-group>
+    <nve-button-group>
+      <nve-icon-button pressed icon-name="split-vertical" aria-label="split vertical"></nve-icon-button>
+      <nve-icon-button icon-name="split-horizontal" aria-label="split horizontal"></nve-icon-button>
+      <nve-icon-button icon-name="split-none" aria-label="split none"></nve-icon-button>
+    </nve-button-group>
     `);
     element = fixture.querySelector(ButtonGroup.metadata.tag);
     await elementIsStable(element);

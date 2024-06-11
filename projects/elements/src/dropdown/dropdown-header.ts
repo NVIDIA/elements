@@ -13,7 +13,7 @@ export class DropdownHeader extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-dropdown-header',
+    tag: 'nve-dropdown-header',
     version: '0.0.0'
   };
 

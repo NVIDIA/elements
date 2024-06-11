@@ -14,11 +14,11 @@ describe(Breadcrumb.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-breadcrumb>
-        <mlv-icon-button icon-name="home"><a href="#" aria-label="link to first page"></a></mlv-icon-button>
-        <mlv-button><a href="#">Item</a></mlv-button>
+      <nve-breadcrumb>
+        <nve-icon-button icon-name="home"><a href="#" aria-label="link to first page"></a></nve-icon-button>
+        <nve-button><a href="#">Item</a></nve-button>
         <span>Static item</span>
-      </mlv-breadcrumb>
+      </nve-breadcrumb>
     `);
     element = fixture.querySelector(Breadcrumb.metadata.tag);
     await elementIsStable(element);

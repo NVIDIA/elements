@@ -9,7 +9,7 @@ describe(Icon.metadata.tag, () => {
   let element: Icon;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<mlv-icon></mlv-icon>`);
+    fixture = await createFixture(html`<nve-icon></nve-icon>`);
     element = fixture.querySelector(Icon.metadata.tag);
     await elementIsStable(element);
   });
@@ -159,7 +159,7 @@ describe(Icon.metadata.tag, () => {
     element.name = 'test-svg-request-update' as any;
     await elementIsStable(element);
 
-    const event = untilEvent(document, 'mlv-icon-test-svg-request-update');
+    const event = untilEvent(document, 'nve-icon-test-svg-request-update');
 
     (customElements.get(Icon.metadata.tag) as any).add({
       'test-svg-request-update': { svg: () => '<svg id="test-svg-request-update"><path d=""/></svg>' }

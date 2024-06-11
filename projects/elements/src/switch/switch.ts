@@ -24,7 +24,7 @@ export class Switch extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-switch',
+    tag: 'nve-switch',
     version: '0.0.0'
   };
 }

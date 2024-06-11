@@ -39,7 +39,7 @@ export class Dot extends LitElement {
   static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
 
   static readonly metadata = {
-    tag: 'mlv-dot',
+    tag: 'nve-dot',
     version: '0.0.0'
   };
 

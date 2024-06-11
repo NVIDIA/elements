@@ -32,7 +32,7 @@ export class AccordionHeader extends LitElement {
   static styles = useStyles([accordionHeaderStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-accordion-header',
+    tag: 'nve-accordion-header',
     version: '0.0.0'
   };
 
@@ -77,7 +77,7 @@ export class AccordionContent extends LitElement {
   static styles = useStyles([accordionContentStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-accordion-content',
+    tag: 'nve-accordion-content',
     version: '0.0.0'
   };
 
@@ -107,7 +107,7 @@ export class Accordion extends LitElement implements ContainerElement {
   static styles = useStyles([accordionStyleSheet]);
 
   static readonly metadata = {
-    tag: 'mlv-accordion',
+    tag: 'nve-accordion',
     version: '0.0.0'
   };
 
@@ -177,7 +177,7 @@ export class Accordion extends LitElement implements ContainerElement {
           >
           <slot name="header"></slot>
 
-          <mlv-icon-button
+          <nve-icon-button
             container="flat"
             icon-name="caret"
             direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
@@ -186,7 +186,7 @@ export class Accordion extends LitElement implements ContainerElement {
             ?selected=${!this.disabled && this.hoverActive}
             .expanded=${this.expanded}
             .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
-            ></mlv-icon-button>
+            ></nve-icon-button>
         </div>
 
         <div id="content">
@@ -237,7 +237,7 @@ export class AccordionGroup extends LitElement {
   @property({ type: String, reflect: true }) container?: Extract<Container, 'flat' | 'full' | 'inset'> = 'full';
 
   static readonly metadata = {
-    tag: 'mlv-accordion-group',
+    tag: 'nve-accordion-group',
     version: '0.0.0'
   };
 

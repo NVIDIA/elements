@@ -34,7 +34,7 @@ export class Logo extends LitElement {
   static styles = useStyles([styles, colorStateStyles]);
 
   static readonly metadata = {
-    tag: 'mlv-logo',
+    tag: 'nve-logo',
     version: '0.0.0'
   };
 

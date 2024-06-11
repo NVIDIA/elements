@@ -9,7 +9,7 @@ describe(Button.metadata.tag, () => {
   let element: Button;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<mlv-button>hello there</mlv-button>`);
+    fixture = await createFixture(html`<nve-button>hello there</nve-button>`);
     element = fixture.querySelector(Button.metadata.tag);
     await elementIsStable(element);
   });

@@ -10,7 +10,7 @@ describe(Divider.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-divider></mlv-divider>
+      <nve-divider></nve-divider>
     `);
     element = fixture.querySelectorAll<Divider>(Divider.metadata.tag)[0];
     await elementIsStable(element);

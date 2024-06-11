@@ -12,7 +12,7 @@ describe(Toast.metadata.tag, () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <button id="btn">button</button>
-      <mlv-toast trigger="btn" anchor="btn">toast</mlv-toast>
+      <nve-toast trigger="btn" anchor="btn">toast</nve-toast>
     `);
     element = fixture.querySelector(Toast.metadata.tag);
     await elementIsStable(element);

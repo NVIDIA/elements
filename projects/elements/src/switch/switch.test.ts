@@ -10,10 +10,10 @@ describe(Switch.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-switch>
+      <nve-switch>
         <label>label</label>
         <input type="checkbox" />
-      </mlv-switch>
+      </nve-switch>
     `);
     element = fixture.querySelector(Switch.metadata.tag);
     await elementIsStable(element);

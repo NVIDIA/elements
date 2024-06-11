@@ -58,7 +58,7 @@ export class Badge extends LitElement {
   static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);
 
   static readonly metadata = {
-    tag: 'mlv-badge',
+    tag: 'nve-badge',
     version: '0.0.0'
   };
 
@@ -83,10 +83,10 @@ export class Badge extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot name="prefix-icon">${this.status && !this.status?.includes('trend') ? html`<mlv-icon name=${statusIcons[this.status]} .size=${this.#size} aria-hidden="true"></mlv-icon>` : nothing}</slot>
+        <slot name="prefix-icon">${this.status && !this.status?.includes('trend') ? html`<nve-icon name=${statusIcons[this.status]} .size=${this.#size} aria-hidden="true"></nve-icon>` : nothing}</slot>
         <slot @slotchange=${this.#slotChange}></slot>
         <slot name="suffix-icon">
-          ${this.status?.includes('trend') ? html`<mlv-icon .name=${statusIcons[this.status] as any} aria-hidden="true"></mlv-icon>` : nothing}
+          ${this.status?.includes('trend') ? html`<nve-icon .name=${statusIcons[this.status] as any} aria-hidden="true"></nve-icon>` : nothing}
         </slot>
       </div>
     `;
@@ -118,7 +118,7 @@ export class Badge extends LitElement {
     const unassignedIcon = this.shadowRoot
       .querySelector<HTMLSlotElement>('slot:not([name])')
       .assignedElements()
-      .find(i => i.tagName === 'MLV-ICON' && !i.slot);
+      .find(i => i.matches('nve-icon, mlv-icon') && !i.slot);
     if (unassignedIcon) {
       unassignedIcon.slot = 'prefix-icon';
     }

@@ -11,11 +11,11 @@ describe(Menu.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-menu>
-        <mlv-menu-item>item 1</mlv-menu-item>
-        <mlv-menu-item>item 2</mlv-menu-item>
-        <mlv-menu-item>item 3</mlv-menu-item>
-      </mlv-menu>
+      <nve-menu>
+        <nve-menu-item>item 1</nve-menu-item>
+        <nve-menu-item>item 2</nve-menu-item>
+        <nve-menu-item>item 3</nve-menu-item>
+      </nve-menu>
     `);
     element = fixture.querySelector(Menu.metadata.tag);
     await elementIsStable(element);

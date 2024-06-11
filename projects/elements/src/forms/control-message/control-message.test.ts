@@ -11,7 +11,7 @@ describe(ControlMessage.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-control-message></mlv-control-message>
+      <nve-control-message></nve-control-message>
     `);
     element = fixture.querySelector(ControlMessage.metadata.tag);
     await elementIsStable(element);

@@ -24,7 +24,7 @@ export class Textarea extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-textarea',
+    tag: 'nve-textarea',
     version: '0.0.0'
   };
 }

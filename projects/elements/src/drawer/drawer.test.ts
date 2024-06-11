@@ -11,7 +11,7 @@ describe(Drawer.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-drawer>hello</mlv-drawer>
+      <nve-drawer>hello</nve-drawer>
     `);
     element = fixture.querySelector(Drawer.metadata.tag);
     await elementIsStable(element);

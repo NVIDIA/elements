@@ -16,16 +16,16 @@ describe(Accordion.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <mlv-accordion-group>
-      <mlv-accordion>
-        <mlv-accordion-header>heading</mlv-accordion-header>
-        <mlv-accordion-content>content</mlv-accordion-content>
-      </mlv-accordion>
-      <mlv-accordion>
-        <mlv-accordion-header>heading</mlv-accordion-header>
-        <mlv-accordion-content>content</mlv-accordion-content>
-      </mlv-accordion>
-    </mlv-accordion-group>
+    <nve-accordion-group>
+      <nve-accordion>
+        <nve-accordion-header>heading</nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
+      <nve-accordion>
+        <nve-accordion-header>heading</nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
+    </nve-accordion-group>
     `);
     parentElement = fixture.querySelector(AccordionGroup.metadata.tag);
     childElement1 = fixture.querySelectorAll<Accordion>(Accordion.metadata.tag)[0];
@@ -165,15 +165,15 @@ describe(`${Accordion.metadata.tag} - Actions`, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-    <mlv-accordion-group>
-      <mlv-accordion>
-        <mlv-accordion-header>
+    <nve-accordion-group>
+      <nve-accordion>
+        <nve-accordion-header>
           heading
-          <mlv-icon-button container="flat" icon-name="add" size="sm" slot="actions"></mlv-icon-button>
-        </mlv-accordion-header>
-        <mlv-accordion-content>content</mlv-accordion-content>
-      </mlv-accordion>
-    </mlv-accordion-group>
+          <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
+        </nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
+    </nve-accordion-group>
     `);
     element = fixture.querySelector<Accordion>(Accordion.metadata.tag);
     await elementIsStable(element);

@@ -12,7 +12,7 @@ describe(Tooltip.metadata.tag, () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <button id="btn">button</button>
-      <mlv-tooltip trigger="btn" anchor="btn">tooltip</mlv-tooltip>
+      <nve-tooltip trigger="btn" anchor="btn">tooltip</nve-tooltip>
     `);
     element = fixture.querySelector(Tooltip.metadata.tag);
     await elementIsStable(element);

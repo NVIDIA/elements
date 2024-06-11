@@ -18,7 +18,7 @@ export class Checkbox extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-checkbox',
+    tag: 'nve-checkbox',
     version: '0.0.0'
   };
 }

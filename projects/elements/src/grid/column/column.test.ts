@@ -12,20 +12,20 @@ describe(GridColumn.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-grid>
-        <mlv-grid-header>
-          <mlv-grid-column>column 1</mlv-grid-column>
-          <mlv-grid-column>column 2</mlv-grid-column>
-          <mlv-grid-column>column 3</mlv-grid-column>
-          <mlv-grid-column>column 4</mlv-grid-column>
-        </mlv-grid-header>
-        <mlv-grid-row>
-          <mlv-grid-cell>cell 1-1</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-2</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-3</mlv-grid-cell>
-          <mlv-grid-cell>cell 1-4</mlv-grid-cell>
-        </mlv-grid-row>
-      </mlv-grid>
+      <nve-grid>
+        <nve-grid-header>
+          <nve-grid-column>column 1</nve-grid-column>
+          <nve-grid-column>column 2</nve-grid-column>
+          <nve-grid-column>column 3</nve-grid-column>
+          <nve-grid-column>column 4</nve-grid-column>
+        </nve-grid-header>
+        <nve-grid-row>
+          <nve-grid-cell>cell 1-1</nve-grid-cell>
+          <nve-grid-cell>cell 1-2</nve-grid-cell>
+          <nve-grid-cell>cell 1-3</nve-grid-cell>
+          <nve-grid-cell>cell 1-4</nve-grid-cell>
+        </nve-grid-row>
+      </nve-grid>
     `);
     grid = fixture.querySelector(Grid.metadata.tag);
     columns = Array.from(fixture.querySelectorAll(GridColumn.metadata.tag));
@@ -62,7 +62,7 @@ describe(GridColumn.metadata.tag, () => {
     await elementIsStable(columns[0]);
     const sheets = (grid.getRootNode() as any).adoptedStyleSheets;
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('--justify-content: center')).toBe(true);
-    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('mlv-grid-column:nth-child(1)')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('nve-grid-column:nth-child(1)')).toBe(true);
   });
 
   it('should update fixed left column position', async () => {

@@ -10,9 +10,9 @@ describe(NotificationGroup.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-notification-group>
+      <nve-notification-group>
 
-      </mlv-notification-group>
+      </nve-notification-group>
     `);
     element = fixture.querySelector(NotificationGroup.metadata.tag);
     await elementIsStable(element);

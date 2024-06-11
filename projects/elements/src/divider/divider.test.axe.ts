@@ -11,7 +11,7 @@ describe(Divider.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-divider></mlv-divider>
+      <nve-divider></nve-divider>
     `);
     element = fixture.querySelector(Divider.metadata.tag);
     await elementIsStable(element);

@@ -46,7 +46,7 @@ export class Combobox extends Control implements ContainerElement {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-combobox',
+    tag: 'nve-combobox',
     version: '0.0.0'
   };
 
@@ -110,7 +110,7 @@ export class Combobox extends Control implements ContainerElement {
     <div class="tags">
       ${Array.from<HTMLOptionElement>(this.#select.selectedOptions).map(
         o => html`
-      <mlv-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o)}>${getDisplayValue(o)}</mlv-tag>`
+      <nve-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o)}>${getDisplayValue(o)}</nve-tag>`
       )}
     </div>`
       : html`<slot name="prefix-icon"></slot>`;
@@ -120,21 +120,21 @@ export class Combobox extends Control implements ContainerElement {
     const multiple = this.#select?.multiple;
     const options = this.#options;
     return html`
-    <mlv-dropdown .popoverType=${'manual'} @close=${e => (e.target.hidden = true)} @open=${e => (e.target.hidden = false)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
-      <mlv-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
+    <nve-dropdown .popoverType=${'manual'} @close=${e => (e.target.hidden = true)} @open=${e => (e.target.hidden = false)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
+      <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
         ${options
           .filter(o => !o.disabled)
           .map(
             o => html`
-        <mlv-menu-item .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
-          ${multiple ? html`<mlv-icon .name=${o.selected ? 'check' : undefined} size="sm"></mlv-icon>` : nothing}
+        <nve-menu-item .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
+          ${multiple ? html`<nve-icon .name=${o.selected ? 'check' : undefined} size="sm"></nve-icon>` : nothing}
           ${options.length < 50 ? html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : getDisplayValue(o)}
-        </mlv-menu-item>`
+        </nve-menu-item>`
           )}
-        ${options.filter(o => !o.disabled).length === 0 ? html`<mlv-menu-item .value=${''} disabled>${this.i18n.noResults}</mlv-menu-item>` : nothing}
-      </mlv-menu>
+        ${options.filter(o => !o.disabled).length === 0 ? html`<nve-menu-item .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}
+      </nve-menu>
       <slot name="footer"></slot>
-    </mlv-dropdown>`;
+    </nve-dropdown>`;
   }
 
   async firstUpdated(props: PropertyValues<this>) {

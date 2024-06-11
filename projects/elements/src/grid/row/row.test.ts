@@ -10,9 +10,9 @@ describe(GridRow.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-grid-row>
+      <nve-grid-row>
 
-      </mlv-grid-row>
+      </nve-grid-row>
     `);
     element = fixture.querySelector(GridRow.metadata.tag);
     await elementIsStable(element);

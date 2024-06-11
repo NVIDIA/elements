@@ -24,7 +24,7 @@ export class GridRow extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-grid-row',
+    tag: 'nve-grid-row',
     version: '0.0.0',
     children: [GridCell.metadata.tag]
   };

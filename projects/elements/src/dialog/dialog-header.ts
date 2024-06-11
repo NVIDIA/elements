@@ -14,7 +14,7 @@ export class DialogHeader extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-dialog-header',
+    tag: 'nve-dialog-header',
     version: '0.0.0'
   };
 

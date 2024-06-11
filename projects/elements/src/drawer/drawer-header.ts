@@ -14,7 +14,7 @@ export class DrawerHeader extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-drawer-header',
+    tag: 'nve-drawer-header',
     version: '0.0.0'
   };
 

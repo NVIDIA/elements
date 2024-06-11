@@ -10,7 +10,7 @@ describe(Dot.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-dot></mlv-dot>
+      <nve-dot></nve-dot>
     `);
     element = fixture.querySelector(Dot.metadata.tag);
     await elementIsStable(element);

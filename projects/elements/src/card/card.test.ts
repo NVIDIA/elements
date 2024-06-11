@@ -14,16 +14,16 @@ describe(Card.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-card>
-        <mlv-card-footer></mlv-card-footer>
+      <nve-card>
+        <nve-card-footer></nve-card-footer>
         <p>content</p>
-        <mlv-card-header>
+        <nve-card-header>
           <h3 slot="subtitle">subtitle</h3>
           <button slot="header-action">header action</button>
           <h2 slot="title">title</h2>
-        </mlv-card-header>
-        <mlv-card-content></mlv-card-content>
-      </mlv-card>
+        </nve-card-header>
+        <nve-card-content></nve-card-content>
+      </nve-card>
     `);
     card = fixture.querySelector(Card.metadata.tag);
     cardHeader = fixture.querySelector(CardHeader.metadata.tag);
@@ -46,12 +46,12 @@ describe(Card.metadata.tag, () => {
     expect(customElements.get(CardFooter.metadata.tag)).toBeDefined();
   });
 
-  it('should have the mlv-card-header self define the header slot', async () => {
+  it('should have the card-header self define the header slot', async () => {
     await elementIsStable(cardHeader);
     expect(cardHeader.slot).toBe('header');
   });
 
-  it('should have the mlv-card-footer self define the footer slot', async () => {
+  it('should have the card-footer self define the footer slot', async () => {
     await elementIsStable(cardFooter);
     expect(cardFooter.slot).toBe('footer');
   });
@@ -61,7 +61,7 @@ describe(Card.metadata.tag, () => {
     await elementIsStable(cardHeader);
     await elementIsStable(cardFooter);
 
-    const [header, content, footer] = getFlatDOMTree(card).filter(e => e.tagName.includes('MLV'));
+    const [header, content, footer] = getFlatDOMTree(card).filter(e => e.tagName.includes('NVE'));
     expect(header).toBe(cardHeader);
     expect(content).toBe(cardContent);
     expect(footer).toBe(cardFooter);

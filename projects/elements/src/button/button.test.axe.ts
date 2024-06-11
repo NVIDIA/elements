@@ -11,11 +11,11 @@ describe(Button.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-button interaction="emphasis">emphasis</mlv-button> <!-- failing -->
-      <mlv-button>default</mlv-button>
-      <mlv-button interaction="destructive">destructive</mlv-button>
-      <mlv-button disabled>disabled</mlv-button>
-      <mlv-button pressed>pressed</mlv-button>
+      <nve-button interaction="emphasis">emphasis</nve-button> <!-- failing -->
+      <nve-button>default</nve-button>
+      <nve-button interaction="destructive">destructive</nve-button>
+      <nve-button disabled>disabled</nve-button>
+      <nve-button pressed>pressed</nve-button>
     `);
     element = fixture.querySelector(Button.metadata.tag);
     await elementIsStable(element);

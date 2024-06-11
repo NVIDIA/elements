@@ -35,7 +35,7 @@ export class Tooltip extends LitElement {
   static styles = useStyles([popoverBaseStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-tooltip',
+    tag: 'nve-tooltip',
     version: '0.0.0'
   };
 

@@ -11,10 +11,10 @@ describe(Week.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-week>
+      <nve-week>
         <label>label</label>
         <input type="week" />
-      </mlv-week>
+      </nve-week>
     `);
     element = fixture.querySelector(Week.metadata.tag);
     await elementIsStable(element);

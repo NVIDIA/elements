@@ -107,7 +107,7 @@ export class Dialog extends LitElement {
   static styles = useStyles([popoverBaseStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-dialog',
+    tag: 'nve-dialog',
     version: '0.0.0'
   };
 
@@ -119,7 +119,7 @@ export class Dialog extends LitElement {
     return html`
     <dialog ${animationFade(this)}>
       <div class="header">
-        ${this.closable ? html`<mlv-icon-button size="sm" @click=${() => this.#typePopoverController.close()} icon-name="cancel" .ariaLabel=${this.i18n.close}></mlv-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button size="sm" @click=${() => this.#typePopoverController.close()} icon-name="cancel" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
       <div class="content">

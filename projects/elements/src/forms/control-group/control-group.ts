@@ -50,7 +50,7 @@ export class ControlGroup extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-control-group',
+    tag: 'nve-control-group',
     version: '0.0.0'
   };
 

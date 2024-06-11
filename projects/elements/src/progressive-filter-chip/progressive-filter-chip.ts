@@ -29,7 +29,7 @@ import styles from './progressive-filter-chip.css?inline';
  */
 export class ProgressiveFilterChip extends LitElement {
   static readonly metadata = {
-    tag: 'mlv-progressive-filter-chip',
+    tag: 'nve-progressive-filter-chip',
     version: '0.0.0'
   };
 
@@ -60,11 +60,11 @@ export class ProgressiveFilterChip extends LitElement {
   #getControlTemplate(el: Element) {
     const slot = html`<slot name=${el.slot} @slotchange=${this.#removeItem}></slot>`;
     if (el.tagName === 'SELECT') {
-      return html`<mlv-select multiple-overflow ?fit-text=${!(el as HTMLSelectElement).multiple}>${slot}</mlv-select>`;
+      return html`<nve-select multiple-overflow ?fit-text=${!(el as HTMLSelectElement).multiple}>${slot}</nve-select>`;
     } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'date') {
-      return html`<mlv-date>${slot}</mlv-date>`;
+      return html`<nve-date>${slot}</nve-date>`;
     } else if (el.tagName === 'INPUT') {
-      return html`<mlv-input>${slot}</mlv-input>`;
+      return html`<nve-input>${slot}</nve-input>`;
     } else {
       return slot;
     }
@@ -74,7 +74,7 @@ export class ProgressiveFilterChip extends LitElement {
     return html`
     <div internal-host>
       ${this.inputs.map(el => this.#getControlTemplate(el))}
-      ${this.closable ? html`<mlv-icon-button @click=${() => this.#typeClosableController.close()} .ariaLabel=${this.i18n.close} icon-name="cancel"></mlv-icon-button>` : nothing}
+      ${this.closable ? html`<nve-icon-button @click=${() => this.#typeClosableController.close()} .ariaLabel=${this.i18n.close} icon-name="cancel"></nve-icon-button>` : nothing}
     </div>
     <slot hidden-slot @slotchange=${this.#createItems}></slot>
     `;
@@ -99,7 +99,7 @@ export class ProgressiveFilterChip extends LitElement {
       this.#resetItems();
       const items = Array.from(
         this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements()
-      ).filter(i => i.matches('input, select, mlv-button, [nve-control], [mlv-control]'));
+      ).filter(i => i.matches('input, select, nve-button, mlv-button, [nve-control], [mlv-control]'));
       items.forEach(i => (i.slot = generateId()));
       this.inputs = items.length ? items : this.inputs;
     }

@@ -13,7 +13,7 @@ export class DropdownFooter extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-dropdown-footer',
+    tag: 'nve-dropdown-footer',
     version: '0.0.0'
   };
 

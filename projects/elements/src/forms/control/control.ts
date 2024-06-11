@@ -123,7 +123,7 @@ export class Control extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-control',
+    tag: 'nve-control',
     version: '0.0.0'
   };
 

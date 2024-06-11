@@ -17,7 +17,7 @@ export class Time extends Control {
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-time',
+    tag: 'nve-time',
     version: '0.0.0'
   };
 
@@ -26,6 +26,6 @@ export class Time extends Control {
   };
 
   protected get suffixContent() {
-    return html`<mlv-icon-button .ariaLabel=${this.i18n.expand} icon-name="clock" container="flat" @click=${this.showPicker}></mlv-icon-button>`;
+    return html`<nve-icon-button .ariaLabel=${this.i18n.expand} icon-name="clock" container="flat" @click=${this.showPicker}></nve-icon-button>`;
   }
 }

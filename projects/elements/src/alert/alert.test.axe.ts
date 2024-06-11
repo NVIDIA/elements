@@ -11,11 +11,11 @@ describe(Alert.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-alert>default</mlv-alert>
-      <mlv-alert status="accent">accent</mlv-alert>
-      <mlv-alert status="warning">warning</mlv-alert>
-      <mlv-alert status="success">success</mlv-alert>
-      <mlv-alert status="danger">danger</mlv-alert>
+      <nve-alert>default</nve-alert>
+      <nve-alert status="accent">accent</nve-alert>
+      <nve-alert status="warning">warning</nve-alert>
+      <nve-alert status="success">success</nve-alert>
+      <nve-alert status="danger">danger</nve-alert>
     `);
     alert = fixture.querySelector(Alert.metadata.tag);
     await elementIsStable(alert);

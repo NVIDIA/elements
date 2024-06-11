@@ -45,7 +45,7 @@ export class Icon extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
-    tag: 'mlv-icon',
+    tag: 'nve-icon',
     version: '0.0.0'
   };
 

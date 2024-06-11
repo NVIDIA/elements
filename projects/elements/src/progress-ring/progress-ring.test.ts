@@ -12,7 +12,7 @@ describe(ProgressRing.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-progress-ring></mlv-progress-ring>
+      <nve-progress-ring></nve-progress-ring>
     `);
     element = fixture.querySelector(ProgressRing.metadata.tag);
     await elementIsStable(element);
@@ -46,22 +46,22 @@ describe(ProgressRing.metadata.tag, () => {
   });
 
   it('should contain icons when status not equals accent', async () => {
-    const mlvIcon = element.shadowRoot.querySelector(Icon.metadata.tag) as Icon;
+    const nveIcon = element.shadowRoot.querySelector(Icon.metadata.tag) as Icon;
 
     element.status = 'warning';
     await elementIsStable(element);
     expect(element.status).toBe('warning');
-    expect(mlvIcon.name).toBe(statusIcons[element.status]);
+    expect(nveIcon.name).toBe(statusIcons[element.status]);
 
     element.status = 'success';
     await elementIsStable(element);
     expect(element.status).toBe('success');
-    expect(mlvIcon.name).toBe(statusIcons[element.status]);
+    expect(nveIcon.name).toBe(statusIcons[element.status]);
 
     element.status = 'danger';
     await elementIsStable(element);
     expect(element.status).toBe('danger');
-    expect(mlvIcon.name).toBe(statusIcons[element.status]);
+    expect(nveIcon.name).toBe(statusIcons[element.status]);
   });
 
   it('should set indeterminate and zeroValue states', async () => {

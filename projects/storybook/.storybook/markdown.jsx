@@ -17,10 +17,10 @@ export const H2 = (args) => {
   <Unstyled>
     <div mlv-layout="column gap:xs align:stretch pad-top:xl">
       <h2 mlv-text="heading xl" id={args.id} className="dynamic-anchor">
-        <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><mlv-icon name="link"></mlv-icon></a>
+        <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
         {args.children}
       </h2>
-      <mlv-divider></mlv-divider>
+      <nve-divider></nve-divider>
     </div>
   </Unstyled>
   )
@@ -31,7 +31,7 @@ export const H3 = (args) => {
   return (
   <Unstyled>
     <h3 id={args.id} mlv-text="heading lg"  mlv-layout="pad-top:lg" className="dynamic-anchor">
-      <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><mlv-icon name="link"></mlv-icon></a>
+      <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
       {args.children}
     </h3>
   </Unstyled>

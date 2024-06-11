@@ -7,7 +7,7 @@ export class SwitchGroup extends ControlGroup {
   static styles: CSSResult[] = useStyles([...ControlGroup.styles, styles]);
 
   static readonly metadata = {
-    tag: 'mlv-switch-group',
+    tag: 'nve-switch-group',
     version: '0.0.0'
   };
 }

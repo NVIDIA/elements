@@ -10,10 +10,10 @@ describe(Input.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-input>
+      <nve-input>
         <label>label</label>
         <input type="text" />
-      </mlv-input>
+      </nve-input>
     `);
     element = fixture.querySelector(Input.metadata.tag);
     await elementIsStable(element);
