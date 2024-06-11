@@ -13,8 +13,8 @@
 
 :host {
   --background: var(--nve-sys-layer-container-background);
-  --font-family: var(--mlv-ref-font-family-roboto-mono);
-  --padding: var(--mlv-ref-space-sm);
+  --font-family: var(--nve-ref-font-family-roboto-mono);
+  --padding: var(--nve-ref-space-sm);
   --border-radius: var(--nve-ref-border-radius-lg);
   display: block;
   overflow: hidden;
@@ -50,10 +50,6 @@ pre {
 :host([container='inline']) {
   --background: none;
   --padding: 0;
-}
-
-[mlv-text~='code'] {
-  margin: 0;
 }
 
 .hljs {
@@ -134,7 +130,7 @@ pre {
 
 .language-xml {
   .hljs-attr {
-    color: var(--mlv-ref-color-blue-sky-1100);
+    color: var(--nve-ref-color-blue-sky-1100);
   }
 }
 

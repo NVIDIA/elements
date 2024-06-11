@@ -25,7 +25,7 @@ describe('nve-codeblock', () => {
 function getTime(): number {
   return new Date().getTime();
 }`;
-  let slot = `<mlv-icon-button slot="actions" container="flat" icon-name="copy"></mlv-icon-button>`;
+  let slot = `<nve-icon-button slot="actions" container="flat" icon-name="copy"></nve-icon-button>`;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -136,6 +136,6 @@ function getTime(): number {
     await elementIsStable(element);
     expect(element.innerHTML.includes(slot)).toBeTruthy();
     expect(element.shadowRoot.querySelector('.hljs-title')).toBeTruthy();
-    expect(element.shadowRoot.querySelector('mlv-icon-button')).toBeFalsy();
+    expect(element.shadowRoot.querySelector('nve-icon-button')).toBeFalsy();
   });
 });
