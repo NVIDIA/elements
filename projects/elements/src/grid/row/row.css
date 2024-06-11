@@ -15,10 +15,12 @@
   grid-template-columns: var(--grid-template-column);
 }
 
+:host(:hover) ::slotted(nve-grid-cell),
 :host(:hover) ::slotted(nve-grid-cell) {
   --interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
+:host(:state(selected)) ::slotted(nve-grid-cell),
 :host(:state(selected)) ::slotted(nve-grid-cell) {
   --background: var(--nve-sys-interaction-highlighted-muted-background);
   --interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);

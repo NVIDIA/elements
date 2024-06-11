@@ -19,6 +19,7 @@
   flex: 1;
 }
 
+::slotted(nve-menu),
 ::slotted(nve-menu) {
   --width: 100%;
 }

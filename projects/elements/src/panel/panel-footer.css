@@ -12,6 +12,7 @@ footer[internal-host] {
   place-items: flex-start;
   gap: var(--gap);
 
+  ::slotted(nve-button),
   ::slotted(nve-button) {
     flex-grow: 1;
   }

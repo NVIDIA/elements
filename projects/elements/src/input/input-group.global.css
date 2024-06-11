@@ -1,14 +1,17 @@
+nve-input-group[type='filter'] > nve-select::part(caret),
 nve-input-group[type='filter'] > nve-select::part(caret) {
   display: none !important;
 }
 
 nve-input-group > [nve-control],
+nve-input-group > nve-button,
 nve-input-group > [nve-control],
 nve-input-group > nve-button {
   --border-radius: 0;
 }
 
 nve-input-group[type='filter'] [nve-control]:nth-child(odd),
+nve-input-group[type='filter'] nve-button:nth-child(odd),
 nve-input-group[type='filter'] [nve-control]:nth-child(odd),
 nve-input-group[type='filter'] nve-button:nth-child(odd) {
   --font-weight: var(--nve-ref-font-weight-medium);
