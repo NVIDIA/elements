@@ -52,10 +52,6 @@ pre {
   --padding: 0;
 }
 
-[nve-text~='code'] {
-  margin: 0;
-}
-
 .hljs {
   color: var(--nve-sys-text-color);
 }
