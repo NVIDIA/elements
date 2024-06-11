@@ -7,7 +7,8 @@ import {
   appendRootNodeStyle,
   generateId,
   ContainerElement,
-  validateSlots
+  validateSlots,
+  tagSelector
 } from '@nvidia-elements/core/internal';
 import { GridHeader } from './header/header.js';
 import { GridColumn } from './column/column.js';
@@ -64,19 +65,19 @@ export class Grid extends LitElement implements ContainerElement {
   }
 
   get #rows() {
-    return Array.from(this.querySelectorAll<GridRow>(GridRow.metadata.tag));
+    return Array.from(this.querySelectorAll<GridRow>(tagSelector(GridRow.metadata.tag)));
   }
 
   get #header() {
-    return this.querySelector<GridHeader>(GridHeader.metadata.tag);
+    return this.querySelector<GridHeader>(tagSelector(GridHeader.metadata.tag));
   }
 
   get #columns() {
-    return Array.from(this.querySelectorAll<GridColumn>(GridColumn.metadata.tag));
+    return Array.from(this.querySelectorAll<GridColumn>(tagSelector(GridColumn.metadata.tag)));
   }
 
   get #cells() {
-    return Array.from(this.querySelectorAll<GridCell>(GridCell.metadata.tag));
+    return Array.from(this.querySelectorAll<GridCell>(tagSelector(GridCell.metadata.tag)));
   }
 
   /** @private */
@@ -85,7 +86,7 @@ export class Grid extends LitElement implements ContainerElement {
   render() {
     return html`
       <div internal-host>
-        <div role="rowgroup" part="scrollbox">
+        <div part="scrollbox">
           <slot></slot>
         </div>
         <slot name="footer"></slot>

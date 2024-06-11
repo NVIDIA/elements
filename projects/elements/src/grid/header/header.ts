@@ -32,7 +32,11 @@ export class GridHeader extends LitElement {
   declare _internals: ElementInternals;
 
   /** @private */
-  @queryAssignedElements({ selector: GridColumn.metadata.tag, flatten: true }) columns!: GridColumn[];
+  @queryAssignedElements({
+    selector: `${GridColumn.metadata.tag}, ${GridColumn.metadata.tag.replace('nve-', 'nve-')}`,
+    flatten: true
+  })
+  columns!: GridColumn[];
 
   get #grid() {
     return this.parentElement as Grid;
