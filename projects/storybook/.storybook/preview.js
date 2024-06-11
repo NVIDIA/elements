@@ -240,7 +240,9 @@ export const parameters = {
         'Testing',
         'Labs',
         [
-          'Documentation'
+          'About',
+          'Code',
+          'Testing Lighthouse'
         ],
         'Internal',
         'Deprecated'
