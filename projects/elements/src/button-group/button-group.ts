@@ -63,11 +63,11 @@ export class ButtonGroup extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  @queryAssignedElements({ selector: 'nve-divider' }) private dividers!: Divider[];
+  @queryAssignedElements({ selector: 'nve-divider, nve-divider' }) private dividers!: Divider[];
 
-  @queryAssignedElements({ selector: 'nve-icon-button' }) private iconButtons!: IconButton[];
+  @queryAssignedElements({ selector: 'nve-icon-button, nve-icon-button' }) private iconButtons!: IconButton[];
 
-  @queryAssignedElements({ selector: 'nve-button' }) private buttons!: Button[];
+  @queryAssignedElements({ selector: 'nve-button, nve-button' }) private buttons!: Button[];
 
   get #buttons() {
     return [...this.iconButtons, ...this.buttons];
