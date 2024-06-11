@@ -2,6 +2,8 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { StepsItem, Steps } from '@nvidia-elements/core/steps';
+import { ProgressRing } from '@nvidia-elements/core/progress-ring';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import '@nvidia-elements/core/steps/define.js';
 
 describe(Steps.metadata.tag, () => {
@@ -85,5 +87,38 @@ describe(Steps.metadata.tag, () => {
 
     expect(parentElement.vertical).toBe(true);
     expect(parentElement.keynavListConfig.layout).toBe('vertical');
+  });
+
+  it('should display step number', async () => {
+    await elementIsStable(childElement);
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).textContent).toBe('1');
+  });
+
+  it('should display icon with default status', async () => {
+    await elementIsStable(childElement);
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).interaction).toBe(undefined);
+  });
+
+  it('should display success icon styles with success status', async () => {
+    childElement.status = 'success';
+    await elementIsStable(childElement);
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).interaction).toBe('emphasis');
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe('check');
+  });
+
+  it('should display danger icon with danger status', async () => {
+    childElement.status = 'danger';
+    await elementIsStable(childElement);
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).interaction).toBe('destructive');
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe(
+      'exclamation-circle'
+    );
+  });
+
+  it('should display progress ring in pending status', async () => {
+    childElement.status = 'pending';
+    await elementIsStable(childElement);
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag)).toBeFalsy();
+    expect(childElement.shadowRoot.querySelector<ProgressRing>(ProgressRing.metadata.tag).status).toBe('accent');
   });
 });

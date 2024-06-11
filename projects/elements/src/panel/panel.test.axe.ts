@@ -16,9 +16,8 @@ describe(Panel.metadata.tag, () => {
           <div slot="title">Title</div>
           <div slot="subtitle"></div>
         </nve-panel-header>
-
-        <nve-panel-content nve-layout="column gap:md">
-          <p nve-text="body">content</p>
+        <nve-panel-content>
+          <p>content</p>
         </nve-panel-content>
       </nve-panel>
     `);

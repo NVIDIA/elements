@@ -18,6 +18,7 @@ import '@nvidia-elements/core/panel/define.js';
 import '@nvidia-elements/core/radio/define.js';
 import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/sort-button/define.js';
+import '@nvidia-elements/core/toolbar/define.js';
 import '@lit-labs/virtualizer';
 
 export default {

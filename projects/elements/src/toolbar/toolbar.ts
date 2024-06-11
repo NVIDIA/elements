@@ -142,7 +142,9 @@ export class Toolbar extends LitElement implements ContainerElement {
 
   #updateContainers() {
     if (this.container !== 'flat' && this.container !== 'inset') {
-      const groups = this.#slottedElements.filter(e => e.matches('nve-button-group')) as ButtonGroup[];
+      const groups = this.#slottedElements.filter(e =>
+        e.matches('nve-button-group, nve-button-group')
+      ) as ButtonGroup[];
       groups.forEach(group => (group.container = 'flat'));
 
       const controls = this.#slottedElements.filter(e => e.matches('[nve-control], [nve-control]')) as (Control & {
@@ -150,22 +152,20 @@ export class Toolbar extends LitElement implements ContainerElement {
       })[];
       controls.forEach(control => (control.container = 'flat'));
 
-      (this.#slottedElements.filter(e => e.matches('nve-button')) as Button[]).forEach(
+      (this.#slottedElements.filter(e => e.matches('nve-button, nve-button')) as Button[]).forEach(
         button => (button.container = 'inline')
       );
-      (this.#slottedElements.filter(e => e.matches('nve-icon-button')) as IconButton[]).forEach(
+      (this.#slottedElements.filter(e => e.matches('nve-icon-button, nve-icon-button')) as IconButton[]).forEach(
         button => (button.container = 'flat')
       );
     }
   }
 
   #updateOrientation() {
-    const dividers = this.#slottedElements.filter(e => e.tagName.toLowerCase().includes('nve-divider')) as Divider[];
+    const dividers = this.#slottedElements.filter(e => e.matches('nve-divider, nve-divider')) as Divider[];
     dividers.forEach(divider => (divider.orientation = this.orientation === 'horizontal' ? 'vertical' : 'horizontal'));
 
-    const groups = this.#slottedElements.filter(e =>
-      e.tagName.toLowerCase().includes('nve-button-group')
-    ) as ButtonGroup[];
+    const groups = this.#slottedElements.filter(e => e.matches('nve-button-group, nve-button-group')) as ButtonGroup[];
     groups.forEach(group => (group.orientation = this.orientation));
   }
 }

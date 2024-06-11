@@ -110,7 +110,7 @@ export class Tabs extends LitElement {
   declare _internals: ElementInternals;
 
   #selectTab(tabItem) {
-    if (!this.behaviorSelect || tabItem.tagName !== 'MLV-TABS-ITEM' || tabItem.disabled) {
+    if (!this.behaviorSelect || !tabItem.matches('nve-tabs-item, nve-tabs-item') || tabItem.disabled) {
       return;
     }
 
