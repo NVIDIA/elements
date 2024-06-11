@@ -1,7 +1,9 @@
+nve-file > input,
 nve-file > input {
   color: var(--color);
 }
 
+nve-file > input::file-selector-button,
 nve-file > input::file-selector-button {
   background: var(--background);
   padding: var(--padding);
@@ -21,16 +23,19 @@ nve-file > input::file-selector-button {
   line-height: 1.2em;
 }
 
+nve-file > input::file-selector-button:hover,
 nve-file > input::file-selector-button:hover {
   --color: var(--nve-sys-interaction-hover-color);
   --background: var(--nve-sys-interaction-background);
 }
 
+nve-file > input::file-selector-button:active,
 nve-file > input::file-selector-button:active {
   --color: var(--nve-sys-interaction-active-color);
   --background: var(--nve-sys-interaction-background);
 }
 
+nve-file > input::file-selector-button:disabled,
 nve-file > input::file-selector-button:disabled {
   --color: var(--nve-sys-interaction-disabled-color);
   --background: var(--nve-sys-interaction-disabled-background);

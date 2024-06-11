@@ -1,3 +1,4 @@
+nve-range input[type='range']::-webkit-slider-thumb,
 nve-range input[type='range']::-webkit-slider-thumb {
   width: var(--nve-ref-size-400);
   height: var(--nve-ref-size-400);
@@ -7,6 +8,7 @@ nve-range input[type='range']::-webkit-slider-thumb {
   appearance: var(--_appearance);
 }
 
+nve-range input[type='range']::-webkit-slider-runnable-track,
 nve-range input[type='range']::-webkit-slider-runnable-track {
   background: var(--nve-sys-interaction-background);
   height: var(--track-height);
@@ -14,6 +16,7 @@ nve-range input[type='range']::-webkit-slider-runnable-track {
   align-self: center;
 }
 
+nve-range:has(datalist),
 nve-range:has(datalist) {
   --_appearance: auto !important;
 }

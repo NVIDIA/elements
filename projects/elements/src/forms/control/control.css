@@ -33,6 +33,7 @@
 }
 
 :host(:state(disabled)),
+:host(:state(disabled)) ::slotted(nve-control-message:not([status])),
 :host(:state(disabled)) ::slotted(nve-control-message:not([status])) {
   --cursor: not-allowed;
   --color: var(--nve-sys-text-muted-color);
@@ -54,6 +55,8 @@
 :host([nve-control]) ::slotted(select:focus),
 :host([nve-control]) ::slotted(textarea:focus),
 :host([nve-control]:focus-within) [internal-host]:has(nve-icon-button:focus) [input],
+:host([nve-control]:focus-within) [internal-host]:has(nve-icon-button:focus) [input],
+[internal-host]:has(nve-icon-button),
 [internal-host]:has(nve-icon-button) {
   outline: 0 !important;
 }
@@ -64,6 +67,8 @@
   }
 }
 
+::slotted(nve-button[nve-control]),
+::slotted(nve-button[nve-control]),
 ::slotted(nve-button[nve-control]),
 ::slotted(nve-button[nve-control]) {
   width: 100%;

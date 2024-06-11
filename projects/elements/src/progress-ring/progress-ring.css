@@ -122,6 +122,7 @@ circle.ring {
 }
 
 ::slotted(nve-icon),
+::slotted(nve-icon),
 nve-icon {
   --width: 50cqw;
   --height: 50cqh;

@@ -1,22 +1,29 @@
-nve-progressive-filter-chip input::placeholder,
-nve-progressive-filter-chip textarea::placeholder {
-  color: var(--nve-sys-text-placeholder-color) !important;
+nve-progressive-filter-chip,
+nve-progressive-filter-chip {
+  &:has([status='error']) {
+    --background: transparent;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--nve-sys-text-placeholder-color) !important;
+  }
+
+  nve-select:not(:state(multiple)),
+  nve-select:not(:state(multiple)) {
+    --padding: 0 var(--nve-ref-size-200);
+  }
+
+  nve-select:not(:state(multiple))::part(caret),
+  nve-select:not(:state(multiple))::part(caret) {
+    display: none;
+  }
 }
 
+nve-progressive-filter-chip input::-webkit-search-cancel-button,
+nve-progressive-filter-chip input::-webkit-calendar-picker-indicator,
 nve-progressive-filter-chip input::-webkit-search-cancel-button,
 nve-progressive-filter-chip input::-webkit-calendar-picker-indicator {
   opacity: 0 !important;
   display: none !important;
-}
-
-nve-progressive-filter-chip:has([status='error']) {
-  --background: transparent;
-}
-
-nve-progressive-filter-chip nve-select:not(:state(multiple)) {
-  --padding: 0 var(--nve-ref-size-200);
-}
-
-nve-progressive-filter-chip nve-select:not(:state(multiple))::part(caret) {
-  display: none;
 }

@@ -90,14 +90,17 @@
   position: absolute;
 }
 
+::slotted(*:not(a):not(nve-icon)),
 ::slotted(*:not(a):not(nve-icon)) {
   pointer-events: none;
 }
 
+::slotted(nve-divider),
 ::slotted(nve-divider) {
   margin: 0 calc(-1 * var(--padding));
 }
 
+::slotted(nve-icon),
 ::slotted(nve-icon) {
   --color: var(--nve-sys-text-muted-color);
 }
