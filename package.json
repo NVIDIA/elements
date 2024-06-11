@@ -29,6 +29,7 @@
     "@nvidia-elements/core": "workspace:@elements/elements@*",
     "@nvidia-elements/core-react": "workspace:@elements/elements-react@*",
     "@nvidia-elements/themes": "workspace:*",
+    "@nvidia-elements/code": "workspace:*",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "12.0.0",
     "@semantic-release/exec": "6.0.3",

@@ -36,6 +36,12 @@ export const Theme = {
     return new Date().getTime();
   }
 </nve-codeblock>
+<br />
+<nve-codeblock nve-theme="dark" language="typescript">
+  function getTime(): number {
+    return new Date().getTime();
+  }
+</nve-codeblock>
 `
 };
 
@@ -75,3 +81,16 @@ function getTime(): number {
 </nve-codeblock>
 `
 }
+
+export const Overflow = {
+  render: () => html`
+<nve-codeblock language="typescript" line-numbers highlight="2" style="height: 100px;">
+  import{LitElement as t,html as e}from"lit";import{property as s}from"lit/decorators/property.js";import{state as o}from"lit/decorators/state.js";
+  import{unsafeHTML as i}from"lit/directives/unsafe-html.js";
+  import{useStyles as r,shiftLeft as n}from"@elements/elements/internal";
+  import l from"./codeblock.css.js";
+  import a from"highlight.js/lib/core";
+  import h from"highlight.js/lib/languages/shell";
+</nve-codeblock>
+`
+};
