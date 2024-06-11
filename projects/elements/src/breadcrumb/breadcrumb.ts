@@ -85,8 +85,12 @@ export class Breadcrumb extends LitElement {
     if (e.target && e.target.assignedElements().length) {
       this.#resetItems();
       const items = this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements();
-      items.filter(i => i.matches('nve-button, nve-icon-button, span, a')).forEach(i => (i.slot = generateId()));
-      items.filter(i => i.matches('nve-button, nve-icon-button')).forEach((i: Button) => (i.container = 'inline'));
+      items
+        .filter(i => i.matches('nve-button, nve-icon-button, nve-button, nve-icon-button, span, a'))
+        .forEach(i => (i.slot = generateId()));
+      items
+        .filter(i => i.matches('nve-button, nve-icon-button, nve-button, nve-icon-button'))
+        .forEach((i: Button) => (i.container = 'inline'));
       this.breadcrumbItems = items.length ? items : this.breadcrumbItems;
     }
   }

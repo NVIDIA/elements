@@ -19,13 +19,9 @@
   align-items: center;
 }
 
-::slotted(nve-button) {
-  --height: var(--nve-ref-size-700);
-  --border-radius: var(--nve-ref-border-radius-sm);
-  --font-weight: var(--nve-ref-font-weight-medium);
-}
-
+::slotted(nve-button),
 ::slotted(nve-icon-button),
+::slotted(nve-button),
 ::slotted(nve-icon-button) {
   --height: var(--nve-ref-size-700);
   --border-radius: var(--nve-ref-border-radius-sm);
