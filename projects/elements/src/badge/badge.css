@@ -54,6 +54,7 @@ slot:not([name]) {
 }
 
 nve-icon,
+::slotted(nve-icon),
 ::slotted(nve-icon) {
   --color: var(--icon-color);
   --width: var(--nve-ref-size-300);
