@@ -13,7 +13,6 @@ export const lighthouseConfig = {
     },
     reporters: ['basic', 'junit'],
     globalSetup: ['@nvidia-elements/testing-lighthouse/vite-setup.js'],
-    include: ['src/**/*.test.lighthouse.ts'],
     testTimeout: 60000,
     server: {
       deps: {
