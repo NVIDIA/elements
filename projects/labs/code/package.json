@@ -61,8 +61,10 @@
     "build": "wireit",
     "build:watch": "wireit",
     "test": "wireit",
+    "test:axe": "wireit",
     "test:coverage": "wireit",
-    "test:watch": "wireit"
+    "test:watch": "wireit",
+    "test:lighthouse": "wireit"
   },
   "dependencies": {
     "highlight.js": "11.9.0",
@@ -75,6 +77,7 @@
     "@elements/elements": "workspace:^",
     "@nvidia-elements/testing": "workspace:*",
     "@nve-internals/vite": "workspace:*",
+    "@nvidia-elements/testing-lighthouse": "workspace:*",
     "@rollup/plugin-terser": "0.4.4",
     "@vitest/browser": "1.6.0",
     "@vitest/coverage-istanbul": "1.6.0",
@@ -95,7 +98,9 @@
     "ci": {
       "dependencies": [
         "build",
-        "test:coverage"
+        "test:axe",
+        "test:coverage",
+        "test:lighthouse"
       ]
     },
     "build": {
@@ -111,6 +116,9 @@
         "src/**",
         "!src/**/*.stories.ts",
         "!src/**/*.stories.mdx",
+        "!src/**/*.test.ts",
+        "!src/**/*.test.axe.ts",
+        "!src/**/*.test.lighthouse.ts",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -159,6 +167,46 @@
     "test:watch": {
       "command": "vitest --watch",
       "service": true
+    },
+    "test:lighthouse": {
+      "command": "vitest run --config=vitest.lighthouse.ts || exit 0",
+      "files": [
+        "src/**/*.test.lighthouse.ts",
+        "vitest.lighthouse.html",
+        "vitest.lighthouse.ts",
+        "vitest.lighthouse.build.ts"
+      ],
+      "output": [
+        ".lighthouse",
+        "coverage/lighthouse/**"
+      ],
+      "dependencies": [
+        "build",
+        "../testing-lighthouse:ci"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:axe": {
+      "command": "vitest run --config=vitest.axe.ts",
+      "files": [
+        "src/**/*.test.axe.ts",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts",
+        "vitest.axe.ts"
+      ],
+      "output": [
+        "coverage/axe/**"
+      ],
+      "dependencies": [
+        "test",
+        "build"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
     }
   }
 }
