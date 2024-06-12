@@ -1,3 +1,11 @@
+## [@elements/elements-v0.37.7](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.6...@elements/elements-v0.37.7) (2024-06-12)
+
+
+### Bug Fixes
+
+* **elements:** add internal alias selector support ([7c1b71c](https://github.com/NVIDIA/elements/commit/7c1b71c9f5a8b62fcf8a8e23d69ab09aa5c4e8ad))
+* **elements:** update css alias selectors ([239ac29](https://github.com/NVIDIA/elements/commit/239ac296f12c2257a7f912ee046ebb6325b125db))
+
 ## [@elements/elements-v0.37.6](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.5...@elements/elements-v0.37.6) (2024-06-10)
 
 
