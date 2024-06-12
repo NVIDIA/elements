@@ -39,7 +39,7 @@ export class LighthouseRunner {
 
     console.log('Starting Chromium...');
     this.#browser = await chromium.launch({
-      args: ['--headless', '--remote-debugging-port=9222', '--enable-experimental-web-platform-features']
+      args: ['--headless', '--remote-debugging-port=9222']
     });
 
     console.log('Starting Vite Server...');

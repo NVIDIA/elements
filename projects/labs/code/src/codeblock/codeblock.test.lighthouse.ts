@@ -3,7 +3,7 @@ import { runner } from '@nvidia-elements/testing-lighthouse';
 
 describe('codeblock lighthouse report', () => {
   test('codeblock should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-badge', /* html */`
+    const report = await runner.getReport('nve-codeblock', /* html */`
       <nve-codeblock language="shell">
         pnpm install
       </nve-codeblock>
@@ -19,7 +19,7 @@ describe('codeblock lighthouse report', () => {
   });
 
   test('codeblock should meet bundle limits for all languages', async () => {
-    const report = await runner.getReport('nve-badge', /* html */`
+    const report = await runner.getReport('nve-codeblock', /* html */`
       <script type="module">
       import('@nvidia-elements/code/codeblock/languages/css.js');
       import('@nvidia-elements/code/codeblock/languages/go.js');

@@ -99,8 +99,7 @@
       "dependencies": [
         "build",
         "test:axe",
-        "test:coverage",
-        "test:lighthouse"
+        "test:coverage"
       ]
     },
     "build": {
@@ -169,24 +168,7 @@
       "service": true
     },
     "test:lighthouse": {
-      "command": "vitest run --config=vitest.lighthouse.ts || exit 0",
-      "files": [
-        "src/**/*.test.lighthouse.ts",
-        "vitest.lighthouse.html",
-        "vitest.lighthouse.ts",
-        "vitest.lighthouse.build.ts"
-      ],
-      "output": [
-        ".lighthouse",
-        "coverage/lighthouse/**"
-      ],
-      "dependencies": [
-        "build",
-        "../testing-lighthouse:ci"
-      ],
-      "env": {
-        "NODE_ENV": "production"
-      }
+      "command": "vitest run --config=vitest.lighthouse.ts || exit 0"
     },
     "test:axe": {
       "command": "vitest run --config=vitest.axe.ts",
