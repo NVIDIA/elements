@@ -18,6 +18,7 @@ export default {
       [
         'ci',
         'docs',
+        'internals',
         'starters',
         'elements',
         'elements-react',

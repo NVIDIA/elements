@@ -390,6 +390,9 @@ importers:
       '@internals/vite':
         specifier: workspace:*
         version: link:../../internals/vite
+      '@nvidia-elements/testing-lighthouse':
+        specifier: workspace:*
+        version: link:../testing-lighthouse
       '@nvidia-elements/testing':
         specifier: workspace:*
         version: link:../../testing
@@ -766,6 +769,9 @@ importers:
 
   projects/storybook:
     dependencies:
+      '@nvidia-elements/behaviors-alpine':
+        specifier: workspace:*
+        version: link:../labs/behaviors-alpine
       '@nvidia-elements/code':
         specifier: workspace:*
         version: link:../labs/code
