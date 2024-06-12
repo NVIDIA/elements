@@ -28,17 +28,28 @@ export default defineConfig(() => {
 ```typescript
 // vitest.config.ts
 import { resolve } from 'path';
-import { defineConfig, mergeConfig } from 'vitest/config';
+import { mergeConfig } from 'vitest/config';
 import { libraryTestConfig } from '@nve-internals/vite';
 
-export default defineConfig(() => {
-  const config = {
-    test: {
-      alias: { '@nvidia-elements/lbrary': resolve(import.meta.dirname, './src') }
-    }
-  };
+export default mergeConfig(libraryTestConfig, {
+  test: {
+    alias: { '@nvidia-elements/library': resolve(import.meta.dirname, './src') }
+  }
+});
+```
 
-  return mergeConfig(libraryTestConfig, config);
+## Axe
+
+```typescript
+// vitest.axe.ts
+import { resolve } from 'path';
+import { mergeConfig } from 'vitest/config';
+import { libraryAxeTestConfig } from '@nve-internals/vite';
+
+export default mergeConfig(libraryAxeTestConfig, {
+  test: {
+    alias: { '@nvidia-elements/library': resolve(import.meta.dirname, './dist') },
+  }
 });
 
 ```
