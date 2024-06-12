@@ -7,7 +7,8 @@
     "build": "wireit"
   },
   "exports": {
-    ".": "./src/index.js"
+    ".": "./src/index.js",
+    "./setup.js": "./src/setup.js"
   },
   "peerDependencies": {
     "@rollup/plugin-terser": "0.4.4",
