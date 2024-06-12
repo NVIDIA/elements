@@ -5,6 +5,8 @@ import elementsChangelog from '@nvidia-elements/core/CHANGELOG.md?raw';
 import elementsReactChangelog from '@nvidia-elements/core-react/CHANGELOG.md?raw';
 import themesChangelog from '@nvidia-elements/themes/CHANGELOG.md?raw';
 import testingChangelog from '@nvidia-elements/testing/CHANGELOG.md?raw';
+import labsCodeChangelog from '@nvidia-elements/code/CHANGELOG.md?raw';
+import labsBehaviorsAlpineChangelog from '@nvidia-elements/behaviors-alpine/CHANGELOG.md?raw';
 
 <Meta title="About/Changelog" />
 
@@ -12,7 +14,7 @@ import testingChangelog from '@nvidia-elements/testing/CHANGELOG.md?raw';
 
 [![release](https://github.com/NVIDIA/elements/-/badges/release.svg?value_width=200)](https://github.com/NVIDIA/elements/-/releases)
 [![pipeline status](https://github.com/NVIDIA/elements/badges/main/pipeline.svg)](https://github.com/NVIDIA/elements/-/commits/main)
-[![coverage](https://github.com/NVIDIA/elements/badges/main/coverage.svg?min_good=90&key_width=170&key_text=@elements/elements%20coverage)](https://github.com/NVIDIA/elements/-/graphs/main/charts)
+[![coverage](https://github.com/NVIDIA/elements/badges/main/coverage.svg?min_good=90&key_text=coverage)](https://github.com/NVIDIA/elements/-/graphs/main/charts)
 
 <nve-divider></nve-divider>
 
@@ -21,10 +23,13 @@ import testingChangelog from '@nvidia-elements/testing/CHANGELOG.md?raw';
   <nve-tabs-item value="elements-react" style={{'--text-transform': 'none'}}>@elements/elements-react</nve-tabs-item>
   <nve-tabs-item value="testing" style={{'--text-transform': 'none'}}>@nvidia-elements/testing</nve-tabs-item>
   <nve-tabs-item value="themes" style={{'--text-transform': 'none'}}>@nvidia-elements/themes</nve-tabs-item>
+  <nve-tabs-item value="labs-code" style={{'--text-transform': 'none'}}>@nvidia-elements/code</nve-tabs-item>
+  <nve-tabs-item value="labs-behaviors-alpine" style={{'--text-transform': 'none'}}>@nvidia-elements/behaviors-alpine</nve-tabs-item>
 </nve-tabs>
 
 <div id="elements" className="changelog">
 <Markdown>{elementsChangelog}</Markdown>
+[Legacy Changelog](./?path=/docs/internal-legacy-changelog--docs)
 </div>
 
 <div id="elements-react" className="changelog" hidden>
@@ -39,7 +44,13 @@ import testingChangelog from '@nvidia-elements/testing/CHANGELOG.md?raw';
 <Markdown>{themesChangelog}</Markdown>
 </div>
 
-[Legacy Changelog](./?path=/docs/internal-legacy-changelog--docs)
+<div id="labs-code" className="changelog" hidden>
+<Markdown>{labsCodeChangelog}</Markdown>
+</div>
+
+<div id="labs-behaviors-alpine" className="changelog" hidden>
+<Markdown>{labsBehaviorsAlpineChangelog}</Markdown>
+</div>
 
 <div hidden>
 {setTimeout(() => {
