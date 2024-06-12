@@ -1,25 +1,20 @@
 import { resolve } from 'path';
-import { defineConfig, mergeConfig } from 'vitest/config';
+import { mergeConfig } from 'vitest/config';
 import { libraryTestConfig } from '@nve-internals/vite';
 
-export default defineConfig(() => {
-  const config = {
-    test: {
-      alias: { '@nvidia-elements/core': resolve(import.meta.dirname, './src') },
-      setupFiles: [resolve(import.meta.dirname, './src/test/setup.ts')],
-      coverage: {
-        exclude: [
-          '**/docs/**',
-          '**/polyfills/**',
-          '**/index.js',
-          '**/src/index.ts',
-          '**/src/icon/icons/**',
-          '**/src/icon/icons.ts',
-          '**/internal/docs.ts'
-        ]
-      }
+export default mergeConfig(libraryTestConfig, {
+  test: {
+    alias: { '@nvidia-elements/core': resolve(import.meta.dirname, './src') },
+    coverage: {
+      exclude: [
+        '**/docs/**',
+        '**/polyfills/**',
+        '**/index.js',
+        '**/src/index.ts',
+        '**/src/icon/icons/**',
+        '**/src/icon/icons.ts',
+        '**/internal/docs.ts'
+      ]
     }
-  };
-
-  return mergeConfig(libraryTestConfig, config);
+  }
 });

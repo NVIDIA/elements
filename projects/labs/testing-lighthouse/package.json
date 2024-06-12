@@ -21,6 +21,7 @@
     "vite-plugin-virtual-html": "1.1.19"
   },
   "devDependencies": {
+    "@types/node": "20.14.2",
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
     "eslint-plugin-import": "2.29.1",
