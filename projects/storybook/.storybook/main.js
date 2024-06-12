@@ -52,7 +52,8 @@ export default {
           '@nvidia-elements/themes/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/themes/CHANGELOG.md?raw'),
           '@nvidia-elements/testing/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/testing/CHANGELOG.md?raw'),
           '@nvidia-elements/core/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/core/CHANGELOG.md?raw'),
-          '@nvidia-elements/behaviors-alpine/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/behaviors-alpine/CHANGELOG.md?raw')
+          '@nvidia-elements/behaviors-alpine/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/behaviors-alpine/CHANGELOG.md?raw'),
+          '@nvidia-elements/code/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/code/CHANGELOG.md?raw')
         }
       }
     });
