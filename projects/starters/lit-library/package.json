@@ -10,11 +10,26 @@
   ],
   "exports": {
     "./package.json": "./package.json",
-    ".": "./dist/index.js",
-    "./index.js": "./dist/index.js",
-    "./login": "./dist/login/index.js",
-    "./login/index.js": "./dist/login/index.js",
-    "./login/define.js": "./dist/login/define.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./login": {
+      "types": "./dist/login/index.d.ts",
+      "default": "./dist/login/index.js"
+    },
+    "./login/index.js": {
+      "types": "./dist/login/index.d.ts",
+      "default": "./dist/login/index.js"
+    },
+    "./login/define.js": {
+      "types": "./dist/login/define.d.ts",
+      "default": "./dist/login/define.js"
+    }
   },
   "sideEffects": [
     "./**/define.js"
