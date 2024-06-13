@@ -32,12 +32,30 @@
   },
   "exports": {
     "./package.json": "./package.json",
-    ".": "./dist/index.js",
-    "./index.js": "./dist/index.js",
-    "./vite-setup": "./dist/vite-setup.js",
-    "./vite-setup.js": "./dist/vite-setup.js",
-    "./vite": "./dist/vite.js",
-    "./vite.js": "./dist/vite.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./vite-setup": {
+      "types": "./dist/vite-setup.d.ts",
+      "default": "./dist/vite-setup.js"
+    },
+    "./vite-setup.js": {
+      "types": "./dist/vite-setup.d.ts",
+      "default": "./dist/vite-setup.js"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "default": "./dist/vite.js"
+    },
+    "./vite.js": {
+      "types": "./dist/vite.d.ts",
+      "default": "./dist/vite.js"
+    }
   },
   "typesVersions": {
     "*": {
