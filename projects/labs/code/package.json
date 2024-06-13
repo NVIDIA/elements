@@ -9,31 +9,106 @@
   ],
   "exports": {
     "./package.json": "./package.json",
-    ".": "./dist/index.js",
-    "./index.js": "./dist/index.js",
-    "./codeblock": "./dist/codeblock/index.js",
-    "./codeblock/index.js": "./dist/codeblock/index.js",
-    "./codeblock/define.js": "./dist/codeblock/define.js",
-    "./codeblock/languages/css": "./dist/codeblock/languages/css.js",
-    "./codeblock/languages/css.js": "./dist/codeblock/languages/css.js",
-    "./codeblock/languages/go": "./dist/codeblock/languages/go.js",
-    "./codeblock/languages/go.js": "./dist/codeblock/languages/go.js",
-    "./codeblock/languages/html": "./dist/codeblock/languages/html.js",
-    "./codeblock/languages/html.js": "./dist/codeblock/languages/html.js",
-    "./codeblock/languages/javascript": "./dist/codeblock/languages/javascript.js",
-    "./codeblock/languages/javascript.js": "./dist/codeblock/languages/javascript.js",
-    "./codeblock/languages/json": "./dist/codeblock/languages/json.js",
-    "./codeblock/languages/json.js": "./dist/codeblock/languages/json.js",
-    "./codeblock/languages/markdown": "./dist/codeblock/languages/markdown.js",
-    "./codeblock/languages/markdown.js": "./dist/codeblock/languages/markdown.js",
-    "./codeblock/languages/python": "./dist/codeblock/languages/python.js",
-    "./codeblock/languages/python.js": "./dist/codeblock/languages/python.js",
-    "./codeblock/languages/typescript": "./dist/codeblock/languages/typescript.js",
-    "./codeblock/languages/typescript.js": "./dist/codeblock/languages/typescript.js",
-    "./codeblock/languages/xml": "./dist/codeblock/languages/xml.js",
-    "./codeblock/languages/xml.js": "./dist/codeblock/languages/xml.js",
-    "./codeblock/languages/yaml": "./dist/codeblock/languages/yaml.js",
-    "./codeblock/languages/yaml.js": "./dist/codeblock/languages/yaml.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./codeblock": {
+      "types": "./dist/codeblock/index.d.ts",
+      "default": "./dist/codeblock/index.js"
+    },
+    "./codeblock/index.js": {
+      "types": "./dist/codeblock/index.d.ts",
+      "default": "./dist/codeblock/index.js"
+    },
+    "./codeblock/define.js": {
+      "types": "./dist/codeblock/define.d.ts",
+      "default": "./dist/codeblock/define.js"
+    },
+    "./codeblock/languages/css": {
+      "types": "./dist/codeblock/languages/css.d.ts",
+      "default": "./dist/codeblock/languages/css.js"
+    },
+    "./codeblock/languages/css.js": {
+      "types": "./dist/codeblock/languages/css.d.ts",
+      "default": "./dist/codeblock/languages/css.js"
+    },
+    "./codeblock/languages/go": {
+      "types": "./dist/codeblock/languages/go.d.ts",
+      "default": "./dist/codeblock/languages/go.js"
+    },
+    "./codeblock/languages/go.js": {
+      "types": "./dist/codeblock/languages/go.d.ts",
+      "default": "./dist/codeblock/languages/go.js"
+    },
+    "./codeblock/languages/html": {
+      "types": "./dist/codeblock/languages/html.d.ts",
+      "default": "./dist/codeblock/languages/html.js"
+    },
+    "./codeblock/languages/html.js": {
+      "types": "./dist/codeblock/languages/html.d.ts",
+      "default": "./dist/codeblock/languages/html.js"
+    },
+    "./codeblock/languages/javascript": {
+      "types": "./dist/codeblock/languages/javascript.d.ts",
+      "default": "./dist/codeblock/languages/javascript.js"
+    },
+    "./codeblock/languages/javascript.js": {
+      "types": "./dist/codeblock/languages/javascript.d.ts",
+      "default": "./dist/codeblock/languages/javascript.js"
+    },
+    "./codeblock/languages/json": {
+      "types": "./dist/codeblock/languages/json.d.ts",
+      "default": "./dist/codeblock/languages/json.js"
+    },
+    "./codeblock/languages/json.js": {
+      "types": "./dist/codeblock/languages/json.d.ts",
+      "default": "./dist/codeblock/languages/json.js"
+    },
+    "./codeblock/languages/markdown": {
+      "types": "./dist/codeblock/languages/markdown.d.ts",
+      "default": "./dist/codeblock/languages/markdown.js"
+    },
+    "./codeblock/languages/markdown.js": {
+      "types": "./dist/codeblock/languages/markdown.d.ts",
+      "default": "./dist/codeblock/languages/markdown.js"
+    },
+    "./codeblock/languages/python": {
+      "types": "./dist/codeblock/languages/python.d.ts",
+      "default": "./dist/codeblock/languages/python.js"
+    },
+    "./codeblock/languages/python.js": {
+      "types": "./dist/codeblock/languages/python.d.ts",
+      "default": "./dist/codeblock/languages/python.js"
+    },
+    "./codeblock/languages/typescript": {
+      "types": "./dist/codeblock/languages/typescript.d.ts",
+      "default": "./dist/codeblock/languages/typescript.js"
+    },
+    "./codeblock/languages/typescript.js": {
+      "types": "./dist/codeblock/languages/typescript.d.ts",
+      "default": "./dist/codeblock/languages/typescript.js"
+    },
+    "./codeblock/languages/xml": {
+      "types": "./dist/codeblock/languages/xml.d.ts",
+      "default": "./dist/codeblock/languages/xml.js"
+    },
+    "./codeblock/languages/xml.js": {
+      "types": "./dist/codeblock/languages/xml.d.ts",
+      "default": "./dist/codeblock/languages/xml.js"
+    },
+    "./codeblock/languages/yaml": {
+      "types": "./dist/codeblock/languages/yaml.d.ts",
+      "default": "./dist/codeblock/languages/yaml.js"
+    },
+    "./codeblock/languages/yaml.js": {
+      "types": "./dist/codeblock/languages/yaml.d.ts",
+      "default": "./dist/codeblock/languages/yaml.js"
+    }
   },
   "sideEffects": [
     "./**/define.js",
