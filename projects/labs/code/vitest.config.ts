@@ -4,6 +4,7 @@ import { libraryTestConfig } from '@internals/vite';
 
 export default mergeConfig(libraryTestConfig, {
   test: {
+    include: ['./src/**/*.test.ts'],
     alias: { '@nvidia-elements/code': resolve(import.meta.dirname, './src') },
     coverage: {
       thresholds: {
