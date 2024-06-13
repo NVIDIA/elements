@@ -160,6 +160,7 @@
       ],
       "dependencies": [
         "build",
+        "test",
         "../../testing:ci"
       ]
     },
@@ -168,7 +169,11 @@
       "service": true
     },
     "test:lighthouse": {
-      "command": "vitest run --config=vitest.lighthouse.ts || exit 0"
+      "command": "vitest run --config=vitest.lighthouse.ts",
+      "dependencies": [
+        "build",
+        "../testing-lighthouse:build"
+      ]
     },
     "test:axe": {
       "command": "vitest run --config=vitest.axe.ts",
@@ -183,7 +188,7 @@
         "coverage/axe/**"
       ],
       "dependencies": [
-        "test",
+        "test:coverage",
         "build"
       ],
       "env": {
