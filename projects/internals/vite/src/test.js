@@ -6,7 +6,6 @@ const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
 /** @type {import('vitest').UserConfig} */
 export const libraryTestConfig = {
   test: {
-    include: ['./src/**/*.test.ts'],
     retry: 1,
     isolate: coverage,
     bail: !watch && !coverage ? 2 : 0,
