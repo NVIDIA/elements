@@ -19,7 +19,6 @@
     "test:axe": "wireit",
     "test:coverage": "wireit",
     "test:lighthouse": "wireit",
-    "test:lighthouse:all": "wireit",
     "lint": "wireit",
     "prepublishonly": "wireit"
   },
@@ -456,7 +455,7 @@
       ]
     },
     "test": {
-      "command": "vitest run || exit 0",
+      "command": "vitest run",
       "files": [
         "src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -475,7 +474,7 @@
       }
     },
     "test:coverage": {
-      "command": "vitest run --coverage || exit 0",
+      "command": "vitest run --coverage",
       "files": [
         "src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -501,7 +500,11 @@
       "service": true
     },
     "test:lighthouse": {
-      "command": "vitest run --config=vitest.lighthouse.ts || exit 0"
+      "command": "vitest run --config=vitest.lighthouse.ts",
+      "dependencies": [
+        "build",
+        "../labs/testing-lighthouse:build"
+      ]
     },
     "test:axe": {
       "command": "vitest run --config=vitest.axe.ts",
@@ -516,7 +519,7 @@
         "coverage/axe/**"
       ],
       "dependencies": [
-        "test",
+        "test:coverage",
         "build"
       ],
       "env": {
