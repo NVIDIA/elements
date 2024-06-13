@@ -15,6 +15,7 @@ import { libraryBuildConfig } from '@nve-internals/vite';
 export default defineConfig(() => {
   const config: UserConfig = {
     resolve: {
+      include: ['./src/**/*.test.lighthouse.ts'],
       alias: { '@nvidia-elements/library': resolve(import.meta.dirname, './src') }
     }
   };
@@ -33,6 +34,7 @@ import { libraryTestConfig } from '@nve-internals/vite';
 
 export default mergeConfig(libraryTestConfig, {
   test: {
+    include: ['./src/**/*.test.ts'],
     alias: { '@nvidia-elements/library': resolve(import.meta.dirname, './src') }
   }
 });
@@ -48,6 +50,7 @@ import { libraryAxeTestConfig } from '@nve-internals/vite';
 
 export default mergeConfig(libraryAxeTestConfig, {
   test: {
+    include: ['./src/**/*.test.axe.ts'],
     alias: { '@nvidia-elements/library': resolve(import.meta.dirname, './dist') },
   }
 });
