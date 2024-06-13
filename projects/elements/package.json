@@ -42,174 +42,672 @@
     "./elements.html-data.json": "./dist/elements.html-data.json",
     "./assets/*": "./dist/assets/*",
     "./css/*": "./dist/css/*",
-    ".": "./dist/index.js",
-    "./index.js": "./dist/index.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./index.css": "./dist/index.css",
     "./inter.css": "./dist/inter.css",
-    "./test": "./dist/test/index.js",
-    "./test/index.js": "./dist/test/index.js",
-    "./polyfills": "./dist/polyfills/index.js",
-    "./polyfills/index.js": "./dist/polyfills/index.js",
-    "./polyfills/custom-state-set.js": "./dist/polyfills/custom-state-set.js",
-    "./bundles/*": "./dist/bundles/*",
-    "./accordion": "./dist/accordion/index.js",
-    "./accordion/index.js": "./dist/accordion/index.js",
-    "./accordion/define.js": "./dist/accordion/define.js",
-    "./alert": "./dist/alert/index.js",
-    "./alert/index.js": "./dist/alert/index.js",
-    "./alert/define.js": "./dist/alert/define.js",
-    "./app-header": "./dist/app-header/index.js",
-    "./app-header/index.js": "./dist/app-header/index.js",
-    "./app-header/define.js": "./dist/app-header/define.js",
-    "./badge": "./dist/badge/index.js",
-    "./badge/index.js": "./dist/badge/index.js",
-    "./badge/define.js": "./dist/badge/define.js",
-    "./breadcrumb": "./dist/breadcrumb/index.js",
-    "./breadcrumb/index.js": "./dist/breadcrumb/index.js",
-    "./breadcrumb/define.js": "./dist/breadcrumb/define.js",
-    "./button": "./dist/button/index.js",
-    "./button/index.js": "./dist/button/index.js",
-    "./button/define.js": "./dist/button/define.js",
-    "./button-group": "./dist/button-group/index.js",
-    "./button-group/index.js": "./dist/button-group/index.js",
-    "./button-group/define.js": "./dist/button-group/define.js",
-    "./card": "./dist/card/index.js",
-    "./card/index.js": "./dist/card/index.js",
-    "./card/define.js": "./dist/card/define.js",
-    "./checkbox": "./dist/checkbox/index.js",
-    "./checkbox/index.js": "./dist/checkbox/index.js",
-    "./checkbox/define.js": "./dist/checkbox/define.js",
-    "./color": "./dist/color/index.js",
-    "./color/index.js": "./dist/color/index.js",
-    "./color/define.js": "./dist/color/define.js",
-    "./combobox": "./dist/combobox/index.js",
-    "./combobox/index.js": "./dist/combobox/index.js",
-    "./combobox/define.js": "./dist/combobox/define.js",
-    "./date": "./dist/date/index.js",
-    "./date/index.js": "./dist/date/index.js",
-    "./date/define.js": "./dist/date/define.js",
-    "./datetime": "./dist/datetime/index.js",
-    "./datetime/index.js": "./dist/datetime/index.js",
-    "./datetime/define.js": "./dist/datetime/define.js",
-    "./dialog": "./dist/dialog/index.js",
-    "./dialog/index.js": "./dist/dialog/index.js",
-    "./dialog/define.js": "./dist/dialog/define.js",
-    "./divider": "./dist/divider/index.js",
-    "./divider/index.js": "./dist/divider/index.js",
-    "./divider/define.js": "./dist/divider/define.js",
-    "./dot": "./dist/dot/index.js",
-    "./dot/index.js": "./dist/dot/index.js",
-    "./dot/define.js": "./dist/dot/define.js",
-    "./drawer": "./dist/drawer/index.js",
-    "./drawer/index.js": "./dist/drawer/index.js",
-    "./drawer/define.js": "./dist/drawer/define.js",
-    "./dropdown": "./dist/dropdown/index.js",
-    "./dropdown/index.js": "./dist/dropdown/index.js",
-    "./dropdown/define.js": "./dist/dropdown/define.js",
-    "./file": "./dist/file/index.js",
-    "./file/index.js": "./dist/file/index.js",
-    "./file/define.js": "./dist/file/define.js",
-    "./forms": "./dist/forms/index.js",
-    "./forms/index.js": "./dist/forms/index.js",
-    "./forms/define.js": "./dist/forms/define.js",
-    "./grid": "./dist/grid/index.js",
-    "./grid/index.js": "./dist/grid/index.js",
-    "./grid/define.js": "./dist/grid/define.js",
-    "./icon": "./dist/icon/index.js",
-    "./icon/index.js": "./dist/icon/index.js",
-    "./icon/define.js": "./dist/icon/define.js",
-    "./icon-button": "./dist/icon-button/index.js",
-    "./icon-button/index.js": "./dist/icon-button/index.js",
-    "./icon-button/define.js": "./dist/icon-button/define.js",
-    "./input": "./dist/input/index.js",
-    "./input/index.js": "./dist/input/index.js",
-    "./input/define.js": "./dist/input/define.js",
-    "./json-viewer": "./dist/json-viewer/index.js",
-    "./json-viewer/index.js": "./dist/json-viewer/index.js",
-    "./json-viewer/define.js": "./dist/json-viewer/define.js",
-    "./logo": "./dist/logo/index.js",
-    "./logo/index.js": "./dist/logo/index.js",
-    "./logo/define.js": "./dist/logo/define.js",
-    "./menu": "./dist/menu/index.js",
-    "./menu/index.js": "./dist/menu/index.js",
-    "./menu/define.js": "./dist/menu/define.js",
-    "./month": "./dist/month/index.js",
-    "./month/index.js": "./dist/month/index.js",
-    "./month/define.js": "./dist/month/define.js",
-    "./notification": "./dist/notification/index.js",
-    "./notification/index.js": "./dist/notification/index.js",
-    "./notification/define.js": "./dist/notification/define.js",
-    "./page-loader": "./dist/page-loader/index.js",
-    "./page-loader/index.js": "./dist/page-loader/index.js",
-    "./page-loader/define.js": "./dist/page-loader/define.js",
-    "./pagination": "./dist/pagination/index.js",
-    "./pagination/index.js": "./dist/pagination/index.js",
-    "./pagination/define.js": "./dist/pagination/define.js",
-    "./panel": "./dist/panel/index.js",
-    "./panel/index.js": "./dist/panel/index.js",
-    "./panel/define.js": "./dist/panel/define.js",
-    "./password": "./dist/password/index.js",
-    "./password/index.js": "./dist/password/index.js",
-    "./password/define.js": "./dist/password/define.js",
-    "./progress-bar": "./dist/progress-bar/index.js",
-    "./progress-bar/index.js": "./dist/progress-bar/index.js",
-    "./progress-bar/define.js": "./dist/progress-bar/define.js",
-    "./progress-ring": "./dist/progress-ring/index.js",
-    "./progress-ring/index.js": "./dist/progress-ring/index.js",
-    "./progress-ring/define.js": "./dist/progress-ring/define.js",
-    "./progressive-filter-chip": "./dist/progressive-filter-chip/index.js",
-    "./progressive-filter-chip/index.js": "./dist/progressive-filter-chip/index.js",
-    "./progressive-filter-chip/define.js": "./dist/progressive-filter-chip/define.js",
-    "./radio": "./dist/radio/index.js",
-    "./radio/index.js": "./dist/radio/index.js",
-    "./radio/define.js": "./dist/radio/define.js",
-    "./range": "./dist/range/index.js",
-    "./range/index.js": "./dist/range/index.js",
-    "./range/define.js": "./dist/range/define.js",
-    "./scoped": "./dist/scoped/index.js",
-    "./scoped/index.js": "./dist/scoped/index.js",
-    "./scoped/define.js": "./dist/scoped/define.js",
-    "./search": "./dist/search/index.js",
-    "./search/index.js": "./dist/search/index.js",
-    "./search/define.js": "./dist/search/define.js",
-    "./select": "./dist/select/index.js",
-    "./select/index.js": "./dist/select/index.js",
-    "./select/define.js": "./dist/select/define.js",
-    "./sort-button": "./dist/sort-button/index.js",
-    "./sort-button/index.js": "./dist/sort-button/index.js",
-    "./sort-button/define.js": "./dist/sort-button/define.js",
-    "./steps": "./dist/steps/index.js",
-    "./steps/index.js": "./dist/steps/index.js",
-    "./steps/define.js": "./dist/steps/define.js",
-    "./switch": "./dist/switch/index.js",
-    "./switch/index.js": "./dist/switch/index.js",
-    "./switch/define.js": "./dist/switch/define.js",
-    "./tabs": "./dist/tabs/index.js",
-    "./tabs/index.js": "./dist/tabs/index.js",
-    "./tabs/define.js": "./dist/tabs/define.js",
-    "./tag": "./dist/tag/index.js",
-    "./tag/index.js": "./dist/tag/index.js",
-    "./tag/define.js": "./dist/tag/define.js",
-    "./toast": "./dist/toast/index.js",
-    "./toast/index.js": "./dist/toast/index.js",
-    "./toast/define.js": "./dist/toast/define.js",
-    "./time": "./dist/time/index.js",
-    "./time/index.js": "./dist/time/index.js",
-    "./time/define.js": "./dist/time/define.js",
-    "./textarea": "./dist/textarea/index.js",
-    "./textarea/index.js": "./dist/textarea/index.js",
-    "./textarea/define.js": "./dist/textarea/define.js",
-    "./toolbar": "./dist/toolbar/index.js",
-    "./toolbar/index.js": "./dist/toolbar/index.js",
-    "./toolbar/define.js": "./dist/toolbar/define.js",
-    "./tooltip": "./dist/tooltip/index.js",
-    "./tooltip/index.js": "./dist/tooltip/index.js",
-    "./tooltip/define.js": "./dist/tooltip/define.js",
-    "./week": "./dist/week/index.js",
-    "./week/index.js": "./dist/week/index.js",
-    "./week/define.js": "./dist/week/define.js",
-    "./internal": "./dist/internal/index.js",
-    "./internal/index.js": "./dist/internal/index.js"
+    "./test": {
+      "types": "./dist/test/index.d.ts",
+      "default": "./dist/test/index.js"
+    },
+    "./test/index.js": {
+      "types": "./dist/test/index.d.ts",
+      "default": "./dist/test/index.js"
+    },
+    "./polyfills": {
+      "types": "./dist/polyfills/index.d.ts",
+      "default": "./dist/polyfills/index.js"
+    },
+    "./polyfills/index.js": {
+      "types": "./dist/polyfills/index.d.ts",
+      "default": "./dist/polyfills/index.js"
+    },
+    "./polyfills/custom-state-set.js": {
+      "types": "./dist/polyfills/custom-state-set.d.ts",
+      "default": "./dist/polyfills/custom-state-set.js"
+    },
+    "./bundles/*": {
+      "types": "./dist/bundles/bundle.d.ts",
+      "default": "./dist/bundles/*"
+    },
+    "./accordion": {
+      "types": "./dist/accordion/index.d.ts",
+      "default": "./dist/accordion/index.js"
+    },
+    "./accordion/index.js": {
+      "types": "./dist/accordion/index.d.ts",
+      "default": "./dist/accordion/index.js"
+    },
+    "./accordion/define.js": {
+      "types": "./dist/accordion/define.d.ts",
+      "default": "./dist/accordion/define.js"
+    },
+    "./alert": {
+      "types": "./dist/alert/index.d.ts",
+      "default": "./dist/alert/index.js"
+    },
+    "./alert/index.js": {
+      "types": "./dist/alert/index.d.ts",
+      "default": "./dist/alert/index.js"
+    },
+    "./alert/define.js": {
+      "types": "./dist/alert/define.d.ts",
+      "default": "./dist/alert/define.js"
+    },
+    "./app-header": {
+      "types": "./dist/app-header/index.d.ts",
+      "default": "./dist/app-header/index.js"
+    },
+    "./app-header/index.js": {
+      "types": "./dist/app-header/index.d.ts",
+      "default": "./dist/app-header/index.js"
+    },
+    "./app-header/define.js": {
+      "types": "./dist/app-header/define.d.ts",
+      "default": "./dist/app-header/define.js"
+    },
+    "./badge": {
+      "types": "./dist/badge/index.d.ts",
+      "default": "./dist/badge/index.js"
+    },
+    "./badge/index.js": {
+      "types": "./dist/badge/index.d.ts",
+      "default": "./dist/badge/index.js"
+    },
+    "./badge/define.js": {
+      "types": "./dist/badge/define.d.ts",
+      "default": "./dist/badge/define.js"
+    },
+    "./breadcrumb": {
+      "types": "./dist/breadcrumb/index.d.ts",
+      "default": "./dist/breadcrumb/index.js"
+    },
+    "./breadcrumb/index.js": {
+      "types": "./dist/breadcrumb/index.d.ts",
+      "default": "./dist/breadcrumb/index.js"
+    },
+    "./breadcrumb/define.js": {
+      "types": "./dist/breadcrumb/define.d.ts",
+      "default": "./dist/breadcrumb/define.js"
+    },
+    "./button": {
+      "types": "./dist/button/index.d.ts",
+      "default": "./dist/button/index.js"
+    },
+    "./button/index.js": {
+      "types": "./dist/button/index.d.ts",
+      "default": "./dist/button/index.js"
+    },
+    "./button/define.js": {
+      "types": "./dist/button/define.d.ts",
+      "default": "./dist/button/define.js"
+    },
+    "./button-group": {
+      "types": "./dist/button-group/index.d.ts",
+      "default": "./dist/button-group/index.js"
+    },
+    "./button-group/index.js": {
+      "types": "./dist/button-group/index.d.ts",
+      "default": "./dist/button-group/index.js"
+    },
+    "./button-group/define.js": {
+      "types": "./dist/button-group/define.d.ts",
+      "default": "./dist/button-group/define.js"
+    },
+    "./card": {
+      "types": "./dist/card/index.d.ts",
+      "default": "./dist/card/index.js"
+    },
+    "./card/index.js": {
+      "types": "./dist/card/index.d.ts",
+      "default": "./dist/card/index.js"
+    },
+    "./card/define.js": {
+      "types": "./dist/card/define.d.ts",
+      "default": "./dist/card/define.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "default": "./dist/checkbox/index.js"
+    },
+    "./checkbox/index.js": {
+      "types": "./dist/checkbox/index.d.ts",
+      "default": "./dist/checkbox/index.js"
+    },
+    "./checkbox/define.js": {
+      "types": "./dist/checkbox/define.d.ts",
+      "default": "./dist/checkbox/define.js"
+    },
+    "./color": {
+      "types": "./dist/color/index.d.ts",
+      "default": "./dist/color/index.js"
+    },
+    "./color/index.js": {
+      "types": "./dist/color/index.d.ts",
+      "default": "./dist/color/index.js"
+    },
+    "./color/define.js": {
+      "types": "./dist/color/define.d.ts",
+      "default": "./dist/color/define.js"
+    },
+    "./combobox": {
+      "types": "./dist/combobox/index.d.ts",
+      "default": "./dist/combobox/index.js"
+    },
+    "./combobox/index.js": {
+      "types": "./dist/combobox/index.d.ts",
+      "default": "./dist/combobox/index.js"
+    },
+    "./combobox/define.js": {
+      "types": "./dist/combobox/define.d.ts",
+      "default": "./dist/combobox/define.js"
+    },
+    "./date": {
+      "types": "./dist/date/index.d.ts",
+      "default": "./dist/date/index.js"
+    },
+    "./date/index.js": {
+      "types": "./dist/date/index.d.ts",
+      "default": "./dist/date/index.js"
+    },
+    "./date/define.js": {
+      "types": "./dist/date/define.d.ts",
+      "default": "./dist/date/define.js"
+    },
+    "./datetime": {
+      "types": "./dist/datetime/index.d.ts",
+      "default": "./dist/datetime/index.js"
+    },
+    "./datetime/index.js": {
+      "types": "./dist/datetime/index.d.ts",
+      "default": "./dist/datetime/index.js"
+    },
+    "./datetime/define.js": {
+      "types": "./dist/datetime/define.d.ts",
+      "default": "./dist/datetime/define.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog/index.d.ts",
+      "default": "./dist/dialog/index.js"
+    },
+    "./dialog/index.js": {
+      "types": "./dist/dialog/index.d.ts",
+      "default": "./dist/dialog/index.js"
+    },
+    "./dialog/define.js": {
+      "types": "./dist/dialog/define.d.ts",
+      "default": "./dist/dialog/define.js"
+    },
+    "./divider": {
+      "types": "./dist/divider/index.d.ts",
+      "default": "./dist/divider/index.js"
+    },
+    "./divider/index.js": {
+      "types": "./dist/divider/index.d.ts",
+      "default": "./dist/divider/index.js"
+    },
+    "./divider/define.js": {
+      "types": "./dist/divider/define.d.ts",
+      "default": "./dist/divider/define.js"
+    },
+    "./dot": {
+      "types": "./dist/dot/index.d.ts",
+      "default": "./dist/dot/index.js"
+    },
+    "./dot/index.js": {
+      "types": "./dist/dot/index.d.ts",
+      "default": "./dist/dot/index.js"
+    },
+    "./dot/define.js": {
+      "types": "./dist/dot/define.d.ts",
+      "default": "./dist/dot/define.js"
+    },
+    "./drawer": {
+      "types": "./dist/drawer/index.d.ts",
+      "default": "./dist/drawer/index.js"
+    },
+    "./drawer/index.js": {
+      "types": "./dist/drawer/index.d.ts",
+      "default": "./dist/drawer/index.js"
+    },
+    "./drawer/define.js": {
+      "types": "./dist/drawer/define.d.ts",
+      "default": "./dist/drawer/define.js"
+    },
+    "./dropdown": {
+      "types": "./dist/dropdown/index.d.ts",
+      "default": "./dist/dropdown/index.js"
+    },
+    "./dropdown/index.js": {
+      "types": "./dist/dropdown/index.d.ts",
+      "default": "./dist/dropdown/index.js"
+    },
+    "./dropdown/define.js": {
+      "types": "./dist/dropdown/define.d.ts",
+      "default": "./dist/dropdown/define.js"
+    },
+    "./file": {
+      "types": "./dist/file/index.d.ts",
+      "default": "./dist/file/index.js"
+    },
+    "./file/index.js": {
+      "types": "./dist/file/index.d.ts",
+      "default": "./dist/file/index.js"
+    },
+    "./file/define.js": {
+      "types": "./dist/file/define.d.ts",
+      "default": "./dist/file/define.js"
+    },
+    "./forms": {
+      "types": "./dist/forms/index.d.ts",
+      "default": "./dist/forms/index.js"
+    },
+    "./forms/index.js": {
+      "types": "./dist/forms/index.d.ts",
+      "default": "./dist/forms/index.js"
+    },
+    "./forms/define.js": {
+      "types": "./dist/forms/define.d.ts",
+      "default": "./dist/forms/define.js"
+    },
+    "./grid": {
+      "types": "./dist/grid/index.d.ts",
+      "default": "./dist/grid/index.js"
+    },
+    "./grid/index.js": {
+      "types": "./dist/grid/index.d.ts",
+      "default": "./dist/grid/index.js"
+    },
+    "./grid/define.js": {
+      "types": "./dist/grid/define.d.ts",
+      "default": "./dist/grid/define.js"
+    },
+    "./icon": {
+      "types": "./dist/icon/index.d.ts",
+      "default": "./dist/icon/index.js"
+    },
+    "./icon/index.js": {
+      "types": "./dist/icon/index.d.ts",
+      "default": "./dist/icon/index.js"
+    },
+    "./icon/define.js": {
+      "types": "./dist/icon/define.d.ts",
+      "default": "./dist/icon/define.js"
+    },
+    "./icon-button": {
+      "types": "./dist/icon-button/index.d.ts",
+      "default": "./dist/icon-button/index.js"
+    },
+    "./icon-button/index.js": {
+      "types": "./dist/icon-button/index.d.ts",
+      "default": "./dist/icon-button/index.js"
+    },
+    "./icon-button/define.js": {
+      "types": "./dist/icon-button/define.d.ts",
+      "default": "./dist/icon-button/define.js"
+    },
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "default": "./dist/input/index.js"
+    },
+    "./input/index.js": {
+      "types": "./dist/input/index.d.ts",
+      "default": "./dist/input/index.js"
+    },
+    "./input/define.js": {
+      "types": "./dist/input/define.d.ts",
+      "default": "./dist/input/define.js"
+    },
+    "./json-viewer": {
+      "types": "./dist/json-viewer/index.d.ts",
+      "default": "./dist/json-viewer/index.js"
+    },
+    "./json-viewer/index.js": {
+      "types": "./dist/json-viewer/index.d.ts",
+      "default": "./dist/json-viewer/index.js"
+    },
+    "./json-viewer/define.js": {
+      "types": "./dist/json-viewer/define.d.ts",
+      "default": "./dist/json-viewer/define.js"
+    },
+    "./logo": {
+      "types": "./dist/logo/index.d.ts",
+      "default": "./dist/logo/index.js"
+    },
+    "./logo/index.js": {
+      "types": "./dist/logo/index.d.ts",
+      "default": "./dist/logo/index.js"
+    },
+    "./logo/define.js": {
+      "types": "./dist/logo/define.d.ts",
+      "default": "./dist/logo/define.js"
+    },
+    "./menu": {
+      "types": "./dist/menu/index.d.ts",
+      "default": "./dist/menu/index.js"
+    },
+    "./menu/index.js": {
+      "types": "./dist/menu/index.d.ts",
+      "default": "./dist/menu/index.js"
+    },
+    "./menu/define.js": {
+      "types": "./dist/menu/define.d.ts",
+      "default": "./dist/menu/define.js"
+    },
+    "./month": {
+      "types": "./dist/month/index.d.ts",
+      "default": "./dist/month/index.js"
+    },
+    "./month/index.js": {
+      "types": "./dist/month/index.d.ts",
+      "default": "./dist/month/index.js"
+    },
+    "./month/define.js": {
+      "types": "./dist/month/define.d.ts",
+      "default": "./dist/month/define.js"
+    },
+    "./notification": {
+      "types": "./dist/notification/index.d.ts",
+      "default": "./dist/notification/index.js"
+    },
+    "./notification/index.js": {
+      "types": "./dist/notification/index.d.ts",
+      "default": "./dist/notification/index.js"
+    },
+    "./notification/define.js": {
+      "types": "./dist/notification/define.d.ts",
+      "default": "./dist/notification/define.js"
+    },
+    "./page-loader": {
+      "types": "./dist/page-loader/index.d.ts",
+      "default": "./dist/page-loader/index.js"
+    },
+    "./page-loader/index.js": {
+      "types": "./dist/page-loader/index.d.ts",
+      "default": "./dist/page-loader/index.js"
+    },
+    "./page-loader/define.js": {
+      "types": "./dist/page-loader/define.d.ts",
+      "default": "./dist/page-loader/define.js"
+    },
+    "./pagination": {
+      "types": "./dist/pagination/index.d.ts",
+      "default": "./dist/pagination/index.js"
+    },
+    "./pagination/index.js": {
+      "types": "./dist/pagination/index.d.ts",
+      "default": "./dist/pagination/index.js"
+    },
+    "./pagination/define.js": {
+      "types": "./dist/pagination/define.d.ts",
+      "default": "./dist/pagination/define.js"
+    },
+    "./panel": {
+      "types": "./dist/panel/index.d.ts",
+      "default": "./dist/panel/index.js"
+    },
+    "./panel/index.js": {
+      "types": "./dist/panel/index.d.ts",
+      "default": "./dist/panel/index.js"
+    },
+    "./panel/define.js": {
+      "types": "./dist/panel/define.d.ts",
+      "default": "./dist/panel/define.js"
+    },
+    "./password": {
+      "types": "./dist/password/index.d.ts",
+      "default": "./dist/password/index.js"
+    },
+    "./password/index.js": {
+      "types": "./dist/password/index.d.ts",
+      "default": "./dist/password/index.js"
+    },
+    "./password/define.js": {
+      "types": "./dist/password/define.d.ts",
+      "default": "./dist/password/define.js"
+    },
+    "./progress-bar": {
+      "types": "./dist/progress-bar/index.d.ts",
+      "default": "./dist/progress-bar/index.js"
+    },
+    "./progress-bar/index.js": {
+      "types": "./dist/progress-bar/index.d.ts",
+      "default": "./dist/progress-bar/index.js"
+    },
+    "./progress-bar/define.js": {
+      "types": "./dist/progress-bar/define.d.ts",
+      "default": "./dist/progress-bar/define.js"
+    },
+    "./progress-ring": {
+      "types": "./dist/progress-ring/index.d.ts",
+      "default": "./dist/progress-ring/index.js"
+    },
+    "./progress-ring/index.js": {
+      "types": "./dist/progress-ring/index.d.ts",
+      "default": "./dist/progress-ring/index.js"
+    },
+    "./progress-ring/define.js": {
+      "types": "./dist/progress-ring/define.d.ts",
+      "default": "./dist/progress-ring/define.js"
+    },
+    "./progressive-filter-chip": {
+      "types": "./dist/progressive-filter-chip/index.d.ts",
+      "default": "./dist/progressive-filter-chip/index.js"
+    },
+    "./progressive-filter-chip/index.js": {
+      "types": "./dist/progressive-filter-chip/index.d.ts",
+      "default": "./dist/progressive-filter-chip/index.js"
+    },
+    "./progressive-filter-chip/define.js": {
+      "types": "./dist/progressive-filter-chip/define.d.ts",
+      "default": "./dist/progressive-filter-chip/define.js"
+    },
+    "./radio": {
+      "types": "./dist/radio/index.d.ts",
+      "default": "./dist/radio/index.js"
+    },
+    "./radio/index.js": {
+      "types": "./dist/radio/index.d.ts",
+      "default": "./dist/radio/index.js"
+    },
+    "./radio/define.js": {
+      "types": "./dist/radio/define.d.ts",
+      "default": "./dist/radio/define.js"
+    },
+    "./range": {
+      "types": "./dist/range/index.d.ts",
+      "default": "./dist/range/index.js"
+    },
+    "./range/index.js": {
+      "types": "./dist/range/index.d.ts",
+      "default": "./dist/range/index.js"
+    },
+    "./range/define.js": {
+      "types": "./dist/range/define.d.ts",
+      "default": "./dist/range/define.js"
+    },
+    "./scoped": {
+      "types": "./dist/scoped/index.d.ts",
+      "default": "./dist/scoped/index.js"
+    },
+    "./scoped/index.js": {
+      "types": "./dist/scoped/index.d.ts",
+      "default": "./dist/scoped/index.js"
+    },
+    "./scoped/define.js": {
+      "types": "./dist/scoped/define.d.ts",
+      "default": "./dist/scoped/define.js"
+    },
+    "./search": {
+      "types": "./dist/search/index.d.ts",
+      "default": "./dist/search/index.js"
+    },
+    "./search/index.js": {
+      "types": "./dist/search/index.d.ts",
+      "default": "./dist/search/index.js"
+    },
+    "./search/define.js": {
+      "types": "./dist/search/define.d.ts",
+      "default": "./dist/search/define.js"
+    },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "default": "./dist/select/index.js"
+    },
+    "./select/index.js": {
+      "types": "./dist/select/index.d.ts",
+      "default": "./dist/select/index.js"
+    },
+    "./select/define.js": {
+      "types": "./dist/select/define.d.ts",
+      "default": "./dist/select/define.js"
+    },
+    "./sort-button": {
+      "types": "./dist/sort-button/index.d.ts",
+      "default": "./dist/sort-button/index.js"
+    },
+    "./sort-button/index.js": {
+      "types": "./dist/sort-button/index.d.ts",
+      "default": "./dist/sort-button/index.js"
+    },
+    "./sort-button/define.js": {
+      "types": "./dist/sort-button/define.d.ts",
+      "default": "./dist/sort-button/define.js"
+    },
+    "./steps": {
+      "types": "./dist/steps/index.d.ts",
+      "default": "./dist/steps/index.js"
+    },
+    "./steps/index.js": {
+      "types": "./dist/steps/index.d.ts",
+      "default": "./dist/steps/index.js"
+    },
+    "./steps/define.js": {
+      "types": "./dist/steps/define.d.ts",
+      "default": "./dist/steps/define.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "default": "./dist/switch/index.js"
+    },
+    "./switch/index.js": {
+      "types": "./dist/switch/index.d.ts",
+      "default": "./dist/switch/index.js"
+    },
+    "./switch/define.js": {
+      "types": "./dist/switch/define.d.ts",
+      "default": "./dist/switch/define.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "default": "./dist/tabs/index.js"
+    },
+    "./tabs/index.js": {
+      "types": "./dist/tabs/index.d.ts",
+      "default": "./dist/tabs/index.js"
+    },
+    "./tabs/define.js": {
+      "types": "./dist/tabs/define.d.ts",
+      "default": "./dist/tabs/define.js"
+    },
+    "./tag": {
+      "types": "./dist/tag/index.d.ts",
+      "default": "./dist/tag/index.js"
+    },
+    "./tag/index.js": {
+      "types": "./dist/tag/index.d.ts",
+      "default": "./dist/tag/index.js"
+    },
+    "./tag/define.js": {
+      "types": "./dist/tag/define.d.ts",
+      "default": "./dist/tag/define.js"
+    },
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "default": "./dist/toast/index.js"
+    },
+    "./toast/index.js": {
+      "types": "./dist/toast/index.d.ts",
+      "default": "./dist/toast/index.js"
+    },
+    "./toast/define.js": {
+      "types": "./dist/toast/define.d.ts",
+      "default": "./dist/toast/define.js"
+    },
+    "./time": {
+      "types": "./dist/time/index.d.ts",
+      "default": "./dist/time/index.js"
+    },
+    "./time/index.js": {
+      "types": "./dist/time/index.d.ts",
+      "default": "./dist/time/index.js"
+    },
+    "./time/define.js": {
+      "types": "./dist/time/define.d.ts",
+      "default": "./dist/time/define.js"
+    },
+    "./textarea": {
+      "types": "./dist/textarea/index.d.ts",
+      "default": "./dist/textarea/index.js"
+    },
+    "./textarea/index.js": {
+      "types": "./dist/textarea/index.d.ts",
+      "default": "./dist/textarea/index.js"
+    },
+    "./textarea/define.js": {
+      "types": "./dist/textarea/define.d.ts",
+      "default": "./dist/textarea/define.js"
+    },
+    "./toolbar": {
+      "types": "./dist/toolbar/index.d.ts",
+      "default": "./dist/toolbar/index.js"
+    },
+    "./toolbar/index.js": {
+      "types": "./dist/toolbar/index.d.ts",
+      "default": "./dist/toolbar/index.js"
+    },
+    "./toolbar/define.js": {
+      "types": "./dist/toolbar/define.d.ts",
+      "default": "./dist/toolbar/define.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "default": "./dist/tooltip/index.js"
+    },
+    "./tooltip/index.js": {
+      "types": "./dist/tooltip/index.d.ts",
+      "default": "./dist/tooltip/index.js"
+    },
+    "./tooltip/define.js": {
+      "types": "./dist/tooltip/define.d.ts",
+      "default": "./dist/tooltip/define.js"
+    },
+    "./week": {
+      "types": "./dist/week/index.d.ts",
+      "default": "./dist/week/index.js"
+    },
+    "./week/index.js": {
+      "types": "./dist/week/index.d.ts",
+      "default": "./dist/week/index.js"
+    },
+    "./week/define.js": {
+      "types": "./dist/week/define.d.ts",
+      "default": "./dist/week/define.js"
+    },
+    "./internal": {
+      "types": "./dist/internal/index.d.ts",
+      "default": "./dist/internal/index.js"
+    },
+    "./internal/index.js": {
+      "types": "./dist/internal/index.d.ts",
+      "default": "./dist/internal/index.js"
+    }
   },
   "typesVersions": {
     "*": {
