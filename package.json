@@ -96,6 +96,11 @@
         "projects/labs/code/.lighthouse",
         "projects/labs/code/coverage/lighthouse/**"
       ],
+      "dependencies": [
+        "./projects/elements:build",
+        "./projects/labs/code:build",
+        "./projects/labs/testing-lighthouse:build"
+      ],
       "env": {
         "NODE_ENV": "production",
         "LIGHTHOUSE_ALL": {
