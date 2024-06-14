@@ -244,11 +244,7 @@
       "service": true
     },
     "test:lighthouse": {
-      "command": "vitest run --config=vitest.lighthouse.ts",
-      "dependencies": [
-        "build",
-        "../testing-lighthouse:build"
-      ]
+      "command": "vitest run --config=vitest.lighthouse.ts"
     },
     "test:axe": {
       "command": "vitest run --config=vitest.axe.ts",
