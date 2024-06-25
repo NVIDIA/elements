@@ -280,7 +280,10 @@ export function validateSlots(host: HTMLElement) {
     const slots = Array.from(host.shadowRoot.querySelectorAll('slot'));
     const allowed = (host.constructor as any).metadata.children;
     slots.forEach(slot => {
-      const invalid = slot.assignedElements().filter(e => !allowed.map(i => i.toUpperCase()).includes(e.tagName));
+      const invalid = slot.assignedElements().filter(e => {
+        const tags = allowed.map(i => i.toUpperCase());
+        return !tags.includes(e.tagName.replace('NVE-', 'MLV-')) && !tags.includes(e.tagName.replace('MLV-', 'NVE-'));
+      });
       if (invalid.length) {
         LogService.warn(
           `Invalid slotted elements detected in ${host.tagName.toLocaleLowerCase()}. Allowed ${allowed.join(', ')}`
