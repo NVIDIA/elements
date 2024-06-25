@@ -7,15 +7,6 @@ import { Default, MediaCard, CardWithHeader, CardWithHeaderAndAction, Tabs, Desc
 
 <element-metrics tag="nve-card"></element-metrics>
 
-Card is composed of a `nve-card` container element and several sub-components with default styling.
-The following sub-components can be used within `nve-card` to achieve standard card layouts:
-
-- `nve-card-header`
-- `nve-card-content`
-- `nve-card-footer`
-
-Content slotted directly under `nve-card` is supported for full flexibility of content.
-
 ## Installation
 
 ```typescript
@@ -56,8 +47,8 @@ import '@nvidia-elements/core/card/define.js';
 
 ## Card with Header and Footer
 
-Combining `nve-card-header`, `nve-card-content` & `nve-card-footer` will yield a fully styled card.
-Note how `nve-card-content` will vertically stretch to fill the card size and the footer will align
+Combining `card-header`, `card-content` & `card-footer` will yield a fully styled card.
+Note how `card-content` will vertically stretch to fill the card size and the footer will align
 to the bottom of the card.
 
 <Canvas of={CardWithHeaderAndFooter} />
@@ -69,7 +60,7 @@ to the bottom of the card.
 ## Card with Content Layout
 
 Layout system is supported when <a href="./?path=/docs/layout-getting-started--docs">nve-layout</a> attribute
-is used on the `nve-card-content` element:
+is used on the `card-content` element:
 
 ```html
 <nve-card>
