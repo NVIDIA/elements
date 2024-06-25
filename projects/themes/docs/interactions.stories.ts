@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/card/define.js';
 
 export default {
-  title: 'Foundations/Tokens/Examples'
+  title: 'Foundations/Themes/Examples'
 };
 
 export const Interactions = {
