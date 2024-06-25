@@ -1,0 +1,19 @@
+:host {
+  margin: 0 calc(var(--padding) * -1) var(--padding) calc(var(--padding) * -1);
+  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
+  --padding: var(--nve-ref-size-400);
+  width: calc(100% + calc(var(--padding) * 2));
+}
+
+[internal-host] {
+  padding: 0 var(--padding) var(--padding) var(--padding);
+  border-bottom: var(--border-bottom);
+}
+
+::slotted(nve-alert-group),
+::slotted(nve-alert-group) {
+  margin: calc(var(--nve-ref-size-400) * -1) calc(var(--nve-ref-size-400) * -1) calc(var(--nve-ref-size-400) * -1)
+    calc(var(--nve-ref-size-400) * -1);
+  width: calc(100% + var(--nve-ref-size-800));
+  --border-radius: var(--nve-ref-border-radius-md) var(--nve-ref-border-radius-md) 0 0;
+}

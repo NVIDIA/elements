@@ -222,6 +222,7 @@ export const parameters = {
           'Textarea',
           'Time',
           'Toast',
+          'Toggletip',
           'Toolbar',
           'Tooltip',
           'Week',
