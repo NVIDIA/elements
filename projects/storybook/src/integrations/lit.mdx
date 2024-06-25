@@ -24,9 +24,9 @@ Once added, properties and events can be used via the standard lit template synt
 // - @close - event listener binding for 'close' custom event
 
 html`
-  <mlv-alert-group status="success" ?hidden=${!showAlert}>
-    <mlv-alert .closable=${true} @close=${() => showAlert = false}">hello there!</mlv-alert>
-  </mlv-alert-group>
+  <nve-alert-group status="success" ?hidden=${!showAlert}>
+    <nve-alert .closable=${true} @close=${() => showAlert = false}">hello there!</nve-alert>
+  </nve-alert-group>
 `;
 ```
 
@@ -84,26 +84,26 @@ export class AppLogin extends LitElement {
   render() {
     return html`
     <form @submit=${e => this.#submit(e)} @input=${this.#input}>
-      <mlv-input>
+      <nve-input>
         <label>Email</label>
         <input .value=${this.formValues.email} type="email" name="email" autocomplete="off" pattern=".+@nvidia.com" required autocomplete="off" />
-        <mlv-control-message error="valueMissing">required</mlv-control-message>
-        <mlv-control-message error="patternMismatch">invalid NVIDIA email</mlv-control-message>
-      </mlv-input>
+        <nve-control-message error="valueMissing">required</nve-control-message>
+        <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
+      </nve-input>
 
-      <mlv-password>
+      <nve-password>
         <label>Password</label>
         <input .value=${this.formValues.password} type="password" name="password" minlength="6" required />
-        <mlv-control-message error="valueMissing">required</mlv-control-message>
-        <mlv-control-message error="tooShort">minimum length is 6 characters</mlv-control-message>
-      </mlv-password>
+        <nve-control-message error="valueMissing">required</nve-control-message>
+        <nve-control-message error="tooShort">minimum length is 6 characters</nve-control-message>
+      </nve-password>
 
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>Remember me</label>
         <input ?checked=${this.formValues.remember} type="checkbox" name="remember" />
-      </mlv-checkbox>
+      </nve-checkbox>
 
-      <mlv-button interaction="emphasis">Login</mlv-button>
+      <nve-button interaction="emphasis">Login</nve-button>
     </form>
     `;
   }

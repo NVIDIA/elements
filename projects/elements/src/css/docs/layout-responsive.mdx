@@ -6,7 +6,7 @@ import '@nvidia-elements/core/icon/define.js';
 
 <Meta title="Internal/Layout/Responsive" />
 
-<mlv-badge container="flat" status="warning">Pre-Release</mlv-badge>
+<nve-badge container="flat" status="warning">Pre-Release</nve-badge>
 
 # Responsive Layout System
 
@@ -16,7 +16,7 @@ You will notice that pages using Elements with `mlv-layout` will result in layou
 However, we introduced an addition to the layout system that uses [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container)
 under the hood for true next-gen responsive design!
 
-<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Learn more about container queries in this Google <a href="https://web.dev/articles/new-responsive#using_container_queries_today" target="_blank" mlv-text="link">web.dev</a> video and article.</mlv-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this Google <a href="https://web.dev/articles/new-responsive#using_container_queries_today" target="_blank" mlv-text="link">web.dev</a> video and article.</nve-alert>
 
 This addition to the layout API gives you the ability to apply conditional layout styling based on the width of the parent element containing an element
 with `mlv-layout` attributes. Currently it supports `gap`, `padding`, and `hide` across a set of 5 contianer size breakpoints.
@@ -37,19 +37,19 @@ The size value after the `:` is the standard size value for the [spacing](./?pat
 ```html
 <div>
   <section class="layout-example" mlv-layout="row gap@xs:xxxs gap@sm:xxs gap@md:md gap@lg:xl gap@xl:xxxl">
-    <mlv-card></mlv-card>
-    <mlv-card></mlv-card>
-    <mlv-card></mlv-card>
-    <mlv-card></mlv-card>
-    <mlv-card mlv-layout="hide@sm"></mlv-card>
+    <nve-card></nve-card>
+    <nve-card></nve-card>
+    <nve-card></nve-card>
+    <nve-card></nve-card>
+    <nve-card mlv-layout="hide@sm"></nve-card>
   </section>
 </div>
 ```
 
-<mlv-alert status="warning">
+<nve-alert status="warning">
   Warning: Notice the inclusion of an extra `div` element wrapping the `mlv-layout` element. <br/>
   This is to ensure that the parent element that receives the container query is the size of the elements size and not a grid/page.
- </mlv-alert>
+ </nve-alert>
 
 ## Responsive Gap Breakpoints
 

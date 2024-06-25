@@ -5,10 +5,10 @@ import * as ValidationStories from './validation.stories';
 
 # Validation
 
-The `mlv-control` supports various validation statuses such as error and success. These statuses can be
-toggle by any framework level forms API. However the `mlv-control` component does also
+The `control` supports various validation statuses such as error and success. These statuses can be
+toggle by any framework level forms API. However the `control` component does also
 support the native [HTML Validation API](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation).
-Defining a Validity State on a `mlv-control-message` will allow messages to be
+Defining a Validity State on a `control-message` will allow messages to be
 shown conditionally based on the current input validity state.
 
 [MDN Validity State](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState)
@@ -22,12 +22,12 @@ If you are using a framework that manages valdiation like Angular, then `novalid
 
 ```html
 <form>
-  <mlv-input>
+  <nve-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
-    <mlv-control-message error="valueMissing">required</mlv-control-message>
-    <mlv-control-message error="patternMismatch">invalid NVIDIA email</mlv-control-message>
-  </mlv-input>
+    <nve-control-message error="valueMissing">required</nve-control-message>
+    <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
+  </nve-input>
 <script>
   const form = document.querySelector('form');
 
@@ -54,6 +54,6 @@ If controls are in a HTML Form then calling `reset()` on the form will reset all
 
 <Canvas of={ValidationStories.ValidationSuccessGroup} />
 
-<element-status tag="mlv-control-message"></element-status>
+<element-status tag="nve-control-message"></element-status>
 
-<element-api tag="mlv-control-message"></element-api>
+<element-api tag="nve-control-message"></element-api>

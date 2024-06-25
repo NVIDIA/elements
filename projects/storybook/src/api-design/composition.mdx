@@ -13,20 +13,20 @@ or over time inherits or re-implements another element's API on its own to expos
 access to its otherwise internal implementation details. Example, using a button and icon
 element we can start to see some of these tradeoffs.
 
-<mlv-alert status="danger">Don't:</mlv-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 
 ```html
-<mlv-button icon="info">
+<nve-button icon="info">
   button
-</mlv-button>
+</nve-button>
 ```
 
-<mlv-alert status="success">Do:</mlv-alert>
+<nve-alert status="success">Do:</nve-alert>
 
 ```html
-<mlv-button>
-  button <mlv-icon name="info"></mlv-icon>
-</mlv-button>
+<nve-button>
+  button <nve-icon name="info"></nve-icon>
+</nve-button>
 ```
 
 It may be tempting to encapsulate other elements and expose their APIs to the host element.
@@ -38,20 +38,20 @@ name attribute so the icon must be exposed via `icon`.
 Going further we run into layout conflicts. If the icon needs to change position we
 must provide a secondary “escape hatch” API to change this behavior.
 
-<mlv-alert status="danger">Don't:</mlv-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 
 ```html
-<mlv-button iconplacement="leading" icon="info">
+<nve-button iconplacement="leading" icon="info">
   button
-</mlv-button>
+</nve-button>
 ```
 
-<mlv-alert status="success">Do:</mlv-alert>
+<nve-alert status="success">Do:</nve-alert>
 
 ```html
-<mlv-button>
-  <mlv-icon name="info"></mlv-icon> button
-</mlv-button>
+<nve-button>
+  <nve-icon name="info"></nve-icon> button
+</nve-button>
 ```
 
 While this works it's introducing “escape hatch” APIs that the button now must support for
@@ -74,9 +74,9 @@ need to be customized. For example, an alert message may show various status typ
 as success, warning and danger. Each may show a different icon within that box by default.
 
 ```html
-<mlv-alert status="success" closable>
+<nve-alert status="success" closable>
   hello there
-</mlv-alert>
+</nve-alert>
 ```
 
 The alert can internally provide the default icon style for the status in the system. But as
@@ -87,16 +87,16 @@ To mitigate this, leveraging default slots can provide a hook for customizations
 <!-- mlv-alert template -->
 <div>
   <slot name="icon">
-    <mlv-icon name=${this.status}></mlv-icon>
+    <nve-icon name=${this.status}></nve-icon>
   </slot>
   <slot></slot>
 </div>
 
 <!-- consumer API -->
-<mlv-alert status="warning">
-  <mlv-icon slot="icon" name="custom-icon"></mlv-icon>
+<nve-alert status="warning">
+  <nve-icon slot="icon" name="custom-icon"></nve-icon>
   hello there
-</mlv-alert>
+</nve-alert>
 ```
 
 Slots can provide default content if no content is provided. Here we set an internal
@@ -113,7 +113,7 @@ the light DOM or the control of the consumer. In this example the h1 heading is 
 into the card element. This creates an incorrect DOM structure as only one given h1 can
 exist within the page. This also applies as the page structure should work down from h1-h6.
 
-<mlv-alert status="danger">Don't:</mlv-alert>
+<nve-alert status="danger">Don't:</nve-alert>
 
 ```html
 <!-- mlv-card template -->
@@ -126,13 +126,13 @@ exist within the page. This also applies as the page structure should work down 
 </div>
 
 <!-- consumer API -->
-<mlv-card status="warning">
+<nve-card status="warning">
   <div slot="header">Card Header</div>
   <p>card content</p>
-</mlv-card>
+</nve-card>
 ```
 
-<mlv-alert status="success">Do:</mlv-alert>
+<nve-alert status="success">Do:</nve-alert>
 
 ```html
 <!-- mlv-card template -->
@@ -145,10 +145,10 @@ exist within the page. This also applies as the page structure should work down 
 </div>
 
 <!-- consumer API -->
-<mlv-card status="warning">
+<nve-card status="warning">
   <h2 slot="header">Card Header</h2>
   <p>card content</p>
-</mlv-card>
+</nve-card>
 ```
 
 While composition based APIs may be more verbose at times, they lower the overall

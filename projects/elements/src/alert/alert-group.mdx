@@ -5,7 +5,7 @@ import { Default, Status, Closable, Actions, Prominence, Multiline } from './ale
 
 # Alert Group
 
-<element-metrics tag="mlv-alert-group"></element-metrics>
+<element-metrics tag="nve-alert-group"></element-metrics>
 
 ## Installation
 
@@ -14,10 +14,10 @@ import '@nvidia-elements/core/alert/define.js';
 ```
 
 ```html
-<mlv-alert-group status="success">
-  <mlv-alert>success message</mlv-alert>
-  <mlv-alert>success message</mlv-alert>
-</mlv-alert-group>
+<nve-alert-group status="success">
+  <nve-alert>success message</nve-alert>
+  <nve-alert>success message</nve-alert>
+</nve-alert-group>
 ```
 
 ## Standard
@@ -26,25 +26,25 @@ import '@nvidia-elements/core/alert/define.js';
 
 ## Status
 
-<element-api tag="mlv-alert-group" type="property" value="status"></element-api>
+<element-api tag="nve-alert-group" type="property" value="status"></element-api>
 
 <Canvas of={Status} />
 
 ## Closable
 
-<element-api tag="mlv-alert" type="property" value="closable"></element-api>
+<element-api tag="nve-alert" type="property" value="closable"></element-api>
 
 <Canvas of={Closable} />
 
 ## Actions
 
-<element-api tag="mlv-alert" type="slot" value="actions"></element-api>
+<element-api tag="nve-alert" type="slot" value="actions"></element-api>
 
 <Canvas of={Actions} />
 
 ## Prominence
 
-<element-api tag="mlv-alert-group" type="property" value="prominence"></element-api>
+<element-api tag="nve-alert-group" type="property" value="prominence"></element-api>
 
 <Canvas of={Prominence} />
 
@@ -52,8 +52,8 @@ import '@nvidia-elements/core/alert/define.js';
 
 <Canvas of={Multiline} />
 
-<element-status tag="mlv-alert-group"></element-status>
+<element-status tag="nve-alert-group"></element-status>
 
-<element-api tag="mlv-alert-group"></element-api>
+<element-api tag="nve-alert-group"></element-api>
 
-<element-api tag="mlv-alert"></element-api>
+<element-api tag="nve-alert"></element-api>

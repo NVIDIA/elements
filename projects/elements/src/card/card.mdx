@@ -5,16 +5,7 @@ import { Default, MediaCard, CardWithHeader, CardWithHeaderAndAction, Tabs, Desc
 
 # Card
 
-<element-metrics tag="mlv-card"></element-metrics>
-
-Card is composed of a `mlv-card` container element and several sub-components with default styling.
-The following sub-components can be used within `mlv-card` to achieve standard card layouts:
-
-- `mlv-card-header`
-- `mlv-card-content`
-- `mlv-card-footer`
-
-Content slotted directly under `mlv-card` is supported for full flexibility of content.
+<element-metrics tag="nve-card"></element-metrics>
 
 ## Installation
 
@@ -23,11 +14,11 @@ import '@nvidia-elements/core/card/define.js';
 ```
 
 ```html
-<mlv-card>
-  <mlv-card-content>
+<nve-card>
+  <nve-card-content>
     Card Content
-  </mlv-card-content>
-</mlv-card>
+  </nve-card-content>
+</nve-card>
 ```
 
 ## Standard
@@ -56,8 +47,8 @@ import '@nvidia-elements/core/card/define.js';
 
 ## Card with Header and Footer
 
-Combining `mlv-card-header`, `mlv-card-content` & `mlv-card-footer` will yield a fully styled card.
-Note how `mlv-card-content` will vertically stretch to fill the card size and the footer will align
+Combining `card-header`, `card-content` & `card-footer` will yield a fully styled card.
+Note how `card-content` will vertically stretch to fill the card size and the footer will align
 to the bottom of the card.
 
 <Canvas of={CardWithHeaderAndFooter} />
@@ -69,16 +60,16 @@ to the bottom of the card.
 ## Card with Content Layout
 
 Layout system is supported when <a href="./?path=/docs/layout-getting-started--docs">mlv-layout</a> attribute
-is used on the `mlv-card-content` element:
+is used on the `card-content` element:
 
 ```html
-<mlv-card>
-  <mlv-card-content mlv-layout="row align:space-around">
+<nve-card>
+  <nve-card-content mlv-layout="row align:space-around">
     <div>Item 1</div>
     <div>Item 2</div>
     <div>Item 3</div>
-  </mlv-card-content>
-</mlv-card>
+  </nve-card-content>
+</nve-card>
 ```
 
 <Canvas of={CardWithContentLayout} />
@@ -87,12 +78,12 @@ is used on the `mlv-card-content` element:
 
 <Canvas of={ContainerFill} />
 
-<element-status tag="mlv-card"></element-status>
+<element-status tag="nve-card"></element-status>
 
-<element-api tag="mlv-card"></element-api>
+<element-api tag="nve-card"></element-api>
 
-<element-api tag="mlv-card-header"></element-api>
+<element-api tag="nve-card-header"></element-api>
 
-<element-api tag="mlv-card-content"></element-api>
+<element-api tag="nve-card-content"></element-api>
 
-<element-api tag="mlv-card-footer"></element-api>
+<element-api tag="nve-card-footer"></element-api>

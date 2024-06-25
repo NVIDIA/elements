@@ -5,37 +5,37 @@ import { ColumnAction } from './grid.stories';
 
 # Data Grid Column Action
 
-<element-metrics tag="mlv-grid-column"></element-metrics>
+<element-metrics tag="nve-grid-column"></element-metrics>
 
 Column actions can be created by using the `mlv-icon-button` to trigger dropdowns or panels to reveal additional actions to the user.
 
 ```html
-<mlv-grid>
-  <mlv-grid-header>
-    <mlv-grid-column>
-      Column 1 <mlv-icon-button slot="actions"></mlv-icon-button>
-    </mlv-grid-column>
-    <mlv-grid-column>Column 2</mlv-grid-column>
-    <mlv-grid-column>Column 3</mlv-grid-column>
-    <mlv-grid-column>Column 4</mlv-grid-column>
-  </mlv-grid-header>
-    <mlv-grid-row>
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column>
+      Column 1 <nve-icon-button slot="actions"></nve-icon-button>
+    </nve-grid-column>
+    <nve-grid-column>Column 2</nve-grid-column>
+    <nve-grid-column>Column 3</nve-grid-column>
+    <nve-grid-column>Column 4</nve-grid-column>
+  </nve-grid-header>
+    <nve-grid-row>
       ...
-    </mlv-grid-row>
+    </nve-grid-row>
   ...
-</mlv-grid>
+</nve-grid>
 ```
 
 ## Column Action
 
 <Canvas of={ColumnAction} story={{ inline: false, height: 460 }} />
 
-<element-api tag="mlv-grid"></element-api>
+<element-api tag="nve-grid"></element-api>
 
-<element-api tag="mlv-grid-header"></element-api>
+<element-api tag="nve-grid-header"></element-api>
 
-<element-api tag="mlv-grid-column"></element-api>
+<element-api tag="nve-grid-column"></element-api>
 
-<element-api tag="mlv-grid-row"></element-api>
+<element-api tag="nve-grid-row"></element-api>
 
-<element-api tag="mlv-grid-cell"></element-api>
+<element-api tag="nve-grid-cell"></element-api>

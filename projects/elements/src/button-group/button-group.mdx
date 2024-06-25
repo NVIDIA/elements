@@ -5,7 +5,7 @@ import { Default, ActionSplit, ActionSplitRounded, Flat, Rounded, RoundedIcon, S
 
 # Button Group
 
-<element-metrics tag="mlv-button-group"></element-metrics>
+<element-metrics tag="nve-button-group"></element-metrics>
 
 ## Installation
 
@@ -14,17 +14,17 @@ import '@nvidia-elements/core/button-group/define.js';
 ```
 
 ```html
-<mlv-button-group>
-  <mlv-icon-button pressed icon-name="split-vertical"></mlv-icon-button>
-  <mlv-icon-button icon-name="split-horizontal"></mlv-icon-button>
-  <mlv-icon-button icon-name="split-none"></mlv-icon-button>
-</mlv-button-group>
+<nve-button-group>
+  <nve-icon-button pressed icon-name="split-vertical"></nve-icon-button>
+  <nve-icon-button icon-name="split-horizontal"></nve-icon-button>
+  <nve-icon-button icon-name="split-none"></nve-icon-button>
+</nve-button-group>
 
-<mlv-button-group behavior-select="single">
-  <mlv-button pressed>10%</mlv-button>
-  <mlv-button>15%</mlv-button>
-  <mlv-button>20%</mlv-button>
-</mlv-button-group>
+<nve-button-group behavior-select="single">
+  <nve-button pressed>10%</nve-button>
+  <nve-button>15%</nve-button>
+  <nve-button>20%</nve-button>
+</nve-button-group>
 ```
 
 ## Standard
@@ -33,9 +33,7 @@ import '@nvidia-elements/core/button-group/define.js';
 
 ## Split
 
-{/* For split actions that contain a button and a dropdown trigger use `mlv-button` separated from `mlv-icon-button` with a `mlv-divider`. */}
-
-<element-api tag="mlv-button-group" type="property" value="interaction"></element-api>
+<element-api tag="nve-button-group" type="property" value="interaction"></element-api>
 
 <Canvas of={ActionSplit} />
 
@@ -45,7 +43,7 @@ import '@nvidia-elements/core/button-group/define.js';
 
 ## Container
 
-<element-api tag="mlv-button-group" type="property" value="container"></element-api>
+<element-api tag="nve-button-group" type="property" value="container"></element-api>
 
 ### Standard
 
@@ -53,13 +51,13 @@ import '@nvidia-elements/core/button-group/define.js';
 
 ### Flat
 
-<element-api tag="mlv-button-group" type="property" value="container"></element-api>
+<element-api tag="nve-button-group" type="property" value="container"></element-api>
 
 <Canvas of={Flat} />
 
 ### Rounded
 
-<element-api tag="mlv-button-group" type="property" value="container"></element-api>
+<element-api tag="nve-button-group" type="property" value="container"></element-api>
 
 <Canvas of={Rounded} />
 
@@ -69,7 +67,7 @@ import '@nvidia-elements/core/button-group/define.js';
 
 ## Selection
 
-<element-api tag="mlv-button-group" type="property" value="behaviorSelect"></element-api>
+<element-api tag="nve-button-group" type="property" value="behaviorSelect"></element-api>
 
 ### Single Select
 
@@ -81,10 +79,10 @@ import '@nvidia-elements/core/button-group/define.js';
 
 ## Orientation
 
-<element-api tag="mlv-button-group" type="property" value="orientation"></element-api>
+<element-api tag="nve-button-group" type="property" value="orientation"></element-api>
 
 <Canvas of={OrientationVertical} />
 
-<element-status tag="mlv-button-group"></element-status>
+<element-status tag="nve-button-group"></element-status>
 
-<element-api tag="mlv-button-group"></element-api>
+<element-api tag="nve-button-group"></element-api>

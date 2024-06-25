@@ -5,7 +5,7 @@ import { Interactive, Default, Content, Position, Wrap, Hint, HintCopy, Status, 
 
 # Tooltip
 
-<element-metrics tag="mlv-tooltip"></element-metrics>
+<element-metrics tag="nve-tooltip"></element-metrics>
 
 ## Installation
 
@@ -14,8 +14,8 @@ import '@nvidia-elements/core/tooltip/define.js';
 ```
 
 ```html
-<mlv-tooltip anchor="btn" position="bottom">hello there</mlv-tooltip>
-<mlv-button id="btn">button</mlv-button>
+<nve-tooltip anchor="btn" position="bottom">hello there</nve-tooltip>
+<nve-button id="btn">button</nve-button>
 ```
 
 ## Standard
@@ -46,7 +46,7 @@ import '@nvidia-elements/core/tooltip/define.js';
 
 ## Behavior Trigger
 
-<element-api tag="mlv-tooltip" type="property" value="behaviorTrigger"></element-api>
+<element-api tag="nve-tooltip" type="property" value="behaviorTrigger"></element-api>
 
 <Canvas of={BehaviorTrigger} story={{ inline: false, height: 200 }} />
 
@@ -93,7 +93,7 @@ class DynamicAnchorPositionDemo extends LitElement {
   render() {
     return html`
       <div ${ref(this.#badge)} id="anchor"></div>
-      <mlv-tooltip anchor="anchor">tooltip</mlv-tooltip>
+      <nve-tooltip anchor="anchor">tooltip</nve-tooltip>
     `;
   }
 
@@ -104,6 +104,6 @@ class DynamicAnchorPositionDemo extends LitElement {
 }
 ```
 
-<element-status tag="mlv-tooltip"></element-status>
+<element-status tag="nve-tooltip"></element-status>
 
-<element-api tag="mlv-tooltip"></element-api>
+<element-api tag="nve-tooltip"></element-api>

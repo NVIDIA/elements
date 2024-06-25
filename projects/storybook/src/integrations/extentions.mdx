@@ -41,17 +41,17 @@ export class DomainLogin extends ScopedRegistryHost(LitElement) {
 
   render() {
     return html`
-      <mlv-input>
+      <nve-input>
         <label>Email</label>
         <input type="email" />
-      </mlv-input>
+      </nve-input>
 
-      <mlv-password>
+      <nve-password>
         <label>Password</label>
         <input type="password" />
-      </mlv-password>
+      </nve-password>
 
-      <mlv-button interaction="emphasis">Login</mlv-button>
+      <nve-button interaction="emphasis">Login</nve-button>
     `;
   }
 }
@@ -64,7 +64,7 @@ can be used in any framework that supports Web Components.
 
 ## Element Scoping without Shadow DOM
 
-<mlv-alert status="warning">The tag alias strategy is experimental and only for rare use-cases when Shadow DOM cannot be used and the UI is likely global impacting other applications.</mlv-alert>
+<nve-alert status="warning">The tag alias strategy is experimental and only for rare use-cases when Shadow DOM cannot be used and the UI is likely global impacting other applications.</nve-alert>
 
 ```typescript
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -78,7 +78,7 @@ The `defineScopedElement` utility function will ensure that the `IconButton` use
 It will also register `IconButton` with a new global suffix of `plugin` rather than the default global `mlv-icon-button`.
 
 ```html
-<mlv-icon-button-plugin icon-name="cancel"></mlv-icon-button-plugin>
+<nve-icon-button-plugin icon-name="cancel"></nve-icon-button-plugin>
 ```
 
 <Story of={ScopedElement} />

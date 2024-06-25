@@ -16,9 +16,9 @@ Slots provide flexibility for content that is controlled by the host application
 guaranteed to be represented accurately through a specific element API.
 
 ```html
-<mlv-alert status="success">
+<nve-alert status="success">
   <p>Hello <strong>There</strong>!</p>
-</mlv-alert>
+</nve-alert>
 ```
 
 ## Composition
@@ -28,18 +28,18 @@ are application specific. This also decouples layout behaviors such as icon and 
 giving the application control on DOM ordering.
 
 ```html
-<mlv-card>
-  <mlv-card-header>
+<nve-card>
+  <nve-card-header>
     <h3>Plugin</h3>
     <a href="#">Learn More</a>
-  </mlv-card-header>
-  <mlv-card-body>
+  </nve-card-header>
+  <nve-card-body>
     <p>Cool new plugin features!</p>
-  </mlv-card-body>
-  <mlv-card-footer>
-    <mlv-button>Enable</mlv-button>
-  </mlv-card-footer>
-</mlv-card>
+  </nve-card-body>
+  <nve-card-footer>
+    <nve-button>Enable</nve-button>
+  </nve-card-footer>
+</nve-card>
 ```
 
 Avoid exposing slot APIs as part of the public API. Rather than requiring the consumer to set a
@@ -75,48 +75,48 @@ render strategy for large lists of elements. For example, a tree view component 
 of potential nodes of varying complexity.
 
 ```html
-<mlv-tree>
-  <mlv-tree-item>item</mlv-tree-item>
-  <mlv-tree-item>item</mlv-tree-item>
-  <mlv-tree-item>item</mlv-tree-item>
-</mlv-tree>
+<nve-tree>
+  <nve-tree-item>item</nve-tree-item>
+  <nve-tree-item>item</nve-tree-item>
+  <nve-tree-item>item</nve-tree-item>
+</nve-tree>
 ```
 
 ```html
-<mlv-tree>
-  <mlv-tree-item>item</mlv-tree-item>
-  <mlv-tree-item>item</mlv-tree-item>
-  <mlv-tree-item expanded>
-  	<mlv-tree-item>item</mlv-tree-item>
-    <mlv-tree-item>item</mlv-tree-item>
-    <mlv-tree-item>item</mlv-tree-item>
-  </mlv-tree-node>
-</mlv-tree>
+<nve-tree>
+  <nve-tree-item>item</nve-tree-item>
+  <nve-tree-item>item</nve-tree-item>
+  <nve-tree-item expanded>
+  	<nve-tree-item>item</nve-tree-item>
+    <nve-tree-item>item</nve-tree-item>
+    <nve-tree-item>item</nve-tree-item>
+  </nve-tree-node>
+</nve-tree>
 ```
 
 By leveraging composition the host application has full render control in their native framework API.
 
 ```html
 <!-- Angular -->
-<mlv-tree>
-  <mlv-tree-item *ngFor="let item of items">{{item.id}}</mlv-tree-item>
-</mlv-tree>
+<nve-tree>
+  <nve-tree-item *ngFor="let item of items">{{item.id}}</nve-tree-item>
+</nve-tree>
 ```
 
 ```tsx
 // JSX
-<mlv-tree>
-  {items.map(item => <mlv-tree-item>{item.id}</mlv-tree-item>)}
-</mlv-tree>
+<nve-tree>
+  {items.map(item => <nve-tree-item>{item.id}</nve-tree-item>)}
+</nve-tree>
 ```
 
 This enables full control of conditional rendering of tree nodes as well as more advanced features like lazy and virtual scrolling.
 
 ```html
 <!-- Angular, only create nodes if the item meets a certain condition -->
-<mlv-tree>
+<nve-tree>
   <ng-container *ngFor="let item of items">
-    <mlv-tree-item *ngIf="item.active">{{item.id}}</mlv-tree-item>
+    <nve-tree-item *ngIf="item.active">{{item.id}}</nve-tree-item>
   </ng-container>
-</mlv-tree>
+</nve-tree>
 ```

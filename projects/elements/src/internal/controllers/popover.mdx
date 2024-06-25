@@ -40,8 +40,8 @@ import '@nvidia-elements/core/notification/define.js';
 Popover types are visible by default and can be controlled via the `hidden` attribute or by appending and removing from the DOM.
 
 ```html
-<mlv-tooltip anchor="action-btn">hello there</mlv-tooltip>
-<mlv-button id="action-btn">button</mlv-button>
+<nve-tooltip anchor="action-btn">hello there</nve-tooltip>
+<nve-button id="action-btn">button</nve-button>
 ```
 
 <Story of={Tooltip} inline={false} height={280} />
@@ -60,8 +60,8 @@ when the popover is attempting to close or open based ona user interaction.
 <Story of={TooltipInteractive} inline={false} height={280} />
 
 ```html
-<mlv-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</mlv-tooltip>
-<mlv-button id="action-btn">button</mlv-button>
+<nve-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</nve-tooltip>
+<nve-button id="action-btn">button</nve-button>
 <script type="module">
   const tooltip = document.querySelector('mlv-tooltip[anchor="action-btn"]');
   tooltip.addEventListener('close', () => tooltip.hidden = true);
@@ -77,8 +77,8 @@ enable automatic state management of the `hidden` state based on the trigger.
 <Story of={TooltipBehaviorTrigger} inline={false} height={280} />
 
 ```html
-<mlv-tooltip behavior-trigger trigger="action-btn" hidden>hello there</mlv-tooltip>
-<mlv-button id="action-btn">button</mlv-button>
+<nve-tooltip behavior-trigger trigger="action-btn" hidden>hello there</nve-tooltip>
+<nve-button id="action-btn">button</nve-button>
 ```
 
 ## Anchor

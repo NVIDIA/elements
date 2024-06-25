@@ -1,12 +1,3 @@
-/* mlv-grid-row:has(mlv-grid-cell:first-child mlv-radio > input:checked) mlv-grid-row,
-mlv-grid-row:has(mlv-grid-cell:first-child mlv-checkbox > input:checked) mlv-grid-row,
-mlv-grid-row:has(mlv-grid-cell:first-child mlv-radio > input:checked) mlv-grid-cell,
-mlv-grid-row:has(mlv-grid-cell:first-child mlv-checkbox > input:checked) mlv-grid-cell,
-nve-grid-row:has(nve-grid-cell:first-child nve-radio > input:checked) nve-grid-row,
-nve-grid-row:has(nve-grid-cell:first-child nve-checkbox > input:checked) nve-grid-row,
-nve-grid-row:has(nve-grid-cell:first-child nve-radio > input:checked) nve-grid-cell,
-nve-grid-row:has(nve-grid-cell:first-child nve-checkbox > input:checked) nve-grid-cell */
-
 mlv-grid-row:has(mlv-grid-cell:first-child [nve-control] > input:checked) mlv-grid-cell,
 nve-grid-row:has(nve-grid-cell:first-child [nve-control] > input:checked) nve-grid-cell {
   --background: var(--nve-sys-interaction-highlighted-muted-background);

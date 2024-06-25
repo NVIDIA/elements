@@ -16,19 +16,19 @@ This document is not intended to define the best practices and API design of hig
 ## Legend
 
 <div mlv-layout="column gap:xs">
-  <mlv-alert status="success">Do: a best practice to follow</mlv-alert>
+  <nve-alert status="success">Do: a best practice to follow</nve-alert>
 
-<mlv-alert status="danger">Don't: a practice to avoid</mlv-alert>
+<nve-alert status="danger">Don't: a practice to avoid</nve-alert>
 
-<mlv-alert status="accent">Tip: helpful details on rationale for a given guideline</mlv-alert>
+<nve-alert status="accent">Tip: helpful details on rationale for a given guideline</nve-alert>
 
-<mlv-alert status="warning">details on the risks of not following a guideline</mlv-alert>
+<nve-alert status="warning">details on the risks of not following a guideline</nve-alert>
 
-<mlv-alert><mlv-icon slot="icon">🏁</mlv-icon> Performance: detail about how a guideline impacts performance</mlv-alert>
+<nve-alert><nve-icon slot="icon">🏁</nve-icon> Performance: detail about how a guideline impacts performance</nve-alert>
 
-<mlv-alert><mlv-icon slot="icon">🎓</mlv-icon> Learn: resource to learn more about a guideline topic</mlv-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: resource to learn more about a guideline topic</nve-alert>
 
-<mlv-alert><mlv-icon slot="icon">🚧</mlv-icon> WIP: details on any work in progress guidance</mlv-alert>
+<nve-alert><nve-icon slot="icon">🚧</nve-icon> WIP: details on any work in progress guidance</nve-alert>
 
 </div>
 
@@ -62,9 +62,9 @@ Consistent element APIs provide consistent developer experience. The recommendat
 
 ```html
 <!-- HTML/JavaScript -->
-<mlv-alert status="success">
+<nve-alert status="success">
   <p>hello there!</p>
-</mlv-alert>
+</nve-alert>
 
 <script type="module">
   import '@nvidia-elements/core/include/alert.js';
@@ -74,26 +74,26 @@ Consistent element APIs provide consistent developer experience. The recommendat
 </script>
 
 <!-- Angular -->
-<mlv-alert status="success" [closable]="boolProp" (close)="handle($event)">
+<nve-alert status="success" [closable]="boolProp" (close)="handle($event)">
   <p>hello there!</p>
-</mlv-alert>
+</nve-alert>
 
 <!-- Lit -->
-<mlv-alert status="success" ?closable=${boolProp} @close=${e => this.handle(e)}>
+<nve-alert status="success" ?closable=${boolProp} @close=${e => this.handle(e)}>
   <p>hello there!</p>
-</mlv-alert>
+</nve-alert>
 
 <!-- Vue -->
-<mlv-alert status="success" :closable="boolProp" @close="handle">
+<nve-alert status="success" :closable="boolProp" @close="handle">
   <p>hello there!</p>
-</mlv-alert>
+</nve-alert>
 
 <!-- React/Preact -->
-<mlv-alert status="success" closable={this.state.boolProp} onClose={this.handle}>
+<nve-alert status="success" closable={this.state.boolProp} onClose={this.handle}>
   <p>hello there!</p>
-</mlv-alert>
+</nve-alert>
 ```
 
-<mlv-alert status="accent">
+<nve-alert status="accent">
   See example of how a Web Component based design system can be used by <a href="https://NVIDIA.github.io/elements/starters/">many frameworks</a>.
-</mlv-alert>
+</nve-alert>

@@ -5,7 +5,7 @@ import { Default, Selected, Current, Disabled, Icons, Scroll, Dropdown, Vertical
 
 # Menu
 
-<element-metrics tag="mlv-menu"></element-metrics>
+<element-metrics tag="nve-menu"></element-metrics>
 
 ## Installation
 
@@ -14,12 +14,12 @@ import '@nvidia-elements/core/menu/define.js';
 ```
 
 ```html
-<mlv-menu>
-  <mlv-menu-item>item 1</mlv-menu-item>
-  <mlv-menu-item selected>item 2</mlv-menu-item>
-  <mlv-menu-item>item 3</mlv-menu-item>
-  <mlv-menu-item>item 4</mlv-menu-item>
-</mlv-menu>
+<nve-menu>
+  <nve-menu-item>item 1</nve-menu-item>
+  <nve-menu-item selected>item 2</nve-menu-item>
+  <nve-menu-item>item 3</nve-menu-item>
+  <nve-menu-item>item 4</nve-menu-item>
+</nve-menu>
 ```
 
 ## Standard
@@ -28,19 +28,19 @@ import '@nvidia-elements/core/menu/define.js';
 
 ## Selected
 
-<element-api tag="mlv-menu-item" type="property" value="selected"></element-api>
+<element-api tag="nve-menu-item" type="property" value="selected"></element-api>
 
 <Canvas of={Selected} />
 
 ## Current
 
-<element-api tag="mlv-menu-item" type="property" value="current"></element-api>
+<element-api tag="nve-menu-item" type="property" value="current"></element-api>
 
 <Canvas of={Current} />
 
 ## Disabled
 
-<element-api tag="mlv-menu-item" type="property" value="disabled"></element-api>
+<element-api tag="nve-menu-item" type="property" value="disabled"></element-api>
 
 <Canvas of={Disabled} />
 
@@ -89,8 +89,8 @@ Menu item has a default slot for content, additionally a `suffix` slot is provid
 
 <Canvas of={Suffix} />
 
-<element-status tag="mlv-menu"></element-status>
+<element-status tag="nve-menu"></element-status>
 
-<element-api tag="mlv-menu"></element-api>
+<element-api tag="nve-menu"></element-api>
 
-<element-api tag="mlv-menu-item"></element-api>
+<element-api tag="nve-menu-item"></element-api>

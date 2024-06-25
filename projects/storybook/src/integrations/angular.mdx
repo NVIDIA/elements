@@ -6,12 +6,12 @@ import '@nvidia-elements/core/alert/define.js';
 # Angular Integration
 
 <div mlv-layout="row gap:xs">
-  <mlv-button>
+  <nve-button>
     <a href="https://NVIDIA.github.io/elements/starters/angular/"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#angular-svg"></use></svg> Demo</a>
-  </mlv-button>
-  <mlv-button>
-    <mlv-icon name="code"></mlv-icon> <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/angular">Source Latest v17</a>
-  </mlv-button>
+  </nve-button>
+  <nve-button>
+    <nve-icon name="code"></nve-icon> <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/angular">Source Latest v17</a>
+  </nve-button>
 </div>
 
 To use Elements in [Angular](https://angular.dev/) follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps.
@@ -42,9 +42,9 @@ Once added, properties and events can be used via the standard Angular template 
   - (close) - event listener binding for 'close' custom event
 -->
 
-<mlv-alert-group status="success" [attr.hidden]="!showAlert">
-  <mlv-alert [closable]="true" (close)="showAlert = false">hello there!</mlv-alert>
-</mlv-alert-group>
+<nve-alert-group status="success" [attr.hidden]="!showAlert">
+  <nve-alert [closable]="true" (close)="showAlert = false">hello there!</nve-alert>
+</nve-alert-group>
 ```
 
 ## Forms
@@ -52,15 +52,15 @@ Once added, properties and events can be used via the standard Angular template 
 Maglev Elements provides a suite of form components that leverage standard HTML input types. This enables frameworks
 to take advantage of built in framework features like [Angular Reactive Forms](https://angular.io/guide/reactive-forms) for managing form validation and state.
 
-<mlv-alert>To integrate custom form control types into Elements checkout our <a href="./?path=/docs/elements-form-control-documentation--docs#custom-controls" onClick="location.reload()">custom control</a> documentation.</mlv-alert>
+<nve-alert>To integrate custom form control types into Elements checkout our <a href="./?path=/docs/elements-form-control-documentation--docs#custom-controls" onClick="location.reload()">custom control</a> documentation.</nve-alert>
 
 ```html
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <mlv-input>
+  <nve-input>
     <label>first name</label>
     <input type="text" formControlName="firstName" />
-    <mlv-control-message *ngIf="form.controls.firstName.invalid && (form.controls.firstName.dirty || form.controls.firstName.touched)">required</mlv-control-message>
-  </mlv-input>
+    <nve-control-message *ngIf="form.controls.firstName.invalid && (form.controls.firstName.dirty || form.controls.firstName.touched)">required</nve-control-message>
+  </nve-input>
   <button>submit</button>
 </form>
 ```
@@ -96,15 +96,15 @@ export class AppComponent  {
 
 ### Angular 12
 
-<mlv-alert-group status="danger">
-  <mlv-alert>Angular 12 is past its support lifecycle and will not receive security updates. Applications should migrate as soon as possible to the <a href="https://angular.dev/update">latest release</a>.</mlv-alert>
-</mlv-alert-group>
+<nve-alert-group status="danger">
+  <nve-alert>Angular 12 is past its support lifecycle and will not receive security updates. Applications should migrate as soon as possible to the <a href="https://angular.dev/update">latest release</a>.</nve-alert>
+</nve-alert-group>
 
 Angular 12 is not officially supported due to its older dependencies (ESBuild, Webpack) not supporting browser standard JavaScript (es2020) and CSS features.
 To use elements in Angular 12 when upgrading is not possible, the [static import bundles](https://github.com/NVIDIA/elements/-/tree/main/projects/starters/static?ref_type=heads) can be copied into the Angular CLI assets and referenced.
 
-<mlv-alert status="warning">Static bundles are strongly discouraged as it will include all component code and not support any performance optimizations
-such as tree-shaking.</mlv-alert>
+<nve-alert status="warning">Static bundles are strongly discouraged as it will include all component code and not support any performance optimizations
+such as tree-shaking.</nve-alert>
 
 ```json
 "assets": [
@@ -120,7 +120,7 @@ such as tree-shaking.</mlv-alert>
     <link rel="stylesheet" href="assets/elements.0.30.0.bundle.css" />
   </head>
   <body mlv-layout="column gap:md pad:lg">
-    <mlv-alert>hello there</mlv-alert>
+    <nve-alert>hello there</nve-alert>
     <script type="module" src="/assets/elements.0.30.0.bundle.js"></script>
   </body>
 </html>
@@ -174,7 +174,7 @@ If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig
 This enables Lit based Web Components to be authored directly within your Angular application but not require a standalone library/project.
 If you are authoring Lit based components and would like to import external CSS files (similar to [Vite Inlined Imports](https://vitejs.dev/guide/features.html#disabling-css-injection-into-the-page)) additonal Angular CLI configuration is needed.
 
-<mlv-alert status="accent">Imports like Webpack !raw-loader and Vite ?inline are not Web standard and likely to be migrated in the future to <a href="https://web.dev/css-module-scripts/">Import Assertions</a></mlv-alert>
+<nve-alert status="accent">Imports like Webpack !raw-loader and Vite ?inline are not Web standard and likely to be migrated in the future to <a href="https://web.dev/css-module-scripts/">Import Assertions</a></nve-alert>
 
 ### 1. Install
 

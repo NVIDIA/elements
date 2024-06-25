@@ -5,24 +5,17 @@ import { Default, LeftSidePanel, RightSidePanel, PanelWithTrigger, ClosablePanel
 
 # Panels
 
-<element-metrics tag="mlv-panel"></element-metrics>
+<element-metrics tag="nve-panel"></element-metrics>
 
 Panels provide a way to make additional content available alongside the primary page layout,
 in a way that is accessible and minimizable.
 
-The Panel element is composed of a `<mlv-panel>` container element and several sub-components with default styling applied.
-The following sub-components can be used within `<mlv-panel>` to achieve standard layouts:
-
-- `<mlv-panel-header>`
-- `<mlv-panel-content>`
-- `<mlv-panel-footer>`
-
 Panels will always be minimizable, either by closing or collapsing. The proper close/collapse icon button will display depending on the
 whether or not the `closable` attribute is set. By default `closable` is false and the panel will collapse down to just an expand icon.
 
-Additionally, `<mlv-panel>` can be have it's `side` property set to `left` or `right` to get the proper collapse/expand icon and animation.
+Additionally, `panel` can be have it's `side` property set to `left` or `right` to get the proper collapse/expand icon and animation.
 
-For additional documentation of examples and patterns of composing `<mlv-panel>` see the [Panel Patterns](./?path=/docs/patterns-panel--docs) doc.
+For additional documentation of examples and patterns of composing `panel` see the [Panel Patterns](./?path=/docs/patterns-panel--docs) doc.
 
 ## Installation
 
@@ -31,11 +24,11 @@ import '@nvidia-elements/core/panel/define.js';
 ```
 
 ```html
-<mlv-panel>
-  <mlv-panel-content>
+<nve-panel>
+  <nve-panel-content>
     Panel Content
-  </mlv-panel-content>
-</mlv-panel>
+  </nve-panel-content>
+</nve-panel>
 ```
 
 ## Standard
@@ -44,31 +37,31 @@ import '@nvidia-elements/core/panel/define.js';
 
 ## Left / Right Side Panels
 
+<element-api tag="nve-panel" type="property" value="side"></element-api>
+
 <Canvas of={LeftSidePanel} />
 
 <Canvas of={RightSidePanel} />
 
 ## Collapsable Panel with External Trigger
 
-An external trigger can be used to expand/collapse or hide/show a panel.
-In this example clicking the button toggles the `expanded` attribute on the `<mlv-panel>` between `true` and `false`
+An external trigger can be used to expand/collapse or hide/show a panel. In this example clicking the button toggles the `expanded` attribute on the `panel` between `true` and `false`
 
 <Canvas of={PanelWithTrigger} />
 
 ## Closable Panel with External Trigger
 
-This is the same example as above only with the `closable` attribute on the `<mlv-panel>`
-set to `true`
+<element-api tag="nve-panel" type="property" value="closable"></element-api>
 
 <Canvas of={ClosablePanel} />
 
 ## Panel with Header
 
-The `<mlv-panel-header>` sub-component can be slotted into `<mlv-panel>` to get default border styling, and additional sub slots within the header.
+The `panel-header` sub-component can be slotted into `panel` to get default border styling, and additional sub slots within the header.
 
 ## Panel with Full Header
 
-In this example `<mlv-panel-header>` is further slotted with elements for `slot="title"`, `slot="subtitle"`, `<mlv-icon-button>` with `slot="action-icon"`
+In this example `panel-header` is further slotted with elements for `slot="title"`, `slot="subtitle"`, `icon-button` with `slot="action-icon"`
 
 <Canvas of={PanelWithFullHeader} />
 
@@ -76,12 +69,12 @@ In this example `<mlv-panel-header>` is further slotted with elements for `slot=
 
 <Canvas of={PanelWithFooter} />
 
-<element-status tag="mlv-panel"></element-status>
+<element-status tag="nve-panel"></element-status>
 
-<element-api tag="mlv-panel"></element-api>
+<element-api tag="nve-panel"></element-api>
 
-<element-api tag="mlv-panel-header"></element-api>
+<element-api tag="nve-panel-header"></element-api>
 
-<element-api tag="mlv-panel-content"></element-api>
+<element-api tag="nve-panel-content"></element-api>
 
-<element-api tag="mlv-panel-footer"></element-api>
+<element-api tag="nve-panel-footer"></element-api>

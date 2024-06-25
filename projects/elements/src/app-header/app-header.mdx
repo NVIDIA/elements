@@ -5,7 +5,7 @@ import { Default, AppBadge, NavItems, NavActions } from './app-header.stories';
 
 # App Header
 
-<element-metrics tag="mlv-app-header"></element-metrics>
+<element-metrics tag="nve-app-header"></element-metrics>
 
 ## Installation
 
@@ -14,15 +14,15 @@ import '@nvidia-elements/core/app-header/define.js';
 ```
 
 ```html
-<mlv-app-header>
-  <mlv-logo></mlv-logo>
+<nve-app-header>
+  <nve-logo></nve-logo>
   <h2 slot="title">Workflows</h2>
-  <mlv-button slot="nav-items" active>Link 1</mlv-button>
-  <mlv-button slot="nav-items">Link 2</mlv-button>
-  <mlv-icon-button icon-name="assist" slot="nav-actions"></mlv-icon-button>
-  <mlv-icon-button icon-name="app-switcher" slot="nav-actions"></mlv-icon-button>
-  <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
-</mlv-app-header>
+  <nve-button slot="nav-items" active>Link 1</nve-button>
+  <nve-button slot="nav-items">Link 2</nve-button>
+  <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
+  <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
+  <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
+</nve-app-header>
 ```
 
 ## Standard
@@ -31,22 +31,22 @@ import '@nvidia-elements/core/app-header/define.js';
 
 ## App Branding
 
-<element-api tag="mlv-app-header" type="slot" value=""></element-api>
+<element-api tag="nve-app-header" type="slot" value=""></element-api>
 
 <Canvas of={AppBadge} />
 
 ## Nav Items
 
-<element-api tag="mlv-app-header" type="slot" value="nav-items"></element-api>
+<element-api tag="nve-app-header" type="slot" value="nav-items"></element-api>
 
 <Canvas of={NavItems} />
 
 ## Nav Actions
 
-<element-api tag="mlv-app-header" type="slot" value="nav-actions"></element-api>
+<element-api tag="nve-app-header" type="slot" value="nav-actions"></element-api>
 
 <Canvas of={NavActions} />
 
-<element-status tag="mlv-app-header"></element-status>
+<element-status tag="nve-app-header"></element-status>
 
-<element-api tag="mlv-app-header"></element-api>
+<element-api tag="nve-app-header"></element-api>

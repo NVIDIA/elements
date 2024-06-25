@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundations/Tokens/Examples'
+  title: 'Foundations/Themes/Examples'
 };
 
 export const Layers = {

@@ -179,8 +179,12 @@ class ElementStatus extends LitElement {
 
   static styles = [unsafeCSS(`${typography}${layout}`)];
 
+  get #element() {
+    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag || d.name === this.tag.replace('nve-', 'mlv-'));
+  }
+
   render() {
-    const metadata = metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag);
+    const metadata = this.#element;
     return html`
     <div className="status-summary" mlv-layout="column gap:md align:stretch">
       <div mlv-layout="column gap:xs align:stretch pad-top:xl">
@@ -236,8 +240,16 @@ class ElementMetrics extends LitElement {
   
   static styles = [unsafeCSS(`${typography}${layout}`)];
 
+  get #tagName() {
+    return this.tag.replace('nve-', 'mlv-');
+  }
+
+  get #element() {
+    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag || d.name === this.#tagName || d.name === this.#tagName);
+  }
+
   render() {
-    const element = metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag);
+    const element = this.#element;
     return html`
       <section mlv-layout="column gap:lg">
         <div mlv-layout="row gap:xs align:center full">
@@ -274,8 +286,12 @@ class ElementAPI extends LitElement {
     version: 'demo'
   }
 
+  get #tagName() {
+    return this.tag.replace('nve-', 'mlv-');
+  }
+
   get #element() {
-    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag);
+    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag || d.name === this.#tagName || d.name === this.#tagName);
   }
 
   #markdown = new showdown.Converter(showdownOptions);
@@ -286,7 +302,7 @@ class ElementAPI extends LitElement {
       ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
       ${!this.type ? html`
         <div mlv-layout="column gap:xs pad-top:xl pad-bottom:lg align:stretch">
-          <h3 mlv-text="heading xl">API - ${this.tag}</h3>
+          <h3 mlv-text="heading xl">API - ${this.#tagName}</h3>
           <mlv-divider></mlv-divider>
         </div>
         <div mlv-layout="column gap:xxl align:stretch">

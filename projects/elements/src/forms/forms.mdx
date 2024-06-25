@@ -18,11 +18,11 @@ import '@nvidia-elements/core/input/define.js';
 ```
 
 ```html
-<mlv-input>
+<nve-input>
   <label>label</label>
   <input type="text" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-input>
+  <nve-control-message>message</nve-control-message>
+</nve-input>
 ```
 
 ## Framework Integrations
@@ -31,23 +31,23 @@ Each frontend framework typically provides it's own guidance and best practices 
 See the links below for specific integration patterns for the following frameworks:
 
 <section mlv-layout="row gap:sm align:center">
-  <mlv-button>
+  <nve-button>
     <a href="./?path=/docs/integrations-angular--docs#forms" onClick={() => location.reload()}>
       <svg width="20" height="20">
         <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#angular-svg"></use>
       </svg>
       Angular Integration
     </a>
-  </mlv-button>
+  </nve-button>
 
-  <mlv-button>
+  <nve-button>
     <a href="./?path=/docs/integrations-lit--docs#forms" onClick={() => location.reload()}>
       <svg width="20" height="20">
         <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use>
       </svg>
       Lit Integration
     </a>
-  </mlv-button>
+  </nve-button>
 </section>
 
 ## Form layouts
@@ -57,31 +57,31 @@ Vertical is the default label layout for all elements.
 
 ### Horizontal Inline
 
-<element-api tag="mlv-control" type="property" value="layout"></element-api>
+<element-api tag="nve-control" type="property" value="layout"></element-api>
 
 <Canvas of={HorizontalInline} />
 
 ### Horizontal
 
-<element-api tag="mlv-control" type="property" value="layout"></element-api>
+<element-api tag="nve-control" type="property" value="layout"></element-api>
 
 <Canvas of={Horizontal} />
 
 ### Vertical
 
-<element-api tag="mlv-control" type="property" value="layout"></element-api>
+<element-api tag="nve-control" type="property" value="layout"></element-api>
 
 <Canvas of={Vertical} />
 
 ### Vertical Inline
 
-<element-api tag="mlv-control" type="property" value="layout"></element-api>
+<element-api tag="nve-control" type="property" value="layout"></element-api>
 
 <Canvas of={VerticalInline} />
 
 ## Fit Text
 
-<element-api tag="mlv-control" type="property" value="fitText"></element-api>
+<element-api tag="nve-control" type="property" value="fitText"></element-api>
 
 <Canvas of={FitText} />
 

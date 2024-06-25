@@ -5,7 +5,7 @@ import { Performance, PerformanceInfiniteScroll, PerformanceVirtualScroll } from
 
 # Data Grid Performance
 
-<element-metrics tag="mlv-grid"></element-metrics>
+<element-metrics tag="nve-grid"></element-metrics>
 
 The grid leverages several approaches to maximize render performance including [CSS Contain](https://developer.mozilla.org/en-US/docs/Web/CSS/contain) and [Element Internal States](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states)
 Performance is tied to the type of elements rendered within the grid iteself.
@@ -31,10 +31,10 @@ class BatchRenderDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-grid style="--scroll-height: 400px" @scrollboxend=${() => this.#loadNextGroup()}>
+      <nve-grid style="--scroll-height: 400px" @scrollboxend=${() => this.#loadNextGroup()}>
         ...
-        ${this.rows.map(row => html`<mlv-grid-row>...</mlv-grid-row>`)}
-      </mlv-grid>
+        ${this.rows.map(row => html`<nve-grid-row>...</nve-grid-row>`)}
+      </nve-grid>
     `
   }
 
@@ -54,10 +54,10 @@ class BatchRenderDemo extends LitElement {
 Virtual Scroll can be acheived using a virtual scroll packge such as [@lit-labs/virtualizer](https://www.npmjs.com/package/@lit-labs/virtualizer) or [@angular/cdk](https://material.angular.io/cdk/scrolling/overview).
 When using a virtual scroll container apply the `scroller` attribute for the grid to know the assigned scrolling container.
 
-<mlv-alert status="warning">
+<nve-alert status="warning">
   Warning: Using advanced features may be unavailable such as keyboard navigation shortcuts.
   Be aware of <a mlv-text="link" href="https://adrianroselli.com/2014/05/so-you-think-you-built-good-infinite.html">accessibility risks</a>.
-</mlv-alert>
+</nve-alert>
 <br />
 
 <Canvas of={PerformanceVirtualScroll} />
@@ -71,33 +71,33 @@ class GridVirtualScrollDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-grid>
-        <mlv-grid-header>
-          <mlv-grid-column>column</mlv-grid-column>
-          <mlv-grid-column>column</mlv-grid-column>
-          <mlv-grid-column>column</mlv-grid-column>
-          <mlv-grid-column>column</mlv-grid-column>
-        </mlv-grid-header>
+      <nve-grid>
+        <nve-grid-header>
+          <nve-grid-column>column</nve-grid-column>
+          <nve-grid-column>column</nve-grid-column>
+          <nve-grid-column>column</nve-grid-column>
+          <nve-grid-column>column</nve-grid-column>
+        </nve-grid-header>
 
         <lit-virtualizer style="min-height: 300px" scroller .items=${this.items} .renderItem=${i => html`
-          <mlv-grid-row style="width: 100%">
-            ${Object.keys(i).map(key => html`<mlv-grid-cell>${i[key]}</mlv-grid-cell>`)}
-          </mlv-grid-row>`}>
+          <nve-grid-row style="width: 100%">
+            ${Object.keys(i).map(key => html`<nve-grid-cell>${i[key]}</nve-grid-cell>`)}
+          </nve-grid-row>`}>
         </lit-virtualizer>
-      </mlv-grid>
+      </nve-grid>
     `;
   }
 }
 ```
 
-<element-status tag="mlv-grid"></element-status>
+<element-status tag="nve-grid"></element-status>
 
-<element-api tag="mlv-grid"></element-api>
+<element-api tag="nve-grid"></element-api>
 
-<element-api tag="mlv-grid-header"></element-api>
+<element-api tag="nve-grid-header"></element-api>
 
-<element-api tag="mlv-grid-column"></element-api>
+<element-api tag="nve-grid-column"></element-api>
 
-<element-api tag="mlv-grid-row"></element-api>
+<element-api tag="nve-grid-row"></element-api>
 
-<element-api tag="mlv-grid-cell"></element-api>
+<element-api tag="nve-grid-cell"></element-api>
