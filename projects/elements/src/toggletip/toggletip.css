@@ -1,0 +1,80 @@
+:host {
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-300);
+  --nve-sys-layer-popover-arrow-padding: 6px;
+  --nve-sys-layer-popover-arrow-offset: 2px;
+  --nve-sys-layer-popover-offset: 2px;
+  --arrow-transform: translate(0, -2px) rotate(-45deg);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --border-radius: var(--nve-ref-border-radius-md);
+  --background: var(--nve-sys-layer-overlay-background);
+  --color: var(--nve-sys-layer-overlay-color);
+  --padding: var(--nve-ref-size-400);
+  --box-shadow: var(--nve-ref-shadow-400);
+  --width: fit-content;
+  --min-width: fit-content;
+  --gap: var(--nve-ref-space-sm);
+  --_divider-padding: var(--padding);
+}
+
+dialog {
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background: var(--background);
+  color: var(--color);
+  box-shadow: var(--box-shadow);
+  gap: var(--nve-ref-space-sm);
+  width: var(--width);
+  min-width: var(--min-width);
+  outline: 0;
+}
+
+dialog::backdrop {
+  background: transparent;
+}
+
+nve-icon-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 99;
+}
+
+.arrow {
+  width: var(--nve-ref-size-300);
+  height: var(--nve-ref-size-300);
+  background: var(--background);
+  transform: var(--arrow-transform);
+  border-radius: var(--nve-ref-size-50);
+  position: absolute;
+}
+
+:host([position*='top']) {
+  --arrow-transform: translate(0, -2px) rotate(-45deg);
+}
+
+:host([position*='right']) {
+  --arrow-transform: translate(2px, 0) rotate(45deg);
+}
+
+:host([position*='bottom']) {
+  --arrow-transform: translate(0, 2px) rotate(45deg);
+}
+
+:host([position*='left']) {
+  --arrow-transform: translate(-2px, 0) rotate(45deg);
+}
+
+::slotted(mlv-menu),
+::slotted(nve-menu) {
+  --width: 100%;
+}
+
+::slotted(mlv-divider),
+::slotted(nve-divider) {
+  margin: 0 calc(-1 * var(--_divider-padding));
+}
+
+#content {
+  margin: calc(var(--padding) * -0.5) 0 calc(var(--padding) * -0.5) 0;
+}

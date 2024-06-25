@@ -1,0 +1,77 @@
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Toggletip } from '@nvidia-elements/core/toggletip';
+import '@nvidia-elements/core/toggletip/define.js';
+
+describe(Toggletip.metadata.tag, () => {
+  let fixture: HTMLElement;
+  let element: Toggletip;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-toggletip>hello</nve-toggletip>
+    `);
+    element = fixture.querySelector(Toggletip.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get(Toggletip.metadata.tag)).toBeDefined();
+  });
+
+  it('should render close button when closable', async () => {
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
+    element.closable = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
+      IconButton.metadata.tag
+    );
+  });
+
+  it('should render arrow by default', async () => {
+    expect(element.shadowRoot.querySelector('.arrow').tagName).toBe('DIV');
+    element.arrow = false;
+  });
+
+  // https://open-ui.org/components/popup.research.explainer#api-shape
+  it('should default to auto behavior', async () => {
+    await elementIsStable(element);
+    expect(element.popoverType).toBe('auto');
+  });
+
+  it('should default to positioning on the top of an anchor', async () => {
+    await elementIsStable(element);
+    expect(element.position).toBe('top');
+  });
+
+  it('should default to alignment of center to the anchor', async () => {
+    await elementIsStable(element);
+    expect(element.alignment).toBe('center');
+  });
+
+  it('should apply an aria-label to the close button', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
+  });
+
+  it('should initialize role of type toggletip', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('toggletip');
+  });
+
+  it('should emit close event when close button clicked', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'close');
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
+    expect(await event).toBeDefined();
+  });
+});
