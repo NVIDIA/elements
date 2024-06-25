@@ -1,0 +1,16 @@
+:host {
+  --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
+  --padding: var(--nve-ref-size-400);
+  --gap: var(--nve-ref-space-sm);
+  display: block;
+  width: calc(100% + calc(var(--padding) * 2));
+  margin: var(--padding) calc(var(--padding) * -1) 0 calc(var(--padding) * -1);
+}
+
+[internal-host] {
+  border-top: var(--border-top);
+  padding: var(--padding) var(--padding) 0 var(--padding);
+  display: flex;
+  justify-content: start;
+  gap: var(--gap);
+}
