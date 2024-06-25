@@ -641,6 +641,18 @@
       "types": "./dist/toast/define.d.ts",
       "default": "./dist/toast/define.js"
     },
+    "./toggletip": {
+      "types": "./dist/toggletip/index.d.ts",
+      "default": "./dist/toggletip/index.js"
+    },
+    "./toggletip/index.js": {
+      "types": "./dist/toggletip/index.d.ts",
+      "default": "./dist/toggletip/index.js"
+    },
+    "./toggletip/define.js": {
+      "types": "./dist/toggletip/define.d.ts",
+      "default": "./dist/toggletip/define.js"
+    },
     "./time": {
       "types": "./dist/time/index.d.ts",
       "default": "./dist/time/index.js"
