@@ -50,3 +50,7 @@
 :host([color]) [internal-host] {
   background: var(--background);
 }
+
+svg {
+  height: var(--height);
+}
