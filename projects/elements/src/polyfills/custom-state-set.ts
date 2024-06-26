@@ -1,3 +1,5 @@
+const SUPPORTS_CUSTOM_STATES = CSS.supports('selector(:state(test))');
+
 /**
  * CustomStateSet Polyfill for :state() syntax downleveled to legacy :--state syntax (Chromium < v123)
  * https://html.spec.whatwg.org/multipage/custom-elements.html#exposing-custom-element-states
@@ -68,5 +70,10 @@ function customStateSetPolyfill() {
 }
 
 function replaceToLegacyState(value: string) {
-  return value.replace(/:--([^\)]+)/g, ':state($1)'); // eslint-disable-line
+  // if the browser does not support :state(*) selectors replace any CSS state selectors with attribute fallbacks [state-*]
+  if (!SUPPORTS_CUSTOM_STATES) {
+    return value.replace(/:--([^\)]+)/g, '[state--$1]').replace(/:state\(([^\)]+)\)/g, '[state--$1]'); // eslint-disable-line
+  } else {
+    return value.replace(/:--([^\)]+)/g, ':state($1)'); // eslint-disable-line
+  }
 }
