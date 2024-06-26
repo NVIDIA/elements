@@ -1,3 +1,11 @@
+## [@elements/elements-v0.37.8](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.7...@elements/elements-v0.37.8) (2024-06-26)
+
+
+### Bug Fixes
+
+* **elements:** improve custom state polyfill ([5929c6d](https://github.com/NVIDIA/elements/commit/5929c6dcfcf27f2eed118063f9b1ab165001ed56))
+* **elements:** logo svg height ([41b712b](https://github.com/NVIDIA/elements/commit/41b712bf15382c87c287bc21a85cc7dbfcfa8578))
+
 ## [@elements/elements-v0.37.7](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.6...@elements/elements-v0.37.7) (2024-06-12)
 
 
