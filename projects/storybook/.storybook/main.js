@@ -12,6 +12,8 @@ export default {
     '../../elements/src/**/*.stories.ts',
     '../../elements-react/docs/**/*.mdx',
     '../../elements-react/docs/**/*.stories.tsx',
+    '../../labs/behaviors-alpine/src/**/*.mdx',
+    '../../labs/behaviors-alpine/src/**/*.stories.ts',
     '../../labs/code/src/**/*.mdx',
     '../../labs/code/src/**/*.stories.ts',
     '../../starters/lit-library/src/**/*.stories.ts',
