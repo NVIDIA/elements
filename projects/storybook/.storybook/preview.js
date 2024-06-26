@@ -1,3 +1,4 @@
+import '@nvidia-elements/core/polyfills';
 import { setCustomElementsManifest } from '@storybook/web-components';
 import { themes } from '@storybook/theming';
 import styles from '@nvidia-elements/core/index.css?inline';
