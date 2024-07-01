@@ -1,0 +1,31 @@
+<template
+  name="Steps Snippet"
+  prefix="steps-snippet"
+  description="Steps enables a multi-step workflow allowing a user to complete a goal in a specific sequence."
+  type="pattern">
+  <nve-steps behavior-select container="${1:condensed}">
+    <nve-steps-item status="success">${2:Step 1}</nve-steps-item>
+    <nve-steps-item status="danger">${3:Step 2}</nve-steps-item>
+    <nve-steps-item selected>${4:Step 3}</nve-steps-item>
+    <nve-steps-item status="pending">${5:Step 4}</nve-steps-item>
+    <nve-steps-item disabled>Disabled</nve-steps-item>
+  </nve-steps>
+
+  $0
+</template>
+
+<template
+  name="vertical-Steps Snippet"
+  prefix="vertical-steps-snippet"
+  description="Steps can be used as the foundation for a side menu by enabling vertical mode."
+  type="pattern">
+  <nve-steps behavior-select vertical container="${1:condensed}">
+    <nve-steps-item status="success">${2:Step 1}</nve-steps-item>
+    <nve-steps-item status="danger">${3:Step 2}</nve-steps-item>
+    <nve-steps-item selected>${4:Step 3}</nve-steps-item>
+    <nve-steps-item status="pending">${5:Step 4}</nve-steps-item>
+    <nve-steps-item disabled>Disabled</nve-steps-item>
+  </nve-steps>
+
+  $0
+</template>
