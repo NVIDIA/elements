@@ -1,0 +1,27 @@
+<template
+  name="Button Group Snippet"
+  prefix="button-group-snippet"
+  description="Simple button group with three icons."
+  type="pattern">
+  <nve-button-group>
+    <nve-icon-button icon-name="${1:copy}"></nve-icon-button>
+    <nve-icon-button icon-name="${2:add-comment}"></nve-icon-button>
+    <nve-icon-button icon-name="${3:download}"></nve-icon-button>
+  </nve-button-group>
+
+  $0
+</template>
+
+<template
+  name="Split Button Snippet"
+  prefix="split-button-snippet"
+  description="Divided button with primary and secondary actions."
+  type="pattern">
+  <nve-button-group>
+    <nve-button>${1:Button Text}</nve-button>
+    <nve-divider orientation="vertical"></nve-divider>
+    <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
+  </nve-button-group>
+
+  $0
+</template>
