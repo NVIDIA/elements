@@ -9,12 +9,18 @@ import { TypeSelectableController } from '@nvidia-elements/core/internal';
 class TypeSelectableControllerTestElement extends LitElement {
   @property({ type: Boolean }) selected: boolean;
 
+  @property({ type: String }) selectable: 'single' | 'multi';
+
   @property({ type: Boolean }) behaviorSelect: boolean;
 
   #typeSelectableController = new TypeSelectableController(this);
 
   select() {
     this.#typeSelectableController.select();
+  }
+
+  toggle() {
+    this.#typeSelectableController.toggle();
   }
 }
 
@@ -52,5 +58,38 @@ describe('type-selectable.controller', () => {
     element.select();
     expect(await event).toBeDefined();
     expect(element.selected).toBe(true);
+  });
+
+  it('should update selectable style state', async () => {
+    expect(element.matches(':state(selectable-single)')).toBeFalsy();
+
+    element.selectable = 'single';
+    await elementIsStable(element);
+    expect(element.matches(':state(selectable-single)')).toBeTruthy();
+
+    element.selectable = 'multi';
+    await elementIsStable(element);
+    expect(element.matches(':state(selectable-multi)')).toBeTruthy();
+  });
+
+  it('should toggle selectable state if behavior-select active', async () => {
+    element.behaviorSelect = true;
+    expect(element.selected).toBe(undefined);
+
+    element.toggle();
+    await elementIsStable(element);
+    expect(element.selected).toBe(true);
+
+    element.toggle();
+    await elementIsStable(element);
+    expect(element.selected).toBe(false);
+  });
+
+  it('should not toggle selectable state if behavior-select not active', async () => {
+    expect(element.selected).toBe(undefined);
+
+    element.toggle();
+    await elementIsStable(element);
+    expect(element.selected).toBe(undefined);
   });
 });

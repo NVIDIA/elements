@@ -9,6 +9,7 @@ export * from './controllers/state-active.controller.js';
 export * from './controllers/state-current.controller.js';
 export * from './controllers/state-disabled.controller.js';
 export * from './controllers/state-expanded.controller.js';
+export * from './controllers/state-highlighted.controller.js';
 export * from './controllers/state-scroll.controller.js';
 export * from './controllers/state-selected.controller.js';
 export * from './controllers/state-pressed.controller.js';
