@@ -823,6 +823,7 @@
         "!src/**/*.test.ts",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.snippets.html",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -836,10 +837,12 @@
         "!dist/inter.css",
         "!dist/inter.woff",
         "!dist/elements.html-data.json",
-        "!dist/elements.css-vars.json"
+        "!dist/elements.css-vars.json",
+        "!dist/data.snippets.json"
       ],
       "dependencies": [
         "build:icons",
+        "build:snippets",
         "../themes:build",
         "../internals/vite:ci",
         "../labs/testing-lighthouse:build"
@@ -860,10 +863,10 @@
     "build:snippets": {
       "command": "@nve-snippets",
       "files": [
-        "**/*.snippet.html"
+        "src/**/*.snippets.html"
       ],
       "output": [
-        "dist/snippets.json"
+        "dist/data.snippets.json"
       ],
       "dependencies": [
         "../labs/snippets:ci"
