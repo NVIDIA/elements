@@ -35,7 +35,32 @@ export const libraryConfig = [
                 '@nvidia-elements/styles/**/*.css?inline'
               ],
               message:
-                'inline CSS utils are not allowed in library APIs to prevent performance issues, use shadow DOM encapsulated CSS instead'
+                'Inline CSS utils are not allowed in library APIs to prevent performance issues, use shadow DOM encapsulated CSS instead'
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    files: [...source],
+    ignores: [
+      '**/src/**/define.ts',
+      '**/src/**/define.js',
+      '**/src/**/define.tsx',
+      '**/src/**/define.d.ts',
+      ...tests,
+      ...stories,
+      ...ignores
+    ],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@nvidia-elements/core/**/define.js'],
+              message: 'Side effect imports should only exist in "define.js" entrypoints'
             }
           ]
         }

@@ -28,7 +28,8 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
       manageTabindex: true,
       loop: false,
       dir: this.host.getAttribute('rtl'),
-      ...this.host.keynavListConfig
+      ...this.host.keynavListConfig,
+      items: Array.from(this.host.keynavListConfig.items).filter((i: any) => !i.disabled)
     };
   }
 

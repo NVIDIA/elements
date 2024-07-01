@@ -94,6 +94,7 @@ export function setupControlStates(control: Control) {
   const observers: MutationObserver[] = [];
   const states = control._internals.states;
   control.input.checked ? states.add('checked') : states.delete('checked');
+  control.input.indeterminate ? states.add('indeterminate') : states.delete('indeterminate');
   control.input.addEventListener('focus', () => control._internals.states.add('focus'));
   control.input.addEventListener('input', () => control._internals.states.add('dirty'));
   control.input.addEventListener('blur', () => {
@@ -123,6 +124,9 @@ export function setupControlStates(control: Control) {
     ),
     getElementUpdate(control.input, 'disabled', value =>
       (value === '' ? true : value) ? states.add('disabled') : states.delete('disabled')
+    ),
+    getElementUpdate(control.input, 'indeterminate', () =>
+      control.input.indeterminate ? states.add('indeterminate') : states.delete('indeterminate')
     )
   );
   return observers;

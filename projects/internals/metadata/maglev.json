@@ -1,5 +1,5 @@
 {
-  "created": "2024-08-20T15:49:09.478Z",
+  "created": "2024-08-22T19:28:00.572Z",
   "projects": [
     {
       "name": "@elements/ddb-dump-roadcast-frontend",
@@ -289,7 +289,7 @@
       "elements": [
         {
           "name": "nve-combobox",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-select",
@@ -372,6 +372,10 @@
           "instanceTotal": 5
         },
         {
+          "name": "nve-dropdown",
+          "instanceTotal": 5
+        },
+        {
           "name": "nve-grid-cell",
           "instanceTotal": 4
         },
@@ -394,6 +398,14 @@
         {
           "name": "nve-grid-row",
           "instanceTotal": 4
+        },
+        {
+          "name": "nve-menu-item",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-menu",
+          "instanceTotal": 3
         },
         {
           "name": "nve-pagination",
@@ -429,10 +441,6 @@
         },
         {
           "name": "nve-divider",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-dropdown",
           "instanceTotal": 2
         },
         {
@@ -484,7 +492,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 178
+      "instanceTotal": 188
     },
     {
       "name": "examples/applications/angular",
@@ -722,6 +730,10 @@
           "instanceTotal": 1
         },
         {
+          "name": "nve-sort-button",
+          "instanceTotal": 3
+        },
+        {
           "name": "nve-tabs-item",
           "instanceTotal": 1
         },
@@ -732,10 +744,6 @@
         {
           "name": "nve-tooltip",
           "instanceTotal": 1
-        },
-        {
-          "name": "nve-sort-button",
-          "instanceTotal": 2
         },
         {
           "name": "nve-card-header",
@@ -786,7 +794,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 111
+      "instanceTotal": 112
     },
     {
       "name": "@elements/vehicle-management",
