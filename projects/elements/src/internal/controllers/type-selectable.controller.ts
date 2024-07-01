@@ -1,7 +1,12 @@
 import { ReactiveController, ReactiveElement } from 'lit';
 import { attachInternals } from '../utils/a11y.js';
 
-export type TypeSelectable = ReactiveElement &  { selected?: boolean, behaviorSelect?: boolean };
+export type TypeSelectable = ReactiveElement & {
+  selected?: boolean;
+  behaviorSelect?: boolean;
+  selectable?: 'single' | 'multi';
+  _internals?: ElementInternals;
+};
 
 /**
  * Controller for enabling selectable behavior for elements.
@@ -18,10 +23,28 @@ export class TypeSelectableController<T extends TypeSelectable> implements React
     attachInternals(this.host);
   }
 
-  select(element: HTMLElement & { selected?: boolean } = this.host) {
-    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: element }));
+  hostUpdated() {
+    this.host.selectable === 'single'
+      ? this.host._internals.states.add('selectable-single')
+      : this.host._internals.states.delete('selectable-single');
+    this.host.selectable === 'multi'
+      ? this.host._internals.states.add('selectable-multi')
+      : this.host._internals.states.delete('selectable-multi');
+  }
+
+  select() {
+    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: this.host }));
+
     if (this.host.behaviorSelect) {
-      element.selected = true;
+      this.host.selected = true;
+    }
+  }
+
+  toggle() {
+    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: this.host }));
+
+    if (this.host.behaviorSelect) {
+      this.host.selected = !this.host.selected;
     }
   }
 }

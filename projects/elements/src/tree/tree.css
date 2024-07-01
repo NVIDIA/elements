@@ -1,0 +1,11 @@
+:host {
+  --max-width: 100%;
+}
+
+:host([border]) {
+  --node-border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+[internal-host] {
+  max-width: var(--max-width);
+}
