@@ -12,7 +12,7 @@ export function isFocusable(element: Element) {
       'embed',
       '*[tabindex]',
       '*[contenteditable=true]',
-      '[role=button]:not([disabled])',
+      '[role=button]:not([disabled])'
     ].join(',')
   );
 }
@@ -28,7 +28,7 @@ export function isSimpleFocusable(element: Element) {
       'object',
       'embed',
       '*[tabindex]',
-      '[role=button]:not([disabled])',
+      '[role=button]:not([disabled])'
     ].join(',')
   );
 }
@@ -66,7 +66,10 @@ export function initializeKeyListItems(items: NodeListOf<HTMLElement> | HTMLElem
 }
 
 /** determines if user interaction is a valid interaction for activating a listbox type */
-export function onListboxActivate(element: HTMLElement & { disabled?: boolean }, fn: (event: KeyboardEvent | PointerEvent) => void) {
+export function onListboxActivate(
+  element: HTMLElement & { disabled?: boolean },
+  fn: (event: KeyboardEvent | PointerEvent) => void
+) {
   const validKey = e => e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'ArrowDown';
 
   element.addEventListener('pointerdown', (e: any) => {

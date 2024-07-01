@@ -219,6 +219,7 @@ export const parameters = {
           'Toggletip',
           'Toolbar',
           'Tooltip',
+          'Tree',
           'Week',
         ],
         'Patterns',
