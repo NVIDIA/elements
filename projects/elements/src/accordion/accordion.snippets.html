@@ -1,0 +1,68 @@
+<template
+  name="Accordion Snippet"
+  prefix="accordion-snippet"
+  description="Basic accordion with title and content slot."
+  type="pattern">
+  <mlv-accordion behavior-expand container="${1:flat}">
+    <mlv-accordion-header>
+      <div slot="title">${2:Title}</div>
+    </mlv-accordion-header>
+
+    <mlv-accordion-content> ${3:Content} </mlv-accordion-content>
+  </mlv-accordion>
+
+  $0
+</template>
+
+<template
+  name="Accordion with Actions Snippet"
+  prefix="accordion-actions-snippet"
+  description="Accordion with action buttons in header."
+  type="pattern">
+  <mlv-accordion behavior-expand container="${1:flat}">
+    <mlv-accordion-header>
+      <div slot="title">${2:Title}</div>
+
+      <mlv-icon-button container="flat" icon-name="${3:add}" size="sm" slot="actions"></mlv-icon-button>
+      <mlv-icon-button container="flat" icon-name="${4:delete}" size="sm" slot="actions"></mlv-icon-button>
+    </mlv-accordion-header>
+
+    <mlv-accordion-content> ${5:Content} </mlv-accordion-content>
+  </mlv-accordion>
+
+  $0
+</template>
+
+<template
+  name="Accorion Group Snippet"
+  prefix="accordion-group-snippet"
+  description="Accordion group with two accordion children."
+  type="pattern">
+  <mlv-accordion-group behavior-expand-single container="${1:flat}">
+    <mlv-accordion>
+      <mlv-accordion-header>
+        <div slot="title">${2:Title}</div>
+      </mlv-accordion-header>
+
+      <mlv-accordion-content> ${3:Content} </mlv-accordion-content>
+    </mlv-accordion>
+
+    <mlv-accordion>
+      <mlv-accordion-header>
+        <div slot="title">${4:Title}</div>
+      </mlv-accordion-header>
+
+      <mlv-accordion-content> ${5:Content} </mlv-accordion-content>
+    </mlv-accordion>
+
+    <mlv-accordion>
+      <mlv-accordion-header>
+        <div slot="title">${6:Title}</div>
+      </mlv-accordion-header>
+
+      <mlv-accordion-content> ${7:Content} </mlv-accordion-content>
+    </mlv-accordion>
+  </mlv-accordion-group>
+
+  $0
+</template>

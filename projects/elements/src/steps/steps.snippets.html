@@ -1,0 +1,31 @@
+<template
+  name="Steps Snippet"
+  prefix="steps-snippet"
+  description="Steps enables a multi-step workflow allowing a user to complete a goal in a specific sequence."
+  type="pattern">
+  <mlv-steps behavior-select container="${1:condensed}">
+    <mlv-steps-item status="success">${2:Step 1}</mlv-steps-item>
+    <mlv-steps-item status="danger">${3:Step 2}</mlv-steps-item>
+    <mlv-steps-item selected>${4:Step 3}</mlv-steps-item>
+    <mlv-steps-item status="pending">${5:Step 4}</mlv-steps-item>
+    <mlv-steps-item disabled>Disabled</mlv-steps-item>
+  </mlv-steps>
+
+  $0
+</template>
+
+<template
+  name="vertical-Steps Snippet"
+  prefix="vertical-steps-snippet"
+  description="Steps can be used as the foundation for a side menu by enabling vertical mode."
+  type="pattern">
+  <mlv-steps behavior-select vertical container="${1:condensed}">
+    <mlv-steps-item status="success">${2:Step 1}</mlv-steps-item>
+    <mlv-steps-item status="danger">${3:Step 2}</mlv-steps-item>
+    <mlv-steps-item selected>${4:Step 3}</mlv-steps-item>
+    <mlv-steps-item status="pending">${5:Step 4}</mlv-steps-item>
+    <mlv-steps-item disabled>Disabled</mlv-steps-item>
+  </mlv-steps>
+
+  $0
+</template>

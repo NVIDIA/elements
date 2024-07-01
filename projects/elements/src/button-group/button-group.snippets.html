@@ -1,0 +1,27 @@
+<template
+  name="Button Group Snippet"
+  prefix="button-group-snippet"
+  description="Simple button group with three icons."
+  type="pattern">
+  <mlv-button-group>
+    <mlv-icon-button icon-name="${1:copy}"></mlv-icon-button>
+    <mlv-icon-button icon-name="${2:add-comment}"></mlv-icon-button>
+    <mlv-icon-button icon-name="${3:download}"></mlv-icon-button>
+  </mlv-button-group>
+
+  $0
+</template>
+
+<template
+  name="Split Button Snippet"
+  prefix="split-button-snippet"
+  description="Divided button with primary and secondary actions."
+  type="pattern">
+  <mlv-button-group>
+    <mlv-button>${1:Button Text}</mlv-button>
+    <mlv-divider orientation="vertical"></mlv-divider>
+    <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
+  </mlv-button-group>
+
+  $0
+</template>
