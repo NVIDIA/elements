@@ -41,6 +41,7 @@
   height: calc(var(--height) / 1.5);
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
   margin-left: var(--nve-ref-space-xxxs);
+  pointer-events: none;
 }
 
 :host(:state(checked)) {
@@ -69,7 +70,29 @@
   outline: 0 !important;
 }
 
-:host(:focus-within) [input] slot {
+:host(:not([nofocus]):focus-within) [input] slot {
   outline: Highlight solid 2px !important;
   outline: 5px auto -webkit-focus-ring-color !important;
+}
+
+:host(:state(indeterminate)) {
+  --background: var(--border-color);
+
+  [input] slot::before {
+    display: none;
+  }
+
+  [input] slot::after {
+    background: var(--nve-sys-interaction-field-color);
+    content: '';
+    display: inline-block;
+    height: var(--border-width);
+    top: 7px;
+    left: 3px;
+    z-index: 99;
+    width: 60%;
+    margin: 0 auto;
+    position: fixed;
+    pointer-events: none;
+  }
 }

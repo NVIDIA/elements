@@ -9,6 +9,8 @@ import { TypeExpandableController } from '@nvidia-elements/core/internal';
 class TypeExpandableControllerTestElement extends LitElement {
   @property({ type: Boolean }) expanded: boolean;
 
+  @property({ type: Boolean }) expandable: boolean;
+
   @property({ type: Boolean }) behaviorExpand: boolean;
 
   #typeExpandableController = new TypeExpandableController(this);
@@ -73,5 +75,17 @@ describe('type-expandable.controller', () => {
 
     element.toggle();
     expect(element.expanded).toBe(false);
+  });
+
+  it('should update expandable style state', async () => {
+    expect(element.matches(':state(expandable)')).toBeFalsy();
+
+    element.expandable = true;
+    await elementIsStable(element);
+    expect(element.matches(':state(expandable)')).toBeTruthy();
+
+    element.expandable = false;
+    await elementIsStable(element);
+    expect(element.matches(':state(expandable)')).toBeFalsy();
   });
 });

@@ -15,11 +15,8 @@ import {
 } from '@nvidia-elements/core/internal';
 import stepsItemStyleSheet from './steps-item.css?inline';
 import stepsStyleSheet from './steps.css?inline';
-
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
-import '@nvidia-elements/core/progress-ring/define.js';
-import '@nvidia-elements/core/icon-button/define.js';
 
 /**
  * @element nve-steps-item

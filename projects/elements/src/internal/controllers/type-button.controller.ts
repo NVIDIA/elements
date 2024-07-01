@@ -1,4 +1,4 @@
-import { ReactiveController, ReactiveElement  } from 'lit';
+import { ReactiveController, ReactiveElement } from 'lit';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
@@ -9,16 +9,25 @@ export function typeButton<T extends Button>(): ClassDecorator {
   return (target: any) => target.addInitializer((instance: T) => new TypeButtonController(instance));
 }
 
-export interface Button extends ReactiveElement { readonly: boolean; disabled; _internals?: ElementInternals; }
+export interface Button extends ReactiveElement {
+  readonly: boolean;
+  disabled;
+  _internals?: ElementInternals;
+}
 
 export class TypeButtonController<T extends Button> implements ReactiveController {
+  #initialTabIndex: number;
+
   constructor(private host: T) {
     this.host.addController(this);
   }
 
   hostConnected() {
     attachInternals(this.host);
-    this.host.tabIndex = 0;
+
+    if (this.host.hasAttribute('tabindex')) {
+      this.#initialTabIndex = this.host.tabIndex;
+    }
   }
 
   async hostUpdated() {
@@ -28,7 +37,7 @@ export class TypeButtonController<T extends Button> implements ReactiveControlle
       this.host._internals.role = 'button';
     }
 
-    this.host.tabIndex = !this.host.disabled ? 0 : -1;
+    this.host.tabIndex = this.host.disabled ? -1 : this.#initialTabIndex;
 
     if (this.host.readonly) {
       this.host._internals.role = 'none';

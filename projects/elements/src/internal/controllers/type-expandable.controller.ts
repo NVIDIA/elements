@@ -1,7 +1,12 @@
 import { ReactiveController, ReactiveElement } from 'lit';
 import { attachInternals } from '../utils/a11y.js';
 
-export type TypeExpandable = ReactiveElement &  {expanded?: boolean, behaviorExpand?: boolean };
+export type TypeExpandable = ReactiveElement & {
+  expanded?: boolean;
+  behaviorExpand?: boolean;
+  expandable?: boolean;
+  _internals?: ElementInternals;
+};
 
 /**
  * Controller for enabling expandable behavior for elements.
@@ -17,6 +22,12 @@ export class TypeExpandableController<T extends TypeExpandable> implements React
 
   hostConnected() {
     attachInternals(this.host);
+  }
+
+  hostUpdated() {
+    this.host.expandable
+      ? this.host._internals.states.add('expandable')
+      : this.host._internals.states.delete('expandable');
   }
 
   open() {

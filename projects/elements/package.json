@@ -703,6 +703,18 @@
       "types": "./dist/tooltip/define.d.ts",
       "default": "./dist/tooltip/define.js"
     },
+    "./tree": {
+      "types": "./dist/tree/index.d.ts",
+      "default": "./dist/tree/index.js"
+    },
+    "./tree/index.js": {
+      "types": "./dist/tree/index.d.ts",
+      "default": "./dist/tree/index.js"
+    },
+    "./tree/define.js": {
+      "types": "./dist/tree/define.d.ts",
+      "default": "./dist/tree/define.js"
+    },
     "./week": {
       "types": "./dist/week/index.d.ts",
       "default": "./dist/week/index.js"
