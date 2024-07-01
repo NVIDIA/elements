@@ -1,3 +1,10 @@
+## [@elements/elements-v0.37.9](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.8...@elements/elements-v0.37.9) (2024-07-01)
+
+
+### Bug Fixes
+
+* **elements:** dialog content width ([ccbae71](https://github.com/NVIDIA/elements/commit/ccbae71b435bc370585b2493be45b9ea24ed4811)), closes [#36](https://github.com/NVIDIA/elements/issues/36)
+
 ## [@elements/elements-v0.37.8](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.7...@elements/elements-v0.37.8) (2024-06-26)
 
 
