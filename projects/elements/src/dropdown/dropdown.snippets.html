@@ -1,0 +1,86 @@
+<template
+  name="Dropdown Snippet"
+  prefix="dropdown-snippet"
+  description="Generic dropdown element for rendering a variety of different content within a dropdown container."
+  type="pattern">
+  <nve-button id="btn">${4:Trigger}</nve-button>
+
+  <nve-dropdown anchor="btn" closable>
+    <nve-dropdown-header>
+      <h3 nve-text="heading semibold sm">${1:Title}</h3>
+    </nve-dropdown-header>
+    <p nve-text="body">${2:Content}</p>
+    <nve-dropdown-footer>
+      <p nve-text="body">${3:Footer Text}</p>
+    </nve-dropdown-footer>
+  </nve-dropdown>
+
+  $0
+</template>
+
+<template
+  name="Dropdown with Radio Snippet"
+  prefix="dropdown-radio-snippet"
+  description="Dropdown with radio select pattern"
+  type="pattern">
+  <nve-button id="btn" nve-control>completed <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
+
+  <nve-dropdown anchor="btn">
+    <nve-radio-group style="width: 250px">
+      <label>${1:Sort By}</label>
+
+      <nve-radio>
+        <label>${2:Completed}</label>
+        <input type="radio" checked />
+        <nve-control-message>${3:latest completed tasks}</nve-control-message>
+      </nve-radio>
+
+      <nve-radio>
+        <label>${4:Failing}</label>
+        <input type="radio" />
+        <nve-control-message>${5:latest failing tasks}</nve-control-message>
+      </nve-radio>
+
+      <nve-radio>
+        <label>${6:Status}</label>
+        <input type="radio" />
+        <nve-control-message>${7:task status priority}</nve-control-message>
+      </nve-radio>
+    </nve-radio-group>
+  </nve-dropdown>
+
+  $0
+</template>
+
+<template
+  name="Dropdown with Checkbox Snippet"
+  prefix="dropdown-checkbox-snippet"
+  description="Dropdown with checkbox select pattern"
+  type="pattern">
+  <nve-button id="btn" nve-control
+    >test suites <nve-icon name="caret" direction="down" size="sm"></nve-icon
+  ></nve-button>
+
+  <nve-dropdown anchor="btn">
+    <nve-checkbox-group style="width: 250px">
+      <label>${1:Test Suites}</label>
+
+      <nve-checkbox>
+        <label>${2:Local}</label>
+        <input type="checkbox" />
+      </nve-checkbox>
+
+      <nve-checkbox>
+        <label>${3:Nightly}</label>
+        <input type="checkbox" checked />
+      </nve-checkbox>
+
+      <nve-checkbox>
+        <label>${4:Remote}</label>
+        <input type="checkbox" />
+      </nve-checkbox>
+    </nve-checkbox-group>
+  </nve-dropdown>
+
+  $0
+</template>
