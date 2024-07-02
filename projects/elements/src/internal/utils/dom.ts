@@ -303,5 +303,13 @@ export function getDisplayValue(option: { label?: string; value?: string }): str
 
 /** returns a combination of nve and mlv for a prefixed tag selector */
 export function tagSelector(selector: string) {
-  return `${selector}, ${selector.replaceAll('nve-', 'nve-')}`;
+  return `${selector.replaceAll('nve-', 'nve-')}, ${selector.replaceAll('nve-', 'nve-')}`;
+}
+
+/** determines if HTML element matches the given component tag */
+export function matchesElementName(element: Partial<HTMLElement>, component: { metadata: { tag: string } }) {
+  return (
+    element.localName === component.metadata.tag.replace('nve-', 'nve-') ||
+    element.localName === component.metadata.tag.replace('nve-', 'nve-')
+  );
 }
