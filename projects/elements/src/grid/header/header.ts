@@ -1,6 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, attachInternals, debounce, LogService, validateSlots } from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, debounce, LogService, validateSlots, tagSelector } from '@nvidia-elements/core/internal';
 import styles from './header.css?inline';
 import { GlobalStateService } from '@nvidia-elements/core/internal/services/global.service';
 import { GridColumn } from '../column/column.js';
@@ -84,7 +84,9 @@ export class GridHeader extends LitElement {
 
   #validateColumns() {
     if (GlobalStateService.state.env !== 'production') {
-      const cells = this.#grid.querySelector(GridRow.metadata.tag)?.querySelectorAll(GridCell.metadata.tag);
+      const cells = this.#grid
+        .querySelector(tagSelector(GridRow.metadata.tag))
+        ?.querySelectorAll(tagSelector(GridCell.metadata.tag));
       if (this.columns && cells && this.columns.length !== cells.length) {
         LogService.error(`grid-column (${this.columns.length}) and grid-cell (${cells.length}) count mismatch`);
       }

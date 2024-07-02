@@ -1,6 +1,12 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, attachInternals, appendRootNodeStyle, getAttributeChanges } from '@nvidia-elements/core/internal';
+import {
+  useStyles,
+  attachInternals,
+  appendRootNodeStyle,
+  getAttributeChanges,
+  tagSelector
+} from '@nvidia-elements/core/internal';
 import type { Grid } from '@nvidia-elements/core/grid';
 import styles from './column.css?inline';
 
@@ -101,7 +107,7 @@ export class GridColumn extends LitElement {
 
   #computeColumnPositions() {
     if (this.position === 'fixed') {
-      const columns = Array.from(this.parentElement.querySelectorAll<GridColumn>(GridColumn.metadata.tag));
+      const columns = Array.from(this.parentElement.querySelectorAll<GridColumn>(tagSelector(GridColumn.metadata.tag)));
       const rightColumns = columns.slice(columns.indexOf(this) + 1, columns.length);
       const position = this.getBoundingClientRect();
       const gridPosition = this.#grid.getBoundingClientRect();
