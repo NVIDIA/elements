@@ -1,3 +1,11 @@
+## [@elements/elements-v0.37.10](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.9...@elements/elements-v0.37.10) (2024-07-02)
+
+
+### Bug Fixes
+
+* **elements:** internal selectors ([0d49ceb](https://github.com/NVIDIA/elements/commit/0d49ceb1a775ca0a9c19cc4df33462a8953a958c))
+* **elements:** select mutations ([d7cb06b](https://github.com/NVIDIA/elements/commit/d7cb06b191bb8b41013a73587161b12b917e6913))
+
 ## [@elements/elements-v0.37.9](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.8...@elements/elements-v0.37.9) (2024-07-01)
 
 
