@@ -5,7 +5,8 @@ import {
   useStyles,
   associateAriaLabel,
   assoicateAriaDescribedBy,
-  associateControlGroup
+  associateControlGroup,
+  tagSelector
 } from '@nvidia-elements/core/internal';
 import { ControlMessage } from '../control-message/control-message.js';
 import { setupControlStatusStates, setupControlGroupStates, inputQuery } from '../utils/states.js';
@@ -42,7 +43,7 @@ export class ControlGroup extends LitElement {
   }
 
   get #messages() {
-    return Array.from(this.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
+    return Array.from(this.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
   }
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
@@ -92,7 +93,10 @@ export class ControlGroup extends LitElement {
   #updateAssociations() {
     this.#assignLabel();
     associateAriaLabel(this.label, this);
-    assoicateAriaDescribedBy(Array.from(this.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag)), this);
+    assoicateAriaDescribedBy(
+      Array.from(this.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag))),
+      this
+    );
     associateControlGroup(Array.from(this.inputs));
   }
 
