@@ -153,7 +153,6 @@ describe(Select.metadata.tag, () => {
     select.options[0].selected = true;
     select.options[1].selected = true;
 
-    element.requestUpdate();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(2);
   });
@@ -163,7 +162,6 @@ describe(Select.metadata.tag, () => {
     select.options[0].selected = true;
     select.options[1].selected = true;
 
-    element.requestUpdate();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag)[0].innerText).toBe('Option 1');
 
@@ -178,7 +176,6 @@ describe(Select.metadata.tag, () => {
     select.options[0].removeAttribute('selected');
     select.options[1].setAttribute('selected', '');
 
-    element.requestUpdate();
     await elementIsStable(element);
     expect(select.value).toBe('2');
 
@@ -199,7 +196,6 @@ describe(Select.metadata.tag, () => {
     select.options[0].removeAttribute('selected');
     select.options[1].setAttribute('selected', '');
 
-    element.requestUpdate();
     await elementIsStable(element);
     expect(select.value).toBe('2');
 
@@ -230,7 +226,6 @@ describe(Select.metadata.tag, () => {
     select.options[0].selected = true;
     select.options[1].selected = false;
 
-    element.requestUpdate();
     await elementIsStable(element);
 
     emulateClick(select);
@@ -249,7 +244,6 @@ describe(Select.metadata.tag, () => {
     select.options[0].selected = true;
     select.options[1].selected = true;
 
-    element.requestUpdate();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(2);
 
@@ -273,7 +267,6 @@ describe(Select.metadata.tag, () => {
     select.options[1].selected = true;
     element.style.setProperty('--width', '50px');
 
-    element.requestUpdate();
     await elementIsStable(element);
     await new Promise(r => requestAnimationFrame(r));
     await new Promise(resolve => setTimeout(resolve, 0));
@@ -297,7 +290,6 @@ describe(Select.metadata.tag, () => {
 
   it('should set host :state(size) state when multiple is used', async () => {
     select.size = 2;
-    element.requestUpdate();
     await elementIsStable(element);
     expect(element.matches(':state(size)')).toBe(true);
   });
@@ -306,7 +298,6 @@ describe(Select.metadata.tag, () => {
     select.multiple = true;
     select.options[0].selected = true;
 
-    element.requestUpdate();
     await elementIsStable(element);
 
     expect(getComputedStyle(element.shadowRoot.querySelector<Tag>(Tag.metadata.tag)).pointerEvents).toBe('auto');
@@ -334,7 +325,6 @@ describe(Select.metadata.tag, () => {
     select.options[0].hidden = true;
     select.options[0].disabled = true;
 
-    element.requestUpdate();
     await elementIsStable(element);
     await new Promise(r => requestAnimationFrame(r));
     await new Promise(resolve => setTimeout(resolve, 0));
@@ -345,26 +335,20 @@ describe(Select.metadata.tag, () => {
   });
 
   it('should mark menu items as disabled when coresponding select option is disabled', async () => {
-    element.requestUpdate();
-    await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].disabled).toBe(false);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1].disabled).toBe(false);
 
     select.options[0].disabled = true;
-    element.requestUpdate();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].disabled).toBe(true);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1].disabled).toBe(false);
   });
 
   it('should mark menu items as hidden when coresponding select option is hidden', async () => {
-    element.requestUpdate();
-    await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].hidden).toBe(false);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1].hidden).toBe(false);
 
     select.options[0].hidden = true;
-    element.requestUpdate();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].hidden).toBe(true);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1].hidden).toBe(false);
