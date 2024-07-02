@@ -145,7 +145,7 @@ export class Select extends Control {
 
     this.#observers.push(
       getAttributeListChanges(this.#select, ['value'], () => this.requestUpdate()),
-      onChildListMutation(this.#select, () => this.requestUpdate())
+      onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true })
     );
   }
 

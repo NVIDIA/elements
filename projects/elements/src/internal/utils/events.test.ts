@@ -50,6 +50,12 @@ describe('onChildListMutation', () => {
     expect(list.querySelectorAll('li').length).toBe(0);
     expect(((await mutation) as any).type).toBe('childList');
   });
+
+  it('should notify of child attribute change', async () => {
+    const mutation = new Promise(r => onChildListMutation(list, m => r(m), { attributes: true, subtree: true }));
+    list.querySelector('li').setAttribute('title', 'test');
+    expect(((await mutation) as any).type).toBe('attributes');
+  });
 });
 
 describe('throttle', () => {
