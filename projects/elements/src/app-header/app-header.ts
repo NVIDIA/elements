@@ -1,6 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, matchesElementName } from '@nvidia-elements/core/internal';
 import { Logo } from '@nvidia-elements/core/logo';
 import type { IconButton } from '@nvidia-elements/core/icon-button';
 import type { Button } from '@nvidia-elements/core/button';
@@ -41,7 +41,7 @@ export class AppHeader extends LitElement {
   @queryAssignedElements() private slottedElements!: HTMLElement[];
 
   get #slottedLogo() {
-    return this.slottedElements.find(i => i.tagName.toLocaleLowerCase() === Logo.metadata.tag) as Logo;
+    return this.slottedElements.find(i => matchesElementName(i, Logo)) as Logo;
   }
 
   render() {

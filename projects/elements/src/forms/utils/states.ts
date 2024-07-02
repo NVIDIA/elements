@@ -1,4 +1,10 @@
-import { getAttributeChanges, getAttributeListChanges, getElementUpdate } from '@nvidia-elements/core/internal';
+import {
+  getAttributeChanges,
+  getAttributeListChanges,
+  getElementUpdate,
+  matchesElementName,
+  tagSelector
+} from '@nvidia-elements/core/internal';
 import type { ControlGroup } from '../control-group/control-group.js';
 import { ControlMessage } from '../control-message/control-message.js';
 import type { Control } from '../control/control.js';
@@ -64,7 +70,7 @@ export function setupControlValidationStates(control: Control, messages: Control
     control.input.form?.addEventListener('reset', () => resetValidityState());
   } else {
     control.shadowRoot.addEventListener('slotchange', () => {
-      const messages = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
+      const messages = Array.from(control.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
       if (messages.find(m => m.status === 'error' && !m.hidden)) {
         control._internals.states.delete('valid');
         control._internals.states.add('invalid');
@@ -153,7 +159,7 @@ export function setupControlStatusStates(control: Control | ControlGroup, messag
   observers.push(
     getAttributeListChanges(control, ['hidden', 'status'], mutation => {
       const target = mutation.target as ControlMessage;
-      if (target.tagName.toLocaleLowerCase() === ControlMessage.metadata.tag) {
+      if (matchesElementName(target, ControlMessage)) {
         updateControlStatusState(control, target);
       }
     })

@@ -24,7 +24,8 @@ import {
   getThemeTokens,
   removeEmptySlotWhitespace,
   hasHorizontalScrollBar,
-  getDisplayValue
+  getDisplayValue,
+  matchesElementName
 } from '@nvidia-elements/core/internal';
 
 @customElement('dom-test-element')
@@ -515,5 +516,18 @@ describe('getDisplayValue', () => {
 
   it('should return empty string if no option was provided', () => {
     expect(getDisplayValue(undefined)).toBe('');
+  });
+});
+
+describe('matchesElementName', () => {
+  it('should determine if provided element name matches provided component', () => {
+    expect(matchesElementName({ localName: 'nve-test' }, { metadata: { tag: 'nve-test' } })).toBe(true);
+    expect(matchesElementName({ localName: 'nve-test' }, { metadata: { tag: 'nve-test' } })).toBe(true);
+
+    expect(matchesElementName({ localName: 'nve-test' }, { metadata: { tag: 'nve-test' } })).toBe(true);
+    expect(matchesElementName({ localName: 'nve-test' }, { metadata: { tag: 'nve-test' } })).toBe(true);
+
+    expect(matchesElementName({ localName: 'x-test' }, { metadata: { tag: 'nve-test' } })).toBe(false);
+    expect(matchesElementName({ localName: 'x-test' }, { metadata: { tag: 'nve-test' } })).toBe(false);
   });
 });
