@@ -1,3 +1,10 @@
+## [@elements/elements-v0.37.11](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.10...@elements/elements-v0.37.11) (2024-07-08)
+
+
+### Bug Fixes
+
+* **elements:** fixed login/logout svg ([5bd8308](https://github.com/NVIDIA/elements/commit/5bd83086f3800f5d774a613540b371e3b394bf34))
+
 ## [@elements/elements-v0.37.10](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.9...@elements/elements-v0.37.10) (2024-07-02)
 
 
