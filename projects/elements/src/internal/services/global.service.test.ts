@@ -27,7 +27,7 @@ describe('GlobalStateService', () => {
     GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
     await event;
 
-    expect((await event).detail.elementRegistry).toStrictEqual({
+    expect(((await event) as CustomEvent).detail.elementRegistry).toStrictEqual({
       one: '0.0.0'
     });
   });
@@ -37,7 +37,7 @@ describe('GlobalStateService', () => {
     GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
     await event;
 
-    expect((await event).detail.elementRegistry).toStrictEqual({
+    expect(((await event) as CustomEvent).detail.elementRegistry).toStrictEqual({
       one: '0.0.0'
     });
 
@@ -55,7 +55,7 @@ describe('GlobalStateService', () => {
     GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
     await event;
 
-    expect((await event).detail.elementRegistry).toStrictEqual({
+    expect(((await event) as CustomEvent).detail.elementRegistry).toStrictEqual({
       one: '0.0.0'
     });
 
@@ -74,7 +74,7 @@ describe('GlobalStateService', () => {
     GlobalStateService.dispatch('TEST_EVENT', { elementRegistry: { one: '0.0.0' } });
     await event;
 
-    expect((await event).detail.elementRegistry).toStrictEqual({
+    expect(((await event) as CustomEvent).detail.elementRegistry).toStrictEqual({
       one: '0.0.0'
     });
 

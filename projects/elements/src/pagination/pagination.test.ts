@@ -159,7 +159,7 @@ describe(Pagination.metadata.tag, () => {
 
     await input;
     await change;
-    const { detail } = await stepChange;
+    const { detail } = (await stepChange) as CustomEvent;
     expect(element.step).toBe(20);
     expect(detail).toBe(20);
   });

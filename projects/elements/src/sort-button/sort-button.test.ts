@@ -59,7 +59,7 @@ describe(SortButton.metadata.tag, () => {
   it('should dispatch a sort event containing current and next sort values when clicked', async () => {
     const event = untilEvent(element, 'sort');
     emulateClick(element);
-    const detail = (await event).detail;
+    const detail = ((await event) as CustomEvent).detail;
     expect(detail.value).toBe('none');
     expect(detail.next).toBe('ascending');
     expect(element._internals.ariaLabel).toBe('sort ascending');
@@ -67,7 +67,7 @@ describe(SortButton.metadata.tag, () => {
     element.sort = 'ascending';
     const eventTwo = untilEvent(element, 'sort');
     emulateClick(element);
-    const detailTwo = (await eventTwo).detail;
+    const detailTwo = ((await eventTwo) as CustomEvent).detail;
     expect(detailTwo.value).toBe('ascending');
     expect(detailTwo.next).toBe('descending');
     expect(element._internals.ariaLabel).toBe('sort descending');
@@ -75,7 +75,7 @@ describe(SortButton.metadata.tag, () => {
     element.sort = 'descending';
     const eventThree = untilEvent(element, 'sort');
     emulateClick(element);
-    const detailThree = (await eventThree).detail;
+    const detailThree = ((await eventThree) as CustomEvent).detail;
     expect(detailThree.value).toBe('descending');
     expect(detailThree.next).toBe('none');
     expect(element._internals.ariaLabel).toBe('sort none');
