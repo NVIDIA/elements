@@ -293,8 +293,8 @@ describe('setupControlStates', () => {
 describe('showNonValidationMessages', () => {
   it('should show all messages that do not have a validation requirement', async () => {
     const messages = [
-      document.createElement(ControlMessage.metadata.tag),
-      document.createElement(ControlMessage.metadata.tag)
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage,
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage
     ];
 
     messages[0].setAttribute('error', 'valueMissing');
@@ -311,8 +311,8 @@ describe('showNonValidationMessages', () => {
 describe('hideAllValidationMessages', () => {
   it('should hide all messages with a validation requirement', async () => {
     const messages = [
-      document.createElement(ControlMessage.metadata.tag),
-      document.createElement(ControlMessage.metadata.tag)
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage,
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage
     ];
 
     messages[0].setAttribute('error', 'valueMissing');
@@ -330,8 +330,8 @@ describe('showActiveValidationMessages', () => {
   it('should only messages wich have active validation rules', async () => {
     const controlMock = { input: { validity: { valueMissing: true } } } as Control;
     const messages = [
-      document.createElement(ControlMessage.metadata.tag),
-      document.createElement(ControlMessage.metadata.tag)
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage,
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage
     ];
 
     messages[0].error = 'valueMissing';
@@ -350,8 +350,8 @@ describe('showActiveValidationMessages', () => {
 describe('hideAllControlMessages', () => {
   it('should hide all control messages', async () => {
     const messages = [
-      document.createElement(ControlMessage.metadata.tag),
-      document.createElement(ControlMessage.metadata.tag)
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage,
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage
     ];
 
     document.body.append(...messages);
@@ -377,8 +377,8 @@ describe('hideInactiveValidationMessages', () => {
   it('should hide all validation messages if control is valid', async () => {
     const controlMock = { input: { validity: { valid: true } } } as Control;
     const messages = [
-      document.createElement(ControlMessage.metadata.tag),
-      document.createElement(ControlMessage.metadata.tag)
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage,
+      document.createElement(ControlMessage.metadata.tag) as ControlMessage
     ];
 
     messages[0].error = 'valueMissing';
