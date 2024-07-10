@@ -21,6 +21,8 @@ export class JSONViewer extends LitElement {
   /** expand all nodes */
   @property({ type: Boolean }) expanded: boolean;
 
+  @property({ type: Boolean }) expandedAll: boolean;
+
   static styles = useStyles([styles]);
 
   static readonly metadata = {

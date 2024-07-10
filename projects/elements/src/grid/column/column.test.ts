@@ -48,13 +48,13 @@ describe(GridColumn.metadata.tag, () => {
     expect(columns[0].ariaSort).toBe(null);
     const event = untilEvent(columns[0], 'sort');
     columns[0].dispatchEvent(new CustomEvent('sort', { bubbles: true, detail: 'accending' }));
-    expect((await event).detail).toBe('accending');
+    expect(((await event) as CustomEvent).detail).toBe('accending');
   });
 
   it('should dispatch nve-grid-column-resize event if column width changes', async () => {
     const event = untilEvent(columns[0], 'nve-grid-column-resize');
     columns[0].width = '100px';
-    expect((await event).target.width).toBe('100px');
+    expect(((await event) as any).target.width).toBe('100px');
   });
 
   it('should update column alignments when changed', async () => {
