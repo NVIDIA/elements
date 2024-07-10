@@ -20,10 +20,10 @@ export default defineConfig(env => {
     plugins: [
       {
         ...dts({
-          tsconfigPath: './tsconfig.lib.json',
           root: resolve('.'),
           entryRoot: resolve('./src'),
-          outDir: dist()
+          outDir: dist(),
+          exclude: ['**/*.test.ts', '**/*.stories.ts']
         }),
         enforce: 'pre'
       }
