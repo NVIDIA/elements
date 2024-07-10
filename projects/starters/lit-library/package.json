@@ -103,7 +103,6 @@
         "!src/**/*.stories.mdx",
         "package.json",
         "tsconfig.json",
-        "tsconfig.lib.json",
         "vite.config.ts"
       ]
     },
@@ -119,7 +118,6 @@
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
-        "tsconfig.lib.json",
         "vite.config.ts",
         "vitest.config.ts"
       ],
