@@ -9,6 +9,7 @@
   --border-right: 0;
   --justify-content: start;
   transition: box-shadow 300ms ease-in-out;
+  contains: inline-size;
 }
 
 [internal-host] {
