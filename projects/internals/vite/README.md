@@ -54,5 +54,4 @@ export default mergeConfig(libraryAxeTestConfig, {
     alias: { '@nvidia-elements/library': resolve(import.meta.dirname, './dist') },
   }
 });
-
 ```
