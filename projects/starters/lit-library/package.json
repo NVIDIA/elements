@@ -68,13 +68,13 @@
     "@elements/elements": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@rollup/plugin-terser": "0.4.4",
-    "@vitest/browser": "1.6.0",
+    "@vitest/browser": "2.0.2",
     "glob": "10.3.10",
     "rollup-plugin-minify-html-literals": "1.2.6",
     "typescript": "5.3.3",
-    "vite": "5.2.11",
+    "vite": "5.3.3",
     "vite-plugin-dts": "3.9.1",
-    "vitest": "1.6.0"
+    "vitest": "2.0.2"
   },
   "wireit": {
     "dev": {

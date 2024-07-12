@@ -5,8 +5,8 @@ import '@nvidia-elements/themes/compact.css';
 import '@nvidia-elements/themes/dark.css';
 import '@nvidia-elements/themes/debug.css';
 import '@nvidia-elements/themes/elements.css';
-import '../css/module.layout.css';
-import '../css/module.typography.css';
+import './css/module.layout.css';
+import './css/module.typography.css';
 
 import '@nvidia-elements/core/accordion/define.js';
 import '@nvidia-elements/core/alert/define.js';
