@@ -17,18 +17,16 @@
     "glob": "10.3.10",
     "lighthouse": "11.4.0",
     "playwright": "1.44.0",
-    "vite": "5.2.11",
+    "vite": "5.3.3",
     "vite-plugin-virtual-html": "1.1.19"
   },
   "devDependencies": {
+    "@nve-internals/eslint": "workspace:*",
+    "@nve-internals/vite": "workspace:*",
     "@types/node": "20.14.2",
-    "@typescript-eslint/eslint-plugin": "7.2.0",
-    "@typescript-eslint/parser": "7.2.0",
-    "eslint-plugin-import": "2.29.1",
-    "globals": "13.23.0",
+    "eslint": "9.6.0",
     "typescript": "5.3.3",
-    "vite-plugin-dts": "3.9.1",
-    "vitest": "1.6.0"
+    "vitest": "2.0.3"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -57,19 +55,6 @@
       "default": "./dist/vite.js"
     }
   },
-  "typesVersions": {
-    "*": {
-      "index": [
-        "dist/index.d.ts"
-      ],
-      "axe": [
-        "dist/axe.d.ts"
-      ],
-      "*": [
-        "dist/index.d.ts"
-      ]
-    }
-  },
   "wireit": {
     "ci": {
       "dependencies": [
@@ -78,12 +63,6 @@
       ]
     },
     "build": {
-      "dependencies": [
-        "build:tsc",
-        "build:vite"
-      ]
-    },
-    "build:vite": {
       "clean": false,
       "command": "vite build",
       "files": [
@@ -94,18 +73,10 @@
       ],
       "output": [
         "dist"
-      ]
-    },
-    "build:tsc": {
-      "command": "tsc --project ./tsconfig.lib.json --noEmit --emitDeclarationOnly false",
-      "files": [
-        "src/**/*.ts",
-        "!src/**/*.test.ts",
-        "package.json",
-        "tsconfig.json",
-        "tsconfig.lib.json"
       ],
-      "output": []
+      "dependencies": [
+        "../../internals/vite:ci"
+      ]
     },
     "lint": {
       "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
@@ -113,7 +84,10 @@
         "eslint.config.js",
         "src/**/*.ts"
       ],
-      "output": []
+      "output": [],
+      "dependencies": [
+        "../../internals/eslint:ci"
+      ]
     }
   }
 }

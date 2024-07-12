@@ -2,9 +2,14 @@ import fs from 'fs';
 import process from 'process';
 import terser from '@rollup/plugin-terser';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
-import dts from 'vite-plugin-dts';
 import { resolve } from 'path';
 import { globSync } from 'glob';
+
+import { tsc } from '../plugins/tsc.js';
+import { cem } from '../plugins/cem.js';
+import { dts } from '../plugins/dts.js';
+import { bundle } from '../plugins/bundle.js';
+import { initial } from '../plugins/initial.js';
 
 const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
@@ -17,12 +22,7 @@ const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package
  * @type {import('vite').UserConfig}
  */
 export const libraryBuildConfig = {
-  plugins: [
-    dts({
-      copyDtsFiles: true,
-      tsconfigPath: resolve(process.cwd(), './tsconfig.lib.json')
-    })
-  ],
+  plugins: [initial(), tsc(), cem(), dts(), bundle()],
   build: {
     cssCodeSplit: true,
     minify: false, // https://github.com/vitejs/vite/issues/8848

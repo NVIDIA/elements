@@ -1,19 +1,24 @@
-import pkg from './package.json' assert { type: 'json' };
 import path from 'path';
+import fs from 'fs';
 import { Project, SyntaxKind } from 'ts-morph';
 
 const resolve = rel => path.resolve(process.cwd(), rel);
-
+const pkg = JSON.parse(fs.readFileSync(resolve('./package.json'), 'utf-8'));
 const runtimeEnvironment = {};
-
 const baseInterface = getBaseInterface();
 
+/** todo: this should be more generalized and not coupled specifically to the elements core package */
 function getBaseInterface() {
-  const project = new Project();
-  const file = project.addSourceFileAtPath(resolve('src/internal/types/index.ts'));
-  const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find(i => i.getName() === 'NveElement');
-  const props = base.getStructure().properties.reduce((p, n) => ({ ...p, [n.name]: n }), {});
-  return props;
+  const baseInterfacePath = resolve('src/internal/types/index.ts');
+
+  if (fs.existsSync(baseInterfacePath)) {
+    const project = new Project();
+    const file = project.addSourceFileAtPath(baseInterfacePath);
+    const base = file.getChildrenOfKind(SyntaxKind.InterfaceDeclaration).find(i => i.getName() === 'NveElement');
+    return base ? base.getStructure().properties.reduce((p, n) => ({ ...p, [n.name]: n }), {}) : {};
+  } else {
+    return {};
+  }
 }
 
 function metadataPlugin() {
@@ -57,6 +62,7 @@ function metadataPlugin() {
                 }
 
                 classDeclaration.metadata = { ...classDeclaration.metadata, [tag.tagName?.getText()]: value };
+                classDeclaration.description = classDeclaration.metadata.description;
               }
             });
           });
@@ -240,7 +246,8 @@ export default {
     resolve('src/**/*.css'),
     resolve('src/**/*.stories.mdx'),
     resolve('src/**/*.stories.ts'),
-    resolve('src/**/*.test.axe.ts')
+    resolve('src/**/*.test.axe.ts'),
+    resolve('src/**/*.test.lighthouse.ts')
   ],
   litelement: true,
   plugins: [
@@ -251,10 +258,7 @@ export default {
     rewriteExportedStringLiteralTypeAliasesPlugin()
   ],
   overrideModuleCreation: ({ ts, globs }) => {
-    const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.lib.json');
-    if (!configFile) {
-      throw Error('tsconfig.lib.json not found');
-    }
+    const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, resolve('tsconfig.json'));
     const { config } = ts.readConfigFile(configFile, ts.sys.readFile);
     const { options } = ts.parseJsonConfigFileContent(config, ts.sys, process.cwd());
     const program = ts.createProgram(globs, options);

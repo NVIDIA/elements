@@ -14,7 +14,7 @@ describe(IconButton.metadata.tag, () => {
       <nve-icon-button aria-label="icon button"></nve-icon-button>
     `);
     element = fixture.querySelectorAll<IconButton>(IconButton.metadata.tag)[0];
-    elementIsStable(element);
+    await elementIsStable(element);
   });
 
   afterEach(() => {

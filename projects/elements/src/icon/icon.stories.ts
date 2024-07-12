@@ -1,4 +1,3 @@
-/* eslint-disable guard-for-in */
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import layout from '@nvidia-elements/core/css/module.layout.css?inline';

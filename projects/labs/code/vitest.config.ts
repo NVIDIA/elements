@@ -8,10 +8,10 @@ export default mergeConfig(libraryTestConfig, {
     alias: { '@nvidia-elements/code': resolve(import.meta.dirname, './src') },
     coverage: {
       thresholds: {
-        lines: 21,
-        branches: 11,
-        functions: 33,
-        statements: 21
+        lines: 90,
+        branches: 87,
+        functions: 90,
+        statements: 90
       }
     }
   }

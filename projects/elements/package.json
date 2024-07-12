@@ -3,19 +3,26 @@
   "version": "0.38.0",
   "type": "module",
   "customElements": "custom-elements.json",
+  "contributes": {
+    "html": {
+      "customData": [
+        "./dist/data.html.json"
+      ]
+    },
+    "snippets": [
+      {
+        "language": "html",
+        "path": "./dist/data.snippets.json"
+      }
+    ]
+  },
   "scripts": {
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
-    "build:tsc": "wireit",
-    "build:vite": "wireit",
-    "build:manifest": "wireit",
     "build:icons": "wireit",
     "build:snippets": "wireit",
-    "build:importmap": "wireit",
-    "build:vscode-custom-data": "wireit",
     "test": "wireit",
-    "test:all": "wireit",
     "test:watch": "wireit",
     "test:axe": "wireit",
     "test:coverage": "wireit",
@@ -39,9 +46,10 @@
     "./package.json": "./package.json",
     "./CHANGELOG.md": "./CHANGELOG.md",
     "./custom-elements.json": "./dist/custom-elements.json",
+    "./data.html.json": "./dist/data.html.json",
+    "./data.css-vars.json": "./dist/data.css-vars.json",
     "./elements.css-vars.json": "./dist/elements.css-vars.json",
     "./elements.html-data.json": "./dist/elements.html-data.json",
-    "./assets/*": "./dist/assets/*",
     "./css/*": "./dist/css/*",
     ".": {
       "types": "./dist/index.d.ts",
@@ -757,44 +765,32 @@
     "formdata-polyfill": "^4.0.10"
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "0.10.2",
-    "@eslint/js": "9.4.0",
     "@jspm/generator": "1.1.12",
     "@lit-labs/virtualizer": "2.0.12",
     "@nvidia-elements/testing": "workspace:*",
     "@nvidia-elements/testing-lighthouse": "workspace:*",
     "@nvidia-elements/snippets": "workspace:*",
+    "@nve-internals/eslint": "workspace:*",
     "@nve-internals/vite": "workspace:*",
-    "@rollup/plugin-terser": "0.4.4",
     "@typescript/lib-dom": "npm:@types/web@0.0.147",
-    "@vitest/browser": "1.6.0",
-    "@vitest/coverage-istanbul": "1.6.0",
+    "@vitest/browser": "2.0.3",
+    "@vitest/coverage-istanbul": "2.0.3",
     "chai": "4.3.10",
     "cssnano": "6.0.1",
     "emoji-picker-element": "1.18.4",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-lit": "1.14.0",
-    "eslint-plugin-lit-a11y": "4.1.2",
-    "eslint-plugin-rulesdir": "0.2.2",
-    "eslint-plugin-wc": "2.1.0",
+    "eslint": "9.6.0",
     "glob": "10.3.10",
-    "globals": "13.23.0",
     "lighthouse": "11.4.0",
     "lit-analyzer": "2.0.3",
     "postcss": "8.4.31",
     "postcss-each": "1.1.0",
-    "postcss-load-config": "4.0.1",
     "postcss-mixins": "9.0.4",
     "regenerator-runtime": "0.13.10",
-    "style-dictionary": "3.8.0",
     "svgo": "3.0.2",
-    "terser": "5.30.3",
     "ts-lit-plugin": "2.0.2",
-    "ts-morph": "20.0.0",
-    "typescript-eslint": "7.12.0",
     "typescript": "5.3.3",
-    "vite": "5.2.11",
-    "vitest": "1.6.0"
+    "vite": "5.3.3",
+    "vitest": "2.0.3"
   },
   "wireit": {
     "dev": {
@@ -807,43 +803,17 @@
       "dependencies": [
         "lint",
         "build",
-        "test:all"
-      ]
-    },
-    "build": {
-      "clean": false,
-      "dependencies": [
-        "build:tsc",
-        "build:vite",
-        "build:bundle",
-        "build:manifest",
-        "build:vscode-custom-data"
+        "test:axe",
+        "test:coverage"
       ]
     },
     "build:watch": {
       "command": "vite build --watch",
       "service": true,
-      "dependencies": [
-        "build"
-      ]
+      "dependencies": []
     },
-    "build:tsc": {
-      "command": "tsc --project ./tsconfig.lib.json --noEmit --emitDeclarationOnly false",
-      "files": [
-        "src/**/*.ts",
-        "src/**/*.stories.ts",
-        "!src/**/*.test.ts",
-        "!src/**/*.test.axe.ts",
-        "!src/**/*.test.lighthouse.ts",
-        "package.json",
-        "tsconfig.json",
-        "tsconfig.lib.json"
-      ],
-      "output": []
-    },
-    "build:vite": {
-      "clean": false,
-      "command": "NODE_ENV=production vite build",
+    "build": {
+      "command": "NODE_ENV=production ELEMENTS_BUILD=true vite build && node ./build/deprecated.js",
       "files": [
         "public/**",
         "src/**",
@@ -857,51 +827,22 @@
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts",
-        "postcss.config.cjs"
+        "vite.bundle.ts",
+        "postcss.config.cjs",
+        "custom-elements-manifest.config.mjs"
       ],
       "output": [
         "dist/**",
-        "!dist/custom-elements.json",
-        "!dist/elements.css-vars.json",
-        "!dist/elements.html-data.json",
-        "!dist/importmap.cdn.json",
-        "!dist/snippets.json",
         "!dist/inter.css",
         "!dist/inter.woff",
-        "!dist/bundles/**"
+        "!dist/elements.html-data.json",
+        "!dist/elements.css-vars.json"
       ],
       "dependencies": [
         "build:icons",
-        "build:manifest",
-        "build:inter",
         "../themes:build",
-        "../internals/vite:build"
-      ]
-    },
-    "build:bundle": {
-      "clean": false,
-      "command": "NODE_ENV=production vite build --config vite.bundle.ts",
-      "files": [
-        "vite.bundle.ts",
-        "package.json"
-      ],
-      "output": [
-        "dist/bundles/**"
-      ],
-      "dependencies": [
-        "build:vite"
-      ]
-    },
-    "build:importmap": {
-      "command": "node ./build/importmap.mjs --outDir ./dist",
-      "files": [
-        "build/importmap.mjs"
-      ],
-      "output": [
-        "dist/importmap.cdn.json"
-      ],
-      "dependencies": [
-        "build:vite"
+        "../internals/vite:ci",
+        "../labs/testing-lighthouse:build"
       ]
     },
     "build:icons": {
@@ -923,57 +864,9 @@
       ],
       "output": [
         "dist/snippets.json"
-      ]
-    },
-    "build:inter": {
-      "command": "node ./build/inter.js",
-      "clean": false,
-      "dependencies": [
-        "../themes:build"
-      ],
-      "files": [
-        "build/inter.js"
-      ],
-      "output": [
-        "dist/inter.css",
-        "dist/inter.woff"
-      ]
-    },
-    "build:manifest": {
-      "command": "cem analyze --config ./custom-elements-manifest.config.mjs --outdir ./dist/",
-      "files": [
-        "src/**",
-        "!src/test/**",
-        "!src/**/*.stories.ts",
-        "!src/**/*.stories.mdx",
-        "!src/**/*.test.ts",
-        "!src/**/*.test.lighthouse.ts",
-        "custom-elements-manifest.config.mjs"
-      ],
-      "output": [
-        "dist/custom-elements.json"
-      ]
-    },
-    "build:vscode-custom-data": {
-      "command": "node ./build/vscode-custom-data.js --outDir ./dist",
-      "files": [
-        "build/vscode-custom-data.js"
-      ],
-      "output": [
-        "dist/elements.html-data.json"
       ],
       "dependencies": [
-        "build:manifest"
-      ]
-    },
-    "test:all": {
-      "command": "echo '...'",
-      "files": [],
-      "output": [],
-      "dependencies": [
-        "test",
-        "test:axe",
-        "test:coverage"
+        "../labs/snippets:ci"
       ]
     },
     "test": {
@@ -982,7 +875,6 @@
         "src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
         "tsconfig.json",
-        "tsconfig.lib.json",
         "vite.config.ts",
         "vitest.config.ts"
       ],
@@ -1001,7 +893,6 @@
         "src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
         "tsconfig.json",
-        "tsconfig.lib.json",
         "vite.config.ts",
         "vitest.config.ts"
       ],
@@ -1029,16 +920,15 @@
       "files": [
         "src/**/*.test.axe.ts",
         "tsconfig.json",
-        "tsconfig.lib.json",
-        "vite.config.ts",
         "vitest.axe.ts"
       ],
       "output": [
         "coverage/axe/**"
       ],
       "dependencies": [
+        "build",
         "test:coverage",
-        "build"
+        "../internals/vite:ci"
       ],
       "env": {
         "NODE_ENV": "production"
@@ -1053,13 +943,14 @@
     "lint:eslint": {
       "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
       "files": [
-        "../internals/eslint/*.cjs",
         "src/**/*.ts",
         "src/**/*.js",
-        "eslint.config.js",
-        "!./lighthouse/dist/**"
+        "eslint.config.js"
       ],
-      "output": []
+      "output": [],
+      "dependencies": [
+        "../internals/eslint:ci"
+      ]
     },
     "lint:analyzer": {
       "command": "lit-analyzer src/**/*.ts --strict --rules.no-unknown-slot off",
