@@ -2,6 +2,20 @@
   "name": "@nvidia-elements/code",
   "version": "0.0.1",
   "type": "module",
+  "customElements": "custom-elements.json",
+  "contributes": {
+    "html": {
+      "customData": [
+        "./dist/data.html.json"
+      ]
+    },
+    "snippets": [
+      {
+        "language": "html",
+        "path": "./dist/data.snippets.json"
+      }
+    ]
+  },
   "files": [
     "README.md",
     "package.json",
@@ -9,6 +23,8 @@
   ],
   "exports": {
     "./package.json": "./package.json",
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./data.html.json": "./dist/data.html.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
@@ -114,27 +130,12 @@
     "./**/define.js",
     "./dist/codeblock/languages/*.js"
   ],
-  "typesVersions": {
-    "*": {
-      "*/define": [
-        "dist/*/define.d.ts"
-      ],
-      "*/define.js": [
-        "dist/*/define.d.ts"
-      ],
-      "*/index.js": [
-        "dist/*/index.d.ts"
-      ],
-      "*": [
-        "dist/*/index.d.ts"
-      ]
-    }
-  },
   "scripts": {
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
     "build:watch": "wireit",
+    "lint": "wireit",
     "test": "wireit",
     "test:axe": "wireit",
     "test:coverage": "wireit",
@@ -151,15 +152,15 @@
   "devDependencies": {
     "@elements/elements": "workspace:^",
     "@nvidia-elements/testing": "workspace:*",
+    "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/testing-lighthouse": "workspace:*",
-    "@rollup/plugin-terser": "0.4.4",
-    "@vitest/browser": "1.6.0",
-    "@vitest/coverage-istanbul": "1.6.0",
+    "@vitest/browser": "2.0.3",
+    "@vitest/coverage-istanbul": "2.0.3",
+    "eslint": "9.6.0",
     "typescript": "5.3.3",
-    "vite": "5.2.11",
-    "vite-plugin-dts": "3.9.1",
-    "vitest": "1.6.0"
+    "vite": "5.3.3",
+    "vitest": "2.0.3"
   },
   "wireit": {
     "dev": {
@@ -173,19 +174,13 @@
     "ci": {
       "dependencies": [
         "build",
+        "lint",
         "test:axe",
         "test:coverage"
       ]
     },
     "build": {
-      "command": "NODE_ENV=production tsc && vite build",
-      "dependencies": [
-        "../../elements:build",
-        "../../testing:ci"
-      ],
-      "output": [
-        "dist/**"
-      ],
+      "command": "NODE_ENV=production vite build",
       "files": [
         "src/**",
         "!src/**/*.stories.ts",
@@ -197,6 +192,13 @@
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../../elements:build",
+        "../../internals/vite:ci"
       ]
     },
     "build:watch": {
@@ -211,13 +213,13 @@
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
-        "tsconfig.lib.json",
         "vite.config.ts",
         "vitest.config.ts"
       ],
       "output": [],
       "dependencies": [
         "build",
+        "../../elements:test",
         "../../testing:ci"
       ]
     },
@@ -226,7 +228,6 @@
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
-        "tsconfig.lib.json",
         "vite.config.ts",
         "vitest.config.ts"
       ],
@@ -251,20 +252,31 @@
       "files": [
         "src/**/*.test.axe.ts",
         "tsconfig.json",
-        "tsconfig.lib.json",
-        "vite.config.ts",
         "vitest.axe.ts"
       ],
       "output": [
         "coverage/axe/**"
       ],
       "dependencies": [
+        "build",
         "test:coverage",
-        "build"
+        "../../internals/vite:ci"
       ],
       "env": {
         "NODE_ENV": "production"
       }
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
+      "files": [
+        "src/**/*.ts",
+        "src/**/*.js",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../internals/eslint:ci"
+      ]
     }
   }
 }
