@@ -1,5 +1,5 @@
 {
-  "created": "2024-05-31T18:47:41.789Z",
+  "created": "2024-07-15T19:02:11.426Z",
   "projects": [
     {
       "name": "@elements/ddb-dump-roadcast-frontend",
@@ -233,8 +233,24 @@
     {
       "name": "drivescrubber",
       "path": "src/ui/drivescrubber/apps/drivescrubber",
-      "elementsVersion": "0.20.0",
+      "elementsVersion": "0.37.10",
       "elements": [
+        {
+          "name": "nve-combobox",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-select",
+          "instanceTotal": 7
+        },
+        {
+          "name": "nve-notification-group",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-notification",
+          "instanceTotal": 4
+        },
         {
           "name": "nve-button",
           "instanceTotal": 16
@@ -249,10 +265,6 @@
         },
         {
           "name": "nve-input",
-          "instanceTotal": 5
-        },
-        {
-          "name": "nve-select",
           "instanceTotal": 5
         },
         {
@@ -277,7 +289,7 @@
         },
         {
           "name": "nve-tooltip",
-          "instanceTotal": 5
+          "instanceTotal": 6
         },
         {
           "name": "nve-date",
@@ -348,16 +360,12 @@
           "instanceTotal": 3
         },
         {
+          "name": "nve-icon-button",
+          "instanceTotal": 5
+        },
+        {
           "name": "nve-input-group",
           "instanceTotal": 2
-        },
-        {
-          "name": "nve-combobox",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-icon-button",
-          "instanceTotal": 4
         },
         {
           "name": "nve-checkbox-group",
@@ -392,14 +400,6 @@
           "instanceTotal": 2
         },
         {
-          "name": "nve-notification-group",
-          "instanceTotal": 3
-        },
-        {
-          "name": "nve-notification",
-          "instanceTotal": 3
-        },
-        {
           "name": "nve-alert-banner",
           "instanceTotal": 2
         },
@@ -408,14 +408,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 148
-    },
-    {
-      "name": "app-shell-angular-demo",
-      "path": "src/ui/examples/app-shell/angular",
-      "elementsVersion": "0.10.0",
-      "elements": [],
-      "instanceTotal": 0
+      "instanceTotal": 156
     },
     {
       "path": "src/ui/examples/applications/angular",
@@ -458,78 +451,106 @@
       "instanceTotal": 5
     },
     {
-      "name": "@elements/asset-browser-views",
-      "path": "src/ui/flywheel/apps/asset-browser",
-      "elementsVersion": "0.19.0",
+      "path": "src/ui/halo/apps/pacsim-test-creator",
+      "elementsVersion": "0.37.6",
       "elements": [
         {
-          "name": "nve-icon-button",
-          "instanceTotal": 9
-        },
-        {
-          "name": "nve-icon",
-          "instanceTotal": 10
-        },
-        {
-          "name": "nve-grid-cell",
+          "name": "nve-alert-group",
           "instanceTotal": 1
         },
         {
-          "name": "nve-grid-column",
+          "name": "nve-alert",
           "instanceTotal": 1
         },
         {
-          "name": "nve-grid-footer",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-grid",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-grid-header",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-grid-row",
+          "name": "nve-app-header",
           "instanceTotal": 1
         },
         {
           "name": "nve-button",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-breadcrumb",
           "instanceTotal": 1
         },
         {
-          "name": "nve-checkbox",
+          "name": "nve-card",
           "instanceTotal": 1
         },
         {
-          "name": "nve-dropdown",
+          "name": "nve-card-header",
           "instanceTotal": 1
         },
         {
-          "name": "nve-search",
+          "name": "nve-card-content",
           "instanceTotal": 1
         },
         {
-          "name": "nve-notification-group",
+          "name": "nve-card-footer",
           "instanceTotal": 1
         },
         {
-          "name": "nve-notification",
+          "name": "nve-combobox",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-divider",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-control-message",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-input",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-progress-ring",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-select",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-steps-item",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-steps",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-textarea",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 33
+      "instanceTotal": 21
     },
     {
       "path": "src/ui/halo/apps/teststudio",
       "elementsVersion": "0.31.1",
-      "elements": [],
-      "instanceTotal": 0
+      "elements": [
+        {
+          "name": "nve-app-header",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 1
     },
     {
       "name": "clip-labeler",
@@ -542,10 +563,6 @@
         },
         {
           "name": "nve-alert",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-checkbox",
           "instanceTotal": 1
         },
         {
@@ -569,7 +586,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 8
+      "instanceTotal": 7
     },
     {
       "name": "@elements/gt-asset-browser",
@@ -607,14 +624,10 @@
       "instanceTotal": 0
     },
     {
-      "name": "static-4dgt-labeler",
-      "path": "src/ui/labeling/apps/static-4dgt-labeler",
+      "name": "minimap-labeler",
+      "path": "src/ui/labeling/apps/minimap-labeler",
       "elementsVersion": "^0.20.0",
       "elements": [
-        {
-          "name": "nve-checkbox",
-          "instanceTotal": 1
-        },
         {
           "name": "nve-dialog-header",
           "instanceTotal": 1
@@ -636,7 +649,79 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 6
+      "instanceTotal": 5
+    },
+    {
+      "name": "occupancy-labeler",
+      "path": "src/ui/labeling/apps/occupancy-labeler",
+      "elementsVersion": "^0.37.7",
+      "elements": [
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-progress-ring",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-accordion",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-panel-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-panel",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tabs-item",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tabs",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 11
+    },
+    {
+      "name": "static-4dgt-labeler",
+      "path": "src/ui/labeling/apps/static-4dgt-labeler",
+      "elementsVersion": "^0.20.0",
+      "elements": [
+        {
+          "name": "nve-dialog-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dialog",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dot",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 5
     },
     {
       "name": "@elements/gt-elements",
@@ -784,36 +869,56 @@
           "instanceTotal": 3
         },
         {
-          "name": "nve-checkbox",
-          "instanceTotal": 5
-        },
-        {
           "name": "nve-dialog-header",
-          "instanceTotal": 3
+          "instanceTotal": 4
         },
         {
           "name": "nve-dialog",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-dot",
-          "instanceTotal": 3
-        },
-        {
-          "name": "nve-icon-button",
           "instanceTotal": 4
         },
         {
+          "name": "nve-icon-button",
+          "instanceTotal": 6
+        },
+        {
           "name": "nve-icon",
-          "instanceTotal": 13
+          "instanceTotal": 15
         },
         {
           "name": "nve-button",
-          "instanceTotal": 17
+          "instanceTotal": 18
         },
         {
           "name": "nve-input",
           "instanceTotal": 3
+        },
+        {
+          "name": "nve-progress-ring",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-accordion",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-panel-content",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-panel",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-tabs-item",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-tabs",
+          "instanceTotal": 2
         },
         {
           "name": "nve-search",
@@ -830,6 +935,10 @@
         {
           "name": "nve-checkbox-group",
           "instanceTotal": 1
+        },
+        {
+          "name": "nve-checkbox",
+          "instanceTotal": 3
         },
         {
           "name": "nve-radio-group",
@@ -856,27 +965,7 @@
           "instanceTotal": 3
         },
         {
-          "name": "nve-accordion",
-          "instanceTotal": 2
-        },
-        {
           "name": "nve-accordion-group",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-panel-content",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-panel",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-tabs-item",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-tabs",
           "instanceTotal": 1
         },
         {
@@ -906,13 +995,9 @@
         {
           "name": "nve-switch",
           "instanceTotal": 1
-        },
-        {
-          "name": "nve-progress-ring",
-          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 94
+      "instanceTotal": 108
     },
     {
       "name": "@elements/job-validator",
@@ -941,7 +1026,7 @@
     {
       "name": "@elements/next-av",
       "path": "src/ui/next/av",
-      "elementsVersion": "0.23.1",
+      "elementsVersion": "0.37.7",
       "elements": [
         {
           "name": "nve-app-header",
@@ -958,14 +1043,6 @@
         {
           "name": "nve-card-content",
           "instanceTotal": 3
-        },
-        {
-          "name": "nve-icon-button",
-          "instanceTotal": 22
-        },
-        {
-          "name": "nve-icon",
-          "instanceTotal": 29
         },
         {
           "name": "nve-menu-item",
@@ -1000,8 +1077,20 @@
           "instanceTotal": 8
         },
         {
+          "name": "nve-icon",
+          "instanceTotal": 28
+        },
+        {
+          "name": "nve-progress-ring",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tag",
+          "instanceTotal": 8
+        },
+        {
           "name": "nve-checkbox",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-dialog-footer",
@@ -1016,12 +1105,16 @@
           "instanceTotal": 3
         },
         {
+          "name": "nve-icon-button",
+          "instanceTotal": 21
+        },
+        {
           "name": "nve-input",
           "instanceTotal": 6
         },
         {
           "name": "nve-select",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-switch",
@@ -1080,14 +1173,6 @@
           "instanceTotal": 1
         },
         {
-          "name": "nve-tag",
-          "instanceTotal": 7
-        },
-        {
-          "name": "nve-progress-ring",
-          "instanceTotal": 1
-        },
-        {
           "name": "nve-badge",
           "instanceTotal": 2
         },
@@ -1128,6 +1213,10 @@
           "instanceTotal": 1
         },
         {
+          "name": "nve-checkbox-group",
+          "instanceTotal": 1
+        },
+        {
           "name": "nve-dot",
           "instanceTotal": 2
         },
@@ -1160,7 +1249,7 @@
           "instanceTotal": 2
         }
       ],
-      "instanceTotal": 226
+      "instanceTotal": 228
     },
     {
       "name": "ide",
@@ -1169,14 +1258,54 @@
       "elements": [
         {
           "name": "nve-icon",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-button",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-alert",
           "instanceTotal": 2
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-control-message",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-input",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-notification",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-textarea",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tooltip",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-alert-banner",
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 3
+      "instanceTotal": 16
     },
     {
       "name": "@elements/vehicle-management",
@@ -1292,8 +1421,12 @@
     {
       "name": "@elements/feedback-elements",
       "path": "src/ui/platform/libs/feedback-elements",
-      "elementsVersion": "0.20.0",
+      "elementsVersion": "0.37.7",
       "elements": [
+        {
+          "name": "nve-alert",
+          "instanceTotal": 1
+        },
         {
           "name": "nve-button",
           "instanceTotal": 1
@@ -1339,7 +1472,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 11
+      "instanceTotal": 12
     },
     {
       "name": "@elements/ide",
@@ -1513,25 +1646,116 @@
       "instanceTotal": 0
     },
     {
-      "name": "@elements/platform-elements",
-      "path": "src/ui/platform/shared/elements",
-      "elementsVersion": "0.21.0",
+      "path": "src/ui/platform/test-automation/dashboards",
+      "elementsVersion": "0.37.7",
       "elements": [
         {
-          "name": "nve-alert-banner",
+          "name": "nve-app-header",
           "instanceTotal": 1
         },
         {
-          "name": "nve-alert",
+          "name": "nve-badge",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-card",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-card-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dialog-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dialog",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dot",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-control-message",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-footer",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-placeholder",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-row",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-notification",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-range",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-select",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tag",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tooltip",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 2
+      "instanceTotal": 25
     },
     {
       "name": "@elements/xp-app-shell",
       "path": "src/ui/platform/xp/app-shell",
-      "elementsVersion": "0.21.0",
+      "elementsVersion": "0.37.7",
       "elements": [
         {
           "name": "nve-dropdown",
@@ -1576,9 +1800,17 @@
         {
           "name": "nve-app-header",
           "instanceTotal": 1
+        },
+        {
+          "name": "nve-alert-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-alert",
+          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 38
+      "instanceTotal": 40
     },
     {
       "name": "@elements/xp-dashboard",

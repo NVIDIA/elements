@@ -1,5 +1,6 @@
-export { libraryBuildConfig } from './build.js';
-export { libraryTestConfig } from './test.js';
-export { libraryAxeTestConfig } from './axe.js';
+export { libraryBuildConfig } from './configs/build.js';
+export { libraryBundleConfig } from './configs/bundle.js';
+export { libraryTestConfig } from './configs/test.js';
+export { libraryAxeTestConfig } from './configs/axe.js';
 
 export const VERSION = '0.0.0';

@@ -20,5 +20,6 @@ packages:
   - 'projects/storybook'
   - 'projects/testing'
   - 'projects/themes'
-  - 'projects/internals/vite'
+  - 'projects/internals/eslint'
   - 'projects/internals/metadata'
+  - 'projects/internals/vite'

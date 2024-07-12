@@ -59,8 +59,9 @@
       "dependencies": [
         "./projects/elements:ci",
         "./projects/elements-react:ci",
-        "./projects/labs/code:ci",
         "./projects/labs/behaviors-alpine:ci",
+        "./projects/labs/code:ci",
+        "./projects/labs/snippets:ci",
         "./projects/labs/testing-lighthouse:ci",
         "./projects/pages:ci",
         "./projects/starters/angular:ci",

@@ -90,7 +90,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
   render() {
     return html`
       <div internal-host>
-        <pre class="hljs"><code class="${this.language ?? ''}"><slot @slotchange=${this.#updateCode} hidden></slot>${unsafeHTML(this.formattedCode)}</code></pre>
+        <pre class="hljs"><code class=${this.language ?? ''}><slot @slotchange=${this.#updateCode} hidden></slot>${unsafeHTML(this.formattedCode)}</code></pre>
         <slot name="actions"></slot>
       </div>
     `;

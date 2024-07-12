@@ -1,5 +1,4 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { customElement } from 'lit/decorators/custom-element.js';
 import typography from '@nvidia-elements/core/css/module.typography.css?inline';
 import layout from '@nvidia-elements/core/css/module.layout.css?inline';
 import { defineScopedElement } from '@nvidia-elements/core/scoped';
@@ -18,7 +17,6 @@ export default {
   title: 'Internal/Integration'
 };
 
-@customElement('my-element')
 class MyElementDemo extends LitElement {
   static styles = [unsafeCSS(`${typography}${layout}`)];
 
@@ -34,6 +32,8 @@ class MyElementDemo extends LitElement {
     `;
   }
 }
+
+customElements.get('my-element') || customElements.define('my-element', MyElementDemo);
 
 export const Lit = {
   render: () => html`<my-element></my-element>`

@@ -37,7 +37,7 @@
         "elements.mjs"
       ],
       "dependencies": [
-        "../../elements:build:manifest"
+        "../../elements:build"
       ]
     }
   },
