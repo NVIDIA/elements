@@ -1,3 +1,10 @@
+## [@elements/elements-v0.38.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.11...@elements/elements-v0.38.0) (2024-07-12)
+
+
+### Features
+
+* **elements:** toggletip ([29ee3d5](https://github.com/NVIDIA/elements/commit/29ee3d5ac08ee22963416c477199e662d6d961e5))
+
 ## [@elements/elements-v0.37.11](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.10...@elements/elements-v0.37.11) (2024-07-08)
 
 
