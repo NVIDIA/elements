@@ -159,9 +159,4 @@ if (!fs.existsSync(`${buildPath}`)) {
   fs.mkdirSync(`${buildPath}`);
 }
 
-if (!fs.existsSync('../elements/dist')) {
-  fs.mkdirSync('../elements/dist');
-}
-
-writeJSONFile(`${buildPath}/css-vars.json`, cssVarCompletions);
-writeJSONFile('../elements/dist/elements.css-vars.json', cssVarCompletions);
+writeJSONFile('./dist/data.css-vars.json', cssVarCompletions);

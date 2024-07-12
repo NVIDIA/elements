@@ -1,123 +1,31 @@
 {
   "name": "pages",
   "private": true,
+  "type": "module",
   "scripts": {
     "ci": "wireit",
     "preview": "wireit"
   },
   "wireit": {
     "ci": {
-      "command": "echo 'building pages...'",
-      "dependencies": [
-        "pages:starters:angular",
-        "pages:starters:buildless",
-        "pages:starters:mpa",
-        "pages:starters:react",
-        "pages:starters:solidjs",
-        "pages:starters:typescript",
-        "pages:starters:vue",
-        "pages:storybook"
-      ],
-      "files": [],
-      "output": []
-    },
-    "pages:starters:angular": {
-      "command": "cp -a ../starters/angular/dist/angular-app/browser/. ./dist/starters/angular",
-      "dependencies": [
-        "../starters/angular:ci",
-        "build"
-      ],
-      "files": [],
-      "output": [
-        "dist/starters/angular/**"
-      ]
-    },
-    "pages:starters:buildless": {
-      "command": "cp -a ../starters/buildless/dist/. ./dist/starters/buildless/",
-      "dependencies": [
-        "../starters/buildless:ci",
-        "build"
-      ],
-      "files": [],
-      "output": [
-        "dist/starters/buildless/**"
-      ]
-    },
-    "pages:starters:mpa": {
-      "command": "cp -a ../starters/mpa/dist/. ./dist/starters/mpa",
-      "dependencies": [
-        "../starters/mpa:ci",
-        "build"
-      ],
-      "files": [],
-      "output": [
-        "dist/starters/mpa/**"
-      ]
-    },
-    "pages:starters:react": {
-      "command": "cp -a ../starters/react/dist/. ./dist/starters/react",
-      "dependencies": [
-        "../starters/react:ci",
-        "build"
-      ],
-      "files": [],
-      "output": [
-        "dist/starters/react/**"
-      ]
-    },
-    "pages:starters:solidjs": {
-      "command": "cp -a ../starters/solidjs/dist/. ./dist/starters/solidjs",
-      "dependencies": [
-        "../starters/solidjs:ci",
-        "build"
-      ],
-      "files": [],
-      "output": [
-        "dist/starters/solidjs/**"
-      ]
-    },
-    "pages:starters:typescript": {
-      "command": "cp -a ../starters/typescript/dist/. ./dist/starters/typescript",
-      "dependencies": [
-        "../starters/typescript:ci",
-        "build"
-      ],
-      "files": [],
-      "output": [
-        "dist/starters/typescript/**"
-      ]
-    },
-    "pages:starters:vue": {
-      "command": "cp -a ../starters/vue/dist/. ./dist/starters/vue",
-      "dependencies": [
-        "../starters/vue:ci",
-        "build"
-      ],
-      "files": [],
-      "output": [
-        "dist/starters/vue/**"
-      ]
-    },
-    "pages:storybook": {
-      "command": "cp -a ../storybook/dist/. ./dist/api",
-      "dependencies": [
-        "../storybook:build",
-        "build"
-      ],
-      "files": [],
-      "output": [
-        "dist/api/**"
-      ]
-    },
-    "build": {
-      "command": "mkdir -p dist/starters && mkdir -p dist/api && cp -a ./_redirects dist/ && cp -a ./robots.txt dist/",
+      "command": "node ./index.js",
       "files": [
+        "index.js",
         "_redirects",
         "robots.txt"
       ],
       "output": [
-        "dist/_redirects",
-        "dist/robots.txt"
+        "dist"
+      ],
+      "dependencies": [
+        "../storybook:build",
+        "../starters/angular:ci",
+        "../starters/buildless:ci",
+        "../starters/mpa:ci",
+        "../starters/react:ci",
+        "../starters/solidjs:ci",
+        "../starters/typescript:ci",
+        "../starters/vue:ci"
       ]
     },
     "preview": {
@@ -129,6 +37,6 @@
     }
   },
   "dependencies": {
-    "vite": "5.2.11"
+    "vite": "5.3.3"
   }
 }

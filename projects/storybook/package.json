@@ -6,7 +6,8 @@
   "scripts": {
     "ci": "wireit",
     "dev": "wireit",
-    "build": "wireit"
+    "build": "wireit",
+    "lint": "wireit"
   },
   "dependencies": {
     "@nvidia-elements/core": "workspace:@elements/elements@*",
@@ -21,6 +22,7 @@
     "showdown": "2.1.0"
   },
   "devDependencies": {
+    "@internals/eslint": "workspace:*",
     "@storybook/core-events": "8.0.0",
     "@storybook/addon-docs": "8.0.0",
     "@storybook/addon-essentials": "8.0.0",
@@ -30,10 +32,10 @@
     "@storybook/theming": "8.0.0",
     "@storybook/web-components": "8.0.0",
     "@storybook/web-components-vite": "8.0.0",
+    "eslint": "9.6.0",
     "storybook": "8.0.0",
     "typescript": "5.3.3",
-    "vite": "5.2.11",
-    "vite-plugin-dts": "3.7.2"
+    "vite": "5.3.3"
   },
   "wireit": {
     "dev": {
@@ -43,7 +45,8 @@
     },
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "lint"
       ]
     },
     "build": {
@@ -73,6 +76,18 @@
         "../elements:build",
         "../labs/code:build",
         "../starters/lit-library:ci"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
+      "files": [
+        "src/**/*.ts",
+        "src/**/*.js",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/eslint:ci"
       ]
     }
   }

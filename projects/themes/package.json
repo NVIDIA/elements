@@ -23,6 +23,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./CHANGELOG.md": "./CHANGELOG.md",
+    "./data.css-vars.json": "./dist/data.css-vars.json",
     "./fonts/*": "./dist/fonts/*",
     "./*": "./dist/*"
   },
@@ -35,10 +36,10 @@
     "build": {
       "dependencies": [
         "build:css-var-completions",
-        "build:style-dictionary"
+        "build:styledictionary"
       ]
     },
-    "build:style-dictionary": {
+    "build:styledictionary": {
       "command": "node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js && node ./build/version.js",
       "files": [
         "src/**",
@@ -48,7 +49,7 @@
       ],
       "output": [
         "dist/",
-        "!dist/css-vars.json"
+        "!dist/data.css-vars.json"
       ]
     },
     "build:css-var-completions": {
@@ -58,10 +59,10 @@
         "src/**"
       ],
       "output": [
-        "dist/css-vars.json"
+        "dist/data.css-vars.json"
       ],
       "dependencies": [
-        "build:style-dictionary"
+        "build:styledictionary"
       ]
     }
   }

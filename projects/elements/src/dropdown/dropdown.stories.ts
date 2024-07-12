@@ -115,7 +115,7 @@ const options = [
 ];
 
 @customElement('radio-group-interactive-demo')
-class RadioGroupInteractiveDemo extends LitElement { /* eslint no-unused-vars: 0 */
+class RadioGroupInteractiveDemo extends LitElement {
   @state() private show = false;
   @state() private selected = options[0];
 
