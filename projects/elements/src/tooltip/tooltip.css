@@ -2,6 +2,7 @@
   --nve-sys-layer-popover-arrow-padding: 6px;
   --nve-sys-layer-popover-arrow-offset: 2px;
   --nve-sys-layer-popover-offset: 2px;
+  --nve-sys-interaction-color: var(--color);
   --border-radius: var(--nve-ref-border-radius-sm);
   --background: var(--nve-sys-layer-popover-background);
   --color: var(--nve-sys-layer-popover-color);
