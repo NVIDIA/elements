@@ -1,3 +1,10 @@
+## [@elements/elements-v0.38.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.38.0...@elements/elements-v0.38.1) (2024-07-15)
+
+
+### Bug Fixes
+
+* **elements:** popover interaction color fallback ([39df66b](https://github.com/NVIDIA/elements/commit/39df66b9d1d2a11f0095a528e5f913ca82f0cb54))
+
 ## [@elements/elements-v0.38.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.37.11...@elements/elements-v0.38.0) (2024-07-12)
 
 
