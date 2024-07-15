@@ -1,5 +1,6 @@
 :host {
   --nve-sys-layer-popover-offset: var(--nve-ref-space-xl);
+  --nve-sys-interaction-color: var(--color);
   --border-radius: var(--nve-ref-border-radius-md);
   --status-color: var(--nve-sys-support-color);
   --background: var(--nve-sys-layer-popover-background);
@@ -53,6 +54,7 @@ nve-icon-button {
   --color: var(--status-color);
 }
 
+::slotted([nve-text]),
 ::slotted([nve-text]) {
   color: inherit !important;
 }
