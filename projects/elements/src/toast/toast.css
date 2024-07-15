@@ -1,5 +1,6 @@
 :host {
   --nve-sys-layer-popover-arrow-offset: var(--nve-ref-size-100);
+  --nve-sys-interaction-color: var(--color);
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-400);
   --nve-sys-layer-popover-offset: var(--nve-ref-space-md);
   --background: var(--nve-sys-layer-popover-background);
