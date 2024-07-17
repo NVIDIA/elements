@@ -1,6 +1,6 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import '@nvidia-elements/core/button/define.js';
-import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, Headings, Size, LeadingTrim } from './typography.stories';
+import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, Headings, Size, LeadingTrim, LineHeightFixed, LineHeightRelative } from './typography.stories';
 import { Text } from '../../../../themes/docs/tokens.stories';
 
 <Meta title="Foundations/Typography/Documentation" />
@@ -74,6 +74,16 @@ By default all `mlv-text` attributes use [leading-trim](https://medium.com/micro
 Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavior it may be necessary to disable this behavior. This can be done by applying `mlv-text="trim:none"`.
 
 <Canvas of={LeadingTrim} />
+
+## Line height
+
+Use different attributes with `mlv-text` like `loose`, `relaxed`, `moderate`, `snug`, and `tight` to give an element a relative line-height based on its current font-size.
+
+<Canvas of={LineHeightRelative} />
+
+Use different attributes with `mlv-text` like `line-height-3` and `line-height-4` to give an element a fixed line-height, irrespective of the current font-size. These are useful when you need very precise control over an element’s final size.
+
+<Canvas of={LineHeightFixed} />
 
 ## Tokens
 

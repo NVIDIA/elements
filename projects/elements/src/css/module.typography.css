@@ -156,6 +156,59 @@
   font-weight: var(--nve-ref-font-weight-light) !important;
 }
 
+/* line-heights */
+[mlv-text~='tight'] {
+  line-height: var(--nve-ref-font-line-height-tight) !important;
+}
+
+[mlv-text~='snug'] {
+  line-height: var(--nve-ref-font-line-height-snug) !important;
+}
+
+[mlv-text~='moderate'] {
+  line-height: var(--nve-ref-font-line-height-moderate) !important;
+}
+
+[mlv-text~='relaxed'] {
+  line-height: var(--nve-ref-font-line-height-relaxed) !important;
+}
+
+[mlv-text~='loose'] {
+  line-height: var(--nve-ref-font-line-height-loose) !important;
+}
+
+[mlv-text~='line-height-3'] {
+  line-height: var(--nve-ref-font-line-height-300) !important;
+}
+
+[mlv-text~='line-height-4'] {
+  line-height: var(--nve-ref-font-line-height-400) !important;
+}
+
+[mlv-text~='line-height-5'] {
+  line-height: var(--nve-ref-font-line-height-500) !important;
+}
+
+[mlv-text~='line-height-6'] {
+  line-height: var(--nve-ref-font-line-height-600) !important;
+}
+
+[mlv-text~='line-height-7'] {
+  line-height: var(--nve-ref-font-line-height-700) !important;
+}
+
+[mlv-text~='line-height-8'] {
+  line-height: var(--nve-ref-font-line-height-800) !important;
+}
+
+[mlv-text~='line-height-9'] {
+  line-height: var(--nve-ref-font-line-height-900) !important;
+}
+
+[mlv-text~='line-height-10'] {
+  line-height: var(--nve-ref-font-line-height-1000) !important;
+}
+
 [mlv-text~='list'] {
   margin: 0;
   padding: 0;

@@ -16,7 +16,7 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(16.2); // total
+    expect(report.payload.css.kb).toBeLessThan(16.5); // total
     expect(report.payload.css.requests['index.css'].kb).toBeLessThan(5.9); // @nvidia-elements/themes/index.css
     expect(report.payload.css.requests['compact.css'].kb).toBeLessThan(0.4); // @nvidia-elements/themes/compact.css
     expect(report.payload.css.requests['dark.css'].kb).toBeLessThan(5); // @nvidia-elements/themes/dark.css
@@ -24,7 +24,7 @@ describe('lighthouse report', () => {
     expect(report.payload.css.requests['reduced.css'].kb).toBeLessThan(0.6); // @nvidia-elements/themes/reduced-motion.css
     expect(report.payload.css.requests['ddb.css'].kb).toBeLessThan(0.8); // @nvidia-elements/themes/ddb-dark.css
     expect(report.payload.css.requests['module.css'].kb).toBeLessThan(1.6); // @nvidia-elements/core/css/module.layout.css
-    expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.3); // @nvidia-elements/core/css/module.typography.css
+    expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.4); // @nvidia-elements/core/css/module.typography.css
   });
 
   test('JS Bundles should remain within compressed bundle limits', async () => {

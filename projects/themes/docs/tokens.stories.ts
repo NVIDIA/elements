@@ -273,6 +273,7 @@ function renderTokenTable(tokens) {
           ${name.includes('ref-color') || name.includes('sys-visualization') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
           ${name.includes('ref-font-family') ? html`<div style="${styleMap({ 'font-family': `var(${name})`, background: 'transparent' })}">font</div>` : ''}
           ${name.includes('ref-font-weight') ? html`<div style="${styleMap({ 'font-weight': `var(${name})`, background: 'transparent' })}">weight</div>` : ''}
+          ${name.includes('ref-font-line-height') ? html`<div style="${styleMap({ 'font-line-height': `var(${name})`, background: 'transparent' })}">line-height</div>` : ''}
           ${name.includes('ref-font-size') ? html`<div style="${styleMap({ 'font-size': `var(${name})`, background: 'transparent' })}">size</div>` : ''}
           ${name.includes('ref-border-radius') ? html`<div style="${styleMap({ 'border-radius': `var(${name})`, width: '100px', height: '100px' })}"></div>` : ''}
           ${name.includes('ref-border-color') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
