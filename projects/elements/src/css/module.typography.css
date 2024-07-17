@@ -156,6 +156,59 @@
   font-weight: var(--nve-ref-font-weight-light) !important;
 }
 
+/* line-heights */
+[nve-text~='tight'] {
+  line-height: var(--nve-ref-font-line-height-tight) !important;
+}
+
+[nve-text~='snug'] {
+  line-height: var(--nve-ref-font-line-height-snug) !important;
+}
+
+[nve-text~='moderate'] {
+  line-height: var(--nve-ref-font-line-height-moderate) !important;
+}
+
+[nve-text~='relaxed'] {
+  line-height: var(--nve-ref-font-line-height-relaxed) !important;
+}
+
+[nve-text~='loose'] {
+  line-height: var(--nve-ref-font-line-height-loose) !important;
+}
+
+[nve-text~='line-height-3'] {
+  line-height: var(--nve-ref-font-line-height-300) !important;
+}
+
+[nve-text~='line-height-4'] {
+  line-height: var(--nve-ref-font-line-height-400) !important;
+}
+
+[nve-text~='line-height-5'] {
+  line-height: var(--nve-ref-font-line-height-500) !important;
+}
+
+[nve-text~='line-height-6'] {
+  line-height: var(--nve-ref-font-line-height-600) !important;
+}
+
+[nve-text~='line-height-7'] {
+  line-height: var(--nve-ref-font-line-height-700) !important;
+}
+
+[nve-text~='line-height-8'] {
+  line-height: var(--nve-ref-font-line-height-800) !important;
+}
+
+[nve-text~='line-height-9'] {
+  line-height: var(--nve-ref-font-line-height-900) !important;
+}
+
+[nve-text~='line-height-10'] {
+  line-height: var(--nve-ref-font-line-height-1000) !important;
+}
+
 [nve-text~='list'] {
   margin: 0;
   padding: 0;
