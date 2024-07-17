@@ -1,5 +1,6 @@
 {
   "name": "@nve-internals/eslint",
+  "version": "0.0.0",
   "type": "module",
   "exports": {
     ".": "./src/index.js"
