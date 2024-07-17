@@ -215,6 +215,9 @@ importers:
         specifier: workspace:^
         version: link:../elements
     devDependencies:
+      '@nve-internals/eslint':
+        specifier: workspace:*
+        version: link:../internals/eslint
       '@nve-internals/vite':
         specifier: workspace:*
         version: link:../internals/vite
