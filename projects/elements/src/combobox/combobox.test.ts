@@ -45,6 +45,10 @@ describe(Combobox.metadata.tag, () => {
 
   it('should remove native data list association', async () => {
     expect(input.getAttribute('list')).toBe('');
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(input.getAttribute('list')).toBe('');
   });
 
   it('should render a menu item for each provided option', async () => {
