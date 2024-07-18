@@ -1,3 +1,10 @@
+## [@elements/elements-v0.39.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.39.0...@elements/elements-v0.39.1) (2024-07-18)
+
+
+### Bug Fixes
+
+* **elements:** combobox datalist association ([3bc03d5](https://github.com/NVIDIA/elements/commit/3bc03d5b6e4a6a4eebc026eb64aa26b5ae424aef))
+
 ## [@elements/elements-v0.39.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.38.1...@elements/elements-v0.39.0) (2024-07-18)
 
 
