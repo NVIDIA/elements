@@ -120,6 +120,8 @@ export class Control extends LitElement {
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
+  protected _associateDatalist = true;
+
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -239,7 +241,10 @@ export class Control extends LitElement {
     this.#assignLabel();
     associateLabel(this.#label, this.input);
     assoicateAriaDescribedBy(Array.from(this.#messages), this.input);
-    associateDataList(this.querySelector<HTMLDataListElement>('datalist'), this.input);
+
+    if (this._associateDatalist) {
+      associateDataList(this.querySelector<HTMLDataListElement>('datalist'), this.input);
+    }
   }
 
   #assignLabel() {
