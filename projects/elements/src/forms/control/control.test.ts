@@ -63,6 +63,15 @@ describe(Control.metadata.tag, () => {
     expect(input.getAttribute('list')).toBe(datalist.id);
   });
 
+  it('should NOT associate datalist to input if child class disables _associateDatalist', async () => {
+    (element as any)._associateDatalist = false;
+    input.setAttribute('list', '');
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(input.getAttribute('list')).toBe('');
+  });
+
   it('should assign no-label style hook if no label element was provided', async () => {
     label.remove();
     element.shadowRoot.dispatchEvent(new Event('slotchange'));
