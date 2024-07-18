@@ -1,3 +1,10 @@
+## [@elements/elements-v0.39.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.38.1...@elements/elements-v0.39.0) (2024-07-18)
+
+
+### Features
+
+* **labs-snippets:** add experiments with text-mate tab-stop syntax ([3901f5e](https://github.com/NVIDIA/elements/commit/3901f5ed402d08e00e058033dc88661166b650ba))
+
 ## [@elements/elements-v0.38.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.38.0...@elements/elements-v0.38.1) (2024-07-15)
 
 
