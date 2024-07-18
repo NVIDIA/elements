@@ -103,6 +103,8 @@ export class Combobox extends Control implements ContainerElement {
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
+  protected _associateDatalist = false;
+
   protected get prefixContent() {
     return this.#select?.multiple
       ? html`
