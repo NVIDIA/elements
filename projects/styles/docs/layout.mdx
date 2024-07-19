@@ -7,31 +7,26 @@ import { GapXxxs, GapXxs, GapXs, GapSm, GapMd, GapLg, GapXl, GapXxl, GapXxxl, Pa
 # Layout System
 
 Grid, horizontal and vertical based layouts can be achieved with _little to no CSS_ using the `nve-layout` attribute.
-
-Set `nve-layout="row"` `nve-layout="column"` or `nve-layout="grid"` on a container element and add additional alignment values.
-
-- `nve-layout="row ..."`
-- `nve-layout="column ..."`
-- `nve-layout="grid ..."`
-
-- `align:left`
-- `align:right`
-- `align:top`
-- `align:bottom ...`
-
-Combine `nve-layout` attribute values to create your desired layout. For example:
+Layouts support `column`, `row` and `grid` based layouts as well as `align` and `gap` adjustments.
 
 ```html
-<section nve-layout="row align:vertical-center align:right">
+<div nve-layout="row gap:sm">
+  <nve-button></nve-button>
+  <nve-button></nve-button>
+  <nve-button></nve-button>
+</div>
 ```
 
-## Framework Integrations
+## Installation
 
-Some frameworks and libraries may require additional configuration to use the `nve-layout` attribute. See the links below for specific integration patterns for the following frameworks:
+```shell
+npm install @nvidia-elements/styles @nvidia-elements/themes
+```
 
-<nve-button>
-  <a href="?path=/docs/integrations-lit--docs#css-utilities"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit Integration</a>
-</nve-button>
+```css
+/* import the global CSS into your project (import may vary based on build tools) */
+@import '@nvidia-elements/styles/dist/layout.css';
+```
 
 ## Layout Gap Spacing
 
