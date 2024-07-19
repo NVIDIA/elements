@@ -33,6 +33,7 @@
   line-height: 0;
 }
 
+::slotted([nve-text]),
 ::slotted([nve-text]) {
   color: inherit !important;
 }

@@ -71,6 +71,7 @@ nve-icon-button {
   margin-inline-start: calc(var(--_gap) * 2);
 }
 
+::slotted([nve-text]),
 ::slotted([nve-text]) {
   color: inherit !important;
 }
