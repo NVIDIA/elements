@@ -4,6 +4,14 @@ import { addons } from '@storybook/preview-api';
 import { updateScope } from './utils.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/code/codeblock/define.js';
+import('@nvidia-elements/code/codeblock/languages/css.js');
+import('@nvidia-elements/code/codeblock/languages/html.js');
+import('@nvidia-elements/code/codeblock/languages/javascript.js');
+import('@nvidia-elements/code/codeblock/languages/json.js');
+import('@nvidia-elements/code/codeblock/languages/markdown.js');
+import('@nvidia-elements/code/codeblock/languages/typescript.js');
+import('@nvidia-elements/code/codeblock/languages/xml.js');
 
 export const H1 = ({ children }) => (
   <Unstyled>
@@ -34,6 +42,18 @@ export const H3 = (args) => {
       <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
       {args.children}
     </h3>
+  </Unstyled>
+  )
+}
+
+export const H4 = (args) => {
+  const id = new URLSearchParams(window.location.search).get('id');
+  return (
+  <Unstyled>
+    <h4 id={args.id} nve-text="heading md"  nve-layout="pad-top:lg" className="dynamic-anchor">
+      <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
+      {args.children}
+    </h4>
   </Unstyled>
   )
 }
@@ -72,7 +92,10 @@ export const PRE = (args) => {
       sourceType: globals?.sourceType ?? ''
     });
 
-    return (<Source dark code={code} language={args.children.props.className.replace('language-', '')} />)
+    // return (<Source dark code={code} language={args.children.props.className.replace('language-', '')} />)
+    return <Unstyled>
+      <nve-codeblock style={{'--padding': 'var(--nve-ref-space-lg)', 'fontSize': '14px'}} code={code} language={args.children.props.className.replace('language-', '').replace('bash', 'markdown').replace('shell', 'markdown')}></nve-codeblock>
+    </Unstyled>
   } else {
     return (args.children)
   }
