@@ -74,6 +74,7 @@
         "./projects/starters/solidjs:ci",
         "./projects/starters/typescript:ci",
         "./projects/storybook:ci",
+        "./projects/styles:ci",
         "./projects/testing:ci",
         "./projects/themes:ci",
         "lighthouse"
@@ -82,24 +83,33 @@
     "lighthouse": {
       "command": "pnpm run -r test:lighthouse --workspace-concurrency=1",
       "files": [
-        "projects/elments/src/**/*.test.lighthouse.ts",
-        "projects/elments/vitest.lighthouse.html",
-        "projects/elments/vitest.lighthouse.ts",
-        "projects/elments/vitest.lighthouse.build.ts",
+        "projects/elements/src/index.test.lighthouse.ts",
+        "projects/elements/src/**/*.test.lighthouse.ts",
+        "projects/elements/vitest.lighthouse.html",
+        "projects/elements/vitest.lighthouse.ts",
+        "projects/elements/vitest.lighthouse.build.ts",
+        "projects/labs/code/src/index.test.lighthouse.ts",
         "projects/labs/code/src/**/*.test.lighthouse.ts",
         "projects/labs/code/vitest.lighthouse.html",
         "projects/labs/code/vitest.lighthouse.ts",
-        "projects/labs/code/vitest.lighthouse.build.ts"
+        "projects/labs/code/vitest.lighthouse.build.ts",
+        "projects/styles/vitest.lighthouse.html",
+        "projects/styles/vitest.lighthouse.ts",
+        "projects/styles/vitest.lighthouse.build.ts",
+        "projects/themes/vitest.lighthouse.ts",
+        "projects/themes/vitest.lighthouse.build.ts"
       ],
       "output": [
         "projects/elements/.lighthouse",
         "projects/elements/coverage/lighthouse/**",
         "projects/labs/code/.lighthouse",
-        "projects/labs/code/coverage/lighthouse/**"
+        "projects/labs/code/coverage/lighthouse/**",
+        "projects/styles/.lighthouse",
+        "projects/styles/coverage/lighthouse/**",
+        "projects/themes/.lighthouse",
+        "projects/themes/coverage/lighthouse/**"
       ],
       "dependencies": [
-        "./projects/elements:build",
-        "./projects/labs/code:build",
         "./projects/labs/testing-lighthouse:build"
       ],
       "env": {
@@ -117,7 +127,8 @@
         "release:elements",
         "release:elements-react",
         "release:labs-behaviors-alpine",
-        "release:labs-code"
+        "release:labs-code",
+        "release:styles"
       ]
     },
     "release:themes": {
@@ -148,6 +159,12 @@
       "command": "cd projects/labs/code && pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
+      ]
+    },
+    "release:styles": {
+      "command": "cd projects/styles && pnpm exec semantic-release",
+      "dependencies": [
+        "release:themes"
       ]
     },
     "format": {
