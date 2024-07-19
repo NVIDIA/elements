@@ -8,7 +8,7 @@ import { Lit } from './integration.stories';
 
 # Lit Integration
 
-To use Elements in Lit follow the [instalation getting started](?path=/docs/about-getting-started--docs) steps. Once complete
+To use Elements in Lit follow the [instalation installation](?path=/docs/about-installation--docs) steps. Once complete
 elements can be imported and used within Lit components.
 
 ```javascript
@@ -42,13 +42,15 @@ are available in your elements Shadow DOM.
 ```typescript
 import { html, unsafeCSS, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
-import typography from '@nvidia-elements/core/css/module.typography.css';
-import layout from '@nvidia-elements/core/css/module.layout.css';
+
+// https://github.com/tc39/proposal-import-attributes
+import typography from '@nvidia-elements/styles/dist/typography.css' with { type: 'css' };
+import layout from '@nvidia-elements/styles/dist/layout.css' with { type: 'css' };
 
 @customElement('my-element')
 class MyElement extends LitElement {
 
-  static styles = [unsafeCSS(`${typography}${layout}`)];
+  static styles = [typography, layout];
 
   render() {
     return html`

@@ -4,26 +4,45 @@ import { Meta } from '@storybook/addon-docs';
 
 # Installation
 
-## Artifactory
+## NPM/Artifactory
 
-Elements packages are published on Artifactory.
-
-- [Elements](https://registry.npmjs.org
-- [Elements React](https://registry.npmjs.org
-- [Themes](https://registry.npmjs.org
-- [Testing](https://registry.npmjs.org
-
-To setup the artifactory add the following references to the `.npmrc` file in your repository.
+Add the following references to the `.npmrc` file in the root of your project where your `package.json` is located.
 
 ```bash
-@elements:registry=https://registry.npmjs.org
-@nve:registry=https://registry.npmjs.org
+registry=https://registry.npmjs.org
 ```
 
-## Maglev
-
-If you are in the Maglev Monorepo the following configuration should already be set in the `.npmrc`.
+Login to [Artifactory](https://registry.npmjs.org once logged in run the following:
 
 ```bash
-registry=https://artifactory.build.nvidia.com/artifactory/api/npm/elements-npm/
+npm login
+```
+
+Install base packages:
+
+```bash
+npm install @nvidia-elements/themes @nvidia-elements/styles @elements/elements --legacy-peer-deps
+```
+
+## Usage
+
+Elements is split into multiple small packages. This allows you to choose what
+tools are needed for your application and omit anything unessesary, improving
+overall application performance.
+
+```css
+/* import the global CSS into your project */
+@import '@elements/elements/dist/index.css';
+@import '@elements/elements/dist/inter.css';
+```
+
+```javascript
+// load via JavaScript imports to make available in HTML templates
+import '@elements/elements/button/define.js';
+import '@elements/elements/dot/define.js';
+...
+```
+
+```html
+<nve-button>hello there</nve-button>
 ```

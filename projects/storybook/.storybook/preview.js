@@ -1,26 +1,30 @@
 import '@nvidia-elements/core/polyfills';
 import { setCustomElementsManifest } from '@storybook/web-components';
+import format from 'html-format';
+
 import { themes } from '@storybook/theming';
 import styles from '@nvidia-elements/core/index.css?inline';
-// import theme from '@nvidia-elements/themes/index.css?inline'; // using backwards compatible theme above
-// import dark from '@nvidia-elements/themes/dark.css?inline'; // using backwards compatible theme above
+import theme from '@nvidia-elements/themes/index.css?inline';
+import dark from '@nvidia-elements/themes/dark.css?inline';
 import fontInter from '@nvidia-elements/themes/fonts/inter.css?inline';
 import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline';
 import ddb from '@nvidia-elements/themes/ddb-dark.css?inline';
 import brand from '@nvidia-elements/themes/brand.css?inline';
 import brandDark from '@nvidia-elements/themes/brand-dark.css?inline';
-import responsiveStyles from '@nvidia-elements/core/css/module.responsive.css?inline';
+import responsiveStyles from '@nvidia-elements/styles/responsive.css?inline';
+import layoutStyles from '@nvidia-elements/styles/layout.css?inline';
+import typographyStyles from '@nvidia-elements/styles/typography.css?inline';
+import '@nvidia-elements/core/button/define.js';
+
 import { playground } from './playground-url.js';
 import { updateScope } from './utils.js';
-import { H1, H2, H3, P, UL, OL, PRE } from './markdown.jsx';
-import '@nvidia-elements/core/button/define.js';
-import format from 'html-format';
+import { H1, H2, H3, H4, P, UL, OL, PRE } from './markdown.jsx';
 
 const customElements = await import('@nvidia-elements/core/custom-elements.json');
 
 import('../src/about/metrics.stories');
 
-setCustomElementsManifest(excludePrivateFields(customElements)); // excludePrivateFields
+setCustomElementsManifest(excludePrivateFields(customElements));
 
 export const parameters = {
   badges: ['stable'],
@@ -36,6 +40,7 @@ export const parameters = {
       h1: H1,
       h2: H2,
       h3: H3,
+      h4: H4,
       p: P,
       ul: UL,
       ol: OL,
@@ -82,22 +87,8 @@ export const parameters = {
           'Support',
           'Testing',
           'Accessibility',
-          'Extensions',
           'Contributions',
-          'Requests',
-          'Glossary',
-          'API Design',
-          [
-            'Getting Started',
-            'Properties & Attributes',
-            'Slots',
-            'Registration',
-            'Custom Events',
-            'Stateless',
-            'Composition',
-            'Styles',
-            'Packaging'
-          ]
+          'Requests'
         ],
         'Integrations',
         'Foundations',
@@ -243,8 +234,20 @@ export const parameters = {
         'Labs',
         [
           'About',
-          'Code',
           'Testing Lighthouse'
+        ],
+        'API Design',
+        [
+          'Getting Started',
+          'Properties & Attributes',
+          'Slots',
+          'Registration',
+          'Custom Events',
+          'Stateless',
+          'Composition',
+          'Styles',
+          'Packaging',
+          'Glossary'
         ],
         'Internal',
         'Deprecated'
@@ -353,11 +356,11 @@ export const globalTypes = {
 }
 
 const styleSheet = new CSSStyleSheet();
-styleSheet.replaceSync(styles + fontInter + fontNvidiaSans + brand + brandDark + ddb + responsiveStyles);
+styleSheet.replaceSync(styles + theme + dark + fontInter + fontNvidiaSans + brand + brandDark + ddb + layoutStyles + typographyStyles);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
 
 const parentStyle = document.createElement('style');
-parentStyle.innerText = styles + fontInter + fontNvidiaSans + brand + brandDark + ddb + responsiveStyles;
+parentStyle.innerText = styles + theme + dark + fontInter + fontNvidiaSans + brand + brandDark + ddb + responsiveStyles + layoutStyles + typographyStyles;
 window.parent.document.head.appendChild(parentStyle);
 
 export const decorators = [(story, { globals }) => {

@@ -55,8 +55,6 @@
     color: var(--nve-sys-interaction-color) !important;
     border-radius: var(--nve-ref-border-radius-xs) !important;
     font-size: var(--nve-ref-font-size-200) !important;
-    padding-block: 0 !important;
-    padding-inline: 28px 6px !important;
     align-items: center !important;
 
     &:hover {
@@ -85,10 +83,6 @@
     }
   }
 
-  .css-d3imve {
-    padding-inline: 8px !important;
-  }
-
   .css-92gwvb {
     background: none !important;
     color: var(--nve-sys-text-muted-color) !important;
@@ -96,28 +90,16 @@
     min-width: 97%;
   }
 
-  .css-p33hfx {
-    padding-left: 45px !important;
-  }
-
-  .css-1xavl7t {
-    padding-left: 36px !important;
-  }
-
   .css-1qs63ah {
     font-weight: 500;
     text-transform: capitalize;
     font-size: 14px !important;
-    padding: 8px 8px !important;
     margin-top: 2px !important;
+    padding-block: 8px !important;
   }
 
   [data-selected='true'] .css-1xavl7t a {
     font-weight: 600;
-  }
-
-  [data-item-id*='--docs'] a {
-    padding-left: 0;
   }
 
   [data-test-id='sb-preview-toolbar'] {
@@ -174,13 +156,13 @@
     color: var(--nve-sys-text-emphasis-color);
     font-family: var(--nve-ref-font-family-inter);
     font-weight: var(--nve-ref-font-weight-semibold);
-    font-size: var(--nve-ref-font-size-500);
+    font-size: var(--nve-ref-font-size-400);
     content: 'Elements';
     width: 175px !important;
   }
 
   a[title='Storybook'] {
-    display: block !important;
+    display: flex !important;
     align-items: center !important;
     padding: 9px 12px 12px 14px !important;
     margin: 0 !important;
@@ -196,9 +178,9 @@
   [title='Storybook']::before {
     content: '';
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTQ3IiBoZWlnaHQ9IjM3MCI+CiAgPHBhdGggaWQ9IkxheWVyIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMjU3LjIyIDY5LjcxdjI0Mi41NmgtNjguNDZWNjkuNzFoNjguNDZabS00ODQuMTgtLjQxYzU5LjYzIDAgMTIwLjY5IDEyLjk1IDEyMC42OSAxMDguNzR2MTM0LjAySDgyNi43VjIwMS4yN2MwLTMzLjkyLTQuMzEtNTIuNjMtMTUuMjEtNjQuMTQtOC40My05LjA0LTIwLjc3LTEzLjM2LTM4LjQ1LTEzLjM2bC01My44Ni0uMnYxODguNDlINjUwLjFWNjkuM2gxMjIuOTRabTYyMi4xNC40MWM1NC42OSAwIDkxLjI4IDYuNTggMTE2LjM3IDQwLjQ5IDE0LjE4IDE4LjkyIDIyLjIgNDkuMzQgMjIuMiA4My40NiAwIDM3LjIxLTkuNDYgNzEuMzMtMjQuMjYgODYuNzQtMjAuNzYgMjItNDAuMDkgMzEuODctOTkuMyAzMS44N2gtMTExLjAyVjY5LjcxaDk2LjAxWm0tMjguMTcgMTkwLjU1aDI5LjRjNDIuNzcgMCA3MC4zMi0xOS4zMiA3MC4zMi02OS4wNyAwLTQ5Ljc0LTI3LjU1LTY4Ljg2LTcwLjMyLTY4Ljg2aC0yOS40djEzNy45M1pNMTE1OS45OCA2OS43MWwtNzguOTUgMjQyLjU2aC05OC42OUw5MDQuMjEgNjkuNzFoNzQuMDJsNTQuNjkgMTkyLjE5IDU3LjE1LTE5Mi4xOWg2OS45MVptNDA1Ljg0IDBoNjguNDd2MjQyLjU2aC02OC40N1Y2OS43MVptMjgzLjUyIDAgOTYuNDMgMjQyLjE0aC03My40bC0xNC4zOS00Mi43NUgxNzQ0LjlsLTE1LjIyIDQyLjk2aC02Ny40M2w5NS42LTI0Mi4zNWg5MS40OVptLTg5Ljg0IDE1Ny42Nmg4NC4yOWwtNDEuNTMtMTEzLjQ3LTQyLjc2IDExMy40N1oiIHN0eWxlPSJmaWxsOiMwMDAiLz4KICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01NTguNjEtLjE4VjM2OS4ySDIwOC42OHYtNDMuMzdjNy40LjgyIDE0LjggMS4yNCAyMi42MiAxLjI0IDgxIDAgMjIzLjg5LTQxLjMyIDI4NS4xNi05Mi43MS05LjA1LTkuMDQtNTIuODQtMjkuODEtNjMuNTMtMzguNDQtNjQuNTYgNTUuNS0xMzEuMTcgMTAyLjU3LTIyMy4yOCAxMDIuNTctNi45OSAwLTE0LjE4LS42MS0yMS4xOC0xLjQ0di0zMC44M2M4LjQzIDEuNDQgMTYuODYgMi4yNiAyNS41IDIuMjYgOTguODkgMCAxOTMuODgtMTE1LjUyIDE5My44OC0xMTUuNTJTMzQ0Ljk5IDQ0LjYzIDIxOC4xNCA0OC45NWwtOS44Ny42MlYtLjE4aDM1MC4zNFpNMjE4LjE0IDc2LjI5YzkxLjI4LTIuODggMTUxLjExIDc4LjUyIDE1MS4xMSA3OC41MnMtNjQuNTYgODkuNjItMTMzLjg0IDg5LjYyYy05LjI1IDAtMTguMy0xLjQ0LTI2Ljk0LTQuMzFWMTM4Ljk4YzM1LjU3IDQuMzIgNDIuNzcgMTkuOTQgNjMuOTUgNTUuNWw0Ny40OS0zOS44OHMtMzQuNzUtNDUuNDItOTMuMTQtNDUuNDJjLTYuMTYtLjIxLTEyLjMzLjItMTguNS44MlY3Ni43MWMtMTAwLjgxIDcuOS0xNTEuMTEgODIuMjEtMTUxLjExIDgyLjIxUzk1LjYgMjgzLjA4IDIwOC4yNyAyOTcuMDV2MjguNzhDNTQuNjkgMzExLjQ0IDAgMTUzLjE3IDAgMTUzLjE3czk2LjYzLTk0LjU2IDIwOC40Ny0xMDMuNnYyNy4xMmMzLjIzLS4yMSA2LjQ1LS40IDkuNjctLjRabS05Ljg3IDE5MC4xNEMxMjMuMTUgMjUxLjIyIDk5LjUxIDE2Mi42MiA5OS41MSAxNjIuNjJTMTQwLjQyIDExNy40IDIwOC4yNyAxMTB2MjguNzhoLS4yMWMtMzUuNTYtNC4zMi02My41MyAyOC45OC02My41MyAyOC45OHMxNS44NCA1Ni4xMiA2My43NCA3Mi4zNnYyNi4zMVoiIHN0eWxlPSJmaWxsOiM3NmI5MDAiLz4KPC9zdmc+");
-    background-size: 58px 10px;
-    width: 58px;
-    height: 10px;
+    background-size: 120px 20px;
+    width: 38px;
+    height: 20px;
     display: block;
   }
 

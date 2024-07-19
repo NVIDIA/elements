@@ -205,7 +205,7 @@ class ElementStatus extends LitElement {
         <nve-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <nve-icon name="clock"></nve-icon></nve-badge>
         <div nve-layout="column gap:xs">
           <nve-alert .status=${metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</nve-alert>
-          <nve-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/about-api-design-getting-started--docs">API Review</a></nve-alert>
+          <nve-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/api-design-getting-started--docs">API Review</a></nve-alert>
           <nve-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</nve-alert>
           <nve-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></nve-alert>
         </div>
