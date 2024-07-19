@@ -24,6 +24,7 @@ export default {
         'elements-react',
         'pages',
         'playground',
+        'styles',
         'testing',
         'themes',
         'labs-behaviors-alpine',

@@ -6,19 +6,6 @@ export default {
   title: 'Foundations/Layout/Examples'
 };
 
-
-const generateCards = (numCards: number) => {
-  const cards = [];
-
-  for (let i = 0; i < numCards; i++) {
-    cards.push(html`<nve-card></nve-card>
-    `);
-  }
-
-  return html`${cards}`;
-};
-
-
 /* eslint-disable */
 const generateLayoutStory = (name, layoutValue, numCards) => {
   return {
@@ -26,7 +13,7 @@ const generateLayoutStory = (name, layoutValue, numCards) => {
 <h3 nve-text="section">${name}</h3>
 
 <section class="layout-example" nve-layout="${layoutValue}">
-  ${generateCards(numCards)}
+  ${new Array(numCards).fill(html`<nve-card></nve-card>`)}
 </section>
     `
   }
@@ -159,7 +146,7 @@ export const GridVariableSpans = {
   render: () => html`
     <h3 nve-text="section">Grid with variable spans (<code>span:...</code>) on the children</h3>
     <section nve-layout="grid gap:md">
-      ${generateCards(12)}
+      ${new Array(12).fill(html`<nve-card></nve-card>`)}
 
       <nve-card nve-layout="span:2"></nve-card>
       <nve-card nve-layout="span:2"></nve-card>
