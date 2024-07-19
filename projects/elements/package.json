@@ -6,7 +6,12 @@
   "contributes": {
     "html": {
       "customData": [
-        "./dist/data.html.json"
+        "./dist/elements.html-data.json"
+      ]
+    },
+    "cssVars": {
+      "customData": [
+        "./dist/elements.css-vars.json"
       ]
     },
     "snippets": [
@@ -765,13 +770,14 @@
     "formdata-polyfill": "^4.0.10"
   },
   "devDependencies": {
+    "@nvidia-elements/styles": "workspace:^",
     "@jspm/generator": "1.1.12",
     "@lit-labs/virtualizer": "2.0.12",
-    "@nvidia-elements/testing": "workspace:*",
-    "@nvidia-elements/testing-lighthouse": "workspace:*",
-    "@nvidia-elements/snippets": "workspace:*",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
+    "@nvidia-elements/snippets": "workspace:*",
+    "@nvidia-elements/testing-lighthouse": "workspace:*",
+    "@nvidia-elements/testing": "workspace:*",
     "@typescript/lib-dom": "npm:@types/web@0.0.147",
     "@vitest/browser": "2.0.3",
     "@vitest/coverage-istanbul": "2.0.3",
@@ -782,9 +788,6 @@
     "glob": "10.3.10",
     "lighthouse": "11.4.0",
     "lit-analyzer": "2.0.3",
-    "postcss": "8.4.31",
-    "postcss-each": "1.1.0",
-    "postcss-mixins": "9.0.4",
     "regenerator-runtime": "0.13.10",
     "svgo": "3.0.2",
     "ts-lit-plugin": "2.0.2",
@@ -824,12 +827,12 @@
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.snippets.html",
+        "build/deprecated.js",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts",
         "vite.bundle.ts",
-        "postcss.config.cjs",
         "custom-elements-manifest.config.mjs"
       ],
       "output": [
@@ -916,7 +919,10 @@
       "service": true
     },
     "test:lighthouse": {
-      "command": "vitest run --config=vitest.lighthouse.ts"
+      "command": "vitest run --config=vitest.lighthouse.ts",
+      "dependencies": [
+        "build"
+      ]
     },
     "test:axe": {
       "command": "vitest run --config=vitest.axe.ts",

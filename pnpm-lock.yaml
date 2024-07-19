@@ -98,9 +98,6 @@ importers:
       '@lit-labs/motion':
         specifier: ^1.0.7
         version: 1.0.7
-      '@nvidia-elements/styles':
-        specifier: workspace:^
-        version: link:../styles
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -148,6 +145,9 @@ importers:
       '@nvidia-elements/testing-lighthouse':
         specifier: workspace:*
         version: link:../labs/testing-lighthouse
+      '@nvidia-elements/styles':
+        specifier: workspace:^
+        version: link:../styles
       '@nvidia-elements/testing':
         specifier: workspace:*
         version: link:../testing
