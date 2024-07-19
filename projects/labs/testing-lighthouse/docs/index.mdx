@@ -40,7 +40,7 @@ Create a base template for lighthouse to run tests in `vitest.lighthouse.html`
 
 ```html
 <!doctype html>
-<html lang="en" mlv-theme="dark">
+<html lang="en" nve-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,11 +49,15 @@ Create a base template for lighthouse to run tests in `vitest.lighthouse.html`
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
     <title>Lighthouse</title>
     <style>
-      @import '@elements/elements/index.css';
+      @import '@nvidia-elements/themes/fonts/inter.css';
+      @import '@nvidia-elements/themes/index.css';
+      @import '@nvidia-elements/themes/dark.css';
+      @import '@nvidia-elements/styles/layout.css';
+      @import '@nvidia-elements/styles/typography.css';
     </style>
   </head>
-  <body mlv-layout="column gap:lg pad:md">
-    <p mlv-text="body">Lighthouse Test</p>
+  <body nve-layout="column gap:lg pad:md">
+    <p nve-text="body">Lighthouse Test</p>
   </body>
 </html>
 ```

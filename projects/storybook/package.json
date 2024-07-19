@@ -12,6 +12,7 @@
   "dependencies": {
     "@nvidia-elements/core": "workspace:@elements/elements@*",
     "@nvidia-elements/core-react": "workspace:@elements/elements-react@*",
+    "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/behaviors-alpine": "workspace:*",
@@ -64,6 +65,8 @@
         "../labs/code/docs/**/*.stories.ts",
         "../labs/testing-lighthouse/docs/**/*.mdx",
         "../labs/testing-lighthouse/docs/**/*.stories.ts",
+        "../styles/docs/**/*.mdx",
+        "../styles/docs/**/*.stories.ts",
         "../testing/docs/**/*.mdx",
         "../testing/docs/**/*.stories.ts",
         "../themes/docs/**/*.mdx",
@@ -75,6 +78,8 @@
       "dependencies": [
         "../elements:build",
         "../labs/code:build",
+        "../styles:build",
+        "../themes:build",
         "../starters/lit-library:ci"
       ]
     },

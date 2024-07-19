@@ -20,7 +20,7 @@
     .prismjs,
     .prismjs *,
     code {
-      font-family: var(--nve-ref-font-family-roboto-mono) !important;
+      font-family: monospace !important;
     }
 
     html {
@@ -51,6 +51,10 @@
       flex-direction: column !important;
       gap: 24px !important;
       max-width: 1100px !important;
+    }
+
+    .sbdocs-content:has(#getting-started-img) {
+      max-width: 1150px !important;
     }
 
     .css-q22hxw:has(.full-width),
@@ -105,10 +109,31 @@
       font-weight: var(--nve-ref-font-weight-regular) !important;
     }
 
+    .css-1kaktxp {
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+
     .prismjs {
-      color: var(--nve-ref-color-white) !important;
-      background: var(--nve-ref-color-gray-denim-1200) !important;
-      background: color-mix(in oklab, var(--nve-ref-color-gray-denim-1200), white 2%) !important;
+      color: var(--nve-sys-text-color) !important;
+      background: var(--nve-sys-layer-container-background) !important;
+      font-size: 14px !important;
+      border-radius: var(--nve-ref-border-radius-md) !important;
+      font-weight: 400 !important;
+
+      .attr-value {
+        color: var(--nve-ref-color-red-tomato-1100) !important;
+      }
+
+      .attr-name {
+        color: var(--nve-sys-text-color) !important;
+      }
+
+      [class='token tag'],
+      .punctuation,
+      .attr-equals {
+        color: var(--nve-ref-color-blue-cobalt-1100) !important;
+      }
     }
 
     [nve-theme*='dark'] .prismjs {
@@ -210,6 +235,14 @@
       --background: var(--nve-sys-layer-overlay-background);
     }
 
+    .sbdocs-wrapper:has(#getting-started-img) {
+      padding-top: 8vh !important;
+
+      nve-codeblock {
+        --padding: var(--nve-ref-space-md) !important;
+      }
+    }
+
     [nve-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
       background-image: url(images/test-image-2.webp) !important;
       object-fit: fill !important;
@@ -251,6 +284,23 @@
 
     .css-xzp052 {
       z-index: 99 !important;
+    }
+
+    .sb-unstyled {
+      display: contents;
+    }
+
+    .sb-unstyled > [mlv-text='list'] [mlv-text='body'] {
+      display: inline !important;
+
+      &::before,
+      &::after {
+        content: initial !important;
+      }
+    }
+
+    [mlv-text='list'] li > .sb-unstyled {
+      display: contents;
     }
 </style>
 <div hidden style="display: none !important">

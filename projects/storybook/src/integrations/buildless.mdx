@@ -22,24 +22,12 @@ use elements without build tooling such as Vite or Rollup for easy in browser **
   <head>
     <title>Import Map Starter + @nvidia-elements/core</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./node_modules/@nvidia-elements/core/dist/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@elements/elements@latest/dist/index.css" />
     <script type="importmap">
       {
         "imports": {
-          "@nvidia-elements/core": "./node_modules/@nvidia-elements/core/dist/",
-          "@nvidia-elements/core/": "./node_modules/@nvidia-elements/core/dist/",
-          "composed-offset-position": "./node_modules/composed-offset-position/dist/composed-offset-position.esm.js",
-          "lit": "./node_modules/lit/index.js",
-          "lit/": "./node_modules/lit/",
-          "lit-html": "./node_modules/lit-html/lit-html.js",
-          "lit-html/": "./node_modules/lit-html/",
-          "lit-element/": "./node_modules/lit-element/",
-          "@lit/reactive-element": "./node_modules/@lit/reactive-element/reactive-element.js",
-          "@lit/reactive-element/": "./node_modules/@lit/reactive-element/",
-          "@lit-labs/motion": "./node_modules/@lit-labs/motion/index.js",
-          "@floating-ui/dom": "./node_modules/@floating-ui/dom/dist/floating-ui.dom.esm.js",
-          "@floating-ui/core": "./node_modules/@floating-ui/core/dist/floating-ui.core.esm.js",
-          "@nvidia-elements/core/": "./node_modules/@nvidia-elements/core/dist/"
+          "@elements/elements": "https://https://esm.sh/@elements/elements@latest",
+          "@elements/elements/": "https://https://esm.sh/@elements/elements@latest/"
         }
       }
     </script>
@@ -59,57 +47,39 @@ use elements without build tooling such as Vite or Rollup for easy in browser **
 Using import maps more complex UI components can be created without build tooling.
 
 {/* Inlined playground so example does not encourage copy/paste of temporary playground cdn */}
-<nve-button><a href="https://elements-stage.nvidia.com/ui/elements-playground/?layout=vertical-split&theme=dark&files=H4sIAAHonWQAA81XzY7bNhB%252BFVYo4ASwyN1skRaOduEeesstvdUFwhVpmQ0lsiTlxjD87h3%252ByJZkC9hFFaQXy%252BTMfPPND8XRMRMN41%252FxztUyWx2zUjWONy5bZcUPTJXuoDnysqdNU%252FgnquU%252Bdzte88dNxqj5ssmCiFMGT1RI0XxBhkuQWneQ3O44d5sMeSDYc%252FyrI6W1sLMzfAs7O%252Be0XRFSsia3jlYcN3tGMRWEWsudJVyCs8bZXEt6qIxqG0ZqxVrAJuuaVpLvzzrrO3x%252Fj98RJqwjMbDojHhy%252FzN2jpshO1saoV1HRtRaGVdTHTKM0NH%252FINQJwG7V7fndsTMv%252Fpb8N9ly2jlIv7X36PyUSEA9S6X5OCnTBAaKXrVUkFbLWa62W%252BCWw0I4oZoZIpmChoju8E8xoCkdzG2N%252F4K4ztn2ZKWArv3PvABl%252FQ7%252FDBTiUbnlZo5KXvxc4%252BfJ0Ct1%252FwORObx2gOsH%252FIDvCON7LpW%252B6e6Kl3%252FZzcTCQ6UEjCl40bT%252FmZI%252FRWDkdb2VijrRVHkroB8Nn%252BMQjzHXcITx%252B9jzPRn2stu9PoBgqp6bFUBOkQLRBCd%252FMgynpRN73vXRHMRu4QK79%252Fh%252BULmxygsZAgbkmTplLNEG3pfGHeY5bC8lPkXgddz%252Fbrn5fsQv3l%252FHGrg5%252Ft1YX7xfsc4lfbaAPdN1N4YEXnf4oXfHdP5P6Q73j%252FBTkDgC3RqHIjoMS9aUsMQ9vKeeXUG6URQVz4od4rwKcx3Y%252BDUA%252BB1grVq%252FVyrZ1g2qqF7VDGnKVrJKAxcgUK19%252FK61PiAuUVz48bEtS%252B6HN3A%252B1gLrZH87hISOUJzk0DFM2Ev0UbjfYl7RCW2NqtECUrn4MFIHNFUZqneHpHQ1fcFUmaqBL8p%252B1lwgX7%252Fg0nNaoUXYPI1dxPS8AD4qvgb6Gu6ZsopDq25F4xvUx9vZlBJA0a9afwrp%252FRhqAMXkDbP9dPUmOV8IUcLDj%252FfoEf1xycAyxfVnz8PZIL2ORDDq4UWF1sK4mAL75AzcD133hg4eABpgx82bt0MUw11rmlDpz%252F196BIm9sOmNOqf0JG2RlSKqlmVECQ3vc452%252Bp%252Bg4fuA63EuCD62sCrh4wjnJr5x6PbCZtWp6fhsiBngxFWAfflfrD3%252BVzr89kOf87VbK1TdaqZxbHibxbj47NYjir%252BNuEOXw%252FEH%252Bd44v33abbsvl1%252FhyrB92v4mPOiD6jcUQOvrcfWbfNfstPpX6x%252Bf9T1DgAA" target="_blank">Playground</a></nve-button>
+<nve-button><a href="https://elements-stage.nvidia.com/ui/elements-playground/91017958-e474-4f1a-9d9c-107d0ad7db8b" target="_blank">Playground</a></nve-button>
 
 ```html
-<!doctype html>
-<html mlv-theme="light">
-<head>
- <link rel="stylesheet" type="text/css" href="https://cdn-stage.nvidia.com/assets/elements-playground/modules/@nvidia-elements/core@0.11.2/dist/index.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn-stage.nvidia.com/assets/elements-playground/modules/@nvidia-elements/core@0.11.2/dist/inter.css" />
-  <script type="importmap">
-    {
-      "imports": {
-        "@nvidia-elements/core": "./node_modules/@nvidia-elements/core/dist/",
-        "@nvidia-elements/core/": "./node_modules/@nvidia-elements/core/dist/"
-        "composed-offset-position": "./node_modules/composed-offset-position/dist/composed-offset-position.esm.js",
-        "lit": "./node_modules/lit/index.js",
-        "lit/": "./node_modules/lit/",
-        "lit-html": "./node_modules/lit-html/lit-html.js",
-        "lit-html/": "./node_modules/lit-html/",
-        "lit-element/": "./node_modules/lit-element/",
-        "@lit/reactive-element": "./node_modules/@lit/reactive-element/reactive-element.js",
-        "@lit/reactive-element/": "./node_modules/@lit/reactive-element/",
-        "@lit-labs/motion": "./node_modules/@lit-labs/motion/index.js",
-        "@floating-ui/dom": "./node_modules/@floating-ui/dom/dist/floating-ui.dom.esm.js",
-        "@floating-ui/core": "./node_modules/@floating-ui/core/dist/floating-ui.core.esm.js",
-        "@nvidia-elements/core/": "./node_modules/@nvidia-elements/core/dist/"
-      }
-    }
-  </script>
-  <script type="module" src="./index.js"></script>
-</head>
+<!DOCTYPE html>
+<html mlv-theme="dark">
+  <head>
+    <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/fonts/inter.css" />
+    <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/index.css" />
+    <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/dark.css" />
+    <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/layout.css" />
+    <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/typography.css" />
+  </head>
   <body mlv-text="body" mlv-layout="column gap:md pad:lg">
     <app-status-label status="success"></app-status-label>
 
     <script type="module">
       import { html, LitElement } from 'lit';
-      import typography from '@nvidia-elements/core/css/module.typography.css' assert { type: 'css' };
-      import layout from '@nvidia-elements/core/css/module.layout.css' assert { type: 'css' };
-      import '@nvidia-elements/core/badge/define.js';
+      import typography from '@nvidia-elements/styles/dist/typography.css' with { type: 'css' };
+      import layout from '@nvidia-elements/styles/dist/layout.css' with { type: 'css' };
+      import '@elements/elements/badge/define.js';
 
       class AppStatusLabel extends LitElement {
         static styles = [typography, layout];
 
         static properties = {
-          status: { type: String }
+          status: { type: String },
         };
 
         render() {
           return html`
             <div mlv-layout="row gap:sm align:center">
               <p mlv-text="label">status:</p>
-              <nve-badge .status=${this.status}>${this.status}</nve-badge>
+              <mlv-badge .status=${this.status}>${this.status}</mlv-badge>
             </div>
           `;
         }

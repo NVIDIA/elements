@@ -49,7 +49,6 @@ const ThemePicker = () => {
         </mlv-drawer-content>
         <mlv-divider style={{'width': '100%'}}></mlv-divider>
         <mlv-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
-          <mlv-tooltip behavior-trigger anchor="data-hint-btn" trigger="data-hint-btn" hidden>Demo data to be displayed in examples (see datagrid)</mlv-tooltip>
           <mlv-select style={{'--background': 'transparent', '--min-width': '170px'}}>
             <label>Data</label>
             <mlv-icon-button slot="label" id="data-hint-btn" size="sm" container="flat" icon-name="information-circle-stroke" style={{'--height': '12px'}}></mlv-icon-button>
@@ -91,11 +90,12 @@ const ThemePicker = () => {
               <input type="checkbox" value="sourceType" defaultChecked={globals.sourceType === 'react'} onChange={e => updateGlobals({ sourceType: e.target.checked ? 'react' : 'html' })} />
             </mlv-switch>
           </mlv-switch-group>
-          <mlv-tooltip behavior-trigger anchor="api-hint-btn" trigger="api-hint-btn" hidden style={{'--width': '280px'}}>
-            <p mlv-text="body sm">Preview code blocks with <code>@nvidia-elements/react</code> components or the <code>nve</code> namespace.</p>
-          </mlv-tooltip>
         </mlv-drawer-content>
       </mlv-drawer>
+      <mlv-tooltip behavior-trigger anchor="data-hint-btn" trigger="data-hint-btn" hidden>Demo data to be displayed in examples (see datagrid)</mlv-tooltip>
+      <mlv-tooltip behavior-trigger anchor="api-hint-btn" trigger="api-hint-btn" hidden style={{'--width': '280px'}}>
+        Preview code blocks with @nvidia-elements/react components or the nve namespace.
+      </mlv-tooltip>
     </div>) : ''
   );
 }
@@ -111,7 +111,7 @@ addons.register('my-addon', () => {
 addons.setConfig({
   sidebar: {
     showRoots: true,
-    collapsedRoots: ['about', 'integrations', 'foundations', 'elements', 'patterns', 'testing', 'labs', 'internal', 'deprecated'],
+    collapsedRoots: ['about', 'integrations', 'foundations', 'elements', 'patterns', 'testing', 'labs', 'api-design', 'internal', 'deprecated'],
   },
 });
 

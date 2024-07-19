@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
     <title>@nvidia-elements/code</title>
   </head>
-  <body mlv-text="body" mlv-layout="column gap:md pad:lg">
+  <body nve-text="body" nve-layout="column gap:md pad:lg">
 <nve-codeblock language="typescript" container="" line-numbers highlight="9,14">
 import { LitElement, html } from "lit";
 import { property, customElement } from "lit/decorators.js";
@@ -36,7 +36,12 @@ export class MyElement extends LitElement {
 }
 </nve-codeblock>
     <script type="module">
-      import '@elements/elements/index.css';
+      import '@nvidia-elements/themes/fonts/inter.css';
+      import '@nvidia-elements/themes/index.css';
+      import '@nvidia-elements/themes/dark.css';
+      import '@nvidia-elements/styles/layout.css';
+      import '@nvidia-elements/styles/typography.css';
+
       import './dist/codeblock/languages/javascript.js';
       import './dist/codeblock/languages/typescript.js';
       import './dist/codeblock/define.js';
