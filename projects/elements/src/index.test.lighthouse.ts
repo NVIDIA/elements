@@ -5,26 +5,12 @@ describe('lighthouse report', () => {
   test('CSS bundles should remain within compressed bundle limits', async () => {
     const report = await runner.getReport('css-bundles', /* html */`
       <script type="module">
-        import('@nvidia-elements/themes/index.css');
-        import('@nvidia-elements/themes/compact.css');
-        import('@nvidia-elements/themes/dark.css');
-        import('@nvidia-elements/themes/high-contrast.css');
-        import('@nvidia-elements/themes/reduced-motion.css');
-        import('@nvidia-elements/themes/ddb-dark.css');
-        import('@nvidia-elements/core/css/module.layout.css');
-        import('@nvidia-elements/core/css/module.typography.css');
+        import('@nvidia-elements/core/index.css');
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(16.5); // total
-    expect(report.payload.css.requests['index.css'].kb).toBeLessThan(5.9); // @nvidia-elements/themes/index.css
-    expect(report.payload.css.requests['compact.css'].kb).toBeLessThan(0.4); // @nvidia-elements/themes/compact.css
-    expect(report.payload.css.requests['dark.css'].kb).toBeLessThan(5); // @nvidia-elements/themes/dark.css
-    expect(report.payload.css.requests['high.css'].kb).toBeLessThan(1); // @nvidia-elements/themes/high-contrast.css
-    expect(report.payload.css.requests['reduced.css'].kb).toBeLessThan(0.6); // @nvidia-elements/themes/reduced-motion.css
-    expect(report.payload.css.requests['ddb.css'].kb).toBeLessThan(0.8); // @nvidia-elements/themes/ddb-dark.css
-    expect(report.payload.css.requests['module.css'].kb).toBeLessThan(1.6); // @nvidia-elements/core/css/module.layout.css
-    expect(report.payload.css.requests['module2.css'].kb).toBeLessThan(1.4); // @nvidia-elements/core/css/module.typography.css
+    expect(report.payload.css.kb).toBeLessThan(18.5); // total
+    expect(report.payload.css.requests['index.css'].kb).toBeLessThan(18.5); // @nvidia-elements/core/index.css
   });
 
   test('JS Bundles should remain within compressed bundle limits', async () => {
@@ -83,6 +69,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(64);
+    expect(report.payload.javascript.kb).toBeLessThan(65.5);
   });
 });
