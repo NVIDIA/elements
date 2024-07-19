@@ -41,6 +41,7 @@ slot {
   display: block;
 }
 
+::slotted([nve-text]),
 ::slotted([nve-text]) {
   color: inherit !important;
 }

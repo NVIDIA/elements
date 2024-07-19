@@ -269,5 +269,7 @@ declare global {
   interface HTMLElement {
     'nve-text': string;
     'nve-layout': string;
+    'nve-text': string;
+    'nve-layout': string;
   }
 }
