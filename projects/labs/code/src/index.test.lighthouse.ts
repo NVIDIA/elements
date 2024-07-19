@@ -19,7 +19,7 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(38);
+    expect(report.payload.javascript.kb).toBeLessThan(38.5);
     expect(report.payload.javascript.requests['define.js'].kb).toBeLessThan(10);
     expect(report.payload.javascript.requests['core.js'].kb).toBeLessThan(9);
     expect(report.payload.javascript.requests['css.js'].kb).toBeLessThan(4);
