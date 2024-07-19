@@ -63,15 +63,14 @@ function createDefaultFiles(content, context) {
   const { globals } = context;
   const themes = [globals.theme, globals.scale, globals.debug, globals.animation, globals.experimental, globals.systemOptions].filter(i => i !== '').join(' ').trim();
 
-  return {
+  const mlvTemplate = {
     'index.html': {
       content: `<!doctype html>
 <html nve-theme="${themes}">
 <head>
-  <link rel="stylesheet" href="${SCOPE}/elements/dist/index.css" />
-  <link rel="stylesheet" href="${SCOPE}/elements/dist/inter.css" />
-  <script type="module" src="./index.js"></script>
-  ${context.id.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
+  <link rel="stylesheet" href="@elements/elements/dist/index.css" />
+  <link rel="stylesheet" href="@elements/elements/dist/inter.css" />
+  <script type="module" src="./index.js"></script>${context.id.includes('foundations-layout') ? `\n<link rel="stylesheet" href="./index.css">` : ''}
 </head>
 <body nve-layout="${content.split('\n')[0].includes('full') ? '' : 'pad:lg'}">
 
@@ -81,7 +80,7 @@ ${content}
 </html>`
     },
     'index.ts': {
-      content: `${getImports(content)}`
+      content: `${getImports(globals.scope)}`
     },
     'importmap.json': {
       content: `{
@@ -89,16 +88,54 @@ ${content}
     "${SCOPE}/elements": "${CDN_MODULES_URL}/${SCOPE}/elements@${ELEMENTS_VERSION}",
     "${SCOPE}/elements/": "${CDN_MODULES_URL}/${SCOPE}/elements@${ELEMENTS_VERSION}/"
   }
-}
-`
+}`
     }
   };
+
+  const nveTemplate = {
+    'index.html': {
+      content: `<!doctype html>
+<html nve-theme="${themes}">
+<head>
+  <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/fonts/inter.css" />
+  <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/index.css" />
+  <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/dark.css" />
+  <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/high-contrast.css" />
+  <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/reduced-motion.css" />
+  <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/compact.css" />
+  <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/typography.css" />
+  <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/layout.css" />
+  <script type="module" src="./index.js"></script>${context.id.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
+</head>
+<body nve-layout="${content.split('\n')[0].includes('full') ? '' : 'pad:lg'}">
+
+${content.replaceAll('nve-', 'nve-')}
+
+</body>
+</html>`
+    },
+    'index.ts': {
+      content: `${getImports(globals.scope)}`
+    },
+    'importmap.json': {
+      content: `{
+  "imports": {
+    "@nvidia-elements/core": "${CDN_MODULES_URL}/@nvidia-elements/core@${ELEMENTS_VERSION}",
+    "@nvidia-elements/core/": "${CDN_MODULES_URL}/@nvidia-elements/core@${ELEMENTS_VERSION}/",
+    "@nvidia-elements/styles/": "${CDN_MODULES_URL}/@nvidia-elements/styles@latest/",
+    "@nvidia-elements/themes/": "${CDN_MODULES_URL}/@nvidia-elements/themes@latest/"
+  }
+}`
+    }
+  };
+
+  return globals.scope === 'mlv' ? mlvTemplate : nveTemplate;
 }
 
-function getImports() {
+function getImports(scope) {
   return metrics['@nvidia-elements/core'].elements
     .filter(e => packageFile.exports[`./${e.name.replace('nve-', '')}/define.js`])
-    .map(e => `import '${SCOPE}/elements/${e.name.replace('nve-', '')}/define.js';`)
+    .map(e => `import '${scope === 'mlv' ? '@elements' : '@nve'}/elements/${e.name.replace('nve-', '')}/define.js';`)
     .join('\n');
 }
 
