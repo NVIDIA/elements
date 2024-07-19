@@ -98,6 +98,9 @@ importers:
       '@lit-labs/motion':
         specifier: ^1.0.7
         version: 1.0.7
+      '@nvidia-elements/styles':
+        specifier: workspace:^
+        version: link:../styles
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -178,15 +181,6 @@ importers:
       lit-analyzer:
         specifier: 2.0.3
         version: 2.0.3
-      postcss:
-        specifier: 8.4.31
-        version: 8.4.31
-      postcss-each:
-        specifier: 1.1.0
-        version: 1.1.0(postcss@8.4.31)
-      postcss-mixins:
-        specifier: 9.0.4
-        version: 9.0.4(postcss@8.4.31)
       regenerator-runtime:
         specifier: 0.13.10
         version: 0.13.10
@@ -314,12 +308,6 @@ importers:
       glob:
         specifier: 10.3.10
         version: 10.3.10
-      postcss:
-        specifier: 8.4.31
-        version: 8.4.31
-      postcss-load-config:
-        specifier: 4.0.1
-        version: 4.0.1(postcss@8.4.31)
       rollup:
         specifier: 3.29.1
         version: 3.29.1
@@ -394,7 +382,7 @@ importers:
         version: 3.1.3
     devDependencies:
       '@elements/elements':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../elements
       '@internals/eslint':
         specifier: workspace:*
@@ -405,6 +393,9 @@ importers:
       '@nvidia-elements/testing-lighthouse':
         specifier: workspace:*
         version: link:../testing-lighthouse
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../../styles
       '@nvidia-elements/testing':
         specifier: workspace:*
         version: link:../../testing
@@ -806,6 +797,9 @@ importers:
       '@nvidia-elements/core-react':
         specifier: workspace:@elements/elements-react@*
         version: link:../elements-react
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../styles
       '@nvidia-elements/testing':
         specifier: workspace:*
         version: link:../testing
@@ -868,6 +862,48 @@ importers:
         specifier: 5.3.3
         version: 5.3.3(@types/node@20.11.6)(terser@5.30.3)
 
+  projects/styles:
+    devDependencies:
+      '@internals/vite':
+        specifier: workspace:*
+        version: link:../internals/vite
+      '@nvidia-elements/testing-lighthouse':
+        specifier: workspace:*
+        version: link:../labs/testing-lighthouse
+      '@nvidia-elements/testing':
+        specifier: workspace:*
+        version: link:../testing
+      '@nvidia-elements/themes':
+        specifier: workspace:*
+        version: link:../themes
+      '@vitest/browser':
+        specifier: 2.0.3
+        version: 2.0.3(playwright@1.44.1)(typescript@5.3.3)(vitest@2.0.3)
+      lit:
+        specifier: 3.1.3
+        version: 3.1.3
+      postcss:
+        specifier: 8.4.31
+        version: 8.4.31
+      postcss-each:
+        specifier: 1.1.0
+        version: 1.1.0(postcss@8.4.31)
+      postcss-load-config:
+        specifier: 4.0.1
+        version: 4.0.1(postcss@8.4.31)
+      postcss-mixins:
+        specifier: 9.0.4
+        version: 9.0.4(postcss@8.4.31)
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
+      vite:
+        specifier: 5.3.3
+        version: 5.3.3(@types/node@20.11.6)(terser@5.30.3)
+      vitest:
+        specifier: 2.0.3
+        version: 2.0.3(@types/node@20.11.6)(@vitest/browser@2.0.3)
+
   projects/testing:
     dependencies:
       lit:
@@ -896,6 +932,9 @@ importers:
 
   projects/themes:
     devDependencies:
+      '@nvidia-elements/testing-lighthouse':
+        specifier: workspace:*
+        version: link:../labs/testing-lighthouse
       chart.js:
         specifier: 4.4.0
         version: 4.4.0
@@ -914,6 +953,12 @@ importers:
       style-dictionary:
         specifier: 3.8.0
         version: 3.8.0
+      vite:
+        specifier: 5.3.3
+        version: 5.3.3(@types/node@20.11.6)(terser@5.30.3)
+      vitest:
+        specifier: 2.0.3
+        version: 2.0.3(@types/node@20.11.6)(@vitest/browser@2.0.3)
 
 packages:
 
@@ -7967,7 +8012,7 @@ packages:
       '@vue/shared': 3.4.15
       estree-walker: 2.0.2
       magic-string: 0.30.10
-      postcss: 8.4.38
+      postcss: 8.4.39
       source-map-js: 1.2.0
 
   /@vue/compiler-ssr@3.4.15:
@@ -8558,7 +8603,7 @@ packages:
       caniuse-lite: 1.0.30001610
       fraction.js: 4.3.7
       normalize-range: 0.1.2
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       postcss: 8.4.33
       postcss-value-parser: 4.2.0
     dev: true
@@ -13209,7 +13254,7 @@ packages:
   /launch-editor@2.6.1:
     resolution: {integrity: sha512-eB/uXmFVpY4zezmGp5XtU21kwo7GBbKB+EQ+UZeWtGb9yAM5xt/Evk+lYH3eRNAtId+ej4u7TYPFZ07w4s7rRw==}
     dependencies:
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       shell-quote: 1.8.1
     dev: true
 
@@ -13331,6 +13376,7 @@ packages:
   /lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
     engines: {node: '>=10'}
+    dev: true
 
   /lilconfig@3.0.0:
     resolution: {integrity: sha512-K2U4W2Ff5ibV7j7ydLr+zLAkIg5JJ4lPn1Ltsdt+Tz/IjQ8buJ55pZAxoP34lqIiwtF9iAvtLv3JGv7CAyAg+g==}
@@ -15606,6 +15652,7 @@ packages:
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+    dev: true
 
   /picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
@@ -15846,7 +15893,7 @@ packages:
       lilconfig: 2.1.0
       postcss: 8.4.31
       yaml: 2.3.4
-    dev: false
+    dev: true
 
   /postcss-loader@7.3.4(postcss@8.4.33)(typescript@5.3.3)(webpack@5.89.0):
     resolution: {integrity: sha512-iW5WTTBSC5BfsBJ9daFMPVrLT36MrNiC6fqOZTTaHjBNX6Pfd5p+hSBqe/fEeNd7pc13QiAyGt7VdGMw4eRC4A==}
@@ -16164,7 +16211,7 @@ packages:
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       source-map-js: 1.2.0
     dev: false
 
@@ -16175,23 +16222,16 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.2.0
+    dev: true
 
   /postcss@8.4.33:
     resolution: {integrity: sha512-Kkpbhhdjw2qQs2O2DGX+8m5OVqEcbB9HRBvuYM9pgrjEFUg30A9LmXNlTAUj4S9kgtGyrMbTzVjH7E+s5Re2yg==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       source-map-js: 1.2.0
     dev: true
-
-  /postcss@8.4.38:
-    resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.3.7
-      picocolors: 1.0.0
-      source-map-js: 1.2.0
 
   /postcss@8.4.39:
     resolution: {integrity: sha512-0vzE+lAiG7hZl1/9I8yzKLx3aR9Xbof3fBHKunvMfOCYAtMhrsnccJY2iTURb9EZd5+pLuiNV9/c/GZJOHsgIw==}
@@ -17947,7 +17987,7 @@ packages:
       css-tree: 2.3.1
       css-what: 6.1.0
       csso: 5.0.5
-      picocolors: 1.0.0
+      picocolors: 1.0.1
     dev: true
 
   /symbol-observable@4.0.0:
@@ -18676,7 +18716,7 @@ packages:
     dependencies:
       browserslist: 4.22.2
       escalade: 3.1.1
-      picocolors: 1.0.0
+      picocolors: 1.0.1
 
   /upper-case-first@2.0.2:
     resolution: {integrity: sha512-514ppYHBaKwfJRK/pNC6c/OxfGa0obSnAl106u97Ed0I625Nin96KAjttZF6ZL3e1XLtphxnqrOi9iWgm+u+bg==}
@@ -19009,7 +19049,7 @@ packages:
       '@types/node': 20.11.6
       esbuild: 0.19.9
       less: 4.2.0
-      postcss: 8.4.38
+      postcss: 8.4.39
       rollup: 4.14.3
       sass: 1.69.7
       terser: 5.26.0
@@ -19822,6 +19862,7 @@ packages:
   /yaml@2.3.4:
     resolution: {integrity: sha512-8aAvwVUSHpfEqTQ4w/KMlf3HcRdt50E5ODIQJBw1fQ5RL34xabzxtUlzTXVqc4rkZsPbvrXKWnABCD7kWSmocA==}
     engines: {node: '>= 14'}
+    dev: true
 
   /yargs-parser@20.2.9:
     resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}

@@ -1,0 +1,97 @@
+{
+  "name": "@nvidia-elements/styles",
+  "version": "0.0.0",
+  "type": "module",
+  "contributes": {
+    "html": {
+      "customData": [
+        "./dist/data.html.json"
+      ]
+    }
+  },
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./data.html.json": "./dist/data.html.json",
+    "./layout.css": "./dist/layout.css",
+    "./responsive.css": "./dist/responsive.css",
+    "./typography.css": "./dist/typography.css",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "test:lighthouse": "wireit"
+  },
+  "peerDependencies": {
+    "@nvidia-elements/themes": "workspace:^"
+  },
+  "devDependencies": {
+    "@nvidia-elements/themes": "workspace:*",
+    "@nvidia-elements/testing": "workspace:*",
+    "@internals/vite": "workspace:*",
+    "@nvidia-elements/testing-lighthouse": "workspace:*",
+    "@vitest/browser": "2.0.3",
+    "lit": "3.1.3",
+    "postcss": "8.4.31",
+    "postcss-each": "1.1.0",
+    "postcss-load-config": "4.0.1",
+    "postcss-mixins": "9.0.4",
+    "typescript": "5.3.3",
+    "vite": "5.3.3",
+    "vitest": "2.0.3"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "dev": {
+      "dependencies": [
+        "build:watch",
+        "../storybook:dev"
+      ]
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build && node ./build/metadata.js",
+      "files": [
+        "src/**",
+        "package.json",
+        "vite.config.ts",
+        "postcss.config.cjs",
+        "!src/**/*.test.lighthouse.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../themes:ci",
+        "../internals/vite:ci"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --watch",
+      "service": true,
+      "dependencies": []
+    },
+    "test:lighthouse": {
+      "command": "vitest run --config=vitest.lighthouse.ts",
+      "dependencies": [
+        "build"
+      ]
+    }
+  }
+}

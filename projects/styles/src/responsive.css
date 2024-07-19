@@ -1,22 +1,22 @@
 /* Applies the all-important container type to the direct parent of any elements using our container query layout utils */
-*:has(> [mlv-layout*='gap@']),
-*:has(> [mlv-layout*='pad@']),
-*:has(> [mlv-layout*='hide@']),
-*:has(> [mlv-layout*='span@']),
-*:has(> [mlv-layout*='span-items@']) {
+*:has(> [nve-layout*='gap@']),
+*:has(> [nve-layout*='pad@']),
+*:has(> [nve-layout*='hide@']),
+*:has(> [nve-layout*='span@']),
+*:has(> [nve-layout*='span-items@']) {
   container-type: inline-size;
 }
 
-[mlv-layout] {
+[nve-layout] {
   /* Responsive (Container Query Based) Layout & Padding */
-  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl), (1px, 150px, 300px, 600px, 900px) {
-    @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+  @each $breakpoint, $breakpoint-value in (sm, md, lg), (150px, 300px, 600px) {
+    @each $size in sm, md, lg {
       @container (width >= $(breakpoint-value)) {
-        &[mlv-layout~='gap@$(breakpoint):$(size)'] {
+        &[nve-layout~='gap@$(breakpoint):$(size)'] {
           gap: var(--nve-ref-space-$(size));
         }
 
-        &[mlv-layout~='pad@$(breakpoint):$(size)'] {
+        &[nve-layout~='pad@$(breakpoint):$(size)'] {
           padding: var(--nve-ref-space-$(size));
         }
       }
@@ -24,17 +24,17 @@
 
     /* Responsive (Container Query Based) Hiding of Elements */
     @container (width < $(breakpoint-value)) {
-      &[mlv-layout~='hide@$(breakpoint)'] {
+      &[nve-layout~='hide@$(breakpoint)'] {
         display: none;
       }
     }
 
     /* Responsive Grid Breakpoints */
-    &[mlv-layout~='grid'] {
+    &[nve-layout~='grid'] {
       @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
         @container (width >= $(breakpoint-value)) {
-          [mlv-layout~='span@$(breakpoint):$(num)'],
-          &[mlv-layout~='span-items@$(breakpoint):$(num)'] > * {
+          [nve-layout~='span@$(breakpoint):$(num)'],
+          &[nve-layout~='span-items@$(breakpoint):$(num)'] > * {
             grid-column: span $(num) / span $(num);
           }
         }

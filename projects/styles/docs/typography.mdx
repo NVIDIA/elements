@@ -1,7 +1,7 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import '@nvidia-elements/core/button/define.js';
 import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, Headings, Size, LeadingTrim, LineHeightFixed, LineHeightRelative } from './typography.stories';
-import { Text } from '../../../../themes/docs/tokens.stories';
+import { Text } from '../../themes/docs/tokens.stories';
 
 <Meta title="Foundations/Typography/Documentation" />
 
@@ -11,18 +11,29 @@ The Typography utilities provides a flexible API to apply typography styles expl
 This enables full control of the visual styling of an element separate from the HTML semantics.
 
 ```html
-<p mlv-text="display">display</p>
-<p mlv-text="heading">heading</p>
-<p mlv-text="body">body</p>
-<p mlv-text="label">label</p>
-<p mlv-text="code">cmd+c</p>
+<p nve-text="display">display</p>
+<p nve-text="heading">heading</p>
+<p nve-text="body">body</p>
+<p nve-text="label">label</p>
+<p nve-text="code">cmd+c</p>
+```
+
+## Installation
+
+```shell
+npm install @nvidia-elements/themes @nvidia-elements/styles
+```
+
+```css
+/* import the global CSS into your project (import may vary based on build tools) */
+@import '@nvidia-elements/styles/dist/typography.css';
 ```
 
 ## Framework Integrations
 
 Some frameworks and libraries may require additional configuration to use the `mlv-text` attribute. See the links below for specific integration patterns for the following frameworks:
 
-<div mlv-layout="row align:center">
+<div nve-layout="row align:center">
   <nve-button>
     <a href="?path=/docs/integrations-lit--docs#forms"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit Integration</a>
   </nve-button>
@@ -70,18 +81,18 @@ Some frameworks and libraries may require additional configuration to use the `m
 
 ## Leading Trim
 
-By default all `mlv-text` attributes use [leading-trim](https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202) to remove excesss whitespace between lines. This provides a more precise layout.
-Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavior it may be necessary to disable this behavior. This can be done by applying `mlv-text="trim:none"`.
+By default all `nve-text` attributes use [leading-trim](https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202) to remove excesss whitespace between lines. This provides a more precise layout.
+Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavior it may be necessary to disable this behavior. This can be done by applying `nve-text="trim:none"`.
 
 <Canvas of={LeadingTrim} />
 
 ## Line height
 
-Use different attributes with `mlv-text` like `loose`, `relaxed`, `moderate`, `snug`, and `tight` to give an element a relative line-height based on its current font-size.
+Use different attributes with `nve-text` like `loose`, `relaxed`, `moderate`, `snug`, and `tight` to give an element a relative line-height based on its current font-size.
 
 <Canvas of={LineHeightRelative} />
 
-Use different attributes with `mlv-text` like `line-height-3` and `line-height-4` to give an element a fixed line-height, irrespective of the current font-size. These are useful when you need very precise control over an element’s final size.
+Use different attributes with `nve-text` like `line-height-3` and `line-height-4` to give an element a fixed line-height, irrespective of the current font-size. These are useful when you need very precise control over an element’s final size.
 
 <Canvas of={LineHeightFixed} />
 
