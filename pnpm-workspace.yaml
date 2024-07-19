@@ -18,6 +18,7 @@ packages:
   - 'projects/elements'
   - 'projects/elements-react'
   - 'projects/storybook'
+  - 'projects/styles'
   - 'projects/testing'
   - 'projects/themes'
   - 'projects/internals/eslint'

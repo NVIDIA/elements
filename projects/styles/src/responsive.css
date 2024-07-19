@@ -9,8 +9,8 @@
 
 [nve-layout] {
   /* Responsive (Container Query Based) Layout & Padding */
-  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl), (1px, 150px, 300px, 600px, 900px) {
-    @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+  @each $breakpoint, $breakpoint-value in (sm, md, lg), (150px, 300px, 600px) {
+    @each $size in sm, md, lg {
       @container (width >= $(breakpoint-value)) {
         &[nve-layout~='gap@$(breakpoint):$(size)'] {
           gap: var(--nve-ref-space-$(size));
