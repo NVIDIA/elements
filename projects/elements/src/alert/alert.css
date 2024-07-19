@@ -82,6 +82,7 @@ nve-icon-button {
   --color: var(--_icon-cancel-color);
 }
 
+::slotted([nve-text]),
 ::slotted([mlv-text]) {
   color: inherit !important;
 }

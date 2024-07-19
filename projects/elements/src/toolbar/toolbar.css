@@ -49,6 +49,7 @@
   --_icon-color: var(--nve-sys-text-white-color) !important;
 }
 
+:host([status='accent']) ::slotted([nve-text]),
 :host([status='accent']) ::slotted([mlv-text]) {
   color: var(--nve-sys-text-white-color) !important;
 }

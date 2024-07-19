@@ -24,7 +24,7 @@
       {
         "name": "ts-lit-plugin",
         "strict": true,
-        "globalAttributes": ["mlv-text", "mlv-layout", "mlv-theme"],
+        "globalAttributes": ["nve-text", "nve-layout", "nve-theme"],
         "rules": {
           "no-unknown-tag-name": "off",
           "no-unknown-attribute": "off",

@@ -42,6 +42,7 @@ slot:not([name]) {
   display: contents;
 }
 
+::slotted([nve-text]),
 ::slotted([mlv-text]) {
   color: inherit !important;
 }

@@ -267,6 +267,8 @@ declare global {
   };
 
   interface HTMLElement {
+    'nve-text': string;
+    'nve-layout': string;
     'mlv-text': string;
     'mlv-layout': string;
   }
