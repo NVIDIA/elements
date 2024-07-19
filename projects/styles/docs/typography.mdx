@@ -1,7 +1,7 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import '@nvidia-elements/core/button/define.js';
 import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, Headings, Size, LeadingTrim, LineHeightFixed, LineHeightRelative } from './typography.stories';
-import { Text } from '../../../../themes/docs/tokens.stories';
+import { Text } from '../../themes/docs/tokens.stories';
 
 <Meta title="Foundations/Typography/Documentation" />
 
@@ -16,6 +16,17 @@ This enables full control of the visual styling of an element separate from the 
 <p nve-text="body">body</p>
 <p nve-text="label">label</p>
 <p nve-text="code">cmd+c</p>
+```
+
+## Installation
+
+```shell
+npm install @nvidia-elements/themes @nvidia-elements/styles
+```
+
+```css
+/* import the global CSS into your project (import may vary based on build tools) */
+@import '@nvidia-elements/styles/dist/typography.css';
 ```
 
 ## Framework Integrations
