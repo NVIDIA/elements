@@ -14,9 +14,9 @@ export default {
     '../../elements-react/docs/**/*.stories.tsx',
     '../../labs/code/src/**/*.mdx',
     '../../labs/code/src/**/*.stories.ts',
-    '../../labs/testing-lighthouse/docs/**/*.mdx',
-    '../../labs/testing-lighthouse/docs/**/*.stories.ts',
     '../../starters/lit-library/src/**/*.stories.ts',
+    '../../styles/docs/**/*.mdx',
+    '../../styles/docs/**/*.stories.ts',
     '../../testing/docs/**/*.mdx',
     '../../testing/docs/**/*.stories.ts',
     '../../themes/docs/**/*.mdx',
@@ -46,8 +46,6 @@ export default {
       },
       resolve: {
         alias: {
-          // '../../elements/src/badge/badge.stories': resolve('./projects/elements/src/badge/badge.stories'),
-          // '../../elements/src/dot/dot.stories': resolve('./projects/elements/src/dot/dot.stories'),
           '@storybook/addon-docs': resolve('node_modules/@storybook/addon-docs'),
           '@nvidia-elements/themes/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/themes/CHANGELOG.md?raw'),
           '@nvidia-elements/testing/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/testing/CHANGELOG.md?raw'),

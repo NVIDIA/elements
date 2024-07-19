@@ -12,34 +12,30 @@
 ## Getting Started
 
 ```bash
-# add internal registry to local .npmrc file (optional)
-@elements/elements:registry=https://registry.npmjs.org
+# local .npmrc file
+registry=https://registry.npmjs.org
 
-# install from registry
-pnpm install @elements/elements
+# https://registry.npmjs.org
+npm login
+
+# install core dependencies
+npm install @nvidia-elements/themes @elements/elements
 ```
 
 ```css
 /* import the global CSS into your project */
-@import '@elements/elements/dist/index.css';
-@import '@elements/elements/dist/inter.css';
+@import '@nvidia-elements/themes/dist/fonts/inter.css';
+@import '@nvidia-elements/themes/dist/index.css';
+@import '@nvidia-elements/themes/dist/dark.css';
 ```
 
-```ts
-// import and use individual elements (recommended)
+```javascript
+// Load via JavaScript imports to make available in HTML templates
 import '@elements/elements/button/define.js';
-import '@elements/elements/card/define.js';
-import '@elements/elements/icon/define.js';
-
-// import specific element type references
-import { Button } from '@elements/elements/button';
-
-// optional (polyfills for non-chromium browsers)
-import '@elements/elements/polyfills';
 ```
 
 ```html
-<nve-button>button</nve-button>
+<nve-button>hello there</nve-button>
 ```
 
 ## Framework Integrations

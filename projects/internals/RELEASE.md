@@ -37,7 +37,7 @@ To wire up a new project to semantic release the following must be completed:
 export const VERSION = '0.0.0';
 ```
 
-4. Add the library artifacts to the GitLab CI upload
+4. Add the library artifacts to the GitLab CI upload in `.github/workflows/ci.yml`
 
 ```yml
 artifacts:
@@ -48,7 +48,15 @@ artifacts:
       - projects/labs/my-library/package.json
 ```
 
-5. Add a new commit scope to `commitlint.config.js`
+5. Add library code coverage reports to GitLab CI upload in `.github/workflows/ci.yml`
+
+```yml
+reports:
+    junit:
+      - projects/labs/my-library/coverage/unit/junit.xml
+```
+
+6. Add a new commit scope to `commitlint.config.js`
 
 ```javascript
 'scope-enum': [
@@ -61,9 +69,9 @@ artifacts:
 ]
 ```
 
-6. Ensure a `README.md` and empty `CHANGELOG.md` exist in the root of the project.
+7. Ensure a `README.md` and empty `CHANGELOG.md` exist in the root of the project.
 
-7. Create a new MR with the above changes.
+8. Create a new MR with the above changes.
 
 ```shell
 feat(labs-my-library): release

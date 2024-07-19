@@ -10,7 +10,7 @@ function capitalize(string) {
 export function updateScope(source, config) {
   const { scope, sourceType } = config;
 
-  if (source.includes('@nve-labs') || source.includes('nve-codeblock')) {
+  if (source.includes('@nve-labs') || source.includes('nve-codeblock') || window.location.href.includes('internal')) {
     return source;
   }
 
@@ -25,7 +25,7 @@ export function updateScope(source, config) {
     .replaceAll(/(Mlv[\w-]*|Nve[\w-]*)/g, (_, value) => {
       return value.replaceAll('Mlv', capitalize(scope)).replaceAll('Nve', capitalize(scope));
     })
-    .replaceAll(/(@elements\/[\w-]*|@nve\/[\w-]*)/g, (_, value) => {
+    .replaceAll(/(@elements\/elements\/[\w-]*|@nve\/elements\/[\w-]*)/g, (_, value) => {
       const scopeImports = {
         'mlv': '@elements',
         'nve': '@nve'
