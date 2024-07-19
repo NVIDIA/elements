@@ -5,7 +5,8 @@
   "description": "Elements themes and tokens",
   "scripts": {
     "ci": "wireit",
-    "build": "wireit"
+    "build": "wireit",
+    "test:lighthouse": "wireit"
   },
   "files": [
     "README.md",
@@ -13,12 +14,15 @@
     "dist/**/*"
   ],
   "devDependencies": {
+    "@nvidia-elements/testing-lighthouse": "workspace:*",
     "chart.js": "4.4.0",
     "cssnano": "6.0.1",
     "glob": "10.3.10",
     "lit": "3.1.3",
     "postcss": "8.4.31",
-    "style-dictionary": "3.8.0"
+    "style-dictionary": "3.8.0",
+    "vite": "5.3.3",
+    "vitest": "2.0.3"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -43,6 +47,7 @@
       "command": "node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js && node ./build/version.js",
       "files": [
         "src/**",
+        "!src/**/*.test.lighthouse.ts",
         "build/style-dictionary.config.js",
         "build/style-dictionary.alias.js",
         "build/style-dictionary.minify.js"
@@ -56,13 +61,20 @@
       "command": "node ./build/css-var-completions.js",
       "files": [
         "build/css-var-completions.js",
-        "src/**"
+        "src/**",
+        "!src/**/*.test.lighthouse.ts"
       ],
       "output": [
         "dist/data.css-vars.json"
       ],
       "dependencies": [
         "build:styledictionary"
+      ]
+    },
+    "test:lighthouse": {
+      "command": "vitest run --config=vitest.lighthouse.ts",
+      "dependencies": [
+        "build"
       ]
     }
   }

@@ -150,7 +150,8 @@
     "@elements/elements": "workspace:^"
   },
   "devDependencies": {
-    "@elements/elements": "workspace:^",
+    "@elements/elements": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
@@ -245,7 +246,10 @@
       "service": true
     },
     "test:lighthouse": {
-      "command": "vitest run --config=vitest.lighthouse.ts"
+      "command": "vitest run --config=vitest.lighthouse.ts",
+      "dependencies": [
+        "build"
+      ]
     },
     "test:axe": {
       "command": "vitest run --config=vitest.axe.ts",
