@@ -151,7 +151,6 @@ for (const token of Object.values(categorizedTokens)) {
 // Collect all tokens with their paths transformed to css variable identifiers.
 const cssVarCompletions = {};
 for (const [path, token] of Object.entries(categorizedTokens)) {
-  cssVarCompletions[`--mlv-${path.replaceAll('.', '-')}`] = token;
   cssVarCompletions[`--nve-${path.replaceAll('.', '-')}`] = token;
 }
 

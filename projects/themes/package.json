@@ -3,6 +3,13 @@
   "version": "0.29.0",
   "type": "module",
   "description": "Elements themes and tokens",
+  "contributes": {
+    "cssVars": {
+      "customData": [
+        "./dist/data.css-vars.json"
+      ]
+    }
+  },
   "scripts": {
     "ci": "wireit",
     "build": "wireit",
