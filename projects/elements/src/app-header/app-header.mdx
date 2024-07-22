@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Default, AppBadge, NavItems, NavActions } from './app-header.stories';
+import { Default, AppBadge, NavItems, NavActions, Dropdown } from './app-header.stories';
 
 <Meta title="Elements/App Header/Documentation" />
 
@@ -17,7 +17,7 @@ import '@nvidia-elements/core/app-header/define.js';
 <nve-app-header>
   <nve-logo></nve-logo>
   <h2 slot="title">Workflows</h2>
-  <nve-button slot="nav-items" active>Link 1</nve-button>
+  <nve-button slot="nav-items" selected>Link 1</nve-button>
   <nve-button slot="nav-items">Link 2</nve-button>
   <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
   <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
@@ -46,6 +46,10 @@ import '@nvidia-elements/core/app-header/define.js';
 <element-api tag="nve-app-header" type="slot" value="nav-actions"></element-api>
 
 <Canvas of={NavActions} />
+
+## Dropdown
+
+<Canvas of={Dropdown} />
 
 <element-status tag="nve-app-header"></element-status>
 
