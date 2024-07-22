@@ -152,7 +152,6 @@ for (const token of Object.values(categorizedTokens)) {
 const cssVarCompletions = {};
 for (const [path, token] of Object.entries(categorizedTokens)) {
   cssVarCompletions[`--nve-${path.replaceAll('.', '-')}`] = token;
-  cssVarCompletions[`--nve-${path.replaceAll('.', '-')}`] = token;
 }
 
 if (!fs.existsSync(`${buildPath}`)) {
