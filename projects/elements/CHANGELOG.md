@@ -1,3 +1,10 @@
+## [@elements/elements-v0.40.0](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.39.1...@elements/elements-v0.40.0) (2024-07-23)
+
+
+### Features
+
+* **elements:** update mlv-text with support of line-height ([7593aff](https://github.com/NVIDIA/elements/commit/7593affa2b28088520bb16c589baf6578a5b588e))
+
 ## [@elements/elements-v0.39.1](https://github.com/NVIDIA/elements/compare/@elements/elements-v0.39.0...@elements/elements-v0.39.1) (2024-07-18)
 
 
