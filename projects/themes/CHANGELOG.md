@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v0.29.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.28.14...@nvidia-elements/themes-v0.29.0) (2024-07-23)
+
+
+### Features
+
+* **elements:** update nve-text with support of line-height ([7593aff](https://github.com/NVIDIA/elements/commit/7593affa2b28088520bb16c589baf6578a5b588e))
+
 ## [@nvidia-elements/themes-v0.28.14](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.28.13...@nvidia-elements/themes-v0.28.14) (2024-06-07)
 
 
