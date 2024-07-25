@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v0.29.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.29.0...@nvidia-elements/themes-v0.29.1) (2024-07-25)
+
+
+### Bug Fixes
+
+* **themes:** add contributions ([8414623](https://github.com/NVIDIA/elements/commit/841462366ab55c491a63b91203bd78b867e79fa9))
+
 ## [@nvidia-elements/themes-v0.29.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.28.14...@nvidia-elements/themes-v0.29.0) (2024-07-23)
 
 
