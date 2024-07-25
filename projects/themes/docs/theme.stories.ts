@@ -1,7 +1,7 @@
 import { html, css, LitElement, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import layout from '@nvidia-elements/core/css/module.layout.css?inline';
-import typography from '@nvidia-elements/core/css/module.typography.css?inline';
+import layout from '../../styles/dist/layout.css?inline';
+import typography from '../../styles/dist/typography.css?inline';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/select/define.js';

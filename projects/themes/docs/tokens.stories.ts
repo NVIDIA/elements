@@ -208,7 +208,7 @@ function getColorScale(color) {
 function getFormattedTokens(tokens, context: any, filter?: (toke: string) => boolean) {
   return Object.entries(tokens)
     .filter(([name]) => filter ? filter(name) : true)
-    .map(([name]) => ({ prop: `--${name.replace('nve', context.globals.scope)}`, value: getTokenValue(name, tokenJSON[name]) }))
+    .map(([name]) => ({ prop: `--${name.replace('nve', context.globals.scope)}`, value: getTokenValue(name, tokenJSON[name], context.globals.scope) }))
     .reduce((prev, next) => ({ ...prev, [next.prop]: next.value }), { });
 }
 
@@ -292,16 +292,17 @@ function renderTokenTable(tokens) {
   </table>`;
 }
 
-function getTokenValue(name: string, value: string) {
+function getTokenValue(name: string, value: string, scope) {
   const themeAttr =  document.querySelector('[nve-theme]')?.getAttribute('nve-theme');
   if (tokenJSON[name].includes('nve-')) {
     let tokens = tokenJSON;
     if (themeAttr?.includes('dark')) {
-      tokens = tokenJSONDark;
+      tokens = { ...tokenJSON, ...tokenJSONDark };
     } else if (themeAttr?.includes('high-contrast')) {
-      tokens = tokenJSONHighContrast;
+      tokens = { ...tokenJSON, ...tokenJSONHighContrast };
     }
-    return tokens[name].replace('nve-', '--nve-');
+
+    return tokens[name].replace('nve-', `--${scope}-`);
   } else if (value.startsWith('#') && value.length === 7) {
     const [h, s, l] = hexToHSL(getComputedStyle(document.documentElement).getPropertyValue(`--${name}`).trim());
     return `hsl(${h} ${s}% ${l}%)`;

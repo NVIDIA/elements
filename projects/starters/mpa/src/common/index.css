@@ -1,7 +1,10 @@
 @import '@elements/elements/index.css';
 @import '@elements/elements/inter.css';
 
-*:not(:defined),
-*:not(:defined) > * {
+body:has(:not(:defined)) {
   visibility: hidden;
+}
+
+@view-transition {
+  navigation: auto;
 }
