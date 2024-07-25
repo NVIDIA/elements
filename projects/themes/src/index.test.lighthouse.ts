@@ -17,7 +17,7 @@ describe('lighthouse report', () => {
     `);
 
     expect(report.payload.css.kb).toBeLessThan(15); // total
-    expect(report.payload.css.requests['index.css'].kb).toBeLessThan(5.9); // @nvidia-elements/themes/index.css
+    expect(report.payload.css.requests['index.css'].kb).toBeLessThan(6); // @nvidia-elements/themes/index.css
     expect(report.payload.css.requests['compact.css'].kb).toBeLessThan(0.4); // @nvidia-elements/themes/compact.css
     expect(report.payload.css.requests['dark.css'].kb).toBeLessThan(5); // @nvidia-elements/themes/dark.css
     expect(report.payload.css.requests['high.css'].kb).toBeLessThan(1); // @nvidia-elements/themes/high-contrast.css

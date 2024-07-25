@@ -1,8 +1,6 @@
 import { html, unsafeCSS, LitElement } from 'lit';
 import typography from '@nvidia-elements/core/css/module.typography.css?inline';
 import layout from '@nvidia-elements/core/css/module.layout.css?inline';
-import { defineScopedElement } from '@nvidia-elements/core/scoped';
-import { IconButton } from '@nvidia-elements/core/icon-button';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/notification/define.js';
 import '@nvidia-elements/core/password/define.js';
@@ -10,8 +8,6 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/input/define.js';
 import '@nvidia-elements/core/checkbox/define.js';
 import '@nvidia-elements/core/button/define.js';
-
-defineScopedElement('plugin', IconButton);
 
 export default {
   title: 'Internal/Integration'
@@ -37,10 +33,6 @@ customElements.get('my-element') || customElements.define('my-element', MyElemen
 
 export const Lit = {
   render: () => html`<my-element></my-element>`
-}
-
-export const ScopedElement = {
-  render: () => html`<nve-icon-button-plugin icon-name="cancel"></nve-icon-button-plugin>`
 }
 
 // used to trigger global option updates (theming) when all stories are isolated in iframes

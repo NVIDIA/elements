@@ -3,8 +3,8 @@ import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import showdown from 'showdown';
 import { define } from '@nvidia-elements/core/internal';
-import typography from '@nvidia-elements/core/css/module.typography.css?inline';
-import layout from '@nvidia-elements/core/css/module.layout.css?inline';
+import typography from '@nvidia-elements/styles/typography.css?inline';
+import layout from '@nvidia-elements/styles/layout.css?inline';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/tag/define.js';
@@ -788,7 +788,7 @@ class MetricDemo extends LitElement {
   }
 
   #search(e: any) {
-    const value = e.target.value.length ? searchJson(structuredClone(metrics[this.rawData]), e.target.value) : metrics[this.rawData];
+    const value = e.target.value.length ? searchJson(structuredClone(metrics['@nvidia-elements/core'][this.rawData]), e.target.value) : metrics['@nvidia-elements/core'][this.rawData];
     (this.shadowRoot as any).querySelector('nve-json-viewer').value = value;
   }
 }

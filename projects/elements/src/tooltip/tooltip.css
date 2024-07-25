@@ -51,7 +51,8 @@ nve-icon-button {
   right: 2px;
 }
 
-::slotted([nve-text]) ::slotted([nve-text]) {
+::slotted([nve-text]),
+::slotted([nve-text]) {
   color: inherit !important;
 }
 

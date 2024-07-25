@@ -41,7 +41,7 @@ describe(AlertBanner.metadata.tag, () => {
         </nve-alert>
       </nve-alert-banner>
     `);
-    alertGroup = fixture.querySelector(AlertBanner.metadata.tag);
+    alertGroup = fixture.querySelector('nve-alert-banner');
     await elementIsStable(alertGroup);
   });
 
@@ -50,7 +50,7 @@ describe(AlertBanner.metadata.tag, () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe([AlertBanner.metadata.tag], {
+    const results = await runAxe(['nve-alert-banner'], {
       rules: {
         'color-contrast': { enabled: false },
         'aria-prohibited-attr': { enabled: false }
