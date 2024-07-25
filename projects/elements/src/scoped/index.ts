@@ -13,6 +13,7 @@ export function scope(element: any, Mixin = ScopedRegistryHost) {
 }
 
 /**
+ * @deprecated
  * Utility for registering Elements with a scope suffix when Custom Element Scoped Registries are not available
  */
 export function defineScopedElement(suffix: string, Element: any, Mixin = ScopedRegistryHost) {
