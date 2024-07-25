@@ -21,7 +21,7 @@ writeFileSync(
   `:root, [nve-theme], [nve-theme] {
 ${css}
 
-  /* deprecations */
+  /* deprecated */
   --nve-sys-interaction-emphasize-background: var(--nve-sys-interaction-emphasis-background);
   --nve-sys-interaction-emphasize-color: var(--nve-sys-interaction-emphasis-color);
   --nve-sys-interaction-secondary-background: var(--nve-sys-accent-secondary-background);

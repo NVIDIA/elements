@@ -40,19 +40,19 @@ import { createComponent } from '@lit-labs/react';
 import { Dialog } from '@nvidia-elements/core/dialog/index.js';
 import '@nvidia-elements/core/dialog/define.js';
 
-const MlvDialog = createComponent({ react: React, tagName: 'nve-dialog', elementClass: Dialog, events: { onclose: 'close' } });
+const NveDialog = createComponent({ react: React, tagName: 'nve-dialog', elementClass: Dialog, events: { onclose: 'close' } });
 ```
 
-The `MlvDialog` React component can now be used within a the NextJS application.
+The `Dialog` React component can now be used within a the NextJS application.
 
 ```tsx
 // - closable - HTML attribute
 // - hidden - can update via attributes or JavaScript property binding
 // - onclose - event listener binding for 'close' custom event
 
-<MlvDialog closable modal hidden={!showDialog} onclose={() => setShowDialog(false)}>
+<NveDialog closable modal hidden={!showDialog} onclose={() => setShowDialog(false)}>
   ...
-</MlvDialog>
+</NveDialog>
 ```
 
 ## Dynamic Components
