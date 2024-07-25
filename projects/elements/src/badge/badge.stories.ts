@@ -15,7 +15,7 @@ export const Default = {
 
 export const Status = {
   render: () => html`
-<div mlv-layout="row gap:xs align:wrap">
+<div nve-layout="row gap:xs align:wrap">
   <mlv-badge status="scheduled">scheduled</mlv-badge>
   <mlv-badge status="queued">queued</mlv-badge>
   <mlv-badge status="pending">pending</mlv-badge>
@@ -33,7 +33,7 @@ export const Status = {
 
 export const StatusFlat = {
   render: () => html`
-<div mlv-layout="row gap:md align:wrap">
+<div nve-layout="row gap:md align:wrap">
   <mlv-badge container="flat" status="scheduled">scheduled</mlv-badge>
   <mlv-badge container="flat" status="queued">queued</mlv-badge>
   <mlv-badge container="flat" status="pending">pending</mlv-badge>
@@ -51,7 +51,7 @@ export const StatusFlat = {
 
 export const StatusIcon = {
   render: () => html`
-<div mlv-layout="row gap:md align:wrap">
+<div nve-layout="row gap:md align:wrap">
   <mlv-badge container="flat" status="scheduled" aria-label="scheduled"></mlv-badge>
   <mlv-badge container="flat" status="queued" aria-label="queued"></mlv-badge>
   <mlv-badge container="flat" status="pending" aria-label="pending"></mlv-badge>
@@ -69,7 +69,7 @@ export const StatusIcon = {
 
 export const Support = {
   render: () => html`
-<div mlv-layout="row gap:md">
+<div nve-layout="row gap:md">
   <mlv-badge status="accent">accent</mlv-badge>
   <mlv-badge status="warning">warning</mlv-badge>
   <mlv-badge status="success">success</mlv-badge>
@@ -80,7 +80,7 @@ export const Support = {
 
 export const StatusLightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="row gap:md pad:md align:wrap">
+<div mlv-theme="root light" nve-layout="row gap:md pad:md align:wrap">
   <mlv-badge status="scheduled">scheduled</mlv-badge>
   <mlv-badge status="queued">queued</mlv-badge>
   <mlv-badge status="pending">pending</mlv-badge>
@@ -98,7 +98,7 @@ export const StatusLightTheme = {
 
 export const StatusDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="row gap:md pad:md align:wrap">
+<div mlv-theme="root dark" nve-layout="row gap:md pad:md align:wrap">
   <mlv-badge status="scheduled">scheduled</mlv-badge>
   <mlv-badge status="queued">queued</mlv-badge>
   <mlv-badge status="pending">pending</mlv-badge>
@@ -116,7 +116,7 @@ export const StatusDarkTheme = {
 
 export const Trend = {
   render: () => html`
-<div mlv-layout="row gap:md">
+<div nve-layout="row gap:md">
   <mlv-badge status="trend-neutral">+15%</mlv-badge>
   <mlv-badge status="trend-up">+15%</mlv-badge>
   <mlv-badge status="trend-down">-15%</mlv-badge>
@@ -126,7 +126,7 @@ export const Trend = {
 
 export const Color = {
   render: () => html`
-<div mlv-layout="row gap:sm align:wrap">
+<div nve-layout="row gap:sm align:wrap">
   <mlv-badge color="red-cardinal"><mlv-icon name="placeholder"></mlv-icon> red-cardinal</mlv-badge>
   <mlv-badge color="gray-slate"><mlv-icon name="placeholder"></mlv-icon> gray-slate</mlv-badge>
   <mlv-badge color="gray-denim"><mlv-icon name="placeholder"></mlv-icon> gray-denim</mlv-badge>
@@ -155,7 +155,7 @@ export const Color = {
 
 export const Prominence = {
   render: () => html`
-<div mlv-layout="row gap:sm align:wrap">
+<div nve-layout="row gap:sm align:wrap">
   <mlv-badge prominence="emphasis" color="red-cardinal"><mlv-icon name="placeholder"></mlv-icon> red-cardinal</mlv-badge>
   <mlv-badge prominence="emphasis" color="gray-slate"><mlv-icon name="placeholder"></mlv-icon> gray-slate</mlv-badge>
   <mlv-badge prominence="emphasis" color="gray-denim"><mlv-icon name="placeholder"></mlv-icon> gray-denim</mlv-badge>
@@ -184,7 +184,7 @@ export const Prominence = {
 
 export const Flat = {
   render: () => html`
-<div mlv-layout="row gap:sm align:wrap">
+<div nve-layout="row gap:sm align:wrap">
   <mlv-badge container="flat" color="red-cardinal"><mlv-icon name="placeholder"></mlv-icon> red-cardinal</mlv-badge>
   <mlv-badge container="flat" color="gray-slate"><mlv-icon name="placeholder"></mlv-icon> gray-slate</mlv-badge>
   <mlv-badge container="flat" color="gray-denim"><mlv-icon name="placeholder"></mlv-icon> gray-denim</mlv-badge>

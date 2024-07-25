@@ -15,7 +15,7 @@ export const Default = {
 
 export const Closable = {
   render: () => html`
-  <div mlv-layout="row gap:xs align:wrap">
+  <div nve-layout="row gap:xs align:wrap">
     <mlv-tag closable>default-color</mlv-tag>
     <mlv-tag closable color="red-cardinal">red-cardinal</mlv-tag>
     <mlv-tag closable color="gray-slate">gray-slate</mlv-tag>
@@ -51,7 +51,7 @@ export const Readonly = {
 
 export const TagGroup = {
   render: () => html`
-   <div mlv-layout="row gap:xs align:vertical-center">
+   <div nve-layout="row gap:xs align:vertical-center">
     <mlv-tag>topic-tag</mlv-tag>
     <mlv-tag>topic-tag</mlv-tag>
     <mlv-tag>topic-tag</mlv-tag>
@@ -64,7 +64,7 @@ export const TagGroup = {
 
 export const Color = {
   render: () => html`
-<div mlv-layout="row gap:xs align:wrap">
+<div nve-layout="row gap:xs align:wrap">
   <mlv-tag>default-color</mlv-tag>
   <mlv-tag color="red-cardinal">red-cardinal</mlv-tag>
   <mlv-tag color="gray-slate">gray-slate</mlv-tag>
@@ -94,7 +94,7 @@ export const Color = {
 
 export const Prominence = {
   render: () => html`
-<div mlv-layout="row gap:xs align:wrap">
+<div nve-layout="row gap:xs align:wrap">
   <mlv-tag prominence="emphasis" color="red-cardinal">red-cardinal</mlv-tag>
   <mlv-tag prominence="emphasis" color="gray-slate">gray-slate</mlv-tag>
   <mlv-tag prominence="emphasis" color="gray-denim">gray-denim</mlv-tag>
@@ -123,7 +123,7 @@ export const Prominence = {
 
 export const LightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="row gap:xs align:wrap pad:sm" style="background: var(--mlv-sys-layer-container-background) !important;">
+<div mlv-theme="root light" nve-layout="row gap:xs align:wrap pad:sm" style="background: var(--mlv-sys-layer-container-background) !important;">
   <mlv-tag>default-color</mlv-tag>
   <mlv-tag color="red-cardinal">red-cardinal</mlv-tag>
   <mlv-tag color="gray-slate">gray-slate</mlv-tag>
@@ -153,7 +153,7 @@ export const LightTheme = {
 
 export const DarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="row gap:xs align:wrap pad:sm">
+<div mlv-theme="root dark" nve-layout="row gap:xs align:wrap pad:sm">
   <mlv-tag>default-color</mlv-tag>
   <mlv-tag color="red-cardinal">red-cardinal</mlv-tag>
   <mlv-tag color="gray-slate">gray-slate</mlv-tag>

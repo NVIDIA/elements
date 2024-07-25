@@ -23,7 +23,7 @@ export const Default = {
 
 export const LightTheme = {
   render: () => html`
-  <div mlv-theme="root light" mlv-layout="row gap:sm pad:md">
+  <div mlv-theme="root light" nve-layout="row gap:sm pad:md">
     <mlv-tabs behavior-select>
       <mlv-tabs-item selected>Tab 1</mlv-tabs-item>
       <mlv-tabs-item>Tab 2</mlv-tabs-item>
@@ -37,7 +37,7 @@ export const LightTheme = {
 
 export const DarkTheme = {
   render: () => html`
-  <div mlv-theme="root dark" mlv-layout="row gap:sm pad:md">
+  <div mlv-theme="root dark" nve-layout="row gap:sm pad:md">
     <mlv-tabs behavior-select>
       <mlv-tabs-item selected> Tab 1</mlv-tabs-item>
       <mlv-tabs-item>Tab 2</mlv-tabs-item>

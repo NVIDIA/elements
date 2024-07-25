@@ -34,7 +34,7 @@ export const Datalist = {
 
 export const Vertical = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-week>
     <label>label</label>
     <input type="week" />
@@ -63,7 +63,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-week layout="horizontal">
     <label>label</label>
     <input type="week" />

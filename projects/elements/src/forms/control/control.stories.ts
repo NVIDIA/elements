@@ -25,7 +25,7 @@ export const Control = () => {
 
 export const Responsive = () => {
   return html`
-  <div mlv-layout="column gap:lg" style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal; max-width: 600px;">
+  <div nve-layout="column gap:lg" style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal; max-width: 600px;">
     <mlv-input layout="horizontal">
       <label>text label</label>
       <input />

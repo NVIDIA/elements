@@ -59,7 +59,7 @@ export const Action = {
 
 export const ActionSplit = {
   render: () => html`
-    <div mlv-layout="row gap:sm">
+    <div nve-layout="row gap:sm">
       <mlv-button-group>
         <mlv-button>button</mlv-button>
         <mlv-divider orientation="vertical"></mlv-divider>
@@ -83,7 +83,7 @@ export const ActionSplit = {
 
 export const ActionSplitRounded = {
   render: () => html`
-    <div mlv-layout="row gap:sm">
+    <div nve-layout="row gap:sm">
       <mlv-button-group container="rounded">
         <mlv-button>button</mlv-button>
         <mlv-divider orientation="vertical"></mlv-divider>

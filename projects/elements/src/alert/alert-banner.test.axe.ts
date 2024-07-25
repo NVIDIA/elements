@@ -11,37 +11,37 @@ describe(AlertBanner.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <mlv-alert-banner>
-        <mlv-alert closable>
-          <span slot="prefix">default</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
-        </mlv-alert>
-      </mlv-alert-banner>
+      <nve-alert-banner>
+        <nve-alert closable>
+          <span slot="prefix">default</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+        </nve-alert>
+      </nve-alert-banner>
 
-      <mlv-alert-banner status="accent">
-        <mlv-alert closable>
-          <span slot="prefix">accent</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
-        </mlv-alert>
-      </mlv-alert-banner>
+      <nve-alert-banner status="accent">
+        <nve-alert closable>
+          <span slot="prefix">accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+        </nve-alert>
+      </nve-alert-banner>
 
-      <mlv-alert-banner status="warning">
-        <mlv-alert closable>
-          <span slot="prefix">warning</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
-        </mlv-alert>
-      </mlv-alert-banner>
+      <nve-alert-banner status="warning">
+        <nve-alert closable>
+          <span slot="prefix">warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+        </nve-alert>
+      </nve-alert-banner>
 
-      <mlv-alert-banner status="success">
-        <mlv-alert closable>
-          <span slot="prefix">success</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
-        </mlv-alert>
-      </mlv-alert-banner>
+      <nve-alert-banner status="success">
+        <nve-alert closable>
+          <span slot="prefix">success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+        </nve-alert>
+      </nve-alert-banner>
 
-      <mlv-alert-banner status="danger">
-        <mlv-alert closable>
-          <span slot="prefix">danger</span> banner message <a href="#" mlv-text="link" slot="actions">view details</a>
-        </mlv-alert>
-      </mlv-alert-banner>
+      <nve-alert-banner status="danger">
+        <nve-alert closable>
+          <span slot="prefix">danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
+        </nve-alert>
+      </nve-alert-banner>
     `);
-    alertGroup = fixture.querySelector(AlertBanner.metadata.tag);
+    alertGroup = fixture.querySelector('nve-alert-banner');
     await elementIsStable(alertGroup);
   });
 
@@ -50,7 +50,7 @@ describe(AlertBanner.metadata.tag, () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe([AlertBanner.metadata.tag], {
+    const results = await runAxe(['nve-alert-banner'], {
       rules: {
         'color-contrast': { enabled: false },
         'aria-prohibited-attr': { enabled: false }

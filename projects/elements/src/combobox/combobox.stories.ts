@@ -36,7 +36,7 @@ export const Default = () => {
 
 export const Vertical = () => {
   return html`
-<div mlv-layout="column gap:lg">
+<div nve-layout="column gap:lg">
   <mlv-combobox>
     <label>label</label>
     <input type="search" />
@@ -97,7 +97,7 @@ export const Vertical = () => {
 
 export const Horizontal = () => {
   return html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-combobox layout="horizontal">
     <label>label</label>
     <input type="search" />
@@ -324,7 +324,7 @@ export const SelectAll = () => {
       <option value="user"></option>
       <option value="progress"></option>
     </select>
-    <div slot="footer" mlv-layout="row align:stretch full">
+    <div slot="footer" nve-layout="row align:stretch full">
       <mlv-button container="flat">Select All</mlv-button>
       <mlv-button container="flat">Deselect All</mlv-button>
     </div>

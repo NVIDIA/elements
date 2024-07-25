@@ -70,8 +70,8 @@ class IconDemo extends LitElement {
     </style>
 
     <mlv-card>
-      <mlv-card-content mlv-layout="column gap:lg">
-        <form @submit=${e => e.preventDefault()} @input=${this.#input} mlv-layout="row gap:md align:vertical-center full">
+      <mlv-card-content nve-layout="column gap:lg">
+        <form @submit=${e => e.preventDefault()} @input=${this.#input} nve-layout="row gap:md align:vertical-center full">
           <mlv-search style="width: 350px">
             <input type="search" @input=${e => this.iconSearchKey = e.target.value} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
           </mlv-search>
@@ -98,12 +98,12 @@ class IconDemo extends LitElement {
           </mlv-checkbox>
         </form>          
 
-        <div mlv-layout="grid gap:md span-items:2">
+        <div nve-layout="grid gap:md span-items:2">
           ${ICON_NAMES.filter((iconName) => iconName.includes(this.iconSearchKey)).map((iconName) => html`
             <mlv-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." container="flat">
-              <div mlv-layout="column align:center gap:md">
+              <div nve-layout="column align:center gap:md">
                 <mlv-icon ?outline=${this.values.outline} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></mlv-icon>
-                <h3 mlv-text="label sm light muted">${iconName}</h3>
+                <h3 nve-text="label sm light muted">${iconName}</h3>
               </div>
             </mlv-button>`
     )}
@@ -134,7 +134,7 @@ class IconDemo extends LitElement {
     const notification = document.createElement('mlv-notification');
     notification.closable = true;
     notification.closeTimeout = 2000;
-    notification.innerHTML = `<h3 mlv-text="label">Copied!</h3><p mlv-text="body">${iconCode} icon code copied to clipboard.</p>`;
+    notification.innerHTML = `<h3 nve-text="label">Copied!</h3><p nve-text="body">${iconCode} icon code copied to clipboard.</p>`;
     notification.addEventListener('close', () => notification.remove(), { once: true });
     document.querySelector('mlv-notification-group').prepend(notification);
   }
@@ -815,12 +815,12 @@ const GUI_NAMES = [
 
 export const Branding = {
   render: () => html`
-    <div mlv-layout="column gap:md">
-      <div mlv-layout="row align:wrap gap:xs">
+    <div nve-layout="column gap:md">
+      <div nve-layout="row align:wrap gap:xs">
         ${GUI_NAMES.map(name => html`<mlv-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/line/${name}.svg` as any} size="xl"></mlv-icon>`)}
       </div>
       <mlv-divider></mlv-divider>
-      <div mlv-layout="row align:wrap gap:xs">
+      <div nve-layout="row align:wrap gap:xs">
         ${GUI_NAMES.map(name => html`<mlv-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/fill/${name}.svg` as any} size="xl"></mlv-icon>`)}
       </div>
     </div>

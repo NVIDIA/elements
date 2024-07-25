@@ -12,7 +12,7 @@ export const Default = {
 
 export const Status = {
   render: () => html`
-<div mlv-layout="column gap:md">
+<div nve-layout="column gap:md">
   <mlv-alert>Standard</mlv-alert>
   <mlv-alert status="accent">Accent</mlv-alert>
   <mlv-alert status="warning">Warning</mlv-alert>
@@ -24,7 +24,7 @@ export const Status = {
 
 export const StatusLightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="column gap:md pad:md">
+<div mlv-theme="root light" nve-layout="column gap:md pad:md">
   <mlv-alert>Standard</mlv-alert>
   <mlv-alert status="accent">Accent</mlv-alert>
   <mlv-alert status="warning">Warning</mlv-alert>
@@ -36,7 +36,7 @@ export const StatusLightTheme = {
 
 export const StatusDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="column gap:md pad:md">
+<div mlv-theme="root dark" nve-layout="column gap:md pad:md">
   <mlv-alert>Standard</mlv-alert>
   <mlv-alert status="accent">Accent</mlv-alert>
   <mlv-alert status="warning">Warning</mlv-alert>
@@ -48,7 +48,7 @@ export const StatusDarkTheme = {
 
 export const TaskStatus = {
   render: () => html`
-<div mlv-layout="column gap:md">
+<div nve-layout="column gap:md">
   <mlv-alert status="scheduled">Scheduled</mlv-alert>
   <mlv-alert status="queued">Queued</mlv-alert>
   <mlv-alert status="finished">Finished</mlv-alert>
@@ -66,7 +66,7 @@ export const TaskStatus = {
 
 export const TaskStatusLightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="column gap:md pad:md">
+<div mlv-theme="root light" nve-layout="column gap:md pad:md">
   <mlv-alert status="scheduled">Scheduled</mlv-alert>
   <mlv-alert status="queued">Queued</mlv-alert>
   <mlv-alert status="pending">Pending</mlv-alert>
@@ -83,7 +83,7 @@ export const TaskStatusLightTheme = {
 
 export const TaskStatusDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="column gap:md pad:md">
+<div mlv-theme="root dark" nve-layout="column gap:md pad:md">
   <mlv-alert status="scheduled">Scheduled</mlv-alert>
   <mlv-alert status="queued">Queued</mlv-alert>
   <mlv-alert status="pending">Pending</mlv-alert>

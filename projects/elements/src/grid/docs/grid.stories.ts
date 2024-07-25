@@ -89,7 +89,7 @@ export const MultiSelectBulkActions = {
   `)}
   <mlv-toolbar status="accent" slot="footer">
     <mlv-icon-button container="flat" icon-name="cancel" slot="prefix"></mlv-icon-button>
-    <p mlv-text="boxy">1 selected</p>
+    <p nve-text="boxy">1 selected</p>
     <mlv-button container="flat" interaction="destructive" slot="suffix">delete</mlv-button>
     <mlv-icon-button container="flat" icon-name="more-actions" slot="suffix"></mlv-icon-button>
   </mlv-toolbar>
@@ -226,7 +226,7 @@ render: () => html`
     </mlv-grid-row>
   `)}
   <mlv-grid-footer>
-    <p mlv-text="body">footer content</p>
+    <p nve-text="body">footer content</p>
   </mlv-grid-footer>
 </mlv-grid>
   `
@@ -244,7 +244,7 @@ export const FooterScrollbar = {
     </mlv-grid-row>
   `)}
   <mlv-grid-footer>
-    <p mlv-text="body">footer content</p>
+    <p nve-text="body">footer content</p>
   </mlv-grid-footer>
 </mlv-grid>
   `
@@ -308,11 +308,11 @@ export const ScrollPosition = {
 
 export const FullHeight = {
   render: () => html`
-<section mlv-layout="column gap:lg" style="height: 500px; padding: var(--mlv-ref-size-100); border: 1px solid var(--mlv-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
+<section nve-layout="column gap:lg" style="height: 500px; padding: var(--mlv-ref-size-100); border: 1px solid var(--mlv-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
   <mlv-search>
     <input type="search" aria-label="search" placeholder="search" />
   </mlv-search>
-  <mlv-grid mlv-layout="full">
+  <mlv-grid nve-layout="full">
     <mlv-grid-header>
       ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
@@ -483,7 +483,7 @@ export const ColumnAlignStart = {
 
 export const DisplaySettings = {
   render: () => html`
-<div mlv-layout="column gap:md full">
+<div nve-layout="column gap:md full">
   <mlv-dropdown closable anchor="column-settings">
     <mlv-checkbox-group style="width: 175px">
       <label>Columns</label>
@@ -507,11 +507,11 @@ export const DisplaySettings = {
     <mlv-divider></mlv-divider>
     <mlv-button interaction="flat-destructive" style="--height: initial">restore settings</mlv-button>
   </mlv-dropdown>
-  <div mlv-layout="row gap:sm align:vertical-center">
-    <p mlv-text="body muted">1,145 results found</p>
+  <div nve-layout="row gap:sm align:vertical-center">
+    <p nve-text="body muted">1,145 results found</p>
     <mlv-button id="column-settings">Display Settings</mlv-button>
   </div>
-  <mlv-grid mlv-layout="full">
+  <mlv-grid nve-layout="full">
     <mlv-grid-header>
       ${grid(8, 4).columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
     </mlv-grid-header>
@@ -746,8 +746,8 @@ export const Card = {
   render: () => html`
 <mlv-card>
   <mlv-card-header>
-    <h2 mlv-text="heading sm bold">Data Grid</h2>
-    <h3 mlv-text="body muted">Card Example</h3>
+    <h2 nve-text="heading sm bold">Data Grid</h2>
+    <h3 nve-text="body muted">Card Example</h3>
     <mlv-icon-button slot="header-action" icon-name="more-actions"></mlv-icon-button>
   </mlv-card-header>
   <mlv-grid container="flat" style="--scroll-height: 325px">
@@ -768,7 +768,7 @@ export const CardTabs = {
   render: () => html`
 <mlv-card>
   <mlv-card-header>
-    <h2 mlv-text="heading sm bold">Data Grid</h2>
+    <h2 nve-text="heading sm bold">Data Grid</h2>
     <mlv-tabs>
       <mlv-tabs-item selected>tab 1</mlv-tabs-item>
       <mlv-tabs-item>tab 2</mlv-tabs-item>
@@ -809,9 +809,9 @@ export const PlaceholderRetry = {
     <mlv-grid-column></mlv-grid-column>
   </mlv-grid-header>
   <mlv-grid-placeholder>
-    <div mlv-layout="column gap:md align:center">
-      <h2 mlv-text="heading">Data not found</h2>
-      <p mlv-text="body">Try adjusting filter settings or try again later.</p>
+    <div nve-layout="column gap:md align:center">
+      <h2 nve-text="heading">Data not found</h2>
+      <p nve-text="body">Try adjusting filter settings or try again later.</p>
       <mlv-button>Retry</mlv-button>
     </div>
   </mlv-grid-placeholder>
@@ -852,7 +852,7 @@ export const Flat = {
 
 export const PanelDetail = {
   render: () => html`
-<div id="grid-detail-panel" mlv-layout="row gap:md align:stretch">
+<div id="grid-detail-panel" nve-layout="row gap:md align:stretch">
   <mlv-grid>
     <mlv-grid-header>
       ${grid(10, 3).columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
@@ -872,17 +872,17 @@ export const PanelDetail = {
       <h2 slot="title">Row 2 Details</h2>
     </mlv-panel-header>
     <mlv-panel-content>
-      <div mlv-layout="column gap:md">
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Task</label>
-          <p mlv-text="eyebrow sm">Workflow</p>
+      <div nve-layout="column gap:md">
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Task</label>
+          <p nve-text="eyebrow sm">Workflow</p>
         </div>
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Status</label>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Status</label>
           <mlv-badge status="success">Complete</mlv-badge>
         </div>
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Priority</label>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Priority</label>
           <mlv-badge status="pending">P1</mlv-badge>
         </div>
       </div>
@@ -913,8 +913,8 @@ export const PanelGrid = {
         padding: 0 !important;
       }
     </style>
-    <main mlv-layout="row gap:sm full">
-      <section mlv-layout="column gap:md full align:stretch">
+    <main nve-layout="row gap:sm full">
+      <section nve-layout="column gap:md full align:stretch">
         page content
       </section>
       <mlv-panel expanded id="panel-grid">
@@ -927,36 +927,36 @@ export const PanelGrid = {
             <mlv-grid-column>Value</mlv-grid-column>
           </mlv-grid-header>
           <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="label muted">Session ID</p></mlv-grid-cell>
-            <mlv-grid-cell><p mlv-text="label">123456</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label muted">Session ID</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label">123456</p></mlv-grid-cell>
           </mlv-grid-row>
           <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="label muted">Record Date</p></mlv-grid-cell>
-            <mlv-grid-cell><p mlv-text="label">2023-09-04 11:00</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label muted">Record Date</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label">2023-09-04 11:00</p></mlv-grid-cell>
           </mlv-grid-row>
           <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="label muted">Tag</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label muted">Tag</p></mlv-grid-cell>
             <mlv-grid-cell><mlv-tag readonly>Production</mlv-tag></mlv-grid-cell>
           </mlv-grid-row>
           <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="label muted">Route ID</p></mlv-grid-cell>
-            <mlv-grid-cell><p mlv-text="label">9876123</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label muted">Route ID</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label">9876123</p></mlv-grid-cell>
           </mlv-grid-row>
           <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="label muted">Configuration</p></mlv-grid-cell>
-            <mlv-grid-cell><p mlv-text="label">prod-0.1.0</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label muted">Configuration</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label">prod-0.1.0</p></mlv-grid-cell>
           </mlv-grid-row>
           <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="label muted">Duration</p></mlv-grid-cell>
-            <mlv-grid-cell><p mlv-text="label">1:23:34</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label muted">Duration</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label">1:23:34</p></mlv-grid-cell>
           </mlv-grid-row>
           <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="label muted">Description</p></mlv-grid-cell>
-            <mlv-grid-cell><p mlv-text="label">local test run</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label muted">Description</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label">local test run</p></mlv-grid-cell>
           </mlv-grid-row>
           <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="label muted">Number of Sensors</p></mlv-grid-cell>
-            <mlv-grid-cell><p mlv-text="label">24</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label muted">Number of Sensors</p></mlv-grid-cell>
+            <mlv-grid-cell><p nve-text="label">24</p></mlv-grid-cell>
           </mlv-grid-row>
         </mlv-grid>
       </mlv-panel>
@@ -974,7 +974,7 @@ class GridPanelDemo extends LitElement {
 
   render() {
     return html`
-      <div mlv-layout="row gap:md align:stretch" style="height: calc(100% - 28px)">
+      <div nve-layout="row gap:md align:stretch" style="height: calc(100% - 28px)">
         <mlv-grid>
           <mlv-grid-header>
             ${this.#grid.columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
@@ -1016,7 +1016,7 @@ class GridDynamicColumnDemo extends LitElement {
 
   render() {
     return html`
-      <div mlv-layout="row gap:md align:stretch" style="height: calc(100% - 28px)">
+      <div nve-layout="row gap:md align:stretch" style="height: calc(100% - 28px)">
         <mlv-grid>
           <mlv-grid-header>
             ${this.grid.columns.map((column, i) => html`<mlv-grid-column width="200px" position=${(i === this.grid.columns.length - 1) || (i === 0) ? 'fixed' : ''}>${column.label}</mlv-grid-column> `)}
@@ -1047,97 +1047,97 @@ export const ColumnDynamicFixed = {
 
 export const All = {
   render: () => html`
-<div mlv-layout="grid gap:lg span-items:4 pad:md">
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Grid</h2>
+<div nve-layout="grid gap:lg span-items:4 pad:md">
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Grid</h2>
     ${Default.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Multi Select</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Multi Select</h2>
     ${MultiSelect.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Multi Select Bulk Actions</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Multi Select Bulk Actions</h2>
     ${MultiSelectBulkActions.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Single Select</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Single Select</h2>
     ${SingleSelect.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Card Tabs</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Card Tabs</h2>
     ${CardTabs.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Panel Detail</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Panel Detail</h2>
     ${PanelDetail.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Column Multi Fixed</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Column Multi Fixed</h2>
     ${ColumnMultiFixed.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Column Fixed</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Column Fixed</h2>
     ${ColumnFixed.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Column Dynamic Fixed</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Column Dynamic Fixed</h2>
     ${ColumnDynamicFixed.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Column Width</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Column Width</h2>
     ${ColumnWidth.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Footer</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Footer</h2>
     ${Footer.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Scroll</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Scroll</h2>
     ${Scroll.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Column Align center</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Column Align center</h2>
     ${ColumnAlignCenter.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Column Align End</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Column Align End</h2>
     ${ColumnAlignEnd.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Row Action</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Row Action</h2>
     ${RowAction.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Row Sort</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Row Sort</h2>
     ${RowSort.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Pagination</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Pagination</h2>
     ${Pagination.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Stripe</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Stripe</h2>
     ${Stripe.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Card</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Card</h2>
     ${Card.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Placeholder</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Placeholder</h2>
     ${Placeholder.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Full</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Full</h2>
     ${Full.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Flat</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Flat</h2>
     ${Flat.render()}
   </div>
-  <div mlv-layout="column gap:md align:stretch">
-    <h2 mlv-text="heading">Content Width</h2>
+  <div nve-layout="column gap:md align:stretch">
+    <h2 nve-text="heading">Content Width</h2>
     ${Content.render()}
   </div>
 </div>`

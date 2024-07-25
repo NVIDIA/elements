@@ -19,7 +19,7 @@ export default {
 export const Default = {
   render: () => html`
     <div style="height: 250px; width: 100%; display: flex; align-items:center; justify-content: center;">
-      <mlv-dropdown anchor="btn"><p mlv-text="body">dropdown content</p></mlv-dropdown>
+      <mlv-dropdown anchor="btn"><p nve-text="body">dropdown content</p></mlv-dropdown>
       <mlv-button id="btn">button</mlv-button>
     </div>
   `
@@ -30,7 +30,7 @@ export const Interactive = {
   render: () => html`
 <mlv-button id="dropdown-btn">open</mlv-button>
 <mlv-dropdown anchor="dropdown-btn" trigger="dropdown-btn" hidden>
-  <p mlv-text="body">hello there</p>
+  <p nve-text="body">hello there</p>
 </mlv-dropdown>
 <script>
   const dropdown = document.querySelector('mlv-dropdown');
@@ -42,7 +42,7 @@ export const Interactive = {
 
 export const DynamicTrigger = {
   render: () => html`
-<div id="dynamic-trigger-demo" mlv-layout="row align:center" style="height: 250px">
+<div id="dynamic-trigger-demo" nve-layout="row align:center" style="height: 250px">
   <mlv-dropdown behavior-trigger hidden>hello there</mlv-dropdown>
   <mlv-button>button</mlv-button>
   <mlv-button>button</mlv-button>
@@ -65,7 +65,7 @@ export const BehaviorTrigger = {
   render: () => html`
 <mlv-button id="dropdown-btn">open</mlv-button>
 <mlv-dropdown anchor="dropdown-btn" trigger="dropdown-btn" behavior-trigger hidden>
-  <p mlv-text="body">hello there</p>
+  <p nve-text="body">hello there</p>
 </mlv-dropdown>
   `
 };
@@ -201,8 +201,8 @@ export const CheckboxGroupInteractive = {
 export const Closable = {
   render: () => html`
 <mlv-dropdown anchor="btn" closable>
-  <h3 mlv-text="label">Title</h3>
-  <p mlv-text="body">some text content in a closable dropdown</p>
+  <h3 nve-text="label">Title</h3>
+  <p nve-text="body">some text content in a closable dropdown</p>
 </mlv-dropdown>
 <mlv-button id="btn">button</mlv-button>
   `
@@ -210,10 +210,10 @@ export const Closable = {
 
 export const Arrow = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 200px">
+<div nve-layout="row align:center" style="height: 200px">
   <mlv-dropdown anchor="btn" arrow>
-    <h3 mlv-text="label">Title</h3>
-    <p mlv-text="body">some text content in a closable dropdown</p>
+    <h3 nve-text="label">Title</h3>
+    <p nve-text="body">some text content in a closable dropdown</p>
   </mlv-dropdown>
   <mlv-button id="btn">button</mlv-button>
 </div>
@@ -222,22 +222,22 @@ export const Arrow = {
 
 export const Position = {
   render: () => html`
-<div mlv-theme mlv-layout="row align:center" style="width: 100%; height: 400px;">
+<div mlv-theme nve-layout="row align:center" style="width: 100%; height: 400px;">
   <mlv-dropdown anchor="card" position="top" alignment="center" closable>
-    <h3 mlv-text="label">Top</h3>
-    <p mlv-text="body">dropdown positioned top</p>
+    <h3 nve-text="label">Top</h3>
+    <p nve-text="body">dropdown positioned top</p>
   </mlv-dropdown>
   <mlv-dropdown anchor="card" position="right" alignment="center" closable>
-    <h3 mlv-text="label">Right</h3>
-    <p mlv-text="body">dropdown positioned right</p>
+    <h3 nve-text="label">Right</h3>
+    <p nve-text="body">dropdown positioned right</p>
   </mlv-dropdown>
   <mlv-dropdown anchor="card" position="bottom" alignment="center" closable>
-    <h3 mlv-text="label">Bottom</h3>
-    <p mlv-text="body">dropdown positioned bottom</p>
+    <h3 nve-text="label">Bottom</h3>
+    <p nve-text="body">dropdown positioned bottom</p>
   </mlv-dropdown>
   <mlv-dropdown anchor="card" position="left" alignment="center" closable>
-    <h3 mlv-text="label">Left</h3>
-    <p mlv-text="body">dropdown positioned left</p>
+    <h3 nve-text="label">Left</h3>
+    <p nve-text="body">dropdown positioned left</p>
   </mlv-dropdown>
   <mlv-card id="card" style="width: 250px; height: 200px;"></mlv-card>
 </div>
@@ -246,7 +246,7 @@ export const Position = {
 
 export const Alignment = {
   render: () => html`
-<div mlv-theme mlv-layout="row align:center">
+<div mlv-theme nve-layout="row align:center">
   <mlv-dropdown anchor="card" position="top" alignment="start">top start</mlv-dropdown>
   <mlv-dropdown anchor="card" position="top" alignment="center">top center</mlv-dropdown>
   <mlv-dropdown anchor="card" position="top" alignment="end">top end</mlv-dropdown>
@@ -272,11 +272,11 @@ export const HeaderFooter = {
   render: () => html `
 <mlv-dropdown anchor="btn" closable>
   <mlv-dropdown-header>
-    <h3 mlv-text="heading semibold sm">heading</h3>
+    <h3 nve-text="heading semibold sm">heading</h3>
   </mlv-dropdown-header>
-  <p mlv-text="body">some text content in a closable dropdown</p>
+  <p nve-text="body">some text content in a closable dropdown</p>
   <mlv-dropdown-footer>
-    <p mlv-text="body">footer</p>
+    <p nve-text="body">footer</p>
   </mlv-dropdown-footer>
 </mlv-dropdown>
 <mlv-button id="btn">button</mlv-button>

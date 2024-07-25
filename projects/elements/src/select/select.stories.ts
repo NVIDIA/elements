@@ -38,25 +38,25 @@ export const CustomOptionRender = {
       CI Services
     </option>
   </select>
-    <div slot="option-1" mlv-layout="row gap:xs align:vertical-center">
+    <div slot="option-1" nve-layout="row gap:xs align:vertical-center">
       <mlv-logo color="pink-rose">Db</mlv-logo>
-      <p mlv-layout="column gap:xs">
-        <span mlv-text="label">Debugger</span>
-        <span mlv-text="body muted">some details on option 1</span>
+      <p nve-layout="column gap:xs">
+        <span nve-text="label">Debugger</span>
+        <span nve-text="body muted">some details on option 1</span>
       </p>
     </div>
-    <div slot="option-2" mlv-layout="row gap:xs align:vertical-center">
+    <div slot="option-2" nve-layout="row gap:xs align:vertical-center">
       <mlv-logo color="blue-cobalt">TM</mlv-logo>
-      <p mlv-layout="column gap:xs">
-        <span mlv-text="label">Task Manager</span>
-        <span mlv-text="body muted">some details on option 2</span>
+      <p nve-layout="column gap:xs">
+        <span nve-text="label">Task Manager</span>
+        <span nve-text="body muted">some details on option 2</span>
       </p>
     </div>
-    <div slot="option-3" mlv-layout="row gap:xs align:vertical-center">
+    <div slot="option-3" nve-layout="row gap:xs align:vertical-center">
       <mlv-logo color="green-mint">CI</mlv-logo>
-      <p mlv-layout="column gap:xs">
-        <span mlv-text="label">CI Services</span>
-        <span mlv-text="body muted">some details on option 3</span>
+      <p nve-layout="column gap:xs">
+        <span nve-text="label">CI Services</span>
+        <span nve-text="body muted">some details on option 3</span>
       </p>
     </div>
   <mlv-control-message>message</mlv-control-message>
@@ -79,7 +79,7 @@ export const Prefix = {
 
 export const Flat = {
   render: () => html`
-<div mlv-layout="column gap:xl align:stretch">
+<div nve-layout="column gap:xl align:stretch">
   <mlv-select container="flat">
     <label>label</label>
     <select>
@@ -104,7 +104,7 @@ export const Flat = {
 
 export const Vertical = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-select>
     <label>label</label>
     <select>
@@ -149,7 +149,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-select layout="horizontal">
     <label>label</label>
     <select>
@@ -239,7 +239,7 @@ export const MultipleOverflow = {
 
 export const Size = {
   render: () => html`
-<div mlv-layout="column gap:xl">
+<div nve-layout="column gap:xl">
   <mlv-select>
     <label>label</label>
     <select size="5">
@@ -268,7 +268,7 @@ export const Size = {
 
 export const Height = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-select style="--scroll-height: 150px">
     <label>label</label>
     <select>
@@ -311,7 +311,7 @@ export const FitText = {
 
 export const FitContent = {
   render: () => html`
-<div mlv-layout="column gap:lg">
+<div nve-layout="column gap:lg">
   <mlv-select fit-content>
     <label>label</label>
     <select>

@@ -32,7 +32,7 @@ export const Radio = {
 
 export const VerticalGroup = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-radio-group>
     <label>label</label>
     <mlv-radio>
@@ -114,7 +114,7 @@ export const VerticalGroup = {
 
 export const VerticalInlineGroup = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-radio-group layout="vertical-inline">
     <label>label</label>
     <mlv-radio>
@@ -196,7 +196,7 @@ export const VerticalInlineGroup = {
 
 export const HorizontalGroup = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-radio-group layout="horizontal">
     <label>label</label>
     <mlv-radio>
@@ -278,7 +278,7 @@ export const HorizontalGroup = {
 
 export const HorizontalInlineGroup = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-radio-group layout="horizontal-inline">
     <label>label</label>
     <mlv-radio>

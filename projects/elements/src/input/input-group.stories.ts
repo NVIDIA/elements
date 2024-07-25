@@ -33,7 +33,7 @@ export const InputGroup = () => {
 
 export const FilterGroupRange = {
   render: () => html`
-<div mlv-layout="row align:vertical-center">
+<div nve-layout="row align:vertical-center">
   <mlv-input-group>
     <mlv-select style="width:150px">
       <select aria-label="date type">

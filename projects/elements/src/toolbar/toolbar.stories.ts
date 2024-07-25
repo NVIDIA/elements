@@ -73,13 +73,13 @@ export const Groups = {
           <option value="p">Paragraph</option>
         </select>
         <div slot="option-1">
-          <span mlv-text="heading">Heading 1</span>
+          <span nve-text="heading">Heading 1</span>
         </div>
         <div slot="option-2">
-          <span mlv-text="heading sm">Heading 2</span>
+          <span nve-text="heading sm">Heading 2</span>
         </div>
         <div slot="option-3">
-          <span mlv-text="body sm">Paragraph</span>
+          <span nve-text="body sm">Paragraph</span>
         </div>
       </mlv-select>
 
@@ -298,17 +298,17 @@ export const Wrap = {
 
 export const Status = {
   render: () => html`
-    <div mlv-layout="column gap:lg align:stretch">
+    <div nve-layout="column gap:lg align:stretch">
       <mlv-toolbar status="accent">
         <mlv-icon-button icon-name="cancel" slot="prefix"></mlv-icon-button>  
-        <p mlv-text="body">123 selected</p>
+        <p nve-text="body">123 selected</p>
         <mlv-button slot="suffix">delete</mlv-button>
         <mlv-icon-button icon-name="more-actions" slot="suffix"></mlv-icon-button>
       </mlv-toolbar>
 
       <mlv-toolbar>
         <mlv-icon-button icon-name="cancel" slot="prefix"></mlv-icon-button>  
-        <p mlv-text="body">123 selected</p>
+        <p nve-text="body">123 selected</p>
         <mlv-button slot="suffix">delete</mlv-button>
         <mlv-icon-button icon-name="more-actions" slot="suffix"></mlv-icon-button>
       </mlv-toolbar>

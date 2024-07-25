@@ -30,8 +30,8 @@ export const Default = {
   inline: false,
   render: (args: ArgTypes) => html`
     <mlv-dialog ${spread(args)} closable>
-      <h3 mlv-text="heading semibold sm">Title</h3>
-      <p mlv-text="body">some text content in a closable dialog</p>
+      <h3 nve-text="heading semibold sm">Title</h3>
+      <p nve-text="body">some text content in a closable dialog</p>
     </mlv-dialog>
   `,
   args: { textContent: 'hello there' }
@@ -42,8 +42,8 @@ export const Interactive = {
   render: () => html`
 <mlv-button id="dialog-btn">open</mlv-button>
 <mlv-dialog trigger="dialog-btn" closable modal hidden>
-  <h3 mlv-text="heading">Title</h3>
-  <p mlv-text="body">some text content in a closable dialog</p>
+  <h3 nve-text="heading">Title</h3>
+  <p nve-text="body">some text content in a closable dialog</p>
 </mlv-dialog>
 <script type="module">
   const dialog = document.querySelector('mlv-dialog');
@@ -58,8 +58,8 @@ export const BehaviorTrigger = {
   render: () => html`
 <mlv-button id="dialog-btn">open</mlv-button>
 <mlv-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
-  <h3 mlv-text="heading">Title</h3>
-  <p mlv-text="body">some text content in a closable dialog</p>
+  <h3 nve-text="heading">Title</h3>
+  <p nve-text="body">some text content in a closable dialog</p>
 
   <mlv-accordion behavior-expand>
     <mlv-accordion-header>
@@ -77,9 +77,9 @@ export const Content = {
   render: () => html`
 <mlv-dialog closable>
   <mlv-dialog-header>
-    <h3 mlv-text="heading semibold">title</h3>
+    <h3 nve-text="heading semibold">title</h3>
   </mlv-dialog-header>
-  <p mlv-text="body">some text content in a closable dialog</p>
+  <p nve-text="body">some text content in a closable dialog</p>
   <mlv-dialog-footer>
     <mlv-button>cancel</mlv-button>
     <mlv-button interaction="emphasis">action</mlv-button>
@@ -91,8 +91,8 @@ export const Content = {
 export const Small = {
   render: () => html`
 <mlv-dialog size="sm" closable>
-  <h3 mlv-text="heading">Small</h3>
-  <p mlv-text="body">some text content in a small dialog</p>
+  <h3 nve-text="heading">Small</h3>
+  <p nve-text="body">some text content in a small dialog</p>
 </mlv-dialog>
   `
 };
@@ -100,8 +100,8 @@ export const Small = {
 export const Medium = {
   render: () => html`
 <mlv-dialog size="md" closable>
-  <h3 mlv-text="heading">Medium</h3>
-  <p mlv-text="body">some text content in a medium dialog</p>
+  <h3 nve-text="heading">Medium</h3>
+  <p nve-text="body">some text content in a medium dialog</p>
 </mlv-dialog>
   `
 };
@@ -109,8 +109,8 @@ export const Medium = {
 export const Large = {
   render: () => html`
 <mlv-dialog size="lg" closable>
-  <h3 mlv-text="heading">Large</h3>
-  <p mlv-text="body">some text content in a large dialog</p>
+  <h3 nve-text="heading">Large</h3>
+  <p nve-text="body">some text content in a large dialog</p>
 </mlv-dialog>
   `
 };
@@ -119,8 +119,8 @@ export const NonClosable = {
   render: () => html`
 <mlv-button id="open-btn">open</mlv-button>
 <mlv-dialog hidden modal>
-  <h3 mlv-text="heading">Non-Closable Dialog</h3>
-  <p mlv-text="body">escape key and light dismiss will not work here</p>
+  <h3 nve-text="heading">Non-Closable Dialog</h3>
+  <p nve-text="body">escape key and light dismiss will not work here</p>
   <mlv-dialog-footer>
     <mlv-button id="cancel-btn">cancel</mlv-button>
   </mlv-dialog-footer>
@@ -160,8 +160,8 @@ export const Alignment = {
 export const Position = {
   render: () => html`
 <mlv-dialog size="sm" position="bottom" alignment="end" closable>
-  <h3 mlv-text="heading">Position</h3>
-  <p mlv-text="body">some text content in a small dialog</p>
+  <h3 nve-text="heading">Position</h3>
+  <p nve-text="body">some text content in a small dialog</p>
 </mlv-dialog>
   `
 };

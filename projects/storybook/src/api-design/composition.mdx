@@ -84,7 +84,7 @@ above with the button, we run the risk of the alert element absorbing parts of t
 To mitigate this, leveraging default slots can provide a hook for customizations.
 
 ```html
-<!-- mlv-alert template -->
+<!-- nve-alert template -->
 <div>
   <slot name="icon">
     <nve-icon name=${this.status}></nve-icon>
@@ -116,7 +116,7 @@ exist within the page. This also applies as the page structure should work down 
 <nve-alert status="danger">Don't:</nve-alert>
 
 ```html
-<!-- mlv-card template -->
+<!-- nve-card template -->
 <div>
   <h1><slot name="header"></slot></h1>
   <div>
@@ -135,7 +135,7 @@ exist within the page. This also applies as the page structure should work down 
 <nve-alert status="success">Do:</nve-alert>
 
 ```html
-<!-- mlv-card template -->
+<!-- nve-card template -->
 <div>
   <slot name="header"></slot>
   <div>

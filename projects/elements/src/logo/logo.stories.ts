@@ -14,12 +14,12 @@ export const Default = {
 
 export const Size = {
   render: () => html`
-<div mlv-layout="row gap:xs">
+<div nve-layout="row gap:xs">
   <mlv-logo size="sm" aria-label="NVIDIA"></mlv-logo>
   <mlv-logo aria-label="NVIDIA" ></mlv-logo>
   <mlv-logo size="lg" aria-label="NVIDIA"></mlv-logo>
 </div>
-<div mlv-layout="row gap:xs">
+<div nve-layout="row gap:xs">
   <mlv-logo size="sm" color="green-mint" aria-label="green mint">Gm</mlv-logo>
   <mlv-logo color="green-mint" aria-label="green mint">Gm</mlv-logo>
   <mlv-logo size="lg" color="green-mint" aria-label="green mint">Gm</mlv-logo>
@@ -29,7 +29,7 @@ export const Size = {
 
 export const Color = {
   render: () => html`
-<div mlv-layout="row gap:xs align:wrap">
+<div nve-layout="row gap:xs align:wrap">
   <mlv-logo aria-label="NVIDIA"></mlv-logo>
   <mlv-logo color="red-cardinal" aria-label="red cardinal">Rc</mlv-logo>
   <mlv-logo color="gray-slate" aria-label="gray slate">Gs</mlv-logo>
@@ -59,7 +59,7 @@ export const Color = {
 
 export const LightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="row gap:xs align:wrap pad:sm" style="background: var(--mlv-sys-layer-container-background) !important;">
+<div mlv-theme="root light" nve-layout="row gap:xs align:wrap pad:sm" style="background: var(--mlv-sys-layer-container-background) !important;">
   <mlv-logo aria-label="NVIDIA"></mlv-logo>
   <mlv-logo color="red-cardinal" aria-label="red cardinal">Rc</mlv-logo>
   <mlv-logo color="gray-slate" aria-label="gray slate">Gs</mlv-logo>
@@ -89,7 +89,7 @@ export const LightTheme = {
 
 export const DarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="row gap:xs align:wrap pad:sm">
+<div mlv-theme="root dark" nve-layout="row gap:xs align:wrap pad:sm">
   <mlv-logo aria-label="NVIDIA"></mlv-logo>
   <mlv-logo color="red-cardinal" aria-label="red cardinal">Rc</mlv-logo>
   <mlv-logo color="gray-slate" aria-label="gray slate">Gs</mlv-logo>

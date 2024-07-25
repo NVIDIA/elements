@@ -1,6 +1,5 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import '@nvidia-elements/core/alert/define.js';
-import { ScopedElement } from './integration.stories';
 
 <Meta title="Integrations/Extensions" />
 
@@ -34,9 +33,9 @@ import '@webcomponents/scoped-custom-element-registry';
 @customElement('domain-login')
 export class DomainLogin extends ScopedRegistryHost(LitElement) {
   static elementDefinitions = {
-    'mlv-input': scope(Input, ScopedRegistryHost),
-    'mlv-password': scope(Password, ScopedRegistryHost),
-    'mlv-button': scope(Button, ScopedRegistryHost)
+    'nve-input': scope(Input, ScopedRegistryHost),
+    'nve-password': scope(Password, ScopedRegistryHost),
+    'nve-button': scope(Button, ScopedRegistryHost)
   }
 
   render() {
@@ -61,26 +60,3 @@ The static `elementDefinitions` property is used to define the elements that wil
 The `scope` function is used to wrap the element definition with the `ScopedRegistryHost` mixin. This is required to ensure
 all Elements in the entire DOM tree are registered to the scoped registry. Once completed the `domain-login` component
 can be used in any framework that supports Web Components.
-
-## Element Scoping without Shadow DOM
-
-<nve-alert status="warning">The tag alias strategy is experimental and only for rare use-cases when Shadow DOM cannot be used and the UI is likely global impacting other applications.</nve-alert>
-
-```typescript
-import { IconButton } from '@nvidia-elements/core/icon-button';
-import { defineScopedElement } from '@nvidia-elements/core/scoped';
-import '@webcomponents/scoped-custom-element-registry';
-
-defineScopedElement('plugin', IconButton);
-```
-
-The `defineScopedElement` utility function will ensure that the `IconButton` uses a scoped registry, encapsulating its internal dependency on `mlv-icon`.
-It will also register `IconButton` with a new global suffix of `plugin` rather than the default global `mlv-icon-button`.
-
-```html
-<nve-icon-button-plugin icon-name="cancel"></nve-icon-button-plugin>
-```
-
-<Story of={ScopedElement} />
-
-While this still creates a global registration for `mlv-icon-button-plugin` its name can be specific to the app, plugin or integration and reduce the chance of a global name collision.

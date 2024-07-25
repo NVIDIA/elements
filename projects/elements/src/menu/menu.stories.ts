@@ -145,7 +145,7 @@ export const Complex = {
 
 export const VerticalNavigationDrawer = {
   render: () => html`
-  <div mlv-layout="column align:stretch full">
+  <div nve-layout="column align:stretch full">
     <mlv-drawer position="right" size="sm" modal closable>
       <mlv-drawer-header>Applications</mlv-drawer-header>
       <mlv-drawer-content>
@@ -162,7 +162,7 @@ export const VerticalNavigationDrawer = {
         <div slot="title">Header</div>
       </mlv-card-header>
       <mlv-card-content>
-        <p mlv-text="body">Content</p>
+        <p nve-text="body">Content</p>
       </mlv-card-content>
     </mlv-card>
   </div>
@@ -171,13 +171,13 @@ export const VerticalNavigationDrawer = {
 
 export const VerticalNavigationPanel = {
   render: () => html`
-  <div mlv-layout="row gap:md align:stretch">
+  <div nve-layout="row gap:md align:stretch">
     <mlv-card>
       <mlv-card-header>
         <div slot="title">Header</div>
       </mlv-card-header>
       <mlv-card-content>
-        <p mlv-text="body">Content</p>
+        <p nve-text="body">Content</p>
       </mlv-card-content>
     </mlv-card>
     <mlv-panel side="right" expanded closable style="max-width:280px; height:500px">

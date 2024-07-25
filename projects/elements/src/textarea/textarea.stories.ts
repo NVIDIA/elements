@@ -18,7 +18,7 @@ export const Textarea = {
 
 export const Vertical = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-textarea>
     <label>label</label>
     <textarea></textarea>
@@ -47,7 +47,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-textarea layout="horizontal">
     <label>label</label>
     <textarea></textarea>

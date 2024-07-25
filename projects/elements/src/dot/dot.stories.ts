@@ -14,13 +14,13 @@ export const Default = {
 
 export const Size = {
   render: () => html`
-<div mlv-layout="row gap:sm">
+<div nve-layout="row gap:sm">
   <mlv-dot size="sm">10</mlv-dot>
   <mlv-dot>10</mlv-dot>
   <mlv-dot size="lg">10</mlv-dot>
 </div>
 <br>
-<div mlv-layout="row gap:lg">
+<div nve-layout="row gap:lg">
   <mlv-dot size="sm"></mlv-dot>
   <mlv-dot></mlv-dot>
   <mlv-dot size="lg"></mlv-dot>
@@ -30,7 +30,7 @@ export const Size = {
 
 export const SupportStatus = {
   render: () => html`
-<div mlv-layout="row gap:md">
+<div nve-layout="row gap:md">
   <mlv-dot></mlv-dot>
   <mlv-dot status="accent"></mlv-dot>
   <mlv-dot status="warning"></mlv-dot>
@@ -42,7 +42,7 @@ export const SupportStatus = {
 
 export const Number = {
   render: () => html`
-<div mlv-layout="row gap:md">
+<div nve-layout="row gap:md">
   <mlv-dot>10</mlv-dot>
   <mlv-dot status="accent" aria-label="10 notifications">10</mlv-dot>
   <mlv-dot status="warning" aria-label="10 notifications">10</mlv-dot>
@@ -54,7 +54,7 @@ export const Number = {
 
 export const Status = {
   render: () => html`
-<div mlv-layout="row gap:md">
+<div nve-layout="row gap:md">
   <mlv-dot status="scheduled"></mlv-dot>
   <mlv-dot status="queued"></mlv-dot>
   <mlv-dot status="pending"></mlv-dot>
@@ -71,7 +71,7 @@ export const Status = {
 
 export const SupportLightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="row gap:md pad:md">
+<div mlv-theme="root light" nve-layout="row gap:md pad:md">
   <mlv-dot></mlv-dot>
   <mlv-dot status="accent"></mlv-dot>
   <mlv-dot status="warning"></mlv-dot>
@@ -83,7 +83,7 @@ export const SupportLightTheme = {
 
 export const SupportDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="row gap:md pad:md">
+<div mlv-theme="root dark" nve-layout="row gap:md pad:md">
   <mlv-dot></mlv-dot>
   <mlv-dot status="accent"></mlv-dot>
   <mlv-dot status="warning"></mlv-dot>
@@ -95,7 +95,7 @@ export const SupportDarkTheme = {
 
 export const StatusLightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="row gap:md pad:md">
+<div mlv-theme="root light" nve-layout="row gap:md pad:md">
   <mlv-dot status="scheduled"></mlv-dot>
   <mlv-dot status="queued"></mlv-dot>
   <mlv-dot status="pending"></mlv-dot>
@@ -112,7 +112,7 @@ export const StatusLightTheme = {
 
 export const StatusDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="row gap:md pad:md">
+<div mlv-theme="root dark" nve-layout="row gap:md pad:md">
   <mlv-dot status="scheduled"></mlv-dot>
   <mlv-dot status="queued"></mlv-dot>
   <mlv-dot status="pending"></mlv-dot>

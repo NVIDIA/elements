@@ -16,7 +16,7 @@ export function updateScope(source, config) {
 
   return source
     .replaceAll(/(mlv-[\w-]*|nve-[\w-]*)/g, (_, value) => {
-      const isElement = !value.includes('mlv-layout') && !value.includes('mlv-text');
+      const isElement = !value.includes('nve-layout') && !value.includes('nve-text');
       const isReact = sourceType === 'react';
       value = isElement ? value.replaceAll('mlv', scope).replaceAll('nve', scope) : value;
       value = isReact && isElement ? pascalCase(value) : value;

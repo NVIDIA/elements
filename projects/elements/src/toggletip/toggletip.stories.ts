@@ -16,14 +16,14 @@ export default {
 
 export const Default = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 400px">
+<div nve-layout="row align:center" style="height: 400px">
   <mlv-toggletip anchor="btn" closable>
     <mlv-toggletip-header>
-      <h3 mlv-text="heading sm">Toggletip Header</h3>
+      <h3 nve-text="heading sm">Toggletip Header</h3>
     </mlv-toggletip-header>
-      <p mlv-text="body">some text content in a toggletip</p>
+      <p nve-text="body">some text content in a toggletip</p>
     <mlv-toggletip-footer>
-      <p mlv-text="body">Toggletip Footer</p>
+      <p nve-text="body">Toggletip Footer</p>
     </mlv-toggletip-footer>
   </mlv-toggletip>
   <mlv-button id="btn">button</mlv-button>
@@ -34,7 +34,7 @@ export const Default = {
 
 export const BehaviorTrigger = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 250px">
+<div nve-layout="row align:center" style="height: 250px">
   <mlv-toggletip behavior-trigger anchor="action-btn" trigger="action-btn" hidden>hello there</mlv-toggletip>
   <mlv-button id="action-btn">button</mlv-button>
 </div>
@@ -45,11 +45,11 @@ export const BehaviorTrigger = {
 export const Interactive = {
   inline: false,
   render: () => html`
-  <div mlv-theme mlv-layout="row align:center" style="width: 100%; height: 200px;">
+  <div mlv-theme nve-layout="row align:center" style="width: 100%; height: 200px;">
   <mlv-button id="toggletip-btn">open</mlv-button>
   <mlv-toggletip trigger="toggletip-btn" hidden anchor="toggletip-btn">
     <mlv-toggletip-header>toggletip header</mlv-toggletip-header>
-      <p mlv-text="body">some text content in a toggletip</p>
+      <p nve-text="body">some text content in a toggletip</p>
     <mlv-toggletip-footer>toggletip footer</mlv-toggletip-footer>
   </mlv-toggletip>
   </div>
@@ -63,10 +63,10 @@ export const Interactive = {
 
 export const Closable = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 400px">
+<div nve-layout="row align:center" style="height: 400px">
   <mlv-toggletip closable anchor="action-btn" trigger="action-btn">
     <mlv-toggletip-header>Toggletip Header</mlv-toggletip-header>
-      <p mlv-text="body">some text content in a toggletip</p>
+      <p nve-text="body">some text content in a toggletip</p>
     <mlv-toggletip-footer>Toggletip Footer</mlv-toggletip-footer>
   </mlv-toggletip>
   <mlv-button id="action-btn">button</mlv-button>
@@ -77,14 +77,14 @@ export const Closable = {
 export const AlertGroup = {
   inline: false,
   render: () => html`
-  <div mlv-theme mlv-layout="row align:center" style="width: 100%; height: 400px;">
+  <div mlv-theme nve-layout="row align:center" style="width: 100%; height: 400px;">
     <mlv-toggletip anchor="btn" behavior-trigger trigger="btn">
         <mlv-toggletip-header>
             <mlv-alert-group status="danger" container="full" prominence="emphasis">
                 <mlv-alert>Workflow Failed</mlv-alert>
             </mlv-alert-group>
         </mlv-toggletip-header>
-        <p mlv-text="body">some text content in a toggletip</p>
+        <p nve-text="body">some text content in a toggletip</p>
         <mlv-toggletip-footer>
             <mlv-button style="width: 100%">Retry Workflow</mlv-button>  
         </mlv-toggletip-footer>

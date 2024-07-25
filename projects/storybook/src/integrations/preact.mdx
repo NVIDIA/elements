@@ -35,8 +35,8 @@ type CustomElement<T, K extends string = ''> = Partial<T & { children: any } & C
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      ['mlv-alert']: CustomElement<Alert>;
-      ['mlv-alert-group']: CustomElement<AlertGroup>;
+      ['nve-alert']: CustomElement<Alert>;
+      ['nve-alert-group']: CustomElement<AlertGroup>;
     }
   }
 }

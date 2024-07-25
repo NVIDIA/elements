@@ -17,7 +17,7 @@ export default {
 /* eslint-disable */
 export const Default = {
   render: () => html`
-    <div mlv-layout="row align:center">
+    <div nve-layout="row align:center">
       <mlv-breadcrumb>
         <mlv-button><a href="#" target="_self">Item 1</a></mlv-button>
         <mlv-button><a href="#" target="_self">Item 2</a></mlv-button>
@@ -30,7 +30,7 @@ export const Default = {
 
 export const WithIconButton = {
   render: () => html`
-    <div mlv-layout="row align:center">
+    <div nve-layout="row align:center">
       <mlv-breadcrumb>
         <mlv-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></mlv-icon-button>
         <mlv-button><a href="#" target="_self">Item 1</a></mlv-button>
@@ -77,7 +77,7 @@ export const WithMenu = {
 
 export const LightTheme = {
   render: () => html`
-    <div mlv-theme="root light" mlv-layout="pad:lg">
+    <div mlv-theme="root light" nve-layout="pad:lg">
       <mlv-breadcrumb>
         <mlv-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></mlv-icon-button>
         <mlv-button><a href="#" target="_self">Item 1</a></mlv-button>
@@ -90,7 +90,7 @@ export const LightTheme = {
 
 export const DarkTheme = {
   render: () => html`
-    <div mlv-theme="root dark" mlv-layout="pad:lg">
+    <div mlv-theme="root dark" nve-layout="pad:lg">
       <mlv-breadcrumb>
         <mlv-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></mlv-icon-button>
         <mlv-button><a href="#" target="_self">Item 1</a></mlv-button>

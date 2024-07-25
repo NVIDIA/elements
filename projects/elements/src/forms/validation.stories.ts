@@ -15,7 +15,7 @@ export default {
 
 export const Validation = () => {
   return html`
-<form id="validation" mlv-layout="column gap:md" style="max-width: 350px;">
+<form id="validation" nve-layout="column gap:md" style="max-width: 350px;">
   <mlv-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
@@ -57,7 +57,7 @@ export const Validation = () => {
 
 export const ValidationErrorGroup = () => {
   return html`
-<form mlv-layout="column gap:md" style="max-width: 350px;" novalidate>
+<form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
   <mlv-input status="error">
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
@@ -82,7 +82,7 @@ export const ValidationErrorGroup = () => {
 
 export const ValidationSuccessGroup = () => {
   return html`
-<form mlv-layout="column gap:md" style="max-width: 350px;" novalidate>
+<form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
   <mlv-input>
     <label>username</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
@@ -105,7 +105,7 @@ export const ValidationSuccessGroup = () => {
 
 export const ValidationReset = () => {
   return html`
-<form mlv-layout="column gap:md" style="max-width: 350px;">
+<form nve-layout="column gap:md" style="max-width: 350px;">
   <mlv-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" value="test@nvidia.com" />
@@ -148,7 +148,7 @@ export class AppLogin extends LitElement {
 
   render() {
     return html`
-      <form @submit=${e => this.#submit(e)} @input=${this.#input} mlv-layout="column gap:lg align:stretch" style="max-width: 400px">
+      <form @submit=${e => this.#submit(e)} @input=${this.#input} nve-layout="column gap:lg align:stretch" style="max-width: 400px">
         <mlv-input>
           <label>Email</label>
           <input .value=${this.formValues.email} type="email" name="email" autocomplete="off" pattern=".+@nvidia.com" required />

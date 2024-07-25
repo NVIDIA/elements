@@ -18,7 +18,7 @@ export const Password = {
 
 export const Vertical = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-password>
     <label>label</label>
     <input type="password" value="123456" />
@@ -47,7 +47,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-password layout="horizontal">
     <label>label</label>
     <input type="password" value="123456" />

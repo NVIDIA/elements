@@ -6,7 +6,7 @@ import { Interactions, Menu, ContainerMenu, PopoverMenu, NavigationDrawer } from
 
 # Interactions
 
-The interaction tokens `--mlv-sys-interaction-*` provide semantic interaction states for interactive components.
+The interaction tokens `--nve-sys-interaction-*` provide semantic interaction states for interactive components.
 These styles include the following categories:
 
 - `default`
@@ -28,30 +28,30 @@ Demos will be replaced with custom elements over time.
 
 ## Interactions
 
-The `--mlv-sys-interaction-state-ratio-*` provides a step ratio value for each interaction state. This combined with
+The `--nve-sys-interaction-state-ratio-*` provides a step ratio value for each interaction state. This combined with
 the CSS [color-mix](https://developer.chrome.com/blog/css-color-mix/) property allows colors to be dynamically computed from the base color.
 
 <Canvas of={Interactions} />
 
 ```css
 button {
-  background: color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio, 0%));
+  background: color-mix(in oklab, var(--nve-sys-interaction-state-base) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio, 0%));
 }
 
 button:hover {
-  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
 button:active {
-  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-active);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-active);
 }
 
 button:disabled {
-  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-disabled);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-disabled);
 }
 
 button[selected] {
-  --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-selected);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
 }
 ```
 

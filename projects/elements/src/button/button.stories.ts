@@ -98,7 +98,7 @@ export const LinkFlat = {
 
 export const LightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="row gap:sm pad:md">
+<div mlv-theme="root light" nve-layout="row gap:sm pad:md">
   <mlv-button>standard</mlv-button>
   <mlv-button interaction="emphasis">emphasis</mlv-button>
   <mlv-button interaction="destructive">destructive</mlv-button>
@@ -109,7 +109,7 @@ export const LightTheme = {
 
 export const DarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="row gap:sm pad:md">
+<div mlv-theme="root dark" nve-layout="row gap:sm pad:md">
   <mlv-button>standard</mlv-button>
   <mlv-button interaction="emphasis">emphasis</mlv-button>
   <mlv-button interaction="destructive">destructive</mlv-button>
@@ -147,7 +147,7 @@ export const FormSubmit = {
 
 export const FormControl = {
   render: () => html`
-<div mlv-layout="row gap:xs" style="max-width: 400px">
+<div nve-layout="row gap:xs" style="max-width: 400px">
   <mlv-search>
     <input type="search" placeholder="search" aria-label="search" />
   </mlv-search>

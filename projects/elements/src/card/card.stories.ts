@@ -71,7 +71,7 @@ export const CardWithContentLayout = {
   render: () => html`
   <div>
     <mlv-card style="width: 400px; height: 300px;">
-      <mlv-card-content mlv-layout="row align:space-around">
+      <mlv-card-content nve-layout="row align:space-around">
         <div>Item 1</div>
         <div>Item 2</div>
         <div>Item 3</div>
@@ -83,7 +83,7 @@ export const CardWithContentLayout = {
 
 export const MediaCard = {
   render: () => html`
-  <div mlv-layout="grid gap:md span-items:6 align:stretch" style="height: 380px">
+  <div nve-layout="grid gap:md span-items:6 align:stretch" style="height: 380px">
     <mlv-card style="height: 100%; width: 100%;">
       <img src="images/test-image-3.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
       <mlv-card-content>
@@ -104,7 +104,7 @@ export const CardWithMultipleContentsAndDivider = {
   render: () => html`
     <div>
       <mlv-card style="width: 400px; height: 300px;">
-        <mlv-card-content mlv-layout="row align:space-around">
+        <mlv-card-content nve-layout="row align:space-around">
           <div>Item 1</div>
           <div>Item 2</div>
           <div>Item 3</div>
@@ -112,7 +112,7 @@ export const CardWithMultipleContentsAndDivider = {
 
         <hr style="width: 100%">
 
-        <mlv-card-content mlv-layout="row align:center gap:md">
+        <mlv-card-content nve-layout="row align:center gap:md">
           <div>Item 1</div>
           <div>Item 2</div>
           <div>Item 3</div>
@@ -153,15 +153,15 @@ export const DescriptionList = {
       <h2 slot="title">Nautical Terms</h2>
     </mlv-card-header>
     <mlv-card-content>
-      <dl mlv-layout="grid gap:lg">
-        <dt mlv-layout="span:4" mlv-text="body muted medium">Knot</dt>
-        <dd mlv-layout="span:8" mlv-text="body">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
+      <dl nve-layout="grid gap:lg">
+        <dt nve-layout="span:4" nve-text="body muted medium">Knot</dt>
+        <dd nve-layout="span:8" nve-text="body">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
 
-        <dt mlv-layout="span:4" mlv-text="body muted medium">Port</dt>
-        <dd mlv-layout="span:8" mlv-text="body">Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+        <dt nve-layout="span:4" nve-text="body muted medium">Port</dt>
+        <dd nve-layout="span:8" nve-text="body">Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the bow (the front of the vessel).</dd>
 
-        <dt mlv-layout="span:4" mlv-text="body muted medium">Starboard</dt>
-        <dd mlv-layout="span:8" mlv-text="body">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+        <dt nve-layout="span:4" nve-text="body muted medium">Starboard</dt>
+        <dd nve-layout="span:8" nve-text="body">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
       </dl>
     </mlv-card-content>
   </mlv-card>
@@ -214,7 +214,7 @@ export const ContainerFlat = {
 
 export const LightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="pad:md align:center">
+<div mlv-theme="root light" nve-layout="pad:md align:center">
   <mlv-card style="width: 400px; height: 300px;">
     <mlv-card-header>
       <div slot="title">Title</div>
@@ -226,7 +226,7 @@ export const LightTheme = {
     </mlv-card-content>
 
     <mlv-card-footer>
-      <div mlv-layout="grid span-items:6 gap:xs">
+      <div nve-layout="grid span-items:6 gap:xs">
         <mlv-button>Cancel</mlv-button>  
         <mlv-button>Action</mlv-button>
       </div>
@@ -238,7 +238,7 @@ export const LightTheme = {
 
 export const DarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="pad:md align:center">
+<div mlv-theme="root dark" nve-layout="pad:md align:center">
   <mlv-card style="width: 400px; height: 300px;">
     <mlv-card-header>
       <div slot="title">Title</div>
@@ -250,7 +250,7 @@ export const DarkTheme = {
     </mlv-card-content>
 
     <mlv-card-footer>
-      <div mlv-layout="grid span-items:6 gap:xs">
+      <div nve-layout="grid span-items:6 gap:xs">
         <mlv-button>Cancel</mlv-button>  
         <mlv-button>Action</mlv-button>
       </div>

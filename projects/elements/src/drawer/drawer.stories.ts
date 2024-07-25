@@ -13,13 +13,13 @@ export const Default = {
   render: () => html`
 <mlv-drawer closable>
   <mlv-drawer-header>
-    <h3 mlv-text="heading semibold sm">Drawer Header</h3>
+    <h3 nve-text="heading semibold sm">Drawer Header</h3>
   </mlv-drawer-header>
   <mlv-drawer-content>
-    <p mlv-text="body">drawer content</p>
+    <p nve-text="body">drawer content</p>
   </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">drawer footer</p>
+    <p nve-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
   `,
@@ -29,13 +29,13 @@ export const Scroll = {
   render: () => html`
 <mlv-drawer closable>
   <mlv-drawer-header>
-    <h3 mlv-text="heading semibold sm">Drawer Header</h3>
+    <h3 nve-text="heading semibold sm">Drawer Header</h3>
   </mlv-drawer-header>
   <mlv-drawer-content>
-    <p mlv-text="body" style="height: 2500px">drawer content</p>
+    <p nve-text="body" style="height: 2500px">drawer content</p>
   </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">drawer footer</p>
+    <p nve-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
   `,
@@ -46,13 +46,13 @@ export const Interactive = {
 <mlv-button id="drawer-btn">open</mlv-button>
 <mlv-drawer closable modal hidden position="right">
   <mlv-drawer-header>
-    <h3 mlv-text="heading">Drawer Header</h3>
+    <h3 nve-text="heading">Drawer Header</h3>
   </mlv-drawer-header>
   <mlv-drawer-content>
-    <p mlv-text="body">drawer content</p>
+    <p nve-text="body">drawer content</p>
   </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">drawer footer</p>
+    <p nve-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
 <script type="module">
@@ -69,13 +69,13 @@ export const BehaviorTrigger = {
 <mlv-button id="drawer-btn">open</mlv-button>
 <mlv-drawer behavior-trigger trigger="drawer-btn" closable modal hidden position="right">
   <mlv-drawer-header>
-    <h3 mlv-text="heading">Drawer Header</h3>
+    <h3 nve-text="heading">Drawer Header</h3>
   </mlv-drawer-header>
   <mlv-drawer-content>
-    <p mlv-text="body">drawer content</p>
+    <p nve-text="body">drawer content</p>
   </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">drawer footer</p>
+    <p nve-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
   `
@@ -85,13 +85,13 @@ export const Small = {
   render: () => html`
 <mlv-drawer size="sm" closable>
   <mlv-drawer-header>
-    <h3 mlv-text="heading semibold sm">Drawer Header</h3>
+    <h3 nve-text="heading semibold sm">Drawer Header</h3>
   </mlv-drawer-header>
   <mlv-drawer-content>
-    <p mlv-text="body">drawer content</p>
+    <p nve-text="body">drawer content</p>
   </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">drawer footer</p>
+    <p nve-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
   `
@@ -101,13 +101,13 @@ export const Large = {
   render: () => html`
 <mlv-drawer size="lg" closable>
   <mlv-drawer-header>
-    <h3 mlv-text="heading semibold sm">Drawer Header</h3>
+    <h3 nve-text="heading semibold sm">Drawer Header</h3>
   </mlv-drawer-header>
   <mlv-drawer-content>
-    <p mlv-text="body">drawer content</p>
+    <p nve-text="body">drawer content</p>
   </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">drawer footer</p>
+    <p nve-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
   `
@@ -118,13 +118,13 @@ export const NonClosable = {
 <mlv-button id="open-btn">open</mlv-button>
 <mlv-drawer hidden modal>
   <mlv-drawer-header>
-    <h3 mlv-text="heading">Drawer Header</h3>
+    <h3 nve-text="heading">Drawer Header</h3>
   </mlv-drawer-header>
   <mlv-drawer-content>
-    <p mlv-text="body">drawer content</p>
+    <p nve-text="body">drawer content</p>
   </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">drawer footer</p>
+    <p nve-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
 <script type="module">
@@ -140,32 +140,32 @@ export const NonClosable = {
 export const Position = {
   inline: false,
   render: () => html`
-<div mlv-layout="row align:center gap:md" style="height: 98vh">
+<div nve-layout="row align:center gap:md" style="height: 98vh">
   <mlv-button class="drawer-btn-left">open left</mlv-button>
   <mlv-button class="drawer-btn-right">open right</mlv-button>
 </div>
 
 <mlv-drawer closable modal hidden position="left">
   <mlv-drawer-header>
-    <h3 mlv-text="heading">Drawer Header Left</h3>
+    <h3 nve-text="heading">Drawer Header Left</h3>
   </mlv-drawer-header>
   <mlv-drawer-content>
-    <p mlv-text="body">drawer content</p>
+    <p nve-text="body">drawer content</p>
   </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">drawer footer</p>
+    <p nve-text="body">drawer footer</p>
   </mlv-drawer-footer>
 </mlv-drawer>
 
 <mlv-drawer closable modal hidden position="right">
   <mlv-drawer-header>
-    <h3 mlv-text="heading">Drawer Header Right</h3>
+    <h3 nve-text="heading">Drawer Header Right</h3>
   </mlv-drawer-header>
   <mlv-drawer-content>
-    <p mlv-text="body">some text content in a right closable drawer</p>
+    <p nve-text="body">some text content in a right closable drawer</p>
   </mlv-drawer-content>
   <mlv-drawer-footer>
-    <p mlv-text="body">some text footer content</p>
+    <p nve-text="body">some text footer content</p>
   </mlv-drawer-footer>
 </mlv-drawer>
 <script type="module">
@@ -190,8 +190,8 @@ export const Position = {
 
 export const Inline = {
   render: () => html`
-<div mlv-layout="row align:stretch">
-  <div mlv-layout="column gap:md align:stretch">
+<div nve-layout="row align:stretch">
+  <div nve-layout="column gap:md align:stretch">
     <mlv-card style="height: 200px">
       <mlv-card-content>
         <mlv-button>open inline drawer</mlv-button>
@@ -202,13 +202,13 @@ export const Inline = {
 
   <mlv-drawer hidden closable modal inline position="right">
     <mlv-drawer-header>
-      <h3 mlv-text="heading semibold sm">Drawer Header</h3>
+      <h3 nve-text="heading semibold sm">Drawer Header</h3>
     </mlv-drawer-header>
     <mlv-drawer-content>
-      <p mlv-text="body">drawer content</p>
+      <p nve-text="body">drawer content</p>
     </mlv-drawer-content>
     <mlv-drawer-footer>
-      <p mlv-text="body">drawer footer</p>
+      <p nve-text="body">drawer footer</p>
     </mlv-drawer-footer>
   </mlv-drawer>
 </div>

@@ -192,7 +192,7 @@ export const PopoverController = {
 
     <ui-popover ${spread(args)} style="--mlv-sys-layer-popover-offset: ${args.offset}px">popover</ui-popover>
     <mlv-card id="card">
-      <mlv-card-content mlv-layout="align:center" style="width: 450px; height: 300px;">
+      <mlv-card-content nve-layout="align:center" style="width: 450px; height: 300px;">
         <mlv-button id="button">toggle</mlv-button>
       </mlv-card-content>
     </mlv-card>
@@ -297,13 +297,13 @@ customElements.get('i18n-item') || customElements.define('i18n-item', I18nItem);
 class I18nDemo extends LitElement {
   render() {
     return html`
-    <div mlv-layout="column gap:md">
-      <div mlv-layout="row gap:sm">
+    <div nve-layout="column gap:md">
+      <div nve-layout="row gap:sm">
         <mlv-button @click=${() => this.#english()}>English</mlv-button>
         <mlv-button @click=${() => this.#french()}>French</mlv-button>
       </div>
       
-      <div mlv-layout="grid span-items:6 gap:sm">
+      <div nve-layout="grid span-items:6 gap:sm">
         <i18n-item .i18n=${{ "close": "dismiss task failure warning" }}></i18n-item>
         <i18n-item></i18n-item>
       </div>

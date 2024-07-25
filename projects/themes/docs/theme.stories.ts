@@ -1,7 +1,7 @@
 import { html, css, LitElement, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import layout from '@nvidia-elements/core/css/module.layout.css?inline';
-import typography from '@nvidia-elements/core/css/module.typography.css?inline';
+import layout from '../../styles/dist/layout.css?inline';
+import typography from '../../styles/dist/typography.css?inline';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/select/define.js';
@@ -65,7 +65,7 @@ export const ReducedMotion = {
   }
 
   .animation,
-  .animation[mlv-theme] {
+  .animation[nve-theme] {
     width: 150px;
     height: 50px;
     border: 1px solid #ccc;
@@ -77,8 +77,8 @@ export const ReducedMotion = {
     width: 20px;
     height: 50px;
     background-color: #ccc;
-    animation: slide-demo var(--mlv-ref-animation-duration-400);
-    animation-timing-function: var(--mlv-ref-animation-easing-100);
+    animation: slide-demo var(--nve-ref-animation-duration-400);
+    animation-timing-function: var(--nve-ref-animation-easing-100);
     animation-iteration-count: infinite;
     animation-delay: 500ms;
     width: 25px;
@@ -87,16 +87,16 @@ export const ReducedMotion = {
     left: 0;
   }
 </style>
-<div mlv-layout="row gap:md">
-  <section mlv-layout="column gap:sm">
-    <code>mlv-theme=""</code>
-    <div class="animation" mlv-theme="">
+<div nve-layout="row gap:md">
+  <section nve-layout="column gap:sm">
+    <code>nve-theme=""</code>
+    <div class="animation" nve-theme="">
       <div></div>
     </div>
   </section>
-  <section mlv-layout="column gap:sm">
-    <code>mlv-theme="reduced-motion"</code>
-    <div class="animation" mlv-theme="reduced-motion">
+  <section nve-layout="column gap:sm">
+    <code>nve-theme="reduced-motion"</code>
+    <div class="animation" nve-theme="reduced-motion">
       <div></div>
     </div>
   </section>
@@ -105,8 +105,8 @@ export const ReducedMotion = {
 
 function getThemeDemo(theme) {
   return html`
-    <div mlv-theme="root ${theme}" mlv-layout="grid span-items:6 gap:md pad:md">
-      <mlv-card>${getThemeContent()}</mlv-card>
+    <div nve-theme="root ${theme}" nve-layout="grid span-items:6 gap:md pad:md">
+      <nve-card>${getThemeContent()}</nve-card>
       ${getThemeContent()}
     </div>
   `;
@@ -115,74 +115,74 @@ function getThemeDemo(theme) {
 function getThemeContent() {
   return html`
     <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px">
-    <div mlv-layout="row gap:sm">
-        <mlv-icon-button icon-name="person"></mlv-icon-button>
-        <mlv-icon-button icon-name="person" interaction="emphasis"></mlv-icon-button>
-        <mlv-icon-button icon-name="person" interaction="destructive"></mlv-icon-button>
-        <mlv-icon-button icon-name="person" container="flat"></mlv-icon-button>
-        <mlv-icon-button icon-name="person" disabled></mlv-icon-button>
+    <div nve-layout="row gap:sm">
+        <nve-icon-button icon-name="person"></nve-icon-button>
+        <nve-icon-button icon-name="person" interaction="emphasis"></nve-icon-button>
+        <nve-icon-button icon-name="person" interaction="destructive"></nve-icon-button>
+        <nve-icon-button icon-name="person" container="flat"></nve-icon-button>
+        <nve-icon-button icon-name="person" disabled></nve-icon-button>
       </div>
-      <div mlv-layout="row gap:sm">
-        <mlv-icon name="person"></mlv-icon>
-        <mlv-icon name="person" status="accent"></mlv-icon>
-        <mlv-icon name="person" status="success"></mlv-icon>
-        <mlv-icon name="person" status="warning"></mlv-icon>
-        <mlv-icon name="person" status="danger"></mlv-icon>
+      <div nve-layout="row gap:sm">
+        <nve-icon name="person"></nve-icon>
+        <nve-icon name="person" status="accent"></nve-icon>
+        <nve-icon name="person" status="success"></nve-icon>
+        <nve-icon name="person" status="warning"></nve-icon>
+        <nve-icon name="person" status="danger"></nve-icon>
       </div>
-      <div mlv-layout="row gap:sm">
-        <mlv-button>default</mlv-button>
-        <mlv-button interaction="emphasis">emphasis</mlv-button>
-        <mlv-button interaction="destructive">destructive</mlv-button>
-        <mlv-button disabled="">disabled</mlv-button>
+      <div nve-layout="row gap:sm">
+        <nve-button>default</nve-button>
+        <nve-button interaction="emphasis">emphasis</nve-button>
+        <nve-button interaction="destructive">destructive</nve-button>
+        <nve-button disabled="">disabled</nve-button>
       </div>
-      <div mlv-layout="column gap:md">
-        <mlv-input>
+      <div nve-layout="column gap:md">
+        <nve-input>
           <label>label</label>
           <input type="text" value="text">
-          <mlv-control-message>message</mlv-control-message>
-        </mlv-input>
-        <mlv-select>
+          <nve-control-message>message</nve-control-message>
+        </nve-input>
+        <nve-select>
           <label>label</label>
           <select>
             <option value="1">option 1</option>
             <option value="2">option 2</option>
             <option value="3">option 3</option>
           </select>
-          <mlv-control-message>message</mlv-control-message>
-        </mlv-select>
+          <nve-control-message>message</nve-control-message>
+        </nve-select>
       </div>
-      <div mlv-layout="column gap:md">
-        <mlv-alert>default</mlv-alert>
-        <mlv-alert status="accent">accent</mlv-alert>
-        <mlv-alert status="warning">warning</mlv-alert>
-        <mlv-alert status="success">success</mlv-alert>
-        <mlv-alert status="danger">danger</mlv-alert>
+      <div nve-layout="column gap:md">
+        <nve-alert>default</nve-alert>
+        <nve-alert status="accent">accent</nve-alert>
+        <nve-alert status="warning">warning</nve-alert>
+        <nve-alert status="success">success</nve-alert>
+        <nve-alert status="danger">danger</nve-alert>
       </div>
-      <div mlv-layout="column gap:md">
-        <mlv-alert-group>
-          <mlv-alert>default</mlv-alert>
-          <mlv-alert>default</mlv-alert>
-        </mlv-alert-group>
+      <div nve-layout="column gap:md">
+        <nve-alert-group>
+          <nve-alert>default</nve-alert>
+          <nve-alert>default</nve-alert>
+        </nve-alert-group>
 
-        <mlv-alert-group status="accent">
-          <mlv-alert>accent</mlv-alert>
-          <mlv-alert>accent</mlv-alert>
-        </mlv-alert-group>
+        <nve-alert-group status="accent">
+          <nve-alert>accent</nve-alert>
+          <nve-alert>accent</nve-alert>
+        </nve-alert-group>
 
-        <mlv-alert-group status="warning">
-          <mlv-alert>warning</mlv-alert>
-          <mlv-alert>warning</mlv-alert>
-        </mlv-alert-group>
+        <nve-alert-group status="warning">
+          <nve-alert>warning</nve-alert>
+          <nve-alert>warning</nve-alert>
+        </nve-alert-group>
 
-        <mlv-alert-group status="success">
-          <mlv-alert>success</mlv-alert>
-          <mlv-alert>success</mlv-alert>
-        </mlv-alert-group>
+        <nve-alert-group status="success">
+          <nve-alert>success</nve-alert>
+          <nve-alert>success</nve-alert>
+        </nve-alert-group>
 
-        <mlv-alert-group status="danger">
-          <mlv-alert>danger</mlv-alert>
-          <mlv-alert>danger</mlv-alert>
-        </mlv-alert-group>
+        <nve-alert-group status="danger">
+          <nve-alert>danger</nve-alert>
+          <nve-alert>danger</nve-alert>
+        </nve-alert-group>
       </div>
     </div>
     `;
@@ -194,7 +194,7 @@ class ThemeGeneratorDemo extends LitElement {
       display: contents;
     }
 
-    mlv-panel {
+    nve-panel {
       min-width: 360px;
       z-index: 99;
       height: 100vh;
@@ -215,149 +215,149 @@ class ThemeGeneratorDemo extends LitElement {
 
   render() {
     return html`
-<div mlv-layout="column" style="height: 100%">
-  <mlv-app-header>
-    <mlv-logo></mlv-logo>
+<div nve-layout="column" style="height: 100%">
+  <nve-app-header>
+    <nve-logo></nve-logo>
     <h2 slot="title">Theme Generator</h2>
-    <mlv-button slot="nav-items" active>Link 1</mlv-button>
-    <mlv-button slot="nav-items">Link 2</mlv-button>
-    <mlv-icon-button icon-name="assist" slot="nav-actions"></mlv-icon-button>
-    <mlv-icon-button icon-name="app-switcher" slot="nav-actions"></mlv-icon-button>
-    <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
-  </mlv-app-header>
+    <nve-button slot="nav-items" active>Link 1</nve-button>
+    <nve-button slot="nav-items">Link 2</nve-button>
+    <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
+  </nve-app-header>
 
-  <mlv-alert-group status="accent" prominence="emphasis" container="full">
-    <mlv-alert closable>banner message</mlv-alert>
-  </mlv-alert-group>
+  <nve-alert-group status="accent" prominence="emphasis" container="full">
+    <nve-alert closable>banner message</nve-alert>
+  </nve-alert-group>
 
-  <div mlv-layout="row" style="width: 100%;">
-    <mlv-panel expanded>
-      <mlv-panel-header>
+  <div nve-layout="row" style="width: 100%;">
+    <nve-panel expanded>
+      <nve-panel-header>
         <h2 slot="title">Theme Options</h2>
-      </mlv-panel-header>
-      <mlv-panel-content>
-        <form @input=${this.#input} mlv-layout="column gap:lg">
-          <mlv-color>
+      </nve-panel-header>
+      <nve-panel-content>
+        <form @input=${this.#input} nve-layout="column gap:lg">
+          <nve-color>
             <label>Color</label>
             <input type="color" name="sys-accent-secondary-background" .value=${this.formValues['sys-accent-secondary-background']} />
-          </mlv-color>
+          </nve-color>
 
-          <mlv-range>
+          <nve-range>
             <label>Space Scale</label>
             <input type="range" name="ref-scale-space" .value=${this.formValues['ref-space-scale']} min="0.5" max="2" step="0.1" />
-          </mlv-range>
+          </nve-range>
 
-          <mlv-range>
+          <nve-range>
             <label>Size Scale</label>
             <input type="range" name="ref-scale-size" .value=${this.formValues['ref-size-scale']} min="0.5" max="1.5" step="0.1" />
-          </mlv-range>
+          </nve-range>
 
-          <mlv-range>
+          <nve-range>
             <label>Text Scale</label>
             <input type="range" name="ref-scale-text" .value=${this.formValues['ref-text-scale']} min="0.5" max="1.5" step="0.1" />
-          </mlv-range>
+          </nve-range>
 
-          <mlv-range>
+          <nve-range>
             <label>Border Radius Scale</label>
             <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-scale-border-radius']} min="0" max="1.5" step="0.1" />
-          </mlv-range>
+          </nve-range>
 
-          <mlv-range>
+          <nve-range>
             <label>Border Width Scale</label>
             <input type="range" name="ref-scale-border-width" .value=${this.formValues['ref-scale-border-width']} min="0.5" max="3" step="0.5" />
-          </mlv-range>
+          </nve-range>
 
-          <mlv-button type="button" @click=${this.#random} style="position: fixed; bottom: 24px;">random</mlv-button>
+          <nve-button type="button" @click=${this.#random} style="position: fixed; bottom: 24px;">random</nve-button>
         </form>
-      </mlv-panel-content>
-    </mlv-panel>
+      </nve-panel-content>
+    </nve-panel>
 
-    <main mlv-layout="column gap:lg pad:lg full align:horizontal-stretch">
-      <h1 mlv-text="heading lg">Heading</h1>
-        <mlv-card>
-          <mlv-card-header>
+    <main nve-layout="column gap:lg pad:lg full align:horizontal-stretch">
+      <h1 nve-text="heading lg">Heading</h1>
+        <nve-card>
+          <nve-card-header>
             <div slot="title">Title</div>
-          </mlv-card-header>
-          <mlv-card-content>
-            <div mlv-layout="column gap:lg">
-              <div mlv-layout="row gap:lg align:vertical-center">
-                <mlv-alert status="accent">alert message</mlv-alert>
-                <mlv-icon status="accent" name="person"></mlv-icon>
-                <mlv-dot status="accent"></mlv-dot>
-                <mlv-progress-ring status="accent" size="sm"></mlv-progress-ring>
+          </nve-card-header>
+          <nve-card-content>
+            <div nve-layout="column gap:lg">
+              <div nve-layout="row gap:lg align:vertical-center">
+                <nve-alert status="accent">alert message</nve-alert>
+                <nve-icon status="accent" name="person"></nve-icon>
+                <nve-dot status="accent"></nve-dot>
+                <nve-progress-ring status="accent" size="sm"></nve-progress-ring>
               </div>
-              <mlv-input layout="horizontal-inline">
+              <nve-input layout="horizontal-inline">
                 <label>text label</label>
                 <input />
-                <mlv-control-message>message</mlv-control-message>
-              </mlv-input>
+                <nve-control-message>message</nve-control-message>
+              </nve-input>
 
-              <mlv-password layout="horizontal-inline">
+              <nve-password layout="horizontal-inline">
                 <label>password label</label>
                 <input type="password" value="123456" autocomplete="off" />
-                <mlv-control-message>message</mlv-control-message>
-              </mlv-password>
+                <nve-control-message>message</nve-control-message>
+              </nve-password>
 
-              <mlv-select layout="horizontal-inline">
+              <nve-select layout="horizontal-inline">
                 <label>select label</label>
                 <select>
                   <option value="1">Option 1</option>
                   <option value="2">Option 2</option>
                   <option value="3">Option 3</option>
                 </select>
-                <mlv-control-message>message</mlv-control-message>
-              </mlv-select>
+                <nve-control-message>message</nve-control-message>
+              </nve-select>
 
-              <mlv-checkbox-group layout="horizontal-inline">
+              <nve-checkbox-group layout="horizontal-inline">
                 <label>checkbox group label</label>
-                <mlv-checkbox>
+                <nve-checkbox>
                   <label>checkbox 1</label>
                   <input type="checkbox" checked />
-                </mlv-checkbox>
+                </nve-checkbox>
 
-                <mlv-checkbox>
+                <nve-checkbox>
                   <label>checkbox 2</label>
                   <input type="checkbox" />
-                </mlv-checkbox>
+                </nve-checkbox>
 
-                <mlv-checkbox>
+                <nve-checkbox>
                   <label>checkbox 3</label>
                   <input type="checkbox" />
-                </mlv-checkbox>
-              </mlv-checkbox-group>
+                </nve-checkbox>
+              </nve-checkbox-group>
 
-              <mlv-radio-group layout="horizontal-inline">
+              <nve-radio-group layout="horizontal-inline">
                 <label>radio group label</label>
-                <mlv-radio>
+                <nve-radio>
                   <label>radio 1</label>
                   <input type="radio" checked />
-                </mlv-radio>
+                </nve-radio>
 
-                <mlv-radio>
+                <nve-radio>
                   <label>radio 2</label>
                   <input type="radio" />
-                </mlv-radio>
+                </nve-radio>
 
-                <mlv-radio>
+                <nve-radio>
                   <label>radio 3</label>
                   <input type="radio" />
-                </mlv-radio>
-              </mlv-radio-group>
+                </nve-radio>
+              </nve-radio-group>
 
-              <mlv-switch-group layout="horizontal-inline">
+              <nve-switch-group layout="horizontal-inline">
                 <label>switch group label</label>
-                <mlv-switch>
+                <nve-switch>
                   <label>switch 1</label>
                   <input type="checkbox" />
-                </mlv-switch>
+                </nve-switch>
 
-                <mlv-switch>
+                <nve-switch>
                   <label>switch 2</label>
                   <input type="checkbox" checked />
-                </mlv-switch>
-              </mlv-switch-group>
+                </nve-switch>
+              </nve-switch-group>
 
-              <mlv-select layout="horizontal-inline">
+              <nve-select layout="horizontal-inline">
                 <label>select multiple label</label>
                 <select multiple>
                   <option value="1">Option 1</option>
@@ -367,22 +367,22 @@ class ThemeGeneratorDemo extends LitElement {
                   <option value="4">Option 4</option>
                   <option value="5">Option 5</option>
                 </select>
-                <mlv-control-message>message</mlv-control-message>
-              </mlv-select>
+                <nve-control-message>message</nve-control-message>
+              </nve-select>
 
-              <mlv-textarea layout="horizontal-inline">
+              <nve-textarea layout="horizontal-inline">
                 <label>textarea label</label>
                 <textarea></textarea>
-                <mlv-control-message>message</mlv-control-message>
-              </mlv-textarea>
+                <nve-control-message>message</nve-control-message>
+              </nve-textarea>
             </div>
-          </mlv-card-content>
-          <mlv-card-footer>
-            <div mlv-layout="row gap:xs full">
-              <mlv-button style="margin-left: auto">button</mlv-button>
+          </nve-card-content>
+          <nve-card-footer>
+            <div nve-layout="row gap:xs full">
+              <nve-button style="margin-left: auto">button</nve-button>
             </div>
-          </mlv-card-footer>
-        </mlv-card>
+          </nve-card-footer>
+        </nve-card>
     </main>
   </div>
 </div>
@@ -445,7 +445,7 @@ function getRandomDecimal(min, max, decimalPlaces) {
   return Math.floor(rand * power) / power;
 }
 
-customElements.get('mlv-demo-theme-generator') || customElements.define('mlv-demo-theme-generator', ThemeGeneratorDemo);
+customElements.get('nve-demo-theme-generator') || customElements.define('nve-demo-theme-generator', ThemeGeneratorDemo);
 
 export const ThemeGenerator = {
   render: () => html`
@@ -457,8 +457,8 @@ export const ThemeGenerator = {
       height: 100% !important;
     }
   </style>
-  <div mlv-theme="root">
-    <mlv-demo-theme-generator></mlv-demo-theme-generator>
+  <div nve-theme="root">
+    <nve-demo-theme-generator></nve-demo-theme-generator>
   </div>
   `
 }

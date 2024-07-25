@@ -49,7 +49,7 @@ export const DisableStep = {
 
 export const Forms = {
   render: () => html`
-    <form id="pagination-form" mlv-layout="column gap:md">
+    <form id="pagination-form" nve-layout="column gap:md">
       <mlv-pagination name="page" value="1" items="100" step="10" aria-label="pagination controls"></mlv-pagination>
       <mlv-button>submit page 10</mlv-button>
       <pre></pre>

@@ -15,8 +15,8 @@ export default {
 export const Utils = {
   render: () => html`
     <style>body { padding: 0 !important; }</style>
-    <div mlv-layout="column gap:md align:stretch">
-      <mlv-select>
+    <div nve-layout="column gap:md align:stretch">
+      <nve-select>
         <select id="visualization-demo-select">
           <option value="line">line</option>
           <option value="bar">bar</option>
@@ -26,16 +26,16 @@ export const Utils = {
           <option value="radar">radar</option>
           <!-- <option value="scatter">scatter</option> -->
         </select>
-      </mlv-select>
-      <mlv-card>
-        <mlv-card-header>
+      </nve-select>
+      <nve-card>
+        <nve-card-header>
           <h2 slot="title">Design Tokens + HTML Canvas</h2>
-          <h3 slot="subtitle" mlv-text="body sm muted">Demo of ChartJS consuming design tokens</h3>
-        </mlv-card-header>
-        <mlv-card-content>
+          <h3 slot="subtitle" nve-text="body sm muted">Demo of ChartJS consuming design tokens</h3>
+        </nve-card-header>
+        <nve-card-content>
           <canvas width="100%" style="display: block; max-height: 70vh"></canvas>
-        </mlv-card-content>
-      </mlv-card>
+        </nve-card-content>
+      </nve-card>
     </div>
     <script type="module">
       const tokens = window.__tokens; // import { getThemeTokens } from '@nvidia-elements/core';
@@ -49,7 +49,7 @@ export const Utils = {
           plugins: {
             legend: {
               labels: {
-                color: tokens['--mlv-sys-text-muted-color'],
+                color: tokens['--nve-sys-text-muted-color'],
                 boxWidth: 25
               },
             },
@@ -59,18 +59,18 @@ export const Utils = {
               suggestedMin: 0,
               suggestedMax: 100,
               ticks: {
-                color: tokens['--mlv-sys-text-muted-color'],
+                color: tokens['--nve-sys-text-muted-color'],
               },
               grid: {
-                color: tokens['--mlv-ref-border-color-muted'],
+                color: tokens['--nve-ref-border-color-muted'],
               },
             },
             x: {
               ticks: {
-                color: tokens['--mlv-sys-text-muted-color'],
+                color: tokens['--nve-sys-text-muted-color'],
               },
               grid: {
-                color: tokens['--mlv-ref-border-color-muted'],
+                color: tokens['--nve-ref-border-color-muted'],
               },
             },
           },
@@ -82,7 +82,7 @@ export const Utils = {
         return {
           labels: Array(7).fill('').map((_, i) => 2017 + i),
           datasets: ['cyan', 'seafoam', 'grass', 'pear', 'nova', 'amber', 'pumpkin', 'red', 'rose', 'lavender', 'violet'].map(label => {
-            const color = getComputedStyle(document.body).getPropertyValue('--mlv-sys-visualization-categorical-' + label);
+            const color = getComputedStyle(document.body).getPropertyValue('--nve-sys-visualization-categorical-' + label);
             function applyOpacityToColor(color, opacity) {
               return 'color-mix(in oklch, '+ color + ', transparent ' + (100 - opacity * 100) + '%)';
             }

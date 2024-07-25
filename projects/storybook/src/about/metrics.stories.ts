@@ -3,8 +3,8 @@ import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import showdown from 'showdown';
 import { define } from '@nvidia-elements/core/internal';
-import typography from '@nvidia-elements/core/css/module.typography.css?inline';
-import layout from '@nvidia-elements/core/css/module.layout.css?inline';
+import typography from '@nvidia-elements/styles/typography.css?inline';
+import layout from '@nvidia-elements/styles/layout.css?inline';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/tag/define.js';
@@ -48,7 +48,7 @@ function getVersionBadge(value) {
     status = 'danger';
   }
 
-  return html`<mlv-badge status=${status as any}>${pin}</mlv-badge>`;
+  return html`<nve-badge status=${status as any}>${pin}</nve-badge>`;
 }
 
 function getCoverageStatus(value, message = '', container = 'flat') {
@@ -66,7 +66,7 @@ function getCoverageStatus(value, message = '', container = 'flat') {
   }
 
   const format = status !== 'unknown' ? new Intl.NumberFormat('default', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value / 100) : 'unknown';
-  return html`<mlv-badge .container=${container} status=${status as any}>${message} ${format}</mlv-badge>`;
+  return html`<nve-badge .container=${container} status=${status as any}>${message} ${format}</nve-badge>`;
 }
 
 function getStatusBadge(status, message = '', container = 'flat') {
@@ -77,16 +77,16 @@ function getStatusBadge(status, message = '', container = 'flat') {
     undefined: 'unknown'
   };
 
-  return html`<mlv-badge .container=${container} .status=${statuses[status]}>${status ? status : 'unknown'}${message}</mlv-badge>`
+  return html`<nve-badge .container=${container} .status=${statuses[status]}>${status ? status : 'unknown'}${message}</nve-badge>`
 }
 
 function getA11yStatusBadge(axe: string | boolean, shorthand = false, container = 'flat') {
   if (axe === undefined) {
-    return html`<mlv-badge .container=${container} status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">${shorthand ? 'Reviewed' : 'Accessibility'}</a></mlv-badge>`;
+    return html`<nve-badge .container=${container} status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">${shorthand ? 'Reviewed' : 'Accessibility'}</a></nve-badge>`;
   } else if (axe === false) {
-    return html`<mlv-badge .container=${container} status="pending">${shorthand ? 'Pending' : 'Accessibility: Pending'}</mlv-badge>`
+    return html`<nve-badge .container=${container} status="pending">${shorthand ? 'Pending' : 'Accessibility: Pending'}</nve-badge>`
   } else {
-    return html`<mlv-badge .container=${container} status="warning" style="--text-transform: none"><a href="https://dequeuniversity.com/rules/axe/4.8/${axe}?application=axeAPI" target="_blank">${shorthand ? axe : `Accessibility: ${axe}`}</a></mlv-badge>`
+    return html`<nve-badge .container=${container} status="warning" style="--text-transform: none"><a href="https://dequeuniversity.com/rules/axe/4.8/${axe}?application=axeAPI" target="_blank">${shorthand ? axe : `Accessibility: ${axe}`}</a></nve-badge>`
   }
 }
 
@@ -106,21 +106,21 @@ function getLighthouseScores(element, container = '') {
   const scores = element.lighthouse.scores;
   const average = scores ? Math.floor((scores.performance + scores.accessibility + scores.bestPractices) / 3) : 0;
   return scores ? html`
-  <mlv-tooltip style="--background: var(--mlv-sys-layer-overlay-background);" behavior-trigger anchor="lighthouse-badge" trigger="lighthouse-badge" position="bottom" hidden>
-    <div mlv-layout="column gap:sm">
-      <mlv-badge container="flat" .status=${getLighthouseScoreStatus(scores.performance)}>Performance: ${scores.performance}</mlv-badge>
-      <mlv-badge container="flat" .status=${getLighthouseScoreStatus(scores.bestPractices)}>Best Practices: ${scores.bestPractices}</mlv-badge>
-      <mlv-badge container="flat" .status=${getLighthouseScoreStatus(scores.accessibility)}>Accessibility: ${scores.accessibility}</mlv-badge>
+  <nve-tooltip style="--background: var(--nve-sys-layer-overlay-background);" behavior-trigger anchor="lighthouse-badge" trigger="lighthouse-badge" position="bottom" hidden>
+    <div nve-layout="column gap:sm">
+      <nve-badge container="flat" .status=${getLighthouseScoreStatus(scores.performance)}>Performance: ${scores.performance}</nve-badge>
+      <nve-badge container="flat" .status=${getLighthouseScoreStatus(scores.bestPractices)}>Best Practices: ${scores.bestPractices}</nve-badge>
+      <nve-badge container="flat" .status=${getLighthouseScoreStatus(scores.accessibility)}>Accessibility: ${scores.accessibility}</nve-badge>
     </div>
-  </mlv-tooltip>
-  <mlv-badge id="lighthouse-badge" .status=${getLighthouseScoreStatus(average)} .container=${container} style="--text-transform: none">
+  </nve-tooltip>
+  <nve-badge id="lighthouse-badge" .status=${getLighthouseScoreStatus(average)} .container=${container} style="--text-transform: none">
     <a href="https://developer.chrome.com/docs/lighthouse/overview/" target="_blank">Lighthouse: ${average}</a>
-  </mlv-badge>
+  </nve-badge>
   ` : nothing;
 }
 
 function getPayloadSize(payload, container = 'flat') {
-  return payload?.javascript ? html`<mlv-badge .container=${container} status="success">${container === 'flat' ? nothing : 'Bundle: '}${payload.javascript.kb.toFixed(2)}kb</mlv-badge>` : nothing;
+  return payload?.javascript ? html`<nve-badge .container=${container} status="success">${container === 'flat' ? nothing : 'Bundle: '}${payload.javascript.kb.toFixed(2)}kb</nve-badge>` : nothing;
 }
 
 function getBehaviorCategoryIcon(category: string) {
@@ -148,13 +148,13 @@ function basicSort(list: any[], key: string) {
 
 export const RawMetadata = {
   render: () => html`
-    <div mlv-layout="column gap:lg">
-      <mlv-button>download</mlv-button>
-      <mlv-json-viewer expanded></mlv-json-viewer>
+    <div nve-layout="column gap:lg">
+      <nve-button>download</nve-button>
+      <nve-json-viewer expanded></nve-json-viewer>
     </div>
     <script type="module">
-      const button = document.querySelector('mlv-button');
-      const viewer = document.querySelector('mlv-json-viewer');
+      const button = document.querySelector('nve-button');
+      const viewer = document.querySelector('nve-json-viewer');
       viewer.value = ${JSON.stringify(metrics)};
       button.addEventListener('click', () => {
         const element = document.createElement('a');
@@ -186,37 +186,37 @@ class ElementStatus extends LitElement {
   render() {
     const metadata = this.#element;
     return html`
-    <div className="status-summary" mlv-layout="column gap:md align:stretch">
-      <div mlv-layout="column gap:xs align:stretch pad-top:xl">
-        <h2 id="stability" mlv-text="heading xl">Release Status</h2>
-        <mlv-divider></mlv-divider>
+    <div className="status-summary" nve-layout="column gap:md align:stretch">
+      <div nve-layout="column gap:xs align:stretch pad-top:xl">
+        <h2 id="stability" nve-text="heading xl">Release Status</h2>
+        <nve-divider></nve-divider>
       </div>
-      <p mlv-text="body">All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
-      <div mlv-layout="column gap:sm">
-        <mlv-badge .status=${metadata.status === 'pre-release' ? 'warning' : 'pending'}>pre-release <mlv-icon name="exclamation-triangle"></mlv-icon></mlv-badge>
-        <div mlv-layout="column gap:xs">
-          <mlv-alert .status=${metadata.figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></mlv-alert>
-          <mlv-alert .status=${metadata.storybook ? 'finished' : 'pending'}>Storybook Preview</mlv-alert>
-          <mlv-alert .status=${metadata.storybook ? 'finished' : 'pending'}>API Documentation</mlv-alert>
-          <mlv-alert .status=${metadata.themes ? 'finished' : 'pending'}>Fully Themeable</mlv-alert>
+      <p nve-text="body">All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
+      <div nve-layout="column gap:sm">
+        <nve-badge .status=${metadata.status === 'pre-release' ? 'warning' : 'pending'}>pre-release <nve-icon name="exclamation-triangle"></nve-icon></nve-badge>
+        <div nve-layout="column gap:xs">
+          <nve-alert .status=${metadata.figma ? 'finished' : 'pending'}>Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
+          <nve-alert .status=${metadata.storybook ? 'finished' : 'pending'}>Storybook Preview</nve-alert>
+          <nve-alert .status=${metadata.storybook ? 'finished' : 'pending'}>API Documentation</nve-alert>
+          <nve-alert .status=${metadata.themes ? 'finished' : 'pending'}>Fully Themeable</nve-alert>
         </div>
       </div>
-      <div mlv-layout="column gap:sm">
-        <mlv-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <mlv-icon name="clock"></mlv-icon></mlv-badge>
-        <div mlv-layout="column gap:xs">
-          <mlv-alert .status=${metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</mlv-alert>
-          <mlv-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/api-design-getting-started--docs">API Review</a></mlv-alert>
-          <mlv-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</mlv-alert>
-          <mlv-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></mlv-alert>
+      <div nve-layout="column gap:sm">
+        <nve-badge .status=${metadata.status === 'beta' ? 'running' : 'pending'}>beta <nve-icon name="clock"></nve-icon></nve-badge>
+        <div nve-layout="column gap:xs">
+          <nve-alert .status=${metadata.unitTests ? 'finished' : 'pending'}>Robust unit test coverages</nve-alert>
+          <nve-alert .status=${metadata.apiReview ? 'finished' : 'pending'}>Passed <a href="./?path=/docs/api-design-getting-started--docs">API Review</a></nve-alert>
+          <nve-alert .status=${metadata.vqa ? 'finished' : 'pending'}>Passed Designer VQA Review</nve-alert>
+          <nve-alert .status=${metadata.package ? 'finished' : 'pending'}>Included in <a href="http://nv/elements">library package</a></nve-alert>
         </div>
       </div>
-      <div mlv-layout="column gap:sm">
-        <mlv-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <mlv-icon name="checkmark-circle"></mlv-icon></mlv-badge>
-        <div mlv-layout="column gap:xs">
-          <mlv-alert .status=${metadata.aria ? 'finished' : 'pending'}>No known outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></mlv-alert>
-          <mlv-alert .status=${metadata.performance ? 'finished' : 'pending'}>No known outstanding performance issues</mlv-alert>
-          <mlv-alert .status=${metadata.responsive ? 'finished' : 'pending'}>Adapts to different screen/container sizes</mlv-alert>
-          <mlv-alert .status=${metadata.stable ? 'finished' : 'pending'}>No breaking API changes for at least 90 days</mlv-alert>
+      <div nve-layout="column gap:sm">
+        <nve-badge .status=${metadata.status === 'stable' ? 'finished' : 'pending'}>stable <nve-icon name="checkmark-circle"></nve-icon></nve-badge>
+        <div nve-layout="column gap:xs">
+          <nve-alert .status=${metadata.aria ? 'finished' : 'pending'}>No known outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></nve-alert>
+          <nve-alert .status=${metadata.performance ? 'finished' : 'pending'}>No known outstanding performance issues</nve-alert>
+          <nve-alert .status=${metadata.responsive ? 'finished' : 'pending'}>Adapts to different screen/container sizes</nve-alert>
+          <nve-alert .status=${metadata.stable ? 'finished' : 'pending'}>No breaking API changes for at least 90 days</nve-alert>
         </div>
       </div>
     </div>
@@ -251,20 +251,20 @@ class ElementMetrics extends LitElement {
   render() {
     const element = this.#element;
     return html`
-      <section mlv-layout="column gap:lg">
-        <div mlv-layout="row gap:xs align:center full">
-          <div mlv-layout="row gap:sm">
+      <section nve-layout="column gap:lg">
+        <div nve-layout="row gap:xs align:center full">
+          <div nve-layout="row gap:sm">
             ${getStatusBadge(element.status, ` ${ELEMENTS_VERSION}`, '')}
             ${getCoverageStatus(element.tests.coverageTotal, 'coverage: ', '')}
             ${element.lighthouse?.payload ? getPayloadSize(element.lighthouse?.payload, '') : nothing}
             ${getLighthouseScores(element)}
             ${getA11yStatusBadge(element.axe, false, '')}
           </div>
-          <mlv-button size="sm" style="margin-left: auto"><mlv-icon name="checklist" size="sm"></mlv-icon><a href=${element.aria}>API Spec</a></mlv-button>
-          ${element.figma ? html`<mlv-button size="sm"><mlv-icon name="shapes" size="sm"></mlv-icon><a href=${element.figma}>Figma</a></mlv-button>` : nothing}
-          <mlv-button size="sm"><mlv-icon name="merge" size="sm"></mlv-icon><a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages">Released ${element.since}</a></mlv-button>
+          <nve-button size="sm" style="margin-left: auto"><nve-icon name="checklist" size="sm"></nve-icon><a href=${element.aria}>API Spec</a></nve-button>
+          ${element.figma ? html`<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href=${element.figma}>Figma</a></nve-button>` : nothing}
+          <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages">Released ${element.since}</a></nve-button>
         </div>
-        ${element.description ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml(element.description).replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
+        ${element.description ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml(element.description).replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       </section>
     `;
   }
@@ -298,86 +298,86 @@ class ElementAPI extends LitElement {
 
   render() {
     return html`
-      ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
-      ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p mlv-text="body">')}></div>` : nothing}
+      ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
+      ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       ${!this.type ? html`
-        <div mlv-layout="column gap:xs pad-top:xl pad-bottom:lg align:stretch">
-          <h3 mlv-text="heading xl">API - ${this.#tagName}</h3>
-          <mlv-divider></mlv-divider>
+        <div nve-layout="column gap:xs pad-top:xl pad-bottom:lg align:stretch">
+          <h3 nve-text="heading xl">API - ${this.#tagName}</h3>
+          <nve-divider></nve-divider>
         </div>
-        <div mlv-layout="column gap:xxl align:stretch">
-          <section mlv-layout="column gap:md" ?hidden=${!this.#element.schema.attributes}>
-            <h3 mlv-text="heading">Properties</h3>
-            <mlv-grid>
-              <mlv-grid-header>
-                <mlv-grid-column width="120px">Property</mlv-grid-column>
-                <mlv-grid-column width="180px">Attribute</mlv-grid-column>
-                <mlv-grid-column>Description</mlv-grid-column>
-                <mlv-grid-column>Type</mlv-grid-column>
-              </mlv-grid-header>
+        <div nve-layout="column gap:xxl align:stretch">
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.schema.attributes}>
+            <h3 nve-text="heading">Properties</h3>
+            <nve-grid>
+              <nve-grid-header>
+                <nve-grid-column width="120px">Property</nve-grid-column>
+                <nve-grid-column width="180px">Attribute</nve-grid-column>
+                <nve-grid-column>Description</nve-grid-column>
+                <nve-grid-column>Type</nve-grid-column>
+              </nve-grid-header>
               ${this.#element.schema.attributes?.map(attr => html`
-              <mlv-grid-row>
-                <mlv-grid-cell><code mlv-text="code">${attr.fieldName}</code></mlv-grid-cell>
-                <mlv-grid-cell><code mlv-text="code">${attr.name}</code></mlv-grid-cell>
-                <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(attr.description ?? '')}></mlv-grid-cell>
-                <mlv-grid-cell>
-                  <div mlv-layout="row gap:xs align:wrap">
-                    ${attr.type?.text ? html`${attr.type?.text.split(' | ').map(i => html`<mlv-tag readonly color="gray-slate">${i.replaceAll("'", '')}</mlv-tag>`)}` : nothing}
-                    ${attr.enum ? html`${attr.enum.map(i => html`<mlv-tag readonly color="gray-slate">${i.replaceAll("'", '')}</mlv-tag>`)}` : nothing}
-                    ${attr.type && !attr.type.text ? html`<mlv-tag readonly color="gray-slate">${attr.type.replaceAll("'", '')}</mlv-tag>` : nothing}
+              <nve-grid-row>
+                <nve-grid-cell><code nve-text="code">${attr.fieldName}</code></nve-grid-cell>
+                <nve-grid-cell><code nve-text="code">${attr.name}</code></nve-grid-cell>
+                <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(attr.description ?? '')}></nve-grid-cell>
+                <nve-grid-cell>
+                  <div nve-layout="row gap:xs align:wrap">
+                    ${attr.type?.text ? html`${attr.type?.text.split(' | ').map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
+                    ${attr.enum ? html`${attr.enum.map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
+                    ${attr.type && !attr.type.text ? html`<nve-tag readonly color="gray-slate">${attr.type.replaceAll("'", '')}</nve-tag>` : nothing}
                   </div>
-                </mlv-grid-cell>
-              </mlv-grid-row>`)}
-            </mlv-grid>
+                </nve-grid-cell>
+              </nve-grid-row>`)}
+            </nve-grid>
           </section>
 
-          <section mlv-layout="column gap:md" ?hidden=${!this.#element.schema.events}>
-            <h3 mlv-text="heading">Events</h3>
-            <mlv-grid>
-              <mlv-grid-header>
-                <mlv-grid-column>Event</mlv-grid-column>
-                <mlv-grid-column>Description</mlv-grid-column>
-              </mlv-grid-header>
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.schema.events}>
+            <h3 nve-text="heading">Events</h3>
+            <nve-grid>
+              <nve-grid-header>
+                <nve-grid-column>Event</nve-grid-column>
+                <nve-grid-column>Description</nve-grid-column>
+              </nve-grid-header>
               ${this.#element.schema.events?.map(event => html`
-              <mlv-grid-row>
-                <mlv-grid-cell>${event.name}</mlv-grid-cell>
-                <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(event.description ?? '')}></mlv-grid-cell>
-              </mlv-grid-row>`)}
-            </mlv-grid>
+              <nve-grid-row>
+                <nve-grid-cell>${event.name}</nve-grid-cell>
+                <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(event.description ?? '')}></nve-grid-cell>
+              </nve-grid-row>`)}
+            </nve-grid>
           </section>
 
-          <section mlv-layout="column gap:md" ?hidden=${!this.#element.schema.slots}>
-            <h3 mlv-text="heading">Slots</h3>
-            <mlv-grid>
-              <mlv-grid-header>
-                <mlv-grid-column>Slot</mlv-grid-column>
-                <mlv-grid-column>Description</mlv-grid-column>
-              </mlv-grid-header>
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.schema.slots}>
+            <h3 nve-text="heading">Slots</h3>
+            <nve-grid>
+              <nve-grid-header>
+                <nve-grid-column>Slot</nve-grid-column>
+                <nve-grid-column>Description</nve-grid-column>
+              </nve-grid-header>
               ${this.#element.schema.slots?.map(slot => html`
-              <mlv-grid-row>
-                <mlv-grid-cell>${slot.name?.length ? slot.name : 'Default'}</mlv-grid-cell>
-                <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(slot.description ?? '')}></mlv-grid-cell>
-              </mlv-grid-row>`)}
-            </mlv-grid>
+              <nve-grid-row>
+                <nve-grid-cell>${slot.name?.length ? slot.name : 'Default'}</nve-grid-cell>
+                <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(slot.description ?? '')}></nve-grid-cell>
+              </nve-grid-row>`)}
+            </nve-grid>
           </section>
 
-          <section mlv-layout="column gap:md" ?hidden=${!this.#element.schema.cssProperties}>
-            <h3 mlv-text="heading">CSS Properties</h3>
-            <mlv-grid>
-              <mlv-grid-header>
-                <mlv-grid-column>Name</mlv-grid-column>
-                <mlv-grid-column>Description</mlv-grid-column>
-              </mlv-grid-header>
+          <section nve-layout="column gap:md" ?hidden=${!this.#element.schema.cssProperties}>
+            <h3 nve-text="heading">CSS Properties</h3>
+            <nve-grid>
+              <nve-grid-header>
+                <nve-grid-column>Name</nve-grid-column>
+                <nve-grid-column>Description</nve-grid-column>
+              </nve-grid-header>
               ${this.#element.schema.cssProperties?.map(prop => html`
-              <mlv-grid-row>
-                <mlv-grid-cell>${prop.name}</mlv-grid-cell>
-                <mlv-grid-cell>
+              <nve-grid-row>
+                <nve-grid-cell>${prop.name}</nve-grid-cell>
+                <nve-grid-cell>
                   ${!prop.name.includes('icon')
-                    ? html`<a mlv-text="link" href=${`https://developer.mozilla.org/en-US/docs/Web/CSS/${prop.name.replace('--', '')}`} target="_blank" rel="none">MDN Documentation</a>`
+                    ? html`<a nve-text="link" href=${`https://developer.mozilla.org/en-US/docs/Web/CSS/${prop.name.replace('--', '')}`} target="_blank" rel="none">MDN Documentation</a>`
                     : nothing}
-                </mlv-grid-cell>
-              </mlv-grid-row>`)}
-            </mlv-grid>
+                </nve-grid-cell>
+              </nve-grid-row>`)}
+            </nve-grid>
           </section>
         </div>
       ` : nothing}
@@ -399,25 +399,25 @@ class ElementsGlossary extends LitElement {
 
   render() {
     return html`
-      <section mlv-layout="column gap:md">
-        <h3 mlv-text="heading">Properties</h3>
-        <mlv-grid>
-          <mlv-grid-header>
-            <mlv-grid-column width="150px">Property</mlv-grid-column>
-            <mlv-grid-column>Description</mlv-grid-column>
-            <mlv-grid-column width="350px">Type</mlv-grid-column>
-          </mlv-grid-header>
+      <section nve-layout="column gap:md">
+        <h3 nve-text="heading">Properties</h3>
+        <nve-grid>
+          <nve-grid-header>
+            <nve-grid-column width="150px">Property</nve-grid-column>
+            <nve-grid-column>Description</nve-grid-column>
+            <nve-grid-column width="350px">Type</nve-grid-column>
+          </nve-grid-header>
           ${metrics.types.props?.map(prop => html`
-          <mlv-grid-row>
-            <mlv-grid-cell><code mlv-text="code">${prop.name}</code></mlv-grid-cell>
-            <mlv-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></mlv-grid-cell>
-            <mlv-grid-cell>
-              <div mlv-layout="row gap:xs align:wrap">
-                ${prop.type ? html`${prop.type?.split('|').map(i => i.trim()).filter(i => i.length).map(i => html`<mlv-tag readonly color="gray-slate">${i.replaceAll("'", '')}</mlv-tag>`)}` : nothing}
+          <nve-grid-row>
+            <nve-grid-cell><code nve-text="code">${prop.name}</code></nve-grid-cell>
+            <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></nve-grid-cell>
+            <nve-grid-cell>
+              <div nve-layout="row gap:xs align:wrap">
+                ${prop.type ? html`${prop.type?.split('|').map(i => i.trim()).filter(i => i.length).map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
               </div>
-            </mlv-grid-cell>
-          </mlv-grid-row>`)}
-        </mlv-grid>
+            </nve-grid-cell>
+          </nve-grid-row>`)}
+        </nve-grid>
       </section>
     `;
   }
@@ -475,50 +475,50 @@ class ElementsMetrics extends LitElement {
 
   render() {
     return html`
-      <div mlv-layout="row gap:md align:vertical-center pad-bottom:sm">
-        <h3 mlv-text="body bold">Summary:</h3>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Total Available Components</span>
-          <span mlv-text="body sm bold"><mlv-badge status="success">${metrics['@nvidia-elements/core'].elements.length}</mlv-badge></span>
+      <div nve-layout="row gap:md align:vertical-center pad-bottom:sm">
+        <h3 nve-text="body bold">Summary:</h3>
+        <section nve-layout="row gap:xs align:center">
+          <span nve-text="body sm muted">Total Available Components</span>
+          <span nve-text="body sm bold"><nve-badge status="success">${metrics['@nvidia-elements/core'].elements.length}</nve-badge></span>
         </section>
       </div>
-      <mlv-grid style="--scroll-height: calc(100vh - 290px)">
-        <mlv-grid-header>
+      <nve-grid style="--scroll-height: calc(100vh - 290px)">
+        <nve-grid-header>
           ${Object.entries(this.state.columns).map(([name, column]) => html`
-            <mlv-grid-column
+            <nve-grid-column
               @mouseover=${() => this.state = { ...this.state, tooltipColumn: name } }
               @mouseleave=${() => this.state = { ...this.state, tooltipColumn: null } }
               id=${name}
               width=${column.width ? column.width : '160px'}>
               ${name.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1").replace(/^./, (match) => match.toUpperCase())}
-              <mlv-sort-button .name=${name} .sort=${column.sort as 'ascending' | 'descending' | 'none'} @sort=${e => this.#sort(e)}></mlv-sort-button>
-            </mlv-grid-column>
+              <nve-sort-button .name=${name} .sort=${column.sort as 'ascending' | 'descending' | 'none'} @sort=${e => this.#sort(e)}></nve-sort-button>
+            </nve-grid-column>
           `)}
-        </mlv-grid-header>
+        </nve-grid-header>
         ${this.elements.map(element => {
           return html`
-          <mlv-grid-row>
-            <mlv-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/api/', './')} mlv-text="body link no-visit">${element.name.replace('mlv-', '')}</a></mlv-grid-cell>
-            <mlv-grid-cell>${getStatusBadge(element.status)}</mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</mlv-grid-cell>
-            <mlv-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</mlv-grid-cell>
-            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.performance)}>${element.lighthouse.scores?.performance}</mlv-badge></mlv-grid-cell>
-            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.accessibility)}>${element.lighthouse.scores?.accessibility}</mlv-badge></mlv-grid-cell>
-            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.bestPractices)}>${element.lighthouse.scores?.bestPractices}</mlv-badge></mlv-grid-cell>
-            <mlv-grid-cell>${getA11yStatusBadge(element.axe, true)}</mlv-grid-cell>
-            <mlv-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} mlv-text="link no-visit">${element.behavior}</a></mlv-grid-cell>
-            <mlv-grid-cell>${element.since}</mlv-grid-cell>
-            <mlv-grid-cell>${element.figma ? html`<a href=${element.figma} mlv-text="link no-visit">Figma</a>` : html`<mlv-icon name="exclamation-triangle" status="warning"></mlv-icon>`}</mlv-grid-cell>
-            <mlv-grid-cell><mlv-icon name="checkmark-circle" status="success"></mlv-icon></mlv-grid-cell>
-            <mlv-grid-cell>${element.responsive ? html`<mlv-icon name="checkmark-circle" status="success"></mlv-icon>` : html`<mlv-icon name="exclamation-triangle" status="warning"></mlv-icon>`}</mlv-grid-cell>
-          </mlv-grid-row>`
+          <nve-grid-row>
+            <nve-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/api/', './')} nve-text="body link no-visit">${element.name.replace('mlv-', '')}</a></nve-grid-cell>
+            <nve-grid-cell>${getStatusBadge(element.status)}</nve-grid-cell>
+            <nve-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</nve-grid-cell>
+            <nve-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</nve-grid-cell>
+            <nve-grid-cell><nve-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.performance)}>${element.lighthouse.scores?.performance}</nve-badge></nve-grid-cell>
+            <nve-grid-cell><nve-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.accessibility)}>${element.lighthouse.scores?.accessibility}</nve-badge></nve-grid-cell>
+            <nve-grid-cell><nve-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.bestPractices)}>${element.lighthouse.scores?.bestPractices}</nve-badge></nve-grid-cell>
+            <nve-grid-cell>${getA11yStatusBadge(element.axe, true)}</nve-grid-cell>
+            <nve-grid-cell>${getBehaviorCategoryIcon(element.behavior)}&nbsp;&nbsp;<a href=${element.aria} nve-text="link no-visit">${element.behavior}</a></nve-grid-cell>
+            <nve-grid-cell>${element.since}</nve-grid-cell>
+            <nve-grid-cell>${element.figma ? html`<a href=${element.figma} nve-text="link no-visit">Figma</a>` : html`<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+            <nve-grid-cell><nve-icon name="checkmark-circle" status="success"></nve-icon></nve-grid-cell>
+            <nve-grid-cell>${element.responsive ? html`<nve-icon name="checkmark-circle" status="success"></nve-icon>` : html`<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+          </nve-grid-row>`
         })}
-        <mlv-grid-footer>
-          <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
-          <mlv-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'elements', bubbles: true }))} container="flat" style="margin-left: auto">view data</mlv-button>
-        </mlv-grid-footer>
-      </mlv-grid>
-      <mlv-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</mlv-tooltip>
+        <nve-grid-footer>
+          <p nve-text="body muted sm">Report Created on ${reportDate}</p>
+          <nve-button @click=${() => this.dispatchEvent(new CustomEvent('view-data', { detail: 'elements', bubbles: true }))} container="flat" style="margin-left: auto">view data</nve-button>
+        </nve-grid-footer>
+      </nve-grid>
+      <nve-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</nve-tooltip>
     `;
   }
 
@@ -560,37 +560,37 @@ class ProjectMetrics extends LitElement {
 
   render() {
     return html`
-      <div mlv-layout="row gap:md align:vertical-center pad-bottom:sm">
-        <h3 mlv-text="body bold">Summary:</h3>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Total Maglev Instances</span>
-          <span mlv-text="body sm bold"><mlv-badge status="success">${metricsMaglev.projects.reduce((p, n) => n.instanceTotal + p, 0)}</mlv-badge></span>
+      <div nve-layout="row gap:md align:vertical-center pad-bottom:sm">
+        <h3 nve-text="body bold">Summary:</h3>
+        <section nve-layout="row gap:xs align:center">
+          <span nve-text="body sm muted">Total Maglev Instances</span>
+          <span nve-text="body sm bold"><nve-badge status="success">${metricsMaglev.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge></span>
         </section>
       </div>
-      <mlv-grid style="--scroll-height: calc(100vh - 290px)">
-        <mlv-grid-header>
+      <nve-grid style="--scroll-height: calc(100vh - 290px)">
+        <nve-grid-header>
           ${Object.entries(this.state.columns).map(([name, column]) => html`
-            <mlv-grid-column
+            <nve-grid-column
               @mouseover=${() => this.state = { ...this.state, tooltipColumn: name } }
               @mouseleave=${() => this.state = { ...this.state, tooltipColumn: null } }
               .name=${name}
               .width=${column.width}
-              id=${name}>${name.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1").replace(/^./, (match) => match.toUpperCase())}</mlv-grid-column>
+              id=${name}>${name.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1").replace(/^./, (match) => match.toUpperCase())}</nve-grid-column>
           `)}
-        </mlv-grid-header>
+        </nve-grid-header>
         ${this.projects.sort((a, b) => getMinorVersion(a.elementsVersion) > getMinorVersion(b.elementsVersion) ? -1 : 1 ).map(project => html`
-          <mlv-grid-row>
-            <mlv-grid-cell>${project.name ?? 'unknown'}</mlv-grid-cell>
-            <mlv-grid-cell>${getVersionBadge(project.elementsVersion)}</mlv-grid-cell>
-            <mlv-grid-cell>${project.instanceTotal}</mlv-grid-cell>
-            <mlv-grid-cell><code mlv-text="code">${project.path}</code></mlv-grid-cell>
-          </mlv-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell>${project.name ?? 'unknown'}</nve-grid-cell>
+            <nve-grid-cell>${getVersionBadge(project.elementsVersion)}</nve-grid-cell>
+            <nve-grid-cell>${project.instanceTotal}</nve-grid-cell>
+            <nve-grid-cell><code nve-text="code">${project.path}</code></nve-grid-cell>
+          </nve-grid-row>
         `)}
-        <mlv-grid-footer>
-          <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
-        </mlv-grid-footer>
-      </mlv-grid>
-      <mlv-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</mlv-tooltip>
+        <nve-grid-footer>
+          <p nve-text="body muted sm">Report Created on ${reportDate}</p>
+        </nve-grid-footer>
+      </nve-grid>
+      <nve-tooltip style="--width: 300px" ?hidden=${!this.state.columns[this.state.tooltipColumn]?.tooltip} anchor=${this.state.tooltipColumn as any}>${this.state.columns[this.state.tooltipColumn]?.tooltip}</nve-tooltip>
     `;
   }
 }
@@ -607,28 +607,28 @@ class LighthouseMetrics extends LitElement {
 
   render() {
     return html`
-      <mlv-grid style="--scroll-height: calc(100vh - 290px)">
-        <mlv-grid-header>
-          <mlv-grid-column>Lighthouse Report</mlv-grid-column>
-          <mlv-grid-column>Performance</mlv-grid-column>
-          <mlv-grid-column>Accessibility</mlv-grid-column>
-          <mlv-grid-column>Best Practices</mlv-grid-column>
-          <mlv-grid-column>Bundle Size</mlv-grid-column>
-        </mlv-grid-header>
+      <nve-grid style="--scroll-height: calc(100vh - 290px)">
+        <nve-grid-header>
+          <nve-grid-column>Lighthouse Report</nve-grid-column>
+          <nve-grid-column>Performance</nve-grid-column>
+          <nve-grid-column>Accessibility</nve-grid-column>
+          <nve-grid-column>Best Practices</nve-grid-column>
+          <nve-grid-column>Bundle Size</nve-grid-column>
+        </nve-grid-header>
         ${metrics['@nvidia-elements/core'].elements.map(element => html`
-          <mlv-grid-row>
-            <mlv-grid-cell>${element.name}</mlv-grid-cell>
-            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.performance)}>${element.lighthouse.scores?.performance}</mlv-badge></mlv-grid-cell>
-            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.accessibility)}>${element.lighthouse.scores?.accessibility}</mlv-badge></mlv-grid-cell>
-            <mlv-grid-cell><mlv-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.bestPractices)}>${element.lighthouse.scores?.bestPractices}</mlv-badge></mlv-grid-cell>
-            <mlv-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</mlv-grid-cell>
-          </mlv-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell>${element.name}</nve-grid-cell>
+            <nve-grid-cell><nve-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.performance)}>${element.lighthouse.scores?.performance}</nve-badge></nve-grid-cell>
+            <nve-grid-cell><nve-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.accessibility)}>${element.lighthouse.scores?.accessibility}</nve-badge></nve-grid-cell>
+            <nve-grid-cell><nve-badge container="flat" .status=${getLighthouseScoreStatus(element.lighthouse.scores?.bestPractices)}>${element.lighthouse.scores?.bestPractices}</nve-badge></nve-grid-cell>
+            <nve-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</nve-grid-cell>
+          </nve-grid-row>
         `)}
-        <mlv-grid-footer>
-          <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
-          <a mlv-text="link" href="https://developer.chrome.com/docs/lighthouse/overview/" style="margin-left: auto">Lighthouse</a>
-        </mlv-grid-footer>
-      </mlv-grid>
+        <nve-grid-footer>
+          <p nve-text="body muted sm">Report Created on ${reportDate}</p>
+          <a nve-text="link" href="https://developer.chrome.com/docs/lighthouse/overview/" style="margin-left: auto">Lighthouse</a>
+        </nve-grid-footer>
+      </nve-grid>
     `;
   }
 }
@@ -645,9 +645,9 @@ class MetricsData extends LitElement {
 
   render() {
     return html`
-    <div mlv-layout="column gap:lg">
-      <mlv-button @click=${this.#download}>download</mlv-button>
-      <mlv-json-viewer .value=${this.value} expanded></mlv-json-viewer>
+    <div nve-layout="column gap:lg">
+      <nve-button @click=${this.#download}>download</nve-button>
+      <nve-json-viewer .value=${this.value} expanded></nve-json-viewer>
     </div>`;
   }
 
@@ -679,48 +679,48 @@ class TestMetrics extends LitElement {
 
   render() {
     return html`
-    <section mlv-layout="column gap:md">
-      <div mlv-layout="row gap:md align:vertical-center">
-        <h3 mlv-text="body bold">Test Coverage:</h3>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Statements</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.statements.pct)}</span>
+    <section nve-layout="column gap:md">
+      <div nve-layout="row gap:md align:vertical-center">
+        <h3 nve-text="body bold">Test Coverage:</h3>
+        <section nve-layout="row gap:xs align:center">
+          <span nve-text="body sm muted">Statements</span>
+          <span nve-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.statements.pct)}</span>
         </section>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Lines</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.lines.pct)}</span>
+        <section nve-layout="row gap:xs align:center">
+          <span nve-text="body sm muted">Lines</span>
+          <span nve-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.lines.pct)}</span>
         </section>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Functions</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.functions.pct)}</span>
+        <section nve-layout="row gap:xs align:center">
+          <span nve-text="body sm muted">Functions</span>
+          <span nve-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.functions.pct)}</span>
         </section>
-        <section mlv-layout="row gap:xs align:center">
-          <span mlv-text="body sm muted">Branches</span>
-          <span mlv-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.branches.pct)}</span>
+        <section nve-layout="row gap:xs align:center">
+          <span nve-text="body sm muted">Branches</span>
+          <span nve-text="body sm bold">${getCoverageStatus(metrics['@nvidia-elements/core'].tests.coverageTotal.branches.pct)}</span>
         </section>
       </div>
-      <mlv-grid style="--scroll-height: calc(100vh - 290px)">
-        <mlv-grid-header>
-          <mlv-grid-column width="350px">File</mlv-grid-column>
-          <mlv-grid-column width="180px">Statements</mlv-grid-column>
-          <mlv-grid-column width="180px">Lines</mlv-grid-column>
-          <mlv-grid-column width="180px">Functions</mlv-grid-column>
-          <mlv-grid-column>Branches</mlv-grid-column>
-        </mlv-grid-header>
+      <nve-grid style="--scroll-height: calc(100vh - 290px)">
+        <nve-grid-header>
+          <nve-grid-column width="350px">File</nve-grid-column>
+          <nve-grid-column width="180px">Statements</nve-grid-column>
+          <nve-grid-column width="180px">Lines</nve-grid-column>
+          <nve-grid-column width="180px">Functions</nve-grid-column>
+          <nve-grid-column>Branches</nve-grid-column>
+        </nve-grid-header>
         ${metrics['@nvidia-elements/core'].tests.coverage.map(cov => html`
-          <mlv-grid-row>
-            <mlv-grid-cell><p mlv-text="body truncate">${cov.file}</p></mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(cov.statements.pct)}</mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(cov.lines.pct)}</mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(cov.functions.pct)}</mlv-grid-cell>
-            <mlv-grid-cell>${getCoverageStatus(cov.branches.pct)}</mlv-grid-cell>
-          </mlv-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="body truncate">${cov.file}</p></nve-grid-cell>
+            <nve-grid-cell>${getCoverageStatus(cov.statements.pct)}</nve-grid-cell>
+            <nve-grid-cell>${getCoverageStatus(cov.lines.pct)}</nve-grid-cell>
+            <nve-grid-cell>${getCoverageStatus(cov.functions.pct)}</nve-grid-cell>
+            <nve-grid-cell>${getCoverageStatus(cov.branches.pct)}</nve-grid-cell>
+          </nve-grid-row>
         `)}
-        <mlv-grid-footer>
-          <p mlv-text="body muted sm">Report Created on ${reportDate}</p>
-          <!-- <mlv-button @click=${() => this.rawData = 'tests'} container="flat" style="margin-left: auto">view data</mlv-button> -->
-        </mlv-grid-footer>
-      </mlv-grid>
+        <nve-grid-footer>
+          <p nve-text="body muted sm">Report Created on ${reportDate}</p>
+          <!-- <nve-button @click=${() => this.rawData = 'tests'} container="flat" style="margin-left: auto">view data</nve-button> -->
+        </nve-grid-footer>
+      </nve-grid>
     </section>
     `;
   }
@@ -742,28 +742,28 @@ class MetricDemo extends LitElement {
 
   render() {
     return html`
-    <div mlv-layout="column gap:md align:horizontal-stretch pad:lg" no-story-container @view-data=${e => this.rawData = e.detail}>
-      <div mlv-layout="column gap:md">
-        <div mlv-layout="row gap:md">
-          <h1 mlv-text="heading lg">Elements</h1>
-          <mlv-badge status="success">version ${ELEMENTS_VERSION}</mlv-badge>
+    <div nve-layout="column gap:md align:horizontal-stretch pad:lg" no-story-container @view-data=${e => this.rawData = e.detail}>
+      <div nve-layout="column gap:md">
+        <div nve-layout="row gap:md">
+          <h1 nve-text="heading lg">Elements</h1>
+          <nve-badge status="success">version ${ELEMENTS_VERSION}</nve-badge>
         </div>
-        <p mlv-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
+        <p nve-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
       </div>
 
-      <section mlv-layout="column gap:lg align:stretch pad-top:lg">
-        <div  mlv-layout="column gap:xs align:stretch">
-          <mlv-tabs>
-            <mlv-tabs-item .selected=${this.tab === 'metrics'} @click=${() => this.tab = 'metrics'} selected>Metrics</mlv-tabs-item>
-            <mlv-tabs-item .selected=${this.tab === 'test'} @click=${() => this.tab = 'test'}>Testing &amp; Performance</mlv-tabs-item>
-            <mlv-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev</mlv-tabs-item>
-            <mlv-tabs-item .selected=${this.tab === 'metadata'} @click=${() => this.tab = 'metadata'}>Raw Metadata</mlv-tabs-item>
-          </mlv-tabs>
-          <mlv-divider></mlv-divider>
+      <section nve-layout="column gap:lg align:stretch pad-top:lg">
+        <div  nve-layout="column gap:xs align:stretch">
+          <nve-tabs>
+            <nve-tabs-item .selected=${this.tab === 'metrics'} @click=${() => this.tab = 'metrics'} selected>Metrics</nve-tabs-item>
+            <nve-tabs-item .selected=${this.tab === 'test'} @click=${() => this.tab = 'test'}>Testing &amp; Performance</nve-tabs-item>
+            <nve-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev</nve-tabs-item>
+            <nve-tabs-item .selected=${this.tab === 'metadata'} @click=${() => this.tab = 'metadata'}>Raw Metadata</nve-tabs-item>
+          </nve-tabs>
+          <nve-divider></nve-divider>
         </div>
         ${this.tab === 'metrics' ? html`<elements-metrics></elements-metrics>` : nothing}
         ${this.tab === 'test' ? html`
-        <div mlv-layout="grid gap:md span-items:6">
+        <div nve-layout="grid gap:md span-items:6">
           <test-metrics></test-metrics>
           <lighthouse-metrics style="margin-top: 26px;"></lighthouse-metrics>
         </div>` : nothing}
@@ -771,25 +771,25 @@ class MetricDemo extends LitElement {
         ${this.tab === 'metadata' ? html`<metrics-data></metrics-data>` : nothing}
       </section>
     </div>
-    <mlv-drawer @close=${() => this.rawData = ''} .hidden=${!this.rawData} position="right" modal closable style="--max-width: 720px; --content-padding: 0">
-      <mlv-drawer-header>
-        <div mlv-layout="column gap:md full">
-          <h2 mlv-text="heading" style="text-transform: capitalize">${this.rawData} data</h2>
-          <mlv-search>
+    <nve-drawer @close=${() => this.rawData = ''} .hidden=${!this.rawData} position="right" modal closable style="--max-width: 720px; --content-padding: 0">
+      <nve-drawer-header>
+        <div nve-layout="column gap:md full">
+          <h2 nve-text="heading" style="text-transform: capitalize">${this.rawData} data</h2>
+          <nve-search>
             <input type="search" @input=${this.#search} />
-          </mlv-search>
+          </nve-search>
         </div>
-      </mlv-drawer-header>
-      <mlv-drawer-content>
-        <mlv-json-viewer expanded>${JSON.stringify(metrics[this.rawData])}</mlv-json-viewer>
-      </mlv-drawer-content>
-    </mlv-drawer>
+      </nve-drawer-header>
+      <nve-drawer-content>
+        <nve-json-viewer expanded>${JSON.stringify(metrics[this.rawData])}</nve-json-viewer>
+      </nve-drawer-content>
+    </nve-drawer>
 `;
   }
 
   #search(e: any) {
-    const value = e.target.value.length ? searchJson(structuredClone(metrics[this.rawData]), e.target.value) : metrics[this.rawData];
-    (this.shadowRoot as any).querySelector('mlv-json-viewer').value = value;
+    const value = e.target.value.length ? searchJson(structuredClone(metrics['@nvidia-elements/core'][this.rawData]), e.target.value) : metrics['@nvidia-elements/core'][this.rawData];
+    (this.shadowRoot as any).querySelector('nve-json-viewer').value = value;
   }
 }
 

@@ -19,7 +19,7 @@ export const File = {
 
 export const Vertical = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-file>
     <label>label</label>
     <input type="file" />
@@ -48,7 +48,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-file layout="horizontal">
     <label>label</label>
     <input type="file" />

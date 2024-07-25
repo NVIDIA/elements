@@ -12,7 +12,7 @@ export const Layers = {
         grid-template-columns: 1fr 1fr;
         gap: 48px;
         padding: 24px;
-        background: var(--mlv-sys-layer-canvas-background);
+        background: var(--nve-sys-layer-canvas-background);
       }
 
       .layer-demo h2,
@@ -22,33 +22,33 @@ export const Layers = {
       }
 
       .canvas {
-        background: var(--mlv-sys-layer-canvas-background);
-        color: var(--mlv-sys-layer-canvas-color);
-        padding: var(--mlv-ref-size-600);
+        background: var(--nve-sys-layer-canvas-background);
+        color: var(--nve-sys-layer-canvas-color);
+        padding: var(--nve-ref-size-600);
       }
 
       .container {
-        background: var(--mlv-sys-layer-container-background);
-        color: var(--mlv-sys-layer-container-color);
-        padding: var(--mlv-ref-size-500);
-        box-shadow: var(--mlv-ref-shadow-100);
-        border-radius: var(--mlv-ref-border-radius-lg);
+        background: var(--nve-sys-layer-container-background);
+        color: var(--nve-sys-layer-container-color);
+        padding: var(--nve-ref-size-500);
+        box-shadow: var(--nve-ref-shadow-100);
+        border-radius: var(--nve-ref-border-radius-lg);
         width: 400px;
         height: 300px;
       }
 
       .overlay {
-        background: var(--mlv-sys-layer-overlay-background);
-        color: var(--mlv-sys-layer-overlay-color);
-        padding: var(--mlv-ref-size-600);
-        box-shadow: var(--mlv-ref-shadow-200);
-        border-radius: var(--mlv-ref-border-radius-lg);
+        background: var(--nve-sys-layer-overlay-background);
+        color: var(--nve-sys-layer-overlay-color);
+        padding: var(--nve-ref-size-600);
+        box-shadow: var(--nve-ref-shadow-200);
+        border-radius: var(--nve-ref-border-radius-lg);
         width: 400px;
         height: 300px;
       }
 
       .backdrop {
-        background: var(--mlv-sys-layer-backdrop-background);
+        background: var(--nve-sys-layer-backdrop-background);
         padding: 24px;
         width: 400px;
         height: 300px;
@@ -63,11 +63,11 @@ export const Layers = {
       }
 
       .popover {
-        background: var(--mlv-sys-layer-popover-background);
-        color: var(--mlv-sys-layer-popover-color);
-        padding: var(--mlv-ref-size-400);
-        box-shadow: var(--mlv-ref-shadow-300);
-        border-radius: var(--mlv-ref-border-radius-md);
+        background: var(--nve-sys-layer-popover-background);
+        color: var(--nve-sys-layer-popover-color);
+        padding: var(--nve-ref-size-400);
+        box-shadow: var(--nve-ref-shadow-300);
+        border-radius: var(--nve-ref-border-radius-md);
         width: 400px;
         height: 130px;
       }

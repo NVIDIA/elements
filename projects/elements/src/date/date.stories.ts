@@ -39,7 +39,7 @@ export const Datalist = {
 
 export const Vertical = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-date>
     <label>label</label>
     <input type="date" />
@@ -68,7 +68,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-date layout="horizontal">
     <label>label</label>
     <input type="date" />
@@ -112,7 +112,7 @@ export const Range = {
 
 export const Types = {
   render: () => html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-date layout="horizontal">
     <label>date label</label>
     <input type="date" />

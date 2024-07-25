@@ -8,7 +8,7 @@ export default {
 
 export const Default = {
   render: () => html`
-    <div mlv-layout="column gap:md pad:lg full">
+    <div nve-layout="column gap:md pad:lg full">
       <mlv-progress-bar value="0"></mlv-progress-bar>
 
       <mlv-progress-bar status="accent" value="25"></mlv-progress-bar>
@@ -24,7 +24,7 @@ export const Default = {
 
 export const Max = {
   render: () => html`
-    <div mlv-layout="column gap:md pad:lg full">
+    <div nve-layout="column gap:md pad:lg full">
       <mlv-progress-bar status="accent" value="25" max="50"></mlv-progress-bar>
 
       <mlv-progress-bar status="accent" value="45" max="50"></mlv-progress-bar>
@@ -34,10 +34,10 @@ export const Max = {
 
 export const Labeled = {
   render: () => html`
-    <div mlv-layout="column gap:xxxs pad:lg align:horizontal-stretch grow">
-      <div mlv-layout="row align:space-between">
-        <p mlv-text="label sm">Upload Status</p>
-        <p mlv-text="label emphasis sm">80%</p>
+    <div nve-layout="column gap:xxxs pad:lg align:horizontal-stretch grow">
+      <div nve-layout="row align:space-between">
+        <p nve-text="label sm">Upload Status</p>
+        <p nve-text="label emphasis sm">80%</p>
       </div>
 
       <mlv-progress-bar status="accent" value="80"></mlv-progress-bar>
@@ -53,7 +53,7 @@ export const Indeterminate = {
 
 export const IndeterminateStatusColors = {
   render: () => html`
-    <div mlv-layout="column gap:md full">
+    <div nve-layout="column gap:md full">
       <mlv-progress-bar status="accent"></mlv-progress-bar>
 
       <mlv-progress-bar status="warning"></mlv-progress-bar>

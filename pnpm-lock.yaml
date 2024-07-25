@@ -344,9 +344,15 @@ importers:
       '@internals/vite':
         specifier: workspace:*
         version: link:../../internals/vite
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../../styles
       '@nvidia-elements/testing':
         specifier: workspace:*
         version: link:../../testing
+      '@nvidia-elements/themes':
+        specifier: workspace:*
+        version: link:../../themes
       '@types/alpinejs':
         specifier: ^3.13.10
         version: 3.13.10

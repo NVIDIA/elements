@@ -63,7 +63,7 @@ override and change the styles in unexpected ways.
 
 <!-- consumer/application styles -->
 <style>
-  mlv-card {
+  nve-card {
     /* bypassing custom css properties */
     background: red;
 
@@ -121,9 +121,9 @@ is solely responsible for modifying the public API to reflect the appropriate st
 
 ```css
 :host {
-  --background: var(--mlv-interaction-background);
-  --border: var(--mlv-object-border-100) solid var(--mlv-object-border-color-100);
-  --color: var(--mlv-interaction-color);
+  --background: var(--nve-interaction-background);
+  --border: var(--nve-object-border-100) solid var(--nve-object-border-color-100);
+  --color: var(--nve-interaction-color);
 }
 
 [internal-host] {
@@ -133,23 +133,23 @@ is solely responsible for modifying the public API to reflect the appropriate st
 }
 
 :host(:hover) {
-  --background: var(--mlv-interaction-hover-background);
-  --color: var(--mlv-interaction-hover-color);
+  --background: var(--nve-interaction-hover-background);
+  --color: var(--nve-interaction-hover-color);
 }
 
 :host([disabled]) {
-  --background: var(--mlv-interaction-disabled-background);
-  --color: var(--mlv-interaction-disabled-color);
+  --background: var(--nve-interaction-disabled-background);
+  --color: var(--nve-interaction-disabled-color);
 }
 
 :host([status='success']) {
-  --background: var(--mlv-status-success-100);
-  --border: var(--mlv-object-border-100) solid var(--mlv-status-success-200);
+  --background: var(--nve-status-success-100);
+  --border: var(--nve-object-border-100) solid var(--nve-status-success-200);
 }
 
 :host([status='danger']) {
-  --background: var(--mlv-status-danger-100);
-  --border: var(--mlv-object-border-100) solid var(--mlv-status-danger-200);
+  --background: var(--nve-status-danger-100);
+  --border: var(--nve-object-border-100) solid var(--nve-status-danger-200);
 }
 ```
 
@@ -160,9 +160,9 @@ With custom elements, the element tag is the scope for the design tokens. Elemen
 tokens are unnecessary and increase the surface area of the API and number of tokens to maintain.
 
 ```css
-mlv-alert.product-custom:hover {
-  --background: var(--mlv-color-green-600);
-  --border: var(--mlv-object-border-100) solid var(--mlv-color-green-700);
+nve-alert.product-custom:hover {
+  --background: var(--nve-color-green-600);
+  --border: var(--nve-object-border-100) solid var(--nve-color-green-700);
 }
 ```
 
@@ -172,29 +172,29 @@ Visual customizations and theming are now fully compatible throughout the public
 
 ```css
 :host {
-  background: var(--mlv-interaction-background);
-  border: var(--mlv-object-border-100) solid var(--mlv-object-border-color-100);
-  color: var(--mlv-interaction-color);
+  background: var(--nve-interaction-background);
+  border: var(--nve-object-border-100) solid var(--nve-object-border-color-100);
+  color: var(--nve-interaction-color);
 }
 
 :host(:hover) {
-  background: var(--mlv-interaction-hover-background);
-  color: var(--mlv-interaction-hover-color);
+  background: var(--nve-interaction-hover-background);
+  color: var(--nve-interaction-hover-color);
 }
 
 :host([disabled]) {
-  background: var(--mlv-interaction-disabled-background);
-  color: var(--mlv-interaction-disabled-color);
+  background: var(--nve-interaction-disabled-background);
+  color: var(--nve-interaction-disabled-color);
 }
 
 :host([status='success']) {
-  background: var(--mlv-status-success-100);
-  border: var(--mlv-object-border-100) solid var(--mlv-status-success-200);
+  background: var(--nve-status-success-100);
+  border: var(--nve-object-border-100) solid var(--nve-status-success-200);
 }
 
 :host([status='danger']) {
-  background: var(--mlv-status-danger-100);
-  border: var(--mlv-object-border-100) solid var(--mlv-status-danger-200);
+  background: var(--nve-status-danger-100);
+  border: var(--nve-object-border-100) solid var(--nve-status-danger-200);
 }
 ```
 
@@ -215,11 +215,11 @@ area of the API and number of tokens to maintain. (see State Properties for more
 
 ```css
 :host([status='danger']) {
-  --background: var(--mlv-sys-support-danger-color);
+  --background: var(--nve-sys-support-danger-color);
 }
 
 :host([status='success']) {
-  --background: var(--mlv-sys-support-success-color);
+  --background: var(--nve-sys-support-success-color);
 }
 ```
 
@@ -227,11 +227,11 @@ area of the API and number of tokens to maintain. (see State Properties for more
 
 ```css
 :host([status='danger']) {
-  background: var(--mlv-sys-support-danger-color);
+  background: var(--nve-sys-support-danger-color);
 }
 
 :host([status='success']) {
-  background: var(--mlv-sys-support-success-color);
+  background: var(--nve-sys-support-success-color);
 }
 ```
 
@@ -253,11 +253,11 @@ For custom states and behaviors, styles can be hooked into the public API of a r
 <style>
 /* element internal styles */
 :host([expanded]) {
-  --background: var(--mlv-interaction-selected-background);
+  --background: var(--nve-interaction-selected-background);
 }
 
 /* consumers can hook into state for custom style overrides */
-mlv-accordion-panel[expanded] {
+nve-accordion-panel[expanded] {
   --background: blue;
 }
 </style>
@@ -288,12 +288,12 @@ support when the reading order is reversed by the user preferences in the browse
 CSS Parts enable elements to expose DOM elements to consumers that typically would be encapsulated in the Shadow DOM.
 
 ```html
-<!-- mlv-dialog internal template -->
+<!-- nve-dialog internal template -->
 <button part="close-button">close</button>
 
 <!-- consumer css -->
 <style>
-  mlv-dialog::part(close-button) {
+  nve-dialog::part(close-button) {
     color: purple;
   }
 </style>
@@ -310,12 +310,12 @@ Elements that are part of the library's public API can more safely be exposed as
 its own well defined and versioned API.
 
 ```html
-<!-- mlv-dialog internal template -->
+<!-- nve-dialog internal template -->
 <nve-icon-button part="close-icon"></nve-icon-button>
 
 <!-- consumer css -->
 <style>
-  mlv-dialog::part(close-icon) {
+  nve-dialog::part(close-icon) {
     --color: purple;
   }
 </style>
@@ -354,7 +354,7 @@ at runtime and create severe performance penalties to consumers of the component
 <nve-alert status="danger">Don't:</nve-alert>
 
 ```typescript
-import theme from '@nvidia-elements/themes/dist/index.css?inline';
-import layout from '@nvidia-elements/core/dist/css/module.layout.css?inline';
-import typography from '@nvidia-elements/core/dist/css/module.typography.css?inline';
+import theme from '@nvidia-elements/themes/index.css?inline';
+import layout from '@nvidia-elements/styles/layout.css?inline';
+import typography from '@nvidia-elements/styles/typography.css?inline';
 ```

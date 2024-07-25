@@ -8,7 +8,7 @@ export default {
 
 export const Default = {
   render: () => html`
-    <div mlv-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm pad:md">
       <mlv-progress-ring status="accent"></mlv-progress-ring>
   
       <mlv-progress-ring status="accent" value="66"></mlv-progress-ring>
@@ -17,7 +17,7 @@ export const Default = {
 
 export const Values = {
   render: () => html`
-    <div mlv-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm pad:md">
       <mlv-progress-ring status="accent"></mlv-progress-ring>
 
       <mlv-progress-ring status="accent" value="0"></mlv-progress-ring>
@@ -32,7 +32,7 @@ export const Values = {
 
 export const Max = {
   render: () => html`
-    <div mlv-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm pad:md">
       <mlv-progress-ring status="accent" max="20" value="5"></mlv-progress-ring>
 
       <mlv-progress-ring status="accent" max="20" value="10"></mlv-progress-ring>
@@ -43,7 +43,7 @@ export const Max = {
     
 export const Status = {
   render: () => html`
-    <div mlv-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm pad:md">
       <mlv-progress-ring status="warning" value="75"></mlv-progress-ring>
 
       <mlv-progress-ring status="danger" value="75"></mlv-progress-ring>
@@ -56,7 +56,7 @@ export const Status = {
     
 export const ZeroValueStatus = {
   render: () => html`
-    <div mlv-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm pad:md">
       <mlv-progress-ring status="success" value="0"></mlv-progress-ring>
 
       <mlv-progress-ring status="warning" value="0"></mlv-progress-ring>
@@ -67,23 +67,23 @@ export const ZeroValueStatus = {
     
 export const WithText = {
   render: () => html`
-    <div mlv-layout="column gap:sm pad:md" mlv-text="medium">
-      <div mlv-layout="row gap:xs align:center">
+    <div nve-layout="column gap:sm pad:md" nve-text="medium">
+      <div nve-layout="row gap:xs align:center">
         <mlv-progress-ring size="xs" status="success" value="0"></mlv-progress-ring>
         Loading Successful
       </div>
 
-      <div mlv-layout="row gap:xs align:center">
+      <div nve-layout="row gap:xs align:center">
         <mlv-progress-ring size="xs" status="warning" value="0"></mlv-progress-ring>
         Loading Timeout
       </div>
 
-      <div mlv-layout="row gap:xs align:center">
+      <div nve-layout="row gap:xs align:center">
         <mlv-progress-ring size="xs" status="danger" value="0"></mlv-progress-ring>
         Loading Error
       </div>
 
-      <div mlv-layout="row gap:xs align:center">
+      <div nve-layout="row gap:xs align:center">
         <mlv-progress-ring status="accent" size="xs"></mlv-progress-ring>
         Active Loading
       </div>
@@ -92,7 +92,7 @@ export const WithText = {
     
 export const SlottedIcon = {
   render: () => html`
-    <div mlv-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm pad:md">
       <mlv-progress-ring status="accent">
         <mlv-icon name="pause" status="accent" slot="status-icon"></mlv-icon>
       </mlv-progress-ring>
@@ -101,7 +101,7 @@ export const SlottedIcon = {
     
 export const Sizing = {
   render: () => html`
-    <div mlv-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm pad:md">
       <mlv-progress-ring status="accent" size="xxs"></mlv-progress-ring>
       <mlv-progress-ring status="accent" size="xs"></mlv-progress-ring>
       <mlv-progress-ring status="accent" size="sm"></mlv-progress-ring>
@@ -110,7 +110,7 @@ export const Sizing = {
       <mlv-progress-ring status="accent" size="xl"></mlv-progress-ring>
     </div>
 
-    <div mlv-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm pad:md">
       <mlv-progress-ring status="danger" size="xxs"></mlv-progress-ring>
       <mlv-progress-ring status="danger" size="xs"></mlv-progress-ring>
       <mlv-progress-ring status="danger" size="sm"></mlv-progress-ring>
@@ -121,7 +121,7 @@ export const Sizing = {
     
 export const WithButton = {
   render: () => html`
-    <div mlv-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm pad:md">
       <mlv-button>
         <mlv-progress-ring status="neutral" size="xxs"></mlv-progress-ring>
         Button

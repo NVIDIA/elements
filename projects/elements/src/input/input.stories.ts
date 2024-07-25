@@ -52,7 +52,7 @@ export const Input = () => {
 
 export const Vertical = () => {
   return html`
-<div mlv-layout="column gap:lg">
+<div nve-layout="column gap:lg">
   <mlv-input>
     <label>label</label>
     <input />
@@ -81,7 +81,7 @@ export const Vertical = () => {
 
 export const Horizontal = () => {
   return html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-input layout="horizontal">
     <label>label</label>
     <input />

@@ -32,7 +32,7 @@ type ArgTypes = Tooltip;
 
 export const Default = {
   render: (args: ArgTypes) => html`
-<div mlv-layout="row align:center" style="height: 250px">
+<div nve-layout="row align:center" style="height: 250px">
   <mlv-tooltip anchor="btn" ${spread(args)}>${args.textContent}</mlv-tooltip>
   <mlv-button id="btn">button</mlv-button>
 </div>
@@ -42,7 +42,7 @@ export const Default = {
 
 export const Interactive = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 250px">
+<div nve-layout="row align:center" style="height: 250px">
   <mlv-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</mlv-tooltip>
   <mlv-button id="action-btn">button</mlv-button>
   <script type="module">
@@ -56,7 +56,7 @@ export const Interactive = {
 
 export const BehaviorTrigger = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 250px">
+<div nve-layout="row align:center" style="height: 250px">
   <mlv-tooltip behavior-trigger anchor="action-btn" trigger="action-btn" hidden>hello there</mlv-tooltip>
   <mlv-button id="action-btn">button</mlv-button>
 </div>
@@ -65,7 +65,7 @@ export const BehaviorTrigger = {
 
 export const OpenDelay = {
   render: () => html`
-<div mlv-layout="row align:center gap:sm" style="height: 250px">
+<div nve-layout="row align:center gap:sm" style="height: 250px">
   <mlv-tooltip behavior-trigger anchor="delay-tooltip-1" trigger="delay-tooltip-1" open-delay="500" hidden>delayed tooltip</mlv-tooltip>
   <mlv-button id="delay-tooltip-1">button</mlv-button>
 
@@ -80,9 +80,9 @@ export const OpenDelay = {
 
 export const DynamicTrigger = {
   render: () => html`
-<div id="dynamic-trigger-demo" mlv-layout="row align:center" style="height: 250px">
+<div id="dynamic-trigger-demo" nve-layout="row align:center" style="height: 250px">
   <mlv-tooltip behavior-trigger hidden>hello there</mlv-tooltip>
-  <div mlv-layout="row gap:xl">
+  <div nve-layout="row gap:xl">
     <mlv-button>button</mlv-button>
     <mlv-button>button</mlv-button>
     <mlv-button>button</mlv-button>
@@ -102,10 +102,10 @@ export const DynamicTrigger = {
 
 export const Hint = {
   render: () => html`
-<div mlv-layout="block align:vertical-center" style="height: 90vh">
+<div nve-layout="block align:vertical-center" style="height: 90vh">
   <mlv-tooltip anchor="action-btn" position="right" trigger="action-btn" hidden>Preview in progress CI tasks for the active host</mlv-tooltip>
-  <div mlv-layout="row gap:xs align:vertical-center">
-    <h2 mlv-text="section">Preview</h2>
+  <div nve-layout="row gap:xs align:vertical-center">
+    <h2 nve-text="section">Preview</h2>
     <mlv-icon-button container="flat" icon-name="information-circle-stroke" id="action-btn"></mlv-icon-button>
   </div>
   <script type="module">
@@ -119,11 +119,11 @@ export const Hint = {
 
 export const HintCopy = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 90vh">
+<div nve-layout="row align:center" style="height: 90vh">
   <mlv-tooltip trigger="btn" anchor="btn" hidden>2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</mlv-tooltip>
   <mlv-toast trigger="btn" anchor="btn" close-timeout="1500" hidden status="success">copied!</mlv-toast>
   <mlv-button container="flat" id="btn" aria-label="copy to clipboard">
-    <p mlv-text="truncate" style="width: 120px">2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</p><mlv-icon name="copy"></mlv-icon>
+    <p nve-text="truncate" style="width: 120px">2d628479cf2db27cbdebbfe41a42f1c9e07c46a8</p><mlv-icon name="copy"></mlv-icon>
   </mlv-button>
 </div>
 
@@ -143,10 +143,10 @@ export const HintCopy = {
 
 export const Content = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 150px">
+<div nve-layout="row align:center" style="height: 150px">
   <mlv-tooltip anchor="btn" position="bottom">
-    <h3 mlv-text="label">Title</h3>
-    <p mlv-text="body">some text content</p>
+    <h3 nve-text="label">Title</h3>
+    <p nve-text="body">some text content</p>
   </mlv-tooltip>
   <mlv-button id="btn">button</mlv-button>
 </div>
@@ -155,7 +155,7 @@ export const Content = {
 
 export const Status = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 250px">
+<div nve-layout="row align:center" style="height: 250px">
   <mlv-tooltip anchor="btn">default status</mlv-tooltip>
   <mlv-tooltip anchor="btn" position="bottom" status="muted">muted status</mlv-tooltip>
   <mlv-button id="btn">button</mlv-button>
@@ -165,7 +165,7 @@ export const Status = {
 
 export const Position = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 200px">
+<div nve-layout="row align:center" style="height: 200px">
   <mlv-tooltip anchor="btn" position="top">top</mlv-tooltip>
   <mlv-tooltip anchor="btn" position="right">right</mlv-tooltip>
   <mlv-tooltip anchor="btn" position="bottom">bottom</mlv-tooltip>
@@ -177,7 +177,7 @@ export const Position = {
 
 export const Alignment = {
   render: () => html`
-<div mlv-theme mlv-layout="row align:center" style="width: 100%; height: 600px;">
+<div mlv-theme nve-layout="row align:center" style="width: 100%; height: 600px;">
   <mlv-tooltip anchor="card" position="top" alignment="start">top start</mlv-tooltip>
   <mlv-tooltip anchor="card" position="top">top center</mlv-tooltip>
   <mlv-tooltip anchor="card" position="top" alignment="end">top end</mlv-tooltip>
@@ -201,7 +201,7 @@ export const Alignment = {
 
 export const Wrap = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 250px">
+<div nve-layout="row align:center" style="height: 250px">
   <mlv-tooltip anchor="btn" style="--width: 200px">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   </mlv-tooltip>

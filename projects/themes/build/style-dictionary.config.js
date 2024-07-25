@@ -20,6 +20,7 @@ html[nve-theme], html[mlv-theme], body[nve-theme], body[mlv-theme], [nve-theme~=
   margin: 0;
 }
 
+*:has([nve-popover]),
 *:has([mlv-popover]) {
   contain: initial;
 }`;

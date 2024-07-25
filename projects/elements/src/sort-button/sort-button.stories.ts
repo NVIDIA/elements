@@ -14,7 +14,7 @@ export const Default = {
 
 export const LightTheme = {
   render: () => html`
-<div mlv-theme="root light" mlv-layout="row gap:md pad:md align:wrap">
+<div mlv-theme="root light" nve-layout="row gap:md pad:md align:wrap">
   <mlv-sort-button></mlv-sort-button>
   <mlv-sort-button sort="ascending"></mlv-sort-button>
   <mlv-sort-button sort="descending"></mlv-sort-button>
@@ -24,7 +24,7 @@ export const LightTheme = {
 
 export const DarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" mlv-layout="row gap:md pad:md align:wrap">
+<div mlv-theme="root dark" nve-layout="row gap:md pad:md align:wrap">
   <mlv-sort-button></mlv-sort-button>
   <mlv-sort-button sort="ascending"></mlv-sort-button>
   <mlv-sort-button sort="descending"></mlv-sort-button>

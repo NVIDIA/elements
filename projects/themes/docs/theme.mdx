@@ -6,18 +6,18 @@ import { Dark, Default, DarkDebug, HighContrast, ReducedMotion } from './theme.s
 
 # Themes
 
-Themes are built leveraging CSS Custom Properties. Themes are applied by setting the `mlv-theme` attribute on the host `html` element.
+Themes are built leveraging CSS Custom Properties. Themes are applied by setting the `nve-theme` attribute on the host `html` element.
 
 ```css
 @import '@nvidia-elements/core/dist/index.css';
 ```
 
 ```html
-<html lang="en" mlv-theme="dark">
+<html lang="en" nve-theme="dark">
 ```
 
 <nve-alert status="warning">
-  If your application cannot access root nodes like html or body then apply mlv-theme="root" to set the root background colors and fonts.
+  If your application cannot access root nodes like html or body then apply nve-theme="root" to set the root background colors and fonts.
 </nve-alert>
 
 <br /><br />
@@ -36,15 +36,15 @@ Themes can be applied dynamically based on user preferences.
 
 ```javascript
  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-   document.body.setAttribute('mlv-theme', 'dark');
+   document.body.setAttribute('nve-theme', 'dark');
  }
 
  if (window.matchMedia('(-ms-high-contrast: active)').matches || window.matchMedia('(forced-colors: active)').matches) {
-   document.body.setAttribute('mlv-theme', 'high-contrast');
+   document.body.setAttribute('nve-theme', 'high-contrast');
  }
 
  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-   document.body.setAttribute('mlv-theme', 'reduced-motion');
+   document.body.setAttribute('nve-theme', 'reduced-motion');
  }
 ```
 

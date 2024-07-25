@@ -5,24 +5,24 @@ import { GridSpan2, GridSpan6, GridAlignTop, GridAlignVerticalCenter, GridAlignB
 
 # Grid
 
-CSS _Grid_ based layouts can be achieved with _little to no CSS_ using the `mlv-layout` attribute.
+CSS _Grid_ based layouts can be achieved with _little to no CSS_ using the `nve-layout` attribute.
 The system is based on a 12 column layout.
 
-Set `mlv-layout="grid"` on a container element and add additional item spanning (`span-items:...`) and `gap:...` values.
+Set `nve-layout="grid"` on a container element and add additional item spanning (`span-items:...`) and `gap:...` values.
 
-- `mlv-layout="grid gap:md span-items:1"`
-- `mlv-layout="grid gap:md span-items:2"`
-- `mlv-layout="grid gap:md span-items:3"`
-- `mlv-layout="grid gap:md span-items:..."`
-- `mlv-layout="grid gap:md span-items:12"`
+- `nve-layout="grid gap:md span-items:1"`
+- `nve-layout="grid gap:md span-items:2"`
+- `nve-layout="grid gap:md span-items:3"`
+- `nve-layout="grid gap:md span-items:..."`
+- `nve-layout="grid gap:md span-items:12"`
 
 Or specify column spanning (`span:...`) on the individual items (1-12):
 
-- `mlv-layout="span:1"`
-- `mlv-layout="span:2"`
-- `mlv-layout="span:3"`
-- `mlv-layout="span:..."`
-- `mlv-layout="span:12"`
+- `nve-layout="span:1"`
+- `nve-layout="span:2"`
+- `nve-layout="span:3"`
+- `nve-layout="span:..."`
+- `nve-layout="span:12"`
 
 Similar to the Horizontal and Vertical _Flexbox_ based system you can also add alignment values:
 
@@ -41,7 +41,7 @@ Similar to the Horizontal and Vertical _Flexbox_ based system you can also add a
 
 ```html
 <!--  Specify column spanning on the parent -->
-<section mlv-layout="grid span-items:3">
+<section nve-layout="grid span-items:3">
   <nve-card></nve-card>
   <nve-card></nve-card>
   <nve-card></nve-card>
@@ -49,17 +49,17 @@ Similar to the Horizontal and Vertical _Flexbox_ based system you can also add a
 </section>
 
 <!--  Specify column spanning on the children -->
-<section mlv-layout="grid gap:md">
-  <nve-card mlv-layout="span:6"></nve-card>
-  <nve-card mlv-layout="span:6"></nve-card>
-  <nve-card mlv-layout="span:4"></nve-card>
-  <nve-card mlv-layout="span:4"></nve-card>
-  <nve-card mlv-layout="span:4"></nve-card>
-  <nve-card mlv-layout="span:4"></nve-card>
+<section nve-layout="grid gap:md">
+  <nve-card nve-layout="span:6"></nve-card>
+  <nve-card nve-layout="span:6"></nve-card>
+  <nve-card nve-layout="span:4"></nve-card>
+  <nve-card nve-layout="span:4"></nve-card>
+  <nve-card nve-layout="span:4"></nve-card>
+  <nve-card nve-layout="span:4"></nve-card>
 </section>
 
 <!--  Grid with alignment options -->
-<section mlv-layout="grid gap:md align:center">
+<section nve-layout="grid gap:md align:center">
   <nve-card></nve-card>
   <nve-card></nve-card>
   <nve-card></nve-card>

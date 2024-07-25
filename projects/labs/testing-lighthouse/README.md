@@ -67,7 +67,7 @@ import { runner } from '@nvidia-elements/testing-lighthouse';
 describe('badge lighthouse report', () => {
   test('badge should meet lighthouse benchmarks', async () => {
     const report = await runner.getReport('nve-badge', /* html */`
-      <mlv-badge>badge</nve-badge>
+      <nve-badge>badge</nve-badge>
       <script type="module">
         import '@nvidia-elements/core/badge/define.js';
       </script>

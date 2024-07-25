@@ -30,12 +30,12 @@ npm install @nvidia-elements/styles @nvidia-elements/themes
 
 ## Layout Gap Spacing
 
-Add the `gap` value to `mlv-layout` to set spacing between elements. For example:
+Add the `gap` value to `nve-layout` to set spacing between elements. For example:
 
 ```html
-<section mlv-layout="row gap:md">
+<section nve-layout="row gap:md">
 
-<section mlv-layout="grid gap:md">
+<section nve-layout="grid gap:md">
 ```
 
 The following "t-shirt" spacing values are available:
@@ -70,12 +70,12 @@ The following "t-shirt" spacing values are available:
 
 ## Layout Padding
 
-Add the `pad` value to `mlv-layout` to set spacing between elements. For example:
+Add the `pad` value to `nve-layout` to set spacing between elements. For example:
 
 ```html
-<section mlv-layout="row pad:md">
+<section nve-layout="row pad:md">
 
-<section mlv-layout="grid pad:md">
+<section nve-layout="grid pad:md">
 ```
 
 The following "t-shirt" spacing values are available:
@@ -103,7 +103,7 @@ Or alternatively use the short hand to just pad the x and y axes.
 - `pad-y:md`
 
 ```html
-<section mlv-layout="row pad-left:md">
+<section nve-layout="row pad-left:md">
 ```
 
 <Canvas of={PadTop} />
@@ -138,11 +138,11 @@ Or alternatively use the short hand to just pad the x and y axes.
 
 ## Full width/height on container
 
-For convenience a `mlv-layout="full"` option can be set to give the container 100% width & height.
+For convenience a `full` option can be set to give the container 100% width & height.
 This is often useful for giving the root element of a page full height.
 
 ```html
-<section mlv-layout="full">
+<section nve-layout="full">
 ```
 
 <Canvas of={Full} />

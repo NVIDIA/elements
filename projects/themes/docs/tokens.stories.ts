@@ -119,9 +119,9 @@ export const ContrastInvert = {
   render: (_, context) => {
     const tokens = Object.keys(getFormattedTokens(tokenJSON, context, value => value.includes('ref-color-green-grass'))).map(k => html`<div style="width: 50px; height: 50px; background: var(${k})"></div>`);
     return html`
-    <div mlv-layout="column gap:sm">
-      <div mlv-layout="row gap:md align:vertical-center"><p mlv-text="label emphasis bold">light</p><div mlv-theme="root light" mlv-layout="row">${tokens}</div></div>
-      <div mlv-layout="row gap:md align:vertical-center"><p mlv-text="label emphasis bold">dark</p><div mlv-theme="root dark" mlv-layout="row">${tokens}</div></div>
+    <div nve-layout="column gap:sm">
+      <div nve-layout="row gap:md align:vertical-center"><p nve-text="label emphasis bold">light</p><div mlv-theme="root light" nve-layout="row">${tokens}</div></div>
+      <div nve-layout="row gap:md align:vertical-center"><p nve-text="label emphasis bold">dark</p><div mlv-theme="root dark" nve-layout="row">${tokens}</div></div>
     </div>
     `
   }
@@ -148,7 +148,7 @@ export const ColorPalette = {
           scale: 1.1;
         }
       </style>
-      <div mlv-layout="grid gap:md" class="color-scale full-width">
+      <div nve-layout="grid gap:md" class="color-scale full-width">
       ${getColorScale('ref-color-gray-slate')}
       ${getColorScale('ref-color-gray-denim')}
       ${getColorScale('ref-color-green-grass')}
@@ -195,12 +195,12 @@ function getColorScale(color) {
     tokens.push(html`<button id="--mlv-${color}-${i}00" value="--mlv-${color}-${i}00" style="background: var(--mlv-${color}-${i}00); color: var(${i < 9 ? '--mlv-ref-color-gray-slate-1200' : '--mlv-ref-color-gray-slate-100'})"></button>`)
   }
   return html`
-  <div mlv-layout="column pad-bottom:xl">
-    <h2 mlv-text="body">${color.replace('ref-color-', '')}</h2>
-    <div mlv-layout="row" style="width: 100%">
-      <div mlv-layout="column" style="padding-top: 25px">${Array.from(Array(12).keys()).map(i => html`<p mlv-text="body" mlv-layout="column align:center pad:xs" style="height: 40px">${i + 1}00</p>`)}</div>
-      <div mlv-layout="column" style="width: 100%"><p mlv-text="body center" mlv-layout="column align:center pad:xs" style="width: 100%">light</p><div mlv-theme="root light" style="width: 100%">${tokens}</div></div>
-      <div mlv-layout="column" style="width: 100%"><p mlv-text="body center" mlv-layout="column align:center pad:xs" style="width: 100%">dark</p><div mlv-theme="root dark" style="width: 100%">${tokens}</div></div>
+  <div nve-layout="column pad-bottom:xl">
+    <h2 nve-text="body">${color.replace('ref-color-', '')}</h2>
+    <div nve-layout="row" style="width: 100%">
+      <div nve-layout="column" style="padding-top: 25px">${Array.from(Array(12).keys()).map(i => html`<p nve-text="body" nve-layout="column align:center pad:xs" style="height: 40px">${i + 1}00</p>`)}</div>
+      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">light</p><div mlv-theme="root light" style="width: 100%">${tokens}</div></div>
+      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">dark</p><div mlv-theme="root dark" style="width: 100%">${tokens}</div></div>
     </div>
   </div>`;
 }
@@ -208,7 +208,7 @@ function getColorScale(color) {
 function getFormattedTokens(tokens, context: any, filter?: (toke: string) => boolean) {
   return Object.entries(tokens)
     .filter(([name]) => filter ? filter(name) : true)
-    .map(([name]) => ({ prop: `--${name.replace('nve', context.globals.scope)}`, value: getTokenValue(name, tokenJSON[name]) }))
+    .map(([name]) => ({ prop: `--${name.replace('nve', context.globals.scope)}`, value: getTokenValue(name, tokenJSON[name], context.globals.scope) }))
     .reduce((prev, next) => ({ ...prev, [next.prop]: next.value }), { });
 }
 
@@ -218,7 +218,7 @@ function renderTokenTable(tokens) {
     .tokens-table {
       width: 100%;
       text-align: left;
-      background: var(--mlv-sys-layer-canvas-background);
+      background: var(--nve-sys-layer-canvas-background);
     }
 
     .tokens-table th {
@@ -226,12 +226,12 @@ function renderTokenTable(tokens) {
     }
 
     .tokens-table td {
-      padding-bottom: var(--mlv-ref-space-xxs);
+      padding-bottom: var(--nve-ref-space-xxs);
     }
 
     .tokens-table td div {
-      background: var(--mlv-ref-border-color);
-      min-height: var(--mlv-ref-size-1000);
+      background: var(--nve-ref-border-color);
+      min-height: var(--nve-ref-size-1000);
       display: flex;
       align-items: center;
       width: 100%;
@@ -253,7 +253,7 @@ function renderTokenTable(tokens) {
     <tbody>
       ${Object.entries(tokens).map(([name, value]: any) => {
         function _toggleCopyIcon(e: any, show: boolean) {
-          e.target.querySelector('mlv-icon-button').style.opacity = show ? 100 : 0;
+          e.target.querySelector('nve-icon-button').style.opacity = show ? 100 : 0;
         }
 
         function copyTokenName(name: string) {
@@ -263,7 +263,7 @@ function renderTokenTable(tokens) {
         return html`<tr @mouseenter="${(e) => _toggleCopyIcon(e, true)}" @mouseleave="${(e) => _toggleCopyIcon(e, false)}">
         <td>
           ${name}
-          <mlv-icon-button style="opacity: 0; margin-top: -18px" title="Copy '${name}' to clipboard" icon-name="copy" container="flat" @click="${() => copyTokenName(name)}"></mlv-icon-button>
+          <nve-icon-button style="opacity: 0; margin-top: -18px" title="Copy '${name}' to clipboard" icon-name="copy" container="flat" @click="${() => copyTokenName(name)}"></nve-icon-button>
         </td>
         <td>
           <code style="user-select: none">${value}</code>
@@ -292,16 +292,17 @@ function renderTokenTable(tokens) {
   </table>`;
 }
 
-function getTokenValue(name: string, value: string) {
-  const themeAttr =  document.querySelector('[mlv-theme]')?.getAttribute('mlv-theme');
-  if (tokenJSON[name].includes('mlv-')) {
+function getTokenValue(name: string, value: string, scope) {
+  const themeAttr =  document.querySelector('[nve-theme]')?.getAttribute('nve-theme');
+  if (tokenJSON[name].includes('nve-')) {
     let tokens = tokenJSON;
     if (themeAttr?.includes('dark')) {
-      tokens = tokenJSONDark;
+      tokens = { ...tokenJSON, ...tokenJSONDark };
     } else if (themeAttr?.includes('high-contrast')) {
-      tokens = tokenJSONHighContrast;
+      tokens = { ...tokenJSON, ...tokenJSONHighContrast };
     }
-    return tokens[name].replace('mlv-', '--mlv-');
+
+    return tokens[name].replace('nve-', `--${scope}-`);
   } else if (value.startsWith('#') && value.length === 7) {
     const [h, s, l] = hexToHSL(getComputedStyle(document.documentElement).getPropertyValue(`--${name}`).trim());
     return `hsl(${h} ${s}% ${l}%)`;

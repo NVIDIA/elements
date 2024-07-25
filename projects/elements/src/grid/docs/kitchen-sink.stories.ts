@@ -127,22 +127,22 @@ class KitchenSinkDemo extends LitElement {
   get #header() {
     return html`
     <mlv-card container="full" style="max-height: 120px">
-      <mlv-card-content mlv-layout="column gap:md align:horizontal-stretch">
-        <div mlv-layout="row gap:md align:center">
-          <h1 mlv-text="heading lg semibold">Workflows</h1>
-          <div mlv-layout="row gap:sm" style="margin-left: auto">
+      <mlv-card-content nve-layout="column gap:md align:horizontal-stretch">
+        <div nve-layout="row gap:md align:center">
+          <h1 nve-text="heading lg semibold">Workflows</h1>
+          <div nve-layout="row gap:sm" style="margin-left: auto">
             <mlv-icon-button @click=${() => this.showAboutDialog = true} icon-name="information-circle-stroke" aria-label="about kitchen sink"></mlv-icon-button>
             <mlv-icon-button icon-name="more-actions" aria-label="additional actions"></mlv-icon-button>
           </div>
         </div>
-        <div mlv-layout="row gap:xl align:vertical-center">
-          <section mlv-layout="row gap:xs align:center">
-            <span mlv-text="body sm muted">Service Location</span>
-            <span mlv-text="body sm bold">Santa Clara</span>
+        <div nve-layout="row gap:xl align:vertical-center">
+          <section nve-layout="row gap:xs align:center">
+            <span nve-text="body sm muted">Service Location</span>
+            <span nve-text="body sm bold">Santa Clara</span>
           </section>
-          <section mlv-layout="row gap:xs align:center">
-            <span mlv-text="body sm muted">Status</span>
-            <span mlv-text="body sm bold"><mlv-badge status="success">available</mlv-badge></span>
+          <section nve-layout="row gap:xs align:center">
+            <span nve-text="body sm muted">Status</span>
+            <span nve-text="body sm bold"><mlv-badge status="success">available</mlv-badge></span>
           </section>
         </div>
       </mlv-card-content>
@@ -153,7 +153,7 @@ class KitchenSinkDemo extends LitElement {
   get #settingsDropdown() {
     return html`
     <mlv-dropdown anchor="column-settings-btn" ?hidden=${!this.workflowGridSettings} @close=${() => this.workflowGridSettings = false}>
-      <h2 mlv-text="heading sm">Settings</h2>
+      <h2 nve-text="heading sm">Settings</h2>
       <mlv-divider></mlv-divider>
       <mlv-checkbox-group style="min-width: 200px">
         ${Object.entries(this.columns).filter(([name]) => name !== 'workflow' && name !== 'status').map(([name, column]) => html`
@@ -169,18 +169,18 @@ class KitchenSinkDemo extends LitElement {
 
   get #actionBar() {
     return html`
-    <div mlv-layout="grid gap:md">
-      <mlv-search container="flat" mlv-layout="span:12">
+    <div nve-layout="grid gap:md">
+      <mlv-search container="flat" nve-layout="span:12">
         <input type="search" placeholder="search" aria-label="search workflows" .value=${this.search} @input=${e => this.#search(e.target.value)} />
       </mlv-search>
-      <div mlv-layout="row gap:sm align:vertical-center span:3">
-        <p mlv-text="body muted">1,145 results found</p>
+      <div nve-layout="row gap:sm align:vertical-center span:3">
+        <p nve-text="body muted">1,145 results found</p>
         <mlv-button id="column-settings-btn" container="flat" @click=${() => this.workflowGridSettings = !this.workflowGridSettings}>
           <mlv-icon name="gear"></mlv-icon>  display settings
         </mlv-button>
       </div>
-      <div mlv-layout="span:5"></div>
-      <div mlv-layout="row gap:sm align:bottom span:4" style="margin-left: auto">
+      <div nve-layout="span:5"></div>
+      <div nve-layout="row gap:sm align:bottom span:4" style="margin-left: auto">
         <mlv-button @click=${() => this.showCreateWorkflowDialog = true} interaction="emphasis">create</mlv-button>
       </div>
     </div>`
@@ -192,36 +192,36 @@ class KitchenSinkDemo extends LitElement {
       <mlv-panel-header>
         <h2 slot="title">Workflow: ${this.workflowDetail?.id}</h2>
       </mlv-panel-header>
-      <mlv-panel-content mlv-layout="column gap:xl">
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Task</label>
-          <p mlv-text="eyebrow sm">${this.workflowDetail?.task}</p>
+      <mlv-panel-content nve-layout="column gap:xl">
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Task</label>
+          <p nve-text="eyebrow sm">${this.workflowDetail?.task}</p>
         </div>
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Priority</label>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Priority</label>
           <mlv-badge status="pending">${this.workflowDetail?.priority}</mlv-badge>
         </div>
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Status</label>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Status</label>
           <mlv-badge status=${this.workflowDetail?.status}>${this.workflowDetail?.status}</mlv-badge>
         </div>
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Coverage</label>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Coverage</label>
           <mlv-badge status=${getTrend(this.workflowDetail?.coverage)}>
             ${this.workflowDetail?.coverage > 0 ? '+' : ''}${this.workflowDetail?.coverage}%
           </mlv-badge>
         </div>
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Reviews</label>
-          <p mlv-text="eyebrow sm">${this.workflowDetail?.reviews}</p>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Reviews</label>
+          <p nve-text="eyebrow sm">${this.workflowDetail?.reviews}</p>
         </div>
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Region</label>
-          <p mlv-text="eyebrow sm">${this.workflowDetail?.region}</p>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Region</label>
+          <p nve-text="eyebrow sm">${this.workflowDetail?.region}</p>
         </div>
-        <div mlv-layout="column gap:xs">
-          <label mlv-text="body sm muted">Created</label>
-          <p mlv-text="eyebrow sm">${this.workflowDetail?.created}</p>
+        <div nve-layout="column gap:xs">
+          <label nve-text="body sm muted">Created</label>
+          <p nve-text="eyebrow sm">${this.workflowDetail?.created}</p>
         </div>
       </mlv-panel-content>
       <mlv-panel-footer>
@@ -233,7 +233,7 @@ class KitchenSinkDemo extends LitElement {
   get #placeholder() {
     return !this.filteredWorkflows.length ? html`
     <mlv-grid-placeholder>
-      <div mlv-layout="column gap:md align:center">
+      <div nve-layout="column gap:md align:center">
         <mlv-alert status="accent">No active workflows found. Try adjusting your filters or reloading.</mlv-alert>
         <mlv-button @click=${() => this.#reloadWorkflows()}>reload workflows <mlv-icon name="refresh"></mlv-icon></mlv-button>
       </div>
@@ -244,10 +244,10 @@ class KitchenSinkDemo extends LitElement {
     return html`
     <mlv-dialog closable modal .hidden=${!this.showCreateWorkflowDialog} @close=${() => this.showCreateWorkflowDialog = false}>
       <mlv-dialog-header>
-        <h2 mlv-text="heading">Workflow</h2>
+        <h2 nve-text="heading">Workflow</h2>
       </mlv-dialog-header>
       <mlv-dialog-content>
-        <form id="workflow-form" mlv-layout="column gap:md" style="width: 200px">
+        <form id="workflow-form" nve-layout="column gap:md" style="width: 200px">
           <mlv-select>
             <label>Task</label>
             <select name="task">
@@ -285,10 +285,10 @@ class KitchenSinkDemo extends LitElement {
     return html`
     <mlv-dialog closable modal .hidden=${!this.showAboutDialog} @close=${() => this.showAboutDialog = false}>
       <mlv-dialog-header>
-        <h2 mlv-text="heading">About Grid Kitchen Sink</h2>
+        <h2 nve-text="heading">About Grid Kitchen Sink</h2>
       </mlv-dialog-header>
       <mlv-dialog-content>
-        <p mlv-text="body wrap">
+        <p nve-text="body wrap">
           This is a demo that demonstrates the full feature set of the datgrid component.
         </p>
       </mlv-dialog-content>
@@ -298,8 +298,8 @@ class KitchenSinkDemo extends LitElement {
   get #notification() {
     return html`
     <mlv-notification .hidden=${!this.workflowNotification} @close=${() => this.workflowNotification = null} status=${this.workflowNotification?.status as any} close-timeout="4000" position="top">
-      <h3 mlv-text="label">${this.workflowNotification?.title}</h3>
-      <p mlv-text="body">${this.workflowNotification?.message}</p>
+      <h3 nve-text="label">${this.workflowNotification?.title}</h3>
+      <p nve-text="body">${this.workflowNotification?.message}</p>
     </mlv-notification>`
   }
 
@@ -307,7 +307,7 @@ class KitchenSinkDemo extends LitElement {
     return this.#selectedCount ? html`
     <mlv-toolbar slot="footer" status="accent">
       <mlv-icon-button container="flat" icon-name="cancel" slot="prefix" @click=${() => this.#selectAll(false)}></mlv-icon-button>
-      <p mlv-text="body">${this.#selectedCount} selected</p>
+      <p nve-text="body">${this.#selectedCount} selected</p>
       <mlv-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} container="flat" slot="suffix">edit</mlv-button>
       <mlv-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} container="flat" interaction="destructive" slot="suffix">delete</mlv-button>
     </mlv-toolbar>` : '';
@@ -316,11 +316,11 @@ class KitchenSinkDemo extends LitElement {
   render() {
     return html`
       ${this.#appHeader}
-      <div mlv-layout="column align:horizontal-stretch" style="height: calc(100vh - 52px)" no-story-container>
+      <div nve-layout="column align:horizontal-stretch" style="height: calc(100vh - 52px)" no-story-container>
         ${this.#header}
-        <div mlv-layout="row align:stretch">
+        <div nve-layout="row align:stretch">
           ${this.#settingsDropdown}
-          <div mlv-layout="column gap:md pad:md full">
+          <div nve-layout="column gap:md pad:md full">
             ${this.#actionBar}
             <mlv-grid style="--scroll-height: calc(100vh - 330px); --row-height: 48px">
               <mlv-grid-header>
@@ -340,9 +340,9 @@ class KitchenSinkDemo extends LitElement {
                   </mlv-checkbox>
                 </mlv-grid-cell>
                 <mlv-grid-cell>
-                  <div mlv-layout="column gap:xs">
-                    <div mlv-text="body">${workflow.task}</div>
-                    <div mlv-text="body sm muted">${workflow.id}</div>
+                  <div nve-layout="column gap:xs">
+                    <div nve-text="body">${workflow.task}</div>
+                    <div nve-text="body sm muted">${workflow.id}</div>
                   </div>
                 </mlv-grid-cell>
                 ${this.columns.status.visible ? html`<mlv-grid-cell><mlv-badge status=${workflow.status}>${workflow.status}</mlv-badge></mlv-grid-cell>` : ''}
@@ -357,7 +357,7 @@ class KitchenSinkDemo extends LitElement {
               </mlv-grid-row>`)}
               ${this.#placeholder}
               <mlv-grid-footer>
-                <p mlv-text="label muted sm">last updated ${new Date()}</p>
+                <p nve-text="label muted sm">last updated ${new Date()}</p>
               </mlv-grid-footer>
               ${this.#bulkActions}
             </mlv-grid>

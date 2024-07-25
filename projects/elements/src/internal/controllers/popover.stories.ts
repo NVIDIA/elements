@@ -16,8 +16,8 @@ export default {
 
 export const Trigger = {
   render: () => html`
-    <div mlv-layout="row align:center" style="height: 250px">
-      <div mlv-layout="row gap:xs">
+    <div nve-layout="row align:center" style="height: 250px">
+      <div nve-layout="row gap:xs">
         <mlv-button id="action-btn-1">button 1</mlv-button>
         <mlv-button id="action-btn-2">button 2</mlv-button>
       </div>
@@ -39,8 +39,8 @@ export const Nested = {
   #root-inner { height: 2000px;}
 </style>
 <mlv-dialog closable modal>
-  <h3 mlv-text="heading">Dialog</h3>
-  <p mlv-text="body" style="margin-bottom: 48px">hello there</p>
+  <h3 nve-text="heading">Dialog</h3>
+  <p nve-text="body" style="margin-bottom: 48px">hello there</p>
 
   <mlv-button id="dropdown-btn">search</mlv-button>
   <mlv-dropdown anchor="dropdown-btn" closable position="bottom" alignment="start">
@@ -54,15 +54,15 @@ export const Nested = {
 </mlv-dialog>
 
 <mlv-notification closable position="bottom" alignment="end">
-  <h3 mlv-text="label">notification</h3>
-  <p mlv-text="body">some text content in a notification</p>  
+  <h3 nve-text="label">notification</h3>
+  <p nve-text="body">some text content in a notification</p>  
 </mlv-notification>
   `
 }
 
 export const Interactive = {
   render: () => html`
-    <div mlv-layout="row align:center gap:xl" style="height: 300px">
+    <div nve-layout="row align:center gap:xl" style="height: 300px">
       <mlv-tooltip trigger="tooltip-btn" behavior-trigger position="top" hidden>hello there</mlv-tooltip>
       <mlv-button id="tooltip-btn">tooltip</mlv-button>
 
@@ -72,27 +72,27 @@ export const Interactive = {
       <mlv-button id="drawer-btn" size="sm">drawer</mlv-button>
       <mlv-drawer trigger="drawer-btn" behavior-trigger hidden closable modal>
         <mlv-drawer-header>
-          <h3 mlv-text="heading semibold sm">Title</h3>
+          <h3 nve-text="heading semibold sm">Title</h3>
         </mlv-drawer-header>
-        <p mlv-text="body">some text content in a drawer</p>
+        <p nve-text="body">some text content in a drawer</p>
       </mlv-drawer>
 
       <mlv-button id="dropdown-btn">dropdown</mlv-button>
       <mlv-dropdown trigger="dropdown-btn" behavior-trigger closable hidden>
-        <h3 mlv-text="heading">Title</h3>
-        <p mlv-text="body">some text content in a dropdown</p>
+        <h3 nve-text="heading">Title</h3>
+        <p nve-text="body">some text content in a dropdown</p>
       </mlv-dropdown>
 
       <mlv-button id="dialog-btn">dialog</mlv-button>
       <mlv-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
-        <h3 mlv-text="heading">Title</h3>
-        <p mlv-text="body">some text content in a closable dialog</p>
+        <h3 nve-text="heading">Title</h3>
+        <p nve-text="body">some text content in a closable dialog</p>
       </mlv-dialog>
 
       <mlv-button id="notification-btn">notification snackbar</mlv-button>
       <mlv-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" alignment="end" close-timeout="2000">
-        <h3 mlv-text="label">notification</h3>
-        <p mlv-text="body">some text content in a notification</p>  
+        <h3 nve-text="label">notification</h3>
+        <p nve-text="body">some text content in a notification</p>  
       </mlv-notification>
     </div>
   `

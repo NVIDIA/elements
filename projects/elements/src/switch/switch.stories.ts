@@ -17,7 +17,7 @@ export const Switch = () => {
 
 export const States = () => {
   return html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-switch>
     <label>label</label>
     <input type="checkbox" />
@@ -46,7 +46,7 @@ export const States = () => {
 
 export const VerticalGroup = () => {
   return html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-switch-group>
     <label>label</label>
     <mlv-switch>
@@ -128,7 +128,7 @@ export const VerticalGroup = () => {
 
 export const VerticalInlineGroup = () => {
   return html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-switch-group layout="vertical-inline">
     <label>label</label>
     <mlv-switch>
@@ -210,7 +210,7 @@ export const VerticalInlineGroup = () => {
 
 export const HorizontalGroup = () => {
   return html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-switch-group layout="horizontal">
     <label>label</label>
     <mlv-switch>
@@ -292,7 +292,7 @@ export const HorizontalGroup = () => {
 
 export const HorizontalInlineGroup = () => {
   return html`
-<div mlv-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg align:stretch">
   <mlv-switch-group layout="horizontal-inline">
     <label>label</label>
     <mlv-switch>

@@ -34,7 +34,7 @@ export const Default = {
 
 export const Status = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 200px">
+<div nve-layout="row align:center" style="height: 200px">
   <mlv-toast position="top">default</mlv-toast>
   <mlv-toast status="success" position="right">success</mlv-toast>
   <mlv-toast status="warning" position="bottom">warning</mlv-toast>
@@ -45,7 +45,7 @@ export const Status = {
 
 export const Actions = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 200px">
+<div nve-layout="row align:center" style="height: 200px">
   <mlv-toast position="top">
     default <mlv-button container="inline">action</mlv-button>
   </mlv-toast>
@@ -64,7 +64,7 @@ export const Actions = {
 
 export const Interactive = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 90vh">
+<div nve-layout="row align:center" style="height: 90vh">
   <mlv-button id="btn">copy to clipboard</mlv-button>
   <mlv-toast anchor="btn" position="top" close-timeout="1500" hidden>copied!</mlv-toast>
 </div>
@@ -79,7 +79,7 @@ export const Interactive = {
 
 export const BehaviorTrigger = {
   render: () => html`
-<div mlv-layout="row align:center" style="height: 90vh">
+<div nve-layout="row align:center" style="height: 90vh">
   <mlv-button id="btn">copy to clipboard</mlv-button>
   <mlv-toast trigger="btn" behavior-trigger position="top" close-timeout="1500" hidden>copied!</mlv-toast>
 </div>

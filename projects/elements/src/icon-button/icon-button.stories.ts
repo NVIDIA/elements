@@ -59,12 +59,12 @@ export const FlatInteractions = {
 
 export const PressedToggle = {
   render: () => html`
-  <div mlv-layout="row gap:sm pad-bottom:md">
+  <div nve-layout="row gap:sm pad-bottom:md">
     <mlv-icon-button icon-name="filter-stroke"></mlv-icon-button>
     <mlv-icon-button pressed icon-name="filter"></mlv-icon-button>
   </div>
 
-  <div mlv-layout="row gap:sm">
+  <div nve-layout="row gap:sm">
     <mlv-icon-button icon-name="eye-hidden" container="flat" aria-label="show"></mlv-icon-button>
     <mlv-icon-button pressed icon-name="eye" container="flat" aria-label="hide"></mlv-icon-button>
   </div>

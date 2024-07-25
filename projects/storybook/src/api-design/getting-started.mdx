@@ -15,7 +15,7 @@ This document is not intended to define the best practices and API design of hig
 
 ## Legend
 
-<div mlv-layout="column gap:xs">
+<div nve-layout="column gap:xs">
   <nve-alert status="success">Do: a best practice to follow</nve-alert>
 
 <nve-alert status="danger">Don't: a practice to avoid</nve-alert>
@@ -68,7 +68,7 @@ Consistent element APIs provide consistent developer experience. The recommendat
 
 <script type="module">
   import '@nvidia-elements/core/include/alert.js';
-  const alert = document.querySelector('mlv-alert');
+  const alert = document.querySelector('nve-alert');
   alert.closable = true;
   alert.addEventListener('close', (e) => console.log(e))
 </script>

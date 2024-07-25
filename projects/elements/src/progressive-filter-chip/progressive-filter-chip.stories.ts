@@ -157,7 +157,7 @@ export const Custom = {
 
 export const Validation = {
   render: () => html`
-<div mlv-layout="column gap:lg">
+<div nve-layout="column gap:lg">
   <mlv-progressive-filter-chip closable>
     <mlv-input>
       <input type="text" value="validation" required />
