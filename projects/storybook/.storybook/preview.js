@@ -18,7 +18,7 @@ import '@nvidia-elements/core/button/define.js';
 
 import { playground } from './playground-url.js';
 import { updateScope } from './utils.js';
-import { H1, H2, H3, H4, P, UL, OL, PRE } from './markdown.jsx';
+import { H1, H2, H3, H4, P, UL, OL, PRE, CODE } from './markdown.jsx';
 
 const customElements = await import('@nvidia-elements/core/custom-elements.json');
 
@@ -44,7 +44,8 @@ export const parameters = {
       p: P,
       ul: UL,
       ol: OL,
-      pre: PRE
+      pre: PRE,
+      code: CODE
     },
     theme: themes.dark,
     source: {

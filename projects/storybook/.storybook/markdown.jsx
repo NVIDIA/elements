@@ -82,11 +82,23 @@ export const OL = (args) => {
   )
 }
 
-export const PRE = (args) => {
+export const CODE = (args) => {
   // workaround https://github.com/storybookjs/storybook/issues/20634
   const globals = { ...addons.getChannel().data.setGlobals[0].globals, ...window.NVE_SB_GLOBALS };
+  const code = updateScope(args.children, {
+    scope: globals?.scope ?? 'mlv',
+    sourceType: globals?.sourceType ?? ''
+  });
 
+  return <Unstyled>
+    <code nve-text="code">{code}</code>
+  </Unstyled>
+}
+
+export const PRE = (args) => {
+  // workaround https://github.com/storybookjs/storybook/issues/20634
   if (args.children?.props?.children) {
+    const globals = { ...addons.getChannel().data.setGlobals[0].globals, ...window.NVE_SB_GLOBALS };
     const code = updateScope(args.children.props.children, {
       scope: globals?.scope ?? 'mlv',
       sourceType: globals?.sourceType ?? ''
