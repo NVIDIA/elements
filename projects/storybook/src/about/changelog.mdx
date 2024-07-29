@@ -3,6 +3,7 @@ import '@nvidia-elements/core/tag/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import elementsChangelog from '@nvidia-elements/core/CHANGELOG.md?raw';
 import elementsReactChangelog from '@nvidia-elements/core-react/CHANGELOG.md?raw';
+import stylesChangelog from '@nvidia-elements/styles/CHANGELOG.md?raw';
 import themesChangelog from '@nvidia-elements/themes/CHANGELOG.md?raw';
 import testingChangelog from '@nvidia-elements/testing/CHANGELOG.md?raw';
 import labsCodeChangelog from '@nvidia-elements/code/CHANGELOG.md?raw';
@@ -19,10 +20,11 @@ import labsBehaviorsAlpineChangelog from '@nvidia-elements/behaviors-alpine/CHAN
 <nve-divider></nve-divider>
 
 <nve-tabs>
-  <nve-tabs-item selected value="elements" style={{'--text-transform': 'none'}}>@elements/elements</nve-tabs-item>
-  <nve-tabs-item value="elements-react" style={{'--text-transform': 'none'}}>@elements/elements-react</nve-tabs-item>
-  <nve-tabs-item value="testing" style={{'--text-transform': 'none'}}>@nvidia-elements/testing</nve-tabs-item>
+  <nve-tabs-item selected value="elements" style={{'--text-transform': 'none'}}>@nvidia-elements/core</nve-tabs-item>
+  <nve-tabs-item value="elements-react" style={{'--text-transform': 'none'}}>@nvidia-elements/core-react</nve-tabs-item>
+  <nve-tabs-item value="styles" style={{'--text-transform': 'none'}}>@nvidia-elements/styles</nve-tabs-item>
   <nve-tabs-item value="themes" style={{'--text-transform': 'none'}}>@nvidia-elements/themes</nve-tabs-item>
+  <nve-tabs-item value="testing" style={{'--text-transform': 'none'}}>@nvidia-elements/testing</nve-tabs-item>
   <nve-tabs-item value="labs-code" style={{'--text-transform': 'none'}}>@nvidia-elements/code</nve-tabs-item>
   <nve-tabs-item value="labs-behaviors-alpine" style={{'--text-transform': 'none'}}>@nvidia-elements/behaviors-alpine</nve-tabs-item>
 </nve-tabs>
@@ -34,6 +36,10 @@ import labsBehaviorsAlpineChangelog from '@nvidia-elements/behaviors-alpine/CHAN
 
 <div id="elements-react" className="changelog" hidden>
 <Markdown>{elementsReactChangelog}</Markdown>
+</div>
+
+<div id="styles" className="changelog" hidden>
+<Markdown>{stylesChangelog}</Markdown>
 </div>
 
 <div id="testing" className="changelog" hidden>

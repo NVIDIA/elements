@@ -1,4 +1,4 @@
-# Multi Page App (MPA) Starter + @elements/elements
+# Multi Page App (MPA) Starter
 
 [Built with Vite](https://vitejs.dev/)
 
