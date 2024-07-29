@@ -6,7 +6,7 @@ The `@nvidia-elements/testing-lighthouse` project provides utilities for running
 
 ```bash
 # add internal registry to local .npmrc file
-@nve:registry=https://registry.npmjs.org
+registry=https://registry.npmjs.org
 ```
 
 ```shell
