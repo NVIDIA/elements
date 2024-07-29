@@ -7,7 +7,7 @@ import cardContentStyleSheet from './card-content.css?inline';
 import cardFooterStyleSheet from './card-footer.css?inline';
 
 /**
- * @element mlv-card
+ * @element nve-card
  * @description A container for content representing a single entity.
  * @since 0.1.3
  * @slot - This is a default/unnamed slot for card content
@@ -47,7 +47,7 @@ export class Card extends LitElement implements ContainerElement {
 }
 
 /**
- * @element mlv-card-header
+ * @element nve-card-header
  * @since 0.1.3
  * @slot - default slot
  * @slot title - Title Text
@@ -89,7 +89,7 @@ export class CardHeader extends LitElement {
 }
 
 /**
- * @element mlv-card-content
+ * @element nve-card-content
  * @since 0.1.3
  * @slot - This is a default/unnamed slot for card content content
  * @cssprop --padding
@@ -113,7 +113,7 @@ export class CardContent extends LitElement {
 }
 
 /**
- * @element mlv-card-footer
+ * @element nve-card-footer
  * @since 0.1.3
  * @slot - This is a default/unnamed slot for card footer content
  * @cssprop --padding

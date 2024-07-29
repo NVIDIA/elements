@@ -3,27 +3,27 @@ import '@nvidia-elements/core/dot/define.js';
 
 export default {
   title: 'Elements/Dot/Examples',
-  component: 'mlv-dot',
+  component: 'nve-dot',
 };
 
 export const Default = {
   render: () => html`
-<mlv-dot status="starting"></mlv-dot>
+<nve-dot status="starting"></nve-dot>
   `
 };
 
 export const Size = {
   render: () => html`
 <div nve-layout="row gap:sm">
-  <mlv-dot size="sm">10</mlv-dot>
-  <mlv-dot>10</mlv-dot>
-  <mlv-dot size="lg">10</mlv-dot>
+  <nve-dot size="sm">10</nve-dot>
+  <nve-dot>10</nve-dot>
+  <nve-dot size="lg">10</nve-dot>
 </div>
 <br>
 <div nve-layout="row gap:lg">
-  <mlv-dot size="sm"></mlv-dot>
-  <mlv-dot></mlv-dot>
-  <mlv-dot size="lg"></mlv-dot>
+  <nve-dot size="sm"></nve-dot>
+  <nve-dot></nve-dot>
+  <nve-dot size="lg"></nve-dot>
 </div>
   `
 }
@@ -31,11 +31,11 @@ export const Size = {
 export const SupportStatus = {
   render: () => html`
 <div nve-layout="row gap:md">
-  <mlv-dot></mlv-dot>
-  <mlv-dot status="accent"></mlv-dot>
-  <mlv-dot status="warning"></mlv-dot>
-  <mlv-dot status="success"></mlv-dot>
-  <mlv-dot status="danger"></mlv-dot>
+  <nve-dot></nve-dot>
+  <nve-dot status="accent"></nve-dot>
+  <nve-dot status="warning"></nve-dot>
+  <nve-dot status="success"></nve-dot>
+  <nve-dot status="danger"></nve-dot>
 </div>
   `
 }
@@ -43,11 +43,11 @@ export const SupportStatus = {
 export const Number = {
   render: () => html`
 <div nve-layout="row gap:md">
-  <mlv-dot>10</mlv-dot>
-  <mlv-dot status="accent" aria-label="10 notifications">10</mlv-dot>
-  <mlv-dot status="warning" aria-label="10 notifications">10</mlv-dot>
-  <mlv-dot status="success" aria-label="10 notifications">10</mlv-dot>
-  <mlv-dot status="danger" aria-label="10 notifications">10</mlv-dot>
+  <nve-dot>10</nve-dot>
+  <nve-dot status="accent" aria-label="10 notifications">10</nve-dot>
+  <nve-dot status="warning" aria-label="10 notifications">10</nve-dot>
+  <nve-dot status="success" aria-label="10 notifications">10</nve-dot>
+  <nve-dot status="danger" aria-label="10 notifications">10</nve-dot>
 </div>
   `
 }
@@ -55,74 +55,74 @@ export const Number = {
 export const Status = {
   render: () => html`
 <div nve-layout="row gap:md">
-  <mlv-dot status="scheduled"></mlv-dot>
-  <mlv-dot status="queued"></mlv-dot>
-  <mlv-dot status="pending"></mlv-dot>
-  <mlv-dot status="starting"></mlv-dot>
-  <mlv-dot status="running"></mlv-dot>
-  <mlv-dot status="restarting"></mlv-dot>
-  <mlv-dot status="stopping"></mlv-dot>
-  <mlv-dot status="finished"></mlv-dot>
-  <mlv-dot status="failed"></mlv-dot>
-  <mlv-dot status="unknown"></mlv-dot>
+  <nve-dot status="scheduled"></nve-dot>
+  <nve-dot status="queued"></nve-dot>
+  <nve-dot status="pending"></nve-dot>
+  <nve-dot status="starting"></nve-dot>
+  <nve-dot status="running"></nve-dot>
+  <nve-dot status="restarting"></nve-dot>
+  <nve-dot status="stopping"></nve-dot>
+  <nve-dot status="finished"></nve-dot>
+  <nve-dot status="failed"></nve-dot>
+  <nve-dot status="unknown"></nve-dot>
 </div>
   `
 }
 
 export const SupportLightTheme = {
   render: () => html`
-<div mlv-theme="root light" nve-layout="row gap:md pad:md">
-  <mlv-dot></mlv-dot>
-  <mlv-dot status="accent"></mlv-dot>
-  <mlv-dot status="warning"></mlv-dot>
-  <mlv-dot status="success"></mlv-dot>
-  <mlv-dot status="danger"></mlv-dot>
+<div nve-theme="root light" nve-layout="row gap:md pad:md">
+  <nve-dot></nve-dot>
+  <nve-dot status="accent"></nve-dot>
+  <nve-dot status="warning"></nve-dot>
+  <nve-dot status="success"></nve-dot>
+  <nve-dot status="danger"></nve-dot>
 </div>
   `
 }
 
 export const SupportDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" nve-layout="row gap:md pad:md">
-  <mlv-dot></mlv-dot>
-  <mlv-dot status="accent"></mlv-dot>
-  <mlv-dot status="warning"></mlv-dot>
-  <mlv-dot status="success"></mlv-dot>
-  <mlv-dot status="danger"></mlv-dot>
+<div nve-theme="root dark" nve-layout="row gap:md pad:md">
+  <nve-dot></nve-dot>
+  <nve-dot status="accent"></nve-dot>
+  <nve-dot status="warning"></nve-dot>
+  <nve-dot status="success"></nve-dot>
+  <nve-dot status="danger"></nve-dot>
 </div>
   `
 }
 
 export const StatusLightTheme = {
   render: () => html`
-<div mlv-theme="root light" nve-layout="row gap:md pad:md">
-  <mlv-dot status="scheduled"></mlv-dot>
-  <mlv-dot status="queued"></mlv-dot>
-  <mlv-dot status="pending"></mlv-dot>
-  <mlv-dot status="starting"></mlv-dot>
-  <mlv-dot status="running"></mlv-dot>
-  <mlv-dot status="restarting"></mlv-dot>
-  <mlv-dot status="stopping"></mlv-dot>
-  <mlv-dot status="finished"></mlv-dot>
-  <mlv-dot status="failed"></mlv-dot>
-  <mlv-dot status="unknown"></mlv-dot>
+<div nve-theme="root light" nve-layout="row gap:md pad:md">
+  <nve-dot status="scheduled"></nve-dot>
+  <nve-dot status="queued"></nve-dot>
+  <nve-dot status="pending"></nve-dot>
+  <nve-dot status="starting"></nve-dot>
+  <nve-dot status="running"></nve-dot>
+  <nve-dot status="restarting"></nve-dot>
+  <nve-dot status="stopping"></nve-dot>
+  <nve-dot status="finished"></nve-dot>
+  <nve-dot status="failed"></nve-dot>
+  <nve-dot status="unknown"></nve-dot>
 </div>
   `
 }
 
 export const StatusDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" nve-layout="row gap:md pad:md">
-  <mlv-dot status="scheduled"></mlv-dot>
-  <mlv-dot status="queued"></mlv-dot>
-  <mlv-dot status="pending"></mlv-dot>
-  <mlv-dot status="starting"></mlv-dot>
-  <mlv-dot status="running"></mlv-dot>
-  <mlv-dot status="restarting"></mlv-dot>
-  <mlv-dot status="stopping"></mlv-dot>
-  <mlv-dot status="finished"></mlv-dot>
-  <mlv-dot status="failed"></mlv-dot>
-  <mlv-dot status="unknown"></mlv-dot>
+<div nve-theme="root dark" nve-layout="row gap:md pad:md">
+  <nve-dot status="scheduled"></nve-dot>
+  <nve-dot status="queued"></nve-dot>
+  <nve-dot status="pending"></nve-dot>
+  <nve-dot status="starting"></nve-dot>
+  <nve-dot status="running"></nve-dot>
+  <nve-dot status="restarting"></nve-dot>
+  <nve-dot status="stopping"></nve-dot>
+  <nve-dot status="finished"></nve-dot>
+  <nve-dot status="failed"></nve-dot>
+  <nve-dot status="unknown"></nve-dot>
 </div>
   `
 }

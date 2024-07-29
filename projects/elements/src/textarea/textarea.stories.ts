@@ -4,91 +4,91 @@ import '@nvidia-elements/core/textarea/define.js';
 
 export default {
   title: 'Elements/Textarea/Examples',
-  component: 'mlv-textarea',
+  component: 'nve-textarea',
 };
 
 export const Textarea = {
   render: () => html`
-<mlv-textarea>
+<nve-textarea>
   <label>label</label>
   <textarea></textarea>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-textarea>`
+  <nve-control-message>message</nve-control-message>
+</nve-textarea>`
 };
 
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-textarea>
+  <nve-textarea>
     <label>label</label>
     <textarea></textarea>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
 
-  <mlv-textarea>
+  <nve-textarea>
     <label>disabled</label>
     <textarea disabled></textarea>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
 
-  <mlv-textarea>
+  <nve-textarea>
     <label>success</label>
     <textarea></textarea>
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-textarea>
 
-  <mlv-textarea>
+  <nve-textarea>
     <label>error</label>
     <textarea></textarea>
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-textarea>
 </div>`
 };
 
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-textarea layout="horizontal">
+  <nve-textarea layout="horizontal">
     <label>label</label>
     <textarea></textarea>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
 
-  <mlv-textarea layout="horizontal">
+  <nve-textarea layout="horizontal">
     <label>disabled</label>
     <textarea disabled></textarea>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
 
-  <mlv-textarea layout="horizontal">
+  <nve-textarea layout="horizontal">
     <label>success</label>
     <textarea></textarea>
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-textarea>
 
-  <mlv-textarea layout="horizontal">
+  <nve-textarea layout="horizontal">
     <label>error</label>
     <textarea></textarea>
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-textarea>
 </div>`
 };
 
 export const ControlValidation = () => {
   return html`
-<mlv-textarea>
+<nve-textarea>
   <label>validation</label>
   <textarea required></textarea>
-  <mlv-control-message>message</mlv-control-message>
-  <mlv-control-message error="valueMissing">required</mlv-control-message>
-</mlv-textarea>`;
+  <nve-control-message>message</nve-control-message>
+  <nve-control-message error="valueMissing">required</nve-control-message>
+</nve-textarea>`;
 }
 
 export const ColumnsAndRows = () => {
   return html`
-<mlv-textarea>
+<nve-textarea>
   <label>label</label>
   <textarea rows="15" cols="40"></textarea>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-textarea>`;
+  <nve-control-message>message</nve-control-message>
+</nve-textarea>`;
 }

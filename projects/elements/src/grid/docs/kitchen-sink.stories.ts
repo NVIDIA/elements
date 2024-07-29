@@ -24,7 +24,7 @@ import { generateId } from '@nvidia-elements/core/internal';
 
 export default {
   title: 'Elements/Data Grid/Examples',
-  component: 'mlv-grid',
+  component: 'nve-grid',
 };
 
 interface Workflow {
@@ -112,27 +112,27 @@ class KitchenSinkDemo extends LitElement {
 
   get #appHeader() {
     return html`
-    <mlv-app-header>
-      <mlv-logo></mlv-logo>
+    <nve-app-header>
+      <nve-logo></nve-logo>
       <h2 slot="title">Workflows</h2>
-      <mlv-button slot="nav-items" active>Link 1</mlv-button>
-      <mlv-button slot="nav-items">Link 2</mlv-button>
-      <mlv-icon-button icon-name="chat-bubble" slot="nav-actions"></mlv-icon-button>
-      <mlv-icon-button icon-name="switch-apps" slot="nav-actions"></mlv-icon-button>
-      <mlv-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</mlv-icon-button>
-    </mlv-app-header>
+      <nve-button slot="nav-items" active>Link 1</nve-button>
+      <nve-button slot="nav-items">Link 2</nve-button>
+      <nve-icon-button icon-name="chat-bubble" slot="nav-actions"></nve-icon-button>
+      <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
+      <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
+    </nve-app-header>
     `
   }
 
   get #header() {
     return html`
-    <mlv-card container="full" style="max-height: 120px">
-      <mlv-card-content nve-layout="column gap:md align:horizontal-stretch">
+    <nve-card container="full" style="max-height: 120px">
+      <nve-card-content nve-layout="column gap:md align:horizontal-stretch">
         <div nve-layout="row gap:md align:center">
           <h1 nve-text="heading lg semibold">Workflows</h1>
           <div nve-layout="row gap:sm" style="margin-left: auto">
-            <mlv-icon-button @click=${() => this.showAboutDialog = true} icon-name="information-circle-stroke" aria-label="about kitchen sink"></mlv-icon-button>
-            <mlv-icon-button icon-name="more-actions" aria-label="additional actions"></mlv-icon-button>
+            <nve-icon-button @click=${() => this.showAboutDialog = true} icon-name="information-circle-stroke" aria-label="about kitchen sink"></nve-icon-button>
+            <nve-icon-button icon-name="more-actions" aria-label="additional actions"></nve-icon-button>
           </div>
         </div>
         <div nve-layout="row gap:xl align:vertical-center">
@@ -142,74 +142,74 @@ class KitchenSinkDemo extends LitElement {
           </section>
           <section nve-layout="row gap:xs align:center">
             <span nve-text="body sm muted">Status</span>
-            <span nve-text="body sm bold"><mlv-badge status="success">available</mlv-badge></span>
+            <span nve-text="body sm bold"><nve-badge status="success">available</nve-badge></span>
           </section>
         </div>
-      </mlv-card-content>
-    </mlv-card>
+      </nve-card-content>
+    </nve-card>
     `
   }
 
   get #settingsDropdown() {
     return html`
-    <mlv-dropdown anchor="column-settings-btn" ?hidden=${!this.workflowGridSettings} @close=${() => this.workflowGridSettings = false}>
+    <nve-dropdown anchor="column-settings-btn" ?hidden=${!this.workflowGridSettings} @close=${() => this.workflowGridSettings = false}>
       <h2 nve-text="heading sm">Settings</h2>
-      <mlv-divider></mlv-divider>
-      <mlv-checkbox-group style="min-width: 200px">
+      <nve-divider></nve-divider>
+      <nve-checkbox-group style="min-width: 200px">
         ${Object.entries(this.columns).filter(([name]) => name !== 'workflow' && name !== 'status').map(([name, column]) => html`
-          <mlv-checkbox>
+          <nve-checkbox>
             <label>${name}</label>
             <input type="checkbox" ?checked=${column.visible} @input=${() => (this.columns = { ...this.columns, [name]: { visible: !this.columns[name].visible } })} />
-          </mlv-checkbox>
+          </nve-checkbox>
         `)}
-      </mlv-checkbox-group>
-    </mlv-dropdown>
+      </nve-checkbox-group>
+    </nve-dropdown>
     `
   }
 
   get #actionBar() {
     return html`
     <div nve-layout="grid gap:md">
-      <mlv-search container="flat" nve-layout="span:12">
+      <nve-search container="flat" nve-layout="span:12">
         <input type="search" placeholder="search" aria-label="search workflows" .value=${this.search} @input=${e => this.#search(e.target.value)} />
-      </mlv-search>
+      </nve-search>
       <div nve-layout="row gap:sm align:vertical-center span:3">
         <p nve-text="body muted">1,145 results found</p>
-        <mlv-button id="column-settings-btn" container="flat" @click=${() => this.workflowGridSettings = !this.workflowGridSettings}>
-          <mlv-icon name="gear"></mlv-icon>  display settings
-        </mlv-button>
+        <nve-button id="column-settings-btn" container="flat" @click=${() => this.workflowGridSettings = !this.workflowGridSettings}>
+          <nve-icon name="gear"></nve-icon>  display settings
+        </nve-button>
       </div>
       <div nve-layout="span:5"></div>
       <div nve-layout="row gap:sm align:bottom span:4" style="margin-left: auto">
-        <mlv-button @click=${() => this.showCreateWorkflowDialog = true} interaction="emphasis">create</mlv-button>
+        <nve-button @click=${() => this.showCreateWorkflowDialog = true} interaction="emphasis">create</nve-button>
       </div>
     </div>`
   }
 
   get #detailPanel() {
     return html`
-    <mlv-panel ?expanded=${!!this.workflowDetail} @close=${() => this.workflowDetail = null} closable style="min-width: 400px">
-      <mlv-panel-header>
+    <nve-panel ?expanded=${!!this.workflowDetail} @close=${() => this.workflowDetail = null} closable style="min-width: 400px">
+      <nve-panel-header>
         <h2 slot="title">Workflow: ${this.workflowDetail?.id}</h2>
-      </mlv-panel-header>
-      <mlv-panel-content nve-layout="column gap:xl">
+      </nve-panel-header>
+      <nve-panel-content nve-layout="column gap:xl">
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Task</label>
           <p nve-text="eyebrow sm">${this.workflowDetail?.task}</p>
         </div>
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Priority</label>
-          <mlv-badge status="pending">${this.workflowDetail?.priority}</mlv-badge>
+          <nve-badge status="pending">${this.workflowDetail?.priority}</nve-badge>
         </div>
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Status</label>
-          <mlv-badge status=${this.workflowDetail?.status}>${this.workflowDetail?.status}</mlv-badge>
+          <nve-badge status=${this.workflowDetail?.status}>${this.workflowDetail?.status}</nve-badge>
         </div>
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Coverage</label>
-          <mlv-badge status=${getTrend(this.workflowDetail?.coverage)}>
+          <nve-badge status=${getTrend(this.workflowDetail?.coverage)}>
             ${this.workflowDetail?.coverage > 0 ? '+' : ''}${this.workflowDetail?.coverage}%
-          </mlv-badge>
+          </nve-badge>
         </div>
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Reviews</label>
@@ -223,94 +223,94 @@ class KitchenSinkDemo extends LitElement {
           <label nve-text="body sm muted">Created</label>
           <p nve-text="eyebrow sm">${this.workflowDetail?.created}</p>
         </div>
-      </mlv-panel-content>
-      <mlv-panel-footer>
-        <mlv-button @click=${() => this.#deleteWorkflow(this.workflowDetail)} interaction="destructive">delete</mlv-button>
-      </mlv-panel-footer>
-    </mlv-panel>`
+      </nve-panel-content>
+      <nve-panel-footer>
+        <nve-button @click=${() => this.#deleteWorkflow(this.workflowDetail)} interaction="destructive">delete</nve-button>
+      </nve-panel-footer>
+    </nve-panel>`
   }
 
   get #placeholder() {
     return !this.filteredWorkflows.length ? html`
-    <mlv-grid-placeholder>
+    <nve-grid-placeholder>
       <div nve-layout="column gap:md align:center">
-        <mlv-alert status="accent">No active workflows found. Try adjusting your filters or reloading.</mlv-alert>
-        <mlv-button @click=${() => this.#reloadWorkflows()}>reload workflows <mlv-icon name="refresh"></mlv-icon></mlv-button>
+        <nve-alert status="accent">No active workflows found. Try adjusting your filters or reloading.</nve-alert>
+        <nve-button @click=${() => this.#reloadWorkflows()}>reload workflows <nve-icon name="refresh"></nve-icon></nve-button>
       </div>
-    </mlv-grid-placeholder>` : '';
+    </nve-grid-placeholder>` : '';
   }
 
   get #createWorkflowDialog() {
     return html`
-    <mlv-dialog closable modal .hidden=${!this.showCreateWorkflowDialog} @close=${() => this.showCreateWorkflowDialog = false}>
-      <mlv-dialog-header>
+    <nve-dialog closable modal .hidden=${!this.showCreateWorkflowDialog} @close=${() => this.showCreateWorkflowDialog = false}>
+      <nve-dialog-header>
         <h2 nve-text="heading">Workflow</h2>
-      </mlv-dialog-header>
-      <mlv-dialog-content>
+      </nve-dialog-header>
+      <nve-dialog-content>
         <form id="workflow-form" nve-layout="column gap:md" style="width: 200px">
-          <mlv-select>
+          <nve-select>
             <label>Task</label>
             <select name="task">
               <option value="build">Build</option>
               <option value="test">Test</option>
               <option value="integration">Integration</option>
             </select>
-          </mlv-select>
-          <mlv-select>
+          </nve-select>
+          <nve-select>
             <label>Priority</label>
             <select name="priority">
               <option value="p0">p0</option>
               <option value="p1">p1</option>
               <option value="p2">p2</option>
             </select>
-          </mlv-select>
-          <mlv-select>
+          </nve-select>
+          <nve-select>
             <label>Region</label>
             <select name="region">
               <option value="Santa Clara">Santa Clara</option>
               <option value="Munich">Munich</option>
               <option value="Redmond">Redmond</option>
             </select>
-          </mlv-select>
+          </nve-select>
           &nbsp;
         </form>
-      </mlv-dialog-content>
-      <mlv-dialog-footer>
-        <mlv-button @click=${() => this.#createWorkflow()}>Create Workflow</mlv-button>
-      </mlv-dialog-footer>
-    </mlv-dialog>`
+      </nve-dialog-content>
+      <nve-dialog-footer>
+        <nve-button @click=${() => this.#createWorkflow()}>Create Workflow</nve-button>
+      </nve-dialog-footer>
+    </nve-dialog>`
   }
 
   get #aboutDialog() {
     return html`
-    <mlv-dialog closable modal .hidden=${!this.showAboutDialog} @close=${() => this.showAboutDialog = false}>
-      <mlv-dialog-header>
+    <nve-dialog closable modal .hidden=${!this.showAboutDialog} @close=${() => this.showAboutDialog = false}>
+      <nve-dialog-header>
         <h2 nve-text="heading">About Grid Kitchen Sink</h2>
-      </mlv-dialog-header>
-      <mlv-dialog-content>
+      </nve-dialog-header>
+      <nve-dialog-content>
         <p nve-text="body wrap">
           This is a demo that demonstrates the full feature set of the datgrid component.
         </p>
-      </mlv-dialog-content>
-    </mlv-dialog>`
+      </nve-dialog-content>
+    </nve-dialog>`
   }
 
   get #notification() {
     return html`
-    <mlv-notification .hidden=${!this.workflowNotification} @close=${() => this.workflowNotification = null} status=${this.workflowNotification?.status as any} close-timeout="4000" position="top">
+    <nve-notification .hidden=${!this.workflowNotification} @close=${() => this.workflowNotification = null} status=${this.workflowNotification?.status as any} close-timeout="4000" position="top">
       <h3 nve-text="label">${this.workflowNotification?.title}</h3>
       <p nve-text="body">${this.workflowNotification?.message}</p>
-    </mlv-notification>`
+    </nve-notification>`
   }
 
   get #bulkActions() {
     return this.#selectedCount ? html`
-    <mlv-toolbar slot="footer" status="accent">
-      <mlv-icon-button container="flat" icon-name="cancel" slot="prefix" @click=${() => this.#selectAll(false)}></mlv-icon-button>
+    <nve-toolbar slot="footer" status="accent">
+      <nve-icon-button container="flat" icon-name="cancel" slot="prefix" @click=${() => this.#selectAll(false)}></nve-icon-button>
       <p nve-text="body">${this.#selectedCount} selected</p>
-      <mlv-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} container="flat" slot="suffix">edit</mlv-button>
-      <mlv-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} container="flat" interaction="destructive" slot="suffix">delete</mlv-button>
-    </mlv-toolbar>` : '';
+      <nve-button @click=${() => this.showCreateWorkflowDialog = true} .disabled=${this.#selectedCount !== 1} container="flat" slot="suffix">edit</nve-button>
+      <nve-button icon-name="delete" @click=${() => this.#deleteSelectedWorkflows()} .disabled=${this.#selectedCount < 1} container="flat" interaction="destructive" slot="suffix">delete</nve-button>
+    </nve-toolbar>` : '';
   }
 
   render() {
@@ -322,45 +322,45 @@ class KitchenSinkDemo extends LitElement {
           ${this.#settingsDropdown}
           <div nve-layout="column gap:md pad:md full">
             ${this.#actionBar}
-            <mlv-grid style="--scroll-height: calc(100vh - 330px); --row-height: 48px">
-              <mlv-grid-header>
-                <mlv-grid-column position="fixed" width="max-content">
-                  <mlv-checkbox>
+            <nve-grid style="--scroll-height: calc(100vh - 330px); --row-height: 48px">
+              <nve-grid-header>
+                <nve-grid-column position="fixed" width="max-content">
+                  <nve-checkbox>
                     <input type="checkbox" aria-label="select all rows" @change=${e => this.#selectAll(e.target.checked)} />
-                  </mlv-checkbox>
-                </mlv-grid-column>
-                ${Object.entries(this.columns).map(([name, column]) => column.visible ? html`<mlv-grid-column .position=${column.position as any} .width=${column.width as any}>${name}</mlv-grid-column>` : '')}
-                <mlv-grid-column position="fixed" width="max-content"></mlv-grid-column>
-              </mlv-grid-header>
+                  </nve-checkbox>
+                </nve-grid-column>
+                ${Object.entries(this.columns).map(([name, column]) => column.visible ? html`<nve-grid-column .position=${column.position as any} .width=${column.width as any}>${name}</nve-grid-column>` : '')}
+                <nve-grid-column position="fixed" width="max-content"></nve-grid-column>
+              </nve-grid-header>
               ${this.filteredWorkflows.map(workflow => html`
-              <mlv-grid-row ?selected=${this.workflowDetail?.id === workflow.id}>
-                <mlv-grid-cell>
-                  <mlv-checkbox>
+              <nve-grid-row ?selected=${this.workflowDetail?.id === workflow.id}>
+                <nve-grid-cell>
+                  <nve-checkbox>
                     <input type="checkbox" @change=${e => this.#selectWorkflow(e, workflow)} .checked=${workflow.selected} aria-label="select drive ${workflow.id}" />
-                  </mlv-checkbox>
-                </mlv-grid-cell>
-                <mlv-grid-cell>
+                  </nve-checkbox>
+                </nve-grid-cell>
+                <nve-grid-cell>
                   <div nve-layout="column gap:xs">
                     <div nve-text="body">${workflow.task}</div>
                     <div nve-text="body sm muted">${workflow.id}</div>
                   </div>
-                </mlv-grid-cell>
-                ${this.columns.status.visible ? html`<mlv-grid-cell><mlv-badge status=${workflow.status}>${workflow.status}</mlv-badge></mlv-grid-cell>` : ''}
-                ${this.columns.priority.visible ? html`<mlv-grid-cell><mlv-badge status="pending">${workflow.priority}</mlv-badge></mlv-grid-cell>`: ''}
-                ${this.columns.coverage.visible ? html`<mlv-grid-cell><mlv-badge status=${getTrend(workflow.coverage)}>${workflow.coverage > 0 ? '+' : ''}${workflow.coverage}%</mlv-badge></mlv-grid-cell>` : ''}
-                ${this.columns.reviews.visible ? html`<mlv-grid-cell>${workflow.reviews}</mlv-grid-cell>` : ''}
-                ${this.columns.region.visible ? html`<mlv-grid-cell>${workflow.region}</mlv-grid-cell>` : ''}
-                ${this.columns.created.visible ? html`<mlv-grid-cell>${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(workflow.created)}</mlv-grid-cell>` : ''}
-                <mlv-grid-cell>
-                  <mlv-icon-button container="flat" icon-name="more-actions" @click=${() => this.workflowDetail = workflow}></mlv-icon-button>
-                </mlv-grid-cell>
-              </mlv-grid-row>`)}
+                </nve-grid-cell>
+                ${this.columns.status.visible ? html`<nve-grid-cell><nve-badge status=${workflow.status}>${workflow.status}</nve-badge></nve-grid-cell>` : ''}
+                ${this.columns.priority.visible ? html`<nve-grid-cell><nve-badge status="pending">${workflow.priority}</nve-badge></nve-grid-cell>`: ''}
+                ${this.columns.coverage.visible ? html`<nve-grid-cell><nve-badge status=${getTrend(workflow.coverage)}>${workflow.coverage > 0 ? '+' : ''}${workflow.coverage}%</nve-badge></nve-grid-cell>` : ''}
+                ${this.columns.reviews.visible ? html`<nve-grid-cell>${workflow.reviews}</nve-grid-cell>` : ''}
+                ${this.columns.region.visible ? html`<nve-grid-cell>${workflow.region}</nve-grid-cell>` : ''}
+                ${this.columns.created.visible ? html`<nve-grid-cell>${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(workflow.created)}</nve-grid-cell>` : ''}
+                <nve-grid-cell>
+                  <nve-icon-button container="flat" icon-name="more-actions" @click=${() => this.workflowDetail = workflow}></nve-icon-button>
+                </nve-grid-cell>
+              </nve-grid-row>`)}
               ${this.#placeholder}
-              <mlv-grid-footer>
+              <nve-grid-footer>
                 <p nve-text="label muted sm">last updated ${new Date()}</p>
-              </mlv-grid-footer>
+              </nve-grid-footer>
               ${this.#bulkActions}
-            </mlv-grid>
+            </nve-grid>
           </div>
           ${this.#detailPanel}
         </div>

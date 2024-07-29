@@ -8,7 +8,7 @@ import '@nvidia-elements/core/tabs/define.js';
 
 export default {
   title: 'Elements/Card/Examples',
-  component: 'mlv-card',
+  component: 'nve-card',
   argTypes: {
     width: {
       control: { type: 'range', min: 200, max: 500 }
@@ -31,11 +31,11 @@ interface ArgTypes {
 export const Default = {
   render: (args: ArgTypes) => html`
     <div>
-      <mlv-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
+      <nve-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
           args.showHeader,
           () => html`
-          <mlv-card-header>
+          <nve-card-header>
             <div slot="title">Title</div>
             <div slot="subtitle">Sub Title</div>
 
@@ -43,25 +43,25 @@ export const Default = {
             ${when(
               args.showAction,
               () => html`
-                <mlv-icon-button slot="header-action" icon-name="more-actions" container="flat"></mlv-icon-button>
+                <nve-icon-button slot="header-action" icon-name="more-actions" container="flat"></nve-icon-button>
               `)}
-          </mlv-card-header>
+          </nve-card-header>
           `
         )}
 
-        <mlv-card-content>
+        <nve-card-content>
           ${args.content}
-        </mlv-card-content>
+        </nve-card-content>
 
         ${when(
           args.showFooter,
           () => html`
-            <mlv-card-footer>
-              <mlv-button style="margin-left: auto">Action</mlv-button>
-            </mlv-card-footer>
+            <nve-card-footer>
+              <nve-button style="margin-left: auto">Action</nve-button>
+            </nve-card-footer>
           `
         )}
-      </mlv-card>
+      </nve-card>
     </div>
   `,
   args: { width: 300, height: 150, content: 'Card Content' }
@@ -70,13 +70,13 @@ export const Default = {
 export const CardWithContentLayout = {
   render: () => html`
   <div>
-    <mlv-card style="width: 400px; height: 300px;">
-      <mlv-card-content nve-layout="row align:space-around">
+    <nve-card style="width: 400px; height: 300px;">
+      <nve-card-content nve-layout="row align:space-around">
         <div>Item 1</div>
         <div>Item 2</div>
         <div>Item 3</div>
-      </mlv-card-content>
-    </mlv-card>
+      </nve-card-content>
+    </nve-card>
   </div>
   `
 }
@@ -84,18 +84,18 @@ export const CardWithContentLayout = {
 export const MediaCard = {
   render: () => html`
   <div nve-layout="grid gap:md span-items:6 align:stretch" style="height: 380px">
-    <mlv-card style="height: 100%; width: 100%;">
+    <nve-card style="height: 100%; width: 100%;">
       <img src="images/test-image-3.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
-      <mlv-card-content>
+      <nve-card-content>
         <p>card content</p>
-      </mlv-card-content>
-    </mlv-card>
-    <mlv-card style="height: 100%; width: 100%;">
+      </nve-card-content>
+    </nve-card>
+    <nve-card style="height: 100%; width: 100%;">
       <img src="images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
-      <mlv-card-content>
+      <nve-card-content>
         <p>card content</p>
-      </mlv-card-content>
-    </mlv-card>
+      </nve-card-content>
+    </nve-card>
   </div>
   `
 }
@@ -103,21 +103,21 @@ export const MediaCard = {
 export const CardWithMultipleContentsAndDivider = {
   render: () => html`
     <div>
-      <mlv-card style="width: 400px; height: 300px;">
-        <mlv-card-content nve-layout="row align:space-around">
+      <nve-card style="width: 400px; height: 300px;">
+        <nve-card-content nve-layout="row align:space-around">
           <div>Item 1</div>
           <div>Item 2</div>
           <div>Item 3</div>
-        </mlv-card-content>
+        </nve-card-content>
 
         <hr style="width: 100%">
 
-        <mlv-card-content nve-layout="row align:center gap:md">
+        <nve-card-content nve-layout="row align:center gap:md">
           <div>Item 1</div>
           <div>Item 2</div>
           <div>Item 3</div>
-        </mlv-card-content>
-      </mlv-card>
+        </nve-card-content>
+      </nve-card>
     </div>
   `
 }
@@ -148,11 +148,11 @@ export const CardWithHeaderAndFooter = {
 export const DescriptionList = {
   render: () => html`
 <div>
-  <mlv-card style="width: 650px">
-    <mlv-card-header>
+  <nve-card style="width: 650px">
+    <nve-card-header>
       <h2 slot="title">Nautical Terms</h2>
-    </mlv-card-header>
-    <mlv-card-content>
+    </nve-card-header>
+    <nve-card-content>
       <dl nve-layout="grid gap:lg">
         <dt nve-layout="span:4" nve-text="body muted medium">Knot</dt>
         <dd nve-layout="span:8" nve-text="body">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
@@ -163,8 +163,8 @@ export const DescriptionList = {
         <dt nve-layout="span:4" nve-text="body muted medium">Starboard</dt>
         <dd nve-layout="span:8" nve-text="body">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
       </dl>
-    </mlv-card-content>
-  </mlv-card>
+    </nve-card-content>
+  </nve-card>
 </div>
   `
 }
@@ -172,18 +172,18 @@ export const DescriptionList = {
 export const Tabs = {
   render: () => html`
 <div>
-  <mlv-card style="width:400px; height:200px">
-    <mlv-card-header>
+  <nve-card style="width:400px; height:200px">
+    <nve-card-header>
       <div slot="title">Title</div>
-      <mlv-tabs>
-        <mlv-tabs-item selected>tab 1</mlv-tabs-item>
-        <mlv-tabs-item>tab 2</mlv-tabs-item>
-        <mlv-tabs-item>tab 3</mlv-tabs-item>
-      </mlv-tabs>
-    </mlv-card-header>
+      <nve-tabs>
+        <nve-tabs-item selected>tab 1</nve-tabs-item>
+        <nve-tabs-item>tab 2</nve-tabs-item>
+        <nve-tabs-item>tab 3</nve-tabs-item>
+      </nve-tabs>
+    </nve-card-header>
 
-    <mlv-card-content> Card Content </mlv-card-content>
-  </mlv-card>
+    <nve-card-content> Card Content </nve-card-content>
+  </nve-card>
 </div>
   `
 }
@@ -191,11 +191,11 @@ export const Tabs = {
 export const ContainerFill = {
   render: () => html`
     <div>
-      <mlv-card container="full">
-        <mlv-card-content>
+      <nve-card container="full">
+        <nve-card-content>
           Container Fill
-        </mlv-card-content>
-      </mlv-card>
+        </nve-card-content>
+      </nve-card>
     </div>
   `
 }
@@ -203,59 +203,59 @@ export const ContainerFill = {
 export const ContainerFlat = {
   render: () => html`
     <div>
-      <mlv-card container="flat">
-        <mlv-card-content>
+      <nve-card container="flat">
+        <nve-card-content>
           Container Flat
-        </mlv-card-content>
-      </mlv-card>
+        </nve-card-content>
+      </nve-card>
     </div>
   `
 }
 
 export const LightTheme = {
   render: () => html`
-<div mlv-theme="root light" nve-layout="pad:md align:center">
-  <mlv-card style="width: 400px; height: 300px;">
-    <mlv-card-header>
+<div nve-theme="root light" nve-layout="pad:md align:center">
+  <nve-card style="width: 400px; height: 300px;">
+    <nve-card-header>
       <div slot="title">Title</div>
       <div slot="subtitle">Sub Title</div>
-    </mlv-card-header>
+    </nve-card-header>
 
-    <mlv-card-content>
+    <nve-card-content>
       Card Content
-    </mlv-card-content>
+    </nve-card-content>
 
-    <mlv-card-footer>
+    <nve-card-footer>
       <div nve-layout="grid span-items:6 gap:xs">
-        <mlv-button>Cancel</mlv-button>  
-        <mlv-button>Action</mlv-button>
+        <nve-button>Cancel</nve-button>  
+        <nve-button>Action</nve-button>
       </div>
-    </mlv-card-footer>
-  </mlv-card>
+    </nve-card-footer>
+  </nve-card>
 </div>
   `
 }
 
 export const DarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" nve-layout="pad:md align:center">
-  <mlv-card style="width: 400px; height: 300px;">
-    <mlv-card-header>
+<div nve-theme="root dark" nve-layout="pad:md align:center">
+  <nve-card style="width: 400px; height: 300px;">
+    <nve-card-header>
       <div slot="title">Title</div>
       <div slot="subtitle">Sub Title</div>
-    </mlv-card-header>
+    </nve-card-header>
 
-    <mlv-card-content>
+    <nve-card-content>
       Card Content
-    </mlv-card-content>
+    </nve-card-content>
 
-    <mlv-card-footer>
+    <nve-card-footer>
       <div nve-layout="grid span-items:6 gap:xs">
-        <mlv-button>Cancel</mlv-button>  
-        <mlv-button>Action</mlv-button>
+        <nve-button>Cancel</nve-button>  
+        <nve-button>Action</nve-button>
       </div>
-    </mlv-card-footer>
-  </mlv-card>
+    </nve-card-footer>
+  </nve-card>
 </div>
   `
 }

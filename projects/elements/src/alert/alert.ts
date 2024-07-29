@@ -19,7 +19,7 @@ import globalStyles from './alert.global.css?inline';
 import styles from './alert.css?inline';
 
 /**
- * @element mlv-alert
+ * @element nve-alert
  * @description Alert is an element that displays a brief, important message in a way that attracts the user's attention without interrupting the user's task.
  * @since 0.3.0
  * @event close - Dispatched when the alert is closed within a alert group.

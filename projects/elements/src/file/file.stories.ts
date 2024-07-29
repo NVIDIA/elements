@@ -4,73 +4,73 @@ import '@nvidia-elements/core/file/define.js';
 
 export default {
   title: 'Elements/File/Examples',
-  component: 'mlv-file',
+  component: 'nve-file',
 };
 
 export const File = {
   render: () => html`
-<mlv-file>
+<nve-file>
   <label>file</label>
   <input type="file" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-file>
+  <nve-control-message>message</nve-control-message>
+</nve-file>
 `
 };
 
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-file>
+  <nve-file>
     <label>label</label>
     <input type="file" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-file>
+    <nve-control-message>message</nve-control-message>
+  </nve-file>
 
-  <mlv-file>
+  <nve-file>
     <label>disabled</label>
     <input type="file" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-file>
+    <nve-control-message>message</nve-control-message>
+  </nve-file>
 
-  <mlv-file>
+  <nve-file>
     <label>success</label>
     <input type="file" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-file>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-file>
 
-  <mlv-file>
+  <nve-file>
     <label>error</label>
     <input type="file" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-file>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-file>
 </div>`
 };
 
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-file layout="horizontal">
+  <nve-file layout="horizontal">
     <label>label</label>
     <input type="file" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-file>
+    <nve-control-message>message</nve-control-message>
+  </nve-file>
 
-  <mlv-file layout="horizontal">
+  <nve-file layout="horizontal">
     <label>disabled</label>
     <input type="file" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-file>
+    <nve-control-message>message</nve-control-message>
+  </nve-file>
 
-  <mlv-file layout="horizontal">
+  <nve-file layout="horizontal">
     <label>success</label>
     <input type="file" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-file>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-file>
 
-  <mlv-file layout="horizontal">
+  <nve-file layout="horizontal">
     <label>error</label>
     <input type="file" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-file>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-file>
 </div>`
 };

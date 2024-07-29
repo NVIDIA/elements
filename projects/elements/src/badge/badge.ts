@@ -18,7 +18,7 @@ import {
 import styles from './badge.css?inline';
 
 /**
- * @element mlv-badge
+ * @element nve-badge
  * @description A visual indicator that communicates a status description of an associated component. Status badges use short text, color, and icons for quick recognition and are placed near the relevant content.
  * @since 0.11.0
  * @slot - default slot for content

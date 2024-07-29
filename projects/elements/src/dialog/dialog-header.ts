@@ -3,7 +3,7 @@ import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './dialog-header.css?inline';
 
 /**
- * @element mlv-dialog-header
+ * @element nve-dialog-header
  * @since 0.6.0
  * @slot - default slot for the dialog header
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-dialog-documentation--docs

@@ -15,7 +15,7 @@ import panelContentStyleSheet from './panel-content.css?inline';
 import panelFooterStyleSheet from './panel-footer.css?inline';
 
 /**
- * @element mlv-panel-header
+ * @element nve-panel-header
  * @since 0.10.0
  * @slot title - Title Text
  * @slot subtitle - Subtitle Text
@@ -54,7 +54,7 @@ export class PanelHeader extends LitElement {
 }
 
 /**
- * @element mlv-panel-content
+ * @element nve-panel-content
  * @since 0.10.0
  * @slot - This is a default/unnamed slot for panel content content
  * @cssprop --padding
@@ -78,7 +78,7 @@ export class PanelContent extends LitElement {
 }
 
 /**
- * @element mlv-panel-footer
+ * @element nve-panel-footer
  * @since 0.10.0
  * @slot - This is a default/unnamed slot for panel footer content
  * @cssprop --padding
@@ -111,7 +111,7 @@ export class PanelFooter extends LitElement {
 }
 
 /**
- * @element mlv-panel
+ * @element nve-panel
  * @description Panel is inline container for content that is coupled to the content on the page (details, additional actions/options). Alternatively [Drawer](./?path=/docs/elements-drawer-documentation--docs) is out of context of the rest of the page (notifications, navigations, settings).
  * @since 0.10.0
  * @event open - Dispatched when the panel is opened.

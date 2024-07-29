@@ -9,7 +9,7 @@ import styles from './icon.css?inline';
 export type { IconName, IconNames, IconSVG } from './icons.js';
 
 /**
- * @element mlv-icon
+ * @element nve-icon
  * @since 0.1.3
  * @description An icon is a graphic symbol designed to visually indicate the purpose of an interface element.
  * @cssprop --color

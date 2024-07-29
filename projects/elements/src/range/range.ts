@@ -5,7 +5,7 @@ import styles from './range.css?inline';
 import { PropertyValues } from 'lit';
 
 /**
- * @element mlv-range
+ * @element nve-range
  * @description A range slider is a control that enables users to choose a value from a continuous range of values.
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-range-documentation--docs

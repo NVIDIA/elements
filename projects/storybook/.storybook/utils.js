@@ -10,7 +10,7 @@ function capitalize(string) {
 export function updateScope(source, config) {
   const { scope, sourceType } = config;
 
-  if (source.includes('@nve-labs') || source.includes('nve-codeblock') || window.location.href.includes('internal')) {
+  if (source.includes('@nve-labs') || source.includes('nve-codeblock') || window.location.href.includes('internal') || window.location.href.includes('migration')) {
     return source;
   }
 

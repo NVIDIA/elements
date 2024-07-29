@@ -47,6 +47,7 @@ export default {
       resolve: {
         alias: {
           '@storybook/addon-docs': resolve('node_modules/@storybook/addon-docs'),
+          '@nvidia-elements/styles/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/styles/CHANGELOG.md?raw'),
           '@nvidia-elements/themes/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/themes/CHANGELOG.md?raw'),
           '@nvidia-elements/testing/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/testing/CHANGELOG.md?raw'),
           '@nvidia-elements/core/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/core/CHANGELOG.md?raw'),

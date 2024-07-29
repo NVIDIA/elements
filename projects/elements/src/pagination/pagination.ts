@@ -13,7 +13,7 @@ import { Select } from '@nvidia-elements/core/select';
 import styles from './pagination.css?inline';
 
 /**
- * @element mlv-pagination
+ * @element nve-pagination
  * @description Pagination is a control that enables users to navigate through pages of content.
  * @since 0.11.0
  * @event input emits when the value (page) has changed

@@ -4,7 +4,7 @@ import { Control } from '@nvidia-elements/core/forms';
 import styles from './radio.css?inline';
 
 /**
- * @element mlv-radio
+ * @element nve-radio
  * @description A radio button is a control that enables users to choose one option from a list of mutually exclusive options.
  * @since 0.3.0
  * @cssprop --width

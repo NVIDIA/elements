@@ -6,176 +6,176 @@ import '@nvidia-elements/core/select/define.js';
 
 export default {
   title: 'Elements/Progressive Filter Chip/Examples',
-  component: 'mlv-progressive-filter-chip',
+  component: 'nve-progressive-filter-chip',
 };
 
 export const Default = {
   render: () => html`
-    <mlv-progressive-filter-chip closable>
-      <mlv-select>
+    <nve-progressive-filter-chip closable>
+      <nve-select>
         <select aria-label="dataset">
           <option>workload</option>
           <option selected>instance</option>
         </select>
-      </mlv-select>
-      <mlv-select>
+      </nve-select>
+      <nve-select>
         <select aria-label="condition">
           <option>sort by</option>
           <option selected>filter by</option>
         </select>
-      </mlv-select>
-      <mlv-select>
+      </nve-select>
+      <nve-select>
         <select aria-label="filter">
           <option selected>utilization</option>
           <option>status</option>
         </select>
-      </mlv-select>
-    </mlv-progressive-filter-chip>
+      </nve-select>
+    </nve-progressive-filter-chip>
   `
 }
 
 export const Layer = {
   render: () => html`
-    <mlv-progressive-filter-chip closable>
-      <mlv-select>
+    <nve-progressive-filter-chip closable>
+      <nve-select>
         <select aria-label="dataset">
           <option>workload</option>
           <option selected>instance</option>
         </select>
-      </mlv-select>
-      <mlv-select>
+      </nve-select>
+      <nve-select>
         <select aria-label="condition">
           <option>sort by</option>
           <option selected>filter by</option>
         </select>
-      </mlv-select>
-      <mlv-select>
+      </nve-select>
+      <nve-select>
         <select aria-label="filter">
           <option selected>utilization</option>
           <option>status</option>
         </select>
-      </mlv-select>
-    </mlv-progressive-filter-chip>
+      </nve-select>
+    </nve-progressive-filter-chip>
   `
 }
 
 export const Multiple = {
 render: () => html`
-    <mlv-progressive-filter-chip closable>
-      <mlv-select>
+    <nve-progressive-filter-chip closable>
+      <nve-select>
         <select aria-label="dataset">
           <option selected>status</option>
           <option>workload</option>
         </select>
-      </mlv-select>
-      <mlv-select>
+      </nve-select>
+      <nve-select>
         <select aria-label="condition">
           <option selected>filter by</option>
           <option>sort by</option>
         </select>
-      </mlv-select>
-      <mlv-select>
+      </nve-select>
+      <nve-select>
         <select multiple aria-label="filter">
           <option selected>progress</option>
           <option>pending</option>
           <option>success</option>
           <option>failed</option>
         </select>
-      </mlv-select>
-    </mlv-progressive-filter-chip>
+      </nve-select>
+    </nve-progressive-filter-chip>
   `
 }
 
 export const TextInput = {
   render: () => html`
-    <mlv-progressive-filter-chip closable>
-      <mlv-select>
+    <nve-progressive-filter-chip closable>
+      <nve-select>
         <select aria-label="dataset">
           <option selected>memory</option>
           <option>CPU</option>
         </select>
-      </mlv-select>
-      <mlv-select>
+      </nve-select>
+      <nve-select>
         <select aria-label="condition">
           <option selected>greater than</option>
           <option>less than</option>
           <option>equal to</option>
         </select>
-      </mlv-select>
-      <mlv-input>
+      </nve-select>
+      <nve-input>
         <input type="number" min="0" max="100" value="50" aria-label="filter" />
-      </mlv-input>
-    </mlv-progressive-filter-chip>
+      </nve-input>
+    </nve-progressive-filter-chip>
   `
 }
 
 export const DateRange = {
   render: () => html`
-    <mlv-progressive-filter-chip>
-      <mlv-select>
+    <nve-progressive-filter-chip>
+      <nve-select>
         <select aria-label="date type">
           <option>recording date</option>
           <option>process date</option>
         </select>
-      </mlv-select>
-      <mlv-date>
+      </nve-select>
+      <nve-date>
         <input type="date" value="2022-05-11" aria-label="start date" />
-      </mlv-date>
-      <mlv-date>
+      </nve-date>
+      <nve-date>
         <input type="date" value="2022-12-07" aria-label="end date" />
-      </mlv-date>
-    </mlv-progressive-filter-chip>
+      </nve-date>
+    </nve-progressive-filter-chip>
     `
 }
 
 export const Custom = {
   render: () => html`
-    <mlv-progressive-filter-chip closable>
-      <mlv-select>
+    <nve-progressive-filter-chip closable>
+      <nve-select>
         <select aria-label="dataset">
           <option>GPS</option>
           <option selected>Cellular</option>
         </select>
-      </mlv-select>
-      <mlv-select>
+      </nve-select>
+      <nve-select>
         <select aria-label="condition">
           <option>contains</option>
           <option>excludes</option>
         </select>
-      </mlv-select>
-      <mlv-button style="width: 190px" id="map-btn">37.3706254,-121.9671894</mlv-button>
-    </mlv-progressive-filter-chip>
-    <mlv-dropdown anchor="map-btn" trigger="map-btn">
-      <mlv-input>
-        <mlv-icon-button icon-name="map-pin" readonly></mlv-icon-button>
+      </nve-select>
+      <nve-button style="width: 190px" id="map-btn">37.3706254,-121.9671894</nve-button>
+    </nve-progressive-filter-chip>
+    <nve-dropdown anchor="map-btn" trigger="map-btn">
+      <nve-input>
+        <nve-icon-button icon-name="map-pin" readonly></nve-icon-button>
         <input value="37.3706254,-121.9671894" disabled />
-      </mlv-input>
+      </nve-input>
       <img src="images/test-map-2.webp" width="300px" alt="non-interactive demo map" />
-    </mlv-dropdown>
+    </nve-dropdown>
   `
 }
 
 export const Validation = {
   render: () => html`
 <div nve-layout="column gap:lg">
-  <mlv-progressive-filter-chip closable>
-    <mlv-input>
+  <nve-progressive-filter-chip closable>
+    <nve-input>
       <input type="text" value="validation" required />
-      <mlv-control-message error="valueMissing">required</mlv-control-message>
-    </mlv-input>
-    <mlv-input>
+      <nve-control-message error="valueMissing">required</nve-control-message>
+    </nve-input>
+    <nve-input>
       <input type="text" />
-    </mlv-input>
-  </mlv-progressive-filter-chip>
+    </nve-input>
+  </nve-progressive-filter-chip>
 
-  <mlv-progressive-filter-chip closable>
-    <mlv-input status="error">
+  <nve-progressive-filter-chip closable>
+    <nve-input status="error">
       <input type="text" value="manual validation" formnovalidate />
-    </mlv-input>
-    <mlv-input>
+    </nve-input>
+    <nve-input>
       <input type="text" />
-    </mlv-input>
-  </mlv-progressive-filter-chip>
+    </nve-input>
+  </nve-progressive-filter-chip>
 </div>
   `
 }

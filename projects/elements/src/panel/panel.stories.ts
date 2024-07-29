@@ -9,7 +9,7 @@ import '@nvidia-elements/core/notification/define.js';
 
 export default {
   title: 'Elements/Panel/Examples',
-  component: 'mlv-panel',
+  component: 'nve-panel',
   argTypes: {
     width: {
       control: { type: 'range', min: 280, max: 500 }
@@ -39,43 +39,43 @@ interface ArgTypes {
 }
 
 const customActionHandler = () => {
-  const notification = document.createElement('mlv-notification');
+  const notification = document.createElement('nve-notification');
   notification.closable = true;
   notification.status = 'success';
   notification.innerHTML = `<h3 nve-text="label">Clicked!</h3><p nve-text="body">Custom action triggered.</p>`;
   notification.addEventListener('close', () => notification.remove(), { once: true });
 
 
-  document.querySelector('mlv-notification-group')?.prepend(notification);
-  setTimeout(() => notification.remove(), 2000 * (document.querySelectorAll('mlv-notification').length));
+  document.querySelector('nve-notification-group')?.prepend(notification);
+  setTimeout(() => notification.remove(), 2000 * (document.querySelectorAll('nve-notification').length));
 }
 
 const togglePanel = (isClosable?: boolean) => {
-  const panel = document.querySelector(`mlv-panel#trigger-closable-${isClosable}`) as Panel;
+  const panel = document.querySelector(`nve-panel#trigger-closable-${isClosable}`) as Panel;
   panel.expanded = !panel.expanded;
 }
 
 export const Default = {
   render: (args: ArgTypes) => html`
     <section nve-layout="row align:space-between pad:sm">
-      <div mlv-theme="root ${args.theme}">
-        <mlv-panel behavior-expand id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
+      <div nve-theme="root ${args.theme}">
+        <nve-panel behavior-expand id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
             args.showHeader,
             () => html`
-            <mlv-panel-header>
+            <nve-panel-header>
               <div slot="title">${args.title}</div>
               <div slot="subtitle">${args.subtitle}</div>
 
               ${when(
                 args.showActionIcon,
-                () => html`<mlv-icon-button container="flat" slot="action-icon" icon-name="more-actions" @click=${() => customActionHandler()}></mlv-icon-button>`
+                () => html`<nve-icon-button container="flat" slot="action-icon" icon-name="more-actions" @click=${() => customActionHandler()}></nve-icon-button>`
               )}
-            </mlv-panel-header>
+            </nve-panel-header>
             `
           )}
 
-          <mlv-panel-content nve-layout="column gap:md">
+          <nve-panel-content nve-layout="column gap:md">
             <div nve-layout="column gap:xs">
               <label nve-text="body sm medium muted">Release</label>
               <p nve-text="label semibold sm">RainbowBridge/08-18-2021AM/A2A</p>
@@ -88,7 +88,7 @@ export const Default = {
 
             <div nve-layout="column gap:xs">
               <label nve-text="body sm medium muted">State</label>
-              <mlv-badge status="finished">Indexed</mlv-badge>
+              <nve-badge status="finished">Indexed</nve-badge>
             </div>
 
             <div nve-layout="column gap:xs">
@@ -110,31 +110,31 @@ export const Default = {
               <label nve-text="body sm medium muted">Session ID</label>
               <a href="#" nve-text="link body sm">Experiment 12345</a>
             </div>
-          </mlv-panel-content>
+          </nve-panel-content>
 
           ${when(
             args.showFooter,
             () => html`
-            <mlv-panel-footer>
-              <mlv-button interaction="destructive" container="flat">Destructive</mlv-button>
-              <mlv-button>Default</mlv-button>
-            </mlv-panel-footer>
+            <nve-panel-footer>
+              <nve-button interaction="destructive" container="flat">Destructive</nve-button>
+              <nve-button>Default</nve-button>
+            </nve-panel-footer>
             `
           )}
-        </mlv-panel>
+        </nve-panel>
       </div>
 
       ${when(
           args.showTrigger,
           () => html`
-            <mlv-button interaction="emphasis" @click=${() => togglePanel(args.closable)}>Toggle Panel</mlv-button>
+            <nve-button interaction="emphasis" @click=${() => togglePanel(args.closable)}>Toggle Panel</nve-button>
           `
         )}
     </section>
 
     ${when(
       args.showActionIcon,
-      () => html`<mlv-notification-group position="bottom" alignment="end"></mlv-notification-group>`
+      () => html`<nve-notification-group position="bottom" alignment="end"></nve-notification-group>`
     )}
   `,
   args: { title: 'Title', side: 'left', expanded: true, closable: false, showHeader: true, width: 280, height: 550 }

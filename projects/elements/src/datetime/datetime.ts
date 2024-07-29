@@ -6,7 +6,7 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './datetime.css?inline';
 
 /**
- * @element mlv-datetime
+ * @element nve-datetime
  * @description A datetime picker is a control that enables users to choose a datetime value.
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-datetime-documentation--docs

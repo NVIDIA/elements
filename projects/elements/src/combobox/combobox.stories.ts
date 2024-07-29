@@ -13,12 +13,12 @@ import '@nvidia-elements/core/dropdown/define.js';
 
 export default {
   title: 'Elements/Combobox/Examples',
-  component: 'mlv-combobox',
+  component: 'nve-combobox',
 };
 
 export const Default = () => {
   return html`
-  <mlv-combobox>
+  <nve-combobox>
     <label>label</label>
     <input type="search">
     <datalist>
@@ -29,15 +29,15 @@ export const Default = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
   `
 };
 
 export const Vertical = () => {
   return html`
 <div nve-layout="column gap:lg">
-  <mlv-combobox>
+  <nve-combobox>
     <label>label</label>
     <input type="search" />
     <datalist>
@@ -48,10 +48,10 @@ export const Vertical = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
 
-  <mlv-combobox>
+  <nve-combobox>
     <label>disabled</label>
     <input disabled />
     <datalist>
@@ -62,10 +62,10 @@ export const Vertical = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
 
-  <mlv-combobox>
+  <nve-combobox>
     <label>success</label>
     <input type="search" />
     <datalist>
@@ -76,10 +76,10 @@ export const Vertical = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-combobox>
 
-  <mlv-combobox>
+  <nve-combobox>
     <label>error</label>
     <input type="search" />
     <datalist>
@@ -90,15 +90,15 @@ export const Vertical = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-combobox>
 </div>`
 };
 
 export const Horizontal = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-combobox layout="horizontal">
+  <nve-combobox layout="horizontal">
     <label>label</label>
     <input type="search" />
     <datalist>
@@ -109,10 +109,10 @@ export const Horizontal = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
 
-  <mlv-combobox layout="horizontal">
+  <nve-combobox layout="horizontal">
     <label>disabled</label>
     <input disabled />
     <datalist>
@@ -123,10 +123,10 @@ export const Horizontal = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
 
-  <mlv-combobox layout="horizontal">
+  <nve-combobox layout="horizontal">
     <label>success</label>
     <input type="search" />
     <datalist>
@@ -137,10 +137,10 @@ export const Horizontal = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-combobox>
 
-  <mlv-combobox layout="horizontal">
+  <nve-combobox layout="horizontal">
     <label>error</label>
     <input type="search" />
     <datalist>
@@ -151,15 +151,15 @@ export const Horizontal = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-combobox>
 </div>`
 };
 
 export const Flat = () => {
   return html`
-  <mlv-combobox container="flat">
-    <mlv-icon name="filter" slot="prefix-icon"></mlv-icon>
+  <nve-combobox container="flat">
+    <nve-icon name="filter" slot="prefix-icon"></nve-icon>
     <input type="search">
     <datalist>
       <option value="status"></option>
@@ -169,13 +169,13 @@ export const Flat = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </datalist>
-  </mlv-combobox>
+  </nve-combobox>
   `
 };
 
 export const Select = () => {
   return html`
-<mlv-combobox>
+<nve-combobox>
   <label>label</label>
   <input type="search">
   <select>
@@ -186,14 +186,14 @@ export const Select = () => {
     <option value="configuration"></option>
     <option value="contains"></option>
   </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-combobox>
+  <nve-control-message>message</nve-control-message>
+</nve-combobox>
   `
 };
 
 export const MultiSelect = () => {
   return html`
-  <mlv-combobox>
+  <nve-combobox>
     <label>label</label>
     <input type="search">
     <select multiple>
@@ -204,14 +204,14 @@ export const MultiSelect = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
   `
 };
 
 export const Label = () => {
   return html`
-  <mlv-combobox>
+  <nve-combobox>
     <label>label</label>
     <input type="search">
     <select>
@@ -222,14 +222,14 @@ export const Label = () => {
       <option value="configuration">Configuration</option>
       <option value="contains">Contains</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
   `
 };
 
 export const Overflow = () => {
   return html`
-  <mlv-combobox style="width: 250px">
+  <nve-combobox style="width: 250px">
     <label>label</label>
     <input type="search">
     <select multiple>
@@ -240,14 +240,14 @@ export const Overflow = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
   `
 };
 
 export const PopoverOverflow = () => {
   return html`
-  <mlv-combobox style="width: 100px">
+  <nve-combobox style="width: 100px">
     <label>label</label>
     <input type="search">
     <select>
@@ -259,14 +259,14 @@ export const PopoverOverflow = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
   `
 };
 
 export const Reset = () => {
   return html`
-  <mlv-combobox style="width: 500px; --scroll-height: 220px">
+  <nve-combobox style="width: 500px; --scroll-height: 220px">
     <label>label</label>
     <input type="search">
     <select multiple>
@@ -277,9 +277,9 @@ export const Reset = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </select>
-    <mlv-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" container="flat"></mlv-icon-button>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" container="flat"></nve-icon-button>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
   <script type="module">
     document.querySelector('#combobox-reset').addEventListener('click', e => e.target.parentElement.reset());
   </script>
@@ -288,7 +288,7 @@ export const Reset = () => {
 
 export const Footer = () => {
   return html`
-  <mlv-combobox style="width: 500px; --scroll-height: 200px">
+  <nve-combobox style="width: 500px; --scroll-height: 200px">
     <label>label</label>
     <input type="search">
     <select multiple>
@@ -302,15 +302,15 @@ export const Footer = () => {
       <option value="user"></option>
       <option value="progress"></option>
     </select>
-    <mlv-button slot="footer" container="flat">action</mlv-button>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-button slot="footer" container="flat">action</nve-button>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
   `
 };
 
 export const SelectAll = () => {
   return html`
-  <mlv-combobox id="combobox-select-all" style="width: 500px; --scroll-height: 200px">
+  <nve-combobox id="combobox-select-all" style="width: 500px; --scroll-height: 200px">
     <label>label</label>
     <input type="search">
     <select multiple>
@@ -325,14 +325,14 @@ export const SelectAll = () => {
       <option value="progress"></option>
     </select>
     <div slot="footer" nve-layout="row align:stretch full">
-      <mlv-button container="flat">Select All</mlv-button>
-      <mlv-button container="flat">Deselect All</mlv-button>
+      <nve-button container="flat">Select All</nve-button>
+      <nve-button container="flat">Deselect All</nve-button>
     </div>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-combobox>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
   <script type="module">
     const combobox = document.querySelector('#combobox-select-all');
-    const [selectAll, deselectAll] = Array.from(combobox.querySelectorAll('mlv-button'));
+    const [selectAll, deselectAll] = Array.from(combobox.querySelectorAll('nve-button'));
 
     selectAll.addEventListener('click', () => combobox.selectAll());
     deselectAll.addEventListener('click', () => combobox.reset());
@@ -342,26 +342,26 @@ export const SelectAll = () => {
 };
 
 export const Performance = () => {
-  return html`<mlv-combobox-performance-demo></mlv-combobox-performance-demo>`
+  return html`<nve-combobox-performance-demo></nve-combobox-performance-demo>`
 }
 
 class ComboboxPerformanceDemo extends LitElement {
   render() {
     return html`
-  <mlv-combobox>
+  <nve-combobox>
     <input type="search">
     <datalist>
       ${new Array(1000).fill('').map((_, i) => html`<option value="${i} item"></option>`)}
     </datalist>
-  </mlv-combobox>
+  </nve-combobox>
     `;
   }
 }
 
-customElements.get('mlv-combobox-performance-demo') || customElements.define('mlv-combobox-performance-demo', ComboboxPerformanceDemo);
+customElements.get('nve-combobox-performance-demo') || customElements.define('nve-combobox-performance-demo', ComboboxPerformanceDemo);
 
 export const FilterDemo = {
-  render: () => html`<mlv-combobox-demo></mlv-combobox-demo>`
+  render: () => html`<nve-combobox-demo></nve-combobox-demo>`
 }
 
 const schema = {
@@ -394,26 +394,26 @@ class ComboboxDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-button id="filter-btn" ?pressed=${!!this.value.filter(v => v.name.length).length}><mlv-icon name="filter"></mlv-icon> </mlv-icon>filters</mlv-button>
-      <mlv-dropdown id="one" hidden trigger="filter-btn" anchor="filter-btn" @open=${e => e.target.hidden = false} @close=${e => e.target.hidden = true} style="--min-width: 400px; --min-height: 500px;">
-        <mlv-progressive-filter-demo @change=${e => this.value = e.detail} .value=${this.value} .schema=${schema}></mlv-progressive-filter-demo>
-      </mlv-dropdown>
+      <nve-button id="filter-btn" ?pressed=${!!this.value.filter(v => v.name.length).length}><nve-icon name="filter"></nve-icon> </nve-icon>filters</nve-button>
+      <nve-dropdown id="one" hidden trigger="filter-btn" anchor="filter-btn" @open=${e => e.target.hidden = false} @close=${e => e.target.hidden = true} style="--min-width: 400px; --min-height: 500px;">
+        <nve-progressive-filter-demo @change=${e => this.value = e.detail} .value=${this.value} .schema=${schema}></nve-progressive-filter-demo>
+      </nve-dropdown>
       <pre style="margin-top: 300px">${JSON.stringify(this.value.filter(v => v.name.length), null, 2)}</pre>
     `;
   }
 }
 
-customElements.get('mlv-combobox-demo') || customElements.define('mlv-combobox-demo', ComboboxDemo);
+customElements.get('nve-combobox-demo') || customElements.define('nve-combobox-demo', ComboboxDemo);
 
 class ProgressiveFilterDemo extends LitElement {
   static styles = [unsafeCSS(`
     :host {
       display: flex;
       flex-direction: column;
-      gap: var(--mlv-ref-space-xs);
+      gap: var(--nve-ref-space-xs);
     }
 
-    mlv-progressive-filter-chip {
+    nve-progressive-filter-chip {
       width: 100%;
     }
   `)];
@@ -429,22 +429,22 @@ class ProgressiveFilterDemo extends LitElement {
   render() {
     return html`
       ${this.value.map(filter => html`
-      <mlv-progressive-filter-chip closable @close=${() => this.#removeFilter(filter)}>
-        <mlv-combobox>
+      <nve-progressive-filter-chip closable @close=${() => this.#removeFilter(filter)}>
+        <nve-combobox>
           <span slot="prefix-icon"></span>
           <input type="search" placeholder="filter" .value=${filter.name} @change=${e => this.#createfilter(e.target.value, filter)} />
           <datalist>${this.#unusedFilters.map(([key]) => html`<option .value=${key}>${key}</option>`)}</datalist>
-        </mlv-combobox>
+        </nve-combobox>
         ${choose(this.schema[filter.name]?.type, [
-          ['text', () => html`<mlv-combobox><input type="text" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} placeholder="value" /></mlv-combobox>`],
-          ['number', () => html`<mlv-combobox><input type="number" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></mlv-combobox>`],
-          ['date', () => html`<mlv-date><input type="date" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></mlv-date>`],
-          ['select', () => html`<mlv-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value=${v}>${v}</option>`)}</select></mlv-select>`]
-        ], () => html`<mlv-combobox><input type="text" placeholder="value" disabled /></mlv-combobox>`)}
-      </mlv-progressive-filter-chip>`)}
-      <mlv-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || !!this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
-        <mlv-icon name="add"></mlv-icon> Add Filter
-      </mlv-button>
+          ['text', () => html`<nve-combobox><input type="text" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} placeholder="value" /></nve-combobox>`],
+          ['number', () => html`<nve-combobox><input type="number" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></nve-combobox>`],
+          ['date', () => html`<nve-date><input type="date" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></nve-date>`],
+          ['select', () => html`<nve-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value=${v}>${v}</option>`)}</select></nve-select>`]
+        ], () => html`<nve-combobox><input type="text" placeholder="value" disabled /></nve-combobox>`)}
+      </nve-progressive-filter-chip>`)}
+      <nve-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || !!this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
+        <nve-icon name="add"></nve-icon> Add Filter
+      </nve-button>
     `;
   }
 
@@ -473,4 +473,4 @@ class ProgressiveFilterDemo extends LitElement {
   }
 }
 
-customElements.get('mlv-progressive-filter-demo') || customElements.define('mlv-progressive-filter-demo', ProgressiveFilterDemo);
+customElements.get('nve-progressive-filter-demo') || customElements.define('nve-progressive-filter-demo', ProgressiveFilterDemo);

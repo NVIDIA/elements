@@ -3,7 +3,7 @@ import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './toggletip-footer.css?inline';
 
 /**
- * @element mlv-toggletip-footer
+ * @element nve-toggletip-footer
  * @since 0.38.0
  * @slot - default slot for the toggletip footer
  * @cssprop --border-top

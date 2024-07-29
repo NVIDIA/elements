@@ -4,14 +4,14 @@ import '@nvidia-elements/core/button/define.js';
 
 export default {
   title: 'Elements/Pagination/Examples',
-  component: 'mlv-pagination',
+  component: 'nve-pagination',
 };
 
 export const Default = {
   render: () => html`
-  <mlv-pagination value="1" items="100" step="10"></mlv-pagination>
+  <nve-pagination value="1" items="100" step="10"></nve-pagination>
   <script type="module">
-    const pagination = document.querySelector('mlv-pagination');
+    const pagination = document.querySelector('nve-pagination');
     pagination.addEventListener('change', e => console.log(e.target.value));
   </script>
   `
@@ -19,39 +19,39 @@ export const Default = {
 
 export const Skippable = {
   render: () => html`
-    <mlv-pagination value="1" items="100" step="10" skippable></mlv-pagination>
+    <nve-pagination value="1" items="100" step="10" skippable></nve-pagination>
   `
 };
 
 export const Disabled = {
   render: () => html`
-    <mlv-pagination disabled value="1" items="100" step="10" skippable></mlv-pagination>
+    <nve-pagination disabled value="1" items="100" step="10" skippable></nve-pagination>
   `
 };
 
 export const Flat = {
   render: () => html`
-    <mlv-pagination container="flat" value="1" items="100" step="10" skippable></mlv-pagination>
+    <nve-pagination container="flat" value="1" items="100" step="10" skippable></nve-pagination>
   `
 };
 
 export const Inline = {
   render: () => html`
-    <mlv-pagination container="inline" value="1" items="100" step="10"></mlv-pagination>
+    <nve-pagination container="inline" value="1" items="100" step="10"></nve-pagination>
   `
 };
 
 export const DisableStep = {
   render: () => html`
-    <mlv-pagination disable-step container="inline" value="1" items="100" step="10"></mlv-pagination>
+    <nve-pagination disable-step container="inline" value="1" items="100" step="10"></nve-pagination>
   `
 };
 
 export const Forms = {
   render: () => html`
     <form id="pagination-form" nve-layout="column gap:md">
-      <mlv-pagination name="page" value="1" items="100" step="10" aria-label="pagination controls"></mlv-pagination>
-      <mlv-button>submit page 10</mlv-button>
+      <nve-pagination name="page" value="1" items="100" step="10" aria-label="pagination controls"></nve-pagination>
+      <nve-button>submit page 10</nve-button>
       <pre></pre>
     </form>
     <script type="module">
@@ -74,32 +74,32 @@ export const Forms = {
 
 export const LightTheme = {
   render: () => html`
-<div mlv-theme="root light pad:md">
-  <mlv-pagination disabled value="1" items="100" step="10" skippable></mlv-pagination>
+<div nve-theme="root light pad:md">
+  <nve-pagination disabled value="1" items="100" step="10" skippable></nve-pagination>
 </div>
   `
 }
 
 export const DarkTheme = {
   render: () => html`
-<div mlv-theme="root dark pad:md">
-  <mlv-pagination disabled value="1" items="100" step="10" skippable></mlv-pagination>
+<div nve-theme="root dark pad:md">
+  <nve-pagination disabled value="1" items="100" step="10" skippable></nve-pagination>
 </div>
   `
 }
 
 export const LargeValues = {
   render: () => html`
-    <mlv-pagination container="inline" value="1" items="10000" step="100"></mlv-pagination>
+    <nve-pagination container="inline" value="1" items="10000" step="100"></nve-pagination>
   `
 }
 
 export const DynamicItems = {
   render: () => html`
-    <mlv-pagination disable-step container="inline" value="1" items="100" step="20"></mlv-pagination>
+    <nve-pagination disable-step container="inline" value="1" items="100" step="20"></nve-pagination>
 
     <script type="module">
-      const pagination = document.querySelector('mlv-pagination');
+      const pagination = document.querySelector('nve-pagination');
       let items = loadItems();
 
       pagination.addEventListener('last-page', async () => {

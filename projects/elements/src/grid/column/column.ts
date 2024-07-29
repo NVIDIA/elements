@@ -11,7 +11,7 @@ import type { Grid } from '@nvidia-elements/core/grid';
 import styles from './column.css?inline';
 
 /**
- * @element mlv-grid-column
+ * @element nve-grid-column
  * @since 0.11.0
  * @slot - default slot for content
  * @slot actions - slot for column actions

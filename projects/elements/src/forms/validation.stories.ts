@@ -16,30 +16,30 @@ export default {
 export const Validation = () => {
   return html`
 <form id="validation" nve-layout="column gap:md" style="max-width: 350px;">
-  <mlv-input>
+  <nve-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
-    <mlv-control-message error="valueMissing">required</mlv-control-message>
-    <mlv-control-message error="patternMismatch">invalid NVIDIA email</mlv-control-message>
-  </mlv-input>
+    <nve-control-message error="valueMissing">required</nve-control-message>
+    <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
+  </nve-input>
 
-  <mlv-password>
+  <nve-password>
     <label>password</label>
     <input type="password" name="password" required minlength="6" autocomplete="off" />
-    <mlv-control-message error="valueMissing">required</mlv-control-message>
-    <mlv-control-message error="tooShort">minimum length is 6 characters</mlv-control-message>
-  </mlv-password>
+    <nve-control-message error="valueMissing">required</nve-control-message>
+    <nve-control-message error="tooShort">minimum length is 6 characters</nve-control-message>
+  </nve-password>
 
-  <mlv-button disabled>login to account</mlv-button>
+  <nve-button disabled>login to account</nve-button>
 
-  <mlv-alert-group hidden status="success">
-    <mlv-alert></mlv-alert>
-  </mlv-alert-group>
+  <nve-alert-group hidden status="success">
+    <nve-alert></nve-alert>
+  </nve-alert-group>
 </form>
 <script type="module">
   const form = document.querySelector('form#validation');
-  const alertGroup = document.querySelector('#validation mlv-alert-group');
-  const alert = document.querySelector('#validation mlv-alert');
+  const alertGroup = document.querySelector('#validation nve-alert-group');
+  const alert = document.querySelector('#validation nve-alert');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -49,7 +49,7 @@ export const Validation = () => {
   });
 
   form.addEventListener('input', e => {
-    form.querySelector('mlv-button').disabled = form.matches(':invalid');
+    form.querySelector('nve-button').disabled = form.matches(':invalid');
   });
 </script>
 `;
@@ -58,24 +58,24 @@ export const Validation = () => {
 export const ValidationErrorGroup = () => {
   return html`
 <form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
-  <mlv-input status="error">
+  <nve-input status="error">
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
-    <mlv-control-message status="error">invalid email</mlv-control-message>
-  </mlv-input>
+    <nve-control-message status="error">invalid email</nve-control-message>
+  </nve-input>
 
-  <mlv-password status="error">
+  <nve-password status="error">
     <label>password</label>
     <input type="password" name="password" required minlength="6" autocomplete="off" />
-    <mlv-control-message status="error">minimum length is 6 characters</mlv-control-message>
-  </mlv-password>
+    <nve-control-message status="error">minimum length is 6 characters</nve-control-message>
+  </nve-password>
 
-  <mlv-button>login to account</mlv-button>
+  <nve-button>login to account</nve-button>
 
-  <mlv-alert-group status="danger">
-    <mlv-alert>invalid email</mlv-alert>
-    <mlv-alert>password required</mlv-alert>
-  </mlv-alert-group>
+  <nve-alert-group status="danger">
+    <nve-alert>invalid email</nve-alert>
+    <nve-alert>password required</nve-alert>
+  </nve-alert-group>
 </form>
 `;
 }
@@ -83,22 +83,22 @@ export const ValidationErrorGroup = () => {
 export const ValidationSuccessGroup = () => {
   return html`
 <form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
-  <mlv-input>
+  <nve-input>
     <label>username</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
-    <mlv-control-message status="success">username available</mlv-control-message>
-  </mlv-input>
+    <nve-control-message status="success">username available</nve-control-message>
+  </nve-input>
 
-  <mlv-password status="error">
+  <nve-password status="error">
     <label>password</label>
     <input type="password" name="password" required minlength="6" autocomplete="off" />
-  </mlv-password>
+  </nve-password>
 
-  <mlv-button>login to account</mlv-button>
+  <nve-button>login to account</nve-button>
 
-  <mlv-alert-group status="success">
-    <mlv-alert closable>account created</mlv-alert>
-  </mlv-alert-group>
+  <nve-alert-group status="success">
+    <nve-alert closable>account created</nve-alert>
+  </nve-alert-group>
 </form>
 `;
 }
@@ -106,27 +106,27 @@ export const ValidationSuccessGroup = () => {
 export const ValidationReset = () => {
   return html`
 <form nve-layout="column gap:md" style="max-width: 350px;">
-  <mlv-input>
+  <nve-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" value="test@nvidia.com" />
-    <mlv-icon-button aria-label="reset" icon-name="cancel" container="flat" type="button"></mlv-icon-button>
-    <mlv-control-message error="valueMissing">required</mlv-control-message>
-    <mlv-control-message error="patternMismatch">invalid NVIDIA email</mlv-control-message>
-  </mlv-input>
+    <nve-icon-button aria-label="reset" icon-name="cancel" container="flat" type="button"></nve-icon-button>
+    <nve-control-message error="valueMissing">required</nve-control-message>
+    <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
+  </nve-input>
 
-  <mlv-password status="error">
+  <nve-password status="error">
     <label>password</label>
     <input type="password" name="password" required minlength="6" autocomplete="off" />
-    <mlv-control-message error="valueMissing">required</mlv-control-message>
-  </mlv-password>
+    <nve-control-message error="valueMissing">required</nve-control-message>
+  </nve-password>
 
-  <mlv-button type="button">reset form</mlv-button>
+  <nve-button type="button">reset form</nve-button>
 </form>
 <script type="module">
   const form = document.querySelector('form');
-  const input = form.querySelector('mlv-input');
-  const resetInput = form.querySelector('mlv-icon-button[icon-name="cancel"]');
-  const resetForm = form.querySelector('mlv-button');
+  const input = form.querySelector('nve-input');
+  const resetInput = form.querySelector('nve-icon-button[icon-name="cancel"]');
+  const resetForm = form.querySelector('nve-button');
 
   resetInput.addEventListener('click', e => input.reset());
   resetForm.addEventListener('click', e => form.reset());
@@ -149,29 +149,29 @@ export class AppLogin extends LitElement {
   render() {
     return html`
       <form @submit=${e => this.#submit(e)} @input=${this.#input} nve-layout="column gap:lg align:stretch" style="max-width: 400px">
-        <mlv-input>
+        <nve-input>
           <label>Email</label>
           <input .value=${this.formValues.email} type="email" name="email" autocomplete="off" pattern=".+@nvidia.com" required />
-          <mlv-control-message error="valueMissing">required</mlv-control-message>
-          <mlv-control-message error="patternMismatch">invalid NVIDIA email</mlv-control-message>
-        </mlv-input>
+          <nve-control-message error="valueMissing">required</nve-control-message>
+          <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
+        </nve-input>
 
-        <mlv-password>
+        <nve-password>
           <label>Password</label>
           <input .value=${this.formValues.password} type="password" name="password" minlength="6" required />
-          <mlv-control-message error="valueMissing">required</mlv-control-message>
-          <mlv-control-message error="tooShort">minimum length is 6 characters</mlv-control-message>
-        </mlv-password>
+          <nve-control-message error="valueMissing">required</nve-control-message>
+          <nve-control-message error="tooShort">minimum length is 6 characters</nve-control-message>
+        </nve-password>
 
-        <mlv-checkbox>
+        <nve-checkbox>
           <label>Remember me</label>
           <input ?checked=${this.formValues.remember} type="checkbox" name="remember" />
-        </mlv-checkbox>
+        </nve-checkbox>
 
-        <mlv-button interaction="emphasis">Login</mlv-button>
+        <nve-button interaction="emphasis">Login</nve-button>
       </form>
       <pre>${JSON.stringify(this.formValues, null, 2)}</pre>
-      <mlv-notification ?hidden=${!this.showNotification} @close=${() => this.showNotification = false} close-timeout="2000" status="success" position="top">Submited: ${JSON.stringify(this.formValues)}</mlv-notification>
+      <nve-notification ?hidden=${!this.showNotification} @close=${() => this.showNotification = false} close-timeout="2000" status="success" position="top">Submited: ${JSON.stringify(this.formValues)}</nve-notification>
     `;
   }
 

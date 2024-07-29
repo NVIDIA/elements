@@ -13,7 +13,7 @@ import tabsItemStyleSheet from './tabs-item.css?inline';
 import tabsStyleSheet from './tabs.css?inline';
 
 /**
- * @element mlv-tabs-item
+ * @element nve-tabs-item
  * @since 0.10.0
  * @slot - default slot for content
  * @cssprop --font-size
@@ -62,7 +62,7 @@ export class TabsItem extends BaseButton {
 }
 
 /**
- * @element mlv-tabs
+ * @element nve-tabs
  * @description Tabs provide a selection UX, typically used for swapping content shown on a page, or within a navigation context.
  * @since 0.10.0
  * @slot - default slot for tab-item

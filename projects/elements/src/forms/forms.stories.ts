@@ -26,171 +26,171 @@ export default {
 export const KitchenSink = {
   render: () => html`
 <div style="display: grid; gap: 36px 48px; grid-template-columns: 1fr 1fr; max-width: 1400px;">
-    <mlv-input layout="vertical-inline">
+    <nve-input layout="vertical-inline">
       <label>text label</label>
       <input />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-input>
+      <nve-control-message>message</nve-control-message>
+    </nve-input>
 
-    <mlv-search layout="vertical-inline">
+    <nve-search layout="vertical-inline">
       <label>search label</label>
       <input type="search" placeholder="search" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-search>
+      <nve-control-message>message</nve-control-message>
+    </nve-search>
 
-    <mlv-password layout="vertical-inline">
+    <nve-password layout="vertical-inline">
       <label>password label</label>
       <input type="password" value="123456" autocomplete="off" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-password>
+      <nve-control-message>message</nve-control-message>
+    </nve-password>
 
-    <mlv-select layout="vertical-inline">
+    <nve-select layout="vertical-inline">
       <label>select label</label>
       <select>
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
         <option value="3">Option 3</option>
       </select>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-select>
+      <nve-control-message>message</nve-control-message>
+    </nve-select>
 
-    <mlv-date layout="vertical-inline">
+    <nve-date layout="vertical-inline">
       <label>date label</label>
       <input type="date" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-date>
+      <nve-control-message>message</nve-control-message>
+    </nve-date>
 
-    <mlv-datetime layout="vertical-inline">
+    <nve-datetime layout="vertical-inline">
       <label>datetime label</label>
       <input type="datetime-local" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-datetime>
+      <nve-control-message>message</nve-control-message>
+    </nve-datetime>
 
-    <mlv-month layout="vertical-inline">
+    <nve-month layout="vertical-inline">
       <label>month label</label>
       <input type="month" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-month>
+      <nve-control-message>message</nve-control-message>
+    </nve-month>
 
-    <mlv-week layout="vertical-inline">
+    <nve-week layout="vertical-inline">
       <label>week label</label>
       <input type="week" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-week>
+      <nve-control-message>message</nve-control-message>
+    </nve-week>
 
-    <mlv-time layout="vertical-inline">
+    <nve-time layout="vertical-inline">
       <label>time label</label>
       <input type="time" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-time>
+      <nve-control-message>message</nve-control-message>
+    </nve-time>
 
-    <mlv-color layout="vertical-inline">
+    <nve-color layout="vertical-inline">
       <label>color label</label>
       <input type="color" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-color>
+      <nve-control-message>message</nve-control-message>
+    </nve-color>
 
-    <mlv-input layout="vertical-inline">
+    <nve-input layout="vertical-inline">
       <label>prefix/suffix label</label>
-      <mlv-button container="flat" readonly>https://</mlv-button>
+      <nve-button container="flat" readonly>https://</nve-button>
       <input type="text" />
-      <mlv-button container="flat" readonly>.com</mlv-button>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-input>
+      <nve-button container="flat" readonly>.com</nve-button>
+      <nve-control-message>message</nve-control-message>
+    </nve-input>
 
-    <mlv-input layout="vertical-inline">
+    <nve-input layout="vertical-inline">
       <label>actions label</label>
-      <mlv-icon-button icon-name="search" container="flat" readonly></mlv-icon-button>
+      <nve-icon-button icon-name="search" container="flat" readonly></nve-icon-button>
       <input type="text" />
-      <mlv-icon-button icon-name="cancel" container="flat" aria-label="clear"></mlv-icon-button>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-input>
+      <nve-icon-button icon-name="cancel" container="flat" aria-label="clear"></nve-icon-button>
+      <nve-control-message>message</nve-control-message>
+    </nve-input>
 
-    <mlv-input-group layout="vertical-inline">
+    <nve-input-group layout="vertical-inline">
       <label>date range</label>
-      <mlv-date>
+      <nve-date>
         <input type="date" aria-label="start date" value="2018-07-22" />
-      </mlv-date>
-      <mlv-date>
+      </nve-date>
+      <nve-date>
         <input type="date" aria-label="end date" value="2022-07-22" />
-      </mlv-date>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-input-group>
+      </nve-date>
+      <nve-control-message>message</nve-control-message>
+    </nve-input-group>
 
-    <mlv-input-group layout="vertical-inline">
+    <nve-input-group layout="vertical-inline">
       <label>domain</label>
-      <mlv-select style="width: 120px">
+      <nve-select style="width: 120px">
         <select aria-label="protocol">
           <option>https://</option>
           <option>http://</option>
         </select>
-      </mlv-select>
-      <mlv-input>
+      </nve-select>
+      <nve-input>
         <input placeholder="example" aria-label="host" />
-        <mlv-button container="flat" readonly="">.com</mlv-button>
-      </mlv-input>
-      <mlv-control-message>Host ID: 123456</mlv-control-message>
-    </mlv-input-group>
+        <nve-button container="flat" readonly="">.com</nve-button>
+      </nve-input>
+      <nve-control-message>Host ID: 123456</nve-control-message>
+    </nve-input-group>
 
-    <mlv-range layout="vertical-inline">
+    <nve-range layout="vertical-inline">
       <label>range label</label>
       <input type="range" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-range>
+      <nve-control-message>message</nve-control-message>
+    </nve-range>
 
-    <mlv-checkbox-group layout="vertical-inline">
+    <nve-checkbox-group layout="vertical-inline">
       <label>checkbox group label</label>
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>checkbox 1</label>
         <input type="checkbox" checked />
-      </mlv-checkbox>
+      </nve-checkbox>
 
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>checkbox 2</label>
         <input type="checkbox" />
-      </mlv-checkbox>
+      </nve-checkbox>
 
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>checkbox 3</label>
         <input type="checkbox" />
-      </mlv-checkbox>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-checkbox-group>
+      </nve-checkbox>
+      <nve-control-message>message</nve-control-message>
+    </nve-checkbox-group>
 
-    <mlv-radio-group layout="vertical-inline">
+    <nve-radio-group layout="vertical-inline">
       <label>radio group label</label>
-      <mlv-radio>
+      <nve-radio>
         <label>radio 1</label>
         <input type="radio" checked />
-      </mlv-radio>
+      </nve-radio>
 
-      <mlv-radio>
+      <nve-radio>
         <label>radio 2</label>
         <input type="radio" />
-      </mlv-radio>
+      </nve-radio>
 
-      <mlv-radio>
+      <nve-radio>
         <label>radio 3</label>
         <input type="radio" />
-      </mlv-radio>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-radio-group>
+      </nve-radio>
+      <nve-control-message>message</nve-control-message>
+    </nve-radio-group>
 
-    <mlv-switch-group layout="vertical-inline">
+    <nve-switch-group layout="vertical-inline">
       <label>switch group label</label>
-      <mlv-switch>
+      <nve-switch>
         <label>switch 1</label>
         <input type="checkbox" />
-      </mlv-switch>
+      </nve-switch>
 
-      <mlv-switch>
+      <nve-switch>
         <label>switch 2</label>
         <input type="checkbox" checked />
-      </mlv-switch>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-switch-group>
+      </nve-switch>
+      <nve-control-message>message</nve-control-message>
+    </nve-switch-group>
 
-    <mlv-select layout="vertical-inline">
+    <nve-select layout="vertical-inline">
       <label>select multiple label</label>
       <select multiple>
         <option value="1">Option 1</option>
@@ -200,47 +200,47 @@ export const KitchenSink = {
         <option value="4">Option 4</option>
         <option value="5">Option 5</option>
       </select>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-select>
+      <nve-control-message>message</nve-control-message>
+    </nve-select>
 
-    <mlv-textarea layout="vertical-inline">
+    <nve-textarea layout="vertical-inline">
       <label>textarea label</label>
       <textarea></textarea>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-textarea>
+      <nve-control-message>message</nve-control-message>
+    </nve-textarea>
 
-    <mlv-file>
+    <nve-file>
       <label>file label</label>
       <input type="file" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-file>
+      <nve-control-message>message</nve-control-message>
+    </nve-file>
 
-    <mlv-search rounded>
+    <nve-search rounded>
       <input type="search" aria-label="search" placeholder="search" />
       <datalist>
         <option value="search result 1"></option>
         <option value="search result 2"></option>
         <option value="search result 3"></option>
       </datalist>
-    </mlv-search>
+    </nve-search>
 
-    <mlv-input layout="vertical-inline">
+    <nve-input layout="vertical-inline">
       <label>disabled</label>
       <input disabled />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-input>
+      <nve-control-message>message</nve-control-message>
+    </nve-input>
 
-    <mlv-input layout="vertical-inline">
+    <nve-input layout="vertical-inline">
       <label>success</label>
       <input />
-      <mlv-control-message status="success">message</mlv-control-message>
-    </mlv-input>
+      <nve-control-message status="success">message</nve-control-message>
+    </nve-input>
 
-    <mlv-input layout="vertical-inline">
+    <nve-input layout="vertical-inline">
       <label>error</label>
       <input />
-      <mlv-control-message status="error">message</mlv-control-message>
-    </mlv-input>
+      <nve-control-message status="error">message</nve-control-message>
+    </nve-input>
 </div>
   `
 }
@@ -248,93 +248,93 @@ export const KitchenSink = {
 export const Vertical = () => {
   return html`
 <div nve-layout="column gap:lg">
-  <mlv-input>
+  <nve-input>
     <label>text label</label>
     <input />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
 
-  <mlv-search>
+  <nve-search>
     <label>search label</label>
     <input type="search" placeholder="search" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-search>
+    <nve-control-message>message</nve-control-message>
+  </nve-search>
 
-  <mlv-password>
+  <nve-password>
     <label>password label</label>
     <input type="password" value="123456" autocomplete="off" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message>message</nve-control-message>
+  </nve-password>
 
-  <mlv-select>
+  <nve-select>
     <label>select label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-range>
+  <nve-range>
     <label>range label</label>
     <input type="range" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-range>
+    <nve-control-message>message</nve-control-message>
+  </nve-range>
 
-  <mlv-checkbox-group>
+  <nve-checkbox-group>
     <label>checkbox group label</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-radio-group>
+  <nve-radio-group>
     <label>radio group label</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-switch-group>
+  <nve-switch-group>
     <label>switch group label</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" checked />
-    </mlv-switch>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-select>
+  <nve-select>
     <label>select multiple label</label>
     <select multiple>
       <option value="1">Option 1</option>
@@ -344,14 +344,14 @@ export const Vertical = () => {
       <option value="4">Option 4</option>
       <option value="5">Option 5</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-textarea>
+  <nve-textarea>
     <label>textarea label</label>
     <textarea></textarea>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
 </div>
   `;
 };
@@ -359,93 +359,93 @@ export const Vertical = () => {
 export const VerticalInline = () => {
   return html`
 <div nve-layout="column gap:lg">
-  <mlv-input layout="vertical-inline">
+  <nve-input layout="vertical-inline">
     <label>text label</label>
     <input />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
 
-  <mlv-search layout="vertical-inline">
+  <nve-search layout="vertical-inline">
     <label>search label</label>
     <input type="search" placeholder="search" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-search>
+    <nve-control-message>message</nve-control-message>
+  </nve-search>
 
-  <mlv-password layout="vertical-inline">
+  <nve-password layout="vertical-inline">
     <label>password label</label>
     <input type="password" value="123456" autocomplete="off" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message>message</nve-control-message>
+  </nve-password>
 
-  <mlv-select layout="vertical-inline">
+  <nve-select layout="vertical-inline">
     <label>select label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-range layout="vertical-inline">
+  <nve-range layout="vertical-inline">
     <label>range label</label>
     <input type="range" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-range>
+    <nve-control-message>message</nve-control-message>
+  </nve-range>
 
-  <mlv-checkbox-group layout="vertical-inline">
+  <nve-checkbox-group layout="vertical-inline">
     <label>checkbox group label</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-radio-group layout="vertical-inline">
+  <nve-radio-group layout="vertical-inline">
     <label>radio group label</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-switch-group layout="vertical-inline">
+  <nve-switch-group layout="vertical-inline">
     <label>switch group label</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" checked />
-    </mlv-switch>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-select layout="vertical-inline">
+  <nve-select layout="vertical-inline">
     <label>select multiple label</label>
     <select multiple>
       <option value="1">Option 1</option>
@@ -455,14 +455,14 @@ export const VerticalInline = () => {
       <option value="4">Option 4</option>
       <option value="5">Option 5</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-textarea layout="vertical-inline">
+  <nve-textarea layout="vertical-inline">
     <label>textarea label</label>
     <textarea></textarea>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
 </div>
   `;
 };
@@ -470,93 +470,93 @@ export const VerticalInline = () => {
 export const Horizontal = () => {
   return html`
 <div nve-layout="column gap:lg">
-  <mlv-input layout="horizontal">
+  <nve-input layout="horizontal">
     <label>text label</label>
     <input />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
 
-  <mlv-search layout="horizontal">
+  <nve-search layout="horizontal">
     <label>search label</label>
     <input type="search" placeholder="search" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-search>
+    <nve-control-message>message</nve-control-message>
+  </nve-search>
 
-  <mlv-password layout="horizontal">
+  <nve-password layout="horizontal">
     <label>password label</label>
     <input type="password" value="123456" autocomplete="off" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message>message</nve-control-message>
+  </nve-password>
 
-  <mlv-select layout="horizontal">
+  <nve-select layout="horizontal">
     <label>select label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-range layout="horizontal">
+  <nve-range layout="horizontal">
     <label>range label</label>
     <input type="range" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-range>
+    <nve-control-message>message</nve-control-message>
+  </nve-range>
 
-  <mlv-checkbox-group layout="horizontal">
+  <nve-checkbox-group layout="horizontal">
     <label>checkbox group label</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-radio-group layout="horizontal">
+  <nve-radio-group layout="horizontal">
     <label>radio group label</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-switch-group layout="horizontal">
+  <nve-switch-group layout="horizontal">
     <label>switch group label</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" checked />
-    </mlv-switch>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-select layout="horizontal">
+  <nve-select layout="horizontal">
     <label>select multiple label</label>
     <select multiple>
       <option value="1">Option 1</option>
@@ -566,14 +566,14 @@ export const Horizontal = () => {
       <option value="4">Option 4</option>
       <option value="5">Option 5</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-textarea layout="horizontal">
+  <nve-textarea layout="horizontal">
     <label>textarea label</label>
     <textarea></textarea>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
 </div>
   `;
 };
@@ -581,93 +581,93 @@ export const Horizontal = () => {
 export const HorizontalInline = () => {
   return html`
 <div nve-layout="column gap:lg">
-  <mlv-input layout="horizontal-inline">
+  <nve-input layout="horizontal-inline">
     <label>text label</label>
     <input />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
 
-  <mlv-search layout="horizontal-inline">
+  <nve-search layout="horizontal-inline">
     <label>search label</label>
     <input type="search" placeholder="search" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-search>
+    <nve-control-message>message</nve-control-message>
+  </nve-search>
 
-  <mlv-password layout="horizontal-inline">
+  <nve-password layout="horizontal-inline">
     <label>password label</label>
     <input type="password" value="123456" autocomplete="off" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message>message</nve-control-message>
+  </nve-password>
 
-  <mlv-select layout="horizontal-inline">
+  <nve-select layout="horizontal-inline">
     <label>select label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-range layout="horizontal-inline">
+  <nve-range layout="horizontal-inline">
     <label>range label</label>
     <input type="range" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-range>
+    <nve-control-message>message</nve-control-message>
+  </nve-range>
 
-  <mlv-checkbox-group layout="horizontal-inline">
+  <nve-checkbox-group layout="horizontal-inline">
     <label>checkbox group label</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-radio-group layout="horizontal-inline">
+  <nve-radio-group layout="horizontal-inline">
     <label>radio group label</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-switch-group layout="horizontal-inline">
+  <nve-switch-group layout="horizontal-inline">
     <label>switch group label</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" checked />
-    </mlv-switch>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-select layout="horizontal-inline">
+  <nve-select layout="horizontal-inline">
     <label>select multiple label</label>
     <select multiple>
       <option value="1">Option 1</option>
@@ -677,14 +677,14 @@ export const HorizontalInline = () => {
       <option value="4">Option 4</option>
       <option value="5">Option 5</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-textarea layout="horizontal-inline">
+  <nve-textarea layout="horizontal-inline">
     <label>textarea label</label>
     <textarea></textarea>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-textarea>
+    <nve-control-message>message</nve-control-message>
+  </nve-textarea>
 </div>
   `;
 };
@@ -693,27 +693,27 @@ export const HorizontalInline = () => {
 export const FitText = {
   render: () => html`
 <section nve-layout="column gap:md">
-  <mlv-date fit-text>
+  <nve-date fit-text>
     <label>date</label>
     <input type="date" value="2017-06-01" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message>message</nve-control-message>
+  </nve-date>
 
-  <mlv-input fit-text>
+  <nve-input fit-text>
     <label>label</label>
     <input value="123456789012345678901234567890" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
 
-  <mlv-select fit-text>
+  <nve-select fit-text>
     <label>label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 1234</option>
       <option value="3">Option 1234567809</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 </section>
 `
 };

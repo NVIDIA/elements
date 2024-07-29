@@ -126,9 +126,9 @@ class PopoverDemo extends LitElement {
 
   static styles = [popoverBaseStyles, css`
     :host {
-      --mlv-sys-layer-popover-arrow-padding: 6px;
-      --mlv-sys-layer-popover-arrow-offset: 2px;
-      --mlv-sys-layer-popover-offset: 2px;
+      --nve-sys-layer-popover-arrow-padding: 6px;
+      --nve-sys-layer-popover-arrow-offset: 2px;
+      --nve-sys-layer-popover-offset: 2px;
     }
 
     dialog {
@@ -151,7 +151,7 @@ class PopoverDemo extends LitElement {
       position: absolute;
     }
 
-    mlv-icon-button {
+    nve-icon-button {
       --color: #000 !important;
       position: absolute;
       top: 0;
@@ -170,7 +170,7 @@ class PopoverDemo extends LitElement {
       <dialog ${animationFade(this)}>
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
-        ${this.closable ? html`<mlv-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" container="flat" aria-label="close"></mlv-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" container="flat" aria-label="close"></nve-icon-button>` : ''}
       </dialog>
     `;
   }
@@ -190,12 +190,12 @@ export const PopoverController = {
       }
     </style>
 
-    <ui-popover ${spread(args)} style="--mlv-sys-layer-popover-offset: ${args.offset}px">popover</ui-popover>
-    <mlv-card id="card">
-      <mlv-card-content nve-layout="align:center" style="width: 450px; height: 300px;">
-        <mlv-button id="button">toggle</mlv-button>
-      </mlv-card-content>
-    </mlv-card>
+    <ui-popover ${spread(args)} style="--nve-sys-layer-popover-offset: ${args.offset}px">popover</ui-popover>
+    <nve-card id="card">
+      <nve-card-content nve-layout="align:center" style="width: 450px; height: 300px;">
+        <nve-button id="button">toggle</nve-button>
+      </nve-card-content>
+    </nve-card>
     <script type="module">
       const button = document.querySelector('#button');
       const popover = document.querySelector('ui-popover');
@@ -253,7 +253,7 @@ export const PopoverControllerAlignment = {
     }
   </style>
 
-  <mlv-card id="card" style="width: 450px; height: 300px;"></mlv-card>
+  <nve-card id="card" style="width: 450px; height: 300px;"></nve-card>
   <ui-popover anchor="card" popover-type="manual" position="top" alignment="start">top start</ui-popover>
   <ui-popover anchor="card" popover-type="manual" position="top">top center</ui-popover>
   <ui-popover anchor="card" popover-type="manual" position="top" alignment="end">top end</ui-popover>
@@ -289,7 +289,7 @@ class I18nItem extends LitElement {
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   render() {
-    return html`<mlv-card><pre style="padding: 24px">${JSON.stringify(this.i18n, null, 2)}</pre></mlv-card>`
+    return html`<nve-card><pre style="padding: 24px">${JSON.stringify(this.i18n, null, 2)}</pre></nve-card>`
   }
 }
 customElements.get('i18n-item') || customElements.define('i18n-item', I18nItem);
@@ -299,8 +299,8 @@ class I18nDemo extends LitElement {
     return html`
     <div nve-layout="column gap:md">
       <div nve-layout="row gap:sm">
-        <mlv-button @click=${() => this.#english()}>English</mlv-button>
-        <mlv-button @click=${() => this.#french()}>French</mlv-button>
+        <nve-button @click=${() => this.#english()}>English</nve-button>
+        <nve-button @click=${() => this.#french()}>French</nve-button>
       </div>
       
       <div nve-layout="grid span-items:6 gap:sm">

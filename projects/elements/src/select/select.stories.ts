@@ -7,25 +7,25 @@ import '@nvidia-elements/core/logo/define.js';
 
 export default {
   title: 'Elements/Select/Examples',
-  component: 'mlv-select',
+  component: 'nve-select',
 };
 
 export const Select = {
   render: () => html`
-<mlv-select>
+<nve-select>
   <label>label</label>
   <select>
     <option value="1">Option 1</option>
     <option value="2">Option 2</option>
     <option value="3">Option 3</option>
   </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+  <nve-control-message>message</nve-control-message>
+</nve-select>`
 };
 
 export const CustomOptionRender = {
   render: () => html`
-<mlv-select>
+<nve-select>
   <label>label</label>
   <select id="complex">
     <option value="1">
@@ -39,162 +39,162 @@ export const CustomOptionRender = {
     </option>
   </select>
     <div slot="option-1" nve-layout="row gap:xs align:vertical-center">
-      <mlv-logo color="pink-rose">Db</mlv-logo>
+      <nve-logo color="pink-rose">Db</nve-logo>
       <p nve-layout="column gap:xs">
         <span nve-text="label">Debugger</span>
         <span nve-text="body muted">some details on option 1</span>
       </p>
     </div>
     <div slot="option-2" nve-layout="row gap:xs align:vertical-center">
-      <mlv-logo color="blue-cobalt">TM</mlv-logo>
+      <nve-logo color="blue-cobalt">TM</nve-logo>
       <p nve-layout="column gap:xs">
         <span nve-text="label">Task Manager</span>
         <span nve-text="body muted">some details on option 2</span>
       </p>
     </div>
     <div slot="option-3" nve-layout="row gap:xs align:vertical-center">
-      <mlv-logo color="green-mint">CI</mlv-logo>
+      <nve-logo color="green-mint">CI</nve-logo>
       <p nve-layout="column gap:xs">
         <span nve-text="label">CI Services</span>
         <span nve-text="body muted">some details on option 3</span>
       </p>
     </div>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>
+  <nve-control-message>message</nve-control-message>
+</nve-select>
   `
 }
 
 export const Prefix = {
   render: () => html`
-  <mlv-select>
-    <mlv-button container="flat" readonly>location</mlv-button>
+  <nve-select>
+    <nve-button container="flat" readonly>location</nve-button>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-  </mlv-select>
+  </nve-select>
   `
 };
 
 export const Flat = {
   render: () => html`
 <div nve-layout="column gap:xl align:stretch">
-  <mlv-select container="flat">
+  <nve-select container="flat">
     <label>label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-select container="flat">
+  <nve-select container="flat">
     <label>multiple</label>
     <select multiple>
       <option selected value="1">Option 1</option>
       <option selected value="2">Option 2</option>
       <option selected value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 </div>`
 };
 
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-select>
+  <nve-select>
     <label>label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-select>
+  <nve-select>
     <label>disabled</label>
     <select disabled>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-select>
+  <nve-select>
     <label>success</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-select>
 
-  <mlv-select>
+  <nve-select>
     <label>error</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-select>
 </div>`
 };
 
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-select layout="horizontal">
+  <nve-select layout="horizontal">
     <label>label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-select layout="horizontal">
+  <nve-select layout="horizontal">
     <label>disabled</label>
     <select disabled>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-select layout="horizontal">
+  <nve-select layout="horizontal">
     <label>success</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-select>
 
-  <mlv-select layout="horizontal">
+  <nve-select layout="horizontal">
     <label>error</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
     </select>
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-select>
 </div>`
 };
 
 export const Multiple = {
   render: () => html`
-<mlv-select>
+<nve-select>
   <label>label</label>
   <select multiple>
     <option value="1">Option 1</option>
@@ -203,13 +203,13 @@ export const Multiple = {
     <option value="4" selected>Option 4</option>
     <option value="5">Option 5</option>
   </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+  <nve-control-message>message</nve-control-message>
+</nve-select>`
 };
 
 export const MultipleDisabled = {
   render: () => html`
-<mlv-select>
+<nve-select>
   <label>label</label>
   <select multiple disabled>
     <option value="1">Option 1</option>
@@ -218,13 +218,13 @@ export const MultipleDisabled = {
     <option value="4" selected>Option 4</option>
     <option value="5">Option 5</option>
   </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+  <nve-control-message>message</nve-control-message>
+</nve-select>`
 };
 
 export const MultipleOverflow = {
   render: () => html`
-<mlv-select style="--width: 250px">
+<nve-select style="--width: 250px">
   <label>label</label>
   <select multiple>
     <option value="1">Option 1</option>
@@ -233,14 +233,14 @@ export const MultipleOverflow = {
     <option value="4" selected>Option 4</option>
     <option value="5" selected>Option 5</option>
   </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+  <nve-control-message>message</nve-control-message>
+</nve-select>`
 };
 
 export const Size = {
   render: () => html`
 <div nve-layout="column gap:xl">
-  <mlv-select>
+  <nve-select>
     <label>label</label>
     <select size="5">
       <option value="1">Option 1</option>
@@ -249,10 +249,10 @@ export const Size = {
       <option value="4">Option 4</option>
       <option value="5">Option 5</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-select>
+  <nve-select>
     <label>label</label>
     <select size="3">
       <option value="1">Option 1</option>
@@ -261,15 +261,15 @@ export const Size = {
       <option value="4">Option 4</option>
       <option value="5">Option 5</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 </div>`
 };
 
 export const Height = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-select style="--scroll-height: 150px">
+  <nve-select style="--scroll-height: 150px">
     <label>label</label>
     <select>
       <option value="1">Option 1</option>
@@ -283,60 +283,60 @@ export const Height = {
       <option value="9">Option 9</option>
       <option value="10">Option 10</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-select>
+  <nve-select>
     <label>label</label>
     <select>
       ${new Array(100).fill('').map((_, i) => html`<option>Option ${i + 1}</option>`)}
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 </div>`
 };
 
 export const FitText = {
   render: () => html`
-<mlv-select fit-text>
+<nve-select fit-text>
   <label>label</label>
   <select>
     <option value="1">Option 1</option>
     <option value="2">Option 1234</option>
     <option value="3">Option 1234567809</option>
   </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+  <nve-control-message>message</nve-control-message>
+</nve-select>`
 };
 
 export const FitContent = {
   render: () => html`
 <div nve-layout="column gap:lg">
-  <mlv-select fit-content>
+  <nve-select fit-content>
     <label>label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 1234</option>
       <option value="3">Option 1234567809</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 
-  <mlv-select fit-content layout="horizontal">
+  <nve-select fit-content layout="horizontal">
     <label>label</label>
     <select>
       <option value="1">Option 1</option>
       <option value="2">Option 1234</option>
       <option value="3">Option 1234567809</option>
     </select>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 </div>`
 };
 
 export const Placeholder = {
   render: () => html`
-<mlv-select>
+<nve-select>
   <label>label</label>
   <select>
     <option value="" selected disabled hidden>Select Option</option>
@@ -344,13 +344,13 @@ export const Placeholder = {
     <option value="2">Option 2</option>
     <option value="3">Option 3</option>
   </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+  <nve-control-message>message</nve-control-message>
+</nve-select>`
 };
 
 export const PlaceholderMultiple = {
   render: () => html`
-<mlv-select>
+<nve-select>
   <label>label</label>
   <select multiple>
     <option value="" selected disabled hidden>Select Option</option>
@@ -358,38 +358,38 @@ export const PlaceholderMultiple = {
     <option value="2">Option 2</option>
     <option value="3">Option 3</option>
   </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+  <nve-control-message>message</nve-control-message>
+</nve-select>`
 };
 
 export const Disabled = {
   render: () => html`
-<mlv-select>
+<nve-select>
   <label>label</label>
   <select>
     <option value="1">Option 1</option>
     <option value="2" disabled>Option 2</option>
     <option value="3">Option 3</option>
   </select>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-select>`
+  <nve-control-message>message</nve-control-message>
+</nve-select>`
 };
 
 export const Performance = {
-  render: () => html`<mlv-select-performance-demo></mlv-select-performance-demo>`
+  render: () => html`<nve-select-performance-demo></nve-select-performance-demo>`
 }
 
 class SelectPerformanceDemo extends LitElement {
   render() {
     return html`
-  <mlv-select>
+  <nve-select>
     <label>1000 options</label>
     <select>
       ${new Array(1000).fill('').map((_, i) => html`<option value=${i}>${i} item</option>`)}
     </select>
-  </mlv-select>
+  </nve-select>
     `;
   }
 }
 
-customElements.get('mlv-select-performance-demo') || customElements.define('mlv-select-performance-demo', SelectPerformanceDemo);
+customElements.get('nve-select-performance-demo') || customElements.define('nve-select-performance-demo', SelectPerformanceDemo);

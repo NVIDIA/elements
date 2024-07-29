@@ -7,7 +7,7 @@ import styles from './input.css?inline';
 export const inputStyles = styles;
 
 /**
- * @element mlv-input
+ * @element nve-input
  * @description An input is a control that enables users to enter text.
  * @since 0.3.0
  * @cssprop --padding

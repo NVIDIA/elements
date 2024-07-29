@@ -17,7 +17,7 @@ import { Icon } from '@nvidia-elements/core/icon';
 import styles from './combobox.css?inline';
 
 /**
- * @element mlv-combobox
+ * @element nve-combobox
  * @description An editable combobox with autocomplete behavior from a given datalist.
  * @since 0.17.0
  * @slot - default slot for input

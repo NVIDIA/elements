@@ -5,55 +5,55 @@ import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Elements/Divider/Examples',
-  component: 'mlv-divider',
+  component: 'nve-divider',
 };
 
 export const Default = {
   render: () => html`
-    <mlv-divider></mlv-divider>
+    <nve-divider></nve-divider>
   `
 };
 
 export const Emphasis = {
   render: () => html`
-    <mlv-divider style="--color: var(--mlv-ref-border-color-emphasis)"></mlv-divider>
+    <nve-divider style="--color: var(--nve-ref-border-color-emphasis)"></nve-divider>
   `
 };
 
 export const Muted = {
   render: () => html`
-    <mlv-divider style="--color: var(--mlv-ref-border-color-muted)"></mlv-divider>
+    <nve-divider style="--color: var(--nve-ref-border-color-muted)"></nve-divider>
   `
 };
 
 export const Vertical = {
   render: () => html`
     <div nve-layout="row gap:sm align:vertical-center" style="height: 50px">
-      <mlv-divider orientation="vertical"></mlv-divider>
-      <mlv-icon-button icon-name="information-circle-stroke"></mlv-icon-button>
-      <mlv-icon-button icon-name="more-actions"></mlv-icon-button>
+      <nve-divider orientation="vertical"></nve-divider>
+      <nve-icon-button icon-name="information-circle-stroke"></nve-icon-button>
+      <nve-icon-button icon-name="more-actions"></nve-icon-button>
     </div>
   `
 };
 
 export const Rounded = {
   render: () => html`
-    <mlv-divider style="--size: var(--mlv-ref-border-width-xl); --border-radius: var(--mlv-ref-border-radius-xs); --color: var(--mlv-sys-accent-secondary-background);"></mlv-divider>
+    <nve-divider style="--size: var(--nve-ref-border-width-xl); --border-radius: var(--nve-ref-border-radius-xs); --color: var(--nve-sys-accent-secondary-background);"></nve-divider>
   `
 };
 
 export const LightTheme = {
   render: () => html`
-    <mlv-card mlv-theme="light">
-      <mlv-divider></mlv-divider>
-    </mlv-card>
+    <nve-card nve-theme="light">
+      <nve-divider></nve-divider>
+    </nve-card>
   `
 }
 
 export const DarkTheme = {
   render: () => html`
-    <mlv-card mlv-theme="dark">
-      <mlv-divider></mlv-divider>
-    </mlv-card>
+    <nve-card nve-theme="dark">
+      <nve-divider></nve-divider>
+    </nve-card>
   `
 }

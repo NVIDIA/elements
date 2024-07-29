@@ -6,7 +6,7 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './month.css?inline';
 
 /**
- * @element mlv-month
+ * @element nve-month
  * @description A month picker is a control that enables users to choose a month value.
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-month-documentation--docs

@@ -5,7 +5,7 @@ import { Icon } from '@nvidia-elements/core/icon';
 import styles from './progress-ring.css?inline';
 
 /**
- * @element mlv-progress-ring
+ * @element nve-progress-ring
  * @description The `progress-ring` component is used to indicate the status of a pending task. It also serves the basis of the page loading element.
  * @since 0.17.0
  * @slot status-icon

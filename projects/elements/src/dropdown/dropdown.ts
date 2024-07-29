@@ -15,7 +15,7 @@ import {
 import styles from './dropdown.css?inline';
 
 /**
- * @element mlv-dropdown
+ * @element nve-dropdown
  * @description Generic dropdown element for rendering a variety of different content within a dropdown container.
  * @since 0.6.0
  * @event open - Dispatched when the dropdown is opened.

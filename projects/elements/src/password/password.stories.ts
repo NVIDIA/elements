@@ -4,72 +4,72 @@ import '@nvidia-elements/core/password/define.js';
 
 export default {
   title: 'Elements/Password/Examples',
-  component: 'mlv-password',
+  component: 'nve-password',
 };
 
 export const Password = {
   render: () => html`
-<mlv-password>
+<nve-password>
   <label>label</label>
   <input type="password" value="123456" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-password>`
+  <nve-control-message>message</nve-control-message>
+</nve-password>`
 };
 
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-password>
+  <nve-password>
     <label>label</label>
     <input type="password" value="123456" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message>message</nve-control-message>
+  </nve-password>
 
-  <mlv-password>
+  <nve-password>
     <label>disabled</label>
     <input type="password" value="123456" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message>message</nve-control-message>
+  </nve-password>
 
-  <mlv-password>
+  <nve-password>
     <label>success</label>
     <input type="password" value="123456" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-password>
 
-  <mlv-password>
+  <nve-password>
     <label>error</label>
     <input type="password" value="123456" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-password>
 </div>`
 };
 
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-password layout="horizontal">
+  <nve-password layout="horizontal">
     <label>label</label>
     <input type="password" value="123456" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message>message</nve-control-message>
+  </nve-password>
 
-  <mlv-password layout="horizontal">
+  <nve-password layout="horizontal">
     <label>disabled</label>
     <input type="password" value="123456" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message>message</nve-control-message>
+  </nve-password>
 
-  <mlv-password layout="horizontal">
+  <nve-password layout="horizontal">
     <label>success</label>
     <input type="password" value="123456" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-password>
 
-  <mlv-password layout="horizontal">
+  <nve-password layout="horizontal">
     <label>error</label>
     <input type="password" value="123456" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-password>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-password>
 </div>`
 };

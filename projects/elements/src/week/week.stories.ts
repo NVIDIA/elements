@@ -4,88 +4,88 @@ import '@nvidia-elements/core/week/define.js';
 
 export default {
   title: 'Elements/Week/Examples',
-  component: 'mlv-week',
+  component: 'nve-week',
 };
 
 export const Week = {
   render: () => html`
-<mlv-week>
+<nve-week>
   <label>label</label>
   <input type="week" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-week>
+  <nve-control-message>message</nve-control-message>
+</nve-week>
 `
 };
 
 export const Datalist = {
   render: () => html`
-<mlv-week>
+<nve-week>
   <label>label</label>
   <input type="week" />
-  <mlv-control-message>message</mlv-control-message>
+  <nve-control-message>message</nve-control-message>
   <datalist>
     <option value="2018-W25"></option>
     <option value="2018-W26"></option>
     <option value="2018-W27"></option>
   </datalist>
-</mlv-week>
+</nve-week>
   `
 }
 
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-week>
+  <nve-week>
     <label>label</label>
     <input type="week" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-week>
+    <nve-control-message>message</nve-control-message>
+  </nve-week>
 
-  <mlv-week>
+  <nve-week>
     <label>disabled</label>
     <input type="week" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-week>
+    <nve-control-message>message</nve-control-message>
+  </nve-week>
 
-  <mlv-week>
+  <nve-week>
     <label>success</label>
     <input type="week" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-week>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-week>
 
-  <mlv-week>
+  <nve-week>
     <label>error</label>
     <input type="week" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-week>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-week>
 </div>`
 };
 
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-week layout="horizontal">
+  <nve-week layout="horizontal">
     <label>label</label>
     <input type="week" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-week>
+    <nve-control-message>message</nve-control-message>
+  </nve-week>
 
-  <mlv-week layout="horizontal">
+  <nve-week layout="horizontal">
     <label>disabled</label>
     <input type="week" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-week>
+    <nve-control-message>message</nve-control-message>
+  </nve-week>
 
-  <mlv-week layout="horizontal">
+  <nve-week layout="horizontal">
     <label>success</label>
     <input type="week" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-week>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-week>
 
-  <mlv-week layout="horizontal">
+  <nve-week layout="horizontal">
     <label>error</label>
     <input type="week" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-week>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-week>
 </div>`
 };

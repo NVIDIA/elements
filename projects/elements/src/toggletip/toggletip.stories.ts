@@ -11,22 +11,22 @@ import '@nvidia-elements/core/icon/define.js';
 
 export default {
   title: 'Elements/Toggletip/Examples',
-  component: 'mlv-toggletip'
+  component: 'nve-toggletip'
 };
 
 export const Default = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 400px">
-  <mlv-toggletip anchor="btn" closable>
-    <mlv-toggletip-header>
+  <nve-toggletip anchor="btn" closable>
+    <nve-toggletip-header>
       <h3 nve-text="heading sm">Toggletip Header</h3>
-    </mlv-toggletip-header>
+    </nve-toggletip-header>
       <p nve-text="body">some text content in a toggletip</p>
-    <mlv-toggletip-footer>
+    <nve-toggletip-footer>
       <p nve-text="body">Toggletip Footer</p>
-    </mlv-toggletip-footer>
-  </mlv-toggletip>
-  <mlv-button id="btn">button</mlv-button>
+    </nve-toggletip-footer>
+  </nve-toggletip>
+  <nve-button id="btn">button</nve-button>
 </div>
 `
 };
@@ -35,8 +35,8 @@ export const Default = {
 export const BehaviorTrigger = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 250px">
-  <mlv-toggletip behavior-trigger anchor="action-btn" trigger="action-btn" hidden>hello there</mlv-toggletip>
-  <mlv-button id="action-btn">button</mlv-button>
+  <nve-toggletip behavior-trigger anchor="action-btn" trigger="action-btn" hidden>hello there</nve-toggletip>
+  <nve-button id="action-btn">button</nve-button>
 </div>
   `
 };
@@ -45,16 +45,16 @@ export const BehaviorTrigger = {
 export const Interactive = {
   inline: false,
   render: () => html`
-  <div mlv-theme nve-layout="row align:center" style="width: 100%; height: 200px;">
-  <mlv-button id="toggletip-btn">open</mlv-button>
-  <mlv-toggletip trigger="toggletip-btn" hidden anchor="toggletip-btn">
-    <mlv-toggletip-header>toggletip header</mlv-toggletip-header>
+  <div nve-theme nve-layout="row align:center" style="width: 100%; height: 200px;">
+  <nve-button id="toggletip-btn">open</nve-button>
+  <nve-toggletip trigger="toggletip-btn" hidden anchor="toggletip-btn">
+    <nve-toggletip-header>toggletip header</nve-toggletip-header>
       <p nve-text="body">some text content in a toggletip</p>
-    <mlv-toggletip-footer>toggletip footer</mlv-toggletip-footer>
-  </mlv-toggletip>
+    <nve-toggletip-footer>toggletip footer</nve-toggletip-footer>
+  </nve-toggletip>
   </div>
 <script>
-  const toggletip = document.querySelector('mlv-toggletip');
+  const toggletip = document.querySelector('nve-toggletip');
   toggletip.addEventListener('open', () => toggletip.hidden = false);
   toggletip.addEventListener('close', () => toggletip.hidden = true);
 </script>
@@ -64,12 +64,12 @@ export const Interactive = {
 export const Closable = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 400px">
-  <mlv-toggletip closable anchor="action-btn" trigger="action-btn">
-    <mlv-toggletip-header>Toggletip Header</mlv-toggletip-header>
+  <nve-toggletip closable anchor="action-btn" trigger="action-btn">
+    <nve-toggletip-header>Toggletip Header</nve-toggletip-header>
       <p nve-text="body">some text content in a toggletip</p>
-    <mlv-toggletip-footer>Toggletip Footer</mlv-toggletip-footer>
-  </mlv-toggletip>
-  <mlv-button id="action-btn">button</mlv-button>
+    <nve-toggletip-footer>Toggletip Footer</nve-toggletip-footer>
+  </nve-toggletip>
+  <nve-button id="action-btn">button</nve-button>
 </div>
   `
 };
@@ -77,19 +77,19 @@ export const Closable = {
 export const AlertGroup = {
   inline: false,
   render: () => html`
-  <div mlv-theme nve-layout="row align:center" style="width: 100%; height: 400px;">
-    <mlv-toggletip anchor="btn" behavior-trigger trigger="btn">
-        <mlv-toggletip-header>
-            <mlv-alert-group status="danger" container="full" prominence="emphasis">
-                <mlv-alert>Workflow Failed</mlv-alert>
-            </mlv-alert-group>
-        </mlv-toggletip-header>
+  <div nve-theme nve-layout="row align:center" style="width: 100%; height: 400px;">
+    <nve-toggletip anchor="btn" behavior-trigger trigger="btn">
+        <nve-toggletip-header>
+            <nve-alert-group status="danger" container="full" prominence="emphasis">
+                <nve-alert>Workflow Failed</nve-alert>
+            </nve-alert-group>
+        </nve-toggletip-header>
         <p nve-text="body">some text content in a toggletip</p>
-        <mlv-toggletip-footer>
-            <mlv-button style="width: 100%">Retry Workflow</mlv-button>  
-        </mlv-toggletip-footer>
-    </mlv-toggletip>
-    <mlv-button id="btn">button</mlv-button>
+        <nve-toggletip-footer>
+            <nve-button style="width: 100%">Retry Workflow</nve-button>  
+        </nve-toggletip-footer>
+    </nve-toggletip>
+    <nve-button id="btn">button</nve-button>
 </div>
   `
 };

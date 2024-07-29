@@ -17,7 +17,7 @@ import globalStyles from './progressive-filter-chip.global.css?inline';
 import styles from './progressive-filter-chip.css?inline';
 
 /**
- * @element mlv-progressive-filter-chip
+ * @element nve-progressive-filter-chip
  * @description A filter chip is a control that enables users to select multiple options from a set of choices.
  * @since 0.16.0
  * @slot - default slot for content

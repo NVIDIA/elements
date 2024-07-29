@@ -7,7 +7,7 @@ import type { Button } from '@nvidia-elements/core/button';
 import styles from './app-header.css?inline';
 
 /**
- * @element mlv-app-header
+ * @element nve-app-header
  * @description An element that appears across the top of all pages containing the application name and primary navigation.
  * @since 0.11.0
  * @slot - Use the default slot in `logo` to create an app logo badge within the app header. Include a `<span>` element inside `app-header` to change the default application title.

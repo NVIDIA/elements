@@ -4,7 +4,7 @@ import { Color, useStyles, colorStateStyles, Size, attachInternals } from '@nvid
 import styles from './logo.css?inline';
 
 /**
- * @element mlv-logo
+ * @element nve-logo
  * @description A visual indicator for a brand or application.
  * @since 0.10.0
  * @slot - default slot for content

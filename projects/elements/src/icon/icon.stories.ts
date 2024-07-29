@@ -15,7 +15,7 @@ import '@nvidia-elements/core/notification/define.js';
 
 export default {
   title: 'Elements/Icon/Examples',
-  component: 'mlv-icon',
+  component: 'nve-icon',
   argTypes: {
     name: {
       control: 'inline-radio',
@@ -35,10 +35,10 @@ interface ArgTypes {
 
 export const Default = {
   render: (args: ArgTypes) =>
-    html`<mlv-icon
+    html`<nve-icon
       .name=${args.name}
       .status=${args.status}
-    ></mlv-icon>`,
+    ></nve-icon>`,
   args: { name: 'user' }
 };
 
@@ -46,7 +46,7 @@ export const IconCatalog = {
   render: () => html`
     <icon-demo></icon-demo>
 
-    <mlv-notification-group position="bottom" alignment="end"></mlv-notification-group>
+    <nve-notification-group position="bottom" alignment="end"></nve-notification-group>
   `
 };
 
@@ -63,19 +63,19 @@ class IconDemo extends LitElement {
         contain: initial;
       }
 
-      mlv-button {
-        --border-radius: var(--mlv-ref-border-radius-sm);
+      nve-button {
+        --border-radius: var(--nve-ref-border-radius-sm);
         --height: 100px;
       }
     </style>
 
-    <mlv-card>
-      <mlv-card-content nve-layout="column gap:lg">
+    <nve-card>
+      <nve-card-content nve-layout="column gap:lg">
         <form @submit=${e => e.preventDefault()} @input=${this.#input} nve-layout="row gap:md align:vertical-center full">
-          <mlv-search style="width: 350px">
+          <nve-search style="width: 350px">
             <input type="search" @input=${e => this.iconSearchKey = e.target.value} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
-          </mlv-search>
-          <mlv-select style="--width: 90px; --text-transform: none">
+          </nve-search>
+          <nve-select style="--width: 90px; --text-transform: none">
             <select aria-label="size" .value=${this.values.size} name="size">
               <option value="xs">xs</option>
               <option value="sm">sm</option>
@@ -83,33 +83,33 @@ class IconDemo extends LitElement {
               <option value="lg">lg</option>
               <option value="xl">xl</option>
             </select>
-          </mlv-select>
-          <mlv-select style="--width: 90px; --text-transform: none">
+          </nve-select>
+          <nve-select style="--width: 90px; --text-transform: none">
             <select aria-label="direction" .value=${this.values.direction} name="direction">
               <option value="">up</option>
               <option value="down">down</option>
               <option value="left">left</option>
               <option value="right">right</option>
             </select>
-          </mlv-select>
-          <mlv-checkbox style="min-width: 200px">
+          </nve-select>
+          <nve-checkbox style="min-width: 200px">
             <label>bounding box</label>
             <input type="checkbox" .checked=${this.values.outline} name="outline" />
-          </mlv-checkbox>
+          </nve-checkbox>
         </form>          
 
         <div nve-layout="grid gap:md span-items:2">
           ${ICON_NAMES.filter((iconName) => iconName.includes(this.iconSearchKey)).map((iconName) => html`
-            <mlv-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." container="flat">
+            <nve-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." container="flat">
               <div nve-layout="column align:center gap:md">
-                <mlv-icon ?outline=${this.values.outline} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></mlv-icon>
+                <nve-icon ?outline=${this.values.outline} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></nve-icon>
                 <h3 nve-text="label sm light muted">${iconName}</h3>
               </div>
-            </mlv-button>`
+            </nve-button>`
     )}
         </div>
-      </mlv-card-content>
-    </mlv-card>
+      </nve-card-content>
+    </nve-card>
   `;
   }
 
@@ -128,15 +128,15 @@ class IconDemo extends LitElement {
   }
 
   async #copyIcon(iconName: string) {
-    const iconCode = `<mlv-icon name="${iconName}"></mlv-icon>`;
+    const iconCode = `<nve-icon name="${iconName}"></nve-icon>`;
     await navigator.clipboard.writeText(iconCode);
 
-    const notification = document.createElement('mlv-notification');
+    const notification = document.createElement('nve-notification');
     notification.closable = true;
     notification.closeTimeout = 2000;
     notification.innerHTML = `<h3 nve-text="label">Copied!</h3><p nve-text="body">${iconCode} icon code copied to clipboard.</p>`;
     notification.addEventListener('close', () => notification.remove(), { once: true });
-    document.querySelector('mlv-notification-group').prepend(notification);
+    document.querySelector('nve-notification-group').prepend(notification);
   }
 }
 
@@ -144,7 +144,7 @@ customElements.get('icon-demo') || customElements.define('icon-demo', IconDemo);
 
 export const PreviewAllIcons = {
   render: () => html`
-    ${ICON_NAMES.map((iconName) => html`<mlv-icon name=${iconName as IconName}></mlv-icon>\n`
+    ${ICON_NAMES.map((iconName) => html`<nve-icon name=${iconName as IconName}></nve-icon>\n`
   )}
   `,
   args: { name: 'person' }
@@ -152,56 +152,56 @@ export const PreviewAllIcons = {
 
 export const Statuses = {
   render: () => html`
-    <mlv-icon name="person"></mlv-icon>
-    <mlv-icon name="person" status="accent"></mlv-icon>
-    <mlv-icon name="person" status="success"></mlv-icon>
-    <mlv-icon name="person" status="warning"></mlv-icon>
-    <mlv-icon name="person" status="danger"></mlv-icon>
+    <nve-icon name="person"></nve-icon>
+    <nve-icon name="person" status="accent"></nve-icon>
+    <nve-icon name="person" status="success"></nve-icon>
+    <nve-icon name="person" status="warning"></nve-icon>
+    <nve-icon name="person" status="danger"></nve-icon>
   `
 }
 
 export const Size = {
   render: () => html`
-    <mlv-icon name="person" size="sm"></mlv-icon>
-    <mlv-icon name="person"></mlv-icon>
-    <mlv-icon name="person" size="lg"></mlv-icon>
+    <nve-icon name="person" size="sm"></nve-icon>
+    <nve-icon name="person"></nve-icon>
+    <nve-icon name="person" size="lg"></nve-icon>
   `
 }
 
 export const Direction = {
   render: () => html`
-    <mlv-icon name="arrow-stop" direction="left"></mlv-icon>
-    <mlv-icon name="arrow-stop" direction="right"></mlv-icon>
-    <mlv-icon name="arrow" direction="up"></mlv-icon>
-    <mlv-icon name="arrow" direction="down"></mlv-icon>
-    <mlv-icon name="arrow" direction="left"></mlv-icon>
-    <mlv-icon name="arrow" direction="right"></mlv-icon>
-    <mlv-icon name="caret" direction="up"></mlv-icon>
-    <mlv-icon name="caret" direction="down"></mlv-icon>
-    <mlv-icon name="caret" direction="left"></mlv-icon>
-    <mlv-icon name="caret" direction="right"></mlv-icon>
-    <mlv-icon name="chevron" direction="up"></mlv-icon>
-    <mlv-icon name="chevron" direction="down"></mlv-icon>
-    <mlv-icon name="chevron" direction="left"></mlv-icon>
-    <mlv-icon name="chevron" direction="right"></mlv-icon>
+    <nve-icon name="arrow-stop" direction="left"></nve-icon>
+    <nve-icon name="arrow-stop" direction="right"></nve-icon>
+    <nve-icon name="arrow" direction="up"></nve-icon>
+    <nve-icon name="arrow" direction="down"></nve-icon>
+    <nve-icon name="arrow" direction="left"></nve-icon>
+    <nve-icon name="arrow" direction="right"></nve-icon>
+    <nve-icon name="caret" direction="up"></nve-icon>
+    <nve-icon name="caret" direction="down"></nve-icon>
+    <nve-icon name="caret" direction="left"></nve-icon>
+    <nve-icon name="caret" direction="right"></nve-icon>
+    <nve-icon name="chevron" direction="up"></nve-icon>
+    <nve-icon name="chevron" direction="down"></nve-icon>
+    <nve-icon name="chevron" direction="left"></nve-icon>
+    <nve-icon name="chevron" direction="right"></nve-icon>
   `
 }
 
 export const Themes = {
   render: () => html`
-    <div mlv-theme="root light">
-      <mlv-icon name="person"></mlv-icon>
-      <mlv-icon name="person" status="accent"></mlv-icon>
-      <mlv-icon name="person" status="success"></mlv-icon>
-      <mlv-icon name="person" status="warning"></mlv-icon>
-      <mlv-icon name="person" status="danger"></mlv-icon>
+    <div nve-theme="root light">
+      <nve-icon name="person"></nve-icon>
+      <nve-icon name="person" status="accent"></nve-icon>
+      <nve-icon name="person" status="success"></nve-icon>
+      <nve-icon name="person" status="warning"></nve-icon>
+      <nve-icon name="person" status="danger"></nve-icon>
     </div>
-    <div mlv-theme="root dark">
-      <mlv-icon name="person"></mlv-icon>
-      <mlv-icon name="person" status="accent"></mlv-icon>
-      <mlv-icon name="person" status="success"></mlv-icon>
-      <mlv-icon name="person" status="warning"></mlv-icon>
-      <mlv-icon name="person" status="danger"></mlv-icon>
+    <div nve-theme="root dark">
+      <nve-icon name="person"></nve-icon>
+      <nve-icon name="person" status="accent"></nve-icon>
+      <nve-icon name="person" status="success"></nve-icon>
+      <nve-icon name="person" status="warning"></nve-icon>
+      <nve-icon name="person" status="danger"></nve-icon>
     </div>
   `
 }
@@ -209,11 +209,11 @@ export const Themes = {
 
 export const Registration = {
   render: () => html`
-    <mlv-icon name=${'inference-ai-posters' as any} style="--width: 75px; --height: 75px;"></mlv-icon>
-    <mlv-icon name=${'automotive-vehicles-autonomous-car-side' as any} style="--width: 75px; --height: 75px;"></mlv-icon>
+    <nve-icon name=${'inference-ai-posters' as any} style="--width: 75px; --height: 75px;"></nve-icon>
+    <nve-icon name=${'automotive-vehicles-autonomous-car-side' as any} style="--width: 75px; --height: 75px;"></nve-icon>
 
     <script type="module">
-      customElements.get('mlv-icon').add({
+      customElements.get('nve-icon').add({
         'inference-ai-posters': {
           svg: () => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48"><g clip-path="url(#inference-ai-posters__a)"><path fill="currentColor" d="M40.5 11.5h-33v25h33v-25Zm-1 24h-31v-23h31v23ZM5.5 9.325V38.5h37V9.325h-37Zm36 28.175h-35V10.325h35V37.5Zm-26-10.908a1.477 1.477 0 0 0-1.23.093 1.5 1.5 0 1 0 1.908 2.233L22.5 32.04a1.5 1.5 0 0 0 2.992 0l6.326-3.122a1.506 1.506 0 1 0 .679-2.326l-1.927-2.623 1.853-2.585a1.5 1.5 0 1 0-.5-2.42l-6.432-2.842c0-.041.012-.08.012-.122a1.5 1.5 0 1 0-3 0c0 .042.009.081.012.122l-6.435 2.842a1.5 1.5 0 1 0-.5 2.42l1.853 2.585-1.933 2.623Zm8-9.184a1.4 1.4 0 0 0 1 0l3.246 4.41-2.567 1.265a1.482 1.482 0 0 0-2.356 0l-2.567-1.265 3.244-4.41Zm8 10.552-5.869 2.9 3.035-4.235 2.842 1.255c.002.02-.008.052-.008.08Zm-15.016-.084 2.842-1.255 3.035 4.235L16.5 27.96c0-.028-.01-.06-.012-.084h-.004Zm7.852 2.666a1.4 1.4 0 0 0-.68 0l-3.267-4.39 2.526-1.116a1.492 1.492 0 0 0 2.162 0l2.526 1.116-3.267 4.39ZM24.5 24a.5.5 0 0 1-.038.189v.011a.5.5 0 0 1-.914 0v-.011A.5.5 0 1 1 24.5 24Zm.988.122c0-.027.007-.054.008-.081l2.852-1.4.932 1.259-1.06 1.425-2.732-1.203Zm-2.988-.081c0 .027.006.054.008.081l-2.728 1.207-1.06-1.429.932-1.267 2.848 1.408Zm-3.769 1.75-2.081.919 1.388-1.886.693.967ZM14.5 28a.5.5 0 1 1 .999.002A.5.5 0 0 1 14.5 28Zm9.5 4.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1Zm9.5-4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm-2.154-1.29-2.081-.919.693-.967 1.388 1.886Zm-2.087-4.522 2.048-1.008-1.4 1.884-.648-.876ZM33.5 20a.5.5 0 0 1-.692.461l-.172-.123-.011-.017-.1-.206A.492.492 0 0 1 32.5 20a.5.5 0 0 1 .998.007L33.5 20Zm-2-.031-2.846 1.4-3-4.081 5.858 2.588c-.002.032-.012.062-.012.093ZM24 15.5a.5.5 0 0 1 .463.685l-.009.019a.507.507 0 0 1-.1.149h-.006a.495.495 0 0 1-.7 0h-.006a.507.507 0 0 1-.1-.149l-.009-.019A.5.5 0 0 1 24 15.5Zm-1.654 1.789-3 4.081-2.846-1.4c0-.03-.007-.06-.009-.091l5.855-2.59ZM14.5 20a.5.5 0 1 1 1 0 .459.459 0 0 1-.024.117l-.1.2-.013.02-.172.123a.49.49 0 0 1-.545-.106A.5.5 0 0 1 14.5 20Zm2.193 1.18 2.048 1.008-.646.876-1.402-1.884Z"/></g><defs><clipPath id="inference-ai-posters__a"><path fill="currentColor" d="M0 0h48v48H0z"/></clipPath></defs></svg>'
         },
@@ -227,11 +227,11 @@ export const Registration = {
 
 export const Alias = {
   render: () => html`
-    <mlv-icon name="chevron"></mlv-icon>
-    <mlv-icon name=${'chevron-up' as any}></mlv-icon>
+    <nve-icon name="chevron"></nve-icon>
+    <nve-icon name=${'chevron-up' as any}></nve-icon>
 
     <script type="module">
-      customElements.get('mlv-icon').alias({
+      customElements.get('nve-icon').alias({
         'chevron': 'chevron-up'
       });
     </script>
@@ -240,7 +240,7 @@ export const Alias = {
 
 export const Source = {
   render: () => html`
-    <mlv-icon name=${'https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg' as any} style="--width: 75px; --height: 75px;"></mlv-icon>
+    <nve-icon name=${'https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg' as any} style="--width: 75px; --height: 75px;"></nve-icon>
   `
 }
 
@@ -265,11 +265,11 @@ class IconPerformanceDemo extends LitElement {
 
   @state() private show = false;
 
-  @state() private icons = Array(this.#multiplier).fill('').map(() => html`<mlv-icon name="person"></mlv-icon>`)
+  @state() private icons = Array(this.#multiplier).fill('').map(() => html`<nve-icon name="person"></nve-icon>`)
 
   render() {
     return html`
-      <mlv-button @click=${() => this.show = !this.show}>show icons</mlv-button>
+      <nve-button @click=${() => this.show = !this.show}>show icons</nve-button>
       <p>${this.#multiplier}</p>
       <div>
         ${this.show ? this.icons : nothing}
@@ -817,11 +817,11 @@ export const Branding = {
   render: () => html`
     <div nve-layout="column gap:md">
       <div nve-layout="row align:wrap gap:xs">
-        ${GUI_NAMES.map(name => html`<mlv-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/line/${name}.svg` as any} size="xl"></mlv-icon>`)}
+        ${GUI_NAMES.map(name => html`<nve-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/line/${name}.svg` as any} size="xl"></nve-icon>`)}
       </div>
-      <mlv-divider></mlv-divider>
+      <nve-divider></nve-divider>
       <div nve-layout="row align:wrap gap:xs">
-        ${GUI_NAMES.map(name => html`<mlv-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/fill/${name}.svg` as any} size="xl"></mlv-icon>`)}
+        ${GUI_NAMES.map(name => html`<nve-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/fill/${name}.svg` as any} size="xl"></nve-icon>`)}
       </div>
     </div>
   `

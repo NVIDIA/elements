@@ -6,7 +6,7 @@ import { Icon, IconName } from '@nvidia-elements/core/icon';
 import styles from './icon-button.css?inline';
 
 /**
- * @element mlv-icon-button
+ * @element nve-icon-button
  * @description An icon button is a button that displays only an icon without a visual label.
  * @since 0.2.1
  * @slot - default

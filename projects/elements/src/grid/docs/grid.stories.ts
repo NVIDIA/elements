@@ -23,284 +23,284 @@ import '@lit-labs/virtualizer';
 
 export default {
   title: 'Elements/Data Grid/Examples',
-  component: 'mlv-grid',
+  component: 'nve-grid',
 };
 
 export const Default = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const MultiSelect = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    <mlv-grid-column width="max-content" position="fixed">
-      <mlv-checkbox>
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="max-content" position="fixed">
+      <nve-checkbox>
         <input type="checkbox" aria-label="select all rows" />
-      </mlv-checkbox>
-    </mlv-grid-column>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+      </nve-checkbox>
+    </nve-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems().map((row, i) => html`
-    <mlv-grid-row>
-      <mlv-grid-cell>
-        <mlv-checkbox>
+    <nve-grid-row>
+      <nve-grid-cell>
+        <nve-checkbox>
           <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
-        </mlv-checkbox>
-      </mlv-grid-cell>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+        </nve-checkbox>
+      </nve-grid-cell>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const MultiSelectBulkActions = {
   render: () => html`
-<mlv-grid style="--scroll-height: 402px">
-  <mlv-grid-header>
-    <mlv-grid-column width="max-content" position="fixed">
-      <mlv-checkbox>
+<nve-grid style="--scroll-height: 402px">
+  <nve-grid-header>
+    <nve-grid-column width="max-content" position="fixed">
+      <nve-checkbox>
         <input type="checkbox" aria-label="select all rows" />
-      </mlv-checkbox>
-    </mlv-grid-column>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+      </nve-checkbox>
+    </nve-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems(20).map((row, i) => html`
-    <mlv-grid-row .selected=${i === 1}>
-      <mlv-grid-cell>
-        <mlv-checkbox>
+    <nve-grid-row .selected=${i === 1}>
+      <nve-grid-cell>
+        <nve-checkbox>
           <input type="checkbox" ?checked=${i === 1} aria-label="select row ${i}" />
-        </mlv-checkbox>
-      </mlv-grid-cell>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+        </nve-checkbox>
+      </nve-grid-cell>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-  <mlv-toolbar status="accent" slot="footer">
-    <mlv-icon-button container="flat" icon-name="cancel" slot="prefix"></mlv-icon-button>
+  <nve-toolbar status="accent" slot="footer">
+    <nve-icon-button container="flat" icon-name="cancel" slot="prefix"></nve-icon-button>
     <p nve-text="boxy">1 selected</p>
-    <mlv-button container="flat" interaction="destructive" slot="suffix">delete</mlv-button>
-    <mlv-icon-button container="flat" icon-name="more-actions" slot="suffix"></mlv-icon-button>
-  </mlv-toolbar>
-</mlv-grid>
+    <nve-button container="flat" interaction="destructive" slot="suffix">delete</nve-button>
+    <nve-icon-button container="flat" icon-name="more-actions" slot="suffix"></nve-icon-button>
+  </nve-toolbar>
+</nve-grid>
   `
 };
 
 export const SingleSelect = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    <mlv-grid-column width="max-content" position="fixed"></mlv-grid-column>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="max-content" position="fixed"></nve-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems().map((row, i) => html`
-    <mlv-grid-row>
-      <mlv-grid-cell>
-        <mlv-radio>
+    <nve-grid-row>
+      <nve-grid-cell>
+        <nve-radio>
           <input type="radio" ?checked=${i === 1} name="single-select" .value=${`${i}`} aria-label="select row ${i}" />
-        </mlv-radio>
-      </mlv-grid-cell>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+        </nve-radio>
+      </nve-grid-cell>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const RowAction = {
   render: () => html`
 <div>
-  <mlv-grid>
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-      <mlv-grid-column width="max-content" aria-label="additonal actions" position="fixed"></mlv-grid-column>
-    </mlv-grid-header>
+  <nve-grid>
+    <nve-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+      <nve-grid-column width="max-content" aria-label="additonal actions" position="fixed"></nve-grid-column>
+    </nve-grid-header>
     ${getItems().map((row, i) => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-        <mlv-grid-cell>
-          <mlv-icon-button container="flat" icon-name="more-actions" aria-label="row ${i} actions"></mlv-icon-button>
-        </mlv-grid-cell>
-      </mlv-grid-row>
+      <nve-grid-row>
+        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+        <nve-grid-cell>
+          <nve-icon-button container="flat" icon-name="more-actions" aria-label="row ${i} actions"></nve-icon-button>
+        </nve-grid-cell>
+      </nve-grid-row>
     `)}
-  </mlv-grid>
+  </nve-grid>
 </div>
   `
 };
 
 export const RowGroups = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    <mlv-grid-column width="max-content" aria-label="expand groups" position="fixed"></mlv-grid-column>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
-  <mlv-grid-row>
-    <mlv-grid-cell>
-      <mlv-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></mlv-icon-button>
-    </mlv-grid-cell>
-    <mlv-grid-cell>Session: 2yuecae</mlv-grid-cell>
-    <mlv-grid-cell>upload</mlv-grid-cell>
-    <mlv-grid-cell>pending</mlv-grid-cell>
-    <mlv-grid-cell>p3</mlv-grid-cell>
-    <mlv-grid-cell>12/04/22</mlv-grid-cell>
-  </mlv-grid-row>
-  <mlv-grid-row selected>
-    <mlv-grid-cell>
-      <mlv-icon-button icon-name="caret" container="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></mlv-icon-button>
-    </mlv-grid-cell>
-    <mlv-grid-cell>Session: mvwgh3t</mlv-grid-cell>
-    <mlv-grid-cell>upload</mlv-grid-cell>
-    <mlv-grid-cell>pending</mlv-grid-cell>
-    <mlv-grid-cell>p0</mlv-grid-cell>
-    <mlv-grid-cell>12/11/22</mlv-grid-cell>
-  </mlv-grid-row>
-  <mlv-grid-row>
-    <mlv-grid-cell></mlv-grid-cell>
-    <mlv-grid-cell>SSD: mvwgh3t</mlv-grid-cell>
-    <mlv-grid-cell>validating</mlv-grid-cell>
-    <mlv-grid-cell>pending</mlv-grid-cell>
-    <mlv-grid-cell>p0</mlv-grid-cell>
-    <mlv-grid-cell>12/11/22</mlv-grid-cell>
-  </mlv-grid-row>
-  <mlv-grid-row>
-    <mlv-grid-cell></mlv-grid-cell>
-    <mlv-grid-cell>SSD: qudbd8x</mlv-grid-cell>
-    <mlv-grid-cell>uploading</mlv-grid-cell>
-    <mlv-grid-cell>finished</mlv-grid-cell>
-    <mlv-grid-cell>p0</mlv-grid-cell>
-    <mlv-grid-cell>12/11/22</mlv-grid-cell>
-  </mlv-grid-row>
-  <mlv-grid-row>
-    <mlv-grid-cell></mlv-grid-cell>
-    <mlv-grid-cell>SSD: j8hvikt</mlv-grid-cell>
-    <mlv-grid-cell>queuing</mlv-grid-cell>
-    <mlv-grid-cell>running</mlv-grid-cell>
-    <mlv-grid-cell>p0</mlv-grid-cell>
-    <mlv-grid-cell>12/11/22</mlv-grid-cell>
-  </mlv-grid-row>
-  <mlv-grid-row>
-    <mlv-grid-cell>
-      <mlv-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></mlv-icon-button>
-    </mlv-grid-cell>
-    <mlv-grid-cell>Session: bg5ujqp</mlv-grid-cell>
-    <mlv-grid-cell>upload</mlv-grid-cell>
-    <mlv-grid-cell>pending</mlv-grid-cell>
-    <mlv-grid-cell>p1</mlv-grid-cell>
-    <mlv-grid-cell>12/12/22</mlv-grid-cell>
-  </mlv-grid-row>
-  <mlv-grid-row>
-    <mlv-grid-cell>
-      <mlv-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></mlv-icon-button>
-    </mlv-grid-cell>
-    <mlv-grid-cell>Session: 6ruehvh</mlv-grid-cell>
-    <mlv-grid-cell>upload</mlv-grid-cell>
-    <mlv-grid-cell>pending</mlv-grid-cell>
-    <mlv-grid-cell>p2</mlv-grid-cell>
-    <mlv-grid-cell>12/09/22</mlv-grid-cell>
-  </mlv-grid-row>
-</mlv-grid>
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="max-content" aria-label="expand groups" position="fixed"></nve-grid-column>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <nve-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session 2yuecae SSD uploads"></nve-icon-button>
+    </nve-grid-cell>
+    <nve-grid-cell>Session: 2yuecae</nve-grid-cell>
+    <nve-grid-cell>upload</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p3</nve-grid-cell>
+    <nve-grid-cell>12/04/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row selected>
+    <nve-grid-cell>
+      <nve-icon-button icon-name="caret" container="flat" direction="down" aria-label="view session mvwgh3t SSD uploads"></nve-icon-button>
+    </nve-grid-cell>
+    <nve-grid-cell>Session: mvwgh3t</nve-grid-cell>
+    <nve-grid-cell>upload</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p0</nve-grid-cell>
+    <nve-grid-cell>12/11/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell></nve-grid-cell>
+    <nve-grid-cell>SSD: mvwgh3t</nve-grid-cell>
+    <nve-grid-cell>validating</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p0</nve-grid-cell>
+    <nve-grid-cell>12/11/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell></nve-grid-cell>
+    <nve-grid-cell>SSD: qudbd8x</nve-grid-cell>
+    <nve-grid-cell>uploading</nve-grid-cell>
+    <nve-grid-cell>finished</nve-grid-cell>
+    <nve-grid-cell>p0</nve-grid-cell>
+    <nve-grid-cell>12/11/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell></nve-grid-cell>
+    <nve-grid-cell>SSD: j8hvikt</nve-grid-cell>
+    <nve-grid-cell>queuing</nve-grid-cell>
+    <nve-grid-cell>running</nve-grid-cell>
+    <nve-grid-cell>p0</nve-grid-cell>
+    <nve-grid-cell>12/11/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <nve-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session bg5ujqp SSD uploads"></nve-icon-button>
+    </nve-grid-cell>
+    <nve-grid-cell>Session: bg5ujqp</nve-grid-cell>
+    <nve-grid-cell>upload</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p1</nve-grid-cell>
+    <nve-grid-cell>12/12/22</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <nve-icon-button icon-name="caret" container="flat" direction="right" aria-label="view session 6ruehvh SSD uploads"></nve-icon-button>
+    </nve-grid-cell>
+    <nve-grid-cell>Session: 6ruehvh</nve-grid-cell>
+    <nve-grid-cell>upload</nve-grid-cell>
+    <nve-grid-cell>pending</nve-grid-cell>
+    <nve-grid-cell>p2</nve-grid-cell>
+    <nve-grid-cell>12/09/22</nve-grid-cell>
+  </nve-grid-row>
+</nve-grid>
 `
 };
 
 export const Footer = {
 render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems(8).map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-  <mlv-grid-footer>
+  <nve-grid-footer>
     <p nve-text="body">footer content</p>
-  </mlv-grid-footer>
-</mlv-grid>
+  </nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const FooterScrollbar = {
   render: () => html`
-<mlv-grid style="--scroll-height: 402px">
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid style="--scroll-height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems(14).map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-  <mlv-grid-footer>
+  <nve-grid-footer>
     <p nve-text="body">footer content</p>
-  </mlv-grid-footer>
-</mlv-grid>
+  </nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const Pagination = {
   render: () => html`
-<mlv-grid style="--scroll-height: 370px">
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid style="--scroll-height: 370px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-  <mlv-grid-footer>
-    <mlv-pagination value="1" items="100" step="10"></mlv-pagination>
-  </mlv-grid-footer>
-</mlv-grid>
+  <nve-grid-footer>
+    <nve-pagination value="1" items="100" step="10"></nve-pagination>
+  </nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const Scroll = {
   render: () => html`
-<mlv-grid style="height: 402px">
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid style="height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems(100).map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-  <mlv-grid-footer>footer</mlv-grid-footer>
-</mlv-grid>
+  <nve-grid-footer>footer</nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const ScrollPosition = {
   render: () => html`
-<mlv-grid style="height: 402px">
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid style="height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems(100).map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-</mlv-grid><br>
+</nve-grid><br>
 
-<mlv-button>scroll top</mlv-button>
+<nve-button>scroll top</nve-button>
 <script type="module">
-  document.querySelector('mlv-button').addEventListener('click', () => {
-    document.querySelector('mlv-grid').scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelector('nve-button').addEventListener('click', () => {
+    document.querySelector('nve-grid').scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
   `
@@ -308,245 +308,245 @@ export const ScrollPosition = {
 
 export const FullHeight = {
   render: () => html`
-<section nve-layout="column gap:lg" style="height: 500px; padding: var(--mlv-ref-size-100); border: 1px solid var(--mlv-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
-  <mlv-search>
+<section nve-layout="column gap:lg" style="height: 500px; padding: var(--nve-ref-size-100); border: 1px solid var(--nve-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
+  <nve-search>
     <input type="search" aria-label="search" placeholder="search" />
-  </mlv-search>
-  <mlv-grid nve-layout="full">
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
+  </nve-search>
+  <nve-grid nve-layout="full">
+    <nve-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    </nve-grid-header>
     ${getItems(100).map(row => html`
-      <mlv-grid-row>
-        ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-      </mlv-grid-row>
+      <nve-grid-row>
+        ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+      </nve-grid-row>
     `)}
-  </mlv-grid>
+  </nve-grid>
 </section>
   `
 };
 
 export const ColumnAction = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
     ${Object.entries(getItems()[0]).map(([, column], i) => html`
-      <mlv-grid-column>
-        ${column.label} <mlv-icon-button id="column-${i}-btn" icon-name="more-actions" slot="actions"></mlv-icon-button>
-      </mlv-grid-column>`)}
-  </mlv-grid-header>
+      <nve-grid-column>
+        ${column.label} <nve-icon-button id="column-${i}-btn" icon-name="more-actions" slot="actions"></nve-icon-button>
+      </nve-grid-column>`)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
-<mlv-dropdown anchor="column-0-btn" arrow>
-  <mlv-search rounded>
+</nve-grid>
+<nve-dropdown anchor="column-0-btn" arrow>
+  <nve-search rounded>
     <input type="search" placeholder="search column" aria-label="search apps" />
-  </mlv-search>
-  <mlv-menu>
-    <mlv-menu-item><mlv-icon name="gear"></mlv-icon> settings</mlv-menu-item>
-    <mlv-menu-item><mlv-icon name="star"></mlv-icon> favorites</mlv-menu-item>
-  </mlv-menu>
-</mlv-dropdown>
+  </nve-search>
+  <nve-menu>
+    <nve-menu-item><nve-icon name="gear"></nve-icon> settings</nve-menu-item>
+    <nve-menu-item><nve-icon name="star"></nve-icon> favorites</nve-menu-item>
+  </nve-menu>
+</nve-dropdown>
   `
 };
 
 export const ColumnWidth = {
   render: () => html`
-<mlv-grid style="--scroll-height: 402px">
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid style="--scroll-height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-  <mlv-grid-footer>footer content</mlv-grid-footer>
-</mlv-grid>
+  <nve-grid-footer>footer content</nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const Content = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems(10).map((row, ir) => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell], ic) => html`<mlv-grid-cell>${ir === 3 && ic === 2 ? `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores` : cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell], ic) => html`<nve-grid-cell>${ir === 3 && ic === 2 ? `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores` : cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const ColumnFixed = {
   render: () => html`
-<mlv-grid style="--scroll-height: 402px; max-width: 800px">
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid style="--scroll-height: 402px; max-width: 800px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const ColumnMultiFixed = {
   render: () => html`
-<mlv-grid style="--scroll-height: 402px; max-width: 800px">
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column], i) => html`<mlv-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</mlv-grid-column>`)}
-  </mlv-grid-header>
+<nve-grid style="--scroll-height: 402px; max-width: 800px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">${column.label}</nve-grid-column>`)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const ColumnStackFixed = {
   render: () => html`
-<mlv-grid style="--scroll-height: 402px; max-width: 800px">
-  <mlv-grid-header>
-    <mlv-grid-column position="fixed" width="100px">Column 1</mlv-grid-column>
-    <mlv-grid-column position="fixed" width="100px">Column 2</mlv-grid-column>
-    <mlv-grid-column width="200px">Column 3</mlv-grid-column>
-    <mlv-grid-column width="200px">Column 4</mlv-grid-column>
-    <mlv-grid-column width="200px">Column 5</mlv-grid-column>
-    <mlv-grid-column width="200px">Column 6</mlv-grid-column>
-    <mlv-grid-column position="fixed" width="100px">Column 7</mlv-grid-column>
-    <mlv-grid-column position="fixed" width="100px">Column 8</mlv-grid-column>
-  </mlv-grid-header>
+<nve-grid style="--scroll-height: 402px; max-width: 800px">
+  <nve-grid-header>
+    <nve-grid-column position="fixed" width="100px">Column 1</nve-grid-column>
+    <nve-grid-column position="fixed" width="100px">Column 2</nve-grid-column>
+    <nve-grid-column width="200px">Column 3</nve-grid-column>
+    <nve-grid-column width="200px">Column 4</nve-grid-column>
+    <nve-grid-column width="200px">Column 5</nve-grid-column>
+    <nve-grid-column width="200px">Column 6</nve-grid-column>
+    <nve-grid-column position="fixed" width="100px">Column 7</nve-grid-column>
+    <nve-grid-column position="fixed" width="100px">Column 8</nve-grid-column>
+  </nve-grid-header>
   ${grid(10, 8).rows.map(row => html`
-    <mlv-grid-row>
-      ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const ColumnAlignCenter = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column column-align="center">${column.label}</mlv-grid-column>`)}
-  </mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="center">${column.label}</nve-grid-column>`)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const ColumnAlignEnd = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column column-align="end">${column.label}</mlv-grid-column>`)}
-  </mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="end">${column.label}</nve-grid-column>`)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const ColumnAlignStart = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column column-align="start">${column.label}</mlv-grid-column>`)}
-  </mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column column-align="start">${column.label}</nve-grid-column>`)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const DisplaySettings = {
   render: () => html`
 <div nve-layout="column gap:md full">
-  <mlv-dropdown closable anchor="column-settings">
-    <mlv-checkbox-group style="width: 175px">
+  <nve-dropdown closable anchor="column-settings">
+    <nve-checkbox-group style="width: 175px">
       <label>Columns</label>
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>Column 1</label>
         <input type="checkbox" checked />
-      </mlv-checkbox>
-      <mlv-checkbox>
+      </nve-checkbox>
+      <nve-checkbox>
         <label>Column 2</label>
         <input type="checkbox" checked />
-      </mlv-checkbox>
-      <mlv-checkbox>
+      </nve-checkbox>
+      <nve-checkbox>
         <label>Column 3</label>
         <input type="checkbox" checked />
-      </mlv-checkbox>
-      <mlv-checkbox>
+      </nve-checkbox>
+      <nve-checkbox>
         <label>Column 4</label>
         <input type="checkbox" checked />
-      </mlv-checkbox>
-    </mlv-checkbox-group>
-    <mlv-divider></mlv-divider>
-    <mlv-button interaction="flat-destructive" style="--height: initial">restore settings</mlv-button>
-  </mlv-dropdown>
+      </nve-checkbox>
+    </nve-checkbox-group>
+    <nve-divider></nve-divider>
+    <nve-button interaction="flat-destructive" style="--height: initial">restore settings</nve-button>
+  </nve-dropdown>
   <div nve-layout="row gap:sm align:vertical-center">
     <p nve-text="body muted">1,145 results found</p>
-    <mlv-button id="column-settings">Display Settings</mlv-button>
+    <nve-button id="column-settings">Display Settings</nve-button>
   </div>
-  <mlv-grid nve-layout="full">
-    <mlv-grid-header>
-      ${grid(8, 4).columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
+  <nve-grid nve-layout="full">
+    <nve-grid-header>
+      ${grid(8, 4).columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    </nve-grid-header>
     ${grid(8, 4).rows.map(row => html`
-      <mlv-grid-row>
-        ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
-      </mlv-grid-row>
+      <nve-grid-row>
+        ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
+      </nve-grid-row>
     `)}
-  </mlv-grid>
+  </nve-grid>
 </div>
   `
 };
 
 export const RowSort = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    <mlv-grid-column>
-      None <mlv-sort-button sort="none"></mlv-sort-button>
-    </mlv-grid-column>
-    <mlv-grid-column>
-      Ascending <mlv-sort-button sort="ascending"></mlv-sort-button>
-    </mlv-grid-column>
-    <mlv-grid-column>
-      Descending <mlv-sort-button sort="descending"></mlv-sort-button>
-    </mlv-grid-column>
-    <mlv-grid-column>Default</mlv-grid-column>
-    <mlv-grid-column>Default</mlv-grid-column>
-  </mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column>
+      None <nve-sort-button sort="none"></nve-sort-button>
+    </nve-grid-column>
+    <nve-grid-column>
+      Ascending <nve-sort-button sort="ascending"></nve-sort-button>
+    </nve-grid-column>
+    <nve-grid-column>
+      Descending <nve-sort-button sort="descending"></nve-sort-button>
+    </nve-grid-column>
+    <nve-grid-column>Default</nve-grid-column>
+    <nve-grid-column>Default</nve-grid-column>
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
@@ -581,18 +581,18 @@ class RowSortDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-grid>
-        <mlv-grid-header>
+      <nve-grid>
+        <nve-grid-header>
         ${Object.entries(this.items[0]).map(([, column], i) => html`
-          <mlv-grid-column>
-            ${column.label} ${i === 0 ? html`<mlv-sort-button .sort=${this.sort} @sort=${e => this.sort = e.detail.next}></mlv-sort-button>` : nothing}
-          </mlv-grid-column>`)}
-        </mlv-grid-header>
+          <nve-grid-column>
+            ${column.label} ${i === 0 ? html`<nve-sort-button .sort=${this.sort} @sort=${e => this.sort = e.detail.next}></nve-sort-button>` : nothing}
+          </nve-grid-column>`)}
+        </nve-grid-header>
         ${this.items.map(row => html`
-        <mlv-grid-row>
-          ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-        </mlv-grid-row>`)}
-      </mlv-grid>
+        <nve-grid-row>
+          ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+        </nve-grid-row>`)}
+      </nve-grid>
     `
   }
 }
@@ -612,18 +612,18 @@ class InfiniteScrollDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-grid style="--scroll-height: 400px" @scrollboxend=${() => this.#loadGroup()}>
-        <mlv-grid-header>
-          ${this.grid.columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column>`)}
-        </mlv-grid-header>
+      <nve-grid style="--scroll-height: 400px" @scrollboxend=${() => this.#loadGroup()}>
+        <nve-grid-header>
+          ${this.grid.columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column>`)}
+        </nve-grid-header>
         ${this.grid.rows.map(row => html`
-        <mlv-grid-row>
-          ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
-        </mlv-grid-row>`)}
-        <mlv-grid-footer>
+        <nve-grid-row>
+          ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
+        </nve-grid-row>`)}
+        <nve-grid-footer>
           <p>Items ${this.grid.rows.length} / 10000</p>
-        </mlv-grid-footer>
-      </mlv-grid>
+        </nve-grid-footer>
+      </nve-grid>
     `
   }
 
@@ -665,18 +665,18 @@ class GridPerformanceDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-button @click=${() => this.show = !this.show}>show large grid</mlv-button>
+      <nve-button @click=${() => this.show = !this.show}>show large grid</nve-button>
       <p>1000 rows, 4000 cells</p>
       ${this.show ? html`
-      <mlv-grid style="--scroll-height: 400px; max-width: 1024px">
-        <mlv-grid-header>
-          ${this.grid.columns.map(column => html`<mlv-grid-column width="1fr">${column.label}</mlv-grid-column>`)}
-        </mlv-grid-header>
+      <nve-grid style="--scroll-height: 400px; max-width: 1024px">
+        <nve-grid-header>
+          ${this.grid.columns.map(column => html`<nve-grid-column width="1fr">${column.label}</nve-grid-column>`)}
+        </nve-grid-header>
         ${this.grid.rows.map(row => html`
-        <mlv-grid-row>
-          ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
-        </mlv-grid-row>`)}
-      </mlv-grid>
+        <nve-grid-row>
+          ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
+        </nve-grid-row>`)}
+      </nve-grid>
       ` : nothing}
     `
   }
@@ -703,20 +703,20 @@ class GridVirtualScrollDemo extends LitElement {
 
   render() {
     return html`
-      <mlv-grid>
-        <mlv-grid-header>
-          <mlv-grid-column>column</mlv-grid-column>
-          <mlv-grid-column>column</mlv-grid-column>
-          <mlv-grid-column>column</mlv-grid-column>
-          <mlv-grid-column>column</mlv-grid-column>
-        </mlv-grid-header>
+      <nve-grid>
+        <nve-grid-header>
+          <nve-grid-column>column</nve-grid-column>
+          <nve-grid-column>column</nve-grid-column>
+          <nve-grid-column>column</nve-grid-column>
+          <nve-grid-column>column</nve-grid-column>
+        </nve-grid-header>
 
         <lit-virtualizer style="min-height: 350px" scroller .items=${this.items} .renderItem=${i => html`
-          <mlv-grid-row style="width: 100%">
-            ${Object.keys(i).map(key => html`<mlv-grid-cell>${i[key]}</mlv-grid-cell>`)}
-          </mlv-grid-row>`}>
+          <nve-grid-row style="width: 100%">
+            ${Object.keys(i).map(key => html`<nve-grid-cell>${i[key]}</nve-grid-cell>`)}
+          </nve-grid-row>`}>
         </lit-virtualizer>
-      </mlv-grid>
+      </nve-grid>
     `;
   }
 }
@@ -729,149 +729,149 @@ export const PerformanceVirtualScroll = {
 
 export const Stripe = {
   render: () => html`
-<mlv-grid stripe>
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid stripe>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const Card = {
   render: () => html`
-<mlv-card>
-  <mlv-card-header>
+<nve-card>
+  <nve-card-header>
     <h2 nve-text="heading sm bold">Data Grid</h2>
     <h3 nve-text="body muted">Card Example</h3>
-    <mlv-icon-button slot="header-action" icon-name="more-actions"></mlv-icon-button>
-  </mlv-card-header>
-  <mlv-grid container="flat" style="--scroll-height: 325px">
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
+    <nve-icon-button slot="header-action" icon-name="more-actions"></nve-icon-button>
+  </nve-card-header>
+  <nve-grid container="flat" style="--scroll-height: 325px">
+    <nve-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    </nve-grid-header>
     ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
     `)}
-  </mlv-grid>
-</mlv-card>
+  </nve-grid>
+</nve-card>
   `
 };
 
 export const CardTabs = {
   render: () => html`
-<mlv-card>
-  <mlv-card-header>
+<nve-card>
+  <nve-card-header>
     <h2 nve-text="heading sm bold">Data Grid</h2>
-    <mlv-tabs>
-      <mlv-tabs-item selected>tab 1</mlv-tabs-item>
-      <mlv-tabs-item>tab 2</mlv-tabs-item>
-      <mlv-tabs-item>tab 3</mlv-tabs-item>
-    </mlv-tabs>
-  </mlv-card-header>
-  <mlv-grid container="flat" style="--scroll-height: 325px">
-    <mlv-grid-header>
-      ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-    </mlv-grid-header>
+    <nve-tabs>
+      <nve-tabs-item selected>tab 1</nve-tabs-item>
+      <nve-tabs-item>tab 2</nve-tabs-item>
+      <nve-tabs-item>tab 3</nve-tabs-item>
+    </nve-tabs>
+  </nve-card-header>
+  <nve-grid container="flat" style="--scroll-height: 325px">
+    <nve-grid-header>
+      ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    </nve-grid-header>
     ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+    </nve-grid-row>
     `)}
-  </mlv-grid>
-</mlv-card>
+  </nve-grid>
+</nve-card>
   `
 };
 
 export const Placeholder = {
   render: () => html`
-<mlv-grid style="min-height: 400px">
-  <mlv-grid-header>
-    <mlv-grid-column></mlv-grid-column>
-  </mlv-grid-header>
-  <mlv-grid-placeholder>
-    <mlv-progress-ring status="accent" size="lg"></mlv-progress-ring>
-  </mlv-grid-placeholder>
-</mlv-grid>
+<nve-grid style="min-height: 400px">
+  <nve-grid-header>
+    <nve-grid-column></nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-placeholder>
+    <nve-progress-ring status="accent" size="lg"></nve-progress-ring>
+  </nve-grid-placeholder>
+</nve-grid>
   `
 };
 
 export const PlaceholderRetry = {
   render: () => html`
-<mlv-grid style="min-height: 400px">
-  <mlv-grid-header>
-    <mlv-grid-column></mlv-grid-column>
-  </mlv-grid-header>
-  <mlv-grid-placeholder>
+<nve-grid style="min-height: 400px">
+  <nve-grid-header>
+    <nve-grid-column></nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-placeholder>
     <div nve-layout="column gap:md align:center">
       <h2 nve-text="heading">Data not found</h2>
       <p nve-text="body">Try adjusting filter settings or try again later.</p>
-      <mlv-button>Retry</mlv-button>
+      <nve-button>Retry</nve-button>
     </div>
-  </mlv-grid-placeholder>
-  <mlv-grid-footer>footer</mlv-grid-footer>
-</mlv-grid>
+  </nve-grid-placeholder>
+  <nve-grid-footer>footer</nve-grid-footer>
+</nve-grid>
   `
 };
 
 export const Full = {
   render: () => html`
-<mlv-grid container="full" style="--scroll-height: 402px">
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid container="full" style="--scroll-height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems(20).map(row => html`
-  <mlv-grid-row>
-    ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-  </mlv-grid-row>
+  <nve-grid-row>
+    ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+  </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const Flat = {
   render: () => html`
-<mlv-grid container="flat" style="--scroll-height: 402px">
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid container="flat" style="--scroll-height: 402px">
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   ${getItems(20).map(row => html`
-  <mlv-grid-row>
-    ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell>`)}
-  </mlv-grid-row>
+  <nve-grid-row>
+    ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell>`)}
+  </nve-grid-row>
   `)}
-</mlv-grid>
+</nve-grid>
   `
 };
 
 export const PanelDetail = {
   render: () => html`
 <div id="grid-detail-panel" nve-layout="row gap:md align:stretch">
-  <mlv-grid>
-    <mlv-grid-header>
-      ${grid(10, 3).columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-      <mlv-grid-column width="max-content" aria-label="details"></mlv-grid-column>
-    </mlv-grid-header>
+  <nve-grid>
+    <nve-grid-header>
+      ${grid(10, 3).columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+      <nve-grid-column width="max-content" aria-label="details"></nve-grid-column>
+    </nve-grid-header>
     ${grid(10, 3).rows.map((row, i) => html`
-      <mlv-grid-row ?selected=${i === 1}>
-        ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
-        <mlv-grid-cell>
-          <mlv-icon-button container="flat" icon-name="expand-details" value=${row.id} aria-label="view ${row.id}"></mlv-icon-button>
-        </mlv-grid-cell>
-      </mlv-grid-row>
+      <nve-grid-row ?selected=${i === 1}>
+        ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
+        <nve-grid-cell>
+          <nve-icon-button container="flat" icon-name="expand-details" value=${row.id} aria-label="view ${row.id}"></nve-icon-button>
+        </nve-grid-cell>
+      </nve-grid-row>
     `)}
-  </mlv-grid>
-  <mlv-panel expanded closable style="min-width: 280px">
-    <mlv-panel-header>
+  </nve-grid>
+  <nve-panel expanded closable style="min-width: 280px">
+    <nve-panel-header>
       <h2 slot="title">Row 2 Details</h2>
-    </mlv-panel-header>
-    <mlv-panel-content>
+    </nve-panel-header>
+    <nve-panel-content>
       <div nve-layout="column gap:md">
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Task</label>
@@ -879,15 +879,15 @@ export const PanelDetail = {
         </div>
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Status</label>
-          <mlv-badge status="success">Complete</mlv-badge>
+          <nve-badge status="success">Complete</nve-badge>
         </div>
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Priority</label>
-          <mlv-badge status="pending">P1</mlv-badge>
+          <nve-badge status="pending">P1</nve-badge>
         </div>
       </div>
-    </mlv-panel-content>
-  </mlv-panel>
+    </nve-panel-content>
+  </nve-panel>
 </div>
   `
 };
@@ -896,7 +896,7 @@ export const PanelGrid = {
   render() {
     return html`
     <style>
-      mlv-panel#panel-grid {
+      nve-panel#panel-grid {
         min-width: 380px;
         z-index: 99;
         height: 100vh;
@@ -905,7 +905,7 @@ export const PanelGrid = {
         right: 0;
       }
 
-      .sb-story mlv-panel#panel-grid {
+      .sb-story nve-panel#panel-grid {
         height: 700px;
       }
 
@@ -917,49 +917,49 @@ export const PanelGrid = {
       <section nve-layout="column gap:md full align:stretch">
         page content
       </section>
-      <mlv-panel expanded id="panel-grid">
-        <mlv-panel-header>
+      <nve-panel expanded id="panel-grid">
+        <nve-panel-header>
           <h2 slot="title">Recording</h2>
-        </mlv-panel-header>
-        <mlv-grid container="flat" stripe style="--scroll-height: 100vh">
-          <mlv-grid-header hidden>
-            <mlv-grid-column>Key</mlv-grid-column>
-            <mlv-grid-column>Value</mlv-grid-column>
-          </mlv-grid-header>
-          <mlv-grid-row>
-            <mlv-grid-cell><p nve-text="label muted">Session ID</p></mlv-grid-cell>
-            <mlv-grid-cell><p nve-text="label">123456</p></mlv-grid-cell>
-          </mlv-grid-row>
-          <mlv-grid-row>
-            <mlv-grid-cell><p nve-text="label muted">Record Date</p></mlv-grid-cell>
-            <mlv-grid-cell><p nve-text="label">2023-09-04 11:00</p></mlv-grid-cell>
-          </mlv-grid-row>
-          <mlv-grid-row>
-            <mlv-grid-cell><p nve-text="label muted">Tag</p></mlv-grid-cell>
-            <mlv-grid-cell><mlv-tag readonly>Production</mlv-tag></mlv-grid-cell>
-          </mlv-grid-row>
-          <mlv-grid-row>
-            <mlv-grid-cell><p nve-text="label muted">Route ID</p></mlv-grid-cell>
-            <mlv-grid-cell><p nve-text="label">9876123</p></mlv-grid-cell>
-          </mlv-grid-row>
-          <mlv-grid-row>
-            <mlv-grid-cell><p nve-text="label muted">Configuration</p></mlv-grid-cell>
-            <mlv-grid-cell><p nve-text="label">prod-0.1.0</p></mlv-grid-cell>
-          </mlv-grid-row>
-          <mlv-grid-row>
-            <mlv-grid-cell><p nve-text="label muted">Duration</p></mlv-grid-cell>
-            <mlv-grid-cell><p nve-text="label">1:23:34</p></mlv-grid-cell>
-          </mlv-grid-row>
-          <mlv-grid-row>
-            <mlv-grid-cell><p nve-text="label muted">Description</p></mlv-grid-cell>
-            <mlv-grid-cell><p nve-text="label">local test run</p></mlv-grid-cell>
-          </mlv-grid-row>
-          <mlv-grid-row>
-            <mlv-grid-cell><p nve-text="label muted">Number of Sensors</p></mlv-grid-cell>
-            <mlv-grid-cell><p nve-text="label">24</p></mlv-grid-cell>
-          </mlv-grid-row>
-        </mlv-grid>
-      </mlv-panel>
+        </nve-panel-header>
+        <nve-grid container="flat" stripe style="--scroll-height: 100vh">
+          <nve-grid-header hidden>
+            <nve-grid-column>Key</nve-grid-column>
+            <nve-grid-column>Value</nve-grid-column>
+          </nve-grid-header>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Session ID</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">123456</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Record Date</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">2023-09-04 11:00</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Tag</p></nve-grid-cell>
+            <nve-grid-cell><nve-tag readonly>Production</nve-tag></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Route ID</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">9876123</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Configuration</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">prod-0.1.0</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Duration</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">1:23:34</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Description</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">local test run</p></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><p nve-text="label muted">Number of Sensors</p></nve-grid-cell>
+            <nve-grid-cell><p nve-text="label">24</p></nve-grid-cell>
+          </nve-grid-row>
+        </nve-grid>
+      </nve-panel>
     </main>
     `;
   }
@@ -975,27 +975,27 @@ class GridPanelDemo extends LitElement {
   render() {
     return html`
       <div nve-layout="row gap:md align:stretch" style="height: calc(100% - 28px)">
-        <mlv-grid>
-          <mlv-grid-header>
-            ${this.#grid.columns.map(column => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-            <mlv-grid-column width="max-content" aria-label="details"></mlv-grid-column>
-          </mlv-grid-header>
+        <nve-grid>
+          <nve-grid-header>
+            ${this.#grid.columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+            <nve-grid-column width="max-content" aria-label="details"></nve-grid-column>
+          </nve-grid-header>
           ${this.#grid.rows.map(row => html`
-          <mlv-grid-row ?selected=${this.selectedId === row.id}>
-            ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
-            <mlv-grid-cell>
-              <mlv-icon-button @click=${() => this.selectedId = row.id} container="flat" icon-name="expand-details"></mlv-icon-button>
-            </mlv-grid-cell>
-          </mlv-grid-row>`)}
-          <mlv-grid-footer>
-            <mlv-icon-button aria-label="show grid options" container="flat" icon-name="expand-details"></mlv-icon-button>
-          </mlv-grid-footer>
-        </mlv-grid>
-        <mlv-panel closable ?expanded=${!!this.selectedId} @close=${() => this.selectedId = null} style="min-width: 280px">
-          <mlv-panel-header>
+          <nve-grid-row ?selected=${this.selectedId === row.id}>
+            ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
+            <nve-grid-cell>
+              <nve-icon-button @click=${() => this.selectedId = row.id} container="flat" icon-name="expand-details"></nve-icon-button>
+            </nve-grid-cell>
+          </nve-grid-row>`)}
+          <nve-grid-footer>
+            <nve-icon-button aria-label="show grid options" container="flat" icon-name="expand-details"></nve-icon-button>
+          </nve-grid-footer>
+        </nve-grid>
+        <nve-panel closable ?expanded=${!!this.selectedId} @close=${() => this.selectedId = null} style="min-width: 280px">
+          <nve-panel-header>
             <h2 slot="title">Row ${this.selectedId}</h2>
-          </mlv-panel-header>
-        </mlv-panel>
+          </nve-panel-header>
+        </nve-panel>
       </div>
     `
   }
@@ -1017,25 +1017,25 @@ class GridDynamicColumnDemo extends LitElement {
   render() {
     return html`
       <div nve-layout="row gap:md align:stretch" style="height: calc(100% - 28px)">
-        <mlv-grid>
-          <mlv-grid-header>
-            ${this.grid.columns.map((column, i) => html`<mlv-grid-column width="200px" position=${(i === this.grid.columns.length - 1) || (i === 0) ? 'fixed' : ''}>${column.label}</mlv-grid-column> `)}
-          </mlv-grid-header>
+        <nve-grid>
+          <nve-grid-header>
+            ${this.grid.columns.map((column, i) => html`<nve-grid-column width="200px" position=${(i === this.grid.columns.length - 1) || (i === 0) ? 'fixed' : ''}>${column.label}</nve-grid-column> `)}
+          </nve-grid-header>
           ${this.grid.rows.map(row => html`
-          <mlv-grid-row ?selected=${this.selectedId === row.id}>
-            ${row.cells.map(cell => html`<mlv-grid-cell>${cell.label}</mlv-grid-cell> `)}
-          </mlv-grid-row>`)}
-          <mlv-grid-footer>
-            <mlv-button container="flat" @click=${this.#update}>add column</mlv-button>
-          </mlv-grid-footer>
-        </mlv-grid>
+          <nve-grid-row ?selected=${this.selectedId === row.id}>
+            ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
+          </nve-grid-row>`)}
+          <nve-grid-footer>
+            <nve-button container="flat" @click=${this.#update}>add column</nve-button>
+          </nve-grid-footer>
+        </nve-grid>
       </div>
       
     `
   }
 
   #update() {
-    this.grid = grid(10, this.shadowRoot.querySelectorAll('mlv-grid-column').length + 1);
+    this.grid = grid(10, this.shadowRoot.querySelectorAll('nve-grid-column').length + 1);
   }
 }
 
@@ -1145,17 +1145,17 @@ export const All = {
 
 export const InvalidDOM = {
   render: () => html`
-<mlv-grid>
-  <mlv-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<mlv-grid-column>${column.label}</mlv-grid-column> `)}
-  </mlv-grid-header>
+<nve-grid>
+  <nve-grid-header>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
   <div>invalid</div>
   ${getItems().map(row => html`
-    <mlv-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<mlv-grid-cell>${cell.value}</mlv-grid-cell> `)}
-    </mlv-grid-row>
+    <nve-grid-row>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+    </nve-grid-row>
   `)}
   <span>invalid</span>
-</mlv-grid>
+</nve-grid>
   `
 };

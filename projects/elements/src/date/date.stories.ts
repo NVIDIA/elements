@@ -9,160 +9,160 @@ import '@nvidia-elements/core/time/define.js';
 
 export default {
   title: 'Elements/Date/Examples',
-  component: 'mlv-date',
+  component: 'nve-date',
 };
 
 export const Date = {
   render: () => html`
-<mlv-date>
+<nve-date>
   <label>date</label>
   <input type="date" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-date>
+  <nve-control-message>message</nve-control-message>
+</nve-date>
 `
 };
 
 export const Datalist = {
   render: () => html`
-<mlv-date>
+<nve-date>
   <label>label</label>
   <input type="date" />
-  <mlv-control-message>message</mlv-control-message>
+  <nve-control-message>message</nve-control-message>
   <datalist>
     <option value="2018-07-22"></option>
     <option value="2018-01-01"></option>
     <option value="2018-12-31"></option>
   </datalist>
-</mlv-date>
+</nve-date>
   `
 }
 
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-date>
+  <nve-date>
     <label>label</label>
     <input type="date" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message>message</nve-control-message>
+  </nve-date>
 
-  <mlv-date>
+  <nve-date>
     <label>disabled</label>
     <input type="date" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message>message</nve-control-message>
+  </nve-date>
 
-  <mlv-date>
+  <nve-date>
     <label>success</label>
     <input type="date" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-date>
 
-  <mlv-date>
+  <nve-date>
     <label>error</label>
     <input type="date" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-date>
 </div>`
 };
 
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-date layout="horizontal">
+  <nve-date layout="horizontal">
     <label>label</label>
     <input type="date" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message>message</nve-control-message>
+  </nve-date>
 
-  <mlv-date layout="horizontal">
+  <nve-date layout="horizontal">
     <label>disabled</label>
     <input type="date" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message>message</nve-control-message>
+  </nve-date>
 
-  <mlv-date layout="horizontal">
+  <nve-date layout="horizontal">
     <label>success</label>
     <input type="date" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-date>
 
-  <mlv-date layout="horizontal">
+  <nve-date layout="horizontal">
     <label>error</label>
     <input type="date" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-date>
 </div>`
 };
 
 export const Range = {
   render: () => html`
-<mlv-input-group>
+<nve-input-group>
   <label>date range</label>
-  <mlv-date>
+  <nve-date>
     <input type="date" aria-label="start date" value="2018-07-22" />
-  </mlv-date>
-  <mlv-date>
+  </nve-date>
+  <nve-date>
     <input type="date" aria-label="end date" value="2022-07-22" />
-  </mlv-date>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-input-group>
+  </nve-date>
+  <nve-control-message>message</nve-control-message>
+</nve-input-group>
 `
 };
 
 export const Types = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-date layout="horizontal">
+  <nve-date layout="horizontal">
     <label>date label</label>
     <input type="date" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-date>
+    <nve-control-message>message</nve-control-message>
+  </nve-date>
 
-  <mlv-datetime layout="horizontal">
+  <nve-datetime layout="horizontal">
     <label>datetime label</label>
     <input type="datetime-local" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-datetime>
+    <nve-control-message>message</nve-control-message>
+  </nve-datetime>
 
-  <mlv-month layout="horizontal">
+  <nve-month layout="horizontal">
     <label>month label</label>
     <input type="month" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-month>
+    <nve-control-message>message</nve-control-message>
+  </nve-month>
 
-  <mlv-week layout="horizontal">
+  <nve-week layout="horizontal">
     <label>week label</label>
     <input type="week" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-week>
+    <nve-control-message>message</nve-control-message>
+  </nve-week>
 
-  <mlv-time layout="horizontal">
+  <nve-time layout="horizontal">
     <label>time label</label>
     <input type="time" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-time>
+    <nve-control-message>message</nve-control-message>
+  </nve-time>
 
-  <mlv-input-group layout="horizontal">
+  <nve-input-group layout="horizontal">
     <label>date range</label>
-    <mlv-date>
+    <nve-date>
       <input type="date" aria-label="start date" value="2018-07-22" />
-    </mlv-date>
-    <mlv-date>
+    </nve-date>
+    <nve-date>
       <input type="date" aria-label="end date" value="2022-07-22" />
-    </mlv-date>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input-group>
+    </nve-date>
+    <nve-control-message>message</nve-control-message>
+  </nve-input-group>
 </div>
 `
 }
 
 export const FitText = {
   render: () => html`
-<mlv-date fit-text>
+<nve-date fit-text>
   <label>date</label>
   <input type="date" value="2017-06-01" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-date>
+  <nve-control-message>message</nve-control-message>
+</nve-date>
 `
 };

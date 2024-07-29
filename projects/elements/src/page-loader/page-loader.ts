@@ -10,7 +10,7 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 import styles from './page-loader.css?inline';
 
 /**
- * @element mlv-page-loader
+ * @element nve-page-loader
  * @description Page Loader is a full-screen version of the `progress-ring` component, for use when the page should remain unusable as the loader is displayed.
  * @since 0.19.0
  * @slot - default slot for content

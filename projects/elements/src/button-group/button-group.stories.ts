@@ -4,79 +4,79 @@ import '@nvidia-elements/core/divider/define.js';
 
 export default {
   title: 'Elements/Button Group/Examples',
-  component: 'mlv-button-group',
+  component: 'nve-button-group',
 };
 
 export const Default = {
   render: () => html`
-    <mlv-button-group>
-      <mlv-icon-button icon-name="copy"></mlv-icon-button>
-      <mlv-icon-button icon-name="add-comment"></mlv-icon-button>
-      <mlv-icon-button icon-name="download"></mlv-icon-button>
-    </mlv-button-group>
+    <nve-button-group>
+      <nve-icon-button icon-name="copy"></nve-icon-button>
+      <nve-icon-button icon-name="add-comment"></nve-icon-button>
+      <nve-icon-button icon-name="download"></nve-icon-button>
+    </nve-button-group>
   `
 };
 
 export const SingleSelect = {
   render: () => html`
-  <mlv-button-group behavior-select="single">
-    <mlv-icon-button pressed icon-name="bars-3-bottom-left"></mlv-icon-button>
-    <mlv-icon-button icon-name="bars-3-bottom-right"></mlv-icon-button>
-    <mlv-icon-button icon-name="bars-4"></mlv-icon-button>
-  </mlv-button-group>
+  <nve-button-group behavior-select="single">
+    <nve-icon-button pressed icon-name="bars-3-bottom-left"></nve-icon-button>
+    <nve-icon-button icon-name="bars-3-bottom-right"></nve-icon-button>
+    <nve-icon-button icon-name="bars-4"></nve-icon-button>
+  </nve-button-group>
   `
 };
 
 export const MultiSelect = {
   render: () => html`
-    <mlv-button-group behavior-select="multi">
-      <mlv-icon-button pressed icon-name="bold" size="sm"></mlv-icon-button>
-      <mlv-icon-button icon-name="italic" size="sm"></mlv-icon-button>
-      <mlv-icon-button pressed icon-name="strikethrough" size="sm"></mlv-icon-button>
-    </mlv-button-group>
+    <nve-button-group behavior-select="multi">
+      <nve-icon-button pressed icon-name="bold" size="sm"></nve-icon-button>
+      <nve-icon-button icon-name="italic" size="sm"></nve-icon-button>
+      <nve-icon-button pressed icon-name="strikethrough" size="sm"></nve-icon-button>
+    </nve-button-group>
   `
 };
 
 export const Flat = {
   render: () => html`
-    <mlv-button-group container="flat">
-      <mlv-icon-button pressed icon-name="split-vertical"></mlv-icon-button>
-      <mlv-icon-button icon-name="split-horizontal"></mlv-icon-button>
-      <mlv-icon-button icon-name="split-none"></mlv-icon-button>
-    </mlv-button-group>
+    <nve-button-group container="flat">
+      <nve-icon-button pressed icon-name="split-vertical"></nve-icon-button>
+      <nve-icon-button icon-name="split-horizontal"></nve-icon-button>
+      <nve-icon-button icon-name="split-none"></nve-icon-button>
+    </nve-button-group>
   `
 };
 
 export const Action = {
   render: () => html`
-    <mlv-button-group>
-      <mlv-icon-button icon-name="copy"></mlv-icon-button>
-      <mlv-icon-button icon-name="add-comment"></mlv-icon-button>
-      <mlv-icon-button icon-name="download"></mlv-icon-button>
-    </mlv-button-group>
+    <nve-button-group>
+      <nve-icon-button icon-name="copy"></nve-icon-button>
+      <nve-icon-button icon-name="add-comment"></nve-icon-button>
+      <nve-icon-button icon-name="download"></nve-icon-button>
+    </nve-button-group>
   `
 };
 
 export const ActionSplit = {
   render: () => html`
     <div nve-layout="row gap:sm">
-      <mlv-button-group>
-        <mlv-button>button</mlv-button>
-        <mlv-divider orientation="vertical"></mlv-divider>
-        <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group>
+        <nve-button>button</nve-button>
+        <nve-divider orientation="vertical"></nve-divider>
+        <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
+      </nve-button-group>
       
-      <mlv-button-group interaction="emphasis">
-        <mlv-button>button</mlv-button>
-        <mlv-divider orientation="vertical"></mlv-divider>
-        <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group interaction="emphasis">
+        <nve-button>button</nve-button>
+        <nve-divider orientation="vertical"></nve-divider>
+        <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
+      </nve-button-group>
       
-      <mlv-button-group interaction="destructive">
-        <mlv-button>button</mlv-button>
-        <mlv-divider orientation="vertical"></mlv-divider>
-        <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group interaction="destructive">
+        <nve-button>button</nve-button>
+        <nve-divider orientation="vertical"></nve-divider>
+        <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
+      </nve-button-group>
     </div>
   `
 };
@@ -84,52 +84,52 @@ export const ActionSplit = {
 export const ActionSplitRounded = {
   render: () => html`
     <div nve-layout="row gap:sm">
-      <mlv-button-group container="rounded">
-        <mlv-button>button</mlv-button>
-        <mlv-divider orientation="vertical"></mlv-divider>
-        <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group container="rounded">
+        <nve-button>button</nve-button>
+        <nve-divider orientation="vertical"></nve-divider>
+        <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
+      </nve-button-group>
       
-      <mlv-button-group container="rounded" interaction="emphasis">
-        <mlv-button>button</mlv-button>
-        <mlv-divider orientation="vertical"></mlv-divider>
-        <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group container="rounded" interaction="emphasis">
+        <nve-button>button</nve-button>
+        <nve-divider orientation="vertical"></nve-divider>
+        <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
+      </nve-button-group>
       
-      <mlv-button-group container="rounded"  interaction="destructive">
-        <mlv-button>button</mlv-button>
-        <mlv-divider orientation="vertical"></mlv-divider>
-        <mlv-icon-button icon-name="caret" size="sm" direction="down"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group container="rounded"  interaction="destructive">
+        <nve-button>button</nve-button>
+        <nve-divider orientation="vertical"></nve-divider>
+        <nve-icon-button icon-name="caret" size="sm" direction="down"></nve-icon-button>
+      </nve-button-group>
     </div>
   `
 };
 
 export const Rounded = {
   render: () => html`
-    <mlv-button-group container="rounded" behavior-select="single">
-      <mlv-button pressed>All Time</mlv-button>
-      <mlv-button>30 Days</mlv-button>
-      <mlv-button>90 Days</mlv-button>
-    </mlv-button-group>
+    <nve-button-group container="rounded" behavior-select="single">
+      <nve-button pressed>All Time</nve-button>
+      <nve-button>30 Days</nve-button>
+      <nve-button>90 Days</nve-button>
+    </nve-button-group>
   `
 };
 
 export const RoundedIcon = {
   render: () => html`
-    <mlv-button-group container="rounded" behavior-select="single">
-      <mlv-icon-button icon-name="table"></mlv-icon-button>
-      <mlv-icon-button icon-name="image"></mlv-icon-button>
-    </mlv-button-group>
+    <nve-button-group container="rounded" behavior-select="single">
+      <nve-icon-button icon-name="table"></nve-icon-button>
+      <nve-icon-button icon-name="image"></nve-icon-button>
+    </nve-button-group>
   `
 };
 
 export const OrientationVertical = {
   render: () => html`
-    <mlv-button-group orientation="vertical">
-      <mlv-icon-button icon-name="copy"></mlv-icon-button>
-      <mlv-icon-button icon-name="add-comment"></mlv-icon-button>
-      <mlv-icon-button icon-name="download"></mlv-icon-button>
-    </mlv-button-group>
+    <nve-button-group orientation="vertical">
+      <nve-icon-button icon-name="copy"></nve-icon-button>
+      <nve-icon-button icon-name="add-comment"></nve-icon-button>
+      <nve-icon-button icon-name="download"></nve-icon-button>
+    </nve-button-group>
   `
 };

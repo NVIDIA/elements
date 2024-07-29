@@ -63,7 +63,7 @@ when the popover is attempting to close or open based ona user interaction.
 <nve-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</nve-tooltip>
 <nve-button id="action-btn">button</nve-button>
 <script type="module">
-  const tooltip = document.querySelector('mlv-tooltip[anchor="action-btn"]');
+  const tooltip = document.querySelector('nve-tooltip[anchor="action-btn"]');
   tooltip.addEventListener('close', () => tooltip.hidden = true);
   tooltip.addEventListener('open', () => tooltip.hidden = false);
 </script>

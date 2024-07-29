@@ -13,7 +13,7 @@ const generateLayoutStory = (name, layoutValue, numCards) => {
 <h3 nve-text="section">${name}</h3>
 
 <section class="layout-example" nve-layout="${layoutValue}">
-  ${new Array(numCards).fill(html`<mlv-card></mlv-card>`)}
+  ${new Array(numCards).fill(html`<nve-card></nve-card>`)}
 </section>
     `
   }
@@ -71,11 +71,11 @@ export const GapResponsive = {
   render: () => html`
     <div>
       <section class="layout-example" nve-layout="row pad:md align:center gap@xs:xxxs gap@sm:xxs gap@md:md gap@lg:xl gap@xl:xxxl">
-        <mlv-card></mlv-card>
-        <mlv-card></mlv-card>
-        <mlv-card></mlv-card>
-        <mlv-card></mlv-card>
-        <mlv-card></mlv-card>
+        <nve-card></nve-card>
+        <nve-card></nve-card>
+        <nve-card></nve-card>
+        <nve-card></nve-card>
+        <nve-card></nve-card>
       </section>
     </div>
   `
@@ -85,7 +85,7 @@ export const PadResponsive = {
   render: () => html`
     <div>
       <section class="layout-example" nve-layout="row pad@xs:xs pad@sm:sm pad@md:md pad@lg:lg pad@xl:xxxl">
-        <mlv-card nve-layout="full"></mlv-card>
+        <nve-card nve-layout="full"></nve-card>
       </section>
     </div>
   `
@@ -96,11 +96,11 @@ export const HideResponsive = {
   render: () => html`
     <div>
       <section class="layout-example" nve-layout="row gap:lg">
-        <mlv-card></mlv-card>
-        <mlv-card></mlv-card>
-        <mlv-card nve-layout="hide@md"></mlv-card>
-        <mlv-card nve-layout="hide@md"></mlv-card>
-        <mlv-card nve-layout="hide@lg"></mlv-card>
+        <nve-card></nve-card>
+        <nve-card></nve-card>
+        <nve-card nve-layout="hide@md"></nve-card>
+        <nve-card nve-layout="hide@md"></nve-card>
+        <nve-card nve-layout="hide@lg"></nve-card>
       </section>
     </div>
   `
@@ -146,40 +146,40 @@ export const GridVariableSpans = {
   render: () => html`
     <h3 nve-text="section">Grid with variable spans (<code>span:...</code>) on the children</h3>
     <section nve-layout="grid gap:md">
-      ${new Array(12).fill(html`<mlv-card></mlv-card>`)}
+      ${new Array(12).fill(html`<nve-card></nve-card>`)}
 
-      <mlv-card nve-layout="span:2"></mlv-card>
-      <mlv-card nve-layout="span:2"></mlv-card>
-      <mlv-card nve-layout="span:2"></mlv-card>
-      <mlv-card nve-layout="span:2"></mlv-card>
-      <mlv-card nve-layout="span:2"></mlv-card>
-      <mlv-card nve-layout="span:2"></mlv-card>
+      <nve-card nve-layout="span:2"></nve-card>
+      <nve-card nve-layout="span:2"></nve-card>
+      <nve-card nve-layout="span:2"></nve-card>
+      <nve-card nve-layout="span:2"></nve-card>
+      <nve-card nve-layout="span:2"></nve-card>
+      <nve-card nve-layout="span:2"></nve-card>
 
-      <mlv-card nve-layout="span:3"></mlv-card>
-      <mlv-card nve-layout="span:3"></mlv-card>
-      <mlv-card nve-layout="span:3"></mlv-card>
-      <mlv-card nve-layout="span:3"></mlv-card>
+      <nve-card nve-layout="span:3"></nve-card>
+      <nve-card nve-layout="span:3"></nve-card>
+      <nve-card nve-layout="span:3"></nve-card>
+      <nve-card nve-layout="span:3"></nve-card>
 
-      <mlv-card nve-layout="span:4"></mlv-card>
-      <mlv-card nve-layout="span:4"></mlv-card>
-      <mlv-card nve-layout="span:4"></mlv-card>
+      <nve-card nve-layout="span:4"></nve-card>
+      <nve-card nve-layout="span:4"></nve-card>
+      <nve-card nve-layout="span:4"></nve-card>
 
-      <mlv-card nve-layout="span:5"></mlv-card>
-      <mlv-card nve-layout="span:5"></mlv-card>
-      <mlv-card nve-layout="span:2"></mlv-card>
+      <nve-card nve-layout="span:5"></nve-card>
+      <nve-card nve-layout="span:5"></nve-card>
+      <nve-card nve-layout="span:2"></nve-card>
 
-      <mlv-card nve-layout="span:6"></mlv-card>
-      <mlv-card nve-layout="span:6"></mlv-card>
+      <nve-card nve-layout="span:6"></nve-card>
+      <nve-card nve-layout="span:6"></nve-card>
 
-      <mlv-card nve-layout="span:7"></mlv-card>
-      <mlv-card nve-layout="span:3"></mlv-card>
-      <mlv-card nve-layout="span:2"></mlv-card>
+      <nve-card nve-layout="span:7"></nve-card>
+      <nve-card nve-layout="span:3"></nve-card>
+      <nve-card nve-layout="span:2"></nve-card>
 
-      <mlv-card nve-layout="span:8"></mlv-card>
-      <mlv-card nve-layout="span:4"></mlv-card>
+      <nve-card nve-layout="span:8"></nve-card>
+      <nve-card nve-layout="span:4"></nve-card>
 
-      <mlv-card nve-layout="span:9"></mlv-card>
-      <mlv-card nve-layout="span:3"></mlv-card>
+      <nve-card nve-layout="span:9"></nve-card>
+      <nve-card nve-layout="span:3"></nve-card>
     </section>
   `
 }
@@ -188,21 +188,21 @@ export const GridVariableSpans = {
 export const ResponsiveGrid = {
   render: () => html`
     <section nve-layout="grid gap:md span-items@xs:12 span-items@sm:6 span-items@md:4 span-items@lg:3 span-items@xl:2" class="layout-example">
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
-      <mlv-card></mlv-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
     </section>
         
     <section nve-layout="grid gap:md" class="layout-example">
-      <mlv-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></mlv-card>
-      <mlv-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></mlv-card>
-      <mlv-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></mlv-card>
-      <mlv-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></mlv-card>
-      <mlv-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></mlv-card>
-      <mlv-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></mlv-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
     </section>
   `
 }

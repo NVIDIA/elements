@@ -16,7 +16,7 @@ import {
 import styles from './toggletip.css?inline';
 
 /**
- * @element mlv-toggletip
+ * @element nve-toggletip
  * @description Generic toggletip element for rendering a variety of different content within a toggletip container.
  * @since 0.38.0
  * @event open - Dispatched when the toggletip is opened.

@@ -11,17 +11,17 @@ import '@nvidia-elements/core/color/define.js';
 
 export default {
   title: 'Elements/Toolbar/Examples',
-  component: 'mlv-toolbar',
+  component: 'nve-toolbar',
 };
 
 export const Default = {
   render: () => html`
   <div>
-    <mlv-toolbar>
-      <mlv-button container="inline"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button container="inline"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-      <mlv-icon-button container="inline" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
-    </mlv-toolbar>
+    <nve-toolbar>
+      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button container="inline" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+    </nve-toolbar>
   </div>
   `
 };
@@ -29,11 +29,11 @@ export const Default = {
 export const ContainerFlat = {
   render: () => html`
   <div>
-    <mlv-toolbar container="flat">
-      <mlv-button container="inline"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button container="inline"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-      <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
-    </mlv-toolbar>
+    <nve-toolbar container="flat">
+      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+    </nve-toolbar>
   </div>
   `
 };
@@ -41,11 +41,11 @@ export const ContainerFlat = {
 export const ContainerInset = {
   render: () => html`
   <div>
-    <mlv-toolbar container="inset">
-      <mlv-button container="inline"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button container="inline"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-      <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
-    </mlv-toolbar>
+    <nve-toolbar container="inset">
+      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+    </nve-toolbar>
   </div>
   `
 };
@@ -53,11 +53,11 @@ export const ContainerInset = {
 export const ContainerFull = {
   render: () => html`
   <div>
-    <mlv-toolbar container="full">
-      <mlv-button container="inline"><mlv-icon name="add"></mlv-icon> create</mlv-button>
-      <mlv-button container="inline"><mlv-icon name="delete"></mlv-icon> delete</mlv-button>
-      <mlv-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></mlv-icon-button>
-    </mlv-toolbar>
+    <nve-toolbar container="full">
+      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+    </nve-toolbar>
   </div>
   `
 };
@@ -65,8 +65,8 @@ export const ContainerFull = {
 export const Groups = {
   render: () => html`
   <div>
-    <mlv-toolbar>
-      <mlv-select fit-text>
+    <nve-toolbar>
+      <nve-select fit-text>
         <select aria-label="element type">
           <option value="1">Heading 1</option>
           <option value="2">Heading 2</option>
@@ -81,34 +81,34 @@ export const Groups = {
         <div slot="option-3">
           <span nve-text="body sm">Paragraph</span>
         </div>
-      </mlv-select>
+      </nve-select>
 
-      <mlv-divider></mlv-divider>
+      <nve-divider></nve-divider>
 
-      <mlv-button-group>
-        <mlv-icon-button pressed icon-name="bars-3-bottom-left"></mlv-icon-button>
-        <mlv-icon-button icon-name="bars-3-bottom-right"></mlv-icon-button>
-        <mlv-icon-button icon-name="bars-4"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group>
+        <nve-icon-button pressed icon-name="bars-3-bottom-left"></nve-icon-button>
+        <nve-icon-button icon-name="bars-3-bottom-right"></nve-icon-button>
+        <nve-icon-button icon-name="bars-4"></nve-icon-button>
+      </nve-button-group>
 
-      <mlv-divider></mlv-divider>
+      <nve-divider></nve-divider>
 
-      <mlv-button-group>
-        <mlv-icon-button icon-name="bold" size="sm"></mlv-icon-button>
-        <mlv-icon-button icon-name="italic" size="sm"></mlv-icon-button>
-        <mlv-icon-button icon-name="strikethrough" size="sm"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group>
+        <nve-icon-button icon-name="bold" size="sm"></nve-icon-button>
+        <nve-icon-button icon-name="italic" size="sm"></nve-icon-button>
+        <nve-icon-button icon-name="strikethrough" size="sm"></nve-icon-button>
+      </nve-button-group>
 
-      <mlv-divider></mlv-divider>
+      <nve-divider></nve-divider>
 
-      <mlv-button-group>
-        <mlv-icon-button icon-name="code"></mlv-icon-button>
-        <mlv-icon-button icon-name="fork"></mlv-icon-button>
-        <mlv-icon-button icon-name="merge"></mlv-icon-button>
-      </mlv-button-group>
+      <nve-button-group>
+        <nve-icon-button icon-name="code"></nve-icon-button>
+        <nve-icon-button icon-name="fork"></nve-icon-button>
+        <nve-icon-button icon-name="merge"></nve-icon-button>
+      </nve-button-group>
 
-      <mlv-button slot="suffix" container="flat">Save</mlv-button>
-    </mlv-toolbar>
+      <nve-button slot="suffix" container="flat">Save</nve-button>
+    </nve-toolbar>
   </div>
   `
 };
@@ -116,21 +116,21 @@ export const Groups = {
 export const Vertical = {
   render: () => html`
   <div>
-    <mlv-toolbar orientation="vertical">
-      <mlv-button-group>
-        <mlv-icon-button pressed icon-name="bars-3-bottom-left"></mlv-icon-button>
-        <mlv-icon-button icon-name="bars-3-bottom-right"></mlv-icon-button>
-        <mlv-icon-button icon-name="bars-4"></mlv-icon-button>
-      </mlv-button-group>
+    <nve-toolbar orientation="vertical">
+      <nve-button-group>
+        <nve-icon-button pressed icon-name="bars-3-bottom-left"></nve-icon-button>
+        <nve-icon-button icon-name="bars-3-bottom-right"></nve-icon-button>
+        <nve-icon-button icon-name="bars-4"></nve-icon-button>
+      </nve-button-group>
 
-      <mlv-divider></mlv-divider>
+      <nve-divider></nve-divider>
 
-      <mlv-button-group>
-        <mlv-icon-button icon-name="bold" size="sm"></mlv-icon-button>
-        <mlv-icon-button icon-name="italic" size="sm"></mlv-icon-button>
-        <mlv-icon-button icon-name="strikethrough"></mlv-icon-button>
-      </mlv-button-group>
-    </mlv-toolbar>
+      <nve-button-group>
+        <nve-icon-button icon-name="bold" size="sm"></nve-icon-button>
+        <nve-icon-button icon-name="italic" size="sm"></nve-icon-button>
+        <nve-icon-button icon-name="strikethrough"></nve-icon-button>
+      </nve-button-group>
+    </nve-toolbar>
   </div>
   `
 };
@@ -138,9 +138,9 @@ export const Vertical = {
 export const Filter = {
   render: () => html`
   <div>
-    <mlv-toolbar container="flat">
-      <mlv-icon-button readonly icon-name="filter" container="flat" slot="prefix"></mlv-icon-button>
-      <mlv-progressive-filter-chip closable>
+    <nve-toolbar container="flat">
+      <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
+      <nve-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option selected>status</option>
           <option>workload</option>
@@ -155,8 +155,8 @@ export const Filter = {
           <option>success</option>
           <option>failed</option>
         </select>
-      </mlv-progressive-filter-chip>
-      <mlv-combobox container="flat">
+      </nve-progressive-filter-chip>
+      <nve-combobox container="flat">
         <input type="search" placeholder="Add Filter" />
         <datalist>
           <option value="Status"></option>
@@ -166,10 +166,10 @@ export const Filter = {
           <option value="Configuration"></option>
           <option value="Contains"></option>
         </datalist>
-      </mlv-combobox>
-      <mlv-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></mlv-icon-button>
-      <mlv-button slot="suffix">Save Filters</mlv-button>
-    </mlv-toolbar>
+      </nve-combobox>
+      <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
+      <nve-button slot="suffix">Save Filters</nve-button>
+    </nve-toolbar>
   </div>
   `
 };
@@ -177,9 +177,9 @@ export const Filter = {
 export const Scroll = {
   render: () => html`
   <div>
-    <mlv-toolbar container="flat">
-      <mlv-icon-button readonly icon-name="filter" container="flat" slot="prefix"></mlv-icon-button>
-      <mlv-progressive-filter-chip closable>
+    <nve-toolbar container="flat">
+      <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
+      <nve-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option>workload</option>
           <option selected>instance</option>
@@ -192,8 +192,8 @@ export const Scroll = {
           <option selected>utilization</option>
           <option>status</option>
         </select>
-      </mlv-progressive-filter-chip>
-      <mlv-progressive-filter-chip closable>
+      </nve-progressive-filter-chip>
+      <nve-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option selected>status</option>
           <option>workload</option>
@@ -208,16 +208,16 @@ export const Scroll = {
           <option>success</option>
           <option>failed</option>
         </select>
-      </mlv-progressive-filter-chip>
-      <mlv-progressive-filter-chip>
+      </nve-progressive-filter-chip>
+      <nve-progressive-filter-chip>
         <select aria-label="date type">
           <option>recording date</option>
           <option>process date</option>
         </select>
         <input type="date" value="2022-05-11" aria-label="start date" />
         <input type="date" value="2022-12-07" aria-label="end date" />
-      </mlv-progressive-filter-chip>
-      <mlv-combobox container="flat">
+      </nve-progressive-filter-chip>
+      <nve-combobox container="flat">
         <input type="search" placeholder="Add Filter" />
         <datalist>
           <option value="Status"></option>
@@ -227,10 +227,10 @@ export const Scroll = {
           <option value="Configuration"></option>
           <option value="Contains"></option>
         </datalist>
-      </mlv-combobox>
-      <mlv-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></mlv-icon-button>
-      <mlv-button slot="suffix">Save Filters</mlv-button>
-    </mlv-toolbar>
+      </nve-combobox>
+      <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
+      <nve-button slot="suffix">Save Filters</nve-button>
+    </nve-toolbar>
   </div>
   `
 };
@@ -238,9 +238,9 @@ export const Scroll = {
 export const Wrap = {
   render: () => html`
   <div>
-    <mlv-toolbar container="flat" content="wrap">
-      <mlv-icon-button readonly icon-name="filter" container="flat" slot="prefix"></mlv-icon-button>
-      <mlv-progressive-filter-chip closable>
+    <nve-toolbar container="flat" content="wrap">
+      <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
+      <nve-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option>workload</option>
           <option selected>instance</option>
@@ -253,8 +253,8 @@ export const Wrap = {
           <option selected>utilization</option>
           <option>status</option>
         </select>
-      </mlv-progressive-filter-chip>
-      <mlv-progressive-filter-chip closable>
+      </nve-progressive-filter-chip>
+      <nve-progressive-filter-chip closable>
         <select aria-label="dataset">
           <option selected>status</option>
           <option>workload</option>
@@ -269,16 +269,16 @@ export const Wrap = {
           <option>success</option>
           <option>failed</option>
         </select>
-      </mlv-progressive-filter-chip>
-      <mlv-progressive-filter-chip>
+      </nve-progressive-filter-chip>
+      <nve-progressive-filter-chip>
         <select aria-label="date type">
           <option>recording date</option>
           <option>process date</option>
         </select>
         <input type="date" value="2022-05-11" aria-label="start date" />
         <input type="date" value="2022-12-07" aria-label="end date" />
-      </mlv-progressive-filter-chip>
-      <mlv-combobox container="flat">
+      </nve-progressive-filter-chip>
+      <nve-combobox container="flat">
         <input type="search" placeholder="Add Filter" />
         <datalist>
           <option value="Status"></option>
@@ -288,10 +288,10 @@ export const Wrap = {
           <option value="Configuration"></option>
           <option value="Contains"></option>
         </datalist>
-      </mlv-combobox>
-      <mlv-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></mlv-icon-button>
-      <mlv-button slot="suffix">Save Filters</mlv-button>
-    </mlv-toolbar>
+      </nve-combobox>
+      <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
+      <nve-button slot="suffix">Save Filters</nve-button>
+    </nve-toolbar>
   </div>
   `
 };
@@ -299,19 +299,19 @@ export const Wrap = {
 export const Status = {
   render: () => html`
     <div nve-layout="column gap:lg align:stretch">
-      <mlv-toolbar status="accent">
-        <mlv-icon-button icon-name="cancel" slot="prefix"></mlv-icon-button>  
+      <nve-toolbar status="accent">
+        <nve-icon-button icon-name="cancel" slot="prefix"></nve-icon-button>  
         <p nve-text="body">123 selected</p>
-        <mlv-button slot="suffix">delete</mlv-button>
-        <mlv-icon-button icon-name="more-actions" slot="suffix"></mlv-icon-button>
-      </mlv-toolbar>
+        <nve-button slot="suffix">delete</nve-button>
+        <nve-icon-button icon-name="more-actions" slot="suffix"></nve-icon-button>
+      </nve-toolbar>
 
-      <mlv-toolbar>
-        <mlv-icon-button icon-name="cancel" slot="prefix"></mlv-icon-button>  
+      <nve-toolbar>
+        <nve-icon-button icon-name="cancel" slot="prefix"></nve-icon-button>  
         <p nve-text="body">123 selected</p>
-        <mlv-button slot="suffix">delete</mlv-button>
-        <mlv-icon-button icon-name="more-actions" slot="suffix"></mlv-icon-button>
-      </mlv-toolbar>
+        <nve-button slot="suffix">delete</nve-button>
+        <nve-icon-button icon-name="more-actions" slot="suffix"></nve-icon-button>
+      </nve-toolbar>
     </div>
   `
 }

@@ -18,7 +18,7 @@ import { Icon, type IconName } from '@nvidia-elements/core/icon';
 import styles from './toast.css?inline';
 
 /**
- * @element mlv-toast
+ * @element nve-toast
  * @description A contextual popup that displays a status. Toasts are [triggered](https://w3c.github.io/aria/#tooltip) by clicking, focusing, or tapping an element and cannot have interactive elements within them.
  * @since 0.6.0
  * @event open - Dispatched when the toast is opened.

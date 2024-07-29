@@ -3,7 +3,7 @@ import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
 import styles from './footer.css?inline';
 
 /**
- * @element mlv-grid-footer
+ * @element nve-grid-footer
  * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background

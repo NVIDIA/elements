@@ -18,7 +18,7 @@ import { Tag } from '@nvidia-elements/core/tag';
 import styles from './select.css?inline';
 
 /**
- * @element mlv-select
+ * @element nve-select
  * @description A select is a control that enables users to select an option from a list of options.
  * @since 0.3.0
  * @cssprop --padding

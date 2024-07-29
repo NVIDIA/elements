@@ -18,7 +18,7 @@ import type { Control } from '@nvidia-elements/core/forms';
 import styles from './toolbar.css?inline';
 
 /**
- * @element mlv-toolbar
+ * @element nve-toolbar
  * @description A toolbar is a container for grouping a set of controls, such as buttons, icon buttons and combobox search.
  * @since 0.19.0
  * @slot - default slot for content

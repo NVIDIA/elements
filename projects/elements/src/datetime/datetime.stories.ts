@@ -5,88 +5,88 @@ import '@nvidia-elements/core/datetime/define.js';
 
 export default {
   title: 'Elements/Datetime/Examples',
-  component: 'mlv-datetime',
+  component: 'nve-datetime',
 };
 
 export const Datetime = {
   render: () => html`
-<mlv-datetime>
+<nve-datetime>
   <label>date</label>
   <input type="datetime-local" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-datetime>
+  <nve-control-message>message</nve-control-message>
+</nve-datetime>
 `
 };
 
 export const Datalist = {
   render: () => html`
-<mlv-month>
+<nve-month>
   <label>label</label>
   <input type="datetime-local" />
-  <mlv-control-message>message</mlv-control-message>
+  <nve-control-message>message</nve-control-message>
   <datalist>
     <option value="2018-06-07T00:00"></option>
     <option value="2018-06-12T19:30"></option>
     <option value="2018-06-14T00:00"></option>
   </datalist>
-</mlv-month>
+</nve-month>
   `
 }
 
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-datetime>
+  <nve-datetime>
     <label>label</label>
     <input type="datetime-local" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-datetime>
+    <nve-control-message>message</nve-control-message>
+  </nve-datetime>
 
-  <mlv-datetime>
+  <nve-datetime>
     <label>disabled</label>
     <input type="datetime-local" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-datetime>
+    <nve-control-message>message</nve-control-message>
+  </nve-datetime>
 
-  <mlv-datetime>
+  <nve-datetime>
     <label>success</label>
     <input type="datetime-local" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-datetime>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-datetime>
 
-  <mlv-datetime>
+  <nve-datetime>
     <label>error</label>
     <input type="datetime-local" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-datetime>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-datetime>
 </div>`
 };
 
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-datetime layout="horizontal">
+  <nve-datetime layout="horizontal">
     <label>label</label>
     <input type="datetime-local" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-datetime>
+    <nve-control-message>message</nve-control-message>
+  </nve-datetime>
 
-  <mlv-datetime layout="horizontal">
+  <nve-datetime layout="horizontal">
     <label>disabled</label>
     <input type="datetime-local" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-datetime>
+    <nve-control-message>message</nve-control-message>
+  </nve-datetime>
 
-  <mlv-datetime layout="horizontal">
+  <nve-datetime layout="horizontal">
     <label>success</label>
     <input type="datetime-local" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-datetime>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-datetime>
 
-  <mlv-datetime layout="horizontal">
+  <nve-datetime layout="horizontal">
     <label>error</label>
     <input type="datetime-local" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-datetime>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-datetime>
 </div>`
 };

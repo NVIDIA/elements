@@ -4,124 +4,124 @@ import '@nvidia-elements/core/checkbox/define.js';
 
 export default {
   title: 'Elements/Checkbox/Examples',
-  component: 'mlv-checkbox',
+  component: 'nve-checkbox',
 };
 
 export const Checkbox = () => {
   return html`
-<mlv-checkbox>
+<nve-checkbox>
   <label>label</label>
   <input type="checkbox" />
-</mlv-checkbox>`
+</nve-checkbox>`
 };
 
 export const States = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-checkbox>
+  <nve-checkbox>
     <label>label</label>
     <input type="checkbox" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox>
 
-  <mlv-checkbox>
+  <nve-checkbox>
     <label>disabled</label>
     <input type="checkbox" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox>
 
-  <mlv-checkbox>
+  <nve-checkbox>
     <label>success</label>
     <input type="checkbox" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-checkbox>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-checkbox>
 
-  <mlv-checkbox>
+  <nve-checkbox>
     <label>error</label>
     <input type="checkbox" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-checkbox>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-checkbox>
 </div>`
 };
 
 export const VerticalGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-checkbox-group>
+  <nve-checkbox-group>
     <label>label</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group>
+  <nve-checkbox-group>
     <label>disabled</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked disabled />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" disabled />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" disabled />
-    </mlv-checkbox>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group>
+  <nve-checkbox-group>
     <label>success</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group>
+  <nve-checkbox-group>
     <label>error</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-checkbox-group>
 </div>
 `
 };
@@ -129,81 +129,81 @@ export const VerticalGroup = () => {
 export const VerticalInlineGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-checkbox-group layout="vertical-inline">
+  <nve-checkbox-group layout="vertical-inline">
     <label>label</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group layout="vertical-inline">
+  <nve-checkbox-group layout="vertical-inline">
     <label>disabled</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked disabled />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" disabled />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" disabled />
-    </mlv-checkbox>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group layout="vertical-inline">
+  <nve-checkbox-group layout="vertical-inline">
     <label>success</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group layout="vertical-inline">
+  <nve-checkbox-group layout="vertical-inline">
     <label>error</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-checkbox-group>
 </div>
 `
 };
@@ -211,81 +211,81 @@ export const VerticalInlineGroup = () => {
 export const HorizontalGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-checkbox-group layout="horizontal">
+  <nve-checkbox-group layout="horizontal">
     <label>label</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group layout="horizontal">
+  <nve-checkbox-group layout="horizontal">
     <label>disabled</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked disabled />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" disabled />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" disabled />
-    </mlv-checkbox>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group layout="horizontal">
+  <nve-checkbox-group layout="horizontal">
     <label>success</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group layout="horizontal">
+  <nve-checkbox-group layout="horizontal">
     <label>error</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-checkbox-group>
 </div>
 `
 };
@@ -293,81 +293,81 @@ export const HorizontalGroup = () => {
 export const HorizontalInlineGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-checkbox-group layout="horizontal-inline">
+  <nve-checkbox-group layout="horizontal-inline">
     <label>label</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group layout="horizontal-inline">
+  <nve-checkbox-group layout="horizontal-inline">
     <label>disabled</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked disabled />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" disabled />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" disabled />
-    </mlv-checkbox>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group layout="horizontal-inline">
+  <nve-checkbox-group layout="horizontal-inline">
     <label>success</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-checkbox-group>
 
-  <mlv-checkbox-group layout="horizontal-inline">
+  <nve-checkbox-group layout="horizontal-inline">
     <label>error</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 1</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 2</label>
       <input type="checkbox" />
-    </mlv-checkbox>
+    </nve-checkbox>
 
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>checkbox 3</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-checkbox-group>
+    </nve-checkbox>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-checkbox-group>
 </div>
 `
 };

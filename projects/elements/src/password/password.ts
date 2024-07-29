@@ -7,7 +7,7 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './password.css?inline';
 
 /**
- * @element mlv-password
+ * @element nve-password
  * @description A password is a control that enables users to enter password text.
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-password-documentation--docs

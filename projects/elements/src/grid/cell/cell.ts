@@ -3,7 +3,7 @@ import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
 import styles from './cell.css?inline';
 
 /**
- * @element mlv-grid-cell
+ * @element nve-grid-cell
  * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background

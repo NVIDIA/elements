@@ -120,8 +120,8 @@ export const ContrastInvert = {
     const tokens = Object.keys(getFormattedTokens(tokenJSON, context, value => value.includes('ref-color-green-grass'))).map(k => html`<div style="width: 50px; height: 50px; background: var(${k})"></div>`);
     return html`
     <div nve-layout="column gap:sm">
-      <div nve-layout="row gap:md align:vertical-center"><p nve-text="label emphasis bold">light</p><div mlv-theme="root light" nve-layout="row">${tokens}</div></div>
-      <div nve-layout="row gap:md align:vertical-center"><p nve-text="label emphasis bold">dark</p><div mlv-theme="root dark" nve-layout="row">${tokens}</div></div>
+      <div nve-layout="row gap:md align:vertical-center"><p nve-text="label emphasis bold">light</p><div nve-theme="root light" nve-layout="row">${tokens}</div></div>
+      <div nve-layout="row gap:md align:vertical-center"><p nve-text="label emphasis bold">dark</p><div nve-theme="root dark" nve-layout="row">${tokens}</div></div>
     </div>
     `
   }
@@ -172,7 +172,7 @@ export const ColorPalette = {
       ${getColorScale('ref-color-lime-pear')}
       ${getColorScale('ref-color-brand-green')}
       </div>
-      <mlv-toast id="color-scale-toast" trigger="color-scale" close-timeout="1500" position="left" hidden>copied!</mlv-toast>
+      <nve-toast id="color-scale-toast" trigger="color-scale" close-timeout="1500" position="left" hidden>copied!</nve-toast>
       <script type="module">
         const toast = document.querySelector('#color-scale-toast');
         const scale = document.querySelector('.color-scale');
@@ -192,15 +192,15 @@ export const ColorPalette = {
 function getColorScale(color) {
   const tokens: any[] = [];
   for (let i = 1; i < 13; i++) {
-    tokens.push(html`<button id="--mlv-${color}-${i}00" value="--mlv-${color}-${i}00" style="background: var(--mlv-${color}-${i}00); color: var(${i < 9 ? '--mlv-ref-color-gray-slate-1200' : '--mlv-ref-color-gray-slate-100'})"></button>`)
+    tokens.push(html`<button id="--nve-${color}-${i}00" value="--nve-${color}-${i}00" style="background: var(--nve-${color}-${i}00); color: var(${i < 9 ? '--nve-ref-color-gray-slate-1200' : '--nve-ref-color-gray-slate-100'})"></button>`)
   }
   return html`
   <div nve-layout="column pad-bottom:xl">
     <h2 nve-text="body">${color.replace('ref-color-', '')}</h2>
     <div nve-layout="row" style="width: 100%">
       <div nve-layout="column" style="padding-top: 25px">${Array.from(Array(12).keys()).map(i => html`<p nve-text="body" nve-layout="column align:center pad:xs" style="height: 40px">${i + 1}00</p>`)}</div>
-      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">light</p><div mlv-theme="root light" style="width: 100%">${tokens}</div></div>
-      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">dark</p><div mlv-theme="root dark" style="width: 100%">${tokens}</div></div>
+      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">light</p><div nve-theme="root light" style="width: 100%">${tokens}</div></div>
+      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">dark</p><div nve-theme="root dark" style="width: 100%">${tokens}</div></div>
     </div>
   </div>`;
 }
@@ -277,9 +277,9 @@ function renderTokenTable(tokens) {
           ${name.includes('ref-font-size') ? html`<div style="${styleMap({ 'font-size': `var(${name})`, background: 'transparent' })}">size</div>` : ''}
           ${name.includes('ref-border-radius') ? html`<div style="${styleMap({ 'border-radius': `var(${name})`, width: '100px', height: '100px' })}"></div>` : ''}
           ${name.includes('ref-border-color') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
-          ${name.includes('ref-border-width') ? html`<div style="${styleMap({ border: '1px solid var(--mlv-ref-border-color)', background: 'transparent', 'border-width': value })}"></div>` : ''}
+          ${name.includes('ref-border-width') ? html`<div style="${styleMap({ border: '1px solid var(--nve-ref-border-color)', background: 'transparent', 'border-width': value })}"></div>` : ''}
           ${name.includes('ref-opacity') ? html`<div style="${styleMap({ opacity: `var(${name})`, background: '#000' })}"></div>` : ''}
-          ${name.includes('ref-shadow') ? html`<div style="padding: 12px; background: transparent;"><div style="${styleMap({ 'box-shadow': `var(${name})`, background: 'var(--mlv-sys-layer-container-background)' })}"></div></div>` : ''}
+          ${name.includes('ref-shadow') ? html`<div style="padding: 12px; background: transparent;"><div style="${styleMap({ 'box-shadow': `var(${name})`, background: 'var(--nve-sys-layer-container-background)' })}"></div></div>` : ''}
           ${name.includes('ref-animation') ? html`<div style="${styleMap({ background: 'transparent' })}"></div>` : ''}
           ${name.includes('sys-status') || name.includes('sys-support') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
           ${name.includes('sys-text') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}

@@ -24,9 +24,9 @@ import globalStyles from './control.global.css?inline';
 import styles from './control.css?inline';
 
 /**
- * @element mlv-control
+ * @element nve-control
  * @since 0.3.0
- * @entrypoint \@elements/elements/forms
+ * @entrypoint \@nvidia-elements/core/forms
  * @slot - Control input element
  * @slot label - Label element
  * @cssprop --cursor

@@ -6,7 +6,7 @@ import { inputStyles } from '@nvidia-elements/core/input';
 import styles from './time.css?inline';
 
 /**
- * @element mlv-time
+ * @element nve-time
  * @description A time picker is a control that enables users to choose a time value.
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-time-documentation--docs

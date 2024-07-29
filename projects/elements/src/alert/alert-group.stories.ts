@@ -6,7 +6,7 @@ import '@nvidia-elements/core/divider/define.js';
 
 export default {
   title: 'Elements/Alert Group/Examples',
-  component: 'mlv-alert-group',
+  component: 'nve-alert-group',
   argTypes: {
     status: {
       control: 'inline-radio',
@@ -20,9 +20,9 @@ type ArgTypes = AlertGroup;
 export const Default = {
   render: (args: ArgTypes) =>
     html`
-    <mlv-alert-group .status=${args.status}>
-      <mlv-alert>alert message</mlv-alert>
-    </mlv-alert-group>
+    <nve-alert-group .status=${args.status}>
+      <nve-alert>alert message</nve-alert>
+    </nve-alert-group>
     `,
     args: { status: undefined }
 };
@@ -30,30 +30,30 @@ export const Default = {
 export const Status = {
   render: () => html`
     <div nve-layout="column gap:md">
-      <mlv-alert-group>
-        <mlv-alert>Standard</mlv-alert>
-        <mlv-alert>Standard</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group>
+        <nve-alert>Standard</nve-alert>
+        <nve-alert>Standard</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="accent">
-        <mlv-alert>Accent</mlv-alert>
-        <mlv-alert>Accent</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="accent">
+        <nve-alert>Accent</nve-alert>
+        <nve-alert>Accent</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="warning">
-        <mlv-alert>Warning</mlv-alert>
-        <mlv-alert>Warning</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="warning">
+        <nve-alert>Warning</nve-alert>
+        <nve-alert>Warning</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="success">
-        <mlv-alert>Success</mlv-alert>
-        <mlv-alert>Success</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="success">
+        <nve-alert>Success</nve-alert>
+        <nve-alert>Success</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="danger">
-        <mlv-alert>Danger</mlv-alert>
-        <mlv-alert>Danger</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="danger">
+        <nve-alert>Danger</nve-alert>
+        <nve-alert>Danger</nve-alert>
+      </nve-alert-group>
     </div>
   `
 }
@@ -61,30 +61,30 @@ export const Status = {
 export const Closable = {
   render: () => html`
     <div nve-layout="column gap:md">
-      <mlv-alert-group>
-        <mlv-alert closable>Standard</mlv-alert>
-        <mlv-alert closable>Standard</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group>
+        <nve-alert closable>Standard</nve-alert>
+        <nve-alert closable>Standard</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="accent">
-        <mlv-alert closable>Accent</mlv-alert>
-        <mlv-alert closable>Accent</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="accent">
+        <nve-alert closable>Accent</nve-alert>
+        <nve-alert closable>Accent</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="warning">
-        <mlv-alert closable>Warning</mlv-alert>
-        <mlv-alert closable>Warning</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="warning">
+        <nve-alert closable>Warning</nve-alert>
+        <nve-alert closable>Warning</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="success">
-        <mlv-alert closable>Success</mlv-alert>
-        <mlv-alert closable>Success</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="success">
+        <nve-alert closable>Success</nve-alert>
+        <nve-alert closable>Success</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="danger">
-        <mlv-alert closable>Danger</mlv-alert>
-        <mlv-alert closable>Danger</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="danger">
+        <nve-alert closable>Danger</nve-alert>
+        <nve-alert closable>Danger</nve-alert>
+      </nve-alert-group>
     </div>
   `
 }
@@ -92,31 +92,31 @@ export const Closable = {
 export const Actions = {
   render: () => html`
   <div nve-layout="column gap:md">
-    <mlv-alert-group>
-      <mlv-alert>
-        Standard <mlv-button slot="actions" container="flat">action</mlv-button>
-      </mlv-alert>
-    </mlv-alert-group>
-    <mlv-alert-group status="accent">
-      <mlv-alert>
-        Standard <mlv-button slot="actions" container="flat">action</mlv-button>
-      </mlv-alert>
-    </mlv-alert-group>
-    <mlv-alert-group status="warning">
-      <mlv-alert>
-        Warning <mlv-button slot="actions" container="flat">action</mlv-button>
-      </mlv-alert>
-    </mlv-alert-group>
-    <mlv-alert-group status="success">
-      <mlv-alert>
-        Success <mlv-button slot="actions" container="flat">action</mlv-button>
-      </mlv-alert>
-    </mlv-alert-group>
-    <mlv-alert-group status="danger">
-      <mlv-alert>
-        Danger <mlv-button slot="actions" container="flat">action</mlv-button>
-      </mlv-alert>
-    </mlv-alert-group>
+    <nve-alert-group>
+      <nve-alert>
+        Standard <nve-button slot="actions" container="flat">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+    <nve-alert-group status="accent">
+      <nve-alert>
+        Standard <nve-button slot="actions" container="flat">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+    <nve-alert-group status="warning">
+      <nve-alert>
+        Warning <nve-button slot="actions" container="flat">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+    <nve-alert-group status="success">
+      <nve-alert>
+        Success <nve-button slot="actions" container="flat">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
+    <nve-alert-group status="danger">
+      <nve-alert>
+        Danger <nve-button slot="actions" container="flat">action</nve-button>
+      </nve-alert>
+    </nve-alert-group>
   </div>
   `
 }
@@ -124,101 +124,101 @@ export const Actions = {
 export const Prominence = {
   render: () => html`
     <div nve-layout="column gap:md">
-      <mlv-alert-group prominence="emphasis" container="full">
-        <mlv-alert closable><span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="accent" prominence="emphasis" container="full">
-        <mlv-alert closable><span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="accent" prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="warning" prominence="emphasis" container="full">
-        <mlv-alert closable><span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="warning" prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="success" prominence="emphasis" container="full">
-        <mlv-alert closable><span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="success" prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="danger" prominence="emphasis" container="full">
-        <mlv-alert closable><span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="danger" prominence="emphasis" container="full">
+        <nve-alert closable><span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
+      </nve-alert-group>
     </div>
   `
 }
 
 export const Themes = {
   render: () => html`
-    <div mlv-theme="root light" nve-layout="column gap:md pad:md">
-      <mlv-alert-group>
-        <mlv-alert>Standard</mlv-alert>
-        <mlv-alert>Standard</mlv-alert>
-      </mlv-alert-group>
+    <div nve-theme="root light" nve-layout="column gap:md pad:md">
+      <nve-alert-group>
+        <nve-alert>Standard</nve-alert>
+        <nve-alert>Standard</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="accent">
-        <mlv-alert>Accent</mlv-alert>
-        <mlv-alert>Accent</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="accent">
+        <nve-alert>Accent</nve-alert>
+        <nve-alert>Accent</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="warning">
-        <mlv-alert>Warning</mlv-alert>
-        <mlv-alert>Warning</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="warning">
+        <nve-alert>Warning</nve-alert>
+        <nve-alert>Warning</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="success">
-        <mlv-alert>Success</mlv-alert>
-        <mlv-alert>Success</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="success">
+        <nve-alert>Success</nve-alert>
+        <nve-alert>Success</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="danger">
-        <mlv-alert>Danger</mlv-alert>
-        <mlv-alert>Danger</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="danger">
+        <nve-alert>Danger</nve-alert>
+        <nve-alert>Danger</nve-alert>
+      </nve-alert-group>
     </div>
-    <div mlv-theme="root dark" nve-layout="column gap:md pad:md">
-      <mlv-alert-group>
-        <mlv-alert>default</mlv-alert>
-        <mlv-alert>default</mlv-alert>
-      </mlv-alert-group>
+    <div nve-theme="root dark" nve-layout="column gap:md pad:md">
+      <nve-alert-group>
+        <nve-alert>default</nve-alert>
+        <nve-alert>default</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="accent">
-        <mlv-alert>Accent</mlv-alert>
-        <mlv-alert>Accent</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="accent">
+        <nve-alert>Accent</nve-alert>
+        <nve-alert>Accent</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="warning">
-        <mlv-alert>Warning</mlv-alert>
-        <mlv-alert>Warning</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="warning">
+        <nve-alert>Warning</nve-alert>
+        <nve-alert>Warning</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="success">
-        <mlv-alert>Success</mlv-alert>
-        <mlv-alert>Success</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="success">
+        <nve-alert>Success</nve-alert>
+        <nve-alert>Success</nve-alert>
+      </nve-alert-group>
 
-      <mlv-alert-group status="danger">
-        <mlv-alert>Danger</mlv-alert>
-        <mlv-alert>Danger</mlv-alert>
-      </mlv-alert-group>
+      <nve-alert-group status="danger">
+        <nve-alert>Danger</nve-alert>
+        <nve-alert>Danger</nve-alert>
+      </nve-alert-group>
     </div>
   `
 }
 
 export const Multiline = {
   render: () => html`
-    <mlv-alert-group status="danger">
-      <mlv-alert>
+    <nve-alert-group status="danger">
+      <nve-alert>
         Session Paused:
         <div slot="content" nve-layout="column gap:sm align:stretch">
           <p nve-text="body sm">Failed to verify drives. <a href="#" nve-text="link">Check Status</a></p>
-          <mlv-divider style="--color: var(--mlv-sys-text-muted-color)"></mlv-divider>
+          <nve-divider style="--color: var(--nve-sys-text-muted-color)"></nve-divider>
           <pre nve-text="code sm" style="background: transparent !important; margin: 0;">
 10:06:01 AM [verify] update /virtual:/verify/
 10:06:11 AM [build] update /virtual:/build/
 10:06:22 AM [error] update /virtual:/error/ - failed to connect to remote
           </pre>
         </div>
-      </mlv-alert>
-    </mlv-alert-group>
+      </nve-alert>
+    </nve-alert-group>
   `
 }

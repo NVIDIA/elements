@@ -3,45 +3,45 @@ import '@nvidia-elements/core/alert/define.js';
 
 export default {
   title: 'Elements/Alert/Examples',
-  component: 'mlv-alert'
+  component: 'nve-alert'
 };
 
 export const Default = {
-  render: () => html`<mlv-alert>alert message</mlv-alert>`
+  render: () => html`<nve-alert>alert message</nve-alert>`
 };
 
 export const Status = {
   render: () => html`
 <div nve-layout="column gap:md">
-  <mlv-alert>Standard</mlv-alert>
-  <mlv-alert status="accent">Accent</mlv-alert>
-  <mlv-alert status="warning">Warning</mlv-alert>
-  <mlv-alert status="success">Success</mlv-alert>
-  <mlv-alert status="danger">Danger</mlv-alert>
+  <nve-alert>Standard</nve-alert>
+  <nve-alert status="accent">Accent</nve-alert>
+  <nve-alert status="warning">Warning</nve-alert>
+  <nve-alert status="success">Success</nve-alert>
+  <nve-alert status="danger">Danger</nve-alert>
 </div>
   `
 }
 
 export const StatusLightTheme = {
   render: () => html`
-<div mlv-theme="root light" nve-layout="column gap:md pad:md">
-  <mlv-alert>Standard</mlv-alert>
-  <mlv-alert status="accent">Accent</mlv-alert>
-  <mlv-alert status="warning">Warning</mlv-alert>
-  <mlv-alert status="success">Success</mlv-alert>
-  <mlv-alert status="danger">Danger</mlv-alert>
+<div nve-theme="root light" nve-layout="column gap:md pad:md">
+  <nve-alert>Standard</nve-alert>
+  <nve-alert status="accent">Accent</nve-alert>
+  <nve-alert status="warning">Warning</nve-alert>
+  <nve-alert status="success">Success</nve-alert>
+  <nve-alert status="danger">Danger</nve-alert>
 </div>
   `
 }
 
 export const StatusDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" nve-layout="column gap:md pad:md">
-  <mlv-alert>Standard</mlv-alert>
-  <mlv-alert status="accent">Accent</mlv-alert>
-  <mlv-alert status="warning">Warning</mlv-alert>
-  <mlv-alert status="success">Success</mlv-alert>
-  <mlv-alert status="danger">Danger</mlv-alert>
+<div nve-theme="root dark" nve-layout="column gap:md pad:md">
+  <nve-alert>Standard</nve-alert>
+  <nve-alert status="accent">Accent</nve-alert>
+  <nve-alert status="warning">Warning</nve-alert>
+  <nve-alert status="success">Success</nve-alert>
+  <nve-alert status="danger">Danger</nve-alert>
 </div>
   `
 }
@@ -49,51 +49,51 @@ export const StatusDarkTheme = {
 export const TaskStatus = {
   render: () => html`
 <div nve-layout="column gap:md">
-  <mlv-alert status="scheduled">Scheduled</mlv-alert>
-  <mlv-alert status="queued">Queued</mlv-alert>
-  <mlv-alert status="finished">Finished</mlv-alert>
-  <mlv-alert status="failed">Failed</mlv-alert>
-  <mlv-alert status="unknown">Unknown</mlv-alert>
-  <mlv-alert status="pending">Pending</mlv-alert>
-  <mlv-alert status="starting">Starting</mlv-alert>
-  <mlv-alert status="running">Running</mlv-alert>
-  <mlv-alert status="restarting">Restarting</mlv-alert>
-  <mlv-alert status="stopping">Stopping</mlv-alert>
-  <mlv-alert status="ignored">Ignored</mlv-alert>
+  <nve-alert status="scheduled">Scheduled</nve-alert>
+  <nve-alert status="queued">Queued</nve-alert>
+  <nve-alert status="finished">Finished</nve-alert>
+  <nve-alert status="failed">Failed</nve-alert>
+  <nve-alert status="unknown">Unknown</nve-alert>
+  <nve-alert status="pending">Pending</nve-alert>
+  <nve-alert status="starting">Starting</nve-alert>
+  <nve-alert status="running">Running</nve-alert>
+  <nve-alert status="restarting">Restarting</nve-alert>
+  <nve-alert status="stopping">Stopping</nve-alert>
+  <nve-alert status="ignored">Ignored</nve-alert>
 </div>
   `
 }
 
 export const TaskStatusLightTheme = {
   render: () => html`
-<div mlv-theme="root light" nve-layout="column gap:md pad:md">
-  <mlv-alert status="scheduled">Scheduled</mlv-alert>
-  <mlv-alert status="queued">Queued</mlv-alert>
-  <mlv-alert status="pending">Pending</mlv-alert>
-  <mlv-alert status="starting">Starting</mlv-alert>
-  <mlv-alert status="running">Running</mlv-alert>
-  <mlv-alert status="restarting">Restarting</mlv-alert>
-  <mlv-alert status="stopping">Stopping</mlv-alert>
-  <mlv-alert status="finished">Fnished</mlv-alert>
-  <mlv-alert status="failed">Failed</mlv-alert>
-  <mlv-alert status="unknown">Unknown</mlv-alert>
+<div nve-theme="root light" nve-layout="column gap:md pad:md">
+  <nve-alert status="scheduled">Scheduled</nve-alert>
+  <nve-alert status="queued">Queued</nve-alert>
+  <nve-alert status="pending">Pending</nve-alert>
+  <nve-alert status="starting">Starting</nve-alert>
+  <nve-alert status="running">Running</nve-alert>
+  <nve-alert status="restarting">Restarting</nve-alert>
+  <nve-alert status="stopping">Stopping</nve-alert>
+  <nve-alert status="finished">Fnished</nve-alert>
+  <nve-alert status="failed">Failed</nve-alert>
+  <nve-alert status="unknown">Unknown</nve-alert>
 </div>
   `
 }
 
 export const TaskStatusDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" nve-layout="column gap:md pad:md">
-  <mlv-alert status="scheduled">Scheduled</mlv-alert>
-  <mlv-alert status="queued">Queued</mlv-alert>
-  <mlv-alert status="pending">Pending</mlv-alert>
-  <mlv-alert status="starting">Starting</mlv-alert>
-  <mlv-alert status="running">Running</mlv-alert>
-  <mlv-alert status="restarting">Restarting</mlv-alert>
-  <mlv-alert status="stopping">Stopping</mlv-alert>
-  <mlv-alert status="finished">Finished</mlv-alert>
-  <mlv-alert status="failed">Failed</mlv-alert>
-  <mlv-alert status="unknown">Unknown</mlv-alert>
+<div nve-theme="root dark" nve-layout="column gap:md pad:md">
+  <nve-alert status="scheduled">Scheduled</nve-alert>
+  <nve-alert status="queued">Queued</nve-alert>
+  <nve-alert status="pending">Pending</nve-alert>
+  <nve-alert status="starting">Starting</nve-alert>
+  <nve-alert status="running">Running</nve-alert>
+  <nve-alert status="restarting">Restarting</nve-alert>
+  <nve-alert status="stopping">Stopping</nve-alert>
+  <nve-alert status="finished">Finished</nve-alert>
+  <nve-alert status="failed">Failed</nve-alert>
+  <nve-alert status="unknown">Unknown</nve-alert>
 </div>
   `
 }

@@ -4,29 +4,29 @@ import '@nvidia-elements/core/alert/define.js';
 
 export default {
   title: 'Elements/Badge/Examples',
-  component: 'mlv-badge',
+  component: 'nve-badge',
 };
 
 export const Default = {
   render: () => html`
-  <mlv-badge>badge</mlv-badge>
+  <nve-badge>badge</nve-badge>
   `
 };
 
 export const Status = {
   render: () => html`
 <div nve-layout="row gap:xs align:wrap">
-  <mlv-badge status="scheduled">scheduled</mlv-badge>
-  <mlv-badge status="queued">queued</mlv-badge>
-  <mlv-badge status="pending">pending</mlv-badge>
-  <mlv-badge status="starting">starting</mlv-badge>
-  <mlv-badge status="running">running</mlv-badge>
-  <mlv-badge status="restarting">restarting</mlv-badge>
-  <mlv-badge status="stopping">stopping</mlv-badge>
-  <mlv-badge status="finished">finished</mlv-badge>
-  <mlv-badge status="failed">failed</mlv-badge>
-  <mlv-badge status="unknown">unknown</mlv-badge>
-  <mlv-badge status="ignored">ignored</mlv-badge>
+  <nve-badge status="scheduled">scheduled</nve-badge>
+  <nve-badge status="queued">queued</nve-badge>
+  <nve-badge status="pending">pending</nve-badge>
+  <nve-badge status="starting">starting</nve-badge>
+  <nve-badge status="running">running</nve-badge>
+  <nve-badge status="restarting">restarting</nve-badge>
+  <nve-badge status="stopping">stopping</nve-badge>
+  <nve-badge status="finished">finished</nve-badge>
+  <nve-badge status="failed">failed</nve-badge>
+  <nve-badge status="unknown">unknown</nve-badge>
+  <nve-badge status="ignored">ignored</nve-badge>
 </div>
   `
 }
@@ -34,17 +34,17 @@ export const Status = {
 export const StatusFlat = {
   render: () => html`
 <div nve-layout="row gap:md align:wrap">
-  <mlv-badge container="flat" status="scheduled">scheduled</mlv-badge>
-  <mlv-badge container="flat" status="queued">queued</mlv-badge>
-  <mlv-badge container="flat" status="pending">pending</mlv-badge>
-  <mlv-badge container="flat" status="starting">starting</mlv-badge>
-  <mlv-badge container="flat" status="running">running</mlv-badge>
-  <mlv-badge container="flat" status="restarting">restarting</mlv-badge>
-  <mlv-badge container="flat" status="stopping">stopping</mlv-badge>
-  <mlv-badge container="flat" status="finished">finished</mlv-badge>
-  <mlv-badge container="flat" status="failed">failed</mlv-badge>
-  <mlv-badge container="flat" status="unknown">unknown</mlv-badge>
-  <mlv-badge container="flat" status="ignored">ignored</mlv-badge>
+  <nve-badge container="flat" status="scheduled">scheduled</nve-badge>
+  <nve-badge container="flat" status="queued">queued</nve-badge>
+  <nve-badge container="flat" status="pending">pending</nve-badge>
+  <nve-badge container="flat" status="starting">starting</nve-badge>
+  <nve-badge container="flat" status="running">running</nve-badge>
+  <nve-badge container="flat" status="restarting">restarting</nve-badge>
+  <nve-badge container="flat" status="stopping">stopping</nve-badge>
+  <nve-badge container="flat" status="finished">finished</nve-badge>
+  <nve-badge container="flat" status="failed">failed</nve-badge>
+  <nve-badge container="flat" status="unknown">unknown</nve-badge>
+  <nve-badge container="flat" status="ignored">ignored</nve-badge>
 </div>
   `
 }
@@ -52,17 +52,17 @@ export const StatusFlat = {
 export const StatusIcon = {
   render: () => html`
 <div nve-layout="row gap:md align:wrap">
-  <mlv-badge container="flat" status="scheduled" aria-label="scheduled"></mlv-badge>
-  <mlv-badge container="flat" status="queued" aria-label="queued"></mlv-badge>
-  <mlv-badge container="flat" status="pending" aria-label="pending"></mlv-badge>
-  <mlv-badge container="flat" status="starting" aria-label="starting"></mlv-badge>
-  <mlv-badge container="flat" status="running" aria-label="running"></mlv-badge>
-  <mlv-badge container="flat" status="restarting" aria-label="restarting"></mlv-badge>
-  <mlv-badge container="flat" status="stopping" aria-label="stopping"></mlv-badge>
-  <mlv-badge container="flat" status="finished" aria-label="finished"></mlv-badge>
-  <mlv-badge container="flat" status="failed" aria-label="failed"></mlv-badge>
-  <mlv-badge container="flat" status="unknown" aria-label="unknown"></mlv-badge>
-  <mlv-badge container="flat" status="ignored" aria-label="ignored"></mlv-badge>
+  <nve-badge container="flat" status="scheduled" aria-label="scheduled"></nve-badge>
+  <nve-badge container="flat" status="queued" aria-label="queued"></nve-badge>
+  <nve-badge container="flat" status="pending" aria-label="pending"></nve-badge>
+  <nve-badge container="flat" status="starting" aria-label="starting"></nve-badge>
+  <nve-badge container="flat" status="running" aria-label="running"></nve-badge>
+  <nve-badge container="flat" status="restarting" aria-label="restarting"></nve-badge>
+  <nve-badge container="flat" status="stopping" aria-label="stopping"></nve-badge>
+  <nve-badge container="flat" status="finished" aria-label="finished"></nve-badge>
+  <nve-badge container="flat" status="failed" aria-label="failed"></nve-badge>
+  <nve-badge container="flat" status="unknown" aria-label="unknown"></nve-badge>
+  <nve-badge container="flat" status="ignored" aria-label="ignored"></nve-badge>
 </div>
   `
 }
@@ -70,46 +70,46 @@ export const StatusIcon = {
 export const Support = {
   render: () => html`
 <div nve-layout="row gap:md">
-  <mlv-badge status="accent">accent</mlv-badge>
-  <mlv-badge status="warning">warning</mlv-badge>
-  <mlv-badge status="success">success</mlv-badge>
-  <mlv-badge status="danger">danger</mlv-badge>
+  <nve-badge status="accent">accent</nve-badge>
+  <nve-badge status="warning">warning</nve-badge>
+  <nve-badge status="success">success</nve-badge>
+  <nve-badge status="danger">danger</nve-badge>
 </div>
   `
 }
 
 export const StatusLightTheme = {
   render: () => html`
-<div mlv-theme="root light" nve-layout="row gap:md pad:md align:wrap">
-  <mlv-badge status="scheduled">scheduled</mlv-badge>
-  <mlv-badge status="queued">queued</mlv-badge>
-  <mlv-badge status="pending">pending</mlv-badge>
-  <mlv-badge status="starting">starting</mlv-badge>
-  <mlv-badge status="running">running</mlv-badge>
-  <mlv-badge status="restarting">restarting</mlv-badge>
-  <mlv-badge status="stopping">stopping</mlv-badge>
-  <mlv-badge status="finished">finished</mlv-badge>
-  <mlv-badge status="failed">failed</mlv-badge>
-  <mlv-badge status="unknown">unknown</mlv-badge>
-  <mlv-badge status="ignored">ignored</mlv-badge>
+<div nve-theme="root light" nve-layout="row gap:md pad:md align:wrap">
+  <nve-badge status="scheduled">scheduled</nve-badge>
+  <nve-badge status="queued">queued</nve-badge>
+  <nve-badge status="pending">pending</nve-badge>
+  <nve-badge status="starting">starting</nve-badge>
+  <nve-badge status="running">running</nve-badge>
+  <nve-badge status="restarting">restarting</nve-badge>
+  <nve-badge status="stopping">stopping</nve-badge>
+  <nve-badge status="finished">finished</nve-badge>
+  <nve-badge status="failed">failed</nve-badge>
+  <nve-badge status="unknown">unknown</nve-badge>
+  <nve-badge status="ignored">ignored</nve-badge>
 </div>
   `
 }
 
 export const StatusDarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" nve-layout="row gap:md pad:md align:wrap">
-  <mlv-badge status="scheduled">scheduled</mlv-badge>
-  <mlv-badge status="queued">queued</mlv-badge>
-  <mlv-badge status="pending">pending</mlv-badge>
-  <mlv-badge status="starting">starting</mlv-badge>
-  <mlv-badge status="running">running</mlv-badge>
-  <mlv-badge status="restarting">restarting</mlv-badge>
-  <mlv-badge status="stopping">stopping</mlv-badge>
-  <mlv-badge status="finished">finished</mlv-badge>
-  <mlv-badge status="failed">failed</mlv-badge>
-  <mlv-badge status="unknown">unknown</mlv-badge>
-  <mlv-badge status="ignored">ignored</mlv-badge>
+<div nve-theme="root dark" nve-layout="row gap:md pad:md align:wrap">
+  <nve-badge status="scheduled">scheduled</nve-badge>
+  <nve-badge status="queued">queued</nve-badge>
+  <nve-badge status="pending">pending</nve-badge>
+  <nve-badge status="starting">starting</nve-badge>
+  <nve-badge status="running">running</nve-badge>
+  <nve-badge status="restarting">restarting</nve-badge>
+  <nve-badge status="stopping">stopping</nve-badge>
+  <nve-badge status="finished">finished</nve-badge>
+  <nve-badge status="failed">failed</nve-badge>
+  <nve-badge status="unknown">unknown</nve-badge>
+  <nve-badge status="ignored">ignored</nve-badge>
 </div>
   `
 }
@@ -117,9 +117,9 @@ export const StatusDarkTheme = {
 export const Trend = {
   render: () => html`
 <div nve-layout="row gap:md">
-  <mlv-badge status="trend-neutral">+15%</mlv-badge>
-  <mlv-badge status="trend-up">+15%</mlv-badge>
-  <mlv-badge status="trend-down">-15%</mlv-badge>
+  <nve-badge status="trend-neutral">+15%</nve-badge>
+  <nve-badge status="trend-up">+15%</nve-badge>
+  <nve-badge status="trend-down">-15%</nve-badge>
 </div>
   `
 }
@@ -127,28 +127,28 @@ export const Trend = {
 export const Color = {
   render: () => html`
 <div nve-layout="row gap:sm align:wrap">
-  <mlv-badge color="red-cardinal"><mlv-icon name="placeholder"></mlv-icon> red-cardinal</mlv-badge>
-  <mlv-badge color="gray-slate"><mlv-icon name="placeholder"></mlv-icon> gray-slate</mlv-badge>
-  <mlv-badge color="gray-denim"><mlv-icon name="placeholder"></mlv-icon> gray-denim</mlv-badge>
-  <mlv-badge color="blue-indigo"><mlv-icon name="placeholder"></mlv-icon> blue-indigo</mlv-badge>
-  <mlv-badge color="blue-cobalt"><mlv-icon name="placeholder"></mlv-icon> blue-cobalt</mlv-badge>
-  <mlv-badge color="blue-sky"><mlv-icon name="placeholder"></mlv-icon> blue-sky</mlv-badge>
-  <mlv-badge color="teal-cyan"><mlv-icon name="placeholder"></mlv-icon> teal-cyan</mlv-badge>
-  <mlv-badge color="green-mint"><mlv-icon name="placeholder"></mlv-icon> green-mint</mlv-badge>
-  <mlv-badge color="teal-seafoam"><mlv-icon name="placeholder"></mlv-icon> teal-seafoam</mlv-badge>
-  <mlv-badge color="green-grass"><mlv-icon name="placeholder"></mlv-icon> green-grass</mlv-badge>
-  <mlv-badge color="yellow-amber"><mlv-icon name="placeholder"></mlv-icon> yellow-amber</mlv-badge>
-  <mlv-badge color="orange-pumpkin"><mlv-icon name="placeholder"></mlv-icon> orange-pumpkin</mlv-badge>
-  <mlv-badge color="red-tomato"><mlv-icon name="placeholder"></mlv-icon> red-tomato</mlv-badge>
-  <mlv-badge color="pink-magenta"><mlv-icon name="placeholder"></mlv-icon> pink-magenta</mlv-badge>
-  <mlv-badge color="purple-plum"><mlv-icon name="placeholder"></mlv-icon> purple-plum</mlv-badge>
-  <mlv-badge color="purple-violet"><mlv-icon name="placeholder"></mlv-icon> purple-violet</mlv-badge>
-  <mlv-badge color="purple-lavender"><mlv-icon name="placeholder"></mlv-icon> purple-lavender</mlv-badge>
-  <mlv-badge color="pink-rose"><mlv-icon name="placeholder"></mlv-icon> pink-rose</mlv-badge>
-  <mlv-badge color="green-jade"><mlv-icon name="placeholder"></mlv-icon> green-jade</mlv-badge>
-  <mlv-badge color="lime-pear"><mlv-icon name="placeholder"></mlv-icon> lime-pear</mlv-badge>
-  <mlv-badge color="yellow-nova"><mlv-icon name="placeholder"></mlv-icon> yellow-nova</mlv-badge>
-  <mlv-badge color="brand-green"><mlv-icon name="placeholder"></mlv-icon> brand-green</mlv-badge>
+  <nve-badge color="red-cardinal"><nve-icon name="placeholder"></nve-icon> red-cardinal</nve-badge>
+  <nve-badge color="gray-slate"><nve-icon name="placeholder"></nve-icon> gray-slate</nve-badge>
+  <nve-badge color="gray-denim"><nve-icon name="placeholder"></nve-icon> gray-denim</nve-badge>
+  <nve-badge color="blue-indigo"><nve-icon name="placeholder"></nve-icon> blue-indigo</nve-badge>
+  <nve-badge color="blue-cobalt"><nve-icon name="placeholder"></nve-icon> blue-cobalt</nve-badge>
+  <nve-badge color="blue-sky"><nve-icon name="placeholder"></nve-icon> blue-sky</nve-badge>
+  <nve-badge color="teal-cyan"><nve-icon name="placeholder"></nve-icon> teal-cyan</nve-badge>
+  <nve-badge color="green-mint"><nve-icon name="placeholder"></nve-icon> green-mint</nve-badge>
+  <nve-badge color="teal-seafoam"><nve-icon name="placeholder"></nve-icon> teal-seafoam</nve-badge>
+  <nve-badge color="green-grass"><nve-icon name="placeholder"></nve-icon> green-grass</nve-badge>
+  <nve-badge color="yellow-amber"><nve-icon name="placeholder"></nve-icon> yellow-amber</nve-badge>
+  <nve-badge color="orange-pumpkin"><nve-icon name="placeholder"></nve-icon> orange-pumpkin</nve-badge>
+  <nve-badge color="red-tomato"><nve-icon name="placeholder"></nve-icon> red-tomato</nve-badge>
+  <nve-badge color="pink-magenta"><nve-icon name="placeholder"></nve-icon> pink-magenta</nve-badge>
+  <nve-badge color="purple-plum"><nve-icon name="placeholder"></nve-icon> purple-plum</nve-badge>
+  <nve-badge color="purple-violet"><nve-icon name="placeholder"></nve-icon> purple-violet</nve-badge>
+  <nve-badge color="purple-lavender"><nve-icon name="placeholder"></nve-icon> purple-lavender</nve-badge>
+  <nve-badge color="pink-rose"><nve-icon name="placeholder"></nve-icon> pink-rose</nve-badge>
+  <nve-badge color="green-jade"><nve-icon name="placeholder"></nve-icon> green-jade</nve-badge>
+  <nve-badge color="lime-pear"><nve-icon name="placeholder"></nve-icon> lime-pear</nve-badge>
+  <nve-badge color="yellow-nova"><nve-icon name="placeholder"></nve-icon> yellow-nova</nve-badge>
+  <nve-badge color="brand-green"><nve-icon name="placeholder"></nve-icon> brand-green</nve-badge>
 </div>
   `
 };
@@ -156,28 +156,28 @@ export const Color = {
 export const Prominence = {
   render: () => html`
 <div nve-layout="row gap:sm align:wrap">
-  <mlv-badge prominence="emphasis" color="red-cardinal"><mlv-icon name="placeholder"></mlv-icon> red-cardinal</mlv-badge>
-  <mlv-badge prominence="emphasis" color="gray-slate"><mlv-icon name="placeholder"></mlv-icon> gray-slate</mlv-badge>
-  <mlv-badge prominence="emphasis" color="gray-denim"><mlv-icon name="placeholder"></mlv-icon> gray-denim</mlv-badge>
-  <mlv-badge prominence="emphasis" color="blue-indigo"><mlv-icon name="placeholder"></mlv-icon> blue-indigo</mlv-badge>
-  <mlv-badge prominence="emphasis" color="blue-cobalt"><mlv-icon name="placeholder"></mlv-icon> blue-cobalt</mlv-badge>
-  <mlv-badge prominence="emphasis" color="blue-sky"><mlv-icon name="placeholder"></mlv-icon> blue-sky</mlv-badge>
-  <mlv-badge prominence="emphasis" color="teal-cyan"><mlv-icon name="placeholder"></mlv-icon> teal-cyan</mlv-badge>
-  <mlv-badge prominence="emphasis" color="green-mint"><mlv-icon name="placeholder"></mlv-icon> green-mint</mlv-badge>
-  <mlv-badge prominence="emphasis" color="teal-seafoam"><mlv-icon name="placeholder"></mlv-icon> teal-seafoam</mlv-badge>
-  <mlv-badge prominence="emphasis" color="green-grass"><mlv-icon name="placeholder"></mlv-icon> green-grass</mlv-badge>
-  <mlv-badge prominence="emphasis" color="yellow-amber"><mlv-icon name="placeholder"></mlv-icon> yellow-amber</mlv-badge>
-  <mlv-badge prominence="emphasis" color="orange-pumpkin"><mlv-icon name="placeholder"></mlv-icon> orange-pumpkin</mlv-badge>
-  <mlv-badge prominence="emphasis" color="red-tomato"><mlv-icon name="placeholder"></mlv-icon> red-tomato</mlv-badge>
-  <mlv-badge prominence="emphasis" color="pink-magenta"><mlv-icon name="placeholder"></mlv-icon> pink-magenta</mlv-badge>
-  <mlv-badge prominence="emphasis" color="purple-plum"><mlv-icon name="placeholder"></mlv-icon> purple-plum</mlv-badge>
-  <mlv-badge prominence="emphasis" color="purple-violet"><mlv-icon name="placeholder"></mlv-icon> purple-violet</mlv-badge>
-  <mlv-badge prominence="emphasis" color="purple-lavender"><mlv-icon name="placeholder"></mlv-icon> purple-lavender</mlv-badge>
-  <mlv-badge prominence="emphasis" color="pink-rose"><mlv-icon name="placeholder"></mlv-icon> pink-rose</mlv-badge>
-  <mlv-badge prominence="emphasis" color="green-jade"><mlv-icon name="placeholder"></mlv-icon> green-jade</mlv-badge>
-  <mlv-badge prominence="emphasis" color="lime-pear"><mlv-icon name="placeholder"></mlv-icon> lime-pear</mlv-badge>
-  <mlv-badge prominence="emphasis" color="yellow-nova"><mlv-icon name="placeholder"></mlv-icon> yellow-nova</mlv-badge>
-  <mlv-badge prominence="emphasis" color="brand-green"><mlv-icon name="placeholder"></mlv-icon> brand-green</mlv-badge>
+  <nve-badge prominence="emphasis" color="red-cardinal"><nve-icon name="placeholder"></nve-icon> red-cardinal</nve-badge>
+  <nve-badge prominence="emphasis" color="gray-slate"><nve-icon name="placeholder"></nve-icon> gray-slate</nve-badge>
+  <nve-badge prominence="emphasis" color="gray-denim"><nve-icon name="placeholder"></nve-icon> gray-denim</nve-badge>
+  <nve-badge prominence="emphasis" color="blue-indigo"><nve-icon name="placeholder"></nve-icon> blue-indigo</nve-badge>
+  <nve-badge prominence="emphasis" color="blue-cobalt"><nve-icon name="placeholder"></nve-icon> blue-cobalt</nve-badge>
+  <nve-badge prominence="emphasis" color="blue-sky"><nve-icon name="placeholder"></nve-icon> blue-sky</nve-badge>
+  <nve-badge prominence="emphasis" color="teal-cyan"><nve-icon name="placeholder"></nve-icon> teal-cyan</nve-badge>
+  <nve-badge prominence="emphasis" color="green-mint"><nve-icon name="placeholder"></nve-icon> green-mint</nve-badge>
+  <nve-badge prominence="emphasis" color="teal-seafoam"><nve-icon name="placeholder"></nve-icon> teal-seafoam</nve-badge>
+  <nve-badge prominence="emphasis" color="green-grass"><nve-icon name="placeholder"></nve-icon> green-grass</nve-badge>
+  <nve-badge prominence="emphasis" color="yellow-amber"><nve-icon name="placeholder"></nve-icon> yellow-amber</nve-badge>
+  <nve-badge prominence="emphasis" color="orange-pumpkin"><nve-icon name="placeholder"></nve-icon> orange-pumpkin</nve-badge>
+  <nve-badge prominence="emphasis" color="red-tomato"><nve-icon name="placeholder"></nve-icon> red-tomato</nve-badge>
+  <nve-badge prominence="emphasis" color="pink-magenta"><nve-icon name="placeholder"></nve-icon> pink-magenta</nve-badge>
+  <nve-badge prominence="emphasis" color="purple-plum"><nve-icon name="placeholder"></nve-icon> purple-plum</nve-badge>
+  <nve-badge prominence="emphasis" color="purple-violet"><nve-icon name="placeholder"></nve-icon> purple-violet</nve-badge>
+  <nve-badge prominence="emphasis" color="purple-lavender"><nve-icon name="placeholder"></nve-icon> purple-lavender</nve-badge>
+  <nve-badge prominence="emphasis" color="pink-rose"><nve-icon name="placeholder"></nve-icon> pink-rose</nve-badge>
+  <nve-badge prominence="emphasis" color="green-jade"><nve-icon name="placeholder"></nve-icon> green-jade</nve-badge>
+  <nve-badge prominence="emphasis" color="lime-pear"><nve-icon name="placeholder"></nve-icon> lime-pear</nve-badge>
+  <nve-badge prominence="emphasis" color="yellow-nova"><nve-icon name="placeholder"></nve-icon> yellow-nova</nve-badge>
+  <nve-badge prominence="emphasis" color="brand-green"><nve-icon name="placeholder"></nve-icon> brand-green</nve-badge>
 </div>
   `
 };
@@ -185,34 +185,34 @@ export const Prominence = {
 export const Flat = {
   render: () => html`
 <div nve-layout="row gap:sm align:wrap">
-  <mlv-badge container="flat" color="red-cardinal"><mlv-icon name="placeholder"></mlv-icon> red-cardinal</mlv-badge>
-  <mlv-badge container="flat" color="gray-slate"><mlv-icon name="placeholder"></mlv-icon> gray-slate</mlv-badge>
-  <mlv-badge container="flat" color="gray-denim"><mlv-icon name="placeholder"></mlv-icon> gray-denim</mlv-badge>
-  <mlv-badge container="flat" color="blue-indigo"><mlv-icon name="placeholder"></mlv-icon> blue-indigo</mlv-badge>
-  <mlv-badge container="flat" color="blue-cobalt"><mlv-icon name="placeholder"></mlv-icon> blue-cobalt</mlv-badge>
-  <mlv-badge container="flat" color="blue-sky"><mlv-icon name="placeholder"></mlv-icon> blue-sky</mlv-badge>
-  <mlv-badge container="flat" color="teal-cyan"><mlv-icon name="placeholder"></mlv-icon> teal-cyan</mlv-badge>
-  <mlv-badge container="flat" color="green-mint"><mlv-icon name="placeholder"></mlv-icon> green-mint</mlv-badge>
-  <mlv-badge container="flat" color="teal-seafoam"><mlv-icon name="placeholder"></mlv-icon> teal-seafoam</mlv-badge>
-  <mlv-badge container="flat" color="green-grass"><mlv-icon name="placeholder"></mlv-icon> green-grass</mlv-badge>
-  <mlv-badge container="flat" color="yellow-amber"><mlv-icon name="placeholder"></mlv-icon> yellow-amber</mlv-badge>
-  <mlv-badge container="flat" color="orange-pumpkin"><mlv-icon name="placeholder"></mlv-icon> orange-pumpkin</mlv-badge>
-  <mlv-badge container="flat" color="red-tomato"><mlv-icon name="placeholder"></mlv-icon> red-tomato</mlv-badge>
-  <mlv-badge container="flat" color="pink-magenta"><mlv-icon name="placeholder"></mlv-icon> pink-magenta</mlv-badge>
-  <mlv-badge container="flat" color="purple-plum"><mlv-icon name="placeholder"></mlv-icon> purple-plum</mlv-badge>
-  <mlv-badge container="flat" color="purple-violet"><mlv-icon name="placeholder"></mlv-icon> purple-violet</mlv-badge>
-  <mlv-badge container="flat" color="purple-lavender"><mlv-icon name="placeholder"></mlv-icon> purple-lavender</mlv-badge>
-  <mlv-badge container="flat" color="pink-rose"><mlv-icon name="placeholder"></mlv-icon> pink-rose</mlv-badge>
-  <mlv-badge container="flat" color="green-jade"><mlv-icon name="placeholder"></mlv-icon> green-jade</mlv-badge>
-  <mlv-badge container="flat" color="lime-pear"><mlv-icon name="placeholder"></mlv-icon> lime-pear</mlv-badge>
-  <mlv-badge container="flat" color="yellow-nova"><mlv-icon name="placeholder"></mlv-icon> yellow-nova</mlv-badge>
-  <mlv-badge container="flat" color="brand-green"><mlv-icon name="placeholder"></mlv-icon> brand-green</mlv-badge>
+  <nve-badge container="flat" color="red-cardinal"><nve-icon name="placeholder"></nve-icon> red-cardinal</nve-badge>
+  <nve-badge container="flat" color="gray-slate"><nve-icon name="placeholder"></nve-icon> gray-slate</nve-badge>
+  <nve-badge container="flat" color="gray-denim"><nve-icon name="placeholder"></nve-icon> gray-denim</nve-badge>
+  <nve-badge container="flat" color="blue-indigo"><nve-icon name="placeholder"></nve-icon> blue-indigo</nve-badge>
+  <nve-badge container="flat" color="blue-cobalt"><nve-icon name="placeholder"></nve-icon> blue-cobalt</nve-badge>
+  <nve-badge container="flat" color="blue-sky"><nve-icon name="placeholder"></nve-icon> blue-sky</nve-badge>
+  <nve-badge container="flat" color="teal-cyan"><nve-icon name="placeholder"></nve-icon> teal-cyan</nve-badge>
+  <nve-badge container="flat" color="green-mint"><nve-icon name="placeholder"></nve-icon> green-mint</nve-badge>
+  <nve-badge container="flat" color="teal-seafoam"><nve-icon name="placeholder"></nve-icon> teal-seafoam</nve-badge>
+  <nve-badge container="flat" color="green-grass"><nve-icon name="placeholder"></nve-icon> green-grass</nve-badge>
+  <nve-badge container="flat" color="yellow-amber"><nve-icon name="placeholder"></nve-icon> yellow-amber</nve-badge>
+  <nve-badge container="flat" color="orange-pumpkin"><nve-icon name="placeholder"></nve-icon> orange-pumpkin</nve-badge>
+  <nve-badge container="flat" color="red-tomato"><nve-icon name="placeholder"></nve-icon> red-tomato</nve-badge>
+  <nve-badge container="flat" color="pink-magenta"><nve-icon name="placeholder"></nve-icon> pink-magenta</nve-badge>
+  <nve-badge container="flat" color="purple-plum"><nve-icon name="placeholder"></nve-icon> purple-plum</nve-badge>
+  <nve-badge container="flat" color="purple-violet"><nve-icon name="placeholder"></nve-icon> purple-violet</nve-badge>
+  <nve-badge container="flat" color="purple-lavender"><nve-icon name="placeholder"></nve-icon> purple-lavender</nve-badge>
+  <nve-badge container="flat" color="pink-rose"><nve-icon name="placeholder"></nve-icon> pink-rose</nve-badge>
+  <nve-badge container="flat" color="green-jade"><nve-icon name="placeholder"></nve-icon> green-jade</nve-badge>
+  <nve-badge container="flat" color="lime-pear"><nve-icon name="placeholder"></nve-icon> lime-pear</nve-badge>
+  <nve-badge container="flat" color="yellow-nova"><nve-icon name="placeholder"></nve-icon> yellow-nova</nve-badge>
+  <nve-badge container="flat" color="brand-green"><nve-icon name="placeholder"></nve-icon> brand-green</nve-badge>
 </div>
   `
 };
 
 export const Overflow = {
   render: () => html`
-  <mlv-badge status="pending" style="--width: 150px">some really long content</mlv-badge>
+  <nve-badge status="pending" style="--width: 150px">some really long content</nve-badge>
   `
 };

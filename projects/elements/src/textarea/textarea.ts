@@ -4,7 +4,7 @@ import { Control } from '@nvidia-elements/core/forms';
 import styles from './textarea.css?inline';
 
 /**
- * @element mlv-textarea
+ * @element nve-textarea
  * @description A textarea is a control that enables users to enter and edit text.
  * @since 0.3.0
  * @cssprop --padding

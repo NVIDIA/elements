@@ -22,7 +22,7 @@ import '@nvidia-elements/core/progress-ring/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 /**
- * @element mlv-steps-item
+ * @element nve-steps-item
  * @since 0.30.0
  * @slot - default slot for step text
  * @slot status-icon - custom slotted step icon
@@ -94,7 +94,7 @@ export class StepsItem extends BaseButton {
 }
 
 /**
- * @element mlv-steps
+ * @element nve-steps
  * @description Steps enables a multi-step workflow allowing a user to complete a goal in a specific sequence.
  * @since 0.30.0
  * @slot - default slot for steps-item

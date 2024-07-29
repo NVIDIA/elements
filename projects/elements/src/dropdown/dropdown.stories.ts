@@ -13,14 +13,14 @@ import '@nvidia-elements/core/icon/define.js';
 
 export default {
   title: 'Elements/Dropdown/Examples',
-  component: 'mlv-dropdown'
+  component: 'nve-dropdown'
 };
 
 export const Default = {
   render: () => html`
     <div style="height: 250px; width: 100%; display: flex; align-items:center; justify-content: center;">
-      <mlv-dropdown anchor="btn"><p nve-text="body">dropdown content</p></mlv-dropdown>
-      <mlv-button id="btn">button</mlv-button>
+      <nve-dropdown anchor="btn"><p nve-text="body">dropdown content</p></nve-dropdown>
+      <nve-button id="btn">button</nve-button>
     </div>
   `
 };
@@ -28,12 +28,12 @@ export const Default = {
 export const Interactive = {
   inline: false,
   render: () => html`
-<mlv-button id="dropdown-btn">open</mlv-button>
-<mlv-dropdown anchor="dropdown-btn" trigger="dropdown-btn" hidden>
+<nve-button id="dropdown-btn">open</nve-button>
+<nve-dropdown anchor="dropdown-btn" trigger="dropdown-btn" hidden>
   <p nve-text="body">hello there</p>
-</mlv-dropdown>
+</nve-dropdown>
 <script>
-  const dropdown = document.querySelector('mlv-dropdown');
+  const dropdown = document.querySelector('nve-dropdown');
   dropdown.addEventListener('open', () => dropdown.hidden = false);
   dropdown.addEventListener('close', () => dropdown.hidden = true);
 </script>
@@ -43,14 +43,14 @@ export const Interactive = {
 export const DynamicTrigger = {
   render: () => html`
 <div id="dynamic-trigger-demo" nve-layout="row align:center" style="height: 250px">
-  <mlv-dropdown behavior-trigger hidden>hello there</mlv-dropdown>
-  <mlv-button>button</mlv-button>
-  <mlv-button>button</mlv-button>
-  <mlv-button>button</mlv-button>
+  <nve-dropdown behavior-trigger hidden>hello there</nve-dropdown>
+  <nve-button>button</nve-button>
+  <nve-button>button</nve-button>
+  <nve-button>button</nve-button>
   <script type="module">
-    const dropdown = document.querySelector('#dynamic-trigger-demo mlv-dropdown');
+    const dropdown = document.querySelector('#dynamic-trigger-demo nve-dropdown');
     document.querySelector('#dynamic-trigger-demo').addEventListener('mousedown', e => {
-      if (e.target.tagName === 'MLV-BUTTON') {
+      if (e.target.tagName === 'NVE-BUTTON') {
         dropdown.anchor = e.target;
         dropdown.trigger = e.target;
       }
@@ -63,48 +63,48 @@ export const DynamicTrigger = {
 export const BehaviorTrigger = {
   inline: false,
   render: () => html`
-<mlv-button id="dropdown-btn">open</mlv-button>
-<mlv-dropdown anchor="dropdown-btn" trigger="dropdown-btn" behavior-trigger hidden>
+<nve-button id="dropdown-btn">open</nve-button>
+<nve-dropdown anchor="dropdown-btn" trigger="dropdown-btn" behavior-trigger hidden>
   <p nve-text="body">hello there</p>
-</mlv-dropdown>
+</nve-dropdown>
   `
 };
 
 export const Content = {
   render: () => html`
-<mlv-dropdown anchor="btn">
-  <mlv-search rounded>
+<nve-dropdown anchor="btn">
+  <nve-search rounded>
     <input type="search" placeholder="Search" />
-  </mlv-search>
-  <mlv-alert>some text content in a dropdown</mlv-alert>
-</mlv-dropdown>
-<mlv-button id="btn">button</mlv-button>
+  </nve-search>
+  <nve-alert>some text content in a dropdown</nve-alert>
+</nve-dropdown>
+<nve-button id="btn">button</nve-button>
   `
 };
 
 export const RadioGroup = {
   render: () => html`
-<mlv-dropdown anchor="btn">
-  <mlv-radio-group style="width: 250px">
+<nve-dropdown anchor="btn">
+  <nve-radio-group style="width: 250px">
     <label>Sort By</label>
-    <mlv-radio>
+    <nve-radio>
       <label>Completed</label>
       <input type="radio" checked />
-      <mlv-control-message>latest completed tasks</mlv-control-message>
-    </mlv-radio>
-    <mlv-radio>
+      <nve-control-message>latest completed tasks</nve-control-message>
+    </nve-radio>
+    <nve-radio>
       <label>Failing</label>
       <input type="radio" />
-      <mlv-control-message>latest failing tasks</mlv-control-message>
-    </mlv-radio>
-    <mlv-radio>
+      <nve-control-message>latest failing tasks</nve-control-message>
+    </nve-radio>
+    <nve-radio>
       <label>Status</label>
       <input type="radio" />
-      <mlv-control-message>task status priority</mlv-control-message>
-    </mlv-radio>
-  </mlv-radio-group>
-</mlv-dropdown>
-<mlv-button id="btn" mlv-control>completed <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
+      <nve-control-message>task status priority</nve-control-message>
+    </nve-radio>
+  </nve-radio-group>
+</nve-dropdown>
+<nve-button id="btn" nve-control>completed <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
   `
 };
 
@@ -121,18 +121,18 @@ class RadioGroupInteractiveDemo extends LitElement {
 
   render() {
     return html`
-<mlv-button id="btn" mlv-control>${this.selected.label} <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
-<mlv-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
-  <mlv-radio-group style="width: 250px">
+<nve-button id="btn" nve-control>${this.selected.label} <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
+<nve-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
+  <nve-radio-group style="width: 250px">
     <label>Sort By</label>
     ${options.map(option => html`
-    <mlv-radio @pointerup=${() => this.show = false}>
+    <nve-radio @pointerup=${() => this.show = false}>
       <label>${option.label}</label>
       <input type="radio" .value=${option.id} ?checked=${option.id === this.selected.id} @input=${() => this.selected = option} />
-      <mlv-control-message>${option.message}</mlv-control-message>
-    </mlv-radio>`)}
-  </mlv-radio-group>
-</mlv-dropdown>
+      <nve-control-message>${option.message}</nve-control-message>
+    </nve-radio>`)}
+  </nve-radio-group>
+</nve-dropdown>
     `
   }
 }
@@ -143,24 +143,24 @@ export function RadioGroupInteractive() {
 
 export const CheckboxGroup = {
   render: () => html`
-<mlv-dropdown anchor="btn">
-  <mlv-checkbox-group style="width: 250px">
+<nve-dropdown anchor="btn">
+  <nve-checkbox-group style="width: 250px">
     <label>Test Suites</label>
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>Local</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-    <mlv-checkbox>
+    </nve-checkbox>
+    <nve-checkbox>
       <label>Nightly</label>
       <input type="checkbox" checked />
-    </mlv-checkbox>
-    <mlv-checkbox>
+    </nve-checkbox>
+    <nve-checkbox>
       <label>Remote</label>
       <input type="checkbox" />
-    </mlv-checkbox>
-  </mlv-checkbox-group>
-</mlv-dropdown>
-<mlv-button id="btn" mlv-control>test suites <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
+    </nve-checkbox>
+  </nve-checkbox-group>
+</nve-dropdown>
+<nve-button id="btn" nve-control>test suites <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
   `
 };
 
@@ -177,18 +177,18 @@ class CheckboxGroupInteractiveDemo extends LitElement { /* eslint no-unused-vars
 
   render() {
     return html`
-<mlv-button id="btn" mlv-control>test suites <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
-<mlv-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
-  <mlv-checkbox-group style="width: 250px">
+<nve-button id="btn" nve-control>test suites <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
+<nve-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
+  <nve-checkbox-group style="width: 250px">
     <label>Sort By</label>
     ${checkboxes.map(checkbox => html`
-    <mlv-checkbox>
+    <nve-checkbox>
       <label>${checkbox.label}</label>
       <input type="checkbox" .value=${checkbox.id} ?checked=${this.suites[checkbox.id]} @input=${e => this.suites = { ...this.suites, [checkbox.id]: e.target.checked }} />
-      <mlv-control-message>${checkbox.message}</mlv-control-message>
-    </mlv-checkbox>`)}
-  </mlv-checkbox-group>
-</mlv-dropdown>
+      <nve-control-message>${checkbox.message}</nve-control-message>
+    </nve-checkbox>`)}
+  </nve-checkbox-group>
+</nve-dropdown>
 <pre>${checkboxes.map(c => html`${c.label}: ${this.suites[c.id]}\n`)}</pre>
     `
   }
@@ -200,85 +200,85 @@ export const CheckboxGroupInteractive = {
 
 export const Closable = {
   render: () => html`
-<mlv-dropdown anchor="btn" closable>
+<nve-dropdown anchor="btn" closable>
   <h3 nve-text="label">Title</h3>
   <p nve-text="body">some text content in a closable dropdown</p>
-</mlv-dropdown>
-<mlv-button id="btn">button</mlv-button>
+</nve-dropdown>
+<nve-button id="btn">button</nve-button>
   `
 };
 
 export const Arrow = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 200px">
-  <mlv-dropdown anchor="btn" arrow>
+  <nve-dropdown anchor="btn" arrow>
     <h3 nve-text="label">Title</h3>
     <p nve-text="body">some text content in a closable dropdown</p>
-  </mlv-dropdown>
-  <mlv-button id="btn">button</mlv-button>
+  </nve-dropdown>
+  <nve-button id="btn">button</nve-button>
 </div>
   `
 };
 
 export const Position = {
   render: () => html`
-<div mlv-theme nve-layout="row align:center" style="width: 100%; height: 400px;">
-  <mlv-dropdown anchor="card" position="top" alignment="center" closable>
+<div nve-theme nve-layout="row align:center" style="width: 100%; height: 400px;">
+  <nve-dropdown anchor="card" position="top" alignment="center" closable>
     <h3 nve-text="label">Top</h3>
     <p nve-text="body">dropdown positioned top</p>
-  </mlv-dropdown>
-  <mlv-dropdown anchor="card" position="right" alignment="center" closable>
+  </nve-dropdown>
+  <nve-dropdown anchor="card" position="right" alignment="center" closable>
     <h3 nve-text="label">Right</h3>
     <p nve-text="body">dropdown positioned right</p>
-  </mlv-dropdown>
-  <mlv-dropdown anchor="card" position="bottom" alignment="center" closable>
+  </nve-dropdown>
+  <nve-dropdown anchor="card" position="bottom" alignment="center" closable>
     <h3 nve-text="label">Bottom</h3>
     <p nve-text="body">dropdown positioned bottom</p>
-  </mlv-dropdown>
-  <mlv-dropdown anchor="card" position="left" alignment="center" closable>
+  </nve-dropdown>
+  <nve-dropdown anchor="card" position="left" alignment="center" closable>
     <h3 nve-text="label">Left</h3>
     <p nve-text="body">dropdown positioned left</p>
-  </mlv-dropdown>
-  <mlv-card id="card" style="width: 250px; height: 200px;"></mlv-card>
+  </nve-dropdown>
+  <nve-card id="card" style="width: 250px; height: 200px;"></nve-card>
 </div>
   `
 };
 
 export const Alignment = {
   render: () => html`
-<div mlv-theme nve-layout="row align:center">
-  <mlv-dropdown anchor="card" position="top" alignment="start">top start</mlv-dropdown>
-  <mlv-dropdown anchor="card" position="top" alignment="center">top center</mlv-dropdown>
-  <mlv-dropdown anchor="card" position="top" alignment="end">top end</mlv-dropdown>
+<div nve-theme nve-layout="row align:center">
+  <nve-dropdown anchor="card" position="top" alignment="start">top start</nve-dropdown>
+  <nve-dropdown anchor="card" position="top" alignment="center">top center</nve-dropdown>
+  <nve-dropdown anchor="card" position="top" alignment="end">top end</nve-dropdown>
 
-  <mlv-dropdown anchor="card" position="right" alignment="start">right start</mlv-dropdown>
-  <mlv-dropdown anchor="card" position="right" alignment="center">right center</mlv-dropdown>
-  <mlv-dropdown anchor="card" position="right" alignment="end">right end</mlv-dropdown>
+  <nve-dropdown anchor="card" position="right" alignment="start">right start</nve-dropdown>
+  <nve-dropdown anchor="card" position="right" alignment="center">right center</nve-dropdown>
+  <nve-dropdown anchor="card" position="right" alignment="end">right end</nve-dropdown>
 
-  <mlv-dropdown anchor="card" position="bottom" alignment="start">bottom start</mlv-dropdown>
-  <mlv-dropdown anchor="card" position="bottom" alignment="center">bottom center</mlv-dropdown>
-  <mlv-dropdown anchor="card" position="bottom" alignment="end">bottom end</mlv-dropdown>
+  <nve-dropdown anchor="card" position="bottom" alignment="start">bottom start</nve-dropdown>
+  <nve-dropdown anchor="card" position="bottom" alignment="center">bottom center</nve-dropdown>
+  <nve-dropdown anchor="card" position="bottom" alignment="end">bottom end</nve-dropdown>
 
-  <mlv-dropdown anchor="card" position="left" alignment="start">left start</mlv-dropdown>
-  <mlv-dropdown anchor="card" position="left" alignment="center">left center</mlv-dropdown>
-  <mlv-dropdown anchor="card" position="left" alignment="end">left end</mlv-dropdown>
+  <nve-dropdown anchor="card" position="left" alignment="start">left start</nve-dropdown>
+  <nve-dropdown anchor="card" position="left" alignment="center">left center</nve-dropdown>
+  <nve-dropdown anchor="card" position="left" alignment="end">left end</nve-dropdown>
 
-  <mlv-card id="card" style="width: 450px; height: 300px;"></mlv-card>
+  <nve-card id="card" style="width: 450px; height: 300px;"></nve-card>
 </div>
   `
 };
 
 export const HeaderFooter = {
   render: () => html `
-<mlv-dropdown anchor="btn" closable>
-  <mlv-dropdown-header>
+<nve-dropdown anchor="btn" closable>
+  <nve-dropdown-header>
     <h3 nve-text="heading semibold sm">heading</h3>
-  </mlv-dropdown-header>
+  </nve-dropdown-header>
   <p nve-text="body">some text content in a closable dropdown</p>
-  <mlv-dropdown-footer>
+  <nve-dropdown-footer>
     <p nve-text="body">footer</p>
-  </mlv-dropdown-footer>
-</mlv-dropdown>
-<mlv-button id="btn">button</mlv-button>
+  </nve-dropdown-footer>
+</nve-dropdown>
+<nve-button id="btn">button</nve-button>
 `
 }

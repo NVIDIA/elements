@@ -11,19 +11,19 @@ import '@nvidia-elements/core/menu/define.js';
 
 export default {
   title: 'Elements/Breadcrumb/Examples',
-  component: 'mlv-breadcrumb',
+  component: 'nve-breadcrumb',
 };
 
 /* eslint-disable */
 export const Default = {
   render: () => html`
     <div nve-layout="row align:center">
-      <mlv-breadcrumb>
-        <mlv-button><a href="#" target="_self">Item 1</a></mlv-button>
-        <mlv-button><a href="#" target="_self">Item 2</a></mlv-button>
-        <mlv-button><a href="#" target="_self">Item 3</a></mlv-button>
+      <nve-breadcrumb>
+        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 3</a></nve-button>
         <span>You Are Here</span>
-      </mlv-breadcrumb>
+      </nve-breadcrumb>
     </div>
   `
 };
@@ -31,12 +31,12 @@ export const Default = {
 export const WithIconButton = {
   render: () => html`
     <div nve-layout="row align:center">
-      <mlv-breadcrumb>
-        <mlv-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></mlv-icon-button>
-        <mlv-button><a href="#" target="_self">Item 1</a></mlv-button>
-        <mlv-button><a href="#" target="_self">Item 2</a></mlv-button>
+      <nve-breadcrumb>
+        <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
+        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
         <span>You Are Here</span>
-      </mlv-breadcrumb>
+      </nve-breadcrumb>
     </div>
   `
 };
@@ -48,23 +48,23 @@ class BreadcrumbMenuDemo extends LitElement {
   render() {
     const ddownId = "more-links";
     return html`
-<mlv-breadcrumb>
-  <mlv-icon-button id=${ddownId + '-btn'} @click=${() => this.menuHidden = false} icon-name="more-actions"></mlv-icon-button>
-  <mlv-button><a href="#" target="_self">Item 4</a></mlv-button>
-  <mlv-button><a href="#" target="_self">Item 5</a></mlv-button>
+<nve-breadcrumb>
+  <nve-icon-button id=${ddownId + '-btn'} @click=${() => this.menuHidden = false} icon-name="more-actions"></nve-icon-button>
+  <nve-button><a href="#" target="_self">Item 4</a></nve-button>
+  <nve-button><a href="#" target="_self">Item 5</a></nve-button>
   <span>You Are Here</span>
-</mlv-breadcrumb>
-<mlv-dropdown id=${ddownId}
+</nve-breadcrumb>
+<nve-dropdown id=${ddownId}
   anchor=${ddownId + '-btn'}
   .hidden=${this.menuHidden}
   @close=${() => this.menuHidden = true}
   arrow>
-  <mlv-menu>
-    <mlv-menu-item>Item 1</mlv-menu-item>
-    <mlv-menu-item>Item 2</mlv-menu-item>
-    <mlv-menu-item>Item 3</mlv-menu-item>
-  </mlv-menu>
-</mlv-dropdown>
+  <nve-menu>
+    <nve-menu-item>Item 1</nve-menu-item>
+    <nve-menu-item>Item 2</nve-menu-item>
+    <nve-menu-item>Item 3</nve-menu-item>
+  </nve-menu>
+</nve-dropdown>
 `
   }
 }
@@ -77,26 +77,26 @@ export const WithMenu = {
 
 export const LightTheme = {
   render: () => html`
-    <div mlv-theme="root light" nve-layout="pad:lg">
-      <mlv-breadcrumb>
-        <mlv-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></mlv-icon-button>
-        <mlv-button><a href="#" target="_self">Item 1</a></mlv-button>
-        <mlv-button><a href="#" target="_self">Item 2</a></mlv-button>
+    <div nve-theme="root light" nve-layout="pad:lg">
+      <nve-breadcrumb>
+        <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
+        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
         <span>You Are Here</span>
-      </mlv-breadcrumb>
+      </nve-breadcrumb>
     </div>
   `
 }
 
 export const DarkTheme = {
   render: () => html`
-    <div mlv-theme="root dark" nve-layout="pad:lg">
-      <mlv-breadcrumb>
-        <mlv-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></mlv-icon-button>
-        <mlv-button><a href="#" target="_self">Item 1</a></mlv-button>
-        <mlv-button><a href="#" target="_self">Item 2</a></mlv-button>
+    <div nve-theme="root dark" nve-layout="pad:lg">
+      <nve-breadcrumb>
+        <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
+        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
         <span>You Are Here</span>
-      </mlv-breadcrumb>
+      </nve-breadcrumb>
     </div>
   `
 }

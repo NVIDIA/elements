@@ -4,124 +4,124 @@ import '@nvidia-elements/core/switch/define.js';
 
 export default {
   title: 'Elements/Switch/Examples',
-  component: 'mlv-switch',
+  component: 'nve-switch',
 };
 
 export const Switch = () => {
   return html`
-<mlv-switch>
+<nve-switch>
   <label>label</label>
   <input type="checkbox" />
-</mlv-switch>`
+</nve-switch>`
 };
 
 export const States = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-switch>
+  <nve-switch>
     <label>label</label>
     <input type="checkbox" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch>
 
-  <mlv-switch>
+  <nve-switch>
     <label>disabled</label>
     <input type="checkbox" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch>
 
-  <mlv-switch>
+  <nve-switch>
     <label>success</label>
     <input type="checkbox" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-switch>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-switch>
 
-  <mlv-switch>
+  <nve-switch>
     <label>error</label>
     <input type="checkbox" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-switch>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-switch>
 </div>`
 };
 
 export const VerticalGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-switch-group>
+  <nve-switch-group>
     <label>label</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group>
+  <nve-switch-group>
     <label>disabled</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked disabled />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" disabled />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" disabled />
-    </mlv-switch>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group>
+  <nve-switch-group>
     <label>success</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group>
+  <nve-switch-group>
     <label>error</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-switch-group>
 </div>
 `
 };
@@ -129,81 +129,81 @@ export const VerticalGroup = () => {
 export const VerticalInlineGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-switch-group layout="vertical-inline">
+  <nve-switch-group layout="vertical-inline">
     <label>label</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group layout="vertical-inline">
+  <nve-switch-group layout="vertical-inline">
     <label>disabled</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked disabled />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" disabled />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" disabled />
-    </mlv-switch>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group layout="vertical-inline">
+  <nve-switch-group layout="vertical-inline">
     <label>success</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group layout="vertical-inline">
+  <nve-switch-group layout="vertical-inline">
     <label>error</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-switch-group>
 </div>
 `
 };
@@ -211,81 +211,81 @@ export const VerticalInlineGroup = () => {
 export const HorizontalGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-switch-group layout="horizontal">
+  <nve-switch-group layout="horizontal">
     <label>label</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group layout="horizontal">
+  <nve-switch-group layout="horizontal">
     <label>disabled</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked disabled />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" disabled />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" disabled />
-    </mlv-switch>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group layout="horizontal">
+  <nve-switch-group layout="horizontal">
     <label>success</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group layout="horizontal">
+  <nve-switch-group layout="horizontal">
     <label>error</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-switch-group>
 </div>
 `
 };
@@ -293,81 +293,81 @@ export const HorizontalGroup = () => {
 export const HorizontalInlineGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-switch-group layout="horizontal-inline">
+  <nve-switch-group layout="horizontal-inline">
     <label>label</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group layout="horizontal-inline">
+  <nve-switch-group layout="horizontal-inline">
     <label>disabled</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked disabled />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" disabled />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" disabled />
-    </mlv-switch>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group layout="horizontal-inline">
+  <nve-switch-group layout="horizontal-inline">
     <label>success</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-switch-group>
 
-  <mlv-switch-group layout="horizontal-inline">
+  <nve-switch-group layout="horizontal-inline">
     <label>error</label>
-    <mlv-switch>
+    <nve-switch>
       <label>switch 1</label>
       <input type="checkbox" checked />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 2</label>
       <input type="checkbox" />
-    </mlv-switch>
+    </nve-switch>
 
-    <mlv-switch>
+    <nve-switch>
       <label>switch 3</label>
       <input type="checkbox" />
-    </mlv-switch>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-switch-group>
+    </nve-switch>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-switch-group>
 </div>
 `
 };

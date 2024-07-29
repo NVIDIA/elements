@@ -4,25 +4,25 @@ import '@nvidia-elements/core/color/define.js';
 
 export default {
   title: 'Elements/Color/Examples',
-  component: 'mlv-color',
+  component: 'nve-color',
 };
 
 export const Color = {
   render: () => html`
-<mlv-color>
+<nve-color>
   <label>label</label>
   <input type="color" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-color>
+  <nve-control-message>message</nve-control-message>
+</nve-color>
 `
 };
 
 export const Datalist = {
   render: () => html`
-<mlv-color>
+<nve-color>
 <label>label</label>
   <input type="color" />
-  <mlv-control-message>message</mlv-control-message>
+  <nve-control-message>message</nve-control-message>
   <datalist>
     <option value="#1a6b00"></option>
     <option value="#448d00"></option>
@@ -40,64 +40,64 @@ export const Datalist = {
     <option value="#ee847f"></option>
     <option value="#f2aba8"></option>
   </datalist>
-</mlv-color>
+</nve-color>
   `
 }
 
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg">
-  <mlv-color>
+  <nve-color>
     <label>label</label>
     <input type="color" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-color>
+    <nve-control-message>message</nve-control-message>
+  </nve-color>
 
-  <mlv-color>
+  <nve-color>
     <label>disabled</label>
     <input type="color" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-color>
+    <nve-control-message>message</nve-control-message>
+  </nve-color>
 
-  <mlv-color>
+  <nve-color>
     <label>success</label>
     <input type="color" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-color>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-color>
 
-  <mlv-color>
+  <nve-color>
     <label>error</label>
     <input type="color" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-color>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-color>
 </div>`
 };
 
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg">
-  <mlv-color layout="horizontal">
+  <nve-color layout="horizontal">
     <label>label</label>
     <input type="color" />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-color>
+    <nve-control-message>message</nve-control-message>
+  </nve-color>
 
-  <mlv-color layout="horizontal">
+  <nve-color layout="horizontal">
     <label>disabled</label>
     <input type="color" disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-color>
+    <nve-control-message>message</nve-control-message>
+  </nve-color>
 
-  <mlv-color layout="horizontal">
+  <nve-color layout="horizontal">
     <label>success</label>
     <input type="color" />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-color>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-color>
 
-  <mlv-color layout="horizontal">
+  <nve-color layout="horizontal">
     <label>error</label>
     <input type="color" />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-color>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-color>
 </div>`
 };

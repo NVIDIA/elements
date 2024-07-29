@@ -3,65 +3,65 @@ import '@nvidia-elements/core/progress-ring/define.js';
 
 export default {
   title: 'Elements/Progress Ring/Examples',
-  component: 'mlv-progress-ring',
+  component: 'nve-progress-ring',
 };
 
 export const Default = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
-      <mlv-progress-ring status="accent"></mlv-progress-ring>
+      <nve-progress-ring status="accent"></nve-progress-ring>
   
-      <mlv-progress-ring status="accent" value="66"></mlv-progress-ring>
+      <nve-progress-ring status="accent" value="66"></nve-progress-ring>
     </div>
 `};
 
 export const Values = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
-      <mlv-progress-ring status="accent"></mlv-progress-ring>
+      <nve-progress-ring status="accent"></nve-progress-ring>
 
-      <mlv-progress-ring status="accent" value="0"></mlv-progress-ring>
+      <nve-progress-ring status="accent" value="0"></nve-progress-ring>
 
-      <mlv-progress-ring status="accent" value="33"></mlv-progress-ring>
+      <nve-progress-ring status="accent" value="33"></nve-progress-ring>
 
-      <mlv-progress-ring status="accent" value="66"></mlv-progress-ring>
+      <nve-progress-ring status="accent" value="66"></nve-progress-ring>
 
-      <mlv-progress-ring status="accent" value="100"></mlv-progress-ring>
+      <nve-progress-ring status="accent" value="100"></nve-progress-ring>
     </div>
 `};
 
 export const Max = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
-      <mlv-progress-ring status="accent" max="20" value="5"></mlv-progress-ring>
+      <nve-progress-ring status="accent" max="20" value="5"></nve-progress-ring>
 
-      <mlv-progress-ring status="accent" max="20" value="10"></mlv-progress-ring>
+      <nve-progress-ring status="accent" max="20" value="10"></nve-progress-ring>
       
-      <mlv-progress-ring status="accent" max="20" value="15"></mlv-progress-ring>
+      <nve-progress-ring status="accent" max="20" value="15"></nve-progress-ring>
     </div>
 `};
     
 export const Status = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
-      <mlv-progress-ring status="warning" value="75"></mlv-progress-ring>
+      <nve-progress-ring status="warning" value="75"></nve-progress-ring>
 
-      <mlv-progress-ring status="danger" value="75"></mlv-progress-ring>
+      <nve-progress-ring status="danger" value="75"></nve-progress-ring>
 
-      <mlv-progress-ring status="warning"></mlv-progress-ring>
+      <nve-progress-ring status="warning"></nve-progress-ring>
 
-      <mlv-progress-ring status="danger"></mlv-progress-ring>
+      <nve-progress-ring status="danger"></nve-progress-ring>
     </div>
 `};
     
 export const ZeroValueStatus = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
-      <mlv-progress-ring status="success" value="0"></mlv-progress-ring>
+      <nve-progress-ring status="success" value="0"></nve-progress-ring>
 
-      <mlv-progress-ring status="warning" value="0"></mlv-progress-ring>
+      <nve-progress-ring status="warning" value="0"></nve-progress-ring>
 
-      <mlv-progress-ring status="danger" value="0"></mlv-progress-ring>
+      <nve-progress-ring status="danger" value="0"></nve-progress-ring>
     </div>
 `};
     
@@ -69,22 +69,22 @@ export const WithText = {
   render: () => html`
     <div nve-layout="column gap:sm pad:md" nve-text="medium">
       <div nve-layout="row gap:xs align:center">
-        <mlv-progress-ring size="xs" status="success" value="0"></mlv-progress-ring>
+        <nve-progress-ring size="xs" status="success" value="0"></nve-progress-ring>
         Loading Successful
       </div>
 
       <div nve-layout="row gap:xs align:center">
-        <mlv-progress-ring size="xs" status="warning" value="0"></mlv-progress-ring>
+        <nve-progress-ring size="xs" status="warning" value="0"></nve-progress-ring>
         Loading Timeout
       </div>
 
       <div nve-layout="row gap:xs align:center">
-        <mlv-progress-ring size="xs" status="danger" value="0"></mlv-progress-ring>
+        <nve-progress-ring size="xs" status="danger" value="0"></nve-progress-ring>
         Loading Error
       </div>
 
       <div nve-layout="row gap:xs align:center">
-        <mlv-progress-ring status="accent" size="xs"></mlv-progress-ring>
+        <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
         Active Loading
       </div>
     </div>
@@ -93,63 +93,63 @@ export const WithText = {
 export const SlottedIcon = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
-      <mlv-progress-ring status="accent">
-        <mlv-icon name="pause" status="accent" slot="status-icon"></mlv-icon>
-      </mlv-progress-ring>
+      <nve-progress-ring status="accent">
+        <nve-icon name="pause" status="accent" slot="status-icon"></nve-icon>
+      </nve-progress-ring>
     </div>
 `};
     
 export const Sizing = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
-      <mlv-progress-ring status="accent" size="xxs"></mlv-progress-ring>
-      <mlv-progress-ring status="accent" size="xs"></mlv-progress-ring>
-      <mlv-progress-ring status="accent" size="sm"></mlv-progress-ring>
-      <mlv-progress-ring status="accent" size="md"></mlv-progress-ring>
-      <mlv-progress-ring status="accent" size="lg"></mlv-progress-ring>
-      <mlv-progress-ring status="accent" size="xl"></mlv-progress-ring>
+      <nve-progress-ring status="accent" size="xxs"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="sm"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="md"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="lg"></nve-progress-ring>
+      <nve-progress-ring status="accent" size="xl"></nve-progress-ring>
     </div>
 
     <div nve-layout="row gap:sm pad:md">
-      <mlv-progress-ring status="danger" size="xxs"></mlv-progress-ring>
-      <mlv-progress-ring status="danger" size="xs"></mlv-progress-ring>
-      <mlv-progress-ring status="danger" size="sm"></mlv-progress-ring>
-      <mlv-progress-ring status="danger" size="md"></mlv-progress-ring>
-      <mlv-progress-ring status="danger" size="lg"></mlv-progress-ring>
+      <nve-progress-ring status="danger" size="xxs"></nve-progress-ring>
+      <nve-progress-ring status="danger" size="xs"></nve-progress-ring>
+      <nve-progress-ring status="danger" size="sm"></nve-progress-ring>
+      <nve-progress-ring status="danger" size="md"></nve-progress-ring>
+      <nve-progress-ring status="danger" size="lg"></nve-progress-ring>
     </div>
 `};
     
 export const WithButton = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
-      <mlv-button>
-        <mlv-progress-ring status="neutral" size="xxs"></mlv-progress-ring>
+      <nve-button>
+        <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
         Button
-      </mlv-button>
+      </nve-button>
 
-      <mlv-button interaction="emphasis">
-        <mlv-progress-ring status="neutral" size="xxs"></mlv-progress-ring>
+      <nve-button interaction="emphasis">
+        <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
         Button
-      </mlv-button>
+      </nve-button>
 
-      <mlv-button interaction="destructive">
-        <mlv-progress-ring status="neutral" size="xxs"></mlv-progress-ring>
+      <nve-button interaction="destructive">
+        <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
         Button
-      </mlv-button>
+      </nve-button>
 
-      <mlv-button>
-        <mlv-progress-ring status="neutral" size="xxs" value="33"></mlv-progress-ring>
+      <nve-button>
+        <nve-progress-ring status="neutral" size="xxs" value="33"></nve-progress-ring>
         Button
-      </mlv-button>
+      </nve-button>
 
-      <mlv-button interaction="emphasis">
-        <mlv-progress-ring status="neutral" size="xxs" value="33"></mlv-progress-ring>
+      <nve-button interaction="emphasis">
+        <nve-progress-ring status="neutral" size="xxs" value="33"></nve-progress-ring>
         Button
-      </mlv-button>
+      </nve-button>
 
-      <mlv-button interaction="destructive">
-        <mlv-progress-ring status="neutral" size="xxs" value="33"></mlv-progress-ring>
+      <nve-button interaction="destructive">
+        <nve-progress-ring status="neutral" size="xxs" value="33"></nve-progress-ring>
         Button
-      </mlv-button>
+      </nve-button>
     </div>
 `};

@@ -7,7 +7,7 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './search.css?inline';
 
 /**
- * @element mlv-search
+ * @element nve-search
  * @description A search is a control that enables users to enter text to search.
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-search-documentation--docs

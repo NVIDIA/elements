@@ -4,7 +4,7 @@ import '@nvidia-elements/core/alert/define.js';
 
 export default {
   title: 'Deprecated/Alert Banner/Examples',
-  component: 'mlv-alert-banner',
+  component: 'nve-alert-banner',
   argTypes: {
     status: {
       control: 'inline-radio',
@@ -18,11 +18,11 @@ type ArgTypes = AlertGroup;
 export const Default = {
   render: (args: ArgTypes) =>
     html`
-<mlv-alert-banner .status=${args.status}>
-  <mlv-alert closable>
+<nve-alert-banner .status=${args.status}>
+  <nve-alert closable>
     <span slot="prefix">Standard</span> banner message
-  </mlv-alert>
-</mlv-alert-banner>
+  </nve-alert>
+</nve-alert-banner>
     `,
     args: { status: undefined }
 };
@@ -30,107 +30,107 @@ export const Default = {
 export const Status = {
   render: () => html`
 <div nve-layout="column gap:md">
-  <mlv-alert-banner>
-    <mlv-alert closable>
+  <nve-alert-banner>
+    <nve-alert closable>
       <span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="accent">
-    <mlv-alert closable>
+  <nve-alert-banner status="accent">
+    <nve-alert closable>
       <span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="warning">
-    <mlv-alert closable>
+  <nve-alert-banner status="warning">
+    <nve-alert closable>
       <span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="success">
-    <mlv-alert closable>
+  <nve-alert-banner status="success">
+    <nve-alert closable>
       <span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="danger">
-    <mlv-alert closable>
+  <nve-alert-banner status="danger">
+    <nve-alert closable>
       <span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 </div>
   `
 }
 
 export const LightTheme = {
   render: () => html`
-<div mlv-theme="root light" nve-layout="column gap:md pad:md">
-  <mlv-alert-banner>
-    <mlv-alert closable>
+<div nve-theme="root light" nve-layout="column gap:md pad:md">
+  <nve-alert-banner>
+    <nve-alert closable>
       <span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="accent">
-    <mlv-alert closable>
+  <nve-alert-banner status="accent">
+    <nve-alert closable>
       <span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="warning">
-    <mlv-alert closable>
+  <nve-alert-banner status="warning">
+    <nve-alert closable>
       <span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="success">
-    <mlv-alert closable>
+  <nve-alert-banner status="success">
+    <nve-alert closable>
       <span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="danger">
-    <mlv-alert closable>
+  <nve-alert-banner status="danger">
+    <nve-alert closable>
       <span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 </div>
   `
 }
 
 export const DarkTheme = {
   render: () => html`
-<div mlv-theme="root dark" nve-layout="column gap:md pad:md">
-<mlv-alert-banner>
-    <mlv-alert closable>
+<div nve-theme="root dark" nve-layout="column gap:md pad:md">
+<nve-alert-banner>
+    <nve-alert closable>
       <span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="accent">
-    <mlv-alert closable>
+  <nve-alert-banner status="accent">
+    <nve-alert closable>
       <span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="warning">
-    <mlv-alert closable>
+  <nve-alert-banner status="warning">
+    <nve-alert closable>
       <span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="success">
-    <mlv-alert closable>
+  <nve-alert-banner status="success">
+    <nve-alert closable>
       <span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 
-  <mlv-alert-banner status="danger">
-    <mlv-alert closable>
+  <nve-alert-banner status="danger">
+    <nve-alert closable>
       <span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a>
-    </mlv-alert>
-  </mlv-alert-banner>
+    </nve-alert>
+  </nve-alert-banner>
 </div>
   `
 }

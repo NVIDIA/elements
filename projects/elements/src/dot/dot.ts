@@ -12,7 +12,7 @@ import {
 import styles from './dot.css?inline';
 
 /**
- * @element mlv-dot
+ * @element nve-dot
  * @description A visual indicator that communicates a status or notification of an associated component.
  * @since 0.10.0
  * @slot - default content

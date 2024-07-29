@@ -18,7 +18,7 @@ import {
 import styles from './notification.css?inline';
 
 /**
- * @element mlv-notification
+ * @element nve-notification
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status.
  * @since 0.6.0
  * @event open - Dispatched when the notification is opened.

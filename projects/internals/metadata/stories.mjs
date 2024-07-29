@@ -17,8 +17,7 @@ async function getStoriesFromFile(filePath) {
     .find(el => el.getText() === 'component')
     ?.getNextSiblings()[1]
     ?.getText()
-    ?.replace(/'/g, '')
-    ?.replace('mlv-', 'nve-');
+    ?.replace(/'/g, '');
 
   const formattedStories = stories.map(async story => {
     const id = story.getDescendantsOfKind(SyntaxKind.Identifier)[0].getText();
@@ -31,7 +30,7 @@ async function getStoriesFromFile(filePath) {
       .trim();
 
     if (template) {
-      if (template.includes('mlv-theme') || template.includes('nve-theme')) {
+      if (template.includes('nve-theme')) {
         const lines = template?.split('\n');
         template = lines.splice(1, lines.length - 2).join('\n');
       }

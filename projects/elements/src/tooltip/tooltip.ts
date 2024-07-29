@@ -14,7 +14,7 @@ import {
 import styles from './tooltip.css?inline';
 
 /**
- * @element mlv-tooltip
+ * @element nve-tooltip
  * @description A contextual popup that displays a description for an element. Tooltips are [triggered](https://w3c.github.io/aria/#tooltip) by hovering, focusing, or tapping an element and cannot have interactive elements within them.
  * @since 0.6.0
  * @event open - Dispatched when the tooltip is opened.

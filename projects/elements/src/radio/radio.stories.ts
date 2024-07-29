@@ -4,110 +4,110 @@ import '@nvidia-elements/core/radio/define.js';
 
 export default {
   title: 'Elements/Radio/Examples',
-  component: 'mlv-input',
+  component: 'nve-input',
 };
 
 export const Radio = {
   render: () => html`
-  <mlv-radio-group>
+  <nve-radio-group>
     <label>label</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>message</nve-control-message>
+  </nve-radio-group>
   `
 }
 
 export const VerticalGroup = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-radio-group>
+  <nve-radio-group>
     <label>label</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group>
+  <nve-radio-group>
     <label>disabled</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked disabled />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" disabled />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" disabled />
-    </mlv-radio>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group>
+  <nve-radio-group>
     <label>success</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group>
+  <nve-radio-group>
     <label>error</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-radio-group>
 </div>
 `
 };
@@ -115,81 +115,81 @@ export const VerticalGroup = {
 export const VerticalInlineGroup = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-radio-group layout="vertical-inline">
+  <nve-radio-group layout="vertical-inline">
     <label>label</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group layout="vertical-inline">
+  <nve-radio-group layout="vertical-inline">
     <label>disabled</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked disabled />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" disabled />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" disabled />
-    </mlv-radio>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group layout="vertical-inline">
+  <nve-radio-group layout="vertical-inline">
     <label>success</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group layout="vertical-inline">
+  <nve-radio-group layout="vertical-inline">
     <label>error</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-radio-group>
 </div>
 `
 };
@@ -197,81 +197,81 @@ export const VerticalInlineGroup = {
 export const HorizontalGroup = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-radio-group layout="horizontal">
+  <nve-radio-group layout="horizontal">
     <label>label</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group layout="horizontal">
+  <nve-radio-group layout="horizontal">
     <label>disabled</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked disabled />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" disabled />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" disabled />
-    </mlv-radio>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group layout="horizontal">
+  <nve-radio-group layout="horizontal">
     <label>success</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group layout="horizontal">
+  <nve-radio-group layout="horizontal">
     <label>error</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-radio-group>
 </div>
 `
 };
@@ -279,81 +279,81 @@ export const HorizontalGroup = {
 export const HorizontalInlineGroup = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-radio-group layout="horizontal-inline">
+  <nve-radio-group layout="horizontal-inline">
     <label>label</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group layout="horizontal-inline">
+  <nve-radio-group layout="horizontal-inline">
     <label>disabled</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked disabled />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" disabled />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" disabled />
-    </mlv-radio>
-    <mlv-control-message>disabled message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message>disabled message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group layout="horizontal-inline">
+  <nve-radio-group layout="horizontal-inline">
     <label>success</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message status="success">success message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message status="success">success message</nve-control-message>
+  </nve-radio-group>
 
-  <mlv-radio-group layout="horizontal-inline">
+  <nve-radio-group layout="horizontal-inline">
     <label>error</label>
-    <mlv-radio>
+    <nve-radio>
       <label>radio 1</label>
       <input type="radio" checked />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 2</label>
       <input type="radio" />
-    </mlv-radio>
+    </nve-radio>
 
-    <mlv-radio>
+    <nve-radio>
       <label>radio 3</label>
       <input type="radio" />
-    </mlv-radio>
-    <mlv-control-message status="error">error message</mlv-control-message>
-  </mlv-radio-group>
+    </nve-radio>
+    <nve-control-message status="error">error message</nve-control-message>
+  </nve-radio-group>
 </div>
 `
 };

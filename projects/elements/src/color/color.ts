@@ -7,7 +7,7 @@ import globalStyles from './color.global.css?inline';
 import styles from './color.css?inline';
 
 /**
- * @element mlv-color
+ * @element nve-color
  * @description A color picker is a control that enables users to choose a color value.
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-color-documentation--docs

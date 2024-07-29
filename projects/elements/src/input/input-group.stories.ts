@@ -9,48 +9,48 @@ import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Elements/Input Group/Examples',
-  component: 'mlv-input-group',
+  component: 'nve-input-group',
 };
 
 export const InputGroup = () => {
   return html`
-<mlv-input-group>
+<nve-input-group>
   <label>domain</label>
-  <mlv-select style="width: 130px">
+  <nve-select style="width: 130px">
     <select aria-label="protocol">
       <option>https://</option>
       <option>http://</option>
     </select>
-  </mlv-select>
-  <mlv-input>
+  </nve-select>
+  <nve-input>
     <input placeholder="example" type="url" aria-label="host" />
-    <mlv-button container="flat" readonly="">.com</mlv-button>
-  </mlv-input>
-  <mlv-control-message>host: 123456</mlv-control-message>
-</mlv-input-group>
+    <nve-button container="flat" readonly="">.com</nve-button>
+  </nve-input>
+  <nve-control-message>host: 123456</nve-control-message>
+</nve-input-group>
 `
 };
 
 export const FilterGroupRange = {
   render: () => html`
 <div nve-layout="row align:vertical-center">
-  <mlv-input-group>
-    <mlv-select style="width:150px">
+  <nve-input-group>
+    <nve-select style="width:150px">
       <select aria-label="date type">
         <option value="1">recording date</option>
         <option value="2">process date</option>
       </select>
-    </mlv-select>
-    <mlv-date style="width:220px">
-      <mlv-button container="flat" readonly="">start</mlv-button>
+    </nve-select>
+    <nve-date style="width:220px">
+      <nve-button container="flat" readonly="">start</nve-button>
       <input type="date" value="2022-05-11" aria-label="start date" />
-    </mlv-date>
-    <mlv-date style="width:220px">
-      <mlv-button container="flat" readonly="">end</mlv-button>
+    </nve-date>
+    <nve-date style="width:220px">
+      <nve-button container="flat" readonly="">end</nve-button>
       <input type="date" value="2022-12-07" aria-label="end date" />
-    </mlv-date>
-    <mlv-icon-button aria-label="remove filter" icon-name="cancel"></mlv-icon-button>
-  </mlv-input-group>
+    </nve-date>
+    <nve-icon-button aria-label="remove filter" icon-name="cancel"></nve-icon-button>
+  </nve-input-group>
 </div>
     `
 }

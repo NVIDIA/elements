@@ -3,7 +3,7 @@ import { useStyles, BaseButton } from '@nvidia-elements/core/internal';
 import styles from './menu-item.css?inline';
 
 /**
- * @element mlv-menu-item
+ * @element nve-menu-item
  * @since 0.11.0
  * @slot - default slot for content
  * @slot suffix - slot for suffix icon

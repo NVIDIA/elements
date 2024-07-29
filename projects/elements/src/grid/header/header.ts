@@ -9,7 +9,7 @@ import { GridRow } from '../row/row.js';
 import { GridCell } from '../cell/cell.js';
 
 /**
- * @element mlv-grid-header
+ * @element nve-grid-header
  * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background

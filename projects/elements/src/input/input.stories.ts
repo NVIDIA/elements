@@ -6,7 +6,7 @@ import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Elements/Input/Examples',
-  component: 'mlv-input',
+  component: 'nve-input',
   argTypes: {
     disabled: {
       control: 'boolean',
@@ -34,113 +34,113 @@ interface ArgTypes {
 export const Default = {
   render: (args: ArgTypes) =>
     html`
-<mlv-input .layout=${args.layout}>
+<nve-input .layout=${args.layout}>
   <label>label</label>
   <input type="text" ?disabled=${args.disabled} />
-  <mlv-control-message .status=${args.status}>message</mlv-control-message>
-</mlv-input>`,
+  <nve-control-message .status=${args.status}>message</nve-control-message>
+</nve-input>`,
 };
 
 export const Input = () => {
   return html`
-<mlv-input>
+<nve-input>
   <label>label</label>
   <input type="text" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-input>`
+  <nve-control-message>message</nve-control-message>
+</nve-input>`
 };
 
 export const Vertical = () => {
   return html`
 <div nve-layout="column gap:lg">
-  <mlv-input>
+  <nve-input>
     <label>label</label>
     <input />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
 
-  <mlv-input>
+  <nve-input>
     <label>disabled</label>
     <input disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
 
-  <mlv-input>
+  <nve-input>
     <label>success</label>
     <input />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-input>
 
-  <mlv-input>
+  <nve-input>
     <label>error</label>
     <input />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-input>
 </div>`
 };
 
 export const Horizontal = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
-  <mlv-input layout="horizontal">
+  <nve-input layout="horizontal">
     <label>label</label>
     <input />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
 
-  <mlv-input layout="horizontal">
+  <nve-input layout="horizontal">
     <label>disabled</label>
     <input disabled />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message>message</nve-control-message>
+  </nve-input>
 
-  <mlv-input layout="horizontal">
+  <nve-input layout="horizontal">
     <label>success</label>
     <input />
-    <mlv-control-message status="success">message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-input>
 
-  <mlv-input layout="horizontal">
+  <nve-input layout="horizontal">
     <label>error</label>
     <input />
-    <mlv-control-message status="error">message</mlv-control-message>
-  </mlv-input>
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-input>
 </div>`
 };
 
 export const Rounded = {
   render: () => html`
-<mlv-input rounded>
+<nve-input rounded>
   <label>label</label>
   <input />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-input>`
+  <nve-control-message>message</nve-control-message>
+</nve-input>`
 };
 
 export const FitText = {
   render: () => html`
-<mlv-input fit-text>
+<nve-input fit-text>
   <label>label</label>
   <input value="123456789012345678901234567890" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-input>`
+  <nve-control-message>message</nve-control-message>
+</nve-input>`
 };
 
 export const FitContent = {
   render: () => html`
-<mlv-input fit-content>
+<nve-input fit-content>
   <label>label</label>
   <input />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-input>`
+  <nve-control-message>message</nve-control-message>
+</nve-input>`
 };
 
 export const Flat = {
   render: () =>
     html`
-<mlv-input container="flat">
+<nve-input container="flat">
   <label>label</label>
   <input />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-input>`,
+  <nve-control-message>message</nve-control-message>
+</nve-input>`,
 };

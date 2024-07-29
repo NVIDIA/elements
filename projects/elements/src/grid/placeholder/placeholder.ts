@@ -3,7 +3,7 @@ import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
 import styles from './placeholder.css?inline';
 
 /**
- * @element mlv-grid-placeholder
+ * @element nve-grid-placeholder
  * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --color

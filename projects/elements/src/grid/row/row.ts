@@ -5,7 +5,7 @@ import { GridCell } from '../cell/cell.js';
 import styles from './row.css?inline';
 
 /**
- * @element mlv-grid-row
+ * @element nve-grid-row
  * @since 0.11.0
  * @slot - default slot for content
  * @cssprop --background

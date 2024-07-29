@@ -14,7 +14,7 @@ import { Icon } from '@nvidia-elements/core/icon';
 import styles from './tag.css?inline';
 
 /**
- * @element mlv-tag
+ * @element nve-tag
  * @description A interactive element that represents a category or group of content. Typically used to filter or organize content for one to many relations.
  * @since 0.10.0
  * @slot - default slot for content

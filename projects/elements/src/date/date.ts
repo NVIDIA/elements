@@ -6,7 +6,7 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './date.css?inline';
 
 /**
- * @element mlv-date
+ * @element nve-date
  * @description A date picker is a control that enables users to choose a date value.
  * @since 0.3.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-date-documentation--docs

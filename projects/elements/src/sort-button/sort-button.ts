@@ -11,7 +11,7 @@ const nextSort = {
 };
 
 /**
- * @element mlv-sort-button
+ * @element nve-sort-button
  * @description A sort button is a control that enables users to sort a list of items in ascending or descending order.
  * @since 0.11.0
  * @event sort - Dispatched when the sort button is clicked, returns the current sort value and the next sort value.

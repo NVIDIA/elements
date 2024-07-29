@@ -3,7 +3,7 @@ import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './drawer-header.css?inline';
 
 /**
- * @element mlv-drawer-header
+ * @element nve-drawer-header
  * @since 0.16.0
  * @slot - default slot for the drawer header
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-drawer-documentation--docs

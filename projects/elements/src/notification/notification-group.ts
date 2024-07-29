@@ -4,7 +4,7 @@ import { PopoverAlign, TypePopoverController, useStyles } from '@nvidia-elements
 import styles from './notification-group.css?inline';
 
 /**
- * @element mlv-notification-group
+ * @element nve-notification-group
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status.
  * @since 0.6.0
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-notification-documentation--docs

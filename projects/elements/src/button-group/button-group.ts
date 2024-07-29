@@ -15,7 +15,7 @@ import type { Divider } from '@nvidia-elements/core/divider';
 import styles from './button-group.css?inline';
 
 /**
- * @element mlv-button-group
+ * @element nve-button-group
  * @description A button group is a control that enables users to choose between two or more distinct mutually exclusive options.
  * @since 0.16.0
  * @slot - slotted `button` or `icon-button`

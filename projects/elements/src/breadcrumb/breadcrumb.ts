@@ -14,7 +14,7 @@ import type { Button } from '@nvidia-elements/core/button';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 
 /**
- * @element mlv-breadcrumb
+ * @element nve-breadcrumb
  * @description Breadcrumb is a component that can help users establish their location while navigating a website with complex URLs and navigation paths.
  * @since 0.11.0
  * @cssprop --breadcrumb-height

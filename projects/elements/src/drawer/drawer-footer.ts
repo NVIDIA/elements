@@ -3,7 +3,7 @@ import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './drawer-footer.css?inline';
 
 /**
- * @element mlv-drawer-footer
+ * @element nve-drawer-footer
  * @since 0.16.0
  * @slot - default slot for the drawer footer
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-drawer-documentation--docs

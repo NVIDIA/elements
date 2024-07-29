@@ -16,59 +16,59 @@ export default {
 
 export const Control = () => {
   return html`
-<mlv-control>
+<nve-control>
   <label>label</label>
   <input />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-control>`;
+  <nve-control-message>message</nve-control-message>
+</nve-control>`;
 };
 
 export const Responsive = () => {
   return html`
   <div nve-layout="column gap:lg" style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal; max-width: 600px;">
-    <mlv-input layout="horizontal">
+    <nve-input layout="horizontal">
       <label>text label</label>
       <input />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-input>
-    <mlv-select layout="horizontal">
+      <nve-control-message>message</nve-control-message>
+    </nve-input>
+    <nve-select layout="horizontal">
       <label>select label</label>
       <select>
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
         <option value="3">Option 3</option>
       </select>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-select>
-    <mlv-search layout="horizontal-inline">
+      <nve-control-message>message</nve-control-message>
+    </nve-select>
+    <nve-search layout="horizontal-inline">
       <label>search label</label>
       <input type="search" placeholder="search" />
-    </mlv-search>
-    <mlv-checkbox-group layout="horizontal-inline">
+    </nve-search>
+    <nve-checkbox-group layout="horizontal-inline">
       <label>checkbox label</label>
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>local</label>
         <input type="checkbox" name="checkbox-group" value="1" checked />
-      </mlv-checkbox>
-      <mlv-checkbox>
+      </nve-checkbox>
+      <nve-checkbox>
         <label>staging</label>
         <input type="checkbox" name="checkbox-group" value="2" />
-      </mlv-checkbox>
-      <mlv-checkbox>
+      </nve-checkbox>
+      <nve-checkbox>
         <label>production</label>
         <input type="checkbox" name="checkbox-group" value="3" />
-      </mlv-checkbox>
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-checkbox-group>
-    <mlv-range layout="horizontal-inline">
+      </nve-checkbox>
+      <nve-control-message>message</nve-control-message>
+    </nve-checkbox-group>
+    <nve-range layout="horizontal-inline">
       <label>label</label>
       <input type="range" />
-      <mlv-control-message>message</mlv-control-message>
-    </mlv-range>
-    <mlv-textarea layout="horizontal-inline">
+      <nve-control-message>message</nve-control-message>
+    </nve-range>
+    <nve-textarea layout="horizontal-inline">
       <label>label</label>
       <textarea></textarea>
-    </mlv-textarea>
+    </nve-textarea>
   </div>
   `;
 };
@@ -82,265 +82,265 @@ export const ControlLayout = () => {
     flex-direction: column;
   }
 
-  mlv-control {
+  nve-control {
     outline: 1px solid red;
   }
 
-  mlv-control-group {
+  nve-control-group {
     outline: 1px solid blue;
   }
 </style>
 <div style="">
-  <mlv-control>
+  <nve-control>
     <label>vertical</label>
     <input />
-  </mlv-control>
+  </nve-control>
 
-  <mlv-control>
+  <nve-control>
     <label>vertical</label>
     <input />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-control>
+    <nve-control-message>message</nve-control-message>
+  </nve-control>
 
-  <mlv-control layout="horizontal">
+  <nve-control layout="horizontal">
     <label>horizontal</label>
     <input />
-  </mlv-control>
+  </nve-control>
 
-  <mlv-control layout="horizontal">
+  <nve-control layout="horizontal">
     <label>horizontal</label>
     <input />
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-control>
+    <nve-control-message>message</nve-control-message>
+  </nve-control>
 
-  <mlv-control-group layout="vertical">
+  <nve-control-group layout="vertical">
     <label>vertical</label>
-    <mlv-control>
+    <nve-control>
       <label>local</label>
       <input type="checkbox" name="checkbox-group" value="1" checked />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>staging</label>
       <input type="checkbox" name="checkbox-group" value="2" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-control-group>
+    </nve-control>
+    <nve-control-message>message</nve-control-message>
+  </nve-control-group>
 
-  <mlv-control-group layout="vertical">
+  <nve-control-group layout="vertical">
     <label>vertical</label>
-    <mlv-control>
+    <nve-control>
       <label>local</label>
       <input type="checkbox" name="checkbox-group" value="1" checked />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>staging</label>
       <input type="checkbox" name="checkbox-group" value="2" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-  </mlv-control-group>
+    </nve-control>
+  </nve-control-group>
 
-  <mlv-control-group layout="vertical-inline">
+  <nve-control-group layout="vertical-inline">
     <label>vertical-inline</label>
-    <mlv-control>
+    <nve-control>
       <label>local</label>
       <input type="checkbox" name="checkbox-group" value="1" checked />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>staging</label>
       <input type="checkbox" name="checkbox-group" value="2" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-control-group>
+    </nve-control>
+    <nve-control-message>message</nve-control-message>
+  </nve-control-group>
 
-  <mlv-control-group layout="vertical-inline">
+  <nve-control-group layout="vertical-inline">
     <label>vertical-inline</label>
-    <mlv-control>
+    <nve-control>
       <label>local</label>
       <input type="checkbox" name="checkbox-group" value="1" checked />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>staging</label>
       <input type="checkbox" name="checkbox-group" value="2" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-  </mlv-control-group>
+    </nve-control>
+  </nve-control-group>
 
-  <mlv-control-group layout="horizontal">
+  <nve-control-group layout="horizontal">
     <label>horizontal</label>
-    <mlv-control>
+    <nve-control>
       <label>local</label>
       <input type="checkbox" name="checkbox-group" value="1" checked />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>staging</label>
       <input type="checkbox" name="checkbox-group" value="2" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-control-group>
+    </nve-control>
+    <nve-control-message>message</nve-control-message>
+  </nve-control-group>
 
-  <mlv-control-group layout="horizontal">
+  <nve-control-group layout="horizontal">
     <label>horizontal</label>
-    <mlv-control>
+    <nve-control>
       <label>local</label>
       <input type="checkbox" name="checkbox-group" value="1" checked />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>staging</label>
       <input type="checkbox" name="checkbox-group" value="2" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-  </mlv-control-group>
+    </nve-control>
+  </nve-control-group>
 
-  <mlv-control-group layout="horizontal-inline">
+  <nve-control-group layout="horizontal-inline">
     <label>horizontal-inline</label>
-    <mlv-control>
+    <nve-control>
       <label>local</label>
       <input type="checkbox" name="checkbox-group" value="1" checked />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>staging</label>
       <input type="checkbox" name="checkbox-group" value="2" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-    <mlv-control-message>message</mlv-control-message>
-  </mlv-control-group>
+    </nve-control>
+    <nve-control-message>message</nve-control-message>
+  </nve-control-group>
 
-  <mlv-control-group layout="horizontal-inline">
+  <nve-control-group layout="horizontal-inline">
     <label>horizontal-inline</label>
-    <mlv-control>
+    <nve-control>
       <label>local</label>
       <input type="checkbox" name="checkbox-group" value="1" checked />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>staging</label>
       <input type="checkbox" name="checkbox-group" value="2" />
-    </mlv-control>
-    <mlv-control>
+    </nve-control>
+    <nve-control>
       <label>production</label>
       <input type="checkbox" name="checkbox-group" value="3" />
-    </mlv-control>
-  </mlv-control-group>
+    </nve-control>
+  </nve-control-group>
 </div>`;
 };
 
 export const ControlValidation = () => {
   return html`
-<mlv-control>
+<nve-control>
   <label>validation</label>
   <input required />
-  <mlv-control-message>message</mlv-control-message>
-  <mlv-control-message error="valueMissing">required</mlv-control-message>
-</mlv-control>`;
+  <nve-control-message>message</nve-control-message>
+  <nve-control-message error="valueMissing">required</nve-control-message>
+</nve-control>`;
 }
 
 export const NoLabelControl = () => {
   return html`
-<mlv-control>
+<nve-control>
   <input type="search" aria-label="search" placeholder="search" />
-</mlv-control>`;
+</nve-control>`;
 }
 
 export const inlineControl = () => {
   return html`
-<mlv-control>
+<nve-control>
   <label>enable logging</label>
   <input type="checkbox" checked />
-</mlv-control>`;
+</nve-control>`;
 }
 
 export const controlGroup = () => {
   return html`
-<mlv-control-group>
+<nve-control-group>
   <label>environment</label>
-  <mlv-control>
+  <nve-control>
     <label>local</label>
     <input type="radio" name="radio-group" value="1" checked />
-  </mlv-control>
-  <mlv-control>
+  </nve-control>
+  <nve-control>
     <label>staging</label>
     <input type="radio" name="radio-group" value="2" />
-  </mlv-control>
-  <mlv-control>
+  </nve-control>
+  <nve-control>
     <label>production</label>
     <input type="radio" name="radio-group" value="3" />
-  </mlv-control>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-control-group>
+  </nve-control>
+  <nve-control-message>message</nve-control-message>
+</nve-control-group>
 
 <br />
 
-<mlv-control-group>
+<nve-control-group>
   <label>environment</label>
-  <mlv-control>
+  <nve-control>
     <label>local</label>
     <input type="checkbox" name="checkbox-group" value="1" checked />
-  </mlv-control>
-  <mlv-control>
+  </nve-control>
+  <nve-control>
     <label>staging</label>
     <input type="checkbox" name="checkbox-group" value="2" />
-  </mlv-control>
-  <mlv-control>
+  </nve-control>
+  <nve-control>
     <label>production</label>
     <input type="checkbox" name="checkbox-group" value="3" />
-  </mlv-control>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-control-group>
+  </nve-control>
+  <nve-control-message>message</nve-control-message>
+</nve-control-group>
 `;
 }
 
 export const DateControl = () => {
   return html`
-<mlv-control>
+<nve-control>
   <label>date</label>
   <input type="date" />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-control>`;
+  <nve-control-message>message</nve-control-message>
+</nve-control>`;
 };
 
 export const TextareaControl = () => {
   return html`
-<mlv-control>
+<nve-control>
   <label>about</label>
   <textarea></textarea>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-control>`;
+  <nve-control-message>message</nve-control-message>
+</nve-control>`;
 }
 
 export const Datalist = () => {
   return html`
-<mlv-control>
+<nve-control>
   <label>search</label>
   <input type="search" />
   <datalist>
@@ -348,45 +348,45 @@ export const Datalist = () => {
     <option value="option 2"></option>
     <option value="option 3"></option>
   </datalist>
-</mlv-control>`;
+</nve-control>`;
 };
 
 export const Status = () => {
   return html`
-<mlv-control>
+<nve-control>
   <label>label</label>
   <input />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-control>
+  <nve-control-message>message</nve-control-message>
+</nve-control>
 
 <br />
 
-<mlv-control>
+<nve-control>
   <label>disabled</label>
   <input disabled />
-  <mlv-control-message>message</mlv-control-message>
-</mlv-control>
+  <nve-control-message>message</nve-control-message>
+</nve-control>
 
 <br />
 
-<mlv-control>
+<nve-control>
   <label>success</label>
   <input />
-  <mlv-control-message status="success">message</mlv-control-message>
-</mlv-control>
+  <nve-control-message status="success">message</nve-control-message>
+</nve-control>
 
 <br />
 
-<mlv-control>
+<nve-control>
   <label>error</label>
   <input />
-  <mlv-control-message status="error">message</mlv-control-message>
-</mlv-control>`;
+  <nve-control-message status="error">message</nve-control-message>
+</nve-control>`;
 };
 
 export const SelectmenuExperimental = () => {
   return html`
-<mlv-control layout="vertical">
+<nve-control layout="vertical">
   <label>selectmenu</label>
   <selectmenu>
     <div slot="button" behavior="button">
@@ -397,17 +397,17 @@ export const SelectmenuExperimental = () => {
     <option value="firefox">Firefox</option>
     <option value="safari">Safari</option>
   </selectmenu>
-  <mlv-control-message>message</mlv-control-message>
-</mlv-control>
+  <nve-control-message>message</nve-control-message>
+</nve-control>
 <style>
   selectmenu {
     width: 100%;
   }
 
   selectmenu button {
-    background: var(--mlv-sys-interaction-background);
-    color: var(--mlv-sys-interaction-color);
-    border-radius: var(--mlv-ref-border-radius-sm);
+    background: var(--nve-sys-interaction-background);
+    color: var(--nve-sys-interaction-color);
+    border-radius: var(--nve-ref-border-radius-sm);
     width: 100%;
     border: 0;
     height: 32px;
@@ -415,13 +415,13 @@ export const SelectmenuExperimental = () => {
   }
 
   selectmenu option {
-    --background: var(--mlv-sys-interaction-background);
-    --mlv-sys-interaction-state-base: var(--mlv-sys-interaction-background);
+    --background: var(--nve-sys-interaction-background);
+    --nve-sys-interaction-state-base: var(--nve-sys-interaction-background);
     cursor: pointer;
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    color: var(--mlv-sys-interaction-color);
+    color: var(--nve-sys-interaction-color);
     border: 0;
     padding: 12px;
   }
@@ -435,19 +435,19 @@ export const SelectmenuExperimental = () => {
   }
 
   selectmenu option {
-    background-image: linear-gradient(color-mix(in oklab, var(--mlv-sys-interaction-state-base) 100%, var(--mlv-sys-interaction-state-mix) var(--mlv-sys-interaction-state-ratio)) 0 0) !important;
+    background-image: linear-gradient(color-mix(in oklab, var(--nve-sys-interaction-state-base) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)) 0 0) !important;
   }
 
   selectmenu option:hover{
-    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-hover);
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
   }
 
   selectmenu option:active {
-    --mlv-sys-interaction-state-ratio: var(--mlv-sys-interaction-state-ratio-active);
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-active);
   }
 
   selectmenu::part(listbox) {
-    background: var(--mlv-sys-interaction-background);
+    background: var(--nve-sys-interaction-background);
     padding: 0;
     border: 0;
   }
@@ -481,7 +481,7 @@ class EmojiDemo extends LitElement {
 
   render() {
     return html`
-      <emoji-picker class="dark" style="height: 250px; width: 350px; --background: var(--mlv-sys-layer-container-background);"></emoji-picker>
+      <emoji-picker class="dark" style="height: 250px; width: 350px; --background: var(--nve-sys-layer-container-background);"></emoji-picker>
     `;
   }
 
@@ -515,11 +515,11 @@ class EmojiDemo extends LitElement {
 
 export const Custom = () => {
   return html`
-<mlv-control>
+<nve-control>
   <label>custom emoji label</label>
   <my-emoji nve-control></my-emoji>
-  <mlv-control-message>message <span id="emoji"></span></mlv-control-message>
-</mlv-control>
+  <nve-control-message>message <span id="emoji"></span></nve-control-message>
+</nve-control>
 <script>
   document.querySelector('my-emoji').addEventListener('change', e => {
     document.querySelector('#emoji').textContent = e.target.value;

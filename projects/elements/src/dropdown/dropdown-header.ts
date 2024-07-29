@@ -3,7 +3,7 @@ import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './dropdown-header.css?inline';
 
 /**
- * @element mlv-dropdown-header
+ * @element nve-dropdown-header
  * @since 0.36.0
  * @slot - default slot for the dropdown header
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-dialog-documentation--docs
