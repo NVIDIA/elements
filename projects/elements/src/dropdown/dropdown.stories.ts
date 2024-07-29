@@ -50,7 +50,7 @@ export const DynamicTrigger = {
   <script type="module">
     const dropdown = document.querySelector('#dynamic-trigger-demo nve-dropdown');
     document.querySelector('#dynamic-trigger-demo').addEventListener('mousedown', e => {
-      if (e.target.tagName === 'MLV-BUTTON') {
+      if (e.target.tagName === 'NVE-BUTTON') {
         dropdown.anchor = e.target;
         dropdown.trigger = e.target;
       }

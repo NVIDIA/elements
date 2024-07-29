@@ -1,4 +1,4 @@
-# Import Map Starter + @elements/elements
+# Import Map Starter
 
 [Import Maps](https://web.dev/import-maps-in-all-modern-browsers/)
 

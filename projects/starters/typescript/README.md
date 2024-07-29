@@ -1,4 +1,4 @@
-# TypeScript Starter + @elements/elements
+# TypeScript Starter
 
 [Built with Vite](https://vitejs.dev/)
 

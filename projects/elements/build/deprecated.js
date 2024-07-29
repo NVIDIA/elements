@@ -15,3 +15,11 @@ writeFileSync('./dist/elements.html-data.json', JSON.stringify({ ...globalHTMLLe
 // elements.css-vars.json
 const cssVarLegacy = readFileSync('../themes/dist/data.css-vars.json', 'utf-8').replaceAll('--nve', '--mlv');
 writeFileSync('./dist/elements.css-vars.json', cssVarLegacy);
+
+// nve- custom-elements.json
+writeFileSync(
+  './dist/custom-elements.json',
+  readFileSync('./dist/custom-elements.json', 'utf-8')
+    .replaceAll('nve-', 'nve-')
+    .replaceAll('@nvidia-elements/core', '@elements/elements')
+);

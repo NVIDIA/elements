@@ -90,7 +90,7 @@ export const DynamicTrigger = {
   <script type="module">
     const tooltip = document.querySelector('#dynamic-trigger-demo nve-tooltip');
     document.querySelector('#dynamic-trigger-demo').addEventListener('mouseover', e => {
-      if (e.target.tagName === 'MLV-BUTTON') {
+      if (e.target.tagName === 'NVE-BUTTON') {
         tooltip.anchor = e.target;
         tooltip.trigger = e.target;
       }
