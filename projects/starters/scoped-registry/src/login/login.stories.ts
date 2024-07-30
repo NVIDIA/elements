@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import 'extensions-elements-starter/login/define.js';
-import '@elements/elements/button/define.js';
+import '@nvidia-elements/core/button/define.js';
 
 export default {
   title: 'Login',
