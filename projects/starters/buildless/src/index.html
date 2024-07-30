@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A simple starter using Elements and TypeScript." />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@elements/elements@latest/dist/index.css" />
-    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@elements/elements@latest/dist/inter.css" />
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/themes@latest/dist/fonts/inter.css" />
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/themes@latest/dist/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/themes@latest/dist/dark.css" />
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/styles@latest/dist/typography.css" />
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/styles@latest/dist/layout.css" />
     <style>
       body:has(*:not(:defined)) * {
         visibility: hidden;
@@ -20,17 +23,17 @@
     <script type="importmap">
       {
         "imports": {
-          "@elements/elements": "https://https://esm.sh/@elements/elements@latest",
-          "@elements/elements/": "https://https://esm.sh/@elements/elements@latest/"
+          "@nvidia-elements/core": "https://https://esm.sh/@elements/elements@latest",
+          "@nvidia-elements/core/": "https://https://esm.sh/@elements/elements@latest/"
         }
       }
     </script>
     <script type="module">
-      import '@elements/elements/app-header/define.js';
-      import '@elements/elements/button/define.js';
-      import '@elements/elements/breadcrumb/define.js';
-      import '@elements/elements/drawer/define.js';
-      import '@elements/elements/menu/define.js';
+      import '@nvidia-elements/core/app-header/define.js';
+      import '@nvidia-elements/core/button/define.js';
+      import '@nvidia-elements/core/breadcrumb/define.js';
+      import '@nvidia-elements/core/drawer/define.js';
+      import '@nvidia-elements/core/menu/define.js';
     </script>
   </head>
   <body>
