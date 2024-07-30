@@ -1,9 +1,9 @@
 import type { Component } from 'solid-js';
-import '@elements/elements/app-header/define.js';
-import '@elements/elements/button/define.js';
-import '@elements/elements/breadcrumb/define.js';
-import '@elements/elements/drawer/define.js';
-import '@elements/elements/menu/define.js';
+import '@nvidia-elements/core/app-header/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/breadcrumb/define.js';
+import '@nvidia-elements/core/drawer/define.js';
+import '@nvidia-elements/core/menu/define.js';
 
 const App: Component = () => {
   return (

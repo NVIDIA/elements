@@ -10,8 +10,10 @@
     "preview": "wireit"
   },
   "dependencies": {
-    "@elements/elements": "workspace:*",
-    "@elements/elements-react": "workspace:*",
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/core-react": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

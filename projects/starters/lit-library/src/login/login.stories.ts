@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import 'lit-library-starter/login/define.js';
-import '@elements/elements/button/define.js';
+import '@nvidia-elements/core/button/define.js';
 
 export default {
   title: 'Internal/Lit Library',
