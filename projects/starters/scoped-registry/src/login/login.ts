@@ -1,11 +1,11 @@
 import { html, LitElement, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
-import { scope } from '@elements/elements/scoped';
-import { Input } from '@elements/elements/input';
-import { Checkbox } from '@elements/elements/checkbox';
-import { Password } from '@elements/elements/password';
-import { ControlMessage } from '@elements/elements/forms';
+import { scope } from '@nvidia-elements/core/scoped';
+import { Input } from '@nvidia-elements/core/input';
+import { Checkbox } from '@nvidia-elements/core/checkbox';
+import { Password } from '@nvidia-elements/core/password';
+import { ControlMessage } from '@nvidia-elements/core/forms';
 import styles from './login.css?inline';
 
 export class DomainLogin extends ScopedRegistryHost(LitElement) {

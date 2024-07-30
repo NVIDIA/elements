@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import '@elements/elements/index.css';
-@import '@elements/elements/inter.css';
+@import '@nvidia-elements/themes/fonts/inter.css';
+@import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/styles/layout.css';
+@import '@nvidia-elements/styles/typography.css';
 
 @view-transition {
   navigation: auto;
