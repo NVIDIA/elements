@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import 'lit-library-starter/login/define.js';
-import '@elements/elements/button/define.js';
+import '@nvidia-elements/core/button/define.js';
 
 export default {
   title: 'Internal/Lit Library',
@@ -9,9 +9,9 @@ export default {
 
 export const Default = {
   render: () => html`
-  <form mlv-layout="column gap:md" style="width: 400px">
+  <form nve-layout="column gap:md" style="width: 400px">
     <domain-login name="login"></domain-login>
-    <mlv-button interaction="emphasis" style="margin-left: auto">login</mlv-button>
+    <nve-button interaction="emphasis" style="margin-left: auto">login</nve-button>
   </form>
   <script type="module">
     const form = document.querySelector('form');

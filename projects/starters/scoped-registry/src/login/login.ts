@@ -1,11 +1,11 @@
 import { html, LitElement, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
-import { scope } from '@elements/elements/scoped';
-import { Input } from '@elements/elements/input';
-import { Checkbox } from '@elements/elements/checkbox';
-import { Password } from '@elements/elements/password';
-import { ControlMessage } from '@elements/elements/forms';
+import { scope } from '@nvidia-elements/core/scoped';
+import { Input } from '@nvidia-elements/core/input';
+import { Checkbox } from '@nvidia-elements/core/checkbox';
+import { Password } from '@nvidia-elements/core/password';
+import { ControlMessage } from '@nvidia-elements/core/forms';
 import styles from './login.css?inline';
 
 export class DomainLogin extends ScopedRegistryHost(LitElement) {
@@ -36,10 +36,10 @@ export class DomainLogin extends ScopedRegistryHost(LitElement) {
   }
 
   static elementDefinitions = {
-    'mlv-input': scope(Input, ScopedRegistryHost),
-    'mlv-password': scope(Password, ScopedRegistryHost),
-    'mlv-checkbox': scope(Checkbox, ScopedRegistryHost),
-    'mlv-control-message': scope(ControlMessage, ScopedRegistryHost)
+    'nve-input': scope(Input, ScopedRegistryHost),
+    'nve-password': scope(Password, ScopedRegistryHost),
+    'nve-checkbox': scope(Checkbox, ScopedRegistryHost),
+    'nve-control-message': scope(ControlMessage, ScopedRegistryHost)
   };
 
   static styles = [unsafeCSS(styles)];
@@ -59,23 +59,23 @@ export class DomainLogin extends ScopedRegistryHost(LitElement) {
   render() {
     return html`
       <form>
-        <mlv-input>
+        <nve-input>
           <label>Email</label>
           <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" @input=${this.#input} .value=${this.#value.email} />
-          <mlv-control-message error="valueMissing">required</mlv-control-message>
-          <mlv-control-message error="patternMismatch">invalid NVIDIA email</mlv-control-message>
-        </mlv-input>
+          <nve-control-message error="valueMissing">required</nve-control-message>
+          <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
+        </nve-input>
 
-        <mlv-password>
+        <nve-password>
           <label>Password</label>
           <input type="password" name="password" required @input=${this.#input} .value=${this.#value.password} />
-          <mlv-control-message error="valueMissing">required</mlv-control-message>
-        </mlv-password>
+          <nve-control-message error="valueMissing">required</nve-control-message>
+        </nve-password>
 
-        <mlv-checkbox>
+        <nve-checkbox>
           <label>remember me</label>
           <input type="checkbox" name="remember" value="on" @change=${this.#change} @input=${this.#input} ?checked=${this.#value.remember} />
-        </mlv-checkbox>
+        </nve-checkbox>
       </form>
     `;
   }

@@ -7,5 +7,5 @@ form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: var(--mlv-ref-space-lg);
+  gap: var(--nve-ref-space-lg);
 }

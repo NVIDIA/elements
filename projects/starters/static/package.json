@@ -9,7 +9,8 @@
     "preview": "wireit"
   },
   "dependencies": {
-    "@elements/elements": "workspace:*",
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*"
   },
   "devDependencies": {

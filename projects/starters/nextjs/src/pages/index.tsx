@@ -1,20 +1,20 @@
 import React from 'react';
 import {
-  MlvAccordionGroup,
-  MlvAccordion,
-  MlvAccordionHeader,
-  MlvAccordionContent
-} from '@elements/elements-react/accordion';
-import { MlvAlert, MlvAlertGroup } from '@elements/elements-react/alert';
-import { MlvAppHeader } from '@elements/elements-react/app-header';
-import { MlvButton } from '@elements/elements-react/button';
-import { MlvIconButton } from '@elements/elements-react/icon-button';
-import { MlvButtonGroup } from '@elements/elements-react/button-group';
-import { MlvBadge } from '@elements/elements-react/badge';
-import { MlvBreadcrumb } from '@elements/elements-react/breadcrumb';
-import { MlvCard, MlvCardHeader, MlvCardContent } from '@elements/elements-react/card';
-import { MlvLogo } from '@elements/elements-react/logo';
-import { MlvInput } from '@elements/elements-react/input';
+  NveAccordionGroup,
+  NveAccordion,
+  NveAccordionHeader,
+  NveAccordionContent
+} from '@nvidia-elements/core-react/accordion';
+import { NveAlert, NveAlertGroup } from '@nvidia-elements/core-react/alert';
+import { NveAppHeader } from '@nvidia-elements/core-react/app-header';
+import { NveButton } from '@nvidia-elements/core-react/button';
+import { NveIconButton } from '@nvidia-elements/core-react/icon-button';
+import { NveButtonGroup } from '@nvidia-elements/core-react/button-group';
+import { NveBadge } from '@nvidia-elements/core-react/badge';
+import { NveBreadcrumb } from '@nvidia-elements/core-react/breadcrumb';
+import { NveCard, NveCardHeader, NveCardContent } from '@nvidia-elements/core-react/card';
+import { NveLogo } from '@nvidia-elements/core-react/logo';
+import { NveInput } from '@nvidia-elements/core-react/input';
 
 // This demo is used for baseline experimental SSR support testing.
 // This demo does not follow the same consistent pattern as the rest of the demo integrations.
@@ -23,122 +23,122 @@ export default function Home() {
 
   return (
     <>
-      <MlvAppHeader>
-        <MlvLogo></MlvLogo>
-        <h2 slot="title">Nav Actions</h2>
-        <MlvButton slot="nav-items" container="inline">
+      <NveAppHeader>
+        <NveLogo></NveLogo>
+        <h2 slot="title">NextJS</h2>
+        <NveButton slot="nav-items" container="inline">
           Link 1
-        </MlvButton>
-        <MlvButton slot="nav-items" container="inline" selected>
+        </NveButton>
+        <NveButton slot="nav-items" container="inline" selected>
           Link 2
-        </MlvButton>
-        <MlvIconButton icon-name="search" slot="nav-actions"></MlvIconButton>
-        <MlvIconButton icon-name="switch-apps" slot="nav-actions"></MlvIconButton>
-        <MlvIconButton interaction="emphasis" slot="nav-actions" size="sm">
+        </NveButton>
+        <NveIconButton icon-name="search" slot="nav-actions"></NveIconButton>
+        <NveIconButton icon-name="switch-apps" slot="nav-actions"></NveIconButton>
+        <NveIconButton interaction="emphasis" slot="nav-actions" size="sm">
           EL
-        </MlvIconButton>
-      </MlvAppHeader>
+        </NveIconButton>
+      </NveAppHeader>
 
-      <div mlv-layout="column gap:md pad:lg" style={{ height: '95vh' }}>
-        <h1 mlv-text="heading">NextJS</h1>
+      <div nve-layout="column gap:md pad:lg" style={{ height: '95vh' }}>
+        <h1 nve-text="heading">NextJS</h1>
 
-        <MlvButton onClick={() => setshowDialog(!showDialog)}>greeting</MlvButton>
+        <NveButton onClick={() => setshowDialog(!showDialog)}>greeting</NveButton>
 
-        <MlvAlert status="success">hello there</MlvAlert>
+        <NveAlert status="success">hello there</NveAlert>
 
-        <MlvAlertGroup status="accent">
-          <MlvAlert>
+        <NveAlertGroup status="accent">
+          <NveAlert>
             Standard{' '}
-            <MlvButton slot="actions" container="flat">
+            <NveButton slot="actions" container="flat">
               action
-            </MlvButton>
-          </MlvAlert>
-        </MlvAlertGroup>
+            </NveButton>
+          </NveAlert>
+        </NveAlertGroup>
 
-        <MlvAccordionGroup container="inset" behavior-expand>
-          <MlvAccordion>
-            <MlvAccordionHeader>
+        <NveAccordionGroup container="inset" behavior-expand>
+          <NveAccordion>
+            <NveAccordionHeader>
               <div slot="title">Heading 1</div>
-            </MlvAccordionHeader>
-            <MlvAccordionContent>
+            </NveAccordionHeader>
+            <NveAccordionContent>
               Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-            </MlvAccordionContent>
-          </MlvAccordion>
-          <MlvAccordion>
-            <MlvAccordionHeader>
+            </NveAccordionContent>
+          </NveAccordion>
+          <NveAccordion>
+            <NveAccordionHeader>
               <div slot="title">Heading 2</div>
-            </MlvAccordionHeader>
-            <MlvAccordionContent>
+            </NveAccordionHeader>
+            <NveAccordionContent>
               Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-            </MlvAccordionContent>
-          </MlvAccordion>
-          <MlvAccordion>
-            <MlvAccordionHeader>
+            </NveAccordionContent>
+          </NveAccordion>
+          <NveAccordion>
+            <NveAccordionHeader>
               <div slot="title">Heading 3</div>
-            </MlvAccordionHeader>
-            <MlvAccordionContent>
+            </NveAccordionHeader>
+            <NveAccordionContent>
               Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-            </MlvAccordionContent>
-          </MlvAccordion>
-        </MlvAccordionGroup>
+            </NveAccordionContent>
+          </NveAccordion>
+        </NveAccordionGroup>
 
-        <div mlv-layout="row gap:xs align:wrap">
-          <MlvBadge status="scheduled">scheduled</MlvBadge>
-          <MlvBadge status="queued">queued</MlvBadge>
-          <MlvBadge status="pending">pending</MlvBadge>
-          <MlvBadge status="starting">starting</MlvBadge>
-          <MlvBadge status="running">running</MlvBadge>
-          <MlvBadge status="restarting">restarting</MlvBadge>
-          <MlvBadge status="stopping">stopping</MlvBadge>
-          <MlvBadge status="finished">finished</MlvBadge>
-          <MlvBadge status="failed">failed</MlvBadge>
-          <MlvBadge status="unknown">unknown</MlvBadge>
-          <MlvBadge status="ignored">ignored</MlvBadge>
+        <div nve-layout="row gap:xs align:wrap">
+          <NveBadge status="scheduled">scheduled</NveBadge>
+          <NveBadge status="queued">queued</NveBadge>
+          <NveBadge status="pending">pending</NveBadge>
+          <NveBadge status="starting">starting</NveBadge>
+          <NveBadge status="running">running</NveBadge>
+          <NveBadge status="restarting">restarting</NveBadge>
+          <NveBadge status="stopping">stopping</NveBadge>
+          <NveBadge status="finished">finished</NveBadge>
+          <NveBadge status="failed">failed</NveBadge>
+          <NveBadge status="unknown">unknown</NveBadge>
+          <NveBadge status="ignored">ignored</NveBadge>
         </div>
 
-        <MlvBreadcrumb>
-          <MlvButton>
+        <NveBreadcrumb>
+          <NveButton>
             <a href="#" target="_self">
               Item 1
             </a>
-          </MlvButton>
-          <MlvButton>
+          </NveButton>
+          <NveButton>
             <a href="#" target="_self">
               Item 2
             </a>
-          </MlvButton>
-          <MlvButton>
+          </NveButton>
+          <NveButton>
             <a href="#" target="_self">
               Item 3
             </a>
-          </MlvButton>
+          </NveButton>
           <span>You Are Here</span>
-        </MlvBreadcrumb>
+        </NveBreadcrumb>
 
-        <div mlv-layout="row gap:xs align:wrap">
-          <MlvButton>standard</MlvButton>
-          <MlvButton interaction="emphasis">emphasis</MlvButton>
-          <MlvButton interaction="destructive">destructive</MlvButton>
-          <MlvButton disabled>disabled</MlvButton>
+        <div nve-layout="row gap:xs align:wrap">
+          <NveButton>standard</NveButton>
+          <NveButton interaction="emphasis">emphasis</NveButton>
+          <NveButton interaction="destructive">destructive</NveButton>
+          <NveButton disabled>disabled</NveButton>
         </div>
 
-        <MlvButtonGroup container="rounded" behavior-select="single">
-          <MlvButton pressed>All Time</MlvButton>
-          <MlvButton>30 Days</MlvButton>
-          <MlvButton>90 Days</MlvButton>
-        </MlvButtonGroup>
+        <NveButtonGroup container="rounded" behavior-select="single">
+          <NveButton pressed>All Time</NveButton>
+          <NveButton>30 Days</NveButton>
+          <NveButton>90 Days</NveButton>
+        </NveButtonGroup>
 
-        <MlvCard mlv-layout="full" style={{ height: '300px' }}>
-          <MlvCardHeader>
-            <h2 mlv-text="heading">Title</h2>
-          </MlvCardHeader>
-          <MlvCardContent>Card Content</MlvCardContent>
-        </MlvCard>
+        <NveCard nve-layout="full" style={{ height: '300px' }}>
+          <NveCardHeader>
+            <h2 nve-text="heading">Title</h2>
+          </NveCardHeader>
+          <NveCardContent>Card Content</NveCardContent>
+        </NveCard>
 
-        <MlvInput>
+        <NveInput>
           <label slot="label">input</label>
           <input type="text" />
-        </MlvInput>
+        </NveInput>
       </div>
     </>
   );

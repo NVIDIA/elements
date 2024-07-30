@@ -31,33 +31,33 @@ The lit team provides the `@lit-labs/scoped-registry-mixin` package which provid
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
-import { scope } from '@elements/elements/internal';
-import { Input } from '@elements/elements/input';
-import { Password } from '@elements/elements/password';
-import { Button } from '@elements/elements/button';
+import { scope } from '@nvidia-elements/core/internal';
+import { Input } from '@nvidia-elements/core/input';
+import { Password } from '@nvidia-elements/core/password';
+import { Button } from '@nvidia-elements/core/button';
 import '@webcomponents/scoped-custom-element-registry';
 
 @customElement('domain-login')
 export class DomainLogin extends ScopedRegistryHost(LitElement) {
   static elementDefinitions = {
-    'mlv-input': scope(Input, ScopedRegistryHost),
-    'mlv-password': scope(Password, ScopedRegistryHost),
-    'mlv-button': scope(Button, ScopedRegistryHost)
+    'nve-input': scope(Input, ScopedRegistryHost),
+    'nve-password': scope(Password, ScopedRegistryHost),
+    'nve-button': scope(Button, ScopedRegistryHost)
   };
 
   render() {
     return html`
-      <mlv-input>
+      <nve-input>
         <label>Email</label>
         <input type="email" />
-      </mlv-input>
+      </nve-input>
 
-      <mlv-password>
+      <nve-password>
         <label>Password</label>
         <input type="password" />
-      </mlv-password>
+      </nve-password>
 
-      <mlv-button interaction="emphasis">Login</mlv-button>
+      <nve-button interaction="emphasis">Login</nve-button>
     `;
   }
 }

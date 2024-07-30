@@ -26,12 +26,12 @@ Copy the bundles into your environment:
 
 ```html
 <!DOCTYPE html>
-<html lang="en" mlv-theme="dark">
+<html lang="en" nve-theme="dark">
   <head>
     <link rel="stylesheet" href="./elements.[version].bundle.css">
   </head>
-  <body mlv-text="body">
-    <mlv-alert>hello there</mlv-alert>
+  <body nve-text="body">
+    <nve-alert>hello there</nve-alert>
 
     <script type="module" src="./elements.[version].bundle.js"></script>
   </body>

@@ -46,23 +46,23 @@ export class DomainLogin extends LitElement {
   render() {
     return html`
       <form>
-        <mlv-input>
+        <nve-input>
           <label>Email</label>
           <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" @input=${this.#input} .value=${this.#value.email} />
-          <mlv-control-message error="valueMissing">required</mlv-control-message>
-          <mlv-control-message error="patternMismatch">invalid NVIDIA email</mlv-control-message>
-        </mlv-input>
+          <nve-control-message error="valueMissing">required</nve-control-message>
+          <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
+        </nve-input>
 
-        <mlv-password>
+        <nve-password>
           <label>Password</label>
           <input type="password" name="password" required @input=${this.#input} .value=${this.#value.password} />
-          <mlv-control-message error="valueMissing">required</mlv-control-message>
-        </mlv-password>
+          <nve-control-message error="valueMissing">required</nve-control-message>
+        </nve-password>
 
-        <mlv-checkbox>
+        <nve-checkbox>
           <label>remember me</label>
           <input type="checkbox" name="remember" value="on" @change=${this.#change} @input=${this.#input} ?checked=${this.#value.remember} />
-        </mlv-checkbox>
+        </nve-checkbox>
       </form>
     `;
   }
