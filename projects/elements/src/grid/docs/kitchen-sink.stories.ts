@@ -1,8 +1,8 @@
 import { LitElement, unsafeCSS, html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
-import layout from '@nvidia-elements/core/css/module.layout.css?inline';
-import typography from '@nvidia-elements/core/css/module.typography.css?inline';
+import layout from '@nvidia-elements/styles/layout.css?inline';
+import typography from '@nvidia-elements/styles/typography.css?inline';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/app-header/define.js';
