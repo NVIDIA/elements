@@ -1,19 +1,22 @@
 import '@nvidia-elements/core/polyfills';
 import { setCustomElementsManifest } from '@storybook/web-components';
 import format from 'html-format';
-
 import { themes } from '@storybook/theming';
-import styles from '@nvidia-elements/core/index.css?inline';
+
+import fontInter from '@nvidia-elements/themes/fonts/inter.css?inline';
 import theme from '@nvidia-elements/themes/index.css?inline';
 import dark from '@nvidia-elements/themes/dark.css?inline';
-import fontInter from '@nvidia-elements/themes/fonts/inter.css?inline';
-import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline';
-import ddb from '@nvidia-elements/themes/ddb-dark.css?inline';
-import brand from '@nvidia-elements/themes/brand.css?inline';
-import brandDark from '@nvidia-elements/themes/brand-dark.css?inline';
-import responsiveStyles from '@nvidia-elements/styles/responsive.css?inline';
 import layoutStyles from '@nvidia-elements/styles/layout.css?inline';
 import typographyStyles from '@nvidia-elements/styles/typography.css?inline';
+import responsiveStyles from '@nvidia-elements/styles/responsive.css?inline';
+import highContrastTheme from '@nvidia-elements/themes/high-contrast.css?inline';
+import reducedMotionTheme from '@nvidia-elements/themes/reduced-motion.css?inline';
+import compactTheme from '@nvidia-elements/themes/compact.css?inline';
+import debugTheme from '@nvidia-elements/themes/debug.css?inline';
+import ddbTheme from '@nvidia-elements/themes/ddb-dark.css?inline';
+import brandTheme from '@nvidia-elements/themes/brand.css?inline';
+import brandDarkTheme from '@nvidia-elements/themes/brand-dark.css?inline';
+import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline';
 import '@nvidia-elements/core/button/define.js';
 
 import { playground } from './playground-url.js';
@@ -331,13 +334,13 @@ export const globalTypes = {
   scope: {
     name: 'Scope',
     description: 'Scope',
-    defaultValue: 'mlv',
+    defaultValue: 'nve',
     toolbar: {
       icon: 'beaker',
       showName: false,
       items: [
-        { value: 'mlv', title: 'mlv' },
-        { value: 'nve', title: 'nve' }
+        { value: 'nve', title: 'nve' },
+        { value: 'mlv', title: 'mlv' }
       ],
     },
   },
@@ -357,11 +360,11 @@ export const globalTypes = {
 }
 
 const styleSheet = new CSSStyleSheet();
-styleSheet.replaceSync(styles + theme + dark + fontInter + fontNvidiaSans + brand + brandDark + ddb + layoutStyles + typographyStyles);
+styleSheet.replaceSync(theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + layoutStyles + typographyStyles);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
 
 const parentStyle = document.createElement('style');
-parentStyle.innerText = styles + theme + dark + fontInter + fontNvidiaSans + brand + brandDark + ddb + responsiveStyles + layoutStyles + typographyStyles;
+parentStyle.innerText = theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + responsiveStyles + layoutStyles + typographyStyles;
 window.parent.document.head.appendChild(parentStyle);
 
 export const decorators = [(story, { globals }) => {

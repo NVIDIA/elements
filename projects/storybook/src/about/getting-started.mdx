@@ -2,6 +2,7 @@ import { Meta } from '@storybook/addon-docs';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/logo/define.js';
+import '@nvidia-elements/core/alert/define.js';
 
 <Meta title="About/Getting Started" parameters={{ options: { showPanel: false }}} />
 
@@ -22,23 +23,27 @@ registry=https://registry.npmjs.org
 npm login
 
 # install core dependencies
-npm install @elements/elements
+npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
 ```
 
+<div nve-layout="grid gap:lg span-items:4 align:stretch">
 ```css
-/* import the global CSS into your project */
-@import '@elements/elements/dist/index.css';
-@import '@elements/elements/dist/inter.css';
+/* CSS */
+@import '@nvidia-elements/themes/fonts/inter.css';
+@import '@nvidia-elements/themes/index.css';
 ```
 
 ```javascript
-// Load via JavaScript imports to make available in HTML templates
-import '@elements/elements/button/define.js';
+// JavaScript
+import '@nvidia-elements/core/button/define.js';
 ```
 
 ```html
+<!-- HTML-->
 <nve-button>hello there</nve-button>
 ```
+
+</div>
 
 <nve-divider></nve-divider>
 
@@ -92,3 +97,7 @@ import '@elements/elements/button/define.js';
     <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style={{ '--color': 'var(--nve-sys-accent-primary-background)' }}></nve-icon> NPM Package</a>
   </nve-button>
 </section>
+
+<div hidden nve-layout="row align:center pad-top:lg">
+  <nve-alert status="accent"><span slot="icon">🎉</span> Elements 1.0 stable is now out! <a nve-text="link" href="./?path=/docs/about-migration--docs">Learn more</a></nve-alert>
+</div>
