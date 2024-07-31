@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
 
-<Meta title="Internal/Next/About/Migration" />
+<Meta title="About/Migration" />
 
 # Migration Guide 1.0
 
@@ -36,10 +36,10 @@ pnpm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/co
 
 ```css
 /* before */
-@import '@elements/elements/dist/index.css';
+@import '@elements/elements/index.css';
 
 /* after */
-@import '@nvidia-elements/core/dist/index.css';
+@import '@nvidia-elements/core/index.css';
 ```
 
 ```typescript
@@ -68,19 +68,19 @@ The CSS bundle is now divided into smaller independent bundles. This allows you 
 
 ```css
 /* before */
-@import '@elements/elements/dist/index.css';
-@import '@elements/elements/dist/inter.css';
+@import '@elements/elements/index.css';
+@import '@elements/elements/inter.css';
 
 /* after */
-@import '@nvidia-elements/themes/dist/fonts/inter.css';
-@import '@nvidia-elements/themes/dist/index.css';
-@import '@nvidia-elements/themes/dist/high-contrast.css';
-@import '@nvidia-elements/themes/dist/reduced-motion.css';
-@import '@nvidia-elements/themes/dist/compact.css';
-@import '@nvidia-elements/themes/dist/dark.css';
-@import '@nvidia-elements/themes/dist/debug.css';
-@import '@nvidia-elements/styles/dist/typography.css';
-@import '@nvidia-elements/styles/dist/layout.css';
+@import '@nvidia-elements/themes/fonts/inter.css';
+@import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/high-contrast.css';
+@import '@nvidia-elements/themes/reduced-motion.css';
+@import '@nvidia-elements/themes/compact.css';
+@import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/debug.css';
+@import '@nvidia-elements/styles/typography.css';
+@import '@nvidia-elements/styles/layout.css';
 ```
 
 ### 2. Update any CSS Custom property usage

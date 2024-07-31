@@ -1,7 +1,7 @@
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import layout from '@nvidia-elements/core/css/module.layout.css?inline';
-import typography from '@nvidia-elements/core/css/module.typography.css?inline';
+import layout from '@nvidia-elements/styles/layout.css?inline';
+import typography from '@nvidia-elements/styles/typography.css?inline';
 import { Icon, IconName, ICON_NAMES } from '@nvidia-elements/core/icon';
 import { Size  as IconSize} from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/button/define.js';
