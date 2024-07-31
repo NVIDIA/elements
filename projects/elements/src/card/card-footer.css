@@ -1,6 +1,6 @@
 :host {
   --padding: var(--nve-ref-size-400);
-  --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
+  --border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   contain: none;
 }
 
