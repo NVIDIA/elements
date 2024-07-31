@@ -21,7 +21,7 @@ npm login
 Install base packages:
 
 ```bash
-npm install @nvidia-elements/themes @nvidia-elements/styles @elements/elements --legacy-peer-deps
+npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
 ```
 
 ## Usage
@@ -31,15 +31,26 @@ tools are needed for your application and omit anything unessesary, improving
 overall application performance.
 
 ```css
-/* import the global CSS into your project */
-@import '@elements/elements/dist/index.css';
-@import '@elements/elements/dist/inter.css';
+/* base theme */
+@import '@nvidia-elements/themes/fonts/inter.css';
+@import '@nvidia-elements/themes/index.css';
+
+/* optional themes */
+@import '@nvidia-elements/themes/high-contrast.css';
+@import '@nvidia-elements/themes/reduced-motion.css';
+@import '@nvidia-elements/themes/compact.css';
+@import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/debug.css';
+
+/* optional CSS utilities */
+@import '@nvidia-elements/styles/typography.css';
+@import '@nvidia-elements/styles/layout.css';
 ```
 
 ```javascript
-// load via JavaScript imports to make available in HTML templates
-import '@elements/elements/button/define.js';
-import '@elements/elements/dot/define.js';
+// Load via JavaScript imports to make available in HTML templates
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/dot/define.js';
 ...
 ```
 

@@ -1,6 +1,6 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import typography from '@nvidia-elements/core/css/module.typography.css?inline';
-import layout from '@nvidia-elements/core/css/module.layout.css?inline';
+import typography from '@nvidia-elements/styles/typography.css?inline';
+import layout from '@nvidia-elements/styles/layout.css?inline';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/notification/define.js';
 import '@nvidia-elements/core/password/define.js';
