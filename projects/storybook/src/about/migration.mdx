@@ -13,6 +13,9 @@ clear ownership boundary and signal of support for our libraries. As we expand i
 projects through [@nve-labs](./?path=/docs/labs-about-documentation--docs), this
 namespace will continue to signify which projects have the backing of the Elements team.
 
+The 1.0 release addresses a long standing issue where peer dependencies are inadvertently overlooked by package managers when the
+package itself has a '0.x' version number. [(npm)](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies) [(semver)](https://semver.org/#spec-item-9)
+
 Don't worry about stability - despite this being a breaking change, we're committed
 to ensuring backwards compatibility throughout our 1.0 release cycle, so you can
 still rely on the `mlv-*` namespace in our APIs.
