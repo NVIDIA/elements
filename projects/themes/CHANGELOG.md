@@ -1,3 +1,16 @@
+## [@nvidia-elements/themes-v1.0.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.29.2...@nvidia-elements/themes-v1.0.0) (2024-07-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* **themes:** release to 1.0 stable
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+
+### Features
+
+* **themes:** stable branch ([c48e1b5](https://github.com/NVIDIA/elements/commit/c48e1b5668842e713ac35a90a695afa86eaf142f))
+
 ## [@nvidia-elements/themes-v0.29.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.29.1...@nvidia-elements/themes-v0.29.2) (2024-07-31)
 
 
