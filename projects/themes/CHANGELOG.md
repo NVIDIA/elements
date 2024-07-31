@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v0.29.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.29.1...@nvidia-elements/themes-v0.29.2) (2024-07-31)
+
+
+### Bug Fixes
+
+* **themes:** typo in dark theme color ref ([fbc391d](https://github.com/NVIDIA/elements/commit/fbc391d89081552f083c91d60750d87d35baf739))
+
 ## [@nvidia-elements/themes-v0.29.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v0.29.0...@nvidia-elements/themes-v0.29.1) (2024-07-25)
 
 
