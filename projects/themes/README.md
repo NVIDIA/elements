@@ -20,7 +20,7 @@ npm install @nvidia-elements/themes
 
 ```css
 /* import the theme CSS into your project */
-@import '@nvidia-elements/themes/dist/index.css';
+@import '@nvidia-elements/themes/index.css';
 ```
 
 | Theme                            | Description          |
