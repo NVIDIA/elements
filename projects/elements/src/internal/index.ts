@@ -18,6 +18,7 @@ export * from './controllers/type-expandable.controller.js';
 export * from './controllers/type-selectable.controller.js';
 export * from './controllers/type-button.controller.js';
 export * from './controllers/type-popover.controller.js';
+export * from './controllers/type-native-popover-trigger.controller.js';
 export { popoverBaseStyles as popoverBaseStyles } from './controllers/type-popover.utils.js';
 export * from './controllers/type-submit.controller.js';
 export * from './styles/index.js';
