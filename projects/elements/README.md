@@ -7,7 +7,7 @@
 - [Changelog](https://NVIDIA.github.io/elements/api/?path=/docs/about-changelog--docs)
 - [Gitlab Repo](https://github.com/NVIDIA/elements)
 - [Package Artifactory URM](https://registry.npmjs.org
-- [Package Artifactory Maglev](ui/packages/npm:%2F%2F@elements%2Felements)
+- [Package Artifactory Maglev](ui/packages/npm:%2F%2F@nvidia-elements%2Fcore)
 
 ## Getting Started
 
@@ -19,19 +19,19 @@ registry=https://registry.npmjs.org
 npm login
 
 # install core dependencies
-npm install @nvidia-elements/themes @elements/elements
+npm install @nvidia-elements/themes @nvidia-elements/core
 ```
 
 ```css
 /* import the global CSS into your project */
-@import '@nvidia-elements/themes/dist/fonts/inter.css';
-@import '@nvidia-elements/themes/dist/index.css';
-@import '@nvidia-elements/themes/dist/dark.css';
+@import '@nvidia-elements/themes/fonts/inter.css';
+@import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/dark.css';
 ```
 
 ```javascript
 // Load via JavaScript imports to make available in HTML templates
-import '@elements/elements/button/define.js';
+import '@nvidia-elements/core/button/define.js';
 ```
 
 ```html

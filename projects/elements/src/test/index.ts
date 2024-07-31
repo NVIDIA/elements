@@ -2,6 +2,7 @@ import { TemplateResult, render } from 'lit';
 export * from './demo.js';
 
 /**
+ * @deprecated
  * Creates a test fixture DOM element for testing.
  * Fixture is ready when all custom elements have been defined.
  */
@@ -18,6 +19,7 @@ export async function createFixture(template?: TemplateResult): Promise<HTMLElem
 }
 
 /**
+ * @deprecated
  * Removes test fixture DOM element.
  */
 export function removeFixture(fixture: HTMLElement) {
@@ -27,14 +29,23 @@ export function removeFixture(fixture: HTMLElement) {
 }
 
 /**
+ * @deprecated
  * Find all elements not defined in the custom elmenets registry and wait until
  * all elements have been added to registry https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined
  */
 async function waitForAllElementsToBeDefined() {
-  const pendingElements = [...new Set(Array.from(document.querySelectorAll('*:not(:defined)')).filter(e => e.tagName.includes('-')).map(e => e.tagName.toLocaleLowerCase()))];
+  const pendingElements = [
+    ...new Set(
+      Array.from(document.querySelectorAll('*:not(:defined)'))
+        .filter(e => e.tagName.includes('-'))
+        .map(e => e.tagName.toLocaleLowerCase())
+    )
+  ];
   return new Promise((resolve, reject) => {
     const undefinedElements = [];
-    Promise.all(pendingElements.map(e => customElements.whenDefined(e))).then(() => resolve('')).catch(e => reject(e));
+    Promise.all(pendingElements.map(e => customElements.whenDefined(e)))
+      .then(() => resolve(''))
+      .catch(e => reject(e));
     setTimeout(() => {
       if (undefinedElements.length) {
         reject('');
@@ -45,20 +56,26 @@ async function waitForAllElementsToBeDefined() {
 }
 
 /**
+ * @deprecated
  * Awaits until Lit element has rendered and has no pending updates
  */
 export async function elementIsStable(element: any) {
   if (element.updateComplete) {
-    return retry(async () => await element.updateComplete ? Promise.resolve() : Promise.reject('Element did not stablize'));
+    return retry(async () =>
+      (await element.updateComplete) ? Promise.resolve() : Promise.reject('Element did not stablize')
+    );
   } else {
     return Promise.reject(`${element.tagName.toLocaleLowerCase()} is not a defined lit element`);
   }
 }
 
 function retry(fn: () => Promise<any>, maxTries = 10) {
-  return fn().catch(() => maxTries > 0 ? retry(fn, maxTries--) : Promise.reject('Max attempts reached'));
+  return fn().catch(() => (maxTries > 0 ? retry(fn, maxTries--) : Promise.reject('Max attempts reached')));
 }
 
+/**
+ * @deprecated
+ */
 export function emulateClick(component: HTMLElement | Element) {
   const event1 = new MouseEvent('mousedown', { bubbles: true });
   const event2 = new MouseEvent('pointerdown', { bubbles: true });
@@ -72,6 +89,9 @@ export function emulateClick(component: HTMLElement | Element) {
   component.dispatchEvent(event5);
 }
 
+/**
+ * @deprecated
+ */
 export function untilEvent(element: HTMLElement | Document, event: string) {
   return new Promise<any>(resolve => element.addEventListener(event, e => resolve(e)));
 }
