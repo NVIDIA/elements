@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.0.1...@nvidia-elements/code-v0.1.0) (2024-07-31)
+
+
+### Features
+
+* **labs-code:** dependency update ([afb2cff](https://github.com/NVIDIA/elements/commit/afb2cff39f7e1a2ac4c1fc146a698706facccc8a))
+
 ## [@nvidia-elements/code-v0.0.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.0.0...@nvidia-elements/code-v0.0.1) (2024-06-11)
 
 
