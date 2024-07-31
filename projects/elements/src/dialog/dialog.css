@@ -8,7 +8,7 @@
   --border-radius: var(--nve-ref-border-radius-lg);
   --background: var(--nve-sys-layer-overlay-background);
   --color: var(--nve-sys-layer-overlay-color);
-  --padding: var(--nve-ref-size-400);
+  --padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
   --box-shadow: var(--nve-ref-shadow-500);
   --gap: var(--nve-ref-space-sm);
   --max-width: 600px;

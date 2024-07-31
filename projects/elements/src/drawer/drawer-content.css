@@ -1,5 +1,5 @@
 :host {
-  --padding: var(--nve-ref-size-400);
+  --padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
   --gap: var(--nve-ref-space-sm);
   width: 100%;
   height: 100%;
