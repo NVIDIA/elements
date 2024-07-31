@@ -9,7 +9,13 @@ import { Dark, Default, DarkDebug, HighContrast, ReducedMotion } from './theme.s
 Themes are built leveraging CSS Custom Properties. Themes are applied by setting the `nve-theme` attribute on the host `html` element.
 
 ```css
-@import '@nvidia-elements/core/dist/index.css';
+@import '@nvidia-elements/themes/fonts/inter.css';
+@import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/high-contrast.css';
+@import '@nvidia-elements/themes/reduced-motion.css';
+@import '@nvidia-elements/themes/compact.css';
+@import '@nvidia-elements/themes/debug.css';
 ```
 
 ```html
@@ -19,18 +25,6 @@ Themes are built leveraging CSS Custom Properties. Themes are applied by setting
 <nve-alert status="warning">
   If your application cannot access root nodes like html or body then apply nve-theme="root" to set the root background colors and fonts.
 </nve-alert>
-
-<br /><br />
-
-## Theme Options
-
-Currently there are the following themes:
-
-- Light (default)
-- Dark
-- High Contrast
-- Reduced Motion (alpha)
-- Compact (alpha)
 
 Themes can be applied dynamically based on user preferences.
 
