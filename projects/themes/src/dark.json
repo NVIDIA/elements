@@ -270,7 +270,7 @@
           "type": "color"
         },
         "1200": {
-          "value": "hoklch(97% 0.044 125.3)",
+          "value": "oklch(97% 0.044 125.3)",
           "type": "color"
         }
       },
