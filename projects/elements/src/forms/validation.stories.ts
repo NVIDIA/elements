@@ -2,7 +2,7 @@ import { html, unsafeCSS, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 import { query } from 'lit/decorators/query.js';
-import layout from '@nvidia-elements/core/css/module.layout.css?inline';
+import layout from '@nvidia-elements/styles/layout.css?inline';
 import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/alert/define.js';

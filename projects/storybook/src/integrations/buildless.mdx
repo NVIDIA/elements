@@ -22,12 +22,12 @@ use elements without build tooling such as Vite or Rollup for easy in browser **
   <head>
     <title>Import Map Starter + @nvidia-elements/core</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@elements/elements@latest/dist/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/core@latest/dist/index.css" />
     <script type="importmap">
       {
         "imports": {
-          "@elements/elements": "https://https://esm.sh/@elements/elements@latest",
-          "@elements/elements/": "https://https://esm.sh/@elements/elements@latest/"
+          "@nvidia-elements/core": "https://https://esm.sh/@nvidia-elements/core@latest",
+          "@nvidia-elements/core/": "https://https://esm.sh/@nvidia-elements/core@latest/"
         }
       }
     </script>
@@ -66,7 +66,7 @@ Using import maps more complex UI components can be created without build toolin
       import { html, LitElement } from 'lit';
       import typography from '@nvidia-elements/styles/dist/typography.css' with { type: 'css' };
       import layout from '@nvidia-elements/styles/dist/layout.css' with { type: 'css' };
-      import '@elements/elements/badge/define.js';
+      import '@nvidia-elements/core/badge/define.js';
 
       class AppStatusLabel extends LitElement {
         static styles = [typography, layout];

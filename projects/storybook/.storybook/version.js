@@ -1,7 +1,7 @@
 
 const controller = new AbortController();
 const timeout = setTimeout(() => controller.abort(), 3000);
-const LATEST_URL = 'https://https://esm.sh/@elements/elements@latest/package.json';
+const LATEST_URL = 'https://https://esm.sh/@nvidia-elements/core@latest/package.json';
 
 export const ELEMENTS_VERSION = await fetch(LATEST_URL, { signal: controller.signal }).then(async (response) => {
   clearTimeout(timeout);
