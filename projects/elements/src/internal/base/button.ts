@@ -8,6 +8,7 @@ import { stateSelected } from '../controllers/state-selected.controller.js';
 import { typeButton } from '../controllers/type-button.controller.js';
 import { typeAnchor } from '../controllers/type-anchor.controller.js';
 import { typeSubmit } from '../controllers/type-submit.controller.js';
+import { typeNativePopoverTrigger } from '../controllers/type-native-popover-trigger.controller.js';
 import { stateCurrent } from '../controllers/state-current.controller.js';
 import { attachInternals } from '../utils/a11y.js';
 
@@ -19,6 +20,7 @@ import { attachInternals } from '../utils/a11y.js';
 @typeButton<BaseButton>()
 @typeAnchor<BaseButton>()
 @typeSubmit<BaseButton>()
+@typeNativePopoverTrigger<BaseButton>()
 @stateActive<BaseButton>()
 @stateCurrent<BaseButton>()
 @statePressed<BaseButton>()
@@ -81,6 +83,15 @@ export class BaseButton extends LitElement {
    * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current
    */
   @property({ type: String, reflect: true }) current: 'page' | 'step';
+
+  @property({ type: Object }) popoverTargetElement: HTMLElement;
+
+  @property({ type: String, attribute: 'popovertarget', reflect: true }) popovertarget: string;
+
+  @property({ type: String, attribute: 'popovertargetaction', reflect: true }) popoverTargetAction:
+    | 'show'
+    | 'hide'
+    | 'toggle';
 
   /**
    * @private
