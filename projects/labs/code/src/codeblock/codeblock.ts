@@ -3,7 +3,7 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
-import { useStyles, ContainerElement, shiftLeft } from '@elements/elements/internal';
+import { useStyles, ContainerElement, shiftLeft } from '@nvidia-elements/core/internal';
 import styles from './codeblock.css?inline';
 
 import hljs from 'highlight.js/lib/core';
