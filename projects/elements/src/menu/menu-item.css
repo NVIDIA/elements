@@ -50,12 +50,13 @@
 }
 
 :host(:state(hover)) {
-  --color: var(--nve-sys-interaction-hover-color);
+  --color: var(--nve-sys-interaction-selected-color);
 }
 
 :host(:state(current)) {
   contain: none;
   content-visibility: initial;
+  --color: var(--nve-sys-interaction-selected-color);
 }
 
 :host(:state(current)) [internal-host] {
@@ -100,11 +101,22 @@
   margin: 0 calc(-1 * var(--padding));
 }
 
+::slotted([slot='suffix']) {
+  margin-left: auto;
+}
 ::slotted(mlv-icon),
 ::slotted(nve-icon) {
   --color: var(--nve-sys-text-muted-color);
 }
 
-::slotted([slot='suffix']) {
-  margin-left: auto;
+:host(:hover) ::slotted(nve-icon),
+:host(:hover) ::slotted(mlv-icon) {
+  --color: var(--nve-sys-text-emphasis-color) !important;
+}
+
+:host(:state(current)) ::slotted(nve-icon),
+:host(:state(current)) ::slotted(mlv-icon),
+:host(:state(selected)) ::slotted(nve-icon),
+:host(:state(selected)) ::slotted(mlv-icon) {
+  --color: var(--nve-sys-interaction-selected-color) !important;
 }
