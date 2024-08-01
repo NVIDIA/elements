@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('badge lighthouse report', () => {
   test('badge should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-badge', /* html */`
+    const report = await lighthouseRunner.getReport('nve-badge', /* html */`
       <nve-badge>badge</nve-badge>
       <script type="module">
         import '@nvidia-elements/core/badge/define.js';

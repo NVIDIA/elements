@@ -60,7 +60,6 @@
         "./projects/labs/behaviors-alpine:ci",
         "./projects/labs/code:ci",
         "./projects/labs/snippets:ci",
-        "./projects/labs/testing-lighthouse:ci",
         "./projects/pages:ci",
         "./projects/starters/angular:ci",
         "./projects/starters/buildless:ci",
@@ -108,7 +107,7 @@
         "projects/themes/coverage/lighthouse/**"
       ],
       "dependencies": [
-        "./projects/labs/testing-lighthouse:build"
+        "./projects/internals/vite:ci"
       ],
       "env": {
         "NODE_ENV": "production",

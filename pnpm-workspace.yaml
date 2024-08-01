@@ -13,7 +13,6 @@ packages:
   - 'projects/labs/behaviors-alpine'
   - 'projects/labs/code'
   - 'projects/labs/snippets'
-  - 'projects/labs/testing-lighthouse'
   - 'projects/pages'
   - 'projects/elements'
   - 'projects/elements-react'

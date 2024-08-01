@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('dialog lighthouse report', () => {
   test('dialog should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-dialog', /* html */`
+    const report = await lighthouseRunner.getReport('nve-dialog', /* html */`
       <nve-dialog closable modal>
         <nve-dialog-header>
           <h3>header</h3>

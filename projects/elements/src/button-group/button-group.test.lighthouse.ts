@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('button-group lighthouse report', () => {
   test('button-group should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-button-group', /* html */`
+    const report = await lighthouseRunner.getReport('nve-button-group', /* html */`
       <nve-button-group>
         <nve-icon-button pressed icon-name="split-vertical" aria-label="split vertical"></nve-icon-button>
         <nve-icon-button icon-name="split-horizontal" aria-label="split horizontal"></nve-icon-button>

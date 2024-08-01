@@ -1,7 +1,7 @@
 import fs from 'fs';
 import process from 'process';
 import terser from '@rollup/plugin-terser';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
+import { minifyHTML } from '../plugins/minify-html.js';
 import { resolve } from 'path';
 
 const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package.json')));
@@ -34,11 +34,9 @@ export const libraryBundleConfig = {
         chunkFileNames: info => `${info.name ? info.name : 'index'}.${packageFile.version}.js`
       },
       plugins: [
-        minifyHTML.default(),
+        minifyHTML(),
         terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
       ]
     }
   }
 };
-
-export default libraryBundleConfig;

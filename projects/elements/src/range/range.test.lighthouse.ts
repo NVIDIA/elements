@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('range lighthouse report', () => {
   test('range should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-range', /* html */`
+    const report = await lighthouseRunner.getReport('nve-range', /* html */`
       <nve-range>
         <label>label</label>
         <input type="range" value="50" />
