@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('accordion lighthouse report', () => {
   test('accordion should meet a lighthouse performance score of 100', async () => {
-    const report = await runner.getReport('nve-accordion', /* html */`
+    const report = await lighthouseRunner.getReport('nve-accordion', /* html */`
       <nve-accordion>
         <nve-accordion-header>
           <div slot="title">Heading</div>

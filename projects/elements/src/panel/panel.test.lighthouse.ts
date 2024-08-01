@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('panel lighthouse report', () => {
   test('panel should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-panel', /* html */`
+    const report = await lighthouseRunner.getReport('nve-panel', /* html */`
       <nve-panel behavior-expand expanded style="width:280px; height:100vh">
         <nve-panel-header>
           <div slot="title">Title</div>

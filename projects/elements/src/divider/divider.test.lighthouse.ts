@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('divider lighthouse report', () => {
   test('divider should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-divider', /* html */`
+    const report = await lighthouseRunner.getReport('nve-divider', /* html */`
       <nve-divider></nve-divider>
       <script type="module">
         import '@nvidia-elements/core/divider/define.js';

@@ -25,7 +25,7 @@ export const libraryTestConfig = {
       if (log.includes('scheduled an update')) return false;
       if (log.includes('Lit is in dev mode')) return false;
     },
-    setupFiles: ['@nve-internals/vite/setup.js'],
+    setupFiles: ['@nve-internals/vite/setup/library.js'],
     browser: {
       isolate: coverage,
       slowHijackESM: false,

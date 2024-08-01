@@ -773,11 +773,10 @@
     "@nve-internals/eslint": "workspace:*",
     "@nve-internals/vite": "workspace:*",
     "@nvidia-elements/snippets": "workspace:*",
-    "@nvidia-elements/testing-lighthouse": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@typescript/lib-dom": "npm:@types/web@0.0.147",
-    "@vitest/browser": "2.0.3",
-    "@vitest/coverage-istanbul": "2.0.3",
+    "@vitest/browser": "2.0.5",
+    "@vitest/coverage-istanbul": "2.0.5",
     "chai": "4.3.10",
     "cssnano": "6.0.1",
     "emoji-picker-element": "1.18.4",
@@ -790,7 +789,7 @@
     "ts-lit-plugin": "2.0.2",
     "typescript": "5.3.3",
     "vite": "5.3.3",
-    "vitest": "2.0.3"
+    "vitest": "2.0.5"
   },
   "wireit": {
     "dev": {
@@ -843,8 +842,7 @@
         "build:icons",
         "build:snippets",
         "../themes:build",
-        "../internals/vite:ci",
-        "../labs/testing-lighthouse:build"
+        "../internals/vite:ci"
       ]
     },
     "build:icons": {

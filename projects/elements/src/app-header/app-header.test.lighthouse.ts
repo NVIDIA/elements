@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('app-header lighthouse report', () => {
   test('app-header should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-app-header', /* html */`
+    const report = await lighthouseRunner.getReport('nve-app-header', /* html */`
       <nve-app-header>
         <nve-logo size="lg" aria-label="NV Logo">NV</nve-logo>
         <h2 slot="title">header</h2>
