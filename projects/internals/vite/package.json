@@ -8,9 +8,8 @@
   },
   "exports": {
     ".": "./src/index.js",
-    "./runners/lighthouse.js": "./src/runners/lighthouse.js",
-    "./setup/library.js": "./src/setup/library.js",
-    "./setup/lighthouse.js": "./src/setup/lighthouse.js"
+    "./runners/*.js": "./src/runners/*.js",
+    "./setup/*.js": "./src/setup/*.js"
   },
   "dependencies": {
     "@custom-elements-manifest/analyzer": "0.10.2",
@@ -18,7 +17,8 @@
     "custom-element-vs-code-integration": "1.3.0",
     "glob": "10.3.10",
     "lighthouse": "11.4.0",
-    "playwright": "1.44.0",
+    "pixelmatch": "6.0.0",
+    "pngjs": "7.0.0",
     "rollup": "3.29.1",
     "rollup-plugin-minify-html-literals": "1.2.6",
     "terser": "5.30.3",

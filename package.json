@@ -4,23 +4,24 @@
   "version": "0.0.0",
   "type": "module",
   "description": "",
-  "packageManager": "pnpm@8.15.1",
+  "packageManager": "pnpm@9.7.0",
   "engines": {
-    "node": "20.11.0"
+    "node": "20.16.0"
   },
   "scripts": {
-    "ci": "pnpm run ci:validate && node ./projects/internals/gitlab/cache-validate.js",
-    "ci:nocache": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline && pnpm run ci",
-    "ci:validate": "wireit",
-    "lighthouse": "wireit",
+    "ci": "wireit",
+    "ci:lighthouse": "wireit",
+    "ci:visual": "wireit",
+    "ci:all": "pnpm run ci && pnpm run ci:lighthouse && pnpm run ci:visual && pnpm run ci:validate",
+    "ci:validate": "node ./projects/internals/gitlab/cache-validate.js ci ci:visual ci:lighthouse",
+    "ci:reset": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline",
+    "clean": "git clean -dfX",
     "format": "wireit",
     "format:fix": "wireit",
-    "clean": "git clean -dfX",
     "playwright": "wireit",
     "prepare": "wireit",
     "release": "wireit",
-    "commitlint": "commitlint --edit",
-    "gitlab:coverage": "wireit"
+    "commitlint": "commitlint --edit"
   },
   "devDependencies": {
     "@commitlint/cli": "19.2.1",
@@ -28,6 +29,7 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/core-react": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "12.0.0",
@@ -42,18 +44,18 @@
     "glob": "10.3.10",
     "husky": "8.0.3",
     "lint-staged": "15.2.1",
-    "playwright": "1.44.1",
+    "playwright": "1.46.0",
     "prettier": "3.2.5",
     "semantic-release": "22.0.12",
     "semantic-release-monorepo": "8.0.2",
     "semantic-release-replace-plugin": "1.2.7",
-    "wireit": "0.14.4"
+    "wireit": "0.14.7"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
   "wireit": {
-    "ci:validate": {
+    "ci": {
       "dependencies": [
         "./projects/elements:ci",
         "./projects/elements-react:ci",
@@ -73,30 +75,27 @@
         "./projects/storybook:ci",
         "./projects/styles:ci",
         "./projects/testing:ci",
-        "./projects/themes:ci",
-        "lighthouse"
-      ]
+        "./projects/themes:ci"
+      ],
+      "files": []
     },
-    "lighthouse": {
-      "command": "pnpm run -r test:lighthouse --workspace-concurrency=1",
+    "ci:lighthouse": {
+      "command": "pnpm run -r test:lighthouse --workspace-concurrency=1 && node ./projects/internals/gitlab/metrics.lighthouse.js",
       "files": [
         "projects/elements/src/index.test.lighthouse.ts",
         "projects/elements/src/**/*.test.lighthouse.ts",
         "projects/elements/vitest.lighthouse.html",
         "projects/elements/vitest.lighthouse.ts",
-        "projects/elements/vitest.lighthouse.build.ts",
         "projects/labs/code/src/index.test.lighthouse.ts",
         "projects/labs/code/src/**/*.test.lighthouse.ts",
         "projects/labs/code/vitest.lighthouse.html",
         "projects/labs/code/vitest.lighthouse.ts",
-        "projects/labs/code/vitest.lighthouse.build.ts",
         "projects/styles/vitest.lighthouse.html",
         "projects/styles/vitest.lighthouse.ts",
-        "projects/styles/vitest.lighthouse.build.ts",
-        "projects/themes/vitest.lighthouse.ts",
-        "projects/themes/vitest.lighthouse.build.ts"
+        "projects/themes/vitest.lighthouse.ts"
       ],
       "output": [
+        ".metrics/metrics.txt",
         "projects/elements/.lighthouse",
         "projects/elements/coverage/lighthouse/**",
         "projects/labs/code/.lighthouse",
@@ -110,11 +109,36 @@
         "./projects/internals/vite:ci"
       ],
       "env": {
-        "NODE_ENV": "production",
-        "LIGHTHOUSE_ALL": {
-          "external": true
-        }
+        "NODE_ENV": "production"
       }
+    },
+    "ci:visual": {
+      "command": "pnpm run -r test:visual --workspace-concurrency=1",
+      "clean": false,
+      "files": [
+        "projects/elements/src/index.test.visual.ts",
+        "projects/elements/src/**/*.test.visual.ts",
+        "projects/elements/vitest.visual.html",
+        "projects/elements/vitest.visual.ts",
+        "projects/styles/src/index.test.visual.ts",
+        "projects/styles/src/**/*.test.visual.ts",
+        "projects/styles/vitest.visual.html",
+        "projects/styles/vitest.visual.ts",
+        "projects/themes/src/index.test.visual.ts",
+        "projects/themes/src/**/*.test.visual.ts",
+        "projects/themes/vitest.visual.html",
+        "projects/themes/vitest.visual.ts"
+      ],
+      "output": [
+        "projects/elements/.visual",
+        "projects/styles/.visual",
+        "projects/themes/.visual"
+      ],
+      "dependencies": [
+        "./projects/elements:build",
+        "./projects/styles:build",
+        "./projects/themes:build"
+      ]
     },
     "release": {
       "command": "echo 'Releasing...'",
@@ -185,10 +209,6 @@
     },
     "prepare": {
       "command": "test -n \"$CI\" || (pnpm run playwright & husky install)"
-    },
-    "gitlab:coverage": {
-      "command": "node ./projects/internals/gitlab/index.js",
-      "dependencies": []
     }
   }
 }

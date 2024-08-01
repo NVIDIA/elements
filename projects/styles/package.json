@@ -33,7 +33,9 @@
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
-    "test:lighthouse": "wireit"
+    "test:lighthouse": "wireit",
+    "test:visual": "wireit",
+    "test:visual:update": "wireit"
   },
   "peerDependencies": {
     "@nvidia-elements/themes": "workspace:^"
@@ -88,6 +90,38 @@
     },
     "test:lighthouse": {
       "command": "vitest run --config=vitest.lighthouse.ts",
+      "files": [
+        "src/index.test.lighthouse.ts",
+        "src/**/*.test.lighthouse.ts",
+        "vitest.lighthouse.html",
+        "vitest.lighthouse.ts"
+      ],
+      "output": [
+        ".lighthouse"
+      ],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ]
+    },
+    "test:visual": {
+      "command": "vitest run --config=vitest.visual.ts",
+      "clean": false,
+      "files": [
+        "src/index.test.visual.ts",
+        "src/**/*.test.visual.ts",
+        "vitest.visual.html",
+        "vitest.visual.ts"
+      ],
+      "output": [
+        ".visual"
+      ],
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test:visual:update": {
+      "command": "rm -rf .visual && vitest run --config=vitest.visual.ts",
       "dependencies": [
         "build"
       ]

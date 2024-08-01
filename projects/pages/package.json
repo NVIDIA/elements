@@ -8,6 +8,11 @@
   },
   "wireit": {
     "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build": {
       "command": "node ./index.js",
       "files": [
         "index.js",
