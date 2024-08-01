@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.1.0...@nvidia-elements/code-v0.2.0) (2024-08-01)
+
+
+### Features
+
+* **elements:** support popovertarget for buttons ([129667c](https://github.com/NVIDIA/elements/commit/129667c59e361f1b53e67a58895b1878a13aaa9f))
+
 ## [@nvidia-elements/code-v0.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.0.1...@nvidia-elements/code-v0.1.0) (2024-07-31)
 
 
