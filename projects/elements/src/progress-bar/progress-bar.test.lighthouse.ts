@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('progress-bar lighthouse report', () => {
   test('progress-bar should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-progress-bar', /* html */`
+    const report = await lighthouseRunner.getReport('nve-progress-bar', /* html */`
       <nve-progress-bar></nve-progress-bar>
       <script type="module">
         import '@nvidia-elements/core/progress-bar/define.js';

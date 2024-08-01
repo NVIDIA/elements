@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('breadcrumb lighthouse report', () => {
   test('breadcrumb should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-breadcrumb', /* html */`
+    const report = await lighthouseRunner.getReport('nve-breadcrumb', /* html */`
       <nve-breadcrumb>
         <nve-icon-button icon-name="home" aria-label="link to first page"></nve-icon-button>
         <nve-button>Item</nve-button>

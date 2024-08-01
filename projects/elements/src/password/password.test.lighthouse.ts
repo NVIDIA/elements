@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('password lighthouse report', () => {
   test('password should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-password', /* html */`
+    const report = await lighthouseRunner.getReport('nve-password', /* html */`
       <nve-password>
         <label>label</label>
         <input type="password" />

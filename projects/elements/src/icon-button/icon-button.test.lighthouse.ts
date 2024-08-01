@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('icon-button lighthouse report', () => {
   test('icon-button should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-icon-button', /* html */`
+    const report = await lighthouseRunner.getReport('nve-icon-button', /* html */`
       <nve-icon-button aria-label="icon button"></nve-icon-button>
       <script type="module">
         import '@nvidia-elements/core/icon-button/define.js';

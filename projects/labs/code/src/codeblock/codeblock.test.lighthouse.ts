@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('codeblock lighthouse report', () => {
   test('codeblock should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-codeblock', /* html */`
+    const report = await lighthouseRunner.getReport('nve-codeblock', /* html */`
       <nve-codeblock language="shell">
         pnpm install
       </nve-codeblock>

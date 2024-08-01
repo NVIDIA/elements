@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('lighthouse report', () => {
   test('@nvidia-elements/code JS Bundles should remain within compressed bundle limits', async () => {
-    const report = await runner.getReport('nve-codeblock', /* html */`
+    const report = await lighthouseRunner.getReport('nve-codeblock', /* html */`
       <script type="module">
       import('@nvidia-elements/code/codeblock/languages/css.js');
       import('@nvidia-elements/code/codeblock/languages/go.js');

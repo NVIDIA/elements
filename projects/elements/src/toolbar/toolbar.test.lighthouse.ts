@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('toolbar lighthouse report', () => {
   test('toolbar should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-toolbar', /* html */`
+    const report = await lighthouseRunner.getReport('nve-toolbar', /* html */`
       <nve-toolbar>
         <nve-button container="flat"><nve-icon name="add"></nve-icon> create</nve-button>
         <nve-button container="flat"><nve-icon name="delete"></nve-icon> delete</nve-button>

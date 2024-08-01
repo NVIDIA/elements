@@ -1,10 +1,10 @@
-import { runner } from './index.js';
+import { lighthouseRunner } from '../runners/lighthouse.js';
 
 let runnerInstance = null;
 
 export async function setup() {
   if (!runnerInstance) {
-    runnerInstance = runner;
+    runnerInstance = lighthouseRunner;
     await runnerInstance.open();
   }
 
