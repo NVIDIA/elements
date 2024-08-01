@@ -1,5 +1,5 @@
 {
-  "created": "2024-07-15T19:02:11.426Z",
+  "created": "2024-08-12T16:44:19.553Z",
   "projects": [
     {
       "name": "@elements/ddb-dump-roadcast-frontend",
@@ -7,6 +7,90 @@
       "elementsVersion": "^0.25.0",
       "elements": [],
       "instanceTotal": 0
+    },
+    {
+      "name": "browser",
+      "path": "src/ui/browser",
+      "elementsVersion": "0.39.1",
+      "elements": [
+        {
+          "name": "nve-button",
+          "instanceTotal": 7
+        },
+        {
+          "name": "nve-divider",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 8
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 10
+        },
+        {
+          "name": "nve-menu-item",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-menu",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-progress-ring",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-range",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tag",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-toast",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tooltip",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-toolbar",
+          "instanceTotal": 7
+        },
+        {
+          "name": "nve-button-group",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-checkbox",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-card",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-card-content",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-combobox",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-progressive-filter-chip",
+          "instanceTotal": 2
+        }
+      ],
+      "instanceTotal": 53
     },
     {
       "name": "user-management",
@@ -18,46 +102,50 @@
     {
       "name": "workflows",
       "path": "src/ui/core/apps/workflows",
-      "elementsVersion": "0.10.0",
+      "elementsVersion": "0.11.0",
       "elements": [
         {
-          "name": "mlv-button",
-          "instanceTotal": 6
-        },
-        {
-          "name": "mlv-dropdown",
+          "name": "nve-breadcrumb",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control",
+          "name": "nve-button",
+          "instanceTotal": 7
+        },
+        {
+          "name": "nve-dropdown",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-control",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-input",
+          "name": "nve-input",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-select",
+          "name": "nve-select",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-textarea",
+          "name": "nve-textarea",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 23
+      "instanceTotal": 25
     },
     {
       "name": "curation-app",
@@ -72,11 +160,11 @@
       "elementsVersion": "^0.11.1",
       "elements": [
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-switch",
+          "name": "nve-switch",
           "instanceTotal": 1
         }
       ],
@@ -86,37 +174,8 @@
       "name": "daas",
       "path": "src/ui/daas",
       "elementsVersion": "^0.11.1",
-      "elements": [
-        {
-          "name": "mlv-grid",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-row",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-icon",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-cell",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid-column",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid-footer",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid-header",
-          "instanceTotal": 1
-        }
-      ],
-      "instanceTotal": 10
+      "elements": [],
+      "instanceTotal": 0
     },
     {
       "name": "dataops",
@@ -124,107 +183,107 @@
       "elementsVersion": "0.19.0",
       "elements": [
         {
-          "name": "mlv-dialog",
+          "name": "nve-dialog",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-notification",
+          "name": "nve-notification",
           "instanceTotal": 15
         },
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 7
         },
         {
-          "name": "mlv-checkbox",
+          "name": "nve-checkbox",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-dropdown",
+          "name": "nve-dropdown",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-control",
+          "name": "nve-control",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 9
         },
         {
-          "name": "mlv-input",
+          "name": "nve-input",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-badge",
+          "name": "nve-badge",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dot",
+          "name": "nve-dot",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tabs-item",
+          "name": "nve-tabs-item",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tabs",
+          "name": "nve-tabs",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-date",
+          "name": "nve-date",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-dialog-footer",
+          "name": "nve-dialog-footer",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog-header",
+          "name": "nve-dialog-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-progress-ring",
+          "name": "nve-progress-ring",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-textarea",
+          "name": "nve-textarea",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-card",
+          "name": "nve-card",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card-header",
+          "name": "nve-card-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card-content",
+          "name": "nve-card-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox-group",
+          "name": "nve-checkbox-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-radio-group",
+          "name": "nve-radio-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-radio",
+          "name": "nve-radio",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control-message",
+          "name": "nve-control-message",
           "instanceTotal": 1
         }
       ],
@@ -236,187 +295,193 @@
       "elementsVersion": "0.37.10",
       "elements": [
         {
-          "name": "mlv-combobox",
+          "name": "nve-combobox",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-select",
+          "name": "nve-select",
           "instanceTotal": 7
         },
         {
-          "name": "mlv-notification-group",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-notification",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-button",
-          "instanceTotal": 16
-        },
-        {
-          "name": "mlv-control-message",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-control",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-input",
+          "name": "nve-notification-group",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-badge",
+          "name": "nve-notification",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 17
+        },
+        {
+          "name": "nve-control-message",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-input",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-badge",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-card",
+          "name": "nve-card",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-card-header",
+          "name": "nve-card-header",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-card-content",
+          "name": "nve-card-content",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-icon",
-          "instanceTotal": 12
+          "name": "nve-icon",
+          "instanceTotal": 13
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
           "instanceTotal": 6
         },
         {
-          "name": "mlv-date",
+          "name": "nve-date",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-search",
+          "name": "nve-search",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-tag",
+          "name": "nve-tag",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-toolbar",
+          "name": "nve-toolbar",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-dialog-footer",
+          "name": "nve-dialog-footer",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-dialog-header",
+          "name": "nve-dialog-header",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-dialog",
+          "name": "nve-dialog",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-grid-cell",
+          "name": "nve-grid-cell",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-grid-column",
+          "name": "nve-grid-column",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-grid",
+          "name": "nve-grid",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-grid-header",
+          "name": "nve-grid-header",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-grid-placeholder",
+          "name": "nve-grid-placeholder",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-grid-row",
+          "name": "nve-grid-row",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-pagination",
+          "name": "nve-pagination",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-progress-ring",
+          "name": "nve-progress-ring",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-sort-button",
+          "name": "nve-sort-button",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-toast",
+          "name": "nve-toast",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-icon-button",
-          "instanceTotal": 5
+          "name": "nve-icon-button",
+          "instanceTotal": 6
         },
         {
-          "name": "mlv-input-group",
+          "name": "nve-input-group",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-checkbox-group",
+          "name": "nve-checkbox-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox",
+          "name": "nve-checkbox",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-divider",
+          "name": "nve-divider",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-dropdown",
+          "name": "nve-dropdown",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-alert-group",
+          "name": "nve-alert-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-tabs-item",
+          "name": "nve-tabs-item",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-tabs",
+          "name": "nve-tabs",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-alert-banner",
+          "name": "nve-alert-banner",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-page-loader",
+          "name": "nve-page-loader",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-progress-bar",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 156
+      "instanceTotal": 162
     },
     {
+      "name": "examples/applications/angular",
       "path": "src/ui/examples/applications/angular",
       "elementsVersion": "0.30.0",
       "elements": [],
       "instanceTotal": 0
     },
     {
+      "name": "examples/applications/lit",
       "path": "src/ui/examples/applications/lit",
       "elementsVersion": "0.31.1",
       "elements": [],
@@ -428,161 +493,407 @@
       "elementsVersion": "0.18.0",
       "elements": [
         {
-          "name": "mlv-grid-cell",
+          "name": "nve-grid-cell",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-column",
+          "name": "nve-grid-column",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid",
+          "name": "nve-grid",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-header",
+          "name": "nve-grid-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-row",
+          "name": "nve-grid-row",
           "instanceTotal": 1
         }
       ],
       "instanceTotal": 5
     },
     {
+      "name": "halo/apps/pacsim-test-creator",
       "path": "src/ui/halo/apps/pacsim-test-creator",
       "elementsVersion": "0.37.6",
       "elements": [
         {
-          "name": "mlv-alert-group",
+          "name": "nve-alert-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-app-header",
+          "name": "nve-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-card",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-card-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-button",
+          "name": "nve-card-content",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-card-footer",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card",
+          "name": "nve-combobox",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card-header",
+          "name": "nve-divider",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card-content",
+          "name": "nve-control-message",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card-footer",
+          "name": "nve-control",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-combobox",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-divider",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control-message",
+          "name": "nve-input",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control",
+          "name": "nve-progress-ring",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-select",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-steps-item",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-input",
+          "name": "nve-steps",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-logo",
+          "name": "nve-textarea",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-progress-ring",
+          "name": "nve-app-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-select",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-steps-item",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-steps",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-textarea",
+          "name": "nve-logo",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 21
+      "instanceTotal": 24
     },
     {
+      "name": "halo/apps/teststudio",
       "path": "src/ui/halo/apps/teststudio",
-      "elementsVersion": "0.31.1",
+      "elementsVersion": "0.37.10",
       "elements": [
         {
-          "name": "mlv-app-header",
+          "name": "nve-app-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 8
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-alert-group",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-alert",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-badge",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-card",
+          "instanceTotal": 8
+        },
+        {
+          "name": "nve-checkbox-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-checkbox",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-divider",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-dot",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-cell",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-column",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-placeholder",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-row",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 6
+        },
+        {
+          "name": "nve-panel-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-panel-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-panel",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-progress-ring",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-search",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tabs-item",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tabs",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tooltip",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-sort-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-card-header",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-card-content",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-card-footer",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-control-message",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-input",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-textarea",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-combobox",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-select",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-steps-item",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-steps",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 1
+      "instanceTotal": 102
+    },
+    {
+      "name": "@elements/vehicle-management",
+      "path": "src/ui/ingest/vehicle-management",
+      "elementsVersion": "0.20.0",
+      "elements": [
+        {
+          "name": "nve-file",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-control-message",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-progress-bar",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-combobox",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-date",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-datetime",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-progress-ring",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-notification",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-input",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-password",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-select",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-textarea",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-row",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-search",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-header",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 33
     },
     {
       "name": "clip-labeler",
       "path": "src/ui/labeling/apps/clip-labeler",
-      "elementsVersion": "^0.20.0",
+      "elementsVersion": "^0.20.1",
       "elements": [
         {
-          "name": "mlv-alert-group",
+          "name": "nve-alert-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog-header",
+          "name": "nve-dialog-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog",
+          "name": "nve-dialog",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dot",
+          "name": "nve-dot",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         }
       ],
@@ -594,11 +905,11 @@
       "elementsVersion": "^0.8.1",
       "elements": [
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-input",
+          "name": "nve-input",
           "instanceTotal": 1
         }
       ],
@@ -607,14 +918,21 @@
     {
       "name": "@elements/label-class-editor",
       "path": "src/ui/labeling/apps/label-class-editor",
-      "elementsVersion": "^0.20.0",
+      "elementsVersion": "^0.20.1",
       "elements": [
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 1
         }
       ],
       "instanceTotal": 1
+    },
+    {
+      "name": "labeling/apps/label-viewer",
+      "path": "src/ui/labeling/apps/label-viewer",
+      "elementsVersion": "0.31.1",
+      "elements": [],
+      "instanceTotal": 0
     },
     {
       "name": "labeler-system-check",
@@ -624,28 +942,56 @@
       "instanceTotal": 0
     },
     {
-      "name": "minimap-labeler",
-      "path": "src/ui/labeling/apps/minimap-labeler",
-      "elementsVersion": "^0.20.0",
+      "name": "lidarless-labeler",
+      "path": "src/ui/labeling/apps/lidarless-labeler",
+      "elementsVersion": "^0.20.1",
       "elements": [
         {
-          "name": "mlv-dialog-header",
+          "name": "nve-dialog-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog",
+          "name": "nve-dialog",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dot",
+          "name": "nve-dot",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 5
+    },
+    {
+      "name": "minimap-labeler",
+      "path": "src/ui/labeling/apps/minimap-labeler",
+      "elementsVersion": "^0.20.1",
+      "elements": [
+        {
+          "name": "nve-dialog-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dialog",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dot",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon",
           "instanceTotal": 1
         }
       ],
@@ -657,67 +1003,95 @@
       "elementsVersion": "^0.37.7",
       "elements": [
         {
-          "name": "mlv-icon-button",
+          "name": "nve-card",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-card-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-card-content",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-badge",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-progress-ring",
+          "name": "nve-button-group",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-accordion",
+          "name": "nve-button",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-tooltip",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-toolbar",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-panel-content",
+          "name": "nve-progress-ring",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-toast",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-panel",
+          "name": "nve-panel-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tabs-item",
+          "name": "nve-panel",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tabs",
+          "name": "nve-tabs-item",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-button",
+          "name": "nve-tabs",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 11
+      "instanceTotal": 35
     },
     {
       "name": "static-4dgt-labeler",
       "path": "src/ui/labeling/apps/static-4dgt-labeler",
-      "elementsVersion": "^0.20.0",
+      "elementsVersion": "^0.20.1",
       "elements": [
         {
-          "name": "mlv-dialog-header",
+          "name": "nve-dialog-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog",
+          "name": "nve-dialog",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dot",
+          "name": "nve-dot",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         }
       ],
@@ -726,298 +1100,274 @@
     {
       "name": "@elements/gt-elements",
       "path": "src/ui/labeling/libs/gt-elements",
-      "elementsVersion": "^0.20.0",
+      "elementsVersion": "^0.20.1",
       "elements": [
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 14
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 9
         },
         {
-          "name": "mlv-alert-group",
+          "name": "nve-alert-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-search",
+          "name": "nve-search",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-card",
+          "name": "nve-card",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card-content",
+          "name": "nve-card-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox-group",
+          "name": "nve-checkbox-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox",
+          "name": "nve-checkbox",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-input",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-radio-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-radio",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-select",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-icon-button",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-input",
+          "name": "nve-time",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-radio-group",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-radio",
+          "name": "nve-tooltip",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-select",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-time",
+          "name": "nve-badge",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-accordion",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-badge",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-accordion",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-accordion-group",
+          "name": "nve-accordion-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dot",
+          "name": "nve-dot",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-panel-content",
+          "name": "nve-panel-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-panel",
+          "name": "nve-panel",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tabs-item",
+          "name": "nve-tabs-item",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tabs",
+          "name": "nve-tabs",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-accordion-header",
+          "name": "nve-accordion-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-accordion-content",
+          "name": "nve-accordion-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert-banner",
+          "name": "nve-alert-banner",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tag",
+          "name": "nve-tag",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-textarea",
+          "name": "nve-textarea",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-button-group",
+          "name": "nve-button-group",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-switch",
+          "name": "nve-switch",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 67
+      "instanceTotal": 66
     },
     {
-      "name": "labeling",
-      "path": "src/ui/labeling",
-      "elementsVersion": "^0.20.0",
+      "name": "@elements/gt-viewer",
+      "path": "src/ui/labeling/libs/gt-viewer",
+      "elementsVersion": "0.37.9",
       "elements": [
         {
-          "name": "mlv-alert-group",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-alert",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-dialog-header",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-dialog",
-          "instanceTotal": 5
-        },
-        {
-          "name": "mlv-dot",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-icon-button",
-          "instanceTotal": 6
-        },
-        {
-          "name": "mlv-icon",
-          "instanceTotal": 15
-        },
-        {
-          "name": "mlv-button",
-          "instanceTotal": 18
-        },
-        {
-          "name": "mlv-input",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-progress-ring",
-          "instanceTotal": 4
-        },
-        {
-          "name": "mlv-accordion",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-panel-content",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-panel",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-tabs-item",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-tabs",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-search",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-card",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-card-content",
+          "name": "nve-accordion-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox-group",
+          "name": "nve-accordion-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-radio-group",
+          "name": "nve-accordion",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-radio",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-select",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-time",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-tooltip",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-badge",
-          "instanceTotal": 3
-        },
-        {
-          "name": "mlv-accordion-group",
+          "name": "nve-app-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-accordion-header",
+          "name": "nve-badge",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-accordion-content",
+          "name": "nve-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert-banner",
+          "name": "nve-dialog-footer",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tag",
+          "name": "nve-dialog",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-textarea",
+          "name": "nve-drawer-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-button-group",
-          "instanceTotal": 4
+          "name": "nve-drawer-header",
+          "instanceTotal": 1
         },
         {
-          "name": "mlv-switch",
+          "name": "nve-drawer",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tabs-item",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tabs",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tag",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 108
+      "instanceTotal": 20
+    },
+    {
+      "name": "@nv_labeling/labeling-tools",
+      "path": "src/ui/labeling/libs/labeling-tools",
+      "elementsVersion": "^0.20.1",
+      "elements": [
+        {
+          "name": "nve-dialog",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-progress-ring",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 2
+    },
+    {
+      "name": "nv-app-tool-frame",
+      "path": "src/ui/labeling/libs/nv-app-tool-frame",
+      "elementsVersion": "^0.20.1",
+      "elements": [
+        {
+          "name": "nve-dialog-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dialog",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 2
     },
     {
       "name": "@elements/job-validator",
       "path": "src/ui/labeling/tools/job-validator",
-      "elementsVersion": "^0.20.0",
+      "elementsVersion": "^0.20.1",
       "elements": [
         {
-          "name": "mlv-badge",
+          "name": "nve-badge",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card",
+          "name": "nve-card",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         }
       ],
@@ -1029,227 +1379,223 @@
       "elementsVersion": "0.37.7",
       "elements": [
         {
-          "name": "mlv-app-header",
+          "name": "nve-app-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 20
         },
         {
-          "name": "mlv-card",
+          "name": "nve-card",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-card-content",
+          "name": "nve-card-content",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-menu-item",
+          "name": "nve-icon-button",
+          "instanceTotal": 22
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 29
+        },
+        {
+          "name": "nve-menu-item",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-menu",
+          "name": "nve-menu",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-panel",
+          "name": "nve-panel",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-progressive-filter-chip",
+          "name": "nve-progressive-filter-chip",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-toast",
+          "name": "nve-toast",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-alert-group",
+          "name": "nve-alert-group",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
           "instanceTotal": 6
         },
         {
-          "name": "mlv-divider",
+          "name": "nve-divider",
           "instanceTotal": 8
         },
         {
-          "name": "mlv-icon",
-          "instanceTotal": 28
-        },
-        {
-          "name": "mlv-progress-ring",
+          "name": "nve-progress-ring",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tag",
+          "name": "nve-tag",
           "instanceTotal": 8
         },
         {
-          "name": "mlv-checkbox",
+          "name": "nve-checkbox",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-dialog-footer",
-          "instanceTotal": 3
+          "name": "nve-dialog-footer",
+          "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog-header",
-          "instanceTotal": 3
+          "name": "nve-dialog-header",
+          "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog",
-          "instanceTotal": 3
+          "name": "nve-dialog",
+          "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
-          "instanceTotal": 21
-        },
-        {
-          "name": "mlv-input",
+          "name": "nve-input",
           "instanceTotal": 6
         },
         {
-          "name": "mlv-select",
+          "name": "nve-select",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-switch",
+          "name": "nve-switch",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-textarea",
+          "name": "nve-textarea",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
           "instanceTotal": 12
         },
         {
-          "name": "mlv-panel-header",
+          "name": "nve-panel-header",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-panel-content",
+          "name": "nve-panel-content",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-tabs-item",
+          "name": "nve-tabs-item",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-tabs",
+          "name": "nve-tabs",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-search",
+          "name": "nve-search",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-dropdown",
+          "name": "nve-dropdown",
           "instanceTotal": 11
         },
         {
-          "name": "mlv-control",
+          "name": "nve-control",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-input-group",
+          "name": "nve-input-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-toolbar",
+          "name": "nve-toolbar",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-combobox",
+          "name": "nve-combobox",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-date",
+          "name": "nve-date",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-badge",
+          "name": "nve-badge",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-grid-cell",
+          "name": "nve-grid-cell",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-grid-column",
+          "name": "nve-grid-column",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-grid",
+          "name": "nve-grid",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-grid-header",
+          "name": "nve-grid-header",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-grid-row",
+          "name": "nve-grid-row",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-sort-button",
+          "name": "nve-sort-button",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-card-header",
+          "name": "nve-card-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-pagination",
+          "name": "nve-pagination",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-button-group",
+          "name": "nve-button-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox-group",
+          "name": "nve-checkbox-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dot",
+          "name": "nve-range",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-logo",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-range",
+          "name": "nve-notification",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-logo",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-notification",
+          "name": "nve-accordion-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-accordion-header",
+          "name": "nve-accordion-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-accordion-content",
+          "name": "nve-accordion",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-accordion",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-progress-bar",
+          "name": "nve-progress-bar",
           "instanceTotal": 2
         }
       ],
-      "instanceTotal": 228
+      "instanceTotal": 222
     },
     {
       "name": "ide",
@@ -1257,166 +1603,246 @@
       "elementsVersion": "0.11.0",
       "elements": [
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-dropdown",
+          "name": "nve-dropdown",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control-message",
+          "name": "nve-control-message",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control",
+          "name": "nve-control",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-input",
+          "name": "nve-input",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-notification",
+          "name": "nve-notification",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-textarea",
+          "name": "nve-textarea",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert-banner",
+          "name": "nve-alert-banner",
           "instanceTotal": 1
         }
       ],
       "instanceTotal": 16
     },
     {
-      "name": "@elements/vehicle-management",
-      "path": "src/ui/platform/apps/vehicle-management",
-      "elementsVersion": "0.20.0",
+      "name": "@elements/elements-playground",
+      "path": "src/ui/platform/design-system/playground",
+      "elementsVersion": "0.33.3",
       "elements": [
         {
-          "name": "mlv-file",
+          "name": "nve-alert-group",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-control-message",
+          "name": "nve-alert",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-app-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 6
+        },
+        {
+          "name": "nve-combobox",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-grid-cell",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-column",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-placeholder",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-grid-row",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 9
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-menu-item",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-menu",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-pagination",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-progress-ring",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-progressive-filter-chip",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-sort-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-toolbar",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tooltip",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-control",
+          "name": "nve-badge",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-card",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-alert-banner",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-divider",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-notification",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-page-loader",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dialog",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-progress-bar",
+          "name": "nve-tabs-item",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-combobox",
+          "name": "nve-tabs",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dialog-footer",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-dialog-header",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-control-message",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-input",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-date",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-datetime",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-button",
+          "name": "nve-select",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-progress-ring",
+          "name": "nve-switch",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-notification",
+          "name": "nve-input-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-input",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-password",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-select",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-textarea",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-row",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-search",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-grid-cell",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid-column",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-grid-header",
+          "name": "nve-tag",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 33
+      "instanceTotal": 87
     },
     {
       "name": "@elements/docs-app",
       "path": "src/ui/platform/docs/components/docs-app",
-      "elementsVersion": "0.10.0",
+      "elementsVersion": "0.37.7",
       "elements": [],
       "instanceTotal": 0
     },
     {
-      "name": "@elements/components",
-      "path": "src/ui/platform/libs/components",
+      "name": "@elements/angular-legacy",
+      "path": "src/ui/platform/libs/angular-legacy",
       "elementsVersion": "0.11.0",
       "elements": [
         {
-          "name": "mlv-logo",
+          "name": "nve-logo",
           "instanceTotal": 3
-        },
-        {
-          "name": "mlv-tag",
-          "instanceTotal": 1
         }
       ],
-      "instanceTotal": 4
+      "instanceTotal": 3
     },
     {
       "name": "@elements/feedback-elements",
@@ -1424,51 +1850,107 @@
       "elementsVersion": "0.37.7",
       "elements": [
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dropdown",
+          "name": "nve-dropdown",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control-message",
+          "name": "nve-control-message",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control",
+          "name": "nve-control",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-input",
+          "name": "nve-input",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-notification",
+          "name": "nve-notification",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-select",
+          "name": "nve-select",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-textarea",
+          "name": "nve-textarea",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 12
+    },
+    {
+      "name": "@elements/feedback-elements-a12",
+      "path": "src/ui/platform/libs/feedback-elements-a12",
+      "elementsVersion": "0.37.7",
+      "elements": [
+        {
+          "name": "nve-alert",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-control-message",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-control",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-input",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-notification",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-select",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-textarea",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-tooltip",
           "instanceTotal": 1
         }
       ],
@@ -1480,11 +1962,11 @@
       "elementsVersion": "0.11.0",
       "elements": [
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-breadcrumb",
+          "name": "nve-breadcrumb",
           "instanceTotal": 1
         }
       ],
@@ -1496,19 +1978,19 @@
       "elementsVersion": "0.11.0",
       "elements": [
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-logo",
+          "name": "nve-logo",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-breadcrumb",
+          "name": "nve-breadcrumb",
           "instanceTotal": 1
         }
       ],
@@ -1520,119 +2002,119 @@
       "elementsVersion": "0.11.0",
       "elements": [
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-card",
+          "name": "nve-card",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-card-header",
+          "name": "nve-card-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card-content",
+          "name": "nve-card-content",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-card-footer",
+          "name": "nve-card-footer",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-checkbox-group",
+          "name": "nve-checkbox-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-checkbox",
+          "name": "nve-checkbox",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-date",
+          "name": "nve-date",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog-footer",
+          "name": "nve-dialog-footer",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-dialog-header",
+          "name": "nve-dialog-header",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-dialog",
+          "name": "nve-dialog",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-dropdown",
+          "name": "nve-dropdown",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control-message",
+          "name": "nve-control-message",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control",
+          "name": "nve-control",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-input",
+          "name": "nve-input",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-notification",
+          "name": "nve-notification",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-password",
+          "name": "nve-password",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-radio-group",
+          "name": "nve-radio-group",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-radio",
+          "name": "nve-radio",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-range",
+          "name": "nve-range",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-search",
+          "name": "nve-search",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-select",
+          "name": "nve-select",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-switch",
+          "name": "nve-switch",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-textarea",
+          "name": "nve-textarea",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-toast",
+          "name": "nve-toast",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
           "instanceTotal": 2
         }
       ],
@@ -1646,107 +2128,108 @@
       "instanceTotal": 0
     },
     {
+      "name": "platform/test-automation/dashboards",
       "path": "src/ui/platform/test-automation/dashboards",
       "elementsVersion": "0.37.7",
       "elements": [
         {
-          "name": "mlv-app-header",
+          "name": "nve-app-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-badge",
+          "name": "nve-badge",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card",
+          "name": "nve-card",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card-content",
+          "name": "nve-card-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog-header",
+          "name": "nve-dialog-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dialog",
+          "name": "nve-dialog",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dot",
+          "name": "nve-dot",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dropdown",
+          "name": "nve-dropdown",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control-message",
+          "name": "nve-control-message",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-control",
+          "name": "nve-control",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-cell",
+          "name": "nve-grid-cell",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-column",
+          "name": "nve-grid-column",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-footer",
+          "name": "nve-grid-footer",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid",
+          "name": "nve-grid",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-header",
+          "name": "nve-grid-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-placeholder",
+          "name": "nve-grid-placeholder",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-row",
+          "name": "nve-grid-row",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-logo",
+          "name": "nve-logo",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-notification",
+          "name": "nve-notification",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-range",
+          "name": "nve-range",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-select",
+          "name": "nve-select",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tag",
+          "name": "nve-tag",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
           "instanceTotal": 1
         }
       ],
@@ -1758,55 +2241,115 @@
       "elementsVersion": "0.37.7",
       "elements": [
         {
-          "name": "mlv-dropdown",
+          "name": "nve-dropdown",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-menu-item",
+          "name": "nve-menu-item",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-menu",
+          "name": "nve-menu",
           "instanceTotal": 6
         },
         {
-          "name": "mlv-badge",
+          "name": "nve-badge",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 5
         },
         {
-          "name": "mlv-divider",
+          "name": "nve-divider",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-breadcrumb",
+          "name": "nve-breadcrumb",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-logo",
+          "name": "nve-logo",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-app-header",
+          "name": "nve-app-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert-group",
+          "name": "nve-alert-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
+          "instanceTotal": 1
+        }
+      ],
+      "instanceTotal": 40
+    },
+    {
+      "name": "@elements/xp-app-shell-a12",
+      "path": "src/ui/platform/xp/app-shell-a12",
+      "elementsVersion": "0.37.7",
+      "elements": [
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-menu-item",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-menu",
+          "instanceTotal": 6
+        },
+        {
+          "name": "nve-badge",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-divider",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-breadcrumb",
+          "instanceTotal": 3
+        },
+        {
+          "name": "nve-icon-button",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-app-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-alert-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-alert",
           "instanceTotal": 1
         }
       ],
@@ -1815,118 +2358,122 @@
     {
       "name": "@elements/xp-dashboard",
       "path": "src/ui/platform/xp/dashboard",
-      "elementsVersion": "0.24.4",
+      "elementsVersion": "0.41.0",
       "elements": [
         {
-          "name": "mlv-alert-group",
+          "name": "nve-alert-group",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-alert",
+          "name": "nve-alert",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-badge",
+          "name": "nve-badge",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-breadcrumb",
+          "name": "nve-breadcrumb",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-card",
+          "name": "nve-card",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-card-content",
+          "name": "nve-card-content",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-divider",
+          "name": "nve-divider",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-grid-cell",
+          "name": "nve-grid-cell",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-grid-column",
+          "name": "nve-grid-column",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-grid",
+          "name": "nve-grid",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-grid-header",
+          "name": "nve-grid-header",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-grid-row",
+          "name": "nve-grid-row",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-notification-group",
+          "name": "nve-notification-group",
           "instanceTotal": 3
         },
         {
-          "name": "mlv-notification",
+          "name": "nve-notification",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-page-loader",
+          "name": "nve-page-loader",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-progress-ring",
+          "name": "nve-progress-ring",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-checkbox-group",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-checkbox",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-dropdown",
-          "instanceTotal": 2
-        },
-        {
-          "name": "mlv-panel-header",
+          "name": "nve-progressive-filter-chip",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-panel-content",
-          "instanceTotal": 1
+          "name": "nve-toolbar",
+          "instanceTotal": 3
         },
         {
-          "name": "mlv-panel",
-          "instanceTotal": 1
-        },
-        {
-          "name": "mlv-search",
+          "name": "nve-checkbox-group",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-toolbar",
+          "name": "nve-checkbox",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 2
+        },
+        {
+          "name": "nve-panel-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-panel-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-panel",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-search",
           "instanceTotal": 2
         }
       ],
-      "instanceTotal": 58
+      "instanceTotal": 60
     },
     {
       "name": "@elements/xp-server",
@@ -1941,19 +2488,19 @@
       "elementsVersion": "^0.20.0",
       "elements": [
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-input",
+          "name": "nve-input",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
           "instanceTotal": 1
         }
       ],
@@ -1965,98 +2512,99 @@
       "elementsVersion": "0.20.0",
       "elements": [
         {
-          "name": "mlv-button",
+          "name": "nve-button",
           "instanceTotal": 4
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-input-group",
+          "name": "nve-input-group",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-input",
+          "name": "nve-input",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-tooltip",
+          "name": "nve-tooltip",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tabs-item",
+          "name": "nve-tabs-item",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-tabs",
+          "name": "nve-tabs",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-color",
+          "name": "nve-color",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-dropdown",
+          "name": "nve-dropdown",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-notification",
+          "name": "nve-notification",
           "instanceTotal": 1
         }
       ],
       "instanceTotal": 16
     },
     {
+      "name": "uploads/ui",
       "path": "src/ui/uploads/ui",
       "elementsVersion": "0.21.0",
       "elements": [
         {
-          "name": "mlv-divider",
+          "name": "nve-divider",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-cell",
+          "name": "nve-grid-cell",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-column",
+          "name": "nve-grid-column",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid",
+          "name": "nve-grid",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-grid-header",
+          "name": "nve-grid-header",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-grid-row",
+          "name": "nve-grid-row",
           "instanceTotal": 2
         },
         {
-          "name": "mlv-icon-button",
+          "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-icon",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-progress-ring",
+          "name": "nve-progress-ring",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-switch",
+          "name": "nve-switch",
           "instanceTotal": 1
         },
         {
-          "name": "mlv-toolbar",
+          "name": "nve-toolbar",
           "instanceTotal": 1
         }
       ],

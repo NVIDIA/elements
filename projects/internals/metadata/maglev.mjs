@@ -2,7 +2,6 @@ import { createRequire } from 'module';
 import { resolve } from 'node:path';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { readdir } from 'node:fs/promises';
-import { SCOPE } from '../../elements/dist/index.js';
 
 const require = createRequire(import.meta.url);
 
@@ -62,9 +61,12 @@ function getManifest() {
 }
 
 function getElementsVersion(data) {
-  const dependencies = data?.dependencies && data?.dependencies[`${SCOPE}/elements`];
-  const devDependencies = data?.devDependencies && data?.devDependencies[`${SCOPE}/elements`];
-  const peerDependencies = data?.peerDependencies && data?.peerDependencies[`${SCOPE}/elements`];
+  const dependencies =
+    data?.dependencies && (data?.dependencies[`@nvidia-elements/core`] || data?.dependencies[`@elements/elements`]);
+  const devDependencies =
+    data?.devDependencies && (data?.devDependencies[`@nvidia-elements/core`] || data?.devDependencies[`@elements/elements`]);
+  const peerDependencies =
+    data?.peerDependencies && (data?.peerDependencies[`@nvidia-elements/core`] || data?.peerDependencies[`@elements/elements`]);
   return dependencies || devDependencies || peerDependencies;
 }
 
@@ -74,14 +76,14 @@ async function getProjects() {
 
   return Promise.all(
     (await getPackageFiles(path))
-      .filter(path => !path.includes('design-system') && !path.includes('dist') && !path.includes('deprecated'))
+      .filter(path => !path.includes('dist') && !path.includes('deprecated'))
       .reduce((files, path) => {
         const data = require(path);
         return getElementsVersion(data) ? [...files, { ...data, path }] : files;
       }, [])
       .map(file => {
         return {
-          package: file.name,
+          package: file.name ? file.name : file.path.split('/src/ui/')[1].replace('/package.json', ''),
           elements: getElementsVersion(file),
           path: file.path.replace('/package.json', '')
         };
@@ -92,7 +94,7 @@ async function getProjects() {
           sources.reduce((tags, path) => {
             const src = readFileSync(path, 'utf8');
             elementTags
-              .filter(tag => tag && src.includes(tag))
+              .filter(tag => (tag && src.includes(tag)) || src.includes(tag?.replace('nve-', 'mlv-')))
               .forEach(tag => {
                 tags[tag] = tags[tag] ? tags[tag] + 1 : 1;
               });

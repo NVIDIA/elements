@@ -21,8 +21,6 @@ import metrics from '../../../internals/metadata/metadata.json';
 import metricsMaglev from '../../../internals/metadata/elements.json';
 import { ELEMENTS_VERSION } from '../../.storybook/version.js';
 
-metrics['@nvidia-elements/core'].elements.forEach(e => e.name = e.name.replace('nve-', 'mlv-')); // temporary
-
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
 const showdownOptions = { simplifiedAutoLink: true };
 
@@ -31,14 +29,16 @@ export default {
 };
 
 function getMinorVersion(value) {
-  return parseFloat(`${value.split('.')[1]}`);
+  return parseFloat(`${value.split('.')[1]}`) 
 }
 
 function getVersionBadge(value) {
   const pin = value.replace('^', '').replace('~', '');
-  const currentVersion = getMinorVersion(ELEMENTS_VERSION);
+  const currentVersion = getMinorVersion(ELEMENTS_VERSION) + 41; // last minor patch for 0.x;
   const version = getMinorVersion(pin);
   let status = 'success';
+
+  console.log(currentVersion, version)
 
   if ((currentVersion - version) > 10) {
     status = 'warning';
@@ -180,7 +180,7 @@ class ElementStatus extends LitElement {
   static styles = [unsafeCSS(`${typography}${layout}`)];
 
   get #element() {
-    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag || d.name === this.tag.replace('nve-', 'mlv-'));
+    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag);
   }
 
   render() {
@@ -240,12 +240,8 @@ class ElementMetrics extends LitElement {
   
   static styles = [unsafeCSS(`${typography}${layout}`)];
 
-  get #tagName() {
-    return this.tag.replace('nve-', 'mlv-');
-  }
-
   get #element() {
-    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag || d.name === this.#tagName || d.name === this.#tagName);
+    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag || d.name === this.tag || d.name === this.tag);
   }
 
   render() {
@@ -286,12 +282,8 @@ class ElementAPI extends LitElement {
     version: 'demo'
   }
 
-  get #tagName() {
-    return this.tag.replace('nve-', 'mlv-');
-  }
-
   get #element() {
-    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag || d.name === this.#tagName || d.name === this.#tagName);
+    return metrics['@nvidia-elements/core'].elements.find(d => d.name === this.tag || d.name === this.tag || d.name === this.tag);
   }
 
   #markdown = new showdown.Converter(showdownOptions);
@@ -302,7 +294,7 @@ class ElementAPI extends LitElement {
       ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       ${!this.type ? html`
         <div nve-layout="column gap:xs pad-top:xl pad-bottom:lg align:stretch">
-          <h3 nve-text="heading xl">API - ${this.#tagName}</h3>
+          <h3 nve-text="heading xl">API - ${this.tag}</h3>
           <nve-divider></nve-divider>
         </div>
         <div nve-layout="column gap:xxl align:stretch">
@@ -498,7 +490,7 @@ class ElementsMetrics extends LitElement {
         ${this.elements.map(element => {
           return html`
           <nve-grid-row>
-            <nve-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/api/', './')} nve-text="body link no-visit">${element.name.replace('mlv-', '')}</a></nve-grid-cell>
+            <nve-grid-cell><a href=${element.storybook.replace('https://NVIDIA.github.io/elements/api/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
             <nve-grid-cell>${getStatusBadge(element.status)}</nve-grid-cell>
             <nve-grid-cell>${getCoverageStatus(element.tests.coverageTotal)}</nve-grid-cell>
             <nve-grid-cell>${getPayloadSize(element.lighthouse?.payload, 'flat')}</nve-grid-cell>
