@@ -21,7 +21,7 @@
     "dist/**/*"
   ],
   "devDependencies": {
-    "@nvidia-elements/testing-lighthouse": "workspace:*",
+    "@internals/vite": "workspace:*",
     "chart.js": "4.4.0",
     "cssnano": "6.0.1",
     "glob": "10.3.10",
@@ -29,7 +29,7 @@
     "postcss": "8.4.31",
     "style-dictionary": "3.8.0",
     "vite": "5.3.3",
-    "vitest": "2.0.3"
+    "vitest": "2.0.5"
   },
   "exports": {
     "./package.json": "./package.json",

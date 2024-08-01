@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('toast lighthouse report', () => {
   test('toast should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-toast', /* html */`
+    const report = await lighthouseRunner.getReport('nve-toast', /* html */`
       <button id="btn">button</button>
       <nve-toast trigger="btn" anchor="btn">toast</nve-toast>
       <script type="module">

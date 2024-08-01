@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('grid lighthouse report', () => {
   test('grid should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-grid', /* html */`
+    const report = await lighthouseRunner.getReport('nve-grid', /* html */`
       <nve-grid aria-label="grid example">
         <nve-grid-header>
           <nve-grid-column>column 1</nve-grid-column>

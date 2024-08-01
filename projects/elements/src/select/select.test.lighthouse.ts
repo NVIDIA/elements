@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('select lighthouse report', () => {
   test('select should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-select', /* html */`
+    const report = await lighthouseRunner.getReport('nve-select', /* html */`
       <nve-select>
         <label>label</label>
         <select>
