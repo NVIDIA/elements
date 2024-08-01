@@ -1,7 +1,7 @@
 import fs from 'fs';
 import process from 'process';
 import terser from '@rollup/plugin-terser';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
+import { minifyHTML } from '../plugins/minify-html.js';
 import { resolve } from 'path';
 import { globSync } from 'glob';
 
@@ -60,7 +60,7 @@ export const libraryBuildConfig = {
         }
       ],
       plugins: [
-        mode === 'production' ? minifyHTML.default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
+        mode === 'production' ? minifyHTML() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
         mode === 'production'
           ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
           : false // https://github.com/vitejs/vite/issues/8848

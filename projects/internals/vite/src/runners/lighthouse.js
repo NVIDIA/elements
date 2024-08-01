@@ -1,12 +1,10 @@
-import lighthouse, { Config, Flags, FormattedIcu } from 'lighthouse';
-import Details from 'lighthouse/types/lhr/audit-details';
-import { Browser, chromium } from 'playwright';
-import { preview, build, PreviewServer } from 'vite';
+import lighthouse from 'lighthouse';
+import { chromium } from 'playwright';
+import { preview, build } from 'vite';
 import virtualHtml from 'vite-plugin-virtual-html';
 import fs from 'fs';
 import path from 'path';
 import { globSync } from 'glob';
-import { AddressInfo } from 'net';
 
 process.env.NODE_ENV = 'production';
 
@@ -17,17 +15,9 @@ const DIST_DIR = `${ROOT_DIR}/dist`;
 const CUSTOM_CONFIG_PATH = resolve('./vitest.lighthouse.build.ts');
 const HAS_CUSTOM_BUILD_CONFIG = fs.existsSync(CUSTOM_CONFIG_PATH);
 
-interface NetworkRequest {
-  mimeType: string;
-  transferSize: number;
-  url: string;
-}
-
-type NetworkRequestDetails = FormattedIcu<Details> & { items: NetworkRequest[] };
-
 export class LighthouseRunner {
-  #server: PreviewServer;
-  #browser: Browser;
+  #server;
+  #browser;
   #port = 4176;
   #report = {};
 
@@ -48,7 +38,7 @@ export class LighthouseRunner {
       preview: { port: this.#port, open: false }
     });
 
-    this.#port = (this.#server.httpServer.address() as AddressInfo).port;
+    this.#port = this.#server.httpServer.address().port;
     console.log(`Vite Server running at port ${this.#port}`);
   }
 
@@ -59,7 +49,7 @@ export class LighthouseRunner {
     }
 
     const report = globSync(resolve(`${DIST_DIR}/**/report.json`)).reduce((p, n) => {
-      const file = JSON.parse(fs.readFileSync(n) as unknown as string);
+      const file = JSON.parse(fs.readFileSync(n));
       return { ...p, [file.name]: file };
     }, {});
 
@@ -74,10 +64,10 @@ export class LighthouseRunner {
 
   async getReport(name, content) {
     await this.#buildPage(name, content);
-    const flags: Flags = { logLevel: 'error', output: ['json', 'html'] };
+    const flags = { logLevel: 'error', output: ['json', 'html'] };
 
     // https://github.com/GoogleChrome/lighthouse/blob/main/core/config/default-config.js
-    const config: Config = {
+    const config = {
       extends: 'lighthouse:default',
       settings: {
         onlyCategories: ['performance', 'accessibility', 'best-practices'],
@@ -97,7 +87,7 @@ export class LighthouseRunner {
       bestPractices: runnerResult.lhr.categories['best-practices'].score * 100
     };
 
-    const requests = (runnerResult.lhr.audits['network-requests'].details as NetworkRequestDetails).items;
+    const requests = runnerResult.lhr.audits['network-requests'].details.items;
     const payload = {
       javascript: {
         kb:
@@ -188,4 +178,4 @@ export class LighthouseRunner {
   }
 }
 
-export const runner = new LighthouseRunner();
+export const lighthouseRunner = new LighthouseRunner();

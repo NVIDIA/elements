@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('switch lighthouse report', () => {
   test('switch should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-switch', /* html */`
+    const report = await lighthouseRunner.getReport('nve-switch', /* html */`
       <nve-switch>
         <label>label</label>
         <input type="checkbox" />

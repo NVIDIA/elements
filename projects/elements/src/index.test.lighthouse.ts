@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('lighthouse report', () => {
   test('CSS bundles should remain within compressed bundle limits', async () => {
-    const report = await runner.getReport('css-bundles', /* html */`
+    const report = await lighthouseRunner.getReport('css-bundles', /* html */`
       <script type="module">
         import('@nvidia-elements/core/index.css');
       </script>
@@ -14,7 +14,7 @@ describe('lighthouse report', () => {
   });
 
   test('JS Bundles should remain within compressed bundle limits', async () => {
-    const report = await runner.getReport('all-js-bundle', /* html */`
+    const report = await lighthouseRunner.getReport('all-js-bundle', /* html */`
       <script type="module">
         import '@nvidia-elements/core/accordion/define.js';
         import '@nvidia-elements/core/alert/define.js';
