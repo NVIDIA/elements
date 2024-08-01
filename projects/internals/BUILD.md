@@ -2,11 +2,11 @@
 
 This is an outline of the tooling that runs the Elements monorepo. This tooling powers a fully automated continuous deployment of multiple NPM/Artifactory packages as well as documentation. This configuration enables:
 
-- Building 10+ demos and libraries
-- 700+ unit tests and performance lighthouse tests
-- Deployment/publishing of libraries and documentation
+- Building 25+ demos and libraries
+- 1000+ unit tests, visual regressions tets and performance lighthouse tests
+- Automated deployment and publishing of libraries and documentation
 
-The **CI pipeline takes an average of [~5-10 minutes](https://github.com/NVIDIA/elements/-/pipelines/12762390)** from the moment a MR is merged to being deployed and available to end users. The average clone, install and build of the **CI pipeline locally takes about ~1-2 mins** on a Macbook M1.
+The **CI pipeline takes an average of [~10 minutes](https://github.com/NVIDIA/elements/-/pipelines/12762390)** from the moment a MR is merged to being deployed and available to end users. The average clone, install and build of the **CI pipeline locally takes about ~1-2 mins** on a Macbook M1.
 
 The local CI job is the same CI job run in the Gitlab Pipeline, this ensures that if it passes locally, there is a very high probability it will pass in CI without issue.
 
@@ -39,6 +39,14 @@ The configuration for the entire pipeline can be found in the root [.github/work
 
   Security audits such as runtime, dependency and secret detection scanning.
 
+- [Open Metrics](https://docs.gitlab.com/ee/ci/testing/metrics_reports.html)
+
+  Standardized metrics tracking for repo and code quality health.
+
+- [Git LFS (Large File System)](https://docs.gitlab.com/ee/topics/git/lfs/)
+
+  Standardized way to source control large files without bloading git histroy. Useful for visual regression baseline images.
+
 ## Build
 
 The following are the repo wide tools that apply to all source code and projects.
@@ -70,6 +78,10 @@ The following are the repo wide tools that apply to all source code and projects
 - [Prettier](https://prettier.io/)
 
   Ensures consistent code formatting for the entire repo.
+
+- [Playwright](https://playwright.dev/)
+
+  Used for real browser unit testing and visual regression testing.
 
 ## Repo Configuration
 

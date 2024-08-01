@@ -237,7 +237,8 @@
       "dependencies": [
         "build",
         "test",
-        "../../testing:ci"
+        "../../testing:ci",
+        "../../elements:test:coverage"
       ]
     },
     "test:watch": {
@@ -246,8 +247,18 @@
     },
     "test:lighthouse": {
       "command": "vitest run --config=vitest.lighthouse.ts",
+      "files": [
+        "src/index.test.lighthouse.ts",
+        "src/**/*.test.lighthouse.ts",
+        "vitest.lighthouse.html",
+        "vitest.lighthouse.ts"
+      ],
+      "output": [
+        ".lighthouse"
+      ],
       "dependencies": [
-        "build"
+        "build",
+        "../../internals/vite:ci"
       ]
     },
     "test:axe": {

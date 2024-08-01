@@ -27,6 +27,8 @@
     "test:axe": "wireit",
     "test:coverage": "wireit",
     "test:lighthouse": "wireit",
+    "test:visual": "wireit",
+    "test:visual:update": "wireit",
     "lint": "wireit",
     "prepublishonly": "wireit"
   },
@@ -770,6 +772,7 @@
     "@nvidia-elements/styles": "workspace:^",
     "@jspm/generator": "1.1.12",
     "@lit-labs/virtualizer": "2.0.12",
+    "@playwright/test": "1.45.3",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/snippets": "workspace:*",
@@ -816,12 +819,12 @@
       "files": [
         "public/**",
         "src/**",
-        "!src/test/lighthouse/**",
         "!src/**/*.stories.ts",
         "!src/**/*.stories.mdx",
         "!src/**/*.test.ts",
-        "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/*.test.axe.ts",
         "!src/**/*.snippets.html",
         "package.json",
         "tsconfig.json",
@@ -842,6 +845,7 @@
         "build:icons",
         "build:snippets",
         "../themes:build",
+        "../styles:build",
         "../internals/vite:ci"
       ]
     },
@@ -874,6 +878,8 @@
       "files": [
         "src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/*.test.axe.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
@@ -892,6 +898,8 @@
       "files": [
         "src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/*.test.axe.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
@@ -914,6 +922,38 @@
     },
     "test:lighthouse": {
       "command": "vitest run --config=vitest.lighthouse.ts",
+      "files": [
+        "src/index.test.lighthouse.ts",
+        "src/**/*.test.lighthouse.ts",
+        "vitest.lighthouse.html",
+        "vitest.lighthouse.ts"
+      ],
+      "output": [
+        ".lighthouse"
+      ],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ]
+    },
+    "test:visual": {
+      "command": "vitest run --config=vitest.visual.ts",
+      "clean": false,
+      "files": [
+        "src/index.test.visual.ts",
+        "src/**/*.test.visual.ts",
+        "vitest.visual.html",
+        "vitest.visual.ts"
+      ],
+      "output": [
+        ".visual"
+      ],
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test:visual:update": {
+      "command": "rm -rf .visual && vitest run --config=vitest.visual.ts",
       "dependencies": [
         "build"
       ]

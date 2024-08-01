@@ -29,32 +29,30 @@ export const AlertGroupDefault = {
 
 export const AlertGroupStatus = {
   render: () => html`
-    <div nve-layout="column gap:md">
-      <nve-alert-group>
-        <nve-alert>Standard</nve-alert>
-        <nve-alert>Standard</nve-alert>
-      </nve-alert-group>
+    <nve-alert-group>
+      <nve-alert>Standard</nve-alert>
+      <nve-alert>Standard</nve-alert>
+    </nve-alert-group>
 
-      <nve-alert-group status="accent">
-        <nve-alert>Accent</nve-alert>
-        <nve-alert>Accent</nve-alert>
-      </nve-alert-group>
+    <nve-alert-group status="accent">
+      <nve-alert>Accent</nve-alert>
+      <nve-alert>Accent</nve-alert>
+    </nve-alert-group>
 
-      <nve-alert-group status="warning">
-        <nve-alert>Warning</nve-alert>
-        <nve-alert>Warning</nve-alert>
-      </nve-alert-group>
+    <nve-alert-group status="warning">
+      <nve-alert>Warning</nve-alert>
+      <nve-alert>Warning</nve-alert>
+    </nve-alert-group>
 
-      <nve-alert-group status="success">
-        <nve-alert>Success</nve-alert>
-        <nve-alert>Success</nve-alert>
-      </nve-alert-group>
+    <nve-alert-group status="success">
+      <nve-alert>Success</nve-alert>
+      <nve-alert>Success</nve-alert>
+    </nve-alert-group>
 
-      <nve-alert-group status="danger">
-        <nve-alert>Danger</nve-alert>
-        <nve-alert>Danger</nve-alert>
-      </nve-alert-group>
-    </div>
+    <nve-alert-group status="danger">
+      <nve-alert>Danger</nve-alert>
+      <nve-alert>Danger</nve-alert>
+    </nve-alert-group>
   `
 }
 

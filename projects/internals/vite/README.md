@@ -40,6 +40,42 @@ export default mergeConfig(libraryTestConfig, {
 });
 ```
 
+```typescript
+// dot.test.ts
+import { html } from 'lit';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { Dot } from '@nvidia-elements/core/dot';
+import '@nvidia-elements/core/dot/define.js';
+
+describe(Dot.metadata.tag, () => {
+  let fixture: HTMLElement;
+  let element: Dot;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-dot></nve-dot>
+    `);
+    element = fixture.querySelector(Dot.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get(Dot.metadata.tag)).toBeDefined();
+  });
+});
+```
+
+To run the tests run `pnpm run test`
+
+```shell
+vitest run --config=vitest.ts
+```
+
 ## Axe
 
 ```typescript
@@ -56,6 +92,35 @@ export default mergeConfig(libraryAxeTestConfig, {
 });
 ```
 
+```typescript
+// dot.test.axe.ts
+import { html } from 'lit';
+import { describe, expect, it } from 'vitest';
+import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { runAxe } from '@nvidia-elements/testing/axe';
+import { Dot } from '@nvidia-elements/core/dot';
+import '@nvidia-elements/core/dot/define.js';
+
+describe(Dot.metadata.tag, () => {
+  it('should pass axe check for status', async () => {
+    const fixture = await createFixture(html`
+      <nve-dot></nve-dot>
+    `);
+
+    await elementIsStable(fixture.querySelector(Dot.metadata.tag));
+    const results = await runAxe([Dot.metadata.tag]);
+    expect(results.violations.length).toBe(0);
+    removeFixture(fixture);
+  });
+});
+```
+
+To run the tests run `pnpm run test:axe`
+
+```shell
+vitest run --config=vitest.axe.ts
+```
+
 ## Lighthouse
 
 ```typescript
@@ -65,7 +130,7 @@ import { libraryLighthouseConfig } from '@internals/vite';
 
 export default mergeConfig(libraryLighthouseConfig, {
   test: {
-    include: [process.env.LIGHTHOUSE_ALL ? 'src/**/*.test.lighthouse.ts' : 'src/index.test.lighthouse.ts']
+    include: ['src/**/*.test.lighthouse.ts']
   }
 });
 ```
@@ -96,18 +161,17 @@ Create a base template for lighthouse to run tests in `vitest.lighthouse.html`
 </html>
 ```
 
-Create a test file example: `src/badge/badge.test.lighthouse.ts`
-
 ```typescript
+// dot.test.lighthouse.ts
 import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@internals/vite';
 
-describe('badge lighthouse report', () => {
-  test('badge should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-badge', /* html */`
-      <nve-badge>badge</nve-badge>
+describe('dot lighthouse report', () => {
+  test('dot should meet lighthouse benchmarks', async () => {
+    const report = await lighthouseRunner.getReport('nve-dot', /* html */`
+      <nve-dot>dot</nve-dot>
       <script type="module">
-        import '@nvidia-elements/core/badge/define.js';
+        import '@nvidia-elements/core/dot/define.js';
       </script>
     `);
 
@@ -119,8 +183,75 @@ describe('badge lighthouse report', () => {
 });
 ```
 
-The tests will return a report containing the lighthouse score results in performance, best practices and accesibility.
+The tests will return a report containing the lighthouse score results in performance, best practices and accesibility. (`pnpm run test:lighthouse`)
 
 ```shell
 vitest run --config=vitest.lighthouse.ts
+```
+
+## Visual
+
+```typescript
+// vitest.visual.ts
+import { mergeConfig } from 'vitest/config';
+import { libraryVisualTestConfig } from '@internals/vite';
+
+export default mergeConfig(libraryVisualTestConfig, {
+  test: {
+    include: [
+      'src/**/*.test.visual.ts'
+    ],
+    outputFile: {
+      junit: './coverage/visual/junit.xml'
+    }
+  }
+});
+```
+
+Create a base template for visual to run tests in `vitest.visual.html`
+
+```html
+<!doctype html>
+<html lang="en" nve-theme="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="about page" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <title>Visual</title>
+    <style>
+      @import '@nvidia-elements/themes/fonts/inter.css';
+      @import '@nvidia-elements/themes/index.css';
+      @import '@nvidia-elements/themes/dark.css';
+      @import '@nvidia-elements/styles/typography.css';
+      @import '@nvidia-elements/styles/layout.css';
+    </style>
+  </head>
+  <body></body>
+</html>
+```
+
+Create a test file example: `src/dot/dot.test.visual.ts`
+
+```typescript
+import { expect, test, describe } from 'vitest';
+import { visualRunner } from '@internals/vite';
+
+describe('dot visual', () => {
+  test('dot should match visual baseline', async () => {
+    const report = await visualRunner.render('dot', /* html */`
+      <script type="module">
+        import '@nvidia-elements/core/dot/define.js';
+      </script>
+      <nve-dot>•︎•︎•︎</nve-dot>
+    `);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+});
+```
+
+The tests will generate a `.visual` directory with the baseline snapshots. These generated images will be used to compare any subsequent tests. If a test needs to be updated, simply delete the image that needs to be regenerated and rerun the test. (`pnpm run test:visual`)
+
+```shell
+vitest run --config=vitest.visual.ts
 ```
