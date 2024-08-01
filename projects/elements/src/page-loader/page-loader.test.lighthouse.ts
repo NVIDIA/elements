@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('page-loader lighthouse report', () => {
   test('page-loader should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-page-loader', /* html */`
+    const report = await lighthouseRunner.getReport('nve-page-loader', /* html */`
       <nve-page-loader aria-label="page-loader"></nve-page-loader>
       <script type="module">
         import '@nvidia-elements/core/page-loader/define.js';

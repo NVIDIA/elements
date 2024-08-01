@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('radio lighthouse report', () => {
   test('radio should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-radio', /* html */`
+    const report = await lighthouseRunner.getReport('nve-radio', /* html */`
       <nve-radio>
         <label>label</label>
         <input type="radio" />

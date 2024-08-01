@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('datetime lighthouse report', () => {
   test('datetime should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-datetime', /* html */`
+    const report = await lighthouseRunner.getReport('nve-datetime', /* html */`
       <nve-datetime>
         <label>label</label>
         <input type="datetime" />

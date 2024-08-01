@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('progressive-filter-chip lighthouse report', () => {
   test('progressive-filter-chip should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-progressive-filter-chip', /* html */`
+    const report = await lighthouseRunner.getReport('nve-progressive-filter-chip', /* html */`
       <nve-progressive-filter-chip>
         <select aria-label="select">
           <option value="1">option 1</option>

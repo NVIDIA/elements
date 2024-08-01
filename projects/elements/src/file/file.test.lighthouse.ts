@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('file lighthouse report', () => {
   test('file should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-file', /* html */`
+    const report = await lighthouseRunner.getReport('nve-file', /* html */`
       <nve-file>
         <label>label</label>
         <input type="file" />

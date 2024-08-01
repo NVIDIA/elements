@@ -1,7 +1,7 @@
 import { mergeConfig } from 'vitest/config';
-import { lighthouseConfig } from '@nvidia-elements/testing-lighthouse/vite';
+import { libraryLighthouseTestConfig } from '@internals/vite';
 
-export default mergeConfig(lighthouseConfig, {
+export default mergeConfig(libraryLighthouseTestConfig, {
   test: {
     include: [process.env.LIGHTHOUSE_ALL ? 'src/**/*.test.lighthouse.ts' : 'src/index.test.lighthouse.ts'],
     outputFile: {

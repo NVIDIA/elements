@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('forms lighthouse report', () => {
   test('form control should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-control', /* html */`
+    const report = await lighthouseRunner.getReport('nve-control', /* html */`
       <nve-control>
         <label>label</label>
         <input />
@@ -20,7 +20,7 @@ describe('forms lighthouse report', () => {
   });
 
   test('form control message should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-control', /* html */`
+    const report = await lighthouseRunner.getReport('nve-control', /* html */`
       <nve-control>
         <label>label</label>
         <input />
@@ -38,7 +38,7 @@ describe('forms lighthouse report', () => {
   });
 
   test('form control group should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-forms', /* html */`
+    const report = await lighthouseRunner.getReport('nve-forms', /* html */`
       <nve-control-group layout="vertical-inline">
         <label>vertical-inline</label>
         <nve-control>

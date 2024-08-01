@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
-import { runner } from '@nvidia-elements/testing-lighthouse';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('dot lighthouse report', () => {
   test('dot should meet lighthouse benchmarks', async () => {
-    const report = await runner.getReport('nve-dot', /* html */`
+    const report = await lighthouseRunner.getReport('nve-dot', /* html */`
       <nve-dot>1</nve-dot>
       <script type="module">
         import '@nvidia-elements/core/dot/define.js';

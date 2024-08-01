@@ -42,8 +42,7 @@
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@internals/vite": "workspace:*",
-    "@nvidia-elements/testing-lighthouse": "workspace:*",
-    "@vitest/browser": "2.0.3",
+    "@vitest/browser": "2.0.5",
     "lit": "3.1.4",
     "postcss": "8.4.31",
     "postcss-each": "1.1.0",
@@ -51,7 +50,7 @@
     "postcss-mixins": "9.0.4",
     "typescript": "5.3.3",
     "vite": "5.3.3",
-    "vitest": "2.0.3"
+    "vitest": "2.0.5"
   },
   "wireit": {
     "ci": {
