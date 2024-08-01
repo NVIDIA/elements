@@ -31,7 +31,8 @@ export function getChildren(node: any): NodeListOf<HTMLElement> {
 }
 
 export function generateId() {
-  return `_${Math.random().toString(36).substring(2, 9)}`;
+  const uint32 = self.crypto.getRandomValues(new Uint32Array(1))[0];
+  return `_${uint32.toString(16)}`;
 }
 
 export function getAttributeChanges(element: HTMLElement, attr: string, fn: (attrValue: string) => any) {
