@@ -24,6 +24,7 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 - `/projects/elements-react` - Elements React library for React compatibility/support
 - `/projects/testing` - A set of testing utilities for Lit based Web Components.
 - `/projects/themes` - Elements Theme library: provides a set of supported themes for Element based projects
+- `/projects/styles` - Elements Styles library: provides a set of CSS utilities for layout and typography
 
 ## Development
 
@@ -32,12 +33,16 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 To setup repository dependencies and run the full build, run the following commands:
 
 ```shell
+brew install git-lfs #  https://git-lfs.com if not yet installed
+```
+
+```shell
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install
 corepack enable
 corepack prepare --activate
-pnpm i
+pnpm i --frozen-lockfile --prefer-offline
 pnpm run ci
 ```
 
@@ -45,12 +50,20 @@ pnpm run ci
 
 Each project/demo has a set of available and standardized NPM scripts. To build and test all projects run `pnpm run ci` in the root of this directory.
 
+#### Repository
+
 - `ci`: run full build/lint/test
-- `ci:nocache`: clear all caches/dependencies then reinstall/build/lint/test
-- `build`: run library build
+- `ci:all`: entire CI process: build, lint, unit/lighthouse/visual tests
+- `ci:reset`: clear all caches/dependencies then reinstall dependencies
+
+#### Projects
+
 - `dev`: run in watch mode
+- `build`: run project/library build
 - `test`: run unit tests
-- `test:watch`: run unit tests in watch mode
+- `test:lighthouse`: run lighthouse performance tests
+- `test:visual`: run playwright visual regression tests
+- `test:axe`: run axe tests for a11y
 
 To learn in detail how the repo is built and run see our [build README.md](https://github.com/NVIDIA/elements/-/blob/main/build/README.md).
 
