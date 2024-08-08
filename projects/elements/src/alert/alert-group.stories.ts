@@ -17,7 +17,7 @@ export default {
 
 type ArgTypes = AlertGroup;
 
-export const Default = {
+export const AlertGroupDefault = {
   render: (args: ArgTypes) =>
     html`
     <nve-alert-group .status=${args.status}>
@@ -27,7 +27,7 @@ export const Default = {
     args: { status: undefined }
 };
 
-export const Status = {
+export const AlertGroupStatus = {
   render: () => html`
     <div nve-layout="column gap:md">
       <nve-alert-group>
