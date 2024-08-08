@@ -1498,6 +1498,16 @@
           "type": "color"
         }
       },
+      "hover": {
+        "color": {
+          "value": "{sys.text.emphasis.color}",
+          "type": "color"
+        },
+        "background": {
+          "value": "{sys.interaction.background}",
+          "type": "color"
+        }
+      },
       "selected": {
         "color": {
           "value": "{sys.text.emphasis.color}",
