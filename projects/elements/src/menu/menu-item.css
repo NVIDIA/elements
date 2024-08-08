@@ -49,7 +49,7 @@
   --color: var(--nve-sys-interaction-disabled-color);
 }
 
-:host(:state(hover)) {
+:host(:hover) {
   --color: var(--nve-sys-interaction-selected-color);
 }
 
