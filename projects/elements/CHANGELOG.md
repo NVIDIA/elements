@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.0...@nvidia-elements/core-v1.1.1) (2024-08-08)
+
+
+### Bug Fixes
+
+* **elements:** padding updates ([f3f243b](https://github.com/NVIDIA/elements/commit/f3f243b4f1044f60076a0f60505096f298dd156d))
+
 ## [@nvidia-elements/core-v1.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.0.0...@nvidia-elements/core-v1.1.0) (2024-08-01)
 
 
