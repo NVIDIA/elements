@@ -99,7 +99,7 @@ export const Links = {
 export const Suffix = {
   render: () => html`
   <nve-menu>
-    <nve-menu-item><nve-icon name="person" slot="suffix"></nve-icon>profile</nve-menu-item>
+    <nve-menu-item><kbd  slot="suffix" nve-text="code flat">CMD + C</kbd></nve-menu-item>
   </nve-menu>
   `
 };
