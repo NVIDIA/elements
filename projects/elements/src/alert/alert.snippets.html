@@ -1,8 +1,4 @@
-<template
-  name="Alert Group Snippet"
-  prefix="alert-group-snippet"
-  description="Alert group with two alerts."
-  type="pattern">
+<template name="Alert Group" prefix="alert-group" description="Alert group with two alerts." type="pattern">
   <nve-alert-group status="${1:accent}" container="${2:flat}" prominence="emphasis">
     <nve-alert closable>${3:Alert Text}</nve-alert>
     <nve-alert closable>${4:Alert Text}</nve-alert>
@@ -11,11 +7,7 @@
   $0
 </template>
 
-<template
-  name="Alert with Action Snippet"
-  prefix="alert-action-snippet"
-  description="Alert with action button."
-  type="pattern">
+<template name="Alert with Action" prefix="alert-action" description="Alert with action button." type="pattern">
   <nve-alert-group status="${1:accent}" container="${2:flat}" prominence="emphasis">
     <nve-alert> ${3:Alert Text} <nve-button slot="actions" container="flat">${4:OK!}</nve-button> </nve-alert>
   </nve-alert-group>
@@ -24,8 +16,8 @@
 </template>
 
 <template
-  name="Multiline Alert Snippet"
-  prefix="multiline-alert-snippet"
+  name="Multiline Alert "
+  prefix="multiline-alert"
   description="Alert text and preformatted code output."
   type="pattern">
   <nve-alert-group status="danger">
