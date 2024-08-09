@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.1.0...@nvidia-elements/themes-v1.1.1) (2024-08-09)
+
+
+### Bug Fixes
+
+* **elements:** add interaction token for hover ([aeb19ba](https://github.com/NVIDIA/elements/commit/aeb19bafb25756a4af089b0819dadef6479008b8))
+
 ## [@nvidia-elements/themes-v1.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.0.0...@nvidia-elements/themes-v1.1.0) (2024-08-01)
 
 
