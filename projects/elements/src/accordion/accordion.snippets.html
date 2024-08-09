@@ -1,8 +1,4 @@
-<template
-  name="Accordion Snippet"
-  prefix="accordion-snippet"
-  description="Basic accordion with title and content slot."
-  type="pattern">
+<template name="Accordion" prefix="accordion" description="Basic accordion with title and content slot." type="pattern">
   <mlv-accordion behavior-expand container="${1:flat}">
     <mlv-accordion-header>
       <div slot="title">${2:Title}</div>
@@ -15,8 +11,8 @@
 </template>
 
 <template
-  name="Accordion with Actions Snippet"
-  prefix="accordion-actions-snippet"
+  name="Accordion with Actions"
+  prefix="accordion-actions"
   description="Accordion with action buttons in header."
   type="pattern">
   <mlv-accordion behavior-expand container="${1:flat}">
@@ -34,8 +30,8 @@
 </template>
 
 <template
-  name="Accorion Group Snippet"
-  prefix="accordion-group-snippet"
+  name="Accorion Group"
+  prefix="accordion-group"
   description="Accordion group with two accordion children."
   type="pattern">
   <mlv-accordion-group behavior-expand-single container="${1:flat}">
