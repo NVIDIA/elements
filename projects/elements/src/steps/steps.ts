@@ -136,7 +136,7 @@ export class Steps extends LitElement {
     };
   }
 
-  @queryAssignedElements() private steps!: StepsItem[];
+  @queryAssignedElements({ selector: 'nve-steps-item, mlv-steps-item' }) private steps!: StepsItem[];
 
   /** @private */
   declare _internals: ElementInternals;
