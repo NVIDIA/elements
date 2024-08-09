@@ -423,15 +423,15 @@ importers:
 
   projects/labs/snippets:
     dependencies:
-      chalk:
-        specifier: 5.3.0
-        version: 5.3.0
       glob:
         specifier: 10.3.10
         version: 10.3.10
       parse5:
         specifier: 7.1.2
         version: 7.1.2
+      picocolors:
+        specifier: 1.0.1
+        version: 1.0.1
     devDependencies:
       '@nve-internals/eslint':
         specifier: workspace:*
@@ -9291,6 +9291,7 @@ packages:
   /chalk@5.3.0:
     resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: true
 
   /change-case@4.1.2:
     resolution: {integrity: sha512-bSxY2ws9OtviILG1EiY5K7NNxkqg/JnRnFxLtKQ96JaviiIxi7djMrSd0ECT9AC+lttClmYwKw53BWpOMblo7A==}
