@@ -10,15 +10,18 @@ describe(Steps.metadata.tag, () => {
   let fixture: HTMLElement;
   let parentElement: Steps;
   let childElement: StepsItem;
+  let childElements: StepsItem[];
 
   beforeEach(async () => {
     fixture = await createFixture(html`
     <nve-steps>
       <nve-steps-item></nve-steps-item>
+      <nve-steps-item></nve-steps-item>
     </nve-steps>
     `);
     parentElement = fixture.querySelector(Steps.metadata.tag);
     childElement = fixture.querySelector(StepsItem.metadata.tag);
+    childElements = Array.from(fixture.querySelectorAll(StepsItem.metadata.tag));
 
     await elementIsStable(parentElement);
     await elementIsStable(childElement);
@@ -120,5 +123,12 @@ describe(Steps.metadata.tag, () => {
     await elementIsStable(childElement);
     expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag)).toBeFalsy();
     expect(childElement.shadowRoot.querySelector<ProgressRing>(ProgressRing.metadata.tag).status).toBe('accent');
+  });
+
+  it('should count number of steps', async () => {
+    await elementIsStable(childElement);
+    expect(childElements.length).toBe(2);
+    expect(childElements[0].index).toBe(1);
+    expect(childElements[1].index).toBe(2);
   });
 });
