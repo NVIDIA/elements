@@ -153,37 +153,37 @@
       ]
     },
     "release:themes": {
-      "command": "CI=true HUSKY=0 cd projects/themes && pnpm exec semantic-release"
+      "command": "cd projects/themes && HUSKY=0 pnpm exec semantic-release"
     },
     "release:testing": {
-      "command": "CI=true HUSKY=0 cd projects/testing && pnpm exec semantic-release"
+      "command": "cd projects/testing && HUSKY=0 pnpm exec semantic-release"
     },
     "release:elements": {
-      "command": "CI=true HUSKY=0 cd projects/elements && pnpm exec semantic-release",
+      "command": "cd projects/elements && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:themes"
       ]
     },
     "release:elements-react": {
-      "command": "CI=true HUSKY=0 cd projects/elements-react && pnpm exec semantic-release",
+      "command": "cd projects/elements-react && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
     },
     "release:labs-behaviors-alpine": {
-      "command": "CI=true HUSKY=0 cd projects/labs/behaviors-alpine && pnpm exec semantic-release",
+      "command": "cd projects/labs/behaviors-alpine && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
     },
     "release:labs-code": {
-      "command": "CI=true HUSKY=0 cd projects/labs/code && pnpm exec semantic-release",
+      "command": "cd projects/labs/code && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
     },
     "release:styles": {
-      "command": "CI=true HUSKY=0 cd projects/styles && pnpm exec semantic-release",
+      "command": "cd projects/styles && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:themes"
       ]
@@ -208,7 +208,7 @@
       "command": "pnpm exec playwright install chromium --with-deps chromium"
     },
     "prepare": {
-      "command": "test -n \"$CI\" || (pnpm run playwright & husky install)"
+      "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs)"
     }
   }
 }
