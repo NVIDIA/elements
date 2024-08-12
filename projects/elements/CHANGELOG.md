@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.1.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.1...@nvidia-elements/core-v1.1.2) (2024-08-12)
+
+
+### Bug Fixes
+
+* **elements:** menu item interaction ([be067f2](https://github.com/NVIDIA/elements/commit/be067f258c80ee6c75ffee730b9aaff30f1d83fc))
+* **elements:** menu item interaction effect ([1a481ca](https://github.com/NVIDIA/elements/commit/1a481ca411d206f03e2ee5346918c72958fc9a92))
+
 ## [@nvidia-elements/core-v1.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.0...@nvidia-elements/core-v1.1.1) (2024-08-08)
 
 
