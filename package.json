@@ -153,37 +153,37 @@
       ]
     },
     "release:themes": {
-      "command": "cd projects/themes && pnpm exec semantic-release"
+      "command": "CI=true HUSKY=0 cd projects/themes && pnpm exec semantic-release"
     },
     "release:testing": {
-      "command": "cd projects/testing && pnpm exec semantic-release"
+      "command": "CI=true HUSKY=0 cd projects/testing && pnpm exec semantic-release"
     },
     "release:elements": {
-      "command": "cd projects/elements && pnpm exec semantic-release",
+      "command": "CI=true HUSKY=0 cd projects/elements && pnpm exec semantic-release",
       "dependencies": [
         "release:themes"
       ]
     },
     "release:elements-react": {
-      "command": "cd projects/elements-react && pnpm exec semantic-release",
+      "command": "CI=true HUSKY=0 cd projects/elements-react && pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
     },
     "release:labs-behaviors-alpine": {
-      "command": "cd projects/labs/behaviors-alpine && pnpm exec semantic-release",
+      "command": "CI=true HUSKY=0 cd projects/labs/behaviors-alpine && pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
     },
     "release:labs-code": {
-      "command": "cd projects/labs/code && pnpm exec semantic-release",
+      "command": "CI=true HUSKY=0 cd projects/labs/code && pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
     },
     "release:styles": {
-      "command": "cd projects/styles && pnpm exec semantic-release",
+      "command": "CI=true HUSKY=0 cd projects/styles && pnpm exec semantic-release",
       "dependencies": [
         "release:themes"
       ]
