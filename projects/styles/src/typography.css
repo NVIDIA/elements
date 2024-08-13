@@ -135,6 +135,14 @@
   color: var(--nve-sys-text-muted-color) !important;
 }
 
+[nve-text~='white'] {
+  color: var(--nve-sys-text-white-color) !important;
+}
+
+[nve-text~='black'] {
+  color: var(--nve-sys-text-black-color) !important;
+}
+
 /* weights */
 [nve-text~='bold'] {
   font-weight: var(--nve-ref-font-weight-bold) !important;
