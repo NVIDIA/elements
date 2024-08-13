@@ -74,7 +74,7 @@ function createDefaultFiles(content, context) {
 </head>
 <body nve-text="body" nve-layout="${content.split('\n')[0].includes('full') ? '' : 'pad:lg'}">
 
-${content}
+${content.replaceAll('nve-', 'nve-')}
 
 </body>
 </html>`
@@ -85,8 +85,8 @@ ${content}
     'importmap.json': {
       content: `{
   "imports": {
-    "${SCOPE}/elements": "${CDN_MODULES_URL}/${SCOPE}/elements@${ELEMENTS_VERSION}",
-    "${SCOPE}/elements/": "${CDN_MODULES_URL}/${SCOPE}/elements@${ELEMENTS_VERSION}/"
+    "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@0.41.0",
+    "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@0.41.0/"
   }
 }`
     }
@@ -109,7 +109,7 @@ ${content}
 </head>
 <body nve-text="body" nve-layout="${content.split('\n')[0].includes('full') ? '' : 'pad:lg'}">
 
-${content.replaceAll('nve-', 'nve-')}
+${content}
 
 </body>
 </html>`
@@ -135,6 +135,7 @@ ${content.replaceAll('nve-', 'nve-')}
 function getImports(scope) {
   return metrics['@nvidia-elements/core'].elements
     .filter(e => packageFile.exports[`./${e.name.replace('nve-', '')}/define.js`])
+    .filter(e => !e.name.includes('json-viewer'))
     .map(e => `import '${scope === 'mlv' ? '@elements' : '@nve'}/elements/${e.name.replace('nve-', '')}/define.js';`)
     .join('\n');
 }
