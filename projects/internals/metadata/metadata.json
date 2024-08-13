@@ -1,5 +1,5 @@
 {
-  "created": "2024-08-20T15:47:57.963Z",
+  "created": "2024-08-20T22:31:08.469Z",
   "types": {
     "props": [
       {
@@ -4899,10 +4899,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.946,
+              "kb": 19.912,
               "requests": {
                 "index.js": {
-                  "kb": 19.362,
+                  "kb": 19.328,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -4993,10 +4993,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.946,
+              "kb": 19.912,
               "requests": {
                 "index.js": {
-                  "kb": 19.362,
+                  "kb": 19.328,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -5059,10 +5059,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.946,
+              "kb": 19.912,
               "requests": {
                 "index.js": {
-                  "kb": 19.362,
+                  "kb": 19.328,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -5387,10 +5387,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.804,
+              "kb": 19.719,
               "requests": {
                 "index.js": {
-                  "kb": 19.03,
+                  "kb": 18.945,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -6737,10 +6737,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 8.753,
+              "kb": 8.772,
               "requests": {
                 "index.js": {
-                  "kb": 8.753,
+                  "kb": 8.772,
                   "name": "index.js"
                 }
               }
@@ -6796,10 +6796,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 8.753,
+              "kb": 8.772,
               "requests": {
                 "index.js": {
-                  "kb": 8.753,
+                  "kb": 8.772,
                   "name": "index.js"
                 }
               }
@@ -6873,10 +6873,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 8.753,
+              "kb": 8.772,
               "requests": {
                 "index.js": {
-                  "kb": 8.753,
+                  "kb": 8.772,
                   "name": "index.js"
                 }
               }
@@ -7226,10 +7226,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.5,
+              "kb": 23.407,
               "requests": {
                 "index.js": {
-                  "kb": 23.5,
+                  "kb": 23.407,
                   "name": "index.js"
                 }
               }
@@ -8052,10 +8052,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.895,
+              "kb": 23.795,
               "requests": {
                 "index.js": {
-                  "kb": 23.121,
+                  "kb": 23.021,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -8150,10 +8150,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.895,
+              "kb": 23.795,
               "requests": {
                 "index.js": {
-                  "kb": 23.121,
+                  "kb": 23.021,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -8961,10 +8961,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 29.604,
+              "kb": 29.502,
               "requests": {
                 "index.js": {
-                  "kb": 28.792,
+                  "kb": 28.69,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -9019,10 +9019,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 29.604,
+              "kb": 29.502,
               "requests": {
                 "index.js": {
-                  "kb": 28.792,
+                  "kb": 28.69,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -9612,10 +9612,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 29.943,
+              "kb": 29.837,
               "requests": {
                 "index.js": {
-                  "kb": 29.131,
+                  "kb": 29.025,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -9670,10 +9670,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 29.943,
+              "kb": 29.837,
               "requests": {
                 "index.js": {
-                  "kb": 29.131,
+                  "kb": 29.025,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -9728,10 +9728,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 29.943,
+              "kb": 29.837,
               "requests": {
                 "index.js": {
-                  "kb": 29.131,
+                  "kb": 29.025,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10067,10 +10067,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 30.707,
+              "kb": 30.481,
               "requests": {
                 "index.js": {
-                  "kb": 29.895,
+                  "kb": 29.669,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10124,10 +10124,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 30.707,
+              "kb": 30.481,
               "requests": {
                 "index.js": {
-                  "kb": 29.895,
+                  "kb": 29.669,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10561,10 +10561,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.643,
+              "kb": 21.584,
               "requests": {
                 "index.js": {
-                  "kb": 21.643,
+                  "kb": 21.584,
                   "name": "index.js"
                 }
               }
@@ -10695,10 +10695,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.643,
+              "kb": 21.584,
               "requests": {
                 "index.js": {
-                  "kb": 21.643,
+                  "kb": 21.584,
                   "name": "index.js"
                 }
               }
@@ -10763,10 +10763,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.643,
+              "kb": 21.584,
               "requests": {
                 "index.js": {
-                  "kb": 21.643,
+                  "kb": 21.584,
                   "name": "index.js"
                 }
               }
@@ -10828,10 +10828,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.643,
+              "kb": 21.584,
               "requests": {
                 "index.js": {
-                  "kb": 21.643,
+                  "kb": 21.584,
                   "name": "index.js"
                 }
               }
@@ -10890,10 +10890,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.643,
+              "kb": 21.584,
               "requests": {
                 "index.js": {
-                  "kb": 21.643,
+                  "kb": 21.584,
                   "name": "index.js"
                 }
               }
@@ -10967,10 +10967,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.643,
+              "kb": 21.584,
               "requests": {
                 "index.js": {
-                  "kb": 21.643,
+                  "kb": 21.584,
                   "name": "index.js"
                 }
               }
@@ -11989,10 +11989,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 24.056,
+              "kb": 23.947,
               "requests": {
                 "index.js": {
-                  "kb": 24.056,
+                  "kb": 23.947,
                   "name": "index.js"
                 }
               }
@@ -12625,10 +12625,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 11.843,
+              "kb": 11.853,
               "requests": {
                 "index.js": {
-                  "kb": 11.843,
+                  "kb": 11.853,
                   "name": "index.js"
                 }
               }
@@ -13227,10 +13227,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 30.422,
+              "kb": 30.32,
               "requests": {
                 "index.js": {
-                  "kb": 29.648,
+                  "kb": 29.546,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -13845,10 +13845,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.627,
+              "kb": 19.578,
               "requests": {
                 "index.js": {
-                  "kb": 18.842,
+                  "kb": 18.793,
                   "name": "index.js"
                 },
                 "double-chevron.svg.js": {
@@ -13914,10 +13914,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.627,
+              "kb": 19.578,
               "requests": {
                 "index.js": {
-                  "kb": 18.842,
+                  "kb": 18.793,
                   "name": "index.js"
                 },
                 "double-chevron.svg.js": {
@@ -13988,10 +13988,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.627,
+              "kb": 19.578,
               "requests": {
                 "index.js": {
-                  "kb": 18.842,
+                  "kb": 18.793,
                   "name": "index.js"
                 },
                 "double-chevron.svg.js": {
@@ -15002,10 +15002,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.419,
+              "kb": 23.327,
               "requests": {
                 "index.js": {
-                  "kb": 23.419,
+                  "kb": 23.327,
                   "name": "index.js"
                 }
               }
@@ -16567,10 +16567,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 20.802,
+              "kb": 20.744,
               "requests": {
                 "index.js": {
-                  "kb": 20.802,
+                  "kb": 20.744,
                   "name": "index.js"
                 }
               }
@@ -17260,10 +17260,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 11.871,
+              "kb": 11.879,
               "requests": {
                 "index.js": {
-                  "kb": 11.871,
+                  "kb": 11.879,
                   "name": "index.js"
                 }
               }
@@ -18660,10 +18660,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 30.75,
+              "kb": 30.534,
               "requests": {
                 "index.js": {
-                  "kb": 29.938,
+                  "kb": 29.722,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -18725,10 +18725,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 30.75,
+              "kb": 30.534,
               "requests": {
                 "index.js": {
-                  "kb": 29.938,
+                  "kb": 29.722,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
