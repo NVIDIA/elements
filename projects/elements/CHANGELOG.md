@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.1.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.3...@nvidia-elements/core-v1.1.4) (2024-08-13)
+
+
+### Bug Fixes
+
+* **elements:** removed snippet suffix ([5383d27](https://github.com/NVIDIA/elements/commit/5383d27ee99c4d8fb0d0227b67102c5a81767bfc))
+
 ## [@nvidia-elements/core-v1.1.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.2...@nvidia-elements/core-v1.1.3) (2024-08-13)
 
 
