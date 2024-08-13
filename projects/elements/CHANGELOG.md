@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.1.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.2...@nvidia-elements/core-v1.1.3) (2024-08-13)
+
+
+### Bug Fixes
+
+* **elements:** steps index count ([f43f301](https://github.com/NVIDIA/elements/commit/f43f301e9e58ab638dad07f745e48d5eb01690cf))
+
 ## [@nvidia-elements/core-v1.1.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.1...@nvidia-elements/core-v1.1.2) (2024-08-12)
 
 
