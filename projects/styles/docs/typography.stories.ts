@@ -56,6 +56,12 @@ export const Color = {
   <p nve-text="body">default</p>
   <p nve-text="body emphasis">emphasis</p>
   <p nve-text="body muted">muted</p>
+  <div nve-theme="root dark" nve-layout="column gap:lg">
+    <p nve-text="body white">white</p>
+  </div>
+  <div nve-theme="root light" nve-layout="column gap:lg">
+    <p nve-text="body black">black</p>
+  </div>
 </div>
   `
 }
