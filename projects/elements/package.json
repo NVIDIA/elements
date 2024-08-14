@@ -215,6 +215,18 @@
       "types": "./dist/combobox/define.d.ts",
       "default": "./dist/combobox/define.js"
     },
+    "./copy-button": {
+      "types": "./dist/copy-button/index.d.ts",
+      "default": "./dist/copy-button/index.js"
+    },
+    "./copy-button/index.js": {
+      "types": "./dist/copy-button/index.d.ts",
+      "default": "./dist/copy-button/index.js"
+    },
+    "./copy-button/define.js": {
+      "types": "./dist/copy-button/define.d.ts",
+      "default": "./dist/copy-button/define.js"
+    },
     "./date": {
       "types": "./dist/date/index.d.ts",
       "default": "./dist/date/index.js"

@@ -1,0 +1,48 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Default, Flat, Size, BehaviorCopy, Interaction, Hint } from './copy-button.stories';
+
+<Meta title="Elements/Copy Button/Documentation" />
+
+# Copy Button
+
+<element-metrics tag="nve-copy-button"></element-metrics>
+
+## Installation
+
+```typescript
+import '@nvidia-elements/core/copy-button/define.js';
+```
+
+```html
+<nve-copy-button value="copy"></nve-copy-button>
+```
+
+## Default
+
+<Canvas of={Default} />
+
+## Interaction
+
+<Canvas of={Interaction} />
+
+## Flat
+
+<Canvas of={Flat} />
+
+## Behavior Copy
+
+<element-api tag="nve-toggletip" type="property" value="behaviorTrigger"></element-api>
+
+<Canvas of={BehaviorCopy} />
+
+## Hint
+
+<Canvas of={Hint} />
+
+## Size
+
+<Canvas of={Size} />
+
+<element-status tag="nve-copy-button"></element-status>
+
+<element-api tag="nve-copy-button"></element-api>
