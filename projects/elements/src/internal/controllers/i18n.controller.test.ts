@@ -57,7 +57,9 @@ describe('i18n.controller', () => {
       trend: 'trend',
       down: 'down',
       up: 'up',
-      neutral: 'neutral'
+      neutral: 'neutral',
+      copy: 'copy',
+      copied: 'copied'
     });
   });
 
@@ -89,7 +91,9 @@ describe('i18n.controller', () => {
       trend: 'trend',
       down: 'down',
       up: 'up',
-      neutral: 'neutral'
+      neutral: 'neutral',
+      copy: 'copy',
+      copied: 'copied'
     });
   });
 });
