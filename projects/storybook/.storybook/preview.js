@@ -153,6 +153,7 @@ export const parameters = {
           'Checkbox',
           'Color',
           'Combobox',
+          'Copy Button',
           'Data Grid',
           [
             'Documentation',
