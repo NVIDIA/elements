@@ -2,6 +2,8 @@ import { GlobalStateService } from './global.service.js';
 
 export interface I18nStrings {
   close: string;
+  copy: string;
+  copied: string;
   expand: string;
   select: string;
   selected: string;
@@ -28,6 +30,8 @@ export interface I18nStrings {
 
 const i18nRegistry = {
   close: 'close',
+  copy: 'copy',
+  copied: 'copied',
   expand: 'expand',
   select: 'select',
   selected: 'selected',

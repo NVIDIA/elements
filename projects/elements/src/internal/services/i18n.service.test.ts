@@ -8,8 +8,11 @@ describe('GlobalStateService', () => {
   });
 
   it('should provide an intial i18n state', () => {
+    console.log(I18nService.i18n);
     expect(I18nService.i18n).toStrictEqual({
       close: 'close',
+      copy: 'copy',
+      copied: 'copied',
       expand: 'expand',
       select: 'select',
       selected: 'selected',
@@ -40,6 +43,8 @@ describe('GlobalStateService', () => {
 
     I18nService.update({
       close: 'fermer',
+      copy: 'copie',
+      copied: 'copié',
       expand: 'étendre',
       select: 'choisir',
       selected: 'choisir',
@@ -66,6 +71,8 @@ describe('GlobalStateService', () => {
 
     expect(I18nService.i18n).toStrictEqual({
       close: 'fermer',
+      copy: 'copie',
+      copied: 'copié',
       expand: 'étendre',
       select: 'choisir',
       selected: 'choisir',

@@ -1,0 +1,80 @@
+import { html } from 'lit';
+import { property } from 'lit/decorators/property.js';
+import { useStyles, I18nController } from '@nvidia-elements/core/internal';
+import { Button } from '@nvidia-elements/core/button';
+import { Icon } from '@nvidia-elements/core/icon';
+import { state } from 'lit/decorators/state.js';
+import styles from './copy-button.css?inline';
+
+/**
+ * @element nve-copy-button
+ * @description A copy button is a button that easily enables the copy to clipboard pattern.
+ * @since 1.1.4
+ * @slot - default
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-copy-button-documentation--docs
+ * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=8776-101652&t=1wXXkUNtvP4Bz5RY-0
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
+ */
+export class CopyButton extends Button {
+  @state() private copied = false;
+
+  @state() private showToast = false;
+
+  @state() private showTooltip = false;
+
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
+
+  /**
+   * Determines if the copy button should auto write to clipboard by the trigger.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'behavior-copy' }) behaviorCopy: boolean;
+
+  static styles = useStyles([...Button.styles, styles]);
+
+  static readonly metadata = {
+    tag: 'nve-copy-button',
+    version: '0.0.0'
+  };
+
+  static elementDefinitions = {
+    [Icon.metadata.tag]: Icon
+  };
+
+  render() {
+    return html`
+     <div id="btn" internal-host interaction-state focus-within aria-hidden="true">
+        <slot></slot>
+        <nve-icon name=${this.copied ? 'check' : 'copy'} .status=${this.copied ? 'success' : undefined} .size=${this.size} aria-hidden="true" @click=${this.#copy}></nve-icon>
+     </div>
+     <nve-toast .hidden=${!this.showToast} @open=${this.#copy} @close=${this.#close} hidden status="success" anchor="btn" trigger="btn" position="top" close-timeout="1500">${this.i18n.copied}</nve-toast>
+     <nve-tooltip .hidden=${!this.showTooltip || this.showToast} @open=${() => (this.showTooltip = true)} @close=${() => (this.showTooltip = false)} anchor="btn" trigger="btn">${this.ariaLabel ?? this.i18n.copy}</nve-tooltip>
+   `;
+  }
+
+  #copy(e: Event) {
+    if (this.behaviorCopy) {
+      e.stopPropagation();
+      navigator.clipboard
+        .writeText(this.value)
+        .then(() => {
+          this.showToast = true;
+          this.copied = true;
+        })
+        .catch(err => {
+          this.showToast = false;
+          console.error(err);
+        });
+    }
+  }
+
+  #close() {
+    this.showToast = false;
+    this.copied = false;
+    this.showTooltip = false;
+  }
+}
