@@ -3,9 +3,10 @@ import process from 'process';
 const watch = process.argv.findIndex(i => i === '--watch') !== -1;
 const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
 
-/** @type {import('vitest').UserConfig} */
+/** @type {import('vite').UserConfig} */
 export const libraryTestConfig = {
   test: {
+    pool: 'forks', // https://github.com/vitest-dev/vitest/issues/3077
     retry: 1,
     isolate: coverage,
     bail: !watch && !coverage ? 2 : 0,
@@ -32,7 +33,8 @@ export const libraryTestConfig = {
       enabled: true,
       headless: !watch,
       provider: 'playwright',
-      name: 'chromium'
+      name: 'chromium',
+      strictPort: true
     },
     coverage: {
       extension: ['.ts'],

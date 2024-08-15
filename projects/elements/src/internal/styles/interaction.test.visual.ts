@@ -31,6 +31,10 @@ function interaction(theme: '' | 'dark' = '') {
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
   <style>
+    body {
+      height: 700px;
+    }
+
     .nve-menu {
       display: flex;
       flex-direction: column;
