@@ -114,6 +114,15 @@ function App() {
                 Documentation
               </a>
             </li>
+            <li>
+              <a
+                download
+                nve-text="link"
+                target="_blank"
+                href="https://NVIDIA.github.io/elements/starters/download/react.zip">
+                Download
+              </a>
+            </li>
           </ul>
         </main>
       </div>
