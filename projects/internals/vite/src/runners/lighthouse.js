@@ -58,7 +58,7 @@ export class LighthouseRunner {
 
     console.log('Stopping Chromium...');
     console.log('Stopping Vite Server...');
-    this.#server.httpServer.close();
+    this.#server.close();
     await this.#browser.close();
   }
 

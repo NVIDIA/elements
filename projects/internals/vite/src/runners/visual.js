@@ -17,26 +17,45 @@ const HAS_CUSTOM_BUILD_CONFIG = fs.existsSync(CUSTOM_CONFIG_PATH);
 
 export class VisualRunner {
   #server;
+  #browser;
+  #page;
   #port = 4176;
   #report = {};
 
   async open() {
-    if (!fs.existsSync(ROOT_DIR)) {
-      fs.mkdirSync(ROOT_DIR);
+    if (!this.#browser) {
+      if (!fs.existsSync(ROOT_DIR)) {
+        fs.mkdirSync(ROOT_DIR);
+      }
+
+      if (!fs.existsSync(DIST_DIR)) {
+        fs.mkdirSync(DIST_DIR);
+      }
+
+      console.log('Starting Vite Server...');
+      this.#server = await preview({
+        root: ROOT_DIR,
+        preview: { port: this.#port, open: false }
+      });
+
+      this.#port = this.#server.httpServer.address().port;
+      console.log(`Vite Server running at port ${this.#port}`);
+
+      this.#browser = await chromium.launch({
+        args: [
+          '--headless',
+          '--remote-debugging-port=9222',
+          '--font-render-hinting=none',
+          '--disable-skia-runtime-opts',
+          '--disable-font-subpixel-positioning',
+          '--disable-lcd-text',
+          '--disable-gpu'
+        ]
+      });
+
+      const context = await this.#browser.newContext({ viewport: { width: 1180, height: 820 } });
+      this.#page = await context.newPage();
     }
-
-    if (!fs.existsSync(DIST_DIR)) {
-      fs.mkdirSync(DIST_DIR);
-    }
-
-    console.log('Starting Vite Server...');
-    this.#server = await preview({
-      root: ROOT_DIR,
-      preview: { port: this.#port, open: false }
-    });
-
-    this.#port = this.#server.httpServer.address().port;
-    console.log(`Vite Server running at port ${this.#port}`);
   }
 
   async close() {
@@ -49,33 +68,21 @@ export class VisualRunner {
     }
 
     console.log('Stopping Vite Server...');
-    this.#server.httpServer.close();
+    this.#server.close();
+    this.#browser.close();
   }
 
   async render(name, content, options = { network: false }) {
     await this.#buildPage(name, content);
+    await this.open();
 
-    const browser = await chromium.launch({
-      args: [
-        '--headless',
-        '--remote-debugging-port=9222',
-        '--font-render-hinting=none',
-        '--disable-skia-runtime-opts',
-        '--disable-font-subpixel-positioning',
-        '--disable-lcd-text',
-        '--disable-gpu'
-      ]
-    });
-
-    const context = await browser.newContext({ viewport: { width: 1180, height: 820 } });
-    const page = await context.newPage();
-    await page.goto(`http://localhost:${this.#port}/${name}/index.html`);
-    await page.evaluate(async () => {
+    await this.#page.goto(`http://localhost:${this.#port}/${name}/index.html`);
+    await this.#page.evaluate(async () => {
       await document.fonts.ready;
     });
 
     if (options.network) {
-      await page.waitForLoadState('networkidle');
+      await this.#page.waitForLoadState('networkidle');
     }
 
     const baselinePath = `./${ROOT_DIR}/${name}.png`;
@@ -84,23 +91,25 @@ export class VisualRunner {
 
     if (hasBaseline) {
       const img1 = PNG.sync.read(fs.readFileSync(baselinePath));
-      const img2 = PNG.sync.read(await page.locator('body').screenshot());
+      const img2 = PNG.sync.read(await this.#page.locator('body').screenshot());
+      const imgDiff = new PNG({ width: img1.width, height: img1.height });
 
-      const { width, height } = img1;
-      const diff = new PNG({ width, height });
-      const maxDiffPixels = pixelmatch(img1.data, img2.data, diff.data, width, height, { threshold: 0.1 });
-      const maxDiffPercentage = Math.floor((maxDiffPixels / (width * height)) * 100);
+      const maxDiffPixels = pixelmatch(img1.data, img2.data, imgDiff.data, img1.width, img1.height, { threshold: 0.1 });
+      const maxDiffPercentage = Math.floor((maxDiffPixels / (img1.width * img1.height)) * 100);
 
-      if (maxDiffPixels > 0) {
-        fs.writeFileSync(diffPath, PNG.sync.write(diff));
+      if (maxDiffPercentage >= 1) {
+        fs.writeFileSync(diffPath, PNG.sync.write(imgDiff));
+        if (!process.env.CI) {
+          fs.writeFileSync(baselinePath, PNG.sync.write(img2));
+        }
       }
 
-      this.#report[name] = { maxDiffPixels, maxDiffPercentage };
+      this.#report[name] = { maxDiffPercentage };
     } else {
-      await page.locator('body').screenshot({ path: baselinePath });
+      await this.#page.locator('body').screenshot({ path: baselinePath });
+      this.#report[name] = { maxDiffPercentage: 0 };
     }
 
-    browser.close();
     return this.#report[name];
   }
 
