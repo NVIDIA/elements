@@ -19,7 +19,7 @@
     "@nvidia-elements/code": "workspace:*",
     "fflate": "0.8.1",
     "html-format": "1.1.2",
-    "lit": "3.1.4",
+    "lit": "catalog:",
     "showdown": "2.1.0"
   },
   "devDependencies": {
@@ -33,10 +33,10 @@
     "@storybook/theming": "8.2.6",
     "@storybook/web-components": "8.2.6",
     "@storybook/web-components-vite": "8.2.6",
-    "eslint": "9.6.0",
+    "eslint": "catalog:",
     "storybook": "8.2.6",
-    "typescript": "5.3.3",
-    "vite": "5.3.3"
+    "typescript": "catalog:",
+    "vite": "catalog:"
   },
   "wireit": {
     "dev": {
@@ -78,7 +78,7 @@
         "../labs/code:build",
         "../styles:build",
         "../themes:build",
-        "../starters/lit-library:ci"
+        "../starters/lit-library:build"
       ]
     },
     "lint": {

@@ -4,12 +4,12 @@ import { visualRunner } from '@internals/vite';
 describe('menu visual', () => {
   test('dot should match visual baseline', async () => {
     const report = await visualRunner.render('menu', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('menu should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('menu.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 

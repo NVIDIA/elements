@@ -34,8 +34,7 @@
     "dev": "wireit",
     "build": "wireit",
     "test:lighthouse": "wireit",
-    "test:visual": "wireit",
-    "test:visual:update": "wireit"
+    "test:visual": "wireit"
   },
   "peerDependencies": {
     "@nvidia-elements/themes": "workspace:^"
@@ -44,20 +43,21 @@
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@internals/vite": "workspace:*",
-    "@vitest/browser": "2.0.5",
-    "lit": "3.1.4",
+    "@vitest/browser": "catalog:",
+    "lit": "catalog:",
     "postcss": "8.4.31",
     "postcss-each": "1.1.0",
     "postcss-load-config": "4.0.1",
     "postcss-mixins": "9.0.4",
-    "typescript": "5.3.3",
-    "vite": "5.3.3",
-    "vitest": "2.0.5"
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
   },
   "wireit": {
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "test:visual"
       ]
     },
     "dev": {
@@ -89,7 +89,7 @@
       "dependencies": []
     },
     "test:lighthouse": {
-      "command": "vitest run --config=vitest.lighthouse.ts",
+      "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
       "files": [
         "src/index.test.lighthouse.ts",
         "src/**/*.test.lighthouse.ts",
@@ -102,10 +102,13 @@
       "dependencies": [
         "build",
         "../internals/vite:ci"
-      ]
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
     },
     "test:visual": {
-      "command": "vitest run --config=vitest.visual.ts",
+      "command": "playwright-lock 'vitest run --config=vitest.visual.ts'",
       "clean": false,
       "files": [
         "src/index.test.visual.ts",
@@ -114,14 +117,8 @@
         "vitest.visual.ts"
       ],
       "output": [
-        ".visual"
+        ".visual/*.png"
       ],
-      "dependencies": [
-        "build"
-      ]
-    },
-    "test:visual:update": {
-      "command": "rm -rf .visual && vitest run --config=vitest.visual.ts",
       "dependencies": [
         "build"
       ]

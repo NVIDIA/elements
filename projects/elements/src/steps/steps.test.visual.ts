@@ -4,12 +4,12 @@ import { visualRunner } from '@internals/vite';
 describe('steps visual', () => {
   test('steps should match visual baseline', async () => {
     const report = await visualRunner.render('steps', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('steps should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('steps.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 

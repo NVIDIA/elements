@@ -133,7 +133,7 @@ ${content}
 }
 
 function getImports(scope) {
-  return metrics['@nvidia-elements/core'].elements
+  return [...metrics['@nvidia-elements/core'].elements, { name: 'forms' }]
     .filter(e => packageFile.exports[`./${e.name.replace('nve-', '')}/define.js`])
     .filter(e => !e.name.includes('json-viewer'))
     .map(e => `import '${scope === 'mlv' ? '@elements' : '@nve'}/elements/${e.name.replace('nve-', '')}/define.js';`)

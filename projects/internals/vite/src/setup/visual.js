@@ -1,10 +1,10 @@
-import { lighthouseRunner } from '../runners/lighthouse.js';
+import { visualRunner } from '../runners/visual.js';
 
 let runnerInstance = null;
 
 export async function setup() {
   if (!runnerInstance) {
-    runnerInstance = lighthouseRunner;
+    runnerInstance = visualRunner;
     await runnerInstance.open();
   }
 
@@ -12,7 +12,7 @@ export async function setup() {
     try {
       await runnerInstance.close();
     } catch {
-      console.log('Failed to close lighthouse runner...');
+      console.log('Failed to close visual runner...');
     }
   };
 }

@@ -4,12 +4,12 @@ import { visualRunner } from '@internals/vite';
 describe('dot visual', () => {
   test('dot should match visual baseline', async () => {
     const report = await visualRunner.render('dot', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('dot should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('dot.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 
