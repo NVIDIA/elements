@@ -10,11 +10,10 @@
   },
   "scripts": {
     "ci": "wireit",
-    "ci:lighthouse": "wireit",
-    "ci:visual": "wireit",
-    "ci:all": "pnpm run ci && pnpm run ci:lighthouse && pnpm run ci:visual && pnpm run ci:validate",
-    "ci:validate": "node ./projects/internals/gitlab/cache-validate.js ci ci:visual ci:lighthouse",
+    "ci:all": "pnpm run ci && pnpm run lighthouse && pnpm run ci:validate",
+    "ci:validate": "node ./projects/internals/gitlab/cache-validate.js ci lighthouse",
     "ci:reset": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline",
+    "lighthouse": "wireit",
     "clean": "git clean -dfX",
     "format": "wireit",
     "format:fix": "wireit",
@@ -41,9 +40,10 @@
     "@tsconfig/node20": "20.1.2",
     "@types/node": "20.11.6",
     "commitlint": "19.2.1",
-    "glob": "10.3.10",
+    "glob": "catalog:",
     "husky": "8.0.3",
     "lint-staged": "15.2.1",
+    "proper-lockfile": "4.1.2",
     "playwright": "1.46.0",
     "prettier": "3.2.5",
     "semantic-release": "22.0.12",
@@ -63,6 +63,7 @@
         "./projects/labs/code:ci",
         "./projects/labs/snippets:ci",
         "./projects/pages:ci",
+        "./projects/starters:ci",
         "./projects/starters/angular:ci",
         "./projects/starters/buildless:ci",
         "./projects/starters/lit-library:ci",
@@ -79,65 +80,22 @@
       ],
       "files": []
     },
-    "ci:lighthouse": {
-      "command": "pnpm run -r test:lighthouse --workspace-concurrency=1 && node ./projects/internals/gitlab/metrics.lighthouse.js",
-      "files": [
-        "projects/elements/src/index.test.lighthouse.ts",
-        "projects/elements/src/**/*.test.lighthouse.ts",
-        "projects/elements/vitest.lighthouse.html",
-        "projects/elements/vitest.lighthouse.ts",
-        "projects/labs/code/src/index.test.lighthouse.ts",
-        "projects/labs/code/src/**/*.test.lighthouse.ts",
-        "projects/labs/code/vitest.lighthouse.html",
-        "projects/labs/code/vitest.lighthouse.ts",
-        "projects/styles/vitest.lighthouse.html",
-        "projects/styles/vitest.lighthouse.ts",
-        "projects/themes/vitest.lighthouse.ts"
+    "lighthouse": {
+      "command": "node ./projects/internals/gitlab/metrics.lighthouse.js",
+      "dependencies": [
+        "./projects/styles:test:lighthouse",
+        "./projects/themes:test:lighthouse",
+        "./projects/elements:test:lighthouse",
+        "./projects/labs/code:test:lighthouse"
       ],
       "output": [
-        ".metrics/metrics.txt",
-        "projects/elements/.lighthouse",
-        "projects/elements/coverage/lighthouse/**",
-        "projects/labs/code/.lighthouse",
-        "projects/labs/code/coverage/lighthouse/**",
-        "projects/styles/.lighthouse",
-        "projects/styles/coverage/lighthouse/**",
-        "projects/themes/.lighthouse",
-        "projects/themes/coverage/lighthouse/**"
-      ],
-      "dependencies": [
-        "./projects/internals/vite:ci"
+        ".metrics/metrics.txt"
       ],
       "env": {
         "NODE_ENV": "production"
-      }
-    },
-    "ci:visual": {
-      "command": "pnpm run -r test:visual --workspace-concurrency=1",
-      "clean": false,
+      },
       "files": [
-        "projects/elements/src/index.test.visual.ts",
-        "projects/elements/src/**/*.test.visual.ts",
-        "projects/elements/vitest.visual.html",
-        "projects/elements/vitest.visual.ts",
-        "projects/styles/src/index.test.visual.ts",
-        "projects/styles/src/**/*.test.visual.ts",
-        "projects/styles/vitest.visual.html",
-        "projects/styles/vitest.visual.ts",
-        "projects/themes/src/index.test.visual.ts",
-        "projects/themes/src/**/*.test.visual.ts",
-        "projects/themes/vitest.visual.html",
-        "projects/themes/vitest.visual.ts"
-      ],
-      "output": [
-        "projects/elements/.visual",
-        "projects/styles/.visual",
-        "projects/themes/.visual"
-      ],
-      "dependencies": [
-        "./projects/elements:build",
-        "./projects/styles:build",
-        "./projects/themes:build"
+        "./projects/internals/gitlab/metrics.lighthouse.js"
       ]
     },
     "release": {

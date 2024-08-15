@@ -94,8 +94,18 @@ export class VisualRunner {
       const img2 = PNG.sync.read(await this.#page.locator('body').screenshot());
       const imgDiff = new PNG({ width: img1.width, height: img1.height });
 
-      const maxDiffPixels = pixelmatch(img1.data, img2.data, imgDiff.data, img1.width, img1.height, { threshold: 0.1 });
-      const maxDiffPercentage = Math.floor((maxDiffPixels / (img1.width * img1.height)) * 100);
+      let maxDiffPercentage = 0;
+      const imagesSameSize = img1.width === img2.width && img1.height === img2.height;
+      if (imagesSameSize) {
+        const maxDiffPixels = pixelmatch(img1.data, img2.data, imgDiff.data, img1.width, img1.height, {
+          threshold: 0.1
+        });
+        maxDiffPercentage = Math.floor((maxDiffPixels / (img1.width * img1.height)) * 100);
+      } else {
+        const imgSize1 = img1.width * img1.height;
+        const imgSize2 = img2.width * img2.height;
+        maxDiffPercentage = 100 * Math.abs((imgSize1 - imgSize2) / ((imgSize1 + imgSize2) / 2));
+      }
 
       if (maxDiffPercentage >= 1) {
         fs.writeFileSync(diffPath, PNG.sync.write(imgDiff));

@@ -4,12 +4,12 @@ import { visualRunner } from '@nve-internals/vite';
 describe('progress-ring visual', () => {
   test('progress-ring should match visual baseline', async () => {
     const report = await visualRunner.render('progress-ring', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('progress-ring should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('progress-ring.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 

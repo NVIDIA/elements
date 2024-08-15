@@ -1,4 +1,5 @@
 packages:
+  - 'projects/starters'
   - 'projects/starters/angular'
   - 'projects/starters/buildless'
   - 'projects/starters/lit-library'
@@ -23,3 +24,20 @@ packages:
   - 'projects/internals/eslint'
   - 'projects/internals/metadata'
   - 'projects/internals/vite'
+
+catalog:
+  '@lit-labs/motion': ^1.0.7
+  '@lit-labs/scoped-registry-mixin': ^1.0.3
+  '@lit-labs/virtualizer': ^2.0.14
+  '@vitest/browser': 2.0.5
+  '@vitest/coverage-istanbul': 2.0.5
+  '@webcomponents/scoped-custom-element-registry': ^0.0.9
+  eslint: 9.6.0
+  glob: 11.0.0
+  lighthouse: 11.4.0
+  lit: ^3.2.0
+  lit-html: ^3.2.0
+  typescript: 5.3.3
+  vite: 5.3.3
+  vitest: 2.0.5
+  vite-plugin-dts: 3.9.1
