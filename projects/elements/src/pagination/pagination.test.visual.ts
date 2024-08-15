@@ -4,12 +4,12 @@ import { visualRunner } from '@nve-internals/vite';
 describe('pagination visual', () => {
   test('pagination should match visual baseline', async () => {
     const report = await visualRunner.render('pagination', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('pagination should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('pagination.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 

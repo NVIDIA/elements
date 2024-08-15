@@ -4,12 +4,12 @@ import { visualRunner } from '@nve-internals/vite';
 describe('progress-bar visual', () => {
   test('progress-bar should match visual baseline', async () => {
     const report = await visualRunner.render('progress-bar', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('progress-bar should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('progress-bar.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 

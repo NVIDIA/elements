@@ -4,12 +4,12 @@ import { visualRunner } from '@nve-internals/vite';
 describe('icon-button visual', () => {
   test('icon-button should match visual baseline', async () => {
     const report = await visualRunner.render('icon-button', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('icon-button should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('icon-button.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 

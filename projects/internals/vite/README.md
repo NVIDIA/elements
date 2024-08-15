@@ -4,7 +4,15 @@ This project is a private and internal API for the elements repo. This provides 
 
 The default configs are standard Vite configuration objects. The objects can be overridden per project level. The configs provide common standard options for our libraries including library API/performance optimizations and test coverage requirements.
 
-## Build
+- `configs/`: base vite configs for various vite builds and tests
+- `playwright/`: playwright specific scripts
+- `plugins/`: vite plugins for build pipelines such as TS and minification
+- `runners/`: test runners for run time evaluation steps, lighthouse or visual
+- `setup/`: initialize files for setup/teardown work with specific test runners
+
+## Documentation
+
+### Build
 
 ```typescript
 // vite.config.ts
@@ -24,7 +32,7 @@ export default defineConfig(() => {
 });
 ```
 
-## Test
+### Test
 
 ```typescript
 // vitest.config.ts
@@ -76,7 +84,7 @@ To run the tests run `pnpm run test`
 vitest run --config=vitest.ts
 ```
 
-## Axe
+### Axe
 
 ```typescript
 // vitest.axe.ts
@@ -121,7 +129,7 @@ To run the tests run `pnpm run test:axe`
 vitest run --config=vitest.axe.ts
 ```
 
-## Lighthouse
+### Lighthouse
 
 ```typescript
 // vitest.lighthouse.ts
@@ -189,7 +197,7 @@ The tests will return a report containing the lighthouse score results in perfor
 vitest run --config=vitest.lighthouse.ts
 ```
 
-## Visual
+### Visual
 
 ```typescript
 // vitest.visual.ts
