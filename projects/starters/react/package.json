@@ -20,7 +20,7 @@
   "devDependencies": {
     "@types/react": "18.2.18",
     "@vitejs/plugin-react": "4.2.0",
-    "vite": "5.3.3"
+    "vite": "catalog:"
   },
   "browserslist": {
     "production": [

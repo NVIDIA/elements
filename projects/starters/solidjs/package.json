@@ -11,8 +11,8 @@
   "license": "MIT",
   "devDependencies": {
     "solid-devtools": "0.29.3",
-    "typescript": "5.3.3",
-    "vite": "5.3.3",
+    "typescript": "catalog:",
+    "vite": "catalog:",
     "vite-plugin-solid": "2.10.1"
   },
   "dependencies": {
