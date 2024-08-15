@@ -24,13 +24,7 @@
       ],
       "dependencies": [
         "../storybook:build",
-        "../starters/angular:ci",
-        "../starters/buildless:ci",
-        "../starters/mpa:ci",
-        "../starters/react:ci",
-        "../starters/solidjs:ci",
-        "../starters/typescript:ci",
-        "../starters/vue:ci"
+        "../starters:build"
       ]
     },
     "preview": {

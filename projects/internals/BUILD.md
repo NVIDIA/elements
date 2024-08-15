@@ -15,6 +15,10 @@ The local CI job is the same CI job run in the Gitlab Pipeline, this ensures tha
 The Elements repo uses standard Gitlab tooling to run its CI/CD pipeline.
 The configuration for the entire pipeline can be found in the root [.github/workflows/ci.yml](https://github.com/NVIDIA/elements/-/blob/main/.github/workflows/ci.yml?ref_type=heads).
 
+- [NV Code Critic](https://confluence.nvidia.com/display/APE/CodeCritic)
+
+  Internal Nvidia LLM code review bot to provided feedback on pull requests.
+
 - [Gitlab Slack Notifications](https://docs.gitlab.com/ee/user/project/integrations/slack.html)
 
   This provides notifications any time a release is published to the support slack.
