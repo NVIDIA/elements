@@ -1,5 +1,5 @@
 {
-  "created": "2024-08-12T16:44:19.553Z",
+  "created": "2024-08-20T15:49:09.478Z",
   "projects": [
     {
       "name": "@elements/ddb-dump-roadcast-frontend",
@@ -58,10 +58,6 @@
           "instanceTotal": 1
         },
         {
-          "name": "nve-tooltip",
-          "instanceTotal": 1
-        },
-        {
           "name": "nve-toolbar",
           "instanceTotal": 7
         },
@@ -88,6 +84,10 @@
         {
           "name": "nve-progressive-filter-chip",
           "instanceTotal": 2
+        },
+        {
+          "name": "nve-tooltip",
+          "instanceTotal": 1
         }
       ],
       "instanceTotal": 53
@@ -169,13 +169,6 @@
         }
       ],
       "instanceTotal": 2
-    },
-    {
-      "name": "daas",
-      "path": "src/ui/daas",
-      "elementsVersion": "^0.11.1",
-      "elements": [],
-      "instanceTotal": 0
     },
     {
       "name": "dataops",
@@ -300,7 +293,7 @@
         },
         {
           "name": "nve-select",
-          "instanceTotal": 7
+          "instanceTotal": 8
         },
         {
           "name": "nve-notification-group",
@@ -312,19 +305,19 @@
         },
         {
           "name": "nve-button",
-          "instanceTotal": 17
+          "instanceTotal": 18
         },
         {
           "name": "nve-control-message",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-control",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-input",
-          "instanceTotal": 5
+          "instanceTotal": 6
         },
         {
           "name": "nve-badge",
@@ -344,7 +337,7 @@
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 13
+          "instanceTotal": 14
         },
         {
           "name": "nve-tooltip",
@@ -368,15 +361,15 @@
         },
         {
           "name": "nve-dialog-footer",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-dialog-header",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-dialog",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-grid-cell",
@@ -408,7 +401,7 @@
         },
         {
           "name": "nve-progress-ring",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-sort-button",
@@ -420,7 +413,7 @@
         },
         {
           "name": "nve-icon-button",
-          "instanceTotal": 6
+          "instanceTotal": 7
         },
         {
           "name": "nve-input-group",
@@ -441,6 +434,26 @@
         {
           "name": "nve-dropdown",
           "instanceTotal": 2
+        },
+        {
+          "name": "nve-accordion-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-accordion-content",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-accordion",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-radio-group",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-radio",
+          "instanceTotal": 1
         },
         {
           "name": "nve-alert-group",
@@ -471,7 +484,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 162
+      "instanceTotal": 178
     },
     {
       "name": "examples/applications/angular",
@@ -638,7 +651,7 @@
         },
         {
           "name": "nve-card",
-          "instanceTotal": 8
+          "instanceTotal": 9
         },
         {
           "name": "nve-checkbox-group",
@@ -662,27 +675,27 @@
         },
         {
           "name": "nve-grid-cell",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-grid-column",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-grid",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-grid-header",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-grid-placeholder",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-grid-row",
-          "instanceTotal": 2
+          "instanceTotal": 3
         },
         {
           "name": "nve-icon",
@@ -702,7 +715,7 @@
         },
         {
           "name": "nve-progress-ring",
-          "instanceTotal": 3
+          "instanceTotal": 4
         },
         {
           "name": "nve-search",
@@ -722,7 +735,7 @@
         },
         {
           "name": "nve-sort-button",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-card-header",
@@ -773,7 +786,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 102
+      "instanceTotal": 111
     },
     {
       "name": "@elements/vehicle-management",
@@ -1000,11 +1013,31 @@
     {
       "name": "occupancy-labeler",
       "path": "src/ui/labeling/apps/occupancy-labeler",
-      "elementsVersion": "^0.37.7",
+      "elementsVersion": "^1.1.1",
       "elements": [
         {
-          "name": "nve-card",
+          "name": "nve-app-header",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-button",
+          "instanceTotal": 5
+        },
+        {
+          "name": "nve-icon-button",
           "instanceTotal": 4
+        },
+        {
+          "name": "nve-icon",
+          "instanceTotal": 4
+        },
+        {
+          "name": "nve-logo",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-card",
+          "instanceTotal": 3
         },
         {
           "name": "nve-card-header",
@@ -1012,7 +1045,7 @@
         },
         {
           "name": "nve-card-content",
-          "instanceTotal": 4
+          "instanceTotal": 3
         },
         {
           "name": "nve-badge",
@@ -1020,18 +1053,6 @@
         },
         {
           "name": "nve-button-group",
-          "instanceTotal": 3
-        },
-        {
-          "name": "nve-button",
-          "instanceTotal": 4
-        },
-        {
-          "name": "nve-icon-button",
-          "instanceTotal": 3
-        },
-        {
-          "name": "nve-icon",
           "instanceTotal": 3
         },
         {
@@ -1067,7 +1088,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 35
+      "instanceTotal": 38
     },
     {
       "name": "static-4dgt-labeler",
@@ -1100,7 +1121,7 @@
     {
       "name": "@elements/gt-elements",
       "path": "src/ui/labeling/libs/gt-elements",
-      "elementsVersion": "^0.20.1",
+      "elementsVersion": "0.20.1",
       "elements": [
         {
           "name": "nve-button",
@@ -1159,6 +1180,10 @@
           "instanceTotal": 3
         },
         {
+          "name": "nve-textarea",
+          "instanceTotal": 2
+        },
+        {
           "name": "nve-time",
           "instanceTotal": 2
         },
@@ -1215,10 +1240,6 @@
           "instanceTotal": 1
         },
         {
-          "name": "nve-textarea",
-          "instanceTotal": 1
-        },
-        {
           "name": "nve-button-group",
           "instanceTotal": 4
         },
@@ -1227,7 +1248,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 66
+      "instanceTotal": 67
     },
     {
       "name": "@elements/gt-viewer",
@@ -1279,18 +1300,6 @@
           "instanceTotal": 1
         },
         {
-          "name": "nve-grid-column",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-grid",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-grid-header",
-          "instanceTotal": 1
-        },
-        {
           "name": "nve-icon-button",
           "instanceTotal": 1
         },
@@ -1300,6 +1309,10 @@
         },
         {
           "name": "nve-logo",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-progress-ring",
           "instanceTotal": 1
         },
         {
@@ -1315,7 +1328,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 20
+      "instanceTotal": 18
     },
     {
       "name": "@nv_labeling/labeling-tools",
@@ -1708,11 +1721,11 @@
         },
         {
           "name": "nve-icon-button",
-          "instanceTotal": 5
+          "instanceTotal": 4
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 9
+          "instanceTotal": 8
         },
         {
           "name": "nve-logo",
@@ -1751,15 +1764,15 @@
           "instanceTotal": 3
         },
         {
+          "name": "nve-alert-banner",
+          "instanceTotal": 1
+        },
+        {
           "name": "nve-badge",
-          "instanceTotal": 2
+          "instanceTotal": 1
         },
         {
           "name": "nve-card",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-alert-banner",
           "instanceTotal": 1
         },
         {
@@ -1823,7 +1836,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 87
+      "instanceTotal": 83
     },
     {
       "name": "@elements/docs-app",
@@ -1843,6 +1856,13 @@
         }
       ],
       "instanceTotal": 3
+    },
+    {
+      "name": "@elements/angular-legacy-next",
+      "path": "src/ui/platform/libs/angular-next/legacy",
+      "elementsVersion": "0.11.0",
+      "elements": [],
+      "instanceTotal": 0
     },
     {
       "name": "@elements/feedback-elements",
@@ -1995,130 +2015,6 @@
         }
       ],
       "instanceTotal": 4
-    },
-    {
-      "name": "apps-and-services",
-      "path": "src/ui/platform/plugins/apps-and-services",
-      "elementsVersion": "0.11.0",
-      "elements": [
-        {
-          "name": "nve-icon",
-          "instanceTotal": 3
-        },
-        {
-          "name": "nve-alert",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-button",
-          "instanceTotal": 3
-        },
-        {
-          "name": "nve-card",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-card-header",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-card-content",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-card-footer",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-checkbox-group",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-checkbox",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-date",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-dialog-footer",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-dialog-header",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-dialog",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-dropdown",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-control-message",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-control",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-icon-button",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-input",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-notification",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-password",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-radio-group",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-radio",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-range",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-search",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-select",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-switch",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-textarea",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-toast",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-tooltip",
-          "instanceTotal": 2
-        }
-      ],
-      "instanceTotal": 46
     },
     {
       "name": "@elements/web-utils",
