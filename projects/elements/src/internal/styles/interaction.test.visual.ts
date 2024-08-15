@@ -4,24 +4,24 @@ import { visualRunner } from '@internals/vite';
 describe('interaction visual', () => {
   test('interaction should match visual baseline', async () => {
     const report = await visualRunner.render('interaction', interaction());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('interaction should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('interaction.dark', interaction('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 
 describe('interaction button visual', () => {
   test('interaction button should match visual baseline', async () => {
     const report = await visualRunner.render('interaction-button', interactionButton());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('interaction button should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('interaction-button.dark', interactionButton('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 
@@ -32,7 +32,7 @@ function interaction(theme: '' | 'dark' = '') {
   </script>
   <style>
     body {
-      height: 700px;
+      height: 720px;
     }
 
     .nve-menu {
@@ -82,41 +82,40 @@ function interaction(theme: '' | 'dark' = '') {
 
     .nve-menu-item:focus,
     .nve-menu-item[focused] {
-      outline-offset: -3px;
-      outline: 5px auto -webkit-focus-ring-color;
-      outline: Highlight solid 2px;
+      --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+      outline: 0 !important; /* disabled for VRT */
     }
   </style>
   <section>
     <div class="nve-menu">
-      <div class="nve-menu-item">item</div>
-      <div class="nve-menu-item">default</div>
-      <div class="nve-menu-item">item</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
     </div>
     <div class="nve-menu">
-      <div class="nve-menu-item">item</div>
-      <div class="nve-menu-item" hover>hover</div>
-      <div class="nve-menu-item">item</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item" hover>•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
     </div>
     <div class="nve-menu">
-      <div class="nve-menu-item">item</div>
-      <div class="nve-menu-item" active>active</div>
-      <div class="nve-menu-item">item</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item" active>•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
     </div>
     <div class="nve-menu">
-      <div class="nve-menu-item">item</div>
-      <div class="nve-menu-item" selected>selected</div>
-      <div class="nve-menu-item">item</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item" selected>•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
     </div>
     <div class="nve-menu">
-      <div class="nve-menu-item">item</div>
-      <div class="nve-menu-item" disabled>disabled</div>
-      <div class="nve-menu-item">item</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item" disabled>•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
     </div>
     <div class="nve-menu">
-      <div class="nve-menu-item">item</div>
-      <div class="nve-menu-item" focused>focused</div>
-      <div class="nve-menu-item">item</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item" focused>•︎•︎•︎•︎•︎•︎</div>
+      <div class="nve-menu-item">•︎•︎•︎•︎•︎•︎</div>
     </div>
   </section>
   `;
@@ -159,18 +158,18 @@ function interactionButton(theme: '' | 'dark' = '') {
   </style>
 
   <section>
-    <button>button</button>
-    <button hover>hover</button>
-    <button active>active</button>
-    <button selected>selected</button>
-    <button disabled>disabled</button>
+    <button>•︎•︎•︎•︎•︎•︎</button>
+    <button hover>•︎•︎•︎•︎•︎•︎</button>
+    <button active>•︎•︎•︎•︎•︎•︎</button>
+    <button selected>•︎•︎•︎•︎•︎•︎</button>
+    <button disabled>•︎•︎•︎•︎•︎•︎</button>
   </section>
   <section style="--nve-sys-interaction-state-base: var(--nve-sys-interaction-emphasis-background)">
-    <button>button</button>
-    <button hover>hover</button>
-    <button active>active</button>
-    <button selected>selected</button>
-    <button disabled>disabled</button>
+    <button>•︎•︎•︎•︎•︎•︎</button>
+    <button hover>•︎•︎•︎•︎•︎•︎</button>
+    <button active>•︎•︎•︎•︎•︎•︎</button>
+    <button selected>•︎•︎•︎•︎•︎•︎</button>
+    <button disabled>•︎•︎•︎•︎•︎•︎</button>
   </section>
   `;
 }

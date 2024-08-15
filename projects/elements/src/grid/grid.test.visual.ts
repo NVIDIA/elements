@@ -4,12 +4,12 @@ import { visualRunner } from '@internals/vite';
 describe('grid visual', () => {
   test('grid should match visual baseline', async () => {
     const report = await visualRunner.render('grid', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('grid should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('grid.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 

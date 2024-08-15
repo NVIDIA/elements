@@ -246,8 +246,10 @@ export default {
     resolve('src/**/*.css'),
     resolve('src/**/*.stories.mdx'),
     resolve('src/**/*.stories.ts'),
+    resolve('src/**/*.test.ts'),
     resolve('src/**/*.test.axe.ts'),
-    resolve('src/**/*.test.lighthouse.ts')
+    resolve('src/**/*.test.lighthouse.ts'),
+    resolve('src/**/*.test.visual.ts')
   ],
   litelement: true,
   plugins: [

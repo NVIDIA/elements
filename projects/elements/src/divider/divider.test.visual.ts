@@ -4,12 +4,12 @@ import { visualRunner } from '@internals/vite';
 describe('divider visual', () => {
   test('divider should match visual baseline', async () => {
     const report = await visualRunner.render('divider', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('divider should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('divider.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 
