@@ -1,8 +1,4 @@
-/**
- * - https://vitejs.dev/config/
- * - https://lit.dev/docs/tools/production/
- * @type {import('vite').UserConfig}
- */
+/** @type {import('vite').UserConfig} */
 export const libraryLighthouseTestConfig = {
   logLevel: 'info',
   test: {
