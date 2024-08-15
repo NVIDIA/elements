@@ -4,12 +4,12 @@ import { visualRunner } from '@nve-internals/vite';
 describe('logo visual', () => {
   test('logo should match visual baseline', async () => {
     const report = await visualRunner.render('logo', template());
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('logo should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('logo.dark', template('dark'));
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 

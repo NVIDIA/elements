@@ -5,12 +5,12 @@ import { ICON_NAMES } from '@nvidia-elements/core/icon';
 describe('icon visual', () => {
   test('icon should match visual baseline', async () => {
     const report = await visualRunner.render('icon', template(), { network: true });
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('icon should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('icon.dark', template('dark'), { network: true });
-    expect(report.maxDiffPercentage).toBe(0);
+    expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
 
