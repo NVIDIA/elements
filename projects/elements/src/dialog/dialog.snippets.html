@@ -3,16 +3,15 @@
   prefix="dialog"
   description="Dialog is a component that appears above main content. A modal dialog is used to display critical information that requires users attention."
   type="pattern">
-  <mlv-dialog size="${6:md}" closable>
-    <mlv-dialog-header>
-      <h3 mlv-text="heading semibold">${1:Title}</h3>
-    </mlv-dialog-header>
-    <p mlv-text="body">${2:Content}</p>
-    <mlv-dialog-footer>
-      <mlv-button>${3:Cancel}</mlv-button>
-      <mlv-button interaction="${4:emphasis}">${5:OK}</mlv-button>
-    </mlv-dialog-footer>
-  </mlv-dialog>
-
+  <nve-dialog size="${6:md}" closable>
+    <nve-dialog-header>
+      <h3 nve-text="heading semibold">${1:Title}</h3>
+    </nve-dialog-header>
+    <p nve-text="body">${2:Content}</p>
+    <nve-dialog-footer>
+      <nve-button>${3:Cancel}</nve-button>
+      <nve-button interaction="${4:emphasis}">${5:OK}</nve-button>
+    </nve-dialog-footer>
+  </nve-dialog>
   $0
 </template>

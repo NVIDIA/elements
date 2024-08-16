@@ -3,14 +3,13 @@
   prefix="tabs"
   description="Tabs provide a selection UX, typically used for swapping content shown on a page, or within a navigation context."
   type="pattern">
-  <mlv-tabs>
-    <mlv-tabs-item selected>${1:Tab 1}</mlv-tabs-item>
-    <mlv-tabs-item>${2:Tab 2}</mlv-tabs-item>
-    <mlv-tabs-item>${3:Tab 3}</mlv-tabs-item>
-    <mlv-tabs-item>${4:Tab 4}</mlv-tabs-item>
-    <mlv-tabs-item disabled>disabled</mlv-tabs-item>
-  </mlv-tabs>
-
+  <nve-tabs>
+    <nve-tabs-item selected>${1:Tab 1}</nve-tabs-item>
+    <nve-tabs-item>${2:Tab 2}</nve-tabs-item>
+    <nve-tabs-item>${3:Tab 3}</nve-tabs-item>
+    <nve-tabs-item>${4:Tab 4}</nve-tabs-item>
+    <nve-tabs-item disabled>disabled</nve-tabs-item>
+  </nve-tabs>
   $0
 </template>
 
@@ -19,14 +18,13 @@
   prefix="vertical-tabs"
   description="Tabs can be used as the foundation for a side menu by enabling vertical mode."
   type="pattern">
-  <mlv-tabs>
-    <mlv-tabs-item selected>${1:Tab 1}</mlv-tabs-item>
-    <mlv-tabs-item>${2:Tab 2}</mlv-tabs-item>
-    <mlv-tabs-item>${3:Tab 3}</mlv-tabs-item>
-    <mlv-tabs-item>${4:Tab 4}</mlv-tabs-item>
-    <mlv-tabs-item disabled>disabled</mlv-tabs-item>
-  </mlv-tabs>
-
+  <nve-tabs>
+    <nve-tabs-item selected>${1:Tab 1}</nve-tabs-item>
+    <nve-tabs-item>${2:Tab 2}</nve-tabs-item>
+    <nve-tabs-item>${3:Tab 3}</nve-tabs-item>
+    <nve-tabs-item>${4:Tab 4}</nve-tabs-item>
+    <nve-tabs-item disabled>disabled</nve-tabs-item>
+  </nve-tabs>
   $0
 </template>
 
@@ -35,16 +33,15 @@
   prefix="tabs-with-dot"
   description="Dots and icons to tabs by slotting content."
   type="pattern">
-  <mlv-tabs>
-    <mlv-tabs-item selected>${1:Tab 1}</mlv-tabs-item>
-    <mlv-tabs-item>${2:Tab 2}</mlv-tabs-item>
-    <mlv-tabs-item>${3:Tab 3}</mlv-tabs-item>
-    <mlv-tabs-item selected>
+  <nve-tabs>
+    <nve-tabs-item selected>${1:Tab 1}</nve-tabs-item>
+    <nve-tabs-item>${2:Tab 2}</nve-tabs-item>
+    <nve-tabs-item>${3:Tab 3}</nve-tabs-item>
+    <nve-tabs-item selected>
       ${4:Tab 4}
-      <mlv-dot aria-label="${5:10} notifications">${5:10}</mlv-dot>
-    </mlv-tabs-item>
-    <mlv-tabs-item disabled>disabled</mlv-tabs-item>
-  </mlv-tabs>
-
+      <nve-dot aria-label="${5:10} notifications">${5:10}</nve-dot>
+    </nve-tabs-item>
+    <nve-tabs-item disabled>disabled</nve-tabs-item>
+  </nve-tabs>
   $0
 </template>

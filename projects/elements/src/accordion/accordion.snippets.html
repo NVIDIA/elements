@@ -1,12 +1,11 @@
 <template name="Accordion" prefix="accordion" description="Basic accordion with title and content slot." type="pattern">
-  <mlv-accordion behavior-expand container="${1:flat}">
-    <mlv-accordion-header>
+  <nve-accordion behavior-expand container="${1:flat}">
+    <nve-accordion-header>
       <div slot="title">${2:Title}</div>
-    </mlv-accordion-header>
+    </nve-accordion-header>
 
-    <mlv-accordion-content> ${3:Content} </mlv-accordion-content>
-  </mlv-accordion>
-
+    <nve-accordion-content> ${3:Content} </nve-accordion-content>
+  </nve-accordion>
   $0
 </template>
 
@@ -15,17 +14,16 @@
   prefix="accordion-actions"
   description="Accordion with action buttons in header."
   type="pattern">
-  <mlv-accordion behavior-expand container="${1:flat}">
-    <mlv-accordion-header>
+  <nve-accordion behavior-expand container="${1:flat}">
+    <nve-accordion-header>
       <div slot="title">${2:Title}</div>
 
-      <mlv-icon-button container="flat" icon-name="${3:add}" size="sm" slot="actions"></mlv-icon-button>
-      <mlv-icon-button container="flat" icon-name="${4:delete}" size="sm" slot="actions"></mlv-icon-button>
-    </mlv-accordion-header>
+      <nve-icon-button container="flat" icon-name="${3:add}" size="sm" slot="actions"></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="${4:delete}" size="sm" slot="actions"></nve-icon-button>
+    </nve-accordion-header>
 
-    <mlv-accordion-content> ${5:Content} </mlv-accordion-content>
-  </mlv-accordion>
-
+    <nve-accordion-content> ${5:Content} </nve-accordion-content>
+  </nve-accordion>
   $0
 </template>
 
@@ -34,31 +32,30 @@
   prefix="accordion-group"
   description="Accordion group with two accordion children."
   type="pattern">
-  <mlv-accordion-group behavior-expand-single container="${1:flat}">
-    <mlv-accordion>
-      <mlv-accordion-header>
+  <nve-accordion-group behavior-expand-single container="${1:flat}">
+    <nve-accordion>
+      <nve-accordion-header>
         <div slot="title">${2:Title}</div>
-      </mlv-accordion-header>
+      </nve-accordion-header>
 
-      <mlv-accordion-content> ${3:Content} </mlv-accordion-content>
-    </mlv-accordion>
+      <nve-accordion-content> ${3:Content} </nve-accordion-content>
+    </nve-accordion>
 
-    <mlv-accordion>
-      <mlv-accordion-header>
+    <nve-accordion>
+      <nve-accordion-header>
         <div slot="title">${4:Title}</div>
-      </mlv-accordion-header>
+      </nve-accordion-header>
 
-      <mlv-accordion-content> ${5:Content} </mlv-accordion-content>
-    </mlv-accordion>
+      <nve-accordion-content> ${5:Content} </nve-accordion-content>
+    </nve-accordion>
 
-    <mlv-accordion>
-      <mlv-accordion-header>
+    <nve-accordion>
+      <nve-accordion-header>
         <div slot="title">${6:Title}</div>
-      </mlv-accordion-header>
+      </nve-accordion-header>
 
-      <mlv-accordion-content> ${7:Content} </mlv-accordion-content>
-    </mlv-accordion>
-  </mlv-accordion-group>
-
+      <nve-accordion-content> ${7:Content} </nve-accordion-content>
+    </nve-accordion>
+  </nve-accordion-group>
   $0
 </template>

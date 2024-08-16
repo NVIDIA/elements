@@ -3,18 +3,17 @@
   prefix="dropdown"
   description="Generic dropdown element for rendering a variety of different content within a dropdown container."
   type="pattern">
-  <mlv-button id="btn">${4:Trigger}</mlv-button>
+  <nve-button id="btn">${4:Trigger}</nve-button>
 
-  <mlv-dropdown anchor="btn" closable>
-    <mlv-dropdown-header>
-      <h3 mlv-text="heading semibold sm">${1:Title}</h3>
-    </mlv-dropdown-header>
-    <p mlv-text="body">${2:Content}</p>
-    <mlv-dropdown-footer>
-      <p mlv-text="body">${3:Footer Text}</p>
-    </mlv-dropdown-footer>
-  </mlv-dropdown>
-
+  <nve-dropdown anchor="btn" closable>
+    <nve-dropdown-header>
+      <h3 nve-text="heading semibold sm">${1:Title}</h3>
+    </nve-dropdown-header>
+    <p nve-text="body">${2:Content}</p>
+    <nve-dropdown-footer>
+      <p nve-text="body">${3:Footer Text}</p>
+    </nve-dropdown-footer>
+  </nve-dropdown>
   $0
 </template>
 
@@ -23,32 +22,31 @@
   prefix="dropdown-radio"
   description="Dropdown with radio select pattern"
   type="pattern">
-  <mlv-button id="btn" mlv-control>completed <mlv-icon name="caret" direction="down" size="sm"></mlv-icon></mlv-button>
+  <nve-button id="btn" nve-control>completed <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
 
-  <mlv-dropdown anchor="btn">
-    <mlv-radio-group style="width: 250px">
+  <nve-dropdown anchor="btn">
+    <nve-radio-group style="width: 250px">
       <label>${1:Sort By}</label>
 
-      <mlv-radio>
+      <nve-radio>
         <label>${2:Completed}</label>
         <input type="radio" checked />
-        <mlv-control-message>${3:latest completed tasks}</mlv-control-message>
-      </mlv-radio>
+        <nve-control-message>${3:latest completed tasks}</nve-control-message>
+      </nve-radio>
 
-      <mlv-radio>
+      <nve-radio>
         <label>${4:Failing}</label>
         <input type="radio" />
-        <mlv-control-message>${5:latest failing tasks}</mlv-control-message>
-      </mlv-radio>
+        <nve-control-message>${5:latest failing tasks}</nve-control-message>
+      </nve-radio>
 
-      <mlv-radio>
+      <nve-radio>
         <label>${6:Status}</label>
         <input type="radio" />
-        <mlv-control-message>${7:task status priority}</mlv-control-message>
-      </mlv-radio>
-    </mlv-radio-group>
-  </mlv-dropdown>
-
+        <nve-control-message>${7:task status priority}</nve-control-message>
+      </nve-radio>
+    </nve-radio-group>
+  </nve-dropdown>
   $0
 </template>
 
@@ -57,30 +55,29 @@
   prefix="dropdown-checkbox"
   description="Dropdown with checkbox select pattern"
   type="pattern">
-  <mlv-button id="btn" mlv-control
-    >test suites <mlv-icon name="caret" direction="down" size="sm"></mlv-icon
-  ></mlv-button>
+  <nve-button id="btn" nve-control
+    >test suites <nve-icon name="caret" direction="down" size="sm"></nve-icon
+  ></nve-button>
 
-  <mlv-dropdown anchor="btn">
-    <mlv-checkbox-group style="width: 250px">
+  <nve-dropdown anchor="btn">
+    <nve-checkbox-group style="width: 250px">
       <label>${1:Test Suites}</label>
 
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>${2:Local}</label>
         <input type="checkbox" />
-      </mlv-checkbox>
+      </nve-checkbox>
 
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>${3:Nightly}</label>
         <input type="checkbox" checked />
-      </mlv-checkbox>
+      </nve-checkbox>
 
-      <mlv-checkbox>
+      <nve-checkbox>
         <label>${4:Remote}</label>
         <input type="checkbox" />
-      </mlv-checkbox>
-    </mlv-checkbox-group>
-  </mlv-dropdown>
-
+      </nve-checkbox>
+    </nve-checkbox-group>
+  </nve-dropdown>
   $0
 </template>
