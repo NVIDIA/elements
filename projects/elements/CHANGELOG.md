@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.1.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.4...@nvidia-elements/core-v1.1.5) (2024-08-16)
+
+
+### Bug Fixes
+
+* **elements:** revised snippet tag names ([1a75256](https://github.com/NVIDIA/elements/commit/1a752560b717e6e75b0452f489e326d6df7e6bee))
+
 ## [@nvidia-elements/core-v1.1.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.3...@nvidia-elements/core-v1.1.4) (2024-08-13)
 
 
