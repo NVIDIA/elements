@@ -1,0 +1,22 @@
+<template name="Codeblock" prefix="codeblock" description="Basic codeblock with language and content" type="pattern">
+  <nve-codeblock container="${1:flat}" language="${2:Language}"> ${3:Content} </nve-codeblock>
+  $0
+</template>
+
+<template
+  name="Codeblock with line-numbers"
+  prefix="codeblock-line-numbers"
+  description="Basic codeblock with line-numbers"
+  type="pattern">
+  <nve-codeblock container="${1:flat}" language="${2:Language}" line-numbers> ${3:Content} </nve-codeblock>
+  $0
+</template>
+
+<template
+  name="Codeblock with highlight lines"
+  prefix="codeblock-highlight"
+  description="Basic codeblock with highlight"
+  type="pattern">
+  <nve-codeblock container="${1:flat}" language="${2:Language}" highlight="${3:Range}"> ${4:Content} </nve-codeblock>
+  $0
+</template>
