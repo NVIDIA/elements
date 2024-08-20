@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.1.0...@nvidia-elements/styles-v1.2.0) (2024-08-20)
+
+
+### Features
+
+* **elements:** add static 'white' and 'black' to mlv-text attribute color options ([aec7d8f](https://github.com/NVIDIA/elements/commit/aec7d8f6a09d555326875f1240dead473f98a0f6))
+
 ## [@nvidia-elements/styles-v1.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.0.0...@nvidia-elements/styles-v1.1.0) (2024-08-01)
 
 
