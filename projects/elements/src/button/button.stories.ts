@@ -162,3 +162,21 @@ export const Popover = {
   <nve-button popovertarget="popover-example">toggle</nve-button>
   `
 }
+
+export const BackgroundOverride = {
+  render: () => html`
+    <style>
+      nve-button.custom {
+        --color: var(--nve-sys-text-black-color);
+        --background-image: linear-gradient(340deg, rgb(255 234 177) 0%, var(--nve-ref-color-yellow-amber-900) 60%);
+
+        &:hover {
+          --background-image: linear-gradient(340deg, rgb(255 234 177) 0%, color-mix(in oklab, var(--nve-ref-color-yellow-amber-900) 100%, #000 4%) 60%);
+        }
+      }
+    </style>
+
+    <nve-button class="custom">Create Account</nve-button>
+    <nve-button>Create Account</nve-button>
+  `
+};

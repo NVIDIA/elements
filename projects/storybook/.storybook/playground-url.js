@@ -3,7 +3,6 @@ import { html } from 'lit';
 import format from 'html-format';
 import packageFile from '@nvidia-elements/core/package.json';
 import { ELEMENTS_VERSION } from './version.js';
-import { SCOPE } from '@nvidia-elements/core';
 import metrics from '../../internals/metadata/metadata.json';
 
 export function playground(Story, context) {
