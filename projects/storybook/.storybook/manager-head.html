@@ -121,6 +121,10 @@
       display: none !important;
     }
 
+    & [title='Show addons'] {
+      display: none !important;
+    }
+
     & .css-c3junj:has([title='Experimental']) {
       margin-left: auto;
     }
@@ -210,10 +214,15 @@
 
   @media (min-width: 600px) {
     .css-1f34q4w,
-    .css-1486cn3 {
-      grid-template-columns: minmax(0, 300px) minmax(100px, 1fr) minmax(0, 400px) !important;
+    .css-1486cn3,
+    .css-p5p7wm,
+    .css-14owk5e {
       grid-template-rows: 1fr !important;
       grid-template-areas: "sidebar content content" !important;
+    }
+
+    .css-1uc5ojr {
+      display: none !important;
     }
   }
 
