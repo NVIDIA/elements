@@ -158,6 +158,7 @@
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "eslint": "catalog:",
+    "publint": "^0.2.10",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
@@ -175,9 +176,20 @@
       "dependencies": [
         "build",
         "lint",
+        "publint",
         "test:axe",
         "test:coverage"
       ]
+    },
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
+      "files": [
+        "package.json"
+      ],
+      "output": []
     },
     "build": {
       "command": "NODE_ENV=production vite build",

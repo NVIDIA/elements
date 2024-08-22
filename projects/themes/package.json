@@ -18,6 +18,7 @@
   },
   "files": [
     "README.md",
+    "CHANGELOG.md",
     "package.json",
     "dist/**/*"
   ],
@@ -28,6 +29,7 @@
     "glob": "catalog:",
     "lit": "catalog:",
     "postcss": "8.4.31",
+    "publint": "^0.2.10",
     "style-dictionary": "3.8.0",
     "vite": "catalog:",
     "vitest": "catalog:"
@@ -43,8 +45,19 @@
     "ci": {
       "dependencies": [
         "build",
+        "publint",
         "test:visual"
       ]
+    },
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
+      "files": [
+        "package.json"
+      ],
+      "output": []
     },
     "build": {
       "dependencies": [
