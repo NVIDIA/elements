@@ -11,11 +11,13 @@
   },
   "files": [
     "README.md",
+    "CHANGELOG.md",
     "package.json",
     "dist/**/*"
   ],
   "exports": {
     "./package.json": "./package.json",
+    "./CHANGELOG.md": "./CHANGELOG.md",
     "./data.html.json": "./dist/data.html.json",
     "./layout.css": "./dist/layout.css",
     "./responsive.css": "./dist/responsive.css",
@@ -49,6 +51,7 @@
     "postcss-each": "1.1.0",
     "postcss-load-config": "4.0.1",
     "postcss-mixins": "9.0.4",
+    "publint": "^0.2.10",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
@@ -57,8 +60,19 @@
     "ci": {
       "dependencies": [
         "build",
+        "publint",
         "test:visual"
       ]
+    },
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
+      "files": [
+        "package.json"
+      ],
+      "output": []
     },
     "dev": {
       "dependencies": [
