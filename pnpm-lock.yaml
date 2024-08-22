@@ -211,6 +211,9 @@ importers:
       lit-analyzer:
         specifier: 2.0.3
         version: 2.0.3
+      publint:
+        specifier: ^0.2.10
+        version: 0.2.10
       svgo:
         specifier: 3.0.2
         version: 3.0.2
@@ -257,6 +260,9 @@ importers:
       glob:
         specifier: 'catalog:'
         version: 11.0.0
+      publint:
+        specifier: ^0.2.10
+        version: 0.2.10
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -401,6 +407,9 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.6.0
+      publint:
+        specifier: ^0.2.10
+        version: 0.2.10
       typescript:
         specifier: 'catalog:'
         version: 5.3.3
@@ -444,6 +453,9 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.6.0
+      publint:
+        specifier: ^0.2.10
+        version: 0.2.10
       typescript:
         specifier: 'catalog:'
         version: 5.3.3
@@ -972,6 +984,9 @@ importers:
       postcss-mixins:
         specifier: 9.0.4
         version: 9.0.4(postcss@8.4.31)
+      publint:
+        specifier: ^0.2.10
+        version: 0.2.10
       typescript:
         specifier: 'catalog:'
         version: 5.3.3
@@ -1028,6 +1043,9 @@ importers:
       postcss:
         specifier: 8.4.31
         version: 8.4.31
+      publint:
+        specifier: ^0.2.10
+        version: 0.2.10
       style-dictionary:
         specifier: 3.8.0
         version: 3.8.0
@@ -5951,6 +5969,10 @@ packages:
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
 
+  ignore-walk@5.0.1:
+    resolution: {integrity: sha512-yemi4pMf51WKT7khInJqAvsIGzoqYXblnsz0ql8tM+yi1EKYTY1evX4NAbJrLL/Aanr2HyZeluqU+Oi7MGHokw==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+
   ignore-walk@6.0.4:
     resolution: {integrity: sha512-t7sv42WkwFkyKbivUCglsQW5YWMskWtbEf4MNKX5u/CCWHKSPzN4FtBQGsQZgCLbxOzpVlcbWVK5KB3auIOjSw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
@@ -6009,6 +6031,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.3:
     resolution: {integrity: sha512-x00IRNXNy63jwGkJmzPigoySHbaqpNuzKbBOmzK+g2OdZpQ9w+sxCN+VSB3ja7IAge2OP2qpfxTjeNcyjmW1uw==}
@@ -7094,6 +7117,10 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  mri@1.2.0:
+    resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
+    engines: {node: '>=4'}
+
   mrmime@2.0.0:
     resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==}
     engines: {node: '>=10'}
@@ -7271,6 +7298,10 @@ packages:
     resolution: {integrity: sha512-uVFpKhj5MheNBJRTiMZ9pE/7hD1QTeEvugSJW/OmLzAp78PB5O6adfMNTvmfKhXBkvCzC+rqifWcVYpGFwTjnw==}
     engines: {node: '>=14.16'}
 
+  npm-bundled@2.0.1:
+    resolution: {integrity: sha512-gZLxXdjEzE/+mOstGDqR6b0EkhJ+kM6fxM6vUuckuctuVPh80Q6pw/rSZj9s4Gex9GxWtIicO1pc8DB9KZWudw==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+
   npm-bundled@3.0.0:
     resolution: {integrity: sha512-Vq0eyEQy+elFpzsKjMss9kxqb9tG3YHg4dsyWuUENuzvSUWe1TCnW/vV9FkhvBk/brEDoDiVd+M1Btosa6ImdQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
@@ -7279,6 +7310,10 @@ packages:
     resolution: {integrity: sha512-W29RiK/xtpCGqn6f3ixfRYGk+zRyr+Ew9F2E20BfXxT5/euLdA/Nm7fO7OeTGuAmTs30cpgInyJ0cYe708YTZw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
+  npm-normalize-package-bin@2.0.0:
+    resolution: {integrity: sha512-awzfKUO7v0FscrSpRoogyNm0sajikhBWpU0QMrW09AMi9n1PoKU6WaIqUzuJSQnpciZZmJ/jMZ2Egfmb/9LiWQ==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+
   npm-normalize-package-bin@3.0.1:
     resolution: {integrity: sha512-dMxCf+zZ+3zeQZXKxmyuCKlIDPGuv8EF940xbkC4kQVDTtqoh6rJFO+JTKSA6/Rwi0getWmtuy4Itup0AMcaDQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
@@ -7286,6 +7321,11 @@ packages:
   npm-package-arg@11.0.2:
     resolution: {integrity: sha512-IGN0IAwmhDJwy13Wc8k+4PEbTPhpJnMtfR53ZbOyjkvmEcLS4nCwp6mvMWjS5sUjeiW3mpx6cHmuhKEu9XmcQw==}
     engines: {node: ^16.14.0 || >=18.0.0}
+
+  npm-packlist@5.1.3:
+    resolution: {integrity: sha512-263/0NGrn32YFYi4J533qzrQ/krmmrWwhKkzwTuM4f/07ug51odoaNjUexxO4vxlzURHcmYMH1QjvHjsNDKLVg==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    hasBin: true
 
   npm-packlist@8.0.2:
     resolution: {integrity: sha512-shYrPFIS/JLP4oQmAwDyk5HcyysKW8/JLTEA32S0Z5TzvpaeeX2yMFfoK1fjEBnCBvVyIB/Jj/GBFdm0wsgzbA==}
@@ -8229,6 +8269,11 @@ packages:
   psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
 
+  publint@0.2.10:
+    resolution: {integrity: sha512-5TzYaAFiGpgkYX/k6VaItRMT2uHI4zO5OWJ2k7Er0Ot3jutBCNTJB1qRHuy1lYq07JhRczzFs6HFPB4D+A47xA==}
+    engines: {node: '>=16'}
+    hasBin: true
+
   pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
 
@@ -8540,6 +8585,10 @@ packages:
 
   rxjs@7.8.1:
     resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
+
+  sade@1.8.1:
+    resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
+    engines: {node: '>=6'}
 
   safe-array-concat@1.0.1:
     resolution: {integrity: sha512-6XbUAseYE2KtOuGueyeobCySj9L4+66Tn6KQMOPQJrAJEowYKW/YR/MGJZl7FdydUdaFu4LYyDZjxf4/Nmo23Q==}
@@ -16750,6 +16799,10 @@ snapshots:
 
   ieee754@1.2.1: {}
 
+  ignore-walk@5.0.1:
+    dependencies:
+      minimatch: 5.1.6
+
   ignore-walk@6.0.4:
     dependencies:
       minimatch: 9.0.4
@@ -18109,6 +18162,8 @@ snapshots:
 
   mkdirp@2.1.6: {}
 
+  mri@1.2.0: {}
+
   mrmime@2.0.0: {}
 
   ms@2.0.0: {}
@@ -18308,6 +18363,10 @@ snapshots:
 
   normalize-url@8.0.0: {}
 
+  npm-bundled@2.0.1:
+    dependencies:
+      npm-normalize-package-bin: 2.0.0
+
   npm-bundled@3.0.0:
     dependencies:
       npm-normalize-package-bin: 3.0.1
@@ -18315,6 +18374,8 @@ snapshots:
   npm-install-checks@6.3.0:
     dependencies:
       semver: 7.6.3
+
+  npm-normalize-package-bin@2.0.0: {}
 
   npm-normalize-package-bin@3.0.1: {}
 
@@ -18324,6 +18385,13 @@ snapshots:
       proc-log: 4.2.0
       semver: 7.6.2
       validate-npm-package-name: 5.0.0
+
+  npm-packlist@5.1.3:
+    dependencies:
+      glob: 8.1.0
+      ignore-walk: 5.0.1
+      npm-bundled: 2.0.1
+      npm-normalize-package-bin: 2.0.0
 
   npm-packlist@8.0.2:
     dependencies:
@@ -19103,6 +19171,12 @@ snapshots:
 
   psl@1.9.0: {}
 
+  publint@0.2.10:
+    dependencies:
+      npm-packlist: 5.1.3
+      picocolors: 1.0.1
+      sade: 1.8.1
+
   pump@3.0.0:
     dependencies:
       end-of-stream: 1.4.4
@@ -19506,6 +19580,10 @@ snapshots:
   rxjs@7.8.1:
     dependencies:
       tslib: 2.6.3
+
+  sade@1.8.1:
+    dependencies:
+      mri: 1.2.0
 
   safe-array-concat@1.0.1:
     dependencies:
