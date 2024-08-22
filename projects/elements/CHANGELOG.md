@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.2.0...@nvidia-elements/core-v1.3.0) (2024-08-22)
+
+
+### Features
+
+* **elements:** treeview ([e47821d](https://github.com/NVIDIA/elements/commit/e47821dc50b10e2017e39aba3346500bc1ba8fcf))
+
 ## [@nvidia-elements/core-v1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.6...@nvidia-elements/core-v1.2.0) (2024-08-22)
 
 
