@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.6...@nvidia-elements/core-v1.2.0) (2024-08-22)
+
+
+### Features
+
+* **elements:** state background override ([e5dbfec](https://github.com/NVIDIA/elements/commit/e5dbfec262593a1106281a7fcdb4150eddafb947))
+
 ## [@nvidia-elements/core-v1.1.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.5...@nvidia-elements/core-v1.1.6) (2024-08-22)
 
 
