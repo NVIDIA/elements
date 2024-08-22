@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.1.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.5...@nvidia-elements/core-v1.1.6) (2024-08-22)
+
+
+### Bug Fixes
+
+* **ci:** enforce publint on packages to fix missing exports ([4eaf7f6](https://github.com/NVIDIA/elements/commit/4eaf7f6c8b35f97842435b78bd97831817f142d8))
+
 ## [@nvidia-elements/core-v1.1.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.1.4...@nvidia-elements/core-v1.1.5) (2024-08-16)
 
 
