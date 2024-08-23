@@ -14,7 +14,6 @@ import { NveBadge } from '@nvidia-elements/core-react/badge';
 import { NveBreadcrumb } from '@nvidia-elements/core-react/breadcrumb';
 import { NveCard, NveCardHeader, NveCardContent } from '@nvidia-elements/core-react/card';
 import { NveLogo } from '@nvidia-elements/core-react/logo';
-import { NveInput } from '@nvidia-elements/core-react/input';
 
 // This demo is used for baseline experimental SSR support testing.
 // This demo does not follow the same consistent pattern as the rest of the demo integrations.
@@ -134,11 +133,6 @@ export default function Home() {
           </NveCardHeader>
           <NveCardContent>Card Content</NveCardContent>
         </NveCard>
-
-        <NveInput>
-          <label slot="label">input</label>
-          <input type="text" />
-        </NveInput>
       </div>
     </>
   );
