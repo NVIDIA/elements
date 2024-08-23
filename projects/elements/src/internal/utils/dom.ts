@@ -241,7 +241,7 @@ export function getThemeTokens(element = globalThis.document.querySelector(':roo
             .filter(rule => rule.type === 1)
             .reduce((propValArr, rule) => {
               const props = [...rule.style]
-                .filter(p => p.trim().includes('--mlv'))
+                .filter(p => p.trim().includes('--nve'))
                 .map(propName => [propName.trim(), rule.style.getPropertyValue(propName).trim()]);
               return [...propValArr, ...props];
             }, [])

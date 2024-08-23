@@ -441,8 +441,13 @@ describe('endOfScrollBox(): ', () => {
 
 describe('getThemeTokens', () => {
   it('should compute and return the current design tokens', async () => {
+    const style = document.createElement('style');
+    document.head.appendChild(style);
+    style.textContent = ':root { --nve-test-token: test; --invalid-test-token: test; }';
+
     const tokens = getThemeTokens();
-    expect(tokens).toBeTruthy();
+    expect(tokens['--nve-test-token']).toBe('test');
+    expect(tokens['--invalid-test-token']).toBe(undefined);
   });
 });
 
