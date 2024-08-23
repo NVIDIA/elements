@@ -63,11 +63,11 @@ export class TreeNode extends LitElement {
    * Returns list of child nodes
    */
   get nodes() {
-    return Array.from(this.querySelectorAll<TreeNode>('nve-tree-node, mlv-tree-node'));
+    return Array.from(this.querySelectorAll<TreeNode>('nve-tree-node'));
   }
 
   get #tree() {
-    return this.closest<Tree>('nve-tree, mlv-tree');
+    return this.closest<Tree>('nve-tree');
   }
 
   /* @private */
