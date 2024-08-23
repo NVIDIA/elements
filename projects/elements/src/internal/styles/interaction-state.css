@@ -5,7 +5,7 @@
       color-mix(
           in oklab,
           var(--nve-sys-interaction-state-base) 100%,
-          var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio, 0%)
+          var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)
         )
         0 0
     )
