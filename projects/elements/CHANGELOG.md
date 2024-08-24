@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.3.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.0...@nvidia-elements/core-v1.3.1) (2024-08-24)
+
+
+### Bug Fixes
+
+* **elements:** interaction state and theme util ([cf9533b](https://github.com/NVIDIA/elements/commit/cf9533b7126b998ddf49ed7397d19eb0cdec2f80))
+
 ## [@nvidia-elements/core-v1.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.2.0...@nvidia-elements/core-v1.3.0) (2024-08-22)
 
 
