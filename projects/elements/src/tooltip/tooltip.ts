@@ -4,6 +4,8 @@ import { query } from 'lit/decorators/query.js';
 import {
   animationFade,
   attachInternals,
+  audit,
+  excessiveInstanceLimit,
   PopoverAlign,
   popoverBaseStyles,
   PopoverPosition,
@@ -31,6 +33,7 @@ import styles from './tooltip.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-29&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */
+@audit({ excessiveInstanceLimit })
 export class Tooltip extends LitElement {
   static styles = useStyles([popoverBaseStyles, styles]);
 

@@ -2,6 +2,8 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import {
   animationFade,
+  audit,
+  excessiveInstanceLimit,
   I18nController,
   PopoverAlign,
   popoverBaseStyles,
@@ -34,6 +36,7 @@ import styles from './dialog.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
+@audit({ excessiveInstanceLimit })
 export class Dialog extends LitElement {
   /**
    * Sets the side position of the popover relative to the provided anchor element.

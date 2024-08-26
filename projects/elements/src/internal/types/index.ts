@@ -262,6 +262,12 @@ declare global {
       versions: string[];
       elementRegistry: Readonly<{ [key: string]: string }>;
       i18nRegistry: Readonly<{ [key: string]: string }>;
+      audit: Readonly<{
+        [key: string]: {
+          count?: number;
+          excessiveInstanceLimitAudited?: boolean;
+        };
+      }>;
     };
     debug: (log?: (...args) => void) => void;
   };
@@ -269,7 +275,5 @@ declare global {
   interface HTMLElement {
     'nve-text': string;
     'nve-layout': string;
-    'mlv-text': string;
-    'mlv-layout': string;
   }
 }
