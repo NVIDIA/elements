@@ -82,21 +82,23 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
     this.host.addController(this);
   }
 
+  #_dialogClose = e => {
+    if (e.target === this.#dialog) {
+      this.close();
+    }
+  };
+
+  #_dialogCancel = e => {
+    if (e.target === this.#dialog) {
+      e.preventDefault();
+      this.close();
+    }
+  };
+
   async hostConnected() {
     await this.host.updateComplete;
-    this.#dialog?.addEventListener('close', e => {
-      if (e.target === this.#dialog) {
-        this.close();
-      }
-    });
-
-    this.#dialog?.addEventListener('cancel', e => {
-      if (e.target === this.#dialog) {
-        e.preventDefault();
-        this.close();
-      }
-    });
-
+    this.#dialog?.addEventListener('close', this.#_dialogClose);
+    this.#dialog?.addEventListener('cancel', this.#_dialogCancel);
     this.#popoverUpdateDisconnect = popoverRenderUpdate(this.#config, async () => await this.#calculatePosition());
     this.#hiddenUpdateObserver = getAttributeChanges(this.host, 'hidden', async () => await this.#render());
     this.#setupTriggerInteractions();
@@ -112,7 +114,11 @@ export class TypePopoverController<T extends Popover> implements ReactiveControl
 
   hostDisconnected() {
     this.#popoverUpdateDisconnect();
+    this.#removeTriggerInteractions();
     this.#hiddenUpdateObserver?.disconnect();
+    this.#dialog?.removeEventListener('close', this.#_dialogClose);
+    this.#dialog?.removeEventListener('cancel', this.#_dialogCancel);
+    globalThis.document.removeEventListener('pointerdown', this.#lightDismiss);
   }
 
   async #render() {
