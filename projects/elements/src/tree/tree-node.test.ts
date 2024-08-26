@@ -309,4 +309,51 @@ describe(TreeNode.metadata.tag, () => {
 
     expect(nestedNodeElement.selected).toBe(true);
   });
+
+  it('should select node if node header is clicked with a slotted anchor element', async () => {
+    const anchor = document.createElement('a');
+    anchor.href = '#';
+    element.appendChild(anchor);
+
+    tree.selectable = 'single';
+    tree.behaviorSelect = true;
+
+    await elementIsStable(tree);
+    await elementIsStable(element);
+    emulateClick(anchor);
+    await elementIsStable(element);
+
+    expect(element.selected).toBe(true);
+  });
+
+  it('should NOT select node if node header is clicked with a slotted non-anchor focusable element', async () => {
+    const button = document.createElement('button');
+    element.appendChild(button);
+
+    tree.selectable = 'single';
+    tree.behaviorSelect = true;
+
+    await elementIsStable(tree);
+    await elementIsStable(element);
+    emulateClick(button);
+    await elementIsStable(element);
+
+    expect(element.selected).toBe(false);
+  });
+
+  it('should NOT expand node if node header is clicked with any interactive elements', async () => {
+    const anchor = document.createElement('a');
+    anchor.href = '#';
+    element.appendChild(anchor);
+
+    tree.selectable = 'single';
+    tree.behaviorSelect = true;
+
+    await elementIsStable(tree);
+    await elementIsStable(element);
+    emulateClick(anchor);
+    await elementIsStable(element);
+
+    expect(element.expanded).toBe(false);
+  });
 });
