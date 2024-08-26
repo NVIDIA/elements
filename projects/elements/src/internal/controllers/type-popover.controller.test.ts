@@ -205,12 +205,20 @@ describe('type-popover.controller', () => {
     expect(events).toBe(0);
   });
 
-  // it('should not throw if disconnected before setup', async () => {
-  //   const el = document.createElement('type-popover-controller-test-element') as any;
-  //   el.parentNode = fixture;
-  //   fixture.appendChild(el);
-  //   element.remove();
-  // });
+  it('should remove event listeners and not trigger events once removed from DOM but still in memory', async () => {
+    element.hidden = false;
+    element.disconnectedCallback();
+    await elementIsStable(element);
+
+    let events = 0;
+    untilEvent(element, 'close')
+      .then(() => events++)
+      .catch(e => console.log(e));
+
+    button.dispatchEvent(new PointerEvent('pointerdown', { clientX: 9000, clientY: 9000 }));
+    await new Promise(r => setTimeout(() => r(null), 0));
+    expect(events).toBe(0);
+  });
 });
 
 describe('type-popover.controller behavior-trigger', () => {
