@@ -10,13 +10,14 @@ export function typeSubmit<T extends Submit>(): ClassDecorator {
   return (target: any) => target.addInitializer((instance: T) => new TypeSubmitController(instance));
 }
 
-export type Submit = ReactiveElement & HTMLElement & {
-  name: string;
-  value: string;
-  disabled: boolean;
-  type: 'button' | 'submit';
-  readonly: boolean;
-};
+export type Submit = ReactiveElement &
+  HTMLElement & {
+    name: string;
+    value: string;
+    disabled: boolean;
+    type: 'button' | 'submit';
+    readonly: boolean;
+  };
 
 export class TypeSubmitController<T extends Submit> implements ReactiveController {
   #button: HTMLButtonElement & { inert: boolean };
@@ -38,7 +39,7 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
     }
   }
 
-  #setupSubmitButton() {  
+  #setupSubmitButton() {
     if (!this.#button) {
       this.#button = globalThis.document.createElement('button') as HTMLButtonElement & { inert: boolean };
       this.#button.hidden = true;
@@ -69,6 +70,7 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
   }
 
   #triggerNativeButtonBehavior(event: Event) {
+    /* istanbul ignore next -- @preserve */
     if (this.host.disabled) {
       stopEvent(event);
     } else if (!event.defaultPrevented) {

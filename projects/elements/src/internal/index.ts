@@ -2,6 +2,7 @@
  * @internal private common utilities for Elements
  */
 export * from './base/button.js';
+export * from './controllers/audit.controller.js';
 export * from './controllers/i18n.controller.js';
 export * from './controllers/keynav-grid.controller.js';
 export * from './controllers/keynav-list.controller.js';

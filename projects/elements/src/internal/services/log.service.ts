@@ -1,6 +1,6 @@
 import { GlobalStateService } from './global.service.js';
 
-const prefix = '@nvidia-elements/core: ';
+const prefix = '@nve: ';
 
 export class LogService {
   static log(value, ...args: any) {
