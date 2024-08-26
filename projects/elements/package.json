@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/core",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "type": "module",
   "customElements": "custom-elements.json",
   "contributes": {
