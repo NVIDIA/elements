@@ -36,6 +36,13 @@ describe(Tree.metadata.tag, () => {
     expect(element._internals.role).toBe('tree');
   });
 
+  it('should reflect border property to attribute', async () => {
+    expect(element.hasAttribute('border')).toBe(false);
+    element.border = true;
+    await elementIsStable(element);
+    expect(element.hasAttribute('border')).toBe(true);
+  });
+
   it('should sync selectable single state from tree to all child nodes', async () => {
     expect(element.nodes[0].selectable).toBe(undefined);
     expect(element.nodes[1].selectable).toBe(undefined);
