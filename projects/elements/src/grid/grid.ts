@@ -1,4 +1,4 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import {
   keyNavigationGrid,
@@ -7,9 +7,10 @@ import {
   appendRootNodeStyle,
   generateId,
   ContainerElement,
-  validateSlots,
-  tagSelector
+  tagSelector,
+  audit
 } from '@nvidia-elements/core/internal';
+import { GridPlaceholder } from './placeholder/placeholder.js';
 import { GridHeader } from './header/header.js';
 import { GridColumn } from './column/column.js';
 import { GridRow } from './row/row.js';
@@ -34,6 +35,7 @@ import globalStyles from './grid.global.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  */
+@audit({ auditSlots: true })
 @keyNavigationGrid<Grid>()
 export class Grid extends LitElement implements ContainerElement {
   /**
@@ -51,7 +53,7 @@ export class Grid extends LitElement implements ContainerElement {
   static readonly metadata = {
     tag: 'nve-grid',
     version: '0.0.0',
-    children: [GridRow.metadata.tag, GridHeader.metadata.tag]
+    children: [GridRow.metadata.tag, GridHeader.metadata.tag, GridPlaceholder.metadata.tag]
   };
 
   static elementDefinitions = {};
@@ -100,11 +102,6 @@ export class Grid extends LitElement implements ContainerElement {
     this._internals.role = 'grid';
     this.id ||= generateId();
     appendRootNodeStyle(this, globalStyles);
-  }
-
-  async firstUpdated(props: PropertyValues<this>) {
-    super.firstUpdated(props);
-    validateSlots(this);
   }
 
   /* eslint no-dupe-class-members: 0 */
