@@ -1,4 +1,5 @@
 import { deepMerge } from '../utils/objects.js';
+import { getEnv } from './global.utils.js';
 
 export class GlobalState {
   constructor() {
@@ -10,10 +11,11 @@ export class GlobalState {
           'color: inherit'
         ),
       state: {
-        env: (import.meta as any).env.MODE,
+        env: getEnv(),
         versions: [],
         elementRegistry: {},
-        i18nRegistry: {}
+        i18nRegistry: {},
+        audit: {}
       }
     };
 
