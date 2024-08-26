@@ -19,6 +19,7 @@ import '@nvidia-elements/core/radio/define.js';
 import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/sort-button/define.js';
 import '@nvidia-elements/core/toolbar/define.js';
+import '@nvidia-elements/core/tooltip/define.js';
 import '@lit-labs/virtualizer';
 
 export default {
@@ -688,7 +689,7 @@ class GridPerformanceDemo extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.NVE_ELEMENTS.state.env = 'watch';
+    window.NVE_ELEMENTS.state.env = 'development';
   }
 }
 
@@ -1156,6 +1157,25 @@ export const InvalidDOM = {
     </nve-grid-row>
   `)}
   <span>invalid</span>
+</nve-grid>
+  `
+};
+
+
+export const Audit = {
+  render: () => html`
+<nve-grid style="height: 450px">
+  <div hidden></div>
+  <nve-grid-header>
+    <div hidden></div>
+    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+  </nve-grid-header>
+  ${getItems(50).map(row => html`
+    <nve-grid-row>
+      <div hidden></div>
+      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}<nve-tooltip hidden>???</nve-tooltip></nve-grid-cell> `)}
+    </nve-grid-row>
+  `)}
 </nve-grid>
   `
 };

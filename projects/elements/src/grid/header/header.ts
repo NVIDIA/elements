@@ -1,6 +1,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import { useStyles, attachInternals, debounce, LogService, validateSlots, tagSelector } from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, debounce, LogService, tagSelector, audit } from '@nvidia-elements/core/internal';
 import styles from './header.css?inline';
 import { GlobalStateService } from '@nvidia-elements/core/internal/services/global.service';
 import { GridColumn } from '../column/column.js';
@@ -19,6 +19,7 @@ import { GridCell } from '../cell/cell.js';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  */
+@audit({ auditSlots: true })
 export class GridHeader extends LitElement {
   static styles = useStyles([styles]);
 
@@ -63,7 +64,6 @@ export class GridHeader extends LitElement {
     const debounceFn = debounce(() => this.#computeColumnWidths(), 100);
     new ResizeObserver(debounceFn).observe(this);
     this.#validateColumns();
-    validateSlots(this);
   }
 
   async #computeColumnWidths() {

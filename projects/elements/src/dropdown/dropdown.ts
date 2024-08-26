@@ -4,6 +4,8 @@ import { query } from 'lit/decorators/query.js';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import {
   animationFade,
+  audit,
+  excessiveInstanceLimit,
   I18nController,
   PopoverAlign,
   popoverBaseStyles,
@@ -33,6 +35,7 @@ import styles from './dropdown.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
+@audit({ excessiveInstanceLimit })
 export class Dropdown extends LitElement {
   /**
    * The anchor provides the element that the popover should position relative to.
