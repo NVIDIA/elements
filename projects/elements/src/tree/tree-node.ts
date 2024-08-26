@@ -162,14 +162,12 @@ export class TreeNode extends LitElement {
   }
 
   #nodeHeaderClick(e) {
-    const hasFocusableElements = getFlattenedFocusableItems(e.target).length;
+    const hasFocusableElements = getFlattenedFocusableItems(e.currentTarget).length;
     if (this.#isExpandable && !this.selectable && !hasFocusableElements) {
-      e.preventDefault();
       this.#toggleExpand();
     }
 
-    if (this.selectable && !hasFocusableElements) {
-      e.preventDefault();
+    if (this.selectable && (!hasFocusableElements || e.target.localName === 'a')) {
       this.#toggleSelection();
     }
   }

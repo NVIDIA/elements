@@ -40,7 +40,7 @@ export class Tree extends LitElement {
   /**
    * Determines if node depth border is rendered.
    */
-  @property({ type: Boolean }) border = false;
+  @property({ type: Boolean, reflect: true }) border = false;
 
   static styles = useStyles([styles]);
 

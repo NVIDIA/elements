@@ -115,7 +115,7 @@ input {
 }
 
 :host(:state(selected):state(selectable-single)) .node-title::after {
-  width: var(--nve-ref-border-width-lg);
+  width: var(--nve-ref-border-width-md);
   border-radius: var(--nve-ref-border-radius-full);
   background: var(--nve-sys-accent-secondary-background);
   content: '';
@@ -123,7 +123,7 @@ input {
   position: absolute;
   height: 80%;
   top: 10%;
-  left: calc(var(--nve-ref-size-100) * -1);
+  left: calc(var(--nve-ref-size-50) * -1);
 }
 
 :host(:state(selectable-single)) .node-title {
