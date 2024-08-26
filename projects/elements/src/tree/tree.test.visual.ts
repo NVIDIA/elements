@@ -166,5 +166,14 @@ function template(theme: '' | 'dark' = '') {
         </nve-tree-node>
       </nve-tree>
     </section>
+
+    <!-- selectable expanded -->
+    <nve-tree selectable="single">
+      <nve-tree-node selected expanded>
+        •︎•︎•︎•︎•︎•︎
+        <nve-tree-node>•︎•︎•︎•︎•︎•︎</nve-tree-node>
+        <nve-tree-node>•︎•︎•︎•︎•︎•︎</nve-tree-node>
+      </nve-tree-node>
+    </nve-tree>
   `;
 }
