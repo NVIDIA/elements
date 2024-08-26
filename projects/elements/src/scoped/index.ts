@@ -18,8 +18,10 @@ export function scope(element: any, Mixin = ScopedRegistryHost) {
  */
 export function defineScopedElement(suffix: string, Element: any, Mixin = ScopedRegistryHost) {
   const { tag } = Element.metadata;
+  /* istanbul ignore next -- @preserve */
   const tagName = `${tag}${suffix ? `-${suffix}` : ''}`;
 
+  /* istanbul ignore next -- @preserve */
   if (!customElements.get(tagName)) {
     customElements.define(tagName, scope(Element, Mixin) as any);
   }
