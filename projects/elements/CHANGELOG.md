@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.3.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.3...@nvidia-elements/core-v1.3.4) (2024-08-27)
+
+
+### Bug Fixes
+
+* **elements:** popover event cleanup ([1f3d857](https://github.com/NVIDIA/elements/commit/1f3d8571a362d4a3825a424ed5cfa4a4fffdcfd9))
+
 ## [@nvidia-elements/core-v1.3.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.2...@nvidia-elements/core-v1.3.3) (2024-08-26)
 
 
