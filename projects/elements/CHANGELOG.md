@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.3.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.4...@nvidia-elements/core-v1.3.5) (2024-08-27)
+
+
+### Bug Fixes
+
+* **elements:** switch outline ([33aabd4](https://github.com/NVIDIA/elements/commit/33aabd43a6c518ed6a373cafe89b44e330739ef3))
+
 ## [@nvidia-elements/core-v1.3.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.3...@nvidia-elements/core-v1.3.4) (2024-08-27)
 
 
