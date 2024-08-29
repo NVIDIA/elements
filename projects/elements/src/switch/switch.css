@@ -81,5 +81,5 @@
 :host(:focus-within) [input] slot {
   outline: Highlight solid 2px !important;
   outline: 5px auto -webkit-focus-ring-color !important;
-  outline-offset: -1px;
+  outline-offset: -2px;
 }

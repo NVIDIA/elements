@@ -371,3 +371,16 @@ export const HorizontalInlineGroup = () => {
 </div>
 `
 };
+
+
+export const Indeterminate = () => {
+  return html`
+<nve-checkbox>
+  <label>checkbox 1</label>
+  <input type="checkbox" checked id="indeterminate" />
+</nve-checkbox>
+<script type="module">
+  document.querySelector('#indeterminate').indeterminate = true;
+</script>
+`
+};
