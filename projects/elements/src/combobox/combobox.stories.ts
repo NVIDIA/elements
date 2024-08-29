@@ -215,12 +215,30 @@ export const Label = () => {
     <label>label</label>
     <input type="search">
     <select>
-      <option value="status">Status</option>
-      <option value="priority">Priority</option>
-      <option value="date">Date</option>
-      <option value="session">Session</option>
-      <option value="configuration">Configuration</option>
-      <option value="contains">Contains</option>
+      <option value="1">Status</option>
+      <option value="2">Priority</option>
+      <option value="3">Date</option>
+      <option value="4">Session</option>
+      <option value="5">Configuration</option>
+      <option value="6">Contains</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  `
+};
+
+export const LabelMultiSelect = () => {
+  return html`
+  <nve-combobox>
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option value="1">Status</option>
+      <option value="2">Priority</option>
+      <option value="3">Date</option>
+      <option value="4">Session</option>
+      <option value="5">Configuration</option>
+      <option value="6">Contains</option>
     </select>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
