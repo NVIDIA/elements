@@ -42,7 +42,10 @@
     "dev": {
       "command": "storybook dev --port 7777",
       "service": true,
-      "clean": false
+      "clean": false,
+      "dependencies": [
+        "build"
+      ]
     },
     "ci": {
       "dependencies": [
