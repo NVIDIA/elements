@@ -266,7 +266,14 @@ export class Combobox extends Control implements ContainerElement {
 
   #updateMenuItems() {
     this.#options.forEach(option => {
-      option.disabled = !option.value.toLocaleLowerCase().includes(this.input?.value.toLowerCase());
+      const hasLabel = option.textContent.trim().length;
+      if (hasLabel) {
+        const matchesLabel = option.textContent.toLocaleLowerCase().includes(this.input?.value.toLowerCase());
+        option.disabled = !matchesLabel;
+      } else {
+        const matchesValue = option.value.toLocaleLowerCase().includes(this.input?.value.toLowerCase());
+        option.disabled = !matchesValue;
+      }
     });
 
     this.requestUpdate();
