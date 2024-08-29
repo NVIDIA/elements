@@ -38,9 +38,8 @@
 
     .playground-btn {
       position: absolute;
-      z-index: 99;
       display: none;
-      bottom: -48px;
+      bottom: 0;
       right: 90px;
       --height: 24px;
       --font-size: 12px;
@@ -74,21 +73,10 @@
       & .css-xzp052 {
         overflow: visible !important;
         padding: 0 0 24px 0 !important;
-        z-index: 99;
-        /* margin: 0 0 48px 0 !important; */
       }
 
       .css-kdwx3d {
         overflow: visible !important;
-        z-index: 99;
-      }
-
-      .css-111a2cx {
-        bottom: -24px;
-      }
-
-      .css-1kaktxp {
-        margin-top: 32px !important;
       }
 
       & .innerZoomElementWrapper div {
@@ -112,6 +100,11 @@
     .css-1kaktxp {
       box-shadow: none !important;
       background: transparent !important;
+
+      button {
+        background: var(--nve-sys-interaction-background) !important;
+        color: var(--nve-sys-interaction-color) !important;
+      }
     }
 
     .prismjs {
@@ -178,10 +171,6 @@
         border-radius: var(--nve-ref-border-radius-lg) !important;
         outline-offset: -4px !important;
       }
-    }
-
-    .css-1kaktxp {
-      margin-top: 12px !important;
     }
 
     .sbdocs {
@@ -300,10 +289,6 @@
       overflow: visible !important;
     }
 
-    .css-xzp052 {
-      z-index: 99 !important;
-    }
-
     .sb-unstyled {
       display: contents;
     }
@@ -319,6 +304,10 @@
 
     [nve-text='list'] li > .sb-unstyled {
       display: contents;
+    }
+
+    [scale='1'] {
+      transform: none !important;
     }
 </style>
 <div hidden style="display: none !important">
