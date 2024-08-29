@@ -124,7 +124,7 @@ export const Transforms = {
   <p nve-text="body uppercase">uppercase</p>
   <p nve-text="body lowercase">LOWERCASE</p>
   <p nve-text="body capitalize">capitalize</p>
-  <p nve-text="body truncate" style="width: 300px;">truncate: At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi.</p>
+  <p nve-text="body truncate" style="width: 350px;">truncate: dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
 </div>
   `
 }
