@@ -332,6 +332,33 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     expect(input.value).toBe('option 1');
     expect(select.value).toBe('option 1');
   });
+
+  it('should filter menu items against provided option values if no labels provided', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+
+    input.value = 'option 1';
+    input.dispatchEvent(new Event('keydown', { bubbles: true }));
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    expect(dropdown.hidden).toBe(false);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(`${MenuItem.metadata.tag}[role='option']`).length).toBe(1);
+  });
+
+  it('should show "no results" message if no match was found', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+
+    input.value = 'option 4';
+    input.dispatchEvent(new Event('keydown', { bubbles: true }));
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    expect(dropdown.hidden).toBe(false);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(`${MenuItem.metadata.tag}[role='option']`).length).toBe(0);
+    expect(element.shadowRoot.querySelector<MenuItem>(`${MenuItem.metadata.tag}[disabled]`).textContent).toBe(
+      'no results'
+    );
+  });
 });
 
 describe(`${Combobox.metadata.tag}: multi select`, () => {
@@ -558,9 +585,9 @@ describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
         <label>combobox</label>
         <input type="search" />
         <select>
-          <option selected value="1">option 1</option>
-          <option value="2">option 2</option>
-          <option value="3">option 3</option>
+          <option selected value="1">option one</option>
+          <option value="2">option two</option>
+          <option value="3">option three</option>
         </select>
         <nve-control-message>message</nve-control-message>
       </nve-combobox>
@@ -582,7 +609,7 @@ describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
 
   it('should initialize input to the selected option label', async () => {
     expect(options[0].selected).toBe(true);
-    expect(input.value).toBe('option 1');
+    expect(input.value).toBe('option one');
   });
 
   it('should initialize select to the selected option value', async () => {
@@ -608,7 +635,7 @@ describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
     expect(options[1].selected).toBe(false);
     expect(options[2].selected).toBe(false);
     expect(select.value).toBe('1');
-    expect(input.value).toBe('option 1');
+    expect(input.value).toBe('option one');
 
     input.value = 'invalid option';
     dropdown.dispatchEvent(new CustomEvent('close', { bubbles: true }));
@@ -619,5 +646,18 @@ describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
     expect(options[0].selected).toBe(false);
     expect(options[1].selected).toBe(false);
     expect(options[2].selected).toBe(false);
+  });
+
+  it('should filter menu items against provided option labels', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+
+    input.value = 'option one';
+    input.dispatchEvent(new Event('keydown', { bubbles: true }));
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(`${MenuItem.metadata.tag}[role='option']`);
+    expect(dropdown.hidden).toBe(false);
+    expect(items.length).toBe(1);
   });
 });
