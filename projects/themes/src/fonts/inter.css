@@ -1,7 +1,13 @@
 @font-face {
   src: url('./inter.woff2') format('woff2');
   font-family: 'Inter';
-  font-weight: normal;
-  font-style: normal;
   font-display: swap;
+}
+
+/* fallback for safari font-synthesis */
+@font-face {
+  src: url('./inter.woff2') format('woff2');
+  font-family: 'Inter';
+  font-display: swap;
+  font-weight: 600;
 }
