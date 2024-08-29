@@ -77,22 +77,22 @@
 
 :host(:state(indeterminate)) {
   --background: var(--border-color);
+}
 
-  [input] slot::before {
-    display: none;
-  }
+:host(:state(indeterminate)) [input] slot::before {
+  display: none;
+}
 
-  [input] slot::after {
-    background: var(--nve-sys-interaction-field-color);
-    content: '';
-    display: inline-block;
-    height: var(--border-width);
-    top: 7px;
-    left: 3px;
-    z-index: 99;
-    width: 60%;
-    margin: 0 auto;
-    position: fixed;
-    pointer-events: none;
-  }
+:host(:state(indeterminate)) [input] slot::after {
+  background: var(--nve-sys-interaction-color);
+  content: '';
+  display: inline-block;
+  height: var(--border-width);
+  top: 7px;
+  left: 3px;
+  z-index: 99;
+  width: 10px;
+  margin: 0 auto;
+  position: absolute;
+  pointer-events: none;
 }
