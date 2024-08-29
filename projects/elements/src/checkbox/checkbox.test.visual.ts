@@ -129,5 +129,15 @@ function template(theme: '' | 'dark' = '') {
     </nve-checkbox>
     <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
   </nve-checkbox-group>
+
+  <!-- indeterminate -->
+  <nve-checkbox>
+    <label>•︎•︎•︎•︎•︎•︎</label>
+    <input type="checkbox" checked id="indeterminate" />
+    <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
+  </nve-checkbox>
+  <script type="module">
+    document.querySelector('#indeterminate').indeterminate = true;
+  </script>
   `;
 }
