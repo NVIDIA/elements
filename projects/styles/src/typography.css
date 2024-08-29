@@ -1,3 +1,7 @@
+[nve-text] {
+  --__capsize-offset: -0.1818em;
+}
+
 /* https://seek-oss.github.io/capsize/ */
 :is(
     [nve-text~='display'],
@@ -7,7 +11,7 @@
     [nve-text~='eyebrow']
   )::before {
   content: '';
-  margin-bottom: -0.1818em;
+  margin-bottom: var(--__capsize-offset);
   display: table;
 }
 
@@ -19,7 +23,7 @@
     [nve-text~='eyebrow']
   )[nve-text]::after {
   content: '';
-  margin-top: -0.1818em;
+  margin-top: var(--__capsize-offset);
   display: table;
 }
 
@@ -309,6 +313,10 @@
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
+
+  &::after {
+    --__capsize-offset: 0;
+  }
 }
 
 [nve-text~='code'] {
