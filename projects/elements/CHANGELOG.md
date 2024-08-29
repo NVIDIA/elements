@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.3.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.5...@nvidia-elements/core-v1.3.6) (2024-08-29)
+
+
+### Bug Fixes
+
+* **elements:** combobox label filtering ([5c3817a](https://github.com/NVIDIA/elements/commit/5c3817a15f67db5fceaa7b4a4416136b2d601c5b))
+
 ## [@nvidia-elements/core-v1.3.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.4...@nvidia-elements/core-v1.3.5) (2024-08-27)
 
 
