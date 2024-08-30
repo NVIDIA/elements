@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.1.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.1.2...@nvidia-elements/themes-v1.1.3) (2024-08-30)
+
+
+### Bug Fixes
+
+* **styles:** font styles ([14df903](https://github.com/NVIDIA/elements/commit/14df9035d1c45702e323408122db711fdbbd5ac3))
+
 ## [@nvidia-elements/themes-v1.1.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.1.1...@nvidia-elements/themes-v1.1.2) (2024-08-22)
 
 
