@@ -1,3 +1,12 @@
+## [@nvidia-elements/core-v1.3.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.6...@nvidia-elements/core-v1.3.7) (2024-08-30)
+
+
+### Bug Fixes
+
+* **elements:** checkbox indeterminate ([7120402](https://github.com/NVIDIA/elements/commit/7120402ed7ae2afa3f29d885de3e9f4ac2bc178d))
+* **elements:** missing tree css prop ([cac75f3](https://github.com/NVIDIA/elements/commit/cac75f31a81b6915613504d03f00aa5ac137d794))
+* **styles:** font styles ([14df903](https://github.com/NVIDIA/elements/commit/14df9035d1c45702e323408122db711fdbbd5ac3))
+
 ## [@nvidia-elements/core-v1.3.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.5...@nvidia-elements/core-v1.3.6) (2024-08-29)
 
 
