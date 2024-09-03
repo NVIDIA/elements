@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.3.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.7...@nvidia-elements/core-v1.3.8) (2024-09-03)
+
+
+### Bug Fixes
+
+* **elements:** audit controller ([ce37319](https://github.com/NVIDIA/elements/commit/ce373198acf40a14799fbb5849d7d8d443241e8c))
+
 ## [@nvidia-elements/core-v1.3.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.6...@nvidia-elements/core-v1.3.7) (2024-08-30)
 
 
