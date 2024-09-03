@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.3.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.8...@nvidia-elements/core-v1.3.9) (2024-09-03)
+
+
+### Bug Fixes
+
+* **elements:** safari toggletip header/footer color ([33cdc19](https://github.com/NVIDIA/elements/commit/33cdc19aae95b9481c1476464f0644237f9664d4))
+
 ## [@nvidia-elements/core-v1.3.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.7...@nvidia-elements/core-v1.3.8) (2024-09-03)
 
 
