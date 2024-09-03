@@ -13,6 +13,7 @@ import {
 import { GridPlaceholder } from './placeholder/placeholder.js';
 import { GridHeader } from './header/header.js';
 import { GridColumn } from './column/column.js';
+import { GridFooter } from './footer/footer.js';
 import { GridRow } from './row/row.js';
 import { GridCell } from './cell/cell.js';
 import styles from './grid.css?inline';
@@ -53,7 +54,7 @@ export class Grid extends LitElement implements ContainerElement {
   static readonly metadata = {
     tag: 'nve-grid',
     version: '0.0.0',
-    children: [GridRow.metadata.tag, GridHeader.metadata.tag, GridPlaceholder.metadata.tag]
+    children: [GridRow.metadata.tag, GridHeader.metadata.tag, GridFooter.metadata.tag, GridPlaceholder.metadata.tag]
   };
 
   static elementDefinitions = {};
