@@ -8,6 +8,7 @@
 }
 
 [internal-host] {
+  color: var(--color);
   border-top: var(--border-top);
   padding: var(--padding) var(--padding) 0 var(--padding);
   display: flex;
