@@ -6,6 +6,7 @@
 }
 
 [internal-host] {
+  color: var(--color);
   padding: 0 var(--padding) var(--padding) var(--padding);
   border-bottom: var(--border-bottom);
 }
