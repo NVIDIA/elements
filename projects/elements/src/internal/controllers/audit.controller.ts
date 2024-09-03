@@ -25,23 +25,29 @@ export type Audit = ReactiveElement;
 
 export class AuditController<T extends Audit> implements ReactiveController {
   get #hostAuditState() {
-    return GlobalStateService.state.audit[this.host.localName];
+    return GlobalStateService.state.audit[this.host.localName] ?? { count: 0 };
+  }
+
+  get #production() {
+    return GlobalStateService.state.env === 'production';
   }
 
   constructor(
     private host: T,
     private options: AuditOptions
   ) {
-    if (GlobalStateService.state.env !== 'production') {
+    if (!this.#production) {
       this.host.addController(this);
+      this.#initializeAudit();
     }
   }
 
   async hostConnected() {
     await this.host.updateComplete;
-    this.#initializeAudit();
-    this.#auditSlots();
-    this.#auditExcessiveInstanceLimit();
+    if (!this.#production) {
+      this.#auditSlots();
+      this.#auditExcessiveInstanceLimit();
+    }
   }
 
   hostDisconnected() {
@@ -49,7 +55,7 @@ export class AuditController<T extends Audit> implements ReactiveController {
   }
 
   #initializeAudit() {
-    if (!this.#hostAuditState) {
+    if (!GlobalStateService.state.audit[this.host.localName]) {
       this.#update({ [this.host.localName]: { count: 0 } });
     }
   }
@@ -82,6 +88,7 @@ export class AuditController<T extends Audit> implements ReactiveController {
     if (this.options.auditSlots) {
       const [invalidElements, validElements] = auditSlots(this.host);
       if (invalidElements.length) {
+        console.log(invalidElements);
         LogService.warn(getInvalidSlotsWarning(this.host.localName, validElements));
       }
     }
