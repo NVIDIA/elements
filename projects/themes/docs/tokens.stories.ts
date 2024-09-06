@@ -35,7 +35,7 @@ export const BorderWidth = {
 };
 
 export const BorderRadius = {
-  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-border')))}`
+  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('ref-border-radius')))}`
 };
 
 export const Opacity = {
@@ -277,7 +277,7 @@ function renderTokenTable(tokens) {
           ${name.includes('ref-font-size') ? html`<div style="${styleMap({ 'font-size': `var(${name})`, background: 'transparent' })}">size</div>` : ''}
           ${name.includes('ref-border-radius') ? html`<div style="${styleMap({ 'border-radius': `var(${name})`, width: '100px', height: '100px' })}"></div>` : ''}
           ${name.includes('ref-border-color') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
-          ${name.includes('ref-border-width') ? html`<div style="${styleMap({ border: '1px solid var(--nve-ref-border-color)', background: 'transparent', 'border-width': value })}"></div>` : ''}
+          ${name.includes('ref-border-width') ? html`<div style="${styleMap({ border: '1px solid var(--nve-ref-border-color)', background: 'transparent', 'border-width': `var(${name})` })}"></div>` : ''}
           ${name.includes('ref-opacity') ? html`<div style="${styleMap({ opacity: `var(${name})`, background: '#000' })}"></div>` : ''}
           ${name.includes('ref-shadow') ? html`<div style="padding: 12px; background: transparent;"><div style="${styleMap({ 'box-shadow': `var(${name})`, background: 'var(--nve-sys-layer-container-background)' })}"></div></div>` : ''}
           ${name.includes('ref-animation') ? html`<div style="${styleMap({ background: 'transparent' })}"></div>` : ''}
