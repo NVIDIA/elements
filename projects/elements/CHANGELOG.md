@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.9...@nvidia-elements/core-v1.4.0) (2024-09-06)
+
+
+### Features
+
+* **elements:** copy-button ([565f1c7](https://github.com/NVIDIA/elements/commit/565f1c7edddcd5cf9212bb82b9a2150903aab5a3))
+
 ## [@nvidia-elements/core-v1.3.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.8...@nvidia-elements/core-v1.3.9) (2024-09-03)
 
 
