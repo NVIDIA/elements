@@ -29,5 +29,8 @@ function template(theme: '' | 'dark' = '') {
   <nve-pagination container="flat" value="1" items="100" step="10" skippable></nve-pagination>
 
   <nve-pagination disable-step container="inline" value="1" items="100" step="10"></nve-pagination>
+
+  <nve-pagination value="1" items="10000" step="1000"></nve-pagination>
+
   `;
 }
