@@ -9,15 +9,19 @@ import '@nvidia-elements/core/pagination/define.js';
 describe(Pagination.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Pagination;
+  let element2: Pagination;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
       <form>
-        <nve-pagination name="page" .value=${1} .step=${10} .items=${100}></nve-pagination>
+        <nve-pagination name="page" id="pagination-1" .value=${1} .step=${10} .items=${100}></nve-pagination>
+        <nve-pagination id="pagination-2" .value=${1} .step=${100} .items=${10000} .stepSizes=${[100, 500, 1000]}></nve-pagination>
       </form>
     `);
-    element = fixture.querySelector(Pagination.metadata.tag);
+    element = fixture.querySelector('#pagination-1');
+    element2 = fixture.querySelector('#pagination-2');
     await elementIsStable(element);
+    await elementIsStable(element2);
   });
 
   afterEach(() => {
@@ -197,5 +201,20 @@ describe(Pagination.metadata.tag, () => {
     select.dispatchEvent(new Event('change'));
     await element.updateComplete;
     expect(selectLabel.textContent).toBe('50-100');
+  });
+
+  it('should select first option by default and render all options passed as step-sizes', async () => {
+    const select = element2.shadowRoot.querySelector<HTMLSelectElement>('select');
+    const selectLabel = element2.shadowRoot.querySelector('.select-label');
+    element2.value = 2;
+    await elementIsStable(element2);
+    expect(selectLabel.textContent).toBe('100-200');
+    expect(select.options[0].selected).toBe(true);
+
+    // Check if options are rendered based on step-sizes provided
+    expect(select.options.length).toBe(3);
+    expect(select.options[0].value).toBe('100');
+    expect(select.options[1].value).toBe('500');
+    expect(select.options[2].value).toBe('1000');
   });
 });
