@@ -56,12 +56,12 @@ label {
 
 nve-input {
   margin-inline-end: var(--nve-ref-size-200);
-  --width: 6ch;
+  --width: fit-content;
 }
 
 nve-select {
   margin-inline-end: var(--nve-ref-size-200);
-  --width: 10ch;
+  --width: fit-content;
 }
 
 nve-icon-button:state(disabled) {

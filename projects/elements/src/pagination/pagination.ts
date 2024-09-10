@@ -37,6 +37,10 @@ export class Pagination extends LitElement {
    * The number of items per page.
    */
   @property({ type: Number }) step = 10;
+  /**
+   * The array of custom step-size.
+   */
+  @property({ type: Array }) stepSizes = [10, 20, 50, 100];
 
   /**
    * The total number of items.
@@ -179,10 +183,7 @@ export class Pagination extends LitElement {
               value=${this.step}
               .disabled=${this.disabled || this.disableStep}
             >
-              <option ?selected=${this.step === 10} value="10">10</option>
-              <option ?selected=${this.step === 20} value="20">20</option>
-              <option ?selected=${this.step === 50} value="50">50</option>
-              <option ?selected=${this.step === 100} value="100">100</option>
+            ${this.stepSizes.map(i => html`<option ?selected=${this.step === i} value=${i}>${i}</option>`)}
             </select>
             <div class="select-label">${this.#selectLabel}</div>
           </nve-select>

@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs';
-import { Default, Skippable, Disabled, Flat, Inline, DisableStep, DynamicItems, Forms } from './pagination.stories';
+import { Default, Skippable, Disabled, Flat, Inline, DisableStep, DynamicItems, DynamicStepSize, Forms } from './pagination.stories';
 
 <Meta title="Elements/Pagination/Documentation" />
 
@@ -47,6 +47,12 @@ If the upper bound of items is unknown the `last-page` event can be used to dete
 to load additional data and update the pagination with the latest total of items.
 
 <Canvas of={DynamicItems} story={{ inline: false, height: 100 }} />
+
+## Dynamic Step Size
+
+When custom step is provided, the select options dynamically adapt to the step and is appended to the default option list
+
+<Canvas of={DynamicStepSize} />
 
 ## Forms
 
