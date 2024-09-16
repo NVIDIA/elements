@@ -66,15 +66,12 @@ export const InteractiveGroup = {
     notification.closable = true;
     notification.status = ['warning', 'danger', 'success', 'accent', undefined][Math.floor(Math.random() * 5)];
     notification.innerHTML = '<h3 nve-text="label">' + (notification.status ?? 'default') + '</h3><p nve-text="body">some text content in a notification</p>';
-    notification.closeTimeout = 10000 * (document.querySelectorAll('nve-notification').length + 1);
+    notification.closeTimeout = 1000 * (document.querySelectorAll('nve-notification').length + 1);
     notification.addEventListener('close', () => notification.remove(), { once: true });
     notification.position = 'bottom';
     notification.alignment = 'end';
 
     document.querySelector('nve-notification-group').prepend(notification);
-    // document.querySelector('body').prepend(notification);
-
-    setTimeout(() => notification.showPopover());
   });
 </script>
 `

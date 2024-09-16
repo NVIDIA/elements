@@ -24,6 +24,7 @@ const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package
 export const libraryBuildConfig = {
   plugins: [initial(), tsc(), cem(), dts(), bundle()],
   build: {
+    cssMinify: 'esbuild',
     cssCodeSplit: true,
     minify: false, // https://github.com/vitejs/vite/issues/8848
     watch: mode === 'watch' ? {} : undefined,

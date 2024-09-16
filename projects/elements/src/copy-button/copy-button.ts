@@ -34,6 +34,11 @@ export class CopyButton extends Button {
    */
   @property({ type: Boolean, reflect: true, attribute: 'behavior-copy' }) behaviorCopy: boolean;
 
+  /**
+   * Defines the value to be copied to user clipboard. Use `aria-label` to set the tooltip hint.
+   */
+  @property({ type: String, reflect: true }) value: string;
+
   static styles = useStyles([...Button.styles, styles]);
 
   static readonly metadata = {
