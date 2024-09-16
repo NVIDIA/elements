@@ -28,23 +28,23 @@ function template(theme: '' | 'dark' = '') {
   </style>
 
   <nve-notification-group position="center">
-    <nve-notification closable>
+    <nve-notification inline closable>
       <h3 nve-text="label">•︎•︎•︎•︎•︎•︎</h3>
       <p nve-text="body">•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎</p>
     </nve-notification>
-    <nve-notification status="accent" closable>
+    <nve-notification status="accent" inline closable>
       <h3 nve-text="label">•︎•︎•︎•︎•︎•︎</h3>
       <p nve-text="body">•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎</p>
     </nve-notification>
-    <nve-notification status="success" closable>
+    <nve-notification status="success" inline closable>
       <h3 nve-text="label">•︎•︎•︎•︎•︎•︎</h3>
       <p nve-text="body">•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎</p>
     </nve-notification>
-    <nve-notification status="warning" closable>
+    <nve-notification status="warning" inline closable>
       <h3 nve-text="label">•︎•︎•︎•︎•︎•︎</h3>
       <p nve-text="body">•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎</p>
     </nve-notification>
-    <nve-notification status="danger" closable>
+    <nve-notification status="danger" inline closable>
       <h3 nve-text="label">•︎•︎•︎•︎•︎•︎</h3>
       <p nve-text="body">•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎</p>
     </nve-notification>

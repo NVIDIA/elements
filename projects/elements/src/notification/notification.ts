@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@nvidia-elements/core/icon';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -96,9 +96,10 @@ export class Notification extends LitElement {
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
-  protected typeNativeAnchorController = new TypeNativeAnchorController<Notification>(this);
-
-  protected typeNativePopoverController = new TypeNativePopoverController<Notification>(this);
+  /**
+   * @private
+   */
+  @property({ type: Boolean }) inline = false;
 
   /** @private */
   get popoverType(): PopoverType {
@@ -106,7 +107,16 @@ export class Notification extends LitElement {
   }
 
   /** @private */
+  get popoverInline() {
+    return this.parentElement.localName === 'nve-notification-group' || this.inline || this.container === 'flat';
+  }
+
+  /** @private */
   declare _internals: ElementInternals;
+
+  protected typeNativeAnchorController: TypeNativeAnchorController<Notification>;
+
+  protected typeNativePopoverController: TypeNativePopoverController<Notification>;
 
   get #popoverContent() {
     return html`
@@ -139,5 +149,22 @@ export class Notification extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'alert';
+  }
+
+  async firstUpdated(props: PropertyValues<this>) {
+    super.firstUpdated(props);
+
+    if (!this.popoverInline) {
+      this.typeNativeAnchorController = new TypeNativeAnchorController<Notification>(this);
+      this.typeNativePopoverController = new TypeNativePopoverController<Notification>(this);
+    }
+  }
+
+  hidePopover(): void {
+    if (this.popoverInline) {
+      this.dispatchEvent(new CustomEvent('close'));
+    } else {
+      super.hidePopover();
+    }
   }
 }

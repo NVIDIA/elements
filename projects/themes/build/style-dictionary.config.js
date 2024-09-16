@@ -20,6 +20,10 @@ html[nve-theme], html[nve-theme], body[nve-theme], body[nve-theme], [nve-theme~=
   margin: 0;
 }
 
+body:has([nve-popover]:popover-open) {
+  overflow-x: hidden;
+}
+
 *:has([nve-popover]),
 *:has([nve-popover]) {
   contain: initial;

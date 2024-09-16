@@ -140,12 +140,11 @@ export class Drawer extends LitElement {
     super.connectedCallback();
     this.addEventListener('toggle', (e: ToggleEvent) => {
       if (this.inline) {
-        this.#inlineElement = this.#inlineElement ?? createGhostElement(this);
-
-        if (e.newState === 'open') {
-          this.after(this.#inlineElement);
-        } else {
+        if (this.#inlineElement && e.newState === 'closed') {
           this.#inlineElement.remove();
+        } else {
+          this.#inlineElement = createGhostElement(this);
+          this.after(this.#inlineElement);
         }
       }
     });

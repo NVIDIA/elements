@@ -195,7 +195,7 @@ describe('type-popover.controller explicit trigger', () => {
   });
 
   it('should trigger close event when associated trigger is activated', async () => {
-    element.hidden = false;
+    element.showPopover();
     await elementIsStable(element);
     const event = untilEvent(element, 'close');
     const closeBtn = element.shadowRoot.querySelector(Button.metadata.tag);
@@ -216,7 +216,7 @@ describe('type-popover.controller explicit trigger', () => {
   });
 
   it('should not trigger a close event when element is not dismissable', async () => {
-    element.hidden = false;
+    element.showPopover();
     element.popoverDismissible = false;
     await elementIsStable(element);
 
@@ -231,7 +231,7 @@ describe('type-popover.controller explicit trigger', () => {
   });
 
   it('should remove event listeners and not trigger events once removed from DOM but still in memory', async () => {
-    element.hidden = false;
+    element.showPopover();
     element.disconnectedCallback();
     await elementIsStable(element);
 
@@ -243,6 +243,28 @@ describe('type-popover.controller explicit trigger', () => {
     button.dispatchEvent(new PointerEvent('pointerdown', { clientX: 9000, clientY: 9000 }));
     await new Promise(r => setTimeout(() => r(null), 0));
     expect(events).toBe(0);
+  });
+
+  it('should show popover if hidden attribute is removed', async () => {
+    const open = untilEvent(element, 'open');
+    element.removeAttribute('hidden');
+    expect((await open).target).toBe(element);
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should hide popover if hidden attribute is added', async () => {
+    expect(element.hasAttribute('hidden')).toBe(true);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    const open = untilEvent(element, 'open');
+    element.removeAttribute('hidden');
+    expect((await open).target).toBe(element);
+    expect(element.matches(':popover-open')).toBe(true);
+
+    const close = untilEvent(element, 'close');
+    element.setAttribute('hidden', '');
+    expect((await close).target).toBe(element);
+    expect(element.matches(':popover-open')).toBe(false);
   });
 });
 
@@ -379,7 +401,7 @@ describe('type-popover.controller legacy behavior-trigger', () => {
   });
 
   it('should NOT trigger close if a close event fires from a slotted child element', async () => {
-    element.hidden = false;
+    element.showPopover();
     await elementIsStable(element);
     const event = untilEvent(element, 'close');
     element.querySelector('div').dispatchEvent(new Event('close', { bubbles: true }));
@@ -389,7 +411,7 @@ describe('type-popover.controller legacy behavior-trigger', () => {
   });
 
   it('should NOT trigger close if a cancel event fires from a slotted child element', async () => {
-    element.hidden = false;
+    element.showPopover();
     await elementIsStable(element);
     const event = untilEvent(element, 'cancel');
     element.querySelector('div').dispatchEvent(new Event('cancel', { bubbles: true }));

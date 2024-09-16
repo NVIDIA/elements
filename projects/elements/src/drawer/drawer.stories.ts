@@ -260,13 +260,40 @@ export const Inline = {
   <div nve-layout="column gap:md align:stretch">
     <nve-card style="height: 200px">
       <nve-card-content>
-        <nve-button popovertarget="drawer">open inline drawer</nve-button>
+        <nve-button popovertarget="drawer">inline drawer</nve-button>
       </nve-card-content>
     </nve-card>
     <nve-card style="height: 200px"></nve-card>
   </div>
 
   <nve-drawer id="drawer" closable modal inline position="right">
+    <nve-drawer-header>
+      <h3 nve-text="heading semibold sm">Drawer Header</h3>
+    </nve-drawer-header>
+    <nve-drawer-content>
+      <p nve-text="body">drawer content</p>
+    </nve-drawer-content>
+    <nve-drawer-footer>
+      <p nve-text="body">drawer footer</p>
+    </nve-drawer-footer>
+  </nve-drawer>
+</div>
+  `
+};
+
+export const InlineVisible = {
+  render: () => html`
+<div nve-layout="row align:horizontal-stretch">
+  <div nve-layout="column gap:md align:stretch">
+    <nve-card style="height: 200px">
+      <nve-card-content>
+        open inline drawer
+      </nve-card-content>
+    </nve-card>
+    <nve-card style="height: 200px"></nve-card>
+  </div>
+
+  <nve-drawer id="drawer" inline position="right">
     <nve-drawer-header>
       <h3 nve-text="heading semibold sm">Drawer Header</h3>
     </nve-drawer-header>
