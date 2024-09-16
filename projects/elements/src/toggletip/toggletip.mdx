@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Default, BehaviorTrigger, Closable, Interactive, AlertGroup } from './toggletip.stories';
+import { Default, Visual, Position, Alignment, Closable, Events, Content, AlertGroup } from './toggletip.stories';
 
 <Meta title="Elements/Toggletip/Documentation" />
 
@@ -14,31 +14,49 @@ import '@nvidia-elements/core/toggletip/define.js';
 ```
 
 ```html
-<nve-toggletip anchor="btn">hello there</nve-toggletip>
+<nve-toggletip anchor="btn">>hello there</nve-toggletip>
 <nve-button id="btn">button</nve-button>
 ```
 
 ## Standard
 
-<Canvas of={Default} story={{ inline: false, height: '400px' }} />
+<Story of={Visual} inline={false} height={130} />
 
-## Behavior Trigger
+<Canvas of={Default} story={{ inline: false, height: 130 }} />
 
-<element-api tag="nve-toggletip" type="property" value="behaviorTrigger"></element-api>
+## Position
 
-<Canvas of={BehaviorTrigger} story={{ inline: false, height: 200 }} />
+<element-api tag="nve-toggletip" type="property" value="position"></element-api>
 
-## Interactive
+<Canvas of={Position} story={{ inline: false, height: 280 }} />
 
-<Canvas of={Interactive} story={{ inline: false, height: '400px' }} />
+## Alignment
+
+<element-api tag="nve-toggletip" type="property" value="alignment"></element-api>
+
+<Canvas of={Alignment} story={{ inline: false, height: 350 }} />
+
+## Events
+
+<element-api tag="nve-toggletip" type="event" value="open"></element-api>
+
+<element-api tag="nve-toggletip" type="event" value="close"></element-api>
+
+<Canvas of={Events} story={{ inline: false, height: 280 }} />
+
+## Content
+
+<Canvas of={Content} story={{ inline: false, height: 400 }} />
 
 ## Closable
 
-<Canvas of={Closable} story={{ inline: false, height: '400px' }} />
+<element-api tag="nve-toggletip" type="property" value="closable"></element-api>
+
+<Canvas of={Closable} story={{ inline: false, height: 400 }} />
 
 ## Alert Group
 
-<Canvas of={AlertGroup} story={{ inline: false, height: '400px' }} />
+<Canvas of={AlertGroup} story={{ inline: false, height: 400 }} />
 
 <element-status tag="nve-toggletip"></element-status>
 

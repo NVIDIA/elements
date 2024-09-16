@@ -5,103 +5,101 @@ import '@nvidia-elements/core/drawer/define.js';
 
 export default {
   title: 'Elements/Notification/Examples',
-  component: 'nve-notification'
+  component: 'nve-notification',
+  parameters: {
+    layout: 'centered'
+  }
 };
 
 export const Default = {
   render: () => html`
-<nve-notification>
-  <h3 nve-text="label">Title</h3>
+<nve-notification id="notification" position="top" close-timeout="2000">
+  <h3 nve-text="label">Notification</h3>
   <p nve-text="body">some text content in a notification</p>
 </nve-notification>
-`,
-  args: { position: 'bottom', alignment: 'center', closable: true }
+<nve-button popovertarget="notification">button</nve-button>
+`
 };
 
-export const Content = {
+export const Visual = {
   render: () => html`
-<nve-notification closable>
-  <h3 nve-text="label">Title</h3>
+<nve-notification position="center">
+  <h3 nve-text="label">Notification</h3>
   <p nve-text="body">some text content in a notification</p>
 </nve-notification>
-  `
+`
 };
 
 export const ContentWrap = {
   render: () => html`
-<nve-notification closable>
-  <h3 nve-text="label">Title</h3>
+<nve-notification position="center">
+  <h3 nve-text="label">Notification</h3>
   <p nve-text="body" style="width: 230px">some text content in a notification with some really long text in it that just keeps going...</p>
 </nve-notification>
   `
 };
 
-export const Interactive = {
+export const Events = {
   render: () => html`
-<nve-notification hidden closable position="bottom" close-timeout="2000">
-  <h3 nve-text="label">notification</h3>
+<nve-notification id="notification" position="top" close-timeout="2000" closable>
+  <h3 nve-text="label">Notification</h3>
   <p nve-text="body">some text content in a notification</p>
 </nve-notification>
-<nve-button>show</nve-button>
-
+<nve-button popovertarget="notification">button</nve-button>
 <script type="module">
   const notification = document.querySelector('nve-notification');
-  const button = document.querySelector('nve-button');
-  notification.addEventListener('close', () => notification.hidden = true);
-  button.addEventListener('click', () => notification.hidden = false);
+  notification.addEventListener('close', () => console.log('close'));
+  notification.addEventListener('open', () => console.log('open'));
 </script>
 `
 };
 
-export const InteractiveStack = {
+export const InteractiveGroup = {
   render: () => html`
-<nve-notification-group position="bottom" alignment="end"></nve-notification-group>
+<nve-notification-group position="bottom" alignment="end" id="group"></nve-notification-group>
 <nve-button>generate</nve-button>
 
 <script type="module">
-  document.querySelector('nve-button').addEventListener('click', () => {
+  const button = document.querySelector('nve-button');
+  button.addEventListener('click', () => {
     const notification = document.createElement('nve-notification');
     notification.closable = true;
     notification.status = ['warning', 'danger', 'success', 'accent', undefined][Math.floor(Math.random() * 5)];
     notification.innerHTML = '<h3 nve-text="label">' + (notification.status ?? 'default') + '</h3><p nve-text="body">some text content in a notification</p>';
-    notification.closeTimeout = 2000 * (document.querySelectorAll('nve-notification').length + 1);
+    notification.closeTimeout = 10000 * (document.querySelectorAll('nve-notification').length + 1);
     notification.addEventListener('close', () => notification.remove(), { once: true });
+    notification.position = 'bottom';
+    notification.alignment = 'end';
+
     document.querySelector('nve-notification-group').prepend(notification);
+    // document.querySelector('body').prepend(notification);
+
+    setTimeout(() => notification.showPopover());
   });
 </script>
-`
-};
-
-export const BehaviorTrigger = {
-  render: () => html`
-<nve-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" close-timeout="2000">
-  <h3 nve-text="label">notification</h3>
-  <p nve-text="body">some text content in a notification</p>
-</nve-notification>
-<nve-button id="notification-btn">show</nve-button>
 `
 };
 
 export const Status = {
   render: () => html`
 <nve-notification-group position="center">
-  <nve-notification closable>
+  <nve-notification>
     <h3 nve-text="label">Default</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
-  <nve-notification status="accent" closable>
+  <nve-notification status="accent">
     <h3 nve-text="label">Accent</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
-  <nve-notification status="success" closable>
+  <nve-notification status="success">
     <h3 nve-text="label">Success</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
-  <nve-notification status="warning" closable>
+  <nve-notification status="warning">
     <h3 nve-text="label">Warning</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
-  <nve-notification status="danger" closable>
+  <nve-notification status="danger">
     <h3 nve-text="label">Danger</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
@@ -109,19 +107,141 @@ export const Status = {
   `
 };
 
+export const Alignment = {
+  render: () => html`
+<nve-notification position="top">
+  <h3 nve-text="label">Top</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="top" alignment="start">
+  <h3 nve-text="label">Top Start</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="top" alignment="end">
+  <h3 nve-text="label">Top End</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+
+<nve-notification position="right">
+  <h3 nve-text="label">Right</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="right" alignment="start">
+  <h3 nve-text="label">Right Start</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="right" alignment="end">
+  <h3 nve-text="label">Right End</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+
+<nve-notification position="bottom">
+  <h3 nve-text="label">Bottom</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="bottom" alignment="start">
+  <h3 nve-text="label">Bottom Start</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="bottom" alignment="end">
+  <h3 nve-text="label">Bottom End</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+
+<nve-notification position="left">
+  <h3 nve-text="label">Left</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="left" alignment="start">
+  <h3 nve-text="label">Left Start</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="left" alignment="end">
+  <h3 nve-text="label">Left End</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+  `
+};
+
 export const Position = {
   render: () => html`
+<nve-notification position="top">
+  <h3 nve-text="label">Position Top</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="right">
+  <h3 nve-text="label">Position Right</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="bottom">
+  <h3 nve-text="label">Position Bottom</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-notification position="left">
+  <h3 nve-text="label">Position Left</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+  `
+};
+
+export const PositionGroup = {
+  render: () => html`
+<nve-notification-group position="top">
+  <nve-notification closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">some text content in a notification</p>
+  </nve-notification>
+  <nve-notification closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">some text content in a notification</p>
+  </nve-notification>
+  <nve-notification closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">some text content in a notification</p>
+  </nve-notification>
+</nve-notification-group>
+
+<nve-notification-group position="right">
+  <nve-notification closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">some text content in a notification</p>
+  </nve-notification>
+  <nve-notification closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">some text content in a notification</p>
+  </nve-notification>
+  <nve-notification closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">some text content in a notification</p>
+  </nve-notification>
+</nve-notification-group>
+
 <nve-notification-group position="bottom">
   <nve-notification closable>
-    <h3 nve-text="label">Title</h3>
+    <h3 nve-text="label">Notification</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
   <nve-notification closable>
-    <h3 nve-text="label">Title</h3>
+    <h3 nve-text="label">Notification</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
   <nve-notification closable>
-    <h3 nve-text="label">Title</h3>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">some text content in a notification</p>
+  </nve-notification>
+</nve-notification-group>
+
+<nve-notification-group position="left">
+  <nve-notification closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">some text content in a notification</p>
+  </nve-notification>
+  <nve-notification closable>
+    <h3 nve-text="label">Notification</h3>
+    <p nve-text="body">some text content in a notification</p>
+  </nve-notification>
+  <nve-notification closable>
+    <h3 nve-text="label">Notification</h3>
     <p nve-text="body">some text content in a notification</p>
   </nve-notification>
 </nve-notification-group>
@@ -162,4 +282,14 @@ export const Drawer = {
   </nve-drawer-footer>
 </nve-drawer>
   `,
+};
+
+export const LegacyBehaviorTrigger = {
+  render: () => html`
+<nve-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" close-timeout="2000">
+  <h3 nve-text="label">notification</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-button id="notification-btn">show</nve-button>
+`
 };

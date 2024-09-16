@@ -1,6 +1,6 @@
 :host {
+  margin: auto;
   --gap: var(--nve-ref-space-sm);
-  display: contents;
 }
 
 [internal-host] {
@@ -10,10 +10,10 @@
   align-items: center;
 }
 
-dialog {
+[internal-host] {
   outline: 0;
 }
 
-dialog::backdrop {
+:host::backdrop {
   background: hsla(0, 0%, 0%, 0.5); /* --nve-sys-layer-backdrop-background (not available on top layer */
 }

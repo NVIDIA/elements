@@ -1,12 +1,13 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import {
-  animationSlide,
+  createGhostElement,
   I18nController,
-  popoverBaseStyles,
+  popoverStyles,
   PopoverType,
   Size,
-  TypePopoverController,
+  TypeNativeAnchorController,
+  TypeNativePopoverController,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -37,7 +38,7 @@ export class Drawer extends LitElement {
    * Sets the side position of the popover relative to the provided anchor element.
    * For drawer the anchor defaults to the document body.
    */
-  @property({ type: String, reflect: true }) position: 'left' | 'right' = 'left';
+  @property({ type: String, reflect: true }) position: 'left' | 'right' | 'bottom' = 'left';
 
   /**
    * Sets the maximum size of the drawer.
@@ -82,7 +83,7 @@ export class Drawer extends LitElement {
   /**
    * Determines if popover should be rendered and positioned.
    */
-  @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
+  @property({ type: Boolean, reflect: true }) hidden = false;
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
@@ -101,9 +102,11 @@ export class Drawer extends LitElement {
     return !!this.closable;
   }
 
-  #typePopoverController = new TypePopoverController<Drawer>(this);
+  protected typeNativeAnchorController = new TypeNativeAnchorController<Drawer>(this);
 
-  static styles = useStyles([popoverBaseStyles, styles]);
+  protected typeNativePopoverController = new TypeNativePopoverController<Drawer>(this);
+
+  static styles = useStyles([popoverStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-drawer',
@@ -116,9 +119,9 @@ export class Drawer extends LitElement {
 
   render() {
     return html`
-    <dialog ${animationSlide(this)}>
+    <div internal-host>
       <div class="header">
-        ${this.closable ? html`<nve-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" .ariaLabel=${this.i18n.close} container="flat"></nve-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close} container="flat"></nve-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
       <div class="content">
@@ -127,7 +130,24 @@ export class Drawer extends LitElement {
       <div>
         <slot name="footer"></slot>
       </div>
-    </dialog>
+    </div>
     `;
+  }
+
+  #inlineElement: HTMLElement;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('toggle', (e: ToggleEvent) => {
+      if (this.inline) {
+        this.#inlineElement = this.#inlineElement ?? createGhostElement(this);
+
+        if (e.newState === 'open') {
+          this.after(this.#inlineElement);
+        } else {
+          this.#inlineElement.remove();
+        }
+      }
+    });
   }
 }

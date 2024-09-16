@@ -11,24 +11,19 @@ import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/notification/define.js';
 
 export default {
-  title: 'Foundations/Popovers/Examples'
+  title: 'Foundations/Popovers/Examples',
+  parameters: {
+    layout: 'centered'
+  }
 }
 
-export const Trigger = {
+export const Anchor = {
   render: () => html`
-    <div nve-layout="row align:center" style="height: 250px">
-      <div nve-layout="row gap:xs">
-        <nve-button id="action-btn-1">button 1</nve-button>
-        <nve-button id="action-btn-2">button 2</nve-button>
-      </div>
-      <nve-tooltip anchor="action-btn-2" trigger="action-btn-1" hidden>tooltip 1</nve-tooltip>
-      <nve-tooltip anchor="action-btn-1" trigger="action-btn-2" hidden>tooltip 2</nve-tooltip>
-      <script type="module">
-        Array.from(document.querySelectorAll('nve-tooltip')).forEach(tooltip => {
-          tooltip.addEventListener('close', () => tooltip.hidden = true);
-          tooltip.addEventListener('open', () => tooltip.hidden = false);
-        });
-      </script>
+    <nve-tooltip id="popover-1" anchor="btn-2">tooltip 1</nve-tooltip>
+    <nve-tooltip id="popover-2" anchor="btn-1">tooltip 2</nve-tooltip>
+    <div nve-layout="row gap:xs">
+      <nve-button id="btn-1" popovertarget="popover-1">button 1</nve-button>
+      <nve-button id="btn-2" popovertarget="popover-2">button 2</nve-button>
     </div>
   `
 }
@@ -61,6 +56,44 @@ export const Nested = {
 }
 
 export const Interactive = {
+  render: () => html`
+    <div nve-layout="row align:center gap:xl" style="height: 300px">
+      <nve-tooltip id="tooltip">hello there</nve-tooltip>
+      <nve-button popovertarget="tooltip">tooltip</nve-button>
+
+      <nve-toast id="toast" close-timeout="1500">copied!</nve-toast>
+      <nve-button popovertarget="toast">toast</nve-button>
+
+      <nve-drawer id="drawer" closable modal>
+        <nve-drawer-header>
+          <h3 nve-text="heading semibold sm">Title</h3>
+        </nve-drawer-header>
+        <p nve-text="body">some text content in a drawer</p>
+      </nve-drawer>
+      <nve-button popovertarget="drawer">drawer</nve-button>
+
+      <nve-dropdown id="dropdown" closable>
+        <h3 nve-text="heading">Title</h3>
+        <p nve-text="body">some text content in a dropdown</p>
+      </nve-dropdown>
+      <nve-button popovertarget="dropdown">dropdown</nve-button>
+
+      <nve-dialog id="dialog" closable modal>
+        <h3 nve-text="heading">Title</h3>
+        <p nve-text="body">some text content in a closable dialog</p>
+      </nve-dialog>
+      <nve-button popovertarget="dialog">dialog</nve-button>
+
+      <nve-notification id="notification" closable position="bottom" alignment="end" close-timeout="2000">
+        <h3 nve-text="label">notification</h3>
+        <p nve-text="body">some text content in a notification</p>  
+      </nve-notification>
+      <nve-button popovertarget="notification">notification snackbar</nve-button>
+    </div>
+  `
+}
+
+export const LegacyInteractive = {
   render: () => html`
     <div nve-layout="row align:center gap:xl" style="height: 300px">
       <nve-tooltip trigger="tooltip-btn" behavior-trigger position="top" hidden>hello there</nve-tooltip>

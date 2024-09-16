@@ -1,9 +1,9 @@
 :host {
   --nve-sys-interaction-background: var(--nve-sys-interaction-background-300);
   --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-300);
-  --nve-sys-layer-popover-arrow-padding: 0;
-  --nve-sys-layer-popover-arrow-offset: 0;
-  --nve-sys-layer-popover-offset: 0;
+  --nve-sys-layer-popover-arrow-padding: 0px;
+  --nve-sys-layer-popover-arrow-offset: 0px;
+  --nve-sys-layer-popover-offset: 0px;
   --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --background: var(--nve-sys-layer-overlay-background);
   --color: var(--nve-sys-layer-overlay-color);
@@ -13,9 +13,11 @@
   --top: 0px;
   --min-height: calc(100% - var(--top));
   --max-width: 400px;
-  --width: 100%;
-  display: contents;
-  contain: none;
+  --width: 100vw;
+  height: 100%;
+  width: var(--width);
+  max-width: var(--max-width);
+  min-height: var(--min-height);
 }
 
 :host([size='sm']) {
@@ -26,48 +28,6 @@
   --max-width: 540px;
 }
 
-dialog {
-  border: var(--border);
-  background: var(--background);
-  color: var(--color);
-  box-shadow: var(--box-shadow);
-  max-width: var(--max-width);
-  min-height: var(--min-height);
-  width: var(--width);
-  top: var(--top) !important;
-  bottom: 0 !important;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  max-height: 100%;
-}
-
-:host([position='left']) dialog {
-  right: initial !important;
-  left: 0 !important;
-  border-left: 0;
-}
-
-:host([position='left'][hidden]) dialog {
-  right: initial !important;
-  left: -400px !important;
-}
-
-:host([position='right']) dialog {
-  left: initial !important;
-  right: 0 !important;
-  border-right: 0;
-}
-
-:host([position='right'][hidden]) dialog {
-  left: initial !important;
-  right: -400px !important;
-}
-
-:host([hidden]) {
-  display: block !important;
-  position: absolute;
-}
-
 :host([inline]) {
   --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
   --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);
@@ -76,23 +36,24 @@ dialog {
   --border: 0;
 }
 
-:host([inline])::after {
-  transition: width var(--nve-ref-animation-duration-200) var(--nve-ref-animation-easing-100);
-  height: 1px;
-  width: 0;
-  content: '';
+[internal-host] {
+  border: var(--border);
+  background: var(--background);
+  color: var(--color);
+  box-shadow: var(--box-shadow);
+  top: var(--top) !important;
+  bottom: 0 !important;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100%;
+  width: 100%;
 }
 
-:host([inline]:not([hidden]))::after {
-  display: block;
-  width: var(--max-width);
-}
-
-dialog::backdrop {
+:host::backdrop {
   background: hsla(0, 0%, 0%, 0.07); /* --nve-sys-layer-backdrop-background (not available on top layer */
 }
 
-:host([inline]) dialog::backdrop {
+:host([inline])::backdrop {
   background: transparent;
 }
 
@@ -115,4 +76,13 @@ nve-icon-button {
   top: 8px;
   right: 8px;
   z-index: 99;
+}
+
+:host([position='bottom']) {
+  min-width: 100%;
+  height: max-content;
+}
+
+:host([position='bottom']) [internal-host] {
+  height: min-content;
 }

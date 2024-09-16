@@ -1,5 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs';
-import { Interactive, Default, Content, Position, Wrap, Hint, HintCopy, Status, BehaviorTrigger, OpenDelay, Alignment, DynamicAnchorPosition } from './tooltip.stories';
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { Default, Visual, Content, Position, Events, Wrap, Hint, Status, OpenDelay, Alignment, DynamicTrigger, DynamicAnchorPosition } from './tooltip.stories';
 
 <Meta title="Elements/Tooltip/Documentation" />
 
@@ -14,92 +14,86 @@ import '@nvidia-elements/core/tooltip/define.js';
 ```
 
 ```html
-<nve-tooltip anchor="btn" position="bottom">hello there</nve-tooltip>
-<nve-button id="btn">button</nve-button>
+<nve-tooltip id="tooltip">tooltip</nve-tooltip>
+<nve-button popovertarget="tooltip">button</nve-button>
 ```
 
 ## Standard
 
-<Canvas of={Interactive} story={{ inline: false, height: 280 }} />
-<Canvas of={Default} story={{ inline: false, height: 280 }} />
+<Story of={Visual} inline={false} height={130} />
 
-## Content/Position
+<Canvas of={Default} story={{ inline: false, height: 130 }} />
 
-<Canvas of={Content} story={{ inline: false, height: 280 }} />
+## Position
+
+<element-api tag="nve-tooltip" type="property" value="position"></element-api>
+
 <Canvas of={Position} story={{ inline: false, height: 280 }} />
 
-## Wrap
+## Alignment
 
-<Canvas of={Wrap} story={{ inline: false, height: 300 }} />
+<element-api tag="nve-tooltip" type="property" value="alignment"></element-api>
 
-## Hint
+<Canvas of={Alignment} story={{ inline: false, height: 350 }} />
 
-<Canvas of={Hint} story={{ inline: false, height: 200 }} />
+## Events
 
-## Hint & Copy
+<element-api tag="nve-tooltip" type="event" value="open"></element-api>
 
-<Canvas of={HintCopy} story={{ inline: false, height: 200 }} />
+<element-api tag="nve-tooltip" type="event" value="close"></element-api>
 
-## Status
+<Canvas of={Events} story={{ inline: false, height: 280 }} />
 
-<Canvas of={Status} story={{ inline: false, height: 200 }} />
+## Dynamic Trigger
 
-## Behavior Trigger
+A popover can be recycled for multiple triggers.
 
-<element-api tag="nve-tooltip" type="property" value="behaviorTrigger"></element-api>
-
-<Canvas of={BehaviorTrigger} story={{ inline: false, height: 200 }} />
+<Canvas of={DynamicTrigger} story={{ inline: false, height: 300 }} />
 
 ## Open Delay
 
 Optionally, add a delay to tooltip opening, with `open-delay` attribute (set in milliseconds) -
 useful when displaying tooltips on datagrid items to avoid overwhelming the UX as the user hovers over rows.
 
-<Canvas of={OpenDelay} story={{ inline: false, height: 200 }} />
+<Canvas of={OpenDelay} story={{ inline: false, height: 300 }} />
 
-## Alignment
+## Wrap
 
-<Canvas of={Alignment} story={{ inline: false, height: 800 }} />
+<Canvas of={Wrap} story={{ inline: false, height: 280 }} />
+
+## Content
+
+<Canvas of={Content} story={{ inline: false, height: 280 }} />
+
+## Status
+
+<Canvas of={Status} story={{ inline: false, height: 300 }} />
+
+## Hint
+
+<Canvas of={Hint} story={{ inline: false, height: 200 }} />
 
 ## Dynamic Anchor Position
 
-<Canvas of={DynamicAnchorPosition} story={{ inline: false, height: 800 }} />
+A popover will follow its assigned anchor event when the anchor position is dynamically changed.
+
+<Canvas of={DynamicAnchorPosition} story={{ inline: false, height: 600 }} />
 
 ```typescript
 @customElement('dynamic-anchor-position-demo')
 class DynamicAnchorPositionDemo extends LitElement {
-  static styles = [css`
-    :host {
-      position: relative;
-      width: 97vw;
-      height: 97vh;
-      display: block;
-      left: 0;
-      transition: left 1s linear;
-      container-type: inline-size;
-    }
-
-    #anchor {
-      top: 50vh;
-      left: 50vw;
-      width: 1px;
-      height: 1px;
-      position: absolute;
-    }
-  `];
-
-  #badge: Ref<Badge> = createRef();
+  #anchor: Ref<HTMLElement> = createRef();
 
   render() {
     return html`
-      <div ${ref(this.#badge)} id="anchor"></div>
+      <div ${ref(this.#anchor)} id="anchor"></div>
       <nve-tooltip anchor="anchor">tooltip</nve-tooltip>
     `;
   }
 
   firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
-    this.addEventListener('mousemove', e => this.#badge.value.style.inset = `${e.clientY - 15}px auto auto ${e.clientX - 15}px`);
+    this.addEventListener('mousemove', e => this.#anchor.value.style.inset = `${e.clientY - 15}px auto auto ${e.clientX - 15}px`);
   }
 }
 ```

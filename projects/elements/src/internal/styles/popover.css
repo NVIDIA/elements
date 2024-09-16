@@ -1,0 +1,233 @@
+:host {
+  all: revert;
+  margin: calc(var(--nve-sys-layer-popover-offset) + calc(var(--nve-sys-layer-popover-arrow-offset) * 2));
+  border: 0;
+  padding: 0;
+  background: none;
+  position: absolute;
+  overflow: visible;
+  contain: initial;
+  width: max-content;
+  z-index: 99;
+  /* for fallback floating ui positioning */
+}
+
+:host {
+  opacity: 0;
+  transition:
+    opacity 0.3s,
+    transform 0.3s allow-discrete,
+    translate 0.3s allow-discrete,
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+}
+
+:host(:popover-open),
+:host(:not([popover]):not([hidden])),
+:host(:state(no-trigger):not([hidden])) {
+  opacity: 1;
+}
+
+:host(:popover-open),
+:host(:state(no-trigger):not([hidden])) {
+  display: block;
+}
+
+@starting-style {
+  :host(:popover-open),
+  :host(:not([popover]):not([hidden])) {
+    opacity: 0;
+  }
+}
+
+[internal-host] {
+  width: var(--width);
+  min-width: var(--min-width);
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  white-space: nowrap;
+  z-index: 9999;
+  border: 0;
+  margin: 0;
+  user-select: text;
+}
+
+@supports (not (position-area: bottom)) {
+  :host(:not([popover])) {
+    display: contents;
+  }
+}
+
+@supports (position-area: bottom) {
+  [internal-host] {
+    position: relative;
+  }
+
+  .arrow {
+    position-area: bottom;
+    translate: 0% -50%;
+  }
+
+  :host([position='top']) .arrow {
+    position-area: bottom;
+    translate: 0% -50%;
+  }
+
+  :host([position='top'][alignment='end']) .arrow {
+    position-area: bottom left;
+    translate: 150% -50%;
+  }
+
+  :host([position='top'][alignment='start']) .arrow {
+    position-area: bottom right;
+    translate: -150% -50%;
+  }
+
+  :host([position='bottom']) .arrow {
+    position-area: top;
+    translate: 0% 50%;
+  }
+
+  :host([position='bottom'][alignment='end']) .arrow {
+    position-area: top left;
+    translate: 150% 50%;
+  }
+
+  :host([position='bottom'][alignment='start']) .arrow {
+    position-area: top right;
+    translate: -150% 50%;
+  }
+
+  :host([position='left']) .arrow {
+    position-area: right;
+    translate: -50% 0%;
+  }
+
+  :host([position='left'][alignment='end']) .arrow {
+    position-area: right;
+    translate: -50% -60%;
+  }
+
+  :host([position='left'][alignment='start']) .arrow {
+    position-area: right;
+    translate: -50% 60%;
+  }
+
+  :host([position='right']) .arrow {
+    position-area: left;
+    translate: 50% 0%;
+  }
+
+  :host([position='right'][alignment='end']) .arrow {
+    position-area: left;
+    translate: 50% -60%;
+  }
+
+  :host([position='right'][alignment='start']) .arrow {
+    position-area: left;
+    translate: 50% 60%;
+  }
+
+  /** positioning */
+  :host {
+    --translate-x: 0;
+    --translate-y: 0;
+    translate: var(--translate-x) var(--translate-y);
+  }
+
+  :host([position='center']) {
+    position-area: center;
+  }
+
+  /** top */
+  :host([position='top']) {
+    position-area: top;
+  }
+
+  :host([position='top'][alignment='start']) {
+    position-area: top left;
+    --translate-x: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='top'][alignment='end']) {
+    position-area: top right;
+    --translate-x: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='top']:state(anchor-body)) {
+    --translate-y: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='top']) {
+    position-area: top;
+  }
+
+  :host([position='top'][alignment='start']) {
+    position-area: top left;
+    --translate-x: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='top'][alignment='end']) {
+    position-area: top right;
+    --translate-x: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  /** bottom */
+  :host([position='bottom']) {
+    position-area: bottom;
+  }
+
+  :host([position='bottom'][alignment='start']) {
+    position-area: bottom left;
+    --translate-x: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='bottom'][alignment='end']) {
+    position-area: bottom right;
+    --translate-x: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='bottom']:state(anchor-body)) {
+    --translate-y: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  /** left */
+  :host([position='left']) {
+    position-area: left;
+  }
+
+  :host([position='left'][alignment='end']) {
+    position-area: bottom left;
+    --translate-y: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='left'][alignment='start']) {
+    position-area: top left;
+    --translate-y: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='left']:state(anchor-body)) {
+    --translate-x: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  /** right */
+  :host([position='right']) {
+    position-area: right;
+  }
+
+  :host([position='right'][alignment='end']) {
+    position-area: bottom right;
+    --translate-y: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='right'][alignment='start']) {
+    position-area: top right;
+    --translate-y: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='right']:state(anchor-body)) {
+    --translate-x: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
+  }
+}
