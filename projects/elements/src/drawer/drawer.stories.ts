@@ -11,6 +11,23 @@ export default {
 
 export const Default = {
   render: () => html`
+<nve-drawer id="drawer" closable modal>
+  <nve-drawer-header>
+    <h3 nve-text="heading semibold sm">Drawer Header</h3>
+  </nve-drawer-header>
+  <nve-drawer-content>
+    <p nve-text="body">drawer content</p>
+  </nve-drawer-content>
+  <nve-drawer-footer>
+    <p nve-text="body">drawer footer</p>
+  </nve-drawer-footer>
+</nve-drawer>
+<nve-button popovertarget="drawer">button</nve-button>
+  `,
+};
+
+export const Visual = {
+  render: () => html`
 <nve-drawer closable>
   <nve-drawer-header>
     <h3 nve-text="heading semibold sm">Drawer Header</h3>
@@ -41,10 +58,9 @@ export const Scroll = {
   `,
 };
 
-export const Interactive = {
+export const Events = {
   render: () => html`
-<nve-button id="drawer-btn">open</nve-button>
-<nve-drawer closable modal hidden position="right">
+<nve-drawer id="drawer" closable modal position="right">
   <nve-drawer-header>
     <h3 nve-text="heading">Drawer Header</h3>
   </nve-drawer-header>
@@ -55,29 +71,12 @@ export const Interactive = {
     <p nve-text="body">drawer footer</p>
   </nve-drawer-footer>
 </nve-drawer>
+<nve-button popovertarget="drawer">open</nve-button>
 <script type="module">
   const drawer = document.querySelector('nve-drawer');
-  const btn = document.querySelector('#drawer-btn');
-  btn.addEventListener('click', () => drawer.hidden = false);
-  drawer.addEventListener('close', () => drawer.hidden = true);
+  drawer.addEventListener('open', () => console.log('open'));
+  drawer.addEventListener('close', () => console.log('close'));
 </script>
-  `
-};
-
-export const BehaviorTrigger = {
-  render: () => html`
-<nve-button id="drawer-btn">open</nve-button>
-<nve-drawer behavior-trigger trigger="drawer-btn" closable modal hidden position="right">
-  <nve-drawer-header>
-    <h3 nve-text="heading">Drawer Header</h3>
-  </nve-drawer-header>
-  <nve-drawer-content>
-    <p nve-text="body">drawer content</p>
-  </nve-drawer-content>
-  <nve-drawer-footer>
-    <p nve-text="body">drawer footer</p>
-  </nve-drawer-footer>
-</nve-drawer>
   `
 };
 
@@ -140,9 +139,57 @@ export const NonClosable = {
 export const Position = {
   inline: false,
   render: () => html`
-<div nve-layout="row align:center gap:md" style="height: 98vh">
+<div nve-layout="row align:center gap:md">
+  <nve-button popovertarget="popover-left">open left</nve-button>
+  <nve-button popovertarget="popover-right">open right</nve-button>
+  <nve-button popovertarget="popover-bottom">open bottom</nve-button>
+</div>
+
+<nve-drawer id="popover-left" closable modal position="left">
+  <nve-drawer-header>
+    <h3 nve-text="heading">Drawer Header Left</h3>
+  </nve-drawer-header>
+  <nve-drawer-content>
+    <p nve-text="body">drawer content</p>
+  </nve-drawer-content>
+  <nve-drawer-footer>
+    <p nve-text="body">drawer footer</p>
+  </nve-drawer-footer>
+</nve-drawer>
+
+<nve-drawer id="popover-right" closable modal position="right">
+  <nve-drawer-header>
+    <h3 nve-text="heading">Drawer Header Right</h3>
+  </nve-drawer-header>
+  <nve-drawer-content>
+    <p nve-text="body">some text content in a right closable drawer</p>
+  </nve-drawer-content>
+  <nve-drawer-footer>
+    <p nve-text="body">some text footer content</p>
+  </nve-drawer-footer>
+</nve-drawer>
+
+<nve-drawer id="popover-bottom" closable modal position="bottom">
+  <nve-drawer-header>
+    <h3 nve-text="heading">Drawer Header Bottom</h3>
+  </nve-drawer-header>
+  <nve-drawer-content>
+    <p nve-text="body" style="height: 200px">some text content in a bottom closable drawer</p>
+  </nve-drawer-content>
+  <nve-drawer-footer>
+    <p nve-text="body">some text footer content</p>
+  </nve-drawer-footer>
+</nve-drawer>
+  `
+};
+
+export const LegacyPosition = {
+  inline: false,
+  render: () => html`
+<div nve-layout="row align:center gap:md" style="height: 95vh">
   <nve-button class="drawer-btn-left">open left</nve-button>
   <nve-button class="drawer-btn-right">open right</nve-button>
+  <nve-button class="drawer-btn-bottom">open bottom</nve-button>
 </div>
 
 <nve-drawer closable modal hidden position="left">
@@ -168,6 +215,18 @@ export const Position = {
     <p nve-text="body">some text footer content</p>
   </nve-drawer-footer>
 </nve-drawer>
+
+<nve-drawer closable modal hidden position="bottom">
+  <nve-drawer-header>
+    <h3 nve-text="heading">Drawer Header Bottom</h3>
+  </nve-drawer-header>
+  <nve-drawer-content>
+    <p nve-text="body">some text content in a bottom closable drawer</p>
+  </nve-drawer-content>
+  <nve-drawer-footer>
+    <p nve-text="body">some text footer content</p>
+  </nve-drawer-footer>
+</nve-drawer>
 <script type="module">
   const leftDrawer = document.querySelector('nve-drawer[position="left"]');
   document.querySelector('.drawer-btn-left').addEventListener('click', () => {
@@ -181,8 +240,15 @@ export const Position = {
     rightDrawer.hidden = false;
   });
 
+  const bottomDrawer = document.querySelector('nve-drawer[position="bottom"]');
+  document.querySelector('.drawer-btn-bottom').addEventListener('click', () => {
+    bottomDrawer.position = 'bottom';
+    bottomDrawer.hidden = false;
+  });
+
   leftDrawer.addEventListener('close', () => leftDrawer.hidden = true);
   rightDrawer.addEventListener('close', () => rightDrawer.hidden = true);
+  bottomDrawer.addEventListener('close', () => bottomDrawer.hidden = true);
 </script>
   `
 };
@@ -190,8 +256,35 @@ export const Position = {
 
 export const Inline = {
   render: () => html`
-<div nve-layout="row align:stretch">
+<div nve-layout="row align:horizontal-stretch">
   <div nve-layout="column gap:md align:stretch">
+    <nve-card style="height: 200px">
+      <nve-card-content>
+        <nve-button popovertarget="drawer">open inline drawer</nve-button>
+      </nve-card-content>
+    </nve-card>
+    <nve-card style="height: 200px"></nve-card>
+  </div>
+
+  <nve-drawer id="drawer" closable modal inline position="right">
+    <nve-drawer-header>
+      <h3 nve-text="heading semibold sm">Drawer Header</h3>
+    </nve-drawer-header>
+    <nve-drawer-content>
+      <p nve-text="body">drawer content</p>
+    </nve-drawer-content>
+    <nve-drawer-footer>
+      <p nve-text="body">drawer footer</p>
+    </nve-drawer-footer>
+  </nve-drawer>
+</div>
+  `
+};
+
+export const LegacyInline = {
+  render: () => html`
+<div nve-layout="row align:stretch">
+  <div nve-layout="column gap:md align:horizontal-stretch">
     <nve-card style="height: 200px">
       <nve-card-content>
         <nve-button>open inline drawer</nve-button>
@@ -218,5 +311,22 @@ export const Inline = {
   open.addEventListener('click', () => drawer.hidden = false);
   drawer.addEventListener('close', () => drawer.hidden = true);
 </script>
+  `
+};
+
+export const LegacyBehaviorTrigger = {
+  render: () => html`
+<nve-button id="drawer-btn">open</nve-button>
+<nve-drawer behavior-trigger trigger="drawer-btn" closable modal hidden position="right">
+  <nve-drawer-header>
+    <h3 nve-text="heading">Drawer Header</h3>
+  </nve-drawer-header>
+  <nve-drawer-content>
+    <p nve-text="body">drawer content</p>
+  </nve-drawer-content>
+  <nve-drawer-footer>
+    <p nve-text="body">drawer footer</p>
+  </nve-drawer-footer>
+</nve-drawer>
   `
 };

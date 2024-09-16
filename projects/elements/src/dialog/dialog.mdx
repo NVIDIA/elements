@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Default, Content, Small, Medium, Large, NonClosable, Interactive, BehaviorTrigger, Position } from './dialog.stories';
+import { Default, Visual, Content, Small, Medium, Large, NonClosable, Position } from './dialog.stories';
 
 <Meta title="Elements/Dialog/Documentation" />
 
@@ -14,48 +14,45 @@ import '@nvidia-elements/core/dialog/define.js';
 ```
 
 ```html
-<nve-dialog>
-  hello there
+<nve-dialog id="dialog" modal closable>
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
+  <p nve-text="body">some text content in a closable dialog</p>
 </nve-dialog>
+
+<nve-button popovertarget="dialog">button</nve-button>
 ```
 
 ## Standard
 
-<Canvas of={Default} story={{ inline: false, height: '400px' }} />
+<Story of={Visual} inline={false} height={400} />
+
+<Canvas of={Default} story={{ inline: false, height: 400 }} />
 
 ## Content
 
-<Canvas of={Content} story={{ inline: false, height: '400px' }} />
+<Canvas of={Content} story={{ inline: false, height: 400 }} />
 
 ## Small
 
-<Canvas of={Small} story={{ inline: false, height: '400px' }} />
+<Canvas of={Small} story={{ inline: false, height: 400 }} />
 
 ## Medium
 
-<Canvas of={Medium} story={{ inline: false, height: '400px' }} />
+<Canvas of={Medium} story={{ inline: false, height: 400 }} />
 
 ## Large
 
-<Canvas of={Large} story={{ inline: false, height: '400px' }} />
+<Canvas of={Large} story={{ inline: false, height: 400 }} />
 
 ## Non-Closable
 
-<Canvas of={NonClosable} story={{ inline: false, height: '400px' }} />
-
-## Interactive
-
-<Canvas of={Interactive} story={{ inline: false, height: '400px' }} />
-
-## Behavior Trigger
-
-<element-api tag="nve-dialog" type="property" value="behaviorTrigger"></element-api>
-
-<Canvas of={BehaviorTrigger} story={{ inline: false, height: '400px' }} />
+<Canvas of={NonClosable} story={{ inline: false, height: 400 }} />
 
 ## Position
 
-<Canvas of={Position} story={{ inline: false, height: '400px' }} />
+<Canvas of={Position} story={{ inline: false, height: 400 }} />
 
 <element-status tag="nve-dialog"></element-status>
 

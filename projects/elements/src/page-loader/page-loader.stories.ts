@@ -8,20 +8,20 @@ export default {
 
 export const Default = {
   render: () => html`
-    <nve-page-loader></nve-page-loader>
+<nve-page-loader></nve-page-loader>
   `
 };
 
 export const Interactive = {
   inline: false,
   render: () => html`
-    <nve-button id="loader-btn">trigger loader</nve-button>
-    <nve-page-loader hidden></nve-page-loader>
+<nve-button id="loader-btn">trigger loader</nve-button>
+<nve-page-loader hidden></nve-page-loader>
 
-    <script type="module">
-      let loader = document.querySelector('nve-page-loader');
-      let btn = document.querySelector('#loader-btn');
-      btn.addEventListener('click', () => loader.hidden = false);
-    </script>
+<script type="module">
+  let loader = document.querySelector('nve-page-loader');
+  let btn = document.querySelector('#loader-btn');
+  btn.addEventListener('click', () => loader.hidden = false);
+</script>
   `
 };

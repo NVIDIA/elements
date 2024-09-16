@@ -15,21 +15,21 @@
   --min-width: fit-content;
   --gap: var(--nve-ref-space-sm);
   --_divider-padding: var(--padding);
+  box-shadow: var(--box-shadow);
 }
 
-dialog {
+[internal-host] {
   padding: var(--padding);
   border-radius: var(--border-radius);
   background: var(--background);
   color: var(--color);
-  box-shadow: var(--box-shadow);
   gap: var(--nve-ref-space-sm);
   width: var(--width);
   min-width: var(--min-width);
   outline: 0;
 }
 
-dialog::backdrop {
+[internal-host]::backdrop {
   background: transparent;
 }
 

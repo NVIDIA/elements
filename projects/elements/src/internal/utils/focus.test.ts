@@ -108,7 +108,7 @@ describe('onListboxActivate', () => {
     let active = false;
     select.disabled = true;
     onListboxActivate(select, () => (active = true));
-    select.dispatchEvent(new Event('pointerdown'));
+    select.dispatchEvent(new Event('pointerup'));
     expect(active).toBe(false);
   });
 

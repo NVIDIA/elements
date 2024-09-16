@@ -1,7 +1,7 @@
 import { ReactiveController, ReactiveElement } from 'lit';
 import { GlobalStateService } from '../services/global.service.js';
 import { LogService } from '../services/log.service.js';
-import { auditSlots, getInvalidSlotsWarning, getExcessiveInstanceLimitWarning } from './audit.utils.js';
+import { auditSlots, getInvalidSlotsWarning, getExcessiveInstanceLimitWarning } from '../utils/audit.js';
 
 export const excessiveInstanceLimit = 50;
 
@@ -88,7 +88,6 @@ export class AuditController<T extends Audit> implements ReactiveController {
     if (this.options.auditSlots) {
       const [invalidElements, validElements] = auditSlots(this.host);
       if (invalidElements.length) {
-        console.log(invalidElements);
         LogService.warn(getInvalidSlotsWarning(this.host.localName, validElements));
       }
     }
