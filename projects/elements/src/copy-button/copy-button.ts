@@ -47,11 +47,11 @@ export class CopyButton extends Button {
 
   render() {
     return html`
-     <div id="btn" internal-host interaction-state focus-within aria-hidden="true">
+     <div id="btn" internal-host interaction-state focus-within @click=${this.#copy}>
         <slot></slot>
-        <nve-icon name=${this.copied ? 'check' : 'copy'} .status=${this.copied ? 'success' : undefined} .size=${this.size} aria-hidden="true" @click=${this.#copy}></nve-icon>
+        <nve-icon name=${this.copied ? 'check' : 'copy'} .status=${this.copied ? 'success' : undefined} .size=${this.size} aria-hidden="true"></nve-icon>
      </div>
-     <nve-toast .hidden=${!this.showToast} @open=${this.#copy} @close=${this.#close} hidden status="success" anchor="btn" trigger="btn" position="top" close-timeout="1500">${this.i18n.copied}</nve-toast>
+     <nve-toast .hidden=${!this.showToast} @close=${this.#close} status="success" anchor="btn" trigger="btn" position="top" close-timeout="1500">${this.i18n.copied}</nve-toast>
      <nve-tooltip .hidden=${!this.showTooltip || this.showToast} @open=${() => (this.showTooltip = true)} @close=${() => (this.showTooltip = false)} anchor="btn" trigger="btn">${this.ariaLabel ?? this.i18n.copy}</nve-tooltip>
    `;
   }

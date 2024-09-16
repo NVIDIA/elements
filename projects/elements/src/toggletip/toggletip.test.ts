@@ -11,7 +11,8 @@ describe(Toggletip.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-toggletip>hello</nve-toggletip>
+      <nve-toggletip id="toggletip">toggletip</nve-toggletip>
+      <button popovertarget="toggletip">button</button>
     `);
     element = fixture.querySelector(Toggletip.metadata.tag);
     await elementIsStable(element);
@@ -66,9 +67,35 @@ describe(Toggletip.metadata.tag, () => {
     expect(element._internals.role).toBe('toggletip');
   });
 
+  it('should emit open event when showPopover is called', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await event).toBeDefined();
+  });
+
+  it('should emit close event when hidePopover is called', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await open).toBeDefined();
+
+    const close = untilEvent(element, 'close');
+    element.hidePopover();
+    expect(await close).toBeDefined();
+  });
+
   it('should emit close event when close button clicked', async () => {
     element.closable = true;
     await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await open).toBeDefined();
 
     const event = untilEvent(element, 'close');
     element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();

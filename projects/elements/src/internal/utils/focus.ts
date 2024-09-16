@@ -74,6 +74,10 @@ export function onListboxActivate(
 
   element.addEventListener('pointerdown', (e: any) => {
     e.preventDefault();
+  });
+
+  element.addEventListener('pointerup', (e: any) => {
+    e.preventDefault();
 
     if (!element.disabled) {
       fn(e);

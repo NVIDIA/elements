@@ -13,3 +13,7 @@ export function getExcessiveInstanceLimitWarning(count: number, localName: strin
 export function getInvalidSlotsWarning(localName: string, allowed: Array<string>) {
   return `Invalid slotted elements detected in ${localName}. Allowed: ${allowed.join(', ')}`;
 }
+
+export function getIdMatchNotFoundWarning(id: string) {
+  return `Provided id "${id}" was not found in DOM`;
+}

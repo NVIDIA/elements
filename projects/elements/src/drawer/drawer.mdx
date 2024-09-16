@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Default, Interactive, Small, Large, Scroll, NonClosable, Position, } from './drawer.stories';
+import { Default, Visual, Events, Small, Large, Scroll, NonClosable, Position, } from './drawer.stories';
 
 <Meta title="Elements/Drawer/Documentation" />
 
@@ -14,7 +14,7 @@ import '@nvidia-elements/core/drawer/define.js';
 ```
 
 ```html
-<nve-drawer closable>
+<nve-drawer id="drawer" closable modal>
   <nve-drawer-header>
     <h3 nve-text="heading semibold sm">drawer header</h3>
   </nve-drawer-header>
@@ -25,15 +25,15 @@ import '@nvidia-elements/core/drawer/define.js';
     <p nve-text="body">drawer footer</p>
   </nve-drawer-footer>
 </nve-drawer>
+
+<nve-button popovertarget="drawer">button</nve-button>
 ```
 
 ## Standard
 
-<Canvas of={Default} story={{ inline: false, height: '700px' }} />
+<Canvas of={Visual} story={{ inline: false, height: 700 }} />
 
-## Interactive
-
-<Canvas of={Interactive} story={{ inline: false, height: '700px' }} />
+<Canvas of={Default} story={{ inline: false, height: 700 }} />
 
 ## Size
 
@@ -41,31 +41,25 @@ import '@nvidia-elements/core/drawer/define.js';
 
 ### Small
 
-<Canvas of={Small} story={{ inline: false, height: '700px' }} />
+<Canvas of={Small} story={{ inline: false, height: 700 }} />
 
 ### Large
 
-<Canvas of={Large} story={{ inline: false, height: '700px' }} />
+<Canvas of={Large} story={{ inline: false, height: 700 }} />
 
 ## Scroll
 
-<Canvas of={Scroll} story={{ inline: false, height: '700px' }} />
-
-## Non-Closable
-
-<Canvas of={NonClosable} story={{ inline: false, height: '700px' }} />
+<Canvas of={Scroll} story={{ inline: false, height: 700 }} />
 
 ## Position
 
 <element-api tag="nve-drawer" type="property" value="position"></element-api>
 
-<Canvas of={Position} story={{ inline: false, height: '700px' }} />
+<Canvas of={Position} story={{ inline: false, height: 700 }} />
 
-## Behavior Trigger
+## Events
 
-<element-api tag="nve-drawer" type="property" value="behaviorTrigger"></element-api>
-
-<Canvas of={Interactive} story={{ inline: false, height: '700px' }} />
+<Canvas of={Events} story={{ inline: false, height: 700 }} />
 
 <element-status tag="nve-drawer"></element-status>
 

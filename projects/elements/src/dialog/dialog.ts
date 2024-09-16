@@ -1,16 +1,16 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import {
-  animationFade,
   audit,
   excessiveInstanceLimit,
   I18nController,
   PopoverAlign,
-  popoverBaseStyles,
+  popoverStyles,
   PopoverPosition,
   PopoverType,
   Size,
-  TypePopoverController,
+  TypeNativeAnchorController,
+  TypeNativePopoverController,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -48,7 +48,7 @@ export class Dialog extends LitElement {
    * Sets the alignment of the popover relative to the provided anchor element.
    * If an arrow exists the alginment will be relative to the arrow against the anchor.
    */
-  @property({ type: String, reflect: true }) alignment: PopoverAlign;
+  @property({ type: String, reflect: true }) alignment: PopoverAlign = 'center';
 
   /**
    * Sets the maximum size of the dialog.
@@ -86,7 +86,7 @@ export class Dialog extends LitElement {
   /**
    * Determines if popover should be rendered and positioned.
    */
-  @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
+  @property({ type: Boolean, reflect: true }) hidden = false;
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
@@ -105,9 +105,11 @@ export class Dialog extends LitElement {
     return !!this.closable;
   }
 
-  #typePopoverController = new TypePopoverController<Dialog>(this);
+  protected typeNativeAnchorController = new TypeNativeAnchorController<Dialog>(this);
 
-  static styles = useStyles([popoverBaseStyles, styles]);
+  protected typeNativePopoverController = new TypeNativePopoverController<Dialog>(this);
+
+  static styles = useStyles([popoverStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-dialog',
@@ -120,16 +122,16 @@ export class Dialog extends LitElement {
 
   render() {
     return html`
-    <dialog ${animationFade(this)}>
+    <div internal-host>
       <div class="header">
-        ${this.closable ? html`<nve-icon-button size="sm" @click=${() => this.#typePopoverController.close()} icon-name="cancel" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button size="sm" @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
       <div class="content">
         <slot></slot>
       </div>
       <slot name="footer"></slot>
-    </dialog>
+    </div>
     `;
   }
 }

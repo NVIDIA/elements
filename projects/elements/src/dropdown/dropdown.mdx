@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Default, Interactive, Content, Closable, RadioGroupInteractive, RadioGroup, CheckboxGroupInteractive, CheckboxGroup, Arrow, Position, BehaviorTrigger, HeaderFooter } from './dropdown.stories';
+import { Default, Visual, Events, Content, Closable, RadioGroupInteractive, RadioGroup, CheckboxGroupInteractive, CheckboxGroup, Position, Alignment } from './dropdown.stories';
 
 <Meta title="Elements/Dropdown/Documentation" />
 
@@ -14,47 +14,57 @@ import '@nvidia-elements/core/dropdown/define.js';
 ```
 
 ```html
-<nve-dropdown anchor="btn">hello there</nve-dropdown>
-<nve-button id="btn">button</nve-button>
+<nve-dropdown id="dropdown">dropdown content</nve-tooltip>
+<nve-button popovertarget="dropdown">button</nve-button>
 ```
 
 ## Standard
 
-<Canvas of={Interactive} story={{ inline: false, height: '400px' }} />
-<Canvas of={Default} story={{ inline: false, height: '400px' }} />
+<Story of={Visual} inline={false} height={250} />
 
-## Content/Closable
+<Canvas of={Default} story={{ inline: false, height: 250 }} />
 
-<Canvas of={Content} story={{ inline: false, height: '400px' }} />
-<Canvas of={Closable} story={{ inline: false, height: '400px' }} />
+## Events
 
-## Radio Group Pattern
+<element-api tag="nve-dropdown" type="event" value="open"></element-api>
 
-<Canvas of={RadioGroupInteractive} story={{ inline: false, height: '400px' }} />
-<Canvas of={RadioGroup} story={{ inline: false, height: '400px' }} />
+<element-api tag="nve-dropdown" type="event" value="close"></element-api>
 
-## Checkbox Group Pattern
+<Canvas of={Events} story={{ inline: false, height: 280 }} />
 
-<Canvas of={CheckboxGroupInteractive} story={{ inline: false, height: '400px' }} />
-<Canvas of={CheckboxGroup} story={{ inline: false, height: '400px' }} />
+## Closable
 
-## Arrow
+<element-api tag="nve-dropdown" type="property" value="closable"></element-api>
 
-<Canvas of={Arrow} story={{ inline: false, height: '400px' }} />
+<Canvas of={Closable} story={{ inline: false, height: 280 }} />
+
+## Content
+
+<Canvas of={Content} story={{ inline: false, height: 450 }} />
 
 ## Position
 
-<Canvas of={Position} story={{ inline: false, height: '600px' }} />
+<element-api tag="nve-dropdown" type="property" value="position"></element-api>
 
-## Behavior Trigger
+<Canvas of={Position} story={{ inline: false, height: 600 }} />
 
-<element-api tag="nve-dropdown" type="property" value="behaviorTrigger"></element-api>
+## Alignment
 
-<Canvas of={BehaviorTrigger} story={{ inline: false, height: '600px' }} />
+<element-api tag="nve-dropdown" type="property" value="alignment"></element-api>
 
-## Header Footer
+<Canvas of={Alignment} story={{ inline: false, height: 600 }} />
 
-<Canvas of ={HeaderFooter} story={{ inline: false, height: '400px' }}/>
+## Radio Group Pattern
+
+<Story of={RadioGroup} inline={false} height={520} />
+
+<Canvas of={RadioGroupInteractive} story={{ inline: false, height: 520 }} />
+
+## Checkbox Group Pattern
+
+<Story of={CheckboxGroup} inline={false} height={400} />
+
+<Canvas of={CheckboxGroupInteractive} story={{ inline: false, height: 520 }} />
 
 <element-status tag="nve-dropdown"></element-status>
 

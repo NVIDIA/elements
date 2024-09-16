@@ -68,12 +68,63 @@ describe(Drawer.metadata.tag, () => {
     expect(element.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
   });
 
+  it('should emit open event when showPopover is called', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await event).toBeDefined();
+  });
+
+  it('should emit close event when hidePopover is called', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await open).toBeDefined();
+
+    const close = untilEvent(element, 'close');
+    element.hidePopover();
+    expect(await close).toBeDefined();
+  });
+
   it('should emit close event when close button clicked', async () => {
     element.closable = true;
     await elementIsStable(element);
 
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await open).toBeDefined();
+
     const event = untilEvent(element, 'close');
     element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
+  });
+
+  it('should create a ghost element placeholder when open and in inline mode', async () => {
+    element.inline = true;
+    await elementIsStable(element);
+
+    const toggle = untilEvent(element, 'toggle');
+    element.showPopover();
+    expect(await toggle).toBeDefined();
+    expect(document.body.querySelector('[nve-ghost]') as HTMLElement).toBeTruthy();
+  });
+
+  it('should remove a ghost element placeholder when closed', async () => {
+    element.inline = true;
+    await elementIsStable(element);
+
+    const toggle = untilEvent(element, 'toggle');
+    element.showPopover();
+    expect(await toggle).toBeDefined();
+    expect(document.body.querySelector('[nve-ghost]') as HTMLElement).toBeTruthy();
+
+    const hide = untilEvent(element, 'toggle');
+    element.hidePopover();
+    expect(await hide).toBeDefined();
+    expect(document.body.querySelector('[nve-ghost]') as HTMLElement).toBe(null);
   });
 });

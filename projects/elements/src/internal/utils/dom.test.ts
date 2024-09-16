@@ -25,7 +25,8 @@ import {
   removeEmptySlotWhitespace,
   hasHorizontalScrollBar,
   getDisplayValue,
-  matchesElementName
+  matchesElementName,
+  createGhostElement
 } from '@nvidia-elements/core/internal';
 
 @customElement('dom-test-element')
@@ -534,5 +535,21 @@ describe('matchesElementName', () => {
 
     expect(matchesElementName({ localName: 'x-test' }, { metadata: { tag: 'nve-test' } })).toBe(false);
     expect(matchesElementName({ localName: 'x-test' }, { metadata: { tag: 'nve-test' } })).toBe(false);
+  });
+});
+
+describe('createGhostElement', () => {
+  it('should create placeholder ghost element for layout shift prevention', () => {
+    const element = document.createElement('div');
+    element.style.width = '500px';
+    element.style.height = '400px';
+    document.body.appendChild(element);
+
+    const ghost = createGhostElement(element);
+    expect(ghost.hasAttribute('nve-ghost')).toBe(true);
+    expect(ghost.style.maxWidth).toBe('500px');
+    expect(ghost.style.width).toBe('100%');
+    expect(ghost.style.height).toBe('1px');
+    element.remove();
   });
 });

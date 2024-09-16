@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
 import '@nvidia-elements/core/alert/define.js';
-import { Interactive, Trigger, Nested } from './popover.stories';
-import { Default as Tooltip, Interactive as TooltipInteractive, BehaviorTrigger as TooltipBehaviorTrigger } from '../../tooltip/tooltip.stories';
+import { Interactive, Anchor, Nested } from './popover.stories';
+import { Default as Tooltip, Events as TooltipEvents, Alignment as TooltipAlignment, } from '../../tooltip/tooltip.stories';
 
 <Meta title="Foundations/Popovers/Documentation" />
 
@@ -37,57 +37,47 @@ import '@nvidia-elements/core/notification/define.js';
 
 ## Usage
 
-Popover types are visible by default and can be controlled via the `hidden` attribute or by appending and removing from the DOM.
+Element popover types use the browser standard [Popover API](https://developer.chrome.com/blog/introducing-popover-api)
 
 ```html
-<nve-tooltip anchor="action-btn">hello there</nve-tooltip>
-<nve-button id="action-btn">button</nve-button>
+<nve-tooltip id="tooltip">hello there</nve-tooltip>
+<nve-button popovertarget="tooltip">button</nve-button>
 ```
 
-<Story of={Tooltip} inline={false} height={280} />
+<Story of={Tooltip} inline={false} height={150} />
 
 ## Events
 
-All popovers are stateless and do not auto close. Popovers provide a `close` event to notify when
-a user has interacted with the popover in a way that should dismiss the popover. Events do not mutate or alter
-the visiblity of the element. This ensures maximum flexiblity, allowing events to be used for running
-application specific logic before showing or hidding the element.
-
 Some popover types such as tooltip have complex interactions such as showing when hovered or focused.
 To simplify these interactions all popover type elements provide a `open` and `close` event to notify
-when the popover is attempting to close or open based ona user interaction.
+when the popover is attempting to close or open based on a user interaction. You can also listen
+to the native `toggle` or `beforetoggle` popover events.
 
-<Story of={TooltipInteractive} inline={false} height={280} />
+<Story of={TooltipEvents} inline={false} height={150} />
 
 ```html
-<nve-tooltip anchor="action-btn" trigger="action-btn" hidden>hello there</nve-tooltip>
-<nve-button id="action-btn">button</nve-button>
+<nve-tooltip id="tooltip">hello there</nve-tooltip>
+<nve-button popovertarget="tooltip">button</nve-button>
 <script type="module">
-  const tooltip = document.querySelector('nve-tooltip[anchor="action-btn"]');
-  tooltip.addEventListener('close', () => tooltip.hidden = true);
-  tooltip.addEventListener('open', () => tooltip.hidden = false);
+  const tooltip = document.querySelector('nve-tooltip');
+  tooltip.addEventListener('close', () => console.log('close'));
+  tooltip.addEventListener('open', () => console.log('open'));
 </script>
 ```
 
-## Behavior Trigger
+## Positioning
 
-If your use case does not need to control the popover state you can use the `behavior-trigger` property to
-enable automatic state management of the `hidden` state based on the trigger.
+All popovers follow the same `position` and `alignment` APIs. This allows popovers to be positioned relative to their anchor.
 
-<Story of={TooltipBehaviorTrigger} inline={false} height={280} />
-
-```html
-<nve-tooltip behavior-trigger trigger="action-btn" hidden>hello there</nve-tooltip>
-<nve-button id="action-btn">button</nve-button>
-```
+<Canvas of={TooltipAlignment} story={{ inline: false, height: 400 }} />
 
 ## Anchor
 
 The `anchor` property defines what element the popover should position itself relative to. For popovers
-like modals this defaults to the document body. The `trigger` property is an optional property that defines
-what element triggers the `open` event.
+like modals this defaults to the document body. The Anchor is optional as the
+popover will use the trigger to determine its anchor by default.
 
-<Canvas of={Trigger} story={{ inline: false, height: 270 }} />
+<Canvas of={Anchor} story={{ inline: false, height: 250 }} />
 
 For elements like tooltips this is often the same as anchor however the anchor and trigger are not always
 the same as UX patterns such as guided tours may have trigger elements that are not the anchored position.
@@ -95,4 +85,4 @@ Both `anchor` and `trigger` can take a string idref or a DOM Element reference.
 
 ## Nested
 
-<Canvas of={Nested} story={{ inline: false, height: 700 }} />
+<Story of={Nested} inline={false} height={700} />

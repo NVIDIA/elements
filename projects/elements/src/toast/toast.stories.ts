@@ -1,35 +1,28 @@
 import { html } from 'lit';
-import { spread } from '@nvidia-elements/core/internal';
-import { Toast } from '@nvidia-elements/core/toast';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/toast/define.js';
 
-
 export default {
   title: 'Elements/Toast/Examples',
   component: 'nve-toast',
-  argTypes: {
-    position: {
-      control: 'inline-radio',
-      options: ['top', 'right', 'bottom', 'left', 'center'],
-      defaultValue: 'top'
-    },
-    alignment: {
-      control: 'inline-radio',
-      options: ['start', 'center', 'end'],
-      defaultValue: 'center'
-    }
+  parameters: {
+    layout: 'centered'
   }
 };
 
-type ArgTypes = Toast;
-
 export const Default = {
-  render: (args: ArgTypes) => html`
-    <nve-toast ${spread(args)}>${args.textContent}</nve-toast>
-  `,
-  args: { textContent: 'hello there', position: 'center' }
+  render: () => html`
+<nve-toast id="toast" close-timeout="1500">hello there</nve-toast>
+<nve-button popovertarget="toast">button</nve-button>
+`
+};
+
+export const Visual = {
+  render: () => html`
+<nve-toast anchor="btn">hello there</nve-toast>
+<nve-button id="btn">button</nve-button>
+`
 };
 
 export const Status = {
@@ -62,28 +55,26 @@ export const Actions = {
   `
 };
 
-export const Interactive = {
+export const Events = {
   render: () => html`
-<div nve-layout="row align:center" style="height: 90vh">
-  <nve-button id="btn">copy to clipboard</nve-button>
-  <nve-toast anchor="btn" position="top" close-timeout="1500" hidden>copied!</nve-toast>
-</div>
+<nve-toast id="toast">hello there</nve-toast>
+<nve-button popovertarget="toast">button</nve-button>
 <script type="module">
-  const btn = document.querySelector('#btn');
   const toast = document.querySelector('nve-toast');
-  btn.addEventListener('click', () => toast.hidden = false);
-  toast.addEventListener('close', () => toast.hidden = true);
+  toast.addEventListener('close', () => console.log('close'));
+  toast.addEventListener('open', () => console.log('open'));
 </script>
-`
+  `
 };
 
-export const BehaviorTrigger = {
+export const Position = {
   render: () => html`
-<div nve-layout="row align:center" style="height: 90vh">
-  <nve-button id="btn">copy to clipboard</nve-button>
-  <nve-toast trigger="btn" behavior-trigger position="top" close-timeout="1500" hidden>copied!</nve-toast>
-</div>
-`
+<nve-toast anchor="btn" position="top">top</nve-toast>
+<nve-toast anchor="btn" position="right">right</nve-toast>
+<nve-toast anchor="btn" position="bottom">bottom</nve-toast>
+<nve-toast anchor="btn" position="left">left</nve-toast>
+<nve-button id="btn">button</nve-button>
+  `
 };
 
 export const Alignment = {
@@ -101,29 +92,14 @@ export const Alignment = {
 <nve-toast anchor="card" position="left" alignment="start">left start</nve-toast>
 <nve-toast anchor="card" position="left">left center</nve-toast>
 <nve-toast anchor="card" position="left" alignment="end">left end</nve-toast>
-
-<nve-toast position="center">center</nve-toast>
-<nve-toast position="top" alignment="start">top start</nve-toast>
-<nve-toast position="top">top center</nve-toast>
-<nve-toast position="top" alignment="end">top end</nve-toast>
-<nve-toast position="right" alignment="start">right start</nve-toast>
-<nve-toast position="right">right center</nve-toast>
-<nve-toast position="right" alignment="end">right end</nve-toast>
-<nve-toast position="bottom" alignment="start">bottom start</nve-toast>
-<nve-toast position="bottom">bottom center</nve-toast>
-<nve-toast position="bottom" alignment="end">bottom end</nve-toast>
-<nve-toast position="left" alignment="start">left start</nve-toast>
-<nve-toast position="left">left center</nve-toast>
-<nve-toast position="left" alignment="end">left end</nve-toast>
-<style>
-  #root-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-  }
-</style>
   `
+};
+
+export const LegacyBehaviorTrigger = {
+  render: () => html`
+<div nve-layout="row align:center" style="height: 90vh">
+  <nve-button id="btn">copy to clipboard</nve-button>
+  <nve-toast trigger="btn" behavior-trigger position="top" close-timeout="1500" hidden>copied!</nve-toast>
+</div>
+`
 };
