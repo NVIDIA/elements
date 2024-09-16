@@ -1,6 +1,5 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { state } from 'lit/decorators/state.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import {
   stateExpanded,
@@ -12,7 +11,7 @@ import {
   Container,
   generateId
 } from '@nvidia-elements/core/internal';
-import { IconButton } from '@nvidia-elements/core/icon-button/icon-button';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
 import accordionHeaderStyleSheet from './accordion-header.css?inline';
 import accordionContentStyleSheet from './accordion-content.css?inline';
@@ -146,8 +145,6 @@ export class Accordion extends LitElement implements ContainerElement {
    */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
-  @state() private hoverActive = false;
-
   get #hasAction(): boolean {
     return !!(this?.querySelectorAll ? Array.from(this?.querySelectorAll<HTMLSlotElement>('[slot="actions"]')) : [])
       .length;
@@ -170,8 +167,6 @@ export class Accordion extends LitElement implements ContainerElement {
       <div internal-host class=${this.#hasAction ? 'has-action' : ''}>
         <div id="header"
           @click=${e => this.#toggle(e.target)}
-          @mouseenter=${() => (this.hoverActive = true)}
-          @mouseleave=${() => (this.hoverActive = false)}
           .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
           .ariaControls=${'content'}
           >
@@ -183,7 +178,6 @@ export class Accordion extends LitElement implements ContainerElement {
             direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
             ?disabled=${this.disabled}
             ?pressed=${this.expanded}
-            ?selected=${!this.disabled && this.hoverActive}
             .expanded=${this.expanded}
             .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
             ></nve-icon-button>
