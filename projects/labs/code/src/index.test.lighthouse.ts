@@ -3,7 +3,7 @@ import { lighthouseRunner } from '@internals/vite';
 
 describe('lighthouse report', () => {
   test('@nvidia-elements/code JS Bundles should remain within compressed bundle limits', async () => {
-    const report = await lighthouseRunner.getReport('nve-codeblock', /* html */`
+    const report = await lighthouseRunner.getReport('bundles', /* html */`
       <script type="module">
       import('@nvidia-elements/code/codeblock/languages/css.js');
       import('@nvidia-elements/code/codeblock/languages/go.js');
@@ -19,7 +19,7 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(38.5);
+    expect(report.payload.javascript.kb).toBeLessThan(37.8);
     expect(report.payload.javascript.requests['define.js'].kb).toBeLessThan(10);
     expect(report.payload.javascript.requests['core.js'].kb).toBeLessThan(9);
     expect(report.payload.javascript.requests['css.js'].kb).toBeLessThan(4);

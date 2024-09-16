@@ -547,8 +547,8 @@ describe('createGhostElement', () => {
 
     const ghost = createGhostElement(element);
     expect(ghost.hasAttribute('nve-ghost')).toBe(true);
+    expect(ghost.style.minWidth).toBe('500px');
     expect(ghost.style.maxWidth).toBe('500px');
-    expect(ghost.style.width).toBe('100%');
     expect(ghost.style.height).toBe('1px');
     element.remove();
   });

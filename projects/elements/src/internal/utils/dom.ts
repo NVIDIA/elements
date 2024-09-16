@@ -287,7 +287,7 @@ export function createGhostElement(sourceElement: HTMLElement) {
   const ghost = globalThis.document.createElement('div');
   const { width } = sourceElement.getBoundingClientRect();
   ghost.setAttribute('nve-ghost', '');
-  ghost.style.width = '100%';
+  ghost.style.minWidth = `${width}px`;
   ghost.style.maxWidth = `${width}px`;
   ghost.style.height = '1px';
   return ghost;

@@ -1,10 +1,13 @@
 :host {
+  --animation-duration: var(--nve-ref-animation-duration-200);
+  --_width: 0px;
+  --_height: 0px;
   all: revert;
   margin: calc(var(--nve-sys-layer-popover-offset) + calc(var(--nve-sys-layer-popover-arrow-offset) * 2));
   border: 0;
   padding: 0;
   background: none;
-  position: absolute;
+  position: fixed;
   overflow: visible;
   contain: initial;
   width: max-content;
@@ -15,11 +18,11 @@
 :host {
   opacity: 0;
   transition:
-    opacity 0.3s,
-    transform 0.3s allow-discrete,
-    translate 0.3s allow-discrete,
-    overlay 0.3s allow-discrete,
-    display 0.3s allow-discrete;
+    opacity var(--animation-duration),
+    transform var(--animation-duration) allow-discrete,
+    translate var(--animation-duration) allow-discrete,
+    overlay var(--animation-duration) allow-discrete,
+    display var(--animation-duration) allow-discrete;
 }
 
 :host(:popover-open),
@@ -40,6 +43,14 @@
   }
 }
 
+:host::backdrop {
+  opacity: 0;
+}
+
+:host(:popover-open)::backdrop {
+  opacity: 1;
+}
+
 [internal-host] {
   width: var(--width);
   min-width: var(--min-width);
@@ -55,6 +66,10 @@
 }
 
 @supports (not (position-area: bottom)) {
+  :host([popover]) {
+    margin: 0;
+  }
+
   :host(:not([popover])) {
     display: contents;
   }
@@ -131,14 +146,33 @@
   }
 
   /** positioning */
-  :host {
-    --translate-x: 0;
-    --translate-y: 0;
-    translate: var(--translate-x) var(--translate-y);
-  }
-
   :host([position='center']) {
     position-area: center;
+  }
+
+  /* offset calculation by anchor controller, can't use transforms with anchoring https://github.com/w3c/csswg-drafts/issues/8584 */
+  :host([position='left']:state(anchor-body)),
+  :host([position='top'][alignment='start']),
+  :host([position='bottom'][alignment='start']) {
+    margin-right: calc(-1 * calc(var(--_width) + var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='right']:state(anchor-body)),
+  :host([position='top'][alignment='end']),
+  :host([position='bottom'][alignment='end']) {
+    margin-left: calc(-1 * calc(var(--_width) + var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='top']:state(anchor-body)),
+  :host([position='left'][alignment='start']),
+  :host([position='right'][alignment='start']) {
+    margin-bottom: calc(-1 * calc(var(--_height) + var(--nve-sys-layer-popover-offset)));
+  }
+
+  :host([position='bottom']:state(anchor-body)),
+  :host([position='left'][alignment='end']),
+  :host([position='right'][alignment='end']) {
+    margin-top: calc(-1 * calc(var(--_height) + var(--nve-sys-layer-popover-offset)));
   }
 
   /** top */
@@ -148,16 +182,10 @@
 
   :host([position='top'][alignment='start']) {
     position-area: top left;
-    --translate-x: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
   }
 
   :host([position='top'][alignment='end']) {
     position-area: top right;
-    --translate-x: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
-  }
-
-  :host([position='top']:state(anchor-body)) {
-    --translate-y: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
   }
 
   :host([position='top']) {
@@ -166,12 +194,10 @@
 
   :host([position='top'][alignment='start']) {
     position-area: top left;
-    --translate-x: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
   }
 
   :host([position='top'][alignment='end']) {
     position-area: top right;
-    --translate-x: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
   }
 
   /** bottom */
@@ -181,16 +207,10 @@
 
   :host([position='bottom'][alignment='start']) {
     position-area: bottom left;
-    --translate-x: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
   }
 
   :host([position='bottom'][alignment='end']) {
     position-area: bottom right;
-    --translate-x: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
-  }
-
-  :host([position='bottom']:state(anchor-body)) {
-    --translate-y: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
   }
 
   /** left */
@@ -200,16 +220,10 @@
 
   :host([position='left'][alignment='end']) {
     position-area: bottom left;
-    --translate-y: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
   }
 
   :host([position='left'][alignment='start']) {
     position-area: top left;
-    --translate-y: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
-  }
-
-  :host([position='left']:state(anchor-body)) {
-    --translate-x: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
   }
 
   /** right */
@@ -219,15 +233,18 @@
 
   :host([position='right'][alignment='end']) {
     position-area: bottom right;
-    --translate-y: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
   }
 
   :host([position='right'][alignment='start']) {
     position-area: top right;
-    --translate-y: calc(100% + calc(2 * var(--nve-sys-layer-popover-offset)));
   }
+}
 
-  :host([position='right']:state(anchor-body)) {
-    --translate-x: calc(-100% + calc(-2 * var(--nve-sys-layer-popover-offset)));
-  }
+/* drawer - style here due to position polyfill for pre chrome 130 */
+:host([inline][position='left']) {
+  inset-area: span-bottom left !important;
+}
+
+:host([inline][position='right']) {
+  inset-area: span-bottom right !important;
 }

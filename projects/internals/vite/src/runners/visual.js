@@ -79,6 +79,7 @@ export class VisualRunner {
     await this.#page.goto(`http://localhost:${this.#port}/${name}/index.html`);
     await this.#page.evaluate(async () => {
       await document.fonts.ready;
+      await new Promise(r => requestAnimationFrame(r));
     });
 
     if (options.network) {
