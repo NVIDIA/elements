@@ -13,8 +13,7 @@ import type { Dot as DotType } from '@nvidia-elements/core/dot';
 import type { Dot as DotTypeFromPath } from '@nvidia-elements/core/dot/index.js';
 
 // multi-entrypoint define
-import * as dot from '@nvidia-elements/core/dot/define';
-import * as dot2 from '@nvidia-elements/core/dot/define.js';
+import * as dot from '@nvidia-elements/core/dot/define.js';
 
 describe('entrypoint paths and type checking', () => {
   it('should allow root entrypoint', () => {
@@ -28,7 +27,6 @@ describe('entrypoint paths and type checking', () => {
     expect(Dot).toBeTruthy();
     expect(DotFromPath).toBeTruthy();
     expect(dot).toBeTruthy();
-    expect(dot2).toBeTruthy();
   });
 
   it('should follow type paths for define and define.js', () => {

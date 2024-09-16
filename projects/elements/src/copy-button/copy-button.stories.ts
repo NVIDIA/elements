@@ -10,7 +10,7 @@ export default {
 
 export const Default = { 
  render: () => html`
-   <nve-copy-button value="hello" behavior-copy></nve-copy-button>
+   <nve-copy-button value="hello" aria-label="copy value" behavior-copy></nve-copy-button>
  `
 }
 

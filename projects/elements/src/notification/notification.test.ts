@@ -120,4 +120,14 @@ describe(Notification.metadata.tag, () => {
     element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
+
+  it('should emit close event when closed and inline mode', async () => {
+    element.closable = true;
+    element.container = 'flat';
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'close');
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
+    expect(await event).toBeDefined();
+  });
 });

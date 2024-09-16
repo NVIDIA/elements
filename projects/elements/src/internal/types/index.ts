@@ -70,7 +70,7 @@ export type TaskStatus =
  * - `manual` no light dismiss, no auto focus
  * - `hint` no light dismiss, no auto focus, open/close on hover/focus
  */
-export type PopoverType = 'auto' | 'manual' | 'hint';
+export type PopoverType = 'auto' | 'manual' | 'hint' | 'inline';
 
 /** Determines the popover alignment relative to its assigned anchor */
 export type PopoverAlign = 'start' | 'end' | 'center';
