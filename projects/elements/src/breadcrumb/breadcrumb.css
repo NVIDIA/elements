@@ -25,7 +25,8 @@ li {
   height: var(--breadcrumb-height);
 }
 
-::slotted(mlv-button) ::slotted(nve-button) {
+::slotted(mlv-button),
+::slotted(nve-button) {
   --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
   --font-size: var(--item-text-size);
   --color: var(--item-color);

@@ -8,7 +8,7 @@ import {
   useStyles,
   attachInternals
 } from '@nvidia-elements/core/internal';
-import { IconButton } from '@nvidia-elements/core/icon-button/icon-button';
+import { IconButton } from '@nvidia-elements/core/icon-button';
 import panelStyleSheet from './panel.css?inline';
 import panelHeaderStyleSheet from './panel-header.css?inline';
 import panelContentStyleSheet from './panel-content.css?inline';

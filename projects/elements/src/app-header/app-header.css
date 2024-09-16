@@ -70,12 +70,14 @@ slot[name='nav-actions'] {
   --font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-::slotted(nve-icon-button[slot='nav-items'][selected]) ::slotted(mlv-icon-button[slot='nav-items'][selected]) {
+::slotted(nve-icon-button[slot='nav-items'][selected]),
+::slotted(mlv-icon-button[slot='nav-items'][selected]) {
   --color: var(--nve-sys-text-emphasis-color);
 }
 
 ::slotted(nve-button[slot='nav-items']:hover),
-::slotted(nve-button[slot='nav-items']:focus) ::slotted(mlv-button[slot='nav-items']:hover),
+::slotted(nve-button[slot='nav-items']:focus),
+::slotted(mlv-button[slot='nav-items']:hover),
 ::slotted(mlv-button[slot='nav-items']:focus) {
   --text-decoration: underline;
 }

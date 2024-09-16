@@ -61,3 +61,7 @@
 :host([disabled]) ::slotted(nve-accordion-header) {
   --cursor: not-allowed;
 }
+
+#header:hover nve-icon-button {
+  --color: var(--nve-sys-text-emphasis-color);
+}
