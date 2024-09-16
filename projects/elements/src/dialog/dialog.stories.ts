@@ -1,6 +1,4 @@
 import { html } from 'lit';
-import { spread } from '@nvidia-elements/core/internal';
-import { Dialog } from '@nvidia-elements/core/dialog';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/dialog/define.js';
@@ -9,67 +7,35 @@ import '@nvidia-elements/core/accordion/define.js';
 export default {
   title: 'Elements/Dialog/Examples',
   component: 'nve-dialog',
-  inline: false,
-  argTypes: {
-    position: {
-      control: 'inline-radio',
-      options: ['top', 'right', 'bottom', 'left'],
-      defaultValue: 'center'
-    },
-    alignment: {
-      control: 'inline-radio',
-      options: ['start', 'center', 'end'],
-      defaultValue: 'center'
-    }
+  parameters: {
+    layout: 'centered'
   }
 };
 
-type ArgTypes = Dialog;
-
 export const Default = {
-  inline: false,
-  render: (args: ArgTypes) => html`
-    <nve-dialog ${spread(args)} closable>
-      <h3 nve-text="heading semibold sm">Title</h3>
-      <p nve-text="body">some text content in a closable dialog</p>
-    </nve-dialog>
-  `,
-  args: { textContent: 'hello there' }
-};
-
-export const Interactive = {
-  inline: false,
   render: () => html`
-<nve-button id="dialog-btn">open</nve-button>
-<nve-dialog trigger="dialog-btn" closable modal hidden>
-  <h3 nve-text="heading">Title</h3>
+<nve-dialog id="dialog" modal closable>
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
   <p nve-text="body">some text content in a closable dialog</p>
 </nve-dialog>
-<script type="module">
-  const dialog = document.querySelector('nve-dialog');
-  dialog.addEventListener('open', () => dialog.hidden = false);
-  dialog.addEventListener('close', () => dialog.hidden = true);
-</script>
-  `
+<nve-button popovertarget="dialog">button</nve-button>
+`
 };
 
-export const BehaviorTrigger = {
-  inline: false,
+export const Visual = {
   render: () => html`
-<nve-button id="dialog-btn">open</nve-button>
-<nve-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
-  <h3 nve-text="heading">Title</h3>
+<nve-dialog closable>
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
   <p nve-text="body">some text content in a closable dialog</p>
-
-  <nve-accordion behavior-expand>
-    <nve-accordion-header>
-      <div slot="title">Heading</div>
-    </nve-accordion-header>
-
-    <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
-  </nve-accordion>
+  <nve-dialog-footer>
+    <nve-button>button</nve-button>
+  </nve-dialog-footer>
 </nve-dialog>
-  `
+`
 };
 
 export const Content = {
@@ -162,6 +128,25 @@ export const Position = {
 <nve-dialog size="sm" position="bottom" alignment="end" closable>
   <h3 nve-text="heading">Position</h3>
   <p nve-text="body">some text content in a small dialog</p>
+</nve-dialog>
+  `
+};
+
+export const LegacyBehaviorTrigger = {
+  inline: false,
+  render: () => html`
+<nve-button id="dialog-btn">open</nve-button>
+<nve-dialog trigger="dialog-btn" behavior-trigger closable modal hidden>
+  <h3 nve-text="heading">Title</h3>
+  <p nve-text="body">some text content in a closable dialog</p>
+
+  <nve-accordion behavior-expand>
+    <nve-accordion-header>
+      <div slot="title">Heading</div>
+    </nve-accordion-header>
+
+    <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+  </nve-accordion>
 </nve-dialog>
   `
 };

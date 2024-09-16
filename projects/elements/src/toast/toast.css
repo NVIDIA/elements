@@ -1,8 +1,9 @@
 :host {
-  --nve-sys-layer-popover-arrow-offset: var(--nve-ref-size-100);
+  --nve-sys-layer-popover-arrow-padding: 0px;
+  --nve-sys-layer-popover-arrow-offset: 0px;
+  --nve-sys-layer-popover-offset: var(--nve-ref-size-200);
   --nve-sys-interaction-color: var(--color);
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-400);
-  --nve-sys-layer-popover-offset: var(--nve-ref-space-md);
   --background: var(--nve-sys-layer-popover-background);
   --border-radius: var(--nve-ref-border-radius-md);
   --color: var(--nve-sys-layer-popover-color);
@@ -13,7 +14,7 @@
   --_gap: var(--gap);
 }
 
-dialog {
+[internal-host] {
   background: var(--background);
   font-size: var(--font-size);
   font-weight: var(--font-weight);
@@ -27,7 +28,7 @@ dialog {
   justify-content: center;
 }
 
-dialog:has(nve-icon-button) {
+[internal-host]:has(nve-icon-button) {
   padding-right: var(--nve-ref-size-800);
 }
 

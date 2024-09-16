@@ -1,5 +1,7 @@
 :host {
-  --nve-sys-layer-popover-offset: var(--nve-ref-space-xxl);
+  --nve-sys-layer-popover-arrow-padding: 0px;
+  --nve-sys-layer-popover-arrow-offset: 0px;
+  --nve-sys-layer-popover-offset: var(--nve-ref-space-xl);
   --box-shadow: var(--nve-ref-shadow-200);
   position: fixed;
   top: 0;
@@ -11,4 +13,11 @@
   display: flex;
   flex-direction: column-reverse;
   gap: var(--nve-ref-space-sm);
+}
+
+::slotted(nve-notification) {
+  position: relative;
+  translate: none;
+  margin: 0;
+  position-anchor: initial !important;
 }

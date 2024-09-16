@@ -202,7 +202,7 @@ export class Combobox extends Control implements ContainerElement {
           this.#setInputValue(this.#items[0].value);
           this.#setSelectValue(this.#options.find(o => (o.label ? o.label : o.value) === this.#items[0].value));
         }
-        this.#dropdown.close();
+        this.#dropdown.hidePopover();
       }
     });
   }
@@ -216,12 +216,12 @@ export class Combobox extends Control implements ContainerElement {
     const dropdown = this.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     await dropdown.updateComplete;
     const options = {
-      element: dropdown?.shadowRoot.querySelector('dialog'),
+      element: dropdown?.shadowRoot.querySelector<HTMLElement>('[internal-host]'),
       focusElement: this.input
     };
     createLightDismiss(options, () => {
       if (!this.#dropdown.hidden) {
-        this.#dropdown.close();
+        this.#dropdown.hidePopover();
       }
     });
   }
@@ -246,7 +246,7 @@ export class Combobox extends Control implements ContainerElement {
   #selectValue(option: { selected?: boolean; label?: string; value?: string }) {
     if (!this.#select?.multiple) {
       this.#setInputValue(getDisplayValue(option));
-      this.#dropdown.close();
+      this.#dropdown.hidePopover();
       focusElementTimeout(this.input);
     }
 
@@ -283,7 +283,7 @@ export class Combobox extends Control implements ContainerElement {
     if (!this.input.disabled && this.#dropdown.hidden) {
       this.#updateMenuItems();
       this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
-      this.#dropdown.open();
+      this.#dropdown.showPopover();
     }
   }
 

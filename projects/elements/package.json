@@ -769,7 +769,6 @@
   },
   "dependencies": {
     "@floating-ui/dom": "1.6.1",
-    "@lit-labs/motion": "catalog:",
     "composed-offset-position": "^0.0.4",
     "lit": "catalog:",
     "lit-html": "catalog:"

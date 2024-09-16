@@ -3,17 +3,17 @@ import { property } from 'lit/decorators/property.js';
 import { Icon } from '@nvidia-elements/core/icon';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import {
-  animationFade,
   attachInternals,
   PopoverAlign,
-  popoverBaseStyles,
+  popoverStyles,
   PopoverType,
   SupportStatus,
   statusIcons,
-  TypePopoverController,
   useStyles,
   I18nController,
-  PopoverPosition
+  PopoverPosition,
+  TypeNativePopoverController,
+  TypeNativeAnchorController
 } from '@nvidia-elements/core/internal';
 import styles from './notification.css?inline';
 
@@ -77,7 +77,7 @@ export class Notification extends LitElement {
   /**
    * Determines if popover should be rendered and positioned.
    */
-  @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
+  @property({ type: Boolean, reflect: true }) hidden = false;
 
   /**
    * Determines the visual status of the notification.
@@ -96,7 +96,9 @@ export class Notification extends LitElement {
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
-  protected typePopoverController = new TypePopoverController<Notification>(this);
+  protected typeNativeAnchorController = new TypeNativeAnchorController<Notification>(this);
+
+  protected typeNativePopoverController = new TypeNativePopoverController<Notification>(this);
 
   /** @private */
   get popoverType(): PopoverType {
@@ -109,11 +111,11 @@ export class Notification extends LitElement {
   get #popoverContent() {
     return html`
     <nve-icon .name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information} part="status-icon"></nve-icon>
-    ${this.closable ? html`<nve-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" size="sm" container="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+    ${this.closable ? html`<nve-icon-button @click=${this.hidePopover} icon-name="cancel" size="sm" container="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
     <slot></slot>`;
   }
 
-  static styles = useStyles([popoverBaseStyles, styles]);
+  static styles = useStyles([popoverStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-notification',
@@ -127,11 +129,9 @@ export class Notification extends LitElement {
 
   render() {
     return html`
-    ${
-      this.position
-        ? html`<dialog class="popover" ${animationFade(this, { onComplete: () => this.#complete() })}>${this.#popoverContent}</dialog>`
-        : html`<div class="popover" ${animationFade(this, { onComplete: () => this.#complete() })}>${this.#popoverContent}</div>`
-    }
+    <div internal-host>
+      ${this.#popoverContent}
+    </div>
     `;
   }
 
@@ -139,20 +139,5 @@ export class Notification extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'alert';
-  }
-
-  async remove() {
-    this.shadowRoot.addEventListener(
-      'nve-animation-complete',
-      () => {
-        super.remove();
-      },
-      { once: true }
-    );
-    this.hidden = true;
-  }
-
-  #complete() {
-    this.shadowRoot.dispatchEvent(new CustomEvent('nve-animation-complete'));
   }
 }
