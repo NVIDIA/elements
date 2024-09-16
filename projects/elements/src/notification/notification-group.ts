@@ -47,7 +47,7 @@ export class NotificationGroup extends LitElement {
   render() {
     return html`
     <div internal-host>
-      <slot></slot>
+      <slot @slotchange=${() => this.showPopover()}></slot>
     </div>
     `;
   }

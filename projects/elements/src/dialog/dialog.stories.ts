@@ -132,6 +132,38 @@ export const Position = {
   `
 };
 
+export const LegacyTrigger = {
+  inline: false,
+  render: () => html`
+<nve-button id="dialog-btn">open</nve-button>
+<nve-dialog trigger="dialog-btn" closable modal hidden>
+  <h3 nve-text="heading">Title</h3>
+  <p nve-text="body">some text content in a closable dialog</p>
+
+  <nve-accordion behavior-expand>
+    <nve-accordion-header>
+      <div slot="title">Heading</div>
+    </nve-accordion-header>
+
+    <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+  </nve-accordion>
+</nve-dialog>
+<script>
+  const dialog = document.querySelector('nve-dialog');
+  dialog.hidden = false;
+  dialog.addEventListener('open', e => {
+    console.log(e);
+    dialog.hidden = false;
+  });
+
+  dialog.addEventListener('close', e => {
+    console.log(e);
+    dialog.hidden = true;
+  });
+</script>
+  `
+};
+
 export const LegacyBehaviorTrigger = {
   inline: false,
   render: () => html`

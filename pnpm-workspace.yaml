@@ -26,7 +26,6 @@ packages:
   - 'projects/internals/vite'
 
 catalog:
-  '@lit-labs/motion': ^1.0.7
   '@lit-labs/scoped-registry-mixin': ^1.0.3
   '@lit-labs/virtualizer': ^2.0.14
   '@vitest/browser': 2.0.5
