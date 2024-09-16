@@ -36,6 +36,10 @@
       font-size: var(--nve-ref-font-size-200);
     }
 
+    .sb-show-main.sb-main-centered #storybook-root {
+      padding: 0 !important;
+    }
+
     .playground-btn {
       position: absolute;
       display: none;
@@ -72,7 +76,7 @@
 
       & .css-xzp052 {
         overflow: visible !important;
-        padding: 0 0 24px 0 !important;
+        padding: 0 0 32px 0 !important;
       }
 
       .css-kdwx3d {
@@ -126,6 +130,17 @@
       .punctuation,
       .attr-equals {
         color: var(--nve-ref-color-blue-cobalt-1100) !important;
+      }
+
+      .token.function,
+      .token.variable,
+      .token.operator,
+      .token.class-name {
+        color: var(--nve-sys-text-color) !important;
+      }
+
+      .token.string {
+        color: var(--nve-ref-color-red-tomato-1100) !important;
       }
     }
 
@@ -226,6 +241,10 @@
       }
     }
 
+    .docs-story .css-1qq744x {
+      padding-inline: 0 !important;
+    }
+
     .docs-story section.layout-example {
       border: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-emphasis);
       margin-block: var(--nve-ref-space-sm) var(--nve-ref-space-xl) !important;
@@ -308,6 +327,7 @@
 
     [scale='1'] {
       transform: none !important;
+      width: 100% !important;
     }
 </style>
 <div hidden style="display: none !important">
