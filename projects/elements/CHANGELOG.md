@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.4.0...@nvidia-elements/core-v1.5.0) (2024-09-16)
+
+
+### Features
+
+* **elements:** pagination page steps ([fe82922](https://github.com/NVIDIA/elements/commit/fe829221702eb1d2a943291d52d070da05ead732))
+
 ## [@nvidia-elements/core-v1.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.3.9...@nvidia-elements/core-v1.4.0) (2024-09-06)
 
 
