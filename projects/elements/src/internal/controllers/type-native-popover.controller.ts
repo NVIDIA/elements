@@ -1,5 +1,5 @@
 import { ReactiveController, ReactiveElement } from 'lit';
-import { generateId, getAttributeChanges } from '../utils/dom.js';
+import { generateId, getAttributeChanges, getAttributeListChanges } from '../utils/dom.js';
 import type { PopoverType } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 import { getHostTrgger } from './type-native-popover.utils.js';
@@ -20,11 +20,15 @@ export interface NativePopover extends ReactiveElement {
  */
 export class TypeNativePopoverController<T extends NativePopover> implements ReactiveController {
   get #triggers(): HTMLElement[] {
-    const triggers = Array.from(
-      (this.host.getRootNode() as HTMLElement).querySelectorAll(`[popovertarget="${this.host.id}"]`)
-    ) as HTMLElement[];
+    const triggers = this.#nativeTriggers;
     this.#explicitTrigger ? triggers.push(this.#explicitTrigger) : null;
     return triggers;
+  }
+
+  get #nativeTriggers(): HTMLElement[] {
+    return Array.from(
+      (this.host.getRootNode() as HTMLElement).querySelectorAll(`[popovertarget="${this.host.id}"]`)
+    ) as HTMLElement[];
   }
 
   constructor(private host: T) {
@@ -38,6 +42,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.host.setAttribute('nve-popover', '');
     this.#setupHiddenUpdates();
     this.#updateTriggers();
+    this.#setupDefaultHiddenState();
 
     this.host.addEventListener('beforetoggle', (e: ToggleEvent) => {
       if (this.host.behaviorTrigger) {
@@ -59,7 +64,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   #observers: MutationObserver[] = [];
 
-  hostUpdated() {
+  async hostUpdated() {
     this.#updateTriggers();
   }
 
@@ -67,18 +72,27 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.#observers.forEach(observer => observer.disconnect());
   }
 
-  #setupHiddenUpdates() {
-    if (this.host.hidden) {
-      this.#observers.push(
-        getAttributeChanges(this.host, 'hidden', () => {
-          if (this.host.hidden) {
-            this.host.hidePopover();
-          } else {
-            this.host.showPopover();
-          }
-        })
-      );
+  async #setupDefaultHiddenState() {
+    await new Promise(r => requestAnimationFrame(r));
+    const nativeTriggers = this.#triggers.filter(t => t !== this.#explicitTrigger);
+    if (this.host.isConnected && !nativeTriggers.length && !this.host.hidden && !this.host.matches(':popover-open')) {
+      this.host.showPopover();
     }
+  }
+
+  async #setupHiddenUpdates() {
+    await new Promise(r => requestAnimationFrame(r));
+    this.#observers.push(
+      getAttributeListChanges(this.host, ['hidden'], () => {
+        if (this.host.isConnected && !this.host.hidden && !this.host.matches(':popover-open')) {
+          this.host.showPopover();
+        }
+
+        if (this.host.isConnected && this.host.hidden && this.host.matches(':popover-open')) {
+          this.host.hidePopover();
+        }
+      })
+    );
   }
 
   #updateTriggers() {
@@ -156,7 +170,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.host._activeTrigger = event.target;
     if (this.host.openDelay) {
       this.#openDelay();
-    } else {
+    } else if (this.host.isConnected) {
       this.host.showPopover();
     }
   }
@@ -164,7 +178,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #openDelay() {
     this.#clearOpenDelay();
     this.#openDelayTimeout = setTimeout(() => {
-      if (this.#openDelayTimeout) {
+      if (this.host.isConnected && this.#openDelayTimeout) {
         this.host.showPopover();
       }
     }, this.host.openDelay);

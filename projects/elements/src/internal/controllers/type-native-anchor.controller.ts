@@ -20,6 +20,7 @@ export interface NativeAnchor extends ReactiveElement {
  */
 export class TypeNativeAnchorController<T extends NativeAnchor> implements ReactiveController {
   private typeNativeAnchorFallbackController: TypeNativeAnchorFallbackController<T>;
+
   constructor(private host: T) {
     this.host.addController(this);
 
@@ -54,6 +55,11 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
       } else {
         this.host._internals.states.delete('anchor-body');
       }
+
+      await new Promise(r => requestAnimationFrame(r));
+      const { width, height } = getComputedStyle(this.host);
+      this.host.style.setProperty('--_width', width);
+      this.host.style.setProperty('--_height', height);
     }
   }
 }

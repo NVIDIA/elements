@@ -4,7 +4,13 @@ import { lighthouseRunner } from '@nve-internals/vite';
 describe('drawer lighthouse report', () => {
   test('drawer should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-drawer', /* html */`
-      <nve-drawer closable>hello</nve-drawer>
+      <style>
+        body {
+          height: 800px;
+          width: 1024px;
+        }
+      </style>
+      <nve-drawer closable position="left" style="width: 400px; height: 800px">hello</nve-drawer>
       <script type="module">
         import '@nvidia-elements/core/drawer/define.js';
       </script>
@@ -13,6 +19,6 @@ describe('drawer lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(33.5);
+    expect(report.payload.javascript.kb).toBeLessThan(21.5);
   });
 });

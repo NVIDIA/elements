@@ -18,6 +18,8 @@
   width: var(--width);
   max-width: var(--max-width);
   min-height: var(--min-height);
+  top: var(--top);
+  height: calc(100vh - var(--top));
 }
 
 :host([size='sm']) {
@@ -28,12 +30,23 @@
   --max-width: 540px;
 }
 
+@starting-style {
+  :host([position='left']:popover-open) {
+    transform: translateX(calc(-1 * var(--width)));
+  }
+
+  :host([position='right']:popover-open) {
+    transform: translateX(var(--width));
+  }
+}
+
 :host([inline]) {
   --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
   --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);
   --background: var(--nve-sys-layer-container-background);
   --box-shadow: none;
   --border: 0;
+  transition: none !important;
 }
 
 [internal-host] {
@@ -41,7 +54,6 @@
   background: var(--background);
   color: var(--color);
   box-shadow: var(--box-shadow);
-  top: var(--top) !important;
   bottom: 0 !important;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
