@@ -53,9 +53,6 @@ export const parameters = {
     theme: themes.dark,
     source: {
       transform: (source, context) => {
-        // remove playground button from view source code in Storybook
-        source = source.trim().replace(/<nve-button class="playground-btn" size="sm">.*<\/nve-button>/g, '')
-
         // basic html formatting
         if (!source.includes('nve-codeblock')) { // skip formatting if codeblock to preserve story source formatting
           source = format(source.replaceAll('=""', ''), ' '.repeat(2), 120); // https://github.com/storybookjs/storybook/issues/10467
@@ -265,7 +262,7 @@ export const globalTypes = {
   theme: {
     name: 'Themes',
     description: 'Themes',
-    defaultValue: 'dark',
+    defaultValue: 'light',
     toolbar: {
       title: 'Themes',
       showName: true,
