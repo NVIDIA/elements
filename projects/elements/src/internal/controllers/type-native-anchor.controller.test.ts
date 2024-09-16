@@ -1,0 +1,71 @@
+import { html, LitElement } from 'lit';
+import { property } from 'lit/decorators/property.js';
+import { customElement } from 'lit/decorators/custom-element.js';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@nvidia-elements/testing';
+import { PopoverAlign, PopoverPosition, TypeNativeAnchorController } from '@nvidia-elements/core/internal';
+
+@customElement('type-native-anchor-controller-test-element')
+class TypeNativeAnchorControllerTestElement extends LitElement {
+  @property({ type: Object }) anchor: HTMLElement | string;
+  @property({ type: String }) position: PopoverPosition;
+  @property({ type: String }) alignment: PopoverAlign;
+
+  _typeNativeAnchorController = new TypeNativeAnchorController(this);
+}
+
+describe('type-native-anchor.controller', () => {
+  let element: TypeNativeAnchorControllerTestElement;
+  let fixture: HTMLElement;
+  let anchor: HTMLButtonElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(
+      html`
+        <type-native-anchor-controller-test-element popover id="popover">popover</type-native-anchor-controller-test-element>
+        <button popovertarget="popover">popover</button>
+      `
+    );
+    element = fixture.querySelector<TypeNativeAnchorControllerTestElement>(
+      'type-native-anchor-controller-test-element'
+    );
+    anchor = fixture.querySelector('button');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should create a anchor fallback controller if browser supports native css anchor positionng', async () => {
+    const supports = globalThis.CSS?.supports;
+    (globalThis.CSS as any).supports = () => false;
+
+    const element = document.createElement(
+      'type-native-anchor-controller-test-element'
+    ) as TypeNativeAnchorControllerTestElement;
+    fixture.appendChild(element);
+    await elementIsStable(element);
+    expect((element._typeNativeAnchorController as any).typeNativeAnchorFallbackController).toBeTruthy();
+    (globalThis.CSS as any).supports = supports;
+  });
+
+  it('should associate anchor name to popover and anchor elements', async () => {
+    await elementIsStable(element);
+    element.anchor = anchor;
+    await elementIsStable(element);
+    expect(anchor.id.startsWith('_')).toBe(true);
+    expect((anchor.style as any).anchorName).toBe(`--${anchor.id}`);
+    expect((element.style as any).positionAnchor).toBe(`--${anchor.id}`);
+  });
+
+  it('should set anchor-body state selector if element is anchored to body element', async () => {
+    element.anchor = anchor;
+    await elementIsStable(element);
+    expect(element.matches(':state(anchor-body)')).toBe(false);
+
+    element.anchor = globalThis.document.body;
+    await elementIsStable(element);
+    expect(element.matches(':state(anchor-body)')).toBe(true);
+  });
+});

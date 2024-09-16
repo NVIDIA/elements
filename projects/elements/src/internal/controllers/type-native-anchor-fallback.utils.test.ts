@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { ComputePositionReturn } from '@floating-ui/dom';
-import { PopoverConfig, setPopoverStyles, setArrowStyles, computePopoverPosition } from './type-popover.utils.js';
+import {
+  PopoverConfig,
+  setPopoverStyles,
+  setArrowStyles,
+  computePopoverPosition
+} from './type-native-anchor-fallback.utils.js';
 
 describe('setPopoverStyles', () => {
   it('should use position fixed if popover has anchor attached to body', () => {
@@ -53,7 +58,16 @@ describe('setArrowStyles', () => {
     document.body.appendChild(popover);
     document.body.appendChild(arrow);
 
-    const config: PopoverConfig = { position: 'top', alignment: 'start', popover: popover, arrow, anchor: document.body, arrowPadding: 6, arrowOffset: 4, offset: 12 };
+    const config: PopoverConfig = {
+      position: 'top',
+      alignment: 'start',
+      popover: popover,
+      arrow,
+      anchor: document.body,
+      arrowPadding: 6,
+      arrowOffset: 4,
+      offset: 12
+    };
     const position: ComputePositionReturn = {
       x: 0,
       y: 0,
@@ -69,7 +83,7 @@ describe('setArrowStyles', () => {
     };
 
     setArrowStyles(config, position);
-    const style = window.getComputedStyle(config.arrow);
+    const style = window.getComputedStyle(config.arrow as HTMLElement);
     expect(style.left).toBe('10px');
     expect(style.top).toBe('10px');
     expect(style.bottom).toBe('2px');
@@ -82,8 +96,17 @@ describe('setArrowStyles', () => {
 describe('computePopoverPosition', () => {
   it('should assign coorditates for popover position relative to the document body', async () => {
     const popover = document.createElement('div');
-    const config: PopoverConfig = { position: 'top', alignment: 'start', popover: popover, anchor: document.body, arrowPadding: 6, arrowOffset: 4, offset: 12, strategy: 'fixed'  };
-    
+    const config: PopoverConfig = {
+      position: 'top',
+      alignment: 'start',
+      popover: popover,
+      anchor: document.body,
+      arrowPadding: 6,
+      arrowOffset: 4,
+      offset: 12,
+      strategy: 'fixed'
+    };
+
     const position = await computePopoverPosition(config);
     expect(position.x).toBe(12);
     expect(position.y === 8 || position.y === 12).toBe(true);
@@ -95,7 +118,16 @@ describe('computePopoverPosition', () => {
   it('should assign coorditates for popover position relative to the popover anchor', async () => {
     const popover = document.createElement('div');
     const anchor = document.createElement('div');
-    const config: PopoverConfig = { position: 'top', alignment: 'start', popover: popover, anchor,  arrowPadding: 6, arrowOffset: 4, offset: 2, strategy: 'fixed'  };
+    const config: PopoverConfig = {
+      position: 'top',
+      alignment: 'start',
+      popover: popover,
+      anchor,
+      arrowPadding: 6,
+      arrowOffset: 4,
+      offset: 2,
+      strategy: 'fixed'
+    };
 
     const position = await computePopoverPosition(config);
     expect(position.x).toBe(0);
@@ -109,7 +141,17 @@ describe('computePopoverPosition', () => {
     const popover = document.createElement('div');
     const anchor = document.createElement('div');
     const arrow = document.createElement('div');
-    const config: PopoverConfig = { position: 'top', alignment: 'start', popover: popover, anchor, arrow, arrowPadding: 6, arrowOffset: 4, offset: 2, strategy: 'fixed' };
+    const config: PopoverConfig = {
+      position: 'top',
+      alignment: 'start',
+      popover: popover,
+      anchor,
+      arrow,
+      arrowPadding: 6,
+      arrowOffset: 4,
+      offset: 2,
+      strategy: 'fixed'
+    };
 
     const position = await computePopoverPosition(config);
     expect(position.x).toBe(0);

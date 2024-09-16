@@ -73,7 +73,7 @@ export class Select extends Control {
   }
 
   get #input() {
-    return this.shadowRoot.querySelector('[input]');
+    return this.shadowRoot.querySelector<HTMLElement>('[input]');
   }
 
   get #tags() {
@@ -131,7 +131,7 @@ export class Select extends Control {
     return this.#select.size === 0
       ? html`
       <nve-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></nve-icon>
-      <nve-dropdown @close=${e => (e.target.hidden = true)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#select as HTMLElement} position="bottom" alignment="center">
+      <nve-dropdown .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom" alignment="center">
         ${this.#menu}
       </nve-dropdown>`
       : this.#menu;
@@ -171,7 +171,7 @@ export class Select extends Control {
       onListboxActivate(this.#select, () => {
         this.requestUpdate(); // update menu items
         this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
-        this.#dropdown.hidden = false;
+        this.#dropdown.showPopover();
         focusElementTimeout(this.#menuItems[0]);
       });
     }
@@ -198,7 +198,7 @@ export class Select extends Control {
     this.requestUpdate();
 
     if (!this.#select.multiple && this.#dropdown) {
-      this.#dropdown.hidden = true;
+      this.#dropdown.hidePopover();
     } else {
       await this.updateComplete;
       this.#updateMultipleOverflow(this.#input.getBoundingClientRect().width);

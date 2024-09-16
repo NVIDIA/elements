@@ -14,7 +14,10 @@
   --max-width: 600px;
   --min-height: 250px;
   --width: 100%;
-  display: contents;
+  width: 100%;
+  max-width: var(--max-width);
+  height: var(--min-height);
+  min-width: max-content;
 }
 
 :host([size='sm']) {
@@ -25,19 +28,18 @@
   --max-width: 840px;
 }
 
-dialog {
+[internal-host] {
   padding: var(--padding);
   border-radius: var(--border-radius);
   border: var(--border);
   background: var(--background);
   color: var(--color);
   box-shadow: var(--box-shadow);
-  max-width: var(--max-width);
-  min-height: var(--min-height);
-  width: var(--width);
+  height: 100%;
+  width: 100%;
 }
 
-dialog::backdrop {
+:host([modal])::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
 

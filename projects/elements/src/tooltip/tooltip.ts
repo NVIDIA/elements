@@ -2,15 +2,15 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import {
-  animationFade,
   attachInternals,
   audit,
   excessiveInstanceLimit,
   PopoverAlign,
-  popoverBaseStyles,
+  popoverStyles,
   PopoverPosition,
   PopoverType,
-  TypePopoverController,
+  TypeNativePopoverController,
+  TypeNativeAnchorController,
   useStyles
 } from '@nvidia-elements/core/internal';
 import styles from './tooltip.css?inline';
@@ -35,7 +35,7 @@ import styles from './tooltip.css?inline';
  */
 @audit({ excessiveInstanceLimit })
 export class Tooltip extends LitElement {
-  static styles = useStyles([popoverBaseStyles, styles]);
+  static styles = useStyles([popoverStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-tooltip',
@@ -77,7 +77,7 @@ export class Tooltip extends LitElement {
   /**
    * Determines if popover should be rendered and positioned.
    */
-  @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
+  @property({ type: Boolean, reflect: true }) hidden = false;
 
   /**
    * A delayed `open` event will occur determined from the provided millisecond value.
@@ -89,17 +89,19 @@ export class Tooltip extends LitElement {
   /** @private */
   readonly popoverType: PopoverType = 'hint';
 
-  protected typePopoverController = new TypePopoverController<Tooltip>(this);
+  protected typeNativePopoverController = new TypeNativePopoverController<Tooltip>(this);
+
+  protected typeNativeAnchorController = new TypeNativeAnchorController<Tooltip>(this);
 
   /** @private */
   declare _internals: ElementInternals;
 
   render() {
     return html`
-    <dialog ${animationFade(this)}>
+    <div internal-host>
       <slot></slot>
-      <div class="arrow"></div>
-    </dialog>
+    </div>
+    <div class="arrow"></div>
     `;
   }
 

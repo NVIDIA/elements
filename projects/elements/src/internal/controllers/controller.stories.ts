@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { BaseButton, TypePopoverController, PopoverPosition, spread, PopoverAlign, popoverBaseStyles, animationFade, I18nController } from '@nvidia-elements/core/internal';
+import { BaseButton, PopoverPosition, spread, PopoverAlign, popoverStyles, I18nController, TypeNativePopoverController, useStyles, TypeNativeAnchorController } from '@nvidia-elements/core/internal';
 import { I18nService } from '@nvidia-elements/core';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
@@ -112,7 +112,7 @@ class PopoverDemo extends LitElement {
 
   @property({ type: Boolean, reflect: true }) closable = false;
 
-  @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
+  @property({ type: Boolean, reflect: true }) hidden = false;
 
   get popoverArrow() {
     return this.shadowRoot.querySelector<HTMLElement>('.arrow');
@@ -122,16 +122,18 @@ class PopoverDemo extends LitElement {
     return this.shadowRoot.querySelector<HTMLElement>('dialog');
   }
 
-  protected typePopoverController = new TypePopoverController<PopoverDemo>(this);
+  protected typeNativeAnchorController = new TypeNativeAnchorController<PopoverDemo>(this);
 
-  static styles = [popoverBaseStyles, css`
+  protected typeNativePopoverController = new TypeNativePopoverController<PopoverDemo>(this);
+
+  static styles = useStyles([popoverStyles, css`
     :host {
       --nve-sys-layer-popover-arrow-padding: 6px;
       --nve-sys-layer-popover-arrow-offset: 2px;
       --nve-sys-layer-popover-offset: 2px;
     }
 
-    dialog {
+    [internal-host] {
       filter: drop-shadow(0 0 0.2rem #ccc);
       padding: 18px;
       min-width: 80px;
@@ -140,7 +142,7 @@ class PopoverDemo extends LitElement {
       color: #2d2d2d;
     }
 
-    dialog::backdrop {
+    :host::backdrop {
       background: #00000082;
     }
 
@@ -163,15 +165,15 @@ class PopoverDemo extends LitElement {
     :host([position*='center']) .arrow {
       display: none;
     }
-  `];
+  `]);
 
   render() {
     return html`
-      <dialog ${animationFade(this)}>
+      <div internal-host>
         <slot></slot>
         ${this.arrow ? html`<div class="arrow"></div>` : ''}
-        ${this.closable ? html`<nve-icon-button @click=${() => this.typePopoverController.close()} icon-name="cancel" container="flat" aria-label="close"></nve-icon-button>` : ''}
-      </dialog>
+        ${this.closable ? html`<nve-icon-button @click=${this.hidePopover} icon-name="cancel" container="flat" aria-label="close"></nve-icon-button>` : ''}
+      </div>
     `;
   }
 }
@@ -243,7 +245,7 @@ export const PopoverController = {
 export const PopoverControllerAlignment = {
   render: () => html`
     <style>
-    #root-inner {
+    #storybook-root {
       display: flex;
       align-items: center;
       justify-content: center;

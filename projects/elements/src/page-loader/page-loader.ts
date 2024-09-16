@@ -1,9 +1,10 @@
 import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators/property.js';
 import {
-  popoverBaseStyles,
+  popoverStyles,
   PopoverPosition,
   PopoverType,
-  TypePopoverController,
+  TypeNativePopoverController,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
@@ -20,16 +21,21 @@ import styles from './page-loader.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=8866%3A125698&mode=dev
  */
 export class PageLoader extends LitElement {
-  /** @private */
-  position: PopoverPosition = 'center';
+  /**
+   * Determines if popover should be rendered and positioned.
+   */
+  @property({ type: Boolean, reflect: true }) hidden = false;
 
   /** @private */
-  popoverType: PopoverType = 'auto';
+  readonly position: PopoverPosition = 'center';
 
   /** @private */
-  _typePopoverController = new TypePopoverController<PageLoader>(this);
+  readonly popoverType: PopoverType = 'manual';
 
-  static styles = useStyles([popoverBaseStyles, styles]);
+  /** @private */
+  protected typeNativePopoverController = new TypeNativePopoverController<PageLoader>(this);
+
+  static styles = useStyles([popoverStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-page-loader',
@@ -42,12 +48,10 @@ export class PageLoader extends LitElement {
 
   render() {
     return html`
-      <dialog>
-        <div internal-host>
-          <nve-progress-ring status="accent" size="xl"></nve-progress-ring>
-          <slot></slot>
-        </div>
-      </dialog>
+      <div internal-host>
+        <nve-progress-ring status="accent" size="xl"></nve-progress-ring>
+        <slot></slot>
+      </div>
     `;
   }
 }

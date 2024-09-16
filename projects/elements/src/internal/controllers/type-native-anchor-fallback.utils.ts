@@ -1,4 +1,5 @@
-import { css } from 'lit';
+/* istanbul ignore file -- @preserve */
+// ignoring as this is a temporary polyfill until CSS Anchor Positioning is stable in Firefox and Safari
 import {
   arrow,
   autoUpdate,
@@ -19,8 +20,8 @@ if (!globalThis.process) {
 
 export interface PopoverConfig {
   position: PopoverPosition;
-  alignment?: PopoverAlign;
   popover: HTMLElement;
+  alignment?: PopoverAlign;
   anchor: HTMLElement;
   arrow?: HTMLElement;
   offset?: number;
@@ -29,48 +30,25 @@ export interface PopoverConfig {
   strategy?: 'fixed' | 'absolute';
 }
 
-export const popoverBaseStyles = css`
-:host {
-  --width: max-content;
-  contain: initial;
-  display: contents;
-}
+export async function setAnchorPositionFallback(host: HTMLElement, popoverConfig: PopoverConfig) {
+  if (!host.hidden) {
+    const styles = getComputedStyle(host);
+    const config = {
+      ...popoverConfig,
+      offset: parseTokenNumber(styles.getPropertyValue('--nve-sys-layer-popover-offset')),
+      arrowOffset: parseTokenNumber(styles.getPropertyValue('--nve-sys-layer-popover-arrow-offset')),
+      arrowPadding: parseTokenNumber(styles.getPropertyValue('--nve-sys-layer-popover-arrow-padding'))
+    };
 
-:host([hidden]) {
-  pointer-events: none !important;
-}
+    config.arrow?.removeAttribute('style');
+    await new Promise(r => requestAnimationFrame(r));
 
-.popover,
-dialog {
-  width: var(--width);
-  background: none;
-  font-family: inherit;
-  display: flex;
-  flex-direction: column;
-  overflow: visible;
-  position: fixed;
-  white-space: nowrap;
-  z-index: 9999;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  opacity: 0;
-  user-select: text;
-}
-
-:host(:not([hidden])) .popover,
-:host(:not([hidden])) dialog {
-  opacity: 1;
-}
-`;
-
-export function getPopoverCustomCSSProperites(element: HTMLElement) {
-  const styles = getComputedStyle(element);
-  return {
-    offset: parseTokenNumber(styles.getPropertyValue('--nve-sys-layer-popover-offset')),
-    arrowOffset: parseTokenNumber(styles.getPropertyValue('--nve-sys-layer-popover-arrow-offset')),
-    arrowPadding: parseTokenNumber(styles.getPropertyValue('--nve-sys-layer-popover-arrow-padding'))
-  };
+    if (host && config.position) {
+      const position = await computePopoverPosition(config);
+      setPopoverStyles(config, position);
+      setArrowStyles(config, position);
+    }
+  }
 }
 
 export function setPopoverStyles(config: PopoverConfig, position: Partial<ComputePositionReturn>) {

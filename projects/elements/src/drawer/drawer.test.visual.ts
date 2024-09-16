@@ -22,8 +22,12 @@ function template(theme: '' | 'dark' = '') {
 
   <style>
     body {
-      min-width: 1024px;
-      min-height: 780px;
+      width: 1024px;
+      height: 780px;
+    }
+
+    nve-drawer {
+      transition: none !important;
     }
   </style>
 

@@ -13,30 +13,74 @@ import '@nvidia-elements/core/icon/define.js';
 
 export default {
   title: 'Elements/Dropdown/Examples',
-  component: 'nve-dropdown'
+  component: 'nve-dropdown',
+  parameters: {
+    layout: 'centered'
+  }
 };
 
 export const Default = {
   render: () => html`
-    <div style="height: 250px; width: 100%; display: flex; align-items:center; justify-content: center;">
-      <nve-dropdown anchor="btn"><p nve-text="body">dropdown content</p></nve-dropdown>
-      <nve-button id="btn">button</nve-button>
-    </div>
+<nve-button id="dropdown-btn">open</nve-button>
+<nve-button id="dropdown-fix">fix</nve-button>
+<nve-dropdown anchor="does-not-exist" modal closable trigger="dropdown-btn" behavior-trigger hidden>
+  <br />
+  <p nve-text="body">hello there</p>
+</nve-dropdown>
+
+<script type="module">
+  const dropdown = document.querySelector('nve-dropdown');
+  const fix = document.querySelector('#dropdown-fix');
+  fix.addEventListener('click', () => {
+    console.log(dropdown.anchor)
+    dropdown.anchor = 'dropdown-btn';
+  });
+</script>
   `
 };
 
-export const Interactive = {
+export const Visual = {
+  render: () => html`
+<nve-dropdown anchor="btn">dropdown content</nve-dropdown>
+<nve-button id="btn">button</nve-button>
+  `
+};
+
+export const Events = {
   inline: false,
   render: () => html`
-<nve-button id="dropdown-btn">open</nve-button>
-<nve-dropdown anchor="dropdown-btn" trigger="dropdown-btn" hidden>
-  <p nve-text="body">hello there</p>
-</nve-dropdown>
+<nve-dropdown id="dropdown">dropdown content</nve-dropdown>
+<nve-button popovertarget="dropdown">button</nve-button>
 <script>
   const dropdown = document.querySelector('nve-dropdown');
-  dropdown.addEventListener('open', () => dropdown.hidden = false);
-  dropdown.addEventListener('close', () => dropdown.hidden = true);
+  dropdown.addEventListener('open', () => console.log('open'));
+  dropdown.addEventListener('close', () => console.log('close'));
 </script>
+  `
+};
+
+export const Closable = {
+  render: () => html`
+<nve-dropdown anchor="btn" closable>
+  <h3 nve-text="label">Title</h3>
+  <p nve-text="body">some text content in a closable dropdown</p>
+</nve-dropdown>
+<nve-button id="btn">button</nve-button>
+  `
+};
+
+export const Content = {
+  render: () => html`
+<nve-dropdown anchor="btn">
+  <nve-dropdown-header>
+    <h3 nve-text="heading semibold sm">heading</h3>
+  </nve-dropdown-header>
+  <p nve-text="body">some text content in a closable dropdown</p>
+  <nve-dropdown-footer>
+    <p nve-text="body">footer</p>
+  </nve-dropdown-footer>
+</nve-dropdown>
+<nve-button id="btn">button</nve-button>
   `
 };
 
@@ -60,25 +104,49 @@ export const DynamicTrigger = {
   `
 };
 
-export const BehaviorTrigger = {
-  inline: false,
+export const Position = {
   render: () => html`
-<nve-button id="dropdown-btn">open</nve-button>
-<nve-dropdown anchor="dropdown-btn" trigger="dropdown-btn" behavior-trigger hidden>
-  <p nve-text="body">hello there</p>
+<nve-dropdown anchor="card" position="top" alignment="center">
+  <h3 nve-text="label">Top</h3>
+  <p nve-text="body">dropdown positioned top</p>
 </nve-dropdown>
+<nve-dropdown anchor="card" position="right" alignment="center">
+  <h3 nve-text="label">Right</h3>
+  <p nve-text="body">dropdown positioned right</p>
+</nve-dropdown>
+<nve-dropdown anchor="card" position="bottom" alignment="center">
+  <h3 nve-text="label">Bottom</h3>
+  <p nve-text="body">dropdown positioned bottom</p>
+</nve-dropdown>
+<nve-dropdown anchor="card" position="left" alignment="center">
+  <h3 nve-text="label">Left</h3>
+  <p nve-text="body">dropdown positioned left</p>
+</nve-dropdown>
+<nve-card id="card" style="width: 250px; height: 200px;"></nve-card>
   `
 };
 
-export const Content = {
+export const Alignment = {
   render: () => html`
-<nve-dropdown anchor="btn">
-  <nve-search rounded>
-    <input type="search" placeholder="Search" />
-  </nve-search>
-  <nve-alert>some text content in a dropdown</nve-alert>
-</nve-dropdown>
-<nve-button id="btn">button</nve-button>
+<div nve-theme nve-layout="row align:center">
+  <nve-dropdown open anchor="card" position="top" alignment="start">top start</nve-dropdown>
+  <nve-dropdown open anchor="card" position="top" alignment="center">top center</nve-dropdown>
+  <nve-dropdown open anchor="card" position="top" alignment="end">top end</nve-dropdown>
+
+  <nve-dropdown open anchor="card" position="right" alignment="start">right start</nve-dropdown>
+  <nve-dropdown open anchor="card" position="right" alignment="center">right center</nve-dropdown>
+  <nve-dropdown open anchor="card" position="right" alignment="end">right end</nve-dropdown>
+
+  <nve-dropdown open anchor="card" position="bottom" alignment="start">bottom start</nve-dropdown>
+  <nve-dropdown open anchor="card" position="bottom" alignment="center">bottom center</nve-dropdown>
+  <nve-dropdown open anchor="card" position="bottom" alignment="end">bottom end</nve-dropdown>
+
+  <nve-dropdown open anchor="card" position="left" alignment="start">left start</nve-dropdown>
+  <nve-dropdown open anchor="card" position="left" alignment="center">left center</nve-dropdown>
+  <nve-dropdown open anchor="card" position="left" alignment="end">left end</nve-dropdown>
+
+  <nve-card id="card" style="width: 450px; height: 300px; margin-top: 50px;"></nve-card>
+</div>
   `
 };
 
@@ -198,87 +266,12 @@ export const CheckboxGroupInteractive = {
   render: () => html`<checkbox-group-interactive-demo></checkbox-group-interactive-demo>`
 };
 
-export const Closable = {
+export const LegacyBehaviorTrigger = {
+  inline: false,
   render: () => html`
-<nve-dropdown anchor="btn" closable>
-  <h3 nve-text="label">Title</h3>
-  <p nve-text="body">some text content in a closable dropdown</p>
+<nve-button id="dropdown-btn">open</nve-button>
+<nve-dropdown anchor="dropdown-btn" trigger="dropdown-btn" behavior-trigger hidden>
+  <p nve-text="body">hello there</p>
 </nve-dropdown>
-<nve-button id="btn">button</nve-button>
   `
 };
-
-export const Arrow = {
-  render: () => html`
-<div nve-layout="row align:center" style="height: 200px">
-  <nve-dropdown anchor="btn" arrow>
-    <h3 nve-text="label">Title</h3>
-    <p nve-text="body">some text content in a closable dropdown</p>
-  </nve-dropdown>
-  <nve-button id="btn">button</nve-button>
-</div>
-  `
-};
-
-export const Position = {
-  render: () => html`
-<div nve-theme nve-layout="row align:center" style="width: 100%; height: 400px;">
-  <nve-dropdown anchor="card" position="top" alignment="center" closable>
-    <h3 nve-text="label">Top</h3>
-    <p nve-text="body">dropdown positioned top</p>
-  </nve-dropdown>
-  <nve-dropdown anchor="card" position="right" alignment="center" closable>
-    <h3 nve-text="label">Right</h3>
-    <p nve-text="body">dropdown positioned right</p>
-  </nve-dropdown>
-  <nve-dropdown anchor="card" position="bottom" alignment="center" closable>
-    <h3 nve-text="label">Bottom</h3>
-    <p nve-text="body">dropdown positioned bottom</p>
-  </nve-dropdown>
-  <nve-dropdown anchor="card" position="left" alignment="center" closable>
-    <h3 nve-text="label">Left</h3>
-    <p nve-text="body">dropdown positioned left</p>
-  </nve-dropdown>
-  <nve-card id="card" style="width: 250px; height: 200px;"></nve-card>
-</div>
-  `
-};
-
-export const Alignment = {
-  render: () => html`
-<div nve-theme nve-layout="row align:center">
-  <nve-dropdown anchor="card" position="top" alignment="start">top start</nve-dropdown>
-  <nve-dropdown anchor="card" position="top" alignment="center">top center</nve-dropdown>
-  <nve-dropdown anchor="card" position="top" alignment="end">top end</nve-dropdown>
-
-  <nve-dropdown anchor="card" position="right" alignment="start">right start</nve-dropdown>
-  <nve-dropdown anchor="card" position="right" alignment="center">right center</nve-dropdown>
-  <nve-dropdown anchor="card" position="right" alignment="end">right end</nve-dropdown>
-
-  <nve-dropdown anchor="card" position="bottom" alignment="start">bottom start</nve-dropdown>
-  <nve-dropdown anchor="card" position="bottom" alignment="center">bottom center</nve-dropdown>
-  <nve-dropdown anchor="card" position="bottom" alignment="end">bottom end</nve-dropdown>
-
-  <nve-dropdown anchor="card" position="left" alignment="start">left start</nve-dropdown>
-  <nve-dropdown anchor="card" position="left" alignment="center">left center</nve-dropdown>
-  <nve-dropdown anchor="card" position="left" alignment="end">left end</nve-dropdown>
-
-  <nve-card id="card" style="width: 450px; height: 300px;"></nve-card>
-</div>
-  `
-};
-
-export const HeaderFooter = {
-  render: () => html `
-<nve-dropdown anchor="btn" closable>
-  <nve-dropdown-header>
-    <h3 nve-text="heading semibold sm">heading</h3>
-  </nve-dropdown-header>
-  <p nve-text="body">some text content in a closable dropdown</p>
-  <nve-dropdown-footer>
-    <p nve-text="body">footer</p>
-  </nve-dropdown-footer>
-</nve-dropdown>
-<nve-button id="btn">button</nve-button>
-`
-}

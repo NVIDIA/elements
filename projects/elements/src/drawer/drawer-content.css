@@ -14,6 +14,7 @@
 }
 
 [internal-host] {
+  background: var(--background);
   padding: var(--padding);
   height: 100%;
   width: 100%;

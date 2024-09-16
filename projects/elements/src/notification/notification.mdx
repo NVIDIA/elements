@@ -1,5 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs';
-import { Interactive, Default, Status, InteractiveStack, Drawer, Position, ContentWrap, BehaviorTrigger } from './notification.stories';
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { Default, Visual, Status, Events, InteractiveGroup, Drawer, Alignment, Position, PositionGroup, ContentWrap } from './notification.stories';
 
 <Meta title="Elements/Notification/Documentation" />
 
@@ -14,43 +14,64 @@ import '@nvidia-elements/core/notification/define.js';
 ```
 
 ```html
-<nve-notification>hello there</nve-notification>
+<nve-notification id="notification" position="top" close-timeout="2000">
+  <h3 nve-text="label">Notification</h3>
+  <p nve-text="body">some text content in a notification</p>
+</nve-notification>
+<nve-button popovertarget="notification">button</nve-button>
 ```
 
 ## Standard
 
-<Canvas of={Interactive} story={{ inline: false, height: '300px' }} />
-<Canvas of={Default} story={{ inline: false, height: '300px' }} />
+<Story of={Visual} inline={false} height={250} />
+
+<Canvas of={Default} story={{ inline: false, height: 300 }} />
+
+## Events
+
+<element-api tag="nve-notification" type="event" value="open"></element-api>
+
+<element-api tag="nve-notification" type="event" value="close"></element-api>
+
+<Canvas of={Events} story={{ inline: false, height: 400 }} />
 
 ## Status
 
-<Canvas of={Status} story={{ inline: false, height: '460px' }} />
+<element-api tag="nve-notification" type="property" value="status"></element-api>
 
-## Interactive Stack
+<Canvas of={Status} story={{ inline: false, height: 450 }} />
 
-<Canvas of={InteractiveStack} story={{ inline: false, height: '600px' }} />
+## Interactive Group
+
+<Canvas of={InteractiveGroup} story={{ inline: false, height: 600 }} />
 
 ## Drawer
 
 <element-api tag="nve-notification" type="property" value="container"></element-api>
 
-<Canvas of={Drawer} story={{ inline: false, height: '900px' }} />
+<Canvas of={Drawer} story={{ inline: false, height: 900 }} />
+
+## Alignment
+
+<element-api tag="nve-notification-group" type="property" value="alignment"></element-api>
+
+<Canvas of={Alignment} story={{ inline: false, height: 700 }} />
 
 ## Position
 
 <element-api tag="nve-notification-group" type="property" value="position"></element-api>
 
-<Canvas of={Position} story={{ inline: false, height: '700px' }} />
+<Canvas of={Position} story={{ inline: false, height: 700 }} />
+
+## Position Group
+
+<element-api tag="nve-notification-group" type="property" value="position"></element-api>
+
+<Canvas of={PositionGroup} story={{ inline: false, height: 700 }} />
 
 ## Content Wrap
 
-<Canvas of={ContentWrap} story={{ inline: false, height: '700px' }} />
-
-## Behavior Trigger
-
-<element-api tag="nve-notifications" type="property" value="behaviorTrigger"></element-api>
-
-<Canvas of={BehaviorTrigger} story={{ inline: false, height: '700px' }} />
+<Canvas of={ContentWrap} story={{ inline: false, height: 700 }} />
 
 <element-status tag="nve-notification"></element-status>
 

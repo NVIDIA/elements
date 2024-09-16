@@ -68,37 +68,6 @@ describe(Notification.metadata.tag, () => {
     expect(element.shadowRoot.querySelector('dialog')).toBe(null);
   });
 
-  it('should update to a popover type if positioned', async () => {
-    expect(element.shadowRoot.querySelector('dialog')).toBe(null);
-    element.position = 'bottom';
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('dialog').tagName).toBe('DIALOG');
-  });
-
-  it('should override remove to set hidden', async () => {
-    expect(element.hidden).toBe(false);
-    await element.remove();
-    expect(element.hidden).toBe(true);
-  });
-
-  it('should emit close event when close button clicked', async () => {
-    element.closable = true;
-    await elementIsStable(element);
-
-    const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
-    expect(await event).toBeDefined();
-  });
-
-  it('should nve-animation-complete event to signal when to remove element', async () => {
-    element.closable = true;
-    await elementIsStable(element);
-
-    const event = untilEvent(element.shadowRoot as any, 'nve-animation-complete');
-    await element.remove();
-    expect(await event).toBeDefined();
-  });
-
   it('should reflect a status', async () => {
     expect(element.status).toBe(undefined);
     expect(element.hasAttribute('status')).toBe(false);
@@ -115,5 +84,40 @@ describe(Notification.metadata.tag, () => {
     element.container = 'flat';
     await elementIsStable(element);
     expect(element.getAttribute('container')).toBe('flat');
+  });
+
+  it('should emit open event when showPopover is called', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await event).toBeDefined();
+  });
+
+  it('should emit close event when hidePopover is called', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await open).toBeDefined();
+
+    const close = untilEvent(element, 'close');
+    element.hidePopover();
+    expect(await close).toBeDefined();
+  });
+
+  it('should emit close event when close button clicked', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await open).toBeDefined();
+
+    const event = untilEvent(element, 'close');
+    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
+    expect(await event).toBeDefined();
   });
 });
