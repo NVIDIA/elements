@@ -97,22 +97,22 @@ describe(Select.metadata.tag, () => {
 
   it('should show custom dropdown menu when clicked', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     emulateClick(select);
     element.requestUpdate();
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
   });
 
   it('should hide dropdown when closed', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     emulateClick(select);
     element.requestUpdate();
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
-    dropdown.dispatchEvent(new CustomEvent('close'));
+    dropdown.hidePopover();
     await element.updateComplete;
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
   });
 
   it('should use aria-hidden for decorative non-semantic icons', async () => {
@@ -138,14 +138,14 @@ describe(Select.metadata.tag, () => {
 
   it('should close dropdown when menu item is selected', async () => {
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
-    expect(element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag).hidden).toBe(true);
+    expect(element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag).matches(':popover-open')).toBe(false);
 
     emulateClick(select);
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag).hidden).toBe(false);
+    expect(element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag).matches(':popover-open')).toBe(true);
 
     emulateClick(items[0]);
-    expect(element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag).hidden).toBe(true);
+    expect(element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag).matches(':popover-open')).toBe(false);
   });
 
   it('should render tags when using multiple select', async () => {

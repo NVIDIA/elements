@@ -3,15 +3,15 @@ import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import {
-  animationFade,
   audit,
   excessiveInstanceLimit,
   I18nController,
   PopoverAlign,
-  popoverBaseStyles,
   PopoverPosition,
+  popoverStyles,
   PopoverType,
-  TypePopoverController,
+  TypeNativeAnchorController,
+  TypeNativePopoverController,
   useStyles
 } from '@nvidia-elements/core/internal';
 import styles from './dropdown.css?inline';
@@ -37,6 +37,17 @@ import styles from './dropdown.css?inline';
  */
 @audit({ excessiveInstanceLimit })
 export class Dropdown extends LitElement {
+  static styles = useStyles([popoverStyles, styles]);
+
+  static readonly metadata = {
+    tag: 'nve-dropdown',
+    version: '0.0.0'
+  };
+
+  static elementDefinitions = {
+    [IconButton.metadata.tag]: IconButton
+  };
+
   /**
    * The anchor provides the element that the popover should position relative to.
    * Anchor can accept a idref string within the same render root or a HTMLElement DOM reference.
@@ -79,50 +90,33 @@ export class Dropdown extends LitElement {
   /**
    * Determines if popover should be rendered and positioned.
    */
-  @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
+  @property({ type: Boolean, reflect: true }) hidden = false;
 
   @query('.arrow') popoverArrow: HTMLElement;
 
   /** @private */
   readonly popoverType: PopoverType = 'auto';
 
-  #typePopoverController = new TypePopoverController<Dropdown>(this);
-
   #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  protected typeNativePopoverController = new TypeNativePopoverController<Dropdown>(this);
+
+  protected typeNativeAnchorController = new TypeNativeAnchorController<Dropdown>(this);
 
   /**
    * Enables internal string values to be updated for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
-  static styles = useStyles([popoverBaseStyles, styles]);
-
-  static readonly metadata = {
-    tag: 'nve-dropdown',
-    version: '0.0.0'
-  };
-
-  static elementDefinitions = {
-    [IconButton.metadata.tag]: IconButton
-  };
-
   render() {
     return html`
-    <dialog ${animationFade(this)}>
+    <div internal-host>
       <slot name="header"></slot>
-      ${this.closable ? html`<nve-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+      ${this.closable ? html`<nve-icon-button @click=${this.hidePopover} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
       <slot></slot>
       <slot name="footer"></slot>
       ${this.arrow ? html`<div class="arrow"></div>` : ''}
-    </dialog>
+    </div>
   `;
-  }
-
-  close() {
-    this.#typePopoverController.close();
-  }
-
-  open() {
-    this.#typePopoverController.open();
   }
 }

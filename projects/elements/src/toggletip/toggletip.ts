@@ -3,17 +3,17 @@ import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import {
-  animationFade,
   attachInternals,
   audit,
   excessiveInstanceLimit,
   I18nController,
   PopoverAlign,
-  popoverBaseStyles,
+  popoverStyles,
   PopoverPosition,
   PopoverType,
-  TypePopoverController,
-  useStyles
+  TypeNativePopoverController,
+  useStyles,
+  TypeNativeAnchorController
 } from '@nvidia-elements/core/internal';
 import styles from './toggletip.css?inline';
 
@@ -37,7 +37,7 @@ import styles from './toggletip.css?inline';
  */
 @audit({ excessiveInstanceLimit })
 export class Toggletip extends LitElement {
-  static styles = useStyles([popoverBaseStyles, styles]);
+  static styles = useStyles([popoverStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-toggletip',
@@ -77,7 +77,7 @@ export class Toggletip extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
 
   /**
-   * Determines if a close button should render within toggletip. Non-closable
+   * Determines if a close button should render within toggletip.
    */
   @property({ type: Boolean }) closable = false;
 
@@ -89,14 +89,16 @@ export class Toggletip extends LitElement {
   /**
    * Determines if popover should be rendered and positioned.
    */
-  @property({ type: Boolean, reflect: true }) hidden = false; /* needed for @lit-labs/motion */
+  @property({ type: Boolean, reflect: true }) hidden = false;
 
   @query('.arrow') popoverArrow: HTMLElement;
 
   /** @private */
   readonly popoverType: PopoverType = 'auto';
 
-  #typePopoverController = new TypePopoverController<Toggletip>(this);
+  protected typeNativeAnchorController = new TypeNativeAnchorController<Toggletip>(this);
+
+  protected typeNativePopoverController = new TypeNativePopoverController<Toggletip>(this);
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
@@ -110,15 +112,15 @@ export class Toggletip extends LitElement {
 
   render() {
     return html`
-    <dialog ${animationFade(this)}>
+    <div internal-host>
       <slot name="header"></slot>
-      ${this.closable ? html`<nve-icon-button @click=${() => this.#typePopoverController.close()} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+      ${this.closable ? html`<nve-icon-button @click=${this.hidePopover} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
       <div id="content">
         <slot></slot>
       </div>
       <slot name="footer"></slot>
-      ${this.arrow ? html`<div class="arrow"></div>` : ''}
-    </dialog>
+    </div>
+    ${this.arrow ? html`<div class="arrow"></div>` : ''}
   `;
   }
 

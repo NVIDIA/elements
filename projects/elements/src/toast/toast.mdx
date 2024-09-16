@@ -1,5 +1,5 @@
-import { Meta, Canvas } from '@storybook/addon-docs';
-import { Interactive, Default, Status, Actions, BehaviorTrigger } from './toast.stories';
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { Default, Visual, Status, Actions, Events, Alignment, Position } from './toast.stories';
 
 <Meta title="Elements/Toast/Documentation" />
 
@@ -14,25 +14,51 @@ import '@nvidia-elements/core/toast/define.js';
 ```
 
 ```html
-<nve-toast anchor="btn" position="bottom">hello there</nve-toast>
-<nve-button id="btn">button</nve-button>
+<nve-toast id="toast" close-timeout="1500">hello there</nve-toast>
+<nve-button popovertarget="toast">button</nve-button>
 ```
 
 ## Standard
 
-<Canvas of={Interactive} story={{ inline: false, height: 200 }} />
-<Canvas of={Default} story={{ inline: false, height: 200 }} />
+<Story of={Visual} inline={false} height={130} />
 
-## Status/Actions
+<Canvas of={Default} story={{ inline: false, height: 130 }} />
+
+## Status
+
+<element-api tag="nve-toast" type="property" value="status"></element-api>
 
 <Canvas of={Status} story={{ inline: false, height: 300 }} />
-<Canvas of={Actions} story={{ inline: false, height: 300 }} />
 
-## Behavior Trigger
+## Close Timeout
 
-<element-api tag="nve-toast" type="property" value="behaviorTrigger"></element-api>
+<element-api tag="nve-toast" type="property" value="closeTimeout"></element-api>
 
-<Canvas of={BehaviorTrigger} story={{ inline: false, height: 300 }} />
+<Canvas of={Default} story={{ inline: false, height: 200 }} />
+
+## Events
+
+<element-api tag="nve-toast" type="event" value="open"></element-api>
+
+<element-api tag="nve-toast" type="event" value="close"></element-api>
+
+<Canvas of={Events} story={{ inline: false, height: 200 }} />
+
+## Actions
+
+<Canvas of={Actions} story={{ inline: false, height: 200 }} />
+
+## Position
+
+<element-api tag="nve-toast" type="property" value="position"></element-api>
+
+<Canvas of={Position} story={{ inline: false, height: 200 }} />
+
+## Alignment
+
+<element-api tag="nve-toast" type="property" value="alignment"></element-api>
+
+<Canvas of={Alignment} story={{ inline: false, height: 600 }} />
 
 <element-status tag="nve-toast"></element-status>
 

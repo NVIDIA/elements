@@ -12,6 +12,7 @@
   --arrow-transform: translate(0, -2px) rotate(-45deg);
   --width: max-content;
   --height: initial;
+  box-shadow: var(--box-shadow);
 }
 
 :host([status='muted']) {
@@ -19,19 +20,18 @@
   --color: var(--nve-sys-layer-overlay-color);
 }
 
-dialog {
+[internal-host] {
   padding: var(--padding);
   border-radius: var(--border-radius);
   background: var(--background);
   color: var(--color);
-  box-shadow: var(--box-shadow);
   font-size: var(--font-size);
   width: var(--width);
   height: var(--height);
   white-space: initial;
 }
 
-dialog:has(nve-icon-button) {
+[internal-host]:has(nve-icon-button) {
   padding-right: var(--nve-ref-size-800);
 }
 

@@ -21,7 +21,7 @@ function template(theme: '' | 'dark' = '') {
   </script>
 
   <div nve-layout="row align:center" style="height: 400px">
-    <nve-tooltip anchor="btn" closable style="--min-width: 250px">
+    <nve-tooltip anchor="btn" closable>
       •︎•︎•︎•︎•︎•︎
     </nve-tooltip>
     <nve-button id="btn">•︎•︎•︎•︎•︎•︎</nve-button>

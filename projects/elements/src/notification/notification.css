@@ -1,4 +1,6 @@
 :host {
+  --nve-sys-layer-popover-arrow-padding: 0px;
+  --nve-sys-layer-popover-arrow-offset: 0px;
   --nve-sys-layer-popover-offset: var(--nve-ref-space-xl);
   --nve-sys-interaction-color: var(--color);
   --border-radius: var(--nve-ref-border-radius-md);
@@ -12,15 +14,9 @@
   --max-width: fit-content;
   --border: 0;
   width: var(--width);
-  position: inherit;
-  display: block;
 }
 
-:host([position]) {
-  position: fixed;
-}
-
-.popover {
+[internal-host] {
   box-shadow: var(--box-shadow);
   padding: var(--padding);
   border-radius: var(--border-radius);
@@ -36,15 +32,18 @@
   position: relative;
 }
 
-.popover:has(nve-icon-button) {
+[internal-host]:has(nve-icon-button) {
   padding-right: var(--nve-ref-size-1000);
 }
 
 nve-icon-button {
-  --color: inherit;
   position: absolute;
   top: 6px;
   right: 6px;
+}
+
+nve-icon-button::part(icon) {
+  --color: var(--nve-sys-layer-popover-color) !important;
 }
 
 [part='status-icon'] {
@@ -67,6 +66,12 @@ nve-icon-button {
   --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --background: var(--nve-sys-layer-overlay-accent-background);
   --color: var(--nve-sys-layer-overlay-color);
+  position: relative;
+  margin: 0;
+}
+
+:host([container='flat']) nve-icon-button::part(icon) {
+  --color: var(--nve-sys-layer-overlay-color) !important;
 }
 
 :host([container='flat']) .popover {

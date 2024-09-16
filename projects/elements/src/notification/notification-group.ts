@@ -1,6 +1,12 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { PopoverAlign, TypePopoverController, useStyles } from '@nvidia-elements/core/internal';
+import {
+  PopoverAlign,
+  popoverStyles,
+  TypeNativeAnchorController,
+  TypeNativePopoverController,
+  useStyles
+} from '@nvidia-elements/core/internal';
 import styles from './notification-group.css?inline';
 
 /**
@@ -27,9 +33,11 @@ export class NotificationGroup extends LitElement {
    */
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
-  protected typePopoverController = new TypePopoverController<NotificationGroup>(this);
+  protected typeNativeAnchorController = new TypeNativeAnchorController<NotificationGroup>(this);
 
-  static styles = useStyles([styles]);
+  protected typeNativePopoverController = new TypeNativePopoverController<NotificationGroup>(this);
+
+  static styles = useStyles([popoverStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-notification-group',
