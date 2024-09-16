@@ -271,7 +271,7 @@ define(ElementMetrics);
 class ElementAPI extends LitElement {
   @property({ type: String }) tag = '';
 
-  @property({ type: String }) type: 'property' | 'slot';
+  @property({ type: String }) type: 'property' | 'event' | 'slot';
 
   @property({ type: String }) value: string;
 
@@ -290,6 +290,7 @@ class ElementAPI extends LitElement {
 
   render() {
     return html`
+      ${this.type === 'event' ? html`<div .innerHTML=${this.#markdown.makeHtml((`<code nve-text="code">${this.value}</code>: ` + this.#element.schema.events?.find(m => m.name === this.value)?.description))?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       ${!this.type ? html`

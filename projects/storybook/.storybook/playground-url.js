@@ -9,7 +9,8 @@ export function playground(Story, context) {
   const story = Story();
   // if story is using lit dynamic templating and or args skip generating playground url
   const usesDynamicArgs = Object.keys(context.unmappedArgs).length && story.values?.length;
-  if (usesDynamicArgs || context.viewMode === 'story' || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('foundations-typography') ||context.id.includes('elements-data-grid-examples--performance')) {
+  const usesIframe = context.viewMode === 'story';
+  if (usesDynamicArgs || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('foundations-typography') ||context.id.includes('elements-data-grid-examples--performance')) {
     return story;
   } else {
     let source = story;
@@ -21,7 +22,20 @@ export function playground(Story, context) {
       const formattedSource = format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), ' '.repeat(2), 120);
       const files = serialize(addCssContent(createDefaultFiles(formattedSource, context), context));
       const url = `https://elements-stage.nvidia.com/ui/elements-playground/?story=${context.id}&files=${files}&version=1`;
-      return html`${story} <nve-button class="playground-btn" size="sm"><a href="${url}" target="_blank">Playground</a></nve-button>`;
+      
+      if (usesIframe) {
+        const buttonList = parent.document.querySelector(`.docs-story:has(#iframe--${context.id}) *:has(.docblock-code-toggle)`);
+        const playground = parent.document.createElement('div');
+        playground.innerHTML = `<nve-button class="playground-btn" size="sm"><a href="${url}" target="_blank">Playground</a></nve-button>`;
+        buttonList.prepend(playground);
+      } else {
+        const buttonList = document.querySelector(`.docs-story:has(#story--${context.id}) *:has(.docblock-code-toggle)`);
+        const playground = document.createElement('div');
+        playground.innerHTML = `<nve-button class="playground-btn" size="sm"><a href="${url}" target="_blank">Playground</a></nve-button>`;
+        buttonList.prepend(playground);
+      }
+
+      return story;
     } catch {
       return source;
     }
