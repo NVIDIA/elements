@@ -11,3 +11,7 @@
   font-display: swap;
   font-weight: 600;
 }
+
+[nve-theme~='inter'] {
+  --nve-ref-font-family: 'Inter', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
