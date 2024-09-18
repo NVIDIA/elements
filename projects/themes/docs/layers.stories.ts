@@ -47,17 +47,17 @@ export const LayersDemo = {
         </nve-input>
         <nve-button>button <nve-icon name="arrow" direction="right"></nve-icon></nve-button>
       </div>
-      <nve-dialog size="sm" closable position="top" alignment="end">
+      <nve-dialog size="sm" closable position="top" alignment="end" style="--min-width: 400px">
         <h3 nve-text="heading">Dialog</h3>
         <p nve-text="body" style="margin-bottom: 48px">hello there</p>
         <nve-button id="dropdown-btn">button</nve-button>
         <nve-dropdown anchor="dropdown-btn" closable position="bottom" alignment="start">
-          <nve-tooltip anchor="tooltip-btn" position="top">tooltip</nve-tooltip>
           <nve-search rounded>
             <label>dropdown content</label>
-            <nve-icon-button id="tooltip-btn" icon-name="information-circle-stroke" container="flat" aria-label="more details" slot="label"></nve-icon-button>
+            <nve-icon-button id="tooltip-btn-1" icon-name="information-circle-stroke" container="flat" aria-label="more details" slot="label"></nve-icon-button>
             <input type="search" placeholder="search" />
           </nve-search>
+          <nve-tooltip anchor="tooltip-btn-1" position="top">tooltip</nve-tooltip>
         </nve-dropdown>
       </nve-dialog>
     </div>
@@ -88,17 +88,17 @@ export const LayersDemo = {
         <nve-button>button <nve-icon name="arrow" direction="right"></nve-icon></nve-button>
       </div>
       <div id="dark" style="position: absolute; right: 48px; top: 0;"></div>
-      <nve-dialog size="sm" closable position="bottom" alignment="end" anchor="dark">
+      <nve-dialog size="sm" closable position="bottom" alignment="end" anchor="dark" style="--min-width: 400px">
         <h3 nve-text="heading">Dialog</h3>
         <p nve-text="body" style="margin-bottom: 48px">hello there</p>
         <nve-button id="dropdown-btn">button</nve-button>
         <nve-dropdown anchor="dropdown-btn" closable position="bottom" alignment="start">
-          <nve-tooltip anchor="tooltip-btn" position="top">tooltip</nve-tooltip>
           <nve-search rounded>
             <label>dropdown content</label>
-            <nve-icon-button id="tooltip-btn" icon-name="information-circle-stroke" container="flat" aria-label="more details" slot="label"></nve-icon-button>
+            <nve-icon-button id="tooltip-btn-2" icon-name="information-circle-stroke" container="flat" aria-label="more details" slot="label"></nve-icon-button>
             <input type="search" placeholder="search" />
           </nve-search>
+          <nve-tooltip anchor="tooltip-btn-2" position="top">tooltip</nve-tooltip>
         </nve-dropdown>
       </nve-dialog>
     </div>

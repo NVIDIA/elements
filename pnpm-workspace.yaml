@@ -36,6 +36,7 @@ catalog:
   lighthouse: 11.4.0
   lit: ^3.2.0
   lit-html: ^3.2.0
+  publint: 0.2.11
   typescript: 5.3.3
   vite: 5.3.3
   vitest: 2.0.5

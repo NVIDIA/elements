@@ -36,6 +36,9 @@ catalogs:
     lit-html:
       specifier: ^3.2.0
       version: 3.2.0
+    publint:
+      specifier: 0.2.11
+      version: 0.2.11
     typescript:
       specifier: 5.3.3
       version: 5.3.3
@@ -206,8 +209,8 @@ importers:
         specifier: 2.0.3
         version: 2.0.3
       publint:
-        specifier: ^0.2.10
-        version: 0.2.10
+        specifier: 'catalog:'
+        version: 0.2.11
       svgo:
         specifier: 3.0.2
         version: 3.0.2
@@ -255,8 +258,8 @@ importers:
         specifier: 'catalog:'
         version: 11.0.0
       publint:
-        specifier: ^0.2.10
-        version: 0.2.10
+        specifier: 'catalog:'
+        version: 0.2.11
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -402,8 +405,8 @@ importers:
         specifier: 'catalog:'
         version: 9.6.0
       publint:
-        specifier: ^0.2.10
-        version: 0.2.10
+        specifier: 'catalog:'
+        version: 0.2.11
       typescript:
         specifier: 'catalog:'
         version: 5.3.3
@@ -451,8 +454,8 @@ importers:
         specifier: 'catalog:'
         version: 9.6.0
       publint:
-        specifier: ^0.2.10
-        version: 0.2.10
+        specifier: 'catalog:'
+        version: 0.2.11
       typescript:
         specifier: 'catalog:'
         version: 5.3.3
@@ -982,8 +985,8 @@ importers:
         specifier: 9.0.4
         version: 9.0.4(postcss@8.4.31)
       publint:
-        specifier: ^0.2.10
-        version: 0.2.10
+        specifier: 'catalog:'
+        version: 0.2.11
       typescript:
         specifier: 'catalog:'
         version: 5.3.3
@@ -1041,8 +1044,8 @@ importers:
         specifier: 8.4.31
         version: 8.4.31
       publint:
-        specifier: ^0.2.10
-        version: 0.2.10
+        specifier: 'catalog:'
+        version: 0.2.11
       style-dictionary:
         specifier: 3.8.0
         version: 3.8.0
@@ -6439,9 +6442,6 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  jsonc-parser@3.2.0:
-    resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
-
   jsonc-parser@3.3.1:
     resolution: {integrity: sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ==}
 
@@ -7830,6 +7830,9 @@ packages:
   picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
 
+  picocolors@1.1.0:
+    resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
+
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
@@ -8263,8 +8266,8 @@ packages:
   psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
 
-  publint@0.2.10:
-    resolution: {integrity: sha512-5TzYaAFiGpgkYX/k6VaItRMT2uHI4zO5OWJ2k7Er0Ot3jutBCNTJB1qRHuy1lYq07JhRczzFs6HFPB4D+A47xA==}
+  publint@0.2.11:
+    resolution: {integrity: sha512-/kxbd+sD/uEG515N/ZYpC6gYs8h89cQ4UIsAq1y6VT4qlNh8xmiSwcP2xU2MbzXFl8J0l2IdONKFweLfYoqhcA==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -13192,7 +13195,7 @@ snapshots:
       read-pkg: 9.0.1
       registry-auth-token: 5.0.2
       semantic-release: 22.0.12(typescript@5.5.4)
-      semver: 7.6.2
+      semver: 7.6.3
       tempy: 3.1.0
 
   '@semantic-release/npm@12.0.0(semantic-release@22.0.12(typescript@5.5.4))':
@@ -15230,7 +15233,7 @@ snapshots:
       handlebars: 4.7.8
       json-stringify-safe: 5.0.1
       meow: 12.1.1
-      semver: 7.6.2
+      semver: 7.6.3
       split2: 4.2.0
 
   conventional-commits-filter@4.0.0: {}
@@ -17225,8 +17228,6 @@ snapshots:
 
   json5@2.2.3: {}
 
-  jsonc-parser@3.2.0: {}
-
   jsonc-parser@3.3.1: {}
 
   jsonfile@4.0.0:
@@ -18772,6 +18773,8 @@ snapshots:
 
   picocolors@1.0.1: {}
 
+  picocolors@1.1.0: {}
+
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
@@ -19161,10 +19164,10 @@ snapshots:
 
   psl@1.9.0: {}
 
-  publint@0.2.10:
+  publint@0.2.11:
     dependencies:
       npm-packlist: 5.1.3
-      picocolors: 1.0.1
+      picocolors: 1.1.0
       sade: 1.8.1
 
   pump@3.0.0:
@@ -19707,7 +19710,7 @@ snapshots:
 
   semver-diff@4.0.0:
     dependencies:
-      semver: 7.6.2
+      semver: 7.6.3
 
   semver-regex@4.0.5: {}
 
@@ -20183,7 +20186,7 @@ snapshots:
       fs-extra: 10.1.0
       glob: 7.2.3
       json5: 2.2.3
-      jsonc-parser: 3.2.0
+      jsonc-parser: 3.3.1
       lodash: 4.17.21
       tinycolor2: 1.6.0
 
