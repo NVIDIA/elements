@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.1.4...@nvidia-elements/themes-v1.2.0) (2024-09-18)
+
+
+### Features
+
+* **themes:** easier font family adjustment ([58abe82](https://github.com/NVIDIA/elements/commit/58abe8225d2955be0e95eafaa68add66b57b18da))
+
 ## [@nvidia-elements/themes-v1.1.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.1.3...@nvidia-elements/themes-v1.1.4) (2024-09-18)
 
 
