@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.6.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.1...@nvidia-elements/core-v1.6.2) (2024-09-18)
+
+
+### Bug Fixes
+
+* **elements:** flat button status icons ([2ceebd3](https://github.com/NVIDIA/elements/commit/2ceebd38d5136adf445640e7f47500b84bcaef65))
+
 ## [@nvidia-elements/core-v1.6.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.0...@nvidia-elements/core-v1.6.1) (2024-09-18)
 
 
