@@ -796,7 +796,7 @@
     "emoji-picker-element": "1.18.4",
     "eslint": "catalog:",
     "lit-analyzer": "2.0.3",
-    "publint": "^0.2.10",
+    "publint": "catalog:",
     "svgo": "3.0.2",
     "ts-lit-plugin": "2.0.2",
     "typescript": "catalog:",

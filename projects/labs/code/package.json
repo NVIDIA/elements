@@ -160,7 +160,7 @@
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "eslint": "catalog:",
-    "publint": "^0.2.10",
+    "publint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"

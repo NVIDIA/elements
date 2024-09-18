@@ -263,7 +263,7 @@ export const globalTypes = {
   theme: {
     name: 'Themes',
     description: 'Themes',
-    defaultValue: 'light',
+    defaultValue: 'dark',
     toolbar: {
       title: 'Themes',
       showName: true,
