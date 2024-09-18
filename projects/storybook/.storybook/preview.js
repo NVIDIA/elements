@@ -106,6 +106,7 @@ export const parameters = {
             'Status',
             'Color',
             'Animation',
+            'Fonts',
             'Examples'
           ],
           'Typography',
@@ -276,6 +277,20 @@ export const globalTypes = {
       ]
     },
   },
+  font: {
+    name: 'Font',
+    description: 'Fonts',
+    defaultValue: '',
+    toolbar: {
+      title: 'Font',
+      showName: true,
+      items: [
+        { value: '', title: 'Theme Default' },
+        { value: 'inter', title: 'Inter' },
+        { value: 'nvidia-sans', title: 'NVIDIA Sans' }
+      ]
+    },
+  },
   scale: {
     name: 'Scale',
     description: 'Scale',
@@ -366,7 +381,7 @@ parentStyle.innerText = theme + dark + fontInter + fontNvidiaSans + highContrast
 window.parent.document.head.appendChild(parentStyle);
 
 export const decorators = [(story, { globals }) => {
-  const themes = window.parent.document.querySelector('[nve-theme]')?.getAttribute('nve-theme') ?? globals.theme;
+  const themes = window.parent.document.querySelector('[nve-theme]')?.getAttribute('nve-theme') ?? `${globals.theme} ${globals.font}`;
   window.document.querySelector('html').setAttribute('nve-theme', themes.trim());
   window.NVE_SB_GLOBALS = globals;
   return story();
