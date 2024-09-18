@@ -292,6 +292,10 @@ class ElementAPI extends LitElement {
 
   #markdown = new showdown.Converter(showdownOptions);
 
+  #checkIfPropertyExists(property) {
+    return CSS.supports(`${property}: initial`);  
+  }
+
   render() {
     return html`
       ${this.type === 'event' ? html`<div .innerHTML=${this.#markdown.makeHtml((`<code nve-text="code">${this.value}</code>: ` + this.#element.schema.events?.find(m => m.name === this.value)?.description))?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
@@ -369,7 +373,7 @@ class ElementAPI extends LitElement {
               <nve-grid-row>
                 <nve-grid-cell>${prop.name}</nve-grid-cell>
                 <nve-grid-cell>
-                  ${!prop.name.includes('icon')
+                  ${!prop.name.includes('icon') && this.#checkIfPropertyExists(prop.name.replace('--', ''))
                     ? html`<a nve-text="link" href=${`https://developer.mozilla.org/en-US/docs/Web/CSS/${prop.name.replace('--', '')}`} target="_blank" rel="none">MDN Documentation</a>`
                     : nothing}
                 </nve-grid-cell>
