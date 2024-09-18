@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.1.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.1.3...@nvidia-elements/themes-v1.1.4) (2024-09-18)
+
+
+### Bug Fixes
+
+* **elements:** css minification ([54c44e3](https://github.com/NVIDIA/elements/commit/54c44e3ffdddb3cf83e79f23fd1f3f007ac11c06))
+
 ## [@nvidia-elements/themes-v1.1.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.1.2...@nvidia-elements/themes-v1.1.3) (2024-08-30)
 
 
