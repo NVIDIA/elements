@@ -51,7 +51,7 @@
     "postcss-each": "1.1.0",
     "postcss-load-config": "4.0.1",
     "postcss-mixins": "9.0.4",
-    "publint": "^0.2.10",
+    "publint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
