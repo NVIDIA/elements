@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.2.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.1...@nvidia-elements/code-v0.2.2) (2024-09-18)
+
+
+### Bug Fixes
+
+* **elements:** css minification ([54c44e3](https://github.com/NVIDIA/elements/commit/54c44e3ffdddb3cf83e79f23fd1f3f007ac11c06))
+
 ## [@nvidia-elements/code-v0.2.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.0...@nvidia-elements/code-v0.2.1) (2024-08-22)
 
 
