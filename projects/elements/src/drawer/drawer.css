@@ -18,7 +18,7 @@
   width: var(--width);
   max-width: var(--max-width);
   min-height: var(--min-height);
-  top: var(--top);
+  margin-top: var(--top);
   height: calc(100vh - var(--top));
 }
 
@@ -61,12 +61,12 @@
   width: 100%;
 }
 
-:host::backdrop {
-  background: hsla(0, 0%, 0%, 0.07); /* --nve-sys-layer-backdrop-background (not available on top layer */
+::backdrop {
+  background: transparent;
 }
 
-:host([inline])::backdrop {
-  background: transparent;
+:host([modal])::backdrop {
+  background: hsla(0, 0%, 0%, 0.07); /* --nve-sys-layer-backdrop-background (not available on top layer */
 }
 
 .header {
