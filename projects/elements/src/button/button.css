@@ -45,8 +45,7 @@
   overflow: hidden;
 }
 
-::slotted(mlv-icon),
-::slotted(nve-icon) {
+::slotted(nve-icon:not([status])) {
   --color: var(--_icon-color);
   pointer-events: none;
 }
