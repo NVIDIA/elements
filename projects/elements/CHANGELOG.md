@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.6.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.0...@nvidia-elements/core-v1.6.1) (2024-09-18)
+
+
+### Bug Fixes
+
+* **elements:** drawer offset top ([3226755](https://github.com/NVIDIA/elements/commit/3226755a27e1a6b0a8a20968de5704e67931fe8d))
+
 ## [@nvidia-elements/core-v1.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.5.0...@nvidia-elements/core-v1.6.0) (2024-09-18)
 
 
