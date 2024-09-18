@@ -8,6 +8,31 @@ import { Responsive } from '../../../elements/src/forms/control/control.stories'
 
 ## Custom Properties
 
+Elements expose custom CSS properties that typically correspond to their native CSS properties, as shown in the table below. Some custom properties have no direct mappings to their native counterparts and are indicated in the table by the absence of MDN documentation references.
+
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column>Name</nve-grid-column>
+    <nve-grid-column>Description</nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>--background</nve-grid-cell>
+    <nve-grid-cell>
+      <a nve-text="link" target="_blank" rel="none" href="https://developer.mozilla.org/en-US/docs/Web/CSS/background">MDN Documentation</a>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>--gap</nve-grid-cell>
+    <nve-grid-cell>
+      <a nve-text="link" target="_blank" rel="none" href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">MDN Documentation</a>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>--status-color</nve-grid-cell>
+    <nve-grid-cell></nve-grid-cell>
+  </nve-grid-row>
+</nve-grid>
+
 Prefer exposing shorthand values. `border: var(--border)` rather than `border-color: var(--border-color)`
 as this gives more flexibility to the user without expanding the public API surface. When possible keep
 CSS Custom Property names simple and map them 1:1 to the native CSS property. This lowers the learning
