@@ -23,7 +23,7 @@ function updateTheme(themes) {
 
 const ThemePicker = () => {
   const [globals, updateGlobals] = useGlobals();
-  const themes = [globals.theme, globals.scale, globals.debug, globals.animation, globals.experimental, globals.systemOptions].filter(i => i !== '').join(' ').trim();
+  const themes = [globals.theme, globals.font, globals.scale, globals.debug, globals.animation, globals.experimental, globals.systemOptions].filter(i => i !== '').join(' ').trim();
   updateTheme(themes);
 
   return (
@@ -56,6 +56,17 @@ const ThemePicker = () => {
               <option value="models">AI/ML</option>
               <option value="">Infra</option>
               <option value="hardware">Hardware</option>
+            </select>
+          </nve-select>
+        </nve-drawer-content>
+        <nve-divider style={{'width': '100%'}}></nve-divider>
+        <nve-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
+          <nve-select style={{'--background': 'transparent', '--min-width': '180px'}}>
+            <label>Font</label>
+            <select size={3} defaultValue={globals.font} onChange={e => updateGlobals({ font: e.target.value })}>
+              <option value="">Default</option>
+              <option value="inter">Inter</option>
+              <option value="nvidia-sans">NVIDIA Sans</option>
             </select>
           </nve-select>
         </nve-drawer-content>
