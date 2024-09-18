@@ -1,3 +1,16 @@
+## [@nvidia-elements/core-v1.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.5.0...@nvidia-elements/core-v1.6.0) (2024-09-18)
+
+
+### Features
+
+* **elements:** native popover support ([4414494](https://github.com/NVIDIA/elements/commit/4414494ddf237bbe9880a6f7ade881e2acef47b0))
+
+
+### Bug Fixes
+
+* **elements:** css minification ([54c44e3](https://github.com/NVIDIA/elements/commit/54c44e3ffdddb3cf83e79f23fd1f3f007ac11c06))
+* **elements:** fix broken internal imports and css selectors ([085f19c](https://github.com/NVIDIA/elements/commit/085f19ca245a07b61fcbb78397d244ad7b7e7d08))
+
 ## [@nvidia-elements/core-v1.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.4.0...@nvidia-elements/core-v1.5.0) (2024-09-16)
 
 
