@@ -4,6 +4,7 @@ import tokenJSON from '@nvidia-elements/themes/index.json';
 import tokenJSONDark from '@nvidia-elements/themes/dark.json';
 import tokenJSONHighContrast from '@nvidia-elements/themes/high-contrast.json';
 import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/copy-button/define.js';
 import '@nvidia-elements/core/toast/define.js';
 
 export default {
@@ -55,7 +56,7 @@ export const Status = {
 };
 
 export const Support = {
-  render: (_, context) => html`${renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-support')))}`
+  render: (_, context) => renderTokenTable(getFormattedTokens(tokenJSON, context, value => value.includes('sys-support')))
 };
 
 export const Accent = {
@@ -241,6 +242,14 @@ function renderTokenTable(tokens) {
     .tokens-table td:nth-child(2) {
       min-width: 190px;
     }
+
+    .tokens-table nve-copy-button {
+      opacity: 0;
+    }
+
+    .tokens-table td:hover nve-copy-button {
+      opacity: 1;
+    }
   </style>
   <table class="tokens-table">
     <thead>
@@ -248,44 +257,36 @@ function renderTokenTable(tokens) {
         <th>Token</th>
         <th>Value</th>
         <th>Demo</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       ${Object.entries(tokens).map(([name, value]: any) => {
-        function _toggleCopyIcon(e: any, show: boolean) {
-          e.target.querySelector('nve-icon-button').style.opacity = show ? 100 : 0;
-        }
-
-        function copyTokenName(name: string) {
-          navigator.clipboard.writeText(name);
-        }
-
-        return html`<tr @mouseenter="${(e) => _toggleCopyIcon(e, true)}" @mouseleave="${(e) => _toggleCopyIcon(e, false)}">
-        <td>
-          ${name}
-          <nve-icon-button style="opacity: 0; margin-top: -18px" title="Copy '${name}' to clipboard" icon-name="copy" container="flat" @click="${() => copyTokenName(name)}"></nve-icon-button>
+        return html`<tr>
+        <td nve-layout="row gap:xs align:vertical-center">
+          ${name} <nve-copy-button aria-label="Copy to clipboard" value="${name}" container="flat" behavior-copy></nve-copy-button>
         </td>
         <td>
           <code style="user-select: none">${value}</code>
         </td>
         <td>
-          ${name.includes('ref-size') || name.includes('ref-space') ? html`<div style="${styleMap({ width: `var(${name})` })}"></div>` : ''}
-          ${name.includes('ref-color') || name.includes('sys-visualization') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
-          ${name.includes('ref-font-family') ? html`<div style="${styleMap({ 'font-family': `var(${name})`, background: 'transparent' })}">font</div>` : ''}
-          ${name.includes('ref-font-weight') ? html`<div style="${styleMap({ 'font-weight': `var(${name})`, background: 'transparent' })}">weight</div>` : ''}
-          ${name.includes('ref-font-line-height') ? html`<div style="${styleMap({ 'font-line-height': `var(${name})`, background: 'transparent' })}">line-height</div>` : ''}
-          ${name.includes('ref-font-size') ? html`<div style="${styleMap({ 'font-size': `var(${name})`, background: 'transparent' })}">size</div>` : ''}
-          ${name.includes('ref-border-radius') ? html`<div style="${styleMap({ 'border-radius': `var(${name})`, width: '100px', height: '100px' })}"></div>` : ''}
-          ${name.includes('ref-border-color') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
-          ${name.includes('ref-border-width') ? html`<div style="${styleMap({ border: '1px solid var(--nve-ref-border-color)', background: 'transparent', 'border-width': `var(${name})` })}"></div>` : ''}
-          ${name.includes('ref-opacity') ? html`<div style="${styleMap({ opacity: `var(${name})`, background: '#000' })}"></div>` : ''}
-          ${name.includes('ref-shadow') ? html`<div style="padding: 12px; background: transparent;"><div style="${styleMap({ 'box-shadow': `var(${name})`, background: 'var(--nve-sys-layer-container-background)' })}"></div></div>` : ''}
-          ${name.includes('ref-animation') ? html`<div style="${styleMap({ background: 'transparent' })}"></div>` : ''}
-          ${name.includes('sys-status') || name.includes('sys-support') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
-          ${name.includes('sys-text') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
-          ${name.includes('sys-accent') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
-          ${name.includes('sys-interaction') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
-          ${name.includes('sys-layer') ? html`<div style="${styleMap({ background: `var(${name})` })}"></div>` : ''}
+          ${name.includes('ref-size') || name.includes('ref-space') ? html`<div style="width: var(${name})"></div>` : ''}
+          ${name.includes('ref-color') || name.includes('sys-visualization') ? html`<div style="background: var(${name})"></div>` : ''}
+          ${name.includes('ref-font-family') ? html`<div style="font-family: var(${name}); background: transparent">font</div>` : ''}
+          ${name.includes('ref-font-weight') ? html`<div style="font-weight: var(${name}); background: transparent">weight</div>` : ''}
+          ${name.includes('ref-font-line-height') ? html`<div style="font-line-height: var(${name}); background: transparent">line-height</div>` : ''}
+          ${name.includes('ref-font-size') ? html`<div style="font-size: var(${name}); background: transparent">size</div>` : ''}
+          ${name.includes('ref-border-radius') ? html`<div style="border-radius: var(${name}); width: 100px; height: 100px"></div>` : ''}
+          ${name.includes('ref-border-color') ? html`<div style="background: var(${name})"></div>` : ''}
+          ${name.includes('ref-border-width') ? html`<div style="border: 1px solid var(--nve-ref-border-color); background: transparent; border-width: var(${name})"></div>` : ''}
+          ${name.includes('ref-opacity') ? html`<div style="opacity: var(${name}); background: #000"></div>` : ''}
+          ${name.includes('ref-shadow') ? html`<div style="padding: 12px; background: transparent;"><div style="box-shadow: var(${name}); background: var(--nve-sys-layer-container-background)"></div></div>` : ''}
+          ${name.includes('ref-animation') ? html`<div style="background: transparent"></div>` : ''}
+          ${name.includes('sys-status') || name.includes('sys-support') ? html`<div style="background: var(${name})"></div>` : ''}
+          ${name.includes('sys-text') ? html`<div style="background: var(${name})"></div>` : ''}
+          ${name.includes('sys-accent') ? html`<div style="background: var(${name})"></div>` : ''}
+          ${name.includes('sys-interaction') ? html`<div style="background: var(${name})"></div>` : ''}
+          ${name.includes('sys-layer') ? html`<div style="background: var(${name})"></div>` : ''}
         </td>
       </tr>`})}
     </tbody>

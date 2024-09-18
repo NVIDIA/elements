@@ -29,7 +29,7 @@
     "glob": "catalog:",
     "lit": "catalog:",
     "postcss": "8.4.31",
-    "publint": "^0.2.10",
+    "publint": "catalog:",
     "style-dictionary": "3.8.0",
     "vite": "catalog:",
     "vitest": "catalog:"
