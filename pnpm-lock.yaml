@@ -942,6 +942,9 @@ importers:
       '@storybook/web-components-vite':
         specifier: 8.2.6
         version: 8.2.6(lit@3.2.0)(storybook@8.2.6(@babel/preset-env@7.24.7(@babel/core@7.24.9)))(typescript@5.3.3)(vite@5.3.3(@types/node@22.0.0)(less@4.2.0)(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.39))(terser@5.30.3))
+      compare-versions:
+        specifier: 6.1.1
+        version: 6.1.1
       eslint:
         specifier: 'catalog:'
         version: 9.6.0
@@ -4598,6 +4601,9 @@ packages:
 
   compare-func@2.0.0:
     resolution: {integrity: sha512-zHig5N+tPWARooBnb0Zx1MFcdfpyJrfTJ3Y5L+IFvUm8rM74hHz66z0gw0x4tijh5CorKkKUCnW82R2vmpeCRA==}
+
+  compare-versions@6.1.1:
+    resolution: {integrity: sha512-4hm4VPpIecmlg59CHXnRDnqGplJFrbLG4aFEl5vl6cK1u76ws3LLvX7ikFnTDl5vo39sjWD6AaDPYodJp/NNHg==}
 
   composed-offset-position@0.0.4:
     resolution: {integrity: sha512-vMlvu1RuNegVE0YsCDSV/X4X10j56mq7PCIyOKK74FxkXzGLwhOUmdkJLSdOBOMwWycobGUMgft2lp+YgTe8hw==}
@@ -15146,6 +15152,8 @@ snapshots:
     dependencies:
       array-ify: 1.0.0
       dot-prop: 5.3.0
+
+  compare-versions@6.1.1: {}
 
   composed-offset-position@0.0.4: {}
 
