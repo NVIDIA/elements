@@ -70,6 +70,7 @@
       "files": [
         "src/**",
         "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
         "build/style-dictionary.config.js",
         "build/style-dictionary.alias.js",
         "build/style-dictionary.minify.js"
@@ -84,7 +85,8 @@
       "files": [
         "build/css-var-completions.js",
         "src/**",
-        "!src/**/*.test.lighthouse.ts"
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts"
       ],
       "output": [
         "dist/data.css-vars.json"
