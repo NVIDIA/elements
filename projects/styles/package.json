@@ -84,10 +84,11 @@
       "command": "NODE_ENV=production vite build && node ./build/metadata.js",
       "files": [
         "src/**",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
         "package.json",
         "vite.config.ts",
-        "postcss.config.cjs",
-        "!src/**/*.test.lighthouse.ts"
+        "postcss.config.cjs"
       ],
       "output": [
         "dist/**"
