@@ -5,7 +5,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/divider/define.js';
 
 export default {
-  title: 'Elements/Alert Group/Examples',
+  title: 'Elements/Alert/Examples',
   component: 'nve-alert-group',
   argTypes: {
     status: {
@@ -29,6 +29,7 @@ export const AlertGroupDefault = {
 
 export const AlertGroupStatus = {
   render: () => html`
+  <div nve-layout="column gap:md">
     <nve-alert-group>
       <nve-alert>Standard</nve-alert>
       <nve-alert>Standard</nve-alert>
@@ -53,6 +54,7 @@ export const AlertGroupStatus = {
       <nve-alert>Danger</nve-alert>
       <nve-alert>Danger</nve-alert>
     </nve-alert-group>
+  </div>
   `
 }
 
