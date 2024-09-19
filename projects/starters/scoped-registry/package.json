@@ -102,7 +102,7 @@
       "files": [
         "src/**",
         "!src/**/*.stories.ts",
-        "!src/**/*.stories.mdx",
+        "!src/**/*.mdx",
         "package.json",
         "tsconfig.json",
         "vite.config.ts"
