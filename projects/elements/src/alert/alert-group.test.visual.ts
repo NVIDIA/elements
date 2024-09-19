@@ -19,7 +19,7 @@ function template(theme: '' | 'dark' = '') {
     import '@nvidia-elements/core/alert/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
-  <div nve-layout="column gap:xs" style="min-width: 768px">
+  <div nve-layout="column gap:xs">
     <nve-alert-group>
       <nve-alert closable>•︎•︎•︎</nve-alert>
       <nve-alert closable>•︎•︎•︎</nve-alert>
@@ -43,6 +43,37 @@ function template(theme: '' | 'dark' = '') {
     <nve-alert-group status="danger">
       <nve-alert closable>•︎•︎•︎</nve-alert>
       <nve-alert closable>•︎•︎•︎</nve-alert>
+    </nve-alert-group>
+
+    <nve-alert-group prominence="emphasis" container="full">
+      <nve-alert closable><span slot="prefix">•︎•︎•︎•︎•︎•︎</span> •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ <a href="#" nve-text="link" slot="actions">•︎•︎•︎•︎•︎•︎</a></nve-alert>
+    </nve-alert-group>
+
+    <nve-alert-group status="accent" prominence="emphasis" container="full">
+      <nve-alert closable><span slot="prefix">•︎•︎•︎•︎•︎•︎</span> •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ <a href="#" nve-text="link" slot="actions">•︎•︎•︎•︎•︎•︎</a></nve-alert>
+    </nve-alert-group>
+
+    <nve-alert-group status="warning" prominence="emphasis" container="full">
+      <nve-alert closable><span slot="prefix">•︎•︎•︎•︎•︎•︎</span> •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ <a href="#" nve-text="link" slot="actions">•︎•︎•︎•︎•︎•︎</a></nve-alert>
+    </nve-alert-group>
+
+    <nve-alert-group status="success" prominence="emphasis" container="full">
+      <nve-alert closable><span slot="prefix">•︎•︎•︎•︎•︎•︎</span> •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ <a href="#" nve-text="link" slot="actions">•︎•︎•︎•︎•︎•︎</a></nve-alert>
+    </nve-alert-group>
+
+    <nve-alert-group status="danger" prominence="emphasis" container="full">
+      <nve-alert closable><span slot="prefix">•︎•︎•︎•︎•︎•︎</span> •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ <a href="#" nve-text="link" slot="actions">•︎•︎•︎•︎•︎•︎</a></nve-alert>
+    </nve-alert-group>
+
+    <nve-alert-group status="danger">
+      <nve-alert>
+        <p nve-text="body sm">•︎•︎•︎•︎•︎•︎</p>
+        <div slot="content" nve-layout="column gap:sm align:stretch">
+          <p nve-text="body sm">•︎•︎•︎•︎•︎•︎</p>
+          <p nve-text="body sm">•︎•︎•︎•︎•︎•︎</p>
+          <p nve-text="body sm">•︎•︎•︎•︎•︎•︎</p>
+        </div>
+      </nve-alert>
     </nve-alert-group>
   </div>
   `;
