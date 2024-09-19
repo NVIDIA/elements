@@ -58,6 +58,7 @@
 }
 
 :host([prominence='emphasis']) {
+  --background: var(--nve-sys-support-color);
   --color: var(--nve-sys-text-white-color);
   --icon-color: var(--color);
 }
