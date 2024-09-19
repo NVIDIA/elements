@@ -2,6 +2,8 @@ import { html, css, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { property } from 'lit/decorators/property.js';
 import showdown from 'showdown';
+import { compareVersions } from 'compare-versions';
+
 import { define } from '@nvidia-elements/core/internal';
 import typography from '@nvidia-elements/styles/typography.css?inline';
 import layout from '@nvidia-elements/styles/layout.css?inline';
@@ -28,27 +30,29 @@ export default {
   title: 'Internal/Metrics'
 };
 
+function getVersionNum(value) {
+  return parseFloat(`${value.replace('^', '').replace('~', '')}`);
+}
+
 function getMinorVersion(value) {
   return parseFloat(`${value.split('.')[1]}`) 
 }
 
 function getVersionBadge(value) {
-  const pin = value.replace('^', '').replace('~', '');
-  const currentVersion = getMinorVersion(ELEMENTS_VERSION) + 41; // last minor patch for 0.x;
-  const version = getMinorVersion(pin);
+  const latestBetaElementsRelease = 41; // last minor patch for 0.x was 0.41.0;
+  const projectMinorVersion = getMinorVersion(value);
+
   let status = 'success';
 
-  console.log(currentVersion, version)
-
-  if ((currentVersion - version) > 10) {
+  if (getVersionNum(value) < 1.0) {
     status = 'warning';
   }
 
-  if ((currentVersion - version) > 15 || value.includes('workspace')) {
+  if (getVersionNum(value) < 1.0 && (latestBetaElementsRelease - projectMinorVersion) > 10 || value.includes('workspace')) {
     status = 'danger';
   }
 
-  return html`<nve-badge status=${status as any}>${pin}</nve-badge>`;
+  return html`<nve-badge status=${status as any}>${value.replace('^', '').replace('~', '')}</nve-badge>`;
 }
 
 function getCoverageStatus(value, message = '', container = 'flat') {
@@ -472,7 +476,7 @@ class ElementsMetrics extends LitElement {
         <h3 nve-text="body bold">Summary:</h3>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Total Available Components</span>
-          <span nve-text="body sm bold"><nve-badge status="success">${metrics['@nvidia-elements/core'].elements.length}</nve-badge></span>
+          <span nve-text="body sm bold"><nve-badge status="scheduled">${metrics['@nvidia-elements/core'].elements.length}</nve-badge></span>
         </section>
       </div>
       <nve-grid style="--scroll-height: calc(100vh - 290px)">
@@ -557,7 +561,7 @@ class ProjectMetrics extends LitElement {
         <h3 nve-text="body bold">Summary:</h3>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Total Maglev Instances</span>
-          <span nve-text="body sm bold"><nve-badge status="success">${metricsMaglev.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge></span>
+          <span nve-text="body sm bold"><nve-badge status="queued">${metricsMaglev.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge></span>
         </section>
       </div>
       <nve-grid style="--scroll-height: calc(100vh - 290px)">
@@ -571,7 +575,7 @@ class ProjectMetrics extends LitElement {
               id=${name}>${name.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1").replace(/^./, (match) => match.toUpperCase())}</nve-grid-column>
           `)}
         </nve-grid-header>
-        ${this.projects.sort((a, b) => getMinorVersion(a.elementsVersion) > getMinorVersion(b.elementsVersion) ? -1 : 1 ).map(project => html`
+        ${this.projects.sort((a, b) => compareVersions(a.elementsVersion, b.elementsVersion) ).reverse().map(project => html`
           <nve-grid-row>
             <nve-grid-cell>${project.name ?? 'unknown'}</nve-grid-cell>
             <nve-grid-cell>${getVersionBadge(project.elementsVersion)}</nve-grid-cell>
