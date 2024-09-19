@@ -198,10 +198,11 @@
       "files": [
         "src/**",
         "!src/**/*.stories.ts",
-        "!src/**/*.stories.mdx",
+        "!src/**/*.mdx",
         "!src/**/*.test.ts",
-        "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/*.test.axe.ts",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -236,6 +237,9 @@
       "command": "playwright-lock 'vitest run'",
       "files": [
         "src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/*.test.axe.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
@@ -251,6 +255,9 @@
       "command": "playwright-lock 'vitest run --coverage'",
       "files": [
         "src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/*.test.axe.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
