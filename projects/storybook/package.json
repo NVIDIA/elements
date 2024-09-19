@@ -33,6 +33,7 @@
     "@storybook/theming": "8.2.6",
     "@storybook/web-components": "8.2.6",
     "@storybook/web-components-vite": "8.2.6",
+    "compare-versions": "6.1.1",
     "eslint": "catalog:",
     "storybook": "8.2.6",
     "typescript": "catalog:",
