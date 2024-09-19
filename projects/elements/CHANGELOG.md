@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.6.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.2...@nvidia-elements/core-v1.6.3) (2024-09-19)
+
+
+### Bug Fixes
+
+* **elements:** alert group default prominence background ([cf8243e](https://github.com/NVIDIA/elements/commit/cf8243eb96905a41c2dffde71e75492fa78a9520))
+
 ## [@nvidia-elements/core-v1.6.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.1...@nvidia-elements/core-v1.6.2) (2024-09-18)
 
 
