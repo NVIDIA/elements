@@ -841,7 +841,7 @@
         "public/**",
         "src/**",
         "!src/**/*.stories.ts",
-        "!src/**/*.stories.mdx",
+        "!src/**/*.mdx",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
