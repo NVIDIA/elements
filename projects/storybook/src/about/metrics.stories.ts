@@ -475,7 +475,7 @@ class ElementsMetrics extends LitElement {
       <div nve-layout="row gap:md align:vertical-center pad-bottom:sm">
         <h3 nve-text="body bold">Summary:</h3>
         <section nve-layout="row gap:xs align:center">
-          <span nve-text="body sm muted">Total Available Components</span>
+          <span nve-text="body sm muted">Total Available Web Components</span>
           <span nve-text="body sm bold"><nve-badge status="scheduled">${metrics['@nvidia-elements/core'].elements.length}</nve-badge></span>
         </section>
       </div>
