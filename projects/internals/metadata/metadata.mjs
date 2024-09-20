@@ -74,7 +74,7 @@ function getElementStability(metadata) {
   let status = 'unknown';
   const preRelease = metadata.apiReview && metadata.storybook?.length;
   const beta = metadata.unitTests && metadata.apiReview && metadata.vqa && metadata.package;
-  const stable = metadata.stable && metadata.responsive && metadata.performance && metadata.aria?.length;
+  const stable = metadata.stable && metadata.performance && metadata.aria?.length;
 
   if (preRelease) {
     status = 'pre-release';
