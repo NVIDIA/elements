@@ -108,7 +108,7 @@ export class Notification extends LitElement {
 
   /** @private */
   get popoverInline() {
-    return this.parentElement.localName === 'nve-notification-group' || this.inline || this.container === 'flat';
+    return this.parentElement?.localName === 'nve-notification-group' || this.inline || this.container === 'flat';
   }
 
   /** @private */

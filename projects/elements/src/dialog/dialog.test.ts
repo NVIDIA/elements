@@ -26,6 +26,11 @@ describe(Dialog.metadata.tag, () => {
     expect(customElements.get(Dialog.metadata.tag)).toBeDefined();
   });
 
+  it('should initialize role of type dialog', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('dialog');
+  });
+
   it('should render close button when closable', async () => {
     expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
 

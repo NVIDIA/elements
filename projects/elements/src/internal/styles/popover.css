@@ -2,7 +2,6 @@
   --animation-duration: var(--nve-ref-animation-duration-200);
   --_width: 0px;
   --_height: 0px;
-  all: revert;
   margin: calc(var(--nve-sys-layer-popover-offset) + calc(var(--nve-sys-layer-popover-arrow-offset) * 2));
   border: 0;
   padding: 0;
@@ -12,6 +11,7 @@
   contain: initial;
   width: max-content;
   z-index: 99;
+  pointer-events: none;
   /* for fallback floating ui positioning */
 }
 
@@ -29,6 +29,7 @@
 :host(:not([popover]):not([hidden])),
 :host(:state(no-trigger):not([hidden])) {
   opacity: 1;
+  pointer-events: initial;
 }
 
 :host(:popover-open),
@@ -151,45 +152,68 @@
   }
 
   /* offset calculation by anchor controller, can't use transforms with anchoring https://github.com/w3c/csswg-drafts/issues/8584 */
-  :host([position='left']:state(anchor-body)),
   :host([position='top'][alignment='start']),
   :host([position='bottom'][alignment='start']) {
     margin-right: calc(-1 * calc(var(--_width) + var(--nve-sys-layer-popover-offset)));
   }
 
-  :host([position='right']:state(anchor-body)),
   :host([position='top'][alignment='end']),
   :host([position='bottom'][alignment='end']) {
     margin-left: calc(-1 * calc(var(--_width) + var(--nve-sys-layer-popover-offset)));
   }
 
-  :host([position='top']:state(anchor-body)),
   :host([position='left'][alignment='start']),
   :host([position='right'][alignment='start']) {
     margin-bottom: calc(-1 * calc(var(--_height) + var(--nve-sys-layer-popover-offset)));
   }
 
-  :host([position='bottom']:state(anchor-body)),
   :host([position='left'][alignment='end']),
   :host([position='right'][alignment='end']) {
     margin-top: calc(-1 * calc(var(--_height) + var(--nve-sys-layer-popover-offset)));
   }
 
+  :host(:state(anchor-body)) {
+    margin: auto;
+  }
+
+  :host([position='top']:state(anchor-body)),
+  :host([position='right'][alignment='start']:state(anchor-body)),
+  :host([position='left'][alignment='start']:state(anchor-body)) {
+    margin-top: var(--nve-sys-layer-popover-offset);
+  }
+
+  :host([position='right']:state(anchor-body)),
+  :host([position='bottom'][alignment='end']:state(anchor-body)),
+  :host([position='top'][alignment='end']:state(anchor-body)) {
+    margin-right: var(--nve-sys-layer-popover-offset);
+  }
+
+  :host([position='bottom']:state(anchor-body)),
+  :host([position='right'][alignment='end']:state(anchor-body)),
+  :host([position='left'][alignment='end']:state(anchor-body)) {
+    margin-bottom: var(--nve-sys-layer-popover-offset);
+  }
+
+  :host([position='left']:state(anchor-body)),
+  :host([position='top'][alignment='start']:state(anchor-body)),
+  :host([position='bottom'][alignment='start']:state(anchor-body)) {
+    margin-left: var(--nve-sys-layer-popover-offset);
+  }
+
   /** top */
   :host([position='top']) {
     position-area: top;
+    inset: 0 auto auto auto;
   }
 
   :host([position='top'][alignment='start']) {
     position-area: top left;
+    inset: 0 auto auto 0;
   }
 
   :host([position='top'][alignment='end']) {
     position-area: top right;
-  }
-
-  :host([position='top']) {
-    position-area: top;
+    inset: 0 0 auto auto;
   }
 
   :host([position='top'][alignment='start']) {
@@ -203,48 +227,52 @@
   /** bottom */
   :host([position='bottom']) {
     position-area: bottom;
+    inset: auto auto 0 auto;
   }
 
   :host([position='bottom'][alignment='start']) {
     position-area: bottom left;
+    inset: auto auto 0 0;
   }
 
   :host([position='bottom'][alignment='end']) {
     position-area: bottom right;
+    inset: auto 0 0 auto;
   }
 
   /** left */
   :host([position='left']) {
     position-area: left;
+    inset: auto auto auto 0;
   }
 
   :host([position='left'][alignment='end']) {
     position-area: bottom left;
+    inset: auto auto 0 0;
   }
 
   :host([position='left'][alignment='start']) {
     position-area: top left;
+    inset: 0 auto auto 0;
   }
 
   /** right */
   :host([position='right']) {
     position-area: right;
+    inset: auto 0 auto auto;
   }
 
   :host([position='right'][alignment='end']) {
     position-area: bottom right;
+    inset: auto 0 0 auto;
   }
 
   :host([position='right'][alignment='start']) {
     position-area: top right;
+    inset: 0 0 auto auto;
   }
-}
 
-/* drawer - style here due to position polyfill for pre chrome 130 */
-:host([inline][position='left']) {
-  inset-area: span-bottom left !important;
-}
-
-:host([inline][position='right']) {
-  inset-area: span-bottom right !important;
+  :host(:not(:state(anchor-body))) {
+    inset: initial;
+  }
 }

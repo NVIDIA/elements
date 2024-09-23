@@ -103,3 +103,40 @@ export const LegacyBehaviorTrigger = {
 </div>
 `
 };
+
+export const ShadowRoot = {
+  render: () => html`
+<toast-test-shadow-root></toast-test-shadow-root>
+<script type="module">
+  customElements.define('toast-test-shadow-root', class ToastTestShadowRoot extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({mode: 'open'});
+
+      const template = document.createElement('template');
+      template.innerHTML = \`
+        <style>:host { box-sizing: border-box; }</style>
+        <nve-toast size="sm">center</nve-toast>
+
+        <nve-toast size="sm" position="top">top center</nve-toast>
+        <nve-toast size="sm" position="top" alignment="start">top start</nve-toast>
+        <nve-toast size="sm" position="top" alignment="end">top end</nve-toast>
+
+        <nve-toast size="sm" position="right" alignment="start">right start</nve-toast>
+        <nve-toast size="sm" position="right">right center</nve-toast>
+        <nve-toast size="sm" position="right" alignment="end">right end</nve-toast>
+
+        <nve-toast size="sm" position="bottom" alignment="start">bottom start</nve-toast>
+        <nve-toast size="sm" position="bottom">bottom center</nve-toast>
+        <nve-toast size="sm" position="bottom" alignment="end">bottom end</nve-toast>
+
+        <nve-toast size="sm" position="left" alignment="start">left start</nve-toast>
+        <nve-toast size="sm" position="left">left center</nve-toast>
+        <nve-toast size="sm" position="left" alignment="end">left end</nve-toast>
+      \`;
+      this._shadow.appendChild(template.content);
+    }
+  });
+</script>
+  `
+};

@@ -18,7 +18,7 @@ describe('dialog lighthouse report', () => {
       </script>
     `);
 
-    expect(report.scores.performance).toBe(100);
+    expect(report.scores.performance).toBeGreaterThan(97); // bfcache
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
     expect(report.payload.javascript.kb).toBeLessThan(22);
