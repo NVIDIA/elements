@@ -21,21 +21,8 @@ export default {
 
 export const Default = {
   render: () => html`
-<nve-button id="dropdown-btn">open</nve-button>
-<nve-button id="dropdown-fix">fix</nve-button>
-<nve-dropdown anchor="does-not-exist" modal closable trigger="dropdown-btn" behavior-trigger hidden>
-  <br />
-  <p nve-text="body">hello there</p>
-</nve-dropdown>
-
-<script type="module">
-  const dropdown = document.querySelector('nve-dropdown');
-  const fix = document.querySelector('#dropdown-fix');
-  fix.addEventListener('click', () => {
-    console.log(dropdown.anchor)
-    dropdown.anchor = 'dropdown-btn';
-  });
-</script>
+<nve-dropdown id="dropdown">dropdown content</nve-dropdown>
+<nve-button popovertarget="dropdown">button</nve-button>
   `
 };
 

@@ -48,12 +48,12 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
   async #calculatePosition() {
     if (supportsNativeCSSAnchorPosition()) {
       const anchor = getHostAnchor(this.host);
-      associateAnchor(this.host, anchor);
 
       if (anchor === globalThis.document.body) {
         this.host._internals.states.add('anchor-body');
       } else {
         this.host._internals.states.delete('anchor-body');
+        associateAnchor(this.host, anchor);
       }
 
       await new Promise(r => requestAnimationFrame(r));

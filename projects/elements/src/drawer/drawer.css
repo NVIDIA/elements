@@ -11,15 +11,14 @@
   --box-shadow: var(--nve-ref-shadow-500);
   --gap: var(--nve-ref-space-sm);
   --top: 0px;
-  --min-height: calc(100% - var(--top));
   --max-width: 400px;
   --width: 100vw;
   height: 100%;
   width: var(--width);
   max-width: var(--max-width);
-  min-height: var(--min-height);
-  margin-top: var(--top);
   height: calc(100vh - var(--top));
+  margin: initial !important;
+  margin-top: var(--top) !important;
 }
 
 :host([size='sm']) {
@@ -30,14 +29,16 @@
   --max-width: 540px;
 }
 
-@starting-style {
-  :host([position='left']:popover-open) {
-    transform: translateX(calc(-1 * var(--width)));
-  }
+:host([position='left']) {
+  transform: translateX(calc(-1 * var(--width))) !important;
+}
 
-  :host([position='right']:popover-open) {
-    transform: translateX(var(--width));
-  }
+:host([position='right']) {
+  transform: translateX(var(--width)) !important;
+}
+
+:host(:popover-open) {
+  transform: translateX(0) !important;
 }
 
 :host([inline]) {
