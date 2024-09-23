@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.6.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.3...@nvidia-elements/core-v1.6.4) (2024-09-23)
+
+
+### Bug Fixes
+
+* **elements:** body anchor popovers and shadow roots ([ef85e65](https://github.com/NVIDIA/elements/commit/ef85e658c5e11d975ee851f447efc71ae6b35a45))
+
 ## [@nvidia-elements/core-v1.6.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.2...@nvidia-elements/core-v1.6.3) (2024-09-19)
 
 
