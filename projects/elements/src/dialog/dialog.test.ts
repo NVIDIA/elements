@@ -50,14 +50,25 @@ describe(Dialog.metadata.tag, () => {
     expect(element.popoverDismissible).toBe(true);
   });
 
+  it('should reflect a modal attribute', async () => {
+    expect(element.modal).toBe(undefined);
+    expect(element.getAttribute('modal')).toBe(null);
+
+    element.modal = true;
+    await elementIsStable(element);
+    expect(element.getAttribute('modal')).toBe('');
+  });
+
   it('should use manual behavior when non-modal', async () => {
     expect(element.modal).toBe(undefined);
     expect(element.popoverType).toBe('manual');
+    expect(element.popover).toBe('manual');
     await elementIsStable(element);
 
     element.modal = true;
     await elementIsStable(element);
     expect(element.popoverType).toBe('auto');
+    expect(element.popover).toBe('auto');
   });
 
   // https://open-ui.org/components/popup.research.explainer#api-shape

@@ -14,12 +14,16 @@ import { NveBadge } from '@nvidia-elements/core-react/badge';
 import { NveBreadcrumb } from '@nvidia-elements/core-react/breadcrumb';
 import { NveCard, NveCardHeader, NveCardContent } from '@nvidia-elements/core-react/card';
 import { NveLogo } from '@nvidia-elements/core-react/logo';
+import { NveDialog } from '@nvidia-elements/core-react/dialog';
+import { NveDropdown } from '@nvidia-elements/core-react/dropdown';
+import { NveTooltip } from '@nvidia-elements/core-react/tooltip';
+import { NveDrawer, NveDrawerHeader } from '@nvidia-elements/core-react/drawer';
+import { NveToast } from '@nvidia-elements/core-react/toast';
+import { NveNotification } from '@nvidia-elements/core-react/notification';
 
 // This demo is used for baseline experimental SSR support testing.
 // This demo does not follow the same consistent pattern as the rest of the demo integrations.
 export default function Home() {
-  const [showDialog, setshowDialog] = React.useState(false);
-
   return (
     <>
       <NveAppHeader>
@@ -41,7 +45,41 @@ export default function Home() {
       <div nve-layout="column gap:md pad:lg" style={{ height: '95vh' }}>
         <h1 nve-text="heading">NextJS</h1>
 
-        <NveButton onClick={() => setshowDialog(!showDialog)}>greeting</NveButton>
+        <div nve-layout="row align:center gap:lg pad:lg">
+          <NveTooltip id="tooltip">hello there</NveTooltip>
+          <NveButton popovertarget="tooltip">tooltip</NveButton>
+
+          <NveToast id="toast" close-timeout="1500">
+            copied!
+          </NveToast>
+          <NveButton popovertarget="toast">toast</NveButton>
+
+          <NveDrawer id="drawer" closable modal>
+            <NveDrawerHeader>
+              <h3 nve-text="heading semibold sm">Title</h3>
+            </NveDrawerHeader>
+            <p nve-text="body">some text content in a drawer</p>
+          </NveDrawer>
+          <NveButton popovertarget="drawer">drawer</NveButton>
+
+          <NveDropdown id="dropdown" closable>
+            <h3 nve-text="heading">Title</h3>
+            <p nve-text="body">some text content in a dropdown</p>
+          </NveDropdown>
+          <NveButton popovertarget="dropdown">dropdown</NveButton>
+
+          <NveDialog id="dialog" closable modal>
+            <h3 nve-text="heading">Title</h3>
+            <p nve-text="body">some text content in a closable dialog</p>
+          </NveDialog>
+          <NveButton popovertarget="dialog">dialog</NveButton>
+
+          <NveNotification id="notification" closable position="bottom" alignment="end" close-timeout="2000">
+            <h3 nve-text="label">notification</h3>
+            <p nve-text="body">some text content in a notification</p>
+          </NveNotification>
+          <NveButton popovertarget="notification">notification snackbar</NveButton>
+        </div>
 
         <NveAlert status="success">hello there</NveAlert>
 
