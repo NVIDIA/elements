@@ -7,9 +7,33 @@ describe('associateAnchor', () => {
     const element = document.createElement('div');
     const anchor = document.createElement('div');
     associateAnchor(element, anchor);
-    expect(anchor.id.startsWith('_')).toBe(true);
-    expect((anchor.style as any).anchorName).toBe(`--${anchor.id}`);
-    expect((element.style as any).positionAnchor).toBe(`--${anchor.id}`);
+    expect((anchor.style as any).anchorName.startsWith('--')).toBe(true);
+    expect((element.style as any).positionAnchor.startsWith('--')).toBe(true);
+    expect((element.style as any).positionAnchor).toBe((anchor.style as any).anchorName);
+  });
+
+  it('should create a CSS Anchor Position association between two elements with the default id if provided', async () => {
+    const element = document.createElement('div');
+    const anchor = document.createElement('div');
+    element.id = 'test';
+    anchor.id = 'test';
+    associateAnchor(element, anchor);
+    expect(anchor.id.startsWith('_')).toBe(false);
+    expect((anchor.style as any).anchorName).toBe('--test');
+    expect((element.style as any).positionAnchor).toBe('--test');
+  });
+
+  // https://github.com/facebook/react/issues/26839#issuecomment-2277253506
+  it('should generate id if a invalid ":" prefixed ID is created via React', async () => {
+    const element = document.createElement('div');
+    const anchor = document.createElement('div');
+    anchor.id = ':test';
+    associateAnchor(element, anchor);
+    expect((anchor.style as any).anchorName.includes('test')).toBe(false);
+    expect((anchor.style as any).positionAnchor.includes('test')).toBe(false);
+    expect((anchor.style as any).anchorName.startsWith('--')).toBe(true);
+    expect((element.style as any).positionAnchor.startsWith('--')).toBe(true);
+    expect((element.style as any).positionAnchor).toBe((anchor.style as any).anchorName);
   });
 });
 

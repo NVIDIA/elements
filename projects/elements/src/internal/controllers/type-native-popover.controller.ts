@@ -27,7 +27,9 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   get #nativeTriggers(): HTMLElement[] {
     return Array.from(
-      (this.host.getRootNode() as HTMLElement).querySelectorAll(`[popovertarget="${this.host.id}"]`)
+      (this.host.getRootNode() as HTMLElement).querySelectorAll(
+        `[popovertarget="${CSS.escape ? CSS.escape(this.host.id) : this.host.id}"]`
+      )
     ) as HTMLElement[];
   }
 
@@ -37,7 +39,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   async hostConnected() {
     attachInternals(this.host);
-    this.host.popover = this.host.popoverType && this.host.popoverType !== 'hint' ? this.host.popoverType : 'auto';
+    this.#updatePopoverType();
     await this.host.updateComplete;
     this.host.setAttribute('nve-popover', '');
     this.#setupHiddenUpdates();
@@ -65,11 +67,16 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #observers: MutationObserver[] = [];
 
   async hostUpdated() {
+    this.#updatePopoverType();
     this.#updateTriggers();
   }
 
   hostDisconnected() {
     this.#observers.forEach(observer => observer.disconnect());
+  }
+
+  #updatePopoverType() {
+    this.host.popover = this.host.popoverType && this.host.popoverType !== 'hint' ? this.host.popoverType : 'auto';
   }
 
   async #setupDefaultHiddenState() {
