@@ -11,7 +11,8 @@ import {
   Size,
   TypeNativeAnchorController,
   TypeNativePopoverController,
-  useStyles
+  useStyles,
+  attachInternals
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './dialog.css?inline';
@@ -120,6 +121,9 @@ export class Dialog extends LitElement {
     [IconButton.metadata.tag]: IconButton
   };
 
+  /** @private */
+  declare _internals: ElementInternals;
+
   render() {
     return html`
     <div internal-host>
@@ -133,5 +137,11 @@ export class Dialog extends LitElement {
       <slot name="footer"></slot>
     </div>
     `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    attachInternals(this);
+    this._internals.role = 'dialog';
   }
 }

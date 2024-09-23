@@ -19,19 +19,12 @@ function template(theme: '' | 'dark' = '') {
     import '@nvidia-elements/core/toast/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
-  <style>
-    body {
-      width: 450px;
-      height: 350px;
-    }
-
-    nve-toast {
-      transition: none !important;
-    }
-  </style>
-  <nve-toast position="top">•︎•︎•︎•︎•︎•︎</nve-toast>
-  <nve-toast status="success" position="right">•︎•︎•︎•︎•︎•︎</nve-toast>
-  <nve-toast status="warning" position="bottom">•︎•︎•︎•︎•︎•︎</nve-toast>
-  <nve-toast status="danger" position="left">•︎•︎•︎•︎•︎•︎</nve-toast>
+  <nve-toast anchor="btn" position="top">•︎•︎•︎•︎•︎•︎</nve-toast>
+  <nve-toast anchor="btn" status="success" position="right">•︎•︎•︎•︎•︎•︎</nve-toast>
+  <nve-toast anchor="btn" status="warning" position="bottom">•︎•︎•︎•︎•︎•︎</nve-toast>
+  <nve-toast anchor="btn" status="danger" position="left">•︎•︎•︎•︎•︎•︎</nve-toast>
+  <div nve-layout="row align:center" style="height: 400px; width: 100%;">
+    <nve-button id="btn">•︎•︎•︎•︎•︎•︎</nve-button>
+  </div>
   `;
 }
