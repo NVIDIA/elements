@@ -1,10 +1,6 @@
+import { isServer } from 'lit';
 import { supportsCSSPositionArea, supportsCSSLegacyInsetArea } from '../utils/supports.js';
 import _popoverStyles from './popover.css?inline';
-
-const styles =
-  !supportsCSSPositionArea() && supportsCSSLegacyInsetArea()
-    ? _popoverStyles.replaceAll('position-area', 'inset-area')
-    : _popoverStyles;
 
 // vite/esbuild minifier does not understand this syntax
 const anchor = /* css */ `
@@ -12,4 +8,12 @@ const anchor = /* css */ `
 .arrow { position-anchor: --internal-host }
 `;
 
-export const popoverStyles = styles + anchor;
+function getPopoverStyles() {
+  if (!isServer && !supportsCSSPositionArea() && supportsCSSLegacyInsetArea()) {
+    return _popoverStyles.replaceAll('position-area', 'inset-area') + anchor;
+  } else {
+    return _popoverStyles + anchor;
+  }
+}
+
+export const popoverStyles = getPopoverStyles();

@@ -3,9 +3,9 @@ import { getIdMatchNotFoundWarning } from '../utils/audit.js';
 import { generateId, getFlatDOMTree } from '../utils/dom.js';
 
 export function associateAnchor(host: HTMLElement, anchor: HTMLElement) {
-  anchor.id = anchor.id ? anchor.id : generateId();
-  (anchor.style as any).anchorName = `--${anchor.id}`;
-  (host.style as any).positionAnchor = `--${anchor.id}`;
+  const id = anchor.id && !anchor.id.includes(':') ? anchor.id : generateId();
+  (anchor.style as any).anchorName = `--${id}`;
+  (host.style as any).positionAnchor = `--${id}`;
 }
 
 export function getHostTrgger(element: HTMLElement, trigger: HTMLElement | string) {

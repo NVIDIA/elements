@@ -1,5 +1,4 @@
 import { GlobalStateService } from '../services/global.service.js';
-import { LogService } from '../services/log.service.js';
 import { isFocusable } from './focus.js';
 
 /**
