@@ -61,7 +61,7 @@ export class Drawer extends LitElement {
    * Anchor can accept a idref string within the same render root or a HTMLElement DOM reference.
    * Drawers should default to the document body.
    */
-  @property({ type: String }) anchor: string | HTMLElement = globalThis.document.body;
+  @property({ type: String }) anchor: string | HTMLElement = globalThis.document?.body;
 
   /**
    * The trigger defines what element triggers an `open` interaction event.
