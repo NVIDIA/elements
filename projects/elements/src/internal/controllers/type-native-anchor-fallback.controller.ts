@@ -22,30 +22,37 @@ export class TypeNativeAnchorFallbackController<T extends NativeAnchorFallback> 
 
   async hostConnected() {
     attachInternals(this.host);
+    await this.host.updateComplete;
     const { popoverRenderUpdate } = await import('./type-native-anchor-fallback.utils.js');
 
     const config = {
       position: this.host.position,
       alignment: this.host.alignment,
       popover: this.host,
-      anchor: getHostAnchor(this.host),
-      arrow: this.host.popoverArrow
+      arrow: this.host.popoverArrow,
+      anchor: getHostAnchor(this.host)
     };
 
     this.#popoverUpdateDisconnect = popoverRenderUpdate(config, async () => {
       await this.host.updateComplete;
-      const { setAnchorPositionFallback } = await import('./type-native-anchor-fallback.utils.js');
-      await setAnchorPositionFallback(this.host, {
-        position: this.host.position,
-        alignment: this.host.alignment,
-        popover: this.host,
-        anchor: getHostAnchor(this.host),
-        arrow: this.host.popoverArrow
-      });
+      await this.#updatePositon();
     });
+
+    this.host.addEventListener('beforetoggle', async () => await this.#updatePositon());
   }
 
   hostDisconnected() {
     this.#popoverUpdateDisconnect();
+  }
+
+  async #updatePositon() {
+    const { setAnchorPositionFallback } = await import('./type-native-anchor-fallback.utils.js');
+    await setAnchorPositionFallback(this.host, {
+      position: this.host.position,
+      alignment: this.host.alignment,
+      popover: this.host,
+      anchor: getHostAnchor(this.host),
+      arrow: this.host.popoverArrow
+    });
   }
 }

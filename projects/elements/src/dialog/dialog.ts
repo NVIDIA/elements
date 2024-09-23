@@ -65,13 +65,13 @@ export class Dialog extends LitElement {
   /**
    * Determines if a dialog should have a modal backdrop that visually overlays the UI.
    */
-  @property({ type: Boolean }) modal: boolean;
+  @property({ type: Boolean, reflect: true }) modal: boolean;
 
   /**
    * The anchor provides the element that the popover should position relative to.
    * Anchor can accept a idref string within the same render root or a HTMLElement DOM reference.
    */
-  @property({ type: String }) anchor: string | HTMLElement = globalThis.document.body;
+  @property({ type: String }) anchor: string | HTMLElement = globalThis.document?.body;
 
   /**
    * The trigger defines what element triggers an `open` interaction event.
