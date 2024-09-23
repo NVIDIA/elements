@@ -32,6 +32,13 @@
   pointer-events: initial;
 }
 
+/* lit SSR ensure popovers are not visible until hydration has happened */
+:host(:not([nve-popover])),
+:host([defer-hydration]) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 :host(:popover-open),
 :host(:state(no-trigger):not([hidden])) {
   display: block;

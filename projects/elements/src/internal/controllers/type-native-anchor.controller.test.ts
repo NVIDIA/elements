@@ -54,9 +54,9 @@ describe('type-native-anchor.controller', () => {
     await elementIsStable(element);
     element.anchor = anchor;
     await elementIsStable(element);
-    expect(anchor.id.startsWith('_')).toBe(true);
-    expect((anchor.style as any).anchorName).toBe(`--${anchor.id}`);
-    expect((element.style as any).positionAnchor).toBe(`--${anchor.id}`);
+    expect((anchor.style as any).anchorName.startsWith('--')).toBe(true);
+    expect((element.style as any).positionAnchor.startsWith('--')).toBe(true);
+    expect((element.style as any).positionAnchor).toBe((anchor.style as any).anchorName);
   });
 
   it('should set anchor-body state selector if element is anchored to body element', async () => {

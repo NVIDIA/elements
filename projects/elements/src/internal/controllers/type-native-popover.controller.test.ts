@@ -159,6 +159,36 @@ describe('type-popover.controller', () => {
   });
 });
 
+describe('type-popover.controller escaped id selectors', () => {
+  let element: TypeNativePopoverControllerTestElement;
+  let button: Button;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-button>anchor</nve-button>
+      <type-native-popover-controller-test-element></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    button = fixture.querySelector(Button.metadata.tag);
+    await element.updateComplete;
+    await button.updateComplete;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should not show popover by default due to correct id matching of escaped characters', async () => {
+    button.popovertarget = ':popover';
+    element.id = ':popover';
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+});
+
 describe('type-popover.controller explicit trigger', () => {
   let element: TypeNativePopoverControllerTestElement;
   let button: Button;
