@@ -1,6 +1,6 @@
 import { unsafeCSS } from 'lit';
-import base from '../styles/base.css?inline';
-import state from '../styles/interaction-state.css?inline';
+import base from './base.css?inline';
+import state from './interaction-state.css?inline';
 import _colorStateStyles from './color.state.css?inline';
 import _statusStateStyles from './status.state.css?inline';
 import _supportStateStyles from './support.state.css?inline';

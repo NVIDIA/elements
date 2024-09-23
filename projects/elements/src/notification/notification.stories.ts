@@ -281,6 +281,64 @@ export const Drawer = {
   `,
 };
 
+export const ShadowRoot = {
+  render: () => html`
+<test-notification-shadow-root></test-notification-shadow-root>
+<script type="module">
+  customElements.define('test-notification-shadow-root', class TestNotificationShadowRoot extends HTMLElement {
+    constructor() {
+      super();
+      this._shadow = this.attachShadow({mode: 'open'});
+
+      const template = document.createElement('template');
+      template.innerHTML = \`
+        <nve-notification position="top">
+          top
+        </nve-notification>
+        <nve-notification position="top" alignment="start">
+          top start
+        </nve-notification>
+        <nve-notification position="top" alignment="end">
+          top end
+        </nve-notification>
+
+        <nve-notification position="right">
+          right
+        </nve-notification>
+        <nve-notification position="right" alignment="start">
+          right start
+        </nve-notification>
+        <nve-notification position="right" alignment="end">
+          right end
+        </nve-notification>
+
+        <nve-notification position="bottom">
+          bottom
+        </nve-notification>
+        <nve-notification position="bottom" alignment="start">
+          bottom start
+        </nve-notification>
+        <nve-notification position="bottom" alignment="end">
+          bottom end
+        </nve-notification>
+
+        <nve-notification position="left">
+          left
+        </nve-notification>
+        <nve-notification position="left" alignment="start">
+          left start
+        </nve-notification>
+        <nve-notification position="left" alignment="end">
+          left end
+        </nve-notification>
+      \`;
+      this._shadow.appendChild(template.content);
+    }
+  });
+</script>
+  `
+};
+
 export const LegacyBehaviorTrigger = {
   render: () => html`
 <nve-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" close-timeout="2000">
