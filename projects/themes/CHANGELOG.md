@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.3.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.0...@nvidia-elements/themes-v1.3.1) (2024-09-24)
+
+
+### Bug Fixes
+
+* **themes:** fix invalid oklch values ([04c24c5](https://github.com/NVIDIA/elements/commit/04c24c5737f2fcb786436e91ea39563d41e39725))
+
 ## [@nvidia-elements/themes-v1.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.2.0...@nvidia-elements/themes-v1.3.0) (2024-09-23)
 
 
