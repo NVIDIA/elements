@@ -148,6 +148,17 @@ export const ColorPalette = {
         .color-scale button:hover {
           scale: 1.1;
         }
+        .color-scale [colors] {
+          --checker-color-1: white;
+          --checker-color-2: black;
+          --checker-size: 20px;
+          --checker-gradient: linear-gradient(45deg, var(--checker-color-1) 25%, transparent 25%, transparent 75%, var(--checker-color-1) 75%);
+
+          background-color: var(--checker-color-2) !important;
+          background-image: var(--checker-gradient), var(--checker-gradient) !important;
+          background-position: 0 0, var(--checker-size) var(--checker-size) !important;
+          background-size: calc(var(--checker-size) * 2) calc(var(--checker-size) * 2) !important;
+        }
       </style>
       <div nve-layout="grid gap:md" class="color-scale full-width">
       ${getColorScale('ref-color-gray-slate')}
@@ -172,6 +183,8 @@ export const ColorPalette = {
       ${getColorScale('ref-color-yellow-nova')}
       ${getColorScale('ref-color-lime-pear')}
       ${getColorScale('ref-color-brand-green')}
+      ${getColorScale('ref-color-alpha-black')}
+      ${getColorScale('ref-color-alpha-white')}
       </div>
       <nve-toast id="color-scale-toast" trigger="color-scale" close-timeout="1500" position="left" hidden>copied!</nve-toast>
       <script type="module">
@@ -200,8 +213,8 @@ function getColorScale(color) {
     <h2 nve-text="body">${color.replace('ref-color-', '')}</h2>
     <div nve-layout="row" style="width: 100%">
       <div nve-layout="column" style="padding-top: 25px">${Array.from(Array(12).keys()).map(i => html`<p nve-text="body" nve-layout="column align:center pad:xs" style="height: 40px">${i + 1}00</p>`)}</div>
-      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">light</p><div nve-theme="root light" style="width: 100%">${tokens}</div></div>
-      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">dark</p><div nve-theme="root dark" style="width: 100%">${tokens}</div></div>
+      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">light</p><div nve-theme="root light" style="width: 100%" colors="">${tokens}</div></div>
+      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">dark</p><div nve-theme="root dark" style="width: 100%" colors="">${tokens}</div></div>
     </div>
   </div>`;
 }
