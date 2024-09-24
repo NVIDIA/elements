@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.3.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.1...@nvidia-elements/themes-v1.3.2) (2024-09-24)
+
+
+### Bug Fixes
+
+* **themes:** add alpha colors to storybook. fix invalid values ([36520bf](https://github.com/NVIDIA/elements/commit/36520bf5703a0aca8370c214bfacfe19fbcb4170))
+
 ## [@nvidia-elements/themes-v1.3.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.0...@nvidia-elements/themes-v1.3.1) (2024-09-24)
 
 
