@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.6.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.4...@nvidia-elements/core-v1.6.5) (2024-09-24)
+
+
+### Bug Fixes
+
+* **elements:** popover workaround react useid ([24a7800](https://github.com/NVIDIA/elements/commit/24a780084c8ab31926d4766db11200aa73a7ce7e))
+
 ## [@nvidia-elements/core-v1.6.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.3...@nvidia-elements/core-v1.6.4) (2024-09-23)
 
 
