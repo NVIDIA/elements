@@ -80,11 +80,6 @@ export class Drawer extends LitElement {
    */
   @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
 
-  /**
-   * Determines if popover should be rendered and positioned.
-   */
-  @property({ type: Boolean, reflect: true }) hidden = false;
-
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
