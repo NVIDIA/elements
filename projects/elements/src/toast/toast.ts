@@ -89,11 +89,6 @@ export class Toast extends LitElement {
   @property({ type: Number, attribute: 'close-timeout' }) closeTimeout = 0;
 
   /**
-   * Determines if popover should be rendered and positioned.
-   */
-  @property({ type: Boolean, reflect: true }) hidden = false;
-
-  /**
    * visual treatment to represent a ongoing task or support status
    */
   @property({ type: String, reflect: true }) status: SupportStatus | 'muted';

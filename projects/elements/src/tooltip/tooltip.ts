@@ -75,11 +75,6 @@ export class Tooltip extends LitElement {
   @property({ type: String, reflect: true }) status: 'muted';
 
   /**
-   * Determines if popover should be rendered and positioned.
-   */
-  @property({ type: Boolean, reflect: true }) hidden = false;
-
-  /**
    * A delayed `open` event will occur determined from the provided millisecond value.
    */
   @property({ type: Number, attribute: 'open-delay' }) openDelay = 0;
