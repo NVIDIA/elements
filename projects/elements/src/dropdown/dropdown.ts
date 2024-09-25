@@ -87,11 +87,6 @@ export class Dropdown extends LitElement {
    */
   @property({ type: Boolean }) arrow = false;
 
-  /**
-   * Determines if popover should be rendered and positioned.
-   */
-  @property({ type: Boolean, reflect: true }) hidden = false;
-
   @query('.arrow') popoverArrow: HTMLElement;
 
   /** @private */

@@ -87,11 +87,6 @@ export class Toggletip extends LitElement {
    */
   @property({ type: Boolean }) arrow = true;
 
-  /**
-   * Determines if popover should be rendered and positioned.
-   */
-  @property({ type: Boolean, reflect: true }) hidden = false;
-
   @query('.arrow') popoverArrow: HTMLElement;
 
   /** @private */
