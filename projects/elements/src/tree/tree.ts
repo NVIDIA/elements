@@ -53,7 +53,7 @@ export class Tree extends LitElement {
   _internals: ElementInternals;
 
   get nodes() {
-    return Array.from(this.querySelectorAll<TreeNode>(TreeNode.metadata.tag));
+    return this.querySelectorAll ? Array.from(this.querySelectorAll<TreeNode>(TreeNode.metadata.tag)) : [];
   }
 
   /** @private */

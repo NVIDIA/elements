@@ -57,6 +57,7 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
       }
 
       await new Promise(r => requestAnimationFrame(r));
+      await new Promise(r => setTimeout(() => r(null), 0));
       const { width, height } = getComputedStyle(this.host);
       this.host.style.setProperty('--_width', width);
       this.host.style.setProperty('--_height', height);

@@ -1,0 +1,13 @@
+import { html } from 'lit';
+import { describe, expect, it } from 'vitest';
+import { ssrRunner } from '@nve-internals/vite';
+import { Divider } from '@nvidia-elements/core/divider';
+import '@nvidia-elements/core/divider/define.js';
+
+describe(Divider.metadata.tag, () => {
+  it('should pass baseline ssr check', async () => {
+    const result = await ssrRunner.render(html`<nve-divider></nve-divider>`);
+    expect(result.includes('shadowroot="open"')).toBe(true);
+    expect(result.includes('nve-divider')).toBe(true);
+  });
+});
