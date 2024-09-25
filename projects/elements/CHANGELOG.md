@@ -1,3 +1,15 @@
+## [@nvidia-elements/core-v1.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.5...@nvidia-elements/core-v1.7.0) (2024-09-25)
+
+
+### Features
+
+* **elements:** copy button icon slot ([9f16e2b](https://github.com/NVIDIA/elements/commit/9f16e2b7c068495bc76290eb23089887ab7136be))
+
+
+### Bug Fixes
+
+* **elements:** popovers hidden state ([42af443](https://github.com/NVIDIA/elements/commit/42af4435451e62a7d293f3c2d371c89a27528994))
+
 ## [@nvidia-elements/core-v1.6.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.4...@nvidia-elements/core-v1.6.5) (2024-09-24)
 
 
