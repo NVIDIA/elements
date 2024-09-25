@@ -52,10 +52,9 @@ describe(CopyButton.metadata.tag, () => {
     // check if toast appears when content is copied successfully
     const toast = element.shadowRoot.querySelector<Toast>(Toast.metadata.tag);
     expect(toast.status).toBe('success');
-
-    await new Promise(resolve => setTimeout(resolve, 4000));
-
-    expect(element.showToast).toBe(false);
+    await toast.updateComplete;
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(toast.hidden).toBe(false);
 
     mockClipboard.mockRestore();
   });
@@ -89,14 +88,11 @@ describe(CopyButton.metadata.tag, () => {
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).click();
-
     await new Promise(resolve => setTimeout(resolve, 0));
 
     // Check if error was logged
     expect(consoleErrorSpy).toHaveBeenCalledWith(new Error('Clipboard API error'));
-
-    // Check that showToast was set to false
-    expect(element.showToast).toBe(false);
+    expect(element.shadowRoot.querySelector<Toast>(Toast.metadata.tag).hidden).toBe(true);
 
     consoleErrorSpy.mockRestore();
     Object.defineProperty(navigator, 'clipboard', { value: originalClipboard });
