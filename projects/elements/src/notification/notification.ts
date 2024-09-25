@@ -75,11 +75,6 @@ export class Notification extends LitElement {
   @property({ type: Number, attribute: 'close-timeout' }) closeTimeout = 0;
 
   /**
-   * Determines if popover should be rendered and positioned.
-   */
-  @property({ type: Boolean, reflect: true }) hidden = false;
-
-  /**
    * Determines the visual status of the notification.
    */
   @property({ type: String, reflect: true }) status: SupportStatus;

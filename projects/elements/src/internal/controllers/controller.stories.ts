@@ -112,8 +112,6 @@ class PopoverDemo extends LitElement {
 
   @property({ type: Boolean, reflect: true }) closable = false;
 
-  @property({ type: Boolean, reflect: true }) hidden = false;
-
   get popoverArrow() {
     return this.shadowRoot.querySelector<HTMLElement>('.arrow');
   }

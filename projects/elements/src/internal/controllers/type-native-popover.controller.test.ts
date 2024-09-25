@@ -19,8 +19,6 @@ class TypeNativePopoverControllerTestElement extends LitElement {
 
   @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger = false;
 
-  @property({ type: Boolean, reflect: true }) hidden = false;
-
   @property({ type: String, reflect: true }) popoverType: 'auto' | 'manual' | 'hint' = 'auto';
 
   @property({ type: Boolean, reflect: true }) arrow = true;
