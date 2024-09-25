@@ -68,6 +68,7 @@ export const libraryTestConfig = {
         '**/*.cjs',
         '**/*.mjs',
         '**/*.test.axe.ts',
+        '**/*.test.ssr.ts',
         '**/*.test.lighthouse.ts',
         '**/*.test.visual.ts',
         '**/*.stories.ts',

@@ -1,0 +1,20 @@
+import { html } from 'lit';
+import { describe, expect, it } from 'vitest';
+import { ssrRunner } from '@internals/vite';
+import { Steps } from '@nvidia-elements/core/steps';
+import '@nvidia-elements/core/steps/define.js';
+
+describe(Steps.metadata.tag, () => {
+  it('should pass baseline ssr check', async () => {
+    const result = await ssrRunner.render(html`
+      <nve-steps>
+        <nve-steps-item>Step 1</nve-steps-item>
+        <nve-steps-item selected>Step 2</nve-steps-item>
+        <nve-steps-item disabled>Step 3</nve-steps-item>
+      </nve-steps>
+    `);
+    expect(result.includes('shadowroot="open"')).toBe(true);
+    expect(result.includes('nve-steps')).toBe(true);
+    expect(result.includes('nve-steps-item')).toBe(true);
+  });
+});

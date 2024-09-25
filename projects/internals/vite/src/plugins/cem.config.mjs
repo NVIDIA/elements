@@ -248,6 +248,7 @@ export default {
     resolve('src/**/*.stories.ts'),
     resolve('src/**/*.test.ts'),
     resolve('src/**/*.test.axe.ts'),
+    resolve('src/**/*.test.ssr.ts'),
     resolve('src/**/*.test.lighthouse.ts'),
     resolve('src/**/*.test.visual.ts')
   ],
