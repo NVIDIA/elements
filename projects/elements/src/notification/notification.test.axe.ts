@@ -11,7 +11,8 @@ describe(Notification.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-notification>hello</nve-notification>
+      <button popovertarget="notification">button</button>
+      <nve-notification closable>hello</nve-notification>
     `);
     element = fixture.querySelector(Notification.metadata.tag);
     await elementIsStable(element);

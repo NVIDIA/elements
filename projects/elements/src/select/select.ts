@@ -128,7 +128,7 @@ export class Select extends Control {
   }
 
   protected get suffixContent() {
-    return this.#select.size === 0
+    return this.#select?.size === 0
       ? html`
       <nve-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></nve-icon>
       <nve-dropdown @close=${e => (e.target.hidden = true)} @open=${e => (e.target.hidden = false)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom" alignment="center">

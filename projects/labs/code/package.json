@@ -203,6 +203,7 @@
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
+        "!src/**/*.test.ssr.ts",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -240,6 +241,7 @@
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
+        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
@@ -258,6 +260,7 @@
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
+        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"

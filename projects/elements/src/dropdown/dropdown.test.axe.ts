@@ -11,8 +11,8 @@ describe(Dropdown.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <button id="btn">button</button>
-      <nve-dropdown trigger="btn" anchor="btn" closable>hello</nve-dropdown>
+      <button popovertarget="dropdown">button</button>
+      <nve-dropdown id="dropdown" closable>hello</nve-dropdown>
     `);
     element = fixture.querySelector(Dropdown.metadata.tag);
     await elementIsStable(element);
