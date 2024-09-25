@@ -28,8 +28,8 @@ packages:
 catalog:
   '@lit-labs/scoped-registry-mixin': ^1.0.3
   '@lit-labs/virtualizer': ^2.0.14
-  '@vitest/browser': 2.0.5
-  '@vitest/coverage-istanbul': 2.0.5
+  '@vitest/browser': 2.1.1
+  '@vitest/coverage-istanbul': 2.1.1
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   eslint: 9.6.0
   glob: 11.0.0
@@ -38,6 +38,6 @@ catalog:
   lit-html: ^3.2.0
   publint: 0.2.11
   typescript: 5.3.3
-  vite: 5.3.3
-  vitest: 2.0.5
-  vite-plugin-dts: 3.9.1
+  vite: 5.4.8
+  vitest: 2.1.1
+  vite-plugin-dts: 4.2.2

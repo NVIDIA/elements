@@ -263,3 +263,47 @@ The tests will generate a `.visual` directory with the baseline snapshots. These
 ```shell
 vitest run --config=vitest.visual.ts
 ```
+
+### SSR
+
+Ensure Lit based components successfully can be server side rendered (SSR).
+
+```typescript
+// vitest.ssr.ts
+import { mergeConfig } from 'vitest/config';
+import { libraryLitSSRTestConfig } from '@nve-internals/vite';
+
+export default mergeConfig(libraryLitSSRTestConfig, {
+  test: {
+    include: [
+      './src/**/*.test.ssr.ts'
+    ],
+    outputFile: {
+      junit: './coverage/ssr/junit.xml'
+    }
+  }
+});
+```
+
+```typescript
+// dot.test.ssr.ts
+import { html } from 'lit';
+import { describe, expect, it } from 'vitest';
+import { ssrRunner } from '@nve-internals/vite';
+import { Dot } from '@nvidia-elements/core/dot';
+import '@nvidia-elements/core/dot/define.js';
+
+describe(Dot.metadata.tag, () => {
+  it('should pass baseline ssr check', async () => {
+    const result = await ssrRunner.render(html`<nve-dot></nve-dot>`);
+    expect(result.includes('shadowroot="open"')).toBe(true);
+    expect(result.includes('nve-dot')).toBe(true);
+  });
+});
+```
+
+To run the tests run `pnpm run test:ssr`
+
+```shell
+vitest run --config=vitest.ssr.ts
+```

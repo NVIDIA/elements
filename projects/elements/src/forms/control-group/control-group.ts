@@ -35,15 +35,17 @@ export class ControlGroup extends LitElement {
     | 'horizontal-inline';
 
   get label() {
-    return this.querySelector<HTMLLabelElement>('label');
+    return this.querySelector?.<HTMLLabelElement>('label');
   }
 
   get inputs() {
-    return this.querySelectorAll<HTMLInputElement>(inputQuery);
+    return this.querySelectorAll ? Array.from(this.querySelectorAll<HTMLInputElement>(inputQuery)) : [];
   }
 
   get #messages() {
-    return Array.from(this.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
+    return this.querySelectorAll
+      ? Array.from(this.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)))
+      : [];
   }
 
   #observers: (MutationObserver | ResizeObserver)[] = [];

@@ -1,4 +1,4 @@
-import { LitElement, html, nothing, TemplateResult } from 'lit';
+import { LitElement, html, nothing, isServer, TemplateResult } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
@@ -82,8 +82,8 @@ export class Control extends LitElement {
   #input: HTMLInputElement;
 
   /** @private */
-  get input() {
-    if (!this.#input) {
+  get input(): HTMLInputElement {
+    if (!isServer && !this.#input) {
       const slotted =
         this.querySelector('slot')
           ?.assignedElements()
