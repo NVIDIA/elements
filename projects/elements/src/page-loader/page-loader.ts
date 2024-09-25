@@ -1,5 +1,4 @@
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators/property.js';
 import {
   popoverStyles,
   PopoverPosition,
@@ -21,11 +20,6 @@ import styles from './page-loader.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=8866%3A125698&mode=dev
  */
 export class PageLoader extends LitElement {
-  /**
-   * Determines if popover should be rendered and positioned.
-   */
-  @property({ type: Boolean, reflect: true }) hidden = false;
-
   /** @private */
   readonly position: PopoverPosition = 'center';
 
