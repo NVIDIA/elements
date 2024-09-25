@@ -25,6 +25,7 @@
     "test": "wireit",
     "test:watch": "wireit",
     "test:axe": "wireit",
+    "test:ssr": "wireit",
     "test:coverage": "wireit",
     "test:lighthouse": "wireit",
     "test:visual": "wireit",
@@ -785,6 +786,7 @@
   },
   "devDependencies": {
     "@nvidia-elements/styles": "workspace:^",
+    "@lit-labs/ssr": "3.2.2",
     "@lit-labs/virtualizer": "catalog:",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
@@ -816,6 +818,7 @@
         "build",
         "publint",
         "test:axe",
+        "test:ssr",
         "test:coverage",
         "test:visual"
       ]
@@ -846,6 +849,7 @@
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
+        "!src/**/*.test.ssr.ts",
         "!src/**/*.snippets.html",
         "package.json",
         "tsconfig.json",
@@ -901,6 +905,7 @@
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
+        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
@@ -922,6 +927,7 @@
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
+        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
@@ -987,6 +993,24 @@
       ],
       "output": [
         "coverage/axe/**"
+      ],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:ssr": {
+      "command": "playwright-lock 'vitest run --config=vitest.ssr.ts'",
+      "files": [
+        "src/**/*.test.ssr.ts",
+        "tsconfig.json",
+        "vitest.ssr.ts"
+      ],
+      "output": [
+        "coverage/ssr/**"
       ],
       "dependencies": [
         "build",
