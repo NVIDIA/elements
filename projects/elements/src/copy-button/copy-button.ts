@@ -11,6 +11,7 @@ import styles from './copy-button.css?inline';
  * @description A copy button is a button that easily enables the copy to clipboard pattern.
  * @since 1.1.4
  * @slot - default
+ * @slot icon - slot for custom icon
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-copy-button-documentation--docs
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=8776-101652&t=1wXXkUNtvP4Bz5RY-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
@@ -55,7 +56,11 @@ export class CopyButton extends Button {
     return html`
      <div id="btn" internal-host interaction-state focus-within @click=${this.#copy}>
         <slot></slot>
-        <nve-icon name=${this.copied ? 'check' : 'copy'} .status=${this.copied ? 'success' : undefined} .size=${this.size} aria-hidden="true"></nve-icon>
+        ${
+          this.copied
+            ? html`<nve-icon name="check" status="success" .size=${this.size} aria-hidden="true"></nve-icon>`
+            : html`<slot name="icon"><nve-icon name="copy" .size=${this.size} aria-hidden="true"></nve-icon></slot>`
+        }
      </div>
      <nve-toast .hidden=${!this.showToast} @close=${this.#close} status="success" anchor="btn" trigger="btn" position="top" close-timeout="1500">${this.i18n.copied}</nve-toast>
      <nve-tooltip .hidden=${!this.showTooltip || this.showToast} @open=${() => (this.showTooltip = true)} @close=${() => (this.showTooltip = false)} anchor="btn" trigger="btn">${this.ariaLabel ?? this.i18n.copy}</nve-tooltip>
