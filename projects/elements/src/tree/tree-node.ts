@@ -81,6 +81,9 @@ export class TreeNode extends LitElement {
   @queryAssignedElements({ slot: 'nodes' }) readonly nodes!: TreeNode[];
 
   /* @private */
+  @state() hasChildTreeNodes = false;
+
+  /* @private */
   @state() indeterminate = false;
 
   /* @private */
@@ -94,7 +97,7 @@ export class TreeNode extends LitElement {
   #typeSelectableController = new TypeSelectableController(this);
 
   get #isExpandable() {
-    return this.expandable || !!this.nodes?.length;
+    return this.hasChildTreeNodes || this.expandable;
   }
 
   static metadata = {
@@ -131,7 +134,7 @@ export class TreeNode extends LitElement {
             <slot name="content" @slotchange=${e => (e.target.assignedNodes() ? e.target.setAttribute('has-content', '') : '')}></slot>
           </div>
         </div>
-        <div .hidden=${!this.expanded} role="group"><slot name="nodes"></slot></div>
+        <div .hidden=${!this.expanded} role="group"><slot name="nodes" @slotchange=${this.handleNodesChange}></slot></div>
       </div>
     `;
   }
@@ -158,6 +161,10 @@ export class TreeNode extends LitElement {
   /** closes and sets the expanded state automatically if behaviorExpand is true */
   close() {
     this.#typeExpandableController.close();
+  }
+
+  handleNodesChange() {
+    this.hasChildTreeNodes = this.nodes.length > 0;
   }
 
   #nodeUpdate() {

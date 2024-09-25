@@ -1,4 +1,16 @@
-import React from 'react';
+import React, {
+  ComponentProps,
+  ComponentType,
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useReducer,
+  useRef,
+  useState
+} from 'react';
 import {
   NveAccordionGroup,
   NveAccordion,
@@ -20,69 +32,75 @@ import { NveTooltip } from '@nvidia-elements/core-react/tooltip';
 import { NveDrawer, NveDrawerHeader } from '@nvidia-elements/core-react/drawer';
 import { NveToast } from '@nvidia-elements/core-react/toast';
 import { NveNotification } from '@nvidia-elements/core-react/notification';
+import { NveTree, NveTreeNode } from '@nvidia-elements/core-react/tree';
+
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 // This demo is used for baseline experimental SSR support testing.
 // This demo does not follow the same consistent pattern as the rest of the demo integrations.
 export default function Home() {
   return (
-    <>
-      <NveAppHeader>
-        <NveLogo></NveLogo>
-        <h2 slot="title">NextJS</h2>
-        <NveButton slot="nav-items" container="inline">
-          Link 1
-        </NveButton>
-        <NveButton slot="nav-items" container="inline" selected>
-          Link 2
-        </NveButton>
-        <NveIconButton icon-name="search" slot="nav-actions"></NveIconButton>
-        <NveIconButton icon-name="switch-apps" slot="nav-actions"></NveIconButton>
-        <NveIconButton interaction="emphasis" slot="nav-actions" size="sm">
-          EL
-        </NveIconButton>
-      </NveAppHeader>
+    <NonSSRRerenderable name="Full Page" fullPage>
+      <NonSSRRerenderable name="AppHeader">
+        <NveAppHeader>
+          <NveLogo />
+          <h2 slot="title">NextJS</h2>
+          <NveButton slot="nav-items" container="inline">
+            Link 1
+          </NveButton>
+          <NveButton slot="nav-items" container="inline" selected>
+            Link 2
+          </NveButton>
+          <NveIconButton icon-name="search" slot="nav-actions"></NveIconButton>
+          <NveIconButton icon-name="switch-apps" slot="nav-actions"></NveIconButton>
+          <NveIconButton interaction="emphasis" slot="nav-actions" size="sm">
+            EL
+          </NveIconButton>
+        </NveAppHeader>
+      </NonSSRRerenderable>
 
-      <div nve-layout="column gap:md pad:lg" style={{ height: '95vh' }}>
-        <h1 nve-text="heading">NextJS</h1>
+      <PopoverLegacyExample name="Tooltip" Component={NveTooltip}>
+        hello there
+      </PopoverLegacyExample>
 
-        <div nve-layout="row align:center gap:lg pad:lg">
-          <NveTooltip id="tooltip">hello there</NveTooltip>
-          <NveButton popovertarget="tooltip">tooltip</NveButton>
+      <PopoverLegacyExample name="Toast" Component={NveToast}>
+        copied!
+      </PopoverLegacyExample>
 
-          <NveToast id="toast" close-timeout="1500">
-            copied!
-          </NveToast>
-          <NveButton popovertarget="toast">toast</NveButton>
+      <PopoverLegacyExample name="Drawer" Component={NveDrawer} closable modal excludeShown>
+        <NveDrawerHeader>
+          <h3 nve-text="heading semibold sm">Title</h3>
+        </NveDrawerHeader>
+        <p nve-text="body">some text content in a drawer</p>
+      </PopoverLegacyExample>
 
-          <NveDrawer id="drawer" closable modal>
-            <NveDrawerHeader>
-              <h3 nve-text="heading semibold sm">Title</h3>
-            </NveDrawerHeader>
-            <p nve-text="body">some text content in a drawer</p>
-          </NveDrawer>
-          <NveButton popovertarget="drawer">drawer</NveButton>
+      <PopoverLegacyExample name="Dropdown" Component={NveDropdown} closable>
+        <h3 nve-text="heading">Title</h3>
+        <p nve-text="body">some text content in a dropdown</p>
+      </PopoverLegacyExample>
 
-          <NveDropdown id="dropdown" closable>
-            <h3 nve-text="heading">Title</h3>
-            <p nve-text="body">some text content in a dropdown</p>
-          </NveDropdown>
-          <NveButton popovertarget="dropdown">dropdown</NveButton>
+      <PopoverLegacyExample name="Dialog" Component={NveDialog} closable modal excludeShown>
+        <h3 nve-text="heading">Title</h3>
+        <p nve-text="body">some text content in a closable dialog</p>
+      </PopoverLegacyExample>
 
-          <NveDialog id="dialog" closable modal>
-            <h3 nve-text="heading">Title</h3>
-            <p nve-text="body">some text content in a closable dialog</p>
-          </NveDialog>
-          <NveButton popovertarget="dialog">dialog</NveButton>
+      <PopoverLegacyExample
+        name="Notification"
+        Component={NveNotification}
+        closable
+        position="bottom"
+        alignment="end"
+        close-timeout="2000"
+        excludeShown>
+        <h3 nve-text="label">notification</h3>
+        <p nve-text="body">some text content in a notification</p>
+      </PopoverLegacyExample>
 
-          <NveNotification id="notification" closable position="bottom" alignment="end" close-timeout="2000">
-            <h3 nve-text="label">notification</h3>
-            <p nve-text="body">some text content in a notification</p>
-          </NveNotification>
-          <NveButton popovertarget="notification">notification snackbar</NveButton>
-        </div>
-
+      <NonSSRRerenderable name="Alert">
         <NveAlert status="success">hello there</NveAlert>
+      </NonSSRRerenderable>
 
+      <NonSSRRerenderable name="Alert Group">
         <NveAlertGroup status="accent">
           <NveAlert>
             Standard{' '}
@@ -91,7 +109,9 @@ export default function Home() {
             </NveButton>
           </NveAlert>
         </NveAlertGroup>
+      </NonSSRRerenderable>
 
+      <NonSSRRerenderable name="Accordion Group">
         <NveAccordionGroup container="inset" behavior-expand>
           <NveAccordion>
             <NveAccordionHeader>
@@ -118,7 +138,9 @@ export default function Home() {
             </NveAccordionContent>
           </NveAccordion>
         </NveAccordionGroup>
+      </NonSSRRerenderable>
 
+      <NonSSRRerenderable name="Badge">
         <div nve-layout="row gap:xs align:wrap">
           <NveBadge status="scheduled">scheduled</NveBadge>
           <NveBadge status="queued">queued</NveBadge>
@@ -132,7 +154,9 @@ export default function Home() {
           <NveBadge status="unknown">unknown</NveBadge>
           <NveBadge status="ignored">ignored</NveBadge>
         </div>
+      </NonSSRRerenderable>
 
+      <NonSSRRerenderable name="Breadcrumb">
         <NveBreadcrumb>
           <NveButton>
             <a href="#" target="_self">
@@ -151,27 +175,149 @@ export default function Home() {
           </NveButton>
           <span>You Are Here</span>
         </NveBreadcrumb>
+      </NonSSRRerenderable>
 
+      <NonSSRRerenderable name="Button">
         <div nve-layout="row gap:xs align:wrap">
           <NveButton>standard</NveButton>
           <NveButton interaction="emphasis">emphasis</NveButton>
           <NveButton interaction="destructive">destructive</NveButton>
           <NveButton disabled>disabled</NveButton>
         </div>
+      </NonSSRRerenderable>
 
+      <NonSSRRerenderable name="Button Group">
         <NveButtonGroup container="rounded" behavior-select="single">
           <NveButton pressed>All Time</NveButton>
           <NveButton>30 Days</NveButton>
           <NveButton>90 Days</NveButton>
         </NveButtonGroup>
+      </NonSSRRerenderable>
 
+      <NonSSRRerenderable name="Card">
         <NveCard nve-layout="full" style={{ height: '300px' }}>
           <NveCardHeader>
             <h2 nve-text="heading">Title</h2>
           </NveCardHeader>
           <NveCardContent>Card Content</NveCardContent>
         </NveCard>
-      </div>
-    </>
+      </NonSSRRerenderable>
+
+      <NonSSRRerenderable name="Tree">
+        <NveTree behaviorExpand>
+          <NveTreeNode expanded>
+            Parent
+            <NveTreeNode expanded>Child</NveTreeNode>
+          </NveTreeNode>
+        </NveTree>
+      </NonSSRRerenderable>
+    </NonSSRRerenderable>
   );
+}
+
+function PopoverLegacyExample<
+  T extends ComponentType<{
+    id?: string;
+    anchor?: string | HTMLElement;
+    trigger?: string | HTMLElement;
+    children: ReactNode;
+  }>
+>({
+  name,
+  Component,
+  excludeShown = false,
+  ...props
+}: {
+  name: string;
+  excludeShown?: boolean;
+  Component: T;
+} & ComponentProps<T>) {
+  const id = useId();
+  return (
+    <NonSSRRerenderable name={name} nve-layout="row gap:lg pad:lg">
+      {/* @ts-ignore */}
+      <Component {...props} id={`${id}-popover`} />
+      <NveButton popovertarget={`${id}-popover`}>popover api</NveButton>
+
+      {/* @ts-ignore */}
+      <Component {...props} anchor={`${id}-legacy-hidden`} trigger={`${id}-legacy-hidden`} behaviorTrigger hidden />
+      <NveButton id={`${id}-legacy-hidden`}>legacy api hidden</NveButton>
+
+      {excludeShown ? null : (
+        <>
+          {/* @ts-ignore */}
+          <Component {...props} anchor={`${id}-legacy-shown`} trigger={`${id}-legacy-shown`} behaviorTrigger />
+          <NveButton id={`${id}-legacy-shown`}>legacy api shown</NveButton>
+        </>
+      )}
+    </NonSSRRerenderable>
+  );
+}
+
+function NonSSRRerenderable({
+  name,
+  children,
+  fullPage = false,
+  ...props
+}: { name: string; fullPage?: boolean } & ComponentProps<typeof NveCardContent>) {
+  const [reRenderCount, incrementReRenderCount] = useReducer(x => x + 1, 0);
+  const [wasSsr, setWasSsr] = useState(true);
+  const ref = useRef<HTMLDivElement>(null);
+  const combinedReRenderCount = reRenderCount + useParentReRenderCount();
+
+  useIsomorphicLayoutEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+    const hasSsrError = ref.current.querySelectorAll('[data-ssr-source=client]').length > 0;
+    if (hasSsrError) {
+      setWasSsr(false);
+    }
+  }, []);
+
+  return (
+    <ParentReRenderCountProvider.Provider value={combinedReRenderCount}>
+      <NveCard
+        container={fullPage ? 'full' : undefined}
+        style={
+          fullPage
+            ? ({ '--background': 'var(--nve-sys-layer-canvas-background)' } as React.CSSProperties)
+            : { marginBottom: '1em' }
+        }>
+        <NveCardHeader>
+          <h1 slot="title" nve-layout="row gap:md align:center">
+            {name}
+            <RenderSource ssr={wasSsr} rerendered={combinedReRenderCount > 0} />
+          </h1>
+          <NveButton
+            type="button"
+            onClick={incrementReRenderCount}
+            slot="header-action"
+            interaction="destructive"
+            style={{ marginLeft: '1em', visibility: combinedReRenderCount === 0 ? 'visible' : 'hidden' }}>
+            Client-side Re-Render
+          </NveButton>
+        </NveCardHeader>
+        <NveCardContent {...props}>
+          <div key={combinedReRenderCount} ref={ref}>
+            {children}
+          </div>
+        </NveCardContent>
+      </NveCard>
+    </ParentReRenderCountProvider.Provider>
+  );
+}
+
+function RenderSource({ ssr, rerendered }: { ssr: boolean; rerendered: boolean }) {
+  return (
+    <NveBadge status={ssr ? 'success' : 'danger'}>
+      {ssr && !rerendered ? 'SSR' : !ssr ? 'Contains SSR Fallback' : 'Client'}
+    </NveBadge>
+  );
+}
+
+const ParentReRenderCountProvider = createContext(0);
+
+function useParentReRenderCount() {
+  return useContext(ParentReRenderCountProvider);
 }
