@@ -74,7 +74,7 @@ describe(Combobox.metadata.tag, () => {
 
   it('should set width of dropdown when opened', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     emulateClick(input);
     await elementIsStable(element);
     expect(dropdown.style.getPropertyValue('--min-width')).toBe(
@@ -98,43 +98,43 @@ describe(Combobox.metadata.tag, () => {
 
   it('should show options on keydown', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
   });
 
   it('should hide options on escape keypress', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
 
     input.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true }));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     items[0].focus();
     items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'Escape', bubbles: true }));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
   });
 
   it('should close dropdown when menu item is selected', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
 
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
   });
 
   it('should focus first option if key arrow down is pressed', async () => {
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
     emulateClick(input);
     input.focus();
@@ -148,39 +148,39 @@ describe(Combobox.metadata.tag, () => {
   it('should hide dropdown on keydown and is a tab event', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
     element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
   });
 
   it('should autocomplete on tab if there is a partial match to first available option', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
     input.value = 'Option';
     element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     expect(input.value).toBe('Option 1');
   });
 
   it('should set the input value if a option is clicked', async () => {
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
 
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
     emulateClick(items[0]);
     expect(input.value).toBe('Option 1');
@@ -189,13 +189,13 @@ describe(Combobox.metadata.tag, () => {
   it('should show "no results" message if no options are provided', async () => {
     const options = element.querySelectorAll('option');
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
 
     options.forEach(i => i.remove());
     element.shadowRoot.dispatchEvent(new Event('slotchange'));
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].textContent.trim()).toBe(
       element.i18n.noResults
     );
@@ -296,7 +296,7 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     input.dispatchEvent(new Event('keydown', { bubbles: true }));
 
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
     const items = Array.from(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag));
     emulateClick(items[1]);
@@ -311,7 +311,7 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     input.dispatchEvent(new Event('keydown', { bubbles: true }));
 
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
     expect(input.value).toBe('opt');
     expect(select.value).toBe('option 1');
@@ -320,15 +320,15 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
   it('should autocomplete on tab if there is a partial match to first available option', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
 
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
     input.value = 'opt';
     element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     expect(input.value).toBe('option 1');
     expect(select.value).toBe('option 1');
   });
@@ -341,7 +341,7 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     input.dispatchEvent(new Event('input', { bubbles: true }));
     await elementIsStable(element);
 
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(`${MenuItem.metadata.tag}[role='option']`).length).toBe(1);
   });
 
@@ -353,7 +353,7 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     input.dispatchEvent(new Event('input', { bubbles: true }));
     await elementIsStable(element);
 
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(`${MenuItem.metadata.tag}[role='option']`).length).toBe(0);
     expect(element.shadowRoot.querySelector<MenuItem>(`${MenuItem.metadata.tag}[disabled]`).textContent).toBe(
       'no results'
@@ -557,10 +557,10 @@ describe(`${Combobox.metadata.tag}: shadow root`, () => {
   it('should focus first option if key arrow down is pressed', async () => {
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect(dropdown.hidden).toBe(true);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
 
     emulateClick(input);
     input.focus();
@@ -657,7 +657,7 @@ describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
     await elementIsStable(element);
 
     const items = element.shadowRoot.querySelectorAll<MenuItem>(`${MenuItem.metadata.tag}[role='option']`);
-    expect(dropdown.hidden).toBe(false);
+    expect(dropdown.matches(':popover-open')).toBe(true);
     expect(items.length).toBe(1);
   });
 });

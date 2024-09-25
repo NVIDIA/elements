@@ -1,4 +1,4 @@
-import { html, nothing, PropertyValues } from 'lit';
+import { html, isServer, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {
@@ -58,18 +58,22 @@ export class Combobox extends Control implements ContainerElement {
   };
 
   get #datalist() {
-    return (this.shadowRoot
-      .querySelector('slot')
-      ?.assignedElements({ flatten: true })
-      ?.find(i => i.tagName === 'DATALIST' || i.tagName === 'SELECT') ??
-      this.querySelector('datalist, select')) as HTMLSelectElement;
+    return this.shadowRoot
+      ? ((this.shadowRoot
+          .querySelector('slot')
+          ?.assignedElements({ flatten: true })
+          ?.find(i => i.tagName === 'DATALIST' || i.tagName === 'SELECT') ??
+          this.querySelector('datalist, select')) as HTMLSelectElement)
+      : null;
   }
 
   get #select() {
-    return (this.shadowRoot
-      .querySelector('slot')
-      ?.assignedElements({ flatten: true })
-      ?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement;
+    return this.shadowRoot
+      ? ((this.shadowRoot
+          .querySelector('slot')
+          ?.assignedElements({ flatten: true })
+          ?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement)
+      : null;
   }
 
   get #options(): HTMLOptionElement[] {
@@ -118,24 +122,24 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   protected get suffixContent() {
-    const multiple = this.#select?.multiple;
-    const options = this.#options;
-    return html`
-    <nve-dropdown .popoverType=${'manual'} @close=${e => (e.target.hidden = true)} @open=${e => (e.target.hidden = false)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
+    return !isServer
+      ? html`
+    <nve-dropdown .popoverType=${'manual'} @open=${e => (e.target.hidden = false)} @close=${this.#closeDropdown} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
       <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
-        ${options
+        ${this.#options
           .filter(o => !o.disabled)
           .map(
             o => html`
         <nve-menu-item .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
-          ${multiple ? html`<nve-icon .name=${o.selected ? 'check' : undefined} size="sm"></nve-icon>` : nothing}
-          ${options.length < 50 ? html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : getDisplayValue(o)}
+          ${this.#select?.multiple ? html`<nve-icon .name=${o.selected ? 'check' : undefined} size="sm"></nve-icon>` : nothing}
+          ${this.#options.length < 50 ? html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>` : getDisplayValue(o)}
         </nve-menu-item>`
           )}
-        ${options.filter(o => !o.disabled).length === 0 ? html`<nve-menu-item .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}
+        ${this.#options.filter(o => !o.disabled).length === 0 ? html`<nve-menu-item .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}
       </nve-menu>
       <slot name="footer"></slot>
-    </nve-dropdown>`;
+    </nve-dropdown>`
+      : nothing;
   }
 
   async firstUpdated(props: PropertyValues<this>) {
@@ -177,14 +181,6 @@ export class Combobox extends Control implements ContainerElement {
       const selected = this.#options.find(o => o.hasAttribute('selected'));
       this.input.value = getDisplayValue(selected);
     }
-
-    this.#dropdown.addEventListener('close', async () => {
-      if (this.#select && !this.#select.multiple && !this.#options.find(o => getDisplayValue(o) === this.input.value)) {
-        this.#options.forEach(o => (o.selected = false));
-        this.#setInputValue('');
-        this.#setSelectValue({ value: '', selected: false });
-      }
-    });
   }
 
   #setupMultipleSelect() {
@@ -196,7 +192,7 @@ export class Combobox extends Control implements ContainerElement {
   #setupAutoCompleteKeyEvents() {
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.code === 'Tab') {
-        if (this.#hasAvailableOptions && !this.#dropdown.hidden && this.input.value !== '') {
+        if (this.#hasAvailableOptions && this.#dropdown.matches(':popover-open') && this.input.value !== '') {
           e.preventDefault();
           this.#setInputValue(this.#items[0].value);
           this.#setSelectValue(this.#options.find(o => (o.label ? o.label : o.value) === this.#items[0].value));
@@ -212,14 +208,14 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   async #setupLightDismiss() {
-    const dropdown = this.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    const dropdown = this.#dropdown;
     await dropdown.updateComplete;
     const options = {
       element: dropdown?.shadowRoot.querySelector<HTMLElement>('[internal-host]'),
       focusElement: this.input
     };
     createLightDismiss(options, () => {
-      if (!this.#dropdown.hidden) {
+      if (this.#dropdown.matches(':popover-open')) {
         this.#dropdown.hidePopover();
       }
     });
@@ -240,6 +236,15 @@ export class Combobox extends Control implements ContainerElement {
         e.preventDefault();
       }
     });
+  }
+
+  #closeDropdown() {
+    this.#dropdown.hidePopover();
+    if (this.#select && !this.#select.multiple && !this.#options.find(o => getDisplayValue(o) === this.input.value)) {
+      this.#options.forEach(o => (o.selected = false));
+      this.#setInputValue('');
+      this.#setSelectValue({ value: '', selected: false });
+    }
   }
 
   #selectValue(option: { selected?: boolean; label?: string; value?: string }) {
@@ -279,7 +284,7 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #openListBox() {
-    if (!this.input.disabled && this.#dropdown.hidden) {
+    if (!this.input.disabled && !this.#dropdown.matches(':popover-open')) {
       this.#updateMenuItems();
       this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
       this.#dropdown.showPopover();

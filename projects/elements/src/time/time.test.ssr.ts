@@ -1,0 +1,18 @@
+import { html } from 'lit';
+import { describe, expect, it } from 'vitest';
+import { ssrRunner } from '@internals/vite';
+import { Time } from '@nvidia-elements/core/time';
+import '@nvidia-elements/core/time/define.js';
+
+describe(Time.metadata.tag, () => {
+  it('should pass baseline ssr check', async () => {
+    const result = await ssrRunner.render(html`
+      <nve-time>
+        <label>label</label>
+        <input type="time" />
+      </nve-time>
+    `);
+    expect(result.includes('shadowroot="open"')).toBe(true);
+    expect(result.includes('nve-time')).toBe(true);
+  });
+});
