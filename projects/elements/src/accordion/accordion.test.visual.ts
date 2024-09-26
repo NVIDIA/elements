@@ -69,5 +69,12 @@ function template(theme: '' | 'dark' = '') {
     </nve-accordion-header>
     <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
   </nve-accordion>
+
+  <nve-accordion behavior-expand add-minus>
+    <nve-accordion-header>
+      <div slot="title">•︎•︎•︎</div>
+    </nve-accordion-header>
+    <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
+  </nve-accordion>
   `;
 }

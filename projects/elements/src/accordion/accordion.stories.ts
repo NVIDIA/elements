@@ -34,6 +34,20 @@ export const Full = {
   `
 };
 
+export const AddMinus = {
+  render: () => html`
+  <div>
+    <nve-accordion behavior-expand add-minus>
+      <nve-accordion-header>
+        <div slot="title">Heading</div>
+      </nve-accordion-header>
+
+      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+    </nve-accordion>
+  </div>
+  `
+};
+
 export const Disabled = {
   render: () => html`
   <div>

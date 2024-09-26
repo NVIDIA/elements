@@ -95,6 +95,7 @@ export class AccordionContent extends LitElement {
  * @slot header - header element (Use `accordion-header` or custom content)
  * @slot content - content element (Use `accordion-content` or custom content)
  * @cssprop --background
+ * @cssprop --border-radius
  * @cssprop --color
  * @cssprop --header-padding
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
@@ -141,6 +142,11 @@ export class Accordion extends LitElement implements ContainerElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
+   * Determines whether the accordion should use add/minus icons
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'add-minus' }) addMinus = false;
+
+  /**
    * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
    */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
@@ -173,8 +179,9 @@ export class Accordion extends LitElement implements ContainerElement {
           <slot name="header"></slot>
 
           <nve-icon-button
+            size=${this.addMinus ? 'sm' : 'md'}
             container="flat"
-            icon-name="caret"
+            icon-name=${this.addMinus ? (this.expanded ? 'minus' : 'add') : 'caret'}
             direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
             ?disabled=${this.disabled}
             ?pressed=${this.expanded}
