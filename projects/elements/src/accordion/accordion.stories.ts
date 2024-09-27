@@ -1,4 +1,5 @@
-import { html } from 'lit';
+import { LitElement, html } from 'lit';
+import { state } from 'lit/decorators/state.js';
 import '@nvidia-elements/core/accordion/define.js';
 
 export default {
@@ -24,20 +25,6 @@ export const Full = {
   render: () => html`
   <div>
     <nve-accordion behavior-expand>
-      <nve-accordion-header>
-        <div slot="title">Heading</div>
-      </nve-accordion-header>
-
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
-    </nve-accordion>
-  </div>
-  `
-};
-
-export const AddMinus = {
-  render: () => html`
-  <div>
-    <nve-accordion behavior-expand add-minus>
       <nve-accordion-header>
         <div slot="title">Heading</div>
       </nve-accordion-header>
@@ -90,6 +77,36 @@ export const Flat = {
       </nve-accordion>
   </div>
 `
+};
+
+class CustomIconDemo extends LitElement {
+  @state() private expanded = false;
+
+  toggleExpanded() {
+    this.expanded = !this.expanded;
+  }
+
+  render() {
+    return html`
+    <div>
+      <nve-accordion .expanded=${this.expanded}>
+        <nve-icon-button slot="icon" icon-name=${this.expanded ? "minus" : "add"} size="sm" container="flat" @click=${this.toggleExpanded}></nve-icon-button>
+
+        <nve-accordion-header @click=${this.toggleExpanded}>
+          <div slot="title">Heading</div>
+        </nve-accordion-header>
+
+        <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      </nve-accordion>
+    </div>
+    `;
+  }
+}
+
+customElements.get('custom-icon-demo') || customElements.define('custom-icon-demo', CustomIconDemo);
+
+export const CustomIconInteractive = {
+  render: () => html`<custom-icon-demo></custom-icon-demo>`
 };
 
 export const WithActions = {
