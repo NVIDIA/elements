@@ -71,7 +71,7 @@ function template(theme: '' | 'dark' = '') {
   </nve-accordion>
 
   <nve-accordion behavior-expand>
-    <nve-icon-button slot="icon" icon-name="add" size="sm" container="flat"></nve-icon-button>
+    <nve-icon-button slot="icon-button" icon-name="add" size="sm" container="flat"></nve-icon-button>
     <nve-accordion-header>
       <div slot="title">•︎•︎•︎</div>
     </nve-accordion-header>

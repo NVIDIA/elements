@@ -92,7 +92,7 @@ export class AccordionContent extends LitElement {
  * @description An accordion is a vertical stack of interactive headings used to toggle the display of further information.
  * @since 0.12.0
  * @slot - This is a default/unnamed slot for accordion content
- * @slot icon - icon elements to display for expand/collapse
+ * @slot icon-button - icon elements to display for expand/collapse
  * @slot header - header element (Use `accordion-header` or custom content)
  * @slot content - content element (Use `accordion-content` or custom content)
  * @cssprop --background
@@ -174,7 +174,7 @@ export class Accordion extends LitElement implements ContainerElement {
           >
           <slot name="header"></slot>
 
-          <slot name="icon">
+          <slot name="icon-button">
             <nve-icon-button
               container="flat"
               icon-name="caret"
