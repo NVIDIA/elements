@@ -53,7 +53,7 @@ export class Tree extends LitElement {
   _internals: ElementInternals;
 
   get nodes() {
-    return this.querySelectorAll ? Array.from(this.querySelectorAll<TreeNode>(TreeNode.metadata.tag)) : [];
+    return Array.from(this.querySelectorAll<TreeNode>(TreeNode.metadata.tag));
   }
 
   /** @private */
@@ -61,7 +61,6 @@ export class Tree extends LitElement {
     return {
       items: this.openNodes,
       layout: 'vertical'
-      // manageTabindex: false
     };
   }
 
@@ -82,11 +81,16 @@ export class Tree extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'tree';
+    this.addEventListener('_node-update', () => this.#syncNodes());
   }
 
   async updated(props: PropertyValues<this>) {
     super.updated(props);
     await this.updateComplete;
+    this.#syncNodes();
+  }
+
+  #syncNodes() {
     this.#syncNodeOptions();
     this.#syncNodeSelections();
   }

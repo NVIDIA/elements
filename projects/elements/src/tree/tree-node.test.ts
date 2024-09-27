@@ -108,27 +108,15 @@ describe(TreeNode.metadata.tag, () => {
   });
 
   it('should have a node group slot if expanded', async () => {
-    expect(element.shadowRoot.querySelector('slot[name=nodes]')).toBeFalsy();
+    expect(element.shadowRoot.querySelector<HTMLElement>('[role=group]').hidden).toBe(true);
 
     element.expanded = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('slot[name=nodes]')).toBeTruthy();
+    expect(element.shadowRoot.querySelector<HTMLElement>('[role=group]').hidden).toBe(false);
 
     element.expanded = false;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('slot[name=nodes]')).toBeFalsy();
-  });
-
-  it('should have a group role if expanded', async () => {
-    expect(element.shadowRoot.querySelector('[role=group]')).toBeFalsy();
-
-    element.expanded = true;
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('[role=group]')).toBeTruthy();
-
-    element.expanded = false;
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('[role=group]')).toBeFalsy();
+    expect(element.shadowRoot.querySelector<HTMLElement>('[role=group]').hidden).toBe(true);
   });
 
   it('should show icon button if expandable', async () => {
@@ -167,6 +155,15 @@ describe(TreeNode.metadata.tag, () => {
     element.selectable = 'multi';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('nve-checkbox')).toBeTruthy();
+  });
+
+  it('should assign aria-label to checkbox if expandable', async () => {
+    expect(element.shadowRoot.querySelector('nve-checkbox')).toBeFalsy();
+
+    element.selectable = 'multi';
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('nve-checkbox')).toBeTruthy();
+    expect(element.shadowRoot.querySelector('nve-checkbox input').ariaLabel).toBe('expand');
   });
 
   it('should show checkbox in indeterminate state', async () => {
