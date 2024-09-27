@@ -92,6 +92,7 @@ export class AccordionContent extends LitElement {
  * @description An accordion is a vertical stack of interactive headings used to toggle the display of further information.
  * @since 0.12.0
  * @slot - This is a default/unnamed slot for accordion content
+ * @slot icon - icon elements to display for expand/collapse
  * @slot header - header element (Use `accordion-header` or custom content)
  * @slot content - content element (Use `accordion-content` or custom content)
  * @cssprop --background
@@ -142,11 +143,6 @@ export class Accordion extends LitElement implements ContainerElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
-   * Determines whether the accordion should use add/minus icons
-   */
-  @property({ type: Boolean, reflect: true, attribute: 'add-minus' }) addMinus = false;
-
-  /**
    * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
    */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
@@ -178,16 +174,17 @@ export class Accordion extends LitElement implements ContainerElement {
           >
           <slot name="header"></slot>
 
-          <nve-icon-button
-            size=${this.addMinus ? 'sm' : 'md'}
-            container="flat"
-            icon-name=${this.addMinus ? (this.expanded ? 'minus' : 'add') : 'caret'}
-            direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
-            ?disabled=${this.disabled}
-            ?pressed=${this.expanded}
-            .expanded=${this.expanded}
-            .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
+          <slot name="icon">
+            <nve-icon-button
+              container="flat"
+              icon-name="caret"
+              direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
+              ?disabled=${this.disabled}
+              ?pressed=${this.expanded}
+              .expanded=${this.expanded}
+              .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
             ></nve-icon-button>
+          </slot>
         </div>
 
         <div id="content">
