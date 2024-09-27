@@ -1,3 +1,17 @@
+## [@nvidia-elements/core-v1.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.7.0...@nvidia-elements/core-v1.8.0) (2024-09-27)
+
+
+### Features
+
+* **elements:** accordion add/minus icon support ([b3cd923](https://github.com/NVIDIA/elements/commit/b3cd923dd5733a81f22e13d65948ff67f3988635))
+* **elements:** icon slot ([90448b7](https://github.com/NVIDIA/elements/commit/90448b7ac7dc1442bed1db4c70a57072180c1c19))
+* **elements:** rename accordion slot icon to icon-button ([bf2691a](https://github.com/NVIDIA/elements/commit/bf2691a48f845e170535edcc1d52c672d91e609b))
+
+
+### Bug Fixes
+
+* **elements:** fix lighthouse ([3fc1a50](https://github.com/NVIDIA/elements/commit/3fc1a5039756a321325a1838c224963052c9e43d))
+
 ## [@nvidia-elements/core-v1.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.6.5...@nvidia-elements/core-v1.7.0) (2024-09-25)
 
 
