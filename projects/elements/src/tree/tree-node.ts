@@ -1,7 +1,9 @@
 import { LitElement, html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import {
+  I18nController,
   TypeExpandableController,
   TypeSelectableController,
   attachInternals,
@@ -62,16 +64,21 @@ export class TreeNode extends LitElement {
    */
   @property({ type: Boolean }) highlighted = false;
 
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
   /**
-   * Returns list of child nodes
+   * Enables internal string values to be updated for internationalization.
    */
-  get nodes() {
-    return this.querySelectorAll ? Array.from(this.querySelectorAll<TreeNode>('nve-tree-node')) : [];
-  }
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   get #tree() {
     return this.closest<Tree>('nve-tree');
   }
+
+  /**
+   * Returns list of child nodes
+   */
+  @queryAssignedElements({ slot: 'nodes' }) readonly nodes!: TreeNode[];
 
   /* @private */
   @state() indeterminate = false;
@@ -87,7 +94,7 @@ export class TreeNode extends LitElement {
   #typeSelectableController = new TypeSelectableController(this);
 
   get #isExpandable() {
-    return !!this.nodes?.length || this.expandable;
+    return this.expandable || !!this.nodes?.length;
   }
 
   static metadata = {
@@ -101,7 +108,7 @@ export class TreeNode extends LitElement {
 
   render() {
     return html`
-      <div internal-host>
+      <div internal-host @slotchange=${this.#nodeUpdate}>
         <div class="node">
           ${
             this.#isExpandable
@@ -115,7 +122,7 @@ export class TreeNode extends LitElement {
             this.selectable === 'multi'
               ? html`
             <nve-checkbox nofocus>
-              <input type="checkbox" @change=${this.#toggleMultiSelection} .checked=${this.selected} .indeterminate=${this.indeterminate} aria-hidden="true" tabindex="-1" />
+              <input type="checkbox" @change=${this.#toggleMultiSelection} .checked=${this.selected} .indeterminate=${this.indeterminate} .ariaLabel=${this.i18n.expand} tabindex="-1" />
             </nve-checkbox>`
               : nothing
           }
@@ -124,7 +131,7 @@ export class TreeNode extends LitElement {
             <slot name="content" @slotchange=${e => (e.target.assignedNodes() ? e.target.setAttribute('has-content', '') : '')}></slot>
           </div>
         </div>
-        ${this.expanded ? html`<div role="group"><slot name="nodes"></slot></div>` : nothing}
+        <div .hidden=${!this.expanded} role="group"><slot name="nodes"></slot></div>
       </div>
     `;
   }
@@ -135,6 +142,12 @@ export class TreeNode extends LitElement {
     this._internals.role = 'treeitem';
     this.slot = 'nodes';
     this.#setupKeyNavInteractions();
+    this.#nodeUpdate();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#nodeUpdate();
   }
 
   /** opens and sets the expanded state automatically if behaviorExpand is true */
@@ -145,6 +158,11 @@ export class TreeNode extends LitElement {
   /** closes and sets the expanded state automatically if behaviorExpand is true */
   close() {
     this.#typeExpandableController.close();
+  }
+
+  #nodeUpdate() {
+    this.requestUpdate();
+    this.dispatchEvent(new CustomEvent('_node-update', { bubbles: true }));
   }
 
   #setupKeyNavInteractions() {
