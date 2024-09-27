@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs';
-import { Default, Full, AccordionGroupInset, AccordionGroupExpandSingle, AccordionGroupFlat, Inset, Flat, CustomIconInteractive, WithActions, Disabled } from './accordion.stories';
+import { Default, Full, AccordionGroupInset, AccordionGroupExpandSingle, AccordionGroupFlat, Inset, Flat, CustomIconButtonInteractive, WithActions, Disabled } from './accordion.stories';
 
 <Meta title="Elements/Accordion/Documentation" />
 
@@ -63,9 +63,11 @@ import '@nvidia-elements/core/accordion/define.js';
 
 <Canvas of={Flat} />
 
-## Icon
+## Icon Button
 
-<Canvas of={CustomIconInteractive} />
+<element-api tag="nve-accordion" type="slot" value="icon-button"></element-api>
+
+<Canvas of={CustomIconButtonInteractive} />
 
 ## Actions
 
