@@ -79,7 +79,7 @@ export const Flat = {
 `
 };
 
-class CustomIconDemo extends LitElement {
+class CustomIconButtonDemo extends LitElement {
   @state() private expanded = false;
 
   toggleExpanded() {
@@ -90,7 +90,7 @@ class CustomIconDemo extends LitElement {
     return html`
     <div>
       <nve-accordion .expanded=${this.expanded}>
-        <nve-icon-button slot="icon" icon-name=${this.expanded ? "minus" : "add"} size="sm" container="flat" @click=${this.toggleExpanded}></nve-icon-button>
+        <nve-icon-button slot="icon-button" icon-name=${this.expanded ? "minus" : "add"} size="sm" container="flat" @click=${this.toggleExpanded}></nve-icon-button>
 
         <nve-accordion-header @click=${this.toggleExpanded}>
           <div slot="title">Heading</div>
@@ -103,10 +103,10 @@ class CustomIconDemo extends LitElement {
   }
 }
 
-customElements.get('custom-icon-demo') || customElements.define('custom-icon-demo', CustomIconDemo);
+customElements.get('custom-icon-button-demo') || customElements.define('custom-icon-button-demo', CustomIconButtonDemo);
 
-export const CustomIconInteractive = {
-  render: () => html`<custom-icon-demo></custom-icon-demo>`
+export const CustomIconButtonInteractive = {
+  render: () => html`<custom-icon-button-demo></custom-icon-button-demo>`
 };
 
 export const WithActions = {
