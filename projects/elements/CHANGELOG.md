@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.8.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.8.0...@nvidia-elements/core-v1.8.1) (2024-09-30)
+
+
+### Bug Fixes
+
+* **elements:** treeview slots ([f50824d](https://github.com/NVIDIA/elements/commit/f50824d9dcb68364bbef4d45fb5d1e14cce19ce8))
+
 ## [@nvidia-elements/core-v1.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.7.0...@nvidia-elements/core-v1.8.0) (2024-09-27)
 
 
