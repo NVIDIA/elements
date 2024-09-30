@@ -16,6 +16,11 @@ describe('dialog visual', () => {
     const report = await visualRunner.render('dialog.shadow-root', shadowRoot());
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  test('dialog should vertically grow to its main content slot height', async () => {
+    const report = await visualRunner.render('dialog.height', height());
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
 
 function template(theme: '' | 'dark' = '') {
@@ -79,5 +84,31 @@ function shadowRoot() {
       }
     });
   </script>
+  `;
+}
+
+function height() {
+  return /* html */ `
+  <style>
+    body {
+      min-width: 1024px;
+      min-height: 780px;
+    }
+  </style>
+  <script type="module">
+    import '@nvidia-elements/core/dialog/define.js';
+    document.documentElement.setAttribute('nve-theme', 'dark');
+  </script>
+  <nve-dialog id="dialog" modal closable>
+    <nve-dialog-header>
+      <h3 nve-text="heading semibold">•︎•︎••︎•︎•</h3>
+    </nve-dialog-header>
+    <p nve-text="body" style="min-height: 400px">
+      •︎•︎••︎•︎•
+    </p>
+    <nve-dialog-footer>
+      <nve-button id="cancel-btn">•︎•︎••︎•︎•</nve-button>
+    </nve-dialog-footer>
+  </nve-dialog>
   `;
 }
