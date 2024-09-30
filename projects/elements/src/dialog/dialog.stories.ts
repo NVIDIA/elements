@@ -221,3 +221,35 @@ export const ShadowRoot = {
 </script>
   `
 };
+
+export const OverflowContent = {
+  render: () => html`
+<nve-dialog id="dialog" modal closable style="height: 400px">
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
+  <p nve-text="body" style="min-height: 400px">
+    some overflow content
+  </p>
+  <nve-dialog-footer>
+    <nve-button id="cancel-btn">cancel</nve-button>
+  </nve-dialog-footer>
+</nve-dialog>
+`
+};
+
+export const TallContent = {
+  render: () => html`
+<nve-dialog id="dialog" modal closable>
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
+  <p nve-text="body" style="min-height: 400px">
+    some overflow content
+  </p>
+  <nve-dialog-footer>
+    <nve-button id="cancel-btn">cancel</nve-button>
+  </nve-dialog-footer>
+</nve-dialog>
+`
+};
