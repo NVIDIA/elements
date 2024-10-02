@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.3.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.2...@nvidia-elements/themes-v1.3.3) (2024-10-02)
+
+
+### Bug Fixes
+
+* **themes:** brand canvas layer contrast ([8261cdc](https://github.com/NVIDIA/elements/commit/8261cdcf9f5ad705a0818479bf842bb75154c946))
+
 ## [@nvidia-elements/themes-v1.3.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.1...@nvidia-elements/themes-v1.3.2) (2024-09-24)
 
 
