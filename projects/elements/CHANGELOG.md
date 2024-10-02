@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.8.1...@nvidia-elements/core-v1.9.0) (2024-10-02)
+
+
+### Features
+
+* **starters:** add nextjs ssr render error fallback ([dc453fb](https://github.com/NVIDIA/elements/commit/dc453fba65def3c567dbb39f568a16fc3654bb49))
+
 ## [@nvidia-elements/core-v1.8.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.8.0...@nvidia-elements/core-v1.8.1) (2024-09-30)
 
 
