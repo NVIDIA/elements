@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.0...@nvidia-elements/core-v1.9.1) (2024-10-02)
+
+
+### Bug Fixes
+
+* **elements:** dialog height ([3bf4488](https://github.com/NVIDIA/elements/commit/3bf448835cc9e3295f2b6322174d930f643dfe29))
+
 ## [@nvidia-elements/core-v1.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.8.1...@nvidia-elements/core-v1.9.0) (2024-10-02)
 
 
