@@ -33,6 +33,7 @@
         "./lit-library:build",
         "./mpa:build",
         "./nextjs:build",
+        "./remix:build",
         "./react:build",
         "./scoped-registry:build",
         "./solidjs:build",

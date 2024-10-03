@@ -15,37 +15,26 @@ import '@nvidia-elements/core/alert/define.js';
   While Elements can be used in React we recommend alternatives such as <a nve-text="link" href="https://preactjs.com">Preact</a> due to <a nve-text="link" href="https://custom-elements-everywhere.com/">React incompatibilities</a> with standard Web APIs.
 </nve-alert>
 
-To use Elements in [NextJS](https://nextjs.org/) follow the [instalation](?path=/docs/about-installation--docs) steps. Once complete
-elements can be imported and used within React jsx and tsx files. The [@lit-labs/react](https://github.com/lit/lit/tree/main/packages/labs/react) package must be
-used to enable React compatibility with Custom Elements. This package will wrap elements into a React component mapping the standard events and properties in a
-way that React can understand. A experimental [@lit-labs/nextjs](https://github.com/lit/lit/tree/main/packages/labs/nextjs) package exists for rendering
+To use Elements in [NextJS](https://nextjs.org/) follow the [instalation](?path=/docs/integrations-react--docs) steps. Once complete
+elements can be imported and used within React jsx and tsx files. A experimental [@lit-labs/nextjs](https://github.com/lit/lit/tree/main/packages/labs/nextjs) package exists for rendering
 elements with NextJS SSR.
 
 ```javascript
-const withLitSSR = require('@lit-labs/nextjs')(); // https://github.com/lit/lit/tree/main/packages/labs/nextjs
+import withLitSSR from '@lit-labs/nextjs'; // https://github.com/lit/lit/tree/main/packages/labs/nextjs
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Add your own config here
-  reactStrictMode: true,
-  swcMinify: true,
+  reactStrictMode: true
 };
 
-module.exports = withLitSSR(nextConfig);
-```
-
-```tsx
-import * as React from 'react';
-import { createComponent } from '@lit-labs/react';
-import { Dialog } from '@nvidia-elements/core/dialog/index.js';
-import '@nvidia-elements/core/dialog/define.js';
-
-const NveDialog = createComponent({ react: React, tagName: 'nve-dialog', elementClass: Dialog, events: { onclose: 'close' } });
+export default withLitSSR({})(nextConfig);
 ```
 
 The `Dialog` React component can now be used within a the NextJS application.
 
 ```tsx
+import { Dialog } from '@nvidia-elements/core-react';
+
 // - closable - HTML attribute
 // - hidden - can update via attributes or JavaScript property binding
 // - onclose - event listener binding for 'close' custom event
@@ -61,12 +50,10 @@ To use the components but avoid using the experimental `@lit-labs/nextjs` packag
 
 ```tsx
 import React from 'react';
-import { createComponent } from '@lit-labs/react';
 import dynamic from 'next/dynamic';
 
-export const MlvDialog = dynamic(async () => {
-  import('@nvidia-elements/core/dialog/define.js');
-  const { Dialog } = await import('@nvidia-elements/core/dialog');
-  return createComponent({ react: React, tagName: Dialog.metadata.tag, elementClass: Dialog, events: { onclose: 'close' } });
+export const NveDialog = dynamic(async () => {
+  const { Dialog } = await import('@nvidia-elements/core-react');
+  return Dialog;
 }, { ssr: false });
 ```

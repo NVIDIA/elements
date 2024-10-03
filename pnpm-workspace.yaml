@@ -5,6 +5,7 @@ packages:
   - 'projects/starters/lit-library'
   - 'projects/starters/mpa'
   - 'projects/starters/nextjs'
+  - 'projects/starters/remix'
   - 'projects/starters/react'
   - 'projects/starters/scoped-registry'
   - 'projects/starters/solidjs'
