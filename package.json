@@ -70,6 +70,7 @@
         "./projects/starters/lit-library:ci",
         "./projects/starters/mpa:ci",
         "./projects/starters/nextjs:ci",
+        "./projects/starters/remix:ci",
         "./projects/starters/react:ci",
         "./projects/starters/scoped-registry:ci",
         "./projects/starters/solidjs:ci",
