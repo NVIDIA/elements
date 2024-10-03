@@ -74,23 +74,17 @@ describe(Control.metadata.tag, () => {
 
   it('should assign no-label style hook if no label element was provided', async () => {
     label.remove();
-    element.shadowRoot.dispatchEvent(new Event('slotchange'));
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('.no-label')).toBeTruthy();
+    expect(getComputedStyle(element.shadowRoot.querySelector('[part="_label"]')).display).toBe('none');
   });
 
   it('should assign no-message style hook if no control message was provided', async () => {
     message.remove();
-    element.shadowRoot.dispatchEvent(new Event('slotchange'));
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('.no-messages')).toBeTruthy();
+    expect(getComputedStyle(element.shadowRoot.querySelector('[part="_messages"]')).display).toBe('none');
   });
 
   it('should assign no-message style hook if no visble control message was provided', async () => {
     message.hidden = true;
-    element.shadowRoot.dispatchEvent(new Event('slotchange'));
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('.no-messages')).toBeTruthy();
+    expect(getComputedStyle(element.shadowRoot.querySelector('[part="_messages"]')).display).toBe('none');
   });
 
   it('should apply multiple attribute if input type is "multiple"', async () => {
