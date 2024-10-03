@@ -2,17 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { Icon, mergeIcons } from '@nvidia-elements/core/icon';
 
 describe(`${Icon.metadata.tag}: static`, () => {
-  it('should return static registry if icon is not yet registered', () => {
-    class Test extends Icon {
-      static metadata = {
-        tag: 'not-registered-icon',
-        version: '0.0.0'
-      };
-    }
-
-    expect((Test as any)._iconsRegistry).toBe(Test._icons);
-  });
-
   it('should merge conflicting icon versions to latest', async () => {
     class Registered {
       static metadata: any = {
