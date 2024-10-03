@@ -1,4 +1,4 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import { html, isServer, LitElement, PropertyValues } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
@@ -49,22 +49,30 @@ export class Icon extends LitElement {
     version: '0.0.0'
   };
 
-  static _icons = ICON_IMPORTS;
+  static _icons: { [key: string]: IconSVG } = ICON_IMPORTS;
 
   private static get _iconsRegistry() {
-    return (customElements.get(this.metadata.tag) as any)?._icons ?? Icon._icons;
+    return this.registeredIcon?._icons ?? Icon._icons;
   }
 
   private static set _iconsRegistry(icons: { [key: string]: IconSVG }) {
-    (customElements.get(this.metadata.tag) as any)._icons = { ...Icon._iconsRegistry, ...icons };
+    this.registeredIcon._icons = { ...Icon._iconsRegistry, ...icons };
+  }
+
+  private static get registeredIcon() {
+    return customElements.get(Icon.metadata.tag) as typeof Icon;
   }
 
   /** @private */
   declare _internals: ElementInternals;
 
+  get #iconString() {
+    return isServer && globalThis._NVE_SSR_ICON_REGISTRY ? globalThis._NVE_SSR_ICON_REGISTRY[this.name] : this.svg;
+  }
+
   render() {
     return html`
-      <div internal-host aria-hidden="true"><slot>${unsafeSVG(this.svg)}</slot></div>
+      <div internal-host aria-hidden="true"><slot>${unsafeSVG(this.#iconString)}</slot></div>
     `;
   }
 

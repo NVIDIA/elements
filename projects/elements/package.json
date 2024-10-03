@@ -43,7 +43,8 @@
     "./dist/polyfills/custom-state-set.js",
     "./dist/test/index.js",
     "./dist/bundles/*.js",
-    "./**/define.js"
+    "./**/define.js",
+    "./**/server.js"
   ],
   "exports": {
     "./package.json": "./package.json",
@@ -359,6 +360,10 @@
     "./icon/define.js": {
       "types": "./dist/icon/define.d.ts",
       "default": "./dist/icon/define.js"
+    },
+    "./icon/server.js": {
+      "types": "./dist/icon/server.d.ts",
+      "default": "./dist/icon/server.js"
     },
     "./icon-button": {
       "types": "./dist/icon-button/index.d.ts",
