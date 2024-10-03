@@ -1,5 +1,4 @@
 import * as path from 'path';
-import { mergeConfig } from 'vite';
 
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 
@@ -34,6 +33,8 @@ export default {
     options: {}
   },
   async viteFinal(config) {
+    const { mergeConfig } = await import('vite'); // https://github.com/storybookjs/storybook/issues/26291
+
     return mergeConfig(config, {
       server: {
         watch: {
@@ -43,7 +44,7 @@ export default {
         },
       },
       build: {
-        target: 'esnext',
+        target: 'esnext', // https://github.com/storybookjs/storybook/issues/22223
         minify: 'esnext'
       },
       resolve: {

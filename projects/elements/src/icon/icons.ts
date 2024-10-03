@@ -1,7 +1,7 @@
 
 // This is an auto-generated file. DO NOT EDIT
 export interface IconSVG {
-  svg: () => Promise<string>;
+  svg: () => Promise<string> | string;
 }
 
 export const ICON_IMPORTS = {
