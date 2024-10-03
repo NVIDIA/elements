@@ -37,6 +37,7 @@ export const libraryBuildConfig = {
         index: resolve(process.cwd(), './src/index.ts'),
         ...[
           ...globSync('./src/**/define.ts'),
+          ...globSync('./src/**/server.ts'),
           ...globSync('./src/**/index.ts'),
           ...globSync('./src/**/index.tsx')
         ].reduce((p, i) => {
