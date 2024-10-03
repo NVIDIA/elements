@@ -17,3 +17,7 @@ export function getInvalidSlotsWarning(localName: string, allowed: Array<string>
 export function getIdMatchNotFoundWarning(id: string) {
   return `Provided id "${id}" was not found in DOM`;
 }
+
+export function getSSRMismatchWarning(localName: string) {
+  return `${localName} rendered on the client with mismatched SSR content. https://lit.dev/docs/ssr/overview/`;
+}

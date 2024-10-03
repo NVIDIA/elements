@@ -69,9 +69,22 @@ export function appendRootNodeStyle(host: HTMLElement, styles: string) {
   stylesheet.replaceSync(styles);
   const root = host.getRootNode() as any;
   if (root.adoptedStyleSheets) {
-    root.adoptedStyleSheets = [...Array.from(root.adoptedStyleSheets), stylesheet];
+    const hasStyleSheet = root.adoptedStyleSheets
+      .map(s => styleSheetToString(s))
+      .find(s => s === styleSheetToString(stylesheet));
+    if (!hasStyleSheet) {
+      root.adoptedStyleSheets = [...Array.from(root.adoptedStyleSheets), stylesheet];
+    }
   }
   return stylesheet;
+}
+
+export function styleSheetToString(stylesheet: CSSStyleSheet) {
+  return stylesheet.cssRules
+    ? Array.from(stylesheet.cssRules)
+        .map(rule => rule.cssText || '')
+        .join('\n')
+    : '';
 }
 
 /* used for cases of needing to know a property update outside of lit, example a native input value prop change */
