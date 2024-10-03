@@ -1,6 +1,7 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import {
+  appendRootNodeStyle,
   attachInternals,
   getFlattenedFocusableItems,
   keyNavigationList,
@@ -10,6 +11,7 @@ import {
 import { updateNodeSelection } from './utils.js';
 import { TreeNode } from './tree-node.js';
 import styles from './tree.css?inline';
+import globalStyles from './tree.global.css?inline';
 
 /**
  * @element nve-tree
@@ -80,6 +82,7 @@ export class Tree extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
+    appendRootNodeStyle(this, globalStyles);
     this._internals.role = 'tree';
     this.addEventListener('_node-update', () => this.#syncNodes());
   }

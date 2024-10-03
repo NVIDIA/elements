@@ -107,16 +107,22 @@ describe(TreeNode.metadata.tag, () => {
     expect(element.shadowRoot.querySelector('nve-icon').direction).toBe('right');
   });
 
-  it('should have a node group slot if expanded', async () => {
-    expect(element.shadowRoot.querySelector<HTMLElement>('[role=group]').hidden).toBe(true);
+  it('should show node group slot if expanded', async () => {
+    expect(getComputedStyle(nestedNodeElement.shadowRoot.querySelector<HTMLElement>('[part="_nodes"]')).display).toBe(
+      'none'
+    );
 
-    element.expanded = true;
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<HTMLElement>('[role=group]').hidden).toBe(false);
+    nestedNodeElement.expanded = true;
+    await elementIsStable(nestedNodeElement);
+    expect(getComputedStyle(nestedNodeElement.shadowRoot.querySelector<HTMLElement>('[part="_nodes"]')).display).toBe(
+      'block'
+    );
 
-    element.expanded = false;
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<HTMLElement>('[role=group]').hidden).toBe(true);
+    nestedNodeElement.expanded = false;
+    await elementIsStable(nestedNodeElement);
+    expect(getComputedStyle(nestedNodeElement.shadowRoot.querySelector<HTMLElement>('[part="_nodes"]')).display).toBe(
+      'none'
+    );
   });
 
   it('should show icon button if expandable', async () => {
