@@ -11,7 +11,6 @@ import {
 import styles from './breadcrumb.css?inline';
 import { Icon } from '@nvidia-elements/core/icon';
 import type { Button } from '@nvidia-elements/core/button';
-import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 
 /**
  * @element nve-breadcrumb
@@ -52,8 +51,6 @@ export class Breadcrumb extends LitElement {
 
   @state() private breadcrumbItems: Element[] = [];
 
-  @queryAssignedElements({ slot: '', flatten: true }) private items!: HTMLElement[];
-
   render() {
     return html`
     <ol internal-host>
@@ -66,7 +63,7 @@ export class Breadcrumb extends LitElement {
       `
       )}
     </ol>
-    <slot hidden-slot @slotchange=${this.#createItems}></slot>`;
+    <slot ?hidden-slot=${!this.breadcrumbItems.length} @slotchange=${this.#createItems}></slot>`;
   }
 
   connectedCallback() {
