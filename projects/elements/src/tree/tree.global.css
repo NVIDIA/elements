@@ -1,0 +1,11 @@
+nve-tree-node:not(:has([slot='content']))::part(_content) {
+  display: none;
+}
+
+nve-tree-node:not(:has([slot='nodes']))::part(_nodes) {
+  display: none;
+}
+
+nve-tree-node:has([slot='nodes']):not([expanded])::part(_nodes) {
+  display: none;
+}
