@@ -1,3 +1,6 @@
+// import withLitSSR from '@lit-labs/nextjs';
+// https://github.com/lit/lit/pull/4774
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true
@@ -26,6 +29,7 @@ function withLitSSR() {
           };
 
           imports.push('side-effects @/ssr/index.mjs');
+          imports.push('side-effects @nvidia-elements/core/icon/server.js');
         } else {
           imports.push('side-effects @lit-labs/ssr-react/enable-lit-ssr.js');
         }

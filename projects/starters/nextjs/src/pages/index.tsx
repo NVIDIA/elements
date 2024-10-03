@@ -33,6 +33,10 @@ import { NveDrawer, NveDrawerHeader } from '@nvidia-elements/core-react/drawer';
 import { NveToast } from '@nvidia-elements/core-react/toast';
 import { NveNotification } from '@nvidia-elements/core-react/notification';
 import { NveTree, NveTreeNode } from '@nvidia-elements/core-react/tree';
+import { NveGrid, NveGridCell, NveGridColumn, NveGridHeader, NveGridRow } from '@nvidia-elements/core-react/grid';
+import { NveCheckbox, NveCheckboxGroup } from '@nvidia-elements/core-react/checkbox';
+import { NveControlMessage } from '@nvidia-elements/core-react/forms';
+import { NveIcon } from '@nvidia-elements/core-react/icon';
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -41,50 +45,54 @@ const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffec
 export default function Home() {
   return (
     <NonSSRRerenderable name="Full Page" fullPage>
+      <NonSSRRerenderable name="Icon">
+        <NveIcon name="person"></NveIcon>
+      </NonSSRRerenderable>
+
       <NonSSRRerenderable name="AppHeader">
         <NveAppHeader>
-          <NveLogo />
+          <NveLogo size="sm" />
           <h2 slot="title">NextJS</h2>
-          <NveButton slot="nav-items" container="inline">
+          <NveButton slot="nav-items" container="flat">
             Link 1
           </NveButton>
-          <NveButton slot="nav-items" container="inline" selected>
+          <NveButton slot="nav-items" container="flat" selected>
             Link 2
           </NveButton>
-          <NveIconButton icon-name="search" slot="nav-actions"></NveIconButton>
-          <NveIconButton icon-name="switch-apps" slot="nav-actions"></NveIconButton>
+          <NveIconButton icon-name="search" container="flat" slot="nav-actions"></NveIconButton>
+          <NveIconButton icon-name="switch-apps" container="flat" slot="nav-actions"></NveIconButton>
           <NveIconButton interaction="emphasis" slot="nav-actions" size="sm">
             EL
           </NveIconButton>
         </NveAppHeader>
       </NonSSRRerenderable>
 
-      <PopoverLegacyExample name="Tooltip" Component={NveTooltip}>
+      <PopoverExample name="Tooltip" Component={NveTooltip}>
         hello there
-      </PopoverLegacyExample>
+      </PopoverExample>
 
-      <PopoverLegacyExample name="Toast" Component={NveToast}>
+      <PopoverExample name="Toast" Component={NveToast}>
         copied!
-      </PopoverLegacyExample>
+      </PopoverExample>
 
-      <PopoverLegacyExample name="Drawer" Component={NveDrawer} closable modal excludeShown>
+      <PopoverExample name="Drawer" Component={NveDrawer} closable modal excludeShown>
         <NveDrawerHeader>
           <h3 nve-text="heading semibold sm">Title</h3>
         </NveDrawerHeader>
         <p nve-text="body">some text content in a drawer</p>
-      </PopoverLegacyExample>
+      </PopoverExample>
 
-      <PopoverLegacyExample name="Dropdown" Component={NveDropdown} closable>
+      <PopoverExample name="Dropdown" Component={NveDropdown} closable>
         <h3 nve-text="heading">Title</h3>
         <p nve-text="body">some text content in a dropdown</p>
-      </PopoverLegacyExample>
+      </PopoverExample>
 
-      <PopoverLegacyExample name="Dialog" Component={NveDialog} closable modal excludeShown>
+      <PopoverExample name="Dialog" Component={NveDialog} closable modal excludeShown>
         <h3 nve-text="heading">Title</h3>
         <p nve-text="body">some text content in a closable dialog</p>
-      </PopoverLegacyExample>
+      </PopoverExample>
 
-      <PopoverLegacyExample
+      <PopoverExample
         name="Notification"
         Component={NveNotification}
         closable
@@ -94,7 +102,7 @@ export default function Home() {
         excludeShown>
         <h3 nve-text="label">notification</h3>
         <p nve-text="body">some text content in a notification</p>
-      </PopoverLegacyExample>
+      </PopoverExample>
 
       <NonSSRRerenderable name="Alert">
         <NveAlert status="success">hello there</NveAlert>
@@ -158,17 +166,17 @@ export default function Home() {
 
       <NonSSRRerenderable name="Breadcrumb">
         <NveBreadcrumb>
-          <NveButton>
+          <NveButton container="inline">
             <a href="#" target="_self">
               Item 1
             </a>
           </NveButton>
-          <NveButton>
+          <NveButton container="inline">
             <a href="#" target="_self">
               Item 2
             </a>
           </NveButton>
-          <NveButton>
+          <NveButton container="inline">
             <a href="#" target="_self">
               Item 3
             </a>
@@ -206,16 +214,68 @@ export default function Home() {
       <NonSSRRerenderable name="Tree">
         <NveTree behaviorExpand>
           <NveTreeNode expanded>
-            Parent
-            <NveTreeNode expanded>Child</NveTreeNode>
+            Node 1<NveTreeNode>Node 1-1</NveTreeNode>
+            <NveTreeNode>Node 1-2</NveTreeNode>
+          </NveTreeNode>
+          <NveTreeNode>
+            Node 2<NveTreeNode>Node 2-1</NveTreeNode>
+            <NveTreeNode>Node 2-2</NveTreeNode>
           </NveTreeNode>
         </NveTree>
+      </NonSSRRerenderable>
+
+      <NonSSRRerenderable name="Grid">
+        <NveGrid>
+          <NveGridHeader>
+            <NveGridColumn>column 1</NveGridColumn>
+            <NveGridColumn>column 2</NveGridColumn>
+            <NveGridColumn>column 3</NveGridColumn>
+            <NveGridColumn>column 4</NveGridColumn>
+          </NveGridHeader>
+          <NveGridRow>
+            <NveGridCell>cell 1-1</NveGridCell>
+            <NveGridCell>cell 1-2</NveGridCell>
+            <NveGridCell>cell 1-3</NveGridCell>
+            <NveGridCell>cell 1-4</NveGridCell>
+          </NveGridRow>
+          <NveGridRow>
+            <NveGridCell>cell 2-1</NveGridCell>
+            <NveGridCell>cell 2-2</NveGridCell>
+            <NveGridCell>cell 2-3</NveGridCell>
+            <NveGridCell>cell 2-4</NveGridCell>
+          </NveGridRow>
+        </NveGrid>
+      </NonSSRRerenderable>
+
+      <NonSSRRerenderable name="Checkbox">
+        <NveCheckboxGroup>
+          <label suppressHydrationWarning>checkbox group</label>
+          <NveCheckbox>
+            <label slot="label" suppressHydrationWarning>
+              checkbox 1
+            </label>
+            <input id="checkbox-1" type="checkbox" defaultChecked />
+          </NveCheckbox>
+          <NveCheckbox>
+            <label slot="label" htmlFor="checkbox-2">
+              checkbox 2
+            </label>
+            <input id="checkbox-2" type="checkbox" defaultChecked />
+          </NveCheckbox>
+          <NveCheckbox>
+            <label slot="label" htmlFor="checkbox-3">
+              checkbox 3
+            </label>
+            <input id="checkbox-3" type="checkbox" defaultChecked />
+          </NveCheckbox>
+          <NveControlMessage>message</NveControlMessage>
+        </NveCheckboxGroup>
       </NonSSRRerenderable>
     </NonSSRRerenderable>
   );
 }
 
-function PopoverLegacyExample<
+function PopoverExample<
   T extends ComponentType<{
     id?: string;
     anchor?: string | HTMLElement;
@@ -234,22 +294,24 @@ function PopoverLegacyExample<
 } & ComponentProps<T>) {
   const id = useId();
   return (
-    <NonSSRRerenderable name={name} nve-layout="row gap:lg pad:lg">
-      {/* @ts-ignore */}
-      <Component {...props} id={`${id}-popover`} />
-      <NveButton popovertarget={`${id}-popover`}>popover api</NveButton>
+    <NonSSRRerenderable name={name}>
+      <div nve-layout="row gap:xs">
+        {/* @ts-ignore */}
+        <Component {...props} id={`${id}-popover`} />
+        <NveButton popovertarget={`${id}-popover`}>popover api</NveButton>
 
-      {/* @ts-ignore */}
-      <Component {...props} anchor={`${id}-legacy-hidden`} trigger={`${id}-legacy-hidden`} behaviorTrigger hidden />
-      <NveButton id={`${id}-legacy-hidden`}>legacy api hidden</NveButton>
+        {/* @ts-ignore */}
+        <Component {...props} anchor={`${id}-legacy-hidden`} trigger={`${id}-legacy-hidden`} behaviorTrigger hidden />
+        <NveButton id={`${id}-legacy-hidden`}>legacy api hidden</NveButton>
 
-      {excludeShown ? null : (
-        <>
-          {/* @ts-ignore */}
-          <Component {...props} anchor={`${id}-legacy-shown`} trigger={`${id}-legacy-shown`} behaviorTrigger />
-          <NveButton id={`${id}-legacy-shown`}>legacy api shown</NveButton>
-        </>
-      )}
+        {excludeShown ? null : (
+          <>
+            {/* @ts-ignore */}
+            <Component {...props} anchor={`${id}-legacy-shown`} trigger={`${id}-legacy-shown`} behaviorTrigger />
+            <NveButton id={`${id}-legacy-shown`}>legacy api shown</NveButton>
+          </>
+        )}
+      </div>
     </NonSSRRerenderable>
   );
 }
@@ -277,13 +339,7 @@ function NonSSRRerenderable({
 
   return (
     <ParentReRenderCountProvider.Provider value={combinedReRenderCount}>
-      <NveCard
-        container={fullPage ? 'full' : undefined}
-        style={
-          fullPage
-            ? ({ '--background': 'var(--nve-sys-layer-canvas-background)' } as React.CSSProperties)
-            : { marginBottom: '1em' }
-        }>
+      <NveCard container="flat">
         <NveCardHeader>
           <h1 slot="title" nve-layout="row gap:md align:center">
             {name}
@@ -293,13 +349,12 @@ function NonSSRRerenderable({
             type="button"
             onClick={incrementReRenderCount}
             slot="header-action"
-            interaction="destructive"
             style={{ marginLeft: '1em', visibility: combinedReRenderCount === 0 ? 'visible' : 'hidden' }}>
             Client-side Re-Render
           </NveButton>
         </NveCardHeader>
         <NveCardContent {...props}>
-          <div key={combinedReRenderCount} ref={ref}>
+          <div key={combinedReRenderCount} ref={ref} nve-layout={fullPage ? 'grid gap:md span-items:4' : ''}>
             {children}
           </div>
         </NveCardContent>
