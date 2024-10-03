@@ -33,7 +33,7 @@ describe(Breadcrumb.metadata.tag, () => {
   });
 
   it('should assign elements to defined slot', async () => {
-    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
 
@@ -43,7 +43,7 @@ describe(Breadcrumb.metadata.tag, () => {
   });
 
   it('should decorate clickable elements with inline', async () => {
-    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
 
@@ -52,7 +52,7 @@ describe(Breadcrumb.metadata.tag, () => {
   });
 
   it('should remove wrapper slot if a child is removed', async () => {
-    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('li').length).toBe(3);
@@ -63,7 +63,7 @@ describe(Breadcrumb.metadata.tag, () => {
   });
 
   it('should add wrapper slot if a child is added', async () => {
-    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('[hidden-slot]');
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('li').length).toBe(3);
