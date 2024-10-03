@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { getExcessiveInstanceLimitWarning, getIdMatchNotFoundWarning, getInvalidSlotsWarning } from './audit.js';
+import {
+  getExcessiveInstanceLimitWarning,
+  getIdMatchNotFoundWarning,
+  getInvalidSlotsWarning,
+  getSSRMismatchWarning
+} from './audit.js';
 
 describe('getExcessiveInstanceLimitWarning', () => {
   it('should return warning message for excessive instance limit', () => {
@@ -21,6 +26,14 @@ describe('getIdMatchNotFoundWarning', () => {
   it('should return warning message for id selectors unmatched in DOM', () => {
     expect(getIdMatchNotFoundWarning('no-id-found-test-element')).toBe(
       'Provided id "no-id-found-test-element" was not found in DOM'
+    );
+  });
+});
+
+describe('getSSRMismatchWarning', () => {
+  it('should return warning message for hydration mismatch', () => {
+    expect(getSSRMismatchWarning('nve-tree')).toBe(
+      'nve-tree rendered on the client with mismatched SSR content. https://lit.dev/docs/ssr/overview/'
     );
   });
 });

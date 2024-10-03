@@ -8,10 +8,12 @@ import {
   TypeSelectableController,
   attachInternals,
   getFlattenedFocusableItems,
+  hostAttr,
   stateExpanded,
   stateHighlighted,
   stateSelected,
   typeAnchor,
+  typeSSR,
   useStyles
 } from '@nvidia-elements/core/internal';
 import type { Tree } from './tree.js';
@@ -34,6 +36,7 @@ import { updateNodeSelection } from './utils.js';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  * @stable false
  */
+@typeSSR()
 @typeAnchor()
 @stateSelected()
 @stateExpanded()
@@ -42,7 +45,7 @@ export class TreeNode extends LitElement {
   /**
    * Determines if node is in an expanded state.
    */
-  @property({ type: Boolean }) expanded = false;
+  @property({ type: Boolean, reflect: true }) expanded = false;
 
   /**
    * Determines whether if node is in a selected state.
@@ -71,6 +74,9 @@ export class TreeNode extends LitElement {
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
+  /** @private */
+  @hostAttr() slot = 'nodes';
+
   get #tree() {
     return this.closest<Tree>('nve-tree');
   }
@@ -79,9 +85,6 @@ export class TreeNode extends LitElement {
    * Returns list of child nodes
    */
   @queryAssignedElements({ slot: 'nodes' }) readonly nodes!: TreeNode[];
-
-  /* @private */
-  @state() hasChildTreeNodes = false;
 
   /* @private */
   @state() indeterminate = false;
@@ -97,7 +100,7 @@ export class TreeNode extends LitElement {
   #typeSelectableController = new TypeSelectableController(this);
 
   get #isExpandable() {
-    return this.hasChildTreeNodes || this.expandable;
+    return this.expandable || this.expanded || !!this.nodes?.length;
   }
 
   static metadata = {
@@ -131,10 +134,10 @@ export class TreeNode extends LitElement {
           }
           <div tabindex="0" part="node-header">
             <slot tabindex="0" class="node-title" @click=${this.#nodeHeaderClick}></slot>
-            <slot name="content" @slotchange=${e => (e.target.assignedNodes() ? e.target.setAttribute('has-content', '') : '')}></slot>
+            <slot name="content" part="_content"></slot>
           </div>
         </div>
-        <div .hidden=${!this.expanded} role="group"><slot name="nodes" @slotchange=${this.handleNodesChange}></slot></div>
+        <div role="group" part="_nodes"><slot name="nodes"></slot></div>
       </div>
     `;
   }
@@ -143,7 +146,6 @@ export class TreeNode extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'treeitem';
-    this.slot = 'nodes';
     this.#setupKeyNavInteractions();
     this.#nodeUpdate();
   }
@@ -161,10 +163,6 @@ export class TreeNode extends LitElement {
   /** closes and sets the expanded state automatically if behaviorExpand is true */
   close() {
     this.#typeExpandableController.close();
-  }
-
-  handleNodesChange() {
-    this.hasChildTreeNodes = this.nodes.length > 0;
   }
 
   #nodeUpdate() {

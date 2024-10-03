@@ -30,16 +30,6 @@ slot[name='nodes'] {
   align-items: start;
 }
 
-[role='group']::before {
-  border-left: var(--node-border);
-  left: var(--nve-ref-size-150);
-  top: 0;
-  display: block;
-  content: '';
-  position: absolute;
-  bottom: 0;
-}
-
 .node {
   display: flex;
   align-items: center;
@@ -72,16 +62,23 @@ slot[name='nodes'] {
 
 [name='content'] {
   padding: var(--nve-ref-size-200);
-  display: none;
-
-  &[has-content] {
-    display: block;
-  }
+  display: block;
 }
 
-[role='group'] {
+[part='_nodes'] {
   width: 100%;
   position: relative;
+  display: block;
+}
+
+[part='_nodes']::before {
+  border-left: var(--node-border);
+  left: var(--nve-ref-size-150);
+  top: 0;
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: 0;
 }
 
 nve-icon-button {
