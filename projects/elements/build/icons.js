@@ -17,13 +17,14 @@ icons = Object.entries(icons)
 
 await writeIconFiles(icons);
 await writeIconRegistry(icons);
+await writeSSRIconRegistry(icons);
 
 function readIconFiles() {
   return fs
     .readdirSync(inputPath)
-    .filter((file) => file.endsWith('.svg'))
+    .filter(file => file.endsWith('.svg'))
     .sort()
-    .map((file) => [
+    .map(file => [
       file.substring(0, file.length - 4),
       fs.readFileSync(path.join(inputPath, file), { encoding: 'utf-8' })
     ])
@@ -33,33 +34,53 @@ function readIconFiles() {
 function writeIconFiles(icons) {
   return Promise.all(
     Object.entries(icons).map(([name, svg]) => {
-      return new Promise((r) => fs.writeFile(path.join(inputPath, `${name}.svg`), svg, { encoding: 'utf-8' }, r));
+      return new Promise(r => fs.writeFile(path.join(inputPath, `${name}.svg`), svg, { encoding: 'utf-8' }, r));
     })
   );
 }
 
 function writeIconRegistry(icons) {
-  return new Promise((r) => {
+  return new Promise(r => {
     fs.writeFile(
       `${outputPath}/icons.ts`,
       `
 // This is an auto-generated file. DO NOT EDIT
 export interface IconSVG {
-  svg: () => Promise<string>;
+  svg: () => Promise<string> | string;
 }
 
 export const ICON_IMPORTS = {\n${Object.keys(icons)
-        .map((i) => `  '${i}': {\n    svg: async () => (await import('./icons/${i}.svg?raw')).default\n  },`)
+        .map(i => `  '${i}': {\n    svg: async () => (await import('./icons/${i}.svg?raw')).default\n  },`)
         .join('\n')}\n};
 
 export type IconName = ${Object.keys(icons)
-        .map((i) => `'${i}'`)
+        .map(i => `'${i}'`)
         .join(' | ')};
 
 /** @deprecated */
 export type IconNames = IconName;
 
 export const ICON_NAMES = Object.keys(ICON_IMPORTS) as IconName[];
+`,
+      { encoding: 'utf-8' },
+      r
+    );
+  });
+}
+
+function writeSSRIconRegistry(icons) {
+  return new Promise(r => {
+    fs.writeFile(
+      `${outputPath}/server.ts`,
+      `
+// This is an auto-generated file. DO NOT EDIT
+// 
+// We could use a top level await in icon.js like the following
+// const { ICON_IMPORTS } = await (isServer ? import('./icons.server.js') : import('./icons.js'));
+// however due to downstream consumer tools that use esbuild/iffe modules, top level await is not supported
+globalThis._NVE_SSR_ICON_REGISTRY = {\n${Object.keys(icons)
+        .map(i => `  '${i}': '${icons[i]}',`)
+        .join('\n')}\n};
 `,
       { encoding: 'utf-8' },
       r
@@ -101,11 +122,11 @@ async function repairViewBoxScales(svgs) {
   const context = await browser.newContext();
   const page = await context.newPage();
 
-  const result = await page.evaluate((icons) => {
+  const result = await page.evaluate(icons => {
     function scaleSVG(svg) {
       // https://typeofnan.dev/how-to-perfectly-fit-an-svg-to-its-contents-using-javascript/
       return [...svg.children]
-        .filter((el) => el.getBBox)
+        .filter(el => el.getBBox)
         .reduce((acc, el) => {
           const { x, y, width, height } = el.getBBox();
           if (!acc.xMin || x < acc.xMin) acc.xMin = x;
