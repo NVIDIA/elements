@@ -11,6 +11,7 @@
     "lint": "wireit"
   },
   "dependencies": {
+    "@lit-labs/nextjs": "0.2.0",
     "@lit-labs/ssr-react": "0.3.0",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/core-react": "workspace:*",
@@ -59,7 +60,7 @@
       "files": [
         "src/**",
         "package.json",
-        "next.config.cjs",
+        "next.config.mjs",
         "tsconfig.json"
       ]
     }
