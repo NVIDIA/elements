@@ -75,10 +75,6 @@ export class Control extends LitElement {
       ?.assignedElements({ flatten: true }) ?? []) as ControlMessage[];
   }
 
-  get #visibleMessages() {
-    return this.#messages.filter(i => !i.hasAttribute('hidden'));
-  }
-
   #input: HTMLInputElement;
 
   /** @private */
@@ -107,13 +103,7 @@ export class Control extends LitElement {
     return nothing;
   }
 
-  @state() private inlineControl = false;
-
-  @state() private styleStates = {
-    'no-messages': !this.#visibleMessages.length,
-    'no-label': !this.#label,
-    'inline-control': this.inlineControl
-  };
+  @property({ type: String, reflect: true, attribute: 'nve-control' }) protected nveControl = '';
 
   /** @private */
   declare _internals: ElementInternals;
@@ -130,23 +120,23 @@ export class Control extends LitElement {
   };
 
   render() {
-    return !this.inlineControl
+    return this.nveControl !== 'inline'
       ? html`
-      <div internal-host class=${classMap(this.styleStates)}>
-        <slot name="label" ?hidden=${!this.#label}></slot>
+      <div internal-host part="_internal-host">
+        <slot name="label" part="_label"></slot>
         <div input>
           ${this.prefixContent}
           <slot></slot>
           ${this.suffixContent}
         </div>
-        <slot name="messages"></slot>
+        <slot name="messages" part="_messages"></slot>
       </div>
     `
       : html`
-      <div internal-host class=${classMap(this.styleStates)}>
+      <div internal-host part="_internal-host">
         <div input><slot interaction-state></slot></div>
-        <slot name="label"></slot>
-        <slot name="messages"></slot>
+        <slot name="label" part="_label"></slot>
+        <slot name="messages" part="_messages"></slot>
       </div>
     `;
   }
@@ -155,7 +145,6 @@ export class Control extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
-    this.setAttribute('nve-control', '');
 
     this.shadowRoot.addEventListener('slotchange', () => {
       this.#updateStyleStates();
@@ -226,14 +215,8 @@ export class Control extends LitElement {
 
   #updateStyleStates() {
     if (this.input) {
-      this.inlineControl = isInlineInputType(this.input);
       this.toggleAttribute('multiple', this.input?.multiple);
       this.input?.hasAttribute('size') ? this.setAttribute('size', '') : this.removeAttribute('size');
-      this.styleStates = {
-        'no-messages': !this.#visibleMessages.length,
-        'no-label': !this.#label,
-        'inline-control': this.inlineControl
-      };
     }
   }
 
