@@ -83,24 +83,19 @@
 }
 
 slot {
-  display: flex;
   line-height: 1;
   width: 100%;
 }
 
 slot[name='label'] {
   grid-area: label;
+  display: inline-flex;
   align-self: center;
 }
 
 slot[name='messages'] {
   grid-area: messages;
-}
-
-.no-messages {
-  & slot[name='messages'] {
-    display: none !important;
-  }
+  display: inline-flex;
 }
 
 [internal-host] {
@@ -110,52 +105,16 @@ slot[name='messages'] {
   gap: var(--nve-ref-space-xs);
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
-  grid-template-areas:
-    'label label label'
-    'input input input'
-    'messages messages messages';
-
-  &.no-messages {
-    grid-template-areas:
-      'label label label'
-      'input input input';
-  }
-
-  &.no-label {
-    grid-template-areas:
-      'input input input'
-      'messages messages messages';
-  }
-
-  &.no-label.no-messages {
-    grid-template-areas: 'input input input';
-  }
+  grid-template-areas: 'input input input';
 }
 
-[internal-host].inline-control {
+:host([nve-control='inline']) [internal-host] {
   align-items: center;
   grid-template-columns: auto 1fr 1fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-    'input label label'
-    '. messages messages';
 
-  & slot {
-    display: inline-flex;
+  slot[name='label'],
+  slot[name='messages'] {
     align-items: center;
-  }
-
-  &.no-messages {
-    grid-template-areas: 'input label label';
-  }
-
-  &.no-label.no-messages {
-    grid-template-areas: 'input input input';
-  }
-
-  &.no-label.no-messages slot[name='label'],
-  &.no-label.no-messages slot[name='messages'] {
-    display: contents !important;
   }
 
   & ::slotted(label) {
@@ -163,17 +122,14 @@ slot[name='messages'] {
     color: var(--color) !important;
     width: 100%;
   }
+
+  slot[name='label'] {
+    line-height: 1;
+    width: 100%;
+  }
 }
 
 :host([layout='horizontal']) [internal-host],
 :host([layout='horizontal-inline']) [internal-host] {
   grid-template-columns: var(--_label-width) 1fr minmax(0, var(--_label-width));
-  grid-template-areas:
-    'label input input'
-    '. messages messages';
-}
-
-:host([layout='horizontal']) [internal-host].no-messages,
-:host([layout='horizontal-inline']) [internal-host].no-messages {
-  grid-template-areas: 'label input input';
 }

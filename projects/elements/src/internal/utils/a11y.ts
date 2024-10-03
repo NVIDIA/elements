@@ -9,7 +9,7 @@ export function attachInternals(element: HTMLElement & { _internals?: ElementInt
 export function associateLabel(label: HTMLLabelElement, input: HTMLInputElement) {
   if (label && input) {
     input.id = input.id ? input.id : generateId();
-    label.setAttribute('for', input.id);
+    label.htmlFor = input.id;
   }
 }
 
