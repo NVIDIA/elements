@@ -670,6 +670,9 @@ importers:
 
   projects/starters/nextjs:
     dependencies:
+      '@lit-labs/nextjs':
+        specifier: 0.2.0
+        version: 0.2.0(@types/react@18.3.3)(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1)(webpack@5.94.0)
       '@lit-labs/ssr-react':
         specifier: 0.3.0
         version: 0.3.0(@types/react@18.3.3)(react@18.3.1)
@@ -2518,6 +2521,11 @@ packages:
     peerDependencies:
       '@inquirer/prompts': '>= 3 < 6'
 
+  '@lit-labs/nextjs@0.2.0':
+    resolution: {integrity: sha512-FarKdhUZmFhDvf349QewKVn9N1WkzD4CPs2Dlgk9uuWtgfqYSFrD82Uq+5Re32igtCFYWiclOyPsPuPboKeTwg==}
+    peerDependencies:
+      next: 13 || 14
+
   '@lit-labs/scoped-registry-mixin@1.0.3':
     resolution: {integrity: sha512-+DywdIJIIR30K0UGdWkn3iPlVvuSfmvo4qUlPTz1hEizksPD4Vl8TrwuXwi4HTIQ2XugYK3WXaWfWqqLEzbrxg==}
 
@@ -3920,6 +3928,9 @@ packages:
 
   '@webcomponents/scoped-custom-element-registry@0.0.9':
     resolution: {integrity: sha512-4RVHwN9oIp23mhrxeDbP9/0wvdcrB0d/MFMqIStShIgfzsqXZXf1OdU5kvqjgdMYavQ5Zm8C6BuBcAjzNwAetQ==}
+
+  '@webcomponents/template-shadowroot@0.2.1':
+    resolution: {integrity: sha512-fXL/vIUakyZL62hyvUh+EMwbVoTc0hksublmRz6ai6et8znHkJa6gtqMUZo1oc7dIz46exHSIImml9QTdknMHg==}
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -11873,6 +11884,17 @@ snapshots:
       '@inquirer/prompts': 5.0.7
       '@inquirer/type': 1.5.5
 
+  '@lit-labs/nextjs@0.2.0(@types/react@18.3.3)(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1)(webpack@5.94.0)':
+    dependencies:
+      '@lit-labs/ssr-react': 0.3.0(@types/react@18.3.3)(react@18.3.1)
+      '@webcomponents/template-shadowroot': 0.2.1
+      imports-loader: 4.0.1(webpack@5.94.0)
+      next: 14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6)
+    transitivePeerDependencies:
+      - '@types/react'
+      - react
+      - webpack
+
   '@lit-labs/scoped-registry-mixin@1.0.3':
     dependencies:
       '@lit/reactive-element': 2.0.4
@@ -13822,6 +13844,8 @@ snapshots:
       '@xtuc/long': 4.2.2
 
   '@webcomponents/scoped-custom-element-registry@0.0.9': {}
+
+  '@webcomponents/template-shadowroot@0.2.1': {}
 
   '@xtuc/ieee754@1.2.0': {}
 
@@ -16345,7 +16369,7 @@ snapshots:
     dependencies:
       source-map: 0.6.1
       strip-comments: 2.0.1
-      webpack: 5.94.0(esbuild@0.23.0)
+      webpack: 5.94.0
 
   imurmurhash@0.1.4: {}
 
@@ -19854,6 +19878,15 @@ snapshots:
     optionalDependencies:
       esbuild: 0.23.0
 
+  terser-webpack-plugin@5.3.10(webpack@5.94.0):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 3.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.30.3
+      webpack: 5.94.0
+
   terser@5.30.3:
     dependencies:
       '@jridgewell/source-map': 0.3.6
@@ -20723,6 +20756,36 @@ snapshots:
       webpack: 5.94.0(esbuild@0.23.0)
 
   webpack-virtual-modules@0.6.2: {}
+
+  webpack@5.94.0:
+    dependencies:
+      '@types/estree': 1.0.6
+      '@webassemblyjs/ast': 1.12.1
+      '@webassemblyjs/wasm-edit': 1.12.1
+      '@webassemblyjs/wasm-parser': 1.12.1
+      acorn: 8.12.1
+      acorn-import-attributes: 1.9.5(acorn@8.12.1)
+      browserslist: 4.24.0
+      chrome-trace-event: 1.0.4
+      enhanced-resolve: 5.17.1
+      es-module-lexer: 1.5.4
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 3.3.0
+      tapable: 2.2.1
+      terser-webpack-plugin: 5.3.10(webpack@5.94.0)
+      watchpack: 2.4.1
+      webpack-sources: 3.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
 
   webpack@5.94.0(esbuild@0.23.0):
     dependencies:

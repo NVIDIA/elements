@@ -10,3 +10,4 @@ CHANGELOG.md
 pnpm-lock.yaml
 projects/labs/code/index.html
 projects/elements/src/css/*.css
+projects/elements/src/icon/server.ts
