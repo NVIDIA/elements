@@ -3,18 +3,3 @@
 @import '@nvidia-elements/themes/dark.css';
 @import '@nvidia-elements/styles/layout.css';
 @import '@nvidia-elements/styles/typography.css';
-
-[data-ssr-error]::after {
-  outline: 1px solid red;
-  position: relative;
-  height: auto;
-  display: block;
-  width: auto;
-  background: #660033;
-  color: white;
-  content: attr(data-ssr-error);
-  padding: 10px;
-  margin: 10px;
-  font-size: 12px;
-  font-weight: bold;
-}
