@@ -1,4 +1,5 @@
 :host {
+  --gap: var(--nve-ref-space-xxs);
   --breadcrumb-height: var(--nve-ref-size-500);
   --item-text-size: var(--nve-ref-font-size-50);
   --item-color: var(--nve-sys-text-muted-color);
@@ -15,7 +16,7 @@ li {
   min-height: 0;
   align-items: flex-start;
   justify-content: stretch;
-  gap: var(--nve-ref-space-xxs);
+  gap: var(--gap);
 }
 
 li {
@@ -68,4 +69,10 @@ nve-icon[separator] {
   font-weight: var(--item-active-font-weight);
   --font-weight: var(--item-active-font-weight);
   --color: var(--item-active-color);
+}
+
+[hidden-slot] {
+  gap: var(--nve-ref-space-sm);
+  display: flex;
+  align-items: center;
 }
