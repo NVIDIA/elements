@@ -1,5 +1,6 @@
 import type { CSSResult } from 'lit';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { property } from 'lit/decorators/property.js';
+import { typeSSR, useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import styles from './checkbox.css?inline';
 
@@ -14,7 +15,10 @@ import styles from './checkbox.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/
  */
+@typeSSR()
 export class Checkbox extends Control {
+  @property({ type: String, reflect: true, attribute: 'nve-control' }) protected nveControl = 'inline';
+
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {
