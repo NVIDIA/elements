@@ -87,10 +87,13 @@ export class Dropdown extends LitElement {
    */
   @property({ type: Boolean }) arrow = false;
 
-  @query('.arrow') popoverArrow: HTMLElement;
+  /** @private */
+  @property({ type: Boolean }) modal = true;
 
   /** @private */
-  readonly popoverType: PopoverType = 'auto';
+  @property({ type: Boolean, attribute: 'popover-type' }) popoverType: PopoverType = 'auto';
+
+  @query('.arrow') popoverArrow: HTMLElement;
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 

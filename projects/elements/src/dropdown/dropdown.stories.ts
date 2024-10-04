@@ -10,6 +10,7 @@ import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/radio/define.js';
 import '@nvidia-elements/core/checkbox/define.js';
 import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/menu/define.js';
 
 export default {
   title: 'Elements/Dropdown/Examples',
@@ -23,6 +24,60 @@ export const Default = {
   render: () => html`
 <nve-dropdown id="dropdown">dropdown content</nve-dropdown>
 <nve-button popovertarget="dropdown">button</nve-button>
+  `
+};
+
+export const NestedMenus = {
+  render: () => html`
+<style>
+  nve-dropdown + nve-dropdown {
+    --nve-sys-layer-popover-offset: 14px;
+  }
+</style>
+
+<nve-button popovertarget="menu-1">menu</nve-button>
+
+<!-- experimental demo, not stable! -->
+<section id="dropdown-group">
+  <nve-dropdown popover-type="manual" id="menu-1">
+    <nve-menu>
+      <nve-menu-item popovertarget="menu-2">item 1-1 <nve-icon name="caret" direction="right" size="sm" slot="suffix"></nve-icon></nve-menu-item>
+      <nve-menu-item>item 1-2</nve-menu-item>
+      <nve-menu-item>item 1-3</nve-menu-item>
+    </nve-menu>
+  </nve-dropdown>
+
+  <nve-dropdown popover-type="manual" id="menu-2" position="right" alignment="start">
+    <nve-menu>
+      <nve-menu-item>item 2-1</nve-menu-item>
+      <nve-menu-item popovertarget="menu-3">item 2-2 <nve-icon name="caret" direction="right" size="sm" slot="suffix"></nve-icon></nve-menu-item>
+      <nve-menu-item>item 2-3</nve-menu-item>
+    </nve-menu>
+  </nve-dropdown>
+
+  <nve-dropdown popover-type="manual" id="menu-3" position="right" alignment="start">
+    <nve-menu>
+      <nve-menu-item>item 3-1</nve-menu-item>
+      <nve-menu-item>item 3-2</nve-menu-item>
+      <nve-menu-item>item 3-3</nve-menu-item>
+    </nve-menu>
+  </nve-dropdown>
+</section>
+
+<script type="module">
+  const group = document.querySelector('#dropdown-group');
+
+  globalThis.document.addEventListener('pointerup', (e) => {
+    if (Array.from(group.querySelectorAll('nve-dropdown')).every(dropdown => clickOutsideElementBounds(e, dropdown))) {
+      group.querySelectorAll('nve-dropdown').forEach(d => d.hidePopover());
+    }
+  });
+
+  function clickOutsideElementBounds(event, element) {
+    const { left, right, top, bottom } = element.getBoundingClientRect();
+    return event.clientX < left || event.clientX > right || event.clientY < top || event.clientY > bottom;
+  }
+</script>
   `
 };
 
