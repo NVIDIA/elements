@@ -30,6 +30,7 @@
       "dependencies": [
         "./angular:build",
         "./buildless:build",
+        "./eleventy:build",
         "./lit-library:build",
         "./mpa:build",
         "./nextjs:build",

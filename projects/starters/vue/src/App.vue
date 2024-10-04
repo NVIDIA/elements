@@ -42,6 +42,12 @@ import '@nvidia-elements/core/menu/define.js';
             </a>
           </nve-menu-item>
           <nve-menu-item>
+            <a href="/elements/starters/eleventy/">
+              <img src="/eleventy.svg" width="18px" height="18px" alt="eleventy logo" />
+              Eleventy
+            </a>
+          </nve-menu-item>
+          <nve-menu-item>
             <a href="/elements/starters/angular/">
               <img src="/angular.svg" width="18px" height="18px" alt="angular logo" />
               Angular

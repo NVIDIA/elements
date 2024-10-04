@@ -53,6 +53,12 @@ function App() {
                 </a>
               </NveMenuItem>
               <NveMenuItem>
+                <a href="/elements/starters/eleventy/">
+                  <img src="/elements/starters/react/eleventy.svg" width="18px" height="18px" alt="eleventy logo" />
+                  Eleventy
+                </a>
+              </NveMenuItem>
+              <NveMenuItem>
                 <a href="/elements/starters/angular/">
                   <img src="/elements/starters/react/angular.svg" width="18px" height="18px" alt="angular logo" />
                   Angular
