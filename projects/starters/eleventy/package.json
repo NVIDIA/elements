@@ -1,0 +1,86 @@
+{
+  "name": "eleventy-starter",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "preview": "wireit"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "dev": {
+      "command": "pnpm exec eleventy --watch & vite build --watch & vite preview",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build": {
+      "dependencies": [
+        "build:11ty",
+        "build:vite"
+      ]
+    },
+    "build:11ty": {
+      "command": "pnpm exec eleventy",
+      "files": [
+        "src",
+        "assets",
+        "./eleventy.config.js"
+      ],
+      "output": [
+        "_site/**"
+      ],
+      "dependencies": [
+        "clean",
+        "../../elements:build"
+      ]
+    },
+    "build:vite": {
+      "command": "vite build",
+      "files": [
+        "src",
+        "vite.config.ts",
+        "package.json"
+      ],
+      "output": [
+        "dist"
+      ],
+      "dependencies": [
+        "../../elements:build",
+        "build:11ty"
+      ]
+    },
+    "preview": {
+      "command": "vite preview",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "clean": {
+      "command": "rm -rf dist && rm -rf _site",
+      "files": [],
+      "output": [],
+      "dependencies": []
+    }
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "5.0.0",
+    "@lit-labs/eleventy-plugin-lit": "1.0.3",
+    "@lit-labs/ssr-client": "1.1.7",
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "markdown-it": "14.1.0",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}
