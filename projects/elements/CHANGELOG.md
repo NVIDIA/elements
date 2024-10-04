@@ -1,3 +1,13 @@
+## [@nvidia-elements/core-v1.9.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.1...@nvidia-elements/core-v1.9.2) (2024-10-04)
+
+
+### Bug Fixes
+
+* **elements:** breadcrumb default static layout ([21a1784](https://github.com/NVIDIA/elements/commit/21a178400493c13e011ee2d6dff00ee367e415fb))
+* **elements:** form controls base layout stability ([a6ff5b0](https://github.com/NVIDIA/elements/commit/a6ff5b0cc314c493fbe12a4c4b214da5f98badb2))
+* **elements:** improve icon static rendering support ([078c85f](https://github.com/NVIDIA/elements/commit/078c85fd87a12426e77766db10a64a5b6968185b))
+* **elements:** improve treeview default layouts ([6bce0e1](https://github.com/NVIDIA/elements/commit/6bce0e1750fcde1dab50010e1206e6759d10a60a))
+
 ## [@nvidia-elements/core-v1.9.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.0...@nvidia-elements/core-v1.9.1) (2024-10-02)
 
 
