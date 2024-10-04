@@ -222,15 +222,17 @@ export const ShadowRoot = {
   `
 };
 
-export const OverflowContent = {
+export const ScrollContent = {
   render: () => html`
 <nve-dialog id="dialog" modal closable style="height: 400px">
   <nve-dialog-header>
     <h3 nve-text="heading semibold">title</h3>
   </nve-dialog-header>
-  <p nve-text="body" style="min-height: 400px">
-    some overflow content
-  </p>
+  <div style="overflow: auto; max-height: 350px;">
+    <p nve-text="body" style="height: 400px">
+      some overflow content
+    </p>
+  </div>
   <nve-dialog-footer>
     <nve-button id="cancel-btn">cancel</nve-button>
   </nve-dialog-footer>
@@ -244,7 +246,7 @@ export const TallContent = {
   <nve-dialog-header>
     <h3 nve-text="heading semibold">title</h3>
   </nve-dialog-header>
-  <p nve-text="body" style="min-height: 400px">
+  <p nve-text="body" style="height: 400px">
     some overflow content
   </p>
   <nve-dialog-footer>

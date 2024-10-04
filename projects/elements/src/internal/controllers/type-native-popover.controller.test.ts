@@ -23,6 +23,8 @@ class TypeNativePopoverControllerTestElement extends LitElement {
 
   @property({ type: Boolean, reflect: true }) arrow = true;
 
+  @property({ type: Boolean, reflect: true }) modal = false;
+
   get popoverArrow() {
     return this.shadowRoot.querySelector<HTMLElement>('.arrow');
   }
@@ -154,6 +156,15 @@ describe('type-popover.controller', () => {
     emulateClick(button);
     expect((await close).target).toBe(element);
     expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should make backdrop content inert if popover is type auto', async () => {
+    element.modal = true;
+    element.showPopover();
+    expect(document.body.style.pointerEvents).toBe('none');
+
+    element.hidePopover();
+    expect(document.body.style.pointerEvents).toBe('initial');
   });
 });
 

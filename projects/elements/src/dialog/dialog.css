@@ -37,7 +37,6 @@
   color: var(--color);
   box-shadow: var(--box-shadow);
   min-height: var(--min-height);
-  height: 100%;
   width: 100%;
 }
 
@@ -58,7 +57,6 @@
   gap: var(--gap);
   display: flex;
   flex-direction: column;
-  overflow: auto;
 }
 
 nve-icon-button {
