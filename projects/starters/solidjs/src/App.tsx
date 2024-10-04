@@ -61,6 +61,12 @@ const App: Component = () => {
                 </a>
               </nve-menu-item>
               <nve-menu-item>
+                <a href="/elements/starters/eleventy/">
+                  <img src="/elements/starters/solidjs/eleventy.svg" width="18px" height="18px" alt="eleventy logo" />
+                  Eleventy
+                </a>
+              </nve-menu-item>
+              <nve-menu-item>
                 <a href="/elements/starters/angular/">
                   <img src="/elements/starters/solidjs/angular.svg" width="18px" height="18px" alt="angular logo" />
                   Angular
