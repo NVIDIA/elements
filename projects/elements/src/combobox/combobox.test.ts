@@ -142,7 +142,7 @@ describe(Combobox.metadata.tag, () => {
     await elementIsStable(element);
     await elementIsStable(items[0]);
     expect(items[0].tabIndex).toBe(0);
-    expect(items[0].tagName).toBe(element.shadowRoot.activeElement.tagName);
+    expect(element.shadowRoot.activeElement.tagName).toBe(items[0].tagName);
   });
 
   it('should hide dropdown on keydown and is a tab event', async () => {
