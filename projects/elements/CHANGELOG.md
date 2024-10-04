@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.2...@nvidia-elements/core-v1.9.3) (2024-10-04)
+
+
+### Bug Fixes
+
+* **elements:** popovers dialog height and modal behavior ([919d8b7](https://github.com/NVIDIA/elements/commit/919d8b751488f7c6b1727ba73399614c9fc3cc6c))
+
 ## [@nvidia-elements/core-v1.9.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.1...@nvidia-elements/core-v1.9.2) (2024-10-04)
 
 
