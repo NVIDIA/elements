@@ -1,14 +1,17 @@
 import { ReactiveController, ReactiveElement } from 'lit';
-import { generateId, getAttributeChanges, getAttributeListChanges } from '../utils/dom.js';
-import type { PopoverType } from '../types/index.js';
+import { generateId, getAttributeListChanges } from '../utils/dom.js';
 import { attachInternals } from '../utils/a11y.js';
+import { focusElement } from '../utils/focus.js';
 import { getHostTrgger } from './type-native-popover.utils.js';
+import type { PopoverType } from '../types/index.js';
+import { TypeInertBackdropController } from './type-inert-backdrop.controller.js';
 
 export interface NativePopover extends ReactiveElement {
   trigger?: HTMLElement | string;
   closeTimeout?: number;
   openDelay?: number;
   popoverType?: PopoverType;
+  modal?: boolean;
   _activeTrigger?: HTMLElement;
   _internals?: ElementInternals;
   /** @deprecated */
@@ -33,8 +36,11 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     ) as HTMLElement[];
   }
 
+  #inertBackdropController: TypeInertBackdropController<T>;
+
   constructor(private host: T) {
     this.host.addController(this);
+    this.#inertBackdropController = new TypeInertBackdropController(host);
   }
 
   async hostConnected() {
@@ -55,6 +61,11 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
         setTimeout(() => this.host.hidePopover(), this.host.closeTimeout);
       }
 
+      if (this.host.modal) {
+        this.#toggleInertBackdrop(e.newState === 'open');
+        this.#toggleFocus(e.newState === 'open');
+      }
+
       this.host.dispatchEvent(
         new CustomEvent(e.newState === 'open' ? 'open' : 'close', {
           bubbles: true,
@@ -73,6 +84,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   hostDisconnected() {
     this.#observers.forEach(observer => observer.disconnect());
+    document.body.style.pointerEvents = 'initial';
   }
 
   #updatePopoverType() {
@@ -131,9 +143,11 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #_close = () => this.#close();
   #_open = e => this.#open(e);
   #_pointerdown = (e: Event) => (this.host._activeTrigger = e.target as HTMLElement);
+  #_focus = () => (this.host._activeTrigger = document.activeElement as HTMLElement);
 
   #addTriggerInteractions() {
     this.#triggers.forEach(t => t.addEventListener('pointerdown', this.#_pointerdown));
+    this.#triggers.forEach(t => t.addEventListener('focus', this.#_focus));
 
     if (this.host.popoverType === 'hint') {
       this.#triggers.forEach(t => {
@@ -147,6 +161,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   #removeTriggerInteractions() {
     this.#triggers.forEach(t => t.removeEventListener('pointerdown', this.#_pointerdown));
+    this.#triggers.forEach(t => t.removeEventListener('focus', this.#_focus));
 
     if (this.host.popoverType === 'hint') {
       this.#triggers.forEach(t => {
@@ -194,5 +209,23 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #clearOpenDelay() {
     clearTimeout(this.#openDelayTimeout);
     this.#openDelayTimeout = null;
+  }
+
+  #toggleInertBackdrop(open: boolean) {
+    if (open) {
+      this.#inertBackdropController.enable();
+    } else {
+      this.#inertBackdropController.disable();
+    }
+  }
+
+  #toggleFocus(open: boolean) {
+    if (open) {
+      if ((this.host.getRootNode() as any).activeElement) {
+        focusElement(this.host);
+      }
+    } else {
+      focusElement(this.host._activeTrigger);
+    }
   }
 }
