@@ -33,14 +33,19 @@ html`
 
 ## CSS Utilities
 
-Elements provide layout and typography utilities to make it easy to style your UI.
+Elements provides [layout](?path=/docs/foundations-layout-documentation--docs) and [typography](?path=/docs/foundations-typography-documentation--docs) utilities to make it easy to style your UI.
 These utilities are global CSS attributes that can be applied to any element. To
 use these utilities within a Lit element, you need to import the styles, so they
 are available in your elements Shadow DOM.
 
 <Canvas of={Lit} />
 
+<nve-alert status="accent">
+  Import the needed style files via CSS or Typescript:
+</nve-alert>
+
 ```typescript
+/* Import CSS attributes via Typescript */
 import { html, unsafeCSS, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 
@@ -65,6 +70,12 @@ class MyElement extends LitElement {
     `;
   }
 }
+```
+
+```css
+/* Import CSS attributes via CSS */
+@import '@nvidia-elements/styles/typography.css';
+@import '@nvidia-elements/styles/layout.css';
 ```
 
 <h2 id="forms">Forms</h2>
