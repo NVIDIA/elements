@@ -99,13 +99,13 @@
   }
 
   :host([position='top'][alignment='end']) .arrow {
-    position-area: bottom left;
-    translate: 150% -50%;
+    position-area: bottom right;
+    translate: -150% -50%;
   }
 
   :host([position='top'][alignment='start']) .arrow {
-    position-area: bottom right;
-    translate: -150% -50%;
+    position-area: bottom left;
+    translate: 150% -50%;
   }
 
   :host([position='bottom']) .arrow {
@@ -114,13 +114,13 @@
   }
 
   :host([position='bottom'][alignment='end']) .arrow {
-    position-area: top left;
-    translate: 150% 50%;
+    position-area: top right;
+    translate: -150% 50%;
   }
 
   :host([position='bottom'][alignment='start']) .arrow {
-    position-area: top right;
-    translate: -150% 50%;
+    position-area: top left;
+    translate: 150% 50%;
   }
 
   :host([position='left']) .arrow {
@@ -129,13 +129,13 @@
   }
 
   :host([position='left'][alignment='end']) .arrow {
-    position-area: right;
-    translate: -50% -60%;
+    position-area: bottom right;
+    translate: -50% -150%;
   }
 
   :host([position='left'][alignment='start']) .arrow {
-    position-area: right;
-    translate: -50% 60%;
+    position-area: top right;
+    translate: -50% 150%;
   }
 
   :host([position='right']) .arrow {
@@ -144,13 +144,13 @@
   }
 
   :host([position='right'][alignment='end']) .arrow {
-    position-area: left;
-    translate: 50% -60%;
+    position-area: bottom left;
+    translate: 50% -150%;
   }
 
   :host([position='right'][alignment='start']) .arrow {
-    position-area: left;
-    translate: 50% 60%;
+    position-area: top left;
+    translate: 50% 150%;
   }
 
   /** positioning */
