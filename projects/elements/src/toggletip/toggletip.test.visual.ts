@@ -16,6 +16,8 @@ describe('toggletip visual', () => {
 function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
+    import '@nvidia-elements/core/button/define.js';
+    import '@nvidia-elements/core/card/define.js';
     import '@nvidia-elements/core/toggletip/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
@@ -31,6 +33,35 @@ function template(theme: '' | 'dark' = '') {
       </nve-toggletip-footer>
     </nve-toggletip>
     <nve-button id="btn">•︎•︎•︎•︎•︎•︎</nve-button>
+  </div>
+
+  <div nve-layout="row align:center" style="width: 100vw; height: 300px">
+    <nve-toggletip anchor="card" position="top" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-toggletip anchor="card" position="top">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-toggletip anchor="card" position="top" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+
+    <nve-toggletip anchor="card" position="right" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-toggletip anchor="card" position="right">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-toggletip anchor="card" position="right" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+
+    <nve-toggletip anchor="card" position="bottom" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-toggletip anchor="card" position="bottom">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-toggletip anchor="card" position="bottom" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+
+    <nve-toggletip anchor="card" position="left" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-toggletip anchor="card" position="left">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-toggletip anchor="card" position="left" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toggletip>
+
+    <nve-card id="card" style="width: 400px; height: 200px"></nve-card>
+  </div>
+
+  <div nve-layout="row align:center" style="width: 100vw; height: 200px">
+    <nve-toggletip alignment="start" anchor="btn1">•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-button id="btn1" style="margin-right: auto">•︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-toggletip anchor="btn2">•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-button id="btn2">•︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-toggletip alignment="end" anchor="btn3">•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎</nve-toggletip>
+    <nve-button id="btn3" style="margin-left: auto">•︎•︎•︎•︎•︎•︎</nve-button>
   </div>
   `;
 }
