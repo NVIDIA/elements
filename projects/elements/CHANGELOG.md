@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.3...@nvidia-elements/core-v1.9.4) (2024-10-08)
+
+
+### Bug Fixes
+
+* **elements:** popover arrow placement ([0b8e7dc](https://github.com/NVIDIA/elements/commit/0b8e7dc5443c62b377678cb2278c4d1e63d24561))
+
 ## [@nvidia-elements/core-v1.9.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.2...@nvidia-elements/core-v1.9.3) (2024-10-04)
 
 
