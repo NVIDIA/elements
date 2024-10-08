@@ -280,6 +280,11 @@
   }
 
   :host(:not(:state(anchor-body))) {
-    inset: initial;
+    inset: revert;
   }
+}
+
+:host([popover]) {
+  position-try-fallbacks: flip-block, flip-inline;
+  position-try: flip-block, flip-inline;
 }

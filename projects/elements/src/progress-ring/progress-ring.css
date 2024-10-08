@@ -5,6 +5,7 @@
   --ring-width: 2px;
   --width: var(--nve-ref-size-800);
   --height: var(--nve-ref-size-800);
+  --animation-duration: calc(var(--nve-ref-animation-duration-400) * 2.5);
 
   width: var(--width);
   height: var(--height);
@@ -114,7 +115,7 @@ circle.ring {
 }
 
 [internal-host][indeterminate] circle.ring {
-  animation: 2s linear 0s infinite normal none running spin-infinite;
+  animation: var(--animation-duration) linear 0s infinite normal none running spin-infinite;
 }
 
 [internal-host][zeroValue] circle.ring {
