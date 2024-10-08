@@ -1,5 +1,5 @@
 import { beforeEach, afterEach, vi, describe, expect, it } from 'vitest';
-import { associateAnchor, getHostAnchor, getHostTrgger } from './type-native-popover.utils.js';
+import { associateAnchor, getHostAnchor, getHostTrigger } from './type-native-popover.utils.js';
 import { LogService } from '../services/log.service.js';
 
 describe('associateAnchor', () => {
@@ -41,7 +41,7 @@ describe('getHostTrgger', () => {
   it('should return the trigger param if already a DOM node reference', async () => {
     const element = document.createElement('div');
     const trigger = document.createElement('div');
-    const match = getHostTrgger(element, trigger);
+    const match = getHostTrigger(element, trigger);
     expect(match).toBe(trigger);
   });
 
@@ -52,7 +52,7 @@ describe('getHostTrgger', () => {
 
     document.body.appendChild(element);
     document.body.appendChild(trigger);
-    const match = getHostTrgger(element, 'test-trigger');
+    const match = getHostTrigger(element, 'test-trigger');
     expect(match).toBe(trigger);
   });
 
@@ -63,7 +63,7 @@ describe('getHostTrgger', () => {
 
     document.body.appendChild(element);
     document.body.appendChild(trigger);
-    const match = getHostTrgger(element, 'test-trigger-not-found');
+    const match = getHostTrigger(element, 'test-trigger-not-found');
     expect(match).toBe(document.body);
   });
 });

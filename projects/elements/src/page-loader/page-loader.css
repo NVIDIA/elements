@@ -1,5 +1,6 @@
 :host {
   margin: auto;
+  height: fit-content;
   --gap: var(--nve-ref-space-sm);
 }
 

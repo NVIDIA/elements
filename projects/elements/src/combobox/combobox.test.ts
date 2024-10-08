@@ -136,11 +136,11 @@ describe(Combobox.metadata.tag, () => {
     await elementIsStable(element);
     expect(dropdown.matches(':popover-open')).toBe(true);
 
+    const open = untilEvent(dropdown, 'open');
     emulateClick(input);
     input.focus();
+    await open;
     element.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown' }));
-    await elementIsStable(element);
-    await elementIsStable(items[0]);
     expect(items[0].tabIndex).toBe(0);
     expect(element.shadowRoot.activeElement.tagName).toBe(items[0].tagName);
   });
@@ -267,6 +267,13 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     expect(items[0].textContent.trim()).toBe(options[0].value);
     expect(items[1].textContent.trim()).toBe(options[1].value);
     expect(items[2].textContent.trim()).toBe(options[2].value);
+  });
+
+  it('should default to dropdown using popover manual and disable modal behavior to allow textbox interactions', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+
+    expect(dropdown.popoverType).toBe('manual');
+    expect(dropdown.modal).toBe(false);
   });
 
   it('should enforce single select and clear invalid options', async () => {
@@ -562,11 +569,11 @@ describe(`${Combobox.metadata.tag}: shadow root`, () => {
     await elementIsStable(element);
     expect(dropdown.matches(':popover-open')).toBe(true);
 
+    const open = untilEvent(dropdown, 'open');
     emulateClick(input);
     input.focus();
+    await open;
     element.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown' }));
-    await elementIsStable(element);
-    await elementIsStable(items[0]);
     expect(items[0].tabIndex).toBe(0);
     expect(items[0].tagName).toBe(element.shadowRoot.activeElement.tagName);
   });
