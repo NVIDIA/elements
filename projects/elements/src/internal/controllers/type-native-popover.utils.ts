@@ -8,7 +8,7 @@ export function associateAnchor(host: HTMLElement, anchor: HTMLElement) {
   (host.style as any).positionAnchor = `--${id}`;
 }
 
-export function getHostTrgger(element: HTMLElement, trigger: HTMLElement | string) {
+export function getHostTrigger(element: HTMLElement, trigger: HTMLElement | string) {
   if (typeof trigger === 'string') {
     return (
       (getFlatDOMTree(element.parentNode as HTMLElement)

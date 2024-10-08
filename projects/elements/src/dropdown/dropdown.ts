@@ -91,7 +91,7 @@ export class Dropdown extends LitElement {
   @property({ type: Boolean }) modal = true;
 
   /** @private */
-  @property({ type: Boolean, attribute: 'popover-type' }) popoverType: PopoverType = 'auto';
+  @property({ type: String, attribute: 'popover-type' }) popoverType: PopoverType = 'auto';
 
   @query('.arrow') popoverArrow: HTMLElement;
 
