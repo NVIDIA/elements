@@ -1,6 +1,13 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, emulateMouseEnter, emulateMouseLeave } from '@nvidia-elements/testing';
+import {
+  createFixture,
+  elementIsStable,
+  removeFixture,
+  emulateMouseEnter,
+  emulateMouseLeave,
+  untilEvent
+} from '@nvidia-elements/testing';
 import { CopyButton } from '@nvidia-elements/core/copy-button';
 import { Icon } from '@nvidia-elements/core/icon';
 import { Toast } from '@nvidia-elements/core/toast';
@@ -61,15 +68,18 @@ describe(CopyButton.metadata.tag, () => {
 
   it('should show the tooltip on hover', async () => {
     // Simulate hover event
-    const button = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
-    emulateMouseEnter(button);
-    await elementIsStable(button);
-
-    // Check if the tooltip appears
     const tooltip = element.shadowRoot.querySelector<Tooltip>(Tooltip.metadata.tag);
+    const button = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
+
+    const open = untilEvent(tooltip, 'open');
+    emulateMouseEnter(button);
+    await open;
+    await elementIsStable(button);
     expect(tooltip.hidden).toBe(false);
 
+    const close = untilEvent(tooltip, 'close');
     emulateMouseLeave(button);
+    await close;
     await elementIsStable(button);
     expect(tooltip.hidden).toBe(true);
   });
