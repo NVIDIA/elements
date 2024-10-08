@@ -159,11 +159,15 @@ describe('type-popover.controller', () => {
   });
 
   it('should make backdrop content inert if popover is type auto', async () => {
+    const open = untilEvent(element, 'open');
     element.modal = true;
     element.showPopover();
+    await open;
     expect(document.body.style.pointerEvents).toBe('none');
 
+    const close = untilEvent(element, 'close');
     element.hidePopover();
+    await close;
     expect(document.body.style.pointerEvents).toBe('initial');
   });
 });
@@ -352,7 +356,9 @@ describe('type-popover.controller explicit dynamic trigger', () => {
     element.anchor = buttons[1];
     await element.updateComplete;
 
+    const open = untilEvent(element, 'open');
     emulateClick(buttons[1]);
+    await open;
     await element.updateComplete;
     expect(element.hidden).toBe(false);
   });
@@ -362,8 +368,10 @@ describe('type-popover.controller explicit dynamic trigger', () => {
     expect(element.hidden).toBe(true);
     expect(element.behaviorTrigger).toBe(true);
 
+    const open = untilEvent(element, 'open');
     emulateClick(buttons[0]);
     await element.updateComplete;
+    await open;
     expect(element.hidden).toBe(false);
 
     element.trigger = buttons[1];
@@ -440,21 +448,27 @@ describe('type-popover.controller legacy behavior-trigger', () => {
   });
 
   it('should NOT trigger close if a close event fires from a slotted child element', async () => {
+    const open = untilEvent(element, 'open');
     element.showPopover();
+    await open;
     await elementIsStable(element);
-    const event = untilEvent(element, 'close');
+
+    const close = untilEvent(element, 'close');
     element.querySelector('div').dispatchEvent(new Event('close', { bubbles: true }));
-    await event;
+    await close;
     await elementIsStable(element);
     expect(element.hidden).toBe(false);
   });
 
   it('should NOT trigger close if a cancel event fires from a slotted child element', async () => {
+    const open = untilEvent(element, 'open');
     element.showPopover();
+    await open;
     await elementIsStable(element);
-    const event = untilEvent(element, 'cancel');
+
+    const cancel = untilEvent(element, 'cancel');
     element.querySelector('div').dispatchEvent(new Event('cancel', { bubbles: true }));
-    await event;
+    await cancel;
     await elementIsStable(element);
     expect(element.hidden).toBe(false);
   });

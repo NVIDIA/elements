@@ -2,7 +2,7 @@ import { ReactiveController, ReactiveElement } from 'lit';
 import { generateId, getAttributeListChanges } from '../utils/dom.js';
 import { attachInternals } from '../utils/a11y.js';
 import { focusElement } from '../utils/focus.js';
-import { getHostTrgger } from './type-native-popover.utils.js';
+import { getHostTrigger } from './type-native-popover.utils.js';
 import type { PopoverType } from '../types/index.js';
 import { TypeInertBackdropController } from './type-inert-backdrop.controller.js';
 
@@ -52,7 +52,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.#updateTriggers();
     this.#setupDefaultHiddenState();
 
-    this.host.addEventListener('beforetoggle', (e: ToggleEvent) => {
+    this.host.addEventListener('toggle', (e: ToggleEvent) => {
       if (this.host.behaviorTrigger) {
         this.host.hidden = e.newState === 'closed';
       }
@@ -84,7 +84,6 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   hostDisconnected() {
     this.#observers.forEach(observer => observer.disconnect());
-    document.body.style.pointerEvents = 'initial';
   }
 
   #updatePopoverType() {
@@ -123,19 +122,23 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   #explicitTrigger: any;
   #updateExplicitTrigger() {
-    if (this.#explicitTrigger) {
+    // reset trigger to query for latest explicit trigger
+    if (this.#explicitTrigger && this.host.id === this.#explicitTrigger.popoverTargetElement?.id) {
       this.#explicitTrigger.removeAttribute('popovertarget');
       this.#explicitTrigger.popoverTargetElement = null;
     }
 
     if (this.host.trigger) {
-      const explicitTrigger = getHostTrgger(this.host, this.host.trigger);
-      if (explicitTrigger) {
+      const explicitTrigger = getHostTrigger(this.host, this.host.trigger) as HTMLButtonElement;
+
+      // if not a hint type setup native popovertaget
+      if (explicitTrigger && this.host.popoverType !== 'hint') {
         this.host.id = this.host.id ? this.host.id : generateId();
-        this.#explicitTrigger = explicitTrigger;
-        this.#explicitTrigger.setAttribute('popovertarget', this.host.id);
-        this.#explicitTrigger.popoverTargetElement = this.host;
+        explicitTrigger.popoverTargetElement = this.host;
+        explicitTrigger.setAttribute('popovertarget', this.host.id);
       }
+
+      this.#explicitTrigger = explicitTrigger;
     }
   }
 
@@ -221,7 +224,8 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   #toggleFocus(open: boolean) {
     if (open) {
-      if ((this.host.getRootNode() as any).activeElement) {
+      // only focus popover if it is not the active element and it does not contain the active element already
+      if ((this.host.getRootNode() as any).activeElement !== this.host && !this.host.shadowRoot.activeElement) {
         focusElement(this.host);
       }
     } else {
