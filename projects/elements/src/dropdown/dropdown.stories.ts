@@ -11,6 +11,7 @@ import '@nvidia-elements/core/radio/define.js';
 import '@nvidia-elements/core/checkbox/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/menu/define.js';
+import '@nvidia-elements/core/tooltip/define.js';
 
 export default {
   title: 'Elements/Dropdown/Examples',
@@ -315,5 +316,57 @@ export const LegacyBehaviorTrigger = {
 <nve-dropdown anchor="dropdown-btn" trigger="dropdown-btn" behavior-trigger hidden>
   <p nve-text="body">hello there</p>
 </nve-dropdown>
+  `
+};
+
+export const DropdownHint = {
+  render: () => html`
+<nve-dropdown id="dropdown" closable>
+  dropdown content
+  <button>btn</button>
+</nve-dropdown>
+
+<nve-tooltip id="tooltip" hidden behavior-trigger trigger="btn">dropdown content</nve-tooltip>
+
+<nve-icon-button id="btn" popovertarget="dropdown" icon-name="gear" aria-label="settings"></nve-icon-button>
+  `
+};
+
+export const DropdownHintTriggers = {
+  render: () => html`
+<nve-tooltip id="tooltip" hidden behavior-trigger trigger="btn">dropdown content</nve-tooltip>
+
+<nve-dropdown id="dropdown" hidden behavior-trigger trigger="btn" closable>
+  dropdown content
+  <button>btn</button>
+</nve-dropdown>
+
+<nve-icon-button id="btn" icon-name="gear" aria-label="settings"></nve-icon-button>
+  `
+};
+
+export const DropdownPositionFallback = {
+  render: () => html`
+<style>
+  body {
+    align-items: start !important;
+    margin: 0;
+    padding: 0 !important;
+  }
+
+  #storybook-root {
+    margin: 512px !important;
+  }
+</style>
+
+<nve-dropdown id="dropdown" anchor="btn" position="bottom" alignment="center">
+  dropdown content
+</nve-dropdown>
+
+<nve-dropdown id="dropdown" anchor="btn" position="right" alignment="center">
+  dropdown content
+</nve-dropdown>
+
+<nve-icon-button id="btn" icon-name="gear" aria-label="settings"></nve-icon-button>
   `
 };
