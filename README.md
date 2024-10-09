@@ -17,7 +17,13 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 - [Bug report](https://github.com/NVIDIA/elements/-/issues/new?issuable_template=default)
 - [Slack Support](https://nvidia.enterprise.slack.com/archives/C03BDL2UCGK)
 
-## Projects
+## Organization
+
+The repository is organized as a top-level **overall** repository and, inside that, libraries are broken up into individual **project** directories.
+
+Project directories have their own `package.json` and commands. But all setup for the CI and development needs to happen at the root **repository** level.
+
+Examples of projects include:
 
 - `/projects/starters` - Suite of standardized starter apps for Elements and Patterns
 - `/projects/elements` - Elements library: curated UI maintained by the Elements team
@@ -30,10 +36,11 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 
 ### Setup
 
-To setup repository dependencies and run the full build, run the following commands:
+To setup repository dependencies and run the full build, run the following commands at the root repository:
 
 ```shell
 brew install git-lfs #  https://git-lfs.com if not yet installed
+git lfs install # run this command at the root of the repository
 ```
 
 ```shell
@@ -43,20 +50,24 @@ nvm install
 corepack enable
 corepack prepare --activate
 pnpm i --frozen-lockfile --prefer-offline
-pnpm run ci
+pnpm run ci # if you need to change or update your version of node, the error will happen here
 ```
+
+#### Troubleshooting
+
+If you are coming from development from a different repository (such as the Maglev monorepo), you may need to install a new version of node in `nvm`. If you see an error message to this effect, [refer to the nvm docs](https://github.com/nvm-sh/nvm?tab=readme-ov-file#usage) for installing the missing node version and for directions on switching between versions of `node` using `nvm`. Note that pnpm may also need to be updated after installing a new version of `node`. See [the pnpm docs](https://pnpm.io/installation) for help there as well. After all of these updates, you will want to start back on the `corepack enable` line in the above list of shell commands.
 
 ### Building
 
-Each project/demo has a set of available and standardized NPM scripts. To build and test all projects run `pnpm run ci` in the root of this directory.
+Both the top-level repository and each project has a set of standardized NPM scripts. To build and test all projects run `pnpm run ci` at the root of repository.
 
-#### Repository
+#### Top-Level Repository
 
 - `ci`: run full build/lint/test
 - `ci:all`: entire CI process: build, lint, unit/lighthouse/visual tests
 - `ci:reset`: clear all caches/dependencies then reinstall dependencies
 
-#### Projects
+#### Individual Projects
 
 - `dev`: run in watch mode
 - `build`: run project/library build
@@ -125,7 +136,7 @@ Open a new [Merge Request](https://github.com/NVIDIA/elements/-/merge_requests) 
 
 #### Amending Commit
 
-**If there are changes requested**, make the requested changes locally and ammend the commit.
+**If there are changes requested**, make the requested changes locally and amend the commit.
 
 ```shell
 git commit -a --amend --no-edit
