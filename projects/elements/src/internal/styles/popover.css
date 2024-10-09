@@ -288,3 +288,11 @@
   position-try-fallbacks: flip-block, flip-inline;
   position-try: flip-block, flip-inline;
 }
+
+:host([popover][modal])::before {
+  content: ' ';
+  display: block;
+  inset: 0;
+  z-index: 99;
+  position: fixed;
+}

@@ -3,7 +3,13 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@nvidia-elements/testing';
-import { PopoverAlign, PopoverPosition, TypeNativePopoverController } from '@nvidia-elements/core/internal';
+import {
+  PopoverAlign,
+  PopoverPosition,
+  popoverStyles,
+  TypeNativePopoverController,
+  useStyles
+} from '@nvidia-elements/core/internal';
 import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/button/define.js';
 
@@ -33,45 +39,7 @@ class TypeNativePopoverControllerTestElement extends LitElement {
 
   typeNativePopoverController = new TypeNativePopoverController<TypeNativePopoverControllerTestElement>(this);
 
-  static styles = [
-    css`
-      :host {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-
-      dialog {
-        border: 1px solid #ccc;
-        padding: 18px;
-        min-width: 80px;
-        text-align: center;
-        background: #fff;
-        color: #2d2d2d;
-        overflow: visible;
-        position: fixed;
-        margin: 0;
-        z-index: 9999;
-      }
-
-      dialog::backdrop {
-        background: #00000082;
-      }
-
-      .arrow {
-        width: 18px;
-        height: 18px;
-        background: #fff;
-        position: absolute;
-      }
-
-      :host(:not([anchor])) .arrow,
-      :host([anchor*='body']) .arrow,
-      :host([position*='center']) .arrow {
-        display: none;
-      }
-    `
-  ];
+  static styles = useStyles([popoverStyles]);
 
   render() {
     return html`
@@ -158,17 +126,25 @@ describe('type-popover.controller', () => {
     expect(element.matches(':popover-open')).toBe(false);
   });
 
-  it('should make backdrop content inert if popover is type auto', async () => {
-    const open = untilEvent(element, 'open');
+  it('should render inert backdrop if popover is type modal', async () => {
     element.modal = true;
-    element.showPopover();
-    await open;
-    expect(document.body.style.pointerEvents).toBe('none');
+    await elementIsStable(element);
+    expect(element.hasAttribute('modal')).toBe(true);
+    expect(getComputedStyle(element, ':before').getPropertyValue('content')).toBe('" "');
+  });
 
-    const close = untilEvent(element, 'close');
-    element.hidePopover();
-    await close;
-    expect(document.body.style.pointerEvents).toBe('initial');
+  it('should close popover if inert modal is rendered and clicked outside of popover bounds', async () => {
+    element.modal = true;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    emulateClick(button);
+    expect((await open).target).toBe(element);
+    expect(element.matches(':popover-open')).toBe(true);
+
+    element.dispatchEvent(new PointerEvent('pointerup', { clientX: 0, clientY: 0 }));
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
   });
 });
 
