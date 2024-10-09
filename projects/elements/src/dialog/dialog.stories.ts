@@ -3,6 +3,7 @@ import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/dialog/define.js';
 import '@nvidia-elements/core/accordion/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
 
 export default {
   title: 'Elements/Dialog/Examples',
@@ -253,5 +254,54 @@ export const TallContent = {
     <nve-button id="cancel-btn">cancel</nve-button>
   </nve-dialog-footer>
 </nve-dialog>
+`
+};
+
+export const InertModal = {
+  render: () => html`
+<style>
+  body {
+    display: block !important;
+    padding: 24px;
+  }
+
+  #storybook-root {
+    display: block;
+    margin: 0 !important;
+  }
+</style>
+<div>
+  <button popovertarget="popover">btn</button>
+  <div>
+    <button popovertarget="popover">btn</button>
+    <nve-dialog id="popover" modal>
+      <nve-dialog-header>
+        <h3 nve-text="heading semibold">title</h3>
+      </nve-dialog-header>
+      <button popovertarget="dropdown">button</button>
+      <nve-dropdown id="dropdown">
+        dropdown content
+        <button>btn</button>
+      </nve-dropdown>
+      <p nve-text="body">some text content in a closable dialog</p>
+      <button onclick="alert('!')">btn</button>
+      <button>btn</button>
+      <button>btn</button>
+    </nve-dialog>
+  </div>
+</div>
+
+<button popovertarget="popover">btn</button><br>
+
+<button popovertarget="popover">btn</button>
+<div>
+  <button popovertarget="popover">btn</button>
+  <div>
+    <button popovertarget="popover">btn</button>
+    <div>
+      <button popovertarget="popover">btn</button>
+    </div>
+  </div>
+</div>
 `
 };
