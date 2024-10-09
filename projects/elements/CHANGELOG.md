@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.4...@nvidia-elements/core-v1.9.5) (2024-10-09)
+
+
+### Bug Fixes
+
+* **elements:** popover trigger fix ([828d193](https://github.com/NVIDIA/elements/commit/828d193742b24117c60ad564149a7c824b4c76c3))
+
 ## [@nvidia-elements/core-v1.9.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.3...@nvidia-elements/core-v1.9.4) (2024-10-08)
 
 
