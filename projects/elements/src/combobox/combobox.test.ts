@@ -568,6 +568,7 @@ describe(`${Combobox.metadata.tag}: shadow root`, () => {
     element.dispatchEvent(new KeyboardEvent('keydown'));
     await elementIsStable(element);
     expect(dropdown.matches(':popover-open')).toBe(true);
+    expect(dropdown.tabIndex).toBe(-1);
 
     const open = untilEvent(dropdown, 'open');
     emulateClick(input);
@@ -576,6 +577,7 @@ describe(`${Combobox.metadata.tag}: shadow root`, () => {
     element.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown' }));
     expect(items[0].tabIndex).toBe(0);
     expect(items[0].tagName).toBe(element.shadowRoot.activeElement.tagName);
+    expect(dropdown.tabIndex).toBe(0);
   });
 });
 

@@ -232,6 +232,7 @@ export class Combobox extends Control implements ContainerElement {
       }
 
       if (e?.code === 'ArrowDown' && (this.getRootNode() as any).activeElement === this.input) {
+        this.#dropdown.tabIndex = 0;
         this.#items[0]?.focus();
         e.preventDefault();
       }
@@ -288,6 +289,7 @@ export class Combobox extends Control implements ContainerElement {
       this.#updateMenuItems();
       this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
       this.#dropdown.showPopover();
+      this.#dropdown.tabIndex = -1;
     }
   }
 

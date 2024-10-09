@@ -25,6 +25,12 @@ describe(Dropdown.metadata.tag, () => {
     expect(customElements.get(Dropdown.metadata.tag)).toBeDefined();
   });
 
+  it('should reflect modal state', async () => {
+    await elementIsStable(element);
+    expect(element.modal).toBe(true);
+    expect(element.hasAttribute('modal')).toBe(true);
+  });
+
   it('should render close button when closable', async () => {
     expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
     element.closable = true;
