@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.5...@nvidia-elements/core-v1.9.6) (2024-10-10)
+
+
+### Bug Fixes
+
+* **elements:** improve inert modal behavior ([db7c9ef](https://github.com/NVIDIA/elements/commit/db7c9ef2d7142a247fdbba43727fd633bcd758cb))
+
 ## [@nvidia-elements/core-v1.9.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.4...@nvidia-elements/core-v1.9.5) (2024-10-09)
 
 
