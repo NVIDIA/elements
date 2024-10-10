@@ -1,6 +1,5 @@
 import type { CSSResult } from 'lit';
-import { property } from 'lit/decorators/property.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import styles from './radio.css?inline';
 
@@ -16,7 +15,7 @@ import styles from './radio.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/radio/
  */
 export class Radio extends Control {
-  @property({ type: String, reflect: true, attribute: 'nve-control' }) protected nveControl = 'inline';
+  @hostAttr({ attribute: 'nve-control' }) protected nveControl = 'inline';
 
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 

@@ -1,6 +1,5 @@
 import type { CSSResult } from 'lit';
-import { property } from 'lit/decorators/property.js';
-import { typeSSR, useStyles } from '@nvidia-elements/core/internal';
+import { hostAttr, typeSSR, useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import styles from './checkbox.css?inline';
 
@@ -17,7 +16,7 @@ import styles from './checkbox.css?inline';
  */
 @typeSSR()
 export class Checkbox extends Control {
-  @property({ type: String, reflect: true, attribute: 'nve-control' }) protected nveControl = 'inline';
+  @hostAttr({ attribute: 'nve-control' }) protected nveControl = 'inline';
 
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
