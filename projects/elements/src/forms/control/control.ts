@@ -10,7 +10,8 @@ import {
   associateDataList,
   appendRootNodeStyle,
   getAttributeListChanges,
-  I18nController
+  I18nController,
+  hostAttr
 } from '@nvidia-elements/core/internal';
 import { ControlMessage } from '../control-message/control-message.js';
 import {
@@ -103,7 +104,7 @@ export class Control extends LitElement {
     return nothing;
   }
 
-  @property({ type: String, reflect: true, attribute: 'nve-control' }) protected nveControl = '';
+  @hostAttr({ attribute: 'nve-control' }) protected nveControl = '';
 
   /** @private */
   declare _internals: ElementInternals;

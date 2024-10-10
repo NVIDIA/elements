@@ -10,10 +10,11 @@
   },
   "scripts": {
     "ci": "wireit",
-    "ci:all": "pnpm run ci && pnpm run lighthouse && pnpm run ci:validate",
-    "ci:validate": "node ./projects/internals/gitlab/cache-validate.js ci lighthouse",
+    "ci:all": "pnpm run ci && pnpm run lighthouse && pnpm run ci:validate && pnpm run lighthouse:validate",
+    "ci:validate": "node ./projects/internals/gitlab/cache-validate.js ci",
     "ci:reset": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline",
     "lighthouse": "wireit",
+    "lighthouse:validate": "node ./projects/internals/gitlab/cache-validate.js lighthouse",
     "clean": "git clean -dfX",
     "format": "wireit",
     "format:fix": "wireit",
@@ -24,8 +25,8 @@
     "commitlint": "commitlint --edit"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.2.1",
-    "@commitlint/config-conventional": "19.1.0",
+    "@commitlint/cli": "19.5.0",
+    "@commitlint/config-conventional": "19.5.0",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/core-react": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
@@ -38,19 +39,19 @@
     "@semantic-release/gitlab": "13.0.3",
     "@semantic-release/npm": "12.0.0",
     "@semantic-release/release-notes-generator": "13.0.0",
-    "@tsconfig/node20": "20.1.2",
-    "@types/node": "20.11.6",
-    "commitlint": "19.2.1",
+    "@tsconfig/node20": "20.1.4",
+    "@types/node": "22.7.5",
+    "commitlint": "19.5.0",
     "glob": "catalog:",
     "husky": "8.0.3",
-    "lint-staged": "15.2.1",
+    "lint-staged": "15.2.10",
     "proper-lockfile": "4.1.2",
-    "playwright": "1.46.0",
+    "playwright": "1.48.0",
     "prettier": "3.2.5",
     "semantic-release": "22.0.12",
     "semantic-release-monorepo": "8.0.2",
     "semantic-release-replace-plugin": "1.2.7",
-    "wireit": "0.14.7"
+    "wireit": "0.14.9"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
