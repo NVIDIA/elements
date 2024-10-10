@@ -1,8 +1,13 @@
 {
   "name": "@nvidia-elements/themes",
   "version": "1.3.3",
-  "type": "module",
   "description": "Elements themes and tokens",
+  "homepage": "https://NVIDIA.github.io/elements/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
+  "type": "module",
   "contributes": {
     "cssVars": {
       "customData": [

@@ -1,6 +1,12 @@
 {
   "name": "@nvidia-elements/code",
   "version": "0.2.2",
+  "description": "Code rendering and editing related UI components",
+  "homepage": "https://NVIDIA.github.io/elements/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
   "type": "module",
   "customElements": "custom-elements.json",
   "contributes": {
@@ -144,7 +150,7 @@
     "test:lighthouse": "wireit"
   },
   "dependencies": {
-    "highlight.js": "11.9.0",
+    "highlight.js": "11.10.0",
     "lit": "catalog:"
   },
   "peerDependencies": {
