@@ -29,7 +29,8 @@
           "no-unknown-tag-name": "off",
           "no-unknown-attribute": "off",
           "no-missing-import": "off",
-          "no-unknown-property": "off"
+          "no-unknown-property": "off",
+          "no-property-visibility-mismatch": "off"
         }
       }
     ]

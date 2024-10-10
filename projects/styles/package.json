@@ -1,6 +1,12 @@
 {
   "name": "@nvidia-elements/styles",
   "version": "1.2.2",
+  "description": "Base global styles for Elements",
+  "homepage": "https://NVIDIA.github.io/elements/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
   "type": "module",
   "contributes": {
     "html": {
