@@ -126,7 +126,6 @@ slot:not([name]) {
   text-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
-  margin-inline-end: var(--nve-ref-space-xs);
   scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
   scrollbar-width: thin;
 }
