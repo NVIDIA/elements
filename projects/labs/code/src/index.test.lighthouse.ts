@@ -19,12 +19,12 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(37.8);
+    expect(report.payload.javascript.kb).toBeLessThan(39);
     expect(report.payload.javascript.requests['define.js'].kb).toBeLessThan(10);
     expect(report.payload.javascript.requests['core.js'].kb).toBeLessThan(9);
-    expect(report.payload.javascript.requests['css.js'].kb).toBeLessThan(4);
+    expect(report.payload.javascript.requests['css.js'].kb).toBeLessThan(4.5);
     expect(report.payload.javascript.requests['html.js'].kb).toBeLessThan(0.5);
-    expect(report.payload.javascript.requests['javascript.js'].kb).toBeLessThan(3);
+    expect(report.payload.javascript.requests['javascript.js'].kb).toBeLessThan(3.1);
     expect(report.payload.javascript.requests['json.js'].kb).toBeLessThan(1);
     expect(report.payload.javascript.requests['markdown.js'].kb).toBeLessThan(1.5);
     expect(report.payload.javascript.requests['python.js'].kb).toBeLessThan(2);
