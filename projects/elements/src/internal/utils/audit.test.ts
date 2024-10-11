@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  getCrossShadowRootAnchorWarning,
   getExcessiveInstanceLimitWarning,
   getIdMatchNotFoundWarning,
   getInvalidSlotsWarning,
@@ -34,6 +35,14 @@ describe('getSSRMismatchWarning', () => {
   it('should return warning message for hydration mismatch', () => {
     expect(getSSRMismatchWarning('nve-tree')).toBe(
       'nve-tree rendered on the client with mismatched SSR content. https://lit.dev/docs/ssr/overview/'
+    );
+  });
+});
+
+describe('getCrossShadowRootAnchorWarning', () => {
+  it('should return warning message for cross shadow root anchoring', () => {
+    expect(getCrossShadowRootAnchorWarning('nve-tooltip')).toBe(
+      '(deprecated) nve-tooltip was provided an anchor outside of its render root. https://NVIDIA.github.io/elements/api/?path=/docs/foundations-popovers-documentation--docs#shadow-root-anchoring'
     );
   });
 });

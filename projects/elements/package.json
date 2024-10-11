@@ -847,7 +847,9 @@
     "build:watch": {
       "command": "vite build --watch",
       "service": true,
-      "dependencies": []
+      "dependencies": [
+        "build"
+      ]
     },
     "build": {
       "command": "NODE_ENV=production ELEMENTS_BUILD=true vite build",

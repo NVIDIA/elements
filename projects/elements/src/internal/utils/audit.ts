@@ -1,3 +1,7 @@
+function createDocLink(subpath = '') {
+  return `https://NVIDIA.github.io/elements/api/${subpath}`;
+}
+
 export function auditSlots(host: HTMLElement) {
   const validElements = ['template', ...(host.constructor as any).metadata.children];
   const invalidElements = Array.from(host.shadowRoot.querySelectorAll('slot')).flatMap(slot =>
@@ -20,4 +24,8 @@ export function getIdMatchNotFoundWarning(id: string) {
 
 export function getSSRMismatchWarning(localName: string) {
   return `${localName} rendered on the client with mismatched SSR content. https://lit.dev/docs/ssr/overview/`;
+}
+
+export function getCrossShadowRootAnchorWarning(localName: string) {
+  return `(deprecated) ${localName} was provided an anchor outside of its render root. ${createDocLink('?path=/docs/foundations-popovers-documentation--docs#shadow-root-anchoring')}`;
 }
