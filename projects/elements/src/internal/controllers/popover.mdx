@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
 import '@nvidia-elements/core/alert/define.js';
 import { Interactive, Anchor, Nested } from './popover.stories';
-import { Default as Tooltip, Events as TooltipEvents, Alignment as TooltipAlignment, } from '../../tooltip/tooltip.stories';
+import { Default as Tooltip, Events as TooltipEvents, Alignment as TooltipAlignment, CrossShadowRootAnchorPosition } from '../../tooltip/tooltip.stories';
 
 <Meta title="Foundations/Popovers/Documentation" />
 
@@ -86,3 +86,15 @@ Both `anchor` and `trigger` can take a string idref or a DOM Element reference.
 ## Nested
 
 <Story of={Nested} inline={false} height={700} />
+
+## Shadow Root Anchoring
+
+Native [CSS Anchor Positioning](https://developer.chrome.com/blog/anchor-positioning-api) allows two elements to be tethered together via
+a unique identifier. This is commonly used for popover-like elements. However CSS Anchor Positioning is limited to only positioning two elements
+in the same render root. Examples of rendering accross render roots include in different Shadow Dom Roots or popover top layer instances.
+This behavior/compatibility issue is being tracked in the [CSSWG (9408)](https://github.com/w3c/csswg-drafts/issues/9408).
+
+Element popover positioning will detect instances of cross Shadow Root anchoring attempts and fallback to a JavaScript based positioning system.
+This will allow the popover to anchor correctly but at the cost of render reliability and performance when compared to native CSS Anchor Positioning.
+
+<Story of={CrossShadowRootAnchorPosition} inline={false} height={400} />
