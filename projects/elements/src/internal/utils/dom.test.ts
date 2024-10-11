@@ -26,7 +26,8 @@ import {
   hasHorizontalScrollBar,
   getDisplayValue,
   matchesElementName,
-  createGhostElement
+  createGhostElement,
+  sameRenderRoot
 } from '@nvidia-elements/core/internal';
 
 @customElement('dom-test-element')
@@ -551,5 +552,44 @@ describe('createGhostElement', () => {
     expect(ghost.style.maxWidth).toBe('500px');
     expect(ghost.style.height).toBe('1px');
     element.remove();
+  });
+});
+
+@customElement('render-root-test-element')
+class RenderRootTest extends LitElement {
+  render() {
+    return html`
+      <button id="btn-shadow-root-1">btn</button>
+      <button id="btn-shadow-root-2">btn</button>
+    `;
+  }
+}
+
+describe('sameRenderRoot', () => {
+  let fixture: HTMLElement;
+  let element: HTMLElement;
+  let btnShadowRoot1: HTMLButtonElement;
+  let btnShadowRoot2: HTMLButtonElement;
+  let btnRoot: HTMLButtonElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <render-root-test-element></render-root-test-element>
+      <button id="btn-root"></button>
+    `);
+
+    element = fixture.querySelector('render-root-test-element');
+    btnShadowRoot1 = element.shadowRoot.querySelector('#btn-shadow-root-1');
+    btnShadowRoot2 = element.shadowRoot.querySelector('#btn-shadow-root-2');
+    btnRoot = fixture.querySelector('#btn-root');
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should determine if pair of elements are rendered within same render root target', () => {
+    expect(sameRenderRoot(btnShadowRoot1, btnShadowRoot2)).toBe(true);
+    expect(sameRenderRoot(btnShadowRoot1, btnRoot)).toBe(false);
   });
 });

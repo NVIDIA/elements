@@ -93,7 +93,7 @@
       ]
     },
     "build": {
-      "command": "NODE_ENV=production tsc && vite build",
+      "command": "NODE_ENV=production tsc -p tsconfig.lib.json && vite build",
       "dependencies": [
         "../../elements:build"
       ],
@@ -103,9 +103,10 @@
       "files": [
         "src/**",
         "!src/**/*.stories.ts",
+        "!src/**/*.test.ts",
         "!src/**/*.mdx",
         "package.json",
-        "tsconfig.json",
+        "tsconfig.lib.json",
         "vite.config.ts"
       ]
     },

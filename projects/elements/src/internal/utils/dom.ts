@@ -304,3 +304,11 @@ export function createGhostElement(sourceElement: HTMLElement) {
   ghost.style.height = '1px';
   return ghost;
 }
+
+export function sameRenderRoot(element1: HTMLElement, element2: HTMLElement) {
+  const root1 = element1.getRootNode();
+  const root2 = element2.getRootNode();
+  const sameShadowRoot = root1 instanceof ShadowRoot && root2 instanceof ShadowRoot && root1 === root2;
+  const sameDocumentRoot = root1 === document && root2 === document;
+  return sameShadowRoot || sameDocumentRoot;
+}
