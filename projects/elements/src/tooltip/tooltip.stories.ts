@@ -9,6 +9,7 @@ import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 import type { Badge } from '@nvidia-elements/core/badge';
+import type { Tooltip } from '@nvidia-elements/core/tooltip';
 
 export default {
   title: 'Elements/Tooltip/Examples',
@@ -231,5 +232,32 @@ export const LegacyOpenDelay = {
 
 <nve-tooltip behavior-trigger anchor="delay-tooltip-3" trigger="delay-tooltip-3" open-delay="500" hidden>delayed tooltip</nve-tooltip>
 <nve-button id="delay-tooltip-3">button</nve-button>
+  `
+};
+
+@customElement('cross-shadow-root-anchor-position-demo')
+class CrossShadowRootAnchorPositionDemo extends LitElement {
+  render() {
+    return html`
+      <nve-tooltip id="shadow-root-tooltip">shadow root tooltip</nve-tooltip>
+      <nve-button id="shadow-root-btn" popovertarget="shadow-root-tooltip">shadow root anchor</nve-button>
+      <nve-button id="cross-root-btn">cross root anchor</nve-button>
+    `;
+  }
+
+  firstUpdated(props: PropertyValues<this>) {
+    super.firstUpdated(props);
+    document.querySelector<Tooltip>('#cross-root-tooltip').anchor = this.shadowRoot.querySelector<HTMLElement>('#cross-root-btn');
+    document.querySelector<Tooltip>('#cross-root-tooltip').trigger = this.shadowRoot.querySelector<HTMLElement>('#cross-root-btn');
+  }
+}
+
+export const CrossShadowRootAnchorPosition = {
+  render: () => html`
+<nve-button popovertarget="root-tooltip">document root anchor</nve-button>
+<nve-tooltip id="root-tooltip">document root tooltip</nve-tooltip>
+
+<cross-shadow-root-anchor-position-demo></cross-shadow-root-anchor-position-demo>
+<nve-tooltip id="cross-root-tooltip" hidden behavior-trigger>cross root tooltip</nve-tooltip>
   `
 };

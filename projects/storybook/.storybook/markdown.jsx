@@ -90,9 +90,7 @@ export const CODE = (args) => {
     sourceType: globals?.sourceType ?? ''
   });
 
-  return <Unstyled>
-    <code nve-text="code">{code}</code>
-  </Unstyled>
+  return <code nve-text="code">{code}</code>
 }
 
 export const PRE = (args) => {
