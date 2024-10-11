@@ -82,6 +82,7 @@
       ],
       "dependencies": [
         "../elements:build",
+        "../elements-react:build",
         "../labs/code:build",
         "../styles:build",
         "../themes:build",
