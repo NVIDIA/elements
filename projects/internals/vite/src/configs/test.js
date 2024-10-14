@@ -10,9 +10,6 @@ export const libraryTestConfig = {
     retry: 1,
     isolate: coverage,
     bail: !watch && !coverage ? 2 : 0,
-    optimizeDeps: {
-      exclude: ['@vitest/coverage-istanbul']
-    },
     server: {
       deps: {
         external: ['**/node_modules/**']

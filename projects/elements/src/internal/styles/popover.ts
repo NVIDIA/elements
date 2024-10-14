@@ -1,3 +1,4 @@
+/* istanbul ignore file -- @preserve */
 import { isServer } from 'lit';
 import { supportsCSSPositionArea, supportsCSSLegacyInsetArea } from '../utils/supports.js';
 import _popoverStyles from './popover.css?inline';
