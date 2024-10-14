@@ -12,6 +12,7 @@
   --gap: var(--nve-ref-space-xs);
   --height: var(--nve-ref-size-800);
   --text-transform: capitalize;
+  --line-height: 1.1em;
   --_icon-color: var(--color);
   --width: initial;
   --min-width: var(--width);
@@ -41,7 +42,7 @@
   place-items: center;
   justify-content: center;
   white-space: nowrap;
-  line-height: 1.1em;
+  line-height: var(--line-height);
   overflow: hidden;
 }
 
@@ -102,6 +103,7 @@
   --height: var(--nve-ref-size-900);
   --padding: 0 var(--nve-ref-size-400);
   --font-size: var(--nve-ref-font-size-200);
+  --line-height: 1em;
 }
 
 :host([readonly]) {
