@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.9.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.6...@nvidia-elements/core-v1.9.7) (2024-10-14)
+
+
+### Bug Fixes
+
+* **ci:** update dependencies and package metadata ([72fc58f](https://github.com/NVIDIA/elements/commit/72fc58fc757524b669b7e002706e1c9ceb11a0c7))
+* **elements:** toolbar phantom gap spacing ([66d8e19](https://github.com/NVIDIA/elements/commit/66d8e19c7205d3f846e410f22008a0a36fbbf9c0))
+
 ## [@nvidia-elements/core-v1.9.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.5...@nvidia-elements/core-v1.9.6) (2024-10-10)
 
 
