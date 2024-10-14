@@ -10,7 +10,7 @@
   },
   "scripts": {
     "ci": "wireit",
-    "ci:all": "pnpm run ci && node ./projects/internals/gitlab/cache-validate.js ci && pnpm run lighthouse && node ./projects/internals/gitlab/cache-validate.js lighthouse",
+    "ci:all": "pnpm run ci && pnpm run lighthouse && node ./projects/internals/gitlab/cache-validate.js ci && node ./projects/internals/gitlab/cache-validate.js lighthouse",
     "ci:reset": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline",
     "lighthouse": "wireit",
     "clean": "git clean -dfX",
