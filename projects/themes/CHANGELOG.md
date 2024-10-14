@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.3.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.3...@nvidia-elements/themes-v1.3.4) (2024-10-14)
+
+
+### Bug Fixes
+
+* **ci:** update dependencies and package metadata ([72fc58f](https://github.com/NVIDIA/elements/commit/72fc58fc757524b669b7e002706e1c9ceb11a0c7))
+
 ## [@nvidia-elements/themes-v1.3.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.2...@nvidia-elements/themes-v1.3.3) (2024-10-02)
 
 
