@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.2.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.2.2...@nvidia-elements/styles-v1.2.3) (2024-10-14)
+
+
+### Bug Fixes
+
+* **ci:** update dependencies and package metadata ([72fc58f](https://github.com/NVIDIA/elements/commit/72fc58fc757524b669b7e002706e1c9ceb11a0c7))
+
 ## [@nvidia-elements/styles-v1.2.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.2.1...@nvidia-elements/styles-v1.2.2) (2024-08-30)
 
 
