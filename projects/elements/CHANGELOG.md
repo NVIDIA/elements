@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.7...@nvidia-elements/core-v1.9.8) (2024-10-14)
+
+
+### Bug Fixes
+
+* **elements:** support shadow root anchor fallback ([f2393f5](https://github.com/NVIDIA/elements/commit/f2393f50f80b4f4aea8bc989b3403d36f8a3d228))
+
 ## [@nvidia-elements/core-v1.9.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.6...@nvidia-elements/core-v1.9.7) (2024-10-14)
 
 
