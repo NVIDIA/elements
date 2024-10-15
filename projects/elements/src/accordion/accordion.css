@@ -6,6 +6,7 @@
   --border-radius: 0;
   --header-padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
   --cursor: pointer;
+  --transition: none;
   width: 100%;
   contain: none;
 }
@@ -38,11 +39,14 @@
 }
 
 #content {
-  display: none;
+  display: block;
+  max-height: 0;
+  transition: var(--transition);
 }
 
 :host(:state(expanded)) #content {
-  display: block;
+  /* we assign a max-height to allow for smooth transitions from open to closed if the consumer wishes, height: auto cannot be transitioned */
+  max-height: 1000vh;
 }
 
 :host([container='inset']) {

@@ -157,6 +157,13 @@ describe(Accordion.metadata.tag, () => {
     expect(childElement1.container).toBe('inset');
     expect(childElement2.container).toBe('inset');
   });
+
+  it('should set aria-hidden for content property when hidden', async () => {
+    expect(childElement1.shadowRoot.querySelector('#content').ariaHidden).toBe('true');
+    childElement1.expanded = true;
+    await elementIsStable(childElement1);
+    expect(childElement1.shadowRoot.querySelector('#content').ariaHidden).toBe('false');
+  });
 });
 
 describe(`${Accordion.metadata.tag} - Actions`, () => {
