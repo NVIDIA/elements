@@ -99,6 +99,7 @@ export class AccordionContent extends LitElement {
  * @cssprop --border-radius
  * @cssprop --color
  * @cssprop --header-padding
+ * @cssprop --transition
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
@@ -187,7 +188,7 @@ export class Accordion extends LitElement implements ContainerElement {
           </slot>
         </div>
 
-        <div id="content">
+        <div id="content" .ariaHidden=${!this.expanded}>
           <slot></slot>
         </div>
       </div>
