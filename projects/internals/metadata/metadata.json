@@ -5077,6 +5077,9 @@
             },
             {
               "name": "--header-padding"
+            },
+            {
+              "name": "--transition"
             }
           ]
         },
