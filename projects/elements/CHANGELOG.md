@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.8...@nvidia-elements/core-v1.9.9) (2024-10-15)
+
+
+### Bug Fixes
+
+* **elements:** large button line height ([16b210b](https://github.com/NVIDIA/elements/commit/16b210b4912e002df32b7a2e18f6433d2095a915))
+
 ## [@nvidia-elements/core-v1.9.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.7...@nvidia-elements/core-v1.9.8) (2024-10-14)
 
 
