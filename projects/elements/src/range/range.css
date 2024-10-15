@@ -6,6 +6,7 @@
   --track-height: var(--nve-ref-size-150);
   --track-border-radius: var(--nve-ref-border-radius-md);
   width: 100%;
+  contain: layout;
 }
 
 ::slotted(input) {

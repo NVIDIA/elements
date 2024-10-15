@@ -8,6 +8,7 @@
   --background: transparent;
   --check-color: transparent;
   display: inline-block;
+  contain: layout;
 }
 
 ::slotted(input) {
@@ -64,15 +65,6 @@
 
 :host(:state(checked):state(disabled)) {
   --background: var(--nve-sys-interaction-disabled-color);
-}
-
-:host(:focus-within) [input] {
-  outline: 0 !important;
-}
-
-:host(:not([nofocus]):focus-within) [input] slot {
-  outline: Highlight solid 2px !important;
-  outline: 5px auto -webkit-focus-ring-color !important;
 }
 
 :host(:state(indeterminate)) {
