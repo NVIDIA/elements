@@ -46,11 +46,6 @@
   --width: fit-content;
 }
 
-[input]:focus-within {
-  outline: Highlight solid 2px !important;
-  outline: 5px auto -webkit-focus-ring-color !important;
-}
-
 :host([nve-control]) ::slotted(input:focus),
 :host([nve-control]) ::slotted(select:focus),
 :host([nve-control]) ::slotted(textarea:focus),
@@ -80,6 +75,16 @@
   display: flex;
   line-height: 1;
   min-height: var(--control-height);
+}
+
+:host([nve-control='inline']) {
+  [internal-host] {
+    min-height: var(--control-height);
+  }
+
+  [input] {
+    min-height: min-content;
+  }
 }
 
 slot {
