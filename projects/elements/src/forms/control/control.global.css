@@ -3,6 +3,11 @@
  * this draft reaches consensous and lands in browsers https://github.com/w3c/csswg-drafts/issues/6867
  */
 
+[nve-control]:not([nofocus]):has(*:focus-visible)::part(_input) {
+  outline: Highlight solid 2px !important;
+  outline: 5px auto -webkit-focus-ring-color !important;
+}
+
 [nve-control] input::placeholder,
 [nve-control] textarea::placeholder {
   color: var(--nve-sys-text-placeholder-color) !important;

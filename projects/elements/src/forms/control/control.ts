@@ -125,7 +125,7 @@ export class Control extends LitElement {
       ? html`
       <div internal-host part="_internal-host">
         <slot name="label" part="_label"></slot>
-        <div input>
+        <div input part="_input">
           ${this.prefixContent}
           <slot></slot>
           ${this.suffixContent}
@@ -135,7 +135,7 @@ export class Control extends LitElement {
     `
       : html`
       <div internal-host part="_internal-host">
-        <div input><slot interaction-state></slot></div>
+        <div input part="_input"><slot interaction-state></slot></div>
         <slot name="label" part="_label"></slot>
         <slot name="messages" part="_messages"></slot>
       </div>

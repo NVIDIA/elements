@@ -21,7 +21,7 @@ import styles from './switch.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/switch/
  */
 export class Switch extends Control {
-  @hostAttr({ attribute: 'nve-control' }) protected nveControl;
+  @hostAttr({ attribute: 'nve-control' }) protected nveControl = 'inline';
 
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
