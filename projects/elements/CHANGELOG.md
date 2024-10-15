@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.10...@nvidia-elements/core-v1.9.11) (2024-10-15)
+
+
+### Bug Fixes
+
+* **elements:** allow accordion transition ([c275bfc](https://github.com/NVIDIA/elements/commit/c275bfccf904ba75a05ae60444b1c0f223638217))
+
 ## [@nvidia-elements/core-v1.9.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.9...@nvidia-elements/core-v1.9.10) (2024-10-15)
 
 
