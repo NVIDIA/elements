@@ -9,6 +9,7 @@
   --anchor-border-radius: var(--nve-ref-border-radius-xxl);
   --anchor-background: var(--nve-sys-interaction-disabled-color);
   display: inline-block;
+  contain: layout;
 }
 
 ::slotted(input) {
@@ -23,12 +24,9 @@
   padding: 0 !important;
 }
 
-[internal-host] {
-  min-height: var(--control-height);
-}
-
 [input] {
   align-items: center;
+  outline-offset: 2px;
 }
 
 [input] slot {
@@ -72,14 +70,4 @@
 
 :host(:state(checked)) [input] slot::after {
   transform: translate(calc(var(--width) / 2), 0);
-}
-
-:host(:focus-within) [input] {
-  outline: 0 !important;
-}
-
-:host(:focus-within) [input] slot {
-  outline: Highlight solid 2px !important;
-  outline: 5px auto -webkit-focus-ring-color !important;
-  outline-offset: -2px;
 }
