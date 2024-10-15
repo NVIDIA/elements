@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.9...@nvidia-elements/core-v1.9.10) (2024-10-15)
+
+
+### Bug Fixes
+
+* **elements:** form controls enable focus visible ([2944172](https://github.com/NVIDIA/elements/commit/2944172ac4381d7240b76c7e2337b7dc16ff971a)), closes [#51](https://github.com/NVIDIA/elements/issues/51)
+
 ## [@nvidia-elements/core-v1.9.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.8...@nvidia-elements/core-v1.9.9) (2024-10-15)
 
 
