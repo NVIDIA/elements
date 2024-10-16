@@ -1,11 +1,12 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   appendRootNodeStyle,
   attachInternals,
   getFlattenedFocusableItems,
   keyNavigationList,
-  KeynavListConfig,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { updateNodeSelection } from './utils.js';

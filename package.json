@@ -57,6 +57,7 @@
   "wireit": {
     "ci": {
       "dependencies": [
+        "format",
         "./projects/elements:ci",
         "./projects/elements-react:ci",
         "./projects/labs/behaviors-alpine:ci",
@@ -166,12 +167,26 @@
         "./**/*.css",
         "./**/*.cjs",
         "./**/*.mjs",
-        "./**/*.json"
+        "./**/*.json",
+        "!projects/elements-react/src/**/*",
+        "!**/vite.bundle.ts.timestamp*.mjs",
+        "!**/build/**",
+        "!**/dist/**",
+        "!**/.wireit/**",
+        "!**/node_modules/**"
       ],
       "output": []
     },
     "format:fix": {
-      "command": "prettier --config prettier.config.js --write ."
+      "command": "prettier --config prettier.config.js --write .",
+      "dependencies": [
+        "./projects/elements:lint:fix",
+        "./projects/labs/behaviors-alpine:lint:fix",
+        "./projects/labs/code:lint:fix",
+        "./projects/labs/snippets:lint:fix",
+        "./projects/storybook:lint:fix",
+        "./projects/testing:lint:fix"
+      ]
     },
     "playwright": {
       "command": "pnpm exec playwright install chromium --with-deps chromium"

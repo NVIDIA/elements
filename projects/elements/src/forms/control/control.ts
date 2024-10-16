@@ -1,12 +1,10 @@
 import { LitElement, html, nothing, isServer, TemplateResult } from 'lit';
-import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators/property.js';
-import { state } from 'lit/decorators/state.js';
 import {
   attachInternals,
   useStyles,
   associateLabel,
-  assoicateAriaDescribedBy,
+  associateAriaDescribedBy,
   associateDataList,
   appendRootNodeStyle,
   getAttributeListChanges,
@@ -20,7 +18,7 @@ import {
   setupControlStatusStates,
   inputQuery
 } from '../utils/states.js';
-import { setupControlLayoutStates, isInlineInputType } from '../utils/layout.js';
+import { setupControlLayoutStates } from '../utils/layout.js';
 import globalStyles from './control.global.css?inline';
 import styles from './control.css?inline';
 
@@ -224,7 +222,7 @@ export class Control extends LitElement {
   #updateAssociations() {
     this.#assignLabel();
     associateLabel(this.#label, this.input);
-    assoicateAriaDescribedBy(Array.from(this.#messages), this.input);
+    associateAriaDescribedBy(Array.from(this.#messages), this.input);
 
     if (this._associateDatalist) {
       associateDataList(this.querySelector<HTMLDataListElement>('datalist'), this.input);

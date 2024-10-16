@@ -1,14 +1,11 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import type { PopoverAlign, PopoverPosition, PopoverType, Size } from '@nvidia-elements/core/internal';
 import {
   audit,
   excessiveInstanceLimit,
   I18nController,
-  PopoverAlign,
   popoverStyles,
-  PopoverPosition,
-  PopoverType,
-  Size,
   TypeNativeAnchorController,
   TypeNativePopoverController,
   useStyles,

@@ -1,12 +1,12 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import type { ContainerElement } from '@nvidia-elements/core/internal';
 import {
   keyNavigationGrid,
   useStyles,
   attachInternals,
   appendRootNodeStyle,
   generateId,
-  ContainerElement,
   tagSelector,
   audit
 } from '@nvidia-elements/core/internal';

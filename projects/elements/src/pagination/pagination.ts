@@ -1,11 +1,11 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   attachInternals,
   formatStandardNumber,
   I18nController,
   keyNavigationList,
-  KeynavListConfig,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';

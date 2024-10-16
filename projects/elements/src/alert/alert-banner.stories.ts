@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { AlertGroup } from '@nvidia-elements/core/alert';
+import type { AlertGroup } from '@nvidia-elements/core/alert';
 import '@nvidia-elements/core/alert/define.js';
 
 export default {

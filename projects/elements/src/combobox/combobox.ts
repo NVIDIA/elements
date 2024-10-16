@@ -1,13 +1,9 @@
-import { html, isServer, nothing, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, isServer, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import {
-  ContainerElement,
-  createLightDismiss,
-  focusElementTimeout,
-  getDisplayValue,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import type { ContainerElement } from '@nvidia-elements/core/internal';
+import { createLightDismiss, focusElementTimeout, getDisplayValue, useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { inputStyles } from '@nvidia-elements/core/input';
 import { Menu, MenuItem } from '@nvidia-elements/core/menu';

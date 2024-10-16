@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
-import { SupportStatus, useStyles } from '@nvidia-elements/core/internal';
+import type { SupportStatus } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import { property } from 'lit/decorators/property.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './progress-bar.css?inline';

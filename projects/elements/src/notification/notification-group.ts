@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import type { PopoverAlign } from '@nvidia-elements/core/internal';
 import {
-  PopoverAlign,
   popoverStyles,
   TypeNativeAnchorController,
   TypeNativePopoverController,

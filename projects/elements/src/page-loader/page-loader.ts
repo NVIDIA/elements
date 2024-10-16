@@ -1,11 +1,6 @@
 import { LitElement, html } from 'lit';
-import {
-  popoverStyles,
-  PopoverPosition,
-  PopoverType,
-  TypeNativePopoverController,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import type { PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
+import { popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 import styles from './page-loader.css?inline';
 

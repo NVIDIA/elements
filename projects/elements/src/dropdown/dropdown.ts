@@ -2,14 +2,12 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import { IconButton } from '@nvidia-elements/core/icon-button';
+import type { PopoverAlign, PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
 import {
   audit,
   excessiveInstanceLimit,
   I18nController,
-  PopoverAlign,
-  PopoverPosition,
   popoverStyles,
-  PopoverType,
   TypeNativeAnchorController,
   TypeNativePopoverController,
   useStyles

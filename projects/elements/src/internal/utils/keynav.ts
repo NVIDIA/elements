@@ -6,9 +6,13 @@ export function onKeys(events: string[], event: KeyboardEvent, fn: () => any) {
     fn();
   }
 }
-export function createLightDismiss(options: { element: HTMLElement, focusElement?: HTMLElement }, fn: () => void) {
+export function createLightDismiss(options: { element: HTMLElement; focusElement?: HTMLElement }, fn: () => void) {
   globalThis.document.addEventListener('pointerup', (e: PointerEvent) => {
-    if (!options.element.hidden && clickOutsideElementBounds(e, options.element) && clickOutsideElementBounds(e, options.focusElement)) {
+    if (
+      !options.element.hidden &&
+      clickOutsideElementBounds(e, options.element) &&
+      clickOutsideElementBounds(e, options.focusElement)
+    ) {
       fn();
     }
   });
