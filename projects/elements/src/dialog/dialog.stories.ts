@@ -153,7 +153,6 @@ export const LegacyTrigger = {
 </nve-dialog>
 <script>
   const dialog = document.querySelector('nve-dialog');
-  dialog.hidden = false;
   dialog.addEventListener('open', e => {
     console.log(e);
     dialog.hidden = false;
