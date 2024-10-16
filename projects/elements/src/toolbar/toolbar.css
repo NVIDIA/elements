@@ -69,7 +69,7 @@
 }
 
 :host([orientation='vertical']) {
-  --padding: var(--nve-ref-size-200) 0;
+  --padding: var(--nve-ref-size-100) 0;
   --width: var(--nve-ref-size-1000);
   --gap: var(--nve-ref-space-xs);
 }

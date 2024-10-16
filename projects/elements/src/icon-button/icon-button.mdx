@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Default, Interactions, FlatInteractions, PressedToggle, SelectedFlat, Link, CustomIcon, Themes, Size } from './icon-button.stories';
+import { Default, Interactions, FlatInteractions, SelectedFlat, Link, CustomIcon, Themes, Size, SelectedInline, Selected, Pressed, PressedFlat, PressedInline } from './icon-button.stories';
 
 <Meta title="Elements/Icon Button/Documentation" />
 
@@ -31,15 +31,31 @@ import '@nvidia-elements/core/icon-button/define.js';
 
 ## Pressed/Toggle
 
-[aria-pressed documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed)
+<element-api tag="nve-icon-button" type="property" value="pressed"></element-api>
 
-<Canvas of={PressedToggle} />
+<Canvas of={Pressed} />
 
-## Flat Selected
+### Pressed Flat
 
-[aria-selected documentation](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected)
+<Canvas of={PressedFlat} />
+
+### Pressed Inline
+
+<Canvas of={PressedInline} />
+
+## Selected
+
+<element-api tag="nve-icon-button" type="property" value="selected"></element-api>
+
+<Canvas of={Selected} />
+
+### Selected Flat
 
 <Canvas of={SelectedFlat} />
+
+### Selected Inline
+
+<Canvas of={SelectedInline} />
 
 ## Link
 
@@ -56,8 +72,6 @@ import '@nvidia-elements/core/icon-button/define.js';
 ## Size
 
 <Canvas of={Size} />
-
-# Element API
 
 <element-status tag="nve-icon-button"></element-status>
 
