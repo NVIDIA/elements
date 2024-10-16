@@ -44,11 +44,11 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.#updatePopoverType();
     await this.host.updateComplete;
     this.host.setAttribute('nve-popover', '');
-    this.host.inert = true;
     this.#setupHiddenUpdates();
     this.#updateTriggers();
     this.#setupDefaultHiddenState();
     this.#setupModalLightDismiss();
+    this.host.inert = this.host.matches(':not(:popover-open)') && !!this.#triggers.length;
 
     this.host.addEventListener('toggle', (e: ToggleEvent) => {
       if (this.host.behaviorTrigger) {
@@ -59,7 +59,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
         setTimeout(() => this.host.hidePopover(), this.host.closeTimeout);
       }
 
-      this.host.inert = e.newState !== 'open';
+      this.host.inert = !this.host.hidden && e.newState !== 'open' && !!this.#triggers.length;
 
       if (this.host.modal) {
         this.#toggleFocus(e.newState === 'open');
