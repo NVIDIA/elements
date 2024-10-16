@@ -35,6 +35,20 @@ export const Full = {
   `
 };
 
+export const Animated = {
+  render: () => html`
+  <div>
+    <nve-accordion behavior-expand style="--transition: height 0.3s ease-in-out">
+      <nve-accordion-header>
+        <div slot="title">Heading</div>
+      </nve-accordion-header>
+
+      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+    </nve-accordion>
+  </div>
+  `
+};
+
 export const Disabled = {
   render: () => html`
   <div>
@@ -50,7 +64,7 @@ export const Disabled = {
 };
 
 export const Inset = {
-  render: () =>  html`
+  render: () => html`
   <div>
     <nve-accordion behavior-expand container="inset">
       <nve-accordion-header>
@@ -65,7 +79,7 @@ export const Inset = {
 };
 
 export const Flat = {
-  render: () =>  html`
+  render: () => html`
   <div>
     <nve-accordion behavior-expand container="flat">
         <nve-accordion-header>
