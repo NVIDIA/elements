@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.14](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.13...@nvidia-elements/core-v1.9.14) (2024-10-16)
+
+
+### Bug Fixes
+
+* **elements:** button flat selection and pressed styles ([fe80999](https://github.com/NVIDIA/elements/commit/fe8099924a5b7764524a033b9512041361d5c9e5))
+
 ## [@nvidia-elements/core-v1.9.13](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.12...@nvidia-elements/core-v1.9.13) (2024-10-16)
 
 
