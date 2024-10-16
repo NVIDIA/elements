@@ -40,13 +40,15 @@
 
 #content {
   display: block;
-  max-height: 0;
+  height: 0;
   transition: var(--transition);
 }
 
 :host(:state(expanded)) #content {
-  /* we assign a max-height to allow for smooth transitions from open to closed if the consumer wishes, height: auto cannot be transitioned */
-  max-height: 1000vh;
+  /* fallback for browsers that do not support intrinsic sizing keywords with calc-size() */
+  height: auto;
+  /* https://developer.chrome.com/docs/css-ui/animate-to-height-auto#animate_to_and_from_intrinsic_sizing_keywords_with_calc-size */
+  height: calc-size(max-content, size);
 }
 
 :host([container='inset']) {
