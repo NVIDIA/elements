@@ -146,6 +146,42 @@ describe('type-popover.controller', () => {
     await elementIsStable(element);
     expect(element.matches(':popover-open')).toBe(false);
   });
+
+  it('if popover is open it should not be inert', async () => {
+    expect(element.inert).toBe(true);
+    const event = untilEvent(element, 'open');
+    element.showPopover();
+    expect((await event).target).toBe(element);
+    expect(element.inert).toBe(false);
+  });
+});
+
+describe('type-popover.controller - default open', () => {
+  let element: TypeNativePopoverControllerTestElement;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <type-native-popover-controller-test-element></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    await element.updateComplete;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define test element', () => {
+    expect(customElements.get('type-native-popover-controller-test-element')).toBeDefined();
+  });
+
+  it('if popover is open by default with no triggers it should not be inert', async () => {
+    await elementIsStable(element);
+    expect(element.inert).toBe(false);
+  });
 });
 
 describe('type-popover.controller escaped id selectors', () => {
