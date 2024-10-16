@@ -119,7 +119,7 @@ export class TreeNode extends LitElement {
           ${
             this.#isExpandable
               ? html`
-            <nve-icon-button @pointerup=${this.#toggleExpand} role="presentation" tabindex="-1" size="sm" container="flat" nofocus>
+            <nve-icon-button @pointerup=${this.#toggleExpand} role="presentation" tabindex="-1" size="sm" container="inline" nofocus>
               <nve-icon name="caret" direction=${this.expanded ? 'down' : 'right'} size="sm"></nve-icon>
             </nve-icon-button>`
               : nothing
