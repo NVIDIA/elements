@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.13](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.12...@nvidia-elements/core-v1.9.13) (2024-10-16)
+
+
+### Bug Fixes
+
+* **elements:** popover inert lifecycle ([2ebc198](https://github.com/NVIDIA/elements/commit/2ebc198767e395d228b9d2af4edf1df5cc5c8fa9))
+
 ## [@nvidia-elements/core-v1.9.12](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.11...@nvidia-elements/core-v1.9.12) (2024-10-16)
 
 
