@@ -1,13 +1,7 @@
 import { html, LitElement, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import {
-  useStyles,
-  keyNavigationList,
-  KeynavListConfig,
-  attachInternals,
-  generateId,
-  isFocusable
-} from '@nvidia-elements/core/internal';
+import type { KeynavListConfig } from '@nvidia-elements/core/internal';
+import { useStyles, keyNavigationList, attachInternals, generateId, isFocusable } from '@nvidia-elements/core/internal';
 import styles from './breadcrumb.css?inline';
 import { Icon } from '@nvidia-elements/core/icon';
 import type { Button } from '@nvidia-elements/core/button';

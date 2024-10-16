@@ -1,4 +1,5 @@
-import { ElementPart, Directive, directive, DirectiveParameters } from 'lit/directive.js';
+import type { ElementPart, DirectiveParameters } from 'lit/directive.js';
+import { Directive, directive } from 'lit/directive.js';
 
 /**
  * @experimental

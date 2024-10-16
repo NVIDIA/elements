@@ -1,14 +1,14 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
+import type { ContainerElement, Container } from '@nvidia-elements/core/internal';
 import {
   stateExpanded,
   I18nController,
   TypeExpandableController,
   useStyles,
   attachInternals,
-  ContainerElement,
-  Container,
   generateId
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
