@@ -2,7 +2,7 @@ import { appendRootNodeStyle, getElementUpdate, useStyles } from '@nvidia-elemen
 import { Control } from '@nvidia-elements/core/forms';
 import globalStyles from './range.global.css?inline';
 import styles from './range.css?inline';
-import { PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
 
 /**
  * @element nve-range

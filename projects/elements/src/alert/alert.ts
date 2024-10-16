@@ -3,11 +3,10 @@ import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { Icon } from '@nvidia-elements/core/icon';
 import { IconButton } from '@nvidia-elements/core/icon-button';
+import type { SupportStatus, TaskStatus } from '@nvidia-elements/core/internal';
 import {
   attachInternals,
   I18nController,
-  SupportStatus,
-  TaskStatus,
   statusIcons,
   TypeClosableController,
   useStyles,

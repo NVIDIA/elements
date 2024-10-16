@@ -1,18 +1,11 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { when } from 'lit/directives/when.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import {
-  BaseButton,
-  stateSelected,
-  useStyles,
-  keyNavigationList,
-  KeynavListConfig,
-  attachInternals,
-  SupportStatus,
-  Container
-} from '@nvidia-elements/core/internal';
+import type { KeynavListConfig, SupportStatus, Container } from '@nvidia-elements/core/internal';
+import { BaseButton, stateSelected, useStyles, keyNavigationList, attachInternals } from '@nvidia-elements/core/internal';
 import stepsItemStyleSheet from './steps-item.css?inline';
 import stepsStyleSheet from './steps.css?inline';
 import { IconButton } from '@nvidia-elements/core/icon-button';

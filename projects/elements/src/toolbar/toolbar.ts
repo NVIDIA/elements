@@ -1,11 +1,12 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
+import type { ContainerElement } from '@nvidia-elements/core/internal';
 import {
   useStyles,
   statusStateStyles,
   supportStateStyles,
-  ContainerElement,
   attachInternals,
   applySlotContentStates,
   hasHorizontalScrollBar

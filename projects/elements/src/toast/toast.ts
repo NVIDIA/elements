@@ -1,17 +1,14 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { IconButton } from '@nvidia-elements/core/icon-button';
+import type { PopoverAlign, PopoverPosition, PopoverType, SupportStatus } from '@nvidia-elements/core/internal';
 import {
   attachInternals,
   audit,
   excessiveInstanceLimit,
   I18nController,
-  PopoverAlign,
   popoverStyles,
-  PopoverPosition,
-  PopoverType,
   statusIcons,
-  SupportStatus,
   TypeNativeAnchorController,
   TypeNativePopoverController,
   useStyles
