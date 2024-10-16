@@ -20,7 +20,7 @@ export function associateAriaLabel(label: HTMLElement, element: HTMLElement) {
   }
 }
 
-export function assoicateAriaDescribedBy(messages: HTMLElement[], element: HTMLElement) {
+export function associateAriaDescribedBy(messages: HTMLElement[], element: HTMLElement) {
   if (messages.length && element) {
     const ids = messages.map(m => (m.id = generateId())).join(' ');
     element.setAttribute('aria-describedby', ids);

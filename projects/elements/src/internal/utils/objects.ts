@@ -1,5 +1,5 @@
 export function isObject(item) {
-  return (item && typeof item === 'object' && !Array.isArray(item));
+  return item && typeof item === 'object' && !Array.isArray(item);
 }
 
 export function deepMerge(target, ...sources) {
@@ -27,7 +27,7 @@ export function deepMerge(target, ...sources) {
 }
 
 export function parseVersion(version: string) {
-  const [major, minor, patch] = version.split('.').map((v) => parseInt(v, 10));
+  const [major, minor, patch] = version.split('.').map(v => parseInt(v, 10));
   return { major: major ? major : -1, minor: minor ? minor : -1, patch: patch ? patch : -1 };
 }
 

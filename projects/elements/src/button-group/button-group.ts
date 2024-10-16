@@ -1,14 +1,9 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import {
-  attachInternals,
-  keyNavigationList,
-  KeynavListConfig,
-  useStyles,
-  Interaction,
-  Size
-} from '@nvidia-elements/core/internal';
+import type { KeynavListConfig, Interaction, Size } from '@nvidia-elements/core/internal';
+import { attachInternals, keyNavigationList, useStyles } from '@nvidia-elements/core/internal';
 import type { IconButton } from '@nvidia-elements/core/icon-button';
 import type { Button } from '@nvidia-elements/core/button';
 import type { Divider } from '@nvidia-elements/core/divider';

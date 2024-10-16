@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { IconButton } from '@nvidia-elements/core/icon-button';
+import type { IconButton } from '@nvidia-elements/core/icon-button';
 import { spread } from '@nvidia-elements/core/internal';
 import { ICON_NAMES } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/icon-button/define.js';

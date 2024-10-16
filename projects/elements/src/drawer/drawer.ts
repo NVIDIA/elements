@@ -1,11 +1,10 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import type { PopoverType, Size } from '@nvidia-elements/core/internal';
 import {
   createGhostElement,
   I18nController,
   popoverStyles,
-  PopoverType,
-  Size,
   TypeNativeAnchorController,
   TypeNativePopoverController,
   useStyles
