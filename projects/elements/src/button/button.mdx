@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Default, Interaction, Flat, Inline, PressedToggle, SelectedFlat, Size, Link, LinkFlat, ButtonWithIcon, FormControl } from './button.stories';
+import { Default, Interaction, Flat, Inline, Pressed, SelectedFlat, Size, Link, LinkFlat, ButtonWithIcon, FormControl } from './button.stories';
 
 <Meta title="Elements/Button/Documentation" />
 
@@ -41,15 +41,13 @@ import '@nvidia-elements/core/button/define.js';
 
 <Canvas of={Inline} />
 
-## Selection Types
-
-### Pressed
+## Pressed
 
 <element-api tag="nve-button" type="property" value="pressed"></element-api>
 
-<Canvas of={PressedToggle} />
+<Canvas of={Pressed} />
 
-### Selected Flat
+## Selected
 
 <element-api tag="nve-button" type="property" value="selected"></element-api>
 
