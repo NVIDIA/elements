@@ -141,8 +141,19 @@
 }
 
 :host(:state(pressed):not([interaction])) {
+  --color: var(--nve-sys-interaction-selected-color);
+}
+
+:host(:state(pressed):not([interaction]):not([container])) {
   --background: var(--nve-sys-support-accent-color);
   --color: var(--nve-sys-text-white-color);
+}
+
+:host([container='flat'][selected]) [interaction-state],
+:host([container='flat']:state(selected)) [interaction-state],
+:host([container='flat'][pressed]) [interaction-state],
+:host([container='flat']:state(pressed)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
 }
 
 :host([interaction*='flat']), /* deprecated */
@@ -233,23 +244,44 @@
   );
 }
 
-:host([interaction*='flat']:state(selected)) [interaction-state], /* deprecated */
+:host(:state(selected)) {
+  --color: var(--nve-sys-text-emphasis-color);
+}
+
 :host([container*='inline']:state(selected)) [interaction-state] {
   --nve-sys-interaction-state-ratio: 0;
 }
 
-:host([interaction*='flat'][readonly]:not(:state(anchor))), /* deprecated */
 :host([container*='inline'][readonly]:not(:state(anchor))) {
   --text-decoration: none;
   --cursor: cursor;
 }
 
-:host([interaction*='flat-destructive']), /* deprecated */
 :host([container='inline'][interaction='destructive']) {
   --color: var(--nve-sys-interaction-destructive-background);
 }
 
-:host([interaction*='flat-emphasize']), /* deprecated */
 :host([container='inline'][interaction='emphasis']) {
+  --color: var(--nve-sys-interaction-emphasis-background);
+}
+
+/* deprecated */
+:host([interaction*='flat']:state(selected)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: 0;
+}
+
+/* deprecated */
+:host([interaction*='flat'][readonly]:not(:state(anchor))) {
+  --text-decoration: none;
+  --cursor: cursor;
+}
+
+/* deprecated */
+:host([interaction*='flat-destructive']) {
+  --color: var(--nve-sys-interaction-destructive-background);
+}
+
+/* deprecated */
+:host([interaction*='flat-emphasize']) {
   --color: var(--nve-sys-interaction-emphasis-background);
 }
