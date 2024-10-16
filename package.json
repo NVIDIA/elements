@@ -168,11 +168,16 @@
         "./**/*.cjs",
         "./**/*.mjs",
         "./**/*.json",
+        "!projects/elements/src/icon/{icons,server}.ts",
         "!projects/elements-react/src/**/*",
-        "!**/vite.bundle.ts.timestamp*.mjs",
-        "!**/build/**",
+        "!projects/starters/nextjs/next-env.d.ts",
+        "!projects/starters/remix/build/**/*",
+        "!**/vite.*.ts.timestamp*",
         "!**/dist/**",
         "!**/.wireit/**",
+        "!**/.next/**",
+        "!**/__screenshots__/**",
+        "!**/coverage/**",
         "!**/node_modules/**"
       ],
       "output": []
