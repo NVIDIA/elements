@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { AppHeader } from '@nvidia-elements/core/app-header';
-import { Button } from '@nvidia-elements/core/button';
+import type { Button } from '@nvidia-elements/core/button';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Logo } from '@nvidia-elements/core/logo';
 import '@nvidia-elements/core/app-header/define.js';

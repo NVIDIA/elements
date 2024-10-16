@@ -4,7 +4,7 @@ import {
   attachInternals,
   useStyles,
   associateAriaLabel,
-  assoicateAriaDescribedBy,
+  associateAriaDescribedBy,
   associateControlGroup,
   tagSelector
 } from '@nvidia-elements/core/internal';
@@ -95,7 +95,7 @@ export class ControlGroup extends LitElement {
   #updateAssociations() {
     this.#assignLabel();
     associateAriaLabel(this.label, this);
-    assoicateAriaDescribedBy(
+    associateAriaDescribedBy(
       Array.from(this.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag))),
       this
     );

@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, ContainerElement } from '@nvidia-elements/core/internal';
+import type { ContainerElement } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { inputStyles } from '@nvidia-elements/core/input';
 import { IconButton } from '@nvidia-elements/core/icon-button';

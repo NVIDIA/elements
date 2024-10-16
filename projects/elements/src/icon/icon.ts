@@ -1,9 +1,12 @@
-import { html, isServer, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, isServer, LitElement } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { attachInternals, parseVersion, Size, useStyles } from '@nvidia-elements/core/internal';
-import { ICON_IMPORTS, IconName, IconSVG } from './icons.js';
+import type { Size } from '@nvidia-elements/core/internal';
+import { attachInternals, parseVersion, useStyles } from '@nvidia-elements/core/internal';
+import type { IconName, IconSVG } from './icons.js';
+import { ICON_IMPORTS } from './icons.js';
 import styles from './icon.css?inline';
 
 export type { IconName, IconNames, IconSVG } from './icons.js';

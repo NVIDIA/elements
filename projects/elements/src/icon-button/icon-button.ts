@@ -1,8 +1,10 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { Size, removeEmptySlotWhitespace, useStyles } from '@nvidia-elements/core/internal';
+import type { Size } from '@nvidia-elements/core/internal';
+import { removeEmptySlotWhitespace, useStyles } from '@nvidia-elements/core/internal';
 import { Button } from '@nvidia-elements/core/button';
-import { Icon, IconName } from '@nvidia-elements/core/icon';
+import type { IconName } from '@nvidia-elements/core/icon';
+import { Icon } from '@nvidia-elements/core/icon';
 import styles from './icon-button.css?inline';
 
 /**

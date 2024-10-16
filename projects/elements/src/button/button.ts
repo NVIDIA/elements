@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { BaseButton, useStyles, Interaction, Inverse, FlatInteraction, Size } from '@nvidia-elements/core/internal';
+import type { Interaction, Inverse, FlatInteraction, Size } from '@nvidia-elements/core/internal';
+import { BaseButton, useStyles } from '@nvidia-elements/core/internal';
 import styles from './button.css?inline';
 
 /**

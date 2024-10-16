@@ -1,6 +1,8 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, I18nController, Size, statusIcons, SupportStatus, useStyles } from '@nvidia-elements/core/internal';
+import type { Size, SupportStatus } from '@nvidia-elements/core/internal';
+import { attachInternals, I18nController, statusIcons, useStyles } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './progress-ring.css?inline';
 

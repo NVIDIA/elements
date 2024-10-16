@@ -1,4 +1,5 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { useStyles, attachInternals, matchesElementName } from '@nvidia-elements/core/internal';
 import { Logo } from '@nvidia-elements/core/logo';

@@ -6,7 +6,7 @@ import {
   associateLabel,
   attachInternals,
   associateAriaLabel,
-  assoicateAriaDescribedBy,
+  associateAriaDescribedBy,
   associateDataList,
   associateControlGroup
 } from '@nvidia-elements/core/internal';
@@ -102,7 +102,7 @@ describe('associateAriaLabel', () => {
   });
 });
 
-describe('assoicateAriaDescribedBy', () => {
+describe('associateAriaDescribedBy', () => {
   it('should describe an element via aria-describedby', async () => {
     const paragraph = document.createElement('p');
     const description = document.createElement('div');
@@ -110,7 +110,7 @@ describe('assoicateAriaDescribedBy', () => {
     expect(description.id).toBe('');
     expect(paragraph.hasAttribute('aria-describedby')).toBe(false);
 
-    assoicateAriaDescribedBy([description], paragraph);
+    associateAriaDescribedBy([description], paragraph);
 
     expect(description.id.length).toBeGreaterThan(0);
     expect(paragraph.getAttribute('aria-describedby')).toBe(description.id);
@@ -125,7 +125,7 @@ describe('assoicateAriaDescribedBy', () => {
     expect(descriptionTwo.id).toBe('');
     expect(paragraph.hasAttribute('aria-describedby')).toBe(false);
 
-    assoicateAriaDescribedBy([description, descriptionTwo], paragraph);
+    associateAriaDescribedBy([description, descriptionTwo], paragraph);
 
     expect(description.id.length).toBeGreaterThan(0);
     expect(descriptionTwo.id.length).toBeGreaterThan(0);

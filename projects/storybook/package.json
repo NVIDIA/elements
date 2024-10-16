@@ -93,13 +93,15 @@
       "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
       "files": [
         "src/**/*.ts",
-        "src/**/*.js",
         "eslint.config.js"
       ],
       "output": [],
       "dependencies": [
         "../internals/eslint:ci"
       ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix ./src/**/*.ts"
     }
   }
 }

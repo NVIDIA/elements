@@ -1,7 +1,9 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, Container, Prominence, SupportStatus, useStyles } from '@nvidia-elements/core/internal';
+import type { Container, Prominence, SupportStatus } from '@nvidia-elements/core/internal';
+import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
 import type { Alert } from './alert.js';
 import styles from './alert-group.css?inline';
 

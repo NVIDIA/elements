@@ -1,4 +1,5 @@
-import { PropertyValues, html, nothing } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {

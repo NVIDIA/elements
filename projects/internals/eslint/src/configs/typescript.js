@@ -19,6 +19,7 @@ const config = {
     'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
     '@typescript-eslint/no-floating-promises': ['error'],
     '@typescript-eslint/no-explicit-any': 'off', // TODO
+    '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test' }] // ignore demo/test components that do not need to be exported
   }
 };

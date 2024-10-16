@@ -1,14 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import {
-  attachInternals,
-  Size,
-  statusStateStyles,
-  supportStateStyles,
-  SupportStatus,
-  TaskStatus,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import type { Size, SupportStatus, TaskStatus } from '@nvidia-elements/core/internal';
+import { attachInternals, statusStateStyles, supportStateStyles, useStyles } from '@nvidia-elements/core/internal';
 import styles from './dot.css?inline';
 
 /**

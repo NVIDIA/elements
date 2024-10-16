@@ -1,14 +1,13 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import type { Color, Prominence } from '@nvidia-elements/core/internal';
 import {
-  Color,
   I18nController,
   BaseButton,
   TypeClosableController,
   useStyles,
-  colorStateStyles,
-  Prominence
+  colorStateStyles
 } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './tag.css?inline';
