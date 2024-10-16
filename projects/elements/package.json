@@ -864,6 +864,8 @@
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.ssr.ts",
         "!src/**/*.snippets.html",
+        "!src/icon/{server,icons}.ts",
+        "!src/**/__screenshots__/**",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -892,11 +894,13 @@
       "clean": false,
       "files": [
         "src/icon/**",
-        "!src/icon/icons.ts",
+        "!src/icon/{icons,server}.ts",
+        "!src/**/__screenshots__/**",
         "build/icons.js"
       ],
       "output": [
-        "src/icon/icons.ts"
+        "src/icon/icons.ts",
+        "src/icon/server.ts"
       ]
     },
     "build:snippets": {
@@ -919,6 +923,7 @@
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.ssr.ts",
+        "!src/**/__screenshots__/**",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
@@ -941,6 +946,7 @@
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.ssr.ts",
+        "!src/**/__screenshots__/**",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
@@ -1043,7 +1049,9 @@
       "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
       "files": [
         "src/**/*.ts",
-        "eslint.config.js"
+        "eslint.config.js",
+        "!src/icon/{server,icons}.ts",
+        "!src/**/__screenshots__/**"
       ],
       "output": [],
       "dependencies": [
@@ -1057,7 +1065,9 @@
       "command": "lit-analyzer src/**/*.ts --strict --rules.no-unknown-slot off",
       "files": [
         "src/**/*.ts",
-        "tsconfig.json"
+        "tsconfig.json",
+        "!src/icon/{server,icons}.ts",
+        "!src/**/__screenshots__/**"
       ],
       "output": []
     },
