@@ -57,25 +57,48 @@ export const FlatInteractions = {
   `
 }
 
-export const PressedToggle = {
+export const Pressed = {
   render: () => html`
-  <div nve-layout="row gap:sm pad-bottom:md">
-    <nve-icon-button icon-name="filter-stroke"></nve-icon-button>
-    <nve-icon-button pressed icon-name="filter"></nve-icon-button>
-  </div>
+    <nve-icon-button pressed icon-name="filter-stroke"></nve-icon-button>
+    <nve-icon-button icon-name="filter"></nve-icon-button>
+  `
+}
 
-  <div nve-layout="row gap:sm">
-    <nve-icon-button icon-name="eye-hidden" container="flat" aria-label="show"></nve-icon-button>
-    <nve-icon-button pressed icon-name="eye" container="flat" aria-label="hide"></nve-icon-button>
-  </div>
+export const PressedFlat = {
+  render: () => html`
+    <nve-icon-button pressed container="flat" icon-name="eye-hidden" aria-label="show"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="eye"  aria-label="hide"></nve-icon-button>
+  `
+}
+
+export const PressedInline = {
+  render: () => html`
+    <nve-icon-button pressed container="inline" icon-name="eye-hidden" aria-label="show"></nve-icon-button>
+    <nve-icon-button container="inline" icon-name="eye" aria-label="hide"></nve-icon-button>
+  `
+}
+
+export const Selected = {
+  render: () => html`
+  <nve-icon-button selected icon-name="split-vertical" aria-label="split vertical"></nve-icon-button>
+  <nve-icon-button icon-name="split-horizontal" aria-label="split horizontal"></nve-icon-button>
+  <nve-icon-button icon-name="split-none" aria-label="preview"></nve-icon-button>
   `
 }
 
 export const SelectedFlat = {
   render: () => html`
-    <nve-icon-button selected icon-name="split-vertical" aria-label="split vertical" container="flat"></nve-icon-button>
-    <nve-icon-button icon-name="split-horizontal" aria-label="split horizontal" container="flat"></nve-icon-button>
-    <nve-icon-button icon-name="split-none" aria-label="preview" container="flat"></nve-icon-button>
+    <nve-icon-button selected container="flat" icon-name="split-vertical" aria-label="split vertical"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="split-horizontal" aria-label="split horizontal"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="split-none" aria-label="preview"></nve-icon-button>
+  `
+}
+
+export const SelectedInline = {
+  render: () => html`
+    <nve-icon-button selected container="inline" icon-name="split-vertical" aria-label="split vertical"></nve-icon-button>
+    <nve-icon-button container="inline" icon-name="split-horizontal" aria-label="split horizontal"></nve-icon-button>
+    <nve-icon-button container="inline" icon-name="split-none" aria-label="preview"></nve-icon-button>
   `
 }
 

@@ -20,9 +20,9 @@ export const Default = {
 export const SingleSelect = {
   render: () => html`
   <nve-button-group behavior-select="single">
-    <nve-icon-button pressed icon-name="bars-3-bottom-left"></nve-icon-button>
-    <nve-icon-button icon-name="bars-3-bottom-right"></nve-icon-button>
-    <nve-icon-button icon-name="bars-4"></nve-icon-button>
+    <nve-icon-button pressed container="flat" icon-name="bars-3-bottom-left"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="bars-3-bottom-right"></nve-icon-button>
+    <nve-icon-button container="flat" icon-name="bars-4"></nve-icon-button>
   </nve-button-group>
   `
 };
@@ -30,9 +30,9 @@ export const SingleSelect = {
 export const MultiSelect = {
   render: () => html`
     <nve-button-group behavior-select="multi">
-      <nve-icon-button pressed icon-name="bold" size="sm"></nve-icon-button>
-      <nve-icon-button icon-name="italic" size="sm"></nve-icon-button>
-      <nve-icon-button pressed icon-name="strikethrough" size="sm"></nve-icon-button>
+      <nve-icon-button pressed container="flat" icon-name="bold" size="sm"></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="italic" size="sm"></nve-icon-button>
+      <nve-icon-button pressed container="flat" icon-name="strikethrough" size="sm"></nve-icon-button>
     </nve-button-group>
   `
 };

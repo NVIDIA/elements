@@ -73,7 +73,7 @@ export const Link = {
   `
 }
 
-export const PressedToggle = {
+export const Pressed = {
   render: () => html`
     <nve-button pressed>pressed</nve-button>
     <nve-button>unpressed</nve-button>
