@@ -1,12 +1,7 @@
 import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import {
-  useStyles,
-  attachInternals,
-  keyNavigationList,
-  KeynavListConfig,
-  appendRootNodeStyle
-} from '@nvidia-elements/core/internal';
+import type { KeynavListConfig } from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, keyNavigationList, appendRootNodeStyle } from '@nvidia-elements/core/internal';
 import type { MenuItem } from './menu-item.js';
 import styles from './menu.css?inline';
 import globalStyles from './menu.global.css?inline';

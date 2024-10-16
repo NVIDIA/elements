@@ -1,14 +1,12 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
+import type { PopoverAlign, PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
 import {
   attachInternals,
   audit,
   excessiveInstanceLimit,
-  PopoverAlign,
   popoverStyles,
-  PopoverPosition,
-  PopoverType,
   TypeNativePopoverController,
   TypeNativeAnchorController,
   useStyles
