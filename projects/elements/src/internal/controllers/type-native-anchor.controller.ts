@@ -35,7 +35,7 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
   async hostConnected() {
     attachInternals(this.host);
     await this.host.updateComplete;
-    this.host.addEventListener('open', () => this.#render());
+    this.host.addEventListener('beforetoggle', () => this.#render());
   }
 
   async hostUpdated() {

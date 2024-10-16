@@ -47,7 +47,7 @@ describe('type-native-anchor.controller', () => {
     fixture.appendChild(element);
     await elementIsStable(element);
 
-    element.dispatchEvent(new CustomEvent('open'));
+    element.dispatchEvent(new CustomEvent('beforetoggle'));
     await elementIsStable(element);
 
     expect(element._internals.states.has('anchor-positioning-fallback')).toBe(true);
