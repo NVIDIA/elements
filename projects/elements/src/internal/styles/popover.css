@@ -279,7 +279,7 @@
   }
 }
 
-:host([popover][modal])::before {
+:host([popover][modal]:not(:state(anchor-positioning-fallback)))::before {
   content: ' ';
   display: block;
   inset: 0;
