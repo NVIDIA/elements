@@ -13,14 +13,17 @@ export function typeSubmit<T extends Submit>(): ClassDecorator {
 export type Submit = ReactiveElement &
   HTMLElement & {
     name: string;
+    form: string;
     value: string;
     disabled: boolean;
     type: 'button' | 'submit';
     readonly: boolean;
   };
 
+type InnerSubmitButton = HTMLButtonElement & { inert: boolean; form: string };
+
 export class TypeSubmitController<T extends Submit> implements ReactiveController {
-  #button: HTMLButtonElement & { inert: boolean };
+  #button: InnerSubmitButton;
 
   constructor(private host: T) {
     this.host.addController(this);
@@ -41,7 +44,7 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
 
   #setupSubmitButton() {
     if (!this.#button) {
-      this.#button = globalThis.document.createElement('button') as HTMLButtonElement & { inert: boolean };
+      this.#button = globalThis.document.createElement('button') as InnerSubmitButton;
       this.#button.hidden = true;
       this.#button.inert = true;
     }
@@ -49,6 +52,7 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
     this.#button.value = this.host.value;
     this.#button.name = this.host.name;
     this.#button.type = this.host.type;
+    this.#button.setAttribute('form', this.host.form);
   }
 
   #setupNativeButtonBehavior() {
