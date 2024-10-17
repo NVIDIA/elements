@@ -49,6 +49,12 @@ export class BaseButton extends LitElement {
   @property({ type: Boolean, reflect: true }) readonly: boolean;
 
   /**
+   * Similar to input form, sets a button to submit a form outside its parent form
+   * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/form
+   */
+  @property({ type: String, reflect: true }) form: string;
+
+  /**
    * The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name
    */
