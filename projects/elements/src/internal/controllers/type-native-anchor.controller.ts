@@ -81,7 +81,9 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
     }
   }
 
-  #calculateDimensions() {
+  async #calculateDimensions() {
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(r => setTimeout(() => r(null), 0));
     const { width, height } = this.host.getBoundingClientRect();
     this.host.style.setProperty('--_width', `${Math.floor(width)}px`);
     this.host.style.setProperty('--_height', `${Math.floor(height)}px`);
