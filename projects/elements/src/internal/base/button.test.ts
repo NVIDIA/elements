@@ -13,11 +13,13 @@ describe('base button', () => {
   let buttonInForm: BaseButtonTestElement;
   let submitButtonInForm: BaseButtonTestElement;
   let form: HTMLFormElement;
+  let otherForm: HTMLFormElement;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
+    <form id="other"></form>
     <base-button-test-element></base-button-test-element>
-    <form>
+    <form id="main">
       <base-button-test-element type="button"></base-button-test-element>
       <base-button-test-element></base-button-test-element>
     </form>`);
@@ -25,8 +27,10 @@ describe('base button', () => {
     element = fixture.querySelectorAll<BaseButtonTestElement>('base-button-test-element')[0];
     buttonInForm = fixture.querySelectorAll<BaseButtonTestElement>('base-button-test-element')[1];
     submitButtonInForm = fixture.querySelectorAll<BaseButtonTestElement>('base-button-test-element')[2];
-    form = fixture.querySelector('form');
+    form = fixture.querySelector('form[id=main]');
     form.addEventListener('submit', e => e.preventDefault());
+    otherForm = fixture.querySelector('form[id=other]');
+    otherForm.addEventListener('submit', e => e.preventDefault());
     buttonInForm.type = 'button';
   });
 
@@ -251,6 +255,27 @@ describe('base button', () => {
     vi.spyOn(o, 'f');
 
     form.addEventListener('submit', o.f);
+
+    emulateClick(submitButtonInForm);
+
     expect(o.f).not.toHaveBeenCalled();
+  });
+
+  it('should respect form attribute', async () => {
+    submitButtonInForm.form = 'other';
+    await elementIsStable(submitButtonInForm);
+
+    const f = { f: () => null };
+    vi.spyOn(f, 'f');
+    form.addEventListener('submit', f.f);
+
+    const o = { f: () => null };
+    vi.spyOn(o, 'f');
+    otherForm.addEventListener('submit', o.f);
+
+    emulateClick(submitButtonInForm);
+
+    expect(f.f).not.toHaveBeenCalled();
+    expect(o.f).toHaveBeenCalled();
   });
 });

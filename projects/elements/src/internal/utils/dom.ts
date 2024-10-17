@@ -232,20 +232,24 @@ export function getThemeTokens(element = globalThis.document.querySelector(':roo
   } catch {}
 
   return [...parent, ...Array.from(globalThis.document.styleSheets)]
-    .reduce(
-      (finalArr, sheet) =>
-        finalArr.concat(
-          [...sheet.cssRules]
-            .filter(rule => rule.type === 1)
-            .reduce((propValArr, rule) => {
-              const props = [...rule.style]
-                .filter(p => p.trim().includes('--nve'))
-                .map(propName => [propName.trim(), rule.style.getPropertyValue(propName).trim()]);
-              return [...propValArr, ...props];
-            }, [])
-        ),
-      []
-    )
+    .reduce((finalArr, sheet) => {
+      let rules = [];
+      try {
+        rules = [...sheet.cssRules];
+      } catch {
+        // if the style sheet is not accessible, skip
+      }
+      return finalArr.concat(
+        rules
+          .filter(rule => rule.type === 1)
+          .reduce((propValArr, rule) => {
+            const props = [...rule.style]
+              .filter(p => p.trim().includes('--nve'))
+              .map(propName => [propName.trim(), rule.style.getPropertyValue(propName).trim()]);
+            return [...propValArr, ...props];
+          }, [])
+      );
+    }, [])
     .reduce((p, token) => ({ ...p, [token[0]]: styles.getPropertyValue(token[0]) }), {});
 }
 
