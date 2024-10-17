@@ -73,4 +73,11 @@ describe('type-native-anchor.controller', () => {
     await elementIsStable(element);
     expect(element.matches(':state(anchor-body)')).toBe(true);
   });
+
+  it('should calculate dimensions before opening', async () => {
+    await elementIsStable(element);
+    const { width, height } = element.getBoundingClientRect();
+    expect(getComputedStyle(element).getPropertyValue('--_width')).toBe(`${width}px`);
+    expect(getComputedStyle(element).getPropertyValue('--_height')).toBe(`${height}px`);
+  });
 });
