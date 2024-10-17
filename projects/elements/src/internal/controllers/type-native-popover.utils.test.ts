@@ -12,6 +12,18 @@ describe('associateAnchor', () => {
     expect((element.style as any).positionAnchor).toBe((anchor.style as any).anchorName);
   });
 
+  it('should not recreate new anchor name if one already provided', async () => {
+    const element = document.createElement('div');
+    const anchor = document.createElement('div');
+    associateAnchor(element, anchor);
+
+    const originalAnchorName = (anchor.style as any).anchorName;
+    expect((element.style as any).positionAnchor).toBe((anchor.style as any).anchorName);
+
+    associateAnchor(element, anchor);
+    expect((element.style as any).positionAnchor).toBe(originalAnchorName);
+  });
+
   it('should create a CSS Anchor Position association between two elements with the default id if provided', async () => {
     const element = document.createElement('div');
     const anchor = document.createElement('div');
