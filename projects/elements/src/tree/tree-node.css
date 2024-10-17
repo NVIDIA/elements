@@ -3,13 +3,15 @@
   --border-radius: var(--nve-ref-border-radius-xs);
   --font-size: var(--nve-ref-font-size-100);
   --min-height: var(--nve-ref-size-800);
-  display: contents;
+  --text-wrap: nowrap;
+  width: 100%;
   cursor: default;
 }
 
 [internal-host] {
   color: var(--color);
   font-size: var(--font-size);
+  text-wrap: var(--text-wrap);
   display: flex;
   align-content: center;
   flex-wrap: wrap;
@@ -23,14 +25,14 @@ slot {
 }
 
 slot[name='nodes'] {
-  padding-left: var(--nve-ref-size-400);
+  padding-left: var(--nve-ref-size-500);
   gap: var(--mlv-ref-space-xxxs);
   display: flex;
   flex-direction: column;
   align-items: start;
 }
 
-.node {
+[part='_node'] {
   display: flex;
   align-items: center;
   width: 100%;
@@ -52,6 +54,7 @@ slot[name='nodes'] {
   flex-direction: column;
   width: 100%;
   position: relative;
+  min-width: fit-content;
 }
 
 :host(:focus-visible) [part='node-header'],
@@ -69,6 +72,7 @@ slot[name='nodes'] {
   width: 100%;
   position: relative;
   display: block;
+  padding-left: var(--nve-ref-size-200);
 }
 
 [part='_nodes']::before {
@@ -135,7 +139,7 @@ input {
   }
 
   slot[name='nodes'] {
-    padding-left: var(--nve-ref-size-500);
+    padding-left: var(--nve-ref-size-700);
   }
 
   [role='group']::before {
