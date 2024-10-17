@@ -1,5 +1,7 @@
 :host {
   --max-width: 100%;
+  display: block;
+  min-width: fit-content;
 }
 
 :host([border]) {
@@ -8,4 +10,5 @@
 
 [internal-host] {
   max-width: var(--max-width);
+  min-width: fit-content;
 }

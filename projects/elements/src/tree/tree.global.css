@@ -1,11 +1,23 @@
-nve-tree-node:not(:has([slot='content']))::part(_content) {
+nve-tree-node:not(:has(> [slot='content']))::part(_content) {
+  display: none !important;
+}
+
+nve-tree-node:not(:has(> [slot='nodes']))::part(_nodes) {
   display: none;
 }
 
-nve-tree-node:not(:has([slot='nodes']))::part(_nodes) {
+nve-tree-node:has(> [slot='nodes']):not([expanded])::part(_nodes) {
   display: none;
 }
 
-nve-tree-node:has([slot='nodes']):not([expanded])::part(_nodes) {
-  display: none;
+nve-tree-node > nve-tree-node:state(is-expandable) {
+  margin-left: calc(-1 * var(--nve-ref-size-400));
+}
+
+nve-tree-node > nve-tree-node:state(is-expandable):state(selectable-multi) {
+  margin-left: calc(-1 * var(--nve-ref-size-500));
+}
+
+nve-tree-node:has(nve-tree-node:state(is-expandable))::part(_nodes) {
+  padding-left: var(--nve-ref-size-400);
 }

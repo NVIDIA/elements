@@ -123,7 +123,7 @@ export const SelectableMultiple = {
         node 1
         <nve-tree-node>node 1-1</nve-tree-node>
         <nve-tree-node selected>node 1-2</nve-tree-node>
-        <nve-tree-node>
+        <nve-tree-node expanded>
           node 1-3
           <nve-tree-node>node 1-3-1</nve-tree-node>
           <nve-tree-node>node 1-3-2</nve-tree-node>
@@ -366,6 +366,67 @@ export const VerticalNav = {
       </nve-tree>
     </nve-drawer-content>
   </nve-drawer>
+  `
+};
+
+export const Overflow = {
+  render: () => html`
+    <div style="width: 300px; height: 500px; overflow: auto; outline: 1px solid #ccc; padding: 12px">
+      <nve-tree border behavior-expand>
+        <nve-tree-node expanded>
+          node 1
+          <nve-tree-node>node 1-1</nve-tree-node>
+          <nve-tree-node>node 1-2</nve-tree-node>
+          <nve-tree-node expanded>
+            node 1-3
+            <nve-tree-node>node 1-3-1</nve-tree-node>
+            <nve-tree-node>node 1-3-2</nve-tree-node>
+            <nve-tree-node expanded>
+              node 1-3-3
+              <nve-tree-node>node 1-3-3-1</nve-tree-node>
+              <nve-tree-node>node 1-3-3-2</nve-tree-node>
+              <nve-tree-node expanded>
+                node 1-3-3-3
+                <nve-tree-node>node 1-3-3-3-1</nve-tree-node>
+                <nve-tree-node>node 1-3-3-3-2</nve-tree-node>
+                <nve-tree-node expanded>
+                  node 1-3-3-3-3
+                  <nve-tree-node>node 1-3-3-3-3-1</nve-tree-node>
+                  <nve-tree-node>node 1-3-3-3-3-2</nve-tree-node>
+                  <nve-tree-node expanded>
+                    node 1-3-3-3-3-3
+                    <nve-tree-node>node 1-3-3-3-3-3-1</nve-tree-node>
+                    <nve-tree-node>node 1-3-3-3-3-3-2</nve-tree-node>
+                    <nve-tree-node expanded>
+                      node 1-3-3-3-3-3-3
+                      <nve-tree-node>node 1-3-3-3-3-3-3-1</nve-tree-node>
+                      <nve-tree-node>node 1-3-3-3-3-3-3-2</nve-tree-node>
+                      <nve-tree-node expanded>
+                        node 1-3-3-3-3-3-3-3
+                        <nve-tree-node>node 1-3-3-3-3-3-3-3-1</nve-tree-node>
+                        <nve-tree-node>node 1-3-3-3-3-3-3-3-2</nve-tree-node>
+                        <nve-tree-node expanded>
+                          node 1-3-3-3-3-3-3-3-3
+                          <nve-tree-node>node 1-3-3-3-3-3-3-3-3-1</nve-tree-node>
+                          <nve-tree-node>node 1-3-3-3-3-3-3-3-3-2</nve-tree-node>
+                          <nve-tree-node>node 1-3-3-3-3-3-3-3-3-3</nve-tree-node>
+                        </nve-tree-node>
+                      </nve-tree-node>
+                    </nve-tree-node>
+                  </nve-tree-node>
+                </nve-tree-node>
+              </nve-tree-node>
+            </nve-tree-node>
+          </nve-tree-node>
+        </nve-tree-node>
+        <nve-tree-node expanded>
+          node 2
+          <nve-tree-node>node 2-1</nve-tree-node>
+          <nve-tree-node>node 2-2</nve-tree-node>
+          <nve-tree-node>node 2-3</nve-tree-node>
+        </nve-tree-node>
+      </nve-tree>
+    </div>
   `
 };
 

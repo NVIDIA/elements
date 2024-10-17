@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Default, Border, DynamicTree, Selectable, Highlight, Links, NodeContent, SelectableMultiple, Async, VerticalNav } from './tree.stories';
+import { Default, Border, DynamicTree, Selectable, Highlight, Links, NodeContent, SelectableMultiple, Async, VerticalNav, Overflow } from './tree.stories';
 
 <Meta title="Elements/Tree/Documentation" />
 
@@ -88,6 +88,12 @@ Example in lit-html:
   ${node.expanded ? node.nodes.map(n => html`${this.#getNodeList(n)}`) : nothing}
 </nve-tree-node>
 ```
+
+## Overflow
+
+If the tree expands past its container, use overflow on the parent to enable scrolling.
+
+<Canvas of={Overflow} />
 
 <element-status tag="nve-tree"></element-status>
 

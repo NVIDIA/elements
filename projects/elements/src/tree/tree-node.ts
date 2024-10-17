@@ -115,7 +115,7 @@ export class TreeNode extends LitElement {
   render() {
     return html`
       <div internal-host @slotchange=${this.#nodeUpdate}>
-        <div class="node">
+        <div part="_node">
           ${
             this.#isExpandable
               ? html`
@@ -167,7 +167,12 @@ export class TreeNode extends LitElement {
 
   #nodeUpdate() {
     this.requestUpdate();
+    this.#toggleExpandableState();
     this.dispatchEvent(new CustomEvent('_node-update', { bubbles: true }));
+  }
+
+  #toggleExpandableState() {
+    this.#isExpandable ? this._internals.states.add('is-expandable') : this._internals.states.delete('is-expandable');
   }
 
   #setupKeyNavInteractions() {
