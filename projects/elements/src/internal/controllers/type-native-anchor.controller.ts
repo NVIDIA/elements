@@ -35,6 +35,7 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
   async hostConnected() {
     attachInternals(this.host);
     await this.host.updateComplete;
+    this.#updatePositioning();
     this.host.addEventListener('beforetoggle', () => this.#render());
   }
 
@@ -48,38 +49,55 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
   }
 
   get #useNativePositioning() {
-    return supportsNativeCSSAnchorPosition() && sameRenderRoot(this.host, getHostAnchor(this.host));
+    const hostAnchor = getHostAnchor(this.host);
+    return (
+      supportsNativeCSSAnchorPosition() &&
+      (hostAnchor === globalThis.document.body || sameRenderRoot(this.host, hostAnchor))
+    );
   }
 
   async #render() {
-    if (this.#useNativePositioning) {
-      this.host._internals.states.delete('anchor-positioning-fallback');
-      const anchor = getHostAnchor(this.host);
+    this.#updatePositioning();
 
-      if (anchor === globalThis.document.body) {
-        this.host._internals.states.add('anchor-body');
-      } else {
-        this.host._internals.states.delete('anchor-body');
-        associateAnchor(this.host, anchor);
-      }
+    if (!this.#useNativePositioning) {
+      await this.#renderFallbackPositioning();
+    }
+  }
 
-      await new Promise(r => requestAnimationFrame(r));
-      await new Promise(r => setTimeout(() => r(null), 0));
-      const { width, height } = getComputedStyle(this.host);
-      this.host.style.setProperty('--_width', width);
-      this.host.style.setProperty('--_height', height);
+  #updatePositioning() {
+    this.host._internals.states.delete('anchor-positioning-fallback');
+    this.#associateAnchors();
+    this.#calculateDimensions();
+  }
+
+  #associateAnchors() {
+    const anchor = getHostAnchor(this.host);
+
+    if (anchor === globalThis.document.body) {
+      this.host._internals.states.add('anchor-body');
     } else {
-      this.host._internals.states.add('anchor-positioning-fallback');
+      this.host._internals.states.delete('anchor-body');
+      associateAnchor(this.host, anchor);
+    }
+  }
 
-      if (!this.typeNativeAnchorFallbackController) {
-        this.typeNativeAnchorFallbackController = new TypeNativeAnchorFallbackController(this.host);
-        this.host.addController(this.typeNativeAnchorFallbackController);
-      }
+  #calculateDimensions() {
+    const { width, height } = this.host.getBoundingClientRect();
+    this.host.style.setProperty('--_width', `${Math.floor(width)}px`);
+    this.host.style.setProperty('--_height', `${Math.floor(height)}px`);
+  }
 
-      if (!sameRenderRoot(this.host, getHostAnchor(this.host)) && !crossRootWarning) {
-        LogService.warn(getCrossShadowRootAnchorWarning(this.host.localName));
-        crossRootWarning = true;
-      }
+  #renderFallbackPositioning() {
+    this.host._internals.states.add('anchor-positioning-fallback');
+
+    if (!this.typeNativeAnchorFallbackController) {
+      this.typeNativeAnchorFallbackController = new TypeNativeAnchorFallbackController(this.host);
+      this.host.addController(this.typeNativeAnchorFallbackController);
+    }
+
+    if (!crossRootWarning) {
+      LogService.warn(getCrossShadowRootAnchorWarning(this.host.localName));
+      crossRootWarning = true;
     }
   }
 }
