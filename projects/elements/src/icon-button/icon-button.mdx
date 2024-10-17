@@ -59,6 +59,20 @@ import '@nvidia-elements/core/icon-button/define.js';
 
 ## Link
 
+Anchors can wrap button instances, however its recommended to slot the anchor into the button.
+
+```html
+<!-- do -->
+<nve-icon-button icon-name="menu">
+    <a href="#" aria-label="link to page"></a>
+</nve-icon-button>
+
+<!-- don't -->
+<a href="#" aria-label="link to page">
+    <nve-icon-button container="flat" icon-name="menu"></nve-icon-button>
+</a>
+```
+
 <Canvas of={Link} />
 
 ## Custom Icon

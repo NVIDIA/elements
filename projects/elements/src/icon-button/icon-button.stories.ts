@@ -114,12 +114,15 @@ export const CustomIcon = {
 
 export const Link = {
   render: () => html`
+    <!-- do -->
     <nve-icon-button icon-name="menu">
       <a href="#" aria-label="link to page"></a>
     </nve-icon-button>
-    <nve-icon-button container="flat" icon-name="menu">
-      <a href="#" aria-label="link to page"></a>
-    </nve-icon-button>
+
+    <!-- don't -->
+    <a href="#" aria-label="link to page">
+      <nve-icon-button container="flat" icon-name="menu"></nve-icon-button>
+    </a>
   `
 }
 

@@ -41,6 +41,7 @@ To setup repository dependencies and run the full build, run the following comma
 ```shell
 brew install git-lfs #  https://git-lfs.com if not yet installed
 git lfs install # run this command at the root of the repository
+git lfs pull
 ```
 
 ```shell
