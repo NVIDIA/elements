@@ -210,3 +210,18 @@ export const MenuItemTooltip = {
   </nve-menu>
   `
 }
+
+export const DangerStatus = {
+  render: () => html`
+  <div nve-layout="pad:lg">
+    <nve-menu>
+      <nve-menu-item status="danger">default</nve-menu-item>
+      <nve-menu-item status="danger" disabled>disabled</nve-menu-item>
+      <nve-menu-item status="danger" selected>selected</nve-menu-item>
+      <nve-menu-item status="danger" current="page">current</nve-menu-item>
+      <nve-menu-item status="danger"><nve-icon name="gear"></nve-icon> icon left</nve-menu-item>
+      <nve-menu-item status="danger">icon right <nve-icon id="warning-icon" size="md" name="exclamation-triangle" style="margin-left: auto"></nve-icon></nve-menu-item>
+    </nve-menu>
+  </div>
+  `
+}
