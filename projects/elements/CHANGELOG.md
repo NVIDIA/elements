@@ -1,3 +1,13 @@
+## [@nvidia-elements/core-v1.9.16](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.15...@nvidia-elements/core-v1.9.16) (2024-10-18)
+
+
+### Bug Fixes
+
+* **elements:** fallback modal ([ea6a855](https://github.com/NVIDIA/elements/commit/ea6a85599bd7fb0756b11a6f3e30e6ac15f26fbd))
+* **elements:** pre compute popover dimensions ([cd62067](https://github.com/NVIDIA/elements/commit/cd62067bd15fb62a2c461ab3ab985deab93473c4))
+* **elements:** reuse assigned anchor names ([ffd604e](https://github.com/NVIDIA/elements/commit/ffd604edebaa35f0dd6479be19920794b1323d15))
+* **elements:** treeview padding fixes ([31c24bf](https://github.com/NVIDIA/elements/commit/31c24bf16a3aed9303b66d5bbd9ca427f0f36c85))
+
 ## [@nvidia-elements/core-v1.9.15](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.14...@nvidia-elements/core-v1.9.15) (2024-10-18)
 
 
