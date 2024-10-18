@@ -63,6 +63,17 @@
   contain: none;
 }
 
+:host([status='danger']) {
+  --nve-sys-interaction-state-base: var(--nve-sys-support-danger-muted-color);
+  --nve-sys-interaction-selected-color: var(--nve-sys-support-danger-emphasis-color);
+  --nve-sys-accent-secondary-background: var(--nve-sys-support-danger-emphasis-color);
+  --color: var(--nve-sys-support-danger-emphasis-color);
+}
+
+:host([status='danger']:hover) ::slotted(nve-icon) {
+  --color: var(--nve-sys-support-danger-emphasis-color) !important;
+}
+
 :host(:state(current)) [internal-host]:after {
   width: var(--nve-ref-border-width-xl);
   border-radius: var(--border-radius);
@@ -73,6 +84,10 @@
   top: var(--nve-ref-size-50);
   bottom: var(--nve-ref-size-50);
   left: calc(var(--nve-ref-size-200) * -1);
+}
+
+::slotted(nve-icon) {
+  --color: inherit !important;
 }
 
 ::slotted(a) {
