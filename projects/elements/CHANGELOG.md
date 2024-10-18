@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.15](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.14...@nvidia-elements/core-v1.9.15) (2024-10-18)
+
+
+### Bug Fixes
+
+* **elements:** buttons support form attribute ([d5d440c](https://github.com/NVIDIA/elements/commit/d5d440c6e1652be433704b249bfaa0e2681b5f9e))
+
 ## [@nvidia-elements/core-v1.9.14](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.13...@nvidia-elements/core-v1.9.14) (2024-10-16)
 
 
