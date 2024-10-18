@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { property } from 'lit/decorators/property.js';
 import { useStyles, BaseButton } from '@nvidia-elements/core/internal';
 import styles from './menu-item.css?inline';
 
@@ -23,6 +24,8 @@ import styles from './menu-item.css?inline';
  */
 export class MenuItem extends BaseButton {
   static styles = useStyles([styles]);
+
+  @property({ type: String, reflect: true }) status: 'danger';
 
   static readonly metadata = {
     tag: 'nve-menu-item',
