@@ -34,6 +34,7 @@ import styles from './alert.css?inline';
  * @cssprop --icon-size
  * @cssprop --font-weight
  * @cssprop --justify-content
+ * @cssprop --align-items
  * @cssprop --min-height
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-alert-documentation--docs
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
