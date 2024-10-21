@@ -215,8 +215,7 @@ export const Multiline = {
           <pre nve-text="code sm" style="background: transparent !important; margin: 0;">
 10:06:01 AM [verify] update /virtual:/verify/
 10:06:11 AM [build] update /virtual:/build/
-10:06:22 AM [error] update /virtual:/error/ - failed to connect to remote
-          </pre>
+10:06:22 AM [error] update /virtual:/error/ - failed to connect to remote</pre>
         </div>
       </nve-alert>
     </nve-alert-group>
