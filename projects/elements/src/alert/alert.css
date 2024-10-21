@@ -6,6 +6,7 @@
   --icon-size: var(--nve-ref-size-400);
   --font-weight: var(--nve-ref-font-weight-medium);
   --justify-content: start;
+  --align-items: center;
   --min-height: initial;
   --text-transform: initial;
   width: auto;
@@ -18,9 +19,9 @@
   gap: var(--gap);
   color: var(--color);
   justify-content: var(--justify-content);
+  align-items: var(--align-items);
   text-transform: var(--text-transform);
   display: flex;
-  align-items: center;
   line-height: 1em;
   height: 100%;
 }
@@ -28,6 +29,7 @@
 slot[part='content'] {
   display: contents;
   padding-left: var(--nve-ref-size-600);
+  padding-bottom: var(--nve-ref-size-200);
 }
 
 slot {
