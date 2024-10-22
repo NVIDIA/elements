@@ -49,13 +49,19 @@ export interface IconSVG {
   svg: () => Promise<string> | string;
 }
 
+function iconImport(iconImport: () => Promise<{default: string}>): IconSVG {
+  return {
+    async svg() {
+      return (await iconImport()).default;
+    }
+  }
+}
+
 export const ICON_IMPORTS = {\n${Object.keys(icons)
-        .map(i => `  '${i}': {\n    svg: async () => (await import('./icons/${i}.svg?raw')).default\n  },`)
+        .map(i => `  '${i}': iconImport(() => import('./icons/${i}.svg?raw')),`)
         .join('\n')}\n};
 
-export type IconName = ${Object.keys(icons)
-        .map(i => `'${i}'`)
-        .join(' | ')};
+export type IconName = keyof typeof ICON_IMPORTS;
 
 /** @deprecated */
 export type IconNames = IconName;
