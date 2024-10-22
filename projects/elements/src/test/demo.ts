@@ -109,7 +109,7 @@ const data = {
  * demo data for stories only, provides a set of demo object that sync with the storybook data option
  */
 export function getItems(rows = 10): DemoItem[] {
-  const type = ((window as any).NVE_SB_GLOBALS.dataTheme as '' | 'models' | 'hardware') ?? '';
+  const type = ((window as any).NVE_SB_GLOBALS?.dataTheme as '' | 'models' | 'hardware') ?? '';
 
   if (data[type][rows]) {
     return [...data[type][rows]];
