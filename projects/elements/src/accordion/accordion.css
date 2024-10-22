@@ -6,7 +6,7 @@
   --border-radius: 0;
   --header-padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
   --cursor: pointer;
-  --transition: none;
+  --transition: height var(--nve-ref-animation-duration-200) ease-in-out;
   width: 100%;
   contain: none;
 }
