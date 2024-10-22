@@ -117,6 +117,6 @@ export const DynamicItems = {
 export const DynamicStepSize = {
   render: () => html`
   <!-- javascript property binding -->
-  <nve-pagination value="1" items="10000" step="100" .stepSizes=${[100, 500, 1000]}></nve-pagination>
+  <nve-pagination value="1" items="10000" step="100" step-sizes="[100, 500, 1000]"></nve-pagination>
   `
 };
